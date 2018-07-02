@@ -1,0 +1,10 @@
+{
+  "name": "dt-sql-parser",
+  "version": "1.0.0",
+  "description": "sql parser",
+  "main": "index.js",
+  "scripts": {},
+  "author": "xiaokang",
+  "license": "ISC",
+  "devDependencies": {}
+}
