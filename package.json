@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "sql parser",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "pegjs   peg/nquery.pegjs core/astParser.js"
+  },
   "author": "xiaokang",
   "license": "ISC",
-  "devDependencies": {}
+  "devDependencies": {
+    "node-query": "^0.3.3",
+    "pegjs": "^0.7.0"
+  },
+  "dependencies": {}
 }
