@@ -160,7 +160,7 @@ start
       }
     }
 
-init  = { params = []; return true; }
+init  = & { params = []; return true; }
 
 union_stmt
   = head:select_stmt tail:(__ KW_UNION __ select_stmt)* {
@@ -424,7 +424,7 @@ expr_list
 
 expr_list_or_empty
   = l:expr_list 
-  / { 
+  / & { 
       return { 
         type  : 'expr_list',
         value : []
@@ -931,7 +931,7 @@ proc_stmt
       }
     }
 
-proc_init  = { varList = []; return true; }
+proc_init  = & { varList = []; return true; }
 
 assign_stmt 
   = va:var_decl __ KW_ASSIGN __ e:proc_expr {

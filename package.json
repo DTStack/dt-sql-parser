@@ -4,7 +4,8 @@
   "description": "sql parser",
   "main": "index.js",
   "scripts": {
-    "build": "pegjs   peg/nquery.pegjs core/astParser.js"
+    "build:parse": "pegjs   peg/nquery.pegjs core/astParser.js",
+    "build:filter":"pegjs   peg/comment.pegjs core/comment.js"
   },
   "author": "xiaokang",
   "license": "ISC",

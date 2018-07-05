@@ -330,17 +330,8 @@ module.exports = (function(){
       
       function parse_init() {
         var result0;
-        var pos0, pos1;
         
-        pos0 = pos;
-        pos1 = pos;
-        result0 = [];
-        if (result0 !== null) {
-          result0 = (function(offset) { params = []; return true; })(pos0);
-        }
-        if (result0 === null) {
-          pos = pos0;
-        }
+        result0 = (function(offset) { params = []; return true; })(pos) ? "" : null;
         return result0;
       }
       
@@ -491,6 +482,7 @@ module.exports = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, s) {
+              console.log(s);
                 return s[2]; 
               })(pos0, result0);
           }
@@ -2323,24 +2315,15 @@ module.exports = (function(){
       
       function parse_expr_list_or_empty() {
         var result0;
-        var pos0, pos1;
         
         result0 = parse_expr_list();
         if (result0 === null) {
-          pos0 = pos;
-          pos1 = pos;
-          result0 = [];
-          if (result0 !== null) {
-            result0 = (function(offset) { 
+          result0 = (function(offset, l) { 
                 return { 
                   type  : 'expr_list',
                   value : []
                 }
-              })(pos0);
-          }
-          if (result0 === null) {
-            pos = pos0;
-          }
+              })(pos, result0) ? "" : null;
         }
         return result0;
       }
@@ -7462,17 +7445,8 @@ module.exports = (function(){
       
       function parse_proc_init() {
         var result0;
-        var pos0, pos1;
         
-        pos0 = pos;
-        pos1 = pos;
-        result0 = [];
-        if (result0 !== null) {
-          result0 = (function(offset) { varList = []; return true; })(pos0);
-        }
-        if (result0 === null) {
-          pos = pos0;
-        }
+        result0 = (function(offset) { varList = []; return true; })(pos) ? "" : null;
         return result0;
       }
       

@@ -3,7 +3,7 @@ const example={
     SELECT muyun_test_down1.id, muyun_test_down1.name, muyun_test_down2.age
     FROM muyun_test_down1
     JOIN muyun_test_down2                   
-    ON muyun_test_down1.id = muyun_test_down2.id
+    ON muyun_test_down1.id = muyun_test_down2.id  
     `,
     test1:`/*asf*/create table sql_task_comment_test(id int comment 'id') comment 'sql test';
     --sdfsss`,
