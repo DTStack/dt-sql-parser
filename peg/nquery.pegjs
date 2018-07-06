@@ -278,7 +278,7 @@ table_name
         db : '',
         table : dt
       }
-      if (tail != '') {
+      if (tail) {
         obj.db = dt;
         obj.table = tail[3];
       } 

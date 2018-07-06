@@ -4,14 +4,14 @@
   "description": "sql parser",
   "main": "index.js",
   "scripts": {
-    "build:parse": "pegjs   peg/nquery.pegjs core/astParser.js",
-    "build:filter":"pegjs   peg/comment.pegjs core/comment.js"
+    "build:parse": "pegjs  -o core/astParser.js peg/nquery.pegjs ",
+    "build:filter": "pegjs -o core/comment.js peg/comment.pegjs "
   },
   "author": "xiaokang",
   "license": "ISC",
   "devDependencies": {
     "node-query": "^0.3.3",
-    "pegjs": "^0.7.0"
+    "pegjs": "^0.10.0"
   },
   "dependencies": {}
 }
