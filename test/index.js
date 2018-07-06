@@ -7,7 +7,7 @@ for(let [key,value] of testMap){
     console.log(value)
     console.log(`******result********`)
     // console.log(dtSqlParser.parser.parse(value));
-    console.log(dtSqlParser.filter.filterComments(value))
+    console.log(dtSqlParser.filter.splitSql(value))
     console.log(`********************`)
 }
 
