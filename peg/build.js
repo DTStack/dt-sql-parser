@@ -19,7 +19,8 @@ function writeIn(file,data){
 function build(content){
     return pegjs.generate(content,{
         output:"source",
-        format:"umd"
+        format:"umd",
+        optimize:"size"
     });
 }
 files.forEach(
