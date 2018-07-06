@@ -1,9 +1,14 @@
 
 
+{
+    let lines=[];
+    let isSplit=false;
+}
+
 start
 = union_stmt:union_stmt  
 {
-    return union_stmt;
+    return {lines,text:union_stmt};
 }
 
 
@@ -11,10 +16,24 @@ union_stmt
 =stmt:
 (
     words:(!kw_start word:. {return word})* 
-    stmt:(comment:comment {return ''}/quote:quote {return quote}) 
-    {return words.join("")+stmt} 
+    stmt:(comment:comment {return ''}/quote:quote {return quote}/";" {isSplit=true;return ";"}) 
+    {
+        const text=words.join("")+stmt;
+        let index=Math.max(lines.length-1,0);
+        lines[index]=(lines[index]||'')+text;
+        if(isSplit){
+            isSplit=false;
+            lines.push('');
+        }
+        return text;
+    } 
 )* other:.*
-{return stmt.join("")+other.join("")}
+{   
+    const text=stmt.join("")+other.join("")
+    let index=Math.max(lines.length-1,0);
+    lines[index]=lines[index]+other.join("");
+    return text;
+}
 
 comment
 =comment:(multiLine/singleLine)
@@ -57,7 +76,7 @@ quote
 
 
 
-kw_start=KW_SINGLE_LINE_START/KW_MULTI_LINE_START/"\""/"'"
+kw_start=KW_SINGLE_LINE_START/KW_MULTI_LINE_START/"\""/"'"/";"
 
 
 KW_SINGLE_LINE_START = "--";

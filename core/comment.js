@@ -113,7 +113,7 @@ module.exports = (function(){
         result0 = parse_union_stmt();
         if (result0 !== null) {
           result0 = (function(offset, union_stmt) {
-            return union_stmt;
+            return {lines,text:union_stmt};
         })(pos0, result0);
         }
         if (result0 === null) {
@@ -229,6 +229,24 @@ module.exports = (function(){
             if (result2 === null) {
               pos = pos4;
             }
+            if (result2 === null) {
+              pos4 = pos;
+              if (input.charCodeAt(pos) === 59) {
+                result2 = ";";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\";\"");
+                }
+              }
+              if (result2 !== null) {
+                result2 = (function(offset) {isSplit=true;return ";"})(pos4);
+              }
+              if (result2 === null) {
+                pos = pos4;
+              }
+            }
           }
           if (result2 !== null) {
             result1 = [result1, result2];
@@ -241,7 +259,16 @@ module.exports = (function(){
           pos = pos3;
         }
         if (result1 !== null) {
-          result1 = (function(offset, words, stmt) {return words.join("")+stmt})(pos2, result1[0], result1[1]);
+          result1 = (function(offset, words, stmt) {
+                const text=words.join("")+stmt;
+                let index=Math.max(lines.length-1,0);
+                lines[index]=(lines[index]||'')+text;
+                if(isSplit){
+                    isSplit=false;
+                    lines.push('');
+                }
+                return text;
+            })(pos2, result1[0], result1[1]);
         }
         if (result1 === null) {
           pos = pos2;
@@ -348,6 +375,24 @@ module.exports = (function(){
               if (result2 === null) {
                 pos = pos4;
               }
+              if (result2 === null) {
+                pos4 = pos;
+                if (input.charCodeAt(pos) === 59) {
+                  result2 = ";";
+                  pos++;
+                } else {
+                  result2 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\";\"");
+                  }
+                }
+                if (result2 !== null) {
+                  result2 = (function(offset) {isSplit=true;return ";"})(pos4);
+                }
+                if (result2 === null) {
+                  pos = pos4;
+                }
+              }
             }
             if (result2 !== null) {
               result1 = [result1, result2];
@@ -360,7 +405,16 @@ module.exports = (function(){
             pos = pos3;
           }
           if (result1 !== null) {
-            result1 = (function(offset, words, stmt) {return words.join("")+stmt})(pos2, result1[0], result1[1]);
+            result1 = (function(offset, words, stmt) {
+                  const text=words.join("")+stmt;
+                  let index=Math.max(lines.length-1,0);
+                  lines[index]=(lines[index]||'')+text;
+                  if(isSplit){
+                      isSplit=false;
+                      lines.push('');
+                  }
+                  return text;
+              })(pos2, result1[0], result1[1]);
           }
           if (result1 === null) {
             pos = pos2;
@@ -400,7 +454,12 @@ module.exports = (function(){
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, stmt, other) {return stmt.join("")+other.join("")})(pos0, result0[0], result0[1]);
+          result0 = (function(offset, stmt, other) {   
+            const text=stmt.join("")+other.join("")
+            let index=Math.max(lines.length-1,0);
+            lines[index]=lines[index]+other.join("");
+            return text;
+        })(pos0, result0[0], result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
@@ -771,6 +830,17 @@ module.exports = (function(){
                   matchFailed("\"'\"");
                 }
               }
+              if (result0 === null) {
+                if (input.charCodeAt(pos) === 59) {
+                  result0 = ";";
+                  pos++;
+                } else {
+                  result0 = null;
+                  if (reportFailures === 0) {
+                    matchFailed("\";\"");
+                  }
+                }
+              }
             }
           }
         }
@@ -909,6 +979,10 @@ module.exports = (function(){
         
         return { line: line, column: column };
       }
+      
+      
+          let lines=[];
+          let isSplit=false;
       
       
       var result = parseFunctions[startRule]();
