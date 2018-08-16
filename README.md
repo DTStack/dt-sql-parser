@@ -40,7 +40,7 @@ console.log(dtFilter.parse(sql))//注意，目前只支持单条sql语句，所�
 ``` javascript
 const dtSqlParser=require("dt-sql-parser").parser;
 
-console.log(dtSqlParser.parseSyntax("selet  * form",'','hive'));
+console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 
 /*
 {
