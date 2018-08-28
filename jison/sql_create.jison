@@ -173,7 +173,7 @@ TableDefinition_EDIT
 
 TableDefinitionRightPart
  : TableIdentifierAndOptionalColumnSpecification OptionalComment OptionalPartitionedBy OptionalSortBy OptionalClusteredBy OptionalSkewedBy
-   OptionalStoredAsOrBy OptionalWithSerdeproperties OptionalHdfsLocation OptionalTblproperties OptionalCachedInOrUncached OptionalAsSelectStatement
+   OptionalStoredAsOrBy  OptionalHdfsLocation OptionalTblproperties OptionalCachedInOrUncached OptionalAsSelectStatement
  ;
 
 TableDefinitionRightPart_EDIT
@@ -1001,11 +1001,11 @@ OptionalStoredAsOrBy
 
 StoredAsOrBy
  : StoredAs
- | 'ROW' HiveOrImpalaFormat HiveOrImpalaRowFormat OptionalStoredAs
+ | 'ROW' HiveOrImpalaFormat HiveOrImpalaRowFormat OptionalWithSerdeproperties OptionalStoredAs
    {
      $$ = parser.mergeSuggestKeywords($3, $4)
    }
- | '<hive>STORED' 'BY' QuotedValue
+ | '<hive>STORED' 'BY' QuotedValue 
   {
     $$ = { storedBy: true }
   }
