@@ -27,7 +27,7 @@ cat autocomplete_header.jison sql_main.jison sql_valueExpression.jison sql_error
 
 echo "Creating SQL autocomplete parser..."
 jison sqlAutocompleteParser.jison sql.jisonlex
-grunt uglify:sqlAutocompleteParser
+# grunt uglify:sqlAutocompleteParser
 cat sqlParseSupport.js sqlAutocompleteParser.js > ../core/sqlAutoCompleteParser.js
 rm sqlAutocompleteParser.jison
 rm sqlAutocompleteParser.js

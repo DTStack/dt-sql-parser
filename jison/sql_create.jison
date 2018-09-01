@@ -190,8 +190,6 @@ TableDefinitionRightPart_EDIT
  | TableIdentifierAndOptionalColumnSpecification OptionalComment OptionalPartitionedBy OptionalSortBy OptionalClusteredBy OptionalSkewedBy
    StoredAsOrBy_EDIT OptionalHdfsLocation OptionalTblproperties OptionalCachedInOrUncached OptionalAsSelectStatement
  | TableIdentifierAndOptionalColumnSpecification OptionalComment OptionalPartitionedBy OptionalSortBy OptionalClusteredBy OptionalSkewedBy
-   OptionalStoredAsOrBy WithSerdeproperties_EDIT OptionalHdfsLocation OptionalTblproperties OptionalCachedInOrUncached OptionalAsSelectStatement
- | TableIdentifierAndOptionalColumnSpecification OptionalComment OptionalPartitionedBy OptionalSortBy OptionalClusteredBy OptionalSkewedBy
    OptionalStoredAsOrBy HdfsLocation_EDIT OptionalTblproperties OptionalCachedInOrUncached OptionalAsSelectStatement
  | TableIdentifierAndOptionalColumnSpecification OptionalComment OptionalPartitionedBy OptionalSortBy OptionalClusteredBy OptionalSkewedBy
    OptionalStoredAsOrBy OptionalHdfsLocation OptionalTblproperties CachedIn_EDIT OptionalAsSelectStatement
@@ -1005,7 +1003,11 @@ StoredAsOrBy
    {
      $$ = parser.mergeSuggestKeywords($3, $4)
    }
- | '<hive>STORED' 'BY' QuotedValue  OptionalWithSerdeproperties
+ | '<hive>STORED' 'BY' QuotedValue  OptionalWithSerdeproperties 
+  {
+    $$ = { storedBy: true }
+  }
+| '<hive>STORED' 'BY' QuotedValue  WithSerdeproperties_EDIT
   {
     $$ = { storedBy: true }
   }
@@ -1087,6 +1089,7 @@ HiveOrImpalaRowFormat_EDIT
 HiveRowFormat
  : HiveDelimitedRowFormat
  | '<hive>SERDE' QuotedValue OptionalWithSerdeproperties
+ | '<hive>SERDE' QuotedValue WithSerdeproperties_EDIT
  ;
 
 HiveRowFormat_EDIT
