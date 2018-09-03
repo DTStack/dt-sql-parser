@@ -3931,14 +3931,16 @@ case 1183:
 
      // We need to handle arbitrary UDFs here instead of inside UserDefinedFunction or there will be a conflict
      // with columnReference for functions like: db.udf(foo)
-     var fn = $$[$0-1].chain[$$[$0-1].chain.length - 1].name.toLowerCase();
+     var fn = $$[$0-1].chain[$$[$0-1].chain.length - 1].name.toLowerCase(); 
      $$[$0-1].lastLoc.type = 'function';
      $$[$0-1].lastLoc.function = fn;
-     $$[$0-1].lastLoc.location = {
-       first_line: $$[$0-1].lastLoc.location.first_line,
-       last_line: $$[$0-1].lastLoc.location.last_line,
-       first_column: $$[$0-1].lastLoc.location.first_column,
-       last_column: $$[$0-1].lastLoc.location.last_column - 1
+     if($$[$0-1].lastLoc.location){
+        $$[$0-1].lastLoc.location = {
+            first_line: $$[$0-1].lastLoc.location.first_line,
+            last_line: $$[$0-1].lastLoc.location.last_line,
+            first_column: $$[$0-1].lastLoc.location.first_column,
+            last_column: $$[$0-1].lastLoc.location.last_column - 1
+        }  
      }
      if ($$[$0-1].lastLoc !== $$[$0-1].firstLoc) {
         $$[$0-1].firstLoc.type = 'database';

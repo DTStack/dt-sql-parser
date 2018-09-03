@@ -2412,14 +2412,16 @@ NonParenthesizedValueExpressionPrimary
    {
      // We need to handle arbitrary UDFs here instead of inside UserDefinedFunction or there will be a conflict
      // with columnReference for functions like: db.udf(foo)
-     var fn = $1.chain[$1.chain.length - 1].name.toLowerCase();
+     var fn = $1.chain[$1.chain.length - 1].name.toLowerCase(); 
      $1.lastLoc.type = 'function';
      $1.lastLoc.function = fn;
-     $1.lastLoc.location = {
-       first_line: $1.lastLoc.location.first_line,
-       last_line: $1.lastLoc.location.last_line,
-       first_column: $1.lastLoc.location.first_column,
-       last_column: $1.lastLoc.location.last_column - 1
+     if($1.lastLoc.location){
+        $1.lastLoc.location = {
+            first_line: $1.lastLoc.location.first_line,
+            last_line: $1.lastLoc.location.last_line,
+            first_column: $1.lastLoc.location.first_column,
+            last_column: $1.lastLoc.location.last_column - 1
+        }  
      }
      if ($1.lastLoc !== $1.firstLoc) {
         $1.firstLoc.type = 'database';
