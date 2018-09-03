@@ -4349,9 +4349,11 @@ case 1320:
      };
 
      if ($$[$0-1]) {
-       this.$.primary.alias = $$[$0-1].alias;
-       parser.addTablePrimary({ subQueryAlias: $$[$0-1].alias });
-       parser.addSubqueryAliasLocation($$[$0-1].location, $$[$0-1].alias, $$[$0-2].identifierChain);
+       if(this.$.primary){
+          this.$.primary.alias = $$[$0-1].alias;
+          parser.addTablePrimary({ subQueryAlias: $$[$0-1].alias });
+          parser.addSubqueryAliasLocation($$[$0-1].location, $$[$0-1].alias, $$[$0-2].identifierChain);
+       }
      }
 
      var keywords = [];
@@ -4451,10 +4453,12 @@ break;
 case 1355:
 
      var subQuery = parser.getSubQuery($$[$0]);
-     subQuery.columns.forEach(function (column) {
-       parser.expandIdentifierChain({ wrapper: column });
-       delete column.linked;
+     if(subQuery){
+        subQuery.columns.forEach(function (column) {
+        parser.expandIdentifierChain({ wrapper: column });
+        delete column.linked;
      });
+     }
      parser.popQueryState(subQuery);
      this.$ = subQuery;
    

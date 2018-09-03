@@ -2958,9 +2958,11 @@ TablePrimary
      };
 
      if ($2) {
-       $$.primary.alias = $2.alias;
-       parser.addTablePrimary({ subQueryAlias: $2.alias });
-       parser.addSubqueryAliasLocation($2.location, $2.alias, $1.identifierChain);
+       if($$.primary){
+          $$.primary.alias = $2.alias;
+          parser.addTablePrimary({ subQueryAlias: $2.alias });
+          parser.addSubqueryAliasLocation($2.location, $2.alias, $1.identifierChain);
+       }
      }
 
      var keywords = [];
@@ -3127,10 +3129,12 @@ TableSubQueryInner
  : PushQueryState SubQuery
    {
      var subQuery = parser.getSubQuery($2);
-     subQuery.columns.forEach(function (column) {
-       parser.expandIdentifierChain({ wrapper: column });
-       delete column.linked;
+     if(subQuery){
+        subQuery.columns.forEach(function (column) {
+        parser.expandIdentifierChain({ wrapper: column });
+        delete column.linked;
      });
+     }
      parser.popQueryState(subQuery);
      $$ = subQuery;
    }
