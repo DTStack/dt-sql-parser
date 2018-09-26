@@ -71,4 +71,5 @@ console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 ```
 
 sql语法解析模块代码来自[nquery](https://github.com/alibaba/nquery/)
+
 hive语法解析模块代码来自[Hue](https://github.com/cloudera/hue)
