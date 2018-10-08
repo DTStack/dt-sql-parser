@@ -69,7 +69,6 @@ console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 }
 */
 ```
-----
 
 ## API
 
@@ -85,10 +84,12 @@ console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 
 #### function parseSyntax(sql:string|Array<string>, type?:string):Object|boolean
 校验sql语法，如果没错误，则返回false，否则返回错误详细信息
+
 可以提供一个含有两个字符串的数组，代表被光标分割的两个sql片段
 
 #### function parserSql(sql:string|Array<string>, type?:string):Object
 解析sql语法，根据上下文提示补全字段与其它辅助信息
+
 可以提供一个含有两个字符串的数组，代表被光标分割的两个sql片段
 
 ----
