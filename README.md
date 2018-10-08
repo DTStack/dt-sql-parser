@@ -69,6 +69,7 @@ console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 }
 */
 ```
+----
 
 ## API
 
@@ -90,6 +91,7 @@ console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 解析sql语法，根据上下文提示补全字段与其它辅助信息
 可以提供一个含有两个字符串的数组，代表被光标分割的两个sql片段
 
+----
 
 ast生成代码来自[nquery](https://github.com/alibaba/nquery/)
 
