@@ -3,9 +3,9 @@
 本项目用于处理sql，目前含有功能
 
 1. 解析sql生成语法树(不支持CREATE等语句，具体可以查看`core/astParser`文件)，支持单条sql语句
-2. 去除sql中的的注释(目前支持`--`,`/**/`类型注释)
+2. 校验sql，hive sql，impala sql等语法，并给予错误信息与建议提示
 3. sql分割,根据`;`将sql分割为数组
-4. 校验sql，hive sql等语法，并给予错误信息与建议提示
+4. 去除sql中的的注释(目前支持`--`,`/**/`类型注释)
 
 
 ## 用法
@@ -70,6 +70,27 @@ console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 */
 ```
 
-sql语法解析模块代码来自[nquery](https://github.com/alibaba/nquery/)
+## API
 
-hive语法解析模块代码来自[Hue](https://github.com/cloudera/hue)
+### filter
+
+#### function filterComments(sql:string):string
+过滤sql注释(支持/*和--)
+
+#### function splitSql(sql:string):Array<string>
+自动去除注释，并且提取出各个sql
+
+### parser
+
+#### function parseSyntax(sql:string|Array<string>, type?:string):Object|boolean
+校验sql语法，如果没错误，则返回false，否则返回错误详细信息
+可以提供一个含有两个字符串的数组，代表被光标分割的两个sql片段
+
+#### function parserSql(sql:string|Array<string>, type?:string):Object
+解析sql语法，根据上下文提示补全字段与其它辅助信息
+可以提供一个含有两个字符串的数组，代表被光标分割的两个sql片段
+
+
+ast生成代码来自[nquery](https://github.com/alibaba/nquery/)
+
+hive，impala等语法解析文件来自[Hue](https://github.com/cloudera/hue)
