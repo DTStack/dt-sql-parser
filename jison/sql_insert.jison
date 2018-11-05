@@ -299,7 +299,7 @@ InsertValuesStatement_EDIT
 
 InsertValuesList
  : ParenthesizedRowValuesList
- | RowValuesList ',' ParenthesizedRowValuesList
+ | ParenthesizedRowValuesList ',' InsertValuesList
  ;
 
 ParenthesizedRowValuesList
