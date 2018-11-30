@@ -97,3 +97,9 @@ console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 ast生成代码来自[nquery](https://github.com/alibaba/nquery/)
 
 hive，impala等语法解析文件来自[Hue](https://github.com/cloudera/hue)
+
+----
+
+### ChangeLog
+
+- 1.1.8 添加转义字符支持
