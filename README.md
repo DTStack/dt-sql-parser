@@ -103,3 +103,4 @@ hive，impala等语法解析文件来自[Hue](https://github.com/cloudera/hue)
 ### ChangeLog
 
 - 1.1.8 添加转义字符支持
+- 1.1.9 添加函数的中括号语法支持( split(nameList)[0] )
