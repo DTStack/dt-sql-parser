@@ -3314,9 +3314,14 @@ ArbitraryFunctionName
  | 'TRUNCATE'
  ;
 
+OptionalFunctionSquareBracket
+ : HiveOrImpalaLeftSquareBracket ValueExpression HiveOrImpalaRightSquareBracket
+ | HiveOrImpalaLeftSquareBracket HiveOrImpalaRightSquareBracket
+ |
+;
 ArbitraryFunctionRightPart
- : '(' ')'
- | '(' ValueExpressionList ')'  -> { expression: $2 }
+ : '(' ')' OptionalFunctionSquareBracket
+ | '(' ValueExpressionList ')' OptionalFunctionSquareBracket  -> { expression: $2 }
  ;
 
 ArbitraryFunctionRightPart_EDIT
