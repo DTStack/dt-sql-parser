@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib/",
+        "sourceMap": false,
+        "allowJs":true,
+        "target": "es6",
+        "module": "commonjs"
+    },
+    "include": [
+        "./src/**/*"
+    ],
+    "exclude": [
+        "./src/peg/*",
+        "./src/jison/*"
+    ]
+}

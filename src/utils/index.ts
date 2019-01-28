@@ -21,4 +21,6 @@ function replaceStrFormIndexArr(str, replaceStr, indexArr) {
     return result;
 }
 
-exports.replaceStrFormIndexArr=replaceStrFormIndexArr;
+export {
+    replaceStrFormIndexArr
+}

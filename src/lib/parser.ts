@@ -1,28 +1,6 @@
-const Parser = require('../core/astParser');
-const Cache = require("../core/cache");
-const sqlSyntaxParser = require("../core/sqlSyntaxParser");
-const sqlAutoCompleteParser = require("../core/sqlAutoCompleteParser");
-const filter = require("./filter");
-
-
-const astCache = new Cache();
-
-/**
- * 生成ast
- */
-function parse(sql) {
-    const cleanSql = filter.cleanSql(sql);
-    let ast = astCache.get(cleanSql);
-
-    if (ast) {
-        return ast
-    } else {
-        ast = Parser.parse(cleanSql).ast;
-        astCache.set(cleanSql, ast);
-        return ast;
-    }
-}
-
+// import * as sqlSyntaxParser from '../core/sqlSyntaxParser';
+import * as sqlSyntaxParser from '../core/sqlSyntaxParser';
+import * as sqlAutoCompleteParser from '../core/sqlAutoCompleteParser';
 /**
  * 自动补全提示
  * @param {(string | Array<string>)} sql
@@ -38,6 +16,7 @@ function parseSyntax(sql, type) {
         sql1=sql[0];
         sql2=sql[1];
     }
+    // @ts-nocheck
     return sqlSyntaxParser.parser.parseSyntax(sql1, sql2, type, false)
 }
 
@@ -59,6 +38,7 @@ function parserSql(sql, type) {
     return sqlAutoCompleteParser.parser.parseSql(sql1, sql2, type, false)
 }
 
-exports.parse = parse;
-exports.parseSyntax = parseSyntax;
-exports.parserSql = parserSql;
+export {
+    parseSyntax,
+    parserSql
+}

@@ -1,5 +1,4 @@
-const replaceStrFormIndexArr = require("../utils").replaceStrFormIndexArr;
-const commentFilter = require('../core/comment');
+import * as commentFilter from '../core/comment';
 
 /**
  * 过滤--注释
@@ -25,6 +24,8 @@ function splitSql(sql) {
     return commentFilter.parse(sql).lines
 }
 
-exports.filterComments = filterComments;
-exports.cleanSql = cleanSql;
-exports.splitSql = splitSql;
+export {
+    filterComments,
+    cleanSql,
+    splitSql
+}
