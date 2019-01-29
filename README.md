@@ -2,10 +2,9 @@
 
 本项目用于处理sql，目前含有功能
 
-1. 解析sql生成语法树(不支持CREATE等语句，具体可以查看`core/astParser`文件)，支持单条sql语句
-2. 校验sql，hive sql，impala sql等语法，并给予错误信息与建议提示
-3. sql分割,根据`;`将sql分割为数组
-4. 去除sql中的的注释(目前支持`--`,`/**/`类型注释)
+1. 校验sql，hive sql，impala sql等语法，并给予错误信息与建议提示
+2. sql分割,根据`;`将sql分割为数组
+3. 去除sql中的的注释(目前支持`--`,`/**/`类型注释)
 
 
 ## 用法
@@ -22,18 +21,6 @@ aaaaaa*/ sql_task_comment_test(id int comment 'id') comment 'sql test';
 `
 console.log(dtFilter.filterComments(sql))//过滤注释
 console.log(dtFilter.splitSql(sql));//分割sql
-```
-
-### 生成ast树
-``` javascript
-const dtFilter=require("dt-sql-parser").parser;
-const sql=`
-/*sttttttttart*/select userId as id,name /*hhhhhhhh
-hhhhhh
-aaaaaa*/ from user where isDeleted=0
-    --eeeeeeeend
-`
-console.log(dtFilter.parse(sql))//注意，目前只支持单条sql语句，所以需要自己调用sql分割一条一条处理！
 ```
 
 ### 校验hive sql语法
