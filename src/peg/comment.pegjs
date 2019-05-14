@@ -13,10 +13,10 @@ start
 
 
 union_stmt
-=stmt:
+=single_stmt:
 (
-    words:(!kw_start word:. {return word})* 
-    stmt:(comment:comment {return ''}/quote:quote {return quote}/";" {isSplit=true;return ";"}) 
+    words:text* 
+    stmt:(comment:comment {return comment}/quote:quote {return quote}/";" {isSplit=true;return ";"}) 
     {
         const text=words.join("")+stmt;
         let index=Math.max(lines.length-1,0);
@@ -29,9 +29,9 @@ union_stmt
     } 
 )* other:.*
 {   
-    const text=stmt.join("")+other.join("")
+    const text=single_stmt.join("")+other.join("")
     let index=Math.max(lines.length-1,0);
-    lines[index]=lines[index]+other.join("");
+    lines[index]=(lines[index]||'')+other.join("");
     return text;
 }
 
@@ -75,7 +75,7 @@ quote
 
 
 
-
+text = !kw_start word:. {return word}
 kw_start=KW_SINGLE_LINE_START/KW_MULTI_LINE_START/"\""/"'"/";"
 
 

@@ -12,5 +12,10 @@
     "exclude": [
         "./src/peg/*",
         "./src/jison/*"
-    ]
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
 }

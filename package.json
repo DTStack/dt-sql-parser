@@ -1,21 +1,29 @@
 {
   "name": "dt-sql-parser",
-  "version": "1.1.10",
+  "version": "1.2.0",
   "description": "sql,hive,parser ",
-  "keywords":["hive","hql","sql","parser"],
-  "main": "index.js",
+  "keywords": [
+    "hive",
+    "hql",
+    "sql",
+    "parser"
+  ],
+  "main": "lib/index.js",
   "scripts": {
     "build:parse": "pegjs  -o core/astParser.js peg/nquery.pegjs ",
     "build:filter": "pegjs -o core/comment.js peg/comment.pegjs ",
     "build:syntax": "sh ./jison/hue-sql-syntax.sh ",
-    "build": "rm -rf lib && tsc"
+    "build": "jest && rm -rf lib && tsc",
+    "test": "jest"
   },
   "author": "xiaokang",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "jest": "^24.8.0",
     "node-query": "^0.3.3",
     "pegjs": "^0.10.0"
   },
-  "git repository":"https://github.com/HSunboy/dt-sql-parser",
+  "git repository": "https://github.com/HSunboy/dt-sql-parser",
   "dependencies": {}
 }

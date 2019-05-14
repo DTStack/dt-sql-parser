@@ -1,41 +1,35 @@
 // import * as sqlSyntaxParser from '../core/sqlSyntaxParser';
 import * as sqlSyntaxParser from '../core/sqlSyntaxParser';
 import * as sqlAutoCompleteParser from '../core/sqlAutoCompleteParser';
+
+type sql = string | string [];
+enum sqlType {
+    Hive = 'hive',
+    None = 'sql',
+    Impala = 'impala'
+}
+function sqlToParserArgs (sql: sql) {
+    let preSql = '', sufSql = '';
+    if(Object.prototype.toString.call(sql) == '[object Array]'){
+        preSql=sql[0];
+        sufSql=sql[1];
+    }
+    return [preSql, sufSql];
+}
 /**
- * 自动补全提示
- * @param {(string | Array<string>)} sql
- * @param {string} [type="hive"]
+ * 校验语法
  */
-function parseSyntax(sql, type) {
-    if (typeof type == "undefined") {
-        type = "hive"
-    }
-    let sql1=sql;
-    let sql2='';
-    if(sql instanceof Array){
-        sql1=sql[0];
-        sql2=sql[1];
-    }
-    // @ts-nocheck
-    return sqlSyntaxParser.parser.parseSyntax(sql1, sql2, type, false)
+function parseSyntax(sql: sql, type:sqlType = sqlType.Hive): sqlSyntaxParser.SyntaxResult | false {
+    const parserArgs = sqlToParserArgs(sql);
+    return sqlSyntaxParser.parser.parseSyntax(parserArgs[0], parserArgs[1], type, false)
 }
 
 /**
  * 自动补全提示
- * @param {(string | Array<string>)} sql
- * @param {string} [type="hive"]
  */
-function parserSql(sql, type) {
-    if (typeof type == "undefined") {
-        type = "hive"
-    }
-    let sql1=sql;
-    let sql2='';
-    if(sql instanceof Array){
-        sql1=sql[0];
-        sql2=sql[1];
-    }
-    return sqlAutoCompleteParser.parser.parseSql(sql1, sql2, type, false)
+function parserSql(sql: sql, type:sqlType = sqlType.Hive): sqlAutoCompleteParser.CompleteResult {
+    const parserArgs = sqlToParserArgs(sql);
+    return sqlAutoCompleteParser.parser.parseSql(parserArgs[0], parserArgs[1], type, false)
 }
 
 export {
