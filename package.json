@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "sql,hive,parser ",
   "keywords": [
     "hive",
@@ -13,7 +13,7 @@
     "build:parse": "pegjs  -o core/astParser.js peg/nquery.pegjs ",
     "build:filter": "pegjs -o core/comment.js peg/comment.pegjs ",
     "build:syntax": "sh ./jison/hue-sql-syntax.sh ",
-    "build": "jest && rm -rf lib && tsc",
+    "build": "rm -rf lib && tsc && jest",
     "test": "jest"
   },
   "author": "xiaokang",

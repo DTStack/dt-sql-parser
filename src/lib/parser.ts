@@ -13,6 +13,8 @@ function sqlToParserArgs (sql: sql) {
     if(Object.prototype.toString.call(sql) == '[object Array]'){
         preSql=sql[0];
         sufSql=sql[1];
+    } else {
+        preSql = sql as string;
     }
     return [preSql, sufSql];
 }
