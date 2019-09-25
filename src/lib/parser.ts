@@ -2,7 +2,6 @@
 import * as sqlSyntaxParser from '../core/sqlSyntaxParser';
 import * as sqlAutoCompleteParser from '../core/sqlAutoCompleteParser';
 
-type sql = string | string [];
 enum sqlType {
     Hive = 'hive',
     None = 'sql',
@@ -29,12 +28,13 @@ function parseSyntax(sql: sql, type:sqlType = sqlType.Hive): sqlSyntaxParser.Syn
 /**
  * 自动补全提示
  */
-function parserSql(sql: sql, type:sqlType = sqlType.Hive): sqlAutoCompleteParser.CompleteResult {
+function parserSql(sql: sql, type: sqlType = sqlType.Hive): sqlAutoCompleteParser.CompleteResult {
     const parserArgs = sqlToParserArgs(sql);
     return sqlAutoCompleteParser.parser.parseSql(parserArgs[0], parserArgs[1], type, false)
 }
 
 export {
     parseSyntax,
-    parserSql
+    parserSql,
+    sqlType
 }

@@ -1,19 +1,21 @@
-const dtSqlParser = require('../lib/index');
+import * as  dtSqlParser from '../src';
+import { SyntaxResult } from '../src/core/sqlSyntaxParser';
 const parser = dtSqlParser.parser;
 const filter = dtSqlParser.filter;
+const flinksqlParser = dtSqlParser.flinksqlParser;
 
 
 describe('complete test', () => {
     describe('hive', () => {
         test('complete result', () => {
             const sql = 'select id,name from user ';
-            const result = parser.parserSql([sql, ''], 'hive');
+            const result = parser.parserSql([sql, ''], dtSqlParser.parser.sqlType.Hive);
             expect(result.locations).toBeInstanceOf(Array);
             expect(result.suggestKeywords).toBeInstanceOf(Array);
         });
         test('empty result', () => {
             const sql = 'i';
-            const result = parser.parserSql([sql, ''], 'hive');
+            const result = parser.parserSql([sql, ''], dtSqlParser.parser.sqlType.Hive);
             expect(result.locations).toBeInstanceOf(Array);
             expect(result.locations).toHaveLength(0);
             expect(result.suggestKeywords).toBeInstanceOf(Array);
@@ -25,12 +27,12 @@ describe('syntax test', () => {
     describe('hive', () => {
         test('no error', () => {
             const sql = 'select id,name from user ';
-            const result = parser.parseSyntax([sql, ''], 'hive');
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Hive);
             expect(result).toBe(false);
         });
         test('select table should not be null', () => {
             const sql = 'select id,name from ';
-            const result = parser.parseSyntax([sql, ''], 'hive');
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Hive) as SyntaxResult;
             expect(result.loc).toEqual({
                 first_line: 1,
                 last_line: 1,
@@ -44,7 +46,7 @@ describe('syntax test', () => {
                ,order_date          bigint comment 'order date'
            )comment 'order table'
            PARTITIONED BY (ds string);`;
-            const result = parser.parseSyntax([sql, ''], 'hive');
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Hive) as SyntaxResult;
             expect(result.text).toBe('1exists');
             expect(result.loc).toEqual({
                 first_line: 1,
@@ -53,5 +55,27 @@ describe('syntax test', () => {
                 last_column: 27
             })
         });
+    })
+    describe('flinksql', () => {
+        test('no error', () => {
+            const sql = `select id from user.id;`;
+            const result = flinksqlParser(sql);
+            expect(result).toBeNull();
+        });
+        test('empty sql', () => {
+            const sql = ``;
+            const result = flinksqlParser(sql);
+            expect(result).toBeNull();
+        });
+        test('syntax error', () => {
+            const sql = 'select id from user.id; \nselect id from us*er.id; \nselect id from *user.id;';
+            const result = flinksqlParser(sql);
+            expect(result).toMatchObject({
+                line: 2,
+                column: 17,
+            });
+            expect(result.token.start).toBe(42);
+            expect(result.token.stop).toBe(42);
+        })
     })
 })
