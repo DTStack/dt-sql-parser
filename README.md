@@ -2,7 +2,7 @@
 
 本项目用于处理sql，目前含有功能
 
-1. 校验sql，hive sql，impala sql等语法，并给予错误信息与建议提示
+1. 校验sql，hive sql，impala sql，flinksql 等语法，并给予错误信息与建议提示
 2. sql分割,根据`;`将sql分割为数组
 3. 去除sql中的的注释(目前支持`--`,`/**/`类型注释)
 
@@ -62,28 +62,33 @@ console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
 ### filter
 
 #### function filterComments(sql:string):string
-过滤sql注释(支持/*和--)
+过滤 `sql` 注释(支持`/*`和`--`)
 
 #### function splitSql(sql:string):Array<string>
-自动去除注释，并且提取出各个sql
+自动去除注释，并且提取出各个 `sql`
 
 ### parser
 
 #### function parseSyntax(sql:string|Array<string>, type?:string):Object|boolean
-校验sql语法，如果没错误，则返回false，否则返回错误详细信息
+校验 `sql` 语法，如果没错误，则返回 `false`，否则返回错误详细信息
 
-可以提供一个含有两个字符串的数组，代表被光标分割的两个sql片段
+可以提供一个含有两个字符串的数组，代表被光标分割的两个 `sql片段`
 
 #### function parserSql(sql:string|Array<string>, type?:string):Object
-解析sql语法，根据上下文提示补全字段与其它辅助信息
+解析 `sql` 语法，根据上下文提示补全字段与其它辅助信息
 
 可以提供一个含有两个字符串的数组，代表被光标分割的两个sql片段
 
+### flinksqlParser
+
+#### function flinksqlParser (sql: sql): SyntaxError
+校验 `flinksql` 语法。
+
+>本项目文档不是很详细，也不准确（暂时没精力写），项目功能可以满足 hivesql，sql，impala，flinksql 的语法检查和提示功能。
+具体使用方式可以参照代码中的 ts 类型。
 ----
 
-ast生成代码来自[nquery](https://github.com/alibaba/nquery/)
-
-hive，impala等语法解析文件来自[Hue](https://github.com/cloudera/hue)
+hive，impala语法解析文件来自[Hue](https://github.com/cloudera/hue)
 
 ----
 
@@ -92,3 +97,4 @@ hive，impala等语法解析文件来自[Hue](https://github.com/cloudera/hue)
 - 1.1.8 添加转义字符支持
 - 1.1.9 添加函数的中括号语法支持( split(nameList)[0] )
 - 1.2.0 添加 ts，添加测试
+- 2.0.0 添加flinksql语法检查
