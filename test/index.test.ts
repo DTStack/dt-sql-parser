@@ -67,6 +67,15 @@ describe('syntax test', () => {
             const result = flinksqlParser(sql);
             expect(result).toBeNull();
         });
+        test('sql comment', () => {
+            const sql = `-- name asf
+            -- type FlinkSQL
+            -- author admin@dtstack.com
+            -- create time 2019-06-12 18:11:05
+            -- desc `;
+            const result = flinksqlParser(sql);
+            expect(result).toBeNull();
+        });
         test('syntax error', () => {
             const sql = 'select id from user.id; \nselect id from us*er.id; \nselect id from *user.id;';
             const result = flinksqlParser(sql);
