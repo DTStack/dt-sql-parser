@@ -42,10 +42,11 @@ function parserSyntax (sql: sql): SyntaxError {
     let runSql = typeof sql == 'string' ? sql : sql.join('');
     const sqls = splitSql(runSql);
     for (let i = 0, index = 0; i < sqls.length; i++) {
+        let end = runSql[sqls[i]] == ';' ? sqls[i] : sqls[i] + 1
         /**
          * 这边不取分号
          */
-        let sql =  new Array(index).fill(' ').join('') + runSql.substring(index, sqls[i]);
+        let sql =  new Array(index).fill(' ').join('') + runSql.substring(index, end);
         let err = parserSingle(sql);
         if (err) {
             return err;

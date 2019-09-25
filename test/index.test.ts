@@ -76,6 +76,12 @@ describe('syntax test', () => {
             const result = flinksqlParser(sql);
             expect(result).toBeNull();
         });
+        test('position', () => {
+            const sql = `selec`;
+            const result = flinksqlParser(sql);
+            expect(result.token.start).toBe(0);
+            expect(result.token.stop).toBe(4);
+        });
         test('syntax error', () => {
             const sql = 'select id from user.id; \nselect id from us*er.id; \nselect id from *user.id;';
             const result = flinksqlParser(sql);

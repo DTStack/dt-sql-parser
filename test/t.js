@@ -2,8 +2,7 @@ const dtSqlParser = require('../lib/index');
 const flinkParser  = require('../lib/lib/flinkParser').default;
 const parser = dtSqlParser.parser;
 
-console.log(flinkParser(`select * from user
- wh1ere a`))
+console.log(flinkParser(`selec`))
 console.time('t')
 const sql = `INSERT INTO TABLE STUDENT_SCORES VALUES 
 ('1','111','68','69','90','CLASS1','DEPARTMENT1'),
