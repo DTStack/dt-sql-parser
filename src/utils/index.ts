@@ -31,6 +31,15 @@ function splitSql (sql: string) {
         queue: string;
         sqls: number[];
     }
+    function pushSql (parser: splitParser, sql: string) {
+        if (!haveEnd && parser.index == sql.length - 1) {
+            parser.sqls.push(parser.index - 1);
+            parser.queue = '';
+        } else {
+            parser.sqls.push(parser.index);
+            parser.queue = '';
+        }
+    }
     // 处理引号
     function quoteToken (parser: splitParser, sql: string): string {
         let queue = parser.queue;
@@ -81,13 +90,7 @@ function splitSql (sql: string) {
     function splitToken (parser: splitParser, sql: string): string {
         let queue = parser.queue;
         if (queue.endsWith(';')) {
-            if (!haveEnd && parser.index == sql.length - 1) {
-                parser.sqls.push(parser.index - 1);
-                queue = '';
-            } else {
-                parser.sqls.push(parser.index);
-                queue = '';
-            }
+            pushSql(parser, sql)
             
         } else {
             return null;
@@ -104,6 +107,9 @@ function splitSql (sql: string) {
         let tokenFuncs = [quoteToken, singleLineCommentToken, multipleLineCommentToken, splitToken];
         for (let i = 0; i < tokenFuncs.length; i++) {
             tokenFuncs[i](parser, sql);
+        }
+        if (parser.index == sql.length - 1 && parser.queue) {
+            pushSql(parser, sql)
         }
     }
     return parser.sqls;

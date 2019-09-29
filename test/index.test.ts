@@ -91,6 +91,39 @@ describe('syntax test', () => {
             });
             expect(result.token.start).toBe(42);
             expect(result.token.stop).toBe(42);
-        })
+            const sql2 = `CREATE TABLE MyTable(
+                message.after.id int AS id,
+                message.after.userid varchar AS userid,
+                message.after.username varchar AS username,
+                message.after.prodid varchar AS prodid,
+                message.after.price double AS price,
+                message.after.amount int AS amount,
+                message.after.discount double AS discount,
+                message.after.tm timestamp AS tm,
+                WATERMARK FOR tm AS withOffset(tm,1000)
+                 )WITH(
+                    'type' ='kafka11,
+                    topic ='1'
+                 );
+                
+                CREATE TABLE MyResult(
+                    a double,
+                    b timestamp,
+                    c timestamp
+                 )WITH(
+                    type ='mysql',
+                    url ='jdbc:mysql://1:3306/yanxi?charset=utf8'
+                 );
+                
+                insert into MyResult
+                select 
+                    sum(price * amount * discount) as a,
+                    TUMBLE_START( ROWTIME, INTERVAL '30' SECOND) as b
+                from MyTable
+                 group by
+                     TUMBLE( ROWTIME, INTERVAL '30' SECOND);`;
+            const result2 = flinksqlParser(sql2);
+            expect(result2).not.toBeNull();
+        });
     })
 })
