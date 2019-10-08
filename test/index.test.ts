@@ -82,6 +82,14 @@ describe('syntax test', () => {
             expect(result.token.start).toBe(0);
             expect(result.token.stop).toBe(4);
         });
+        test('test lateral table', () => {
+            const sql = `select 
+            id 
+            FROM 
+            userTable, LATERAL table(json(mess)) as t(ord, name_id);`;
+            const result = flinksqlParser(sql);
+            expect(result).toBeNull();
+        });
         test('syntax error', () => {
             const sql = 'select id from user.id; \nselect id from us*er.id; \nselect id from *user.id;';
             const result = flinksqlParser(sql);
