@@ -780,6 +780,72 @@ sqlVisitor.prototype.visitTableValuedFunction = function(ctx) {
 };
 
 
+// Visit a parse tree produced by sqlParser#matchRecognize.
+sqlVisitor.prototype.visitMatchRecognize = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#measureColumn.
+sqlVisitor.prototype.visitMeasureColumn = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#condition1.
+sqlVisitor.prototype.visitCondition1 = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#variable.
+sqlVisitor.prototype.visitVariable = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#pattern1.
+sqlVisitor.prototype.visitPattern1 = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#patternTerm.
+sqlVisitor.prototype.visitPatternTerm = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#patternFactor.
+sqlVisitor.prototype.visitPatternFactor = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#patternQuantifier.
+sqlVisitor.prototype.visitPatternQuantifier = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#minRepeat.
+sqlVisitor.prototype.visitMinRepeat = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#maxRepeat.
+sqlVisitor.prototype.visitMaxRepeat = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by sqlParser#repeat.
+sqlVisitor.prototype.visitRepeat = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by sqlParser#inlineTable.
 sqlVisitor.prototype.visitInlineTable = function(ctx) {
   return this.visitChildren(ctx);
