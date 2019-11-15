@@ -21,7 +21,6 @@
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "jest": "^24.8.0",
-    "node-query": "^0.3.3",
     "pegjs": "^0.10.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
