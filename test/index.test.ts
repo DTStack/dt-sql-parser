@@ -156,5 +156,17 @@ describe('syntax test', () => {
             const result = flinksqlParser(sql);
             expect(result).toBeNull();
         })
+        test('test primary key', () => {
+            const sql = `create table aa(
+                name.a[1].a varchar as name ,
+                ts int,
+                primary key (id, id[2])
+            ) with (
+                type = 'kafka',
+                aa = '12'
+            );`;
+            const result = flinksqlParser(sql);
+            expect(result).toBeNull();
+        })
     })
 })

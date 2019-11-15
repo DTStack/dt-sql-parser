@@ -1188,6 +1188,12 @@ sqlVisitor.prototype.visitDtColType = function(ctx) {
 };
 
 
+// Visit a parse tree produced by sqlParser#dtColIdentifier.
+sqlVisitor.prototype.visitDtColIdentifier = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by sqlParser#complexColTypeList.
 sqlVisitor.prototype.visitComplexColTypeList = function(ctx) {
   return this.visitChildren(ctx);

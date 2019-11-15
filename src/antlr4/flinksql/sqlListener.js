@@ -1775,6 +1775,15 @@ sqlListener.prototype.exitDtColType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by sqlParser#dtColIdentifier.
+sqlListener.prototype.enterDtColIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by sqlParser#dtColIdentifier.
+sqlListener.prototype.exitDtColIdentifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by sqlParser#complexColTypeList.
 sqlListener.prototype.enterComplexColTypeList = function(ctx) {
 };
