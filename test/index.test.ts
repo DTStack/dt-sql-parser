@@ -24,6 +24,35 @@ describe('complete test', () => {
 })
 
 describe('syntax test', () => {
+    describe('impala', () => {
+        test('no error', () => {
+            const sql = 'select id,name from user ';
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
+            expect(result).toBe(false);
+        });
+        test('insert', () => {
+            const sql = `insert into user (id, name) values (1 ,'a')`;
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
+            expect(result).toBe(false);
+        });
+        test('WITH SERDEPROPERTIES', () => {
+            const sql =`CREATE TABLE ih.h_b_py_detail (
+                contract_no STRING,
+                region_code STRING,
+                credit_code STRING
+              )
+              PARTITIONED BY (
+                cdate STRING
+              )
+              ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'
+              WITH SERDEPROPERTIES ('field.delim'=',', 'line.delim'='\n', 'serialization.format'=',')
+              STORED AS TEXTFILE
+              LOCATION 'hdfs://kudu1'
+              TBLPROPERTIES ('last_modified_by'='anonymous', 'last_modified_time'='1577082098', 'skip.header.line.count'='1')`;
+              const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
+            expect(result).toBe(false);
+        })
+    });
     describe('hive', () => {
         test('no error', () => {
             const sql = 'select id,name from user ';
