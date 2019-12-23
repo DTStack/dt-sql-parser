@@ -1130,7 +1130,7 @@ HiveDelimitedRowFormat_EDIT
  ;
 
 ImpalaRowFormat
- : '<impala>DELIMITED' OptionalFieldsTerminatedBy OptionalLinesTerminatedBy
+ : '<impala>DELIMITED' OptionalFieldsTerminatedBy OptionalLinesTerminatedBy OptionalWithSerdeproperties
    {
      if (!$2 && !$3) {
        $$ = { suggestKeywords: [{ value: 'FIELDS TERMINATED BY', weight: 2 }, { value: 'LINES TERMINATED BY', weight: 1 }] };
@@ -1143,8 +1143,8 @@ ImpalaRowFormat
  ;
 
 ImpalaRowFormat_EDIT
- : '<impala>DELIMITED' OptionalFieldsTerminatedBy_EDIT OptionalLinesTerminatedBy
- | '<impala>DELIMITED' OptionalFieldsTerminatedBy OptionalLinesTerminatedBy_EDIT
+ : '<impala>DELIMITED' OptionalFieldsTerminatedBy_EDIT OptionalLinesTerminatedBy OptionalWithSerdeproperties
+ | '<impala>DELIMITED' OptionalFieldsTerminatedBy OptionalLinesTerminatedBy_EDIT OptionalWithSerdeproperties
  ;
 
 OptionalFieldsTerminatedBy

@@ -382,7 +382,7 @@ ImpalaInsertOrUpsertStatement_EDIT
 
 ImpalaInsertOrUpsertStatementWithoutCTE
  : ImpalaInsertOrUpsertLeftPart OptionalImpalaShuffleOrNoShuffle SelectStatement OptionalUnions
- | ImpalaInsertOrUpsertLeftPart 'VALUES' '(' ImpalaRowValuesLists ')'
+ | ImpalaInsertOrUpsertLeftPart 'VALUES' ImpalaRowValuesLists
  ;
 
 ImpalaInsertOrUpsertStatementWithoutCTE_EDIT
@@ -400,8 +400,8 @@ ImpalaInsertOrUpsertStatementWithoutCTE_EDIT
  | ImpalaInsertOrUpsertLeftPart_EDIT OptionalImpalaShuffleOrNoShuffle SelectStatement OptionalUnions
  | ImpalaInsertOrUpsertLeftPart OptionalImpalaShuffleOrNoShuffle SelectStatement_EDIT OptionalUnions
  | ImpalaInsertOrUpsertLeftPart OptionalImpalaShuffleOrNoShuffle SelectStatement OptionalUnions_EDIT
- | ImpalaInsertOrUpsertLeftPart_EDIT 'VALUES' '(' ImpalaRowValuesLists ')'
- | ImpalaInsertOrUpsertLeftPart 'VALUES' '(' ImpalaRowValuesLists_EDIT ')'
+ | ImpalaInsertOrUpsertLeftPart_EDIT 'VALUES' ImpalaRowValuesLists
+ | ImpalaInsertOrUpsertLeftPart 'VALUES' ImpalaRowValuesLists_EDIT
  ;
 
 ImpalaInsertOrUpsertLeftPart
