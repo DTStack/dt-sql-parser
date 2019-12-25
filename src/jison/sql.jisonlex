@@ -67,7 +67,6 @@
 <hive>'USER'                               { return '<hive>USER'; }
 <hive>'USING'                              { return '<hive>USING'; }
 <hive>'VIEWS'                              { return '<hive>VIEWS'; }
-<hive>'LIFECYCLE'                          { return '<hive>LIFECYCLE'; }
 
 // Non-reserved Keywords
 <hive>'ABORT'                              { parser.determineCase(yytext); return '<hive>ABORT'; }
@@ -331,6 +330,7 @@
 <between>'AND'                             { this.popState(); return 'BETWEEN_AND'; }
 
 // Reserved Keywords
+'LIFECYCLE'                                { return 'LIFECYCLE'; }
 'ALL'                                      { return 'ALL'; }
 'ALTER'                                    { parser.determineCase(yytext); parser.addStatementTypeLocation('ALTER', yylloc, yy.lexer.upcomingInput()); return 'ALTER'; }
 'AND'                                      { return 'AND'; }

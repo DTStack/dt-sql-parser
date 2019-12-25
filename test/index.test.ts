@@ -48,7 +48,8 @@ describe('syntax test', () => {
               WITH SERDEPROPERTIES ('field.delim'=',', 'line.delim'='\n', 'serialization.format'=',')
               STORED AS TEXTFILE
               LOCATION 'hdfs://kudu1'
-              TBLPROPERTIES ('last_modified_by'='anonymous', 'last_modified_time'='1577082098', 'skip.header.line.count'='1')`;
+              TBLPROPERTIES ('last_modified_by'='anonymous', 'last_modified_time'='1577082098', 'skip.header.line.count'='1')
+              lifecycle 888`;
               const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
             expect(result).toBe(false);
         })

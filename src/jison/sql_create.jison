@@ -157,7 +157,7 @@ TableDefinition
 
 LifeCyclePart
 :
-| '<hive>LIFECYCLE' 'UNSIGNED_INTEGER'
+| 'LIFECYCLE' 'UNSIGNED_INTEGER'
 ;
 
 TableDefinition_EDIT
