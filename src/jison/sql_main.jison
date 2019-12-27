@@ -3312,6 +3312,7 @@ ArbitraryFunctionName
  | 'MAP'
  | '<impala>REPLACE'
  | 'TRUNCATE'
+ | 'LEFT'
  ;
 
 OptionalFunctionSquareBracket

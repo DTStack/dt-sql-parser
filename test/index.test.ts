@@ -53,6 +53,11 @@ describe('syntax test', () => {
               const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
             expect(result).toBe(false);
         })
+        test('left function', () => {
+            const sql = `select left(a) from sa;`
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
+            expect(result).toBe(false);
+        })
     });
     describe('hive', () => {
         test('no error', () => {
