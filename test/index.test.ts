@@ -8,7 +8,7 @@ const flinksqlParser = dtSqlParser.flinksqlParser;
 describe('complete test', () => {
     describe('hive', () => {
         test('complete result', () => {
-            const sql = 'select id,name from user ';
+            const sql = 'select id,name from `user` ;';
             const result = parser.parserSql([sql, ''], dtSqlParser.parser.sqlType.Hive);
             expect(result.locations).toBeInstanceOf(Array);
             expect(result.suggestKeywords).toBeInstanceOf(Array);
@@ -26,12 +26,12 @@ describe('complete test', () => {
 describe('syntax test', () => {
     describe('impala', () => {
         test('no error', () => {
-            const sql = 'select id,name from user ';
+            const sql = 'select id,name from user1 ';
             const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
             expect(result).toBe(false);
         });
         test('insert', () => {
-            const sql = `insert into user (id, name) values (1 ,'a')`;
+            const sql = `insert into user1 (id, name) values (1 ,'a')`;
             const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
             expect(result).toBe(false);
         });
@@ -61,7 +61,7 @@ describe('syntax test', () => {
     });
     describe('hive', () => {
         test('no error', () => {
-            const sql = 'select id,name from user ';
+            const sql = 'select id,name from user1 ';
             const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Hive);
             expect(result).toBe(false);
         });
@@ -93,7 +93,7 @@ describe('syntax test', () => {
     })
     describe('flinksql', () => {
         test('no error', () => {
-            const sql = `select id from user.id;`;
+            const sql = `select id from use1r.id;`;
             const result = flinksqlParser(sql);
             expect(result).toBeNull();
         });
@@ -126,14 +126,14 @@ describe('syntax test', () => {
             expect(result).toBeNull();
         });
         test('syntax error', () => {
-            const sql = 'select id from user.id; \nselect id from us*er.id; \nselect id from *user.id;';
+            const sql = 'select id from us1er.id; \nselect id from us*er.id; \nselect id from *u1ser.id;';
             const result = flinksqlParser(sql);
             expect(result).toMatchObject({
                 line: 2,
                 column: 17,
             });
-            expect(result.token.start).toBe(42);
-            expect(result.token.stop).toBe(42);
+            expect(result.token.start).toBe(43);
+            expect(result.token.stop).toBe(43);
             const sql2 = `CREATE TABLE MyTable(
                 message.after.id int AS id,
                 message.after.userid varchar AS userid,

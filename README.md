@@ -98,3 +98,4 @@ hive，impala语法解析文件来自[Hue](https://github.com/cloudera/hue)
 - 1.1.9 添加函数的中括号语法支持( split(nameList)[0] )
 - 1.2.0 添加 ts，添加测试
 - 2.0.0 添加flinksql语法检查
+- 3.0.0 拆分hive，impala，集成最新 `HUE` 方案

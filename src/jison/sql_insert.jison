@@ -267,11 +267,6 @@ InsertValuesStatement
      $4.owner = 'insert';
      parser.addTablePrimary($4);
    }
- | '<hive>INSERT' '<hive>OVERWRITE' OptionalHiveTable SchemaQualifiedTableIdentifier OptionalPartitionSpec 'VALUES' InsertValuesList
-   {
-     $4.owner = 'insert';
-     parser.addTablePrimary($4);
-   }
  | 'INSERT' 'INTO' OptionalTable SchemaQualifiedTableIdentifier 'VALUES' InsertValuesList
    {
      $4.owner = 'insert';
@@ -304,7 +299,7 @@ InsertValuesStatement_EDIT
 
 InsertValuesList
  : ParenthesizedRowValuesList
- | ParenthesizedRowValuesList ',' InsertValuesList
+ | RowValuesList ',' ParenthesizedRowValuesList
  ;
 
 ParenthesizedRowValuesList
