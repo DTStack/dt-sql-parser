@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "sql,hive,parser ",
   "keywords": [
     "hive",
@@ -12,7 +12,7 @@
   "scripts": {
     "build:parse": "pegjs  -o core/astParser.js peg/nquery.pegjs ",
     "build:filter": "pegjs -o core/comment.js peg/comment.pegjs ",
-    "build:syntax": "sh ./jison/hue-sql-syntax.sh ",
+    "build:syntax": "node ./src/scripts/generateParsers.js impala",
     "build": "npm test && rm -rf lib && tsc",
     "test": "jest"
   },

@@ -58,6 +58,17 @@ describe('syntax test', () => {
             const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
             expect(result).toBe(false);
         })
+        test('create as select', () => {
+            const sql = `create table partitions_yes partitioned by (year, month)
+            as select s, year, month from partitions_no;`
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
+            expect(result).toBe(false);
+        })
+        test('show grant ', () => {
+            const sql = `show grant role 18_112_a;`
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Impala);
+            expect(result).toBe(false);
+        })
     });
     describe('hive', () => {
         test('no error', () => {
