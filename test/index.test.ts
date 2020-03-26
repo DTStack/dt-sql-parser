@@ -76,6 +76,11 @@ describe('syntax test', () => {
             const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Hive);
             expect(result).toBe(false);
         });
+        test('insert', () => {
+            const sql = `insert into table user1 values (1, 'a'), (2, 'b')`;
+            const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Hive);
+            expect(result).toBe(false);
+        });
         test('select table should not be null', () => {
             const sql = 'select id,name from ';
             const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Hive) as SyntaxResult;
