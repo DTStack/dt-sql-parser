@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "sql,hive,parser ",
   "keywords": [
     "hive",

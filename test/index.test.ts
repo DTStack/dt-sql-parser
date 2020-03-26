@@ -77,7 +77,7 @@ describe('syntax test', () => {
             expect(result).toBe(false);
         });
         test('insert', () => {
-            const sql = `insert into table user1 values (1, 'a'), (2, 'b')`;
+            const sql = `insert into table user1 values (1, 'a'), (2, 'b'), (3, 'b')`;
             const result = parser.parseSyntax([sql, ''], dtSqlParser.parser.sqlType.Hive);
             expect(result).toBe(false);
         });
