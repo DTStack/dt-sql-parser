@@ -1,15 +1,17 @@
+> 如果你只想单纯的解析(SQL/SparkSQL)，请使用 [cuopyue](https://github.com/HSunboy/cuopyue)
+
 # dt-sql-parser
 
-本项目用于处理sql，目前含有功能
+本项目用于处理SQL，目前含有功能
 
-1. 校验sql，hive sql，impala sql，flinksql 等语法，并给予错误信息与建议提示
-2. sql分割,根据`;`将sql分割为数组
-3. 去除sql中的的注释(目前支持`--`,`/**/`类型注释)
+1. 校验SQL，hive SQL，impala SQL，flinkSQL 等语法，并给予错误信息与建议提示
+2. SQL分割,根据`;`将sql分割为数组
+3. 去除SQL中的的注释(目前支持`--`,`/**/`类型注释)
 
 
 ## 用法
 
-### 过滤注释 / sql分割
+### 过滤注释 / SQL分割
 
 ``` javascript
 const dtFilter=require("dt-sql-parser").filter;
