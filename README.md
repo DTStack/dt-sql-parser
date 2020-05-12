@@ -2,6 +2,11 @@
 
 # dt-sql-parser
 
+[![NPM version][npm-image]][npm-url]
+
+[npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/dt-sql-parser
+
 本项目用于处理SQL，目前含有功能
 
 1. 校验SQL，hive SQL，impala SQL，flinkSQL 等语法，并给予错误信息与建议提示
