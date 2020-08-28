@@ -4,17 +4,17 @@ describe('utils', () => {
         test('single', () => {
             let sql = 'select id,name from user';
             let result = utils.splitSql(sql);
-            expect(result).toEqual([sql.length - 1])
+            expect(result).toEqual([sql.length - 1]);
             sql += ';';
             result = utils.splitSql(sql);
-            expect(result).toEqual([sql.length - 1])
+            expect(result).toEqual([sql.length - 1]);
         });
         test('multiple', () => {
             const sql = `-- a ;
             select * from a;
             select user from b`;
             const result = utils.splitSql(sql);
-            expect(result).toEqual([34, 65])
+            expect(result).toEqual([34, 65]);
         });
         test('error sql', () => {
             const sql = `CREATE TABLE MyResult(
@@ -29,7 +29,7 @@ describe('utils', () => {
                 tableName ='user'
              );`;
             const result = utils.splitSql(sql);
-            expect(result).toEqual([337])
+            expect(result).toEqual([337]);
             const sql2 = `CREATE TABLE MyResult(
                 a double,
                 b timestamp,
@@ -42,7 +42,7 @@ describe('utils', () => {
                 tableName ='user'
              )`;
             const result2 = utils.splitSql(sql2);
-            expect(result2).toEqual([336])
+            expect(result2).toEqual([336]);
         });
-    })
-})
+    });
+});
