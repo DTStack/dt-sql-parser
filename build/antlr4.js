@@ -1,31 +1,35 @@
 const path = require('path');
 const exec = require('child_process').exec;
 
+const antlr4 = path.resolve(__dirname, 'antlr-4.8-complete.jar');
 const grammars = path.resolve(__dirname, '../src/grammar');
+const output = path.resolve(__dirname, '../src/parser');
 
-const languages = [
+const entry = [
     'generic',
     'mysql',
-    // 'oracle',
-    // 'flink',
-    // 'hive',
-    // 'impala',
-    // 'libra',
-    // 'spark',
-    // 'tidb'
+    'hive',
+    'plsql',
+    'spark',
+    'tsql',
 ];
 
-languages.forEach(language => {
-
-    exec(`npx antlr4-tool -l ts -o ${grammars}/${language}/parser ${grammars}/${language}/*.g4`, (error) => {
-        console.log('error:', error)
-    })
-
-    // const compiledResults = antlr4Tool.compile({
-    //     language: 'ts', // Only support for JavaScript & TypeScript
-    //     grammarFiles:  [`${grammars}/${language}/*.g4`],
-    //     outputDirectory: `${grammars}/${language}/parser`
-    // });
-    
-})
+entry.forEach((language) => {
+    const cmd = `
+        java -jar ${antlr4}
+        -Dlanguage=JavaScript 
+        -visitor
+        -listener
+        -o ${output}/${language}
+        ${grammars}/${language}/*.g4 
+    `.replace(/\n/g, '');
+    console.log('cmd:', cmd);
+    exec(cmd, (err) => {
+        if (err) {
+            console.error('Antlr4 build error: ' + language, err);
+        } else {
+            console.log(`Build ${language} success.`);
+        }
+    });
+});
 

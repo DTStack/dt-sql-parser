@@ -14,7 +14,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "build:parser": "node build/antlr4.js",
+    "antlr": "node build/antlr4.js",
     "build": "npm test && rm -rf lib && tsc",
     "eslint": "eslint ./src/**/*.ts",
     "check-types": "tsc --skipLibCheck",
