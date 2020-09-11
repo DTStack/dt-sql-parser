@@ -3,15 +3,14 @@ const exec = require('child_process').exec;
 
 const antlr4 = path.resolve(__dirname, 'antlr-4.8-complete.jar');
 const grammars = path.resolve(__dirname, '../src/grammar');
-const output = path.resolve(__dirname, '../src/parser');
+const output = path.resolve(__dirname, '../src/lib');
 
 const entry = [
     'generic',
-    'mysql',
     'hive',
     'plsql',
     'spark',
-    'tsql',
+    'impala',
 ];
 
 entry.forEach((language) => {

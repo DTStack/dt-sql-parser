@@ -3,5 +3,5 @@ package-lock.json
 .DS_Store
 .vscode
 .history
-lib/
+dist/
 src/**/.antlr

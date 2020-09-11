@@ -12,10 +12,10 @@
     "impala",
     "bigdata"
   ],
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "antlr": "node build/antlr4.js",
-    "build": "npm test && rm -rf lib && tsc",
+    "antlr4": "node build/antlr4.js",
+    "build": "npm test && rm -rf dist && tsc",
     "eslint": "eslint ./src/**/*.ts",
     "check-types": "tsc --skipLibCheck",
     "test": "jest"

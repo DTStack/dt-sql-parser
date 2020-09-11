@@ -27,7 +27,7 @@ module.exports = {
     // coverageDirectory: null,
 
     // An array of regexp pattern strings used to skip coverage collection
-    coveragePathIgnorePatterns: ["/node_modules/"],
+    coveragePathIgnorePatterns: ['/node_modules/'],
 
     // A list of reporter names that Jest uses when writing coverage reports
     // coverageReporters: [
@@ -57,7 +57,7 @@ module.exports = {
 
     // A set of global variables that need to be available in all test environments
     globals: {
-      window: {},
+        window: {},
     },
 
     // An array of directory names to be searched recursively up from the requiring module's location
@@ -129,7 +129,7 @@ module.exports = {
     // snapshotSerializers: [],
 
     // The test environment that will be used for testing
-    testEnvironment: "node",
+    testEnvironment: 'node',
 
     // Options that will be passed to the testEnvironment
     // testEnvironmentOptions: {},
@@ -144,7 +144,7 @@ module.exports = {
     // ],
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-    testPathIgnorePatterns: ["/node_modules/"],
+    testPathIgnorePatterns: ['/node_modules/'],
 
     // The regexp pattern or array of patterns that Jest uses to detect test files
     // testRegex: [],
@@ -163,11 +163,11 @@ module.exports = {
 
     // A map from regular expressions to paths to transformers
     transform: {
-      "^.+\\.(t|j)sx?$": "ts-jest",
+        '^.+\\.(t|j)sx?$': 'ts-jest',
     },
 
     // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-    transformIgnorePatterns: ["/node_modules/"],
+    transformIgnorePatterns: ['/node_modules/'],
 
     // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
     // unmockedModulePathPatterns: undefined,

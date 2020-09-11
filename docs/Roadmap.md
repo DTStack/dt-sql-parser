@@ -17,6 +17,5 @@
 - Generic SQL
 - Flink SQL
 - Libra SQL
-- Oracle SQL
 - TiDB
     MySQL Compatible Syntax
