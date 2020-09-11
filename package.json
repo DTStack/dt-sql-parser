@@ -18,7 +18,7 @@
     "build": "npm test && rm -rf dist && tsc",
     "eslint": "eslint ./src/**/*.ts",
     "check-types": "tsc --skipLibCheck",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "author": "dt-insight-front",
   "license": "ISC",

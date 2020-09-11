@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "./lib/",
+        "outDir": "./dist/",
         "sourceMap": false,
         "allowJs":true,
         "target": "es6",
