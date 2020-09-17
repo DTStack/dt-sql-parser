@@ -89,7 +89,7 @@ export default abstract class BasicParser<C = any> {
         const parser = this.createParser(input);
         this._parser = parser;
 
-        const tree = parser.statement();
+        const tree = parser.program();
         return tree.toStringTree(parser.ruleNames);
     }
 
