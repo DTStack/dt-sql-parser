@@ -6,11 +6,12 @@ const grammars = path.resolve(__dirname, '../src/grammar');
 const output = path.resolve(__dirname, '../src/lib');
 
 const entry = [
-    'generic',
-    'hive',
-    'plsql',
-    'spark',
-    'impala',
+    // 'generic',
+    // 'hive',
+    // 'plsql',
+    // 'spark',
+    // 'impala',
+    'flinksql',
 ];
 
 entry.forEach((language) => {
