@@ -24,8 +24,20 @@ FlinkSqlParserVisitor.prototype.visitStatement = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#sqlStatements.
+FlinkSqlParserVisitor.prototype.visitSqlStatements = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#sqlStatement.
 FlinkSqlParserVisitor.prototype.visitSqlStatement = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#emptyStatement.
+FlinkSqlParserVisitor.prototype.visitEmptyStatement = function(ctx) {
   return this.visitChildren(ctx);
 };
 

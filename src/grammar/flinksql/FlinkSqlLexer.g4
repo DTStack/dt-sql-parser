@@ -299,10 +299,37 @@ ROW:                          'ROW';
 NULL:                         'NULL';
 
 
-// single character Keywords
+// Operators. Comparation
 
-EQUAL:                        '=';
-COMMA:                        ',';
+EQUAL_SYMBOL:                        '=';
+GREATER_SYMBOL:                      '>';
+LESS_SYMBOL:                         '<';
+EXCLAMATION_SYMBOL:                  '!';
+
+
+// Operators. Bit
+
+BIT_NOT_OP:                          '~';
+BIT_OR_OP:                           '|';
+BIT_AND_OP:                          '&';
+BIT_XOR_OP:                          '^';
+
+
+// Constructors symbols
+
+DOT:                                 '.';
+LR_BRACKET:                          '(';
+RR_BRACKET:                          ')';
+COMMA:                               ',';
+SEMICOLON:                           ';';
+AT_SIGN:                             '@';
+ZERO_DECIMAL:                        '0';
+ONE_DECIMAL:                         '1';
+TWO_DECIMAL:                         '2';
+SINGLE_QUOTE_SYMB:                   '\'';
+DOUBLE_QUOTE_SYMB:                   '"';
+REVERSE_QUOTE_SYMB:                  '`';
+COLON_SYMB:                          ':';
 
 
 fragment ID_LITERAL:                 [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;

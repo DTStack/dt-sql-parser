@@ -29,12 +29,30 @@ FlinkSqlParserListener.prototype.exitStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#sqlStatements.
+FlinkSqlParserListener.prototype.enterSqlStatements = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#sqlStatements.
+FlinkSqlParserListener.prototype.exitSqlStatements = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#sqlStatement.
 FlinkSqlParserListener.prototype.enterSqlStatement = function(ctx) {
 };
 
 // Exit a parse tree produced by FlinkSqlParser#sqlStatement.
 FlinkSqlParserListener.prototype.exitSqlStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#emptyStatement.
+FlinkSqlParserListener.prototype.enterEmptyStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#emptyStatement.
+FlinkSqlParserListener.prototype.exitEmptyStatement = function(ctx) {
 };
 
 

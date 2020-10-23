@@ -5,11 +5,19 @@ options { tokenVocab=FlinkSqlLexer; }
 program: statement EOF;
 
 statement
-    : sqlStatement EOF
+    : sqlStatements EOF
+    ;
+
+sqlStatements
+    : (sqlStatement SEMICOLON | emptyStatement)*
     ;
 
 sqlStatement
     : ddlStatement | dmlStatement
+    ;
+
+emptyStatement
+    : SEMICOLON
     ;
 
 ddlStatement
@@ -24,13 +32,13 @@ dmlStatement
 
 createTable
     : CREATE TABLE tableName
-    ( 
-        columnOptionDefinition (',' columnOptionDefinition)*
-    )
+    LR_BRACKET 
+        columnOptionDefinition (COMMA columnOptionDefinition)*
+    RR_BRACKET
     partitionDefinition?
-    WITH (
-        withOptionDefinition (',' withOptionDefinition)*
-    )
+    WITH LR_BRACKET
+        withOptionDefinition (COMMA withOptionDefinition)*
+    RR_BRACKET
     ;
 
 
@@ -67,7 +75,7 @@ partitionColumnName
     ;
 
 withOptionDefinition
-    : REVERSE_QUOTE_ID EQUAL REVERSE_QUOTE_ID
+    : REVERSE_QUOTE_ID EQUAL_SYMBOL REVERSE_QUOTE_ID
     ;
 
 createDatabase

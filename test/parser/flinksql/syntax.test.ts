@@ -6,15 +6,14 @@ describe('FlinkSQL Syntax Tests', () => {
     test('Test simple CreateTable Statement', () => {
         const sql = `
             CREATE TABLE Orders (
-                user BIGINT,
-                product STRING
+                user BIGINT
             ) WITH ( 
                 "connector" = "kafka",
                 "scan.startup.mode" = "earliest-offset"
             );
         `;
         const result = parser.validate(sql);
-
+        console.log(result);
         expect(result.length).toBe(0);
     });
 });
