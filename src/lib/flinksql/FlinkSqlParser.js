@@ -8,106 +8,197 @@ var grammarFileName = "FlinkSqlParser.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u0131\u00b5\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
+    "\u0003\u0133\u013c\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
     "\t\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007",
     "\u0004\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f",
     "\u0004\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010",
     "\u0004\u0011\t\u0011\u0004\u0012\t\u0012\u0004\u0013\t\u0013\u0004\u0014",
     "\t\u0014\u0004\u0015\t\u0015\u0004\u0016\t\u0016\u0004\u0017\t\u0017",
     "\u0004\u0018\t\u0018\u0004\u0019\t\u0019\u0004\u001a\t\u001a\u0004\u001b",
-    "\t\u001b\u0004\u001c\t\u001c\u0004\u001d\t\u001d\u0003\u0002\u0003\u0002",
-    "\u0003\u0002\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0004\u0003\u0004",
-    "\u0003\u0004\u0003\u0004\u0007\u0004E\n\u0004\f\u0004\u000e\u0004H\u000b",
-    "\u0004\u0003\u0005\u0003\u0005\u0005\u0005L\n\u0005\u0003\u0006\u0003",
-    "\u0006\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003",
-    "\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0005",
-    "\u0007[\n\u0007\u0003\b\u0003\b\u0005\b_\n\b\u0003\t\u0003\t\u0003\t",
-    "\u0003\t\u0003\t\u0003\t\u0003\t\u0007\th\n\t\f\t\u000e\tk\u000b\t\u0003",
-    "\t\u0003\t\u0005\to\n\t\u0003\t\u0003\t\u0003\t\u0003\t\u0003\t\u0007",
-    "\tv\n\t\f\t\u000e\ty\u000b\t\u0003\t\u0003\t\u0003\n\u0003\n\u0007\n",
-    "\u007f\n\n\f\n\u000e\n\u0082\u000b\n\u0003\u000b\u0003\u000b\u0003\u000b",
-    "\u0003\f\u0003\f\u0003\r\u0003\r\u0003\u000e\u0003\u000e\u0003\u000e",
-    "\u0003\u000e\u0003\u000f\u0003\u000f\u0003\u000f\u0007\u000f\u0092\n",
-    "\u000f\f\u000f\u000e\u000f\u0095\u000b\u000f\u0003\u0010\u0003\u0010",
-    "\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0012\u0003\u0012",
-    "\u0003\u0013\u0003\u0013\u0003\u0014\u0003\u0014\u0003\u0015\u0003\u0015",
-    "\u0003\u0016\u0003\u0016\u0003\u0017\u0003\u0017\u0003\u0018\u0003\u0018",
-    "\u0003\u0019\u0003\u0019\u0003\u001a\u0003\u001a\u0003\u001b\u0003\u001b",
-    "\u0003\u001c\u0003\u001c\u0003\u001d\u0003\u001d\u0003\u001d\u0003\u0080",
-    "\u0002\u001e\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018",
-    "\u001a\u001c\u001e \"$&(*,.02468\u0002\u0003\u0003\u0002\u0106\u011c",
-    "\u0002\u00ab\u0002:\u0003\u0002\u0002\u0002\u0004=\u0003\u0002\u0002",
-    "\u0002\u0006F\u0003\u0002\u0002\u0002\bK\u0003\u0002\u0002\u0002\nM",
-    "\u0003\u0002\u0002\u0002\fZ\u0003\u0002\u0002\u0002\u000e^\u0003\u0002",
-    "\u0002\u0002\u0010`\u0003\u0002\u0002\u0002\u0012|\u0003\u0002\u0002",
-    "\u0002\u0014\u0083\u0003\u0002\u0002\u0002\u0016\u0086\u0003\u0002\u0002",
-    "\u0002\u0018\u0088\u0003\u0002\u0002\u0002\u001a\u008a\u0003\u0002\u0002",
-    "\u0002\u001c\u008e\u0003\u0002\u0002\u0002\u001e\u0096\u0003\u0002\u0002",
-    "\u0002 \u0098\u0003\u0002\u0002\u0002\"\u009c\u0003\u0002\u0002\u0002",
-    "$\u009e\u0003\u0002\u0002\u0002&\u00a0\u0003\u0002\u0002\u0002(\u00a2",
-    "\u0003\u0002\u0002\u0002*\u00a4\u0003\u0002\u0002\u0002,\u00a6\u0003",
-    "\u0002\u0002\u0002.\u00a8\u0003\u0002\u0002\u00020\u00aa\u0003\u0002",
-    "\u0002\u00022\u00ac\u0003\u0002\u0002\u00024\u00ae\u0003\u0002\u0002",
-    "\u00026\u00b0\u0003\u0002\u0002\u00028\u00b2\u0003\u0002\u0002\u0002",
-    ":;\u0005\u0004\u0003\u0002;<\u0007\u0002\u0002\u0003<\u0003\u0003\u0002",
-    "\u0002\u0002=>\u0005\u0006\u0004\u0002>?\u0007\u0002\u0002\u0003?\u0005",
-    "\u0003\u0002\u0002\u0002@A\u0005\b\u0005\u0002AB\u0007\u0129\u0002\u0002",
-    "BE\u0003\u0002\u0002\u0002CE\u0005\n\u0006\u0002D@\u0003\u0002\u0002",
-    "\u0002DC\u0003\u0002\u0002\u0002EH\u0003\u0002\u0002\u0002FD\u0003\u0002",
-    "\u0002\u0002FG\u0003\u0002\u0002\u0002G\u0007\u0003\u0002\u0002\u0002",
-    "HF\u0003\u0002\u0002\u0002IL\u0005\f\u0007\u0002JL\u0005\u000e\b\u0002",
-    "KI\u0003\u0002\u0002\u0002KJ\u0003\u0002\u0002\u0002L\t\u0003\u0002",
-    "\u0002\u0002MN\u0007\u0129\u0002\u0002N\u000b\u0003\u0002\u0002\u0002",
-    "O[\u0005\u0010\t\u0002P[\u0005\"\u0012\u0002Q[\u0005$\u0013\u0002R[",
-    "\u0005&\u0014\u0002S[\u0005(\u0015\u0002T[\u0005*\u0016\u0002U[\u0005",
-    ",\u0017\u0002V[\u0005.\u0018\u0002W[\u00050\u0019\u0002X[\u00052\u001a",
-    "\u0002Y[\u00054\u001b\u0002ZO\u0003\u0002\u0002\u0002ZP\u0003\u0002",
-    "\u0002\u0002ZQ\u0003\u0002\u0002\u0002ZR\u0003\u0002\u0002\u0002ZS\u0003",
-    "\u0002\u0002\u0002ZT\u0003\u0002\u0002\u0002ZU\u0003\u0002\u0002\u0002",
-    "ZV\u0003\u0002\u0002\u0002ZW\u0003\u0002\u0002\u0002ZX\u0003\u0002\u0002",
-    "\u0002ZY\u0003\u0002\u0002\u0002[\r\u0003\u0002\u0002\u0002\\_\u0005",
-    "6\u001c\u0002]_\u00058\u001d\u0002^\\\u0003\u0002\u0002\u0002^]\u0003",
-    "\u0002\u0002\u0002_\u000f\u0003\u0002\u0002\u0002`a\u0007I\u0002\u0002",
-    "ab\u0007J\u0002\u0002bc\u0005\u0012\n\u0002cd\u0007\u0126\u0002\u0002",
-    "di\u0005\u0014\u000b\u0002ef\u0007\u0128\u0002\u0002fh\u0005\u0014\u000b",
-    "\u0002ge\u0003\u0002\u0002\u0002hk\u0003\u0002\u0002\u0002ig\u0003\u0002",
-    "\u0002\u0002ij\u0003\u0002\u0002\u0002jl\u0003\u0002\u0002\u0002ki\u0003",
-    "\u0002\u0002\u0002ln\u0007\u0127\u0002\u0002mo\u0005\u001a\u000e\u0002",
-    "nm\u0003\u0002\u0002\u0002no\u0003\u0002\u0002\u0002op\u0003\u0002\u0002",
-    "\u0002pq\u0007G\u0002\u0002qr\u0007\u0126\u0002\u0002rw\u0005 \u0011",
-    "\u0002st\u0007\u0128\u0002\u0002tv\u0005 \u0011\u0002us\u0003\u0002",
-    "\u0002\u0002vy\u0003\u0002\u0002\u0002wu\u0003\u0002\u0002\u0002wx\u0003",
-    "\u0002\u0002\u0002xz\u0003\u0002\u0002\u0002yw\u0003\u0002\u0002\u0002",
-    "z{\u0007\u0127\u0002\u0002{\u0011\u0003\u0002\u0002\u0002|\u0080\u0007",
-    "\u0105\u0002\u0002}\u007f\u0007\u0104\u0002\u0002~}\u0003\u0002\u0002",
-    "\u0002\u007f\u0082\u0003\u0002\u0002\u0002\u0080\u0081\u0003\u0002\u0002",
-    "\u0002\u0080~\u0003\u0002\u0002\u0002\u0081\u0013\u0003\u0002\u0002",
-    "\u0002\u0082\u0080\u0003\u0002\u0002\u0002\u0083\u0084\u0005\u0016\f",
-    "\u0002\u0084\u0085\u0005\u0018\r\u0002\u0085\u0015\u0003\u0002\u0002",
-    "\u0002\u0086\u0087\u0007\u0105\u0002\u0002\u0087\u0017\u0003\u0002\u0002",
-    "\u0002\u0088\u0089\t\u0002\u0002\u0002\u0089\u0019\u0003\u0002\u0002",
-    "\u0002\u008a\u008b\u0007\u00cf\u0002\u0002\u008b\u008c\u0007\u0010\u0002",
-    "\u0002\u008c\u008d\u0005\u001c\u000f\u0002\u008d\u001b\u0003\u0002\u0002",
-    "\u0002\u008e\u0093\u0005\u001e\u0010\u0002\u008f\u0090\u0007\u0128\u0002",
-    "\u0002\u0090\u0092\u0005\u001e\u0010\u0002\u0091\u008f\u0003\u0002\u0002",
-    "\u0002\u0092\u0095\u0003\u0002\u0002\u0002\u0093\u0091\u0003\u0002\u0002",
-    "\u0002\u0093\u0094\u0003\u0002\u0002\u0002\u0094\u001d\u0003\u0002\u0002",
-    "\u0002\u0095\u0093\u0003\u0002\u0002\u0002\u0096\u0097\u0007\u0105\u0002",
-    "\u0002\u0097\u001f\u0003\u0002\u0002\u0002\u0098\u0099\u0007\u0103\u0002",
-    "\u0002\u0099\u009a\u0007\u011d\u0002\u0002\u009a\u009b\u0007\u0103\u0002",
-    "\u0002\u009b!\u0003\u0002\u0002\u0002\u009c\u009d\u0003\u0002\u0002",
-    "\u0002\u009d#\u0003\u0002\u0002\u0002\u009e\u009f\u0003\u0002\u0002",
-    "\u0002\u009f%\u0003\u0002\u0002\u0002\u00a0\u00a1\u0003\u0002\u0002",
-    "\u0002\u00a1\'\u0003\u0002\u0002\u0002\u00a2\u00a3\u0003\u0002\u0002",
-    "\u0002\u00a3)\u0003\u0002\u0002\u0002\u00a4\u00a5\u0003\u0002\u0002",
-    "\u0002\u00a5+\u0003\u0002\u0002\u0002\u00a6\u00a7\u0003\u0002\u0002",
-    "\u0002\u00a7-\u0003\u0002\u0002\u0002\u00a8\u00a9\u0003\u0002\u0002",
-    "\u0002\u00a9/\u0003\u0002\u0002\u0002\u00aa\u00ab\u0003\u0002\u0002",
-    "\u0002\u00ab1\u0003\u0002\u0002\u0002\u00ac\u00ad\u0003\u0002\u0002",
-    "\u0002\u00ad3\u0003\u0002\u0002\u0002\u00ae\u00af\u0003\u0002\u0002",
-    "\u0002\u00af5\u0003\u0002\u0002\u0002\u00b0\u00b1\u0003\u0002\u0002",
-    "\u0002\u00b17\u0003\u0002\u0002\u0002\u00b2\u00b3\u0003\u0002\u0002",
-    "\u0002\u00b39\u0003\u0002\u0002\u0002\fDFKZ^inw\u0080\u0093"].join("");
+    "\t\u001b\u0004\u001c\t\u001c\u0004\u001d\t\u001d\u0004\u001e\t\u001e",
+    "\u0004\u001f\t\u001f\u0004 \t \u0004!\t!\u0004\"\t\"\u0004#\t#\u0004",
+    "$\t$\u0004%\t%\u0004&\t&\u0003\u0002\u0003\u0002\u0003\u0002\u0003\u0003",
+    "\u0003\u0003\u0003\u0003\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0004",
+    "\u0007\u0004W\n\u0004\f\u0004\u000e\u0004Z\u000b\u0004\u0003\u0005\u0003",
+    "\u0005\u0005\u0005^\n\u0005\u0003\u0006\u0003\u0006\u0003\u0007\u0003",
+    "\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003",
+    "\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0005\u0007m\n\u0007\u0003",
+    "\b\u0003\b\u0005\bq\n\b\u0003\t\u0003\t\u0003\t\u0003\t\u0003\t\u0003",
+    "\t\u0003\t\u0007\tz\n\t\f\t\u000e\t}\u000b\t\u0003\t\u0003\t\u0005\t",
+    "\u0081\n\t\u0003\t\u0003\t\u0003\n\u0003\n\u0003\n\u0003\u000b\u0003",
+    "\u000b\u0003\f\u0003\f\u0003\r\u0003\r\u0003\r\u0003\r\u0003\u000e\u0003",
+    "\u000e\u0003\u000e\u0007\u000e\u0093\n\u000e\f\u000e\u000e\u000e\u0096",
+    "\u000b\u000e\u0003\u000f\u0003\u000f\u0003\u0010\u0003\u0010\u0003\u0010",
+    "\u0005\u0010\u009d\n\u0010\u0003\u0010\u0003\u0010\u0003\u0010\u0003",
+    "\u0011\u0003\u0011\u0005\u0011\u00a4\n\u0011\u0003\u0011\u0003\u0011",
+    "\u0005\u0011\u00a8\n\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0003",
+    "\u0011\u0003\u0012\u0003\u0012\u0003\u0013\u0003\u0013\u0003\u0013\u0003",
+    "\u0013\u0003\u0013\u0005\u0013\u00b5\n\u0013\u0003\u0014\u0003\u0014",
+    "\u0003\u0014\u0003\u0014\u0003\u0015\u0003\u0015\u0003\u0015\u0003\u0015",
+    "\u0003\u0015\u0007\u0015\u00c0\n\u0015\f\u0015\u000e\u0015\u00c3\u000b",
+    "\u0015\u0003\u0015\u0003\u0015\u0003\u0016\u0003\u0016\u0003\u0016\u0003",
+    "\u0016\u0003\u0016\u0003\u0017\u0003\u0017\u0003\u0018\u0003\u0018\u0003",
+    "\u0018\u0003\u0018\u0003\u0018\u0003\u0019\u0003\u0019\u0003\u0019\u0003",
+    "\u0019\u0003\u0019\u0005\u0019\u00d8\n\u0019\u0003\u001a\u0003\u001a",
+    "\u0005\u001a\u00dc\n\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0003",
+    "\u001a\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0005\u001b\u00e6",
+    "\n\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001c",
+    "\u0003\u001c\u0003\u001d\u0003\u001d\u0003\u001d\u0003\u001d\u0005\u001d",
+    "\u00f2\n\u001d\u0003\u001d\u0003\u001d\u0005\u001d\u00f6\n\u001d\u0003",
+    "\u001e\u0003\u001e\u0003\u001e\u0003\u001e\u0003\u001e\u0007\u001e\u00fd",
+    "\n\u001e\f\u001e\u000e\u001e\u0100\u000b\u001e\u0003\u001e\u0003\u001e",
+    "\u0003\u001f\u0003\u001f\u0003\u001f\u0003\u001f\u0007\u001f\u0108\n",
+    "\u001f\f\u001f\u000e\u001f\u010b\u000b\u001f\u0003 \u0003 \u0007 \u010f",
+    "\n \f \u000e \u0112\u000b \u0003 \u0003 \u0003!\u0003!\u0003!\u0007",
+    "!\u0119\n!\f!\u000e!\u011c\u000b!\u0003\"\u0003\"\u0007\"\u0120\n\"",
+    "\f\"\u000e\"\u0123\u000b\"\u0003#\u0003#\u0003#\u0003#\u0003#\u0007",
+    "#\u012a\n#\f#\u000e#\u012d\u000b#\u0003#\u0003#\u0003$\u0003$\u0003",
+    "$\u0003$\u0003%\u0003%\u0003%\u0003&\u0003&\u0003&\u0003&\u0003&\u0004",
+    "\u0110\u0121\u0002\'\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014",
+    "\u0016\u0018\u001a\u001c\u001e \"$&(*,.02468:<>@BDFHJ\u0002\u0005\u0003",
+    "\u0002\u0108\u011e\u0003\u0002\u00c0\u00c1\u0004\u0002PP\u0094\u0094",
+    "\u0002\u0138\u0002L\u0003\u0002\u0002\u0002\u0004O\u0003\u0002\u0002",
+    "\u0002\u0006X\u0003\u0002\u0002\u0002\b]\u0003\u0002\u0002\u0002\n_",
+    "\u0003\u0002\u0002\u0002\fl\u0003\u0002\u0002\u0002\u000ep\u0003\u0002",
+    "\u0002\u0002\u0010r\u0003\u0002\u0002\u0002\u0012\u0084\u0003\u0002",
+    "\u0002\u0002\u0014\u0087\u0003\u0002\u0002\u0002\u0016\u0089\u0003\u0002",
+    "\u0002\u0002\u0018\u008b\u0003\u0002\u0002\u0002\u001a\u008f\u0003\u0002",
+    "\u0002\u0002\u001c\u0097\u0003\u0002\u0002\u0002\u001e\u0099\u0003\u0002",
+    "\u0002\u0002 \u00a1\u0003\u0002\u0002\u0002\"\u00ad\u0003\u0002\u0002",
+    "\u0002$\u00af\u0003\u0002\u0002\u0002&\u00b6\u0003\u0002\u0002\u0002",
+    "(\u00ba\u0003\u0002\u0002\u0002*\u00c6\u0003\u0002\u0002\u0002,\u00cb",
+    "\u0003\u0002\u0002\u0002.\u00cd\u0003\u0002\u0002\u00020\u00d2\u0003",
+    "\u0002\u0002\u00022\u00d9\u0003\u0002\u0002\u00024\u00e1\u0003\u0002",
+    "\u0002\u00026\u00eb\u0003\u0002\u0002\u00028\u00ed\u0003\u0002\u0002",
+    "\u0002:\u00f7\u0003\u0002\u0002\u0002<\u0103\u0003\u0002\u0002\u0002",
+    ">\u010c\u0003\u0002\u0002\u0002@\u0115\u0003\u0002\u0002\u0002B\u011d",
+    "\u0003\u0002\u0002\u0002D\u0124\u0003\u0002\u0002\u0002F\u0130\u0003",
+    "\u0002\u0002\u0002H\u0134\u0003\u0002\u0002\u0002J\u0137\u0003\u0002",
+    "\u0002\u0002LM\u0005\u0004\u0003\u0002MN\u0007\u0002\u0002\u0003N\u0003",
+    "\u0003\u0002\u0002\u0002OP\u0005\u0006\u0004\u0002PQ\u0007\u0002\u0002",
+    "\u0003Q\u0005\u0003\u0002\u0002\u0002RS\u0005\b\u0005\u0002ST\u0007",
+    "\u012b\u0002\u0002TW\u0003\u0002\u0002\u0002UW\u0005\n\u0006\u0002V",
+    "R\u0003\u0002\u0002\u0002VU\u0003\u0002\u0002\u0002WZ\u0003\u0002\u0002",
+    "\u0002XV\u0003\u0002\u0002\u0002XY\u0003\u0002\u0002\u0002Y\u0007\u0003",
+    "\u0002\u0002\u0002ZX\u0003\u0002\u0002\u0002[^\u0005\f\u0007\u0002\\",
+    "^\u0005\u000e\b\u0002][\u0003\u0002\u0002\u0002]\\\u0003\u0002\u0002",
+    "\u0002^\t\u0003\u0002\u0002\u0002_`\u0007\u012b\u0002\u0002`\u000b\u0003",
+    "\u0002\u0002\u0002am\u0005\u0010\t\u0002bm\u0005\u001e\u0010\u0002c",
+    "m\u0005 \u0011\u0002dm\u0005\"\u0012\u0002em\u0005$\u0013\u0002fm\u0005",
+    "*\u0016\u0002gm\u0005,\u0017\u0002hm\u0005.\u0018\u0002im\u00050\u0019",
+    "\u0002jm\u00052\u001a\u0002km\u00054\u001b\u0002la\u0003\u0002\u0002",
+    "\u0002lb\u0003\u0002\u0002\u0002lc\u0003\u0002\u0002\u0002ld\u0003\u0002",
+    "\u0002\u0002le\u0003\u0002\u0002\u0002lf\u0003\u0002\u0002\u0002lg\u0003",
+    "\u0002\u0002\u0002lh\u0003\u0002\u0002\u0002li\u0003\u0002\u0002\u0002",
+    "lj\u0003\u0002\u0002\u0002lk\u0003\u0002\u0002\u0002m\r\u0003\u0002",
+    "\u0002\u0002nq\u00056\u001c\u0002oq\u00058\u001d\u0002pn\u0003\u0002",
+    "\u0002\u0002po\u0003\u0002\u0002\u0002q\u000f\u0003\u0002\u0002\u0002",
+    "rs\u0007I\u0002\u0002st\u0007J\u0002\u0002tu\u0005B\"\u0002uv\u0007",
+    "\u0128\u0002\u0002v{\u0005\u0012\n\u0002wx\u0007\u012a\u0002\u0002x",
+    "z\u0005\u0012\n\u0002yw\u0003\u0002\u0002\u0002z}\u0003\u0002\u0002",
+    "\u0002{y\u0003\u0002\u0002\u0002{|\u0003\u0002\u0002\u0002|~\u0003\u0002",
+    "\u0002\u0002}{\u0003\u0002\u0002\u0002~\u0080\u0007\u0129\u0002\u0002",
+    "\u007f\u0081\u0005\u0018\r\u0002\u0080\u007f\u0003\u0002\u0002\u0002",
+    "\u0080\u0081\u0003\u0002\u0002\u0002\u0081\u0082\u0003\u0002\u0002\u0002",
+    "\u0082\u0083\u0005D#\u0002\u0083\u0011\u0003\u0002\u0002\u0002\u0084",
+    "\u0085\u0005\u0014\u000b\u0002\u0085\u0086\u0005\u0016\f\u0002\u0086",
+    "\u0013\u0003\u0002\u0002\u0002\u0087\u0088\u0007\u0106\u0002\u0002\u0088",
+    "\u0015\u0003\u0002\u0002\u0002\u0089\u008a\t\u0002\u0002\u0002\u008a",
+    "\u0017\u0003\u0002\u0002\u0002\u008b\u008c\u0007\u00cf\u0002\u0002\u008c",
+    "\u008d\u0007\u0010\u0002\u0002\u008d\u008e\u0005\u001a\u000e\u0002\u008e",
+    "\u0019\u0003\u0002\u0002\u0002\u008f\u0094\u0005\u001c\u000f\u0002\u0090",
+    "\u0091\u0007\u012a\u0002\u0002\u0091\u0093\u0005\u001c\u000f\u0002\u0092",
+    "\u0090\u0003\u0002\u0002\u0002\u0093\u0096\u0003\u0002\u0002\u0002\u0094",
+    "\u0092\u0003\u0002\u0002\u0002\u0094\u0095\u0003\u0002\u0002\u0002\u0095",
+    "\u001b\u0003\u0002\u0002\u0002\u0096\u0094\u0003\u0002\u0002\u0002\u0097",
+    "\u0098\u0007\u0106\u0002\u0002\u0098\u001d\u0003\u0002\u0002\u0002\u0099",
+    "\u009a\u0007I\u0002\u0002\u009a\u009c\u0007\u00c7\u0002\u0002\u009b",
+    "\u009d\u0005F$\u0002\u009c\u009b\u0003\u0002\u0002\u0002\u009c\u009d",
+    "\u0003\u0002\u0002\u0002\u009d\u009e\u0003\u0002\u0002\u0002\u009e\u009f",
+    "\u0005B\"\u0002\u009f\u00a0\u0005D#\u0002\u00a0\u001f\u0003\u0002\u0002",
+    "\u0002\u00a1\u00a3\u0007I\u0002\u0002\u00a2\u00a4\u0007\u00ae\u0002",
+    "\u0002\u00a3\u00a2\u0003\u0002\u0002\u0002\u00a3\u00a4\u0003\u0002\u0002",
+    "\u0002\u00a4\u00a5\u0003\u0002\u0002\u0002\u00a5\u00a7\u0007L\u0002",
+    "\u0002\u00a6\u00a8\u0005F$\u0002\u00a7\u00a6\u0003\u0002\u0002\u0002",
+    "\u00a7\u00a8\u0003\u0002\u0002\u0002\u00a8\u00a9\u0003\u0002\u0002\u0002",
+    "\u00a9\u00aa\u0005B\"\u0002\u00aa\u00ab\u0007\n\u0002\u0002\u00ab\u00ac",
+    "\u00056\u001c\u0002\u00ac!\u0003\u0002\u0002\u0002\u00ad\u00ae\u0003",
+    "\u0002\u0002\u0002\u00ae#\u0003\u0002\u0002\u0002\u00af\u00b0\u0007",
+    "g\u0002\u0002\u00b0\u00b1\u0007J\u0002\u0002\u00b1\u00b4\u0005B\"\u0002",
+    "\u00b2\u00b5\u0005&\u0014\u0002\u00b3\u00b5\u0005(\u0015\u0002\u00b4",
+    "\u00b2\u0003\u0002\u0002\u0002\u00b4\u00b3\u0003\u0002\u0002\u0002\u00b5",
+    "%\u0003\u0002\u0002\u0002\u00b6\u00b7\u0007h\u0002\u0002\u00b7\u00b8",
+    "\u0007d\u0002\u0002\u00b8\u00b9\u0005B\"\u0002\u00b9\'\u0003\u0002\u0002",
+    "\u0002\u00ba\u00bb\u0007k\u0002\u0002\u00bb\u00bc\u0007\u0128\u0002",
+    "\u0002\u00bc\u00c1\u0005J&\u0002\u00bd\u00be\u0007\u012a\u0002\u0002",
+    "\u00be\u00c0\u0005J&\u0002\u00bf\u00bd\u0003\u0002\u0002\u0002\u00c0",
+    "\u00c3\u0003\u0002\u0002\u0002\u00c1\u00bf\u0003\u0002\u0002\u0002\u00c1",
+    "\u00c2\u0003\u0002\u0002\u0002\u00c2\u00c4\u0003\u0002\u0002\u0002\u00c3",
+    "\u00c1\u0003\u0002\u0002\u0002\u00c4\u00c5\u0007\u0129\u0002\u0002\u00c5",
+    ")\u0003\u0002\u0002\u0002\u00c6\u00c7\u0007g\u0002\u0002\u00c7\u00c8",
+    "\u0007\u00c7\u0002\u0002\u00c8\u00c9\u0005B\"\u0002\u00c9\u00ca\u0005",
+    "(\u0015\u0002\u00ca+\u0003\u0002\u0002\u0002\u00cb\u00cc\u0003\u0002",
+    "\u0002\u0002\u00cc-\u0003\u0002\u0002\u0002\u00cd\u00ce\u0007_\u0002",
+    "\u0002\u00ce\u00cf\u0007J\u0002\u0002\u00cf\u00d0\u0005H%\u0002\u00d0",
+    "\u00d1\u0005B\"\u0002\u00d1/\u0003\u0002\u0002\u0002\u00d2\u00d3\u0007",
+    "_\u0002\u0002\u00d3\u00d4\u0007\u00c7\u0002\u0002\u00d4\u00d5\u0005",
+    "H%\u0002\u00d5\u00d7\u0005B\"\u0002\u00d6\u00d8\t\u0003\u0002\u0002",
+    "\u00d7\u00d6\u0003\u0002\u0002\u0002\u00d7\u00d8\u0003\u0002\u0002\u0002",
+    "\u00d81\u0003\u0002\u0002\u0002\u00d9\u00db\u0007_\u0002\u0002\u00da",
+    "\u00dc\u0007\u00ae\u0002\u0002\u00db\u00da\u0003\u0002\u0002\u0002\u00db",
+    "\u00dc\u0003\u0002\u0002\u0002\u00dc\u00dd\u0003\u0002\u0002\u0002\u00dd",
+    "\u00de\u0007L\u0002\u0002\u00de\u00df\u0005H%\u0002\u00df\u00e0\u0005",
+    "B\"\u0002\u00e03\u0003\u0002\u0002\u0002\u00e1\u00e5\u0007_\u0002\u0002",
+    "\u00e2\u00e6\u0007\u00ae\u0002\u0002\u00e3\u00e4\u0007\u00ae\u0002\u0002",
+    "\u00e4\u00e6\u0007\u0107\u0002\u0002\u00e5\u00e2\u0003\u0002\u0002\u0002",
+    "\u00e5\u00e3\u0003\u0002\u0002\u0002\u00e5\u00e6\u0003\u0002\u0002\u0002",
+    "\u00e6\u00e7\u0003\u0002\u0002\u0002\u00e7\u00e8\u0007\u00a5\u0002\u0002",
+    "\u00e8\u00e9\u0005H%\u0002\u00e9\u00ea\u0005B\"\u0002\u00ea5\u0003\u0002",
+    "\u0002\u0002\u00eb\u00ec\u0003\u0002\u0002\u0002\u00ec7\u0003\u0002",
+    "\u0002\u0002\u00ed\u00ee\u0007N\u0002\u0002\u00ee\u00ef\t\u0004\u0002",
+    "\u0002\u00ef\u00f5\u0005B\"\u0002\u00f0\u00f2\u0005:\u001e\u0002\u00f1",
+    "\u00f0\u0003\u0002\u0002\u0002\u00f1\u00f2\u0003\u0002\u0002\u0002\u00f2",
+    "\u00f3\u0003\u0002\u0002\u0002\u00f3\u00f6\u00056\u001c\u0002\u00f4",
+    "\u00f6\u0005<\u001f\u0002\u00f5\u00f1\u0003\u0002\u0002\u0002\u00f5",
+    "\u00f4\u0003\u0002\u0002\u0002\u00f69\u0003\u0002\u0002\u0002\u00f7",
+    "\u00f8\u0007=\u0002\u0002\u00f8\u00f9\u0007\u0128\u0002\u0002\u00f9",
+    "\u00fe\u0005J&\u0002\u00fa\u00fb\u0007\u012a\u0002\u0002\u00fb\u00fd",
+    "\u0005J&\u0002\u00fc\u00fa\u0003\u0002\u0002\u0002\u00fd\u0100\u0003",
+    "\u0002\u0002\u0002\u00fe\u00fc\u0003\u0002\u0002\u0002\u00fe\u00ff\u0003",
+    "\u0002\u0002\u0002\u00ff\u0101\u0003\u0002\u0002\u0002\u0100\u00fe\u0003",
+    "\u0002\u0002\u0002\u0101\u0102\u0007\u0129\u0002\u0002\u0102;\u0003",
+    "\u0002\u0002\u0002\u0103\u0104\u0007H\u0002\u0002\u0104\u0109\u0005",
+    "> \u0002\u0105\u0106\u0007\u012a\u0002\u0002\u0106\u0108\u0005> \u0002",
+    "\u0107\u0105\u0003\u0002\u0002\u0002\u0108\u010b\u0003\u0002\u0002\u0002",
+    "\u0109\u0107\u0003\u0002\u0002\u0002\u0109\u010a\u0003\u0002\u0002\u0002",
+    "\u010a=\u0003\u0002\u0002\u0002\u010b\u0109\u0003\u0002\u0002\u0002",
+    "\u010c\u0110\u0007\u0128\u0002\u0002\u010d\u010f\u000b\u0002\u0002\u0002",
+    "\u010e\u010d\u0003\u0002\u0002\u0002\u010f\u0112\u0003\u0002\u0002\u0002",
+    "\u0110\u0111\u0003\u0002\u0002\u0002\u0110\u010e\u0003\u0002\u0002\u0002",
+    "\u0111\u0113\u0003\u0002\u0002\u0002\u0112\u0110\u0003\u0002\u0002\u0002",
+    "\u0113\u0114\u0007\u0129\u0002\u0002\u0114?\u0003\u0002\u0002\u0002",
+    "\u0115\u011a\u0005B\"\u0002\u0116\u0117\u0007\u012a\u0002\u0002\u0117",
+    "\u0119\u0005B\"\u0002\u0118\u0116\u0003\u0002\u0002\u0002\u0119\u011c",
+    "\u0003\u0002\u0002\u0002\u011a\u0118\u0003\u0002\u0002\u0002\u011a\u011b",
+    "\u0003\u0002\u0002\u0002\u011bA\u0003\u0002\u0002\u0002\u011c\u011a",
+    "\u0003\u0002\u0002\u0002\u011d\u0121\u0007\u0106\u0002\u0002\u011e\u0120",
+    "\u0007\u0105\u0002\u0002\u011f\u011e\u0003\u0002\u0002\u0002\u0120\u0123",
+    "\u0003\u0002\u0002\u0002\u0121\u0122\u0003\u0002\u0002\u0002\u0121\u011f",
+    "\u0003\u0002\u0002\u0002\u0122C\u0003\u0002\u0002\u0002\u0123\u0121",
+    "\u0003\u0002\u0002\u0002\u0124\u0125\u0007G\u0002\u0002\u0125\u0126",
+    "\u0007\u0128\u0002\u0002\u0126\u012b\u0005J&\u0002\u0127\u0128\u0007",
+    "\u012a\u0002\u0002\u0128\u012a\u0005J&\u0002\u0129\u0127\u0003\u0002",
+    "\u0002\u0002\u012a\u012d\u0003\u0002\u0002\u0002\u012b\u0129\u0003\u0002",
+    "\u0002\u0002\u012b\u012c\u0003\u0002\u0002\u0002\u012c\u012e\u0003\u0002",
+    "\u0002\u0002\u012d\u012b\u0003\u0002\u0002\u0002\u012e\u012f\u0007\u0129",
+    "\u0002\u0002\u012fE\u0003\u0002\u0002\u0002\u0130\u0131\u0007w\u0002",
+    "\u0002\u0131\u0132\u0007\u001c\u0002\u0002\u0132\u0133\u0007\u001e\u0002",
+    "\u0002\u0133G\u0003\u0002\u0002\u0002\u0134\u0135\u0007w\u0002\u0002",
+    "\u0135\u0136\u0007\u001e\u0002\u0002\u0136I\u0003\u0002\u0002\u0002",
+    "\u0137\u0138\u0007\u0104\u0002\u0002\u0138\u0139\u0007\u011f\u0002\u0002",
+    "\u0139\u013a\u0007\u0104\u0002\u0002\u013aK\u0003\u0002\u0002\u0002",
+    "\u001aVX]lp{\u0080\u0094\u009c\u00a3\u00a7\u00b4\u00c1\u00d7\u00db\u00e5",
+    "\u00f1\u00f5\u00fe\u0109\u0110\u011a\u0121\u012b"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -171,15 +262,15 @@ var literalNames = [ null, null, null, null, null, "'SELECT'", "'FROM'",
                      "'INTEGER_VALUE'", "'DECIMAL_VALUE'", "'DOUBLE_LITERAL'", 
                      "'BIGDECIMAL_LITERAL'", "'IDENTIFIER'", "'BACKQUOTED_IDENTIFIER'", 
                      "'SIMPLE_COMMENT'", "'BRACKETED_EMPTY_COMMENT'", "'BRACKETED_COMMENT'", 
-                     "'WS'", "'UNRECOGNIZED'", null, null, null, "'STRING'", 
-                     "'ARRAY'", "'MAP'", "'CHAR'", "'VARCHAR'", "'BINARY'", 
-                     "'VARBINARY'", "'BYTES'", "'DECIMAL'", "'TINYINT'", 
-                     "'SMALLINT'", "'INT'", "'BIGINT'", "'FLOAT'", "'DOUBLE'", 
-                     "'DATE'", "'TIME'", "'TIMESTAMP'", "'MULTISET'", "'BOOLEAN'", 
-                     "'RAW'", "'ROW'", "'NULL'", "'='", "'>'", "'<'", "'!'", 
-                     "'~'", "'|'", "'&'", "'^'", "'.'", "'('", "')'", "','", 
-                     "';'", "'@'", "'0'", "'1'", "'2'", "'''", "'\"'", "'`'", 
-                     "':'" ];
+                     "'WS'", "'UNRECOGNIZED'", null, null, null, null, "'SYSTEM'", 
+                     "'STRING'", "'ARRAY'", "'MAP'", "'CHAR'", "'VARCHAR'", 
+                     "'BINARY'", "'VARBINARY'", "'BYTES'", "'DECIMAL'", 
+                     "'TINYINT'", "'SMALLINT'", "'INT'", "'BIGINT'", "'FLOAT'", 
+                     "'DOUBLE'", "'DATE'", "'TIME'", "'TIMESTAMP'", "'MULTISET'", 
+                     "'BOOLEAN'", "'RAW'", "'ROW'", "'NULL'", "'='", "'>'", 
+                     "'<'", "'!'", "'~'", "'|'", "'&'", "'^'", "'.'", "'('", 
+                     "')'", "','", "';'", "'@'", "'0'", "'1'", "'2'", "'''", 
+                     "'\"'", "'`'", "':'" ];
 
 var symbolicNames = [ null, "SPACE", "SPEC_MYSQL_COMMENT", "COMMENT_INPUT", 
                       "LINE_COMMENT", "SELECT", "FROM", "ADD", "AS", "ALL", 
@@ -230,26 +321,29 @@ var symbolicNames = [ null, "SPACE", "SPEC_MYSQL_COMMENT", "COMMENT_INPUT",
                       "INTEGER_VALUE", "DECIMAL_VALUE", "DOUBLE_LITERAL", 
                       "BIGDECIMAL_LITERAL", "IDENTIFIER", "BACKQUOTED_IDENTIFIER", 
                       "SIMPLE_COMMENT", "BRACKETED_EMPTY_COMMENT", "BRACKETED_COMMENT", 
-                      "WS", "UNRECOGNIZED", "REVERSE_QUOTE_ID", "DOT_ID", 
-                      "ID", "STRING", "ARRAY", "MAP", "CHAR", "VARCHAR", 
-                      "BINARY", "VARBINARY", "BYTES", "DECIMAL", "TINYINT", 
-                      "SMALLINT", "INT", "BIGINT", "FLOAT", "DOUBLE", "DATE", 
-                      "TIME", "TIMESTAMP", "MULTISET", "BOOLEAN", "RAW", 
-                      "ROW", "NULL", "EQUAL_SYMBOL", "GREATER_SYMBOL", "LESS_SYMBOL", 
-                      "EXCLAMATION_SYMBOL", "BIT_NOT_OP", "BIT_OR_OP", "BIT_AND_OP", 
-                      "BIT_XOR_OP", "DOT", "LR_BRACKET", "RR_BRACKET", "COMMA", 
-                      "SEMICOLON", "AT_SIGN", "ZERO_DECIMAL", "ONE_DECIMAL", 
-                      "TWO_DECIMAL", "SINGLE_QUOTE_SYMB", "DOUBLE_QUOTE_SYMB", 
-                      "REVERSE_QUOTE_SYMB", "COLON_SYMB" ];
+                      "WS", "UNRECOGNIZED", "REVERSE_QUOTE_ID", "DOUBLE_QUOTE_ID", 
+                      "DOT_ID", "ID", "SYSTEM", "STRING", "ARRAY", "MAP", 
+                      "CHAR", "VARCHAR", "BINARY", "VARBINARY", "BYTES", 
+                      "DECIMAL", "TINYINT", "SMALLINT", "INT", "BIGINT", 
+                      "FLOAT", "DOUBLE", "DATE", "TIME", "TIMESTAMP", "MULTISET", 
+                      "BOOLEAN", "RAW", "ROW", "NULL", "EQUAL_SYMBOL", "GREATER_SYMBOL", 
+                      "LESS_SYMBOL", "EXCLAMATION_SYMBOL", "BIT_NOT_OP", 
+                      "BIT_OR_OP", "BIT_AND_OP", "BIT_XOR_OP", "DOT", "LR_BRACKET", 
+                      "RR_BRACKET", "COMMA", "SEMICOLON", "AT_SIGN", "ZERO_DECIMAL", 
+                      "ONE_DECIMAL", "TWO_DECIMAL", "SINGLE_QUOTE_SYMB", 
+                      "DOUBLE_QUOTE_SYMB", "REVERSE_QUOTE_SYMB", "COLON_SYMB" ];
 
 var ruleNames =  [ "program", "statement", "sqlStatements", "sqlStatement", 
                    "emptyStatement", "ddlStatement", "dmlStatement", "createTable", 
-                   "tableName", "columnOptionDefinition", "columnName", 
-                   "columnType", "partitionDefinition", "partitionColumnDefinition", 
-                   "partitionColumnName", "withOptionDefinition", "createDatabase", 
-                   "createView", "createFunction", "alterTable", "alterDatabase", 
+                   "columnOptionDefinition", "columnName", "columnType", 
+                   "partitionDefinition", "partitionColumnDefinition", "partitionColumnName", 
+                   "createDatabase", "createView", "createFunction", "alterTable", 
+                   "renameDefinition", "setKeyValueDefinition", "alterDatabase", 
                    "alterFunction", "dropTable", "dropDatabase", "dropView", 
-                   "dropFunction", "selectStatement", "insertStatement" ];
+                   "dropFunction", "selectStatement", "insertStatement", 
+                   "insertPartitionDefinition", "valuesDefinition", "valuesRowDefinition", 
+                   "uidList", "uid", "withOption", "ifNotExists", "ifExists", 
+                   "keyValueDefinition" ];
 
 function FlinkSqlParser (input) {
 	antlr4.Parser.call(this, input);
@@ -527,52 +621,54 @@ FlinkSqlParser.BRACKETED_COMMENT = 254;
 FlinkSqlParser.WS = 255;
 FlinkSqlParser.UNRECOGNIZED = 256;
 FlinkSqlParser.REVERSE_QUOTE_ID = 257;
-FlinkSqlParser.DOT_ID = 258;
-FlinkSqlParser.ID = 259;
-FlinkSqlParser.STRING = 260;
-FlinkSqlParser.ARRAY = 261;
-FlinkSqlParser.MAP = 262;
-FlinkSqlParser.CHAR = 263;
-FlinkSqlParser.VARCHAR = 264;
-FlinkSqlParser.BINARY = 265;
-FlinkSqlParser.VARBINARY = 266;
-FlinkSqlParser.BYTES = 267;
-FlinkSqlParser.DECIMAL = 268;
-FlinkSqlParser.TINYINT = 269;
-FlinkSqlParser.SMALLINT = 270;
-FlinkSqlParser.INT = 271;
-FlinkSqlParser.BIGINT = 272;
-FlinkSqlParser.FLOAT = 273;
-FlinkSqlParser.DOUBLE = 274;
-FlinkSqlParser.DATE = 275;
-FlinkSqlParser.TIME = 276;
-FlinkSqlParser.TIMESTAMP = 277;
-FlinkSqlParser.MULTISET = 278;
-FlinkSqlParser.BOOLEAN = 279;
-FlinkSqlParser.RAW = 280;
-FlinkSqlParser.ROW = 281;
-FlinkSqlParser.NULL = 282;
-FlinkSqlParser.EQUAL_SYMBOL = 283;
-FlinkSqlParser.GREATER_SYMBOL = 284;
-FlinkSqlParser.LESS_SYMBOL = 285;
-FlinkSqlParser.EXCLAMATION_SYMBOL = 286;
-FlinkSqlParser.BIT_NOT_OP = 287;
-FlinkSqlParser.BIT_OR_OP = 288;
-FlinkSqlParser.BIT_AND_OP = 289;
-FlinkSqlParser.BIT_XOR_OP = 290;
-FlinkSqlParser.DOT = 291;
-FlinkSqlParser.LR_BRACKET = 292;
-FlinkSqlParser.RR_BRACKET = 293;
-FlinkSqlParser.COMMA = 294;
-FlinkSqlParser.SEMICOLON = 295;
-FlinkSqlParser.AT_SIGN = 296;
-FlinkSqlParser.ZERO_DECIMAL = 297;
-FlinkSqlParser.ONE_DECIMAL = 298;
-FlinkSqlParser.TWO_DECIMAL = 299;
-FlinkSqlParser.SINGLE_QUOTE_SYMB = 300;
-FlinkSqlParser.DOUBLE_QUOTE_SYMB = 301;
-FlinkSqlParser.REVERSE_QUOTE_SYMB = 302;
-FlinkSqlParser.COLON_SYMB = 303;
+FlinkSqlParser.DOUBLE_QUOTE_ID = 258;
+FlinkSqlParser.DOT_ID = 259;
+FlinkSqlParser.ID = 260;
+FlinkSqlParser.SYSTEM = 261;
+FlinkSqlParser.STRING = 262;
+FlinkSqlParser.ARRAY = 263;
+FlinkSqlParser.MAP = 264;
+FlinkSqlParser.CHAR = 265;
+FlinkSqlParser.VARCHAR = 266;
+FlinkSqlParser.BINARY = 267;
+FlinkSqlParser.VARBINARY = 268;
+FlinkSqlParser.BYTES = 269;
+FlinkSqlParser.DECIMAL = 270;
+FlinkSqlParser.TINYINT = 271;
+FlinkSqlParser.SMALLINT = 272;
+FlinkSqlParser.INT = 273;
+FlinkSqlParser.BIGINT = 274;
+FlinkSqlParser.FLOAT = 275;
+FlinkSqlParser.DOUBLE = 276;
+FlinkSqlParser.DATE = 277;
+FlinkSqlParser.TIME = 278;
+FlinkSqlParser.TIMESTAMP = 279;
+FlinkSqlParser.MULTISET = 280;
+FlinkSqlParser.BOOLEAN = 281;
+FlinkSqlParser.RAW = 282;
+FlinkSqlParser.ROW = 283;
+FlinkSqlParser.NULL = 284;
+FlinkSqlParser.EQUAL_SYMBOL = 285;
+FlinkSqlParser.GREATER_SYMBOL = 286;
+FlinkSqlParser.LESS_SYMBOL = 287;
+FlinkSqlParser.EXCLAMATION_SYMBOL = 288;
+FlinkSqlParser.BIT_NOT_OP = 289;
+FlinkSqlParser.BIT_OR_OP = 290;
+FlinkSqlParser.BIT_AND_OP = 291;
+FlinkSqlParser.BIT_XOR_OP = 292;
+FlinkSqlParser.DOT = 293;
+FlinkSqlParser.LR_BRACKET = 294;
+FlinkSqlParser.RR_BRACKET = 295;
+FlinkSqlParser.COMMA = 296;
+FlinkSqlParser.SEMICOLON = 297;
+FlinkSqlParser.AT_SIGN = 298;
+FlinkSqlParser.ZERO_DECIMAL = 299;
+FlinkSqlParser.ONE_DECIMAL = 300;
+FlinkSqlParser.TWO_DECIMAL = 301;
+FlinkSqlParser.SINGLE_QUOTE_SYMB = 302;
+FlinkSqlParser.DOUBLE_QUOTE_SYMB = 303;
+FlinkSqlParser.REVERSE_QUOTE_SYMB = 304;
+FlinkSqlParser.COLON_SYMB = 305;
 
 FlinkSqlParser.RULE_program = 0;
 FlinkSqlParser.RULE_statement = 1;
@@ -582,18 +678,18 @@ FlinkSqlParser.RULE_emptyStatement = 4;
 FlinkSqlParser.RULE_ddlStatement = 5;
 FlinkSqlParser.RULE_dmlStatement = 6;
 FlinkSqlParser.RULE_createTable = 7;
-FlinkSqlParser.RULE_tableName = 8;
-FlinkSqlParser.RULE_columnOptionDefinition = 9;
-FlinkSqlParser.RULE_columnName = 10;
-FlinkSqlParser.RULE_columnType = 11;
-FlinkSqlParser.RULE_partitionDefinition = 12;
-FlinkSqlParser.RULE_partitionColumnDefinition = 13;
-FlinkSqlParser.RULE_partitionColumnName = 14;
-FlinkSqlParser.RULE_withOptionDefinition = 15;
-FlinkSqlParser.RULE_createDatabase = 16;
-FlinkSqlParser.RULE_createView = 17;
-FlinkSqlParser.RULE_createFunction = 18;
-FlinkSqlParser.RULE_alterTable = 19;
+FlinkSqlParser.RULE_columnOptionDefinition = 8;
+FlinkSqlParser.RULE_columnName = 9;
+FlinkSqlParser.RULE_columnType = 10;
+FlinkSqlParser.RULE_partitionDefinition = 11;
+FlinkSqlParser.RULE_partitionColumnDefinition = 12;
+FlinkSqlParser.RULE_partitionColumnName = 13;
+FlinkSqlParser.RULE_createDatabase = 14;
+FlinkSqlParser.RULE_createView = 15;
+FlinkSqlParser.RULE_createFunction = 16;
+FlinkSqlParser.RULE_alterTable = 17;
+FlinkSqlParser.RULE_renameDefinition = 18;
+FlinkSqlParser.RULE_setKeyValueDefinition = 19;
 FlinkSqlParser.RULE_alterDatabase = 20;
 FlinkSqlParser.RULE_alterFunction = 21;
 FlinkSqlParser.RULE_dropTable = 22;
@@ -602,6 +698,15 @@ FlinkSqlParser.RULE_dropView = 24;
 FlinkSqlParser.RULE_dropFunction = 25;
 FlinkSqlParser.RULE_selectStatement = 26;
 FlinkSqlParser.RULE_insertStatement = 27;
+FlinkSqlParser.RULE_insertPartitionDefinition = 28;
+FlinkSqlParser.RULE_valuesDefinition = 29;
+FlinkSqlParser.RULE_valuesRowDefinition = 30;
+FlinkSqlParser.RULE_uidList = 31;
+FlinkSqlParser.RULE_uid = 32;
+FlinkSqlParser.RULE_withOption = 33;
+FlinkSqlParser.RULE_ifNotExists = 34;
+FlinkSqlParser.RULE_ifExists = 35;
+FlinkSqlParser.RULE_keyValueDefinition = 36;
 
 
 function ProgramContext(parser, parent, invokingState) {
@@ -659,9 +764,9 @@ FlinkSqlParser.prototype.program = function() {
     this.enterRule(localctx, 0, FlinkSqlParser.RULE_program);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 56;
+        this.state = 74;
         this.statement();
-        this.state = 57;
+        this.state = 75;
         this.match(FlinkSqlParser.EOF);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -733,9 +838,9 @@ FlinkSqlParser.prototype.statement = function() {
     this.enterRule(localctx, 2, FlinkSqlParser.RULE_statement);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 59;
+        this.state = 77;
         this.sqlStatements();
-        this.state = 60;
+        this.state = 78;
         this.match(FlinkSqlParser.EOF);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -834,28 +939,28 @@ FlinkSqlParser.prototype.sqlStatements = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 68;
+        this.state = 86;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while(_la===FlinkSqlParser.CREATE || _la===FlinkSqlParser.SEMICOLON) {
-            this.state = 66;
+        while(((((_la - 71)) & ~0x1f) == 0 && ((1 << (_la - 71)) & ((1 << (FlinkSqlParser.CREATE - 71)) | (1 << (FlinkSqlParser.INSERT - 71)) | (1 << (FlinkSqlParser.DROP - 71)) | (1 << (FlinkSqlParser.ALTER - 71)))) !== 0) || _la===FlinkSqlParser.SEMICOLON) {
+            this.state = 84;
             this._errHandler.sync(this);
             var la_ = this._interp.adaptivePredict(this._input,0,this._ctx);
             switch(la_) {
             case 1:
-                this.state = 62;
+                this.state = 80;
                 this.sqlStatement();
-                this.state = 63;
+                this.state = 81;
                 this.match(FlinkSqlParser.SEMICOLON);
                 break;
 
             case 2:
-                this.state = 65;
+                this.state = 83;
                 this.emptyStatement();
                 break;
 
             }
-            this.state = 70;
+            this.state = 88;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
@@ -928,19 +1033,19 @@ FlinkSqlParser.prototype.sqlStatement = function() {
     var localctx = new SqlStatementContext(this, this._ctx, this.state);
     this.enterRule(localctx, 6, FlinkSqlParser.RULE_sqlStatement);
     try {
-        this.state = 73;
+        this.state = 91;
         this._errHandler.sync(this);
         var la_ = this._interp.adaptivePredict(this._input,2,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 71;
+            this.state = 89;
             this.ddlStatement();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 72;
+            this.state = 90;
             this.dmlStatement();
             break;
 
@@ -1011,7 +1116,7 @@ FlinkSqlParser.prototype.emptyStatement = function() {
     this.enterRule(localctx, 8, FlinkSqlParser.RULE_emptyStatement);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 75;
+        this.state = 93;
         this.match(FlinkSqlParser.SEMICOLON);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1118,73 +1223,73 @@ FlinkSqlParser.prototype.ddlStatement = function() {
     var localctx = new DdlStatementContext(this, this._ctx, this.state);
     this.enterRule(localctx, 10, FlinkSqlParser.RULE_ddlStatement);
     try {
-        this.state = 88;
+        this.state = 106;
         this._errHandler.sync(this);
         var la_ = this._interp.adaptivePredict(this._input,3,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 77;
+            this.state = 95;
             this.createTable();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 78;
+            this.state = 96;
             this.createDatabase();
             break;
 
         case 3:
             this.enterOuterAlt(localctx, 3);
-            this.state = 79;
+            this.state = 97;
             this.createView();
             break;
 
         case 4:
             this.enterOuterAlt(localctx, 4);
-            this.state = 80;
+            this.state = 98;
             this.createFunction();
             break;
 
         case 5:
             this.enterOuterAlt(localctx, 5);
-            this.state = 81;
+            this.state = 99;
             this.alterTable();
             break;
 
         case 6:
             this.enterOuterAlt(localctx, 6);
-            this.state = 82;
+            this.state = 100;
             this.alterDatabase();
             break;
 
         case 7:
             this.enterOuterAlt(localctx, 7);
-            this.state = 83;
+            this.state = 101;
             this.alterFunction();
             break;
 
         case 8:
             this.enterOuterAlt(localctx, 8);
-            this.state = 84;
+            this.state = 102;
             this.dropTable();
             break;
 
         case 9:
             this.enterOuterAlt(localctx, 9);
-            this.state = 85;
+            this.state = 103;
             this.dropDatabase();
             break;
 
         case 10:
             this.enterOuterAlt(localctx, 10);
-            this.state = 86;
+            this.state = 104;
             this.dropView();
             break;
 
         case 11:
             this.enterOuterAlt(localctx, 11);
-            this.state = 87;
+            this.state = 105;
             this.dropFunction();
             break;
 
@@ -1258,22 +1363,21 @@ FlinkSqlParser.prototype.dmlStatement = function() {
     var localctx = new DmlStatementContext(this, this._ctx, this.state);
     this.enterRule(localctx, 12, FlinkSqlParser.RULE_dmlStatement);
     try {
-        this.state = 92;
+        this.state = 110;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,4,this._ctx);
-        switch(la_) {
-        case 1:
+        switch(this._input.LA(1)) {
+        case FlinkSqlParser.SEMICOLON:
             this.enterOuterAlt(localctx, 1);
-            this.state = 90;
+            this.state = 108;
             this.selectStatement();
             break;
-
-        case 2:
+        case FlinkSqlParser.INSERT:
             this.enterOuterAlt(localctx, 2);
-            this.state = 91;
+            this.state = 109;
             this.insertStatement();
             break;
-
+        default:
+            throw new antlr4.error.NoViableAltException(this);
         }
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1314,21 +1418,13 @@ CreateTableContext.prototype.TABLE = function() {
     return this.getToken(FlinkSqlParser.TABLE, 0);
 };
 
-CreateTableContext.prototype.tableName = function() {
-    return this.getTypedRuleContext(TableNameContext,0);
+CreateTableContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
 };
 
-CreateTableContext.prototype.LR_BRACKET = function(i) {
-	if(i===undefined) {
-		i = null;
-	}
-    if(i===null) {
-        return this.getTokens(FlinkSqlParser.LR_BRACKET);
-    } else {
-        return this.getToken(FlinkSqlParser.LR_BRACKET, i);
-    }
+CreateTableContext.prototype.LR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
 };
-
 
 CreateTableContext.prototype.columnOptionDefinition = function(i) {
     if(i===undefined) {
@@ -1341,31 +1437,12 @@ CreateTableContext.prototype.columnOptionDefinition = function(i) {
     }
 };
 
-CreateTableContext.prototype.RR_BRACKET = function(i) {
-	if(i===undefined) {
-		i = null;
-	}
-    if(i===null) {
-        return this.getTokens(FlinkSqlParser.RR_BRACKET);
-    } else {
-        return this.getToken(FlinkSqlParser.RR_BRACKET, i);
-    }
+CreateTableContext.prototype.RR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
 };
 
-
-CreateTableContext.prototype.WITH = function() {
-    return this.getToken(FlinkSqlParser.WITH, 0);
-};
-
-CreateTableContext.prototype.withOptionDefinition = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(WithOptionDefinitionContext);
-    } else {
-        return this.getTypedRuleContext(WithOptionDefinitionContext,i);
-    }
+CreateTableContext.prototype.withOption = function() {
+    return this.getTypedRuleContext(WithOptionContext,0);
 };
 
 CreateTableContext.prototype.COMMA = function(i) {
@@ -1416,151 +1493,40 @@ FlinkSqlParser.prototype.createTable = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 94;
+        this.state = 112;
         this.match(FlinkSqlParser.CREATE);
-        this.state = 95;
+        this.state = 113;
         this.match(FlinkSqlParser.TABLE);
-        this.state = 96;
-        this.tableName();
-        this.state = 97;
+        this.state = 114;
+        this.uid();
+        this.state = 115;
         this.match(FlinkSqlParser.LR_BRACKET);
-        this.state = 98;
+        this.state = 116;
         this.columnOptionDefinition();
-        this.state = 103;
+        this.state = 121;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===FlinkSqlParser.COMMA) {
-            this.state = 99;
+            this.state = 117;
             this.match(FlinkSqlParser.COMMA);
-            this.state = 100;
+            this.state = 118;
             this.columnOptionDefinition();
-            this.state = 105;
+            this.state = 123;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
-        this.state = 106;
+        this.state = 124;
         this.match(FlinkSqlParser.RR_BRACKET);
-        this.state = 108;
+        this.state = 126;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         if(_la===FlinkSqlParser.PARTITIONED) {
-            this.state = 107;
+            this.state = 125;
             this.partitionDefinition();
         }
 
-        this.state = 110;
-        this.match(FlinkSqlParser.WITH);
-        this.state = 111;
-        this.match(FlinkSqlParser.LR_BRACKET);
-        this.state = 112;
-        this.withOptionDefinition();
-        this.state = 117;
-        this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        while(_la===FlinkSqlParser.COMMA) {
-            this.state = 113;
-            this.match(FlinkSqlParser.COMMA);
-            this.state = 114;
-            this.withOptionDefinition();
-            this.state = 119;
-            this._errHandler.sync(this);
-            _la = this._input.LA(1);
-        }
-        this.state = 120;
-        this.match(FlinkSqlParser.RR_BRACKET);
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-
-function TableNameContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = FlinkSqlParser.RULE_tableName;
-    return this;
-}
-
-TableNameContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-TableNameContext.prototype.constructor = TableNameContext;
-
-TableNameContext.prototype.ID = function() {
-    return this.getToken(FlinkSqlParser.ID, 0);
-};
-
-TableNameContext.prototype.DOT_ID = function(i) {
-	if(i===undefined) {
-		i = null;
-	}
-    if(i===null) {
-        return this.getTokens(FlinkSqlParser.DOT_ID);
-    } else {
-        return this.getToken(FlinkSqlParser.DOT_ID, i);
-    }
-};
-
-
-TableNameContext.prototype.enterRule = function(listener) {
-    if(listener instanceof FlinkSqlParserListener ) {
-        listener.enterTableName(this);
-	}
-};
-
-TableNameContext.prototype.exitRule = function(listener) {
-    if(listener instanceof FlinkSqlParserListener ) {
-        listener.exitTableName(this);
-	}
-};
-
-TableNameContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof FlinkSqlParserVisitor ) {
-        return visitor.visitTableName(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-
-
-FlinkSqlParser.TableNameContext = TableNameContext;
-
-FlinkSqlParser.prototype.tableName = function() {
-
-    var localctx = new TableNameContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 16, FlinkSqlParser.RULE_tableName);
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 122;
-        this.match(FlinkSqlParser.ID);
-        this.state = 126;
-        this._errHandler.sync(this);
-        var _alt = this._interp.adaptivePredict(this._input,8,this._ctx)
-        while(_alt!=1 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
-            if(_alt===1+1) {
-                this.state = 123;
-                this.match(FlinkSqlParser.DOT_ID); 
-            }
-            this.state = 128;
-            this._errHandler.sync(this);
-            _alt = this._interp.adaptivePredict(this._input,8,this._ctx);
-        }
-
+        this.state = 128;
+        this.withOption();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1628,12 +1594,12 @@ FlinkSqlParser.ColumnOptionDefinitionContext = ColumnOptionDefinitionContext;
 FlinkSqlParser.prototype.columnOptionDefinition = function() {
 
     var localctx = new ColumnOptionDefinitionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 18, FlinkSqlParser.RULE_columnOptionDefinition);
+    this.enterRule(localctx, 16, FlinkSqlParser.RULE_columnOptionDefinition);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 129;
-        this.columnName();
         this.state = 130;
+        this.columnName();
+        this.state = 131;
         this.columnType();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1698,10 +1664,10 @@ FlinkSqlParser.ColumnNameContext = ColumnNameContext;
 FlinkSqlParser.prototype.columnName = function() {
 
     var localctx = new ColumnNameContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 20, FlinkSqlParser.RULE_columnName);
+    this.enterRule(localctx, 18, FlinkSqlParser.RULE_columnName);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 132;
+        this.state = 133;
         this.match(FlinkSqlParser.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1854,13 +1820,13 @@ FlinkSqlParser.ColumnTypeContext = ColumnTypeContext;
 FlinkSqlParser.prototype.columnType = function() {
 
     var localctx = new ColumnTypeContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 22, FlinkSqlParser.RULE_columnType);
+    this.enterRule(localctx, 20, FlinkSqlParser.RULE_columnType);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 134;
+        this.state = 135;
         _la = this._input.LA(1);
-        if(!(((((_la - 260)) & ~0x1f) == 0 && ((1 << (_la - 260)) & ((1 << (FlinkSqlParser.STRING - 260)) | (1 << (FlinkSqlParser.ARRAY - 260)) | (1 << (FlinkSqlParser.MAP - 260)) | (1 << (FlinkSqlParser.CHAR - 260)) | (1 << (FlinkSqlParser.VARCHAR - 260)) | (1 << (FlinkSqlParser.BINARY - 260)) | (1 << (FlinkSqlParser.VARBINARY - 260)) | (1 << (FlinkSqlParser.BYTES - 260)) | (1 << (FlinkSqlParser.DECIMAL - 260)) | (1 << (FlinkSqlParser.TINYINT - 260)) | (1 << (FlinkSqlParser.SMALLINT - 260)) | (1 << (FlinkSqlParser.INT - 260)) | (1 << (FlinkSqlParser.BIGINT - 260)) | (1 << (FlinkSqlParser.FLOAT - 260)) | (1 << (FlinkSqlParser.DOUBLE - 260)) | (1 << (FlinkSqlParser.DATE - 260)) | (1 << (FlinkSqlParser.TIME - 260)) | (1 << (FlinkSqlParser.TIMESTAMP - 260)) | (1 << (FlinkSqlParser.MULTISET - 260)) | (1 << (FlinkSqlParser.BOOLEAN - 260)) | (1 << (FlinkSqlParser.RAW - 260)) | (1 << (FlinkSqlParser.ROW - 260)) | (1 << (FlinkSqlParser.NULL - 260)))) !== 0))) {
+        if(!(((((_la - 262)) & ~0x1f) == 0 && ((1 << (_la - 262)) & ((1 << (FlinkSqlParser.STRING - 262)) | (1 << (FlinkSqlParser.ARRAY - 262)) | (1 << (FlinkSqlParser.MAP - 262)) | (1 << (FlinkSqlParser.CHAR - 262)) | (1 << (FlinkSqlParser.VARCHAR - 262)) | (1 << (FlinkSqlParser.BINARY - 262)) | (1 << (FlinkSqlParser.VARBINARY - 262)) | (1 << (FlinkSqlParser.BYTES - 262)) | (1 << (FlinkSqlParser.DECIMAL - 262)) | (1 << (FlinkSqlParser.TINYINT - 262)) | (1 << (FlinkSqlParser.SMALLINT - 262)) | (1 << (FlinkSqlParser.INT - 262)) | (1 << (FlinkSqlParser.BIGINT - 262)) | (1 << (FlinkSqlParser.FLOAT - 262)) | (1 << (FlinkSqlParser.DOUBLE - 262)) | (1 << (FlinkSqlParser.DATE - 262)) | (1 << (FlinkSqlParser.TIME - 262)) | (1 << (FlinkSqlParser.TIMESTAMP - 262)) | (1 << (FlinkSqlParser.MULTISET - 262)) | (1 << (FlinkSqlParser.BOOLEAN - 262)) | (1 << (FlinkSqlParser.RAW - 262)) | (1 << (FlinkSqlParser.ROW - 262)) | (1 << (FlinkSqlParser.NULL - 262)))) !== 0))) {
         this._errHandler.recoverInline(this);
         }
         else {
@@ -1938,14 +1904,14 @@ FlinkSqlParser.PartitionDefinitionContext = PartitionDefinitionContext;
 FlinkSqlParser.prototype.partitionDefinition = function() {
 
     var localctx = new PartitionDefinitionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 24, FlinkSqlParser.RULE_partitionDefinition);
+    this.enterRule(localctx, 22, FlinkSqlParser.RULE_partitionDefinition);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 136;
-        this.match(FlinkSqlParser.PARTITIONED);
         this.state = 137;
-        this.match(FlinkSqlParser.BY);
+        this.match(FlinkSqlParser.PARTITIONED);
         this.state = 138;
+        this.match(FlinkSqlParser.BY);
+        this.state = 139;
         this.partitionColumnDefinition();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2029,21 +1995,21 @@ FlinkSqlParser.PartitionColumnDefinitionContext = PartitionColumnDefinitionConte
 FlinkSqlParser.prototype.partitionColumnDefinition = function() {
 
     var localctx = new PartitionColumnDefinitionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 26, FlinkSqlParser.RULE_partitionColumnDefinition);
+    this.enterRule(localctx, 24, FlinkSqlParser.RULE_partitionColumnDefinition);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 140;
+        this.state = 141;
         this.partitionColumnName();
-        this.state = 145;
+        this.state = 146;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===FlinkSqlParser.COMMA) {
-            this.state = 141;
-            this.match(FlinkSqlParser.COMMA);
             this.state = 142;
+            this.match(FlinkSqlParser.COMMA);
+            this.state = 143;
             this.partitionColumnName();
-            this.state = 147;
+            this.state = 148;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
@@ -2110,95 +2076,11 @@ FlinkSqlParser.PartitionColumnNameContext = PartitionColumnNameContext;
 FlinkSqlParser.prototype.partitionColumnName = function() {
 
     var localctx = new PartitionColumnNameContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 28, FlinkSqlParser.RULE_partitionColumnName);
+    this.enterRule(localctx, 26, FlinkSqlParser.RULE_partitionColumnName);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 148;
+        this.state = 149;
         this.match(FlinkSqlParser.ID);
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-
-function WithOptionDefinitionContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = FlinkSqlParser.RULE_withOptionDefinition;
-    return this;
-}
-
-WithOptionDefinitionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-WithOptionDefinitionContext.prototype.constructor = WithOptionDefinitionContext;
-
-WithOptionDefinitionContext.prototype.REVERSE_QUOTE_ID = function(i) {
-	if(i===undefined) {
-		i = null;
-	}
-    if(i===null) {
-        return this.getTokens(FlinkSqlParser.REVERSE_QUOTE_ID);
-    } else {
-        return this.getToken(FlinkSqlParser.REVERSE_QUOTE_ID, i);
-    }
-};
-
-
-WithOptionDefinitionContext.prototype.EQUAL_SYMBOL = function() {
-    return this.getToken(FlinkSqlParser.EQUAL_SYMBOL, 0);
-};
-
-WithOptionDefinitionContext.prototype.enterRule = function(listener) {
-    if(listener instanceof FlinkSqlParserListener ) {
-        listener.enterWithOptionDefinition(this);
-	}
-};
-
-WithOptionDefinitionContext.prototype.exitRule = function(listener) {
-    if(listener instanceof FlinkSqlParserListener ) {
-        listener.exitWithOptionDefinition(this);
-	}
-};
-
-WithOptionDefinitionContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof FlinkSqlParserVisitor ) {
-        return visitor.visitWithOptionDefinition(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-
-
-FlinkSqlParser.WithOptionDefinitionContext = WithOptionDefinitionContext;
-
-FlinkSqlParser.prototype.withOptionDefinition = function() {
-
-    var localctx = new WithOptionDefinitionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 30, FlinkSqlParser.RULE_withOptionDefinition);
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 150;
-        this.match(FlinkSqlParser.REVERSE_QUOTE_ID);
-        this.state = 151;
-        this.match(FlinkSqlParser.EQUAL_SYMBOL);
-        this.state = 152;
-        this.match(FlinkSqlParser.REVERSE_QUOTE_ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2230,6 +2112,25 @@ function CreateDatabaseContext(parser, parent, invokingState) {
 CreateDatabaseContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 CreateDatabaseContext.prototype.constructor = CreateDatabaseContext;
 
+CreateDatabaseContext.prototype.CREATE = function() {
+    return this.getToken(FlinkSqlParser.CREATE, 0);
+};
+
+CreateDatabaseContext.prototype.DATABASE = function() {
+    return this.getToken(FlinkSqlParser.DATABASE, 0);
+};
+
+CreateDatabaseContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+CreateDatabaseContext.prototype.withOption = function() {
+    return this.getTypedRuleContext(WithOptionContext,0);
+};
+
+CreateDatabaseContext.prototype.ifNotExists = function() {
+    return this.getTypedRuleContext(IfNotExistsContext,0);
+};
 
 CreateDatabaseContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2259,10 +2160,26 @@ FlinkSqlParser.CreateDatabaseContext = CreateDatabaseContext;
 FlinkSqlParser.prototype.createDatabase = function() {
 
     var localctx = new CreateDatabaseContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 32, FlinkSqlParser.RULE_createDatabase);
+    this.enterRule(localctx, 28, FlinkSqlParser.RULE_createDatabase);
+    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
+        this.state = 151;
+        this.match(FlinkSqlParser.CREATE);
+        this.state = 152;
+        this.match(FlinkSqlParser.DATABASE);
+        this.state = 154;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        if(_la===FlinkSqlParser.IF) {
+            this.state = 153;
+            this.ifNotExists();
+        }
 
+        this.state = 156;
+        this.uid();
+        this.state = 157;
+        this.withOption();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2294,6 +2211,33 @@ function CreateViewContext(parser, parent, invokingState) {
 CreateViewContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 CreateViewContext.prototype.constructor = CreateViewContext;
 
+CreateViewContext.prototype.CREATE = function() {
+    return this.getToken(FlinkSqlParser.CREATE, 0);
+};
+
+CreateViewContext.prototype.VIEW = function() {
+    return this.getToken(FlinkSqlParser.VIEW, 0);
+};
+
+CreateViewContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+CreateViewContext.prototype.AS = function() {
+    return this.getToken(FlinkSqlParser.AS, 0);
+};
+
+CreateViewContext.prototype.selectStatement = function() {
+    return this.getTypedRuleContext(SelectStatementContext,0);
+};
+
+CreateViewContext.prototype.TEMPORARY = function() {
+    return this.getToken(FlinkSqlParser.TEMPORARY, 0);
+};
+
+CreateViewContext.prototype.ifNotExists = function() {
+    return this.getTypedRuleContext(IfNotExistsContext,0);
+};
 
 CreateViewContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2323,10 +2267,36 @@ FlinkSqlParser.CreateViewContext = CreateViewContext;
 FlinkSqlParser.prototype.createView = function() {
 
     var localctx = new CreateViewContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 34, FlinkSqlParser.RULE_createView);
+    this.enterRule(localctx, 30, FlinkSqlParser.RULE_createView);
+    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
+        this.state = 159;
+        this.match(FlinkSqlParser.CREATE);
+        this.state = 161;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        if(_la===FlinkSqlParser.TEMPORARY) {
+            this.state = 160;
+            this.match(FlinkSqlParser.TEMPORARY);
+        }
 
+        this.state = 163;
+        this.match(FlinkSqlParser.VIEW);
+        this.state = 165;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        if(_la===FlinkSqlParser.IF) {
+            this.state = 164;
+            this.ifNotExists();
+        }
+
+        this.state = 167;
+        this.uid();
+        this.state = 168;
+        this.match(FlinkSqlParser.AS);
+        this.state = 169;
+        this.selectStatement();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2387,7 +2357,7 @@ FlinkSqlParser.CreateFunctionContext = CreateFunctionContext;
 FlinkSqlParser.prototype.createFunction = function() {
 
     var localctx = new CreateFunctionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 36, FlinkSqlParser.RULE_createFunction);
+    this.enterRule(localctx, 32, FlinkSqlParser.RULE_createFunction);
     try {
         this.enterOuterAlt(localctx, 1);
 
@@ -2422,6 +2392,25 @@ function AlterTableContext(parser, parent, invokingState) {
 AlterTableContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 AlterTableContext.prototype.constructor = AlterTableContext;
 
+AlterTableContext.prototype.ALTER = function() {
+    return this.getToken(FlinkSqlParser.ALTER, 0);
+};
+
+AlterTableContext.prototype.TABLE = function() {
+    return this.getToken(FlinkSqlParser.TABLE, 0);
+};
+
+AlterTableContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+AlterTableContext.prototype.renameDefinition = function() {
+    return this.getTypedRuleContext(RenameDefinitionContext,0);
+};
+
+AlterTableContext.prototype.setKeyValueDefinition = function() {
+    return this.getTypedRuleContext(SetKeyValueDefinitionContext,0);
+};
 
 AlterTableContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2451,10 +2440,227 @@ FlinkSqlParser.AlterTableContext = AlterTableContext;
 FlinkSqlParser.prototype.alterTable = function() {
 
     var localctx = new AlterTableContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 38, FlinkSqlParser.RULE_alterTable);
+    this.enterRule(localctx, 34, FlinkSqlParser.RULE_alterTable);
     try {
         this.enterOuterAlt(localctx, 1);
+        this.state = 173;
+        this.match(FlinkSqlParser.ALTER);
+        this.state = 174;
+        this.match(FlinkSqlParser.TABLE);
+        this.state = 175;
+        this.uid();
+        this.state = 178;
+        this._errHandler.sync(this);
+        switch(this._input.LA(1)) {
+        case FlinkSqlParser.RENAME:
+            this.state = 176;
+            this.renameDefinition();
+            break;
+        case FlinkSqlParser.SET:
+            this.state = 177;
+            this.setKeyValueDefinition();
+            break;
+        default:
+            throw new antlr4.error.NoViableAltException(this);
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
 
+
+function RenameDefinitionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_renameDefinition;
+    return this;
+}
+
+RenameDefinitionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+RenameDefinitionContext.prototype.constructor = RenameDefinitionContext;
+
+RenameDefinitionContext.prototype.RENAME = function() {
+    return this.getToken(FlinkSqlParser.RENAME, 0);
+};
+
+RenameDefinitionContext.prototype.TO = function() {
+    return this.getToken(FlinkSqlParser.TO, 0);
+};
+
+RenameDefinitionContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+RenameDefinitionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterRenameDefinition(this);
+	}
+};
+
+RenameDefinitionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitRenameDefinition(this);
+	}
+};
+
+RenameDefinitionContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitRenameDefinition(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.RenameDefinitionContext = RenameDefinitionContext;
+
+FlinkSqlParser.prototype.renameDefinition = function() {
+
+    var localctx = new RenameDefinitionContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 36, FlinkSqlParser.RULE_renameDefinition);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 180;
+        this.match(FlinkSqlParser.RENAME);
+        this.state = 181;
+        this.match(FlinkSqlParser.TO);
+        this.state = 182;
+        this.uid();
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function SetKeyValueDefinitionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_setKeyValueDefinition;
+    return this;
+}
+
+SetKeyValueDefinitionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+SetKeyValueDefinitionContext.prototype.constructor = SetKeyValueDefinitionContext;
+
+SetKeyValueDefinitionContext.prototype.SET = function() {
+    return this.getToken(FlinkSqlParser.SET, 0);
+};
+
+SetKeyValueDefinitionContext.prototype.LR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
+};
+
+SetKeyValueDefinitionContext.prototype.keyValueDefinition = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(KeyValueDefinitionContext);
+    } else {
+        return this.getTypedRuleContext(KeyValueDefinitionContext,i);
+    }
+};
+
+SetKeyValueDefinitionContext.prototype.RR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
+};
+
+SetKeyValueDefinitionContext.prototype.COMMA = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(FlinkSqlParser.COMMA);
+    } else {
+        return this.getToken(FlinkSqlParser.COMMA, i);
+    }
+};
+
+
+SetKeyValueDefinitionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterSetKeyValueDefinition(this);
+	}
+};
+
+SetKeyValueDefinitionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitSetKeyValueDefinition(this);
+	}
+};
+
+SetKeyValueDefinitionContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitSetKeyValueDefinition(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.SetKeyValueDefinitionContext = SetKeyValueDefinitionContext;
+
+FlinkSqlParser.prototype.setKeyValueDefinition = function() {
+
+    var localctx = new SetKeyValueDefinitionContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 38, FlinkSqlParser.RULE_setKeyValueDefinition);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 184;
+        this.match(FlinkSqlParser.SET);
+        this.state = 185;
+        this.match(FlinkSqlParser.LR_BRACKET);
+        this.state = 186;
+        this.keyValueDefinition();
+        this.state = 191;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===FlinkSqlParser.COMMA) {
+            this.state = 187;
+            this.match(FlinkSqlParser.COMMA);
+            this.state = 188;
+            this.keyValueDefinition();
+            this.state = 193;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+        this.state = 194;
+        this.match(FlinkSqlParser.RR_BRACKET);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2486,6 +2692,21 @@ function AlterDatabaseContext(parser, parent, invokingState) {
 AlterDatabaseContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 AlterDatabaseContext.prototype.constructor = AlterDatabaseContext;
 
+AlterDatabaseContext.prototype.ALTER = function() {
+    return this.getToken(FlinkSqlParser.ALTER, 0);
+};
+
+AlterDatabaseContext.prototype.DATABASE = function() {
+    return this.getToken(FlinkSqlParser.DATABASE, 0);
+};
+
+AlterDatabaseContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+AlterDatabaseContext.prototype.setKeyValueDefinition = function() {
+    return this.getTypedRuleContext(SetKeyValueDefinitionContext,0);
+};
 
 AlterDatabaseContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2518,7 +2739,14 @@ FlinkSqlParser.prototype.alterDatabase = function() {
     this.enterRule(localctx, 40, FlinkSqlParser.RULE_alterDatabase);
     try {
         this.enterOuterAlt(localctx, 1);
-
+        this.state = 196;
+        this.match(FlinkSqlParser.ALTER);
+        this.state = 197;
+        this.match(FlinkSqlParser.DATABASE);
+        this.state = 198;
+        this.uid();
+        this.state = 199;
+        this.setKeyValueDefinition();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2614,6 +2842,21 @@ function DropTableContext(parser, parent, invokingState) {
 DropTableContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 DropTableContext.prototype.constructor = DropTableContext;
 
+DropTableContext.prototype.DROP = function() {
+    return this.getToken(FlinkSqlParser.DROP, 0);
+};
+
+DropTableContext.prototype.TABLE = function() {
+    return this.getToken(FlinkSqlParser.TABLE, 0);
+};
+
+DropTableContext.prototype.ifExists = function() {
+    return this.getTypedRuleContext(IfExistsContext,0);
+};
+
+DropTableContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
 
 DropTableContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2646,7 +2889,14 @@ FlinkSqlParser.prototype.dropTable = function() {
     this.enterRule(localctx, 44, FlinkSqlParser.RULE_dropTable);
     try {
         this.enterOuterAlt(localctx, 1);
-
+        this.state = 203;
+        this.match(FlinkSqlParser.DROP);
+        this.state = 204;
+        this.match(FlinkSqlParser.TABLE);
+        this.state = 205;
+        this.ifExists();
+        this.state = 206;
+        this.uid();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2672,12 +2922,36 @@ function DropDatabaseContext(parser, parent, invokingState) {
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
     this.ruleIndex = FlinkSqlParser.RULE_dropDatabase;
+    this.dropType = null; // Token
     return this;
 }
 
 DropDatabaseContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 DropDatabaseContext.prototype.constructor = DropDatabaseContext;
 
+DropDatabaseContext.prototype.DROP = function() {
+    return this.getToken(FlinkSqlParser.DROP, 0);
+};
+
+DropDatabaseContext.prototype.DATABASE = function() {
+    return this.getToken(FlinkSqlParser.DATABASE, 0);
+};
+
+DropDatabaseContext.prototype.ifExists = function() {
+    return this.getTypedRuleContext(IfExistsContext,0);
+};
+
+DropDatabaseContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+DropDatabaseContext.prototype.RESTRICT = function() {
+    return this.getToken(FlinkSqlParser.RESTRICT, 0);
+};
+
+DropDatabaseContext.prototype.CASCADE = function() {
+    return this.getToken(FlinkSqlParser.CASCADE, 0);
+};
 
 DropDatabaseContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2708,8 +2982,32 @@ FlinkSqlParser.prototype.dropDatabase = function() {
 
     var localctx = new DropDatabaseContext(this, this._ctx, this.state);
     this.enterRule(localctx, 46, FlinkSqlParser.RULE_dropDatabase);
+    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
+        this.state = 208;
+        this.match(FlinkSqlParser.DROP);
+        this.state = 209;
+        this.match(FlinkSqlParser.DATABASE);
+        this.state = 210;
+        this.ifExists();
+        this.state = 211;
+        this.uid();
+        this.state = 213;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        if(_la===FlinkSqlParser.CASCADE || _la===FlinkSqlParser.RESTRICT) {
+            this.state = 212;
+            localctx.dropType = this._input.LT(1);
+            _la = this._input.LA(1);
+            if(!(_la===FlinkSqlParser.CASCADE || _la===FlinkSqlParser.RESTRICT)) {
+                localctx.dropType = this._errHandler.recoverInline(this);
+            }
+            else {
+            	this._errHandler.reportMatch(this);
+                this.consume();
+            }
+        }
 
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2742,6 +3040,25 @@ function DropViewContext(parser, parent, invokingState) {
 DropViewContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 DropViewContext.prototype.constructor = DropViewContext;
 
+DropViewContext.prototype.DROP = function() {
+    return this.getToken(FlinkSqlParser.DROP, 0);
+};
+
+DropViewContext.prototype.VIEW = function() {
+    return this.getToken(FlinkSqlParser.VIEW, 0);
+};
+
+DropViewContext.prototype.ifExists = function() {
+    return this.getTypedRuleContext(IfExistsContext,0);
+};
+
+DropViewContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+DropViewContext.prototype.TEMPORARY = function() {
+    return this.getToken(FlinkSqlParser.TEMPORARY, 0);
+};
 
 DropViewContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2772,9 +3089,25 @@ FlinkSqlParser.prototype.dropView = function() {
 
     var localctx = new DropViewContext(this, this._ctx, this.state);
     this.enterRule(localctx, 48, FlinkSqlParser.RULE_dropView);
+    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
+        this.state = 215;
+        this.match(FlinkSqlParser.DROP);
+        this.state = 217;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        if(_la===FlinkSqlParser.TEMPORARY) {
+            this.state = 216;
+            this.match(FlinkSqlParser.TEMPORARY);
+        }
 
+        this.state = 219;
+        this.match(FlinkSqlParser.VIEW);
+        this.state = 220;
+        this.ifExists();
+        this.state = 221;
+        this.uid();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2806,6 +3139,29 @@ function DropFunctionContext(parser, parent, invokingState) {
 DropFunctionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 DropFunctionContext.prototype.constructor = DropFunctionContext;
 
+DropFunctionContext.prototype.DROP = function() {
+    return this.getToken(FlinkSqlParser.DROP, 0);
+};
+
+DropFunctionContext.prototype.FUNCTION = function() {
+    return this.getToken(FlinkSqlParser.FUNCTION, 0);
+};
+
+DropFunctionContext.prototype.ifExists = function() {
+    return this.getTypedRuleContext(IfExistsContext,0);
+};
+
+DropFunctionContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+DropFunctionContext.prototype.TEMPORARY = function() {
+    return this.getToken(FlinkSqlParser.TEMPORARY, 0);
+};
+
+DropFunctionContext.prototype.SYSTEM = function() {
+    return this.getToken(FlinkSqlParser.SYSTEM, 0);
+};
 
 DropFunctionContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2838,7 +3194,28 @@ FlinkSqlParser.prototype.dropFunction = function() {
     this.enterRule(localctx, 50, FlinkSqlParser.RULE_dropFunction);
     try {
         this.enterOuterAlt(localctx, 1);
+        this.state = 223;
+        this.match(FlinkSqlParser.DROP);
+        this.state = 227;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,15,this._ctx);
+        if(la_===1) {
+            this.state = 224;
+            this.match(FlinkSqlParser.TEMPORARY);
 
+        } else if(la_===2) {
+            this.state = 225;
+            this.match(FlinkSqlParser.TEMPORARY);
+            this.state = 226;
+            this.match(FlinkSqlParser.SYSTEM);
+
+        }
+        this.state = 229;
+        this.match(FlinkSqlParser.FUNCTION);
+        this.state = 230;
+        this.ifExists();
+        this.state = 231;
+        this.uid();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2934,6 +3311,33 @@ function InsertStatementContext(parser, parent, invokingState) {
 InsertStatementContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 InsertStatementContext.prototype.constructor = InsertStatementContext;
 
+InsertStatementContext.prototype.INSERT = function() {
+    return this.getToken(FlinkSqlParser.INSERT, 0);
+};
+
+InsertStatementContext.prototype.uid = function() {
+    return this.getTypedRuleContext(UidContext,0);
+};
+
+InsertStatementContext.prototype.INTO = function() {
+    return this.getToken(FlinkSqlParser.INTO, 0);
+};
+
+InsertStatementContext.prototype.OVERWRITE = function() {
+    return this.getToken(FlinkSqlParser.OVERWRITE, 0);
+};
+
+InsertStatementContext.prototype.selectStatement = function() {
+    return this.getTypedRuleContext(SelectStatementContext,0);
+};
+
+InsertStatementContext.prototype.valuesDefinition = function() {
+    return this.getTypedRuleContext(ValuesDefinitionContext,0);
+};
+
+InsertStatementContext.prototype.insertPartitionDefinition = function() {
+    return this.getTypedRuleContext(InsertPartitionDefinitionContext,0);
+};
 
 InsertStatementContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
@@ -2964,9 +3368,905 @@ FlinkSqlParser.prototype.insertStatement = function() {
 
     var localctx = new InsertStatementContext(this, this._ctx, this.state);
     this.enterRule(localctx, 54, FlinkSqlParser.RULE_insertStatement);
+    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
+        this.state = 235;
+        this.match(FlinkSqlParser.INSERT);
+        this.state = 236;
+        _la = this._input.LA(1);
+        if(!(_la===FlinkSqlParser.INTO || _la===FlinkSqlParser.OVERWRITE)) {
+        this._errHandler.recoverInline(this);
+        }
+        else {
+        	this._errHandler.reportMatch(this);
+            this.consume();
+        }
+        this.state = 237;
+        this.uid();
+        this.state = 243;
+        this._errHandler.sync(this);
+        switch(this._input.LA(1)) {
+        case FlinkSqlParser.PARTITION:
+        case FlinkSqlParser.SEMICOLON:
+            this.state = 239;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            if(_la===FlinkSqlParser.PARTITION) {
+                this.state = 238;
+                this.insertPartitionDefinition();
+            }
 
+            this.state = 241;
+            this.selectStatement();
+            break;
+        case FlinkSqlParser.VALUES:
+            this.state = 242;
+            this.valuesDefinition();
+            break;
+        default:
+            throw new antlr4.error.NoViableAltException(this);
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function InsertPartitionDefinitionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_insertPartitionDefinition;
+    return this;
+}
+
+InsertPartitionDefinitionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+InsertPartitionDefinitionContext.prototype.constructor = InsertPartitionDefinitionContext;
+
+InsertPartitionDefinitionContext.prototype.PARTITION = function() {
+    return this.getToken(FlinkSqlParser.PARTITION, 0);
+};
+
+InsertPartitionDefinitionContext.prototype.LR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
+};
+
+InsertPartitionDefinitionContext.prototype.keyValueDefinition = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(KeyValueDefinitionContext);
+    } else {
+        return this.getTypedRuleContext(KeyValueDefinitionContext,i);
+    }
+};
+
+InsertPartitionDefinitionContext.prototype.RR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
+};
+
+InsertPartitionDefinitionContext.prototype.COMMA = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(FlinkSqlParser.COMMA);
+    } else {
+        return this.getToken(FlinkSqlParser.COMMA, i);
+    }
+};
+
+
+InsertPartitionDefinitionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterInsertPartitionDefinition(this);
+	}
+};
+
+InsertPartitionDefinitionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitInsertPartitionDefinition(this);
+	}
+};
+
+InsertPartitionDefinitionContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitInsertPartitionDefinition(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.InsertPartitionDefinitionContext = InsertPartitionDefinitionContext;
+
+FlinkSqlParser.prototype.insertPartitionDefinition = function() {
+
+    var localctx = new InsertPartitionDefinitionContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 56, FlinkSqlParser.RULE_insertPartitionDefinition);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 245;
+        this.match(FlinkSqlParser.PARTITION);
+        this.state = 246;
+        this.match(FlinkSqlParser.LR_BRACKET);
+        this.state = 247;
+        this.keyValueDefinition();
+        this.state = 252;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===FlinkSqlParser.COMMA) {
+            this.state = 248;
+            this.match(FlinkSqlParser.COMMA);
+            this.state = 249;
+            this.keyValueDefinition();
+            this.state = 254;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+        this.state = 255;
+        this.match(FlinkSqlParser.RR_BRACKET);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function ValuesDefinitionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_valuesDefinition;
+    return this;
+}
+
+ValuesDefinitionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ValuesDefinitionContext.prototype.constructor = ValuesDefinitionContext;
+
+ValuesDefinitionContext.prototype.VALUES = function() {
+    return this.getToken(FlinkSqlParser.VALUES, 0);
+};
+
+ValuesDefinitionContext.prototype.valuesRowDefinition = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(ValuesRowDefinitionContext);
+    } else {
+        return this.getTypedRuleContext(ValuesRowDefinitionContext,i);
+    }
+};
+
+ValuesDefinitionContext.prototype.COMMA = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(FlinkSqlParser.COMMA);
+    } else {
+        return this.getToken(FlinkSqlParser.COMMA, i);
+    }
+};
+
+
+ValuesDefinitionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterValuesDefinition(this);
+	}
+};
+
+ValuesDefinitionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitValuesDefinition(this);
+	}
+};
+
+ValuesDefinitionContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitValuesDefinition(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.ValuesDefinitionContext = ValuesDefinitionContext;
+
+FlinkSqlParser.prototype.valuesDefinition = function() {
+
+    var localctx = new ValuesDefinitionContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 58, FlinkSqlParser.RULE_valuesDefinition);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 257;
+        this.match(FlinkSqlParser.VALUES);
+        this.state = 258;
+        this.valuesRowDefinition();
+        this.state = 263;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===FlinkSqlParser.COMMA) {
+            this.state = 259;
+            this.match(FlinkSqlParser.COMMA);
+            this.state = 260;
+            this.valuesRowDefinition();
+            this.state = 265;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function ValuesRowDefinitionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_valuesRowDefinition;
+    return this;
+}
+
+ValuesRowDefinitionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ValuesRowDefinitionContext.prototype.constructor = ValuesRowDefinitionContext;
+
+ValuesRowDefinitionContext.prototype.LR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
+};
+
+ValuesRowDefinitionContext.prototype.RR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
+};
+
+ValuesRowDefinitionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterValuesRowDefinition(this);
+	}
+};
+
+ValuesRowDefinitionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitValuesRowDefinition(this);
+	}
+};
+
+ValuesRowDefinitionContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitValuesRowDefinition(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.ValuesRowDefinitionContext = ValuesRowDefinitionContext;
+
+FlinkSqlParser.prototype.valuesRowDefinition = function() {
+
+    var localctx = new ValuesRowDefinitionContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 60, FlinkSqlParser.RULE_valuesRowDefinition);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 266;
+        this.match(FlinkSqlParser.LR_BRACKET);
+        this.state = 270;
+        this._errHandler.sync(this);
+        var _alt = this._interp.adaptivePredict(this._input,20,this._ctx)
+        while(_alt!=1 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+            if(_alt===1+1) {
+                this.state = 267;
+                this.matchWildcard(); 
+            }
+            this.state = 272;
+            this._errHandler.sync(this);
+            _alt = this._interp.adaptivePredict(this._input,20,this._ctx);
+        }
+
+        this.state = 273;
+        this.match(FlinkSqlParser.RR_BRACKET);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function UidListContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_uidList;
+    return this;
+}
+
+UidListContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+UidListContext.prototype.constructor = UidListContext;
+
+UidListContext.prototype.uid = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(UidContext);
+    } else {
+        return this.getTypedRuleContext(UidContext,i);
+    }
+};
+
+UidListContext.prototype.COMMA = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(FlinkSqlParser.COMMA);
+    } else {
+        return this.getToken(FlinkSqlParser.COMMA, i);
+    }
+};
+
+
+UidListContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterUidList(this);
+	}
+};
+
+UidListContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitUidList(this);
+	}
+};
+
+UidListContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitUidList(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.UidListContext = UidListContext;
+
+FlinkSqlParser.prototype.uidList = function() {
+
+    var localctx = new UidListContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 62, FlinkSqlParser.RULE_uidList);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 275;
+        this.uid();
+        this.state = 280;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===FlinkSqlParser.COMMA) {
+            this.state = 276;
+            this.match(FlinkSqlParser.COMMA);
+            this.state = 277;
+            this.uid();
+            this.state = 282;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function UidContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_uid;
+    return this;
+}
+
+UidContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+UidContext.prototype.constructor = UidContext;
+
+UidContext.prototype.ID = function() {
+    return this.getToken(FlinkSqlParser.ID, 0);
+};
+
+UidContext.prototype.DOT_ID = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(FlinkSqlParser.DOT_ID);
+    } else {
+        return this.getToken(FlinkSqlParser.DOT_ID, i);
+    }
+};
+
+
+UidContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterUid(this);
+	}
+};
+
+UidContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitUid(this);
+	}
+};
+
+UidContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitUid(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.UidContext = UidContext;
+
+FlinkSqlParser.prototype.uid = function() {
+
+    var localctx = new UidContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 64, FlinkSqlParser.RULE_uid);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 283;
+        this.match(FlinkSqlParser.ID);
+        this.state = 287;
+        this._errHandler.sync(this);
+        var _alt = this._interp.adaptivePredict(this._input,22,this._ctx)
+        while(_alt!=1 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+            if(_alt===1+1) {
+                this.state = 284;
+                this.match(FlinkSqlParser.DOT_ID); 
+            }
+            this.state = 289;
+            this._errHandler.sync(this);
+            _alt = this._interp.adaptivePredict(this._input,22,this._ctx);
+        }
+
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function WithOptionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_withOption;
+    return this;
+}
+
+WithOptionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+WithOptionContext.prototype.constructor = WithOptionContext;
+
+WithOptionContext.prototype.WITH = function() {
+    return this.getToken(FlinkSqlParser.WITH, 0);
+};
+
+WithOptionContext.prototype.LR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
+};
+
+WithOptionContext.prototype.keyValueDefinition = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(KeyValueDefinitionContext);
+    } else {
+        return this.getTypedRuleContext(KeyValueDefinitionContext,i);
+    }
+};
+
+WithOptionContext.prototype.RR_BRACKET = function() {
+    return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
+};
+
+WithOptionContext.prototype.COMMA = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(FlinkSqlParser.COMMA);
+    } else {
+        return this.getToken(FlinkSqlParser.COMMA, i);
+    }
+};
+
+
+WithOptionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterWithOption(this);
+	}
+};
+
+WithOptionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitWithOption(this);
+	}
+};
+
+WithOptionContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitWithOption(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.WithOptionContext = WithOptionContext;
+
+FlinkSqlParser.prototype.withOption = function() {
+
+    var localctx = new WithOptionContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 66, FlinkSqlParser.RULE_withOption);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 290;
+        this.match(FlinkSqlParser.WITH);
+        this.state = 291;
+        this.match(FlinkSqlParser.LR_BRACKET);
+        this.state = 292;
+        this.keyValueDefinition();
+        this.state = 297;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===FlinkSqlParser.COMMA) {
+            this.state = 293;
+            this.match(FlinkSqlParser.COMMA);
+            this.state = 294;
+            this.keyValueDefinition();
+            this.state = 299;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+        this.state = 300;
+        this.match(FlinkSqlParser.RR_BRACKET);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function IfNotExistsContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_ifNotExists;
+    return this;
+}
+
+IfNotExistsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+IfNotExistsContext.prototype.constructor = IfNotExistsContext;
+
+IfNotExistsContext.prototype.IF = function() {
+    return this.getToken(FlinkSqlParser.IF, 0);
+};
+
+IfNotExistsContext.prototype.NOT = function() {
+    return this.getToken(FlinkSqlParser.NOT, 0);
+};
+
+IfNotExistsContext.prototype.EXISTS = function() {
+    return this.getToken(FlinkSqlParser.EXISTS, 0);
+};
+
+IfNotExistsContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterIfNotExists(this);
+	}
+};
+
+IfNotExistsContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitIfNotExists(this);
+	}
+};
+
+IfNotExistsContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitIfNotExists(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.IfNotExistsContext = IfNotExistsContext;
+
+FlinkSqlParser.prototype.ifNotExists = function() {
+
+    var localctx = new IfNotExistsContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 68, FlinkSqlParser.RULE_ifNotExists);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 302;
+        this.match(FlinkSqlParser.IF);
+        this.state = 303;
+        this.match(FlinkSqlParser.NOT);
+        this.state = 304;
+        this.match(FlinkSqlParser.EXISTS);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function IfExistsContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_ifExists;
+    return this;
+}
+
+IfExistsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+IfExistsContext.prototype.constructor = IfExistsContext;
+
+IfExistsContext.prototype.IF = function() {
+    return this.getToken(FlinkSqlParser.IF, 0);
+};
+
+IfExistsContext.prototype.EXISTS = function() {
+    return this.getToken(FlinkSqlParser.EXISTS, 0);
+};
+
+IfExistsContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterIfExists(this);
+	}
+};
+
+IfExistsContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitIfExists(this);
+	}
+};
+
+IfExistsContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitIfExists(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.IfExistsContext = IfExistsContext;
+
+FlinkSqlParser.prototype.ifExists = function() {
+
+    var localctx = new IfExistsContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 70, FlinkSqlParser.RULE_ifExists);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 306;
+        this.match(FlinkSqlParser.IF);
+        this.state = 307;
+        this.match(FlinkSqlParser.EXISTS);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+
+function KeyValueDefinitionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = FlinkSqlParser.RULE_keyValueDefinition;
+    return this;
+}
+
+KeyValueDefinitionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+KeyValueDefinitionContext.prototype.constructor = KeyValueDefinitionContext;
+
+KeyValueDefinitionContext.prototype.DOUBLE_QUOTE_ID = function(i) {
+	if(i===undefined) {
+		i = null;
+	}
+    if(i===null) {
+        return this.getTokens(FlinkSqlParser.DOUBLE_QUOTE_ID);
+    } else {
+        return this.getToken(FlinkSqlParser.DOUBLE_QUOTE_ID, i);
+    }
+};
+
+
+KeyValueDefinitionContext.prototype.EQUAL_SYMBOL = function() {
+    return this.getToken(FlinkSqlParser.EQUAL_SYMBOL, 0);
+};
+
+KeyValueDefinitionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.enterKeyValueDefinition(this);
+	}
+};
+
+KeyValueDefinitionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof FlinkSqlParserListener ) {
+        listener.exitKeyValueDefinition(this);
+	}
+};
+
+KeyValueDefinitionContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof FlinkSqlParserVisitor ) {
+        return visitor.visitKeyValueDefinition(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+FlinkSqlParser.KeyValueDefinitionContext = KeyValueDefinitionContext;
+
+FlinkSqlParser.prototype.keyValueDefinition = function() {
+
+    var localctx = new KeyValueDefinitionContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 72, FlinkSqlParser.RULE_keyValueDefinition);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 309;
+        this.match(FlinkSqlParser.DOUBLE_QUOTE_ID);
+        this.state = 310;
+        this.match(FlinkSqlParser.EQUAL_SYMBOL);
+        this.state = 311;
+        this.match(FlinkSqlParser.DOUBLE_QUOTE_ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;

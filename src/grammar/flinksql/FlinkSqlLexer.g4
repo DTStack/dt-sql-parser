@@ -267,9 +267,11 @@ BRACKETED_EMPTY_COMMENT:      'BRACKETED_EMPTY_COMMENT';
 BRACKETED_COMMENT:            'BRACKETED_COMMENT';
 WS:                           'WS';
 UNRECOGNIZED:                 'UNRECOGNIZED';
-REVERSE_QUOTE_ID:             '"' ~'"'+ '"';
+REVERSE_QUOTE_ID:              '`' ~'`'+ '`';
+DOUBLE_QUOTE_ID:              '"' ~'"'+ '"';
 DOT_ID:                       '.' ID_LITERAL;
 ID:                           ID_LITERAL;
+SYSTEM:                       'SYSTEM';
 
 
 // DATA TYPE Keywords
