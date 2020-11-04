@@ -1,4 +1,4 @@
-parser grammar FlinkSqlParser;
+grammar FlinkSqlParser;
 
 options { tokenVocab=FlinkSqlLexer; }
 
@@ -27,7 +27,7 @@ ddlStatement
     ;
 
 dmlStatement
-    : selectStatement | insertStatement
+    : queryStatement | insertStatement
     ;
 
 
@@ -110,25 +110,74 @@ alterFunction
 // Drop statements
 
 dropTable
-    : DROP TABLE ifExists uid
+    : DROP TABLE ifExists? uid
     ;
 
 dropDatabase
-    : DROP DATABASE ifExists uid dropType=(RESTRICT | CASCADE)?
+    : DROP DATABASE ifExists? uid dropType=(RESTRICT | CASCADE)?
     ;
 
 dropView
-    : DROP TEMPORARY? VIEW ifExists uid
+    : DROP TEMPORARY? VIEW ifExists? uid
     ;
 
 dropFunction
-    : DROP (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifExists uid
+    : DROP (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifExists? uid
     ;
 
 
 // Select statements
 
+queryStatement
+    : valuesDefinition
+    | (
+        selectStatement
+        | selectWithoutFromDefinition
+        // | queryStatement UNION ALL? queryStatement
+        // | queryStatement EXCEPT queryStatement
+        // | queryStatement INTERSECT queryStatement
+    ) queryOrderByDefinition? queryLimitDefinition? queryOffsetDefinition? queryFetchDefinition?
+    ;
+
 selectStatement
+    : SELECT (ALL | DISTINCT)? 
+    (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
+    FROM tableExpression
+    ;
+
+projectItemDefinition // expression (AS? columnAlias)? | tableAlias . *
+    :
+    ;
+
+tableExpression
+    :
+    ;
+
+selectWithoutFromDefinition
+    : 
+    ;
+
+queryOrderByDefinition
+    : ORDER BY orderItemDefition (COMMA orderItemDefition)*
+    ;
+
+orderItemDefition // expression (ASC | DESC)?
+    : 
+    ;
+
+queryLimitDefinition
+    : LIMIT (countDefinition | ALL)
+    ;
+
+countDefinition
+    :
+    ;
+
+queryOffsetDefinition // OFFSET start (ROW | ROWS)
+    :
+    ;
+
+queryFetchDefinition // FETCH (FIRST | NEXT) countDefinition? (ROW | ROWS) ONLY
     :
     ;
 
@@ -153,7 +202,7 @@ valuesDefinition
     : VALUES valuesRowDefinition (COMMA valuesRowDefinition)*
     ;
 
-// TODO 匹配所有的值 任意value
+// TODO 匹配所有的值 任意value 即：(val1 [, val2, ...])
 valuesRowDefinition
     : LR_BRACKET
         .*?

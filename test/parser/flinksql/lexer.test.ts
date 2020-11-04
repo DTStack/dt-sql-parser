@@ -7,6 +7,6 @@ describe('FlinkSQL Lexer tests', () => {
     const tokens = parser.getAllTokens(sql);
 
     test('token counts', () => {
-        expect(tokens.length).toBe(7);
+        expect(tokens.length).toBe(6);
     });
 });
