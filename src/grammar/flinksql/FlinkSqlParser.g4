@@ -129,20 +129,25 @@ dropFunction
 // Select statements
 
 queryStatement
-    : valuesDefinition
-    | (
-        selectStatement
-        | selectWithoutFromDefinition
-        // | queryStatement UNION ALL? queryStatement
-        // | queryStatement EXCEPT queryStatement
-        // | queryStatement INTERSECT queryStatement
-    ) queryOrderByDefinition? queryLimitDefinition? queryOffsetDefinition? queryFetchDefinition?
+    : valuesDefinition | selectStatements queryOrderByDefinition? queryLimitDefinition? queryOffsetDefinition? queryFetchDefinition?
+    ;
+
+selectStatements
+    : selectStatement
+    | selectWithoutFromDefinition
+    // | queryStatement UNION ALL? queryStatement
+    // | queryStatement EXCEPT queryStatement
+    // | queryStatement INTERSECT queryStatement
     ;
 
 selectStatement
     : SELECT (ALL | DISTINCT)? 
     (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
     FROM tableExpression
+    (WHERE booleanExpression)?
+    (GROUP BY groupItemDefinition (COMMA groupItemDefinition)*)
+    (HAVING booleanExpression)?
+    // (WINDOW windowName AS windowSpec (COMMA windowName AS windowSpec)*)?
     ;
 
 projectItemDefinition // expression (AS? columnAlias)? | tableAlias . *
@@ -150,11 +155,60 @@ projectItemDefinition // expression (AS? columnAlias)? | tableAlias . *
     ;
 
 tableExpression
+    : tableReference (COMMA tableReference)*
+    | tableExpression NATURAL? (LEFT | RIGHT | FULL)? JOIN tableExpression joinCondition?
+    ;
+
+tableReference
+    : // tablePrimary matchRecognize? (AS? alias (LR_BRACKET columnAlias (COMMA columnAlias)* RR_BRACKET)?)?
+    ;
+
+// tablePrimary
+//     : TABLE? uid dynamicTableOptions?
+//     | LATERAL TABLE LR_BRACKET uid LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+//     | UNNEST LR_BRACKET expression RR_BRACKET
+//     ;
+
+
+joinCondition // ON booleanExpression | USING LR_BRACKET column (COMMA column)* RR_BRACKET
     :
     ;
 
+booleanExpression
+    :
+    ;
+
+groupItemDefinition
+    : expression
+    | LR_BRACKET RR_BRACKET
+    | LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | CUBE LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | ROLLUP LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | GROUPING SETS LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
+    ;
+
+// windowRef
+//     : windowName | windowSpec
+//     ;
+
+// windowSpec
+//     : windowName 
+//     LR_BRACKET
+//         (ORDER BY orderItem (COMMA orderItem)*)?
+//         (PARTITION BY expression (COMMA expression)*)
+//         (
+//             RANGE numericOrIntervalExpression PRECEDING
+//             | ROWS numericExpression PRECEDING
+//         )?
+//     RR_BRACKET
+//     ;
+
 selectWithoutFromDefinition
-    : 
+    : SELECT (ALL | DISTINCT)? (ASTERISK_SIGN | projectItem (COMMA projectItem)*)
+    ;
+
+projectItem
+    : // expression (AS? columnAlias)? | tableAlias . *
     ;
 
 queryOrderByDefinition
@@ -233,4 +287,8 @@ ifExists
 
 keyValueDefinition
     : DOUBLE_QUOTE_ID EQUAL_SYMBOL DOUBLE_QUOTE_ID
+    ;
+
+expression
+    :
     ;
