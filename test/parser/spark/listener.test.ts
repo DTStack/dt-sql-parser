@@ -7,7 +7,7 @@ describe('Spark SQL Listener Tests', () => {
 
     const parserTree = parser.parse(sql);
 
-    test('Listener enterTableName', async () => {
+    test('Listener enterTableName', () => {
         let result = '';
         class MyListener extends SqlBaseListener {
             enterTableName(ctx): void {
@@ -16,7 +16,7 @@ describe('Spark SQL Listener Tests', () => {
         }
         const listenTableName: any = new MyListener();
 
-        await parser.listen(listenTableName, parserTree);
+        parser.listen(listenTableName, parserTree);
         expect(result).toBe(expectTableName);
     });
 });

@@ -1,14 +1,21 @@
 import SQLParser from '../../../src/parser/spark';
 
+const log = console.log.bind(console);
+
 describe('SparkSQL Lexer tests', () => {
-    const mysqlParser = new SQLParser();
+    const parser = new SQLParser();
 
-    // const sql = 'select id,name,sex from user1;';
-    const sql = 'select * from person where age >= 20 order by age desc limit 2;';
-    const tokens = mysqlParser.getAllTokens(sql);
-    console.log('tokens', tokens);
+    test('select id,name from user1;', () => {
+        const sql = `select id,name from user1;`;
+        const tokens = parser.getAllTokens(sql);
+        const length = tokens.length;
+        log('tokens length', length);
+        expect(tokens.length).toBe(10);
+    });
 
-    test('token counts', () => {
-        expect(tokens.length).toBe(28);
+    test('SELECT * FROM t WHERE x = 1 AND y = 2;', () => {
+        const sql = `SELECT * FROM t WHERE x = 1 AND y = 2;`;
+        const tokens = parser.getAllTokens(sql);
+        expect(tokens.length).toBe(24);
     });
 });
