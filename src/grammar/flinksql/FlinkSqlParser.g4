@@ -144,14 +144,14 @@ selectStatement
     : SELECT (ALL | DISTINCT)? 
     (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
     FROM tableExpression
-    (WHERE booleanExpression)?
+    (WHERE expression)?
     (GROUP BY groupItemDefinition (COMMA groupItemDefinition)*)
-    (HAVING booleanExpression)?
+    (HAVING expression)?
     // (WINDOW windowName AS windowSpec (COMMA windowName AS windowSpec)*)?
     ;
 
-projectItemDefinition // expression (AS? columnAlias)? | tableAlias . *
-    :
+projectItemDefinition
+    : expression (AS? uid)? | uid '.' '*'
     ;
 
 tableExpression
@@ -160,18 +160,25 @@ tableExpression
     ;
 
 tableReference
-    : // tablePrimary matchRecognize? (AS? alias (LR_BRACKET columnAlias (COMMA columnAlias)* RR_BRACKET)?)?
+    : tablePrimary matchRecognize? (AS? uid (LR_BRACKET uid (COMMA uid)* RR_BRACKET)?)?
     ;
 
-// tablePrimary
-//     : TABLE? uid dynamicTableOptions?
-//     | LATERAL TABLE LR_BRACKET uid LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
-//     | UNNEST LR_BRACKET expression RR_BRACKET
-//     ;
-
-
-joinCondition // ON booleanExpression | USING LR_BRACKET column (COMMA column)* RR_BRACKET
+matchRecognize
     :
+    ;
+
+tablePrimary
+    : TABLE? uid dynamicTableOptions?
+    | LATERAL TABLE LR_BRACKET uid LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    | UNNEST LR_BRACKET expression RR_BRACKET
+    ;
+
+dynamicTableOptions
+    :
+    ;
+
+joinCondition
+    : ON booleanExpression | USING LR_BRACKET uid (COMMA uid)* RR_BRACKET
     ;
 
 booleanExpression
@@ -208,15 +215,15 @@ selectWithoutFromDefinition
     ;
 
 projectItem
-    : // expression (AS? columnAlias)? | tableAlias . *
+    : expression (AS? uid)? | uid '.' '*'
     ;
 
 queryOrderByDefinition
     : ORDER BY orderItemDefition (COMMA orderItemDefition)*
     ;
 
-orderItemDefition // expression (ASC | DESC)?
-    : 
+orderItemDefition
+    : expression (ASC | DESC)
     ;
 
 queryLimitDefinition
@@ -234,7 +241,6 @@ queryOffsetDefinition // OFFSET start (ROW | ROWS)
 queryFetchDefinition // FETCH (FIRST | NEXT) countDefinition? (ROW | ROWS) ONLY
     :
     ;
-
 
 // Insert statements
 
@@ -256,11 +262,14 @@ valuesDefinition
     : VALUES valuesRowDefinition (COMMA valuesRowDefinition)*
     ;
 
-// TODO 匹配所有的值 任意value 即：(val1 [, val2, ...])
 valuesRowDefinition
     : LR_BRACKET
-        .*?
+        allValueDifinition (COMMA allValueDifinition)*
     RR_BRACKET
+    ;
+
+allValueDifinition
+    : stringLiteral | booleanLiteral | DEC_DIGIT | NULL
     ;
 
 // base common
@@ -289,6 +298,82 @@ keyValueDefinition
     : DOUBLE_QUOTE_ID EQUAL_SYMBOL DOUBLE_QUOTE_ID
     ;
 
-expression
-    :
+expressions
+    : expression (',' expression)*
     ;
+
+//    Expressions, predicates
+
+// Simplified approach for expression
+expression
+    : notOperator=(NOT | '!') expression                            #notExpression
+    | expression logicalOperator expression                         #logicalExpression
+    | predicate IS NOT? testValue=(TRUE | FALSE)                    #isExpression
+    | predicate                                                     #predicateExpression
+    ;
+
+predicate
+    : predicate NOT? IN '(' (selectStatement | expressions) ')'     #inPredicate
+    | left=predicate comparisonOperator right=predicate             #binaryComparasionPredicate
+    | predicate comparisonOperator
+      quantifier=(ALL | ANY) '(' selectStatement ')'                #subqueryComparasionPredicate
+    | predicate NOT? BETWEEN predicate AND predicate                #betweenPredicate
+    | predicate NOT? LIKE predicate                                 #likePredicate
+    | expressionAtom                                                #expressionAtomPredicate
+    ;
+
+expressionAtom
+    : constant                                                      #constantExpressionAtom
+    | fullColumnName                                                #fullColumnNameExpressionAtom
+    | unaryOperator expressionAtom                                  #unaryExpressionAtom
+    | BINARY expressionAtom                                         #binaryExpressionAtom
+    | '(' expression (',' expression)* ')'                          #nestedExpressionAtom
+    | ROW '(' expression (',' expression)+ ')'                      #nestedRowExpressionAtom
+    | EXISTS '(' selectStatement ')'                                #existsExpessionAtom
+    | '(' selectStatement ')'                                       #subqueryExpessionAtom
+    | left=expressionAtom bitOperator right=expressionAtom          #bitExpressionAtom
+    | left=expressionAtom mathOperator right=expressionAtom         #mathExpressionAtom
+    ;
+
+logicalOperator
+    : AND | '&' '&' | OR | '|' '|'
+    ;
+
+comparisonOperator
+    : '=' | '>' | '<' | '<' '=' | '>' '='
+    | '<' '>' | '!' '=' | '<' '=' '>'
+    ;
+bitOperator
+    : '<' '<' | '>' '>' | '&' | '^' | '|'
+    ;
+
+mathOperator
+    : '*' | '/' | '%' | DIV | '+' | '-' | '--'
+    ;
+
+unaryOperator
+    : '!' | '~' | '+' | '-' | NOT
+    ;
+
+fullColumnName
+    : uid
+    ;
+
+constant
+    : stringLiteral | decimalLiteral
+    | '-' decimalLiteral
+    | booleanLiteral
+    | REAL_LITERAL | BIT_STRING
+    | NOT? NULL
+    ;
+
+stringLiteral
+    : STRING_LITERAL
+    ;
+
+decimalLiteral
+    : DECIMAL_LITERAL | ZERO_DECIMAL | ONE_DECIMAL | TWO_DECIMAL
+    ;
+
+booleanLiteral
+    : TRUE | FALSE;

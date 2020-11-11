@@ -168,8 +168,122 @@ FlinkSqlParserVisitor.prototype.visitDropFunction = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParserParser#queryStatement.
+FlinkSqlParserVisitor.prototype.visitQueryStatement = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#selectStatements.
+FlinkSqlParserVisitor.prototype.visitSelectStatements = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParserParser#selectStatement.
 FlinkSqlParserVisitor.prototype.visitSelectStatement = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#projectItemDefinition.
+FlinkSqlParserVisitor.prototype.visitProjectItemDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#tableExpression.
+FlinkSqlParserVisitor.prototype.visitTableExpression = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#tableReference.
+FlinkSqlParserVisitor.prototype.visitTableReference = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#matchRecognize.
+FlinkSqlParserVisitor.prototype.visitMatchRecognize = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#tablePrimary.
+FlinkSqlParserVisitor.prototype.visitTablePrimary = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#dynamicTableOptions.
+FlinkSqlParserVisitor.prototype.visitDynamicTableOptions = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#joinCondition.
+FlinkSqlParserVisitor.prototype.visitJoinCondition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#booleanExpression.
+FlinkSqlParserVisitor.prototype.visitBooleanExpression = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#groupItemDefinition.
+FlinkSqlParserVisitor.prototype.visitGroupItemDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#selectWithoutFromDefinition.
+FlinkSqlParserVisitor.prototype.visitSelectWithoutFromDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#projectItem.
+FlinkSqlParserVisitor.prototype.visitProjectItem = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#queryOrderByDefinition.
+FlinkSqlParserVisitor.prototype.visitQueryOrderByDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#orderItemDefition.
+FlinkSqlParserVisitor.prototype.visitOrderItemDefition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#queryLimitDefinition.
+FlinkSqlParserVisitor.prototype.visitQueryLimitDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#countDefinition.
+FlinkSqlParserVisitor.prototype.visitCountDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#queryOffsetDefinition.
+FlinkSqlParserVisitor.prototype.visitQueryOffsetDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#queryFetchDefinition.
+FlinkSqlParserVisitor.prototype.visitQueryFetchDefinition = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -194,6 +308,12 @@ FlinkSqlParserVisitor.prototype.visitValuesDefinition = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParserParser#valuesRowDefinition.
 FlinkSqlParserVisitor.prototype.visitValuesRowDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#allValueDifinition.
+FlinkSqlParserVisitor.prototype.visitAllValueDifinition = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -230,6 +350,192 @@ FlinkSqlParserVisitor.prototype.visitIfExists = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParserParser#keyValueDefinition.
 FlinkSqlParserVisitor.prototype.visitKeyValueDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#expressions.
+FlinkSqlParserVisitor.prototype.visitExpressions = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#isExpression.
+FlinkSqlParserVisitor.prototype.visitIsExpression = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#notExpression.
+FlinkSqlParserVisitor.prototype.visitNotExpression = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#logicalExpression.
+FlinkSqlParserVisitor.prototype.visitLogicalExpression = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#predicateExpression.
+FlinkSqlParserVisitor.prototype.visitPredicateExpression = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#expressionAtomPredicate.
+FlinkSqlParserVisitor.prototype.visitExpressionAtomPredicate = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#inPredicate.
+FlinkSqlParserVisitor.prototype.visitInPredicate = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#subqueryComparasionPredicate.
+FlinkSqlParserVisitor.prototype.visitSubqueryComparasionPredicate = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#betweenPredicate.
+FlinkSqlParserVisitor.prototype.visitBetweenPredicate = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#binaryComparasionPredicate.
+FlinkSqlParserVisitor.prototype.visitBinaryComparasionPredicate = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#likePredicate.
+FlinkSqlParserVisitor.prototype.visitLikePredicate = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#unaryExpressionAtom.
+FlinkSqlParserVisitor.prototype.visitUnaryExpressionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#subqueryExpessionAtom.
+FlinkSqlParserVisitor.prototype.visitSubqueryExpessionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#existsExpessionAtom.
+FlinkSqlParserVisitor.prototype.visitExistsExpessionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#constantExpressionAtom.
+FlinkSqlParserVisitor.prototype.visitConstantExpressionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#binaryExpressionAtom.
+FlinkSqlParserVisitor.prototype.visitBinaryExpressionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#fullColumnNameExpressionAtom.
+FlinkSqlParserVisitor.prototype.visitFullColumnNameExpressionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#bitExpressionAtom.
+FlinkSqlParserVisitor.prototype.visitBitExpressionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#nestedExpressionAtom.
+FlinkSqlParserVisitor.prototype.visitNestedExpressionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#nestedRowExpressionAtom.
+FlinkSqlParserVisitor.prototype.visitNestedRowExpressionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#mathExpressionAtom.
+FlinkSqlParserVisitor.prototype.visitMathExpressionAtom = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#logicalOperator.
+FlinkSqlParserVisitor.prototype.visitLogicalOperator = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#comparisonOperator.
+FlinkSqlParserVisitor.prototype.visitComparisonOperator = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#bitOperator.
+FlinkSqlParserVisitor.prototype.visitBitOperator = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#mathOperator.
+FlinkSqlParserVisitor.prototype.visitMathOperator = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#unaryOperator.
+FlinkSqlParserVisitor.prototype.visitUnaryOperator = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#fullColumnName.
+FlinkSqlParserVisitor.prototype.visitFullColumnName = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#constant.
+FlinkSqlParserVisitor.prototype.visitConstant = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#stringLiteral.
+FlinkSqlParserVisitor.prototype.visitStringLiteral = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#decimalLiteral.
+FlinkSqlParserVisitor.prototype.visitDecimalLiteral = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParserParser#booleanLiteral.
+FlinkSqlParserVisitor.prototype.visitBooleanLiteral = function(ctx) {
   return this.visitChildren(ctx);
 };
 

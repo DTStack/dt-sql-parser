@@ -69,4 +69,10 @@ describe('FlinkSQL Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
+    test('Test simple Select Statement', () => {
+        const sql = ` SELECT product, amount FROM Orders;`;
+        const result = parser.validate(sql);
+        console.log(result);
+        expect(result.length).toBe(0);
+    });
 });
