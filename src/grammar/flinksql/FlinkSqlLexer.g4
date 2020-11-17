@@ -320,6 +320,8 @@ BIT_XOR_OP:                          '^';
 // Constructors symbols
 
 DOT:                                 '.';
+LS_BRACKET:                          '[';
+RS_BRACKET:                          ']';
 LR_BRACKET:                          '(';
 RR_BRACKET:                          ')';
 COMMA:                               ',';
@@ -333,6 +335,7 @@ DOUBLE_QUOTE_SYMB:                   '"';
 REVERSE_QUOTE_SYMB:                  '`';
 COLON_SYMB:                          ':';
 ASTERISK_SIGN:                       '*';
+UNDERLINE_SIGN:                       '_';
 STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
 DECIMAL_LITERAL:                     DEC_DIGIT+;
 REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
@@ -340,10 +343,12 @@ REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
                                      | (DEC_DIGIT+)? '.' (DEC_DIGIT+ EXPONENT_NUM_PART)
                                      | DEC_DIGIT+ EXPONENT_NUM_PART;
 BIT_STRING:                          BIT_STRING_L;
+IDENTIFIER_BASE:                     (DEC_LETTER | DEC_DIGIT | UNDERLINE_SIGN)+;
 
 fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
 fragment ID_LITERAL:                 [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;
 fragment DEC_DIGIT:                  [0-9];
+fragment DEC_LETTER:                  [A-Za-z];
 fragment DQUOTA_STRING:              '"' ( '\\'. | '""' | ~('"'| '\\') )* '"';
 fragment SQUOTA_STRING:              '\'' ('\\'. | '\'\'' | ~('\'' | '\\'))* '\'';
 fragment BIT_STRING_L:               'B' '\'' [01]+ '\'';

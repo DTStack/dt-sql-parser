@@ -126,122 +126,6 @@ dropFunction
     ;
 
 
-// Select statements
-
-queryStatement
-    : valuesDefinition | selectStatements queryOrderByDefinition? queryLimitDefinition? queryOffsetDefinition? queryFetchDefinition?
-    ;
-
-selectStatements
-    : selectStatement
-    | selectWithoutFromDefinition
-    // | queryStatement UNION ALL? queryStatement
-    // | queryStatement EXCEPT queryStatement
-    // | queryStatement INTERSECT queryStatement
-    ;
-
-selectStatement
-    : SELECT (ALL | DISTINCT)? 
-    (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
-    FROM tableExpression
-    (WHERE expression)?
-    (GROUP BY groupItemDefinition (COMMA groupItemDefinition)*)
-    (HAVING expression)?
-    // (WINDOW windowName AS windowSpec (COMMA windowName AS windowSpec)*)?
-    ;
-
-projectItemDefinition
-    : expression (AS? uid)? | uid '.' '*'
-    ;
-
-tableExpression
-    : tableReference (COMMA tableReference)*
-    | tableExpression NATURAL? (LEFT | RIGHT | FULL)? JOIN tableExpression joinCondition?
-    ;
-
-tableReference
-    : tablePrimary matchRecognize? (AS? uid (LR_BRACKET uid (COMMA uid)* RR_BRACKET)?)?
-    ;
-
-matchRecognize
-    :
-    ;
-
-tablePrimary
-    : TABLE? uid dynamicTableOptions?
-    | LATERAL TABLE LR_BRACKET uid LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
-    | UNNEST LR_BRACKET expression RR_BRACKET
-    ;
-
-dynamicTableOptions
-    :
-    ;
-
-joinCondition
-    : ON booleanExpression | USING LR_BRACKET uid (COMMA uid)* RR_BRACKET
-    ;
-
-booleanExpression
-    :
-    ;
-
-groupItemDefinition
-    : expression
-    | LR_BRACKET RR_BRACKET
-    | LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | CUBE LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | ROLLUP LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | GROUPING SETS LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
-    ;
-
-// windowRef
-//     : windowName | windowSpec
-//     ;
-
-// windowSpec
-//     : windowName 
-//     LR_BRACKET
-//         (ORDER BY orderItem (COMMA orderItem)*)?
-//         (PARTITION BY expression (COMMA expression)*)
-//         (
-//             RANGE numericOrIntervalExpression PRECEDING
-//             | ROWS numericExpression PRECEDING
-//         )?
-//     RR_BRACKET
-//     ;
-
-selectWithoutFromDefinition
-    : SELECT (ALL | DISTINCT)? (ASTERISK_SIGN | projectItem (COMMA projectItem)*)
-    ;
-
-projectItem
-    : expression (AS? uid)? | uid '.' '*'
-    ;
-
-queryOrderByDefinition
-    : ORDER BY orderItemDefition (COMMA orderItemDefition)*
-    ;
-
-orderItemDefition
-    : expression (ASC | DESC)
-    ;
-
-queryLimitDefinition
-    : LIMIT (countDefinition | ALL)
-    ;
-
-countDefinition
-    :
-    ;
-
-queryOffsetDefinition // OFFSET start (ROW | ROWS)
-    :
-    ;
-
-queryFetchDefinition // FETCH (FIRST | NEXT) countDefinition? (ROW | ROWS) ONLY
-    :
-    ;
-
 // Insert statements
 
 insertStatement
@@ -272,7 +156,133 @@ allValueDifinition
     : stringLiteral | booleanLiteral | DEC_DIGIT | NULL
     ;
 
+
+// Select statements
+
+queryStatement
+    : 
+    ;
+
+selectStatement
+    : SELECT setQuantifier?
+    (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
+    FROM tableExpression
+    ;
+
+projectItemDefinition
+    : expression (AS? uid)? | uid '.' '*'
+    ;
+
+tableExpression
+    : tableReference (COMMA tableReference)*
+    ;
+
+tableReference
+    : tablePrimary tableAlias
+    ;
+
+tablePrimary
+    : TABLE? uid 
+    ;
+
+// expression
+
+expression
+    : booleanExpression
+    ;
+
+booleanExpression
+    : NOT booleanExpression                                        #logicalNot
+    // | EXISTS '(' query ')'                                         #exists
+    | valueExpression predicate?                                   #predicated
+    | left=booleanExpression operator=AND right=booleanExpression  #logicalBinary
+    | left=booleanExpression operator=OR right=booleanExpression   #logicalBinary
+    ;
+
+predicate
+    : NOT? kind=BETWEEN lower=valueExpression AND upper=valueExpression
+    | NOT? kind=IN '(' expression (',' expression)* ')'
+    // | NOT? kind=IN '(' query ')'
+    | NOT? kind=RLIKE pattern=valueExpression
+    | NOT? kind=LIKE quantifier=(ANY | ALL) ('('')' | '(' expression (',' expression)* ')')
+    | NOT? kind=LIKE pattern=valueExpression
+    | IS NOT? kind=NULL
+    | IS NOT? kind=(TRUE | FALSE)
+    | IS NOT? kind=DISTINCT FROM right=valueExpression
+    ;
+
+valueExpression
+    : primaryExpression                                                                      #valueExpressionDefault
+    | operator=(MINUS | PLUS | TILDE) valueExpression                                        #arithmeticUnary
+    | left=valueExpression operator=(ASTERISK | SLASH | PERCENT | DIV) right=valueExpression #arithmeticBinary
+    | left=valueExpression operator=(PLUS | MINUS | CONCAT_PIPE) right=valueExpression       #arithmeticBinary
+    | left=valueExpression operator=AMPERSAND right=valueExpression                          #arithmeticBinary
+    | left=valueExpression operator=HAT right=valueExpression                                #arithmeticBinary
+    | left=valueExpression operator=PIPE right=valueExpression                               #arithmeticBinary
+    | left=valueExpression comparisonOperator right=valueExpression                          #comparison
+    ;
+
+primaryExpression
+    : CASE whenClause+ (ELSE elseExpression=expression)? END                                   #searchedCase
+    | CASE value=expression whenClause+ (ELSE elseExpression=expression)? END                  #simpleCase
+    // | CAST '(' expression AS dataType ')'                                                      #cast
+    // | STRUCT '(' (argument+=namedExpression (',' argument+=namedExpression)*)? ')'             #struct
+    | FIRST '(' expression (IGNORE NULLS)? ')'                                                 #first
+    | LAST '(' expression (IGNORE NULLS)? ')'                                                  #last
+    | POSITION '(' substr=valueExpression IN str=valueExpression ')'                           #position
+    | constant                                                                                 #constantDefault
+    | ASTERISK                                                                                 #star
+    // | qualifiedName '.' ASTERISK                                                               #star
+    // | '(' namedExpression (',' namedExpression)+ ')'                                           #rowConstructor
+    // | '(' query ')'                                                                            #subqueryExpression
+    // | functionName '(' (setQuantifier? argument+=expression (',' argument+=expression)*)? ')'
+    //    (FILTER '(' WHERE where=booleanExpression ')')? (OVER windowSpec)?                      #functionCall
+    // | identifier '->' expression                                                               #lambda
+    // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
+    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
+    // | identifier                                                                               #columnReference
+    // | base=primaryExpression '.' fieldName=identifier                                          #dereference
+    | '(' expression ')'                                                                       #parenthesizedExpression
+    // | EXTRACT '(' field=identifier FROM source=valueExpression ')'                             #extract
+    // | (SUBSTR | SUBSTRING) '(' str=valueExpression (FROM | ',') pos=valueExpression
+    //   ((FOR | ',') len=valueExpression)? ')'                                                   #substring
+    // | TRIM '(' trimOption=(BOTH | LEADING | TRAILING)? (trimStr=valueExpression)?
+    //    FROM srcStr=valueExpression ')'                                                         #trim
+    // | OVERLAY '(' input=valueExpression PLACING replace=valueExpression
+    //   FROM position=valueExpression (FOR length=valueExpression)? ')'                          #overlay
+    ;
+
+
 // base common
+
+tableAlias
+    : (AS? strictIdentifier identifierList?)?
+    ;
+
+identifierList
+    : '(' identifierSeq ')'
+    ;
+
+identifierSeq
+    : identifier (COMMA identifier)*
+    ;
+
+identifier
+    : strictIdentifier
+    ;
+
+strictIdentifier
+    : IDENTIFIER_BASE              #unquotedIdentifier
+    | quotedIdentifier        #quotedIdentifierAlternative
+    ;
+
+quotedIdentifier
+    : STRING_LITERAL
+    ;
+
+whenClause
+    : WHEN condition=expression THEN result=expression
+    ;
 
 uidList
     : uid (',' uid)*
@@ -296,43 +306,6 @@ ifExists
 
 keyValueDefinition
     : DOUBLE_QUOTE_ID EQUAL_SYMBOL DOUBLE_QUOTE_ID
-    ;
-
-expressions
-    : expression (',' expression)*
-    ;
-
-//    Expressions, predicates
-
-// Simplified approach for expression
-expression
-    : notOperator=(NOT | '!') expression                            #notExpression
-    | expression logicalOperator expression                         #logicalExpression
-    | predicate IS NOT? testValue=(TRUE | FALSE)                    #isExpression
-    | predicate                                                     #predicateExpression
-    ;
-
-predicate
-    : predicate NOT? IN '(' (selectStatement | expressions) ')'     #inPredicate
-    | left=predicate comparisonOperator right=predicate             #binaryComparasionPredicate
-    | predicate comparisonOperator
-      quantifier=(ALL | ANY) '(' selectStatement ')'                #subqueryComparasionPredicate
-    | predicate NOT? BETWEEN predicate AND predicate                #betweenPredicate
-    | predicate NOT? LIKE predicate                                 #likePredicate
-    | expressionAtom                                                #expressionAtomPredicate
-    ;
-
-expressionAtom
-    : constant                                                      #constantExpressionAtom
-    | fullColumnName                                                #fullColumnNameExpressionAtom
-    | unaryOperator expressionAtom                                  #unaryExpressionAtom
-    | BINARY expressionAtom                                         #binaryExpressionAtom
-    | '(' expression (',' expression)* ')'                          #nestedExpressionAtom
-    | ROW '(' expression (',' expression)+ ')'                      #nestedRowExpressionAtom
-    | EXISTS '(' selectStatement ')'                                #existsExpessionAtom
-    | '(' selectStatement ')'                                       #subqueryExpessionAtom
-    | left=expressionAtom bitOperator right=expressionAtom          #bitExpressionAtom
-    | left=expressionAtom mathOperator right=expressionAtom         #mathExpressionAtom
     ;
 
 logicalOperator
@@ -360,11 +333,13 @@ fullColumnName
     ;
 
 constant
-    : stringLiteral | decimalLiteral
-    | '-' decimalLiteral
-    | booleanLiteral
-    | REAL_LITERAL | BIT_STRING
-    | NOT? NULL
+    : stringLiteral                                             // 引号包含的字符串
+    | decimalLiteral                                            // 整数
+    | '-' decimalLiteral                                        // 负整数
+    | booleanLiteral                                            // 布尔值
+    | REAL_LITERAL                                              // 小数
+    | BIT_STRING
+    | NOT? NULL                                                 // 空 | 非空
     ;
 
 stringLiteral
@@ -377,3 +352,8 @@ decimalLiteral
 
 booleanLiteral
     : TRUE | FALSE;
+
+setQuantifier
+    : DISTINCT
+    | ALL
+    ;
