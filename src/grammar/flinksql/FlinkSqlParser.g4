@@ -1,6 +1,7 @@
 grammar FlinkSqlParser;
 
-options { tokenVocab=FlinkSqlLexer; }
+// import FlinkSqlLexer;
+// options { tokenVocab=FlinkSqlLexer; }
 
 program: statement EOF;
 
@@ -51,11 +52,11 @@ columnName
     ;
 
 columnType
-    : CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
+    : typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
     | DECIMAL | TINYINT | SMALLINT | INT | BIGINT | FLOAT | DOUBLE
     | DATE | TIME | TIMESTAMP
     | ARRAY | MAP | MULTISET | ROW
-    | BOOLEAN | RAW | NULL
+    | BOOLEAN | RAW | NULL)
     ;
 
 partitionDefinition
@@ -232,7 +233,7 @@ primaryExpression
     | POSITION '(' substr=valueExpression IN str=valueExpression ')'                           #position
     | constant                                                                                 #constantDefault
     | ASTERISK                                                                                 #star
-    // | qualifiedName '.' ASTERISK                                                               #star
+    // | qualifiedName '.' ASTERISK                                                                #star
     // | '(' namedExpression (',' namedExpression)+ ')'                                           #rowConstructor
     // | '(' query ')'                                                                            #subqueryExpression
     // | functionName '(' (setQuantifier? argument+=expression (',' argument+=expression)*)? ')'
@@ -321,11 +322,11 @@ bitOperator
     ;
 
 mathOperator
-    : '*' | '/' | '%' | DIV | '+' | '-' | '--'
+    : '*' | SLASH_SIGN | PENCENT_SIGN | DIV | '+' | '-' | DOUBLE_HYPNEN_SIGN
     ;
 
 unaryOperator
-    : '!' | '~' | '+' | '-' | NOT
+    : '!' | '~' | ADD_SIGN | '-' | NOT
     ;
 
 fullColumnName
@@ -335,7 +336,7 @@ fullColumnName
 constant
     : stringLiteral                                             // 引号包含的字符串
     | decimalLiteral                                            // 整数
-    | '-' decimalLiteral                                        // 负整数
+    | HYPNEN_SIGN decimalLiteral                                        // 负整数
     | booleanLiteral                                            // 布尔值
     | REAL_LITERAL                                              // 小数
     | BIT_STRING
@@ -357,3 +358,365 @@ setQuantifier
     : DISTINCT
     | ALL
     ;
+
+
+/* 
+lexer grammar
+*/
+
+
+// SKIP
+
+SPACE:                               [ \t\r\n]+    -> channel(HIDDEN);
+COMMENT_INPUT:                       '/*' .*? '*/' -> channel(HIDDEN);
+LINE_COMMENT:                        (
+                                       ('-- ' | '#') ~[\r\n]* ('\r'? '\n' | EOF)
+                                       | '--' ('\r'? '\n' | EOF)
+                                     ) -> channel(HIDDEN);
+
+
+// Common Keywords
+
+SELECT:                       'SELECT';
+FROM:                         'FROM';
+ADD:                          'ADD';
+AS:                           'AS';
+ALL:                          'ALL';
+ANY:                          'ANY';
+DISTINCT:                     'DISTINCT';
+WHERE:                        'WHERE';
+GROUP:                        'GROUP';
+BY:                           'BY';
+GROUPING:                     'GROUPING';
+SETS:                         'SETS';
+CUBE:                         'CUBE';
+ROLLUP:                       'ROLLUP';
+ORDER:                        'ORDER';
+HAVING:                       'HAVING';
+LIMIT:                        'LIMIT';
+AT:                           'AT';
+OR:                           'OR';
+AND:                          'AND';
+IN:                           'IN';
+NOT:                          'NOT';
+NO:                           'NO';
+EXISTS:                       'EXISTS';
+BETWEEN:                      'BETWEEN';
+LIKE:                         'LIKE';
+RLIKE:                        'RLIKE';
+IS:                           'IS';
+TRUE:                         'TRUE';
+FALSE:                        'FALSE';
+NULLS:                        'NULLS';
+ASC:                          'ASC';
+DESC:                         'DESC';
+FOR:                          'FOR';
+INTERVAL:                     'INTERVAL';
+CASE:                         'CASE';
+WHEN:                         'WHEN';
+THEN:                         'THEN';
+ELSE:                         'ELSE';
+END:                          'END';
+JOIN:                         'JOIN';
+CROSS:                        'CROSS';
+OUTER:                        'OUTER';
+INNER:                        'INNER';
+LEFT:                         'LEFT';
+SEMI:                         'SEMI';
+RIGHT:                        'RIGHT';
+FULL:                         'FULL';
+NATURAL:                      'NATURAL';
+ON:                           'ON';
+PIVOT:                        'PIVOT';
+LATERAL:                      'LATERAL';
+WINDOW:                       'WINDOW';
+OVER:                         'OVER';
+PARTITION:                    'PARTITION';
+RANGE:                        'RANGE';
+ROWS:                         'ROWS';
+UNBOUNDED:                    'UNBOUNDED';
+PRECEDING:                    'PRECEDING';
+FOLLOWING:                    'FOLLOWING';
+CURRENT:                      'CURRENT';
+FIRST:                        'FIRST';
+AFTER:                        'AFTER';
+LAST:                         'LAST';
+WITH:                         'WITH';
+VALUES:                       'VALUES';
+CREATE:                       'CREATE';
+TABLE:                        'TABLE';
+DIRECTORY:                    'DIRECTORY';
+VIEW:                         'VIEW';
+REPLACE:                      'REPLACE';
+INSERT:                       'INSERT';
+DELETE:                       'DELETE';
+INTO:                         'INTO';
+DESCRIBE:                     'DESCRIBE';
+EXPLAIN:                      'EXPLAIN';
+FORMAT:                       'FORMAT';
+LOGICAL:                      'LOGICAL';
+CODEGEN:                      'CODEGEN';
+COST:                         'COST';
+CAST:                         'CAST';
+SHOW:                         'SHOW';
+TABLES:                       'TABLES';
+COLUMNS:                      'COLUMNS';
+COLUMN:                       'COLUMN';
+USE:                          'USE';
+PARTITIONS:                   'PARTITIONS';
+FUNCTIONS:                    'FUNCTIONS';
+DROP:                         'DROP';
+UNION:                        'UNION';
+EXCEPT:                       'EXCEPT';
+SETMINUS:                     'SETMINUS';
+INTERSECT:                    'INTERSECT';
+TO:                           'TO';
+TABLESAMPLE:                  'TABLESAMPLE';
+STRATIFY:                     'STRATIFY';
+ALTER:                        'ALTER';
+RENAME:                       'RENAME';
+STRUCT:                       'STRUCT';
+COMMENT:                      'COMMENT';
+SET:                          'SET';
+RESET:                        'RESET';
+DATA:                         'DATA';
+START:                        'START';
+TRANSACTION:                  'TRANSACTION';
+COMMIT:                       'COMMIT';
+ROLLBACK:                     'ROLLBACK';
+MACRO:                        'MACRO';
+IGNORE:                       'IGNORE';
+BOTH:                         'BOTH';
+LEADING:                      'LEADING';
+TRAILING:                     'TRAILING';
+IF:                           'IF';
+POSITION:                     'POSITION';
+EXTRACT:                      'EXTRACT';
+EQ:                           'EQ';
+NSEQ:                         'NSEQ';
+NEQ:                          'NEQ';
+NEQJ:                         'NEQJ';
+LT:                           'LT';
+LTE:                          'LTE';
+GT:                           'GT';
+GTE:                          'GTE';
+PLUS:                         'PLUS';
+MINUS:                        'MINUS';
+ASTERISK:                     'ASTERISK';
+SLASH:                        'SLASH';
+PERCENT:                      'PERCENT';
+DIV:                          'DIV';
+TILDE:                        'TILDE';
+AMPERSAND:                    'AMPERSAND';
+PIPE:                         'PIPE';
+CONCAT_PIPE:                  'CONCAT_PIPE';
+HAT:                          'HAT';
+PERCENTLIT:                   'PERCENTLIT';
+BUCKET:                       'BUCKET';
+OUT:                          'OUT';
+OF:                           'OF';
+SORT:                         'SORT';
+CLUSTER:                      'CLUSTER';
+DISTRIBUTE:                   'DISTRIBUTE';
+OVERWRITE:                    'OVERWRITE';
+TRANSFORM:                    'TRANSFORM';
+REDUCE:                       'REDUCE';
+USING:                        'USING';
+SERDE:                        'SERDE';
+SERDEPROPERTIES:              'SERDEPROPERTIES';
+RECORDREADER:                 'RECORDREADER';
+RECORDWRITER:                 'RECORDWRITER';
+DELIMITED:                    'DELIMITED';
+FIELDS:                       'FIELDS';
+TERMINATED:                   'TERMINATED';
+COLLECTION:                   'COLLECTION';
+ITEMS:                        'ITEMS';
+KEYS:                         'KEYS';
+ESCAPED:                      'ESCAPED';
+LINES:                        'LINES';
+SEPARATED:                    'SEPARATED';
+FUNCTION:                     'FUNCTION';
+EXTENDED:                     'EXTENDED';
+REFRESH:                      'REFRESH';
+CLEAR:                        'CLEAR';
+CACHE:                        'CACHE';
+UNCACHE:                      'UNCACHE';
+LAZY:                         'LAZY';
+FORMATTED:                    'FORMATTED';
+GLOBAL:                       'GLOBAL';
+TEMPORARY:                    'TEMPORARY';
+OPTIONS:                      'OPTIONS';
+UNSET:                        'UNSET';
+TBLPROPERTIES:                'TBLPROPERTIES';
+DBPROPERTIES:                 'DBPROPERTIES';
+BUCKETS:                      'BUCKETS';
+SKEWED:                       'SKEWED';
+STORED:                       'STORED';
+DIRECTORIES:                  'DIRECTORIES';
+LOCATION:                     'LOCATION';
+EXCHANGE:                     'EXCHANGE';
+ARCHIVE:                      'ARCHIVE';
+UNARCHIVE:                    'UNARCHIVE';
+FILEFORMAT:                   'FILEFORMAT';
+TOUCH:                        'TOUCH';
+COMPACT:                      'COMPACT';
+CONCATENATE:                  'CONCATENATE';
+CHANGE:                       'CHANGE';
+CASCADE:                      'CASCADE';
+RESTRICT:                     'RESTRICT';
+CLUSTERED:                    'CLUSTERED';
+SORTED:                       'SORTED';
+PURGE:                        'PURGE';
+INPUTFORMAT:                  'INPUTFORMAT';
+OUTPUTFORMAT:                 'OUTPUTFORMAT';
+DATABASE:                     'DATABASE';
+DATABASES:                    'DATABASES';
+DFS:                          'DFS';
+TRUNCATE:                     'TRUNCATE';
+ANALYZE:                      'ANALYZE';
+COMPUTE:                      'COMPUTE';
+LIST:                         'LIST';
+STATISTICS:                   'STATISTICS';
+PARTITIONED:                  'PARTITIONED';
+EXTERNAL:                     'EXTERNAL';
+DEFINED:                      'DEFINED';
+REVOKE:                       'REVOKE';
+GRANT:                        'GRANT';
+LOCK:                         'LOCK';
+UNLOCK:                       'UNLOCK';
+MSCK:                         'MSCK';
+REPAIR:                       'REPAIR';
+RECOVER:                      'RECOVER';
+EXPORT:                       'EXPORT';
+IMPORT:                       'IMPORT';
+LOAD:                         'LOAD';
+ROLE:                         'ROLE';
+ROLES:                        'ROLES';
+COMPACTIONS:                  'COMPACTIONS';
+PRINCIPALS:                   'PRINCIPALS';
+TRANSACTIONS:                 'TRANSACTIONS';
+INDEX:                        'INDEX';
+INDEXES:                      'INDEXES';
+LOCKS:                        'LOCKS';
+OPTION:                       'OPTION';
+ANTI:                         'ANTI';
+LOCAL:                        'LOCAL';
+INPATH:                       'INPATH';
+WATERMARK:                    'WATERMARK';
+UNNEST:                       'UNNEST';
+MATCH_RECOGNIZE:              'MATCH_RECOGNIZE';
+MEASURES:                     'MEASURES';
+ONE:                          'ONE';
+PER:                          'PER';
+MATCH:                        'MATCH';
+SKIP1:                        'SKIP1';
+NEXT:                         'NEXT';
+PAST:                         'PAST';
+PATTERN:                      'PATTERN';
+WITHIN:                       'WITHIN';
+DEFINE:                       'DEFINE';
+BIGINT_LITERAL:               'BIGINT_LITERAL';
+SMALLINT_LITERAL:             'SMALLINT_LITERAL';
+TINYINT_LITERAL:              'TINYINT_LITERAL';
+INTEGER_VALUE:                'INTEGER_VALUE';
+DECIMAL_VALUE:                'DECIMAL_VALUE';
+DOUBLE_LITERAL:               'DOUBLE_LITERAL';
+BIGDECIMAL_LITERAL:           'BIGDECIMAL_LITERAL';
+IDENTIFIER:                   'IDENTIFIER';
+BACKQUOTED_IDENTIFIER:        'BACKQUOTED_IDENTIFIER';
+SIMPLE_COMMENT:               'SIMPLE_COMMENT';
+BRACKETED_EMPTY_COMMENT:      'BRACKETED_EMPTY_COMMENT';
+BRACKETED_COMMENT:            'BRACKETED_COMMENT';
+WS:                           'WS';
+UNRECOGNIZED:                 'UNRECOGNIZED';
+REVERSE_QUOTE_ID:              '`' ~'`'+ '`';
+DOUBLE_QUOTE_ID:              '"' ~'"'+ '"';
+DOT_ID:                       '.' ID_LITERAL;
+ID:                           ID_LITERAL;
+SYSTEM:                       'SYSTEM';
+
+
+// DATA TYPE Keywords
+
+STRING:                       'STRING';
+ARRAY:                        'ARRAY';
+MAP:                          'MAP';
+CHAR:                         'CHAR';
+VARCHAR:                      'VARCHAR';
+BINARY:                       'BINARY';
+VARBINARY:                    'VARBINARY';
+BYTES:                        'BYTES';
+DECIMAL:                      'DECIMAL';
+TINYINT:                      'TINYINT';
+SMALLINT:                     'SMALLINT';
+INT:                          'INT';
+BIGINT:                       'BIGINT';
+FLOAT:                        'FLOAT';
+DOUBLE:                       'DOUBLE';
+DATE:                         'DATE';
+TIME:                         'TIME';
+TIMESTAMP:                    'TIMESTAMP';
+MULTISET:                     'MULTISET';
+BOOLEAN:                      'BOOLEAN';
+RAW:                          'RAW';
+ROW:                          'ROW';
+NULL:                         'NULL';
+
+
+// Operators. Comparation
+
+EQUAL_SYMBOL:                        '=';
+GREATER_SYMBOL:                      '>';
+LESS_SYMBOL:                         '<';
+EXCLAMATION_SYMBOL:                  '!';
+
+
+// Operators. Bit
+
+BIT_NOT_OP:                          '~';
+BIT_OR_OP:                           '|';
+BIT_AND_OP:                          '&';
+BIT_XOR_OP:                          '^';
+
+
+// Constructors symbols
+
+DOT:                                 '.';
+LS_BRACKET:                          '[';
+RS_BRACKET:                          ']';
+LR_BRACKET:                          '(';
+RR_BRACKET:                          ')';
+COMMA:                               ',';
+SEMICOLON:                           ';';
+AT_SIGN:                             '@';
+ZERO_DECIMAL:                        '0';
+ONE_DECIMAL:                         '1';
+TWO_DECIMAL:                         '2';
+SINGLE_QUOTE_SYMB:                   '\'';
+DOUBLE_QUOTE_SYMB:                   '"';
+REVERSE_QUOTE_SYMB:                  '`';
+COLON_SYMB:                          ':';
+ASTERISK_SIGN:                       '*';
+UNDERLINE_SIGN:                      '_';
+HYPNEN_SIGN:                         '-';
+ADD_SIGN:                            '+';
+PENCENT_SIGN:                        '%';
+DOUBLE_HYPNEN_SIGN:                  '--';
+SLASH_SIGN:                          '/';
+STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
+DECIMAL_LITERAL:                     DEC_DIGIT+;
+REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
+                                     | DEC_DIGIT+ '.' EXPONENT_NUM_PART
+                                     | (DEC_DIGIT+)? '.' (DEC_DIGIT+ EXPONENT_NUM_PART)
+                                     | DEC_DIGIT+ EXPONENT_NUM_PART;
+BIT_STRING:                          BIT_STRING_L;
+IDENTIFIER_BASE:                     (DEC_LETTER | DEC_DIGIT | UNDERLINE_SIGN)+;
+
+fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
+fragment ID_LITERAL:                 [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;
+fragment DEC_DIGIT:                  [0-9];
+fragment DEC_LETTER:                  [A-Za-z];
+fragment DQUOTA_STRING:              '"' ( '\\'. | '""' | ~('"'| '\\') )* '"';
+fragment SQUOTA_STRING:              '\'' ('\\'. | '\'\'' | ~('\'' | '\\'))* '\'';
+fragment BIT_STRING_L:               'B' '\'' [01]+ '\'';
+fragment BQUOTA_STRING:              '`' ( '\\'. | '``' | ~('`'|'\\'))* '`';
