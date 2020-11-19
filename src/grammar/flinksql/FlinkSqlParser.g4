@@ -149,12 +149,8 @@ valuesDefinition
 
 valuesRowDefinition
     : LR_BRACKET
-        allValueDifinition (COMMA allValueDifinition)*
+        constant (COMMA constant)*
     RR_BRACKET
-    ;
-
-allValueDifinition
-    : stringLiteral | booleanLiteral | DEC_DIGIT | NULL
     ;
 
 
@@ -179,11 +175,11 @@ tableExpression
     ;
 
 tableReference
-    : tablePrimary tableAlias
+    : tablePrimary tableAlias?
     ;
 
 tablePrimary
-    : TABLE? uid 
+    : TABLE? uid
     ;
 
 // expression
@@ -257,7 +253,7 @@ primaryExpression
 // base common
 
 tableAlias
-    : (AS? strictIdentifier identifierList?)?
+    : AS? strictIdentifier identifierList?
     ;
 
 identifierList
@@ -273,8 +269,12 @@ identifier
     ;
 
 strictIdentifier
-    : IDENTIFIER_BASE              #unquotedIdentifier
+    : unquotedIdentifier              #unquotedIdentifierAlternative
     | quotedIdentifier        #quotedIdentifierAlternative
+    ;
+
+unquotedIdentifier
+    : DIG_LITERAL | ID
     ;
 
 quotedIdentifier
@@ -306,7 +306,7 @@ ifExists
     : IF EXISTS;
 
 keyValueDefinition
-    : DOUBLE_QUOTE_ID EQUAL_SYMBOL DOUBLE_QUOTE_ID
+    : STRING_LITERAL EQUAL_SYMBOL STRING_LITERAL
     ;
 
 logicalOperator
@@ -348,7 +348,7 @@ stringLiteral
     ;
 
 decimalLiteral
-    : DECIMAL_LITERAL | ZERO_DECIMAL | ONE_DECIMAL | TWO_DECIMAL
+    : DIG_LITERAL
     ;
 
 booleanLiteral
@@ -629,10 +629,6 @@ BRACKETED_EMPTY_COMMENT:      'BRACKETED_EMPTY_COMMENT';
 BRACKETED_COMMENT:            'BRACKETED_COMMENT';
 WS:                           'WS';
 UNRECOGNIZED:                 'UNRECOGNIZED';
-REVERSE_QUOTE_ID:              '`' ~'`'+ '`';
-DOUBLE_QUOTE_ID:              '"' ~'"'+ '"';
-DOT_ID:                       '.' ID_LITERAL;
-ID:                           ID_LITERAL;
 SYSTEM:                       'SYSTEM';
 
 
@@ -703,19 +699,20 @@ ADD_SIGN:                            '+';
 PENCENT_SIGN:                        '%';
 DOUBLE_HYPNEN_SIGN:                  '--';
 SLASH_SIGN:                          '/';
+DOT_ID:                              '.' ID_LITERAL;
 STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
-DECIMAL_LITERAL:                     DEC_DIGIT+;
+DIG_LITERAL:                         DEC_DIGIT+;
 REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
                                      | DEC_DIGIT+ '.' EXPONENT_NUM_PART
                                      | (DEC_DIGIT+)? '.' (DEC_DIGIT+ EXPONENT_NUM_PART)
                                      | DEC_DIGIT+ EXPONENT_NUM_PART;
 BIT_STRING:                          BIT_STRING_L;
-IDENTIFIER_BASE:                     (DEC_LETTER | DEC_DIGIT | UNDERLINE_SIGN)+;
+ID:                                  ID_LITERAL;
 
 fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
 fragment ID_LITERAL:                 [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;
 fragment DEC_DIGIT:                  [0-9];
-fragment DEC_LETTER:                  [A-Za-z];
+fragment DEC_LETTER:                 [A-Za-z];
 fragment DQUOTA_STRING:              '"' ( '\\'. | '""' | ~('"'| '\\') )* '"';
 fragment SQUOTA_STRING:              '\'' ('\\'. | '\'\'' | ~('\'' | '\\'))* '\'';
 fragment BIT_STRING_L:               'B' '\'' [01]+ '\'';
