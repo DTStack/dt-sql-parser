@@ -157,17 +157,25 @@ valuesRowDefinition
 // Select statements
 
 queryStatement
-    : 
+    : (
+        selectClause | selectStatement
+    ) orderByCaluse? limitClause
     ;
 
 selectStatement
-    : SELECT setQuantifier?
-    (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
-    FROM tableExpression
+    : selectClause fromClause whereClause? groupByClause? havingClause?
+    ;
+
+selectClause
+    : SELECT setQuantifier? (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
     ;
 
 projectItemDefinition
     : expression (AS? uid)? | uid '.' '*'
+    ;
+
+fromClause
+    : FROM tableExpression
     ;
 
 tableExpression
@@ -180,6 +188,39 @@ tableReference
 
 tablePrimary
     : TABLE? uid
+    ;
+
+whereClause
+    : WHERE booleanExpression
+    ;
+
+groupByClause
+    : GROUP BY groupItemDefinition (COMMA groupItemDefinition)*
+    ;
+
+groupItemDefinition
+    : expression
+    | LR_BRACKET RR_BRACKET
+    | LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | CUBE LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | ROLLUP LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | GROUPING SETS LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
+    ;
+
+havingClause
+    : HAVING booleanExpression
+    ;
+
+orderByCaluse
+    : ORDER BY orderItemDefition (COMMA orderItemDefition)*
+    ;
+
+orderItemDefition
+    : expression (ASC | DESC)
+    ;
+
+limitClause
+    : LIMIT (ALL | limit=expression)
     ;
 
 // expression
@@ -227,7 +268,7 @@ primaryExpression
     | FIRST '(' expression (IGNORE NULLS)? ')'                                                 #first
     | LAST '(' expression (IGNORE NULLS)? ')'                                                  #last
     | POSITION '(' substr=valueExpression IN str=valueExpression ')'                           #position
-    | constant                                                                                 #constantDefault
+    // | constant                                                                                 #constantDefault
     | ASTERISK                                                                                 #star
     // | qualifiedName '.' ASTERISK                                                                #star
     // | '(' namedExpression (',' namedExpression)+ ')'                                           #rowConstructor
@@ -236,8 +277,8 @@ primaryExpression
     //    (FILTER '(' WHERE where=booleanExpression ')')? (OVER windowSpec)?                      #functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
-    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
-    // | identifier                                                                               #columnReference
+    // | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
+    | identifier                                                                               #columnReference
     // | base=primaryExpression '.' fieldName=identifier                                          #dereference
     | '(' expression ')'                                                                       #parenthesizedExpression
     // | EXTRACT '(' field=identifier FROM source=valueExpression ')'                             #extract
@@ -685,9 +726,6 @@ RR_BRACKET:                          ')';
 COMMA:                               ',';
 SEMICOLON:                           ';';
 AT_SIGN:                             '@';
-ZERO_DECIMAL:                        '0';
-ONE_DECIMAL:                         '1';
-TWO_DECIMAL:                         '2';
 SINGLE_QUOTE_SYMB:                   '\'';
 DOUBLE_QUOTE_SYMB:                   '"';
 REVERSE_QUOTE_SYMB:                  '`';
