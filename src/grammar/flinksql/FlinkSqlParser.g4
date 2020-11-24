@@ -157,13 +157,19 @@ valuesRowDefinition
 // Select statements
 
 queryStatement
-    : (
-        selectClause | selectStatement
-    ) orderByCaluse? limitClause
+    : valuesCaluse
+    | '(' queryStatement ')'
+    | left=queryStatement operator=(INTERSECT | UNION | EXCEPT) ALL? right=queryStatement orderByCaluse? limitClause?
+    | selectClause orderByCaluse? limitClause?
+    | selectStatement orderByCaluse? limitClause?
+    ;
+
+valuesCaluse
+    : VALUES expression (COMMA expression )*
     ;
 
 selectStatement
-    : selectClause fromClause whereClause? groupByClause? havingClause?
+    : selectClause fromClause whereClause? groupByClause? havingClause? windowClause?
     ;
 
 selectClause
@@ -171,7 +177,7 @@ selectClause
     ;
 
 projectItemDefinition
-    : expression (AS? uid)? | uid '.' '*'
+    : expression (AS? uid)?
     ;
 
 fromClause
@@ -180,6 +186,7 @@ fromClause
 
 tableExpression
     : tableReference (COMMA tableReference)*
+    | tableExpression NATURAL? (LEFT | RIGHT | FULL)? JOIN tableExpression joinCondition?
     ;
 
 tableReference
@@ -187,7 +194,14 @@ tableReference
     ;
 
 tablePrimary
-    : TABLE? uid
+    : TABLE? expression
+    | LATERAL TABLE LR_BRACKET uid LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    | UNNEST LR_BRACKET expression RR_BRACKET
+    ;
+
+joinCondition
+    : ON booleanExpression
+    | USING LR_BRACKET uid (COMMA uid)* RR_BRACKET
     ;
 
 whereClause
@@ -216,12 +230,43 @@ orderByCaluse
     ;
 
 orderItemDefition
-    : expression (ASC | DESC)
+    : expression (ASC | DESC)?
     ;
 
 limitClause
     : LIMIT (ALL | limit=expression)
     ;
+
+windowClause
+    : WINDOW namedWindow (',' namedWindow)*
+    ;
+
+namedWindow
+    : name=errorCapturingIdentifier AS windowSpec
+    ;
+
+windowSpec
+    : name=errorCapturingIdentifier?
+    '('
+        (ORDER BY sortItem (',' sortItem)*)?
+        (PARTITION BY expression (',' expression)*)?
+        windowFrame?
+    ')'
+    ;
+
+sortItem
+    : expression ordering=(ASC | DESC)? (NULLS nullOrder=(LAST | FIRST))?
+    ;
+
+windowFrame
+    : RANGE frameBound
+    | ROWS frameBound
+    ;
+
+frameBound
+    : expression PRECEDING
+    ;
+
 
 // expression
 
@@ -231,7 +276,7 @@ expression
 
 booleanExpression
     : NOT booleanExpression                                        #logicalNot
-    // | EXISTS '(' query ')'                                         #exists
+    | EXISTS '(' queryStatement ')'                                         #exists
     | valueExpression predicate?                                   #predicated
     | left=booleanExpression operator=AND right=booleanExpression  #logicalBinary
     | left=booleanExpression operator=OR right=booleanExpression   #logicalBinary
@@ -240,7 +285,8 @@ booleanExpression
 predicate
     : NOT? kind=BETWEEN lower=valueExpression AND upper=valueExpression
     | NOT? kind=IN '(' expression (',' expression)* ')'
-    // | NOT? kind=IN '(' query ')'
+    | NOT? kind=IN '(' queryStatement ')'
+    | kind=EXISTS '(' queryStatement ')'
     | NOT? kind=RLIKE pattern=valueExpression
     | NOT? kind=LIKE quantifier=(ANY | ALL) ('('')' | '(' expression (',' expression)* ')')
     | NOT? kind=LIKE pattern=valueExpression
@@ -251,12 +297,12 @@ predicate
 
 valueExpression
     : primaryExpression                                                                      #valueExpressionDefault
-    | operator=(MINUS | PLUS | TILDE) valueExpression                                        #arithmeticUnary
-    | left=valueExpression operator=(ASTERISK | SLASH | PERCENT | DIV) right=valueExpression #arithmeticBinary
-    | left=valueExpression operator=(PLUS | MINUS | CONCAT_PIPE) right=valueExpression       #arithmeticBinary
-    | left=valueExpression operator=AMPERSAND right=valueExpression                          #arithmeticBinary
-    | left=valueExpression operator=HAT right=valueExpression                                #arithmeticBinary
-    | left=valueExpression operator=PIPE right=valueExpression                               #arithmeticBinary
+    | operator=('-' | '+' | '~') valueExpression                                        #arithmeticUnary
+    | left=valueExpression operator=('*' | '/' | '%' | DIV) right=valueExpression #arithmeticBinary
+    | left=valueExpression operator=('+' | '-' | '||') right=valueExpression       #arithmeticBinary
+    | left=valueExpression operator='&' right=valueExpression                          #arithmeticBinary
+    | left=valueExpression operator='^' right=valueExpression                                #arithmeticBinary
+    | left=valueExpression operator='|' right=valueExpression                               #arithmeticBinary
     | left=valueExpression comparisonOperator right=valueExpression                          #comparison
     ;
 
@@ -268,18 +314,17 @@ primaryExpression
     | FIRST '(' expression (IGNORE NULLS)? ')'                                                 #first
     | LAST '(' expression (IGNORE NULLS)? ')'                                                  #last
     | POSITION '(' substr=valueExpression IN str=valueExpression ')'                           #position
-    // | constant                                                                                 #constantDefault
-    | ASTERISK                                                                                 #star
-    // | qualifiedName '.' ASTERISK                                                                #star
+    | constant                                                                                 #constantDefault
+    | '*'                                                                                 #star
+    | uid '.' '*'                                                                #star
     // | '(' namedExpression (',' namedExpression)+ ')'                                           #rowConstructor
-    // | '(' query ')'                                                                            #subqueryExpression
-    // | functionName '(' (setQuantifier? argument+=expression (',' argument+=expression)*)? ')'
-    //    (FILTER '(' WHERE where=booleanExpression ')')? (OVER windowSpec)?                      #functionCall
+    | '(' queryStatement ')'                                                                            #subqueryExpression
+    | functionName '(' (setQuantifier? expression (',' expression)*)? ')'                      #functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
-    // | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
+    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
     | identifier                                                                               #columnReference
-    // | base=primaryExpression '.' fieldName=identifier                                          #dereference
+    | dereferenceDefinition                                                                                      #dereference
     | '(' expression ')'                                                                       #parenthesizedExpression
     // | EXTRACT '(' field=identifier FROM source=valueExpression ')'                             #extract
     // | (SUBSTR | SUBSTRING) '(' str=valueExpression (FROM | ',') pos=valueExpression
@@ -290,11 +335,53 @@ primaryExpression
     //   FROM position=valueExpression (FOR length=valueExpression)? ')'                          #overlay
     ;
 
+functionName
+    : uid
+    ;
+
+dereferenceDefinition
+    : uid
+    ;
+
 
 // base common
 
+interval
+    : INTERVAL (errorCapturingMultiUnitsInterval | errorCapturingUnitToUnitInterval)?
+    ;
+
+errorCapturingMultiUnitsInterval
+    : multiUnitsInterval unitToUnitInterval?
+    ;
+
+multiUnitsInterval
+    : (intervalValue identifier)+
+    ;
+
+errorCapturingUnitToUnitInterval
+    : body=unitToUnitInterval (error1=multiUnitsInterval | error2=unitToUnitInterval)?
+    ;
+
+unitToUnitInterval
+    : value=intervalValue from=identifier TO to=identifier
+    ;
+
+intervalValue
+    : ('+' | '-')? (DIG_LITERAL | REAL_LITERAL)
+    | STRING_LITERAL
+    ;
+
 tableAlias
     : AS? strictIdentifier identifierList?
+    ;
+
+errorCapturingIdentifier
+    : identifier errorCapturingIdentifierExtra
+    ;
+
+errorCapturingIdentifierExtra
+    : (MINUS identifier)+    #errorIdent
+    |                        #realIdent
     ;
 
 identifierList
@@ -377,6 +464,7 @@ fullColumnName
 constant
     : stringLiteral                                             // 引号包含的字符串
     | decimalLiteral                                            // 整数
+    | interval                                                  // INTERVAL keywords
     | HYPNEN_SIGN decimalLiteral                                        // 负整数
     | booleanLiteral                                            // 布尔值
     | REAL_LITERAL                                              // 小数
