@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "sql,hive,parser ",
   "keywords": [
     "hive",
@@ -27,7 +27,7 @@
   },
   "git repository": "https://github.com/HSunboy/dt-sql-parser",
   "dependencies": {
-    "@types/antlr4": "^4.7.0",
-    "antlr4": "^4.7.2"
+    "@types/antlr4": "4.7.0",
+    "antlr4": "4.7.2"
   }
 }
