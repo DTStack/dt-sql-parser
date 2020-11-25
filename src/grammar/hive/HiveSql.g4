@@ -15,7 +15,7 @@
    limitations under the License.
 */
 
-parser grammar HiveSqlParser;
+parser grammar HiveSql;
 
 options {
     tokenVocab=HiveSqlLexer;
