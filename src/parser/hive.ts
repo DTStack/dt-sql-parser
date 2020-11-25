@@ -1,8 +1,8 @@
 import { InputStream, CommonTokenStream, Lexer } from 'antlr4';
 import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
 import { HiveSqlParser } from '../lib/hive/HiveSqlParser';
-export * from '../lib/hive/HiveSqlListener';
-export * from '../lib/hive/HiveSqlVisitor';
+export * from '../lib/hive/HiveSqlParserListener';
+export * from '../lib/hive/HiveSqlParserVisitor';
 
 import BasicParser from './common/BasicParser';
 
