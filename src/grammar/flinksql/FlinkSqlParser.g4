@@ -22,7 +22,7 @@ emptyStatement
     ;
 
 ddlStatement
-    : createTable | createDatabase | createView | createFunction
+    : createTable | createDatabase | createView | createFunction | createCatalog
     | alterTable | alterDatabase | alterFunction
     | dropTable | dropDatabase | dropView | dropFunction
     ;
@@ -38,13 +38,16 @@ createTable
     : CREATE TABLE uid
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
+        watermarkDefinition?
     RR_BRACKET
+    commentSpec?
     partitionDefinition?
     withOption
+    likeDefinition?
     ;
 
 columnOptionDefinition
-    : columnName columnType
+    : columnName columnType lengthOneDimension?
     ;
 
 columnName
@@ -59,28 +62,60 @@ columnType
     | BOOLEAN | RAW | NULL)
     ;
 
+lengthOneDimension
+    : '(' decimalLiteral ')'
+    ;
+
+commentSpec
+    : COMMENT STRING_LITERAL
+    ;
+
+watermarkDefinition
+    : WATERMARK FOR expression AS expression
+    ;
+
 partitionDefinition
-    : PARTITIONED BY partitionColumnDefinition
+    : PARTITIONED BY transformList
     ;
 
-partitionColumnDefinition
-    : partitionColumnName (COMMA partitionColumnName)*
+transformList
+    : '(' transform (',' transform)* ')'
     ;
 
-partitionColumnName
-    : ID
+transform
+    : qualifiedName                                                           #identityTransform
+    | transformName=identifier
+      '(' transformArgument (',' transformArgument)* ')'  #applyTransform
+    ;
+
+transformArgument
+    : qualifiedName
+    | constant
+    ;
+
+likeDefinition
+    : LIKE identifier likeOption
+    ;
+
+likeOption
+    : (INCLUDING | EXCLUDING) (ALL | CONSTRAINTS)
+    | (INCLUDING | EXCLUDING) (GENERATED | OPTIONS)
+    ;
+
+createCatalog
+    : CREATE CATALOG uid withOption
     ;
 
 createDatabase
-    : CREATE DATABASE ifNotExists? uid withOption
+    : CREATE DATABASE ifNotExists? uid commentSpec? withOption
     ;
 
 createView
-    : CREATE TEMPORARY? VIEW ifNotExists? uid AS selectStatement
+    : CREATE TEMPORARY? VIEW ifNotExists? uid (columnName (',' columnName)*)? commentSpec AS queryStatement
     ;
 
 createFunction
-    :
+    : CREATE (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifNotExists? uid AS identifier (LANGUAGE identifier)?
     ;
 
 // Alter statements
@@ -346,6 +381,10 @@ dereferenceDefinition
 
 // base common
 
+qualifiedName
+    : identifier ('.' identifier)*
+    ;
+
 interval
     : INTERVAL (errorCapturingMultiUnitsInterval | errorCapturingUnitToUnitInterval)?
     ;
@@ -422,9 +461,7 @@ uid
     ;
 
 withOption
-    : WITH LR_BRACKET
-        keyValueDefinition (COMMA keyValueDefinition)*
-    RR_BRACKET
+    : WITH tablePropertyList
     ;
 
 ifNotExists
@@ -435,6 +472,26 @@ ifExists
 
 keyValueDefinition
     : STRING_LITERAL EQUAL_SYMBOL STRING_LITERAL
+    ;
+
+tablePropertyList
+    : '(' tableProperty (',' tableProperty)* ')'
+    ;
+
+tableProperty
+    : key=tablePropertyKey (EQUAL_SYMBOL? value=tablePropertyValue)?
+    ;
+
+tablePropertyKey
+    : identifier ('.' identifier)*
+    | STRING_LITERAL
+    ;
+
+tablePropertyValue
+    : DIG_LITERAL
+    | REAL_LITERAL
+    | booleanLiteral
+    | STRING_LITERAL
     ;
 
 logicalOperator
@@ -744,21 +801,15 @@ PAST:                         'PAST';
 PATTERN:                      'PATTERN';
 WITHIN:                       'WITHIN';
 DEFINE:                       'DEFINE';
-BIGINT_LITERAL:               'BIGINT_LITERAL';
-SMALLINT_LITERAL:             'SMALLINT_LITERAL';
-TINYINT_LITERAL:              'TINYINT_LITERAL';
-INTEGER_VALUE:                'INTEGER_VALUE';
-DECIMAL_VALUE:                'DECIMAL_VALUE';
-DOUBLE_LITERAL:               'DOUBLE_LITERAL';
-BIGDECIMAL_LITERAL:           'BIGDECIMAL_LITERAL';
-IDENTIFIER:                   'IDENTIFIER';
-BACKQUOTED_IDENTIFIER:        'BACKQUOTED_IDENTIFIER';
-SIMPLE_COMMENT:               'SIMPLE_COMMENT';
-BRACKETED_EMPTY_COMMENT:      'BRACKETED_EMPTY_COMMENT';
-BRACKETED_COMMENT:            'BRACKETED_COMMENT';
 WS:                           'WS';
-UNRECOGNIZED:                 'UNRECOGNIZED';
 SYSTEM:                       'SYSTEM';
+INCLUDING:                    'INCLUDING';
+EXCLUDING:                    'EXCLUDING';
+CONSTRAINTS:                  'CONSTRAINTS';
+OVERWRITING:                  'OVERWRITING';
+GENERATED:                    'GENERATED';
+CATALOG:                      'CATALOG';
+LANGUAGE:                     'LANGUAGE';
 
 
 // DATA TYPE Keywords
