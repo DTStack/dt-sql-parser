@@ -8,7 +8,7 @@ import BasicParser from './common/BasicParser';
 
 export default class FlinkSQL extends BasicParser {
     public createLexer(input: string): Lexer {
-        const chars = new InputStream(input);
+        const chars = new InputStream(input.toUpperCase()); // Some Lexer only support uppercase token, So you need transform
         const lexer = <unknown> new FlinkSqlLexer(chars) as Lexer;
         return lexer;
     }

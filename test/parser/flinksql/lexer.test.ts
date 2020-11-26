@@ -1,5 +1,4 @@
 import SQLParser from '../../../src/parser/flinksql';
-// todo 校验 token 解析
 describe('FlinkSQL Lexer tests', () => {
     const parser = new SQLParser();
 
@@ -7,6 +6,6 @@ describe('FlinkSQL Lexer tests', () => {
     const tokens = parser.getAllTokens(sql);
 
     test('token counts', () => {
-        expect(tokens.length).toBe(6);
+        expect(tokens.length).toBe(7);
     });
 });
