@@ -1,6 +1,8 @@
-import SQLParser, { PlSqlParserListener } from '../../../src/parser/plsql';
-// todo 校验关键字提取
-describe('PLSQL Listener Tests', () => {
+import
+SQLParser, { FlinkSqlParserListener }
+    from '../../../src/parser/flinksql';
+
+describe('Flink SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
     const parser = new SQLParser();
@@ -9,8 +11,8 @@ describe('PLSQL Listener Tests', () => {
 
     test('Listener enterTableName', async () => {
         let result = '';
-        class MyListener extends PlSqlParserListener {
-            enterTable_ref_list(ctx): void {
+        class MyListener extends FlinkSqlParserListener {
+            enterTableExpression(ctx): void {
                 result = ctx.getText().toLowerCase();
             }
         }
