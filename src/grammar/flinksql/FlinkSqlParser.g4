@@ -53,7 +53,9 @@ createTable
     : CREATE TABLE uid
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
-        watermarkDefinition?
+        (COMMA watermarkDefinition)?
+        (COMMA tableConstraint)?
+        (COMMA selfDefinitionClause)?
     RR_BRACKET
     commentSpec?
     partitionDefinition?
@@ -62,11 +64,15 @@ createTable
     ;
 
 columnOptionDefinition
-    : columnName columnType lengthOneDimension?
+    : columnName columnType lengthOneDimension? columnAlias?
     ;
 
 columnName
-    : ID
+    : plusUid | expression
+    ;
+
+columnNameList
+    : columnName (',' columnName)*
     ;
 
 columnType
@@ -74,7 +80,8 @@ columnType
     | DECIMAL | TINYINT | SMALLINT | INT | BIGINT | FLOAT | DOUBLE
     | DATE | TIME | TIMESTAMP
     | ARRAY | MAP | MULTISET | ROW
-    | BOOLEAN | RAW | NULL)
+    | BOOLEAN | RAW | NULL
+    | DATETIME)
     ;
 
 lengthOneDimension
@@ -87,6 +94,14 @@ commentSpec
 
 watermarkDefinition
     : WATERMARK FOR expression AS expression
+    ;
+
+tableConstraint
+    : (CONSTRAINT identifier)? PRIMARY KEY '(' columnNameList ')'
+    ;
+
+selfDefinitionClause // 数栈自定义语句 ‘PERIOD FOR SYSTEM_TIME’
+    : PERIOD FOR SYSTEM_TIME
     ;
 
 partitionDefinition
@@ -126,7 +141,7 @@ createDatabase
     ;
 
 createView
-    : CREATE TEMPORARY? VIEW ifNotExists? uid (columnName (',' columnName)*)? commentSpec? AS queryStatement
+    : CREATE TEMPORARY? VIEW ifNotExists? uid columnNameList? commentSpec? AS queryStatement
     ;
 
 createFunction
@@ -355,7 +370,7 @@ valueExpression
 primaryExpression
     : CASE whenClause+ (ELSE elseExpression=expression)? END                                   #searchedCase
     | CASE value=expression whenClause+ (ELSE elseExpression=expression)? END                  #simpleCase
-    // | CAST '(' expression AS dataType ')'                                                      #cast
+    | CAST '(' expression AS columnType ')'                                                      #cast
     // | STRUCT '(' (argument+=namedExpression (',' argument+=namedExpression)*)? ')'             #struct
     | FIRST '(' expression (IGNORE NULLS)? ')'                                                 #first
     | LAST '(' expression (IGNORE NULLS)? ')'                                                  #last
@@ -393,7 +408,7 @@ dereferenceDefinition
 // base common
 
 qualifiedName
-    : identifier ('.' identifier)*
+    : identifier | dereferenceDefinition
     ;
 
 interval
@@ -419,6 +434,10 @@ unitToUnitInterval
 intervalValue
     : ('+' | '-')? (DIG_LITERAL | REAL_LITERAL)
     | STRING_LITERAL
+    ;
+
+columnAlias
+    : AS? strictIdentifier identifierList?
     ;
 
 tableAlias
@@ -452,7 +471,7 @@ strictIdentifier
     ;
 
 unquotedIdentifier
-    : DIG_LITERAL | ID
+    : DIG_LITERAL | ID_LITERAL
     ;
 
 quotedIdentifier
@@ -468,7 +487,11 @@ uidList
     ;
 
 uid
-    : ID (DOT_ID)*?
+    : ID_LITERAL DOT_ID*?
+    ;
+
+plusUid  // 匹配 xxx.$xx xx:xxxx 等字符
+    : (ID_LITERAL | PLUS_ID_LITERAL) (DOT_ID | PLUS_DOT_ID)*?
     ;
 
 withOption
@@ -490,7 +513,7 @@ tableProperty
     ;
 
 tablePropertyKey
-    : identifier ('.' identifier)*
+    : identifier | dereferenceDefinition
     | STRING_LITERAL
     ;
 

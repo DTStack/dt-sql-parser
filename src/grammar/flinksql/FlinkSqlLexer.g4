@@ -198,6 +198,7 @@ COMPACT:                      'COMPACT';
 CONCATENATE:                  'CONCATENATE';
 CHANGE:                       'CHANGE';
 CASCADE:                      'CASCADE';
+CONSTRAINT:                   'CONSTRAINT';
 RESTRICT:                     'RESTRICT';
 CLUSTERED:                    'CLUSTERED';
 SORTED:                       'SORTED';
@@ -261,6 +262,10 @@ CATALOG:                      'CATALOG';
 LANGUAGE:                     'LANGUAGE';
 CATALOGS:                     'CATALOGS';
 VIEWS:                        'VIEWS';
+PRIMARY:                      'PRIMARY';
+KEY:                          'KEY';
+PERIOD:                       'PERIOD';
+SYSTEM_TIME:                  'SYSTEM_TIME';
 
 
 // DATA TYPE Keywords
@@ -288,6 +293,8 @@ BOOLEAN:                      'BOOLEAN';
 RAW:                          'RAW';
 ROW:                          'ROW';
 NULL:                         'NULL';
+DATETIME:                     'DATETIME';  // 数栈自定义类型
+
 
 
 // Operators. Comparation
@@ -328,7 +335,8 @@ PENCENT_SIGN:                        '%';
 DOUBLE_VERTICAL_SIGN:                '||';
 DOUBLE_HYPNEN_SIGN:                  '--';
 SLASH_SIGN:                          '/';
-DOT_ID:                              '.' ID_LITERAL;
+DOT_ID:                              '.' ID_LITERAL_FRAG;
+PLUS_DOT_ID:                          (':' | '.') PLUS_ID_LITERAL;
 STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
 DIG_LITERAL:                         DEC_DIGIT+;
 REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
@@ -336,10 +344,12 @@ REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
                                      | (DEC_DIGIT+)? '.' (DEC_DIGIT+ EXPONENT_NUM_PART)
                                      | DEC_DIGIT+ EXPONENT_NUM_PART;
 BIT_STRING:                          BIT_STRING_L;
-ID:                                  ID_LITERAL;
+ID_LITERAL:                          ID_LITERAL_FRAG;
+PLUS_ID_LITERAL:                     PLUS_ID_LITERAL_FRAG;
 
 fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
-fragment ID_LITERAL:                 [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;
+fragment ID_LITERAL_FRAG:            [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;
+fragment PLUS_ID_LITERAL_FRAG:       ('a'..'z' | '0'..'9' | '_' | '*' | '@' | '#' | '^' | '$' | '%' | '&')*?[A-Z_a-z]+?('a'..'z' | '0'..'9' | '_' | '*' | '@' | '#' | '^' | '$' | '%' | '&')*;
 fragment DEC_DIGIT:                  [0-9];
 fragment DEC_LETTER:                 [A-Za-z];
 fragment DQUOTA_STRING:              '"' ( '\\'. | '""' | ~('"'| '\\') )* '"';

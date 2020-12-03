@@ -96,6 +96,12 @@ FlinkSqlParserVisitor.prototype.visitColumnName = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#columnNameList.
+FlinkSqlParserVisitor.prototype.visitColumnNameList = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#columnType.
 FlinkSqlParserVisitor.prototype.visitColumnType = function(ctx) {
   return this.visitChildren(ctx);
@@ -116,6 +122,18 @@ FlinkSqlParserVisitor.prototype.visitCommentSpec = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#watermarkDefinition.
 FlinkSqlParserVisitor.prototype.visitWatermarkDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#tableConstraint.
+FlinkSqlParserVisitor.prototype.visitTableConstraint = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#selfDefinitionClause.
+FlinkSqlParserVisitor.prototype.visitSelfDefinitionClause = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -504,6 +522,12 @@ FlinkSqlParserVisitor.prototype.visitSubqueryExpression = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#cast.
+FlinkSqlParserVisitor.prototype.visitCast = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#constantDefault.
 FlinkSqlParserVisitor.prototype.visitConstantDefault = function(ctx) {
   return this.visitChildren(ctx);
@@ -594,6 +618,12 @@ FlinkSqlParserVisitor.prototype.visitIntervalValue = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#columnAlias.
+FlinkSqlParserVisitor.prototype.visitColumnAlias = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#tableAlias.
 FlinkSqlParserVisitor.prototype.visitTableAlias = function(ctx) {
   return this.visitChildren(ctx);
@@ -674,6 +704,12 @@ FlinkSqlParserVisitor.prototype.visitUidList = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#uid.
 FlinkSqlParserVisitor.prototype.visitUid = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#plusUid.
+FlinkSqlParserVisitor.prototype.visitPlusUid = function(ctx) {
   return this.visitChildren(ctx);
 };
 
