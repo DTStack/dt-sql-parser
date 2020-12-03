@@ -238,7 +238,7 @@ selectClause
     ;
 
 projectItemDefinition
-    : expression (AS? uid)?
+    : expression (AS? expression)?
     ;
 
 fromClause
@@ -247,7 +247,7 @@ fromClause
 
 tableExpression
     : tableReference (COMMA tableReference)*
-    | tableExpression NATURAL? (LEFT | RIGHT | FULL)? JOIN tableExpression joinCondition?
+    | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? JOIN tableExpression joinCondition?
     ;
 
 tableReference

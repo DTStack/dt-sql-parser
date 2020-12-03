@@ -349,7 +349,8 @@ PLUS_ID_LITERAL:                     PLUS_ID_LITERAL_FRAG;
 
 fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
 fragment ID_LITERAL_FRAG:            [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;
-fragment PLUS_ID_LITERAL_FRAG:       ('a'..'z' | '0'..'9' | '_' | '*' | '@' | '#' | '^' | '$' | '%' | '&')*?[A-Z_a-z]+?('a'..'z' | '0'..'9' | '_' | '*' | '@' | '#' | '^' | '$' | '%' | '&')*;
+// fragment PLUS_ID_LITERAL_FRAG:       ('a'..'z' | '0'..'9' | '_' | '*' | '@' | '#' | '^' | '$' | '%' | '&')*?[A-Z_a-z]+?('a'..'z' | '0'..'9' | '_' | '*' | '@' | '#' | '^' | '$' | '%' | '&')*;
+fragment PLUS_ID_LITERAL_FRAG:       ('a'..'z' | '0'..'9' | '_' | '*' | '@' | '#' | '^' | '$' | '%' | '&')+;
 fragment DEC_DIGIT:                  [0-9];
 fragment DEC_LETTER:                 [A-Za-z];
 fragment DQUOTA_STRING:              '"' ( '\\'. | '""' | ~('"'| '\\') )* '"';

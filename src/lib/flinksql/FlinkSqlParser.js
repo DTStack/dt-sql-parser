@@ -171,7 +171,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u00ff\u0003\u0002\u0104\u011b\u0003\u0002\u00f7\u00f8\u0004\u0002\n",
     "\n\u00f9\u00f9\u0004\u0002\u00ae\u00ae\u00fb\u00fb\u0004\u0002\u00bf",
     "\u00bf\u00c1\u00c1\u0004\u0002OO\u0093\u0093\u0004\u0002_`bb\u0004\u0002",
-    "2245\u0003\u0002%&\u0004\u0002CCEE\u0003\u0002\n\u000b\u0003\u0002\"",
+    "1245\u0003\u0002%&\u0004\u0002CCEE\u0003\u0002\n\u000b\u0003\u0002\"",
     "#\u0004\u0002\u0120\u0120\u0132\u0133\u0006\u0002\u0086\u0086\u0130",
     "\u0130\u0134\u0134\u0137\u0137\u0004\u0002\u0132\u0133\u0135\u0135\u0003",
     "\u0002\u0132\u0133\u0003\u0002\u013b\u013c\u0004\u0002\u013b\u013b\u013e",
@@ -479,7 +479,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0282\u0003\u0002\u0002\u0002\u028ba\u0003\u0002\u0002\u0002\u028c",
     "\u0291\u0005\u0088E\u0002\u028d\u028f\u0007\t\u0002\u0002\u028e\u028d",
     "\u0003\u0002\u0002\u0002\u028e\u028f\u0003\u0002\u0002\u0002\u028f\u0290",
-    "\u0003\u0002\u0002\u0002\u0290\u0292\u0005\u00bc_\u0002\u0291\u028e",
+    "\u0003\u0002\u0002\u0002\u0290\u0292\u0005\u0088E\u0002\u0291\u028e",
     "\u0003\u0002\u0002\u0002\u0291\u0292\u0003\u0002\u0002\u0002\u0292c",
     "\u0003\u0002\u0002\u0002\u0293\u0294\u0007\u0007\u0002\u0002\u0294\u0295",
     "\u0005f4\u0002\u0295e\u0003\u0002\u0002\u0002\u0296\u0297\b4\u0001\u0002",
@@ -6873,12 +6873,15 @@ function ProjectItemDefinitionContext(parser, parent, invokingState) {
 ProjectItemDefinitionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 ProjectItemDefinitionContext.prototype.constructor = ProjectItemDefinitionContext;
 
-ProjectItemDefinitionContext.prototype.expression = function() {
-    return this.getTypedRuleContext(ExpressionContext,0);
-};
-
-ProjectItemDefinitionContext.prototype.uid = function() {
-    return this.getTypedRuleContext(UidContext,0);
+ProjectItemDefinitionContext.prototype.expression = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(ExpressionContext);
+    } else {
+        return this.getTypedRuleContext(ExpressionContext,i);
+    }
 };
 
 ProjectItemDefinitionContext.prototype.AS = function() {
@@ -6932,7 +6935,7 @@ FlinkSqlParser.prototype.projectItemDefinition = function() {
             }
 
             this.state = 654;
-            this.uid();
+            this.expression();
 
         }
     } catch (re) {
@@ -7098,6 +7101,10 @@ TableExpressionContext.prototype.FULL = function() {
     return this.getToken(FlinkSqlParser.FULL, 0);
 };
 
+TableExpressionContext.prototype.INNER = function() {
+    return this.getToken(FlinkSqlParser.INNER, 0);
+};
+
 TableExpressionContext.prototype.enterRule = function(listener) {
     if(listener instanceof FlinkSqlParserListener ) {
         listener.enterTableExpression(this);
@@ -7177,10 +7184,10 @@ FlinkSqlParser.prototype.tableExpression = function(_p) {
                 this.state = 674;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
-                if(((((_la - 48)) & ~0x1f) == 0 && ((1 << (_la - 48)) & ((1 << (FlinkSqlParser.LEFT - 48)) | (1 << (FlinkSqlParser.RIGHT - 48)) | (1 << (FlinkSqlParser.FULL - 48)))) !== 0)) {
+                if(((((_la - 47)) & ~0x1f) == 0 && ((1 << (_la - 47)) & ((1 << (FlinkSqlParser.INNER - 47)) | (1 << (FlinkSqlParser.LEFT - 47)) | (1 << (FlinkSqlParser.RIGHT - 47)) | (1 << (FlinkSqlParser.FULL - 47)))) !== 0)) {
                     this.state = 673;
                     _la = this._input.LA(1);
-                    if(!(((((_la - 48)) & ~0x1f) == 0 && ((1 << (_la - 48)) & ((1 << (FlinkSqlParser.LEFT - 48)) | (1 << (FlinkSqlParser.RIGHT - 48)) | (1 << (FlinkSqlParser.FULL - 48)))) !== 0))) {
+                    if(!(((((_la - 47)) & ~0x1f) == 0 && ((1 << (_la - 47)) & ((1 << (FlinkSqlParser.INNER - 47)) | (1 << (FlinkSqlParser.LEFT - 47)) | (1 << (FlinkSqlParser.RIGHT - 47)) | (1 << (FlinkSqlParser.FULL - 47)))) !== 0))) {
                     this._errHandler.recoverInline(this);
                     }
                     else {
