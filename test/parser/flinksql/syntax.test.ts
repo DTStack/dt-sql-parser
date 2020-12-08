@@ -173,7 +173,7 @@ describe('FlinkSQL Syntax Tests', () => {
         expect(result.length).toBe(0);
     });
 
-    // todo 字段中包含特殊字符 如$符号 内容匹配不准确 自定义字段与与定义的词法规则重复 也会匹配不准确
+    // todo 字段中包含特殊字符 如$符号 内容匹配不准确
     // test('Test complex sql Statement one', () => {
     //     const sql = sqlMockData.sqlStrOne;
     //     const result = parser.validate(sql);

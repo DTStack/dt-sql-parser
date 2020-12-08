@@ -678,6 +678,18 @@ FlinkSqlParserVisitor.prototype.visitQuotedIdentifierAlternative = function(ctx)
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#ansiNonReservedKeywords.
+FlinkSqlParserVisitor.prototype.visitAnsiNonReservedKeywords = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#nonReservedKeywords.
+FlinkSqlParserVisitor.prototype.visitNonReservedKeywords = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#unquotedIdentifier.
 FlinkSqlParserVisitor.prototype.visitUnquotedIdentifier = function(ctx) {
   return this.visitChildren(ctx);
@@ -818,6 +830,24 @@ FlinkSqlParserVisitor.prototype.visitBooleanLiteral = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#setQuantifier.
 FlinkSqlParserVisitor.prototype.visitSetQuantifier = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#ansiNonReserved.
+FlinkSqlParserVisitor.prototype.visitAnsiNonReserved = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#strictNonReserved.
+FlinkSqlParserVisitor.prototype.visitStrictNonReserved = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#nonReserved.
+FlinkSqlParserVisitor.prototype.visitNonReserved = function(ctx) {
   return this.visitChildren(ctx);
 };
 
