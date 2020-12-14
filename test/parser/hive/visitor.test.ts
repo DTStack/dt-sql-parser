@@ -1,15 +1,15 @@
 import SQLParser, { HiveSqlVisitor } from '../../../src/parser/hive';
 
 describe('Generic SQL Visitor Tests', () => {
-    const expectTableName = 'user1';
-    const sql = `select id,name,sex from ${expectTableName};`;
+    const expectTableName = 'dm_gis.dlv_addr_tc_count';
+    const sql = `select citycode,tc,inc_day from ${expectTableName} where inc_day='20190501' limit 100;`;
     const parser = new SQLParser();
 
     const parserTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);
     });
 
-    console.log('Parser tree string:', parser.toString(parserTree));
+    // console.log('Parser tree string:', parser.toString(parserTree));
 
     test('Visitor visitTableName', () => {
         let result = '';
@@ -19,6 +19,7 @@ describe('Generic SQL Visitor Tests', () => {
                 super.visitTable_name(ctx);
             }
         }
+
         const visitor: any = new MyVisitor();
         visitor.visit(parserTree);
 
