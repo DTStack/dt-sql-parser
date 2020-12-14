@@ -1,6 +1,5 @@
 import SQLParser from '../../../src/parser/flinksql';
 import sqlMockData from '../../mock/flinkSql';
-import * as utils from '../../../src/utils';
 
 describe('FlinkSQL Syntax Tests', () => {
     const parser = new SQLParser();
@@ -219,13 +218,4 @@ describe('FlinkSQL Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
-    // test('Test complex sql Statement with splitSql', () => {
-    //     const sql = sqlMockData.allSqlStr;
-    //     const result = [];
-    //     utils.splitSql(sql).forEach((ele) => {
-    //         const tempRul = parser.validate(utils.cleanSql(ele));
-    //         result.push(...tempRul);
-    //     });
-    //     expect(result.length).toBe(0);
-    // });
 });

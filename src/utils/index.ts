@@ -37,21 +37,14 @@ function lexer(input: string): Token[] {
      */
     // eslint-disable-next-line
     const matchQuotation = (currentChar: string, validator: RegExp, TokenType: TokenType) => {
-        // let value = '';
-        // let start = current;
-        // let startLine = line;
-
         do {
             if (currentChar === '\n') {
                 line++;
             }
-            // value += currentChar;
             currentChar = input[++current];
         } while (!validator.test(currentChar));
 
-        // value += currentChar;
         ++current;
-        // console.log(TokenType, value, start, startLine, current)
     };
 
     while (current < input.length) {
