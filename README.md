@@ -19,7 +19,7 @@ In addition, several helper methods are provided to format the SQL before parsin
 
 tips: The Grammar file can also be compiled into other languages with [ANTLR4](https://github.com/antlr/antlr4) .
 
-[English](./README.md) | 简体中文
+English | [简体中文](./README-zh_CN.md)
 
 ## Installation
 
