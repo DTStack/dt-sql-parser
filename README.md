@@ -5,7 +5,7 @@
 [npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/dt-sql-parser
 
-此项目是基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的 SQL 语言解析器。主要用于大数据开发中，对各类 SQL 的解析。目前支持的 SQL：
+dt-sql-parser is a SQL parser built on [ANTLR4](https://github.com/antlr/antlr4) .It's mainly used for analyzing all kinds of SQL in the development of big data. Supported SQL:
 
 - MySQL
 - Flink SQL
@@ -13,15 +13,15 @@
 - Hive SQL
 - PL/SQL
 
-每种 SQL 都提供了对应基础类、Visitor 类和 Listener 类，包含了生成 token、生成 AST、语法校验、visitor 和 listener 模式遍历 AST 指定节点等功能。
+It provides the basic class, Visitor class, and Listener class. These class including the ability to generate tokens, generate parse tree, syntax validation, and Visitor & Listener patterns to traverse the AST.
 
-此外，为了方便解析，还提供了几个辅助方法可以在解析前对 SQL 进行格式处理。主要作用是清除 SQL 语句中的 '--' 和 '/**/' 两种类型的注释，以及拆分大段 SQL。
+In addition, several helper methods are provided to format the SQL before parsing. The main effect is to clear the '--' and '/**/' types of comments in SQL statements, and to split large chunks of SQL
 
-提示：项目中的 grammar 文件也可以通过 [ANTLR4](https://github.com/antlr/antlr4) 编译成其他语言
+tips: The Grammar file can also be compiled into other languages with [ANTLR4](https://github.com/antlr/antlr4) .
 
 [English](./README.md) | 简体中文
 
-## 安装
+## Installation
 
 ```
 // use npm
@@ -31,11 +31,11 @@ npm i dt-sql-parser --save
 yarn add dt-sql-parser
 ```
 
-## 示例
+## Usage
 
 ### Clean
 
-清除注释和前后空格
+clear comments and Spaces before and after
 
 ```javascript
 import { cleanSql } from 'dt-sql-parser';
@@ -52,7 +52,7 @@ select id,name from user1;
 
 ### Split
 
-分割 sql
+split sql
 
 ```javascript
 import { splitSql } from 'dt-sql-parser';
@@ -69,7 +69,7 @@ console.log(sqlList)
 
 ### Tokens
 
-对 sql 语句进行词法分析，生成 token
+lexical analysis, generate token
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
@@ -99,7 +99,7 @@ console.log(tokens)
 
 ### Syntax validation
 
-validate 方法对 sql 语句的语法正确性进行校验，返回一个由 error 组成的数组
+verifies the syntax correctness of the SQL statement and returns an array of errors
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
@@ -110,7 +110,7 @@ const validate = (sql) => {
     console.log(errors)
 }
 ```
-语法正确的 sql:
+correct sql:
 ```javascript
 const correctSql = 'select id,name from user1;'
 validate(correctSql)
@@ -118,7 +118,7 @@ validate(correctSql)
 []
 */
 ```
-包含错误语法的 sql:
+incorrect sql:
 ```javascript
 const incorrectSql = 'selec id,name from user1;'
 validate(incorrectSql)
@@ -137,7 +137,7 @@ validate(incorrectSql)
 
 ### Visitor
 
-使用 visitor 模式访问 AST 中的指定节点
+access the specified node in the AST by Visitor pattern
 
 ```javascript
 import { GenericSQL, SqlParserVisitor } from 'dt-sql-parser';
@@ -147,12 +147,12 @@ const sql = `select id,name from user1;`
 // parseTree
 const tree = parser.parse(sql)
 class MyVisitor extends SqlParserVisitor {
-    // 重写 visitTableName 方法
+    // overwrite visitTableName
     visitTableName(ctx) {
         let tableName = ctx.getText().toLowerCase()
         console.log('TableName', tableName)
     }
-    // 重写 visitSelectElements 方法
+    // overwrite visitSelectElements
     visitSelectElements(ctx) {
         let selectElements = ctx.getText().toLowerCase()
         console.log('SelectElements', selectElements)
@@ -167,11 +167,11 @@ TableName user1
 */
 
 ```
-提示：使用 Visitor 模式时，节点的方法名称可以在对应 SQL 目录下的 Visitor 文件中查找
+tips: The node's method name can be found in the Visitor file under the corresponding SQL directory
 
 ### Listener
 
-listener 模式，利用 [ANTLR4](https://github.com/antlr/antlr4) 提供的 ParseTreeWalker 对象遍历 AST，进入各个节点时调用对应的方法。
+access the specified node in the AST by Listener pattern
 
 ```javascript
 import { GenericSQL, SqlParserListener } from 'dt-sql-parser';
@@ -200,17 +200,17 @@ TableName user1
 
 ```
 
-提示：使用 Listener 模式时，节点的方法名称可以在对应 SQL 目录下的 Listener 文件中查找
+tips: The node's method name can be found in the Listener file under the corresponding SQL directory
 
-### 其他
+### Other
 
-- parserTreeToString 将 SQL 解析成 AST，再转成 string 形式
+- parserTreeToString (parse the SQL into AST and turn it into a String)
 
-## 路线图
+## Roadmap
 
 - Auto-complete
 - Impala SQL
 
-## 许可证
+## License
 
 [MIT](./LICENSE)

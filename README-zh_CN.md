@@ -204,7 +204,7 @@ TableName user1
 
 ### 其他
 
-- parserTreeToString 将 SQL 解析成 AST，再转成 string 形式
+- parserTreeToString (将 SQL 解析成 AST，再转成 string 形式)
 
 ## 路线图
 
