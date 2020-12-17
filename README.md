@@ -2,18 +2,16 @@
 
 [![NPM version][npm-image]][npm-url]
 
+English | [简体中文](./README-zh_CN.md)
+
 [npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/dt-sql-parser
 
-English | [简体中文](./README-zh_CN.md)
+dt-sql-parser is a `SQL Parser` project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the `BigData` domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete `validate`, `tokenize`, `traverse` the AST, and so on features.
 
-dt-sql-parser is a collection of SQL parsers developed based on [ANTLR4](https://github.com/antlr/antlr4) .It's mainly used for parsing all kinds of SQL in the development of big data.
+Besides, it' provides some helper methods, like `split` SQL, and filter the `--` and `/**/` types of comments in SQL.
 
-It provides the basic class, Visitor class, and Listener class. These class including the ability to generate tokens, generate parse tree, syntax validation, and Visitor & Listener patterns to traverse the AST.
-
-In addition, several helper methods are provided to format the SQL before parsing. The main effect is to clear the '--' and '/**/' types of comments in SQL statements, and to split large chunks of SQL
-
-tips: The Grammar file can also be compiled into other languages with [ANTLR4](https://github.com/antlr/antlr4) .
+> Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
 
 Supported SQL:
 
@@ -25,7 +23,7 @@ Supported SQL:
 
 ## Installation
 
-```
+```bash
 // use npm
 npm i dt-sql-parser --save
 
@@ -35,43 +33,61 @@ yarn add dt-sql-parser
 
 ## Usage
 
-### Clean
+### Syntax Validation
 
-clear comments and Spaces before and after
+First, we need to import the `Parser` object from `dt-sql-parser`, the different language needs
+different Parser, so if you need to handle the `Flink SQL`, you can import the `FlinkSQL Parser`.
+
+The below is a `GenericSQL Parser` example:
 
 ```javascript
-import { cleanSql } from 'dt-sql-parser';
+import { GenericSQL } from 'dt-sql-parser';
 
-const sql = `-- comment comment
-select id,name from user1; `
-const cleanedSql = cleanSql(sql)
-console.log(cleanedSql)
+const parser = new GenericSQL();
 
+const correctSql = 'select id,name from user1;';
+const errors = parser.validate(correctSql);
+console.log(errors); 
+```
+
+output:
+
+```javascript
 /*
-select id,name from user1;
+[]
 */
 ```
 
-### Split
-
-split sql
+validate failed:
 
 ```javascript
-import { splitSql } from 'dt-sql-parser';
+const incorrectSql = 'selec id,name from user1;'
+const errors = parser.validate(incorrectSql);
+console.log(errors); 
+```
 
-const sql = `select id,name from user1;
-select id,name from user2;`
-const sqlList = splitSql(sql)
-console.log(sqlList)
+output:
 
+```javascript
 /*
-["select id,name from user1;", "\nselect id,name from user2;"]
+[
+    {
+        endCol: 5,
+        endLine: 1,
+        startCol: 0,
+        startLine: 1,
+        message: "mismatched input 'SELEC' expecting {<EOF>, 'ALTER', 'ANALYZE', 'CALL', 'CHANGE', 'CHECK', 'CREATE', 'DELETE', 'DESC', 'DESCRIBE', 'DROP', 'EXPLAIN', 'GET', 'GRANT', 'INSERT', 'KILL', 'LOAD', 'LOCK', 'OPTIMIZE', 'PURGE', 'RELEASE', 'RENAME', 'REPLACE', 'RESIGNAL', 'REVOKE', 'SELECT', 'SET', 'SHOW', 'SIGNAL', 'UNLOCK', 'UPDATE', 'USE', 'BEGIN', 'BINLOG', 'CACHE', 'CHECKSUM', 'COMMIT', 'DEALLOCATE', 'DO', 'FLUSH', 'HANDLER', 'HELP', 'INSTALL', 'PREPARE', 'REPAIR', 'RESET', 'ROLLBACK', 'SAVEPOINT', 'START', 'STOP', 'TRUNCATE', 'UNINSTALL', 'XA', 'EXECUTE', 'SHUTDOWN', '--', '(', ';'}"
+    }
+]
 */
 ```
 
-### Tokens
+We instanced a Parser object, and use the `validate` method to check the SQL syntax, if failed
+returns an array object includes `error` message.
 
-lexical analysis, generate token
+### Tokenizer
+
+You can also the all `tokens` by the Parser:
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
@@ -99,47 +115,9 @@ console.log(tokens)
 */
 ```
 
-### Syntax validation
-
-verifies the syntax correctness of the SQL statement and returns an array of errors
-
-```javascript
-import { GenericSQL } from 'dt-sql-parser';
-
-const validate = (sql) => {
-    const parser = new GenericSQL()
-    const errors = parser.validate(sql)
-    console.log(errors)
-}
-```
-correct sql:
-```javascript
-const correctSql = 'select id,name from user1;'
-validate(correctSql)
-/*
-[]
-*/
-```
-incorrect sql:
-```javascript
-const incorrectSql = 'selec id,name from user1;'
-validate(incorrectSql)
-/*
-[
-    {
-        endCol: 5,
-        endLine: 1,
-        startCol: 0,
-        startLine: 1,
-        message: "mismatched input 'SELEC' expecting {<EOF>, 'ALTER', 'ANALYZE', 'CALL', 'CHANGE', 'CHECK', 'CREATE', 'DELETE', 'DESC', 'DESCRIBE', 'DROP', 'EXPLAIN', 'GET', 'GRANT', 'INSERT', 'KILL', 'LOAD', 'LOCK', 'OPTIMIZE', 'PURGE', 'RELEASE', 'RENAME', 'REPLACE', 'RESIGNAL', 'REVOKE', 'SELECT', 'SET', 'SHOW', 'SIGNAL', 'UNLOCK', 'UPDATE', 'USE', 'BEGIN', 'BINLOG', 'CACHE', 'CHECKSUM', 'COMMIT', 'DEALLOCATE', 'DO', 'FLUSH', 'HANDLER', 'HELP', 'INSTALL', 'PREPARE', 'REPAIR', 'RESET', 'ROLLBACK', 'SAVEPOINT', 'START', 'STOP', 'TRUNCATE', 'UNINSTALL', 'XA', 'EXECUTE', 'SHUTDOWN', '--', '(', ';'}"
-    }
-]
-*/
-```
-
 ### Visitor
 
-access the specified node in the AST by Visitor pattern
+Traverse the tree node by the Visitor:
 
 ```javascript
 import { GenericSQL, SqlParserVisitor } from 'dt-sql-parser';
@@ -169,7 +147,8 @@ TableName user1
 */
 
 ```
-tips: The node's method name can be found in the Visitor file under the corresponding SQL directory
+
+> Tips: The node's method name can be found in the Visitor file under the corresponding SQL directory
 
 ### Listener
 
@@ -202,11 +181,47 @@ TableName user1
 
 ```
 
-tips: The node's method name can be found in the Listener file under the corresponding SQL directory
+> Tips: The node's method name can be found in the Listener file under the corresponding SQL directory
 
-### Other
+### Clean
 
-- parserTreeToString (parse the SQL into AST and turn it into a String)
+Clear the `comments` and `spaces` before and after
+
+```javascript
+import { cleanSql } from 'dt-sql-parser';
+
+const sql = `-- comment comment
+select id,name from user1; `
+const cleanedSql = cleanSql(sql)
+console.log(cleanedSql)
+
+/*
+select id,name from user1;
+*/
+```
+
+### Split SQL
+
+When the SQL text is very big, you can think about to split it by `;` , and handle each line.
+
+```javascript
+import { splitSql } from 'dt-sql-parser';
+
+const sql = `select id,name from user1;
+select id,name from user2;`
+const sqlList = splitSql(sql)
+console.log(sqlList)
+
+/*
+["select id,name from user1;", "\nselect id,name from user2;"]
+*/
+```
+
+### Other API
+
+- parserTreeToString(input: string)
+
+Parse the input and convert the AST to a `List-like` tree string.
 
 ## Roadmap
 
