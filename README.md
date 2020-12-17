@@ -50,7 +50,7 @@ const errors = parser.validate(correctSql);
 console.log(errors); 
 ```
 
-output:
+Output:
 
 ```javascript
 /*
@@ -58,7 +58,7 @@ output:
 */
 ```
 
-validate failed:
+Validate failed:
 
 ```javascript
 const incorrectSql = 'selec id,name from user1;'
@@ -66,7 +66,7 @@ const errors = parser.validate(incorrectSql);
 console.log(errors); 
 ```
 
-output:
+Output:
 
 ```javascript
 /*
