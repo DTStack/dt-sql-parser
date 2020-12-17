@@ -1,4 +1,4 @@
-import SQLParser, { SqlBaseVisitor } from '../../../src/parser/spark';
+import SQLParser, { SparkSqlVisitor } from '../../../src/parser/spark';
 
 describe('Spark SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -13,7 +13,7 @@ describe('Spark SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends SqlBaseVisitor {
+        class MyVisitor extends SparkSqlVisitor {
             visitTableName(ctx): void {
                 result = ctx.getText().toLowerCase();
                 super.visitTableName(ctx);

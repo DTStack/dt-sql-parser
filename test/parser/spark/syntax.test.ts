@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import SQLParser from '../../../src/parser/spark';
 
-// const log = console.log.bind(console);
 const error = console.log.bind(console, '***** error\n');
 
 const validateTest = (sqls) => {

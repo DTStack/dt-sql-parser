@@ -1,4 +1,4 @@
-// Generated from /Users/jinjiongxi/workspace/dt-sql-parser/src/grammar/spark/SqlBase.g4 by ANTLR 4.8
+// Generated from /Users/jinjiongxi/workspace/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -1755,7 +1755,7 @@ var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
 var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new antlr4.dfa.DFA(ds, index); });
 
-function SqlBaseLexer(input) {
+function SparkSqlLexer(input) {
 	antlr4.Lexer.call(this, input);
     this._interp = new antlr4.atn.LexerATNSimulator(this, atn, decisionsToDFA, new antlr4.PredictionContextCache());
 
@@ -1792,572 +1792,579 @@ function SqlBaseLexer(input) {
     return this;
 }
 
-SqlBaseLexer.prototype = Object.create(antlr4.Lexer.prototype);
-SqlBaseLexer.prototype.constructor = SqlBaseLexer;
+SparkSqlLexer.prototype = Object.create(antlr4.Lexer.prototype);
+SparkSqlLexer.prototype.constructor = SparkSqlLexer;
 
-Object.defineProperty(SqlBaseLexer.prototype, "atn", {
+Object.defineProperty(SparkSqlLexer.prototype, "atn", {
         get : function() {
                 return atn;
         }
 });
 
-SqlBaseLexer.EOF = antlr4.Token.EOF;
-SqlBaseLexer.T__0 = 1;
-SqlBaseLexer.T__1 = 2;
-SqlBaseLexer.T__2 = 3;
-SqlBaseLexer.T__3 = 4;
-SqlBaseLexer.T__4 = 5;
-SqlBaseLexer.T__5 = 6;
-SqlBaseLexer.T__6 = 7;
-SqlBaseLexer.T__7 = 8;
-SqlBaseLexer.T__8 = 9;
-SqlBaseLexer.T__9 = 10;
-SqlBaseLexer.T__10 = 11;
-SqlBaseLexer.ADD = 12;
-SqlBaseLexer.AFTER = 13;
-SqlBaseLexer.ALL = 14;
-SqlBaseLexer.ALTER = 15;
-SqlBaseLexer.ANALYZE = 16;
-SqlBaseLexer.AND = 17;
-SqlBaseLexer.ANTI = 18;
-SqlBaseLexer.ANY = 19;
-SqlBaseLexer.ARCHIVE = 20;
-SqlBaseLexer.ARRAY = 21;
-SqlBaseLexer.AS = 22;
-SqlBaseLexer.ASC = 23;
-SqlBaseLexer.AT = 24;
-SqlBaseLexer.AUTHORIZATION = 25;
-SqlBaseLexer.BETWEEN = 26;
-SqlBaseLexer.BOTH = 27;
-SqlBaseLexer.BUCKET = 28;
-SqlBaseLexer.BUCKETS = 29;
-SqlBaseLexer.BY = 30;
-SqlBaseLexer.CACHE = 31;
-SqlBaseLexer.CASCADE = 32;
-SqlBaseLexer.CASE = 33;
-SqlBaseLexer.CAST = 34;
-SqlBaseLexer.CHANGE = 35;
-SqlBaseLexer.CHECK = 36;
-SqlBaseLexer.CLEAR = 37;
-SqlBaseLexer.CLUSTER = 38;
-SqlBaseLexer.CLUSTERED = 39;
-SqlBaseLexer.CODEGEN = 40;
-SqlBaseLexer.COLLATE = 41;
-SqlBaseLexer.COLLECTION = 42;
-SqlBaseLexer.COLUMN = 43;
-SqlBaseLexer.COLUMNS = 44;
-SqlBaseLexer.COMMENT = 45;
-SqlBaseLexer.COMMIT = 46;
-SqlBaseLexer.COMPACT = 47;
-SqlBaseLexer.COMPACTIONS = 48;
-SqlBaseLexer.COMPUTE = 49;
-SqlBaseLexer.CONCATENATE = 50;
-SqlBaseLexer.CONSTRAINT = 51;
-SqlBaseLexer.COST = 52;
-SqlBaseLexer.CREATE = 53;
-SqlBaseLexer.CROSS = 54;
-SqlBaseLexer.CUBE = 55;
-SqlBaseLexer.CURRENT = 56;
-SqlBaseLexer.CURRENT_DATE = 57;
-SqlBaseLexer.CURRENT_TIME = 58;
-SqlBaseLexer.CURRENT_TIMESTAMP = 59;
-SqlBaseLexer.CURRENT_USER = 60;
-SqlBaseLexer.DATA = 61;
-SqlBaseLexer.DATABASE = 62;
-SqlBaseLexer.DATABASES = 63;
-SqlBaseLexer.DBPROPERTIES = 64;
-SqlBaseLexer.DEFINED = 65;
-SqlBaseLexer.DELETE = 66;
-SqlBaseLexer.DELIMITED = 67;
-SqlBaseLexer.DESC = 68;
-SqlBaseLexer.DESCRIBE = 69;
-SqlBaseLexer.DFS = 70;
-SqlBaseLexer.DIRECTORIES = 71;
-SqlBaseLexer.DIRECTORY = 72;
-SqlBaseLexer.DISTINCT = 73;
-SqlBaseLexer.DISTRIBUTE = 74;
-SqlBaseLexer.DIV = 75;
-SqlBaseLexer.DROP = 76;
-SqlBaseLexer.ELSE = 77;
-SqlBaseLexer.END = 78;
-SqlBaseLexer.ESCAPE = 79;
-SqlBaseLexer.ESCAPED = 80;
-SqlBaseLexer.EXCEPT = 81;
-SqlBaseLexer.EXCHANGE = 82;
-SqlBaseLexer.EXISTS = 83;
-SqlBaseLexer.EXPLAIN = 84;
-SqlBaseLexer.EXPORT = 85;
-SqlBaseLexer.EXTENDED = 86;
-SqlBaseLexer.EXTERNAL = 87;
-SqlBaseLexer.EXTRACT = 88;
-SqlBaseLexer.FALSE = 89;
-SqlBaseLexer.FETCH = 90;
-SqlBaseLexer.FIELDS = 91;
-SqlBaseLexer.FILTER = 92;
-SqlBaseLexer.FILEFORMAT = 93;
-SqlBaseLexer.FIRST = 94;
-SqlBaseLexer.FOLLOWING = 95;
-SqlBaseLexer.FOR = 96;
-SqlBaseLexer.FOREIGN = 97;
-SqlBaseLexer.FORMAT = 98;
-SqlBaseLexer.FORMATTED = 99;
-SqlBaseLexer.FROM = 100;
-SqlBaseLexer.FULL = 101;
-SqlBaseLexer.FUNCTION = 102;
-SqlBaseLexer.FUNCTIONS = 103;
-SqlBaseLexer.GLOBAL = 104;
-SqlBaseLexer.GRANT = 105;
-SqlBaseLexer.GROUP = 106;
-SqlBaseLexer.GROUPING = 107;
-SqlBaseLexer.HAVING = 108;
-SqlBaseLexer.IF = 109;
-SqlBaseLexer.IGNORE = 110;
-SqlBaseLexer.IMPORT = 111;
-SqlBaseLexer.IN = 112;
-SqlBaseLexer.INDEX = 113;
-SqlBaseLexer.INDEXES = 114;
-SqlBaseLexer.INNER = 115;
-SqlBaseLexer.INPATH = 116;
-SqlBaseLexer.INPUTFORMAT = 117;
-SqlBaseLexer.INSERT = 118;
-SqlBaseLexer.INTERSECT = 119;
-SqlBaseLexer.INTERVAL = 120;
-SqlBaseLexer.INTO = 121;
-SqlBaseLexer.IS = 122;
-SqlBaseLexer.ITEMS = 123;
-SqlBaseLexer.JOIN = 124;
-SqlBaseLexer.KEYS = 125;
-SqlBaseLexer.LAST = 126;
-SqlBaseLexer.LATERAL = 127;
-SqlBaseLexer.LAZY = 128;
-SqlBaseLexer.LEADING = 129;
-SqlBaseLexer.LEFT = 130;
-SqlBaseLexer.LIKE = 131;
-SqlBaseLexer.LIMIT = 132;
-SqlBaseLexer.LINES = 133;
-SqlBaseLexer.LIST = 134;
-SqlBaseLexer.LOAD = 135;
-SqlBaseLexer.LOCAL = 136;
-SqlBaseLexer.LOCATION = 137;
-SqlBaseLexer.LOCK = 138;
-SqlBaseLexer.LOCKS = 139;
-SqlBaseLexer.LOGICAL = 140;
-SqlBaseLexer.MACRO = 141;
-SqlBaseLexer.MAP = 142;
-SqlBaseLexer.MATCHED = 143;
-SqlBaseLexer.MERGE = 144;
-SqlBaseLexer.MSCK = 145;
-SqlBaseLexer.NAMESPACE = 146;
-SqlBaseLexer.NAMESPACES = 147;
-SqlBaseLexer.NATURAL = 148;
-SqlBaseLexer.NO = 149;
-SqlBaseLexer.NOT = 150;
-SqlBaseLexer.NULL = 151;
-SqlBaseLexer.NULLS = 152;
-SqlBaseLexer.OF = 153;
-SqlBaseLexer.ON = 154;
-SqlBaseLexer.ONLY = 155;
-SqlBaseLexer.OPTION = 156;
-SqlBaseLexer.OPTIONS = 157;
-SqlBaseLexer.OR = 158;
-SqlBaseLexer.ORDER = 159;
-SqlBaseLexer.OUT = 160;
-SqlBaseLexer.OUTER = 161;
-SqlBaseLexer.OUTPUTFORMAT = 162;
-SqlBaseLexer.OVER = 163;
-SqlBaseLexer.OVERLAPS = 164;
-SqlBaseLexer.OVERLAY = 165;
-SqlBaseLexer.OVERWRITE = 166;
-SqlBaseLexer.PARTITION = 167;
-SqlBaseLexer.PARTITIONED = 168;
-SqlBaseLexer.PARTITIONS = 169;
-SqlBaseLexer.PERCENTLIT = 170;
-SqlBaseLexer.PIVOT = 171;
-SqlBaseLexer.PLACING = 172;
-SqlBaseLexer.POSITION = 173;
-SqlBaseLexer.PRECEDING = 174;
-SqlBaseLexer.PRIMARY = 175;
-SqlBaseLexer.PRINCIPALS = 176;
-SqlBaseLexer.PROPERTIES = 177;
-SqlBaseLexer.PURGE = 178;
-SqlBaseLexer.QUERY = 179;
-SqlBaseLexer.RANGE = 180;
-SqlBaseLexer.RECORDREADER = 181;
-SqlBaseLexer.RECORDWRITER = 182;
-SqlBaseLexer.RECOVER = 183;
-SqlBaseLexer.REDUCE = 184;
-SqlBaseLexer.REFERENCES = 185;
-SqlBaseLexer.REFRESH = 186;
-SqlBaseLexer.RENAME = 187;
-SqlBaseLexer.REPAIR = 188;
-SqlBaseLexer.REPLACE = 189;
-SqlBaseLexer.RESET = 190;
-SqlBaseLexer.RESTRICT = 191;
-SqlBaseLexer.REVOKE = 192;
-SqlBaseLexer.RIGHT = 193;
-SqlBaseLexer.RLIKE = 194;
-SqlBaseLexer.ROLE = 195;
-SqlBaseLexer.ROLES = 196;
-SqlBaseLexer.ROLLBACK = 197;
-SqlBaseLexer.ROLLUP = 198;
-SqlBaseLexer.ROW = 199;
-SqlBaseLexer.ROWS = 200;
-SqlBaseLexer.SCHEMA = 201;
-SqlBaseLexer.SELECT = 202;
-SqlBaseLexer.SEMI = 203;
-SqlBaseLexer.SEPARATED = 204;
-SqlBaseLexer.SERDE = 205;
-SqlBaseLexer.SERDEPROPERTIES = 206;
-SqlBaseLexer.SESSION_USER = 207;
-SqlBaseLexer.SET = 208;
-SqlBaseLexer.SETMINUS = 209;
-SqlBaseLexer.SETS = 210;
-SqlBaseLexer.SHOW = 211;
-SqlBaseLexer.SKEWED = 212;
-SqlBaseLexer.SOME = 213;
-SqlBaseLexer.SORT = 214;
-SqlBaseLexer.SORTED = 215;
-SqlBaseLexer.START = 216;
-SqlBaseLexer.STATISTICS = 217;
-SqlBaseLexer.STORED = 218;
-SqlBaseLexer.STRATIFY = 219;
-SqlBaseLexer.STRUCT = 220;
-SqlBaseLexer.SUBSTR = 221;
-SqlBaseLexer.SUBSTRING = 222;
-SqlBaseLexer.TABLE = 223;
-SqlBaseLexer.TABLES = 224;
-SqlBaseLexer.TABLESAMPLE = 225;
-SqlBaseLexer.TBLPROPERTIES = 226;
-SqlBaseLexer.TEMPORARY = 227;
-SqlBaseLexer.TERMINATED = 228;
-SqlBaseLexer.THEN = 229;
-SqlBaseLexer.TIME = 230;
-SqlBaseLexer.TO = 231;
-SqlBaseLexer.TOUCH = 232;
-SqlBaseLexer.TRAILING = 233;
-SqlBaseLexer.TRANSACTION = 234;
-SqlBaseLexer.TRANSACTIONS = 235;
-SqlBaseLexer.TRANSFORM = 236;
-SqlBaseLexer.TRIM = 237;
-SqlBaseLexer.TRUE = 238;
-SqlBaseLexer.TRUNCATE = 239;
-SqlBaseLexer.TYPE = 240;
-SqlBaseLexer.UNARCHIVE = 241;
-SqlBaseLexer.UNBOUNDED = 242;
-SqlBaseLexer.UNCACHE = 243;
-SqlBaseLexer.UNION = 244;
-SqlBaseLexer.UNIQUE = 245;
-SqlBaseLexer.UNKNOWN = 246;
-SqlBaseLexer.UNLOCK = 247;
-SqlBaseLexer.UNSET = 248;
-SqlBaseLexer.UPDATE = 249;
-SqlBaseLexer.USE = 250;
-SqlBaseLexer.USER = 251;
-SqlBaseLexer.USING = 252;
-SqlBaseLexer.VALUES = 253;
-SqlBaseLexer.VIEW = 254;
-SqlBaseLexer.VIEWS = 255;
-SqlBaseLexer.WHEN = 256;
-SqlBaseLexer.WHERE = 257;
-SqlBaseLexer.WINDOW = 258;
-SqlBaseLexer.WITH = 259;
-SqlBaseLexer.ZONE = 260;
-SqlBaseLexer.EQ = 261;
-SqlBaseLexer.NSEQ = 262;
-SqlBaseLexer.NEQ = 263;
-SqlBaseLexer.NEQJ = 264;
-SqlBaseLexer.LT = 265;
-SqlBaseLexer.LTE = 266;
-SqlBaseLexer.GT = 267;
-SqlBaseLexer.GTE = 268;
-SqlBaseLexer.PLUS = 269;
-SqlBaseLexer.MINUS = 270;
-SqlBaseLexer.ASTERISK = 271;
-SqlBaseLexer.SLASH = 272;
-SqlBaseLexer.PERCENT = 273;
-SqlBaseLexer.TILDE = 274;
-SqlBaseLexer.AMPERSAND = 275;
-SqlBaseLexer.PIPE = 276;
-SqlBaseLexer.CONCAT_PIPE = 277;
-SqlBaseLexer.HAT = 278;
-SqlBaseLexer.STRING = 279;
-SqlBaseLexer.BIGINT_LITERAL = 280;
-SqlBaseLexer.SMALLINT_LITERAL = 281;
-SqlBaseLexer.TINYINT_LITERAL = 282;
-SqlBaseLexer.INTEGER_VALUE = 283;
-SqlBaseLexer.EXPONENT_VALUE = 284;
-SqlBaseLexer.DECIMAL_VALUE = 285;
-SqlBaseLexer.FLOAT_LITERAL = 286;
-SqlBaseLexer.DOUBLE_LITERAL = 287;
-SqlBaseLexer.BIGDECIMAL_LITERAL = 288;
-SqlBaseLexer.IDENTIFIER = 289;
-SqlBaseLexer.BACKQUOTED_IDENTIFIER = 290;
-SqlBaseLexer.SIMPLE_COMMENT = 291;
-SqlBaseLexer.BRACKETED_COMMENT = 292;
-SqlBaseLexer.WS = 293;
-SqlBaseLexer.UNRECOGNIZED = 294;
+SparkSqlLexer.EOF = antlr4.Token.EOF;
+SparkSqlLexer.T__0 = 1;
+SparkSqlLexer.T__1 = 2;
+SparkSqlLexer.T__2 = 3;
+SparkSqlLexer.T__3 = 4;
+SparkSqlLexer.T__4 = 5;
+SparkSqlLexer.T__5 = 6;
+SparkSqlLexer.T__6 = 7;
+SparkSqlLexer.T__7 = 8;
+SparkSqlLexer.T__8 = 9;
+SparkSqlLexer.T__9 = 10;
+SparkSqlLexer.T__10 = 11;
+SparkSqlLexer.ADD = 12;
+SparkSqlLexer.AFTER = 13;
+SparkSqlLexer.ALL = 14;
+SparkSqlLexer.ALTER = 15;
+SparkSqlLexer.ANALYZE = 16;
+SparkSqlLexer.AND = 17;
+SparkSqlLexer.ANTI = 18;
+SparkSqlLexer.ANY = 19;
+SparkSqlLexer.ARCHIVE = 20;
+SparkSqlLexer.ARRAY = 21;
+SparkSqlLexer.AS = 22;
+SparkSqlLexer.ASC = 23;
+SparkSqlLexer.AT = 24;
+SparkSqlLexer.AUTHORIZATION = 25;
+SparkSqlLexer.BETWEEN = 26;
+SparkSqlLexer.BOTH = 27;
+SparkSqlLexer.BUCKET = 28;
+SparkSqlLexer.BUCKETS = 29;
+SparkSqlLexer.BY = 30;
+SparkSqlLexer.CACHE = 31;
+SparkSqlLexer.CASCADE = 32;
+SparkSqlLexer.CASE = 33;
+SparkSqlLexer.CAST = 34;
+SparkSqlLexer.CHANGE = 35;
+SparkSqlLexer.CHECK = 36;
+SparkSqlLexer.CLEAR = 37;
+SparkSqlLexer.CLUSTER = 38;
+SparkSqlLexer.CLUSTERED = 39;
+SparkSqlLexer.CODEGEN = 40;
+SparkSqlLexer.COLLATE = 41;
+SparkSqlLexer.COLLECTION = 42;
+SparkSqlLexer.COLUMN = 43;
+SparkSqlLexer.COLUMNS = 44;
+SparkSqlLexer.COMMENT = 45;
+SparkSqlLexer.COMMIT = 46;
+SparkSqlLexer.COMPACT = 47;
+SparkSqlLexer.COMPACTIONS = 48;
+SparkSqlLexer.COMPUTE = 49;
+SparkSqlLexer.CONCATENATE = 50;
+SparkSqlLexer.CONSTRAINT = 51;
+SparkSqlLexer.COST = 52;
+SparkSqlLexer.CREATE = 53;
+SparkSqlLexer.CROSS = 54;
+SparkSqlLexer.CUBE = 55;
+SparkSqlLexer.CURRENT = 56;
+SparkSqlLexer.CURRENT_DATE = 57;
+SparkSqlLexer.CURRENT_TIME = 58;
+SparkSqlLexer.CURRENT_TIMESTAMP = 59;
+SparkSqlLexer.CURRENT_USER = 60;
+SparkSqlLexer.DATA = 61;
+SparkSqlLexer.DATABASE = 62;
+SparkSqlLexer.DATABASES = 63;
+SparkSqlLexer.DBPROPERTIES = 64;
+SparkSqlLexer.DEFINED = 65;
+SparkSqlLexer.DELETE = 66;
+SparkSqlLexer.DELIMITED = 67;
+SparkSqlLexer.DESC = 68;
+SparkSqlLexer.DESCRIBE = 69;
+SparkSqlLexer.DFS = 70;
+SparkSqlLexer.DIRECTORIES = 71;
+SparkSqlLexer.DIRECTORY = 72;
+SparkSqlLexer.DISTINCT = 73;
+SparkSqlLexer.DISTRIBUTE = 74;
+SparkSqlLexer.DIV = 75;
+SparkSqlLexer.DROP = 76;
+SparkSqlLexer.ELSE = 77;
+SparkSqlLexer.END = 78;
+SparkSqlLexer.ESCAPE = 79;
+SparkSqlLexer.ESCAPED = 80;
+SparkSqlLexer.EXCEPT = 81;
+SparkSqlLexer.EXCHANGE = 82;
+SparkSqlLexer.EXISTS = 83;
+SparkSqlLexer.EXPLAIN = 84;
+SparkSqlLexer.EXPORT = 85;
+SparkSqlLexer.EXTENDED = 86;
+SparkSqlLexer.EXTERNAL = 87;
+SparkSqlLexer.EXTRACT = 88;
+SparkSqlLexer.FALSE = 89;
+SparkSqlLexer.FETCH = 90;
+SparkSqlLexer.FIELDS = 91;
+SparkSqlLexer.FILTER = 92;
+SparkSqlLexer.FILEFORMAT = 93;
+SparkSqlLexer.FIRST = 94;
+SparkSqlLexer.FOLLOWING = 95;
+SparkSqlLexer.FOR = 96;
+SparkSqlLexer.FOREIGN = 97;
+SparkSqlLexer.FORMAT = 98;
+SparkSqlLexer.FORMATTED = 99;
+SparkSqlLexer.FROM = 100;
+SparkSqlLexer.FULL = 101;
+SparkSqlLexer.FUNCTION = 102;
+SparkSqlLexer.FUNCTIONS = 103;
+SparkSqlLexer.GLOBAL = 104;
+SparkSqlLexer.GRANT = 105;
+SparkSqlLexer.GROUP = 106;
+SparkSqlLexer.GROUPING = 107;
+SparkSqlLexer.HAVING = 108;
+SparkSqlLexer.IF = 109;
+SparkSqlLexer.IGNORE = 110;
+SparkSqlLexer.IMPORT = 111;
+SparkSqlLexer.IN = 112;
+SparkSqlLexer.INDEX = 113;
+SparkSqlLexer.INDEXES = 114;
+SparkSqlLexer.INNER = 115;
+SparkSqlLexer.INPATH = 116;
+SparkSqlLexer.INPUTFORMAT = 117;
+SparkSqlLexer.INSERT = 118;
+SparkSqlLexer.INTERSECT = 119;
+SparkSqlLexer.INTERVAL = 120;
+SparkSqlLexer.INTO = 121;
+SparkSqlLexer.IS = 122;
+SparkSqlLexer.ITEMS = 123;
+SparkSqlLexer.JOIN = 124;
+SparkSqlLexer.KEYS = 125;
+SparkSqlLexer.LAST = 126;
+SparkSqlLexer.LATERAL = 127;
+SparkSqlLexer.LAZY = 128;
+SparkSqlLexer.LEADING = 129;
+SparkSqlLexer.LEFT = 130;
+SparkSqlLexer.LIKE = 131;
+SparkSqlLexer.LIMIT = 132;
+SparkSqlLexer.LINES = 133;
+SparkSqlLexer.LIST = 134;
+SparkSqlLexer.LOAD = 135;
+SparkSqlLexer.LOCAL = 136;
+SparkSqlLexer.LOCATION = 137;
+SparkSqlLexer.LOCK = 138;
+SparkSqlLexer.LOCKS = 139;
+SparkSqlLexer.LOGICAL = 140;
+SparkSqlLexer.MACRO = 141;
+SparkSqlLexer.MAP = 142;
+SparkSqlLexer.MATCHED = 143;
+SparkSqlLexer.MERGE = 144;
+SparkSqlLexer.MSCK = 145;
+SparkSqlLexer.NAMESPACE = 146;
+SparkSqlLexer.NAMESPACES = 147;
+SparkSqlLexer.NATURAL = 148;
+SparkSqlLexer.NO = 149;
+SparkSqlLexer.NOT = 150;
+SparkSqlLexer.NULL = 151;
+SparkSqlLexer.NULLS = 152;
+SparkSqlLexer.OF = 153;
+SparkSqlLexer.ON = 154;
+SparkSqlLexer.ONLY = 155;
+SparkSqlLexer.OPTION = 156;
+SparkSqlLexer.OPTIONS = 157;
+SparkSqlLexer.OR = 158;
+SparkSqlLexer.ORDER = 159;
+SparkSqlLexer.OUT = 160;
+SparkSqlLexer.OUTER = 161;
+SparkSqlLexer.OUTPUTFORMAT = 162;
+SparkSqlLexer.OVER = 163;
+SparkSqlLexer.OVERLAPS = 164;
+SparkSqlLexer.OVERLAY = 165;
+SparkSqlLexer.OVERWRITE = 166;
+SparkSqlLexer.PARTITION = 167;
+SparkSqlLexer.PARTITIONED = 168;
+SparkSqlLexer.PARTITIONS = 169;
+SparkSqlLexer.PERCENTLIT = 170;
+SparkSqlLexer.PIVOT = 171;
+SparkSqlLexer.PLACING = 172;
+SparkSqlLexer.POSITION = 173;
+SparkSqlLexer.PRECEDING = 174;
+SparkSqlLexer.PRIMARY = 175;
+SparkSqlLexer.PRINCIPALS = 176;
+SparkSqlLexer.PROPERTIES = 177;
+SparkSqlLexer.PURGE = 178;
+SparkSqlLexer.QUERY = 179;
+SparkSqlLexer.RANGE = 180;
+SparkSqlLexer.RECORDREADER = 181;
+SparkSqlLexer.RECORDWRITER = 182;
+SparkSqlLexer.RECOVER = 183;
+SparkSqlLexer.REDUCE = 184;
+SparkSqlLexer.REFERENCES = 185;
+SparkSqlLexer.REFRESH = 186;
+SparkSqlLexer.RENAME = 187;
+SparkSqlLexer.REPAIR = 188;
+SparkSqlLexer.REPLACE = 189;
+SparkSqlLexer.RESET = 190;
+SparkSqlLexer.RESTRICT = 191;
+SparkSqlLexer.REVOKE = 192;
+SparkSqlLexer.RIGHT = 193;
+SparkSqlLexer.RLIKE = 194;
+SparkSqlLexer.ROLE = 195;
+SparkSqlLexer.ROLES = 196;
+SparkSqlLexer.ROLLBACK = 197;
+SparkSqlLexer.ROLLUP = 198;
+SparkSqlLexer.ROW = 199;
+SparkSqlLexer.ROWS = 200;
+SparkSqlLexer.SCHEMA = 201;
+SparkSqlLexer.SELECT = 202;
+SparkSqlLexer.SEMI = 203;
+SparkSqlLexer.SEPARATED = 204;
+SparkSqlLexer.SERDE = 205;
+SparkSqlLexer.SERDEPROPERTIES = 206;
+SparkSqlLexer.SESSION_USER = 207;
+SparkSqlLexer.SET = 208;
+SparkSqlLexer.SETMINUS = 209;
+SparkSqlLexer.SETS = 210;
+SparkSqlLexer.SHOW = 211;
+SparkSqlLexer.SKEWED = 212;
+SparkSqlLexer.SOME = 213;
+SparkSqlLexer.SORT = 214;
+SparkSqlLexer.SORTED = 215;
+SparkSqlLexer.START = 216;
+SparkSqlLexer.STATISTICS = 217;
+SparkSqlLexer.STORED = 218;
+SparkSqlLexer.STRATIFY = 219;
+SparkSqlLexer.STRUCT = 220;
+SparkSqlLexer.SUBSTR = 221;
+SparkSqlLexer.SUBSTRING = 222;
+SparkSqlLexer.TABLE = 223;
+SparkSqlLexer.TABLES = 224;
+SparkSqlLexer.TABLESAMPLE = 225;
+SparkSqlLexer.TBLPROPERTIES = 226;
+SparkSqlLexer.TEMPORARY = 227;
+SparkSqlLexer.TERMINATED = 228;
+SparkSqlLexer.THEN = 229;
+SparkSqlLexer.TIME = 230;
+SparkSqlLexer.TO = 231;
+SparkSqlLexer.TOUCH = 232;
+SparkSqlLexer.TRAILING = 233;
+SparkSqlLexer.TRANSACTION = 234;
+SparkSqlLexer.TRANSACTIONS = 235;
+SparkSqlLexer.TRANSFORM = 236;
+SparkSqlLexer.TRIM = 237;
+SparkSqlLexer.TRUE = 238;
+SparkSqlLexer.TRUNCATE = 239;
+SparkSqlLexer.TYPE = 240;
+SparkSqlLexer.UNARCHIVE = 241;
+SparkSqlLexer.UNBOUNDED = 242;
+SparkSqlLexer.UNCACHE = 243;
+SparkSqlLexer.UNION = 244;
+SparkSqlLexer.UNIQUE = 245;
+SparkSqlLexer.UNKNOWN = 246;
+SparkSqlLexer.UNLOCK = 247;
+SparkSqlLexer.UNSET = 248;
+SparkSqlLexer.UPDATE = 249;
+SparkSqlLexer.USE = 250;
+SparkSqlLexer.USER = 251;
+SparkSqlLexer.USING = 252;
+SparkSqlLexer.VALUES = 253;
+SparkSqlLexer.VIEW = 254;
+SparkSqlLexer.VIEWS = 255;
+SparkSqlLexer.WHEN = 256;
+SparkSqlLexer.WHERE = 257;
+SparkSqlLexer.WINDOW = 258;
+SparkSqlLexer.WITH = 259;
+SparkSqlLexer.ZONE = 260;
+SparkSqlLexer.EQ = 261;
+SparkSqlLexer.NSEQ = 262;
+SparkSqlLexer.NEQ = 263;
+SparkSqlLexer.NEQJ = 264;
+SparkSqlLexer.LT = 265;
+SparkSqlLexer.LTE = 266;
+SparkSqlLexer.GT = 267;
+SparkSqlLexer.GTE = 268;
+SparkSqlLexer.PLUS = 269;
+SparkSqlLexer.MINUS = 270;
+SparkSqlLexer.ASTERISK = 271;
+SparkSqlLexer.SLASH = 272;
+SparkSqlLexer.PERCENT = 273;
+SparkSqlLexer.TILDE = 274;
+SparkSqlLexer.AMPERSAND = 275;
+SparkSqlLexer.PIPE = 276;
+SparkSqlLexer.CONCAT_PIPE = 277;
+SparkSqlLexer.HAT = 278;
+SparkSqlLexer.STRING = 279;
+SparkSqlLexer.BIGINT_LITERAL = 280;
+SparkSqlLexer.SMALLINT_LITERAL = 281;
+SparkSqlLexer.TINYINT_LITERAL = 282;
+SparkSqlLexer.INTEGER_VALUE = 283;
+SparkSqlLexer.EXPONENT_VALUE = 284;
+SparkSqlLexer.DECIMAL_VALUE = 285;
+SparkSqlLexer.FLOAT_LITERAL = 286;
+SparkSqlLexer.DOUBLE_LITERAL = 287;
+SparkSqlLexer.BIGDECIMAL_LITERAL = 288;
+SparkSqlLexer.IDENTIFIER = 289;
+SparkSqlLexer.BACKQUOTED_IDENTIFIER = 290;
+SparkSqlLexer.SIMPLE_COMMENT = 291;
+SparkSqlLexer.BRACKETED_COMMENT = 292;
+SparkSqlLexer.WS = 293;
+SparkSqlLexer.UNRECOGNIZED = 294;
 
-SqlBaseLexer.prototype.channelNames = [ "DEFAULT_TOKEN_CHANNEL", "HIDDEN" ];
+SparkSqlLexer.prototype.channelNames = [ "DEFAULT_TOKEN_CHANNEL", "HIDDEN" ];
 
-SqlBaseLexer.prototype.modeNames = [ "DEFAULT_MODE" ];
+SparkSqlLexer.prototype.modeNames = [ "DEFAULT_MODE" ];
 
-SqlBaseLexer.prototype.literalNames = [ null, "';'", "'('", "')'", "','", 
-                                        "'.'", "'/*+'", "'*/'", "'->'", 
-                                        "'['", "']'", "':'", "'ADD'", "'AFTER'", 
-                                        "'ALL'", "'ALTER'", "'ANALYZE'", 
-                                        "'AND'", "'ANTI'", "'ANY'", "'ARCHIVE'", 
-                                        "'ARRAY'", "'AS'", "'ASC'", "'AT'", 
-                                        "'AUTHORIZATION'", "'BETWEEN'", 
-                                        "'BOTH'", "'BUCKET'", "'BUCKETS'", 
-                                        "'BY'", "'CACHE'", "'CASCADE'", 
-                                        "'CASE'", "'CAST'", "'CHANGE'", 
-                                        "'CHECK'", "'CLEAR'", "'CLUSTER'", 
-                                        "'CLUSTERED'", "'CODEGEN'", "'COLLATE'", 
-                                        "'COLLECTION'", "'COLUMN'", "'COLUMNS'", 
-                                        "'COMMENT'", "'COMMIT'", "'COMPACT'", 
-                                        "'COMPACTIONS'", "'COMPUTE'", "'CONCATENATE'", 
-                                        "'CONSTRAINT'", "'COST'", "'CREATE'", 
-                                        "'CROSS'", "'CUBE'", "'CURRENT'", 
-                                        "'CURRENT_DATE'", "'CURRENT_TIME'", 
-                                        "'CURRENT_TIMESTAMP'", "'CURRENT_USER'", 
-                                        "'DATA'", "'DATABASE'", null, "'DBPROPERTIES'", 
-                                        "'DEFINED'", "'DELETE'", "'DELIMITED'", 
-                                        "'DESC'", "'DESCRIBE'", "'DFS'", 
-                                        "'DIRECTORIES'", "'DIRECTORY'", 
-                                        "'DISTINCT'", "'DISTRIBUTE'", "'DIV'", 
-                                        "'DROP'", "'ELSE'", "'END'", "'ESCAPE'", 
-                                        "'ESCAPED'", "'EXCEPT'", "'EXCHANGE'", 
-                                        "'EXISTS'", "'EXPLAIN'", "'EXPORT'", 
-                                        "'EXTENDED'", "'EXTERNAL'", "'EXTRACT'", 
-                                        "'FALSE'", "'FETCH'", "'FIELDS'", 
-                                        "'FILTER'", "'FILEFORMAT'", "'FIRST'", 
-                                        "'FOLLOWING'", "'FOR'", "'FOREIGN'", 
-                                        "'FORMAT'", "'FORMATTED'", "'FROM'", 
-                                        "'FULL'", "'FUNCTION'", "'FUNCTIONS'", 
-                                        "'GLOBAL'", "'GRANT'", "'GROUP'", 
-                                        "'GROUPING'", "'HAVING'", "'IF'", 
-                                        "'IGNORE'", "'IMPORT'", "'IN'", 
-                                        "'INDEX'", "'INDEXES'", "'INNER'", 
-                                        "'INPATH'", "'INPUTFORMAT'", "'INSERT'", 
-                                        "'INTERSECT'", "'INTERVAL'", "'INTO'", 
-                                        "'IS'", "'ITEMS'", "'JOIN'", "'KEYS'", 
-                                        "'LAST'", "'LATERAL'", "'LAZY'", 
-                                        "'LEADING'", "'LEFT'", "'LIKE'", 
-                                        "'LIMIT'", "'LINES'", "'LIST'", 
-                                        "'LOAD'", "'LOCAL'", "'LOCATION'", 
-                                        "'LOCK'", "'LOCKS'", "'LOGICAL'", 
-                                        "'MACRO'", "'MAP'", "'MATCHED'", 
-                                        "'MERGE'", "'MSCK'", "'NAMESPACE'", 
-                                        "'NAMESPACES'", "'NATURAL'", "'NO'", 
-                                        null, "'NULL'", "'NULLS'", "'OF'", 
-                                        "'ON'", "'ONLY'", "'OPTION'", "'OPTIONS'", 
-                                        "'OR'", "'ORDER'", "'OUT'", "'OUTER'", 
-                                        "'OUTPUTFORMAT'", "'OVER'", "'OVERLAPS'", 
-                                        "'OVERLAY'", "'OVERWRITE'", "'PARTITION'", 
-                                        "'PARTITIONED'", "'PARTITIONS'", 
-                                        "'PERCENT'", "'PIVOT'", "'PLACING'", 
-                                        "'POSITION'", "'PRECEDING'", "'PRIMARY'", 
-                                        "'PRINCIPALS'", "'PROPERTIES'", 
-                                        "'PURGE'", "'QUERY'", "'RANGE'", 
-                                        "'RECORDREADER'", "'RECORDWRITER'", 
-                                        "'RECOVER'", "'REDUCE'", "'REFERENCES'", 
-                                        "'REFRESH'", "'RENAME'", "'REPAIR'", 
-                                        "'REPLACE'", "'RESET'", "'RESTRICT'", 
-                                        "'REVOKE'", "'RIGHT'", null, "'ROLE'", 
-                                        "'ROLES'", "'ROLLBACK'", "'ROLLUP'", 
-                                        "'ROW'", "'ROWS'", "'SCHEMA'", "'SELECT'", 
-                                        "'SEMI'", "'SEPARATED'", "'SERDE'", 
-                                        "'SERDEPROPERTIES'", "'SESSION_USER'", 
-                                        "'SET'", "'MINUS'", "'SETS'", "'SHOW'", 
-                                        "'SKEWED'", "'SOME'", "'SORT'", 
-                                        "'SORTED'", "'START'", "'STATISTICS'", 
-                                        "'STORED'", "'STRATIFY'", "'STRUCT'", 
-                                        "'SUBSTR'", "'SUBSTRING'", "'TABLE'", 
-                                        "'TABLES'", "'TABLESAMPLE'", "'TBLPROPERTIES'", 
-                                        null, "'TERMINATED'", "'THEN'", 
-                                        "'TIME'", "'TO'", "'TOUCH'", "'TRAILING'", 
-                                        "'TRANSACTION'", "'TRANSACTIONS'", 
-                                        "'TRANSFORM'", "'TRIM'", "'TRUE'", 
-                                        "'TRUNCATE'", "'TYPE'", "'UNARCHIVE'", 
-                                        "'UNBOUNDED'", "'UNCACHE'", "'UNION'", 
-                                        "'UNIQUE'", "'UNKNOWN'", "'UNLOCK'", 
-                                        "'UNSET'", "'UPDATE'", "'USE'", 
-                                        "'USER'", "'USING'", "'VALUES'", 
-                                        "'VIEW'", "'VIEWS'", "'WHEN'", "'WHERE'", 
-                                        "'WINDOW'", "'WITH'", "'ZONE'", 
-                                        null, "'<=>'", "'<>'", "'!='", "'<'", 
-                                        null, "'>'", null, "'+'", "'-'", 
-                                        "'*'", "'/'", "'%'", "'~'", "'&'", 
-                                        "'|'", "'||'", "'^'" ];
+SparkSqlLexer.prototype.literalNames = [ null, "';'", "'('", "')'", "','", 
+                                         "'.'", "'/*+'", "'*/'", "'->'", 
+                                         "'['", "']'", "':'", "'ADD'", "'AFTER'", 
+                                         "'ALL'", "'ALTER'", "'ANALYZE'", 
+                                         "'AND'", "'ANTI'", "'ANY'", "'ARCHIVE'", 
+                                         "'ARRAY'", "'AS'", "'ASC'", "'AT'", 
+                                         "'AUTHORIZATION'", "'BETWEEN'", 
+                                         "'BOTH'", "'BUCKET'", "'BUCKETS'", 
+                                         "'BY'", "'CACHE'", "'CASCADE'", 
+                                         "'CASE'", "'CAST'", "'CHANGE'", 
+                                         "'CHECK'", "'CLEAR'", "'CLUSTER'", 
+                                         "'CLUSTERED'", "'CODEGEN'", "'COLLATE'", 
+                                         "'COLLECTION'", "'COLUMN'", "'COLUMNS'", 
+                                         "'COMMENT'", "'COMMIT'", "'COMPACT'", 
+                                         "'COMPACTIONS'", "'COMPUTE'", "'CONCATENATE'", 
+                                         "'CONSTRAINT'", "'COST'", "'CREATE'", 
+                                         "'CROSS'", "'CUBE'", "'CURRENT'", 
+                                         "'CURRENT_DATE'", "'CURRENT_TIME'", 
+                                         "'CURRENT_TIMESTAMP'", "'CURRENT_USER'", 
+                                         "'DATA'", "'DATABASE'", null, "'DBPROPERTIES'", 
+                                         "'DEFINED'", "'DELETE'", "'DELIMITED'", 
+                                         "'DESC'", "'DESCRIBE'", "'DFS'", 
+                                         "'DIRECTORIES'", "'DIRECTORY'", 
+                                         "'DISTINCT'", "'DISTRIBUTE'", "'DIV'", 
+                                         "'DROP'", "'ELSE'", "'END'", "'ESCAPE'", 
+                                         "'ESCAPED'", "'EXCEPT'", "'EXCHANGE'", 
+                                         "'EXISTS'", "'EXPLAIN'", "'EXPORT'", 
+                                         "'EXTENDED'", "'EXTERNAL'", "'EXTRACT'", 
+                                         "'FALSE'", "'FETCH'", "'FIELDS'", 
+                                         "'FILTER'", "'FILEFORMAT'", "'FIRST'", 
+                                         "'FOLLOWING'", "'FOR'", "'FOREIGN'", 
+                                         "'FORMAT'", "'FORMATTED'", "'FROM'", 
+                                         "'FULL'", "'FUNCTION'", "'FUNCTIONS'", 
+                                         "'GLOBAL'", "'GRANT'", "'GROUP'", 
+                                         "'GROUPING'", "'HAVING'", "'IF'", 
+                                         "'IGNORE'", "'IMPORT'", "'IN'", 
+                                         "'INDEX'", "'INDEXES'", "'INNER'", 
+                                         "'INPATH'", "'INPUTFORMAT'", "'INSERT'", 
+                                         "'INTERSECT'", "'INTERVAL'", "'INTO'", 
+                                         "'IS'", "'ITEMS'", "'JOIN'", "'KEYS'", 
+                                         "'LAST'", "'LATERAL'", "'LAZY'", 
+                                         "'LEADING'", "'LEFT'", "'LIKE'", 
+                                         "'LIMIT'", "'LINES'", "'LIST'", 
+                                         "'LOAD'", "'LOCAL'", "'LOCATION'", 
+                                         "'LOCK'", "'LOCKS'", "'LOGICAL'", 
+                                         "'MACRO'", "'MAP'", "'MATCHED'", 
+                                         "'MERGE'", "'MSCK'", "'NAMESPACE'", 
+                                         "'NAMESPACES'", "'NATURAL'", "'NO'", 
+                                         null, "'NULL'", "'NULLS'", "'OF'", 
+                                         "'ON'", "'ONLY'", "'OPTION'", "'OPTIONS'", 
+                                         "'OR'", "'ORDER'", "'OUT'", "'OUTER'", 
+                                         "'OUTPUTFORMAT'", "'OVER'", "'OVERLAPS'", 
+                                         "'OVERLAY'", "'OVERWRITE'", "'PARTITION'", 
+                                         "'PARTITIONED'", "'PARTITIONS'", 
+                                         "'PERCENT'", "'PIVOT'", "'PLACING'", 
+                                         "'POSITION'", "'PRECEDING'", "'PRIMARY'", 
+                                         "'PRINCIPALS'", "'PROPERTIES'", 
+                                         "'PURGE'", "'QUERY'", "'RANGE'", 
+                                         "'RECORDREADER'", "'RECORDWRITER'", 
+                                         "'RECOVER'", "'REDUCE'", "'REFERENCES'", 
+                                         "'REFRESH'", "'RENAME'", "'REPAIR'", 
+                                         "'REPLACE'", "'RESET'", "'RESTRICT'", 
+                                         "'REVOKE'", "'RIGHT'", null, "'ROLE'", 
+                                         "'ROLES'", "'ROLLBACK'", "'ROLLUP'", 
+                                         "'ROW'", "'ROWS'", "'SCHEMA'", 
+                                         "'SELECT'", "'SEMI'", "'SEPARATED'", 
+                                         "'SERDE'", "'SERDEPROPERTIES'", 
+                                         "'SESSION_USER'", "'SET'", "'MINUS'", 
+                                         "'SETS'", "'SHOW'", "'SKEWED'", 
+                                         "'SOME'", "'SORT'", "'SORTED'", 
+                                         "'START'", "'STATISTICS'", "'STORED'", 
+                                         "'STRATIFY'", "'STRUCT'", "'SUBSTR'", 
+                                         "'SUBSTRING'", "'TABLE'", "'TABLES'", 
+                                         "'TABLESAMPLE'", "'TBLPROPERTIES'", 
+                                         null, "'TERMINATED'", "'THEN'", 
+                                         "'TIME'", "'TO'", "'TOUCH'", "'TRAILING'", 
+                                         "'TRANSACTION'", "'TRANSACTIONS'", 
+                                         "'TRANSFORM'", "'TRIM'", "'TRUE'", 
+                                         "'TRUNCATE'", "'TYPE'", "'UNARCHIVE'", 
+                                         "'UNBOUNDED'", "'UNCACHE'", "'UNION'", 
+                                         "'UNIQUE'", "'UNKNOWN'", "'UNLOCK'", 
+                                         "'UNSET'", "'UPDATE'", "'USE'", 
+                                         "'USER'", "'USING'", "'VALUES'", 
+                                         "'VIEW'", "'VIEWS'", "'WHEN'", 
+                                         "'WHERE'", "'WINDOW'", "'WITH'", 
+                                         "'ZONE'", null, "'<=>'", "'<>'", 
+                                         "'!='", "'<'", null, "'>'", null, 
+                                         "'+'", "'-'", "'*'", "'/'", "'%'", 
+                                         "'~'", "'&'", "'|'", "'||'", "'^'" ];
 
-SqlBaseLexer.prototype.symbolicNames = [ null, null, null, null, null, null, 
-                                         null, null, null, null, null, null, 
-                                         "ADD", "AFTER", "ALL", "ALTER", 
-                                         "ANALYZE", "AND", "ANTI", "ANY", 
-                                         "ARCHIVE", "ARRAY", "AS", "ASC", 
-                                         "AT", "AUTHORIZATION", "BETWEEN", 
-                                         "BOTH", "BUCKET", "BUCKETS", "BY", 
-                                         "CACHE", "CASCADE", "CASE", "CAST", 
-                                         "CHANGE", "CHECK", "CLEAR", "CLUSTER", 
-                                         "CLUSTERED", "CODEGEN", "COLLATE", 
-                                         "COLLECTION", "COLUMN", "COLUMNS", 
-                                         "COMMENT", "COMMIT", "COMPACT", 
-                                         "COMPACTIONS", "COMPUTE", "CONCATENATE", 
-                                         "CONSTRAINT", "COST", "CREATE", 
-                                         "CROSS", "CUBE", "CURRENT", "CURRENT_DATE", 
-                                         "CURRENT_TIME", "CURRENT_TIMESTAMP", 
-                                         "CURRENT_USER", "DATA", "DATABASE", 
-                                         "DATABASES", "DBPROPERTIES", "DEFINED", 
-                                         "DELETE", "DELIMITED", "DESC", 
-                                         "DESCRIBE", "DFS", "DIRECTORIES", 
-                                         "DIRECTORY", "DISTINCT", "DISTRIBUTE", 
-                                         "DIV", "DROP", "ELSE", "END", "ESCAPE", 
-                                         "ESCAPED", "EXCEPT", "EXCHANGE", 
-                                         "EXISTS", "EXPLAIN", "EXPORT", 
-                                         "EXTENDED", "EXTERNAL", "EXTRACT", 
-                                         "FALSE", "FETCH", "FIELDS", "FILTER", 
-                                         "FILEFORMAT", "FIRST", "FOLLOWING", 
-                                         "FOR", "FOREIGN", "FORMAT", "FORMATTED", 
-                                         "FROM", "FULL", "FUNCTION", "FUNCTIONS", 
-                                         "GLOBAL", "GRANT", "GROUP", "GROUPING", 
-                                         "HAVING", "IF", "IGNORE", "IMPORT", 
-                                         "IN", "INDEX", "INDEXES", "INNER", 
-                                         "INPATH", "INPUTFORMAT", "INSERT", 
-                                         "INTERSECT", "INTERVAL", "INTO", 
-                                         "IS", "ITEMS", "JOIN", "KEYS", 
-                                         "LAST", "LATERAL", "LAZY", "LEADING", 
-                                         "LEFT", "LIKE", "LIMIT", "LINES", 
-                                         "LIST", "LOAD", "LOCAL", "LOCATION", 
-                                         "LOCK", "LOCKS", "LOGICAL", "MACRO", 
-                                         "MAP", "MATCHED", "MERGE", "MSCK", 
-                                         "NAMESPACE", "NAMESPACES", "NATURAL", 
-                                         "NO", "NOT", "NULL", "NULLS", "OF", 
-                                         "ON", "ONLY", "OPTION", "OPTIONS", 
-                                         "OR", "ORDER", "OUT", "OUTER", 
-                                         "OUTPUTFORMAT", "OVER", "OVERLAPS", 
-                                         "OVERLAY", "OVERWRITE", "PARTITION", 
-                                         "PARTITIONED", "PARTITIONS", "PERCENTLIT", 
-                                         "PIVOT", "PLACING", "POSITION", 
-                                         "PRECEDING", "PRIMARY", "PRINCIPALS", 
-                                         "PROPERTIES", "PURGE", "QUERY", 
-                                         "RANGE", "RECORDREADER", "RECORDWRITER", 
-                                         "RECOVER", "REDUCE", "REFERENCES", 
-                                         "REFRESH", "RENAME", "REPAIR", 
-                                         "REPLACE", "RESET", "RESTRICT", 
-                                         "REVOKE", "RIGHT", "RLIKE", "ROLE", 
-                                         "ROLES", "ROLLBACK", "ROLLUP", 
-                                         "ROW", "ROWS", "SCHEMA", "SELECT", 
-                                         "SEMI", "SEPARATED", "SERDE", "SERDEPROPERTIES", 
-                                         "SESSION_USER", "SET", "SETMINUS", 
-                                         "SETS", "SHOW", "SKEWED", "SOME", 
-                                         "SORT", "SORTED", "START", "STATISTICS", 
-                                         "STORED", "STRATIFY", "STRUCT", 
-                                         "SUBSTR", "SUBSTRING", "TABLE", 
-                                         "TABLES", "TABLESAMPLE", "TBLPROPERTIES", 
-                                         "TEMPORARY", "TERMINATED", "THEN", 
-                                         "TIME", "TO", "TOUCH", "TRAILING", 
-                                         "TRANSACTION", "TRANSACTIONS", 
-                                         "TRANSFORM", "TRIM", "TRUE", "TRUNCATE", 
-                                         "TYPE", "UNARCHIVE", "UNBOUNDED", 
-                                         "UNCACHE", "UNION", "UNIQUE", "UNKNOWN", 
-                                         "UNLOCK", "UNSET", "UPDATE", "USE", 
-                                         "USER", "USING", "VALUES", "VIEW", 
-                                         "VIEWS", "WHEN", "WHERE", "WINDOW", 
-                                         "WITH", "ZONE", "EQ", "NSEQ", "NEQ", 
-                                         "NEQJ", "LT", "LTE", "GT", "GTE", 
-                                         "PLUS", "MINUS", "ASTERISK", "SLASH", 
-                                         "PERCENT", "TILDE", "AMPERSAND", 
-                                         "PIPE", "CONCAT_PIPE", "HAT", "STRING", 
-                                         "BIGINT_LITERAL", "SMALLINT_LITERAL", 
-                                         "TINYINT_LITERAL", "INTEGER_VALUE", 
-                                         "EXPONENT_VALUE", "DECIMAL_VALUE", 
-                                         "FLOAT_LITERAL", "DOUBLE_LITERAL", 
-                                         "BIGDECIMAL_LITERAL", "IDENTIFIER", 
-                                         "BACKQUOTED_IDENTIFIER", "SIMPLE_COMMENT", 
-                                         "BRACKETED_COMMENT", "WS", "UNRECOGNIZED" ];
+SparkSqlLexer.prototype.symbolicNames = [ null, null, null, null, null, 
+                                          null, null, null, null, null, 
+                                          null, null, "ADD", "AFTER", "ALL", 
+                                          "ALTER", "ANALYZE", "AND", "ANTI", 
+                                          "ANY", "ARCHIVE", "ARRAY", "AS", 
+                                          "ASC", "AT", "AUTHORIZATION", 
+                                          "BETWEEN", "BOTH", "BUCKET", "BUCKETS", 
+                                          "BY", "CACHE", "CASCADE", "CASE", 
+                                          "CAST", "CHANGE", "CHECK", "CLEAR", 
+                                          "CLUSTER", "CLUSTERED", "CODEGEN", 
+                                          "COLLATE", "COLLECTION", "COLUMN", 
+                                          "COLUMNS", "COMMENT", "COMMIT", 
+                                          "COMPACT", "COMPACTIONS", "COMPUTE", 
+                                          "CONCATENATE", "CONSTRAINT", "COST", 
+                                          "CREATE", "CROSS", "CUBE", "CURRENT", 
+                                          "CURRENT_DATE", "CURRENT_TIME", 
+                                          "CURRENT_TIMESTAMP", "CURRENT_USER", 
+                                          "DATA", "DATABASE", "DATABASES", 
+                                          "DBPROPERTIES", "DEFINED", "DELETE", 
+                                          "DELIMITED", "DESC", "DESCRIBE", 
+                                          "DFS", "DIRECTORIES", "DIRECTORY", 
+                                          "DISTINCT", "DISTRIBUTE", "DIV", 
+                                          "DROP", "ELSE", "END", "ESCAPE", 
+                                          "ESCAPED", "EXCEPT", "EXCHANGE", 
+                                          "EXISTS", "EXPLAIN", "EXPORT", 
+                                          "EXTENDED", "EXTERNAL", "EXTRACT", 
+                                          "FALSE", "FETCH", "FIELDS", "FILTER", 
+                                          "FILEFORMAT", "FIRST", "FOLLOWING", 
+                                          "FOR", "FOREIGN", "FORMAT", "FORMATTED", 
+                                          "FROM", "FULL", "FUNCTION", "FUNCTIONS", 
+                                          "GLOBAL", "GRANT", "GROUP", "GROUPING", 
+                                          "HAVING", "IF", "IGNORE", "IMPORT", 
+                                          "IN", "INDEX", "INDEXES", "INNER", 
+                                          "INPATH", "INPUTFORMAT", "INSERT", 
+                                          "INTERSECT", "INTERVAL", "INTO", 
+                                          "IS", "ITEMS", "JOIN", "KEYS", 
+                                          "LAST", "LATERAL", "LAZY", "LEADING", 
+                                          "LEFT", "LIKE", "LIMIT", "LINES", 
+                                          "LIST", "LOAD", "LOCAL", "LOCATION", 
+                                          "LOCK", "LOCKS", "LOGICAL", "MACRO", 
+                                          "MAP", "MATCHED", "MERGE", "MSCK", 
+                                          "NAMESPACE", "NAMESPACES", "NATURAL", 
+                                          "NO", "NOT", "NULL", "NULLS", 
+                                          "OF", "ON", "ONLY", "OPTION", 
+                                          "OPTIONS", "OR", "ORDER", "OUT", 
+                                          "OUTER", "OUTPUTFORMAT", "OVER", 
+                                          "OVERLAPS", "OVERLAY", "OVERWRITE", 
+                                          "PARTITION", "PARTITIONED", "PARTITIONS", 
+                                          "PERCENTLIT", "PIVOT", "PLACING", 
+                                          "POSITION", "PRECEDING", "PRIMARY", 
+                                          "PRINCIPALS", "PROPERTIES", "PURGE", 
+                                          "QUERY", "RANGE", "RECORDREADER", 
+                                          "RECORDWRITER", "RECOVER", "REDUCE", 
+                                          "REFERENCES", "REFRESH", "RENAME", 
+                                          "REPAIR", "REPLACE", "RESET", 
+                                          "RESTRICT", "REVOKE", "RIGHT", 
+                                          "RLIKE", "ROLE", "ROLES", "ROLLBACK", 
+                                          "ROLLUP", "ROW", "ROWS", "SCHEMA", 
+                                          "SELECT", "SEMI", "SEPARATED", 
+                                          "SERDE", "SERDEPROPERTIES", "SESSION_USER", 
+                                          "SET", "SETMINUS", "SETS", "SHOW", 
+                                          "SKEWED", "SOME", "SORT", "SORTED", 
+                                          "START", "STATISTICS", "STORED", 
+                                          "STRATIFY", "STRUCT", "SUBSTR", 
+                                          "SUBSTRING", "TABLE", "TABLES", 
+                                          "TABLESAMPLE", "TBLPROPERTIES", 
+                                          "TEMPORARY", "TERMINATED", "THEN", 
+                                          "TIME", "TO", "TOUCH", "TRAILING", 
+                                          "TRANSACTION", "TRANSACTIONS", 
+                                          "TRANSFORM", "TRIM", "TRUE", "TRUNCATE", 
+                                          "TYPE", "UNARCHIVE", "UNBOUNDED", 
+                                          "UNCACHE", "UNION", "UNIQUE", 
+                                          "UNKNOWN", "UNLOCK", "UNSET", 
+                                          "UPDATE", "USE", "USER", "USING", 
+                                          "VALUES", "VIEW", "VIEWS", "WHEN", 
+                                          "WHERE", "WINDOW", "WITH", "ZONE", 
+                                          "EQ", "NSEQ", "NEQ", "NEQJ", "LT", 
+                                          "LTE", "GT", "GTE", "PLUS", "MINUS", 
+                                          "ASTERISK", "SLASH", "PERCENT", 
+                                          "TILDE", "AMPERSAND", "PIPE", 
+                                          "CONCAT_PIPE", "HAT", "STRING", 
+                                          "BIGINT_LITERAL", "SMALLINT_LITERAL", 
+                                          "TINYINT_LITERAL", "INTEGER_VALUE", 
+                                          "EXPONENT_VALUE", "DECIMAL_VALUE", 
+                                          "FLOAT_LITERAL", "DOUBLE_LITERAL", 
+                                          "BIGDECIMAL_LITERAL", "IDENTIFIER", 
+                                          "BACKQUOTED_IDENTIFIER", "SIMPLE_COMMENT", 
+                                          "BRACKETED_COMMENT", "WS", "UNRECOGNIZED" ];
 
-SqlBaseLexer.prototype.ruleNames = [ "T__0", "T__1", "T__2", "T__3", "T__4", 
-                                     "T__5", "T__6", "T__7", "T__8", "T__9", 
-                                     "T__10", "ADD", "AFTER", "ALL", "ALTER", 
-                                     "ANALYZE", "AND", "ANTI", "ANY", "ARCHIVE", 
-                                     "ARRAY", "AS", "ASC", "AT", "AUTHORIZATION", 
-                                     "BETWEEN", "BOTH", "BUCKET", "BUCKETS", 
-                                     "BY", "CACHE", "CASCADE", "CASE", "CAST", 
-                                     "CHANGE", "CHECK", "CLEAR", "CLUSTER", 
-                                     "CLUSTERED", "CODEGEN", "COLLATE", 
-                                     "COLLECTION", "COLUMN", "COLUMNS", 
-                                     "COMMENT", "COMMIT", "COMPACT", "COMPACTIONS", 
-                                     "COMPUTE", "CONCATENATE", "CONSTRAINT", 
-                                     "COST", "CREATE", "CROSS", "CUBE", 
-                                     "CURRENT", "CURRENT_DATE", "CURRENT_TIME", 
-                                     "CURRENT_TIMESTAMP", "CURRENT_USER", 
-                                     "DATA", "DATABASE", "DATABASES", "DBPROPERTIES", 
-                                     "DEFINED", "DELETE", "DELIMITED", "DESC", 
-                                     "DESCRIBE", "DFS", "DIRECTORIES", "DIRECTORY", 
-                                     "DISTINCT", "DISTRIBUTE", "DIV", "DROP", 
-                                     "ELSE", "END", "ESCAPE", "ESCAPED", 
-                                     "EXCEPT", "EXCHANGE", "EXISTS", "EXPLAIN", 
-                                     "EXPORT", "EXTENDED", "EXTERNAL", "EXTRACT", 
-                                     "FALSE", "FETCH", "FIELDS", "FILTER", 
-                                     "FILEFORMAT", "FIRST", "FOLLOWING", 
-                                     "FOR", "FOREIGN", "FORMAT", "FORMATTED", 
-                                     "FROM", "FULL", "FUNCTION", "FUNCTIONS", 
-                                     "GLOBAL", "GRANT", "GROUP", "GROUPING", 
-                                     "HAVING", "IF", "IGNORE", "IMPORT", 
-                                     "IN", "INDEX", "INDEXES", "INNER", 
-                                     "INPATH", "INPUTFORMAT", "INSERT", 
-                                     "INTERSECT", "INTERVAL", "INTO", "IS", 
-                                     "ITEMS", "JOIN", "KEYS", "LAST", "LATERAL", 
-                                     "LAZY", "LEADING", "LEFT", "LIKE", 
-                                     "LIMIT", "LINES", "LIST", "LOAD", "LOCAL", 
-                                     "LOCATION", "LOCK", "LOCKS", "LOGICAL", 
-                                     "MACRO", "MAP", "MATCHED", "MERGE", 
-                                     "MSCK", "NAMESPACE", "NAMESPACES", 
-                                     "NATURAL", "NO", "NOT", "NULL", "NULLS", 
-                                     "OF", "ON", "ONLY", "OPTION", "OPTIONS", 
-                                     "OR", "ORDER", "OUT", "OUTER", "OUTPUTFORMAT", 
-                                     "OVER", "OVERLAPS", "OVERLAY", "OVERWRITE", 
-                                     "PARTITION", "PARTITIONED", "PARTITIONS", 
-                                     "PERCENTLIT", "PIVOT", "PLACING", "POSITION", 
-                                     "PRECEDING", "PRIMARY", "PRINCIPALS", 
-                                     "PROPERTIES", "PURGE", "QUERY", "RANGE", 
-                                     "RECORDREADER", "RECORDWRITER", "RECOVER", 
-                                     "REDUCE", "REFERENCES", "REFRESH", 
-                                     "RENAME", "REPAIR", "REPLACE", "RESET", 
-                                     "RESTRICT", "REVOKE", "RIGHT", "RLIKE", 
-                                     "ROLE", "ROLES", "ROLLBACK", "ROLLUP", 
-                                     "ROW", "ROWS", "SCHEMA", "SELECT", 
-                                     "SEMI", "SEPARATED", "SERDE", "SERDEPROPERTIES", 
-                                     "SESSION_USER", "SET", "SETMINUS", 
-                                     "SETS", "SHOW", "SKEWED", "SOME", "SORT", 
-                                     "SORTED", "START", "STATISTICS", "STORED", 
-                                     "STRATIFY", "STRUCT", "SUBSTR", "SUBSTRING", 
-                                     "TABLE", "TABLES", "TABLESAMPLE", "TBLPROPERTIES", 
-                                     "TEMPORARY", "TERMINATED", "THEN", 
-                                     "TIME", "TO", "TOUCH", "TRAILING", 
-                                     "TRANSACTION", "TRANSACTIONS", "TRANSFORM", 
-                                     "TRIM", "TRUE", "TRUNCATE", "TYPE", 
-                                     "UNARCHIVE", "UNBOUNDED", "UNCACHE", 
-                                     "UNION", "UNIQUE", "UNKNOWN", "UNLOCK", 
-                                     "UNSET", "UPDATE", "USE", "USER", "USING", 
-                                     "VALUES", "VIEW", "VIEWS", "WHEN", 
-                                     "WHERE", "WINDOW", "WITH", "ZONE", 
-                                     "EQ", "NSEQ", "NEQ", "NEQJ", "LT", 
-                                     "LTE", "GT", "GTE", "PLUS", "MINUS", 
-                                     "ASTERISK", "SLASH", "PERCENT", "TILDE", 
-                                     "AMPERSAND", "PIPE", "CONCAT_PIPE", 
-                                     "HAT", "STRING", "BIGINT_LITERAL", 
-                                     "SMALLINT_LITERAL", "TINYINT_LITERAL", 
-                                     "INTEGER_VALUE", "EXPONENT_VALUE", 
-                                     "DECIMAL_VALUE", "FLOAT_LITERAL", "DOUBLE_LITERAL", 
-                                     "BIGDECIMAL_LITERAL", "IDENTIFIER", 
-                                     "BACKQUOTED_IDENTIFIER", "DECIMAL_DIGITS", 
-                                     "EXPONENT", "DIGIT", "LETTER", "SIMPLE_COMMENT", 
-                                     "BRACKETED_COMMENT", "WS", "UNRECOGNIZED" ];
+SparkSqlLexer.prototype.ruleNames = [ "T__0", "T__1", "T__2", "T__3", "T__4", 
+                                      "T__5", "T__6", "T__7", "T__8", "T__9", 
+                                      "T__10", "ADD", "AFTER", "ALL", "ALTER", 
+                                      "ANALYZE", "AND", "ANTI", "ANY", "ARCHIVE", 
+                                      "ARRAY", "AS", "ASC", "AT", "AUTHORIZATION", 
+                                      "BETWEEN", "BOTH", "BUCKET", "BUCKETS", 
+                                      "BY", "CACHE", "CASCADE", "CASE", 
+                                      "CAST", "CHANGE", "CHECK", "CLEAR", 
+                                      "CLUSTER", "CLUSTERED", "CODEGEN", 
+                                      "COLLATE", "COLLECTION", "COLUMN", 
+                                      "COLUMNS", "COMMENT", "COMMIT", "COMPACT", 
+                                      "COMPACTIONS", "COMPUTE", "CONCATENATE", 
+                                      "CONSTRAINT", "COST", "CREATE", "CROSS", 
+                                      "CUBE", "CURRENT", "CURRENT_DATE", 
+                                      "CURRENT_TIME", "CURRENT_TIMESTAMP", 
+                                      "CURRENT_USER", "DATA", "DATABASE", 
+                                      "DATABASES", "DBPROPERTIES", "DEFINED", 
+                                      "DELETE", "DELIMITED", "DESC", "DESCRIBE", 
+                                      "DFS", "DIRECTORIES", "DIRECTORY", 
+                                      "DISTINCT", "DISTRIBUTE", "DIV", "DROP", 
+                                      "ELSE", "END", "ESCAPE", "ESCAPED", 
+                                      "EXCEPT", "EXCHANGE", "EXISTS", "EXPLAIN", 
+                                      "EXPORT", "EXTENDED", "EXTERNAL", 
+                                      "EXTRACT", "FALSE", "FETCH", "FIELDS", 
+                                      "FILTER", "FILEFORMAT", "FIRST", "FOLLOWING", 
+                                      "FOR", "FOREIGN", "FORMAT", "FORMATTED", 
+                                      "FROM", "FULL", "FUNCTION", "FUNCTIONS", 
+                                      "GLOBAL", "GRANT", "GROUP", "GROUPING", 
+                                      "HAVING", "IF", "IGNORE", "IMPORT", 
+                                      "IN", "INDEX", "INDEXES", "INNER", 
+                                      "INPATH", "INPUTFORMAT", "INSERT", 
+                                      "INTERSECT", "INTERVAL", "INTO", "IS", 
+                                      "ITEMS", "JOIN", "KEYS", "LAST", "LATERAL", 
+                                      "LAZY", "LEADING", "LEFT", "LIKE", 
+                                      "LIMIT", "LINES", "LIST", "LOAD", 
+                                      "LOCAL", "LOCATION", "LOCK", "LOCKS", 
+                                      "LOGICAL", "MACRO", "MAP", "MATCHED", 
+                                      "MERGE", "MSCK", "NAMESPACE", "NAMESPACES", 
+                                      "NATURAL", "NO", "NOT", "NULL", "NULLS", 
+                                      "OF", "ON", "ONLY", "OPTION", "OPTIONS", 
+                                      "OR", "ORDER", "OUT", "OUTER", "OUTPUTFORMAT", 
+                                      "OVER", "OVERLAPS", "OVERLAY", "OVERWRITE", 
+                                      "PARTITION", "PARTITIONED", "PARTITIONS", 
+                                      "PERCENTLIT", "PIVOT", "PLACING", 
+                                      "POSITION", "PRECEDING", "PRIMARY", 
+                                      "PRINCIPALS", "PROPERTIES", "PURGE", 
+                                      "QUERY", "RANGE", "RECORDREADER", 
+                                      "RECORDWRITER", "RECOVER", "REDUCE", 
+                                      "REFERENCES", "REFRESH", "RENAME", 
+                                      "REPAIR", "REPLACE", "RESET", "RESTRICT", 
+                                      "REVOKE", "RIGHT", "RLIKE", "ROLE", 
+                                      "ROLES", "ROLLBACK", "ROLLUP", "ROW", 
+                                      "ROWS", "SCHEMA", "SELECT", "SEMI", 
+                                      "SEPARATED", "SERDE", "SERDEPROPERTIES", 
+                                      "SESSION_USER", "SET", "SETMINUS", 
+                                      "SETS", "SHOW", "SKEWED", "SOME", 
+                                      "SORT", "SORTED", "START", "STATISTICS", 
+                                      "STORED", "STRATIFY", "STRUCT", "SUBSTR", 
+                                      "SUBSTRING", "TABLE", "TABLES", "TABLESAMPLE", 
+                                      "TBLPROPERTIES", "TEMPORARY", "TERMINATED", 
+                                      "THEN", "TIME", "TO", "TOUCH", "TRAILING", 
+                                      "TRANSACTION", "TRANSACTIONS", "TRANSFORM", 
+                                      "TRIM", "TRUE", "TRUNCATE", "TYPE", 
+                                      "UNARCHIVE", "UNBOUNDED", "UNCACHE", 
+                                      "UNION", "UNIQUE", "UNKNOWN", "UNLOCK", 
+                                      "UNSET", "UPDATE", "USE", "USER", 
+                                      "USING", "VALUES", "VIEW", "VIEWS", 
+                                      "WHEN", "WHERE", "WINDOW", "WITH", 
+                                      "ZONE", "EQ", "NSEQ", "NEQ", "NEQJ", 
+                                      "LT", "LTE", "GT", "GTE", "PLUS", 
+                                      "MINUS", "ASTERISK", "SLASH", "PERCENT", 
+                                      "TILDE", "AMPERSAND", "PIPE", "CONCAT_PIPE", 
+                                      "HAT", "STRING", "BIGINT_LITERAL", 
+                                      "SMALLINT_LITERAL", "TINYINT_LITERAL", 
+                                      "INTEGER_VALUE", "EXPONENT_VALUE", 
+                                      "DECIMAL_VALUE", "FLOAT_LITERAL", 
+                                      "DOUBLE_LITERAL", "BIGDECIMAL_LITERAL", 
+                                      "IDENTIFIER", "BACKQUOTED_IDENTIFIER", 
+                                      "DECIMAL_DIGITS", "EXPONENT", "DIGIT", 
+                                      "LETTER", "SIMPLE_COMMENT", "BRACKETED_COMMENT", 
+                                      "WS", "UNRECOGNIZED" ];
 
-SqlBaseLexer.prototype.grammarFileName = "SqlBase.g4";
+SparkSqlLexer.prototype.grammarFileName = "SparkSql.g4";
 
-SqlBaseLexer.prototype.sempred = function(localctx, ruleIndex, predIndex) {
+SparkSqlLexer.prototype.sempred = function(localctx, ruleIndex, predIndex) {
 	switch (ruleIndex) {
 		case 283:
 			return this.EXPONENT_VALUE_sempred(localctx, predIndex);
@@ -2376,7 +2383,7 @@ SqlBaseLexer.prototype.sempred = function(localctx, ruleIndex, predIndex) {
     }
 };
 
-SqlBaseLexer.prototype.EXPONENT_VALUE_sempred = function(localctx, predIndex) {
+SparkSqlLexer.prototype.EXPONENT_VALUE_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 0:
 			return isValidDecimal();
@@ -2385,7 +2392,7 @@ SqlBaseLexer.prototype.EXPONENT_VALUE_sempred = function(localctx, predIndex) {
 	}
 };
 
-SqlBaseLexer.prototype.DECIMAL_VALUE_sempred = function(localctx, predIndex) {
+SparkSqlLexer.prototype.DECIMAL_VALUE_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 1:
 			return isValidDecimal();
@@ -2394,7 +2401,7 @@ SqlBaseLexer.prototype.DECIMAL_VALUE_sempred = function(localctx, predIndex) {
 	}
 };
 
-SqlBaseLexer.prototype.FLOAT_LITERAL_sempred = function(localctx, predIndex) {
+SparkSqlLexer.prototype.FLOAT_LITERAL_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 2:
 			return isValidDecimal();
@@ -2403,7 +2410,7 @@ SqlBaseLexer.prototype.FLOAT_LITERAL_sempred = function(localctx, predIndex) {
 	}
 };
 
-SqlBaseLexer.prototype.DOUBLE_LITERAL_sempred = function(localctx, predIndex) {
+SparkSqlLexer.prototype.DOUBLE_LITERAL_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 3:
 			return isValidDecimal();
@@ -2412,7 +2419,7 @@ SqlBaseLexer.prototype.DOUBLE_LITERAL_sempred = function(localctx, predIndex) {
 	}
 };
 
-SqlBaseLexer.prototype.BIGDECIMAL_LITERAL_sempred = function(localctx, predIndex) {
+SparkSqlLexer.prototype.BIGDECIMAL_LITERAL_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 4:
 			return isValidDecimal();
@@ -2421,7 +2428,7 @@ SqlBaseLexer.prototype.BIGDECIMAL_LITERAL_sempred = function(localctx, predIndex
 	}
 };
 
-SqlBaseLexer.prototype.BRACKETED_COMMENT_sempred = function(localctx, predIndex) {
+SparkSqlLexer.prototype.BRACKETED_COMMENT_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 5:
 			return !isHint();
@@ -2432,5 +2439,5 @@ SqlBaseLexer.prototype.BRACKETED_COMMENT_sempred = function(localctx, predIndex)
 
 
 
-exports.SqlBaseLexer = SqlBaseLexer;
+exports.SparkSqlLexer = SparkSqlLexer;
 
