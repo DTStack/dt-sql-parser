@@ -7,9 +7,9 @@ English | [简体中文](./README-zh_CN.md)
 [npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/dt-sql-parser
 
-dt-sql-parser is a `SQL Parser` project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the `BigData` domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the `syntax validation`, `tokenizer`, `traverse` the AST, and so on features.
+dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
 
-Besides, it' provides some helper methods, like `split` SQL, and filter the `--` and `/**/` types of comments in SQL.
+Besides, it' provides some helper methods, like **split** SQL, and filter the `--` and `/**/` types of comments in SQL.
 
 > Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
 
@@ -35,10 +35,10 @@ yarn add dt-sql-parser
 
 ### Syntax Validation
 
-First, we need to import the `Parser` object from `dt-sql-parser`, the different language needs
-different Parser, so if you need to handle the `Flink SQL`, you can import the `FlinkSQL Parser`.
+First, we need to import the **Parser** object from `dt-sql-parser`, the different language needs
+different Parser, so if you need to handle the **Flink SQL**, you can import the **FlinkSQL Parser**.
 
-The below is a `GenericSQL Parser` example:
+The below is a **GenericSQL Parser** example:
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
@@ -82,12 +82,12 @@ output:
 */
 ```
 
-We instanced a Parser object, and use the `validate` method to check the SQL syntax, if failed
-returns an array object includes `error` message.
+We instanced a Parser object, and use the **validate** method to check the SQL syntax, if failed
+returns an array object includes **error** message.
 
 ### Tokenizer
 
-You can also the all `tokens` by the Parser:
+You can also the all **tokens** by the Parser:
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
@@ -152,7 +152,7 @@ TableName user1
 
 ### Listener
 
-access the specified node in the AST by Listener pattern
+Access the specified node in the AST by the Listener
 
 ```javascript
 import { GenericSQL, SqlParserListener } from 'dt-sql-parser';
@@ -185,7 +185,7 @@ TableName user1
 
 ### Clean
 
-Clear the `comments` and `spaces` before and after
+Clear the **comments** and **spaces** before and after
 
 ```javascript
 import { cleanSql } from 'dt-sql-parser';
@@ -202,7 +202,7 @@ select id,name from user1;
 
 ### Split SQL
 
-When the SQL text is very big, you can think about to split it by `;` , and handle each line.
+When the SQL text is very big, you can think about to split it by `;` , and handle it by each line.
 
 ```javascript
 import { splitSql } from 'dt-sql-parser';

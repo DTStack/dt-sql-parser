@@ -7,7 +7,7 @@
 
 [English](./README.md) | 简体中文
 
-dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的， 针对大数据领域的 `SQL Parser` 项目。通过[ANTLR4](https://github.com/antlr/antlr4) 默认生成的 Parser、Visitor 和 Listener 对象，我们可以轻松的做到对 SQL 语句的`语法检查`（Syntax Validation）、`词法分析`（Tokenizer)、 `遍历 AST` 节点等功能。此外，还提供了几个辅助方法, 例如 SQL 切分（Split）、过滤 SQL 语句中的 `--` 和 `/**/` 等类型的注释。
+dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的， 针对大数据领域的 **SQL Parser** 项目。通过[ANTLR4](https://github.com/antlr/antlr4) 默认生成的 Parser、Visitor 和 Listener 对象，我们可以轻松的做到对 SQL 语句的**语法检查**（Syntax Validation）、**词法分析**（Tokenizer)、 **遍历 AST** 节点等功能。此外，还提供了几个辅助方法, 例如 SQL 切分（Split）、过滤 SQL 语句中的 `--` 和 `/**/` 等类型的注释。
 
 已支持的 SQL 类型：
 
@@ -34,7 +34,7 @@ yarn add dt-sql-parser
 ### 语法校验（Syntax Validation）
 
 首先需要声明相应的 Parser 对象，不同的 SQL 类型需要引入不同的 Parser 对象处理，例如如果是
-针对 `Flink SQL`，则需要单独引入 `FlinkSQL` Parser，这里我们使用 `GenericSQL` 作为示例：
+针对 **Flink SQL**，则需要单独引入 **FlinkSQL** Parser，这里我们使用 **GenericSQL** 作为示例：
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
@@ -78,7 +78,7 @@ console.log(errors);
 */
 ```
 
-先实例化 Parser 对象，然后使用 `validate` 方法对 SQL 语句进行校验，如果校验失败，则返回一个包含 `Error` 信息的数组。
+先实例化 Parser 对象，然后使用 `validate` 方法对 SQL 语句进行校验，如果校验失败，则返回一个包含 `error` 信息的数组。
 
 ### 词法分析（Tokenizer）
 
