@@ -1,6 +1,6 @@
 import { InputStream, CommonTokenStream, Lexer } from 'antlr4';
 import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
-import { HiveSqlParser } from '../lib/hive/HiveSqlParser';
+import { HiveSql } from '../lib/hive/HiveSql';
 export * from '../lib/hive/HiveSqlListener';
 export * from '../lib/hive/HiveSqlVisitor';
 
@@ -14,7 +14,7 @@ export default class HiveSQL extends BasicParser {
     }
     public createParserFromLexer(lexer: Lexer) {
         const tokenStream = new CommonTokenStream(lexer);
-        return new HiveSqlParser(tokenStream);
+        return new HiveSql(tokenStream);
     }
 }
 

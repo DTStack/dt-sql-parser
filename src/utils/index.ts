@@ -1,125 +1,183 @@
-function replaceStrFormIndexArr(str, replaceStr, indexArr) {
-    let result = '';
-    let index = 0;
 
-    if (!indexArr || indexArr.length < 1) {
-        return str;
-    }
-    for (let i = 0; i < indexArr.length; i++) {
-        const indexItem = indexArr[i];
-        const begin = indexItem.begin;
+import { TokenType, Token, TokenReg } from './token';
 
-        result = result + str.substring(index, begin) + replaceStr;
-        index = indexItem.end + 1;
+/**
+ * 获取 注释 以及 分隔符 等词法信息
+ * @param {String} sql
+ */
+function lexer(input: string): Token[] {
+    // 记录当前字符的位置
+    let current = 0;
+    let line = 1;
+    // 最终的 TokenTypes 结果
+    const tokens: Token[] = [];
 
-        if (i == indexArr.length - 1) {
-            result = result + str.substring(index);
+    /**
+     * 提取 TokenType
+     */
+    // eslint-disable-next-line
+    const extract = (currentChar: string, validator: RegExp, TokenType: TokenType): Token => {
+        let value = '';
+        const start = current;
+        while (validator.test(currentChar)) {
+            value += currentChar;
+            currentChar = input[++current];
         }
-    }
-
-    return result;
-}
-function splitSql(sql: string) {
-    let haveEnd = true;
-    if (!sql.endsWith(';')) {
-        sql += ';';
-        haveEnd = false;
-    }
-    interface splitParser {
-        index: number;
-        queue: string;
-        sqls: number[];
-    }
-    function pushSql(parser: splitParser, sql: string) {
-        if (!haveEnd && parser.index == sql.length - 1) {
-            parser.sqls.push(parser.index - 1);
-            parser.queue = '';
-        } else {
-            parser.sqls.push(parser.index);
-            parser.queue = '';
-        }
-    }
-    // 处理引号
-    function quoteToken(parser: splitParser, sql: string): string {
-        const queue = parser.queue;
-        const endsWith = queue[queue.length - 1];
-        if (endsWith == '\'' || endsWith == '"') {
-            const nextToken = sql.indexOf(endsWith, parser.index + 1);
-            if (nextToken != -1) {
-                parser.index = nextToken;
-                parser.queue = '';
-            } else {
-                parser.index = sql.length - 1;
-            }
-        } else {
-            return null;
-        }
-    }
-    // 处理单行注释
-    function singleLineCommentToken(parser: splitParser, sql: string): string {
-        let queue = parser.queue;
-        if (queue.endsWith('--')) {
-            const nextToken = sql.indexOf('\n', parser.index + 1);
-            if (nextToken != -1) {
-                parser.index = nextToken;
-                queue = '';
-            } else {
-                parser.index = sql.length - 1;
-            }
-        } else {
-            return null;
-        }
-    }
-    // 处理多行注释
-    function multipleLineCommentToken(
-        parser: splitParser, sql: string,
-    ): string {
-        const queue = parser.queue;
-        if (queue.endsWith('/*')) {
-            const nextToken = sql.indexOf('*/', parser.index + 1);
-            if (nextToken != -1) {
-                parser.index = nextToken + 1;
-                parser.queue = '';
-            } else {
-                parser.index = sql.length - 1;
-                parser.queue = '';
-            }
-        } else {
-            return null;
-        }
-    }
-    function splitToken(parser: splitParser, sql: string): string {
-        const queue = parser.queue;
-        if (queue.endsWith(';')) {
-            pushSql(parser, sql);
-        } else {
-            return null;
-        }
-    }
-    const parser: splitParser = {
-        index: 0,
-        queue: '',
-        sqls: [],
+        return {
+            type: TokenType,
+            start: start,
+            end: current,
+            lineNumber: line,
+            value: value,
+        };
     };
-    for (parser.index = 0; parser.index < sql.length; parser.index++) {
-        const char = sql[parser.index];
-        parser.queue += char;
-        const tokenFuncs = [
-            quoteToken,
-            singleLineCommentToken,
-            multipleLineCommentToken,
-            splitToken,
-        ];
-        for (let i = 0; i < tokenFuncs.length; i++) {
-            tokenFuncs[i](parser, sql);
+
+    /**
+     * 过滤（提取） 引号中的内容
+     */
+    // eslint-disable-next-line
+    const matchQuotation = (currentChar: string, validator: RegExp, TokenType: TokenType) => {
+        do {
+            if (currentChar === '\n') {
+                line++;
+            }
+            currentChar = input[++current];
+        } while (!validator.test(currentChar));
+
+        ++current;
+    };
+
+    while (current < input.length) {
+        let char = input[current];
+
+        // 按顺序处理 换行符 反引号 单引号 双引号 注释 分号
+        // 引号内 可能包含注释包含的符号以及分号 所以优先处理引号里面的内容 去除干扰信息
+
+        if (char === '\n') {
+            line++;
+            current++;
+            continue;
         }
-        if (parser.index == sql.length - 1 && parser.queue) {
-            pushSql(parser, sql);
+
+        if (TokenReg.BackQuotation.test(char)) {
+            // eslint-disable-next-line
+            matchQuotation(char, TokenReg.BackQuotation, TokenType.BackQuotation);
+            continue;
         }
+
+        if (TokenReg.SingleQuotation.test(char)) {
+            // eslint-disable-next-line
+            matchQuotation(char, TokenReg.SingleQuotation, TokenType.SingleQuotation);
+            continue;
+        }
+
+        if (TokenReg.DoubleQuotation.test(char)) {
+            // eslint-disable-next-line
+            matchQuotation(char, TokenReg.DoubleQuotation, TokenType.DoubleQuotation);
+            continue;
+        }
+
+        // 处理单行注释，以--开始，\n 结束
+        if (char === '-' && input[current + 1] === '-') {
+            let value = '';
+            const start = current;
+
+            while (char !== '\n') {
+                value += char;
+                char = input[++current];
+            }
+            tokens.push({
+                type: TokenType.Comment,
+                value,
+                start: start,
+                lineNumber: line,
+                end: current,
+            });
+            continue;
+        }
+
+        // 处理多行注释，以 /* 开始， */结束
+        if (char === '/' && input[current + 1] === '*') {
+            let value = '';
+            const start = current;
+            const startLine = line;
+
+            while (!(char === '/' && input[current - 1] === '*')) {
+                if (char === '\n') {
+                    line++;
+                }
+                value += char;
+                char = input[++current];
+            }
+            value += char;
+            ++current;
+
+            tokens.push({
+                type: TokenType.Comment,
+                value,
+                start: start,
+                lineNumber: startLine,
+                end: current,
+            });
+            continue;
+        }
+
+        // 处理结束符 ;
+        if (TokenReg.StatementTerminator.test(char)) {
+            const newToken = extract(
+                char,
+                TokenReg.StatementTerminator,
+                TokenType.StatementTerminator,
+            );
+            tokens.push(newToken);
+            continue;
+        }
+
+        current++;
     }
-    return parser.sqls;
+    return tokens;
+}
+
+/**
+ * 分割sql
+ * @param {String} sql
+ */
+function splitSql(sql: string) {
+    const tokens = lexer(sql);
+    const sqlArr = [];
+    let startIndex = 0;
+    tokens.forEach((ele: Token) => {
+        if (ele.type === TokenType.StatementTerminator) {
+            sqlArr.push(sql.slice(startIndex, ele.end));
+            startIndex = ele.end;
+        }
+    });
+    if (startIndex < sql.length) {
+        sqlArr.push(sql.slice(startIndex));
+    }
+    return sqlArr;
+}
+
+/**
+ * 清除注释和前后空格
+ * @param {String} sql
+ */
+function cleanSql(sql: string) {
+    sql.trim(); // 删除前后空格
+    const tokens = lexer(sql);
+    let resultSql = '';
+    let startIndex = 0;
+    tokens.forEach((ele: Token) => {
+        if (ele.type === TokenType.Comment) {
+            resultSql += sql.slice(startIndex, ele.start);
+            startIndex = ele.end + 1;
+        }
+    });
+    resultSql += sql.slice(startIndex);
+    return resultSql;
 }
 export {
-    replaceStrFormIndexArr,
+    cleanSql,
     splitSql,
+    lexer,
 };

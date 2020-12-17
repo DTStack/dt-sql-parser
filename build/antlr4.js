@@ -11,6 +11,7 @@ const entry = [
     'plsql',
     'spark',
     'impala',
+    'flinksql',
 ];
 
 entry.forEach((language) => {

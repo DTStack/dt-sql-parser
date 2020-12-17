@@ -1,8 +1,8 @@
-import SQLParser, { HiveSqlVisitor } from '../../../src/parser/hive';
+import SQLParser, { FlinkSqlParserVisitor } from '../../../src/parser/flinksql';
 
-describe('Generic SQL Visitor Tests', () => {
-    const expectTableName = 'dm_gis.dlv_addr_tc_count';
-    const sql = `select citycode,tc,inc_day from ${expectTableName} where inc_day='20190501' limit 100;`;
+describe('Flink SQL Visitor Tests', () => {
+    const expectTableName = 'user1';
+    const sql = `select id,name,sex from ${expectTableName};`;
     const parser = new SQLParser();
 
     const parserTree = parser.parse(sql, (error) => {
@@ -13,13 +13,12 @@ describe('Generic SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends HiveSqlVisitor {
-            visitTable_name(ctx): void {
+        class MyVisitor extends FlinkSqlParserVisitor {
+            visitTableExpression(ctx): void {
                 result = ctx.getText().toLowerCase();
-                super.visitTable_name(ctx);
+                super.visitTableExpression(ctx);
             }
         }
-
         const visitor: any = new MyVisitor();
         visitor.visit(parserTree);
 
