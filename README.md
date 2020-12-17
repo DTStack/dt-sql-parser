@@ -87,7 +87,7 @@ returns an array object includes **error** message.
 
 ### Tokenizer
 
-You can also the all **tokens** by the Parser:
+Get all **tokens** by the Parser:
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
