@@ -80,8 +80,8 @@ const tokens = parser.getAllTokens(sql)
 console.log(tokens)
 /*
 [
-	  {
-	  		channel: 0
+    {
+        channel: 0
         column: 0
         line: 1
         source: [SqlLexer, InputStream]
@@ -91,8 +91,8 @@ console.log(tokens)
         type: 137
         _text: null
         text: "SELECT"
-	  },
-	  ...
+    },
+    ...
 ]
 */
 ```
