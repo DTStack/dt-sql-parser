@@ -7,7 +7,7 @@ English | [简体中文](./README-zh_CN.md)
 [npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/dt-sql-parser
 
-dt-sql-parser is a `SQL Parser` project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the `BigData` domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete `validate`, `tokenize`, `traverse` the AST, and so on features.
+dt-sql-parser is a `SQL Parser` project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the `BigData` domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the `syntax validation`, `tokenizer`, `traverse` the AST, and so on features.
 
 Besides, it' provides some helper methods, like `split` SQL, and filter the `--` and `/**/` types of comments in SQL.
 

@@ -33,8 +33,8 @@ yarn add dt-sql-parser
 
 ### 语法校验（Syntax Validation）
 
-首先需要声明想对应的 Parser 对象，不同的 SQL 类型需要引入不同的 Parser 对象处理，例如如果是
-真的 `Flink SQL`, 则需要单独引入 `FlinkSQL` 对象, 这里我们使用 `GenericSQL` 作为示例：
+首先需要声明相应的 Parser 对象，不同的 SQL 类型需要引入不同的 Parser 对象处理，例如如果是
+针对 `Flink SQL`，则需要单独引入 `FlinkSQL` Parser，这里我们使用 `GenericSQL` 作为示例：
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
