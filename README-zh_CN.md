@@ -7,7 +7,7 @@
 
 [English](./README.md) | 简体中文
 
-dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的， 针对大数据领域的 **SQL Parser** 项目。通过[ANTLR4](https://github.com/antlr/antlr4) 默认生成的 Parser、Visitor 和 Listener 对象，我们可以轻松的做到对 SQL 语句的**语法检查**（Syntax Validation）、**词法分析**（Tokenizer)、 **遍历 AST** 节点等功能。此外，还提供了几个辅助方法, 例如 SQL 切分（Split）、过滤 SQL 语句中的 `--` 和 `/**/` 等类型的注释。
+dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的， 针对大数据领域的 **SQL Parser** 项目。通过[ANTLR4](https://github.com/antlr/antlr4) 默认生成的 Parser、Visitor 和 Listener 对象，我们可以轻松的做到对 SQL 语句的**语法检查**（Syntax Validation）、**词法分析**（Tokenizer)、 **遍历 AST** 节点等功能。此外，还提供了几个辅助方法, 例如 SQL 切割（Split）、过滤 SQL 语句中的 `--` 和 `/**/` 等类型的注释。
 
 已支持的 SQL 类型：
 
