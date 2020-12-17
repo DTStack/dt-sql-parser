@@ -15,7 +15,7 @@
   "main": "dist/index.js",
   "scripts": {
     "antlr4": "node build/antlr4.js",
-    "build": "npm test && rm -rf dist && tsc",
+    "build": "rm -rf dist && tsc",
     "eslint": "eslint ./src/**/*.ts",
     "check-types": "tsc --skipLibCheck",
     "test": "jest --coverage"
