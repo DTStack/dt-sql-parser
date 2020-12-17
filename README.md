@@ -11,8 +11,6 @@ dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com
 
 Besides, it' provides some helper methods, like **split** SQL, and filter the `--` and `/**/` types of comments in SQL.
 
-> Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
-
 Supported SQL:
 
 - MySQL
@@ -20,6 +18,8 @@ Supported SQL:
 - Spark SQL
 - Hive SQL
 - PL/SQL
+
+>Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
 
 ## Installation
 
