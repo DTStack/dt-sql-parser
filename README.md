@@ -5,13 +5,9 @@
 [npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/dt-sql-parser
 
-dt-sql-parser is a SQL parser built on [ANTLR4](https://github.com/antlr/antlr4) .It's mainly used for analyzing all kinds of SQL in the development of big data. Supported SQL:
+English | [简体中文](./README-zh_CN.md)
 
-- MySQL
-- Flink SQL
-- Spark SQL
-- Hive SQL
-- PL/SQL
+dt-sql-parser is a collection of SQL parsers developed based on [ANTLR4](https://github.com/antlr/antlr4) .It's mainly used for parsing all kinds of SQL in the development of big data.
 
 It provides the basic class, Visitor class, and Listener class. These class including the ability to generate tokens, generate parse tree, syntax validation, and Visitor & Listener patterns to traverse the AST.
 
@@ -19,7 +15,13 @@ In addition, several helper methods are provided to format the SQL before parsin
 
 tips: The Grammar file can also be compiled into other languages with [ANTLR4](https://github.com/antlr/antlr4) .
 
-English | [简体中文](./README-zh_CN.md)
+Supported SQL:
+
+- MySQL
+- Flink SQL
+- Spark SQL
+- Hive SQL
+- PL/SQL
 
 ## Installation
 
@@ -209,7 +211,7 @@ tips: The node's method name can be found in the Listener file under the corresp
 ## Roadmap
 
 - Auto-complete
-- Impala SQL
+- Format code
 
 ## License
 

@@ -5,13 +5,9 @@
 [npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/dt-sql-parser
 
-此项目是基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的 SQL 语言解析器。主要用于大数据开发中，对各类 SQL 的解析。目前支持的 SQL：
+[English](./README.md) | 简体中文
 
-- MySQL
-- Flink SQL
-- Spark SQL
-- Hive SQL
-- PL/SQL
+dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的 SQL 解析器集合。主要用于大数据开发中，对各类 SQL 的解析。
 
 每种 SQL 都提供了对应基础类、Visitor 类和 Listener 类，包含了生成 token、生成 AST、语法校验、visitor 和 listener 模式遍历 AST 指定节点等功能。
 
@@ -19,7 +15,13 @@
 
 提示：项目中的 grammar 文件也可以通过 [ANTLR4](https://github.com/antlr/antlr4) 编译成其他语言
 
-[English](./README.md) | 简体中文
+目前支持的 SQL：
+
+- MySQL
+- Flink SQL
+- Spark SQL
+- Hive SQL
+- PL/SQL
 
 ## 安装
 
@@ -209,7 +211,7 @@ TableName user1
 ## 路线图
 
 - Auto-complete
-- Impala SQL
+- Format code
 
 ## 许可证
 
