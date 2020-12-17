@@ -29,6 +29,15 @@ SparkSqlListener.prototype.exitSingleStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SparkSqlParser#emptyStatement.
+SparkSqlListener.prototype.enterEmptyStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by SparkSqlParser#emptyStatement.
+SparkSqlListener.prototype.exitEmptyStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SparkSqlParser#singleExpression.
 SparkSqlListener.prototype.enterSingleExpression = function(ctx) {
 };

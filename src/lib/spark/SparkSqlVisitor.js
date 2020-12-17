@@ -24,6 +24,12 @@ SparkSqlVisitor.prototype.visitSingleStatement = function(ctx) {
 };
 
 
+// Visit a parse tree produced by SparkSqlParser#emptyStatement.
+SparkSqlVisitor.prototype.visitEmptyStatement = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by SparkSqlParser#singleExpression.
 SparkSqlVisitor.prototype.visitSingleExpression = function(ctx) {
   return this.visitChildren(ctx);

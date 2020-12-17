@@ -75,7 +75,11 @@ program
     ;
 
 singleStatement
-    : statement ';'* EOF
+    : (statement SEMICOLON? | emptyStatement)*
+    ;
+
+emptyStatement
+    : SEMICOLON
     ;
 
 singleExpression
@@ -1741,6 +1745,7 @@ AMPERSAND: '&';
 PIPE: '|';
 CONCAT_PIPE: '||';
 HAT: '^';
+SEMICOLON: ';';
 
 STRING
     : '\'' ( ~('\''|'\\') | ('\\' .) )* '\''
