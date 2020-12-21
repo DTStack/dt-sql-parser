@@ -2,16 +2,14 @@
 
 [![NPM version][npm-image]][npm-url]
 
-English | [简体中文](./README-zh_CN.md)
-
 [npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/dt-sql-parser
 
-dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
+[English](./README.md) | 简体中文
 
-Besides, it' provides some helper methods, like **split** SQL, and filter the `--` and `/**/` types of comments in SQL.
+dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的， 针对大数据领域的 **SQL Parser** 项目。通过[ANTLR4](https://github.com/antlr/antlr4) 默认生成的 Parser、Visitor 和 Listener 对象，我们可以轻松的做到对 SQL 语句的**语法检查**（Syntax Validation）、**词法分析**（Tokenizer)、 **遍历 AST** 节点等功能。此外，还提供了几个辅助方法, 例如 SQL 切割（Split）、过滤 SQL 语句中的 `--` 和 `/**/` 等类型的注释。
 
-Supported SQL:
+已支持的 SQL 类型：
 
 - MySQL
 - Flink SQL
@@ -19,9 +17,9 @@ Supported SQL:
 - Hive SQL
 - PL/SQL
 
->Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
+> 提示：当前的 Parser 是 `Javascript` 语言版本，如果有必要，可以尝试编译 Grammar 文件到其他目标语言
 
-## Installation
+## 安装
 
 ```bash
 // use npm
@@ -31,14 +29,12 @@ npm i dt-sql-parser --save
 yarn add dt-sql-parser
 ```
 
-## Usage
+## 使用
 
-### Syntax Validation
+### 语法校验（Syntax Validation）
 
-First, we need to import the **Parser** object from `dt-sql-parser`, the different language needs
-different Parser, so if you need to handle the **Flink SQL**, you can import the **FlinkSQL Parser**.
-
-The below is a **GenericSQL Parser** example:
+首先需要声明相应的 Parser 对象，不同的 SQL 类型需要引入不同的 Parser 对象处理，例如如果是
+针对 **Flink SQL**，则需要单独引入 **FlinkSQL** Parser，这里我们使用 **GenericSQL** 作为示例：
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
@@ -50,7 +46,7 @@ const errors = parser.validate(correctSql);
 console.log(errors); 
 ```
 
-Output:
+输出：
 
 ```javascript
 /*
@@ -58,7 +54,7 @@ Output:
 */
 ```
 
-Validate failed:
+校验失败示例：
 
 ```javascript
 const incorrectSql = 'selec id,name from user1;'
@@ -66,7 +62,7 @@ const errors = parser.validate(incorrectSql);
 console.log(errors); 
 ```
 
-Output:
+输出：
 
 ```javascript
 /*
@@ -82,12 +78,11 @@ Output:
 */
 ```
 
-We instanced a Parser object, and use the **validate** method to check the SQL syntax, if failed
-returns an array object includes **error** message.
+先实例化 Parser 对象，然后使用 `validate` 方法对 SQL 语句进行校验，如果校验失败，则返回一个包含 `error` 信息的数组。
 
-### Tokenizer
+### 词法分析（Tokenizer）
 
-Get all **tokens** by the Parser:
+必要场景下，可单独对 SQL 语句进行词法分析，获取所有的 Tokens 对象：
 
 ```javascript
 import { GenericSQL } from 'dt-sql-parser';
@@ -115,9 +110,9 @@ console.log(tokens)
 */
 ```
 
-### Visitor
+### 访问者模式（Visitor）
 
-Traverse the tree node by the Visitor:
+使用 Visitor 模式访问 AST 中的指定节点
 
 ```javascript
 import { GenericSQL, SqlParserVisitor } from 'dt-sql-parser';
@@ -127,12 +122,12 @@ const sql = `select id,name from user1;`
 // parseTree
 const tree = parser.parse(sql)
 class MyVisitor extends SqlParserVisitor {
-    // overwrite visitTableName
+    // 重写 visitTableName 方法
     visitTableName(ctx) {
         let tableName = ctx.getText().toLowerCase()
         console.log('TableName', tableName)
     }
-    // overwrite visitSelectElements
+    // 重写 visitSelectElements 方法
     visitSelectElements(ctx) {
         let selectElements = ctx.getText().toLowerCase()
         console.log('SelectElements', selectElements)
@@ -148,11 +143,11 @@ TableName user1
 
 ```
 
-> Tips: The node's method name can be found in the Visitor file under the corresponding SQL directory
+> 提示：使用 Visitor 模式时，节点的方法名称可以在对应 SQL 目录下的 Visitor 文件中查找
 
-### Listener
+### 监听器（Listener）
 
-Access the specified node in the AST by the Listener
+Listener 模式，利用 [ANTLR4](https://github.com/antlr/antlr4) 提供的 ParseTreeWalker 对象遍历 AST，进入各个节点时调用对应的方法。
 
 ```javascript
 import { GenericSQL, SqlParserListener } from 'dt-sql-parser';
@@ -181,11 +176,11 @@ TableName user1
 
 ```
 
-> Tips: The node's method name can be found in the Listener file under the corresponding SQL directory
+> 提示：使用 Listener 模式时，节点的方法名称可以在对应 SQL 目录下的 Listener 文件中查找
 
-### Clean
+### 清理注释内容
 
-Clear the **comments** and **spaces** before and after
+清除注释和前后空格
 
 ```javascript
 import { cleanSql } from 'dt-sql-parser';
@@ -200,9 +195,9 @@ select id,name from user1;
 */
 ```
 
-### Split SQL
+### 切割 SQL （Split）
 
-When the SQL text is very big, you can think about to split it by `;` , and handle it by each line.
+SQL 太大的情况下，我们可以先将SQL语句按 `;` 切割，然后逐句处理。
 
 ```javascript
 import { splitSql } from 'dt-sql-parser';
@@ -217,17 +212,17 @@ console.log(sqlList)
 */
 ```
 
-### Other API
+### 其他 API
 
-- parserTreeToString(input: string)
+- parserTreeToString (input: string)
 
-Parse the input and convert the AST to a `List-like` tree string.
+将 SQL 解析成 `List-like` 风格的树形字符串， 一般用于测试
 
-## Roadmap
+## 路线图
 
 - Auto-complete
 - Format code
 
-## License
+## 许可证
 
 [MIT](./LICENSE)
