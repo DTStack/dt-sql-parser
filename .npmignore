@@ -3,4 +3,9 @@ node_modules
 package-lock.json
 .DS_Store
 .git
+.github
+.history
+site
 src/
+docs
+lib/grammar

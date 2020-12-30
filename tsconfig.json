@@ -1,17 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "./lib/",
+        "outDir": "./dist/",
         "sourceMap": false,
         "allowJs":true,
         "target": "es6",
-        "module": "commonjs"
+        "module": "commonjs",
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "typeRoots": [
+            "node",
+            "node_modules/@types",
+            "./src/typings"
+        ]
+
     },
     "include": [
         "./src/**/*"
-    ],
-    "exclude": [
-        "./src/peg/*",
-        "./src/jison/*"
     ],
     "typeAcquisition": {
         "include": [

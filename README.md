@@ -1,108 +1,233 @@
-> 如果你只想单纯的解析(SQL/SparkSQL)，请使用 [cuopyue](https://github.com/HSunboy/cuopyue)
-
 # dt-sql-parser
 
 [![NPM version][npm-image]][npm-url]
 
+English | [简体中文](./README-zh_CN.md)
+
 [npm-image]: https://img.shields.io/npm/v/dt-sql-parser.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/dt-sql-parser
 
-本项目用于处理SQL，目前含有功能
+dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
 
-1. 校验SQL，hive SQL，impala SQL，flinkSQL 等语法，并给予错误信息与建议提示
-2. SQL分割,根据`;`将sql分割为数组
-3. 去除SQL中的的注释(目前支持`--`,`/**/`类型注释)
+Besides, it' provides some helper methods, like **split** SQL, and filter the `--` and `/**/` types of comments in SQL.
 
+Supported SQL:
 
-## 用法
+- MySQL
+- Flink SQL
+- Spark SQL
+- Hive SQL
+- PL/SQL
 
-### 过滤注释 / SQL分割
+>Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
 
-``` javascript
-const dtFilter=require("dt-sql-parser").filter;
-const sql=`
-/*sttttttttart*/create table /*hhhhhhhh
-hhhhhh
-aaaaaa*/ sql_task_comment_test(id int comment 'id') comment 'sql test';
-    --eeeeeeeend
-`
-console.log(dtFilter.filterComments(sql))//过滤注释
-console.log(dtFilter.splitSql(sql));//分割sql
+## Installation
+
+```bash
+// use npm
+npm i dt-sql-parser --save
+
+// use yarn
+yarn add dt-sql-parser
 ```
 
-### 校验hive sql语法
-``` javascript
-const dtSqlParser=require("dt-sql-parser").parser;
+## Usage
 
-console.log(dtSqlParser.parseSyntax("selet  * form",'hive'));
+### Syntax Validation
 
+First, we need to import the **Parser** object from `dt-sql-parser`, the different language needs
+different Parser, so if you need to handle the **Flink SQL**, you can import the **FlinkSQL Parser**.
+
+The below is a **GenericSQL Parser** example:
+
+```javascript
+import { GenericSQL } from 'dt-sql-parser';
+
+const parser = new GenericSQL();
+
+const correctSql = 'select id,name from user1;';
+const errors = parser.validate(correctSql);
+console.log(errors); 
+```
+
+Output:
+
+```javascript
 /*
-{
-  "text": "selet",//错误部分
-  "token": "REGULAR_IDENTIFIER",//类型
-  "line": 0,
-  "loc": {//错误位置信息
-    "first_line": 1,
-    "last_line": 1,
-    "first_column": 0,
-    "last_column": 5
-  },
-  "ruleId": "0",
-  "expected": [//建议输入内容
-    {
-      "text": "select",//建议内容
-      "distance": 1//建议优先级
-    },
-    {
-      "text": "delete",
-      "distance": 2
-    }
-  ],
-  "recoverable": false,
-  "incompleteStatement": true
-}
+[]
 */
 ```
 
-## API
+Validate failed:
 
-### filter
+```javascript
+const incorrectSql = 'selec id,name from user1;'
+const errors = parser.validate(incorrectSql);
+console.log(errors); 
+```
 
-#### function filterComments(sql:string):string
-过滤 `sql` 注释(支持`/*`和`--`)
+Output:
 
-#### function splitSql(sql:string):Array<string>
-自动去除注释，并且提取出各个 `sql`
+```javascript
+/*
+[
+    {
+        endCol: 5,
+        endLine: 1,
+        startCol: 0,
+        startLine: 1,
+        message: "mismatched input 'SELEC' expecting {<EOF>, 'ALTER', 'ANALYZE', 'CALL', 'CHANGE', 'CHECK', 'CREATE', 'DELETE', 'DESC', 'DESCRIBE', 'DROP', 'EXPLAIN', 'GET', 'GRANT', 'INSERT', 'KILL', 'LOAD', 'LOCK', 'OPTIMIZE', 'PURGE', 'RELEASE', 'RENAME', 'REPLACE', 'RESIGNAL', 'REVOKE', 'SELECT', 'SET', 'SHOW', 'SIGNAL', 'UNLOCK', 'UPDATE', 'USE', 'BEGIN', 'BINLOG', 'CACHE', 'CHECKSUM', 'COMMIT', 'DEALLOCATE', 'DO', 'FLUSH', 'HANDLER', 'HELP', 'INSTALL', 'PREPARE', 'REPAIR', 'RESET', 'ROLLBACK', 'SAVEPOINT', 'START', 'STOP', 'TRUNCATE', 'UNINSTALL', 'XA', 'EXECUTE', 'SHUTDOWN', '--', '(', ';'}"
+    }
+]
+*/
+```
 
-### parser
+We instanced a Parser object, and use the **validate** method to check the SQL syntax, if failed
+returns an array object includes **error** message.
 
-#### function parseSyntax(sql:string|Array<string>, type?:string):Object|boolean
-校验 `sql` 语法，如果没错误，则返回 `false`，否则返回错误详细信息
+### Tokenizer
 
-可以提供一个含有两个字符串的数组，代表被光标分割的两个 `sql片段`
+Get all **tokens** by the Parser:
 
-#### function parserSql(sql:string|Array<string>, type?:string):Object
-解析 `sql` 语法，根据上下文提示补全字段与其它辅助信息
+```javascript
+import { GenericSQL } from 'dt-sql-parser';
 
-可以提供一个含有两个字符串的数组，代表被光标分割的两个sql片段
+const parser = new GenericSQL()
+const sql = 'select id,name,sex from user1;'
+const tokens = parser.getAllTokens(sql)
+console.log(tokens)
+/*
+[
+    {
+        channel: 0
+        column: 0
+        line: 1
+        source: [SqlLexer, InputStream]
+        start: 0
+        stop: 5
+        tokenIndex: -1
+        type: 137
+        _text: null
+        text: "SELECT"
+    },
+    ...
+]
+*/
+```
 
-### flinksqlParser
+### Visitor
 
-#### function flinksqlParser (sql: sql): SyntaxError
-校验 `flinksql` 语法。
+Traverse the tree node by the Visitor:
 
->本项目文档不是很详细，也不准确（暂时没精力写），项目功能可以满足 hivesql，sql，impala，flinksql 的语法检查和提示功能。
-具体使用方式可以参照代码中的 ts 类型。
-----
+```javascript
+import { GenericSQL, SqlParserVisitor } from 'dt-sql-parser';
 
-hive，impala语法解析文件来自[Hue](https://github.com/cloudera/hue)
+const parser = new GenericSQL()
+const sql = `select id,name from user1;`
+// parseTree
+const tree = parser.parse(sql)
+class MyVisitor extends SqlParserVisitor {
+    // overwrite visitTableName
+    visitTableName(ctx) {
+        let tableName = ctx.getText().toLowerCase()
+        console.log('TableName', tableName)
+    }
+    // overwrite visitSelectElements
+    visitSelectElements(ctx) {
+        let selectElements = ctx.getText().toLowerCase()
+        console.log('SelectElements', selectElements)
+    }
+}
+const visitor = new MyVisitor()
+visitor.visit(tree)
 
-----
+/*
+SelectElements id,name
+TableName user1
+*/
 
-### ChangeLog
+```
 
-- 1.1.8 添加转义字符支持
-- 1.1.9 添加函数的中括号语法支持( split(nameList)[0] )
-- 1.2.0 添加 ts，添加测试
-- 2.0.0 添加flinksql语法检查
-- 3.0.0 拆分hive，impala，集成最新 `HUE` 方案
+> Tips: The node's method name can be found in the Visitor file under the corresponding SQL directory
+
+### Listener
+
+Access the specified node in the AST by the Listener
+
+```javascript
+import { GenericSQL, SqlParserListener } from 'dt-sql-parser';
+
+const parser = new GenericSQL();
+const sql = 'select id,name from user1;'
+// parseTree
+const tree = parser.parse(sql)
+class MyListener extends SqlParserListener {
+    enterTableName(ctx) {
+        let tableName = ctx.getText().toLowerCase()
+        console.log('TableName', tableName)
+    }
+    enterSelectElements(ctx) {
+        let selectElements = ctx.getText().toLowerCase()
+        log('SelectElements', selectElements)
+    }
+}
+const listenTableName = new MyListener();
+parser.listen(listenTableName, tree);
+
+/*
+SelectElements id,name
+TableName user1
+*/
+
+```
+
+> Tips: The node's method name can be found in the Listener file under the corresponding SQL directory
+
+### Clean
+
+Clear the **comments** and **spaces** before and after
+
+```javascript
+import { cleanSql } from 'dt-sql-parser';
+
+const sql = `-- comment comment
+select id,name from user1; `
+const cleanedSql = cleanSql(sql)
+console.log(cleanedSql)
+
+/*
+select id,name from user1;
+*/
+```
+
+### Split SQL
+
+When the SQL text is very big, you can think about to split it by `;` , and handle it by each line.
+
+```javascript
+import { splitSql } from 'dt-sql-parser';
+
+const sql = `select id,name from user1;
+select id,name from user2;`
+const sqlList = splitSql(sql)
+console.log(sqlList)
+
+/*
+["select id,name from user1;", "\nselect id,name from user2;"]
+*/
+```
+
+### Other API
+
+- parserTreeToString(input: string)
+
+Parse the input and convert the AST to a `List-like` tree string.
+
+## Roadmap
+
+- Auto-complete
+- Format code
+
+## License
+
+[MIT](./LICENSE)
