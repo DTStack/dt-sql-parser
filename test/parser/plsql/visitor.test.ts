@@ -10,6 +10,7 @@ describe('PLSQL Visitor Tests', () => {
     test('Visitor visitTable_ref_list', () => {
         let result = '';
         class MyVisitor extends PlSqlParserVisitor {
+            // eslint-disable-next-line camelcase
             visitTable_ref_list(ctx): void {
                 result = ctx.getText().toLowerCase();
                 super.visitTable_ref_list(ctx);
