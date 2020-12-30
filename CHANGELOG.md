@@ -4,7 +4,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [4.0.0-beta](https://github.com/DTStack/dt-sql-parser/compare/v3.0.5...v4.0.0-beta) (2020-12-30)
 
-
 ### Features
 
 * **fink:** refactoring selectStatement ([dae7980](https://github.com/DTStack/dt-sql-parser/commit/dae7980f75232a69b9cac89e816fcc1e18b41e30))
@@ -30,7 +29,6 @@ All notable changes to this project will be documented in this file. See [standa
 * create hive lexer and hive parser ([81fb236](https://github.com/DTStack/dt-sql-parser/commit/81fb23648e0f3d080331f16f387a857d26f12d60))
 * refactoring hive SQL lexer ([c3af5fc](https://github.com/DTStack/dt-sql-parser/commit/c3af5fccc10619f9ea4cb7680e58864bfbbae2c0))
 * **flinksql:** add some lexer ([e8822d5](https://github.com/DTStack/dt-sql-parser/commit/e8822d530f79bd873dc259ba6182789397fb68f2))
-
 
 ### Bug Fixes
 
