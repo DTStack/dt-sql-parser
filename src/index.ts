@@ -8,3 +8,6 @@ export * from './lib/hive/HiveSqlListener';
 export * from './lib/hive/HiveSqlVisitor';
 export * from './lib/plsql/PlSqlParserListener';
 export * from './lib/plsql/PlSqlParserVisitor';
+export * from './lib/spark/SparkSqlVisitor';
+export * from './lib/spark/SparkSqlListener';
+

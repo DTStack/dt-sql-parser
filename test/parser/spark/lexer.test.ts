@@ -1,9 +1,9 @@
-import SQLParser from '../../../src/parser/spark';
+import { SparkSQL } from '../../../src';
 
 const log = console.log.bind(console);
 
 describe('SparkSQL Lexer tests', () => {
-    const parser = new SQLParser();
+    const parser = new SparkSQL();
 
     test('select id,name from user1;', () => {
         const sql = `select id,name from user1;`;
