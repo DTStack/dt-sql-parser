@@ -44,7 +44,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [4.0.1-beta](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta...v4.0.1-beta) (2021-01-05)
 
-
 ### Bug Fixes
 
 * delete mock data ([e5c9690](https://github.com/DTStack/dt-sql-parser/commit/e5c96907190aecf12fe4bd24ee32c3a3802c34e7))
@@ -84,7 +83,3 @@ All notable changes to this project will be documented in this file. See [standa
 * **flink:** clear useless comments ([d3008ad](https://github.com/DTStack/dt-sql-parser/commit/d3008add05c45a748acda539fbb4cbc12603d482))
 * adjust import path ([cff6192](https://github.com/DTStack/dt-sql-parser/commit/cff6192d0f87c12cdd88159b9d2fa3e68b836ecb))
 * restore antlr4 config ([3137fac](https://github.com/DTStack/dt-sql-parser/commit/3137fac4e15444e6fc9845e0d25ba2b0d9c091d6))
-
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
