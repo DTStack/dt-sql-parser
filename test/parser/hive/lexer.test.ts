@@ -1,7 +1,7 @@
-import SQLParser from '../../../src/parser/hive';
+import { HiveSQL } from '../../../src';
 
 describe('HiveSQL Lexer tests', () => {
-    const parser = new SQLParser();
+    const parser = new HiveSQL();
     test('select token counts', () => {
         const sql = 'SELECT * FROM t1';
         const tokens = parser.getAllTokens(sql);
