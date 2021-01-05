@@ -1,8 +1,9 @@
-import * as utils from '../../src/utils';
+import { lexer, splitSql, cleanSql } from '../../src';
+
 describe('utils', () => {
     test('split single sql', () => {
         const sql = 'select id,name from user';
-        const result = utils.splitSql(sql);
+        const result = splitSql(sql);
         expect(result.length).toEqual(1);
     });
     test('split multiple sql', () => {
@@ -13,7 +14,7 @@ describe('utils', () => {
             xxx
         */
         select user from b`;
-        const result = utils.splitSql(sql);
+        const result = splitSql(sql);
         expect(result.length).toEqual(2);
     });
     test('lexer', () => {
@@ -24,7 +25,7 @@ describe('utils', () => {
             xxx
         */
         select user from b;`;
-        const result = utils.lexer(sql);
+        const result = lexer(sql);
         expect(result.length).toEqual(4);
     });
     test('cleanSql', () => {
@@ -35,7 +36,7 @@ describe('utils', () => {
             xxx
         */
         select user from b`;
-        const result = utils.cleanSql(sql);
+        const result = cleanSql(sql);
         expect(result.indexOf('xxx')).toEqual(-1);
     });
 });
