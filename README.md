@@ -226,7 +226,7 @@ Parse the input and convert the AST to a `List-like` tree string.
 ## Roadmap
 
 - Auto-complete
-- Format code
+- Code formatting
 
 ## License
 
