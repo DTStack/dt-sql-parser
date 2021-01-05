@@ -4,7 +4,7 @@ import { PlSqlParser } from '../lib/plsql/PlSqlParser';
 export * from '../lib/plsql/PlSqlParserListener';
 export * from '../lib/plsql/PlSqlParserVisitor';
 
-import BasicParser from './common/BasicParser';
+import BasicParser from './common/basicParser';
 
 export default class PLSQLParser extends BasicParser {
     public createLexer(input: string): Lexer {

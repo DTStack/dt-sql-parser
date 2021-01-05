@@ -4,7 +4,7 @@ import { SparkSqlParser } from '../lib/spark/SparkSqlParser';
 export * from '../lib/spark/SparkSqlVisitor';
 export * from '../lib/spark/SparkSqlListener';
 
-import BasicParser from './common/BasicParser';
+import BasicParser from './common/basicParser';
 
 export default class SparkSQL extends BasicParser {
     public createLexer(input: string): Lexer {

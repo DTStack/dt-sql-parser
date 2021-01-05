@@ -4,7 +4,7 @@ import { FlinkSqlParser } from '../lib/flinksql/FlinkSqlParser';
 export * from '../lib/flinksql/FlinkSqlParserListener';
 export * from '../lib/flinksql/FlinkSqlParserVisitor';
 
-import BasicParser from './common/BasicParser';
+import BasicParser from './common/basicParser';
 
 export default class FlinkSQL extends BasicParser {
     public createLexer(input: string): Lexer {
