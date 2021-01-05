@@ -1,7 +1,7 @@
-import SQLParser from '../../../src/parser/generic';
+import { GenericSQL } from '../../../src';
 
 describe('Generic SQL Syntax Tests', () => {
-    const parser = new SQLParser();
+    const parser = new GenericSQL();
 
     test('Select Statement', () => {
         const sql = 'select id,name from user1;';

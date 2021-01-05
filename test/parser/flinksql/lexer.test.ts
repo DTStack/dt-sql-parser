@@ -1,6 +1,7 @@
-import SQLParser from '../../../src/parser/flinksql';
+import { FlinkSQL } from '../../../src';
+
 describe('FlinkSQL Lexer tests', () => {
-    const parser = new SQLParser();
+    const parser = new FlinkSQL();
 
     const sql = 'SELECT * FROM table1';
     const tokens = parser.getAllTokens(sql);

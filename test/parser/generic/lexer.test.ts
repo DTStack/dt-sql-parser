@@ -1,7 +1,7 @@
-import SQLParser from '../../../src/parser/generic';
+import { GenericSQL } from '../../../src/';
 
 describe('GenericSQL Lexer tests', () => {
-    const mysqlParser = new SQLParser();
+    const mysqlParser = new GenericSQL();
 
     const sql = 'select id,name,sex from user1;';
     const tokens = mysqlParser.getAllTokens(sql);

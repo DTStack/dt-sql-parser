@@ -1,7 +1,7 @@
-import SQLParser from '../../../src/parser/flinksql';
+import { FlinkSQL } from '../../../src';
 
 describe('FlinkSQL Syntax Tests', () => {
-    const parser = new SQLParser();
+    const parser = new FlinkSQL();
 
     // Create statements
     test('Test simple CreateTable Statement', () => {
