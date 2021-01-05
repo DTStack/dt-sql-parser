@@ -344,10 +344,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@types/antlr4@^4.7.2":
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/@types/antlr4/-/antlr4-4.7.2.tgz#8cfbbcea13d45c42e9a326aa0e55df816cdd07f5"
-  integrity sha512-v6NASzZa4pUgO2QJJqGHTRRBfZDTOk2savuugSfCLatRTd2q+UtW0I7ub9mjzERhm7aWqGxBi886HnJkLYiIEA==
+"@types/antlr4@4.7.0":
+  version "4.7.0"
+  resolved "http://registry.npm.dtstack.com/@types%2fantlr4/-/antlr4-4.7.0.tgz#e6300119bddff6e23f5bbd299f5cf3c722a6249b"
+  integrity sha1-5jABGb3f9uI/W70pn1zzxyKmJJs=
 
 "@types/babel__core@^7.1.0":
   version "7.1.9"
@@ -589,10 +589,10 @@ ansi-styles@^4.1.0:
     "@types/color-name" "^1.1.1"
     color-convert "^2.0.1"
 
-antlr4@^4.7.2:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/antlr4/-/antlr4-4.8.0.tgz#f938ec171be7fc2855cd3a533e87647185b32b6a"
-  integrity sha512-en/MxQ4OkPgGJQ3wD/muzj1uDnFSzdFIhc2+c6bHZokWkuBb6RRvFjpWhPxWLbgQvaEzldJZ0GSQpfSAaE3hqg==
+antlr4@4.7.2:
+  version "4.7.2"
+  resolved "http://registry.npm.dtstack.com/antlr4/-/antlr4-4.7.2.tgz#9d0b5987bb63660de658055ee9149141b4d9b462"
+  integrity sha512-vZA1xYufXLe3LX+ja9rIVxjRmILb1x3k7KYZHltRbfJtXjJ1DlFIqt+CbPYmghx0EuzY9DajiDw+MdyEt1qAsQ==
 
 anymatch@^2.0.0:
   version "2.0.0"
