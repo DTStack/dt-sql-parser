@@ -18,7 +18,8 @@
     "build": "rm -rf dist && tsc",
     "eslint": "eslint ./src/**/*.ts",
     "check-types": "tsc --skipLibCheck",
-    "test": "jest"
+    "test": "jest",
+    "release": "npm run build && standard-version --infile CHANGELOG.md"
   },
   "author": "dt-insight-front",
   "license": "MIT",
@@ -39,6 +40,7 @@
   },
   "dependencies": {
     "@types/antlr4": "4.7.0",
-    "antlr4": "4.7.2"
+    "antlr4": "4.7.2",
+    "standard-version": "^9.1.0"
   }
 }
