@@ -1,9 +1,9 @@
-import SQLParser, { PlSqlParserListener } from '../../../src/parser/plsql';
+import { PLSQL, PlSqlParserListener } from '../../../src';
 
 describe('PLSQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new SQLParser();
+    const parser = new PLSQL();
 
     const parserTree = parser.parse(sql);
 

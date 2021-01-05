@@ -1,9 +1,9 @@
-import SQLParser, { HiveSqlVisitor } from '../../../src/parser/hive';
+import { HiveSQL, HiveSqlVisitor } from '../../../src';
 
 describe('Generic SQL Visitor Tests', () => {
     const expectTableName = 'dm_gis.dlv_addr_tc_count';
     const sql = `select citycode,tc,inc_day from ${expectTableName} where inc_day='20190501' limit 100;`;
-    const parser = new SQLParser();
+    const parser = new HiveSQL();
 
     const parserTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);

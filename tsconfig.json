@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
-        "sourceMap": false,
+        "sourceMap": true,
         "allowJs":true,
         "target": "es6",
         "module": "commonjs",
         "noUnusedLocals": true,
         "noUnusedParameters": false,
+        "skipLibCheck": true,
         "typeRoots": [
             "node",
             "node_modules/@types",

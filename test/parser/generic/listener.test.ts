@@ -1,9 +1,9 @@
-import SQLParser, { SqlParserListener } from '../../../src/parser/generic';
+import { GenericSQL, SqlParserListener } from '../../../src';
 
 describe('Generic SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new SQLParser();
+    const parser = new GenericSQL();
 
     const parserTree = parser.parse(sql);
 

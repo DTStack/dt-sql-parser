@@ -1,10 +1,7 @@
 import { InputStream, CommonTokenStream, Lexer } from 'antlr4';
 import { SqlLexer } from '../lib/generic/SqlLexer';
 import { SqlParser } from '../lib/generic/SqlParser';
-export * from '../lib/generic/SqlParserVisitor';
-export * from '../lib/generic/SqlParserListener';
-
-import BasicParser from './common/BasicParser';
+import BasicParser from './common/basicParser';
 
 export default class GenericSQL extends BasicParser {
     public createLexer(input: string): Lexer {

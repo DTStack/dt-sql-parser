@@ -1,7 +1,7 @@
-import SQLParser, { HiveSqlListener } from '../../../src/parser/hive';
+import { HiveSQL, HiveSqlListener } from '../../../src';
 
 describe('Hive SQL Listener Tests', () => {
-    const parser = new SQLParser();
+    const parser = new HiveSQL();
     test('Listener enterSelectList', async () => {
         const expectTableName = 'userName';
         const sql = `select ${expectTableName} from user1 where inc_day='20190601' limit 1000;`;

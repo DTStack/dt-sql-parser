@@ -1,11 +1,9 @@
-import
-SQLParser, { FlinkSqlParserListener }
-    from '../../../src/parser/flinksql';
+import { FlinkSQL, FlinkSqlParserListener } from '../../../src';
 
 describe('Flink SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new SQLParser();
+    const parser = new FlinkSQL();
 
     const parserTree = parser.parse(sql);
 

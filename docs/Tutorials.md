@@ -8,6 +8,20 @@
 
 ## Integrate with Monaco Editor
 
+## Release
+
+npm run script
+
+```bash
+npm run release -- --release-as minor
+```
+
+Or
+
+```bash
+npm run release -- --release-as 1.1.0
+```
+
 ## Reference
 
 - <https://tomassetti.me/writing-a-browser-based-editor-using-monaco-and-antlr/>

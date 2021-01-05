@@ -1,10 +1,9 @@
-/* eslint-disable max-len */
-import SQLParser from '../../../src/parser/spark';
+import { SparkSQL } from '../../../src';
 
 const error = console.log.bind(console, '***** error\n');
 
 const validateTest = (sqls) => {
-    const parser = new SQLParser();
+    const parser = new SparkSQL();
     sqls.forEach((sql, i) => {
         const result = parser.validate(sql);
         if (result.length !== 0) {

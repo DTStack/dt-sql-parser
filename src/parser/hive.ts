@@ -1,10 +1,7 @@
 import { InputStream, CommonTokenStream, Lexer } from 'antlr4';
 import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
 import { HiveSql } from '../lib/hive/HiveSql';
-export * from '../lib/hive/HiveSqlListener';
-export * from '../lib/hive/HiveSqlVisitor';
-
-import BasicParser from './common/BasicParser';
+import BasicParser from './common/basicParser';
 
 export default class HiveSQL extends BasicParser {
     public createLexer(input: string): Lexer {

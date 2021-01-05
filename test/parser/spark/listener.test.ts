@@ -1,9 +1,9 @@
-import SQLParser, { SparkSqlListener } from '../../../src/parser/spark';
+import { SparkSQL, SparkSqlListener } from '../../../src';
 
 describe('Spark SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new SQLParser();
+    const parser = new SparkSQL();
 
     const parserTree = parser.parse(sql);
 

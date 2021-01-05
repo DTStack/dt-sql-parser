@@ -1,8 +1,3 @@
-export * from './generic';
-export * from './plsql';
-export * from './hive';
-export * from './flinksql';
-export * from './spark';
 export { default as GenericSQL } from './generic';
 export { default as PLSQL } from './plsql';
 export { default as HiveSQL } from './hive';

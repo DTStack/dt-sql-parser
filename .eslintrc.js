@@ -7,6 +7,12 @@ module.exports = {
         'google',
     ],
     'globals': {
+        'expect': 'readable',
+        'test': 'readable',
+        'describe': 'readable',
+        'beforeEach': 'readable',
+        'afterEach': 'readable',
+        'jest': 'readable',
         'Atomics': 'readonly',
         'SharedArrayBuffer': 'readonly',
     },

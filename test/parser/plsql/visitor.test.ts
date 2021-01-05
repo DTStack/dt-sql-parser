@@ -1,9 +1,9 @@
-import SQLParser, { PlSqlParserVisitor } from '../../../src/parser/plsql';
+import { PLSQL, PlSqlParserVisitor } from '../../../src';
 
 describe('PLSQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new SQLParser();
+    const parser = new PLSQL();
 
     const parserTree = parser.parse(sql);
 

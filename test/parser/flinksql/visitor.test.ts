@@ -1,9 +1,9 @@
-import SQLParser, { FlinkSqlParserVisitor } from '../../../src/parser/flinksql';
+import { FlinkSQL, FlinkSqlParserVisitor } from '../../../src';
 
 describe('Flink SQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new SQLParser();
+    const parser = new FlinkSQL();
 
     const parserTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);
