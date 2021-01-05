@@ -1,5 +1,4 @@
 import SQLParser from '../../../src/parser/flinksql';
-import sqlMockData from '../../mock/flinkSql';
 
 describe('FlinkSQL Syntax Tests', () => {
     const parser = new SQLParser();
@@ -169,52 +168,6 @@ describe('FlinkSQL Syntax Tests', () => {
     // show statements
     test('Test simple Show Statement', () => {
         const sql = `SHOW CATALOGS;`;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-
-    test('Test complex sql Statement one', () => {
-        const sql = sqlMockData.sqlStrOne;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test complex sql Statement two', () => {
-        const sql = sqlMockData.sqlStrTwo;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test complex sql Statement three', () => {
-        const sql = sqlMockData.sqlStrThree;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test complex sql Statement four', () => {
-        const sql = sqlMockData.sqlStrFour;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test complex sql Statement five', () => {
-        const sql = sqlMockData.sqlStrFive;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test complex sql Statement six', () => {
-        const sql = sqlMockData.sqlStrSix;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test complex sql Statement seven', () => {
-        const sql = sqlMockData.sqlStrSeven;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test complex sql Statement eight', () => {
-        const sql = sqlMockData.sqlStrEight;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test complex sql Statement nine', () => {
-        const sql = sqlMockData.allSqlStr;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
