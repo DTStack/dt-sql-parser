@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "4.0.0-beta",
+  "version": "4.0.1-beta",
   "description": "There are some sql parsers built with antlr4, and it's mainly for the **BigData** domain.",
   "keywords": [
     "sql",

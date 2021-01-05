@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1-beta](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta...v4.0.1-beta) (2021-01-05)
+
+
+### Bug Fixes
+
+* delete mock data ([e5c9690](https://github.com/DTStack/dt-sql-parser/commit/e5c96907190aecf12fe4bd24ee32c3a3802c34e7))
+
 ## [4.0.0-beta](https://github.com/DTStack/dt-sql-parser/compare/v3.0.5...v4.0.0-beta) (2020-12-30)
 
 ### Features
