@@ -1,8 +1,6 @@
 import { InputStream, CommonTokenStream, Lexer } from 'antlr4';
 import { PlSqlLexer } from '../lib/plsql/PlSqlLexer';
 import { PlSqlParser } from '../lib/plsql/PlSqlParser';
-export * from '../lib/plsql/PlSqlParserListener';
-export * from '../lib/plsql/PlSqlParserVisitor';
 
 import BasicParser from './common/basicParser';
 

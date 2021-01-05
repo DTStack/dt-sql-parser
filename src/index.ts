@@ -6,3 +6,5 @@ export * from './lib/generic/SqlParserVisitor';
 export * from './lib/generic/SqlParserListener';
 export * from './lib/hive/HiveSqlListener';
 export * from './lib/hive/HiveSqlVisitor';
+export * from './lib/plsql/PlSqlParserListener';
+export * from './lib/plsql/PlSqlParserVisitor';

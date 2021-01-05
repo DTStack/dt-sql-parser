@@ -1,7 +1,7 @@
-import SQLParser from '../../../src/parser/plsql';
+import { PLSQL } from '../../../src';
 
 describe('PLSQL Lexer tests', () => {
-    const parser = new SQLParser();
+    const parser = new PLSQL();
 
     const sql = 'select id,name,sex from user1;';
     const tokens = parser.getAllTokens(sql);

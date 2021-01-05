@@ -1,7 +1,7 @@
-import SQLParser from '../../../src/parser/plsql';
+import { PLSQL } from '../../../src';
 
 describe('PLSQL Syntax Tests', () => {
-    const parser = new SQLParser();
+    const parser = new PLSQL();
 
     test('Test simple select Statement', () => {
         const sql = 'select id,name from user1;';
