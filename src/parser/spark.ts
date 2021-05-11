@@ -9,7 +9,7 @@ export default class SparkSQL extends BasicParser {
         const lexer = <unknown> new SparkSqlLexer(chars) as Lexer;
         return lexer;
     }
-    public createParserFromLexer(lexer: Lexer) {
+    public createParserFromLexer(lexer: Lexer): any {
         const tokenStream = new CommonTokenStream(lexer);
         return new SparkSqlParser(tokenStream);
     }

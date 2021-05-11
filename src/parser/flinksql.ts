@@ -9,7 +9,7 @@ export default class FlinkSQL extends BasicParser {
         const lexer = <unknown> new FlinkSqlLexer(chars) as Lexer;
         return lexer;
     }
-    public createParserFromLexer(lexer: Lexer) {
+    public createParserFromLexer(lexer: Lexer): any {
         const tokenStream = new CommonTokenStream(lexer);
         return new FlinkSqlParser(tokenStream);
     }

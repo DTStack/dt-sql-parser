@@ -9,7 +9,7 @@ export default class GenericSQL extends BasicParser {
         const lexer = <unknown> new SqlLexer(chars) as Lexer;
         return lexer;
     }
-    public createParserFromLexer(lexer: Lexer) {
+    public createParserFromLexer(lexer: Lexer): any {
         const tokenStream = new CommonTokenStream(lexer);
         return new SqlParser(tokenStream);
     }

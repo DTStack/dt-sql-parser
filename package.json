@@ -13,6 +13,8 @@
     "bigdata"
   ],
   "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "antlr4": "node build/antlr4.js",
     "build": "rm -rf dist && tsc",
