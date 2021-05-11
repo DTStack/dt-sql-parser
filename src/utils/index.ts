@@ -163,7 +163,7 @@ function splitSql(sql: string) {
  * @param {String} sql
  */
 function cleanSql(sql: string) {
-    sql = sql.trim(); // 删除前后空格
+    sql.trim(); // 删除前后空格
     const tokens = lexer(sql);
     let resultSql = '';
     let startIndex = 0;

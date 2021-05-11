@@ -39,12 +39,4 @@ describe('utils', () => {
         const result = cleanSql(sql);
         expect(result.indexOf('xxx')).toEqual(-1);
     });
-
-    test('clean SQL white spaces', () => {
-        const sql = `   
-        select * from a;    `;
-        const expected = 'select * from a;';
-        const result = cleanSql(sql);
-        expect(result).toEqual(expected);
-    });
 });
