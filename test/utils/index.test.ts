@@ -1,4 +1,5 @@
 import { lexer, splitSql, cleanSql } from '../../src';
+import { TokenType } from '../../src/utils/token';
 
 describe('utils', () => {
     test('split single sql', () => {
@@ -27,6 +28,15 @@ describe('utils', () => {
         select user from b;`;
         const result = lexer(sql);
         expect(result.length).toEqual(4);
+    });
+    test('lexer for comments', () => {
+        const sql = `select * from a;--comments`;
+        const expected = `--comments`;
+        const result = lexer(sql);
+        const comments = result.find((token) =>
+            token.type === TokenType.Comment,
+        );
+        expect(comments.value).toEqual(expected);
     });
     test('cleanSql', () => {
         const sql = `-- a ;

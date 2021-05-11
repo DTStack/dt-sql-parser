@@ -82,7 +82,7 @@ function lexer(input: string): Token[] {
             let value = '';
             const start = current;
 
-            while (char !== '\n') {
+            while (char !== '\n' && current < input.length) {
                 value += char;
                 char = input[++current];
             }
