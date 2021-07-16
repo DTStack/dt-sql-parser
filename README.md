@@ -16,7 +16,7 @@ Besides, it provides some helper methods, like **split** SQL, and filter the `--
 
 Supported SQL:
 
-- MySQL
+- Generic SQL (MySQL)
 - Flink SQL
 - Spark SQL
 - Hive SQL
