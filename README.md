@@ -12,17 +12,22 @@ English | [简体中文](./README-zh_CN.md)
 
 dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
 
-Besides, it' provides some helper methods, like **split** SQL, and filter the `--` and `/**/` types of comments in SQL.
+Besides, it provides some helper methods, like **split** SQL, and filter the `--` and `/**/` types of comments in SQL.
 
 Supported SQL:
 
-- MySQL
+- Generic SQL (MySQL)
 - Flink SQL
 - Spark SQL
 - Hive SQL
 - PL/SQL
 
 >Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
+
+## Integrating SQL Parser with Monaco Editor
+
+We have provided a [monaco-sql-languages](https://github.com/DTStack/monaco-sql-languages) package, you can integrate with `monaco-editor`
+easily.
 
 ## Installation
 
