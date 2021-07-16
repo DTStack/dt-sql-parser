@@ -33,7 +33,8 @@
     "eslint-config-google": "^0.14.0",
     "jest": "^24.8.0",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "standard-version": "^9.1.0"
   },
   "git repository": "https://github.com/DTStack/dt-sql-parser",
   "repository": "https://github.com/DTStack/dt-sql-parser",
@@ -42,7 +43,6 @@
   },
   "dependencies": {
     "@types/antlr4": "4.7.0",
-    "antlr4": "4.7.2",
-    "standard-version": "^9.1.0"
+    "antlr4": "4.7.2"
   }
 }
