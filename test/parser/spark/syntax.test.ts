@@ -312,4 +312,13 @@ SELECT * FROM t2;`,
         ];
         validateTest(sqls);
     });
+
+    test('Customizing variables with the ${} symbol', () => {
+        const sqls = [
+            `select * from \${tb};`,
+            `select a as \${b_} from tb_test;`,
+            'select a as ${bb} from ${tt}',
+        ];
+        validateTest(sqls);
+    });
 });
