@@ -6,7 +6,6 @@ export enum TokenType {
     SingleQuotation = 'SingleQuotation',
     DoubleQuotation = 'DoubleQuotation',
     BackQuotation = 'BackQuotation',
-
     /**
      * Language element type
      */
@@ -16,11 +15,20 @@ export enum TokenType {
      * Statement
      */
     StatementTerminator = 'StatementTerminator',
-
     /**
      * Others
      */
-    Error = 'Error'
+    Error = 'Error',
+    /**
+     * Left small Bracket
+     */
+    LeftSmallBracket = 'LeftSmallBracket',
+    /**
+     * Left small Bracket
+     */
+    RightSmallBracket = 'RightSmallBracket',
+    Comma = 'Comma',
+    FunctionArguments = 'FunctionArguments'
 }
 
 /**
@@ -40,7 +48,10 @@ export interface Token {
 */
 export const TokenReg = {
     [TokenType.StatementTerminator]: /[;]/,
-    [TokenType.SingleQuotation]: /[']/,
+    [TokenType.SingleQuotation]: /['|\']/,
     [TokenType.DoubleQuotation]: /["]/,
     [TokenType.BackQuotation]: /[`]/,
+    [TokenType.LeftSmallBracket]: /[(]/,
+    [TokenType.RightSmallBracket]: /[)]/,
+    [TokenType.Comma]: /[,]/,
 };
