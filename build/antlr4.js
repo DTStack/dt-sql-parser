@@ -10,7 +10,6 @@ const entry = [
     'hive',
     'plsql',
     'spark',
-    'impala',
     'flinksql',
 ];
 
