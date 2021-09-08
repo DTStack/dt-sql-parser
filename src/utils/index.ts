@@ -33,9 +33,32 @@ function lexer(input: string): Token[] {
     };
 
     /**
+     * 过滤函数内容
+     */
+    const matchFunction = (currentChar: string, validator: RegExp) => {
+        let value = currentChar;
+        const start = current;
+        do {
+            if (currentChar === '\n') {
+                line++;
+            }
+
+            currentChar = input[++current];
+            value += currentChar;
+        } while (!validator.test(currentChar)); // 处理转义字符
+        tokens.push({
+            type: TokenType.FunctionArguments,
+            value,
+            start: start,
+            lineNumber: line,
+            end: current,
+        });
+        ++current;
+    };
+
+    /**
      * 过滤（提取） 引号中的内容
      */
-    // eslint-disable-next-line
     const matchQuotation = (currentChar: string, validator: RegExp, TokenType: TokenType) => {
         do {
             if (currentChar === '\n') {
@@ -50,12 +73,17 @@ function lexer(input: string): Token[] {
     while (current < input.length) {
         let char = input[current];
 
-        // 按顺序处理 换行符 反引号 单引号 双引号 注释 分号
+        // 按顺序处理 括号函数 换行符 反引号 单引号 双引号 注释 分号
         // 引号内 可能包含注释包含的符号以及分号 所以优先处理引号里面的内容 去除干扰信息
 
         if (char === '\n') {
             line++;
             current++;
+            continue;
+        }
+
+        if (TokenReg.LeftSmallBracket.test(char)) {
+            matchFunction(char, TokenReg.RightSmallBracket);
             continue;
         }
 
