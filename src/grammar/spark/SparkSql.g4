@@ -1793,11 +1793,15 @@ BIGDECIMAL_LITERAL
     ;
 
 IDENTIFIER
-    : (LETTER | DIGIT | '_')+
+    : (LETTER | DIGIT | '_' | CUSTOM_VARS)+
     ;
 
 BACKQUOTED_IDENTIFIER
     : '`' ( ~'`' | '``' )* '`'
+    ;
+
+CUSTOM_VARS
+    : '${'(IDENTIFIER)'}'
     ;
 
 fragment DECIMAL_DIGITS
