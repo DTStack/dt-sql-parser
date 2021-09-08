@@ -9,7 +9,6 @@
     "hive",
     "spark",
     "flink",
-    "impala",
     "bigdata"
   ],
   "main": "dist/index.js",
