@@ -7,6 +7,7 @@ describe('utils', () => {
         const result = splitSql(sql);
         expect(result.length).toEqual(1);
     });
+
     test('split multiple sql', () => {
         const sql = `-- a ;
         select * from a;
@@ -18,6 +19,14 @@ describe('utils', () => {
         const result = splitSql(sql);
         expect(result.length).toEqual(2);
     });
+
+    test('split special quotation sql', () => {
+        const sql = `select regexp_replace('a', 'bc', 'xfe'feefe', '233'); 
+            select regexp_replace('abc', "fe", '233');`;
+        const result = splitSql(sql);
+        expect(result.length).toEqual(2);
+    });
+
     test('lexer', () => {
         const sql = `-- a ;
         select * from a;
