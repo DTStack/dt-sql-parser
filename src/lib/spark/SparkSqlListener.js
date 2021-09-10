@@ -1,4 +1,4 @@
-// Generated from /Users/jinjiongxi/workspace/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.8
+// Generated from /Users/ziv/Workspace/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
