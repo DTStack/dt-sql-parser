@@ -1,4 +1,4 @@
-// Generated from /Users/jinjiongxi/workspace/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.8
+// Generated from /Users/ziv/Workspace/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 var SparkSqlListener = require('./SparkSqlListener').SparkSqlListener;
@@ -8,7 +8,7 @@ var grammarFileName = "SparkSql.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u0128\u0bd9\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
+    "\u0003\u0129\u0bd9\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
     "\t\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007",
     "\u0004\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f",
     "\u0004\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010",
@@ -2285,7 +2285,8 @@ var symbolicNames = [ null, null, null, null, null, null, null, null, null,
                       "TINYINT_LITERAL", "INTEGER_VALUE", "EXPONENT_VALUE", 
                       "DECIMAL_VALUE", "FLOAT_LITERAL", "DOUBLE_LITERAL", 
                       "BIGDECIMAL_LITERAL", "IDENTIFIER", "BACKQUOTED_IDENTIFIER", 
-                      "SIMPLE_COMMENT", "BRACKETED_COMMENT", "WS", "UNRECOGNIZED" ];
+                      "CUSTOM_VARS", "SIMPLE_COMMENT", "BRACKETED_COMMENT", 
+                      "WS", "UNRECOGNIZED" ];
 
 var ruleNames =  [ "program", "singleStatement", "emptyStatement", "singleExpression", 
                    "singleTableIdentifier", "singleMultipartIdentifier", 
@@ -2659,10 +2660,11 @@ SparkSqlParser.DOUBLE_LITERAL = 287;
 SparkSqlParser.BIGDECIMAL_LITERAL = 288;
 SparkSqlParser.IDENTIFIER = 289;
 SparkSqlParser.BACKQUOTED_IDENTIFIER = 290;
-SparkSqlParser.SIMPLE_COMMENT = 291;
-SparkSqlParser.BRACKETED_COMMENT = 292;
-SparkSqlParser.WS = 293;
-SparkSqlParser.UNRECOGNIZED = 294;
+SparkSqlParser.CUSTOM_VARS = 291;
+SparkSqlParser.SIMPLE_COMMENT = 292;
+SparkSqlParser.BRACKETED_COMMENT = 293;
+SparkSqlParser.WS = 294;
+SparkSqlParser.UNRECOGNIZED = 295;
 
 SparkSqlParser.RULE_program = 0;
 SparkSqlParser.RULE_singleStatement = 1;

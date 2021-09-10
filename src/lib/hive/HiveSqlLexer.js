@@ -1,4 +1,4 @@
-// Generated from /Users/libowen/Desktop/Code/gitlab.prod.dtstack.cn/dt-insight-front/infrastructure/dt-sql-parser/src/grammar/hive/HiveSqlLexer.g4 by ANTLR 4.8
+// Generated from /Users/ziv/Workspace/dt-sql-parser/src/grammar/hive/HiveSqlLexer.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
