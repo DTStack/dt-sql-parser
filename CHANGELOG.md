@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.2.2](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.2.1...v4.0.0-beta.2.2) (2021-09-10)
+
+
+### Features
+
+* add Bracket, Comma, and FunctionArguments tokens ([b1ae454](https://github.com/DTStack/dt-sql-parser/commit/b1ae454ae4f8cc78071a5708486bd0f6dc96d29c))
+* remove the impala ([dd38dda](https://github.com/DTStack/dt-sql-parser/commit/dd38dda19a8d714c0024b65cf51da078da835692))
+* remove the impala ([f9cf65d](https://github.com/DTStack/dt-sql-parser/commit/f9cf65d95142f17e0055e00997304a7d3888aa44))
+* support custom variables ${} ([df18e6c](https://github.com/DTStack/dt-sql-parser/commit/df18e6cb21c025266716ffff3be5ce17390bec1f))
+* tokenizer for the function arugments ([bb6e8ac](https://github.com/DTStack/dt-sql-parser/commit/bb6e8ac025a2b71594c75705ffd0df753cdb5e55))
+
 ## [4.0.0-beta.2.1](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.2...v4.0.0-beta.2.1) (2021-07-16)
 
 ## [4.0.0-beta.2](https://github.com/DTStack/dt-sql-parser/compare/v3.0.5...v4.0.0-beta.2) (2021-05-11)
