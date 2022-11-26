@@ -180,7 +180,7 @@ class MyListener extends SqlParserListener {
     }
     enterSelectElements(ctx) {
         let selectElements = ctx.getText().toLowerCase()
-        log('SelectElements', selectElements)
+        console.log('SelectElements', selectElements)
     }
 }
 const listenTableName = new MyListener();
