@@ -23,7 +23,8 @@ export default abstract class BasicParser<C = any> {
         parser.removeErrorListeners();
         parser.addErrorListener(new ParserErrorListener(errorListener));
 
-        const parserTree = parser.program();
+        // Note :  needed by pgsql
+        const parserTree = parser.program? parser.program() : parser.root();
 
         return parserTree;
     }
@@ -37,7 +38,12 @@ export default abstract class BasicParser<C = any> {
         parser.removeErrorListeners();
         parser.addErrorListener(new ParserErrorCollector(syntaxErrors));
 
-        parser.program();
+        // Note :  needed by pgsql
+        if (parser.program) {
+            parser.program();
+        } else {
+            parser.root();
+        }
 
         return lexerError.concat(syntaxErrors);
     }
@@ -89,7 +95,8 @@ export default abstract class BasicParser<C = any> {
         const parser = this.createParser(input);
         this._parser = parser;
 
-        const tree = parser.program();
+        // Note :  needed by pgsql
+        const tree = parser.program? parser.program() : parser.root();
         return tree.toStringTree(parser.ruleNames);
     }
 
