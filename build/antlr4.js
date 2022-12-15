@@ -8,6 +8,7 @@ const output = path.resolve(__dirname, '../src/lib');
 const entry = [
     'generic',
     'hive',
+    'pgsql',
     'plsql',
     'spark',
     'flinksql',
