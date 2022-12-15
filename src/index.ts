@@ -10,4 +10,5 @@ export * from './lib/plsql/PlSqlParserListener';
 export * from './lib/plsql/PlSqlParserVisitor';
 export * from './lib/spark/SparkSqlVisitor';
 export * from './lib/spark/SparkSqlListener';
-
+export * from './lib/pgsql/PostgreSQLParserListener';
+export * from './lib/pgsql/PostgreSQLParserVisitor';
