@@ -12,8 +12,8 @@ function PostgreSQLParserVisitor() {
 PostgreSQLParserVisitor.prototype = Object.create(antlr4.tree.ParseTreeVisitor.prototype);
 PostgreSQLParserVisitor.prototype.constructor = PostgreSQLParserVisitor;
 
-// Visit a parse tree produced by PostgreSQLParser#root.
-PostgreSQLParserVisitor.prototype.visitRoot = function(ctx) {
+// Visit a parse tree produced by PostgreSQLParser#program.
+PostgreSQLParserVisitor.prototype.visitProgram = function(ctx) {
   return this.visitChildren(ctx);
 };
 

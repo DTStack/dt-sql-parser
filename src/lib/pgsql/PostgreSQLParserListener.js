@@ -11,12 +11,12 @@ function PostgreSQLParserListener() {
 PostgreSQLParserListener.prototype = Object.create(antlr4.tree.ParseTreeListener.prototype);
 PostgreSQLParserListener.prototype.constructor = PostgreSQLParserListener;
 
-// Enter a parse tree produced by PostgreSQLParser#root.
-PostgreSQLParserListener.prototype.enterRoot = function(ctx) {
+// Enter a parse tree produced by PostgreSQLParser#program.
+PostgreSQLParserListener.prototype.enterProgram = function(ctx) {
 };
 
-// Exit a parse tree produced by PostgreSQLParser#root.
-PostgreSQLParserListener.prototype.exitRoot = function(ctx) {
+// Exit a parse tree produced by PostgreSQLParser#program.
+PostgreSQLParserListener.prototype.exitProgram = function(ctx) {
 };
 
 

@@ -16,7 +16,7 @@ export class PostgreSQLParserBase extends antlr4.Parser {
 
     GetParsedSqlTree( script, line) {
         const ph = this.getPostgreSQLParser(script);
-        return ph.root();
+        return ph.program();
     }
 
     ParseRoutineBody( _localctx) {
@@ -58,7 +58,7 @@ export class PostgreSQLParserBase extends antlr4.Parser {
                 func_as.func_as().Definition = ph.plsqlroot();
                 break;
             case 'sql':
-                func_as.func_as().Definition = ph.root();
+                func_as.func_as().Definition = ph.program();
                 break;
             }
         }
