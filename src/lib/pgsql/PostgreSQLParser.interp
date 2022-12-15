@@ -1115,7 +1115,7 @@ EndDollarStringConstant
 AfterEscapeStringConstantWithNewlineMode_Continued
 
 rule names:
-root
+program
 plsqlroot
 stmtblock
 stmtmulti

@@ -12,7 +12,7 @@ superClass = PostgreSQLParserBase;
 @members
 {
 }
-root
+program
    : stmtblock EOF
    ;
 
