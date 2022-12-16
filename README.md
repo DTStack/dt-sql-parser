@@ -25,6 +25,7 @@ Supported SQL:
 - Spark SQL
 - Hive SQL
 - PL/SQL
+- PostgreSQL
 
 >Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
 
