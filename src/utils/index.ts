@@ -35,25 +35,32 @@ function lexer(input: string): Token[] {
     /**
      * 过滤函数内容
      */
-    const matchFunction = (currentChar: string, validator: RegExp) => {
-        let value = currentChar;
-        const start = current;
-        do {
+    const matchFunction = () => {
+        const bracketNum = [current];
+        for (let i = current + 1; i < input.length; i++) {
+            const currentChar = input[i];
             if (currentChar === '\n') {
                 line++;
             }
-
-            currentChar = input[++current];
-            value += currentChar;
-        } while (!validator.test(currentChar)); // 处理转义字符
-        tokens.push({
-            type: TokenType.FunctionArguments,
-            value,
-            start: start,
-            lineNumber: line,
-            end: current,
-        });
-        ++current;
+            if (TokenReg.LeftSmallBracket.test(currentChar)) {
+                bracketNum.push(i);
+            }
+            if (TokenReg.RightSmallBracket.test(currentChar)) {
+                const start = bracketNum.pop();
+                const end = i + 1;
+                if (bracketNum.length === 0) {
+                    current = end;
+                    tokens.push({
+                        type: TokenType.FunctionArguments,
+                        value: input.slice(start, end),
+                        start,
+                        lineNumber: line,
+                        end,
+                    });
+                    return;
+                }
+            }
+        }
     };
 
     /**
@@ -83,7 +90,7 @@ function lexer(input: string): Token[] {
         }
 
         if (TokenReg.LeftSmallBracket.test(char)) {
-            matchFunction(char, TokenReg.RightSmallBracket);
+            matchFunction();
             continue;
         }
 
