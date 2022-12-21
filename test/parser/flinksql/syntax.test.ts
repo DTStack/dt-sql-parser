@@ -173,6 +173,12 @@ describe('FlinkSQL Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
+    // test for catalog table
+    test('Test Select Statement with catalog table', () => {
+        const sql = `SELECT * FROM catalog1.db1.table1;`;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
 
     // describe statements
     test('Test simple Describe Statement', () => {

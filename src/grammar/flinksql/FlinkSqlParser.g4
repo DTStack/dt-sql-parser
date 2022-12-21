@@ -218,11 +218,11 @@ valuesRowDefinition
 // Select statements
 
 queryStatement
-	: valuesCaluse
-	| '(' queryStatement ')'
+    : valuesCaluse
+    | '(' queryStatement ')'
     | left=queryStatement operator=(INTERSECT | UNION | EXCEPT) ALL? right=queryStatement orderByCaluse? limitClause?
     | selectClause orderByCaluse? limitClause?
-	| selectStatement orderByCaluse? limitClause?
+    | selectStatement orderByCaluse? limitClause?
     ;
 
 valuesCaluse
@@ -263,7 +263,7 @@ tablePrimary
     ;
 
 tablePath
-    : ((catalogName '.')? databaseName '.')? tableName
+    : uid
     ;
 
 systemTimePeriod
@@ -422,18 +422,6 @@ dereferenceDefinition
 // base common
 
 correlationName
-    : identifier
-    ;
-
-catalogName
-    : identifier
-    ;
-
-databaseName
-    : identifier
-    ;
-
-tableName
     : identifier
     ;
 
