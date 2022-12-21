@@ -218,11 +218,11 @@ valuesRowDefinition
 // Select statements
 
 queryStatement
-    : valuesCaluse
-    | '(' queryStatement ')'
+	: valuesCaluse
+	| '(' queryStatement ')'
     | left=queryStatement operator=(INTERSECT | UNION | EXCEPT) ALL? right=queryStatement orderByCaluse? limitClause?
     | selectClause orderByCaluse? limitClause?
-    | selectStatement orderByCaluse? limitClause?
+	| selectStatement orderByCaluse? limitClause?
     ;
 
 valuesCaluse
@@ -247,7 +247,8 @@ fromClause
 
 tableExpression
     : tableReference (COMMA tableReference)*
-    | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? JOIN tableExpression joinCondition?
+    | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? OUTER? JOIN tableExpression joinCondition?
+    | tableExpression CROSS JOIN tableExpression
     ;
 
 tableReference
@@ -255,9 +256,22 @@ tableReference
     ;
 
 tablePrimary
-    : TABLE? expression
-    | LATERAL TABLE LR_BRACKET uid LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    : TABLE? tablePath systemTimePeriod? (AS? correlationName)?
+    | LATERAL TABLE LR_BRACKET functionName LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    | LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | UNNEST LR_BRACKET expression RR_BRACKET
+    ;
+
+tablePath
+    : ((catalogName '.')? databaseName '.')? tableName
+    ;
+
+systemTimePeriod
+    : FOR SYSTEM_TIME AS OF dateTimeExpression
+    ;
+
+dateTimeExpression
+    : expression
     ;
 
 joinCondition
@@ -406,6 +420,22 @@ dereferenceDefinition
 
 
 // base common
+
+correlationName
+    : identifier
+    ;
+
+catalogName
+    : identifier
+    ;
+
+databaseName
+    : identifier
+    ;
+
+tableName
+    : identifier
+    ;
 
 qualifiedName
     : identifier | dereferenceDefinition

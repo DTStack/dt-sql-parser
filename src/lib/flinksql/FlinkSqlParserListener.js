@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/Workspace/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
+// Generated from /Users/yuwan/Desktop/yuwan/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -497,6 +497,33 @@ FlinkSqlParserListener.prototype.exitTablePrimary = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#tablePath.
+FlinkSqlParserListener.prototype.enterTablePath = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#tablePath.
+FlinkSqlParserListener.prototype.exitTablePath = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#systemTimePeriod.
+FlinkSqlParserListener.prototype.enterSystemTimePeriod = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#systemTimePeriod.
+FlinkSqlParserListener.prototype.exitSystemTimePeriod = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#dateTimeExpression.
+FlinkSqlParserListener.prototype.enterDateTimeExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#dateTimeExpression.
+FlinkSqlParserListener.prototype.exitDateTimeExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#joinCondition.
 FlinkSqlParserListener.prototype.enterJoinCondition = function(ctx) {
 };
@@ -854,6 +881,42 @@ FlinkSqlParserListener.prototype.enterDereferenceDefinition = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#dereferenceDefinition.
 FlinkSqlParserListener.prototype.exitDereferenceDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#correlationName.
+FlinkSqlParserListener.prototype.enterCorrelationName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#correlationName.
+FlinkSqlParserListener.prototype.exitCorrelationName = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#catalogName.
+FlinkSqlParserListener.prototype.enterCatalogName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#catalogName.
+FlinkSqlParserListener.prototype.exitCatalogName = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#databaseName.
+FlinkSqlParserListener.prototype.enterDatabaseName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#databaseName.
+FlinkSqlParserListener.prototype.exitDatabaseName = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#tableName.
+FlinkSqlParserListener.prototype.enterTableName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#tableName.
+FlinkSqlParserListener.prototype.exitTableName = function(ctx) {
 };
 
 
