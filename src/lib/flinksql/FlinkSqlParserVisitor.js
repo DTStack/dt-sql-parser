@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/Workspace/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
+// Generated from /Users/yuwan/Desktop/yuwan/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -336,6 +336,24 @@ FlinkSqlParserVisitor.prototype.visitTablePrimary = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#tablePath.
+FlinkSqlParserVisitor.prototype.visitTablePath = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#systemTimePeriod.
+FlinkSqlParserVisitor.prototype.visitSystemTimePeriod = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#dateTimeExpression.
+FlinkSqlParserVisitor.prototype.visitDateTimeExpression = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#joinCondition.
 FlinkSqlParserVisitor.prototype.visitJoinCondition = function(ctx) {
   return this.visitChildren(ctx);
@@ -572,6 +590,30 @@ FlinkSqlParserVisitor.prototype.visitFunctionName = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#dereferenceDefinition.
 FlinkSqlParserVisitor.prototype.visitDereferenceDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#correlationName.
+FlinkSqlParserVisitor.prototype.visitCorrelationName = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#catalogName.
+FlinkSqlParserVisitor.prototype.visitCatalogName = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#databaseName.
+FlinkSqlParserVisitor.prototype.visitDatabaseName = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#tableName.
+FlinkSqlParserVisitor.prototype.visitTableName = function(ctx) {
   return this.visitChildren(ctx);
 };
 
