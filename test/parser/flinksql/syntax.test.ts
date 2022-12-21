@@ -143,6 +143,36 @@ describe('FlinkSQL Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
+    // test left outer join
+    test('Test Select Statement with left outer join', () => {
+        const sql = `
+            SELECT order_id, res
+            FROM Orders
+            LEFT OUTER JOIN LATERAL TABLE(table_func(order_id)) t(res)
+            ON TRUE
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+    // test cross join
+    test('Test Select Statement with cross join', () => {
+        const sql = `
+            SELECT order_id, tag
+            FROM Orders CROSS JOIN UNNEST(tags) AS t (tag)
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+    // test for time temporal join
+    test('Test Select Statement with time temporal join', () => {
+        const sql = `SELECT o.order_id, o.total, c.country, c.zip
+            FROM Orders AS o
+            JOIN Customers FOR SYSTEM_TIME AS OF o.proc_time AS c
+            ON o.customer_id = c.id;
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
 
     // describe statements
     test('Test simple Describe Statement', () => {
