@@ -600,24 +600,6 @@ FlinkSqlParserVisitor.prototype.visitCorrelationName = function(ctx) {
 };
 
 
-// Visit a parse tree produced by FlinkSqlParser#catalogName.
-FlinkSqlParserVisitor.prototype.visitCatalogName = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by FlinkSqlParser#databaseName.
-FlinkSqlParserVisitor.prototype.visitDatabaseName = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by FlinkSqlParser#tableName.
-FlinkSqlParserVisitor.prototype.visitTableName = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
 // Visit a parse tree produced by FlinkSqlParser#qualifiedName.
 FlinkSqlParserVisitor.prototype.visitQualifiedName = function(ctx) {
   return this.visitChildren(ctx);

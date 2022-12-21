@@ -893,33 +893,6 @@ FlinkSqlParserListener.prototype.exitCorrelationName = function(ctx) {
 };
 
 
-// Enter a parse tree produced by FlinkSqlParser#catalogName.
-FlinkSqlParserListener.prototype.enterCatalogName = function(ctx) {
-};
-
-// Exit a parse tree produced by FlinkSqlParser#catalogName.
-FlinkSqlParserListener.prototype.exitCatalogName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by FlinkSqlParser#databaseName.
-FlinkSqlParserListener.prototype.enterDatabaseName = function(ctx) {
-};
-
-// Exit a parse tree produced by FlinkSqlParser#databaseName.
-FlinkSqlParserListener.prototype.exitDatabaseName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by FlinkSqlParser#tableName.
-FlinkSqlParserListener.prototype.enterTableName = function(ctx) {
-};
-
-// Exit a parse tree produced by FlinkSqlParser#tableName.
-FlinkSqlParserListener.prototype.exitTableName = function(ctx) {
-};
-
-
 // Enter a parse tree produced by FlinkSqlParser#qualifiedName.
 FlinkSqlParserListener.prototype.enterQualifiedName = function(ctx) {
 };
