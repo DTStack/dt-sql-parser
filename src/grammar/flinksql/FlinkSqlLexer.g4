@@ -230,8 +230,10 @@ WS:                           'WS';
 SYSTEM:                       'SYSTEM';
 INCLUDING:                    'INCLUDING';
 EXCLUDING:                    'EXCLUDING';
+OVERWRITING:                  'OVERWRITING';
 CONSTRAINTS:                  'CONSTRAINTS';
 GENERATED:                    'GENERATED';
+WATERMARKS:                   'WATERMARKS';
 CATALOG:                      'CATALOG';
 LANGUAGE:                     'LANGUAGE';
 CATALOGS:                     'CATALOGS';
@@ -240,7 +242,9 @@ PRIMARY:                      'PRIMARY';
 KEY:                          'KEY';
 PERIOD:                       'PERIOD';
 SYSTEM_TIME:                  'SYSTEM_TIME';
-
+ENFORCED:                     'ENFORCED';
+METADATA:                     'METADATA';
+VIRTUAL:                      'VIRTUAL';
 
 // DATA TYPE Keywords
 
@@ -262,6 +266,7 @@ DOUBLE:                       'DOUBLE';
 DATE:                         'DATE';
 TIME:                         'TIME';
 TIMESTAMP:                    'TIMESTAMP';
+TIMESTAMP_LTZ:                'TIMESTAMP_LTZ';
 MULTISET:                     'MULTISET';
 BOOLEAN:                      'BOOLEAN';
 RAW:                          'RAW';

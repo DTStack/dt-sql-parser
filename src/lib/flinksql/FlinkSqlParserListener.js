@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/Workspace/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
+// Generated from /Users/yuwan/Desktop/yuwan/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -128,6 +128,15 @@ FlinkSqlParserListener.prototype.exitColumnOptionDefinition = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#physicalColumnDefinition.
+FlinkSqlParserListener.prototype.enterPhysicalColumnDefinition = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#physicalColumnDefinition.
+FlinkSqlParserListener.prototype.exitPhysicalColumnDefinition = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#columnName.
 FlinkSqlParserListener.prototype.enterColumnName = function(ctx) {
 };
@@ -164,12 +173,57 @@ FlinkSqlParserListener.prototype.exitLengthOneDimension = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#columnConstraint.
+FlinkSqlParserListener.prototype.enterColumnConstraint = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#columnConstraint.
+FlinkSqlParserListener.prototype.exitColumnConstraint = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#commentSpec.
 FlinkSqlParserListener.prototype.enterCommentSpec = function(ctx) {
 };
 
 // Exit a parse tree produced by FlinkSqlParser#commentSpec.
 FlinkSqlParserListener.prototype.exitCommentSpec = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#metadataColumnDefinition.
+FlinkSqlParserListener.prototype.enterMetadataColumnDefinition = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#metadataColumnDefinition.
+FlinkSqlParserListener.prototype.exitMetadataColumnDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#metadataKey.
+FlinkSqlParserListener.prototype.enterMetadataKey = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#metadataKey.
+FlinkSqlParserListener.prototype.exitMetadataKey = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#computedColumnDefinition.
+FlinkSqlParserListener.prototype.enterComputedColumnDefinition = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#computedColumnDefinition.
+FlinkSqlParserListener.prototype.exitComputedColumnDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#computedColumnExpression.
+FlinkSqlParserListener.prototype.enterComputedColumnExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#computedColumnExpression.
+FlinkSqlParserListener.prototype.exitComputedColumnExpression = function(ctx) {
 };
 
 
@@ -188,6 +242,15 @@ FlinkSqlParserListener.prototype.enterTableConstraint = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#tableConstraint.
 FlinkSqlParserListener.prototype.exitTableConstraint = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#constraintName.
+FlinkSqlParserListener.prototype.enterConstraintName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#constraintName.
+FlinkSqlParserListener.prototype.exitConstraintName = function(ctx) {
 };
 
 
@@ -251,6 +314,15 @@ FlinkSqlParserListener.prototype.enterLikeDefinition = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#likeDefinition.
 FlinkSqlParserListener.prototype.exitLikeDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#sourceTable.
+FlinkSqlParserListener.prototype.enterSourceTable = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#sourceTable.
+FlinkSqlParserListener.prototype.exitSourceTable = function(ctx) {
 };
 
 

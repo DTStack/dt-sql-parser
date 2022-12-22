@@ -50,7 +50,7 @@ showStatememt
 // Create statements
 
 createTable
-    : CREATE TABLE uid
+    : CREATE TABLE ifNotExists? sourceTable
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
         (COMMA watermarkDefinition)?
@@ -64,7 +64,13 @@ createTable
     ;
 
 columnOptionDefinition
-    : columnName columnType lengthOneDimension? columnAlias?
+    : physicalColumnDefinition
+    | metadataColumnDefinition
+    | computedColumnDefinition
+    ;
+
+physicalColumnDefinition
+    : columnName columnType columnConstraint? commentSpec?
     ;
 
 columnName
@@ -78,18 +84,39 @@ columnNameList
 columnType
     : typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
     | DECIMAL | TINYINT | SMALLINT | INT | BIGINT | FLOAT | DOUBLE
-    | DATE | TIME | TIMESTAMP
+    | DATE | TIME | TIMESTAMP | TIMESTAMP_LTZ
     | ARRAY | MAP | MULTISET | ROW
     | BOOLEAN | RAW | NULL
-    | DATETIME)
+    | DATETIME) lengthOneDimension?
     ;
 
 lengthOneDimension
     : '(' decimalLiteral ')'
     ;
 
+columnConstraint
+    :(CONSTRAINT constraintName)? PRIMARY KEY (NOT ENFORCED)?
+    ;
+
 commentSpec
     : COMMENT STRING_LITERAL
+    ;
+
+metadataColumnDefinition
+    : columnName columnType METADATA (FROM metadataKey)? VIRTUAL?
+    ;
+
+metadataKey
+    : STRING_LITERAL
+    ;
+
+computedColumnDefinition
+    : columnName AS computedColumnExpression commentSpec?
+    ;
+
+// 计算表达式
+computedColumnExpression
+    : expression
     ;
 
 watermarkDefinition
@@ -97,7 +124,11 @@ watermarkDefinition
     ;
 
 tableConstraint
-    : (CONSTRAINT identifier)? PRIMARY KEY '(' columnNameList ')'
+    : (CONSTRAINT constraintName)? PRIMARY KEY '(' columnNameList ')' (NOT ENFORCED)?
+    ;
+
+constraintName
+    : identifier
     ;
 
 selfDefinitionClause // 数栈自定义语句 ‘PERIOD FOR SYSTEM_TIME’
@@ -124,12 +155,16 @@ transformArgument
     ;
 
 likeDefinition
-    : LIKE identifier likeOption
+    : LIKE sourceTable (LR_BRACKET likeOption* RR_BRACKET)?
+    ;
+
+sourceTable
+    : uid
     ;
 
 likeOption
-    : (INCLUDING | EXCLUDING) (ALL | CONSTRAINTS)
-    | (INCLUDING | EXCLUDING) (GENERATED | OPTIONS)
+    : (INCLUDING | EXCLUDING) (ALL | CONSTRAINTS | PARTITIONS)
+    | (INCLUDING | EXCLUDING | OVERWRITING) (GENERATED | OPTIONS | WATERMARKS)
     ;
 
 createCatalog

@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/Workspace/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
+// Generated from /Users/yuwan/Desktop/yuwan/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -90,6 +90,12 @@ FlinkSqlParserVisitor.prototype.visitColumnOptionDefinition = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#physicalColumnDefinition.
+FlinkSqlParserVisitor.prototype.visitPhysicalColumnDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#columnName.
 FlinkSqlParserVisitor.prototype.visitColumnName = function(ctx) {
   return this.visitChildren(ctx);
@@ -114,8 +120,38 @@ FlinkSqlParserVisitor.prototype.visitLengthOneDimension = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#columnConstraint.
+FlinkSqlParserVisitor.prototype.visitColumnConstraint = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#commentSpec.
 FlinkSqlParserVisitor.prototype.visitCommentSpec = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#metadataColumnDefinition.
+FlinkSqlParserVisitor.prototype.visitMetadataColumnDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#metadataKey.
+FlinkSqlParserVisitor.prototype.visitMetadataKey = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#computedColumnDefinition.
+FlinkSqlParserVisitor.prototype.visitComputedColumnDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#computedColumnExpression.
+FlinkSqlParserVisitor.prototype.visitComputedColumnExpression = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -128,6 +164,12 @@ FlinkSqlParserVisitor.prototype.visitWatermarkDefinition = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#tableConstraint.
 FlinkSqlParserVisitor.prototype.visitTableConstraint = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#constraintName.
+FlinkSqlParserVisitor.prototype.visitConstraintName = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -170,6 +212,12 @@ FlinkSqlParserVisitor.prototype.visitTransformArgument = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#likeDefinition.
 FlinkSqlParserVisitor.prototype.visitLikeDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#sourceTable.
+FlinkSqlParserVisitor.prototype.visitSourceTable = function(ctx) {
   return this.visitChildren(ctx);
 };
 
