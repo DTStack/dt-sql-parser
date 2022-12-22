@@ -82,16 +82,40 @@ columnNameList
     ;
 
 columnType
-    : typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
-    | DECIMAL | TINYINT | SMALLINT | INT | BIGINT | FLOAT | DOUBLE
-    | DATE | TIME | TIMESTAMP | TIMESTAMP_LTZ
-    | ARRAY | MAP | MULTISET | ROW
-    | BOOLEAN | RAW | NULL
-    | DATETIME) lengthOneDimension?
+    : typeName=(DATE | BOOLEAN | NULL)
+    | typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
+        | TINYINT | SMALLINT | INT | INTEGER | BIGINT
+        | TIME | TIMESTAMP | TIMESTAMP_LTZ | DATETIME
+    ) lengthOneDimension?
+    | typeName=(DECIMAL | DEC | NUMERIC | FLOAT | DOUBLE) lengthTwoOptionalDimension?
+    | type=(ARRAY | MULTISET) lengthOneTypeDimension?
+    | type=MAP mapTypeDimension?
+    | type=ROW rowTypeDimension?
+    | type=RAW lengthTwoStringDimension?
     ;
 
 lengthOneDimension
     : '(' decimalLiteral ')'
+    ;
+
+lengthTwoOptionalDimension
+    : '(' decimalLiteral (',' decimalLiteral)? ')'
+    ;
+
+lengthTwoStringDimension
+    : '(' stringLiteral (',' stringLiteral)? ')'
+    ;
+
+lengthOneTypeDimension
+    : LESS_SYMBOL columnType GREATER_SYMBOL
+    ;
+
+mapTypeDimension
+    : LESS_SYMBOL columnType (COMMA columnType) GREATER_SYMBOL
+    ;
+
+rowTypeDimension
+    : LESS_SYMBOL columnName columnType (COMMA columnName columnType)* GREATER_SYMBOL
     ;
 
 columnConstraint

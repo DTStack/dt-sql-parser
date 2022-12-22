@@ -126,4 +126,34 @@ describe('FlinkSQL Create Table Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
+    // data type
+    test('Test Data Type Statement', () => {
+        const sql = `
+            CREATE TABLE catalog1.db1.table1 (
+                attr0 string,
+                attr1 boolean,
+                attr3 decimal(38,18),
+                attr4 TINYINT,
+                attr5 smallint,
+                attr6 int,
+                attr7 bigint,
+                attr8 float,
+                attr9 double,
+                attr10 date,
+                attr11 time,
+                attr12 timestamp(3),
+                attr13 array<string>,
+                attr14 row<attr15 float, attr16 timestamp(3)>,
+                attr17 map<int, bigint>,
+                name1 VARCHAR(64),
+                message ROW<data ROW<UPO_TIMESTAMP VARCHAR(20)>>,
+                raw RAW('class', 'snapshot')
+            ) WITH (
+                'connector' = 'kafka'
+            );
+        `;
+        const result = parser.validate(sql);
+        console.log(result);
+        expect(result.length).toBe(0);
+    });
 });
