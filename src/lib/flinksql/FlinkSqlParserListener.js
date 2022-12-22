@@ -173,6 +173,51 @@ FlinkSqlParserListener.prototype.exitLengthOneDimension = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#lengthTwoOptionalDimension.
+FlinkSqlParserListener.prototype.enterLengthTwoOptionalDimension = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#lengthTwoOptionalDimension.
+FlinkSqlParserListener.prototype.exitLengthTwoOptionalDimension = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#lengthTwoStringDimension.
+FlinkSqlParserListener.prototype.enterLengthTwoStringDimension = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#lengthTwoStringDimension.
+FlinkSqlParserListener.prototype.exitLengthTwoStringDimension = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#lengthOneTypeDimension.
+FlinkSqlParserListener.prototype.enterLengthOneTypeDimension = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#lengthOneTypeDimension.
+FlinkSqlParserListener.prototype.exitLengthOneTypeDimension = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#mapTypeDimension.
+FlinkSqlParserListener.prototype.enterMapTypeDimension = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#mapTypeDimension.
+FlinkSqlParserListener.prototype.exitMapTypeDimension = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#rowTypeDimension.
+FlinkSqlParserListener.prototype.enterRowTypeDimension = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#rowTypeDimension.
+FlinkSqlParserListener.prototype.exitRowTypeDimension = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#columnConstraint.
 FlinkSqlParserListener.prototype.enterColumnConstraint = function(ctx) {
 };
