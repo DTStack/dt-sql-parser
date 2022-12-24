@@ -614,6 +614,33 @@ FlinkSqlParserListener.prototype.exitTablePrimary = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#tablePath.
+FlinkSqlParserListener.prototype.enterTablePath = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#tablePath.
+FlinkSqlParserListener.prototype.exitTablePath = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#systemTimePeriod.
+FlinkSqlParserListener.prototype.enterSystemTimePeriod = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#systemTimePeriod.
+FlinkSqlParserListener.prototype.exitSystemTimePeriod = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#dateTimeExpression.
+FlinkSqlParserListener.prototype.enterDateTimeExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#dateTimeExpression.
+FlinkSqlParserListener.prototype.exitDateTimeExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#joinCondition.
 FlinkSqlParserListener.prototype.enterJoinCondition = function(ctx) {
 };
@@ -971,6 +998,15 @@ FlinkSqlParserListener.prototype.enterDereferenceDefinition = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#dereferenceDefinition.
 FlinkSqlParserListener.prototype.exitDereferenceDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#correlationName.
+FlinkSqlParserListener.prototype.enterCorrelationName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#correlationName.
+FlinkSqlParserListener.prototype.exitCorrelationName = function(ctx) {
 };
 
 
