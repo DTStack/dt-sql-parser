@@ -153,7 +153,6 @@ describe('FlinkSQL Create Table Syntax Tests', () => {
             );
         `;
         const result = parser.validate(sql);
-        console.log(result);
         expect(result.length).toBe(0);
     });
 });
