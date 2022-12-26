@@ -102,6 +102,19 @@ describe('FlinkSQL Syntax Tests', () => {
     });
 
     // query statements
+    test('Test With clause', () => {
+        const sql = `
+            WITH orders_with_total AS (
+                SELECT order_id, price + tax AS total
+                FROM Orders
+            )
+            SELECT order_id, SUM(total)
+            FROM orders_with_total
+            GROUP BY order_id;
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
     test('Test simple Select Statement', () => {
         const sql = `SELECT product, amount FROM Orders;`;
         const result = parser.validate(sql);

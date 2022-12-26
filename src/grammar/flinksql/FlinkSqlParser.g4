@@ -219,6 +219,7 @@ valuesRowDefinition
 
 queryStatement
     : valuesCaluse
+    | WITH withItem (COMMA withItem)* queryStatement
     | '(' queryStatement ')'
     | left=queryStatement operator=(INTERSECT | UNION | EXCEPT) ALL? right=queryStatement orderByCaluse? limitClause?
     | selectClause orderByCaluse? limitClause?
@@ -227,6 +228,14 @@ queryStatement
 
 valuesCaluse
     : VALUES expression (COMMA expression )*
+    ;
+
+withItem
+    : withItemName (LR_BRACKET columnName (COMMA columnName)* RR_BRACKET)? AS LR_BRACKET queryStatement RR_BRACKET
+    ;
+
+withItemName
+    : identifier
     ;
 
 selectStatement

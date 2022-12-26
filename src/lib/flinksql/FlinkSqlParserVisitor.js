@@ -294,6 +294,18 @@ FlinkSqlParserVisitor.prototype.visitValuesCaluse = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#withItem.
+FlinkSqlParserVisitor.prototype.visitWithItem = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#withItemName.
+FlinkSqlParserVisitor.prototype.visitWithItemName = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#selectStatement.
 FlinkSqlParserVisitor.prototype.visitSelectStatement = function(ctx) {
   return this.visitChildren(ctx);
