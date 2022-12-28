@@ -551,6 +551,24 @@ FlinkSqlParserListener.prototype.exitValuesCaluse = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#withItem.
+FlinkSqlParserListener.prototype.enterWithItem = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#withItem.
+FlinkSqlParserListener.prototype.exitWithItem = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#withItemName.
+FlinkSqlParserListener.prototype.enterWithItemName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#withItemName.
+FlinkSqlParserListener.prototype.exitWithItemName = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#selectStatement.
 FlinkSqlParserListener.prototype.enterSelectStatement = function(ctx) {
 };
