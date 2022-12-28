@@ -50,7 +50,7 @@ showStatememt
 // Create statements
 
 createTable
-    : CREATE TABLE uid
+    : CREATE TABLE ifNotExists? sourceTable
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
         (COMMA watermarkDefinition)?
@@ -64,7 +64,13 @@ createTable
     ;
 
 columnOptionDefinition
-    : columnName columnType lengthOneDimension? columnAlias?
+    : physicalColumnDefinition
+    | metadataColumnDefinition
+    | computedColumnDefinition
+    ;
+
+physicalColumnDefinition
+    : columnName columnType columnConstraint? commentSpec?
     ;
 
 columnName
@@ -76,20 +82,65 @@ columnNameList
     ;
 
 columnType
-    : typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
-    | DECIMAL | TINYINT | SMALLINT | INT | BIGINT | FLOAT | DOUBLE
-    | DATE | TIME | TIMESTAMP
-    | ARRAY | MAP | MULTISET | ROW
-    | BOOLEAN | RAW | NULL
-    | DATETIME)
+    : typeName=(DATE | BOOLEAN | NULL)
+    | typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
+        | TINYINT | SMALLINT | INT | INTEGER | BIGINT
+        | TIME | TIMESTAMP | TIMESTAMP_LTZ | DATETIME
+    ) lengthOneDimension?
+    | typeName=(DECIMAL | DEC | NUMERIC | FLOAT | DOUBLE) lengthTwoOptionalDimension?
+    | type=(ARRAY | MULTISET) lengthOneTypeDimension?
+    | type=MAP mapTypeDimension?
+    | type=ROW rowTypeDimension?
+    | type=RAW lengthTwoStringDimension?
     ;
 
 lengthOneDimension
     : '(' decimalLiteral ')'
     ;
 
+lengthTwoOptionalDimension
+    : '(' decimalLiteral (',' decimalLiteral)? ')'
+    ;
+
+lengthTwoStringDimension
+    : '(' stringLiteral (',' stringLiteral)? ')'
+    ;
+
+lengthOneTypeDimension
+    : LESS_SYMBOL columnType GREATER_SYMBOL
+    ;
+
+mapTypeDimension
+    : LESS_SYMBOL columnType (COMMA columnType) GREATER_SYMBOL
+    ;
+
+rowTypeDimension
+    : LESS_SYMBOL columnName columnType (COMMA columnName columnType)* GREATER_SYMBOL
+    ;
+
+columnConstraint
+    :(CONSTRAINT constraintName)? PRIMARY KEY (NOT ENFORCED)?
+    ;
+
 commentSpec
     : COMMENT STRING_LITERAL
+    ;
+
+metadataColumnDefinition
+    : columnName columnType METADATA (FROM metadataKey)? VIRTUAL?
+    ;
+
+metadataKey
+    : STRING_LITERAL
+    ;
+
+computedColumnDefinition
+    : columnName AS computedColumnExpression commentSpec?
+    ;
+
+// 计算表达式
+computedColumnExpression
+    : expression
     ;
 
 watermarkDefinition
@@ -97,7 +148,11 @@ watermarkDefinition
     ;
 
 tableConstraint
-    : (CONSTRAINT identifier)? PRIMARY KEY '(' columnNameList ')'
+    : (CONSTRAINT constraintName)? PRIMARY KEY '(' columnNameList ')' (NOT ENFORCED)?
+    ;
+
+constraintName
+    : identifier
     ;
 
 selfDefinitionClause // 数栈自定义语句 ‘PERIOD FOR SYSTEM_TIME’
@@ -124,12 +179,16 @@ transformArgument
     ;
 
 likeDefinition
-    : LIKE identifier likeOption
+    : LIKE sourceTable (LR_BRACKET likeOption* RR_BRACKET)?
+    ;
+
+sourceTable
+    : uid
     ;
 
 likeOption
-    : (INCLUDING | EXCLUDING) (ALL | CONSTRAINTS)
-    | (INCLUDING | EXCLUDING) (GENERATED | OPTIONS)
+    : (INCLUDING | EXCLUDING) (ALL | CONSTRAINTS | PARTITIONS)
+    | (INCLUDING | EXCLUDING | OVERWRITING) (GENERATED | OPTIONS | WATERMARKS)
     ;
 
 createCatalog
@@ -219,6 +278,7 @@ valuesRowDefinition
 
 queryStatement
     : valuesCaluse
+    | WITH withItem (COMMA withItem)* queryStatement
     | '(' queryStatement ')'
     | left=queryStatement operator=(INTERSECT | UNION | EXCEPT) ALL? right=queryStatement orderByCaluse? limitClause?
     | selectClause orderByCaluse? limitClause?
@@ -227,6 +287,14 @@ queryStatement
 
 valuesCaluse
     : VALUES expression (COMMA expression )*
+    ;
+
+withItem
+    : withItemName (LR_BRACKET columnName (COMMA columnName)* RR_BRACKET)? AS LR_BRACKET queryStatement RR_BRACKET
+    ;
+
+withItemName
+    : identifier
     ;
 
 selectStatement
@@ -247,7 +315,8 @@ fromClause
 
 tableExpression
     : tableReference (COMMA tableReference)*
-    | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? JOIN tableExpression joinCondition?
+    | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? OUTER? JOIN tableExpression joinCondition?
+    | tableExpression CROSS JOIN tableExpression
     ;
 
 tableReference
@@ -255,9 +324,22 @@ tableReference
     ;
 
 tablePrimary
-    : TABLE? expression
-    | LATERAL TABLE LR_BRACKET uid LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    : TABLE? tablePath systemTimePeriod? (AS? correlationName)?
+    | LATERAL TABLE LR_BRACKET functionName LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    | LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | UNNEST LR_BRACKET expression RR_BRACKET
+    ;
+
+tablePath
+    : uid
+    ;
+
+systemTimePeriod
+    : FOR SYSTEM_TIME AS OF dateTimeExpression
+    ;
+
+dateTimeExpression
+    : expression
     ;
 
 joinCondition
@@ -406,6 +488,10 @@ dereferenceDefinition
 
 
 // base common
+
+correlationName
+    : identifier
+    ;
 
 qualifiedName
     : identifier | dereferenceDefinition

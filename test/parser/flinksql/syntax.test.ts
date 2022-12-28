@@ -102,6 +102,19 @@ describe('FlinkSQL Syntax Tests', () => {
     });
 
     // query statements
+    test('Test With clause', () => {
+        const sql = `
+            WITH orders_with_total AS (
+                SELECT order_id, price + tax AS total
+                FROM Orders
+            )
+            SELECT order_id, SUM(total)
+            FROM orders_with_total
+            GROUP BY order_id;
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
     test('Test simple Select Statement', () => {
         const sql = `SELECT product, amount FROM Orders;`;
         const result = parser.validate(sql);
@@ -140,6 +153,42 @@ describe('FlinkSQL Syntax Tests', () => {
             SELECT id, name, employee.deptno, deptname FROM employee
             FULL JOIN department ON employee.deptno = department.deptno;
         `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+    // test left outer join
+    test('Test Select Statement with left outer join', () => {
+        const sql = `
+            SELECT order_id, res
+            FROM Orders
+            LEFT OUTER JOIN LATERAL TABLE(table_func(order_id)) t(res)
+            ON TRUE
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+    // test cross join
+    test('Test Select Statement with cross join', () => {
+        const sql = `
+            SELECT order_id, tag
+            FROM Orders CROSS JOIN UNNEST(tags) AS t (tag)
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+    // test for time temporal join
+    test('Test Select Statement with time temporal join', () => {
+        const sql = `SELECT o.order_id, o.total, c.country, c.zip
+            FROM Orders AS o
+            JOIN Customers FOR SYSTEM_TIME AS OF o.proc_time AS c
+            ON o.customer_id = c.id;
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+    // test for catalog table
+    test('Test Select Statement with catalog table', () => {
+        const sql = `SELECT * FROM catalog1.db1.table1;`;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
