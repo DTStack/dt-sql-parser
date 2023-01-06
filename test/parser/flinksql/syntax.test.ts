@@ -220,4 +220,23 @@ describe('FlinkSQL Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
+
+    test('Test invalid Double Line Comment statement', () => {
+        let sql = `-test comment\n`;
+        let result = parser.validate(sql);
+        expect(result.length).toBe(1);
+    });
+
+    test('Test valid Double Line Comment statement', () => {
+        const sql = `----test comment\n`;
+        const result = parser.validate(sql);
+        console.log('res:', result);
+        expect(result.length).toBe(0);
+    });
+
+    test('Test valid Hash Sign Line Comment statement', () => {
+        const sql = `#test comment\n`;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
 });
