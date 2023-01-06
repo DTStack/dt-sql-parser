@@ -9,3 +9,7 @@ site
 src/
 docs
 lib/grammar
+.vscode
+build
+yarn.lock
+
