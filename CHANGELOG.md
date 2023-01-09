@@ -2,13 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [4.0.0-beta.3.1](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.2.2...v4.0.0-beta.3.1) (2023-01-09)
-
-
-### Bug Fixes
-
-* fix bracket match ([e446fc0](https://github.com/DTStack/dt-sql-parser/commit/e446fc0435eb21c4a931db161c9c3a25dc8edb2b))
-* fix flinksql create table grammar, add test ([#65](https://github.com/DTStack/dt-sql-parser/issues/65)) ([0c9a831](https://github.com/DTStack/dt-sql-parser/commit/0c9a831585a3609cca5d9c8003f53f4cc4149632))
+## [4.0.0-beta.3.2](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.3.1...v4.0.0-beta.3.2) (2023-01-09)
 
 ## [4.0.0-beta.3.1](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.3...v4.0.0-beta.3.1) (2022-12-30)
 
