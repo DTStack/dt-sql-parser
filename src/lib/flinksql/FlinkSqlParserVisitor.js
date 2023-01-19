@@ -312,6 +312,12 @@ FlinkSqlParserVisitor.prototype.visitAlterFunction = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#dropCatalog.
+FlinkSqlParserVisitor.prototype.visitDropCatalog = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#dropTable.
 FlinkSqlParserVisitor.prototype.visitDropTable = function(ctx) {
   return this.visitChildren(ctx);

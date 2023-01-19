@@ -461,6 +461,15 @@ FlinkSqlParserListener.prototype.exitAlterFunction = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#dropCatalog.
+FlinkSqlParserListener.prototype.enterDropCatalog = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#dropCatalog.
+FlinkSqlParserListener.prototype.exitDropCatalog = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#dropTable.
 FlinkSqlParserListener.prototype.enterDropTable = function(ctx) {
 };

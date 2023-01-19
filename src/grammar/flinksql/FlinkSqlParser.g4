@@ -23,7 +23,7 @@ emptyStatement
 ddlStatement
     : createTable | createDatabase | createView | createFunction | createCatalog
     | alterTable | alterDatabase | alterFunction
-    | dropTable | dropDatabase | dropView | dropFunction
+    | dropCatalog | dropTable | dropDatabase | dropView | dropFunction
     ;
 
 dmlStatement
@@ -204,7 +204,7 @@ createView
     ;
 
 createFunction
-      : CREATE (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifNotExists? uid AS identifier (LANGUAGE identifier)?
+    : CREATE (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifNotExists? uid AS identifier (LANGUAGE identifier)?
     ;
 
 // Alter statements
@@ -232,8 +232,12 @@ alterFunction
 
 // Drop statements
 
+dropCatalog
+    : DROP CATALOG ifExists? uid
+    ;
+
 dropTable
-    : DROP TABLE ifExists? uid
+    : DROP TEMPORARY? TABLE ifExists? uid
     ;
 
 dropDatabase
