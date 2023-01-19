@@ -342,8 +342,20 @@ FlinkSqlParserVisitor.prototype.visitInsertStatement = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#insertSimpleStatement.
+FlinkSqlParserVisitor.prototype.visitInsertSimpleStatement = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#insertPartitionDefinition.
 FlinkSqlParserVisitor.prototype.visitInsertPartitionDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#insertColumnListDefinition.
+FlinkSqlParserVisitor.prototype.visitInsertColumnListDefinition = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -356,6 +368,18 @@ FlinkSqlParserVisitor.prototype.visitValuesDefinition = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#valuesRowDefinition.
 FlinkSqlParserVisitor.prototype.visitValuesRowDefinition = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#insertMulStatementCompatibility.
+FlinkSqlParserVisitor.prototype.visitInsertMulStatementCompatibility = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#insertMulStatement.
+FlinkSqlParserVisitor.prototype.visitInsertMulStatement = function(ctx) {
   return this.visitChildren(ctx);
 };
 

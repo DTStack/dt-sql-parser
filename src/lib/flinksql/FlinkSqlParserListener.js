@@ -506,12 +506,30 @@ FlinkSqlParserListener.prototype.exitInsertStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#insertSimpleStatement.
+FlinkSqlParserListener.prototype.enterInsertSimpleStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#insertSimpleStatement.
+FlinkSqlParserListener.prototype.exitInsertSimpleStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#insertPartitionDefinition.
 FlinkSqlParserListener.prototype.enterInsertPartitionDefinition = function(ctx) {
 };
 
 // Exit a parse tree produced by FlinkSqlParser#insertPartitionDefinition.
 FlinkSqlParserListener.prototype.exitInsertPartitionDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#insertColumnListDefinition.
+FlinkSqlParserListener.prototype.enterInsertColumnListDefinition = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#insertColumnListDefinition.
+FlinkSqlParserListener.prototype.exitInsertColumnListDefinition = function(ctx) {
 };
 
 
@@ -530,6 +548,24 @@ FlinkSqlParserListener.prototype.enterValuesRowDefinition = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#valuesRowDefinition.
 FlinkSqlParserListener.prototype.exitValuesRowDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#insertMulStatementCompatibility.
+FlinkSqlParserListener.prototype.enterInsertMulStatementCompatibility = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#insertMulStatementCompatibility.
+FlinkSqlParserListener.prototype.exitInsertMulStatementCompatibility = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#insertMulStatement.
+FlinkSqlParserListener.prototype.enterInsertMulStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#insertMulStatement.
+FlinkSqlParserListener.prototype.exitInsertMulStatement = function(ctx) {
 };
 
 

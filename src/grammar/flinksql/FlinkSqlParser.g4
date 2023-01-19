@@ -204,7 +204,7 @@ createView
     ;
 
 createFunction
-    : CREATE (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifNotExists? uid AS identifier (LANGUAGE identifier)?
+      : CREATE (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifNotExists? uid AS identifier (LANGUAGE identifier)?
     ;
 
 // Alter statements
@@ -252,15 +252,23 @@ dropFunction
 // Insert statements
 
 insertStatement
-    : INSERT (INTO | OVERWRITE) uid
+    : insertSimpleStatement | insertMulStatementCompatibility | insertMulStatement
+    ;
+
+insertSimpleStatement
+    : EXECUTE? INSERT (INTO | OVERWRITE) uid
     (
-        insertPartitionDefinition? queryStatement
+        insertPartitionDefinition? insertColumnListDefinition? queryStatement
         | valuesDefinition
     )
     ;
 
 insertPartitionDefinition
     : PARTITION tablePropertyList
+    ;
+
+insertColumnListDefinition
+    : LR_BRACKET columnNameList RR_BRACKET
     ;
 
 valuesDefinition
@@ -271,6 +279,14 @@ valuesRowDefinition
     : LR_BRACKET
         constant (COMMA constant)*
     RR_BRACKET
+    ;
+
+insertMulStatementCompatibility
+    : BEGIN STATEMENT SET SEMICOLON (insertSimpleStatement SEMICOLON)+ END
+    ;
+
+insertMulStatement
+    : EXECUTE STATEMENT SET BEGIN (insertSimpleStatement SEMICOLON)+ END
     ;
 
 
