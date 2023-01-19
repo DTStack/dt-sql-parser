@@ -443,6 +443,15 @@ FlinkSqlParserListener.prototype.exitSetKeyValueDefinition = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#alertView.
+FlinkSqlParserListener.prototype.enterAlertView = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#alertView.
+FlinkSqlParserListener.prototype.exitAlertView = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#alterDatabase.
 FlinkSqlParserListener.prototype.enterAlterDatabase = function(ctx) {
 };

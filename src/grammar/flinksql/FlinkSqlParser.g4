@@ -22,7 +22,7 @@ emptyStatement
 
 ddlStatement
     : createTable | createDatabase | createView | createFunction | createCatalog
-    | alterTable | alterDatabase | alterFunction
+    | alterTable | alertView | alterDatabase | alterFunction
     | dropCatalog | dropTable | dropDatabase | dropView | dropFunction
     ;
 
@@ -221,12 +221,16 @@ setKeyValueDefinition
     : SET tablePropertyList
     ;
 
+alertView
+    : ALTER VIEW uid (renameDefinition | AS queryStatement)
+    ;
+
 alterDatabase
     : ALTER DATABASE uid setKeyValueDefinition
     ;
 
 alterFunction
-    : ALTER (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifExists? uid AS identifier (LANGUAGE identifier)? 
+    : ALTER (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifExists? uid AS identifier (LANGUAGE (JAVA|SCALA|PYTHON))? 
     ;
 
 

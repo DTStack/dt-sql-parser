@@ -300,6 +300,12 @@ FlinkSqlParserVisitor.prototype.visitSetKeyValueDefinition = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#alertView.
+FlinkSqlParserVisitor.prototype.visitAlertView = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#alterDatabase.
 FlinkSqlParserVisitor.prototype.visitAlterDatabase = function(ctx) {
   return this.visitChildren(ctx);
