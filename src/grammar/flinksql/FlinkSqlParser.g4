@@ -50,6 +50,10 @@ showStatememt
 // Create statements
 
 createTable
+    : (simpleCreateTable | createTableAsSelect)
+    ;
+    
+simpleCreateTable
     : CREATE TABLE ifNotExists? sourceTable
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
@@ -61,6 +65,14 @@ createTable
     partitionDefinition?
     withOption
     likeDefinition?
+    ;
+
+/*
+ * 详见 https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/dev/table/sql/create/#as-select_statement
+ * CTAS 不支持指定显示指定列，不支持创建分区表，临时表
+ */
+createTableAsSelect
+    : CREATE TABLE ifNotExists? sourceTable withOption (AS queryStatement)?
     ;
 
 columnOptionDefinition
@@ -204,7 +216,15 @@ createView
     ;
 
 createFunction
-    : CREATE (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifNotExists? uid AS identifier (LANGUAGE identifier)?
+    : CREATE (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifNotExists? uid AS identifier (LANGUAGE (JAVA|SCALA|PYTHON))? usingClause?
+    ;
+
+usingClause
+    : USING JAR jarFileName (COMMA JAR jarFileName)* 
+    ;
+
+jarFileName
+    : STRING_LITERAL
     ;
 
 // Alter statements

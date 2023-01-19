@@ -119,6 +119,24 @@ FlinkSqlParserListener.prototype.exitCreateTable = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#simpleCreateTable.
+FlinkSqlParserListener.prototype.enterSimpleCreateTable = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#simpleCreateTable.
+FlinkSqlParserListener.prototype.exitSimpleCreateTable = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#createTableAsSelect.
+FlinkSqlParserListener.prototype.enterCreateTableAsSelect = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#createTableAsSelect.
+FlinkSqlParserListener.prototype.exitCreateTableAsSelect = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#columnOptionDefinition.
 FlinkSqlParserListener.prototype.enterColumnOptionDefinition = function(ctx) {
 };
@@ -413,6 +431,24 @@ FlinkSqlParserListener.prototype.enterCreateFunction = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#createFunction.
 FlinkSqlParserListener.prototype.exitCreateFunction = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#usingClause.
+FlinkSqlParserListener.prototype.enterUsingClause = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#usingClause.
+FlinkSqlParserListener.prototype.exitUsingClause = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#jarFileName.
+FlinkSqlParserListener.prototype.enterJarFileName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#jarFileName.
+FlinkSqlParserListener.prototype.exitJarFileName = function(ctx) {
 };
 
 

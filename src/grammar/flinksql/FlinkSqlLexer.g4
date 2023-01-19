@@ -242,6 +242,7 @@ LANGUAGE:                     'LANGUAGE';
 JAVA:                         'JAVA';
 SCALA:                        'SCALA';
 PYTHON:                       'PYTHON';
+JAR:                          'JAR';
 CATALOGS:                     'CATALOGS';
 VIEWS:                        'VIEWS';
 PRIMARY:                      'PRIMARY';
@@ -335,6 +336,7 @@ BIT_STRING:                          BIT_STRING_L;
 ID_LITERAL:                          ID_LITERAL_FRAG;
 PLUS_ID_LITERAL:                     PLUS_ID_LITERAL_FRAG;
 
+fragment JAR_FILE_PARTTARN:          '`' ( '\\'. | '``' | ~('`'|'\\'))* '`';
 fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
 fragment ID_LITERAL_FRAG:            [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;
 fragment PLUS_ID_LITERAL_FRAG:       [A-Z_0-9a-z*@#^$%&{}]*?[A-Z_a-z*@#^$%&{}]+?[A-Z_0-9a-z*@#^$%&{}]*;

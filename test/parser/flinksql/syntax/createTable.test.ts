@@ -114,6 +114,19 @@ describe('FlinkSQL Create Table Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
+    // AS select_statement
+    test('Test As Select Statement', () => {
+        const sql = `
+            CREATE TABLE my_ctas_table
+            WITH (
+                'connector' = 'kafka'
+            )
+            AS SELECT id, name, age FROM source_table WHERE mod(id, 10) = 0;
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+
     // create catalog table
     test('Test Create Catalog Table Statement', () => {
         const sql = `

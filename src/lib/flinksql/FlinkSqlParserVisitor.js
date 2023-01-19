@@ -84,6 +84,18 @@ FlinkSqlParserVisitor.prototype.visitCreateTable = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#simpleCreateTable.
+FlinkSqlParserVisitor.prototype.visitSimpleCreateTable = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#createTableAsSelect.
+FlinkSqlParserVisitor.prototype.visitCreateTableAsSelect = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#columnOptionDefinition.
 FlinkSqlParserVisitor.prototype.visitColumnOptionDefinition = function(ctx) {
   return this.visitChildren(ctx);
@@ -278,6 +290,18 @@ FlinkSqlParserVisitor.prototype.visitCreateView = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#createFunction.
 FlinkSqlParserVisitor.prototype.visitCreateFunction = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#usingClause.
+FlinkSqlParserVisitor.prototype.visitUsingClause = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#jarFileName.
+FlinkSqlParserVisitor.prototype.visitJarFileName = function(ctx) {
   return this.visitChildren(ctx);
 };
 
