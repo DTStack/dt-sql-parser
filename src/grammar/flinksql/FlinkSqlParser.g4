@@ -30,20 +30,39 @@ dmlStatement
     : queryStatement | insertStatement
     ;
 
+// some statemen
 describeStatement
-    : DESCRIBE uid
+    : (DESCRIBE | DESC) uid
     ;
 
 explainStatement
-    : EXPLAIN identifier FOR dmlStatement
+    : EXPLAIN (explainDetails | PLAN FOR)? (dmlStatement | insertMulStatement)
+    ;
+
+explainDetails
+    : explainDetail (COMMA explainDetail)*
+    ;
+
+explainDetail
+    : CHANGELOG_MODE | JSON_EXECUTION_PLAN | ESTIMATED_COST
     ;
 
 useStatement
-    : USE CATALOG? uid
+    : USE CATALOG? uid | useModuleStatement
+    ;
+
+useModuleStatement
+    : USE MODULES uid (COMMA uid)*
     ;
 
 showStatememt
-    : SHOW (CATALOGS | DATABASES | TABLES | FUNCTIONS | VIEWS)
+    : SHOW (CATALOGS | DATABASES | VIEWS | JARS)
+    | SHOW CURRENT (CATALOG | DATABASE)
+    | SHOW TABLES (( FROM | IN ) uid)? likePredicate?
+    | SHOW COLUMNS ( FROM | IN ) uid likePredicate?
+    | SHOW CREATE (TABLE | VIEW) uid
+    | SHOW USER? FUNCTIONS
+    | SHOW FULL? MODULES
     ;
 
 
@@ -480,6 +499,11 @@ predicate
     | IS NOT? kind=NULL
     | IS NOT? kind=(TRUE | FALSE)
     | IS NOT? kind=DISTINCT FROM right=valueExpression
+    ;
+
+likePredicate
+    : NOT? kind=LIKE quantifier=(ANY | ALL) ('('')' | '(' expression (',' expression)* ')')
+    | NOT? kind=LIKE pattern=valueExpression
     ;
 
 valueExpression
@@ -1159,6 +1183,7 @@ nonReserved
     | UNSET
     | UNNEST
     | USE
+    | USER
     | VALUES
     | VARBINARY
     | VARCHAR

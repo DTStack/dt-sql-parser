@@ -97,28 +97,73 @@ describe('FlinkSQL Syntax Tests', () => {
 
     // describe statements
     test('Test simple Describe Statement', () => {
-        const sql = `DESCRIBE Orders;`;
+        const sql = `
+            DESCRIBE Orders;
+            DESC Orders;
+        `;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
 
-    // describe statements
+    // explain statements
     test('Test simple Explain Statement', () => {
-        const sql = `EXPLAIN tempTable FOR SELECT k, SUM(v) FROM oneTable;`;
+        const sql = `
+            EXPLAIN SELECT * FROM emps;
+            EXPLAIN PLAN FOR SELECT * FROM emps;
+            EXPLAIN PLAN FOR insert into emps1 SELECT * FROM emps2;
+            EXPLAIN CHANGELOG_MODE SELECT * FROM emps;
+            EXPLAIN ESTIMATED_COST SELECT * FROM emps;
+            EXPLAIN JSON_EXECUTION_PLAN SELECT * FROM emps;
+            EXPLAIN CHANGELOG_MODE, JSON_EXECUTION_PLAN, ESTIMATED_COST SELECT * FROM emps;
+        `;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
+    });
+
+    test('Test simple Explain statement_set', () => {
+        // TODO: 这个目前有点异议
+        // 按官网上写的，那应该是 explain execute statement set - begin，但是 github 上的 test 里提供的样例是不带 execute 的
+        const sql = `
+            EXPLAIN STATEMENT SET
+            BEGIN
+            INSERT INTO t1 SELECT * FROM t2;
+            INSERT INTO t2 SELECT * FROM t3;
+            END;
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(3);
     });
 
     // use statements
     test('Test simple Use Statement', () => {
-        const sql = `USE CATALOG orders;`;
+        const sql = `
+            USE CATALOG cat1;
+            USE db1;
+            USE MODULES hive;
+        `;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
 
     // show statements
     test('Test simple Show Statement', () => {
-        const sql = `SHOW CATALOGS;`;
+        const sql = `
+            SHOW CATALOGS;
+            SHOW CURRENT CATALOG;
+            SHOW DATABASES;
+            SHOW CURRENT DATABASE;
+            SHOW TABLES;
+            SHOW TABLES FROM catalog1.db1 NOT LIKE '%';
+            SHOW CREATE TABLE my_table;
+            SHOW COLUMNS FROM my_table LIKE '%f%';
+            SHOW VIEWS;
+            SHOW CREATE VIEW my_view;
+            SHOW FUNCTIONS;
+            SHOW USER FUNCTIONS;
+            SHOW MODULES;
+            SHOW FULL MODULES;
+            SHOW JARS;
+        `;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });

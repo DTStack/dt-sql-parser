@@ -66,8 +66,26 @@ FlinkSqlParserVisitor.prototype.visitExplainStatement = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#explainDetails.
+FlinkSqlParserVisitor.prototype.visitExplainDetails = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#explainDetail.
+FlinkSqlParserVisitor.prototype.visitExplainDetail = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#useStatement.
 FlinkSqlParserVisitor.prototype.visitUseStatement = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#useModuleStatement.
+FlinkSqlParserVisitor.prototype.visitUseModuleStatement = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -620,6 +638,12 @@ FlinkSqlParserVisitor.prototype.visitLogicalBinary = function(ctx) {
 
 // Visit a parse tree produced by FlinkSqlParser#predicate.
 FlinkSqlParserVisitor.prototype.visitPredicate = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#likePredicate.
+FlinkSqlParserVisitor.prototype.visitLikePredicate = function(ctx) {
   return this.visitChildren(ctx);
 };
 

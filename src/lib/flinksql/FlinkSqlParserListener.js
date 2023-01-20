@@ -92,12 +92,39 @@ FlinkSqlParserListener.prototype.exitExplainStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#explainDetails.
+FlinkSqlParserListener.prototype.enterExplainDetails = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#explainDetails.
+FlinkSqlParserListener.prototype.exitExplainDetails = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#explainDetail.
+FlinkSqlParserListener.prototype.enterExplainDetail = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#explainDetail.
+FlinkSqlParserListener.prototype.exitExplainDetail = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#useStatement.
 FlinkSqlParserListener.prototype.enterUseStatement = function(ctx) {
 };
 
 // Exit a parse tree produced by FlinkSqlParser#useStatement.
 FlinkSqlParserListener.prototype.exitUseStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#useModuleStatement.
+FlinkSqlParserListener.prototype.enterUseModuleStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#useModuleStatement.
+FlinkSqlParserListener.prototype.exitUseModuleStatement = function(ctx) {
 };
 
 
@@ -926,6 +953,15 @@ FlinkSqlParserListener.prototype.enterPredicate = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#predicate.
 FlinkSqlParserListener.prototype.exitPredicate = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#likePredicate.
+FlinkSqlParserListener.prototype.enterLikePredicate = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#likePredicate.
+FlinkSqlParserListener.prototype.exitLikePredicate = function(ctx) {
 };
 
 
