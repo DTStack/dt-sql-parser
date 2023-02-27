@@ -93,7 +93,7 @@ createTable
     ;
     
 simpleCreateTable
-    : CREATE TABLE ifNotExists? sourceTable
+    : CREATE TEMPORARY? TABLE ifNotExists? sourceTable
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
         (COMMA watermarkDefinition)?
@@ -319,11 +319,11 @@ dropFunction
 // Insert statements
 
 insertStatement
-    : insertSimpleStatement | insertMulStatementCompatibility | insertMulStatement
+    : (EXECUTE? insertSimpleStatement) | insertMulStatementCompatibility | (EXECUTE insertMulStatement)
     ;
 
 insertSimpleStatement
-    : EXECUTE? INSERT (INTO | OVERWRITE) uid
+    : INSERT (INTO | OVERWRITE) uid
     (
         insertPartitionDefinition? insertColumnListDefinition? queryStatement
         | valuesDefinition
@@ -353,7 +353,7 @@ insertMulStatementCompatibility
     ;
 
 insertMulStatement
-    : EXECUTE STATEMENT SET BEGIN (insertSimpleStatement SEMICOLON)+ END
+    : STATEMENT SET BEGIN (insertSimpleStatement SEMICOLON)+ END
     ;
 
 

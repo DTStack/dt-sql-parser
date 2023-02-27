@@ -120,9 +120,16 @@ describe('FlinkSQL Syntax Tests', () => {
         expect(result.length).toBe(0);
     });
 
+    // explain insert_statement
+    test('Test Explain Insert Statement', () => {
+        const sql = `EXPLAIN INSERT INTO EMPS1 SELECT * FROM EMPS2;`;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+
     test('Test simple Explain statement_set', () => {
-        // TODO: 这个目前有点异议
-        // 按官网上写的，那应该是 explain execute statement set - begin，但是 github 上的 test 里提供的样例是不带 execute 的
+        // 按官网上写的，那应该是 explain execute statement set - begin，但实际执行时，携带 execute 会报错
+        // 个人理解，explain 是解析该语法如何执行，而不能在解析的过程中，去执行语句
         const sql = `
             EXPLAIN STATEMENT SET
             BEGIN
@@ -131,7 +138,7 @@ describe('FlinkSQL Syntax Tests', () => {
             END;
         `;
         const result = parser.validate(sql);
-        expect(result.length).toBe(3);
+        expect(result.length).toBe(0);
     });
 
     // use statements

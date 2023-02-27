@@ -4,9 +4,22 @@ describe('FlinkSQL Create Table Syntax Tests', () => {
     const parser = new FlinkSQL();
 
     // simple create table statement
-    test('Test simple CreateTable Statement', () => {
+    test('Test simple Create Table Statement', () => {
         const sql = `
             CREATE TABLE MyTable (
+                'user_id' BIGINT,
+                'name' STRING
+            ) WITH (
+                'connector'='oracle-x'
+            );
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+    // create temporary table statement
+    test('Test Temporary Create Table Statement', () => {
+        const sql = `
+            CREATE TEMPORARY TABLE MyTable (
                 'user_id' BIGINT,
                 'name' STRING
             ) WITH (
