@@ -96,6 +96,36 @@ FlinkSqlParserVisitor.prototype.visitShowStatememt = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#loadStatement.
+FlinkSqlParserVisitor.prototype.visitLoadStatement = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#unloadStatememt.
+FlinkSqlParserVisitor.prototype.visitUnloadStatememt = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#setStatememt.
+FlinkSqlParserVisitor.prototype.visitSetStatememt = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#resetStatememt.
+FlinkSqlParserVisitor.prototype.visitResetStatememt = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by FlinkSqlParser#jarStatememt.
+FlinkSqlParserVisitor.prototype.visitJarStatememt = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#createTable.
 FlinkSqlParserVisitor.prototype.visitCreateTable = function(ctx) {
   return this.visitChildren(ctx);

@@ -14,6 +14,7 @@ sqlStatements
 
 sqlStatement
     : ddlStatement | dmlStatement | describeStatement | explainStatement | useStatement | showStatememt
+    | loadStatement | unloadStatememt | setStatememt | resetStatememt | jarStatememt
     ;
 
 emptyStatement
@@ -36,7 +37,7 @@ describeStatement
     ;
 
 explainStatement
-    : EXPLAIN (explainDetails | PLAN FOR)? (dmlStatement | insertMulStatement)
+    : EXPLAIN (explainDetails | PLAN FOR)? (dmlStatement | insertSimpleStatement | insertMulStatement)
     ;
 
 explainDetails
@@ -65,6 +66,25 @@ showStatememt
     | SHOW FULL? MODULES
     ;
 
+loadStatement
+    : LOAD MODULE uid (WITH tablePropertyList)?
+    ;
+    
+unloadStatememt
+    : UNLOAD MODULE uid
+    ;
+
+setStatememt
+    : SET (tableProperty)?
+    ;
+
+resetStatememt
+    : RESET tablePropertyKey?
+    ;
+    
+jarStatememt
+    : (ADD | REMOVE) JAR jarFileName
+    ;
 
 // Create statements
 

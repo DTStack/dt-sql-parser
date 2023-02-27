@@ -69,7 +69,7 @@ describe('FlinkSQL Create Table Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
-    test('Test insert into multiple tables Statement for 1.16', () => {
+    test('Test insert into multiple tables Statement for 1.15', () => {
         const sql = `
             EXECUTE STATEMENT SET
             BEGIN

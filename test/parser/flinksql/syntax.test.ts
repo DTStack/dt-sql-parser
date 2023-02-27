@@ -167,4 +167,22 @@ describe('FlinkSQL Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
+
+    // other statement
+    test('Test other Statement', () => {
+        const sql = `
+        LOAD MODULE CORE;
+        LOAD MODULE dummy WITH ('k1' = 'v1', 'k2' = 'v2');
+        UNLOAD MODULE CORE;
+        SET;
+        SET 'test-key' = 'test-value';
+        RESET;
+        RESET 'test-key';
+        ADD JAR '<path_to_filename>.jar'
+        REMOVE JAR '<path_to_filename>.jar'
+        `;
+        const result = parser.validate(sql);
+        console.log(result);
+        expect(result.length).toBe(0);
+    });
 });

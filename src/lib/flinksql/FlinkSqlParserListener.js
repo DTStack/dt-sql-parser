@@ -137,6 +137,51 @@ FlinkSqlParserListener.prototype.exitShowStatememt = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#loadStatement.
+FlinkSqlParserListener.prototype.enterLoadStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#loadStatement.
+FlinkSqlParserListener.prototype.exitLoadStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#unloadStatememt.
+FlinkSqlParserListener.prototype.enterUnloadStatememt = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#unloadStatememt.
+FlinkSqlParserListener.prototype.exitUnloadStatememt = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#setStatememt.
+FlinkSqlParserListener.prototype.enterSetStatememt = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#setStatememt.
+FlinkSqlParserListener.prototype.exitSetStatememt = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#resetStatememt.
+FlinkSqlParserListener.prototype.enterResetStatememt = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#resetStatememt.
+FlinkSqlParserListener.prototype.exitResetStatememt = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#jarStatememt.
+FlinkSqlParserListener.prototype.enterJarStatememt = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#jarStatememt.
+FlinkSqlParserListener.prototype.exitJarStatememt = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#createTable.
 FlinkSqlParserListener.prototype.enterCreateTable = function(ctx) {
 };
