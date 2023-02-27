@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/pgsql/PostgreSQLLexer.g4 by ANTLR 4.8
+// Generated from /Users/salvo/dt-sql-parser2/src/grammar/pgsql/PostgreSQLLexer.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -4737,7 +4737,7 @@ PostgreSQLLexer.prototype.Operator_action = function(localctx , actionIndex) {
 	switch (actionIndex) {
 	case 0:
 
-		    HandleLessLessGreaterGreater();
+        this.HandleLessLessGreaterGreater();
 		   
 		break;
 	default:
@@ -4748,7 +4748,7 @@ PostgreSQLLexer.prototype.Operator_action = function(localctx , actionIndex) {
 PostgreSQLLexer.prototype.BeginDollarStringConstant_action = function(localctx , actionIndex) {
 	switch (actionIndex) {
 	case 1:
-		pushTag();
+        this.pushTag();
 		break;
 	default:
 		throw "No registered action for:" + actionIndex;
@@ -4758,7 +4758,7 @@ PostgreSQLLexer.prototype.BeginDollarStringConstant_action = function(localctx ,
 PostgreSQLLexer.prototype.NumericFail_action = function(localctx , actionIndex) {
 	switch (actionIndex) {
 	case 2:
-		HandleNumericFail();
+        this.HandleNumericFail();
 		break;
 	default:
 		throw "No registered action for:" + actionIndex;
@@ -4769,7 +4769,7 @@ PostgreSQLLexer.prototype.UnterminatedBlockComment_action = function(localctx , 
 	switch (actionIndex) {
 	case 3:
 
-		            UnterminatedBlockCommentDebugAssert();
+        this.UnterminatedBlockCommentDebugAssert();
 		   
 		break;
 	default:
@@ -4798,7 +4798,7 @@ PostgreSQLLexer.prototype.AfterEscapeStringConstantWithNewlineMode_NotContinued_
 PostgreSQLLexer.prototype.EndDollarStringConstant_action = function(localctx , actionIndex) {
 	switch (actionIndex) {
 	case 6:
-		popTag();
+        this.popTag();
 		break;
 	default:
 		throw "No registered action for:" + actionIndex;
@@ -4822,11 +4822,11 @@ PostgreSQLLexer.prototype.sempred = function(localctx, ruleIndex, predIndex) {
 PostgreSQLLexer.prototype.Operator_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 0:
-			return checkLA('-');
+			return this.checkLA('-');
 		case 1:
-			return checkLA('*');
+			return this.checkLA('*');
 		case 2:
-			return checkLA('*');
+			return this.checkLA('*');
 		default:
 			throw "No predicate with index:" + predIndex;
 	}
@@ -4835,11 +4835,11 @@ PostgreSQLLexer.prototype.Operator_sempred = function(localctx, predIndex) {
 PostgreSQLLexer.prototype.OperatorEndingWithPlusMinus_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 3:
-			return checkLA('-');
+			return this.checkLA('-');
 		case 4:
-			return checkLA('*');
+			return this.checkLA('*');
 		case 5:
-			return checkLA('-');
+			return this.checkLA('-');
 		default:
 			throw "No predicate with index:" + predIndex;
 	}
@@ -4848,10 +4848,10 @@ PostgreSQLLexer.prototype.OperatorEndingWithPlusMinus_sempred = function(localct
 PostgreSQLLexer.prototype.IdentifierStartChar_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 6:
-			return charIsLetter();
+			return this.charIsLetter();
 		case 7:
-			return 
-		    CheckIfUtf32Letter()
+			return
+            this.CheckIfUtf32Letter()
 		   ;
 		default:
 			throw "No predicate with index:" + predIndex;
@@ -4861,7 +4861,7 @@ PostgreSQLLexer.prototype.IdentifierStartChar_sempred = function(localctx, predI
 PostgreSQLLexer.prototype.EndDollarStringConstant_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 8:
-			return isTag();
+			return this.isTag();
 		default:
 			throw "No predicate with index:" + predIndex;
 	}

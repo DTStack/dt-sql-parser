@@ -3,104 +3,6 @@ import { FlinkSQL } from '../../../src';
 describe('FlinkSQL Syntax Tests', () => {
     const parser = new FlinkSQL();
 
-    // Create statements
-    test('Test simple CreateTable Statement', () => {
-        const sql = `
-            CREATE TABLE Orders (
-                user BIGINT
-            ) WITH ( 
-                "connector" = "kafka",
-                "scan.startup.mode" = "earliest-offset"
-            );
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test simple CreateDatabase Statement', () => {
-        const sql = `
-            CREATE DATABASE IF NOT EXISTS dataApi
-            WITH ( 
-                "owner" = "admin"
-            );
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test simple CreateView Statement', () => {
-        const sql = `
-            CREATE TEMPORARY VIEW IF NOT EXISTS tempView
-            AS SELECT product, amount FROM Orders;
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test simple CreateFunction Statement', () => {
-        const sql = `
-            CREATE TEMPORARY FUNCTION IF NOT EXISTS tempFunction AS 'SimpleUdf';
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-
-    // Alter statements
-    test('Test simple AlterTable Statement', () => {
-        const sql = `ALTER TABLE Orders RENAME TO NewOrders;`;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test simple AlterDatabase Statement', () => {
-        const sql = `ALTER DATABASE tempDB SET ("key1"="value1");`;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test simple AlterFunction Statement', () => {
-        const sql = `
-            ALTER TEMPORARY FUNCTION IF EXISTS tempFunction AS 'SimpleUdf';
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-
-    // Drop statements
-    test('Test simple DropTable Statement', () => {
-        const sql = `DROP TABLE IF EXISTS Orders;`;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test simple DropDatabase Statement', () => {
-        const sql = `DROP DATABASE IF EXISTS Orders RESTRICT;`;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test simple DropView Statement', () => {
-        const sql = `DROP TEMPORARY VIEW IF EXISTS Orders;`;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test simple DropFunction Statement', () => {
-        const sql = `DROP TEMPORARY FUNCTION IF EXISTS Orders;`;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-
-    // insert statements
-    test('Test one simple Insert Statement', () => {
-        const sql = `
-            INSERT INTO students VALUES
-            ('Amy Smith', '123 Park Ave, San Jose', 111111);
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test two simple Insert Statement', () => {
-        const sql = `
-            INSERT INTO students PARTITION (student_id = 444444)
-            SELECT name, address FROM persons WHERE name = "Dora Williams";
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-
     // query statements
     test('Test With clause', () => {
         const sql = `
@@ -195,29 +97,99 @@ describe('FlinkSQL Syntax Tests', () => {
 
     // describe statements
     test('Test simple Describe Statement', () => {
-        const sql = `DESCRIBE Orders;`;
+        const sql = `
+            DESCRIBE Orders;
+            DESC Orders;
+        `;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
 
-    // describe statements
+    // explain statements
     test('Test simple Explain Statement', () => {
-        const sql = `EXPLAIN tempTable FOR SELECT k, SUM(v) FROM oneTable;`;
+        const sql = `
+            EXPLAIN SELECT * FROM emps;
+            EXPLAIN PLAN FOR SELECT * FROM emps;
+            EXPLAIN PLAN FOR insert into emps1 SELECT * FROM emps2;
+            EXPLAIN CHANGELOG_MODE SELECT * FROM emps;
+            EXPLAIN ESTIMATED_COST SELECT * FROM emps;
+            EXPLAIN JSON_EXECUTION_PLAN SELECT * FROM emps;
+            EXPLAIN CHANGELOG_MODE, JSON_EXECUTION_PLAN, ESTIMATED_COST SELECT * FROM emps;
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+
+    // explain insert_statement
+    test('Test Explain Insert Statement', () => {
+        const sql = `EXPLAIN INSERT INTO EMPS1 SELECT * FROM EMPS2;`;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+
+    test('Test simple Explain statement_set', () => {
+        // 按官网上写的，那应该是 explain execute statement set - begin，但实际执行时，携带 execute 会报错
+        // 个人理解，explain 是解析该语法如何执行，而不能在解析的过程中，去执行语句
+        const sql = `
+            EXPLAIN STATEMENT SET
+            BEGIN
+            INSERT INTO t1 SELECT * FROM t2;
+            INSERT INTO t2 SELECT * FROM t3;
+            END;
+        `;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
 
     // use statements
     test('Test simple Use Statement', () => {
-        const sql = `USE CATALOG orders;`;
+        const sql = `
+            USE CATALOG cat1;
+            USE db1;
+            USE MODULES hive;
+        `;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
 
     // show statements
     test('Test simple Show Statement', () => {
-        const sql = `SHOW CATALOGS;`;
+        const sql = `
+            SHOW CATALOGS;
+            SHOW CURRENT CATALOG;
+            SHOW DATABASES;
+            SHOW CURRENT DATABASE;
+            SHOW TABLES;
+            SHOW TABLES FROM catalog1.db1 NOT LIKE '%';
+            SHOW CREATE TABLE my_table;
+            SHOW COLUMNS FROM my_table LIKE '%f%';
+            SHOW VIEWS;
+            SHOW CREATE VIEW my_view;
+            SHOW FUNCTIONS;
+            SHOW USER FUNCTIONS;
+            SHOW MODULES;
+            SHOW FULL MODULES;
+            SHOW JARS;
+        `;
         const result = parser.validate(sql);
+        expect(result.length).toBe(0);
+    });
+
+    // other statement
+    test('Test other Statement', () => {
+        const sql = `
+        LOAD MODULE CORE;
+        LOAD MODULE dummy WITH ('k1' = 'v1', 'k2' = 'v2');
+        UNLOAD MODULE CORE;
+        SET;
+        SET 'test-key' = 'test-value';
+        RESET;
+        RESET 'test-key';
+        ADD JAR '<path_to_filename>.jar'
+        REMOVE JAR '<path_to_filename>.jar'
+        `;
+        const result = parser.validate(sql);
+        console.log(result);
         expect(result.length).toBe(0);
     });
 

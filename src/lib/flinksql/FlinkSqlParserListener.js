@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
+// Generated from /Users/yuwan/Desktop/yuwan/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.8
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
@@ -92,12 +92,39 @@ FlinkSqlParserListener.prototype.exitExplainStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#explainDetails.
+FlinkSqlParserListener.prototype.enterExplainDetails = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#explainDetails.
+FlinkSqlParserListener.prototype.exitExplainDetails = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#explainDetail.
+FlinkSqlParserListener.prototype.enterExplainDetail = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#explainDetail.
+FlinkSqlParserListener.prototype.exitExplainDetail = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#useStatement.
 FlinkSqlParserListener.prototype.enterUseStatement = function(ctx) {
 };
 
 // Exit a parse tree produced by FlinkSqlParser#useStatement.
 FlinkSqlParserListener.prototype.exitUseStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#useModuleStatement.
+FlinkSqlParserListener.prototype.enterUseModuleStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#useModuleStatement.
+FlinkSqlParserListener.prototype.exitUseModuleStatement = function(ctx) {
 };
 
 
@@ -110,12 +137,75 @@ FlinkSqlParserListener.prototype.exitShowStatememt = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#loadStatement.
+FlinkSqlParserListener.prototype.enterLoadStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#loadStatement.
+FlinkSqlParserListener.prototype.exitLoadStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#unloadStatememt.
+FlinkSqlParserListener.prototype.enterUnloadStatememt = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#unloadStatememt.
+FlinkSqlParserListener.prototype.exitUnloadStatememt = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#setStatememt.
+FlinkSqlParserListener.prototype.enterSetStatememt = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#setStatememt.
+FlinkSqlParserListener.prototype.exitSetStatememt = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#resetStatememt.
+FlinkSqlParserListener.prototype.enterResetStatememt = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#resetStatememt.
+FlinkSqlParserListener.prototype.exitResetStatememt = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#jarStatememt.
+FlinkSqlParserListener.prototype.enterJarStatememt = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#jarStatememt.
+FlinkSqlParserListener.prototype.exitJarStatememt = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#createTable.
 FlinkSqlParserListener.prototype.enterCreateTable = function(ctx) {
 };
 
 // Exit a parse tree produced by FlinkSqlParser#createTable.
 FlinkSqlParserListener.prototype.exitCreateTable = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#simpleCreateTable.
+FlinkSqlParserListener.prototype.enterSimpleCreateTable = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#simpleCreateTable.
+FlinkSqlParserListener.prototype.exitSimpleCreateTable = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#createTableAsSelect.
+FlinkSqlParserListener.prototype.enterCreateTableAsSelect = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#createTableAsSelect.
+FlinkSqlParserListener.prototype.exitCreateTableAsSelect = function(ctx) {
 };
 
 
@@ -416,6 +506,24 @@ FlinkSqlParserListener.prototype.exitCreateFunction = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#usingClause.
+FlinkSqlParserListener.prototype.enterUsingClause = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#usingClause.
+FlinkSqlParserListener.prototype.exitUsingClause = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#jarFileName.
+FlinkSqlParserListener.prototype.enterJarFileName = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#jarFileName.
+FlinkSqlParserListener.prototype.exitJarFileName = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#alterTable.
 FlinkSqlParserListener.prototype.enterAlterTable = function(ctx) {
 };
@@ -443,6 +551,15 @@ FlinkSqlParserListener.prototype.exitSetKeyValueDefinition = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#alertView.
+FlinkSqlParserListener.prototype.enterAlertView = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#alertView.
+FlinkSqlParserListener.prototype.exitAlertView = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#alterDatabase.
 FlinkSqlParserListener.prototype.enterAlterDatabase = function(ctx) {
 };
@@ -458,6 +575,15 @@ FlinkSqlParserListener.prototype.enterAlterFunction = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#alterFunction.
 FlinkSqlParserListener.prototype.exitAlterFunction = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#dropCatalog.
+FlinkSqlParserListener.prototype.enterDropCatalog = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#dropCatalog.
+FlinkSqlParserListener.prototype.exitDropCatalog = function(ctx) {
 };
 
 
@@ -506,12 +632,30 @@ FlinkSqlParserListener.prototype.exitInsertStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#insertSimpleStatement.
+FlinkSqlParserListener.prototype.enterInsertSimpleStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#insertSimpleStatement.
+FlinkSqlParserListener.prototype.exitInsertSimpleStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#insertPartitionDefinition.
 FlinkSqlParserListener.prototype.enterInsertPartitionDefinition = function(ctx) {
 };
 
 // Exit a parse tree produced by FlinkSqlParser#insertPartitionDefinition.
 FlinkSqlParserListener.prototype.exitInsertPartitionDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#insertColumnListDefinition.
+FlinkSqlParserListener.prototype.enterInsertColumnListDefinition = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#insertColumnListDefinition.
+FlinkSqlParserListener.prototype.exitInsertColumnListDefinition = function(ctx) {
 };
 
 
@@ -530,6 +674,24 @@ FlinkSqlParserListener.prototype.enterValuesRowDefinition = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#valuesRowDefinition.
 FlinkSqlParserListener.prototype.exitValuesRowDefinition = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#insertMulStatementCompatibility.
+FlinkSqlParserListener.prototype.enterInsertMulStatementCompatibility = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#insertMulStatementCompatibility.
+FlinkSqlParserListener.prototype.exitInsertMulStatementCompatibility = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#insertMulStatement.
+FlinkSqlParserListener.prototype.enterInsertMulStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#insertMulStatement.
+FlinkSqlParserListener.prototype.exitInsertMulStatement = function(ctx) {
 };
 
 
@@ -836,6 +998,15 @@ FlinkSqlParserListener.prototype.enterPredicate = function(ctx) {
 
 // Exit a parse tree produced by FlinkSqlParser#predicate.
 FlinkSqlParserListener.prototype.exitPredicate = function(ctx) {
+};
+
+
+// Enter a parse tree produced by FlinkSqlParser#likePredicate.
+FlinkSqlParserListener.prototype.enterLikePredicate = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#likePredicate.
+FlinkSqlParserListener.prototype.exitLikePredicate = function(ctx) {
 };
 
 

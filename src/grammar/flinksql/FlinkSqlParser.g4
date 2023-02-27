@@ -14,6 +14,7 @@ sqlStatements
 
 sqlStatement
     : ddlStatement | dmlStatement | describeStatement | explainStatement | useStatement | showStatememt
+    | loadStatement | unloadStatememt | setStatememt | resetStatememt | jarStatememt
     ;
 
 emptyStatement
@@ -22,35 +23,77 @@ emptyStatement
 
 ddlStatement
     : createTable | createDatabase | createView | createFunction | createCatalog
-    | alterTable | alterDatabase | alterFunction
-    | dropTable | dropDatabase | dropView | dropFunction
+    | alterTable | alertView | alterDatabase | alterFunction
+    | dropCatalog | dropTable | dropDatabase | dropView | dropFunction
     ;
 
 dmlStatement
     : queryStatement | insertStatement
     ;
 
+// some statemen
 describeStatement
-    : DESCRIBE uid
+    : (DESCRIBE | DESC) uid
     ;
 
 explainStatement
-    : EXPLAIN identifier FOR dmlStatement
+    : EXPLAIN (explainDetails | PLAN FOR)? (dmlStatement | insertSimpleStatement | insertMulStatement)
+    ;
+
+explainDetails
+    : explainDetail (COMMA explainDetail)*
+    ;
+
+explainDetail
+    : CHANGELOG_MODE | JSON_EXECUTION_PLAN | ESTIMATED_COST
     ;
 
 useStatement
-    : USE CATALOG? uid
+    : USE CATALOG? uid | useModuleStatement
+    ;
+
+useModuleStatement
+    : USE MODULES uid (COMMA uid)*
     ;
 
 showStatememt
-    : SHOW (CATALOGS | DATABASES | TABLES | FUNCTIONS | VIEWS)
+    : SHOW (CATALOGS | DATABASES | VIEWS | JARS)
+    | SHOW CURRENT (CATALOG | DATABASE)
+    | SHOW TABLES (( FROM | IN ) uid)? likePredicate?
+    | SHOW COLUMNS ( FROM | IN ) uid likePredicate?
+    | SHOW CREATE (TABLE | VIEW) uid
+    | SHOW USER? FUNCTIONS
+    | SHOW FULL? MODULES
     ;
 
+loadStatement
+    : LOAD MODULE uid (WITH tablePropertyList)?
+    ;
+    
+unloadStatememt
+    : UNLOAD MODULE uid
+    ;
+
+setStatememt
+    : SET (tableProperty)?
+    ;
+
+resetStatememt
+    : RESET tablePropertyKey?
+    ;
+    
+jarStatememt
+    : (ADD | REMOVE) JAR jarFileName
+    ;
 
 // Create statements
 
 createTable
-    : CREATE TABLE ifNotExists? sourceTable
+    : (simpleCreateTable | createTableAsSelect)
+    ;
+    
+simpleCreateTable
+    : CREATE TEMPORARY? TABLE ifNotExists? sourceTable
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
         (COMMA watermarkDefinition)?
@@ -61,6 +104,14 @@ createTable
     partitionDefinition?
     withOption
     likeDefinition?
+    ;
+
+/*
+ * 详见 https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/dev/table/sql/create/#as-select_statement
+ * CTAS 不支持指定显示指定列，不支持创建分区表，临时表
+ */
+createTableAsSelect
+    : CREATE TABLE ifNotExists? sourceTable withOption (AS queryStatement)?
     ;
 
 columnOptionDefinition
@@ -204,7 +255,15 @@ createView
     ;
 
 createFunction
-    : CREATE (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifNotExists? uid AS identifier (LANGUAGE identifier)?
+    : CREATE (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifNotExists? uid AS identifier (LANGUAGE (JAVA|SCALA|PYTHON))? usingClause?
+    ;
+
+usingClause
+    : USING JAR jarFileName (COMMA JAR jarFileName)* 
+    ;
+
+jarFileName
+    : STRING_LITERAL
     ;
 
 // Alter statements
@@ -221,19 +280,27 @@ setKeyValueDefinition
     : SET tablePropertyList
     ;
 
+alertView
+    : ALTER VIEW uid (renameDefinition | AS queryStatement)
+    ;
+
 alterDatabase
     : ALTER DATABASE uid setKeyValueDefinition
     ;
 
 alterFunction
-    : ALTER (TEMPORARY|TEMPORARY SYSTEM) FUNCTION ifExists? uid AS identifier (LANGUAGE identifier)? 
+    : ALTER (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifExists? uid AS identifier (LANGUAGE (JAVA|SCALA|PYTHON))? 
     ;
 
 
 // Drop statements
 
+dropCatalog
+    : DROP CATALOG ifExists? uid
+    ;
+
 dropTable
-    : DROP TABLE ifExists? uid
+    : DROP TEMPORARY? TABLE ifExists? uid
     ;
 
 dropDatabase
@@ -252,15 +319,23 @@ dropFunction
 // Insert statements
 
 insertStatement
+    : (EXECUTE? insertSimpleStatement) | insertMulStatementCompatibility | (EXECUTE insertMulStatement)
+    ;
+
+insertSimpleStatement
     : INSERT (INTO | OVERWRITE) uid
     (
-        insertPartitionDefinition? queryStatement
+        insertPartitionDefinition? insertColumnListDefinition? queryStatement
         | valuesDefinition
     )
     ;
 
 insertPartitionDefinition
     : PARTITION tablePropertyList
+    ;
+
+insertColumnListDefinition
+    : LR_BRACKET columnNameList RR_BRACKET
     ;
 
 valuesDefinition
@@ -271,6 +346,14 @@ valuesRowDefinition
     : LR_BRACKET
         constant (COMMA constant)*
     RR_BRACKET
+    ;
+
+insertMulStatementCompatibility
+    : BEGIN STATEMENT SET SEMICOLON (insertSimpleStatement SEMICOLON)+ END
+    ;
+
+insertMulStatement
+    : STATEMENT SET BEGIN (insertSimpleStatement SEMICOLON)+ END
     ;
 
 
@@ -436,6 +519,11 @@ predicate
     | IS NOT? kind=NULL
     | IS NOT? kind=(TRUE | FALSE)
     | IS NOT? kind=DISTINCT FROM right=valueExpression
+    ;
+
+likePredicate
+    : NOT? kind=LIKE quantifier=(ANY | ALL) ('('')' | '(' expression (',' expression)* ')')
+    | NOT? kind=LIKE pattern=valueExpression
     ;
 
 valueExpression
@@ -1115,6 +1203,7 @@ nonReserved
     | UNSET
     | UNNEST
     | USE
+    | USER
     | VALUES
     | VARBINARY
     | VARCHAR
