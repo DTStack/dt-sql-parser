@@ -14,7 +14,7 @@ sqlStatements
 
 sqlStatement
     : ddlStatement | dmlStatement | describeStatement | explainStatement | useStatement | showStatememt
-    | loadStatement | unloadStatememt | setStatememt | resetStatememt | jarStatememt
+    | loadStatement | unloadStatememt | setStatememt | resetStatememt | jarStatememt | dtAddStatement
     ;
 
 emptyStatement
@@ -84,6 +84,11 @@ resetStatememt
     
 jarStatememt
     : (ADD | REMOVE) JAR jarFileName
+    ;
+
+// 数栈平台自研的添加文件语法
+dtAddStatement
+    : ADD FILE WITH FILE_PATH
     ;
 
 // Create statements

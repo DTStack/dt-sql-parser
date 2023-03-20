@@ -126,6 +126,12 @@ FlinkSqlParserVisitor.prototype.visitJarStatememt = function(ctx) {
 };
 
 
+// Visit a parse tree produced by FlinkSqlParser#dtAddStatement.
+FlinkSqlParserVisitor.prototype.visitDtAddStatement = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by FlinkSqlParser#createTable.
 FlinkSqlParserVisitor.prototype.visitCreateTable = function(ctx) {
   return this.visitChildren(ctx);

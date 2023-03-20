@@ -252,6 +252,7 @@ JAVA:                         'JAVA';
 SCALA:                        'SCALA';
 PYTHON:                       'PYTHON';
 JAR:                          'JAR';
+FILE:                         'FILE';
 CATALOGS:                     'CATALOGS';
 VIEWS:                        'VIEWS';
 JARS:                         'JARS';
@@ -345,7 +346,9 @@ REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
 BIT_STRING:                          BIT_STRING_L;
 ID_LITERAL:                          ID_LITERAL_FRAG;
 PLUS_ID_LITERAL:                     PLUS_ID_LITERAL_FRAG;
+FILE_PATH:                           FILE_PATH_STRING;
 
+fragment FILE_PATH_STRING:           (('/' | '\\') (~('/' | '\\'))*)+;
 fragment JAR_FILE_PARTTARN:          '`' ( '\\'. | '``' | ~('`'|'\\'))* '`';
 fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
 fragment ID_LITERAL_FRAG:            [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;

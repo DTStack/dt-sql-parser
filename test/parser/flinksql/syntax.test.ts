@@ -189,13 +189,21 @@ describe('FlinkSQL Syntax Tests', () => {
         REMOVE JAR '<path_to_filename>.jar'
         `;
         const result = parser.validate(sql);
-        console.log(result);
+        expect(result.length).toBe(0);
+    });
+
+    test('DT Add Statement', () => {
+        const sql = `
+            ADD FILE WITH /tests/krb5.conf;
+            ADD FILE WITH tests/krb5.conf;
+        `;
+        const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
 
     test('Test invalid Double Line Comment statement', () => {
-        let sql = `-test comment\n`;
-        let result = parser.validate(sql);
+        const sql = `-test comment\n`;
+        const result = parser.validate(sql);
         expect(result.length).toBe(1);
     });
 
