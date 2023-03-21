@@ -182,6 +182,15 @@ FlinkSqlParserListener.prototype.exitJarStatememt = function(ctx) {
 };
 
 
+// Enter a parse tree produced by FlinkSqlParser#dtAddStatement.
+FlinkSqlParserListener.prototype.enterDtAddStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by FlinkSqlParser#dtAddStatement.
+FlinkSqlParserListener.prototype.exitDtAddStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by FlinkSqlParser#createTable.
 FlinkSqlParserListener.prototype.enterCreateTable = function(ctx) {
 };

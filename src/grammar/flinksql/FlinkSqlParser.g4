@@ -14,7 +14,7 @@ sqlStatements
 
 sqlStatement
     : ddlStatement | dmlStatement | describeStatement | explainStatement | useStatement | showStatememt
-    | loadStatement | unloadStatememt | setStatememt | resetStatememt | jarStatememt
+    | loadStatement | unloadStatememt | setStatememt | resetStatememt | jarStatememt | dtAddStatement
     ;
 
 emptyStatement
@@ -84,6 +84,15 @@ resetStatememt
     
 jarStatememt
     : (ADD | REMOVE) JAR jarFileName
+    ;
+
+// 数栈平台自研的添加文件语法
+dtAddStatement
+    : ADD JAR WITH FILE_PATH (AS uid)?
+    | ADD FILE WITH FILE_PATH (AS uid)? (RENAME uid)?
+    | ADD (PYTHON_FILES | PYTHON_REQUIREMENTS | PYTHON_DEPENDENCIES | PYTHON_JAR | PYTHON_ARCHIVES) WITH FILE_PATH RENAME uid
+    | ADD PYTHON_PARAMETER FILE_PATH
+    | ADD ENGINE FILE WITH FILE_PATH RENAME uid KEY uid
     ;
 
 // Create statements
