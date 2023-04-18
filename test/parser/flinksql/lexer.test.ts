@@ -1,4 +1,4 @@
-import { FlinkSQL } from '../../../src';
+import FlinkSQL from '../../../src/parser/flinksql';
 
 describe('FlinkSQL Lexer tests', () => {
     const parser = new FlinkSQL();
@@ -7,6 +7,6 @@ describe('FlinkSQL Lexer tests', () => {
     const tokens = parser.getAllTokens(sql);
 
     test('token counts', () => {
-        expect(tokens.length).toBe(7);
+        expect(tokens.length - 1).toBe(7);
     });
 });

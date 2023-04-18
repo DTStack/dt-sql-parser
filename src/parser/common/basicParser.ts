@@ -1,5 +1,4 @@
-import { Token, Lexer } from 'antlr4';
-import { ParseTreeWalker } from 'antlr4/tree';
+import { Token, Parser, Lexer, ParseTreeWalker, CommonTokenStream } from 'antlr4';
 
 import ParserErrorListener, {
     ParserError,
@@ -10,12 +9,12 @@ import ParserErrorListener, {
 /**
  * Custom Parser class, subclass needs extends it.
  */
-export default abstract class BasicParser<C = any> {
-    private _parser;
+export default abstract class BasicParser<P extends Parser, L extends Lexer> {
+    private _parser: P;
 
     public parse(
         input: string,
-        errorListener?: ErrorHandler,
+        errorListener?: ErrorHandler<any>,
     ) {
         const parser = this.createParser(input);
         this._parser = parser;
@@ -46,33 +45,31 @@ export default abstract class BasicParser<C = any> {
      * Create antrl4 Lexer object
      * @param input source string
      */
-    public abstract createLexer(input: string): Lexer;
+    public abstract createLexer(input: string): L;
 
     /**
      * Create Parser by lexer
      * @param lexer Lexer
      */
-    public abstract createParserFromLexer(lexer: Lexer);
+    public abstract createParserFromLexer(lexer: L);
 
     /**
-     * Visit parser tree
-     * @param parserTree
-     */
-    // public abstract visit(visitor: any, parserTree: any);
-
-    /**
-     * The source string
+     * Get all Tokens of input string
      * @param input string
+     * @returns Token[]
      */
     public getAllTokens(input: string): Token[] {
-        return this.createLexer(input).getAllTokens();
+        const lexer = this.createLexer(input);
+        const tokensStream = new CommonTokenStream(lexer);
+        tokensStream.fill();
+        return tokensStream.tokens;
     };
 
     /**
      * Get Parser instance by input string
      * @param input
      */
-    public createParser(input: string) {
+    public createParser(input: string): P {
         const lexer = this.createLexer(input);
         const parser: any = this.createParserFromLexer(lexer);
         parser.buildParseTrees = true;
