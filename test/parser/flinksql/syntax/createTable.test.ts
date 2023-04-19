@@ -1,4 +1,4 @@
-import { FlinkSQL } from '../../../../src';
+import FlinkSQL from '../../../../src/parser/flinksql';
 
 describe('FlinkSQL Create Table Syntax Tests', () => {
     const parser = new FlinkSQL();
