@@ -5,7 +5,7 @@ import PostgreSQLLexer from '../lib/pgsql/PostgreSQLLexer';
 import PostgreSQLParser from '../lib/pgsql/PostgreSQLParser';
 
 export default class PostgresSQL extends BasicParser {
-    public createLexer(input: string): Lexer {
+    public createLexer(input: string): PostgreSQLLexer {
         const chars = new CharStream(input.toUpperCase());
         const lexer = new PostgreSQLLexer(chars);
         return lexer;

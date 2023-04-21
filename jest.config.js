@@ -194,6 +194,6 @@ module.exports = {
   // Whether to use watchman for file crawling
   // watchman: true,
   moduleNameMapper : {
-    '^antlr4$': '<rootDir>/node_modules/antlr4/dist/antlr4.web.js',
+    '^antlr4$': '<rootDir>/node_modules/antlr4/src/antlr4/index.web.js',
   }
 };

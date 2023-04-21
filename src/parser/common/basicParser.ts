@@ -1,16 +1,23 @@
-import { Token, Parser, Lexer, ParseTreeWalker, CommonTokenStream } from 'antlr4';
-
+import { Token, ParseTreeWalker, CommonTokenStream } from 'antlr4';
+import type { Parser } from 'antlr4/src/antlr4';
 import ParserErrorListener, {
     ParserError,
     ErrorHandler,
     ParserErrorCollector,
 } from './parserErrorListener';
 
+interface IParser {
+    // Lost in type definition
+    ruleNames: string[];
+    // Customized in our parser
+    program(): any;
+}
+
 /**
  * Custom Parser class, subclass needs extends it.
  */
-export default abstract class BasicParser<P extends Parser, L extends Lexer> {
-    private _parser: P;
+export default abstract class BasicParser {
+    private _parser: IParser & Parser;
 
     public parse(
         input: string,
@@ -45,13 +52,13 @@ export default abstract class BasicParser<P extends Parser, L extends Lexer> {
      * Create antrl4 Lexer object
      * @param input source string
      */
-    public abstract createLexer(input: string): L;
+    public abstract createLexer(input: string);
 
     /**
      * Create Parser by lexer
      * @param lexer Lexer
      */
-    public abstract createParserFromLexer(lexer: L);
+    public abstract createParserFromLexer(lexer);
 
     /**
      * Get all Tokens of input string
@@ -69,7 +76,7 @@ export default abstract class BasicParser<P extends Parser, L extends Lexer> {
      * Get Parser instance by input string
      * @param input
      */
-    public createParser(input: string): P {
+    public createParser(input: string): IParser & Parser {
         const lexer = this.createLexer(input);
         const parser: any = this.createParserFromLexer(lexer);
         parser.buildParseTrees = true;

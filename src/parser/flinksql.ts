@@ -2,7 +2,7 @@ import { CharStream, CommonTokenStream, Lexer } from 'antlr4';
 import FlinkSqlLexer from '../lib/flinksql/FlinkSqlLexer';
 import FlinkSqlParser from '../lib/flinksql/FlinkSqlParser';
 import BasicParser from './common/basicParser';
-export default class FlinkSQL extends BasicParser<FlinkSqlParser, FlinkSqlLexer> {
+export default class FlinkSQL extends BasicParser {
     public createLexer(input: string): FlinkSqlLexer {
         const chars = new CharStream(input.toUpperCase()); // Some Lexer only support uppercase token, So you need transform
         const lexer = new FlinkSqlLexer(chars);

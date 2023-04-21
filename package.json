@@ -37,7 +37,8 @@
     "eslint-config-google": "^0.14.0",
     "jest": "^29.5.0",
     "standard-version": "^9.5.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "yargs-parser": "^21.1.1"
   },
   "git repository": "https://github.com/DTStack/dt-sql-parser",
   "repository": "https://github.com/DTStack/dt-sql-parser",

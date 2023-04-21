@@ -1,4 +1,4 @@
-import { CharStream, CommonTokenStream, Lexer } from 'antlr4';
+import { CharStream, CommonTokenStream, Lexer } from 'antlr4/src/antlr4/index.web';
 import HiveSqlLexer from '../lib/hive/HiveSqlLexer';
 import HiveSql from '../lib/hive/HiveSql';
 import BasicParser from './common/basicParser';
