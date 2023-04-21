@@ -1,4 +1,5 @@
-import { PostgresSQL, PostgreSQLParserVisitor } from '../../../src';
+import PostgreSQLParserVisitor from "../../../src/lib/pgsql/PostgreSQLParserVisitor";
+import PostgresSQL from "../../../src/parser/pgsql";
 
 describe('Generic SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -11,11 +12,11 @@ describe('Generic SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends PostgreSQLParserVisitor {
+        class MyVisitor extends PostgreSQLParserVisitor<any> {
             // eslint-disable-next-line camelcase
-            visitTable_ref(ctx): void {
+            visitTable_ref = (ctx): void => {
                 result = ctx.getText().toLowerCase();
-                super.visitTable_ref(ctx);
+                super.visitTable_ref?.(ctx);
             }
         }
         const visitor: any = new MyVisitor();

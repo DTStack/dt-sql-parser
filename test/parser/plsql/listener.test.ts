@@ -1,4 +1,5 @@
-import { PLSQL, PlSqlParserListener } from '../../../src';
+import PlSqlParserListener from '../../../src/lib/plsql/PlSqlParserListener';
+import PLSQL from '../../../src/parser/plsql';
 
 describe('PLSQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -11,7 +12,7 @@ describe('PLSQL Listener Tests', () => {
         let result = '';
         class MyListener extends PlSqlParserListener {
             // eslint-disable-next-line camelcase
-            enterTable_ref_list(ctx): void {
+            enterTable_ref_list = (ctx): void => {
                 result = ctx.getText().toLowerCase();
             }
         }

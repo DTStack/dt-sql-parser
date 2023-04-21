@@ -1,4 +1,4 @@
-import { PLSQL } from '../../../src';
+import PLSQL from '../../../src/parser/plsql';
 
 describe('PLSQL Lexer tests', () => {
     const parser = new PLSQL();
@@ -7,6 +7,6 @@ describe('PLSQL Lexer tests', () => {
     const tokens = parser.getAllTokens(sql);
 
     test('token counts', () => {
-        expect(tokens.length).toBe(12);
+        expect(tokens.length - 1).toBe(12);
     });
 });

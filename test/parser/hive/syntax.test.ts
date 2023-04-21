@@ -1,4 +1,4 @@
-import { HiveSQL } from '../../../src';
+import HiveSQL from '../../../src/parser/hive';
 
 describe('Hive SQL Syntax Tests', () => {
     const parser = new HiveSQL();

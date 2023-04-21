@@ -1,4 +1,4 @@
-import { PostgresSQL } from '../../../src/';
+import PostgresSQL from '../../../src/parser/pgsql';
 
 describe('PostgresSQL Lexer tests', () => {
     const mysqlParser = new PostgresSQL();
@@ -7,6 +7,6 @@ describe('PostgresSQL Lexer tests', () => {
     const tokens = mysqlParser.getAllTokens(sql);
 
     test('token counts', () => {
-        expect(tokens.length).toBe(12);
+        expect(tokens.length - 1).toBe(12);
     });
 });

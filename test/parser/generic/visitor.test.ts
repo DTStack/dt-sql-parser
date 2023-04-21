@@ -1,4 +1,5 @@
-import { GenericSQL, SqlParserVisitor } from '../../../src';
+import GenericSQL from '../../../src/parser/generic';
+import SqlParserVisitor from '../../../src/lib/generic/SqlParserVisitor';
 
 describe('Generic SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -9,17 +10,19 @@ describe('Generic SQL Visitor Tests', () => {
         console.log('Parse error:', error);
     });
 
-    console.log('Parser tree string:', parser.toString(parserTree));
-
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends SqlParserVisitor {
-            visitTableName(ctx): void {
+        class MyVisitor extends SqlParserVisitor<any> {
+            constructor() {
+                super();
+            }
+
+            visitTableName = (ctx): void => {
                 result = ctx.getText().toLowerCase();
-                super.visitTableName(ctx);
+                super.visitTableName?.(ctx);
             }
         }
-        const visitor: any = new MyVisitor();
+        const visitor = new MyVisitor();
         visitor.visit(parserTree);
 
         expect(result).toBe(expectTableName);

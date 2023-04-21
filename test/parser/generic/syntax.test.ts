@@ -1,4 +1,4 @@
-import { GenericSQL } from '../../../src';
+import GenericSQL from '../../../src/parser/generic';
 
 describe('Generic SQL Syntax Tests', () => {
     const parser = new GenericSQL();

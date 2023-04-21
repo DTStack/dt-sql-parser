@@ -1,4 +1,4 @@
-import { PostgresSQL } from '../../../src';
+import PostgresSQL from "../../../src/parser/pgsql";
 
 describe('Generic SQL Syntax Tests', () => {
     const parser = new PostgresSQL();
