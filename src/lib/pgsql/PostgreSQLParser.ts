@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/pgsql/PostgreSQLParser.g4 by ANTLR 4.12.0
+// dt-sql-parser/src/grammar/pgsql/PostgreSQLParser.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
 import {
@@ -19,8 +19,7 @@ import PostgreSQLParserVisitor from "./PostgreSQLParserVisitor.js";
 type int = number;
 
 
-
-import { PostgreSQLParserBase } from './base/PostgreSQLParserBase';
+import PostgreSQLParserBase from './base/PostgreSQLParserBase';
 
 export default class PostgreSQLParser extends PostgreSQLParserBase {
 	public static readonly Dollar = 1;
@@ -30843,9 +30842,7 @@ export default class PostgreSQLParser extends PostgreSQLParserBase {
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 283, this._ctx);
 			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
-
-			                ParseRoutineBody(_localctx);
-			            
+			            this.ParseRoutineBody(_localctx);
 			}
 		}
 		catch (re) {

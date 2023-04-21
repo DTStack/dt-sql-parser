@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.12.0
+// dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
 import {
@@ -17,6 +17,10 @@ import SparkSqlVisitor from "./SparkSqlVisitor.js";
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 // eslint-disable-next-line no-unused-vars
 type int = number;
+
+const legacy_setops_precedence_enbled = false;
+const legacy_exponent_literal_as_decimal_enabled = false;
+const SQL_standard_keyword_behavior = false;
 
 export default class SparkSqlParser extends Parser {
 	public static readonly T__0 = 1;
@@ -879,27 +883,6 @@ export default class SparkSqlParser extends Parser {
 	protected createFailedPredicateException(predicate?: string, message?: string): FailedPredicateException {
 		return new FailedPredicateException(this, predicate, message);
 	}
-
-
-	    /**
-	    * When false, INTERSECT is given the greater precedence over the other set
-	    * operations (UNION, EXCEPT and MINUS) as per the SQL standard.
-	    */
-	    //  public boolean legacy_setops_precedence_enbled = false;
-	    /**
-	    * When false, a literal with an exponent would be converted into
-	    * double type rather than decimal type.
-	    */
-	    //  public boolean legacy_exponent_literal_as_decimal_enabled = false;
-	    global.legacy_exponent_literal_as_decimal_enabled = false;
-	    /**
-	    * When true, the behavior of keywords follows ANSI SQL standard.
-	    */
-	    //  public boolean SQL_standard_keyword_behavior = false;
-
-	    global.legacy_setops_precedence_enbled = false;
-	    global.legacy_exponent_literal_as_decimal_enabled = false;
-	    global.SQL_standard_keyword_behavior = false;
 
 	constructor(input: TokenStream) {
 		super(input);

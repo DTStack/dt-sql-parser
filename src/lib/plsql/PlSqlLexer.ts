@@ -1,17 +1,20 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/plsql/PlSqlLexer.g4 by ANTLR 4.12.0
+// dt-sql-parser/src/grammar/plsql/PlSqlLexer.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 import {
 	ATN,
 	ATNDeserializer,
 	CharStream,
 	DecisionState, DFA,
-	Lexer,
 	LexerATNSimulator,
 	RuleContext,
 	PredictionContextCache,
 	Token
 } from "antlr4";
-export default class PlSqlLexer extends Lexer {
+
+
+import PlSqlBaseLexer from './base/PlSqlBaseLexer';
+
+export default class PlSqlLexer extends PlSqlBaseLexer {
 	public static readonly ABORT = 1;
 	public static readonly ABS = 2;
 	public static readonly ACCESS = 3;
@@ -5135,21 +5138,21 @@ export default class PlSqlLexer extends Lexer {
 	private REMARK_COMMENT_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 0:
-			return IsNewlineAtPos(-4);
+			return this.IsNewlineAtPos(-4);
 		}
 		return true;
 	}
 	private PROMPT_MESSAGE_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 1:
-			return IsNewlineAtPos(-4);
+			return this.IsNewlineAtPos(-4);
 		}
 		return true;
 	}
 	private START_CMD_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 2:
-			return IsNewlineAtPos(-2);
+			return this.IsNewlineAtPos(-2);
 		}
 		return true;
 	}

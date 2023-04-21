@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.12.0
+// dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 import {
 	ATN,
@@ -11,7 +11,10 @@ import {
 	PredictionContextCache,
 	Token
 } from "antlr4";
-export default class SparkSqlLexer extends Lexer {
+
+import SparkSqlBaseLexer from "./base/SparkSqlBaseLexer";
+
+export default class SparkSqlLexer extends SparkSqlBaseLexer {
 	public static readonly T__0 = 1;
 	public static readonly T__1 = 2;
 	public static readonly T__2 = 3;
@@ -605,38 +608,6 @@ export default class SparkSqlLexer extends Lexer {
 		"WS", "UNRECOGNIZED",
 	];
 
-
-	    var ctx = this
-	    /**
-	    * Verify whether current token is a valid decimal token (which contains dot).
-	    * Returns true if the character that follows the token is not a digit or letter or underscore.
-	    *
-	    * For example:
-	    * For char stream "2.3", "2." is not a valid decimal token, because it is followed by digit '3'.
-	    * For char stream "2.3_", "2.3" is not a valid decimal token, because it is followed by '_'.
-	    * For char stream "2.3W", "2.3" is not a valid decimal token, because it is followed by 'W'.
-	    * For char stream "12.0D 34.E2+0.12 "  12.0D is a valid decimal token because it is followed
-	    * by a space. 34.E2 is a valid decimal token because it is followed by symbol '+'
-	    * which is not a digit or letter or underscore.
-	    */
-	    global.isValidDecimal = function() {
-	        let nextChar = ctx._input.LA(1);
-	        return !(nextChar >= 'A' && nextChar <= 'Z' || nextChar >= '0' && nextChar <= '9' || nextChar == '_')
-	    }
-
-	    /**
-	    * This method will be called when we see '/*' and try to match it as a bracketed comment.
-	    * If the next character is '+', it should be parsed as hint later, and we cannot match
-	    * it as a bracketed comment.
-	    *
-	    * Returns true if the next character is '+'.
-	    */
-	    global.isHint = function() {
-	        let nextChar = ctx._input.LA(1);
-	        return nextChar == '+'
-	    }
-
-
 	constructor(input: CharStream) {
 		super(input);
 		this._interp = new LexerATNSimulator(this, SparkSqlLexer._ATN, SparkSqlLexer.DecisionsToDFA, new PredictionContextCache());
@@ -675,42 +646,42 @@ export default class SparkSqlLexer extends Lexer {
 	private EXPONENT_VALUE_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 0:
-			return isValidDecimal();
+			return this.isValidDecimal();
 		}
 		return true;
 	}
 	private DECIMAL_VALUE_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 1:
-			return isValidDecimal();
+			return this.isValidDecimal();
 		}
 		return true;
 	}
 	private FLOAT_LITERAL_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 2:
-			return isValidDecimal();
+			return this.isValidDecimal();
 		}
 		return true;
 	}
 	private DOUBLE_LITERAL_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 3:
-			return isValidDecimal();
+			return this.isValidDecimal();
 		}
 		return true;
 	}
 	private BIGDECIMAL_LITERAL_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 4:
-			return isValidDecimal();
+			return this.isValidDecimal();
 		}
 		return true;
 	}
 	private BRACKETED_COMMENT_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 5:
-			return !isHint();
+			return !this.isHint();
 		}
 		return true;
 	}

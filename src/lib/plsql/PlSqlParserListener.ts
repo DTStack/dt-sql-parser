@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/plsql/PlSqlParser.g4 by ANTLR 4.12.0
+// dt-sql-parser/src/grammar/plsql/PlSqlParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeListener} from "antlr4";
 

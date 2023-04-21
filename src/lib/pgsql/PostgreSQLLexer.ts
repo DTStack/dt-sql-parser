@@ -1,11 +1,10 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/pgsql/PostgreSQLLexer.g4 by ANTLR 4.12.0
+// dt-sql-parser/src/grammar/pgsql/PostgreSQLLexer.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 import {
 	ATN,
 	ATNDeserializer,
 	CharStream,
 	DecisionState, DFA,
-	Lexer,
 	LexerATNSimulator,
 	RuleContext,
 	PredictionContextCache,
@@ -13,7 +12,7 @@ import {
 } from "antlr4";
 
 
-import { PostgreSQLLexerBase } from './base/PostgreSQLLexerBase';
+import PostgreSQLLexerBase from './base/PostgreSQLLexerBase';
 
 export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 	public static readonly Dollar = 1;
@@ -1196,10 +1195,8 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 		"EndDollarStringConstant",
 	];
 
-
 	/* This field stores the tags which are used to detect the end of a dollar-quoted string literal.
 	 */
-
 
 	constructor(input: CharStream) {
 		super(input);
@@ -1247,23 +1244,21 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 	private Operator_action(localctx: RuleContext, actionIndex: number): void {
 		switch (actionIndex) {
 		case 0:
-
-			    HandleLessLessGreaterGreater();
-			   
+			    this.HandleLessLessGreaterGreater();
 			break;
 		}
 	}
 	private BeginDollarStringConstant_action(localctx: RuleContext, actionIndex: number): void {
 		switch (actionIndex) {
 		case 1:
-			pushTag();
+			this.pushTag();
 			break;
 		}
 	}
 	private NumericFail_action(localctx: RuleContext, actionIndex: number): void {
 		switch (actionIndex) {
 		case 2:
-			HandleNumericFail();
+			this.HandleNumericFail();
 			break;
 		}
 	}
@@ -1271,7 +1266,7 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 		switch (actionIndex) {
 		case 3:
 
-			            UnterminatedBlockCommentDebugAssert();
+			            this.UnterminatedBlockCommentDebugAssert();
 			   
 			break;
 		}
@@ -1291,7 +1286,7 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 	private EndDollarStringConstant_action(localctx: RuleContext, actionIndex: number): void {
 		switch (actionIndex) {
 		case 6:
-			popTag();
+			this.popTag();
 			break;
 		}
 	}
@@ -1312,32 +1307,32 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 	private Operator_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 0:
-			return checkLA('-');
+			return this.checkLA('-');
 		case 1:
-			return checkLA('*');
+			return this.checkLA('*');
 		case 2:
-			return checkLA('*');
+			return this.checkLA('*');
 		}
 		return true;
 	}
 	private OperatorEndingWithPlusMinus_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 3:
-			return checkLA('-');
+			return this.checkLA('-');
 		case 4:
-			return checkLA('*');
+			return this.checkLA('*');
 		case 5:
-			return checkLA('-');
+			return this.checkLA('-');
 		}
 		return true;
 	}
 	private IdentifierStartChar_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 6:
-			return charIsLetter();
+			return this.charIsLetter();
 		case 7:
 			return 
-		    CheckIfUtf32Letter()
+		    this.CheckIfUtf32Letter()
 		   ;
 		}
 		return true;
@@ -1345,7 +1340,7 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 	private EndDollarStringConstant_sempred(localctx: RuleContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 8:
-			return isTag();
+			return this.isTag();
 		}
 		return true;
 	}
