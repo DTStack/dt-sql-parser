@@ -7,7 +7,6 @@ import {
 	DecisionState, DFA,
 	Lexer,
 	LexerATNSimulator,
-	RuleContext,
 	PredictionContextCache,
 	Token
 } from "antlr4";

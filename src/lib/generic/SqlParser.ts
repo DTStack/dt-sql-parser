@@ -4,19 +4,14 @@
 import {
 	ATN,
 	ATNDeserializer, DecisionState, DFA, FailedPredicateException,
-	RecognitionException, NoViableAltException, BailErrorStrategy,
+	RecognitionException, NoViableAltException,
 	Parser, ParserATNSimulator,
-	RuleContext, ParserRuleContext, PredictionMode, PredictionContextCache,
-	TerminalNode, RuleNode,
+	RuleContext, ParserRuleContext, PredictionContextCache,
+	TerminalNode,
 	Token, TokenStream,
-	Interval, IntervalSet
 } from 'antlr4';
 import SqlParserListener from "./SqlParserListener.js";
 import SqlParserVisitor from "./SqlParserVisitor.js";
-
-// for running tests with parameters, TODO: discuss strategy for typed parameters in CI
-// eslint-disable-next-line no-unused-vars
-type int = number;
 
 export default class SqlParser extends Parser {
 	public static readonly SPACE = 1;
@@ -46929,6 +46924,7 @@ export default class SqlParser extends Parser {
 		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: ExpressionContext = new ExpressionContext(this, this._ctx, _parentState);
+		// @ts-ignore
 		let _prevctx: ExpressionContext = localctx;
 		let _startState: number = 602;
 		this.enterRecursionRule(localctx, 602, SqlParser.RULE_expression, _p);

@@ -1,4 +1,4 @@
-import { Token, ParseTreeWalker, CommonTokenStream } from 'antlr4';
+import { ParseTreeWalker, CommonTokenStream } from 'antlr4';
 import type { Parser } from 'antlr4/src/antlr4';
 import ParserErrorListener, {
     ParserError,
@@ -65,7 +65,7 @@ export default abstract class BasicParser {
      * @param input string
      * @returns Token[]
      */
-    public getAllTokens(input: string): Token[] {
+    public getAllTokens(input: string): string[] {
         const lexer = this.createLexer(input);
         const tokensStream = new CommonTokenStream(lexer);
         tokensStream.fill();

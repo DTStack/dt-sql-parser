@@ -5,7 +5,6 @@ import {
 	ATNDeserializer,
 	CharStream,
 	DecisionState, DFA,
-	Lexer,
 	LexerATNSimulator,
 	RuleContext,
 	PredictionContextCache,

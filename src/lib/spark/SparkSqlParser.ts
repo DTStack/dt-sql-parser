@@ -4,19 +4,17 @@
 import {
 	ATN,
 	ATNDeserializer, DecisionState, DFA, FailedPredicateException,
-	RecognitionException, NoViableAltException, BailErrorStrategy,
+	RecognitionException, NoViableAltException,
 	Parser, ParserATNSimulator,
-	RuleContext, ParserRuleContext, PredictionMode, PredictionContextCache,
-	TerminalNode, RuleNode,
+	RuleContext, ParserRuleContext, PredictionContextCache,
+	TerminalNode,
 	Token, TokenStream,
-	Interval, IntervalSet
 } from 'antlr4';
 import SparkSqlListener from "./SparkSqlListener.js";
 import SparkSqlVisitor from "./SparkSqlVisitor.js";
 
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 // eslint-disable-next-line no-unused-vars
-type int = number;
 
 const legacy_setops_precedence_enbled = false;
 const legacy_exponent_literal_as_decimal_enabled = false;

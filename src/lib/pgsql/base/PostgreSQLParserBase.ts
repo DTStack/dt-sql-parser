@@ -51,6 +51,7 @@ export default class PostgreSQLParserBase extends Parser {
         // eslint-disable-next-line camelcase
         if (!!func_as) {
             const txt = this.GetRoutineBodyString(func_as.func_as().sconst(0));
+            // @ts-ignore
             const line = func_as.func_as().sconst(0).start.getLine();
             const ph = this.getPostgreSQLParser(txt);
             switch (lang) {

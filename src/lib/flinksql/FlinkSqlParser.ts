@@ -4,19 +4,14 @@
 import {
 	ATN,
 	ATNDeserializer, DecisionState, DFA, FailedPredicateException,
-	RecognitionException, NoViableAltException, BailErrorStrategy,
+	RecognitionException, NoViableAltException,
 	Parser, ParserATNSimulator,
-	RuleContext, ParserRuleContext, PredictionMode, PredictionContextCache,
-	TerminalNode, RuleNode,
+	RuleContext, ParserRuleContext, PredictionContextCache,
+	TerminalNode,
 	Token, TokenStream,
-	Interval, IntervalSet
 } from 'antlr4';
 import FlinkSqlParserListener from "./FlinkSqlParserListener.js";
 import FlinkSqlParserVisitor from "./FlinkSqlParserVisitor.js";
-
-// for running tests with parameters, TODO: discuss strategy for typed parameters in CI
-// eslint-disable-next-line no-unused-vars
-type int = number;
 
 export default class FlinkSqlParser extends Parser {
 	public static readonly SPACE = 1;
@@ -5524,6 +5519,7 @@ export default class FlinkSqlParser extends Parser {
 		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: TableExpressionContext = new TableExpressionContext(this, this._ctx, _parentState);
+		// @ts-ignore
 		let _prevctx: TableExpressionContext = localctx;
 		let _startState: number = 168;
 		this.enterRecursionRule(localctx, 168, FlinkSqlParser.RULE_tableExpression, _p);

@@ -4,20 +4,14 @@
 import {
 	ATN,
 	ATNDeserializer, DecisionState, DFA, FailedPredicateException,
-	RecognitionException, NoViableAltException, BailErrorStrategy,
-	Parser, ParserATNSimulator,
-	RuleContext, ParserRuleContext, PredictionMode, PredictionContextCache,
-	TerminalNode, RuleNode,
+	RecognitionException, NoViableAltException,
+	ParserATNSimulator,
+	RuleContext, ParserRuleContext, PredictionContextCache,
+	TerminalNode,
 	Token, TokenStream,
-	Interval, IntervalSet
 } from 'antlr4';
 import PostgreSQLParserListener from "./PostgreSQLParserListener.js";
 import PostgreSQLParserVisitor from "./PostgreSQLParserVisitor.js";
-
-// for running tests with parameters, TODO: discuss strategy for typed parameters in CI
-// eslint-disable-next-line no-unused-vars
-type int = number;
-
 
 import PostgreSQLParserBase from './base/PostgreSQLParserBase';
 
@@ -30842,7 +30836,7 @@ export default class PostgreSQLParser extends PostgreSQLParserBase {
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 283, this._ctx);
 			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
-			            this.ParseRoutineBody(_localctx);
+			            this.ParseRoutineBody(localctx);
 			}
 		}
 		catch (re) {
@@ -55880,6 +55874,7 @@ export default class PostgreSQLParser extends PostgreSQLParserBase {
 		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: B_exprContext = new B_exprContext(this, this._ctx, _parentState);
+		// @ts-ignore
 		let _prevctx: B_exprContext = localctx;
 		let _startState: number = 1192;
 		this.enterRecursionRule(localctx, 1192, PostgreSQLParser.RULE_b_expr, _p);
@@ -97213,6 +97208,7 @@ export class AltertsconfigurationstmtContext extends ParserRuleContext {
 	public CONFIGURATION(): TerminalNode {
 		return this.getToken(PostgreSQLParser.CONFIGURATION, 0);
 	}
+	// @ts-ignore
 	public any_name_list(): Any_nameContext[] {
 		return this.getTypedRuleContexts(Any_nameContext) as Any_nameContext[];
 	}
@@ -97234,6 +97230,7 @@ export class AltertsconfigurationstmtContext extends ParserRuleContext {
 	public any_with(): Any_withContext {
 		return this.getTypedRuleContext(Any_withContext, 0) as Any_withContext;
 	}
+	// @ts-ignore
 	public any_name_list(): Any_name_listContext {
 		return this.getTypedRuleContext(Any_name_listContext, 0) as Any_name_listContext;
 	}

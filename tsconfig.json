@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
+        "baseUrl": "./",
         "sourceMap": true,
         "allowJs":true,
         "target": "es6",
@@ -26,11 +27,11 @@
             "node",
             "node_modules/@types",
             "./src/typings",
+            "node_modules/antlr4/**/*"
         ]
     },
     "include": [
-        "./src/**/*",
-        "node_modules/antlr4/**/*"
+        "./src/**/*"
     ],
     "typeAcquisition": {
         "include": [

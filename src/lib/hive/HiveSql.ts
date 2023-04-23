@@ -4,19 +4,14 @@
 import {
 	ATN,
 	ATNDeserializer, DecisionState, DFA, FailedPredicateException,
-	RecognitionException, NoViableAltException, BailErrorStrategy,
+	RecognitionException, NoViableAltException,
 	Parser, ParserATNSimulator,
-	RuleContext, ParserRuleContext, PredictionMode, PredictionContextCache,
-	TerminalNode, RuleNode,
+	RuleContext, ParserRuleContext, PredictionContextCache,
+	TerminalNode,
 	Token, TokenStream,
-	Interval, IntervalSet
 } from 'antlr4';
 import HiveSqlListener from "./HiveSqlListener.js";
 import HiveSqlVisitor from "./HiveSqlVisitor.js";
-
-// for running tests with parameters, TODO: discuss strategy for typed parameters in CI
-// eslint-disable-next-line no-unused-vars
-type int = number;
 
 export default class HiveSql extends Parser {
 	public static readonly T_ACTION = 1;
@@ -1382,7 +1377,7 @@ export default class HiveSql extends Parser {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 489;
-			if (!(!this._input.LT(2).text.toUpperCase() === "TRANSACTION")) {
+			if (!(this._input.LT(2).text.toUpperCase() === "TRANSACTION")) {
 				throw this.createFailedPredicateException("!this._input.LT(2).text.toUpperCase() === \"TRANSACTION\"");
 			}
 			this.state = 490;
@@ -14691,6 +14686,7 @@ export default class HiveSql extends Parser {
 		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: Bool_exprContext = new Bool_exprContext(this, this._ctx, _parentState);
+		// @ts-ignore
 		let _prevctx: Bool_exprContext = localctx;
 		let _startState: number = 366;
 		this.enterRecursionRule(localctx, 366, HiveSql.RULE_bool_expr, _p);
@@ -15241,6 +15237,7 @@ export default class HiveSql extends Parser {
 		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let localctx: ExprContext = new ExprContext(this, this._ctx, _parentState);
+		// @ts-ignore
 		let _prevctx: ExprContext = localctx;
 		let _startState: number = 382;
 		this.enterRecursionRule(localctx, 382, HiveSql.RULE_expr, _p);
@@ -20264,7 +20261,7 @@ export default class HiveSql extends Parser {
 	private block_end_sempred(localctx: Block_endContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 0:
-			return !this._input.LT(2).text.toUpperCase() === "TRANSACTION";
+			return this._input.LT(2).text.toUpperCase() !== "TRANSACTION";
 		}
 		return true;
 	}

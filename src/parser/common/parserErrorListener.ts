@@ -22,7 +22,7 @@ type ErrorOffendingSymbol = {
 
 export type ErrorHandler<T> = (err: ParserError, errOption: SyntaxError<T>) => void;
 
-export class ParserErrorCollector extends ErrorListener {
+export class ParserErrorCollector extends ErrorListener<ErrorOffendingSymbol> {
     private _errors: ParserError[];
 
     constructor(error: ParserError[]) {
@@ -49,7 +49,7 @@ export class ParserErrorCollector extends ErrorListener {
 }
 
 
-export default class ParserErrorListener extends ErrorListener {
+export default class ParserErrorListener extends ErrorListener<ErrorOffendingSymbol> {
     private _errorHandler;
 
     constructor(errorListener: ErrorHandler<ErrorOffendingSymbol>) {
