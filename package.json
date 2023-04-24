@@ -19,7 +19,7 @@
     "build": "rm -rf dist && tsc",
     "eslint": "eslint ./src/**/*.ts",
     "check-types": "tsc --skipLibCheck",
-    "test": "jest",
+    "test": "NODE_OPTIONS=--max_old_space_size=4096 && jest",
     "release": "npm run build && standard-version --infile CHANGELOG.md"
   },
   "author": "dt-insight-front",
