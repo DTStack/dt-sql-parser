@@ -1,4 +1,5 @@
-import { SparkSQL, SparkSqlListener } from '../../../src';
+import SparkSqlListener from '../../../src/lib/spark/SparkSqlListener';
+import SparkSQL from '../../../src/parser/spark';
 
 describe('Spark SQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -10,7 +11,7 @@ describe('Spark SQL Listener Tests', () => {
     test('Listener enterTableName', () => {
         let result = '';
         class MyListener extends SparkSqlListener {
-            enterTableName(ctx): void {
+            enterTableName = (ctx): void => {
                 result = ctx.getText().toLowerCase();
             }
         }

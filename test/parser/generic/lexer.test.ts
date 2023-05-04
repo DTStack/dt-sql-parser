@@ -1,4 +1,4 @@
-import { GenericSQL } from '../../../src/';
+import GenericSQL from '../../../src/parser/generic';
 
 describe('GenericSQL Lexer tests', () => {
     const mysqlParser = new GenericSQL();
@@ -7,6 +7,6 @@ describe('GenericSQL Lexer tests', () => {
     const tokens = mysqlParser.getAllTokens(sql);
 
     test('token counts', () => {
-        expect(tokens.length).toBe(12);
+        expect(tokens.length - 1).toBe(12);
     });
 });

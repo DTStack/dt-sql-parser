@@ -1,21 +1,27 @@
-import { Token, Lexer } from 'antlr4';
-import { ParseTreeWalker } from 'antlr4/tree';
-
+import { ParseTreeWalker, CommonTokenStream } from 'antlr4';
+import type { Parser } from 'antlr4/src/antlr4';
 import ParserErrorListener, {
     ParserError,
     ErrorHandler,
     ParserErrorCollector,
 } from './parserErrorListener';
 
+interface IParser {
+    // Lost in type definition
+    ruleNames: string[];
+    // Customized in our parser
+    program(): any;
+}
+
 /**
  * Custom Parser class, subclass needs extends it.
  */
-export default abstract class BasicParser<C = any> {
-    private _parser;
+export default abstract class BasicParser {
+    private _parser: IParser & Parser;
 
     public parse(
         input: string,
-        errorListener?: ErrorHandler,
+        errorListener?: ErrorHandler<any>,
     ) {
         const parser = this.createParser(input);
         this._parser = parser;
@@ -46,33 +52,31 @@ export default abstract class BasicParser<C = any> {
      * Create antrl4 Lexer object
      * @param input source string
      */
-    public abstract createLexer(input: string): Lexer;
+    public abstract createLexer(input: string);
 
     /**
      * Create Parser by lexer
      * @param lexer Lexer
      */
-    public abstract createParserFromLexer(lexer: Lexer);
+    public abstract createParserFromLexer(lexer);
 
     /**
-     * Visit parser tree
-     * @param parserTree
-     */
-    // public abstract visit(visitor: any, parserTree: any);
-
-    /**
-     * The source string
+     * Get all Tokens of input string
      * @param input string
+     * @returns Token[]
      */
-    public getAllTokens(input: string): Token[] {
-        return this.createLexer(input).getAllTokens();
+    public getAllTokens(input: string): string[] {
+        const lexer = this.createLexer(input);
+        const tokensStream = new CommonTokenStream(lexer);
+        tokensStream.fill();
+        return tokensStream.tokens;
     };
 
     /**
      * Get Parser instance by input string
      * @param input
      */
-    public createParser(input: string) {
+    public createParser(input: string): IParser & Parser {
         const lexer = this.createLexer(input);
         const parser: any = this.createParserFromLexer(lexer);
         parser.buildParseTrees = true;

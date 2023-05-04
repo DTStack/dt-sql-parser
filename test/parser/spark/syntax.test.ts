@@ -1,4 +1,4 @@
-import { SparkSQL } from '../../../src';
+import SparkSQL from '../../../src/parser/spark';
 
 const error = console.log.bind(console, '***** error\n');
 

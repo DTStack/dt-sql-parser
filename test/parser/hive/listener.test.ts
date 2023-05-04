@@ -1,4 +1,6 @@
-import { HiveSQL, HiveSqlListener } from '../../../src';
+import HiveSqlListener from '../../../src/lib/hive/HiveSqlListener';
+import HiveSQL from '../../../src/parser/hive';
+
 
 describe('Hive SQL Listener Tests', () => {
     const parser = new HiveSQL();
@@ -9,7 +11,7 @@ describe('Hive SQL Listener Tests', () => {
 
         let result = '';
         class MyListener extends HiveSqlListener {
-            enterSelect_list(ctx): void {
+            enterSelect_list = (ctx): void => {
                 result = ctx.getText();
             }
         }
@@ -23,7 +25,7 @@ describe('Hive SQL Listener Tests', () => {
         const parserTree = parser.parse(sql);
         let result = '';
         class MyListener extends HiveSqlListener {
-            enterDrop_stmt(ctx): void {
+            enterDrop_stmt = (ctx): void => {
                 result = ctx.getText();
             }
         }

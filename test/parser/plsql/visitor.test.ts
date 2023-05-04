@@ -1,4 +1,5 @@
-import { PLSQL, PlSqlParserVisitor } from '../../../src';
+import PlSqlParserVisitor from '../../../src/lib/plsql/PlSqlParserVisitor';
+import PLSQL from '../../../src/parser/plsql';
 
 describe('PLSQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -9,11 +10,11 @@ describe('PLSQL Visitor Tests', () => {
 
     test('Visitor visitTable_ref_list', () => {
         let result = '';
-        class MyVisitor extends PlSqlParserVisitor {
+        class MyVisitor extends PlSqlParserVisitor<any> {
             // eslint-disable-next-line camelcase
-            visitTable_ref_list(ctx): void {
+            visitTable_ref_list = (ctx): void => {
                 result = ctx.getText().toLowerCase();
-                super.visitTable_ref_list(ctx);
+                super.visitTable_ref_list?.(ctx);
             }
         }
         const visitor: any = new MyVisitor();

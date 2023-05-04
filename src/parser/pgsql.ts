@@ -1,13 +1,13 @@
-import { InputStream, CommonTokenStream, Lexer } from 'antlr4';
-import { PostgreSQLLexer } from '../lib/pgsql/PostgreSQLLexer';
-import { PostgreSQLParser } from '../lib/pgsql/PostgreSQLParser';
+import { CharStream, CommonTokenStream, Lexer } from 'antlr4';
 
 import BasicParser from './common/basicParser';
+import PostgreSQLLexer from '../lib/pgsql/PostgreSQLLexer';
+import PostgreSQLParser from '../lib/pgsql/PostgreSQLParser';
 
 export default class PostgresSQL extends BasicParser {
-    public createLexer(input: string): Lexer {
-        const chars = new InputStream(input.toUpperCase());
-        const lexer = <unknown> new PostgreSQLLexer(chars) as Lexer;
+    public createLexer(input: string): PostgreSQLLexer {
+        const chars = new CharStream(input.toUpperCase());
+        const lexer = new PostgreSQLLexer(chars);
         return lexer;
     }
     public createParserFromLexer(lexer: Lexer): any {

@@ -1,4 +1,5 @@
-import { SparkSQL, SparkSqlVisitor } from '../../../src';
+import SparkSqlVisitor from '../../../src/lib/spark/SparkSqlVisitor';
+import SparkSQL from '../../../src/parser/spark';
 
 describe('Spark SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -9,14 +10,12 @@ describe('Spark SQL Visitor Tests', () => {
         console.log('Parse error:', error);
     });
 
-    console.log('Parser tree string:', parser.toString(parserTree));
-
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends SparkSqlVisitor {
-            visitTableName(ctx): void {
+        class MyVisitor extends SparkSqlVisitor<any> {
+            visitTableName = (ctx): void => {
                 result = ctx.getText().toLowerCase();
-                super.visitTableName(ctx);
+                super.visitTableName?.(ctx);
             }
         }
         const visitor: any = new MyVisitor();

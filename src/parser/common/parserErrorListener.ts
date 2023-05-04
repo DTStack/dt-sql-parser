@@ -1,6 +1,4 @@
-import { Token, Recognizer } from 'antlr4';
-import { ErrorListener } from 'antlr4/error';
-
+import { Token, Recognizer, ErrorListener, RecognitionException } from 'antlr4';
 export interface ParserError {
     startLine: number;
     endLine: number;
@@ -9,8 +7,8 @@ export interface ParserError {
     message: string;
 }
 
-export interface SyntaxError {
-    recognizer: Recognizer;
+export interface SyntaxError<T> {
+    recognizer: Recognizer<T>;
     offendingSymbol: Token;
     line: number;
     charPositionInLine: number;
@@ -18,9 +16,13 @@ export interface SyntaxError {
     e: any;
 }
 
-export type ErrorHandler = (err: ParserError, errOption: SyntaxError) => void;
+type ErrorOffendingSymbol = {
+    text: string;
+};
 
-export class ParserErrorCollector extends ErrorListener {
+export type ErrorHandler<T> = (err: ParserError, errOption: SyntaxError<T>) => void;
+
+export class ParserErrorCollector extends ErrorListener<ErrorOffendingSymbol> {
     private _errors: ParserError[];
 
     constructor(error: ParserError[]) {
@@ -29,11 +31,11 @@ export class ParserErrorCollector extends ErrorListener {
     }
 
     syntaxError(
-        recognizer: Recognizer, offendingSymbol: Token, line: number,
-        charPositionInLine: number, msg: string, e: any,
+        recognizer: Recognizer<ErrorOffendingSymbol>, offendingSymbol: ErrorOffendingSymbol, line: number,
+        charPositionInLine: number, msg: string, e: RecognitionException,
     ) {
         let endCol = charPositionInLine + 1;
-        if (offendingSymbol &&offendingSymbol.text !== null) {
+        if (offendingSymbol && offendingSymbol.text !== null) {
             endCol = charPositionInLine + offendingSymbol.text.length;
         }
         this._errors.push({
@@ -47,20 +49,20 @@ export class ParserErrorCollector extends ErrorListener {
 }
 
 
-export default class ParserErrorListener extends ErrorListener {
+export default class ParserErrorListener extends ErrorListener<ErrorOffendingSymbol> {
     private _errorHandler;
 
-    constructor(errorListener: ErrorHandler) {
+    constructor(errorListener: ErrorHandler<ErrorOffendingSymbol>) {
         super();
         this._errorHandler = errorListener;
     }
 
     syntaxError(
-        recognizer: Recognizer, offendingSymbol: Token, line: number,
+        recognizer: Recognizer<ErrorOffendingSymbol>, offendingSymbol: ErrorOffendingSymbol, line: number,
         charPositionInLine: number, msg: string, e: any,
     ) {
         let endCol = charPositionInLine + 1;
-        if (offendingSymbol &&offendingSymbol.text !== null) {
+        if (offendingSymbol && offendingSymbol.text !== null) {
             endCol = charPositionInLine + offendingSymbol.text.length;
         }
         if (this._errorHandler) {

@@ -1,4 +1,5 @@
-import { HiveSQL, HiveSqlVisitor } from '../../../src';
+import HiveSqlVisitor from '../../../src/lib/hive/HiveSqlVisitor';
+import HiveSQL from '../../../src/parser/hive';
 
 describe('Generic SQL Visitor Tests', () => {
     const expectTableName = 'dm_gis.dlv_addr_tc_count';
@@ -9,18 +10,16 @@ describe('Generic SQL Visitor Tests', () => {
         console.log('Parse error:', error);
     });
 
-    // console.log('Parser tree string:', parser.toString(parserTree));
-
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends HiveSqlVisitor {
-            visitTable_name(ctx): void {
+        class MyVisitor extends HiveSqlVisitor<any> {
+            visitTable_name = (ctx): void => {
                 result = ctx.getText().toLowerCase();
-                super.visitTable_name(ctx);
+                super.visitTable_name?.(ctx);
             }
         }
 
-        const visitor: any = new MyVisitor();
+        const visitor = new MyVisitor();
         visitor.visit(parserTree);
 
         expect(result).toBe(expectTableName);

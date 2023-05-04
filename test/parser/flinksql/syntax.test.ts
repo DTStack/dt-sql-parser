@@ -1,4 +1,4 @@
-import { FlinkSQL } from '../../../src';
+import FlinkSQL from '../../../src/parser/flinksql';
 
 describe('FlinkSQL Syntax Tests', () => {
     const parser = new FlinkSQL();
@@ -21,6 +21,11 @@ describe('FlinkSQL Syntax Tests', () => {
         const sql = `SELECT product, amount FROM Orders;`;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
+    });
+    test('Test simple Error Select Statement', () => {
+        const sql = `SELECTproduct, amount FROM;`;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(1);
     });
     test('Test Select Statement with where clause', () => {
         const sql = `SELECT * FROM person WHERE id = 200 OR id = 300;`;
@@ -217,7 +222,6 @@ describe('FlinkSQL Syntax Tests', () => {
     test('Test valid Double Line Comment statement', () => {
         const sql = `----test comment\n`;
         const result = parser.validate(sql);
-        console.log('res:', result);
         expect(result.length).toBe(0);
     });
 

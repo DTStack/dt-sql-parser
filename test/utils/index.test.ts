@@ -1,4 +1,4 @@
-import { lexer, splitSql, cleanSql } from '../../src';
+import { lexer, splitSql, cleanSql } from '../../src/utils';
 import { TokenType } from '../../src/utils/token';
 
 describe('utils', () => {
@@ -46,7 +46,6 @@ describe('utils', () => {
         WHERE year = 2018;
         SELECT * FROM table;`;
         const result = splitSql(sql);
-        console.log(JSON.stringify(result));
         expect(result.length).toEqual(2);
     });
 
@@ -68,7 +67,7 @@ describe('utils', () => {
         const comments = result.find((token) =>
             token.type === TokenType.Comment,
         );
-        expect(comments.value).toEqual(expected);
+        expect(comments?.value).toEqual(expected);
     });
     test('cleanSql', () => {
         const sql = `-- a ;

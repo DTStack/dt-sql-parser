@@ -1,20 +1,34 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
+        "baseUrl": "./",
         "sourceMap": true,
         "allowJs":true,
         "target": "es6",
-        "module": "commonjs",
+        "module": "ESNext",
+        "moduleResolution": "node",
         "declaration": true,
         "noUnusedLocals": true,
         "noUnusedParameters": false,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
         "skipLibCheck": true,
+        "paths": {
+            "antlr4": [
+                "node_modules/antlr4/src/antlr4/index"
+            ]
+        },
+        "types": [
+            "node",
+            "jest",
+            "antlr4"
+        ],
         "typeRoots": [
             "node",
             "node_modules/@types",
-            "./src/typings"
+            "./src/typings",
+            "node_modules/antlr4/**/*"
         ]
-
     },
     "include": [
         "./src/**/*"
