@@ -6,3 +6,4 @@ package-lock.json
 dist/
 src/**/.antlr
 coverage
+.idea
