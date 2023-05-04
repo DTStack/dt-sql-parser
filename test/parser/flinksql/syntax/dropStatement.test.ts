@@ -1,6 +1,6 @@
 import FlinkSQL from "../../../../src/parser/flinksql";
 
-describe('FlinkSQL Create Table Syntax Tests', () => {
+describe('FlinkSQL Drop Statements Tests', () => {
     const parser = new FlinkSQL();
     // Drop statements
     test('Test Simple Drop Catalog Statement', () => {
@@ -13,12 +13,23 @@ describe('FlinkSQL Create Table Syntax Tests', () => {
     });
     test('Test Simple Drop Table Statement', () => {
         const sql = `
-            DROP TABLE Orders;
-            DROP TABLE IF EXISTS Orders;
-            DROP TEMPORARY TABLE IF EXISTS Orders;
+            DROP TABLE catalog1.db1.tbl1;
+            DROP TABLE IF EXISTS catalog1.db1.tbl1;
+            DROP TEMPORARY TABLE IF EXISTS catalog1.db1.tbl1;
+            DROP TEMPORARY TABLE IF EXISTS catalog1.db1.tbl1;
         `;
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
+    });
+    test('Test Invalid Drop Table Statement', () => {
+        const sql = `
+            DROP TABLE;
+            DROP TABLE IF catalog1.db1.tbl1;
+            DROP TEMPORARY IF EXISTS catalog1.db1.tbl1;
+            DROP TEMPORARY TABLE IF EXISTS;
+        `;
+        const result = parser.validate(sql);
+        expect(result.length).toBe(4);
     });
     test('Test Simple Drop Database Statement', () => {
         const sql = `
