@@ -138,7 +138,7 @@ columnName
     ;
 
 columnNameList
-    : columnName (',' columnName)*
+    : LR_BRACKET columnName (',' columnName)* RR_BRACKET
     ;
 
 columnType
@@ -208,7 +208,7 @@ watermarkDefinition
     ;
 
 tableConstraint
-    : (CONSTRAINT constraintName)? PRIMARY KEY '(' columnNameList ')' (NOT ENFORCED)?
+    : (CONSTRAINT constraintName)? PRIMARY KEY columnNameList (NOT ENFORCED)?
     ;
 
 constraintName
@@ -334,17 +334,13 @@ insertStatement
 insertSimpleStatement
     : INSERT (INTO | OVERWRITE) uid
     (
-        insertPartitionDefinition? insertColumnListDefinition? queryStatement
+        insertPartitionDefinition? columnNameList? queryStatement
         | valuesDefinition
     )
     ;
 
 insertPartitionDefinition
     : PARTITION tablePropertyList
-    ;
-
-insertColumnListDefinition
-    : LR_BRACKET columnNameList RR_BRACKET
     ;
 
 valuesDefinition
