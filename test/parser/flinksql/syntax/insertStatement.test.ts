@@ -12,15 +12,21 @@ const readSQL = (fileName: string) =>
         .map((i) => i.trim());
 
 const features = {
-    singleTable: readSQL('insertSingleTable.sql'),
+    InsertFromSelectQueries: readSQL('insertFromSelectQueries.sql'),
+    InsertValuesIntoTable: readSQL('insertValuesIntoTable.sql'),
     MultipleTable: readSQL('insertMultipleTable.sql')
 };
 
 describe('FlinkSQL Insert Syntax Tests', () => {
     describe('INSERT SINGLE TABLE', () => {
-        features.singleTable.forEach((singleTable) => {
-            it(singleTable, () => {
-                expect(parser.validate(singleTable).length).toBe(0);
+        features.InsertFromSelectQueries.forEach((insertFromSelectQueries) => {
+            it(insertFromSelectQueries, () => {
+                expect(parser.validate(insertFromSelectQueries).length).toBe(0);
+            });
+        });
+        features.InsertValuesIntoTable.forEach((insertValuesIntoTable) => {
+            it(insertValuesIntoTable, () => {
+                expect(parser.validate(insertValuesIntoTable).length).toBe(0);
             });
         });
     });
