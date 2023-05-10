@@ -209,7 +209,7 @@ watermarkDefinition
     ;
 
 tableConstraint
-    : (CONSTRAINT constraintName)? PRIMARY KEY columnNameList (NOT ENFORCED)?
+    : (CONSTRAINT constraintName)? PRIMARY KEY columnNameList NOT ENFORCED
     ;
 
 constraintName
