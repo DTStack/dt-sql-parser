@@ -79,6 +79,7 @@ FIRST:                        'FIRST';
 AFTER:                        'AFTER';
 LAST:                         'LAST';
 WITH:                         'WITH';
+WITHOUT:                      'WITHOUT';
 VALUES:                       'VALUES';
 CREATE:                       'CREATE';
 TABLE:                        'TABLE';
@@ -270,6 +271,7 @@ SYSTEM_TIME:                  'SYSTEM_TIME';
 ENFORCED:                     'ENFORCED';
 METADATA:                     'METADATA';
 VIRTUAL:                      'VIRTUAL';
+ZONE:                         'ZONE';
 
 // DATA TYPE Keywords
 

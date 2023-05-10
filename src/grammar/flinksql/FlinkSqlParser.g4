@@ -145,8 +145,9 @@ columnType
     : typeName=(DATE | BOOLEAN | NULL)
     | typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
         | TINYINT | SMALLINT | INT | INTEGER | BIGINT
-        | TIME | TIMESTAMP | TIMESTAMP_LTZ | DATETIME
+        | TIME | IMESTAMP_LTZ | DATETIME
     ) lengthOneDimension?
+    | typeName=TIMESTAMP lengthOneDimension? ((WITHOUT | WITH) LOCAL? TIME ZONE)?
     | typeName=(DECIMAL | DEC | NUMERIC | FLOAT | DOUBLE) lengthTwoOptionalDimension?
     | type=(ARRAY | MULTISET) lengthOneTypeDimension?
     | type=MAP mapTypeDimension?
@@ -179,7 +180,7 @@ rowTypeDimension
     ;
 
 columnConstraint
-    :(CONSTRAINT constraintName)? PRIMARY KEY (NOT ENFORCED)?
+    :(CONSTRAINT constraintName)? PRIMARY KEY NOT ENFORCED
     ;
 
 commentSpec
@@ -247,8 +248,8 @@ sourceTable
     ;
 
 likeOption
-    : (INCLUDING | EXCLUDING) (ALL | CONSTRAINTS | PARTITIONS)
-    | (INCLUDING | EXCLUDING | OVERWRITING) (GENERATED | OPTIONS | WATERMARKS)
+    : ((INCLUDING | EXCLUDING) (ALL | CONSTRAINTS | PARTITIONS))
+    | ((INCLUDING | EXCLUDING | OVERWRITING) (GENERATED | OPTIONS | WATERMARKS))
     ;
 
 createCatalog
