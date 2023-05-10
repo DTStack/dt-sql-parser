@@ -362,7 +362,6 @@ insertMulStatement
     : STATEMENT SET BEGIN (insertSimpleStatement SEMICOLON)+ END
     ;
 
-
 // Select statements
 
 queryStatement

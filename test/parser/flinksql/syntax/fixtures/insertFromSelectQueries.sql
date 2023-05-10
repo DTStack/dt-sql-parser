@@ -9,7 +9,7 @@ SELECT user,
 FROM page_view_source;
 
 
---- Excute InsertStatement
+--- Execute InsertStatement
 EXECUTE
 INSERT INTO country_page_view PARTITION (date = '2019-8-30', country = 'China')
 SELECT user,
@@ -41,6 +41,7 @@ SELECT user,
     cnt,
     country
 FROM page_view_source;
+
 
 
 
