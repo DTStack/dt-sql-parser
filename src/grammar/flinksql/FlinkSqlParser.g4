@@ -145,7 +145,7 @@ columnType
     : typeName=(DATE | BOOLEAN | NULL)
     | typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
         | TINYINT | SMALLINT | INT | INTEGER | BIGINT
-        | TIME | IMESTAMP_LTZ | DATETIME
+        | TIME | TIMESTAMP_LTZ | DATETIME
     ) lengthOneDimension?
     | typeName=TIMESTAMP lengthOneDimension? ((WITHOUT | WITH) LOCAL? TIME ZONE)?
     | typeName=(DECIMAL | DEC | NUMERIC | FLOAT | DOUBLE) lengthTwoOptionalDimension?
