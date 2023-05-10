@@ -419,6 +419,7 @@ tableExpression
     : tableReference (COMMA tableReference)*
     | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? OUTER? JOIN tableExpression joinCondition?
     | tableExpression CROSS JOIN tableExpression
+    | inlineDataValueClause
     ;
 
 tableReference
@@ -442,6 +443,10 @@ systemTimePeriod
 
 dateTimeExpression
     : expression
+    ;
+
+inlineDataValueClause
+    : LR_BRACKET valuesDefinition RR_BRACKET tableAlias
     ;
 
 joinCondition
