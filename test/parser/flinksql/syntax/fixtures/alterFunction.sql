@@ -1,0 +1,7 @@
+ALTER FUNCTION tempFunction AS 'SimpleUdf';
+
+ALTER TEMPORARY FUNCTION IF EXISTS tempFunction AS 'SimpleUdf';
+
+ALTER TEMPORARY SYSTEM FUNCTION IF EXISTS tempFunction AS 'SimpleUdf';
+
+ALTER FUNCTION myudf AS 'com.example.MyUdf' LANGUAGE PYTHON;

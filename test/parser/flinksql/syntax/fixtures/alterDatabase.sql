@@ -1,0 +1,1 @@
+ALTER DATABASE tempDB SET ("key1"="value1");
