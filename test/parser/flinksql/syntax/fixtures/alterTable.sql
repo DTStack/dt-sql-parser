@@ -1,3 +1,6 @@
+-- Refer: https://github.com/apache/flink/blob/master/flink-table/flink-sql-parser/src/test/java/org/apache/flink/sql/parser/FlinkSqlParserImplTest.java#L2016
+-- Just for simple alter table statements, it not include alter table columns statements
+
 alter table
     t1 rename to t2;
 

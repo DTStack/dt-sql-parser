@@ -277,6 +277,8 @@ jarFileName
     ;
 
 // Alter statements
+// Just for simple alter table statements, 
+// it only includes rename, set key, add constraint, drop constraint, add unique
 
 alterTable
     : ALTER TABLE ifExists? uid (renameDefinition | setKeyValueDefinition | addConstraint | dropConstraint | addUnique)
