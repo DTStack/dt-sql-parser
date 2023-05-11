@@ -1,22 +1,14 @@
 import FlinkSQL from '../../../../src/parser/flinksql';
-import fs from 'fs';
-import path from 'path';
+import { readSQL } from '../../../helper';
 
 const parser = new FlinkSQL();
 
-const readSQL = (fileName: string) =>
-    fs
-        .readFileSync(path.join(__dirname, 'fixtures', fileName), 'utf-8')
-        .split(';')
-        .filter(Boolean)
-        .map((i) => i.trim());
-
 const features = {
-    table: readSQL('createTable.sql'),
-    catalog: readSQL('createCatalog.sql'),
-    database: readSQL('createDatabase.sql'),
-    view: readSQL('createView.sql'),
-    function: readSQL('createFunction.sql'),
+    table: readSQL(__dirname, 'createTable.sql'),
+    catalog: readSQL(__dirname, 'createCatalog.sql'),
+    database: readSQL(__dirname, 'createDatabase.sql'),
+    view: readSQL(__dirname, 'createView.sql'),
+    function: readSQL(__dirname, 'createFunction.sql'),
 };
 
 describe('FlinkSQL Create Syntax Tests', () => {
