@@ -265,6 +265,7 @@ CATALOGS:                     'CATALOGS';
 VIEWS:                        'VIEWS';
 JARS:                         'JARS';
 PRIMARY:                      'PRIMARY';
+UNIQUE:                       'UNIQUE';
 KEY:                          'KEY';
 PERIOD:                       'PERIOD';
 SYSTEM_TIME:                  'SYSTEM_TIME';
