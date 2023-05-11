@@ -1,5 +1,7 @@
 CREATE TABLE MyTable ('user_id' BIGINT, 'name' STRING) WITH ('connector' = 'oracle-x');
 
+CREATE TABLE MyTable WITH ('connector' = 'oracle-x');
+
 CREATE TABLE MyTable (
     'user_id' BIGINT,
     'name' STRING,
@@ -32,14 +34,10 @@ CREATE TABLE tbl1 (
     b varchar,
     proc AS PROCTIME(),
     meta STRING METADATA,
-    my_meta STRING METADATA
-    FROM
-        'meta',
-        my_meta STRING METADATA
-    FROM
-        'meta' VIRTUAL,
-        meta STRING METADATA VIRTUAL,
-        PRIMARY KEY (a, b)
+    my_meta STRING METADATA FROM 'meta',
+    my_meta STRING METADATA FROM 'meta' VIRTUAL,
+    meta STRING METADATA VIRTUAL,
+    PRIMARY KEY (a, b) NOT ENFORCED
 ) PARTITIONED BY (a, h) WITH (
     'connector' = 'kafka',
     'kafka.topic' = 'log.test'
@@ -69,8 +67,8 @@ CREATE TABLE Orders_with_watermark (
     INCLUDING GENERATED
 );
 
-CREATE TABLE my_ctas_table WITH ('connector' = 'kafka') AS
-SELECT
+CREATE TABLE my_ctas_table WITH ('connector' = 'kafka') 
+AS SELECT
     id,
     name,
     age
@@ -109,7 +107,7 @@ CREATE TABLE IF NOT EXISTS tbl1 (
     ts AS toTimestamp(b, 'yyyy-MM-dd HH:mm:ss'),
     b varchar,
     proc AS PROCTIME(),
-    PRIMARY KEY (a, b)
+    PRIMARY KEY (a, b) NOT ENFORCED
 ) PARTITIONED BY (a, h) WITH (
     'connector' = 'kafka',
     'kafka.topic' = 'log.test'
@@ -125,7 +123,7 @@ CREATE TABLE tbl1 (
     meta STRING METADATA,
     my_meta STRING METADATA FROM 'meta',
     my_meta STRING METADATA FROM 'meta' VIRTUAL,
-    PRIMARY KEY (a, b)
+    PRIMARY KEY (a, b) NOT ENFORCED
 ) COMMENT 'test table comment ABC.' PARTITIONED BY (a, h) WITH (
     'connector' = 'kafka',
     'kafka.topic' = 'log.test'
@@ -138,7 +136,7 @@ CREATE TABLE tbl1 (
     ts AS toTimestamp(b, 'yyyy-MM-dd HH:mm:ss'),
     b varchar,
     proc AS PROCTIME(),
-    PRIMARY KEY (a, b)
+    PRIMARY KEY (a, b) NOT ENFORCED
 ) COMMENT 'test table comment ABC.' PARTITIONED BY (a, h) WITH (
     'connector' = 'kafka',
     'kafka.topic' = 'log.test'
@@ -199,7 +197,7 @@ CREATE TABLE tbl1 (
     b MAP<int, varchar>,
     c ROW<cc0 int, cc1 float, cc2 varchar>,
     d MULTISET<varchar>,
-    PRIMARY KEY (a, b) 
+    PRIMARY KEY (a, b) NOT ENFORCED
 ) with (
     'x' = 'y', 
     'asd' = 'data'
@@ -211,7 +209,7 @@ CREATE TABLE tbl1 (
     c ROW<cc0 ARRAY<int>, cc1 float, cc2 varchar>,
     d MULTISET<ARRAY<int>>,
     f TIMESTAMP(9),
-    PRIMARY KEY (a, b) 
+    PRIMARY KEY (a, b) NOT ENFORCED
 ) with (
     'x' = 'y', 
     'asd' = 'data'
@@ -223,7 +221,7 @@ CREATE TABLE tbl1 (
     c ROW<cc0 ARRAY<int>, cc1 float, cc2 varchar>,
     d MULTISET<ARRAY<int>>,
     f TIMESTAMP(9),
-    PRIMARY KEY (a, b) 
+    PRIMARY KEY (a, b) NOT ENFORCED
 ) with (
     'x' = 'y', 
     'asd' = 'data'
