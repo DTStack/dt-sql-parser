@@ -1,21 +1,13 @@
 import FlinkSQL from '../../../../src/parser/flinksql';
-import fs from 'fs';
-import path from 'path';
+import { readSQL } from '../../../helper';
+
 
 const parser = new FlinkSQL();
 
-const readSQL = (fileName: string, isSegment = true) => {
-    const sqlFiles = fs.readFileSync(path.join(__dirname, 'fixtures', fileName), 'utf-8')
-    if (!isSegment) return [sqlFiles];
-    return sqlFiles.split(';')
-        .filter(Boolean)
-        .map((i) => i.trim());
-}
-
 const features = {
-    InsertFromSelectQueries: readSQL('insertFromSelectQueries.sql'),
-    InsertValuesIntoTable: readSQL('insertValuesIntoTable.sql'),
-    InsertMultipleTable: readSQL('insertMultipleTable.sql', false)
+    InsertFromSelectQueries: readSQL(__dirname, 'insertFromSelectQueries.sql'),
+    InsertValuesIntoTable: readSQL(__dirname, 'insertValuesIntoTable.sql'),
+    InsertMultipleTable: readSQL(__dirname, 'insertMultipleTable.sql')
 };
 
 describe('FlinkSQL Insert Syntax Tests', () => {
