@@ -1,49 +1,39 @@
 import FlinkSQL from "../../../../src/parser/flinksql";
+import { readSQL } from "../../../helper";
 
-describe('FlinkSQL Create Table Syntax Tests', () => {
+const features = {
+    table: readSQL(__dirname, 'dropTable.sql'),
+    view: readSQL(__dirname, 'dropView.sql'),
+    function: readSQL(__dirname, 'dropFunction.sql'),
+    catalog: readSQL(__dirname, 'dropCatalog.sql'),
+    database: readSQL(__dirname, 'dropDatabase.sql'),
+};
+
+describe('FlinkSQL Drop Statements Tests', () => {
     const parser = new FlinkSQL();
-    // Drop statements
-    test('Test Simple Drop Catalog Statement', () => {
-        const sql = `
-            DROP CATALOG catalog1;
-            DROP CATALOG IF EXISTS catalog2;
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+    features.table.forEach((sql) => {
+        it(sql, () => {
+            expect(parser.validate(sql).length).toBe(0);
+        });
     });
-    test('Test Simple Drop Table Statement', () => {
-        const sql = `
-            DROP TABLE Orders;
-            DROP TABLE IF EXISTS Orders;
-            DROP TEMPORARY TABLE IF EXISTS Orders;
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+    features.view.forEach((sql) => {
+        it(sql, () => {
+            expect(parser.validate(sql).length).toBe(0);
+        });
     });
-    test('Test Simple Drop Database Statement', () => {
-        const sql = `
-            DROP DATABASE Orders;
-            DROP DATABASE IF EXISTS Orders RESTRICT;
-            DROP DATABASE IF EXISTS Orders CASCADE;
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+    features.function.forEach((sql) => {
+        it(sql, () => {
+            expect(parser.validate(sql).length).toBe(0);
+        });
     });
-    test('Test Simple Drop View Statement', () => {
-        const sql = `
-            DROP VIEW Orders;
-            DROP TEMPORARY VIEW IF EXISTS Orders;
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
-    });
-    test('Test Simple Drop Function Statement', () => {
-        const sql = `
-            DROP FUNCTION Orders;
-            DROP TEMPORARY FUNCTION IF EXISTS Orders;
-            DROP TEMPORARY SYSTEM FUNCTION IF EXISTS Orders;
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+    features.catalog.forEach((sql) => {
+        it(sql, () => {
+            expect(parser.validate(sql).length).toBe(0);
+        });
+    });  
+    features.database.forEach((sql) => {
+        it(sql, () => {
+            expect(parser.validate(sql).length).toBe(0);
+        });
     });
 });
