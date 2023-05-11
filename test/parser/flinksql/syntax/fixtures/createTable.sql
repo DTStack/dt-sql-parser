@@ -2,6 +2,9 @@ CREATE TABLE MyTable ('user_id' BIGINT, 'name' STRING) WITH ('connector' = 'orac
 
 CREATE TABLE MyTable WITH ('connector' = 'oracle-x');
 
+-- 尽管官方文档的 BNF 里没有支持创建临时表，但实际上是支持的
+CREATE TEMPORARY TABLE MyTable ('user_id' BIGINT, 'name' STRING) WITH ('connector' = 'oracle-x');
+
 CREATE TABLE MyTable (
     'user_id' BIGINT,
     'name' STRING,
