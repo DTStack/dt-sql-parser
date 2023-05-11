@@ -273,6 +273,15 @@ ENFORCED:                     'ENFORCED';
 METADATA:                     'METADATA';
 VIRTUAL:                      'VIRTUAL';
 ZONE:                         'ZONE';
+TUMBLE:                       'TUMBLE';
+HOP:                          'HOP';
+CUMULATE:                     'CUMULATE';
+DESCRIPTOR:                   'DESCRIPTOR';
+TIMECOL:                      'TIMECOL';
+SIZE:                         'SIZE';
+OFFSET:                       'OFFSET';
+STEP:                         'STEP';
+SLIDE:                        'SLIDE';
 
 // DATA TYPE Keywords
 
@@ -357,6 +366,7 @@ BIT_STRING:                          BIT_STRING_L;
 ID_LITERAL:                          ID_LITERAL_FRAG;
 PLUS_ID_LITERAL:                     PLUS_ID_LITERAL_FRAG;
 FILE_PATH:                           FILE_PATH_STRING;
+DOUBLE_ARROW:                        '=>';                
 
 fragment FILE_PATH_STRING:           ([/\\] (~([/\\ ]))*)+;
 fragment JAR_FILE_PARTTARN:          '`' ( '\\'. | '``' | ~('`'|'\\'))* '`';

@@ -420,6 +420,7 @@ tableExpression
     | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? OUTER? JOIN tableExpression joinCondition?
     | tableExpression CROSS JOIN tableExpression
     | inlineDataValueClause
+    | windoTVFClause
     ;
 
 tableReference
@@ -447,6 +448,46 @@ dateTimeExpression
 
 inlineDataValueClause
     : LR_BRACKET valuesDefinition RR_BRACKET tableAlias
+    ;
+
+windoTVFClause
+    : TABLE LR_BRACKET windowTVFExression RR_BRACKET
+    ;
+
+windowTVFExression
+    : windoTVFName LR_BRACKET windowTVFParam (COMMA windowTVFParam)* RR_BRACKET
+    ;
+
+windoTVFName
+    : TUMBLE
+    | HOP
+    | CUMULATE
+;
+
+windowTVFParam
+    : TABLE uid
+    | columnDescriptor
+    | timeInervalExpression
+    | DATA DOUBLE_ARROW TABLE uid
+    | TIMECOL DOUBLE_ARROW columnDescriptor
+    | timeIntervalParamName DOUBLE_ARROW timeInervalExpression
+    ;
+
+timeIntervalParamName
+    : DATA
+    | TIMECOL
+    | SIZE
+    | OFFSET
+    | STEP
+    | SLIDE
+    ;
+
+timeInervalExpression
+    : INTERVAL STRING_LITERAL ID_LITERAL
+    ;
+
+columnDescriptor
+    : DESCRIPTOR LR_BRACKET uid RR_BRACKET
     ;
 
 joinCondition

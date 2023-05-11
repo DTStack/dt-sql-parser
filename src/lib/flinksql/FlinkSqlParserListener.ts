@@ -96,6 +96,14 @@ import { TablePrimaryContext } from "./FlinkSqlParser";
 import { TablePathContext } from "./FlinkSqlParser";
 import { SystemTimePeriodContext } from "./FlinkSqlParser";
 import { DateTimeExpressionContext } from "./FlinkSqlParser";
+import { InlineDataValueClauseContext } from "./FlinkSqlParser";
+import { WindoTVFClauseContext } from "./FlinkSqlParser";
+import { WindowTVFExressionContext } from "./FlinkSqlParser";
+import { WindoTVFNameContext } from "./FlinkSqlParser";
+import { WindowTVFParamContext } from "./FlinkSqlParser";
+import { TimeIntervalParamNameContext } from "./FlinkSqlParser";
+import { TimeInervalExpressionContext } from "./FlinkSqlParser";
+import { ColumnDescriptorContext } from "./FlinkSqlParser";
 import { JoinConditionContext } from "./FlinkSqlParser";
 import { WhereClauseContext } from "./FlinkSqlParser";
 import { GroupByClauseContext } from "./FlinkSqlParser";
@@ -1125,6 +1133,86 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitDateTimeExpression?: (ctx: DateTimeExpressionContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.inlineDataValueClause`.
+	 * @param ctx the parse tree
+	 */
+	enterInlineDataValueClause?: (ctx: InlineDataValueClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.inlineDataValueClause`.
+	 * @param ctx the parse tree
+	 */
+	exitInlineDataValueClause?: (ctx: InlineDataValueClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.windoTVFClause`.
+	 * @param ctx the parse tree
+	 */
+	enterWindoTVFClause?: (ctx: WindoTVFClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.windoTVFClause`.
+	 * @param ctx the parse tree
+	 */
+	exitWindoTVFClause?: (ctx: WindoTVFClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.windowTVFExression`.
+	 * @param ctx the parse tree
+	 */
+	enterWindowTVFExression?: (ctx: WindowTVFExressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.windowTVFExression`.
+	 * @param ctx the parse tree
+	 */
+	exitWindowTVFExression?: (ctx: WindowTVFExressionContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.windoTVFName`.
+	 * @param ctx the parse tree
+	 */
+	enterWindoTVFName?: (ctx: WindoTVFNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.windoTVFName`.
+	 * @param ctx the parse tree
+	 */
+	exitWindoTVFName?: (ctx: WindoTVFNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.windowTVFParam`.
+	 * @param ctx the parse tree
+	 */
+	enterWindowTVFParam?: (ctx: WindowTVFParamContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.windowTVFParam`.
+	 * @param ctx the parse tree
+	 */
+	exitWindowTVFParam?: (ctx: WindowTVFParamContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.timeIntervalParamName`.
+	 * @param ctx the parse tree
+	 */
+	enterTimeIntervalParamName?: (ctx: TimeIntervalParamNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.timeIntervalParamName`.
+	 * @param ctx the parse tree
+	 */
+	exitTimeIntervalParamName?: (ctx: TimeIntervalParamNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.timeInervalExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterTimeInervalExpression?: (ctx: TimeInervalExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.timeInervalExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitTimeInervalExpression?: (ctx: TimeInervalExpressionContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.columnDescriptor`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnDescriptor?: (ctx: ColumnDescriptorContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.columnDescriptor`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnDescriptor?: (ctx: ColumnDescriptorContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.joinCondition`.
 	 * @param ctx the parse tree

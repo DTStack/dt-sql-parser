@@ -96,6 +96,14 @@ import { TablePrimaryContext } from "./FlinkSqlParser";
 import { TablePathContext } from "./FlinkSqlParser";
 import { SystemTimePeriodContext } from "./FlinkSqlParser";
 import { DateTimeExpressionContext } from "./FlinkSqlParser";
+import { InlineDataValueClauseContext } from "./FlinkSqlParser";
+import { WindoTVFClauseContext } from "./FlinkSqlParser";
+import { WindowTVFExressionContext } from "./FlinkSqlParser";
+import { WindoTVFNameContext } from "./FlinkSqlParser";
+import { WindowTVFParamContext } from "./FlinkSqlParser";
+import { TimeIntervalParamNameContext } from "./FlinkSqlParser";
+import { TimeInervalExpressionContext } from "./FlinkSqlParser";
+import { ColumnDescriptorContext } from "./FlinkSqlParser";
 import { JoinConditionContext } from "./FlinkSqlParser";
 import { WhereClauseContext } from "./FlinkSqlParser";
 import { GroupByClauseContext } from "./FlinkSqlParser";
@@ -754,6 +762,54 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitDateTimeExpression?: (ctx: DateTimeExpressionContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.inlineDataValueClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInlineDataValueClause?: (ctx: InlineDataValueClauseContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.windoTVFClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitWindoTVFClause?: (ctx: WindoTVFClauseContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.windowTVFExression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitWindowTVFExression?: (ctx: WindowTVFExressionContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.windoTVFName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitWindoTVFName?: (ctx: WindoTVFNameContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.windowTVFParam`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitWindowTVFParam?: (ctx: WindowTVFParamContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.timeIntervalParamName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTimeIntervalParamName?: (ctx: TimeIntervalParamNameContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.timeInervalExpression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTimeInervalExpression?: (ctx: TimeInervalExpressionContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.columnDescriptor`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnDescriptor?: (ctx: ColumnDescriptorContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.joinCondition`.
 	 * @param ctx the parse tree

@@ -275,79 +275,88 @@ export default class FlinkSqlParser extends Parser {
 	public static readonly VIEWS = 254;
 	public static readonly JARS = 255;
 	public static readonly PRIMARY = 256;
-	public static readonly UNIQUE = 257;
-	public static readonly KEY = 258;
-	public static readonly PERIOD = 259;
-	public static readonly SYSTEM_TIME = 260;
-	public static readonly ENFORCED = 261;
-	public static readonly METADATA = 262;
-	public static readonly VIRTUAL = 263;
-	public static readonly ZONE = 264;
-	public static readonly STRING = 265;
-	public static readonly ARRAY = 266;
-	public static readonly MAP = 267;
-	public static readonly CHAR = 268;
-	public static readonly VARCHAR = 269;
-	public static readonly BINARY = 270;
-	public static readonly VARBINARY = 271;
-	public static readonly BYTES = 272;
-	public static readonly DECIMAL = 273;
-	public static readonly DEC = 274;
-	public static readonly NUMERIC = 275;
-	public static readonly TINYINT = 276;
-	public static readonly SMALLINT = 277;
-	public static readonly INT = 278;
-	public static readonly INTEGER = 279;
-	public static readonly BIGINT = 280;
-	public static readonly FLOAT = 281;
-	public static readonly DOUBLE = 282;
-	public static readonly DATE = 283;
-	public static readonly TIME = 284;
-	public static readonly TIMESTAMP = 285;
-	public static readonly TIMESTAMP_LTZ = 286;
-	public static readonly MULTISET = 287;
-	public static readonly BOOLEAN = 288;
-	public static readonly RAW = 289;
-	public static readonly ROW = 290;
-	public static readonly NULL = 291;
-	public static readonly DATETIME = 292;
-	public static readonly EQUAL_SYMBOL = 293;
-	public static readonly GREATER_SYMBOL = 294;
-	public static readonly LESS_SYMBOL = 295;
-	public static readonly EXCLAMATION_SYMBOL = 296;
-	public static readonly BIT_NOT_OP = 297;
-	public static readonly BIT_OR_OP = 298;
-	public static readonly BIT_AND_OP = 299;
-	public static readonly BIT_XOR_OP = 300;
-	public static readonly DOT = 301;
-	public static readonly LS_BRACKET = 302;
-	public static readonly RS_BRACKET = 303;
-	public static readonly LR_BRACKET = 304;
-	public static readonly RR_BRACKET = 305;
-	public static readonly COMMA = 306;
-	public static readonly SEMICOLON = 307;
-	public static readonly AT_SIGN = 308;
-	public static readonly SINGLE_QUOTE_SYMB = 309;
-	public static readonly DOUBLE_QUOTE_SYMB = 310;
-	public static readonly REVERSE_QUOTE_SYMB = 311;
-	public static readonly COLON_SYMB = 312;
-	public static readonly ASTERISK_SIGN = 313;
-	public static readonly UNDERLINE_SIGN = 314;
-	public static readonly HYPNEN_SIGN = 315;
-	public static readonly ADD_SIGN = 316;
-	public static readonly PENCENT_SIGN = 317;
-	public static readonly DOUBLE_VERTICAL_SIGN = 318;
-	public static readonly DOUBLE_HYPNEN_SIGN = 319;
-	public static readonly SLASH_SIGN = 320;
-	public static readonly DOT_ID = 321;
-	public static readonly PLUS_DOT_ID = 322;
-	public static readonly STRING_LITERAL = 323;
-	public static readonly DIG_LITERAL = 324;
-	public static readonly REAL_LITERAL = 325;
-	public static readonly BIT_STRING = 326;
-	public static readonly ID_LITERAL = 327;
-	public static readonly PLUS_ID_LITERAL = 328;
-	public static readonly FILE_PATH = 329;
+	public static readonly KEY = 257;
+	public static readonly PERIOD = 258;
+	public static readonly SYSTEM_TIME = 259;
+	public static readonly ENFORCED = 260;
+	public static readonly METADATA = 261;
+	public static readonly VIRTUAL = 262;
+	public static readonly ZONE = 263;
+	public static readonly TUMBLE = 264;
+	public static readonly HOP = 265;
+	public static readonly CUMULATE = 266;
+	public static readonly DESCRIPTOR = 267;
+	public static readonly TIMECOL = 268;
+	public static readonly SIZE = 269;
+	public static readonly OFFSET = 270;
+	public static readonly STEP = 271;
+	public static readonly SLIDE = 272;
+	public static readonly STRING = 273;
+	public static readonly ARRAY = 274;
+	public static readonly MAP = 275;
+	public static readonly CHAR = 276;
+	public static readonly VARCHAR = 277;
+	public static readonly BINARY = 278;
+	public static readonly VARBINARY = 279;
+	public static readonly BYTES = 280;
+	public static readonly DECIMAL = 281;
+	public static readonly DEC = 282;
+	public static readonly NUMERIC = 283;
+	public static readonly TINYINT = 284;
+	public static readonly SMALLINT = 285;
+	public static readonly INT = 286;
+	public static readonly INTEGER = 287;
+	public static readonly BIGINT = 288;
+	public static readonly FLOAT = 289;
+	public static readonly DOUBLE = 290;
+	public static readonly DATE = 291;
+	public static readonly TIME = 292;
+	public static readonly TIMESTAMP = 293;
+	public static readonly TIMESTAMP_LTZ = 294;
+	public static readonly MULTISET = 295;
+	public static readonly BOOLEAN = 296;
+	public static readonly RAW = 297;
+	public static readonly ROW = 298;
+	public static readonly NULL = 299;
+	public static readonly DATETIME = 300;
+	public static readonly EQUAL_SYMBOL = 301;
+	public static readonly GREATER_SYMBOL = 302;
+	public static readonly LESS_SYMBOL = 303;
+	public static readonly EXCLAMATION_SYMBOL = 304;
+	public static readonly BIT_NOT_OP = 305;
+	public static readonly BIT_OR_OP = 306;
+	public static readonly BIT_AND_OP = 307;
+	public static readonly BIT_XOR_OP = 308;
+	public static readonly DOT = 309;
+	public static readonly LS_BRACKET = 310;
+	public static readonly RS_BRACKET = 311;
+	public static readonly LR_BRACKET = 312;
+	public static readonly RR_BRACKET = 313;
+	public static readonly COMMA = 314;
+	public static readonly SEMICOLON = 315;
+	public static readonly AT_SIGN = 316;
+	public static readonly SINGLE_QUOTE_SYMB = 317;
+	public static readonly DOUBLE_QUOTE_SYMB = 318;
+	public static readonly REVERSE_QUOTE_SYMB = 319;
+	public static readonly COLON_SYMB = 320;
+	public static readonly ASTERISK_SIGN = 321;
+	public static readonly UNDERLINE_SIGN = 322;
+	public static readonly HYPNEN_SIGN = 323;
+	public static readonly ADD_SIGN = 324;
+	public static readonly PENCENT_SIGN = 325;
+	public static readonly DOUBLE_VERTICAL_SIGN = 326;
+	public static readonly DOUBLE_HYPNEN_SIGN = 327;
+	public static readonly SLASH_SIGN = 328;
+	public static readonly DOT_ID = 329;
+	public static readonly PLUS_DOT_ID = 330;
+	public static readonly STRING_LITERAL = 331;
+	public static readonly DIG_LITERAL = 332;
+	public static readonly REAL_LITERAL = 333;
+	public static readonly BIT_STRING = 334;
+	public static readonly ID_LITERAL = 335;
+	public static readonly PLUS_ID_LITERAL = 336;
+	public static readonly FILE_PATH = 337;
+	public static readonly DOUBLE_ARROW = 338;
 	public static readonly EOF = Token.EOF;
 	public static readonly RULE_program = 0;
 	public static readonly RULE_statement = 1;
@@ -698,7 +707,13 @@ export default class FlinkSqlParser extends Parser {
                                                             "'ENFORCED'", 
                                                             "'METADATA'", 
                                                             "'VIRTUAL'", 
-                                                            "'ZONE'", "'STRING'", 
+                                                            "'ZONE'", "'TUMBLE'", 
+                                                            "'HOP'", "'CUMULATE'", 
+                                                            "'DESCRIPTOR'", 
+                                                            "'TIMECOL'", 
+                                                            "'SIZE'", "'OFFSET'", 
+                                                            "'STEP'", "'SLIDE'", 
+                                                            "'STRING'", 
                                                             "'ARRAY'", "'MAP'", 
                                                             "'CHAR'", "'VARCHAR'", 
                                                             "'BINARY'", 
@@ -730,7 +745,12 @@ export default class FlinkSqlParser extends Parser {
                                                             "'*'", "'_'", 
                                                             "'-'", "'+'", 
                                                             "'%'", "'||'", 
-                                                            "'--'", "'/'" ];
+                                                            "'--'", "'/'", 
+                                                            null, null, 
+                                                            null, null, 
+                                                            null, null, 
+                                                            null, null, 
+                                                            null, "'=>'" ];
 	public static readonly symbolicNames: (string | null)[] = [ null, "SPACE", 
                                                              "COMMENT_INPUT", 
                                                              "LINE_COMMENT", 
@@ -904,9 +924,15 @@ export default class FlinkSqlParser extends Parser {
                                                              "ENFORCED", 
                                                              "METADATA", 
                                                              "VIRTUAL", 
-                                                             "ZONE", "STRING", 
-                                                             "ARRAY", "MAP", 
-                                                             "CHAR", "VARCHAR", 
+                                                             "ZONE", "TUMBLE", 
+                                                             "HOP", "CUMULATE", 
+                                                             "DESCRIPTOR", 
+                                                             "TIMECOL", 
+                                                             "SIZE", "OFFSET", 
+                                                             "STEP", "SLIDE", 
+                                                             "STRING", "ARRAY", 
+                                                             "MAP", "CHAR", 
+                                                             "VARCHAR", 
                                                              "BINARY", "VARBINARY", 
                                                              "BYTES", "DECIMAL", 
                                                              "DEC", "NUMERIC", 
@@ -954,7 +980,8 @@ export default class FlinkSqlParser extends Parser {
                                                              "BIT_STRING", 
                                                              "ID_LITERAL", 
                                                              "PLUS_ID_LITERAL", 
-                                                             "FILE_PATH" ];
+                                                             "FILE_PATH", 
+                                                             "DOUBLE_ARROW" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"program", "statement", "sqlStatements", "sqlStatement", "emptyStatement", 
@@ -1098,7 +1125,7 @@ export default class FlinkSqlParser extends Parser {
 				case 117:
 				case 212:
 				case 213:
-				case 304:
+				case 312:
 					{
 					this.state = 320;
 					this.sqlStatement();
@@ -1114,7 +1141,7 @@ export default class FlinkSqlParser extends Parser {
 					}
 					}
 					break;
-				case 307:
+				case 315:
 					{
 					this.state = 324;
 					this.emptyStatement();
@@ -1410,7 +1437,7 @@ export default class FlinkSqlParser extends Parser {
 			case 4:
 			case 70:
 			case 72:
-			case 304:
+			case 312:
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 362;
@@ -1512,7 +1539,7 @@ export default class FlinkSqlParser extends Parser {
 			case 78:
 			case 79:
 			case 80:
-			case 304:
+			case 312:
 				break;
 			default:
 				break;
@@ -1568,7 +1595,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 385;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 381;
@@ -1698,7 +1725,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 405;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 401;
@@ -2357,7 +2384,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 541;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===306) {
+			if (_la===314) {
 				{
 				this.state = 539;
 				this.match(FlinkSqlParser.COMMA);
@@ -2616,7 +2643,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 588;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 584;
@@ -2656,15 +2683,15 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 630;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 283:
-			case 288:
 			case 291:
+			case 296:
+			case 299:
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 593;
 				localctx._typeName = this._input.LT(1);
 				_la = this._input.LA(1);
-				if(!(((((_la - 283)) & ~0x1F) === 0 && ((1 << (_la - 283)) & 289) !== 0))) {
+				if(!(((((_la - 291)) & ~0x1F) === 0 && ((1 << (_la - 291)) & 289) !== 0))) {
 				    localctx._typeName = this._errHandler.recoverInline(this);
 				}
 				else {
@@ -2673,26 +2700,26 @@ export default class FlinkSqlParser extends Parser {
 				}
 				}
 				break;
-			case 265:
-			case 268:
-			case 269:
-			case 270:
-			case 271:
-			case 272:
+			case 273:
 			case 276:
 			case 277:
 			case 278:
 			case 279:
 			case 280:
 			case 284:
+			case 285:
 			case 286:
+			case 287:
+			case 288:
 			case 292:
+			case 294:
+			case 300:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 594;
 				localctx._typeName = this._input.LT(1);
 				_la = this._input.LA(1);
-				if(!(((((_la - 265)) & ~0x1F) === 0 && ((1 << (_la - 265)) & 136902905) !== 0))) {
+				if(!(((((_la - 273)) & ~0x1F) === 0 && ((1 << (_la - 273)) & 136902905) !== 0))) {
 				    localctx._typeName = this._errHandler.recoverInline(this);
 				}
 				else {
@@ -2702,7 +2729,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 596;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===304) {
+				if (_la===312) {
 					{
 					this.state = 595;
 					this.lengthOneDimension();
@@ -2711,7 +2738,7 @@ export default class FlinkSqlParser extends Parser {
 
 				}
 				break;
-			case 285:
+			case 293:
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 598;
@@ -2719,7 +2746,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 600;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===304) {
+				if (_la===312) {
 					{
 					this.state = 599;
 					this.lengthOneDimension();
@@ -2759,17 +2786,17 @@ export default class FlinkSqlParser extends Parser {
 
 				}
 				break;
-			case 273:
-			case 274:
-			case 275:
 			case 281:
 			case 282:
+			case 283:
+			case 289:
+			case 290:
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 610;
 				localctx._typeName = this._input.LT(1);
 				_la = this._input.LA(1);
-				if(!(((((_la - 273)) & ~0x1F) === 0 && ((1 << (_la - 273)) & 775) !== 0))) {
+				if(!(((((_la - 281)) & ~0x1F) === 0 && ((1 << (_la - 281)) & 775) !== 0))) {
 				    localctx._typeName = this._errHandler.recoverInline(this);
 				}
 				else {
@@ -2779,7 +2806,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 612;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===304) {
+				if (_la===312) {
 					{
 					this.state = 611;
 					this.lengthTwoOptionalDimension();
@@ -2788,14 +2815,14 @@ export default class FlinkSqlParser extends Parser {
 
 				}
 				break;
-			case 266:
-			case 287:
+			case 274:
+			case 295:
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 614;
 				localctx._type_ = this._input.LT(1);
 				_la = this._input.LA(1);
-				if(!(_la===266 || _la===287)) {
+				if(!(_la===274 || _la===295)) {
 				    localctx._type_ = this._errHandler.recoverInline(this);
 				}
 				else {
@@ -2805,7 +2832,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 616;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===295) {
+				if (_la===303) {
 					{
 					this.state = 615;
 					this.lengthOneTypeDimension();
@@ -2814,7 +2841,7 @@ export default class FlinkSqlParser extends Parser {
 
 				}
 				break;
-			case 267:
+			case 275:
 				this.enterOuterAlt(localctx, 6);
 				{
 				this.state = 618;
@@ -2822,7 +2849,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 620;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===295) {
+				if (_la===303) {
 					{
 					this.state = 619;
 					this.mapTypeDimension();
@@ -2831,7 +2858,7 @@ export default class FlinkSqlParser extends Parser {
 
 				}
 				break;
-			case 290:
+			case 298:
 				this.enterOuterAlt(localctx, 7);
 				{
 				this.state = 622;
@@ -2839,7 +2866,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 624;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===295) {
+				if (_la===303) {
 					{
 					this.state = 623;
 					this.rowTypeDimension();
@@ -2848,7 +2875,7 @@ export default class FlinkSqlParser extends Parser {
 
 				}
 				break;
-			case 289:
+			case 297:
 				this.enterOuterAlt(localctx, 8);
 				{
 				this.state = 626;
@@ -2856,7 +2883,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 628;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===304) {
+				if (_la===312) {
 					{
 					this.state = 627;
 					this.lengthTwoStringDimension();
@@ -2927,7 +2954,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 640;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===306) {
+			if (_la===314) {
 				{
 				this.state = 638;
 				this.match(FlinkSqlParser.COMMA);
@@ -2969,7 +2996,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 648;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===306) {
+			if (_la===314) {
 				{
 				this.state = 646;
 				this.match(FlinkSqlParser.COMMA);
@@ -3077,7 +3104,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 672;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 666;
@@ -3500,7 +3527,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 741;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 737;
@@ -3561,7 +3588,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 754;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
 					this.state = 750;
@@ -3906,7 +3933,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 811;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===304) {
+			if (_la===312) {
 				{
 				this.state = 810;
 				this.columnNameList();
@@ -4051,7 +4078,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 847;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 842;
@@ -4966,7 +4993,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1003;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 999;
@@ -5010,7 +5037,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1012;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 1008;
@@ -5127,7 +5154,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1037;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
 					this.state = 1033;
@@ -5350,7 +5377,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1100;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===304) {
+			if (_la===312) {
 				{
 				this.state = 1089;
 				this.match(FlinkSqlParser.LR_BRACKET);
@@ -5359,7 +5386,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1095;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
 					this.state = 1091;
@@ -5900,7 +5927,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1208;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
 					this.state = 1204;
@@ -6053,49 +6080,367 @@ export default class FlinkSqlParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
-	public joinCondition(): JoinConditionContext {
-		let localctx: JoinConditionContext = new JoinConditionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 184, FlinkSqlParser.RULE_joinCondition);
+	public inlineDataValueClause(): InlineDataValueClauseContext {
+		let localctx: InlineDataValueClauseContext = new InlineDataValueClauseContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 178, FlinkSqlParser.RULE_inlineDataValueClause);
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 1237;
+			this.match(FlinkSqlParser.LR_BRACKET);
+			this.state = 1238;
+			this.valuesDefinition();
+			this.state = 1239;
+			this.match(FlinkSqlParser.RR_BRACKET);
+			this.state = 1240;
+			this.tableAlias();
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public windoTVFClause(): WindoTVFClauseContext {
+		let localctx: WindoTVFClauseContext = new WindoTVFClauseContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 180, FlinkSqlParser.RULE_windoTVFClause);
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 1242;
+			this.match(FlinkSqlParser.TABLE);
+			this.state = 1243;
+			this.match(FlinkSqlParser.LR_BRACKET);
+			this.state = 1244;
+			this.windowTVFExression();
+			this.state = 1245;
+			this.match(FlinkSqlParser.RR_BRACKET);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public windowTVFExression(): WindowTVFExressionContext {
+		let localctx: WindowTVFExressionContext = new WindowTVFExressionContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 182, FlinkSqlParser.RULE_windowTVFExression);
 		let _la: number;
 		try {
-			this.state = 1252;
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 1247;
+			this.windoTVFName();
+			this.state = 1248;
+			this.match(FlinkSqlParser.LR_BRACKET);
+			this.state = 1249;
+			this.windowTVFParam();
+			this.state = 1254;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (_la===314) {
+				{
+				{
+				this.state = 1250;
+				this.match(FlinkSqlParser.COMMA);
+				this.state = 1251;
+				this.windowTVFParam();
+				}
+				}
+				this.state = 1256;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			this.state = 1257;
+			this.match(FlinkSqlParser.RR_BRACKET);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public windoTVFName(): WindoTVFNameContext {
+		let localctx: WindoTVFNameContext = new WindoTVFNameContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 184, FlinkSqlParser.RULE_windoTVFName);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 1259;
+			_la = this._input.LA(1);
+			if(!(((((_la - 264)) & ~0x1F) === 0 && ((1 << (_la - 264)) & 7) !== 0))) {
+			this._errHandler.recoverInline(this);
+			}
+			else {
+				this._errHandler.reportMatch(this);
+			    this.consume();
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public windowTVFParam(): WindowTVFParamContext {
+		let localctx: WindowTVFParamContext = new WindowTVFParamContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 186, FlinkSqlParser.RULE_windowTVFParam);
+		try {
+			this.state = 1276;
+			this._errHandler.sync(this);
+			switch ( this._interp.adaptivePredict(this._input, 140, this._ctx) ) {
+			case 1:
+				this.enterOuterAlt(localctx, 1);
+				{
+				this.state = 1261;
+				this.match(FlinkSqlParser.TABLE);
+				this.state = 1262;
+				this.uid();
+				}
+				break;
+			case 2:
+				this.enterOuterAlt(localctx, 2);
+				{
+				this.state = 1263;
+				this.columnDescriptor();
+				}
+				break;
+			case 3:
+				this.enterOuterAlt(localctx, 3);
+				{
+				this.state = 1264;
+				this.timeInervalExpression();
+				}
+				break;
+			case 4:
+				this.enterOuterAlt(localctx, 4);
+				{
+				this.state = 1265;
+				this.match(FlinkSqlParser.DATA);
+				this.state = 1266;
+				this.match(FlinkSqlParser.DOUBLE_ARROW);
+				this.state = 1267;
+				this.match(FlinkSqlParser.TABLE);
+				this.state = 1268;
+				this.uid();
+				}
+				break;
+			case 5:
+				this.enterOuterAlt(localctx, 5);
+				{
+				this.state = 1269;
+				this.match(FlinkSqlParser.TIMECOL);
+				this.state = 1270;
+				this.match(FlinkSqlParser.DOUBLE_ARROW);
+				this.state = 1271;
+				this.columnDescriptor();
+				}
+				break;
+			case 6:
+				this.enterOuterAlt(localctx, 6);
+				{
+				this.state = 1272;
+				this.timeIntervalParamName();
+				this.state = 1273;
+				this.match(FlinkSqlParser.DOUBLE_ARROW);
+				this.state = 1274;
+				this.timeInervalExpression();
+				}
+				break;
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public timeIntervalParamName(): TimeIntervalParamNameContext {
+		let localctx: TimeIntervalParamNameContext = new TimeIntervalParamNameContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 188, FlinkSqlParser.RULE_timeIntervalParamName);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 1278;
+			_la = this._input.LA(1);
+			if(!(_la===118 || ((((_la - 268)) & ~0x1F) === 0 && ((1 << (_la - 268)) & 31) !== 0))) {
+			this._errHandler.recoverInline(this);
+			}
+			else {
+				this._errHandler.reportMatch(this);
+			    this.consume();
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public timeInervalExpression(): TimeInervalExpressionContext {
+		let localctx: TimeInervalExpressionContext = new TimeInervalExpressionContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 190, FlinkSqlParser.RULE_timeInervalExpression);
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 1280;
+			this.match(FlinkSqlParser.INTERVAL);
+			this.state = 1281;
+			this.match(FlinkSqlParser.STRING_LITERAL);
+			this.state = 1282;
+			this.match(FlinkSqlParser.ID_LITERAL);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public columnDescriptor(): ColumnDescriptorContext {
+		let localctx: ColumnDescriptorContext = new ColumnDescriptorContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 192, FlinkSqlParser.RULE_columnDescriptor);
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 1284;
+			this.match(FlinkSqlParser.DESCRIPTOR);
+			this.state = 1285;
+			this.match(FlinkSqlParser.LR_BRACKET);
+			this.state = 1286;
+			this.uid();
+			this.state = 1287;
+			this.match(FlinkSqlParser.RR_BRACKET);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public joinCondition(): JoinConditionContext {
+		let localctx: JoinConditionContext = new JoinConditionContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 176, FlinkSqlParser.RULE_joinCondition);
+		let _la: number;
+		try {
+			this.state = 1215;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 55:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 1238;
+				this.state = 1201;
 				this.match(FlinkSqlParser.ON);
-				this.state = 1239;
+				this.state = 1202;
 				this.booleanExpression(0);
 				}
 				break;
 			case 143:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 1240;
+				this.state = 1203;
 				this.match(FlinkSqlParser.USING);
-				this.state = 1241;
+				this.state = 1204;
 				this.match(FlinkSqlParser.LR_BRACKET);
-				this.state = 1242;
+				this.state = 1205;
 				this.uid();
-				this.state = 1247;
+				this.state = 1210;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
-					this.state = 1243;
+					this.state = 1206;
 					this.match(FlinkSqlParser.COMMA);
-					this.state = 1244;
+					this.state = 1207;
 					this.uid();
 					}
 					}
-					this.state = 1249;
+					this.state = 1212;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 1250;
+				this.state = 1213;
 				this.match(FlinkSqlParser.RR_BRACKET);
 				}
 				break;
@@ -6120,13 +6465,13 @@ export default class FlinkSqlParser extends Parser {
 	// @RuleVersion(0)
 	public whereClause(): WhereClauseContext {
 		let localctx: WhereClauseContext = new WhereClauseContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 186, FlinkSqlParser.RULE_whereClause);
+		this.enterRule(localctx, 178, FlinkSqlParser.RULE_whereClause);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1254;
+			this.state = 1217;
 			this.match(FlinkSqlParser.WHERE);
-			this.state = 1255;
+			this.state = 1218;
 			this.booleanExpression(0);
 			}
 		}
@@ -6147,34 +6492,34 @@ export default class FlinkSqlParser extends Parser {
 	// @RuleVersion(0)
 	public groupByClause(): GroupByClauseContext {
 		let localctx: GroupByClauseContext = new GroupByClauseContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 188, FlinkSqlParser.RULE_groupByClause);
+		this.enterRule(localctx, 180, FlinkSqlParser.RULE_groupByClause);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 1257;
+			this.state = 1220;
 			this.match(FlinkSqlParser.GROUP);
-			this.state = 1258;
+			this.state = 1221;
 			this.match(FlinkSqlParser.BY);
-			this.state = 1259;
+			this.state = 1222;
 			this.groupItemDefinition();
-			this.state = 1264;
+			this.state = 1227;
 			this._errHandler.sync(this);
-			_alt = this._interp.adaptivePredict(this._input, 142, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 139, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1260;
+					this.state = 1223;
 					this.match(FlinkSqlParser.COMMA);
-					this.state = 1261;
+					this.state = 1224;
 					this.groupItemDefinition();
 					}
 					}
 				}
-				this.state = 1266;
+				this.state = 1229;
 				this._errHandler.sync(this);
-				_alt = this._interp.adaptivePredict(this._input, 142, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 139, this._ctx);
 			}
 			}
 		}
@@ -6195,119 +6540,119 @@ export default class FlinkSqlParser extends Parser {
 	// @RuleVersion(0)
 	public groupItemDefinition(): GroupItemDefinitionContext {
 		let localctx: GroupItemDefinitionContext = new GroupItemDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 190, FlinkSqlParser.RULE_groupItemDefinition);
+		this.enterRule(localctx, 182, FlinkSqlParser.RULE_groupItemDefinition);
 		let _la: number;
 		try {
-			this.state = 1318;
+			this.state = 1281;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 147, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 144, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 1267;
+				this.state = 1230;
 				this.expression();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 1268;
+				this.state = 1231;
 				this.match(FlinkSqlParser.LR_BRACKET);
-				this.state = 1269;
+				this.state = 1232;
 				this.match(FlinkSqlParser.RR_BRACKET);
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 1270;
+				this.state = 1233;
 				this.match(FlinkSqlParser.LR_BRACKET);
-				this.state = 1271;
+				this.state = 1234;
 				this.expression();
-				this.state = 1276;
+				this.state = 1239;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
-					this.state = 1272;
+					this.state = 1235;
 					this.match(FlinkSqlParser.COMMA);
-					this.state = 1273;
+					this.state = 1236;
 					this.expression();
 					}
 					}
-					this.state = 1278;
+					this.state = 1241;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 1279;
+				this.state = 1242;
 				this.match(FlinkSqlParser.RR_BRACKET);
 				}
 				break;
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 1281;
+				this.state = 1244;
 				this.match(FlinkSqlParser.CUBE);
-				this.state = 1282;
+				this.state = 1245;
 				this.match(FlinkSqlParser.LR_BRACKET);
-				this.state = 1283;
+				this.state = 1246;
 				this.expression();
-				this.state = 1288;
+				this.state = 1251;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
-					this.state = 1284;
+					this.state = 1247;
 					this.match(FlinkSqlParser.COMMA);
-					this.state = 1285;
+					this.state = 1248;
 					this.expression();
 					}
 					}
-					this.state = 1290;
+					this.state = 1253;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 1291;
+				this.state = 1254;
 				this.match(FlinkSqlParser.RR_BRACKET);
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 1293;
+				this.state = 1256;
 				this.match(FlinkSqlParser.ROLLUP);
-				this.state = 1294;
+				this.state = 1257;
 				this.match(FlinkSqlParser.LR_BRACKET);
-				this.state = 1295;
+				this.state = 1258;
 				this.expression();
-				this.state = 1300;
+				this.state = 1263;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
-					this.state = 1296;
+					this.state = 1259;
 					this.match(FlinkSqlParser.COMMA);
-					this.state = 1297;
+					this.state = 1260;
 					this.expression();
 					}
 					}
-					this.state = 1302;
+					this.state = 1265;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 1303;
+				this.state = 1266;
 				this.match(FlinkSqlParser.RR_BRACKET);
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 1305;
+				this.state = 1268;
 				this.match(FlinkSqlParser.GROUPING);
-				this.state = 1306;
+				this.state = 1269;
 				this.match(FlinkSqlParser.SETS);
 				this.state = 1307;
 				this.match(FlinkSqlParser.LR_BRACKET);
@@ -6316,7 +6661,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1313;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
 					this.state = 1309;
@@ -6594,7 +6939,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1356;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (((((_la - 4)) & ~0x1F) === 0 && ((1 << (_la - 4)) & 4294967295) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & 4294967167) !== 0) || ((((_la - 68)) & ~0x1F) === 0 && ((1 << (_la - 68)) & 4291015671) !== 0) || ((((_la - 102)) & ~0x1F) === 0 && ((1 << (_la - 102)) & 4294967295) !== 0) || ((((_la - 134)) & ~0x1F) === 0 && ((1 << (_la - 134)) & 4294967295) !== 0) || ((((_la - 166)) & ~0x1F) === 0 && ((1 << (_la - 166)) & 4294967295) !== 0) || ((((_la - 198)) & ~0x1F) === 0 && ((1 << (_la - 198)) & 4294934527) !== 0) || ((((_la - 230)) & ~0x1F) === 0 && ((1 << (_la - 230)) & 1971324639) !== 0) || ((((_la - 265)) & ~0x1F) === 0 && ((1 << (_la - 265)) & 266320383) !== 0) || ((((_la - 323)) & ~0x1F) === 0 && ((1 << (_la - 323)) & 19) !== 0)) {
+			if (((((_la - 4)) & ~0x1F) === 0 && ((1 << (_la - 4)) & 4294967295) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & 4294967167) !== 0) || ((((_la - 68)) & ~0x1F) === 0 && ((1 << (_la - 68)) & 4291015671) !== 0) || ((((_la - 102)) & ~0x1F) === 0 && ((1 << (_la - 102)) & 4294967295) !== 0) || ((((_la - 134)) & ~0x1F) === 0 && ((1 << (_la - 134)) & 4294967295) !== 0) || ((((_la - 166)) & ~0x1F) === 0 && ((1 << (_la - 166)) & 4294967295) !== 0) || ((((_la - 198)) & ~0x1F) === 0 && ((1 << (_la - 198)) & 4294934527) !== 0) || ((((_la - 230)) & ~0x1F) === 0 && ((1 << (_la - 230)) & 1031800543) !== 0) || ((((_la - 273)) & ~0x1F) === 0 && ((1 << (_la - 273)) & 266320383) !== 0) || ((((_la - 331)) & ~0x1F) === 0 && ((1 << (_la - 331)) & 19) !== 0)) {
 				{
 				this.state = 1355;
 				localctx._name = this.errorCapturingIdentifier();
@@ -6617,7 +6962,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1366;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
 					this.state = 1362;
@@ -6647,7 +6992,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1378;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
 					this.state = 1374;
@@ -7041,7 +7386,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1450;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				while (_la===306) {
+				while (_la===314) {
 					{
 					{
 					this.state = 1446;
@@ -7158,7 +7503,7 @@ export default class FlinkSqlParser extends Parser {
 					this.state = 1486;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					while (_la===306) {
+					while (_la===314) {
 						{
 						{
 						this.state = 1482;
@@ -7336,7 +7681,7 @@ export default class FlinkSqlParser extends Parser {
 					this.state = 1530;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					while (_la===306) {
+					while (_la===314) {
 						{
 						{
 						this.state = 1526;
@@ -7432,7 +7777,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1546;
 				(localctx as ArithmeticUnaryContext)._operator = this._input.LT(1);
 				_la = this._input.LA(1);
-				if(!(((((_la - 297)) & ~0x1F) === 0 && ((1 << (_la - 297)) & 786433) !== 0))) {
+				if(!(((((_la - 305)) & ~0x1F) === 0 && ((1 << (_la - 305)) & 786433) !== 0))) {
 				    (localctx as ArithmeticUnaryContext)._operator = this._errHandler.recoverInline(this);
 				}
 				else {
@@ -7470,7 +7815,7 @@ export default class FlinkSqlParser extends Parser {
 						this.state = 1551;
 						(localctx as ArithmeticBinaryContext)._operator = this._input.LT(1);
 						_la = this._input.LA(1);
-						if(!(_la===132 || ((((_la - 313)) & ~0x1F) === 0 && ((1 << (_la - 313)) & 145) !== 0))) {
+						if(!(_la===132 || ((((_la - 321)) & ~0x1F) === 0 && ((1 << (_la - 321)) & 145) !== 0))) {
 						    (localctx as ArithmeticBinaryContext)._operator = this._errHandler.recoverInline(this);
 						}
 						else {
@@ -7493,7 +7838,7 @@ export default class FlinkSqlParser extends Parser {
 						this.state = 1554;
 						(localctx as ArithmeticBinaryContext)._operator = this._input.LT(1);
 						_la = this._input.LA(1);
-						if(!(((((_la - 315)) & ~0x1F) === 0 && ((1 << (_la - 315)) & 11) !== 0))) {
+						if(!(((((_la - 323)) & ~0x1F) === 0 && ((1 << (_la - 323)) & 11) !== 0))) {
 						    (localctx as ArithmeticBinaryContext)._operator = this._errHandler.recoverInline(this);
 						}
 						else {
@@ -7835,7 +8180,7 @@ export default class FlinkSqlParser extends Parser {
 				this.state = 1655;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (((((_la - 4)) & ~0x1F) === 0 && ((1 << (_la - 4)) & 4294967295) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & 4294967167) !== 0) || ((((_la - 68)) & ~0x1F) === 0 && ((1 << (_la - 68)) & 4291015671) !== 0) || ((((_la - 102)) & ~0x1F) === 0 && ((1 << (_la - 102)) & 4294967295) !== 0) || ((((_la - 134)) & ~0x1F) === 0 && ((1 << (_la - 134)) & 4294967295) !== 0) || ((((_la - 166)) & ~0x1F) === 0 && ((1 << (_la - 166)) & 4294967295) !== 0) || ((((_la - 198)) & ~0x1F) === 0 && ((1 << (_la - 198)) & 4294934527) !== 0) || ((((_la - 230)) & ~0x1F) === 0 && ((1 << (_la - 230)) & 1971324639) !== 0) || ((((_la - 265)) & ~0x1F) === 0 && ((1 << (_la - 265)) & 266320383) !== 0) || ((((_la - 297)) & ~0x1F) === 0 && ((1 << (_la - 297)) & 2081226881) !== 0)) {
+				if (((((_la - 4)) & ~0x1F) === 0 && ((1 << (_la - 4)) & 4294967295) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & 4294967167) !== 0) || ((((_la - 68)) & ~0x1F) === 0 && ((1 << (_la - 68)) & 4291015671) !== 0) || ((((_la - 102)) & ~0x1F) === 0 && ((1 << (_la - 102)) & 4294967295) !== 0) || ((((_la - 134)) & ~0x1F) === 0 && ((1 << (_la - 134)) & 4294967295) !== 0) || ((((_la - 166)) & ~0x1F) === 0 && ((1 << (_la - 166)) & 4294967295) !== 0) || ((((_la - 198)) & ~0x1F) === 0 && ((1 << (_la - 198)) & 4294934527) !== 0) || ((((_la - 230)) & ~0x1F) === 0 && ((1 << (_la - 230)) & 1031800543) !== 0) || ((((_la - 273)) & ~0x1F) === 0 && ((1 << (_la - 273)) & 266320383) !== 0) || ((((_la - 305)) & ~0x1F) === 0 && ((1 << (_la - 305)) & 2081226881) !== 0)) {
 					{
 					this.state = 1645;
 					this._errHandler.sync(this);
@@ -7852,7 +8197,7 @@ export default class FlinkSqlParser extends Parser {
 					this.state = 1652;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-					while (_la===306) {
+					while (_la===314) {
 						{
 						{
 						this.state = 1648;
@@ -8268,20 +8613,20 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1718;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 315:
-			case 316:
+			case 323:
 			case 324:
-			case 325:
+			case 332:
+			case 333:
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1714;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===315 || _la===316) {
+				if (_la===323 || _la===324) {
 					{
 					this.state = 1713;
 					_la = this._input.LA(1);
-					if(!(_la===315 || _la===316)) {
+					if(!(_la===323 || _la===324)) {
 					this._errHandler.recoverInline(this);
 					}
 					else {
@@ -8293,7 +8638,7 @@ export default class FlinkSqlParser extends Parser {
 
 				this.state = 1716;
 				_la = this._input.LA(1);
-				if(!(_la===324 || _la===325)) {
+				if(!(_la===332 || _la===333)) {
 				this._errHandler.recoverInline(this);
 				}
 				else {
@@ -8302,7 +8647,7 @@ export default class FlinkSqlParser extends Parser {
 				}
 				}
 				break;
-			case 323:
+			case 331:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1717;
@@ -8350,7 +8695,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1725;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===304) {
+			if (_la===312) {
 				{
 				this.state = 1724;
 				this.identifierList();
@@ -8477,7 +8822,7 @@ export default class FlinkSqlParser extends Parser {
 				}
 				break;
 			case 7:
-			case 304:
+			case 312:
 				localctx = new RealIdentContext(this, localctx);
 				this.enterOuterAlt(localctx, 2);
 				// tslint:disable-next-line:no-empty
@@ -8544,7 +8889,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1755;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 1751;
@@ -8677,7 +9022,7 @@ export default class FlinkSqlParser extends Parser {
 			{
 			this.state = 1768;
 			_la = this._input.LA(1);
-			if(!(_la===324 || _la===327)) {
+			if(!(_la===332 || _la===335)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -8769,7 +9114,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1782;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 1778;
@@ -8851,7 +9196,7 @@ export default class FlinkSqlParser extends Parser {
 			{
 			this.state = 1792;
 			_la = this._input.LA(1);
-			if(!(_la===327 || _la===328)) {
+			if(!(_la===335 || _la===336)) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -8867,7 +9212,7 @@ export default class FlinkSqlParser extends Parser {
 					{
 					this.state = 1793;
 					_la = this._input.LA(1);
-					if(!(_la===321 || _la===322)) {
+					if(!(_la===329 || _la===330)) {
 					this._errHandler.recoverInline(this);
 					}
 					else {
@@ -8995,7 +9340,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1815;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la===306) {
+			while (_la===314) {
 				{
 				{
 				this.state = 1811;
@@ -9039,12 +9384,12 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1825;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===32 || _la===33 || ((((_la - 293)) & ~0x1F) === 0 && ((1 << (_la - 293)) & 3221225473) !== 0) || _la===325) {
+			if (_la===32 || _la===33 || ((((_la - 301)) & ~0x1F) === 0 && ((1 << (_la - 301)) & 3221225473) !== 0) || _la===333) {
 				{
 				this.state = 1822;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===293) {
+				if (_la===301) {
 					{
 					this.state = 1821;
 					this.match(FlinkSqlParser.EQUAL_SYMBOL);
@@ -9125,14 +9470,14 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1836;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 324:
+			case 332:
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1832;
 				this.match(FlinkSqlParser.DIG_LITERAL);
 				}
 				break;
-			case 325:
+			case 333:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1833;
@@ -9147,7 +9492,7 @@ export default class FlinkSqlParser extends Parser {
 				this.booleanLiteral();
 				}
 				break;
-			case 323:
+			case 331:
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1835;
@@ -9187,7 +9532,7 @@ export default class FlinkSqlParser extends Parser {
 				this.match(FlinkSqlParser.AND);
 				}
 				break;
-			case 299:
+			case 307:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1839;
@@ -9203,7 +9548,7 @@ export default class FlinkSqlParser extends Parser {
 				this.match(FlinkSqlParser.OR);
 				}
 				break;
-			case 298:
+			case 306:
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1842;
@@ -9330,7 +9675,7 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1869;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 295:
+			case 303:
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1862;
@@ -9339,7 +9684,7 @@ export default class FlinkSqlParser extends Parser {
 				this.match(FlinkSqlParser.LESS_SYMBOL);
 				}
 				break;
-			case 294:
+			case 302:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1864;
@@ -9348,21 +9693,21 @@ export default class FlinkSqlParser extends Parser {
 				this.match(FlinkSqlParser.GREATER_SYMBOL);
 				}
 				break;
-			case 299:
+			case 307:
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 1866;
 				this.match(FlinkSqlParser.BIT_AND_OP);
 				}
 				break;
-			case 300:
+			case 308:
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1867;
 				this.match(FlinkSqlParser.BIT_XOR_OP);
 				}
 				break;
-			case 298:
+			case 306:
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 1868;
@@ -9397,7 +9742,7 @@ export default class FlinkSqlParser extends Parser {
 			{
 			this.state = 1871;
 			_la = this._input.LA(1);
-			if(!(_la===132 || ((((_la - 313)) & ~0x1F) === 0 && ((1 << (_la - 313)) & 221) !== 0))) {
+			if(!(_la===132 || ((((_la - 321)) & ~0x1F) === 0 && ((1 << (_la - 321)) & 221) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -9430,7 +9775,7 @@ export default class FlinkSqlParser extends Parser {
 			{
 			this.state = 1873;
 			_la = this._input.LA(1);
-			if(!(_la===25 || ((((_la - 296)) & ~0x1F) === 0 && ((1 << (_la - 296)) & 1572867) !== 0))) {
+			if(!(_la===25 || ((((_la - 304)) & ~0x1F) === 0 && ((1 << (_la - 304)) & 1572867) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -9487,14 +9832,14 @@ export default class FlinkSqlParser extends Parser {
 			this.state = 1889;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 323:
+			case 331:
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1877;
 				this.stringLiteral();
 				}
 				break;
-			case 324:
+			case 332:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1878;
@@ -9508,7 +9853,7 @@ export default class FlinkSqlParser extends Parser {
 				this.interval();
 				}
 				break;
-			case 315:
+			case 323:
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1880;
@@ -9525,14 +9870,14 @@ export default class FlinkSqlParser extends Parser {
 				this.booleanLiteral();
 				}
 				break;
-			case 325:
+			case 333:
 				this.enterOuterAlt(localctx, 6);
 				{
 				this.state = 1883;
 				this.match(FlinkSqlParser.REAL_LITERAL);
 				}
 				break;
-			case 326:
+			case 334:
 				this.enterOuterAlt(localctx, 7);
 				{
 				this.state = 1884;
@@ -9540,7 +9885,7 @@ export default class FlinkSqlParser extends Parser {
 				}
 				break;
 			case 25:
-			case 291:
+			case 299:
 				this.enterOuterAlt(localctx, 8);
 				{
 				this.state = 1886;
@@ -9701,7 +10046,7 @@ export default class FlinkSqlParser extends Parser {
 			{
 			this.state = 1899;
 			_la = this._input.LA(1);
-			if(!(((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 1978716033) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4294709249) !== 0) || ((((_la - 72)) & ~0x1F) === 0 && ((1 << (_la - 72)) & 3418108729) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 4280287177) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4294967167) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 4294836223) !== 0) || ((((_la - 200)) & ~0x1F) === 0 && ((1 << (_la - 200)) & 4294959087) !== 0) || ((((_la - 232)) & ~0x1F) === 0 && ((1 << (_la - 232)) & 476053943) !== 0) || ((((_la - 265)) & ~0x1F) === 0 && ((1 << (_la - 265)) & 266320383) !== 0))) {
+			if(!(((((_la - 6)) & ~0x1F) === 0 && ((1 << (_la - 6)) & 1978716033) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 4294709249) !== 0) || ((((_la - 72)) & ~0x1F) === 0 && ((1 << (_la - 72)) & 3418108729) !== 0) || ((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & 4280287177) !== 0) || ((((_la - 136)) & ~0x1F) === 0 && ((1 << (_la - 136)) & 4294967167) !== 0) || ((((_la - 168)) & ~0x1F) === 0 && ((1 << (_la - 168)) & 4294836223) !== 0) || ((((_la - 200)) & ~0x1F) === 0 && ((1 << (_la - 200)) & 4294959087) !== 0) || ((((_la - 232)) & ~0x1F) === 0 && ((1 << (_la - 232)) & 241172919) !== 0) || ((((_la - 273)) & ~0x1F) === 0 && ((1 << (_la - 273)) & 266320383) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -9767,7 +10112,7 @@ export default class FlinkSqlParser extends Parser {
 			{
 			this.state = 1903;
 			_la = this._input.LA(1);
-			if(!(((((_la - 4)) & ~0x1F) === 0 && ((1 << (_la - 4)) & 4294967295) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & 4294052223) !== 0) || ((((_la - 68)) & ~0x1F) === 0 && ((1 << (_la - 68)) & 4291015671) !== 0) || ((((_la - 102)) & ~0x1F) === 0 && ((1 << (_la - 102)) & 4294967175) !== 0) || ((((_la - 134)) & ~0x1F) === 0 && ((1 << (_la - 134)) & 4294966783) !== 0) || ((((_la - 166)) & ~0x1F) === 0 && ((1 << (_la - 166)) & 4294965247) !== 0) || ((((_la - 198)) & ~0x1F) === 0 && ((1 << (_la - 198)) & 4261380095) !== 0) || ((((_la - 230)) & ~0x1F) === 0 && ((1 << (_la - 230)) & 1971324639) !== 0) || ((((_la - 265)) & ~0x1F) === 0 && ((1 << (_la - 265)) & 266320383) !== 0))) {
+			if(!(((((_la - 4)) & ~0x1F) === 0 && ((1 << (_la - 4)) & 4294967295) !== 0) || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & 4294052223) !== 0) || ((((_la - 68)) & ~0x1F) === 0 && ((1 << (_la - 68)) & 4291015671) !== 0) || ((((_la - 102)) & ~0x1F) === 0 && ((1 << (_la - 102)) & 4294967175) !== 0) || ((((_la - 134)) & ~0x1F) === 0 && ((1 << (_la - 134)) & 4294966783) !== 0) || ((((_la - 166)) & ~0x1F) === 0 && ((1 << (_la - 166)) & 4294965247) !== 0) || ((((_la - 198)) & ~0x1F) === 0 && ((1 << (_la - 198)) & 4261380095) !== 0) || ((((_la - 230)) & ~0x1F) === 0 && ((1 << (_la - 230)) & 1031800543) !== 0) || ((((_la - 273)) & ~0x1F) === 0 && ((1 << (_la - 273)) & 266320383) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -9816,9 +10161,9 @@ export default class FlinkSqlParser extends Parser {
 	private tableExpression_sempred(localctx: TableExpressionContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 1:
-			return this.precpred(this._ctx, 1);
+			return this.precpred(this._ctx, 3);
 		case 2:
-			return this.precpred(this._ctx, 2);
+			return this.precpred(this._ctx, 4);
 		}
 		return true;
 	}
@@ -14646,6 +14991,12 @@ export class TableExpressionContext extends ParserRuleContext {
 	public COMMA(i: number): TerminalNode {
 		return this.getToken(FlinkSqlParser.COMMA, i);
 	}
+	public inlineDataValueClause(): InlineDataValueClauseContext {
+		return this.getTypedRuleContext(InlineDataValueClauseContext, 0) as InlineDataValueClauseContext;
+	}
+	public windoTVFClause(): WindoTVFClauseContext {
+		return this.getTypedRuleContext(WindoTVFClauseContext, 0) as WindoTVFClauseContext;
+	}
 	public tableExpression_list(): TableExpressionContext[] {
 		return this.getTypedRuleContexts(TableExpressionContext) as TableExpressionContext[];
 	}
@@ -14919,6 +15270,355 @@ export class DateTimeExpressionContext extends ParserRuleContext {
 	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
 		if (visitor.visitDateTimeExpression) {
 			return visitor.visitDateTimeExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class InlineDataValueClauseContext extends ParserRuleContext {
+	constructor(parser?: FlinkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public LR_BRACKET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
+	}
+	public valuesDefinition(): ValuesDefinitionContext {
+		return this.getTypedRuleContext(ValuesDefinitionContext, 0) as ValuesDefinitionContext;
+	}
+	public RR_BRACKET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
+	}
+	public tableAlias(): TableAliasContext {
+		return this.getTypedRuleContext(TableAliasContext, 0) as TableAliasContext;
+	}
+    public get ruleIndex(): number {
+    	return FlinkSqlParser.RULE_inlineDataValueClause;
+	}
+	public enterRule(listener: FlinkSqlParserListener): void {
+	    if(listener.enterInlineDataValueClause) {
+	 		listener.enterInlineDataValueClause(this);
+		}
+	}
+	public exitRule(listener: FlinkSqlParserListener): void {
+	    if(listener.exitInlineDataValueClause) {
+	 		listener.exitInlineDataValueClause(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
+		if (visitor.visitInlineDataValueClause) {
+			return visitor.visitInlineDataValueClause(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class WindoTVFClauseContext extends ParserRuleContext {
+	constructor(parser?: FlinkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public TABLE(): TerminalNode {
+		return this.getToken(FlinkSqlParser.TABLE, 0);
+	}
+	public LR_BRACKET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
+	}
+	public windowTVFExression(): WindowTVFExressionContext {
+		return this.getTypedRuleContext(WindowTVFExressionContext, 0) as WindowTVFExressionContext;
+	}
+	public RR_BRACKET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
+	}
+    public get ruleIndex(): number {
+    	return FlinkSqlParser.RULE_windoTVFClause;
+	}
+	public enterRule(listener: FlinkSqlParserListener): void {
+	    if(listener.enterWindoTVFClause) {
+	 		listener.enterWindoTVFClause(this);
+		}
+	}
+	public exitRule(listener: FlinkSqlParserListener): void {
+	    if(listener.exitWindoTVFClause) {
+	 		listener.exitWindoTVFClause(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
+		if (visitor.visitWindoTVFClause) {
+			return visitor.visitWindoTVFClause(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class WindowTVFExressionContext extends ParserRuleContext {
+	constructor(parser?: FlinkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public windoTVFName(): WindoTVFNameContext {
+		return this.getTypedRuleContext(WindoTVFNameContext, 0) as WindoTVFNameContext;
+	}
+	public LR_BRACKET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
+	}
+	public windowTVFParam_list(): WindowTVFParamContext[] {
+		return this.getTypedRuleContexts(WindowTVFParamContext) as WindowTVFParamContext[];
+	}
+	public windowTVFParam(i: number): WindowTVFParamContext {
+		return this.getTypedRuleContext(WindowTVFParamContext, i) as WindowTVFParamContext;
+	}
+	public RR_BRACKET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
+	}
+	public COMMA_list(): TerminalNode[] {
+	    	return this.getTokens(FlinkSqlParser.COMMA);
+	}
+	public COMMA(i: number): TerminalNode {
+		return this.getToken(FlinkSqlParser.COMMA, i);
+	}
+    public get ruleIndex(): number {
+    	return FlinkSqlParser.RULE_windowTVFExression;
+	}
+	public enterRule(listener: FlinkSqlParserListener): void {
+	    if(listener.enterWindowTVFExression) {
+	 		listener.enterWindowTVFExression(this);
+		}
+	}
+	public exitRule(listener: FlinkSqlParserListener): void {
+	    if(listener.exitWindowTVFExression) {
+	 		listener.exitWindowTVFExression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
+		if (visitor.visitWindowTVFExression) {
+			return visitor.visitWindowTVFExression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class WindoTVFNameContext extends ParserRuleContext {
+	constructor(parser?: FlinkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public TUMBLE(): TerminalNode {
+		return this.getToken(FlinkSqlParser.TUMBLE, 0);
+	}
+	public HOP(): TerminalNode {
+		return this.getToken(FlinkSqlParser.HOP, 0);
+	}
+	public CUMULATE(): TerminalNode {
+		return this.getToken(FlinkSqlParser.CUMULATE, 0);
+	}
+    public get ruleIndex(): number {
+    	return FlinkSqlParser.RULE_windoTVFName;
+	}
+	public enterRule(listener: FlinkSqlParserListener): void {
+	    if(listener.enterWindoTVFName) {
+	 		listener.enterWindoTVFName(this);
+		}
+	}
+	public exitRule(listener: FlinkSqlParserListener): void {
+	    if(listener.exitWindoTVFName) {
+	 		listener.exitWindoTVFName(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
+		if (visitor.visitWindoTVFName) {
+			return visitor.visitWindoTVFName(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class WindowTVFParamContext extends ParserRuleContext {
+	constructor(parser?: FlinkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public TABLE(): TerminalNode {
+		return this.getToken(FlinkSqlParser.TABLE, 0);
+	}
+	public uid(): UidContext {
+		return this.getTypedRuleContext(UidContext, 0) as UidContext;
+	}
+	public columnDescriptor(): ColumnDescriptorContext {
+		return this.getTypedRuleContext(ColumnDescriptorContext, 0) as ColumnDescriptorContext;
+	}
+	public timeInervalExpression(): TimeInervalExpressionContext {
+		return this.getTypedRuleContext(TimeInervalExpressionContext, 0) as TimeInervalExpressionContext;
+	}
+	public DATA(): TerminalNode {
+		return this.getToken(FlinkSqlParser.DATA, 0);
+	}
+	public DOUBLE_ARROW(): TerminalNode {
+		return this.getToken(FlinkSqlParser.DOUBLE_ARROW, 0);
+	}
+	public TIMECOL(): TerminalNode {
+		return this.getToken(FlinkSqlParser.TIMECOL, 0);
+	}
+	public timeIntervalParamName(): TimeIntervalParamNameContext {
+		return this.getTypedRuleContext(TimeIntervalParamNameContext, 0) as TimeIntervalParamNameContext;
+	}
+    public get ruleIndex(): number {
+    	return FlinkSqlParser.RULE_windowTVFParam;
+	}
+	public enterRule(listener: FlinkSqlParserListener): void {
+	    if(listener.enterWindowTVFParam) {
+	 		listener.enterWindowTVFParam(this);
+		}
+	}
+	public exitRule(listener: FlinkSqlParserListener): void {
+	    if(listener.exitWindowTVFParam) {
+	 		listener.exitWindowTVFParam(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
+		if (visitor.visitWindowTVFParam) {
+			return visitor.visitWindowTVFParam(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class TimeIntervalParamNameContext extends ParserRuleContext {
+	constructor(parser?: FlinkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public DATA(): TerminalNode {
+		return this.getToken(FlinkSqlParser.DATA, 0);
+	}
+	public TIMECOL(): TerminalNode {
+		return this.getToken(FlinkSqlParser.TIMECOL, 0);
+	}
+	public SIZE(): TerminalNode {
+		return this.getToken(FlinkSqlParser.SIZE, 0);
+	}
+	public OFFSET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.OFFSET, 0);
+	}
+	public STEP(): TerminalNode {
+		return this.getToken(FlinkSqlParser.STEP, 0);
+	}
+	public SLIDE(): TerminalNode {
+		return this.getToken(FlinkSqlParser.SLIDE, 0);
+	}
+    public get ruleIndex(): number {
+    	return FlinkSqlParser.RULE_timeIntervalParamName;
+	}
+	public enterRule(listener: FlinkSqlParserListener): void {
+	    if(listener.enterTimeIntervalParamName) {
+	 		listener.enterTimeIntervalParamName(this);
+		}
+	}
+	public exitRule(listener: FlinkSqlParserListener): void {
+	    if(listener.exitTimeIntervalParamName) {
+	 		listener.exitTimeIntervalParamName(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
+		if (visitor.visitTimeIntervalParamName) {
+			return visitor.visitTimeIntervalParamName(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class TimeInervalExpressionContext extends ParserRuleContext {
+	constructor(parser?: FlinkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public INTERVAL(): TerminalNode {
+		return this.getToken(FlinkSqlParser.INTERVAL, 0);
+	}
+	public STRING_LITERAL(): TerminalNode {
+		return this.getToken(FlinkSqlParser.STRING_LITERAL, 0);
+	}
+	public ID_LITERAL(): TerminalNode {
+		return this.getToken(FlinkSqlParser.ID_LITERAL, 0);
+	}
+    public get ruleIndex(): number {
+    	return FlinkSqlParser.RULE_timeInervalExpression;
+	}
+	public enterRule(listener: FlinkSqlParserListener): void {
+	    if(listener.enterTimeInervalExpression) {
+	 		listener.enterTimeInervalExpression(this);
+		}
+	}
+	public exitRule(listener: FlinkSqlParserListener): void {
+	    if(listener.exitTimeInervalExpression) {
+	 		listener.exitTimeInervalExpression(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
+		if (visitor.visitTimeInervalExpression) {
+			return visitor.visitTimeInervalExpression(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class ColumnDescriptorContext extends ParserRuleContext {
+	constructor(parser?: FlinkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public DESCRIPTOR(): TerminalNode {
+		return this.getToken(FlinkSqlParser.DESCRIPTOR, 0);
+	}
+	public LR_BRACKET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.LR_BRACKET, 0);
+	}
+	public uid(): UidContext {
+		return this.getTypedRuleContext(UidContext, 0) as UidContext;
+	}
+	public RR_BRACKET(): TerminalNode {
+		return this.getToken(FlinkSqlParser.RR_BRACKET, 0);
+	}
+    public get ruleIndex(): number {
+    	return FlinkSqlParser.RULE_columnDescriptor;
+	}
+	public enterRule(listener: FlinkSqlParserListener): void {
+	    if(listener.enterColumnDescriptor) {
+	 		listener.enterColumnDescriptor(this);
+		}
+	}
+	public exitRule(listener: FlinkSqlParserListener): void {
+	    if(listener.exitColumnDescriptor) {
+	 		listener.exitColumnDescriptor(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result {
+		if (visitor.visitColumnDescriptor) {
+			return visitor.visitColumnDescriptor(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
