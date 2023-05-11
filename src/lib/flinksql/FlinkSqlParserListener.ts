@@ -1,4 +1,4 @@
-// Generated from /Users/zhenglin/Documents/parser/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeListener} from "antlr4";
 
@@ -64,6 +64,10 @@ import { JarFileNameContext } from "./FlinkSqlParser";
 import { AlterTableContext } from "./FlinkSqlParser";
 import { RenameDefinitionContext } from "./FlinkSqlParser";
 import { SetKeyValueDefinitionContext } from "./FlinkSqlParser";
+import { AddConstraintContext } from "./FlinkSqlParser";
+import { DropConstraintContext } from "./FlinkSqlParser";
+import { AddUniqueContext } from "./FlinkSqlParser";
+import { NotForcedContext } from "./FlinkSqlParser";
 import { AlertViewContext } from "./FlinkSqlParser";
 import { AlterDatabaseContext } from "./FlinkSqlParser";
 import { AlterFunctionContext } from "./FlinkSqlParser";
@@ -801,6 +805,46 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitSetKeyValueDefinition?: (ctx: SetKeyValueDefinitionContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.addConstraint`.
+	 * @param ctx the parse tree
+	 */
+	enterAddConstraint?: (ctx: AddConstraintContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.addConstraint`.
+	 * @param ctx the parse tree
+	 */
+	exitAddConstraint?: (ctx: AddConstraintContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.dropConstraint`.
+	 * @param ctx the parse tree
+	 */
+	enterDropConstraint?: (ctx: DropConstraintContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.dropConstraint`.
+	 * @param ctx the parse tree
+	 */
+	exitDropConstraint?: (ctx: DropConstraintContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.addUnique`.
+	 * @param ctx the parse tree
+	 */
+	enterAddUnique?: (ctx: AddUniqueContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.addUnique`.
+	 * @param ctx the parse tree
+	 */
+	exitAddUnique?: (ctx: AddUniqueContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.notForced`.
+	 * @param ctx the parse tree
+	 */
+	enterNotForced?: (ctx: NotForcedContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.notForced`.
+	 * @param ctx the parse tree
+	 */
+	exitNotForced?: (ctx: NotForcedContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.alertView`.
 	 * @param ctx the parse tree
