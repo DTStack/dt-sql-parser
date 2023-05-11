@@ -1,4 +1,4 @@
-// dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/mortalYoung/Projects/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeVisitor} from 'antlr4';
 
@@ -75,7 +75,6 @@ import { DropFunctionContext } from "./FlinkSqlParser";
 import { InsertStatementContext } from "./FlinkSqlParser";
 import { InsertSimpleStatementContext } from "./FlinkSqlParser";
 import { InsertPartitionDefinitionContext } from "./FlinkSqlParser";
-import { InsertColumnListDefinitionContext } from "./FlinkSqlParser";
 import { ValuesDefinitionContext } from "./FlinkSqlParser";
 import { ValuesRowDefinitionContext } from "./FlinkSqlParser";
 import { InsertMulStatementCompatibilityContext } from "./FlinkSqlParser";
@@ -626,12 +625,6 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitInsertPartitionDefinition?: (ctx: InsertPartitionDefinitionContext) => Result;
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.insertColumnListDefinition`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitInsertColumnListDefinition?: (ctx: InsertColumnListDefinitionContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.valuesDefinition`.
 	 * @param ctx the parse tree

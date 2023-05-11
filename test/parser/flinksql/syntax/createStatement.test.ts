@@ -1,43 +1,58 @@
-import FlinkSQL from "../../../../src/parser/flinksql";
+import FlinkSQL from '../../../../src/parser/flinksql';
+import fs from 'fs';
+import path from 'path';
 
-describe('FlinkSQL Create Table Syntax Tests', () => {
-    const parser = new FlinkSQL();
-    // Create statements
-    test('Test Create Catalog Statement', () => {
-        const sql = `
-            CREATE CATALOG c1
-            WITH (
-                'key1'='value1',
-                'key2'='value2'
-            )
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+const parser = new FlinkSQL();
+
+const readSQL = (fileName: string) =>
+    fs
+        .readFileSync(path.join(__dirname, 'fixtures', fileName), 'utf-8')
+        .split(';')
+        .filter(Boolean)
+        .map((i) => i.trim());
+
+const features = {
+    table: readSQL('createTable.sql'),
+    catalog: readSQL('createCatalog.sql'),
+    database: readSQL('createDatabase.sql'),
+    view: readSQL('createView.sql'),
+    function: readSQL('createFunction.sql'),
+};
+
+describe('FlinkSQL Create Syntax Tests', () => {
+    describe('CREATE TABLE', () => {
+        features.table.forEach((table) => {
+            it(table, () => {
+                expect(parser.validate(table).length).toBe(0);
+            });
+        });
     });
-    test('Test simple Create Database Statement', () => {
-        const sql = `
-            CREATE DATABASE IF NOT EXISTS dataApi
-            WITH ( 
-                "owner" = "admin"
-            );
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+    describe('CREATE CATALOG', () => {
+        features.catalog.forEach((catalog) => {
+            it(catalog, () => {
+                expect(parser.validate(catalog).length).toBe(0);
+            });
+        });
     });
-    test('Test simple Create View Statement', () => {
-        const sql = `
-            CREATE TEMPORARY VIEW IF NOT EXISTS tempView
-            AS SELECT product, amount FROM Orders;
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+    describe('CREATE DATABASE', () => {
+        features.database.forEach((database) => {
+            it(database, () => {
+                expect(parser.validate(database).length).toBe(0);
+            });
+        });
     });
-    test('Test simple Create Function Statement', () => {
-        const sql = `
-            CREATE FUNCTION IF NOT EXISTS tempFunction AS 'SimpleUdf';
-            CREATE TEMPORARY FUNCTION function1 AS 'org.apache.fink.function.function1' LANGUAGE JAVA USING JAR 'file:///path/to/test.jar', JAR 'hdfs:///path/to/test2.jar';
-        `;
-        const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+    describe('CREATE VIEW', () => {
+        features.view.forEach((view) => {
+            it(view, () => {
+                expect(parser.validate(view).length).toBe(0);
+            });
+        });
+    });
+    describe('CREATE FUNCTION', () => {
+        features.function.forEach((func) => {
+            it(func, () => {
+                expect(parser.validate(func).length).toBe(0);
+            });
+        });
     });
 });

@@ -138,15 +138,16 @@ columnName
     ;
 
 columnNameList
-    : columnName (',' columnName)*
+    : LR_BRACKET columnName (',' columnName)* RR_BRACKET
     ;
 
 columnType
     : typeName=(DATE | BOOLEAN | NULL)
     | typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
         | TINYINT | SMALLINT | INT | INTEGER | BIGINT
-        | TIME | TIMESTAMP | TIMESTAMP_LTZ | DATETIME
+        | TIME | TIMESTAMP_LTZ | DATETIME
     ) lengthOneDimension?
+    | typeName=TIMESTAMP lengthOneDimension? ((WITHOUT | WITH) LOCAL? TIME ZONE)?
     | typeName=(DECIMAL | DEC | NUMERIC | FLOAT | DOUBLE) lengthTwoOptionalDimension?
     | type=(ARRAY | MULTISET) lengthOneTypeDimension?
     | type=MAP mapTypeDimension?
@@ -179,7 +180,7 @@ rowTypeDimension
     ;
 
 columnConstraint
-    :(CONSTRAINT constraintName)? PRIMARY KEY (NOT ENFORCED)?
+    :(CONSTRAINT constraintName)? PRIMARY KEY NOT ENFORCED
     ;
 
 commentSpec
@@ -208,7 +209,7 @@ watermarkDefinition
     ;
 
 tableConstraint
-    : (CONSTRAINT constraintName)? PRIMARY KEY '(' columnNameList ')' (NOT ENFORCED)?
+    : (CONSTRAINT constraintName)? PRIMARY KEY columnNameList NOT ENFORCED
     ;
 
 constraintName
@@ -247,8 +248,8 @@ sourceTable
     ;
 
 likeOption
-    : (INCLUDING | EXCLUDING) (ALL | CONSTRAINTS | PARTITIONS)
-    | (INCLUDING | EXCLUDING | OVERWRITING) (GENERATED | OPTIONS | WATERMARKS)
+    : ((INCLUDING | EXCLUDING) (ALL | CONSTRAINTS | PARTITIONS))
+    | ((INCLUDING | EXCLUDING | OVERWRITING) (GENERATED | OPTIONS | WATERMARKS))
     ;
 
 createCatalog
@@ -334,17 +335,13 @@ insertStatement
 insertSimpleStatement
     : INSERT (INTO | OVERWRITE) uid
     (
-        insertPartitionDefinition? insertColumnListDefinition? queryStatement
+        insertPartitionDefinition? columnNameList? queryStatement
         | valuesDefinition
     )
     ;
 
 insertPartitionDefinition
     : PARTITION tablePropertyList
-    ;
-
-insertColumnListDefinition
-    : LR_BRACKET columnNameList RR_BRACKET
     ;
 
 valuesDefinition
