@@ -279,15 +279,31 @@ jarFileName
 // Alter statements
 
 alterTable
-    : ALTER TABLE uid (renameDefinition | setKeyValueDefinition)
+    : ALTER TABLE ifExists? uid (renameDefinition | setKeyValueDefinition | addConstraint | dropConstraint | addUnique)
     ;
 
 renameDefinition
-    : RENAME TO uid
+    : RENAME uid? TO uid
     ;
 
 setKeyValueDefinition
     : SET tablePropertyList
+    ;
+
+addConstraint
+    : ADD CONSTRAINT constraintName PRIMARY KEY columnNameList notForced?
+    ;
+
+dropConstraint
+    : DROP CONSTRAINT constraintName
+    ;
+
+addUnique
+    : ADD UNIQUE columnNameList
+    ;
+
+notForced
+    : NOT ENFORCED
     ;
 
 alertView
