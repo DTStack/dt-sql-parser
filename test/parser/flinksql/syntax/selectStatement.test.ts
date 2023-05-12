@@ -6,7 +6,8 @@ const parser = new FlinkSQL();
 const features = {
     base: readSQL(__dirname, "select.sql"),
     distinct: readSQL(__dirname, "selectDistinct.sql"),
-    windowTVF: readSQL(__dirname, "selectWindowTVF.sql")
+    windowTVF: readSQL(__dirname, "selectWindowTVF.sql"),
+    aggregation: readSQL(__dirname, "selectAggregation.sql")
 };
 
 describe("FlinkSQL Query Statement Tests", () => {
@@ -35,7 +36,7 @@ describe("FlinkSQL Query Statement Tests", () => {
     })
 
     describe("Select Aggregation", () => {
-        features.windowTVF.forEach((sql) => {
+        features.aggregation.forEach((sql) => {
             it(sql, () => {
                 expect(parser.validate(sql).length).toBe(0);
             });
