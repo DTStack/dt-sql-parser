@@ -33,4 +33,12 @@ describe("FlinkSQL Query Statement Tests", () => {
             });
         })
     })
+
+    describe("Select Aggregation", () => {
+        features.windowTVF.forEach((sql) => {
+            it(sql, () => {
+                expect(parser.validate(sql).length).toBe(0);
+            });
+        })
+    })
 });

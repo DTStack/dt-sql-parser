@@ -23,17 +23,19 @@ SELECT * FROM TABLE(
 
 SELECT * FROM TABLE(
     HOP(
-      DATA => TABLE Bid,
-      TIMECOL => DESCRIPTOR(bidtime),
-      SLIDE => INTERVAL '5' MINUTES,
-      SIZE => INTERVAL '10' MINUTES));
+        DATA => TABLE Bid,
+        TIMECOL => DESCRIPTOR(bidtime),
+        SLIDE => INTERVAL '5' MINUTES,
+        SIZE => INTERVAL '10' MINUTES
+    )
+);
 
 SELECT * FROM TABLE(
     CUMULATE(
-      DATA => TABLE Bid,
-      TIMECOL => DESCRIPTOR(bidtime),
-      STEP => INTERVAL '2' MINUTES,
-      SIZE => INTERVAL '10' MINUTES
+        DATA => TABLE Bid,
+        TIMECOL => DESCRIPTOR(bidtime),
+        STEP => INTERVAL '2' MINUTES,
+        SIZE => INTERVAL '10' MINUTES
     )
 );
 
