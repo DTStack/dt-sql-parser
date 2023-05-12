@@ -62,29 +62,16 @@ jobs:
                   path: node_modules
                   key: node_modules-${{ hashFiles('**/package-temp-dir/yarn.lock') }}
              
-            - name: Test utils
-              run: npx jest test/utils
-            - name: Test FLinkSQL
-              run: npx jest test/parser/flinksql
-            - name: Test SparkSQL
-              run: npx jest test/parser/spark
-            - name: Test GenericSQL
-              run: npx jest test/parser/generic
-              env:
-                NODE_OPTIONS: "--max_old_space_size=4096"
-            - name: Test HiveSQL
-              run: npx jest test/parser/hive
-            - name: Test PGSQL
-              run: npx jest test/parser/pgsql
-              env:
-                NODE_OPTIONS: "--max_old_space_size=4096"
-              env:
-                NODE_OPTIONS: "--max_old_space_size=4096"
-            - name: Test PLSQL
-              run: npx jest test/parser/plsql
-              env:
-                NODE_OPTIONS: "--max_old_space_size=4096"
-
+            - name: Run Units Test
+              run: |
+                export NODE_OPTIONS="--max_old_space_size=4096"
+                npx jest test/utils
+                npx jest test/parser/flinksql
+                npx jest test/parser/spark
+                npx jest test/parser/generic
+                npx jest test/parser/hive
+                npx jest test/parser/pgsql
+                npx jest test/parser/plsql
     build:
         runs-on: ubuntu-latest
         needs: [setup]
