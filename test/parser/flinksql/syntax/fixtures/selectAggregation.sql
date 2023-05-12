@@ -88,3 +88,9 @@ SELECT
 GROUP BY
   SESSION(order_time, INTERVAL '1' DAY),
   user;
+
+-- Having
+SELECT SUM(amount)
+FROM Orders
+GROUP BY users
+HAVING SUM(amount) > 50;
