@@ -44,7 +44,6 @@ export default abstract class BasicParser {
         parser.addErrorListener(new ParserErrorCollector(syntaxErrors));
 
         parser.program();
-
         return lexerError.concat(syntaxErrors);
     }
 

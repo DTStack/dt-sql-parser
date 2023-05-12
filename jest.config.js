@@ -6,7 +6,6 @@
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
-  
 
   // Stop running tests after `n` failures
   // bail: 0,
@@ -85,7 +84,7 @@ module.exports = {
     "ts",
     "tsx",
     "json",
-    "node"
+    "node",
   ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
@@ -154,10 +153,7 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: [
-    "**/__tests__/**/*.[jt]s?(x)",
-    "**/?(*.)+(spec|test).[tj]s?(x)"
-  ],
+  testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[tj]s?(x)"],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -175,17 +171,18 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '\\.[jt]sx?$': ['ts-jest', {
-      tsconfig: {
-        noUnusedLocals: false,
-      }
-    }]
+    "\\.[jt]sx?$": [
+      "ts-jest",
+      {
+        tsconfig: {
+          noUnusedLocals: false,
+        },
+      },
+    ],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  transformIgnorePatterns: [
-    '/node_modules/(?!antlr4)'
-  ],
+  transformIgnorePatterns: ["/node_modules/(?!antlr4)"],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
@@ -198,7 +195,7 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-  moduleNameMapper : {
-    '^antlr4$': '<rootDir>/node_modules/antlr4/src/antlr4/index.web.js',
-  }
+  moduleNameMapper: {
+    "^antlr4$": "<rootDir>/node_modules/antlr4/src/antlr4/index.web.js",
+  },
 };
