@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeVisitor} from 'antlr4';
 
@@ -102,12 +102,17 @@ import { WindowTVFExressionContext } from "./FlinkSqlParser";
 import { WindoTVFNameContext } from "./FlinkSqlParser";
 import { WindowTVFParamContext } from "./FlinkSqlParser";
 import { TimeIntervalParamNameContext } from "./FlinkSqlParser";
-import { TimeInervalExpressionContext } from "./FlinkSqlParser";
 import { ColumnDescriptorContext } from "./FlinkSqlParser";
 import { JoinConditionContext } from "./FlinkSqlParser";
 import { WhereClauseContext } from "./FlinkSqlParser";
 import { GroupByClauseContext } from "./FlinkSqlParser";
 import { GroupItemDefinitionContext } from "./FlinkSqlParser";
+import { GroupingSetsContext } from "./FlinkSqlParser";
+import { GroupingSetsNotaionNameContext } from "./FlinkSqlParser";
+import { GroupWindowFunctionContext } from "./FlinkSqlParser";
+import { GroupWindowFunctionNameContext } from "./FlinkSqlParser";
+import { TimeAttrColumnContext } from "./FlinkSqlParser";
+import { TimeInervalExpressionContext } from "./FlinkSqlParser";
 import { HavingClauseContext } from "./FlinkSqlParser";
 import { OrderByCaluseContext } from "./FlinkSqlParser";
 import { OrderItemDefitionContext } from "./FlinkSqlParser";
@@ -799,12 +804,6 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitTimeIntervalParamName?: (ctx: TimeIntervalParamNameContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.timeInervalExpression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTimeInervalExpression?: (ctx: TimeInervalExpressionContext) => Result;
-	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.columnDescriptor`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -834,6 +833,42 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitGroupItemDefinition?: (ctx: GroupItemDefinitionContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.groupingSets`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGroupingSets?: (ctx: GroupingSetsContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.groupingSetsNotaionName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGroupingSetsNotaionName?: (ctx: GroupingSetsNotaionNameContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.groupWindowFunction`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGroupWindowFunction?: (ctx: GroupWindowFunctionContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.groupWindowFunctionName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGroupWindowFunctionName?: (ctx: GroupWindowFunctionNameContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.timeAttrColumn`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTimeAttrColumn?: (ctx: TimeAttrColumnContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.timeInervalExpression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTimeInervalExpression?: (ctx: TimeInervalExpressionContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.havingClause`.
 	 * @param ctx the parse tree

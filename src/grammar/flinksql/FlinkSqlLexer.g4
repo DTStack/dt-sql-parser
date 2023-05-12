@@ -282,6 +282,7 @@ SIZE:                         'SIZE';
 OFFSET:                       'OFFSET';
 STEP:                         'STEP';
 SLIDE:                        'SLIDE';
+SESSION:                      'SESSION';
 
 // DATA TYPE Keywords
 

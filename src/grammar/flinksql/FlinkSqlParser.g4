@@ -465,10 +465,10 @@ windoTVFName
 ;
 
 windowTVFParam
-    : TABLE uid
+    : TABLE timeAttrColumn
     | columnDescriptor
     | timeInervalExpression
-    | DATA DOUBLE_ARROW TABLE uid
+    | DATA DOUBLE_ARROW TABLE timeAttrColumn
     | TIMECOL DOUBLE_ARROW columnDescriptor
     | timeIntervalParamName DOUBLE_ARROW timeInervalExpression
     ;
@@ -480,10 +480,6 @@ timeIntervalParamName
     | OFFSET
     | STEP
     | SLIDE
-    ;
-
-timeInervalExpression
-    : INTERVAL STRING_LITERAL ID_LITERAL
     ;
 
 columnDescriptor
@@ -505,11 +501,38 @@ groupByClause
 
 groupItemDefinition
     : expression
+    | groupWindowFunction
     | LR_BRACKET RR_BRACKET
     | LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | CUBE LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | ROLLUP LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | GROUPING SETS LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
+    | groupingSetsNotaionName LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | groupingSets LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
+    ;
+
+groupingSets
+    : GROUPING SETS
+    ;
+
+groupingSetsNotaionName
+    : CUBE
+    | ROLLUP
+    ;
+
+groupWindowFunction
+    : groupWindowFunctionName LR_BRACKET timeAttrColumn COMMA timeInervalExpression RR_BRACKET
+    ;
+
+groupWindowFunctionName
+    : TUMBLE
+    | HOP
+    | SESSION
+    ;
+
+timeAttrColumn
+    : uid
+    ;
+
+timeInervalExpression
+    : INTERVAL STRING_LITERAL ID_LITERAL
     ;
 
 havingClause
