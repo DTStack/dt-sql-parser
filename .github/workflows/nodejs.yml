@@ -1,4 +1,4 @@
-name: Node CI
+name: CI
 
 # Triggers the workflow on push or pull request events but only for the master branch
 on:
@@ -17,6 +17,11 @@ jobs:
         steps:
             - name: checkout
               uses: actions/checkout@v2
+            
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                node-version: ${{ matrix.node-version }}
 
             - name: cache yarn.lock
               uses: actions/cache@v2
@@ -49,7 +54,12 @@ jobs:
         needs: [setup]
         steps:
             - uses: actions/checkout@v2
-
+   
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                node-version: ${{ matrix.node-version }}
+            
             - name: Restore cache from yarn.lock
               uses: actions/cache@v2
               with:
@@ -72,6 +82,11 @@ jobs:
         needs: [setup]
         steps:
             - uses: actions/checkout@v2
+               
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                node-version: ${{ matrix.node-version }}
 
             - name: Restore cache from yarn.lock
               uses: actions/cache@v2
