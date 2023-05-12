@@ -1,4 +1,4 @@
-// Generated from /Users/mortalYoung/Projects/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/zhenglin/Documents/parser/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeVisitor} from 'antlr4';
 
@@ -77,7 +77,6 @@ import { InsertSimpleStatementContext } from "./FlinkSqlParser";
 import { InsertPartitionDefinitionContext } from "./FlinkSqlParser";
 import { ValuesDefinitionContext } from "./FlinkSqlParser";
 import { ValuesRowDefinitionContext } from "./FlinkSqlParser";
-import { InsertMulStatementCompatibilityContext } from "./FlinkSqlParser";
 import { InsertMulStatementContext } from "./FlinkSqlParser";
 import { QueryStatementContext } from "./FlinkSqlParser";
 import { ValuesCaluseContext } from "./FlinkSqlParser";
@@ -637,12 +636,6 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitValuesRowDefinition?: (ctx: ValuesRowDefinitionContext) => Result;
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.insertMulStatementCompatibility`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitInsertMulStatementCompatibility?: (ctx: InsertMulStatementCompatibilityContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.insertMulStatement`.
 	 * @param ctx the parse tree
