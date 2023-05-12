@@ -12,17 +12,12 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-version: [16.x, 18.x]
+                node-version: [18.x]
 
         steps:
             - name: checkout
               uses: actions/checkout@v2
             
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v2
-              with:
-                node-version: ${{ matrix.node-version }}
-
             - name: cache yarn.lock
               uses: actions/cache@v2
               with:
@@ -54,12 +49,7 @@ jobs:
         needs: [setup]
         steps:
             - uses: actions/checkout@v2
-   
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v2
-              with:
-                node-version: ${{ matrix.node-version }}
-            
+          
             - name: Restore cache from yarn.lock
               uses: actions/cache@v2
               with:
@@ -82,11 +72,6 @@ jobs:
         needs: [setup]
         steps:
             - uses: actions/checkout@v2
-               
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v2
-              with:
-                node-version: ${{ matrix.node-version }}
 
             - name: Restore cache from yarn.lock
               uses: actions/cache@v2
