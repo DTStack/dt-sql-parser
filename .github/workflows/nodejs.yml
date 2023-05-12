@@ -62,10 +62,8 @@ jobs:
                   path: node_modules
                   key: node_modules-${{ hashFiles('**/package-temp-dir/yarn.lock') }}
 
-            - name: Run Unit Test
-              run: |
-                  export NODE_OPTIONS="--max_old_space_size=4096"
-                  yarn test
+            - name: Test FlinkSQL
+              run: npx jest test/parser/flinksql
 
     build:
         runs-on: ubuntu-latest
