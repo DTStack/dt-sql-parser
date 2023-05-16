@@ -114,16 +114,25 @@ import { GroupWindowFunctionContext } from "./FlinkSqlParser";
 import { GroupWindowFunctionNameContext } from "./FlinkSqlParser";
 import { TimeAttrColumnContext } from "./FlinkSqlParser";
 import { HavingClauseContext } from "./FlinkSqlParser";
-import { OrderByCaluseContext } from "./FlinkSqlParser";
-import { OrderItemDefitionContext } from "./FlinkSqlParser";
-import { LimitClauseContext } from "./FlinkSqlParser";
 import { WindowClauseContext } from "./FlinkSqlParser";
 import { NamedWindowContext } from "./FlinkSqlParser";
 import { WindowSpecContext } from "./FlinkSqlParser";
-import { SortItemContext } from "./FlinkSqlParser";
+import { MatchRecognizeClauseContext } from "./FlinkSqlParser";
+import { OrderByCaluseContext } from "./FlinkSqlParser";
+import { OrderItemDefitionContext } from "./FlinkSqlParser";
+import { LimitClauseContext } from "./FlinkSqlParser";
+import { PartitionByClauseContext } from "./FlinkSqlParser";
+import { QuantifiersContext } from "./FlinkSqlParser";
+import { MeasuresClauseContext } from "./FlinkSqlParser";
+import { PatternDefinationContext } from "./FlinkSqlParser";
+import { PatternVariableContext } from "./FlinkSqlParser";
+import { OutputModeContext } from "./FlinkSqlParser";
+import { AfterMatchStrategyContext } from "./FlinkSqlParser";
+import { PatternVariablesDefinationContext } from "./FlinkSqlParser";
 import { WindowFrameContext } from "./FlinkSqlParser";
 import { FrameBoundContext } from "./FlinkSqlParser";
-import { TimeInervalExpressionContext } from "./FlinkSqlParser";
+import { WithinClauseContext } from "./FlinkSqlParser";
+import { TimeIntervalExpressionContext } from "./FlinkSqlParser";
 import { ExpressionContext } from "./FlinkSqlParser";
 import { LogicalNotContext } from "./FlinkSqlParser";
 import { PredicatedContext } from "./FlinkSqlParser";
@@ -876,24 +885,6 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitHavingClause?: (ctx: HavingClauseContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.orderByCaluse`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitOrderByCaluse?: (ctx: OrderByCaluseContext) => Result;
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.orderItemDefition`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitOrderItemDefition?: (ctx: OrderItemDefitionContext) => Result;
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.limitClause`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitLimitClause?: (ctx: LimitClauseContext) => Result;
-	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.windowClause`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -912,11 +903,77 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitWindowSpec?: (ctx: WindowSpecContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.sortItem`.
+	 * Visit a parse tree produced by `FlinkSqlParser.matchRecognizeClause`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitSortItem?: (ctx: SortItemContext) => Result;
+	visitMatchRecognizeClause?: (ctx: MatchRecognizeClauseContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.orderByCaluse`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitOrderByCaluse?: (ctx: OrderByCaluseContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.orderItemDefition`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitOrderItemDefition?: (ctx: OrderItemDefitionContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.limitClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitLimitClause?: (ctx: LimitClauseContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.partitionByClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPartitionByClause?: (ctx: PartitionByClauseContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.quantifiers`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQuantifiers?: (ctx: QuantifiersContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.measuresClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMeasuresClause?: (ctx: MeasuresClauseContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.patternDefination`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPatternDefination?: (ctx: PatternDefinationContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.patternVariable`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPatternVariable?: (ctx: PatternVariableContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.outputMode`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitOutputMode?: (ctx: OutputModeContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.afterMatchStrategy`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAfterMatchStrategy?: (ctx: AfterMatchStrategyContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.patternVariablesDefination`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPatternVariablesDefination?: (ctx: PatternVariablesDefinationContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.windowFrame`.
 	 * @param ctx the parse tree
@@ -930,11 +987,17 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitFrameBound?: (ctx: FrameBoundContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.timeInervalExpression`.
+	 * Visit a parse tree produced by `FlinkSqlParser.withinClause`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitTimeInervalExpression?: (ctx: TimeInervalExpressionContext) => Result;
+	visitWithinClause?: (ctx: WithinClauseContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.expression`.
 	 * @param ctx the parse tree

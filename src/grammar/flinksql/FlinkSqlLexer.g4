@@ -283,6 +283,14 @@ OFFSET:                       'OFFSET';
 STEP:                         'STEP';
 SLIDE:                        'SLIDE';
 SESSION:                      'SESSION';
+MATCH_RECOGNIZE:              'MATCH_RECOGNIZE';
+MEASURES:                     'MEASURES';
+PATTERN:                      'PATTERN';
+ONE:                          'ONE';
+PER:                          'PER';
+KW_SKIP:                      'SKIP';
+PAST:                         'PAST';
+DEFINE:                       'DEFINE';
 
 // DATA TYPE Keywords
 
@@ -340,6 +348,8 @@ LS_BRACKET:                          '[';
 RS_BRACKET:                          ']';
 LR_BRACKET:                          '(';
 RR_BRACKET:                          ')';
+LB_BRACKET:                          '{';
+RB_BRACKET:                          '}';
 COMMA:                               ',';
 SEMICOLON:                           ';';
 AT_SIGN:                             '@';
@@ -355,6 +365,7 @@ PENCENT_SIGN:                        '%';
 DOUBLE_VERTICAL_SIGN:                '||';
 DOUBLE_HYPNEN_SIGN:                  '--';
 SLASH_SIGN:                          '/';
+QUESTION_MARK_SIGN:                  '?'; 
 DOT_ID:                              '.' ID_LITERAL_FRAG;
 STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
 DIG_LITERAL:                         DEC_DIGIT+;

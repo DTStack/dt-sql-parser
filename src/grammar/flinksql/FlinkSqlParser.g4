@@ -401,6 +401,7 @@ withItemName
 
 selectStatement
     : selectClause fromClause whereClause? groupByClause? havingClause? windowClause?
+    | selectClause fromClause matchRecognizeClause
     ;
 
 selectClause
@@ -473,10 +474,10 @@ windoTVFName
 windowTVFParam
     : TABLE timeAttrColumn
     | columnDescriptor
-    | timeInervalExpression
+    | timeIntervalExpression
     | DATA DOUBLE_ARROW TABLE timeAttrColumn
     | TIMECOL DOUBLE_ARROW columnDescriptor
-    | timeIntervalParamName DOUBLE_ARROW timeInervalExpression
+    | timeIntervalParamName DOUBLE_ARROW timeIntervalExpression
     ;
 
 timeIntervalParamName
@@ -524,7 +525,7 @@ groupingSetsNotaionName
     ;
 
 groupWindowFunction
-    : groupWindowFunctionName LR_BRACKET timeAttrColumn COMMA timeInervalExpression RR_BRACKET
+    : groupWindowFunctionName LR_BRACKET timeAttrColumn COMMA timeIntervalExpression RR_BRACKET
     ;
 
 groupWindowFunctionName
@@ -541,18 +542,6 @@ havingClause
     : HAVING booleanExpression
     ;
 
-orderByCaluse
-    : ORDER BY orderItemDefition (COMMA orderItemDefition)*
-    ;
-
-orderItemDefition
-    : expression (ASC | DESC)?
-    ;
-
-limitClause
-    : LIMIT (ALL | limit=expression)
-    ;
-
 windowClause
     : WINDOW namedWindow (',' namedWindow)*
     ;
@@ -564,18 +553,84 @@ namedWindow
 windowSpec
     : name=errorCapturingIdentifier?
     LR_BRACKET
-        (PARTITION BY expression (',' expression)*)?
-        (ORDER BY sortItem (',' sortItem)*)?
+        partitionByClause?
+        orderByCaluse?
         windowFrame?
     RR_BRACKET
     ;
 
-sortItem
+matchRecognizeClause
+    : MATCH_RECOGNIZE 
+    LR_BRACKET 
+        partitionByClause?
+        orderByCaluse?
+        measuresClause?
+        outputMode?
+        afterMatchStrategy?
+        patternDefination?
+        patternVariablesDefination
+    RR_BRACKET ( AS? strictIdentifier )?
+    ;
+
+orderByCaluse
+    : ORDER BY orderItemDefition (COMMA orderItemDefition)*
+    ;
+
+orderItemDefition
     : expression ordering=(ASC | DESC)? (NULLS nullOrder=(LAST | FIRST))?
     ;
 
+limitClause
+    : LIMIT (ALL | limit=expression)
+    ;
+
+partitionByClause
+    : PARTITION BY expression (COMMA expression)*
+    ;
+
+quantifiers
+    : (ASTERISK_SIGN)
+    | (ADD_SIGN)
+    | (QUESTION_MARK_SIGN)
+    | (LB_BRACKET DIG_LITERAL COMMA DIG_LITERAL RB_BRACKET)
+    | (LB_BRACKET DIG_LITERAL COMMA  RB_BRACKET)
+    | (LB_BRACKET COMMA DIG_LITERAL RB_BRACKET)
+    ;
+
+measuresClause
+    : MEASURES projectItemDefinition (COMMA projectItemDefinition)*
+    ;
+
+patternDefination
+    : PATTERN 
+    LR_BRACKET
+        patternVariable+
+    RR_BRACKET 
+    withinClause?
+    ;
+
+patternVariable
+    : unquotedIdentifier quantifiers?
+    ;
+
+outputMode
+    : ALL ROWS PER MATCH
+    | ONE ROW PER MATCH
+    ;
+
+afterMatchStrategy
+    : AFTER MATCH KW_SKIP PAST LAST ROW 
+    | AFTER MATCH KW_SKIP TO NEXT ROW
+    | AFTER MATCH KW_SKIP TO LAST unquotedIdentifier
+    | AFTER MATCH KW_SKIP TO FIRST unquotedIdentifier
+    ;
+
+patternVariablesDefination
+    : DEFINE projectItemDefinition (COMMA projectItemDefinition)*
+    ;
+
 windowFrame
-    : RANGE BETWEEN timeInervalExpression frameBound
+    : RANGE BETWEEN timeIntervalExpression frameBound
     | ROWS BETWEEN DIG_LITERAL frameBound
     ;
 
@@ -583,7 +638,11 @@ frameBound
     : PRECEDING AND CURRENT ROW
     ;
 
-timeInervalExpression
+withinClause
+    : WITHIN timeIntervalExpression
+    ;
+
+timeIntervalExpression
     : INTERVAL STRING_LITERAL ID_LITERAL
     ;
 
