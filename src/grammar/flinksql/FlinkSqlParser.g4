@@ -408,7 +408,13 @@ selectClause
     ;
 
 projectItemDefinition
-    : expression (AS? expression)?
+    : overWindowItem
+    | expression (AS? expression)?
+    ;
+
+overWindowItem
+    : primaryExpression OVER windowSpec AS strictIdentifier
+    | primaryExpression OVER errorCapturingIdentifier AS strictIdentifier
     ;
 
 fromClause
@@ -531,10 +537,6 @@ timeAttrColumn
     : uid
     ;
 
-timeInervalExpression
-    : INTERVAL STRING_LITERAL ID_LITERAL
-    ;
-
 havingClause
     : HAVING booleanExpression
     ;
@@ -561,11 +563,11 @@ namedWindow
 
 windowSpec
     : name=errorCapturingIdentifier?
-    '('
-        (ORDER BY sortItem (',' sortItem)*)?
+    LR_BRACKET
         (PARTITION BY expression (',' expression)*)?
+        (ORDER BY sortItem (',' sortItem)*)?
         windowFrame?
-    ')'
+    RR_BRACKET
     ;
 
 sortItem
@@ -573,14 +575,17 @@ sortItem
     ;
 
 windowFrame
-    : RANGE frameBound
-    | ROWS frameBound
+    : RANGE BETWEEN timeInervalExpression frameBound
+    | ROWS BETWEEN DIG_LITERAL frameBound
     ;
 
 frameBound
-    : expression PRECEDING
+    : PRECEDING AND CURRENT ROW
     ;
 
+timeInervalExpression
+    : INTERVAL STRING_LITERAL ID_LITERAL
+    ;
 
 // expression
 
