@@ -1,0 +1,28 @@
+-- UNION
+(SELECT s FROM t1) UNION (SELECT s FROM t2);
+
+(SELECT s FROM t1) UNION ALL (SELECT s FROM t2);
+
+-- INTERSECT
+(SELECT s FROM t1) INTERSECT (SELECT s FROM t2);
+
+(SELECT s FROM t1) INTERSECT ALL (SELECT s FROM t2);
+
+-- EXPECT
+(SELECT s FROM t1) EXCEPT (SELECT s FROM t2);
+
+(SELECT s FROM t1) EXCEPT ALL (SELECT s FROM t2);
+
+-- IN
+SELECT user, amount
+FROM Orders
+WHERE product IN (
+    SELECT product FROM NewProducts
+)
+
+-- EXISTS
+SELECT user, amount
+FROM Orders
+WHERE product EXISTS (
+    SELECT product FROM NewProducts
+)
