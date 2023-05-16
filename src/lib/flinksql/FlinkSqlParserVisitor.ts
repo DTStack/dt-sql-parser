@@ -176,7 +176,6 @@ import { QuotedIdentifierContext } from "./FlinkSqlParser";
 import { WhenClauseContext } from "./FlinkSqlParser";
 import { UidListContext } from "./FlinkSqlParser";
 import { UidContext } from "./FlinkSqlParser";
-import { PlusUidContext } from "./FlinkSqlParser";
 import { WithOptionContext } from "./FlinkSqlParser";
 import { IfNotExistsContext } from "./FlinkSqlParser";
 import { IfExistsContext } from "./FlinkSqlParser";
@@ -1276,12 +1275,6 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitUid?: (ctx: UidContext) => Result;
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.plusUid`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitPlusUid?: (ctx: PlusUidContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.withOption`.
 	 * @param ctx the parse tree

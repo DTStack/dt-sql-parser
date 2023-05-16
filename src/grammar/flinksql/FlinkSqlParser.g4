@@ -134,7 +134,7 @@ physicalColumnDefinition
     ;
 
 columnName
-    : plusUid | expression
+    : uid | expression
     ;
 
 columnNameList
@@ -758,10 +758,6 @@ uidList
 
 uid
     : ID_LITERAL DOT_ID*?
-    ;
-
-plusUid  // 匹配 xxx.$xx xx:xxxx 等字符
-    : (ID_LITERAL | PLUS_ID_LITERAL) (DOT_ID | PLUS_DOT_ID)*?
     ;
 
 withOption
