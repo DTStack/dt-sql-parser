@@ -5,6 +5,7 @@ const parser = new FlinkSQL();
 
 const features = {
     base: readSQL(__dirname, "select.sql"),
+    withClause: readSQL(__dirname, "selectWithClause.sql"),
     distinct: readSQL(__dirname, "selectDistinct.sql"),
     windowTVF: readSQL(__dirname, "selectWindowTVF.sql"),
     aggregation: readSQL(__dirname, "selectAggregation.sql"),
@@ -21,6 +22,15 @@ describe("FlinkSQL Query Statement Tests", () => {
             });
         });
     });
+
+    describe("With Clause Select", () => {
+        features.withClause.forEach((sql) => {
+            it(sql, () => {
+                expect(parser.validate(sql).length).toBe(0);
+            });
+        });
+    });
+
     
     describe("Select DISTINCT", () => {
         features.distinct.forEach((sql) => {
