@@ -7,7 +7,8 @@ const features = {
     base: readSQL(__dirname, "select.sql"),
     distinct: readSQL(__dirname, "selectDistinct.sql"),
     windowTVF: readSQL(__dirname, "selectWindowTVF.sql"),
-    aggregation: readSQL(__dirname, "selectAggregation.sql")
+    aggregation: readSQL(__dirname, "selectAggregation.sql"),
+    join: readSQL(__dirname, "selectJoin.sql")
 };
 
 describe("FlinkSQL Query Statement Tests", () => {
@@ -37,6 +38,14 @@ describe("FlinkSQL Query Statement Tests", () => {
 
     describe("Select Aggregation", () => {
         features.aggregation.forEach((sql) => {
+            it(sql, () => {
+                expect(parser.validate(sql).length).toBe(0);
+            });
+        })
+    })
+
+    describe("Select Join", () => {
+        features.join.forEach((sql) => {
             it(sql, () => {
                 expect(parser.validate(sql).length).toBe(0);
             });
