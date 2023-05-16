@@ -380,7 +380,7 @@ insertMulStatement
 
 queryStatement
     : valuesCaluse
-    | WITH withItem (COMMA withItem)* queryStatement
+    | withClause queryStatement
     | '(' queryStatement ')'
     | left=queryStatement operator=(INTERSECT | UNION | EXCEPT) ALL? right=queryStatement orderByCaluse? limitClause?
     | selectClause orderByCaluse? limitClause?
@@ -389,6 +389,10 @@ queryStatement
 
 valuesCaluse
     : VALUES expression (COMMA expression )*
+    ;
+
+withClause
+    : WITH withItem (COMMA withItem)*
     ;
 
 withItem

@@ -84,6 +84,7 @@ import { ValuesRowDefinitionContext } from "./FlinkSqlParser";
 import { InsertMulStatementContext } from "./FlinkSqlParser";
 import { QueryStatementContext } from "./FlinkSqlParser";
 import { ValuesCaluseContext } from "./FlinkSqlParser";
+import { WithClauseContext } from "./FlinkSqlParser";
 import { WithItemContext } from "./FlinkSqlParser";
 import { WithItemNameContext } from "./FlinkSqlParser";
 import { SelectStatementContext } from "./FlinkSqlParser";
@@ -1027,6 +1028,16 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitValuesCaluse?: (ctx: ValuesCaluseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.withClause`.
+	 * @param ctx the parse tree
+	 */
+	enterWithClause?: (ctx: WithClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.withClause`.
+	 * @param ctx the parse tree
+	 */
+	exitWithClause?: (ctx: WithClauseContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.withItem`.
 	 * @param ctx the parse tree
