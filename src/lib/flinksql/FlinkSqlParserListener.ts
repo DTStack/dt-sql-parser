@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeListener} from "antlr4";
 
@@ -84,11 +84,13 @@ import { ValuesRowDefinitionContext } from "./FlinkSqlParser";
 import { InsertMulStatementContext } from "./FlinkSqlParser";
 import { QueryStatementContext } from "./FlinkSqlParser";
 import { ValuesCaluseContext } from "./FlinkSqlParser";
+import { WithClauseContext } from "./FlinkSqlParser";
 import { WithItemContext } from "./FlinkSqlParser";
 import { WithItemNameContext } from "./FlinkSqlParser";
 import { SelectStatementContext } from "./FlinkSqlParser";
 import { SelectClauseContext } from "./FlinkSqlParser";
 import { ProjectItemDefinitionContext } from "./FlinkSqlParser";
+import { OverWindowItemContext } from "./FlinkSqlParser";
 import { FromClauseContext } from "./FlinkSqlParser";
 import { TableExpressionContext } from "./FlinkSqlParser";
 import { TableReferenceContext } from "./FlinkSqlParser";
@@ -96,20 +98,42 @@ import { TablePrimaryContext } from "./FlinkSqlParser";
 import { TablePathContext } from "./FlinkSqlParser";
 import { SystemTimePeriodContext } from "./FlinkSqlParser";
 import { DateTimeExpressionContext } from "./FlinkSqlParser";
+import { InlineDataValueClauseContext } from "./FlinkSqlParser";
+import { WindoTVFClauseContext } from "./FlinkSqlParser";
+import { WindowTVFExressionContext } from "./FlinkSqlParser";
+import { WindoTVFNameContext } from "./FlinkSqlParser";
+import { WindowTVFParamContext } from "./FlinkSqlParser";
+import { TimeIntervalParamNameContext } from "./FlinkSqlParser";
+import { ColumnDescriptorContext } from "./FlinkSqlParser";
 import { JoinConditionContext } from "./FlinkSqlParser";
 import { WhereClauseContext } from "./FlinkSqlParser";
 import { GroupByClauseContext } from "./FlinkSqlParser";
 import { GroupItemDefinitionContext } from "./FlinkSqlParser";
+import { GroupingSetsContext } from "./FlinkSqlParser";
+import { GroupingSetsNotaionNameContext } from "./FlinkSqlParser";
+import { GroupWindowFunctionContext } from "./FlinkSqlParser";
+import { GroupWindowFunctionNameContext } from "./FlinkSqlParser";
+import { TimeAttrColumnContext } from "./FlinkSqlParser";
 import { HavingClauseContext } from "./FlinkSqlParser";
-import { OrderByCaluseContext } from "./FlinkSqlParser";
-import { OrderItemDefitionContext } from "./FlinkSqlParser";
-import { LimitClauseContext } from "./FlinkSqlParser";
 import { WindowClauseContext } from "./FlinkSqlParser";
 import { NamedWindowContext } from "./FlinkSqlParser";
 import { WindowSpecContext } from "./FlinkSqlParser";
-import { SortItemContext } from "./FlinkSqlParser";
+import { MatchRecognizeClauseContext } from "./FlinkSqlParser";
+import { OrderByCaluseContext } from "./FlinkSqlParser";
+import { OrderItemDefitionContext } from "./FlinkSqlParser";
+import { LimitClauseContext } from "./FlinkSqlParser";
+import { PartitionByClauseContext } from "./FlinkSqlParser";
+import { QuantifiersContext } from "./FlinkSqlParser";
+import { MeasuresClauseContext } from "./FlinkSqlParser";
+import { PatternDefinationContext } from "./FlinkSqlParser";
+import { PatternVariableContext } from "./FlinkSqlParser";
+import { OutputModeContext } from "./FlinkSqlParser";
+import { AfterMatchStrategyContext } from "./FlinkSqlParser";
+import { PatternVariablesDefinationContext } from "./FlinkSqlParser";
 import { WindowFrameContext } from "./FlinkSqlParser";
 import { FrameBoundContext } from "./FlinkSqlParser";
+import { WithinClauseContext } from "./FlinkSqlParser";
+import { TimeIntervalExpressionContext } from "./FlinkSqlParser";
 import { ExpressionContext } from "./FlinkSqlParser";
 import { LogicalNotContext } from "./FlinkSqlParser";
 import { PredicatedContext } from "./FlinkSqlParser";
@@ -162,7 +186,6 @@ import { QuotedIdentifierContext } from "./FlinkSqlParser";
 import { WhenClauseContext } from "./FlinkSqlParser";
 import { UidListContext } from "./FlinkSqlParser";
 import { UidContext } from "./FlinkSqlParser";
-import { PlusUidContext } from "./FlinkSqlParser";
 import { WithOptionContext } from "./FlinkSqlParser";
 import { IfNotExistsContext } from "./FlinkSqlParser";
 import { IfExistsContext } from "./FlinkSqlParser";
@@ -1006,6 +1029,16 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitValuesCaluse?: (ctx: ValuesCaluseContext) => void;
 	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.withClause`.
+	 * @param ctx the parse tree
+	 */
+	enterWithClause?: (ctx: WithClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.withClause`.
+	 * @param ctx the parse tree
+	 */
+	exitWithClause?: (ctx: WithClauseContext) => void;
+	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.withItem`.
 	 * @param ctx the parse tree
 	 */
@@ -1055,6 +1088,16 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitProjectItemDefinition?: (ctx: ProjectItemDefinitionContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.overWindowItem`.
+	 * @param ctx the parse tree
+	 */
+	enterOverWindowItem?: (ctx: OverWindowItemContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.overWindowItem`.
+	 * @param ctx the parse tree
+	 */
+	exitOverWindowItem?: (ctx: OverWindowItemContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.fromClause`.
 	 * @param ctx the parse tree
@@ -1126,6 +1169,76 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitDateTimeExpression?: (ctx: DateTimeExpressionContext) => void;
 	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.inlineDataValueClause`.
+	 * @param ctx the parse tree
+	 */
+	enterInlineDataValueClause?: (ctx: InlineDataValueClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.inlineDataValueClause`.
+	 * @param ctx the parse tree
+	 */
+	exitInlineDataValueClause?: (ctx: InlineDataValueClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.windoTVFClause`.
+	 * @param ctx the parse tree
+	 */
+	enterWindoTVFClause?: (ctx: WindoTVFClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.windoTVFClause`.
+	 * @param ctx the parse tree
+	 */
+	exitWindoTVFClause?: (ctx: WindoTVFClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.windowTVFExression`.
+	 * @param ctx the parse tree
+	 */
+	enterWindowTVFExression?: (ctx: WindowTVFExressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.windowTVFExression`.
+	 * @param ctx the parse tree
+	 */
+	exitWindowTVFExression?: (ctx: WindowTVFExressionContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.windoTVFName`.
+	 * @param ctx the parse tree
+	 */
+	enterWindoTVFName?: (ctx: WindoTVFNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.windoTVFName`.
+	 * @param ctx the parse tree
+	 */
+	exitWindoTVFName?: (ctx: WindoTVFNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.windowTVFParam`.
+	 * @param ctx the parse tree
+	 */
+	enterWindowTVFParam?: (ctx: WindowTVFParamContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.windowTVFParam`.
+	 * @param ctx the parse tree
+	 */
+	exitWindowTVFParam?: (ctx: WindowTVFParamContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.timeIntervalParamName`.
+	 * @param ctx the parse tree
+	 */
+	enterTimeIntervalParamName?: (ctx: TimeIntervalParamNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.timeIntervalParamName`.
+	 * @param ctx the parse tree
+	 */
+	exitTimeIntervalParamName?: (ctx: TimeIntervalParamNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.columnDescriptor`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnDescriptor?: (ctx: ColumnDescriptorContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.columnDescriptor`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnDescriptor?: (ctx: ColumnDescriptorContext) => void;
+	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.joinCondition`.
 	 * @param ctx the parse tree
 	 */
@@ -1166,6 +1279,56 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitGroupItemDefinition?: (ctx: GroupItemDefinitionContext) => void;
 	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.groupingSets`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupingSets?: (ctx: GroupingSetsContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.groupingSets`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupingSets?: (ctx: GroupingSetsContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.groupingSetsNotaionName`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupingSetsNotaionName?: (ctx: GroupingSetsNotaionNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.groupingSetsNotaionName`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupingSetsNotaionName?: (ctx: GroupingSetsNotaionNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.groupWindowFunction`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupWindowFunction?: (ctx: GroupWindowFunctionContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.groupWindowFunction`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupWindowFunction?: (ctx: GroupWindowFunctionContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.groupWindowFunctionName`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupWindowFunctionName?: (ctx: GroupWindowFunctionNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.groupWindowFunctionName`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupWindowFunctionName?: (ctx: GroupWindowFunctionNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.timeAttrColumn`.
+	 * @param ctx the parse tree
+	 */
+	enterTimeAttrColumn?: (ctx: TimeAttrColumnContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.timeAttrColumn`.
+	 * @param ctx the parse tree
+	 */
+	exitTimeAttrColumn?: (ctx: TimeAttrColumnContext) => void;
+	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.havingClause`.
 	 * @param ctx the parse tree
 	 */
@@ -1175,36 +1338,6 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitHavingClause?: (ctx: HavingClauseContext) => void;
-	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.orderByCaluse`.
-	 * @param ctx the parse tree
-	 */
-	enterOrderByCaluse?: (ctx: OrderByCaluseContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.orderByCaluse`.
-	 * @param ctx the parse tree
-	 */
-	exitOrderByCaluse?: (ctx: OrderByCaluseContext) => void;
-	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.orderItemDefition`.
-	 * @param ctx the parse tree
-	 */
-	enterOrderItemDefition?: (ctx: OrderItemDefitionContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.orderItemDefition`.
-	 * @param ctx the parse tree
-	 */
-	exitOrderItemDefition?: (ctx: OrderItemDefitionContext) => void;
-	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.limitClause`.
-	 * @param ctx the parse tree
-	 */
-	enterLimitClause?: (ctx: LimitClauseContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.limitClause`.
-	 * @param ctx the parse tree
-	 */
-	exitLimitClause?: (ctx: LimitClauseContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.windowClause`.
 	 * @param ctx the parse tree
@@ -1236,15 +1369,125 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitWindowSpec?: (ctx: WindowSpecContext) => void;
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.sortItem`.
+	 * Enter a parse tree produced by `FlinkSqlParser.matchRecognizeClause`.
 	 * @param ctx the parse tree
 	 */
-	enterSortItem?: (ctx: SortItemContext) => void;
+	enterMatchRecognizeClause?: (ctx: MatchRecognizeClauseContext) => void;
 	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.sortItem`.
+	 * Exit a parse tree produced by `FlinkSqlParser.matchRecognizeClause`.
 	 * @param ctx the parse tree
 	 */
-	exitSortItem?: (ctx: SortItemContext) => void;
+	exitMatchRecognizeClause?: (ctx: MatchRecognizeClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.orderByCaluse`.
+	 * @param ctx the parse tree
+	 */
+	enterOrderByCaluse?: (ctx: OrderByCaluseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.orderByCaluse`.
+	 * @param ctx the parse tree
+	 */
+	exitOrderByCaluse?: (ctx: OrderByCaluseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.orderItemDefition`.
+	 * @param ctx the parse tree
+	 */
+	enterOrderItemDefition?: (ctx: OrderItemDefitionContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.orderItemDefition`.
+	 * @param ctx the parse tree
+	 */
+	exitOrderItemDefition?: (ctx: OrderItemDefitionContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.limitClause`.
+	 * @param ctx the parse tree
+	 */
+	enterLimitClause?: (ctx: LimitClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.limitClause`.
+	 * @param ctx the parse tree
+	 */
+	exitLimitClause?: (ctx: LimitClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.partitionByClause`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionByClause?: (ctx: PartitionByClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.partitionByClause`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionByClause?: (ctx: PartitionByClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.quantifiers`.
+	 * @param ctx the parse tree
+	 */
+	enterQuantifiers?: (ctx: QuantifiersContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.quantifiers`.
+	 * @param ctx the parse tree
+	 */
+	exitQuantifiers?: (ctx: QuantifiersContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.measuresClause`.
+	 * @param ctx the parse tree
+	 */
+	enterMeasuresClause?: (ctx: MeasuresClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.measuresClause`.
+	 * @param ctx the parse tree
+	 */
+	exitMeasuresClause?: (ctx: MeasuresClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.patternDefination`.
+	 * @param ctx the parse tree
+	 */
+	enterPatternDefination?: (ctx: PatternDefinationContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.patternDefination`.
+	 * @param ctx the parse tree
+	 */
+	exitPatternDefination?: (ctx: PatternDefinationContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.patternVariable`.
+	 * @param ctx the parse tree
+	 */
+	enterPatternVariable?: (ctx: PatternVariableContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.patternVariable`.
+	 * @param ctx the parse tree
+	 */
+	exitPatternVariable?: (ctx: PatternVariableContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.outputMode`.
+	 * @param ctx the parse tree
+	 */
+	enterOutputMode?: (ctx: OutputModeContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.outputMode`.
+	 * @param ctx the parse tree
+	 */
+	exitOutputMode?: (ctx: OutputModeContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.afterMatchStrategy`.
+	 * @param ctx the parse tree
+	 */
+	enterAfterMatchStrategy?: (ctx: AfterMatchStrategyContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.afterMatchStrategy`.
+	 * @param ctx the parse tree
+	 */
+	exitAfterMatchStrategy?: (ctx: AfterMatchStrategyContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.patternVariablesDefination`.
+	 * @param ctx the parse tree
+	 */
+	enterPatternVariablesDefination?: (ctx: PatternVariablesDefinationContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.patternVariablesDefination`.
+	 * @param ctx the parse tree
+	 */
+	exitPatternVariablesDefination?: (ctx: PatternVariablesDefinationContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.windowFrame`.
 	 * @param ctx the parse tree
@@ -1265,6 +1508,26 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFrameBound?: (ctx: FrameBoundContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.withinClause`.
+	 * @param ctx the parse tree
+	 */
+	enterWithinClause?: (ctx: WithinClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.withinClause`.
+	 * @param ctx the parse tree
+	 */
+	exitWithinClause?: (ctx: WithinClauseContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.expression`.
 	 * @param ctx the parse tree
@@ -1841,16 +2104,6 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUid?: (ctx: UidContext) => void;
-	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.plusUid`.
-	 * @param ctx the parse tree
-	 */
-	enterPlusUid?: (ctx: PlusUidContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.plusUid`.
-	 * @param ctx the parse tree
-	 */
-	exitPlusUid?: (ctx: PlusUidContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.withOption`.
 	 * @param ctx the parse tree

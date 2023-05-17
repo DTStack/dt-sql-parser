@@ -134,7 +134,7 @@ physicalColumnDefinition
     ;
 
 columnName
-    : plusUid | expression
+    : uid | expression
     ;
 
 columnNameList
@@ -380,7 +380,7 @@ insertMulStatement
 
 queryStatement
     : valuesCaluse
-    | WITH withItem (COMMA withItem)* queryStatement
+    | withClause queryStatement
     | '(' queryStatement ')'
     | left=queryStatement operator=(INTERSECT | UNION | EXCEPT) ALL? right=queryStatement orderByCaluse? limitClause?
     | selectClause orderByCaluse? limitClause?
@@ -389,6 +389,10 @@ queryStatement
 
 valuesCaluse
     : VALUES expression (COMMA expression )*
+    ;
+
+withClause
+    : WITH withItem (COMMA withItem)*
     ;
 
 withItem
@@ -401,6 +405,7 @@ withItemName
 
 selectStatement
     : selectClause fromClause whereClause? groupByClause? havingClause? windowClause?
+    | selectClause fromClause matchRecognizeClause
     ;
 
 selectClause
@@ -408,7 +413,13 @@ selectClause
     ;
 
 projectItemDefinition
-    : expression (AS? expression)?
+    : overWindowItem
+    | expression (AS? expression)?
+    ;
+
+overWindowItem
+    : primaryExpression OVER windowSpec AS strictIdentifier
+    | primaryExpression OVER errorCapturingIdentifier AS strictIdentifier
     ;
 
 fromClause
@@ -419,6 +430,8 @@ tableExpression
     : tableReference (COMMA tableReference)*
     | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? OUTER? JOIN tableExpression joinCondition?
     | tableExpression CROSS JOIN tableExpression
+    | inlineDataValueClause
+    | windoTVFClause
     ;
 
 tableReference
@@ -444,6 +457,46 @@ dateTimeExpression
     : expression
     ;
 
+inlineDataValueClause
+    : LR_BRACKET valuesDefinition RR_BRACKET tableAlias
+    ;
+
+windoTVFClause
+    : TABLE LR_BRACKET windowTVFExression RR_BRACKET
+    ;
+
+windowTVFExression
+    : windoTVFName LR_BRACKET windowTVFParam (COMMA windowTVFParam)* RR_BRACKET
+    ;
+
+windoTVFName
+    : TUMBLE
+    | HOP
+    | CUMULATE
+;
+
+windowTVFParam
+    : TABLE timeAttrColumn
+    | columnDescriptor
+    | timeIntervalExpression
+    | DATA DOUBLE_ARROW TABLE timeAttrColumn
+    | TIMECOL DOUBLE_ARROW columnDescriptor
+    | timeIntervalParamName DOUBLE_ARROW timeIntervalExpression
+    ;
+
+timeIntervalParamName
+    : DATA
+    | TIMECOL
+    | SIZE
+    | OFFSET
+    | STEP
+    | SLIDE
+    ;
+
+columnDescriptor
+    : DESCRIPTOR LR_BRACKET uid RR_BRACKET
+    ;
+
 joinCondition
     : ON booleanExpression
     | USING LR_BRACKET uid (COMMA uid)* RR_BRACKET
@@ -459,27 +512,38 @@ groupByClause
 
 groupItemDefinition
     : expression
+    | groupWindowFunction
     | LR_BRACKET RR_BRACKET
     | LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | CUBE LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | ROLLUP LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | GROUPING SETS LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
+    | groupingSetsNotaionName LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | groupingSets LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
+    ;
+
+groupingSets
+    : GROUPING SETS
+    ;
+
+groupingSetsNotaionName
+    : CUBE
+    | ROLLUP
+    ;
+
+groupWindowFunction
+    : groupWindowFunctionName LR_BRACKET timeAttrColumn COMMA timeIntervalExpression RR_BRACKET
+    ;
+
+groupWindowFunctionName
+    : TUMBLE
+    | HOP
+    | SESSION
+    ;
+
+timeAttrColumn
+    : uid
     ;
 
 havingClause
     : HAVING booleanExpression
-    ;
-
-orderByCaluse
-    : ORDER BY orderItemDefition (COMMA orderItemDefition)*
-    ;
-
-orderItemDefition
-    : expression (ASC | DESC)?
-    ;
-
-limitClause
-    : LIMIT (ALL | limit=expression)
     ;
 
 windowClause
@@ -492,26 +556,99 @@ namedWindow
 
 windowSpec
     : name=errorCapturingIdentifier?
-    '('
-        (ORDER BY sortItem (',' sortItem)*)?
-        (PARTITION BY expression (',' expression)*)?
+    LR_BRACKET
+        partitionByClause?
+        orderByCaluse?
         windowFrame?
-    ')'
+    RR_BRACKET
     ;
 
-sortItem
+matchRecognizeClause
+    : MATCH_RECOGNIZE 
+    LR_BRACKET 
+        partitionByClause?
+        orderByCaluse?
+        measuresClause?
+        outputMode?
+        afterMatchStrategy?
+        patternDefination?
+        patternVariablesDefination
+    RR_BRACKET ( AS? strictIdentifier )?
+    ;
+
+orderByCaluse
+    : ORDER BY orderItemDefition (COMMA orderItemDefition)*
+    ;
+
+orderItemDefition
     : expression ordering=(ASC | DESC)? (NULLS nullOrder=(LAST | FIRST))?
     ;
 
+limitClause
+    : LIMIT (ALL | limit=expression)
+    ;
+
+partitionByClause
+    : PARTITION BY expression (COMMA expression)*
+    ;
+
+quantifiers
+    : (ASTERISK_SIGN)
+    | (ADD_SIGN)
+    | (QUESTION_MARK_SIGN)
+    | (LB_BRACKET DIG_LITERAL COMMA DIG_LITERAL RB_BRACKET)
+    | (LB_BRACKET DIG_LITERAL COMMA  RB_BRACKET)
+    | (LB_BRACKET COMMA DIG_LITERAL RB_BRACKET)
+    ;
+
+measuresClause
+    : MEASURES projectItemDefinition (COMMA projectItemDefinition)*
+    ;
+
+patternDefination
+    : PATTERN 
+    LR_BRACKET
+        patternVariable+
+    RR_BRACKET 
+    withinClause?
+    ;
+
+patternVariable
+    : unquotedIdentifier quantifiers?
+    ;
+
+outputMode
+    : ALL ROWS PER MATCH
+    | ONE ROW PER MATCH
+    ;
+
+afterMatchStrategy
+    : AFTER MATCH KW_SKIP PAST LAST ROW 
+    | AFTER MATCH KW_SKIP TO NEXT ROW
+    | AFTER MATCH KW_SKIP TO LAST unquotedIdentifier
+    | AFTER MATCH KW_SKIP TO FIRST unquotedIdentifier
+    ;
+
+patternVariablesDefination
+    : DEFINE projectItemDefinition (COMMA projectItemDefinition)*
+    ;
+
 windowFrame
-    : RANGE frameBound
-    | ROWS frameBound
+    : RANGE BETWEEN timeIntervalExpression frameBound
+    | ROWS BETWEEN DIG_LITERAL frameBound
     ;
 
 frameBound
-    : expression PRECEDING
+    : PRECEDING AND CURRENT ROW
     ;
 
+withinClause
+    : WITHIN timeIntervalExpression
+    ;
+
+timeIntervalExpression
+    : INTERVAL STRING_LITERAL ID_LITERAL
+    ;
 
 // expression
 
@@ -684,10 +821,6 @@ uidList
 
 uid
     : ID_LITERAL DOT_ID*?
-    ;
-
-plusUid  // 匹配 xxx.$xx xx:xxxx 等字符
-    : (ID_LITERAL | PLUS_ID_LITERAL) (DOT_ID | PLUS_DOT_ID)*?
     ;
 
 withOption

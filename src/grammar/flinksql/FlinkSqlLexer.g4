@@ -273,6 +273,24 @@ ENFORCED:                     'ENFORCED';
 METADATA:                     'METADATA';
 VIRTUAL:                      'VIRTUAL';
 ZONE:                         'ZONE';
+TUMBLE:                       'TUMBLE';
+HOP:                          'HOP';
+CUMULATE:                     'CUMULATE';
+DESCRIPTOR:                   'DESCRIPTOR';
+TIMECOL:                      'TIMECOL';
+SIZE:                         'SIZE';
+OFFSET:                       'OFFSET';
+STEP:                         'STEP';
+SLIDE:                        'SLIDE';
+SESSION:                      'SESSION';
+MATCH_RECOGNIZE:              'MATCH_RECOGNIZE';
+MEASURES:                     'MEASURES';
+PATTERN:                      'PATTERN';
+ONE:                          'ONE';
+PER:                          'PER';
+KW_SKIP:                      'SKIP';
+PAST:                         'PAST';
+DEFINE:                       'DEFINE';
 
 // DATA TYPE Keywords
 
@@ -330,6 +348,8 @@ LS_BRACKET:                          '[';
 RS_BRACKET:                          ']';
 LR_BRACKET:                          '(';
 RR_BRACKET:                          ')';
+LB_BRACKET:                          '{';
+RB_BRACKET:                          '}';
 COMMA:                               ',';
 SEMICOLON:                           ';';
 AT_SIGN:                             '@';
@@ -345,8 +365,8 @@ PENCENT_SIGN:                        '%';
 DOUBLE_VERTICAL_SIGN:                '||';
 DOUBLE_HYPNEN_SIGN:                  '--';
 SLASH_SIGN:                          '/';
+QUESTION_MARK_SIGN:                  '?'; 
 DOT_ID:                              '.' ID_LITERAL_FRAG;
-PLUS_DOT_ID:                          (':' | '.') PLUS_ID_LITERAL;
 STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
 DIG_LITERAL:                         DEC_DIGIT+;
 REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
@@ -355,14 +375,13 @@ REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
                                      | DEC_DIGIT+ EXPONENT_NUM_PART;
 BIT_STRING:                          BIT_STRING_L;
 ID_LITERAL:                          ID_LITERAL_FRAG;
-PLUS_ID_LITERAL:                     PLUS_ID_LITERAL_FRAG;
 FILE_PATH:                           FILE_PATH_STRING;
+DOUBLE_ARROW:                        '=>';                
 
 fragment FILE_PATH_STRING:           ([/\\] (~([/\\ ]))*)+;
 fragment JAR_FILE_PARTTARN:          '`' ( '\\'. | '``' | ~('`'|'\\'))* '`';
 fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
 fragment ID_LITERAL_FRAG:            [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;
-fragment PLUS_ID_LITERAL_FRAG:       [A-Z_0-9a-z*@#^$%&{}]*?[A-Z_a-z*@#^$%&{}]+?[A-Z_0-9a-z*@#^$%&{}]*;
 fragment DEC_DIGIT:                  [0-9];
 fragment DEC_LETTER:                 [A-Za-z];
 fragment DQUOTA_STRING:              '"' ( '\\'. | '""' | ~('"'| '\\') )* '"';
