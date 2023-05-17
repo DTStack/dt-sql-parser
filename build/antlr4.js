@@ -43,7 +43,7 @@ if (argv.all) { // build all: yarn antlr4 --all
     if (supportedLanguage) {
         compile(argv.lang);
     } else {
-        console.error('Unsupported language: ' + argv.lang);
+        console.error('Invalid language: ' + argv.lang + ', supported languages:\n' + entry.join(', '));
     }
 } else {
     console.error('Please to specify the language, just like: yarn antlr4 --lang flinksql');

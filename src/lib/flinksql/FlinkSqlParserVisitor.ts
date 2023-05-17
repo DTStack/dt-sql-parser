@@ -1,4 +1,4 @@
-// Generated from /Users/zhenglin/Documents/parser/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeVisitor} from 'antlr4';
 
@@ -64,6 +64,10 @@ import { JarFileNameContext } from "./FlinkSqlParser";
 import { AlterTableContext } from "./FlinkSqlParser";
 import { RenameDefinitionContext } from "./FlinkSqlParser";
 import { SetKeyValueDefinitionContext } from "./FlinkSqlParser";
+import { AddConstraintContext } from "./FlinkSqlParser";
+import { DropConstraintContext } from "./FlinkSqlParser";
+import { AddUniqueContext } from "./FlinkSqlParser";
+import { NotForcedContext } from "./FlinkSqlParser";
 import { AlertViewContext } from "./FlinkSqlParser";
 import { AlterDatabaseContext } from "./FlinkSqlParser";
 import { AlterFunctionContext } from "./FlinkSqlParser";
@@ -558,6 +562,30 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitSetKeyValueDefinition?: (ctx: SetKeyValueDefinitionContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.addConstraint`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAddConstraint?: (ctx: AddConstraintContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.dropConstraint`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropConstraint?: (ctx: DropConstraintContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.addUnique`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAddUnique?: (ctx: AddUniqueContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.notForced`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitNotForced?: (ctx: NotForcedContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.alertView`.
 	 * @param ctx the parse tree
