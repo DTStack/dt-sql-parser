@@ -8,7 +8,7 @@ VALUES ('Chinese', 'mumiao', 18),
     ('Amercian', 'georage', 22);
 
 EXECUTE
-INSERT OverWrite country_page_view
+INSERT OVERWRITE country_page_view
 VALUES ('Chinese', 'mumiao', 18),
     ('Amercian', 'georage', 22);
 
