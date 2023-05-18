@@ -25,4 +25,4 @@ CREATE TEMPORARY FUNCTION function1 AS 'org.apache.flink.function.function1' LAN
 CREATE TEMPORARY SYSTEM FUNCTION function1 AS 'org.apache.flink.function.function1' LANGUAGE SCALA USING JAR '/path/to/test.jar';
 
 CREATE FUNCTION function1 AS 'org.apache.flink.function.function1' LANGUAGE JAVA USING JAR 'file:///path/to/test.jar',
-jar 'hdfs:///path/to/test2.jar';
+JAR 'hdfs:///path/to/test2.jar';
