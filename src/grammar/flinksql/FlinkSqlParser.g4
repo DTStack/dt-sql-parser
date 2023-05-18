@@ -33,11 +33,11 @@ dmlStatement
 
 // some statemen
 describeStatement
-    : (DESCRIBE | DESC) uid
+    : (KW_DESCRIBE | KW_DESC) uid
     ;
 
 explainStatement
-    : EXPLAIN (explainDetails | PLAN FOR)? (dmlStatement | insertSimpleStatement | insertMulStatement)
+    : KW_EXPLAIN (explainDetails | KW_PLAN KW_FOR)? (dmlStatement | insertSimpleStatement | insertMulStatement)
     ;
 
 explainDetails
@@ -45,54 +45,54 @@ explainDetails
     ;
 
 explainDetail
-    : CHANGELOG_MODE | JSON_EXECUTION_PLAN | ESTIMATED_COST
+    : KW_CHANGELOG_MODE | KW_JSON_EXECUTION_PLAN | KW_ESTIMATED_COST
     ;
 
 useStatement
-    : USE CATALOG? uid | useModuleStatement
+    : KW_USE KW_CATALOG? uid | useModuleStatement
     ;
 
 useModuleStatement
-    : USE MODULES uid (COMMA uid)*
+    : KW_USE KW_MODULES uid (COMMA uid)*
     ;
 
 showStatememt
-    : SHOW (CATALOGS | DATABASES | VIEWS | JARS)
-    | SHOW CURRENT (CATALOG | DATABASE)
-    | SHOW TABLES (( FROM | IN ) uid)? likePredicate?
-    | SHOW COLUMNS ( FROM | IN ) uid likePredicate?
-    | SHOW CREATE (TABLE | VIEW) uid
-    | SHOW USER? FUNCTIONS
-    | SHOW FULL? MODULES
+    : KW_SHOW (KW_CATALOGS | KW_DATABASES | KW_VIEWS | KW_JARS)
+    | KW_SHOW KW_CURRENT (KW_CATALOG | KW_DATABASE)
+    | KW_SHOW KW_TABLES (( KW_FROM | KW_IN ) uid)? likePredicate?
+    | KW_SHOW KW_COLUMNS ( KW_FROM | KW_IN ) uid likePredicate?
+    | KW_SHOW KW_CREATE (KW_TABLE | KW_VIEW) uid
+    | KW_SHOW KW_USER? KW_FUNCTIONS
+    | KW_SHOW KW_FULL? KW_MODULES
     ;
 
 loadStatement
-    : LOAD MODULE uid (WITH tablePropertyList)?
+    : KW_LOAD KW_MODULE uid (KW_WITH tablePropertyList)?
     ;
     
 unloadStatememt
-    : UNLOAD MODULE uid
+    : KW_UNLOAD KW_MODULE uid
     ;
 
 setStatememt
-    : SET (tableProperty)?
+    : KW_SET (tableProperty)?
     ;
 
 resetStatememt
-    : RESET tablePropertyKey?
+    : KW_RESET tablePropertyKey?
     ;
     
 jarStatememt
-    : (ADD | REMOVE) JAR jarFileName
+    : (KW_ADD | KW_REMOVE) KW_JAR jarFileName
     ;
 
 // 数栈平台自研的添加文件语法
 dtAddStatement
-    : ADD JAR WITH FILE_PATH (AS uid)?
-    | ADD FILE WITH FILE_PATH (AS uid)? (RENAME uid)?
-    | ADD (PYTHON_FILES | PYTHON_REQUIREMENTS | PYTHON_DEPENDENCIES | PYTHON_JAR | PYTHON_ARCHIVES) WITH FILE_PATH RENAME uid
-    | ADD PYTHON_PARAMETER FILE_PATH
-    | ADD ENGINE FILE WITH FILE_PATH RENAME uid KEY uid
+    : KW_ADD KW_JAR KW_WITH FILE_PATH (KW_AS uid)?
+    | KW_ADD KW_FILE KW_WITH FILE_PATH (KW_AS uid)? (KW_RENAME uid)?
+    | KW_ADD (KW_PYTHON_FILES | KW_PYTHON_REQUIREMENTS | KW_PYTHON_DEPENDENCIES | KW_PYTHON_JAR | KW_PYTHON_ARCHIVES) KW_WITH FILE_PATH KW_RENAME uid
+    | KW_ADD KW_PYTHON_PARAMETER FILE_PATH
+    | KW_ADD KW_ENGINE KW_FILE KW_WITH FILE_PATH KW_RENAME uid KW_KEY uid
     ;
 
 // Create statements
@@ -102,7 +102,7 @@ createTable
     ;
     
 simpleCreateTable
-    : CREATE TEMPORARY? TABLE ifNotExists? sourceTable
+    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? sourceTable
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
         (COMMA watermarkDefinition)?
@@ -120,7 +120,7 @@ simpleCreateTable
  * CTAS 不支持指定显示指定列，不支持创建分区表，临时表
  */
 createTableAsSelect
-    : CREATE TABLE ifNotExists? sourceTable withOption (AS queryStatement)?
+    : KW_CREATE KW_TABLE ifNotExists? sourceTable withOption (KW_AS queryStatement)?
     ;
 
 columnOptionDefinition
@@ -142,17 +142,17 @@ columnNameList
     ;
 
 columnType
-    : typeName=(DATE | BOOLEAN | NULL)
-    | typeName=(CHAR | VARCHAR | STRING | BINARY | VARBINARY | BYTES
-        | TINYINT | SMALLINT | INT | INTEGER | BIGINT
-        | TIME | TIMESTAMP_LTZ | DATETIME
+    : typeName=(KW_DATE | KW_BOOLEAN | KW_NULL)
+    | typeName=(KW_CHAR | KW_VARCHAR | KW_STRING | KW_BINARY | KW_VARBINARY | KW_BYTES
+        | KW_TINYINT | KW_SMALLINT |KW_INT | KW_INTEGER | KW_BIGINT
+        | KW_TIME | KW_TIMESTAMP_LTZ | KW_DATETIME
     ) lengthOneDimension?
-    | typeName=TIMESTAMP lengthOneDimension? ((WITHOUT | WITH) LOCAL? TIME ZONE)?
-    | typeName=(DECIMAL | DEC | NUMERIC | FLOAT | DOUBLE) lengthTwoOptionalDimension?
-    | type=(ARRAY | MULTISET) lengthOneTypeDimension?
-    | type=MAP mapTypeDimension?
-    | type=ROW rowTypeDimension?
-    | type=RAW lengthTwoStringDimension?
+    | typeName=KW_TIMESTAMP lengthOneDimension? ((KW_WITHOUT | KW_WITH) KW_LOCAL? KW_TIME KW_ZONE)?
+    | typeName=(KW_DECIMAL | KW_DEC | KW_NUMERIC | KW_FLOAT | KW_DOUBLE) lengthTwoOptionalDimension?
+    | type=(KW_ARRAY | KW_MULTISET) lengthOneTypeDimension?
+    | type=KW_MAP mapTypeDimension?
+    | type=KW_ROW rowTypeDimension?
+    | type=KW_RAW lengthTwoStringDimension?
     ;
 
 lengthOneDimension
@@ -180,15 +180,15 @@ rowTypeDimension
     ;
 
 columnConstraint
-    :(CONSTRAINT constraintName)? PRIMARY KEY NOT ENFORCED
+    :(KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY KW_NOT KW_ENFORCED
     ;
 
 commentSpec
-    : COMMENT STRING_LITERAL
+    : KW_COMMENT STRING_LITERAL
     ;
 
 metadataColumnDefinition
-    : columnName columnType METADATA (FROM metadataKey)? VIRTUAL?
+    : columnName columnType KW_METADATA (KW_FROM metadataKey)? KW_VIRTUAL?
     ;
 
 metadataKey
@@ -196,7 +196,7 @@ metadataKey
     ;
 
 computedColumnDefinition
-    : columnName AS computedColumnExpression commentSpec?
+    : columnName KW_AS computedColumnExpression commentSpec?
     ;
 
 // 计算表达式
@@ -205,23 +205,23 @@ computedColumnExpression
     ;
 
 watermarkDefinition
-    : WATERMARK FOR expression AS expression
+    : KW_WATERMARK KW_FOR expression KW_AS expression
     ;
 
 tableConstraint
-    : (CONSTRAINT constraintName)? PRIMARY KEY columnNameList NOT ENFORCED
+    : (KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY columnNameList KW_NOT KW_ENFORCED
     ;
 
 constraintName
     : identifier
     ;
 
-selfDefinitionClause // 数栈自定义语句 ‘PERIOD FOR SYSTEM_TIME’
-    : PERIOD FOR SYSTEM_TIME
+selfDefinitionClause // 数栈自定义语句 ‘PERIOD KW_FOR SYSTEM_TIME’
+    : KW_PERIOD KW_FOR KW_SYSTEM_TIME
     ;
 
 partitionDefinition
-    : PARTITIONED BY transformList
+    : KW_PARTITIONED KW_BY transformList
     ;
 
 transformList
@@ -240,7 +240,7 @@ transformArgument
     ;
 
 likeDefinition
-    : LIKE sourceTable (LR_BRACKET likeOption* RR_BRACKET)?
+    : KW_LIKE sourceTable (LR_BRACKET likeOption* RR_BRACKET)?
     ;
 
 sourceTable
@@ -248,28 +248,28 @@ sourceTable
     ;
 
 likeOption
-    : ((INCLUDING | EXCLUDING) (ALL | CONSTRAINTS | PARTITIONS))
-    | ((INCLUDING | EXCLUDING | OVERWRITING) (GENERATED | OPTIONS | WATERMARKS))
+    : ((KW_INCLUDING | KW_EXCLUDING) (KW_ALL | KW_CONSTRAINTS | KW_PARTITIONS))
+    | ((KW_INCLUDING | KW_EXCLUDING | KW_OVERWRITING) (KW_GENERATED | KW_OPTIONS | KW_WATERMARKS))
     ;
 
 createCatalog
-    : CREATE CATALOG uid withOption
+    : KW_CREATE KW_CATALOG uid withOption
     ;
 
 createDatabase
-    : CREATE DATABASE ifNotExists? uid commentSpec? withOption
+    : KW_CREATE KW_DATABASE ifNotExists? uid commentSpec? withOption
     ;
 
 createView
-    : CREATE TEMPORARY? VIEW ifNotExists? uid columnNameList? commentSpec? AS queryStatement
+    : KW_CREATE KW_TEMPORARY? KW_VIEW ifNotExists? uid columnNameList? commentSpec? KW_AS queryStatement
     ;
 
 createFunction
-    : CREATE (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifNotExists? uid AS identifier (LANGUAGE (JAVA|SCALA|PYTHON))? usingClause?
+    : KW_CREATE (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifNotExists? uid KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))? usingClause?
     ;
 
 usingClause
-    : USING JAR jarFileName (COMMA JAR jarFileName)* 
+    : KW_USING KW_JAR jarFileName (COMMA KW_JAR jarFileName)* 
     ;
 
 jarFileName
@@ -281,77 +281,77 @@ jarFileName
 // it only includes rename, set key, add constraint, drop constraint, add unique
 
 alterTable
-    : ALTER TABLE ifExists? uid (renameDefinition | setKeyValueDefinition | addConstraint | dropConstraint | addUnique)
+    : KW_ALTER KW_TABLE ifExists? uid (renameDefinition | setKeyValueDefinition | addConstraint | dropConstraint | addUnique)
     ;
 
 renameDefinition
-    : RENAME uid? TO uid
+    : KW_RENAME uid? KW_TO uid
     ;
 
 setKeyValueDefinition
-    : SET tablePropertyList
+    : KW_SET tablePropertyList
     ;
 
 addConstraint
-    : ADD CONSTRAINT constraintName PRIMARY KEY columnNameList notForced?
+    : KW_ADD KW_CONSTRAINT constraintName KW_PRIMARY KW_KEY columnNameList notForced?
     ;
 
 dropConstraint
-    : DROP CONSTRAINT constraintName
+    : KW_DROP KW_CONSTRAINT constraintName
     ;
 
 addUnique
-    : ADD UNIQUE columnNameList
+    : KW_ADD KW_UNIQUE columnNameList
     ;
 
 notForced
-    : NOT ENFORCED
+    : KW_NOT KW_ENFORCED
     ;
 
 alertView
-    : ALTER VIEW uid (renameDefinition | AS queryStatement)
+    : KW_ALTER KW_VIEW uid (renameDefinition | KW_AS queryStatement)
     ;
 
 alterDatabase
-    : ALTER DATABASE uid setKeyValueDefinition
+    : KW_ALTER KW_DATABASE uid setKeyValueDefinition
     ;
 
 alterFunction
-    : ALTER (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifExists? uid AS identifier (LANGUAGE (JAVA|SCALA|PYTHON))? 
+    : KW_ALTER (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? uid KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))? 
     ;
 
 
 // Drop statements
 
 dropCatalog
-    : DROP CATALOG ifExists? uid
+    : KW_DROP KW_CATALOG ifExists? uid
     ;
 
 dropTable
-    : DROP TEMPORARY? TABLE ifExists? uid
+    : KW_DROP KW_TEMPORARY? KW_TABLE ifExists? uid
     ;
 
 dropDatabase
-    : DROP DATABASE ifExists? uid dropType=(RESTRICT | CASCADE)?
+    : KW_DROP KW_DATABASE ifExists? uid dropType=(KW_RESTRICT | KW_CASCADE)?
     ;
 
 dropView
-    : DROP TEMPORARY? VIEW ifExists? uid
+    : KW_DROP KW_TEMPORARY? KW_VIEW ifExists? uid
     ;
 
 dropFunction
-    : DROP (TEMPORARY|TEMPORARY SYSTEM)? FUNCTION ifExists? uid
+    : KW_DROP (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? uid
     ;
 
 
 // Insert statements
 
 insertStatement
-    : (EXECUTE? insertSimpleStatement) | (EXECUTE insertMulStatement)
+    : (KW_EXECUTE? insertSimpleStatement) | (KW_EXECUTE insertMulStatement)
     ;
 
 insertSimpleStatement
-    : INSERT (INTO | OVERWRITE) uid
+    : KW_INSERT (KW_INTO | KW_OVERWRITE) uid
     (
         insertPartitionDefinition? columnNameList? queryStatement
         | valuesDefinition
@@ -359,11 +359,11 @@ insertSimpleStatement
     ;
 
 insertPartitionDefinition
-    : PARTITION tablePropertyList
+    : KW_PARTITION tablePropertyList
     ;
 
 valuesDefinition
-    : VALUES valuesRowDefinition (COMMA valuesRowDefinition)*
+    : KW_VALUES valuesRowDefinition (COMMA valuesRowDefinition)*
     ;
 
 valuesRowDefinition
@@ -373,7 +373,7 @@ valuesRowDefinition
     ;
 
 insertMulStatement
-    : STATEMENT SET BEGIN (insertSimpleStatement SEMICOLON)+ END
+    : KW_STATEMENT KW_SET KW_BEGIN (insertSimpleStatement SEMICOLON)+ KW_END
     ;
 
 // Select statements
@@ -382,21 +382,21 @@ queryStatement
     : valuesCaluse
     | withClause queryStatement
     | '(' queryStatement ')'
-    | left=queryStatement operator=(INTERSECT | UNION | EXCEPT) ALL? right=queryStatement orderByCaluse? limitClause?
+    | left=queryStatement operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT) KW_ALL? right=queryStatement orderByCaluse? limitClause?
     | selectClause orderByCaluse? limitClause?
     | selectStatement orderByCaluse? limitClause?
     ;
 
 valuesCaluse
-    : VALUES expression (COMMA expression )*
+    : KW_VALUES expression (COMMA expression )*
     ;
 
 withClause
-    : WITH withItem (COMMA withItem)*
+    : KW_WITH withItem (COMMA withItem)*
     ;
 
 withItem
-    : withItemName (LR_BRACKET columnName (COMMA columnName)* RR_BRACKET)? AS LR_BRACKET queryStatement RR_BRACKET
+    : withItemName (LR_BRACKET columnName (COMMA columnName)* RR_BRACKET)? KW_AS LR_BRACKET queryStatement RR_BRACKET
     ;
 
 withItemName
@@ -409,27 +409,27 @@ selectStatement
     ;
 
 selectClause
-    : SELECT setQuantifier? (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
+    : KW_SELECT setQuantifier? (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
     ;
 
 projectItemDefinition
     : overWindowItem
-    | expression (AS? expression)?
+    | expression (KW_AS? expression)?
     ;
 
 overWindowItem
-    : primaryExpression OVER windowSpec AS strictIdentifier
-    | primaryExpression OVER errorCapturingIdentifier AS strictIdentifier
+    : primaryExpression KW_OVER windowSpec KW_AS identifier
+    | primaryExpression KW_OVER errorCapturingIdentifier KW_AS identifier
     ;
 
 fromClause
-    : FROM tableExpression
+    : KW_FROM tableExpression
     ;
 
 tableExpression
     : tableReference (COMMA tableReference)*
-    | tableExpression NATURAL? (LEFT | RIGHT | FULL | INNER)? OUTER? JOIN tableExpression joinCondition?
-    | tableExpression CROSS JOIN tableExpression
+    | tableExpression KW_NATURAL? (KW_LEFT | KW_RIGHT | KW_FULL | KW_INNER)? KW_OUTER? KW_JOIN tableExpression joinCondition?
+    | tableExpression KW_CROSS KW_JOIN tableExpression
     | inlineDataValueClause
     | windoTVFClause
     ;
@@ -439,10 +439,10 @@ tableReference
     ;
 
 tablePrimary
-    : TABLE? tablePath systemTimePeriod? (AS? correlationName)?
-    | LATERAL TABLE LR_BRACKET functionName LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
-    | LATERAL? LR_BRACKET queryStatement RR_BRACKET
-    | UNNEST LR_BRACKET expression RR_BRACKET
+    : KW_TABLE? tablePath systemTimePeriod? (KW_AS? correlationName)?
+    | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
+    | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
 
 tablePath
@@ -450,7 +450,7 @@ tablePath
     ;
 
 systemTimePeriod
-    : FOR SYSTEM_TIME AS OF dateTimeExpression
+    : KW_FOR KW_SYSTEM_TIME KW_AS KW_OF dateTimeExpression
     ;
 
 dateTimeExpression
@@ -462,7 +462,7 @@ inlineDataValueClause
     ;
 
 windoTVFClause
-    : TABLE LR_BRACKET windowTVFExression RR_BRACKET
+    : KW_TABLE LR_BRACKET windowTVFExression RR_BRACKET
     ;
 
 windowTVFExression
@@ -470,44 +470,44 @@ windowTVFExression
     ;
 
 windoTVFName
-    : TUMBLE
-    | HOP
-    | CUMULATE
+    : KW_TUMBLE
+    | KW_HOP
+    | KW_CUMULATE
 ;
 
 windowTVFParam
-    : TABLE timeAttrColumn
+    : KW_TABLE timeAttrColumn
     | columnDescriptor
     | timeIntervalExpression
-    | DATA DOUBLE_ARROW TABLE timeAttrColumn
-    | TIMECOL DOUBLE_ARROW columnDescriptor
+    | KW_DATA DOUBLE_ARROW KW_TABLE timeAttrColumn
+    | KW_TIMECOL DOUBLE_ARROW columnDescriptor
     | timeIntervalParamName DOUBLE_ARROW timeIntervalExpression
     ;
 
 timeIntervalParamName
-    : DATA
-    | TIMECOL
-    | SIZE
-    | OFFSET
-    | STEP
-    | SLIDE
+    : KW_DATA
+    | KW_TIMECOL
+    | KW_SIZE
+    | KW_OFFSET
+    | KW_STEP
+    | KW_SLIDE
     ;
 
 columnDescriptor
-    : DESCRIPTOR LR_BRACKET uid RR_BRACKET
+    : KW_DESCRIPTOR LR_BRACKET uid RR_BRACKET
     ;
 
 joinCondition
-    : ON booleanExpression
-    | USING LR_BRACKET uid (COMMA uid)* RR_BRACKET
+    : KW_ON booleanExpression
+    | KW_USING LR_BRACKET uid (COMMA uid)* RR_BRACKET
     ;
 
 whereClause
-    : WHERE booleanExpression
+    : KW_WHERE booleanExpression
     ;
 
 groupByClause
-    : GROUP BY groupItemDefinition (COMMA groupItemDefinition)*
+    : KW_GROUP KW_BY groupItemDefinition (COMMA groupItemDefinition)*
     ;
 
 groupItemDefinition
@@ -520,12 +520,12 @@ groupItemDefinition
     ;
 
 groupingSets
-    : GROUPING SETS
+    : KW_GROUPING KW_SETS
     ;
 
 groupingSetsNotaionName
-    : CUBE
-    | ROLLUP
+    : KW_CUBE
+    | KW_ROLLUP
     ;
 
 groupWindowFunction
@@ -533,9 +533,9 @@ groupWindowFunction
     ;
 
 groupWindowFunctionName
-    : TUMBLE
-    | HOP
-    | SESSION
+    : KW_TUMBLE
+    | KW_HOP
+    | KW_SESSION
     ;
 
 timeAttrColumn
@@ -543,15 +543,15 @@ timeAttrColumn
     ;
 
 havingClause
-    : HAVING booleanExpression
+    : KW_HAVING booleanExpression
     ;
 
 windowClause
-    : WINDOW namedWindow (',' namedWindow)*
+    : KW_WINDOW namedWindow (',' namedWindow)*
     ;
 
 namedWindow
-    : name=errorCapturingIdentifier AS windowSpec
+    : name=errorCapturingIdentifier KW_AS windowSpec
     ;
 
 windowSpec
@@ -564,7 +564,7 @@ windowSpec
     ;
 
 matchRecognizeClause
-    : MATCH_RECOGNIZE 
+    : KW_MATCH_RECOGNIZE 
     LR_BRACKET 
         partitionByClause?
         orderByCaluse?
@@ -573,23 +573,23 @@ matchRecognizeClause
         afterMatchStrategy?
         patternDefination?
         patternVariablesDefination
-    RR_BRACKET ( AS? strictIdentifier )?
+    RR_BRACKET ( KW_AS? identifier )?
     ;
 
 orderByCaluse
-    : ORDER BY orderItemDefition (COMMA orderItemDefition)*
+    : KW_ORDER KW_BY orderItemDefition (COMMA orderItemDefition)*
     ;
 
 orderItemDefition
-    : expression ordering=(ASC | DESC)? (NULLS nullOrder=(LAST | FIRST))?
+    : expression ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
     ;
 
 limitClause
-    : LIMIT (ALL | limit=expression)
+    : KW_LIMIT (KW_ALL | limit=expression)
     ;
 
 partitionByClause
-    : PARTITION BY expression (COMMA expression)*
+    : KW_PARTITION KW_BY expression (COMMA expression)*
     ;
 
 quantifiers
@@ -602,11 +602,11 @@ quantifiers
     ;
 
 measuresClause
-    : MEASURES projectItemDefinition (COMMA projectItemDefinition)*
+    : KW_MEASURES projectItemDefinition (COMMA projectItemDefinition)*
     ;
 
 patternDefination
-    : PATTERN 
+    : KW_PATTERN 
     LR_BRACKET
         patternVariable+
     RR_BRACKET 
@@ -618,36 +618,36 @@ patternVariable
     ;
 
 outputMode
-    : ALL ROWS PER MATCH
-    | ONE ROW PER MATCH
+    : KW_ALL KW_ROWS KW_PER KW_MATCH
+    | KW_ONE KW_ROW KW_PER KW_MATCH
     ;
 
 afterMatchStrategy
-    : AFTER MATCH KW_SKIP PAST LAST ROW 
-    | AFTER MATCH KW_SKIP TO NEXT ROW
-    | AFTER MATCH KW_SKIP TO LAST unquotedIdentifier
-    | AFTER MATCH KW_SKIP TO FIRST unquotedIdentifier
+    : KW_AFTER KW_MATCH KW_SKIP KW_PAST KW_LAST KW_ROW 
+    | KW_AFTER KW_MATCH KW_SKIP KW_TO KW_NEXT KW_ROW
+    | KW_AFTER KW_MATCH KW_SKIP KW_TO KW_LAST unquotedIdentifier
+    | KW_AFTER KW_MATCH KW_SKIP KW_TO KW_FIRST unquotedIdentifier
     ;
 
 patternVariablesDefination
-    : DEFINE projectItemDefinition (COMMA projectItemDefinition)*
+    : KW_DEFINE projectItemDefinition (COMMA projectItemDefinition)*
     ;
 
 windowFrame
-    : RANGE BETWEEN timeIntervalExpression frameBound
-    | ROWS BETWEEN DIG_LITERAL frameBound
+    : KW_RANGE KW_BETWEEN timeIntervalExpression frameBound
+    | KW_ROWS KW_BETWEEN DIG_LITERAL frameBound
     ;
 
 frameBound
-    : PRECEDING AND CURRENT ROW
+    : KW_PRECEDING KW_AND KW_CURRENT KW_ROW
     ;
 
 withinClause
-    : WITHIN timeIntervalExpression
+    : KW_WITHIN timeIntervalExpression
     ;
 
 timeIntervalExpression
-    : INTERVAL STRING_LITERAL ID_LITERAL
+    : KW_INTERVAL STRING_LITERAL ID_LITERAL
     ;
 
 // expression
@@ -657,35 +657,35 @@ expression
     ;
 
 booleanExpression
-    : NOT booleanExpression                                        #logicalNot
-    | EXISTS '(' queryStatement ')'                                         #exists
+    : KW_NOT booleanExpression                                        #logicalNot
+    | KW_EXISTS '(' queryStatement ')'                                         #exists
     | valueExpression predicate?                                   #predicated
-    | left=booleanExpression operator=AND right=booleanExpression  #logicalBinary
-    | left=booleanExpression operator=OR right=booleanExpression   #logicalBinary
+    | left=booleanExpression operator=KW_AND right=booleanExpression  #logicalBinary
+    | left=booleanExpression operator=KW_OR right=booleanExpression   #logicalBinary
     ;
 
 predicate
-    : NOT? kind=BETWEEN lower=valueExpression AND upper=valueExpression
-    | NOT? kind=IN '(' expression (',' expression)* ')'
-    | NOT? kind=IN '(' queryStatement ')'
-    | kind=EXISTS '(' queryStatement ')'
-    | NOT? kind=RLIKE pattern=valueExpression
-    | NOT? kind=LIKE quantifier=(ANY | ALL) ('('')' | '(' expression (',' expression)* ')')
-    | NOT? kind=LIKE pattern=valueExpression
-    | IS NOT? kind=NULL
-    | IS NOT? kind=(TRUE | FALSE)
-    | IS NOT? kind=DISTINCT FROM right=valueExpression
+    : KW_NOT? kind=KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression
+    | KW_NOT? kind=KW_IN '(' expression (',' expression)* ')'
+    | KW_NOT? kind=KW_IN '(' queryStatement ')'
+    | kind=KW_EXISTS '(' queryStatement ')'
+    | KW_NOT? kind=KW_RLIKE pattern=valueExpression
+    | KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) ('('')' | '(' expression (',' expression)* ')')
+    | KW_NOT? kind=KW_LIKE pattern=valueExpression
+    | KW_IS KW_NOT? kind=KW_NULL
+    | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE)
+    | KW_IS KW_NOT? kind=KW_DISTINCT KW_FROM right=valueExpression
     ;
 
 likePredicate
-    : NOT? kind=LIKE quantifier=(ANY | ALL) ('('')' | '(' expression (',' expression)* ')')
-    | NOT? kind=LIKE pattern=valueExpression
+    : KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) ('('')' | '(' expression (',' expression)* ')')
+    | KW_NOT? kind=KW_LIKE pattern=valueExpression
     ;
 
 valueExpression
     : primaryExpression                                                                      #valueExpressionDefault
     | operator=('-' | '+' | '~') valueExpression                                        #arithmeticUnary
-    | left=valueExpression operator=('*' | '/' | '%' | DIV) right=valueExpression #arithmeticBinary
+    | left=valueExpression operator=('*' | '/' | '%' | KW_DIV) right=valueExpression #arithmeticBinary
     | left=valueExpression operator=('+' | '-' | DOUBLE_VERTICAL_SIGN) right=valueExpression       #arithmeticBinary
     | left=valueExpression operator='&' right=valueExpression                          #arithmeticBinary
     | left=valueExpression operator='^' right=valueExpression                                #arithmeticBinary
@@ -694,13 +694,13 @@ valueExpression
     ;
 
 primaryExpression
-    : CASE whenClause+ (ELSE elseExpression=expression)? END                                   #searchedCase
-    | CASE value=expression whenClause+ (ELSE elseExpression=expression)? END                  #simpleCase
-    | CAST '(' expression AS columnType ')'                                                      #cast
+    : KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                                   #searchedCase
+    | KW_CASE value=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END                  #simpleCase
+    | KW_CAST '(' expression KW_AS columnType ')'                                                      #cast
     // | STRUCT '(' (argument+=namedExpression (',' argument+=namedExpression)*)? ')'             #struct
-    | FIRST '(' expression (IGNORE NULLS)? ')'                                                 #first
-    | LAST '(' expression (IGNORE NULLS)? ')'                                                  #last
-    | POSITION '(' substr=valueExpression IN str=valueExpression ')'                           #position
+    | KW_FIRST '(' expression (KW_IGNORE KW_NULLS)? ')'                                                 #first
+    | KW_LAST '(' expression (KW_IGNORE KW_NULLS)? ')'                                                  #last
+    | KW_POSITION '(' substr=valueExpression KW_IN str=valueExpression ')'                           #position
     | constant                                                                                 #constantDefault
     | '*'                                                                                 #star
     | uid '.' '*'                                                                #star
@@ -713,17 +713,19 @@ primaryExpression
     | identifier                                                                               #columnReference
     | dereferenceDefinition                                                                                      #dereference
     | '(' expression ')'                                                                       #parenthesizedExpression
-    // | EXTRACT '(' field=identifier FROM source=valueExpression ')'                             #extract
-    // | (SUBSTR | SUBSTRING) '(' str=valueExpression (FROM | ',') pos=valueExpression
-    //   ((FOR | ',') len=valueExpression)? ')'                                                   #substring
+    // | EXTRACT '(' field=identifier KW_FROM source=valueExpression ')'                             #extract
+    // | (SUBSTR | SUBSTRING) '(' str=valueExpression (KW_FROM | ',') pos=valueExpression
+    //   ((KW_FOR | ',') len=valueExpression)? ')'                                                   #substring
     // | TRIM '(' trimOption=(BOTH | LEADING | TRAILING)? (trimStr=valueExpression)?
-    //    FROM srcStr=valueExpression ')'                                                         #trim
+    //    KW_FROM srcStr=valueExpression ')'                                                         #trim
     // | OVERLAY '(' input=valueExpression PLACING replace=valueExpression
-    //   FROM position=valueExpression (FOR length=valueExpression)? ')'                          #overlay
+    //   KW_FROM position=valueExpression (KW_FOR length=valueExpression)? ')'                          #overlay
     ;
 
 functionName
-    : uid
+    : reservedKeywords
+    | nonReservedKeywords
+    | uid
     ;
 
 dereferenceDefinition
@@ -742,7 +744,7 @@ qualifiedName
     ;
 
 interval
-    : INTERVAL (errorCapturingMultiUnitsInterval | errorCapturingUnitToUnitInterval)?
+    : KW_INTERVAL (errorCapturingMultiUnitsInterval | errorCapturingUnitToUnitInterval)?
     ;
 
 errorCapturingMultiUnitsInterval
@@ -758,7 +760,7 @@ errorCapturingUnitToUnitInterval
     ;
 
 unitToUnitInterval
-    : value=intervalValue from=identifier TO to=identifier
+    : value=intervalValue from=identifier KW_TO to=identifier
     ;
 
 intervalValue
@@ -767,11 +769,11 @@ intervalValue
     ;
 
 columnAlias
-    : AS? strictIdentifier identifierList?
+    : KW_AS? identifier identifierList?
     ;
 
 tableAlias
-    : AS? strictIdentifier identifierList?
+    : KW_AS? identifier identifierList?
     ;
 
 errorCapturingIdentifier
@@ -779,7 +781,7 @@ errorCapturingIdentifier
     ;
 
 errorCapturingIdentifierExtra
-    : (MINUS identifier)+    #errorIdent
+    : (KW_MINUS identifier)+    #errorIdent
     |                        #realIdent
     ;
 
@@ -792,15 +794,9 @@ identifierSeq
     ;
 
 identifier
-    : strictIdentifier
-    | strictNonReserved
-    ;
-
-strictIdentifier
-    : unquotedIdentifier              #unquotedIdentifierAlternative
-    | quotedIdentifier        #quotedIdentifierAlternative
-    | ansiNonReserved        #ansiNonReservedKeywords
-    | nonReserved        #nonReservedKeywords
+    : unquotedIdentifier         #unquotedIdentifierAlternative
+    | quotedIdentifier           #quotedIdentifierAlternative
+    | nonReservedKeywords        #nonReservedKeywordsAlternative
     ;
 
 unquotedIdentifier
@@ -812,7 +808,7 @@ quotedIdentifier
     ;
 
 whenClause
-    : WHEN condition=expression THEN result=expression
+    : KW_WHEN condition=expression KW_THEN result=expression
     ;
 
 uidList
@@ -824,14 +820,14 @@ uid
     ;
 
 withOption
-    : WITH tablePropertyList
+    : KW_WITH tablePropertyList
     ;
 
 ifNotExists
-    : IF NOT EXISTS;
+    : KW_IF KW_NOT KW_EXISTS;
 
 ifExists
-    : IF EXISTS;
+    : KW_IF KW_EXISTS;
 
 tablePropertyList
     : '(' tableProperty (',' tableProperty)* ')'
@@ -854,7 +850,7 @@ tablePropertyValue
     ;
 
 logicalOperator
-    : AND | '&' '&' | OR | '|' '|'
+    : KW_AND | '&' '&' | KW_OR | '|' '|'
     ;
 
 comparisonOperator
@@ -866,11 +862,11 @@ bitOperator
     ;
 
 mathOperator
-    : '*' | SLASH_SIGN | PENCENT_SIGN | DIV | '+' | '-' | DOUBLE_HYPNEN_SIGN
+    : '*' | SLASH_SIGN | PENCENT_SIGN | KW_DIV | '+' | '-' | DOUBLE_HYPNEN_SIGN
     ;
 
 unaryOperator
-    : '!' | '~' | ADD_SIGN | '-' | NOT
+    : '!' | '~' | ADD_SIGN | '-' | KW_NOT
     ;
 
 fullColumnName
@@ -880,12 +876,12 @@ fullColumnName
 constant
     : stringLiteral                                             // 引号包含的字符串
     | decimalLiteral                                            // 整数
-    | interval                                                  // INTERVAL keywords
+    | interval                                                  // KW_INTERVAL keywords
     | HYPNEN_SIGN decimalLiteral                                        // 负整数
     | booleanLiteral                                            // 布尔值
     | REAL_LITERAL                                              // 小数
     | BIT_STRING
-    | NOT? NULL                                                 // 空 | 非空
+    | KW_NOT? KW_NULL                                                 // 空 | 非空
     ;
 
 stringLiteral
@@ -897,475 +893,378 @@ decimalLiteral
     ;
 
 booleanLiteral
-    : TRUE | FALSE;
+    : KW_TRUE | KW_FALSE;
 
 setQuantifier
-    : DISTINCT
-    | ALL
+    : KW_DISTINCT
+    | KW_ALL
     ;
 
-ansiNonReserved
-    : ADD
-    | AFTER
-    | ALTER
-    | ANALYZE
-    | ANTI
-    | ARCHIVE
-    | ARRAY
-    | ASC
-    | AT
-    | BETWEEN
-    | BIGINT
-    | BINARY
-    | BOOLEAN
-    | BUCKET
-    | BUCKETS
-    | BY
-    | BYTES
-    | CACHE
-    | CASCADE
-    | CATALOG
-    | CATALOGS
-    | CHANGE
-    | CHAR
-    | CLEAR
-    | CLUSTER
-    | CLUSTERED
-    | CODEGEN
-    | COLLECTION
-    | COLUMNS
-    | COMMENT
-    | COMMIT
-    | COMPACT
-    | COMPACTIONS
-    | COMPUTE
-    | CONCATENATE
-    | CONSTRAINTS
-    | COST
-    | CUBE
-    | CURRENT
-    | DATA
-    | DATABASE
-    | DATABASES
-    | DATE
-    | DATETIME
-    | DBPROPERTIES
-    | DECIMAL
-    | DEFINED
-    | DELETE
-    | DELIMITED
-    | DESC
-    | DESCRIBE
-    | DFS
-    | DIRECTORIES
-    | DIRECTORY
-    | DISTRIBUTE
-    | DIV
-    | DOUBLE
-    | DROP
-    | ESCAPED
-    | EXCHANGE
-    | EXCLUDING
-    | EXISTS
-    | EXPLAIN
-    | EXPORT
-    | EXTENDED
-    | EXTERNAL
-    | EXTRACT
-    | FIELDS
-    | FILEFORMAT
-    | FIRST
-    | FLOAT
-    | FOLLOWING
-    | FORMAT
-    | FORMATTED
-    | FUNCTION
-    | FUNCTIONS
-    | GENERATED
-    | GLOBAL
-    | GROUPING
-    | IF
-    | IGNORE
-    | IMPORT
-    | INCLUDING
-    | INDEX
-    | INDEXES
-    | INPATH
-    | INPUTFORMAT
-    | INSERT
-    | INT
-    | INTERVAL
-    | ITEMS
-    | KEY
-    | KEYS
-    | LANGUAGE
-    | LAST
-    | LATERAL
-    | LAZY
-    | LIKE
-    | LIMIT
-    | LINES
-    | LIST
-    | LOAD
-    | LOCAL
-    | LOCATION
-    | LOCK
-    | LOCKS
-    | LOGICAL
-    | MACRO
-    | MAP
-    | MATCH
-    | MINUS
-    | MSCK
-    | MULTISET
-    | NEXT
-    | NO
-    | NULL
-    | NULLS
-    | OF
-    | OPTION
-    | OPTIONS
-    | OUT
-    | OUTPUTFORMAT
-    | OVER
-    | OVERWRITE
-    | PARTITION
-    | PARTITIONED
-    | PARTITIONS
-    | PERCENTLIT
-    | PERIOD
-    | PIVOT
-    | POSITION
-    | PRECEDING
-    | PRINCIPALS
-    | PURGE
-    | RANGE
-    | RAW
-    | RECORDREADER
-    | RECORDWRITER
-    | RECOVER
-    | REDUCE
-    | REFRESH
-    | RENAME
-    | REPAIR
-    | REPLACE
-    | RESET
-    | RESTRICT
-    | REVOKE
-    | RLIKE
-    | ROLE
-    | ROLES
-    | ROLLBACK
-    | ROLLUP
-    | ROW
-    | ROWS
-    | SEMI
-    | SEPARATED
-    | SERDE
-    | SERDEPROPERTIES
-    | SET
-    | SETMINUS
-    | SETS
-    | SHOW
-    | SKEWED
-    | SMALLINT
-    | SORT
-    | SORTED
-    | START
-    | STATISTICS
-    | STORED
-    | STRATIFY
-    | STRING
-    | STRUCT
-    | SYSTEM
-    | SYSTEM_TIME
-    | TABLES
-    | TABLESAMPLE
-    | TBLPROPERTIES
-    | TEMPORARY
-    | TERMINATED
-    | TIME
-    | TIMESTAMP
-    | TINYINT
-    | TOUCH
-    | TRANSACTION
-    | TRANSACTIONS
-    | TRANSFORM
-    | TRUE
-    | TRUNCATE
-    | UNARCHIVE
-    | UNBOUNDED
-    | UNCACHE
-    | UNLOCK
-    | UNSET
-    | UNNEST
-    | USE
-    | VALUES
-    | VARBINARY
-    | VARCHAR
-    | VIEW
-    | VIEWS
-    | WATERMARK
-    | WINDOW
-    | WITHIN
-    | WS
+reservedKeywords
+    : KW_ABS
+    | KW_ALL
+    | ALLOW
+    | KW_ALTER 
+    | KW_AND
+    | KW_ANY
+    | KW_ARE
+    | KW_ARRAY
+    | KW_AS
+    | KW_AT
+    | KW_AVG
+    | KW_BEGIN
+    | KW_BETWEEN
+    | KW_BIGINT
+    | KW_BINARY
+    | KW_BIT
+    | KW_BLOB
+    | KW_BOOLEAN
+    | KW_BOTH
+    | KW_BY
+    | KW_CALL
+    | KW_CALLED
+    | KW_CASCADED
+    | KW_CASE
+    | KW_CAST
+    | KW_CEIL
+    | KW_CHAR
+    | KW_CHARACTER
+    | KW_CHECK
+    | KW_CLOB
+    | KW_CLOSE
+    | KW_COALESCE
+    | KW_COLLATE
+    | KW_COLLECT
+    | KW_COLUMN
+    | KW_COMMIT
+    | KW_CONNECT
+    | KW_CONSTRAINT
+    | KW_CONTAINS
+    | KW_CONVERT
+    | KW_COUNT
+    | KW_CREATE
+    | KW_CROSS
+    | KW_CUBE
+    | KW_CURRENT
+    | KW_CURSOR
+    | KW_CYCLE
+    | KW_DATE
+    | KW_DATETIME
+    | KW_DAY
+    | KW_DEC
+    | KW_DECIMAL
+    | KW_DECLARE
+    | KW_DEFAULT
+    | KW_DEFINE
+    | KW_DELETE
+    | KW_DESCRIBE
+    | KW_DISTINCT
+    | KW_DOUBLE
+    | KW_DROP
+    | KW_EACH
+    | KW_ELSE
+    | KW_END
+    | KW_EQUALS
+    | KW_EXCEPT
+    | KW_EXECUTE
+    | KW_EXISTS
+    | KW_EXPLAIN
+    | KW_EXTERNAL
+    | KW_EXTRACT
+    | KW_FALSE
+    | KW_FLOAT
+    | KW_FOR
+    | KW_FROM
+    | KW_FULL
+    | KW_FUNCTION
+    | KW_GLOBAL
+    | KW_GRANT
+    | KW_GROUP
+    | KW_GROUPING
+    | KW_GROUPS
+    | KW_HAVING
+    | KW_HOUR
+    | KW_IMPORT
+    | KW_IN
+    | KW_INCLUDING
+    | KW_INNER
+    | KW_INOUT
+    | KW_INSERT
+    | KW_INT
+    | KW_INTEGER
+    | KW_INTERSECT
+    | KW_INTERVAL
+    | KW_INTO
+    | KW_IS
+    | KW_JOIN
+    | KW_LAG
+    | KW_LANGUAGE
+    | KW_LATERAL
+    | KW_LEADING
+    | KW_LEFT
+    | KW_LIKE
+    | KW_LIMIT
+    | KW_LOCAL
+    | KW_MATCH
+    | KW_MATCH_RECOGNIZE
+    | KW_MEASURES
+    | KW_MERGE
+    | KW_METADATA
+    | KW_MINUS
+    | KW_MINUTE
+    | KW_MODIFIES
+    | KW_MODULE
+    | KW_MONTH
+    | KW_MULTISET
+    | KW_NATURAL
+    | KW_NEXT
+    | KW_NO
+    | KW_NONE
+    | KW_NOT
+    | KW_NULL
+    | KW_NUMERIC
+    | KW_OF
+    | KW_OFFSET
+    | KW_ON
+    | KW_ONE
+    | KW_OR
+    | KW_ORDER
+    | KW_OUT
+    | KW_OUTER
+    | KW_OVER
+    | KW_OVERLAY
+    | KW_PARTITION
+    | KW_PATTERN
+    | KW_PER
+    | KW_PERCENT
+    | KW_PERIOD
+    | KW_POSITION
+    | KW_PRIMARY
+    | KW_RANGE
+    | KW_RANK
+    | KW_RESET
+    | KW_REVOKE
+    | KW_RIGHT
+    | KW_RLIKE
+    | KW_ROLLBACK
+    | KW_ROLLUP
+    | KW_ROW
+    | KW_ROWS
+    | KW_SECOND
+    | KW_SELECT
+    | KW_SET
+    | KW_SHOW
+    | KW_SKIP
+    | KW_SMALLINT
+    | KW_START
+    | KW_STATIC
+    | KW_SUBSTRING
+    | KW_SUM
+    | KW_SYSTEM
+    | KW_SYSTEM_TIME
+    | KW_SYSTEM_USER
+    | KW_TABLE
+    | KW_TABLESAMPLE
+    | KW_THEN
+    | KW_TIME
+    | KW_TIMESTAMP
+    | KW_TINYINT
+    | KW_TO
+    | KW_TRUE
+    | KW_TRUNCATE
+    | KW_UNION
+    | KW_UNIQUE
+    | KW_UNKNOWN
+    | KW_UNNEST
+    | KW_UPPER
+    | KW_UPSERT
+    | KW_USER
+    | KW_USING
+    | KW_VALUE
+    | KW_VALUES
+    | KW_VARBINARY
+    | KW_VARCHAR
+    | KW_WHEN
+    | KW_WHERE
+    | KW_WINDOW
+    | KW_WITH
+    | KW_WITHIN
+    | KW_WITHOUT
+    | KW_YEAR
     ;
 
-strictNonReserved
-    : ANTI
-    | CROSS
-    | EXCEPT
-    | FULL
-    | INNER
-    | INTERSECT
-    | JOIN
-    | LEFT
-    | NATURAL
-    | ON
-    | RIGHT
-    | SEMI
-    | SETMINUS
-    | UNION
-    | USING
-    ;
-
-nonReserved
-    : ADD
-    | AFTER
-    | ALL
-    | ALTER
-    | ANALYZE
-    | AND
-    | ANY
-    | COLUMNS
-    | ARRAY
-    | AS
-    | ASC
-    | AT
-    | BETWEEN
-    | BIGINT
-    | BINARY
-    | BOOLEAN
-    | BOTH
-    | BUCKET
-    | BUCKETS
-    | BY
-    | BYTES
-    | CACHE
-    | CASCADE
-    | CASE
-    | CAST
-    | CATALOG
-    | CATALOGS
-    | CHANGE
-    | CHAR
-    | CLEAR
-    | CLUSTER
-    | CLUSTERED
-    | CODEGEN
-    | COLLECTION
-    | COLUMN
-    | COLUMNS
-    | COMMENT
-    | COMMIT
-    | COMPACT
-    | COMPACTIONS
-    | COMPUTE
-    | CONCATENATE
-    | CONSTRAINT
-    | CONSTRAINTS
-    | COST
-    | CREATE
-    | CUBE
-    | CURRENT
-    | DATA
-    | DATABASE
-    | DATABASES
-    | DATE
-    | DATETIME
-    | DBPROPERTIES
-    | DECIMAL
-    | DEFINED
-    | DELETE
-    | DELIMITED
-    | DESC
-    | DESCRIBE
-    | DFS
-    | DIRECTORIES
-    | DIRECTORY
-    | DISTINCT
-    | DISTRIBUTE
-    | DIV
-    | DOUBLE
-    | DROP
-    | ELSE
-    | END
-    | ESCAPED
-    | EXCHANGE
-    | EXCLUDING
-    | EXISTS
-    | EXPLAIN
-    | EXPORT
-    | EXTENDED
-    | EXTERNAL
-    | EXTRACT
-    | FALSE
-    | FIELDS
-    | FILEFORMAT
-    | FIRST
-    | FLOAT
-    | FOLLOWING
-    | FOR
-    | FORMAT
-    | FORMATTED
-    | FROM
-    | FUNCTION
-    | FUNCTIONS
-    | GENERATED
-    | GLOBAL
-    | GRANT
-    | GROUP
-    | GROUPING
-    | HAVING
-    | IF
-    | IGNORE
-    | IMPORT
-    | IN
-    | INCLUDING
-    | INDEX
-    | INDEXES
-    | INPATH
-    | INPUTFORMAT
-    | INSERT
-    | INT
-    | INTERVAL
-    | INTO
-    | IS
-    | ITEMS
-    | KEY
-    | KEYS
-    | LANGUAGE
-    | LAST
-    | LATERAL
-    | LAZY
-    | LEADING
-    | LIKE
-    | LIMIT
-    | LINES
-    | LIST
-    | LOAD
-    | LOCAL
-    | LOCATION
-    | LOCK
-    | LOCKS
-    | LOGICAL
-    | MACRO
-    | MAP
-    | MATCH
-    | MINUS
-    | MSCK
-    | MULTISET
-    | NEXT
-    | NO
-    | NOT
-    | NULL
-    | NULLS
-    | OF
-    | OPTION
-    | OPTIONS
-    | OR
-    | ORDER
-    | OUT
-    | OUTER
-    | OUTPUTFORMAT
-    | OVER
-    | OVERWRITE
-    | PARTITION
-    | PARTITIONED
-    | PARTITIONS
-    | PERCENTLIT
-    | PERIOD
-    | PIVOT
-    | POSITION
-    | PRECEDING
-    | PRIMARY
-    | PRINCIPALS
-    | PURGE
-    | RANGE
-    | RAW
-    | RECORDREADER
-    | RECORDWRITER
-    | RECOVER
-    | REDUCE
-    | REFRESH
-    | RENAME
-    | REPAIR
-    | REPLACE
-    | RESET
-    | RESTRICT
-    | REVOKE
-    | RLIKE
-    | ROLE
-    | ROLES
-    | ROLLBACK
-    | ROLLUP
-    | ROW
-    | ROWS
-    | SELECT
-    | SEPARATED
-    | SERDE
-    | SERDEPROPERTIES
-    | SET
-    | SETS
-    | SHOW
-    | SKEWED
-    | SMALLINT
-    | SORT
-    | SORTED
-    | START
-    | STATISTICS
-    | STORED
-    | STRATIFY
-    | STRING
-    | STRUCT
-    | SYSTEM
-    | SYSTEM_TIME
-    | TABLE
-    | TABLES
-    | TABLESAMPLE
-    | TBLPROPERTIES
-    | TEMPORARY
-    | TERMINATED
-    | THEN
-    | TIME
-    | TIMESTAMP
-    | TINYINT
-    | TO
-    | TOUCH
-    | TRAILING
-    | TRANSACTION
-    | TRANSACTIONS
-    | TRANSFORM
-    | TRUE
-    | TRUNCATE
-    | UNARCHIVE
-    | UNBOUNDED
-    | UNCACHE
-    | UNLOCK
-    | UNSET
-    | UNNEST
-    | USE
-    | USER
-    | VALUES
-    | VARBINARY
-    | VARCHAR
-    | VIEW
-    | VIEWS
-    | WATERMARK
-    | WHEN
-    | WHERE
-    | WINDOW
-    | WITH
-    | WITHIN
-    | WS
+nonReservedKeywords
+    :KW_ADD                           
+    |KW_ADMIN                         
+    |KW_AFTER                         
+    |KW_ANALYZE                       
+    |KW_ASC                           
+    |KW_BEFORE                        
+    |KW_BYTES                         
+    |KW_CASCADE                       
+    |KW_CATALOG                       
+    |KW_CATALOGS                      
+    |KW_CENTURY                       
+    |KW_CHAIN                         
+    |KW_CHANGELOG_MODE                
+    |KW_CHARACTERS                    
+    |KW_COMMENT                       
+    |KW_COMPACT                       
+    |KW_COLUMNS                       
+    |KW_CONSTRAINTS                   
+    |KW_CONSTRUCTOR                   
+    |KW_CUMULATE                      
+    |KW_DATA                          
+    |KW_DATABASE                      
+    |KW_DATABASES                     
+    |KW_DAYS                          
+    |KW_DECADE                        
+    |KW_DEFINED                       
+    |KW_DESC                          
+    |KW_DESCRIPTOR                    
+    |KW_DIV                           
+    |KW_ENCODING                      
+    |KW_ENFORCED                      
+    |KW_ENGINE                        
+    |KW_ERROR                         
+    |KW_ESTIMATED_COST                
+    |KW_EXCEPTION                     
+    |KW_EXCLUDE                       
+    |KW_EXCLUDING                     
+    |KW_EXTENDED                      
+    |KW_FILE                          
+    |KW_FINAL                         
+    |KW_FIRST                         
+    |KW_FOLLOWING                     
+    |KW_FORMAT                        
+    |KW_FORTRAN                       
+    |KW_FOUND                         
+    |KW_FRAC_SECOND                   
+    |KW_FUNCTIONS                     
+    |KW_GENERAL                       
+    |KW_GENERATED                     
+    |KW_GO                            
+    |KW_GOTO                          
+    |KW_GRANTED                       
+    |KW_HOP                           
+    |KW_HOURS                         
+    |KW_IF                            
+    |KW_IGNORE                        
+    |KW_INCREMENT                     
+    |KW_INPUT                         
+    |KW_INVOKER                       
+    |KW_JAR                           
+    |KW_JARS                          
+    |KW_JAVA                          
+    |KW_JSON                          
+    |KW_JSON_EXECUTION_PLAN           
+    |KW_KEY                           
+    |KW_KEY_MEMBER                    
+    |KW_KEY_TYPE                      
+    |KW_LABEL                         
+    |KW_LAST                          
+    |KW_LENGTH                        
+    |KW_LEVEL                         
+    |KW_LOAD                          
+    |KW_MAP                           
+    |KW_MICROSECOND                   
+    |KW_MILLENNIUM                    
+    |KW_MILLISECOND                   
+    |KW_MINUTES                       
+    |KW_MINVALUE                      
+    |KW_MODIFY                        
+    |KW_MODULES                       
+    |KW_MONTHS                        
+    |KW_NAME                          
+    |KW_NAMES                         
+    |KW_NANOSECOND                    
+    |KW_NULLS                         
+    |KW_NUMBER                        
+    |KW_OPTION                        
+    |KW_OPTIONS                       
+    |KW_ORDERING                      
+    |KW_OUTPUT                        
+    |KW_OVERWRITE                     
+    |KW_OVERWRITING                   
+    |KW_PARTITIONED                   
+    |KW_PARTITIONS                    
+    |KW_PASSING                       
+    |KW_PAST                          
+    |KW_PATH                          
+    |KW_PLACING                       
+    |KW_PLAN                          
+    |KW_PRECEDING                     
+    |KW_PRESERVE                      
+    |KW_PRIOR                         
+    |KW_PRIVILEGES                    
+    |KW_PUBLIC                        
+    |KW_PYTHON                        
+    |KW_PYTHON_FILES                  
+    |KW_PYTHON_REQUIREMENTS           
+    |KW_PYTHON_DEPENDENCIES           
+    |KW_PYTHON_JAR                    
+    |KW_PYTHON_ARCHIVES               
+    |KW_PYTHON_PARAMETER              
+    |KW_QUARTER                       
+    |KW_RAW                           
+    |KW_READ                          
+    |KW_RELATIVE                      
+    |KW_REMOVE                        
+    |KW_RENAME                        
+    |KW_REPLACE                       
+    |KW_RESPECT                       
+    |KW_RESTART                       
+    |KW_RESTRICT                      
+    |KW_ROLE                          
+    |KW_ROW_COUNT                     
+    |KW_SCALA                         
+    |KW_SCALAR                        
+    |KW_SCALE                         
+    |KW_SCHEMA                        
+    |KW_SECONDS                       
+    |KW_SECTION                       
+    |KW_SECURITY                      
+    |KW_SELF                          
+    |KW_SERVER                        
+    |KW_SERVER_NAME                   
+    |KW_SESSION                       
+    |KW_SETS                          
+    |KW_SIMPLE                        
+    |KW_SIZE                          
+    |KW_SLIDE                         
+    |KW_SOURCE                        
+    |KW_SPACE                         
+    |KW_STATE                         
+    |KW_STATEMENT                     
+    |KW_STEP                          
+    |KW_STRING                        
+    |KW_STRUCTURE                     
+    |KW_STYLE                         
+    |KW_TABLES                        
+    |KW_TEMPORARY                     
+    |KW_TIMECOL                       
+    |KW_TIMESTAMP_LTZ                 
+    |KW_TIMESTAMPADD                  
+    |KW_TIMESTAMPDIFF                 
+    |KW_TRANSFORM                     
+    |KW_TUMBLE                        
+    |KW_TYPE                          
+    |KW_UNDER                         
+    |KW_UNLOAD                        
+    |KW_USAGE                         
+    |KW_USE                           
+    |KW_UTF16                         
+    |KW_UTF32                         
+    |KW_UTF8                          
+    |KW_VERSION                       
+    |KW_VIEW                          
+    |KW_VIEWS                         
+    |KW_VIRTUAL                       
+    |KW_WATERMARK                     
+    |KW_WATERMARKS                    
+    |KW_WEEK                          
+    |KW_WORK                          
+    |KW_WRAPPER                       
+    |KW_YEARS                         
+    |KW_ZONE                          
     ;
