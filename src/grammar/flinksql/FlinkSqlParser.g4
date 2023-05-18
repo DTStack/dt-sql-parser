@@ -479,9 +479,9 @@ windowTVFParam
     : KW_TABLE timeAttrColumn
     | columnDescriptor
     | timeIntervalExpression
-    | KW_DATA DOUBLE_ARROW KW_TABLE timeAttrColumn
-    | KW_TIMECOL DOUBLE_ARROW columnDescriptor
-    | timeIntervalParamName DOUBLE_ARROW timeIntervalExpression
+    | KW_DATA DOUBLE_RIGHT_ARROW KW_TABLE timeAttrColumn
+    | KW_TIMECOL DOUBLE_RIGHT_ARROW columnDescriptor
+    | timeIntervalParamName DOUBLE_RIGHT_ARROW timeIntervalExpression
     ;
 
 timeIntervalParamName
@@ -813,12 +813,8 @@ whenClause
     : KW_WHEN condition=expression KW_THEN result=expression
     ;
 
-uidList
-    : uid (',' uid)*
-    ;
-
 uid
-    : ID_LITERAL DOT_ID*?
+    : identifier (DOT identifier)*?
     ;
 
 withOption
@@ -869,10 +865,6 @@ mathOperator
 
 unaryOperator
     : '!' | '~' | ADD_SIGN | '-' | KW_NOT
-    ;
-
-fullColumnName
-    : uid
     ;
 
 constant
@@ -1177,8 +1169,6 @@ nonReservedKeywords
     |KW_MODIFY                        
     |KW_MODULES                       
     |KW_MONTHS                        
-    |KW_NAME                          
-    |KW_NAMES                         
     |KW_NANOSECOND                    
     |KW_NULLS                         
     |KW_NUMBER                        

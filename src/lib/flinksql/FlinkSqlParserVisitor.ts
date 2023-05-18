@@ -133,7 +133,6 @@ import { PatternVariablesDefinationContext } from "./FlinkSqlParser";
 import { WindowFrameContext } from "./FlinkSqlParser";
 import { FrameBoundContext } from "./FlinkSqlParser";
 import { WithinClauseContext } from "./FlinkSqlParser";
-import { TimeIntervalExpressionContext } from "./FlinkSqlParser";
 import { ExpressionContext } from "./FlinkSqlParser";
 import { LogicalNotContext } from "./FlinkSqlParser";
 import { PredicatedContext } from "./FlinkSqlParser";
@@ -163,12 +162,13 @@ import { FunctionNameContext } from "./FlinkSqlParser";
 import { DereferenceDefinitionContext } from "./FlinkSqlParser";
 import { CorrelationNameContext } from "./FlinkSqlParser";
 import { QualifiedNameContext } from "./FlinkSqlParser";
-import { IntervalContext } from "./FlinkSqlParser";
+import { TimeIntervalExpressionContext } from "./FlinkSqlParser";
 import { ErrorCapturingMultiUnitsIntervalContext } from "./FlinkSqlParser";
 import { MultiUnitsIntervalContext } from "./FlinkSqlParser";
 import { ErrorCapturingUnitToUnitIntervalContext } from "./FlinkSqlParser";
 import { UnitToUnitIntervalContext } from "./FlinkSqlParser";
 import { IntervalValueContext } from "./FlinkSqlParser";
+import { IntervalTimeUnitContext } from "./FlinkSqlParser";
 import { ColumnAliasContext } from "./FlinkSqlParser";
 import { TableAliasContext } from "./FlinkSqlParser";
 import { ErrorCapturingIdentifierContext } from "./FlinkSqlParser";
@@ -176,15 +176,12 @@ import { ErrorIdentContext } from "./FlinkSqlParser";
 import { RealIdentContext } from "./FlinkSqlParser";
 import { IdentifierListContext } from "./FlinkSqlParser";
 import { IdentifierSeqContext } from "./FlinkSqlParser";
-import { IdentifierContext } from "./FlinkSqlParser";
 import { UnquotedIdentifierAlternativeContext } from "./FlinkSqlParser";
 import { QuotedIdentifierAlternativeContext } from "./FlinkSqlParser";
-import { AnsiNonReservedKeywordsContext } from "./FlinkSqlParser";
-import { NonReservedKeywordsContext } from "./FlinkSqlParser";
+import { NonReservedKeywordsAlternativeContext } from "./FlinkSqlParser";
 import { UnquotedIdentifierContext } from "./FlinkSqlParser";
 import { QuotedIdentifierContext } from "./FlinkSqlParser";
 import { WhenClauseContext } from "./FlinkSqlParser";
-import { UidListContext } from "./FlinkSqlParser";
 import { UidContext } from "./FlinkSqlParser";
 import { WithOptionContext } from "./FlinkSqlParser";
 import { IfNotExistsContext } from "./FlinkSqlParser";
@@ -198,15 +195,13 @@ import { ComparisonOperatorContext } from "./FlinkSqlParser";
 import { BitOperatorContext } from "./FlinkSqlParser";
 import { MathOperatorContext } from "./FlinkSqlParser";
 import { UnaryOperatorContext } from "./FlinkSqlParser";
-import { FullColumnNameContext } from "./FlinkSqlParser";
 import { ConstantContext } from "./FlinkSqlParser";
 import { StringLiteralContext } from "./FlinkSqlParser";
 import { DecimalLiteralContext } from "./FlinkSqlParser";
 import { BooleanLiteralContext } from "./FlinkSqlParser";
 import { SetQuantifierContext } from "./FlinkSqlParser";
-import { AnsiNonReservedContext } from "./FlinkSqlParser";
-import { StrictNonReservedContext } from "./FlinkSqlParser";
-import { NonReservedContext } from "./FlinkSqlParser";
+import { ReservedKeywordsContext } from "./FlinkSqlParser";
+import { NonReservedKeywordsContext } from "./FlinkSqlParser";
 
 
 /**
@@ -1000,12 +995,6 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitWithinClause?: (ctx: WithinClauseContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => Result;
-	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1202,11 +1191,11 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitQualifiedName?: (ctx: QualifiedNameContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.interval`.
+	 * Visit a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitInterval?: (ctx: IntervalContext) => Result;
+	visitTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.errorCapturingMultiUnitsInterval`.
 	 * @param ctx the parse tree
@@ -1237,6 +1226,12 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitIntervalValue?: (ctx: IntervalValueContext) => Result;
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.intervalTimeUnit`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitIntervalTimeUnit?: (ctx: IntervalTimeUnitContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.columnAlias`.
 	 * @param ctx the parse tree
@@ -1282,39 +1277,26 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitIdentifierSeq?: (ctx: IdentifierSeqContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.identifier`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitIdentifier?: (ctx: IdentifierContext) => Result;
-	/**
 	 * Visit a parse tree produced by the `unquotedIdentifierAlternative`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitUnquotedIdentifierAlternative?: (ctx: UnquotedIdentifierAlternativeContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `quotedIdentifierAlternative`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitQuotedIdentifierAlternative?: (ctx: QuotedIdentifierAlternativeContext) => Result;
 	/**
-	 * Visit a parse tree produced by the `ansiNonReservedKeywords`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * Visit a parse tree produced by the `nonReservedKeywordsAlternative`
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitAnsiNonReservedKeywords?: (ctx: AnsiNonReservedKeywordsContext) => Result;
-	/**
-	 * Visit a parse tree produced by the `nonReservedKeywords`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitNonReservedKeywords?: (ctx: NonReservedKeywordsContext) => Result;
+	visitNonReservedKeywordsAlternative?: (ctx: NonReservedKeywordsAlternativeContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.unquotedIdentifier`.
 	 * @param ctx the parse tree
@@ -1333,12 +1315,6 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitWhenClause?: (ctx: WhenClauseContext) => Result;
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.uidList`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitUidList?: (ctx: UidListContext) => Result;
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.uid`.
 	 * @param ctx the parse tree
@@ -1418,12 +1394,6 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitUnaryOperator?: (ctx: UnaryOperatorContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.fullColumnName`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitFullColumnName?: (ctx: FullColumnNameContext) => Result;
-	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.constant`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1454,22 +1424,16 @@ export default class FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitSetQuantifier?: (ctx: SetQuantifierContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.ansiNonReserved`.
+	 * Visit a parse tree produced by `FlinkSqlParser.reservedKeywords`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitAnsiNonReserved?: (ctx: AnsiNonReservedContext) => Result;
+	visitReservedKeywords?: (ctx: ReservedKeywordsContext) => Result;
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.strictNonReserved`.
+	 * Visit a parse tree produced by `FlinkSqlParser.nonReservedKeywords`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStrictNonReserved?: (ctx: StrictNonReservedContext) => Result;
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.nonReserved`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitNonReserved?: (ctx: NonReservedContext) => Result;
+	visitNonReservedKeywords?: (ctx: NonReservedKeywordsContext) => Result;
 }
 

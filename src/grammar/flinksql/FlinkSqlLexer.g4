@@ -94,8 +94,6 @@ KW_MINVALUE:                         'MINVALUE';
 KW_MODIFY:                           'MODIFY';
 KW_MODULES:                          'MODULES';
 KW_MONTHS:                           'MONTHS';
-KW_NAME:                             'NAME';
-KW_NAMES:                            'NAMES';
 KW_NANOSECOND:                       'NANOSECOND';
 KW_NULLS:                            'NULLS';
 KW_NUMBER:                           'NUMBER';
@@ -424,7 +422,7 @@ DOUBLE_VERTICAL_SIGN:                '||';
 DOUBLE_HYPNEN_SIGN:                  '--';
 SLASH_SIGN:                          '/';
 QUESTION_MARK_SIGN:                  '?'; 
-DOT_ID:                              '.' ID_LITERAL_FRAG;
+DOUBLE_RIGHT_ARROW:                        '=>';                
 STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
 DIG_LITERAL:                         DEC_DIGIT+;
 REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
@@ -434,7 +432,6 @@ REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
 BIT_STRING:                          BIT_STRING_L;
 ID_LITERAL:                          ID_LITERAL_FRAG;
 FILE_PATH:                           FILE_PATH_STRING;
-DOUBLE_ARROW:                        '=>';                
 
 fragment FILE_PATH_STRING:           ([/\\] (~([/\\ ]))*)+;
 fragment JAR_FILE_PARTTARN:          '`' ( '\\'. | '``' | ~('`'|'\\'))* '`';

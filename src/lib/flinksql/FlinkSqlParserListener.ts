@@ -133,7 +133,6 @@ import { PatternVariablesDefinationContext } from "./FlinkSqlParser";
 import { WindowFrameContext } from "./FlinkSqlParser";
 import { FrameBoundContext } from "./FlinkSqlParser";
 import { WithinClauseContext } from "./FlinkSqlParser";
-import { TimeIntervalExpressionContext } from "./FlinkSqlParser";
 import { ExpressionContext } from "./FlinkSqlParser";
 import { LogicalNotContext } from "./FlinkSqlParser";
 import { PredicatedContext } from "./FlinkSqlParser";
@@ -163,12 +162,13 @@ import { FunctionNameContext } from "./FlinkSqlParser";
 import { DereferenceDefinitionContext } from "./FlinkSqlParser";
 import { CorrelationNameContext } from "./FlinkSqlParser";
 import { QualifiedNameContext } from "./FlinkSqlParser";
-import { IntervalContext } from "./FlinkSqlParser";
+import { TimeIntervalExpressionContext } from "./FlinkSqlParser";
 import { ErrorCapturingMultiUnitsIntervalContext } from "./FlinkSqlParser";
 import { MultiUnitsIntervalContext } from "./FlinkSqlParser";
 import { ErrorCapturingUnitToUnitIntervalContext } from "./FlinkSqlParser";
 import { UnitToUnitIntervalContext } from "./FlinkSqlParser";
 import { IntervalValueContext } from "./FlinkSqlParser";
+import { IntervalTimeUnitContext } from "./FlinkSqlParser";
 import { ColumnAliasContext } from "./FlinkSqlParser";
 import { TableAliasContext } from "./FlinkSqlParser";
 import { ErrorCapturingIdentifierContext } from "./FlinkSqlParser";
@@ -176,15 +176,12 @@ import { ErrorIdentContext } from "./FlinkSqlParser";
 import { RealIdentContext } from "./FlinkSqlParser";
 import { IdentifierListContext } from "./FlinkSqlParser";
 import { IdentifierSeqContext } from "./FlinkSqlParser";
-import { IdentifierContext } from "./FlinkSqlParser";
 import { UnquotedIdentifierAlternativeContext } from "./FlinkSqlParser";
 import { QuotedIdentifierAlternativeContext } from "./FlinkSqlParser";
-import { AnsiNonReservedKeywordsContext } from "./FlinkSqlParser";
-import { NonReservedKeywordsContext } from "./FlinkSqlParser";
+import { NonReservedKeywordsAlternativeContext } from "./FlinkSqlParser";
 import { UnquotedIdentifierContext } from "./FlinkSqlParser";
 import { QuotedIdentifierContext } from "./FlinkSqlParser";
 import { WhenClauseContext } from "./FlinkSqlParser";
-import { UidListContext } from "./FlinkSqlParser";
 import { UidContext } from "./FlinkSqlParser";
 import { WithOptionContext } from "./FlinkSqlParser";
 import { IfNotExistsContext } from "./FlinkSqlParser";
@@ -198,15 +195,13 @@ import { ComparisonOperatorContext } from "./FlinkSqlParser";
 import { BitOperatorContext } from "./FlinkSqlParser";
 import { MathOperatorContext } from "./FlinkSqlParser";
 import { UnaryOperatorContext } from "./FlinkSqlParser";
-import { FullColumnNameContext } from "./FlinkSqlParser";
 import { ConstantContext } from "./FlinkSqlParser";
 import { StringLiteralContext } from "./FlinkSqlParser";
 import { DecimalLiteralContext } from "./FlinkSqlParser";
 import { BooleanLiteralContext } from "./FlinkSqlParser";
 import { SetQuantifierContext } from "./FlinkSqlParser";
-import { AnsiNonReservedContext } from "./FlinkSqlParser";
-import { StrictNonReservedContext } from "./FlinkSqlParser";
-import { NonReservedContext } from "./FlinkSqlParser";
+import { ReservedKeywordsContext } from "./FlinkSqlParser";
+import { NonReservedKeywordsContext } from "./FlinkSqlParser";
 
 
 /**
@@ -1519,16 +1514,6 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitWithinClause?: (ctx: WithinClauseContext) => void;
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => void;
-	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.expression`.
 	 * @param ctx the parse tree
 	 */
@@ -1863,15 +1848,15 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitQualifiedName?: (ctx: QualifiedNameContext) => void;
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.interval`.
+	 * Enter a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
 	 * @param ctx the parse tree
 	 */
-	enterInterval?: (ctx: IntervalContext) => void;
+	enterTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => void;
 	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.interval`.
+	 * Exit a parse tree produced by `FlinkSqlParser.timeIntervalExpression`.
 	 * @param ctx the parse tree
 	 */
-	exitInterval?: (ctx: IntervalContext) => void;
+	exitTimeIntervalExpression?: (ctx: TimeIntervalExpressionContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.errorCapturingMultiUnitsInterval`.
 	 * @param ctx the parse tree
@@ -1922,6 +1907,16 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitIntervalValue?: (ctx: IntervalValueContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.intervalTimeUnit`.
+	 * @param ctx the parse tree
+	 */
+	enterIntervalTimeUnit?: (ctx: IntervalTimeUnitContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.intervalTimeUnit`.
+	 * @param ctx the parse tree
+	 */
+	exitIntervalTimeUnit?: (ctx: IntervalTimeUnitContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.columnAlias`.
 	 * @param ctx the parse tree
@@ -1997,63 +1992,41 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitIdentifierSeq?: (ctx: IdentifierSeqContext) => void;
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.identifier`.
-	 * @param ctx the parse tree
-	 */
-	enterIdentifier?: (ctx: IdentifierContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.identifier`.
-	 * @param ctx the parse tree
-	 */
-	exitIdentifier?: (ctx: IdentifierContext) => void;
-	/**
 	 * Enter a parse tree produced by the `unquotedIdentifierAlternative`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 */
 	enterUnquotedIdentifierAlternative?: (ctx: UnquotedIdentifierAlternativeContext) => void;
 	/**
 	 * Exit a parse tree produced by the `unquotedIdentifierAlternative`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 */
 	exitUnquotedIdentifierAlternative?: (ctx: UnquotedIdentifierAlternativeContext) => void;
 	/**
 	 * Enter a parse tree produced by the `quotedIdentifierAlternative`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 */
 	enterQuotedIdentifierAlternative?: (ctx: QuotedIdentifierAlternativeContext) => void;
 	/**
 	 * Exit a parse tree produced by the `quotedIdentifierAlternative`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 */
 	exitQuotedIdentifierAlternative?: (ctx: QuotedIdentifierAlternativeContext) => void;
 	/**
-	 * Enter a parse tree produced by the `ansiNonReservedKeywords`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * Enter a parse tree produced by the `nonReservedKeywordsAlternative`
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 */
-	enterAnsiNonReservedKeywords?: (ctx: AnsiNonReservedKeywordsContext) => void;
+	enterNonReservedKeywordsAlternative?: (ctx: NonReservedKeywordsAlternativeContext) => void;
 	/**
-	 * Exit a parse tree produced by the `ansiNonReservedKeywords`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
+	 * Exit a parse tree produced by the `nonReservedKeywordsAlternative`
+	 * labeled alternative in `FlinkSqlParser.identifier`.
 	 * @param ctx the parse tree
 	 */
-	exitAnsiNonReservedKeywords?: (ctx: AnsiNonReservedKeywordsContext) => void;
-	/**
-	 * Enter a parse tree produced by the `nonReservedKeywords`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
-	 * @param ctx the parse tree
-	 */
-	enterNonReservedKeywords?: (ctx: NonReservedKeywordsContext) => void;
-	/**
-	 * Exit a parse tree produced by the `nonReservedKeywords`
-	 * labeled alternative in `FlinkSqlParser.strictIdentifier`.
-	 * @param ctx the parse tree
-	 */
-	exitNonReservedKeywords?: (ctx: NonReservedKeywordsContext) => void;
+	exitNonReservedKeywordsAlternative?: (ctx: NonReservedKeywordsAlternativeContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.unquotedIdentifier`.
 	 * @param ctx the parse tree
@@ -2084,16 +2057,6 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitWhenClause?: (ctx: WhenClauseContext) => void;
-	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.uidList`.
-	 * @param ctx the parse tree
-	 */
-	enterUidList?: (ctx: UidListContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.uidList`.
-	 * @param ctx the parse tree
-	 */
-	exitUidList?: (ctx: UidListContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.uid`.
 	 * @param ctx the parse tree
@@ -2225,16 +2188,6 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitUnaryOperator?: (ctx: UnaryOperatorContext) => void;
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.fullColumnName`.
-	 * @param ctx the parse tree
-	 */
-	enterFullColumnName?: (ctx: FullColumnNameContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.fullColumnName`.
-	 * @param ctx the parse tree
-	 */
-	exitFullColumnName?: (ctx: FullColumnNameContext) => void;
-	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.constant`.
 	 * @param ctx the parse tree
 	 */
@@ -2285,34 +2238,24 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitSetQuantifier?: (ctx: SetQuantifierContext) => void;
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.ansiNonReserved`.
+	 * Enter a parse tree produced by `FlinkSqlParser.reservedKeywords`.
 	 * @param ctx the parse tree
 	 */
-	enterAnsiNonReserved?: (ctx: AnsiNonReservedContext) => void;
+	enterReservedKeywords?: (ctx: ReservedKeywordsContext) => void;
 	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.ansiNonReserved`.
+	 * Exit a parse tree produced by `FlinkSqlParser.reservedKeywords`.
 	 * @param ctx the parse tree
 	 */
-	exitAnsiNonReserved?: (ctx: AnsiNonReservedContext) => void;
+	exitReservedKeywords?: (ctx: ReservedKeywordsContext) => void;
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.strictNonReserved`.
+	 * Enter a parse tree produced by `FlinkSqlParser.nonReservedKeywords`.
 	 * @param ctx the parse tree
 	 */
-	enterStrictNonReserved?: (ctx: StrictNonReservedContext) => void;
+	enterNonReservedKeywords?: (ctx: NonReservedKeywordsContext) => void;
 	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.strictNonReserved`.
+	 * Exit a parse tree produced by `FlinkSqlParser.nonReservedKeywords`.
 	 * @param ctx the parse tree
 	 */
-	exitStrictNonReserved?: (ctx: StrictNonReservedContext) => void;
-	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.nonReserved`.
-	 * @param ctx the parse tree
-	 */
-	enterNonReserved?: (ctx: NonReservedContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.nonReserved`.
-	 * @param ctx the parse tree
-	 */
-	exitNonReserved?: (ctx: NonReservedContext) => void;
+	exitNonReservedKeywords?: (ctx: NonReservedKeywordsContext) => void;
 }
 
