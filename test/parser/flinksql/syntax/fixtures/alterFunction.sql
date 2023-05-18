@@ -1,12 +1,12 @@
 ALTER FUNCTION tempFunction AS 'SimpleUdf';
 
-alter temporary function function1 as 'org.apache.flink.function.function1';
+ALTER temporary FUNCTION function1 AS 'org.apache.flink.function.function1';
 
-alter temporary function function1 as 'org.apache.flink.function.function1' language scala;
+ALTER temporary FUNCTION function1 AS 'org.apache.flink.function.function1' LANGUAGE scala;
 
-alter temporary system function function1 as 'org.apache.flink.function.function1';
+ALTER temporary SYSTEM FUNCTION function1 AS 'org.apache.flink.function.function1';
 
-alter temporary system function function1 as 'org.apache.flink.function.function1' language java;
+ALTER temporary SYSTEM FUNCTION function1 AS 'org.apache.flink.function.function1' LANGUAGE java;
 
 ALTER TEMPORARY SYSTEM FUNCTION IF EXISTS tempFunction AS 'SimpleUdf';
 
