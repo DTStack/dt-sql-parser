@@ -66,33 +66,33 @@ GROUP BY
 
 -- Group Window Aggregation
 SELECT
-    user,
+    `user`,
     TUMBLE_START(order_time, INTERVAL '1' DAY) AS wStart,
     SUM(amount) FROM Orders
 GROUP BY
     TUMBLE(order_time, INTERVAL '1' DAY),
-    user;
+    `user`;
 
 SELECT
-    user,
+    `user`,
     TUMBLE_START(order_time, INTERVAL '1' DAY) AS wStart,
     SUM(amount) FROM Orders
 GROUP BY
     HOP(order_time, INTERVAL '1' DAY),
-    user;
+    `user`;
 
 SELECT
-    user,
+    `user`,
     TUMBLE_START(order_time, INTERVAL '1' DAY) AS wStart,
     SUM(amount) FROM Orders
 GROUP BY
     SESSION(order_time, INTERVAL '1' DAY),
-    user;
+    `user`;
 
 -- Having
 SELECT SUM(amount)
 FROM Orders
-GROUP BY users
+GROUP BY `users`
 HAVING SUM(amount) > 50;
 
 -- Over Aggregation
