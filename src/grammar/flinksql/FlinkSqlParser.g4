@@ -646,9 +646,6 @@ withinClause
     : KW_WITHIN timeIntervalExpression
     ;
 
-timeIntervalExpression
-    : KW_INTERVAL STRING_LITERAL ID_LITERAL
-    ;
 
 // expression
 
@@ -743,7 +740,7 @@ qualifiedName
     : identifier | dereferenceDefinition
     ;
 
-interval
+timeIntervalExpression
     : KW_INTERVAL (errorCapturingMultiUnitsInterval | errorCapturingUnitToUnitInterval)?
     ;
 
@@ -752,7 +749,7 @@ errorCapturingMultiUnitsInterval
     ;
 
 multiUnitsInterval
-    : (intervalValue identifier)+
+    : (intervalValue intervalTimeUnit)+
     ;
 
 errorCapturingUnitToUnitInterval
@@ -760,12 +757,17 @@ errorCapturingUnitToUnitInterval
     ;
 
 unitToUnitInterval
-    : value=intervalValue from=identifier KW_TO to=identifier
+    : value=intervalValue from=intervalTimeUnit KW_TO to=intervalTimeUnit
     ;
 
 intervalValue
     : ('+' | '-')? (DIG_LITERAL | REAL_LITERAL)
     | STRING_LITERAL
+    ;
+
+intervalTimeUnit  // TODO: 需要整理 interval 时间粒度比如 SECOND、DAY
+    : identifier
+    | reservedKeywords
     ;
 
 columnAlias
@@ -876,7 +878,7 @@ fullColumnName
 constant
     : stringLiteral                                             // 引号包含的字符串
     | decimalLiteral                                            // 整数
-    | interval                                                  // KW_INTERVAL keywords
+    | timeIntervalExpression                                                  // KW_INTERVAL keywords
     | HYPNEN_SIGN decimalLiteral                                        // 负整数
     | booleanLiteral                                            // 布尔值
     | REAL_LITERAL                                              // 小数
