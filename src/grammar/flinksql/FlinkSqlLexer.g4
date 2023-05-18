@@ -11,6 +11,7 @@ LINE_COMMENT:                        (
 
 // List of keywords that are not reserved.
 // Please keep the keyword in alphabetical order if new keyword is added.
+// Please add it to the nonReservedKeywords rule if new keyword is added.
 // Reference link https://github.com/apache/flink/blob/release-1.16/flink-table/flink-sql-parser/src/main/codegen/data/Parser.tdd
 
 KW_ADD:                              'ADD';
@@ -188,7 +189,9 @@ KW_ZONE:                             'ZONE';
 
 // Reserved Keywords
 // Please keep the keyword in alphabetical order if new keyword is added.
+// Please add it to the reservedKeywords rule if new keyword is added.
 // Reference link https://calcite.apache.org/docs/reference.html
+
 KW_ABS:                              'ABS';
 KW_ALL:                              'ALL';
 ALLOW:                               'ALLOW';
