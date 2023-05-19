@@ -667,15 +667,16 @@ booleanExpression
     ;
 
 predicate
-    : KW_NOT? kind=KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression
+    : KW_NOT? 
+        kind=KW_BETWEEN (KW_ASYMMETRIC | KW_SYMMETRIC)? 
+        lower=valueExpression KW_AND 
+        upper=valueExpression
     | KW_NOT? kind=KW_IN '(' expression (',' expression)* ')'
     | KW_NOT? kind=KW_IN '(' queryStatement ')'
     | kind=KW_EXISTS '(' queryStatement ')'
     | KW_NOT? kind=KW_RLIKE pattern=valueExpression
-    | KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) ('('')' | '(' expression (',' expression)* ')')
-    | KW_NOT? kind=KW_LIKE pattern=valueExpression
-    | KW_IS KW_NOT? kind=KW_NULL
-    | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE)
+    | likePredicate
+    | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL)
     | KW_IS KW_NOT? kind=KW_DISTINCT KW_FROM right=valueExpression
     ;
 
@@ -869,6 +870,7 @@ comparisonOperator
     | '!' '=' 
     | '<' '=' '>'
     ;
+
 bitOperator
     : '<' '<' 
     | '>' '>' 
@@ -925,13 +927,14 @@ setQuantifier
 reservedKeywords
     : KW_ABS
     | KW_ALL
-    | ALLOW
+    | KW_ALLOW
     | KW_ALTER 
     | KW_AND
     | KW_ANY
     | KW_ARE
     | KW_ARRAY
     | KW_AS
+    | KW_ASYMMETRIC
     | KW_AT
     | KW_AVG
     | KW_BEGIN
@@ -1082,6 +1085,7 @@ reservedKeywords
     | KW_STATIC
     | KW_SUBSTRING
     | KW_SUM
+    | KW_SYSTEM_TIME
     | KW_SYSTEM
     | KW_SYSTEM_TIME
     | KW_SYSTEM_USER
