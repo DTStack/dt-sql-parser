@@ -425,7 +425,7 @@ DOUBLE_VERTICAL_SIGN:                '||';
 DOUBLE_HYPNEN_SIGN:                  '--';
 SLASH_SIGN:                          '/';
 QUESTION_MARK_SIGN:                  '?'; 
-DOUBLE_RIGHT_ARROW:                        '=>';                
+DOUBLE_RIGHT_ARROW:                  '=>';                
 STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
 DIG_LITERAL:                         DEC_DIGIT+;
 REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+

@@ -853,23 +853,46 @@ tablePropertyValue
     ;
 
 logicalOperator
-    : KW_AND | '&' '&' | KW_OR | '|' '|'
+    : KW_AND
+    | '&' '&'
+    | KW_OR 
+    | '|' '|'
     ;
 
 comparisonOperator
-    : '=' | '>' | '<' | '<' '=' | '>' '='
-    | '<' '>' | '!' '=' | '<' '=' '>'
+    : '=' 
+    | '>' 
+    | '<' 
+    | '<' '=' 
+    | '>' '='
+    | '<' '>' 
+    | '!' '=' 
+    | '<' '=' '>'
     ;
 bitOperator
-    : '<' '<' | '>' '>' | '&' | '^' | '|'
+    : '<' '<' 
+    | '>' '>' 
+    | '&' 
+    | '^' 
+    | '|'
     ;
 
 mathOperator
-    : '*' | SLASH_SIGN | PENCENT_SIGN | KW_DIV | '+' | '-' | DOUBLE_HYPNEN_SIGN
+    : '*' 
+    | SLASH_SIGN 
+    | PENCENT_SIGN 
+    | KW_DIV 
+    | '+' 
+    | '-' 
+    | DOUBLE_HYPNEN_SIGN
     ;
 
 unaryOperator
-    : '!' | '~' | ADD_SIGN | '-' | KW_NOT
+    : '!' 
+    | '~' 
+    | ADD_SIGN 
+    | '-' 
+    | KW_NOT
     ;
 
 constant
