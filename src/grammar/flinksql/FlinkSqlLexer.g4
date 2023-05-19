@@ -346,6 +346,7 @@ KW_SECOND:                           'SECOND';
 KW_SELECT:                           'SELECT';
 KW_SET:                              'SET';
 KW_SHOW:                             'SHOW';
+KW_SIMILAR:                          'SIMILAR';
 KW_SKIP:                             'SKIP';
 KW_SMALLINT:                         'SMALLINT';
 KW_START:                            'START';

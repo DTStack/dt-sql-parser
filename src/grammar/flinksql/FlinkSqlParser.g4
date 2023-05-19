@@ -678,6 +678,7 @@ predicate
     | likePredicate
     | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL)
     | KW_IS KW_NOT? kind=KW_DISTINCT KW_FROM right=valueExpression
+    | KW_NOT? kind=KW_SIMILAR KW_TO  right=valueExpression
     ;
 
 likePredicate
@@ -1079,6 +1080,7 @@ reservedKeywords
     | KW_SELECT
     | KW_SET
     | KW_SHOW
+    | KW_SIMILAR
     | KW_SKIP
     | KW_SMALLINT
     | KW_START
