@@ -664,6 +664,7 @@ booleanExpression
     | valueExpression predicate?                                   #predicated
     | left=booleanExpression operator=KW_AND right=booleanExpression  #logicalBinary
     | left=booleanExpression operator=KW_OR right=booleanExpression   #logicalBinary
+    | booleanExpression KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL) #logicalNested
     ;
 
 predicate
