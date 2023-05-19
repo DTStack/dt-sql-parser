@@ -39,7 +39,7 @@ describe('FlinkSQL Syntax Tests', () => {
     });
     test('Test Select Statement with having clause', () => {
         const sql = `
-            SELECT city, sum(quantity) AS sum 
+            SELECT city, sum(quantity) AS _sum 
             FROM dealer GROUP BY city HAVING city = 'Fremont';
         `;
         const result = parser.validate(sql);
