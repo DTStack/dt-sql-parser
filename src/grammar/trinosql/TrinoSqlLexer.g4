@@ -1,4 +1,4 @@
-lexer grammar TrinoSqlLexer;
+lexer grammar trinoSqlLexer;
 
 ABSENT_: 'ABSENT';
 ADD_: 'ADD';

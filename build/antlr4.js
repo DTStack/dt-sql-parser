@@ -13,6 +13,7 @@ const entry = [
     'plsql',
     'spark',
     'flinksql',
+    'trinosql',
 ];
 
 function compile(language) {
