@@ -180,7 +180,7 @@ rowTypeDimension
     ;
 
 columnConstraint
-    :(KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY (KW_NOT KW_ENFORCED)? | KW_NOT KW_NULL
+    :(KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY (KW_NOT KW_ENFORCED)? | KW_NOT? KW_NULL
     ;
 
 commentSpec

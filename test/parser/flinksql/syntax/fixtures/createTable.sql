@@ -298,7 +298,7 @@ CREATE TABLE dt_catalog.dt_db.users (
     -- That was weird, NOT ENFORCED should have been necessary but we got a demo like the following and it could work!
     user_id INT PRIMARY KEY, 
     user_name VARCHAR(255) NOT NULL,
-    age INT NOT NULL
+    age INT NULL
 ) WITH (
     'connector' = 'faker'
 );
