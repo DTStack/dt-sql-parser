@@ -1,4 +1,4 @@
--- FlinkSQL 1.16：insert multipe table statement 
+-- FlinkSQL 1.16：insert multiple table statement 
 
 EXECUTE STATEMENT SET 
 BEGIN
@@ -10,7 +10,7 @@ VALUES ('Chinese', 'mumiao', 18),
     ('Amercian', 'georage', 22);
 END;
 
--- FlinkSQL 1.15：insert multipe table statement 
+-- FlinkSQL 1.15：insert multiple table statement 
 
 BEGIN STATEMENT SET;
 INSERT INTO country_page_view
