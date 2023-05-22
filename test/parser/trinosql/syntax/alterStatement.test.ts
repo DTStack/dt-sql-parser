@@ -2,9 +2,9 @@ import TrinoSQL from "../../../../src/parser/trinosql";
 import { readSQL } from "../../../helper";
 
 const features = {
-    table: readSQL(__dirname, 'alterTable.sql'),
-    view: readSQL(__dirname, 'alterView.sql'),
-    schema: readSQL(__dirname, 'alterSchema.sql'),
+    table: readSQL(__dirname, 'alter_table.sql'),
+    view: readSQL(__dirname, 'alter_view.sql'),
+    schema: readSQL(__dirname, 'alter_schema.sql'),
 };
 
 describe('TrinoSQL Alter Statements Syntax Tests', () => {
