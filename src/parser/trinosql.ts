@@ -1,6 +1,6 @@
 import { CharStream, CommonTokenStream, Lexer } from 'antlr4';
-import trinoSqlLexer from '../lib/trinosql/trinoSqlLexer';
-import trinoSqlParser from '../lib/trinosql/trinoSqlParser';
+import trinoSqlLexer from '../lib/trinosql/trinoSqlParserLexer';
+import trinoSqlParser from '../lib/trinosql/trinoSqlParserParser';
 import BasicParser from './common/basicParser';
 export default class trinoSQL extends BasicParser {
     public createLexer(input: string): trinoSqlLexer {

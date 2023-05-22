@@ -1,7 +1,7 @@
-parser grammar trinoSqlParser;
+grammar trinoSqlParser;
 
-options {
-	tokenVocab = trinoSqlLexer;
+tokens {
+	DELIMITER
 }
 
 // Modified entrypoint
@@ -12,937 +12,993 @@ statements:
 	| standaloneExpression
 	| standalonePathSpecification
 	| standaloneType
-	| standaloneRowPattern SEMICOLON_?;
+	| standaloneRowPattern;
 
-singleStatement: statement SEMICOLON_;
+singleStatement: statement SEMICOLON ;
 
-standaloneExpression: expression SEMICOLON_;
+standaloneExpression: expression SEMICOLON;
 
-standalonePathSpecification: pathSpecification SEMICOLON_;
+standalonePathSpecification: pathSpecification SEMICOLON;
 
-standaloneType: type SEMICOLON_;
+standaloneType: type SEMICOLON;
 
-standaloneRowPattern: rowPattern SEMICOLON_;
+standaloneRowPattern: rowPattern SEMICOLON;
 
 statement:
-	query													# statementDefault
-	| USE_ schema = identifier								# use
-	| USE_ catalog = identifier DOT_ schema = identifier	# use
-	| CREATE_ SCHEMA_ (IF_ NOT_ EXISTS_)? qualifiedName (
-		AUTHORIZATION_ principal
-	)? (WITH_ properties)? # createSchema
-	| DROP_ SCHEMA_ (IF_ EXISTS_)? qualifiedName (
-		CASCADE_
-		| RESTRICT_
-	)?																# dropSchema
-	| ALTER_ SCHEMA_ qualifiedName RENAME_ TO_ identifier			# renameSchema
-	| ALTER_ SCHEMA_ qualifiedName SET_ AUTHORIZATION_ principal	# setSchemaAuthorization
-	| CREATE_ TABLE_ (IF_ NOT_ EXISTS_)? qualifiedName columnAliases? (
-		COMMENT_ string_
-	)? (WITH_ properties)? AS_ (query | LPAREN_ query RPAREN_) (
-		WITH_ (NO_)? DATA_
+	query												# statementDefault
+	| USE schema = identifier							# use
+	| USE catalog = identifier '.' schema = identifier	# use
+	| CREATE SCHEMA (IF NOT EXISTS)? qualifiedName (
+		AUTHORIZATION principal
+	)? (WITH properties)?											# createSchema
+	| DROP SCHEMA (IF EXISTS)? qualifiedName (CASCADE | RESTRICT)?	# dropSchema
+	| ALTER SCHEMA qualifiedName RENAME TO identifier				# renameSchema
+	| ALTER SCHEMA qualifiedName SET AUTHORIZATION principal		# setSchemaAuthorization
+	| CREATE TABLE (IF NOT EXISTS)? qualifiedName columnAliases? (
+		COMMENT string
+	)? (WITH properties)? AS (query | '(' query ')') (
+		WITH (NO)? DATA
 	)? # createTableAsSelect
-	| CREATE_ TABLE_ (IF_ NOT_ EXISTS_)? qualifiedName LPAREN_ tableElement (
-		COMMA_ tableElement
-	)* RPAREN_ (COMMENT_ string_)? (WITH_ properties)?									# createTable
-	| DROP_ TABLE_ (IF_ EXISTS_)? qualifiedName											# dropTable
-	| INSERT_ INTO_ qualifiedName columnAliases? query									# insertInto
-	| DELETE_ FROM_ qualifiedName (WHERE_ booleanExpression)?							# delete
-	| TRUNCATE_ TABLE_ qualifiedName													# truncateTable
-	| COMMENT_ ON_ TABLE_ qualifiedName IS_ (string_ | NULL_)							# commentTable
-	| COMMENT_ ON_ VIEW_ qualifiedName IS_ (string_ | NULL_)							# commentView
-	| COMMENT_ ON_ COLUMN_ qualifiedName IS_ (string_ | NULL_)							# commentColumn
-	| ALTER_ TABLE_ (IF_ EXISTS_)? from = qualifiedName RENAME_ TO_ to = qualifiedName	# renameTable
-	| ALTER_ TABLE_ (IF_ EXISTS_)? tableName = qualifiedName ADD_ COLUMN_ (
-		IF_ NOT_ EXISTS_
-	)? column = columnDefinition # addColumn
-	| ALTER_ TABLE_ (IF_ EXISTS_)? tableName = qualifiedName RENAME_ COLUMN_ (
-		IF_ EXISTS_
-	)? from = identifier TO_ to = identifier # renameColumn
-	| ALTER_ TABLE_ (IF_ EXISTS_)? tableName = qualifiedName DROP_ COLUMN_ (
-		IF_ EXISTS_
+	| CREATE TABLE (IF NOT EXISTS)? qualifiedName '(' tableElement (
+		',' tableElement
+	)* ')' (COMMENT string)? (WITH properties)?										# createTable
+	| DROP TABLE (IF EXISTS)? qualifiedName											# dropTable
+	| INSERT INTO qualifiedName columnAliases? query								# insertInto
+	| DELETE FROM qualifiedName (WHERE booleanExpression)?							# delete
+	| ALTER TABLE (IF EXISTS)? from = qualifiedName RENAME TO to = qualifiedName	# renameTable
+	| COMMENT ON TABLE qualifiedName IS (string | NULL)								# commentTable
+	| COMMENT ON COLUMN qualifiedName IS (string | NULL)							# commentColumn
+	| ALTER TABLE (IF EXISTS)? tableName = qualifiedName RENAME COLUMN (
+		IF EXISTS
+	)? from = identifier TO to = identifier # renameColumn
+	| ALTER TABLE (IF EXISTS)? tableName = qualifiedName DROP COLUMN (
+		IF EXISTS
 	)? column = qualifiedName # dropColumn
-	| ALTER_ TABLE_ (IF_ EXISTS_)? tableName = qualifiedName ALTER_ COLUMN_ columnName = identifier
-		SET_ DATA_ TYPE_ type														# setColumnType
-	| ALTER_ TABLE_ tableName = qualifiedName SET_ AUTHORIZATION_ principal			# setTableAuthorization
-	| ALTER_ TABLE_ tableName = qualifiedName SET_ PROPERTIES_ propertyAssignments	#
-		setTableProperties
-	| ALTER_ TABLE_ tableName = qualifiedName EXECUTE_ procedureName = identifier (
-		LPAREN_ (callArgument (COMMA_ callArgument)*)? RPAREN_
-	)? (WHERE_ where = booleanExpression)?			# tableExecute
-	| ANALYZE_ qualifiedName (WITH_ properties)?	# analyze
-	| CREATE_ (OR_ REPLACE_)? MATERIALIZED_ VIEW_ (
-		IF_ NOT_ EXISTS_
-	)? qualifiedName (GRACE_ PERIOD_ interval)? (
-		COMMENT_ string_
-	)? (WITH_ properties)? AS_ query # createMaterializedView
-	| CREATE_ (OR_ REPLACE_)? VIEW_ qualifiedName (
-		COMMENT_ string_
-	)? (SECURITY_ (DEFINER_ | INVOKER_))? AS_ query													# createView
-	| REFRESH_ MATERIALIZED_ VIEW_ qualifiedName													# refreshMaterializedView
-	| DROP_ MATERIALIZED_ VIEW_ (IF_ EXISTS_)? qualifiedName										# dropMaterializedView
-	| ALTER_ MATERIALIZED_ VIEW_ (IF_ EXISTS_)? from = qualifiedName RENAME_ TO_ to = qualifiedName	#
-		renameMaterializedView
-	| ALTER_ MATERIALIZED_ VIEW_ qualifiedName SET_ PROPERTIES_ propertyAssignments #
-		setMaterializedViewProperties
-	| DROP_ VIEW_ (IF_ EXISTS_)? qualifiedName							# dropView
-	| ALTER_ VIEW_ from = qualifiedName RENAME_ TO_ to = qualifiedName	# renameView
-	| ALTER_ VIEW_ from = qualifiedName SET_ AUTHORIZATION_ principal	# setViewAuthorization
-	| CALL_ qualifiedName LPAREN_ (
-		callArgument (COMMA_ callArgument)*
-	)? RPAREN_ # call
-	| CREATE_ ROLE_ name = identifier (WITH_ ADMIN_ grantor)? (
-		IN_ catalog = identifier
-	)?															# createRole
-	| DROP_ ROLE_ name = identifier (IN_ catalog = identifier)?	# dropRole
-	| GRANT_ roles TO_ principal (COMMA_ principal)* (
-		WITH_ ADMIN_ OPTION_
-	)? (GRANTED_ BY_ grantor)? (IN_ catalog = identifier)? # grantRoles
-	| REVOKE_ (ADMIN_ OPTION_ FOR_)? roles FROM_ principal (
-		COMMA_ principal
-	)* (GRANTED_ BY_ grantor)? (IN_ catalog = identifier)? # revokeRoles
-	| SET_ ROLE_ (ALL_ | NONE_ | role = identifier) (
-		IN_ catalog = identifier
-	)? # setRole
-	| GRANT_ (privilege (COMMA_ privilege)* | ALL_ PRIVILEGES_) ON_ (
-		SCHEMA_
-		| TABLE_
-	)? qualifiedName TO_ grantee = principal (
-		WITH_ GRANT_ OPTION_
-	)? # grant
-	| DENY_ (privilege (COMMA_ privilege)* | ALL_ PRIVILEGES_) ON_ (
-		SCHEMA_
-		| TABLE_
-	)? qualifiedName TO_ grantee = principal # deny
-	| REVOKE_ (GRANT_ OPTION_ FOR_)? (
-		privilege (COMMA_ privilege)*
-		| ALL_ PRIVILEGES_
-	) ON_ (SCHEMA_ | TABLE_)? qualifiedName FROM_ grantee = principal	# revoke
-	| SHOW_ GRANTS_ (ON_ TABLE_? qualifiedName)?						# showGrants
-	| EXPLAIN_ (
-		LPAREN_ explainOption (COMMA_ explainOption)* RPAREN_
-	)? statement										# explain
-	| EXPLAIN_ ANALYZE_ VERBOSE_? statement				# explainAnalyze
-	| SHOW_ CREATE_ TABLE_ qualifiedName				# showCreateTable
-	| SHOW_ CREATE_ SCHEMA_ qualifiedName				# showCreateSchema
-	| SHOW_ CREATE_ VIEW_ qualifiedName					# showCreateView
-	| SHOW_ CREATE_ MATERIALIZED_ VIEW_ qualifiedName	# showCreateMaterializedView
-	| SHOW_ TABLES_ ((FROM_ | IN_) qualifiedName)? (
-		LIKE_ pattern = string_ (ESCAPE_ escape = string_)?
+	| ALTER TABLE (IF EXISTS)? tableName = qualifiedName ADD COLUMN (
+		IF NOT EXISTS
+	)? column = columnDefinition										# addColumn
+	| ALTER TABLE tableName = qualifiedName SET AUTHORIZATION principal	# setTableAuthorization
+	| ANALYZE qualifiedName (WITH properties)?							# analyze
+	| CREATE (OR REPLACE)? MATERIALIZED VIEW (IF NOT EXISTS)? qualifiedName (
+		COMMENT string
+	)? (WITH properties)? AS query # createMaterializedView
+	| CREATE (OR REPLACE)? VIEW qualifiedName (COMMENT string)? (
+		SECURITY (DEFINER | INVOKER)
+	)? AS query															# createView
+	| REFRESH MATERIALIZED VIEW qualifiedName							# refreshMaterializedView
+	| DROP MATERIALIZED VIEW (IF EXISTS)? qualifiedName					# dropMaterializedView
+	| DROP VIEW (IF EXISTS)? qualifiedName								# dropView
+	| ALTER VIEW from = qualifiedName RENAME TO to = qualifiedName		# renameView
+	| ALTER VIEW from = qualifiedName SET AUTHORIZATION principal		# setViewAuthorization
+	| CALL qualifiedName '(' (callArgument (',' callArgument)*)? ')'	# call
+	| CREATE ROLE name = identifier (WITH ADMIN grantor)?				# createRole
+	| DROP ROLE name = identifier										# dropRole
+	| GRANT roles TO principal (',' principal)* (
+		WITH ADMIN OPTION
+	)? (GRANTED BY grantor)? # grantRoles
+	| REVOKE (ADMIN OPTION FOR)? roles FROM principal (
+		',' principal
+	)* (GRANTED BY grantor)?					# revokeRoles
+	| SET ROLE (ALL | NONE | role = identifier)	# setRole
+	| GRANT (privilege (',' privilege)* | ALL PRIVILEGES) ON (
+		SCHEMA
+		| TABLE
+	)? qualifiedName TO grantee = principal (WITH GRANT OPTION)? # grant
+	| REVOKE (GRANT OPTION FOR)? (
+		privilege (',' privilege)*
+		| ALL PRIVILEGES
+	) ON (SCHEMA | TABLE)? qualifiedName FROM grantee = principal	# revoke
+	| SHOW GRANTS (ON TABLE? qualifiedName)?						# showGrants
+	| EXPLAIN ANALYZE? VERBOSE? (
+		'(' explainOption (',' explainOption)* ')'
+	)? statement									# explain
+	| SHOW CREATE TABLE qualifiedName				# showCreateTable
+	| SHOW CREATE SCHEMA qualifiedName				# showCreateSchema
+	| SHOW CREATE VIEW qualifiedName				# showCreateView
+	| SHOW CREATE MATERIALIZED VIEW qualifiedName	# showCreateMaterializedView
+	| SHOW TABLES ((FROM | IN) qualifiedName)? (
+		LIKE pattern = string (ESCAPE escape = string)?
 	)? # showTables
-	| SHOW_ SCHEMAS_ ((FROM_ | IN_) identifier)? (
-		LIKE_ pattern = string_ (ESCAPE_ escape = string_)?
+	| SHOW SCHEMAS ((FROM | IN) identifier)? (
+		LIKE pattern = string (ESCAPE escape = string)?
 	)? # showSchemas
-	| SHOW_ CATALOGS_ (
-		LIKE_ pattern = string_ (ESCAPE_ escape = string_)?
+	| SHOW CATALOGS (
+		LIKE pattern = string (ESCAPE escape = string)?
 	)? # showCatalogs
-	| SHOW_ COLUMNS_ (FROM_ | IN_) qualifiedName? (
-		LIKE_ pattern = string_ (ESCAPE_ escape = string_)?
-	)?														# showColumns
-	| SHOW_ STATS_ FOR_ qualifiedName						# showStats
-	| SHOW_ STATS_ FOR_ LPAREN_ query RPAREN_				# showStatsForQuery
-	| SHOW_ CURRENT_? ROLES_ ((FROM_ | IN_) identifier)?	# showRoles
-	| SHOW_ ROLE_ GRANTS_ ((FROM_ | IN_) identifier)?		# showRoleGrants
-	| DESCRIBE_ qualifiedName								# showColumns
-	| DESC_ qualifiedName									# showColumns
-	| SHOW_ FUNCTIONS_ (
-		LIKE_ pattern = string_ (ESCAPE_ escape = string_)?
+	| SHOW COLUMNS (FROM | IN) qualifiedName? (
+		LIKE pattern = string (ESCAPE escape = string)?
+	)?												# showColumns
+	| SHOW STATS FOR qualifiedName					# showStats
+	| SHOW STATS FOR '(' query ')'					# showStatsForQuery
+	| SHOW CURRENT? ROLES ((FROM | IN) identifier)?	# showRoles
+	| SHOW ROLE GRANTS ((FROM | IN) identifier)?	# showRoleGrants
+	| DESCRIBE qualifiedName						# showColumns
+	| DESC qualifiedName							# showColumns
+	| SHOW FUNCTIONS (
+		LIKE pattern = string (ESCAPE escape = string)?
 	)? # showFunctions
-	| SHOW_ SESSION_ (
-		LIKE_ pattern = string_ (ESCAPE_ escape = string_)?
-	)?												# showSession
-	| SET_ SESSION_ qualifiedName EQ_ expression	# setSession
-	| RESET_ SESSION_ qualifiedName					# resetSession
-	| START_ TRANSACTION_ (
-		transactionMode (COMMA_ transactionMode)*
-	)?										# startTransaction
-	| COMMIT_ WORK_?						# commit
-	| ROLLBACK_ WORK_?						# rollback
-	| PREPARE_ identifier FROM_ statement	# prepare
-	| DEALLOCATE_ PREPARE_ identifier		# deallocate
-	| EXECUTE_ identifier (
-		USING_ expression (COMMA_ expression)*
-	)?											# execute
-	| DESCRIBE_ INPUT_ identifier				# describeInput
-	| DESCRIBE_ OUTPUT_ identifier				# describeOutput
-	| SET_ PATH_ pathSpecification				# setPath
-	| SET_ TIME_ ZONE_ (LOCAL_ | expression)	# setTimeZone
-	| UPDATE_ qualifiedName SET_ updateAssignment (
-		COMMA_ updateAssignment
-	)* (WHERE_ where = booleanExpression)?														# update
-	| MERGE_ INTO_ qualifiedName (AS_? identifier)? USING_ relation ON_ expression mergeCase+	# merge
-		;
+	| SHOW SESSION (
+		LIKE pattern = string (ESCAPE escape = string)?
+	)?																# showSession
+	| SET SESSION qualifiedName EQ expression						# setSession
+	| RESET SESSION qualifiedName									# resetSession
+	| START TRANSACTION (transactionMode (',' transactionMode)*)?	# startTransaction
+	| COMMIT WORK?													# commit
+	| ROLLBACK WORK?												# rollback
+	| PREPARE identifier FROM statement								# prepare
+	| DEALLOCATE PREPARE identifier									# deallocate
+	| EXECUTE identifier (USING expression (',' expression)*)?		# execute
+	| DESCRIBE INPUT identifier										# describeInput
+	| DESCRIBE OUTPUT identifier									# describeOutput
+	| SET PATH pathSpecification									# setPath
+	| SET TIME ZONE (LOCAL | expression)							# setTimeZone
+	| UPDATE qualifiedName SET updateAssignment (
+		',' updateAssignment
+	)* (WHERE where = booleanExpression)?													# update
+	| MERGE INTO qualifiedName (AS? identifier)? USING relation ON expression mergeCase+	# merge
+	| SHOW COMMENT ON TABLE qualifiedName													# showTableComment
+	| SHOW COMMENT ON COLUMN qualifiedName													# showColumnComment;
 
 query: with? queryNoWith;
 
-with: WITH_ RECURSIVE_? namedQuery (COMMA_ namedQuery)*;
+with: WITH RECURSIVE? namedQuery (',' namedQuery)*;
 
 tableElement: columnDefinition | likeClause;
 
 columnDefinition:
-	identifier type (NOT_ NULL_)? (COMMENT_ string_)? (
-		WITH_ properties
+	identifier type (NOT NULL)? (COMMENT string)? (
+		WITH properties
 	)?;
 
 likeClause:
-	LIKE_ qualifiedName (
-		optionType = (INCLUDING_ | EXCLUDING_) PROPERTIES_
+	LIKE qualifiedName (
+		optionType = (INCLUDING | EXCLUDING) PROPERTIES
 	)?;
 
-properties: LPAREN_ propertyAssignments RPAREN_;
+properties: '(' property (',' property)* ')';
 
-propertyAssignments: property (COMMA_ property)*;
-
-property: identifier EQ_ propertyValue;
-
-propertyValue:
-	DEFAULT_		# defaultPropertyValue
-	| expression	# nonDefaultPropertyValue;
+property: identifier EQ expression;
 
 queryNoWith:
-	queryTerm (ORDER_ BY_ sortItem (COMMA_ sortItem)*)? (
-		OFFSET_ offset = rowCount (ROW_ | ROWS_)?
+	queryTerm (ORDER BY sortItem (',' sortItem)*)? (
+		OFFSET offset = rowCount (ROW | ROWS)?
 	)? (
-		LIMIT_ limit = limitRowCount
-		| FETCH_ (FIRST_ | NEXT_) (fetchFirst = rowCount)? (
-			ROW_
-			| ROWS_
-		) (ONLY_ | WITH_ TIES_)
+		(LIMIT limit = limitRowCount)
+		| (
+			FETCH (FIRST | NEXT) (fetchFirst = rowCount)? (
+				ROW
+				| ROWS
+			) (ONLY | WITH TIES)
+		)
 	)?;
 
-limitRowCount: ALL_ | rowCount;
+limitRowCount: ALL | rowCount;
 
-rowCount: INTEGER_VALUE_ | QUESTION_MARK_;
+rowCount: INTEGER_VALUE | QUESTION_MARK;
 
 queryTerm:
-	queryPrimary																		# queryTermDefault
-	| left = queryTerm operator = INTERSECT_ setQuantifier? right = queryTerm			# setOperation
-	| left = queryTerm operator = (UNION_ | EXCEPT_) setQuantifier? right = queryTerm	# setOperation;
+	queryPrimary																	# queryTermDefault
+	| left = queryTerm operator = INTERSECT setQuantifier? right = queryTerm		# setOperation
+	| left = queryTerm operator = (UNION | EXCEPT) setQuantifier? right = queryTerm	# setOperation;
 
 queryPrimary:
-	querySpecification							# queryPrimaryDefault
-	| TABLE_ qualifiedName						# table
-	| VALUES_ expression (COMMA_ expression)*	# inlineTable
-	| LPAREN_ queryNoWith RPAREN_				# subquery;
+	querySpecification						# queryPrimaryDefault
+	| TABLE qualifiedName					# table
+	| VALUES expression (',' expression)*	# inlineTable
+	| '(' queryNoWith ')'					# subquery;
 
 sortItem:
-	expression ordering = (ASC_ | DESC_)? (
-		NULLS_ nullOrdering = (FIRST_ | LAST_)
+	expression ordering = (ASC | DESC)? (
+		NULLS nullOrdering = (FIRST | LAST)
 	)?;
 
 querySpecification:
-	SELECT_ setQuantifier? selectItem (COMMA_ selectItem)* (
-		FROM_ relation (COMMA_ relation)*
-	)? (WHERE_ where = booleanExpression)? (GROUP_ BY_ groupBy)? (
-		HAVING_ having = booleanExpression
-	)? (WINDOW_ windowDefinition (COMMA_ windowDefinition)*)?;
+	SELECT setQuantifier? selectItem (',' selectItem)* (
+		FROM relation (',' relation)*
+	)? (WHERE where = booleanExpression)? (GROUP BY groupBy)? (
+		HAVING having = booleanExpression
+	)? (WINDOW windowDefinition (',' windowDefinition)*)?;
 
-groupBy:
-	setQuantifier? groupingElement (COMMA_ groupingElement)*;
+groupBy: setQuantifier? groupingElement (',' groupingElement)*;
 
 groupingElement:
-	groupingSet															# singleGroupingSet
-	| ROLLUP_ LPAREN_ (expression (COMMA_ expression)*)? RPAREN_		# rollup
-	| CUBE_ LPAREN_ (expression (COMMA_ expression)*)? RPAREN_			# cube
-	| GROUPING_ SETS_ LPAREN_ groupingSet (COMMA_ groupingSet)* RPAREN_	# multipleGroupingSets;
+	groupingSet												# singleGroupingSet
+	| ROLLUP '(' (expression (',' expression)*)? ')'		# rollup
+	| CUBE '(' (expression (',' expression)*)? ')'			# cube
+	| GROUPING SETS '(' groupingSet (',' groupingSet)* ')'	# multipleGroupingSets;
 
 groupingSet:
-	LPAREN_ (expression (COMMA_ expression)*)? RPAREN_
+	'(' (expression (',' expression)*)? ')'
 	| expression;
 
 windowDefinition:
-	name = identifier AS_ LPAREN_ windowSpecification RPAREN_;
+	name = identifier AS '(' windowSpecification ')';
 
 windowSpecification: (existingWindowName = identifier)? (
-		PARTITION_ BY_ partition += expression (
-			COMMA_ partition += expression
+		PARTITION BY partition += expression (
+			',' partition += expression
 		)*
-	)? (ORDER_ BY_ sortItem (COMMA_ sortItem)*)? windowFrame?;
+	)? (ORDER BY sortItem (',' sortItem)*)? windowFrame?;
 
-namedQuery:
-	name = identifier (columnAliases)? AS_ LPAREN_ query RPAREN_;
+namedQuery: name = identifier (columnAliases)? AS '(' query ')';
 
-setQuantifier: DISTINCT_ | ALL_;
+setQuantifier: DISTINCT | ALL;
 
 selectItem:
-	expression (AS_? identifier)?							# selectSingle
-	| primaryExpression DOT_ ASTERISK_ (AS_ columnAliases)?	# selectAll
-	| ASTERISK_												# selectAll;
+	expression (AS? identifier)?							# selectSingle
+	| primaryExpression '.' ASTERISK (AS columnAliases)?	# selectAll
+	| ASTERISK												# selectAll;
 
 relation:
 	left = relation (
-		CROSS_ JOIN_ right = sampledRelation
-		| joinType JOIN_ rightRelation = relation joinCriteria
-		| NATURAL_ joinType JOIN_ right = sampledRelation
+		CROSS JOIN right = sampledRelation
+		| joinType JOIN rightRelation = relation joinCriteria
+		| NATURAL joinType JOIN right = sampledRelation
 	)					# joinRelation
 	| sampledRelation	# relationDefault;
 
-joinType: INNER_? | (LEFT_ | RIGHT_ | FULL_) OUTER_?;
+joinType: INNER? | LEFT OUTER? | RIGHT OUTER? | FULL OUTER?;
 
 joinCriteria:
-	ON_ booleanExpression
-	| USING_ LPAREN_ identifier (COMMA_ identifier)* RPAREN_;
+	ON booleanExpression
+	| USING '(' identifier (',' identifier)* ')';
 
 sampledRelation:
 	patternRecognition (
-		TABLESAMPLE_ sampleType LPAREN_ percentage = expression RPAREN_
+		TABLESAMPLE sampleType '(' percentage = expression ')'
 	)?;
 
-sampleType: BERNOULLI_ | SYSTEM_;
-
-trimsSpecification: LEADING_ | TRAILING_ | BOTH_;
-
-listAggOverflowBehavior:
-	ERROR_
-	| TRUNCATE_ string_? listaggCountIndication;
-
-listaggCountIndication: (WITH_ | WITHOUT_) COUNT_;
+sampleType: BERNOULLI | SYSTEM;
 
 patternRecognition:
 	aliasedRelation (
-		MATCH_RECOGNIZE_ LPAREN_ (
-			PARTITION_ BY_ partition += expression (
-				COMMA_ partition += expression
+		MATCH_RECOGNIZE '(' (
+			PARTITION BY partition += expression (
+				',' partition += expression
 			)*
-		)? (ORDER_ BY_ sortItem (COMMA_ sortItem)*)? (
-			MEASURES_ measureDefinition (
-				COMMA_ measureDefinition
-			)*
-		)? rowsPerMatch? (AFTER_ MATCH_ skipTo)? (
-			INITIAL_
-			| SEEK_
-		)? PATTERN_ LPAREN_ rowPattern RPAREN_ (
-			SUBSET_ subsetDefinition (COMMA_ subsetDefinition)*
-		)? DEFINE_ variableDefinition (COMMA_ variableDefinition)* RPAREN_ (
-			AS_? identifier columnAliases?
+		)? (ORDER BY sortItem (',' sortItem)*)? (
+			MEASURES measureDefinition (',' measureDefinition)*
+		)? rowsPerMatch? (AFTER MATCH skipTo)? (INITIAL | SEEK)? PATTERN '(' rowPattern ')' (
+			SUBSET subsetDefinition (',' subsetDefinition)*
+		)? DEFINE variableDefinition (',' variableDefinition)* ')' (
+			AS? identifier columnAliases?
 		)?
 	)?;
 
-measureDefinition: expression AS_ identifier;
+measureDefinition: expression AS identifier;
 
 rowsPerMatch:
-	ONE_ ROW_ PER_ MATCH_
-	| ALL_ ROWS_ PER_ MATCH_ emptyMatchHandling?;
+	ONE ROW PER MATCH
+	| ALL ROWS PER MATCH emptyMatchHandling?;
 
 emptyMatchHandling:
-	SHOW_ EMPTY_ MATCHES_
-	| OMIT_ EMPTY_ MATCHES_
-	| WITH_ UNMATCHED_ ROWS_;
+	SHOW EMPTY MATCHES
+	| OMIT EMPTY MATCHES
+	| WITH UNMATCHED ROWS;
 
 skipTo:
-	SKIP_ (
-		TO_ (NEXT_ ROW_ | (FIRST_ | LAST_)? identifier)
-		| PAST_ LAST_ ROW_
-	);
+	'SKIP' TO NEXT ROW
+	| 'SKIP' PAST LAST ROW
+	| 'SKIP' TO FIRST identifier
+	| 'SKIP' TO LAST identifier
+	| 'SKIP' TO identifier;
 
 subsetDefinition:
-	name = identifier EQ_ LPAREN_ union += identifier (
-		COMMA_ union += identifier
-	)* RPAREN_;
+	name = identifier EQ '(' union += identifier (
+		',' union += identifier
+	)* ')';
 
-variableDefinition: identifier AS_ expression;
+variableDefinition: identifier AS expression;
 
 aliasedRelation:
-	relationPrimary (AS_? identifier columnAliases?)?;
+	relationPrimary (AS? identifier columnAliases?)?;
 
-columnAliases: LPAREN_ identifier (COMMA_ identifier)* RPAREN_;
+columnAliases: '(' identifier (',' identifier)* ')';
 
 relationPrimary:
-	qualifiedName queryPeriod?	# tableName
-	| LPAREN_ query RPAREN_		# subqueryRelation
-	| UNNEST_ LPAREN_ expression (COMMA_ expression)* RPAREN_ (
-		WITH_ ORDINALITY_
-	)?											# unnest
-	| LATERAL_ LPAREN_ query RPAREN_			# lateral
-	| TABLE_ LPAREN_ tableFunctionCall RPAREN_	# tableFunctionInvocation
-	| LPAREN_ relation RPAREN_					# parenthesizedRelation;
-
-tableFunctionCall:
-	qualifiedName LPAREN_ (
-		tableFunctionArgument (COMMA_ tableFunctionArgument)*
-	)? (
-		COPARTITION_ copartitionTables (COMMA_ copartitionTables)*
-	)? RPAREN_;
-
-tableFunctionArgument: (identifier RDOUBLEARROW_)? (
-		tableArgument
-		| descriptorArgument
-		| expression
-	) ; // descriptor before expression to avoid parsing descriptor as a function call
-
-tableArgument:
-	tableArgumentRelation (
-		PARTITION_ BY_ (
-			LPAREN_ (expression (COMMA_ expression)*)? RPAREN_
-			| expression
-		)
-	)? (PRUNE_ WHEN_ EMPTY_ | KEEP_ WHEN_ EMPTY_)? (
-		ORDER_ BY_ (
-			LPAREN_ sortItem (COMMA_ sortItem)* RPAREN_
-			| sortItem
-		)
-	)?;
-
-tableArgumentRelation:
-	TABLE_ LPAREN_ qualifiedName RPAREN_ (
-		AS_? identifier columnAliases?
-	)? # tableArgumentTable
-	| TABLE_ LPAREN_ query RPAREN_ (
-		AS_? identifier columnAliases?
-	)? # tableArgumentQuery;
-
-descriptorArgument:
-	DESCRIPTOR_ LPAREN_ descriptorField (COMMA_ descriptorField)* RPAREN_
-	| CAST_ LPAREN_ NULL_ AS_ DESCRIPTOR_ RPAREN_;
-
-descriptorField: identifier type?;
-
-copartitionTables:
-	LPAREN_ qualifiedName COMMA_ qualifiedName (
-		COMMA_ qualifiedName
-	)* RPAREN_;
+	qualifiedName	# tableName
+	| '(' query ')'	# subqueryRelation
+	| UNNEST '(' expression (',' expression)* ')' (
+		WITH ORDINALITY
+	)?						# unnest
+	| LATERAL '(' query ')'	# lateral
+	| '(' relation ')'		# parenthesizedRelation;
 
 expression: booleanExpression;
 
 booleanExpression:
-	valueExpression predicate_?					# predicated
-	| NOT_ booleanExpression					# logicalNot
-	| booleanExpression AND_ booleanExpression	# and
-	| booleanExpression OR_ booleanExpression	# or;
+	valueExpression predicate[$valueExpression.ctx]?					# predicated
+	| NOT booleanExpression												# logicalNot
+	| left = booleanExpression operator = AND right = booleanExpression	# logicalBinary
+	| left = booleanExpression operator = OR right = booleanExpression	# logicalBinary;
 
 // workaround for https://github.com/antlr/antlr4/issues/780
-predicate_:
-	comparisonOperator right = valueExpression								# comparison
-	| comparisonOperator comparisonQuantifier LPAREN_ query RPAREN_			# quantifiedComparison
-	| NOT_? BETWEEN_ lower = valueExpression AND_ upper = valueExpression	# between
-	| NOT_? IN_ LPAREN_ expression (COMMA_ expression)* RPAREN_				# inList
-	| NOT_? IN_ LPAREN_ query RPAREN_										# inSubquery
-	| NOT_? LIKE_ pattern = valueExpression (
-		ESCAPE_ escape = valueExpression
-	)?													# like
-	| IS_ NOT_? NULL_									# nullPredicate
-	| IS_ NOT_? DISTINCT_ FROM_ right = valueExpression	# distinctFrom;
+predicate[ParserRuleContext value]:
+	comparisonOperator right = valueExpression							# comparison
+	| comparisonOperator comparisonQuantifier '(' query ')'				# quantifiedComparison
+	| NOT? BETWEEN lower = valueExpression AND upper = valueExpression	# between
+	| NOT? IN '(' expression (',' expression)* ')'						# inList
+	| NOT? IN '(' query ')'												# inSubquery
+	| NOT? LIKE pattern = valueExpression (
+		ESCAPE escape = valueExpression
+	)?												# like
+	| IS NOT? NULL									# nullPredicate
+	| IS NOT? DISTINCT FROM right = valueExpression	# distinctFrom;
 
 valueExpression:
-	primaryExpression								# valueExpressionDefault
-	| valueExpression AT_ timeZoneSpecifier			# atTimeZone
-	| operator = (MINUS_ | PLUS_) valueExpression	# arithmeticUnary
+	primaryExpression							# valueExpressionDefault
+	| valueExpression AT timeZoneSpecifier		# atTimeZone
+	| operator = (MINUS | PLUS) valueExpression	# arithmeticUnary
 	| left = valueExpression operator = (
-		ASTERISK_
-		| SLASH_
-		| PERCENT_
-	) right = valueExpression														# arithmeticBinary
-	| left = valueExpression operator = (PLUS_ | MINUS_) right = valueExpression	# arithmeticBinary
-	| left = valueExpression CONCAT_ right = valueExpression						# concatenation;
+		ASTERISK
+		| SLASH
+		| PERCENT
+	) right = valueExpression													# arithmeticBinary
+	| left = valueExpression operator = (PLUS | MINUS) right = valueExpression	# arithmeticBinary
+	| left = valueExpression CONCAT right = valueExpression						# concatenation;
 
 primaryExpression:
-	NULL_															# nullLiteral
-	| interval														# intervalLiteral
-	| identifier string_											# typeConstructor
-	| DOUBLE_ PRECISION_ string_									# typeConstructor
-	| number														# numericLiteral
-	| booleanValue													# booleanLiteral
-	| string_														# stringLiteral
-	| BINARY_LITERAL_												# binaryLiteral
-	| QUESTION_MARK_												# parameter
-	| POSITION_ LPAREN_ valueExpression IN_ valueExpression RPAREN_	# position
-	| LPAREN_ expression (COMMA_ expression)+ RPAREN_				# rowConstructor
-	| ROW_ LPAREN_ expression (COMMA_ expression)* RPAREN_			# rowConstructor
-	| name = LISTAGG_ LPAREN_ setQuantifier? expression (
-		COMMA_ string_
-	)? (ON_ OVERFLOW_ listAggOverflowBehavior)? RPAREN_ (
-		WITHIN_ GROUP_ LPAREN_ ORDER_ BY_ sortItem (
-			COMMA_ sortItem
-		)* RPAREN_
-	) # listagg
-	| processingMode? qualifiedName LPAREN_ (
-		label = identifier DOT_
-	)? ASTERISK_ RPAREN_ filter? over? # functionCall
-	| processingMode? qualifiedName LPAREN_ (
-		setQuantifier? expression (COMMA_ expression)*
-	)? (ORDER_ BY_ sortItem (COMMA_ sortItem)*)? RPAREN_ filter? (
+	NULL													# nullLiteral
+	| interval												# intervalLiteral
+	| identifier string										# typeConstructor
+	| DOUBLE PRECISION string								# typeConstructor
+	| number												# numericLiteral
+	| booleanValue											# booleanLiteral
+	| string												# stringLiteral
+	| BINARY_LITERAL										# binaryLiteral
+	| QUESTION_MARK											# parameter
+	| POSITION '(' valueExpression IN valueExpression ')'	# position
+	| '(' expression (',' expression)+ ')'					# rowConstructor
+	| ROW '(' expression (',' expression)* ')'				# rowConstructor
+	| qualifiedName '(' ASTERISK ')' filter? over?			# functionCall
+	| processingMode? qualifiedName '(' (
+		setQuantifier? expression (',' expression)*
+	)? (ORDER BY sortItem (',' sortItem)*)? ')' filter? (
 		nullTreatment? over
-	)?																		# functionCall
-	| identifier over														# measure
-	| identifier RARROW_ expression											# lambda
-	| LPAREN_ (identifier (COMMA_ identifier)*)? RPAREN_ RARROW_ expression	# lambda
-	| LPAREN_ query RPAREN_													# subqueryExpression
-	// This is an extension to ANSI_ SQL, which considers EXISTS_ to be a <boolean expression>
-	| EXISTS_ LPAREN_ query RPAREN_ # exists
-	| CASE_ operand = expression whenClause+ (
-		ELSE_ elseExpression = expression
-	)? END_																	# simpleCase
-	| CASE_ whenClause+ (ELSE_ elseExpression = expression)? END_			# searchedCase
-	| CAST_ LPAREN_ expression AS_ type RPAREN_								# cast
-	| TRY_CAST_ LPAREN_ expression AS_ type RPAREN_							# cast
-	| ARRAY_ LSQUARE_ (expression (COMMA_ expression)*)? RSQUARE_			# arrayConstructor
-	| value = primaryExpression LSQUARE_ index = valueExpression RSQUARE_	# subscript
-	| identifier															# columnReference
-	| base_ = primaryExpression DOT_ fieldName = identifier					# dereference
-	| name = CURRENT_DATE_													# specialDateTimeFunction
-	| name = CURRENT_TIME_ (
-		LPAREN_ precision = INTEGER_VALUE_ RPAREN_
-	)? # specialDateTimeFunction
-	| name = CURRENT_TIMESTAMP_ (
-		LPAREN_ precision = INTEGER_VALUE_ RPAREN_
-	)? # specialDateTimeFunction
-	| name = LOCALTIME_ (
-		LPAREN_ precision = INTEGER_VALUE_ RPAREN_
-	)? # specialDateTimeFunction
-	| name = LOCALTIMESTAMP_ (
-		LPAREN_ precision = INTEGER_VALUE_ RPAREN_
-	)?							# specialDateTimeFunction
-	| name = CURRENT_USER_		# currentUser
-	| name = CURRENT_CATALOG_	# currentCatalog
-	| name = CURRENT_SCHEMA_	# currentSchema
-	| name = CURRENT_PATH_		# currentPath
-	| TRIM_ LPAREN_ (
-		trimsSpecification? trimChar = valueExpression? FROM_
-	)? trimSource = valueExpression RPAREN_													# trim
-	| TRIM_ LPAREN_ trimSource = valueExpression COMMA_ trimChar = valueExpression RPAREN_	# trim
-	| SUBSTRING_ LPAREN_ valueExpression FROM_ valueExpression (
-		FOR_ valueExpression
-	)? RPAREN_																# substring
-	| NORMALIZE_ LPAREN_ valueExpression (COMMA_ normalForm)? RPAREN_		# normalize
-	| EXTRACT_ LPAREN_ identifier FROM_ valueExpression RPAREN_				# extract
-	| LPAREN_ expression RPAREN_											# parenthesizedExpression
-	| GROUPING_ LPAREN_ (qualifiedName (COMMA_ qualifiedName)*)? RPAREN_	# groupingOperation
-	| JSON_EXISTS_ LPAREN_ jsonPathInvocation (
-		jsonExistsErrorBehavior ON_ ERROR_
-	)? RPAREN_ # jsonExists
-	| JSON_VALUE_ LPAREN_ jsonPathInvocation (RETURNING_ type)? (
-		emptyBehavior = jsonValueBehavior ON_ EMPTY_
-	)? (errorBehavior = jsonValueBehavior ON_ ERROR_)? RPAREN_ # jsonValue
-	| JSON_QUERY_ LPAREN_ jsonPathInvocation (
-		RETURNING_ type (FORMAT_ jsonRepresentation)?
-	)? (jsonQueryWrapperBehavior WRAPPER_)? (
-		(KEEP_ | OMIT_) QUOTES_ (ON_ SCALAR_ TEXT_STRING_)?
-	)? (emptyBehavior = jsonQueryBehavior ON_ EMPTY_)? (
-		errorBehavior = jsonQueryBehavior ON_ ERROR_
-	)? RPAREN_ # jsonQuery
-	| JSON_OBJECT_ LPAREN_ (
-		jsonObjectMember (COMMA_ jsonObjectMember)* (
-			NULL_ ON_ NULL_
-			| ABSENT_ ON_ NULL_
-		)? (WITH_ UNIQUE_ KEYS_? | WITHOUT_ UNIQUE_ KEYS_?)?
-	)? (RETURNING_ type (FORMAT_ jsonRepresentation)?)? RPAREN_ # jsonObject
-	| JSON_ARRAY_ LPAREN_ (
-		jsonValueExpression (COMMA_ jsonValueExpression)* (
-			NULL_ ON_ NULL_
-			| ABSENT_ ON_ NULL_
-		)?
-	)? (RETURNING_ type (FORMAT_ jsonRepresentation)?)? RPAREN_ # jsonArray;
+	)?															# functionCall
+	| identifier over											# measure
+	| identifier '->' expression								# lambda
+	| '(' (identifier (',' identifier)*)? ')' '->' expression	# lambda
+	| '(' query ')'												# subqueryExpression
+	// This is an extension to ANSI SQL, which considers EXISTS to be a <boolean expression>
+	| EXISTS '(' query ')' # exists
+	| CASE operand = expression whenClause+ (
+		ELSE elseExpression = expression
+	)? END														# simpleCase
+	| CASE whenClause+ (ELSE elseExpression = expression)? END	# searchedCase
+	| CAST '(' expression AS type ')'							# cast
+	| TRY_CAST '(' expression AS type ')'						# cast
+	| ARRAY '[' (expression (',' expression)*)? ']'				# arrayConstructor
+	| value = primaryExpression '[' index = valueExpression ']'	# subscript
+	| identifier												# columnReference
+	| base = primaryExpression '.' fieldName = identifier		# dereference
+	| name = CURRENT_DATE										# specialDateTimeFunction
+	| name = CURRENT_TIME ('(' precision = INTEGER_VALUE ')')?	# specialDateTimeFunction
+	| name = CURRENT_TIMESTAMP (
+		'(' precision = INTEGER_VALUE ')'
+	)?																# specialDateTimeFunction
+	| name = LOCALTIME ('(' precision = INTEGER_VALUE ')')?			# specialDateTimeFunction
+	| name = LOCALTIMESTAMP ('(' precision = INTEGER_VALUE ')')?	# specialDateTimeFunction
+	| name = CURRENT_USER											# currentUser
+	| name = CURRENT_CATALOG										# currentCatalog
+	| name = CURRENT_SCHEMA											# currentSchema
+	| name = CURRENT_PATH											# currentPath
+	| SUBSTRING '(' valueExpression FROM valueExpression (
+		FOR valueExpression
+	)? ')'														# substring
+	| NORMALIZE '(' valueExpression (',' normalForm)? ')'		# normalize
+	| EXTRACT '(' identifier FROM valueExpression ')'			# extract
+	| '(' expression ')'										# parenthesizedExpression
+	| GROUPING '(' (qualifiedName (',' qualifiedName)*)? ')'	# groupingOperation;
 
-jsonPathInvocation:
-	jsonValueExpression COMMA_ path = string_ (
-		PASSING_ jsonArgument (COMMA_ jsonArgument)*
-	)?;
+processingMode: RUNNING | FINAL;
 
-jsonValueExpression: expression (FORMAT_ jsonRepresentation)?;
+nullTreatment: IGNORE NULLS | RESPECT NULLS;
 
-jsonRepresentation:
-	JSON_ (ENCODING_ (UTF8_ | UTF16_ | UTF32_))?
-		; // TODO_ add implementation-defined JSON_ representation option
-
-jsonArgument: jsonValueExpression AS_ identifier;
-
-jsonExistsErrorBehavior: TRUE_ | FALSE_ | UNKNOWN_ | ERROR_;
-
-jsonValueBehavior: ERROR_ | NULL_ | DEFAULT_ expression;
-
-jsonQueryWrapperBehavior:
-	WITHOUT_ ARRAY_?
-	| WITH_ (CONDITIONAL_ | UNCONDITIONAL_)? ARRAY_?;
-
-jsonQueryBehavior: ERROR_ | NULL_ | EMPTY_ (ARRAY_ | OBJECT_);
-
-jsonObjectMember:
-	KEY_? expression VALUE_ jsonValueExpression
-	| expression COLON_ jsonValueExpression;
-
-processingMode: RUNNING_ | FINAL_;
-
-nullTreatment: IGNORE_ NULLS_ | RESPECT_ NULLS_;
-
-// renamed from "string" to avoid golang name conflict
-string_:
-	STRING_									# basicStringLiteral
-	| UNICODE_STRING_ (UESCAPE_ STRING_)?	# unicodeStringLiteral;
+string:
+	STRING								# basicStringLiteral
+	| UNICODE_STRING (UESCAPE STRING)?	# unicodeStringLiteral;
 
 timeZoneSpecifier:
-	TIME_ ZONE_ interval	# timeZoneInterval
-	| TIME_ ZONE_ string_	# timeZoneString;
+	TIME ZONE interval	# timeZoneInterval
+	| TIME ZONE string	# timeZoneString;
 
-comparisonOperator: EQ_ | NEQ_ | LT_ | LTE_ | GT_ | GTE_;
+comparisonOperator: EQ | NEQ | LT | LTE | GT | GTE;
 
-comparisonQuantifier: ALL_ | SOME_ | ANY_;
+comparisonQuantifier: ALL | SOME | ANY;
 
-booleanValue: TRUE_ | FALSE_;
+booleanValue: TRUE | FALSE;
 
 interval:
-	INTERVAL_ sign = (PLUS_ | MINUS_)? string_ from = intervalField (
-		TO_ to = intervalField
+	INTERVAL sign = (PLUS | MINUS)? string from = intervalField (
+		TO to = intervalField
 	)?;
 
-intervalField:
-	YEAR_
-	| MONTH_
-	| DAY_
-	| HOUR_
-	| MINUTE_
-	| SECOND_;
+intervalField: YEAR | MONTH | DAY | HOUR | MINUTE | SECOND;
 
-normalForm: NFD_ | NFC_ | NFKD_ | NFKC_;
+normalForm: NFD | NFC | NFKD | NFKC;
 
 type:
-	ROW_ LPAREN_ rowField (COMMA_ rowField)* RPAREN_			# rowType
-	| INTERVAL_ from = intervalField (TO_ to = intervalField)?	# intervalType
-	| base = TIMESTAMP_ (
-		LPAREN_ precision = typeParameter RPAREN_
-	)? (WITHOUT_ TIME_ ZONE_)? # dateTimeType
-	| base = TIMESTAMP_ (
-		LPAREN_ precision = typeParameter RPAREN_
-	)? WITH_ TIME_ ZONE_ # dateTimeType
-	| base = TIME_ (LPAREN_ precision = typeParameter RPAREN_)? (
-		WITHOUT_ TIME_ ZONE_
-	)?																				# dateTimeType
-	| base = TIME_ (LPAREN_ precision = typeParameter RPAREN_)? WITH_ TIME_ ZONE_	# dateTimeType
-	| DOUBLE_ PRECISION_															# doublePrecisionType
-	| ARRAY_ LT_ type GT_															# legacyArrayType
-	| MAP_ LT_ keyType = type COMMA_ valueType = type GT_							# legacyMapType
-	| type ARRAY_ (LSQUARE_ INTEGER_VALUE_ RSQUARE_)?								# arrayType
-	| identifier (
-		LPAREN_ typeParameter (COMMA_ typeParameter)* RPAREN_
-	)? # genericType;
+	ROW '(' rowField (',' rowField)* ')'						# rowType
+	| INTERVAL from = intervalField (TO to = intervalField)?	# intervalType
+	| base = TIMESTAMP ('(' precision = typeParameter ')')? (
+		WITHOUT TIME ZONE
+	)?																		# dateTimeType
+	| base = TIMESTAMP ('(' precision = typeParameter ')')? WITH TIME ZONE	# dateTimeType
+	| base = TIME ('(' precision = typeParameter ')')? (
+		WITHOUT TIME ZONE
+	)?																	# dateTimeType
+	| base = TIME ('(' precision = typeParameter ')')? WITH TIME ZONE	# dateTimeType
+	| DOUBLE PRECISION													# doublePrecisionType
+	| ARRAY '<' type '>'												# legacyArrayType
+	| MAP '<' keyType = type ',' valueType = type '>'					# legacyMapType
+	| type ARRAY ('[' INTEGER_VALUE ']')?								# arrayType
+	| identifier ('(' typeParameter (',' typeParameter)* ')')?			# genericType;
 
 rowField: type | identifier type;
 
-typeParameter: INTEGER_VALUE_ | type;
+typeParameter: INTEGER_VALUE | type;
 
 whenClause:
-	WHEN_ condition = expression THEN_ result = expression;
+	WHEN condition = expression THEN result = expression;
 
-filter: FILTER_ LPAREN_ WHERE_ booleanExpression RPAREN_;
+filter: FILTER '(' WHERE booleanExpression ')';
 
 mergeCase:
-	WHEN_ MATCHED_ (AND_ condition = expression)? THEN_ UPDATE_ SET_ targets += identifier EQ_
-		values += expression (
-		COMMA_ targets += identifier EQ_ values += expression
-	)*																# mergeUpdate
-	| WHEN_ MATCHED_ (AND_ condition = expression)? THEN_ DELETE_	# mergeDelete
-	| WHEN_ NOT_ MATCHED_ (AND_ condition = expression)? THEN_ INSERT_ (
-		LPAREN_ targets += identifier (
-			COMMA_ targets += identifier
-		)* RPAREN_
-	)? VALUES_ LPAREN_ values += expression (
-		COMMA_ values += expression
-	)* RPAREN_ # mergeInsert;
+	WHEN MATCHED (AND condition = expression)? THEN UPDATE SET targets += identifier EQ values +=
+		expression (
+		',' targets += identifier EQ values += expression
+	)*															# mergeUpdate
+	| WHEN MATCHED (AND condition = expression)? THEN DELETE	# mergeDelete
+	| WHEN NOT MATCHED (AND condition = expression)? THEN INSERT (
+		'(' targets += identifier (',' targets += identifier)* ')'
+	)? VALUES '(' values += expression (',' values += expression)* ')' # mergeInsert;
 
 over:
-	OVER_ (
-		windowName = identifier
-		| LPAREN_ windowSpecification RPAREN_
-	);
+	OVER (windowName = identifier | '(' windowSpecification ')');
 
 windowFrame: (
-		MEASURES_ measureDefinition (COMMA_ measureDefinition)*
-	)? frameExtent (AFTER_ MATCH_ skipTo)? (INITIAL_ | SEEK_)? (
-		PATTERN_ LPAREN_ rowPattern RPAREN_
-	)? (SUBSET_ subsetDefinition (COMMA_ subsetDefinition)*)? (
-		DEFINE_ variableDefinition (COMMA_ variableDefinition)*
+		MEASURES measureDefinition (',' measureDefinition)*
+	)? frameExtent (AFTER MATCH skipTo)? (INITIAL | SEEK)? (
+		PATTERN '(' rowPattern ')'
+	)? (SUBSET subsetDefinition (',' subsetDefinition)*)? (
+		DEFINE variableDefinition (',' variableDefinition)*
 	)?;
 
-// renamed start and stop to avoid Dart name conflict
 frameExtent:
-	frameType = RANGE_ start_ = frameBound
-	| frameType = ROWS_ start_ = frameBound
-	| frameType = GROUPS_ start_ = frameBound
-	| frameType = RANGE_ BETWEEN_ start_ = frameBound AND_ end_ = frameBound
-	| frameType = ROWS_ BETWEEN_ start_ = frameBound AND_ end_ = frameBound
-	| frameType = GROUPS_ BETWEEN_ start_ = frameBound AND_ end_ = frameBound;
+	frameType = RANGE start = frameBound
+	| frameType = ROWS start = frameBound
+	| frameType = GROUPS start = frameBound
+	| frameType = RANGE BETWEEN start = frameBound AND end = frameBound
+	| frameType = ROWS BETWEEN start = frameBound AND end = frameBound
+	| frameType = GROUPS BETWEEN start = frameBound AND end = frameBound;
 
 frameBound:
-	UNBOUNDED_ boundType = PRECEDING_					# unboundedFrame
-	| UNBOUNDED_ boundType = FOLLOWING_					# unboundedFrame
-	| CURRENT_ ROW_										# currentRowBound
-	| expression boundType = (PRECEDING_ | FOLLOWING_)	# boundedFrame;
+	UNBOUNDED boundType = PRECEDING						# unboundedFrame
+	| UNBOUNDED boundType = FOLLOWING					# unboundedFrame
+	| CURRENT ROW										# currentRowBound
+	| expression boundType = (PRECEDING | FOLLOWING)	# boundedFrame;
 
 rowPattern:
 	patternPrimary patternQuantifier?	# quantifiedPrimary
 	| rowPattern rowPattern				# patternConcatenation
-	| rowPattern VBAR_ rowPattern		# patternAlternation;
+	| rowPattern '|' rowPattern			# patternAlternation;
 
 patternPrimary:
-	identifier													# patternVariable
-	| LPAREN_ RPAREN_											# emptyPattern
-	| PERMUTE_ LPAREN_ rowPattern (COMMA_ rowPattern)* RPAREN_	# patternPermutation
-	| LPAREN_ rowPattern RPAREN_								# groupedPattern
-	| CARET_													# partitionStartAnchor
-	| DOLLAR_													# partitionEndAnchor
-	| LCURLYHYPHEN_ rowPattern RCURLYHYPHEN_					# excludedPattern;
+	identifier										# patternVariable
+	| '(' ')'										# emptyPattern
+	| PERMUTE '(' rowPattern (',' rowPattern)* ')'	# patternPermutation
+	| '(' rowPattern ')'							# groupedPattern
+	| '^'											# partitionStartAnchor
+	| '$'											# partitionEndAnchor
+	| '{-' rowPattern '-}'							# excludedPattern;
 
 patternQuantifier:
-	ASTERISK_ (reluctant = QUESTION_MARK_)?			# zeroOrMoreQuantifier
-	| PLUS_ (reluctant = QUESTION_MARK_)?			# oneOrMoreQuantifier
-	| QUESTION_MARK_ (reluctant = QUESTION_MARK_)?	# zeroOrOneQuantifier
-	| LCURLY_ exactly = INTEGER_VALUE_ RCURLY_ (
-		reluctant = QUESTION_MARK_
-	)? # rangeQuantifier
-	| LCURLY_ (atLeast = INTEGER_VALUE_)? COMMA_ (
-		atMost = INTEGER_VALUE_
-	)? RCURLY_ (reluctant = QUESTION_MARK_)? # rangeQuantifier;
+	ASTERISK (reluctant = QUESTION_MARK)?							# zeroOrMoreQuantifier
+	| PLUS (reluctant = QUESTION_MARK)?								# oneOrMoreQuantifier
+	| QUESTION_MARK (reluctant = QUESTION_MARK)?					# zeroOrOneQuantifier
+	| '{' exactly = INTEGER_VALUE '}' (reluctant = QUESTION_MARK)?	# rangeQuantifier
+	| '{' (atLeast = INTEGER_VALUE)? ',' (atMost = INTEGER_VALUE)? '}' (
+		reluctant = QUESTION_MARK
+	)? # rangeQuantifier;
 
-updateAssignment: identifier EQ_ expression;
+updateAssignment: identifier EQ expression;
 
 explainOption:
-	FORMAT_ value = (TEXT_ | GRAPHVIZ_ | JSON_)					# explainFormat
-	| TYPE_ value = (LOGICAL_ | DISTRIBUTED_ | VALIDATE_ | IO_)	# explainType;
+	FORMAT value = (TEXT | GRAPHVIZ | JSON)					# explainFormat
+	| TYPE value = (LOGICAL | DISTRIBUTED | VALIDATE | IO)	# explainType;
 
 transactionMode:
-	ISOLATION_ LEVEL_ levelOfIsolation		# isolationLevel
-	| READ_ accessMode = (ONLY_ | WRITE_)	# transactionAccessMode;
+	ISOLATION LEVEL levelOfIsolation	# isolationLevel
+	| READ accessMode = (ONLY | WRITE)	# transactionAccessMode;
 
 levelOfIsolation:
-	READ_ UNCOMMITTED_	# readUncommitted
-	| READ_ COMMITTED_	# readCommitted
-	| REPEATABLE_ READ_	# repeatableRead
-	| SERIALIZABLE_		# serializable;
+	READ UNCOMMITTED	# readUncommitted
+	| READ COMMITTED	# readCommitted
+	| REPEATABLE READ	# repeatableRead
+	| SERIALIZABLE		# serializable;
 
 callArgument:
-	expression								# positionalArgument
-	| identifier RDOUBLEARROW_ expression	# namedArgument;
+	expression						# positionalArgument
+	| identifier '=>' expression	# namedArgument;
 
 pathElement:
-	identifier DOT_ identifier	# qualifiedArgument
+	identifier '.' identifier	# qualifiedArgument
 	| identifier				# unqualifiedArgument;
 
-pathSpecification: pathElement (COMMA_ pathElement)*;
+pathSpecification: pathElement (',' pathElement)*;
 
-privilege: CREATE_ | SELECT_ | DELETE_ | INSERT_ | UPDATE_;
+privilege: SELECT | DELETE | INSERT | UPDATE;
 
-qualifiedName: identifier (DOT_ identifier)*;
-
-queryPeriod: FOR_ rangeType AS_ OF_ end = valueExpression;
-
-rangeType: TIMESTAMP_ | VERSION_;
+qualifiedName: identifier ('.' identifier)*;
 
 grantor:
 	principal		# specifiedPrincipal
-	| CURRENT_USER_	# currentUserGrantor
-	| CURRENT_ROLE_	# currentRoleGrantor;
+	| CURRENT_USER	# currentUserGrantor
+	| CURRENT_ROLE	# currentRoleGrantor;
 
 principal:
 	identifier			# unspecifiedPrincipal
-	| USER_ identifier	# userPrincipal
-	| ROLE_ identifier	# rolePrincipal;
+	| USER identifier	# userPrincipal
+	| ROLE identifier	# rolePrincipal;
 
-roles: identifier (COMMA_ identifier)*;
+roles: identifier (',' identifier)*;
 
 identifier:
-	IDENTIFIER_					# unquotedIdentifier
-	| QUOTED_IDENTIFIER_		# quotedIdentifier
-	| nonReserved				# unquotedIdentifier
-	| BACKQUOTED_IDENTIFIER_	# backQuotedIdentifier
-	| DIGIT_IDENTIFIER_			# digitIdentifier;
+	IDENTIFIER				# unquotedIdentifier
+	| QUOTED_IDENTIFIER		# quotedIdentifier
+	| nonReserved			# unquotedIdentifier
+	| BACKQUOTED_IDENTIFIER	# backQuotedIdentifier
+	| DIGIT_IDENTIFIER		# digitIdentifier;
 
 number:
-	MINUS_? DECIMAL_VALUE_		# decimalLiteral
-	| MINUS_? DOUBLE_VALUE_		# doubleLiteral
-	| MINUS_? INTEGER_VALUE_	# integerLiteral;
+	MINUS? DECIMAL_VALUE	# decimalLiteral
+	| MINUS? DOUBLE_VALUE	# doubleLiteral
+	| MINUS? INTEGER_VALUE	# integerLiteral;
 
 nonReserved
 // IMPORTANT: this rule must only contain tokens. Nested rules are not supported. See SqlParser.exitNonReserved
 		:
-	ABSENT_
-	| ADD_
-	| ADMIN_
-	| AFTER_
-	| ALL_
-	| ANALYZE_
-	| ANY_
-	| ARRAY_
-	| ASC_
-	| AT_
-	| AUTHORIZATION_
-	| BERNOULLI_
-	| BOTH_
-	| CALL_
-	| CASCADE_
-	| CATALOGS_
-	| COLUMN_
-	| COLUMNS_
-	| COMMENT_
-	| COMMIT_
-	| COMMITTED_
-	| CONDITIONAL_
-	| COPARTITION_
-	| COUNT_
-	| CURRENT_
-	| DATA_
-	| DATE_
-	| DAY_
-	| DEFAULT_
-	| DEFINE_
-	| DEFINER_
-	| DESC_
-	| DESCRIPTOR_
-	| DISTRIBUTED_
-	| DOUBLE_
-	| EMPTY_
-	| ENCODING_
-	| ERROR_
-	| EXCLUDING_
-	| EXPLAIN_
-	| FETCH_
-	| FILTER_
-	| FINAL_
-	| FIRST_
-	| FOLLOWING_
-	| FORMAT_
-	| FUNCTIONS_
-	| GRACE_
-	| GRANT_
-	| DENY_
-	| GRANTED_
-	| GRANTS_
-	| GRAPHVIZ_
-	| GROUPS_
-	| HOUR_
-	| IF_
-	| IGNORE_
-	| INCLUDING_
-	| INITIAL_
-	| INPUT_
-	| INTERVAL_
-	| INVOKER_
-	| IO_
-	| ISOLATION_
-	| JSON_
-	| KEEP_
-	| KEY_
-	| KEYS_
-	| LAST_
-	| LATERAL_
-	| LEADING_
-	| LEVEL_
-	| LIMIT_
-	| LOCAL_
-	| LOGICAL_
-	| MAP_
-	| MATCH_
-	| MATCHED_
-	| MATCHES_
-	| MATCH_RECOGNIZE_
-	| MATERIALIZED_
-	| MEASURES_
-	| MERGE_
-	| MINUTE_
-	| MONTH_
-	| NEXT_
-	| NFC_
-	| NFD_
-	| NFKC_
-	| NFKD_
-	| NO_
-	| NONE_
-	| NULLIF_
-	| NULLS_
-	| OBJECT_
-	| OF_
-	| OFFSET_
-	| OMIT_
-	| ONE_
-	| ONLY_
-	| OPTION_
-	| ORDINALITY_
-	| OUTPUT_
-	| OVER_
-	| OVERFLOW_
-	| PARTITION_
-	| PARTITIONS_
-	| PASSING_
-	| PAST_
-	| PATH_
-	| PATTERN_
-	| PER_
-	| PERIOD_
-	| PERMUTE_
-	| POSITION_
-	| PRECEDING_
-	| PRECISION_
-	| PRIVILEGES_
-	| PROPERTIES_
-	| PRUNE_
-	| QUOTES_
-	| RANGE_
-	| READ_
-	| REFRESH_
-	| RENAME_
-	| REPEATABLE_
-	| REPLACE_
-	| RESET_
-	| RESPECT_
-	| RESTRICT_
-	| RETURNING_
-	| REVOKE_
-	| ROLE_
-	| ROLES_
-	| ROLLBACK_
-	| ROW_
-	| ROWS_
-	| RUNNING_
-	| SCALAR_
-	| SCHEMA_
-	| SCHEMAS_
-	| SECOND_
-	| SECURITY_
-	| SEEK_
-	| SERIALIZABLE_
-	| SESSION_
-	| SET_
-	| SETS_
-	| SHOW_
-	| SOME_
-	| START_
-	| STATS_
-	| SUBSET_
-	| SUBSTRING_
-	| SYSTEM_
-	| TABLES_
-	| TABLESAMPLE_
-	| TEXT_
-	| TEXT_STRING_
-	| TIES_
-	| TIME_
-	| TIMESTAMP_
-	| TO_
-	| TRAILING_
-	| TRANSACTION_
-	| TRUNCATE_
-	| TRY_CAST_
-	| TYPE_
-	| UNBOUNDED_
-	| UNCOMMITTED_
-	| UNCONDITIONAL_
-	| UNIQUE_
-	| UNKNOWN_
-	| UNMATCHED_
-	| UPDATE_
-	| USE_
-	| USER_
-	| UTF16_
-	| UTF32_
-	| UTF8_
-	| VALIDATE_
-	| VALUE_
-	| VERBOSE_
-	| VERSION_
-	| VIEW_
-	| WINDOW_
-	| WITHIN_
-	| WITHOUT_
-	| WORK_
-	| WRAPPER_
-	| WRITE_
-	| YEAR_
-	| ZONE_;
+	ADD
+	| ADMIN
+	| AFTER
+	| ALL
+	| ANALYZE
+	| ANY
+	| ARRAY
+	| ASC
+	| AT
+	| AUTHORIZATION
+	| BERNOULLI
+	| CALL
+	| CASCADE
+	| CATALOGS
+	| COLUMN
+	| COLUMNS
+	| COMMENT
+	| COMMIT
+	| COMMITTED
+	| CURRENT
+	| DATA
+	| DATE
+	| DAY
+	| DEFINE
+	| DEFINER
+	| DESC
+	| DISTRIBUTED
+	| DOUBLE
+	| EMPTY
+	| EXCLUDING
+	| EXPLAIN
+	| FETCH
+	| FILTER
+	| FINAL
+	| FIRST
+	| FOLLOWING
+	| FORMAT
+	| FUNCTIONS
+	| GRANT
+	| GRANTED
+	| GRANTS
+	| GRAPHVIZ
+	| GROUPS
+	| HOUR
+	| IF
+	| IGNORE
+	| INCLUDING
+	| INITIAL
+	| INPUT
+	| INTERVAL
+	| INVOKER
+	| IO
+	| ISOLATION
+	| JSON
+	| LAST
+	| LATERAL
+	| LEVEL
+	| LIMIT
+	| LOCAL
+	| LOGICAL
+	| MAP
+	| MATCH
+	| MATCHED
+	| MATCHES
+	| MATCH_RECOGNIZE
+	| MATERIALIZED
+	| MEASURES
+	| MERGE
+	| MINUTE
+	| MONTH
+	| NEXT
+	| NFC
+	| NFD
+	| NFKC
+	| NFKD
+	| NO
+	| NONE
+	| NULLIF
+	| NULLS
+	| OFFSET
+	| OMIT
+	| ONE
+	| ONLY
+	| OPTION
+	| ORDINALITY
+	| OUTPUT
+	| OVER
+	| PARTITION
+	| PARTITIONS
+	| PAST
+	| PATH
+	| PATTERN
+	| PER
+	| PERMUTE
+	| POSITION
+	| PRECEDING
+	| PRECISION
+	| PRIVILEGES
+	| PROPERTIES
+	| RANGE
+	| READ
+	| REFRESH
+	| RENAME
+	| REPEATABLE
+	| REPLACE
+	| RESET
+	| RESPECT
+	| RESTRICT
+	| REVOKE
+	| ROLE
+	| ROLES
+	| ROLLBACK
+	| ROW
+	| ROWS
+	| RUNNING
+	| SCHEMA
+	| SCHEMAS
+	| SECOND
+	| SECURITY
+	| SEEK
+	| SERIALIZABLE
+	| SESSION
+	| SET
+	| SETS
+	| SHOW
+	| SOME
+	| START
+	| STATS
+	| SUBSET
+	| SUBSTRING
+	| SYSTEM
+	| TABLES
+	| TABLESAMPLE
+	| TEXT
+	| TIES
+	| TIME
+	| TIMESTAMP
+	| TO
+	| TRANSACTION
+	| TRY_CAST
+	| TYPE
+	| UNBOUNDED
+	| UNCOMMITTED
+	| UNMATCHED
+	| UPDATE
+	| USE
+	| USER
+	| VALIDATE
+	| VERBOSE
+	| VIEW
+	| WINDOW
+	| WITHOUT
+	| WORK
+	| WRITE
+	| YEAR
+	| ZONE;
+
+ADD: 'ADD';
+ADMIN: 'ADMIN';
+AFTER: 'AFTER';
+ALL: 'ALL';
+ALTER: 'ALTER';
+ANALYZE: 'ANALYZE';
+AND: 'AND';
+ANY: 'ANY';
+ARRAY: 'ARRAY';
+AS: 'AS';
+ASC: 'ASC';
+AT: 'AT';
+AUTHORIZATION: 'AUTHORIZATION';
+BERNOULLI: 'BERNOULLI';
+BETWEEN: 'BETWEEN';
+BY: 'BY';
+CALL: 'CALL';
+CASCADE: 'CASCADE';
+CASE: 'CASE';
+CAST: 'CAST';
+CATALOGS: 'CATALOGS';
+COLUMN: 'COLUMN';
+COLUMNS: 'COLUMNS';
+COMMENT: 'COMMENT';
+COMMIT: 'COMMIT';
+COMMITTED: 'COMMITTED';
+CONSTRAINT: 'CONSTRAINT';
+CREATE: 'CREATE';
+CROSS: 'CROSS';
+CUBE: 'CUBE';
+CURRENT: 'CURRENT';
+CURRENT_CATALOG: 'CURRENT_CATALOG';
+CURRENT_DATE: 'CURRENT_DATE';
+CURRENT_PATH: 'CURRENT_PATH';
+CURRENT_ROLE: 'CURRENT_ROLE';
+CURRENT_SCHEMA: 'CURRENT_SCHEMA';
+CURRENT_TIME: 'CURRENT_TIME';
+CURRENT_TIMESTAMP: 'CURRENT_TIMESTAMP';
+CURRENT_USER: 'CURRENT_USER';
+DATA: 'DATA';
+DATE: 'DATE';
+DAY: 'DAY';
+DEALLOCATE: 'DEALLOCATE';
+DEFINER: 'DEFINER';
+DELETE: 'DELETE';
+DESC: 'DESC';
+DESCRIBE: 'DESCRIBE';
+DEFINE: 'DEFINE';
+DISTINCT: 'DISTINCT';
+DISTRIBUTED: 'DISTRIBUTED';
+DOUBLE: 'DOUBLE';
+DROP: 'DROP';
+ELSE: 'ELSE';
+EMPTY: 'EMPTY';
+END: 'END';
+ESCAPE: 'ESCAPE';
+EXCEPT: 'EXCEPT';
+EXCLUDING: 'EXCLUDING';
+EXECUTE: 'EXECUTE';
+EXISTS: 'EXISTS';
+EXPLAIN: 'EXPLAIN';
+EXTRACT: 'EXTRACT';
+FALSE: 'FALSE';
+FETCH: 'FETCH';
+FILTER: 'FILTER';
+FINAL: 'FINAL';
+FIRST: 'FIRST';
+FOLLOWING: 'FOLLOWING';
+FOR: 'FOR';
+FORMAT: 'FORMAT';
+FROM: 'FROM';
+FULL: 'FULL';
+FUNCTIONS: 'FUNCTIONS';
+GRANT: 'GRANT';
+GRANTED: 'GRANTED';
+GRANTS: 'GRANTS';
+GRAPHVIZ: 'GRAPHVIZ';
+GROUP: 'GROUP';
+GROUPING: 'GROUPING';
+GROUPS: 'GROUPS';
+HAVING: 'HAVING';
+HOUR: 'HOUR';
+IF: 'IF';
+IGNORE: 'IGNORE';
+IN: 'IN';
+INCLUDING: 'INCLUDING';
+INITIAL: 'INITIAL';
+INNER: 'INNER';
+INPUT: 'INPUT';
+INSERT: 'INSERT';
+INTERSECT: 'INTERSECT';
+INTERVAL: 'INTERVAL';
+INTO: 'INTO';
+INVOKER: 'INVOKER';
+IO: 'IO';
+IS: 'IS';
+ISOLATION: 'ISOLATION';
+JOIN: 'JOIN';
+JSON: 'JSON';
+LAST: 'LAST';
+LATERAL: 'LATERAL';
+LEFT: 'LEFT';
+LEVEL: 'LEVEL';
+LIKE: 'LIKE';
+LIMIT: 'LIMIT';
+LOCAL: 'LOCAL';
+LOCALTIME: 'LOCALTIME';
+LOCALTIMESTAMP: 'LOCALTIMESTAMP';
+LOGICAL: 'LOGICAL';
+MAP: 'MAP';
+MATCH: 'MATCH';
+MATCHED: 'MATCHED';
+MATCHES: 'MATCHES';
+MATCH_RECOGNIZE: 'MATCH_RECOGNIZE';
+MATERIALIZED: 'MATERIALIZED';
+MEASURES: 'MEASURES';
+MERGE: 'MERGE';
+MINUTE: 'MINUTE';
+MONTH: 'MONTH';
+NATURAL: 'NATURAL';
+NEXT: 'NEXT';
+NFC: 'NFC';
+NFD: 'NFD';
+NFKC: 'NFKC';
+NFKD: 'NFKD';
+NO: 'NO';
+NONE: 'NONE';
+NORMALIZE: 'NORMALIZE';
+NOT: 'NOT';
+NULL: 'NULL';
+NULLIF: 'NULLIF';
+NULLS: 'NULLS';
+OFFSET: 'OFFSET';
+OMIT: 'OMIT';
+ON: 'ON';
+ONE: 'ONE';
+ONLY: 'ONLY';
+OPTION: 'OPTION';
+OR: 'OR';
+ORDER: 'ORDER';
+ORDINALITY: 'ORDINALITY';
+OUTER: 'OUTER';
+OUTPUT: 'OUTPUT';
+OVER: 'OVER';
+PARTITION: 'PARTITION';
+PARTITIONS: 'PARTITIONS';
+PAST: 'PAST';
+PATH: 'PATH';
+PATTERN: 'PATTERN';
+PER: 'PER';
+PERMUTE: 'PERMUTE';
+POSITION: 'POSITION';
+PRECEDING: 'PRECEDING';
+PRECISION: 'PRECISION';
+PREPARE: 'PREPARE';
+PRIVILEGES: 'PRIVILEGES';
+PROPERTIES: 'PROPERTIES';
+RANGE: 'RANGE';
+READ: 'READ';
+RECURSIVE: 'RECURSIVE';
+REFRESH: 'REFRESH';
+RENAME: 'RENAME';
+REPEATABLE: 'REPEATABLE';
+REPLACE: 'REPLACE';
+RESET: 'RESET';
+RESPECT: 'RESPECT';
+RESTRICT: 'RESTRICT';
+REVOKE: 'REVOKE';
+RIGHT: 'RIGHT';
+ROLE: 'ROLE';
+ROLES: 'ROLES';
+ROLLBACK: 'ROLLBACK';
+ROLLUP: 'ROLLUP';
+ROW: 'ROW';
+ROWS: 'ROWS';
+RUNNING: 'RUNNING';
+SCHEMA: 'SCHEMA';
+SCHEMAS: 'SCHEMAS';
+SECOND: 'SECOND';
+SECURITY: 'SECURITY';
+SEEK: 'SEEK';
+SELECT: 'SELECT';
+SERIALIZABLE: 'SERIALIZABLE';
+SESSION: 'SESSION';
+SET: 'SET';
+SETS: 'SETS';
+SHOW: 'SHOW';
+SOME: 'SOME';
+START: 'START';
+STATS: 'STATS';
+SUBSET: 'SUBSET';
+SUBSTRING: 'SUBSTRING';
+SYSTEM: 'SYSTEM';
+TABLE: 'TABLE';
+TABLES: 'TABLES';
+TABLESAMPLE: 'TABLESAMPLE';
+TEXT: 'TEXT';
+THEN: 'THEN';
+TIES: 'TIES';
+TIME: 'TIME';
+TIMESTAMP: 'TIMESTAMP';
+TO: 'TO';
+TRANSACTION: 'TRANSACTION';
+TRUE: 'TRUE';
+TRY_CAST: 'TRY_CAST';
+TYPE: 'TYPE';
+UESCAPE: 'UESCAPE';
+UNBOUNDED: 'UNBOUNDED';
+UNCOMMITTED: 'UNCOMMITTED';
+UNION: 'UNION';
+UNMATCHED: 'UNMATCHED';
+UNNEST: 'UNNEST';
+UPDATE: 'UPDATE';
+USE: 'USE';
+USER: 'USER';
+USING: 'USING';
+VALIDATE: 'VALIDATE';
+VALUES: 'VALUES';
+VERBOSE: 'VERBOSE';
+VIEW: 'VIEW';
+WHEN: 'WHEN';
+WHERE: 'WHERE';
+WINDOW: 'WINDOW';
+WITH: 'WITH';
+WITHOUT: 'WITHOUT';
+WORK: 'WORK';
+WRITE: 'WRITE';
+YEAR: 'YEAR';
+ZONE: 'ZONE';
+
+EQ: '=';
+NEQ: '<>' | '!=';
+LT: '<';
+LTE: '<=';
+GT: '>';
+GTE: '>=';
+
+PLUS: '+';
+MINUS: '-';
+ASTERISK: '*';
+SLASH: '/';
+PERCENT: '%';
+CONCAT: '||';
+QUESTION_MARK: '?';
+
+STRING: '\'' ( ~'\'' | '\'\'')* '\'';
+
+UNICODE_STRING: 'U&\'' ( ~'\'' | '\'\'')* '\'';
+
+// Note: we allow any character inside the binary literal and validate its a correct literal when
+// the AST is being constructed. This allows us to provide more meaningful error messages to the
+// user
+BINARY_LITERAL: 'X\'' (~'\'')* '\'';
+
+INTEGER_VALUE: DIGIT+;
+
+DECIMAL_VALUE: DIGIT+ '.' DIGIT* | '.' DIGIT+;
+
+DOUBLE_VALUE:
+	DIGIT+ ('.' DIGIT*)? EXPONENT
+	| '.' DIGIT+ EXPONENT;
+
+IDENTIFIER: (LETTER | '_') (LETTER | DIGIT | '_')*;
+
+DIGIT_IDENTIFIER: DIGIT (LETTER | DIGIT | '_')+;
+
+QUOTED_IDENTIFIER: '"' ( ~'"' | '""')* '"';
+
+BACKQUOTED_IDENTIFIER: '`' ( ~'`' | '``')* '`';
+SEMICOLON: ';';
+
+fragment EXPONENT: 'E' [+-]? DIGIT+;
+
+fragment DIGIT: [0-9];
+
+fragment LETTER: [A-Z];
+
+SIMPLE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
+
+BRACKETED_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
+
+WS: [ \r\n\t]+ -> channel(HIDDEN);
+
+// Catch-all for anything we can't recognize. We use this to be able to ignore and recover all the
+// text when splitting statements with DelimiterLexer
+UNRECOGNIZED: .;

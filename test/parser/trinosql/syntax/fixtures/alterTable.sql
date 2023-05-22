@@ -1,11 +1,18 @@
-alter table foo rename to bar;
-alter table a.b.c rename to d.e.f;
-alter table a.b.c rename column x to y;
-alter table a.b.c add column x bigint;
-alter table a.b.c add column x bigint comment 'large x';
-alter table a.b.c add column x bigint with (weight = 2);
-alter table a.b.c add column x bigint comment 'xtra' with (compression = 'LZ4', special = true);
-alter table a.b.c drop column x;
-ALTER TABLE foo.bar.baz SET AUTHORIZATION qux;
-ALTER TABLE foo.bar.baz SET AUTHORIZATION USER qux;
-ALTER TABLE foo.bar.baz SET AUTHORIZATION ROLE qux;
+ALTER TABLE users RENAME TO people;
+ALTER TABLE IF EXISTS users RENAME TO people;
+ALTER TABLE users ADD COLUMN zip varchar;
+ALTER TABLE IF EXISTS users ADD COLUMN IF NOT EXISTS zip varchar;
+ALTER TABLE users DROP COLUMN zip;
+ALTER TABLE IF EXISTS users DROP COLUMN IF EXISTS zip;
+
+ALTER TABLE users RENAME COLUMN id TO user_id;
+ALTER TABLE IF EXISTS users RENAME column IF EXISTS id to user_id;
+
+ALTER TABLE people SET AUTHORIZATION alice;
+ALTER TABLE people SET AUTHORIZATION ROLE PUBLIC;
+
+ALTER TABLE people SET PROPERTIES x = 'y';
+ALTER TABLE people SET PROPERTIES foo = 123, "foo bar" = 456;
+ALTER TABLE people SET PROPERTIES x = DEFAULT;
+ALTER TABLE hive.schema.test_table EXECUTE optimize(file_size_threshold => '10MB');
+
