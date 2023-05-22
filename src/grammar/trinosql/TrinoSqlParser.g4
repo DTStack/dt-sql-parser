@@ -71,7 +71,9 @@ statement:
 	| ALTER VIEW from = qualifiedName RENAME TO to = qualifiedName		# renameView
 	| ALTER VIEW from = qualifiedName SET AUTHORIZATION principal		# setViewAuthorization
 	| CALL qualifiedName '(' (callArgument (',' callArgument)*)? ')'	# call
-	| CREATE ROLE name = identifier (WITH ADMIN grantor)?				# createRole
+	| CREATE ROLE name = identifier 
+		(WITH ADMIN grantor)? 
+		(IN catalog = identifier)?										# createRole 
 	| DROP ROLE name = identifier										# dropRole
 	| GRANT roles TO principal (',' principal)* (
 		WITH ADMIN OPTION
