@@ -257,6 +257,7 @@ KW_EACH:                             'EACH';
 KW_ELSE:                             'ELSE';
 KW_END:                              'END';
 KW_EQUALS:                           'EQUALS';
+KW_ESCAPE:                           'ESCAPE';
 KW_EXCEPT:                           'EXCEPT';
 KW_EXECUTE:                          'EXECUTE';
 KW_EXISTS:                           'EXISTS';

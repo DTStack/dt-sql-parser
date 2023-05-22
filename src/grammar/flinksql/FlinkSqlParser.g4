@@ -679,12 +679,12 @@ predicate
     | likePredicate
     | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL)
     | KW_IS KW_NOT? kind=KW_DISTINCT KW_FROM right=valueExpression
-    | KW_NOT? kind=KW_SIMILAR KW_TO  right=valueExpression
+    | KW_NOT? kind=KW_SIMILAR KW_TO right=valueExpression (KW_ESCAPE stringLiteral)?
     ;
 
 likePredicate
     : KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) ('('')' | '(' expression (',' expression)* ')')
-    | KW_NOT? kind=KW_LIKE pattern=valueExpression
+    | KW_NOT? kind=KW_LIKE pattern=valueExpression (KW_ESCAPE stringLiteral)?
     ;
 
 valueExpression
