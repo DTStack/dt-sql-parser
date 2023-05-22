@@ -182,7 +182,7 @@ module.exports = {
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  transformIgnorePatterns: ["/node_modules/(?!antlr4)"],
+  transformIgnorePatterns: ["/node_modules/.pnpm/(?!antlr4)"],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
@@ -196,6 +196,6 @@ module.exports = {
   // Whether to use watchman for file crawling
   // watchman: true,
   moduleNameMapper: {
-    "^antlr4$": "<rootDir>/node_modules/antlr4/src/antlr4/index.web.js",
+    "^antlr4$": "<rootDir>/node_modules/antlr4/dist/antlr4.web.js",
   },
 };

@@ -347,7 +347,8 @@ dropFunction
 // Insert statements
 
 insertStatement
-    : (KW_EXECUTE? insertSimpleStatement) | (KW_EXECUTE insertMulStatement)
+: (KW_EXECUTE? insertSimpleStatement)
+	| insertMulStatementCompatibility | (KW_EXECUTE insertMulStatement)
     ;
 
 insertSimpleStatement
@@ -370,6 +371,10 @@ valuesRowDefinition
     : LR_BRACKET
         constant (COMMA constant)*
     RR_BRACKET
+    ;
+
+insertMulStatementCompatibility
+	: KW_BEGIN KW_STATEMENT KW_SET SEMICOLON (insertSimpleStatement SEMICOLON)+ KW_END
     ;
 
 insertMulStatement
