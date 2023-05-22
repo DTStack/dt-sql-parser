@@ -1,5 +1,5 @@
 import FlinkSQL from '../../../src/parser/flinksql';
-import FlinkSqlParserListener from '../../../src/lib/flinksql/FlinkSqlParserListener';
+import { FlinkSqlParserListener } from '../../../src/lib/flinksql/FlinkSqlParserListener';
 import { TableExpressionContext } from '../../../src/lib/flinksql/FlinkSqlParser';
 
 describe('Flink SQL Listener Tests', () => {
@@ -11,14 +11,10 @@ describe('Flink SQL Listener Tests', () => {
 
     test('Listener enterTableName', async () => {
         let result = '';
-        class MyListener extends FlinkSqlParserListener {
-
-            constructor() {
-                super()
-            }
+        class MyListener implements FlinkSqlParserListener {
 
             enterTableExpression = (ctx: TableExpressionContext): void => {
-                result = ctx.getText().toLowerCase();
+                result = ctx.text.toLowerCase();
             }
         }
         const listenTableName = new MyListener();
