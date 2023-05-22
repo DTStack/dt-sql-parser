@@ -12,3 +12,5 @@ export * from './lib/spark/SparkSqlVisitor';
 export * from './lib/spark/SparkSqlListener';
 export * from './lib/pgsql/PostgreSQLParserListener';
 export * from './lib/pgsql/PostgreSQLParserVisitor';
+export * from './lib/trinosql/TrinoSqlParserListener';
+export * from './lib/trinosql/TrinoSqlParserVisitor';
