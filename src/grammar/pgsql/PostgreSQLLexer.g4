@@ -35,17 +35,8 @@ lexer grammar PostgreSQLLexer;
 
 options {
    superClass = PostgreSQLLexerBase;
-   caseInsensitive = true;
 }
 
-@ header
-{
-}
-@ members
-{
-/* This field stores the tags which are used to detect the end of a dollar-quoted string literal.
- */
-}
 //
 
 // SPECIAL CHARACTERS (4.1.4)
@@ -2501,12 +2492,6 @@ AfterEscapeStringConstantMode_Newline
    : Newline -> type (Newline) , channel (HIDDEN) , mode (AfterEscapeStringConstantWithNewlineMode)
    ;
 
-AfterEscapeStringConstantMode_NotContinued
-   :
-   {} // intentionally empty
-   -> skip , popMode
-   ;
-
 mode AfterEscapeStringConstantWithNewlineMode;
 AfterEscapeStringConstantWithNewlineMode_Whitespace
    : Whitespace -> type (Whitespace) , channel (HIDDEN)
@@ -2522,7 +2507,7 @@ AfterEscapeStringConstantWithNewlineMode_Continued
 
 AfterEscapeStringConstantWithNewlineMode_NotContinued
    :
-   {} // intentionally empty
+   . // intentionally empty
    -> skip , popMode
    ;
 

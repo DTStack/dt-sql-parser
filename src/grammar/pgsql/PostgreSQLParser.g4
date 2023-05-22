@@ -5,22 +5,7 @@ options { tokenVocab = PostgreSQLLexer;
 superClass = PostgreSQLParserBase;
 }
 
-
-@header
-{
-}
-@members
-{
-}
 program
-   : stmtblock EOF
-   ;
-
-plsqlroot
-   : pl_function
-   ;
-
-stmtblock
    : stmtmulti
    ;
 
@@ -475,17 +460,14 @@ alter_column_default
 opt_drop_behavior
    : CASCADE
    | RESTRICT
-   |
    ;
 
 opt_collate_clause
    : COLLATE any_name
-   |
    ;
 
 alter_using
    : USING a_expr
-   |
    ;
 
 replica_identity
@@ -501,7 +483,6 @@ reloptions
 
 opt_reloptions
    : WITH reloptions
-   |
    ;
 
 reloption_list
@@ -566,7 +547,6 @@ copy_from
 
 opt_program
    : PROGRAM
-   |
    ;
 
 copy_file_name
@@ -602,17 +582,14 @@ copy_opt_item
 
 opt_binary
    : BINARY
-   |
    ;
 
 copy_delimiter
    : opt_using DELIMITERS sconst
-   |
    ;
 
 opt_using
    : USING
-   |
    ;
 
 copy_generic_opt_list
@@ -628,7 +605,6 @@ copy_generic_opt_arg
    | numericonly
    | STAR
    | OPEN_PAREN copy_generic_opt_arg_list CLOSE_PAREN
-   |
    ;
 
 copy_generic_opt_arg_list
@@ -649,17 +625,14 @@ opttemp
    | LOCAL (TEMPORARY | TEMP)
    | GLOBAL (TEMPORARY | TEMP)
    | UNLOGGED
-   |
    ;
 
 opttableelementlist
    : tableelementlist
-   |
    ;
 
 opttypedtableelementlist
    : OPEN_PAREN typedtableelementlist CLOSE_PAREN
-   |
    ;
 
 tableelementlist
@@ -757,12 +730,10 @@ constraintelem
 
 opt_no_inherit
    : NO INHERIT
-   |
    ;
 
 opt_column_list
    : OPEN_PAREN columnlist CLOSE_PAREN
-   |
    ;
 
 columnlist
@@ -775,12 +746,10 @@ columnElem
 
 opt_c_include
    : INCLUDE OPEN_PAREN columnlist CLOSE_PAREN
-   |
    ;
 
 key_match
    : MATCH (FULL | PARTIAL | SIMPLE)
-   |
    ;
 
 exclusionconstraintlist
@@ -793,7 +762,6 @@ exclusionconstraintelem
 
 exclusionwhereclause
    : WHERE OPEN_PAREN a_expr CLOSE_PAREN
-   |
    ;
 
 key_actions
@@ -801,7 +769,6 @@ key_actions
    | key_delete
    | key_update key_delete
    | key_delete key_update
-   |
    ;
 
 key_update
@@ -821,12 +788,10 @@ key_action
 
 optinherit
    : INHERITS OPEN_PAREN qualified_name_list CLOSE_PAREN
-   |
    ;
 
 optpartitionspec
    : partitionspec
-   |
    ;
 
 partitionspec
@@ -845,28 +810,23 @@ part_elem
 
 table_access_method_clause
    : USING name
-   |
    ;
 
 optwith
    : WITH reloptions
    | WITHOUT OIDS
-   |
    ;
 
 oncommitoption
    : ON COMMIT (DROP | DELETE_P ROWS | PRESERVE ROWS)
-   |
    ;
 
 opttablespace
    : TABLESPACE name
-   |
    ;
 
 optconstablespace
    : USING INDEX TABLESPACE name
-   |
    ;
 
 existingindex
@@ -891,7 +851,6 @@ create_as_target
 
 opt_with_data
    : WITH (DATA_P | NO DATA_P)
-   |
    ;
 
 creatematviewstmt
@@ -904,7 +863,6 @@ create_mv_target
 
 optnolog
    : UNLOGGED
-   |
    ;
 
 refreshmatviewstmt
@@ -921,12 +879,10 @@ alterseqstmt
 
 optseqoptlist
    : seqoptlist
-   |
    ;
 
 optparenthesizedseqoptlist
    : OPEN_PAREN seqoptlist CLOSE_PAREN
-   |
    ;
 
 seqoptlist
@@ -969,7 +925,6 @@ createplangstmt
 
 opt_trusted
    : TRUSTED
-   |
    ;
 
 handler_name
@@ -978,7 +933,6 @@ handler_name
 
 opt_inline_handler
    : INLINE_P handler_name
-   |
    ;
 
 validator_clause
@@ -988,12 +942,10 @@ validator_clause
 
 opt_validator
    : validator_clause
-   |
    ;
 
 opt_procedural
    : PROCEDURAL
-   |
    ;
 
 createtablespacestmt
@@ -1002,7 +954,6 @@ createtablespacestmt
 
 opttablespaceowner
    : OWNER rolespec
-   |
    ;
 
 droptablespacestmt
@@ -1069,7 +1020,6 @@ fdw_options
 
 opt_fdw_options
    : fdw_options
-   |
    ;
 
 alterfdwstmt
@@ -1079,7 +1029,6 @@ alterfdwstmt
 
 create_generic_options
    : OPTIONS OPEN_PAREN generic_option_list CLOSE_PAREN
-   |
    ;
 
 generic_option_list
@@ -1120,7 +1069,6 @@ createforeignserverstmt
 
 opt_type
    : TYPE_P sconst
-   |
    ;
 
 foreign_server_version
@@ -1129,7 +1077,6 @@ foreign_server_version
 
 opt_foreign_server_version
    : foreign_server_version
-   |
    ;
 
 alterforeignserverstmt
@@ -1154,7 +1101,6 @@ import_qualification_type
 
 import_qualification
    : import_qualification_type OPEN_PAREN relation_expr_list CLOSE_PAREN
-   |
    ;
 
 createusermappingstmt
@@ -1186,32 +1132,26 @@ alterpolicystmt
 
 rowsecurityoptionalexpr
    : USING OPEN_PAREN a_expr CLOSE_PAREN
-   |
    ;
 
 rowsecurityoptionalwithcheck
    : WITH CHECK OPEN_PAREN a_expr CLOSE_PAREN
-   |
    ;
 
 rowsecuritydefaulttorole
    : TO role_list
-   |
    ;
 
 rowsecurityoptionaltorole
    : TO role_list
-   |
    ;
 
 rowsecuritydefaultpermissive
    : AS identifier
-   |
    ;
 
 rowsecuritydefaultforcmd
    : FOR row_security_cmd
-   |
    ;
 
 row_security_cmd
@@ -1256,7 +1196,6 @@ triggeroneevent
 
 triggerreferencing
    : REFERENCING triggertransitions
-   |
    ;
 
 triggertransitions
@@ -1283,12 +1222,10 @@ transitionrelname
 
 triggerforspec
    : FOR triggerforopteach triggerfortype
-   |
    ;
 
 triggerforopteach
    : EACH
-   |
    ;
 
 triggerfortype
@@ -1298,7 +1235,6 @@ triggerfortype
 
 triggerwhen
    : WHEN OPEN_PAREN a_expr CLOSE_PAREN
-   |
    ;
 
 function_or_procedure
@@ -1319,7 +1255,6 @@ triggerfuncarg
 
 optconstrfromtable
    : FROM qualified_name
-   |
    ;
 
 constraintattributespec
@@ -1421,7 +1356,6 @@ old_aggr_elem
 
 opt_enum_val_list
    : enum_val_list
-   |
    ;
 
 enum_val_list
@@ -1437,7 +1371,6 @@ alterenumstmt
 
 opt_if_not_exists
    : IF_P NOT EXISTS
-   |
    ;
 
 createopclassstmt
@@ -1458,23 +1391,19 @@ opclass_item
 
 opt_default
    : DEFAULT
-   |
    ;
 
 opt_opfamily
    : FAMILY any_name
-   |
    ;
 
 opclass_purpose
    : FOR SEARCH
    | FOR ORDER BY any_name
-   |
    ;
 
 opt_recheck
    : RECHECK
-   |
    ;
 
 createopfamilystmt
@@ -1592,7 +1521,6 @@ truncatestmt
 opt_restart_seqs
    : CONTINUE_P IDENTITY_P
    | RESTART IDENTITY_P
-   |
    ;
 
 commentstmt
@@ -1636,7 +1564,6 @@ seclabelstmt
 
 opt_provider
    : FOR nonreservedword_or_sconst
-   |
    ;
 
 security_label
@@ -1675,7 +1602,6 @@ from_in
 
 opt_from_in
    : from_in
-   |
    ;
 
 grantstmt
@@ -1740,7 +1666,6 @@ grantee
 
 opt_grant_grant_option
    : WITH GRANT OPTION
-   |
    ;
 
 grantrolestmt
@@ -1754,12 +1679,10 @@ revokerolestmt
 
 opt_grant_admin_option
    : WITH ADMIN OPTION
-   |
    ;
 
 opt_granted_by
    : GRANTED BY rolespec
-   |
    ;
 
 alterdefaultprivilegesstmt
@@ -1790,7 +1713,6 @@ defacl_privilege_target
    | TYPES_P
    | SCHEMAS
    ;
-   //create index
 
 indexstmt
    : CREATE opt_unique INDEX opt_concurrently opt_index_name ON relation_expr access_method_clause OPEN_PAREN index_params CLOSE_PAREN opt_include opt_reloptions opttablespace where_clause
@@ -1799,22 +1721,18 @@ indexstmt
 
 opt_unique
    : UNIQUE
-   |
    ;
 
 opt_concurrently
    : CONCURRENTLY
-   |
    ;
 
 opt_index_name
    : name
-   |
    ;
 
 access_method_clause
    : USING name
-   |
    ;
 
 index_params
@@ -1834,7 +1752,6 @@ index_elem
 
 opt_include
    : INCLUDE OPEN_PAREN index_including_params CLOSE_PAREN
-   |
    ;
 
 index_including_params
@@ -1843,25 +1760,20 @@ index_including_params
 
 opt_collate
    : COLLATE any_name
-   |
    ;
 
 opt_class
    : any_name
-   |
    ;
 
 opt_asc_desc
    : ASC
    | DESC
-   |
    ;
-   //TOD NULLS_LA was used
 
 opt_nulls_order
    : NULLS_P FIRST_P
    | NULLS_P LAST_P
-   |
    ;
 
 createfunctionstmt
@@ -1874,7 +1786,6 @@ createfunctionstmt
 
 opt_or_replace
    : OR REPLACE
-   |
    ;
 
 func_args
@@ -1960,7 +1871,6 @@ createfunc_opt_list
                 ParseRoutineBody(_localctx);
             }
    //                    | createfunc_opt_list createfunc_opt_item
-
    ;
 
 common_func_opt_item
@@ -2010,7 +1920,6 @@ transform_type_list
 
 opt_definition
    : WITH definition
-   |
    ;
 
 table_func_column
@@ -2031,7 +1940,6 @@ alterfunc_opt_list
 
 opt_restrict
    : RESTRICT
-   |
    ;
 
 removefuncstmt
@@ -2094,7 +2002,6 @@ createcaststmt
 cast_context
    : AS IMPLICIT_P
    | AS ASSIGNMENT
-   |
    ;
 
 dropcaststmt
@@ -2103,7 +2010,6 @@ dropcaststmt
 
 opt_if_exists
    : IF_P EXISTS
-   |
    ;
 
 createtransformstmt
@@ -2212,12 +2118,10 @@ renamestmt
 
 opt_column
    : COLUMN
-   |
    ;
 
 opt_set_data
    : SET DATA_P
-   |
    ;
 
 alterobjectdependsstmt
@@ -2231,7 +2135,6 @@ alterobjectdependsstmt
 
 opt_no
    : NO
-   |
    ;
 
 alterobjectschemastmt
@@ -2322,7 +2225,6 @@ createpublicationstmt
 
 opt_publication_for_tables
    : publication_for_tables
-   |
    ;
 
 publication_for_tables
@@ -2387,7 +2289,6 @@ ruleactionstmt
 
 ruleactionstmtOrEmpty
    : ruleactionstmt
-   |
    ;
 
 event
@@ -2400,7 +2301,6 @@ event
 opt_instead
    : INSTEAD
    | ALSO
-   |
    ;
 
 notifystmt
@@ -2409,7 +2309,6 @@ notifystmt
 
 notify_payload
    : COMMA sconst
-   |
    ;
 
 listenstmt
@@ -2441,7 +2340,6 @@ transactionstmt
 opt_transaction
    : WORK
    | TRANSACTION
-   |
    ;
 
 transaction_mode_item
@@ -2458,12 +2356,10 @@ transaction_mode_list
 
 transaction_mode_list_or_empty
    : transaction_mode_list
-   |
    ;
 
 opt_transaction_chain
    : AND NO? CHAIN
-   |
    ;
 
 viewstmt
@@ -2477,7 +2373,6 @@ viewstmt
 
 opt_check_option
    : WITH (CASCADED | LOCAL)? CHECK OPTION
-   |
    ;
 
 loadstmt
@@ -2490,7 +2385,6 @@ createdbstmt
 
 createdb_opt_list
    : createdb_opt_items
-   |
    ;
 
 createdb_opt_items
@@ -2513,7 +2407,6 @@ createdb_opt_name
 
 opt_equal
    : EQUAL
-   |
    ;
 
 alterdatabasestmt
@@ -2554,7 +2447,6 @@ alterdomainstmt
 
 opt_as
    : AS
-   |
    ;
 
 altertsdictionarystmt
@@ -2572,10 +2464,7 @@ altertsconfigurationstmt
 
 any_with
    : WITH
-   //TODO
-
    //         | WITH_LA
-
    ;
 
 createconversionstmt
@@ -2590,7 +2479,6 @@ clusterstmt
 
 cluster_index_specification
    : USING name
-   |
    ;
 
 vacuumstmt
@@ -2624,32 +2512,26 @@ vac_analyze_option_name
 vac_analyze_option_arg
    : opt_boolean_or_string
    | numericonly
-   |
    ;
 
 opt_analyze
    : analyze_keyword
-   |
    ;
 
 opt_verbose
    : VERBOSE
-   |
    ;
 
 opt_full
    : FULL
-   |
    ;
 
 opt_freeze
    : FREEZE
-   |
    ;
 
 opt_name_list
    : OPEN_PAREN name_list CLOSE_PAREN
-   |
    ;
 
 vacuum_relation
@@ -2662,7 +2544,6 @@ vacuum_relation_list
 
 opt_vacuum_relation_list
    : vacuum_relation_list
-   |
    ;
 
 explainstmt
@@ -2700,7 +2581,6 @@ explain_option_name
 explain_option_arg
    : opt_boolean_or_string
    | numericonly
-   |
    ;
 
 preparestmt
@@ -2709,7 +2589,6 @@ preparestmt
 
 prep_type_clause
    : OPEN_PAREN type_list CLOSE_PAREN
-   |
    ;
 
 preparablestmt
@@ -2727,7 +2606,6 @@ executestmt
 
 execute_param_clause
    : OPEN_PAREN expr_list CLOSE_PAREN
-   |
    ;
 
 deallocatestmt
@@ -2767,18 +2645,15 @@ insert_column_item
 
 opt_on_conflict
    : ON CONFLICT opt_conf_expr DO (UPDATE SET set_clause_list where_clause | NOTHING)
-   |
    ;
 
 opt_conf_expr
    : OPEN_PAREN index_params CLOSE_PAREN where_clause
    | ON CONSTRAINT name
-   |
    ;
 
 returning_clause
    : RETURNING target_list
-   |
    ;
 
 deletestmt
@@ -2787,7 +2662,6 @@ deletestmt
 
 using_clause
    : USING from_list
-   |
    ;
 
 lockstmt
@@ -2796,7 +2670,6 @@ lockstmt
 
 opt_lock
    : IN_P lock_type MODE
-   |
    ;
 
 lock_type
@@ -2808,13 +2681,11 @@ lock_type
 
 opt_nowait
    : NOWAIT
-   |
    ;
 
 opt_nowait_or_skip
    : NOWAIT
    | SKIP_P LOCKED
-   |
    ;
 
 updatestmt
@@ -2925,17 +2796,14 @@ common_table_expr
 opt_materialized
    : MATERIALIZED
    | NOT MATERIALIZED
-   |
    ;
 
 opt_with_clause
    : with_clause
-   |
    ;
 
 into_clause
    : INTO (opt_strict opttempTableName | into_target)
-   |
    ;
 
 opt_strict
@@ -2952,13 +2820,11 @@ opttempTableName
 
 opt_table
    : TABLE
-   |
    ;
 
 all_or_distinct
    : ALL
    | DISTINCT
-   |
    ;
 
 distinct_clause
@@ -2967,12 +2833,10 @@ distinct_clause
 
 opt_all_clause
    : ALL
-   |
    ;
 
 opt_sort_clause
    : sort_clause
-   |
    ;
 
 sort_clause
@@ -2994,7 +2858,6 @@ select_limit
 
 opt_select_limit
    : select_limit
-   |
    ;
 
 limit_clause
@@ -3038,7 +2901,6 @@ first_or_next
 
 group_clause
    : GROUP_P BY group_by_list
-   |
    ;
 
 group_by_list
@@ -3071,7 +2933,6 @@ grouping_sets_clause
 
 having_clause
    : HAVING a_expr
-   |
    ;
 
 for_locking_clause
@@ -3081,7 +2942,6 @@ for_locking_clause
 
 opt_for_locking_clause
    : for_locking_clause
-   |
    ;
 
 for_locking_items
@@ -3098,7 +2958,6 @@ for_locking_strength
 
 locked_rels_list
    : OF qualified_name_list
-   |
    ;
 
 values_clause
@@ -3107,7 +2966,6 @@ values_clause
 
 from_clause
    : FROM from_list
-   |
    ;
 
 from_list
@@ -3139,13 +2997,11 @@ alias_clause
 
 opt_alias_clause
    : alias_clause
-   |
    ;
 
 func_alias_clause
    : alias_clause
    | (AS colid? | colid) OPEN_PAREN tablefuncelementlist CLOSE_PAREN
-   |
    ;
 
 join_type
@@ -3176,7 +3032,6 @@ tablesample_clause
 
 opt_repeatable_clause
    : REPEATABLE OPEN_PAREN a_expr CLOSE_PAREN
-   |
    ;
 
 func_table
@@ -3194,28 +3049,22 @@ rowsfrom_list
 
 opt_col_def_list
    : AS OPEN_PAREN tablefuncelementlist CLOSE_PAREN
-   |
    ;
-   //TODO WITH_LA was used
 
 opt_ordinality
    : WITH ORDINALITY
-   |
    ;
 
 where_clause
    : WHERE a_expr
-   |
    ;
 
 where_or_current_clause
    : WHERE (CURRENT_P OF cursor_name | a_expr)
-   |
    ;
 
 opttablefuncelementlist
    : tablefuncelementlist
-   |
    ;
 
 tablefuncelementlist
@@ -3289,7 +3138,6 @@ generictype
 
 opt_type_modifiers
    : OPEN_PAREN expr_list CLOSE_PAREN
-   |
    ;
 
 numeric
@@ -3308,9 +3156,7 @@ numeric
 
 opt_float
    : OPEN_PAREN iconst CLOSE_PAREN
-   |
    ;
-   //todo: merge alts
 
 bit
    : bitwithlength
@@ -3346,7 +3192,6 @@ character_c
 
 opt_varying
    : VARYING
-   |
    ;
 
 constdatetime
@@ -3361,7 +3206,6 @@ constinterval
 opt_timezone
    : WITH TIME ZONE
    | WITHOUT TIME ZONE
-   |
    ;
 
 opt_interval
@@ -3375,7 +3219,6 @@ opt_interval
    | DAY_P TO (HOUR_P | MINUTE_P | interval_second)
    | HOUR_P TO (MINUTE_P | interval_second)
    | MINUTE_P TO interval_second
-   |
    ;
 
 interval_second
@@ -3384,68 +3227,15 @@ interval_second
 
 opt_escape
    : ESCAPE a_expr
-   |
    ;
    //precendence accroding to Table 4.2. Operator Precedence (highest to lowest)
 
    //https://www.postgresql.org/docs/12/sql-syntax-lexical.html#SQL-PRECEDENCE
 
-/*
-original version of a_expr, for info
- a_expr: c_expr
-        //::	left	PostgreSQL-style typecast
-       | a_expr TYPECAST typename -- 1
-       | a_expr COLLATE any_name -- 2
-       | a_expr AT TIME ZONE a_expr-- 3
-       //right	unary plus, unary minus
-       | (PLUS| MINUS) a_expr -- 4
-        //left	exponentiation
-       | a_expr CARET a_expr -- 5
-        //left	multiplication, division, modulo
-       | a_expr (STAR | SLASH | PERCENT) a_expr -- 6
-        //left	addition, subtraction
-       | a_expr (PLUS | MINUS) a_expr -- 7
-        //left	all other native and user-defined operators
-       | a_expr qual_op a_expr -- 8
-       | qual_op a_expr -- 9
-        //range containment, set membership, string matching BETWEEN IN LIKE ILIKE SIMILAR
-       | a_expr NOT? (LIKE|ILIKE|SIMILAR TO|(BETWEEN SYMMETRIC?)) a_expr opt_escape -- 10
-        //< > = <= >= <>	 	comparison operators
-       | a_expr (LT | GT | EQUAL | LESS_EQUALS | GREATER_EQUALS | NOT_EQUALS) a_expr -- 11
-       //IS ISNULL NOTNULL	 	IS TRUE, IS FALSE, IS NULL, IS DISTINCT FROM, etc
-       | a_expr IS NOT?
-            (
-                NULL_P
-                |TRUE_P
-                |FALSE_P
-                |UNKNOWN
-                |DISTINCT FROM a_expr
-                |OF OPEN_PAREN type_list CLOSE_PAREN
-                |DOCUMENT_P
-                |unicode_normal_form? NORMALIZED
-            ) -- 12
-       | a_expr (ISNULL|NOTNULL) -- 13
-       | row OVERLAPS row -- 14
-       //NOT	right	logical negation
-       | NOT a_expr -- 15
-        //AND	left	logical conjunction
-       | a_expr AND a_expr -- 16
-        //OR	left	logical disjunction
-       | a_expr OR a_expr -- 17
-       | a_expr (LESS_LESS|GREATER_GREATER) a_expr -- 18
-       | a_expr qual_op -- 19
-       | a_expr NOT? IN_P in_expr -- 20
-       | a_expr subquery_Op sub_type (select_with_parens|OPEN_PAREN a_expr CLOSE_PAREN) -- 21
-       | UNIQUE select_with_parens -- 22
-       | DEFAULT -- 23
-;
-*/
-
 
 a_expr
    : a_expr_qual
    ;
-/*23*/
 
 
 /*moved to c_expr*/
@@ -3559,9 +3349,7 @@ a_expr_caret
 
 
 a_expr_unary_sign
-   : (MINUS | PLUS)? a_expr_at_time_zone /* */
-
-
+   : (MINUS | PLUS)? a_expr_at_time_zone
    ;
 /* 3*/
 
@@ -3608,9 +3396,7 @@ c_expr
    | ARRAY (select_with_parens | array_expr) # c_expr_expr
    | PARAM opt_indirection # c_expr_expr
    | GROUPING OPEN_PAREN expr_list CLOSE_PAREN # c_expr_expr
-   | /*22*/
-
-   UNIQUE select_with_parens # c_expr_expr
+   | UNIQUE select_with_parens # c_expr_expr /*22*/
    | columnref # c_expr_expr
    | aexprconst # c_expr_expr
    | plsqlvariablename # c_expr_expr
@@ -3620,9 +3406,7 @@ c_expr
    | select_with_parens indirection? # c_expr_expr
    | explicit_row # c_expr_expr
    | implicit_row # c_expr_expr
-   | row OVERLAPS row /* 14*/
-
-   # c_expr_expr
+   | row OVERLAPS row # c_expr_expr  /* 14*/ 
    ;
 
 plsqlvariablename
@@ -3687,7 +3471,6 @@ opt_xml_root_standalone
    : COMMA STANDALONE_P YES_P
    | COMMA STANDALONE_P NO
    | COMMA STANDALONE_P NO VALUE_P
-   |
    ;
 
 xml_attributes
@@ -3710,7 +3493,6 @@ document_or_content
 xml_whitespace_option
    : PRESERVE WHITESPACE_P
    | STRIP_P WHITESPACE_P
-   |
    ;
 
 xmlexists_argument
@@ -3726,17 +3508,14 @@ xml_passing_mech
 
 within_group_clause
    : WITHIN GROUP_P OPEN_PAREN sort_clause CLOSE_PAREN
-   |
    ;
 
 filter_clause
    : FILTER OPEN_PAREN WHERE a_expr CLOSE_PAREN
-   |
    ;
 
 window_clause
    : WINDOW window_definition_list
-   |
    ;
 
 window_definition_list
@@ -3749,7 +3528,6 @@ window_definition
 
 over_clause
    : OVER (window_specification | colid)
-   |
    ;
 
 window_specification
@@ -3758,19 +3536,16 @@ window_specification
 
 opt_existing_window_name
    : colid
-   |
    ;
 
 opt_partition_clause
    : PARTITION BY expr_list
-   |
    ;
 
 opt_frame_clause
    : RANGE frame_extent opt_window_exclusion_clause
    | ROWS frame_extent opt_window_exclusion_clause
    | GROUPS frame_extent opt_window_exclusion_clause
-   |
    ;
 
 frame_extent
@@ -3786,7 +3561,6 @@ frame_bound
 
 opt_window_exclusion_clause
    : EXCLUDE (CURRENT_P ROW | GROUP_P | TIES | NO OTHERS)
-   |
    ;
 
 row
@@ -3797,15 +3571,6 @@ row
 explicit_row
    : ROW OPEN_PAREN expr_list? CLOSE_PAREN
    ;
-/*
-TODO:
-for some reason v1
-implicit_row: OPEN_PAREN expr_list COMMA a_expr CLOSE_PAREN;
-works better than v2
-implicit_row: OPEN_PAREN expr_list  CLOSE_PAREN;
-while looks like they are almost the same, except v2 requieres at least 2 items in list
-while v1 allows single item in list
-*/
 
 
 implicit_row
@@ -3884,7 +3649,6 @@ array_expr_list
 
 extract_list
    : extract_arg FROM a_expr
-   |
    ;
 
 extract_arg
@@ -3911,7 +3675,6 @@ overlay_list
 
 position_list
    : b_expr IN_P b_expr
-   |
    ;
 
 substr_list
@@ -3921,7 +3684,6 @@ substr_list
    | a_expr FOR a_expr
    | a_expr SIMILAR a_expr ESCAPE a_expr
    | expr_list
-   |
    ;
 
 trim_list
@@ -3949,12 +3711,10 @@ when_clause
 
 case_default
    : ELSE a_expr
-   |
    ;
 
 case_arg
    : a_expr
-   |
    ;
 
 columnref
@@ -3968,7 +3728,6 @@ indirection_el
 
 opt_slice_bound
    : a_expr
-   |
    ;
 
 indirection
@@ -3981,7 +3740,6 @@ opt_indirection
 
 opt_target_list
    : target_list
-   |
    ;
 
 target_list
@@ -4065,7 +3823,6 @@ anysconst
 
 opt_uescape
    : UESCAPE anysconst
-   |
    ;
 
 signediconst
@@ -4556,14 +4313,6 @@ reserved_keyword
    | IN_P
    | INITIALLY
    | INTERSECT
-/*
-from pl_gram.y, line ~2982
-	 * Fortunately, INTO is a fully reserved word in the main grammar, so
-	 * at least we need not worry about it appearing as an identifier.
-*/
-
-
-   //                 | INTO
    | LATERAL_P
    | LEADING
    | LIMIT
@@ -4600,15 +4349,6 @@ from pl_gram.y, line ~2982
    | WITH
    ;
 
-/************************************************************************************************************************************************************/
-/*PL/SQL GRAMMAR */
-
-
-/*PLSQL grammar */
-
-   /************************************************************************************************************************************************************/ pl_function
-   : comp_options pl_block opt_semi
-   ;
 
 comp_options
    : comp_option*
@@ -4935,17 +4675,6 @@ opt_return_result
    :
    | sql_expression
    ;
-   //https://www.postgresql.org/docs/current/plpgsql-errors-and-messages.html
-
-   //RAISE [ level ] 'format' [, expression [, ... ]] [ USING option = expression [, ... ] ];
-
-   //RAISE [ level ] condition_name [ USING option = expression [, ... ] ];
-
-   //RAISE [ level ] SQLSTATE 'sqlstate' [ USING option = expression [, ... ] ];
-
-   //RAISE [ level ] USING option = expression [, ... ];
-
-   //RAISE ;
 
 stmt_raise
    : RAISE opt_stmt_raise_level sconst opt_raise_list opt_raise_using SEMI
@@ -4957,7 +4686,6 @@ stmt_raise
 
 opt_stmt_raise_level
    :
-   |
    | DEBUG
    | LOG
    | INFO
@@ -4983,7 +4711,6 @@ opt_raise_using_elem
 opt_raise_using_elem_list
    : opt_raise_using_elem (COMMA opt_raise_using_elem)*
    ;
-   //todo imnplement
 
 stmt_assert
    : ASSERT sql_expression opt_stmt_assert_message SEMI
@@ -4997,23 +4724,11 @@ opt_stmt_assert_message
 loop_body
    : LOOP proc_sect END_P LOOP opt_label SEMI
    ;
-   //TODO: looks like all other statements like INSERT/SELECT/UPDATE/DELETE are handled here;
 
-   //pls take a look at original grammar
 
 stmt_execsql
    : make_execsql_stmt SEMI
-/*K_IMPORT
-            | K_INSERT
-            | t_word
-            | t_cword
-*/
-
-
    ;
-   //https://www.postgresql.org/docs/current/plpgsql-statements.html#PLPGSQL-STATEMENTS-SQL-NORESULT
-
-   //EXECUTE command-string [ INTO [STRICT] target ] [ USING expression [, ... ] ];
 
 stmt_dynexecute
    : EXECUTE a_expr (
@@ -5035,15 +4750,6 @@ opt_execute_into
    :
    | INTO STRICT_P? into_target
    ;
-   //https://www.postgresql.org/docs/current/plpgsql-cursors.html#PLPGSQL-CURSOR-OPENING
-
-   //OPEN unbound_cursorvar [ [ NO ] SCROLL ] FOR query;
-
-   //OPEN unbound_cursorvar [ [ NO ] SCROLL ] FOR EXECUTE query_string
-
-   //                                     [ USING expression [, ... ] ];
-
-   //OPEN bound_cursorvar [ ( [ argument_name := ] argument_value [, ...] ) ];
 
 stmt_open
    : OPEN
@@ -5078,7 +4784,6 @@ opt_scroll_option_no
    ;
    //https://www.postgresql.org/docs/current/plpgsql-cursors.html#PLPGSQL-CURSOR-OPENING
 
-   //FETCH [ direction { FROM | IN } ] cursor INTO target;
 
 stmt_fetch
    : FETCH direction = opt_fetch_direction opt_cursor_from cursor_variable INTO into_target SEMI
@@ -5096,7 +4801,6 @@ opt_cursor_from
 
 opt_fetch_direction
    :
-   |
    | NEXT
    | PRIOR
    | FIRST_P
@@ -5167,17 +4871,7 @@ proc_condition
    : any_identifier
    | SQLSTATE sconst
    ;
-   //expr_until_semi:
 
-   //;
-
-   //expr_until_rightbracket:
-
-   //;
-
-   //expr_until_loop:
-
-   //;
 
 opt_block_label
    :
@@ -5196,7 +4890,6 @@ opt_label
 
 opt_exitcond
    : WHEN expr_until_semi
-   |
    ;
 
 any_identifier
@@ -5216,23 +4909,18 @@ plsql_unreserved_keyword
    | CLOSE
    | COLLATE
    | COLUMN
-   //| COLUMN_NAME
    | COMMIT
    | CONSTANT
    | CONSTRAINT
-   //| CONSTRAINT_NAME
    | CONTINUE_P
    | CURRENT_P
    | CURSOR
-   //| DATATYPE
    | DEBUG
    | DEFAULT
-   //| DETAIL
    | DIAGNOSTICS
    | DO
    | DUMP
    | ELSIF
-   //| ERRCODE
    | ERROR
    | EXCEPTION
    | EXIT
@@ -5240,17 +4928,11 @@ plsql_unreserved_keyword
    | FIRST_P
    | FORWARD
    | GET
-   //| HINT
-
-   //| IMPORT
    | INFO
    | INSERT
    | IS
    | LAST_P
    | LOG
-   //| MESSAGE
-
-   //| MESSAGE_TEXT
    | MOVE
    | NEXT
    | NO
@@ -5258,15 +4940,6 @@ plsql_unreserved_keyword
    | OPEN
    | OPTION
    | PERFORM
-   //| PG_CONTEXT
-
-   //| PG_DATATYPE_NAME
-
-   //| PG_EXCEPTION_CONTEXT
-
-   //| PG_EXCEPTION_DETAIL
-
-   //| PG_EXCEPTION_HINT
    | PRINT_STRICT_PARAMS
    | PRIOR
    | QUERY
@@ -5274,20 +4947,16 @@ plsql_unreserved_keyword
    | RELATIVE_P
    | RESET
    | RETURN
-   //| RETURNED_SQLSTATE
    | REVERSE
    | ROLLBACK
-   //| ROW_COUNT
    | ROWTYPE
    | SCHEMA
-   //| SCHEMA_NAME
    | SCROLL
    | SET
    | SLICE
    | SQLSTATE
    | STACKED
    | TABLE
-   //| TABLE_NAME
    | TYPE_P
    | USE_COLUMN
    | USE_VARIABLE
@@ -5322,6 +4991,5 @@ make_execsql_stmt
 
 opt_returning_clause_into
    : INTO opt_strict into_target
-   |
    ;
 
