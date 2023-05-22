@@ -6,3 +6,6 @@ alter table a.b.c add column x bigint comment 'large x';
 alter table a.b.c add column x bigint with (weight = 2);
 alter table a.b.c add column x bigint comment 'xtra' with (compression = 'LZ4', special = true);
 alter table a.b.c drop column x;
+ALTER TABLE foo.bar.baz SET AUTHORIZATION qux;
+ALTER TABLE foo.bar.baz SET AUTHORIZATION USER qux;
+ALTER TABLE foo.bar.baz SET AUTHORIZATION ROLE qux;
