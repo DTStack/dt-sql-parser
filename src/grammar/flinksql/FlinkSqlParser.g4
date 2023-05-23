@@ -728,7 +728,7 @@ primaryExpression
     ;
 
 functionName
-    : reservedKeywords
+    : reservedKeywordsUsedAsFunctionName
     | nonReservedKeywords
     | uid
     ;
@@ -924,6 +924,41 @@ booleanLiteral
 setQuantifier
     : KW_DISTINCT
     | KW_ALL
+    ;
+
+reservedKeywordsUsedAsFunctionName
+    : KW_ABS
+    | KW_ARRAY
+    | KW_AVG
+    | KW_CAST
+    | KW_CEIL
+    | KW_COALESCE
+    | KW_COLLECT
+    | KW_COUNT
+    | KW_DATE
+    | KW_GROUPING
+    | KW_HOUR
+    | KW_IF
+    | KW_LAG
+    | KW_LEFT
+    | KW_MAP
+    | KW_MINUTE
+    | KW_MONTH
+    | KW_OVERLAY
+    | KW_POSITION
+    | KW_POWER
+    | KW_QUARTER
+    | KW_RANK
+    | KW_RIGHT
+    | KW_SECOND
+    | KW_SUBSTRING
+    | KW_SUM
+    | KW_TIME
+    | KW_TIMESTAMP
+    | KW_TRUNCATE
+    | KW_UPPER
+    | KW_WEEK
+    | KW_YEAR
     ;
 
 reservedKeywords

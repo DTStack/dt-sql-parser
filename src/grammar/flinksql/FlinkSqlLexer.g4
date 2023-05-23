@@ -332,6 +332,7 @@ KW_PER:                              'PER';
 KW_PERCENT:                          'PERCENT';
 KW_PERIOD:                           'PERIOD';
 KW_POSITION:                         'POSITION';
+KW_POWER:                            'POWER';
 KW_PRIMARY:                          'PRIMARY';
 KW_RANGE:                            'RANGE';
 KW_RANK:                             'RANK';

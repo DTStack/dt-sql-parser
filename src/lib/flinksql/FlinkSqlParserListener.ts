@@ -202,6 +202,7 @@ import { StringLiteralContext } from "./FlinkSqlParser";
 import { DecimalLiteralContext } from "./FlinkSqlParser";
 import { BooleanLiteralContext } from "./FlinkSqlParser";
 import { SetQuantifierContext } from "./FlinkSqlParser";
+import { ReservedKeywordsUsedAsFunctionNameContext } from "./FlinkSqlParser";
 import { ReservedKeywordsContext } from "./FlinkSqlParser";
 import { NonReservedKeywordsContext } from "./FlinkSqlParser";
 
@@ -2261,6 +2262,16 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitSetQuantifier?: (ctx: SetQuantifierContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.reservedKeywordsUsedAsFunctionName`.
+	 * @param ctx the parse tree
+	 */
+	enterReservedKeywordsUsedAsFunctionName?: (ctx: ReservedKeywordsUsedAsFunctionNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.reservedKeywordsUsedAsFunctionName`.
+	 * @param ctx the parse tree
+	 */
+	exitReservedKeywordsUsedAsFunctionName?: (ctx: ReservedKeywordsUsedAsFunctionNameContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.reservedKeywords`.
 	 * @param ctx the parse tree
