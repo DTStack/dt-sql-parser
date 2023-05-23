@@ -2,6 +2,15 @@ CREATE TABLE MyTable ('user_id' BIGINT, 'name' STRING) WITH ('connector' = 'orac
 
 CREATE TABLE MyTable WITH ('connector' = 'oracle-x');
 
+CREATE TEMPORARY TABLE client_errors (
+    log_time TIMESTAMP(3),
+    request_line STRING,
+    status_code STRING,
+    size INT
+) WITH (
+    'connector' = 'stream-x'
+);
+
 -- 尽管官方文档的 BNF 里没有支持创建临时表，但实际上是支持的
 CREATE TEMPORARY TABLE MyTable ('user_id' BIGINT, 'name' STRING) WITH ('connector' = 'oracle-x');
 
@@ -231,4 +240,65 @@ CREATE TABLE tbl1 (
 )  LIKE Orders (
    OVERWRITING OPTIONS
    EXCLUDING CONSTRAINTS
+);
+
+CREATE TEMPORARY TABLE server_logs (
+    client_ip STRING,
+    client_identity STRING,
+    userid STRING,
+    user_agent STRING,
+    log_time TIMESTAMP(3),
+    request_line STRING,
+    status_code STRING,
+    size INT
+) WITH (
+    'connector' = 'faker'
+);
+
+CREATE TEMPORARY TABLE aggregations1 (
+    `browser`     STRING,
+    `status_code` STRING,
+    `end_time`    TIMESTAMP(3),
+    `requests`    BIGINT NOT NULL
+) WITH (
+    'connector' = 'blackhole'
+);
+
+CREATE TABLE dt_catalog.dt_db.doctor_sightings (
+    doctor        STRING,
+    sighting_time TIMESTAMP(3),
+    WATERMARK FOR sighting_time AS sighting_time - INTERVAL '15' SECONDS
+) WITH (
+    'connector' = 'faker'
+);
+
+
+CREATE TABLE dt_catalog.dt_db.bids (
+    bid_id STRING,
+    currency_code STRING,
+    bid_price DOUBLE,
+    transaction_time TIMESTAMP(3),
+    WATERMARK FOR transaction_time AS transaction_time - INTERVAL '5' SECONDS  -- 定义事件时间，允许的最大窗口延迟为5s
+) WITH (
+    'connector' = 'faker'
+);
+
+
+CREATE TABLE dt_catalog.dt_db.currency_rates (
+    `currency_code` STRING,
+    `eur_rate` DECIMAL(6,4),
+    `rate_time` TIMESTAMP(3),
+    WATERMARK FOR `rate_time` AS rate_time - INTERVAL '15' SECONDS, -- 定义事件时间
+    PRIMARY KEY (currency_code) NOT ENFORCED -- 定义主键
+) WITH (
+    'connector' = 'faker'
+);
+
+CREATE TABLE dt_catalog.dt_db.users (
+    -- That was weird, NOT ENFORCED should have been necessary but we got a demo like the following and it could work!
+    user_id INT PRIMARY KEY, 
+    user_name VARCHAR(255) NOT NULL,
+    age INT NULL
+) WITH (
+    'connector' = 'faker'
 );
