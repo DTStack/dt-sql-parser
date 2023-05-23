@@ -25,10 +25,6 @@ options {
     superClass=PlSqlBaseParser;
 }
 
-@parser::postinclude {
-#include <PlSqlBaseParser.h>
-}
-
 program: sql_script EOF;
 
 sql_script
@@ -2254,7 +2250,7 @@ partial_database_recovery
     ;
 
 partial_database_recovery_10g
-    : {isVersion10()}? STANDBY
+    : {this.isVersion10()}? STANDBY
       ( TABLESPACE tablespace (',' tablespace)*
       | DATAFILE CHAR_STRING | filenumber (',' CHAR_STRING | filenumber)*
       )
