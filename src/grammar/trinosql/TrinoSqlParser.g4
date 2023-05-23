@@ -75,9 +75,11 @@ statement:
 		(WITH ADMIN grantor)? 
 		(IN catalog = identifier)?										# createRole 
 	| DROP ROLE name = identifier										# dropRole
-	| GRANT roles TO principal (',' principal)* (
-		WITH ADMIN OPTION
-	)? (GRANTED BY grantor)? # grantRoles
+	| GRANT roles TO principal 
+	(',' principal)*
+	(WITH ADMIN OPTION)? 
+	(GRANTED BY grantor)? 
+	(IN catalog = identifier)?                                          # grantRoles
 	| REVOKE (ADMIN OPTION FOR)? roles FROM principal (
 		',' principal
 	)* (GRANTED BY grantor)?					# revokeRoles
