@@ -1,4 +1,5 @@
-import PostgreSQLParserVisitor from "../../../src/lib/pgsql/PostgreSQLParserVisitor";
+import { AbstractParseTreeVisitor } from "antlr4ts/tree/AbstractParseTreeVisitor";
+import { PostgreSQLParserVisitor } from "../../../src/lib/pgsql/PostgreSQLParserVisitor";
 import PostgresSQL from "../../../src/parser/pgsql";
 
 describe('Generic SQL Visitor Tests', () => {
@@ -12,11 +13,13 @@ describe('Generic SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends PostgreSQLParserVisitor<any> {
-            // eslint-disable-next-line camelcase
-            visitTable_ref = (ctx): void => {
-                result = ctx.getText().toLowerCase();
-                super.visitTable_ref?.(ctx);
+        class MyVisitor extends AbstractParseTreeVisitor<any> implements PostgreSQLParserVisitor<any> {
+            protected defaultResult() {
+                return result;
+            }
+            
+            visitTable_ref(ctx) {
+                result = ctx.text.toLowerCase();
             }
         }
         const visitor: any = new MyVisitor();

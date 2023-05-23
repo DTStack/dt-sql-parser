@@ -1,6 +1,6 @@
-import { Parser } from 'antlr4';
+import { Parser } from "antlr4ts/Parser";
 
-export default class PlSqlBaseParser extends Parser {
+export default abstract class PlSqlBaseParser extends Parser {
 
     private _isVersion10: boolean = false;
     private _isVersion12: boolean = true;

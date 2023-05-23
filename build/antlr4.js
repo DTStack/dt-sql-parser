@@ -17,11 +17,10 @@ const entry = [
 
 function compile(language) {
     const cmd = `
-        java -jar ${antlr4}
-        -Dlanguage=TypeScript 
+        antlr4ts
         -visitor
         -listener
-        -o ${output}/${language}
+        -Xexact-output-dir -o ${output}/${language}
         ${grammars}/${language}/*.g4 
     `.replace(/\n/g, '');
     console.info('Executing:', cmd);

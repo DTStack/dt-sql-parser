@@ -1,4 +1,5 @@
-import HiveSqlVisitor from '../../../src/lib/hive/HiveSqlVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { HiveSqlVisitor } from '../../../src/lib/hive/HiveSqlVisitor';
 import HiveSQL from '../../../src/parser/hive';
 
 describe('Generic SQL Visitor Tests', () => {
@@ -12,10 +13,14 @@ describe('Generic SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends HiveSqlVisitor<any> {
-            visitTable_name = (ctx): void => {
-                result = ctx.getText().toLowerCase();
-                super.visitTable_name?.(ctx);
+        class MyVisitor extends AbstractParseTreeVisitor<any> implements HiveSqlVisitor<any> {
+
+            defaultResult() {
+                return result;
+            }
+
+            visitTable_name(ctx) {
+                result = ctx.text.toLowerCase();
             }
         }
 

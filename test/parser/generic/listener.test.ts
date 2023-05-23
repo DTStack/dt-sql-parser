@@ -1,5 +1,5 @@
 import GenericSQL from '../../../src/parser/generic';
-import SqlParserListener from '../../../src/lib/generic/SqlParserListener';
+import { SqlParserListener } from '../../../src/lib/generic/SqlParserListener';
 
 describe('Generic SQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -10,9 +10,9 @@ describe('Generic SQL Listener Tests', () => {
 
     test('Listener enterTableName', async () => {
         let result = '';
-        class MyListener extends SqlParserListener {
+        class MyListener implements SqlParserListener {
             enterTableName = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+                result = ctx.text.toLowerCase();
             }
         }
         const listenTableName: any = new MyListener();

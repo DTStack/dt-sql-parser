@@ -7,6 +7,6 @@ describe('GenericSQL Lexer tests', () => {
     const tokens = mysqlParser.getAllTokens(sql);
 
     test('token counts', () => {
-        expect(tokens.length - 1).toBe(12);
+        expect(tokens.length).toBe(12);
     });
 });

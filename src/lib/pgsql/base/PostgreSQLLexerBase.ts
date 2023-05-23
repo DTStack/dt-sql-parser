@@ -1,13 +1,15 @@
+import { Vocabulary } from "antlr4ts";
+import { Lexer } from "antlr4ts/Lexer";
 
-import { Lexer } from 'antlr4';
 
 function isLetter(str) {
     return str.length === 1 && str.match(/[a-z]/i);
 }
 
-export default class PostgreSQLLexerBase extends Lexer {
-
+export default abstract class PostgreSQLLexerBase extends Lexer {
+  
     tags: string[] = [];
+    _interp: any;
 
     CheckIfUtf32Letter() {
         // eslint-disable-next-line new-cap

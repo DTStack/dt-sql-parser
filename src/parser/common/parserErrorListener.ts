@@ -1,4 +1,4 @@
-import { Token, Recognizer, ErrorListener, RecognitionException } from 'antlr4';
+import { Token, Recognizer, DiagnosticErrorListener, RecognitionException } from 'antlr4ts';
 export interface ParserError {
     startLine: number;
     endLine: number;
@@ -8,7 +8,7 @@ export interface ParserError {
 }
 
 export interface SyntaxError<T> {
-    recognizer: Recognizer<T>;
+    recognizer: Recognizer<T, any>;
     offendingSymbol: Token;
     line: number;
     charPositionInLine: number;
@@ -22,7 +22,7 @@ type ErrorOffendingSymbol = {
 
 export type ErrorHandler<T> = (err: ParserError, errOption: SyntaxError<T>) => void;
 
-export class ParserErrorCollector extends ErrorListener<ErrorOffendingSymbol> {
+export class ParserErrorCollector extends DiagnosticErrorListener {
     private _errors: ParserError[];
 
     constructor(error: ParserError[]) {
@@ -31,7 +31,7 @@ export class ParserErrorCollector extends ErrorListener<ErrorOffendingSymbol> {
     }
 
     syntaxError(
-        recognizer: Recognizer<ErrorOffendingSymbol>, offendingSymbol: ErrorOffendingSymbol, line: number,
+        recognizer: Recognizer<ErrorOffendingSymbol, any>, offendingSymbol: ErrorOffendingSymbol, line: number,
         charPositionInLine: number, msg: string, e: RecognitionException,
     ) {
         let endCol = charPositionInLine + 1;
@@ -49,7 +49,7 @@ export class ParserErrorCollector extends ErrorListener<ErrorOffendingSymbol> {
 }
 
 
-export default class ParserErrorListener extends ErrorListener<ErrorOffendingSymbol> {
+export default class ParserErrorListener extends DiagnosticErrorListener {
     private _errorHandler;
 
     constructor(errorListener: ErrorHandler<ErrorOffendingSymbol>) {
@@ -58,7 +58,7 @@ export default class ParserErrorListener extends ErrorListener<ErrorOffendingSym
     }
 
     syntaxError(
-        recognizer: Recognizer<ErrorOffendingSymbol>, offendingSymbol: ErrorOffendingSymbol, line: number,
+        recognizer: Recognizer<ErrorOffendingSymbol, any>, offendingSymbol: ErrorOffendingSymbol, line: number,
         charPositionInLine: number, msg: string, e: any,
     ) {
         let endCol = charPositionInLine + 1;

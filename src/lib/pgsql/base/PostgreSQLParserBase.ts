@@ -1,9 +1,9 @@
 /* eslint-disable new-cap,camelcase */
-import { Parser, CharStreams, CommonTokenStream } from 'antlr4';
-import PostgreSQLLexer from '../PostgreSQLLexer';
-import PostgreSQLParser from '../PostgreSQLParser';
+import { CharStreams, CommonTokenStream, Parser } from 'antlr4ts';
+import { PostgreSQLLexer } from '../PostgreSQLLexer';
+import { PostgreSQLParser } from '../PostgreSQLParser';
 
-export default class PostgreSQLParserBase extends Parser {
+export default abstract class PostgreSQLParserBase extends Parser {
 
     getPostgreSQLParser(script) {
         const charStream = CharStreams.fromString(script);
@@ -56,7 +56,7 @@ export default class PostgreSQLParserBase extends Parser {
             const ph = this.getPostgreSQLParser(txt);
             switch (lang) {
             case 'plpgsql':
-                func_as.func_as().Definition = ph.plsqlroot();
+                func_as.func_as().Definition = ph.program();
                 break;
             case 'sql':
                 func_as.func_as().Definition = ph.program();
