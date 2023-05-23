@@ -17,57 +17,55 @@
 grammar SparkSql;
 
 @parser::members {
-    /**
-    * When false, INTERSECT is given the greater precedence over the other set
-    * operations (UNION, EXCEPT and MINUS) as per the SQL standard.
-    */
-    //  public boolean legacy_setops_precedence_enbled = false;
-    /**
-    * When false, a literal with an exponent would be converted into
-    * double type rather than decimal type.
-    */
-    //  public boolean legacy_exponent_literal_as_decimal_enabled = false;
-    global.legacy_exponent_literal_as_decimal_enabled = false;
-    /**
-    * When true, the behavior of keywords follows ANSI SQL standard.
-    */
-    //  public boolean SQL_standard_keyword_behavior = false;
-
-    global.legacy_setops_precedence_enbled = false;
-    global.legacy_exponent_literal_as_decimal_enabled = false;
-    global.SQL_standard_keyword_behavior = false;
+/**
+* When false, INTERSECT is given the greater precedence over the other set
+* operations (UNION, EXCEPT and MINUS) as per the SQL standard.
+*/
+public legacy_setops_precedence_enbled = false;
+/**
+* When false, a literal with an exponent would be converted into
+* double type rather than decimal type.
+*/
+public legacy_exponent_literal_as_decimal_enabled = false;
+/**
+* When true, the behavior of keywords follows ANSI SQL standard.
+*/
+public SQL_standard_keyword_behavior = false;
 }
 
 @lexer::members {
-    var ctx = this
-    /**
-    * Verify whether current token is a valid decimal token (which contains dot).
-    * Returns true if the character that follows the token is not a digit or letter or underscore.
-    *
-    * For example:
-    * For char stream "2.3", "2." is not a valid decimal token, because it is followed by digit '3'.
-    * For char stream "2.3_", "2.3" is not a valid decimal token, because it is followed by '_'.
-    * For char stream "2.3W", "2.3" is not a valid decimal token, because it is followed by 'W'.
-    * For char stream "12.0D 34.E2+0.12 "  12.0D is a valid decimal token because it is followed
-    * by a space. 34.E2 is a valid decimal token because it is followed by symbol '+'
-    * which is not a digit or letter or underscore.
-    */
-    global.isValidDecimal = function() {
-        let nextChar = ctx._input.LA(1);
-        return !(nextChar >= 'A' && nextChar <= 'Z' || nextChar >= '0' && nextChar <= '9' || nextChar == '_')
-    }
+/**
+* Verify whether current token is a valid decimal token (which contains dot).
+* Returns true if the character that follows the token is not a digit or letter or underscore.
+*
+* For example:
+* For char stream "2.3", "2." is not a valid decimal token, because it is followed by digit '3'.
+* For char stream "2.3_", "2.3" is not a valid decimal token, because it is followed by '_'.
+* For char stream "2.3W", "2.3" is not a valid decimal token, because it is followed by 'W'.
+* For char stream "12.0D 34.E2+0.12 "  12.0D is a valid decimal token because it is followed
+* by a space. 34.E2 is a valid decimal token because it is followed by symbol '+'
+* which is not a digit or letter or underscore.
+*/
+isValidDecimal() {
+    let nextChar = this.fromCodePoint(this._input.LA(1));
+    return !(nextChar >= 'A' && nextChar <= 'Z' || nextChar >= '0' && nextChar <= '9' || nextChar == '_')
+}
 
-    /**
-    * This method will be called when we see '/*' and try to match it as a bracketed comment.
-    * If the next character is '+', it should be parsed as hint later, and we cannot match
-    * it as a bracketed comment.
-    *
-    * Returns true if the next character is '+'.
-    */
-    global.isHint = function() {
-        let nextChar = ctx._input.LA(1);
-        return nextChar == '+'
-    }
+/**
+* This method will be called when we see '/*' and try to match it as a bracketed comment.
+* If the next character is '+', it should be parsed as hint later, and we cannot match
+* it as a bracketed comment.
+*
+* Returns true if the next character is '+'.
+*/
+isHint() {
+    let nextChar = this.fromCodePoint(this._input.LA(1));
+    return nextChar == '+'
+}
+
+fromCodePoint(codePoint) {
+    return String.fromCodePoint(codePoint);
+}
 }
 
 program
@@ -471,11 +469,11 @@ multiInsertQueryBody
 
 queryTerm
     : queryPrimary                                                                       #queryTermDefault
-    | left=queryTerm {legacy_setops_precedence_enbled}?
+    | left=queryTerm {this.legacy_setops_precedence_enbled}?
         operator=(INTERSECT | UNION | EXCEPT | SETMINUS) setQuantifier? right=queryTerm  #setOperation
-    | left=queryTerm {!legacy_setops_precedence_enbled}?
+    | left=queryTerm {!this.legacy_setops_precedence_enbled}?
         operator=INTERSECT setQuantifier? right=queryTerm                                #setOperation
-    | left=queryTerm {!legacy_setops_precedence_enbled}?
+    | left=queryTerm {!this.legacy_setops_precedence_enbled}?
         operator=(UNION | EXCEPT | SETMINUS) setQuantifier? right=queryTerm              #setOperation
     ;
 
@@ -928,10 +926,10 @@ windowSpec
     ;
 
 windowFrame
-    : frameType=RANGE start=frameBound
-    | frameType=ROWS start=frameBound
-    | frameType=RANGE BETWEEN start=frameBound AND end=frameBound
-    | frameType=ROWS BETWEEN start=frameBound AND end=frameBound
+    : frameType=RANGE frameStart=frameBound
+    | frameType=ROWS frameStart=frameBound
+    | frameType=RANGE BETWEEN frameStart=frameBound AND end=frameBound
+    | frameType=ROWS BETWEEN frameStart=frameBound AND end=frameBound
     ;
 
 frameBound
@@ -970,14 +968,14 @@ errorCapturingIdentifierExtra
 
 identifier
     : strictIdentifier
-    | {!SQL_standard_keyword_behavior}? strictNonReserved
+    | {!this.SQL_standard_keyword_behavior}? strictNonReserved
     ;
 
 strictIdentifier
     : IDENTIFIER              #unquotedIdentifier
     | quotedIdentifier        #quotedIdentifierAlternative
-    | {SQL_standard_keyword_behavior}? ansiNonReserved #unquotedIdentifier
-    | {!SQL_standard_keyword_behavior}? nonReserved    #unquotedIdentifier
+    | {this.SQL_standard_keyword_behavior}? ansiNonReserved #unquotedIdentifier
+    | {!this.SQL_standard_keyword_behavior}? nonReserved    #unquotedIdentifier
     ;
 
 quotedIdentifier
@@ -985,9 +983,9 @@ quotedIdentifier
     ;
 
 number
-    : {!legacy_exponent_literal_as_decimal_enabled}? MINUS? EXPONENT_VALUE #exponentLiteral
-    | {!legacy_exponent_literal_as_decimal_enabled}? MINUS? DECIMAL_VALUE  #decimalLiteral
-    | {legacy_exponent_literal_as_decimal_enabled}? MINUS? (EXPONENT_VALUE | DECIMAL_VALUE) #legacyDecimalLiteral
+    : {!this.legacy_exponent_literal_as_decimal_enabled}? MINUS? EXPONENT_VALUE #exponentLiteral
+    | {!this.legacy_exponent_literal_as_decimal_enabled}? MINUS? DECIMAL_VALUE  #decimalLiteral
+    | {this.legacy_exponent_literal_as_decimal_enabled}? MINUS? (EXPONENT_VALUE | DECIMAL_VALUE) #legacyDecimalLiteral
     | MINUS? INTEGER_VALUE            #integerLiteral
     | MINUS? BIGINT_LITERAL           #bigIntLiteral
     | MINUS? SMALLINT_LITERAL         #smallIntLiteral
@@ -1004,7 +1002,7 @@ alterColumnAction
     | setOrDrop=(SET | DROP) NOT NULL
     ;
 
-// When `SQL_standard_keyword_behavior=true`, there are 2 kinds of keywords in Spark SQL.
+// When `this.SQL_standard_keyword_behavior=true`, there are 2 kinds of keywords in Spark SQL.
 // - Reserved keywords:
 //     Keywords that are reserved and can't be used as identifiers for table, view, column,
 //     function, alias, etc.
@@ -1770,26 +1768,26 @@ INTEGER_VALUE
 
 EXPONENT_VALUE
     : DIGIT+ EXPONENT
-    | DECIMAL_DIGITS EXPONENT {isValidDecimal()}?
+    | DECIMAL_DIGITS EXPONENT {this.isValidDecimal()}?
     ;
 
 DECIMAL_VALUE
-    : DECIMAL_DIGITS {isValidDecimal()}?
+    : DECIMAL_DIGITS {this.isValidDecimal()}?
     ;
 
 FLOAT_LITERAL
     : DIGIT+ EXPONENT? 'F'
-    | DECIMAL_DIGITS EXPONENT? 'F' {isValidDecimal()}?
+    | DECIMAL_DIGITS EXPONENT? 'F' {this.isValidDecimal()}?
     ;
 
 DOUBLE_LITERAL
     : DIGIT+ EXPONENT? 'D'
-    | DECIMAL_DIGITS EXPONENT? 'D' {isValidDecimal()}?
+    | DECIMAL_DIGITS EXPONENT? 'D' {this.isValidDecimal()}?
     ;
 
 BIGDECIMAL_LITERAL
     : DIGIT+ EXPONENT? 'BD'
-    | DECIMAL_DIGITS EXPONENT? 'BD' {isValidDecimal()}?
+    | DECIMAL_DIGITS EXPONENT? 'BD' {this.isValidDecimal()}?
     ;
 
 IDENTIFIER
@@ -1826,7 +1824,7 @@ SIMPLE_COMMENT
     ;
 
 BRACKETED_COMMENT
-    : '/*' {!isHint()}? (BRACKETED_COMMENT|.)*? '*/' -> channel(HIDDEN)
+    : '/*' {!this.isHint()}? (BRACKETED_COMMENT|.)*? '*/' -> channel(HIDDEN)
     ;
 
 WS

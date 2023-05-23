@@ -1,24 +1,22 @@
-// dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
 import {
 	ATN,
 	ATNDeserializer, DecisionState, DFA, FailedPredicateException,
-	RecognitionException, NoViableAltException,
+	RecognitionException, NoViableAltException, BailErrorStrategy,
 	Parser, ParserATNSimulator,
-	RuleContext, ParserRuleContext, PredictionContextCache,
-	TerminalNode,
+	RuleContext, ParserRuleContext, PredictionMode, PredictionContextCache,
+	TerminalNode, RuleNode,
 	Token, TokenStream,
+	Interval, IntervalSet
 } from 'antlr4';
 import SparkSqlListener from "./SparkSqlListener.js";
 import SparkSqlVisitor from "./SparkSqlVisitor.js";
 
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 // eslint-disable-next-line no-unused-vars
-
-const legacy_setops_precedence_enbled = false;
-const legacy_exponent_literal_as_decimal_enabled = false;
-const SQL_standard_keyword_behavior = false;
+type int = number;
 
 export default class SparkSqlParser extends Parser {
 	public static readonly T__0 = 1;
@@ -881,6 +879,22 @@ export default class SparkSqlParser extends Parser {
 	protected createFailedPredicateException(predicate?: string, message?: string): FailedPredicateException {
 		return new FailedPredicateException(this, predicate, message);
 	}
+
+
+	/**
+	* When false, INTERSECT is given the greater precedence over the other set
+	* operations (UNION, EXCEPT and MINUS) as per the SQL standard.
+	*/
+	public legacy_setops_precedence_enbled = false;
+	/**
+	* When false, a literal with an exponent would be converted into
+	* double type rather than decimal type.
+	*/
+	public legacy_exponent_literal_as_decimal_enabled = false;
+	/**
+	* When true, the behavior of keywords follows ANSI SQL standard.
+	*/
+	public SQL_standard_keyword_behavior = false;
 
 	constructor(input: TokenStream) {
 		super(input);
@@ -6339,8 +6353,8 @@ export default class SparkSqlParser extends Parser {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 3)");
 						}
 						this.state = 1614;
-						if (!(legacy_setops_precedence_enbled)) {
-							throw this.createFailedPredicateException("legacy_setops_precedence_enbled");
+						if (!(this.legacy_setops_precedence_enbled)) {
+							throw this.createFailedPredicateException("this.legacy_setops_precedence_enbled");
 						}
 						this.state = 1615;
 						(localctx as SetOperationContext)._operator = this._input.LT(1);
@@ -6376,8 +6390,8 @@ export default class SparkSqlParser extends Parser {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
 						}
 						this.state = 1621;
-						if (!(!legacy_setops_precedence_enbled)) {
-							throw this.createFailedPredicateException("!legacy_setops_precedence_enbled");
+						if (!(!this.legacy_setops_precedence_enbled)) {
+							throw this.createFailedPredicateException("!this.legacy_setops_precedence_enbled");
 						}
 						this.state = 1622;
 						(localctx as SetOperationContext)._operator = this.match(SparkSqlParser.INTERSECT);
@@ -6405,8 +6419,8 @@ export default class SparkSqlParser extends Parser {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 1)");
 						}
 						this.state = 1628;
-						if (!(!legacy_setops_precedence_enbled)) {
-							throw this.createFailedPredicateException("!legacy_setops_precedence_enbled");
+						if (!(!this.legacy_setops_precedence_enbled)) {
+							throw this.createFailedPredicateException("!this.legacy_setops_precedence_enbled");
 						}
 						this.state = 1629;
 						(localctx as SetOperationContext)._operator = this._input.LT(1);
@@ -12272,7 +12286,7 @@ export default class SparkSqlParser extends Parser {
 				this.state = 2894;
 				localctx._frameType = this.match(SparkSqlParser.RANGE);
 				this.state = 2895;
-				localctx._start = this.frameBound();
+				localctx._frameStart = this.frameBound();
 				}
 				break;
 			case 2:
@@ -12281,7 +12295,7 @@ export default class SparkSqlParser extends Parser {
 				this.state = 2896;
 				localctx._frameType = this.match(SparkSqlParser.ROWS);
 				this.state = 2897;
-				localctx._start = this.frameBound();
+				localctx._frameStart = this.frameBound();
 				}
 				break;
 			case 3:
@@ -12292,7 +12306,7 @@ export default class SparkSqlParser extends Parser {
 				this.state = 2899;
 				this.match(SparkSqlParser.BETWEEN);
 				this.state = 2900;
-				localctx._start = this.frameBound();
+				localctx._frameStart = this.frameBound();
 				this.state = 2901;
 				this.match(SparkSqlParser.AND);
 				this.state = 2902;
@@ -12307,7 +12321,7 @@ export default class SparkSqlParser extends Parser {
 				this.state = 2905;
 				this.match(SparkSqlParser.BETWEEN);
 				this.state = 2906;
-				localctx._start = this.frameBound();
+				localctx._frameStart = this.frameBound();
 				this.state = 2907;
 				this.match(SparkSqlParser.AND);
 				this.state = 2908;
@@ -12642,8 +12656,8 @@ export default class SparkSqlParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2956;
-				if (!(!SQL_standard_keyword_behavior)) {
-					throw this.createFailedPredicateException("!SQL_standard_keyword_behavior");
+				if (!(!this.SQL_standard_keyword_behavior)) {
+					throw this.createFailedPredicateException("!this.SQL_standard_keyword_behavior");
 				}
 				this.state = 2957;
 				this.strictNonReserved();
@@ -12694,8 +12708,8 @@ export default class SparkSqlParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2962;
-				if (!(SQL_standard_keyword_behavior)) {
-					throw this.createFailedPredicateException("SQL_standard_keyword_behavior");
+				if (!(this.SQL_standard_keyword_behavior)) {
+					throw this.createFailedPredicateException("this.SQL_standard_keyword_behavior");
 				}
 				this.state = 2963;
 				this.ansiNonReserved();
@@ -12706,8 +12720,8 @@ export default class SparkSqlParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 2964;
-				if (!(!SQL_standard_keyword_behavior)) {
-					throw this.createFailedPredicateException("!SQL_standard_keyword_behavior");
+				if (!(!this.SQL_standard_keyword_behavior)) {
+					throw this.createFailedPredicateException("!this.SQL_standard_keyword_behavior");
 				}
 				this.state = 2965;
 				this.nonReserved();
@@ -12768,8 +12782,8 @@ export default class SparkSqlParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2970;
-				if (!(!legacy_exponent_literal_as_decimal_enabled)) {
-					throw this.createFailedPredicateException("!legacy_exponent_literal_as_decimal_enabled");
+				if (!(!this.legacy_exponent_literal_as_decimal_enabled)) {
+					throw this.createFailedPredicateException("!this.legacy_exponent_literal_as_decimal_enabled");
 				}
 				this.state = 2972;
 				this._errHandler.sync(this);
@@ -12790,8 +12804,8 @@ export default class SparkSqlParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2975;
-				if (!(!legacy_exponent_literal_as_decimal_enabled)) {
-					throw this.createFailedPredicateException("!legacy_exponent_literal_as_decimal_enabled");
+				if (!(!this.legacy_exponent_literal_as_decimal_enabled)) {
+					throw this.createFailedPredicateException("!this.legacy_exponent_literal_as_decimal_enabled");
 				}
 				this.state = 2977;
 				this._errHandler.sync(this);
@@ -12812,8 +12826,8 @@ export default class SparkSqlParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2980;
-				if (!(legacy_exponent_literal_as_decimal_enabled)) {
-					throw this.createFailedPredicateException("legacy_exponent_literal_as_decimal_enabled");
+				if (!(this.legacy_exponent_literal_as_decimal_enabled)) {
+					throw this.createFailedPredicateException("this.legacy_exponent_literal_as_decimal_enabled");
 				}
 				this.state = 2982;
 				this._errHandler.sync(this);
@@ -13173,15 +13187,15 @@ export default class SparkSqlParser extends Parser {
 		case 0:
 			return this.precpred(this._ctx, 3);
 		case 1:
-			return legacy_setops_precedence_enbled;
+			return this.legacy_setops_precedence_enbled;
 		case 2:
 			return this.precpred(this._ctx, 2);
 		case 3:
-			return !legacy_setops_precedence_enbled;
+			return !this.legacy_setops_precedence_enbled;
 		case 4:
 			return this.precpred(this._ctx, 1);
 		case 5:
-			return !legacy_setops_precedence_enbled;
+			return !this.legacy_setops_precedence_enbled;
 		}
 		return true;
 	}
@@ -13223,27 +13237,27 @@ export default class SparkSqlParser extends Parser {
 	private identifier_sempred(localctx: IdentifierContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 16:
-			return !SQL_standard_keyword_behavior;
+			return !this.SQL_standard_keyword_behavior;
 		}
 		return true;
 	}
 	private strictIdentifier_sempred(localctx: StrictIdentifierContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 17:
-			return SQL_standard_keyword_behavior;
+			return this.SQL_standard_keyword_behavior;
 		case 18:
-			return !SQL_standard_keyword_behavior;
+			return !this.SQL_standard_keyword_behavior;
 		}
 		return true;
 	}
 	private number_sempred(localctx: NumberContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 19:
-			return !legacy_exponent_literal_as_decimal_enabled;
+			return !this.legacy_exponent_literal_as_decimal_enabled;
 		case 20:
-			return !legacy_exponent_literal_as_decimal_enabled;
+			return !this.legacy_exponent_literal_as_decimal_enabled;
 		case 21:
-			return legacy_exponent_literal_as_decimal_enabled;
+			return this.legacy_exponent_literal_as_decimal_enabled;
 		}
 		return true;
 	}
@@ -24999,7 +25013,7 @@ export class WindowDefContext extends WindowSpecContext {
 
 export class WindowFrameContext extends ParserRuleContext {
 	public _frameType!: Token;
-	public _start!: FrameBoundContext;
+	public _frameStart!: FrameBoundContext;
 	public _end!: FrameBoundContext;
 	constructor(parser?: SparkSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
