@@ -21,10 +21,6 @@ options {
     tokenVocab=HiveSqlLexer;
 }
 
-@parser::members {
-this._input = input;
-}
-
 program : block EOF;
 
 block : ((begin_end_block | stmt) T_GO?)+ ;               // Multiple consecutive blocks/statements
@@ -39,7 +35,7 @@ single_block_stmt :                                      // Single BEGIN END blo
      ;
 
 block_end :
-       {!this._input.LT(2).text.toUpperCase() === "TRANSACTION"}? T_END
+       {this._input.LT(2).text.toUpperCase() !== "TRANSACTION"}? T_END
      ;
 
 proc_block :
