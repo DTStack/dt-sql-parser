@@ -81,9 +81,10 @@ statement:
 	(WITH ADMIN OPTION)? 
 	(GRANTED BY grantor)? 
 	(IN catalog = identifier)?                                          # grantRoles
-	| REVOKE (ADMIN OPTION FOR)? roles FROM principal (
-		',' principal
-	)* (GRANTED BY grantor)?					# revokeRoles
+	| REVOKE (ADMIN OPTION FOR)? roles FROM principal 
+	(',' principal)* 
+	(GRANTED BY grantor)?
+	(IN catalog = identifier)? # revokeRoles
 	| SET ROLE (ALL | NONE | role = identifier)	# setRole
 	| GRANT (privilege (',' privilege)* | ALL PRIVILEGES) ON (
 		SCHEMA
