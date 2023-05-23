@@ -29,11 +29,15 @@ import { RenameColumnContext } from "./trinoSqlParserParser";
 import { DropColumnContext } from "./trinoSqlParserParser";
 import { AddColumnContext } from "./trinoSqlParserParser";
 import { SetTableAuthorizationContext } from "./trinoSqlParserParser";
+import { SetTablePropertiesContext } from "./trinoSqlParserParser";
+import { TableExecuteContext } from "./trinoSqlParserParser";
 import { AnalyzeContext } from "./trinoSqlParserParser";
 import { CreateMaterializedViewContext } from "./trinoSqlParserParser";
 import { CreateViewContext } from "./trinoSqlParserParser";
 import { RefreshMaterializedViewContext } from "./trinoSqlParserParser";
 import { DropMaterializedViewContext } from "./trinoSqlParserParser";
+import { RenameMaterializedViewContext } from "./trinoSqlParserParser";
+import { SetMaterializedViewPropertiesContext } from "./trinoSqlParserParser";
 import { DropViewContext } from "./trinoSqlParserParser";
 import { RenameViewContext } from "./trinoSqlParserParser";
 import { SetViewAuthorizationContext } from "./trinoSqlParserParser";
@@ -84,7 +88,10 @@ import { TableElementContext } from "./trinoSqlParserParser";
 import { ColumnDefinitionContext } from "./trinoSqlParserParser";
 import { LikeClauseContext } from "./trinoSqlParserParser";
 import { PropertiesContext } from "./trinoSqlParserParser";
+import { PropertyAssignmentsContext } from "./trinoSqlParserParser";
 import { PropertyContext } from "./trinoSqlParserParser";
+import { DefaultPropertyValueContext } from "./trinoSqlParserParser";
+import { NonDefaultPropertyValueContext } from "./trinoSqlParserParser";
 import { QueryNoWithContext } from "./trinoSqlParserParser";
 import { LimitRowCountContext } from "./trinoSqlParserParser";
 import { RowCountContext } from "./trinoSqlParserParser";
@@ -441,6 +448,20 @@ export default class trinoSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitSetTableAuthorization?: (ctx: SetTableAuthorizationContext) => Result;
 	/**
+	 * Visit a parse tree produced by the `setTableProperties`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetTableProperties?: (ctx: SetTablePropertiesContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `tableExecute`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTableExecute?: (ctx: TableExecuteContext) => Result;
+	/**
 	 * Visit a parse tree produced by the `analyze`
 	 * labeled alternative in `trinoSqlParserParser.statement`.
 	 * @param ctx the parse tree
@@ -475,6 +496,20 @@ export default class trinoSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitDropMaterializedView?: (ctx: DropMaterializedViewContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `renameMaterializedView`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRenameMaterializedView?: (ctx: RenameMaterializedViewContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `setMaterializedViewProperties`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetMaterializedViewProperties?: (ctx: SetMaterializedViewPropertiesContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `dropView`
 	 * labeled alternative in `trinoSqlParserParser.statement`.
@@ -820,11 +855,31 @@ export default class trinoSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 */
 	visitProperties?: (ctx: PropertiesContext) => Result;
 	/**
+	 * Visit a parse tree produced by `trinoSqlParserParser.propertyAssignments`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPropertyAssignments?: (ctx: PropertyAssignmentsContext) => Result;
+	/**
 	 * Visit a parse tree produced by `trinoSqlParserParser.property`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitProperty?: (ctx: PropertyContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `defaultPropertyValue`
+	 * labeled alternative in `trinoSqlParserParser.propertyValue`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDefaultPropertyValue?: (ctx: DefaultPropertyValueContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `nonDefaultPropertyValue`
+	 * labeled alternative in `trinoSqlParserParser.propertyValue`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitNonDefaultPropertyValue?: (ctx: NonDefaultPropertyValueContext) => Result;
 	/**
 	 * Visit a parse tree produced by `trinoSqlParserParser.queryNoWith`.
 	 * @param ctx the parse tree

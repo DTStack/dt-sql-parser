@@ -58,7 +58,11 @@ statement:
 	| ALTER TABLE (IF EXISTS)? tableName = qualifiedName ADD COLUMN (
 		IF NOT EXISTS
 	)? column = columnDefinition										# addColumn
-	| ALTER TABLE tableName = qualifiedName SET AUTHORIZATION principal	# setTableAuthorization
+	| ALTER TABLE tableName = qualifiedName SET AUTHORIZATION principal				# setTableAuthorization
+	| ALTER TABLE tableName = qualifiedName SET PROPERTIES propertyAssignments	# setTableProperties
+	| ALTER TABLE tableName = qualifiedName EXECUTE procedureName = identifier (
+		'(' (callArgument (',' callArgument)*)? ')'
+	)? (WHERE where = booleanExpression)? # tableExecute
 	| ANALYZE qualifiedName (WITH properties)?							# analyze
 	| CREATE (OR REPLACE)? MATERIALIZED VIEW (IF NOT EXISTS)? qualifiedName (
 		COMMENT string
@@ -67,7 +71,9 @@ statement:
 		SECURITY (DEFINER | INVOKER)
 	)? AS query															# createView
 	| REFRESH MATERIALIZED VIEW qualifiedName							# refreshMaterializedView
-	| DROP MATERIALIZED VIEW (IF EXISTS)? qualifiedName					# dropMaterializedView
+	| DROP MATERIALIZED VIEW (IF EXISTS)? qualifiedName												# dropMaterializedView
+	| ALTER MATERIALIZED VIEW (IF EXISTS)? from = qualifiedName RENAME TO to = qualifiedName	# renameMaterializedView
+	| ALTER MATERIALIZED VIEW qualifiedName SET PROPERTIES propertyAssignments # setMaterializedViewProperties
 	| DROP VIEW (IF EXISTS)? qualifiedName								# dropView
 	| ALTER VIEW from = qualifiedName RENAME TO to = qualifiedName		# renameView
 	| ALTER VIEW from = qualifiedName SET AUTHORIZATION principal		# setViewAuthorization
@@ -166,9 +172,15 @@ likeClause:
 		optionType = (INCLUDING | EXCLUDING) PROPERTIES
 	)?;
 
-properties: '(' property (',' property)* ')';
+properties: '(' propertyAssignments ')';
 
-property: identifier EQ expression;
+propertyAssignments: property (',' property)*;
+
+property: identifier EQ propertyValue;
+
+propertyValue:
+	DEFAULT			# defaultPropertyValue
+	| expression	# nonDefaultPropertyValue;
 
 queryNoWith:
 	queryTerm (ORDER BY sortItem (',' sortItem)*)? (
@@ -593,6 +605,7 @@ nonReserved
 	| DATA
 	| DATE
 	| DAY
+	| DEFAULT
 	| DEFINE
 	| DEFINER
 	| DESC
@@ -771,6 +784,7 @@ CURRENT_USER: 'CURRENT_USER';
 DATA: 'DATA';
 DATE: 'DATE';
 DAY: 'DAY';
+DEFAULT: 'DEFAULT';
 DEALLOCATE: 'DEALLOCATE';
 DEFINER: 'DEFINER';
 DELETE: 'DELETE';

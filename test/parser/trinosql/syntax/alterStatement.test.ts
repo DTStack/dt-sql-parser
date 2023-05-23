@@ -5,6 +5,7 @@ const features = {
     table: readSQL(__dirname, 'alter_table.sql'),
     view: readSQL(__dirname, 'alter_view.sql'),
     schema: readSQL(__dirname, 'alter_schema.sql'),
+    materializedView: readSQL(__dirname, 'alter_materialized_view.sql')
 };
 
 describe('TrinoSQL Alter Statements Syntax Tests', () => {
@@ -24,6 +25,10 @@ describe('TrinoSQL Alter Statements Syntax Tests', () => {
             expect(parser.validate(sql).length).toBe(0);
         });
     });  
-
+   features.materializedView.forEach((sql) => {
+        it(sql, () => {
+            expect(parser.validate(sql).length).toBe(0);
+        });
+    });  
 });
 

@@ -29,11 +29,15 @@ import { RenameColumnContext } from "./trinoSqlParserParser";
 import { DropColumnContext } from "./trinoSqlParserParser";
 import { AddColumnContext } from "./trinoSqlParserParser";
 import { SetTableAuthorizationContext } from "./trinoSqlParserParser";
+import { SetTablePropertiesContext } from "./trinoSqlParserParser";
+import { TableExecuteContext } from "./trinoSqlParserParser";
 import { AnalyzeContext } from "./trinoSqlParserParser";
 import { CreateMaterializedViewContext } from "./trinoSqlParserParser";
 import { CreateViewContext } from "./trinoSqlParserParser";
 import { RefreshMaterializedViewContext } from "./trinoSqlParserParser";
 import { DropMaterializedViewContext } from "./trinoSqlParserParser";
+import { RenameMaterializedViewContext } from "./trinoSqlParserParser";
+import { SetMaterializedViewPropertiesContext } from "./trinoSqlParserParser";
 import { DropViewContext } from "./trinoSqlParserParser";
 import { RenameViewContext } from "./trinoSqlParserParser";
 import { SetViewAuthorizationContext } from "./trinoSqlParserParser";
@@ -84,7 +88,10 @@ import { TableElementContext } from "./trinoSqlParserParser";
 import { ColumnDefinitionContext } from "./trinoSqlParserParser";
 import { LikeClauseContext } from "./trinoSqlParserParser";
 import { PropertiesContext } from "./trinoSqlParserParser";
+import { PropertyAssignmentsContext } from "./trinoSqlParserParser";
 import { PropertyContext } from "./trinoSqlParserParser";
+import { DefaultPropertyValueContext } from "./trinoSqlParserParser";
+import { NonDefaultPropertyValueContext } from "./trinoSqlParserParser";
 import { QueryNoWithContext } from "./trinoSqlParserParser";
 import { LimitRowCountContext } from "./trinoSqlParserParser";
 import { RowCountContext } from "./trinoSqlParserParser";
@@ -561,6 +568,30 @@ export default class trinoSqlParserListener extends ParseTreeListener {
 	 */
 	exitSetTableAuthorization?: (ctx: SetTableAuthorizationContext) => void;
 	/**
+	 * Enter a parse tree produced by the `setTableProperties`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterSetTableProperties?: (ctx: SetTablePropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by the `setTableProperties`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitSetTableProperties?: (ctx: SetTablePropertiesContext) => void;
+	/**
+	 * Enter a parse tree produced by the `tableExecute`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterTableExecute?: (ctx: TableExecuteContext) => void;
+	/**
+	 * Exit a parse tree produced by the `tableExecute`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitTableExecute?: (ctx: TableExecuteContext) => void;
+	/**
 	 * Enter a parse tree produced by the `analyze`
 	 * labeled alternative in `trinoSqlParserParser.statement`.
 	 * @param ctx the parse tree
@@ -620,6 +651,30 @@ export default class trinoSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitDropMaterializedView?: (ctx: DropMaterializedViewContext) => void;
+	/**
+	 * Enter a parse tree produced by the `renameMaterializedView`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterRenameMaterializedView?: (ctx: RenameMaterializedViewContext) => void;
+	/**
+	 * Exit a parse tree produced by the `renameMaterializedView`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitRenameMaterializedView?: (ctx: RenameMaterializedViewContext) => void;
+	/**
+	 * Enter a parse tree produced by the `setMaterializedViewProperties`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterSetMaterializedViewProperties?: (ctx: SetMaterializedViewPropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by the `setMaterializedViewProperties`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitSetMaterializedViewProperties?: (ctx: SetMaterializedViewPropertiesContext) => void;
 	/**
 	 * Enter a parse tree produced by the `dropView`
 	 * labeled alternative in `trinoSqlParserParser.statement`.
@@ -1209,6 +1264,16 @@ export default class trinoSqlParserListener extends ParseTreeListener {
 	 */
 	exitProperties?: (ctx: PropertiesContext) => void;
 	/**
+	 * Enter a parse tree produced by `trinoSqlParserParser.propertyAssignments`.
+	 * @param ctx the parse tree
+	 */
+	enterPropertyAssignments?: (ctx: PropertyAssignmentsContext) => void;
+	/**
+	 * Exit a parse tree produced by `trinoSqlParserParser.propertyAssignments`.
+	 * @param ctx the parse tree
+	 */
+	exitPropertyAssignments?: (ctx: PropertyAssignmentsContext) => void;
+	/**
 	 * Enter a parse tree produced by `trinoSqlParserParser.property`.
 	 * @param ctx the parse tree
 	 */
@@ -1218,6 +1283,30 @@ export default class trinoSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitProperty?: (ctx: PropertyContext) => void;
+	/**
+	 * Enter a parse tree produced by the `defaultPropertyValue`
+	 * labeled alternative in `trinoSqlParserParser.propertyValue`.
+	 * @param ctx the parse tree
+	 */
+	enterDefaultPropertyValue?: (ctx: DefaultPropertyValueContext) => void;
+	/**
+	 * Exit a parse tree produced by the `defaultPropertyValue`
+	 * labeled alternative in `trinoSqlParserParser.propertyValue`.
+	 * @param ctx the parse tree
+	 */
+	exitDefaultPropertyValue?: (ctx: DefaultPropertyValueContext) => void;
+	/**
+	 * Enter a parse tree produced by the `nonDefaultPropertyValue`
+	 * labeled alternative in `trinoSqlParserParser.propertyValue`.
+	 * @param ctx the parse tree
+	 */
+	enterNonDefaultPropertyValue?: (ctx: NonDefaultPropertyValueContext) => void;
+	/**
+	 * Exit a parse tree produced by the `nonDefaultPropertyValue`
+	 * labeled alternative in `trinoSqlParserParser.propertyValue`.
+	 * @param ctx the parse tree
+	 */
+	exitNonDefaultPropertyValue?: (ctx: NonDefaultPropertyValueContext) => void;
 	/**
 	 * Enter a parse tree produced by `trinoSqlParserParser.queryNoWith`.
 	 * @param ctx the parse tree
