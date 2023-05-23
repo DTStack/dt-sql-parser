@@ -28,6 +28,8 @@ https://github.com/tunnelvisionlabs/antlr4-grammar-postgresql/blob/master/src/co
  *    promote the sale, use or other dealings in this Software without prior
  *    written authorization from Tunnel Vision Laboratories, LLC.
  */
+
+
 lexer grammar PostgreSQLLexer;
 /* Reference:
  * http://www.postgresql.org/docs/9.3/static/sql-syntax-lexical.html
@@ -35,6 +37,9 @@ lexer grammar PostgreSQLLexer;
 
 options {
    superClass = PostgreSQLLexerBase;
+}
+@lexer::header {
+import PostgreSQLLexerBase from "./base/PostgreSQLLexerBase";
 }
 
 //
@@ -169,14 +174,12 @@ PARAM
 
 Operator
    : ((OperatorCharacter | ('+' | '-'
-   {checkLA('-')}?)+ (OperatorCharacter | '/'
-   {checkLA('*')}?) | '/'
-   {checkLA('*')}?)+ | // special handling for the single-character operators + and -
+   {this.checkLA('-')}?)+ (OperatorCharacter | '/'
+   {this.checkLA('*')}?) | '/'
+   {this.checkLA('*')}?)+ | // special handling for the single-character operators + and -
    [+-])
-   //TODO somehow rewrite this part without using Actions
-
    {
-    HandleLessLessGreaterGreater();
+    this.HandleLessLessGreaterGreater();
    }
    ;
 /* This rule handles operators which end with + or -, and sets the token type to Operator. It is comprised of four
@@ -193,9 +196,9 @@ Operator
 
 OperatorEndingWithPlusMinus
    : (OperatorCharacterNotAllowPlusMinusAtEnd | '-'
-   {checkLA('-')}? | '/'
-   {checkLA('*')}?)* OperatorCharacterAllowPlusMinusAtEnd Operator? ('+' | '-'
-   {checkLA('-')}?)+ -> type (Operator)
+   {this.checkLA('-')}? | '/'
+   {this.checkLA('*')}?)* OperatorCharacterAllowPlusMinusAtEnd Operator? ('+' | '-'
+   {this.checkLA('-')}?)+ -> type (Operator)
    ;
    // Each of the following fragment rules omits the +, -, and / characters, which must always be handled in a special way
 
@@ -2191,11 +2194,11 @@ fragment IdentifierStartChar
    [\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]
    | // these are the letters above 0xFF which only need a single UTF-16 code unit
    [\u0100-\uD7FF\uE000-\uFFFF]
-   {charIsLetter()}?
+   {this.charIsLetter()}?
    | // letters which require multiple UTF-16 code units
    [\uD800-\uDBFF] [\uDC00-\uDFFF]
    {
-    CheckIfUtf32Letter()
+    this.CheckIfUtf32Letter()
    }?
 
    ;
@@ -2306,7 +2309,7 @@ UnterminatedUnicodeEscapeStringConstant
 
 BeginDollarStringConstant
    : '$' Tag? '$'
-   {pushTag();} -> pushMode (DollarQuotedStringMode)
+   {this.pushTag();} -> pushMode (DollarQuotedStringMode)
    ;
 /* "The tag, if any, of a dollar-quoted string follows the same rules as an
  * unquoted identifier, except that it cannot contain a dollar sign."
@@ -2357,7 +2360,7 @@ Integral
 
 NumericFail
    : Digits '..'
-   {HandleNumericFail();}
+   {this.HandleNumericFail();}
    ;
 
 Numeric
@@ -2415,7 +2418,7 @@ UnterminatedBlockComment
    // Optional assertion to make sure this rule is working as intended
 
    {
-            UnterminatedBlockCommentDebugAssert();
+      this.UnterminatedBlockCommentDebugAssert();
    }
    ;
    //
@@ -2523,7 +2526,7 @@ DollarText
 
 EndDollarStringConstant
    : ('$' Tag? '$')
-   {isTag()}?
-   {popTag();} -> popMode
+   {this.isTag()}?
+   {this.popTag();} -> popMode
    ;
 

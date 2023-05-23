@@ -1,9 +1,15 @@
+
 parser grammar PostgreSQLParser;
 
 
 options { tokenVocab = PostgreSQLLexer;
 superClass = PostgreSQLParserBase;
 }
+@parser::header {
+import PostgreSQLParserBase from "./base/PostgreSQLParserBase";
+}
+
+
 
 program
    : stmtmulti
@@ -1868,9 +1874,8 @@ aggregate_with_argtypes_list
 createfunc_opt_list
    : createfunc_opt_item+
    {
-                ParseRoutineBody(_localctx);
-            }
-   //                    | createfunc_opt_list createfunc_opt_item
+      this.ParseRoutineBody(_localctx);
+   }
    ;
 
 common_func_opt_item

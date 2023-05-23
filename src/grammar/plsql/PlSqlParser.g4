@@ -24,9 +24,8 @@ options {
     tokenVocab=PlSqlLexer;
     superClass=PlSqlBaseParser;
 }
-
-@parser::postinclude {
-#include <PlSqlBaseParser.h>
+@parser::header {
+import PlSqlBaseParser from './base/PlSqlBaseParser';
 }
 
 program: sql_script EOF;
@@ -2254,7 +2253,7 @@ partial_database_recovery
     ;
 
 partial_database_recovery_10g
-    : {isVersion10()}? STANDBY
+    : {this.isVersion10()}? STANDBY
       ( TABLESPACE tablespace (',' tablespace)*
       | DATAFILE CHAR_STRING | filenumber (',' CHAR_STRING | filenumber)*
       )
