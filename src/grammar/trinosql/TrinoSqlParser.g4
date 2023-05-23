@@ -86,6 +86,10 @@ statement:
 		SCHEMA
 		| TABLE
 	)? qualifiedName TO grantee = principal (WITH GRANT OPTION)? # grant
+	| DENY (privilege (',' privilege)* | ALL PRIVILEGES) ON (
+		SCHEMA
+		| TABLE
+	)? qualifiedName TO grantee = principal # deny
 	| REVOKE (GRANT OPTION FOR)? (
 		privilege (',' privilege)*
 		| ALL PRIVILEGES
@@ -602,6 +606,7 @@ nonReserved
 	| GRANT
 	| GRANTED
 	| GRANTS
+	| DENY
 	| GRAPHVIZ
 	| GROUPS
 	| HOUR
@@ -794,6 +799,7 @@ FUNCTIONS: 'FUNCTIONS';
 GRANT: 'GRANT';
 GRANTED: 'GRANTED';
 GRANTS: 'GRANTS';
+DENY: 'DENY';
 GRAPHVIZ: 'GRAPHVIZ';
 GROUP: 'GROUP';
 GROUPING: 'GROUPING';

@@ -43,6 +43,7 @@ import { GrantRolesContext } from "./trinoSqlParserParser";
 import { RevokeRolesContext } from "./trinoSqlParserParser";
 import { SetRoleContext } from "./trinoSqlParserParser";
 import { GrantContext } from "./trinoSqlParserParser";
+import { DenyContext } from "./trinoSqlParserParser";
 import { RevokeContext } from "./trinoSqlParserParser";
 import { ShowGrantsContext } from "./trinoSqlParserParser";
 import { ExplainContext } from "./trinoSqlParserParser";
@@ -536,6 +537,13 @@ export default class trinoSqlParserVisitor<Result> extends ParseTreeVisitor<Resu
 	 * @return the visitor result
 	 */
 	visitGrant?: (ctx: GrantContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `deny`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDeny?: (ctx: DenyContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `revoke`
 	 * labeled alternative in `trinoSqlParserParser.statement`.

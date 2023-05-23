@@ -43,6 +43,7 @@ import { GrantRolesContext } from "./trinoSqlParserParser";
 import { RevokeRolesContext } from "./trinoSqlParserParser";
 import { SetRoleContext } from "./trinoSqlParserParser";
 import { GrantContext } from "./trinoSqlParserParser";
+import { DenyContext } from "./trinoSqlParserParser";
 import { RevokeContext } from "./trinoSqlParserParser";
 import { ShowGrantsContext } from "./trinoSqlParserParser";
 import { ExplainContext } from "./trinoSqlParserParser";
@@ -726,6 +727,18 @@ export default class trinoSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitGrant?: (ctx: GrantContext) => void;
+	/**
+	 * Enter a parse tree produced by the `deny`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterDeny?: (ctx: DenyContext) => void;
+	/**
+	 * Exit a parse tree produced by the `deny`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitDeny?: (ctx: DenyContext) => void;
 	/**
 	 * Enter a parse tree produced by the `revoke`
 	 * labeled alternative in `trinoSqlParserParser.statement`.
