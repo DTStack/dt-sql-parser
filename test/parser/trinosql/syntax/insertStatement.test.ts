@@ -5,7 +5,7 @@ const features = {
     insertIntoTable: readSQL(__dirname, 'insert_into.sql'),
 };
 
-describe('TrinoSQL insert Statements Syntax Tests', () => {
+describe('TrinoSQL Insert Statements Syntax Tests', () => {
     const parser = new TrinoSQL();
     features.insertIntoTable.forEach((sql) => {
         it(sql, () => {

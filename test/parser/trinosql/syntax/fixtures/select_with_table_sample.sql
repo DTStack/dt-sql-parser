@@ -1,0 +1,10 @@
+SELECT *
+FROM users TABLESAMPLE BERNOULLI (50);
+
+SELECT *
+FROM users TABLESAMPLE SYSTEM (75);
+
+SELECT o.*, i.*
+FROM orders o TABLESAMPLE SYSTEM (10)
+JOIN lineitem i TABLESAMPLE BERNOULLI (40)
+  ON o.orderkey = i.orderkey;

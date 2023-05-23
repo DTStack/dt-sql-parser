@@ -10,7 +10,7 @@ const features = {
     materializedView: readSQL(__dirname, 'create_materialized_view.sql'),
 };
 
-describe('TrinoSQL Drop Statements Syntax Tests', () => {
+describe('TrinoSQL Create Statements Syntax Tests', () => {
     const parser = new TrinoSQL();
    features.table.forEach((sql) => {
         it(sql, () => {
