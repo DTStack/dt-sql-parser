@@ -445,7 +445,7 @@ tableReference
 
 tablePrimary
     : KW_TABLE? tablePath systemTimePeriod? (KW_AS? correlationName)?
-    | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET functionParam (COMMA functionParam)* RR_BRACKET RR_BRACKET
     | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
@@ -711,7 +711,7 @@ primaryExpression
     | uid '.' '*'                                                                #star
     // | '(' namedExpression (',' namedExpression)+ ')'                                           #rowConstructor
     | '(' queryStatement ')'                                                                            #subqueryExpression
-    | functionName '(' (setQuantifier? expression (',' expression)*)? ')'                      #functionCall
+    | functionName '(' (setQuantifier? functionParam (',' functionParam)*)? ')'                      #functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
@@ -728,15 +728,21 @@ primaryExpression
     ;
 
 functionName
-    : reservedKeywordsUsedAsFunctionName
+    : reservedKeywordsUsedAsFuncName
     | nonReservedKeywords
     | uid
+    ;
+
+functionParam
+    : reservedKeywordsUsedAsFuncParam
+    | timeIntervalUnit
+    | timePointUnit
+    | expression
     ;
 
 dereferenceDefinition
     : uid
     ;
-
 
 // base common
 
@@ -757,7 +763,7 @@ errorCapturingMultiUnitsInterval
     ;
 
 multiUnitsInterval
-    : (intervalValue intervalTimeUnit)+
+    : (intervalValue timeIntervalUnit)+
     ;
 
 errorCapturingUnitToUnitInterval
@@ -765,17 +771,12 @@ errorCapturingUnitToUnitInterval
     ;
 
 unitToUnitInterval
-    : value=intervalValue from=intervalTimeUnit KW_TO to=intervalTimeUnit
+    : value=intervalValue from=timeIntervalUnit KW_TO to=timeIntervalUnit
     ;
 
 intervalValue
     : ('+' | '-')? (DIG_LITERAL | REAL_LITERAL)
     | STRING_LITERAL
-    ;
-
-intervalTimeUnit  // TODO: 需要整理 interval 时间粒度比如 SECOND、DAY
-    : identifier
-    | reservedKeywords
     ;
 
 columnAlias
@@ -900,14 +901,18 @@ unaryOperator
     ;
 
 constant
-    : stringLiteral                                             // 引号包含的字符串
-    | decimalLiteral                                            // 整数
-    | timeIntervalExpression                                                  // KW_INTERVAL keywords
-    | HYPNEN_SIGN decimalLiteral                                        // 负整数
+    : timeIntervalExpression
+    | timePointLiteral
+    | stringLiteral                                             // 引号包含的字符串
+    | HYPNEN_SIGN? decimalLiteral                                // 正/负整数
     | booleanLiteral                                            // 布尔值
     | REAL_LITERAL                                              // 小数
     | BIT_STRING
-    | KW_NOT? KW_NULL                                                 // 空 | 非空
+    | KW_NOT? KW_NULL                                           // 空 | 非空
+    ;
+
+timePointLiteral
+    : timePointUnit stringLiteral
     ;
 
 stringLiteral
@@ -926,7 +931,54 @@ setQuantifier
     | KW_ALL
     ;
 
-reservedKeywordsUsedAsFunctionName
+timePointUnit
+    : KW_YEAR
+    | KW_QUARTER
+    | KW_MONTH
+    | KW_WEEK
+    | KW_DAY
+    | KW_HOUR
+    | KW_MINUTE
+    | KW_SECOND
+    | KW_MILLISECOND
+    | KW_MICROSECOND
+    ;
+
+timeIntervalUnit
+    : KW_MILLENNIUM
+    | KW_CENTURY
+    | KW_DECADE
+    | KW_YEAR
+    | KW_YEARS
+    | KW_QUARTER
+    | KW_MONTH
+    | KW_MONTHS
+    | KW_WEEK
+    | KW_WEEKS
+    | KW_DAY
+    | KW_DAYS
+    | KW_HOUR
+    | KW_HOURS
+    | KW_MINUTE
+    | KW_MINUTES
+    | KW_SECOND
+    | KW_SECONDS
+    | KW_MILLISECOND
+    | KW_MICROSECOND
+    | KW_NANOSECOND
+    | KW_EPOCH
+    ;
+
+reservedKeywordsUsedAsFuncParam
+    : KW_LEADING
+    | KW_TRAILING
+    | KW_BOTH
+    | KW_ALL
+    | KW_DISTINCT
+    | ASTERISK_SIGN
+    ;
+
+reservedKeywordsUsedAsFuncName
     : KW_ABS
     | KW_ARRAY
     | KW_AVG
