@@ -85,8 +85,9 @@ statement:
 	(',' principal)* 
 	(GRANTED BY grantor)?
 	(IN catalog = identifier)? # revokeRoles
-	| SET ROLE (ALL | NONE | role = identifier)	# setRole
-	| GRANT (privilege (',' privilege)* | ALL PRIVILEGES) ON (
+	| SET ROLE (ALL | NONE | role = identifier) (
+		IN catalog = identifier
+	)? # setRole | GRANT (privilege (',' privilege)* | ALL PRIVILEGES) ON (
 		SCHEMA
 		| TABLE
 	)? qualifiedName TO grantee = principal (WITH GRANT OPTION)? # grant
