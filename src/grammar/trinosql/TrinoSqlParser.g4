@@ -44,7 +44,8 @@ statement:
 	)* ')' (COMMENT string)? (WITH properties)?										# createTable
 	| DROP TABLE (IF EXISTS)? qualifiedName											# dropTable
 	| INSERT INTO qualifiedName columnAliases? query								# insertInto
-	| DELETE FROM qualifiedName (WHERE booleanExpression)?							# delete
+	| DELETE FROM qualifiedName (WHERE booleanExpression)?	# delete
+	| TRUNCATE TABLE qualifiedName						# truncateTable 
 	| ALTER TABLE (IF EXISTS)? from = qualifiedName RENAME TO to = qualifiedName	# renameTable
 	| COMMENT ON TABLE qualifiedName IS (string | NULL)								# commentTable
 	| COMMENT ON COLUMN qualifiedName IS (string | NULL)							# commentColumn
@@ -707,6 +708,7 @@ nonReserved
 	| TIMESTAMP
 	| TO
 	| TRANSACTION
+	| TRUNCATE
 	| TRY_CAST
 	| TYPE
 	| UNBOUNDED
@@ -929,6 +931,7 @@ TIME: 'TIME';
 TIMESTAMP: 'TIMESTAMP';
 TO: 'TO';
 TRANSACTION: 'TRANSACTION';
+TRUNCATE: 'TRUNCATE';
 TRUE: 'TRUE';
 TRY_CAST: 'TRY_CAST';
 TYPE: 'TYPE';

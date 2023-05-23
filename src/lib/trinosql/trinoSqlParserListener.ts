@@ -21,6 +21,7 @@ import { CreateTableContext } from "./trinoSqlParserParser";
 import { DropTableContext } from "./trinoSqlParserParser";
 import { InsertIntoContext } from "./trinoSqlParserParser";
 import { DeleteContext } from "./trinoSqlParserParser";
+import { TruncateTableContext } from "./trinoSqlParserParser";
 import { RenameTableContext } from "./trinoSqlParserParser";
 import { CommentTableContext } from "./trinoSqlParserParser";
 import { CommentColumnContext } from "./trinoSqlParserParser";
@@ -463,6 +464,18 @@ export default class trinoSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitDelete?: (ctx: DeleteContext) => void;
+	/**
+	 * Enter a parse tree produced by the `truncateTable`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterTruncateTable?: (ctx: TruncateTableContext) => void;
+	/**
+	 * Exit a parse tree produced by the `truncateTable`
+	 * labeled alternative in `trinoSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitTruncateTable?: (ctx: TruncateTableContext) => void;
 	/**
 	 * Enter a parse tree produced by the `renameTable`
 	 * labeled alternative in `trinoSqlParserParser.statement`.
