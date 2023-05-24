@@ -1,19 +1,17 @@
-// dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/spark/SparkSql.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 import {
 	ATN,
 	ATNDeserializer,
 	CharStream,
 	DecisionState, DFA,
+	Lexer,
 	LexerATNSimulator,
 	RuleContext,
 	PredictionContextCache,
 	Token
 } from "antlr4";
-
-import SparkSqlBaseLexer from "./base/SparkSqlBaseLexer";
-
-export default class SparkSqlLexer extends SparkSqlBaseLexer {
+export default class SparkSqlLexer extends Lexer {
 	public static readonly T__0 = 1;
 	public static readonly T__1 = 2;
 	public static readonly T__2 = 3;
@@ -606,6 +604,41 @@ export default class SparkSqlLexer extends SparkSqlBaseLexer {
 		"EXPONENT", "DIGIT", "LETTER", "SIMPLE_COMMENT", "BRACKETED_COMMENT", 
 		"WS", "UNRECOGNIZED",
 	];
+
+
+	/**
+	* Verify whether current token is a valid decimal token (which contains dot).
+	* Returns true if the character that follows the token is not a digit or letter or underscore.
+	*
+	* For example:
+	* For char stream "2.3", "2." is not a valid decimal token, because it is followed by digit '3'.
+	* For char stream "2.3_", "2.3" is not a valid decimal token, because it is followed by '_'.
+	* For char stream "2.3W", "2.3" is not a valid decimal token, because it is followed by 'W'.
+	* For char stream "12.0D 34.E2+0.12 "  12.0D is a valid decimal token because it is followed
+	* by a space. 34.E2 is a valid decimal token because it is followed by symbol '+'
+	* which is not a digit or letter or underscore.
+	*/
+	isValidDecimal() {
+	    let nextChar = this.fromCodePoint(this._input.LA(1));
+	    return !(nextChar >= 'A' && nextChar <= 'Z' || nextChar >= '0' && nextChar <= '9' || nextChar == '_')
+	}
+
+	/**
+	* This method will be called when we see '/*' and try to match it as a bracketed comment.
+	* If the next character is '+', it should be parsed as hint later, and we cannot match
+	* it as a bracketed comment.
+	*
+	* Returns true if the next character is '+'.
+	*/
+	isHint() {
+	    let nextChar = this.fromCodePoint(this._input.LA(1));
+	    return nextChar == '+'
+	}
+
+	fromCodePoint(codePoint) {
+	    return String.fromCodePoint(codePoint);
+	}
+
 
 	constructor(input: CharStream) {
 		super(input);

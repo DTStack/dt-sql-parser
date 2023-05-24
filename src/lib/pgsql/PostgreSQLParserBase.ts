@@ -1,7 +1,7 @@
 /* eslint-disable new-cap,camelcase */
 import { Parser, CharStreams, CommonTokenStream } from 'antlr4';
-import PostgreSQLLexer from '../PostgreSQLLexer';
-import PostgreSQLParser from '../PostgreSQLParser';
+import PostgreSQLLexer from './PostgreSQLLexer';
+import PostgreSQLParser from './PostgreSQLParser';
 
 export default class PostgreSQLParserBase extends Parser {
 

@@ -1,4 +1,4 @@
-// dt-sql-parser/src/grammar/pgsql/PostgreSQLParser.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/pgsql/PostgreSQLParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeVisitor} from 'antlr4';
 

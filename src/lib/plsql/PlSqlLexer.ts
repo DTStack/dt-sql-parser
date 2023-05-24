@@ -1,18 +1,17 @@
-// dt-sql-parser/src/grammar/plsql/PlSqlLexer.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/plsql/PlSqlLexer.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 import {
 	ATN,
 	ATNDeserializer,
 	CharStream,
 	DecisionState, DFA,
+	Lexer,
 	LexerATNSimulator,
 	RuleContext,
 	PredictionContextCache,
 	Token
 } from "antlr4";
-
-
-import PlSqlBaseLexer from './base/PlSqlBaseLexer';
+import PlSqlBaseLexer from './PlSqlBaseLexer';
 
 export default class PlSqlLexer extends PlSqlBaseLexer {
 	public static readonly ABORT = 1;
