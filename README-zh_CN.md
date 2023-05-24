@@ -16,6 +16,7 @@ dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发�
 - Spark SQL
 - Hive SQL
 - PL/SQL
+- Trino SQL
 
 > 提示：当前的 Parser 是 `Javascript` 语言版本，如果有必要，可以尝试编译 Grammar 文件到其他目标语言
 
@@ -103,7 +104,6 @@ console.log(tokens)
         tokenIndex: -1
         type: 137
         _text: null
-        text: "SELECT"
     },
     ...
 ]
