@@ -1,4 +1,4 @@
-// Generated from /Users/zhenglin/Documents/parser/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.12.0
 
 import {ParseTreeListener} from "antlr4";
 
@@ -138,6 +138,7 @@ import { ExpressionContext } from "./FlinkSqlParser";
 import { LogicalNotContext } from "./FlinkSqlParser";
 import { PredicatedContext } from "./FlinkSqlParser";
 import { ExistsContext } from "./FlinkSqlParser";
+import { LogicalNestedContext } from "./FlinkSqlParser";
 import { LogicalBinaryContext } from "./FlinkSqlParser";
 import { PredicateContext } from "./FlinkSqlParser";
 import { LikePredicateContext } from "./FlinkSqlParser";
@@ -201,6 +202,7 @@ import { StringLiteralContext } from "./FlinkSqlParser";
 import { DecimalLiteralContext } from "./FlinkSqlParser";
 import { BooleanLiteralContext } from "./FlinkSqlParser";
 import { SetQuantifierContext } from "./FlinkSqlParser";
+import { ReservedKeywordsUsedAsFunctionNameContext } from "./FlinkSqlParser";
 import { ReservedKeywordsContext } from "./FlinkSqlParser";
 import { NonReservedKeywordsContext } from "./FlinkSqlParser";
 
@@ -1571,6 +1573,18 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 */
 	exitExists?: (ctx: ExistsContext) => void;
 	/**
+	 * Enter a parse tree produced by the `logicalNested`
+	 * labeled alternative in `FlinkSqlParser.booleanExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterLogicalNested?: (ctx: LogicalNestedContext) => void;
+	/**
+	 * Exit a parse tree produced by the `logicalNested`
+	 * labeled alternative in `FlinkSqlParser.booleanExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitLogicalNested?: (ctx: LogicalNestedContext) => void;
+	/**
 	 * Enter a parse tree produced by the `logicalBinary`
 	 * labeled alternative in `FlinkSqlParser.booleanExpression`.
 	 * @param ctx the parse tree
@@ -2248,6 +2262,16 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitSetQuantifier?: (ctx: SetQuantifierContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.reservedKeywordsUsedAsFunctionName`.
+	 * @param ctx the parse tree
+	 */
+	enterReservedKeywordsUsedAsFunctionName?: (ctx: ReservedKeywordsUsedAsFunctionNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.reservedKeywordsUsedAsFunctionName`.
+	 * @param ctx the parse tree
+	 */
+	exitReservedKeywordsUsedAsFunctionName?: (ctx: ReservedKeywordsUsedAsFunctionNameContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.reservedKeywords`.
 	 * @param ctx the parse tree
