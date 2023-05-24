@@ -1957,10 +1957,8 @@ aggregate_with_argtypes_list
 createfunc_opt_list
    : createfunc_opt_item+
    {
-                ParseRoutineBody(_localctx);
-            }
-   //                    | createfunc_opt_list createfunc_opt_item
-
+      this.ParseRoutineBody(localctx);
+   }
    ;
 
 common_func_opt_item
@@ -4562,7 +4560,6 @@ from pl_gram.y, line ~2982
 	 * at least we need not worry about it appearing as an identifier.
 */
 
-
    //                 | INTO
    | LATERAL_P
    | LEADING
@@ -4606,7 +4603,8 @@ from pl_gram.y, line ~2982
 
 /*PLSQL grammar */
 
-   /************************************************************************************************************************************************************/ pl_function
+/************************************************************************************************************************************************************/ 
+pl_function
    : comp_options pl_block opt_semi
    ;
 
@@ -4925,7 +4923,6 @@ exit_type
    : EXIT
    | CONTINUE_P
    ;
-   //todo implement RETURN statement according to initial grammar line 1754
 
 stmt_return
    : RETURN (NEXT sql_expression | QUERY (EXECUTE a_expr opt_for_using_expression | selectstmt) | opt_return_result) SEMI
@@ -5324,4 +5321,3 @@ opt_returning_clause_into
    : INTO opt_strict into_target
    |
    ;
-

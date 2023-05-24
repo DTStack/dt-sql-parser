@@ -1,10 +1,11 @@
-// dt-sql-parser/src/grammar/pgsql/PostgreSQLLexer.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/pgsql/PostgreSQLLexer.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 import {
 	ATN,
 	ATNDeserializer,
 	CharStream,
 	DecisionState, DFA,
+	Lexer,
 	LexerATNSimulator,
 	RuleContext,
 	PredictionContextCache,
@@ -12,7 +13,7 @@ import {
 } from "antlr4";
 
 
-import PostgreSQLLexerBase from './base/PostgreSQLLexerBase';
+import PostgreSQLLexerBase from './PostgreSQLLexerBase';
 
 export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 	public static readonly Dollar = 1;
@@ -1195,8 +1196,10 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 		"EndDollarStringConstant",
 	];
 
+
 	/* This field stores the tags which are used to detect the end of a dollar-quoted string literal.
 	 */
+
 
 	constructor(input: CharStream) {
 		super(input);
@@ -1244,7 +1247,9 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 	private Operator_action(localctx: RuleContext, actionIndex: number): void {
 		switch (actionIndex) {
 		case 0:
+
 			    this.HandleLessLessGreaterGreater();
+			   
 			break;
 		}
 	}
@@ -1266,7 +1271,7 @@ export default class PostgreSQLLexer extends PostgreSQLLexerBase {
 		switch (actionIndex) {
 		case 3:
 
-			            this.UnterminatedBlockCommentDebugAssert();
+			      this.UnterminatedBlockCommentDebugAssert();
 			   
 			break;
 		}
