@@ -11,10 +11,12 @@ const features = {
     selectWithOffset: readSQL(__dirname, 'select_with_offset.sql'),
     selectWithJoin: readSQL(__dirname, 'select_with_join.sql'),
     selectWithFetch: readSQL(__dirname, 'select_with_fetch.sql'),
-    selectWithUNNEST: readSQL(__dirname, 'select_with_ unnest.sql')
+    selectWithUNNEST: readSQL(__dirname, 'select_with_ unnest.sql'),
+    selectWithExists: readSQL(__dirname, 'select_with_exists.sql'),
+    selectWithUnion: readSQL(__dirname, 'select_with_union.sql')
 };
 
-describe('TrinoSQL Create Statements Syntax Tests', () => {
+describe('TrinoSQL Select Statements Syntax Tests', () => {
     const parser = new TrinoSQL();
    features.select.forEach((sql) => {
         it(sql, () => {
@@ -63,6 +65,16 @@ describe('TrinoSQL Create Statements Syntax Tests', () => {
         });
     }); 
     features.selectWithUNNEST.forEach((sql) => {
+        it(sql, () => {
+            expect(parser.validate(sql).length).toBe(0);
+        });
+    }); 
+   features.selectWithExists.forEach((sql) => {
+        it(sql, () => {
+            expect(parser.validate(sql).length).toBe(0);
+        });
+    }); 
+    features.selectWithUnion.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });

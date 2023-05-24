@@ -5,7 +5,7 @@ const features = {
     rollbackTransaction: readSQL(__dirname, 'rollback_transaction.sql'),
 };
 
-describe('TrinoSQL Revoke Statements Syntax Tests', () => {
+describe('TrinoSQL Rollback Transaction Statements Syntax Tests', () => {
     const parser = new TrinoSQL();
     // rollback transaction statements
     features.rollbackTransaction.forEach((sql) => {

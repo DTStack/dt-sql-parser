@@ -5,7 +5,7 @@ const features = {
     truncateTable: readSQL(__dirname, 'truncate_table.sql'),
 };
 
-describe('TrinoSQL truncate table Statements Syntax Tests', () => {
+describe('TrinoSQL Truncate Table Statements Syntax Tests', () => {
     const parser = new TrinoSQL();
     // truncate table statements
     features.truncateTable.forEach((sql) => {

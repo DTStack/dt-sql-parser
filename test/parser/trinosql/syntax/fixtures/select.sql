@@ -1,4 +1,6 @@
--- GROUP BY normal
+-- DOUBLE IN Query
+SELECT 123.456E7 FROM DUAL;
+-- GROUP BY 
 SELECT * FROM table1 GROUP BY a;
 SELECT * FROM table1 GROUP BY a, b;
 SELECT * FROM table1 GROUP BY ();
@@ -105,3 +107,11 @@ SELECT orderkey, clerk, totalprice,
 FROM orders
 WINDOW w AS (PARTITION BY clerk ORDER BY totalprice DESC)
 ORDER BY count() OVER w, clerk, rnk
+-- AGGREGATION FILTER/ ORDER BY
+SELECT SUM(x) FILTER (WHERE x > 4);
+SELECT array_agg(x ORDER BY t.y) FROM t;
+-- INTERSECT
+SELECT 123 INTERSECT DISTINCT SELECT 123 INTERSECT ALL SELECT 123;
+-- substring_built_in_function
+SELECT substring('string' FROM 2);
+SELECT substring('string' FROM 2 FOR 3);
