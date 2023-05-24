@@ -14,15 +14,15 @@ statements:
 	| standaloneType
 	| standaloneRowPattern;
 
-singleStatement: statement SEMICOLON ;
+singleStatement: statement SEMICOLON?;
 
-standaloneExpression: expression SEMICOLON;
+standaloneExpression: expression SEMICOLON?;
 
-standalonePathSpecification: pathSpecification SEMICOLON;
+standalonePathSpecification: pathSpecification SEMICOLON?;
 
-standaloneType: type SEMICOLON;
+standaloneType: type SEMICOLON?;
 
-standaloneRowPattern: rowPattern SEMICOLON;
+standaloneRowPattern: rowPattern SEMICOLON?;
 
 statement:
 	query												# statementDefault
@@ -568,12 +568,13 @@ principal:
 
 roles: identifier (',' identifier)*;
 
-identifier:
-	IDENTIFIER				# unquotedIdentifier
-	| QUOTED_IDENTIFIER		# quotedIdentifier
-	| nonReserved			# unquotedIdentifier
-	| BACKQUOTED_IDENTIFIER	# backQuotedIdentifier
-	| DIGIT_IDENTIFIER		# digitIdentifier;
+identifier
+    : IDENTIFIER             #unquotedIdentifier
+    | QUOTED_IDENTIFIER      #quotedIdentifier
+    | nonReserved            #unquotedIdentifier
+    | BACKQUOTED_IDENTIFIER  #backQuotedIdentifier
+    | DIGIT_IDENTIFIER       #digitIdentifier
+    ;
 
 number:
 	MINUS? DECIMAL_VALUE	# decimalLiteral
@@ -581,9 +582,7 @@ number:
 	| MINUS? INTEGER_VALUE	# integerLiteral;
 
 nonReserved
-// IMPORTANT: this rule must only contain tokens. Nested rules are not supported. See SqlParser.exitNonReserved
-		:
-	ADD
+	: ADD
 	| ADMIN
 	| AFTER
 	| ALL
@@ -1021,7 +1020,7 @@ fragment EXPONENT: 'E' [+-]? DIGIT+;
 
 fragment DIGIT: [0-9];
 
-fragment LETTER: [A-Z];
+fragment LETTER: [A-Za-z];
 
 SIMPLE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 
