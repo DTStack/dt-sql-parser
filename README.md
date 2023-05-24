@@ -26,6 +26,7 @@ Supported SQL:
 - Hive SQL
 - PL/SQL
 - PostgreSQL
+- Trino SQL
 
 >Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
 
@@ -121,7 +122,6 @@ console.log(tokens)
         tokenIndex: -1
         type: 137
         _text: null
-        text: "SELECT"
     },
     ...
 ]
