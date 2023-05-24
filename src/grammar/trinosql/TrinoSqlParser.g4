@@ -1,4 +1,4 @@
-grammar trinoSqlParser;
+grammar TrinoSqlParser;
 
 tokens {
 	DELIMITER
