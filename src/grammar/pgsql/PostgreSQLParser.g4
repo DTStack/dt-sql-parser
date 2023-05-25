@@ -6,7 +6,7 @@ options { tokenVocab = PostgreSQLLexer;
 superClass = PostgreSQLParserBase;
 }
 @parser::header {
-import PostgreSQLParserBase from "./base/PostgreSQLParserBase";
+import PostgreSQLParserBase from "./PostgreSQLParserBase";
 }
 
 

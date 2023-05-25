@@ -37,9 +37,10 @@ lexer grammar PostgreSQLLexer;
 
 options {
    superClass = PostgreSQLLexerBase;
+   caseInsensitive = true;
 }
 @lexer::header {
-import PostgreSQLLexerBase from "./base/PostgreSQLLexerBase";
+import PostgreSQLLexerBase from "./PostgreSQLLexerBase";
 }
 
 //

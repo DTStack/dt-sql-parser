@@ -10,7 +10,7 @@ const validateTest = (sqls) => {
             error(i, sql);
             error(result);
         }
-        expect(result.length).toBe(0);
+        expect(result.find(i => i.message)).toBeUndefined();
     });
 };
 

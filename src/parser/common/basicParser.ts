@@ -45,6 +45,8 @@ export default abstract class BasicParser {
         parser.addErrorListener(new ParserErrorCollector(syntaxErrors));
 
         parser.program();
+        console.log('Validate SQL:', input);
+        console.log('Validate Error:', syntaxErrors);
         return lexerError.concat(syntaxErrors);
     }
 

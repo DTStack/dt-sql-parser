@@ -1,5 +1,6 @@
 import trinoSQL from '../../../src/parser/trinosql';
-import TrinoSqlParserVisitor from '../../../src/lib/trinosql/TrinoSqlVisitor';
+import { TrinoSqlVisitor } from '../../../src/lib/trinosql/TrinoSqlVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree';
 
 describe('trino SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -12,7 +13,10 @@ describe('trino SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends TrinoSqlParserVisitor<any>{ 
+        class MyVisitor extends AbstractParseTreeVisitor<any> implements TrinoSqlVisitor<any>{ 
+            protected defaultResult() {
+                return result;
+            }
             visitTableName = (ctx): void => {
                 result = ctx.getText().toLowerCase();
             }

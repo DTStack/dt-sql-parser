@@ -23,7 +23,7 @@ describe('FlinkSQL Syntax Tests', () => {
         expect(result.length).toBe(0);
     });
     test('Test simple Error Select Statement', () => {
-        const sql = `SELECTproduct, amount FROM;`;
+        const sql = `SELECT product, amount FROM;`;
         const result = parser.validate(sql);
         expect(result.length).toBe(1);
     });
@@ -48,12 +48,12 @@ describe('FlinkSQL Syntax Tests', () => {
     test('Test Select Statement with order by clause', () => {
         const sql = `SELECT name, age FROM person ORDER BY age;`;
         const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+        expect(result).toBe(0);
     });
     test('Test Select Statement with limit clause', () => {
         const sql = `SELECT name, age FROM person ORDER BY name LIMIT 2;`;
         const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+        expect(result).toBe(0);
     });
     test('Test Select Statement with join', () => {
         const sql = `
@@ -61,7 +61,7 @@ describe('FlinkSQL Syntax Tests', () => {
             FULL JOIN department ON employee.deptno = department.deptno;
         `;
         const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+        expect(result).toBe(0);
     });
     // test left outer join
     test('Test Select Statement with left outer join', () => {
@@ -72,7 +72,7 @@ describe('FlinkSQL Syntax Tests', () => {
             ON TRUE
         `;
         const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+        expect(result).toBe(0);
     });
     // test cross join
     test('Test Select Statement with cross join', () => {
@@ -81,7 +81,7 @@ describe('FlinkSQL Syntax Tests', () => {
             FROM Orders CROSS JOIN UNNEST(tags) AS t (tag)
         `;
         const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+        expect(result).toBe(0);
     });
     // test for time temporal join
     test('Test Select Statement with time temporal join', () => {
@@ -91,7 +91,7 @@ describe('FlinkSQL Syntax Tests', () => {
             ON o.customer_id = c.id;
         `;
         const result = parser.validate(sql);
-        expect(result.length).toBe(0);
+        expect(result).toBe(0);
     });
     // test for catalog table
     test('Test Select Statement with catalog table', () => {

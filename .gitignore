@@ -8,4 +8,3 @@ src/**/.antlr
 coverage
 .idea
 gen/
-src/lib
