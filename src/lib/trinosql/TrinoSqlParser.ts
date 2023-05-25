@@ -1,4 +1,4 @@
-// Generated from /Users/zhenglin/Documents/parser/dt-sql-parser/src/grammar/trinosql/trinoSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/trinosql/TrinoSql.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
 import {
@@ -11,14 +11,14 @@ import {
 	Token, TokenStream,
 	Interval, IntervalSet
 } from 'antlr4';
-import trinoSqlParserListener from "./trinoSqlParserListener.js";
-import trinoSqlParserVisitor from "./trinoSqlParserVisitor.js";
+import TrinoSqlListener from "./TrinoSqlListener.js";
+import TrinoSqlVisitor from "./TrinoSqlVisitor.js";
 
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 // eslint-disable-next-line no-unused-vars
 type int = number;
 
-export default class trinoSqlParserParser extends Parser {
+export default class TrinoSqlParser extends Parser {
 	public static readonly T__0 = 1;
 	public static readonly T__1 = 2;
 	public static readonly T__2 = 3;
@@ -765,11 +765,11 @@ export default class trinoSqlParserParser extends Parser {
 		"privilege", "qualifiedName", "grantor", "principal", "roles", "identifier", 
 		"number", "nonReserved",
 	];
-	public get grammarFileName(): string { return "trinoSqlParser.g4"; }
-	public get literalNames(): (string | null)[] { return trinoSqlParserParser.literalNames; }
-	public get symbolicNames(): (string | null)[] { return trinoSqlParserParser.symbolicNames; }
-	public get ruleNames(): string[] { return trinoSqlParserParser.ruleNames; }
-	public get serializedATN(): number[] { return trinoSqlParserParser._serializedATN; }
+	public get grammarFileName(): string { return "TrinoSql.g4"; }
+	public get literalNames(): (string | null)[] { return TrinoSqlParser.literalNames; }
+	public get symbolicNames(): (string | null)[] { return TrinoSqlParser.symbolicNames; }
+	public get ruleNames(): string[] { return TrinoSqlParser.ruleNames; }
+	public get serializedATN(): number[] { return TrinoSqlParser._serializedATN; }
 
 	protected createFailedPredicateException(predicate?: string, message?: string): FailedPredicateException {
 		return new FailedPredicateException(this, predicate, message);
@@ -777,12 +777,12 @@ export default class trinoSqlParserParser extends Parser {
 
 	constructor(input: TokenStream) {
 		super(input);
-		this._interp = new ParserATNSimulator(this, trinoSqlParserParser._ATN, trinoSqlParserParser.DecisionsToDFA, new PredictionContextCache());
+		this._interp = new ParserATNSimulator(this, TrinoSqlParser._ATN, TrinoSqlParser.DecisionsToDFA, new PredictionContextCache());
 	}
 	// @RuleVersion(0)
 	public program(): ProgramContext {
 		let localctx: ProgramContext = new ProgramContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 0, trinoSqlParserParser.RULE_program);
+		this.enterRule(localctx, 0, TrinoSqlParser.RULE_program);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -802,7 +802,7 @@ export default class trinoSqlParserParser extends Parser {
 				_la = this._input.LA(1);
 			}
 			this.state = 186;
-			this.match(trinoSqlParserParser.EOF);
+			this.match(TrinoSqlParser.EOF);
 			}
 		}
 		catch (re) {
@@ -822,7 +822,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public statements(): StatementsContext {
 		let localctx: StatementsContext = new StatementsContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 2, trinoSqlParserParser.RULE_statements);
+		this.enterRule(localctx, 2, TrinoSqlParser.RULE_statements);
 		try {
 			this.state = 193;
 			this._errHandler.sync(this);
@@ -881,7 +881,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public singleStatement(): SingleStatementContext {
 		let localctx: SingleStatementContext = new SingleStatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 4, trinoSqlParserParser.RULE_singleStatement);
+		this.enterRule(localctx, 4, TrinoSqlParser.RULE_singleStatement);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -894,7 +894,7 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===272) {
 				{
 				this.state = 196;
-				this.match(trinoSqlParserParser.SEMICOLON);
+				this.match(TrinoSqlParser.SEMICOLON);
 				}
 			}
 
@@ -917,7 +917,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public standaloneExpression(): StandaloneExpressionContext {
 		let localctx: StandaloneExpressionContext = new StandaloneExpressionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 6, trinoSqlParserParser.RULE_standaloneExpression);
+		this.enterRule(localctx, 6, TrinoSqlParser.RULE_standaloneExpression);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -930,7 +930,7 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===272) {
 				{
 				this.state = 200;
-				this.match(trinoSqlParserParser.SEMICOLON);
+				this.match(TrinoSqlParser.SEMICOLON);
 				}
 			}
 
@@ -953,7 +953,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public standalonePathSpecification(): StandalonePathSpecificationContext {
 		let localctx: StandalonePathSpecificationContext = new StandalonePathSpecificationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 8, trinoSqlParserParser.RULE_standalonePathSpecification);
+		this.enterRule(localctx, 8, TrinoSqlParser.RULE_standalonePathSpecification);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -966,7 +966,7 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===272) {
 				{
 				this.state = 204;
-				this.match(trinoSqlParserParser.SEMICOLON);
+				this.match(TrinoSqlParser.SEMICOLON);
 				}
 			}
 
@@ -989,7 +989,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public standaloneType(): StandaloneTypeContext {
 		let localctx: StandaloneTypeContext = new StandaloneTypeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 10, trinoSqlParserParser.RULE_standaloneType);
+		this.enterRule(localctx, 10, TrinoSqlParser.RULE_standaloneType);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -1002,7 +1002,7 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===272) {
 				{
 				this.state = 208;
-				this.match(trinoSqlParserParser.SEMICOLON);
+				this.match(TrinoSqlParser.SEMICOLON);
 				}
 			}
 
@@ -1025,7 +1025,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public standaloneRowPattern(): StandaloneRowPatternContext {
 		let localctx: StandaloneRowPatternContext = new StandaloneRowPatternContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 12, trinoSqlParserParser.RULE_standaloneRowPattern);
+		this.enterRule(localctx, 12, TrinoSqlParser.RULE_standaloneRowPattern);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -1038,7 +1038,7 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===272) {
 				{
 				this.state = 212;
-				this.match(trinoSqlParserParser.SEMICOLON);
+				this.match(TrinoSqlParser.SEMICOLON);
 				}
 			}
 
@@ -1061,7 +1061,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public statement(): StatementContext {
 		let localctx: StatementContext = new StatementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 14, trinoSqlParserParser.RULE_statement);
+		this.enterRule(localctx, 14, TrinoSqlParser.RULE_statement);
 		let _la: number;
 		try {
 			this.state = 985;
@@ -1080,7 +1080,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 216;
-				this.match(trinoSqlParserParser.USE);
+				this.match(TrinoSqlParser.USE);
 				this.state = 217;
 				(localctx as UseContext)._schema = this.identifier();
 				}
@@ -1090,11 +1090,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 218;
-				this.match(trinoSqlParserParser.USE);
+				this.match(TrinoSqlParser.USE);
 				this.state = 219;
 				(localctx as UseContext)._catalog = this.identifier();
 				this.state = 220;
-				this.match(trinoSqlParserParser.T__0);
+				this.match(TrinoSqlParser.T__0);
 				this.state = 221;
 				(localctx as UseContext)._schema = this.identifier();
 				}
@@ -1104,20 +1104,20 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 223;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 224;
-				this.match(trinoSqlParserParser.SCHEMA);
+				this.match(TrinoSqlParser.SCHEMA);
 				this.state = 228;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 7, this._ctx) ) {
 				case 1:
 					{
 					this.state = 225;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 226;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					this.state = 227;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -1129,7 +1129,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 231;
-					this.match(trinoSqlParserParser.AUTHORIZATION);
+					this.match(TrinoSqlParser.AUTHORIZATION);
 					this.state = 232;
 					this.principal();
 					}
@@ -1141,7 +1141,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 235;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 236;
 					this.properties();
 					}
@@ -1154,18 +1154,18 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 239;
-				this.match(trinoSqlParserParser.DROP);
+				this.match(TrinoSqlParser.DROP);
 				this.state = 240;
-				this.match(trinoSqlParserParser.SCHEMA);
+				this.match(TrinoSqlParser.SCHEMA);
 				this.state = 243;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 10, this._ctx) ) {
 				case 1:
 					{
 					this.state = 241;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 242;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -1195,15 +1195,15 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 6);
 				{
 				this.state = 249;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 250;
-				this.match(trinoSqlParserParser.SCHEMA);
+				this.match(TrinoSqlParser.SCHEMA);
 				this.state = 251;
 				this.qualifiedName();
 				this.state = 252;
-				this.match(trinoSqlParserParser.RENAME);
+				this.match(TrinoSqlParser.RENAME);
 				this.state = 253;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 254;
 				this.identifier();
 				}
@@ -1213,15 +1213,15 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 7);
 				{
 				this.state = 256;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 257;
-				this.match(trinoSqlParserParser.SCHEMA);
+				this.match(TrinoSqlParser.SCHEMA);
 				this.state = 258;
 				this.qualifiedName();
 				this.state = 259;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 260;
-				this.match(trinoSqlParserParser.AUTHORIZATION);
+				this.match(TrinoSqlParser.AUTHORIZATION);
 				this.state = 261;
 				this.principal();
 				}
@@ -1231,20 +1231,20 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 8);
 				{
 				this.state = 263;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 264;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 268;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 12, this._ctx) ) {
 				case 1:
 					{
 					this.state = 265;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 266;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					this.state = 267;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -1266,7 +1266,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===40) {
 					{
 					this.state = 274;
-					this.match(trinoSqlParserParser.COMMENT);
+					this.match(TrinoSqlParser.COMMENT);
 					this.state = 275;
 					this.string_();
 					}
@@ -1278,14 +1278,14 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===243) {
 					{
 					this.state = 278;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 279;
 					this.properties();
 					}
 				}
 
 				this.state = 282;
-				this.match(trinoSqlParserParser.AS);
+				this.match(TrinoSqlParser.AS);
 				this.state = 288;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 16, this._ctx) ) {
@@ -1298,11 +1298,11 @@ export default class trinoSqlParserParser extends Parser {
 				case 2:
 					{
 					this.state = 284;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 285;
 					this.query();
 					this.state = 286;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -1312,19 +1312,19 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 290;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 292;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 					if (_la===144) {
 						{
 						this.state = 291;
-						this.match(trinoSqlParserParser.NO);
+						this.match(TrinoSqlParser.NO);
 						}
 					}
 
 					this.state = 294;
-					this.match(trinoSqlParserParser.DATA);
+					this.match(TrinoSqlParser.DATA);
 					}
 					break;
 				}
@@ -1335,27 +1335,27 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 9);
 				{
 				this.state = 297;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 298;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 302;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 19, this._ctx) ) {
 				case 1:
 					{
 					this.state = 299;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 300;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					this.state = 301;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
 				this.state = 304;
 				this.qualifiedName();
 				this.state = 305;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 306;
 				this.tableElement();
 				this.state = 311;
@@ -1365,7 +1365,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 307;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 308;
 					this.tableElement();
 					}
@@ -1375,14 +1375,14 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 314;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				this.state = 317;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 21, this._ctx) ) {
 				case 1:
 					{
 					this.state = 315;
-					this.match(trinoSqlParserParser.COMMENT);
+					this.match(TrinoSqlParser.COMMENT);
 					this.state = 316;
 					this.string_();
 					}
@@ -1394,7 +1394,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 319;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 320;
 					this.properties();
 					}
@@ -1407,18 +1407,18 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 10);
 				{
 				this.state = 323;
-				this.match(trinoSqlParserParser.DROP);
+				this.match(TrinoSqlParser.DROP);
 				this.state = 324;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 327;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 23, this._ctx) ) {
 				case 1:
 					{
 					this.state = 325;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 326;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -1431,9 +1431,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 11);
 				{
 				this.state = 330;
-				this.match(trinoSqlParserParser.INSERT);
+				this.match(TrinoSqlParser.INSERT);
 				this.state = 331;
-				this.match(trinoSqlParserParser.INTO);
+				this.match(TrinoSqlParser.INTO);
 				this.state = 332;
 				this.qualifiedName();
 				this.state = 334;
@@ -1455,9 +1455,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 12);
 				{
 				this.state = 338;
-				this.match(trinoSqlParserParser.DELETE);
+				this.match(TrinoSqlParser.DELETE);
 				this.state = 339;
-				this.match(trinoSqlParserParser.FROM);
+				this.match(TrinoSqlParser.FROM);
 				this.state = 340;
 				this.qualifiedName();
 				this.state = 343;
@@ -1466,7 +1466,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===241) {
 					{
 					this.state = 341;
-					this.match(trinoSqlParserParser.WHERE);
+					this.match(TrinoSqlParser.WHERE);
 					this.state = 342;
 					this.booleanExpression(0);
 					}
@@ -1479,9 +1479,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 13);
 				{
 				this.state = 345;
-				this.match(trinoSqlParserParser.TRUNCATE);
+				this.match(TrinoSqlParser.TRUNCATE);
 				this.state = 346;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 347;
 				this.qualifiedName();
 				}
@@ -1491,27 +1491,27 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 14);
 				{
 				this.state = 348;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 349;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 352;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 26, this._ctx) ) {
 				case 1:
 					{
 					this.state = 350;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 351;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
 				this.state = 354;
 				(localctx as RenameTableContext)._from_ = this.qualifiedName();
 				this.state = 355;
-				this.match(trinoSqlParserParser.RENAME);
+				this.match(TrinoSqlParser.RENAME);
 				this.state = 356;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 357;
 				(localctx as RenameTableContext)._to = this.qualifiedName();
 				}
@@ -1521,15 +1521,15 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 15);
 				{
 				this.state = 359;
-				this.match(trinoSqlParserParser.COMMENT);
+				this.match(TrinoSqlParser.COMMENT);
 				this.state = 360;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 361;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 362;
 				this.qualifiedName();
 				this.state = 363;
-				this.match(trinoSqlParserParser.IS);
+				this.match(TrinoSqlParser.IS);
 				this.state = 366;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
@@ -1543,7 +1543,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 148:
 					{
 					this.state = 365;
-					this.match(trinoSqlParserParser.NULL);
+					this.match(TrinoSqlParser.NULL);
 					}
 					break;
 				default:
@@ -1556,15 +1556,15 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 16);
 				{
 				this.state = 368;
-				this.match(trinoSqlParserParser.COMMENT);
+				this.match(TrinoSqlParser.COMMENT);
 				this.state = 369;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 370;
-				this.match(trinoSqlParserParser.COLUMN);
+				this.match(TrinoSqlParser.COLUMN);
 				this.state = 371;
 				this.qualifiedName();
 				this.state = 372;
-				this.match(trinoSqlParserParser.IS);
+				this.match(TrinoSqlParser.IS);
 				this.state = 375;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
@@ -1578,7 +1578,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 148:
 					{
 					this.state = 374;
-					this.match(trinoSqlParserParser.NULL);
+					this.match(TrinoSqlParser.NULL);
 					}
 					break;
 				default:
@@ -1591,43 +1591,43 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 17);
 				{
 				this.state = 377;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 378;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 381;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 29, this._ctx) ) {
 				case 1:
 					{
 					this.state = 379;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 380;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
 				this.state = 383;
 				(localctx as RenameColumnContext)._tableName = this.qualifiedName();
 				this.state = 384;
-				this.match(trinoSqlParserParser.RENAME);
+				this.match(TrinoSqlParser.RENAME);
 				this.state = 385;
-				this.match(trinoSqlParserParser.COLUMN);
+				this.match(TrinoSqlParser.COLUMN);
 				this.state = 388;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 30, this._ctx) ) {
 				case 1:
 					{
 					this.state = 386;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 387;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
 				this.state = 390;
 				(localctx as RenameColumnContext)._from_ = this.identifier();
 				this.state = 391;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 392;
 				(localctx as RenameColumnContext)._to = this.identifier();
 				}
@@ -1637,36 +1637,36 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 18);
 				{
 				this.state = 394;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 395;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 398;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 31, this._ctx) ) {
 				case 1:
 					{
 					this.state = 396;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 397;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
 				this.state = 400;
 				(localctx as DropColumnContext)._tableName = this.qualifiedName();
 				this.state = 401;
-				this.match(trinoSqlParserParser.DROP);
+				this.match(TrinoSqlParser.DROP);
 				this.state = 402;
-				this.match(trinoSqlParserParser.COLUMN);
+				this.match(TrinoSqlParser.COLUMN);
 				this.state = 405;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 32, this._ctx) ) {
 				case 1:
 					{
 					this.state = 403;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 404;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -1679,38 +1679,38 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 19);
 				{
 				this.state = 409;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 410;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 413;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 33, this._ctx) ) {
 				case 1:
 					{
 					this.state = 411;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 412;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
 				this.state = 415;
 				(localctx as AddColumnContext)._tableName = this.qualifiedName();
 				this.state = 416;
-				this.match(trinoSqlParserParser.ADD);
+				this.match(TrinoSqlParser.ADD);
 				this.state = 417;
-				this.match(trinoSqlParserParser.COLUMN);
+				this.match(TrinoSqlParser.COLUMN);
 				this.state = 421;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 34, this._ctx) ) {
 				case 1:
 					{
 					this.state = 418;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 419;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					this.state = 420;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -1723,15 +1723,15 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 20);
 				{
 				this.state = 425;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 426;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 427;
 				(localctx as SetTableAuthorizationContext)._tableName = this.qualifiedName();
 				this.state = 428;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 429;
-				this.match(trinoSqlParserParser.AUTHORIZATION);
+				this.match(TrinoSqlParser.AUTHORIZATION);
 				this.state = 430;
 				this.principal();
 				}
@@ -1741,15 +1741,15 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 21);
 				{
 				this.state = 432;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 433;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 434;
 				(localctx as SetTablePropertiesContext)._tableName = this.qualifiedName();
 				this.state = 435;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 436;
-				this.match(trinoSqlParserParser.PROPERTIES);
+				this.match(TrinoSqlParser.PROPERTIES);
 				this.state = 437;
 				this.propertyAssignments();
 				}
@@ -1759,13 +1759,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 22);
 				{
 				this.state = 439;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 440;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 441;
 				(localctx as TableExecuteContext)._tableName = this.qualifiedName();
 				this.state = 442;
-				this.match(trinoSqlParserParser.EXECUTE);
+				this.match(TrinoSqlParser.EXECUTE);
 				this.state = 443;
 				(localctx as TableExecuteContext)._procedureName = this.identifier();
 				this.state = 456;
@@ -1774,7 +1774,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 444;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 453;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
@@ -1789,7 +1789,7 @@ export default class trinoSqlParserParser extends Parser {
 							{
 							{
 							this.state = 446;
-							this.match(trinoSqlParserParser.T__3);
+							this.match(TrinoSqlParser.T__3);
 							this.state = 447;
 							this.callArgument();
 							}
@@ -1802,7 +1802,7 @@ export default class trinoSqlParserParser extends Parser {
 					}
 
 					this.state = 455;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -1812,7 +1812,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===241) {
 					{
 					this.state = 458;
-					this.match(trinoSqlParserParser.WHERE);
+					this.match(TrinoSqlParser.WHERE);
 					this.state = 459;
 					(localctx as TableExecuteContext)._where = this.booleanExpression(0);
 					}
@@ -1825,7 +1825,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 23);
 				{
 				this.state = 462;
-				this.match(trinoSqlParserParser.ANALYZE);
+				this.match(TrinoSqlParser.ANALYZE);
 				this.state = 463;
 				this.qualifiedName();
 				this.state = 466;
@@ -1834,7 +1834,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 464;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 465;
 					this.properties();
 					}
@@ -1847,34 +1847,34 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 24);
 				{
 				this.state = 468;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 471;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===157) {
 					{
 					this.state = 469;
-					this.match(trinoSqlParserParser.OR);
+					this.match(TrinoSqlParser.OR);
 					this.state = 470;
-					this.match(trinoSqlParserParser.REPLACE);
+					this.match(TrinoSqlParser.REPLACE);
 					}
 				}
 
 				this.state = 473;
-				this.match(trinoSqlParserParser.MATERIALIZED);
+				this.match(TrinoSqlParser.MATERIALIZED);
 				this.state = 474;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 478;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 41, this._ctx) ) {
 				case 1:
 					{
 					this.state = 475;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 476;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					this.state = 477;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -1886,7 +1886,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===40) {
 					{
 					this.state = 481;
-					this.match(trinoSqlParserParser.COMMENT);
+					this.match(TrinoSqlParser.COMMENT);
 					this.state = 482;
 					this.string_();
 					}
@@ -1898,14 +1898,14 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===243) {
 					{
 					this.state = 485;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 486;
 					this.properties();
 					}
 				}
 
 				this.state = 489;
-				this.match(trinoSqlParserParser.AS);
+				this.match(TrinoSqlParser.AS);
 				this.state = 490;
 				this.query();
 				}
@@ -1915,21 +1915,21 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 25);
 				{
 				this.state = 492;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 495;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===157) {
 					{
 					this.state = 493;
-					this.match(trinoSqlParserParser.OR);
+					this.match(TrinoSqlParser.OR);
 					this.state = 494;
-					this.match(trinoSqlParserParser.REPLACE);
+					this.match(TrinoSqlParser.REPLACE);
 					}
 				}
 
 				this.state = 497;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 498;
 				this.qualifiedName();
 				this.state = 501;
@@ -1938,7 +1938,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===40) {
 					{
 					this.state = 499;
-					this.match(trinoSqlParserParser.COMMENT);
+					this.match(TrinoSqlParser.COMMENT);
 					this.state = 500;
 					this.string_();
 					}
@@ -1950,7 +1950,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===198) {
 					{
 					this.state = 503;
-					this.match(trinoSqlParserParser.SECURITY);
+					this.match(TrinoSqlParser.SECURITY);
 					this.state = 504;
 					_la = this._input.LA(1);
 					if(!(_la===61 || _la===112)) {
@@ -1964,7 +1964,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 507;
-				this.match(trinoSqlParserParser.AS);
+				this.match(TrinoSqlParser.AS);
 				this.state = 508;
 				this.query();
 				}
@@ -1974,11 +1974,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 26);
 				{
 				this.state = 510;
-				this.match(trinoSqlParserParser.REFRESH);
+				this.match(TrinoSqlParser.REFRESH);
 				this.state = 511;
-				this.match(trinoSqlParserParser.MATERIALIZED);
+				this.match(TrinoSqlParser.MATERIALIZED);
 				this.state = 512;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 513;
 				this.qualifiedName();
 				}
@@ -1988,20 +1988,20 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 27);
 				{
 				this.state = 514;
-				this.match(trinoSqlParserParser.DROP);
+				this.match(TrinoSqlParser.DROP);
 				this.state = 515;
-				this.match(trinoSqlParserParser.MATERIALIZED);
+				this.match(TrinoSqlParser.MATERIALIZED);
 				this.state = 516;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 519;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 47, this._ctx) ) {
 				case 1:
 					{
 					this.state = 517;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 518;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -2014,29 +2014,29 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 28);
 				{
 				this.state = 522;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 523;
-				this.match(trinoSqlParserParser.MATERIALIZED);
+				this.match(TrinoSqlParser.MATERIALIZED);
 				this.state = 524;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 527;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 48, this._ctx) ) {
 				case 1:
 					{
 					this.state = 525;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 526;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
 				this.state = 529;
 				(localctx as RenameMaterializedViewContext)._from_ = this.qualifiedName();
 				this.state = 530;
-				this.match(trinoSqlParserParser.RENAME);
+				this.match(TrinoSqlParser.RENAME);
 				this.state = 531;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 532;
 				(localctx as RenameMaterializedViewContext)._to = this.qualifiedName();
 				}
@@ -2046,17 +2046,17 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 29);
 				{
 				this.state = 534;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 535;
-				this.match(trinoSqlParserParser.MATERIALIZED);
+				this.match(TrinoSqlParser.MATERIALIZED);
 				this.state = 536;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 537;
 				this.qualifiedName();
 				this.state = 538;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 539;
-				this.match(trinoSqlParserParser.PROPERTIES);
+				this.match(TrinoSqlParser.PROPERTIES);
 				this.state = 540;
 				this.propertyAssignments();
 				}
@@ -2066,18 +2066,18 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 30);
 				{
 				this.state = 542;
-				this.match(trinoSqlParserParser.DROP);
+				this.match(TrinoSqlParser.DROP);
 				this.state = 543;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 546;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 49, this._ctx) ) {
 				case 1:
 					{
 					this.state = 544;
-					this.match(trinoSqlParserParser.IF);
+					this.match(TrinoSqlParser.IF);
 					this.state = 545;
-					this.match(trinoSqlParserParser.EXISTS);
+					this.match(TrinoSqlParser.EXISTS);
 					}
 					break;
 				}
@@ -2090,15 +2090,15 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 31);
 				{
 				this.state = 549;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 550;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 551;
 				(localctx as RenameViewContext)._from_ = this.qualifiedName();
 				this.state = 552;
-				this.match(trinoSqlParserParser.RENAME);
+				this.match(TrinoSqlParser.RENAME);
 				this.state = 553;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 554;
 				(localctx as RenameViewContext)._to = this.qualifiedName();
 				}
@@ -2108,15 +2108,15 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 32);
 				{
 				this.state = 556;
-				this.match(trinoSqlParserParser.ALTER);
+				this.match(TrinoSqlParser.ALTER);
 				this.state = 557;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 558;
 				(localctx as SetViewAuthorizationContext)._from_ = this.qualifiedName();
 				this.state = 559;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 560;
-				this.match(trinoSqlParserParser.AUTHORIZATION);
+				this.match(TrinoSqlParser.AUTHORIZATION);
 				this.state = 561;
 				this.principal();
 				}
@@ -2126,11 +2126,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 33);
 				{
 				this.state = 563;
-				this.match(trinoSqlParserParser.CALL);
+				this.match(TrinoSqlParser.CALL);
 				this.state = 564;
 				this.qualifiedName();
 				this.state = 565;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 574;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -2145,7 +2145,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 567;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 568;
 						this.callArgument();
 						}
@@ -2158,7 +2158,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 576;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 34:
@@ -2166,9 +2166,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 34);
 				{
 				this.state = 578;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 579;
-				this.match(trinoSqlParserParser.ROLE);
+				this.match(TrinoSqlParser.ROLE);
 				this.state = 580;
 				(localctx as CreateRoleContext)._name = this.identifier();
 				this.state = 584;
@@ -2177,9 +2177,9 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 581;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 582;
-					this.match(trinoSqlParserParser.ADMIN);
+					this.match(TrinoSqlParser.ADMIN);
 					this.state = 583;
 					this.grantor();
 					}
@@ -2191,7 +2191,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===103) {
 					{
 					this.state = 586;
-					this.match(trinoSqlParserParser.IN);
+					this.match(TrinoSqlParser.IN);
 					this.state = 587;
 					(localctx as CreateRoleContext)._catalog = this.identifier();
 					}
@@ -2204,9 +2204,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 35);
 				{
 				this.state = 590;
-				this.match(trinoSqlParserParser.DROP);
+				this.match(TrinoSqlParser.DROP);
 				this.state = 591;
-				this.match(trinoSqlParserParser.ROLE);
+				this.match(TrinoSqlParser.ROLE);
 				this.state = 592;
 				(localctx as DropRoleContext)._name = this.identifier();
 				}
@@ -2216,11 +2216,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 36);
 				{
 				this.state = 593;
-				this.match(trinoSqlParserParser.GRANT);
+				this.match(TrinoSqlParser.GRANT);
 				this.state = 594;
 				this.roles();
 				this.state = 595;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 596;
 				this.principal();
 				this.state = 601;
@@ -2230,7 +2230,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 597;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 598;
 					this.principal();
 					}
@@ -2245,11 +2245,11 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 604;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 605;
-					this.match(trinoSqlParserParser.ADMIN);
+					this.match(TrinoSqlParser.ADMIN);
 					this.state = 606;
-					this.match(trinoSqlParserParser.OPTION);
+					this.match(TrinoSqlParser.OPTION);
 					}
 					break;
 				}
@@ -2259,9 +2259,9 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 609;
-					this.match(trinoSqlParserParser.GRANTED);
+					this.match(TrinoSqlParser.GRANTED);
 					this.state = 610;
-					this.match(trinoSqlParserParser.BY);
+					this.match(TrinoSqlParser.BY);
 					this.state = 611;
 					this.grantor();
 					}
@@ -2273,7 +2273,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===103) {
 					{
 					this.state = 614;
-					this.match(trinoSqlParserParser.IN);
+					this.match(TrinoSqlParser.IN);
 					this.state = 615;
 					(localctx as GrantRolesContext)._catalog = this.identifier();
 					}
@@ -2286,25 +2286,25 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 37);
 				{
 				this.state = 618;
-				this.match(trinoSqlParserParser.REVOKE);
+				this.match(TrinoSqlParser.REVOKE);
 				this.state = 622;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 58, this._ctx) ) {
 				case 1:
 					{
 					this.state = 619;
-					this.match(trinoSqlParserParser.ADMIN);
+					this.match(TrinoSqlParser.ADMIN);
 					this.state = 620;
-					this.match(trinoSqlParserParser.OPTION);
+					this.match(TrinoSqlParser.OPTION);
 					this.state = 621;
-					this.match(trinoSqlParserParser.FOR);
+					this.match(TrinoSqlParser.FOR);
 					}
 					break;
 				}
 				this.state = 624;
 				this.roles();
 				this.state = 625;
-				this.match(trinoSqlParserParser.FROM);
+				this.match(TrinoSqlParser.FROM);
 				this.state = 626;
 				this.principal();
 				this.state = 631;
@@ -2314,7 +2314,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 627;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 628;
 					this.principal();
 					}
@@ -2329,9 +2329,9 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 634;
-					this.match(trinoSqlParserParser.GRANTED);
+					this.match(TrinoSqlParser.GRANTED);
 					this.state = 635;
-					this.match(trinoSqlParserParser.BY);
+					this.match(TrinoSqlParser.BY);
 					this.state = 636;
 					this.grantor();
 					}
@@ -2343,7 +2343,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===103) {
 					{
 					this.state = 639;
-					this.match(trinoSqlParserParser.IN);
+					this.match(TrinoSqlParser.IN);
 					this.state = 640;
 					(localctx as RevokeRolesContext)._catalog = this.identifier();
 					}
@@ -2356,22 +2356,22 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 38);
 				{
 				this.state = 643;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 644;
-				this.match(trinoSqlParserParser.ROLE);
+				this.match(TrinoSqlParser.ROLE);
 				this.state = 648;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 62, this._ctx) ) {
 				case 1:
 					{
 					this.state = 645;
-					this.match(trinoSqlParserParser.ALL);
+					this.match(TrinoSqlParser.ALL);
 					}
 					break;
 				case 2:
 					{
 					this.state = 646;
-					this.match(trinoSqlParserParser.NONE);
+					this.match(TrinoSqlParser.NONE);
 					}
 					break;
 				case 3:
@@ -2387,7 +2387,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===103) {
 					{
 					this.state = 650;
-					this.match(trinoSqlParserParser.IN);
+					this.match(TrinoSqlParser.IN);
 					this.state = 651;
 					(localctx as SetRoleContext)._catalog = this.identifier();
 					}
@@ -2400,7 +2400,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 39);
 				{
 				this.state = 654;
-				this.match(trinoSqlParserParser.GRANT);
+				this.match(TrinoSqlParser.GRANT);
 				this.state = 665;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
@@ -2418,7 +2418,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 656;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 657;
 						this.privilege();
 						}
@@ -2432,16 +2432,16 @@ export default class trinoSqlParserParser extends Parser {
 				case 20:
 					{
 					this.state = 663;
-					this.match(trinoSqlParserParser.ALL);
+					this.match(TrinoSqlParser.ALL);
 					this.state = 664;
-					this.match(trinoSqlParserParser.PRIVILEGES);
+					this.match(TrinoSqlParser.PRIVILEGES);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
 				this.state = 667;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 669;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 66, this._ctx) ) {
@@ -2462,7 +2462,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 671;
 				this.qualifiedName();
 				this.state = 672;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 673;
 				(localctx as GrantContext)._grantee = this.principal();
 				this.state = 677;
@@ -2471,11 +2471,11 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 674;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 675;
-					this.match(trinoSqlParserParser.GRANT);
+					this.match(TrinoSqlParser.GRANT);
 					this.state = 676;
-					this.match(trinoSqlParserParser.OPTION);
+					this.match(TrinoSqlParser.OPTION);
 					}
 					break;
 				}
@@ -2486,7 +2486,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 40);
 				{
 				this.state = 679;
-				this.match(trinoSqlParserParser.DENY);
+				this.match(TrinoSqlParser.DENY);
 				this.state = 690;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
@@ -2504,7 +2504,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 681;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 682;
 						this.privilege();
 						}
@@ -2518,16 +2518,16 @@ export default class trinoSqlParserParser extends Parser {
 				case 20:
 					{
 					this.state = 688;
-					this.match(trinoSqlParserParser.ALL);
+					this.match(TrinoSqlParser.ALL);
 					this.state = 689;
-					this.match(trinoSqlParserParser.PRIVILEGES);
+					this.match(TrinoSqlParser.PRIVILEGES);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
 				this.state = 692;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 694;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 70, this._ctx) ) {
@@ -2548,7 +2548,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 696;
 				this.qualifiedName();
 				this.state = 697;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 698;
 				(localctx as DenyContext)._grantee = this.principal();
 				}
@@ -2558,18 +2558,18 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 41);
 				{
 				this.state = 700;
-				this.match(trinoSqlParserParser.REVOKE);
+				this.match(TrinoSqlParser.REVOKE);
 				this.state = 704;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===91) {
 					{
 					this.state = 701;
-					this.match(trinoSqlParserParser.GRANT);
+					this.match(TrinoSqlParser.GRANT);
 					this.state = 702;
-					this.match(trinoSqlParserParser.OPTION);
+					this.match(TrinoSqlParser.OPTION);
 					this.state = 703;
-					this.match(trinoSqlParserParser.FOR);
+					this.match(TrinoSqlParser.FOR);
 					}
 				}
 
@@ -2590,7 +2590,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 707;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 708;
 						this.privilege();
 						}
@@ -2604,16 +2604,16 @@ export default class trinoSqlParserParser extends Parser {
 				case 20:
 					{
 					this.state = 714;
-					this.match(trinoSqlParserParser.ALL);
+					this.match(TrinoSqlParser.ALL);
 					this.state = 715;
-					this.match(trinoSqlParserParser.PRIVILEGES);
+					this.match(TrinoSqlParser.PRIVILEGES);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
 				this.state = 718;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 720;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 74, this._ctx) ) {
@@ -2634,7 +2634,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 722;
 				this.qualifiedName();
 				this.state = 723;
-				this.match(trinoSqlParserParser.FROM);
+				this.match(TrinoSqlParser.FROM);
 				this.state = 724;
 				(localctx as RevokeContext)._grantee = this.principal();
 				}
@@ -2644,23 +2644,23 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 42);
 				{
 				this.state = 726;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 727;
-				this.match(trinoSqlParserParser.GRANTS);
+				this.match(TrinoSqlParser.GRANTS);
 				this.state = 733;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===153) {
 					{
 					this.state = 728;
-					this.match(trinoSqlParserParser.ON);
+					this.match(TrinoSqlParser.ON);
 					this.state = 730;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 					if (_la===212) {
 						{
 						this.state = 729;
-						this.match(trinoSqlParserParser.TABLE);
+						this.match(TrinoSqlParser.TABLE);
 						}
 					}
 
@@ -2676,14 +2676,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 43);
 				{
 				this.state = 735;
-				this.match(trinoSqlParserParser.EXPLAIN);
+				this.match(TrinoSqlParser.EXPLAIN);
 				this.state = 737;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 77, this._ctx) ) {
 				case 1:
 					{
 					this.state = 736;
-					this.match(trinoSqlParserParser.ANALYZE);
+					this.match(TrinoSqlParser.ANALYZE);
 					}
 					break;
 				}
@@ -2693,7 +2693,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===238) {
 					{
 					this.state = 739;
-					this.match(trinoSqlParserParser.VERBOSE);
+					this.match(TrinoSqlParser.VERBOSE);
 					}
 				}
 
@@ -2703,7 +2703,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 742;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 743;
 					this.explainOption();
 					this.state = 748;
@@ -2713,7 +2713,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 744;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 745;
 						this.explainOption();
 						}
@@ -2723,7 +2723,7 @@ export default class trinoSqlParserParser extends Parser {
 						_la = this._input.LA(1);
 					}
 					this.state = 751;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -2736,11 +2736,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 44);
 				{
 				this.state = 756;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 757;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 758;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 759;
 				this.qualifiedName();
 				}
@@ -2750,11 +2750,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 45);
 				{
 				this.state = 760;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 761;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 762;
-				this.match(trinoSqlParserParser.SCHEMA);
+				this.match(TrinoSqlParser.SCHEMA);
 				this.state = 763;
 				this.qualifiedName();
 				}
@@ -2764,11 +2764,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 46);
 				{
 				this.state = 764;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 765;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 766;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 767;
 				this.qualifiedName();
 				}
@@ -2778,13 +2778,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 47);
 				{
 				this.state = 768;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 769;
-				this.match(trinoSqlParserParser.CREATE);
+				this.match(TrinoSqlParser.CREATE);
 				this.state = 770;
-				this.match(trinoSqlParserParser.MATERIALIZED);
+				this.match(TrinoSqlParser.MATERIALIZED);
 				this.state = 771;
-				this.match(trinoSqlParserParser.VIEW);
+				this.match(TrinoSqlParser.VIEW);
 				this.state = 772;
 				this.qualifiedName();
 				}
@@ -2794,9 +2794,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 48);
 				{
 				this.state = 773;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 774;
-				this.match(trinoSqlParserParser.TABLES);
+				this.match(TrinoSqlParser.TABLES);
 				this.state = 777;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -2822,7 +2822,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===122) {
 					{
 					this.state = 779;
-					this.match(trinoSqlParserParser.LIKE);
+					this.match(TrinoSqlParser.LIKE);
 					this.state = 780;
 					(localctx as ShowTablesContext)._pattern = this.string_();
 					this.state = 783;
@@ -2831,7 +2831,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===73) {
 						{
 						this.state = 781;
-						this.match(trinoSqlParserParser.ESCAPE);
+						this.match(TrinoSqlParser.ESCAPE);
 						this.state = 782;
 						(localctx as ShowTablesContext)._escape = this.string_();
 						}
@@ -2847,9 +2847,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 49);
 				{
 				this.state = 787;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 788;
-				this.match(trinoSqlParserParser.SCHEMAS);
+				this.match(TrinoSqlParser.SCHEMAS);
 				this.state = 791;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -2875,7 +2875,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===122) {
 					{
 					this.state = 793;
-					this.match(trinoSqlParserParser.LIKE);
+					this.match(TrinoSqlParser.LIKE);
 					this.state = 794;
 					(localctx as ShowSchemasContext)._pattern = this.string_();
 					this.state = 797;
@@ -2884,7 +2884,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===73) {
 						{
 						this.state = 795;
-						this.match(trinoSqlParserParser.ESCAPE);
+						this.match(TrinoSqlParser.ESCAPE);
 						this.state = 796;
 						(localctx as ShowSchemasContext)._escape = this.string_();
 						}
@@ -2900,16 +2900,16 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 50);
 				{
 				this.state = 801;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 802;
-				this.match(trinoSqlParserParser.CATALOGS);
+				this.match(TrinoSqlParser.CATALOGS);
 				this.state = 809;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===122) {
 					{
 					this.state = 803;
-					this.match(trinoSqlParserParser.LIKE);
+					this.match(TrinoSqlParser.LIKE);
 					this.state = 804;
 					(localctx as ShowCatalogsContext)._pattern = this.string_();
 					this.state = 807;
@@ -2918,7 +2918,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===73) {
 						{
 						this.state = 805;
-						this.match(trinoSqlParserParser.ESCAPE);
+						this.match(TrinoSqlParser.ESCAPE);
 						this.state = 806;
 						(localctx as ShowCatalogsContext)._escape = this.string_();
 						}
@@ -2934,9 +2934,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 51);
 				{
 				this.state = 811;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 812;
-				this.match(trinoSqlParserParser.COLUMNS);
+				this.match(TrinoSqlParser.COLUMNS);
 				this.state = 813;
 				_la = this._input.LA(1);
 				if(!(_la===88 || _la===103)) {
@@ -2962,7 +2962,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===122) {
 					{
 					this.state = 817;
-					this.match(trinoSqlParserParser.LIKE);
+					this.match(TrinoSqlParser.LIKE);
 					this.state = 818;
 					(localctx as ShowColumnsContext)._pattern = this.string_();
 					this.state = 821;
@@ -2971,7 +2971,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===73) {
 						{
 						this.state = 819;
-						this.match(trinoSqlParserParser.ESCAPE);
+						this.match(TrinoSqlParser.ESCAPE);
 						this.state = 820;
 						(localctx as ShowColumnsContext)._escape = this.string_();
 						}
@@ -2987,11 +2987,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 52);
 				{
 				this.state = 825;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 826;
-				this.match(trinoSqlParserParser.STATS);
+				this.match(TrinoSqlParser.STATS);
 				this.state = 827;
-				this.match(trinoSqlParserParser.FOR);
+				this.match(TrinoSqlParser.FOR);
 				this.state = 828;
 				this.qualifiedName();
 				}
@@ -3001,17 +3001,17 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 53);
 				{
 				this.state = 829;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 830;
-				this.match(trinoSqlParserParser.STATS);
+				this.match(TrinoSqlParser.STATS);
 				this.state = 831;
-				this.match(trinoSqlParserParser.FOR);
+				this.match(TrinoSqlParser.FOR);
 				this.state = 832;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 833;
 				this.query();
 				this.state = 834;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 54:
@@ -3019,19 +3019,19 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 54);
 				{
 				this.state = 836;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 838;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===47) {
 					{
 					this.state = 837;
-					this.match(trinoSqlParserParser.CURRENT);
+					this.match(TrinoSqlParser.CURRENT);
 					}
 				}
 
 				this.state = 840;
-				this.match(trinoSqlParserParser.ROLES);
+				this.match(TrinoSqlParser.ROLES);
 				this.state = 843;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -3058,11 +3058,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 55);
 				{
 				this.state = 845;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 846;
-				this.match(trinoSqlParserParser.ROLE);
+				this.match(TrinoSqlParser.ROLE);
 				this.state = 847;
-				this.match(trinoSqlParserParser.GRANTS);
+				this.match(TrinoSqlParser.GRANTS);
 				this.state = 850;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -3089,7 +3089,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 56);
 				{
 				this.state = 852;
-				this.match(trinoSqlParserParser.DESCRIBE);
+				this.match(TrinoSqlParser.DESCRIBE);
 				this.state = 853;
 				this.qualifiedName();
 				}
@@ -3099,7 +3099,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 57);
 				{
 				this.state = 854;
-				this.match(trinoSqlParserParser.DESC);
+				this.match(TrinoSqlParser.DESC);
 				this.state = 855;
 				this.qualifiedName();
 				}
@@ -3109,16 +3109,16 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 58);
 				{
 				this.state = 856;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 857;
-				this.match(trinoSqlParserParser.FUNCTIONS);
+				this.match(TrinoSqlParser.FUNCTIONS);
 				this.state = 864;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===122) {
 					{
 					this.state = 858;
-					this.match(trinoSqlParserParser.LIKE);
+					this.match(TrinoSqlParser.LIKE);
 					this.state = 859;
 					(localctx as ShowFunctionsContext)._pattern = this.string_();
 					this.state = 862;
@@ -3127,7 +3127,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===73) {
 						{
 						this.state = 860;
-						this.match(trinoSqlParserParser.ESCAPE);
+						this.match(TrinoSqlParser.ESCAPE);
 						this.state = 861;
 						(localctx as ShowFunctionsContext)._escape = this.string_();
 						}
@@ -3143,16 +3143,16 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 59);
 				{
 				this.state = 866;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 867;
-				this.match(trinoSqlParserParser.SESSION);
+				this.match(TrinoSqlParser.SESSION);
 				this.state = 874;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===122) {
 					{
 					this.state = 868;
-					this.match(trinoSqlParserParser.LIKE);
+					this.match(TrinoSqlParser.LIKE);
 					this.state = 869;
 					(localctx as ShowSessionContext)._pattern = this.string_();
 					this.state = 872;
@@ -3161,7 +3161,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===73) {
 						{
 						this.state = 870;
-						this.match(trinoSqlParserParser.ESCAPE);
+						this.match(TrinoSqlParser.ESCAPE);
 						this.state = 871;
 						(localctx as ShowSessionContext)._escape = this.string_();
 						}
@@ -3177,13 +3177,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 60);
 				{
 				this.state = 876;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 877;
-				this.match(trinoSqlParserParser.SESSION);
+				this.match(TrinoSqlParser.SESSION);
 				this.state = 878;
 				this.qualifiedName();
 				this.state = 879;
-				this.match(trinoSqlParserParser.EQ);
+				this.match(TrinoSqlParser.EQ);
 				this.state = 880;
 				this.expression();
 				}
@@ -3193,9 +3193,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 61);
 				{
 				this.state = 882;
-				this.match(trinoSqlParserParser.RESET);
+				this.match(TrinoSqlParser.RESET);
 				this.state = 883;
-				this.match(trinoSqlParserParser.SESSION);
+				this.match(TrinoSqlParser.SESSION);
 				this.state = 884;
 				this.qualifiedName();
 				}
@@ -3205,9 +3205,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 62);
 				{
 				this.state = 885;
-				this.match(trinoSqlParserParser.START);
+				this.match(TrinoSqlParser.START);
 				this.state = 886;
-				this.match(trinoSqlParserParser.TRANSACTION);
+				this.match(TrinoSqlParser.TRANSACTION);
 				this.state = 895;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 100, this._ctx) ) {
@@ -3222,7 +3222,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 888;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 889;
 						this.transactionMode();
 						}
@@ -3241,14 +3241,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 63);
 				{
 				this.state = 897;
-				this.match(trinoSqlParserParser.COMMIT);
+				this.match(TrinoSqlParser.COMMIT);
 				this.state = 899;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 101, this._ctx) ) {
 				case 1:
 					{
 					this.state = 898;
-					this.match(trinoSqlParserParser.WORK);
+					this.match(TrinoSqlParser.WORK);
 					}
 					break;
 				}
@@ -3259,14 +3259,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 64);
 				{
 				this.state = 901;
-				this.match(trinoSqlParserParser.ROLLBACK);
+				this.match(TrinoSqlParser.ROLLBACK);
 				this.state = 903;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 102, this._ctx) ) {
 				case 1:
 					{
 					this.state = 902;
-					this.match(trinoSqlParserParser.WORK);
+					this.match(TrinoSqlParser.WORK);
 					}
 					break;
 				}
@@ -3277,11 +3277,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 65);
 				{
 				this.state = 905;
-				this.match(trinoSqlParserParser.PREPARE);
+				this.match(TrinoSqlParser.PREPARE);
 				this.state = 906;
 				this.identifier();
 				this.state = 907;
-				this.match(trinoSqlParserParser.FROM);
+				this.match(TrinoSqlParser.FROM);
 				this.state = 908;
 				this.statement();
 				}
@@ -3291,9 +3291,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 66);
 				{
 				this.state = 910;
-				this.match(trinoSqlParserParser.DEALLOCATE);
+				this.match(TrinoSqlParser.DEALLOCATE);
 				this.state = 911;
-				this.match(trinoSqlParserParser.PREPARE);
+				this.match(TrinoSqlParser.PREPARE);
 				this.state = 912;
 				this.identifier();
 				}
@@ -3303,7 +3303,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 67);
 				{
 				this.state = 913;
-				this.match(trinoSqlParserParser.EXECUTE);
+				this.match(TrinoSqlParser.EXECUTE);
 				this.state = 914;
 				this.identifier();
 				this.state = 924;
@@ -3312,7 +3312,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===235) {
 					{
 					this.state = 915;
-					this.match(trinoSqlParserParser.USING);
+					this.match(TrinoSqlParser.USING);
 					this.state = 916;
 					this.expression();
 					this.state = 921;
@@ -3322,7 +3322,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 917;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 918;
 						this.expression();
 						}
@@ -3341,9 +3341,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 68);
 				{
 				this.state = 926;
-				this.match(trinoSqlParserParser.DESCRIBE);
+				this.match(TrinoSqlParser.DESCRIBE);
 				this.state = 927;
-				this.match(trinoSqlParserParser.INPUT);
+				this.match(TrinoSqlParser.INPUT);
 				this.state = 928;
 				this.identifier();
 				}
@@ -3353,9 +3353,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 69);
 				{
 				this.state = 929;
-				this.match(trinoSqlParserParser.DESCRIBE);
+				this.match(TrinoSqlParser.DESCRIBE);
 				this.state = 930;
-				this.match(trinoSqlParserParser.OUTPUT);
+				this.match(TrinoSqlParser.OUTPUT);
 				this.state = 931;
 				this.identifier();
 				}
@@ -3365,9 +3365,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 70);
 				{
 				this.state = 932;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 933;
-				this.match(trinoSqlParserParser.PATH);
+				this.match(TrinoSqlParser.PATH);
 				this.state = 934;
 				this.pathSpecification();
 				}
@@ -3377,18 +3377,18 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 71);
 				{
 				this.state = 935;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 936;
-				this.match(trinoSqlParserParser.TIME);
+				this.match(TrinoSqlParser.TIME);
 				this.state = 937;
-				this.match(trinoSqlParserParser.ZONE);
+				this.match(TrinoSqlParser.ZONE);
 				this.state = 940;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 105, this._ctx) ) {
 				case 1:
 					{
 					this.state = 938;
-					this.match(trinoSqlParserParser.LOCAL);
+					this.match(TrinoSqlParser.LOCAL);
 					}
 					break;
 				case 2:
@@ -3405,11 +3405,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 72);
 				{
 				this.state = 942;
-				this.match(trinoSqlParserParser.UPDATE);
+				this.match(TrinoSqlParser.UPDATE);
 				this.state = 943;
 				this.qualifiedName();
 				this.state = 944;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 945;
 				this.updateAssignment();
 				this.state = 950;
@@ -3419,7 +3419,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 946;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 947;
 					this.updateAssignment();
 					}
@@ -3434,7 +3434,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===241) {
 					{
 					this.state = 953;
-					this.match(trinoSqlParserParser.WHERE);
+					this.match(TrinoSqlParser.WHERE);
 					this.state = 954;
 					(localctx as UpdateContext)._where = this.booleanExpression(0);
 					}
@@ -3447,9 +3447,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 73);
 				{
 				this.state = 957;
-				this.match(trinoSqlParserParser.MERGE);
+				this.match(TrinoSqlParser.MERGE);
 				this.state = 958;
-				this.match(trinoSqlParserParser.INTO);
+				this.match(TrinoSqlParser.INTO);
 				this.state = 959;
 				this.qualifiedName();
 				this.state = 964;
@@ -3463,7 +3463,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===26) {
 						{
 						this.state = 960;
-						this.match(trinoSqlParserParser.AS);
+						this.match(TrinoSqlParser.AS);
 						}
 					}
 
@@ -3473,11 +3473,11 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 966;
-				this.match(trinoSqlParserParser.USING);
+				this.match(TrinoSqlParser.USING);
 				this.state = 967;
 				this.relation(0);
 				this.state = 968;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 969;
 				this.expression();
 				this.state = 971;
@@ -3501,13 +3501,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 74);
 				{
 				this.state = 975;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 976;
-				this.match(trinoSqlParserParser.COMMENT);
+				this.match(TrinoSqlParser.COMMENT);
 				this.state = 977;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 978;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 979;
 				this.qualifiedName();
 				}
@@ -3517,13 +3517,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 75);
 				{
 				this.state = 980;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 981;
-				this.match(trinoSqlParserParser.COMMENT);
+				this.match(TrinoSqlParser.COMMENT);
 				this.state = 982;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 983;
-				this.match(trinoSqlParserParser.COLUMN);
+				this.match(TrinoSqlParser.COLUMN);
 				this.state = 984;
 				this.qualifiedName();
 				}
@@ -3547,7 +3547,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public query(): QueryContext {
 		let localctx: QueryContext = new QueryContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 16, trinoSqlParserParser.RULE_query);
+		this.enterRule(localctx, 16, TrinoSqlParser.RULE_query);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -3583,20 +3583,20 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public with_(): WithContext {
 		let localctx: WithContext = new WithContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 18, trinoSqlParserParser.RULE_with);
+		this.enterRule(localctx, 18, TrinoSqlParser.RULE_with);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 992;
-			this.match(trinoSqlParserParser.WITH);
+			this.match(TrinoSqlParser.WITH);
 			this.state = 994;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===178) {
 				{
 				this.state = 993;
-				this.match(trinoSqlParserParser.RECURSIVE);
+				this.match(TrinoSqlParser.RECURSIVE);
 				}
 			}
 
@@ -3609,7 +3609,7 @@ export default class trinoSqlParserParser extends Parser {
 				{
 				{
 				this.state = 997;
-				this.match(trinoSqlParserParser.T__3);
+				this.match(TrinoSqlParser.T__3);
 				this.state = 998;
 				this.namedQuery();
 				}
@@ -3637,7 +3637,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public tableElement(): TableElementContext {
 		let localctx: TableElementContext = new TableElementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 20, trinoSqlParserParser.RULE_tableElement);
+		this.enterRule(localctx, 20, TrinoSqlParser.RULE_tableElement);
 		try {
 			this.state = 1006;
 			this._errHandler.sync(this);
@@ -3839,7 +3839,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public columnDefinition(): ColumnDefinitionContext {
 		let localctx: ColumnDefinitionContext = new ColumnDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 22, trinoSqlParserParser.RULE_columnDefinition);
+		this.enterRule(localctx, 22, TrinoSqlParser.RULE_columnDefinition);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
@@ -3853,9 +3853,9 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1010;
-				this.match(trinoSqlParserParser.NOT);
+				this.match(TrinoSqlParser.NOT);
 				this.state = 1011;
-				this.match(trinoSqlParserParser.NULL);
+				this.match(TrinoSqlParser.NULL);
 				}
 				break;
 			}
@@ -3865,7 +3865,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1014;
-				this.match(trinoSqlParserParser.COMMENT);
+				this.match(TrinoSqlParser.COMMENT);
 				this.state = 1015;
 				this.string_();
 				}
@@ -3877,7 +3877,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1018;
-				this.match(trinoSqlParserParser.WITH);
+				this.match(TrinoSqlParser.WITH);
 				this.state = 1019;
 				this.properties();
 				}
@@ -3902,13 +3902,13 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public likeClause(): LikeClauseContext {
 		let localctx: LikeClauseContext = new LikeClauseContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 24, trinoSqlParserParser.RULE_likeClause);
+		this.enterRule(localctx, 24, TrinoSqlParser.RULE_likeClause);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1022;
-			this.match(trinoSqlParserParser.LIKE);
+			this.match(TrinoSqlParser.LIKE);
 			this.state = 1023;
 			this.qualifiedName();
 			this.state = 1026;
@@ -3927,7 +3927,7 @@ export default class trinoSqlParserParser extends Parser {
 				    this.consume();
 				}
 				this.state = 1025;
-				this.match(trinoSqlParserParser.PROPERTIES);
+				this.match(TrinoSqlParser.PROPERTIES);
 				}
 			}
 
@@ -3950,16 +3950,16 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public properties(): PropertiesContext {
 		let localctx: PropertiesContext = new PropertiesContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 26, trinoSqlParserParser.RULE_properties);
+		this.enterRule(localctx, 26, TrinoSqlParser.RULE_properties);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1028;
-			this.match(trinoSqlParserParser.T__1);
+			this.match(TrinoSqlParser.T__1);
 			this.state = 1029;
 			this.propertyAssignments();
 			this.state = 1030;
-			this.match(trinoSqlParserParser.T__2);
+			this.match(TrinoSqlParser.T__2);
 			}
 		}
 		catch (re) {
@@ -3979,7 +3979,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public propertyAssignments(): PropertyAssignmentsContext {
 		let localctx: PropertyAssignmentsContext = new PropertyAssignmentsContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 28, trinoSqlParserParser.RULE_propertyAssignments);
+		this.enterRule(localctx, 28, TrinoSqlParser.RULE_propertyAssignments);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -3993,7 +3993,7 @@ export default class trinoSqlParserParser extends Parser {
 				{
 				{
 				this.state = 1033;
-				this.match(trinoSqlParserParser.T__3);
+				this.match(TrinoSqlParser.T__3);
 				this.state = 1034;
 				this.property();
 				}
@@ -4021,14 +4021,14 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public property(): PropertyContext {
 		let localctx: PropertyContext = new PropertyContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 30, trinoSqlParserParser.RULE_property);
+		this.enterRule(localctx, 30, TrinoSqlParser.RULE_property);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1040;
 			this.identifier();
 			this.state = 1041;
-			this.match(trinoSqlParserParser.EQ);
+			this.match(TrinoSqlParser.EQ);
 			this.state = 1042;
 			this.propertyValue();
 			}
@@ -4050,7 +4050,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public propertyValue(): PropertyValueContext {
 		let localctx: PropertyValueContext = new PropertyValueContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 32, trinoSqlParserParser.RULE_propertyValue);
+		this.enterRule(localctx, 32, TrinoSqlParser.RULE_propertyValue);
 		try {
 			this.state = 1046;
 			this._errHandler.sync(this);
@@ -4060,7 +4060,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1044;
-				this.match(trinoSqlParserParser.DEFAULT);
+				this.match(TrinoSqlParser.DEFAULT);
 				}
 				break;
 			case 2:
@@ -4090,7 +4090,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public queryNoWith(): QueryNoWithContext {
 		let localctx: QueryNoWithContext = new QueryNoWithContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 34, trinoSqlParserParser.RULE_queryNoWith);
+		this.enterRule(localctx, 34, TrinoSqlParser.RULE_queryNoWith);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -4103,9 +4103,9 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===158) {
 				{
 				this.state = 1049;
-				this.match(trinoSqlParserParser.ORDER);
+				this.match(TrinoSqlParser.ORDER);
 				this.state = 1050;
-				this.match(trinoSqlParserParser.BY);
+				this.match(TrinoSqlParser.BY);
 				this.state = 1051;
 				this.sortItem();
 				this.state = 1056;
@@ -4115,7 +4115,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1052;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1053;
 					this.sortItem();
 					}
@@ -4133,7 +4133,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1061;
-				this.match(trinoSqlParserParser.OFFSET);
+				this.match(TrinoSqlParser.OFFSET);
 				this.state = 1062;
 				localctx._offset = this.rowCount();
 				this.state = 1064;
@@ -4163,7 +4163,7 @@ export default class trinoSqlParserParser extends Parser {
 				{
 				{
 				this.state = 1068;
-				this.match(trinoSqlParserParser.LIMIT);
+				this.match(TrinoSqlParser.LIMIT);
 				this.state = 1069;
 				localctx._limit = this.limitRowCount();
 				}
@@ -4173,7 +4173,7 @@ export default class trinoSqlParserParser extends Parser {
 				{
 				{
 				this.state = 1070;
-				this.match(trinoSqlParserParser.FETCH);
+				this.match(TrinoSqlParser.FETCH);
 				this.state = 1071;
 				_la = this._input.LA(1);
 				if(!(_la===84 || _la===139)) {
@@ -4208,15 +4208,15 @@ export default class trinoSqlParserParser extends Parser {
 				case 155:
 					{
 					this.state = 1076;
-					this.match(trinoSqlParserParser.ONLY);
+					this.match(TrinoSqlParser.ONLY);
 					}
 					break;
 				case 243:
 					{
 					this.state = 1077;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 1078;
-					this.match(trinoSqlParserParser.TIES);
+					this.match(TrinoSqlParser.TIES);
 					}
 					break;
 				default:
@@ -4245,7 +4245,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public limitRowCount(): LimitRowCountContext {
 		let localctx: LimitRowCountContext = new LimitRowCountContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 36, trinoSqlParserParser.RULE_limitRowCount);
+		this.enterRule(localctx, 36, TrinoSqlParser.RULE_limitRowCount);
 		try {
 			this.state = 1085;
 			this._errHandler.sync(this);
@@ -4254,7 +4254,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1083;
-				this.match(trinoSqlParserParser.ALL);
+				this.match(TrinoSqlParser.ALL);
 				}
 				break;
 			case 261:
@@ -4286,7 +4286,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public rowCount(): RowCountContext {
 		let localctx: RowCountContext = new RowCountContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 38, trinoSqlParserParser.RULE_rowCount);
+		this.enterRule(localctx, 38, TrinoSqlParser.RULE_rowCount);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -4330,7 +4330,7 @@ export default class trinoSqlParserParser extends Parser {
 		let localctx: QueryTermContext = new QueryTermContext(this, this._ctx, _parentState);
 		let _prevctx: QueryTermContext = localctx;
 		let _startState: number = 40;
-		this.enterRecursionRule(localctx, 40, trinoSqlParserParser.RULE_queryTerm, _p);
+		this.enterRecursionRule(localctx, 40, TrinoSqlParser.RULE_queryTerm, _p);
 		let _la: number;
 		try {
 			let _alt: number;
@@ -4362,13 +4362,13 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						localctx = new SetOperationContext(this, new QueryTermContext(this, _parentctx, _parentState));
 						(localctx as SetOperationContext)._left = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_queryTerm);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_queryTerm);
 						this.state = 1092;
 						if (!(this.precpred(this._ctx, 2))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
 						}
 						this.state = 1093;
-						(localctx as SetOperationContext)._operator = this.match(trinoSqlParserParser.INTERSECT);
+						(localctx as SetOperationContext)._operator = this.match(TrinoSqlParser.INTERSECT);
 						this.state = 1095;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
@@ -4387,7 +4387,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						localctx = new SetOperationContext(this, new QueryTermContext(this, _parentctx, _parentState));
 						(localctx as SetOperationContext)._left = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_queryTerm);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_queryTerm);
 						this.state = 1098;
 						if (!(this.precpred(this._ctx, 1))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 1)");
@@ -4442,7 +4442,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public queryPrimary(): QueryPrimaryContext {
 		let localctx: QueryPrimaryContext = new QueryPrimaryContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 42, trinoSqlParserParser.RULE_queryPrimary);
+		this.enterRule(localctx, 42, TrinoSqlParser.RULE_queryPrimary);
 		try {
 			let _alt: number;
 			this.state = 1125;
@@ -4461,7 +4461,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1110;
-				this.match(trinoSqlParserParser.TABLE);
+				this.match(TrinoSqlParser.TABLE);
 				this.state = 1111;
 				this.qualifiedName();
 				}
@@ -4471,7 +4471,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 1112;
-				this.match(trinoSqlParserParser.VALUES);
+				this.match(TrinoSqlParser.VALUES);
 				this.state = 1113;
 				this.expression();
 				this.state = 1118;
@@ -4482,7 +4482,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1114;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1115;
 						this.expression();
 						}
@@ -4499,11 +4499,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1121;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1122;
 				this.queryNoWith();
 				this.state = 1123;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			default:
@@ -4527,7 +4527,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public sortItem(): SortItemContext {
 		let localctx: SortItemContext = new SortItemContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 44, trinoSqlParserParser.RULE_sortItem);
+		this.enterRule(localctx, 44, TrinoSqlParser.RULE_sortItem);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -4558,7 +4558,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1131;
-				this.match(trinoSqlParserParser.NULLS);
+				this.match(TrinoSqlParser.NULLS);
 				this.state = 1132;
 				localctx._nullOrdering = this._input.LT(1);
 				_la = this._input.LA(1);
@@ -4591,13 +4591,13 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public querySpecification(): QuerySpecificationContext {
 		let localctx: QuerySpecificationContext = new QuerySpecificationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 46, trinoSqlParserParser.RULE_querySpecification);
+		this.enterRule(localctx, 46, TrinoSqlParser.RULE_querySpecification);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1135;
-			this.match(trinoSqlParserParser.SELECT);
+			this.match(TrinoSqlParser.SELECT);
 			this.state = 1137;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 138, this._ctx) ) {
@@ -4618,7 +4618,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1140;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1141;
 					this.selectItem();
 					}
@@ -4634,7 +4634,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1147;
-				this.match(trinoSqlParserParser.FROM);
+				this.match(TrinoSqlParser.FROM);
 				this.state = 1148;
 				this.relation(0);
 				this.state = 1153;
@@ -4645,7 +4645,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1149;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1150;
 						this.relation(0);
 						}
@@ -4664,7 +4664,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1158;
-				this.match(trinoSqlParserParser.WHERE);
+				this.match(TrinoSqlParser.WHERE);
 				this.state = 1159;
 				localctx._where = this.booleanExpression(0);
 				}
@@ -4676,9 +4676,9 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1162;
-				this.match(trinoSqlParserParser.GROUP);
+				this.match(TrinoSqlParser.GROUP);
 				this.state = 1163;
-				this.match(trinoSqlParserParser.BY);
+				this.match(TrinoSqlParser.BY);
 				this.state = 1164;
 				this.groupBy();
 				}
@@ -4690,7 +4690,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1167;
-				this.match(trinoSqlParserParser.HAVING);
+				this.match(TrinoSqlParser.HAVING);
 				this.state = 1168;
 				localctx._having = this.booleanExpression(0);
 				}
@@ -4702,7 +4702,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1171;
-				this.match(trinoSqlParserParser.WINDOW);
+				this.match(TrinoSqlParser.WINDOW);
 				this.state = 1172;
 				this.windowDefinition();
 				this.state = 1177;
@@ -4713,7 +4713,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1173;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1174;
 						this.windowDefinition();
 						}
@@ -4745,7 +4745,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public groupBy(): GroupByContext {
 		let localctx: GroupByContext = new GroupByContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 48, trinoSqlParserParser.RULE_groupBy);
+		this.enterRule(localctx, 48, TrinoSqlParser.RULE_groupBy);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
@@ -4770,7 +4770,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1186;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1187;
 					this.groupingElement();
 					}
@@ -4799,7 +4799,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public groupingElement(): GroupingElementContext {
 		let localctx: GroupingElementContext = new GroupingElementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 50, trinoSqlParserParser.RULE_groupingElement);
+		this.enterRule(localctx, 50, TrinoSqlParser.RULE_groupingElement);
 		let _la: number;
 		try {
 			this.state = 1233;
@@ -4818,9 +4818,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1194;
-				this.match(trinoSqlParserParser.ROLLUP);
+				this.match(TrinoSqlParser.ROLLUP);
 				this.state = 1195;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1204;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -4835,7 +4835,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1197;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1198;
 						this.expression();
 						}
@@ -4848,7 +4848,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1206;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 3:
@@ -4856,9 +4856,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 1207;
-				this.match(trinoSqlParserParser.CUBE);
+				this.match(TrinoSqlParser.CUBE);
 				this.state = 1208;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1217;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -4873,7 +4873,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1210;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1211;
 						this.expression();
 						}
@@ -4886,7 +4886,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1219;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 4:
@@ -4894,11 +4894,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1220;
-				this.match(trinoSqlParserParser.GROUPING);
+				this.match(TrinoSqlParser.GROUPING);
 				this.state = 1221;
-				this.match(trinoSqlParserParser.SETS);
+				this.match(TrinoSqlParser.SETS);
 				this.state = 1222;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1223;
 				this.groupingSet();
 				this.state = 1228;
@@ -4908,7 +4908,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1224;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1225;
 					this.groupingSet();
 					}
@@ -4918,7 +4918,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 1231;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			}
@@ -4940,7 +4940,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public groupingSet(): GroupingSetContext {
 		let localctx: GroupingSetContext = new GroupingSetContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 52, trinoSqlParserParser.RULE_groupingSet);
+		this.enterRule(localctx, 52, TrinoSqlParser.RULE_groupingSet);
 		let _la: number;
 		try {
 			this.state = 1248;
@@ -4950,7 +4950,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1235;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1244;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -4965,7 +4965,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1237;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1238;
 						this.expression();
 						}
@@ -4978,7 +4978,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1246;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 2:
@@ -5007,20 +5007,20 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public windowDefinition(): WindowDefinitionContext {
 		let localctx: WindowDefinitionContext = new WindowDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 54, trinoSqlParserParser.RULE_windowDefinition);
+		this.enterRule(localctx, 54, TrinoSqlParser.RULE_windowDefinition);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1250;
 			localctx._name = this.identifier();
 			this.state = 1251;
-			this.match(trinoSqlParserParser.AS);
+			this.match(TrinoSqlParser.AS);
 			this.state = 1252;
-			this.match(trinoSqlParserParser.T__1);
+			this.match(TrinoSqlParser.T__1);
 			this.state = 1253;
 			this.windowSpecification();
 			this.state = 1254;
-			this.match(trinoSqlParserParser.T__2);
+			this.match(TrinoSqlParser.T__2);
 			}
 		}
 		catch (re) {
@@ -5040,7 +5040,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public windowSpecification(): WindowSpecificationContext {
 		let localctx: WindowSpecificationContext = new WindowSpecificationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 56, trinoSqlParserParser.RULE_windowSpecification);
+		this.enterRule(localctx, 56, TrinoSqlParser.RULE_windowSpecification);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -5061,9 +5061,9 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===163) {
 				{
 				this.state = 1259;
-				this.match(trinoSqlParserParser.PARTITION);
+				this.match(TrinoSqlParser.PARTITION);
 				this.state = 1260;
-				this.match(trinoSqlParserParser.BY);
+				this.match(TrinoSqlParser.BY);
 				this.state = 1261;
 				localctx._expression = this.expression();
 				localctx._partition.push(localctx._expression);
@@ -5074,7 +5074,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1262;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1263;
 					localctx._expression = this.expression();
 					localctx._partition.push(localctx._expression);
@@ -5093,9 +5093,9 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===158) {
 				{
 				this.state = 1271;
-				this.match(trinoSqlParserParser.ORDER);
+				this.match(TrinoSqlParser.ORDER);
 				this.state = 1272;
-				this.match(trinoSqlParserParser.BY);
+				this.match(TrinoSqlParser.BY);
 				this.state = 1273;
 				this.sortItem();
 				this.state = 1278;
@@ -5105,7 +5105,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1274;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1275;
 					this.sortItem();
 					}
@@ -5146,7 +5146,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public namedQuery(): NamedQueryContext {
 		let localctx: NamedQueryContext = new NamedQueryContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 58, trinoSqlParserParser.RULE_namedQuery);
+		this.enterRule(localctx, 58, TrinoSqlParser.RULE_namedQuery);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -5164,13 +5164,13 @@ export default class trinoSqlParserParser extends Parser {
 			}
 
 			this.state = 1290;
-			this.match(trinoSqlParserParser.AS);
+			this.match(TrinoSqlParser.AS);
 			this.state = 1291;
-			this.match(trinoSqlParserParser.T__1);
+			this.match(TrinoSqlParser.T__1);
 			this.state = 1292;
 			this.query();
 			this.state = 1293;
-			this.match(trinoSqlParserParser.T__2);
+			this.match(TrinoSqlParser.T__2);
 			}
 		}
 		catch (re) {
@@ -5190,7 +5190,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public setQuantifier(): SetQuantifierContext {
 		let localctx: SetQuantifierContext = new SetQuantifierContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 60, trinoSqlParserParser.RULE_setQuantifier);
+		this.enterRule(localctx, 60, TrinoSqlParser.RULE_setQuantifier);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -5223,7 +5223,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public selectItem(): SelectItemContext {
 		let localctx: SelectItemContext = new SelectItemContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 62, trinoSqlParserParser.RULE_selectItem);
+		this.enterRule(localctx, 62, TrinoSqlParser.RULE_selectItem);
 		let _la: number;
 		try {
 			this.state = 1312;
@@ -5246,7 +5246,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===26) {
 						{
 						this.state = 1298;
-						this.match(trinoSqlParserParser.AS);
+						this.match(TrinoSqlParser.AS);
 						}
 					}
 
@@ -5264,16 +5264,16 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 1304;
 				this.primaryExpression(0);
 				this.state = 1305;
-				this.match(trinoSqlParserParser.T__0);
+				this.match(TrinoSqlParser.T__0);
 				this.state = 1306;
-				this.match(trinoSqlParserParser.ASTERISK);
+				this.match(TrinoSqlParser.ASTERISK);
 				this.state = 1309;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 167, this._ctx) ) {
 				case 1:
 					{
 					this.state = 1307;
-					this.match(trinoSqlParserParser.AS);
+					this.match(TrinoSqlParser.AS);
 					this.state = 1308;
 					this.columnAliases();
 					}
@@ -5286,7 +5286,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 1311;
-				this.match(trinoSqlParserParser.ASTERISK);
+				this.match(TrinoSqlParser.ASTERISK);
 				}
 				break;
 			}
@@ -5319,7 +5319,7 @@ export default class trinoSqlParserParser extends Parser {
 		let localctx: RelationContext = new RelationContext(this, this._ctx, _parentState);
 		let _prevctx: RelationContext = localctx;
 		let _startState: number = 64;
-		this.enterRecursionRule(localctx, 64, trinoSqlParserParser.RULE_relation, _p);
+		this.enterRecursionRule(localctx, 64, TrinoSqlParser.RULE_relation, _p);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
@@ -5346,7 +5346,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					localctx = new JoinRelationContext(this, new RelationContext(this, _parentctx, _parentState));
 					(localctx as JoinRelationContext)._left = _prevctx;
-					this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_relation);
+					this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_relation);
 					this.state = 1317;
 					if (!(this.precpred(this._ctx, 2))) {
 						throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
@@ -5357,9 +5357,9 @@ export default class trinoSqlParserParser extends Parser {
 					case 45:
 						{
 						this.state = 1318;
-						this.match(trinoSqlParserParser.CROSS);
+						this.match(TrinoSqlParser.CROSS);
 						this.state = 1319;
-						this.match(trinoSqlParserParser.JOIN);
+						this.match(TrinoSqlParser.JOIN);
 						this.state = 1320;
 						(localctx as JoinRelationContext)._right = this.sampledRelation();
 						}
@@ -5373,7 +5373,7 @@ export default class trinoSqlParserParser extends Parser {
 						this.state = 1321;
 						this.joinType();
 						this.state = 1322;
-						this.match(trinoSqlParserParser.JOIN);
+						this.match(TrinoSqlParser.JOIN);
 						this.state = 1323;
 						(localctx as JoinRelationContext)._rightRelation = this.relation(0);
 						this.state = 1324;
@@ -5383,11 +5383,11 @@ export default class trinoSqlParserParser extends Parser {
 					case 138:
 						{
 						this.state = 1326;
-						this.match(trinoSqlParserParser.NATURAL);
+						this.match(TrinoSqlParser.NATURAL);
 						this.state = 1327;
 						this.joinType();
 						this.state = 1328;
-						this.match(trinoSqlParserParser.JOIN);
+						this.match(TrinoSqlParser.JOIN);
 						this.state = 1329;
 						(localctx as JoinRelationContext)._right = this.sampledRelation();
 						}
@@ -5421,7 +5421,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public joinType(): JoinTypeContext {
 		let localctx: JoinTypeContext = new JoinTypeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 66, trinoSqlParserParser.RULE_joinType);
+		this.enterRule(localctx, 66, TrinoSqlParser.RULE_joinType);
 		let _la: number;
 		try {
 			this.state = 1353;
@@ -5437,7 +5437,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===106) {
 					{
 					this.state = 1338;
-					this.match(trinoSqlParserParser.INNER);
+					this.match(TrinoSqlParser.INNER);
 					}
 				}
 
@@ -5447,14 +5447,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1341;
-				this.match(trinoSqlParserParser.LEFT);
+				this.match(TrinoSqlParser.LEFT);
 				this.state = 1343;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===160) {
 					{
 					this.state = 1342;
-					this.match(trinoSqlParserParser.OUTER);
+					this.match(TrinoSqlParser.OUTER);
 					}
 				}
 
@@ -5464,14 +5464,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 1345;
-				this.match(trinoSqlParserParser.RIGHT);
+				this.match(TrinoSqlParser.RIGHT);
 				this.state = 1347;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===160) {
 					{
 					this.state = 1346;
-					this.match(trinoSqlParserParser.OUTER);
+					this.match(TrinoSqlParser.OUTER);
 					}
 				}
 
@@ -5481,14 +5481,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1349;
-				this.match(trinoSqlParserParser.FULL);
+				this.match(TrinoSqlParser.FULL);
 				this.state = 1351;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===160) {
 					{
 					this.state = 1350;
-					this.match(trinoSqlParserParser.OUTER);
+					this.match(TrinoSqlParser.OUTER);
 					}
 				}
 
@@ -5515,7 +5515,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public joinCriteria(): JoinCriteriaContext {
 		let localctx: JoinCriteriaContext = new JoinCriteriaContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 68, trinoSqlParserParser.RULE_joinCriteria);
+		this.enterRule(localctx, 68, TrinoSqlParser.RULE_joinCriteria);
 		let _la: number;
 		try {
 			this.state = 1369;
@@ -5525,7 +5525,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1355;
-				this.match(trinoSqlParserParser.ON);
+				this.match(TrinoSqlParser.ON);
 				this.state = 1356;
 				this.booleanExpression(0);
 				}
@@ -5534,9 +5534,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1357;
-				this.match(trinoSqlParserParser.USING);
+				this.match(TrinoSqlParser.USING);
 				this.state = 1358;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1359;
 				this.identifier();
 				this.state = 1364;
@@ -5546,7 +5546,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1360;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1361;
 					this.identifier();
 					}
@@ -5556,7 +5556,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 1367;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			default:
@@ -5580,7 +5580,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public sampledRelation(): SampledRelationContext {
 		let localctx: SampledRelationContext = new SampledRelationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 70, trinoSqlParserParser.RULE_sampledRelation);
+		this.enterRule(localctx, 70, TrinoSqlParser.RULE_sampledRelation);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
@@ -5592,15 +5592,15 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1372;
-				this.match(trinoSqlParserParser.TABLESAMPLE);
+				this.match(TrinoSqlParser.TABLESAMPLE);
 				this.state = 1373;
 				this.sampleType();
 				this.state = 1374;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1375;
 				localctx._percentage = this.expression();
 				this.state = 1376;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			}
@@ -5623,7 +5623,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public sampleType(): SampleTypeContext {
 		let localctx: SampleTypeContext = new SampleTypeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 72, trinoSqlParserParser.RULE_sampleType);
+		this.enterRule(localctx, 72, TrinoSqlParser.RULE_sampleType);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -5656,7 +5656,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public patternRecognition(): PatternRecognitionContext {
 		let localctx: PatternRecognitionContext = new PatternRecognitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 74, trinoSqlParserParser.RULE_patternRecognition);
+		this.enterRule(localctx, 74, TrinoSqlParser.RULE_patternRecognition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -5669,18 +5669,18 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1383;
-				this.match(trinoSqlParserParser.MATCH_RECOGNIZE);
+				this.match(TrinoSqlParser.MATCH_RECOGNIZE);
 				this.state = 1384;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1395;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===163) {
 					{
 					this.state = 1385;
-					this.match(trinoSqlParserParser.PARTITION);
+					this.match(TrinoSqlParser.PARTITION);
 					this.state = 1386;
-					this.match(trinoSqlParserParser.BY);
+					this.match(TrinoSqlParser.BY);
 					this.state = 1387;
 					localctx._expression = this.expression();
 					localctx._partition.push(localctx._expression);
@@ -5691,7 +5691,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1388;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1389;
 						localctx._expression = this.expression();
 						localctx._partition.push(localctx._expression);
@@ -5710,9 +5710,9 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===158) {
 					{
 					this.state = 1397;
-					this.match(trinoSqlParserParser.ORDER);
+					this.match(TrinoSqlParser.ORDER);
 					this.state = 1398;
-					this.match(trinoSqlParserParser.BY);
+					this.match(TrinoSqlParser.BY);
 					this.state = 1399;
 					this.sortItem();
 					this.state = 1404;
@@ -5722,7 +5722,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1400;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1401;
 						this.sortItem();
 						}
@@ -5740,7 +5740,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===134) {
 					{
 					this.state = 1409;
-					this.match(trinoSqlParserParser.MEASURES);
+					this.match(TrinoSqlParser.MEASURES);
 					this.state = 1410;
 					this.measureDefinition();
 					this.state = 1415;
@@ -5750,7 +5750,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1411;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1412;
 						this.measureDefinition();
 						}
@@ -5778,9 +5778,9 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===19) {
 					{
 					this.state = 1423;
-					this.match(trinoSqlParserParser.AFTER);
+					this.match(TrinoSqlParser.AFTER);
 					this.state = 1424;
-					this.match(trinoSqlParserParser.MATCH);
+					this.match(TrinoSqlParser.MATCH);
 					this.state = 1425;
 					this.skipTo();
 					}
@@ -5804,20 +5804,20 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1431;
-				this.match(trinoSqlParserParser.PATTERN);
+				this.match(TrinoSqlParser.PATTERN);
 				this.state = 1432;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1433;
 				this.rowPattern(0);
 				this.state = 1434;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				this.state = 1444;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===209) {
 					{
 					this.state = 1435;
-					this.match(trinoSqlParserParser.SUBSET);
+					this.match(TrinoSqlParser.SUBSET);
 					this.state = 1436;
 					this.subsetDefinition();
 					this.state = 1441;
@@ -5827,7 +5827,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1437;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1438;
 						this.subsetDefinition();
 						}
@@ -5840,7 +5840,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1446;
-				this.match(trinoSqlParserParser.DEFINE);
+				this.match(TrinoSqlParser.DEFINE);
 				this.state = 1447;
 				this.variableDefinition();
 				this.state = 1452;
@@ -5850,7 +5850,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1448;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1449;
 					this.variableDefinition();
 					}
@@ -5860,7 +5860,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 1455;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				this.state = 1463;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 193, this._ctx) ) {
@@ -5872,7 +5872,7 @@ export default class trinoSqlParserParser extends Parser {
 					if (_la===26) {
 						{
 						this.state = 1456;
-						this.match(trinoSqlParserParser.AS);
+						this.match(TrinoSqlParser.AS);
 						}
 					}
 
@@ -5913,14 +5913,14 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public measureDefinition(): MeasureDefinitionContext {
 		let localctx: MeasureDefinitionContext = new MeasureDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 76, trinoSqlParserParser.RULE_measureDefinition);
+		this.enterRule(localctx, 76, TrinoSqlParser.RULE_measureDefinition);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1467;
 			this.expression();
 			this.state = 1468;
-			this.match(trinoSqlParserParser.AS);
+			this.match(TrinoSqlParser.AS);
 			this.state = 1469;
 			this.identifier();
 			}
@@ -5942,7 +5942,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public rowsPerMatch(): RowsPerMatchContext {
 		let localctx: RowsPerMatchContext = new RowsPerMatchContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 78, trinoSqlParserParser.RULE_rowsPerMatch);
+		this.enterRule(localctx, 78, TrinoSqlParser.RULE_rowsPerMatch);
 		let _la: number;
 		try {
 			this.state = 1482;
@@ -5952,26 +5952,26 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1471;
-				this.match(trinoSqlParserParser.ONE);
+				this.match(TrinoSqlParser.ONE);
 				this.state = 1472;
-				this.match(trinoSqlParserParser.ROW);
+				this.match(TrinoSqlParser.ROW);
 				this.state = 1473;
-				this.match(trinoSqlParserParser.PER);
+				this.match(TrinoSqlParser.PER);
 				this.state = 1474;
-				this.match(trinoSqlParserParser.MATCH);
+				this.match(TrinoSqlParser.MATCH);
 				}
 				break;
 			case 20:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1475;
-				this.match(trinoSqlParserParser.ALL);
+				this.match(TrinoSqlParser.ALL);
 				this.state = 1476;
-				this.match(trinoSqlParserParser.ROWS);
+				this.match(TrinoSqlParser.ROWS);
 				this.state = 1477;
-				this.match(trinoSqlParserParser.PER);
+				this.match(TrinoSqlParser.PER);
 				this.state = 1478;
-				this.match(trinoSqlParserParser.MATCH);
+				this.match(TrinoSqlParser.MATCH);
 				this.state = 1480;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -6005,7 +6005,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public emptyMatchHandling(): EmptyMatchHandlingContext {
 		let localctx: EmptyMatchHandlingContext = new EmptyMatchHandlingContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 80, trinoSqlParserParser.RULE_emptyMatchHandling);
+		this.enterRule(localctx, 80, TrinoSqlParser.RULE_emptyMatchHandling);
 		try {
 			this.state = 1493;
 			this._errHandler.sync(this);
@@ -6014,33 +6014,33 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1484;
-				this.match(trinoSqlParserParser.SHOW);
+				this.match(TrinoSqlParser.SHOW);
 				this.state = 1485;
-				this.match(trinoSqlParserParser.EMPTY);
+				this.match(TrinoSqlParser.EMPTY);
 				this.state = 1486;
-				this.match(trinoSqlParserParser.MATCHES);
+				this.match(TrinoSqlParser.MATCHES);
 				}
 				break;
 			case 152:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1487;
-				this.match(trinoSqlParserParser.OMIT);
+				this.match(TrinoSqlParser.OMIT);
 				this.state = 1488;
-				this.match(trinoSqlParserParser.EMPTY);
+				this.match(TrinoSqlParser.EMPTY);
 				this.state = 1489;
-				this.match(trinoSqlParserParser.MATCHES);
+				this.match(TrinoSqlParser.MATCHES);
 				}
 				break;
 			case 243:
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 1490;
-				this.match(trinoSqlParserParser.WITH);
+				this.match(TrinoSqlParser.WITH);
 				this.state = 1491;
-				this.match(trinoSqlParserParser.UNMATCHED);
+				this.match(TrinoSqlParser.UNMATCHED);
 				this.state = 1492;
-				this.match(trinoSqlParserParser.ROWS);
+				this.match(TrinoSqlParser.ROWS);
 				}
 				break;
 			default:
@@ -6064,7 +6064,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public skipTo(): SkipToContext {
 		let localctx: SkipToContext = new SkipToContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 82, trinoSqlParserParser.RULE_skipTo);
+		this.enterRule(localctx, 82, TrinoSqlParser.RULE_skipTo);
 		try {
 			this.state = 1514;
 			this._errHandler.sync(this);
@@ -6073,37 +6073,37 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1495;
-				this.match(trinoSqlParserParser.T__4);
+				this.match(TrinoSqlParser.T__4);
 				this.state = 1496;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 1497;
-				this.match(trinoSqlParserParser.NEXT);
+				this.match(TrinoSqlParser.NEXT);
 				this.state = 1498;
-				this.match(trinoSqlParserParser.ROW);
+				this.match(TrinoSqlParser.ROW);
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1499;
-				this.match(trinoSqlParserParser.T__4);
+				this.match(TrinoSqlParser.T__4);
 				this.state = 1500;
-				this.match(trinoSqlParserParser.PAST);
+				this.match(TrinoSqlParser.PAST);
 				this.state = 1501;
-				this.match(trinoSqlParserParser.LAST);
+				this.match(TrinoSqlParser.LAST);
 				this.state = 1502;
-				this.match(trinoSqlParserParser.ROW);
+				this.match(TrinoSqlParser.ROW);
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 1503;
-				this.match(trinoSqlParserParser.T__4);
+				this.match(TrinoSqlParser.T__4);
 				this.state = 1504;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 1505;
-				this.match(trinoSqlParserParser.FIRST);
+				this.match(TrinoSqlParser.FIRST);
 				this.state = 1506;
 				this.identifier();
 				}
@@ -6112,11 +6112,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1507;
-				this.match(trinoSqlParserParser.T__4);
+				this.match(TrinoSqlParser.T__4);
 				this.state = 1508;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 1509;
-				this.match(trinoSqlParserParser.LAST);
+				this.match(TrinoSqlParser.LAST);
 				this.state = 1510;
 				this.identifier();
 				}
@@ -6125,9 +6125,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 1511;
-				this.match(trinoSqlParserParser.T__4);
+				this.match(TrinoSqlParser.T__4);
 				this.state = 1512;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 1513;
 				this.identifier();
 				}
@@ -6151,7 +6151,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public subsetDefinition(): SubsetDefinitionContext {
 		let localctx: SubsetDefinitionContext = new SubsetDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 84, trinoSqlParserParser.RULE_subsetDefinition);
+		this.enterRule(localctx, 84, TrinoSqlParser.RULE_subsetDefinition);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -6159,9 +6159,9 @@ export default class trinoSqlParserParser extends Parser {
 			this.state = 1516;
 			localctx._name = this.identifier();
 			this.state = 1517;
-			this.match(trinoSqlParserParser.EQ);
+			this.match(TrinoSqlParser.EQ);
 			this.state = 1518;
-			this.match(trinoSqlParserParser.T__1);
+			this.match(TrinoSqlParser.T__1);
 			this.state = 1519;
 			localctx._identifier = this.identifier();
 			localctx._union.push(localctx._identifier);
@@ -6172,7 +6172,7 @@ export default class trinoSqlParserParser extends Parser {
 				{
 				{
 				this.state = 1520;
-				this.match(trinoSqlParserParser.T__3);
+				this.match(TrinoSqlParser.T__3);
 				this.state = 1521;
 				localctx._identifier = this.identifier();
 				localctx._union.push(localctx._identifier);
@@ -6183,7 +6183,7 @@ export default class trinoSqlParserParser extends Parser {
 				_la = this._input.LA(1);
 			}
 			this.state = 1527;
-			this.match(trinoSqlParserParser.T__2);
+			this.match(TrinoSqlParser.T__2);
 			}
 		}
 		catch (re) {
@@ -6203,14 +6203,14 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public variableDefinition(): VariableDefinitionContext {
 		let localctx: VariableDefinitionContext = new VariableDefinitionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 86, trinoSqlParserParser.RULE_variableDefinition);
+		this.enterRule(localctx, 86, TrinoSqlParser.RULE_variableDefinition);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1529;
 			this.identifier();
 			this.state = 1530;
-			this.match(trinoSqlParserParser.AS);
+			this.match(TrinoSqlParser.AS);
 			this.state = 1531;
 			this.expression();
 			}
@@ -6232,7 +6232,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public aliasedRelation(): AliasedRelationContext {
 		let localctx: AliasedRelationContext = new AliasedRelationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 88, trinoSqlParserParser.RULE_aliasedRelation);
+		this.enterRule(localctx, 88, TrinoSqlParser.RULE_aliasedRelation);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -6250,7 +6250,7 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===26) {
 					{
 					this.state = 1534;
-					this.match(trinoSqlParserParser.AS);
+					this.match(TrinoSqlParser.AS);
 					}
 				}
 
@@ -6288,13 +6288,13 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public columnAliases(): ColumnAliasesContext {
 		let localctx: ColumnAliasesContext = new ColumnAliasesContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 90, trinoSqlParserParser.RULE_columnAliases);
+		this.enterRule(localctx, 90, TrinoSqlParser.RULE_columnAliases);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1543;
-			this.match(trinoSqlParserParser.T__1);
+			this.match(TrinoSqlParser.T__1);
 			this.state = 1544;
 			this.identifier();
 			this.state = 1549;
@@ -6304,7 +6304,7 @@ export default class trinoSqlParserParser extends Parser {
 				{
 				{
 				this.state = 1545;
-				this.match(trinoSqlParserParser.T__3);
+				this.match(TrinoSqlParser.T__3);
 				this.state = 1546;
 				this.identifier();
 				}
@@ -6314,7 +6314,7 @@ export default class trinoSqlParserParser extends Parser {
 				_la = this._input.LA(1);
 			}
 			this.state = 1552;
-			this.match(trinoSqlParserParser.T__2);
+			this.match(TrinoSqlParser.T__2);
 			}
 		}
 		catch (re) {
@@ -6334,7 +6334,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public relationPrimary(): RelationPrimaryContext {
 		let localctx: RelationPrimaryContext = new RelationPrimaryContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 92, trinoSqlParserParser.RULE_relationPrimary);
+		this.enterRule(localctx, 92, TrinoSqlParser.RULE_relationPrimary);
 		let _la: number;
 		try {
 			this.state = 1583;
@@ -6353,11 +6353,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1555;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1556;
 				this.query();
 				this.state = 1557;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 3:
@@ -6365,9 +6365,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 1559;
-				this.match(trinoSqlParserParser.UNNEST);
+				this.match(TrinoSqlParser.UNNEST);
 				this.state = 1560;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1561;
 				this.expression();
 				this.state = 1566;
@@ -6377,7 +6377,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1562;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1563;
 					this.expression();
 					}
@@ -6387,16 +6387,16 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 1569;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				this.state = 1572;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 205, this._ctx) ) {
 				case 1:
 					{
 					this.state = 1570;
-					this.match(trinoSqlParserParser.WITH);
+					this.match(TrinoSqlParser.WITH);
 					this.state = 1571;
-					this.match(trinoSqlParserParser.ORDINALITY);
+					this.match(TrinoSqlParser.ORDINALITY);
 					}
 					break;
 				}
@@ -6407,13 +6407,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 1574;
-				this.match(trinoSqlParserParser.LATERAL);
+				this.match(TrinoSqlParser.LATERAL);
 				this.state = 1575;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1576;
 				this.query();
 				this.state = 1577;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 5:
@@ -6421,11 +6421,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 1579;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1580;
 				this.relation(0);
 				this.state = 1581;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			}
@@ -6447,7 +6447,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public expression(): ExpressionContext {
 		let localctx: ExpressionContext = new ExpressionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 94, trinoSqlParserParser.RULE_expression);
+		this.enterRule(localctx, 94, TrinoSqlParser.RULE_expression);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
@@ -6483,7 +6483,7 @@ export default class trinoSqlParserParser extends Parser {
 		let localctx: BooleanExpressionContext = new BooleanExpressionContext(this, this._ctx, _parentState);
 		let _prevctx: BooleanExpressionContext = localctx;
 		let _startState: number = 96;
-		this.enterRecursionRule(localctx, 96, trinoSqlParserParser.RULE_booleanExpression, _p);
+		this.enterRecursionRule(localctx, 96, TrinoSqlParser.RULE_booleanExpression, _p);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
@@ -6707,7 +6707,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1592;
-				this.match(trinoSqlParserParser.NOT);
+				this.match(TrinoSqlParser.NOT);
 				this.state = 1593;
 				this.booleanExpression(3);
 				}
@@ -6733,13 +6733,13 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						localctx = new LogicalBinaryContext(this, new BooleanExpressionContext(this, _parentctx, _parentState));
 						(localctx as LogicalBinaryContext)._left = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_booleanExpression);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_booleanExpression);
 						this.state = 1596;
 						if (!(this.precpred(this._ctx, 2))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
 						}
 						this.state = 1597;
-						(localctx as LogicalBinaryContext)._operator = this.match(trinoSqlParserParser.AND);
+						(localctx as LogicalBinaryContext)._operator = this.match(TrinoSqlParser.AND);
 						this.state = 1598;
 						(localctx as LogicalBinaryContext)._right = this.booleanExpression(3);
 						}
@@ -6748,13 +6748,13 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						localctx = new LogicalBinaryContext(this, new BooleanExpressionContext(this, _parentctx, _parentState));
 						(localctx as LogicalBinaryContext)._left = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_booleanExpression);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_booleanExpression);
 						this.state = 1599;
 						if (!(this.precpred(this._ctx, 1))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 1)");
 						}
 						this.state = 1600;
-						(localctx as LogicalBinaryContext)._operator = this.match(trinoSqlParserParser.OR);
+						(localctx as LogicalBinaryContext)._operator = this.match(TrinoSqlParser.OR);
 						this.state = 1601;
 						(localctx as LogicalBinaryContext)._right = this.booleanExpression(2);
 						}
@@ -6785,7 +6785,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public predicate(value: ParserRuleContext): PredicateContext {
 		let localctx: PredicateContext = new PredicateContext(this, this._ctx, this.state, value);
-		this.enterRule(localctx, 98, trinoSqlParserParser.RULE_predicate);
+		this.enterRule(localctx, 98, TrinoSqlParser.RULE_predicate);
 		let _la: number;
 		try {
 			this.state = 1668;
@@ -6810,11 +6810,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 1611;
 				this.comparisonQuantifier();
 				this.state = 1612;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1613;
 				this.query();
 				this.state = 1614;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 3:
@@ -6827,16 +6827,16 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===147) {
 					{
 					this.state = 1616;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					}
 				}
 
 				this.state = 1619;
-				this.match(trinoSqlParserParser.BETWEEN);
+				this.match(TrinoSqlParser.BETWEEN);
 				this.state = 1620;
 				(localctx as BetweenContext)._lower = this.valueExpression(0);
 				this.state = 1621;
-				this.match(trinoSqlParserParser.AND);
+				this.match(TrinoSqlParser.AND);
 				this.state = 1622;
 				(localctx as BetweenContext)._upper = this.valueExpression(0);
 				}
@@ -6851,14 +6851,14 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===147) {
 					{
 					this.state = 1624;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					}
 				}
 
 				this.state = 1627;
-				this.match(trinoSqlParserParser.IN);
+				this.match(TrinoSqlParser.IN);
 				this.state = 1628;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1629;
 				this.expression();
 				this.state = 1634;
@@ -6868,7 +6868,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1630;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1631;
 					this.expression();
 					}
@@ -6878,7 +6878,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 1637;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 5:
@@ -6891,18 +6891,18 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===147) {
 					{
 					this.state = 1639;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					}
 				}
 
 				this.state = 1642;
-				this.match(trinoSqlParserParser.IN);
+				this.match(TrinoSqlParser.IN);
 				this.state = 1643;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1644;
 				this.query();
 				this.state = 1645;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 6:
@@ -6915,12 +6915,12 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===147) {
 					{
 					this.state = 1647;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					}
 				}
 
 				this.state = 1650;
-				this.match(trinoSqlParserParser.LIKE);
+				this.match(TrinoSqlParser.LIKE);
 				this.state = 1651;
 				(localctx as LikeContext)._pattern = this.valueExpression(0);
 				this.state = 1654;
@@ -6929,7 +6929,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 1652;
-					this.match(trinoSqlParserParser.ESCAPE);
+					this.match(TrinoSqlParser.ESCAPE);
 					this.state = 1653;
 					(localctx as LikeContext)._escape = this.valueExpression(0);
 					}
@@ -6942,19 +6942,19 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 7);
 				{
 				this.state = 1656;
-				this.match(trinoSqlParserParser.IS);
+				this.match(TrinoSqlParser.IS);
 				this.state = 1658;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===147) {
 					{
 					this.state = 1657;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					}
 				}
 
 				this.state = 1660;
-				this.match(trinoSqlParserParser.NULL);
+				this.match(TrinoSqlParser.NULL);
 				}
 				break;
 			case 8:
@@ -6962,21 +6962,21 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 8);
 				{
 				this.state = 1661;
-				this.match(trinoSqlParserParser.IS);
+				this.match(TrinoSqlParser.IS);
 				this.state = 1663;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===147) {
 					{
 					this.state = 1662;
-					this.match(trinoSqlParserParser.NOT);
+					this.match(TrinoSqlParser.NOT);
 					}
 				}
 
 				this.state = 1665;
-				this.match(trinoSqlParserParser.DISTINCT);
+				this.match(TrinoSqlParser.DISTINCT);
 				this.state = 1666;
-				this.match(trinoSqlParserParser.FROM);
+				this.match(TrinoSqlParser.FROM);
 				this.state = 1667;
 				(localctx as DistinctFromContext)._right = this.valueExpression(0);
 				}
@@ -7011,7 +7011,7 @@ export default class trinoSqlParserParser extends Parser {
 		let localctx: ValueExpressionContext = new ValueExpressionContext(this, this._ctx, _parentState);
 		let _prevctx: ValueExpressionContext = localctx;
 		let _startState: number = 100;
-		this.enterRecursionRule(localctx, 100, trinoSqlParserParser.RULE_valueExpression, _p);
+		this.enterRecursionRule(localctx, 100, TrinoSqlParser.RULE_valueExpression, _p);
 		let _la: number;
 		try {
 			let _alt: number;
@@ -7068,7 +7068,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						localctx = new ArithmeticBinaryContext(this, new ValueExpressionContext(this, _parentctx, _parentState));
 						(localctx as ArithmeticBinaryContext)._left = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_valueExpression);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_valueExpression);
 						this.state = 1676;
 						if (!(this.precpred(this._ctx, 3))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 3)");
@@ -7091,7 +7091,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						localctx = new ArithmeticBinaryContext(this, new ValueExpressionContext(this, _parentctx, _parentState));
 						(localctx as ArithmeticBinaryContext)._left = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_valueExpression);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_valueExpression);
 						this.state = 1679;
 						if (!(this.precpred(this._ctx, 2))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
@@ -7114,13 +7114,13 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						localctx = new ConcatenationContext(this, new ValueExpressionContext(this, _parentctx, _parentState));
 						(localctx as ConcatenationContext)._left = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_valueExpression);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_valueExpression);
 						this.state = 1682;
 						if (!(this.precpred(this._ctx, 1))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 1)");
 						}
 						this.state = 1683;
-						this.match(trinoSqlParserParser.CONCAT);
+						this.match(TrinoSqlParser.CONCAT);
 						this.state = 1684;
 						(localctx as ConcatenationContext)._right = this.valueExpression(2);
 						}
@@ -7128,13 +7128,13 @@ export default class trinoSqlParserParser extends Parser {
 					case 4:
 						{
 						localctx = new AtTimeZoneContext(this, new ValueExpressionContext(this, _parentctx, _parentState));
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_valueExpression);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_valueExpression);
 						this.state = 1685;
 						if (!(this.precpred(this._ctx, 5))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 5)");
 						}
 						this.state = 1686;
-						this.match(trinoSqlParserParser.AT);
+						this.match(TrinoSqlParser.AT);
 						this.state = 1687;
 						this.timeZoneSpecifier();
 						}
@@ -7176,7 +7176,7 @@ export default class trinoSqlParserParser extends Parser {
 		let localctx: PrimaryExpressionContext = new PrimaryExpressionContext(this, this._ctx, _parentState);
 		let _prevctx: PrimaryExpressionContext = localctx;
 		let _startState: number = 102;
-		this.enterRecursionRule(localctx, 102, trinoSqlParserParser.RULE_primaryExpression, _p);
+		this.enterRecursionRule(localctx, 102, TrinoSqlParser.RULE_primaryExpression, _p);
 		let _la: number;
 		try {
 			let _alt: number;
@@ -7192,7 +7192,7 @@ export default class trinoSqlParserParser extends Parser {
 				_prevctx = localctx;
 
 				this.state = 1694;
-				this.match(trinoSqlParserParser.NULL);
+				this.match(TrinoSqlParser.NULL);
 				}
 				break;
 			case 2:
@@ -7221,9 +7221,9 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1699;
-				this.match(trinoSqlParserParser.DOUBLE);
+				this.match(TrinoSqlParser.DOUBLE);
 				this.state = 1700;
-				this.match(trinoSqlParserParser.PRECISION);
+				this.match(TrinoSqlParser.PRECISION);
 				this.state = 1701;
 				this.string_();
 				}
@@ -7261,7 +7261,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1705;
-				this.match(trinoSqlParserParser.BINARY_LITERAL);
+				this.match(TrinoSqlParser.BINARY_LITERAL);
 				}
 				break;
 			case 9:
@@ -7270,7 +7270,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1706;
-				this.match(trinoSqlParserParser.QUESTION_MARK);
+				this.match(TrinoSqlParser.QUESTION_MARK);
 				}
 				break;
 			case 10:
@@ -7279,17 +7279,17 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1707;
-				this.match(trinoSqlParserParser.POSITION);
+				this.match(TrinoSqlParser.POSITION);
 				this.state = 1708;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1709;
 				this.valueExpression(0);
 				this.state = 1710;
-				this.match(trinoSqlParserParser.IN);
+				this.match(TrinoSqlParser.IN);
 				this.state = 1711;
 				this.valueExpression(0);
 				this.state = 1712;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 11:
@@ -7298,7 +7298,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1714;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1715;
 				this.expression();
 				this.state = 1718;
@@ -7308,7 +7308,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1716;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1717;
 					this.expression();
 					}
@@ -7318,7 +7318,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				} while (_la===4);
 				this.state = 1722;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 12:
@@ -7327,9 +7327,9 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1724;
-				this.match(trinoSqlParserParser.ROW);
+				this.match(TrinoSqlParser.ROW);
 				this.state = 1725;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1726;
 				this.expression();
 				this.state = 1731;
@@ -7339,7 +7339,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 1727;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1728;
 					this.expression();
 					}
@@ -7349,7 +7349,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 1734;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 13:
@@ -7360,11 +7360,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 1736;
 				this.qualifiedName();
 				this.state = 1737;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1738;
-				this.match(trinoSqlParserParser.ASTERISK);
+				this.match(TrinoSqlParser.ASTERISK);
 				this.state = 1739;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				this.state = 1741;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 225, this._ctx) ) {
@@ -7405,7 +7405,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 1749;
 				this.qualifiedName();
 				this.state = 1750;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1762;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -7430,7 +7430,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1755;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1756;
 						this.expression();
 						}
@@ -7448,9 +7448,9 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===158) {
 					{
 					this.state = 1764;
-					this.match(trinoSqlParserParser.ORDER);
+					this.match(TrinoSqlParser.ORDER);
 					this.state = 1765;
-					this.match(trinoSqlParserParser.BY);
+					this.match(TrinoSqlParser.BY);
 					this.state = 1766;
 					this.sortItem();
 					this.state = 1771;
@@ -7460,7 +7460,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1767;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1768;
 						this.sortItem();
 						}
@@ -7473,7 +7473,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1776;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				this.state = 1778;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 233, this._ctx) ) {
@@ -7525,7 +7525,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 1789;
 				this.identifier();
 				this.state = 1790;
-				this.match(trinoSqlParserParser.T__5);
+				this.match(TrinoSqlParser.T__5);
 				this.state = 1791;
 				this.expression();
 				}
@@ -7536,7 +7536,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1793;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1802;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -7551,7 +7551,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1795;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1796;
 						this.identifier();
 						}
@@ -7564,9 +7564,9 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1804;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				this.state = 1805;
-				this.match(trinoSqlParserParser.T__5);
+				this.match(TrinoSqlParser.T__5);
 				this.state = 1806;
 				this.expression();
 				}
@@ -7577,11 +7577,11 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1807;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1808;
 				this.query();
 				this.state = 1809;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 19:
@@ -7590,13 +7590,13 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1811;
-				this.match(trinoSqlParserParser.EXISTS);
+				this.match(TrinoSqlParser.EXISTS);
 				this.state = 1812;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1813;
 				this.query();
 				this.state = 1814;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 20:
@@ -7605,7 +7605,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1816;
-				this.match(trinoSqlParserParser.CASE);
+				this.match(TrinoSqlParser.CASE);
 				this.state = 1817;
 				(localctx as SimpleCaseContext)._operand = this.expression();
 				this.state = 1819;
@@ -7628,14 +7628,14 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===70) {
 					{
 					this.state = 1823;
-					this.match(trinoSqlParserParser.ELSE);
+					this.match(TrinoSqlParser.ELSE);
 					this.state = 1824;
 					(localctx as SimpleCaseContext)._elseExpression = this.expression();
 					}
 				}
 
 				this.state = 1827;
-				this.match(trinoSqlParserParser.END);
+				this.match(TrinoSqlParser.END);
 				}
 				break;
 			case 21:
@@ -7644,7 +7644,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1829;
-				this.match(trinoSqlParserParser.CASE);
+				this.match(TrinoSqlParser.CASE);
 				this.state = 1831;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -7665,14 +7665,14 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===70) {
 					{
 					this.state = 1835;
-					this.match(trinoSqlParserParser.ELSE);
+					this.match(TrinoSqlParser.ELSE);
 					this.state = 1836;
 					(localctx as SearchedCaseContext)._elseExpression = this.expression();
 					}
 				}
 
 				this.state = 1839;
-				this.match(trinoSqlParserParser.END);
+				this.match(TrinoSqlParser.END);
 				}
 				break;
 			case 22:
@@ -7681,17 +7681,17 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1841;
-				this.match(trinoSqlParserParser.CAST);
+				this.match(TrinoSqlParser.CAST);
 				this.state = 1842;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1843;
 				this.expression();
 				this.state = 1844;
-				this.match(trinoSqlParserParser.AS);
+				this.match(TrinoSqlParser.AS);
 				this.state = 1845;
 				this.type_(0);
 				this.state = 1846;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 23:
@@ -7700,17 +7700,17 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1848;
-				this.match(trinoSqlParserParser.TRY_CAST);
+				this.match(TrinoSqlParser.TRY_CAST);
 				this.state = 1849;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1850;
 				this.expression();
 				this.state = 1851;
-				this.match(trinoSqlParserParser.AS);
+				this.match(TrinoSqlParser.AS);
 				this.state = 1852;
 				this.type_(0);
 				this.state = 1853;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 24:
@@ -7719,9 +7719,9 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1855;
-				this.match(trinoSqlParserParser.ARRAY);
+				this.match(TrinoSqlParser.ARRAY);
 				this.state = 1856;
-				this.match(trinoSqlParserParser.T__6);
+				this.match(TrinoSqlParser.T__6);
 				this.state = 1865;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -7736,7 +7736,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1858;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1859;
 						this.expression();
 						}
@@ -7749,7 +7749,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1867;
-				this.match(trinoSqlParserParser.T__7);
+				this.match(TrinoSqlParser.T__7);
 				}
 				break;
 			case 25:
@@ -7767,7 +7767,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1869;
-				(localctx as SpecialDateTimeFunctionContext)._name = this.match(trinoSqlParserParser.CURRENT_DATE);
+				(localctx as SpecialDateTimeFunctionContext)._name = this.match(TrinoSqlParser.CURRENT_DATE);
 				}
 				break;
 			case 27:
@@ -7776,18 +7776,18 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1870;
-				(localctx as SpecialDateTimeFunctionContext)._name = this.match(trinoSqlParserParser.CURRENT_TIME);
+				(localctx as SpecialDateTimeFunctionContext)._name = this.match(TrinoSqlParser.CURRENT_TIME);
 				this.state = 1874;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 244, this._ctx) ) {
 				case 1:
 					{
 					this.state = 1871;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 1872;
-					(localctx as SpecialDateTimeFunctionContext)._precision = this.match(trinoSqlParserParser.INTEGER_VALUE);
+					(localctx as SpecialDateTimeFunctionContext)._precision = this.match(TrinoSqlParser.INTEGER_VALUE);
 					this.state = 1873;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -7799,18 +7799,18 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1876;
-				(localctx as SpecialDateTimeFunctionContext)._name = this.match(trinoSqlParserParser.CURRENT_TIMESTAMP);
+				(localctx as SpecialDateTimeFunctionContext)._name = this.match(TrinoSqlParser.CURRENT_TIMESTAMP);
 				this.state = 1880;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 245, this._ctx) ) {
 				case 1:
 					{
 					this.state = 1877;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 1878;
-					(localctx as SpecialDateTimeFunctionContext)._precision = this.match(trinoSqlParserParser.INTEGER_VALUE);
+					(localctx as SpecialDateTimeFunctionContext)._precision = this.match(TrinoSqlParser.INTEGER_VALUE);
 					this.state = 1879;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -7822,18 +7822,18 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1882;
-				(localctx as SpecialDateTimeFunctionContext)._name = this.match(trinoSqlParserParser.LOCALTIME);
+				(localctx as SpecialDateTimeFunctionContext)._name = this.match(TrinoSqlParser.LOCALTIME);
 				this.state = 1886;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 246, this._ctx) ) {
 				case 1:
 					{
 					this.state = 1883;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 1884;
-					(localctx as SpecialDateTimeFunctionContext)._precision = this.match(trinoSqlParserParser.INTEGER_VALUE);
+					(localctx as SpecialDateTimeFunctionContext)._precision = this.match(TrinoSqlParser.INTEGER_VALUE);
 					this.state = 1885;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -7845,18 +7845,18 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1888;
-				(localctx as SpecialDateTimeFunctionContext)._name = this.match(trinoSqlParserParser.LOCALTIMESTAMP);
+				(localctx as SpecialDateTimeFunctionContext)._name = this.match(TrinoSqlParser.LOCALTIMESTAMP);
 				this.state = 1892;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 247, this._ctx) ) {
 				case 1:
 					{
 					this.state = 1889;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 1890;
-					(localctx as SpecialDateTimeFunctionContext)._precision = this.match(trinoSqlParserParser.INTEGER_VALUE);
+					(localctx as SpecialDateTimeFunctionContext)._precision = this.match(TrinoSqlParser.INTEGER_VALUE);
 					this.state = 1891;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -7868,7 +7868,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1894;
-				(localctx as CurrentUserContext)._name = this.match(trinoSqlParserParser.CURRENT_USER);
+				(localctx as CurrentUserContext)._name = this.match(TrinoSqlParser.CURRENT_USER);
 				}
 				break;
 			case 32:
@@ -7877,7 +7877,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1895;
-				(localctx as CurrentCatalogContext)._name = this.match(trinoSqlParserParser.CURRENT_CATALOG);
+				(localctx as CurrentCatalogContext)._name = this.match(TrinoSqlParser.CURRENT_CATALOG);
 				}
 				break;
 			case 33:
@@ -7886,7 +7886,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1896;
-				(localctx as CurrentSchemaContext)._name = this.match(trinoSqlParserParser.CURRENT_SCHEMA);
+				(localctx as CurrentSchemaContext)._name = this.match(TrinoSqlParser.CURRENT_SCHEMA);
 				}
 				break;
 			case 34:
@@ -7895,7 +7895,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1897;
-				(localctx as CurrentPathContext)._name = this.match(trinoSqlParserParser.CURRENT_PATH);
+				(localctx as CurrentPathContext)._name = this.match(TrinoSqlParser.CURRENT_PATH);
 				}
 				break;
 			case 35:
@@ -7904,13 +7904,13 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1898;
-				this.match(trinoSqlParserParser.SUBSTRING);
+				this.match(TrinoSqlParser.SUBSTRING);
 				this.state = 1899;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1900;
 				this.valueExpression(0);
 				this.state = 1901;
-				this.match(trinoSqlParserParser.FROM);
+				this.match(TrinoSqlParser.FROM);
 				this.state = 1902;
 				this.valueExpression(0);
 				this.state = 1905;
@@ -7919,14 +7919,14 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===86) {
 					{
 					this.state = 1903;
-					this.match(trinoSqlParserParser.FOR);
+					this.match(TrinoSqlParser.FOR);
 					this.state = 1904;
 					this.valueExpression(0);
 					}
 				}
 
 				this.state = 1907;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 36:
@@ -7935,9 +7935,9 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1909;
-				this.match(trinoSqlParserParser.NORMALIZE);
+				this.match(TrinoSqlParser.NORMALIZE);
 				this.state = 1910;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1911;
 				this.valueExpression(0);
 				this.state = 1914;
@@ -7946,14 +7946,14 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===4) {
 					{
 					this.state = 1912;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 1913;
 					this.normalForm();
 					}
 				}
 
 				this.state = 1916;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 37:
@@ -7962,17 +7962,17 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1918;
-				this.match(trinoSqlParserParser.EXTRACT);
+				this.match(TrinoSqlParser.EXTRACT);
 				this.state = 1919;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1920;
 				this.identifier();
 				this.state = 1921;
-				this.match(trinoSqlParserParser.FROM);
+				this.match(TrinoSqlParser.FROM);
 				this.state = 1922;
 				this.valueExpression(0);
 				this.state = 1923;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 38:
@@ -7981,11 +7981,11 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1925;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1926;
 				this.expression();
 				this.state = 1927;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 39:
@@ -7994,9 +7994,9 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 1929;
-				this.match(trinoSqlParserParser.GROUPING);
+				this.match(TrinoSqlParser.GROUPING);
 				this.state = 1930;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 1939;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -8011,7 +8011,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 1932;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 1933;
 						this.qualifiedName();
 						}
@@ -8024,7 +8024,7 @@ export default class trinoSqlParserParser extends Parser {
 				}
 
 				this.state = 1941;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			}
@@ -8046,30 +8046,30 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						localctx = new SubscriptContext(this, new PrimaryExpressionContext(this, _parentctx, _parentState));
 						(localctx as SubscriptContext)._value = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_primaryExpression);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_primaryExpression);
 						this.state = 1944;
 						if (!(this.precpred(this._ctx, 17))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 17)");
 						}
 						this.state = 1945;
-						this.match(trinoSqlParserParser.T__6);
+						this.match(TrinoSqlParser.T__6);
 						this.state = 1946;
 						(localctx as SubscriptContext)._index = this.valueExpression(0);
 						this.state = 1947;
-						this.match(trinoSqlParserParser.T__7);
+						this.match(TrinoSqlParser.T__7);
 						}
 						break;
 					case 2:
 						{
 						localctx = new DereferenceContext(this, new PrimaryExpressionContext(this, _parentctx, _parentState));
 						(localctx as DereferenceContext)._base = _prevctx;
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_primaryExpression);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_primaryExpression);
 						this.state = 1949;
 						if (!(this.precpred(this._ctx, 15))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 15)");
 						}
 						this.state = 1950;
-						this.match(trinoSqlParserParser.T__0);
+						this.match(TrinoSqlParser.T__0);
 						this.state = 1951;
 						(localctx as DereferenceContext)._fieldName = this.identifier();
 						}
@@ -8100,7 +8100,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public processingMode(): ProcessingModeContext {
 		let localctx: ProcessingModeContext = new ProcessingModeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 104, trinoSqlParserParser.RULE_processingMode);
+		this.enterRule(localctx, 104, TrinoSqlParser.RULE_processingMode);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -8133,7 +8133,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public nullTreatment(): NullTreatmentContext {
 		let localctx: NullTreatmentContext = new NullTreatmentContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 106, trinoSqlParserParser.RULE_nullTreatment);
+		this.enterRule(localctx, 106, TrinoSqlParser.RULE_nullTreatment);
 		try {
 			this.state = 1963;
 			this._errHandler.sync(this);
@@ -8142,18 +8142,18 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1959;
-				this.match(trinoSqlParserParser.IGNORE);
+				this.match(TrinoSqlParser.IGNORE);
 				this.state = 1960;
-				this.match(trinoSqlParserParser.NULLS);
+				this.match(TrinoSqlParser.NULLS);
 				}
 				break;
 			case 184:
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1961;
-				this.match(trinoSqlParserParser.RESPECT);
+				this.match(TrinoSqlParser.RESPECT);
 				this.state = 1962;
-				this.match(trinoSqlParserParser.NULLS);
+				this.match(TrinoSqlParser.NULLS);
 				}
 				break;
 			default:
@@ -8177,7 +8177,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public string_(): StringContext {
 		let localctx: StringContext = new StringContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 108, trinoSqlParserParser.RULE_string);
+		this.enterRule(localctx, 108, TrinoSqlParser.RULE_string);
 		try {
 			this.state = 1971;
 			this._errHandler.sync(this);
@@ -8187,7 +8187,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1965;
-				this.match(trinoSqlParserParser.STRING);
+				this.match(TrinoSqlParser.STRING);
 				}
 				break;
 			case 263:
@@ -8195,16 +8195,16 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1966;
-				this.match(trinoSqlParserParser.UNICODE_STRING);
+				this.match(TrinoSqlParser.UNICODE_STRING);
 				this.state = 1969;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 256, this._ctx) ) {
 				case 1:
 					{
 					this.state = 1967;
-					this.match(trinoSqlParserParser.UESCAPE);
+					this.match(TrinoSqlParser.UESCAPE);
 					this.state = 1968;
-					this.match(trinoSqlParserParser.STRING);
+					this.match(TrinoSqlParser.STRING);
 					}
 					break;
 				}
@@ -8231,7 +8231,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public timeZoneSpecifier(): TimeZoneSpecifierContext {
 		let localctx: TimeZoneSpecifierContext = new TimeZoneSpecifierContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 110, trinoSqlParserParser.RULE_timeZoneSpecifier);
+		this.enterRule(localctx, 110, TrinoSqlParser.RULE_timeZoneSpecifier);
 		try {
 			this.state = 1979;
 			this._errHandler.sync(this);
@@ -8241,9 +8241,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 1973;
-				this.match(trinoSqlParserParser.TIME);
+				this.match(TrinoSqlParser.TIME);
 				this.state = 1974;
-				this.match(trinoSqlParserParser.ZONE);
+				this.match(TrinoSqlParser.ZONE);
 				this.state = 1975;
 				this.interval();
 				}
@@ -8253,9 +8253,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 1976;
-				this.match(trinoSqlParserParser.TIME);
+				this.match(TrinoSqlParser.TIME);
 				this.state = 1977;
-				this.match(trinoSqlParserParser.ZONE);
+				this.match(TrinoSqlParser.ZONE);
 				this.state = 1978;
 				this.string_();
 				}
@@ -8279,7 +8279,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public comparisonOperator(): ComparisonOperatorContext {
 		let localctx: ComparisonOperatorContext = new ComparisonOperatorContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 112, trinoSqlParserParser.RULE_comparisonOperator);
+		this.enterRule(localctx, 112, TrinoSqlParser.RULE_comparisonOperator);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -8312,7 +8312,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public comparisonQuantifier(): ComparisonQuantifierContext {
 		let localctx: ComparisonQuantifierContext = new ComparisonQuantifierContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 114, trinoSqlParserParser.RULE_comparisonQuantifier);
+		this.enterRule(localctx, 114, TrinoSqlParser.RULE_comparisonQuantifier);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -8345,7 +8345,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public booleanValue(): BooleanValueContext {
 		let localctx: BooleanValueContext = new BooleanValueContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 116, trinoSqlParserParser.RULE_booleanValue);
+		this.enterRule(localctx, 116, TrinoSqlParser.RULE_booleanValue);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -8378,13 +8378,13 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public interval(): IntervalContext {
 		let localctx: IntervalContext = new IntervalContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 118, trinoSqlParserParser.RULE_interval);
+		this.enterRule(localctx, 118, TrinoSqlParser.RULE_interval);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 1987;
-			this.match(trinoSqlParserParser.INTERVAL);
+			this.match(TrinoSqlParser.INTERVAL);
 			this.state = 1989;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
@@ -8413,7 +8413,7 @@ export default class trinoSqlParserParser extends Parser {
 			case 1:
 				{
 				this.state = 1993;
-				this.match(trinoSqlParserParser.TO);
+				this.match(TrinoSqlParser.TO);
 				this.state = 1994;
 				localctx._to = this.intervalField();
 				}
@@ -8438,7 +8438,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public intervalField(): IntervalFieldContext {
 		let localctx: IntervalFieldContext = new IntervalFieldContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 120, trinoSqlParserParser.RULE_intervalField);
+		this.enterRule(localctx, 120, TrinoSqlParser.RULE_intervalField);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -8471,7 +8471,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public normalForm(): NormalFormContext {
 		let localctx: NormalFormContext = new NormalFormContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 122, trinoSqlParserParser.RULE_normalForm);
+		this.enterRule(localctx, 122, TrinoSqlParser.RULE_normalForm);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -8515,7 +8515,7 @@ export default class trinoSqlParserParser extends Parser {
 		let localctx: TypeContext = new TypeContext(this, this._ctx, _parentState);
 		let _prevctx: TypeContext = localctx;
 		let _startState: number = 124;
-		this.enterRecursionRule(localctx, 124, trinoSqlParserParser.RULE_type, _p);
+		this.enterRecursionRule(localctx, 124, TrinoSqlParser.RULE_type, _p);
 		let _la: number;
 		try {
 			let _alt: number;
@@ -8531,9 +8531,9 @@ export default class trinoSqlParserParser extends Parser {
 				_prevctx = localctx;
 
 				this.state = 2002;
-				this.match(trinoSqlParserParser.ROW);
+				this.match(TrinoSqlParser.ROW);
 				this.state = 2003;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 2004;
 				this.rowField();
 				this.state = 2009;
@@ -8543,7 +8543,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 2005;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 2006;
 					this.rowField();
 					}
@@ -8553,7 +8553,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 2012;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 2:
@@ -8562,7 +8562,7 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 2014;
-				this.match(trinoSqlParserParser.INTERVAL);
+				this.match(TrinoSqlParser.INTERVAL);
 				this.state = 2015;
 				(localctx as IntervalTypeContext)._from_ = this.intervalField();
 				this.state = 2018;
@@ -8571,7 +8571,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 2016;
-					this.match(trinoSqlParserParser.TO);
+					this.match(TrinoSqlParser.TO);
 					this.state = 2017;
 					(localctx as IntervalTypeContext)._to = this.intervalField();
 					}
@@ -8585,18 +8585,18 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 2020;
-				(localctx as DateTimeTypeContext)._base = this.match(trinoSqlParserParser.TIMESTAMP);
+				(localctx as DateTimeTypeContext)._base = this.match(TrinoSqlParser.TIMESTAMP);
 				this.state = 2025;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 263, this._ctx) ) {
 				case 1:
 					{
 					this.state = 2021;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 2022;
 					(localctx as DateTimeTypeContext)._precision = this.typeParameter();
 					this.state = 2023;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -8606,11 +8606,11 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 2027;
-					this.match(trinoSqlParserParser.WITHOUT);
+					this.match(TrinoSqlParser.WITHOUT);
 					this.state = 2028;
-					this.match(trinoSqlParserParser.TIME);
+					this.match(TrinoSqlParser.TIME);
 					this.state = 2029;
-					this.match(trinoSqlParserParser.ZONE);
+					this.match(TrinoSqlParser.ZONE);
 					}
 					break;
 				}
@@ -8622,27 +8622,27 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 2032;
-				(localctx as DateTimeTypeContext)._base = this.match(trinoSqlParserParser.TIMESTAMP);
+				(localctx as DateTimeTypeContext)._base = this.match(TrinoSqlParser.TIMESTAMP);
 				this.state = 2037;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===2) {
 					{
 					this.state = 2033;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 2034;
 					(localctx as DateTimeTypeContext)._precision = this.typeParameter();
 					this.state = 2035;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 				}
 
 				this.state = 2039;
-				this.match(trinoSqlParserParser.WITH);
+				this.match(TrinoSqlParser.WITH);
 				this.state = 2040;
-				this.match(trinoSqlParserParser.TIME);
+				this.match(TrinoSqlParser.TIME);
 				this.state = 2041;
-				this.match(trinoSqlParserParser.ZONE);
+				this.match(TrinoSqlParser.ZONE);
 				}
 				break;
 			case 5:
@@ -8651,18 +8651,18 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 2042;
-				(localctx as DateTimeTypeContext)._base = this.match(trinoSqlParserParser.TIME);
+				(localctx as DateTimeTypeContext)._base = this.match(TrinoSqlParser.TIME);
 				this.state = 2047;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 266, this._ctx) ) {
 				case 1:
 					{
 					this.state = 2043;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 2044;
 					(localctx as DateTimeTypeContext)._precision = this.typeParameter();
 					this.state = 2045;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -8672,11 +8672,11 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 2049;
-					this.match(trinoSqlParserParser.WITHOUT);
+					this.match(TrinoSqlParser.WITHOUT);
 					this.state = 2050;
-					this.match(trinoSqlParserParser.TIME);
+					this.match(TrinoSqlParser.TIME);
 					this.state = 2051;
-					this.match(trinoSqlParserParser.ZONE);
+					this.match(TrinoSqlParser.ZONE);
 					}
 					break;
 				}
@@ -8688,27 +8688,27 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 2054;
-				(localctx as DateTimeTypeContext)._base = this.match(trinoSqlParserParser.TIME);
+				(localctx as DateTimeTypeContext)._base = this.match(TrinoSqlParser.TIME);
 				this.state = 2059;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===2) {
 					{
 					this.state = 2055;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 2056;
 					(localctx as DateTimeTypeContext)._precision = this.typeParameter();
 					this.state = 2057;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 				}
 
 				this.state = 2061;
-				this.match(trinoSqlParserParser.WITH);
+				this.match(TrinoSqlParser.WITH);
 				this.state = 2062;
-				this.match(trinoSqlParserParser.TIME);
+				this.match(TrinoSqlParser.TIME);
 				this.state = 2063;
-				this.match(trinoSqlParserParser.ZONE);
+				this.match(TrinoSqlParser.ZONE);
 				}
 				break;
 			case 7:
@@ -8717,9 +8717,9 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 2064;
-				this.match(trinoSqlParserParser.DOUBLE);
+				this.match(TrinoSqlParser.DOUBLE);
 				this.state = 2065;
-				this.match(trinoSqlParserParser.PRECISION);
+				this.match(TrinoSqlParser.PRECISION);
 				}
 				break;
 			case 8:
@@ -8728,13 +8728,13 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 2066;
-				this.match(trinoSqlParserParser.ARRAY);
+				this.match(TrinoSqlParser.ARRAY);
 				this.state = 2067;
-				this.match(trinoSqlParserParser.LT);
+				this.match(TrinoSqlParser.LT);
 				this.state = 2068;
 				this.type_(0);
 				this.state = 2069;
-				this.match(trinoSqlParserParser.GT);
+				this.match(TrinoSqlParser.GT);
 				}
 				break;
 			case 9:
@@ -8743,17 +8743,17 @@ export default class trinoSqlParserParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 				this.state = 2071;
-				this.match(trinoSqlParserParser.MAP);
+				this.match(TrinoSqlParser.MAP);
 				this.state = 2072;
-				this.match(trinoSqlParserParser.LT);
+				this.match(TrinoSqlParser.LT);
 				this.state = 2073;
 				(localctx as LegacyMapTypeContext)._keyType = this.type_(0);
 				this.state = 2074;
-				this.match(trinoSqlParserParser.T__3);
+				this.match(TrinoSqlParser.T__3);
 				this.state = 2075;
 				(localctx as LegacyMapTypeContext)._valueType = this.type_(0);
 				this.state = 2076;
-				this.match(trinoSqlParserParser.GT);
+				this.match(TrinoSqlParser.GT);
 				}
 				break;
 			case 10:
@@ -8769,7 +8769,7 @@ export default class trinoSqlParserParser extends Parser {
 				case 1:
 					{
 					this.state = 2079;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 2080;
 					this.typeParameter();
 					this.state = 2085;
@@ -8779,7 +8779,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 2081;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 2082;
 						this.typeParameter();
 						}
@@ -8789,7 +8789,7 @@ export default class trinoSqlParserParser extends Parser {
 						_la = this._input.LA(1);
 					}
 					this.state = 2088;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 					break;
 				}
@@ -8809,24 +8809,24 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					localctx = new ArrayTypeContext(this, new TypeContext(this, _parentctx, _parentState));
-					this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_type);
+					this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_type);
 					this.state = 2094;
 					if (!(this.precpred(this._ctx, 2))) {
 						throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
 					}
 					this.state = 2095;
-					this.match(trinoSqlParserParser.ARRAY);
+					this.match(TrinoSqlParser.ARRAY);
 					this.state = 2099;
 					this._errHandler.sync(this);
 					switch ( this._interp.adaptivePredict(this._input, 272, this._ctx) ) {
 					case 1:
 						{
 						this.state = 2096;
-						this.match(trinoSqlParserParser.T__6);
+						this.match(TrinoSqlParser.T__6);
 						this.state = 2097;
-						this.match(trinoSqlParserParser.INTEGER_VALUE);
+						this.match(TrinoSqlParser.INTEGER_VALUE);
 						this.state = 2098;
-						this.match(trinoSqlParserParser.T__7);
+						this.match(TrinoSqlParser.T__7);
 						}
 						break;
 					}
@@ -8856,7 +8856,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public rowField(): RowFieldContext {
 		let localctx: RowFieldContext = new RowFieldContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 126, trinoSqlParserParser.RULE_rowField);
+		this.enterRule(localctx, 126, TrinoSqlParser.RULE_rowField);
 		try {
 			this.state = 2110;
 			this._errHandler.sync(this);
@@ -8896,7 +8896,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public typeParameter(): TypeParameterContext {
 		let localctx: TypeParameterContext = new TypeParameterContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 128, trinoSqlParserParser.RULE_typeParameter);
+		this.enterRule(localctx, 128, TrinoSqlParser.RULE_typeParameter);
 		try {
 			this.state = 2114;
 			this._errHandler.sync(this);
@@ -8905,7 +8905,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2112;
-				this.match(trinoSqlParserParser.INTEGER_VALUE);
+				this.match(TrinoSqlParser.INTEGER_VALUE);
 				}
 				break;
 			case 17:
@@ -9098,16 +9098,16 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public whenClause(): WhenClauseContext {
 		let localctx: WhenClauseContext = new WhenClauseContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 130, trinoSqlParserParser.RULE_whenClause);
+		this.enterRule(localctx, 130, TrinoSqlParser.RULE_whenClause);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 2116;
-			this.match(trinoSqlParserParser.WHEN);
+			this.match(TrinoSqlParser.WHEN);
 			this.state = 2117;
 			localctx._condition = this.expression();
 			this.state = 2118;
-			this.match(trinoSqlParserParser.THEN);
+			this.match(TrinoSqlParser.THEN);
 			this.state = 2119;
 			localctx._result = this.expression();
 			}
@@ -9129,20 +9129,20 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public filter(): FilterContext {
 		let localctx: FilterContext = new FilterContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 132, trinoSqlParserParser.RULE_filter);
+		this.enterRule(localctx, 132, TrinoSqlParser.RULE_filter);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 2121;
-			this.match(trinoSqlParserParser.FILTER);
+			this.match(TrinoSqlParser.FILTER);
 			this.state = 2122;
-			this.match(trinoSqlParserParser.T__1);
+			this.match(TrinoSqlParser.T__1);
 			this.state = 2123;
-			this.match(trinoSqlParserParser.WHERE);
+			this.match(TrinoSqlParser.WHERE);
 			this.state = 2124;
 			this.booleanExpression(0);
 			this.state = 2125;
-			this.match(trinoSqlParserParser.T__2);
+			this.match(TrinoSqlParser.T__2);
 			}
 		}
 		catch (re) {
@@ -9162,7 +9162,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public mergeCase(): MergeCaseContext {
 		let localctx: MergeCaseContext = new MergeCaseContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 134, trinoSqlParserParser.RULE_mergeCase);
+		this.enterRule(localctx, 134, TrinoSqlParser.RULE_mergeCase);
 		let _la: number;
 		try {
 			this.state = 2191;
@@ -9173,32 +9173,32 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2127;
-				this.match(trinoSqlParserParser.WHEN);
+				this.match(TrinoSqlParser.WHEN);
 				this.state = 2128;
-				this.match(trinoSqlParserParser.MATCHED);
+				this.match(TrinoSqlParser.MATCHED);
 				this.state = 2131;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===23) {
 					{
 					this.state = 2129;
-					this.match(trinoSqlParserParser.AND);
+					this.match(TrinoSqlParser.AND);
 					this.state = 2130;
 					(localctx as MergeUpdateContext)._condition = this.expression();
 					}
 				}
 
 				this.state = 2133;
-				this.match(trinoSqlParserParser.THEN);
+				this.match(TrinoSqlParser.THEN);
 				this.state = 2134;
-				this.match(trinoSqlParserParser.UPDATE);
+				this.match(TrinoSqlParser.UPDATE);
 				this.state = 2135;
-				this.match(trinoSqlParserParser.SET);
+				this.match(TrinoSqlParser.SET);
 				this.state = 2136;
 				(localctx as MergeUpdateContext)._identifier = this.identifier();
 				(localctx as MergeUpdateContext)._targets.push((localctx as MergeUpdateContext)._identifier);
 				this.state = 2137;
-				this.match(trinoSqlParserParser.EQ);
+				this.match(TrinoSqlParser.EQ);
 				this.state = 2138;
 				(localctx as MergeUpdateContext)._expression = this.expression();
 				(localctx as MergeUpdateContext)._values.push((localctx as MergeUpdateContext)._expression);
@@ -9209,12 +9209,12 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 2139;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 2140;
 					(localctx as MergeUpdateContext)._identifier = this.identifier();
 					(localctx as MergeUpdateContext)._targets.push((localctx as MergeUpdateContext)._identifier);
 					this.state = 2141;
-					this.match(trinoSqlParserParser.EQ);
+					this.match(TrinoSqlParser.EQ);
 					this.state = 2142;
 					(localctx as MergeUpdateContext)._expression = this.expression();
 					(localctx as MergeUpdateContext)._values.push((localctx as MergeUpdateContext)._expression);
@@ -9231,25 +9231,25 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2149;
-				this.match(trinoSqlParserParser.WHEN);
+				this.match(TrinoSqlParser.WHEN);
 				this.state = 2150;
-				this.match(trinoSqlParserParser.MATCHED);
+				this.match(TrinoSqlParser.MATCHED);
 				this.state = 2153;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===23) {
 					{
 					this.state = 2151;
-					this.match(trinoSqlParserParser.AND);
+					this.match(TrinoSqlParser.AND);
 					this.state = 2152;
 					(localctx as MergeDeleteContext)._condition = this.expression();
 					}
 				}
 
 				this.state = 2155;
-				this.match(trinoSqlParserParser.THEN);
+				this.match(TrinoSqlParser.THEN);
 				this.state = 2156;
-				this.match(trinoSqlParserParser.DELETE);
+				this.match(TrinoSqlParser.DELETE);
 				}
 				break;
 			case 3:
@@ -9257,34 +9257,34 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2157;
-				this.match(trinoSqlParserParser.WHEN);
+				this.match(TrinoSqlParser.WHEN);
 				this.state = 2158;
-				this.match(trinoSqlParserParser.NOT);
+				this.match(TrinoSqlParser.NOT);
 				this.state = 2159;
-				this.match(trinoSqlParserParser.MATCHED);
+				this.match(TrinoSqlParser.MATCHED);
 				this.state = 2162;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===23) {
 					{
 					this.state = 2160;
-					this.match(trinoSqlParserParser.AND);
+					this.match(TrinoSqlParser.AND);
 					this.state = 2161;
 					(localctx as MergeInsertContext)._condition = this.expression();
 					}
 				}
 
 				this.state = 2164;
-				this.match(trinoSqlParserParser.THEN);
+				this.match(TrinoSqlParser.THEN);
 				this.state = 2165;
-				this.match(trinoSqlParserParser.INSERT);
+				this.match(TrinoSqlParser.INSERT);
 				this.state = 2177;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===2) {
 					{
 					this.state = 2166;
-					this.match(trinoSqlParserParser.T__1);
+					this.match(TrinoSqlParser.T__1);
 					this.state = 2167;
 					(localctx as MergeInsertContext)._identifier = this.identifier();
 					(localctx as MergeInsertContext)._targets.push((localctx as MergeInsertContext)._identifier);
@@ -9295,7 +9295,7 @@ export default class trinoSqlParserParser extends Parser {
 						{
 						{
 						this.state = 2168;
-						this.match(trinoSqlParserParser.T__3);
+						this.match(TrinoSqlParser.T__3);
 						this.state = 2169;
 						(localctx as MergeInsertContext)._identifier = this.identifier();
 						(localctx as MergeInsertContext)._targets.push((localctx as MergeInsertContext)._identifier);
@@ -9306,14 +9306,14 @@ export default class trinoSqlParserParser extends Parser {
 						_la = this._input.LA(1);
 					}
 					this.state = 2175;
-					this.match(trinoSqlParserParser.T__2);
+					this.match(TrinoSqlParser.T__2);
 					}
 				}
 
 				this.state = 2179;
-				this.match(trinoSqlParserParser.VALUES);
+				this.match(TrinoSqlParser.VALUES);
 				this.state = 2180;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 2181;
 				(localctx as MergeInsertContext)._expression = this.expression();
 				(localctx as MergeInsertContext)._values.push((localctx as MergeInsertContext)._expression);
@@ -9324,7 +9324,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 2182;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 2183;
 					(localctx as MergeInsertContext)._expression = this.expression();
 					(localctx as MergeInsertContext)._values.push((localctx as MergeInsertContext)._expression);
@@ -9335,7 +9335,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 2189;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			}
@@ -9357,12 +9357,12 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public over(): OverContext {
 		let localctx: OverContext = new OverContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 136, trinoSqlParserParser.RULE_over);
+		this.enterRule(localctx, 136, TrinoSqlParser.RULE_over);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 2193;
-			this.match(trinoSqlParserParser.OVER);
+			this.match(TrinoSqlParser.OVER);
 			this.state = 2199;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
@@ -9537,11 +9537,11 @@ export default class trinoSqlParserParser extends Parser {
 			case 2:
 				{
 				this.state = 2195;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 2196;
 				this.windowSpecification();
 				this.state = 2197;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			default:
@@ -9566,7 +9566,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public windowFrame(): WindowFrameContext {
 		let localctx: WindowFrameContext = new WindowFrameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 138, trinoSqlParserParser.RULE_windowFrame);
+		this.enterRule(localctx, 138, TrinoSqlParser.RULE_windowFrame);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -9577,7 +9577,7 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===134) {
 				{
 				this.state = 2201;
-				this.match(trinoSqlParserParser.MEASURES);
+				this.match(TrinoSqlParser.MEASURES);
 				this.state = 2202;
 				this.measureDefinition();
 				this.state = 2207;
@@ -9587,7 +9587,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 2203;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 2204;
 					this.measureDefinition();
 					}
@@ -9607,9 +9607,9 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===19) {
 				{
 				this.state = 2213;
-				this.match(trinoSqlParserParser.AFTER);
+				this.match(TrinoSqlParser.AFTER);
 				this.state = 2214;
-				this.match(trinoSqlParserParser.MATCH);
+				this.match(TrinoSqlParser.MATCH);
 				this.state = 2215;
 				this.skipTo();
 				}
@@ -9638,13 +9638,13 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===167) {
 				{
 				this.state = 2221;
-				this.match(trinoSqlParserParser.PATTERN);
+				this.match(TrinoSqlParser.PATTERN);
 				this.state = 2222;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 2223;
 				this.rowPattern(0);
 				this.state = 2224;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 			}
 
@@ -9654,7 +9654,7 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===209) {
 				{
 				this.state = 2228;
-				this.match(trinoSqlParserParser.SUBSET);
+				this.match(TrinoSqlParser.SUBSET);
 				this.state = 2229;
 				this.subsetDefinition();
 				this.state = 2234;
@@ -9664,7 +9664,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 2230;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 2231;
 					this.subsetDefinition();
 					}
@@ -9682,7 +9682,7 @@ export default class trinoSqlParserParser extends Parser {
 			if (_la===65) {
 				{
 				this.state = 2239;
-				this.match(trinoSqlParserParser.DEFINE);
+				this.match(TrinoSqlParser.DEFINE);
 				this.state = 2240;
 				this.variableDefinition();
 				this.state = 2245;
@@ -9692,7 +9692,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 2241;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 2242;
 					this.variableDefinition();
 					}
@@ -9723,7 +9723,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public frameExtent(): FrameExtentContext {
 		let localctx: FrameExtentContext = new FrameExtentContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 140, trinoSqlParserParser.RULE_frameExtent);
+		this.enterRule(localctx, 140, TrinoSqlParser.RULE_frameExtent);
 		try {
 			this.state = 2274;
 			this._errHandler.sync(this);
@@ -9732,7 +9732,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2250;
-				localctx._frameType = this.match(trinoSqlParserParser.RANGE);
+				localctx._frameType = this.match(TrinoSqlParser.RANGE);
 				this.state = 2251;
 				localctx._start = this.frameBound();
 				}
@@ -9741,7 +9741,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2252;
-				localctx._frameType = this.match(trinoSqlParserParser.ROWS);
+				localctx._frameType = this.match(TrinoSqlParser.ROWS);
 				this.state = 2253;
 				localctx._start = this.frameBound();
 				}
@@ -9750,7 +9750,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2254;
-				localctx._frameType = this.match(trinoSqlParserParser.GROUPS);
+				localctx._frameType = this.match(TrinoSqlParser.GROUPS);
 				this.state = 2255;
 				localctx._start = this.frameBound();
 				}
@@ -9759,13 +9759,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 2256;
-				localctx._frameType = this.match(trinoSqlParserParser.RANGE);
+				localctx._frameType = this.match(TrinoSqlParser.RANGE);
 				this.state = 2257;
-				this.match(trinoSqlParserParser.BETWEEN);
+				this.match(TrinoSqlParser.BETWEEN);
 				this.state = 2258;
 				localctx._start = this.frameBound();
 				this.state = 2259;
-				this.match(trinoSqlParserParser.AND);
+				this.match(TrinoSqlParser.AND);
 				this.state = 2260;
 				localctx._end = this.frameBound();
 				}
@@ -9774,13 +9774,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 2262;
-				localctx._frameType = this.match(trinoSqlParserParser.ROWS);
+				localctx._frameType = this.match(TrinoSqlParser.ROWS);
 				this.state = 2263;
-				this.match(trinoSqlParserParser.BETWEEN);
+				this.match(TrinoSqlParser.BETWEEN);
 				this.state = 2264;
 				localctx._start = this.frameBound();
 				this.state = 2265;
-				this.match(trinoSqlParserParser.AND);
+				this.match(TrinoSqlParser.AND);
 				this.state = 2266;
 				localctx._end = this.frameBound();
 				}
@@ -9789,13 +9789,13 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 6);
 				{
 				this.state = 2268;
-				localctx._frameType = this.match(trinoSqlParserParser.GROUPS);
+				localctx._frameType = this.match(TrinoSqlParser.GROUPS);
 				this.state = 2269;
-				this.match(trinoSqlParserParser.BETWEEN);
+				this.match(TrinoSqlParser.BETWEEN);
 				this.state = 2270;
 				localctx._start = this.frameBound();
 				this.state = 2271;
-				this.match(trinoSqlParserParser.AND);
+				this.match(TrinoSqlParser.AND);
 				this.state = 2272;
 				localctx._end = this.frameBound();
 				}
@@ -9819,7 +9819,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public frameBound(): FrameBoundContext {
 		let localctx: FrameBoundContext = new FrameBoundContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 142, trinoSqlParserParser.RULE_frameBound);
+		this.enterRule(localctx, 142, TrinoSqlParser.RULE_frameBound);
 		let _la: number;
 		try {
 			this.state = 2285;
@@ -9830,9 +9830,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2276;
-				this.match(trinoSqlParserParser.UNBOUNDED);
+				this.match(TrinoSqlParser.UNBOUNDED);
 				this.state = 2277;
-				(localctx as UnboundedFrameContext)._boundType = this.match(trinoSqlParserParser.PRECEDING);
+				(localctx as UnboundedFrameContext)._boundType = this.match(TrinoSqlParser.PRECEDING);
 				}
 				break;
 			case 2:
@@ -9840,9 +9840,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2278;
-				this.match(trinoSqlParserParser.UNBOUNDED);
+				this.match(TrinoSqlParser.UNBOUNDED);
 				this.state = 2279;
-				(localctx as UnboundedFrameContext)._boundType = this.match(trinoSqlParserParser.FOLLOWING);
+				(localctx as UnboundedFrameContext)._boundType = this.match(TrinoSqlParser.FOLLOWING);
 				}
 				break;
 			case 3:
@@ -9850,9 +9850,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2280;
-				this.match(trinoSqlParserParser.CURRENT);
+				this.match(TrinoSqlParser.CURRENT);
 				this.state = 2281;
-				this.match(trinoSqlParserParser.ROW);
+				this.match(TrinoSqlParser.ROW);
 				}
 				break;
 			case 4:
@@ -9903,7 +9903,7 @@ export default class trinoSqlParserParser extends Parser {
 		let localctx: RowPatternContext = new RowPatternContext(this, this._ctx, _parentState);
 		let _prevctx: RowPatternContext = localctx;
 		let _startState: number = 144;
-		this.enterRecursionRule(localctx, 144, trinoSqlParserParser.RULE_rowPattern, _p);
+		this.enterRecursionRule(localctx, 144, TrinoSqlParser.RULE_rowPattern, _p);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
@@ -9943,7 +9943,7 @@ export default class trinoSqlParserParser extends Parser {
 					case 1:
 						{
 						localctx = new PatternConcatenationContext(this, new RowPatternContext(this, _parentctx, _parentState));
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_rowPattern);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_rowPattern);
 						this.state = 2292;
 						if (!(this.precpred(this._ctx, 2))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 2)");
@@ -9955,13 +9955,13 @@ export default class trinoSqlParserParser extends Parser {
 					case 2:
 						{
 						localctx = new PatternAlternationContext(this, new RowPatternContext(this, _parentctx, _parentState));
-						this.pushNewRecursionContext(localctx, _startState, trinoSqlParserParser.RULE_rowPattern);
+						this.pushNewRecursionContext(localctx, _startState, TrinoSqlParser.RULE_rowPattern);
 						this.state = 2294;
 						if (!(this.precpred(this._ctx, 1))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 1)");
 						}
 						this.state = 2295;
-						this.match(trinoSqlParserParser.T__8);
+						this.match(TrinoSqlParser.T__8);
 						this.state = 2296;
 						this.rowPattern(2);
 						}
@@ -9992,7 +9992,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public patternPrimary(): PatternPrimaryContext {
 		let localctx: PatternPrimaryContext = new PatternPrimaryContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 146, trinoSqlParserParser.RULE_patternPrimary);
+		this.enterRule(localctx, 146, TrinoSqlParser.RULE_patternPrimary);
 		let _la: number;
 		try {
 			this.state = 2327;
@@ -10011,9 +10011,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2303;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 2304;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 3:
@@ -10021,9 +10021,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2305;
-				this.match(trinoSqlParserParser.PERMUTE);
+				this.match(TrinoSqlParser.PERMUTE);
 				this.state = 2306;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 2307;
 				this.rowPattern(0);
 				this.state = 2312;
@@ -10033,7 +10033,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 2308;
-					this.match(trinoSqlParserParser.T__3);
+					this.match(TrinoSqlParser.T__3);
 					this.state = 2309;
 					this.rowPattern(0);
 					}
@@ -10043,7 +10043,7 @@ export default class trinoSqlParserParser extends Parser {
 					_la = this._input.LA(1);
 				}
 				this.state = 2315;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 4:
@@ -10051,11 +10051,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 2317;
-				this.match(trinoSqlParserParser.T__1);
+				this.match(TrinoSqlParser.T__1);
 				this.state = 2318;
 				this.rowPattern(0);
 				this.state = 2319;
-				this.match(trinoSqlParserParser.T__2);
+				this.match(TrinoSqlParser.T__2);
 				}
 				break;
 			case 5:
@@ -10063,7 +10063,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 2321;
-				this.match(trinoSqlParserParser.T__9);
+				this.match(TrinoSqlParser.T__9);
 				}
 				break;
 			case 6:
@@ -10071,7 +10071,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 6);
 				{
 				this.state = 2322;
-				this.match(trinoSqlParserParser.T__10);
+				this.match(TrinoSqlParser.T__10);
 				}
 				break;
 			case 7:
@@ -10079,11 +10079,11 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 7);
 				{
 				this.state = 2323;
-				this.match(trinoSqlParserParser.T__11);
+				this.match(TrinoSqlParser.T__11);
 				this.state = 2324;
 				this.rowPattern(0);
 				this.state = 2325;
-				this.match(trinoSqlParserParser.T__12);
+				this.match(TrinoSqlParser.T__12);
 				}
 				break;
 			}
@@ -10105,7 +10105,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public patternQuantifier(): PatternQuantifierContext {
 		let localctx: PatternQuantifierContext = new PatternQuantifierContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 148, trinoSqlParserParser.RULE_patternQuantifier);
+		this.enterRule(localctx, 148, TrinoSqlParser.RULE_patternQuantifier);
 		let _la: number;
 		try {
 			this.state = 2359;
@@ -10116,14 +10116,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2329;
-				this.match(trinoSqlParserParser.ASTERISK);
+				this.match(TrinoSqlParser.ASTERISK);
 				this.state = 2331;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 301, this._ctx) ) {
 				case 1:
 					{
 					this.state = 2330;
-					(localctx as ZeroOrMoreQuantifierContext)._reluctant = this.match(trinoSqlParserParser.QUESTION_MARK);
+					(localctx as ZeroOrMoreQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
 					}
 					break;
 				}
@@ -10134,14 +10134,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2333;
-				this.match(trinoSqlParserParser.PLUS);
+				this.match(TrinoSqlParser.PLUS);
 				this.state = 2335;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 302, this._ctx) ) {
 				case 1:
 					{
 					this.state = 2334;
-					(localctx as OneOrMoreQuantifierContext)._reluctant = this.match(trinoSqlParserParser.QUESTION_MARK);
+					(localctx as OneOrMoreQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
 					}
 					break;
 				}
@@ -10152,14 +10152,14 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2337;
-				this.match(trinoSqlParserParser.QUESTION_MARK);
+				this.match(TrinoSqlParser.QUESTION_MARK);
 				this.state = 2339;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 303, this._ctx) ) {
 				case 1:
 					{
 					this.state = 2338;
-					(localctx as ZeroOrOneQuantifierContext)._reluctant = this.match(trinoSqlParserParser.QUESTION_MARK);
+					(localctx as ZeroOrOneQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
 					}
 					break;
 				}
@@ -10170,18 +10170,18 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 2341;
-				this.match(trinoSqlParserParser.T__13);
+				this.match(TrinoSqlParser.T__13);
 				this.state = 2342;
-				(localctx as RangeQuantifierContext)._exactly = this.match(trinoSqlParserParser.INTEGER_VALUE);
+				(localctx as RangeQuantifierContext)._exactly = this.match(TrinoSqlParser.INTEGER_VALUE);
 				this.state = 2343;
-				this.match(trinoSqlParserParser.T__14);
+				this.match(TrinoSqlParser.T__14);
 				this.state = 2345;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 304, this._ctx) ) {
 				case 1:
 					{
 					this.state = 2344;
-					(localctx as RangeQuantifierContext)._reluctant = this.match(trinoSqlParserParser.QUESTION_MARK);
+					(localctx as RangeQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
 					}
 					break;
 				}
@@ -10192,38 +10192,38 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 2347;
-				this.match(trinoSqlParserParser.T__13);
+				this.match(TrinoSqlParser.T__13);
 				this.state = 2349;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===265) {
 					{
 					this.state = 2348;
-					(localctx as RangeQuantifierContext)._atLeast = this.match(trinoSqlParserParser.INTEGER_VALUE);
+					(localctx as RangeQuantifierContext)._atLeast = this.match(TrinoSqlParser.INTEGER_VALUE);
 					}
 				}
 
 				this.state = 2351;
-				this.match(trinoSqlParserParser.T__3);
+				this.match(TrinoSqlParser.T__3);
 				this.state = 2353;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===265) {
 					{
 					this.state = 2352;
-					(localctx as RangeQuantifierContext)._atMost = this.match(trinoSqlParserParser.INTEGER_VALUE);
+					(localctx as RangeQuantifierContext)._atMost = this.match(TrinoSqlParser.INTEGER_VALUE);
 					}
 				}
 
 				this.state = 2355;
-				this.match(trinoSqlParserParser.T__14);
+				this.match(TrinoSqlParser.T__14);
 				this.state = 2357;
 				this._errHandler.sync(this);
 				switch ( this._interp.adaptivePredict(this._input, 307, this._ctx) ) {
 				case 1:
 					{
 					this.state = 2356;
-					(localctx as RangeQuantifierContext)._reluctant = this.match(trinoSqlParserParser.QUESTION_MARK);
+					(localctx as RangeQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
 					}
 					break;
 				}
@@ -10248,14 +10248,14 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public updateAssignment(): UpdateAssignmentContext {
 		let localctx: UpdateAssignmentContext = new UpdateAssignmentContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 150, trinoSqlParserParser.RULE_updateAssignment);
+		this.enterRule(localctx, 150, TrinoSqlParser.RULE_updateAssignment);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
 			this.state = 2361;
 			this.identifier();
 			this.state = 2362;
-			this.match(trinoSqlParserParser.EQ);
+			this.match(TrinoSqlParser.EQ);
 			this.state = 2363;
 			this.expression();
 			}
@@ -10277,7 +10277,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public explainOption(): ExplainOptionContext {
 		let localctx: ExplainOptionContext = new ExplainOptionContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 152, trinoSqlParserParser.RULE_explainOption);
+		this.enterRule(localctx, 152, TrinoSqlParser.RULE_explainOption);
 		let _la: number;
 		try {
 			this.state = 2369;
@@ -10288,7 +10288,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2365;
-				this.match(trinoSqlParserParser.FORMAT);
+				this.match(TrinoSqlParser.FORMAT);
 				this.state = 2366;
 				(localctx as ExplainFormatContext)._value = this._input.LT(1);
 				_la = this._input.LA(1);
@@ -10306,7 +10306,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2367;
-				this.match(trinoSqlParserParser.TYPE);
+				this.match(TrinoSqlParser.TYPE);
 				this.state = 2368;
 				(localctx as ExplainTypeContext)._value = this._input.LT(1);
 				_la = this._input.LA(1);
@@ -10340,7 +10340,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public transactionMode(): TransactionModeContext {
 		let localctx: TransactionModeContext = new TransactionModeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 154, trinoSqlParserParser.RULE_transactionMode);
+		this.enterRule(localctx, 154, TrinoSqlParser.RULE_transactionMode);
 		let _la: number;
 		try {
 			this.state = 2376;
@@ -10351,9 +10351,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2371;
-				this.match(trinoSqlParserParser.ISOLATION);
+				this.match(TrinoSqlParser.ISOLATION);
 				this.state = 2372;
-				this.match(trinoSqlParserParser.LEVEL);
+				this.match(TrinoSqlParser.LEVEL);
 				this.state = 2373;
 				this.levelOfIsolation();
 				}
@@ -10363,7 +10363,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2374;
-				this.match(trinoSqlParserParser.READ);
+				this.match(TrinoSqlParser.READ);
 				this.state = 2375;
 				(localctx as TransactionAccessModeContext)._accessMode = this._input.LT(1);
 				_la = this._input.LA(1);
@@ -10397,7 +10397,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public levelOfIsolation(): LevelOfIsolationContext {
 		let localctx: LevelOfIsolationContext = new LevelOfIsolationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 156, trinoSqlParserParser.RULE_levelOfIsolation);
+		this.enterRule(localctx, 156, TrinoSqlParser.RULE_levelOfIsolation);
 		try {
 			this.state = 2385;
 			this._errHandler.sync(this);
@@ -10407,9 +10407,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2378;
-				this.match(trinoSqlParserParser.READ);
+				this.match(TrinoSqlParser.READ);
 				this.state = 2379;
-				this.match(trinoSqlParserParser.UNCOMMITTED);
+				this.match(TrinoSqlParser.UNCOMMITTED);
 				}
 				break;
 			case 2:
@@ -10417,9 +10417,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2380;
-				this.match(trinoSqlParserParser.READ);
+				this.match(TrinoSqlParser.READ);
 				this.state = 2381;
-				this.match(trinoSqlParserParser.COMMITTED);
+				this.match(TrinoSqlParser.COMMITTED);
 				}
 				break;
 			case 3:
@@ -10427,9 +10427,9 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2382;
-				this.match(trinoSqlParserParser.REPEATABLE);
+				this.match(TrinoSqlParser.REPEATABLE);
 				this.state = 2383;
-				this.match(trinoSqlParserParser.READ);
+				this.match(TrinoSqlParser.READ);
 				}
 				break;
 			case 4:
@@ -10437,7 +10437,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 2384;
-				this.match(trinoSqlParserParser.SERIALIZABLE);
+				this.match(TrinoSqlParser.SERIALIZABLE);
 				}
 				break;
 			}
@@ -10459,7 +10459,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public callArgument(): CallArgumentContext {
 		let localctx: CallArgumentContext = new CallArgumentContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 158, trinoSqlParserParser.RULE_callArgument);
+		this.enterRule(localctx, 158, TrinoSqlParser.RULE_callArgument);
 		try {
 			this.state = 2392;
 			this._errHandler.sync(this);
@@ -10479,7 +10479,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 2388;
 				this.identifier();
 				this.state = 2389;
-				this.match(trinoSqlParserParser.T__15);
+				this.match(TrinoSqlParser.T__15);
 				this.state = 2390;
 				this.expression();
 				}
@@ -10503,7 +10503,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public pathElement(): PathElementContext {
 		let localctx: PathElementContext = new PathElementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 160, trinoSqlParserParser.RULE_pathElement);
+		this.enterRule(localctx, 160, TrinoSqlParser.RULE_pathElement);
 		try {
 			this.state = 2399;
 			this._errHandler.sync(this);
@@ -10515,7 +10515,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.state = 2394;
 				this.identifier();
 				this.state = 2395;
-				this.match(trinoSqlParserParser.T__0);
+				this.match(TrinoSqlParser.T__0);
 				this.state = 2396;
 				this.identifier();
 				}
@@ -10547,7 +10547,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public pathSpecification(): PathSpecificationContext {
 		let localctx: PathSpecificationContext = new PathSpecificationContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 162, trinoSqlParserParser.RULE_pathSpecification);
+		this.enterRule(localctx, 162, TrinoSqlParser.RULE_pathSpecification);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -10561,7 +10561,7 @@ export default class trinoSqlParserParser extends Parser {
 				{
 				{
 				this.state = 2402;
-				this.match(trinoSqlParserParser.T__3);
+				this.match(TrinoSqlParser.T__3);
 				this.state = 2403;
 				this.pathElement();
 				}
@@ -10589,7 +10589,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public privilege(): PrivilegeContext {
 		let localctx: PrivilegeContext = new PrivilegeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 164, trinoSqlParserParser.RULE_privilege);
+		this.enterRule(localctx, 164, TrinoSqlParser.RULE_privilege);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -10622,7 +10622,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public qualifiedName(): QualifiedNameContext {
 		let localctx: QualifiedNameContext = new QualifiedNameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 166, trinoSqlParserParser.RULE_qualifiedName);
+		this.enterRule(localctx, 166, TrinoSqlParser.RULE_qualifiedName);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
@@ -10637,7 +10637,7 @@ export default class trinoSqlParserParser extends Parser {
 					{
 					{
 					this.state = 2412;
-					this.match(trinoSqlParserParser.T__0);
+					this.match(TrinoSqlParser.T__0);
 					this.state = 2413;
 					this.identifier();
 					}
@@ -10666,7 +10666,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public grantor(): GrantorContext {
 		let localctx: GrantorContext = new GrantorContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 168, trinoSqlParserParser.RULE_grantor);
+		this.enterRule(localctx, 168, TrinoSqlParser.RULE_grantor);
 		try {
 			this.state = 2422;
 			this._errHandler.sync(this);
@@ -10846,7 +10846,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2420;
-				this.match(trinoSqlParserParser.CURRENT_USER);
+				this.match(TrinoSqlParser.CURRENT_USER);
 				}
 				break;
 			case 51:
@@ -10854,7 +10854,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2421;
-				this.match(trinoSqlParserParser.CURRENT_ROLE);
+				this.match(TrinoSqlParser.CURRENT_ROLE);
 				}
 				break;
 			default:
@@ -10878,7 +10878,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public principal(): PrincipalContext {
 		let localctx: PrincipalContext = new PrincipalContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 170, trinoSqlParserParser.RULE_principal);
+		this.enterRule(localctx, 170, TrinoSqlParser.RULE_principal);
 		try {
 			this.state = 2429;
 			this._errHandler.sync(this);
@@ -10896,7 +10896,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2425;
-				this.match(trinoSqlParserParser.USER);
+				this.match(TrinoSqlParser.USER);
 				this.state = 2426;
 				this.identifier();
 				}
@@ -10906,7 +10906,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 2427;
-				this.match(trinoSqlParserParser.ROLE);
+				this.match(TrinoSqlParser.ROLE);
 				this.state = 2428;
 				this.identifier();
 				}
@@ -10930,7 +10930,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public roles(): RolesContext {
 		let localctx: RolesContext = new RolesContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 172, trinoSqlParserParser.RULE_roles);
+		this.enterRule(localctx, 172, TrinoSqlParser.RULE_roles);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -10944,7 +10944,7 @@ export default class trinoSqlParserParser extends Parser {
 				{
 				{
 				this.state = 2432;
-				this.match(trinoSqlParserParser.T__3);
+				this.match(TrinoSqlParser.T__3);
 				this.state = 2433;
 				this.identifier();
 				}
@@ -10972,7 +10972,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public identifier(): IdentifierContext {
 		let localctx: IdentifierContext = new IdentifierContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 174, trinoSqlParserParser.RULE_identifier);
+		this.enterRule(localctx, 174, TrinoSqlParser.RULE_identifier);
 		try {
 			this.state = 2444;
 			this._errHandler.sync(this);
@@ -10982,7 +10982,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 2439;
-				this.match(trinoSqlParserParser.IDENTIFIER);
+				this.match(TrinoSqlParser.IDENTIFIER);
 				}
 				break;
 			case 270:
@@ -10990,7 +10990,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 2440;
-				this.match(trinoSqlParserParser.QUOTED_IDENTIFIER);
+				this.match(TrinoSqlParser.QUOTED_IDENTIFIER);
 				}
 				break;
 			case 17:
@@ -11164,7 +11164,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 2442;
-				this.match(trinoSqlParserParser.BACKQUOTED_IDENTIFIER);
+				this.match(TrinoSqlParser.BACKQUOTED_IDENTIFIER);
 				}
 				break;
 			case 269:
@@ -11172,7 +11172,7 @@ export default class trinoSqlParserParser extends Parser {
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 2443;
-				this.match(trinoSqlParserParser.DIGIT_IDENTIFIER);
+				this.match(TrinoSqlParser.DIGIT_IDENTIFIER);
 				}
 				break;
 			default:
@@ -11196,7 +11196,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public number_(): NumberContext {
 		let localctx: NumberContext = new NumberContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 176, trinoSqlParserParser.RULE_number);
+		this.enterRule(localctx, 176, TrinoSqlParser.RULE_number);
 		let _la: number;
 		try {
 			this.state = 2458;
@@ -11212,12 +11212,12 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===256) {
 					{
 					this.state = 2446;
-					this.match(trinoSqlParserParser.MINUS);
+					this.match(TrinoSqlParser.MINUS);
 					}
 				}
 
 				this.state = 2449;
-				this.match(trinoSqlParserParser.DECIMAL_VALUE);
+				this.match(TrinoSqlParser.DECIMAL_VALUE);
 				}
 				break;
 			case 2:
@@ -11230,12 +11230,12 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===256) {
 					{
 					this.state = 2450;
-					this.match(trinoSqlParserParser.MINUS);
+					this.match(TrinoSqlParser.MINUS);
 					}
 				}
 
 				this.state = 2453;
-				this.match(trinoSqlParserParser.DOUBLE_VALUE);
+				this.match(TrinoSqlParser.DOUBLE_VALUE);
 				}
 				break;
 			case 3:
@@ -11248,12 +11248,12 @@ export default class trinoSqlParserParser extends Parser {
 				if (_la===256) {
 					{
 					this.state = 2454;
-					this.match(trinoSqlParserParser.MINUS);
+					this.match(TrinoSqlParser.MINUS);
 					}
 				}
 
 				this.state = 2457;
-				this.match(trinoSqlParserParser.INTEGER_VALUE);
+				this.match(TrinoSqlParser.INTEGER_VALUE);
 				}
 				break;
 			}
@@ -11275,7 +11275,7 @@ export default class trinoSqlParserParser extends Parser {
 	// @RuleVersion(0)
 	public nonReserved(): NonReservedContext {
 		let localctx: NonReservedContext = new NonReservedContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 178, trinoSqlParserParser.RULE_nonReserved);
+		this.enterRule(localctx, 178, TrinoSqlParser.RULE_nonReserved);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
@@ -12329,25 +12329,25 @@ export default class trinoSqlParserParser extends Parser {
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
-		if (!trinoSqlParserParser.__ATN) {
-			trinoSqlParserParser.__ATN = new ATNDeserializer().deserialize(trinoSqlParserParser._serializedATN);
+		if (!TrinoSqlParser.__ATN) {
+			TrinoSqlParser.__ATN = new ATNDeserializer().deserialize(TrinoSqlParser._serializedATN);
 		}
 
-		return trinoSqlParserParser.__ATN;
+		return TrinoSqlParser.__ATN;
 	}
 
 
-	static DecisionsToDFA = trinoSqlParserParser._ATN.decisionToState.map( (ds: DecisionState, index: number) => new DFA(ds, index) );
+	static DecisionsToDFA = TrinoSqlParser._ATN.decisionToState.map( (ds: DecisionState, index: number) => new DFA(ds, index) );
 
 }
 
 export class ProgramContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public EOF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EOF, 0);
+		return this.getToken(TrinoSqlParser.EOF, 0);
 	}
 	public statements_list(): StatementsContext[] {
 		return this.getTypedRuleContexts(StatementsContext) as StatementsContext[];
@@ -12356,20 +12356,20 @@ export class ProgramContext extends ParserRuleContext {
 		return this.getTypedRuleContext(StatementsContext, i) as StatementsContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_program;
+    	return TrinoSqlParser.RULE_program;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterProgram) {
 	 		listener.enterProgram(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitProgram) {
 	 		listener.exitProgram(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitProgram) {
 			return visitor.visitProgram(this);
 		} else {
@@ -12380,7 +12380,7 @@ export class ProgramContext extends ParserRuleContext {
 
 
 export class StatementsContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -12400,20 +12400,20 @@ export class StatementsContext extends ParserRuleContext {
 		return this.getTypedRuleContext(StandaloneRowPatternContext, 0) as StandaloneRowPatternContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_statements;
+    	return TrinoSqlParser.RULE_statements;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterStatements) {
 	 		listener.enterStatements(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitStatements) {
 	 		listener.exitStatements(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitStatements) {
 			return visitor.visitStatements(this);
 		} else {
@@ -12424,7 +12424,7 @@ export class StatementsContext extends ParserRuleContext {
 
 
 export class SingleStatementContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -12432,23 +12432,23 @@ export class SingleStatementContext extends ParserRuleContext {
 		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
 	}
 	public SEMICOLON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SEMICOLON, 0);
+		return this.getToken(TrinoSqlParser.SEMICOLON, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_singleStatement;
+    	return TrinoSqlParser.RULE_singleStatement;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSingleStatement) {
 	 		listener.enterSingleStatement(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSingleStatement) {
 	 		listener.exitSingleStatement(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSingleStatement) {
 			return visitor.visitSingleStatement(this);
 		} else {
@@ -12459,7 +12459,7 @@ export class SingleStatementContext extends ParserRuleContext {
 
 
 export class StandaloneExpressionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -12467,23 +12467,23 @@ export class StandaloneExpressionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
 	public SEMICOLON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SEMICOLON, 0);
+		return this.getToken(TrinoSqlParser.SEMICOLON, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_standaloneExpression;
+    	return TrinoSqlParser.RULE_standaloneExpression;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterStandaloneExpression) {
 	 		listener.enterStandaloneExpression(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitStandaloneExpression) {
 	 		listener.exitStandaloneExpression(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitStandaloneExpression) {
 			return visitor.visitStandaloneExpression(this);
 		} else {
@@ -12494,7 +12494,7 @@ export class StandaloneExpressionContext extends ParserRuleContext {
 
 
 export class StandalonePathSpecificationContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -12502,23 +12502,23 @@ export class StandalonePathSpecificationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(PathSpecificationContext, 0) as PathSpecificationContext;
 	}
 	public SEMICOLON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SEMICOLON, 0);
+		return this.getToken(TrinoSqlParser.SEMICOLON, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_standalonePathSpecification;
+    	return TrinoSqlParser.RULE_standalonePathSpecification;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterStandalonePathSpecification) {
 	 		listener.enterStandalonePathSpecification(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitStandalonePathSpecification) {
 	 		listener.exitStandalonePathSpecification(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitStandalonePathSpecification) {
 			return visitor.visitStandalonePathSpecification(this);
 		} else {
@@ -12529,7 +12529,7 @@ export class StandalonePathSpecificationContext extends ParserRuleContext {
 
 
 export class StandaloneTypeContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -12537,23 +12537,23 @@ export class StandaloneTypeContext extends ParserRuleContext {
 		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
 	}
 	public SEMICOLON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SEMICOLON, 0);
+		return this.getToken(TrinoSqlParser.SEMICOLON, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_standaloneType;
+    	return TrinoSqlParser.RULE_standaloneType;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterStandaloneType) {
 	 		listener.enterStandaloneType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitStandaloneType) {
 	 		listener.exitStandaloneType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitStandaloneType) {
 			return visitor.visitStandaloneType(this);
 		} else {
@@ -12564,7 +12564,7 @@ export class StandaloneTypeContext extends ParserRuleContext {
 
 
 export class StandaloneRowPatternContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -12572,23 +12572,23 @@ export class StandaloneRowPatternContext extends ParserRuleContext {
 		return this.getTypedRuleContext(RowPatternContext, 0) as RowPatternContext;
 	}
 	public SEMICOLON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SEMICOLON, 0);
+		return this.getToken(TrinoSqlParser.SEMICOLON, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_standaloneRowPattern;
+    	return TrinoSqlParser.RULE_standaloneRowPattern;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterStandaloneRowPattern) {
 	 		listener.enterStandaloneRowPattern(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitStandaloneRowPattern) {
 	 		listener.exitStandaloneRowPattern(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitStandaloneRowPattern) {
 			return visitor.visitStandaloneRowPattern(this);
 		} else {
@@ -12599,33 +12599,33 @@ export class StandaloneRowPatternContext extends ParserRuleContext {
 
 
 export class StatementContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_statement;
+    	return TrinoSqlParser.RULE_statement;
 	}
 	public copyFrom(ctx: StatementContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class ExplainContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public EXPLAIN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXPLAIN, 0);
+		return this.getToken(TrinoSqlParser.EXPLAIN, 0);
 	}
 	public statement(): StatementContext {
 		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
 	}
 	public ANALYZE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ANALYZE, 0);
+		return this.getToken(TrinoSqlParser.ANALYZE, 0);
 	}
 	public VERBOSE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VERBOSE, 0);
+		return this.getToken(TrinoSqlParser.VERBOSE, 0);
 	}
 	public explainOption_list(): ExplainOptionContext[] {
 		return this.getTypedRuleContexts(ExplainOptionContext) as ExplainOptionContext[];
@@ -12633,18 +12633,18 @@ export class ExplainContext extends StatementContext {
 	public explainOption(i: number): ExplainOptionContext {
 		return this.getTypedRuleContext(ExplainOptionContext, i) as ExplainOptionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterExplain) {
 	 		listener.enterExplain(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitExplain) {
 	 		listener.exitExplain(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitExplain) {
 			return visitor.visitExplain(this);
 		} else {
@@ -12653,34 +12653,34 @@ export class ExplainContext extends StatementContext {
 	}
 }
 export class PrepareContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public PREPARE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PREPARE, 0);
+		return this.getToken(TrinoSqlParser.PREPARE, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public statement(): StatementContext {
 		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPrepare) {
 	 		listener.enterPrepare(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPrepare) {
 	 		listener.exitPrepare(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPrepare) {
 			return visitor.visitPrepare(this);
 		} else {
@@ -12689,40 +12689,40 @@ export class PrepareContext extends StatementContext {
 	}
 }
 export class DropMaterializedViewContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DROP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DROP, 0);
+		return this.getToken(TrinoSqlParser.DROP, 0);
 	}
 	public MATERIALIZED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATERIALIZED, 0);
+		return this.getToken(TrinoSqlParser.MATERIALIZED, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDropMaterializedView) {
 	 		listener.enterDropMaterializedView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDropMaterializedView) {
 	 		listener.exitDropMaterializedView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDropMaterializedView) {
 			return visitor.visitDropMaterializedView(this);
 		} else {
@@ -12731,43 +12731,43 @@ export class DropMaterializedViewContext extends StatementContext {
 	}
 }
 export class SetMaterializedViewPropertiesContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public MATERIALIZED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATERIALIZED, 0);
+		return this.getToken(TrinoSqlParser.MATERIALIZED, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public PROPERTIES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PROPERTIES, 0);
+		return this.getToken(TrinoSqlParser.PROPERTIES, 0);
 	}
 	public propertyAssignments(): PropertyAssignmentsContext {
 		return this.getTypedRuleContext(PropertyAssignmentsContext, 0) as PropertyAssignmentsContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetMaterializedViewProperties) {
 	 		listener.enterSetMaterializedViewProperties(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetMaterializedViewProperties) {
 	 		listener.exitSetMaterializedViewProperties(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetMaterializedViewProperties) {
 			return visitor.visitSetMaterializedViewProperties(this);
 		} else {
@@ -12778,12 +12778,12 @@ export class SetMaterializedViewPropertiesContext extends StatementContext {
 export class UseContext extends StatementContext {
 	public _schema!: IdentifierContext;
 	public _catalog!: IdentifierContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public USE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.USE, 0);
+		return this.getToken(TrinoSqlParser.USE, 0);
 	}
 	public identifier_list(): IdentifierContext[] {
 		return this.getTypedRuleContexts(IdentifierContext) as IdentifierContext[];
@@ -12791,18 +12791,18 @@ export class UseContext extends StatementContext {
 	public identifier(i: number): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUse) {
 	 		listener.enterUse(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUse) {
 	 		listener.exitUse(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUse) {
 			return visitor.visitUse(this);
 		} else {
@@ -12811,31 +12811,31 @@ export class UseContext extends StatementContext {
 	}
 }
 export class DeallocateContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DEALLOCATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DEALLOCATE, 0);
+		return this.getToken(TrinoSqlParser.DEALLOCATE, 0);
 	}
 	public PREPARE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PREPARE, 0);
+		return this.getToken(TrinoSqlParser.PREPARE, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDeallocate) {
 	 		listener.enterDeallocate(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDeallocate) {
 	 		listener.exitDeallocate(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDeallocate) {
 			return visitor.visitDeallocate(this);
 		} else {
@@ -12846,21 +12846,21 @@ export class DeallocateContext extends StatementContext {
 export class RenameTableContext extends StatementContext {
 	public _from_!: QualifiedNameContext;
 	public _to!: QualifiedNameContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public RENAME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RENAME, 0);
+		return this.getToken(TrinoSqlParser.RENAME, 0);
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public qualifiedName_list(): QualifiedNameContext[] {
 		return this.getTypedRuleContexts(QualifiedNameContext) as QualifiedNameContext[];
@@ -12869,23 +12869,23 @@ export class RenameTableContext extends StatementContext {
 		return this.getTypedRuleContext(QualifiedNameContext, i) as QualifiedNameContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRenameTable) {
 	 		listener.enterRenameTable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRenameTable) {
 	 		listener.exitRenameTable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRenameTable) {
 			return visitor.visitRenameTable(this);
 		} else {
@@ -12894,28 +12894,28 @@ export class RenameTableContext extends StatementContext {
 	}
 }
 export class CommitContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public COMMIT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMIT, 0);
+		return this.getToken(TrinoSqlParser.COMMIT, 0);
 	}
 	public WORK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WORK, 0);
+		return this.getToken(TrinoSqlParser.WORK, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCommit) {
 	 		listener.enterCommit(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCommit) {
 	 		listener.exitCommit(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCommit) {
 			return visitor.visitCommit(this);
 		} else {
@@ -12926,15 +12926,15 @@ export class CommitContext extends StatementContext {
 export class CreateRoleContext extends StatementContext {
 	public _name!: IdentifierContext;
 	public _catalog!: IdentifierContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public ROLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLE, 0);
+		return this.getToken(TrinoSqlParser.ROLE, 0);
 	}
 	public identifier_list(): IdentifierContext[] {
 		return this.getTypedRuleContexts(IdentifierContext) as IdentifierContext[];
@@ -12943,29 +12943,29 @@ export class CreateRoleContext extends StatementContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public ADMIN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ADMIN, 0);
+		return this.getToken(TrinoSqlParser.ADMIN, 0);
 	}
 	public grantor(): GrantorContext {
 		return this.getTypedRuleContext(GrantorContext, 0) as GrantorContext;
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCreateRole) {
 	 		listener.enterCreateRole(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCreateRole) {
 	 		listener.exitCreateRole(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCreateRole) {
 			return visitor.visitCreateRole(this);
 		} else {
@@ -12976,21 +12976,21 @@ export class CreateRoleContext extends StatementContext {
 export class DropColumnContext extends StatementContext {
 	public _tableName!: QualifiedNameContext;
 	public _column!: QualifiedNameContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public DROP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DROP, 0);
+		return this.getToken(TrinoSqlParser.DROP, 0);
 	}
 	public COLUMN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COLUMN, 0);
+		return this.getToken(TrinoSqlParser.COLUMN, 0);
 	}
 	public qualifiedName_list(): QualifiedNameContext[] {
 		return this.getTypedRuleContexts(QualifiedNameContext) as QualifiedNameContext[];
@@ -12999,29 +12999,29 @@ export class DropColumnContext extends StatementContext {
 		return this.getTypedRuleContext(QualifiedNameContext, i) as QualifiedNameContext;
 	}
 	public IF_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.IF);
+	    	return this.getTokens(TrinoSqlParser.IF);
 	}
 	public IF(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, i);
+		return this.getToken(TrinoSqlParser.IF, i);
 	}
 	public EXISTS_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.EXISTS);
+	    	return this.getTokens(TrinoSqlParser.EXISTS);
 	}
 	public EXISTS(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, i);
+		return this.getToken(TrinoSqlParser.EXISTS, i);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDropColumn) {
 	 		listener.enterDropColumn(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDropColumn) {
 	 		listener.exitDropColumn(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDropColumn) {
 			return visitor.visitDropColumn(this);
 		} else {
@@ -13030,37 +13030,37 @@ export class DropColumnContext extends StatementContext {
 	}
 }
 export class DropViewContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DROP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DROP, 0);
+		return this.getToken(TrinoSqlParser.DROP, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDropView) {
 	 		listener.enterDropView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDropView) {
 	 		listener.exitDropView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDropView) {
 			return visitor.visitDropView(this);
 		} else {
@@ -13071,27 +13071,27 @@ export class DropViewContext extends StatementContext {
 export class ShowTablesContext extends StatementContext {
 	public _pattern!: StringContext;
 	public _escape!: StringContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public TABLES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLES, 0);
+		return this.getToken(TrinoSqlParser.TABLES, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public LIKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIKE, 0);
+		return this.getToken(TrinoSqlParser.LIKE, 0);
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
 	public string__list(): StringContext[] {
 		return this.getTypedRuleContexts(StringContext) as StringContext[];
@@ -13100,20 +13100,20 @@ export class ShowTablesContext extends StatementContext {
 		return this.getTypedRuleContext(StringContext, i) as StringContext;
 	}
 	public ESCAPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ESCAPE, 0);
+		return this.getToken(TrinoSqlParser.ESCAPE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowTables) {
 	 		listener.enterShowTables(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowTables) {
 	 		listener.exitShowTables(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowTables) {
 			return visitor.visitShowTables(this);
 		} else {
@@ -13123,21 +13123,21 @@ export class ShowTablesContext extends StatementContext {
 }
 export class SetViewAuthorizationContext extends StatementContext {
 	public _from_!: QualifiedNameContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public AUTHORIZATION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AUTHORIZATION, 0);
+		return this.getToken(TrinoSqlParser.AUTHORIZATION, 0);
 	}
 	public principal(): PrincipalContext {
 		return this.getTypedRuleContext(PrincipalContext, 0) as PrincipalContext;
@@ -13145,18 +13145,18 @@ export class SetViewAuthorizationContext extends StatementContext {
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetViewAuthorization) {
 	 		listener.enterSetViewAuthorization(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetViewAuthorization) {
 	 		listener.exitSetViewAuthorization(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetViewAuthorization) {
 			return visitor.visitSetViewAuthorization(this);
 		} else {
@@ -13165,37 +13165,37 @@ export class SetViewAuthorizationContext extends StatementContext {
 	}
 }
 export class ShowTableCommentContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowTableComment) {
 	 		listener.enterShowTableComment(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowTableComment) {
 	 		listener.exitShowTableComment(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowTableComment) {
 			return visitor.visitShowTableComment(this);
 		} else {
@@ -13206,18 +13206,18 @@ export class ShowTableCommentContext extends StatementContext {
 export class ShowCatalogsContext extends StatementContext {
 	public _pattern!: StringContext;
 	public _escape!: StringContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public CATALOGS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CATALOGS, 0);
+		return this.getToken(TrinoSqlParser.CATALOGS, 0);
 	}
 	public LIKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIKE, 0);
+		return this.getToken(TrinoSqlParser.LIKE, 0);
 	}
 	public string__list(): StringContext[] {
 		return this.getTypedRuleContexts(StringContext) as StringContext[];
@@ -13226,20 +13226,20 @@ export class ShowCatalogsContext extends StatementContext {
 		return this.getTypedRuleContext(StringContext, i) as StringContext;
 	}
 	public ESCAPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ESCAPE, 0);
+		return this.getToken(TrinoSqlParser.ESCAPE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowCatalogs) {
 	 		listener.enterShowCatalogs(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowCatalogs) {
 	 		listener.exitShowCatalogs(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowCatalogs) {
 			return visitor.visitShowCatalogs(this);
 		} else {
@@ -13248,40 +13248,40 @@ export class ShowCatalogsContext extends StatementContext {
 	}
 }
 export class ShowRolesContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public ROLES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLES, 0);
+		return this.getToken(TrinoSqlParser.ROLES, 0);
 	}
 	public CURRENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT, 0);
+		return this.getToken(TrinoSqlParser.CURRENT, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowRoles) {
 	 		listener.enterShowRoles(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowRoles) {
 	 		listener.exitShowRoles(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowRoles) {
 			return visitor.visitShowRoles(this);
 		} else {
@@ -13290,27 +13290,27 @@ export class ShowRolesContext extends StatementContext {
 	}
 }
 export class MergeContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public MERGE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MERGE, 0);
+		return this.getToken(TrinoSqlParser.MERGE, 0);
 	}
 	public INTO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTO, 0);
+		return this.getToken(TrinoSqlParser.INTO, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public USING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.USING, 0);
+		return this.getToken(TrinoSqlParser.USING, 0);
 	}
 	public relation(): RelationContext {
 		return this.getTypedRuleContext(RelationContext, 0) as RelationContext;
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
@@ -13325,20 +13325,20 @@ export class MergeContext extends StatementContext {
 		return this.getTypedRuleContext(MergeCaseContext, i) as MergeCaseContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterMerge) {
 	 		listener.enterMerge(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitMerge) {
 	 		listener.exitMerge(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitMerge) {
 			return visitor.visitMerge(this);
 		} else {
@@ -13350,24 +13350,24 @@ export class RenameColumnContext extends StatementContext {
 	public _tableName!: QualifiedNameContext;
 	public _from_!: IdentifierContext;
 	public _to!: IdentifierContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public RENAME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RENAME, 0);
+		return this.getToken(TrinoSqlParser.RENAME, 0);
 	}
 	public COLUMN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COLUMN, 0);
+		return this.getToken(TrinoSqlParser.COLUMN, 0);
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
@@ -13379,29 +13379,29 @@ export class RenameColumnContext extends StatementContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
 	public IF_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.IF);
+	    	return this.getTokens(TrinoSqlParser.IF);
 	}
 	public IF(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, i);
+		return this.getToken(TrinoSqlParser.IF, i);
 	}
 	public EXISTS_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.EXISTS);
+	    	return this.getTokens(TrinoSqlParser.EXISTS);
 	}
 	public EXISTS(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, i);
+		return this.getToken(TrinoSqlParser.EXISTS, i);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRenameColumn) {
 	 		listener.enterRenameColumn(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRenameColumn) {
 	 		listener.exitRenameColumn(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRenameColumn) {
 			return visitor.visitRenameColumn(this);
 		} else {
@@ -13410,43 +13410,43 @@ export class RenameColumnContext extends StatementContext {
 	}
 }
 export class CommentColumnContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public COLUMN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COLUMN, 0);
+		return this.getToken(TrinoSqlParser.COLUMN, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public IS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IS, 0);
+		return this.getToken(TrinoSqlParser.IS, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
 	public NULL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULL, 0);
+		return this.getToken(TrinoSqlParser.NULL, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCommentColumn) {
 	 		listener.enterCommentColumn(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCommentColumn) {
 	 		listener.exitCommentColumn(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCommentColumn) {
 			return visitor.visitCommentColumn(this);
 		} else {
@@ -13456,18 +13456,18 @@ export class CommentColumnContext extends StatementContext {
 }
 export class RevokeRolesContext extends StatementContext {
 	public _catalog!: IdentifierContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public REVOKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REVOKE, 0);
+		return this.getToken(TrinoSqlParser.REVOKE, 0);
 	}
 	public roles(): RolesContext {
 		return this.getTypedRuleContext(RolesContext, 0) as RolesContext;
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public principal_list(): PrincipalContext[] {
 		return this.getTypedRuleContexts(PrincipalContext) as PrincipalContext[];
@@ -13476,41 +13476,41 @@ export class RevokeRolesContext extends StatementContext {
 		return this.getTypedRuleContext(PrincipalContext, i) as PrincipalContext;
 	}
 	public ADMIN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ADMIN, 0);
+		return this.getToken(TrinoSqlParser.ADMIN, 0);
 	}
 	public OPTION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OPTION, 0);
+		return this.getToken(TrinoSqlParser.OPTION, 0);
 	}
 	public FOR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FOR, 0);
+		return this.getToken(TrinoSqlParser.FOR, 0);
 	}
 	public GRANTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANTED, 0);
+		return this.getToken(TrinoSqlParser.GRANTED, 0);
 	}
 	public BY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BY, 0);
+		return this.getToken(TrinoSqlParser.BY, 0);
 	}
 	public grantor(): GrantorContext {
 		return this.getTypedRuleContext(GrantorContext, 0) as GrantorContext;
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRevokeRoles) {
 	 		listener.enterRevokeRoles(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRevokeRoles) {
 	 		listener.exitRevokeRoles(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRevokeRoles) {
 			return visitor.visitRevokeRoles(this);
 		} else {
@@ -13519,34 +13519,34 @@ export class RevokeRolesContext extends StatementContext {
 	}
 }
 export class ShowCreateTableContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowCreateTable) {
 	 		listener.enterShowCreateTable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowCreateTable) {
 	 		listener.exitShowCreateTable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowCreateTable) {
 			return visitor.visitShowCreateTable(this);
 		} else {
@@ -13557,27 +13557,27 @@ export class ShowCreateTableContext extends StatementContext {
 export class ShowColumnsContext extends StatementContext {
 	public _pattern!: StringContext;
 	public _escape!: StringContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public COLUMNS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COLUMNS, 0);
+		return this.getToken(TrinoSqlParser.COLUMNS, 0);
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public LIKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIKE, 0);
+		return this.getToken(TrinoSqlParser.LIKE, 0);
 	}
 	public string__list(): StringContext[] {
 		return this.getTypedRuleContexts(StringContext) as StringContext[];
@@ -13586,26 +13586,26 @@ export class ShowColumnsContext extends StatementContext {
 		return this.getTypedRuleContext(StringContext, i) as StringContext;
 	}
 	public ESCAPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ESCAPE, 0);
+		return this.getToken(TrinoSqlParser.ESCAPE, 0);
 	}
 	public DESCRIBE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DESCRIBE, 0);
+		return this.getToken(TrinoSqlParser.DESCRIBE, 0);
 	}
 	public DESC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DESC, 0);
+		return this.getToken(TrinoSqlParser.DESC, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowColumns) {
 	 		listener.enterShowColumns(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowColumns) {
 	 		listener.exitShowColumns(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowColumns) {
 			return visitor.visitShowColumns(this);
 		} else {
@@ -13614,40 +13614,40 @@ export class ShowColumnsContext extends StatementContext {
 	}
 }
 export class ShowRoleGrantsContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public ROLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLE, 0);
+		return this.getToken(TrinoSqlParser.ROLE, 0);
 	}
 	public GRANTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANTS, 0);
+		return this.getToken(TrinoSqlParser.GRANTS, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowRoleGrants) {
 	 		listener.enterShowRoleGrants(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowRoleGrants) {
 	 		listener.exitShowRoleGrants(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowRoleGrants) {
 			return visitor.visitShowRoleGrants(this);
 		} else {
@@ -13658,21 +13658,21 @@ export class ShowRoleGrantsContext extends StatementContext {
 export class AddColumnContext extends StatementContext {
 	public _tableName!: QualifiedNameContext;
 	public _column!: ColumnDefinitionContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public ADD(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ADD, 0);
+		return this.getToken(TrinoSqlParser.ADD, 0);
 	}
 	public COLUMN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COLUMN, 0);
+		return this.getToken(TrinoSqlParser.COLUMN, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
@@ -13681,32 +13681,32 @@ export class AddColumnContext extends StatementContext {
 		return this.getTypedRuleContext(ColumnDefinitionContext, 0) as ColumnDefinitionContext;
 	}
 	public IF_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.IF);
+	    	return this.getTokens(TrinoSqlParser.IF);
 	}
 	public IF(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, i);
+		return this.getToken(TrinoSqlParser.IF, i);
 	}
 	public EXISTS_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.EXISTS);
+	    	return this.getTokens(TrinoSqlParser.EXISTS);
 	}
 	public EXISTS(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, i);
+		return this.getToken(TrinoSqlParser.EXISTS, i);
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterAddColumn) {
 	 		listener.enterAddColumn(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitAddColumn) {
 	 		listener.exitAddColumn(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitAddColumn) {
 			return visitor.visitAddColumn(this);
 		} else {
@@ -13716,21 +13716,21 @@ export class AddColumnContext extends StatementContext {
 }
 export class DenyContext extends StatementContext {
 	public _grantee!: PrincipalContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DENY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DENY, 0);
+		return this.getToken(TrinoSqlParser.DENY, 0);
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public principal(): PrincipalContext {
 		return this.getTypedRuleContext(PrincipalContext, 0) as PrincipalContext;
@@ -13742,29 +13742,29 @@ export class DenyContext extends StatementContext {
 		return this.getTypedRuleContext(PrivilegeContext, i) as PrivilegeContext;
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
 	public PRIVILEGES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRIVILEGES, 0);
+		return this.getToken(TrinoSqlParser.PRIVILEGES, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDeny) {
 	 		listener.enterDeny(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDeny) {
 	 		listener.exitDeny(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDeny) {
 			return visitor.visitDeny(this);
 		} else {
@@ -13773,31 +13773,31 @@ export class DenyContext extends StatementContext {
 	}
 }
 export class ResetSessionContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public RESET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RESET, 0);
+		return this.getToken(TrinoSqlParser.RESET, 0);
 	}
 	public SESSION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SESSION, 0);
+		return this.getToken(TrinoSqlParser.SESSION, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterResetSession) {
 	 		listener.enterResetSession(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitResetSession) {
 	 		listener.exitResetSession(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitResetSession) {
 			return visitor.visitResetSession(this);
 		} else {
@@ -13806,15 +13806,15 @@ export class ResetSessionContext extends StatementContext {
 	}
 }
 export class InsertIntoContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public INSERT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INSERT, 0);
+		return this.getToken(TrinoSqlParser.INSERT, 0);
 	}
 	public INTO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTO, 0);
+		return this.getToken(TrinoSqlParser.INTO, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
@@ -13825,18 +13825,18 @@ export class InsertIntoContext extends StatementContext {
 	public columnAliases(): ColumnAliasesContext {
 		return this.getTypedRuleContext(ColumnAliasesContext, 0) as ColumnAliasesContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterInsertInto) {
 	 		listener.enterInsertInto(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitInsertInto) {
 	 		listener.exitInsertInto(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitInsertInto) {
 			return visitor.visitInsertInto(this);
 		} else {
@@ -13847,18 +13847,18 @@ export class InsertIntoContext extends StatementContext {
 export class ShowSessionContext extends StatementContext {
 	public _pattern!: StringContext;
 	public _escape!: StringContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public SESSION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SESSION, 0);
+		return this.getToken(TrinoSqlParser.SESSION, 0);
 	}
 	public LIKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIKE, 0);
+		return this.getToken(TrinoSqlParser.LIKE, 0);
 	}
 	public string__list(): StringContext[] {
 		return this.getTypedRuleContexts(StringContext) as StringContext[];
@@ -13867,20 +13867,20 @@ export class ShowSessionContext extends StatementContext {
 		return this.getTypedRuleContext(StringContext, i) as StringContext;
 	}
 	public ESCAPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ESCAPE, 0);
+		return this.getToken(TrinoSqlParser.ESCAPE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowSession) {
 	 		listener.enterShowSession(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowSession) {
 	 		listener.exitShowSession(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowSession) {
 			return visitor.visitShowSession(this);
 		} else {
@@ -13889,52 +13889,52 @@ export class ShowSessionContext extends StatementContext {
 	}
 }
 export class CreateSchemaContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
 	public AUTHORIZATION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AUTHORIZATION, 0);
+		return this.getToken(TrinoSqlParser.AUTHORIZATION, 0);
 	}
 	public principal(): PrincipalContext {
 		return this.getTypedRuleContext(PrincipalContext, 0) as PrincipalContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public properties(): PropertiesContext {
 		return this.getTypedRuleContext(PropertiesContext, 0) as PropertiesContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCreateSchema) {
 	 		listener.enterCreateSchema(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCreateSchema) {
 	 		listener.exitCreateSchema(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCreateSchema) {
 			return visitor.visitCreateSchema(this);
 		} else {
@@ -13943,18 +13943,18 @@ export class CreateSchemaContext extends StatementContext {
 	}
 }
 export class ExecuteContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public EXECUTE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXECUTE, 0);
+		return this.getToken(TrinoSqlParser.EXECUTE, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public USING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.USING, 0);
+		return this.getToken(TrinoSqlParser.USING, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -13962,18 +13962,18 @@ export class ExecuteContext extends StatementContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterExecute) {
 	 		listener.enterExecute(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitExecute) {
 	 		listener.exitExecute(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitExecute) {
 			return visitor.visitExecute(this);
 		} else {
@@ -13982,40 +13982,40 @@ export class ExecuteContext extends StatementContext {
 	}
 }
 export class RenameSchemaContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public RENAME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RENAME, 0);
+		return this.getToken(TrinoSqlParser.RENAME, 0);
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRenameSchema) {
 	 		listener.enterRenameSchema(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRenameSchema) {
 	 		listener.exitRenameSchema(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRenameSchema) {
 			return visitor.visitRenameSchema(this);
 		} else {
@@ -14025,31 +14025,31 @@ export class RenameSchemaContext extends StatementContext {
 }
 export class DropRoleContext extends StatementContext {
 	public _name!: IdentifierContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DROP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DROP, 0);
+		return this.getToken(TrinoSqlParser.DROP, 0);
 	}
 	public ROLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLE, 0);
+		return this.getToken(TrinoSqlParser.ROLE, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDropRole) {
 	 		listener.enterDropRole(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDropRole) {
 	 		listener.exitDropRole(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDropRole) {
 			return visitor.visitDropRole(this);
 		} else {
@@ -14058,34 +14058,34 @@ export class DropRoleContext extends StatementContext {
 	}
 }
 export class AnalyzeContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ANALYZE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ANALYZE, 0);
+		return this.getToken(TrinoSqlParser.ANALYZE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public properties(): PropertiesContext {
 		return this.getTypedRuleContext(PropertiesContext, 0) as PropertiesContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterAnalyze) {
 	 		listener.enterAnalyze(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitAnalyze) {
 	 		listener.exitAnalyze(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitAnalyze) {
 			return visitor.visitAnalyze(this);
 		} else {
@@ -14096,21 +14096,21 @@ export class AnalyzeContext extends StatementContext {
 export class SetRoleContext extends StatementContext {
 	public _role!: IdentifierContext;
 	public _catalog!: IdentifierContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public ROLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLE, 0);
+		return this.getToken(TrinoSqlParser.ROLE, 0);
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
 	public NONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NONE, 0);
+		return this.getToken(TrinoSqlParser.NONE, 0);
 	}
 	public identifier_list(): IdentifierContext[] {
 		return this.getTypedRuleContexts(IdentifierContext) as IdentifierContext[];
@@ -14119,20 +14119,20 @@ export class SetRoleContext extends StatementContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetRole) {
 	 		listener.enterSetRole(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetRole) {
 	 		listener.exitSetRole(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetRole) {
 			return visitor.visitSetRole(this);
 		} else {
@@ -14141,37 +14141,37 @@ export class SetRoleContext extends StatementContext {
 	}
 }
 export class ShowGrantsContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public GRANTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANTS, 0);
+		return this.getToken(TrinoSqlParser.GRANTS, 0);
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowGrants) {
 	 		listener.enterShowGrants(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowGrants) {
 	 		listener.exitShowGrants(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowGrants) {
 			return visitor.visitShowGrants(this);
 		} else {
@@ -14180,43 +14180,43 @@ export class ShowGrantsContext extends StatementContext {
 	}
 }
 export class DropSchemaContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DROP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DROP, 0);
+		return this.getToken(TrinoSqlParser.DROP, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
 	public CASCADE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CASCADE, 0);
+		return this.getToken(TrinoSqlParser.CASCADE, 0);
 	}
 	public RESTRICT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RESTRICT, 0);
+		return this.getToken(TrinoSqlParser.RESTRICT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDropSchema) {
 	 		listener.enterDropSchema(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDropSchema) {
 	 		listener.exitDropSchema(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDropSchema) {
 			return visitor.visitDropSchema(this);
 		} else {
@@ -14226,21 +14226,21 @@ export class DropSchemaContext extends StatementContext {
 }
 export class SetTableAuthorizationContext extends StatementContext {
 	public _tableName!: QualifiedNameContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public AUTHORIZATION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AUTHORIZATION, 0);
+		return this.getToken(TrinoSqlParser.AUTHORIZATION, 0);
 	}
 	public principal(): PrincipalContext {
 		return this.getTypedRuleContext(PrincipalContext, 0) as PrincipalContext;
@@ -14248,18 +14248,18 @@ export class SetTableAuthorizationContext extends StatementContext {
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetTableAuthorization) {
 	 		listener.enterSetTableAuthorization(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetTableAuthorization) {
 	 		listener.exitSetTableAuthorization(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetTableAuthorization) {
 			return visitor.visitSetTableAuthorization(this);
 		} else {
@@ -14268,34 +14268,34 @@ export class SetTableAuthorizationContext extends StatementContext {
 	}
 }
 export class ShowCreateViewContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowCreateView) {
 	 		listener.enterShowCreateView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowCreateView) {
 	 		listener.exitShowCreateView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowCreateView) {
 			return visitor.visitShowCreateView(this);
 		} else {
@@ -14304,37 +14304,37 @@ export class ShowCreateViewContext extends StatementContext {
 	}
 }
 export class ShowColumnCommentContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public COLUMN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COLUMN, 0);
+		return this.getToken(TrinoSqlParser.COLUMN, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowColumnComment) {
 	 		listener.enterShowColumnComment(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowColumnComment) {
 	 		listener.exitShowColumnComment(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowColumnComment) {
 			return visitor.visitShowColumnComment(this);
 		} else {
@@ -14343,15 +14343,15 @@ export class ShowColumnCommentContext extends StatementContext {
 	}
 }
 export class CreateTableContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
@@ -14363,38 +14363,38 @@ export class CreateTableContext extends StatementContext {
 		return this.getTypedRuleContext(TableElementContext, i) as TableElementContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public properties(): PropertiesContext {
 		return this.getTypedRuleContext(PropertiesContext, 0) as PropertiesContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCreateTable) {
 	 		listener.enterCreateTable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCreateTable) {
 	 		listener.exitCreateTable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCreateTable) {
 			return visitor.visitCreateTable(this);
 		} else {
@@ -14403,15 +14403,15 @@ export class CreateTableContext extends StatementContext {
 	}
 }
 export class StartTransactionContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public START(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.START, 0);
+		return this.getToken(TrinoSqlParser.START, 0);
 	}
 	public TRANSACTION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TRANSACTION, 0);
+		return this.getToken(TrinoSqlParser.TRANSACTION, 0);
 	}
 	public transactionMode_list(): TransactionModeContext[] {
 		return this.getTypedRuleContexts(TransactionModeContext) as TransactionModeContext[];
@@ -14419,18 +14419,18 @@ export class StartTransactionContext extends StatementContext {
 	public transactionMode(i: number): TransactionModeContext {
 		return this.getTypedRuleContext(TransactionModeContext, i) as TransactionModeContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterStartTransaction) {
 	 		listener.enterStartTransaction(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitStartTransaction) {
 	 		listener.exitStartTransaction(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitStartTransaction) {
 			return visitor.visitStartTransaction(this);
 		} else {
@@ -14439,70 +14439,70 @@ export class StartTransactionContext extends StatementContext {
 	}
 }
 export class CreateTableAsSelectContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
 	public columnAliases(): ColumnAliasesContext {
 		return this.getTypedRuleContext(ColumnAliasesContext, 0) as ColumnAliasesContext;
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
 	public WITH_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.WITH);
+	    	return this.getTokens(TrinoSqlParser.WITH);
 	}
 	public WITH(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, i);
+		return this.getToken(TrinoSqlParser.WITH, i);
 	}
 	public properties(): PropertiesContext {
 		return this.getTypedRuleContext(PropertiesContext, 0) as PropertiesContext;
 	}
 	public DATA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DATA, 0);
+		return this.getToken(TrinoSqlParser.DATA, 0);
 	}
 	public NO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NO, 0);
+		return this.getToken(TrinoSqlParser.NO, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCreateTableAsSelect) {
 	 		listener.enterCreateTableAsSelect(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCreateTableAsSelect) {
 	 		listener.exitCreateTableAsSelect(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCreateTableAsSelect) {
 			return visitor.visitCreateTableAsSelect(this);
 		} else {
@@ -14511,34 +14511,34 @@ export class CreateTableAsSelectContext extends StatementContext {
 	}
 }
 export class ShowStatsContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public STATS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.STATS, 0);
+		return this.getToken(TrinoSqlParser.STATS, 0);
 	}
 	public FOR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FOR, 0);
+		return this.getToken(TrinoSqlParser.FOR, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowStats) {
 	 		listener.enterShowStats(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowStats) {
 	 		listener.exitShowStats(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowStats) {
 			return visitor.visitShowStats(this);
 		} else {
@@ -14547,34 +14547,34 @@ export class ShowStatsContext extends StatementContext {
 	}
 }
 export class ShowCreateSchemaContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowCreateSchema) {
 	 		listener.enterShowCreateSchema(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowCreateSchema) {
 	 		listener.exitShowCreateSchema(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowCreateSchema) {
 			return visitor.visitShowCreateSchema(this);
 		} else {
@@ -14584,21 +14584,21 @@ export class ShowCreateSchemaContext extends StatementContext {
 }
 export class RevokeContext extends StatementContext {
 	public _grantee!: PrincipalContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public REVOKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REVOKE, 0);
+		return this.getToken(TrinoSqlParser.REVOKE, 0);
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public principal(): PrincipalContext {
 		return this.getTypedRuleContext(PrincipalContext, 0) as PrincipalContext;
@@ -14610,38 +14610,38 @@ export class RevokeContext extends StatementContext {
 		return this.getTypedRuleContext(PrivilegeContext, i) as PrivilegeContext;
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
 	public PRIVILEGES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRIVILEGES, 0);
+		return this.getToken(TrinoSqlParser.PRIVILEGES, 0);
 	}
 	public GRANT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANT, 0);
+		return this.getToken(TrinoSqlParser.GRANT, 0);
 	}
 	public OPTION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OPTION, 0);
+		return this.getToken(TrinoSqlParser.OPTION, 0);
 	}
 	public FOR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FOR, 0);
+		return this.getToken(TrinoSqlParser.FOR, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRevoke) {
 	 		listener.enterRevoke(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRevoke) {
 	 		listener.exitRevoke(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRevoke) {
 			return visitor.visitRevoke(this);
 		} else {
@@ -14651,18 +14651,18 @@ export class RevokeContext extends StatementContext {
 }
 export class UpdateContext extends StatementContext {
 	public _where!: BooleanExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public UPDATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UPDATE, 0);
+		return this.getToken(TrinoSqlParser.UPDATE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public updateAssignment_list(): UpdateAssignmentContext[] {
 		return this.getTypedRuleContexts(UpdateAssignmentContext) as UpdateAssignmentContext[];
@@ -14671,23 +14671,23 @@ export class UpdateContext extends StatementContext {
 		return this.getTypedRuleContext(UpdateAssignmentContext, i) as UpdateAssignmentContext;
 	}
 	public WHERE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHERE, 0);
+		return this.getToken(TrinoSqlParser.WHERE, 0);
 	}
 	public booleanExpression(): BooleanExpressionContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, 0) as BooleanExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUpdate) {
 	 		listener.enterUpdate(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUpdate) {
 	 		listener.exitUpdate(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUpdate) {
 			return visitor.visitUpdate(this);
 		} else {
@@ -14699,18 +14699,18 @@ export class TableExecuteContext extends StatementContext {
 	public _tableName!: QualifiedNameContext;
 	public _procedureName!: IdentifierContext;
 	public _where!: BooleanExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public EXECUTE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXECUTE, 0);
+		return this.getToken(TrinoSqlParser.EXECUTE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
@@ -14719,7 +14719,7 @@ export class TableExecuteContext extends StatementContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public WHERE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHERE, 0);
+		return this.getToken(TrinoSqlParser.WHERE, 0);
 	}
 	public booleanExpression(): BooleanExpressionContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, 0) as BooleanExpressionContext;
@@ -14730,18 +14730,18 @@ export class TableExecuteContext extends StatementContext {
 	public callArgument(i: number): CallArgumentContext {
 		return this.getTypedRuleContext(CallArgumentContext, i) as CallArgumentContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTableExecute) {
 	 		listener.enterTableExecute(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTableExecute) {
 	 		listener.exitTableExecute(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTableExecute) {
 			return visitor.visitTableExecute(this);
 		} else {
@@ -14750,37 +14750,37 @@ export class TableExecuteContext extends StatementContext {
 	}
 }
 export class DeleteContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DELETE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DELETE, 0);
+		return this.getToken(TrinoSqlParser.DELETE, 0);
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public WHERE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHERE, 0);
+		return this.getToken(TrinoSqlParser.WHERE, 0);
 	}
 	public booleanExpression(): BooleanExpressionContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, 0) as BooleanExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDelete) {
 	 		listener.enterDelete(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDelete) {
 	 		listener.exitDelete(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDelete) {
 			return visitor.visitDelete(this);
 		} else {
@@ -14789,31 +14789,31 @@ export class DeleteContext extends StatementContext {
 	}
 }
 export class DescribeInputContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DESCRIBE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DESCRIBE, 0);
+		return this.getToken(TrinoSqlParser.DESCRIBE, 0);
 	}
 	public INPUT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INPUT, 0);
+		return this.getToken(TrinoSqlParser.INPUT, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDescribeInput) {
 	 		listener.enterDescribeInput(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDescribeInput) {
 	 		listener.exitDescribeInput(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDescribeInput) {
 			return visitor.visitDescribeInput(this);
 		} else {
@@ -14822,34 +14822,34 @@ export class DescribeInputContext extends StatementContext {
 	}
 }
 export class ShowStatsForQueryContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public STATS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.STATS, 0);
+		return this.getToken(TrinoSqlParser.STATS, 0);
 	}
 	public FOR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FOR, 0);
+		return this.getToken(TrinoSqlParser.FOR, 0);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowStatsForQuery) {
 	 		listener.enterShowStatsForQuery(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowStatsForQuery) {
 	 		listener.exitShowStatsForQuery(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowStatsForQuery) {
 			return visitor.visitShowStatsForQuery(this);
 		} else {
@@ -14858,25 +14858,25 @@ export class ShowStatsForQueryContext extends StatementContext {
 	}
 }
 export class StatementDefaultContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterStatementDefault) {
 	 		listener.enterStatementDefault(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitStatementDefault) {
 	 		listener.exitStatementDefault(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitStatementDefault) {
 			return visitor.visitStatementDefault(this);
 		} else {
@@ -14885,37 +14885,37 @@ export class StatementDefaultContext extends StatementContext {
 	}
 }
 export class SetTimeZoneContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public TIME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIME, 0);
+		return this.getToken(TrinoSqlParser.TIME, 0);
 	}
 	public ZONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ZONE, 0);
+		return this.getToken(TrinoSqlParser.ZONE, 0);
 	}
 	public LOCAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LOCAL, 0);
+		return this.getToken(TrinoSqlParser.LOCAL, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetTimeZone) {
 	 		listener.enterSetTimeZone(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetTimeZone) {
 	 		listener.exitSetTimeZone(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetTimeZone) {
 			return visitor.visitSetTimeZone(this);
 		} else {
@@ -14924,31 +14924,31 @@ export class SetTimeZoneContext extends StatementContext {
 	}
 }
 export class TruncateTableContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public TRUNCATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TRUNCATE, 0);
+		return this.getToken(TrinoSqlParser.TRUNCATE, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTruncateTable) {
 	 		listener.enterTruncateTable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTruncateTable) {
 	 		listener.exitTruncateTable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTruncateTable) {
 			return visitor.visitTruncateTable(this);
 		} else {
@@ -14957,67 +14957,67 @@ export class TruncateTableContext extends StatementContext {
 	}
 }
 export class CreateMaterializedViewContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public MATERIALIZED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATERIALIZED, 0);
+		return this.getToken(TrinoSqlParser.MATERIALIZED, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
 	public OR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OR, 0);
+		return this.getToken(TrinoSqlParser.OR, 0);
 	}
 	public REPLACE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REPLACE, 0);
+		return this.getToken(TrinoSqlParser.REPLACE, 0);
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public properties(): PropertiesContext {
 		return this.getTypedRuleContext(PropertiesContext, 0) as PropertiesContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCreateMaterializedView) {
 	 		listener.enterCreateMaterializedView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCreateMaterializedView) {
 	 		listener.exitCreateMaterializedView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCreateMaterializedView) {
 			return visitor.visitCreateMaterializedView(this);
 		} else {
@@ -15026,37 +15026,37 @@ export class CreateMaterializedViewContext extends StatementContext {
 	}
 }
 export class SetSessionContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public SESSION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SESSION, 0);
+		return this.getToken(TrinoSqlParser.SESSION, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public EQ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EQ, 0);
+		return this.getToken(TrinoSqlParser.EQ, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetSession) {
 	 		listener.enterSetSession(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetSession) {
 	 		listener.exitSetSession(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetSession) {
 			return visitor.visitSetSession(this);
 		} else {
@@ -15065,58 +15065,58 @@ export class SetSessionContext extends StatementContext {
 	}
 }
 export class CreateViewContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
 	public OR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OR, 0);
+		return this.getToken(TrinoSqlParser.OR, 0);
 	}
 	public REPLACE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REPLACE, 0);
+		return this.getToken(TrinoSqlParser.REPLACE, 0);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
 	public SECURITY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SECURITY, 0);
+		return this.getToken(TrinoSqlParser.SECURITY, 0);
 	}
 	public DEFINER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DEFINER, 0);
+		return this.getToken(TrinoSqlParser.DEFINER, 0);
 	}
 	public INVOKER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INVOKER, 0);
+		return this.getToken(TrinoSqlParser.INVOKER, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCreateView) {
 	 		listener.enterCreateView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCreateView) {
 	 		listener.exitCreateView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCreateView) {
 			return visitor.visitCreateView(this);
 		} else {
@@ -15127,24 +15127,24 @@ export class CreateViewContext extends StatementContext {
 export class RenameMaterializedViewContext extends StatementContext {
 	public _from_!: QualifiedNameContext;
 	public _to!: QualifiedNameContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public MATERIALIZED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATERIALIZED, 0);
+		return this.getToken(TrinoSqlParser.MATERIALIZED, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public RENAME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RENAME, 0);
+		return this.getToken(TrinoSqlParser.RENAME, 0);
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public qualifiedName_list(): QualifiedNameContext[] {
 		return this.getTypedRuleContexts(QualifiedNameContext) as QualifiedNameContext[];
@@ -15153,23 +15153,23 @@ export class RenameMaterializedViewContext extends StatementContext {
 		return this.getTypedRuleContext(QualifiedNameContext, i) as QualifiedNameContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRenameMaterializedView) {
 	 		listener.enterRenameMaterializedView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRenameMaterializedView) {
 	 		listener.exitRenameMaterializedView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRenameMaterializedView) {
 			return visitor.visitRenameMaterializedView(this);
 		} else {
@@ -15180,27 +15180,27 @@ export class RenameMaterializedViewContext extends StatementContext {
 export class ShowSchemasContext extends StatementContext {
 	public _pattern!: StringContext;
 	public _escape!: StringContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public SCHEMAS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMAS, 0);
+		return this.getToken(TrinoSqlParser.SCHEMAS, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public LIKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIKE, 0);
+		return this.getToken(TrinoSqlParser.LIKE, 0);
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
 	public string__list(): StringContext[] {
 		return this.getTypedRuleContexts(StringContext) as StringContext[];
@@ -15209,20 +15209,20 @@ export class ShowSchemasContext extends StatementContext {
 		return this.getTypedRuleContext(StringContext, i) as StringContext;
 	}
 	public ESCAPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ESCAPE, 0);
+		return this.getToken(TrinoSqlParser.ESCAPE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowSchemas) {
 	 		listener.enterShowSchemas(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowSchemas) {
 	 		listener.exitShowSchemas(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowSchemas) {
 			return visitor.visitShowSchemas(this);
 		} else {
@@ -15231,37 +15231,37 @@ export class ShowSchemasContext extends StatementContext {
 	}
 }
 export class DropTableContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DROP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DROP, 0);
+		return this.getToken(TrinoSqlParser.DROP, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDropTable) {
 	 		listener.enterDropTable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDropTable) {
 	 		listener.exitDropTable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDropTable) {
 			return visitor.visitDropTable(this);
 		} else {
@@ -15270,40 +15270,40 @@ export class DropTableContext extends StatementContext {
 	}
 }
 export class SetSchemaAuthorizationContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public AUTHORIZATION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AUTHORIZATION, 0);
+		return this.getToken(TrinoSqlParser.AUTHORIZATION, 0);
 	}
 	public principal(): PrincipalContext {
 		return this.getTypedRuleContext(PrincipalContext, 0) as PrincipalContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetSchemaAuthorization) {
 	 		listener.enterSetSchemaAuthorization(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetSchemaAuthorization) {
 	 		listener.exitSetSchemaAuthorization(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetSchemaAuthorization) {
 			return visitor.visitSetSchemaAuthorization(this);
 		} else {
@@ -15312,28 +15312,28 @@ export class SetSchemaAuthorizationContext extends StatementContext {
 	}
 }
 export class RollbackContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ROLLBACK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLLBACK, 0);
+		return this.getToken(TrinoSqlParser.ROLLBACK, 0);
 	}
 	public WORK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WORK, 0);
+		return this.getToken(TrinoSqlParser.WORK, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRollback) {
 	 		listener.enterRollback(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRollback) {
 	 		listener.exitRollback(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRollback) {
 			return visitor.visitRollback(this);
 		} else {
@@ -15342,43 +15342,43 @@ export class RollbackContext extends StatementContext {
 	}
 }
 export class CommentTableContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public IS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IS, 0);
+		return this.getToken(TrinoSqlParser.IS, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
 	public NULL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULL, 0);
+		return this.getToken(TrinoSqlParser.NULL, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCommentTable) {
 	 		listener.enterCommentTable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCommentTable) {
 	 		listener.exitCommentTable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCommentTable) {
 			return visitor.visitCommentTable(this);
 		} else {
@@ -15389,21 +15389,21 @@ export class CommentTableContext extends StatementContext {
 export class RenameViewContext extends StatementContext {
 	public _from_!: QualifiedNameContext;
 	public _to!: QualifiedNameContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public RENAME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RENAME, 0);
+		return this.getToken(TrinoSqlParser.RENAME, 0);
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public qualifiedName_list(): QualifiedNameContext[] {
 		return this.getTypedRuleContexts(QualifiedNameContext) as QualifiedNameContext[];
@@ -15411,18 +15411,18 @@ export class RenameViewContext extends StatementContext {
 	public qualifiedName(i: number): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, i) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRenameView) {
 	 		listener.enterRenameView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRenameView) {
 	 		listener.exitRenameView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRenameView) {
 			return visitor.visitRenameView(this);
 		} else {
@@ -15431,31 +15431,31 @@ export class RenameViewContext extends StatementContext {
 	}
 }
 export class SetPathContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public PATH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PATH, 0);
+		return this.getToken(TrinoSqlParser.PATH, 0);
 	}
 	public pathSpecification(): PathSpecificationContext {
 		return this.getTypedRuleContext(PathSpecificationContext, 0) as PathSpecificationContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetPath) {
 	 		listener.enterSetPath(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetPath) {
 	 		listener.exitSetPath(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetPath) {
 			return visitor.visitSetPath(this);
 		} else {
@@ -15465,18 +15465,18 @@ export class SetPathContext extends StatementContext {
 }
 export class GrantRolesContext extends StatementContext {
 	public _catalog!: IdentifierContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public GRANT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANT, 0);
+		return this.getToken(TrinoSqlParser.GRANT, 0);
 	}
 	public roles(): RolesContext {
 		return this.getTypedRuleContext(RolesContext, 0) as RolesContext;
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public principal_list(): PrincipalContext[] {
 		return this.getTypedRuleContexts(PrincipalContext) as PrincipalContext[];
@@ -15485,41 +15485,41 @@ export class GrantRolesContext extends StatementContext {
 		return this.getTypedRuleContext(PrincipalContext, i) as PrincipalContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public ADMIN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ADMIN, 0);
+		return this.getToken(TrinoSqlParser.ADMIN, 0);
 	}
 	public OPTION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OPTION, 0);
+		return this.getToken(TrinoSqlParser.OPTION, 0);
 	}
 	public GRANTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANTED, 0);
+		return this.getToken(TrinoSqlParser.GRANTED, 0);
 	}
 	public BY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BY, 0);
+		return this.getToken(TrinoSqlParser.BY, 0);
 	}
 	public grantor(): GrantorContext {
 		return this.getTypedRuleContext(GrantorContext, 0) as GrantorContext;
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterGrantRoles) {
 	 		listener.enterGrantRoles(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitGrantRoles) {
 	 		listener.exitGrantRoles(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitGrantRoles) {
 			return visitor.visitGrantRoles(this);
 		} else {
@@ -15528,12 +15528,12 @@ export class GrantRolesContext extends StatementContext {
 	}
 }
 export class CallContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CALL, 0);
+		return this.getToken(TrinoSqlParser.CALL, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
@@ -15544,18 +15544,18 @@ export class CallContext extends StatementContext {
 	public callArgument(i: number): CallArgumentContext {
 		return this.getTypedRuleContext(CallArgumentContext, i) as CallArgumentContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCall) {
 	 		listener.enterCall(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCall) {
 	 		listener.exitCall(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCall) {
 			return visitor.visitCall(this);
 		} else {
@@ -15564,34 +15564,34 @@ export class CallContext extends StatementContext {
 	}
 }
 export class RefreshMaterializedViewContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public REFRESH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REFRESH, 0);
+		return this.getToken(TrinoSqlParser.REFRESH, 0);
 	}
 	public MATERIALIZED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATERIALIZED, 0);
+		return this.getToken(TrinoSqlParser.MATERIALIZED, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRefreshMaterializedView) {
 	 		listener.enterRefreshMaterializedView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRefreshMaterializedView) {
 	 		listener.exitRefreshMaterializedView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRefreshMaterializedView) {
 			return visitor.visitRefreshMaterializedView(this);
 		} else {
@@ -15600,37 +15600,37 @@ export class RefreshMaterializedViewContext extends StatementContext {
 	}
 }
 export class ShowCreateMaterializedViewContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public CREATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CREATE, 0);
+		return this.getToken(TrinoSqlParser.CREATE, 0);
 	}
 	public MATERIALIZED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATERIALIZED, 0);
+		return this.getToken(TrinoSqlParser.MATERIALIZED, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowCreateMaterializedView) {
 	 		listener.enterShowCreateMaterializedView(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowCreateMaterializedView) {
 	 		listener.exitShowCreateMaterializedView(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowCreateMaterializedView) {
 			return visitor.visitShowCreateMaterializedView(this);
 		} else {
@@ -15641,18 +15641,18 @@ export class ShowCreateMaterializedViewContext extends StatementContext {
 export class ShowFunctionsContext extends StatementContext {
 	public _pattern!: StringContext;
 	public _escape!: StringContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public FUNCTIONS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FUNCTIONS, 0);
+		return this.getToken(TrinoSqlParser.FUNCTIONS, 0);
 	}
 	public LIKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIKE, 0);
+		return this.getToken(TrinoSqlParser.LIKE, 0);
 	}
 	public string__list(): StringContext[] {
 		return this.getTypedRuleContexts(StringContext) as StringContext[];
@@ -15661,20 +15661,20 @@ export class ShowFunctionsContext extends StatementContext {
 		return this.getTypedRuleContext(StringContext, i) as StringContext;
 	}
 	public ESCAPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ESCAPE, 0);
+		return this.getToken(TrinoSqlParser.ESCAPE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterShowFunctions) {
 	 		listener.enterShowFunctions(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitShowFunctions) {
 	 		listener.exitShowFunctions(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitShowFunctions) {
 			return visitor.visitShowFunctions(this);
 		} else {
@@ -15683,31 +15683,31 @@ export class ShowFunctionsContext extends StatementContext {
 	}
 }
 export class DescribeOutputContext extends StatementContext {
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DESCRIBE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DESCRIBE, 0);
+		return this.getToken(TrinoSqlParser.DESCRIBE, 0);
 	}
 	public OUTPUT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OUTPUT, 0);
+		return this.getToken(TrinoSqlParser.OUTPUT, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDescribeOutput) {
 	 		listener.enterDescribeOutput(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDescribeOutput) {
 	 		listener.exitDescribeOutput(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDescribeOutput) {
 			return visitor.visitDescribeOutput(this);
 		} else {
@@ -15717,24 +15717,24 @@ export class DescribeOutputContext extends StatementContext {
 }
 export class GrantContext extends StatementContext {
 	public _grantee!: PrincipalContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public GRANT_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.GRANT);
+	    	return this.getTokens(TrinoSqlParser.GRANT);
 	}
 	public GRANT(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANT, i);
+		return this.getToken(TrinoSqlParser.GRANT, i);
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public principal(): PrincipalContext {
 		return this.getTypedRuleContext(PrincipalContext, 0) as PrincipalContext;
@@ -15746,35 +15746,35 @@ export class GrantContext extends StatementContext {
 		return this.getTypedRuleContext(PrivilegeContext, i) as PrivilegeContext;
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
 	public PRIVILEGES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRIVILEGES, 0);
+		return this.getToken(TrinoSqlParser.PRIVILEGES, 0);
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public OPTION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OPTION, 0);
+		return this.getToken(TrinoSqlParser.OPTION, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterGrant) {
 	 		listener.enterGrant(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitGrant) {
 	 		listener.exitGrant(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitGrant) {
 			return visitor.visitGrant(this);
 		} else {
@@ -15784,21 +15784,21 @@ export class GrantContext extends StatementContext {
 }
 export class SetTablePropertiesContext extends StatementContext {
 	public _tableName!: QualifiedNameContext;
-	constructor(parser: trinoSqlParserParser, ctx: StatementContext) {
+	constructor(parser: TrinoSqlParser, ctx: StatementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ALTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALTER, 0);
+		return this.getToken(TrinoSqlParser.ALTER, 0);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public PROPERTIES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PROPERTIES, 0);
+		return this.getToken(TrinoSqlParser.PROPERTIES, 0);
 	}
 	public propertyAssignments(): PropertyAssignmentsContext {
 		return this.getTypedRuleContext(PropertyAssignmentsContext, 0) as PropertyAssignmentsContext;
@@ -15806,18 +15806,18 @@ export class SetTablePropertiesContext extends StatementContext {
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetTableProperties) {
 	 		listener.enterSetTableProperties(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetTableProperties) {
 	 		listener.exitSetTableProperties(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetTableProperties) {
 			return visitor.visitSetTableProperties(this);
 		} else {
@@ -15828,7 +15828,7 @@ export class SetTablePropertiesContext extends StatementContext {
 
 
 export class QueryContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -15839,20 +15839,20 @@ export class QueryContext extends ParserRuleContext {
 		return this.getTypedRuleContext(WithContext, 0) as WithContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_query;
+    	return TrinoSqlParser.RULE_query;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQuery) {
 	 		listener.enterQuery(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQuery) {
 	 		listener.exitQuery(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQuery) {
 			return visitor.visitQuery(this);
 		} else {
@@ -15863,12 +15863,12 @@ export class QueryContext extends ParserRuleContext {
 
 
 export class WithContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public namedQuery_list(): NamedQueryContext[] {
 		return this.getTypedRuleContexts(NamedQueryContext) as NamedQueryContext[];
@@ -15877,23 +15877,23 @@ export class WithContext extends ParserRuleContext {
 		return this.getTypedRuleContext(NamedQueryContext, i) as NamedQueryContext;
 	}
 	public RECURSIVE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RECURSIVE, 0);
+		return this.getToken(TrinoSqlParser.RECURSIVE, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_with;
+    	return TrinoSqlParser.RULE_with;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterWith) {
 	 		listener.enterWith(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitWith) {
 	 		listener.exitWith(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitWith) {
 			return visitor.visitWith(this);
 		} else {
@@ -15904,7 +15904,7 @@ export class WithContext extends ParserRuleContext {
 
 
 export class TableElementContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -15915,20 +15915,20 @@ export class TableElementContext extends ParserRuleContext {
 		return this.getTypedRuleContext(LikeClauseContext, 0) as LikeClauseContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_tableElement;
+    	return TrinoSqlParser.RULE_tableElement;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTableElement) {
 	 		listener.enterTableElement(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTableElement) {
 	 		listener.exitTableElement(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTableElement) {
 			return visitor.visitTableElement(this);
 		} else {
@@ -15939,7 +15939,7 @@ export class TableElementContext extends ParserRuleContext {
 
 
 export class ColumnDefinitionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -15950,38 +15950,38 @@ export class ColumnDefinitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
 	public NULL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULL, 0);
+		return this.getToken(TrinoSqlParser.NULL, 0);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public properties(): PropertiesContext {
 		return this.getTypedRuleContext(PropertiesContext, 0) as PropertiesContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_columnDefinition;
+    	return TrinoSqlParser.RULE_columnDefinition;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterColumnDefinition) {
 	 		listener.enterColumnDefinition(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitColumnDefinition) {
 	 		listener.exitColumnDefinition(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitColumnDefinition) {
 			return visitor.visitColumnDefinition(this);
 		} else {
@@ -15993,40 +15993,40 @@ export class ColumnDefinitionContext extends ParserRuleContext {
 
 export class LikeClauseContext extends ParserRuleContext {
 	public _optionType!: Token;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public LIKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIKE, 0);
+		return this.getToken(TrinoSqlParser.LIKE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public PROPERTIES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PROPERTIES, 0);
+		return this.getToken(TrinoSqlParser.PROPERTIES, 0);
 	}
 	public INCLUDING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INCLUDING, 0);
+		return this.getToken(TrinoSqlParser.INCLUDING, 0);
 	}
 	public EXCLUDING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXCLUDING, 0);
+		return this.getToken(TrinoSqlParser.EXCLUDING, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_likeClause;
+    	return TrinoSqlParser.RULE_likeClause;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLikeClause) {
 	 		listener.enterLikeClause(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLikeClause) {
 	 		listener.exitLikeClause(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLikeClause) {
 			return visitor.visitLikeClause(this);
 		} else {
@@ -16037,7 +16037,7 @@ export class LikeClauseContext extends ParserRuleContext {
 
 
 export class PropertiesContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -16045,20 +16045,20 @@ export class PropertiesContext extends ParserRuleContext {
 		return this.getTypedRuleContext(PropertyAssignmentsContext, 0) as PropertyAssignmentsContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_properties;
+    	return TrinoSqlParser.RULE_properties;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterProperties) {
 	 		listener.enterProperties(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitProperties) {
 	 		listener.exitProperties(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitProperties) {
 			return visitor.visitProperties(this);
 		} else {
@@ -16069,7 +16069,7 @@ export class PropertiesContext extends ParserRuleContext {
 
 
 export class PropertyAssignmentsContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -16080,20 +16080,20 @@ export class PropertyAssignmentsContext extends ParserRuleContext {
 		return this.getTypedRuleContext(PropertyContext, i) as PropertyContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_propertyAssignments;
+    	return TrinoSqlParser.RULE_propertyAssignments;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPropertyAssignments) {
 	 		listener.enterPropertyAssignments(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPropertyAssignments) {
 	 		listener.exitPropertyAssignments(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPropertyAssignments) {
 			return visitor.visitPropertyAssignments(this);
 		} else {
@@ -16104,7 +16104,7 @@ export class PropertyAssignmentsContext extends ParserRuleContext {
 
 
 export class PropertyContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -16112,26 +16112,26 @@ export class PropertyContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public EQ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EQ, 0);
+		return this.getToken(TrinoSqlParser.EQ, 0);
 	}
 	public propertyValue(): PropertyValueContext {
 		return this.getTypedRuleContext(PropertyValueContext, 0) as PropertyValueContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_property;
+    	return TrinoSqlParser.RULE_property;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterProperty) {
 	 		listener.enterProperty(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitProperty) {
 	 		listener.exitProperty(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitProperty) {
 			return visitor.visitProperty(this);
 		} else {
@@ -16142,37 +16142,37 @@ export class PropertyContext extends ParserRuleContext {
 
 
 export class PropertyValueContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_propertyValue;
+    	return TrinoSqlParser.RULE_propertyValue;
 	}
 	public copyFrom(ctx: PropertyValueContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class DefaultPropertyValueContext extends PropertyValueContext {
-	constructor(parser: trinoSqlParserParser, ctx: PropertyValueContext) {
+	constructor(parser: TrinoSqlParser, ctx: PropertyValueContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DEFAULT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DEFAULT, 0);
+		return this.getToken(TrinoSqlParser.DEFAULT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDefaultPropertyValue) {
 	 		listener.enterDefaultPropertyValue(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDefaultPropertyValue) {
 	 		listener.exitDefaultPropertyValue(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDefaultPropertyValue) {
 			return visitor.visitDefaultPropertyValue(this);
 		} else {
@@ -16181,25 +16181,25 @@ export class DefaultPropertyValueContext extends PropertyValueContext {
 	}
 }
 export class NonDefaultPropertyValueContext extends PropertyValueContext {
-	constructor(parser: trinoSqlParserParser, ctx: PropertyValueContext) {
+	constructor(parser: TrinoSqlParser, ctx: PropertyValueContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNonDefaultPropertyValue) {
 	 		listener.enterNonDefaultPropertyValue(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNonDefaultPropertyValue) {
 	 		listener.exitNonDefaultPropertyValue(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNonDefaultPropertyValue) {
 			return visitor.visitNonDefaultPropertyValue(this);
 		} else {
@@ -16213,7 +16213,7 @@ export class QueryNoWithContext extends ParserRuleContext {
 	public _offset!: RowCountContext;
 	public _limit!: LimitRowCountContext;
 	public _fetchFirst!: RowCountContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -16221,10 +16221,10 @@ export class QueryNoWithContext extends ParserRuleContext {
 		return this.getTypedRuleContext(QueryTermContext, 0) as QueryTermContext;
 	}
 	public ORDER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ORDER, 0);
+		return this.getToken(TrinoSqlParser.ORDER, 0);
 	}
 	public BY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BY, 0);
+		return this.getToken(TrinoSqlParser.BY, 0);
 	}
 	public sortItem_list(): SortItemContext[] {
 		return this.getTypedRuleContexts(SortItemContext) as SortItemContext[];
@@ -16233,7 +16233,7 @@ export class QueryNoWithContext extends ParserRuleContext {
 		return this.getTypedRuleContext(SortItemContext, i) as SortItemContext;
 	}
 	public OFFSET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OFFSET, 0);
+		return this.getToken(TrinoSqlParser.OFFSET, 0);
 	}
 	public rowCount_list(): RowCountContext[] {
 		return this.getTypedRuleContexts(RowCountContext) as RowCountContext[];
@@ -16242,56 +16242,56 @@ export class QueryNoWithContext extends ParserRuleContext {
 		return this.getTypedRuleContext(RowCountContext, i) as RowCountContext;
 	}
 	public LIMIT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIMIT, 0);
+		return this.getToken(TrinoSqlParser.LIMIT, 0);
 	}
 	public FETCH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FETCH, 0);
+		return this.getToken(TrinoSqlParser.FETCH, 0);
 	}
 	public limitRowCount(): LimitRowCountContext {
 		return this.getTypedRuleContext(LimitRowCountContext, 0) as LimitRowCountContext;
 	}
 	public FIRST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FIRST, 0);
+		return this.getToken(TrinoSqlParser.FIRST, 0);
 	}
 	public NEXT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NEXT, 0);
+		return this.getToken(TrinoSqlParser.NEXT, 0);
 	}
 	public ROW_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.ROW);
+	    	return this.getTokens(TrinoSqlParser.ROW);
 	}
 	public ROW(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROW, i);
+		return this.getToken(TrinoSqlParser.ROW, i);
 	}
 	public ROWS_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.ROWS);
+	    	return this.getTokens(TrinoSqlParser.ROWS);
 	}
 	public ROWS(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROWS, i);
+		return this.getToken(TrinoSqlParser.ROWS, i);
 	}
 	public ONLY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ONLY, 0);
+		return this.getToken(TrinoSqlParser.ONLY, 0);
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public TIES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIES, 0);
+		return this.getToken(TrinoSqlParser.TIES, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_queryNoWith;
+    	return TrinoSqlParser.RULE_queryNoWith;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQueryNoWith) {
 	 		listener.enterQueryNoWith(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQueryNoWith) {
 	 		listener.exitQueryNoWith(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQueryNoWith) {
 			return visitor.visitQueryNoWith(this);
 		} else {
@@ -16302,31 +16302,31 @@ export class QueryNoWithContext extends ParserRuleContext {
 
 
 export class LimitRowCountContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
 	public rowCount(): RowCountContext {
 		return this.getTypedRuleContext(RowCountContext, 0) as RowCountContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_limitRowCount;
+    	return TrinoSqlParser.RULE_limitRowCount;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLimitRowCount) {
 	 		listener.enterLimitRowCount(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLimitRowCount) {
 	 		listener.exitLimitRowCount(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLimitRowCount) {
 			return visitor.visitLimitRowCount(this);
 		} else {
@@ -16337,31 +16337,31 @@ export class LimitRowCountContext extends ParserRuleContext {
 
 
 export class RowCountContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public INTEGER_VALUE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTEGER_VALUE, 0);
+		return this.getToken(TrinoSqlParser.INTEGER_VALUE, 0);
 	}
 	public QUESTION_MARK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.QUESTION_MARK, 0);
+		return this.getToken(TrinoSqlParser.QUESTION_MARK, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_rowCount;
+    	return TrinoSqlParser.RULE_rowCount;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRowCount) {
 	 		listener.enterRowCount(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRowCount) {
 	 		listener.exitRowCount(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRowCount) {
 			return visitor.visitRowCount(this);
 		} else {
@@ -16372,37 +16372,37 @@ export class RowCountContext extends ParserRuleContext {
 
 
 export class QueryTermContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_queryTerm;
+    	return TrinoSqlParser.RULE_queryTerm;
 	}
 	public copyFrom(ctx: QueryTermContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class QueryTermDefaultContext extends QueryTermContext {
-	constructor(parser: trinoSqlParserParser, ctx: QueryTermContext) {
+	constructor(parser: TrinoSqlParser, ctx: QueryTermContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public queryPrimary(): QueryPrimaryContext {
 		return this.getTypedRuleContext(QueryPrimaryContext, 0) as QueryPrimaryContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQueryTermDefault) {
 	 		listener.enterQueryTermDefault(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQueryTermDefault) {
 	 		listener.exitQueryTermDefault(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQueryTermDefault) {
 			return visitor.visitQueryTermDefault(this);
 		} else {
@@ -16414,7 +16414,7 @@ export class SetOperationContext extends QueryTermContext {
 	public _left!: QueryTermContext;
 	public _operator!: Token;
 	public _right!: QueryTermContext;
-	constructor(parser: trinoSqlParserParser, ctx: QueryTermContext) {
+	constructor(parser: TrinoSqlParser, ctx: QueryTermContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -16425,29 +16425,29 @@ export class SetOperationContext extends QueryTermContext {
 		return this.getTypedRuleContext(QueryTermContext, i) as QueryTermContext;
 	}
 	public INTERSECT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTERSECT, 0);
+		return this.getToken(TrinoSqlParser.INTERSECT, 0);
 	}
 	public setQuantifier(): SetQuantifierContext {
 		return this.getTypedRuleContext(SetQuantifierContext, 0) as SetQuantifierContext;
 	}
 	public UNION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNION, 0);
+		return this.getToken(TrinoSqlParser.UNION, 0);
 	}
 	public EXCEPT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXCEPT, 0);
+		return this.getToken(TrinoSqlParser.EXCEPT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetOperation) {
 	 		listener.enterSetOperation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetOperation) {
 	 		listener.exitSetOperation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetOperation) {
 			return visitor.visitSetOperation(this);
 		} else {
@@ -16458,37 +16458,37 @@ export class SetOperationContext extends QueryTermContext {
 
 
 export class QueryPrimaryContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_queryPrimary;
+    	return TrinoSqlParser.RULE_queryPrimary;
 	}
 	public copyFrom(ctx: QueryPrimaryContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class SubqueryContext extends QueryPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: QueryPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: QueryPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public queryNoWith(): QueryNoWithContext {
 		return this.getTypedRuleContext(QueryNoWithContext, 0) as QueryNoWithContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSubquery) {
 	 		listener.enterSubquery(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSubquery) {
 	 		listener.exitSubquery(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSubquery) {
 			return visitor.visitSubquery(this);
 		} else {
@@ -16497,25 +16497,25 @@ export class SubqueryContext extends QueryPrimaryContext {
 	}
 }
 export class QueryPrimaryDefaultContext extends QueryPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: QueryPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: QueryPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public querySpecification(): QuerySpecificationContext {
 		return this.getTypedRuleContext(QuerySpecificationContext, 0) as QuerySpecificationContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQueryPrimaryDefault) {
 	 		listener.enterQueryPrimaryDefault(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQueryPrimaryDefault) {
 	 		listener.exitQueryPrimaryDefault(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQueryPrimaryDefault) {
 			return visitor.visitQueryPrimaryDefault(this);
 		} else {
@@ -16524,28 +16524,28 @@ export class QueryPrimaryDefaultContext extends QueryPrimaryContext {
 	}
 }
 export class TableContext extends QueryPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: QueryPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: QueryPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public TABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLE, 0);
+		return this.getToken(TrinoSqlParser.TABLE, 0);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTable) {
 	 		listener.enterTable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTable) {
 	 		listener.exitTable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTable) {
 			return visitor.visitTable(this);
 		} else {
@@ -16554,12 +16554,12 @@ export class TableContext extends QueryPrimaryContext {
 	}
 }
 export class InlineTableContext extends QueryPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: QueryPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: QueryPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public VALUES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VALUES, 0);
+		return this.getToken(TrinoSqlParser.VALUES, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -16567,18 +16567,18 @@ export class InlineTableContext extends QueryPrimaryContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterInlineTable) {
 	 		listener.enterInlineTable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitInlineTable) {
 	 		listener.exitInlineTable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitInlineTable) {
 			return visitor.visitInlineTable(this);
 		} else {
@@ -16591,7 +16591,7 @@ export class InlineTableContext extends QueryPrimaryContext {
 export class SortItemContext extends ParserRuleContext {
 	public _ordering!: Token;
 	public _nullOrdering!: Token;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -16599,35 +16599,35 @@ export class SortItemContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
 	public NULLS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULLS, 0);
+		return this.getToken(TrinoSqlParser.NULLS, 0);
 	}
 	public ASC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ASC, 0);
+		return this.getToken(TrinoSqlParser.ASC, 0);
 	}
 	public DESC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DESC, 0);
+		return this.getToken(TrinoSqlParser.DESC, 0);
 	}
 	public FIRST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FIRST, 0);
+		return this.getToken(TrinoSqlParser.FIRST, 0);
 	}
 	public LAST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LAST, 0);
+		return this.getToken(TrinoSqlParser.LAST, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_sortItem;
+    	return TrinoSqlParser.RULE_sortItem;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSortItem) {
 	 		listener.enterSortItem(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSortItem) {
 	 		listener.exitSortItem(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSortItem) {
 			return visitor.visitSortItem(this);
 		} else {
@@ -16640,12 +16640,12 @@ export class SortItemContext extends ParserRuleContext {
 export class QuerySpecificationContext extends ParserRuleContext {
 	public _where!: BooleanExpressionContext;
 	public _having!: BooleanExpressionContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public SELECT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SELECT, 0);
+		return this.getToken(TrinoSqlParser.SELECT, 0);
 	}
 	public selectItem_list(): SelectItemContext[] {
 		return this.getTypedRuleContexts(SelectItemContext) as SelectItemContext[];
@@ -16657,7 +16657,7 @@ export class QuerySpecificationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(SetQuantifierContext, 0) as SetQuantifierContext;
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public relation_list(): RelationContext[] {
 		return this.getTypedRuleContexts(RelationContext) as RelationContext[];
@@ -16666,22 +16666,22 @@ export class QuerySpecificationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(RelationContext, i) as RelationContext;
 	}
 	public WHERE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHERE, 0);
+		return this.getToken(TrinoSqlParser.WHERE, 0);
 	}
 	public GROUP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GROUP, 0);
+		return this.getToken(TrinoSqlParser.GROUP, 0);
 	}
 	public BY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BY, 0);
+		return this.getToken(TrinoSqlParser.BY, 0);
 	}
 	public groupBy(): GroupByContext {
 		return this.getTypedRuleContext(GroupByContext, 0) as GroupByContext;
 	}
 	public HAVING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.HAVING, 0);
+		return this.getToken(TrinoSqlParser.HAVING, 0);
 	}
 	public WINDOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WINDOW, 0);
+		return this.getToken(TrinoSqlParser.WINDOW, 0);
 	}
 	public windowDefinition_list(): WindowDefinitionContext[] {
 		return this.getTypedRuleContexts(WindowDefinitionContext) as WindowDefinitionContext[];
@@ -16696,20 +16696,20 @@ export class QuerySpecificationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, i) as BooleanExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_querySpecification;
+    	return TrinoSqlParser.RULE_querySpecification;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQuerySpecification) {
 	 		listener.enterQuerySpecification(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQuerySpecification) {
 	 		listener.exitQuerySpecification(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQuerySpecification) {
 			return visitor.visitQuerySpecification(this);
 		} else {
@@ -16720,7 +16720,7 @@ export class QuerySpecificationContext extends ParserRuleContext {
 
 
 export class GroupByContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -16734,20 +16734,20 @@ export class GroupByContext extends ParserRuleContext {
 		return this.getTypedRuleContext(SetQuantifierContext, 0) as SetQuantifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_groupBy;
+    	return TrinoSqlParser.RULE_groupBy;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterGroupBy) {
 	 		listener.enterGroupBy(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitGroupBy) {
 	 		listener.exitGroupBy(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitGroupBy) {
 			return visitor.visitGroupBy(this);
 		} else {
@@ -16758,27 +16758,27 @@ export class GroupByContext extends ParserRuleContext {
 
 
 export class GroupingElementContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_groupingElement;
+    	return TrinoSqlParser.RULE_groupingElement;
 	}
 	public copyFrom(ctx: GroupingElementContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class MultipleGroupingSetsContext extends GroupingElementContext {
-	constructor(parser: trinoSqlParserParser, ctx: GroupingElementContext) {
+	constructor(parser: TrinoSqlParser, ctx: GroupingElementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public GROUPING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GROUPING, 0);
+		return this.getToken(TrinoSqlParser.GROUPING, 0);
 	}
 	public SETS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SETS, 0);
+		return this.getToken(TrinoSqlParser.SETS, 0);
 	}
 	public groupingSet_list(): GroupingSetContext[] {
 		return this.getTypedRuleContexts(GroupingSetContext) as GroupingSetContext[];
@@ -16786,18 +16786,18 @@ export class MultipleGroupingSetsContext extends GroupingElementContext {
 	public groupingSet(i: number): GroupingSetContext {
 		return this.getTypedRuleContext(GroupingSetContext, i) as GroupingSetContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterMultipleGroupingSets) {
 	 		listener.enterMultipleGroupingSets(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitMultipleGroupingSets) {
 	 		listener.exitMultipleGroupingSets(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitMultipleGroupingSets) {
 			return visitor.visitMultipleGroupingSets(this);
 		} else {
@@ -16806,25 +16806,25 @@ export class MultipleGroupingSetsContext extends GroupingElementContext {
 	}
 }
 export class SingleGroupingSetContext extends GroupingElementContext {
-	constructor(parser: trinoSqlParserParser, ctx: GroupingElementContext) {
+	constructor(parser: TrinoSqlParser, ctx: GroupingElementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public groupingSet(): GroupingSetContext {
 		return this.getTypedRuleContext(GroupingSetContext, 0) as GroupingSetContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSingleGroupingSet) {
 	 		listener.enterSingleGroupingSet(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSingleGroupingSet) {
 	 		listener.exitSingleGroupingSet(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSingleGroupingSet) {
 			return visitor.visitSingleGroupingSet(this);
 		} else {
@@ -16833,12 +16833,12 @@ export class SingleGroupingSetContext extends GroupingElementContext {
 	}
 }
 export class CubeContext extends GroupingElementContext {
-	constructor(parser: trinoSqlParserParser, ctx: GroupingElementContext) {
+	constructor(parser: TrinoSqlParser, ctx: GroupingElementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CUBE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CUBE, 0);
+		return this.getToken(TrinoSqlParser.CUBE, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -16846,18 +16846,18 @@ export class CubeContext extends GroupingElementContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCube) {
 	 		listener.enterCube(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCube) {
 	 		listener.exitCube(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCube) {
 			return visitor.visitCube(this);
 		} else {
@@ -16866,12 +16866,12 @@ export class CubeContext extends GroupingElementContext {
 	}
 }
 export class RollupContext extends GroupingElementContext {
-	constructor(parser: trinoSqlParserParser, ctx: GroupingElementContext) {
+	constructor(parser: TrinoSqlParser, ctx: GroupingElementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ROLLUP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLLUP, 0);
+		return this.getToken(TrinoSqlParser.ROLLUP, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -16879,18 +16879,18 @@ export class RollupContext extends GroupingElementContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRollup) {
 	 		listener.enterRollup(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRollup) {
 	 		listener.exitRollup(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRollup) {
 			return visitor.visitRollup(this);
 		} else {
@@ -16901,7 +16901,7 @@ export class RollupContext extends GroupingElementContext {
 
 
 export class GroupingSetContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -16912,20 +16912,20 @@ export class GroupingSetContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_groupingSet;
+    	return TrinoSqlParser.RULE_groupingSet;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterGroupingSet) {
 	 		listener.enterGroupingSet(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitGroupingSet) {
 	 		listener.exitGroupingSet(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitGroupingSet) {
 			return visitor.visitGroupingSet(this);
 		} else {
@@ -16937,12 +16937,12 @@ export class GroupingSetContext extends ParserRuleContext {
 
 export class WindowDefinitionContext extends ParserRuleContext {
 	public _name!: IdentifierContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public windowSpecification(): WindowSpecificationContext {
 		return this.getTypedRuleContext(WindowSpecificationContext, 0) as WindowSpecificationContext;
@@ -16951,20 +16951,20 @@ export class WindowDefinitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_windowDefinition;
+    	return TrinoSqlParser.RULE_windowDefinition;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterWindowDefinition) {
 	 		listener.enterWindowDefinition(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitWindowDefinition) {
 	 		listener.exitWindowDefinition(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitWindowDefinition) {
 			return visitor.visitWindowDefinition(this);
 		} else {
@@ -16978,21 +16978,21 @@ export class WindowSpecificationContext extends ParserRuleContext {
 	public _existingWindowName!: IdentifierContext;
 	public _expression!: ExpressionContext;
 	public _partition: ExpressionContext[] = [];
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public PARTITION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PARTITION, 0);
+		return this.getToken(TrinoSqlParser.PARTITION, 0);
 	}
 	public BY_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.BY);
+	    	return this.getTokens(TrinoSqlParser.BY);
 	}
 	public BY(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BY, i);
+		return this.getToken(TrinoSqlParser.BY, i);
 	}
 	public ORDER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ORDER, 0);
+		return this.getToken(TrinoSqlParser.ORDER, 0);
 	}
 	public sortItem_list(): SortItemContext[] {
 		return this.getTypedRuleContexts(SortItemContext) as SortItemContext[];
@@ -17013,20 +17013,20 @@ export class WindowSpecificationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_windowSpecification;
+    	return TrinoSqlParser.RULE_windowSpecification;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterWindowSpecification) {
 	 		listener.enterWindowSpecification(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitWindowSpecification) {
 	 		listener.exitWindowSpecification(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitWindowSpecification) {
 			return visitor.visitWindowSpecification(this);
 		} else {
@@ -17038,12 +17038,12 @@ export class WindowSpecificationContext extends ParserRuleContext {
 
 export class NamedQueryContext extends ParserRuleContext {
 	public _name!: IdentifierContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
@@ -17055,20 +17055,20 @@ export class NamedQueryContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ColumnAliasesContext, 0) as ColumnAliasesContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_namedQuery;
+    	return TrinoSqlParser.RULE_namedQuery;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNamedQuery) {
 	 		listener.enterNamedQuery(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNamedQuery) {
 	 		listener.exitNamedQuery(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNamedQuery) {
 			return visitor.visitNamedQuery(this);
 		} else {
@@ -17079,31 +17079,31 @@ export class NamedQueryContext extends ParserRuleContext {
 
 
 export class SetQuantifierContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public DISTINCT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DISTINCT, 0);
+		return this.getToken(TrinoSqlParser.DISTINCT, 0);
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_setQuantifier;
+    	return TrinoSqlParser.RULE_setQuantifier;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSetQuantifier) {
 	 		listener.enterSetQuantifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSetQuantifier) {
 	 		listener.exitSetQuantifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSetQuantifier) {
 			return visitor.visitSetQuantifier(this);
 		} else {
@@ -17114,19 +17114,19 @@ export class SetQuantifierContext extends ParserRuleContext {
 
 
 export class SelectItemContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_selectItem;
+    	return TrinoSqlParser.RULE_selectItem;
 	}
 	public copyFrom(ctx: SelectItemContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class SelectAllContext extends SelectItemContext {
-	constructor(parser: trinoSqlParserParser, ctx: SelectItemContext) {
+	constructor(parser: TrinoSqlParser, ctx: SelectItemContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -17134,26 +17134,26 @@ export class SelectAllContext extends SelectItemContext {
 		return this.getTypedRuleContext(PrimaryExpressionContext, 0) as PrimaryExpressionContext;
 	}
 	public ASTERISK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ASTERISK, 0);
+		return this.getToken(TrinoSqlParser.ASTERISK, 0);
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public columnAliases(): ColumnAliasesContext {
 		return this.getTypedRuleContext(ColumnAliasesContext, 0) as ColumnAliasesContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSelectAll) {
 	 		listener.enterSelectAll(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSelectAll) {
 	 		listener.exitSelectAll(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSelectAll) {
 			return visitor.visitSelectAll(this);
 		} else {
@@ -17162,7 +17162,7 @@ export class SelectAllContext extends SelectItemContext {
 	}
 }
 export class SelectSingleContext extends SelectItemContext {
-	constructor(parser: trinoSqlParserParser, ctx: SelectItemContext) {
+	constructor(parser: TrinoSqlParser, ctx: SelectItemContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -17173,20 +17173,20 @@ export class SelectSingleContext extends SelectItemContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSelectSingle) {
 	 		listener.enterSelectSingle(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSelectSingle) {
 	 		listener.exitSelectSingle(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSelectSingle) {
 			return visitor.visitSelectSingle(this);
 		} else {
@@ -17197,37 +17197,37 @@ export class SelectSingleContext extends SelectItemContext {
 
 
 export class RelationContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_relation;
+    	return TrinoSqlParser.RULE_relation;
 	}
 	public copyFrom(ctx: RelationContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class RelationDefaultContext extends RelationContext {
-	constructor(parser: trinoSqlParserParser, ctx: RelationContext) {
+	constructor(parser: TrinoSqlParser, ctx: RelationContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public sampledRelation(): SampledRelationContext {
 		return this.getTypedRuleContext(SampledRelationContext, 0) as SampledRelationContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRelationDefault) {
 	 		listener.enterRelationDefault(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRelationDefault) {
 	 		listener.exitRelationDefault(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRelationDefault) {
 			return visitor.visitRelationDefault(this);
 		} else {
@@ -17239,7 +17239,7 @@ export class JoinRelationContext extends RelationContext {
 	public _left!: RelationContext;
 	public _right!: SampledRelationContext;
 	public _rightRelation!: RelationContext;
-	constructor(parser: trinoSqlParserParser, ctx: RelationContext) {
+	constructor(parser: TrinoSqlParser, ctx: RelationContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -17250,10 +17250,10 @@ export class JoinRelationContext extends RelationContext {
 		return this.getTypedRuleContext(RelationContext, i) as RelationContext;
 	}
 	public CROSS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CROSS, 0);
+		return this.getToken(TrinoSqlParser.CROSS, 0);
 	}
 	public JOIN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.JOIN, 0);
+		return this.getToken(TrinoSqlParser.JOIN, 0);
 	}
 	public joinType(): JoinTypeContext {
 		return this.getTypedRuleContext(JoinTypeContext, 0) as JoinTypeContext;
@@ -17262,23 +17262,23 @@ export class JoinRelationContext extends RelationContext {
 		return this.getTypedRuleContext(JoinCriteriaContext, 0) as JoinCriteriaContext;
 	}
 	public NATURAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NATURAL, 0);
+		return this.getToken(TrinoSqlParser.NATURAL, 0);
 	}
 	public sampledRelation(): SampledRelationContext {
 		return this.getTypedRuleContext(SampledRelationContext, 0) as SampledRelationContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterJoinRelation) {
 	 		listener.enterJoinRelation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitJoinRelation) {
 	 		listener.exitJoinRelation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitJoinRelation) {
 			return visitor.visitJoinRelation(this);
 		} else {
@@ -17289,40 +17289,40 @@ export class JoinRelationContext extends RelationContext {
 
 
 export class JoinTypeContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public INNER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INNER, 0);
+		return this.getToken(TrinoSqlParser.INNER, 0);
 	}
 	public LEFT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LEFT, 0);
+		return this.getToken(TrinoSqlParser.LEFT, 0);
 	}
 	public OUTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OUTER, 0);
+		return this.getToken(TrinoSqlParser.OUTER, 0);
 	}
 	public RIGHT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RIGHT, 0);
+		return this.getToken(TrinoSqlParser.RIGHT, 0);
 	}
 	public FULL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FULL, 0);
+		return this.getToken(TrinoSqlParser.FULL, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_joinType;
+    	return TrinoSqlParser.RULE_joinType;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterJoinType) {
 	 		listener.enterJoinType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitJoinType) {
 	 		listener.exitJoinType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitJoinType) {
 			return visitor.visitJoinType(this);
 		} else {
@@ -17333,18 +17333,18 @@ export class JoinTypeContext extends ParserRuleContext {
 
 
 export class JoinCriteriaContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public ON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ON, 0);
+		return this.getToken(TrinoSqlParser.ON, 0);
 	}
 	public booleanExpression(): BooleanExpressionContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, 0) as BooleanExpressionContext;
 	}
 	public USING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.USING, 0);
+		return this.getToken(TrinoSqlParser.USING, 0);
 	}
 	public identifier_list(): IdentifierContext[] {
 		return this.getTypedRuleContexts(IdentifierContext) as IdentifierContext[];
@@ -17353,20 +17353,20 @@ export class JoinCriteriaContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_joinCriteria;
+    	return TrinoSqlParser.RULE_joinCriteria;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterJoinCriteria) {
 	 		listener.enterJoinCriteria(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitJoinCriteria) {
 	 		listener.exitJoinCriteria(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitJoinCriteria) {
 			return visitor.visitJoinCriteria(this);
 		} else {
@@ -17378,7 +17378,7 @@ export class JoinCriteriaContext extends ParserRuleContext {
 
 export class SampledRelationContext extends ParserRuleContext {
 	public _percentage!: ExpressionContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -17386,7 +17386,7 @@ export class SampledRelationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(PatternRecognitionContext, 0) as PatternRecognitionContext;
 	}
 	public TABLESAMPLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLESAMPLE, 0);
+		return this.getToken(TrinoSqlParser.TABLESAMPLE, 0);
 	}
 	public sampleType(): SampleTypeContext {
 		return this.getTypedRuleContext(SampleTypeContext, 0) as SampleTypeContext;
@@ -17395,20 +17395,20 @@ export class SampledRelationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_sampledRelation;
+    	return TrinoSqlParser.RULE_sampledRelation;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSampledRelation) {
 	 		listener.enterSampledRelation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSampledRelation) {
 	 		listener.exitSampledRelation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSampledRelation) {
 			return visitor.visitSampledRelation(this);
 		} else {
@@ -17419,31 +17419,31 @@ export class SampledRelationContext extends ParserRuleContext {
 
 
 export class SampleTypeContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public BERNOULLI(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BERNOULLI, 0);
+		return this.getToken(TrinoSqlParser.BERNOULLI, 0);
 	}
 	public SYSTEM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SYSTEM, 0);
+		return this.getToken(TrinoSqlParser.SYSTEM, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_sampleType;
+    	return TrinoSqlParser.RULE_sampleType;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSampleType) {
 	 		listener.enterSampleType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSampleType) {
 	 		listener.exitSampleType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSampleType) {
 			return visitor.visitSampleType(this);
 		} else {
@@ -17456,7 +17456,7 @@ export class SampleTypeContext extends ParserRuleContext {
 export class PatternRecognitionContext extends ParserRuleContext {
 	public _expression!: ExpressionContext;
 	public _partition: ExpressionContext[] = [];
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -17464,16 +17464,16 @@ export class PatternRecognitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(AliasedRelationContext, 0) as AliasedRelationContext;
 	}
 	public MATCH_RECOGNIZE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCH_RECOGNIZE, 0);
+		return this.getToken(TrinoSqlParser.MATCH_RECOGNIZE, 0);
 	}
 	public PATTERN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PATTERN, 0);
+		return this.getToken(TrinoSqlParser.PATTERN, 0);
 	}
 	public rowPattern(): RowPatternContext {
 		return this.getTypedRuleContext(RowPatternContext, 0) as RowPatternContext;
 	}
 	public DEFINE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DEFINE, 0);
+		return this.getToken(TrinoSqlParser.DEFINE, 0);
 	}
 	public variableDefinition_list(): VariableDefinitionContext[] {
 		return this.getTypedRuleContexts(VariableDefinitionContext) as VariableDefinitionContext[];
@@ -17482,16 +17482,16 @@ export class PatternRecognitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(VariableDefinitionContext, i) as VariableDefinitionContext;
 	}
 	public PARTITION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PARTITION, 0);
+		return this.getToken(TrinoSqlParser.PARTITION, 0);
 	}
 	public BY_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.BY);
+	    	return this.getTokens(TrinoSqlParser.BY);
 	}
 	public BY(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BY, i);
+		return this.getToken(TrinoSqlParser.BY, i);
 	}
 	public ORDER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ORDER, 0);
+		return this.getToken(TrinoSqlParser.ORDER, 0);
 	}
 	public sortItem_list(): SortItemContext[] {
 		return this.getTypedRuleContexts(SortItemContext) as SortItemContext[];
@@ -17500,7 +17500,7 @@ export class PatternRecognitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(SortItemContext, i) as SortItemContext;
 	}
 	public MEASURES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MEASURES, 0);
+		return this.getToken(TrinoSqlParser.MEASURES, 0);
 	}
 	public measureDefinition_list(): MeasureDefinitionContext[] {
 		return this.getTypedRuleContexts(MeasureDefinitionContext) as MeasureDefinitionContext[];
@@ -17512,16 +17512,16 @@ export class PatternRecognitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(RowsPerMatchContext, 0) as RowsPerMatchContext;
 	}
 	public AFTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AFTER, 0);
+		return this.getToken(TrinoSqlParser.AFTER, 0);
 	}
 	public MATCH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCH, 0);
+		return this.getToken(TrinoSqlParser.MATCH, 0);
 	}
 	public skipTo(): SkipToContext {
 		return this.getTypedRuleContext(SkipToContext, 0) as SkipToContext;
 	}
 	public SUBSET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SUBSET, 0);
+		return this.getToken(TrinoSqlParser.SUBSET, 0);
 	}
 	public subsetDefinition_list(): SubsetDefinitionContext[] {
 		return this.getTypedRuleContexts(SubsetDefinitionContext) as SubsetDefinitionContext[];
@@ -17539,32 +17539,32 @@ export class PatternRecognitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
 	public INITIAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INITIAL, 0);
+		return this.getToken(TrinoSqlParser.INITIAL, 0);
 	}
 	public SEEK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SEEK, 0);
+		return this.getToken(TrinoSqlParser.SEEK, 0);
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public columnAliases(): ColumnAliasesContext {
 		return this.getTypedRuleContext(ColumnAliasesContext, 0) as ColumnAliasesContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_patternRecognition;
+    	return TrinoSqlParser.RULE_patternRecognition;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPatternRecognition) {
 	 		listener.enterPatternRecognition(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPatternRecognition) {
 	 		listener.exitPatternRecognition(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPatternRecognition) {
 			return visitor.visitPatternRecognition(this);
 		} else {
@@ -17575,7 +17575,7 @@ export class PatternRecognitionContext extends ParserRuleContext {
 
 
 export class MeasureDefinitionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -17583,26 +17583,26 @@ export class MeasureDefinitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_measureDefinition;
+    	return TrinoSqlParser.RULE_measureDefinition;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterMeasureDefinition) {
 	 		listener.enterMeasureDefinition(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitMeasureDefinition) {
 	 		listener.exitMeasureDefinition(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitMeasureDefinition) {
 			return visitor.visitMeasureDefinition(this);
 		} else {
@@ -17613,46 +17613,46 @@ export class MeasureDefinitionContext extends ParserRuleContext {
 
 
 export class RowsPerMatchContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public ONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ONE, 0);
+		return this.getToken(TrinoSqlParser.ONE, 0);
 	}
 	public ROW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROW, 0);
+		return this.getToken(TrinoSqlParser.ROW, 0);
 	}
 	public PER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PER, 0);
+		return this.getToken(TrinoSqlParser.PER, 0);
 	}
 	public MATCH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCH, 0);
+		return this.getToken(TrinoSqlParser.MATCH, 0);
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
 	public ROWS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROWS, 0);
+		return this.getToken(TrinoSqlParser.ROWS, 0);
 	}
 	public emptyMatchHandling(): EmptyMatchHandlingContext {
 		return this.getTypedRuleContext(EmptyMatchHandlingContext, 0) as EmptyMatchHandlingContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_rowsPerMatch;
+    	return TrinoSqlParser.RULE_rowsPerMatch;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRowsPerMatch) {
 	 		listener.enterRowsPerMatch(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRowsPerMatch) {
 	 		listener.exitRowsPerMatch(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRowsPerMatch) {
 			return visitor.visitRowsPerMatch(this);
 		} else {
@@ -17663,46 +17663,46 @@ export class RowsPerMatchContext extends ParserRuleContext {
 
 
 export class EmptyMatchHandlingContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public EMPTY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EMPTY, 0);
+		return this.getToken(TrinoSqlParser.EMPTY, 0);
 	}
 	public MATCHES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCHES, 0);
+		return this.getToken(TrinoSqlParser.MATCHES, 0);
 	}
 	public OMIT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OMIT, 0);
+		return this.getToken(TrinoSqlParser.OMIT, 0);
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public UNMATCHED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNMATCHED, 0);
+		return this.getToken(TrinoSqlParser.UNMATCHED, 0);
 	}
 	public ROWS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROWS, 0);
+		return this.getToken(TrinoSqlParser.ROWS, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_emptyMatchHandling;
+    	return TrinoSqlParser.RULE_emptyMatchHandling;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterEmptyMatchHandling) {
 	 		listener.enterEmptyMatchHandling(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitEmptyMatchHandling) {
 	 		listener.exitEmptyMatchHandling(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitEmptyMatchHandling) {
 			return visitor.visitEmptyMatchHandling(this);
 		} else {
@@ -17713,46 +17713,46 @@ export class EmptyMatchHandlingContext extends ParserRuleContext {
 
 
 export class SkipToContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public NEXT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NEXT, 0);
+		return this.getToken(TrinoSqlParser.NEXT, 0);
 	}
 	public ROW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROW, 0);
+		return this.getToken(TrinoSqlParser.ROW, 0);
 	}
 	public PAST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PAST, 0);
+		return this.getToken(TrinoSqlParser.PAST, 0);
 	}
 	public LAST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LAST, 0);
+		return this.getToken(TrinoSqlParser.LAST, 0);
 	}
 	public FIRST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FIRST, 0);
+		return this.getToken(TrinoSqlParser.FIRST, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_skipTo;
+    	return TrinoSqlParser.RULE_skipTo;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSkipTo) {
 	 		listener.enterSkipTo(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSkipTo) {
 	 		listener.exitSkipTo(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSkipTo) {
 			return visitor.visitSkipTo(this);
 		} else {
@@ -17766,12 +17766,12 @@ export class SubsetDefinitionContext extends ParserRuleContext {
 	public _name!: IdentifierContext;
 	public _identifier!: IdentifierContext;
 	public _union: IdentifierContext[] = [];
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public EQ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EQ, 0);
+		return this.getToken(TrinoSqlParser.EQ, 0);
 	}
 	public identifier_list(): IdentifierContext[] {
 		return this.getTypedRuleContexts(IdentifierContext) as IdentifierContext[];
@@ -17780,20 +17780,20 @@ export class SubsetDefinitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_subsetDefinition;
+    	return TrinoSqlParser.RULE_subsetDefinition;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSubsetDefinition) {
 	 		listener.enterSubsetDefinition(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSubsetDefinition) {
 	 		listener.exitSubsetDefinition(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSubsetDefinition) {
 			return visitor.visitSubsetDefinition(this);
 		} else {
@@ -17804,7 +17804,7 @@ export class SubsetDefinitionContext extends ParserRuleContext {
 
 
 export class VariableDefinitionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -17812,26 +17812,26 @@ export class VariableDefinitionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_variableDefinition;
+    	return TrinoSqlParser.RULE_variableDefinition;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterVariableDefinition) {
 	 		listener.enterVariableDefinition(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitVariableDefinition) {
 	 		listener.exitVariableDefinition(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitVariableDefinition) {
 			return visitor.visitVariableDefinition(this);
 		} else {
@@ -17842,7 +17842,7 @@ export class VariableDefinitionContext extends ParserRuleContext {
 
 
 export class AliasedRelationContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -17853,26 +17853,26 @@ export class AliasedRelationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public columnAliases(): ColumnAliasesContext {
 		return this.getTypedRuleContext(ColumnAliasesContext, 0) as ColumnAliasesContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_aliasedRelation;
+    	return TrinoSqlParser.RULE_aliasedRelation;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterAliasedRelation) {
 	 		listener.enterAliasedRelation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitAliasedRelation) {
 	 		listener.exitAliasedRelation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitAliasedRelation) {
 			return visitor.visitAliasedRelation(this);
 		} else {
@@ -17883,7 +17883,7 @@ export class AliasedRelationContext extends ParserRuleContext {
 
 
 export class ColumnAliasesContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -17894,20 +17894,20 @@ export class ColumnAliasesContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_columnAliases;
+    	return TrinoSqlParser.RULE_columnAliases;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterColumnAliases) {
 	 		listener.enterColumnAliases(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitColumnAliases) {
 	 		listener.exitColumnAliases(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitColumnAliases) {
 			return visitor.visitColumnAliases(this);
 		} else {
@@ -17918,37 +17918,37 @@ export class ColumnAliasesContext extends ParserRuleContext {
 
 
 export class RelationPrimaryContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_relationPrimary;
+    	return TrinoSqlParser.RULE_relationPrimary;
 	}
 	public copyFrom(ctx: RelationPrimaryContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class SubqueryRelationContext extends RelationPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: RelationPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: RelationPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSubqueryRelation) {
 	 		listener.enterSubqueryRelation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSubqueryRelation) {
 	 		listener.exitSubqueryRelation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSubqueryRelation) {
 			return visitor.visitSubqueryRelation(this);
 		} else {
@@ -17957,25 +17957,25 @@ export class SubqueryRelationContext extends RelationPrimaryContext {
 	}
 }
 export class ParenthesizedRelationContext extends RelationPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: RelationPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: RelationPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public relation(): RelationContext {
 		return this.getTypedRuleContext(RelationContext, 0) as RelationContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterParenthesizedRelation) {
 	 		listener.enterParenthesizedRelation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitParenthesizedRelation) {
 	 		listener.exitParenthesizedRelation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitParenthesizedRelation) {
 			return visitor.visitParenthesizedRelation(this);
 		} else {
@@ -17984,12 +17984,12 @@ export class ParenthesizedRelationContext extends RelationPrimaryContext {
 	}
 }
 export class UnnestContext extends RelationPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: RelationPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: RelationPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public UNNEST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNNEST, 0);
+		return this.getToken(TrinoSqlParser.UNNEST, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -17998,23 +17998,23 @@ export class UnnestContext extends RelationPrimaryContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
 	public ORDINALITY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ORDINALITY, 0);
+		return this.getToken(TrinoSqlParser.ORDINALITY, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUnnest) {
 	 		listener.enterUnnest(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUnnest) {
 	 		listener.exitUnnest(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUnnest) {
 			return visitor.visitUnnest(this);
 		} else {
@@ -18023,28 +18023,28 @@ export class UnnestContext extends RelationPrimaryContext {
 	}
 }
 export class LateralContext extends RelationPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: RelationPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: RelationPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public LATERAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LATERAL, 0);
+		return this.getToken(TrinoSqlParser.LATERAL, 0);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLateral) {
 	 		listener.enterLateral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLateral) {
 	 		listener.exitLateral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLateral) {
 			return visitor.visitLateral(this);
 		} else {
@@ -18053,25 +18053,25 @@ export class LateralContext extends RelationPrimaryContext {
 	}
 }
 export class TableNameContext extends RelationPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: RelationPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: RelationPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public qualifiedName(): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTableName) {
 	 		listener.enterTableName(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTableName) {
 	 		listener.exitTableName(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTableName) {
 			return visitor.visitTableName(this);
 		} else {
@@ -18082,7 +18082,7 @@ export class TableNameContext extends RelationPrimaryContext {
 
 
 export class ExpressionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -18090,20 +18090,20 @@ export class ExpressionContext extends ParserRuleContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, 0) as BooleanExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_expression;
+    	return TrinoSqlParser.RULE_expression;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterExpression) {
 	 		listener.enterExpression(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitExpression) {
 	 		listener.exitExpression(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitExpression) {
 			return visitor.visitExpression(this);
 		} else {
@@ -18114,40 +18114,40 @@ export class ExpressionContext extends ParserRuleContext {
 
 
 export class BooleanExpressionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_booleanExpression;
+    	return TrinoSqlParser.RULE_booleanExpression;
 	}
 	public copyFrom(ctx: BooleanExpressionContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class LogicalNotContext extends BooleanExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: BooleanExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: BooleanExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
 	public booleanExpression(): BooleanExpressionContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, 0) as BooleanExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLogicalNot) {
 	 		listener.enterLogicalNot(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLogicalNot) {
 	 		listener.exitLogicalNot(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLogicalNot) {
 			return visitor.visitLogicalNot(this);
 		} else {
@@ -18157,7 +18157,7 @@ export class LogicalNotContext extends BooleanExpressionContext {
 }
 export class PredicatedContext extends BooleanExpressionContext {
 	public _valueExpression!: ValueExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: BooleanExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: BooleanExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -18167,18 +18167,18 @@ export class PredicatedContext extends BooleanExpressionContext {
 	public predicate(): PredicateContext {
 		return this.getTypedRuleContext(PredicateContext, 0) as PredicateContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPredicated) {
 	 		listener.enterPredicated(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPredicated) {
 	 		listener.exitPredicated(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPredicated) {
 			return visitor.visitPredicated(this);
 		} else {
@@ -18190,7 +18190,7 @@ export class LogicalBinaryContext extends BooleanExpressionContext {
 	public _left!: BooleanExpressionContext;
 	public _operator!: Token;
 	public _right!: BooleanExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: BooleanExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: BooleanExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -18201,23 +18201,23 @@ export class LogicalBinaryContext extends BooleanExpressionContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, i) as BooleanExpressionContext;
 	}
 	public AND(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AND, 0);
+		return this.getToken(TrinoSqlParser.AND, 0);
 	}
 	public OR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OR, 0);
+		return this.getToken(TrinoSqlParser.OR, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLogicalBinary) {
 	 		listener.enterLogicalBinary(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLogicalBinary) {
 	 		listener.exitLogicalBinary(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLogicalBinary) {
 			return visitor.visitLogicalBinary(this);
 		} else {
@@ -18229,13 +18229,13 @@ export class LogicalBinaryContext extends BooleanExpressionContext {
 
 export class PredicateContext extends ParserRuleContext {
 	public value: ParserRuleContext;
-	constructor(parser: trinoSqlParserParser, parent: ParserRuleContext, invokingState: number, value: ParserRuleContext) {
+	constructor(parser: TrinoSqlParser, parent: ParserRuleContext, invokingState: number, value: ParserRuleContext) {
 		super(parent, invokingState);
     	this.parser = parser;
         this.value = value;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_predicate;
+    	return TrinoSqlParser.RULE_predicate;
 	}
 	public copyFrom(ctx: PredicateContext): void {
 		super.copyFrom(ctx);
@@ -18244,7 +18244,7 @@ export class PredicateContext extends ParserRuleContext {
 }
 export class ComparisonContext extends PredicateContext {
 	public _right!: ValueExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: PredicateContext) {
+	constructor(parser: TrinoSqlParser, ctx: PredicateContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState, ctx.value);
 		super.copyFrom(ctx);
 	}
@@ -18254,18 +18254,18 @@ export class ComparisonContext extends PredicateContext {
 	public valueExpression(): ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, 0) as ValueExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterComparison) {
 	 		listener.enterComparison(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitComparison) {
 	 		listener.exitComparison(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitComparison) {
 			return visitor.visitComparison(this);
 		} else {
@@ -18276,12 +18276,12 @@ export class ComparisonContext extends PredicateContext {
 export class LikeContext extends PredicateContext {
 	public _pattern!: ValueExpressionContext;
 	public _escape!: ValueExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: PredicateContext) {
+	constructor(parser: TrinoSqlParser, ctx: PredicateContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState, ctx.value);
 		super.copyFrom(ctx);
 	}
 	public LIKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIKE, 0);
+		return this.getToken(TrinoSqlParser.LIKE, 0);
 	}
 	public valueExpression_list(): ValueExpressionContext[] {
 		return this.getTypedRuleContexts(ValueExpressionContext) as ValueExpressionContext[];
@@ -18290,23 +18290,23 @@ export class LikeContext extends PredicateContext {
 		return this.getTypedRuleContext(ValueExpressionContext, i) as ValueExpressionContext;
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
 	public ESCAPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ESCAPE, 0);
+		return this.getToken(TrinoSqlParser.ESCAPE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLike) {
 	 		listener.enterLike(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLike) {
 	 		listener.exitLike(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLike) {
 			return visitor.visitLike(this);
 		} else {
@@ -18315,31 +18315,31 @@ export class LikeContext extends PredicateContext {
 	}
 }
 export class InSubqueryContext extends PredicateContext {
-	constructor(parser: trinoSqlParserParser, ctx: PredicateContext) {
+	constructor(parser: TrinoSqlParser, ctx: PredicateContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState, ctx.value);
 		super.copyFrom(ctx);
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterInSubquery) {
 	 		listener.enterInSubquery(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitInSubquery) {
 	 		listener.exitInSubquery(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitInSubquery) {
 			return visitor.visitInSubquery(this);
 		} else {
@@ -18349,37 +18349,37 @@ export class InSubqueryContext extends PredicateContext {
 }
 export class DistinctFromContext extends PredicateContext {
 	public _right!: ValueExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: PredicateContext) {
+	constructor(parser: TrinoSqlParser, ctx: PredicateContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState, ctx.value);
 		super.copyFrom(ctx);
 	}
 	public IS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IS, 0);
+		return this.getToken(TrinoSqlParser.IS, 0);
 	}
 	public DISTINCT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DISTINCT, 0);
+		return this.getToken(TrinoSqlParser.DISTINCT, 0);
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public valueExpression(): ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, 0) as ValueExpressionContext;
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDistinctFrom) {
 	 		listener.enterDistinctFrom(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDistinctFrom) {
 	 		listener.exitDistinctFrom(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDistinctFrom) {
 			return visitor.visitDistinctFrom(this);
 		} else {
@@ -18388,12 +18388,12 @@ export class DistinctFromContext extends PredicateContext {
 	}
 }
 export class InListContext extends PredicateContext {
-	constructor(parser: trinoSqlParserParser, ctx: PredicateContext) {
+	constructor(parser: TrinoSqlParser, ctx: PredicateContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState, ctx.value);
 		super.copyFrom(ctx);
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -18402,20 +18402,20 @@ export class InListContext extends PredicateContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterInList) {
 	 		listener.enterInList(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitInList) {
 	 		listener.exitInList(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitInList) {
 			return visitor.visitInList(this);
 		} else {
@@ -18424,31 +18424,31 @@ export class InListContext extends PredicateContext {
 	}
 }
 export class NullPredicateContext extends PredicateContext {
-	constructor(parser: trinoSqlParserParser, ctx: PredicateContext) {
+	constructor(parser: TrinoSqlParser, ctx: PredicateContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState, ctx.value);
 		super.copyFrom(ctx);
 	}
 	public IS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IS, 0);
+		return this.getToken(TrinoSqlParser.IS, 0);
 	}
 	public NULL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULL, 0);
+		return this.getToken(TrinoSqlParser.NULL, 0);
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNullPredicate) {
 	 		listener.enterNullPredicate(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNullPredicate) {
 	 		listener.exitNullPredicate(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNullPredicate) {
 			return visitor.visitNullPredicate(this);
 		} else {
@@ -18459,15 +18459,15 @@ export class NullPredicateContext extends PredicateContext {
 export class BetweenContext extends PredicateContext {
 	public _lower!: ValueExpressionContext;
 	public _upper!: ValueExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: PredicateContext) {
+	constructor(parser: TrinoSqlParser, ctx: PredicateContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState, ctx.value);
 		super.copyFrom(ctx);
 	}
 	public BETWEEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BETWEEN, 0);
+		return this.getToken(TrinoSqlParser.BETWEEN, 0);
 	}
 	public AND(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AND, 0);
+		return this.getToken(TrinoSqlParser.AND, 0);
 	}
 	public valueExpression_list(): ValueExpressionContext[] {
 		return this.getTypedRuleContexts(ValueExpressionContext) as ValueExpressionContext[];
@@ -18476,20 +18476,20 @@ export class BetweenContext extends PredicateContext {
 		return this.getTypedRuleContext(ValueExpressionContext, i) as ValueExpressionContext;
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterBetween) {
 	 		listener.enterBetween(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitBetween) {
 	 		listener.exitBetween(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitBetween) {
 			return visitor.visitBetween(this);
 		} else {
@@ -18498,7 +18498,7 @@ export class BetweenContext extends PredicateContext {
 	}
 }
 export class QuantifiedComparisonContext extends PredicateContext {
-	constructor(parser: trinoSqlParserParser, ctx: PredicateContext) {
+	constructor(parser: TrinoSqlParser, ctx: PredicateContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState, ctx.value);
 		super.copyFrom(ctx);
 	}
@@ -18511,18 +18511,18 @@ export class QuantifiedComparisonContext extends PredicateContext {
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQuantifiedComparison) {
 	 		listener.enterQuantifiedComparison(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQuantifiedComparison) {
 	 		listener.exitQuantifiedComparison(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQuantifiedComparison) {
 			return visitor.visitQuantifiedComparison(this);
 		} else {
@@ -18533,37 +18533,37 @@ export class QuantifiedComparisonContext extends PredicateContext {
 
 
 export class ValueExpressionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_valueExpression;
+    	return TrinoSqlParser.RULE_valueExpression;
 	}
 	public copyFrom(ctx: ValueExpressionContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class ValueExpressionDefaultContext extends ValueExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: ValueExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: ValueExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public primaryExpression(): PrimaryExpressionContext {
 		return this.getTypedRuleContext(PrimaryExpressionContext, 0) as PrimaryExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterValueExpressionDefault) {
 	 		listener.enterValueExpressionDefault(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitValueExpressionDefault) {
 	 		listener.exitValueExpressionDefault(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitValueExpressionDefault) {
 			return visitor.visitValueExpressionDefault(this);
 		} else {
@@ -18574,12 +18574,12 @@ export class ValueExpressionDefaultContext extends ValueExpressionContext {
 export class ConcatenationContext extends ValueExpressionContext {
 	public _left!: ValueExpressionContext;
 	public _right!: ValueExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: ValueExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: ValueExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CONCAT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CONCAT, 0);
+		return this.getToken(TrinoSqlParser.CONCAT, 0);
 	}
 	public valueExpression_list(): ValueExpressionContext[] {
 		return this.getTypedRuleContexts(ValueExpressionContext) as ValueExpressionContext[];
@@ -18587,18 +18587,18 @@ export class ConcatenationContext extends ValueExpressionContext {
 	public valueExpression(i: number): ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, i) as ValueExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterConcatenation) {
 	 		listener.enterConcatenation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitConcatenation) {
 	 		listener.exitConcatenation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitConcatenation) {
 			return visitor.visitConcatenation(this);
 		} else {
@@ -18610,7 +18610,7 @@ export class ArithmeticBinaryContext extends ValueExpressionContext {
 	public _left!: ValueExpressionContext;
 	public _operator!: Token;
 	public _right!: ValueExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: ValueExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: ValueExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -18621,32 +18621,32 @@ export class ArithmeticBinaryContext extends ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, i) as ValueExpressionContext;
 	}
 	public ASTERISK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ASTERISK, 0);
+		return this.getToken(TrinoSqlParser.ASTERISK, 0);
 	}
 	public SLASH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SLASH, 0);
+		return this.getToken(TrinoSqlParser.SLASH, 0);
 	}
 	public PERCENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PERCENT, 0);
+		return this.getToken(TrinoSqlParser.PERCENT, 0);
 	}
 	public PLUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PLUS, 0);
+		return this.getToken(TrinoSqlParser.PLUS, 0);
 	}
 	public MINUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MINUS, 0);
+		return this.getToken(TrinoSqlParser.MINUS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterArithmeticBinary) {
 	 		listener.enterArithmeticBinary(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitArithmeticBinary) {
 	 		listener.exitArithmeticBinary(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitArithmeticBinary) {
 			return visitor.visitArithmeticBinary(this);
 		} else {
@@ -18656,7 +18656,7 @@ export class ArithmeticBinaryContext extends ValueExpressionContext {
 }
 export class ArithmeticUnaryContext extends ValueExpressionContext {
 	public _operator!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: ValueExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: ValueExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -18664,23 +18664,23 @@ export class ArithmeticUnaryContext extends ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, 0) as ValueExpressionContext;
 	}
 	public MINUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MINUS, 0);
+		return this.getToken(TrinoSqlParser.MINUS, 0);
 	}
 	public PLUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PLUS, 0);
+		return this.getToken(TrinoSqlParser.PLUS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterArithmeticUnary) {
 	 		listener.enterArithmeticUnary(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitArithmeticUnary) {
 	 		listener.exitArithmeticUnary(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitArithmeticUnary) {
 			return visitor.visitArithmeticUnary(this);
 		} else {
@@ -18689,7 +18689,7 @@ export class ArithmeticUnaryContext extends ValueExpressionContext {
 	}
 }
 export class AtTimeZoneContext extends ValueExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: ValueExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: ValueExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -18697,23 +18697,23 @@ export class AtTimeZoneContext extends ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, 0) as ValueExpressionContext;
 	}
 	public AT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AT, 0);
+		return this.getToken(TrinoSqlParser.AT, 0);
 	}
 	public timeZoneSpecifier(): TimeZoneSpecifierContext {
 		return this.getTypedRuleContext(TimeZoneSpecifierContext, 0) as TimeZoneSpecifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterAtTimeZone) {
 	 		listener.enterAtTimeZone(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitAtTimeZone) {
 	 		listener.exitAtTimeZone(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitAtTimeZone) {
 			return visitor.visitAtTimeZone(this);
 		} else {
@@ -18724,12 +18724,12 @@ export class AtTimeZoneContext extends ValueExpressionContext {
 
 
 export class PrimaryExpressionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_primaryExpression;
+    	return TrinoSqlParser.RULE_primaryExpression;
 	}
 	public copyFrom(ctx: PrimaryExpressionContext): void {
 		super.copyFrom(ctx);
@@ -18738,7 +18738,7 @@ export class PrimaryExpressionContext extends ParserRuleContext {
 export class DereferenceContext extends PrimaryExpressionContext {
 	public _base!: PrimaryExpressionContext;
 	public _fieldName!: IdentifierContext;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -18748,18 +18748,18 @@ export class DereferenceContext extends PrimaryExpressionContext {
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDereference) {
 	 		listener.enterDereference(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDereference) {
 	 		listener.exitDereference(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDereference) {
 			return visitor.visitDereference(this);
 		} else {
@@ -18768,7 +18768,7 @@ export class DereferenceContext extends PrimaryExpressionContext {
 	}
 }
 export class TypeConstructorContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -18779,23 +18779,23 @@ export class TypeConstructorContext extends PrimaryExpressionContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
 	public DOUBLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DOUBLE, 0);
+		return this.getToken(TrinoSqlParser.DOUBLE, 0);
 	}
 	public PRECISION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRECISION, 0);
+		return this.getToken(TrinoSqlParser.PRECISION, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTypeConstructor) {
 	 		listener.enterTypeConstructor(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTypeConstructor) {
 	 		listener.exitTypeConstructor(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTypeConstructor) {
 			return visitor.visitTypeConstructor(this);
 		} else {
@@ -18806,40 +18806,40 @@ export class TypeConstructorContext extends PrimaryExpressionContext {
 export class SpecialDateTimeFunctionContext extends PrimaryExpressionContext {
 	public _name!: Token;
 	public _precision!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CURRENT_DATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_DATE, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_DATE, 0);
 	}
 	public CURRENT_TIME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_TIME, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_TIME, 0);
 	}
 	public INTEGER_VALUE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTEGER_VALUE, 0);
+		return this.getToken(TrinoSqlParser.INTEGER_VALUE, 0);
 	}
 	public CURRENT_TIMESTAMP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_TIMESTAMP, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_TIMESTAMP, 0);
 	}
 	public LOCALTIME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LOCALTIME, 0);
+		return this.getToken(TrinoSqlParser.LOCALTIME, 0);
 	}
 	public LOCALTIMESTAMP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LOCALTIMESTAMP, 0);
+		return this.getToken(TrinoSqlParser.LOCALTIMESTAMP, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSpecialDateTimeFunction) {
 	 		listener.enterSpecialDateTimeFunction(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSpecialDateTimeFunction) {
 	 		listener.exitSpecialDateTimeFunction(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSpecialDateTimeFunction) {
 			return visitor.visitSpecialDateTimeFunction(this);
 		} else {
@@ -18848,12 +18848,12 @@ export class SpecialDateTimeFunctionContext extends PrimaryExpressionContext {
 	}
 }
 export class SubstringContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SUBSTRING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SUBSTRING, 0);
+		return this.getToken(TrinoSqlParser.SUBSTRING, 0);
 	}
 	public valueExpression_list(): ValueExpressionContext[] {
 		return this.getTypedRuleContexts(ValueExpressionContext) as ValueExpressionContext[];
@@ -18862,23 +18862,23 @@ export class SubstringContext extends PrimaryExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, i) as ValueExpressionContext;
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public FOR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FOR, 0);
+		return this.getToken(TrinoSqlParser.FOR, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSubstring) {
 	 		listener.enterSubstring(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSubstring) {
 	 		listener.exitSubstring(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSubstring) {
 			return visitor.visitSubstring(this);
 		} else {
@@ -18887,37 +18887,37 @@ export class SubstringContext extends PrimaryExpressionContext {
 	}
 }
 export class CastContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CAST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CAST, 0);
+		return this.getToken(TrinoSqlParser.CAST, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
 	public AS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AS, 0);
+		return this.getToken(TrinoSqlParser.AS, 0);
 	}
 	public type_(): TypeContext {
 		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
 	}
 	public TRY_CAST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TRY_CAST, 0);
+		return this.getToken(TrinoSqlParser.TRY_CAST, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCast) {
 	 		listener.enterCast(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCast) {
 	 		listener.exitCast(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCast) {
 			return visitor.visitCast(this);
 		} else {
@@ -18926,7 +18926,7 @@ export class CastContext extends PrimaryExpressionContext {
 	}
 }
 export class LambdaContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -18939,18 +18939,18 @@ export class LambdaContext extends PrimaryExpressionContext {
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLambda) {
 	 		listener.enterLambda(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLambda) {
 	 		listener.exitLambda(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLambda) {
 			return visitor.visitLambda(this);
 		} else {
@@ -18959,25 +18959,25 @@ export class LambdaContext extends PrimaryExpressionContext {
 	}
 }
 export class ParenthesizedExpressionContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterParenthesizedExpression) {
 	 		listener.enterParenthesizedExpression(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitParenthesizedExpression) {
 	 		listener.exitParenthesizedExpression(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitParenthesizedExpression) {
 			return visitor.visitParenthesizedExpression(this);
 		} else {
@@ -18986,25 +18986,25 @@ export class ParenthesizedExpressionContext extends PrimaryExpressionContext {
 	}
 }
 export class ParameterContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public QUESTION_MARK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.QUESTION_MARK, 0);
+		return this.getToken(TrinoSqlParser.QUESTION_MARK, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterParameter) {
 	 		listener.enterParameter(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitParameter) {
 	 		listener.exitParameter(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitParameter) {
 			return visitor.visitParameter(this);
 		} else {
@@ -19013,12 +19013,12 @@ export class ParameterContext extends PrimaryExpressionContext {
 	}
 }
 export class NormalizeContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public NORMALIZE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NORMALIZE, 0);
+		return this.getToken(TrinoSqlParser.NORMALIZE, 0);
 	}
 	public valueExpression(): ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, 0) as ValueExpressionContext;
@@ -19026,18 +19026,18 @@ export class NormalizeContext extends PrimaryExpressionContext {
 	public normalForm(): NormalFormContext {
 		return this.getTypedRuleContext(NormalFormContext, 0) as NormalFormContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNormalize) {
 	 		listener.enterNormalize(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNormalize) {
 	 		listener.exitNormalize(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNormalize) {
 			return visitor.visitNormalize(this);
 		} else {
@@ -19046,25 +19046,25 @@ export class NormalizeContext extends PrimaryExpressionContext {
 	}
 }
 export class IntervalLiteralContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public interval(): IntervalContext {
 		return this.getTypedRuleContext(IntervalContext, 0) as IntervalContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterIntervalLiteral) {
 	 		listener.enterIntervalLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitIntervalLiteral) {
 	 		listener.exitIntervalLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitIntervalLiteral) {
 			return visitor.visitIntervalLiteral(this);
 		} else {
@@ -19073,25 +19073,25 @@ export class IntervalLiteralContext extends PrimaryExpressionContext {
 	}
 }
 export class NumericLiteralContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public number_(): NumberContext {
 		return this.getTypedRuleContext(NumberContext, 0) as NumberContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNumericLiteral) {
 	 		listener.enterNumericLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNumericLiteral) {
 	 		listener.exitNumericLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNumericLiteral) {
 			return visitor.visitNumericLiteral(this);
 		} else {
@@ -19100,25 +19100,25 @@ export class NumericLiteralContext extends PrimaryExpressionContext {
 	}
 }
 export class BooleanLiteralContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public booleanValue(): BooleanValueContext {
 		return this.getTypedRuleContext(BooleanValueContext, 0) as BooleanValueContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterBooleanLiteral) {
 	 		listener.enterBooleanLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitBooleanLiteral) {
 	 		listener.exitBooleanLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitBooleanLiteral) {
 			return visitor.visitBooleanLiteral(this);
 		} else {
@@ -19129,15 +19129,15 @@ export class BooleanLiteralContext extends PrimaryExpressionContext {
 export class SimpleCaseContext extends PrimaryExpressionContext {
 	public _operand!: ExpressionContext;
 	public _elseExpression!: ExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CASE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CASE, 0);
+		return this.getToken(TrinoSqlParser.CASE, 0);
 	}
 	public END(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.END, 0);
+		return this.getToken(TrinoSqlParser.END, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -19152,20 +19152,20 @@ export class SimpleCaseContext extends PrimaryExpressionContext {
 		return this.getTypedRuleContext(WhenClauseContext, i) as WhenClauseContext;
 	}
 	public ELSE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ELSE, 0);
+		return this.getToken(TrinoSqlParser.ELSE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSimpleCase) {
 	 		listener.enterSimpleCase(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSimpleCase) {
 	 		listener.exitSimpleCase(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSimpleCase) {
 			return visitor.visitSimpleCase(this);
 		} else {
@@ -19174,25 +19174,25 @@ export class SimpleCaseContext extends PrimaryExpressionContext {
 	}
 }
 export class ColumnReferenceContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterColumnReference) {
 	 		listener.enterColumnReference(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitColumnReference) {
 	 		listener.exitColumnReference(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitColumnReference) {
 			return visitor.visitColumnReference(this);
 		} else {
@@ -19201,25 +19201,25 @@ export class ColumnReferenceContext extends PrimaryExpressionContext {
 	}
 }
 export class NullLiteralContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public NULL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULL, 0);
+		return this.getToken(TrinoSqlParser.NULL, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNullLiteral) {
 	 		listener.enterNullLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNullLiteral) {
 	 		listener.exitNullLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNullLiteral) {
 			return visitor.visitNullLiteral(this);
 		} else {
@@ -19228,7 +19228,7 @@ export class NullLiteralContext extends PrimaryExpressionContext {
 	}
 }
 export class RowConstructorContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -19239,20 +19239,20 @@ export class RowConstructorContext extends PrimaryExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
 	public ROW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROW, 0);
+		return this.getToken(TrinoSqlParser.ROW, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRowConstructor) {
 	 		listener.enterRowConstructor(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRowConstructor) {
 	 		listener.exitRowConstructor(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRowConstructor) {
 			return visitor.visitRowConstructor(this);
 		} else {
@@ -19263,7 +19263,7 @@ export class RowConstructorContext extends PrimaryExpressionContext {
 export class SubscriptContext extends PrimaryExpressionContext {
 	public _value!: PrimaryExpressionContext;
 	public _index!: ValueExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -19273,18 +19273,18 @@ export class SubscriptContext extends PrimaryExpressionContext {
 	public valueExpression(): ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, 0) as ValueExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSubscript) {
 	 		listener.enterSubscript(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSubscript) {
 	 		listener.exitSubscript(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSubscript) {
 			return visitor.visitSubscript(this);
 		} else {
@@ -19294,25 +19294,25 @@ export class SubscriptContext extends PrimaryExpressionContext {
 }
 export class CurrentPathContext extends PrimaryExpressionContext {
 	public _name!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CURRENT_PATH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_PATH, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_PATH, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCurrentPath) {
 	 		listener.enterCurrentPath(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCurrentPath) {
 	 		listener.exitCurrentPath(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCurrentPath) {
 			return visitor.visitCurrentPath(this);
 		} else {
@@ -19321,25 +19321,25 @@ export class CurrentPathContext extends PrimaryExpressionContext {
 	}
 }
 export class SubqueryExpressionContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSubqueryExpression) {
 	 		listener.enterSubqueryExpression(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSubqueryExpression) {
 	 		listener.exitSubqueryExpression(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSubqueryExpression) {
 			return visitor.visitSubqueryExpression(this);
 		} else {
@@ -19348,25 +19348,25 @@ export class SubqueryExpressionContext extends PrimaryExpressionContext {
 	}
 }
 export class BinaryLiteralContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public BINARY_LITERAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BINARY_LITERAL, 0);
+		return this.getToken(TrinoSqlParser.BINARY_LITERAL, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterBinaryLiteral) {
 	 		listener.enterBinaryLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitBinaryLiteral) {
 	 		listener.exitBinaryLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitBinaryLiteral) {
 			return visitor.visitBinaryLiteral(this);
 		} else {
@@ -19376,25 +19376,25 @@ export class BinaryLiteralContext extends PrimaryExpressionContext {
 }
 export class CurrentUserContext extends PrimaryExpressionContext {
 	public _name!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CURRENT_USER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_USER, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_USER, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCurrentUser) {
 	 		listener.enterCurrentUser(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCurrentUser) {
 	 		listener.exitCurrentUser(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCurrentUser) {
 			return visitor.visitCurrentUser(this);
 		} else {
@@ -19403,7 +19403,7 @@ export class CurrentUserContext extends PrimaryExpressionContext {
 	}
 }
 export class MeasureContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -19413,18 +19413,18 @@ export class MeasureContext extends PrimaryExpressionContext {
 	public over(): OverContext {
 		return this.getTypedRuleContext(OverContext, 0) as OverContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterMeasure) {
 	 		listener.enterMeasure(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitMeasure) {
 	 		listener.exitMeasure(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitMeasure) {
 			return visitor.visitMeasure(this);
 		} else {
@@ -19433,34 +19433,34 @@ export class MeasureContext extends PrimaryExpressionContext {
 	}
 }
 export class ExtractContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public EXTRACT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXTRACT, 0);
+		return this.getToken(TrinoSqlParser.EXTRACT, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public FROM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FROM, 0);
+		return this.getToken(TrinoSqlParser.FROM, 0);
 	}
 	public valueExpression(): ValueExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, 0) as ValueExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterExtract) {
 	 		listener.enterExtract(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitExtract) {
 	 		listener.exitExtract(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitExtract) {
 			return visitor.visitExtract(this);
 		} else {
@@ -19469,25 +19469,25 @@ export class ExtractContext extends PrimaryExpressionContext {
 	}
 }
 export class StringLiteralContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterStringLiteral) {
 	 		listener.enterStringLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitStringLiteral) {
 	 		listener.exitStringLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitStringLiteral) {
 			return visitor.visitStringLiteral(this);
 		} else {
@@ -19496,12 +19496,12 @@ export class StringLiteralContext extends PrimaryExpressionContext {
 	}
 }
 export class ArrayConstructorContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ARRAY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ARRAY, 0);
+		return this.getToken(TrinoSqlParser.ARRAY, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -19509,18 +19509,18 @@ export class ArrayConstructorContext extends PrimaryExpressionContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterArrayConstructor) {
 	 		listener.enterArrayConstructor(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitArrayConstructor) {
 	 		listener.exitArrayConstructor(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitArrayConstructor) {
 			return visitor.visitArrayConstructor(this);
 		} else {
@@ -19529,7 +19529,7 @@ export class ArrayConstructorContext extends PrimaryExpressionContext {
 	}
 }
 export class FunctionCallContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -19537,7 +19537,7 @@ export class FunctionCallContext extends PrimaryExpressionContext {
 		return this.getTypedRuleContext(QualifiedNameContext, 0) as QualifiedNameContext;
 	}
 	public ASTERISK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ASTERISK, 0);
+		return this.getToken(TrinoSqlParser.ASTERISK, 0);
 	}
 	public filter(): FilterContext {
 		return this.getTypedRuleContext(FilterContext, 0) as FilterContext;
@@ -19555,10 +19555,10 @@ export class FunctionCallContext extends PrimaryExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
 	public ORDER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ORDER, 0);
+		return this.getToken(TrinoSqlParser.ORDER, 0);
 	}
 	public BY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BY, 0);
+		return this.getToken(TrinoSqlParser.BY, 0);
 	}
 	public sortItem_list(): SortItemContext[] {
 		return this.getTypedRuleContexts(SortItemContext) as SortItemContext[];
@@ -19572,18 +19572,18 @@ export class FunctionCallContext extends PrimaryExpressionContext {
 	public nullTreatment(): NullTreatmentContext {
 		return this.getTypedRuleContext(NullTreatmentContext, 0) as NullTreatmentContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterFunctionCall) {
 	 		listener.enterFunctionCall(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitFunctionCall) {
 	 		listener.exitFunctionCall(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitFunctionCall) {
 			return visitor.visitFunctionCall(this);
 		} else {
@@ -19593,25 +19593,25 @@ export class FunctionCallContext extends PrimaryExpressionContext {
 }
 export class CurrentSchemaContext extends PrimaryExpressionContext {
 	public _name!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CURRENT_SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_SCHEMA, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCurrentSchema) {
 	 		listener.enterCurrentSchema(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCurrentSchema) {
 	 		listener.exitCurrentSchema(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCurrentSchema) {
 			return visitor.visitCurrentSchema(this);
 		} else {
@@ -19620,28 +19620,28 @@ export class CurrentSchemaContext extends PrimaryExpressionContext {
 	}
 }
 export class ExistsContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public EXISTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXISTS, 0);
+		return this.getToken(TrinoSqlParser.EXISTS, 0);
 	}
 	public query(): QueryContext {
 		return this.getTypedRuleContext(QueryContext, 0) as QueryContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterExists) {
 	 		listener.enterExists(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitExists) {
 	 		listener.exitExists(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitExists) {
 			return visitor.visitExists(this);
 		} else {
@@ -19650,12 +19650,12 @@ export class ExistsContext extends PrimaryExpressionContext {
 	}
 }
 export class PositionContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public POSITION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.POSITION, 0);
+		return this.getToken(TrinoSqlParser.POSITION, 0);
 	}
 	public valueExpression_list(): ValueExpressionContext[] {
 		return this.getTypedRuleContexts(ValueExpressionContext) as ValueExpressionContext[];
@@ -19664,20 +19664,20 @@ export class PositionContext extends PrimaryExpressionContext {
 		return this.getTypedRuleContext(ValueExpressionContext, i) as ValueExpressionContext;
 	}
 	public IN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IN, 0);
+		return this.getToken(TrinoSqlParser.IN, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPosition) {
 	 		listener.enterPosition(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPosition) {
 	 		listener.exitPosition(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPosition) {
 			return visitor.visitPosition(this);
 		} else {
@@ -19687,15 +19687,15 @@ export class PositionContext extends PrimaryExpressionContext {
 }
 export class SearchedCaseContext extends PrimaryExpressionContext {
 	public _elseExpression!: ExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CASE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CASE, 0);
+		return this.getToken(TrinoSqlParser.CASE, 0);
 	}
 	public END(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.END, 0);
+		return this.getToken(TrinoSqlParser.END, 0);
 	}
 	public whenClause_list(): WhenClauseContext[] {
 		return this.getTypedRuleContexts(WhenClauseContext) as WhenClauseContext[];
@@ -19704,23 +19704,23 @@ export class SearchedCaseContext extends PrimaryExpressionContext {
 		return this.getTypedRuleContext(WhenClauseContext, i) as WhenClauseContext;
 	}
 	public ELSE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ELSE, 0);
+		return this.getToken(TrinoSqlParser.ELSE, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSearchedCase) {
 	 		listener.enterSearchedCase(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSearchedCase) {
 	 		listener.exitSearchedCase(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSearchedCase) {
 			return visitor.visitSearchedCase(this);
 		} else {
@@ -19730,25 +19730,25 @@ export class SearchedCaseContext extends PrimaryExpressionContext {
 }
 export class CurrentCatalogContext extends PrimaryExpressionContext {
 	public _name!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CURRENT_CATALOG(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_CATALOG, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_CATALOG, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCurrentCatalog) {
 	 		listener.enterCurrentCatalog(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCurrentCatalog) {
 	 		listener.exitCurrentCatalog(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCurrentCatalog) {
 			return visitor.visitCurrentCatalog(this);
 		} else {
@@ -19757,12 +19757,12 @@ export class CurrentCatalogContext extends PrimaryExpressionContext {
 	}
 }
 export class GroupingOperationContext extends PrimaryExpressionContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrimaryExpressionContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrimaryExpressionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public GROUPING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GROUPING, 0);
+		return this.getToken(TrinoSqlParser.GROUPING, 0);
 	}
 	public qualifiedName_list(): QualifiedNameContext[] {
 		return this.getTypedRuleContexts(QualifiedNameContext) as QualifiedNameContext[];
@@ -19770,18 +19770,18 @@ export class GroupingOperationContext extends PrimaryExpressionContext {
 	public qualifiedName(i: number): QualifiedNameContext {
 		return this.getTypedRuleContext(QualifiedNameContext, i) as QualifiedNameContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterGroupingOperation) {
 	 		listener.enterGroupingOperation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitGroupingOperation) {
 	 		listener.exitGroupingOperation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitGroupingOperation) {
 			return visitor.visitGroupingOperation(this);
 		} else {
@@ -19792,31 +19792,31 @@ export class GroupingOperationContext extends PrimaryExpressionContext {
 
 
 export class ProcessingModeContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public RUNNING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RUNNING, 0);
+		return this.getToken(TrinoSqlParser.RUNNING, 0);
 	}
 	public FINAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FINAL, 0);
+		return this.getToken(TrinoSqlParser.FINAL, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_processingMode;
+    	return TrinoSqlParser.RULE_processingMode;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterProcessingMode) {
 	 		listener.enterProcessingMode(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitProcessingMode) {
 	 		listener.exitProcessingMode(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitProcessingMode) {
 			return visitor.visitProcessingMode(this);
 		} else {
@@ -19827,34 +19827,34 @@ export class ProcessingModeContext extends ParserRuleContext {
 
 
 export class NullTreatmentContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public IGNORE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IGNORE, 0);
+		return this.getToken(TrinoSqlParser.IGNORE, 0);
 	}
 	public NULLS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULLS, 0);
+		return this.getToken(TrinoSqlParser.NULLS, 0);
 	}
 	public RESPECT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RESPECT, 0);
+		return this.getToken(TrinoSqlParser.RESPECT, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_nullTreatment;
+    	return TrinoSqlParser.RULE_nullTreatment;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNullTreatment) {
 	 		listener.enterNullTreatment(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNullTreatment) {
 	 		listener.exitNullTreatment(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNullTreatment) {
 			return visitor.visitNullTreatment(this);
 		} else {
@@ -19865,43 +19865,43 @@ export class NullTreatmentContext extends ParserRuleContext {
 
 
 export class StringContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_string;
+    	return TrinoSqlParser.RULE_string;
 	}
 	public copyFrom(ctx: StringContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class UnicodeStringLiteralContext extends StringContext {
-	constructor(parser: trinoSqlParserParser, ctx: StringContext) {
+	constructor(parser: TrinoSqlParser, ctx: StringContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public UNICODE_STRING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNICODE_STRING, 0);
+		return this.getToken(TrinoSqlParser.UNICODE_STRING, 0);
 	}
 	public UESCAPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UESCAPE, 0);
+		return this.getToken(TrinoSqlParser.UESCAPE, 0);
 	}
 	public STRING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.STRING, 0);
+		return this.getToken(TrinoSqlParser.STRING, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUnicodeStringLiteral) {
 	 		listener.enterUnicodeStringLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUnicodeStringLiteral) {
 	 		listener.exitUnicodeStringLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUnicodeStringLiteral) {
 			return visitor.visitUnicodeStringLiteral(this);
 		} else {
@@ -19910,25 +19910,25 @@ export class UnicodeStringLiteralContext extends StringContext {
 	}
 }
 export class BasicStringLiteralContext extends StringContext {
-	constructor(parser: trinoSqlParserParser, ctx: StringContext) {
+	constructor(parser: TrinoSqlParser, ctx: StringContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public STRING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.STRING, 0);
+		return this.getToken(TrinoSqlParser.STRING, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterBasicStringLiteral) {
 	 		listener.enterBasicStringLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitBasicStringLiteral) {
 	 		listener.exitBasicStringLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitBasicStringLiteral) {
 			return visitor.visitBasicStringLiteral(this);
 		} else {
@@ -19939,43 +19939,43 @@ export class BasicStringLiteralContext extends StringContext {
 
 
 export class TimeZoneSpecifierContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_timeZoneSpecifier;
+    	return TrinoSqlParser.RULE_timeZoneSpecifier;
 	}
 	public copyFrom(ctx: TimeZoneSpecifierContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class TimeZoneIntervalContext extends TimeZoneSpecifierContext {
-	constructor(parser: trinoSqlParserParser, ctx: TimeZoneSpecifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: TimeZoneSpecifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public TIME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIME, 0);
+		return this.getToken(TrinoSqlParser.TIME, 0);
 	}
 	public ZONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ZONE, 0);
+		return this.getToken(TrinoSqlParser.ZONE, 0);
 	}
 	public interval(): IntervalContext {
 		return this.getTypedRuleContext(IntervalContext, 0) as IntervalContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTimeZoneInterval) {
 	 		listener.enterTimeZoneInterval(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTimeZoneInterval) {
 	 		listener.exitTimeZoneInterval(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTimeZoneInterval) {
 			return visitor.visitTimeZoneInterval(this);
 		} else {
@@ -19984,31 +19984,31 @@ export class TimeZoneIntervalContext extends TimeZoneSpecifierContext {
 	}
 }
 export class TimeZoneStringContext extends TimeZoneSpecifierContext {
-	constructor(parser: trinoSqlParserParser, ctx: TimeZoneSpecifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: TimeZoneSpecifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public TIME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIME, 0);
+		return this.getToken(TrinoSqlParser.TIME, 0);
 	}
 	public ZONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ZONE, 0);
+		return this.getToken(TrinoSqlParser.ZONE, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTimeZoneString) {
 	 		listener.enterTimeZoneString(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTimeZoneString) {
 	 		listener.exitTimeZoneString(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTimeZoneString) {
 			return visitor.visitTimeZoneString(this);
 		} else {
@@ -20019,43 +20019,43 @@ export class TimeZoneStringContext extends TimeZoneSpecifierContext {
 
 
 export class ComparisonOperatorContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public EQ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EQ, 0);
+		return this.getToken(TrinoSqlParser.EQ, 0);
 	}
 	public NEQ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NEQ, 0);
+		return this.getToken(TrinoSqlParser.NEQ, 0);
 	}
 	public LT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LT, 0);
+		return this.getToken(TrinoSqlParser.LT, 0);
 	}
 	public LTE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LTE, 0);
+		return this.getToken(TrinoSqlParser.LTE, 0);
 	}
 	public GT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GT, 0);
+		return this.getToken(TrinoSqlParser.GT, 0);
 	}
 	public GTE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GTE, 0);
+		return this.getToken(TrinoSqlParser.GTE, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_comparisonOperator;
+    	return TrinoSqlParser.RULE_comparisonOperator;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterComparisonOperator) {
 	 		listener.enterComparisonOperator(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitComparisonOperator) {
 	 		listener.exitComparisonOperator(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitComparisonOperator) {
 			return visitor.visitComparisonOperator(this);
 		} else {
@@ -20066,34 +20066,34 @@ export class ComparisonOperatorContext extends ParserRuleContext {
 
 
 export class ComparisonQuantifierContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
 	public SOME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SOME, 0);
+		return this.getToken(TrinoSqlParser.SOME, 0);
 	}
 	public ANY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ANY, 0);
+		return this.getToken(TrinoSqlParser.ANY, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_comparisonQuantifier;
+    	return TrinoSqlParser.RULE_comparisonQuantifier;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterComparisonQuantifier) {
 	 		listener.enterComparisonQuantifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitComparisonQuantifier) {
 	 		listener.exitComparisonQuantifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitComparisonQuantifier) {
 			return visitor.visitComparisonQuantifier(this);
 		} else {
@@ -20104,31 +20104,31 @@ export class ComparisonQuantifierContext extends ParserRuleContext {
 
 
 export class BooleanValueContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public TRUE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TRUE, 0);
+		return this.getToken(TrinoSqlParser.TRUE, 0);
 	}
 	public FALSE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FALSE, 0);
+		return this.getToken(TrinoSqlParser.FALSE, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_booleanValue;
+    	return TrinoSqlParser.RULE_booleanValue;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterBooleanValue) {
 	 		listener.enterBooleanValue(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitBooleanValue) {
 	 		listener.exitBooleanValue(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitBooleanValue) {
 			return visitor.visitBooleanValue(this);
 		} else {
@@ -20142,12 +20142,12 @@ export class IntervalContext extends ParserRuleContext {
 	public _sign!: Token;
 	public _from_!: IntervalFieldContext;
 	public _to!: IntervalFieldContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public INTERVAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTERVAL, 0);
+		return this.getToken(TrinoSqlParser.INTERVAL, 0);
 	}
 	public string_(): StringContext {
 		return this.getTypedRuleContext(StringContext, 0) as StringContext;
@@ -20159,29 +20159,29 @@ export class IntervalContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IntervalFieldContext, i) as IntervalFieldContext;
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public PLUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PLUS, 0);
+		return this.getToken(TrinoSqlParser.PLUS, 0);
 	}
 	public MINUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MINUS, 0);
+		return this.getToken(TrinoSqlParser.MINUS, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_interval;
+    	return TrinoSqlParser.RULE_interval;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterInterval) {
 	 		listener.enterInterval(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitInterval) {
 	 		listener.exitInterval(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitInterval) {
 			return visitor.visitInterval(this);
 		} else {
@@ -20192,43 +20192,43 @@ export class IntervalContext extends ParserRuleContext {
 
 
 export class IntervalFieldContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public YEAR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.YEAR, 0);
+		return this.getToken(TrinoSqlParser.YEAR, 0);
 	}
 	public MONTH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MONTH, 0);
+		return this.getToken(TrinoSqlParser.MONTH, 0);
 	}
 	public DAY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DAY, 0);
+		return this.getToken(TrinoSqlParser.DAY, 0);
 	}
 	public HOUR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.HOUR, 0);
+		return this.getToken(TrinoSqlParser.HOUR, 0);
 	}
 	public MINUTE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MINUTE, 0);
+		return this.getToken(TrinoSqlParser.MINUTE, 0);
 	}
 	public SECOND(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SECOND, 0);
+		return this.getToken(TrinoSqlParser.SECOND, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_intervalField;
+    	return TrinoSqlParser.RULE_intervalField;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterIntervalField) {
 	 		listener.enterIntervalField(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitIntervalField) {
 	 		listener.exitIntervalField(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitIntervalField) {
 			return visitor.visitIntervalField(this);
 		} else {
@@ -20239,37 +20239,37 @@ export class IntervalFieldContext extends ParserRuleContext {
 
 
 export class NormalFormContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public NFD(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NFD, 0);
+		return this.getToken(TrinoSqlParser.NFD, 0);
 	}
 	public NFC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NFC, 0);
+		return this.getToken(TrinoSqlParser.NFC, 0);
 	}
 	public NFKD(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NFKD, 0);
+		return this.getToken(TrinoSqlParser.NFKD, 0);
 	}
 	public NFKC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NFKC, 0);
+		return this.getToken(TrinoSqlParser.NFKC, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_normalForm;
+    	return TrinoSqlParser.RULE_normalForm;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNormalForm) {
 	 		listener.enterNormalForm(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNormalForm) {
 	 		listener.exitNormalForm(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNormalForm) {
 			return visitor.visitNormalForm(this);
 		} else {
@@ -20280,24 +20280,24 @@ export class NormalFormContext extends ParserRuleContext {
 
 
 export class TypeContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_type;
+    	return TrinoSqlParser.RULE_type;
 	}
 	public copyFrom(ctx: TypeContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class RowTypeContext extends TypeContext {
-	constructor(parser: trinoSqlParserParser, ctx: TypeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TypeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ROW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROW, 0);
+		return this.getToken(TrinoSqlParser.ROW, 0);
 	}
 	public rowField_list(): RowFieldContext[] {
 		return this.getTypedRuleContexts(RowFieldContext) as RowFieldContext[];
@@ -20305,18 +20305,18 @@ export class RowTypeContext extends TypeContext {
 	public rowField(i: number): RowFieldContext {
 		return this.getTypedRuleContext(RowFieldContext, i) as RowFieldContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRowType) {
 	 		listener.enterRowType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRowType) {
 	 		listener.exitRowType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRowType) {
 			return visitor.visitRowType(this);
 		} else {
@@ -20327,12 +20327,12 @@ export class RowTypeContext extends TypeContext {
 export class IntervalTypeContext extends TypeContext {
 	public _from_!: IntervalFieldContext;
 	public _to!: IntervalFieldContext;
-	constructor(parser: trinoSqlParserParser, ctx: TypeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TypeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public INTERVAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTERVAL, 0);
+		return this.getToken(TrinoSqlParser.INTERVAL, 0);
 	}
 	public intervalField_list(): IntervalFieldContext[] {
 		return this.getTypedRuleContexts(IntervalFieldContext) as IntervalFieldContext[];
@@ -20341,20 +20341,20 @@ export class IntervalTypeContext extends TypeContext {
 		return this.getTypedRuleContext(IntervalFieldContext, i) as IntervalFieldContext;
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterIntervalType) {
 	 		listener.enterIntervalType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitIntervalType) {
 	 		listener.exitIntervalType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitIntervalType) {
 			return visitor.visitIntervalType(this);
 		} else {
@@ -20363,7 +20363,7 @@ export class IntervalTypeContext extends TypeContext {
 	}
 }
 export class ArrayTypeContext extends TypeContext {
-	constructor(parser: trinoSqlParserParser, ctx: TypeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TypeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -20371,23 +20371,23 @@ export class ArrayTypeContext extends TypeContext {
 		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
 	}
 	public ARRAY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ARRAY, 0);
+		return this.getToken(TrinoSqlParser.ARRAY, 0);
 	}
 	public INTEGER_VALUE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTEGER_VALUE, 0);
+		return this.getToken(TrinoSqlParser.INTEGER_VALUE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterArrayType) {
 	 		listener.enterArrayType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitArrayType) {
 	 		listener.exitArrayType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitArrayType) {
 			return visitor.visitArrayType(this);
 		} else {
@@ -20396,28 +20396,28 @@ export class ArrayTypeContext extends TypeContext {
 	}
 }
 export class DoublePrecisionTypeContext extends TypeContext {
-	constructor(parser: trinoSqlParserParser, ctx: TypeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TypeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DOUBLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DOUBLE, 0);
+		return this.getToken(TrinoSqlParser.DOUBLE, 0);
 	}
 	public PRECISION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRECISION, 0);
+		return this.getToken(TrinoSqlParser.PRECISION, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDoublePrecisionType) {
 	 		listener.enterDoublePrecisionType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDoublePrecisionType) {
 	 		listener.exitDoublePrecisionType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDoublePrecisionType) {
 			return visitor.visitDoublePrecisionType(this);
 		} else {
@@ -20426,34 +20426,34 @@ export class DoublePrecisionTypeContext extends TypeContext {
 	}
 }
 export class LegacyArrayTypeContext extends TypeContext {
-	constructor(parser: trinoSqlParserParser, ctx: TypeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TypeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ARRAY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ARRAY, 0);
+		return this.getToken(TrinoSqlParser.ARRAY, 0);
 	}
 	public LT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LT, 0);
+		return this.getToken(TrinoSqlParser.LT, 0);
 	}
 	public type_(): TypeContext {
 		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
 	}
 	public GT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GT, 0);
+		return this.getToken(TrinoSqlParser.GT, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLegacyArrayType) {
 	 		listener.enterLegacyArrayType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLegacyArrayType) {
 	 		listener.exitLegacyArrayType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLegacyArrayType) {
 			return visitor.visitLegacyArrayType(this);
 		} else {
@@ -20462,7 +20462,7 @@ export class LegacyArrayTypeContext extends TypeContext {
 	}
 }
 export class GenericTypeContext extends TypeContext {
-	constructor(parser: trinoSqlParserParser, ctx: TypeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TypeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -20475,18 +20475,18 @@ export class GenericTypeContext extends TypeContext {
 	public typeParameter(i: number): TypeParameterContext {
 		return this.getTypedRuleContext(TypeParameterContext, i) as TypeParameterContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterGenericType) {
 	 		listener.enterGenericType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitGenericType) {
 	 		listener.exitGenericType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitGenericType) {
 			return visitor.visitGenericType(this);
 		} else {
@@ -20497,43 +20497,43 @@ export class GenericTypeContext extends TypeContext {
 export class DateTimeTypeContext extends TypeContext {
 	public _base!: Token;
 	public _precision!: TypeParameterContext;
-	constructor(parser: trinoSqlParserParser, ctx: TypeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TypeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public TIMESTAMP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIMESTAMP, 0);
+		return this.getToken(TrinoSqlParser.TIMESTAMP, 0);
 	}
 	public WITHOUT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITHOUT, 0);
+		return this.getToken(TrinoSqlParser.WITHOUT, 0);
 	}
 	public TIME_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.TIME);
+	    	return this.getTokens(TrinoSqlParser.TIME);
 	}
 	public TIME(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIME, i);
+		return this.getToken(TrinoSqlParser.TIME, i);
 	}
 	public ZONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ZONE, 0);
+		return this.getToken(TrinoSqlParser.ZONE, 0);
 	}
 	public typeParameter(): TypeParameterContext {
 		return this.getTypedRuleContext(TypeParameterContext, 0) as TypeParameterContext;
 	}
 	public WITH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITH, 0);
+		return this.getToken(TrinoSqlParser.WITH, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDateTimeType) {
 	 		listener.enterDateTimeType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDateTimeType) {
 	 		listener.exitDateTimeType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDateTimeType) {
 			return visitor.visitDateTimeType(this);
 		} else {
@@ -20544,18 +20544,18 @@ export class DateTimeTypeContext extends TypeContext {
 export class LegacyMapTypeContext extends TypeContext {
 	public _keyType!: TypeContext;
 	public _valueType!: TypeContext;
-	constructor(parser: trinoSqlParserParser, ctx: TypeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TypeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public MAP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MAP, 0);
+		return this.getToken(TrinoSqlParser.MAP, 0);
 	}
 	public LT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LT, 0);
+		return this.getToken(TrinoSqlParser.LT, 0);
 	}
 	public GT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GT, 0);
+		return this.getToken(TrinoSqlParser.GT, 0);
 	}
 	public type__list(): TypeContext[] {
 		return this.getTypedRuleContexts(TypeContext) as TypeContext[];
@@ -20563,18 +20563,18 @@ export class LegacyMapTypeContext extends TypeContext {
 	public type_(i: number): TypeContext {
 		return this.getTypedRuleContext(TypeContext, i) as TypeContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterLegacyMapType) {
 	 		listener.enterLegacyMapType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitLegacyMapType) {
 	 		listener.exitLegacyMapType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitLegacyMapType) {
 			return visitor.visitLegacyMapType(this);
 		} else {
@@ -20585,7 +20585,7 @@ export class LegacyMapTypeContext extends TypeContext {
 
 
 export class RowFieldContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -20596,20 +20596,20 @@ export class RowFieldContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_rowField;
+    	return TrinoSqlParser.RULE_rowField;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRowField) {
 	 		listener.enterRowField(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRowField) {
 	 		listener.exitRowField(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRowField) {
 			return visitor.visitRowField(this);
 		} else {
@@ -20620,31 +20620,31 @@ export class RowFieldContext extends ParserRuleContext {
 
 
 export class TypeParameterContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public INTEGER_VALUE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTEGER_VALUE, 0);
+		return this.getToken(TrinoSqlParser.INTEGER_VALUE, 0);
 	}
 	public type_(): TypeContext {
 		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_typeParameter;
+    	return TrinoSqlParser.RULE_typeParameter;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTypeParameter) {
 	 		listener.enterTypeParameter(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTypeParameter) {
 	 		listener.exitTypeParameter(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTypeParameter) {
 			return visitor.visitTypeParameter(this);
 		} else {
@@ -20657,15 +20657,15 @@ export class TypeParameterContext extends ParserRuleContext {
 export class WhenClauseContext extends ParserRuleContext {
 	public _condition!: ExpressionContext;
 	public _result!: ExpressionContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public WHEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHEN, 0);
+		return this.getToken(TrinoSqlParser.WHEN, 0);
 	}
 	public THEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.THEN, 0);
+		return this.getToken(TrinoSqlParser.THEN, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -20674,20 +20674,20 @@ export class WhenClauseContext extends ParserRuleContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_whenClause;
+    	return TrinoSqlParser.RULE_whenClause;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterWhenClause) {
 	 		listener.enterWhenClause(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitWhenClause) {
 	 		listener.exitWhenClause(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitWhenClause) {
 			return visitor.visitWhenClause(this);
 		} else {
@@ -20698,34 +20698,34 @@ export class WhenClauseContext extends ParserRuleContext {
 
 
 export class FilterContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public FILTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FILTER, 0);
+		return this.getToken(TrinoSqlParser.FILTER, 0);
 	}
 	public WHERE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHERE, 0);
+		return this.getToken(TrinoSqlParser.WHERE, 0);
 	}
 	public booleanExpression(): BooleanExpressionContext {
 		return this.getTypedRuleContext(BooleanExpressionContext, 0) as BooleanExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_filter;
+    	return TrinoSqlParser.RULE_filter;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterFilter) {
 	 		listener.enterFilter(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitFilter) {
 	 		listener.exitFilter(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitFilter) {
 			return visitor.visitFilter(this);
 		} else {
@@ -20736,12 +20736,12 @@ export class FilterContext extends ParserRuleContext {
 
 
 export class MergeCaseContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_mergeCase;
+    	return TrinoSqlParser.RULE_mergeCase;
 	}
 	public copyFrom(ctx: MergeCaseContext): void {
 		super.copyFrom(ctx);
@@ -20753,27 +20753,27 @@ export class MergeInsertContext extends MergeCaseContext {
 	public _targets: IdentifierContext[] = [];
 	public _expression!: ExpressionContext;
 	public _values: ExpressionContext[] = [];
-	constructor(parser: trinoSqlParserParser, ctx: MergeCaseContext) {
+	constructor(parser: TrinoSqlParser, ctx: MergeCaseContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public WHEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHEN, 0);
+		return this.getToken(TrinoSqlParser.WHEN, 0);
 	}
 	public NOT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NOT, 0);
+		return this.getToken(TrinoSqlParser.NOT, 0);
 	}
 	public MATCHED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCHED, 0);
+		return this.getToken(TrinoSqlParser.MATCHED, 0);
 	}
 	public THEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.THEN, 0);
+		return this.getToken(TrinoSqlParser.THEN, 0);
 	}
 	public INSERT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INSERT, 0);
+		return this.getToken(TrinoSqlParser.INSERT, 0);
 	}
 	public VALUES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VALUES, 0);
+		return this.getToken(TrinoSqlParser.VALUES, 0);
 	}
 	public expression_list(): ExpressionContext[] {
 		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
@@ -20782,7 +20782,7 @@ export class MergeInsertContext extends MergeCaseContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
 	public AND(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AND, 0);
+		return this.getToken(TrinoSqlParser.AND, 0);
 	}
 	public identifier_list(): IdentifierContext[] {
 		return this.getTypedRuleContexts(IdentifierContext) as IdentifierContext[];
@@ -20790,18 +20790,18 @@ export class MergeInsertContext extends MergeCaseContext {
 	public identifier(i: number): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterMergeInsert) {
 	 		listener.enterMergeInsert(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitMergeInsert) {
 	 		listener.exitMergeInsert(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitMergeInsert) {
 			return visitor.visitMergeInsert(this);
 		} else {
@@ -20815,30 +20815,30 @@ export class MergeUpdateContext extends MergeCaseContext {
 	public _targets: IdentifierContext[] = [];
 	public _expression!: ExpressionContext;
 	public _values: ExpressionContext[] = [];
-	constructor(parser: trinoSqlParserParser, ctx: MergeCaseContext) {
+	constructor(parser: TrinoSqlParser, ctx: MergeCaseContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public WHEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHEN, 0);
+		return this.getToken(TrinoSqlParser.WHEN, 0);
 	}
 	public MATCHED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCHED, 0);
+		return this.getToken(TrinoSqlParser.MATCHED, 0);
 	}
 	public THEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.THEN, 0);
+		return this.getToken(TrinoSqlParser.THEN, 0);
 	}
 	public UPDATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UPDATE, 0);
+		return this.getToken(TrinoSqlParser.UPDATE, 0);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public EQ_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.EQ);
+	    	return this.getTokens(TrinoSqlParser.EQ);
 	}
 	public EQ(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EQ, i);
+		return this.getToken(TrinoSqlParser.EQ, i);
 	}
 	public identifier_list(): IdentifierContext[] {
 		return this.getTypedRuleContexts(IdentifierContext) as IdentifierContext[];
@@ -20853,20 +20853,20 @@ export class MergeUpdateContext extends MergeCaseContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
 	public AND(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AND, 0);
+		return this.getToken(TrinoSqlParser.AND, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterMergeUpdate) {
 	 		listener.enterMergeUpdate(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitMergeUpdate) {
 	 		listener.exitMergeUpdate(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitMergeUpdate) {
 			return visitor.visitMergeUpdate(this);
 		} else {
@@ -20876,40 +20876,40 @@ export class MergeUpdateContext extends MergeCaseContext {
 }
 export class MergeDeleteContext extends MergeCaseContext {
 	public _condition!: ExpressionContext;
-	constructor(parser: trinoSqlParserParser, ctx: MergeCaseContext) {
+	constructor(parser: TrinoSqlParser, ctx: MergeCaseContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public WHEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WHEN, 0);
+		return this.getToken(TrinoSqlParser.WHEN, 0);
 	}
 	public MATCHED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCHED, 0);
+		return this.getToken(TrinoSqlParser.MATCHED, 0);
 	}
 	public THEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.THEN, 0);
+		return this.getToken(TrinoSqlParser.THEN, 0);
 	}
 	public DELETE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DELETE, 0);
+		return this.getToken(TrinoSqlParser.DELETE, 0);
 	}
 	public AND(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AND, 0);
+		return this.getToken(TrinoSqlParser.AND, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterMergeDelete) {
 	 		listener.enterMergeDelete(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitMergeDelete) {
 	 		listener.exitMergeDelete(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitMergeDelete) {
 			return visitor.visitMergeDelete(this);
 		} else {
@@ -20921,12 +20921,12 @@ export class MergeDeleteContext extends MergeCaseContext {
 
 export class OverContext extends ParserRuleContext {
 	public _windowName!: IdentifierContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public OVER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OVER, 0);
+		return this.getToken(TrinoSqlParser.OVER, 0);
 	}
 	public windowSpecification(): WindowSpecificationContext {
 		return this.getTypedRuleContext(WindowSpecificationContext, 0) as WindowSpecificationContext;
@@ -20935,20 +20935,20 @@ export class OverContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_over;
+    	return TrinoSqlParser.RULE_over;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterOver) {
 	 		listener.enterOver(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitOver) {
 	 		listener.exitOver(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitOver) {
 			return visitor.visitOver(this);
 		} else {
@@ -20959,7 +20959,7 @@ export class OverContext extends ParserRuleContext {
 
 
 export class WindowFrameContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -20967,7 +20967,7 @@ export class WindowFrameContext extends ParserRuleContext {
 		return this.getTypedRuleContext(FrameExtentContext, 0) as FrameExtentContext;
 	}
 	public MEASURES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MEASURES, 0);
+		return this.getToken(TrinoSqlParser.MEASURES, 0);
 	}
 	public measureDefinition_list(): MeasureDefinitionContext[] {
 		return this.getTypedRuleContexts(MeasureDefinitionContext) as MeasureDefinitionContext[];
@@ -20976,22 +20976,22 @@ export class WindowFrameContext extends ParserRuleContext {
 		return this.getTypedRuleContext(MeasureDefinitionContext, i) as MeasureDefinitionContext;
 	}
 	public AFTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AFTER, 0);
+		return this.getToken(TrinoSqlParser.AFTER, 0);
 	}
 	public MATCH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCH, 0);
+		return this.getToken(TrinoSqlParser.MATCH, 0);
 	}
 	public skipTo(): SkipToContext {
 		return this.getTypedRuleContext(SkipToContext, 0) as SkipToContext;
 	}
 	public PATTERN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PATTERN, 0);
+		return this.getToken(TrinoSqlParser.PATTERN, 0);
 	}
 	public rowPattern(): RowPatternContext {
 		return this.getTypedRuleContext(RowPatternContext, 0) as RowPatternContext;
 	}
 	public SUBSET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SUBSET, 0);
+		return this.getToken(TrinoSqlParser.SUBSET, 0);
 	}
 	public subsetDefinition_list(): SubsetDefinitionContext[] {
 		return this.getTypedRuleContexts(SubsetDefinitionContext) as SubsetDefinitionContext[];
@@ -21000,7 +21000,7 @@ export class WindowFrameContext extends ParserRuleContext {
 		return this.getTypedRuleContext(SubsetDefinitionContext, i) as SubsetDefinitionContext;
 	}
 	public DEFINE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DEFINE, 0);
+		return this.getToken(TrinoSqlParser.DEFINE, 0);
 	}
 	public variableDefinition_list(): VariableDefinitionContext[] {
 		return this.getTypedRuleContexts(VariableDefinitionContext) as VariableDefinitionContext[];
@@ -21009,26 +21009,26 @@ export class WindowFrameContext extends ParserRuleContext {
 		return this.getTypedRuleContext(VariableDefinitionContext, i) as VariableDefinitionContext;
 	}
 	public INITIAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INITIAL, 0);
+		return this.getToken(TrinoSqlParser.INITIAL, 0);
 	}
 	public SEEK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SEEK, 0);
+		return this.getToken(TrinoSqlParser.SEEK, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_windowFrame;
+    	return TrinoSqlParser.RULE_windowFrame;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterWindowFrame) {
 	 		listener.enterWindowFrame(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitWindowFrame) {
 	 		listener.exitWindowFrame(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitWindowFrame) {
 			return visitor.visitWindowFrame(this);
 		} else {
@@ -21042,12 +21042,12 @@ export class FrameExtentContext extends ParserRuleContext {
 	public _frameType!: Token;
 	public _start!: FrameBoundContext;
 	public _end!: FrameBoundContext;
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public RANGE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RANGE, 0);
+		return this.getToken(TrinoSqlParser.RANGE, 0);
 	}
 	public frameBound_list(): FrameBoundContext[] {
 		return this.getTypedRuleContexts(FrameBoundContext) as FrameBoundContext[];
@@ -21056,32 +21056,32 @@ export class FrameExtentContext extends ParserRuleContext {
 		return this.getTypedRuleContext(FrameBoundContext, i) as FrameBoundContext;
 	}
 	public ROWS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROWS, 0);
+		return this.getToken(TrinoSqlParser.ROWS, 0);
 	}
 	public GROUPS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GROUPS, 0);
+		return this.getToken(TrinoSqlParser.GROUPS, 0);
 	}
 	public BETWEEN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BETWEEN, 0);
+		return this.getToken(TrinoSqlParser.BETWEEN, 0);
 	}
 	public AND(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AND, 0);
+		return this.getToken(TrinoSqlParser.AND, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_frameExtent;
+    	return TrinoSqlParser.RULE_frameExtent;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterFrameExtent) {
 	 		listener.enterFrameExtent(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitFrameExtent) {
 	 		listener.exitFrameExtent(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitFrameExtent) {
 			return visitor.visitFrameExtent(this);
 		} else {
@@ -21092,12 +21092,12 @@ export class FrameExtentContext extends ParserRuleContext {
 
 
 export class FrameBoundContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_frameBound;
+    	return TrinoSqlParser.RULE_frameBound;
 	}
 	public copyFrom(ctx: FrameBoundContext): void {
 		super.copyFrom(ctx);
@@ -21105,7 +21105,7 @@ export class FrameBoundContext extends ParserRuleContext {
 }
 export class BoundedFrameContext extends FrameBoundContext {
 	public _boundType!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: FrameBoundContext) {
+	constructor(parser: TrinoSqlParser, ctx: FrameBoundContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -21113,23 +21113,23 @@ export class BoundedFrameContext extends FrameBoundContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
 	public PRECEDING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRECEDING, 0);
+		return this.getToken(TrinoSqlParser.PRECEDING, 0);
 	}
 	public FOLLOWING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FOLLOWING, 0);
+		return this.getToken(TrinoSqlParser.FOLLOWING, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterBoundedFrame) {
 	 		listener.enterBoundedFrame(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitBoundedFrame) {
 	 		listener.exitBoundedFrame(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitBoundedFrame) {
 			return visitor.visitBoundedFrame(this);
 		} else {
@@ -21139,31 +21139,31 @@ export class BoundedFrameContext extends FrameBoundContext {
 }
 export class UnboundedFrameContext extends FrameBoundContext {
 	public _boundType!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: FrameBoundContext) {
+	constructor(parser: TrinoSqlParser, ctx: FrameBoundContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public UNBOUNDED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNBOUNDED, 0);
+		return this.getToken(TrinoSqlParser.UNBOUNDED, 0);
 	}
 	public PRECEDING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRECEDING, 0);
+		return this.getToken(TrinoSqlParser.PRECEDING, 0);
 	}
 	public FOLLOWING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FOLLOWING, 0);
+		return this.getToken(TrinoSqlParser.FOLLOWING, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUnboundedFrame) {
 	 		listener.enterUnboundedFrame(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUnboundedFrame) {
 	 		listener.exitUnboundedFrame(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUnboundedFrame) {
 			return visitor.visitUnboundedFrame(this);
 		} else {
@@ -21172,28 +21172,28 @@ export class UnboundedFrameContext extends FrameBoundContext {
 	}
 }
 export class CurrentRowBoundContext extends FrameBoundContext {
-	constructor(parser: trinoSqlParserParser, ctx: FrameBoundContext) {
+	constructor(parser: TrinoSqlParser, ctx: FrameBoundContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CURRENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT, 0);
+		return this.getToken(TrinoSqlParser.CURRENT, 0);
 	}
 	public ROW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROW, 0);
+		return this.getToken(TrinoSqlParser.ROW, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCurrentRowBound) {
 	 		listener.enterCurrentRowBound(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCurrentRowBound) {
 	 		listener.exitCurrentRowBound(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCurrentRowBound) {
 			return visitor.visitCurrentRowBound(this);
 		} else {
@@ -21204,19 +21204,19 @@ export class CurrentRowBoundContext extends FrameBoundContext {
 
 
 export class RowPatternContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_rowPattern;
+    	return TrinoSqlParser.RULE_rowPattern;
 	}
 	public copyFrom(ctx: RowPatternContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class QuantifiedPrimaryContext extends RowPatternContext {
-	constructor(parser: trinoSqlParserParser, ctx: RowPatternContext) {
+	constructor(parser: TrinoSqlParser, ctx: RowPatternContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -21226,18 +21226,18 @@ export class QuantifiedPrimaryContext extends RowPatternContext {
 	public patternQuantifier(): PatternQuantifierContext {
 		return this.getTypedRuleContext(PatternQuantifierContext, 0) as PatternQuantifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQuantifiedPrimary) {
 	 		listener.enterQuantifiedPrimary(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQuantifiedPrimary) {
 	 		listener.exitQuantifiedPrimary(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQuantifiedPrimary) {
 			return visitor.visitQuantifiedPrimary(this);
 		} else {
@@ -21246,7 +21246,7 @@ export class QuantifiedPrimaryContext extends RowPatternContext {
 	}
 }
 export class PatternConcatenationContext extends RowPatternContext {
-	constructor(parser: trinoSqlParserParser, ctx: RowPatternContext) {
+	constructor(parser: TrinoSqlParser, ctx: RowPatternContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -21256,18 +21256,18 @@ export class PatternConcatenationContext extends RowPatternContext {
 	public rowPattern(i: number): RowPatternContext {
 		return this.getTypedRuleContext(RowPatternContext, i) as RowPatternContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPatternConcatenation) {
 	 		listener.enterPatternConcatenation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPatternConcatenation) {
 	 		listener.exitPatternConcatenation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPatternConcatenation) {
 			return visitor.visitPatternConcatenation(this);
 		} else {
@@ -21276,7 +21276,7 @@ export class PatternConcatenationContext extends RowPatternContext {
 	}
 }
 export class PatternAlternationContext extends RowPatternContext {
-	constructor(parser: trinoSqlParserParser, ctx: RowPatternContext) {
+	constructor(parser: TrinoSqlParser, ctx: RowPatternContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -21286,18 +21286,18 @@ export class PatternAlternationContext extends RowPatternContext {
 	public rowPattern(i: number): RowPatternContext {
 		return this.getTypedRuleContext(RowPatternContext, i) as RowPatternContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPatternAlternation) {
 	 		listener.enterPatternAlternation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPatternAlternation) {
 	 		listener.exitPatternAlternation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPatternAlternation) {
 			return visitor.visitPatternAlternation(this);
 		} else {
@@ -21308,24 +21308,24 @@ export class PatternAlternationContext extends RowPatternContext {
 
 
 export class PatternPrimaryContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_patternPrimary;
+    	return TrinoSqlParser.RULE_patternPrimary;
 	}
 	public copyFrom(ctx: PatternPrimaryContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class PatternPermutationContext extends PatternPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: PatternPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public PERMUTE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PERMUTE, 0);
+		return this.getToken(TrinoSqlParser.PERMUTE, 0);
 	}
 	public rowPattern_list(): RowPatternContext[] {
 		return this.getTypedRuleContexts(RowPatternContext) as RowPatternContext[];
@@ -21333,18 +21333,18 @@ export class PatternPermutationContext extends PatternPrimaryContext {
 	public rowPattern(i: number): RowPatternContext {
 		return this.getTypedRuleContext(RowPatternContext, i) as RowPatternContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPatternPermutation) {
 	 		listener.enterPatternPermutation(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPatternPermutation) {
 	 		listener.exitPatternPermutation(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPatternPermutation) {
 			return visitor.visitPatternPermutation(this);
 		} else {
@@ -21353,22 +21353,22 @@ export class PatternPermutationContext extends PatternPrimaryContext {
 	}
 }
 export class PartitionEndAnchorContext extends PatternPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: PatternPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPartitionEndAnchor) {
 	 		listener.enterPartitionEndAnchor(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPartitionEndAnchor) {
 	 		listener.exitPartitionEndAnchor(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPartitionEndAnchor) {
 			return visitor.visitPartitionEndAnchor(this);
 		} else {
@@ -21377,25 +21377,25 @@ export class PartitionEndAnchorContext extends PatternPrimaryContext {
 	}
 }
 export class PatternVariableContext extends PatternPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: PatternPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPatternVariable) {
 	 		listener.enterPatternVariable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPatternVariable) {
 	 		listener.exitPatternVariable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPatternVariable) {
 			return visitor.visitPatternVariable(this);
 		} else {
@@ -21404,25 +21404,25 @@ export class PatternVariableContext extends PatternPrimaryContext {
 	}
 }
 export class ExcludedPatternContext extends PatternPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: PatternPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public rowPattern(): RowPatternContext {
 		return this.getTypedRuleContext(RowPatternContext, 0) as RowPatternContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterExcludedPattern) {
 	 		listener.enterExcludedPattern(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitExcludedPattern) {
 	 		listener.exitExcludedPattern(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitExcludedPattern) {
 			return visitor.visitExcludedPattern(this);
 		} else {
@@ -21431,22 +21431,22 @@ export class ExcludedPatternContext extends PatternPrimaryContext {
 	}
 }
 export class PartitionStartAnchorContext extends PatternPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: PatternPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPartitionStartAnchor) {
 	 		listener.enterPartitionStartAnchor(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPartitionStartAnchor) {
 	 		listener.exitPartitionStartAnchor(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPartitionStartAnchor) {
 			return visitor.visitPartitionStartAnchor(this);
 		} else {
@@ -21455,22 +21455,22 @@ export class PartitionStartAnchorContext extends PatternPrimaryContext {
 	}
 }
 export class EmptyPatternContext extends PatternPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: PatternPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterEmptyPattern) {
 	 		listener.enterEmptyPattern(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitEmptyPattern) {
 	 		listener.exitEmptyPattern(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitEmptyPattern) {
 			return visitor.visitEmptyPattern(this);
 		} else {
@@ -21479,25 +21479,25 @@ export class EmptyPatternContext extends PatternPrimaryContext {
 	}
 }
 export class GroupedPatternContext extends PatternPrimaryContext {
-	constructor(parser: trinoSqlParserParser, ctx: PatternPrimaryContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternPrimaryContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public rowPattern(): RowPatternContext {
 		return this.getTypedRuleContext(RowPatternContext, 0) as RowPatternContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterGroupedPattern) {
 	 		listener.enterGroupedPattern(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitGroupedPattern) {
 	 		listener.exitGroupedPattern(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitGroupedPattern) {
 			return visitor.visitGroupedPattern(this);
 		} else {
@@ -21508,12 +21508,12 @@ export class GroupedPatternContext extends PatternPrimaryContext {
 
 
 export class PatternQuantifierContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_patternQuantifier;
+    	return TrinoSqlParser.RULE_patternQuantifier;
 	}
 	public copyFrom(ctx: PatternQuantifierContext): void {
 		super.copyFrom(ctx);
@@ -21521,28 +21521,28 @@ export class PatternQuantifierContext extends ParserRuleContext {
 }
 export class ZeroOrMoreQuantifierContext extends PatternQuantifierContext {
 	public _reluctant!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PatternQuantifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternQuantifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ASTERISK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ASTERISK, 0);
+		return this.getToken(TrinoSqlParser.ASTERISK, 0);
 	}
 	public QUESTION_MARK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.QUESTION_MARK, 0);
+		return this.getToken(TrinoSqlParser.QUESTION_MARK, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterZeroOrMoreQuantifier) {
 	 		listener.enterZeroOrMoreQuantifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitZeroOrMoreQuantifier) {
 	 		listener.exitZeroOrMoreQuantifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitZeroOrMoreQuantifier) {
 			return visitor.visitZeroOrMoreQuantifier(this);
 		} else {
@@ -21552,28 +21552,28 @@ export class ZeroOrMoreQuantifierContext extends PatternQuantifierContext {
 }
 export class OneOrMoreQuantifierContext extends PatternQuantifierContext {
 	public _reluctant!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PatternQuantifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternQuantifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public PLUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PLUS, 0);
+		return this.getToken(TrinoSqlParser.PLUS, 0);
 	}
 	public QUESTION_MARK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.QUESTION_MARK, 0);
+		return this.getToken(TrinoSqlParser.QUESTION_MARK, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterOneOrMoreQuantifier) {
 	 		listener.enterOneOrMoreQuantifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitOneOrMoreQuantifier) {
 	 		listener.exitOneOrMoreQuantifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitOneOrMoreQuantifier) {
 			return visitor.visitOneOrMoreQuantifier(this);
 		} else {
@@ -21583,28 +21583,28 @@ export class OneOrMoreQuantifierContext extends PatternQuantifierContext {
 }
 export class ZeroOrOneQuantifierContext extends PatternQuantifierContext {
 	public _reluctant!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PatternQuantifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternQuantifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public QUESTION_MARK_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.QUESTION_MARK);
+	    	return this.getTokens(TrinoSqlParser.QUESTION_MARK);
 	}
 	public QUESTION_MARK(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.QUESTION_MARK, i);
+		return this.getToken(TrinoSqlParser.QUESTION_MARK, i);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterZeroOrOneQuantifier) {
 	 		listener.enterZeroOrOneQuantifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitZeroOrOneQuantifier) {
 	 		listener.exitZeroOrOneQuantifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitZeroOrOneQuantifier) {
 			return visitor.visitZeroOrOneQuantifier(this);
 		} else {
@@ -21617,31 +21617,31 @@ export class RangeQuantifierContext extends PatternQuantifierContext {
 	public _reluctant!: Token;
 	public _atLeast!: Token;
 	public _atMost!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: PatternQuantifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: PatternQuantifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public INTEGER_VALUE_list(): TerminalNode[] {
-	    	return this.getTokens(trinoSqlParserParser.INTEGER_VALUE);
+	    	return this.getTokens(TrinoSqlParser.INTEGER_VALUE);
 	}
 	public INTEGER_VALUE(i: number): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTEGER_VALUE, i);
+		return this.getToken(TrinoSqlParser.INTEGER_VALUE, i);
 	}
 	public QUESTION_MARK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.QUESTION_MARK, 0);
+		return this.getToken(TrinoSqlParser.QUESTION_MARK, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRangeQuantifier) {
 	 		listener.enterRangeQuantifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRangeQuantifier) {
 	 		listener.exitRangeQuantifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRangeQuantifier) {
 			return visitor.visitRangeQuantifier(this);
 		} else {
@@ -21652,7 +21652,7 @@ export class RangeQuantifierContext extends PatternQuantifierContext {
 
 
 export class UpdateAssignmentContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -21660,26 +21660,26 @@ export class UpdateAssignmentContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
 	public EQ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EQ, 0);
+		return this.getToken(TrinoSqlParser.EQ, 0);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_updateAssignment;
+    	return TrinoSqlParser.RULE_updateAssignment;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUpdateAssignment) {
 	 		listener.enterUpdateAssignment(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUpdateAssignment) {
 	 		listener.exitUpdateAssignment(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUpdateAssignment) {
 			return visitor.visitUpdateAssignment(this);
 		} else {
@@ -21690,12 +21690,12 @@ export class UpdateAssignmentContext extends ParserRuleContext {
 
 
 export class ExplainOptionContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_explainOption;
+    	return TrinoSqlParser.RULE_explainOption;
 	}
 	public copyFrom(ctx: ExplainOptionContext): void {
 		super.copyFrom(ctx);
@@ -21703,34 +21703,34 @@ export class ExplainOptionContext extends ParserRuleContext {
 }
 export class ExplainFormatContext extends ExplainOptionContext {
 	public _value!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: ExplainOptionContext) {
+	constructor(parser: TrinoSqlParser, ctx: ExplainOptionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public FORMAT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FORMAT, 0);
+		return this.getToken(TrinoSqlParser.FORMAT, 0);
 	}
 	public TEXT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TEXT, 0);
+		return this.getToken(TrinoSqlParser.TEXT, 0);
 	}
 	public GRAPHVIZ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRAPHVIZ, 0);
+		return this.getToken(TrinoSqlParser.GRAPHVIZ, 0);
 	}
 	public JSON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.JSON, 0);
+		return this.getToken(TrinoSqlParser.JSON, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterExplainFormat) {
 	 		listener.enterExplainFormat(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitExplainFormat) {
 	 		listener.exitExplainFormat(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitExplainFormat) {
 			return visitor.visitExplainFormat(this);
 		} else {
@@ -21740,37 +21740,37 @@ export class ExplainFormatContext extends ExplainOptionContext {
 }
 export class ExplainTypeContext extends ExplainOptionContext {
 	public _value!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: ExplainOptionContext) {
+	constructor(parser: TrinoSqlParser, ctx: ExplainOptionContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public TYPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TYPE, 0);
+		return this.getToken(TrinoSqlParser.TYPE, 0);
 	}
 	public LOGICAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LOGICAL, 0);
+		return this.getToken(TrinoSqlParser.LOGICAL, 0);
 	}
 	public DISTRIBUTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DISTRIBUTED, 0);
+		return this.getToken(TrinoSqlParser.DISTRIBUTED, 0);
 	}
 	public VALIDATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VALIDATE, 0);
+		return this.getToken(TrinoSqlParser.VALIDATE, 0);
 	}
 	public IO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IO, 0);
+		return this.getToken(TrinoSqlParser.IO, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterExplainType) {
 	 		listener.enterExplainType(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitExplainType) {
 	 		listener.exitExplainType(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitExplainType) {
 			return visitor.visitExplainType(this);
 		} else {
@@ -21781,12 +21781,12 @@ export class ExplainTypeContext extends ExplainOptionContext {
 
 
 export class TransactionModeContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_transactionMode;
+    	return TrinoSqlParser.RULE_transactionMode;
 	}
 	public copyFrom(ctx: TransactionModeContext): void {
 		super.copyFrom(ctx);
@@ -21794,31 +21794,31 @@ export class TransactionModeContext extends ParserRuleContext {
 }
 export class TransactionAccessModeContext extends TransactionModeContext {
 	public _accessMode!: Token;
-	constructor(parser: trinoSqlParserParser, ctx: TransactionModeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TransactionModeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public READ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.READ, 0);
+		return this.getToken(TrinoSqlParser.READ, 0);
 	}
 	public ONLY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ONLY, 0);
+		return this.getToken(TrinoSqlParser.ONLY, 0);
 	}
 	public WRITE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WRITE, 0);
+		return this.getToken(TrinoSqlParser.WRITE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterTransactionAccessMode) {
 	 		listener.enterTransactionAccessMode(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitTransactionAccessMode) {
 	 		listener.exitTransactionAccessMode(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitTransactionAccessMode) {
 			return visitor.visitTransactionAccessMode(this);
 		} else {
@@ -21827,31 +21827,31 @@ export class TransactionAccessModeContext extends TransactionModeContext {
 	}
 }
 export class IsolationLevelContext extends TransactionModeContext {
-	constructor(parser: trinoSqlParserParser, ctx: TransactionModeContext) {
+	constructor(parser: TrinoSqlParser, ctx: TransactionModeContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ISOLATION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ISOLATION, 0);
+		return this.getToken(TrinoSqlParser.ISOLATION, 0);
 	}
 	public LEVEL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LEVEL, 0);
+		return this.getToken(TrinoSqlParser.LEVEL, 0);
 	}
 	public levelOfIsolation(): LevelOfIsolationContext {
 		return this.getTypedRuleContext(LevelOfIsolationContext, 0) as LevelOfIsolationContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterIsolationLevel) {
 	 		listener.enterIsolationLevel(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitIsolationLevel) {
 	 		listener.exitIsolationLevel(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitIsolationLevel) {
 			return visitor.visitIsolationLevel(this);
 		} else {
@@ -21862,40 +21862,40 @@ export class IsolationLevelContext extends TransactionModeContext {
 
 
 export class LevelOfIsolationContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_levelOfIsolation;
+    	return TrinoSqlParser.RULE_levelOfIsolation;
 	}
 	public copyFrom(ctx: LevelOfIsolationContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class ReadUncommittedContext extends LevelOfIsolationContext {
-	constructor(parser: trinoSqlParserParser, ctx: LevelOfIsolationContext) {
+	constructor(parser: TrinoSqlParser, ctx: LevelOfIsolationContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public READ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.READ, 0);
+		return this.getToken(TrinoSqlParser.READ, 0);
 	}
 	public UNCOMMITTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNCOMMITTED, 0);
+		return this.getToken(TrinoSqlParser.UNCOMMITTED, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterReadUncommitted) {
 	 		listener.enterReadUncommitted(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitReadUncommitted) {
 	 		listener.exitReadUncommitted(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitReadUncommitted) {
 			return visitor.visitReadUncommitted(this);
 		} else {
@@ -21904,25 +21904,25 @@ export class ReadUncommittedContext extends LevelOfIsolationContext {
 	}
 }
 export class SerializableContext extends LevelOfIsolationContext {
-	constructor(parser: trinoSqlParserParser, ctx: LevelOfIsolationContext) {
+	constructor(parser: TrinoSqlParser, ctx: LevelOfIsolationContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public SERIALIZABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SERIALIZABLE, 0);
+		return this.getToken(TrinoSqlParser.SERIALIZABLE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSerializable) {
 	 		listener.enterSerializable(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSerializable) {
 	 		listener.exitSerializable(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSerializable) {
 			return visitor.visitSerializable(this);
 		} else {
@@ -21931,28 +21931,28 @@ export class SerializableContext extends LevelOfIsolationContext {
 	}
 }
 export class ReadCommittedContext extends LevelOfIsolationContext {
-	constructor(parser: trinoSqlParserParser, ctx: LevelOfIsolationContext) {
+	constructor(parser: TrinoSqlParser, ctx: LevelOfIsolationContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public READ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.READ, 0);
+		return this.getToken(TrinoSqlParser.READ, 0);
 	}
 	public COMMITTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMITTED, 0);
+		return this.getToken(TrinoSqlParser.COMMITTED, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterReadCommitted) {
 	 		listener.enterReadCommitted(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitReadCommitted) {
 	 		listener.exitReadCommitted(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitReadCommitted) {
 			return visitor.visitReadCommitted(this);
 		} else {
@@ -21961,28 +21961,28 @@ export class ReadCommittedContext extends LevelOfIsolationContext {
 	}
 }
 export class RepeatableReadContext extends LevelOfIsolationContext {
-	constructor(parser: trinoSqlParserParser, ctx: LevelOfIsolationContext) {
+	constructor(parser: TrinoSqlParser, ctx: LevelOfIsolationContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public REPEATABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REPEATABLE, 0);
+		return this.getToken(TrinoSqlParser.REPEATABLE, 0);
 	}
 	public READ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.READ, 0);
+		return this.getToken(TrinoSqlParser.READ, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRepeatableRead) {
 	 		listener.enterRepeatableRead(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRepeatableRead) {
 	 		listener.exitRepeatableRead(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRepeatableRead) {
 			return visitor.visitRepeatableRead(this);
 		} else {
@@ -21993,37 +21993,37 @@ export class RepeatableReadContext extends LevelOfIsolationContext {
 
 
 export class CallArgumentContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_callArgument;
+    	return TrinoSqlParser.RULE_callArgument;
 	}
 	public copyFrom(ctx: CallArgumentContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class PositionalArgumentContext extends CallArgumentContext {
-	constructor(parser: trinoSqlParserParser, ctx: CallArgumentContext) {
+	constructor(parser: TrinoSqlParser, ctx: CallArgumentContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPositionalArgument) {
 	 		listener.enterPositionalArgument(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPositionalArgument) {
 	 		listener.exitPositionalArgument(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPositionalArgument) {
 			return visitor.visitPositionalArgument(this);
 		} else {
@@ -22032,7 +22032,7 @@ export class PositionalArgumentContext extends CallArgumentContext {
 	}
 }
 export class NamedArgumentContext extends CallArgumentContext {
-	constructor(parser: trinoSqlParserParser, ctx: CallArgumentContext) {
+	constructor(parser: TrinoSqlParser, ctx: CallArgumentContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -22042,18 +22042,18 @@ export class NamedArgumentContext extends CallArgumentContext {
 	public expression(): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNamedArgument) {
 	 		listener.enterNamedArgument(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNamedArgument) {
 	 		listener.exitNamedArgument(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNamedArgument) {
 			return visitor.visitNamedArgument(this);
 		} else {
@@ -22064,19 +22064,19 @@ export class NamedArgumentContext extends CallArgumentContext {
 
 
 export class PathElementContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_pathElement;
+    	return TrinoSqlParser.RULE_pathElement;
 	}
 	public copyFrom(ctx: PathElementContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class QualifiedArgumentContext extends PathElementContext {
-	constructor(parser: trinoSqlParserParser, ctx: PathElementContext) {
+	constructor(parser: TrinoSqlParser, ctx: PathElementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
@@ -22086,18 +22086,18 @@ export class QualifiedArgumentContext extends PathElementContext {
 	public identifier(i: number): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQualifiedArgument) {
 	 		listener.enterQualifiedArgument(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQualifiedArgument) {
 	 		listener.exitQualifiedArgument(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQualifiedArgument) {
 			return visitor.visitQualifiedArgument(this);
 		} else {
@@ -22106,25 +22106,25 @@ export class QualifiedArgumentContext extends PathElementContext {
 	}
 }
 export class UnqualifiedArgumentContext extends PathElementContext {
-	constructor(parser: trinoSqlParserParser, ctx: PathElementContext) {
+	constructor(parser: TrinoSqlParser, ctx: PathElementContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUnqualifiedArgument) {
 	 		listener.enterUnqualifiedArgument(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUnqualifiedArgument) {
 	 		listener.exitUnqualifiedArgument(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUnqualifiedArgument) {
 			return visitor.visitUnqualifiedArgument(this);
 		} else {
@@ -22135,7 +22135,7 @@ export class UnqualifiedArgumentContext extends PathElementContext {
 
 
 export class PathSpecificationContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22146,20 +22146,20 @@ export class PathSpecificationContext extends ParserRuleContext {
 		return this.getTypedRuleContext(PathElementContext, i) as PathElementContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_pathSpecification;
+    	return TrinoSqlParser.RULE_pathSpecification;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPathSpecification) {
 	 		listener.enterPathSpecification(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPathSpecification) {
 	 		listener.exitPathSpecification(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPathSpecification) {
 			return visitor.visitPathSpecification(this);
 		} else {
@@ -22170,37 +22170,37 @@ export class PathSpecificationContext extends ParserRuleContext {
 
 
 export class PrivilegeContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public SELECT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SELECT, 0);
+		return this.getToken(TrinoSqlParser.SELECT, 0);
 	}
 	public DELETE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DELETE, 0);
+		return this.getToken(TrinoSqlParser.DELETE, 0);
 	}
 	public INSERT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INSERT, 0);
+		return this.getToken(TrinoSqlParser.INSERT, 0);
 	}
 	public UPDATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UPDATE, 0);
+		return this.getToken(TrinoSqlParser.UPDATE, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_privilege;
+    	return TrinoSqlParser.RULE_privilege;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterPrivilege) {
 	 		listener.enterPrivilege(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitPrivilege) {
 	 		listener.exitPrivilege(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitPrivilege) {
 			return visitor.visitPrivilege(this);
 		} else {
@@ -22211,7 +22211,7 @@ export class PrivilegeContext extends ParserRuleContext {
 
 
 export class QualifiedNameContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22222,20 +22222,20 @@ export class QualifiedNameContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_qualifiedName;
+    	return TrinoSqlParser.RULE_qualifiedName;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQualifiedName) {
 	 		listener.enterQualifiedName(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQualifiedName) {
 	 		listener.exitQualifiedName(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQualifiedName) {
 			return visitor.visitQualifiedName(this);
 		} else {
@@ -22246,37 +22246,37 @@ export class QualifiedNameContext extends ParserRuleContext {
 
 
 export class GrantorContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_grantor;
+    	return TrinoSqlParser.RULE_grantor;
 	}
 	public copyFrom(ctx: GrantorContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class CurrentUserGrantorContext extends GrantorContext {
-	constructor(parser: trinoSqlParserParser, ctx: GrantorContext) {
+	constructor(parser: TrinoSqlParser, ctx: GrantorContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CURRENT_USER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_USER, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_USER, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCurrentUserGrantor) {
 	 		listener.enterCurrentUserGrantor(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCurrentUserGrantor) {
 	 		listener.exitCurrentUserGrantor(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCurrentUserGrantor) {
 			return visitor.visitCurrentUserGrantor(this);
 		} else {
@@ -22285,25 +22285,25 @@ export class CurrentUserGrantorContext extends GrantorContext {
 	}
 }
 export class SpecifiedPrincipalContext extends GrantorContext {
-	constructor(parser: trinoSqlParserParser, ctx: GrantorContext) {
+	constructor(parser: TrinoSqlParser, ctx: GrantorContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public principal(): PrincipalContext {
 		return this.getTypedRuleContext(PrincipalContext, 0) as PrincipalContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterSpecifiedPrincipal) {
 	 		listener.enterSpecifiedPrincipal(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitSpecifiedPrincipal) {
 	 		listener.exitSpecifiedPrincipal(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitSpecifiedPrincipal) {
 			return visitor.visitSpecifiedPrincipal(this);
 		} else {
@@ -22312,25 +22312,25 @@ export class SpecifiedPrincipalContext extends GrantorContext {
 	}
 }
 export class CurrentRoleGrantorContext extends GrantorContext {
-	constructor(parser: trinoSqlParserParser, ctx: GrantorContext) {
+	constructor(parser: TrinoSqlParser, ctx: GrantorContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public CURRENT_ROLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT_ROLE, 0);
+		return this.getToken(TrinoSqlParser.CURRENT_ROLE, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterCurrentRoleGrantor) {
 	 		listener.enterCurrentRoleGrantor(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitCurrentRoleGrantor) {
 	 		listener.exitCurrentRoleGrantor(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitCurrentRoleGrantor) {
 			return visitor.visitCurrentRoleGrantor(this);
 		} else {
@@ -22341,37 +22341,37 @@ export class CurrentRoleGrantorContext extends GrantorContext {
 
 
 export class PrincipalContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_principal;
+    	return TrinoSqlParser.RULE_principal;
 	}
 	public copyFrom(ctx: PrincipalContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class UnspecifiedPrincipalContext extends PrincipalContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrincipalContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrincipalContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUnspecifiedPrincipal) {
 	 		listener.enterUnspecifiedPrincipal(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUnspecifiedPrincipal) {
 	 		listener.exitUnspecifiedPrincipal(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUnspecifiedPrincipal) {
 			return visitor.visitUnspecifiedPrincipal(this);
 		} else {
@@ -22380,28 +22380,28 @@ export class UnspecifiedPrincipalContext extends PrincipalContext {
 	}
 }
 export class UserPrincipalContext extends PrincipalContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrincipalContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrincipalContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public USER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.USER, 0);
+		return this.getToken(TrinoSqlParser.USER, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUserPrincipal) {
 	 		listener.enterUserPrincipal(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUserPrincipal) {
 	 		listener.exitUserPrincipal(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUserPrincipal) {
 			return visitor.visitUserPrincipal(this);
 		} else {
@@ -22410,28 +22410,28 @@ export class UserPrincipalContext extends PrincipalContext {
 	}
 }
 export class RolePrincipalContext extends PrincipalContext {
-	constructor(parser: trinoSqlParserParser, ctx: PrincipalContext) {
+	constructor(parser: TrinoSqlParser, ctx: PrincipalContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public ROLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLE, 0);
+		return this.getToken(TrinoSqlParser.ROLE, 0);
 	}
 	public identifier(): IdentifierContext {
 		return this.getTypedRuleContext(IdentifierContext, 0) as IdentifierContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRolePrincipal) {
 	 		listener.enterRolePrincipal(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRolePrincipal) {
 	 		listener.exitRolePrincipal(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRolePrincipal) {
 			return visitor.visitRolePrincipal(this);
 		} else {
@@ -22442,7 +22442,7 @@ export class RolePrincipalContext extends PrincipalContext {
 
 
 export class RolesContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
@@ -22453,20 +22453,20 @@ export class RolesContext extends ParserRuleContext {
 		return this.getTypedRuleContext(IdentifierContext, i) as IdentifierContext;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_roles;
+    	return TrinoSqlParser.RULE_roles;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterRoles) {
 	 		listener.enterRoles(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitRoles) {
 	 		listener.exitRoles(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitRoles) {
 			return visitor.visitRoles(this);
 		} else {
@@ -22477,37 +22477,37 @@ export class RolesContext extends ParserRuleContext {
 
 
 export class IdentifierContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_identifier;
+    	return TrinoSqlParser.RULE_identifier;
 	}
 	public copyFrom(ctx: IdentifierContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class BackQuotedIdentifierContext extends IdentifierContext {
-	constructor(parser: trinoSqlParserParser, ctx: IdentifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: IdentifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public BACKQUOTED_IDENTIFIER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BACKQUOTED_IDENTIFIER, 0);
+		return this.getToken(TrinoSqlParser.BACKQUOTED_IDENTIFIER, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterBackQuotedIdentifier) {
 	 		listener.enterBackQuotedIdentifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitBackQuotedIdentifier) {
 	 		listener.exitBackQuotedIdentifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitBackQuotedIdentifier) {
 			return visitor.visitBackQuotedIdentifier(this);
 		} else {
@@ -22516,25 +22516,25 @@ export class BackQuotedIdentifierContext extends IdentifierContext {
 	}
 }
 export class QuotedIdentifierContext extends IdentifierContext {
-	constructor(parser: trinoSqlParserParser, ctx: IdentifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: IdentifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public QUOTED_IDENTIFIER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.QUOTED_IDENTIFIER, 0);
+		return this.getToken(TrinoSqlParser.QUOTED_IDENTIFIER, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterQuotedIdentifier) {
 	 		listener.enterQuotedIdentifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitQuotedIdentifier) {
 	 		listener.exitQuotedIdentifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitQuotedIdentifier) {
 			return visitor.visitQuotedIdentifier(this);
 		} else {
@@ -22543,25 +22543,25 @@ export class QuotedIdentifierContext extends IdentifierContext {
 	}
 }
 export class DigitIdentifierContext extends IdentifierContext {
-	constructor(parser: trinoSqlParserParser, ctx: IdentifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: IdentifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DIGIT_IDENTIFIER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DIGIT_IDENTIFIER, 0);
+		return this.getToken(TrinoSqlParser.DIGIT_IDENTIFIER, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDigitIdentifier) {
 	 		listener.enterDigitIdentifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDigitIdentifier) {
 	 		listener.exitDigitIdentifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDigitIdentifier) {
 			return visitor.visitDigitIdentifier(this);
 		} else {
@@ -22570,28 +22570,28 @@ export class DigitIdentifierContext extends IdentifierContext {
 	}
 }
 export class UnquotedIdentifierContext extends IdentifierContext {
-	constructor(parser: trinoSqlParserParser, ctx: IdentifierContext) {
+	constructor(parser: TrinoSqlParser, ctx: IdentifierContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public IDENTIFIER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IDENTIFIER, 0);
+		return this.getToken(TrinoSqlParser.IDENTIFIER, 0);
 	}
 	public nonReserved(): NonReservedContext {
 		return this.getTypedRuleContext(NonReservedContext, 0) as NonReservedContext;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterUnquotedIdentifier) {
 	 		listener.enterUnquotedIdentifier(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitUnquotedIdentifier) {
 	 		listener.exitUnquotedIdentifier(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitUnquotedIdentifier) {
 			return visitor.visitUnquotedIdentifier(this);
 		} else {
@@ -22602,40 +22602,40 @@ export class UnquotedIdentifierContext extends IdentifierContext {
 
 
 export class NumberContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_number;
+    	return TrinoSqlParser.RULE_number;
 	}
 	public copyFrom(ctx: NumberContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class DecimalLiteralContext extends NumberContext {
-	constructor(parser: trinoSqlParserParser, ctx: NumberContext) {
+	constructor(parser: TrinoSqlParser, ctx: NumberContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DECIMAL_VALUE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DECIMAL_VALUE, 0);
+		return this.getToken(TrinoSqlParser.DECIMAL_VALUE, 0);
 	}
 	public MINUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MINUS, 0);
+		return this.getToken(TrinoSqlParser.MINUS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDecimalLiteral) {
 	 		listener.enterDecimalLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDecimalLiteral) {
 	 		listener.exitDecimalLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDecimalLiteral) {
 			return visitor.visitDecimalLiteral(this);
 		} else {
@@ -22644,28 +22644,28 @@ export class DecimalLiteralContext extends NumberContext {
 	}
 }
 export class DoubleLiteralContext extends NumberContext {
-	constructor(parser: trinoSqlParserParser, ctx: NumberContext) {
+	constructor(parser: TrinoSqlParser, ctx: NumberContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public DOUBLE_VALUE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DOUBLE_VALUE, 0);
+		return this.getToken(TrinoSqlParser.DOUBLE_VALUE, 0);
 	}
 	public MINUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MINUS, 0);
+		return this.getToken(TrinoSqlParser.MINUS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterDoubleLiteral) {
 	 		listener.enterDoubleLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitDoubleLiteral) {
 	 		listener.exitDoubleLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitDoubleLiteral) {
 			return visitor.visitDoubleLiteral(this);
 		} else {
@@ -22674,28 +22674,28 @@ export class DoubleLiteralContext extends NumberContext {
 	}
 }
 export class IntegerLiteralContext extends NumberContext {
-	constructor(parser: trinoSqlParserParser, ctx: NumberContext) {
+	constructor(parser: TrinoSqlParser, ctx: NumberContext) {
 		super(parser, ctx.parentCtx, ctx.invokingState);
 		super.copyFrom(ctx);
 	}
 	public INTEGER_VALUE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTEGER_VALUE, 0);
+		return this.getToken(TrinoSqlParser.INTEGER_VALUE, 0);
 	}
 	public MINUS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MINUS, 0);
+		return this.getToken(TrinoSqlParser.MINUS, 0);
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterIntegerLiteral) {
 	 		listener.enterIntegerLiteral(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitIntegerLiteral) {
 	 		listener.exitIntegerLiteral(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitIntegerLiteral) {
 			return visitor.visitIntegerLiteral(this);
 		} else {
@@ -22706,502 +22706,502 @@ export class IntegerLiteralContext extends NumberContext {
 
 
 export class NonReservedContext extends ParserRuleContext {
-	constructor(parser?: trinoSqlParserParser, parent?: ParserRuleContext, invokingState?: number) {
+	constructor(parser?: TrinoSqlParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
 	public ADD(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ADD, 0);
+		return this.getToken(TrinoSqlParser.ADD, 0);
 	}
 	public ADMIN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ADMIN, 0);
+		return this.getToken(TrinoSqlParser.ADMIN, 0);
 	}
 	public AFTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AFTER, 0);
+		return this.getToken(TrinoSqlParser.AFTER, 0);
 	}
 	public ALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ALL, 0);
+		return this.getToken(TrinoSqlParser.ALL, 0);
 	}
 	public ANALYZE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ANALYZE, 0);
+		return this.getToken(TrinoSqlParser.ANALYZE, 0);
 	}
 	public ANY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ANY, 0);
+		return this.getToken(TrinoSqlParser.ANY, 0);
 	}
 	public ARRAY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ARRAY, 0);
+		return this.getToken(TrinoSqlParser.ARRAY, 0);
 	}
 	public ASC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ASC, 0);
+		return this.getToken(TrinoSqlParser.ASC, 0);
 	}
 	public AT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AT, 0);
+		return this.getToken(TrinoSqlParser.AT, 0);
 	}
 	public AUTHORIZATION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.AUTHORIZATION, 0);
+		return this.getToken(TrinoSqlParser.AUTHORIZATION, 0);
 	}
 	public BERNOULLI(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.BERNOULLI, 0);
+		return this.getToken(TrinoSqlParser.BERNOULLI, 0);
 	}
 	public CALL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CALL, 0);
+		return this.getToken(TrinoSqlParser.CALL, 0);
 	}
 	public CASCADE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CASCADE, 0);
+		return this.getToken(TrinoSqlParser.CASCADE, 0);
 	}
 	public CATALOGS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CATALOGS, 0);
+		return this.getToken(TrinoSqlParser.CATALOGS, 0);
 	}
 	public COLUMN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COLUMN, 0);
+		return this.getToken(TrinoSqlParser.COLUMN, 0);
 	}
 	public COLUMNS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COLUMNS, 0);
+		return this.getToken(TrinoSqlParser.COLUMNS, 0);
 	}
 	public COMMENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMENT, 0);
+		return this.getToken(TrinoSqlParser.COMMENT, 0);
 	}
 	public COMMIT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMIT, 0);
+		return this.getToken(TrinoSqlParser.COMMIT, 0);
 	}
 	public COMMITTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.COMMITTED, 0);
+		return this.getToken(TrinoSqlParser.COMMITTED, 0);
 	}
 	public CURRENT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.CURRENT, 0);
+		return this.getToken(TrinoSqlParser.CURRENT, 0);
 	}
 	public DATA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DATA, 0);
+		return this.getToken(TrinoSqlParser.DATA, 0);
 	}
 	public DATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DATE, 0);
+		return this.getToken(TrinoSqlParser.DATE, 0);
 	}
 	public DAY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DAY, 0);
+		return this.getToken(TrinoSqlParser.DAY, 0);
 	}
 	public DEFAULT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DEFAULT, 0);
+		return this.getToken(TrinoSqlParser.DEFAULT, 0);
 	}
 	public DEFINE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DEFINE, 0);
+		return this.getToken(TrinoSqlParser.DEFINE, 0);
 	}
 	public DEFINER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DEFINER, 0);
+		return this.getToken(TrinoSqlParser.DEFINER, 0);
 	}
 	public DESC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DESC, 0);
+		return this.getToken(TrinoSqlParser.DESC, 0);
 	}
 	public DISTRIBUTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DISTRIBUTED, 0);
+		return this.getToken(TrinoSqlParser.DISTRIBUTED, 0);
 	}
 	public DOUBLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DOUBLE, 0);
+		return this.getToken(TrinoSqlParser.DOUBLE, 0);
 	}
 	public EMPTY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EMPTY, 0);
+		return this.getToken(TrinoSqlParser.EMPTY, 0);
 	}
 	public EXCLUDING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXCLUDING, 0);
+		return this.getToken(TrinoSqlParser.EXCLUDING, 0);
 	}
 	public EXPLAIN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.EXPLAIN, 0);
+		return this.getToken(TrinoSqlParser.EXPLAIN, 0);
 	}
 	public FETCH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FETCH, 0);
+		return this.getToken(TrinoSqlParser.FETCH, 0);
 	}
 	public FILTER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FILTER, 0);
+		return this.getToken(TrinoSqlParser.FILTER, 0);
 	}
 	public FINAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FINAL, 0);
+		return this.getToken(TrinoSqlParser.FINAL, 0);
 	}
 	public FIRST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FIRST, 0);
+		return this.getToken(TrinoSqlParser.FIRST, 0);
 	}
 	public FOLLOWING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FOLLOWING, 0);
+		return this.getToken(TrinoSqlParser.FOLLOWING, 0);
 	}
 	public FORMAT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FORMAT, 0);
+		return this.getToken(TrinoSqlParser.FORMAT, 0);
 	}
 	public FUNCTIONS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.FUNCTIONS, 0);
+		return this.getToken(TrinoSqlParser.FUNCTIONS, 0);
 	}
 	public GRANT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANT, 0);
+		return this.getToken(TrinoSqlParser.GRANT, 0);
 	}
 	public GRANTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANTED, 0);
+		return this.getToken(TrinoSqlParser.GRANTED, 0);
 	}
 	public GRANTS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRANTS, 0);
+		return this.getToken(TrinoSqlParser.GRANTS, 0);
 	}
 	public DENY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.DENY, 0);
+		return this.getToken(TrinoSqlParser.DENY, 0);
 	}
 	public GRAPHVIZ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GRAPHVIZ, 0);
+		return this.getToken(TrinoSqlParser.GRAPHVIZ, 0);
 	}
 	public GROUPS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.GROUPS, 0);
+		return this.getToken(TrinoSqlParser.GROUPS, 0);
 	}
 	public HOUR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.HOUR, 0);
+		return this.getToken(TrinoSqlParser.HOUR, 0);
 	}
 	public IF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IF, 0);
+		return this.getToken(TrinoSqlParser.IF, 0);
 	}
 	public IGNORE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IGNORE, 0);
+		return this.getToken(TrinoSqlParser.IGNORE, 0);
 	}
 	public INCLUDING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INCLUDING, 0);
+		return this.getToken(TrinoSqlParser.INCLUDING, 0);
 	}
 	public INITIAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INITIAL, 0);
+		return this.getToken(TrinoSqlParser.INITIAL, 0);
 	}
 	public INPUT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INPUT, 0);
+		return this.getToken(TrinoSqlParser.INPUT, 0);
 	}
 	public INTERVAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INTERVAL, 0);
+		return this.getToken(TrinoSqlParser.INTERVAL, 0);
 	}
 	public INVOKER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.INVOKER, 0);
+		return this.getToken(TrinoSqlParser.INVOKER, 0);
 	}
 	public IO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.IO, 0);
+		return this.getToken(TrinoSqlParser.IO, 0);
 	}
 	public ISOLATION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ISOLATION, 0);
+		return this.getToken(TrinoSqlParser.ISOLATION, 0);
 	}
 	public JSON(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.JSON, 0);
+		return this.getToken(TrinoSqlParser.JSON, 0);
 	}
 	public LAST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LAST, 0);
+		return this.getToken(TrinoSqlParser.LAST, 0);
 	}
 	public LATERAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LATERAL, 0);
+		return this.getToken(TrinoSqlParser.LATERAL, 0);
 	}
 	public LEVEL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LEVEL, 0);
+		return this.getToken(TrinoSqlParser.LEVEL, 0);
 	}
 	public LIMIT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LIMIT, 0);
+		return this.getToken(TrinoSqlParser.LIMIT, 0);
 	}
 	public LOCAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LOCAL, 0);
+		return this.getToken(TrinoSqlParser.LOCAL, 0);
 	}
 	public LOGICAL(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.LOGICAL, 0);
+		return this.getToken(TrinoSqlParser.LOGICAL, 0);
 	}
 	public MAP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MAP, 0);
+		return this.getToken(TrinoSqlParser.MAP, 0);
 	}
 	public MATCH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCH, 0);
+		return this.getToken(TrinoSqlParser.MATCH, 0);
 	}
 	public MATCHED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCHED, 0);
+		return this.getToken(TrinoSqlParser.MATCHED, 0);
 	}
 	public MATCHES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCHES, 0);
+		return this.getToken(TrinoSqlParser.MATCHES, 0);
 	}
 	public MATCH_RECOGNIZE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATCH_RECOGNIZE, 0);
+		return this.getToken(TrinoSqlParser.MATCH_RECOGNIZE, 0);
 	}
 	public MATERIALIZED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MATERIALIZED, 0);
+		return this.getToken(TrinoSqlParser.MATERIALIZED, 0);
 	}
 	public MEASURES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MEASURES, 0);
+		return this.getToken(TrinoSqlParser.MEASURES, 0);
 	}
 	public MERGE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MERGE, 0);
+		return this.getToken(TrinoSqlParser.MERGE, 0);
 	}
 	public MINUTE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MINUTE, 0);
+		return this.getToken(TrinoSqlParser.MINUTE, 0);
 	}
 	public MONTH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.MONTH, 0);
+		return this.getToken(TrinoSqlParser.MONTH, 0);
 	}
 	public NEXT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NEXT, 0);
+		return this.getToken(TrinoSqlParser.NEXT, 0);
 	}
 	public NFC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NFC, 0);
+		return this.getToken(TrinoSqlParser.NFC, 0);
 	}
 	public NFD(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NFD, 0);
+		return this.getToken(TrinoSqlParser.NFD, 0);
 	}
 	public NFKC(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NFKC, 0);
+		return this.getToken(TrinoSqlParser.NFKC, 0);
 	}
 	public NFKD(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NFKD, 0);
+		return this.getToken(TrinoSqlParser.NFKD, 0);
 	}
 	public NO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NO, 0);
+		return this.getToken(TrinoSqlParser.NO, 0);
 	}
 	public NONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NONE, 0);
+		return this.getToken(TrinoSqlParser.NONE, 0);
 	}
 	public NULLIF(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULLIF, 0);
+		return this.getToken(TrinoSqlParser.NULLIF, 0);
 	}
 	public NULLS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.NULLS, 0);
+		return this.getToken(TrinoSqlParser.NULLS, 0);
 	}
 	public OFFSET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OFFSET, 0);
+		return this.getToken(TrinoSqlParser.OFFSET, 0);
 	}
 	public OMIT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OMIT, 0);
+		return this.getToken(TrinoSqlParser.OMIT, 0);
 	}
 	public ONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ONE, 0);
+		return this.getToken(TrinoSqlParser.ONE, 0);
 	}
 	public ONLY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ONLY, 0);
+		return this.getToken(TrinoSqlParser.ONLY, 0);
 	}
 	public OPTION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OPTION, 0);
+		return this.getToken(TrinoSqlParser.OPTION, 0);
 	}
 	public ORDINALITY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ORDINALITY, 0);
+		return this.getToken(TrinoSqlParser.ORDINALITY, 0);
 	}
 	public OUTPUT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OUTPUT, 0);
+		return this.getToken(TrinoSqlParser.OUTPUT, 0);
 	}
 	public OVER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.OVER, 0);
+		return this.getToken(TrinoSqlParser.OVER, 0);
 	}
 	public PARTITION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PARTITION, 0);
+		return this.getToken(TrinoSqlParser.PARTITION, 0);
 	}
 	public PARTITIONS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PARTITIONS, 0);
+		return this.getToken(TrinoSqlParser.PARTITIONS, 0);
 	}
 	public PAST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PAST, 0);
+		return this.getToken(TrinoSqlParser.PAST, 0);
 	}
 	public PATH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PATH, 0);
+		return this.getToken(TrinoSqlParser.PATH, 0);
 	}
 	public PATTERN(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PATTERN, 0);
+		return this.getToken(TrinoSqlParser.PATTERN, 0);
 	}
 	public PER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PER, 0);
+		return this.getToken(TrinoSqlParser.PER, 0);
 	}
 	public PERMUTE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PERMUTE, 0);
+		return this.getToken(TrinoSqlParser.PERMUTE, 0);
 	}
 	public POSITION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.POSITION, 0);
+		return this.getToken(TrinoSqlParser.POSITION, 0);
 	}
 	public PRECEDING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRECEDING, 0);
+		return this.getToken(TrinoSqlParser.PRECEDING, 0);
 	}
 	public PRECISION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRECISION, 0);
+		return this.getToken(TrinoSqlParser.PRECISION, 0);
 	}
 	public PRIVILEGES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PRIVILEGES, 0);
+		return this.getToken(TrinoSqlParser.PRIVILEGES, 0);
 	}
 	public PROPERTIES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.PROPERTIES, 0);
+		return this.getToken(TrinoSqlParser.PROPERTIES, 0);
 	}
 	public RANGE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RANGE, 0);
+		return this.getToken(TrinoSqlParser.RANGE, 0);
 	}
 	public READ(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.READ, 0);
+		return this.getToken(TrinoSqlParser.READ, 0);
 	}
 	public REFRESH(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REFRESH, 0);
+		return this.getToken(TrinoSqlParser.REFRESH, 0);
 	}
 	public RENAME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RENAME, 0);
+		return this.getToken(TrinoSqlParser.RENAME, 0);
 	}
 	public REPEATABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REPEATABLE, 0);
+		return this.getToken(TrinoSqlParser.REPEATABLE, 0);
 	}
 	public REPLACE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REPLACE, 0);
+		return this.getToken(TrinoSqlParser.REPLACE, 0);
 	}
 	public RESET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RESET, 0);
+		return this.getToken(TrinoSqlParser.RESET, 0);
 	}
 	public RESPECT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RESPECT, 0);
+		return this.getToken(TrinoSqlParser.RESPECT, 0);
 	}
 	public RESTRICT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RESTRICT, 0);
+		return this.getToken(TrinoSqlParser.RESTRICT, 0);
 	}
 	public REVOKE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.REVOKE, 0);
+		return this.getToken(TrinoSqlParser.REVOKE, 0);
 	}
 	public ROLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLE, 0);
+		return this.getToken(TrinoSqlParser.ROLE, 0);
 	}
 	public ROLES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLES, 0);
+		return this.getToken(TrinoSqlParser.ROLES, 0);
 	}
 	public ROLLBACK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROLLBACK, 0);
+		return this.getToken(TrinoSqlParser.ROLLBACK, 0);
 	}
 	public ROW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROW, 0);
+		return this.getToken(TrinoSqlParser.ROW, 0);
 	}
 	public ROWS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ROWS, 0);
+		return this.getToken(TrinoSqlParser.ROWS, 0);
 	}
 	public RUNNING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.RUNNING, 0);
+		return this.getToken(TrinoSqlParser.RUNNING, 0);
 	}
 	public SCHEMA(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMA, 0);
+		return this.getToken(TrinoSqlParser.SCHEMA, 0);
 	}
 	public SCHEMAS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SCHEMAS, 0);
+		return this.getToken(TrinoSqlParser.SCHEMAS, 0);
 	}
 	public SECOND(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SECOND, 0);
+		return this.getToken(TrinoSqlParser.SECOND, 0);
 	}
 	public SECURITY(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SECURITY, 0);
+		return this.getToken(TrinoSqlParser.SECURITY, 0);
 	}
 	public SEEK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SEEK, 0);
+		return this.getToken(TrinoSqlParser.SEEK, 0);
 	}
 	public SERIALIZABLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SERIALIZABLE, 0);
+		return this.getToken(TrinoSqlParser.SERIALIZABLE, 0);
 	}
 	public SESSION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SESSION, 0);
+		return this.getToken(TrinoSqlParser.SESSION, 0);
 	}
 	public SET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SET, 0);
+		return this.getToken(TrinoSqlParser.SET, 0);
 	}
 	public SETS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SETS, 0);
+		return this.getToken(TrinoSqlParser.SETS, 0);
 	}
 	public SHOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SHOW, 0);
+		return this.getToken(TrinoSqlParser.SHOW, 0);
 	}
 	public SOME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SOME, 0);
+		return this.getToken(TrinoSqlParser.SOME, 0);
 	}
 	public START(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.START, 0);
+		return this.getToken(TrinoSqlParser.START, 0);
 	}
 	public STATS(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.STATS, 0);
+		return this.getToken(TrinoSqlParser.STATS, 0);
 	}
 	public SUBSET(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SUBSET, 0);
+		return this.getToken(TrinoSqlParser.SUBSET, 0);
 	}
 	public SUBSTRING(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SUBSTRING, 0);
+		return this.getToken(TrinoSqlParser.SUBSTRING, 0);
 	}
 	public SYSTEM(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.SYSTEM, 0);
+		return this.getToken(TrinoSqlParser.SYSTEM, 0);
 	}
 	public TABLES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLES, 0);
+		return this.getToken(TrinoSqlParser.TABLES, 0);
 	}
 	public TABLESAMPLE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TABLESAMPLE, 0);
+		return this.getToken(TrinoSqlParser.TABLESAMPLE, 0);
 	}
 	public TEXT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TEXT, 0);
+		return this.getToken(TrinoSqlParser.TEXT, 0);
 	}
 	public TIES(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIES, 0);
+		return this.getToken(TrinoSqlParser.TIES, 0);
 	}
 	public TIME(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIME, 0);
+		return this.getToken(TrinoSqlParser.TIME, 0);
 	}
 	public TIMESTAMP(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TIMESTAMP, 0);
+		return this.getToken(TrinoSqlParser.TIMESTAMP, 0);
 	}
 	public TO(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TO, 0);
+		return this.getToken(TrinoSqlParser.TO, 0);
 	}
 	public TRANSACTION(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TRANSACTION, 0);
+		return this.getToken(TrinoSqlParser.TRANSACTION, 0);
 	}
 	public TRUNCATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TRUNCATE, 0);
+		return this.getToken(TrinoSqlParser.TRUNCATE, 0);
 	}
 	public TRY_CAST(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TRY_CAST, 0);
+		return this.getToken(TrinoSqlParser.TRY_CAST, 0);
 	}
 	public TYPE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.TYPE, 0);
+		return this.getToken(TrinoSqlParser.TYPE, 0);
 	}
 	public UNBOUNDED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNBOUNDED, 0);
+		return this.getToken(TrinoSqlParser.UNBOUNDED, 0);
 	}
 	public UNCOMMITTED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNCOMMITTED, 0);
+		return this.getToken(TrinoSqlParser.UNCOMMITTED, 0);
 	}
 	public UNMATCHED(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UNMATCHED, 0);
+		return this.getToken(TrinoSqlParser.UNMATCHED, 0);
 	}
 	public UPDATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.UPDATE, 0);
+		return this.getToken(TrinoSqlParser.UPDATE, 0);
 	}
 	public USE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.USE, 0);
+		return this.getToken(TrinoSqlParser.USE, 0);
 	}
 	public USER(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.USER, 0);
+		return this.getToken(TrinoSqlParser.USER, 0);
 	}
 	public VALIDATE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VALIDATE, 0);
+		return this.getToken(TrinoSqlParser.VALIDATE, 0);
 	}
 	public VERBOSE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VERBOSE, 0);
+		return this.getToken(TrinoSqlParser.VERBOSE, 0);
 	}
 	public VIEW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.VIEW, 0);
+		return this.getToken(TrinoSqlParser.VIEW, 0);
 	}
 	public WINDOW(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WINDOW, 0);
+		return this.getToken(TrinoSqlParser.WINDOW, 0);
 	}
 	public WITHOUT(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WITHOUT, 0);
+		return this.getToken(TrinoSqlParser.WITHOUT, 0);
 	}
 	public WORK(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WORK, 0);
+		return this.getToken(TrinoSqlParser.WORK, 0);
 	}
 	public WRITE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.WRITE, 0);
+		return this.getToken(TrinoSqlParser.WRITE, 0);
 	}
 	public YEAR(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.YEAR, 0);
+		return this.getToken(TrinoSqlParser.YEAR, 0);
 	}
 	public ZONE(): TerminalNode {
-		return this.getToken(trinoSqlParserParser.ZONE, 0);
+		return this.getToken(TrinoSqlParser.ZONE, 0);
 	}
     public get ruleIndex(): number {
-    	return trinoSqlParserParser.RULE_nonReserved;
+    	return TrinoSqlParser.RULE_nonReserved;
 	}
-	public enterRule(listener: trinoSqlParserListener): void {
+	public enterRule(listener: TrinoSqlListener): void {
 	    if(listener.enterNonReserved) {
 	 		listener.enterNonReserved(this);
 		}
 	}
-	public exitRule(listener: trinoSqlParserListener): void {
+	public exitRule(listener: TrinoSqlListener): void {
 	    if(listener.exitNonReserved) {
 	 		listener.exitNonReserved(this);
 		}
 	}
 	// @Override
-	public accept<Result>(visitor: trinoSqlParserVisitor<Result>): Result {
+	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
 		if (visitor.visitNonReserved) {
 			return visitor.visitNonReserved(this);
 		} else {

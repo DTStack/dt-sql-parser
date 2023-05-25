@@ -1,4 +1,4 @@
-// Generated from /Users/zhenglin/Documents/parser/dt-sql-parser/src/grammar/trinosql/trinoSqlParser.g4 by ANTLR 4.12.0
+// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/trinosql/TrinoSql.g4 by ANTLR 4.12.0
 // noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 import {
 	ATN,
@@ -11,7 +11,7 @@ import {
 	PredictionContextCache,
 	Token
 } from "antlr4";
-export default class trinoSqlParserLexer extends Lexer {
+export default class TrinoSqlLexer extends Lexer {
 	public static readonly T__0 = 1;
 	public static readonly T__1 = 2;
 	public static readonly T__2 = 3;
@@ -569,20 +569,20 @@ export default class trinoSqlParserLexer extends Lexer {
 
 	constructor(input: CharStream) {
 		super(input);
-		this._interp = new LexerATNSimulator(this, trinoSqlParserLexer._ATN, trinoSqlParserLexer.DecisionsToDFA, new PredictionContextCache());
+		this._interp = new LexerATNSimulator(this, TrinoSqlLexer._ATN, TrinoSqlLexer.DecisionsToDFA, new PredictionContextCache());
 	}
 
-	public get grammarFileName(): string { return "trinoSqlParser.g4"; }
+	public get grammarFileName(): string { return "TrinoSql.g4"; }
 
-	public get literalNames(): (string | null)[] { return trinoSqlParserLexer.literalNames; }
-	public get symbolicNames(): (string | null)[] { return trinoSqlParserLexer.symbolicNames; }
-	public get ruleNames(): string[] { return trinoSqlParserLexer.ruleNames; }
+	public get literalNames(): (string | null)[] { return TrinoSqlLexer.literalNames; }
+	public get symbolicNames(): (string | null)[] { return TrinoSqlLexer.symbolicNames; }
+	public get ruleNames(): string[] { return TrinoSqlLexer.ruleNames; }
 
-	public get serializedATN(): number[] { return trinoSqlParserLexer._serializedATN; }
+	public get serializedATN(): number[] { return TrinoSqlLexer._serializedATN; }
 
-	public get channelNames(): string[] { return trinoSqlParserLexer.channelNames; }
+	public get channelNames(): string[] { return TrinoSqlLexer.channelNames; }
 
-	public get modeNames(): string[] { return trinoSqlParserLexer.modeNames; }
+	public get modeNames(): string[] { return TrinoSqlLexer.modeNames; }
 
 	public static readonly _serializedATN: number[] = [4,0,276,2467,6,-1,2,
 	0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,
@@ -1424,13 +1424,13 @@ export default class trinoSqlParserLexer extends Lexer {
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
-		if (!trinoSqlParserLexer.__ATN) {
-			trinoSqlParserLexer.__ATN = new ATNDeserializer().deserialize(trinoSqlParserLexer._serializedATN);
+		if (!TrinoSqlLexer.__ATN) {
+			TrinoSqlLexer.__ATN = new ATNDeserializer().deserialize(TrinoSqlLexer._serializedATN);
 		}
 
-		return trinoSqlParserLexer.__ATN;
+		return TrinoSqlLexer.__ATN;
 	}
 
 
-	static DecisionsToDFA = trinoSqlParserLexer._ATN.decisionToState.map( (ds: DecisionState, index: number) => new DFA(ds, index) );
+	static DecisionsToDFA = TrinoSqlLexer._ATN.decisionToState.map( (ds: DecisionState, index: number) => new DFA(ds, index) );
 }

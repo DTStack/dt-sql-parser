@@ -1,6 +1,5 @@
 import trinoSQL from '../../../src/parser/trinosql';
-import trinoSqlParserListener from '../../../src/lib/trinosql/trinoSqlParserListener';
-import { TableExpressionContext } from '../../../src/lib/trinosql/trinoSqlParser';
+import TrinoSqlParserListener from '../../../src/lib/trinosql/TrinoSqlListener';
 
 describe('trino SQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -11,15 +10,15 @@ describe('trino SQL Listener Tests', () => {
 
     test('Listener enterTableName', async () => {
         let result = '';
-        class MyListener extends trinoSqlParserListener {
+        class MyListener extends TrinoSqlParserListener {
 
             constructor() {
                 super()
             }
 
-            enterTableExpression = (ctx: TableExpressionContext): void => {
+            enterTableName = (ctx): void => {
                 result = ctx.getText().toLowerCase();
-            }
+            };
         }
         const listenTableName = new MyListener();
 

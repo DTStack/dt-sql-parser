@@ -1,5 +1,5 @@
 import trinoSQL from '../../../src/parser/trinosql';
-import trinoSqlParserVisitor from '../../../src/lib/trinosql/trinoSqlParserVisitor';
+import TrinoSqlParserVisitor from '../../../src/lib/trinosql/TrinoSqlVisitor';
 
 describe('trino SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -12,8 +12,8 @@ describe('trino SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends trinoSqlParserVisitor<any>{ 
-            visitTableExpression = (ctx): void => {
+        class MyVisitor extends TrinoSqlParserVisitor<any>{ 
+            visitTableName = (ctx): void => {
                 result = ctx.getText().toLowerCase();
             }
         }
