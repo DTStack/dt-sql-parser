@@ -180,7 +180,7 @@ rowTypeDimension
     ;
 
 columnConstraint
-    :(KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY KW_NOT KW_ENFORCED
+    :(KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY (KW_NOT KW_ENFORCED)? | KW_NOT? KW_NULL
     ;
 
 commentSpec
@@ -347,7 +347,8 @@ dropFunction
 // Insert statements
 
 insertStatement
-    : (KW_EXECUTE? insertSimpleStatement) | (KW_EXECUTE insertMulStatement)
+: (KW_EXECUTE? insertSimpleStatement)
+	| insertMulStatementCompatibility | (KW_EXECUTE insertMulStatement)
     ;
 
 insertSimpleStatement
@@ -370,6 +371,10 @@ valuesRowDefinition
     : LR_BRACKET
         constant (COMMA constant)*
     RR_BRACKET
+    ;
+
+insertMulStatementCompatibility
+	: KW_BEGIN KW_STATEMENT KW_SET SEMICOLON (insertSimpleStatement SEMICOLON)+ KW_END
     ;
 
 insertMulStatement
@@ -440,7 +445,7 @@ tableReference
 
 tablePrimary
     : KW_TABLE? tablePath systemTimePeriod? (KW_AS? correlationName)?
-    | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET expression (COMMA expression)* RR_BRACKET RR_BRACKET
+    | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET functionParam (COMMA functionParam)* RR_BRACKET RR_BRACKET
     | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
@@ -659,24 +664,27 @@ booleanExpression
     | valueExpression predicate?                                   #predicated
     | left=booleanExpression operator=KW_AND right=booleanExpression  #logicalBinary
     | left=booleanExpression operator=KW_OR right=booleanExpression   #logicalBinary
+    | booleanExpression KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL) #logicalNested
     ;
 
 predicate
-    : KW_NOT? kind=KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression
+    : KW_NOT? 
+        kind=KW_BETWEEN (KW_ASYMMETRIC | KW_SYMMETRIC)? 
+        lower=valueExpression KW_AND 
+        upper=valueExpression
     | KW_NOT? kind=KW_IN '(' expression (',' expression)* ')'
     | KW_NOT? kind=KW_IN '(' queryStatement ')'
     | kind=KW_EXISTS '(' queryStatement ')'
     | KW_NOT? kind=KW_RLIKE pattern=valueExpression
-    | KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) ('('')' | '(' expression (',' expression)* ')')
-    | KW_NOT? kind=KW_LIKE pattern=valueExpression
-    | KW_IS KW_NOT? kind=KW_NULL
-    | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE)
+    | likePredicate
+    | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL)
     | KW_IS KW_NOT? kind=KW_DISTINCT KW_FROM right=valueExpression
+    | KW_NOT? kind=KW_SIMILAR KW_TO right=valueExpression (KW_ESCAPE stringLiteral)?
     ;
 
 likePredicate
     : KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) ('('')' | '(' expression (',' expression)* ')')
-    | KW_NOT? kind=KW_LIKE pattern=valueExpression
+    | KW_NOT? kind=KW_LIKE pattern=valueExpression (KW_ESCAPE stringLiteral)?
     ;
 
 valueExpression
@@ -703,7 +711,7 @@ primaryExpression
     | uid '.' '*'                                                                #star
     // | '(' namedExpression (',' namedExpression)+ ')'                                           #rowConstructor
     | '(' queryStatement ')'                                                                            #subqueryExpression
-    | functionName '(' (setQuantifier? expression (',' expression)*)? ')'                      #functionCall
+    | functionName '(' (setQuantifier? functionParam (',' functionParam)*)? ')'                      #functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
@@ -720,15 +728,21 @@ primaryExpression
     ;
 
 functionName
-    : reservedKeywords
+    : reservedKeywordsUsedAsFuncName
     | nonReservedKeywords
     | uid
+    ;
+
+functionParam
+    : reservedKeywordsUsedAsFuncParam
+    | timeIntervalUnit
+    | timePointUnit
+    | expression
     ;
 
 dereferenceDefinition
     : uid
     ;
-
 
 // base common
 
@@ -749,7 +763,7 @@ errorCapturingMultiUnitsInterval
     ;
 
 multiUnitsInterval
-    : (intervalValue intervalTimeUnit)+
+    : (intervalValue timeIntervalUnit)+
     ;
 
 errorCapturingUnitToUnitInterval
@@ -757,17 +771,12 @@ errorCapturingUnitToUnitInterval
     ;
 
 unitToUnitInterval
-    : value=intervalValue from=intervalTimeUnit KW_TO to=intervalTimeUnit
+    : value=intervalValue from=timeIntervalUnit KW_TO to=timeIntervalUnit
     ;
 
 intervalValue
     : ('+' | '-')? (DIG_LITERAL | REAL_LITERAL)
     | STRING_LITERAL
-    ;
-
-intervalTimeUnit  // TODO: 需要整理 interval 时间粒度比如 SECOND、DAY
-    : identifier
-    | reservedKeywords
     ;
 
 columnAlias
@@ -848,34 +857,62 @@ tablePropertyValue
     ;
 
 logicalOperator
-    : KW_AND | '&' '&' | KW_OR | '|' '|'
+    : KW_AND
+    | '&' '&'
+    | KW_OR 
+    | '|' '|'
     ;
 
 comparisonOperator
-    : '=' | '>' | '<' | '<' '=' | '>' '='
-    | '<' '>' | '!' '=' | '<' '=' '>'
+    : '=' 
+    | '>' 
+    | '<' 
+    | '<' '=' 
+    | '>' '='
+    | '<' '>' 
+    | '!' '=' 
+    | '<' '=' '>'
     ;
+
 bitOperator
-    : '<' '<' | '>' '>' | '&' | '^' | '|'
+    : '<' '<' 
+    | '>' '>' 
+    | '&' 
+    | '^' 
+    | '|'
     ;
 
 mathOperator
-    : '*' | SLASH_SIGN | PENCENT_SIGN | KW_DIV | '+' | '-' | DOUBLE_HYPNEN_SIGN
+    : '*' 
+    | SLASH_SIGN 
+    | PENCENT_SIGN 
+    | KW_DIV 
+    | '+' 
+    | '-' 
+    | DOUBLE_HYPNEN_SIGN
     ;
 
 unaryOperator
-    : '!' | '~' | ADD_SIGN | '-' | KW_NOT
+    : '!' 
+    | '~' 
+    | ADD_SIGN 
+    | '-' 
+    | KW_NOT
     ;
 
 constant
-    : stringLiteral                                             // 引号包含的字符串
-    | decimalLiteral                                            // 整数
-    | timeIntervalExpression                                                  // KW_INTERVAL keywords
-    | HYPNEN_SIGN decimalLiteral                                        // 负整数
+    : timeIntervalExpression
+    | timePointLiteral
+    | stringLiteral                                             // 引号包含的字符串
+    | HYPNEN_SIGN? decimalLiteral                                // 正/负整数
     | booleanLiteral                                            // 布尔值
     | REAL_LITERAL                                              // 小数
     | BIT_STRING
-    | KW_NOT? KW_NULL                                                 // 空 | 非空
+    | KW_NOT? KW_NULL                                           // 空 | 非空
+    ;
+
+timePointLiteral
+    : timePointUnit stringLiteral
     ;
 
 stringLiteral
@@ -894,16 +931,99 @@ setQuantifier
     | KW_ALL
     ;
 
+timePointUnit
+    : KW_YEAR
+    | KW_QUARTER
+    | KW_MONTH
+    | KW_WEEK
+    | KW_DAY
+    | KW_HOUR
+    | KW_MINUTE
+    | KW_SECOND
+    | KW_MILLISECOND
+    | KW_MICROSECOND
+    ;
+
+timeIntervalUnit
+    : KW_MILLENNIUM
+    | KW_CENTURY
+    | KW_DECADE
+    | KW_YEAR
+    | KW_YEARS
+    | KW_QUARTER
+    | KW_MONTH
+    | KW_MONTHS
+    | KW_WEEK
+    | KW_WEEKS
+    | KW_DAY
+    | KW_DAYS
+    | KW_HOUR
+    | KW_HOURS
+    | KW_MINUTE
+    | KW_MINUTES
+    | KW_SECOND
+    | KW_SECONDS
+    | KW_MILLISECOND
+    | KW_MICROSECOND
+    | KW_NANOSECOND
+    | KW_EPOCH
+    ;
+
+reservedKeywordsUsedAsFuncParam
+    : KW_LEADING
+    | KW_TRAILING
+    | KW_BOTH
+    | KW_ALL
+    | KW_DISTINCT
+    | ASTERISK_SIGN
+    ;
+
+reservedKeywordsUsedAsFuncName
+    : KW_ABS
+    | KW_ARRAY
+    | KW_AVG
+    | KW_CAST
+    | KW_CEIL
+    | KW_COALESCE
+    | KW_COLLECT
+    | KW_COUNT
+    | KW_DATE
+    | KW_GROUPING
+    | KW_HOUR
+    | KW_IF
+    | KW_LAG
+    | KW_LEFT
+    | KW_MAP
+    | KW_MINUTE
+    | KW_MONTH
+    | KW_OVERLAY
+    | KW_POSITION
+    | KW_POWER
+    | KW_QUARTER
+    | KW_RANK
+    | KW_RIGHT
+    | KW_SECOND
+    | KW_SUBSTRING
+    | KW_SUM
+    | KW_TIME
+    | KW_TIMESTAMP
+    | KW_TRUNCATE
+    | KW_UPPER
+    | KW_WEEK
+    | KW_YEAR
+    ;
+
 reservedKeywords
     : KW_ABS
     | KW_ALL
-    | ALLOW
+    | KW_ALLOW
     | KW_ALTER 
     | KW_AND
     | KW_ANY
     | KW_ARE
     | KW_ARRAY
     | KW_AS
+    | KW_ASYMMETRIC
     | KW_AT
     | KW_AVG
     | KW_BEGIN
@@ -1048,12 +1168,14 @@ reservedKeywords
     | KW_SELECT
     | KW_SET
     | KW_SHOW
+    | KW_SIMILAR
     | KW_SKIP
     | KW_SMALLINT
     | KW_START
     | KW_STATIC
     | KW_SUBSTRING
     | KW_SUM
+    | KW_SYSTEM_TIME
     | KW_SYSTEM
     | KW_SYSTEM_TIME
     | KW_SYSTEM_USER

@@ -23,10 +23,13 @@ lexer grammar PlSqlLexer;
 options {
     superClass=PlSqlBaseLexer;
 }
+<<<<<<< HEAD
 @lexer::header {
 import PlSqlBaseLexer from "./base/PlSqlBaseLexer";
 }
 
+=======
+>>>>>>> master
 
 ABORT:                        'ABORT';
 ABS:                          'ABS';

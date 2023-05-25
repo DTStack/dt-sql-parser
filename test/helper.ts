@@ -10,7 +10,7 @@ export const readSQL = (dirname: string, fileName: string) => {
         const char = content[index];
         tmp += char;
 
-        const isMulti = tmp.includes('EXECUTE STATEMENT SET');
+        const isMulti = tmp.includes('EXECUTE STATEMENT SET') || tmp.includes('BEGIN STATEMENT SET;');
 
         if (!isMulti) {
             // 非批量的先简单按照分号切割

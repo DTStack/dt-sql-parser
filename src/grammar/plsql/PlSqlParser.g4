@@ -24,9 +24,12 @@ options {
     tokenVocab=PlSqlLexer;
     superClass=PlSqlBaseParser;
 }
+<<<<<<< HEAD
 @parser::header {
 import PlSqlBaseParser from './base/PlSqlBaseParser';
 }
+=======
+>>>>>>> master
 
 program: sql_script EOF;
 

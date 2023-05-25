@@ -11,7 +11,8 @@ const features = {
     aggregation: readSQL(__dirname, "selectAggregation.sql"),
     join: readSQL(__dirname, "selectJoin.sql"),
     setOperation: readSQL(__dirname, "selectSetOperations.sql"),
-    pattern: readSQL(__dirname, "selectPatternRecognition.sql")
+    pattern: readSQL(__dirname, "selectPatternRecognition.sql"),
+    where: readSQL(__dirname, "selectWhere.sql"),
 };
 
 describe("FlinkSQL Query Statement Tests", () => {
@@ -77,6 +78,14 @@ describe("FlinkSQL Query Statement Tests", () => {
             it(sql, () => {
                 expect(parser.validate(sql).length).toBe(0);
             });
+        })
+    })
+
+    describe("Select Where", () => {
+        features.where.forEach((sql) => {
+            it(sql, () => {
+                expect(parser.validate(sql).length).toBe(0)
+            })
         })
     })
 });

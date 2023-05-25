@@ -4318,6 +4318,13 @@ reserved_keyword
    | IN_P
    | INITIALLY
    | INTERSECT
+/*
+from pl_gram.y, line ~2982
+	 * Fortunately, INTO is a fully reserved word in the main grammar, so
+	 * at least we need not worry about it appearing as an identifier.
+*/
+
+   //                 | INTO
    | LATERAL_P
    | LEADING
    | LIMIT
@@ -4354,6 +4361,16 @@ reserved_keyword
    | WITH
    ;
 
+/************************************************************************************************************************************************************/
+/*PL/SQL GRAMMAR */
+
+
+/*PLSQL grammar */
+
+/************************************************************************************************************************************************************/ 
+pl_function
+   : comp_options pl_block opt_semi
+   ;
 
 comp_options
    : comp_option*
@@ -4670,7 +4687,6 @@ exit_type
    : EXIT
    | CONTINUE_P
    ;
-   //todo implement RETURN statement according to initial grammar line 1754
 
 stmt_return
    : RETURN (NEXT sql_expression | QUERY (EXECUTE a_expr opt_for_using_expression | selectstmt) | opt_return_result) SEMI
@@ -4997,4 +5013,3 @@ make_execsql_stmt
 opt_returning_clause_into
    : INTO opt_strict into_target
    ;
-
