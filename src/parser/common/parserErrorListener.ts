@@ -1,4 +1,4 @@
-import { Token, Recognizer, DiagnosticErrorListener, RecognitionException } from 'antlr4ts';
+import { Token, Recognizer, ParserErrorListener, RecognitionException } from 'antlr4ts';
 export interface ParserError {
     startLine: number;
     endLine: number;
@@ -22,11 +22,10 @@ type ErrorOffendingSymbol = {
 
 export type ErrorHandler<T> = (err: ParserError, errOption: SyntaxError<T>) => void;
 
-export class ParserErrorCollector extends DiagnosticErrorListener {
+export class ParserErrorCollector implements ParserErrorListener {
     private _errors: ParserError[];
 
     constructor(error: ParserError[]) {
-        super();
         this._errors = error;
     }
 
@@ -49,11 +48,10 @@ export class ParserErrorCollector extends DiagnosticErrorListener {
 }
 
 
-export default class ParserErrorListener extends DiagnosticErrorListener {
+export default class CustomParserErrorListener implements ParserErrorListener  {
     private _errorHandler;
 
     constructor(errorListener: ErrorHandler<ErrorOffendingSymbol>) {
-        super();
         this._errorHandler = errorListener;
     }
 
