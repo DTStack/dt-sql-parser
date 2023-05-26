@@ -1,4 +1,4 @@
-import { CommonTokenStream, Parser } from 'antlr4ts';
+import { Parser } from 'antlr4ts';
 import { ParseTreeWalker } from 'antlr4ts/tree';
 
 import ParserErrorListener, {
@@ -45,8 +45,6 @@ export default abstract class BasicParser {
         parser.addErrorListener(new ParserErrorCollector(syntaxErrors));
 
         parser.program();
-        console.log('Validate SQL:', input);
-        console.log('Validate Error:', syntaxErrors);
         return lexerError.concat(syntaxErrors);
     }
 
