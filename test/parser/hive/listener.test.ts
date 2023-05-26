@@ -11,27 +11,27 @@ describe('Hive SQL Listener Tests', () => {
 
         let result = '';
         class MyListener implements HiveSqlListener {
-            enterSelect_list(ctx) {
+            enterSelectItem(ctx) {
                 result = ctx.text;
             }
         }
         const listenTableName: any = new MyListener();
 
         await parser.listen(listenTableName, parserTree);
-        expect(result).toBe(expectTableName);
+        expect(result).toBe(expectTableName.toUpperCase());
     });
     test('Listener enterCreateTable', async () => {
         const sql = `drop table table_name;`;
         const parserTree = parser.parse(sql);
         let result = '';
         class MyListener implements HiveSqlListener {
-            enterDrop_stmt(ctx) {
+            enterDropTableStatement(ctx) {
                 result = ctx.text;
             }
         }
         const listenTableName: any = new MyListener();
 
         await parser.listen(listenTableName, parserTree);
-        expect(result).toBe('droptabletable_name');
+        expect(result).toBe('DROPTABLETABLE_NAME');
     });
 });

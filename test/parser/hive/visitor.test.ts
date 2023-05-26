@@ -2,7 +2,7 @@ import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor
 import { HiveSqlVisitor } from '../../../src/lib/hive/HiveSqlVisitor';
 import HiveSQL from '../../../src/parser/hive';
 
-describe('Generic SQL Visitor Tests', () => {
+describe('Hive SQL Visitor Tests', () => {
     const expectTableName = 'dm_gis.dlv_addr_tc_count';
     const sql = `select citycode,tc,inc_day from ${expectTableName} where inc_day='20190501' limit 100;`;
     const parser = new HiveSQL();
@@ -19,7 +19,7 @@ describe('Generic SQL Visitor Tests', () => {
                 return result;
             }
 
-            visitTable_name(ctx) {
+            visitTableName(ctx) {
                 result = ctx.text.toLowerCase();
             }
         }

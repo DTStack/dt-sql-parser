@@ -3,234 +3,505 @@
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 
-import { Single_quotedStringContext } from "./HiveSql";
-import { Double_quotedStringContext } from "./HiveSql";
 import { ProgramContext } from "./HiveSql";
-import { BlockContext } from "./HiveSql";
-import { Begin_end_blockContext } from "./HiveSql";
-import { Single_block_stmtContext } from "./HiveSql";
-import { Block_endContext } from "./HiveSql";
-import { Proc_blockContext } from "./HiveSql";
-import { StmtContext } from "./HiveSql";
-import { Semicolon_stmtContext } from "./HiveSql";
-import { Exception_blockContext } from "./HiveSql";
-import { Exception_block_itemContext } from "./HiveSql";
-import { Null_stmtContext } from "./HiveSql";
-import { Expr_stmtContext } from "./HiveSql";
-import { Assignment_stmtContext } from "./HiveSql";
-import { Assignment_stmt_itemContext } from "./HiveSql";
-import { Assignment_stmt_single_itemContext } from "./HiveSql";
-import { Assignment_stmt_multiple_itemContext } from "./HiveSql";
-import { Assignment_stmt_select_itemContext } from "./HiveSql";
-import { Allocate_cursor_stmtContext } from "./HiveSql";
-import { Associate_locator_stmtContext } from "./HiveSql";
-import { Begin_transaction_stmtContext } from "./HiveSql";
-import { Break_stmtContext } from "./HiveSql";
-import { Call_stmtContext } from "./HiveSql";
-import { Declare_stmtContext } from "./HiveSql";
-import { Declare_blockContext } from "./HiveSql";
-import { Declare_block_inplaceContext } from "./HiveSql";
-import { Declare_stmt_itemContext } from "./HiveSql";
-import { Declare_var_itemContext } from "./HiveSql";
-import { Declare_condition_itemContext } from "./HiveSql";
-import { Declare_cursor_itemContext } from "./HiveSql";
-import { Cursor_with_returnContext } from "./HiveSql";
-import { Cursor_without_returnContext } from "./HiveSql";
-import { Declare_handler_itemContext } from "./HiveSql";
-import { Declare_temporary_table_itemContext } from "./HiveSql";
-import { Create_table_stmtContext } from "./HiveSql";
-import { Create_local_temp_table_stmtContext } from "./HiveSql";
-import { Create_table_definitionContext } from "./HiveSql";
-import { Create_table_columnsContext } from "./HiveSql";
-import { Create_table_columns_itemContext } from "./HiveSql";
-import { Column_nameContext } from "./HiveSql";
-import { Create_table_column_inline_consContext } from "./HiveSql";
-import { Create_table_column_consContext } from "./HiveSql";
-import { Create_table_fk_actionContext } from "./HiveSql";
-import { Create_table_preoptionsContext } from "./HiveSql";
-import { Create_table_preoptions_itemContext } from "./HiveSql";
-import { Create_table_preoptions_td_itemContext } from "./HiveSql";
-import { Create_table_optionsContext } from "./HiveSql";
-import { Create_table_options_itemContext } from "./HiveSql";
-import { Create_table_options_ora_itemContext } from "./HiveSql";
-import { Create_table_options_db2_itemContext } from "./HiveSql";
-import { Create_table_options_td_itemContext } from "./HiveSql";
-import { Create_table_options_hive_itemContext } from "./HiveSql";
-import { Create_table_hive_row_formatContext } from "./HiveSql";
-import { Create_table_hive_row_format_fieldsContext } from "./HiveSql";
-import { Create_table_options_mssql_itemContext } from "./HiveSql";
-import { Create_table_options_mysql_itemContext } from "./HiveSql";
-import { Alter_table_stmtContext } from "./HiveSql";
-import { Alter_table_itemContext } from "./HiveSql";
-import { Alter_table_add_constraintContext } from "./HiveSql";
-import { Alter_table_add_constraint_itemContext } from "./HiveSql";
-import { DtypeContext } from "./HiveSql";
-import { Dtype_lenContext } from "./HiveSql";
-import { Dtype_attrContext } from "./HiveSql";
-import { Dtype_defaultContext } from "./HiveSql";
-import { Create_database_stmtContext } from "./HiveSql";
-import { Create_database_optionContext } from "./HiveSql";
-import { Create_function_stmtContext } from "./HiveSql";
-import { Create_function_returnContext } from "./HiveSql";
-import { Create_package_stmtContext } from "./HiveSql";
-import { Package_specContext } from "./HiveSql";
-import { Package_spec_itemContext } from "./HiveSql";
-import { Create_package_body_stmtContext } from "./HiveSql";
-import { Package_bodyContext } from "./HiveSql";
-import { Package_body_itemContext } from "./HiveSql";
-import { Create_procedure_stmtContext } from "./HiveSql";
-import { Create_routine_paramsContext } from "./HiveSql";
-import { Create_routine_param_itemContext } from "./HiveSql";
-import { Create_routine_optionsContext } from "./HiveSql";
-import { Create_routine_optionContext } from "./HiveSql";
-import { Drop_stmtContext } from "./HiveSql";
-import { End_transaction_stmtContext } from "./HiveSql";
-import { Exec_stmtContext } from "./HiveSql";
-import { If_stmtContext } from "./HiveSql";
-import { If_plsql_stmtContext } from "./HiveSql";
-import { If_tsql_stmtContext } from "./HiveSql";
-import { If_bteq_stmtContext } from "./HiveSql";
-import { Elseif_blockContext } from "./HiveSql";
-import { Else_blockContext } from "./HiveSql";
-import { Include_stmtContext } from "./HiveSql";
-import { Insert_stmtContext } from "./HiveSql";
-import { Insert_stmt_colsContext } from "./HiveSql";
-import { Insert_stmt_rowsContext } from "./HiveSql";
-import { Insert_stmt_rowContext } from "./HiveSql";
-import { Insert_directory_stmtContext } from "./HiveSql";
-import { Exit_stmtContext } from "./HiveSql";
-import { Get_diag_stmtContext } from "./HiveSql";
-import { Get_diag_stmt_itemContext } from "./HiveSql";
-import { Get_diag_stmt_exception_itemContext } from "./HiveSql";
-import { Get_diag_stmt_rowcount_itemContext } from "./HiveSql";
-import { Grant_stmtContext } from "./HiveSql";
-import { Grant_stmt_itemContext } from "./HiveSql";
-import { Leave_stmtContext } from "./HiveSql";
-import { Map_object_stmtContext } from "./HiveSql";
-import { Open_stmtContext } from "./HiveSql";
-import { Fetch_stmtContext } from "./HiveSql";
-import { Collect_stats_stmtContext } from "./HiveSql";
-import { Collect_stats_clauseContext } from "./HiveSql";
-import { Close_stmtContext } from "./HiveSql";
-import { Cmp_stmtContext } from "./HiveSql";
-import { Cmp_sourceContext } from "./HiveSql";
-import { Copy_from_local_stmtContext } from "./HiveSql";
-import { Copy_stmtContext } from "./HiveSql";
-import { Copy_sourceContext } from "./HiveSql";
-import { Copy_targetContext } from "./HiveSql";
-import { Copy_optionContext } from "./HiveSql";
-import { Copy_file_optionContext } from "./HiveSql";
-import { Commit_stmtContext } from "./HiveSql";
-import { Create_index_stmtContext } from "./HiveSql";
-import { Create_index_colContext } from "./HiveSql";
-import { Index_storage_clauseContext } from "./HiveSql";
-import { Index_mssql_storage_clauseContext } from "./HiveSql";
-import { Print_stmtContext } from "./HiveSql";
-import { Quit_stmtContext } from "./HiveSql";
-import { Raise_stmtContext } from "./HiveSql";
-import { Resignal_stmtContext } from "./HiveSql";
-import { Return_stmtContext } from "./HiveSql";
-import { Rollback_stmtContext } from "./HiveSql";
-import { Set_session_optionContext } from "./HiveSql";
-import { Set_current_schema_optionContext } from "./HiveSql";
-import { Set_mssql_session_optionContext } from "./HiveSql";
-import { Set_teradata_session_optionContext } from "./HiveSql";
-import { Signal_stmtContext } from "./HiveSql";
-import { Summary_stmtContext } from "./HiveSql";
-import { Truncate_stmtContext } from "./HiveSql";
-import { Use_stmtContext } from "./HiveSql";
-import { Values_into_stmtContext } from "./HiveSql";
-import { While_stmtContext } from "./HiveSql";
-import { For_cursor_stmtContext } from "./HiveSql";
-import { For_range_stmtContext } from "./HiveSql";
-import { LabelContext } from "./HiveSql";
-import { Using_clauseContext } from "./HiveSql";
-import { Select_stmtContext } from "./HiveSql";
-import { Cte_select_stmtContext } from "./HiveSql";
-import { Cte_select_stmt_itemContext } from "./HiveSql";
-import { Cte_select_colsContext } from "./HiveSql";
-import { Fullselect_stmtContext } from "./HiveSql";
-import { Fullselect_stmt_itemContext } from "./HiveSql";
-import { Fullselect_set_clauseContext } from "./HiveSql";
-import { Subselect_stmtContext } from "./HiveSql";
-import { Select_listContext } from "./HiveSql";
-import { Select_list_setContext } from "./HiveSql";
-import { Select_list_limitContext } from "./HiveSql";
-import { Select_list_itemContext } from "./HiveSql";
-import { Select_list_aliasContext } from "./HiveSql";
-import { Select_list_asteriskContext } from "./HiveSql";
-import { Into_clauseContext } from "./HiveSql";
-import { From_clauseContext } from "./HiveSql";
-import { From_table_clauseContext } from "./HiveSql";
-import { From_table_name_clauseContext } from "./HiveSql";
-import { From_subselect_clauseContext } from "./HiveSql";
-import { From_join_clauseContext } from "./HiveSql";
-import { From_join_type_clauseContext } from "./HiveSql";
-import { From_table_values_clauseContext } from "./HiveSql";
-import { From_table_values_rowContext } from "./HiveSql";
-import { From_alias_clauseContext } from "./HiveSql";
-import { Table_nameContext } from "./HiveSql";
-import { Where_clauseContext } from "./HiveSql";
-import { Group_by_clauseContext } from "./HiveSql";
-import { Having_clauseContext } from "./HiveSql";
-import { Qualify_clauseContext } from "./HiveSql";
-import { Order_by_clauseContext } from "./HiveSql";
-import { Select_optionsContext } from "./HiveSql";
-import { Select_options_itemContext } from "./HiveSql";
-import { Update_stmtContext } from "./HiveSql";
-import { Update_assignmentContext } from "./HiveSql";
-import { Update_tableContext } from "./HiveSql";
-import { Update_upsertContext } from "./HiveSql";
-import { Merge_stmtContext } from "./HiveSql";
-import { Merge_tableContext } from "./HiveSql";
-import { Merge_conditionContext } from "./HiveSql";
-import { Merge_actionContext } from "./HiveSql";
-import { Delete_stmtContext } from "./HiveSql";
-import { Delete_aliasContext } from "./HiveSql";
-import { Describe_stmtContext } from "./HiveSql";
-import { Bool_exprContext } from "./HiveSql";
-import { Bool_expr_atomContext } from "./HiveSql";
-import { Bool_expr_unaryContext } from "./HiveSql";
-import { Bool_expr_single_inContext } from "./HiveSql";
-import { Bool_expr_multi_inContext } from "./HiveSql";
-import { Bool_expr_binaryContext } from "./HiveSql";
-import { Bool_expr_logical_operatorContext } from "./HiveSql";
-import { Bool_expr_binary_operatorContext } from "./HiveSql";
-import { ExprContext } from "./HiveSql";
-import { Expr_atomContext } from "./HiveSql";
-import { Expr_intervalContext } from "./HiveSql";
-import { Interval_itemContext } from "./HiveSql";
-import { Expr_concatContext } from "./HiveSql";
-import { Expr_concat_itemContext } from "./HiveSql";
-import { Expr_caseContext } from "./HiveSql";
-import { Expr_case_simpleContext } from "./HiveSql";
-import { Expr_case_searchedContext } from "./HiveSql";
-import { Expr_cursor_attributeContext } from "./HiveSql";
-import { Expr_agg_window_funcContext } from "./HiveSql";
-import { Expr_func_all_distinctContext } from "./HiveSql";
-import { Expr_func_over_clauseContext } from "./HiveSql";
-import { Expr_func_partition_by_clauseContext } from "./HiveSql";
-import { Expr_spec_funcContext } from "./HiveSql";
-import { Expr_funcContext } from "./HiveSql";
-import { Expr_func_paramsContext } from "./HiveSql";
-import { Func_paramContext } from "./HiveSql";
-import { Expr_selectContext } from "./HiveSql";
-import { Expr_fileContext } from "./HiveSql";
-import { HiveContext } from "./HiveSql";
-import { Hive_itemContext } from "./HiveSql";
-import { HostContext } from "./HiveSql";
-import { Host_cmdContext } from "./HiveSql";
-import { Host_stmtContext } from "./HiveSql";
-import { File_nameContext } from "./HiveSql";
-import { Date_literalContext } from "./HiveSql";
-import { Timestamp_literalContext } from "./HiveSql";
-import { IdentContext } from "./HiveSql";
-import { StringContext } from "./HiveSql";
-import { Int_numberContext } from "./HiveSql";
-import { Dec_numberContext } from "./HiveSql";
-import { Bool_literalContext } from "./HiveSql";
-import { Null_constContext } from "./HiveSql";
-import { Non_reserved_wordsContext } from "./HiveSql";
+import { StatementContext } from "./HiveSql";
+import { ExplainStatementContext } from "./HiveSql";
+import { ExplainOptionContext } from "./HiveSql";
+import { VectorizationOnlyContext } from "./HiveSql";
+import { VectorizatonDetailContext } from "./HiveSql";
+import { ExecStatementContext } from "./HiveSql";
+import { LoadStatementContext } from "./HiveSql";
+import { ReplicationClauseContext } from "./HiveSql";
+import { ExportStatementContext } from "./HiveSql";
+import { ImportStatementContext } from "./HiveSql";
+import { ReplDumpStatementContext } from "./HiveSql";
+import { ReplDbPolicyContext } from "./HiveSql";
+import { ReplLoadStatementContext } from "./HiveSql";
+import { ReplConfigsContext } from "./HiveSql";
+import { ReplConfigsListContext } from "./HiveSql";
+import { ReplTableLevelPolicyContext } from "./HiveSql";
+import { ReplStatusStatementContext } from "./HiveSql";
+import { DdlStatementContext } from "./HiveSql";
+import { IfExistsContext } from "./HiveSql";
+import { RestrictOrCascadeContext } from "./HiveSql";
+import { IfNotExistsContext } from "./HiveSql";
+import { ForceContext } from "./HiveSql";
+import { RewriteEnabledContext } from "./HiveSql";
+import { RewriteDisabledContext } from "./HiveSql";
+import { StoredAsDirsContext } from "./HiveSql";
+import { OrReplaceContext } from "./HiveSql";
+import { CreateDatabaseStatementContext } from "./HiveSql";
+import { DbLocationContext } from "./HiveSql";
+import { DbManagedLocationContext } from "./HiveSql";
+import { DbPropertiesContext } from "./HiveSql";
+import { DbPropertiesListContext } from "./HiveSql";
+import { DbConnectorNameContext } from "./HiveSql";
+import { SwitchDatabaseStatementContext } from "./HiveSql";
+import { DropDatabaseStatementContext } from "./HiveSql";
+import { DatabaseCommentContext } from "./HiveSql";
+import { TruncateTableStatementContext } from "./HiveSql";
+import { DropTableStatementContext } from "./HiveSql";
+import { InputFileFormatContext } from "./HiveSql";
+import { TabTypeExprContext } from "./HiveSql";
+import { PartTypeExprContext } from "./HiveSql";
+import { TabPartColTypeExprContext } from "./HiveSql";
+import { DescStatementContext } from "./HiveSql";
+import { AnalyzeStatementContext } from "./HiveSql";
+import { From_inContext } from "./HiveSql";
+import { Db_schemaContext } from "./HiveSql";
+import { ShowStatementContext } from "./HiveSql";
+import { ShowTablesFilterExprContext } from "./HiveSql";
+import { LockStatementContext } from "./HiveSql";
+import { LockDatabaseContext } from "./HiveSql";
+import { LockModeContext } from "./HiveSql";
+import { UnlockStatementContext } from "./HiveSql";
+import { UnlockDatabaseContext } from "./HiveSql";
+import { CreateRoleStatementContext } from "./HiveSql";
+import { DropRoleStatementContext } from "./HiveSql";
+import { GrantPrivilegesContext } from "./HiveSql";
+import { RevokePrivilegesContext } from "./HiveSql";
+import { GrantRoleContext } from "./HiveSql";
+import { RevokeRoleContext } from "./HiveSql";
+import { ShowRoleGrantsContext } from "./HiveSql";
+import { ShowRolesContext } from "./HiveSql";
+import { ShowCurrentRoleContext } from "./HiveSql";
+import { SetRoleContext } from "./HiveSql";
+import { ShowGrantsContext } from "./HiveSql";
+import { ShowRolePrincipalsContext } from "./HiveSql";
+import { PrivilegeIncludeColObjectContext } from "./HiveSql";
+import { PrivilegeObjectContext } from "./HiveSql";
+import { PrivObjectContext } from "./HiveSql";
+import { PrivObjectColsContext } from "./HiveSql";
+import { PrivilegeListContext } from "./HiveSql";
+import { PrivlegeDefContext } from "./HiveSql";
+import { PrivilegeTypeContext } from "./HiveSql";
+import { PrincipalSpecificationContext } from "./HiveSql";
+import { PrincipalNameContext } from "./HiveSql";
+import { WithGrantOptionContext } from "./HiveSql";
+import { GrantOptionForContext } from "./HiveSql";
+import { AdminOptionForContext } from "./HiveSql";
+import { WithAdminOptionContext } from "./HiveSql";
+import { MetastoreCheckContext } from "./HiveSql";
+import { ResourceListContext } from "./HiveSql";
+import { ResourceContext } from "./HiveSql";
+import { ResourceTypeContext } from "./HiveSql";
+import { CreateFunctionStatementContext } from "./HiveSql";
+import { DropFunctionStatementContext } from "./HiveSql";
+import { ReloadFunctionsStatementContext } from "./HiveSql";
+import { CreateMacroStatementContext } from "./HiveSql";
+import { DropMacroStatementContext } from "./HiveSql";
+import { CreateViewStatementContext } from "./HiveSql";
+import { ViewPartitionContext } from "./HiveSql";
+import { ViewOrganizationContext } from "./HiveSql";
+import { ViewClusterSpecContext } from "./HiveSql";
+import { ViewComplexSpecContext } from "./HiveSql";
+import { ViewDistSpecContext } from "./HiveSql";
+import { ViewSortSpecContext } from "./HiveSql";
+import { DropViewStatementContext } from "./HiveSql";
+import { CreateMaterializedViewStatementContext } from "./HiveSql";
+import { DropMaterializedViewStatementContext } from "./HiveSql";
+import { CreateScheduledQueryStatementContext } from "./HiveSql";
+import { DropScheduledQueryStatementContext } from "./HiveSql";
+import { AlterScheduledQueryStatementContext } from "./HiveSql";
+import { AlterScheduledQueryChangeContext } from "./HiveSql";
+import { ScheduleSpecContext } from "./HiveSql";
+import { ExecutedAsSpecContext } from "./HiveSql";
+import { DefinedAsSpecContext } from "./HiveSql";
+import { ShowFunctionIdentifierContext } from "./HiveSql";
+import { ShowStmtIdentifierContext } from "./HiveSql";
+import { TableCommentContext } from "./HiveSql";
+import { CreateTablePartitionSpecContext } from "./HiveSql";
+import { CreateTablePartitionColumnTypeSpecContext } from "./HiveSql";
+import { CreateTablePartitionColumnSpecContext } from "./HiveSql";
+import { PartitionTransformSpecContext } from "./HiveSql";
+import { ColumnNameTransformConstraintContext } from "./HiveSql";
+import { PartitionTransformTypeContext } from "./HiveSql";
+import { TableBucketsContext } from "./HiveSql";
+import { TableImplBucketsContext } from "./HiveSql";
+import { TableSkewedContext } from "./HiveSql";
+import { RowFormatContext } from "./HiveSql";
+import { RecordReaderContext } from "./HiveSql";
+import { RecordWriterContext } from "./HiveSql";
+import { RowFormatSerdeContext } from "./HiveSql";
+import { RowFormatDelimitedContext } from "./HiveSql";
+import { TableRowFormatContext } from "./HiveSql";
+import { TablePropertiesPrefixedContext } from "./HiveSql";
+import { TablePropertiesContext } from "./HiveSql";
+import { TablePropertiesListContext } from "./HiveSql";
+import { KeyValuePropertyContext } from "./HiveSql";
+import { KeyPropertyContext } from "./HiveSql";
+import { TableRowFormatFieldIdentifierContext } from "./HiveSql";
+import { TableRowFormatCollItemsIdentifierContext } from "./HiveSql";
+import { TableRowFormatMapKeysIdentifierContext } from "./HiveSql";
+import { TableRowFormatLinesIdentifierContext } from "./HiveSql";
+import { TableRowNullFormatContext } from "./HiveSql";
+import { TableFileFormatContext } from "./HiveSql";
+import { TableLocationContext } from "./HiveSql";
+import { ColumnNameTypeListContext } from "./HiveSql";
+import { ColumnNameTypeOrConstraintListContext } from "./HiveSql";
+import { ColumnNameColonTypeListContext } from "./HiveSql";
+import { ColumnNameListContext } from "./HiveSql";
+import { ColumnNameContext } from "./HiveSql";
+import { ExtColumnNameContext } from "./HiveSql";
+import { ColumnNameOrderListContext } from "./HiveSql";
+import { ColumnParenthesesListContext } from "./HiveSql";
+import { EnableValidateSpecificationContext } from "./HiveSql";
+import { EnableSpecificationContext } from "./HiveSql";
+import { ValidateSpecificationContext } from "./HiveSql";
+import { EnforcedSpecificationContext } from "./HiveSql";
+import { RelySpecificationContext } from "./HiveSql";
+import { CreateConstraintContext } from "./HiveSql";
+import { AlterConstraintWithNameContext } from "./HiveSql";
+import { TableLevelConstraintContext } from "./HiveSql";
+import { PkUkConstraintContext } from "./HiveSql";
+import { CheckConstraintContext } from "./HiveSql";
+import { CreateForeignKeyContext } from "./HiveSql";
+import { AlterForeignKeyWithNameContext } from "./HiveSql";
+import { SkewedValueElementContext } from "./HiveSql";
+import { SkewedColumnValuePairListContext } from "./HiveSql";
+import { SkewedColumnValuePairContext } from "./HiveSql";
+import { SkewedColumnValuesContext } from "./HiveSql";
+import { SkewedColumnValueContext } from "./HiveSql";
+import { SkewedValueLocationElementContext } from "./HiveSql";
+import { OrderSpecificationContext } from "./HiveSql";
+import { NullOrderingContext } from "./HiveSql";
+import { ColumnNameOrderContext } from "./HiveSql";
+import { ColumnNameCommentListContext } from "./HiveSql";
+import { ColumnNameCommentContext } from "./HiveSql";
+import { OrderSpecificationRewriteContext } from "./HiveSql";
+import { ColumnRefOrderContext } from "./HiveSql";
+import { ColumnNameTypeContext } from "./HiveSql";
+import { ColumnNameTypeOrConstraintContext } from "./HiveSql";
+import { TableConstraintContext } from "./HiveSql";
+import { ColumnNameTypeConstraintContext } from "./HiveSql";
+import { ColumnConstraintContext } from "./HiveSql";
+import { ForeignKeyConstraintContext } from "./HiveSql";
+import { ColConstraintContext } from "./HiveSql";
+import { AlterColumnConstraintContext } from "./HiveSql";
+import { AlterForeignKeyConstraintContext } from "./HiveSql";
+import { AlterColConstraintContext } from "./HiveSql";
+import { ColumnConstraintTypeContext } from "./HiveSql";
+import { DefaultValContext } from "./HiveSql";
+import { TableConstraintTypeContext } from "./HiveSql";
+import { ConstraintOptsCreateContext } from "./HiveSql";
+import { ConstraintOptsAlterContext } from "./HiveSql";
+import { ColumnNameColonTypeContext } from "./HiveSql";
+import { ColTypeContext } from "./HiveSql";
+import { ColTypeListContext } from "./HiveSql";
+import { TypeContext } from "./HiveSql";
+import { PrimitiveTypeContext } from "./HiveSql";
+import { ListTypeContext } from "./HiveSql";
+import { StructTypeContext } from "./HiveSql";
+import { MapTypeContext } from "./HiveSql";
+import { UnionTypeContext } from "./HiveSql";
+import { SetOperatorContext } from "./HiveSql";
+import { QueryStatementExpressionContext } from "./HiveSql";
+import { QueryStatementExpressionBodyContext } from "./HiveSql";
+import { WithClauseContext } from "./HiveSql";
+import { CteStatementContext } from "./HiveSql";
+import { FromStatementContext } from "./HiveSql";
+import { SingleFromStatementContext } from "./HiveSql";
+import { RegularBodyContext } from "./HiveSql";
+import { AtomSelectStatementContext } from "./HiveSql";
+import { SelectStatementContext } from "./HiveSql";
+import { SetOpSelectStatementContext } from "./HiveSql";
+import { SelectStatementWithCTEContext } from "./HiveSql";
+import { BodyContext } from "./HiveSql";
+import { InsertClauseContext } from "./HiveSql";
+import { DestinationContext } from "./HiveSql";
+import { LimitClauseContext } from "./HiveSql";
+import { DeleteStatementContext } from "./HiveSql";
+import { ColumnAssignmentClauseContext } from "./HiveSql";
+import { PrecedencePlusExpressionOrDefaultContext } from "./HiveSql";
+import { SetColumnsClauseContext } from "./HiveSql";
+import { UpdateStatementContext } from "./HiveSql";
+import { SqlTransactionStatementContext } from "./HiveSql";
+import { StartTransactionStatementContext } from "./HiveSql";
+import { TransactionModeContext } from "./HiveSql";
+import { TransactionAccessModeContext } from "./HiveSql";
+import { IsolationLevelContext } from "./HiveSql";
+import { LevelOfIsolationContext } from "./HiveSql";
+import { CommitStatementContext } from "./HiveSql";
+import { RollbackStatementContext } from "./HiveSql";
+import { SetAutoCommitStatementContext } from "./HiveSql";
+import { AbortTransactionStatementContext } from "./HiveSql";
+import { AbortCompactionStatementContext } from "./HiveSql";
+import { MergeStatementContext } from "./HiveSql";
+import { WhenClausesContext } from "./HiveSql";
+import { WhenNotMatchedClauseContext } from "./HiveSql";
+import { WhenMatchedAndClauseContext } from "./HiveSql";
+import { WhenMatchedThenClauseContext } from "./HiveSql";
+import { UpdateOrDeleteContext } from "./HiveSql";
+import { KillQueryStatementContext } from "./HiveSql";
+import { CompactionIdContext } from "./HiveSql";
+import { CompactionPoolContext } from "./HiveSql";
+import { CompactionTypeContext } from "./HiveSql";
+import { CompactionStatusContext } from "./HiveSql";
+import { AlterStatementContext } from "./HiveSql";
+import { AlterTableStatementSuffixContext } from "./HiveSql";
+import { AlterTblPartitionStatementSuffixContext } from "./HiveSql";
+import { AlterStatementPartitionKeyTypeContext } from "./HiveSql";
+import { AlterViewStatementSuffixContext } from "./HiveSql";
+import { AlterMaterializedViewStatementSuffixContext } from "./HiveSql";
+import { AlterMaterializedViewSuffixRewriteContext } from "./HiveSql";
+import { AlterMaterializedViewSuffixRebuildContext } from "./HiveSql";
+import { AlterDatabaseStatementSuffixContext } from "./HiveSql";
+import { AlterDatabaseSuffixPropertiesContext } from "./HiveSql";
+import { AlterDatabaseSuffixSetOwnerContext } from "./HiveSql";
+import { AlterDatabaseSuffixSetLocationContext } from "./HiveSql";
+import { AlterDatabaseSuffixSetManagedLocationContext } from "./HiveSql";
+import { AlterStatementSuffixRenameContext } from "./HiveSql";
+import { AlterStatementSuffixAddColContext } from "./HiveSql";
+import { AlterStatementSuffixAddConstraintContext } from "./HiveSql";
+import { AlterStatementSuffixUpdateColumnsContext } from "./HiveSql";
+import { AlterStatementSuffixDropConstraintContext } from "./HiveSql";
+import { AlterStatementSuffixRenameColContext } from "./HiveSql";
+import { AlterStatementSuffixUpdateStatsColContext } from "./HiveSql";
+import { AlterStatementSuffixUpdateStatsContext } from "./HiveSql";
+import { AlterStatementChangeColPositionContext } from "./HiveSql";
+import { AlterStatementSuffixAddPartitionsContext } from "./HiveSql";
+import { AlterStatementSuffixAddPartitionsElementContext } from "./HiveSql";
+import { AlterStatementSuffixTouchContext } from "./HiveSql";
+import { AlterStatementSuffixArchiveContext } from "./HiveSql";
+import { AlterStatementSuffixUnArchiveContext } from "./HiveSql";
+import { PartitionLocationContext } from "./HiveSql";
+import { AlterStatementSuffixDropPartitionsContext } from "./HiveSql";
+import { AlterStatementSuffixPropertiesContext } from "./HiveSql";
+import { AlterViewSuffixPropertiesContext } from "./HiveSql";
+import { AlterStatementSuffixSerdePropertiesContext } from "./HiveSql";
+import { TablePartitionPrefixContext } from "./HiveSql";
+import { AlterStatementSuffixFileFormatContext } from "./HiveSql";
+import { AlterStatementSuffixClusterbySortbyContext } from "./HiveSql";
+import { AlterTblPartitionStatementSuffixSkewedLocationContext } from "./HiveSql";
+import { SkewedLocationsContext } from "./HiveSql";
+import { SkewedLocationsListContext } from "./HiveSql";
+import { SkewedLocationMapContext } from "./HiveSql";
+import { AlterStatementSuffixLocationContext } from "./HiveSql";
+import { AlterStatementSuffixSkewedbyContext } from "./HiveSql";
+import { AlterStatementSuffixExchangePartitionContext } from "./HiveSql";
+import { AlterStatementSuffixRenamePartContext } from "./HiveSql";
+import { AlterStatementSuffixStatsPartContext } from "./HiveSql";
+import { AlterStatementSuffixMergeFilesContext } from "./HiveSql";
+import { AlterStatementSuffixBucketNumContext } from "./HiveSql";
+import { BlockingContext } from "./HiveSql";
+import { CompactPoolContext } from "./HiveSql";
+import { AlterStatementSuffixCompactContext } from "./HiveSql";
+import { AlterStatementSuffixSetOwnerContext } from "./HiveSql";
+import { AlterStatementSuffixSetPartSpecContext } from "./HiveSql";
+import { AlterStatementSuffixExecuteContext } from "./HiveSql";
+import { FileFormatContext } from "./HiveSql";
+import { AlterDataConnectorStatementSuffixContext } from "./HiveSql";
+import { AlterDataConnectorSuffixPropertiesContext } from "./HiveSql";
+import { AlterDataConnectorSuffixSetOwnerContext } from "./HiveSql";
+import { AlterDataConnectorSuffixSetUrlContext } from "./HiveSql";
+import { LikeTableOrFileContext } from "./HiveSql";
+import { CreateTableStatementContext } from "./HiveSql";
+import { CreateDataConnectorStatementContext } from "./HiveSql";
+import { DataConnectorCommentContext } from "./HiveSql";
+import { DataConnectorUrlContext } from "./HiveSql";
+import { DataConnectorTypeContext } from "./HiveSql";
+import { DcPropertiesContext } from "./HiveSql";
+import { DropDataConnectorStatementContext } from "./HiveSql";
+import { TableAllColumnsContext } from "./HiveSql";
+import { TableOrColumnContext } from "./HiveSql";
+import { DefaultValueContext } from "./HiveSql";
+import { ExpressionListContext } from "./HiveSql";
+import { AliasListContext } from "./HiveSql";
+import { FromClauseContext } from "./HiveSql";
+import { FromSourceContext } from "./HiveSql";
+import { AtomjoinSourceContext } from "./HiveSql";
+import { JoinSourceContext } from "./HiveSql";
+import { JoinSourcePartContext } from "./HiveSql";
+import { UniqueJoinSourceContext } from "./HiveSql";
+import { UniqueJoinExprContext } from "./HiveSql";
+import { UniqueJoinTokenContext } from "./HiveSql";
+import { JoinTokenContext } from "./HiveSql";
+import { LateralViewContext } from "./HiveSql";
+import { TableAliasContext } from "./HiveSql";
+import { TableBucketSampleContext } from "./HiveSql";
+import { SplitSampleContext } from "./HiveSql";
+import { TableSampleContext } from "./HiveSql";
+import { TableSourceContext } from "./HiveSql";
+import { AsOfClauseContext } from "./HiveSql";
+import { UniqueJoinTableSourceContext } from "./HiveSql";
+import { TableNameContext } from "./HiveSql";
+import { ViewNameContext } from "./HiveSql";
+import { SubQuerySourceContext } from "./HiveSql";
+import { PartitioningSpecContext } from "./HiveSql";
+import { PartitionTableFunctionSourceContext } from "./HiveSql";
+import { PartitionedTableFunctionContext } from "./HiveSql";
+import { WhereClauseContext } from "./HiveSql";
+import { SearchConditionContext } from "./HiveSql";
+import { ValuesSourceContext } from "./HiveSql";
+import { ValuesClauseContext } from "./HiveSql";
+import { ValuesTableConstructorContext } from "./HiveSql";
+import { ValueRowConstructorContext } from "./HiveSql";
+import { FirstValueRowConstructorContext } from "./HiveSql";
+import { VirtualTableSourceContext } from "./HiveSql";
+import { SelectClauseContext } from "./HiveSql";
+import { All_distinctContext } from "./HiveSql";
+import { SelectListContext } from "./HiveSql";
+import { SelectTrfmClauseContext } from "./HiveSql";
+import { SelectItemContext } from "./HiveSql";
+import { TrfmClauseContext } from "./HiveSql";
+import { SelectExpressionContext } from "./HiveSql";
+import { SelectExpressionListContext } from "./HiveSql";
+import { Window_clauseContext } from "./HiveSql";
+import { Window_defnContext } from "./HiveSql";
+import { Window_specificationContext } from "./HiveSql";
+import { Window_frameContext } from "./HiveSql";
+import { Window_range_expressionContext } from "./HiveSql";
+import { Window_value_expressionContext } from "./HiveSql";
+import { Window_frame_start_boundaryContext } from "./HiveSql";
+import { Window_frame_boundaryContext } from "./HiveSql";
+import { GroupByClauseContext } from "./HiveSql";
+import { Groupby_expressionContext } from "./HiveSql";
+import { GroupByEmptyContext } from "./HiveSql";
+import { RollupStandardContext } from "./HiveSql";
+import { RollupOldSyntaxContext } from "./HiveSql";
+import { GroupingSetExpressionContext } from "./HiveSql";
+import { GroupingSetExpressionMultipleContext } from "./HiveSql";
+import { GroupingExpressionSingleContext } from "./HiveSql";
+import { HavingClauseContext } from "./HiveSql";
+import { QualifyClauseContext } from "./HiveSql";
+import { HavingConditionContext } from "./HiveSql";
+import { ExpressionsInParenthesisContext } from "./HiveSql";
+import { ExpressionsNotInParenthesisContext } from "./HiveSql";
+import { ExpressionPartContext } from "./HiveSql";
+import { ExpressionOrDefaultContext } from "./HiveSql";
+import { FirstExpressionsWithAliasContext } from "./HiveSql";
+import { ExpressionWithAliasContext } from "./HiveSql";
+import { ExpressionsContext } from "./HiveSql";
+import { ColumnRefOrderInParenthesisContext } from "./HiveSql";
+import { ColumnRefOrderNotInParenthesisContext } from "./HiveSql";
+import { OrderByClauseContext } from "./HiveSql";
+import { ClusterByClauseContext } from "./HiveSql";
+import { PartitionByClauseContext } from "./HiveSql";
+import { DistributeByClauseContext } from "./HiveSql";
+import { SortByClauseContext } from "./HiveSql";
+import { TrimFunctionContext } from "./HiveSql";
+import { Function_Context } from "./HiveSql";
+import { Null_treatmentContext } from "./HiveSql";
+import { FunctionNameContext } from "./HiveSql";
+import { CastExpressionContext } from "./HiveSql";
+import { CaseExpressionContext } from "./HiveSql";
+import { WhenExpressionContext } from "./HiveSql";
+import { FloorExpressionContext } from "./HiveSql";
+import { FloorDateQualifiersContext } from "./HiveSql";
+import { ExtractExpressionContext } from "./HiveSql";
+import { TimeQualifiersContext } from "./HiveSql";
+import { ConstantContext } from "./HiveSql";
+import { PrepareStmtParamContext } from "./HiveSql";
+import { ParameterIdxContext } from "./HiveSql";
+import { StringLiteralSequenceContext } from "./HiveSql";
+import { CharSetStringLiteralContext } from "./HiveSql";
+import { DateLiteralContext } from "./HiveSql";
+import { TimestampLiteralContext } from "./HiveSql";
+import { TimestampLocalTZLiteralContext } from "./HiveSql";
+import { IntervalValueContext } from "./HiveSql";
+import { IntervalLiteralContext } from "./HiveSql";
+import { IntervalExpressionContext } from "./HiveSql";
+import { IntervalQualifiersContext } from "./HiveSql";
+import { ExpressionContext } from "./HiveSql";
+import { AtomExpressionContext } from "./HiveSql";
+import { PrecedenceFieldExpressionContext } from "./HiveSql";
+import { PrecedenceUnaryOperatorContext } from "./HiveSql";
+import { PrecedenceUnaryPrefixExpressionContext } from "./HiveSql";
+import { PrecedenceBitwiseXorOperatorContext } from "./HiveSql";
+import { PrecedenceBitwiseXorExpressionContext } from "./HiveSql";
+import { PrecedenceStarOperatorContext } from "./HiveSql";
+import { PrecedenceStarExpressionContext } from "./HiveSql";
+import { PrecedencePlusOperatorContext } from "./HiveSql";
+import { PrecedencePlusExpressionContext } from "./HiveSql";
+import { PrecedenceConcatenateOperatorContext } from "./HiveSql";
+import { PrecedenceConcatenateExpressionContext } from "./HiveSql";
+import { PrecedenceAmpersandOperatorContext } from "./HiveSql";
+import { PrecedenceAmpersandExpressionContext } from "./HiveSql";
+import { PrecedenceBitwiseOrOperatorContext } from "./HiveSql";
+import { PrecedenceBitwiseOrExpressionContext } from "./HiveSql";
+import { PrecedenceRegexpOperatorContext } from "./HiveSql";
+import { PrecedenceSimilarOperatorContext } from "./HiveSql";
+import { SubQueryExpressionContext } from "./HiveSql";
+import { PrecedenceSimilarExpressionContext } from "./HiveSql";
+import { PrecedenceSimilarExpressionMainContext } from "./HiveSql";
+import { PrecedenceSimilarExpressionPartContext } from "./HiveSql";
+import { PrecedenceSimilarExpressionAtomContext } from "./HiveSql";
+import { PrecedenceSimilarExpressionQuantifierPredicateContext } from "./HiveSql";
+import { QuantifierTypeContext } from "./HiveSql";
+import { PrecedenceSimilarExpressionInContext } from "./HiveSql";
+import { PrecedenceSimilarExpressionPartNotContext } from "./HiveSql";
+import { PrecedenceDistinctOperatorContext } from "./HiveSql";
+import { PrecedenceEqualOperatorContext } from "./HiveSql";
+import { PrecedenceEqualExpressionContext } from "./HiveSql";
+import { IsConditionContext } from "./HiveSql";
+import { PrecedenceUnarySuffixExpressionContext } from "./HiveSql";
+import { PrecedenceNotOperatorContext } from "./HiveSql";
+import { PrecedenceNotExpressionContext } from "./HiveSql";
+import { PrecedenceAndOperatorContext } from "./HiveSql";
+import { PrecedenceAndExpressionContext } from "./HiveSql";
+import { PrecedenceOrOperatorContext } from "./HiveSql";
+import { PrecedenceOrExpressionContext } from "./HiveSql";
+import { BooleanValueContext } from "./HiveSql";
+import { BooleanValueTokContext } from "./HiveSql";
+import { TableOrPartitionContext } from "./HiveSql";
+import { PartitionSpecContext } from "./HiveSql";
+import { PartitionValContext } from "./HiveSql";
+import { PartitionSelectorSpecContext } from "./HiveSql";
+import { PartitionSelectorValContext } from "./HiveSql";
+import { PartitionSelectorOperatorContext } from "./HiveSql";
+import { SubQuerySelectorOperatorContext } from "./HiveSql";
+import { SysFuncNamesContext } from "./HiveSql";
+import { DescFuncNamesContext } from "./HiveSql";
+import { Id_Context } from "./HiveSql";
+import { FunctionIdentifierContext } from "./HiveSql";
+import { PrincipalIdentifierContext } from "./HiveSql";
+import { NonReservedContext } from "./HiveSql";
+import { Sql11ReservedKeywordsUsedAsFunctionNameContext } from "./HiveSql";
+import { HintContext } from "./HiveSql";
+import { HintListContext } from "./HiveSql";
+import { HintItemContext } from "./HiveSql";
+import { HintNameContext } from "./HiveSql";
+import { HintArgsContext } from "./HiveSql";
+import { HintArgNameContext } from "./HiveSql";
+import { PrepareStatementContext } from "./HiveSql";
+import { ExecuteStatementContext } from "./HiveSql";
+import { ExecuteParamListContext } from "./HiveSql";
+import { ResourcePlanDdlStatementsContext } from "./HiveSql";
+import { RpAssignContext } from "./HiveSql";
+import { RpAssignListContext } from "./HiveSql";
+import { RpUnassignContext } from "./HiveSql";
+import { RpUnassignListContext } from "./HiveSql";
+import { CreateResourcePlanStatementContext } from "./HiveSql";
+import { WithReplaceContext } from "./HiveSql";
+import { ActivateContext } from "./HiveSql";
+import { EnableContext } from "./HiveSql";
+import { DisableContext } from "./HiveSql";
+import { UnmanagedContext } from "./HiveSql";
+import { AlterResourcePlanStatementContext } from "./HiveSql";
+import { GlobalWmStatementContext } from "./HiveSql";
+import { ReplaceResourcePlanStatementContext } from "./HiveSql";
+import { DropResourcePlanStatementContext } from "./HiveSql";
+import { PoolPathContext } from "./HiveSql";
+import { TriggerExpressionContext } from "./HiveSql";
+import { TriggerExpressionStandaloneContext } from "./HiveSql";
+import { TriggerOrExpressionContext } from "./HiveSql";
+import { TriggerAndExpressionContext } from "./HiveSql";
+import { TriggerAtomExpressionContext } from "./HiveSql";
+import { TriggerLiteralContext } from "./HiveSql";
+import { ComparisionOperatorContext } from "./HiveSql";
+import { TriggerActionExpressionContext } from "./HiveSql";
+import { TriggerActionExpressionStandaloneContext } from "./HiveSql";
+import { CreateTriggerStatementContext } from "./HiveSql";
+import { AlterTriggerStatementContext } from "./HiveSql";
+import { DropTriggerStatementContext } from "./HiveSql";
+import { PoolAssignContext } from "./HiveSql";
+import { PoolAssignListContext } from "./HiveSql";
+import { CreatePoolStatementContext } from "./HiveSql";
+import { AlterPoolStatementContext } from "./HiveSql";
+import { DropPoolStatementContext } from "./HiveSql";
+import { CreateMappingStatementContext } from "./HiveSql";
+import { AlterMappingStatementContext } from "./HiveSql";
+import { DropMappingStatementContext } from "./HiveSql";
 
 
 /**
@@ -238,32 +509,6 @@ import { Non_reserved_wordsContext } from "./HiveSql";
  * `HiveSql`.
  */
 export interface HiveSqlListener extends ParseTreeListener {
-	/**
-	 * Enter a parse tree produced by the `single_quotedString`
-	 * labeled alternative in `HiveSql.string`.
-	 * @param ctx the parse tree
-	 */
-	enterSingle_quotedString?: (ctx: Single_quotedStringContext) => void;
-	/**
-	 * Exit a parse tree produced by the `single_quotedString`
-	 * labeled alternative in `HiveSql.string`.
-	 * @param ctx the parse tree
-	 */
-	exitSingle_quotedString?: (ctx: Single_quotedStringContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `double_quotedString`
-	 * labeled alternative in `HiveSql.string`.
-	 * @param ctx the parse tree
-	 */
-	enterDouble_quotedString?: (ctx: Double_quotedStringContext) => void;
-	/**
-	 * Exit a parse tree produced by the `double_quotedString`
-	 * labeled alternative in `HiveSql.string`.
-	 * @param ctx the parse tree
-	 */
-	exitDouble_quotedString?: (ctx: Double_quotedStringContext) => void;
-
 	/**
 	 * Enter a parse tree produced by `HiveSql.program`.
 	 * @param ctx the parse tree
@@ -276,2478 +521,5481 @@ export interface HiveSqlListener extends ParseTreeListener {
 	exitProgram?: (ctx: ProgramContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.block`.
+	 * Enter a parse tree produced by `HiveSql.statement`.
 	 * @param ctx the parse tree
 	 */
-	enterBlock?: (ctx: BlockContext) => void;
+	enterStatement?: (ctx: StatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.block`.
+	 * Exit a parse tree produced by `HiveSql.statement`.
 	 * @param ctx the parse tree
 	 */
-	exitBlock?: (ctx: BlockContext) => void;
+	exitStatement?: (ctx: StatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.begin_end_block`.
+	 * Enter a parse tree produced by `HiveSql.explainStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterBegin_end_block?: (ctx: Begin_end_blockContext) => void;
+	enterExplainStatement?: (ctx: ExplainStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.begin_end_block`.
+	 * Exit a parse tree produced by `HiveSql.explainStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitBegin_end_block?: (ctx: Begin_end_blockContext) => void;
+	exitExplainStatement?: (ctx: ExplainStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.single_block_stmt`.
+	 * Enter a parse tree produced by `HiveSql.explainOption`.
 	 * @param ctx the parse tree
 	 */
-	enterSingle_block_stmt?: (ctx: Single_block_stmtContext) => void;
+	enterExplainOption?: (ctx: ExplainOptionContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.single_block_stmt`.
+	 * Exit a parse tree produced by `HiveSql.explainOption`.
 	 * @param ctx the parse tree
 	 */
-	exitSingle_block_stmt?: (ctx: Single_block_stmtContext) => void;
+	exitExplainOption?: (ctx: ExplainOptionContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.block_end`.
+	 * Enter a parse tree produced by `HiveSql.vectorizationOnly`.
 	 * @param ctx the parse tree
 	 */
-	enterBlock_end?: (ctx: Block_endContext) => void;
+	enterVectorizationOnly?: (ctx: VectorizationOnlyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.block_end`.
+	 * Exit a parse tree produced by `HiveSql.vectorizationOnly`.
 	 * @param ctx the parse tree
 	 */
-	exitBlock_end?: (ctx: Block_endContext) => void;
+	exitVectorizationOnly?: (ctx: VectorizationOnlyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.proc_block`.
+	 * Enter a parse tree produced by `HiveSql.vectorizatonDetail`.
 	 * @param ctx the parse tree
 	 */
-	enterProc_block?: (ctx: Proc_blockContext) => void;
+	enterVectorizatonDetail?: (ctx: VectorizatonDetailContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.proc_block`.
+	 * Exit a parse tree produced by `HiveSql.vectorizatonDetail`.
 	 * @param ctx the parse tree
 	 */
-	exitProc_block?: (ctx: Proc_blockContext) => void;
+	exitVectorizatonDetail?: (ctx: VectorizatonDetailContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.stmt`.
+	 * Enter a parse tree produced by `HiveSql.execStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterStmt?: (ctx: StmtContext) => void;
+	enterExecStatement?: (ctx: ExecStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.stmt`.
+	 * Exit a parse tree produced by `HiveSql.execStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitStmt?: (ctx: StmtContext) => void;
+	exitExecStatement?: (ctx: ExecStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.semicolon_stmt`.
+	 * Enter a parse tree produced by `HiveSql.loadStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterSemicolon_stmt?: (ctx: Semicolon_stmtContext) => void;
+	enterLoadStatement?: (ctx: LoadStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.semicolon_stmt`.
+	 * Exit a parse tree produced by `HiveSql.loadStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitSemicolon_stmt?: (ctx: Semicolon_stmtContext) => void;
+	exitLoadStatement?: (ctx: LoadStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.exception_block`.
+	 * Enter a parse tree produced by `HiveSql.replicationClause`.
 	 * @param ctx the parse tree
 	 */
-	enterException_block?: (ctx: Exception_blockContext) => void;
+	enterReplicationClause?: (ctx: ReplicationClauseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.exception_block`.
+	 * Exit a parse tree produced by `HiveSql.replicationClause`.
 	 * @param ctx the parse tree
 	 */
-	exitException_block?: (ctx: Exception_blockContext) => void;
+	exitReplicationClause?: (ctx: ReplicationClauseContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.exception_block_item`.
+	 * Enter a parse tree produced by `HiveSql.exportStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterException_block_item?: (ctx: Exception_block_itemContext) => void;
+	enterExportStatement?: (ctx: ExportStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.exception_block_item`.
+	 * Exit a parse tree produced by `HiveSql.exportStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitException_block_item?: (ctx: Exception_block_itemContext) => void;
+	exitExportStatement?: (ctx: ExportStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.null_stmt`.
+	 * Enter a parse tree produced by `HiveSql.importStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterNull_stmt?: (ctx: Null_stmtContext) => void;
+	enterImportStatement?: (ctx: ImportStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.null_stmt`.
+	 * Exit a parse tree produced by `HiveSql.importStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitNull_stmt?: (ctx: Null_stmtContext) => void;
+	exitImportStatement?: (ctx: ImportStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_stmt`.
+	 * Enter a parse tree produced by `HiveSql.replDumpStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_stmt?: (ctx: Expr_stmtContext) => void;
+	enterReplDumpStatement?: (ctx: ReplDumpStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_stmt`.
+	 * Exit a parse tree produced by `HiveSql.replDumpStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_stmt?: (ctx: Expr_stmtContext) => void;
+	exitReplDumpStatement?: (ctx: ReplDumpStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.assignment_stmt`.
+	 * Enter a parse tree produced by `HiveSql.replDbPolicy`.
 	 * @param ctx the parse tree
 	 */
-	enterAssignment_stmt?: (ctx: Assignment_stmtContext) => void;
+	enterReplDbPolicy?: (ctx: ReplDbPolicyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.assignment_stmt`.
+	 * Exit a parse tree produced by `HiveSql.replDbPolicy`.
 	 * @param ctx the parse tree
 	 */
-	exitAssignment_stmt?: (ctx: Assignment_stmtContext) => void;
+	exitReplDbPolicy?: (ctx: ReplDbPolicyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.assignment_stmt_item`.
+	 * Enter a parse tree produced by `HiveSql.replLoadStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterAssignment_stmt_item?: (ctx: Assignment_stmt_itemContext) => void;
+	enterReplLoadStatement?: (ctx: ReplLoadStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.assignment_stmt_item`.
+	 * Exit a parse tree produced by `HiveSql.replLoadStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitAssignment_stmt_item?: (ctx: Assignment_stmt_itemContext) => void;
+	exitReplLoadStatement?: (ctx: ReplLoadStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.assignment_stmt_single_item`.
+	 * Enter a parse tree produced by `HiveSql.replConfigs`.
 	 * @param ctx the parse tree
 	 */
-	enterAssignment_stmt_single_item?: (ctx: Assignment_stmt_single_itemContext) => void;
+	enterReplConfigs?: (ctx: ReplConfigsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.assignment_stmt_single_item`.
+	 * Exit a parse tree produced by `HiveSql.replConfigs`.
 	 * @param ctx the parse tree
 	 */
-	exitAssignment_stmt_single_item?: (ctx: Assignment_stmt_single_itemContext) => void;
+	exitReplConfigs?: (ctx: ReplConfigsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.assignment_stmt_multiple_item`.
+	 * Enter a parse tree produced by `HiveSql.replConfigsList`.
 	 * @param ctx the parse tree
 	 */
-	enterAssignment_stmt_multiple_item?: (ctx: Assignment_stmt_multiple_itemContext) => void;
+	enterReplConfigsList?: (ctx: ReplConfigsListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.assignment_stmt_multiple_item`.
+	 * Exit a parse tree produced by `HiveSql.replConfigsList`.
 	 * @param ctx the parse tree
 	 */
-	exitAssignment_stmt_multiple_item?: (ctx: Assignment_stmt_multiple_itemContext) => void;
+	exitReplConfigsList?: (ctx: ReplConfigsListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.assignment_stmt_select_item`.
+	 * Enter a parse tree produced by `HiveSql.replTableLevelPolicy`.
 	 * @param ctx the parse tree
 	 */
-	enterAssignment_stmt_select_item?: (ctx: Assignment_stmt_select_itemContext) => void;
+	enterReplTableLevelPolicy?: (ctx: ReplTableLevelPolicyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.assignment_stmt_select_item`.
+	 * Exit a parse tree produced by `HiveSql.replTableLevelPolicy`.
 	 * @param ctx the parse tree
 	 */
-	exitAssignment_stmt_select_item?: (ctx: Assignment_stmt_select_itemContext) => void;
+	exitReplTableLevelPolicy?: (ctx: ReplTableLevelPolicyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.allocate_cursor_stmt`.
+	 * Enter a parse tree produced by `HiveSql.replStatusStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterAllocate_cursor_stmt?: (ctx: Allocate_cursor_stmtContext) => void;
+	enterReplStatusStatement?: (ctx: ReplStatusStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.allocate_cursor_stmt`.
+	 * Exit a parse tree produced by `HiveSql.replStatusStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitAllocate_cursor_stmt?: (ctx: Allocate_cursor_stmtContext) => void;
+	exitReplStatusStatement?: (ctx: ReplStatusStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.associate_locator_stmt`.
+	 * Enter a parse tree produced by `HiveSql.ddlStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterAssociate_locator_stmt?: (ctx: Associate_locator_stmtContext) => void;
+	enterDdlStatement?: (ctx: DdlStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.associate_locator_stmt`.
+	 * Exit a parse tree produced by `HiveSql.ddlStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitAssociate_locator_stmt?: (ctx: Associate_locator_stmtContext) => void;
+	exitDdlStatement?: (ctx: DdlStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.begin_transaction_stmt`.
+	 * Enter a parse tree produced by `HiveSql.ifExists`.
 	 * @param ctx the parse tree
 	 */
-	enterBegin_transaction_stmt?: (ctx: Begin_transaction_stmtContext) => void;
+	enterIfExists?: (ctx: IfExistsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.begin_transaction_stmt`.
+	 * Exit a parse tree produced by `HiveSql.ifExists`.
 	 * @param ctx the parse tree
 	 */
-	exitBegin_transaction_stmt?: (ctx: Begin_transaction_stmtContext) => void;
+	exitIfExists?: (ctx: IfExistsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.break_stmt`.
+	 * Enter a parse tree produced by `HiveSql.restrictOrCascade`.
 	 * @param ctx the parse tree
 	 */
-	enterBreak_stmt?: (ctx: Break_stmtContext) => void;
+	enterRestrictOrCascade?: (ctx: RestrictOrCascadeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.break_stmt`.
+	 * Exit a parse tree produced by `HiveSql.restrictOrCascade`.
 	 * @param ctx the parse tree
 	 */
-	exitBreak_stmt?: (ctx: Break_stmtContext) => void;
+	exitRestrictOrCascade?: (ctx: RestrictOrCascadeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.call_stmt`.
+	 * Enter a parse tree produced by `HiveSql.ifNotExists`.
 	 * @param ctx the parse tree
 	 */
-	enterCall_stmt?: (ctx: Call_stmtContext) => void;
+	enterIfNotExists?: (ctx: IfNotExistsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.call_stmt`.
+	 * Exit a parse tree produced by `HiveSql.ifNotExists`.
 	 * @param ctx the parse tree
 	 */
-	exitCall_stmt?: (ctx: Call_stmtContext) => void;
+	exitIfNotExists?: (ctx: IfNotExistsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_stmt`.
+	 * Enter a parse tree produced by `HiveSql.force`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_stmt?: (ctx: Declare_stmtContext) => void;
+	enterForce?: (ctx: ForceContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_stmt`.
+	 * Exit a parse tree produced by `HiveSql.force`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_stmt?: (ctx: Declare_stmtContext) => void;
+	exitForce?: (ctx: ForceContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_block`.
+	 * Enter a parse tree produced by `HiveSql.rewriteEnabled`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_block?: (ctx: Declare_blockContext) => void;
+	enterRewriteEnabled?: (ctx: RewriteEnabledContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_block`.
+	 * Exit a parse tree produced by `HiveSql.rewriteEnabled`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_block?: (ctx: Declare_blockContext) => void;
+	exitRewriteEnabled?: (ctx: RewriteEnabledContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_block_inplace`.
+	 * Enter a parse tree produced by `HiveSql.rewriteDisabled`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_block_inplace?: (ctx: Declare_block_inplaceContext) => void;
+	enterRewriteDisabled?: (ctx: RewriteDisabledContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_block_inplace`.
+	 * Exit a parse tree produced by `HiveSql.rewriteDisabled`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_block_inplace?: (ctx: Declare_block_inplaceContext) => void;
+	exitRewriteDisabled?: (ctx: RewriteDisabledContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_stmt_item`.
+	 * Enter a parse tree produced by `HiveSql.storedAsDirs`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_stmt_item?: (ctx: Declare_stmt_itemContext) => void;
+	enterStoredAsDirs?: (ctx: StoredAsDirsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_stmt_item`.
+	 * Exit a parse tree produced by `HiveSql.storedAsDirs`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_stmt_item?: (ctx: Declare_stmt_itemContext) => void;
+	exitStoredAsDirs?: (ctx: StoredAsDirsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_var_item`.
+	 * Enter a parse tree produced by `HiveSql.orReplace`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_var_item?: (ctx: Declare_var_itemContext) => void;
+	enterOrReplace?: (ctx: OrReplaceContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_var_item`.
+	 * Exit a parse tree produced by `HiveSql.orReplace`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_var_item?: (ctx: Declare_var_itemContext) => void;
+	exitOrReplace?: (ctx: OrReplaceContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_condition_item`.
+	 * Enter a parse tree produced by `HiveSql.createDatabaseStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_condition_item?: (ctx: Declare_condition_itemContext) => void;
+	enterCreateDatabaseStatement?: (ctx: CreateDatabaseStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_condition_item`.
+	 * Exit a parse tree produced by `HiveSql.createDatabaseStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_condition_item?: (ctx: Declare_condition_itemContext) => void;
+	exitCreateDatabaseStatement?: (ctx: CreateDatabaseStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_cursor_item`.
+	 * Enter a parse tree produced by `HiveSql.dbLocation`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_cursor_item?: (ctx: Declare_cursor_itemContext) => void;
+	enterDbLocation?: (ctx: DbLocationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_cursor_item`.
+	 * Exit a parse tree produced by `HiveSql.dbLocation`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_cursor_item?: (ctx: Declare_cursor_itemContext) => void;
+	exitDbLocation?: (ctx: DbLocationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.cursor_with_return`.
+	 * Enter a parse tree produced by `HiveSql.dbManagedLocation`.
 	 * @param ctx the parse tree
 	 */
-	enterCursor_with_return?: (ctx: Cursor_with_returnContext) => void;
+	enterDbManagedLocation?: (ctx: DbManagedLocationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.cursor_with_return`.
+	 * Exit a parse tree produced by `HiveSql.dbManagedLocation`.
 	 * @param ctx the parse tree
 	 */
-	exitCursor_with_return?: (ctx: Cursor_with_returnContext) => void;
+	exitDbManagedLocation?: (ctx: DbManagedLocationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.cursor_without_return`.
+	 * Enter a parse tree produced by `HiveSql.dbProperties`.
 	 * @param ctx the parse tree
 	 */
-	enterCursor_without_return?: (ctx: Cursor_without_returnContext) => void;
+	enterDbProperties?: (ctx: DbPropertiesContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.cursor_without_return`.
+	 * Exit a parse tree produced by `HiveSql.dbProperties`.
 	 * @param ctx the parse tree
 	 */
-	exitCursor_without_return?: (ctx: Cursor_without_returnContext) => void;
+	exitDbProperties?: (ctx: DbPropertiesContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_handler_item`.
+	 * Enter a parse tree produced by `HiveSql.dbPropertiesList`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_handler_item?: (ctx: Declare_handler_itemContext) => void;
+	enterDbPropertiesList?: (ctx: DbPropertiesListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_handler_item`.
+	 * Exit a parse tree produced by `HiveSql.dbPropertiesList`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_handler_item?: (ctx: Declare_handler_itemContext) => void;
+	exitDbPropertiesList?: (ctx: DbPropertiesListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.declare_temporary_table_item`.
+	 * Enter a parse tree produced by `HiveSql.dbConnectorName`.
 	 * @param ctx the parse tree
 	 */
-	enterDeclare_temporary_table_item?: (ctx: Declare_temporary_table_itemContext) => void;
+	enterDbConnectorName?: (ctx: DbConnectorNameContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.declare_temporary_table_item`.
+	 * Exit a parse tree produced by `HiveSql.dbConnectorName`.
 	 * @param ctx the parse tree
 	 */
-	exitDeclare_temporary_table_item?: (ctx: Declare_temporary_table_itemContext) => void;
+	exitDbConnectorName?: (ctx: DbConnectorNameContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_stmt`.
+	 * Enter a parse tree produced by `HiveSql.switchDatabaseStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_stmt?: (ctx: Create_table_stmtContext) => void;
+	enterSwitchDatabaseStatement?: (ctx: SwitchDatabaseStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_stmt`.
+	 * Exit a parse tree produced by `HiveSql.switchDatabaseStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_stmt?: (ctx: Create_table_stmtContext) => void;
+	exitSwitchDatabaseStatement?: (ctx: SwitchDatabaseStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_local_temp_table_stmt`.
+	 * Enter a parse tree produced by `HiveSql.dropDatabaseStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_local_temp_table_stmt?: (ctx: Create_local_temp_table_stmtContext) => void;
+	enterDropDatabaseStatement?: (ctx: DropDatabaseStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_local_temp_table_stmt`.
+	 * Exit a parse tree produced by `HiveSql.dropDatabaseStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_local_temp_table_stmt?: (ctx: Create_local_temp_table_stmtContext) => void;
+	exitDropDatabaseStatement?: (ctx: DropDatabaseStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_definition`.
+	 * Enter a parse tree produced by `HiveSql.databaseComment`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_definition?: (ctx: Create_table_definitionContext) => void;
+	enterDatabaseComment?: (ctx: DatabaseCommentContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_definition`.
+	 * Exit a parse tree produced by `HiveSql.databaseComment`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_definition?: (ctx: Create_table_definitionContext) => void;
+	exitDatabaseComment?: (ctx: DatabaseCommentContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_columns`.
+	 * Enter a parse tree produced by `HiveSql.truncateTableStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_columns?: (ctx: Create_table_columnsContext) => void;
+	enterTruncateTableStatement?: (ctx: TruncateTableStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_columns`.
+	 * Exit a parse tree produced by `HiveSql.truncateTableStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_columns?: (ctx: Create_table_columnsContext) => void;
+	exitTruncateTableStatement?: (ctx: TruncateTableStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_columns_item`.
+	 * Enter a parse tree produced by `HiveSql.dropTableStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_columns_item?: (ctx: Create_table_columns_itemContext) => void;
+	enterDropTableStatement?: (ctx: DropTableStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_columns_item`.
+	 * Exit a parse tree produced by `HiveSql.dropTableStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_columns_item?: (ctx: Create_table_columns_itemContext) => void;
+	exitDropTableStatement?: (ctx: DropTableStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.column_name`.
+	 * Enter a parse tree produced by `HiveSql.inputFileFormat`.
 	 * @param ctx the parse tree
 	 */
-	enterColumn_name?: (ctx: Column_nameContext) => void;
+	enterInputFileFormat?: (ctx: InputFileFormatContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.column_name`.
+	 * Exit a parse tree produced by `HiveSql.inputFileFormat`.
 	 * @param ctx the parse tree
 	 */
-	exitColumn_name?: (ctx: Column_nameContext) => void;
+	exitInputFileFormat?: (ctx: InputFileFormatContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_column_inline_cons`.
+	 * Enter a parse tree produced by `HiveSql.tabTypeExpr`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_column_inline_cons?: (ctx: Create_table_column_inline_consContext) => void;
+	enterTabTypeExpr?: (ctx: TabTypeExprContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_column_inline_cons`.
+	 * Exit a parse tree produced by `HiveSql.tabTypeExpr`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_column_inline_cons?: (ctx: Create_table_column_inline_consContext) => void;
+	exitTabTypeExpr?: (ctx: TabTypeExprContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_column_cons`.
+	 * Enter a parse tree produced by `HiveSql.partTypeExpr`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_column_cons?: (ctx: Create_table_column_consContext) => void;
+	enterPartTypeExpr?: (ctx: PartTypeExprContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_column_cons`.
+	 * Exit a parse tree produced by `HiveSql.partTypeExpr`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_column_cons?: (ctx: Create_table_column_consContext) => void;
+	exitPartTypeExpr?: (ctx: PartTypeExprContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_fk_action`.
+	 * Enter a parse tree produced by `HiveSql.tabPartColTypeExpr`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_fk_action?: (ctx: Create_table_fk_actionContext) => void;
+	enterTabPartColTypeExpr?: (ctx: TabPartColTypeExprContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_fk_action`.
+	 * Exit a parse tree produced by `HiveSql.tabPartColTypeExpr`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_fk_action?: (ctx: Create_table_fk_actionContext) => void;
+	exitTabPartColTypeExpr?: (ctx: TabPartColTypeExprContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_preoptions`.
+	 * Enter a parse tree produced by `HiveSql.descStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_preoptions?: (ctx: Create_table_preoptionsContext) => void;
+	enterDescStatement?: (ctx: DescStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_preoptions`.
+	 * Exit a parse tree produced by `HiveSql.descStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_preoptions?: (ctx: Create_table_preoptionsContext) => void;
+	exitDescStatement?: (ctx: DescStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_preoptions_item`.
+	 * Enter a parse tree produced by `HiveSql.analyzeStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_preoptions_item?: (ctx: Create_table_preoptions_itemContext) => void;
+	enterAnalyzeStatement?: (ctx: AnalyzeStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_preoptions_item`.
+	 * Exit a parse tree produced by `HiveSql.analyzeStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_preoptions_item?: (ctx: Create_table_preoptions_itemContext) => void;
+	exitAnalyzeStatement?: (ctx: AnalyzeStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_preoptions_td_item`.
+	 * Enter a parse tree produced by `HiveSql.from_in`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_preoptions_td_item?: (ctx: Create_table_preoptions_td_itemContext) => void;
+	enterFrom_in?: (ctx: From_inContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_preoptions_td_item`.
+	 * Exit a parse tree produced by `HiveSql.from_in`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_preoptions_td_item?: (ctx: Create_table_preoptions_td_itemContext) => void;
+	exitFrom_in?: (ctx: From_inContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_options`.
+	 * Enter a parse tree produced by `HiveSql.db_schema`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_options?: (ctx: Create_table_optionsContext) => void;
+	enterDb_schema?: (ctx: Db_schemaContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_options`.
+	 * Exit a parse tree produced by `HiveSql.db_schema`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_options?: (ctx: Create_table_optionsContext) => void;
+	exitDb_schema?: (ctx: Db_schemaContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_options_item`.
+	 * Enter a parse tree produced by `HiveSql.showStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_options_item?: (ctx: Create_table_options_itemContext) => void;
+	enterShowStatement?: (ctx: ShowStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_options_item`.
+	 * Exit a parse tree produced by `HiveSql.showStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_options_item?: (ctx: Create_table_options_itemContext) => void;
+	exitShowStatement?: (ctx: ShowStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_options_ora_item`.
+	 * Enter a parse tree produced by `HiveSql.showTablesFilterExpr`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_options_ora_item?: (ctx: Create_table_options_ora_itemContext) => void;
+	enterShowTablesFilterExpr?: (ctx: ShowTablesFilterExprContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_options_ora_item`.
+	 * Exit a parse tree produced by `HiveSql.showTablesFilterExpr`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_options_ora_item?: (ctx: Create_table_options_ora_itemContext) => void;
+	exitShowTablesFilterExpr?: (ctx: ShowTablesFilterExprContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_options_db2_item`.
+	 * Enter a parse tree produced by `HiveSql.lockStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_options_db2_item?: (ctx: Create_table_options_db2_itemContext) => void;
+	enterLockStatement?: (ctx: LockStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_options_db2_item`.
+	 * Exit a parse tree produced by `HiveSql.lockStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_options_db2_item?: (ctx: Create_table_options_db2_itemContext) => void;
+	exitLockStatement?: (ctx: LockStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_options_td_item`.
+	 * Enter a parse tree produced by `HiveSql.lockDatabase`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_options_td_item?: (ctx: Create_table_options_td_itemContext) => void;
+	enterLockDatabase?: (ctx: LockDatabaseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_options_td_item`.
+	 * Exit a parse tree produced by `HiveSql.lockDatabase`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_options_td_item?: (ctx: Create_table_options_td_itemContext) => void;
+	exitLockDatabase?: (ctx: LockDatabaseContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_options_hive_item`.
+	 * Enter a parse tree produced by `HiveSql.lockMode`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_options_hive_item?: (ctx: Create_table_options_hive_itemContext) => void;
+	enterLockMode?: (ctx: LockModeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_options_hive_item`.
+	 * Exit a parse tree produced by `HiveSql.lockMode`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_options_hive_item?: (ctx: Create_table_options_hive_itemContext) => void;
+	exitLockMode?: (ctx: LockModeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_hive_row_format`.
+	 * Enter a parse tree produced by `HiveSql.unlockStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_hive_row_format?: (ctx: Create_table_hive_row_formatContext) => void;
+	enterUnlockStatement?: (ctx: UnlockStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_hive_row_format`.
+	 * Exit a parse tree produced by `HiveSql.unlockStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_hive_row_format?: (ctx: Create_table_hive_row_formatContext) => void;
+	exitUnlockStatement?: (ctx: UnlockStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_hive_row_format_fields`.
+	 * Enter a parse tree produced by `HiveSql.unlockDatabase`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_hive_row_format_fields?: (ctx: Create_table_hive_row_format_fieldsContext) => void;
+	enterUnlockDatabase?: (ctx: UnlockDatabaseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_hive_row_format_fields`.
+	 * Exit a parse tree produced by `HiveSql.unlockDatabase`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_hive_row_format_fields?: (ctx: Create_table_hive_row_format_fieldsContext) => void;
+	exitUnlockDatabase?: (ctx: UnlockDatabaseContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_options_mssql_item`.
+	 * Enter a parse tree produced by `HiveSql.createRoleStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_options_mssql_item?: (ctx: Create_table_options_mssql_itemContext) => void;
+	enterCreateRoleStatement?: (ctx: CreateRoleStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_options_mssql_item`.
+	 * Exit a parse tree produced by `HiveSql.createRoleStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_options_mssql_item?: (ctx: Create_table_options_mssql_itemContext) => void;
+	exitCreateRoleStatement?: (ctx: CreateRoleStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_table_options_mysql_item`.
+	 * Enter a parse tree produced by `HiveSql.dropRoleStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_table_options_mysql_item?: (ctx: Create_table_options_mysql_itemContext) => void;
+	enterDropRoleStatement?: (ctx: DropRoleStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_table_options_mysql_item`.
+	 * Exit a parse tree produced by `HiveSql.dropRoleStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_table_options_mysql_item?: (ctx: Create_table_options_mysql_itemContext) => void;
+	exitDropRoleStatement?: (ctx: DropRoleStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.alter_table_stmt`.
+	 * Enter a parse tree produced by `HiveSql.grantPrivileges`.
 	 * @param ctx the parse tree
 	 */
-	enterAlter_table_stmt?: (ctx: Alter_table_stmtContext) => void;
+	enterGrantPrivileges?: (ctx: GrantPrivilegesContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.alter_table_stmt`.
+	 * Exit a parse tree produced by `HiveSql.grantPrivileges`.
 	 * @param ctx the parse tree
 	 */
-	exitAlter_table_stmt?: (ctx: Alter_table_stmtContext) => void;
+	exitGrantPrivileges?: (ctx: GrantPrivilegesContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.alter_table_item`.
+	 * Enter a parse tree produced by `HiveSql.revokePrivileges`.
 	 * @param ctx the parse tree
 	 */
-	enterAlter_table_item?: (ctx: Alter_table_itemContext) => void;
+	enterRevokePrivileges?: (ctx: RevokePrivilegesContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.alter_table_item`.
+	 * Exit a parse tree produced by `HiveSql.revokePrivileges`.
 	 * @param ctx the parse tree
 	 */
-	exitAlter_table_item?: (ctx: Alter_table_itemContext) => void;
+	exitRevokePrivileges?: (ctx: RevokePrivilegesContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.alter_table_add_constraint`.
+	 * Enter a parse tree produced by `HiveSql.grantRole`.
 	 * @param ctx the parse tree
 	 */
-	enterAlter_table_add_constraint?: (ctx: Alter_table_add_constraintContext) => void;
+	enterGrantRole?: (ctx: GrantRoleContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.alter_table_add_constraint`.
+	 * Exit a parse tree produced by `HiveSql.grantRole`.
 	 * @param ctx the parse tree
 	 */
-	exitAlter_table_add_constraint?: (ctx: Alter_table_add_constraintContext) => void;
+	exitGrantRole?: (ctx: GrantRoleContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.alter_table_add_constraint_item`.
+	 * Enter a parse tree produced by `HiveSql.revokeRole`.
 	 * @param ctx the parse tree
 	 */
-	enterAlter_table_add_constraint_item?: (ctx: Alter_table_add_constraint_itemContext) => void;
+	enterRevokeRole?: (ctx: RevokeRoleContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.alter_table_add_constraint_item`.
+	 * Exit a parse tree produced by `HiveSql.revokeRole`.
 	 * @param ctx the parse tree
 	 */
-	exitAlter_table_add_constraint_item?: (ctx: Alter_table_add_constraint_itemContext) => void;
+	exitRevokeRole?: (ctx: RevokeRoleContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.dtype`.
+	 * Enter a parse tree produced by `HiveSql.showRoleGrants`.
 	 * @param ctx the parse tree
 	 */
-	enterDtype?: (ctx: DtypeContext) => void;
+	enterShowRoleGrants?: (ctx: ShowRoleGrantsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.dtype`.
+	 * Exit a parse tree produced by `HiveSql.showRoleGrants`.
 	 * @param ctx the parse tree
 	 */
-	exitDtype?: (ctx: DtypeContext) => void;
+	exitShowRoleGrants?: (ctx: ShowRoleGrantsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.dtype_len`.
+	 * Enter a parse tree produced by `HiveSql.showRoles`.
 	 * @param ctx the parse tree
 	 */
-	enterDtype_len?: (ctx: Dtype_lenContext) => void;
+	enterShowRoles?: (ctx: ShowRolesContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.dtype_len`.
+	 * Exit a parse tree produced by `HiveSql.showRoles`.
 	 * @param ctx the parse tree
 	 */
-	exitDtype_len?: (ctx: Dtype_lenContext) => void;
+	exitShowRoles?: (ctx: ShowRolesContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.dtype_attr`.
+	 * Enter a parse tree produced by `HiveSql.showCurrentRole`.
 	 * @param ctx the parse tree
 	 */
-	enterDtype_attr?: (ctx: Dtype_attrContext) => void;
+	enterShowCurrentRole?: (ctx: ShowCurrentRoleContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.dtype_attr`.
+	 * Exit a parse tree produced by `HiveSql.showCurrentRole`.
 	 * @param ctx the parse tree
 	 */
-	exitDtype_attr?: (ctx: Dtype_attrContext) => void;
+	exitShowCurrentRole?: (ctx: ShowCurrentRoleContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.dtype_default`.
+	 * Enter a parse tree produced by `HiveSql.setRole`.
 	 * @param ctx the parse tree
 	 */
-	enterDtype_default?: (ctx: Dtype_defaultContext) => void;
+	enterSetRole?: (ctx: SetRoleContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.dtype_default`.
+	 * Exit a parse tree produced by `HiveSql.setRole`.
 	 * @param ctx the parse tree
 	 */
-	exitDtype_default?: (ctx: Dtype_defaultContext) => void;
+	exitSetRole?: (ctx: SetRoleContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_database_stmt`.
+	 * Enter a parse tree produced by `HiveSql.showGrants`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_database_stmt?: (ctx: Create_database_stmtContext) => void;
+	enterShowGrants?: (ctx: ShowGrantsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_database_stmt`.
+	 * Exit a parse tree produced by `HiveSql.showGrants`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_database_stmt?: (ctx: Create_database_stmtContext) => void;
+	exitShowGrants?: (ctx: ShowGrantsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_database_option`.
+	 * Enter a parse tree produced by `HiveSql.showRolePrincipals`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_database_option?: (ctx: Create_database_optionContext) => void;
+	enterShowRolePrincipals?: (ctx: ShowRolePrincipalsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_database_option`.
+	 * Exit a parse tree produced by `HiveSql.showRolePrincipals`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_database_option?: (ctx: Create_database_optionContext) => void;
+	exitShowRolePrincipals?: (ctx: ShowRolePrincipalsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_function_stmt`.
+	 * Enter a parse tree produced by `HiveSql.privilegeIncludeColObject`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_function_stmt?: (ctx: Create_function_stmtContext) => void;
+	enterPrivilegeIncludeColObject?: (ctx: PrivilegeIncludeColObjectContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_function_stmt`.
+	 * Exit a parse tree produced by `HiveSql.privilegeIncludeColObject`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_function_stmt?: (ctx: Create_function_stmtContext) => void;
+	exitPrivilegeIncludeColObject?: (ctx: PrivilegeIncludeColObjectContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_function_return`.
+	 * Enter a parse tree produced by `HiveSql.privilegeObject`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_function_return?: (ctx: Create_function_returnContext) => void;
+	enterPrivilegeObject?: (ctx: PrivilegeObjectContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_function_return`.
+	 * Exit a parse tree produced by `HiveSql.privilegeObject`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_function_return?: (ctx: Create_function_returnContext) => void;
+	exitPrivilegeObject?: (ctx: PrivilegeObjectContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_package_stmt`.
+	 * Enter a parse tree produced by `HiveSql.privObject`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_package_stmt?: (ctx: Create_package_stmtContext) => void;
+	enterPrivObject?: (ctx: PrivObjectContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_package_stmt`.
+	 * Exit a parse tree produced by `HiveSql.privObject`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_package_stmt?: (ctx: Create_package_stmtContext) => void;
+	exitPrivObject?: (ctx: PrivObjectContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.package_spec`.
+	 * Enter a parse tree produced by `HiveSql.privObjectCols`.
 	 * @param ctx the parse tree
 	 */
-	enterPackage_spec?: (ctx: Package_specContext) => void;
+	enterPrivObjectCols?: (ctx: PrivObjectColsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.package_spec`.
+	 * Exit a parse tree produced by `HiveSql.privObjectCols`.
 	 * @param ctx the parse tree
 	 */
-	exitPackage_spec?: (ctx: Package_specContext) => void;
+	exitPrivObjectCols?: (ctx: PrivObjectColsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.package_spec_item`.
+	 * Enter a parse tree produced by `HiveSql.privilegeList`.
 	 * @param ctx the parse tree
 	 */
-	enterPackage_spec_item?: (ctx: Package_spec_itemContext) => void;
+	enterPrivilegeList?: (ctx: PrivilegeListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.package_spec_item`.
+	 * Exit a parse tree produced by `HiveSql.privilegeList`.
 	 * @param ctx the parse tree
 	 */
-	exitPackage_spec_item?: (ctx: Package_spec_itemContext) => void;
+	exitPrivilegeList?: (ctx: PrivilegeListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_package_body_stmt`.
+	 * Enter a parse tree produced by `HiveSql.privlegeDef`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_package_body_stmt?: (ctx: Create_package_body_stmtContext) => void;
+	enterPrivlegeDef?: (ctx: PrivlegeDefContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_package_body_stmt`.
+	 * Exit a parse tree produced by `HiveSql.privlegeDef`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_package_body_stmt?: (ctx: Create_package_body_stmtContext) => void;
+	exitPrivlegeDef?: (ctx: PrivlegeDefContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.package_body`.
+	 * Enter a parse tree produced by `HiveSql.privilegeType`.
 	 * @param ctx the parse tree
 	 */
-	enterPackage_body?: (ctx: Package_bodyContext) => void;
+	enterPrivilegeType?: (ctx: PrivilegeTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.package_body`.
+	 * Exit a parse tree produced by `HiveSql.privilegeType`.
 	 * @param ctx the parse tree
 	 */
-	exitPackage_body?: (ctx: Package_bodyContext) => void;
+	exitPrivilegeType?: (ctx: PrivilegeTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.package_body_item`.
+	 * Enter a parse tree produced by `HiveSql.principalSpecification`.
 	 * @param ctx the parse tree
 	 */
-	enterPackage_body_item?: (ctx: Package_body_itemContext) => void;
+	enterPrincipalSpecification?: (ctx: PrincipalSpecificationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.package_body_item`.
+	 * Exit a parse tree produced by `HiveSql.principalSpecification`.
 	 * @param ctx the parse tree
 	 */
-	exitPackage_body_item?: (ctx: Package_body_itemContext) => void;
+	exitPrincipalSpecification?: (ctx: PrincipalSpecificationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_procedure_stmt`.
+	 * Enter a parse tree produced by `HiveSql.principalName`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_procedure_stmt?: (ctx: Create_procedure_stmtContext) => void;
+	enterPrincipalName?: (ctx: PrincipalNameContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_procedure_stmt`.
+	 * Exit a parse tree produced by `HiveSql.principalName`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_procedure_stmt?: (ctx: Create_procedure_stmtContext) => void;
+	exitPrincipalName?: (ctx: PrincipalNameContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_routine_params`.
+	 * Enter a parse tree produced by `HiveSql.withGrantOption`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_routine_params?: (ctx: Create_routine_paramsContext) => void;
+	enterWithGrantOption?: (ctx: WithGrantOptionContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_routine_params`.
+	 * Exit a parse tree produced by `HiveSql.withGrantOption`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_routine_params?: (ctx: Create_routine_paramsContext) => void;
+	exitWithGrantOption?: (ctx: WithGrantOptionContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_routine_param_item`.
+	 * Enter a parse tree produced by `HiveSql.grantOptionFor`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_routine_param_item?: (ctx: Create_routine_param_itemContext) => void;
+	enterGrantOptionFor?: (ctx: GrantOptionForContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_routine_param_item`.
+	 * Exit a parse tree produced by `HiveSql.grantOptionFor`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_routine_param_item?: (ctx: Create_routine_param_itemContext) => void;
+	exitGrantOptionFor?: (ctx: GrantOptionForContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_routine_options`.
+	 * Enter a parse tree produced by `HiveSql.adminOptionFor`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_routine_options?: (ctx: Create_routine_optionsContext) => void;
+	enterAdminOptionFor?: (ctx: AdminOptionForContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_routine_options`.
+	 * Exit a parse tree produced by `HiveSql.adminOptionFor`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_routine_options?: (ctx: Create_routine_optionsContext) => void;
+	exitAdminOptionFor?: (ctx: AdminOptionForContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_routine_option`.
+	 * Enter a parse tree produced by `HiveSql.withAdminOption`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_routine_option?: (ctx: Create_routine_optionContext) => void;
+	enterWithAdminOption?: (ctx: WithAdminOptionContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_routine_option`.
+	 * Exit a parse tree produced by `HiveSql.withAdminOption`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_routine_option?: (ctx: Create_routine_optionContext) => void;
+	exitWithAdminOption?: (ctx: WithAdminOptionContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.drop_stmt`.
+	 * Enter a parse tree produced by `HiveSql.metastoreCheck`.
 	 * @param ctx the parse tree
 	 */
-	enterDrop_stmt?: (ctx: Drop_stmtContext) => void;
+	enterMetastoreCheck?: (ctx: MetastoreCheckContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.drop_stmt`.
+	 * Exit a parse tree produced by `HiveSql.metastoreCheck`.
 	 * @param ctx the parse tree
 	 */
-	exitDrop_stmt?: (ctx: Drop_stmtContext) => void;
+	exitMetastoreCheck?: (ctx: MetastoreCheckContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.end_transaction_stmt`.
+	 * Enter a parse tree produced by `HiveSql.resourceList`.
 	 * @param ctx the parse tree
 	 */
-	enterEnd_transaction_stmt?: (ctx: End_transaction_stmtContext) => void;
+	enterResourceList?: (ctx: ResourceListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.end_transaction_stmt`.
+	 * Exit a parse tree produced by `HiveSql.resourceList`.
 	 * @param ctx the parse tree
 	 */
-	exitEnd_transaction_stmt?: (ctx: End_transaction_stmtContext) => void;
+	exitResourceList?: (ctx: ResourceListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.exec_stmt`.
+	 * Enter a parse tree produced by `HiveSql.resource`.
 	 * @param ctx the parse tree
 	 */
-	enterExec_stmt?: (ctx: Exec_stmtContext) => void;
+	enterResource?: (ctx: ResourceContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.exec_stmt`.
+	 * Exit a parse tree produced by `HiveSql.resource`.
 	 * @param ctx the parse tree
 	 */
-	exitExec_stmt?: (ctx: Exec_stmtContext) => void;
+	exitResource?: (ctx: ResourceContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.if_stmt`.
+	 * Enter a parse tree produced by `HiveSql.resourceType`.
 	 * @param ctx the parse tree
 	 */
-	enterIf_stmt?: (ctx: If_stmtContext) => void;
+	enterResourceType?: (ctx: ResourceTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.if_stmt`.
+	 * Exit a parse tree produced by `HiveSql.resourceType`.
 	 * @param ctx the parse tree
 	 */
-	exitIf_stmt?: (ctx: If_stmtContext) => void;
+	exitResourceType?: (ctx: ResourceTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.if_plsql_stmt`.
+	 * Enter a parse tree produced by `HiveSql.createFunctionStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterIf_plsql_stmt?: (ctx: If_plsql_stmtContext) => void;
+	enterCreateFunctionStatement?: (ctx: CreateFunctionStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.if_plsql_stmt`.
+	 * Exit a parse tree produced by `HiveSql.createFunctionStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitIf_plsql_stmt?: (ctx: If_plsql_stmtContext) => void;
+	exitCreateFunctionStatement?: (ctx: CreateFunctionStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.if_tsql_stmt`.
+	 * Enter a parse tree produced by `HiveSql.dropFunctionStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterIf_tsql_stmt?: (ctx: If_tsql_stmtContext) => void;
+	enterDropFunctionStatement?: (ctx: DropFunctionStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.if_tsql_stmt`.
+	 * Exit a parse tree produced by `HiveSql.dropFunctionStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitIf_tsql_stmt?: (ctx: If_tsql_stmtContext) => void;
+	exitDropFunctionStatement?: (ctx: DropFunctionStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.if_bteq_stmt`.
+	 * Enter a parse tree produced by `HiveSql.reloadFunctionsStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterIf_bteq_stmt?: (ctx: If_bteq_stmtContext) => void;
+	enterReloadFunctionsStatement?: (ctx: ReloadFunctionsStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.if_bteq_stmt`.
+	 * Exit a parse tree produced by `HiveSql.reloadFunctionsStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitIf_bteq_stmt?: (ctx: If_bteq_stmtContext) => void;
+	exitReloadFunctionsStatement?: (ctx: ReloadFunctionsStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.elseif_block`.
+	 * Enter a parse tree produced by `HiveSql.createMacroStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterElseif_block?: (ctx: Elseif_blockContext) => void;
+	enterCreateMacroStatement?: (ctx: CreateMacroStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.elseif_block`.
+	 * Exit a parse tree produced by `HiveSql.createMacroStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitElseif_block?: (ctx: Elseif_blockContext) => void;
+	exitCreateMacroStatement?: (ctx: CreateMacroStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.else_block`.
+	 * Enter a parse tree produced by `HiveSql.dropMacroStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterElse_block?: (ctx: Else_blockContext) => void;
+	enterDropMacroStatement?: (ctx: DropMacroStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.else_block`.
+	 * Exit a parse tree produced by `HiveSql.dropMacroStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitElse_block?: (ctx: Else_blockContext) => void;
+	exitDropMacroStatement?: (ctx: DropMacroStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.include_stmt`.
+	 * Enter a parse tree produced by `HiveSql.createViewStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterInclude_stmt?: (ctx: Include_stmtContext) => void;
+	enterCreateViewStatement?: (ctx: CreateViewStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.include_stmt`.
+	 * Exit a parse tree produced by `HiveSql.createViewStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitInclude_stmt?: (ctx: Include_stmtContext) => void;
+	exitCreateViewStatement?: (ctx: CreateViewStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.insert_stmt`.
+	 * Enter a parse tree produced by `HiveSql.viewPartition`.
 	 * @param ctx the parse tree
 	 */
-	enterInsert_stmt?: (ctx: Insert_stmtContext) => void;
+	enterViewPartition?: (ctx: ViewPartitionContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.insert_stmt`.
+	 * Exit a parse tree produced by `HiveSql.viewPartition`.
 	 * @param ctx the parse tree
 	 */
-	exitInsert_stmt?: (ctx: Insert_stmtContext) => void;
+	exitViewPartition?: (ctx: ViewPartitionContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.insert_stmt_cols`.
+	 * Enter a parse tree produced by `HiveSql.viewOrganization`.
 	 * @param ctx the parse tree
 	 */
-	enterInsert_stmt_cols?: (ctx: Insert_stmt_colsContext) => void;
+	enterViewOrganization?: (ctx: ViewOrganizationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.insert_stmt_cols`.
+	 * Exit a parse tree produced by `HiveSql.viewOrganization`.
 	 * @param ctx the parse tree
 	 */
-	exitInsert_stmt_cols?: (ctx: Insert_stmt_colsContext) => void;
+	exitViewOrganization?: (ctx: ViewOrganizationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.insert_stmt_rows`.
+	 * Enter a parse tree produced by `HiveSql.viewClusterSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterInsert_stmt_rows?: (ctx: Insert_stmt_rowsContext) => void;
+	enterViewClusterSpec?: (ctx: ViewClusterSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.insert_stmt_rows`.
+	 * Exit a parse tree produced by `HiveSql.viewClusterSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitInsert_stmt_rows?: (ctx: Insert_stmt_rowsContext) => void;
+	exitViewClusterSpec?: (ctx: ViewClusterSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.insert_stmt_row`.
+	 * Enter a parse tree produced by `HiveSql.viewComplexSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterInsert_stmt_row?: (ctx: Insert_stmt_rowContext) => void;
+	enterViewComplexSpec?: (ctx: ViewComplexSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.insert_stmt_row`.
+	 * Exit a parse tree produced by `HiveSql.viewComplexSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitInsert_stmt_row?: (ctx: Insert_stmt_rowContext) => void;
+	exitViewComplexSpec?: (ctx: ViewComplexSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.insert_directory_stmt`.
+	 * Enter a parse tree produced by `HiveSql.viewDistSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterInsert_directory_stmt?: (ctx: Insert_directory_stmtContext) => void;
+	enterViewDistSpec?: (ctx: ViewDistSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.insert_directory_stmt`.
+	 * Exit a parse tree produced by `HiveSql.viewDistSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitInsert_directory_stmt?: (ctx: Insert_directory_stmtContext) => void;
+	exitViewDistSpec?: (ctx: ViewDistSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.exit_stmt`.
+	 * Enter a parse tree produced by `HiveSql.viewSortSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterExit_stmt?: (ctx: Exit_stmtContext) => void;
+	enterViewSortSpec?: (ctx: ViewSortSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.exit_stmt`.
+	 * Exit a parse tree produced by `HiveSql.viewSortSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitExit_stmt?: (ctx: Exit_stmtContext) => void;
+	exitViewSortSpec?: (ctx: ViewSortSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.get_diag_stmt`.
+	 * Enter a parse tree produced by `HiveSql.dropViewStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterGet_diag_stmt?: (ctx: Get_diag_stmtContext) => void;
+	enterDropViewStatement?: (ctx: DropViewStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.get_diag_stmt`.
+	 * Exit a parse tree produced by `HiveSql.dropViewStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitGet_diag_stmt?: (ctx: Get_diag_stmtContext) => void;
+	exitDropViewStatement?: (ctx: DropViewStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.get_diag_stmt_item`.
+	 * Enter a parse tree produced by `HiveSql.createMaterializedViewStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterGet_diag_stmt_item?: (ctx: Get_diag_stmt_itemContext) => void;
+	enterCreateMaterializedViewStatement?: (ctx: CreateMaterializedViewStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.get_diag_stmt_item`.
+	 * Exit a parse tree produced by `HiveSql.createMaterializedViewStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitGet_diag_stmt_item?: (ctx: Get_diag_stmt_itemContext) => void;
+	exitCreateMaterializedViewStatement?: (ctx: CreateMaterializedViewStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.get_diag_stmt_exception_item`.
+	 * Enter a parse tree produced by `HiveSql.dropMaterializedViewStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterGet_diag_stmt_exception_item?: (ctx: Get_diag_stmt_exception_itemContext) => void;
+	enterDropMaterializedViewStatement?: (ctx: DropMaterializedViewStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.get_diag_stmt_exception_item`.
+	 * Exit a parse tree produced by `HiveSql.dropMaterializedViewStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitGet_diag_stmt_exception_item?: (ctx: Get_diag_stmt_exception_itemContext) => void;
+	exitDropMaterializedViewStatement?: (ctx: DropMaterializedViewStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.get_diag_stmt_rowcount_item`.
+	 * Enter a parse tree produced by `HiveSql.createScheduledQueryStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterGet_diag_stmt_rowcount_item?: (ctx: Get_diag_stmt_rowcount_itemContext) => void;
+	enterCreateScheduledQueryStatement?: (ctx: CreateScheduledQueryStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.get_diag_stmt_rowcount_item`.
+	 * Exit a parse tree produced by `HiveSql.createScheduledQueryStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitGet_diag_stmt_rowcount_item?: (ctx: Get_diag_stmt_rowcount_itemContext) => void;
+	exitCreateScheduledQueryStatement?: (ctx: CreateScheduledQueryStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.grant_stmt`.
+	 * Enter a parse tree produced by `HiveSql.dropScheduledQueryStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterGrant_stmt?: (ctx: Grant_stmtContext) => void;
+	enterDropScheduledQueryStatement?: (ctx: DropScheduledQueryStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.grant_stmt`.
+	 * Exit a parse tree produced by `HiveSql.dropScheduledQueryStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitGrant_stmt?: (ctx: Grant_stmtContext) => void;
+	exitDropScheduledQueryStatement?: (ctx: DropScheduledQueryStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.grant_stmt_item`.
+	 * Enter a parse tree produced by `HiveSql.alterScheduledQueryStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterGrant_stmt_item?: (ctx: Grant_stmt_itemContext) => void;
+	enterAlterScheduledQueryStatement?: (ctx: AlterScheduledQueryStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.grant_stmt_item`.
+	 * Exit a parse tree produced by `HiveSql.alterScheduledQueryStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitGrant_stmt_item?: (ctx: Grant_stmt_itemContext) => void;
+	exitAlterScheduledQueryStatement?: (ctx: AlterScheduledQueryStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.leave_stmt`.
+	 * Enter a parse tree produced by `HiveSql.alterScheduledQueryChange`.
 	 * @param ctx the parse tree
 	 */
-	enterLeave_stmt?: (ctx: Leave_stmtContext) => void;
+	enterAlterScheduledQueryChange?: (ctx: AlterScheduledQueryChangeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.leave_stmt`.
+	 * Exit a parse tree produced by `HiveSql.alterScheduledQueryChange`.
 	 * @param ctx the parse tree
 	 */
-	exitLeave_stmt?: (ctx: Leave_stmtContext) => void;
+	exitAlterScheduledQueryChange?: (ctx: AlterScheduledQueryChangeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.map_object_stmt`.
+	 * Enter a parse tree produced by `HiveSql.scheduleSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterMap_object_stmt?: (ctx: Map_object_stmtContext) => void;
+	enterScheduleSpec?: (ctx: ScheduleSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.map_object_stmt`.
+	 * Exit a parse tree produced by `HiveSql.scheduleSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitMap_object_stmt?: (ctx: Map_object_stmtContext) => void;
+	exitScheduleSpec?: (ctx: ScheduleSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.open_stmt`.
+	 * Enter a parse tree produced by `HiveSql.executedAsSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterOpen_stmt?: (ctx: Open_stmtContext) => void;
+	enterExecutedAsSpec?: (ctx: ExecutedAsSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.open_stmt`.
+	 * Exit a parse tree produced by `HiveSql.executedAsSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitOpen_stmt?: (ctx: Open_stmtContext) => void;
+	exitExecutedAsSpec?: (ctx: ExecutedAsSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.fetch_stmt`.
+	 * Enter a parse tree produced by `HiveSql.definedAsSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterFetch_stmt?: (ctx: Fetch_stmtContext) => void;
+	enterDefinedAsSpec?: (ctx: DefinedAsSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.fetch_stmt`.
+	 * Exit a parse tree produced by `HiveSql.definedAsSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitFetch_stmt?: (ctx: Fetch_stmtContext) => void;
+	exitDefinedAsSpec?: (ctx: DefinedAsSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.collect_stats_stmt`.
+	 * Enter a parse tree produced by `HiveSql.showFunctionIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	enterCollect_stats_stmt?: (ctx: Collect_stats_stmtContext) => void;
+	enterShowFunctionIdentifier?: (ctx: ShowFunctionIdentifierContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.collect_stats_stmt`.
+	 * Exit a parse tree produced by `HiveSql.showFunctionIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	exitCollect_stats_stmt?: (ctx: Collect_stats_stmtContext) => void;
+	exitShowFunctionIdentifier?: (ctx: ShowFunctionIdentifierContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.collect_stats_clause`.
+	 * Enter a parse tree produced by `HiveSql.showStmtIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	enterCollect_stats_clause?: (ctx: Collect_stats_clauseContext) => void;
+	enterShowStmtIdentifier?: (ctx: ShowStmtIdentifierContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.collect_stats_clause`.
+	 * Exit a parse tree produced by `HiveSql.showStmtIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	exitCollect_stats_clause?: (ctx: Collect_stats_clauseContext) => void;
+	exitShowStmtIdentifier?: (ctx: ShowStmtIdentifierContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.close_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tableComment`.
 	 * @param ctx the parse tree
 	 */
-	enterClose_stmt?: (ctx: Close_stmtContext) => void;
+	enterTableComment?: (ctx: TableCommentContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.close_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tableComment`.
 	 * @param ctx the parse tree
 	 */
-	exitClose_stmt?: (ctx: Close_stmtContext) => void;
+	exitTableComment?: (ctx: TableCommentContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.cmp_stmt`.
+	 * Enter a parse tree produced by `HiveSql.createTablePartitionSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterCmp_stmt?: (ctx: Cmp_stmtContext) => void;
+	enterCreateTablePartitionSpec?: (ctx: CreateTablePartitionSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.cmp_stmt`.
+	 * Exit a parse tree produced by `HiveSql.createTablePartitionSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitCmp_stmt?: (ctx: Cmp_stmtContext) => void;
+	exitCreateTablePartitionSpec?: (ctx: CreateTablePartitionSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.cmp_source`.
+	 * Enter a parse tree produced by `HiveSql.createTablePartitionColumnTypeSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterCmp_source?: (ctx: Cmp_sourceContext) => void;
+	enterCreateTablePartitionColumnTypeSpec?: (ctx: CreateTablePartitionColumnTypeSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.cmp_source`.
+	 * Exit a parse tree produced by `HiveSql.createTablePartitionColumnTypeSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitCmp_source?: (ctx: Cmp_sourceContext) => void;
+	exitCreateTablePartitionColumnTypeSpec?: (ctx: CreateTablePartitionColumnTypeSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.copy_from_local_stmt`.
+	 * Enter a parse tree produced by `HiveSql.createTablePartitionColumnSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterCopy_from_local_stmt?: (ctx: Copy_from_local_stmtContext) => void;
+	enterCreateTablePartitionColumnSpec?: (ctx: CreateTablePartitionColumnSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.copy_from_local_stmt`.
+	 * Exit a parse tree produced by `HiveSql.createTablePartitionColumnSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitCopy_from_local_stmt?: (ctx: Copy_from_local_stmtContext) => void;
+	exitCreateTablePartitionColumnSpec?: (ctx: CreateTablePartitionColumnSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.copy_stmt`.
+	 * Enter a parse tree produced by `HiveSql.partitionTransformSpec`.
 	 * @param ctx the parse tree
 	 */
-	enterCopy_stmt?: (ctx: Copy_stmtContext) => void;
+	enterPartitionTransformSpec?: (ctx: PartitionTransformSpecContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.copy_stmt`.
+	 * Exit a parse tree produced by `HiveSql.partitionTransformSpec`.
 	 * @param ctx the parse tree
 	 */
-	exitCopy_stmt?: (ctx: Copy_stmtContext) => void;
+	exitPartitionTransformSpec?: (ctx: PartitionTransformSpecContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.copy_source`.
+	 * Enter a parse tree produced by `HiveSql.columnNameTransformConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterCopy_source?: (ctx: Copy_sourceContext) => void;
+	enterColumnNameTransformConstraint?: (ctx: ColumnNameTransformConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.copy_source`.
+	 * Exit a parse tree produced by `HiveSql.columnNameTransformConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitCopy_source?: (ctx: Copy_sourceContext) => void;
+	exitColumnNameTransformConstraint?: (ctx: ColumnNameTransformConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.copy_target`.
+	 * Enter a parse tree produced by `HiveSql.partitionTransformType`.
 	 * @param ctx the parse tree
 	 */
-	enterCopy_target?: (ctx: Copy_targetContext) => void;
+	enterPartitionTransformType?: (ctx: PartitionTransformTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.copy_target`.
+	 * Exit a parse tree produced by `HiveSql.partitionTransformType`.
 	 * @param ctx the parse tree
 	 */
-	exitCopy_target?: (ctx: Copy_targetContext) => void;
+	exitPartitionTransformType?: (ctx: PartitionTransformTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.copy_option`.
+	 * Enter a parse tree produced by `HiveSql.tableBuckets`.
 	 * @param ctx the parse tree
 	 */
-	enterCopy_option?: (ctx: Copy_optionContext) => void;
+	enterTableBuckets?: (ctx: TableBucketsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.copy_option`.
+	 * Exit a parse tree produced by `HiveSql.tableBuckets`.
 	 * @param ctx the parse tree
 	 */
-	exitCopy_option?: (ctx: Copy_optionContext) => void;
+	exitTableBuckets?: (ctx: TableBucketsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.copy_file_option`.
+	 * Enter a parse tree produced by `HiveSql.tableImplBuckets`.
 	 * @param ctx the parse tree
 	 */
-	enterCopy_file_option?: (ctx: Copy_file_optionContext) => void;
+	enterTableImplBuckets?: (ctx: TableImplBucketsContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.copy_file_option`.
+	 * Exit a parse tree produced by `HiveSql.tableImplBuckets`.
 	 * @param ctx the parse tree
 	 */
-	exitCopy_file_option?: (ctx: Copy_file_optionContext) => void;
+	exitTableImplBuckets?: (ctx: TableImplBucketsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.commit_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tableSkewed`.
 	 * @param ctx the parse tree
 	 */
-	enterCommit_stmt?: (ctx: Commit_stmtContext) => void;
+	enterTableSkewed?: (ctx: TableSkewedContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.commit_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tableSkewed`.
 	 * @param ctx the parse tree
 	 */
-	exitCommit_stmt?: (ctx: Commit_stmtContext) => void;
+	exitTableSkewed?: (ctx: TableSkewedContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_index_stmt`.
+	 * Enter a parse tree produced by `HiveSql.rowFormat`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_index_stmt?: (ctx: Create_index_stmtContext) => void;
+	enterRowFormat?: (ctx: RowFormatContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_index_stmt`.
+	 * Exit a parse tree produced by `HiveSql.rowFormat`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_index_stmt?: (ctx: Create_index_stmtContext) => void;
+	exitRowFormat?: (ctx: RowFormatContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.create_index_col`.
+	 * Enter a parse tree produced by `HiveSql.recordReader`.
 	 * @param ctx the parse tree
 	 */
-	enterCreate_index_col?: (ctx: Create_index_colContext) => void;
+	enterRecordReader?: (ctx: RecordReaderContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.create_index_col`.
+	 * Exit a parse tree produced by `HiveSql.recordReader`.
 	 * @param ctx the parse tree
 	 */
-	exitCreate_index_col?: (ctx: Create_index_colContext) => void;
+	exitRecordReader?: (ctx: RecordReaderContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.index_storage_clause`.
+	 * Enter a parse tree produced by `HiveSql.recordWriter`.
 	 * @param ctx the parse tree
 	 */
-	enterIndex_storage_clause?: (ctx: Index_storage_clauseContext) => void;
+	enterRecordWriter?: (ctx: RecordWriterContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.index_storage_clause`.
+	 * Exit a parse tree produced by `HiveSql.recordWriter`.
 	 * @param ctx the parse tree
 	 */
-	exitIndex_storage_clause?: (ctx: Index_storage_clauseContext) => void;
+	exitRecordWriter?: (ctx: RecordWriterContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.index_mssql_storage_clause`.
+	 * Enter a parse tree produced by `HiveSql.rowFormatSerde`.
 	 * @param ctx the parse tree
 	 */
-	enterIndex_mssql_storage_clause?: (ctx: Index_mssql_storage_clauseContext) => void;
+	enterRowFormatSerde?: (ctx: RowFormatSerdeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.index_mssql_storage_clause`.
+	 * Exit a parse tree produced by `HiveSql.rowFormatSerde`.
 	 * @param ctx the parse tree
 	 */
-	exitIndex_mssql_storage_clause?: (ctx: Index_mssql_storage_clauseContext) => void;
+	exitRowFormatSerde?: (ctx: RowFormatSerdeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.print_stmt`.
+	 * Enter a parse tree produced by `HiveSql.rowFormatDelimited`.
 	 * @param ctx the parse tree
 	 */
-	enterPrint_stmt?: (ctx: Print_stmtContext) => void;
+	enterRowFormatDelimited?: (ctx: RowFormatDelimitedContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.print_stmt`.
+	 * Exit a parse tree produced by `HiveSql.rowFormatDelimited`.
 	 * @param ctx the parse tree
 	 */
-	exitPrint_stmt?: (ctx: Print_stmtContext) => void;
+	exitRowFormatDelimited?: (ctx: RowFormatDelimitedContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.quit_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tableRowFormat`.
 	 * @param ctx the parse tree
 	 */
-	enterQuit_stmt?: (ctx: Quit_stmtContext) => void;
+	enterTableRowFormat?: (ctx: TableRowFormatContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.quit_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tableRowFormat`.
 	 * @param ctx the parse tree
 	 */
-	exitQuit_stmt?: (ctx: Quit_stmtContext) => void;
+	exitTableRowFormat?: (ctx: TableRowFormatContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.raise_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tablePropertiesPrefixed`.
 	 * @param ctx the parse tree
 	 */
-	enterRaise_stmt?: (ctx: Raise_stmtContext) => void;
+	enterTablePropertiesPrefixed?: (ctx: TablePropertiesPrefixedContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.raise_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tablePropertiesPrefixed`.
 	 * @param ctx the parse tree
 	 */
-	exitRaise_stmt?: (ctx: Raise_stmtContext) => void;
+	exitTablePropertiesPrefixed?: (ctx: TablePropertiesPrefixedContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.resignal_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tableProperties`.
 	 * @param ctx the parse tree
 	 */
-	enterResignal_stmt?: (ctx: Resignal_stmtContext) => void;
+	enterTableProperties?: (ctx: TablePropertiesContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.resignal_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tableProperties`.
 	 * @param ctx the parse tree
 	 */
-	exitResignal_stmt?: (ctx: Resignal_stmtContext) => void;
+	exitTableProperties?: (ctx: TablePropertiesContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.return_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tablePropertiesList`.
 	 * @param ctx the parse tree
 	 */
-	enterReturn_stmt?: (ctx: Return_stmtContext) => void;
+	enterTablePropertiesList?: (ctx: TablePropertiesListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.return_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tablePropertiesList`.
 	 * @param ctx the parse tree
 	 */
-	exitReturn_stmt?: (ctx: Return_stmtContext) => void;
+	exitTablePropertiesList?: (ctx: TablePropertiesListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.rollback_stmt`.
+	 * Enter a parse tree produced by `HiveSql.keyValueProperty`.
 	 * @param ctx the parse tree
 	 */
-	enterRollback_stmt?: (ctx: Rollback_stmtContext) => void;
+	enterKeyValueProperty?: (ctx: KeyValuePropertyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.rollback_stmt`.
+	 * Exit a parse tree produced by `HiveSql.keyValueProperty`.
 	 * @param ctx the parse tree
 	 */
-	exitRollback_stmt?: (ctx: Rollback_stmtContext) => void;
+	exitKeyValueProperty?: (ctx: KeyValuePropertyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.set_session_option`.
+	 * Enter a parse tree produced by `HiveSql.keyProperty`.
 	 * @param ctx the parse tree
 	 */
-	enterSet_session_option?: (ctx: Set_session_optionContext) => void;
+	enterKeyProperty?: (ctx: KeyPropertyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.set_session_option`.
+	 * Exit a parse tree produced by `HiveSql.keyProperty`.
 	 * @param ctx the parse tree
 	 */
-	exitSet_session_option?: (ctx: Set_session_optionContext) => void;
+	exitKeyProperty?: (ctx: KeyPropertyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.set_current_schema_option`.
+	 * Enter a parse tree produced by `HiveSql.tableRowFormatFieldIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	enterSet_current_schema_option?: (ctx: Set_current_schema_optionContext) => void;
+	enterTableRowFormatFieldIdentifier?: (ctx: TableRowFormatFieldIdentifierContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.set_current_schema_option`.
+	 * Exit a parse tree produced by `HiveSql.tableRowFormatFieldIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	exitSet_current_schema_option?: (ctx: Set_current_schema_optionContext) => void;
+	exitTableRowFormatFieldIdentifier?: (ctx: TableRowFormatFieldIdentifierContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.set_mssql_session_option`.
+	 * Enter a parse tree produced by `HiveSql.tableRowFormatCollItemsIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	enterSet_mssql_session_option?: (ctx: Set_mssql_session_optionContext) => void;
+	enterTableRowFormatCollItemsIdentifier?: (ctx: TableRowFormatCollItemsIdentifierContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.set_mssql_session_option`.
+	 * Exit a parse tree produced by `HiveSql.tableRowFormatCollItemsIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	exitSet_mssql_session_option?: (ctx: Set_mssql_session_optionContext) => void;
+	exitTableRowFormatCollItemsIdentifier?: (ctx: TableRowFormatCollItemsIdentifierContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.set_teradata_session_option`.
+	 * Enter a parse tree produced by `HiveSql.tableRowFormatMapKeysIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	enterSet_teradata_session_option?: (ctx: Set_teradata_session_optionContext) => void;
+	enterTableRowFormatMapKeysIdentifier?: (ctx: TableRowFormatMapKeysIdentifierContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.set_teradata_session_option`.
+	 * Exit a parse tree produced by `HiveSql.tableRowFormatMapKeysIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	exitSet_teradata_session_option?: (ctx: Set_teradata_session_optionContext) => void;
+	exitTableRowFormatMapKeysIdentifier?: (ctx: TableRowFormatMapKeysIdentifierContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.signal_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tableRowFormatLinesIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	enterSignal_stmt?: (ctx: Signal_stmtContext) => void;
+	enterTableRowFormatLinesIdentifier?: (ctx: TableRowFormatLinesIdentifierContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.signal_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tableRowFormatLinesIdentifier`.
 	 * @param ctx the parse tree
 	 */
-	exitSignal_stmt?: (ctx: Signal_stmtContext) => void;
+	exitTableRowFormatLinesIdentifier?: (ctx: TableRowFormatLinesIdentifierContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.summary_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tableRowNullFormat`.
 	 * @param ctx the parse tree
 	 */
-	enterSummary_stmt?: (ctx: Summary_stmtContext) => void;
+	enterTableRowNullFormat?: (ctx: TableRowNullFormatContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.summary_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tableRowNullFormat`.
 	 * @param ctx the parse tree
 	 */
-	exitSummary_stmt?: (ctx: Summary_stmtContext) => void;
+	exitTableRowNullFormat?: (ctx: TableRowNullFormatContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.truncate_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tableFileFormat`.
 	 * @param ctx the parse tree
 	 */
-	enterTruncate_stmt?: (ctx: Truncate_stmtContext) => void;
+	enterTableFileFormat?: (ctx: TableFileFormatContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.truncate_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tableFileFormat`.
 	 * @param ctx the parse tree
 	 */
-	exitTruncate_stmt?: (ctx: Truncate_stmtContext) => void;
+	exitTableFileFormat?: (ctx: TableFileFormatContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.use_stmt`.
+	 * Enter a parse tree produced by `HiveSql.tableLocation`.
 	 * @param ctx the parse tree
 	 */
-	enterUse_stmt?: (ctx: Use_stmtContext) => void;
+	enterTableLocation?: (ctx: TableLocationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.use_stmt`.
+	 * Exit a parse tree produced by `HiveSql.tableLocation`.
 	 * @param ctx the parse tree
 	 */
-	exitUse_stmt?: (ctx: Use_stmtContext) => void;
+	exitTableLocation?: (ctx: TableLocationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.values_into_stmt`.
+	 * Enter a parse tree produced by `HiveSql.columnNameTypeList`.
 	 * @param ctx the parse tree
 	 */
-	enterValues_into_stmt?: (ctx: Values_into_stmtContext) => void;
+	enterColumnNameTypeList?: (ctx: ColumnNameTypeListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.values_into_stmt`.
+	 * Exit a parse tree produced by `HiveSql.columnNameTypeList`.
 	 * @param ctx the parse tree
 	 */
-	exitValues_into_stmt?: (ctx: Values_into_stmtContext) => void;
+	exitColumnNameTypeList?: (ctx: ColumnNameTypeListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.while_stmt`.
+	 * Enter a parse tree produced by `HiveSql.columnNameTypeOrConstraintList`.
 	 * @param ctx the parse tree
 	 */
-	enterWhile_stmt?: (ctx: While_stmtContext) => void;
+	enterColumnNameTypeOrConstraintList?: (ctx: ColumnNameTypeOrConstraintListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.while_stmt`.
+	 * Exit a parse tree produced by `HiveSql.columnNameTypeOrConstraintList`.
 	 * @param ctx the parse tree
 	 */
-	exitWhile_stmt?: (ctx: While_stmtContext) => void;
+	exitColumnNameTypeOrConstraintList?: (ctx: ColumnNameTypeOrConstraintListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.for_cursor_stmt`.
+	 * Enter a parse tree produced by `HiveSql.columnNameColonTypeList`.
 	 * @param ctx the parse tree
 	 */
-	enterFor_cursor_stmt?: (ctx: For_cursor_stmtContext) => void;
+	enterColumnNameColonTypeList?: (ctx: ColumnNameColonTypeListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.for_cursor_stmt`.
+	 * Exit a parse tree produced by `HiveSql.columnNameColonTypeList`.
 	 * @param ctx the parse tree
 	 */
-	exitFor_cursor_stmt?: (ctx: For_cursor_stmtContext) => void;
+	exitColumnNameColonTypeList?: (ctx: ColumnNameColonTypeListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.for_range_stmt`.
+	 * Enter a parse tree produced by `HiveSql.columnNameList`.
 	 * @param ctx the parse tree
 	 */
-	enterFor_range_stmt?: (ctx: For_range_stmtContext) => void;
+	enterColumnNameList?: (ctx: ColumnNameListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.for_range_stmt`.
+	 * Exit a parse tree produced by `HiveSql.columnNameList`.
 	 * @param ctx the parse tree
 	 */
-	exitFor_range_stmt?: (ctx: For_range_stmtContext) => void;
+	exitColumnNameList?: (ctx: ColumnNameListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.label`.
+	 * Enter a parse tree produced by `HiveSql.columnName`.
 	 * @param ctx the parse tree
 	 */
-	enterLabel?: (ctx: LabelContext) => void;
+	enterColumnName?: (ctx: ColumnNameContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.label`.
+	 * Exit a parse tree produced by `HiveSql.columnName`.
 	 * @param ctx the parse tree
 	 */
-	exitLabel?: (ctx: LabelContext) => void;
+	exitColumnName?: (ctx: ColumnNameContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.using_clause`.
+	 * Enter a parse tree produced by `HiveSql.extColumnName`.
 	 * @param ctx the parse tree
 	 */
-	enterUsing_clause?: (ctx: Using_clauseContext) => void;
+	enterExtColumnName?: (ctx: ExtColumnNameContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.using_clause`.
+	 * Exit a parse tree produced by `HiveSql.extColumnName`.
 	 * @param ctx the parse tree
 	 */
-	exitUsing_clause?: (ctx: Using_clauseContext) => void;
+	exitExtColumnName?: (ctx: ExtColumnNameContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_stmt`.
+	 * Enter a parse tree produced by `HiveSql.columnNameOrderList`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_stmt?: (ctx: Select_stmtContext) => void;
+	enterColumnNameOrderList?: (ctx: ColumnNameOrderListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_stmt`.
+	 * Exit a parse tree produced by `HiveSql.columnNameOrderList`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_stmt?: (ctx: Select_stmtContext) => void;
+	exitColumnNameOrderList?: (ctx: ColumnNameOrderListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.cte_select_stmt`.
+	 * Enter a parse tree produced by `HiveSql.columnParenthesesList`.
 	 * @param ctx the parse tree
 	 */
-	enterCte_select_stmt?: (ctx: Cte_select_stmtContext) => void;
+	enterColumnParenthesesList?: (ctx: ColumnParenthesesListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.cte_select_stmt`.
+	 * Exit a parse tree produced by `HiveSql.columnParenthesesList`.
 	 * @param ctx the parse tree
 	 */
-	exitCte_select_stmt?: (ctx: Cte_select_stmtContext) => void;
+	exitColumnParenthesesList?: (ctx: ColumnParenthesesListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.cte_select_stmt_item`.
+	 * Enter a parse tree produced by `HiveSql.enableValidateSpecification`.
 	 * @param ctx the parse tree
 	 */
-	enterCte_select_stmt_item?: (ctx: Cte_select_stmt_itemContext) => void;
+	enterEnableValidateSpecification?: (ctx: EnableValidateSpecificationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.cte_select_stmt_item`.
+	 * Exit a parse tree produced by `HiveSql.enableValidateSpecification`.
 	 * @param ctx the parse tree
 	 */
-	exitCte_select_stmt_item?: (ctx: Cte_select_stmt_itemContext) => void;
+	exitEnableValidateSpecification?: (ctx: EnableValidateSpecificationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.cte_select_cols`.
+	 * Enter a parse tree produced by `HiveSql.enableSpecification`.
 	 * @param ctx the parse tree
 	 */
-	enterCte_select_cols?: (ctx: Cte_select_colsContext) => void;
+	enterEnableSpecification?: (ctx: EnableSpecificationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.cte_select_cols`.
+	 * Exit a parse tree produced by `HiveSql.enableSpecification`.
 	 * @param ctx the parse tree
 	 */
-	exitCte_select_cols?: (ctx: Cte_select_colsContext) => void;
+	exitEnableSpecification?: (ctx: EnableSpecificationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.fullselect_stmt`.
+	 * Enter a parse tree produced by `HiveSql.validateSpecification`.
 	 * @param ctx the parse tree
 	 */
-	enterFullselect_stmt?: (ctx: Fullselect_stmtContext) => void;
+	enterValidateSpecification?: (ctx: ValidateSpecificationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.fullselect_stmt`.
+	 * Exit a parse tree produced by `HiveSql.validateSpecification`.
 	 * @param ctx the parse tree
 	 */
-	exitFullselect_stmt?: (ctx: Fullselect_stmtContext) => void;
+	exitValidateSpecification?: (ctx: ValidateSpecificationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.fullselect_stmt_item`.
+	 * Enter a parse tree produced by `HiveSql.enforcedSpecification`.
 	 * @param ctx the parse tree
 	 */
-	enterFullselect_stmt_item?: (ctx: Fullselect_stmt_itemContext) => void;
+	enterEnforcedSpecification?: (ctx: EnforcedSpecificationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.fullselect_stmt_item`.
+	 * Exit a parse tree produced by `HiveSql.enforcedSpecification`.
 	 * @param ctx the parse tree
 	 */
-	exitFullselect_stmt_item?: (ctx: Fullselect_stmt_itemContext) => void;
+	exitEnforcedSpecification?: (ctx: EnforcedSpecificationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.fullselect_set_clause`.
+	 * Enter a parse tree produced by `HiveSql.relySpecification`.
 	 * @param ctx the parse tree
 	 */
-	enterFullselect_set_clause?: (ctx: Fullselect_set_clauseContext) => void;
+	enterRelySpecification?: (ctx: RelySpecificationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.fullselect_set_clause`.
+	 * Exit a parse tree produced by `HiveSql.relySpecification`.
 	 * @param ctx the parse tree
 	 */
-	exitFullselect_set_clause?: (ctx: Fullselect_set_clauseContext) => void;
+	exitRelySpecification?: (ctx: RelySpecificationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.subselect_stmt`.
+	 * Enter a parse tree produced by `HiveSql.createConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterSubselect_stmt?: (ctx: Subselect_stmtContext) => void;
+	enterCreateConstraint?: (ctx: CreateConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.subselect_stmt`.
+	 * Exit a parse tree produced by `HiveSql.createConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitSubselect_stmt?: (ctx: Subselect_stmtContext) => void;
+	exitCreateConstraint?: (ctx: CreateConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_list`.
+	 * Enter a parse tree produced by `HiveSql.alterConstraintWithName`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_list?: (ctx: Select_listContext) => void;
+	enterAlterConstraintWithName?: (ctx: AlterConstraintWithNameContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_list`.
+	 * Exit a parse tree produced by `HiveSql.alterConstraintWithName`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_list?: (ctx: Select_listContext) => void;
+	exitAlterConstraintWithName?: (ctx: AlterConstraintWithNameContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_list_set`.
+	 * Enter a parse tree produced by `HiveSql.tableLevelConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_list_set?: (ctx: Select_list_setContext) => void;
+	enterTableLevelConstraint?: (ctx: TableLevelConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_list_set`.
+	 * Exit a parse tree produced by `HiveSql.tableLevelConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_list_set?: (ctx: Select_list_setContext) => void;
+	exitTableLevelConstraint?: (ctx: TableLevelConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_list_limit`.
+	 * Enter a parse tree produced by `HiveSql.pkUkConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_list_limit?: (ctx: Select_list_limitContext) => void;
+	enterPkUkConstraint?: (ctx: PkUkConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_list_limit`.
+	 * Exit a parse tree produced by `HiveSql.pkUkConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_list_limit?: (ctx: Select_list_limitContext) => void;
+	exitPkUkConstraint?: (ctx: PkUkConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_list_item`.
+	 * Enter a parse tree produced by `HiveSql.checkConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_list_item?: (ctx: Select_list_itemContext) => void;
+	enterCheckConstraint?: (ctx: CheckConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_list_item`.
+	 * Exit a parse tree produced by `HiveSql.checkConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_list_item?: (ctx: Select_list_itemContext) => void;
+	exitCheckConstraint?: (ctx: CheckConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_list_alias`.
+	 * Enter a parse tree produced by `HiveSql.createForeignKey`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_list_alias?: (ctx: Select_list_aliasContext) => void;
+	enterCreateForeignKey?: (ctx: CreateForeignKeyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_list_alias`.
+	 * Exit a parse tree produced by `HiveSql.createForeignKey`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_list_alias?: (ctx: Select_list_aliasContext) => void;
+	exitCreateForeignKey?: (ctx: CreateForeignKeyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_list_asterisk`.
+	 * Enter a parse tree produced by `HiveSql.alterForeignKeyWithName`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_list_asterisk?: (ctx: Select_list_asteriskContext) => void;
+	enterAlterForeignKeyWithName?: (ctx: AlterForeignKeyWithNameContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_list_asterisk`.
+	 * Exit a parse tree produced by `HiveSql.alterForeignKeyWithName`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_list_asterisk?: (ctx: Select_list_asteriskContext) => void;
+	exitAlterForeignKeyWithName?: (ctx: AlterForeignKeyWithNameContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.into_clause`.
+	 * Enter a parse tree produced by `HiveSql.skewedValueElement`.
 	 * @param ctx the parse tree
 	 */
-	enterInto_clause?: (ctx: Into_clauseContext) => void;
+	enterSkewedValueElement?: (ctx: SkewedValueElementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.into_clause`.
+	 * Exit a parse tree produced by `HiveSql.skewedValueElement`.
 	 * @param ctx the parse tree
 	 */
-	exitInto_clause?: (ctx: Into_clauseContext) => void;
+	exitSkewedValueElement?: (ctx: SkewedValueElementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_clause`.
+	 * Enter a parse tree produced by `HiveSql.skewedColumnValuePairList`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_clause?: (ctx: From_clauseContext) => void;
+	enterSkewedColumnValuePairList?: (ctx: SkewedColumnValuePairListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_clause`.
+	 * Exit a parse tree produced by `HiveSql.skewedColumnValuePairList`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_clause?: (ctx: From_clauseContext) => void;
+	exitSkewedColumnValuePairList?: (ctx: SkewedColumnValuePairListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_table_clause`.
+	 * Enter a parse tree produced by `HiveSql.skewedColumnValuePair`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_table_clause?: (ctx: From_table_clauseContext) => void;
+	enterSkewedColumnValuePair?: (ctx: SkewedColumnValuePairContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_table_clause`.
+	 * Exit a parse tree produced by `HiveSql.skewedColumnValuePair`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_table_clause?: (ctx: From_table_clauseContext) => void;
+	exitSkewedColumnValuePair?: (ctx: SkewedColumnValuePairContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_table_name_clause`.
+	 * Enter a parse tree produced by `HiveSql.skewedColumnValues`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_table_name_clause?: (ctx: From_table_name_clauseContext) => void;
+	enterSkewedColumnValues?: (ctx: SkewedColumnValuesContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_table_name_clause`.
+	 * Exit a parse tree produced by `HiveSql.skewedColumnValues`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_table_name_clause?: (ctx: From_table_name_clauseContext) => void;
+	exitSkewedColumnValues?: (ctx: SkewedColumnValuesContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_subselect_clause`.
+	 * Enter a parse tree produced by `HiveSql.skewedColumnValue`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_subselect_clause?: (ctx: From_subselect_clauseContext) => void;
+	enterSkewedColumnValue?: (ctx: SkewedColumnValueContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_subselect_clause`.
+	 * Exit a parse tree produced by `HiveSql.skewedColumnValue`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_subselect_clause?: (ctx: From_subselect_clauseContext) => void;
+	exitSkewedColumnValue?: (ctx: SkewedColumnValueContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_join_clause`.
+	 * Enter a parse tree produced by `HiveSql.skewedValueLocationElement`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_join_clause?: (ctx: From_join_clauseContext) => void;
+	enterSkewedValueLocationElement?: (ctx: SkewedValueLocationElementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_join_clause`.
+	 * Exit a parse tree produced by `HiveSql.skewedValueLocationElement`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_join_clause?: (ctx: From_join_clauseContext) => void;
+	exitSkewedValueLocationElement?: (ctx: SkewedValueLocationElementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_join_type_clause`.
+	 * Enter a parse tree produced by `HiveSql.orderSpecification`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_join_type_clause?: (ctx: From_join_type_clauseContext) => void;
+	enterOrderSpecification?: (ctx: OrderSpecificationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_join_type_clause`.
+	 * Exit a parse tree produced by `HiveSql.orderSpecification`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_join_type_clause?: (ctx: From_join_type_clauseContext) => void;
+	exitOrderSpecification?: (ctx: OrderSpecificationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_table_values_clause`.
+	 * Enter a parse tree produced by `HiveSql.nullOrdering`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_table_values_clause?: (ctx: From_table_values_clauseContext) => void;
+	enterNullOrdering?: (ctx: NullOrderingContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_table_values_clause`.
+	 * Exit a parse tree produced by `HiveSql.nullOrdering`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_table_values_clause?: (ctx: From_table_values_clauseContext) => void;
+	exitNullOrdering?: (ctx: NullOrderingContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_table_values_row`.
+	 * Enter a parse tree produced by `HiveSql.columnNameOrder`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_table_values_row?: (ctx: From_table_values_rowContext) => void;
+	enterColumnNameOrder?: (ctx: ColumnNameOrderContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_table_values_row`.
+	 * Exit a parse tree produced by `HiveSql.columnNameOrder`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_table_values_row?: (ctx: From_table_values_rowContext) => void;
+	exitColumnNameOrder?: (ctx: ColumnNameOrderContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.from_alias_clause`.
+	 * Enter a parse tree produced by `HiveSql.columnNameCommentList`.
 	 * @param ctx the parse tree
 	 */
-	enterFrom_alias_clause?: (ctx: From_alias_clauseContext) => void;
+	enterColumnNameCommentList?: (ctx: ColumnNameCommentListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.from_alias_clause`.
+	 * Exit a parse tree produced by `HiveSql.columnNameCommentList`.
 	 * @param ctx the parse tree
 	 */
-	exitFrom_alias_clause?: (ctx: From_alias_clauseContext) => void;
+	exitColumnNameCommentList?: (ctx: ColumnNameCommentListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.table_name`.
+	 * Enter a parse tree produced by `HiveSql.columnNameComment`.
 	 * @param ctx the parse tree
 	 */
-	enterTable_name?: (ctx: Table_nameContext) => void;
+	enterColumnNameComment?: (ctx: ColumnNameCommentContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.table_name`.
+	 * Exit a parse tree produced by `HiveSql.columnNameComment`.
 	 * @param ctx the parse tree
 	 */
-	exitTable_name?: (ctx: Table_nameContext) => void;
+	exitColumnNameComment?: (ctx: ColumnNameCommentContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.where_clause`.
+	 * Enter a parse tree produced by `HiveSql.orderSpecificationRewrite`.
 	 * @param ctx the parse tree
 	 */
-	enterWhere_clause?: (ctx: Where_clauseContext) => void;
+	enterOrderSpecificationRewrite?: (ctx: OrderSpecificationRewriteContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.where_clause`.
+	 * Exit a parse tree produced by `HiveSql.orderSpecificationRewrite`.
 	 * @param ctx the parse tree
 	 */
-	exitWhere_clause?: (ctx: Where_clauseContext) => void;
+	exitOrderSpecificationRewrite?: (ctx: OrderSpecificationRewriteContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.group_by_clause`.
+	 * Enter a parse tree produced by `HiveSql.columnRefOrder`.
 	 * @param ctx the parse tree
 	 */
-	enterGroup_by_clause?: (ctx: Group_by_clauseContext) => void;
+	enterColumnRefOrder?: (ctx: ColumnRefOrderContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.group_by_clause`.
+	 * Exit a parse tree produced by `HiveSql.columnRefOrder`.
 	 * @param ctx the parse tree
 	 */
-	exitGroup_by_clause?: (ctx: Group_by_clauseContext) => void;
+	exitColumnRefOrder?: (ctx: ColumnRefOrderContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.having_clause`.
+	 * Enter a parse tree produced by `HiveSql.columnNameType`.
 	 * @param ctx the parse tree
 	 */
-	enterHaving_clause?: (ctx: Having_clauseContext) => void;
+	enterColumnNameType?: (ctx: ColumnNameTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.having_clause`.
+	 * Exit a parse tree produced by `HiveSql.columnNameType`.
 	 * @param ctx the parse tree
 	 */
-	exitHaving_clause?: (ctx: Having_clauseContext) => void;
+	exitColumnNameType?: (ctx: ColumnNameTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.qualify_clause`.
+	 * Enter a parse tree produced by `HiveSql.columnNameTypeOrConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterQualify_clause?: (ctx: Qualify_clauseContext) => void;
+	enterColumnNameTypeOrConstraint?: (ctx: ColumnNameTypeOrConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.qualify_clause`.
+	 * Exit a parse tree produced by `HiveSql.columnNameTypeOrConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitQualify_clause?: (ctx: Qualify_clauseContext) => void;
+	exitColumnNameTypeOrConstraint?: (ctx: ColumnNameTypeOrConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.order_by_clause`.
+	 * Enter a parse tree produced by `HiveSql.tableConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterOrder_by_clause?: (ctx: Order_by_clauseContext) => void;
+	enterTableConstraint?: (ctx: TableConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.order_by_clause`.
+	 * Exit a parse tree produced by `HiveSql.tableConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitOrder_by_clause?: (ctx: Order_by_clauseContext) => void;
+	exitTableConstraint?: (ctx: TableConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_options`.
+	 * Enter a parse tree produced by `HiveSql.columnNameTypeConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_options?: (ctx: Select_optionsContext) => void;
+	enterColumnNameTypeConstraint?: (ctx: ColumnNameTypeConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_options`.
+	 * Exit a parse tree produced by `HiveSql.columnNameTypeConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_options?: (ctx: Select_optionsContext) => void;
+	exitColumnNameTypeConstraint?: (ctx: ColumnNameTypeConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.select_options_item`.
+	 * Enter a parse tree produced by `HiveSql.columnConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterSelect_options_item?: (ctx: Select_options_itemContext) => void;
+	enterColumnConstraint?: (ctx: ColumnConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.select_options_item`.
+	 * Exit a parse tree produced by `HiveSql.columnConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitSelect_options_item?: (ctx: Select_options_itemContext) => void;
+	exitColumnConstraint?: (ctx: ColumnConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.update_stmt`.
+	 * Enter a parse tree produced by `HiveSql.foreignKeyConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterUpdate_stmt?: (ctx: Update_stmtContext) => void;
+	enterForeignKeyConstraint?: (ctx: ForeignKeyConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.update_stmt`.
+	 * Exit a parse tree produced by `HiveSql.foreignKeyConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitUpdate_stmt?: (ctx: Update_stmtContext) => void;
+	exitForeignKeyConstraint?: (ctx: ForeignKeyConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.update_assignment`.
+	 * Enter a parse tree produced by `HiveSql.colConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterUpdate_assignment?: (ctx: Update_assignmentContext) => void;
+	enterColConstraint?: (ctx: ColConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.update_assignment`.
+	 * Exit a parse tree produced by `HiveSql.colConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitUpdate_assignment?: (ctx: Update_assignmentContext) => void;
+	exitColConstraint?: (ctx: ColConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.update_table`.
+	 * Enter a parse tree produced by `HiveSql.alterColumnConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterUpdate_table?: (ctx: Update_tableContext) => void;
+	enterAlterColumnConstraint?: (ctx: AlterColumnConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.update_table`.
+	 * Exit a parse tree produced by `HiveSql.alterColumnConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitUpdate_table?: (ctx: Update_tableContext) => void;
+	exitAlterColumnConstraint?: (ctx: AlterColumnConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.update_upsert`.
+	 * Enter a parse tree produced by `HiveSql.alterForeignKeyConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterUpdate_upsert?: (ctx: Update_upsertContext) => void;
+	enterAlterForeignKeyConstraint?: (ctx: AlterForeignKeyConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.update_upsert`.
+	 * Exit a parse tree produced by `HiveSql.alterForeignKeyConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitUpdate_upsert?: (ctx: Update_upsertContext) => void;
+	exitAlterForeignKeyConstraint?: (ctx: AlterForeignKeyConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.merge_stmt`.
+	 * Enter a parse tree produced by `HiveSql.alterColConstraint`.
 	 * @param ctx the parse tree
 	 */
-	enterMerge_stmt?: (ctx: Merge_stmtContext) => void;
+	enterAlterColConstraint?: (ctx: AlterColConstraintContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.merge_stmt`.
+	 * Exit a parse tree produced by `HiveSql.alterColConstraint`.
 	 * @param ctx the parse tree
 	 */
-	exitMerge_stmt?: (ctx: Merge_stmtContext) => void;
+	exitAlterColConstraint?: (ctx: AlterColConstraintContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.merge_table`.
+	 * Enter a parse tree produced by `HiveSql.columnConstraintType`.
 	 * @param ctx the parse tree
 	 */
-	enterMerge_table?: (ctx: Merge_tableContext) => void;
+	enterColumnConstraintType?: (ctx: ColumnConstraintTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.merge_table`.
+	 * Exit a parse tree produced by `HiveSql.columnConstraintType`.
 	 * @param ctx the parse tree
 	 */
-	exitMerge_table?: (ctx: Merge_tableContext) => void;
+	exitColumnConstraintType?: (ctx: ColumnConstraintTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.merge_condition`.
+	 * Enter a parse tree produced by `HiveSql.defaultVal`.
 	 * @param ctx the parse tree
 	 */
-	enterMerge_condition?: (ctx: Merge_conditionContext) => void;
+	enterDefaultVal?: (ctx: DefaultValContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.merge_condition`.
+	 * Exit a parse tree produced by `HiveSql.defaultVal`.
 	 * @param ctx the parse tree
 	 */
-	exitMerge_condition?: (ctx: Merge_conditionContext) => void;
+	exitDefaultVal?: (ctx: DefaultValContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.merge_action`.
+	 * Enter a parse tree produced by `HiveSql.tableConstraintType`.
 	 * @param ctx the parse tree
 	 */
-	enterMerge_action?: (ctx: Merge_actionContext) => void;
+	enterTableConstraintType?: (ctx: TableConstraintTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.merge_action`.
+	 * Exit a parse tree produced by `HiveSql.tableConstraintType`.
 	 * @param ctx the parse tree
 	 */
-	exitMerge_action?: (ctx: Merge_actionContext) => void;
+	exitTableConstraintType?: (ctx: TableConstraintTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.delete_stmt`.
+	 * Enter a parse tree produced by `HiveSql.constraintOptsCreate`.
 	 * @param ctx the parse tree
 	 */
-	enterDelete_stmt?: (ctx: Delete_stmtContext) => void;
+	enterConstraintOptsCreate?: (ctx: ConstraintOptsCreateContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.delete_stmt`.
+	 * Exit a parse tree produced by `HiveSql.constraintOptsCreate`.
 	 * @param ctx the parse tree
 	 */
-	exitDelete_stmt?: (ctx: Delete_stmtContext) => void;
+	exitConstraintOptsCreate?: (ctx: ConstraintOptsCreateContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.delete_alias`.
+	 * Enter a parse tree produced by `HiveSql.constraintOptsAlter`.
 	 * @param ctx the parse tree
 	 */
-	enterDelete_alias?: (ctx: Delete_aliasContext) => void;
+	enterConstraintOptsAlter?: (ctx: ConstraintOptsAlterContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.delete_alias`.
+	 * Exit a parse tree produced by `HiveSql.constraintOptsAlter`.
 	 * @param ctx the parse tree
 	 */
-	exitDelete_alias?: (ctx: Delete_aliasContext) => void;
+	exitConstraintOptsAlter?: (ctx: ConstraintOptsAlterContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.describe_stmt`.
+	 * Enter a parse tree produced by `HiveSql.columnNameColonType`.
 	 * @param ctx the parse tree
 	 */
-	enterDescribe_stmt?: (ctx: Describe_stmtContext) => void;
+	enterColumnNameColonType?: (ctx: ColumnNameColonTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.describe_stmt`.
+	 * Exit a parse tree produced by `HiveSql.columnNameColonType`.
 	 * @param ctx the parse tree
 	 */
-	exitDescribe_stmt?: (ctx: Describe_stmtContext) => void;
+	exitColumnNameColonType?: (ctx: ColumnNameColonTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_expr`.
+	 * Enter a parse tree produced by `HiveSql.colType`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_expr?: (ctx: Bool_exprContext) => void;
+	enterColType?: (ctx: ColTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_expr`.
+	 * Exit a parse tree produced by `HiveSql.colType`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_expr?: (ctx: Bool_exprContext) => void;
+	exitColType?: (ctx: ColTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_expr_atom`.
+	 * Enter a parse tree produced by `HiveSql.colTypeList`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_expr_atom?: (ctx: Bool_expr_atomContext) => void;
+	enterColTypeList?: (ctx: ColTypeListContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_expr_atom`.
+	 * Exit a parse tree produced by `HiveSql.colTypeList`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_expr_atom?: (ctx: Bool_expr_atomContext) => void;
+	exitColTypeList?: (ctx: ColTypeListContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_expr_unary`.
+	 * Enter a parse tree produced by `HiveSql.type`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_expr_unary?: (ctx: Bool_expr_unaryContext) => void;
+	enterType?: (ctx: TypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_expr_unary`.
+	 * Exit a parse tree produced by `HiveSql.type`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_expr_unary?: (ctx: Bool_expr_unaryContext) => void;
+	exitType?: (ctx: TypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_expr_single_in`.
+	 * Enter a parse tree produced by `HiveSql.primitiveType`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_expr_single_in?: (ctx: Bool_expr_single_inContext) => void;
+	enterPrimitiveType?: (ctx: PrimitiveTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_expr_single_in`.
+	 * Exit a parse tree produced by `HiveSql.primitiveType`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_expr_single_in?: (ctx: Bool_expr_single_inContext) => void;
+	exitPrimitiveType?: (ctx: PrimitiveTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_expr_multi_in`.
+	 * Enter a parse tree produced by `HiveSql.listType`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_expr_multi_in?: (ctx: Bool_expr_multi_inContext) => void;
+	enterListType?: (ctx: ListTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_expr_multi_in`.
+	 * Exit a parse tree produced by `HiveSql.listType`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_expr_multi_in?: (ctx: Bool_expr_multi_inContext) => void;
+	exitListType?: (ctx: ListTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_expr_binary`.
+	 * Enter a parse tree produced by `HiveSql.structType`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_expr_binary?: (ctx: Bool_expr_binaryContext) => void;
+	enterStructType?: (ctx: StructTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_expr_binary`.
+	 * Exit a parse tree produced by `HiveSql.structType`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_expr_binary?: (ctx: Bool_expr_binaryContext) => void;
+	exitStructType?: (ctx: StructTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_expr_logical_operator`.
+	 * Enter a parse tree produced by `HiveSql.mapType`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_expr_logical_operator?: (ctx: Bool_expr_logical_operatorContext) => void;
+	enterMapType?: (ctx: MapTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_expr_logical_operator`.
+	 * Exit a parse tree produced by `HiveSql.mapType`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_expr_logical_operator?: (ctx: Bool_expr_logical_operatorContext) => void;
+	exitMapType?: (ctx: MapTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_expr_binary_operator`.
+	 * Enter a parse tree produced by `HiveSql.unionType`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_expr_binary_operator?: (ctx: Bool_expr_binary_operatorContext) => void;
+	enterUnionType?: (ctx: UnionTypeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_expr_binary_operator`.
+	 * Exit a parse tree produced by `HiveSql.unionType`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_expr_binary_operator?: (ctx: Bool_expr_binary_operatorContext) => void;
+	exitUnionType?: (ctx: UnionTypeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr`.
+	 * Enter a parse tree produced by `HiveSql.setOperator`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr?: (ctx: ExprContext) => void;
+	enterSetOperator?: (ctx: SetOperatorContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr`.
+	 * Exit a parse tree produced by `HiveSql.setOperator`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr?: (ctx: ExprContext) => void;
+	exitSetOperator?: (ctx: SetOperatorContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_atom`.
+	 * Enter a parse tree produced by `HiveSql.queryStatementExpression`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_atom?: (ctx: Expr_atomContext) => void;
+	enterQueryStatementExpression?: (ctx: QueryStatementExpressionContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_atom`.
+	 * Exit a parse tree produced by `HiveSql.queryStatementExpression`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_atom?: (ctx: Expr_atomContext) => void;
+	exitQueryStatementExpression?: (ctx: QueryStatementExpressionContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_interval`.
+	 * Enter a parse tree produced by `HiveSql.queryStatementExpressionBody`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_interval?: (ctx: Expr_intervalContext) => void;
+	enterQueryStatementExpressionBody?: (ctx: QueryStatementExpressionBodyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_interval`.
+	 * Exit a parse tree produced by `HiveSql.queryStatementExpressionBody`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_interval?: (ctx: Expr_intervalContext) => void;
+	exitQueryStatementExpressionBody?: (ctx: QueryStatementExpressionBodyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.interval_item`.
+	 * Enter a parse tree produced by `HiveSql.withClause`.
 	 * @param ctx the parse tree
 	 */
-	enterInterval_item?: (ctx: Interval_itemContext) => void;
+	enterWithClause?: (ctx: WithClauseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.interval_item`.
+	 * Exit a parse tree produced by `HiveSql.withClause`.
 	 * @param ctx the parse tree
 	 */
-	exitInterval_item?: (ctx: Interval_itemContext) => void;
+	exitWithClause?: (ctx: WithClauseContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_concat`.
+	 * Enter a parse tree produced by `HiveSql.cteStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_concat?: (ctx: Expr_concatContext) => void;
+	enterCteStatement?: (ctx: CteStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_concat`.
+	 * Exit a parse tree produced by `HiveSql.cteStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_concat?: (ctx: Expr_concatContext) => void;
+	exitCteStatement?: (ctx: CteStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_concat_item`.
+	 * Enter a parse tree produced by `HiveSql.fromStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_concat_item?: (ctx: Expr_concat_itemContext) => void;
+	enterFromStatement?: (ctx: FromStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_concat_item`.
+	 * Exit a parse tree produced by `HiveSql.fromStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_concat_item?: (ctx: Expr_concat_itemContext) => void;
+	exitFromStatement?: (ctx: FromStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_case`.
+	 * Enter a parse tree produced by `HiveSql.singleFromStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_case?: (ctx: Expr_caseContext) => void;
+	enterSingleFromStatement?: (ctx: SingleFromStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_case`.
+	 * Exit a parse tree produced by `HiveSql.singleFromStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_case?: (ctx: Expr_caseContext) => void;
+	exitSingleFromStatement?: (ctx: SingleFromStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_case_simple`.
+	 * Enter a parse tree produced by `HiveSql.regularBody`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_case_simple?: (ctx: Expr_case_simpleContext) => void;
+	enterRegularBody?: (ctx: RegularBodyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_case_simple`.
+	 * Exit a parse tree produced by `HiveSql.regularBody`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_case_simple?: (ctx: Expr_case_simpleContext) => void;
+	exitRegularBody?: (ctx: RegularBodyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_case_searched`.
+	 * Enter a parse tree produced by `HiveSql.atomSelectStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_case_searched?: (ctx: Expr_case_searchedContext) => void;
+	enterAtomSelectStatement?: (ctx: AtomSelectStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_case_searched`.
+	 * Exit a parse tree produced by `HiveSql.atomSelectStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_case_searched?: (ctx: Expr_case_searchedContext) => void;
+	exitAtomSelectStatement?: (ctx: AtomSelectStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_cursor_attribute`.
+	 * Enter a parse tree produced by `HiveSql.selectStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_cursor_attribute?: (ctx: Expr_cursor_attributeContext) => void;
+	enterSelectStatement?: (ctx: SelectStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_cursor_attribute`.
+	 * Exit a parse tree produced by `HiveSql.selectStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_cursor_attribute?: (ctx: Expr_cursor_attributeContext) => void;
+	exitSelectStatement?: (ctx: SelectStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_agg_window_func`.
+	 * Enter a parse tree produced by `HiveSql.setOpSelectStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_agg_window_func?: (ctx: Expr_agg_window_funcContext) => void;
+	enterSetOpSelectStatement?: (ctx: SetOpSelectStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_agg_window_func`.
+	 * Exit a parse tree produced by `HiveSql.setOpSelectStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_agg_window_func?: (ctx: Expr_agg_window_funcContext) => void;
+	exitSetOpSelectStatement?: (ctx: SetOpSelectStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_func_all_distinct`.
+	 * Enter a parse tree produced by `HiveSql.selectStatementWithCTE`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_func_all_distinct?: (ctx: Expr_func_all_distinctContext) => void;
+	enterSelectStatementWithCTE?: (ctx: SelectStatementWithCTEContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_func_all_distinct`.
+	 * Exit a parse tree produced by `HiveSql.selectStatementWithCTE`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_func_all_distinct?: (ctx: Expr_func_all_distinctContext) => void;
+	exitSelectStatementWithCTE?: (ctx: SelectStatementWithCTEContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_func_over_clause`.
+	 * Enter a parse tree produced by `HiveSql.body`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_func_over_clause?: (ctx: Expr_func_over_clauseContext) => void;
+	enterBody?: (ctx: BodyContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_func_over_clause`.
+	 * Exit a parse tree produced by `HiveSql.body`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_func_over_clause?: (ctx: Expr_func_over_clauseContext) => void;
+	exitBody?: (ctx: BodyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_func_partition_by_clause`.
+	 * Enter a parse tree produced by `HiveSql.insertClause`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_func_partition_by_clause?: (ctx: Expr_func_partition_by_clauseContext) => void;
+	enterInsertClause?: (ctx: InsertClauseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_func_partition_by_clause`.
+	 * Exit a parse tree produced by `HiveSql.insertClause`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_func_partition_by_clause?: (ctx: Expr_func_partition_by_clauseContext) => void;
+	exitInsertClause?: (ctx: InsertClauseContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_spec_func`.
+	 * Enter a parse tree produced by `HiveSql.destination`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_spec_func?: (ctx: Expr_spec_funcContext) => void;
+	enterDestination?: (ctx: DestinationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_spec_func`.
+	 * Exit a parse tree produced by `HiveSql.destination`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_spec_func?: (ctx: Expr_spec_funcContext) => void;
+	exitDestination?: (ctx: DestinationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_func`.
+	 * Enter a parse tree produced by `HiveSql.limitClause`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_func?: (ctx: Expr_funcContext) => void;
+	enterLimitClause?: (ctx: LimitClauseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_func`.
+	 * Exit a parse tree produced by `HiveSql.limitClause`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_func?: (ctx: Expr_funcContext) => void;
+	exitLimitClause?: (ctx: LimitClauseContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_func_params`.
+	 * Enter a parse tree produced by `HiveSql.deleteStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_func_params?: (ctx: Expr_func_paramsContext) => void;
+	enterDeleteStatement?: (ctx: DeleteStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_func_params`.
+	 * Exit a parse tree produced by `HiveSql.deleteStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_func_params?: (ctx: Expr_func_paramsContext) => void;
+	exitDeleteStatement?: (ctx: DeleteStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.func_param`.
+	 * Enter a parse tree produced by `HiveSql.columnAssignmentClause`.
 	 * @param ctx the parse tree
 	 */
-	enterFunc_param?: (ctx: Func_paramContext) => void;
+	enterColumnAssignmentClause?: (ctx: ColumnAssignmentClauseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.func_param`.
+	 * Exit a parse tree produced by `HiveSql.columnAssignmentClause`.
 	 * @param ctx the parse tree
 	 */
-	exitFunc_param?: (ctx: Func_paramContext) => void;
+	exitColumnAssignmentClause?: (ctx: ColumnAssignmentClauseContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_select`.
+	 * Enter a parse tree produced by `HiveSql.precedencePlusExpressionOrDefault`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_select?: (ctx: Expr_selectContext) => void;
+	enterPrecedencePlusExpressionOrDefault?: (ctx: PrecedencePlusExpressionOrDefaultContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_select`.
+	 * Exit a parse tree produced by `HiveSql.precedencePlusExpressionOrDefault`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_select?: (ctx: Expr_selectContext) => void;
+	exitPrecedencePlusExpressionOrDefault?: (ctx: PrecedencePlusExpressionOrDefaultContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.expr_file`.
+	 * Enter a parse tree produced by `HiveSql.setColumnsClause`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr_file?: (ctx: Expr_fileContext) => void;
+	enterSetColumnsClause?: (ctx: SetColumnsClauseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.expr_file`.
+	 * Exit a parse tree produced by `HiveSql.setColumnsClause`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr_file?: (ctx: Expr_fileContext) => void;
+	exitSetColumnsClause?: (ctx: SetColumnsClauseContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.hive`.
+	 * Enter a parse tree produced by `HiveSql.updateStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterHive?: (ctx: HiveContext) => void;
+	enterUpdateStatement?: (ctx: UpdateStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.hive`.
+	 * Exit a parse tree produced by `HiveSql.updateStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitHive?: (ctx: HiveContext) => void;
+	exitUpdateStatement?: (ctx: UpdateStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.hive_item`.
+	 * Enter a parse tree produced by `HiveSql.sqlTransactionStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterHive_item?: (ctx: Hive_itemContext) => void;
+	enterSqlTransactionStatement?: (ctx: SqlTransactionStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.hive_item`.
+	 * Exit a parse tree produced by `HiveSql.sqlTransactionStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitHive_item?: (ctx: Hive_itemContext) => void;
+	exitSqlTransactionStatement?: (ctx: SqlTransactionStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.host`.
+	 * Enter a parse tree produced by `HiveSql.startTransactionStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterHost?: (ctx: HostContext) => void;
+	enterStartTransactionStatement?: (ctx: StartTransactionStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.host`.
+	 * Exit a parse tree produced by `HiveSql.startTransactionStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitHost?: (ctx: HostContext) => void;
+	exitStartTransactionStatement?: (ctx: StartTransactionStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.host_cmd`.
+	 * Enter a parse tree produced by `HiveSql.transactionMode`.
 	 * @param ctx the parse tree
 	 */
-	enterHost_cmd?: (ctx: Host_cmdContext) => void;
+	enterTransactionMode?: (ctx: TransactionModeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.host_cmd`.
+	 * Exit a parse tree produced by `HiveSql.transactionMode`.
 	 * @param ctx the parse tree
 	 */
-	exitHost_cmd?: (ctx: Host_cmdContext) => void;
+	exitTransactionMode?: (ctx: TransactionModeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.host_stmt`.
+	 * Enter a parse tree produced by `HiveSql.transactionAccessMode`.
 	 * @param ctx the parse tree
 	 */
-	enterHost_stmt?: (ctx: Host_stmtContext) => void;
+	enterTransactionAccessMode?: (ctx: TransactionAccessModeContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.host_stmt`.
+	 * Exit a parse tree produced by `HiveSql.transactionAccessMode`.
 	 * @param ctx the parse tree
 	 */
-	exitHost_stmt?: (ctx: Host_stmtContext) => void;
+	exitTransactionAccessMode?: (ctx: TransactionAccessModeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.file_name`.
+	 * Enter a parse tree produced by `HiveSql.isolationLevel`.
 	 * @param ctx the parse tree
 	 */
-	enterFile_name?: (ctx: File_nameContext) => void;
+	enterIsolationLevel?: (ctx: IsolationLevelContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.file_name`.
+	 * Exit a parse tree produced by `HiveSql.isolationLevel`.
 	 * @param ctx the parse tree
 	 */
-	exitFile_name?: (ctx: File_nameContext) => void;
+	exitIsolationLevel?: (ctx: IsolationLevelContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.date_literal`.
+	 * Enter a parse tree produced by `HiveSql.levelOfIsolation`.
 	 * @param ctx the parse tree
 	 */
-	enterDate_literal?: (ctx: Date_literalContext) => void;
+	enterLevelOfIsolation?: (ctx: LevelOfIsolationContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.date_literal`.
+	 * Exit a parse tree produced by `HiveSql.levelOfIsolation`.
 	 * @param ctx the parse tree
 	 */
-	exitDate_literal?: (ctx: Date_literalContext) => void;
+	exitLevelOfIsolation?: (ctx: LevelOfIsolationContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.timestamp_literal`.
+	 * Enter a parse tree produced by `HiveSql.commitStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterTimestamp_literal?: (ctx: Timestamp_literalContext) => void;
+	enterCommitStatement?: (ctx: CommitStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.timestamp_literal`.
+	 * Exit a parse tree produced by `HiveSql.commitStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitTimestamp_literal?: (ctx: Timestamp_literalContext) => void;
+	exitCommitStatement?: (ctx: CommitStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.ident`.
+	 * Enter a parse tree produced by `HiveSql.rollbackStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterIdent?: (ctx: IdentContext) => void;
+	enterRollbackStatement?: (ctx: RollbackStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.ident`.
+	 * Exit a parse tree produced by `HiveSql.rollbackStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitIdent?: (ctx: IdentContext) => void;
+	exitRollbackStatement?: (ctx: RollbackStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.string`.
+	 * Enter a parse tree produced by `HiveSql.setAutoCommitStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterString?: (ctx: StringContext) => void;
+	enterSetAutoCommitStatement?: (ctx: SetAutoCommitStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.string`.
+	 * Exit a parse tree produced by `HiveSql.setAutoCommitStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitString?: (ctx: StringContext) => void;
+	exitSetAutoCommitStatement?: (ctx: SetAutoCommitStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.int_number`.
+	 * Enter a parse tree produced by `HiveSql.abortTransactionStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterInt_number?: (ctx: Int_numberContext) => void;
+	enterAbortTransactionStatement?: (ctx: AbortTransactionStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.int_number`.
+	 * Exit a parse tree produced by `HiveSql.abortTransactionStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitInt_number?: (ctx: Int_numberContext) => void;
+	exitAbortTransactionStatement?: (ctx: AbortTransactionStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.dec_number`.
+	 * Enter a parse tree produced by `HiveSql.abortCompactionStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterDec_number?: (ctx: Dec_numberContext) => void;
+	enterAbortCompactionStatement?: (ctx: AbortCompactionStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.dec_number`.
+	 * Exit a parse tree produced by `HiveSql.abortCompactionStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitDec_number?: (ctx: Dec_numberContext) => void;
+	exitAbortCompactionStatement?: (ctx: AbortCompactionStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.bool_literal`.
+	 * Enter a parse tree produced by `HiveSql.mergeStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterBool_literal?: (ctx: Bool_literalContext) => void;
+	enterMergeStatement?: (ctx: MergeStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.bool_literal`.
+	 * Exit a parse tree produced by `HiveSql.mergeStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitBool_literal?: (ctx: Bool_literalContext) => void;
+	exitMergeStatement?: (ctx: MergeStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.null_const`.
+	 * Enter a parse tree produced by `HiveSql.whenClauses`.
 	 * @param ctx the parse tree
 	 */
-	enterNull_const?: (ctx: Null_constContext) => void;
+	enterWhenClauses?: (ctx: WhenClausesContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.null_const`.
+	 * Exit a parse tree produced by `HiveSql.whenClauses`.
 	 * @param ctx the parse tree
 	 */
-	exitNull_const?: (ctx: Null_constContext) => void;
+	exitWhenClauses?: (ctx: WhenClausesContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `HiveSql.non_reserved_words`.
+	 * Enter a parse tree produced by `HiveSql.whenNotMatchedClause`.
 	 * @param ctx the parse tree
 	 */
-	enterNon_reserved_words?: (ctx: Non_reserved_wordsContext) => void;
+	enterWhenNotMatchedClause?: (ctx: WhenNotMatchedClauseContext) => void;
 	/**
-	 * Exit a parse tree produced by `HiveSql.non_reserved_words`.
+	 * Exit a parse tree produced by `HiveSql.whenNotMatchedClause`.
 	 * @param ctx the parse tree
 	 */
-	exitNon_reserved_words?: (ctx: Non_reserved_wordsContext) => void;
+	exitWhenNotMatchedClause?: (ctx: WhenNotMatchedClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.whenMatchedAndClause`.
+	 * @param ctx the parse tree
+	 */
+	enterWhenMatchedAndClause?: (ctx: WhenMatchedAndClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.whenMatchedAndClause`.
+	 * @param ctx the parse tree
+	 */
+	exitWhenMatchedAndClause?: (ctx: WhenMatchedAndClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.whenMatchedThenClause`.
+	 * @param ctx the parse tree
+	 */
+	enterWhenMatchedThenClause?: (ctx: WhenMatchedThenClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.whenMatchedThenClause`.
+	 * @param ctx the parse tree
+	 */
+	exitWhenMatchedThenClause?: (ctx: WhenMatchedThenClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.updateOrDelete`.
+	 * @param ctx the parse tree
+	 */
+	enterUpdateOrDelete?: (ctx: UpdateOrDeleteContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.updateOrDelete`.
+	 * @param ctx the parse tree
+	 */
+	exitUpdateOrDelete?: (ctx: UpdateOrDeleteContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.killQueryStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterKillQueryStatement?: (ctx: KillQueryStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.killQueryStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitKillQueryStatement?: (ctx: KillQueryStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.compactionId`.
+	 * @param ctx the parse tree
+	 */
+	enterCompactionId?: (ctx: CompactionIdContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.compactionId`.
+	 * @param ctx the parse tree
+	 */
+	exitCompactionId?: (ctx: CompactionIdContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.compactionPool`.
+	 * @param ctx the parse tree
+	 */
+	enterCompactionPool?: (ctx: CompactionPoolContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.compactionPool`.
+	 * @param ctx the parse tree
+	 */
+	exitCompactionPool?: (ctx: CompactionPoolContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.compactionType`.
+	 * @param ctx the parse tree
+	 */
+	enterCompactionType?: (ctx: CompactionTypeContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.compactionType`.
+	 * @param ctx the parse tree
+	 */
+	exitCompactionType?: (ctx: CompactionTypeContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.compactionStatus`.
+	 * @param ctx the parse tree
+	 */
+	enterCompactionStatus?: (ctx: CompactionStatusContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.compactionStatus`.
+	 * @param ctx the parse tree
+	 */
+	exitCompactionStatus?: (ctx: CompactionStatusContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatement?: (ctx: AlterStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatement?: (ctx: AlterStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterTableStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterTableStatementSuffix?: (ctx: AlterTableStatementSuffixContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterTableStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterTableStatementSuffix?: (ctx: AlterTableStatementSuffixContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterTblPartitionStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterTblPartitionStatementSuffix?: (ctx: AlterTblPartitionStatementSuffixContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterTblPartitionStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterTblPartitionStatementSuffix?: (ctx: AlterTblPartitionStatementSuffixContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementPartitionKeyType`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementPartitionKeyType?: (ctx: AlterStatementPartitionKeyTypeContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementPartitionKeyType`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementPartitionKeyType?: (ctx: AlterStatementPartitionKeyTypeContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterViewStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterViewStatementSuffix?: (ctx: AlterViewStatementSuffixContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterViewStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterViewStatementSuffix?: (ctx: AlterViewStatementSuffixContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterMaterializedViewStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterMaterializedViewStatementSuffix?: (ctx: AlterMaterializedViewStatementSuffixContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterMaterializedViewStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterMaterializedViewStatementSuffix?: (ctx: AlterMaterializedViewStatementSuffixContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterMaterializedViewSuffixRewrite`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterMaterializedViewSuffixRewrite?: (ctx: AlterMaterializedViewSuffixRewriteContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterMaterializedViewSuffixRewrite`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterMaterializedViewSuffixRewrite?: (ctx: AlterMaterializedViewSuffixRewriteContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterMaterializedViewSuffixRebuild`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterMaterializedViewSuffixRebuild?: (ctx: AlterMaterializedViewSuffixRebuildContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterMaterializedViewSuffixRebuild`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterMaterializedViewSuffixRebuild?: (ctx: AlterMaterializedViewSuffixRebuildContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDatabaseStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDatabaseStatementSuffix?: (ctx: AlterDatabaseStatementSuffixContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDatabaseStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDatabaseStatementSuffix?: (ctx: AlterDatabaseStatementSuffixContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDatabaseSuffixProperties`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDatabaseSuffixProperties?: (ctx: AlterDatabaseSuffixPropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDatabaseSuffixProperties`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDatabaseSuffixProperties?: (ctx: AlterDatabaseSuffixPropertiesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDatabaseSuffixSetOwner`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDatabaseSuffixSetOwner?: (ctx: AlterDatabaseSuffixSetOwnerContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDatabaseSuffixSetOwner`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDatabaseSuffixSetOwner?: (ctx: AlterDatabaseSuffixSetOwnerContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDatabaseSuffixSetLocation`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDatabaseSuffixSetLocation?: (ctx: AlterDatabaseSuffixSetLocationContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDatabaseSuffixSetLocation`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDatabaseSuffixSetLocation?: (ctx: AlterDatabaseSuffixSetLocationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDatabaseSuffixSetManagedLocation`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDatabaseSuffixSetManagedLocation?: (ctx: AlterDatabaseSuffixSetManagedLocationContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDatabaseSuffixSetManagedLocation`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDatabaseSuffixSetManagedLocation?: (ctx: AlterDatabaseSuffixSetManagedLocationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixRename`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixRename?: (ctx: AlterStatementSuffixRenameContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixRename`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixRename?: (ctx: AlterStatementSuffixRenameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixAddCol`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixAddCol?: (ctx: AlterStatementSuffixAddColContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixAddCol`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixAddCol?: (ctx: AlterStatementSuffixAddColContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixAddConstraint`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixAddConstraint?: (ctx: AlterStatementSuffixAddConstraintContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixAddConstraint`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixAddConstraint?: (ctx: AlterStatementSuffixAddConstraintContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixUpdateColumns`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixUpdateColumns?: (ctx: AlterStatementSuffixUpdateColumnsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixUpdateColumns`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixUpdateColumns?: (ctx: AlterStatementSuffixUpdateColumnsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixDropConstraint`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixDropConstraint?: (ctx: AlterStatementSuffixDropConstraintContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixDropConstraint`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixDropConstraint?: (ctx: AlterStatementSuffixDropConstraintContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixRenameCol`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixRenameCol?: (ctx: AlterStatementSuffixRenameColContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixRenameCol`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixRenameCol?: (ctx: AlterStatementSuffixRenameColContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixUpdateStatsCol`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixUpdateStatsCol?: (ctx: AlterStatementSuffixUpdateStatsColContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixUpdateStatsCol`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixUpdateStatsCol?: (ctx: AlterStatementSuffixUpdateStatsColContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixUpdateStats`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixUpdateStats?: (ctx: AlterStatementSuffixUpdateStatsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixUpdateStats`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixUpdateStats?: (ctx: AlterStatementSuffixUpdateStatsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementChangeColPosition`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementChangeColPosition?: (ctx: AlterStatementChangeColPositionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementChangeColPosition`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementChangeColPosition?: (ctx: AlterStatementChangeColPositionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixAddPartitions`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixAddPartitions?: (ctx: AlterStatementSuffixAddPartitionsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixAddPartitions`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixAddPartitions?: (ctx: AlterStatementSuffixAddPartitionsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixAddPartitionsElement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixAddPartitionsElement?: (ctx: AlterStatementSuffixAddPartitionsElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixAddPartitionsElement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixAddPartitionsElement?: (ctx: AlterStatementSuffixAddPartitionsElementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixTouch`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixTouch?: (ctx: AlterStatementSuffixTouchContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixTouch`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixTouch?: (ctx: AlterStatementSuffixTouchContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixArchive`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixArchive?: (ctx: AlterStatementSuffixArchiveContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixArchive`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixArchive?: (ctx: AlterStatementSuffixArchiveContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixUnArchive`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixUnArchive?: (ctx: AlterStatementSuffixUnArchiveContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixUnArchive`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixUnArchive?: (ctx: AlterStatementSuffixUnArchiveContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionLocation`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionLocation?: (ctx: PartitionLocationContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionLocation`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionLocation?: (ctx: PartitionLocationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixDropPartitions`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixDropPartitions?: (ctx: AlterStatementSuffixDropPartitionsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixDropPartitions`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixDropPartitions?: (ctx: AlterStatementSuffixDropPartitionsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixProperties`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixProperties?: (ctx: AlterStatementSuffixPropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixProperties`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixProperties?: (ctx: AlterStatementSuffixPropertiesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterViewSuffixProperties`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterViewSuffixProperties?: (ctx: AlterViewSuffixPropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterViewSuffixProperties`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterViewSuffixProperties?: (ctx: AlterViewSuffixPropertiesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixSerdeProperties`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixSerdeProperties?: (ctx: AlterStatementSuffixSerdePropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixSerdeProperties`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixSerdeProperties?: (ctx: AlterStatementSuffixSerdePropertiesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tablePartitionPrefix`.
+	 * @param ctx the parse tree
+	 */
+	enterTablePartitionPrefix?: (ctx: TablePartitionPrefixContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tablePartitionPrefix`.
+	 * @param ctx the parse tree
+	 */
+	exitTablePartitionPrefix?: (ctx: TablePartitionPrefixContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixFileFormat`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixFileFormat?: (ctx: AlterStatementSuffixFileFormatContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixFileFormat`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixFileFormat?: (ctx: AlterStatementSuffixFileFormatContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixClusterbySortby`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixClusterbySortby?: (ctx: AlterStatementSuffixClusterbySortbyContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixClusterbySortby`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixClusterbySortby?: (ctx: AlterStatementSuffixClusterbySortbyContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterTblPartitionStatementSuffixSkewedLocation`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterTblPartitionStatementSuffixSkewedLocation?: (ctx: AlterTblPartitionStatementSuffixSkewedLocationContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterTblPartitionStatementSuffixSkewedLocation`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterTblPartitionStatementSuffixSkewedLocation?: (ctx: AlterTblPartitionStatementSuffixSkewedLocationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.skewedLocations`.
+	 * @param ctx the parse tree
+	 */
+	enterSkewedLocations?: (ctx: SkewedLocationsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.skewedLocations`.
+	 * @param ctx the parse tree
+	 */
+	exitSkewedLocations?: (ctx: SkewedLocationsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.skewedLocationsList`.
+	 * @param ctx the parse tree
+	 */
+	enterSkewedLocationsList?: (ctx: SkewedLocationsListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.skewedLocationsList`.
+	 * @param ctx the parse tree
+	 */
+	exitSkewedLocationsList?: (ctx: SkewedLocationsListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.skewedLocationMap`.
+	 * @param ctx the parse tree
+	 */
+	enterSkewedLocationMap?: (ctx: SkewedLocationMapContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.skewedLocationMap`.
+	 * @param ctx the parse tree
+	 */
+	exitSkewedLocationMap?: (ctx: SkewedLocationMapContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixLocation`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixLocation?: (ctx: AlterStatementSuffixLocationContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixLocation`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixLocation?: (ctx: AlterStatementSuffixLocationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixSkewedby`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixSkewedby?: (ctx: AlterStatementSuffixSkewedbyContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixSkewedby`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixSkewedby?: (ctx: AlterStatementSuffixSkewedbyContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixExchangePartition`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixExchangePartition?: (ctx: AlterStatementSuffixExchangePartitionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixExchangePartition`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixExchangePartition?: (ctx: AlterStatementSuffixExchangePartitionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixRenamePart`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixRenamePart?: (ctx: AlterStatementSuffixRenamePartContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixRenamePart`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixRenamePart?: (ctx: AlterStatementSuffixRenamePartContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixStatsPart`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixStatsPart?: (ctx: AlterStatementSuffixStatsPartContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixStatsPart`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixStatsPart?: (ctx: AlterStatementSuffixStatsPartContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixMergeFiles`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixMergeFiles?: (ctx: AlterStatementSuffixMergeFilesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixMergeFiles`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixMergeFiles?: (ctx: AlterStatementSuffixMergeFilesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixBucketNum`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixBucketNum?: (ctx: AlterStatementSuffixBucketNumContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixBucketNum`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixBucketNum?: (ctx: AlterStatementSuffixBucketNumContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.blocking`.
+	 * @param ctx the parse tree
+	 */
+	enterBlocking?: (ctx: BlockingContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.blocking`.
+	 * @param ctx the parse tree
+	 */
+	exitBlocking?: (ctx: BlockingContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.compactPool`.
+	 * @param ctx the parse tree
+	 */
+	enterCompactPool?: (ctx: CompactPoolContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.compactPool`.
+	 * @param ctx the parse tree
+	 */
+	exitCompactPool?: (ctx: CompactPoolContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixCompact`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixCompact?: (ctx: AlterStatementSuffixCompactContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixCompact`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixCompact?: (ctx: AlterStatementSuffixCompactContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixSetOwner`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixSetOwner?: (ctx: AlterStatementSuffixSetOwnerContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixSetOwner`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixSetOwner?: (ctx: AlterStatementSuffixSetOwnerContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixSetPartSpec`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixSetPartSpec?: (ctx: AlterStatementSuffixSetPartSpecContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixSetPartSpec`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixSetPartSpec?: (ctx: AlterStatementSuffixSetPartSpecContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterStatementSuffixExecute`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixExecute?: (ctx: AlterStatementSuffixExecuteContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterStatementSuffixExecute`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixExecute?: (ctx: AlterStatementSuffixExecuteContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.fileFormat`.
+	 * @param ctx the parse tree
+	 */
+	enterFileFormat?: (ctx: FileFormatContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.fileFormat`.
+	 * @param ctx the parse tree
+	 */
+	exitFileFormat?: (ctx: FileFormatContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDataConnectorStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDataConnectorStatementSuffix?: (ctx: AlterDataConnectorStatementSuffixContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDataConnectorStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDataConnectorStatementSuffix?: (ctx: AlterDataConnectorStatementSuffixContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDataConnectorSuffixProperties`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDataConnectorSuffixProperties?: (ctx: AlterDataConnectorSuffixPropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDataConnectorSuffixProperties`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDataConnectorSuffixProperties?: (ctx: AlterDataConnectorSuffixPropertiesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDataConnectorSuffixSetOwner`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDataConnectorSuffixSetOwner?: (ctx: AlterDataConnectorSuffixSetOwnerContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDataConnectorSuffixSetOwner`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDataConnectorSuffixSetOwner?: (ctx: AlterDataConnectorSuffixSetOwnerContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterDataConnectorSuffixSetUrl`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterDataConnectorSuffixSetUrl?: (ctx: AlterDataConnectorSuffixSetUrlContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterDataConnectorSuffixSetUrl`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterDataConnectorSuffixSetUrl?: (ctx: AlterDataConnectorSuffixSetUrlContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.likeTableOrFile`.
+	 * @param ctx the parse tree
+	 */
+	enterLikeTableOrFile?: (ctx: LikeTableOrFileContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.likeTableOrFile`.
+	 * @param ctx the parse tree
+	 */
+	exitLikeTableOrFile?: (ctx: LikeTableOrFileContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.createTableStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCreateTableStatement?: (ctx: CreateTableStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.createTableStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCreateTableStatement?: (ctx: CreateTableStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.createDataConnectorStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCreateDataConnectorStatement?: (ctx: CreateDataConnectorStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.createDataConnectorStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCreateDataConnectorStatement?: (ctx: CreateDataConnectorStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dataConnectorComment`.
+	 * @param ctx the parse tree
+	 */
+	enterDataConnectorComment?: (ctx: DataConnectorCommentContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dataConnectorComment`.
+	 * @param ctx the parse tree
+	 */
+	exitDataConnectorComment?: (ctx: DataConnectorCommentContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dataConnectorUrl`.
+	 * @param ctx the parse tree
+	 */
+	enterDataConnectorUrl?: (ctx: DataConnectorUrlContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dataConnectorUrl`.
+	 * @param ctx the parse tree
+	 */
+	exitDataConnectorUrl?: (ctx: DataConnectorUrlContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dataConnectorType`.
+	 * @param ctx the parse tree
+	 */
+	enterDataConnectorType?: (ctx: DataConnectorTypeContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dataConnectorType`.
+	 * @param ctx the parse tree
+	 */
+	exitDataConnectorType?: (ctx: DataConnectorTypeContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dcProperties`.
+	 * @param ctx the parse tree
+	 */
+	enterDcProperties?: (ctx: DcPropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dcProperties`.
+	 * @param ctx the parse tree
+	 */
+	exitDcProperties?: (ctx: DcPropertiesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dropDataConnectorStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterDropDataConnectorStatement?: (ctx: DropDataConnectorStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dropDataConnectorStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitDropDataConnectorStatement?: (ctx: DropDataConnectorStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tableAllColumns`.
+	 * @param ctx the parse tree
+	 */
+	enterTableAllColumns?: (ctx: TableAllColumnsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tableAllColumns`.
+	 * @param ctx the parse tree
+	 */
+	exitTableAllColumns?: (ctx: TableAllColumnsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tableOrColumn`.
+	 * @param ctx the parse tree
+	 */
+	enterTableOrColumn?: (ctx: TableOrColumnContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tableOrColumn`.
+	 * @param ctx the parse tree
+	 */
+	exitTableOrColumn?: (ctx: TableOrColumnContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.defaultValue`.
+	 * @param ctx the parse tree
+	 */
+	enterDefaultValue?: (ctx: DefaultValueContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.defaultValue`.
+	 * @param ctx the parse tree
+	 */
+	exitDefaultValue?: (ctx: DefaultValueContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.expressionList`.
+	 * @param ctx the parse tree
+	 */
+	enterExpressionList?: (ctx: ExpressionListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.expressionList`.
+	 * @param ctx the parse tree
+	 */
+	exitExpressionList?: (ctx: ExpressionListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.aliasList`.
+	 * @param ctx the parse tree
+	 */
+	enterAliasList?: (ctx: AliasListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.aliasList`.
+	 * @param ctx the parse tree
+	 */
+	exitAliasList?: (ctx: AliasListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.fromClause`.
+	 * @param ctx the parse tree
+	 */
+	enterFromClause?: (ctx: FromClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.fromClause`.
+	 * @param ctx the parse tree
+	 */
+	exitFromClause?: (ctx: FromClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.fromSource`.
+	 * @param ctx the parse tree
+	 */
+	enterFromSource?: (ctx: FromSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.fromSource`.
+	 * @param ctx the parse tree
+	 */
+	exitFromSource?: (ctx: FromSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.atomjoinSource`.
+	 * @param ctx the parse tree
+	 */
+	enterAtomjoinSource?: (ctx: AtomjoinSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.atomjoinSource`.
+	 * @param ctx the parse tree
+	 */
+	exitAtomjoinSource?: (ctx: AtomjoinSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.joinSource`.
+	 * @param ctx the parse tree
+	 */
+	enterJoinSource?: (ctx: JoinSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.joinSource`.
+	 * @param ctx the parse tree
+	 */
+	exitJoinSource?: (ctx: JoinSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.joinSourcePart`.
+	 * @param ctx the parse tree
+	 */
+	enterJoinSourcePart?: (ctx: JoinSourcePartContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.joinSourcePart`.
+	 * @param ctx the parse tree
+	 */
+	exitJoinSourcePart?: (ctx: JoinSourcePartContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.uniqueJoinSource`.
+	 * @param ctx the parse tree
+	 */
+	enterUniqueJoinSource?: (ctx: UniqueJoinSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.uniqueJoinSource`.
+	 * @param ctx the parse tree
+	 */
+	exitUniqueJoinSource?: (ctx: UniqueJoinSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.uniqueJoinExpr`.
+	 * @param ctx the parse tree
+	 */
+	enterUniqueJoinExpr?: (ctx: UniqueJoinExprContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.uniqueJoinExpr`.
+	 * @param ctx the parse tree
+	 */
+	exitUniqueJoinExpr?: (ctx: UniqueJoinExprContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.uniqueJoinToken`.
+	 * @param ctx the parse tree
+	 */
+	enterUniqueJoinToken?: (ctx: UniqueJoinTokenContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.uniqueJoinToken`.
+	 * @param ctx the parse tree
+	 */
+	exitUniqueJoinToken?: (ctx: UniqueJoinTokenContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.joinToken`.
+	 * @param ctx the parse tree
+	 */
+	enterJoinToken?: (ctx: JoinTokenContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.joinToken`.
+	 * @param ctx the parse tree
+	 */
+	exitJoinToken?: (ctx: JoinTokenContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.lateralView`.
+	 * @param ctx the parse tree
+	 */
+	enterLateralView?: (ctx: LateralViewContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.lateralView`.
+	 * @param ctx the parse tree
+	 */
+	exitLateralView?: (ctx: LateralViewContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tableAlias`.
+	 * @param ctx the parse tree
+	 */
+	enterTableAlias?: (ctx: TableAliasContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tableAlias`.
+	 * @param ctx the parse tree
+	 */
+	exitTableAlias?: (ctx: TableAliasContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tableBucketSample`.
+	 * @param ctx the parse tree
+	 */
+	enterTableBucketSample?: (ctx: TableBucketSampleContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tableBucketSample`.
+	 * @param ctx the parse tree
+	 */
+	exitTableBucketSample?: (ctx: TableBucketSampleContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.splitSample`.
+	 * @param ctx the parse tree
+	 */
+	enterSplitSample?: (ctx: SplitSampleContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.splitSample`.
+	 * @param ctx the parse tree
+	 */
+	exitSplitSample?: (ctx: SplitSampleContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tableSample`.
+	 * @param ctx the parse tree
+	 */
+	enterTableSample?: (ctx: TableSampleContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tableSample`.
+	 * @param ctx the parse tree
+	 */
+	exitTableSample?: (ctx: TableSampleContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tableSource`.
+	 * @param ctx the parse tree
+	 */
+	enterTableSource?: (ctx: TableSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tableSource`.
+	 * @param ctx the parse tree
+	 */
+	exitTableSource?: (ctx: TableSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.asOfClause`.
+	 * @param ctx the parse tree
+	 */
+	enterAsOfClause?: (ctx: AsOfClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.asOfClause`.
+	 * @param ctx the parse tree
+	 */
+	exitAsOfClause?: (ctx: AsOfClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.uniqueJoinTableSource`.
+	 * @param ctx the parse tree
+	 */
+	enterUniqueJoinTableSource?: (ctx: UniqueJoinTableSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.uniqueJoinTableSource`.
+	 * @param ctx the parse tree
+	 */
+	exitUniqueJoinTableSource?: (ctx: UniqueJoinTableSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tableName`.
+	 * @param ctx the parse tree
+	 */
+	enterTableName?: (ctx: TableNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tableName`.
+	 * @param ctx the parse tree
+	 */
+	exitTableName?: (ctx: TableNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.viewName`.
+	 * @param ctx the parse tree
+	 */
+	enterViewName?: (ctx: ViewNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.viewName`.
+	 * @param ctx the parse tree
+	 */
+	exitViewName?: (ctx: ViewNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.subQuerySource`.
+	 * @param ctx the parse tree
+	 */
+	enterSubQuerySource?: (ctx: SubQuerySourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.subQuerySource`.
+	 * @param ctx the parse tree
+	 */
+	exitSubQuerySource?: (ctx: SubQuerySourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitioningSpec`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitioningSpec?: (ctx: PartitioningSpecContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitioningSpec`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitioningSpec?: (ctx: PartitioningSpecContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionTableFunctionSource`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionTableFunctionSource?: (ctx: PartitionTableFunctionSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionTableFunctionSource`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionTableFunctionSource?: (ctx: PartitionTableFunctionSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionedTableFunction`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionedTableFunction?: (ctx: PartitionedTableFunctionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionedTableFunction`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionedTableFunction?: (ctx: PartitionedTableFunctionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.whereClause`.
+	 * @param ctx the parse tree
+	 */
+	enterWhereClause?: (ctx: WhereClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.whereClause`.
+	 * @param ctx the parse tree
+	 */
+	exitWhereClause?: (ctx: WhereClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.searchCondition`.
+	 * @param ctx the parse tree
+	 */
+	enterSearchCondition?: (ctx: SearchConditionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.searchCondition`.
+	 * @param ctx the parse tree
+	 */
+	exitSearchCondition?: (ctx: SearchConditionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.valuesSource`.
+	 * @param ctx the parse tree
+	 */
+	enterValuesSource?: (ctx: ValuesSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.valuesSource`.
+	 * @param ctx the parse tree
+	 */
+	exitValuesSource?: (ctx: ValuesSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.valuesClause`.
+	 * @param ctx the parse tree
+	 */
+	enterValuesClause?: (ctx: ValuesClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.valuesClause`.
+	 * @param ctx the parse tree
+	 */
+	exitValuesClause?: (ctx: ValuesClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.valuesTableConstructor`.
+	 * @param ctx the parse tree
+	 */
+	enterValuesTableConstructor?: (ctx: ValuesTableConstructorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.valuesTableConstructor`.
+	 * @param ctx the parse tree
+	 */
+	exitValuesTableConstructor?: (ctx: ValuesTableConstructorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.valueRowConstructor`.
+	 * @param ctx the parse tree
+	 */
+	enterValueRowConstructor?: (ctx: ValueRowConstructorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.valueRowConstructor`.
+	 * @param ctx the parse tree
+	 */
+	exitValueRowConstructor?: (ctx: ValueRowConstructorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.firstValueRowConstructor`.
+	 * @param ctx the parse tree
+	 */
+	enterFirstValueRowConstructor?: (ctx: FirstValueRowConstructorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.firstValueRowConstructor`.
+	 * @param ctx the parse tree
+	 */
+	exitFirstValueRowConstructor?: (ctx: FirstValueRowConstructorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.virtualTableSource`.
+	 * @param ctx the parse tree
+	 */
+	enterVirtualTableSource?: (ctx: VirtualTableSourceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.virtualTableSource`.
+	 * @param ctx the parse tree
+	 */
+	exitVirtualTableSource?: (ctx: VirtualTableSourceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.selectClause`.
+	 * @param ctx the parse tree
+	 */
+	enterSelectClause?: (ctx: SelectClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.selectClause`.
+	 * @param ctx the parse tree
+	 */
+	exitSelectClause?: (ctx: SelectClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.all_distinct`.
+	 * @param ctx the parse tree
+	 */
+	enterAll_distinct?: (ctx: All_distinctContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.all_distinct`.
+	 * @param ctx the parse tree
+	 */
+	exitAll_distinct?: (ctx: All_distinctContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.selectList`.
+	 * @param ctx the parse tree
+	 */
+	enterSelectList?: (ctx: SelectListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.selectList`.
+	 * @param ctx the parse tree
+	 */
+	exitSelectList?: (ctx: SelectListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.selectTrfmClause`.
+	 * @param ctx the parse tree
+	 */
+	enterSelectTrfmClause?: (ctx: SelectTrfmClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.selectTrfmClause`.
+	 * @param ctx the parse tree
+	 */
+	exitSelectTrfmClause?: (ctx: SelectTrfmClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.selectItem`.
+	 * @param ctx the parse tree
+	 */
+	enterSelectItem?: (ctx: SelectItemContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.selectItem`.
+	 * @param ctx the parse tree
+	 */
+	exitSelectItem?: (ctx: SelectItemContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.trfmClause`.
+	 * @param ctx the parse tree
+	 */
+	enterTrfmClause?: (ctx: TrfmClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.trfmClause`.
+	 * @param ctx the parse tree
+	 */
+	exitTrfmClause?: (ctx: TrfmClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.selectExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterSelectExpression?: (ctx: SelectExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.selectExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitSelectExpression?: (ctx: SelectExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.selectExpressionList`.
+	 * @param ctx the parse tree
+	 */
+	enterSelectExpressionList?: (ctx: SelectExpressionListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.selectExpressionList`.
+	 * @param ctx the parse tree
+	 */
+	exitSelectExpressionList?: (ctx: SelectExpressionListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.window_clause`.
+	 * @param ctx the parse tree
+	 */
+	enterWindow_clause?: (ctx: Window_clauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.window_clause`.
+	 * @param ctx the parse tree
+	 */
+	exitWindow_clause?: (ctx: Window_clauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.window_defn`.
+	 * @param ctx the parse tree
+	 */
+	enterWindow_defn?: (ctx: Window_defnContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.window_defn`.
+	 * @param ctx the parse tree
+	 */
+	exitWindow_defn?: (ctx: Window_defnContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.window_specification`.
+	 * @param ctx the parse tree
+	 */
+	enterWindow_specification?: (ctx: Window_specificationContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.window_specification`.
+	 * @param ctx the parse tree
+	 */
+	exitWindow_specification?: (ctx: Window_specificationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.window_frame`.
+	 * @param ctx the parse tree
+	 */
+	enterWindow_frame?: (ctx: Window_frameContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.window_frame`.
+	 * @param ctx the parse tree
+	 */
+	exitWindow_frame?: (ctx: Window_frameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.window_range_expression`.
+	 * @param ctx the parse tree
+	 */
+	enterWindow_range_expression?: (ctx: Window_range_expressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.window_range_expression`.
+	 * @param ctx the parse tree
+	 */
+	exitWindow_range_expression?: (ctx: Window_range_expressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.window_value_expression`.
+	 * @param ctx the parse tree
+	 */
+	enterWindow_value_expression?: (ctx: Window_value_expressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.window_value_expression`.
+	 * @param ctx the parse tree
+	 */
+	exitWindow_value_expression?: (ctx: Window_value_expressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.window_frame_start_boundary`.
+	 * @param ctx the parse tree
+	 */
+	enterWindow_frame_start_boundary?: (ctx: Window_frame_start_boundaryContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.window_frame_start_boundary`.
+	 * @param ctx the parse tree
+	 */
+	exitWindow_frame_start_boundary?: (ctx: Window_frame_start_boundaryContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.window_frame_boundary`.
+	 * @param ctx the parse tree
+	 */
+	enterWindow_frame_boundary?: (ctx: Window_frame_boundaryContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.window_frame_boundary`.
+	 * @param ctx the parse tree
+	 */
+	exitWindow_frame_boundary?: (ctx: Window_frame_boundaryContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.groupByClause`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupByClause?: (ctx: GroupByClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.groupByClause`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupByClause?: (ctx: GroupByClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.groupby_expression`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupby_expression?: (ctx: Groupby_expressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.groupby_expression`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupby_expression?: (ctx: Groupby_expressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.groupByEmpty`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupByEmpty?: (ctx: GroupByEmptyContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.groupByEmpty`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupByEmpty?: (ctx: GroupByEmptyContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.rollupStandard`.
+	 * @param ctx the parse tree
+	 */
+	enterRollupStandard?: (ctx: RollupStandardContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.rollupStandard`.
+	 * @param ctx the parse tree
+	 */
+	exitRollupStandard?: (ctx: RollupStandardContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.rollupOldSyntax`.
+	 * @param ctx the parse tree
+	 */
+	enterRollupOldSyntax?: (ctx: RollupOldSyntaxContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.rollupOldSyntax`.
+	 * @param ctx the parse tree
+	 */
+	exitRollupOldSyntax?: (ctx: RollupOldSyntaxContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.groupingSetExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupingSetExpression?: (ctx: GroupingSetExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.groupingSetExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupingSetExpression?: (ctx: GroupingSetExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.groupingSetExpressionMultiple`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupingSetExpressionMultiple?: (ctx: GroupingSetExpressionMultipleContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.groupingSetExpressionMultiple`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupingSetExpressionMultiple?: (ctx: GroupingSetExpressionMultipleContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.groupingExpressionSingle`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupingExpressionSingle?: (ctx: GroupingExpressionSingleContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.groupingExpressionSingle`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupingExpressionSingle?: (ctx: GroupingExpressionSingleContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.havingClause`.
+	 * @param ctx the parse tree
+	 */
+	enterHavingClause?: (ctx: HavingClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.havingClause`.
+	 * @param ctx the parse tree
+	 */
+	exitHavingClause?: (ctx: HavingClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.qualifyClause`.
+	 * @param ctx the parse tree
+	 */
+	enterQualifyClause?: (ctx: QualifyClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.qualifyClause`.
+	 * @param ctx the parse tree
+	 */
+	exitQualifyClause?: (ctx: QualifyClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.havingCondition`.
+	 * @param ctx the parse tree
+	 */
+	enterHavingCondition?: (ctx: HavingConditionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.havingCondition`.
+	 * @param ctx the parse tree
+	 */
+	exitHavingCondition?: (ctx: HavingConditionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.expressionsInParenthesis`.
+	 * @param ctx the parse tree
+	 */
+	enterExpressionsInParenthesis?: (ctx: ExpressionsInParenthesisContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.expressionsInParenthesis`.
+	 * @param ctx the parse tree
+	 */
+	exitExpressionsInParenthesis?: (ctx: ExpressionsInParenthesisContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.expressionsNotInParenthesis`.
+	 * @param ctx the parse tree
+	 */
+	enterExpressionsNotInParenthesis?: (ctx: ExpressionsNotInParenthesisContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.expressionsNotInParenthesis`.
+	 * @param ctx the parse tree
+	 */
+	exitExpressionsNotInParenthesis?: (ctx: ExpressionsNotInParenthesisContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.expressionPart`.
+	 * @param ctx the parse tree
+	 */
+	enterExpressionPart?: (ctx: ExpressionPartContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.expressionPart`.
+	 * @param ctx the parse tree
+	 */
+	exitExpressionPart?: (ctx: ExpressionPartContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.expressionOrDefault`.
+	 * @param ctx the parse tree
+	 */
+	enterExpressionOrDefault?: (ctx: ExpressionOrDefaultContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.expressionOrDefault`.
+	 * @param ctx the parse tree
+	 */
+	exitExpressionOrDefault?: (ctx: ExpressionOrDefaultContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.firstExpressionsWithAlias`.
+	 * @param ctx the parse tree
+	 */
+	enterFirstExpressionsWithAlias?: (ctx: FirstExpressionsWithAliasContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.firstExpressionsWithAlias`.
+	 * @param ctx the parse tree
+	 */
+	exitFirstExpressionsWithAlias?: (ctx: FirstExpressionsWithAliasContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.expressionWithAlias`.
+	 * @param ctx the parse tree
+	 */
+	enterExpressionWithAlias?: (ctx: ExpressionWithAliasContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.expressionWithAlias`.
+	 * @param ctx the parse tree
+	 */
+	exitExpressionWithAlias?: (ctx: ExpressionWithAliasContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.expressions`.
+	 * @param ctx the parse tree
+	 */
+	enterExpressions?: (ctx: ExpressionsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.expressions`.
+	 * @param ctx the parse tree
+	 */
+	exitExpressions?: (ctx: ExpressionsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.columnRefOrderInParenthesis`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnRefOrderInParenthesis?: (ctx: ColumnRefOrderInParenthesisContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.columnRefOrderInParenthesis`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnRefOrderInParenthesis?: (ctx: ColumnRefOrderInParenthesisContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.columnRefOrderNotInParenthesis`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnRefOrderNotInParenthesis?: (ctx: ColumnRefOrderNotInParenthesisContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.columnRefOrderNotInParenthesis`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnRefOrderNotInParenthesis?: (ctx: ColumnRefOrderNotInParenthesisContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.orderByClause`.
+	 * @param ctx the parse tree
+	 */
+	enterOrderByClause?: (ctx: OrderByClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.orderByClause`.
+	 * @param ctx the parse tree
+	 */
+	exitOrderByClause?: (ctx: OrderByClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.clusterByClause`.
+	 * @param ctx the parse tree
+	 */
+	enterClusterByClause?: (ctx: ClusterByClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.clusterByClause`.
+	 * @param ctx the parse tree
+	 */
+	exitClusterByClause?: (ctx: ClusterByClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionByClause`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionByClause?: (ctx: PartitionByClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionByClause`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionByClause?: (ctx: PartitionByClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.distributeByClause`.
+	 * @param ctx the parse tree
+	 */
+	enterDistributeByClause?: (ctx: DistributeByClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.distributeByClause`.
+	 * @param ctx the parse tree
+	 */
+	exitDistributeByClause?: (ctx: DistributeByClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.sortByClause`.
+	 * @param ctx the parse tree
+	 */
+	enterSortByClause?: (ctx: SortByClauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.sortByClause`.
+	 * @param ctx the parse tree
+	 */
+	exitSortByClause?: (ctx: SortByClauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.trimFunction`.
+	 * @param ctx the parse tree
+	 */
+	enterTrimFunction?: (ctx: TrimFunctionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.trimFunction`.
+	 * @param ctx the parse tree
+	 */
+	exitTrimFunction?: (ctx: TrimFunctionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.function_`.
+	 * @param ctx the parse tree
+	 */
+	enterFunction_?: (ctx: Function_Context) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.function_`.
+	 * @param ctx the parse tree
+	 */
+	exitFunction_?: (ctx: Function_Context) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.null_treatment`.
+	 * @param ctx the parse tree
+	 */
+	enterNull_treatment?: (ctx: Null_treatmentContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.null_treatment`.
+	 * @param ctx the parse tree
+	 */
+	exitNull_treatment?: (ctx: Null_treatmentContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.functionName`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionName?: (ctx: FunctionNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.functionName`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionName?: (ctx: FunctionNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.castExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterCastExpression?: (ctx: CastExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.castExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitCastExpression?: (ctx: CastExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.caseExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterCaseExpression?: (ctx: CaseExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.caseExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitCaseExpression?: (ctx: CaseExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.whenExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterWhenExpression?: (ctx: WhenExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.whenExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitWhenExpression?: (ctx: WhenExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.floorExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterFloorExpression?: (ctx: FloorExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.floorExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitFloorExpression?: (ctx: FloorExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.floorDateQualifiers`.
+	 * @param ctx the parse tree
+	 */
+	enterFloorDateQualifiers?: (ctx: FloorDateQualifiersContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.floorDateQualifiers`.
+	 * @param ctx the parse tree
+	 */
+	exitFloorDateQualifiers?: (ctx: FloorDateQualifiersContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.extractExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterExtractExpression?: (ctx: ExtractExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.extractExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitExtractExpression?: (ctx: ExtractExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.timeQualifiers`.
+	 * @param ctx the parse tree
+	 */
+	enterTimeQualifiers?: (ctx: TimeQualifiersContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.timeQualifiers`.
+	 * @param ctx the parse tree
+	 */
+	exitTimeQualifiers?: (ctx: TimeQualifiersContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.constant`.
+	 * @param ctx the parse tree
+	 */
+	enterConstant?: (ctx: ConstantContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.constant`.
+	 * @param ctx the parse tree
+	 */
+	exitConstant?: (ctx: ConstantContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.prepareStmtParam`.
+	 * @param ctx the parse tree
+	 */
+	enterPrepareStmtParam?: (ctx: PrepareStmtParamContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.prepareStmtParam`.
+	 * @param ctx the parse tree
+	 */
+	exitPrepareStmtParam?: (ctx: PrepareStmtParamContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.parameterIdx`.
+	 * @param ctx the parse tree
+	 */
+	enterParameterIdx?: (ctx: ParameterIdxContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.parameterIdx`.
+	 * @param ctx the parse tree
+	 */
+	exitParameterIdx?: (ctx: ParameterIdxContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.stringLiteralSequence`.
+	 * @param ctx the parse tree
+	 */
+	enterStringLiteralSequence?: (ctx: StringLiteralSequenceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.stringLiteralSequence`.
+	 * @param ctx the parse tree
+	 */
+	exitStringLiteralSequence?: (ctx: StringLiteralSequenceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.charSetStringLiteral`.
+	 * @param ctx the parse tree
+	 */
+	enterCharSetStringLiteral?: (ctx: CharSetStringLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.charSetStringLiteral`.
+	 * @param ctx the parse tree
+	 */
+	exitCharSetStringLiteral?: (ctx: CharSetStringLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dateLiteral`.
+	 * @param ctx the parse tree
+	 */
+	enterDateLiteral?: (ctx: DateLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dateLiteral`.
+	 * @param ctx the parse tree
+	 */
+	exitDateLiteral?: (ctx: DateLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.timestampLiteral`.
+	 * @param ctx the parse tree
+	 */
+	enterTimestampLiteral?: (ctx: TimestampLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.timestampLiteral`.
+	 * @param ctx the parse tree
+	 */
+	exitTimestampLiteral?: (ctx: TimestampLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.timestampLocalTZLiteral`.
+	 * @param ctx the parse tree
+	 */
+	enterTimestampLocalTZLiteral?: (ctx: TimestampLocalTZLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.timestampLocalTZLiteral`.
+	 * @param ctx the parse tree
+	 */
+	exitTimestampLocalTZLiteral?: (ctx: TimestampLocalTZLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.intervalValue`.
+	 * @param ctx the parse tree
+	 */
+	enterIntervalValue?: (ctx: IntervalValueContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.intervalValue`.
+	 * @param ctx the parse tree
+	 */
+	exitIntervalValue?: (ctx: IntervalValueContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.intervalLiteral`.
+	 * @param ctx the parse tree
+	 */
+	enterIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.intervalLiteral`.
+	 * @param ctx the parse tree
+	 */
+	exitIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.intervalExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterIntervalExpression?: (ctx: IntervalExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.intervalExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitIntervalExpression?: (ctx: IntervalExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.intervalQualifiers`.
+	 * @param ctx the parse tree
+	 */
+	enterIntervalQualifiers?: (ctx: IntervalQualifiersContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.intervalQualifiers`.
+	 * @param ctx the parse tree
+	 */
+	exitIntervalQualifiers?: (ctx: IntervalQualifiersContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterExpression?: (ctx: ExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitExpression?: (ctx: ExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.atomExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterAtomExpression?: (ctx: AtomExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.atomExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitAtomExpression?: (ctx: AtomExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceFieldExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceFieldExpression?: (ctx: PrecedenceFieldExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceFieldExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceFieldExpression?: (ctx: PrecedenceFieldExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceUnaryOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceUnaryOperator?: (ctx: PrecedenceUnaryOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceUnaryOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceUnaryOperator?: (ctx: PrecedenceUnaryOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceUnaryPrefixExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceUnaryPrefixExpression?: (ctx: PrecedenceUnaryPrefixExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceUnaryPrefixExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceUnaryPrefixExpression?: (ctx: PrecedenceUnaryPrefixExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceBitwiseXorOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceBitwiseXorOperator?: (ctx: PrecedenceBitwiseXorOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceBitwiseXorOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceBitwiseXorOperator?: (ctx: PrecedenceBitwiseXorOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceBitwiseXorExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceBitwiseXorExpression?: (ctx: PrecedenceBitwiseXorExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceBitwiseXorExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceBitwiseXorExpression?: (ctx: PrecedenceBitwiseXorExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceStarOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceStarOperator?: (ctx: PrecedenceStarOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceStarOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceStarOperator?: (ctx: PrecedenceStarOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceStarExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceStarExpression?: (ctx: PrecedenceStarExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceStarExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceStarExpression?: (ctx: PrecedenceStarExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedencePlusOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedencePlusOperator?: (ctx: PrecedencePlusOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedencePlusOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedencePlusOperator?: (ctx: PrecedencePlusOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedencePlusExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedencePlusExpression?: (ctx: PrecedencePlusExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedencePlusExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedencePlusExpression?: (ctx: PrecedencePlusExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceConcatenateOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceConcatenateOperator?: (ctx: PrecedenceConcatenateOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceConcatenateOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceConcatenateOperator?: (ctx: PrecedenceConcatenateOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceConcatenateExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceConcatenateExpression?: (ctx: PrecedenceConcatenateExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceConcatenateExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceConcatenateExpression?: (ctx: PrecedenceConcatenateExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceAmpersandOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceAmpersandOperator?: (ctx: PrecedenceAmpersandOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceAmpersandOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceAmpersandOperator?: (ctx: PrecedenceAmpersandOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceAmpersandExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceAmpersandExpression?: (ctx: PrecedenceAmpersandExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceAmpersandExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceAmpersandExpression?: (ctx: PrecedenceAmpersandExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceBitwiseOrOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceBitwiseOrOperator?: (ctx: PrecedenceBitwiseOrOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceBitwiseOrOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceBitwiseOrOperator?: (ctx: PrecedenceBitwiseOrOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceBitwiseOrExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceBitwiseOrExpression?: (ctx: PrecedenceBitwiseOrExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceBitwiseOrExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceBitwiseOrExpression?: (ctx: PrecedenceBitwiseOrExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceRegexpOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceRegexpOperator?: (ctx: PrecedenceRegexpOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceRegexpOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceRegexpOperator?: (ctx: PrecedenceRegexpOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceSimilarOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceSimilarOperator?: (ctx: PrecedenceSimilarOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceSimilarOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceSimilarOperator?: (ctx: PrecedenceSimilarOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.subQueryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterSubQueryExpression?: (ctx: SubQueryExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.subQueryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitSubQueryExpression?: (ctx: SubQueryExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceSimilarExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceSimilarExpression?: (ctx: PrecedenceSimilarExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceSimilarExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceSimilarExpression?: (ctx: PrecedenceSimilarExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceSimilarExpressionMain`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceSimilarExpressionMain?: (ctx: PrecedenceSimilarExpressionMainContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceSimilarExpressionMain`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceSimilarExpressionMain?: (ctx: PrecedenceSimilarExpressionMainContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceSimilarExpressionPart`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceSimilarExpressionPart?: (ctx: PrecedenceSimilarExpressionPartContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceSimilarExpressionPart`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceSimilarExpressionPart?: (ctx: PrecedenceSimilarExpressionPartContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceSimilarExpressionAtom`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceSimilarExpressionAtom?: (ctx: PrecedenceSimilarExpressionAtomContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceSimilarExpressionAtom`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceSimilarExpressionAtom?: (ctx: PrecedenceSimilarExpressionAtomContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceSimilarExpressionQuantifierPredicate`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceSimilarExpressionQuantifierPredicate?: (ctx: PrecedenceSimilarExpressionQuantifierPredicateContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceSimilarExpressionQuantifierPredicate`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceSimilarExpressionQuantifierPredicate?: (ctx: PrecedenceSimilarExpressionQuantifierPredicateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.quantifierType`.
+	 * @param ctx the parse tree
+	 */
+	enterQuantifierType?: (ctx: QuantifierTypeContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.quantifierType`.
+	 * @param ctx the parse tree
+	 */
+	exitQuantifierType?: (ctx: QuantifierTypeContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceSimilarExpressionIn`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceSimilarExpressionIn?: (ctx: PrecedenceSimilarExpressionInContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceSimilarExpressionIn`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceSimilarExpressionIn?: (ctx: PrecedenceSimilarExpressionInContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceSimilarExpressionPartNot`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceSimilarExpressionPartNot?: (ctx: PrecedenceSimilarExpressionPartNotContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceSimilarExpressionPartNot`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceSimilarExpressionPartNot?: (ctx: PrecedenceSimilarExpressionPartNotContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceDistinctOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceDistinctOperator?: (ctx: PrecedenceDistinctOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceDistinctOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceDistinctOperator?: (ctx: PrecedenceDistinctOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceEqualOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceEqualOperator?: (ctx: PrecedenceEqualOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceEqualOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceEqualOperator?: (ctx: PrecedenceEqualOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceEqualExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceEqualExpression?: (ctx: PrecedenceEqualExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceEqualExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceEqualExpression?: (ctx: PrecedenceEqualExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.isCondition`.
+	 * @param ctx the parse tree
+	 */
+	enterIsCondition?: (ctx: IsConditionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.isCondition`.
+	 * @param ctx the parse tree
+	 */
+	exitIsCondition?: (ctx: IsConditionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceUnarySuffixExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceUnarySuffixExpression?: (ctx: PrecedenceUnarySuffixExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceUnarySuffixExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceUnarySuffixExpression?: (ctx: PrecedenceUnarySuffixExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceNotOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceNotOperator?: (ctx: PrecedenceNotOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceNotOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceNotOperator?: (ctx: PrecedenceNotOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceNotExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceNotExpression?: (ctx: PrecedenceNotExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceNotExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceNotExpression?: (ctx: PrecedenceNotExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceAndOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceAndOperator?: (ctx: PrecedenceAndOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceAndOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceAndOperator?: (ctx: PrecedenceAndOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceAndExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceAndExpression?: (ctx: PrecedenceAndExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceAndExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceAndExpression?: (ctx: PrecedenceAndExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceOrOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceOrOperator?: (ctx: PrecedenceOrOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceOrOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceOrOperator?: (ctx: PrecedenceOrOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.precedenceOrExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPrecedenceOrExpression?: (ctx: PrecedenceOrExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.precedenceOrExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPrecedenceOrExpression?: (ctx: PrecedenceOrExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.booleanValue`.
+	 * @param ctx the parse tree
+	 */
+	enterBooleanValue?: (ctx: BooleanValueContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.booleanValue`.
+	 * @param ctx the parse tree
+	 */
+	exitBooleanValue?: (ctx: BooleanValueContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.booleanValueTok`.
+	 * @param ctx the parse tree
+	 */
+	enterBooleanValueTok?: (ctx: BooleanValueTokContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.booleanValueTok`.
+	 * @param ctx the parse tree
+	 */
+	exitBooleanValueTok?: (ctx: BooleanValueTokContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.tableOrPartition`.
+	 * @param ctx the parse tree
+	 */
+	enterTableOrPartition?: (ctx: TableOrPartitionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.tableOrPartition`.
+	 * @param ctx the parse tree
+	 */
+	exitTableOrPartition?: (ctx: TableOrPartitionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionSpec`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionSpec?: (ctx: PartitionSpecContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionSpec`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionSpec?: (ctx: PartitionSpecContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionVal`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionVal?: (ctx: PartitionValContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionVal`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionVal?: (ctx: PartitionValContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionSelectorSpec`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionSelectorSpec?: (ctx: PartitionSelectorSpecContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionSelectorSpec`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionSelectorSpec?: (ctx: PartitionSelectorSpecContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionSelectorVal`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionSelectorVal?: (ctx: PartitionSelectorValContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionSelectorVal`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionSelectorVal?: (ctx: PartitionSelectorValContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.partitionSelectorOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionSelectorOperator?: (ctx: PartitionSelectorOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.partitionSelectorOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionSelectorOperator?: (ctx: PartitionSelectorOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.subQuerySelectorOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterSubQuerySelectorOperator?: (ctx: SubQuerySelectorOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.subQuerySelectorOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitSubQuerySelectorOperator?: (ctx: SubQuerySelectorOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.sysFuncNames`.
+	 * @param ctx the parse tree
+	 */
+	enterSysFuncNames?: (ctx: SysFuncNamesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.sysFuncNames`.
+	 * @param ctx the parse tree
+	 */
+	exitSysFuncNames?: (ctx: SysFuncNamesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.descFuncNames`.
+	 * @param ctx the parse tree
+	 */
+	enterDescFuncNames?: (ctx: DescFuncNamesContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.descFuncNames`.
+	 * @param ctx the parse tree
+	 */
+	exitDescFuncNames?: (ctx: DescFuncNamesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.id_`.
+	 * @param ctx the parse tree
+	 */
+	enterId_?: (ctx: Id_Context) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.id_`.
+	 * @param ctx the parse tree
+	 */
+	exitId_?: (ctx: Id_Context) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.functionIdentifier`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionIdentifier?: (ctx: FunctionIdentifierContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.functionIdentifier`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionIdentifier?: (ctx: FunctionIdentifierContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.principalIdentifier`.
+	 * @param ctx the parse tree
+	 */
+	enterPrincipalIdentifier?: (ctx: PrincipalIdentifierContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.principalIdentifier`.
+	 * @param ctx the parse tree
+	 */
+	exitPrincipalIdentifier?: (ctx: PrincipalIdentifierContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.nonReserved`.
+	 * @param ctx the parse tree
+	 */
+	enterNonReserved?: (ctx: NonReservedContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.nonReserved`.
+	 * @param ctx the parse tree
+	 */
+	exitNonReserved?: (ctx: NonReservedContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.sql11ReservedKeywordsUsedAsFunctionName`.
+	 * @param ctx the parse tree
+	 */
+	enterSql11ReservedKeywordsUsedAsFunctionName?: (ctx: Sql11ReservedKeywordsUsedAsFunctionNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.sql11ReservedKeywordsUsedAsFunctionName`.
+	 * @param ctx the parse tree
+	 */
+	exitSql11ReservedKeywordsUsedAsFunctionName?: (ctx: Sql11ReservedKeywordsUsedAsFunctionNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.hint`.
+	 * @param ctx the parse tree
+	 */
+	enterHint?: (ctx: HintContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.hint`.
+	 * @param ctx the parse tree
+	 */
+	exitHint?: (ctx: HintContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.hintList`.
+	 * @param ctx the parse tree
+	 */
+	enterHintList?: (ctx: HintListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.hintList`.
+	 * @param ctx the parse tree
+	 */
+	exitHintList?: (ctx: HintListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.hintItem`.
+	 * @param ctx the parse tree
+	 */
+	enterHintItem?: (ctx: HintItemContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.hintItem`.
+	 * @param ctx the parse tree
+	 */
+	exitHintItem?: (ctx: HintItemContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.hintName`.
+	 * @param ctx the parse tree
+	 */
+	enterHintName?: (ctx: HintNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.hintName`.
+	 * @param ctx the parse tree
+	 */
+	exitHintName?: (ctx: HintNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.hintArgs`.
+	 * @param ctx the parse tree
+	 */
+	enterHintArgs?: (ctx: HintArgsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.hintArgs`.
+	 * @param ctx the parse tree
+	 */
+	exitHintArgs?: (ctx: HintArgsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.hintArgName`.
+	 * @param ctx the parse tree
+	 */
+	enterHintArgName?: (ctx: HintArgNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.hintArgName`.
+	 * @param ctx the parse tree
+	 */
+	exitHintArgName?: (ctx: HintArgNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.prepareStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterPrepareStatement?: (ctx: PrepareStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.prepareStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitPrepareStatement?: (ctx: PrepareStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.executeStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterExecuteStatement?: (ctx: ExecuteStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.executeStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitExecuteStatement?: (ctx: ExecuteStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.executeParamList`.
+	 * @param ctx the parse tree
+	 */
+	enterExecuteParamList?: (ctx: ExecuteParamListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.executeParamList`.
+	 * @param ctx the parse tree
+	 */
+	exitExecuteParamList?: (ctx: ExecuteParamListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.resourcePlanDdlStatements`.
+	 * @param ctx the parse tree
+	 */
+	enterResourcePlanDdlStatements?: (ctx: ResourcePlanDdlStatementsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.resourcePlanDdlStatements`.
+	 * @param ctx the parse tree
+	 */
+	exitResourcePlanDdlStatements?: (ctx: ResourcePlanDdlStatementsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.rpAssign`.
+	 * @param ctx the parse tree
+	 */
+	enterRpAssign?: (ctx: RpAssignContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.rpAssign`.
+	 * @param ctx the parse tree
+	 */
+	exitRpAssign?: (ctx: RpAssignContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.rpAssignList`.
+	 * @param ctx the parse tree
+	 */
+	enterRpAssignList?: (ctx: RpAssignListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.rpAssignList`.
+	 * @param ctx the parse tree
+	 */
+	exitRpAssignList?: (ctx: RpAssignListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.rpUnassign`.
+	 * @param ctx the parse tree
+	 */
+	enterRpUnassign?: (ctx: RpUnassignContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.rpUnassign`.
+	 * @param ctx the parse tree
+	 */
+	exitRpUnassign?: (ctx: RpUnassignContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.rpUnassignList`.
+	 * @param ctx the parse tree
+	 */
+	enterRpUnassignList?: (ctx: RpUnassignListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.rpUnassignList`.
+	 * @param ctx the parse tree
+	 */
+	exitRpUnassignList?: (ctx: RpUnassignListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.createResourcePlanStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCreateResourcePlanStatement?: (ctx: CreateResourcePlanStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.createResourcePlanStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCreateResourcePlanStatement?: (ctx: CreateResourcePlanStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.withReplace`.
+	 * @param ctx the parse tree
+	 */
+	enterWithReplace?: (ctx: WithReplaceContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.withReplace`.
+	 * @param ctx the parse tree
+	 */
+	exitWithReplace?: (ctx: WithReplaceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.activate`.
+	 * @param ctx the parse tree
+	 */
+	enterActivate?: (ctx: ActivateContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.activate`.
+	 * @param ctx the parse tree
+	 */
+	exitActivate?: (ctx: ActivateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.enable`.
+	 * @param ctx the parse tree
+	 */
+	enterEnable?: (ctx: EnableContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.enable`.
+	 * @param ctx the parse tree
+	 */
+	exitEnable?: (ctx: EnableContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.disable`.
+	 * @param ctx the parse tree
+	 */
+	enterDisable?: (ctx: DisableContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.disable`.
+	 * @param ctx the parse tree
+	 */
+	exitDisable?: (ctx: DisableContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.unmanaged`.
+	 * @param ctx the parse tree
+	 */
+	enterUnmanaged?: (ctx: UnmanagedContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.unmanaged`.
+	 * @param ctx the parse tree
+	 */
+	exitUnmanaged?: (ctx: UnmanagedContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterResourcePlanStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterResourcePlanStatement?: (ctx: AlterResourcePlanStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterResourcePlanStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterResourcePlanStatement?: (ctx: AlterResourcePlanStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.globalWmStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterGlobalWmStatement?: (ctx: GlobalWmStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.globalWmStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitGlobalWmStatement?: (ctx: GlobalWmStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.replaceResourcePlanStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterReplaceResourcePlanStatement?: (ctx: ReplaceResourcePlanStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.replaceResourcePlanStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitReplaceResourcePlanStatement?: (ctx: ReplaceResourcePlanStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dropResourcePlanStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterDropResourcePlanStatement?: (ctx: DropResourcePlanStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dropResourcePlanStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitDropResourcePlanStatement?: (ctx: DropResourcePlanStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.poolPath`.
+	 * @param ctx the parse tree
+	 */
+	enterPoolPath?: (ctx: PoolPathContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.poolPath`.
+	 * @param ctx the parse tree
+	 */
+	exitPoolPath?: (ctx: PoolPathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.triggerExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterTriggerExpression?: (ctx: TriggerExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.triggerExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitTriggerExpression?: (ctx: TriggerExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.triggerExpressionStandalone`.
+	 * @param ctx the parse tree
+	 */
+	enterTriggerExpressionStandalone?: (ctx: TriggerExpressionStandaloneContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.triggerExpressionStandalone`.
+	 * @param ctx the parse tree
+	 */
+	exitTriggerExpressionStandalone?: (ctx: TriggerExpressionStandaloneContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.triggerOrExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterTriggerOrExpression?: (ctx: TriggerOrExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.triggerOrExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitTriggerOrExpression?: (ctx: TriggerOrExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.triggerAndExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterTriggerAndExpression?: (ctx: TriggerAndExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.triggerAndExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitTriggerAndExpression?: (ctx: TriggerAndExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.triggerAtomExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterTriggerAtomExpression?: (ctx: TriggerAtomExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.triggerAtomExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitTriggerAtomExpression?: (ctx: TriggerAtomExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.triggerLiteral`.
+	 * @param ctx the parse tree
+	 */
+	enterTriggerLiteral?: (ctx: TriggerLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.triggerLiteral`.
+	 * @param ctx the parse tree
+	 */
+	exitTriggerLiteral?: (ctx: TriggerLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.comparisionOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterComparisionOperator?: (ctx: ComparisionOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.comparisionOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitComparisionOperator?: (ctx: ComparisionOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.triggerActionExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterTriggerActionExpression?: (ctx: TriggerActionExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.triggerActionExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitTriggerActionExpression?: (ctx: TriggerActionExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.triggerActionExpressionStandalone`.
+	 * @param ctx the parse tree
+	 */
+	enterTriggerActionExpressionStandalone?: (ctx: TriggerActionExpressionStandaloneContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.triggerActionExpressionStandalone`.
+	 * @param ctx the parse tree
+	 */
+	exitTriggerActionExpressionStandalone?: (ctx: TriggerActionExpressionStandaloneContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.createTriggerStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCreateTriggerStatement?: (ctx: CreateTriggerStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.createTriggerStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCreateTriggerStatement?: (ctx: CreateTriggerStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterTriggerStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterTriggerStatement?: (ctx: AlterTriggerStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterTriggerStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterTriggerStatement?: (ctx: AlterTriggerStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dropTriggerStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterDropTriggerStatement?: (ctx: DropTriggerStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dropTriggerStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitDropTriggerStatement?: (ctx: DropTriggerStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.poolAssign`.
+	 * @param ctx the parse tree
+	 */
+	enterPoolAssign?: (ctx: PoolAssignContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.poolAssign`.
+	 * @param ctx the parse tree
+	 */
+	exitPoolAssign?: (ctx: PoolAssignContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.poolAssignList`.
+	 * @param ctx the parse tree
+	 */
+	enterPoolAssignList?: (ctx: PoolAssignListContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.poolAssignList`.
+	 * @param ctx the parse tree
+	 */
+	exitPoolAssignList?: (ctx: PoolAssignListContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.createPoolStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCreatePoolStatement?: (ctx: CreatePoolStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.createPoolStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCreatePoolStatement?: (ctx: CreatePoolStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterPoolStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterPoolStatement?: (ctx: AlterPoolStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterPoolStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterPoolStatement?: (ctx: AlterPoolStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dropPoolStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterDropPoolStatement?: (ctx: DropPoolStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dropPoolStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitDropPoolStatement?: (ctx: DropPoolStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.createMappingStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCreateMappingStatement?: (ctx: CreateMappingStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.createMappingStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCreateMappingStatement?: (ctx: CreateMappingStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.alterMappingStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterMappingStatement?: (ctx: AlterMappingStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.alterMappingStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterMappingStatement?: (ctx: AlterMappingStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSql.dropMappingStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterDropMappingStatement?: (ctx: DropMappingStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSql.dropMappingStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitDropMappingStatement?: (ctx: DropMappingStatementContext) => void;
 }
 

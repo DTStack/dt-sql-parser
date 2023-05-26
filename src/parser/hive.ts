@@ -5,7 +5,7 @@ import BasicParser from './common/basicParser';
 
 export default class HiveSQL extends BasicParser {
     public createLexer(input: string): HiveSqlLexer {
-        const chars = CharStreams.fromString(input);
+        const chars = CharStreams.fromString(input.toUpperCase());
         const lexer = new HiveSqlLexer(chars);
         return lexer;
     }
