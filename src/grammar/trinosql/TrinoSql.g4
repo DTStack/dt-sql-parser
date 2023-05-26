@@ -490,12 +490,12 @@ windowFrame: (
 	)?;
 
 frameExtent:
-	frameType = RANGE start = frameBound
-	| frameType = ROWS start = frameBound
-	| frameType = GROUPS start = frameBound
-	| frameType = RANGE BETWEEN start = frameBound AND end = frameBound
-	| frameType = ROWS BETWEEN start = frameBound AND end = frameBound
-	| frameType = GROUPS BETWEEN start = frameBound AND end = frameBound;
+	frameType = RANGE frameStart = frameBound
+	| frameType = ROWS frameStart = frameBound
+	| frameType = GROUPS frameStart = frameBound
+	| frameType = RANGE BETWEEN frameStart = frameBound AND end = frameBound
+	| frameType = ROWS BETWEEN frameStart = frameBound AND end = frameBound
+	| frameType = GROUPS BETWEEN frameStart = frameBound AND end = frameBound;
 
 frameBound:
 	UNBOUNDED boundType = PRECEDING						# unboundedFrame
