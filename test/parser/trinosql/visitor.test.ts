@@ -18,7 +18,7 @@ describe('trino SQL Visitor Tests', () => {
                 return result;
             }
             visitTableName = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+                result = ctx.text.toLowerCase();
             }
         }
         const visitor: any = new MyVisitor();

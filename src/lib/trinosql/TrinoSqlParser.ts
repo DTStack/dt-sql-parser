@@ -9743,7 +9743,7 @@ export class TrinoSqlParser extends Parser {
 				this.state = 2250;
 				_localctx._frameType = this.match(TrinoSqlParser.RANGE);
 				this.state = 2251;
-				_localctx._start = this.frameBound();
+				_localctx._frameStart = this.frameBound();
 				}
 				break;
 
@@ -9753,7 +9753,7 @@ export class TrinoSqlParser extends Parser {
 				this.state = 2252;
 				_localctx._frameType = this.match(TrinoSqlParser.ROWS);
 				this.state = 2253;
-				_localctx._start = this.frameBound();
+				_localctx._frameStart = this.frameBound();
 				}
 				break;
 
@@ -9763,7 +9763,7 @@ export class TrinoSqlParser extends Parser {
 				this.state = 2254;
 				_localctx._frameType = this.match(TrinoSqlParser.GROUPS);
 				this.state = 2255;
-				_localctx._start = this.frameBound();
+				_localctx._frameStart = this.frameBound();
 				}
 				break;
 
@@ -9775,7 +9775,7 @@ export class TrinoSqlParser extends Parser {
 				this.state = 2257;
 				this.match(TrinoSqlParser.BETWEEN);
 				this.state = 2258;
-				_localctx._start = this.frameBound();
+				_localctx._frameStart = this.frameBound();
 				this.state = 2259;
 				this.match(TrinoSqlParser.AND);
 				this.state = 2260;
@@ -9791,7 +9791,7 @@ export class TrinoSqlParser extends Parser {
 				this.state = 2263;
 				this.match(TrinoSqlParser.BETWEEN);
 				this.state = 2264;
-				_localctx._start = this.frameBound();
+				_localctx._frameStart = this.frameBound();
 				this.state = 2265;
 				this.match(TrinoSqlParser.AND);
 				this.state = 2266;
@@ -9807,7 +9807,7 @@ export class TrinoSqlParser extends Parser {
 				this.state = 2269;
 				this.match(TrinoSqlParser.BETWEEN);
 				this.state = 2270;
-				_localctx._start = this.frameBound();
+				_localctx._frameStart = this.frameBound();
 				this.state = 2271;
 				this.match(TrinoSqlParser.AND);
 				this.state = 2272;
@@ -20952,7 +20952,7 @@ export class WindowFrameContext extends ParserRuleContext {
 
 export class FrameExtentContext extends ParserRuleContext {
 	public _frameType!: Token;
-	public _start!: FrameBoundContext;
+	public _frameStart!: FrameBoundContext;
 	public _end!: FrameBoundContext;
 	public RANGE(): TerminalNode | undefined { return this.tryGetToken(TrinoSqlParser.RANGE, 0); }
 	public frameBound(): FrameBoundContext[];

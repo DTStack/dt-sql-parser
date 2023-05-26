@@ -13,7 +13,7 @@ describe('trino SQL Listener Tests', () => {
         class MyListener implements TrinoSqlListener {
 
             enterTableName = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+                result = ctx.text.toLowerCase();
             };
         }
         const listenTableName = new MyListener();
