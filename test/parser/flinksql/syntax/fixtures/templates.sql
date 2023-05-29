@@ -431,14 +431,14 @@ BEGIN STATEMENT SET;
 INSERT INTO avg_request_size_1m SELECT
     window_start,
     window_end,
-    total_size / num_requests AS avg_size
+    total_size/num_requests AS avg_size
 FROM server_logs_window_1m;
 
 -- 写入结果到5min窗口粒度结果表
 INSERT INTO avg_request_size_5m SELECT
     window_start,
     window_end,
-    total_size / num_requests AS avg_size
+    total_size/num_requests AS avg_size
 FROM server_logs_window_5m;
 END;
 

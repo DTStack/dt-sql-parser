@@ -442,9 +442,9 @@ REAL_LITERAL:                        (DEC_DIGIT+)? '.' DEC_DIGIT+
                                      | DEC_DIGIT+ EXPONENT_NUM_PART;
 BIT_STRING:                          BIT_STRING_L;
 ID_LITERAL:                          ID_LITERAL_FRAG;
-FILE_PATH:                           FILE_PATH_STRING;
+SLASH_TEXT:                          SLASH_TEXT_FRAG;
 
-fragment FILE_PATH_STRING:           ([/\\] (~([/\\ ]))*)+;
+fragment SLASH_TEXT_FRAG:            [/\\] (~([/\\ ] | '(' | ')' | ';'))*;
 fragment JAR_FILE_PARTTARN:          '`' ( '\\'. | '``' | ~('`'|'\\'))* '`';
 fragment EXPONENT_NUM_PART:          'E' [-+]? DEC_DIGIT+;
 fragment ID_LITERAL_FRAG:            [A-Z_0-9a-z]*?[A-Z_a-z]+?[A-Z_0-9a-z]*;

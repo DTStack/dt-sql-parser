@@ -23,6 +23,7 @@ import { SetStatememtContext } from "./FlinkSqlParser";
 import { ResetStatememtContext } from "./FlinkSqlParser";
 import { JarStatememtContext } from "./FlinkSqlParser";
 import { DtAddStatementContext } from "./FlinkSqlParser";
+import { DtFilePathContext } from "./FlinkSqlParser";
 import { CreateTableContext } from "./FlinkSqlParser";
 import { SimpleCreateTableContext } from "./FlinkSqlParser";
 import { CreateTableAsSelectContext } from "./FlinkSqlParser";
@@ -144,6 +145,7 @@ import { PredicateContext } from "./FlinkSqlParser";
 import { LikePredicateContext } from "./FlinkSqlParser";
 import { ValueExpressionDefaultContext } from "./FlinkSqlParser";
 import { ComparisonContext } from "./FlinkSqlParser";
+import { ArithmeticBinaryAlternateContext } from "./FlinkSqlParser";
 import { ArithmeticBinaryContext } from "./FlinkSqlParser";
 import { ArithmeticUnaryContext } from "./FlinkSqlParser";
 import { DereferenceContext } from "./FlinkSqlParser";
@@ -416,6 +418,16 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitDtAddStatement?: (ctx: DtAddStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.dtFilePath`.
+	 * @param ctx the parse tree
+	 */
+	enterDtFilePath?: (ctx: DtFilePathContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.dtFilePath`.
+	 * @param ctx the parse tree
+	 */
+	exitDtFilePath?: (ctx: DtFilePathContext) => void;
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.createTable`.
 	 * @param ctx the parse tree
@@ -1644,6 +1656,18 @@ export default class FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitComparison?: (ctx: ComparisonContext) => void;
+	/**
+	 * Enter a parse tree produced by the `arithmeticBinaryAlternate`
+	 * labeled alternative in `FlinkSqlParser.valueExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterArithmeticBinaryAlternate?: (ctx: ArithmeticBinaryAlternateContext) => void;
+	/**
+	 * Exit a parse tree produced by the `arithmeticBinaryAlternate`
+	 * labeled alternative in `FlinkSqlParser.valueExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitArithmeticBinaryAlternate?: (ctx: ArithmeticBinaryAlternateContext) => void;
 	/**
 	 * Enter a parse tree produced by the `arithmeticBinary`
 	 * labeled alternative in `FlinkSqlParser.valueExpression`.
