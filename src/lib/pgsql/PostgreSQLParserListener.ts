@@ -17,6 +17,7 @@ import { C_expr_caseContext } from "./PostgreSQLParser";
 import { In_expr_selectContext } from "./PostgreSQLParser";
 import { In_expr_listContext } from "./PostgreSQLParser";
 import { ProgramContext } from "./PostgreSQLParser";
+import { PlsqlrootContext } from "./PostgreSQLParser";
 import { StmtmultiContext } from "./PostgreSQLParser";
 import { StmtContext } from "./PostgreSQLParser";
 import { PlsqlconsolecommandContext } from "./PostgreSQLParser";
@@ -965,6 +966,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitProgram?: (ctx: ProgramContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.plsqlroot`.
+	 * @param ctx the parse tree
+	 */
+	enterPlsqlroot?: (ctx: PlsqlrootContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.plsqlroot`.
+	 * @param ctx the parse tree
+	 */
+	exitPlsqlroot?: (ctx: PlsqlrootContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.stmtmulti`.

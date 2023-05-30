@@ -1,4 +1,3 @@
-import { Vocabulary } from "antlr4ts";
 import { Lexer } from "antlr4ts/Lexer";
 
 
@@ -10,6 +9,52 @@ export default abstract class PostgreSQLLexerBase extends Lexer {
   
     tags: string[] = [];
     _interp: any;
+
+    constructor(input) {
+        super(input);
+    }
+
+    pushTag() {
+        this.tags.push(this.text);
+    }
+
+    isTag() {
+        return this.text === this.tags[this.tags.length - 1];
+    }
+
+    popTag() {
+        this.tags.pop();
+    }
+
+    getInputStream() {
+        return this._input;
+    }
+    checkLA( c) {
+        // eslint-disable-next-line new-cap
+        return this.getInputStream().LA(1) !== c;
+    }
+
+    charIsLetter() {
+        // eslint-disable-next-line new-cap
+        return isLetter(this.getInputStream().LA(-1));
+    }
+
+    HandleNumericFail() {
+        this.getInputStream().seek(this.getInputStream().index - 2);
+        const Integral = 535;
+        this.type = Integral;
+    }
+
+    HandleLessLessGreaterGreater() {
+        const LESS_LESS = 18;
+        const GREATER_GREATER = 19;
+        if (this.text === '<<') this.type = LESS_LESS;
+        if (this.text === '>>') this.type = GREATER_GREATER;
+    }
+
+    UnterminatedBlockCommentDebugAssert() {
+        // Debug.Assert(InputStream.LA(1) == -1 /*EOF*/);
+    }
 
     CheckIfUtf32Letter() {
         // eslint-disable-next-line new-cap
@@ -23,52 +68,4 @@ export default abstract class PostgreSQLLexerBase extends Lexer {
         }
         return isLetter(c[0]);
     }
-
-    UnterminatedBlockCommentDebugAssert() {
-        // Debug.Assert(InputStream.LA(1) == -1 /*EOF*/);
-    }
-
-    HandleLessLessGreaterGreater() {
-        const LESS_LESS = 18;
-        const GREATER_GREATER = 19;
-        if (this.text === '<<') {
-            this._type = LESS_LESS;
-        }
-        if (this.text === '>>') {
-            this._type = GREATER_GREATER;
-        }
-    }
-
-    HandleNumericFail() {
-        this.getInputStream().seek(this.getInputStream().index - 2);
-        const Integral = 535;
-        this._type = Integral;
-    }
-
-    charIsLetter() {
-        // eslint-disable-next-line new-cap
-        return isLetter(this.getInputStream().LA(-1));
-    }
-
-    pushTag() {
-        this.tags.push(this.text);
-    };
-    
-    isTag() {
-        return this.text === this.tags.pop();
-    }
-    
-    popTag() {
-        this.tags.pop();
-    }
-    
-    getInputStream() {
-        return this._input;
-    }
-    
-    checkLA(c) {
-        // eslint-disable-next-line new-cap
-        return this.getInputStream().LA(1) !== c;
-    }
-    
 }

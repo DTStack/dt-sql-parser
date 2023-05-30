@@ -3,22 +3,18 @@ import { CharStreams, CommonTokenStream, Parser } from 'antlr4ts';
 import { PostgreSQLLexer } from './PostgreSQLLexer';
 import { PostgreSQLParser } from './PostgreSQLParser';
 
+// @ts-ignore
 export default abstract class PostgreSQLParserBase extends Parser {
-
-    getPostgreSQLParser(script) {
-        const chars = CharStreams.fromString(script.toUpperCase());
-        const lexer = new PostgreSQLLexer(chars);
-        const tokenStream = new CommonTokenStream(lexer);
-        const parser = new PostgreSQLParser(tokenStream);
-        return parser;
+    constructor( input) {
+        super(input);
     }
 
-    GetParsedSqlTree(script, line) {
+    GetParsedSqlTree( script, line) {
         const ph = this.getPostgreSQLParser(script);
         return ph.program();
     }
 
-    ParseRoutineBody(_localctx) {
+    ParseRoutineBody( _localctx) {
         let lang = null;
         for (let _i = 0, _a = _localctx.createfunc_opt_item(); _i < _a.length; _i++) {
             const coi = _a[_i];
@@ -35,13 +31,10 @@ export default abstract class PostgreSQLParserBase extends Parser {
                 }
             }
         }
-        if (!lang) {
-            return;
-        }
+        if (!lang) return;
         // eslint-disable-next-line camelcase
         let func_as = null;
-        for (let _b = 0, _c = _localctx.createfunc_opt_item(); _b < _c.length; _b++) {
-            const a = _c[_b];
+        for (const a of _localctx.createfunc_opt_item()) {
             if (!a.func_as()) {
                 // eslint-disable-next-line camelcase
                 func_as = a;
@@ -49,14 +42,13 @@ export default abstract class PostgreSQLParserBase extends Parser {
             }
         }
         // eslint-disable-next-line camelcase
-        if (!!func_as) {
+        if (!func_as) {
             const txt = this.GetRoutineBodyString(func_as.func_as().sconst(0));
-            // @ts-ignore
             const line = func_as.func_as().sconst(0).start.getLine();
             const ph = this.getPostgreSQLParser(txt);
             switch (lang) {
             case 'plpgsql':
-                func_as.func_as().Definition = ph.program();
+                func_as.func_as().Definition = ph.plsqlroot();
                 break;
             case 'sql':
                 func_as.func_as().Definition = ph.program();
@@ -65,46 +57,47 @@ export default abstract class PostgreSQLParserBase extends Parser {
         }
     }
 
-    TrimQuotes(s: string) {
-        return (!s) ? s : s.substring(1, s.length - 1);
+    TrimQuotes( s) {
+        return (!s) ? s : s.substring(1, s.length() - 1);
     }
 
-    unquote(s: string) {
-        const slength = s.length;
+    unquote( s) {
+        const slength = s.length();
         let r = '';
         let i = 0;
         while (i < slength) {
             const c = s.charAt(i);
             r = r.concat(c);
-            if (c === '\'' && i < slength - 1 && (s.charAt(i + 1) === '\'')) {
-                i++;
-            }
+            if (c === '\'' && i < slength - 1 && (s.charAt(i + 1) === '\'')) i++;
             i++;
         }
         return r.toString();
-    };
+    }
 
-    GetRoutineBodyString(rule) {
+    GetRoutineBodyString( rule) {
         const anysconst = rule.anysconst();
+        // eslint-disable-next-line new-cap
         const StringConstant = anysconst.StringConstant();
-        if (!!StringConstant) {
-            return this.unquote(this.TrimQuotes(StringConstant.getText()));
-        }
+        if (null !== StringConstant) return this.unquote(this.TrimQuotes(StringConstant.getText()));
         const UnicodeEscapeStringConstant = anysconst.UnicodeEscapeStringConstant();
-        if (!!UnicodeEscapeStringConstant) {
-            return this.TrimQuotes(UnicodeEscapeStringConstant.getText());
-        }
+        if (null !== UnicodeEscapeStringConstant) return this.TrimQuotes(UnicodeEscapeStringConstant.getText());
         const EscapeStringConstant = anysconst.EscapeStringConstant();
-        if (!!EscapeStringConstant) {
-            return this.TrimQuotes(EscapeStringConstant.getText());
-        }
+        if (null !== EscapeStringConstant) return this.TrimQuotes(EscapeStringConstant.getText());
         let result = '';
         const dollartext = anysconst.DollarText();
-        for (let _i = 0, dollartext_1 = dollartext; _i < dollartext_1.length; _i++) {
-            const s = dollartext_1[_i];
+        for (const s of dollartext) {
             result += s.getText();
         }
         return result;
     }
 
+    getPostgreSQLParser( script) {
+        const charStream = CharStreams.fromString(script);
+        const lexer = new PostgreSQLLexer(charStream);
+        const tokens = new CommonTokenStream(lexer);
+        const parser = new PostgreSQLParser(tokens);
+        // lexer.removeErrorListeners();
+        // parser.removeErrorListeners();
+        return parser;
+    }
 }

@@ -1,3 +1,4 @@
+import { Target_listContext } from '../../../src/lib/pgsql/PostgreSQLParser';
 import { PostgreSQLParserListener } from '../../../src/lib/pgsql/PostgreSQLParserListener';
 import PostgresSQL from '../../../src/parser/pgsql';
 
@@ -12,8 +13,7 @@ describe('PostgresSQL Listener Tests', () => {
         let result = '';
         class MyListener implements PostgreSQLParserListener {
             enterTable_ref(ctx) {
-                console.log('ctx:', ctx)
-                result = ctx.text;
+                result = ctx.text.toLowerCase();
             }
         }
         const listenTableName: any = new MyListener();
