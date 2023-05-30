@@ -1,5 +1,6 @@
 import FlinkSQL from '../../../src/parser/flinksql';
-import FlinkSqlParserVisitor from '../../../src/lib/flinksql/FlinkSqlParserVisitor';
+import { FlinkSqlParserVisitor } from '../../../src/lib/flinksql/FlinkSqlParserVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree';
 
 describe('Flink SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -12,9 +13,12 @@ describe('Flink SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends FlinkSqlParserVisitor<any>{ 
+        class MyVisitor extends AbstractParseTreeVisitor<any> implements FlinkSqlParserVisitor<any>{
+            protected defaultResult() {
+                return result;
+            } 
             visitTableExpression = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+                result = ctx.text.toLowerCase();
             }
         }
         const visitor: any = new MyVisitor();

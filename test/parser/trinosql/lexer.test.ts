@@ -7,6 +7,6 @@ describe('trinoSQL Lexer tests', () => {
     const tokens = parser.getAllTokens(sql);
 
     test('token counts', () => {
-        expect(tokens.length - 1).toBe(7);
+        expect(tokens.length).toBe(7);
     });
 });

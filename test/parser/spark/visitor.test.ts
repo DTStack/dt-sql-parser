@@ -1,4 +1,5 @@
-import SparkSqlVisitor from '../../../src/lib/spark/SparkSqlVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { SparkSqlVisitor } from '../../../src/lib/spark/SparkSqlVisitor';
 import SparkSQL from '../../../src/parser/spark';
 
 describe('Spark SQL Visitor Tests', () => {
@@ -12,10 +13,12 @@ describe('Spark SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends SparkSqlVisitor<any> {
+        class MyVisitor extends AbstractParseTreeVisitor<any> implements SparkSqlVisitor<any> {
+            protected defaultResult() {
+                return result;
+            }
             visitTableName = (ctx): void => {
-                result = ctx.getText().toLowerCase();
-                super.visitTableName?.(ctx);
+                result = ctx.text.toLowerCase();
             }
         }
         const visitor: any = new MyVisitor();

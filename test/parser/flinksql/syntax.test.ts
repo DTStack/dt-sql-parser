@@ -23,7 +23,7 @@ describe('FlinkSQL Syntax Tests', () => {
         expect(result.length).toBe(0);
     });
     test('Test simple Error Select Statement', () => {
-        const sql = `SELECTproduct, amount FROM;`;
+        const sql = `SELECT product, amount FROM;`;
         const result = parser.validate(sql);
         expect(result.length).toBe(1);
     });

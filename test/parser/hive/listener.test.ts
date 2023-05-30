@@ -1,4 +1,4 @@
-import HiveSqlListener from '../../../src/lib/hive/HiveSqlListener';
+import { HiveSqlListener } from '../../../src/lib/hive/HiveSqlListener';
 import HiveSQL from '../../../src/parser/hive';
 
 
@@ -10,28 +10,28 @@ describe('Hive SQL Listener Tests', () => {
         const parserTree = parser.parse(sql);
 
         let result = '';
-        class MyListener extends HiveSqlListener {
-            enterSelect_list = (ctx): void => {
-                result = ctx.getText();
+        class MyListener implements HiveSqlListener {
+            enterSelectItem(ctx) {
+                result = ctx.text;
             }
         }
         const listenTableName: any = new MyListener();
 
         await parser.listen(listenTableName, parserTree);
-        expect(result).toBe(expectTableName);
+        expect(result).toBe(expectTableName.toUpperCase());
     });
     test('Listener enterCreateTable', async () => {
         const sql = `drop table table_name;`;
         const parserTree = parser.parse(sql);
         let result = '';
-        class MyListener extends HiveSqlListener {
-            enterDrop_stmt = (ctx): void => {
-                result = ctx.getText();
+        class MyListener implements HiveSqlListener {
+            enterDropTableStatement(ctx) {
+                result = ctx.text;
             }
         }
         const listenTableName: any = new MyListener();
 
         await parser.listen(listenTableName, parserTree);
-        expect(result).toBe('droptabletable_name');
+        expect(result).toBe('DROPTABLETABLE_NAME');
     });
 });

@@ -1,12 +1,13 @@
-import { ParseTreeWalker, CommonTokenStream } from 'antlr4';
-import type { Parser } from 'antlr4/src/antlr4';
+import { Parser } from 'antlr4ts';
+import { ParseTreeWalker } from 'antlr4ts/tree';
+
 import ParserErrorListener, {
     ParserError,
     ErrorHandler,
     ParserErrorCollector,
 } from './parserErrorListener';
 
-interface IParser {
+interface IParser extends Parser {
     // Lost in type definition
     ruleNames: string[];
     // Customized in our parser
@@ -17,7 +18,7 @@ interface IParser {
  * Custom Parser class, subclass needs extends it.
  */
 export default abstract class BasicParser {
-    private _parser: IParser & Parser;
+    private _parser: IParser;
 
     public parse(
         input: string,
@@ -66,16 +67,14 @@ export default abstract class BasicParser {
      */
     public getAllTokens(input: string): string[] {
         const lexer = this.createLexer(input);
-        const tokensStream = new CommonTokenStream(lexer);
-        tokensStream.fill();
-        return tokensStream.tokens;
+        return lexer.getAllTokens().map(token => token.text);
     };
 
     /**
      * Get Parser instance by input string
      * @param input
      */
-    public createParser(input: string): IParser & Parser {
+    public createParser(input: string): IParser {
         const lexer = this.createLexer(input);
         const parser: any = this.createParserFromLexer(lexer);
         parser.buildParseTrees = true;

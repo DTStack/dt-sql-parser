@@ -1,441 +1,553 @@
+/**
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
 
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 lexer grammar HiveSqlLexer;
 
-// Lexer rules
-T_ACTION          : A C T I O N ;
-T_ADD2            : A D D ;
-T_ALL             : A L L ;
-T_ALLOCATE        : A L L O C A T E ;
-T_ALTER           : A L T E R ;
-T_AND             : A N D ;
-T_ANSI_NULLS      : A N S I '_' N U L L S ;
-T_ANSI_PADDING    : A N S I '_' P A D D I N G ;
-T_AS              : A S ;
-T_ASC             : A S C ;
-T_ASSOCIATE       : A S S O C I A T E ;
-T_AT              : A T ;
-T_AUTO_INCREMENT  : A U T O '_' I N C R E M E N T ;
-T_AVG             : A V G ;
-T_BATCHSIZE       : B A T C H S I Z E ;
-T_BEGIN           : B E G I N ;
-T_BETWEEN         : B E T W E E N ;
-T_BIGINT          : B I G I N T ;
-T_BINARY_DOUBLE   : B I N A R Y '_' D O U B L E ;
-T_BINARY_FLOAT    : B I N A R Y '_' F L O A T ;
-T_BINARY_INTEGER  : B I N A R Y '_' I N T E G E R ;
-T_BIT             : B I T ;
-T_BODY            : B O D Y ;
-T_BREAK           : B R E A K ;
-T_BY              : B Y ;
-T_BYTE            : B Y T E ;
-T_CALL            : C A L L ;
-T_CALLER          : C A L L E R ;
-T_CASCADE         : C A S C A D E ;
-T_CASE            : C A S E ;
-T_CASESPECIFIC    : C A S E S P E C I F I C ;
-T_CAST            : C A S T ;
-T_CHAR            : C H A R ;
-T_CHARACTER       : C H A R A C T E R ;
-T_CHARSET         : C H A R S E T ;
-T_CLIENT          : C L I E N T ;
-T_CLOSE           : C L O S E ;
-T_CLUSTERED       : C L U S T E R E D;
-T_CMP             : C M P ;
-T_COLLECT         : C O L L E C T ;
-T_COLLECTION      : C O L L E C T I O N ;
-T_COLUMN          : C O L U M N ;
-T_COMMENT         : C O M M E N T;
-T_CONSTANT        : C O N S T A N T ;
-T_COMMIT          : C O M M I T ;
-T_COMPRESS        : C O M P R E S S ;
-T_CONCAT          : C O N C A T;
-T_CONDITION       : C O N D I T I O N ;
-T_CONSTRAINT      : C O N S T R A I N T ;
-T_CONTINUE        : C O N T I N U E ;
-T_COPY            : C O P Y ;
-T_COUNT           : C O U N T ;
-T_COUNT_BIG       : C O U N T '_' B I G;
-T_CREATE          : C R E A T E ;
-T_CREATION        : C R E A T I O N ;
-T_CREATOR         : C R E A T O R ;
-T_CS              : C S;
-T_CURRENT         : C U R R E N T ;
-T_CURRENT_SCHEMA  : C U R R E N T '_' S C H E M A ;
-T_CURSOR          : C U R S O R ;
-T_DATABASE        : D A T A B A S E ;
-T_DATA            : D A T A ;
-T_DATE            : D A T E ;
-T_DATETIME        : D A T E T I M E ;
-T_DAY             : D A Y ;
-T_DAYS            : D A Y S ;
-T_DEC             : D E C ;
-T_DECIMAL         : D E C I M A L ;
-T_DECLARE         : D E C L A R E ;
-T_DEFAULT         : D E F A U L T ;
-T_DEFERRED        : D E F E R R E D ;
-T_DEFINED         : D E F I N E D ;
-T_DEFINER         : D E F I N E R ;
-T_DEFINITION      : D E F I N I T I O N ;
-T_DELETE          : D E L E T E ;
-T_DELIMITED       : D E L I M I T E D ;
-T_DELIMITER       : D E L I M I T E R ;
-T_DESC            : D E S C ;
-T_DESCRIBE        : D E S C R I B E ;
-T_DIAGNOSTICS     : D I A G N O S T I C S ;
-T_DIR             : D I R ;
-T_DIRECTORY       : D I R E C T O R Y ;
-T_DISTINCT        : D I S T I N C T ;
-T_DISTRIBUTE      : D I S T R I B U T E ;
-T_DO              : D O ;
-T_DOUBLE          : D O U B L E ;
-T_DROP            : D R O P ;
-T_DYNAMIC         : D Y N A M I C ;
-T_ELSE            : E L S E ;
-T_ELSEIF          : E L S E I F ;
-T_ELSIF           : E L S I F ;
-T_ENABLE          : E N A B L E ;
-T_END             : E N D ;
-T_ENGINE          : E N G I N E ;
-T_ESCAPED         : E S C A P E D ;
-T_EXCEPT          : E X C E P T ;
-T_EXEC            : E X E C ;
-T_EXECUTE         : E X E C U T E ;
-T_EXCEPTION       : E X C E P T I O N ;
-T_EXCLUSIVE       : E X C L U S I V E ;
-T_EXISTS          : E X I S T S ;
-T_EXIT            : E X I T ;
-T_FALLBACK        : F A L L B A C K ;
-T_FALSE           : F A L S E ;
-T_FETCH           : F E T C H ;
-T_FIELDS          : F I E L D S ;
-T_FILE            : F I L E ;
-T_FILES           : F I L E S ;
-T_FLOAT           : F L O A T ;
-T_FOR             : F O R ;
-T_FOREIGN         : F O R E I G N ;
-T_FORMAT          : F O R M A T ;
-T_FOUND           : F O U N D ;
-T_FROM            : F R O M ;
-T_FULL            : F U L L ;
-T_FUNCTION        : F U N C T I O N ;
-T_GET             : G E T ;
-T_GLOBAL          : G L O B A L ;
-T_GO              : G O ;
-T_GRANT           : G R A N T ;
-T_GROUP           : G R O U P ;
-T_HANDLER         : H A N D L E R ;
-T_HASH            : H A S H ;
-T_HAVING          : H A V I N G ;
-T_HDFS            : H D F S ;
-T_HIVE            : H I V E ;
-T_HOST            : H O S T ;
-T_IDENTITY        : I D E N T I T Y ;
-T_IF              : I F ;
-T_IGNORE          : I G N O R E ;
-T_IMMEDIATE       : I M M E D I A T E ;
-T_IN              : I N ;
-T_INCLUDE         : I N C L U D E ;
-T_INDEX           : I N D E X ;
-T_INITRANS        : I N I T R A N S ;
-T_INNER           : I N N E R ;
-T_INOUT           : I N O U T;
-T_INSERT          : I N S E R T ;
-T_INT             : I N T ;
-T_INT2            : I N T '2';
-T_INT4            : I N T '4';
-T_INT8            : I N T '8';
-T_INTEGER         : I N T E G E R ;
-T_INTERSECT       : I N T E R S E C T ;
-T_INTERVAL        : I N T E R V A L ;
-T_INTO            : I N T O ;
-T_INVOKER         : I N V O K E R ;
-T_IS              : I S ;
-T_ISOPEN          : I S O P E N ;
-T_ITEMS           : I T E M S ;
-T_JOIN            : J O I N ;
-T_KEEP            : K E E P;
-T_KEY             : K E Y ;
-T_KEYS            : K E Y S ;
-T_LANGUAGE        : L A N G U A G E ;
-T_LEAVE           : L E A V E ;
-T_LEFT            : L E F T ;
-T_LIKE            : L I K E ;
-T_LIMIT           : L I M I T ;
-T_LINES           : L I N E S ;
-T_LOCAL           : L O C A L ;
-T_LOCATION        : L O C A T I O N ;
-T_LOCATOR         : L O C A T O R ;
-T_LOCATORS        : L O C A T O R S ;
-T_LOCKS           : L O C K S ;
-T_LOG             : L O G ;
-T_LOGGED          : L O G G E D ;
-T_LOGGING         : L O G G I N G ;
-T_LOOP            : L O O P ;
-T_MAP             : M A P ;
-T_MATCHED         : M A T C H E D ;
-T_MAX             : M A X ;
-T_MAXTRANS        : M A X T R A N S ;
-T_MERGE           : M E R G E ;
-T_MESSAGE_TEXT    : M E S S A G E '_' T E X T ;
-T_MICROSECOND     : M I C R O S E C O N D ;
-T_MICROSECONDS    : M I C R O S E C O N D S;
-T_MIN             : M I N ;
-T_MULTISET        : M U L T I S E T ;
-T_NCHAR           : N C H A R ;
-T_NEW             : N E W ;
-T_NVARCHAR        : N V A R C H A R ;
-T_NO              : N O ;
-T_NOCOUNT         : N O C O U N T ;
-T_NOCOMPRESS      : N O C O M P R E S S ;
-T_NOLOGGING       : N O L O G G I N G ;
-T_NONE            : N O N E ;
-T_NOT             : N O T ;
-T_NOTFOUND        : N O T F O U N D ;
-T_NULL            : N U L L ;
-T_NUMERIC         : N U M E R I C ;
-T_NUMBER          : N U M B E R ;
-T_OBJECT          : O B J E C T ;
-T_OFF             : O F F ;
-T_ON              : O N ;
-T_ONLY            : O N L Y ;
-T_OPEN            : O P E N ;
-T_OR              : O R ;
-T_ORDER           : O R D E R;
-T_OUT             : O U T ;
-T_OUTER           : O U T E R ;
-T_OVER            : O V E R ;
-T_OVERWRITE       : O V E R W R I T E ;
-T_OWNER           : O W N E R ;
-T_PACKAGE         : P A C K A G E ;
-T_PARTITION       : P A R T I T I O N ;
-T_PCTFREE         : P C T F R E E ;
-T_PCTUSED         : P C T U S E D ;
-T_PLS_INTEGER     : P L S '_' I N T E G E R ;
-T_PRECISION       : P R E C I S I O N ;
-T_PRESERVE        : P R E S E R V E ;
-T_PRIMARY         : P R I M A R Y ;
-T_PRINT           : P R I N T ;
-T_PROC            : P R O C ;
-T_PROCEDURE       : P R O C E D U R E ;
-T_QUALIFY         : Q U A L I F Y ;
-T_QUERY_BAND      : Q U E R Y '_' B A N D ;
-T_QUIT            : Q U I T ;
-T_QUOTED_IDENTIFIER : Q U O T E D '_' I D E N T I F I E R ;
-T_RAISE           : R A I S E ;
-T_REAL            : R E A L ;
-T_REFERENCES      : R E F E R E N C E S ;
-T_REGEXP          : R E G E X P ;
-T_REPLACE         : R E P L A C E ;
-T_RESIGNAL        : R E S I G N A L ;
-T_RESTRICT        : R E S T R I C T ;
-T_RESULT          : R E S U L T ;
-T_RESULT_SET_LOCATOR : R E S U L T '_' S E T '_' L O C A T O R ;
-T_RETURN          : R E T U R N ;
-T_RETURNS         : R E T U R N S ;
-T_REVERSE         : R E V E R S E ;
-T_RIGHT           : R I G H T ;
-T_RLIKE           : R L I K E ;
-T_ROLE            : R O L E ;
-T_ROLLBACK        : R O L L B A C K ;
-T_ROW             : R O W ;
-T_ROWS            : R O W S ;
-T_ROWTYPE         : R O W T Y P E ;
-T_ROW_COUNT       : R O W '_' C O U N T ;
-T_RR              : R R;
-T_RS              : R S ;
-T_PWD             : P W D ;
-T_TRIM            : T R I M ;
-T_SCHEMA          : S C H E M A ;
-T_SECOND          : S E C O N D ;
-T_SECONDS         : S E C O N D S;
-T_SECURITY        : S E C U R I T Y ;
-T_SEGMENT         : S E G M E N T ;
-T_SEL             : S E L ;
-T_SELECT          : S E L E C T ;
-T_SET             : S E T ;
-T_SESSION         : S E S S I O N ;
-T_SESSIONS        : S E S S I O N S ;
-T_SETS            : S E T S;
-T_SHARE           : S H A R E ;
-T_SIGNAL          : S I G N A L ;
-T_SIMPLE_DOUBLE   : S I M P L E '_' D O U B L E ;
-T_SIMPLE_FLOAT    : S I M P L E '_' F L O A T ;
-T_SIMPLE_INTEGER  : S I M P L E '_' I N T E G E R ;
-T_SMALLDATETIME   : S M A L L D A T E T I M E ;
-T_SMALLINT        : S M A L L I N T ;
-T_SQL             : S Q L ;
-T_SQLEXCEPTION    : S Q L E X C E P T I O N ;
-T_SQLINSERT       : S Q L I N S E R T ;
-T_SQLSTATE        : S Q L S T A T E ;
-T_SQLWARNING      : S Q L W A R N I N G ;
-T_STATS           : S T A T S ;
-T_STATISTICS      : S T A T I S T I C S ;
-T_STEP            : S T E P ;
-T_STORAGE         : S T O R A G E ;
-T_STORED          : S T O R E D ;
-T_STRING          : S T R I N G ;
-T_SUBDIR          : S U B D I R ;
-T_SUBSTRING       : S U B S T R I N G ;
-T_SUM             : S U M ;
-T_SUMMARY         : S U M M A R Y ;
-T_SYS_REFCURSOR   : S Y S '_' R E F C U R S O R ;
-T_TABLE           : T A B L E ;
-T_TABLESPACE      : T A B L E S P A C E ;
-T_TEMPORARY       : T E M P O R A R Y ;
-T_TERMINATED      : T E R M I N A T E D ;
-T_TEXTIMAGE_ON    : T E X T I M A G E '_' O N ;
-T_THEN            : T H E N ;
-T_TIMESTAMP       : T I M E S T A M P ;
-T_TINYINT         : T I N Y I N T ;
-T_TITLE           : T I T L E ;
-T_TO              : T O ;
-T_TOP             : T O P ;
-T_TRANSACTION     : T R A N S A C T I O N ;
-T_TRUE            : T R U E ;
-T_TRUNCATE        : T R U N C A T E;
-T_TYPE            : T Y P E ;
-T_UNION           : U N I O N ;
-T_UNIQUE          : U N I Q U E ;
-T_UPDATE          : U P D A T E ;
-T_UR              : U R ;
-T_USE             : U S E ;
-T_USING           : U S I N G ;
-T_VALUE           : V A L U E ;
-T_VALUES          : V A L U E S ;
-T_VAR             : V A R ;
-T_VARCHAR         : V A R C H A R ;
-T_VARCHAR2        : V A R C H A R '2' ;
-T_VARYING         : V A R Y I N G ;
-T_VOLATILE        : V O L A T I L E ;
-T_WHEN            : W H E N ;
-T_WHERE           : W H E R E ;
-T_WHILE           : W H I L E ;
-T_WITH            : W I T H ;
-T_WITHOUT         : W I T H O U T ;
-T_WORK            : W O R K ;
-T_XACT_ABORT      : X A C T '_' A B O R T ;
-T_XML             : X M L ;
-T_YES             : Y E S ;
+options { caseInsensitive = true; }
 
-// Functions with specific syntax
-T_ACTIVITY_COUNT       : A C T I V I T Y '_' C O U N T ;
-T_CUME_DIST            : C U M E '_' D I S T ;
-T_CURRENT_DATE         : C U R R E N T '_' D A T E ;
-T_CURRENT_TIMESTAMP    : C U R R E N T '_' T I M E S T A M P ;
-T_CURRENT_USER         : C U R R E N T '_' U S E R ;
-T_DENSE_RANK           : D E N S E '_' R A N K ;
-T_FIRST_VALUE          : F I R S T '_' V A L U E;
-T_LAG                  : L A G ;
-T_LAST_VALUE           : L A S T '_' V A L U E;
-T_LEAD                 : L E A D ;
-T_MAX_PART_STRING      : M A X '_' P A R T '_' S T R I N G ;
-T_MIN_PART_STRING      : M I N '_' P A R T '_' S T R I N G ;
-T_MAX_PART_INT         : M A X '_' P A R T '_' I N T ;
-T_MIN_PART_INT         : M I N '_' P A R T '_' I N T ;
-T_MAX_PART_DATE        : M A X '_' P A R T '_' D A T E ;
-T_MIN_PART_DATE        : M I N '_' P A R T '_' D A T E ;
-T_PART_COUNT           : P A R T '_' C O U N T ;
-T_PART_LOC             : P A R T '_' L O C ;
-T_RANK                 : R A N K ;
-T_ROW_NUMBER           : R O W '_' N U M B E R;
-T_STDEV                : S T D E V ;
-T_SYSDATE              : S Y S D A T E ;
-T_VARIANCE             : V A R I A N C E ;
-T_USER                 : U S E R;
+// Keywords
+KW_ABORT                               : 'ABORT';
+KW_ACTIVATE                            : 'ACTIVATE';
+KW_ACTIVE                              : 'ACTIVE';
+KW_ADD                                 : 'ADD';
+KW_ADMIN                               : 'ADMIN';
+KW_AFTER                               : 'AFTER';
+KW_ALL                                 : 'ALL';
+KW_ALLOC_FRACTION                      : 'ALLOC_FRACTION';
+KW_ALTER                               : 'ALTER';
+KW_ANALYZE                             : 'ANALYZE';
+KW_AND                                 : 'AND';
+KW_ANTI                                : 'ANTI';
+KW_ANY                                 : 'ANY';
+KW_APPLICATION                         : 'APPLICATION';
+KW_ARCHIVE                             : 'ARCHIVE';
+KW_ARRAY                               : 'ARRAY';
+KW_AS                                  : 'AS';
+KW_ASC                                 : 'ASC';
+KW_AST                                 : 'AST';
+KW_AT                                  : 'AT';
+KW_AUTHORIZATION                       : 'AUTHORIZATION';
+KW_AUTOCOMMIT                          : 'AUTOCOMMIT';
+KW_BATCH                               : 'KW_BATCH';
+KW_BEFORE                              : 'BEFORE';
+KW_BETWEEN                             : 'BETWEEN';
+KW_BIGINT                              : 'BIGINT';
+KW_BINARY                              : 'BINARY';
+KW_BOOLEAN                             : 'BOOLEAN';
+KW_BOTH                                : 'BOTH';
+KW_BUCKET                              : 'BUCKET';
+KW_BUCKETS                             : 'BUCKETS';
+KW_BY                                  : 'BY';
+KW_CACHE                               : 'CACHE';
+KW_CASCADE                             : 'CASCADE';
+KW_CASE                                : 'CASE';
+KW_CAST                                : 'CAST';
+KW_CBO                                 : 'CBO';
+KW_CHANGE                              : 'CHANGE';
+KW_CHAR                                : 'CHAR';
+KW_CHECK                               : 'CHECK';
+KW_CLUSTER                             : 'CLUSTER';
+KW_CLUSTERED                           : 'CLUSTERED';
+KW_CLUSTERSTATUS                       : 'CLUSTERSTATUS';
+KW_COLLECTION                          : 'COLLECTION';
+KW_COLUMN                              : 'COLUMN';
+KW_COLUMNS                             : 'COLUMNS';
+KW_COMMENT                             : 'COMMENT';
+KW_COMMIT                              : 'COMMIT';
+KW_COMPACT                             : 'COMPACT';
+KW_COMPACTIONS                         : 'COMPACTIONS';
+KW_COMPACT_ID                          : 'COMPACTIONID';
+KW_COMPUTE                             : 'COMPUTE';
+KW_CONCATENATE                         : 'CONCATENATE';
+KW_CONF                                : 'CONF';
+KW_CONSTRAINT                          : 'CONSTRAINT';
+KW_CONTINUE                            : 'CONTINUE';
+KW_COST                                : 'COST';
+KW_CREATE                              : 'CREATE';
+KW_CRON                                : 'CRON';
+KW_CROSS                               : 'CROSS';
+KW_CUBE                                : 'CUBE';
+KW_CURRENT                             : 'CURRENT';
+KW_CURRENT_DATE                        : 'CURRENT_DATE';
+KW_CURRENT_TIMESTAMP                   : 'CURRENT_TIMESTAMP';
+KW_CURSOR                              : 'CURSOR';
+KW_DATA                                : 'DATA';
+KW_DATABASE                            : 'DATABASE';
+KW_DATABASES                           : 'DATABASES';
+KW_DATACONNECTOR                       : 'CONNECTOR';
+KW_DATACONNECTORS                      : 'CONNECTORS';
+KW_DATE                                : 'DATE';
+KW_DATETIME                            : 'DATETIME';
+KW_DAY                                 : 'DAY' 'S'?;
+KW_DAYOFWEEK                           : 'KW_DAYOFWEEK';
+KW_DBPROPERTIES                        : 'DBPROPERTIES';
+KW_DCPROPERTIES                        : 'DCPROPERTIES';
+KW_DDL                                 : 'DDL';
+KW_DEBUG                               : 'DEBUG';
+KW_DECIMAL                             : 'DEC' 'IMAL'? | 'NUMERIC';
+KW_DEFAULT                             : 'DEFAULT';
+KW_DEFERRED                            : 'DEFERRED';
+KW_DEFINED                             : 'DEFINED';
+KW_DELETE                              : 'DELETE';
+KW_DELIMITED                           : 'DELIMITED';
+KW_DEPENDENCY                          : 'DEPENDENCY';
+KW_DESC                                : 'DESC';
+KW_DESCRIBE                            : 'DESCRIBE';
+KW_DETAIL                              : 'DETAIL';
+KW_DIRECTORIES                         : 'DIRECTORIES';
+KW_DIRECTORY                           : 'DIRECTORY';
+KW_DISABLE                             : 'DISABLE' 'D'?;
+KW_DISTINCT                            : 'DISTINCT';
+KW_DISTRIBUTE                          : 'DISTRIBUTE';
+KW_DISTRIBUTED                         : 'DISTRIBUTED';
+KW_DO                                  : 'DO';
+KW_DOUBLE                              : 'DOUBLE';
+KW_DOW                                 : 'DAYOFWEEK';
+KW_DROP                                : 'DROP';
+KW_DUMP                                : 'DUMP';
+KW_ELEM_TYPE                           : '$ELEM$';
+KW_ELSE                                : 'ELSE';
+KW_ENABLE                              : 'ENABLE' 'D'?;
+KW_END                                 : 'END';
+KW_ENFORCED                            : 'ENFORCED';
+KW_ESCAPED                             : 'ESCAPED';
+KW_EVERY                               : 'EVERY';
+KW_EXCEPT                              : 'EXCEPT';
+KW_EXCHANGE                            : 'EXCHANGE';
+KW_EXCLUSIVE                           : 'EXCLUSIVE';
+KW_EXECUTE                             : 'EXECUTE';
+KW_EXECUTED                            : 'EXECUTED';
+KW_EXISTS                              : 'EXISTS';
+KW_EXPIRE_SNAPSHOTS                    : 'EXPIRE_SNAPSHOTS';
+KW_EXPLAIN                             : 'EXPLAIN';
+KW_EXPORT                              : 'EXPORT';
+KW_EXPRESSION                          : 'EXPRESSION';
+KW_EXTENDED                            : 'EXTENDED';
+KW_EXTERNAL                            : 'EXTERNAL';
+KW_EXTRACT                             : 'EXTRACT';
+KW_FALSE                               : 'FALSE';
+KW_FETCH                               : 'FETCH';
+KW_FIELDS                              : 'FIELDS';
+KW_FILE                                : 'FILE';
+KW_FILEFORMAT                          : 'FILEFORMAT';
+KW_FIRST                               : 'FIRST';
+KW_FLOAT                               : 'FLOAT';
+KW_FLOOR                               : 'FLOOR';
+KW_FOLLOWING                           : 'FOLLOWING';
+KW_FOR                                 : 'FOR';
+KW_FORCE                               : 'FORCE';
+KW_FOREIGN                             : 'FOREIGN';
+KW_FORMAT                              : 'FORMAT';
+KW_FORMATTED                           : 'FORMATTED';
+KW_FROM                                : 'FROM';
+KW_FULL                                : 'FULL';
+KW_FUNCTION                            : 'FUNCTION';
+KW_FUNCTIONS                           : 'FUNCTIONS';
+KW_GRANT                               : 'GRANT';
+KW_GROUP                               : 'GROUP';
+KW_GROUPING                            : 'GROUPING';
+KW_HAVING                              : 'HAVING';
+KW_HOLD_DDLTIME                        : 'KW_HOLD_DDLTIME';
+KW_HOUR                                : 'HOUR' 'S'?;
+KW_IDXPROPERTIES                       : 'IDXPROPERTIES';
+KW_IF                                  : 'IF';
+KW_IGNORE                              : 'IGNORE';
+KW_IMPORT                              : 'IMPORT';
+KW_IN                                  : 'IN';
+KW_INDEX                               : 'INDEX';
+KW_INDEXES                             : 'INDEXES';
+KW_INNER                               : 'INNER';
+KW_INPATH                              : 'INPATH';
+KW_INPUTDRIVER                         : 'INPUTDRIVER';
+KW_INPUTFORMAT                         : 'INPUTFORMAT';
+KW_INSERT                              : 'INSERT';
+KW_INT                                 : 'INT' 'EGER'?;
+KW_INTERSECT                           : 'INTERSECT';
+KW_INTERVAL                            : 'INTERVAL';
+KW_INTO                                : 'INTO';
+KW_IS                                  : 'IS';
+KW_ISOLATION                           : 'ISOLATION';
+KW_ITEMS                               : 'ITEMS';
+KW_JAR                                 : 'JAR';
+KW_JOIN                                : 'JOIN';
+KW_JOINCOST                            : 'JOINCOST';
+KW_KEY                                 : 'KEY';
+KW_KEYS                                : 'KEYS';
+KW_KEY_TYPE                            : '$KEY$';
+KW_KILL                                : 'KILL';
+KW_LAST                                : 'LAST';
+KW_LATERAL                             : 'LATERAL';
+KW_LEADING                             : 'LEADING';
+KW_LEFT                                : 'LEFT';
+KW_LESS                                : 'LESS';
+KW_LEVEL                               : 'LEVEL';
+KW_LIKE                                : 'LIKE';
+KW_LIMIT                               : 'LIMIT';
+KW_LINES                               : 'LINES';
+KW_LOAD                                : 'LOAD';
+KW_LOCAL                               : 'LOCAL';
+KW_LOCATION                            : 'LOCATION';
+KW_LOCK                                : 'LOCK';
+KW_LOCKS                               : 'LOCKS';
+KW_LOGICAL                             : 'LOGICAL';
+KW_LONG                                : 'LONG';
+KW_MACRO                               : 'MACRO';
+KW_MANAGED                             : 'MANAGED';
+KW_MANAGEDLOCATION                     : 'MANAGEDLOCATION';
+KW_MANAGEMENT                          : 'MANAGEMENT';
+KW_MAP                                 : 'MAP';
+KW_MAPJOIN                             : 'MAPJOIN';
+KW_MAPPING                             : 'MAPPING';
+KW_MATCHED                             : 'MATCHED';
+KW_MATERIALIZED                        : 'MATERIALIZED';
+KW_MERGE                               : 'MERGE';
+KW_METADATA                            : 'METADATA';
+KW_MINUS                               : 'MINUS';
+KW_MINUTE                              : 'MINUTE' 'S'?;
+KW_MONTH                               : 'MONTH' 'S'?;
+KW_MORE                                : 'MORE';
+KW_MOVE                                : 'MOVE';
+KW_MSCK                                : 'MSCK';
+KW_NONE                                : 'NONE';
+KW_NORELY                              : 'NORELY';
+KW_NOSCAN                              : 'NOSCAN';
+KW_NOT                                 : 'NOT' | '!';
+KW_NOVALIDATE                          : 'NOVALIDATE';
+KW_NO_DROP                             : 'KW_NO_DROP';
+KW_NULL                                : 'NULL';
+KW_NULLS                               : 'NULLS';
+KW_OF                                  : 'OF';
+KW_OFFLINE                             : 'KW_OFFLINE';
+KW_OFFSET                              : 'OFFSET';
+KW_ON                                  : 'ON';
+KW_ONLY                                : 'ONLY';
+KW_OPERATOR                            : 'OPERATOR';
+KW_OPTION                              : 'OPTION';
+KW_OR                                  : 'OR';
+KW_ORDER                               : 'ORDER';
+KW_OUT                                 : 'OUT';
+KW_OUTER                               : 'OUTER';
+KW_OUTPUTDRIVER                        : 'OUTPUTDRIVER';
+KW_OUTPUTFORMAT                        : 'OUTPUTFORMAT';
+KW_OVER                                : 'OVER';
+KW_OVERWRITE                           : 'OVERWRITE';
+KW_OWNER                               : 'OWNER';
+KW_PARTITION                           : 'PARTITION';
+KW_PARTITIONED                         : 'PARTITIONED';
+KW_PARTITIONS                          : 'PARTITIONS';
+KW_PATH                                : 'PATH';
+KW_PERCENT                             : 'PERCENT';
+KW_PKFK_JOIN                           : 'PKFK_JOIN';
+KW_PLAN                                : 'PLAN';
+KW_PLANS                               : 'PLANS';
+KW_PLUS                                : 'PLUS';
+KW_POOL                                : 'POOL';
+KW_PRECEDING                           : 'PRECEDING';
+KW_PRECISION                           : 'PRECISION';
+KW_PREPARE                             : 'PREPARE';
+KW_PRESERVE                            : 'PRESERVE';
+KW_PRIMARY                             : 'PRIMARY';
+KW_PRINCIPALS                          : 'PRINCIPALS';
+KW_PROCEDURE                           : 'PROCEDURE';
+KW_PROTECTION                          : 'KW_PROTECTION';
+KW_PURGE                               : 'PURGE';
+KW_QUALIFY                             : 'QUALIFY';
+KW_QUARTER                             : 'QUARTER';
+KW_QUERY                               : 'QUERY';
+KW_QUERY_PARALLELISM                   : 'QUERY_PARALLELISM';
+KW_RANGE                               : 'RANGE';
+KW_READ                                : 'READ';
+KW_READONLY                            : 'KW_READONLY';
+KW_READS                               : 'READS';
+KW_REAL                                : 'REAL';
+KW_REBUILD                             : 'REBUILD';
+KW_RECORDREADER                        : 'RECORDREADER';
+KW_RECORDWRITER                        : 'RECORDWRITER';
+KW_REDUCE                              : 'REDUCE';
+KW_REFERENCES                          : 'REFERENCES';
+KW_REGEXP                              : 'REGEXP';
+KW_RELOAD                              : 'RELOAD';
+KW_RELY                                : 'RELY';
+KW_REMOTE                              : 'REMOTE';
+KW_RENAME                              : 'RENAME';
+KW_REOPTIMIZATION                      : 'REOPTIMIZATION';
+KW_REPAIR                              : 'REPAIR';
+KW_REPL                                : 'REPL';
+KW_REPLACE                             : 'REPLACE';
+KW_REPLICATION                         : 'REPLICATION';
+KW_RESOURCE                            : 'RESOURCE';
+KW_RESPECT                             : 'RESPECT';
+KW_RESTRICT                            : 'RESTRICT';
+KW_REVOKE                              : 'REVOKE';
+KW_REWRITE                             : 'REWRITE';
+KW_RIGHT                               : 'RIGHT';
+KW_RLIKE                               : 'RLIKE';
+KW_ROLE                                : 'ROLE';
+KW_ROLES                               : 'ROLES';
+KW_ROLLBACK                            : 'ROLLBACK';
+KW_ROLLUP                              : 'ROLLUP';
+KW_ROW                                 : 'ROW';
+KW_ROWS                                : 'ROWS';
+KW_SCHEDULED                           : 'SCHEDULED';
+KW_SCHEDULING_POLICY                   : 'SCHEDULING_POLICY';
+KW_SCHEMA                              : 'SCHEMA';
+KW_SCHEMAS                             : 'SCHEMAS';
+KW_SECOND                              : 'SECOND' 'S'?;
+KW_SELECT                              : 'SELECT';
+KW_SEMI                                : 'SEMI';
+KW_SERDE                               : 'SERDE';
+KW_SERDEPROPERTIES                     : 'SERDEPROPERTIES';
+KW_SERVER                              : 'SERVER';
+KW_SET                                 : 'SET';
+KW_SETS                                : 'SETS';
+KW_SET_CURRENT_SNAPSHOT                : 'SET_CURRENT_SNAPSHOT';
+KW_SHARED                              : 'SHARED';
+KW_SHOW                                : 'SHOW';
+KW_SHOW_DATABASE                       : 'SHOW_DATABASE';
+KW_SKEWED                              : 'SKEWED';
+KW_SMALLINT                            : 'SMALLINT';
+KW_SNAPSHOT                            : 'SNAPSHOT';
+KW_SOME                                : 'SOME';
+KW_SORT                                : 'SORT';
+KW_SORTED                              : 'SORTED';
+KW_SPEC                                : 'SPEC';
+KW_SSL                                 : 'SSL';
+KW_START                               : 'START';
+KW_STATISTICS                          : 'STATISTICS';
+KW_STATUS                              : 'STATUS';
+KW_STORED                              : 'STORED';
+KW_STREAMTABLE                         : 'STREAMTABLE';
+KW_STRING                              : 'STRING';
+KW_STRUCT                              : 'STRUCT';
+KW_SUMMARY                             : 'SUMMARY';
+KW_SYNC                                : 'SYNC';
+KW_SYSTEM_TIME                         : 'SYSTEM_TIME';
+KW_SYSTEM_VERSION                      : 'SYSTEM_VERSION';
+KW_TABLE                               : 'TABLE';
+KW_TABLES                              : 'TABLES';
+KW_TABLESAMPLE                         : 'TABLESAMPLE';
+KW_TBLPROPERTIES                       : 'TBLPROPERTIES';
+KW_TEMPORARY                           : 'TEMPORARY';
+KW_TERMINATED                          : 'TERMINATED';
+KW_THEN                                : 'THEN';
+KW_TIME                                : 'TIME';
+KW_TIMESTAMP                           : 'TIMESTAMP';
+KW_TIMESTAMPLOCALTZ                    : 'TIMESTAMPLOCALTZ';
+KW_TIMESTAMPTZ                         : 'KW_TIMESTAMPTZ';
+KW_TINYINT                             : 'TINYINT';
+KW_TO                                  : 'TO';
+KW_TOUCH                               : 'TOUCH';
+KW_TRAILING                            : 'TRAILING';
+KW_TRANSACTION                         : 'TRANSACTION';
+KW_TRANSACTIONAL                       : 'TRANSACTIONAL';
+KW_TRANSACTIONS                        : 'TRANSACTIONS';
+KW_TRANSFORM                           : 'TRANSFORM';
+KW_TRIGGER                             : 'TRIGGER';
+KW_TRIM                                : 'TRIM';
+KW_TRUE                                : 'TRUE';
+KW_TRUNCATE                            : 'TRUNCATE';
+KW_TYPE                                : 'TYPE';
+KW_UNARCHIVE                           : 'UNARCHIVE';
+KW_UNBOUNDED                           : 'UNBOUNDED';
+KW_UNDO                                : 'UNDO';
+KW_UNION                               : 'UNION';
+KW_UNIONTYPE                           : 'UNIONTYPE';
+KW_UNIQUE                              : 'UNIQUE';
+KW_UNIQUEJOIN                          : 'UNIQUEJOIN';
+KW_UNKNOWN                             : 'UNKNOWN';
+KW_UNLOCK                              : 'UNLOCK';
+KW_UNMANAGED                           : 'UNMANAGED';
+KW_UNSET                               : 'UNSET';
+KW_UNSIGNED                            : 'UNSIGNED';
+KW_UPDATE                              : 'UPDATE';
+KW_URI                                 : 'URI';
+KW_URL                                 : 'URL';
+KW_USE                                 : 'USE';
+KW_USER                                : 'USER';
+KW_USING                               : 'USING';
+KW_UTC                                 : 'UTC';
+KW_UTCTIMESTAMP                        : 'UTC_TMESTAMP';
+KW_VALIDATE                            : 'VALIDATE';
+KW_VALUES                              : 'VALUES';
+KW_VALUE_TYPE                          : '$VALUE$';
+KW_VARCHAR                             : 'VARCHAR';
+KW_VECTORIZATION                       : 'VECTORIZATION';
+KW_VIEW                                : 'VIEW';
+KW_VIEWS                               : 'VIEWS';
+KW_WAIT                                : 'WAIT';
+KW_WEEK                                : 'WEEK' 'S'?;
+KW_WHEN                                : 'WHEN';
+KW_WHERE                               : 'WHERE';
+KW_WHILE                               : 'WHILE';
+KW_WINDOW                              : 'WINDOW';
+KW_WITH                                : 'WITH';
+KW_WITHIN                              : 'WITHIN';
+KW_WORK                                : 'WORK';
+KW_WORKLOAD                            : 'WORKLOAD';
+KW_WRITE                               : 'WRITE';
+KW_YEAR                                : 'YEAR' 'S'?;
+KW_ZONE                                : 'ZONE';
 
-T_ADD          : '+' ;
-T_COLON        : ':' ;
-T_COMMA        : ',' ;
-T_PIPE         : '||' ;
-T_DIV          : '/' ;
-T_DOT          : '.' ;
-T_DOT2         : '..' ;
-T_EQUAL        : '=' ;
-T_EQUAL2       : '==' ;
-T_SHARP        : '#'  ;
-T_NOTE         : '!'  ;
-T_NOTEQUAL     : '<>' ;
-T_NOTEQUAL2    : '!=' ;
-T_GREATER      : '>' ;
-T_GREATEREQUAL : '>=' ;
-T_LESS         : '<' ;
-T_LESSEQUAL    : '<=' ;
-T_MUL          : '*' ;
-T_PRECENT      : '%' ;
-T_CALLS        : '@' ;
-T_OPEN_B       : '{' ;
-T_OPEN_P       : '(' ;
-T_OPEN_SB      : '[' ;
-T_CLOSE_B      : '}' ;
-T_CLOSE_P      : ')' ;
-T_CLOSE_SB     : ']' ;
-T_SEMICOLON    : ';' ;
-T_SUB          : '-' ;
+// Operators
+// NOTE: if you add a new function/operator, add it to sysFuncNames so that describe function _FUNC_ will work.
+DOT : '.'; // generated as a part of Number rule
+COLON : ':' ;
+COMMA : ',' ;
+SEMICOLON : ';' ;
 
-L_ID        : L_ID_PART                                                // Identifier
-            ;
-L_S_STRING  : '\'' (('\'' '\'') | ('\\' '\'') | ~('\''))* '\''         // Single quoted string literal
-            ;
-L_D_STRING  : '"' (L_STR_ESC_D | .)*? '"'                              // Double quoted string literal
-            ;
-L_INT       : L_DIGIT+ ;                                               // Integer
-L_DEC       : L_DIGIT+ '.' ~'.' L_DIGIT*                               // Decimal number
-            | '.' L_DIGIT+
-            ;
-L_WS        : L_BLANK+ -> skip ;                                       // Whitespace
-L_M_COMMENT : '/*' .*? '*/' -> channel(HIDDEN) ;                       // Multiline comment
-L_S_COMMENT : ('--' | '//')  .*? '\r'? '\n' -> channel(HIDDEN) ;       // Single line comment
+LPAREN : '(' ;
+RPAREN : ')' ;
+LSQUARE : '[' ;
+RSQUARE : ']' ;
+LCURLY : '{';
+RCURLY : '}';
 
-L_FILE      : ([a-zA-Z] ':' '\\'?)? L_ID ('\\' L_ID)*                  // File path (a/b/c Linux path causes conflicts with division operator and handled at parser level)
-            ;
+EQUAL : '=' | '==';
+EQUAL_NS : '<=>';
+NOTEQUAL : '<>' | '!=';
+LESSTHANOREQUALTO : '<=';
+LESSTHAN : '<';
+GREATERTHANOREQUALTO : '>=';
+GREATERTHAN : '>';
 
-L_LABEL     : ([a-zA-Z] | L_DIGIT | '_')* ':'
-            ;
+DIVIDE : '/';
+PLUS : '+';
+MINUS : '-';
+STAR : '*';
+MOD : '%';
+DIV : 'DIV';
+
+AMPERSAND : '&';
+TILDE : '~';
+BITWISEOR : '|';
+CONCATENATE : '||';
+BITWISEXOR : '^';
+QUESTION : '?';
+DOLLAR : '$';
+
+// LITERALS
+
+StringLiteral
+    : ( '\'' ( ~('\''|'\\') | ('\\' .) )* '\''
+    | '"' ( ~('"'|'\\') | ('\\' .) )* '"'
+    )+
+    ;
+
+CharSetLiteral
+    : StringLiteral
+    | '0' 'X' (HexDigit | Digit)+
+    ;
+
+IntegralLiteral
+    : Digit+ ('L' | 'S' | 'Y')
+    ;
+
+NumberLiteral
+    : Number ('B'? 'D')
+    ;
+
+ByteLengthLiteral
+    : Digit+ [BKMG]
+    ;
+
+Number
+    : Digit+ (DOT Digit* Exponent? | Exponent)?
+    ;
+
+/*
+An Identifier can be:
+- tableName
+- columnName
+- select expr alias
+- lateral view aliases
+- database name
+- view name
+- subquery alias
+- function name
+- ptf argument identifier
+- index name
+- property name for: db,tbl,partition...
+- fileFormat
+- role name
+- privilege name
+- principal name
+- macro name
+- hint name
+- window name
+*/
+Identifier
+    : (Letter | Digit) (Letter | Digit | '_')*
+    | QuotedIdentifier
+    | '`' RegexComponent+ '`'
+    ;
 
 fragment
-L_ID_PART  :
-             [a-zA-Z] ([a-zA-Z] | L_DIGIT | '_')*                           // Identifier part
-            | '$' '{' .*? '}'
-            | ('_' | '@' | ':' | '#' | '$') ([a-zA-Z] | L_DIGIT | '_' | '@' | ':' | '#' | '$')+     // (at least one char must follow special char)
-            | '"' .*? '"'                                                   // Quoted identifiers
-            | '[' .*? ']'
-            | '`' .*? '`'
-            ;
-fragment
-L_STR_ESC_D :                                                          // Double quoted string escape sequence
-              '""' | '\\"'
-            ;
-fragment
-L_DIGIT     : [0-9]                                                    // Digit
-            ;
-fragment
-L_BLANK     : (' ' | '\t' | '\r' | '\n')
-            ;
+QuotedIdentifier
+    : '`'  ('``' | ~'`')* '`'
+    ;
 
-// Support case-insensitive keywords and allowing case-sensitive identifiers
-fragment A : ('a'|'A') ;
-fragment B : ('b'|'B') ;
-fragment C : ('c'|'C') ;
-fragment D : ('d'|'D') ;
-fragment E : ('e'|'E') ;
-fragment F : ('f'|'F') ;
-fragment G : ('g'|'G') ;
-fragment H : ('h'|'H') ;
-fragment I : ('i'|'I') ;
-fragment J : ('j'|'J') ;
-fragment K : ('k'|'K') ;
-fragment L : ('l'|'L') ;
-fragment M : ('m'|'M') ;
-fragment N : ('n'|'N') ;
-fragment O : ('o'|'O') ;
-fragment P : ('p'|'P') ;
-fragment Q : ('q'|'Q') ;
-fragment R : ('r'|'R') ;
-fragment S : ('s'|'S') ;
-fragment T : ('t'|'T') ;
-fragment U : ('u'|'U') ;
-fragment V : ('v'|'V') ;
-fragment W : ('w'|'W') ;
-fragment X : ('x'|'X') ;
-fragment Y : ('y'|'Y') ;
-fragment Z : ('z'|'Z') ;
+fragment
+Letter
+    : 'A'..'Z'
+    ;
+
+fragment
+HexDigit
+    : 'A'..'F'
+    ;
+
+fragment
+Digit
+    : '0'..'9'
+    ;
+
+fragment
+Exponent
+    : ('E') ( PLUS|MINUS )? (Digit)+
+    ;
+
+fragment
+RegexComponent
+    : 'A'..'Z' | '0'..'9' | '_'
+    | PLUS | STAR | QUESTION | MINUS | DOT
+    | LPAREN | RPAREN | LSQUARE | RSQUARE | LCURLY | RCURLY
+    | BITWISEXOR | BITWISEOR | DOLLAR | '!'
+    ;
+
+CharSetName
+    : '_' (Letter | Digit | '_' | '-' | '.' | ':')+
+    ;
+
+WHITE_SPACE
+    : (' '|'\r'|'\t'|'\n') -> channel(HIDDEN)
+    ;
+
+LINE_COMMENT
+    : '--' ~('\n' | '\r')* -> channel(HIDDEN)
+    ;
+
+QUERY_HINT
+    : SHOW_HINT
+    | HIDDEN_HINT
+    ;
+
+SHOW_HINT
+    : '/*+' (QUERY_HINT | .)*? '*/' ->channel(HIDDEN)
+    ;
+
+HIDDEN_HINT
+    : '/*' (QUERY_HINT | .)*? '*/' -> channel(HIDDEN)
+    ;

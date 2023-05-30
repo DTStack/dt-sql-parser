@@ -1,4 +1,5 @@
-import PostgreSQLParserListener from '../../../src/lib/pgsql/PostgreSQLParserListener';
+import { Target_listContext } from '../../../src/lib/pgsql/PostgreSQLParser';
+import { PostgreSQLParserListener } from '../../../src/lib/pgsql/PostgreSQLParserListener';
 import PostgresSQL from '../../../src/parser/pgsql';
 
 describe('PostgresSQL Listener Tests', () => {
@@ -10,10 +11,9 @@ describe('PostgresSQL Listener Tests', () => {
 
     test('Listener enterTableName', async () => {
         let result = '';
-        class MyListener extends PostgreSQLParserListener {
-            // eslint-disable-next-line camelcase
-            enterTable_ref = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+        class MyListener implements PostgreSQLParserListener {
+            enterTable_ref(ctx) {
+                result = ctx.text.toLowerCase();
             }
         }
         const listenTableName: any = new MyListener();

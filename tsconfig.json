@@ -20,14 +20,12 @@
         },
         "types": [
             "node",
-            "jest",
-            "antlr4"
+            "jest"
         ],
         "typeRoots": [
             "node",
             "node_modules/@types",
-            "./src/typings",
-            "node_modules/antlr4/**/*"
+            "./src/typings"
         ]
     },
     "include": [
