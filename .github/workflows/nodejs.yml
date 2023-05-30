@@ -65,13 +65,7 @@ jobs:
             - name: Run Units Test
               run: |
                 export NODE_OPTIONS="--max_old_space_size=4096"
-                npx jest test/utils
-                npx jest test/parser/flinksql
-                npx jest test/parser/spark
-                npx jest test/parser/generic
-                npx jest test/parser/hive
-                npx jest test/parser/pgsql
-                npx jest test/parser/plsql
+                yarn test
     build:
         runs-on: ubuntu-latest
         needs: [setup]

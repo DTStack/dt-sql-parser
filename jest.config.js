@@ -100,7 +100,7 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  preset: "ts-jest/presets/js-with-ts-esm",
+  // preset: "ts-jest/presets/js-with-ts-esm",
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -171,19 +171,11 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "\\.[jt]sx?$": [
-      "ts-jest",
-      {
-        tsconfig: {
-          noUnusedLocals: false,
-        },
-      },
-    ],
+    "\\.[jt]sx?$": ['@swc/jest']
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  transformIgnorePatterns: ["/node_modules/.pnpm/(?!antlr4)"],
-
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
 
@@ -194,8 +186,5 @@ module.exports = {
   // watchPathIgnorePatterns: [],
 
   // Whether to use watchman for file crawling
-  // watchman: true,
-  moduleNameMapper: {
-    "^antlr4$": "<rootDir>/node_modules/antlr4/dist/antlr4.web.js",
-  },
+  // watchman: true
 };
