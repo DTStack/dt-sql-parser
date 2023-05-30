@@ -13,12 +13,11 @@ describe('PLSQL Visitor Tests', () => {
         let result = '';
         class MyVisitor extends AbstractParseTreeVisitor<any> implements PlSqlParserVisitor<any> {
             protected defaultResult() {
-                throw new Error('Method not implemented.');
                 return result;
             }
             // eslint-disable-next-line camelcase
             visitTable_ref_list = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+                result = ctx.text.toLowerCase();
             }
         }
         const visitor: any = new MyVisitor();

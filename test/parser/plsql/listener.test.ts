@@ -13,7 +13,7 @@ describe('PLSQL Listener Tests', () => {
         class MyListener implements PlSqlParserListener {
             // eslint-disable-next-line camelcase
             enterTable_ref_list = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+                result = ctx.text.toLowerCase();
             }
         }
         const listenTableName: any = new MyListener();
