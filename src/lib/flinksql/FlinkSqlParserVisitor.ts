@@ -10,6 +10,7 @@ import { ValueExpressionDefaultContext } from "./FlinkSqlParser";
 import { ArithmeticUnaryContext } from "./FlinkSqlParser";
 import { ArithmeticBinaryContext } from "./FlinkSqlParser";
 import { ComparisonContext } from "./FlinkSqlParser";
+import { ArithmeticBinaryAlternateContext } from "./FlinkSqlParser";
 import { SearchedCaseContext } from "./FlinkSqlParser";
 import { SimpleCaseContext } from "./FlinkSqlParser";
 import { CastContext } from "./FlinkSqlParser";
@@ -53,6 +54,7 @@ import { SetStatememtContext } from "./FlinkSqlParser";
 import { ResetStatememtContext } from "./FlinkSqlParser";
 import { JarStatememtContext } from "./FlinkSqlParser";
 import { DtAddStatementContext } from "./FlinkSqlParser";
+import { DtFilePathContext } from "./FlinkSqlParser";
 import { CreateTableContext } from "./FlinkSqlParser";
 import { SimpleCreateTableContext } from "./FlinkSqlParser";
 import { CreateTableAsSelectContext } from "./FlinkSqlParser";
@@ -280,6 +282,14 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitComparison?: (ctx: ComparisonContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `arithmeticBinaryAlternate`
+	 * labeled alternative in `FlinkSqlParser.valueExpression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitArithmeticBinaryAlternate?: (ctx: ArithmeticBinaryAlternateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `searchedCase`
@@ -604,6 +614,13 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitDtAddStatement?: (ctx: DtAddStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.dtFilePath`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDtFilePath?: (ctx: DtFilePathContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.createTable`.

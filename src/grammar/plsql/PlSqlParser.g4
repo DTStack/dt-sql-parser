@@ -28,10 +28,10 @@ options {
 import PlSqlBaseParser from './PlSqlBaseParser';
 }
 
-program: sql_script;
+program: sql_script SEMICOLON? EOF;
 
 sql_script
-    : ((unit_statement | sql_plus_command) SEMICOLON?)* EOF
+    : (unit_statement | sql_plus_command)*
     ;
 
 unit_statement

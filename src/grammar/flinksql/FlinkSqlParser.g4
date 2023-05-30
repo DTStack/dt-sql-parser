@@ -88,11 +88,15 @@ jarStatememt
 
 // 数栈平台自研的添加文件语法
 dtAddStatement
-    : KW_ADD KW_JAR KW_WITH FILE_PATH (KW_AS uid)?
-    | KW_ADD KW_FILE KW_WITH FILE_PATH (KW_AS uid)? (KW_RENAME uid)?
-    | KW_ADD (KW_PYTHON_FILES | KW_PYTHON_REQUIREMENTS | KW_PYTHON_DEPENDENCIES | KW_PYTHON_JAR | KW_PYTHON_ARCHIVES) KW_WITH FILE_PATH KW_RENAME uid
-    | KW_ADD KW_PYTHON_PARAMETER FILE_PATH
-    | KW_ADD KW_ENGINE KW_FILE KW_WITH FILE_PATH KW_RENAME uid KW_KEY uid
+    : KW_ADD KW_JAR KW_WITH dtFilePath (KW_AS uid)?
+    | KW_ADD KW_FILE KW_WITH dtFilePath (KW_AS uid)? (KW_RENAME uid)?
+    | KW_ADD (KW_PYTHON_FILES | KW_PYTHON_REQUIREMENTS | KW_PYTHON_DEPENDENCIES | KW_PYTHON_JAR | KW_PYTHON_ARCHIVES) KW_WITH dtFilePath KW_RENAME uid
+    | KW_ADD KW_PYTHON_PARAMETER dtFilePath
+    | KW_ADD KW_ENGINE KW_FILE KW_WITH dtFilePath KW_RENAME uid KW_KEY uid
+    ;
+
+dtFilePath
+    : SLASH_TEXT+
     ;
 
 // Create statements
@@ -696,6 +700,7 @@ valueExpression
     | left=valueExpression operator='^' right=valueExpression                                #arithmeticBinary
     | left=valueExpression operator='|' right=valueExpression                               #arithmeticBinary
     | left=valueExpression comparisonOperator right=valueExpression                          #comparison
+    | left=valueExpression right=SLASH_TEXT                                                #arithmeticBinaryAlternate
     ;
 
 primaryExpression
