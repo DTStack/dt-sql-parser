@@ -6,6 +6,6 @@ export default abstract class PlSqlBaseLexer extends Lexer {
 
     IsNewlineAtPos(pos: number): boolean {
         const la = this._input.LA(pos);
-        return la == -1;
+        return la == -1 || String.fromCharCode(la) == '\n';
     }
 }
