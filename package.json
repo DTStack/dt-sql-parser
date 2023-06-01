@@ -47,6 +47,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
+    "antlr4-c3": "^3.0.1",
     "antlr4ts": "^0.5.0-alpha.4",
     "antlr4ts-cli": "^0.5.0-alpha.4"
   }
