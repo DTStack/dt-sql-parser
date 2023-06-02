@@ -9,12 +9,14 @@ statement
     ;
 
 sqlStatements
-    : (sqlStatement SEMICOLON? | emptyStatement)*
+    : (sqlStatement | emptyStatement)*
     ;
 
 sqlStatement
-    : ddlStatement | dmlStatement | describeStatement | explainStatement | useStatement | showStatememt
-    | loadStatement | unloadStatememt | setStatememt | resetStatememt | jarStatememt | dtAddStatement
+    : ddlStatement SEMICOLON? | dmlStatement SEMICOLON? | describeStatement SEMICOLON? 
+    | explainStatement SEMICOLON? | useStatement SEMICOLON?| showStatememt SEMICOLON?
+    | loadStatement SEMICOLON?| unloadStatememt SEMICOLON?| setStatememt SEMICOLON?
+    | resetStatememt SEMICOLON?| jarStatememt SEMICOLON?| dtAddStatement SEMICOLON?
     ;
 
 emptyStatement

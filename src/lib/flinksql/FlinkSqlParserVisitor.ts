@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -84,7 +84,6 @@ import { TransformListContext } from "./FlinkSqlParser";
 import { TransformContext } from "./FlinkSqlParser";
 import { TransformArgumentContext } from "./FlinkSqlParser";
 import { LikeDefinitionContext } from "./FlinkSqlParser";
-import { SourceTableContext } from "./FlinkSqlParser";
 import { LikeOptionContext } from "./FlinkSqlParser";
 import { CreateCatalogContext } from "./FlinkSqlParser";
 import { CreateDatabaseContext } from "./FlinkSqlParser";
@@ -127,7 +126,6 @@ import { FromClauseContext } from "./FlinkSqlParser";
 import { TableExpressionContext } from "./FlinkSqlParser";
 import { TableReferenceContext } from "./FlinkSqlParser";
 import { TablePrimaryContext } from "./FlinkSqlParser";
-import { TablePathContext } from "./FlinkSqlParser";
 import { SystemTimePeriodContext } from "./FlinkSqlParser";
 import { DateTimeExpressionContext } from "./FlinkSqlParser";
 import { InlineDataValueClauseContext } from "./FlinkSqlParser";
@@ -192,6 +190,11 @@ import { IdentifierContext } from "./FlinkSqlParser";
 import { UnquotedIdentifierContext } from "./FlinkSqlParser";
 import { QuotedIdentifierContext } from "./FlinkSqlParser";
 import { WhenClauseContext } from "./FlinkSqlParser";
+import { CatalogPathContext } from "./FlinkSqlParser";
+import { DatabasePathContext } from "./FlinkSqlParser";
+import { DatabasePathCreateContext } from "./FlinkSqlParser";
+import { TablePathCreateContext } from "./FlinkSqlParser";
+import { TablePathContext } from "./FlinkSqlParser";
 import { UidContext } from "./FlinkSqlParser";
 import { WithOptionContext } from "./FlinkSqlParser";
 import { IfNotExistsContext } from "./FlinkSqlParser";
@@ -826,13 +829,6 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	visitLikeDefinition?: (ctx: LikeDefinitionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.sourceTable`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSourceTable?: (ctx: SourceTableContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.likeOption`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1125,13 +1121,6 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitTablePrimary?: (ctx: TablePrimaryContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.tablePath`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTablePath?: (ctx: TablePathContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.systemTimePeriod`.
@@ -1580,6 +1569,41 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitWhenClause?: (ctx: WhenClauseContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.catalogPath`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCatalogPath?: (ctx: CatalogPathContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.databasePath`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDatabasePath?: (ctx: DatabasePathContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.databasePathCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDatabasePathCreate?: (ctx: DatabasePathCreateContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.tablePathCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTablePathCreate?: (ctx: TablePathCreateContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.tablePath`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTablePath?: (ctx: TablePathContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.uid`.
