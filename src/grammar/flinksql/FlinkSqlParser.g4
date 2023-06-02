@@ -33,7 +33,7 @@ dmlStatement
 
 // some statemen
 describeStatement
-    : (KW_DESCRIBE | KW_DESC) uid
+    : (KW_DESCRIBE | KW_DESC) tablePath
     ;
 
 explainStatement
@@ -49,7 +49,9 @@ explainDetail
     ;
 
 useStatement
-    : KW_USE KW_CATALOG? uid | useModuleStatement
+    : KW_USE KW_CATALOG catalogPath 
+    | KW_USE databasePath
+    | useModuleStatement
     ;
 
 useModuleStatement
@@ -59,7 +61,7 @@ useModuleStatement
 showStatememt
     : KW_SHOW (KW_CATALOGS | KW_DATABASES | KW_VIEWS | KW_JARS)
     | KW_SHOW KW_CURRENT (KW_CATALOG | KW_DATABASE)
-    | KW_SHOW KW_TABLES (( KW_FROM | KW_IN ) uid)? likePredicate?
+    | KW_SHOW KW_TABLES (( KW_FROM | KW_IN ) tablePath)? likePredicate?
     | KW_SHOW KW_COLUMNS ( KW_FROM | KW_IN ) uid likePredicate?
     | KW_SHOW KW_CREATE (KW_TABLE | KW_VIEW) uid
     | KW_SHOW KW_USER? KW_FUNCTIONS
@@ -106,7 +108,7 @@ createTable
     ;
     
 simpleCreateTable
-    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? sourceTable
+    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tablePathCreate
     LR_BRACKET 
         columnOptionDefinition (COMMA columnOptionDefinition)*
         (COMMA watermarkDefinition)?
@@ -124,7 +126,7 @@ simpleCreateTable
  * CTAS 不支持指定显示指定列，不支持创建分区表，临时表
  */
 createTableAsSelect
-    : KW_CREATE KW_TABLE ifNotExists? sourceTable withOption (KW_AS queryStatement)?
+    : KW_CREATE KW_TABLE ifNotExists? tablePathCreate withOption (KW_AS queryStatement)?
     ;
 
 columnOptionDefinition
@@ -244,11 +246,7 @@ transformArgument
     ;
 
 likeDefinition
-    : KW_LIKE sourceTable (LR_BRACKET likeOption* RR_BRACKET)?
-    ;
-
-sourceTable
-    : uid
+    : KW_LIKE tablePath (LR_BRACKET likeOption* RR_BRACKET)?
     ;
 
 likeOption
@@ -261,7 +259,7 @@ createCatalog
     ;
 
 createDatabase
-    : KW_CREATE KW_DATABASE ifNotExists? uid commentSpec? withOption
+    : KW_CREATE KW_DATABASE ifNotExists? databasePathCreate commentSpec? withOption
     ;
 
 createView
@@ -269,7 +267,7 @@ createView
     ;
 
 createFunction
-    : KW_CREATE (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifNotExists? uid KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))? usingClause?
+    : KW_CREATE (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifNotExists? functionName KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))? usingClause?
     ;
 
 usingClause
@@ -285,7 +283,7 @@ jarFileName
 // it only includes rename, set key, add constraint, drop constraint, add unique
 
 alterTable
-    : KW_ALTER KW_TABLE ifExists? uid (renameDefinition | setKeyValueDefinition | addConstraint | dropConstraint | addUnique)
+    : KW_ALTER KW_TABLE ifExists? tablePath (renameDefinition | setKeyValueDefinition | addConstraint | dropConstraint | addUnique)
     ;
 
 renameDefinition
@@ -317,7 +315,7 @@ alertView
     ;
 
 alterDatabase
-    : KW_ALTER KW_DATABASE uid setKeyValueDefinition
+    : KW_ALTER KW_DATABASE databasePath setKeyValueDefinition
     ;
 
 alterFunction
@@ -328,15 +326,15 @@ alterFunction
 // Drop statements
 
 dropCatalog
-    : KW_DROP KW_CATALOG ifExists? uid
+    : KW_DROP KW_CATALOG ifExists? catalogPath
     ;
 
 dropTable
-    : KW_DROP KW_TEMPORARY? KW_TABLE ifExists? uid
+    : KW_DROP KW_TEMPORARY? KW_TABLE ifExists? tablePath
     ;
 
 dropDatabase
-    : KW_DROP KW_DATABASE ifExists? uid dropType=(KW_RESTRICT | KW_CASCADE)?
+    : KW_DROP KW_DATABASE ifExists? databasePath dropType=(KW_RESTRICT | KW_CASCADE)?
     ;
 
 dropView
@@ -344,7 +342,7 @@ dropView
     ;
 
 dropFunction
-    : KW_DROP (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? uid
+    : KW_DROP (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? functionName
     ;
 
 
@@ -356,7 +354,7 @@ insertStatement
     ;
 
 insertSimpleStatement
-    : KW_INSERT (KW_INTO | KW_OVERWRITE) uid
+    : KW_INSERT (KW_INTO | KW_OVERWRITE) tablePath
     (
         insertPartitionDefinition? columnNameList? queryStatement
         | valuesDefinition
@@ -454,9 +452,7 @@ tablePrimary
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
 
-tablePath
-    : uid
-    ;
+
 
 systemTimePeriod
     : KW_FOR KW_SYSTEM_TIME KW_AS KW_OF dateTimeExpression
@@ -825,6 +821,26 @@ quotedIdentifier
 
 whenClause
     : KW_WHEN condition=expression KW_THEN result=expression
+    ;
+
+catalogPath
+    : uid
+    ;
+
+databasePath
+    : uid
+    ;
+
+databasePathCreate
+    : uid
+    ;
+
+tablePathCreate
+    : uid
+    ;
+
+tablePath
+    : uid
     ;
 
 uid
