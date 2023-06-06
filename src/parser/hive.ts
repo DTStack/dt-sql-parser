@@ -1,17 +1,32 @@
-import { CharStreams, CommonTokenStream } from 'antlr4ts';
+import { Token } from 'antlr4ts';
+import { CandidatesCollection } from 'antlr4-c3';
 import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
-import { HiveSql } from '../lib/hive/HiveSql';
+import { HiveSql, ProgramContext } from '../lib/hive/HiveSql';
 import BasicParser from './common/basicParser';
+import { Suggestions } from './common/basic-parser-types';
 
-export default class HiveSQL extends BasicParser {
-    public createLexer(input: string): HiveSqlLexer {
-        const chars = CharStreams.fromString(input.toUpperCase());
-        const lexer = new HiveSqlLexer(chars);
+
+export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, HiveSql> {
+    public createLexerFormCharStream(charStreams) {
+        const lexer = new HiveSqlLexer(charStreams);
         return lexer;
     }
-    public createParserFromLexer(lexer: HiveSqlLexer): HiveSql {
-        const tokenStream = new CommonTokenStream(lexer);
+
+    public createParserFromTokenStream(tokenStream) {
         return new HiveSql(tokenStream);
+    }
+
+    public preferredRules: Set<number> = new Set();
+
+    public processCandidates(
+        candidates: CandidatesCollection, 
+        allTokens: Token[], 
+        caretTokenIndex: number
+    ): Suggestions<Token> {
+        return {
+            syntax: [],
+            keywords: []
+        }
     }
 }
 

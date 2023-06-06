@@ -1,17 +1,32 @@
-import { CharStreams, CommonTokenStream, Lexer } from 'antlr4ts';
+import { Token } from 'antlr4ts';
+import { CandidatesCollection } from 'antlr4-c3';
 import { TrinoSqlLexer } from '../lib/trinosql/TrinoSqlLexer';
-import { TrinoSqlParser } from '../lib/trinosql/TrinoSqlParser';
+import { TrinoSqlParser, ProgramContext } from '../lib/trinosql/TrinoSqlParser';
 import BasicParser from './common/basicParser';
-export default class trinoSQL extends BasicParser {
-    public createLexer(input: string): TrinoSqlLexer {
-        const chars = CharStreams.fromString(input.toUpperCase()); // Some Lexer only support uppercase token, So you need transform
-        const lexer = new TrinoSqlLexer(chars);
+import { Suggestions } from './common/basic-parser-types';
+
+export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
+    public createLexerFormCharStream(charStreams) {
+        const lexer = new TrinoSqlLexer(charStreams);
         return lexer;
     }
-    public createParserFromLexer(lexer: Lexer): TrinoSqlParser {
-        const tokens = new CommonTokenStream(lexer);
-        const parser = new TrinoSqlParser(tokens);
+
+    public createParserFromTokenStream(tokenStream) {
+        const parser = new TrinoSqlParser(tokenStream);
         return parser;
+    }
+
+    public preferredRules: Set<number> = new Set();
+
+    public processCandidates(
+        candidates: CandidatesCollection, 
+        allTokens: Token[], 
+        caretTokenIndex: number
+    ): Suggestions<Token> {
+        return {
+            syntax: [],
+            keywords: []
+        }
     }
 }
 
