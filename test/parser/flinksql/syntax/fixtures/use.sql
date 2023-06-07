@@ -1,0 +1,5 @@
+USE CATALOG cat1;
+
+USE db1;
+
+USE MODULES hive;
