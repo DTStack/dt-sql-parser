@@ -41,7 +41,7 @@ export interface WordRange {
 /**
  * Suggested information analyzed from the input
  */
-export interface SyntaxSuggestion<T> {
+export interface SyntaxSuggestion<T = WordRange> {
     syntaxContextType: SyntaxContextType;
     wordRanges: T[];
 }
@@ -49,7 +49,7 @@ export interface SyntaxSuggestion<T> {
 /**
  * Suggested information analyzed from the input
  */
-export interface Suggestions<T> {
+export interface Suggestions<T = WordRange> {
     /**
      * Suggestions about syntax
      */

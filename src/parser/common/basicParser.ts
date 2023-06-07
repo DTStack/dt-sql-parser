@@ -173,7 +173,7 @@ export default abstract class BasicParser<
      * @param caretPosition caret position, such as cursor position
      * @returns suggestion
      */
-    getSuggestionAtCaretPosition(input: string, caretPosition: CaretPosition): Suggestions<WordRange> | null {
+    getSuggestionAtCaretPosition(input: string, caretPosition: CaretPosition): Suggestions | null {
         this.parse(input);
         const allTokens = this.getAllTokens(input);
         const caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
