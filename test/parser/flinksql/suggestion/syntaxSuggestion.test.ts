@@ -39,17 +39,17 @@ describe('Flink SQL Syntax Suggestion', () => {
             .toEqual([ 'cat', '.', 'db' ])
     })
 
-    // test('Create table', () => {
-    //     const pos: CaretPosition = {
-    //         line: 5,
-    //         column: 20
-    //     }
-    //     const suggestion = atc.getSuggestionList(syntaxSql, pos)?.[0];
+    test('Create table', () => {
+        const pos: CaretPosition = {
+            lineNumber: 5,
+            column: 20
+        }
+        const suggestion = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax?.[0];
         
-    //     expect(suggestion?.type === SyntaxContextType.TABLE_CREATE)
-    //     expect(suggestion?.tokenRange.map(token => token.text))
-    //         .toEqual([ 'cat', '.', 'db' ])
-    // })
+        expect(suggestion?.syntaxContextType === SyntaxContextType.TABLE_CREATE)
+        expect(suggestion?.wordRanges.map(token => token.text))
+            .toEqual([ 'cat', '.', 'db' ])
+    })
 
     test('Show tables from', () => {
         const pos: CaretPosition = {
@@ -64,6 +64,18 @@ describe('Flink SQL Syntax Suggestion', () => {
     })
 
     test('Alter database', () => {
+        const pos: CaretPosition = {
+            lineNumber: 9,
+            column: 20
+        }
+        const suggestion = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax?.[0];
+        
+        expect(suggestion?.syntaxContextType === SyntaxContextType.DATABASE)
+        expect(suggestion?.wordRanges.map(token => token.text))
+            .toEqual([ 'cat', '.' ])
+    })
+
+    test('Use database', () => {
         const pos: CaretPosition = {
             lineNumber: 9,
             column: 20

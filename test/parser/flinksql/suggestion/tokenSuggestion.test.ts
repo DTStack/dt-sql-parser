@@ -8,15 +8,50 @@ const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggesti
 describe('Flink SQL Syntax Suggestion', () => {
     const parser = new FlinkSQL();
 
-    test('Insert table ', () => {
+    test('Use Statement ', () => {
         const pos: CaretPosition = {
-            lineNumber: 1,
+            lineNumber: 3,
+            column: 5
+        }
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+   
+        expect(suggestion)
+            .toEqual([ 'MODULES', 'CATALOG' ])
+    })
+
+    test('Create Statement ', () => {
+        const pos: CaretPosition = {
+            lineNumber: 5,
             column: 8
         }
         const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
    
         expect(suggestion)
             .toEqual([ 'CATALOG', 'FUNCTION', 'TEMPORARY', 'VIEW', 'DATABASE', 'TABLE' ])
+    })
+
+    test('Show Statement ', () => {
+        const pos: CaretPosition = {
+            lineNumber: 7,
+            column: 6
+        }
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+   
+        expect(suggestion)
+            .toEqual([
+                'MODULES',
+                'FULL',
+                'FUNCTIONS',
+                'USER',
+                'CREATE',
+                'COLUMNS',
+                'TABLES',
+                'CURRENT',
+                'CATALOGS',
+                'DATABASES',
+                'JARS',
+                'VIEWS'
+            ])
     })
 
 })
