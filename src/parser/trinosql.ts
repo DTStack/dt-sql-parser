@@ -16,6 +16,10 @@ export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext,
         return parser;
     }
 
+    protected get splitListener () {
+        return null as any;
+    }
+
     public preferredRules: Set<number> = new Set();
 
     public processCandidates(

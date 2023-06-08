@@ -16,6 +16,10 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
         return new HiveSql(tokenStream);
     }
 
+    protected get splitListener () {
+        return null as any;
+    }
+
     public preferredRules: Set<number> = new Set();
 
     public processCandidates(

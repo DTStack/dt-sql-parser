@@ -17,6 +17,10 @@ export default class PostgresSQL extends BasicParser<PostgreSQLLexer, ProgramCon
 
     public preferredRules: Set<number> = new Set();
 
+    protected get splitListener () {
+        return null as any;
+    }
+
     public processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 

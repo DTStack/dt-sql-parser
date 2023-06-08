@@ -17,6 +17,10 @@ export default class GenericSQL extends BasicParser<SqlLexer, ProgramContext, Sq
 
     public preferredRules: Set<number> = new Set();
 
+    protected get splitListener () {
+        return null as any;
+    }
+
     public processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 

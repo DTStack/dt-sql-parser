@@ -59,3 +59,13 @@ export interface Suggestions<T = WordRange> {
      */
     keywords: string[];
 }
+
+export interface TextSlice {
+    startIndex: number;
+    endIndex: number;
+    startLine: number;
+    endLine: number;
+    startColumn: number;
+    endColumn: number;
+    text: string;
+}

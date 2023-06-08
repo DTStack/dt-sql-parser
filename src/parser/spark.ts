@@ -17,6 +17,10 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
 
     public preferredRules: Set<number> = new Set();
 
+    protected get splitListener () {
+        return null as any;
+    }
+
     public processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 

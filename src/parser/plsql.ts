@@ -17,6 +17,10 @@ export default class PLSQL extends BasicParser<PlSqlLexer, ProgramContext, PlSql
 
     public preferredRules: Set<number> = new Set();
 
+    protected get splitListener () {
+        return null as any;
+    }
+
     public processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 

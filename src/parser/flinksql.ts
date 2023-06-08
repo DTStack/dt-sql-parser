@@ -1,7 +1,13 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
 import { FlinkSqlLexer } from '../lib/flinksql/FlinkSqlLexer';
-import { FlinkSqlParser, ProgramContext } from '../lib/flinksql/FlinkSqlParser';
+import {
+    FlinkSqlParser,
+    ProgramContext,
+    SqlStatementContext,
+    SqlStatementsContext
+} from '../lib/flinksql/FlinkSqlParser';
+import { FlinkSqlParserListener } from 'src/lib/flinksql/FlinkSqlParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
 import BasicParser from './common/basicParser';
 
@@ -24,17 +30,24 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
         FlinkSqlParser.RULE_catalogPath, // catalog name
     ]);
 
+    protected get splitListener () {
+        return new FlinkSqlSplitListener();
+    }
+
     public processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number
+        caretTokenIndex: number,
+        tokenIndexOffset: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (let candidate of candidates.rules) {
-            const [ruleType, candidateRule] = candidate
-            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1)
+            const [ruleType, candidateRule] = candidate;
+            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
+            const tokenRanges = allTokens.slice(startTokenIndex, caretTokenIndex + 1);
+
             let syntaxContextType: SyntaxContextType;
             switch (ruleType) {
                 case FlinkSqlParser.RULE_tablePath: {
@@ -83,5 +96,20 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
             syntax: originalSyntaxSuggestions,
             keywords,
         }
+    }
+}
+
+export class FlinkSqlSplitListener implements FlinkSqlParserListener {
+    private _statementsContext: SqlStatementContext[] = [];
+
+    exitSqlStatement = (ctx: SqlStatementContext) => {
+        this._statementsContext.push(ctx);
+    }
+
+    enterSqlStatements = (ctx: SqlStatementsContext) => {
+    };
+    
+    get statementsContext () {
+        return this._statementsContext;
     }
 }
