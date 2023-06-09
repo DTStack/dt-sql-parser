@@ -1,0 +1,11 @@
+INSERT INTO cat.db.tb
+
+SELECT * FROM cat.db
+
+CREATE TABLE cat.db ;
+
+SHOW TABLES FROM cat
+
+ALTER DATABASE cat.
+
+USE DATABASE cat.

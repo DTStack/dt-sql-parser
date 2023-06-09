@@ -1,17 +1,34 @@
-import { CharStreams, CommonTokenStream, Lexer } from 'antlr4ts';
-
-import BasicParser from './common/basicParser';
+import { Token } from 'antlr4ts';
+import { CandidatesCollection } from 'antlr4-c3';
 import { PlSqlLexer } from '../lib/plsql/PlSqlLexer';
-import { PlSqlParser } from '../lib/plsql/PlSqlParser';
+import { PlSqlParser, ProgramContext } from '../lib/plsql/PlSqlParser';
+import BasicParser from './common/basicParser';
+import { Suggestions } from './common/basic-parser-types';
 
-export default class PLSQLParser extends BasicParser {
-    public createLexer(input: string): PlSqlLexer {
-        const chars = CharStreams.fromString(input.toUpperCase());
-        const lexer = new PlSqlLexer(chars);
+export default class PLSQL extends BasicParser<PlSqlLexer, ProgramContext, PlSqlParser> {
+    public createLexerFormCharStream(charStreams) {
+        const lexer = new PlSqlLexer(charStreams);
         return lexer;
     }
-    public createParserFromLexer(lexer: Lexer): PlSqlParser {
-        const tokenStream = new CommonTokenStream(lexer);
+
+    public createParserFromTokenStream(tokenStream) {
         return new PlSqlParser(tokenStream);
+    }
+
+    public preferredRules: Set<number> = new Set();
+
+    protected get splitListener () {
+        return null as any;
+    }
+
+    public processCandidates(
+        candidates: CandidatesCollection, 
+        allTokens: Token[], 
+        caretTokenIndex: number
+    ): Suggestions<Token> {
+        return {
+            syntax: [],
+            keywords: []
+        }
     }
 }
