@@ -46,7 +46,7 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
             const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(startTokenIndex, caretTokenIndex + 1);
+            const tokenRanges = allTokens.slice(startTokenIndex, caretTokenIndex + tokenIndexOffset + 1);
 
             let syntaxContextType: SyntaxContextType;
             switch (ruleType) {
