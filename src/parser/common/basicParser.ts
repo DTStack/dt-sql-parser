@@ -224,7 +224,7 @@ export default abstract class BasicParser<
 
         this.parse(input);
         let sqlParserIns = this._parser;
-        let allTokens = this.getAllTokens(input);
+        const allTokens = this.getAllTokens(input);
         let caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
         let c3Context: ParserRuleContext = this._parserTree;
         let tokenIndexOffset: number = 0;
@@ -238,7 +238,7 @@ export default abstract class BasicParser<
         this.listen(splitListener, this._parserTree);
 
         // If there are multiple statements.
-        if (splitListener.statementsContext.length) {
+        if (splitListener.statementsContext.length > 1) {
             // find statement rule context where caretPosition is located.
             const caretStatementContext = splitListener?.statementsContext.find(ctx => {
                 return caretTokenIndex <= ctx.stop?.tokenIndex && caretTokenIndex >= ctx.start.tokenIndex;
@@ -247,12 +247,9 @@ export default abstract class BasicParser<
             if(caretStatementContext) {
                 c3Context = caretStatementContext
             } else {
-                const lastIndex = splitListener.statementsContext.length > 1
-                    ? 2
-                    : 1;
                 const lastStatementToken= splitListener
-                    .statementsContext[splitListener?.statementsContext.length - lastIndex]
-                    .stop;
+                    .statementsContext[splitListener?.statementsContext.length - 1]
+                    .start;
                 /**
                  * If caretStatementContext is not found and it follows all statements.
                  * Reparses part of the input following the penultimate statement.
@@ -263,11 +260,11 @@ export default abstract class BasicParser<
                      * Save offset of the tokenIndex in the partInput
                      * compared to the tokenIndex in the whole input 
                      */  
-                    tokenIndexOffset = lastStatementToken?.tokenIndex + 1;
+                    tokenIndexOffset = lastStatementToken?.tokenIndex;
                     // Correct caretTokenIndex
                     caretTokenIndex = caretTokenIndex - tokenIndexOffset;
 
-                    const inputSlice = input.slice(lastStatementToken.stopIndex + 1);
+                    const inputSlice = input.slice(lastStatementToken.startIndex);
                     const charStreams = CharStreams.fromString(inputSlice.toUpperCase());
                     const lexer = this.createLexerFormCharStream(charStreams);
                     const tokenStream = new CommonTokenStream(lexer);

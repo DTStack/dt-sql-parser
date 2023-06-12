@@ -4,6 +4,7 @@ import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/
 import FlinkSQL from '../../../../src/parser/flinksql'
 
 const syntaxSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'syntaxSuggestion.sql'), 'utf-8');
+const multipleSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'multipleSql.sql'), 'utf-8');
 
 describe('Flink SQL Syntax Suggestion', () => {
     const parser = new FlinkSQL();
@@ -84,7 +85,19 @@ describe('Flink SQL Syntax Suggestion', () => {
         
         expect(suggestion?.syntaxContextType === SyntaxContextType.DATABASE)
         expect(suggestion?.wordRanges.map(token => token.text))
-            .toEqual([ 'cat', '.' ])
+            .toEqual([ 'cat', '.' ]);
+    })
+
+    test("Multiple SQL use database", () => {
+        const pos: CaretPosition = {
+            lineNumber: 19,
+            column: 10,
+        }
+        const suggestion = parser.getSuggestionAtCaretPosition(multipleSql, pos)?.syntax?.[0];
+        console.log(suggestion);
+        expect(suggestion?.syntaxContextType === SyntaxContextType.DATABASE);
+        expect(suggestion?.wordRanges.map(token => token.text))
+            .toEqual([ 'cat1', '.' ]);
     })
 
 })
