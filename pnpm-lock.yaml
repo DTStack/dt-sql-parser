@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@swc/core': ^1.3.60
@@ -26,8 +26,8 @@ devDependencies:
   '@swc/jest': 0.2.26_@swc+core@1.3.60
   '@types/jest': 29.5.1
   '@types/node': 18.16.16
-  '@typescript-eslint/eslint-plugin': 3.10.1_a18e814019c959d52a44881c5533ce12
-  '@typescript-eslint/parser': 3.10.1_eslint@7.32.0+typescript@5.0.4
+  '@typescript-eslint/eslint-plugin': 3.10.1_ughicqazzfm5kkseraofkm6oci
+  '@typescript-eslint/parser': 3.10.1_cgdknpc562nnyruteofhkegnom
   antlr4ts-cli: 0.5.0-alpha.4
   eslint: 7.32.0
   eslint-config-google: 0.14.0_eslint@7.32.0
@@ -751,6 +751,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -760,6 +761,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -769,6 +771,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
     requiresBuild: true
     dev: true
     optional: true
@@ -778,6 +781,7 @@ packages:
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
     requiresBuild: true
     dev: true
     optional: true
@@ -944,7 +948,7 @@ packages:
       '@types/yargs-parser': 21.0.0
     dev: true
 
-  /@typescript-eslint/eslint-plugin/3.10.1_a18e814019c959d52a44881c5533ce12:
+  /@typescript-eslint/eslint-plugin/3.10.1_ughicqazzfm5kkseraofkm6oci:
     resolution: {integrity: sha512-PQg0emRtzZFWq6PxBcdxRH3QIQiyFO3WCVpRL3fgj5oQS3CDs3AeAKfv4DxNhzn8ITdNJGJ4D3Qw8eAJf3lXeQ==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -955,8 +959,8 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/experimental-utils': 3.10.1_eslint@7.32.0+typescript@5.0.4
-      '@typescript-eslint/parser': 3.10.1_eslint@7.32.0+typescript@5.0.4
+      '@typescript-eslint/experimental-utils': 3.10.1_cgdknpc562nnyruteofhkegnom
+      '@typescript-eslint/parser': 3.10.1_cgdknpc562nnyruteofhkegnom
       debug: 4.3.4
       eslint: 7.32.0
       functional-red-black-tree: 1.0.1
@@ -968,7 +972,7 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/experimental-utils/3.10.1_eslint@7.32.0+typescript@5.0.4:
+  /@typescript-eslint/experimental-utils/3.10.1_cgdknpc562nnyruteofhkegnom:
     resolution: {integrity: sha512-DewqIgscDzmAfd5nOGe4zm6Bl7PKtMG2Ad0KG8CUZAHlXfAKTF9Ol5PXhiMh39yRL2ChRH1cuuUGOcVyyrhQIw==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -985,7 +989,7 @@ packages:
       - typescript
     dev: true
 
-  /@typescript-eslint/parser/3.10.1_eslint@7.32.0+typescript@5.0.4:
+  /@typescript-eslint/parser/3.10.1_cgdknpc562nnyruteofhkegnom:
     resolution: {integrity: sha512-Ug1RcWcrJP02hmtaXVS3axPPTTPnZjupqhgj+NnZ6BCkwSImWk/283347+x9wN+lqOdK9Eo3vsyiyDHgsmiEJw==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -996,7 +1000,7 @@ packages:
         optional: true
     dependencies:
       '@types/eslint-visitor-keys': 1.0.0
-      '@typescript-eslint/experimental-utils': 3.10.1_eslint@7.32.0+typescript@5.0.4
+      '@typescript-eslint/experimental-utils': 3.10.1_cgdknpc562nnyruteofhkegnom
       '@typescript-eslint/types': 3.10.1
       '@typescript-eslint/typescript-estree': 3.10.1_typescript@5.0.4
       eslint: 7.32.0
@@ -1543,8 +1547,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      is-text-path: 1.0.1
       JSONStream: 1.3.5
+      is-text-path: 1.0.1
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2
