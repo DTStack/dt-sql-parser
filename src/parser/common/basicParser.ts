@@ -49,12 +49,12 @@ export default abstract class BasicParser<
     protected _parsedInput: string = null;
 
     /**
-     * preferredRules for antlr4-c3
+     * PreferredRules for antlr4-c3
      */
     protected abstract preferredRules: Set<number>;
  
     /**
-     * Create antrl4 Lexer instance
+     * Create a antrl4 Lexer instance
      * @param input source string
      */
     protected abstract createLexerFormCharStream(charStreams: CodePointCharStream): L;
@@ -66,7 +66,7 @@ export default abstract class BasicParser<
     protected abstract createParserFromTokenStream(tokenStream: CommonTokenStream): P;
     
     /**
-     * convert candidates to suggestions
+     * Convert candidates to suggestions
      * @param candidates candidate list
      * @param allTokens all tokens from input
      * @param caretTokenIndex tokenIndex of caretPosition
@@ -81,14 +81,55 @@ export default abstract class BasicParser<
     ): Suggestions<Token>;
 
     /**
-     * splitListener instance Getter
+     * Get splitListener instance.
      */
     protected abstract get splitListener (): SplitListener; 
 
     /**
-     * If it is invoked multiple times in a row and the input parameters is the same 
-     * this method returns the parsing result directly for the first time，
-     * unless the errorListener parameter is passed
+     * Create an anltr4 lexer from input.
+     * @param input string
+     */
+    public createLexer(input: string) {
+        const charStreams = CharStreams.fromString(input.toUpperCase());
+        const lexer = this.createLexerFormCharStream(charStreams);
+        return lexer;
+   
+    }
+
+    /**
+     * Create an anltr4 parser from input.
+     * @param input string
+     */
+    public createParser(input: string) {
+        const lexer = this.createLexer(input);
+        const tokenStream = new CommonTokenStream(lexer);
+        const parser = this.createParserFromTokenStream(tokenStream);
+        return parser;        
+    }
+
+    /**
+     * Create an anltr4 parser from input.
+     * And the instances will be cache.
+     * @param input string
+     */
+    protected createParserWithCache(input: string): P {
+        this._parserTree = null;
+        this._charStreams = CharStreams.fromString(input.toUpperCase());
+        this._lexer = this.createLexerFormCharStream(this._charStreams);
+
+        this._tokenStream = new CommonTokenStream(this._lexer);
+        this._tokenStream.fill();
+        
+        this._parser = this.createParserFromTokenStream(this._tokenStream);
+        this._parser.buildParseTree = true;
+
+        return this._parser
+    }
+
+    /**
+     * If it is invoked multiple times in a row and the input parameters is the same,
+     * this method returns the parsing result directly for the first time
+     * unless the errorListener parameter is passed.
      * @param input source string
      * @param errorListener listen errors
      * @returns parserTree
@@ -97,12 +138,12 @@ export default abstract class BasicParser<
         input: string,
         errorListener?: ErrorHandler<any>
     ) {
-        // Avoid parsing the same input repeatedly
+        // Avoid parsing the same input repeatedly.
         if(this._parsedInput === input && !errorListener) {
             return;
         }
 
-        const parser = this.createParser(input);
+        const parser = this.createParserWithCache(input);
         this._parsedInput = input;
 
         parser.removeErrorListeners();
@@ -119,7 +160,7 @@ export default abstract class BasicParser<
     }
 
     /**
-     * validate input string and return syntax errors
+     * Validate input string and return syntax errors if exists.
      * @param input source string
      * @returns syntax errors
      */
@@ -142,25 +183,6 @@ export default abstract class BasicParser<
         }
         return allTokens
     };
-
-    /**
-     * Get Parser instance by input string
-     * @param input string
-     */
-    public createParser(input: string): P {
-        this._parserTree = null;
-        this._charStreams = CharStreams.fromString(input.toUpperCase());
-        this._lexer = this.createLexerFormCharStream(this._charStreams);
-
-        this._tokenStream = new CommonTokenStream(this._lexer);
-        this._tokenStream.fill();
-        
-        this._parser = this.createParserFromTokenStream(this._tokenStream);
-        this._parser.buildParseTree = true;
-
-        return this._parser
-    }
-
     /**
      * It convert tree to string, it's convenient to use in unit test.
      * @param string input
@@ -187,10 +209,11 @@ export default abstract class BasicParser<
     }
 
     /**
-     * split input into statements
+     * Split input into statements.
+     * If exist syntax error it will return null.
      * @param input source string
      */
-    public splitSQL(input): TextSlice[] {
+    public splitSQLByStatement(input): TextSlice[] {
         this.parse(input);
         const splitListener = this.splitListener;
         this.listen(splitListener, this._parserTree);
@@ -265,8 +288,7 @@ export default abstract class BasicParser<
                     caretTokenIndex = caretTokenIndex - tokenIndexOffset;
 
                     const inputSlice = input.slice(lastStatementToken.startIndex);
-                    const charStreams = CharStreams.fromString(inputSlice.toUpperCase());
-                    const lexer = this.createLexerFormCharStream(charStreams);
+                    const lexer = this.createLexer(inputSlice);
                     const tokenStream = new CommonTokenStream(lexer);
                     tokenStream.fill();
                     const parser = this.createParserFromTokenStream(tokenStream);
