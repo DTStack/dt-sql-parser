@@ -51,19 +51,19 @@ export default abstract class BasicParser<
     /**
      * preferredRules for antlr4-c3
      */
-    public abstract preferredRules: Set<number>;
+    protected abstract preferredRules: Set<number>;
  
     /**
      * Create antrl4 Lexer instance
      * @param input source string
      */
-    public abstract createLexerFormCharStream(charStreams: CodePointCharStream): L;
+    protected abstract createLexerFormCharStream(charStreams: CodePointCharStream): L;
 
     /**
      * Create Parser by CommonTokenStream
      * @param tokenStream CommonTokenStream
      */
-    public abstract createParserFromTokenStream(tokenStream: CommonTokenStream): P;
+    protected abstract createParserFromTokenStream(tokenStream: CommonTokenStream): P;
     
     /**
      * convert candidates to suggestions
@@ -73,7 +73,7 @@ export default abstract class BasicParser<
      * @param tokenIndexOffset offset of the tokenIndex in the candidates 
      * compared to the tokenIndex in allTokens
      */
-    public abstract processCandidates(
+    protected abstract processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 
         caretTokenIndex: number,

@@ -6,12 +6,12 @@ import BasicParser from './common/basicParser';
 import { Suggestions } from './common/basic-parser-types';
 
 export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
-    public createLexerFormCharStream(charStreams) {
+    protected createLexerFormCharStream(charStreams) {
         const lexer = new TrinoSqlLexer(charStreams);
         return lexer;
     }
 
-    public createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream) {
         const parser = new TrinoSqlParser(tokenStream);
         return parser;
     }
@@ -20,9 +20,9 @@ export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext,
         return null as any;
     }
 
-    public preferredRules: Set<number> = new Set();
+    protected preferredRules: Set<number> = new Set();
 
-    public processCandidates(
+    protected processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 
         caretTokenIndex: number
