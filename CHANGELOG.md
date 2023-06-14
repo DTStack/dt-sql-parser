@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.3.1...v4.0.0) (2023-06-14)
+
+
+### Features
+
+* complete Query statements of FlinkSQL   ([#93](https://github.com/DTStack/dt-sql-parser/issues/93)) ([a026ae0](https://github.com/DTStack/dt-sql-parser/commit/a026ae059297d732dd5af7af4a851c5fe55a3229))
+* extracting the common readSQL function ([4af913c](https://github.com/DTStack/dt-sql-parser/commit/4af913cf301d61e7ce9652cf47669bfa87a6b84b))
+* FlinkSQL supports auto complete ([#115](https://github.com/DTStack/dt-sql-parser/issues/115)) ([1b02ff5](https://github.com/DTStack/dt-sql-parser/commit/1b02ff5d7582bf626f9bef5ea1c1f0e65732d23e))
+* **flink:** support insert multipe tables statement for FlinkSQL 1.15([#104](https://github.com/DTStack/dt-sql-parser/issues/104)) ([c409b80](https://github.com/DTStack/dt-sql-parser/commit/c409b80ee1a3b1df92fab522442f3425d984d8c7))
+* **flink:** support NOT NULL syntax ([#103](https://github.com/DTStack/dt-sql-parser/issues/103)) ([4b824fb](https://github.com/DTStack/dt-sql-parser/commit/4b824fb50004c0938171d887a21e761fdb62df89))
+* improve flinksql createStatement ([#91](https://github.com/DTStack/dt-sql-parser/issues/91)) ([370cccf](https://github.com/DTStack/dt-sql-parser/commit/370cccf8d9328aabccba1c9140a2adea395783f7))
+* improve flinksql insertStatement ([dc417e1](https://github.com/DTStack/dt-sql-parser/commit/dc417e1381ca52525037b215a153df28ddc81272))
+* replace fliePath with slashText to resolve conflict between filePath and arithmetic ([#112](https://github.com/DTStack/dt-sql-parser/issues/112)) ([793ff6e](https://github.com/DTStack/dt-sql-parser/commit/793ff6ef0e10e502eeb61ad8e40ccfe05ae50929))
+* support trino(presto) sql language ([#105](https://github.com/DTStack/dt-sql-parser/issues/105)) ([9c82a5d](https://github.com/DTStack/dt-sql-parser/commit/9c82a5d248e9d94479045ad7b248e4a785e62e92))
+* update alter and drop statements ([#94](https://github.com/DTStack/dt-sql-parser/issues/94)) ([fbee70c](https://github.com/DTStack/dt-sql-parser/commit/fbee70cde54fcec773cf35f858016c1a23459cc0))
+* update the builtin funcs of flinksql ([#102](https://github.com/DTStack/dt-sql-parser/issues/102)) ([0924acf](https://github.com/DTStack/dt-sql-parser/commit/0924acf730df41866be18f82172a58854f3bb0a3))
+* upgrade antlr4 to 4.12.0 ([#88](https://github.com/DTStack/dt-sql-parser/issues/88)) ([c1c72de](https://github.com/DTStack/dt-sql-parser/commit/c1c72def30a2df90182290fb2e5bc64265dfa3c3))
+
+
+### Bug Fixes
+
+* correct the grammar usage, especially in the parts targeting javascript ([#109](https://github.com/DTStack/dt-sql-parser/issues/109)) ([eeb111b](https://github.com/DTStack/dt-sql-parser/commit/eeb111b5c5e06eb144d7679d4b813082537945d4))
+* ingore the unused errors of libs ([b39825e](https://github.com/DTStack/dt-sql-parser/commit/b39825e31a4d25dc4ab2a0c6fb12d84d55944b12))
+* rename to TrinoSqlParser ([46a8a7a](https://github.com/DTStack/dt-sql-parser/commit/46a8a7ab125638b5e2dd6067d8b74b0f90ff543d))
+* rename TrinoSqlParser to TrinoSql ([8084c79](https://github.com/DTStack/dt-sql-parser/commit/8084c7919a5e1d982556d4684abfad6afa58c124))
+* rename TrinoSqlVisitor ([76d7ee5](https://github.com/DTStack/dt-sql-parser/commit/76d7ee5e7074b5549e791e529dc925ab32b51f4a))
+* update the exports path of trino ([1442ad6](https://github.com/DTStack/dt-sql-parser/commit/1442ad66d73144b4f4d29ed899f4dc7406cbff1f))
+
 ## [4.0.0-beta.3.2](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.3.1...v4.0.0-beta.3.2) (2023-01-09)
 
 ## [4.0.0-beta.3.1](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.3...v4.0.0-beta.3.1) (2022-12-30)
