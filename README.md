@@ -13,7 +13,6 @@ English | [简体中文](./README-zh_CN.md)
 [online-chat-img]: https://img.shields.io/discord/920616811261743104?logo=Molecule
 [online-chat-url]: https://discord.gg/uVvq6mfPfa
 
-
 dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
 
 Besides, it provides some helper methods, like **split** SQL, and filter the `--` and `/**/` types of comments in SQL.
@@ -55,7 +54,7 @@ different Parser, so if you need to handle the **Flink SQL**, you can import the
 The below is a **GenericSQL Parser** example:
 
 ```javascript
-import { GenericSQL } from 'dt-sql-parser';
+import GenericSQL from 'dt-sql-parser/dist/parser/generic';
 
 const parser = new GenericSQL();
 
@@ -104,7 +103,7 @@ returns an array object includes **error** message.
 Get all **tokens** by the Parser:
 
 ```javascript
-import { GenericSQL } from 'dt-sql-parser';
+import GenericSQL from 'dt-sql-parser/dist/parser/generic';
 
 const parser = new GenericSQL()
 const sql = 'select id,name,sex from user1;'
@@ -133,7 +132,8 @@ console.log(tokens)
 Traverse the tree node by the Visitor:
 
 ```javascript
-import { GenericSQL, SqlParserVisitor } from 'dt-sql-parser';
+import GenericSQL from 'dt-sql-parser/dist/parser/generic';
+import { SqlParserVisitor } from 'dt-sql-parser/dist/parser/generic/SqlParserVisitor';
 
 const parser = new GenericSQL()
 const sql = `select id,name from user1;`
@@ -168,7 +168,8 @@ TableName user1
 Access the specified node in the AST by the Listener
 
 ```javascript
-import { GenericSQL, SqlParserListener } from 'dt-sql-parser';
+import GenericSQL from 'dt-sql-parser/dist/parser/generic';
+import { SqlParserListener } from 'dt-sql-parser/dist/parser/generic/SqlParserListener';
 
 const parser = new GenericSQL();
 const sql = 'select id,name from user1;'
