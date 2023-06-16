@@ -7,12 +7,12 @@ import { Suggestions } from './common/basic-parser-types';
 
 
 export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, HiveSql> {
-    public createLexerFormCharStream(charStreams) {
+    protected createLexerFormCharStream(charStreams) {
         const lexer = new HiveSqlLexer(charStreams);
         return lexer;
     }
 
-    public createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream) {
         return new HiveSql(tokenStream);
     }
 
@@ -20,9 +20,9 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
         return null as any;
     }
 
-    public preferredRules: Set<number> = new Set();
+    protected preferredRules: Set<number> = new Set();
 
-    public processCandidates(
+    protected processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 
         caretTokenIndex: number

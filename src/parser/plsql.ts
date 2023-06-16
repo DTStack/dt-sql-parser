@@ -6,22 +6,22 @@ import BasicParser from './common/basicParser';
 import { Suggestions } from './common/basic-parser-types';
 
 export default class PLSQL extends BasicParser<PlSqlLexer, ProgramContext, PlSqlParser> {
-    public createLexerFormCharStream(charStreams) {
+    protected createLexerFormCharStream(charStreams) {
         const lexer = new PlSqlLexer(charStreams);
         return lexer;
     }
 
-    public createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream) {
         return new PlSqlParser(tokenStream);
     }
 
-    public preferredRules: Set<number> = new Set();
+    protected preferredRules: Set<number> = new Set();
 
     protected get splitListener () {
         return null as any;
     }
 
-    public processCandidates(
+    protected processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 
         caretTokenIndex: number

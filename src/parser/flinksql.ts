@@ -12,17 +12,17 @@ import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic
 import BasicParser from './common/basicParser';
 
 export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
-    public createLexerFormCharStream(charStreams) {
+    protected createLexerFormCharStream(charStreams) {
         const lexer = new FlinkSqlLexer(charStreams);
         return lexer;
     }
 
-    public createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream) {
         const parser = new FlinkSqlParser(tokenStream);
         return parser;
     }
 
-    public preferredRules = new Set([
+    protected preferredRules = new Set([
         FlinkSqlParser.RULE_tablePath, // table name >> select / insert ...
         FlinkSqlParser.RULE_tablePathCreate, // table name >> create 
         FlinkSqlParser.RULE_databasePath, // database name >> show
@@ -34,7 +34,7 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
         return new FlinkSqlSplitListener();
     }
 
-    public processCandidates(
+    protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
         caretTokenIndex: number,

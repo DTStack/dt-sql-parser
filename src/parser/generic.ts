@@ -6,22 +6,22 @@ import BasicParser from './common/basicParser';
 import { Suggestions } from './common/basic-parser-types';
 
 export default class GenericSQL extends BasicParser<SqlLexer, ProgramContext, SqlParser> {
-    public createLexerFormCharStream(charStreams): SqlLexer {
+    protected createLexerFormCharStream(charStreams): SqlLexer {
         const lexer = new SqlLexer(charStreams);
         return lexer;
     }
 
-    public createParserFromTokenStream(tokenStream): SqlParser {
+    protected createParserFromTokenStream(tokenStream): SqlParser {
         return new SqlParser(tokenStream);
     }
 
-    public preferredRules: Set<number> = new Set();
+    protected preferredRules: Set<number> = new Set();
 
     protected get splitListener () {
         return null as any;
     }
 
-    public processCandidates(
+    protected processCandidates(
         candidates: CandidatesCollection, 
         allTokens: Token[], 
         caretTokenIndex: number
