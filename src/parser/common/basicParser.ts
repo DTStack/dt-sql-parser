@@ -292,6 +292,7 @@ export default abstract class BasicParser<
                     const tokenStream = new CommonTokenStream(lexer);
                     tokenStream.fill();
                     const parser = this.createParserFromTokenStream(tokenStream);
+                    parser.removeErrorListeners();
                     parser.buildParseTree = true;
                     sqlParserIns = parser;
                     c3Context = parser.program();
