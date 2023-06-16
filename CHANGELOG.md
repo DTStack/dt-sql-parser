@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.1](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4...v4.0.0-beta.4.1) (2023-06-16)
+
 ## [4.0.0-beta.4](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.3.1...v4.0.0-beta.4) (2023-06-14)
 
 
