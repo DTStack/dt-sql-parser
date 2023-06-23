@@ -7,7 +7,7 @@ import {
     SqlStatementContext,
     SqlStatementsContext
 } from '../lib/flinksql/FlinkSqlParser';
-import { FlinkSqlParserListener } from 'src/lib/flinksql/FlinkSqlParserListener';
+import { FlinkSqlParserListener } from '../lib/flinksql/FlinkSqlParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
 import BasicParser from './common/basicParser';
 
