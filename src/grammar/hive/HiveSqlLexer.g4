@@ -16,7 +16,8 @@
 */
 lexer grammar HiveSqlLexer;
 
-options { caseInsensitive = true; }
+// unsupported option caseInsensitive in antlr4@4.9
+// options { caseInsensitive = true; }
 
 // Keywords
 KW_ABORT                               : 'ABORT';
