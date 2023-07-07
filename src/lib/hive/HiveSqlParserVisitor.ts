@@ -90,6 +90,8 @@ import { DropFunctionStatementContext } from "./HiveSqlParser";
 import { ReloadFunctionsStatementContext } from "./HiveSqlParser";
 import { CreateMacroStatementContext } from "./HiveSqlParser";
 import { DropMacroStatementContext } from "./HiveSqlParser";
+import { CreateIndexStatementContext } from "./HiveSqlParser";
+import { DropIndexStatementContext } from "./HiveSqlParser";
 import { CreateViewStatementContext } from "./HiveSqlParser";
 import { ViewPartitionContext } from "./HiveSqlParser";
 import { ViewOrganizationContext } from "./HiveSqlParser";
@@ -289,6 +291,7 @@ import { AlterStatementSuffixCompactContext } from "./HiveSqlParser";
 import { AlterStatementSuffixSetOwnerContext } from "./HiveSqlParser";
 import { AlterStatementSuffixSetPartSpecContext } from "./HiveSqlParser";
 import { AlterStatementSuffixExecuteContext } from "./HiveSqlParser";
+import { AlterIndexStatementSuffixContext } from "./HiveSqlParser";
 import { FileFormatContext } from "./HiveSqlParser";
 import { AlterDataConnectorStatementSuffixContext } from "./HiveSqlParser";
 import { AlterDataConnectorSuffixPropertiesContext } from "./HiveSqlParser";
@@ -1120,6 +1123,20 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitDropMacroStatement?: (ctx: DropMacroStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.createIndexStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateIndexStatement?: (ctx: CreateIndexStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.dropIndexStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropIndexStatement?: (ctx: DropIndexStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.createViewStatement`.
@@ -2513,6 +2530,13 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitAlterStatementSuffixExecute?: (ctx: AlterStatementSuffixExecuteContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.alterIndexStatementSuffix`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterIndexStatementSuffix?: (ctx: AlterIndexStatementSuffixContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.fileFormat`.
