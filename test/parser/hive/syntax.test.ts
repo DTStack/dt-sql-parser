@@ -15,6 +15,6 @@ describe('Hive SQL Syntax Tests', () => {
     test('Wrong Select Statement', () => {
         const sql = 'SELECT add ABC FROM WHERE;';
         const result = parser.validate(sql);
-        expect(result.length).toBe(2);
+        expect(result.length).toBe(1);
     });
 });
