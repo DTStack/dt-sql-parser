@@ -21,11 +21,11 @@ options
     tokenVocab=HiveSqlLexer;
 }
 
-program : statement EOF;
+program : statement* EOF;
 
 // starting rule
 statement
-    : (explainStatement | execStatement) SEMICOLON? EOF
+    : (explainStatement | execStatement) SEMICOLON?
     ;
 
 explainStatement
@@ -160,6 +160,8 @@ ddlStatement
     | dropFunctionStatement
     | reloadFunctionsStatement
     | dropMacroStatement
+    | createIndexStatement
+    | dropIndexStatement
     | analyzeStatement
     | lockStatement
     | unlockStatement
@@ -539,6 +541,20 @@ createMacroStatement
 dropMacroStatement
     : KW_DROP KW_TEMPORARY KW_MACRO ifExists? Identifier
     ;
+
+createIndexStatement
+    : KW_CREATE KW_INDEX id_ KW_ON KW_TABLE tableName columnParenthesesList KW_AS indextype=StringLiteral
+    (KW_WITH KW_DEFERRED KW_REBUILD)?
+    (KW_IDXPROPERTIES tableProperties)?
+    (KW_IN KW_TABLE tableName)?
+    (KW_PARTITIONED KW_BY columnParenthesesList)?
+    (tableRowFormat? tableFileFormat)?
+    (KW_LOCATION locn=StringLiteral)?
+    tablePropertiesPrefixed?
+    tableComment?;
+
+dropIndexStatement
+    : KW_DROP KW_INDEX ifExists? id_ KW_ON tableName;
 
 createViewStatement
     : KW_CREATE orReplace? KW_VIEW ifNotExists? name=tableName
@@ -1314,6 +1330,7 @@ alterStatement
                | KW_MATERIALIZED KW_VIEW tableNameTree=tableName alterMaterializedViewStatementSuffix
                | db_schema alterDatabaseStatementSuffix
                | KW_DATACONNECTOR alterDataConnectorStatementSuffix
+               | KW_INDEX alterIndexStatementSuffix
                )
     ;
 
@@ -1569,6 +1586,11 @@ alterStatementSuffixExecute
                  | KW_SET_CURRENT_SNAPSHOT LPAREN snapshotParam=Number
                  ) RPAREN
     ;
+
+alterIndexStatementSuffix
+    : id_ KW_ON tableName
+    partitionSpec?
+    KW_REBUILD;
 
 fileFormat
     : KW_INPUTFORMAT inFmt=StringLiteral KW_OUTPUTFORMAT outFmt=StringLiteral KW_SERDE serdeCls=StringLiteral

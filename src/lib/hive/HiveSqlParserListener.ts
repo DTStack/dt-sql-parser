@@ -90,6 +90,8 @@ import { DropFunctionStatementContext } from "./HiveSqlParser";
 import { ReloadFunctionsStatementContext } from "./HiveSqlParser";
 import { CreateMacroStatementContext } from "./HiveSqlParser";
 import { DropMacroStatementContext } from "./HiveSqlParser";
+import { CreateIndexStatementContext } from "./HiveSqlParser";
+import { DropIndexStatementContext } from "./HiveSqlParser";
 import { CreateViewStatementContext } from "./HiveSqlParser";
 import { ViewPartitionContext } from "./HiveSqlParser";
 import { ViewOrganizationContext } from "./HiveSqlParser";
@@ -289,6 +291,7 @@ import { AlterStatementSuffixCompactContext } from "./HiveSqlParser";
 import { AlterStatementSuffixSetOwnerContext } from "./HiveSqlParser";
 import { AlterStatementSuffixSetPartSpecContext } from "./HiveSqlParser";
 import { AlterStatementSuffixExecuteContext } from "./HiveSqlParser";
+import { AlterIndexStatementSuffixContext } from "./HiveSqlParser";
 import { FileFormatContext } from "./HiveSqlParser";
 import { AlterDataConnectorStatementSuffixContext } from "./HiveSqlParser";
 import { AlterDataConnectorSuffixPropertiesContext } from "./HiveSqlParser";
@@ -1465,6 +1468,28 @@ export interface HiveSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitDropMacroStatement?: (ctx: DropMacroStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.createIndexStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterCreateIndexStatement?: (ctx: CreateIndexStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.createIndexStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitCreateIndexStatement?: (ctx: CreateIndexStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.dropIndexStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterDropIndexStatement?: (ctx: DropIndexStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.dropIndexStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitDropIndexStatement?: (ctx: DropIndexStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `HiveSqlParser.createViewStatement`.
@@ -3654,6 +3679,17 @@ export interface HiveSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAlterStatementSuffixExecute?: (ctx: AlterStatementSuffixExecuteContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.alterIndexStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterIndexStatementSuffix?: (ctx: AlterIndexStatementSuffixContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.alterIndexStatementSuffix`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterIndexStatementSuffix?: (ctx: AlterIndexStatementSuffixContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `HiveSqlParser.fileFormat`.
