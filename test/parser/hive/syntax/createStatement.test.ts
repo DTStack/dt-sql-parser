@@ -56,13 +56,13 @@ describe('Hive Create Syntax Tests', () => {
         });
     });
 
-    // describe('CREATE INDEX', () => {
-    //     features.indexes.forEach((index) => {
-    //         it(index, () => {
-    //             expect(parser.validate(index).length).toBe(0);
-    //         });
-    //     });
-    // });
+    describe('CREATE INDEX', () => {
+        features.indexes.forEach((index) => {
+            it(index, () => {
+                expect(parser.validate(index).length).toBe(0);
+            });
+        });
+    });
 
     describe('CREATE MACRO', () => {
         features.macros.forEach((macro) => {

@@ -16,9 +16,9 @@ TBLPROPERTIES ("prop1"="value1", "prop2"="value2");
 CREATE INDEX table04_index
 ON TABLE table04 (column5) 
 AS 'COMPACT' 
+IDXPROPERTIES ("prop3"="value3", "prop4"="value4")
 IN TABLE indextable1
 STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler';
-IDXPROPERTIES ("prop3"="value3", "prop4"="value4");
 
 CREATE INDEX table05_index 
 ON TABLE table05 (column6) 
@@ -30,7 +30,3 @@ ON TABLE table06 (column7)
 AS 'COMPACT' 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
 STORED AS TEXTFILE;
-
-
-
-
