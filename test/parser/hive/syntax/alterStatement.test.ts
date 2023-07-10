@@ -9,6 +9,7 @@ const features = {
     tables: readSQL(__dirname, 'alterTable.sql'),
     indexes: readSQL(__dirname, 'alterIndex.sql'),
     views: readSQL(__dirname, 'alterView.sql'),
+    scheduleQueries: readSQL(__dirname, 'alterScheduleQuery.sql'),
 };
 
 describe('Hive Alter Syntax Tests', () => {
@@ -48,6 +49,14 @@ describe('Hive Alter Syntax Tests', () => {
         features.views.forEach((view) => {
             it(view, () => {
                 expect(parser.validate(view).length).toBe(0);
+            });
+        });
+    });
+
+    describe('ALTER SCHEDULE QUERY', () => {
+        features.scheduleQueries.forEach((sq) => {
+            it(sq, () => {
+                expect(parser.validate(sq).length).toBe(0);
             });
         });
     });

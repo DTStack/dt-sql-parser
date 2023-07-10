@@ -39,3 +39,6 @@ DROP INDEX IF EXISTS table02_index ON table02;
 DROP FUNCTION func1;
 
 DROP FUNCTION IF EXISTS func2;
+
+-- Drop Schedule Query
+DROP SCHEDULED QUERY sq_1;
