@@ -1023,6 +1023,8 @@ reservedKeywordsUsedAsFuncName
     | KW_POSITION
     | KW_POWER
     | KW_QUARTER
+    | KW_ROW
+    | KW_ROWS
     | KW_RANK
     | KW_RIGHT
     | KW_SECOND
