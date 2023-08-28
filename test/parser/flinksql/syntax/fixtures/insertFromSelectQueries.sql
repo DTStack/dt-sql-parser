@@ -42,6 +42,13 @@ SELECT `user`,
     country
 FROM page_view_source;
 
+--- Insert with function
+INSERT INTO hbase_table
+SELECT
+    st.id as rowKey,
+    ROW(id, name, age) as baseInfo
+FROM sourceTable st;
+
 
 
 
