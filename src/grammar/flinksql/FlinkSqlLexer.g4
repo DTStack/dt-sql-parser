@@ -227,6 +227,7 @@ KW_CHECK:                            'CHECK';
 KW_CLOB:                             'CLOB';
 KW_CLOSE:                            'CLOSE';
 KW_COALESCE:                         'COALESCE';
+KW_CONFIG:                           'CONFIG';
 KW_COLLATE:                          'COLLATE';
 KW_COLLECT:                          'COLLECT';
 KW_COLUMN:                           'COLUMN';
