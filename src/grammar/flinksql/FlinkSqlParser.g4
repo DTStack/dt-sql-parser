@@ -97,6 +97,7 @@ dtAddStatement
     | KW_ADD (KW_PYTHON_FILES | KW_PYTHON_REQUIREMENTS | KW_PYTHON_DEPENDENCIES | KW_PYTHON_JAR | KW_PYTHON_ARCHIVES) KW_WITH dtFilePath KW_RENAME uid
     | KW_ADD KW_PYTHON_PARAMETER dtFilePath
     | KW_ADD KW_ENGINE KW_FILE KW_WITH dtFilePath KW_RENAME uid KW_KEY uid
+    | KW_ADD KW_CONFIG KW_FILE KW_WITH dtFilePath KW_FOR uid KW_AS uid
     ;
 
 dtFilePath
@@ -1023,6 +1024,8 @@ reservedKeywordsUsedAsFuncName
     | KW_POSITION
     | KW_POWER
     | KW_QUARTER
+    | KW_ROW
+    | KW_ROWS
     | KW_RANK
     | KW_RIGHT
     | KW_SECOND
