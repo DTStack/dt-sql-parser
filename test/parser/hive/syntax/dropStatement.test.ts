@@ -4,15 +4,20 @@ import { readSQL } from '../../../helper';
 const parser = new HiveSQL();
 
 const features = {
-    indexes: readSQL(__dirname, 'dropIndex.sql'),
+    drops: readSQL(__dirname, 'drop.sql'),
+    reloads: readSQL(__dirname, 'reload.sql')
 };
 
 describe('Hive Drop Syntax Tests', () => {
-    describe('DROP INDEX', () => {
-        features.indexes.forEach((index) => {
-            it(index, () => {
-                expect(parser.validate(index).length).toBe(0);
-            });
+    features.drops.forEach((drop) => {
+        it(drop, () => {
+            expect(parser.validate(drop).length).toBe(0);
+        });
+    });
+
+    features.reloads.forEach((reload) => {
+        it(reload, () => {
+            expect(parser.validate(reload).length).toBe(0);
         });
     });
 });
