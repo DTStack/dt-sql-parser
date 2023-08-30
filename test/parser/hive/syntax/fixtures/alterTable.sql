@@ -105,12 +105,63 @@ ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1);
 
 ALTER TABLE dr_tbl2 DROP IF EXISTS PARTITION (`pt2`=2) PURGE;
 
--- ALTER TABLE dr_tbl2 DROP IF EXISTS PARTITION (`pt2`=2) IGNORE PROTECTION PURGE;
-
 -- Archive Partition
 ALTER TABLE arch_pt_tbl1 ARCHIVE PARTITION (`pt1`=1);
 
 ALTER TABLE arch_pt_tbl2 UNARCHIVE PARTITION (`pt2`=2) ;
+
+-- Alter Table/Partition File Format
+ALTER TABLE tbl1 SET FILEFORMAT orc;
+
+ALTER TABLE tbl2 PARTITION (`pt1`=1) SET FILEFORMAT orc;
+
+-- Alter Table/Partition Location
+ALTER TABLE tbl3 SET LOCATION "new location";
+
+ALTER TABLE tbl4 PARTITION (`pt1`=1) SET LOCATION "new location";
+
+-- Alter Table/Partition Touch
+ALTER TABLE tbl5 TOUCH;
+
+ALTER TABLE tbl6 TOUCH PARTITION (`pt1`=1);
+
+-- Alter Table/Partition Protections
+ALTER TABLE tbl7 ENABLE NO_DROP CASCADE;
+
+ALTER TABLE tbl8 PARTITION (`pt1`=1) DISABLE NO_DROP;
+  
+ALTER TABLE tbl9 DISABLE OFFLINE;
+
+ALTER TABLE db1.tbl PARTITION (`pt1`=1) ENABLE OFFLINE;
+
+-- Alter Table/Partition Compact
+ALTER TABLE tbl_com COMPACT 'compaction_type';
+
+ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
+COMPACT 'compaction_type' AND WAIT
+CLUSTERED INTO 1 BUCKETS
+ORDER BY col1
+POOL 'pool1'
+WITH OVERWRITE TBLPROPERTIES ("propKey1"="propVal");
+
+-- Alter Table/Partition Concatenate
+ALTER TABLE tbl22 CONCATENATE;
+
+ALTER TABLE tbl23 PARTITION (pt1 = 'anyValue') CONCATENATE;
+
+-- Alter Table/Partition Update columns
+ALTER TABLE tbl24 UPDATE COLUMNS;
+
+ALTER TABLE tbl24 PARTITION (pt1 = 'partition_value') UPDATE COLUMNS;
+
+-- Change Column Name/Type/Position/Comment
+ALTER TABLE test_change CHANGE COLUMN a a1 INT;
+
+ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE c c1 INT FIRST;
+
+ALTER TABLE test_change CHANGE a1 a1 INT COMMENT 'this is column a1' RESTRICT;
+
+ALTER TABLE test_change CHANGE a1 a2 STRING AFTER b CASCADE;
 
 -- Add/Replace Columns
 ALTER TABLE rp_col_tbl1 ADD COLUMNS (`col1` INT);
@@ -121,3 +172,6 @@ ALTER TABLE rp_col_tbl2
 PARTITION (`pt1`=1)
 ADD COLUMNS (`col3` INT COMMENT 'a new col')
 CASCADE;
+
+-- Partial Partition Specification 
+ALTER TABLE foo PARTITION (ds='2008-04-08', hr=11) CHANGE COLUMN dec_column_name dec_column_name DECIMAL(38,18);
