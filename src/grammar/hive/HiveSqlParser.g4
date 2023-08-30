@@ -2190,7 +2190,6 @@ timeQualifiers
     | KW_MONTH
     | KW_WEEK
     | KW_DAY
-    | KW_DOW
     | KW_HOUR
     | KW_MINUTE
     | KW_SECOND
@@ -2647,7 +2646,6 @@ nonReserved
     | KW_DISTRIBUTE
     | KW_DISTRIBUTED
     | KW_DO
-    | KW_DOW
     | KW_DUMP
     | KW_ELEM_TYPE
     | KW_ENABLE
