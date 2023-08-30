@@ -1369,6 +1369,7 @@ alterTblPartitionStatementSuffix
     | alterStatementSuffixRenameCol
     | alterStatementSuffixAddCol
     | alterStatementSuffixUpdateColumns
+    | alterStatementSuffixProtections
     ;
 
 alterStatementPartitionKeyType
@@ -1433,6 +1434,11 @@ alterStatementSuffixAddConstraint
 
 alterStatementSuffixUpdateColumns
     : KW_UPDATE KW_COLUMNS restrictOrCascade?
+    ;
+
+alterStatementSuffixProtections
+    : enableSpecification KW_NO_DROP KW_CASCADE?
+    | enableSpecification KW_OFFLINE
     ;
 
 alterStatementSuffixDropConstraint
@@ -1569,7 +1575,7 @@ compactPool
     ;
 
 alterStatementSuffixCompact
-    : KW_COMPACT compactType=StringLiteral tableImplBuckets? blocking? compactPool? (KW_WITH KW_OVERWRITE KW_TBLPROPERTIES tableProperties)?
+    : KW_COMPACT compactType=StringLiteral blocking? tableImplBuckets? orderByClause? compactPool? (KW_WITH KW_OVERWRITE KW_TBLPROPERTIES tableProperties)?
     ;
 
 alterStatementSuffixSetOwner
