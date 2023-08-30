@@ -1369,6 +1369,7 @@ alterTblPartitionStatementSuffix
     | alterStatementSuffixRenameCol
     | alterStatementSuffixAddCol
     | alterStatementSuffixUpdateColumns
+    | alterStatementSuffixProtections
     ;
 
 alterStatementPartitionKeyType
@@ -1433,6 +1434,11 @@ alterStatementSuffixAddConstraint
 
 alterStatementSuffixUpdateColumns
     : KW_UPDATE KW_COLUMNS restrictOrCascade?
+    ;
+
+alterStatementSuffixProtections
+    : enableSpecification KW_NO_DROP KW_CASCADE?
+    | enableSpecification KW_OFFLINE
     ;
 
 alterStatementSuffixDropConstraint
@@ -1569,7 +1575,7 @@ compactPool
     ;
 
 alterStatementSuffixCompact
-    : KW_COMPACT compactType=StringLiteral tableImplBuckets? blocking? compactPool? (KW_WITH KW_OVERWRITE KW_TBLPROPERTIES tableProperties)?
+    : KW_COMPACT compactType=StringLiteral blocking? tableImplBuckets? orderByClause? compactPool? (KW_WITH KW_OVERWRITE KW_TBLPROPERTIES tableProperties)?
     ;
 
 alterStatementSuffixSetOwner
@@ -2184,7 +2190,6 @@ timeQualifiers
     | KW_MONTH
     | KW_WEEK
     | KW_DAY
-    | KW_DOW
     | KW_HOUR
     | KW_MINUTE
     | KW_SECOND
@@ -2641,7 +2646,6 @@ nonReserved
     | KW_DISTRIBUTE
     | KW_DISTRIBUTED
     | KW_DO
-    | KW_DOW
     | KW_DUMP
     | KW_ELEM_TYPE
     | KW_ENABLE

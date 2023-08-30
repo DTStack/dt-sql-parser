@@ -256,6 +256,7 @@ import { AlterStatementSuffixRenameContext } from "./HiveSqlParser";
 import { AlterStatementSuffixAddColContext } from "./HiveSqlParser";
 import { AlterStatementSuffixAddConstraintContext } from "./HiveSqlParser";
 import { AlterStatementSuffixUpdateColumnsContext } from "./HiveSqlParser";
+import { AlterStatementSuffixProtectionsContext } from "./HiveSqlParser";
 import { AlterStatementSuffixDropConstraintContext } from "./HiveSqlParser";
 import { AlterStatementSuffixRenameColContext } from "./HiveSqlParser";
 import { AlterStatementSuffixUpdateStatsColContext } from "./HiveSqlParser";
@@ -3294,6 +3295,17 @@ export interface HiveSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAlterStatementSuffixUpdateColumns?: (ctx: AlterStatementSuffixUpdateColumnsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.alterStatementSuffixProtections`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatementSuffixProtections?: (ctx: AlterStatementSuffixProtectionsContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.alterStatementSuffixProtections`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatementSuffixProtections?: (ctx: AlterStatementSuffixProtectionsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `HiveSqlParser.alterStatementSuffixDropConstraint`.
