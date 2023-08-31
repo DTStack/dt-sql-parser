@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.2](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.1...v4.0.0-beta.4.2) (2023-08-31)
+
+
+### Features
+
+* format hive grammar files name ([1d890e5](https://github.com/DTStack/dt-sql-parser/commit/1d890e58fe94de7f270bd84ba16b35e8589944cf))
+* hiveSQL support create/drop/alter index grammar ([ebd9a1e](https://github.com/DTStack/dt-sql-parser/commit/ebd9a1ed85c103b8525948a60da2c57b0c80c361))
+* recomplie hive sql grammar and fix parser about ([e97e0b2](https://github.com/DTStack/dt-sql-parser/commit/e97e0b2ef60e24f6b7f88afa0b13f839062579e8))
+* support DT_ADD_CONFIG_FILE syntax ([13b58b2](https://github.com/DTStack/dt-sql-parser/commit/13b58b2dec049c66e85b55c3c9a5b695d4ef14e6))
+
+
+### Bug Fixes
+
+* allow ROW and ROWS as function name ([82d097b](https://github.com/DTStack/dt-sql-parser/commit/82d097b034e69094da8d3e7fa3aa2960a2d3f977))
+* flinkSqlParser should not import src ([f413a29](https://github.com/DTStack/dt-sql-parser/commit/f413a29fac6ab4552e33784b2eb803b728d75a92))
+
 ## [4.0.0-beta.4.1](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4...v4.0.0-beta.4.1) (2023-06-16)
 
 ## [4.0.0-beta.4](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.3.1...v4.0.0-beta.4) (2023-06-14)
