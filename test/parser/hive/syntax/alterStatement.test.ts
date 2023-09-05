@@ -20,7 +20,7 @@ describe('Hive Alter Syntax Tests', () => {
             });
         });
     });
-    
+
     describe('ALTER CONNECTOR', () => {
         features.connectors.forEach((ctors) => {
             it(ctors, () => {
