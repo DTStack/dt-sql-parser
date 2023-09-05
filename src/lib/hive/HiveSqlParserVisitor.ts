@@ -481,6 +481,14 @@ import { ActivateContext } from "./HiveSqlParser";
 import { EnableContext } from "./HiveSqlParser";
 import { DisableContext } from "./HiveSqlParser";
 import { UnmanagedContext } from "./HiveSqlParser";
+import { YearContext } from "./HiveSqlParser";
+import { MonthContext } from "./HiveSqlParser";
+import { WeekContext } from "./HiveSqlParser";
+import { DayContext } from "./HiveSqlParser";
+import { HourContext } from "./HiveSqlParser";
+import { MinuteContext } from "./HiveSqlParser";
+import { SecondContext } from "./HiveSqlParser";
+import { DecimalContext } from "./HiveSqlParser";
 import { AlterResourcePlanStatementContext } from "./HiveSqlParser";
 import { GlobalWmStatementContext } from "./HiveSqlParser";
 import { ReplaceResourcePlanStatementContext } from "./HiveSqlParser";
@@ -3861,6 +3869,62 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitUnmanaged?: (ctx: UnmanagedContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.year`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitYear?: (ctx: YearContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.month`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMonth?: (ctx: MonthContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.week`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitWeek?: (ctx: WeekContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.day`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDay?: (ctx: DayContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.hour`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitHour?: (ctx: HourContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.minute`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMinute?: (ctx: MinuteContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.second`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSecond?: (ctx: SecondContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.decimal`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDecimal?: (ctx: DecimalContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.alterResourcePlanStatement`.

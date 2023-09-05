@@ -205,11 +205,11 @@ force
     ;
 
 rewriteEnabled
-    : KW_ENABLE KW_REWRITE
+    : enable KW_REWRITE
     ;
 
 rewriteDisabled
-    : KW_DISABLE KW_REWRITE
+    : disable KW_REWRITE
     ;
 
 storedAsDirs
@@ -681,7 +681,7 @@ columnNameTransformConstraint
 
 partitionTransformType
     : columnName
-    | (KW_YEAR | KW_MONTH | KW_DAY | KW_HOUR) LPAREN columnName RPAREN
+    | (year | month | day | hour) LPAREN columnName RPAREN
     | (KW_TRUNCATE | KW_BUCKET) LPAREN value=Number COMMA columnName RPAREN
     ;
 
@@ -822,8 +822,8 @@ enableValidateSpecification
     ;
 
 enableSpecification
-    : KW_ENABLE
-    | KW_DISABLE
+    : enable
+    | disable
     ;
 
 validateSpecification
@@ -1021,6 +1021,7 @@ primitiveType
     : KW_TINYINT
     | KW_SMALLINT
     | KW_INT
+    | KW_INTEGER
     | KW_BIGINT
     | KW_BOOLEAN
     | KW_FLOAT
@@ -1038,7 +1039,7 @@ primitiveType
     //| KW_INTERVAL KW_DAY KW_TO KW_SECOND
     | KW_STRING
     | KW_BINARY
-    | KW_DECIMAL (LPAREN prec=Number (COMMA scale=Number)? RPAREN)?
+    | decimal (LPAREN prec=Number (COMMA scale=Number)? RPAREN)?
     | (KW_VARCHAR | KW_CHAR) LPAREN length=Number RPAREN
     ;
 
@@ -2170,14 +2171,14 @@ floorExpression
     ;
 
 floorDateQualifiers
-    : KW_YEAR
+    : year
     | KW_QUARTER
-    | KW_MONTH
-    | KW_WEEK
-    | KW_DAY
-    | KW_HOUR
-    | KW_MINUTE
-    | KW_SECOND
+    | month
+    | week
+    | day
+    | hour
+    | minute
+    | second
     ;
 
 extractExpression
@@ -2185,14 +2186,14 @@ extractExpression
     ;
 
 timeQualifiers
-    : KW_YEAR
+    : year
     | KW_QUARTER
-    | KW_MONTH
-    | KW_WEEK
-    | KW_DAY
-    | KW_HOUR
-    | KW_MINUTE
-    | KW_SECOND
+    | month
+    | week
+    | day
+    | hour
+    | minute
+    | second
     ;
 
 constant
@@ -2256,14 +2257,14 @@ intervalExpression
     ;
 
 intervalQualifiers
-    : KW_YEAR KW_TO KW_MONTH
-    | KW_DAY KW_TO KW_SECOND
-    | KW_YEAR
-    | KW_MONTH
-    | KW_DAY
-    | KW_HOUR
-    | KW_MINUTE
-    | KW_SECOND
+    : year KW_TO month
+    | day KW_TO second
+    | year
+    | month
+    | day
+    | hour
+    | minute
+    | second
     ;
 
 expression
@@ -2292,6 +2293,7 @@ precedenceUnaryOperator
     : PLUS
     | MINUS
     | TILDE
+    | BITWISENOT
     ;
 
 precedenceUnaryPrefixExpression
@@ -2524,6 +2526,7 @@ sysFuncNames
     | KW_TINYINT
     | KW_SMALLINT
     | KW_INT
+    | KW_INTEGER
     | KW_BIGINT
     | KW_FLOAT
     | KW_REAL
@@ -2629,6 +2632,7 @@ nonReserved
     | KW_DATABASES
     | KW_DATETIME
     | KW_DAY
+    | KW_DAYS
     | KW_DAYOFWEEK
     | KW_DBPROPERTIES
     | KW_DCPROPERTIES
@@ -2643,12 +2647,14 @@ nonReserved
     | KW_DIRECTORIES
     | KW_DIRECTORY
     | KW_DISABLE
+    | KW_DISABLED
     | KW_DISTRIBUTE
     | KW_DISTRIBUTED
     | KW_DO
     | KW_DUMP
     | KW_ELEM_TYPE
     | KW_ENABLE
+    | KW_ENABLED
     | KW_ENFORCED
     | KW_ESCAPED
     | KW_EVERY
@@ -2668,6 +2674,7 @@ nonReserved
     | KW_FUNCTIONS
     | KW_HOLD_DDLTIME
     | KW_HOUR
+    | KW_HOURS
     | KW_IDXPROPERTIES
     | KW_IGNORE
     | KW_INDEX
@@ -2702,7 +2709,9 @@ nonReserved
     | KW_MATERIALIZED
     | KW_METADATA
     | KW_MINUTE
+    | KW_MINUTES
     | KW_MONTH
+    | KW_MONTHS
     | KW_MOVE
     | KW_MSCK
     | KW_NORELY
@@ -2756,6 +2765,7 @@ nonReserved
     | KW_SCHEMA
     | KW_SCHEMAS
     | KW_SECOND
+    | KW_SECONDS
     | KW_SEMI
     | KW_SERDE
     | KW_SERDEPROPERTIES
@@ -2812,12 +2822,14 @@ nonReserved
     | KW_VIEWS
     | KW_WAIT
     | KW_WEEK
+    | KW_WEEKS
     | KW_WHILE
     | KW_WITHIN
     | KW_WORK
     | KW_WORKLOAD
     | KW_WRITE
     | KW_YEAR
+    | KW_YEARS
     | KW_ZONE
     ;
 
@@ -2837,6 +2849,7 @@ sql11ReservedKeywordsUsedAsFunctionName
     | KW_GROUPING
     | KW_IF
     | KW_INT
+    | KW_INTEGER
     | KW_MAP
     | KW_REAL
     | KW_SMALLINT
@@ -2937,20 +2950,63 @@ activate
 
 enable
     : KW_ENABLE
+    | KW_ENABLED
     ;
 
 disable
     : KW_DISABLE
+    | KW_DISABLED
     ;
 
 unmanaged
     : KW_UNMANAGED
     ;
 
+year
+    : KW_YEAR
+    | KW_YEARS
+    ;
+
+month
+    : KW_MONTH
+    | KW_MONTHS
+    ;
+
+week
+    : KW_WEEK
+    | KW_WEEKS
+    ;
+
+day
+    : KW_DAY
+    | KW_DAYS
+    ;
+
+hour
+    : KW_HOUR
+    | KW_HOURS
+    ;
+
+minute
+    : KW_MINUTE
+    | KW_MINUTES
+    ;
+
+second
+    : KW_SECOND
+    | KW_SECONDS
+    ;
+
+decimal
+    : KW_DEC
+    | KW_DECIMAL
+    | KW_NUMERIC
+    ;
+
 alterResourcePlanStatement
     : KW_ALTER KW_RESOURCE KW_PLAN name=id_ (
           KW_VALIDATE
-        | KW_DISABLE
+        | disable
         | KW_SET rpAssignList
         | KW_UNSET rpUnassignList
         | KW_RENAME KW_TO newName=id_
@@ -2962,7 +3018,7 @@ alterResourcePlanStatement
 /** It might make sense to make this more generic, if something else could be enabled/disabled.
     For now, it's only used for WM. Translate into another form of an alter statement. */
 globalWmStatement
-    : (KW_ENABLE | KW_DISABLE) KW_WORKLOAD KW_MANAGEMENT
+    : (enable | disable) KW_WORKLOAD KW_MANAGEMENT
     ;
 
 replaceResourcePlanStatement
