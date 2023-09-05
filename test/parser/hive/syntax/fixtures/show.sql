@@ -39,9 +39,9 @@ SHOW TBLPROPERTIES tblname("foo");
 SHOW CREATE TABLE db.tbl1;
 
 -- Show Indexes
--- SHOW INDEX ON idx_tbl;
+SHOW INDEX ON idx_tbl;
 
--- SHOW FORMATTED INDEXES ON idx_tbl2 FROM db_1;
+SHOW FORMATTED INDEXES ON idx_tbl2 FROM db_1;
 
 -- Show Columns
 SHOW COLUMNS FROM tble;
