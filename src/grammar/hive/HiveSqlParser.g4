@@ -1503,7 +1503,7 @@ alterStatementSuffixRecoverPartitions
     ;
 
 alterStatementSuffixDropPartitions
-    : KW_DROP ifExists? KW_PARTITION partitionSelectorSpec (COMMA KW_PARTITION partitionSelectorSpec)* dropPartitionsIgnoreClause? KW_PURGE?
+    : KW_DROP ifExists? KW_PARTITION partitionSelectorSpec (COMMA KW_PARTITION partitionSelectorSpec)* dropPartitionsIgnoreClause? KW_PURGE? replicationClause?
     ;
 
 alterStatementSuffixProperties
