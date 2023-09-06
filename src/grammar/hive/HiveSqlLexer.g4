@@ -121,6 +121,7 @@ KW_DISTRIBUTED                         : 'DISTRIBUTED';
 KW_DO                                  : 'DO';
 KW_DOUBLE                              : 'DOUBLE';
 KW_DROP                                : 'DROP';
+KW_RECOVER                             : 'RECOVER';
 KW_DUMP                                : 'DUMP';
 KW_ELEM_TYPE                           : '$ELEM$';
 KW_ELSE                                : 'ELSE';

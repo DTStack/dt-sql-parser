@@ -83,6 +83,10 @@ loadStatement
     : KW_LOAD KW_DATA KW_LOCAL? KW_INPATH StringLiteral KW_OVERWRITE? KW_INTO KW_TABLE tableOrPartition inputFileFormat?
     ;
 
+dropPartitionsIgnoreClause
+    : KW_IGNORE KW_PROTECTION
+    ;
+
 replicationClause
     : KW_FOR KW_METADATA? KW_REPLICATION LPAREN StringLiteral RPAREN
     ;
@@ -481,6 +485,12 @@ principalName
     : KW_USER principalIdentifier
     | KW_GROUP principalIdentifier
     | KW_ROLE id_
+    ;
+
+principalAlterName
+    : KW_USER principalIdentifier
+    | KW_ROLE id_
+    | id_
     ;
 
 withGrantOption
@@ -1337,6 +1347,7 @@ alterStatement
 
 alterTableStatementSuffix
     : alterStatementSuffixRename
+    | alterStatementSuffixRecoverPartitions
     | alterStatementSuffixDropPartitions
     | alterStatementSuffixAddPartitions
     | alterStatementSuffixTouch
@@ -1349,7 +1360,7 @@ alterTableStatementSuffix
     | alterStatementSuffixDropConstraint
     | alterStatementSuffixAddConstraint
     | alterTblPartitionStatementSuffix
-    | partitionSpec alterTblPartitionStatementSuffix
+    | partitionSpec? alterTblPartitionStatementSuffix
     | alterStatementSuffixSetOwner
     | alterStatementSuffixSetPartSpec
     | alterStatementSuffixExecute
@@ -1410,7 +1421,7 @@ alterDatabaseSuffixProperties
     ;
 
 alterDatabaseSuffixSetOwner
-    : dbName=id_ KW_SET KW_OWNER principalName
+    : dbName=id_ KW_SET KW_OWNER principalAlterName
     ;
 
 alterDatabaseSuffixSetLocation
@@ -1488,8 +1499,12 @@ partitionLocation
     : KW_LOCATION locn=StringLiteral
     ;
 
+alterStatementSuffixRecoverPartitions
+    : KW_RECOVER KW_PARTITIONS
+    ;
+
 alterStatementSuffixDropPartitions
-    : KW_DROP ifExists? KW_PARTITION partitionSelectorSpec (COMMA KW_PARTITION partitionSelectorSpec)* KW_PURGE? replicationClause?
+    : KW_DROP ifExists? KW_PARTITION partitionSelectorSpec (COMMA KW_PARTITION partitionSelectorSpec)* dropPartitionsIgnoreClause? KW_PURGE? replicationClause?
     ;
 
 alterStatementSuffixProperties
@@ -1616,7 +1631,7 @@ alterDataConnectorSuffixProperties
     ;
 
 alterDataConnectorSuffixSetOwner
-    : dcName=id_ KW_SET KW_OWNER principalName
+    : dcName=id_ KW_SET KW_OWNER principalAlterName
     ;
 
 alterDataConnectorSuffixSetUrl
