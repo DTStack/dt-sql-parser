@@ -1,4 +1,4 @@
-// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/hive/HiveSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/xuxiaoqi/Documents/dt-sql-parser-copy/src/grammar/hive/HiveSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -11,6 +11,7 @@ import { VectorizationOnlyContext } from "./HiveSqlParser";
 import { VectorizatonDetailContext } from "./HiveSqlParser";
 import { ExecStatementContext } from "./HiveSqlParser";
 import { LoadStatementContext } from "./HiveSqlParser";
+import { DropPartitionsIgnoreClauseContext } from "./HiveSqlParser";
 import { ReplicationClauseContext } from "./HiveSqlParser";
 import { ExportStatementContext } from "./HiveSqlParser";
 import { ImportStatementContext } from "./HiveSqlParser";
@@ -77,6 +78,7 @@ import { PrivlegeDefContext } from "./HiveSqlParser";
 import { PrivilegeTypeContext } from "./HiveSqlParser";
 import { PrincipalSpecificationContext } from "./HiveSqlParser";
 import { PrincipalNameContext } from "./HiveSqlParser";
+import { PrincipalAlterNameContext } from "./HiveSqlParser";
 import { WithGrantOptionContext } from "./HiveSqlParser";
 import { GrantOptionForContext } from "./HiveSqlParser";
 import { AdminOptionForContext } from "./HiveSqlParser";
@@ -268,6 +270,7 @@ import { AlterStatementSuffixTouchContext } from "./HiveSqlParser";
 import { AlterStatementSuffixArchiveContext } from "./HiveSqlParser";
 import { AlterStatementSuffixUnArchiveContext } from "./HiveSqlParser";
 import { PartitionLocationContext } from "./HiveSqlParser";
+import { AlterStatementSuffixRecoverPartitionsContext } from "./HiveSqlParser";
 import { AlterStatementSuffixDropPartitionsContext } from "./HiveSqlParser";
 import { AlterStatementSuffixPropertiesContext } from "./HiveSqlParser";
 import { AlterViewSuffixPropertiesContext } from "./HiveSqlParser";
@@ -571,6 +574,13 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitLoadStatement?: (ctx: LoadStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.dropPartitionsIgnoreClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropPartitionsIgnoreClause?: (ctx: DropPartitionsIgnoreClauseContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.replicationClause`.
@@ -1033,6 +1043,13 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitPrincipalName?: (ctx: PrincipalNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.principalAlterName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPrincipalAlterName?: (ctx: PrincipalAlterNameContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.withGrantOption`.
@@ -2370,6 +2387,13 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitPartitionLocation?: (ctx: PartitionLocationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.alterStatementSuffixRecoverPartitions`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterStatementSuffixRecoverPartitions?: (ctx: AlterStatementSuffixRecoverPartitionsContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.alterStatementSuffixDropPartitions`.
