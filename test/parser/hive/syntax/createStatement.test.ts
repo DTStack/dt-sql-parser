@@ -15,7 +15,7 @@ const features = {
     scheduledQueries: readSQL(__dirname, 'createScheduledQuery.sql')
 };
 
-describe('Hive Create Syntax Tests', () => {
+describe('HiveSQL Create Syntax Tests', () => {
     describe('CREATE DATABASE', () => {
         features.databases.forEach((database) => {
             it(database, () => {

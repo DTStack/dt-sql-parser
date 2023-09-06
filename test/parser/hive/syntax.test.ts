@@ -1,6 +1,6 @@
 import HiveSQL from '../../../src/parser/hive';
 
-describe('Hive SQL Syntax Tests', () => {
+describe('HiveSQL Syntax Tests', () => {
     const parser = new HiveSQL();
     test('Create Table Statement', () => {
         const sql = 'CREATE TABLE person(name STRING,age INT);';

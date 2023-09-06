@@ -12,7 +12,7 @@ const features = {
     scheduleQueries: readSQL(__dirname, 'alterScheduleQuery.sql'),
 };
 
-describe('Hive Alter Syntax Tests', () => {
+describe('HiveSQL Alter Syntax Tests', () => {
     describe('ALTER DATABASE', () => {
         features.databases.forEach((db) => {
             it(db, () => {

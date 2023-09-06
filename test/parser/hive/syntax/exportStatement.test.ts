@@ -5,7 +5,7 @@ const features = {
     exports: readSQL(__dirname, 'export.sql')
 };
 
-describe('Hive Export Syntax Tests', () => {
+describe('HiveSQL Export Syntax Tests', () => {
     const parser = new HiveSQL();
 
     features.exports.forEach((exp) => {

@@ -5,7 +5,7 @@ const features = {
     imports: readSQL(__dirname, 'import.sql')
 };
 
-describe('Hive Import Syntax Tests', () => {
+describe('HiveSQL Import Syntax Tests', () => {
     const parser = new HiveSQL();
 
     features.imports.forEach((imp) => {

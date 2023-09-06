@@ -7,7 +7,7 @@ const features = {
     aborts: readSQL(__dirname, 'abort.sql'),
 };
 
-describe('Hive Abort Syntax Tests', () => {
+describe('HiveSQL Abort Syntax Tests', () => {
     features.aborts.forEach((ab) => {
         it(ab, () => {
             expect(parser.validate(ab).length).toBe(0);

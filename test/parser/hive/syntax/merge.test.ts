@@ -7,7 +7,7 @@ const features = {
     merges: readSQL(__dirname, 'merge.sql'),
 };
 
-describe('Hive Merge Syntax Tests', () => {
+describe('HiveSQL Merge Syntax Tests', () => {
     features.merges.forEach((merge) => {
         it(merge, () => {
             expect(parser.validate(merge).length).toBe(0);

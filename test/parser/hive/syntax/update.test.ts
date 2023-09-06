@@ -7,7 +7,7 @@ const features = {
     updates: readSQL(__dirname, 'update.sql'),
 };
 
-describe('Hive Update Syntax Tests', () => {
+describe('HiveSQL Update Syntax Tests', () => {
     features.updates.forEach((update) => {
         it(update, () => {
             expect(parser.validate(update).length).toBe(0);

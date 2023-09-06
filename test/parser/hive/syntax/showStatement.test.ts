@@ -7,7 +7,7 @@ const features = {
     shows: readSQL(__dirname, 'show.sql'),
 };
 
-describe('Hive Show Syntax Tests', () => {
+describe('HiveSQL Show Syntax Tests', () => {
     features.shows.forEach((show) => {
         it(show, () => {
             expect(parser.validate(show).length).toBe(0);

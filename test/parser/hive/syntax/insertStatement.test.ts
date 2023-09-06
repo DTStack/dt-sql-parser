@@ -8,7 +8,7 @@ const features = {
     insertFromValues: readSQL(__dirname, 'insertFormValues.sql')
 };
 
-describe('Hive Insert Syntax Tests', () => {
+describe('HiveSQL Insert Syntax Tests', () => {
     features.insertFromQueries.forEach((ifq) => {
         it(ifq, () => {
             expect(parser.validate(ifq).length).toBe(0);
