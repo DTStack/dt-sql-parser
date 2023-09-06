@@ -484,6 +484,14 @@ import { ActivateContext } from "./HiveSqlParser";
 import { EnableContext } from "./HiveSqlParser";
 import { DisableContext } from "./HiveSqlParser";
 import { UnmanagedContext } from "./HiveSqlParser";
+import { YearContext } from "./HiveSqlParser";
+import { MonthContext } from "./HiveSqlParser";
+import { WeekContext } from "./HiveSqlParser";
+import { DayContext } from "./HiveSqlParser";
+import { HourContext } from "./HiveSqlParser";
+import { MinuteContext } from "./HiveSqlParser";
+import { SecondContext } from "./HiveSqlParser";
+import { DecimalContext } from "./HiveSqlParser";
 import { AlterResourcePlanStatementContext } from "./HiveSqlParser";
 import { GlobalWmStatementContext } from "./HiveSqlParser";
 import { ReplaceResourcePlanStatementContext } from "./HiveSqlParser";
@@ -5806,6 +5814,94 @@ export interface HiveSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUnmanaged?: (ctx: UnmanagedContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.year`.
+	 * @param ctx the parse tree
+	 */
+	enterYear?: (ctx: YearContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.year`.
+	 * @param ctx the parse tree
+	 */
+	exitYear?: (ctx: YearContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.month`.
+	 * @param ctx the parse tree
+	 */
+	enterMonth?: (ctx: MonthContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.month`.
+	 * @param ctx the parse tree
+	 */
+	exitMonth?: (ctx: MonthContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.week`.
+	 * @param ctx the parse tree
+	 */
+	enterWeek?: (ctx: WeekContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.week`.
+	 * @param ctx the parse tree
+	 */
+	exitWeek?: (ctx: WeekContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.day`.
+	 * @param ctx the parse tree
+	 */
+	enterDay?: (ctx: DayContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.day`.
+	 * @param ctx the parse tree
+	 */
+	exitDay?: (ctx: DayContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.hour`.
+	 * @param ctx the parse tree
+	 */
+	enterHour?: (ctx: HourContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.hour`.
+	 * @param ctx the parse tree
+	 */
+	exitHour?: (ctx: HourContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.minute`.
+	 * @param ctx the parse tree
+	 */
+	enterMinute?: (ctx: MinuteContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.minute`.
+	 * @param ctx the parse tree
+	 */
+	exitMinute?: (ctx: MinuteContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.second`.
+	 * @param ctx the parse tree
+	 */
+	enterSecond?: (ctx: SecondContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.second`.
+	 * @param ctx the parse tree
+	 */
+	exitSecond?: (ctx: SecondContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.decimal`.
+	 * @param ctx the parse tree
+	 */
+	enterDecimal?: (ctx: DecimalContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.decimal`.
+	 * @param ctx the parse tree
+	 */
+	exitDecimal?: (ctx: DecimalContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `HiveSqlParser.alterResourcePlanStatement`.
