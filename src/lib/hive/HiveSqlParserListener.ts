@@ -1,4 +1,4 @@
-// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/hive/HiveSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/xuxiaoqi/Documents/dt-sql-parser-copy/src/grammar/hive/HiveSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
