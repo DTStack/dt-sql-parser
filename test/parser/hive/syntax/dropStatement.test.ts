@@ -8,7 +8,7 @@ const features = {
     reloads: readSQL(__dirname, 'reload.sql')
 };
 
-describe('Hive Drop Syntax Tests', () => {
+describe('HiveSQL Drop Syntax Tests', () => {
     features.drops.forEach((drop) => {
         it(drop, () => {
             expect(parser.validate(drop).length).toBe(0);

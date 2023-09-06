@@ -346,6 +346,7 @@ showStatement
     | KW_SHOW KW_CONF StringLiteral
     | KW_SHOW KW_RESOURCE (KW_PLAN rp_name=id_ | KW_PLANS)
     | KW_SHOW KW_DATACONNECTORS
+    | KW_SHOW KW_FORMATTED? ( KW_INDEX | KW_INDEXES ) KW_ON tableName (from_in id_)?
     ;
 
 showTablesFilterExpr

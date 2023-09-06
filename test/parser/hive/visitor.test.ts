@@ -1,8 +1,9 @@
 import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
-import { HiveSqlVisitor } from '../../../src/lib/hive/HiveSqlVisitor';
+import { HiveSqlParserVisitor } from '../../../src/lib/hive/HiveSqlParserVisitor';
 import HiveSQL from '../../../src/parser/hive';
+import { ProgramContext } from '../../../src/lib/hive/HiveSqlParser';
 
-describe('Hive SQL Visitor Tests', () => {
+describe('HiveSQL Visitor Tests', () => {
     const expectTableName = 'dm_gis.dlv_addr_tc_count';
     const sql = `select citycode,tc,inc_day from ${expectTableName} where inc_day='20190501' limit 100;`;
     const parser = new HiveSQL();
@@ -13,7 +14,7 @@ describe('Hive SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends AbstractParseTreeVisitor<any> implements HiveSqlVisitor<any> {
+        class MyVisitor extends AbstractParseTreeVisitor<any> implements HiveSqlParserVisitor<any> {
 
             defaultResult() {
                 return result;
@@ -25,7 +26,7 @@ describe('Hive SQL Visitor Tests', () => {
         }
 
         const visitor = new MyVisitor();
-        visitor.visit(parserTree);
+        visitor.visit(parserTree as ProgramContext);
 
         expect(result).toBe(expectTableName);
     });
