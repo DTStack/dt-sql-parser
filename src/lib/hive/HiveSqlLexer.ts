@@ -1,4 +1,4 @@
-// Generated from /Users/xuxiaoqi/Documents/dt-sql-parser-copy/src/grammar/hive/HiveSqlLexer.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/hive/HiveSqlLexer.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ATN } from "antlr4ts/atn/ATN";
