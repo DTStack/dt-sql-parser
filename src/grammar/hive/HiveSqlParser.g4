@@ -225,7 +225,7 @@ orReplace
     ;
 
 createDatabaseStatement
-    : KW_CREATE db_schema
+    : KW_CREATE KW_REMOTE? db_schema
         ifNotExists?
         name=id_
         databaseComment?
@@ -567,8 +567,8 @@ dropIndexStatement
     : KW_DROP KW_INDEX ifExists? id_ KW_ON tableName;
 
 createViewStatement
-    : KW_CREATE orReplace? KW_VIEW ifNotExists? name=tableName
-        (LPAREN columnNameCommentList RPAREN)? tableComment? viewPartition?
+    : KW_CREATE orReplace? KW_VIEW ifNotExists? name=tableName 
+        (LPAREN columnNameCommentList RPAREN)? tableComment? viewPartition?     
         tablePropertiesPrefixed?
         KW_AS
         selectStatementWithCTE
@@ -1685,7 +1685,7 @@ createTableStatement
     ;
 
 createDataConnectorStatement
-    : KW_CREATE KW_DATACONNECTOR ifNotExists? name=id_ dataConnectorType dataConnectorUrl dataConnectorComment?
+    : KW_CREATE KW_DATACONNECTOR ifNotExists? name=id_ dataConnectorType? dataConnectorUrl? dataConnectorComment?
         (KW_WITH KW_DCPROPERTIES dcprops=dcProperties)?
     ;
 

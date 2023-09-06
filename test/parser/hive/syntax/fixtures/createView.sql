@@ -1,4 +1,7 @@
 -- Common View
+CREATE VIEW mydb.bro_view
+AS SELECT * FROM mydb.sale_tbl;
+
 CREATE VIEW IF NOT EXISTS mydb.bro_view
 COMMENT '一个测试视图'
 AS SELECT * FROM mydb.sale_tbl;
@@ -18,6 +21,11 @@ AS SELECT DISTINCT id, `name`, runtime
 
 
 -- Materialized View
+CREATE MATERIALIZED VIEW IF NOT EXISTS mydb.bro_view
+DISABLE REWRITE
+COMMENT '一个测试视图'
+AS SELECT * FROM mydb.sale_tbl;
+
 CREATE MATERIALIZED VIEW druid_wiki_mv
 COMMENT '这是一个物化视图'
 STORED AS PARQUET
