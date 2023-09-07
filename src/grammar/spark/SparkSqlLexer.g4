@@ -22,7 +22,7 @@ lexer grammar SparkSqlLexer;
   /**
    * When true, parser should throw ParseException for unclosed bracketed comment.
    */
-  public boolean has_unclosed_bracketed_comment = false;
+  public has_unclosed_bracketed_comment = false;
 
   /**
    * Verify whether current token is a valid decimal token (which contains dot).
@@ -36,8 +36,8 @@ lexer grammar SparkSqlLexer;
    * by a space. 34.E2 is a valid decimal token because it is followed by symbol '+'
    * which is not a digit or letter or underscore.
    */
-  public boolean isValidDecimal() {
-    int nextChar = _input.LA(1);
+  public isValidDecimal() {
+    const nextChar = _input.LA(1);
     if (nextChar >= 'A' && nextChar <= 'Z' || nextChar >= '0' && nextChar <= '9' ||
       nextChar == '_') {
       return false;
@@ -53,8 +53,8 @@ lexer grammar SparkSqlLexer;
    *
    * Returns true if the next character is '+'.
    */
-  public boolean isHint() {
-    int nextChar = _input.LA(1);
+  public isHint() {
+    const nextChar = _input.LA(1);
     if (nextChar == '+') {
       return true;
     } else {
@@ -68,7 +68,7 @@ lexer grammar SparkSqlLexer;
    * If the method be called, it means the end of the entire character stream match,
    * and we set the flag and fail later.
    */
-  public void markUnclosedComment() {
+  public markUnclosedComment() {
     has_unclosed_bracketed_comment = true;
   }
 }
