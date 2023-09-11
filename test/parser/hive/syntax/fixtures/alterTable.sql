@@ -212,6 +212,8 @@ ALTER TABLE db1.tbl PARTITION (`pt1`=1) ENABLE OFFLINE;
 
 ALTER TABLE db1.tbl PARTITION (`pt1`=1) DISABLE OFFLINE;
 
+ALTER TABLE foo PARTITION (ds='2008-04-08', hr=11) CHANGE COLUMN dec_column_name dec_column_name DECIMAL(38,18);
+
 -- Alter Table/Partition Compact
 ALTER TABLE tbl_com COMPACT 'compaction_type';
 
