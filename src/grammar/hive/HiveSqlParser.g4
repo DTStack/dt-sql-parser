@@ -471,6 +471,7 @@ privilegeType
     | KW_UPDATE
     | KW_CREATE
     | KW_DROP
+    | KW_INDEX
     | KW_LOCK
     | KW_SELECT
     | KW_SHOW_DATABASE

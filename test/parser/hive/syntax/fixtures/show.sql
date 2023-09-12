@@ -93,6 +93,8 @@ SHOW CURRENT ROLES;
 -- Show Role Grant
 SHOW ROLE GRANT USER user1;
 
+SHOW ROLE GRANT ROLE `role`;
+
 -- Show Principals
 SHOW PRINCIPALS role1;
 
