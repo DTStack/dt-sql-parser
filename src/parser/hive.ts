@@ -25,7 +25,7 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
         HiveSqlParser.RULE_hintArgName, // hint name
     ]);
 
-    protected get splitListener() {
+    protected get splitListener () {
         return new HiveSqlSplitListener();
     }
 
@@ -93,15 +93,15 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
 }
 
 export class HiveSqlSplitListener implements HiveSqlParserListener {
-    private _statementContext: ProgramContext[] = [];
+    private _statementContext: StatementContext[] = [];
 
-    exitSqlStatement = (ctx: ExplainStatementContext | ExecStatementContext) => {
+    exitStatement = (ctx: StatementContext) => {
         this._statementContext.push(ctx);
     }
 
-    enterSqlStatements = (ctx: StatementContext) => {
+    enterStatement = (ctx: StatementContext) => {
     };
-    
+
     get statementsContext() {
         return this._statementContext;
     }
