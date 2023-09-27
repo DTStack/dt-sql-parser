@@ -45,35 +45,11 @@ options { tokenVocab = SparkSqlLexer; }
 }
 
 program
-    : singleStatement EOF
+    : singleStatement* EOF
     ;
 
 singleStatement
-    : statement SEMICOLON* EOF
-    ;
-
-singleExpression
-    : namedExpression EOF
-    ;
-
-singleTableIdentifier
-    : tableIdentifier EOF
-    ;
-
-singleMultipartIdentifier
-    : multipartIdentifier EOF
-    ;
-
-singleFunctionIdentifier
-    : functionIdentifier EOF
-    ;
-
-singleDataType
-    : dataType EOF
-    ;
-
-singleTableSchema
-    : colTypeList EOF
+    : statement SEMICOLON ?
     ;
 
 tableIdentifierReference: identifierReference;
