@@ -14,6 +14,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
+/**
+ * This file is an adaptation of antlr's grammars-v4/sql/hive/v4/HiveLexer.g4 grammar.
+ * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/hive/v4/HiveLexer.g4
+ */
+
 lexer grammar HiveSqlLexer;
 
 // unsupported option caseInsensitive in antlr4@4.9

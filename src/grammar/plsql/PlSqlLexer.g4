@@ -18,6 +18,11 @@
  * limitations under the License.
  */
 
+/**
+ * This file is an adaptation of antlr's grammars-v4/sql/plsql/PlSqlLexer.g4 grammar.
+ * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/plsql/PlSqlLexer.g4
+ */
+
 lexer grammar PlSqlLexer;
 
 options {

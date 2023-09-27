@@ -1,9 +1,4 @@
 /*
- based on
- https://github.com/tunnelvisionlabs/antlr4-grammar-postgresql/blob/master/src/com/tunnelvisionlabs/postgresql/PostgreSqlLexer.g4
- */
-
-/*
  * [The "MIT license"] Copyright (C) 2014 Sam Harwell, Tunnel Vision Laboratories, LLC
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -23,8 +18,16 @@
  * other dealings in this Software without prior written authorization from Tunnel Vision
  * Laboratories, LLC.
  */
+
+/**
+ * This file is an adaptation of tunnelvisionlabs's antlr4-grammar-postgresql/src/com/tunnelvisionlabs/postgresql/PostgreSqlLexer.g4 grammar.
+ * Reference: https://github.com/tunnelvisionlabs/antlr4-grammar-postgresql/blob/master/src/com/tunnelvisionlabs/postgresql/PostgreSqlLexer.g4
+ */
+
 lexer grammar PostgreSQLLexer;
-/* Reference: http://www.postgresql.org/docs/9.3/static/sql-syntax-lexical.html
+
+/**
+ * Reference Doc: http://www.postgresql.org/docs/9.3/static/sql-syntax-lexical.html
  */
 
 options {
