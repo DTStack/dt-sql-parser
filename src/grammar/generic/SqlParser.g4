@@ -23,6 +23,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/**
+ * This file is an adaptation of antlr's grammars-v4/sql/mysql/Positive-Technologies/MySqlParser.g4 grammar.
+ * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/mysql/Positive-Technologies/MySqlParser.g4
+ */
+
 parser grammar SqlParser;
 
 options { tokenVocab=SqlLexer; }

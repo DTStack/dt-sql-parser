@@ -14,6 +14,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
+/**
+ * This file is an adaptation of antlr/grammars-v4's sql/hive/v4/HiveParser.g4 grammar.
+ * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/hive/v4/HiveParser.g4
+ */
+
 parser grammar HiveSqlParser;
 
 options
