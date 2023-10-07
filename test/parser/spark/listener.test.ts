@@ -1,4 +1,4 @@
-import { SparkSqlListener } from '../../../src/lib/spark/SparkSqlListener';
+import { SparkSqlParserListener } from '../../../src/lib/spark/SparkSqlParserListener';
 import SparkSQL from '../../../src/parser/spark';
 
 describe('Spark SQL Listener Tests', () => {
@@ -8,10 +8,10 @@ describe('Spark SQL Listener Tests', () => {
 
     const parserTree = parser.parse(sql);
 
-    test('Listener enterTableName', () => {
+    test('Listener exitRelationPrimary', () => {
         let result = '';
-        class MyListener implements SparkSqlListener {
-            enterTableName = (ctx): void => {
+        class MyListener implements SparkSqlParserListener {
+            exitRelationPrimary = (ctx): void => {
                 result = ctx.text.toLowerCase();
             }
         }

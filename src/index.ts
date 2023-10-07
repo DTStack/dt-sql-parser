@@ -8,13 +8,13 @@ export * from './lib/hive/HiveSqlParserListener';
 export * from './lib/hive/HiveSqlParserVisitor';
 export * from './lib/plsql/PlSqlParserListener';
 export * from './lib/plsql/PlSqlParserVisitor';
-export * from './lib/spark/SparkSqlVisitor';
-export * from './lib/spark/SparkSqlListener';
+export * from './lib/spark/SparkSqlParserVisitor';
+export * from './lib/spark/SparkSqlParserListener';
 export * from './lib/pgsql/PostgreSQLParserListener';
 export * from './lib/pgsql/PostgreSQLParserVisitor';
 export * from './lib/trinosql/TrinoSqlListener';
 export * from './lib/trinosql/TrinoSqlVisitor';
-export { SyntaxContextType } from './parser/common/basic-parser-types'
+export { SyntaxContextType } from './parser/common/basic-parser-types';
 
 
 export type * from './parser/common/basic-parser-types';

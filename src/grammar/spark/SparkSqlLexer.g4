@@ -71,7 +71,7 @@ lexer grammar SparkSqlLexer;
    * and we set the flag and fail later.
    */
   public markUnclosedComment() {
-    has_unclosed_bracketed_comment = true;
+    this.has_unclosed_bracketed_comment = true;
   }
 }
 
@@ -488,26 +488,26 @@ INTEGER_VALUE
 
 EXPONENT_VALUE
     : DIGIT+ EXPONENT
-    | DECIMAL_DIGITS EXPONENT {isValidDecimal()}?
+    | DECIMAL_DIGITS EXPONENT {this.isValidDecimal()}?
     ;
 
 DECIMAL_VALUE
-    : DECIMAL_DIGITS {isValidDecimal()}?
+    : DECIMAL_DIGITS {this.isValidDecimal()}?
     ;
 
 FLOAT_LITERAL
     : DIGIT+ EXPONENT? 'F'
-    | DECIMAL_DIGITS EXPONENT? 'F' {isValidDecimal()}?
+    | DECIMAL_DIGITS EXPONENT? 'F' {this.isValidDecimal()}?
     ;
 
 DOUBLE_LITERAL
     : DIGIT+ EXPONENT? 'D'
-    | DECIMAL_DIGITS EXPONENT? 'D' {isValidDecimal()}?
+    | DECIMAL_DIGITS EXPONENT? 'D' {this.isValidDecimal()}?
     ;
 
 BIGDECIMAL_LITERAL
     : DIGIT+ EXPONENT? 'BD'
-    | DECIMAL_DIGITS EXPONENT? 'BD' {isValidDecimal()}?
+    | DECIMAL_DIGITS EXPONENT? 'BD' {this.isValidDecimal()}?
     ;
 
 IDENTIFIER
@@ -540,7 +540,7 @@ SIMPLE_COMMENT
     ;
 
 BRACKETED_COMMENT
-    : '/*' {!isHint()}? ( BRACKETED_COMMENT | . )*? ('*/' | {markUnclosedComment();} EOF) -> channel(HIDDEN)
+    : '/*' {!this.isHint()}? ( BRACKETED_COMMENT | . )*? ('*/' | {this.markUnclosedComment();} EOF) -> channel(HIDDEN)
     ;
 
 WS
