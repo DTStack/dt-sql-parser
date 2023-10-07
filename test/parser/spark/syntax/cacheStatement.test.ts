@@ -4,7 +4,7 @@ import { readSQL } from '../../../helper';
 const parser = new SparkSQL();
 
 const features = {
-  cache: readSQL(__dirname, 'cache.sql'),
+    cache: readSQL(__dirname, 'cache.sql'),
 };
 
 describe('Spark cache Syntax Tests', () => {

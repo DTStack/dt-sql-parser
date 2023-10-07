@@ -4,7 +4,7 @@ import { readSQL } from '../../../helper';
 const parser = new SparkSQL();
 
 const features = {
-  describe: readSQL(__dirname, 'describe.sql'),
+    describe: readSQL(__dirname, 'describe.sql'),
 };
 
 describe('Spark describe Syntax Tests', () => {

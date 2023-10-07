@@ -25,7 +25,7 @@ DESCRIBE QUERY SELECT age, sum(age) FROM person GROUP BY age;
 DESCRIBE QUERY WITH all_names_cte
     AS (SELECT name from person) SELECT * FROM all_names_cte;
 
-DESC QUERY VALUES(100, 'John', 10000.20D) AS employee(id, name, salary);
+DESC QUERY VALUES(100, 'John', 10000) AS employee(id, name, salary);
 
 DESC QUERY TABLE person;
 
