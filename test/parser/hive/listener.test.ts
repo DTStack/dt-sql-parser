@@ -6,8 +6,8 @@ import HiveSQL from '../../../src/parser/hive';
 describe('HiveSQL Listener Tests', () => {
     const parser = new HiveSQL();
     test('Listener enterSelectList', async () => {
-        const expectTableName = 'userName';
-        const sql = `select ${expectTableName} from user1 where inc_day='20190601' limit 1000;`;
+        const expectTableName = 'username';
+        const sql = `select ${expectTableName} from tablename where inc_day='20190601' limit 1000;`;
         const parserTree = parser.parse(sql);
 
         let result = '';

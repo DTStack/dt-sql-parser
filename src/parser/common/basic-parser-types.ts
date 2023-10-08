@@ -22,7 +22,15 @@ export enum SyntaxContextType {
     /** table name path, such as catalog.db.tb */
     TABLE = 'table',
     /** table name path will be created */
-    TABLE_CREATE = 'tableCreate'
+    TABLE_CREATE = 'tableCreate',
+    /** view name */
+    VIEW = 'view',
+    /** function name */
+    FUNCTION = 'function',
+    /** principal name */
+    PRINCIPAL = 'principal',
+    /** hint arg name */
+    HTNTARG = 'hintArg',
 }
 
 export interface WordRange {
