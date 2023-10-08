@@ -1166,11 +1166,15 @@ windowSpec
       RIGHT_PAREN
     ;
 
+/**
+* replace start identifier with start_ in grammar.
+* https://github.com/tunnelvisionlabs/antlr4ts/issues/417
+*/
 windowFrame
-    : frameType=KW_RANGE start=frameBound
-    | frameType=KW_ROWS start=frameBound
-    | frameType=KW_RANGE KW_BETWEEN start=frameBound KW_AND end=frameBound
-    | frameType=KW_ROWS KW_BETWEEN start=frameBound KW_AND end=frameBound
+    : frameType=KW_RANGE start_=frameBound
+    | frameType=KW_ROWS start_=frameBound
+    | frameType=KW_RANGE KW_BETWEEN start_=frameBound KW_AND end=frameBound
+    | frameType=KW_ROWS KW_BETWEEN start_=frameBound KW_AND end=frameBound
     ;
 
 frameBound

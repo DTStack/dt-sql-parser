@@ -1,4 +1,4 @@
-// Generated from /Users/liuyi/Desktop/Projects/dtstack/dt-sql-parser/src/grammar/spark/SparkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/edy/github/dt-sql-parser/src/grammar/spark/SparkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ATN } from "antlr4ts/atn/ATN";
@@ -15759,7 +15759,7 @@ export class SparkSqlParser extends Parser {
 				this.state = 3651;
 				_localctx._frameType = this.match(SparkSqlParser.KW_RANGE);
 				this.state = 3652;
-				_localctx._start = this.frameBound();
+				_localctx._start_ = this.frameBound();
 				}
 				break;
 
@@ -15769,7 +15769,7 @@ export class SparkSqlParser extends Parser {
 				this.state = 3653;
 				_localctx._frameType = this.match(SparkSqlParser.KW_ROWS);
 				this.state = 3654;
-				_localctx._start = this.frameBound();
+				_localctx._start_ = this.frameBound();
 				}
 				break;
 
@@ -15781,7 +15781,7 @@ export class SparkSqlParser extends Parser {
 				this.state = 3656;
 				this.match(SparkSqlParser.KW_BETWEEN);
 				this.state = 3657;
-				_localctx._start = this.frameBound();
+				_localctx._start_ = this.frameBound();
 				this.state = 3658;
 				this.match(SparkSqlParser.KW_AND);
 				this.state = 3659;
@@ -15797,7 +15797,7 @@ export class SparkSqlParser extends Parser {
 				this.state = 3662;
 				this.match(SparkSqlParser.KW_BETWEEN);
 				this.state = 3663;
-				_localctx._start = this.frameBound();
+				_localctx._start_ = this.frameBound();
 				this.state = 3664;
 				this.match(SparkSqlParser.KW_AND);
 				this.state = 3665;
@@ -27579,7 +27579,7 @@ export class WindowSpecContext extends ParserRuleContext {
 
 export class WindowFrameContext extends ParserRuleContext {
 	public _frameType!: Token;
-	public _start!: FrameBoundContext;
+	public _start_!: FrameBoundContext;
 	public _end!: FrameBoundContext;
 	public KW_RANGE(): TerminalNode | undefined { return this.tryGetToken(SparkSqlParser.KW_RANGE, 0); }
 	public frameBound(): FrameBoundContext[];
