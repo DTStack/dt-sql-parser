@@ -17,18 +17,18 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
 
     protected preferredRules: Set<number> = new Set();
 
-    protected get splitListener () {
+    protected get splitListener() {
         return null as any;
     }
 
     protected processCandidates(
-        candidates: CandidatesCollection, 
-        allTokens: Token[], 
-        caretTokenIndex: number
+        candidates: CandidatesCollection,
+        allTokens: Token[],
+        caretTokenIndex: number,
     ): Suggestions<Token> {
         return {
             syntax: [],
-            keywords: []
-        }
+            keywords: [],
+        };
     }
 }

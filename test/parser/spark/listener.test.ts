@@ -15,7 +15,7 @@ describe('Spark SQL Listener Tests', () => {
                 result = ctx.text.toLowerCase();
             }
         }
-        const listenTableName: any = new MyListener();
+        const listenTableName = new MyListener();
 
         parser.listen(listenTableName, parserTree);
         expect(result).toBe(expectTableName);
