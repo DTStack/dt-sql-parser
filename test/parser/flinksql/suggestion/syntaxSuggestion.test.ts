@@ -20,10 +20,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 22
         }
-        const suggestion = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax?.[0];
-        
-        expect(suggestion?.syntaxContextType === SyntaxContextType.TABLE)
-        
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(syn => syn.syntaxContextType === SyntaxContextType.TABLE);
+
+        expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map(token => token.text))
             .toEqual([ 'cat', '.', 'db', '.', 'tb' ])
     })
@@ -33,9 +33,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 3,
             column: 21
         }
-        const suggestion = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax?.[0];
-        
-        expect(suggestion?.syntaxContextType === SyntaxContextType.TABLE)
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(syn => syn.syntaxContextType === SyntaxContextType.TABLE);
+
+        expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map(token => token.text))
             .toEqual([ 'cat', '.', 'db' ])
     })
@@ -45,9 +46,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 20
         }
-        const suggestion = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax?.[0];
-        
-        expect(suggestion?.syntaxContextType === SyntaxContextType.TABLE_CREATE)
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(syn => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE);
+
+        expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map(token => token.text))
             .toEqual([ 'cat', '.', 'db' ])
     })
@@ -57,9 +59,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 21
         }
-        const suggestion = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax?.[0];
-        
-        expect(suggestion?.syntaxContextType === SyntaxContextType.TABLE)
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(syn => syn.syntaxContextType === SyntaxContextType.TABLE);
+
+        expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map(token => token.text))
             .toEqual([ 'cat' ])
     })
@@ -69,9 +72,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 20
         }
-        const suggestion = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax?.[0];
-        
-        expect(suggestion?.syntaxContextType === SyntaxContextType.DATABASE)
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(syn => syn.syntaxContextType === SyntaxContextType.DATABASE);
+
+        expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map(token => token.text))
             .toEqual([ 'cat', '.' ])
     })
@@ -81,9 +85,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 20
         }
-        const suggestion = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax?.[0];
-        
-        expect(suggestion?.syntaxContextType === SyntaxContextType.DATABASE)
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(syn => syn.syntaxContextType === SyntaxContextType.DATABASE);
+
+        expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map(token => token.text))
             .toEqual([ 'cat', '.' ]);
     })
@@ -93,9 +98,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 19,
             column: 10,
         }
-        const suggestion = parser.getSuggestionAtCaretPosition(multipleSql, pos)?.syntax?.[0];
-        console.log(suggestion);
-        expect(suggestion?.syntaxContextType === SyntaxContextType.DATABASE);
+        const syntaxes = parser.getSuggestionAtCaretPosition(multipleSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(syn => syn.syntaxContextType === SyntaxContextType.DATABASE);
+
+        expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map(token => token.text))
             .toEqual([ 'cat1', '.' ]);
     })

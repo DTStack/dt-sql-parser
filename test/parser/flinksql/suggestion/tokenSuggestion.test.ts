@@ -5,7 +5,7 @@ import FlinkSQL from '../../../../src/parser/flinksql'
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
-describe('Flink SQL Syntax Suggestion', () => {
+describe('Flink SQL Token Suggestion', () => {
     const parser = new FlinkSQL();
 
     test('Use Statement ', () => {
