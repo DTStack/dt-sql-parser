@@ -17,20 +17,20 @@ export enum SyntaxContextType {
     CATALOG = 'catalog',
     /** database name path, such as catalog.db */
     DATABASE = 'database',
-    /** database name path will be created  */
+    /** database name path that will be created  */
     DATABASE_CREATE = 'databaseCreate',
     /** table name path, such as catalog.db.tb */
     TABLE = 'table',
-    /** table name path will be created */
+    /** table name path that will be created */
     TABLE_CREATE = 'tableCreate',
-    /** view name */
+    /** view name path, such as db.tb.view */
     VIEW = 'view',
+    /** view name path that will be created */
+    VIEW_CREATE = 'viewCreate',
     /** function name */
     FUNCTION = 'function',
-    /** principal name */
-    PRINCIPAL = 'principal',
-    /** hint arg name */
-    HTNTARG = 'hintArg',
+    /** function name that will be created */
+    FUNCTION_CREATE = 'functionCreate',
 }
 
 export interface WordRange {

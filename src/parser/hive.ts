@@ -18,11 +18,15 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
     }
 
     protected preferredRules: Set<number> = new Set([
+        HiveSqlParser.RULE_dbSchemaName, // db or schema name
+        HiveSqlParser.RULE_dbSchemaNameCreate, // db or schema name that will be created
         HiveSqlParser.RULE_tableName, // table name
+        HiveSqlParser.RULE_tableNameCreate, // table name that will be created
         HiveSqlParser.RULE_viewName, // view name
-        HiveSqlParser.RULE_functionIdentifier, // function name
-        HiveSqlParser.RULE_principalIdentifier, // USER/ROLE/GROUP name
-        HiveSqlParser.RULE_hintArgName, // hint name
+        HiveSqlParser.RULE_viewNameCreate, // view name that will be created
+        HiveSqlParser.RULE_userDefinedFuncName, // function name
+        HiveSqlParser.RULE_functionNameCreate, // function name that will be created
+
     ]);
 
     protected get splitListener () {
@@ -37,7 +41,6 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
-
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
             const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
@@ -45,24 +48,36 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
 
             let syntaxContextType: SyntaxContextType;
             switch (ruleType) {
+                case HiveSqlParser.RULE_dbSchemaName: {
+                    syntaxContextType = SyntaxContextType.DATABASE;
+                    break;
+                }
+                case HiveSqlParser.RULE_dbSchemaNameCreate: {
+                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    break;
+                }
                 case HiveSqlParser.RULE_tableName: {
                     syntaxContextType = SyntaxContextType.TABLE;
+                    break;
+                }
+                case HiveSqlParser.RULE_tableNameCreate: {
+                    syntaxContextType = SyntaxContextType.TABLE_CREATE
                     break;
                 }
                 case HiveSqlParser.RULE_viewName: {
                     syntaxContextType = SyntaxContextType.VIEW;
                     break;
                 }
-                case HiveSqlParser.RULE_functionIdentifier: {
+                case HiveSqlParser.RULE_viewNameCreate: {
+                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    break;
+                }
+                case HiveSqlParser.RULE_userDefinedFuncName: {
                     syntaxContextType = SyntaxContextType.FUNCTION;
                     break;
                 }
-                case HiveSqlParser.RULE_principalIdentifier: {
-                    syntaxContextType = SyntaxContextType.PRINCIPAL;
-                    break;
-                }
-                case HiveSqlParser.RULE_hintArgName: {
-                    syntaxContextType = SyntaxContextType.HTNTARG;
+                case HiveSqlParser.RULE_functionNameCreate: {
+                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
                     break;
                 }
                 default:
@@ -86,15 +101,15 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
             }
         }
         return {
-            syntax: [],
-            keywords: [],
+            syntax: originalSyntaxSuggestions,
+            keywords,
         };
     }
 }
 
 export class HiveSqlSplitListener implements HiveSqlParserListener {
     private _statementContext: StatementContext[] = [];
-
+    
     exitStatement = (ctx: StatementContext) => {
         this._statementContext.push(ctx);
     }
