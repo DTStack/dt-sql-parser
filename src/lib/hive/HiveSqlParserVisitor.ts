@@ -1,4 +1,4 @@
-// Generated from /Users/xuxiaoqi/Documents/work/daishu-code/dt-sql-parser/src/grammar/hive/HiveSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/hive/HiveSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -111,7 +111,6 @@ import { AlterScheduledQueryChangeContext } from "./HiveSqlParser";
 import { ScheduleSpecContext } from "./HiveSqlParser";
 import { ExecutedAsSpecContext } from "./HiveSqlParser";
 import { DefinedAsSpecContext } from "./HiveSqlParser";
-import { ShowFunctionIdentifierContext } from "./HiveSqlParser";
 import { ShowStmtIdentifierContext } from "./HiveSqlParser";
 import { TableCommentContext } from "./HiveSqlParser";
 import { CreateTablePartitionSpecContext } from "./HiveSqlParser";
@@ -331,8 +330,13 @@ import { TableSampleContext } from "./HiveSqlParser";
 import { TableSourceContext } from "./HiveSqlParser";
 import { AsOfClauseContext } from "./HiveSqlParser";
 import { UniqueJoinTableSourceContext } from "./HiveSqlParser";
+import { DbSchemaNameContext } from "./HiveSqlParser";
+import { DbSchemaNameCreateContext } from "./HiveSqlParser";
+import { TableOrViewContext } from "./HiveSqlParser";
 import { TableNameContext } from "./HiveSqlParser";
+import { TableNameCreateContext } from "./HiveSqlParser";
 import { ViewNameContext } from "./HiveSqlParser";
+import { ViewNameCreateContext } from "./HiveSqlParser";
 import { SubQuerySourceContext } from "./HiveSqlParser";
 import { PartitioningSpecContext } from "./HiveSqlParser";
 import { PartitionTableFunctionSourceContext } from "./HiveSqlParser";
@@ -389,7 +393,10 @@ import { SortByClauseContext } from "./HiveSqlParser";
 import { TrimFunctionContext } from "./HiveSqlParser";
 import { Function_Context } from "./HiveSqlParser";
 import { Null_treatmentContext } from "./HiveSqlParser";
-import { FunctionNameContext } from "./HiveSqlParser";
+import { FunctionNameForDDLContext } from "./HiveSqlParser";
+import { FunctionNameForInvokeContext } from "./HiveSqlParser";
+import { UserDefinedFuncNameContext } from "./HiveSqlParser";
+import { FunctionNameCreateContext } from "./HiveSqlParser";
 import { CastExpressionContext } from "./HiveSqlParser";
 import { CaseExpressionContext } from "./HiveSqlParser";
 import { WhenExpressionContext } from "./HiveSqlParser";
@@ -458,7 +465,6 @@ import { PartitionSelectorValContext } from "./HiveSqlParser";
 import { PartitionSelectorOperatorContext } from "./HiveSqlParser";
 import { SubQuerySelectorOperatorContext } from "./HiveSqlParser";
 import { SysFuncNamesContext } from "./HiveSqlParser";
-import { DescFuncNamesContext } from "./HiveSqlParser";
 import { Id_Context } from "./HiveSqlParser";
 import { FunctionIdentifierContext } from "./HiveSqlParser";
 import { PrincipalIdentifierContext } from "./HiveSqlParser";
@@ -1282,13 +1288,6 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitDefinedAsSpec?: (ctx: DefinedAsSpecContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `HiveSqlParser.showFunctionIdentifier`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitShowFunctionIdentifier?: (ctx: ShowFunctionIdentifierContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.showStmtIdentifier`.
@@ -2824,6 +2823,27 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitUniqueJoinTableSource?: (ctx: UniqueJoinTableSourceContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `HiveSqlParser.dbSchemaName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDbSchemaName?: (ctx: DbSchemaNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.dbSchemaNameCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDbSchemaNameCreate?: (ctx: DbSchemaNameCreateContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.tableOrView`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTableOrView?: (ctx: TableOrViewContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `HiveSqlParser.tableName`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2831,11 +2851,25 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitTableName?: (ctx: TableNameContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `HiveSqlParser.tableNameCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTableNameCreate?: (ctx: TableNameCreateContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `HiveSqlParser.viewName`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitViewName?: (ctx: ViewNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.viewNameCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitViewNameCreate?: (ctx: ViewNameCreateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.subQuerySource`.
@@ -3230,11 +3264,32 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitNull_treatment?: (ctx: Null_treatmentContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `HiveSqlParser.functionName`.
+	 * Visit a parse tree produced by `HiveSqlParser.functionNameForDDL`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitFunctionName?: (ctx: FunctionNameContext) => Result;
+	visitFunctionNameForDDL?: (ctx: FunctionNameForDDLContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.functionNameForInvoke`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFunctionNameForInvoke?: (ctx: FunctionNameForInvokeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.userDefinedFuncName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitUserDefinedFuncName?: (ctx: UserDefinedFuncNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `HiveSqlParser.functionNameCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFunctionNameCreate?: (ctx: FunctionNameCreateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.castExpression`.
@@ -3711,13 +3766,6 @@ export interface HiveSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitSysFuncNames?: (ctx: SysFuncNamesContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `HiveSqlParser.descFuncNames`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDescFuncNames?: (ctx: DescFuncNamesContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `HiveSqlParser.id_`.

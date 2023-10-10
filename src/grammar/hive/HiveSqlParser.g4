@@ -119,13 +119,13 @@ replDumpStatement
     ;
 
 replDbPolicy
-    : dbName=id_ (DOT tablePolicy=replTableLevelPolicy)?
+    : dbName=dbSchemaName (DOT tablePolicy=replTableLevelPolicy)?
     ;
 
 replLoadStatement
     : KW_REPL KW_LOAD
       sourceDbPolicy=replDbPolicy
-      (KW_INTO dbName=id_)?
+      (KW_INTO dbName=dbSchemaName)?
       (KW_WITH replConf=replConfigs)?
     ;
 
@@ -143,7 +143,7 @@ replTableLevelPolicy
 
 replStatusStatement
     : KW_REPL KW_STATUS
-        dbName=id_
+        dbName=dbSchemaName
         (KW_WITH replConf=replConfigs)?
     ;
 
@@ -233,14 +233,14 @@ orReplace
 createDatabaseStatement
     : KW_CREATE KW_REMOTE? db_schema
         ifNotExists?
-        name=id_
+        name=dbSchemaNameCreate
         databaseComment?
         dbLocation?
         dbManagedLocation?
         (KW_WITH KW_DBPROPERTIES dbprops=dbProperties)?
     | KW_CREATE KW_REMOTE db_schema
         ifNotExists?
-        name=id_
+        name=dbSchemaNameCreate
         databaseComment?
         dbConnectorName
         (KW_WITH KW_DBPROPERTIES dbprops=dbProperties)?
@@ -263,15 +263,15 @@ dbPropertiesList
     ;
 
 dbConnectorName
-    : KW_USING dcName=id_
+    : KW_USING dcName=dbSchemaName
     ;
 
 switchDatabaseStatement
-    : KW_USE id_
+    : KW_USE dbSchemaName
     ;
 
 dropDatabaseStatement
-    : KW_DROP db_schema ifExists? id_ restrictOrCascade?
+    : KW_DROP db_schema ifExists? dbSchemaName restrictOrCascade?
     ;
 
 databaseComment
@@ -300,15 +300,15 @@ partTypeExpr
     ;
 
 tabPartColTypeExpr
-    : tableName partitionSpec? extColumnName?
+    : tableOrView partitionSpec? extColumnName?
     ;
 
 descStatement
     : (KW_DESCRIBE | KW_DESC)
     (
-        db_schema KW_EXTENDED? dbName=id_
-        | KW_DATACONNECTOR KW_EXTENDED? dcName=id_
-        | KW_FUNCTION KW_EXTENDED? name=descFuncNames
+        db_schema KW_EXTENDED? dbName=dbSchemaName
+        | KW_DATACONNECTOR KW_EXTENDED? dcName=dbSchemaName
+        | KW_FUNCTION KW_EXTENDED? name=functionNameForDDL
         | (descOptions=KW_FORMATTED | descOptions=KW_EXTENDED) parttype=tabPartColTypeExpr
         | parttype=tabPartColTypeExpr
     )
@@ -333,26 +333,26 @@ db_schema
 
 showStatement
     : KW_SHOW (KW_DATABASES | KW_SCHEMAS) (KW_LIKE showStmtIdentifier)?
-    | KW_SHOW isExtended=KW_EXTENDED? KW_TABLES (from_in db_name=id_)? filter=showTablesFilterExpr?
-    | KW_SHOW KW_VIEWS (from_in db_name=id_)? (KW_LIKE showStmtIdentifier | showStmtIdentifier)?
-    | KW_SHOW KW_MATERIALIZED KW_VIEWS (from_in db_name=id_)? (KW_LIKE showStmtIdentifier|showStmtIdentifier)?
-    | KW_SHOW KW_SORTED? KW_COLUMNS from_in tableName (from_in db_name=id_)? (KW_LIKE showStmtIdentifier|showStmtIdentifier)?
-    | KW_SHOW KW_FUNCTIONS (KW_LIKE showFunctionIdentifier)?
-    | KW_SHOW KW_PARTITIONS tabName=tableName partitionSpec? whereClause? orderByClause? limitClause?
-    | KW_SHOW KW_CREATE (db_schema db_name=id_ | KW_TABLE tabName=tableName)
-    | KW_SHOW KW_TABLE KW_EXTENDED (from_in db_name=id_)? KW_LIKE showStmtIdentifier partitionSpec?
+    | KW_SHOW isExtended=KW_EXTENDED? KW_TABLES (from_in db_name=dbSchemaName)? filter=showTablesFilterExpr?
+    | KW_SHOW KW_VIEWS (from_in db_name=dbSchemaName)? (KW_LIKE showStmtIdentifier | showStmtIdentifier)?
+    | KW_SHOW KW_MATERIALIZED KW_VIEWS (from_in db_name=dbSchemaName)? (KW_LIKE showStmtIdentifier|showStmtIdentifier)?
+    | KW_SHOW KW_SORTED? KW_COLUMNS from_in tableOrView (from_in db_name=dbSchemaName)? (KW_LIKE showStmtIdentifier|showStmtIdentifier)?
+    | KW_SHOW KW_FUNCTIONS (KW_LIKE functionNameForDDL)?
+    | KW_SHOW KW_PARTITIONS tabOrViewName=tableOrView partitionSpec? whereClause? orderByClause? limitClause?
+    | KW_SHOW KW_CREATE (db_schema db_name=dbSchemaName | KW_TABLE tabName=tableName)
+    | KW_SHOW KW_TABLE KW_EXTENDED (from_in db_name=dbSchemaName)? KW_LIKE showStmtIdentifier partitionSpec?
     | KW_SHOW KW_TBLPROPERTIES tableName (LPAREN prptyName=StringLiteral RPAREN)?
-    | KW_SHOW KW_LOCKS (db_schema dbName=id_ isExtended=KW_EXTENDED? | parttype=partTypeExpr? isExtended=KW_EXTENDED?)
+    | KW_SHOW KW_LOCKS (db_schema dbName=dbSchemaName isExtended=KW_EXTENDED? | parttype=partTypeExpr? isExtended=KW_EXTENDED?)
     | KW_SHOW KW_COMPACTIONS
       ( compactionId
-      | db_schema dbName=id_ compactionPool? compactionType? compactionStatus? orderByClause? limitClause?
+      | db_schema dbName=dbSchemaName compactionPool? compactionType? compactionStatus? orderByClause? limitClause?
       | parttype=partTypeExpr? compactionPool? compactionType? compactionStatus? orderByClause? limitClause?
       )
     | KW_SHOW KW_TRANSACTIONS
     | KW_SHOW KW_CONF StringLiteral
     | KW_SHOW KW_RESOURCE (KW_PLAN rp_name=id_ | KW_PLANS)
     | KW_SHOW KW_DATACONNECTORS
-    | KW_SHOW KW_FORMATTED? ( KW_INDEX | KW_INDEXES ) KW_ON tableName (from_in id_)?
+    | KW_SHOW KW_FORMATTED? ( KW_INDEX | KW_INDEXES ) KW_ON tableName (from_in dbSchemaName)?
     ;
 
 showTablesFilterExpr
@@ -366,7 +366,7 @@ lockStatement
     ;
 
 lockDatabase
-    : KW_LOCK db_schema dbName=id_ lockMode
+    : KW_LOCK db_schema dbName=dbSchemaName lockMode
     ;
 
 lockMode
@@ -379,7 +379,7 @@ unlockStatement
     ;
 
 unlockDatabase
-    : KW_UNLOCK db_schema dbName=id_
+    : KW_UNLOCK db_schema dbName=dbSchemaName
     ;
 
 createRoleStatement
@@ -450,14 +450,14 @@ privilegeObject
 database or table type. Type is optional, default type is table
 */
 privObject
-    : db_schema id_
+    : db_schema dbSchemaName
     | KW_TABLE? tableName partitionSpec?
     | KW_URI path=StringLiteral
     | KW_SERVER id_
     ;
 
 privObjectCols
-    : db_schema id_
+    : db_schema dbSchemaName
     | KW_TABLE? tableName (LPAREN cols=columnNameList RPAREN)? partitionSpec?
     | KW_URI path=StringLiteral
     | KW_SERVER id_
@@ -539,12 +539,12 @@ resourceType
     ;
 
 createFunctionStatement
-    : KW_CREATE temp=KW_TEMPORARY? KW_FUNCTION functionIdentifier KW_AS StringLiteral
+    : KW_CREATE temp=KW_TEMPORARY? KW_FUNCTION functionNameCreate KW_AS StringLiteral
       (KW_USING rList=resourceList)?
     ;
 
 dropFunctionStatement
-    : KW_DROP temp=KW_TEMPORARY? KW_FUNCTION ifExists? functionIdentifier
+    : KW_DROP temp=KW_TEMPORARY? KW_FUNCTION ifExists? functionNameForDDL
     ;
 
 reloadFunctionsStatement
@@ -575,7 +575,7 @@ dropIndexStatement
     : KW_DROP KW_INDEX ifExists? id_ KW_ON tableName;
 
 createViewStatement
-    : KW_CREATE orReplace? KW_VIEW ifNotExists? name=tableName 
+    : KW_CREATE orReplace? KW_VIEW ifNotExists? name=viewNameCreate
         (LPAREN columnNameCommentList RPAREN)? tableComment? viewPartition?     
         tablePropertiesPrefixed?
         KW_AS
@@ -612,7 +612,7 @@ dropViewStatement
     ;
 
 createMaterializedViewStatement
-    : KW_CREATE KW_MATERIALIZED KW_VIEW ifNotExists? name=tableName
+    : KW_CREATE KW_MATERIALIZED KW_VIEW ifNotExists? name=viewNameCreate
         rewriteDisabled? tableComment? viewPartition? viewOrganization?
         tableRowFormat? tableFileFormat? tableLocation?
         tablePropertiesPrefixed? KW_AS selectStatementWithCTE
@@ -658,11 +658,6 @@ executedAsSpec
 
 definedAsSpec
     : KW_DEFINED? KW_AS statement
-    ;
-
-showFunctionIdentifier
-    : functionIdentifier
-    | StringLiteral
     ;
 
 showStmtIdentifier
@@ -1345,8 +1340,8 @@ END SHOW COMPACTIONS statement
 
 alterStatement
     : KW_ALTER ( KW_TABLE tableName alterTableStatementSuffix
-               | KW_VIEW tableName KW_AS? alterViewStatementSuffix
-               | KW_MATERIALIZED KW_VIEW tableNameTree=tableName alterMaterializedViewStatementSuffix
+               | KW_VIEW viewName KW_AS? alterViewStatementSuffix
+               | KW_MATERIALIZED KW_VIEW tableNameTree=viewName alterMaterializedViewStatementSuffix
                | db_schema alterDatabaseStatementSuffix
                | KW_DATACONNECTOR alterDataConnectorStatementSuffix
                | KW_INDEX alterIndexStatementSuffix
@@ -1425,23 +1420,23 @@ alterDatabaseStatementSuffix
     ;
 
 alterDatabaseSuffixProperties
-    : name=id_ KW_SET KW_DBPROPERTIES dbProperties
+    : name=dbSchemaName KW_SET KW_DBPROPERTIES dbProperties
     ;
 
 alterDatabaseSuffixSetOwner
-    : dbName=id_ KW_SET KW_OWNER principalAlterName
+    : dbName=dbSchemaName KW_SET KW_OWNER principalAlterName
     ;
 
 alterDatabaseSuffixSetLocation
-    : dbName=id_ KW_SET (KW_LOCATION | KW_MANAGEDLOCATION) newLocation=StringLiteral
+    : dbName=dbSchemaName KW_SET (KW_LOCATION | KW_MANAGEDLOCATION) newLocation=StringLiteral
     ;
 
 alterDatabaseSuffixSetManagedLocation
-    : dbName=id_ KW_SET KW_MANAGEDLOCATION newLocation=StringLiteral
+    : dbName=dbSchemaName KW_SET KW_MANAGEDLOCATION newLocation=StringLiteral
     ;
 
 alterStatementSuffixRename
-    : KW_RENAME KW_TO tableName
+    : KW_RENAME KW_TO tableNameCreate
     ;
 
 alterStatementSuffixAddCol
@@ -1635,15 +1630,15 @@ alterDataConnectorStatementSuffix
     ;
 
 alterDataConnectorSuffixProperties
-    : name=id_ KW_SET KW_DCPROPERTIES dcProperties
+    : name=dbSchemaName KW_SET KW_DCPROPERTIES dcProperties
     ;
 
 alterDataConnectorSuffixSetOwner
-    : dcName=id_ KW_SET KW_OWNER principalAlterName
+    : dcName=dbSchemaName KW_SET KW_OWNER principalAlterName
     ;
 
 alterDataConnectorSuffixSetUrl
-    : dcName=id_ KW_SET KW_URL newUri=StringLiteral
+    : dcName=dbSchemaName KW_SET KW_URL newUri=StringLiteral
     ;
 
 likeTableOrFile
@@ -1656,7 +1651,7 @@ likeTableOrFile
 Rules for parsing createtable
 */
 createTableStatement
-    : KW_CREATE temp=KW_TEMPORARY? trans=KW_TRANSACTIONAL? ext=KW_EXTERNAL? KW_TABLE ifNotExists? name=tableName
+    : KW_CREATE temp=KW_TEMPORARY? trans=KW_TRANSACTIONAL? ext=KW_EXTERNAL? KW_TABLE ifNotExists? name=tableNameCreate
       (  likeTableOrFile
          createTablePartitionSpec?
          tableRowFormat?
@@ -1674,7 +1669,7 @@ createTableStatement
          tablePropertiesPrefixed?
          (KW_AS selectStatementWithCTE)?
       )
-    | KW_CREATE mgd=KW_MANAGED KW_TABLE ifNotExists? name=tableName
+    | KW_CREATE mgd=KW_MANAGED KW_TABLE ifNotExists? name=tableNameCreate
        ( likeTableOrFile
          tableRowFormat?
          tableFileFormat?
@@ -1720,7 +1715,7 @@ dropDataConnectorStatement
 
 tableAllColumns
     : STAR
-    | tableName DOT STAR
+    | tableOrView DOT STAR
     ;
 
 // (table|column)
@@ -1816,7 +1811,7 @@ tableSample
     ;
 
 tableSource
-    : tabname=tableName props=tableProperties? ts=tableSample? asOf=asOfClause? (KW_AS? alias=id_)?
+    : tabname=tableOrView props=tableProperties? ts=tableSample? asOf=asOfClause? (KW_AS? alias=id_)?
     ;
 
 asOfClause
@@ -1826,7 +1821,20 @@ asOfClause
     ;
 
 uniqueJoinTableSource
-    : tabname=tableName ts=tableSample? (KW_AS? alias=id_)?
+    : tabname=tableOrView ts=tableSample? (KW_AS? alias=id_)?
+    ;
+
+dbSchemaName
+    : id_
+    ;
+
+dbSchemaNameCreate
+    : id_
+    ;
+
+tableOrView
+    : tableName
+    | viewName
     ;
 
 tableName
@@ -1834,7 +1842,16 @@ tableName
     | tab=id_
     ;
 
+tableNameCreate
+    : db=id_ DOT tab=id_ (DOT meta=id_)?
+    | tab=id_
+    ;
+
 viewName
+    : (db=id_ DOT)? view=id_
+    ;
+
+viewNameCreate
     : (db=id_ DOT)? view=id_
     ;
 
@@ -2140,7 +2157,7 @@ trimFunction
 // fun(par1, par2, par3)
 function_
     : trimFunction
-    | functionName
+    | functionNameForInvoke
     LPAREN
       (star=STAR | dist=all_distinct? (selectExpression (COMMA selectExpression)*)?)
       (
@@ -2160,9 +2177,23 @@ null_treatment
     | KW_IGNORE KW_NULLS
     ;
 
-functionName
-    : functionIdentifier // Keyword IF is also a function name
+functionNameForDDL
+    : functionNameForInvoke
+    | StringLiteral
+    ;
+
+functionNameForInvoke
+    : userDefinedFuncName
     | sql11ReservedKeywordsUsedAsFunctionName
+    | sysFuncNames
+    ;
+
+userDefinedFuncName
+    : functionIdentifier
+    ;
+
+functionNameCreate
+    : functionIdentifier
     ;
 
 castExpression
@@ -2582,12 +2613,6 @@ sysFuncNames
     | KW_REGEXP
     | KW_IN
     | KW_BETWEEN
-    ;
-
-descFuncNames
-    : sysFuncNames
-    | StringLiteral
-    | functionIdentifier
     ;
 
 id_
