@@ -2177,23 +2177,27 @@ null_treatment
     | KW_IGNORE KW_NULLS
     ;
 
-functionNameForDDL
-    : functionNameForInvoke
+functionNameCreate
+    : functionIdentifier
+    ;
+
+functionNameForDDL // Function name use to DDL, such as drop function
+    : userDefinedFuncName
     | StringLiteral
     ;
 
-functionNameForInvoke
+functionNameForInvoke // Function name used to invoke
     : userDefinedFuncName
-    | sql11ReservedKeywordsUsedAsFunctionName
+    | internalFunctionName
+    ;
+
+userDefinedFuncName // User Defined Function
+    : functionIdentifier
+    ;
+
+internalFunctionName // Hive Internal Function
+    : sql11ReservedKeywordsUsedAsFunctionName
     | sysFuncNames
-    ;
-
-userDefinedFuncName
-    : functionIdentifier
-    ;
-
-functionNameCreate
-    : functionIdentifier
     ;
 
 castExpression

@@ -24,7 +24,8 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
         HiveSqlParser.RULE_tableNameCreate, // table name that will be created
         HiveSqlParser.RULE_viewName, // view name
         HiveSqlParser.RULE_viewNameCreate, // view name that will be created
-        HiveSqlParser.RULE_userDefinedFuncName, // function name
+        HiveSqlParser.RULE_functionNameForDDL, // function name
+        HiveSqlParser.RULE_functionNameForInvoke, // function name
         HiveSqlParser.RULE_functionNameCreate, // function name that will be created
 
     ]);
@@ -72,7 +73,8 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
                     syntaxContextType = SyntaxContextType.VIEW_CREATE;
                     break;
                 }
-                case HiveSqlParser.RULE_userDefinedFuncName: {
+                case HiveSqlParser.RULE_functionNameForDDL: 
+                case HiveSqlParser.RULE_functionNameForInvoke: {
                     syntaxContextType = SyntaxContextType.FUNCTION;
                     break;
                 }
