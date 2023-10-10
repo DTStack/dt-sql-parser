@@ -1,0 +1,19 @@
+INSERT INTO db.tb ;
+
+SELECT * FROM db.;
+
+CREATE TABLE db. VALUES;
+
+DROP TABLE IF EXISTS db.a;
+
+CREATE OR REPLACE VIEW db.v;
+
+DROP VIEW db.v ;
+
+CREATE FUNCTION fn1;
+
+SELECT name, calculate_age(birthdate) AS age FROM students;
+
+CREATE DATABASE db;
+
+DROP SCHEMA IF EXISTS sch;
