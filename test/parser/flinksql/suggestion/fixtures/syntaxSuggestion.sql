@@ -1,11 +1,25 @@
-INSERT INTO cat.db.tb
-
-SELECT * FROM cat.db
-
+DROP CATALOG cat;
+;
+SELECT * FROM cat. ;
+;
 CREATE TABLE cat.db ;
+;
+SHOW TABLES FROM cat;
+;
+ALTER DATABASE cat.;
+;
+DROP VIEW v;
+;
+SELECT * FROM ;
+;
+CREATE VIEW cv;
+;
+SELECT name, calculate_age(birthdate) AS age FROM students;
+;
+CREATE FUNCTION fnc;
+;
+SHOW COLUMNS FROM vie;
+;
+SHOW CREATE TABLE tb1;
 
-SHOW TABLES FROM cat
-
-ALTER DATABASE cat.
-
-USE DATABASE cat.
+SHOW CREATE VIEW v1;
