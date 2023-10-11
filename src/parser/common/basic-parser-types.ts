@@ -15,6 +15,8 @@ export interface CaretPosition {
 export enum SyntaxContextType {
     /** catalog name */
     CATALOG = 'catalog',
+    /** catalog name that will be created  */
+    CATALOG_CREATE = 'catalogCreate',
     /** database name path, such as catalog.db */
     DATABASE = 'database',
     /** database name path that will be created  */

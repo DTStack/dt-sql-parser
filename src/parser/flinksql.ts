@@ -23,11 +23,15 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
     }
 
     protected preferredRules = new Set([
-        FlinkSqlParser.RULE_tablePath, // table name >> select / insert ...
-        FlinkSqlParser.RULE_tablePathCreate, // table name >> create 
-        FlinkSqlParser.RULE_databasePath, // database name >> show
-        FlinkSqlParser.RULE_databasePathCreate, // database name >> create 
         FlinkSqlParser.RULE_catalogPath, // catalog name
+        FlinkSqlParser.RULE_databasePath, // database name
+        FlinkSqlParser.RULE_databasePathCreate, // database name that will be created
+        FlinkSqlParser.RULE_tablePath, // table name
+        FlinkSqlParser.RULE_tablePathCreate, // table name that will be created
+        FlinkSqlParser.RULE_viewPath, // view name path
+        FlinkSqlParser.RULE_viewPathCreate, // viewName that will be created
+        FlinkSqlParser.RULE_functionName, // functionName
+        FlinkSqlParser.RULE_functionNameCreate, // functionName that will be created
     ]);
 
     protected get splitListener () {
@@ -50,6 +54,18 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
 
             let syntaxContextType: SyntaxContextType;
             switch (ruleType) {
+                case FlinkSqlParser.RULE_catalogPath: {
+                    syntaxContextType = SyntaxContextType.CATALOG;
+                    break;
+                }
+                case FlinkSqlParser.RULE_databasePath: {
+                    syntaxContextType = SyntaxContextType.DATABASE;
+                    break;
+                }
+                case FlinkSqlParser.RULE_databasePathCreate: {
+                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    break;
+                }
                 case FlinkSqlParser.RULE_tablePath: {
                     syntaxContextType = SyntaxContextType.TABLE;
                     break;
@@ -58,16 +74,20 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
                     syntaxContextType = SyntaxContextType.TABLE_CREATE;
                     break;
                 }
-                case FlinkSqlParser.RULE_databasePath: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                case FlinkSqlParser.RULE_viewPath: {
+                    syntaxContextType = SyntaxContextType.VIEW;
                     break;
                 }
-                case FlinkSqlParser.RULE_databasePathCreate: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                case FlinkSqlParser.RULE_viewPathCreate : {
+                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
                     break;
                 }
-                case FlinkSqlParser.RULE_catalogPath: {
-                    syntaxContextType = SyntaxContextType.CATALOG;
+                case FlinkSqlParser.RULE_functionName : {
+                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    break;
+                }
+                case FlinkSqlParser.RULE_functionNameCreate : {
+                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
                     break;
                 }
                 default:
