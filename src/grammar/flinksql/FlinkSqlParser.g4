@@ -63,9 +63,9 @@ useModuleStatement
 showStatememt
     : KW_SHOW (KW_CATALOGS | KW_DATABASES | KW_VIEWS | KW_JARS)
     | KW_SHOW KW_CURRENT (KW_CATALOG | KW_DATABASE)
-    | KW_SHOW KW_TABLES (( KW_FROM | KW_IN ) tablePath)? likePredicate?
-    | KW_SHOW KW_COLUMNS ( KW_FROM | KW_IN ) uid likePredicate?
-    | KW_SHOW KW_CREATE (KW_TABLE | KW_VIEW) uid
+    | KW_SHOW KW_TABLES (( KW_FROM | KW_IN ) databasePath)? likePredicate?
+    | KW_SHOW KW_COLUMNS ( KW_FROM | KW_IN ) (viewPath| tablePath) likePredicate?
+    | KW_SHOW KW_CREATE (KW_TABLE tablePath | KW_VIEW viewPath)
     | KW_SHOW KW_USER? KW_FUNCTIONS
     | KW_SHOW KW_FULL? KW_MODULES
     ;
@@ -258,7 +258,7 @@ likeOption
     ;
 
 createCatalog
-    : KW_CREATE KW_CATALOG uid withOption
+    : KW_CREATE KW_CATALOG catalogPathCreate withOption
     ;
 
 createDatabase
@@ -266,11 +266,11 @@ createDatabase
     ;
 
 createView
-    : KW_CREATE KW_TEMPORARY? KW_VIEW ifNotExists? uid columnNameList? commentSpec? KW_AS queryStatement
+    : KW_CREATE KW_TEMPORARY? KW_VIEW ifNotExists? viewPathCreate columnNameList? commentSpec? KW_AS queryStatement
     ;
 
 createFunction
-    : KW_CREATE (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifNotExists? functionName KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))? usingClause?
+    : KW_CREATE (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifNotExists? functionNameCreate KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))? usingClause?
     ;
 
 usingClause
@@ -314,7 +314,7 @@ notForced
     ;
 
 alertView
-    : KW_ALTER KW_VIEW uid (renameDefinition | KW_AS queryStatement)
+    : KW_ALTER KW_VIEW viewPath (renameDefinition | KW_AS queryStatement)
     ;
 
 alterDatabase
@@ -322,7 +322,7 @@ alterDatabase
     ;
 
 alterFunction
-    : KW_ALTER (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? uid KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))? 
+    : KW_ALTER (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? functionName KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))?  // TODO
     ;
 
 
@@ -341,7 +341,7 @@ dropDatabase
     ;
 
 dropView
-    : KW_DROP KW_TEMPORARY? KW_VIEW ifExists? uid
+    : KW_DROP KW_TEMPORARY? KW_VIEW ifExists? viewPath
     ;
 
 dropFunction
@@ -450,12 +450,11 @@ tableReference
 
 tablePrimary
     : KW_TABLE? tablePath systemTimePeriod? (KW_AS? correlationName)?
+    | viewPath systemTimePeriod? (KW_AS? correlationName)?
     | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET functionParam (COMMA functionParam)* RR_BRACKET RR_BRACKET
     | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
-
-
 
 systemTimePeriod
     : KW_FOR KW_SYSTEM_TIME KW_AS KW_OF dateTimeExpression
@@ -731,6 +730,10 @@ primaryExpression
     //   KW_FROM position=valueExpression (KW_FOR length=valueExpression)? ')'                          #overlay
     ;
 
+functionNameCreate
+    : uid
+    ;
+
 functionName
     : reservedKeywordsUsedAsFuncName
     | nonReservedKeywords
@@ -827,23 +830,39 @@ whenClause
     ;
 
 catalogPath
-    : uid
+    : identifier
+    ;
+
+catalogPathCreate
+    : identifier
     ;
 
 databasePath
-    : uid
+    : identifier (DOT identifier)?
     ;
 
 databasePathCreate
-    : uid
+    : identifier (DOT identifier)?
     ;
 
 tablePathCreate
-    : uid
+    : identifier (DOT identifier)?
+    | identifier DOT identifier (DOT identifier)?
     ;
 
 tablePath
-    : uid
+    : identifier (DOT identifier)?
+    | identifier DOT identifier (DOT identifier)?
+    ;
+
+viewPath
+    : identifier (DOT identifier)?
+    | identifier DOT identifier (DOT identifier)?
+    ;
+
+viewPathCreate
+    : identifier (DOT identifier)?
+    | identifier DOT identifier (DOT identifier)?
     ;
 
 uid

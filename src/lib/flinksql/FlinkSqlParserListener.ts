@@ -169,6 +169,7 @@ import { PredicateContext } from "./FlinkSqlParser";
 import { LikePredicateContext } from "./FlinkSqlParser";
 import { ValueExpressionContext } from "./FlinkSqlParser";
 import { PrimaryExpressionContext } from "./FlinkSqlParser";
+import { FunctionNameCreateContext } from "./FlinkSqlParser";
 import { FunctionNameContext } from "./FlinkSqlParser";
 import { FunctionParamContext } from "./FlinkSqlParser";
 import { DereferenceDefinitionContext } from "./FlinkSqlParser";
@@ -191,10 +192,13 @@ import { UnquotedIdentifierContext } from "./FlinkSqlParser";
 import { QuotedIdentifierContext } from "./FlinkSqlParser";
 import { WhenClauseContext } from "./FlinkSqlParser";
 import { CatalogPathContext } from "./FlinkSqlParser";
+import { CatalogPathCreateContext } from "./FlinkSqlParser";
 import { DatabasePathContext } from "./FlinkSqlParser";
 import { DatabasePathCreateContext } from "./FlinkSqlParser";
 import { TablePathCreateContext } from "./FlinkSqlParser";
 import { TablePathContext } from "./FlinkSqlParser";
+import { ViewPathContext } from "./FlinkSqlParser";
+import { ViewPathCreateContext } from "./FlinkSqlParser";
 import { UidContext } from "./FlinkSqlParser";
 import { WithOptionContext } from "./FlinkSqlParser";
 import { IfNotExistsContext } from "./FlinkSqlParser";
@@ -2116,6 +2120,17 @@ export interface FlinkSqlParserListener extends ParseTreeListener {
 	exitPrimaryExpression?: (ctx: PrimaryExpressionContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.functionNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionNameCreate?: (ctx: FunctionNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.functionNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionNameCreate?: (ctx: FunctionNameCreateContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.functionName`.
 	 * @param ctx the parse tree
 	 */
@@ -2358,6 +2373,17 @@ export interface FlinkSqlParserListener extends ParseTreeListener {
 	exitCatalogPath?: (ctx: CatalogPathContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.catalogPathCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterCatalogPathCreate?: (ctx: CatalogPathCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.catalogPathCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitCatalogPathCreate?: (ctx: CatalogPathCreateContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.databasePath`.
 	 * @param ctx the parse tree
 	 */
@@ -2400,6 +2426,28 @@ export interface FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitTablePath?: (ctx: TablePathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.viewPath`.
+	 * @param ctx the parse tree
+	 */
+	enterViewPath?: (ctx: ViewPathContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.viewPath`.
+	 * @param ctx the parse tree
+	 */
+	exitViewPath?: (ctx: ViewPathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `FlinkSqlParser.viewPathCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterViewPathCreate?: (ctx: ViewPathCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `FlinkSqlParser.viewPathCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitViewPathCreate?: (ctx: ViewPathCreateContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.uid`.
