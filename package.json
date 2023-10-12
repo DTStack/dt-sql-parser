@@ -18,9 +18,10 @@
     "dist"
   ],
   "scripts": {
+    "prepare": "husky install",
     "antlr4": "node ./scripts/antlr4.js",
     "build": "rm -rf dist && tsc",
-    "check-types": "tsc --skipLibCheck",
+    "check-types": "tsc -p ./tsconfig.check.json",
     "test": "NODE_OPTIONS=--max_old_space_size=4096 && jest",
     "release": "npm run build && node ./scripts/release.js",
     "lint": "prettier --check '**/*.ts' --config ./.prettierrc",
@@ -42,7 +43,7 @@
     "husky": "^8.0.3",
     "inquirer": "^8.2.2",
     "jest": "^29.5.0",
-    "lint-staged": "^14.0.1",
+    "lint-staged": "12.5.0",
     "prettier": "^3.0.3",
     "standard-version": "^9.5.0",
     "typescript": "^5.0.4",
