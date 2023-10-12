@@ -54,34 +54,29 @@ singleStatement
     : statement SEMICOLON ?
     ;
 
-tableIdentifierReference: identifierReference;
-viewIdentifierReference: identifierReference;
-functionIdentifierReference: identifierReference;
-namespaceIdentifierReference: identifierReference;
-
 statement
     : query
     | ctes? dmlStatementNoWith
-    | KW_USE identifierReference
-    | KW_USE namespace namespaceIdentifierReference
+    | KW_USE dbSchemaName
+    | KW_USE dbSchema dbSchemaName
     | KW_SET KW_CATALOG (identifier | stringLit)
-    | KW_CREATE namespace (KW_IF KW_NOT KW_EXISTS)? namespaceIdentifierReference
+    | KW_CREATE dbSchema (ifNotExists)? dbSchemaNameCreate
         (commentSpec |
          locationSpec |
          (KW_WITH (KW_DBPROPERTIES | KW_PROPERTIES) propertyList))*
-    | KW_ALTER namespace namespaceIdentifierReference
+    | KW_ALTER dbSchema dbSchemaName
         KW_SET (KW_DBPROPERTIES | KW_PROPERTIES) propertyList
-    | KW_ALTER namespace namespaceIdentifierReference
+    | KW_ALTER dbSchema dbSchemaName
         KW_SET locationSpec
-    | KW_DROP namespace (KW_IF KW_EXISTS)? namespaceIdentifierReference
+    | KW_DROP dbSchema (ifExists)? dbSchemaName
         (KW_RESTRICT | KW_CASCADE)?
-    | KW_SHOW namespaces ((KW_FROM | KW_IN) multipartIdentifier)?
+    | KW_SHOW dbSchemas ((KW_FROM | KW_IN) multipartIdentifier)?
         (KW_LIKE? pattern=stringLit)?
     | createTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider?
         createTableClauses
         (KW_AS? query)?
-    | KW_CREATE KW_TABLE (KW_IF KW_NOT KW_EXISTS)? target=tableIdentifier
-        KW_LIKE source=tableIdentifier
+    | KW_CREATE KW_TABLE (ifNotExists)? target=tableNameCreate
+        KW_LIKE source=tableName
         (tableProvider |
         rowFormat |
         createFileFormat |
@@ -90,112 +85,111 @@ statement
     | replaceTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider?
         createTableClauses
         (KW_AS? query)?
-    | KW_ANALYZE KW_TABLE tableIdentifierReference partitionSpec? KW_COMPUTE KW_STATISTICS
+    | KW_ANALYZE KW_TABLE tableName partitionSpec? KW_COMPUTE KW_STATISTICS
         (identifier | KW_FOR KW_COLUMNS identifierSeq | KW_FOR KW_ALL KW_COLUMNS)?
-    | KW_ANALYZE KW_TABLES ((KW_FROM | KW_IN) tableIdentifierReference)? KW_COMPUTE KW_STATISTICS
+    | KW_ANALYZE KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)? KW_COMPUTE KW_STATISTICS
         (identifier)?
-    | KW_ALTER KW_TABLE tableIdentifierReference
+    | KW_ALTER KW_TABLE tableName
         KW_ADD (KW_COLUMN | KW_COLUMNS)
         qualifiedColTypeWithPositionList
-    | KW_ALTER KW_TABLE tableIdentifierReference
+    | KW_ALTER KW_TABLE tableName
         KW_ADD (KW_COLUMN | KW_COLUMNS)
         LEFT_PAREN qualifiedColTypeWithPositionList RIGHT_PAREN
-    | KW_ALTER KW_TABLE table=tableIdentifierReference
+    | KW_ALTER KW_TABLE table=tableName
         KW_RENAME KW_COLUMN
         multipartIdentifier KW_TO errorCapturingIdentifier
-    | KW_ALTER KW_TABLE tableIdentifierReference
-        KW_DROP (KW_COLUMN | KW_COLUMNS) (KW_IF KW_EXISTS)?
+    | KW_ALTER KW_TABLE tableName
+        KW_DROP (KW_COLUMN | KW_COLUMNS) (ifExists)?
         LEFT_PAREN multipartIdentifierList RIGHT_PAREN
-    | KW_ALTER KW_TABLE tableIdentifierReference
-        KW_DROP (KW_COLUMN | KW_COLUMNS) (KW_IF KW_EXISTS)?
+    | KW_ALTER KW_TABLE tableName
+        KW_DROP (KW_COLUMN | KW_COLUMNS) (ifExists)?
         multipartIdentifierList
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableIdentifierReference | viewIdentifierReference)
+    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName)
         KW_RENAME KW_TO multipartIdentifier
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableIdentifierReference | viewIdentifierReference)
+    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName)
         KW_SET KW_TBLPROPERTIES propertyList
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableIdentifierReference | viewIdentifierReference)
-        KW_UNSET KW_TBLPROPERTIES (KW_IF KW_EXISTS)? propertyList
-    | KW_ALTER KW_TABLE table=tableIdentifierReference
+    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName)
+        KW_UNSET KW_TBLPROPERTIES (ifExists)? propertyList
+    | KW_ALTER KW_TABLE table=tableName
         (KW_ALTER | KW_CHANGE) KW_COLUMN? column=multipartIdentifier
         alterColumnAction?
-    | KW_ALTER KW_TABLE table=tableIdentifierReference partitionSpec?
+    | KW_ALTER KW_TABLE table=tableName partitionSpec?
         KW_CHANGE KW_COLUMN?
         colName=multipartIdentifier colType colPosition?
-    | KW_ALTER KW_TABLE table=tableIdentifierReference partitionSpec?
+    | KW_ALTER KW_TABLE table=tableName partitionSpec?
         KW_REPLACE KW_COLUMNS
         LEFT_PAREN qualifiedColTypeWithPositionList
         RIGHT_PAREN
-    | KW_ALTER KW_TABLE tableIdentifierReference (partitionSpec)?
+    | KW_ALTER KW_TABLE tableName (partitionSpec)?
         KW_SET KW_SERDE stringLit (KW_WITH KW_SERDEPROPERTIES propertyList)?
-    | KW_ALTER KW_TABLE tableIdentifierReference (partitionSpec)?
+    | KW_ALTER KW_TABLE tableName (partitionSpec)?
         KW_SET KW_SERDEPROPERTIES propertyList
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableIdentifierReference | viewIdentifierReference) KW_ADD (KW_IF KW_NOT KW_EXISTS)?
+    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName) KW_ADD (ifNotExists)?
         partitionSpecLocation+
-    | KW_ALTER KW_TABLE tableIdentifierReference
+    | KW_ALTER KW_TABLE tableName
         partitionSpec KW_RENAME KW_TO partitionSpec
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableIdentifierReference | viewIdentifierReference)
-        KW_DROP (KW_IF KW_EXISTS)? partitionSpec (COMMA partitionSpec)* KW_PURGE?
-    | KW_ALTER KW_TABLE tableIdentifierReference
+    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName)
+        KW_DROP (ifExists)? partitionSpec (COMMA partitionSpec)* KW_PURGE?
+    | KW_ALTER KW_TABLE tableName
         (partitionSpec)? KW_SET locationSpec
-    | KW_ALTER KW_TABLE tableIdentifierReference KW_RECOVER KW_PARTITIONS
-    | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? tableIdentifierReference KW_PURGE?
-    | KW_DROP KW_VIEW (KW_IF KW_EXISTS)? viewIdentifierReference
+    | KW_ALTER KW_TABLE tableName KW_RECOVER KW_PARTITIONS
+    | KW_DROP KW_TABLE (ifExists)? tableName KW_PURGE?
+    | KW_DROP KW_VIEW (ifExists)? viewName
     | KW_CREATE (KW_OR KW_REPLACE)? (KW_GLOBAL? KW_TEMPORARY)?
-        KW_VIEW (KW_IF KW_NOT KW_EXISTS)? viewIdentifierReference
+        KW_VIEW (ifNotExists)? viewNameCreate
         identifierCommentList?
         (commentSpec |
          (KW_PARTITIONED KW_ON identifierList) |
          (KW_TBLPROPERTIES propertyList))*
         KW_AS query
     | KW_CREATE (KW_OR KW_REPLACE)? KW_GLOBAL? KW_TEMPORARY KW_VIEW
-        tableIdentifier (LEFT_PAREN colTypeList RIGHT_PAREN)? tableProvider
+        viewNameCreate (LEFT_PAREN colTypeList RIGHT_PAREN)? tableProvider
         (KW_OPTIONS propertyList)?
-    | KW_ALTER KW_VIEW viewIdentifierReference KW_AS? query
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_TEMPORARY? KW_FUNCTION (KW_IF KW_NOT KW_EXISTS)?
-        functionIdentifierReference KW_AS className=stringLit
+    | KW_ALTER KW_VIEW viewName KW_AS? query
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_TEMPORARY? KW_FUNCTION (ifNotExists)?
+        functionNameCreate KW_AS className=stringLit
         (KW_USING resource (COMMA resource)*)?
-    | KW_DROP KW_TEMPORARY? KW_FUNCTION (KW_IF KW_EXISTS)? functionIdentifierReference
+    | KW_DROP KW_TEMPORARY? KW_FUNCTION (ifExists)? functionName
     | KW_DECLARE (KW_OR KW_REPLACE)? KW_VARIABLE?
-        functionIdentifierReference dataType? variableDefaultExpression?
-    | KW_DROP KW_TEMPORARY KW_VARIABLE (KW_IF KW_EXISTS)? identifierReference
+        functionName dataType? variableDefaultExpression?
+    | KW_DROP KW_TEMPORARY KW_VARIABLE (ifExists)? (tableName | viewName | functionName)
     | KW_EXPLAIN (KW_LOGICAL | KW_FORMATTED | KW_EXTENDED | KW_CODEGEN | KW_COST)?
         statement
-    | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) tableIdentifierReference)?
+    | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)?
         (KW_LIKE? pattern=stringLit)?
-    | KW_SHOW KW_TABLE KW_EXTENDED ((KW_FROM | KW_IN) ns=tableIdentifierReference)?
+    | KW_SHOW KW_TABLE KW_EXTENDED ((KW_FROM | KW_IN) ns=dbSchemaName)?
         KW_LIKE pattern=stringLit partitionSpec?
-    | KW_SHOW KW_TBLPROPERTIES table=tableIdentifierReference
+    | KW_SHOW KW_TBLPROPERTIES table=tableName
         (LEFT_PAREN key=propertyKey RIGHT_PAREN)?
-    | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) table=tableIdentifierReference
+    | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) table=tableName
         ((KW_FROM | KW_IN) multipartIdentifier)?
-    | KW_SHOW KW_VIEWS ((KW_FROM | KW_IN) viewIdentifierReference)?
+    | KW_SHOW KW_VIEWS ((KW_FROM | KW_IN) dbSchemaName)?
         (KW_LIKE? pattern=stringLit)?
-    | KW_SHOW KW_PARTITIONS identifierReference partitionSpec?
-    | KW_SHOW identifier? KW_FUNCTIONS ((KW_FROM | KW_IN) ns=tableIdentifierReference)?
+    | KW_SHOW KW_PARTITIONS tableName partitionSpec?
+    | KW_SHOW functionKind? KW_FUNCTIONS ((KW_FROM | KW_IN) ns=dbSchemaName)?
         (KW_LIKE? (legacy=multipartIdentifier | pattern=stringLit))?
-    | KW_SHOW KW_CREATE KW_TABLE tableIdentifierReference (KW_AS KW_SERDE)?
-    | KW_SHOW KW_CURRENT namespace
+    | KW_SHOW KW_CREATE KW_TABLE tableName (KW_AS KW_SERDE)?
+    | KW_SHOW KW_CURRENT dbSchema
     | KW_SHOW KW_CATALOGS (KW_LIKE? pattern=stringLit)?
     | (KW_DESC | KW_DESCRIBE) KW_FUNCTION KW_EXTENDED? describeFuncName
-    | (KW_DESC | KW_DESCRIBE) namespace KW_EXTENDED?
-        namespaceIdentifierReference
+    | (KW_DESC | KW_DESCRIBE) KW_DATABASE KW_EXTENDED? dbSchemaName
     | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)?
-        tableIdentifierReference partitionSpec? describeColName?
+        tableName partitionSpec? describeColName?
     | (KW_DESC | KW_DESCRIBE) KW_QUERY? query
-    | KW_COMMENT KW_ON namespace namespaceIdentifierReference KW_IS
+    | KW_COMMENT KW_ON dbSchema dbSchemaName KW_IS
         comment
-    | KW_COMMENT KW_ON KW_TABLE tableIdentifierReference KW_IS comment
-    | KW_REFRESH KW_TABLE tableIdentifierReference
-    | KW_REFRESH KW_FUNCTION functionIdentifierReference
+    | KW_COMMENT KW_ON KW_TABLE tableName KW_IS comment
+    | KW_REFRESH KW_TABLE tableName
+    | KW_REFRESH KW_FUNCTION functionName
     | KW_REFRESH (stringLit | .*?)
-    | KW_CACHE KW_LAZY? KW_TABLE tableIdentifierReference
+    | KW_CACHE KW_LAZY? KW_TABLE tableName
         (KW_OPTIONS options=propertyList)? (KW_AS? query)?
-    | KW_UNCACHE KW_TABLE (KW_IF KW_EXISTS)? tableIdentifierReference
+    | KW_UNCACHE KW_TABLE (ifExists)? tableName
     | KW_CLEAR KW_CACHE
     | KW_LOAD KW_DATA KW_LOCAL? KW_INPATH path=stringLit KW_OVERWRITE? KW_INTO KW_TABLE
-        tableIdentifierReference partitionSpec?
-    | KW_TRUNCATE KW_TABLE tableIdentifierReference partitionSpec?
-    | (KW_MSCK)? KW_REPAIR KW_TABLE tableIdentifierReference
+        tableName partitionSpec?
+    | KW_TRUNCATE KW_TABLE tableName partitionSpec?
+    | (KW_MSCK)? KW_REPAIR KW_TABLE tableName
         (option=(KW_ADD|KW_DROP|KW_SYNC) KW_PARTITIONS)?
     | op=(KW_ADD | KW_LIST) identifier .*?
     | KW_SET KW_ROLE .*?
@@ -211,11 +205,11 @@ statement
     | KW_SET .*?
     | KW_RESET configKey
     | KW_RESET .*?
-    | KW_CREATE KW_INDEX (KW_IF KW_NOT KW_EXISTS)? identifier KW_ON KW_TABLE?
-        tableIdentifierReference (KW_USING indexType=identifier)?
+    | KW_CREATE KW_INDEX (ifNotExists)? identifier KW_ON KW_TABLE?
+        tableName (KW_USING indexType=identifier)?
         LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN
         (KW_OPTIONS options=propertyList)?
-    | KW_DROP KW_INDEX (KW_IF KW_EXISTS)? identifier KW_ON KW_TABLE? tableIdentifierReference
+    | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName
     | unsupportedHiveNativeCommands .*?
     ;
 
@@ -258,21 +252,21 @@ unsupportedHiveNativeCommands
     | kw1=KW_UNLOCK kw2=KW_DATABASE
     | kw1=KW_CREATE kw2=KW_TEMPORARY kw3=KW_MACRO
     | kw1=KW_DROP kw2=KW_TEMPORARY kw3=KW_MACRO
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_NOT kw4=KW_CLUSTERED
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_CLUSTERED kw4=KW_BY
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_NOT kw4=KW_SORTED
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_SKEWED kw4=KW_BY
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_NOT kw4=KW_SKEWED
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_NOT kw4=KW_STORED kw5=KW_AS kw6=KW_DIRECTORIES
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_SET kw4=KW_SKEWED kw5=KW_LOCATION
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_EXCHANGE kw4=KW_PARTITION
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_ARCHIVE kw4=KW_PARTITION
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_UNARCHIVE kw4=KW_PARTITION
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier kw3=KW_TOUCH
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier partitionSpec? kw3=KW_COMPACT
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier partitionSpec? kw3=KW_CONCATENATE
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier partitionSpec? kw3=KW_SET kw4=KW_FILEFORMAT
-    | kw1=KW_ALTER kw2=KW_TABLE tableIdentifier partitionSpec? kw3=KW_REPLACE kw4=KW_COLUMNS
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_NOT kw4=KW_CLUSTERED
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_CLUSTERED kw4=KW_BY
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_NOT kw4=KW_SORTED
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_SKEWED kw4=KW_BY
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_NOT kw4=KW_SKEWED
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_NOT kw4=KW_STORED kw5=KW_AS kw6=KW_DIRECTORIES
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_SET kw4=KW_SKEWED kw5=KW_LOCATION
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_EXCHANGE kw4=KW_PARTITION
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_ARCHIVE kw4=KW_PARTITION
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_UNARCHIVE kw4=KW_PARTITION
+    | kw1=KW_ALTER kw2=KW_TABLE tableName kw3=KW_TOUCH
+    | kw1=KW_ALTER kw2=KW_TABLE tableName partitionSpec? kw3=KW_COMPACT
+    | kw1=KW_ALTER kw2=KW_TABLE tableName partitionSpec? kw3=KW_CONCATENATE
+    | kw1=KW_ALTER kw2=KW_TABLE tableName partitionSpec? kw3=KW_SET kw4=KW_FILEFORMAT
+    | kw1=KW_ALTER kw2=KW_TABLE tableName partitionSpec? kw3=KW_REPLACE kw4=KW_COLUMNS
     | kw1=KW_START kw2=KW_TRANSACTION
     | kw1=KW_COMMIT
     | kw1=KW_ROLLBACK
@@ -280,11 +274,11 @@ unsupportedHiveNativeCommands
     ;
 
 createTableHeader
-    : KW_CREATE KW_TEMPORARY? KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tableIdentifierReference
+    : KW_CREATE KW_TEMPORARY? KW_EXTERNAL? KW_TABLE (ifNotExists)? tableNameCreate
     ;
 
 replaceTableHeader
-    : (KW_CREATE KW_OR)? KW_REPLACE KW_TABLE tableIdentifierReference
+    : (KW_CREATE KW_OR)? KW_REPLACE KW_TABLE tableNameCreate
     ;
 
 bucketSpec
@@ -312,9 +306,9 @@ query
     ;
 
 insertInto
-    : KW_INSERT KW_OVERWRITE KW_TABLE? tableIdentifierReference (partitionSpec (KW_IF KW_NOT KW_EXISTS)?)?  ((KW_BY KW_NAME) | identifierList)?
-    | KW_INSERT KW_INTO KW_TABLE? tableIdentifierReference partitionSpec? (KW_IF KW_NOT KW_EXISTS)? ((KW_BY KW_NAME) | identifierList)?
-    | KW_INSERT KW_INTO KW_TABLE? tableIdentifierReference KW_REPLACE whereClause
+    : KW_INSERT KW_OVERWRITE KW_TABLE? tableName (partitionSpec (ifNotExists)?)?  ((KW_BY KW_NAME) | identifierList)?
+    | KW_INSERT KW_INTO KW_TABLE? tableName partitionSpec? (ifNotExists)? ((KW_BY KW_NAME) | identifierList)?
+    | KW_INSERT KW_INTO KW_TABLE? tableName KW_REPLACE whereClause
     | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY path=stringLit rowFormat? createFileFormat?
     | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY (path=stringLit)? tableProvider (KW_OPTIONS options=propertyList)?
     ;
@@ -332,13 +326,13 @@ partitionVal
     | identifier EQ KW_DEFAULT
     ;
 
-namespace
+dbSchema
     : KW_NAMESPACE
     | KW_DATABASE
     | KW_SCHEMA
     ;
 
-namespaces
+dbSchemas
     : KW_NAMESPACES
     | KW_DATABASES
     | KW_SCHEMAS
@@ -437,9 +431,9 @@ resource
 dmlStatementNoWith
     : insertInto query
     | fromClause multiInsertQueryBody+
-    | KW_DELETE KW_FROM identifierReference tableAlias whereClause?
-    | KW_UPDATE identifierReference tableAlias setClause whereClause?
-    | KW_MERGE KW_INTO target=identifierReference targetAlias=tableAlias
+    | KW_DELETE KW_FROM tableName tableAlias whereClause?
+    | KW_UPDATE tableName tableAlias setClause whereClause?
+    | KW_MERGE KW_INTO target=tableName targetAlias=tableAlias
         KW_USING (source=identifierReference |
           LEFT_PAREN sourceQuery=query RIGHT_PAREN) sourceAlias=tableAlias
         KW_ON mergeCondition=booleanExpression
@@ -447,6 +441,13 @@ dmlStatementNoWith
         notMatchedClause*
         notMatchedBySourceClause*
     ;
+
+dbSchemaName: identifierReference;
+dbSchemaNameCreate: identifierReference;
+tableNameCreate : tableIdentifier;
+tableName : tableIdentifier;
+viewNameCreate : viewIdentifier;
+viewName : viewIdentifier;
 
 identifierReference
     : KW_IDENTIFIER_KW LEFT_PAREN expression RIGHT_PAREN
@@ -480,7 +481,7 @@ queryTerm
 queryPrimary
     : querySpecification
     | fromStatement
-    | KW_TABLE tableIdentifierReference
+    | KW_TABLE tableName
     | inlineTable
     | LEFT_PAREN query RIGHT_PAREN
     ;
@@ -600,6 +601,10 @@ fromClause
     : KW_FROM relation (COMMA relation)* lateralView* pivotClause? unpivotClause?
     ;
 
+functionKind
+    : KW_USER | KW_SYSTEM | KW_ALL
+    ;
+
 temporalClause
     : KW_FOR? (KW_SYSTEM_VERSION | KW_VERSION) KW_AS KW_OF version
     | KW_FOR? (KW_SYSTEM_TIME | KW_TIMESTAMP) KW_AS KW_OF timestamp=valueExpression
@@ -695,8 +700,14 @@ unpivotAlias
     : KW_AS? identifier
     ;
 
+ifNotExists
+    : KW_IF KW_NOT KW_EXISTS;
+
+ifExists
+    : KW_IF KW_EXISTS;
+
 lateralView
-    : KW_LATERAL KW_VIEW (KW_OUTER)? qualifiedName LEFT_PAREN (expression (COMMA expression)*)? RIGHT_PAREN tblName=identifier (KW_AS? colName+=identifier (COMMA colName+=identifier)*)?
+    : KW_LATERAL KW_VIEW (KW_OUTER)? viewName LEFT_PAREN (expression (COMMA expression)*)? RIGHT_PAREN tableAlias (KW_AS? colName+=identifier (COMMA colName+=identifier)*)?
     ;
 
 setQuantifier
@@ -706,6 +717,7 @@ setQuantifier
 
 relation
     : KW_LATERAL? relationPrimary relationExtension*
+    | tableName
     ;
 
 relationExtension
@@ -784,8 +796,8 @@ inlineTable
     ;
 
 functionTableSubqueryArgument
-    : KW_TABLE tableIdentifierReference tableArgumentPartitioning?
-    | KW_TABLE LEFT_PAREN tableIdentifierReference RIGHT_PAREN tableArgumentPartitioning?
+    : KW_TABLE tableName tableArgumentPartitioning?
+    | KW_TABLE LEFT_PAREN tableName RIGHT_PAREN tableArgumentPartitioning?
     | KW_TABLE LEFT_PAREN query RIGHT_PAREN tableArgumentPartitioning?
     ;
 
@@ -814,7 +826,7 @@ functionTableArgument
     ;
 
 functionTable
-    : funcName=functionName LEFT_PAREN
+    : functionName LEFT_PAREN
       (functionTableArgument (COMMA functionTableArgument)*)?
       RIGHT_PAREN tableAlias
     ;
@@ -853,8 +865,8 @@ tableIdentifier
     : (db=errorCapturingIdentifier DOT)? table=errorCapturingIdentifier
     ;
 
-functionIdentifier
-    : (db=errorCapturingIdentifier DOT)? function=errorCapturingIdentifier
+viewIdentifier
+    : (db=errorCapturingIdentifier DOT)? view=errorCapturingIdentifier
     ;
 
 namedExpression
@@ -903,7 +915,7 @@ expressionSeq
     ;
 
 booleanExpression
-    : KW_NOT booleanExpression
+    : (KW_NOT | NOT) booleanExpression
     | KW_EXISTS LEFT_PAREN query RIGHT_PAREN
     | valueExpression predicate?
     | left=booleanExpression operator=KW_AND right=booleanExpression
@@ -914,7 +926,7 @@ predicate
     : KW_NOT? kind=KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression
     | KW_NOT? kind=KW_IN LEFT_PAREN expression (COMMA expression)* RIGHT_PAREN
     | KW_NOT? kind=KW_IN LEFT_PAREN query RIGHT_PAREN
-    | KW_NOT? kind=KW_RLIKE pattern=valueExpression
+    | KW_NOT? kind=(KW_RLIKE | KW_REGEXP) pattern=valueExpression
     | KW_NOT? kind=(KW_LIKE | KW_ILIKE) quantifier=(KW_ANY | KW_SOME | KW_ALL) (LEFT_PAREN RIGHT_PAREN | LEFT_PAREN expression (COMMA expression)* RIGHT_PAREN)
     | KW_NOT? kind=(KW_LIKE | KW_ILIKE) pattern=valueExpression (KW_ESCAPE escapeChar=stringLit)?
     | KW_IS KW_NOT? kind=KW_NULL
@@ -1195,6 +1207,10 @@ functionName
     | KW_RIGHT
     ;
 
+functionNameCreate
+    : qualifiedName
+    ;
+
 qualifiedName
     : identifier (DOT identifier)*
     ;
@@ -1462,6 +1478,7 @@ ansiNonReserved
     | KW_RESTRICT
     | KW_REVOKE
     | KW_RLIKE
+    | KW_REGEXP
     | KW_ROLE
     | KW_ROLES
     | KW_ROLLBACK
@@ -1496,6 +1513,7 @@ ansiNonReserved
     | KW_SUBSTR
     | KW_SUBSTRING
     | KW_SYNC
+    | KW_SYSTEM
     | KW_SYSTEM_TIME
     | KW_SYSTEM_VERSION
     | KW_TABLES
@@ -1801,6 +1819,7 @@ nonReserved
     | KW_RESTRICT
     | KW_REVOKE
     | KW_RLIKE
+    | KW_REGEXP
     | KW_ROLE
     | KW_ROLES
     | KW_ROLLBACK
@@ -1836,6 +1855,7 @@ nonReserved
     | KW_SUBSTR
     | KW_SUBSTRING
     | KW_SYNC
+    | KW_SYSTEM
     | KW_SYSTEM_TIME
     | KW_SYSTEM_VERSION
     | KW_TABLE
