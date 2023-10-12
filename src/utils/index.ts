@@ -1,4 +1,3 @@
-
 import { TokenType, Token, TokenReg } from './token';
 
 /**
@@ -15,7 +14,6 @@ function lexer(input: string): Token[] {
     /**
      * 提取 TokenType
      */
-    // eslint-disable-next-line
     const extract = (currentChar: string, validator: RegExp, TokenType: TokenType): Token => {
         let value = '';
         const start = current;
@@ -95,19 +93,16 @@ function lexer(input: string): Token[] {
         }
 
         if (TokenReg.BackQuotation.test(char)) {
-            // eslint-disable-next-line
             matchQuotation(char, TokenReg.BackQuotation, TokenType.BackQuotation);
             continue;
         }
 
         if (TokenReg.SingleQuotation.test(char)) {
-            // eslint-disable-next-line
             matchQuotation(char, TokenReg.SingleQuotation, TokenType.SingleQuotation);
             continue;
         }
 
         if (TokenReg.DoubleQuotation.test(char)) {
-            // eslint-disable-next-line
             matchQuotation(char, TokenReg.DoubleQuotation, TokenType.DoubleQuotation);
             continue;
         }
@@ -162,7 +157,7 @@ function lexer(input: string): Token[] {
             const newToken = extract(
                 char,
                 TokenReg.StatementTerminator,
-                TokenType.StatementTerminator,
+                TokenType.StatementTerminator
             );
             tokens.push(newToken);
             continue;
@@ -211,8 +206,4 @@ function cleanSql(sql: string) {
     resultSql += sql.slice(startIndex);
     return resultSql;
 }
-export {
-    cleanSql,
-    splitSql,
-    lexer,
-};
+export { cleanSql, splitSql, lexer };

@@ -5,7 +5,7 @@ const parser = new HiveSQL();
 
 const features = {
     insertFromQueries: readSQL(__dirname, 'insertFromQuery.sql'),
-    insertFromValues: readSQL(__dirname, 'insertFormValues.sql')
+    insertFromValues: readSQL(__dirname, 'insertFormValues.sql'),
 };
 
 describe('HiveSQL Insert Syntax Tests', () => {

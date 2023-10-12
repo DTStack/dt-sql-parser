@@ -5,7 +5,7 @@ const parser = new HiveSQL();
 
 const features = {
     drops: readSQL(__dirname, 'drop.sql'),
-    reloads: readSQL(__dirname, 'reload.sql')
+    reloads: readSQL(__dirname, 'reload.sql'),
 };
 
 describe('HiveSQL Drop Syntax Tests', () => {

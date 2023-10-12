@@ -16,21 +16,20 @@ export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext,
         return parser;
     }
 
-    protected get splitListener () {
+    protected get splitListener() {
         return null as any;
     }
 
     protected preferredRules: Set<number> = new Set();
 
     protected processCandidates(
-        candidates: CandidatesCollection, 
-        allTokens: Token[], 
+        candidates: CandidatesCollection,
+        allTokens: Token[],
         caretTokenIndex: number
     ): Suggestions<Token> {
         return {
             syntax: [],
-            keywords: []
-        }
+            keywords: [],
+        };
     }
 }
-

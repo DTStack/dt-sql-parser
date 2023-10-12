@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     commit: readSQL(__dirname, 'commit.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL Commit Statements Syntax Tests', () => {
         });
     });
 });
-

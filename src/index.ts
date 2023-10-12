@@ -16,6 +16,5 @@ export * from './lib/trinosql/TrinoSqlListener';
 export * from './lib/trinosql/TrinoSqlVisitor';
 export { SyntaxContextType } from './parser/common/basic-parser-types';
 
-
 export type * from './parser/common/basic-parser-types';
 export type { SyntaxError, ParserError } from './parser/common/parserErrorListener';

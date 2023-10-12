@@ -1,7 +1,7 @@
+import { ParseTreeListener } from 'antlr4ts/tree';
 import { ProgramContext } from '../../../src/lib/hive/HiveSqlParser';
 import { HiveSqlParserListener } from '../../../src/lib/hive/HiveSqlParserListener';
 import HiveSQL from '../../../src/parser/hive';
-
 
 describe('HiveSQL Listener Tests', () => {
     const parser = new HiveSQL();
@@ -16,9 +16,9 @@ describe('HiveSQL Listener Tests', () => {
                 result = ctx.text;
             }
         }
-        const listenTableName: any = new MyListener();
+        const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName, parserTree as ProgramContext);
+        await parser.listen(listenTableName as ParseTreeListener, parserTree as ProgramContext);
         expect(result).toBe(expectTableName.toUpperCase());
     });
     test('Listener enterCreateTable', async () => {
@@ -30,9 +30,9 @@ describe('HiveSQL Listener Tests', () => {
                 result = ctx.text;
             }
         }
-        const listenTableName: any = new MyListener();
+        const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName, parserTree as ProgramContext);
+        await parser.listen(listenTableName as ParseTreeListener, parserTree as ProgramContext);
         expect(result).toBe('DROPTABLETABLE_NAME');
     });
 });

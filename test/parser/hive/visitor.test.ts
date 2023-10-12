@@ -15,7 +15,6 @@ describe('HiveSQL Visitor Tests', () => {
     test('Visitor visitTableName', () => {
         let result = '';
         class MyVisitor extends AbstractParseTreeVisitor<any> implements HiveSqlParserVisitor<any> {
-
             defaultResult() {
                 return result;
             }

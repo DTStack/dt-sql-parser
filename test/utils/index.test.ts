@@ -64,9 +64,7 @@ describe('utils', () => {
         const sql = `select * from a;--comments`;
         const expected = `--comments`;
         const result = lexer(sql);
-        const comments = result.find((token) =>
-            token.type === TokenType.Comment,
-        );
+        const comments = result.find((token) => token.type === TokenType.Comment);
         expect(comments?.value).toEqual(expected);
     });
     test('cleanSql', () => {

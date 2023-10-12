@@ -28,14 +28,14 @@ export enum TokenType {
      */
     RightSmallBracket = 'RightSmallBracket',
     Comma = 'Comma',
-    FunctionArguments = 'FunctionArguments'
+    FunctionArguments = 'FunctionArguments',
 }
 
 /**
  * Token object
  */
 export interface Token {
-    type: TokenType,
+    type: TokenType;
     value: string;
     start: number;
     end: number;
@@ -44,8 +44,8 @@ export interface Token {
 }
 
 /**
-*  Token recognition rules
-*/
+ *  Token recognition rules
+ */
 export const TokenReg = {
     [TokenType.StatementTerminator]: /[;]/,
     [TokenType.SingleQuotation]: /['|\']/,

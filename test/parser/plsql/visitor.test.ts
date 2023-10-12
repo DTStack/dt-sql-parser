@@ -15,10 +15,9 @@ describe('PLSQL Visitor Tests', () => {
             protected defaultResult() {
                 return result;
             }
-            // eslint-disable-next-line camelcase
             visitTable_ref_list = (ctx): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
         const visitor: any = new MyVisitor();
         visitor.visit(parserTree);

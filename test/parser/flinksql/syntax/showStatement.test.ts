@@ -1,8 +1,8 @@
-import FlinkSQL from "../../../../src/parser/flinksql";
-import { readSQL } from "../../../helper";
+import FlinkSQL from '../../../../src/parser/flinksql';
+import { readSQL } from '../../../helper';
 
 const features = {
-    shows: readSQL(__dirname, 'show.sql')
+    shows: readSQL(__dirname, 'show.sql'),
 };
 
 describe('FlinkSQL Show Syntax Tests', () => {

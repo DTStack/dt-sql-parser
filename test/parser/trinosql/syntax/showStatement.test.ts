@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     tables: readSQL(__dirname, 'show_tables.sql'),
@@ -75,4 +75,3 @@ describe('TrinoSQL Show Statements Syntax Tests', () => {
         });
     });
 });
-

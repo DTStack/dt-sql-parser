@@ -12,7 +12,7 @@ const features = {
     indexes: readSQL(__dirname, 'createIndex.sql'),
     macros: readSQL(__dirname, 'createMacro.sql'),
     connectors: readSQL(__dirname, 'createConnector.sql'),
-    scheduledQueries: readSQL(__dirname, 'createScheduledQuery.sql')
+    scheduledQueries: readSQL(__dirname, 'createScheduledQuery.sql'),
 };
 
 describe('HiveSQL Create Syntax Tests', () => {

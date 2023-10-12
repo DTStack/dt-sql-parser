@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     refreshMaterializedView: readSQL(__dirname, 'refresh_materialized_view.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL Refresh Materialized View Statements Syntax Tests', () => {
         });
     });
 });
-

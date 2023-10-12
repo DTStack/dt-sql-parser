@@ -3,7 +3,10 @@ import path from 'path';
 import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
 import SparkSQL from '../../../../src/parser/spark';
 
-const syntaxSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'syntaxSuggestion.sql'), 'utf-8');
+const syntaxSql = fs.readFileSync(
+    path.join(__dirname, 'fixtures', 'syntaxSuggestion.sql'),
+    'utf-8'
+);
 
 describe('Spark SQL Syntax Suggestion', () => {
     const parser = new SparkSQL();
@@ -20,11 +23,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 18,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.TABLE);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['db', '.', 'tb']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'tb']);
     });
 
     test('Select table ', () => {
@@ -33,11 +37,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 18,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.TABLE);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['db', '.']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
     });
 
     test('Create table ', () => {
@@ -46,11 +51,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 17,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['db', '.']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
     });
 
     test('DROP table ', () => {
@@ -59,11 +65,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 26,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.TABLE);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['db', '.', 'a']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'a']);
     });
 
     test('Create view ', () => {
@@ -72,11 +79,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 28,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['db', '.', 'v']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'v']);
     });
 
     test('Drop view ', () => {
@@ -85,11 +93,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 15,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.VIEW);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['db', '.', 'v']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'v']);
     });
 
     test('Create function ', () => {
@@ -98,11 +107,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 20,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION_CREATE);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION_CREATE
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['fn1']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['fn1']);
     });
 
     test('Use function', () => {
@@ -111,11 +121,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 27,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['calculate_age']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['calculate_age']);
     });
 
     test('Create database', () => {
@@ -124,11 +135,12 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 19,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['db']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db']);
     });
 
     test('Drop database', () => {
@@ -137,10 +149,11 @@ describe('Spark SQL Syntax Suggestion', () => {
             column: 26,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find((syn) => syn.syntaxContextType === SyntaxContextType.DATABASE);
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+        );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text))
-            .toEqual(['sch']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['sch']);
     });
 });

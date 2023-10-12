@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     startTransaction: readSQL(__dirname, 'start_transaction.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL Start Transaction Statements Syntax Tests', () => {
         });
     });
 });
-

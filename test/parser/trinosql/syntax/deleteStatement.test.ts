@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     delete: readSQL(__dirname, 'delete.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL Delete Statements Syntax Tests', () => {
         });
     });
 });
-

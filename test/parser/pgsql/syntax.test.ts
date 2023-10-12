@@ -1,4 +1,4 @@
-import PostgresSQL from "../../../src/parser/pgsql";
+import PostgresSQL from '../../../src/parser/pgsql';
 
 describe('PostgresSQL SQL Syntax Tests', () => {
     const parser = new PostgresSQL();
@@ -21,5 +21,4 @@ describe('PostgresSQL SQL Syntax Tests', () => {
         const result = parser.validate(sql);
         expect(result.length).toBe(0);
     });
-
 });

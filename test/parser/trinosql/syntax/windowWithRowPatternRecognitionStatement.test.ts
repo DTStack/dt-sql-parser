@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     windowWithRowPatternRecognition: readSQL(__dirname, 'window_with_row_pattern_recognition.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL Window With Row Pattern Recognition Statements Syntax Tests',
         });
     });
 });
-

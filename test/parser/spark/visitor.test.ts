@@ -12,14 +12,17 @@ describe('Spark SQL Visitor Tests', () => {
     });
 
     test('Visitor visitRelationPrimary', () => {
-        class MyVisitor extends AbstractParseTreeVisitor<any> implements SparkSqlParserVisitor<any> {
+        class MyVisitor
+            extends AbstractParseTreeVisitor<any>
+            implements SparkSqlParserVisitor<any>
+        {
             result: string = '';
             protected defaultResult() {
                 return this.result;
             }
             visitRelationPrimary = (ctx): void => {
                 this.result = ctx.text.toLowerCase();
-            }
+            };
         }
         const visitor = new MyVisitor();
         visitor.visit(parserTree);

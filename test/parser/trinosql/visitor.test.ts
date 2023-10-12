@@ -13,13 +13,13 @@ describe('trino SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends AbstractParseTreeVisitor<any> implements TrinoSqlVisitor<any>{ 
+        class MyVisitor extends AbstractParseTreeVisitor<any> implements TrinoSqlVisitor<any> {
             protected defaultResult() {
                 return result;
             }
             visitTableName = (ctx): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
         const visitor: any = new MyVisitor();
         visitor.visit(parserTree);

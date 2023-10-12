@@ -1,232 +1,191 @@
-import fs from "fs";
-import path from "path";
-import { CaretPosition } from "../../../../src/parser/common/basic-parser-types";
-import HiveSQL from "../../../../src/parser/hive";
+import fs from 'fs';
+import path from 'path';
+import { CaretPosition } from '../../../../src/parser/common/basic-parser-types';
+import HiveSQL from '../../../../src/parser/hive';
 
-const tokenSql = fs.readFileSync(
-    path.join(__dirname, "fixtures", "tokenSuggestion.sql"),
-    "utf-8"
-);
+const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
-describe("Hive SQL Syntax Suggestion", () => {
+describe('Hive SQL Syntax Suggestion', () => {
     const parser = new HiveSQL();
 
-    test("After ALTER", () => {
+    test('After ALTER', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
         expect(suggestion).toEqual([
-            "APPLICATION",
-            "GROUP",
-            "USER",
-            "POOL",
-            "TRIGGER",
-            "RESOURCE",
-            "SCHEDULED",
-            "INDEX",
-            "CONNECTOR",
-            "DATABASE",
-            "SCHEMA",
-            "MATERIALIZED",
-            "VIEW",
-            "TABLE",
+            'APPLICATION',
+            'GROUP',
+            'USER',
+            'POOL',
+            'TRIGGER',
+            'RESOURCE',
+            'SCHEDULED',
+            'INDEX',
+            'CONNECTOR',
+            'DATABASE',
+            'SCHEMA',
+            'MATERIALIZED',
+            'VIEW',
+            'TABLE',
         ]);
     });
 
-    test("After CREATE", () => {
+    test('After CREATE', () => {
         const pos: CaretPosition = {
             lineNumber: 3,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
         expect(suggestion).toEqual([
-            "CONNECTOR",
-            "APPLICATION",
-            "GROUP",
-            "USER",
-            "POOL",
-            "TRIGGER",
-            "RESOURCE",
-            "ROLE",
-            "INDEX",
-            "TEMPORARY",
-            "FUNCTION",
-            "SCHEDULED",
-            "MATERIALIZED",
-            "VIEW",
-            "OR",
-            "MANAGED",
-            "TABLE",
-            "EXTERNAL",
-            "TRANSACTIONAL",
-            "REMOTE",
-            "DATABASE",
-            "SCHEMA",
+            'CONNECTOR',
+            'APPLICATION',
+            'GROUP',
+            'USER',
+            'POOL',
+            'TRIGGER',
+            'RESOURCE',
+            'ROLE',
+            'INDEX',
+            'TEMPORARY',
+            'FUNCTION',
+            'SCHEDULED',
+            'MATERIALIZED',
+            'VIEW',
+            'OR',
+            'MANAGED',
+            'TABLE',
+            'EXTERNAL',
+            'TRANSACTIONAL',
+            'REMOTE',
+            'DATABASE',
+            'SCHEMA',
         ]);
     });
 
-    test("After DELETE", () => {
+    test('After DELETE', () => {
         const pos: CaretPosition = {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
         expect(suggestion).toEqual(['FROM']);
     });
 
-    test("After DESCRIBE", () => {
+    test('After DESCRIBE', () => {
         const pos: CaretPosition = {
             lineNumber: 7,
             column: 10,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
         expect(suggestion).toEqual([
-            "EXTENDED",
-            "FORMATTED",
-            "FUNCTION",
-            "CONNECTOR",
-            "DATABASE",
-            "SCHEMA",
+            'EXTENDED',
+            'FORMATTED',
+            'FUNCTION',
+            'CONNECTOR',
+            'DATABASE',
+            'SCHEMA',
         ]);
     });
 
-    test("After DROP", () => {
+    test('After DROP', () => {
         const pos: CaretPosition = {
             lineNumber: 9,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
         expect(suggestion).toEqual([
-            "CONNECTOR",
-            "APPLICATION",
-            "GROUP",
-            "USER",
-            "POOL",
-            "TRIGGER",
-            "RESOURCE",
-            "ROLE",
-            "INDEX",
-            "TEMPORARY",
-            "FUNCTION",
-            "MATERIALIZED",
-            "VIEW",
-            "SCHEDULED",
-            "TABLE",
-            "DATABASE",
-            "SCHEMA",
+            'CONNECTOR',
+            'APPLICATION',
+            'GROUP',
+            'USER',
+            'POOL',
+            'TRIGGER',
+            'RESOURCE',
+            'ROLE',
+            'INDEX',
+            'TEMPORARY',
+            'FUNCTION',
+            'MATERIALIZED',
+            'VIEW',
+            'SCHEDULED',
+            'TABLE',
+            'DATABASE',
+            'SCHEMA',
         ]);
     });
 
-    test("After EXPORT", () => {
+    test('After EXPORT', () => {
         const pos: CaretPosition = {
             lineNumber: 11,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
         expect(suggestion).toEqual(['TABLE']);
     });
 
-    test("After IMPORT", () => {
+    test('After IMPORT', () => {
         const pos: CaretPosition = {
             lineNumber: 13,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
-        expect(suggestion).toEqual([
-            "FROM",
-            "TABLE",
-            "EXTERNAL",
-        ]);
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        expect(suggestion).toEqual(['FROM', 'TABLE', 'EXTERNAL']);
     });
 
-    test("After INSERT", () => {
+    test('After INSERT', () => {
         const pos: CaretPosition = {
             lineNumber: 15,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
-        expect(suggestion).toEqual([
-            "INTO",
-            "OVERWRITE",
-        ]);
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        expect(suggestion).toEqual(['INTO', 'OVERWRITE']);
     });
 
-    test("After LOAD", () => {
+    test('After LOAD', () => {
         const pos: CaretPosition = {
             lineNumber: 17,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
-        expect(suggestion).toEqual(["DATA"
-        ]);
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        expect(suggestion).toEqual(['DATA']);
     });
 
-    test("After SHOW", () => {
+    test('After SHOW', () => {
         const pos: CaretPosition = {
             lineNumber: 19,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
         expect(suggestion).toEqual([
-            "CURRENT",
-            "ROLES",
-            "PRINCIPALS",
-            "ROLE",
-            "GRANT",
-            "INDEX",
-            "INDEXES",
-            "FORMATTED",
-            "CONNECTORS",
-            "RESOURCE",
-            "CONF",
-            "TRANSACTIONS",
-            "COMPACTIONS",
-            "LOCKS",
-            "TBLPROPERTIES",
-            "TABLE",
-            "CREATE",
-            "PARTITIONS",
-            "FUNCTIONS",
-            "COLUMNS",
-            "SORTED",
-            "MATERIALIZED",
-            "VIEWS",
-            "TABLES",
-            "EXTENDED",
-            "DATABASES",
-            "SCHEMAS",
+            'CURRENT',
+            'ROLES',
+            'PRINCIPALS',
+            'ROLE',
+            'GRANT',
+            'INDEX',
+            'INDEXES',
+            'FORMATTED',
+            'CONNECTORS',
+            'RESOURCE',
+            'CONF',
+            'TRANSACTIONS',
+            'COMPACTIONS',
+            'LOCKS',
+            'TBLPROPERTIES',
+            'TABLE',
+            'CREATE',
+            'PARTITIONS',
+            'FUNCTIONS',
+            'COLUMNS',
+            'SORTED',
+            'MATERIALIZED',
+            'VIEWS',
+            'TABLES',
+            'EXTENDED',
+            'DATABASES',
+            'SCHEMAS',
         ]);
     });
 });

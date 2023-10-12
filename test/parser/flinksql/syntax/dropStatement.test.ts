@@ -1,5 +1,5 @@
-import FlinkSQL from "../../../../src/parser/flinksql";
-import { readSQL } from "../../../helper";
+import FlinkSQL from '../../../../src/parser/flinksql';
+import { readSQL } from '../../../helper';
 
 const features = {
     table: readSQL(__dirname, 'dropTable.sql'),
@@ -30,7 +30,7 @@ describe('FlinkSQL Drop Statements Tests', () => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
     features.database.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);

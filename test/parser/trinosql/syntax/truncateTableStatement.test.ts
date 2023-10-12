@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     truncateTable: readSQL(__dirname, 'truncate_table.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL Truncate Table Statements Syntax Tests', () => {
         });
     });
 });
-

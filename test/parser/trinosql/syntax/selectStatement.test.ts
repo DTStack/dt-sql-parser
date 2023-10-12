@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     select: readSQL(__dirname, 'select.sql'),
@@ -13,12 +13,12 @@ const features = {
     selectWithFetch: readSQL(__dirname, 'select_with_fetch.sql'),
     selectWithUNNEST: readSQL(__dirname, 'select_with_ unnest.sql'),
     selectWithExists: readSQL(__dirname, 'select_with_exists.sql'),
-    selectWithUnion: readSQL(__dirname, 'select_with_union.sql')
+    selectWithUnion: readSQL(__dirname, 'select_with_union.sql'),
 };
 
 describe('TrinoSQL Select Statements Syntax Tests', () => {
     const parser = new TrinoSQL();
-   features.select.forEach((sql) => {
+    features.select.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
@@ -27,57 +27,56 @@ describe('TrinoSQL Select Statements Syntax Tests', () => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
     features.selectWithSetOperations.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
 
     features.selectWithSubQueries.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
     features.selectWithTableSample.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
     features.selectWithRowType.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    }); 
+    });
     features.selectWithOffset.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    }); 
+    });
     features.selectWithJoin.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    }); 
+    });
     features.selectWithFetch.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    }); 
+    });
     features.selectWithUNNEST.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    }); 
-   features.selectWithExists.forEach((sql) => {
+    });
+    features.selectWithExists.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    }); 
+    });
     features.selectWithUnion.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    }); 
+    });
 });
-

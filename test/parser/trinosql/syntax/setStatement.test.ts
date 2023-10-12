@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     role: readSQL(__dirname, 'set_role.sql'),
@@ -32,4 +32,3 @@ describe('TrinoSQL Set Statements Syntax Tests', () => {
         });
     });
 });
-

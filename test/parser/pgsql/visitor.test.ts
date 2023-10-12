@@ -1,6 +1,6 @@
-import { AbstractParseTreeVisitor } from "antlr4ts/tree/AbstractParseTreeVisitor";
-import { PostgreSQLParserVisitor } from "../../../src/lib/pgsql/PostgreSQLParserVisitor";
-import PostgresSQL from "../../../src/parser/pgsql";
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { PostgreSQLParserVisitor } from '../../../src/lib/pgsql/PostgreSQLParserVisitor';
+import PostgresSQL from '../../../src/parser/pgsql';
 
 describe('Generic SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -13,11 +13,14 @@ describe('Generic SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends AbstractParseTreeVisitor<any> implements PostgreSQLParserVisitor<any> {
+        class MyVisitor
+            extends AbstractParseTreeVisitor<any>
+            implements PostgreSQLParserVisitor<any>
+        {
             protected defaultResult() {
                 return result;
             }
-            
+
             visitTable_ref(ctx) {
                 result = ctx.text.toLowerCase();
             }

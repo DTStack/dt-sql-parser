@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     deallocatePrepare: readSQL(__dirname, 'deallocate_prepare.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL deallocatePrepare Statements Syntax Tests', () => {
         });
     });
 });
-
