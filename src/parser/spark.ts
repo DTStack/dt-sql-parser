@@ -96,7 +96,6 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
             const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
             const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
             if (symbolicName && symbolicName.startsWith('KW_')) {
-                // eslint-disable-next-line quotes
                 const keyword = displayName.startsWith("'") && displayName.endsWith("'") ? displayName.slice(1, -1) : displayName;
                 keywords.push(keyword);
             }

@@ -915,7 +915,7 @@ expressionSeq
     ;
 
 booleanExpression
-    : KW_NOT booleanExpression
+    : (KW_NOT | NOT) booleanExpression
     | KW_EXISTS LEFT_PAREN query RIGHT_PAREN
     | valueExpression predicate?
     | left=booleanExpression operator=KW_AND right=booleanExpression
@@ -926,7 +926,7 @@ predicate
     : KW_NOT? kind=KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression
     | KW_NOT? kind=KW_IN LEFT_PAREN expression (COMMA expression)* RIGHT_PAREN
     | KW_NOT? kind=KW_IN LEFT_PAREN query RIGHT_PAREN
-    | KW_NOT? kind=KW_RLIKE pattern=valueExpression
+    | KW_NOT? kind=(KW_RLIKE | KW_REGEXP) pattern=valueExpression
     | KW_NOT? kind=(KW_LIKE | KW_ILIKE) quantifier=(KW_ANY | KW_SOME | KW_ALL) (LEFT_PAREN RIGHT_PAREN | LEFT_PAREN expression (COMMA expression)* RIGHT_PAREN)
     | KW_NOT? kind=(KW_LIKE | KW_ILIKE) pattern=valueExpression (KW_ESCAPE escapeChar=stringLit)?
     | KW_IS KW_NOT? kind=KW_NULL
@@ -1478,6 +1478,7 @@ ansiNonReserved
     | KW_RESTRICT
     | KW_REVOKE
     | KW_RLIKE
+    | KW_REGEXP
     | KW_ROLE
     | KW_ROLES
     | KW_ROLLBACK
@@ -1818,6 +1819,7 @@ nonReserved
     | KW_RESTRICT
     | KW_REVOKE
     | KW_RLIKE
+    | KW_REGEXP
     | KW_ROLE
     | KW_ROLES
     | KW_ROLLBACK
