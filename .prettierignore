@@ -1,0 +1,7 @@
+**/*.md
+**/*.ejs
+**/package.json
+**/lib
+**/dist
+node_modules
+coverage
