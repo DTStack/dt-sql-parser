@@ -43,7 +43,50 @@ jobs:
             - name: install
               if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
               run: yarn
+    prettier:
+      runs-on: ubuntu-latest
+      needs: [setup]
+      steps:
+          - uses: actions/checkout@v2
 
+          - name: Restore cache from yarn.lock
+            uses: actions/cache@v2
+            with:
+                path: package-temp-dir
+                key: lock-${{ github.sha }}
+
+          - name: Restore cache from node_modules
+            uses: actions/cache@v2
+            with:
+                path: node_modules
+                key: node_modules-${{ hashFiles('**/package-temp-dir/yarn.lock') }}
+            
+          - name: Run prettier lint
+            run: |
+              export NODE_OPTIONS="--max_old_space_size=4096"
+              yarn lint
+    check-types:
+      runs-on: ubuntu-latest
+      needs: [setup]
+      steps:
+          - uses: actions/checkout@v2
+
+          - name: Restore cache from yarn.lock
+            uses: actions/cache@v2
+            with:
+                path: package-temp-dir
+                key: lock-${{ github.sha }}
+
+          - name: Restore cache from node_modules
+            uses: actions/cache@v2
+            with:
+                path: node_modules
+                key: node_modules-${{ hashFiles('**/package-temp-dir/yarn.lock') }}
+            
+          - name: Run tsc check
+            run: |
+              export NODE_OPTIONS="--max_old_space_size=4096"
+              yarn check-types
     test:
         runs-on: ubuntu-latest
         needs: [setup]
