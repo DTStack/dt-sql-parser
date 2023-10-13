@@ -13,19 +13,9 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
-        expect(suggestion).toEqual([
-            'TABLE',
-            'INDEX',
-            'VIEW',
-            'DATABASE',
-            'NAMESPACE',
-            'SCHEMA',
-        ]);
+        expect(suggestion).toEqual(['TABLE', 'INDEX', 'VIEW', 'DATABASE', 'NAMESPACE', 'SCHEMA']);
     });
 
     test('After CREATE', () => {
@@ -33,10 +23,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 3,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
         expect(suggestion).toEqual([
             'TEMPORARY',
@@ -59,10 +46,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
         expect(suggestion).toEqual(['FROM']);
     });
@@ -72,10 +56,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 10,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
         expect(suggestion).toEqual([
             'WITH',
@@ -98,10 +79,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
         expect(suggestion).toEqual([
             'TEMPORARY',
@@ -121,15 +99,9 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 11,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
-        expect(suggestion).toEqual([
-            'OVERWRITE',
-            'INTO',
-        ]);
+        expect(suggestion).toEqual(['OVERWRITE', 'INTO']);
     });
 
     test('After LOAD', () => {
@@ -137,14 +109,9 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 13,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
-        expect(suggestion).toEqual([
-            'DATA',
-        ]);
+        expect(suggestion).toEqual(['DATA']);
     });
 
     test('After SHOW', () => {
@@ -152,10 +119,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 15,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
         expect(suggestion).toEqual([
             'LOCKS',
@@ -190,10 +154,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 17,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            tokenSql,
-            pos,
-        )?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
         expect(suggestion).toEqual(['TABLE']);
     });

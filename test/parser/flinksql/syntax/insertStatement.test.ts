@@ -1,13 +1,12 @@
 import FlinkSQL from '../../../../src/parser/flinksql';
 import { readSQL } from '../../../helper';
 
-
 const parser = new FlinkSQL();
 
 const features = {
     InsertFromSelectQueries: readSQL(__dirname, 'insertFromSelectQueries.sql'),
     InsertValuesIntoTable: readSQL(__dirname, 'insertValuesIntoTable.sql'),
-    InsertMultipleTable: readSQL(__dirname, 'insertMultipleTable.sql')
+    InsertMultipleTable: readSQL(__dirname, 'insertMultipleTable.sql'),
 };
 
 describe('FlinkSQL Insert Syntax Tests', () => {

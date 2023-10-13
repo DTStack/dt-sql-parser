@@ -1,3 +1,4 @@
+import { ParseTreeListener } from 'antlr4ts/tree';
 import { SparkSqlParserListener } from '../../../src/lib/spark/SparkSqlParserListener';
 import SparkSQL from '../../../src/parser/spark';
 
@@ -13,11 +14,11 @@ describe('Spark SQL Listener Tests', () => {
         class MyListener implements SparkSqlParserListener {
             exitRelationPrimary = (ctx): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
         const listenTableName = new MyListener();
 
-        parser.listen(listenTableName, parserTree);
+        parser.listen(listenTableName as ParseTreeListener, parserTree);
         expect(result).toBe(expectTableName);
     });
 });

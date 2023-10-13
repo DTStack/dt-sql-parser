@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     resetSession: readSQL(__dirname, 'reset_session.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL Reset Session Statements Syntax Tests', () => {
         });
     });
 });
-

@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     insertIntoTable: readSQL(__dirname, 'insert_into.sql'),
@@ -13,4 +13,3 @@ describe('TrinoSQL Insert Statements Syntax Tests', () => {
         });
     });
 });
-

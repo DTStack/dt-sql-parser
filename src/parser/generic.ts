@@ -17,19 +17,18 @@ export default class GenericSQL extends BasicParser<SqlLexer, ProgramContext, Sq
 
     protected preferredRules: Set<number> = new Set();
 
-    protected get splitListener () {
+    protected get splitListener() {
         return null as any;
     }
 
     protected processCandidates(
-        candidates: CandidatesCollection, 
-        allTokens: Token[], 
+        candidates: CandidatesCollection,
+        allTokens: Token[],
         caretTokenIndex: number
     ): Suggestions<Token> {
         return {
             syntax: [],
-            keywords: []
-        }
+            keywords: [],
+        };
     }
 }
-

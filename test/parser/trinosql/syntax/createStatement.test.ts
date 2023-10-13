@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     table: readSQL(__dirname, 'create_table.sql'),
@@ -12,7 +12,7 @@ const features = {
 
 describe('TrinoSQL Create Statements Syntax Tests', () => {
     const parser = new TrinoSQL();
-   features.table.forEach((sql) => {
+    features.table.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
@@ -21,28 +21,26 @@ describe('TrinoSQL Create Statements Syntax Tests', () => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
     features.schema.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
 
     features.tableAsSelect.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
     features.role.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    });  
+    });
     features.materializedView.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
-    }); 
-
+    });
 });
-

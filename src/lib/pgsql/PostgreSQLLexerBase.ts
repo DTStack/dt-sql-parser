@@ -30,12 +30,10 @@ export default abstract class PostgreSQLLexerBase extends Lexer {
         return this._input;
     }
     checkLA( c) {
-        // eslint-disable-next-line new-cap
         return this.getInputStream().LA(1) !== c;
     }
 
     charIsLetter() {
-        // eslint-disable-next-line new-cap
         return isLetter(this.getInputStream().LA(-1));
     }
 
@@ -53,11 +51,9 @@ export default abstract class PostgreSQLLexerBase extends Lexer {
     }
 
     UnterminatedBlockCommentDebugAssert() {
-        // Debug.Assert(InputStream.LA(1) == -1 /*EOF*/);
     }
 
     CheckIfUtf32Letter() {
-        // eslint-disable-next-line new-cap
         let codePoint = this.getInputStream().LA(-2) << 8 + this.getInputStream().LA(-1);
         let c;
         if (codePoint < 0x10000) {

@@ -10,7 +10,8 @@ export const readSQL = (dirname: string, fileName: string) => {
         const char = content[index];
         tmp += char;
 
-        const isMulti = tmp.includes('EXECUTE STATEMENT SET') || tmp.includes('BEGIN STATEMENT SET;');
+        const isMulti =
+            tmp.includes('EXECUTE STATEMENT SET') || tmp.includes('BEGIN STATEMENT SET;');
 
         if (!isMulti) {
             // 非批量的先简单按照分号切割
@@ -31,14 +32,14 @@ export const readSQL = (dirname: string, fileName: string) => {
 
 /**
  * Benchmark for a function.
- * @param name 
- * @param fn 
+ * @param name
+ * @param fn
  * @param times , default 1
  * @returns [ totalTime, averageTime, msg ]
  */
 export function benchmark(name: string, fn: Function, times: number = 1): [number, number, string] {
     const start = performance.now();
-    
+
     for (let i = 0; i < times; i++) {
         fn();
     }
@@ -46,12 +47,13 @@ export function benchmark(name: string, fn: Function, times: number = 1): [numbe
     const totalTime = end - start;
     const averageTime = totalTime / times;
 
-    const msg = `Benchmark: ${name} executed ${times} times. Total time: ${totalTime.toFixed(2)}ms. Average time: ${averageTime.toFixed(2)}ms`;
-    console.log(msg)
-    
+    const msg = `Benchmark: ${name} executed ${times} times. Total time: ${totalTime.toFixed(
+        2
+    )}ms. Average time: ${averageTime.toFixed(2)}ms`;
+    console.log(msg);
+
     return [totalTime, averageTime, msg];
 }
-
 
 export function getReportTableRow(name, rows, times, totalTime, averageTime) {
     return `| ${name} | ${rows} | ${times} | ${totalTime.toFixed(2)} | ${averageTime.toFixed(2)} |`;

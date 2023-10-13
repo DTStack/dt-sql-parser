@@ -1,8 +1,8 @@
 import HiveSQL from '../../../../src/parser/hive';
-import { readSQL } from "../../../helper";
+import { readSQL } from '../../../helper';
 
 const features = {
-    imports: readSQL(__dirname, 'import.sql')
+    imports: readSQL(__dirname, 'import.sql'),
 };
 
 describe('HiveSQL Import Syntax Tests', () => {

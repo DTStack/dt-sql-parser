@@ -1,3 +1,4 @@
+import { ParseTreeListener } from 'antlr4ts/tree';
 import { PlSqlParserListener } from '../../../src/lib/plsql/PlSqlParserListener';
 import PLSQL from '../../../src/parser/plsql';
 
@@ -11,14 +12,13 @@ describe('PLSQL Listener Tests', () => {
     test('Listener enterTableName', async () => {
         let result = '';
         class MyListener implements PlSqlParserListener {
-            // eslint-disable-next-line camelcase
             enterTable_ref_list = (ctx): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
-        const listenTableName: any = new MyListener();
+        const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName, parserTree);
+        await parser.listen(listenTableName as ParseTreeListener, parserTree);
         expect(result).toBe(expectTableName);
     });
 });

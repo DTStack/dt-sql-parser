@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     revoke: readSQL(__dirname, 'revoke.sql'),
@@ -20,4 +20,3 @@ describe('TrinoSQL Revoke Statements Syntax Tests', () => {
         });
     });
 });
-

@@ -1,9 +1,8 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     analyze: readSQL(__dirname, 'analyze.sql'),
-
 };
 
 describe('TrinoSQL Analyze Statements Syntax Tests', () => {
@@ -15,4 +14,3 @@ describe('TrinoSQL Analyze Statements Syntax Tests', () => {
         });
     });
 });
-

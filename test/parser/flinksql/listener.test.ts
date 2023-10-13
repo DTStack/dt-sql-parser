@@ -1,6 +1,7 @@
 import FlinkSQL from '../../../src/parser/flinksql';
 import { FlinkSqlParserListener } from '../../../src/lib/flinksql/FlinkSqlParserListener';
 import { TableExpressionContext } from '../../../src/lib/flinksql/FlinkSqlParser';
+import { ParseTreeListener } from 'antlr4ts/tree';
 
 describe('Flink SQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -12,14 +13,13 @@ describe('Flink SQL Listener Tests', () => {
     test('Listener enterTableName', async () => {
         let result = '';
         class MyListener implements FlinkSqlParserListener {
-
             enterTableExpression = (ctx: TableExpressionContext): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName, parserTree);
+        await parser.listen(listenTableName as ParseTreeListener, parserTree);
         expect(result).toBe(expectTableName);
     });
 });

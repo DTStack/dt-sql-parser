@@ -1,7 +1,6 @@
 import SparkSQL from '../../../../src/parser/spark';
 import { readSQL } from '../../../helper';
 
-
 const parser = new SparkSQL();
 
 const features = {

@@ -13,13 +13,16 @@ describe('Flink SQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor extends AbstractParseTreeVisitor<any> implements FlinkSqlParserVisitor<any>{
+        class MyVisitor
+            extends AbstractParseTreeVisitor<any>
+            implements FlinkSqlParserVisitor<any>
+        {
             protected defaultResult() {
                 return result;
-            } 
+            }
             visitTableExpression = (ctx): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
         const visitor: any = new MyVisitor();
         visitor.visit(parserTree);

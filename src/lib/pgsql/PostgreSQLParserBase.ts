@@ -1,9 +1,7 @@
-/* eslint-disable new-cap,camelcase */
 import { CharStreams, CommonTokenStream, Parser } from 'antlr4ts';
 import { PostgreSQLLexer } from './PostgreSQLLexer';
 import { PostgreSQLParser } from './PostgreSQLParser';
 
-// @ts-ignore
 export default abstract class PostgreSQLParserBase extends Parser {
     constructor( input) {
         super(input);
@@ -32,16 +30,13 @@ export default abstract class PostgreSQLParserBase extends Parser {
             }
         }
         if (!lang) return;
-        // eslint-disable-next-line camelcase
         let func_as = null;
         for (const a of _localctx.createfunc_opt_item()) {
             if (!a.func_as()) {
-                // eslint-disable-next-line camelcase
                 func_as = a;
                 break;
             }
         }
-        // eslint-disable-next-line camelcase
         if (!func_as) {
             const txt = this.GetRoutineBodyString(func_as.func_as().sconst(0));
             const line = func_as.func_as().sconst(0).start.getLine();
@@ -76,7 +71,6 @@ export default abstract class PostgreSQLParserBase extends Parser {
 
     GetRoutineBodyString( rule) {
         const anysconst = rule.anysconst();
-        // eslint-disable-next-line new-cap
         const StringConstant = anysconst.StringConstant();
         if (null !== StringConstant) return this.unquote(this.TrimQuotes(StringConstant.getText()));
         const UnicodeEscapeStringConstant = anysconst.UnicodeEscapeStringConstant();

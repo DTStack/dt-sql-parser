@@ -17,10 +17,10 @@ describe('Generic SQL Visitor Tests', () => {
             protected defaultResult() {
                 return result;
             }
-           
+
             visitTableName = (ctx): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
         const visitor = new MyVisitor();
         visitor.visit(parserTree);

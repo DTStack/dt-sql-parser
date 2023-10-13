@@ -1,5 +1,5 @@
-import TrinoSQL from "../../../../src/parser/trinosql";
-import { readSQL } from "../../../helper";
+import TrinoSQL from '../../../../src/parser/trinosql';
+import { readSQL } from '../../../helper';
 
 const features = {
     rollbackTransaction: readSQL(__dirname, 'rollback_transaction.sql'),
@@ -14,4 +14,3 @@ describe('TrinoSQL Rollback Transaction Statements Syntax Tests', () => {
         });
     });
 });
-

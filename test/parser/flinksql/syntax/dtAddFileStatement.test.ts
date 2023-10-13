@@ -1,8 +1,8 @@
-import FlinkSQL from "../../../../src/parser/flinksql";
-import { readSQL } from "../../../helper";
+import FlinkSQL from '../../../../src/parser/flinksql';
+import { readSQL } from '../../../helper';
 
 const features = {
-    dtAddFiles: readSQL(__dirname, 'dtAddFile.sql')
+    dtAddFiles: readSQL(__dirname, 'dtAddFile.sql'),
 };
 
 describe('FlinkSQL DT Add File Syntax Tests', () => {

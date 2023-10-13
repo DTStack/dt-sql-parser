@@ -1,21 +1,21 @@
-import { 
-    Parser, 
-    Lexer, 
+import {
+    Parser,
+    Lexer,
     Token,
-    CharStreams, 
-    CommonTokenStream, 
+    CharStreams,
+    CommonTokenStream,
     CodePointCharStream,
-    ParserRuleContext
+    ParserRuleContext,
 } from 'antlr4ts';
 import { ParseTreeWalker, ParseTreeListener } from 'antlr4ts/tree';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { findCaretTokenIndex } from '../../utils/findCaretTokenIndex';
-import { 
+import {
     CaretPosition,
     Suggestions,
     SyntaxSuggestion,
     WordRange,
-    TextSlice
+    TextSlice,
 } from './basic-parser-types';
 import ParserErrorListener, {
     ParserError,
@@ -36,10 +36,10 @@ interface SplitListener extends ParseTreeListener {
  * Custom Parser class, subclass needs extends it.
  */
 export default abstract class BasicParser<
-    L extends Lexer = Lexer, 
+    L extends Lexer = Lexer,
     PRC extends ParserRuleContext = ParserRuleContext,
-    P extends IParser<PRC> = IParser<PRC>
->  {
+    P extends IParser<PRC> = IParser<PRC>,
+> {
     protected _charStreams: CodePointCharStream;
     protected _lexer: L;
     protected _tokenStream: CommonTokenStream;
@@ -52,7 +52,7 @@ export default abstract class BasicParser<
      * PreferredRules for antlr4-c3
      */
     protected abstract preferredRules: Set<number>;
- 
+
     /**
      * Create a antrl4 Lexer instance
      * @param input source string
@@ -64,26 +64,26 @@ export default abstract class BasicParser<
      * @param tokenStream CommonTokenStream
      */
     protected abstract createParserFromTokenStream(tokenStream: CommonTokenStream): P;
-    
+
     /**
      * Convert candidates to suggestions
      * @param candidates candidate list
      * @param allTokens all tokens from input
      * @param caretTokenIndex tokenIndex of caretPosition
-     * @param tokenIndexOffset offset of the tokenIndex in the candidates 
+     * @param tokenIndexOffset offset of the tokenIndex in the candidates
      * compared to the tokenIndex in allTokens
      */
     protected abstract processCandidates(
-        candidates: CandidatesCollection, 
-        allTokens: Token[], 
+        candidates: CandidatesCollection,
+        allTokens: Token[],
         caretTokenIndex: number,
-        tokenIndexOffset: number,
+        tokenIndexOffset: number
     ): Suggestions<Token>;
 
     /**
      * Get splitListener instance.
      */
-    protected abstract get splitListener (): SplitListener; 
+    protected abstract get splitListener(): SplitListener;
 
     /**
      * Create an anltr4 lexer from input.
@@ -92,8 +92,8 @@ export default abstract class BasicParser<
     public createLexer(input: string) {
         const charStreams = CharStreams.fromString(input.toUpperCase());
         const lexer = this.createLexerFormCharStream(charStreams);
+
         return lexer;
-   
     }
 
     /**
@@ -104,7 +104,7 @@ export default abstract class BasicParser<
         const lexer = this.createLexer(input);
         const tokenStream = new CommonTokenStream(lexer);
         const parser = this.createParserFromTokenStream(tokenStream);
-        return parser;        
+        return parser;
     }
 
     /**
@@ -119,11 +119,11 @@ export default abstract class BasicParser<
 
         this._tokenStream = new CommonTokenStream(this._lexer);
         this._tokenStream.fill();
-        
+
         this._parser = this.createParserFromTokenStream(this._tokenStream);
         this._parser.buildParseTree = true;
 
-        return this._parser
+        return this._parser;
     }
 
     /**
@@ -134,13 +134,10 @@ export default abstract class BasicParser<
      * @param errorListener listen errors
      * @returns parserTree
      */
-    public parse(
-        input: string,
-        errorListener?: ErrorHandler<any>
-    ) {
+    public parse(input: string, errorListener?: ErrorHandler<any>) {
         // Avoid parsing the same input repeatedly.
-        if(this._parsedInput === input && !errorListener) {
-            return;
+        if (this._parsedInput === input && !errorListener) {
+            return this._parserTree;
         }
 
         const parser = this.createParserWithCache(input);
@@ -150,12 +147,12 @@ export default abstract class BasicParser<
         this._errorCollector.clear();
 
         parser.addErrorListener(this._errorCollector);
-        if(errorListener) {
+        if (errorListener) {
             parser.addErrorListener(new ParserErrorListener(errorListener));
         }
 
         this._parserTree = parser.program();
-        
+
         return this._parserTree;
     }
 
@@ -178,11 +175,11 @@ export default abstract class BasicParser<
     public getAllTokens(input: string): Token[] {
         this.parse(input);
         let allTokens = this._tokenStream.getTokens();
-        if(allTokens[allTokens.length - 1].text === '<EOF>') {
-            allTokens = allTokens.slice(0, -1)
+        if (allTokens[allTokens.length - 1].text === '<EOF>') {
+            allTokens = allTokens.slice(0, -1);
         }
-        return allTokens
-    };
+        return allTokens;
+    }
     /**
      * It convert tree to string, it's convenient to use in unit test.
      * @param string input
@@ -204,7 +201,10 @@ export default abstract class BasicParser<
      * @param listener Listener instance extends ParserListener
      * @param parserTree parser Tree
      */
-    public listen<PTL extends ParseTreeListener = ParseTreeListener>(listener: PTL, parserTree: PRC) {
+    public listen<PTL extends ParseTreeListener = ParseTreeListener>(
+        listener: PTL,
+        parserTree: PRC
+    ) {
         ParseTreeWalker.DEFAULT.walk(listener, parserTree);
     }
 
@@ -217,8 +217,8 @@ export default abstract class BasicParser<
         this.parse(input);
         const splitListener = this.splitListener;
         this.listen(splitListener, this._parserTree);
-        
-        const res = splitListener.statementsContext.map(context => {
+
+        const res = splitListener.statementsContext.map((context) => {
             const { start, stop } = context;
             return {
                 startIndex: start.startIndex,
@@ -228,8 +228,8 @@ export default abstract class BasicParser<
                 startColumn: start.charPositionInLine + 1,
                 endColumn: stop.charPositionInLine + stop.text.length,
                 text: this._parsedInput.slice(start.startIndex, stop.stopIndex + 1),
-            }
-        })
+            };
+        });
 
         return res;
     }
@@ -240,10 +240,13 @@ export default abstract class BasicParser<
      * @param caretPosition caret position, such as cursor position
      * @returns suggestion
      */
-    public getSuggestionAtCaretPosition(input: string, caretPosition: CaretPosition): Suggestions | null {
+    public getSuggestionAtCaretPosition(
+        input: string,
+        caretPosition: CaretPosition
+    ): Suggestions | null {
         const splitListener = this.splitListener;
         // TODO: add splitListener to all sqlParser implements add remove following if
-        if(!splitListener) return null;
+        if (!splitListener) return null;
 
         this.parse(input);
         let sqlParserIns = this._parser;
@@ -252,8 +255,8 @@ export default abstract class BasicParser<
         let c3Context: ParserRuleContext = this._parserTree;
         let tokenIndexOffset: number = 0;
 
-        if(!caretTokenIndex && caretTokenIndex !== 0) return null;
-        
+        if (!caretTokenIndex && caretTokenIndex !== 0) return null;
+
         /**
          * Split sql by statement.
          * Try to collect candidates from the caret statement only.
@@ -263,16 +266,19 @@ export default abstract class BasicParser<
         // If there are multiple statements.
         if (splitListener.statementsContext.length > 1) {
             // find statement rule context where caretPosition is located.
-            const caretStatementContext = splitListener?.statementsContext.find(ctx => {
-                return caretTokenIndex <= ctx.stop?.tokenIndex && caretTokenIndex >= ctx.start.tokenIndex;
+            const caretStatementContext = splitListener?.statementsContext.find((ctx) => {
+                return (
+                    caretTokenIndex <= ctx.stop?.tokenIndex &&
+                    caretTokenIndex >= ctx.start.tokenIndex
+                );
             });
 
-            if(caretStatementContext) {
-                c3Context = caretStatementContext
+            if (caretStatementContext) {
+                c3Context = caretStatementContext;
             } else {
-                const lastStatementToken= splitListener
-                    .statementsContext[splitListener?.statementsContext.length - 1]
-                    .start;
+                const lastStatementToken =
+                    splitListener.statementsContext[splitListener?.statementsContext.length - 1]
+                        .start;
                 /**
                  * If caretStatementContext is not found and it follows all statements.
                  * Reparses part of the input following the penultimate statement.
@@ -281,8 +287,8 @@ export default abstract class BasicParser<
                 if (caretTokenIndex > lastStatementToken?.tokenIndex) {
                     /**
                      * Save offset of the tokenIndex in the partInput
-                     * compared to the tokenIndex in the whole input 
-                     */  
+                     * compared to the tokenIndex in the whole input
+                     */
                     tokenIndexOffset = lastStatementToken?.tokenIndex;
                     // Correct caretTokenIndex
                     caretTokenIndex = caretTokenIndex - tokenIndexOffset;
@@ -304,28 +310,34 @@ export default abstract class BasicParser<
         core.preferredRules = this.preferredRules;
 
         const candidates = core.collectCandidates(caretTokenIndex, c3Context);
-        const originalSuggestions = this.processCandidates(candidates, allTokens, caretTokenIndex, tokenIndexOffset);
+        const originalSuggestions = this.processCandidates(
+            candidates,
+            allTokens,
+            caretTokenIndex,
+            tokenIndexOffset
+        );
 
-        const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax
-            .map(syntaxCtx => {
-                const wordRanges: WordRange[] = syntaxCtx.wordRanges.map(token => {
+        const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(
+            (syntaxCtx) => {
+                const wordRanges: WordRange[] = syntaxCtx.wordRanges.map((token) => {
                     return {
                         text: this._parsedInput.slice(token.startIndex, token.stopIndex + 1),
                         startIndex: token.startIndex,
                         stopIndex: token.stopIndex,
                         line: token.line,
                         startColumn: token.charPositionInLine + 1,
-                        stopColumn: token.charPositionInLine + token.text.length
-                    }
-                })
+                        stopColumn: token.charPositionInLine + token.text.length,
+                    };
+                });
                 return {
                     syntaxContextType: syntaxCtx.syntaxContextType,
                     wordRanges,
-                }
-            })
+                };
+            }
+        );
         return {
             syntax: syntaxSuggestions,
-            keywords: originalSuggestions.keywords
-        }
+            keywords: originalSuggestions.keywords,
+        };
     }
 }

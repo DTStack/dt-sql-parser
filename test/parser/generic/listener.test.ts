@@ -1,5 +1,6 @@
 import GenericSQL from '../../../src/parser/generic';
 import { SqlParserListener } from '../../../src/lib/generic/SqlParserListener';
+import { ParseTreeListener } from 'antlr4ts/tree';
 
 describe('Generic SQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -13,11 +14,11 @@ describe('Generic SQL Listener Tests', () => {
         class MyListener implements SqlParserListener {
             enterTableName = (ctx): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
         const listenTableName: any = new MyListener();
 
-        await parser.listen(listenTableName, parserTree);
+        await parser.listen(listenTableName as ParseTreeListener, parserTree);
         expect(result).toBe(expectTableName);
     });
 });

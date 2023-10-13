@@ -1,3 +1,4 @@
+import { ParseTreeListener } from 'antlr4ts/tree';
 import { Target_listContext } from '../../../src/lib/pgsql/PostgreSQLParser';
 import { PostgreSQLParserListener } from '../../../src/lib/pgsql/PostgreSQLParserListener';
 import PostgresSQL from '../../../src/parser/pgsql';
@@ -16,9 +17,9 @@ describe('PostgresSQL Listener Tests', () => {
                 result = ctx.text.toLowerCase();
             }
         }
-        const listenTableName: any = new MyListener();
+        const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName, parserTree);
+        await parser.listen(listenTableName as ParseTreeListener, parserTree);
         expect(result).toBe(expectTableName);
     });
 });

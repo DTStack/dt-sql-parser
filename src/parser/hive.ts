@@ -1,11 +1,16 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
 import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
-import { HiveSqlParser, ProgramContext, StatementContext, ExplainStatementContext, ExecStatementContext } from '../lib/hive/HiveSqlParser';
+import {
+    HiveSqlParser,
+    ProgramContext,
+    StatementContext,
+    ExplainStatementContext,
+    ExecStatementContext,
+} from '../lib/hive/HiveSqlParser';
 import BasicParser from './common/basicParser';
 import { HiveSqlParserListener } from '../lib/hive/HiveSqlParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
-
 
 export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, HiveSqlParser> {
     protected createLexerFormCharStream(charStreams) {
@@ -27,10 +32,9 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
         HiveSqlParser.RULE_functionNameForDDL, // function name
         HiveSqlParser.RULE_functionNameForInvoke, // function name
         HiveSqlParser.RULE_functionNameCreate, // function name that will be created
-
     ]);
 
-    protected get splitListener () {
+    protected get splitListener() {
         return new HiveSqlSplitListener();
     }
 
@@ -38,14 +42,17 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
         candidates: CandidatesCollection,
         allTokens: Token[],
         caretTokenIndex: number,
-        tokenIndexOffset: number,
+        tokenIndexOffset: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
             const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(startTokenIndex, caretTokenIndex + tokenIndexOffset + 1);
+            const tokenRanges = allTokens.slice(
+                startTokenIndex,
+                caretTokenIndex + tokenIndexOffset + 1
+            );
 
             let syntaxContextType: SyntaxContextType;
             switch (ruleType) {
@@ -62,7 +69,7 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
                     break;
                 }
                 case HiveSqlParser.RULE_tableNameCreate: {
-                    syntaxContextType = SyntaxContextType.TABLE_CREATE
+                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
                     break;
                 }
                 case HiveSqlParser.RULE_viewName: {
@@ -73,7 +80,7 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
                     syntaxContextType = SyntaxContextType.VIEW_CREATE;
                     break;
                 }
-                case HiveSqlParser.RULE_functionNameForDDL: 
+                case HiveSqlParser.RULE_functionNameForDDL:
                 case HiveSqlParser.RULE_functionNameForInvoke: {
                     syntaxContextType = SyntaxContextType.FUNCTION;
                     break;
@@ -98,7 +105,10 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
             const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
             const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
             if (symbolicName && symbolicName.startsWith('KW_')) {
-                const keyword = displayName.startsWith("'") && displayName.endsWith("'") ? displayName.slice(1, -1) : displayName;
+                const keyword =
+                    displayName.startsWith("'") && displayName.endsWith("'")
+                        ? displayName.slice(1, -1)
+                        : displayName;
                 keywords.push(keyword);
             }
         }
@@ -111,16 +121,14 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
 
 export class HiveSqlSplitListener implements HiveSqlParserListener {
     private _statementContext: StatementContext[] = [];
-    
+
     exitStatement = (ctx: StatementContext) => {
         this._statementContext.push(ctx);
-    }
-
-    enterStatement = (ctx: StatementContext) => {
     };
+
+    enterStatement = (ctx: StatementContext) => {};
 
     get statementsContext() {
         return this._statementContext;
     }
 }
-

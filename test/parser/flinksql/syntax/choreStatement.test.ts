@@ -1,9 +1,9 @@
-import FlinkSQL from "../../../../src/parser/flinksql";
-import { readSQL } from "../../../helper";
+import FlinkSQL from '../../../../src/parser/flinksql';
+import { readSQL } from '../../../helper';
 
 // 综合测试的 sql 不做切割
 const features = {
-    chores: readSQL(__dirname, 'chore.sql')
+    chores: readSQL(__dirname, 'chore.sql'),
 };
 
 describe('FlinkSQL Chore Syntax Tests', () => {

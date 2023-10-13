@@ -1,5 +1,5 @@
-import FlinkSQL from "../../../../src/parser/flinksql";
-import { readSQL } from "../../../helper";
+import FlinkSQL from '../../../../src/parser/flinksql';
+import { readSQL } from '../../../helper';
 
 const features = {
     table: readSQL(__dirname, 'alterTable.sql'),
@@ -26,11 +26,10 @@ describe('FlinkSQL Alter Statements Syntax Tests', () => {
             expect(parser.validate(sql).length).toBe(0);
         });
     });
-    
+
     features.function.forEach((sql) => {
         it(sql, () => {
             expect(parser.validate(sql).length).toBe(0);
         });
     });
 });
-

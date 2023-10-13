@@ -2,7 +2,7 @@ import HiveSQL from '../../../../src/parser/hive';
 import { readSQL } from '../../../helper';
 
 const features = {
-    exports: readSQL(__dirname, 'export.sql')
+    exports: readSQL(__dirname, 'export.sql'),
 };
 
 describe('HiveSQL Export Syntax Tests', () => {
@@ -14,4 +14,3 @@ describe('HiveSQL Export Syntax Tests', () => {
         });
     });
 });
-

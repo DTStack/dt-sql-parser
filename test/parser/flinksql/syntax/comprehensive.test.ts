@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import FlinkSQL from "../../../../src/parser/flinksql";
+import FlinkSQL from '../../../../src/parser/flinksql';
 
 // 综合测试的 sql 不做切割
 const features = {
-    templates: fs.readFileSync(path.join(__dirname, 'fixtures', 'templates.sql'), 'utf-8')
+    templates: fs.readFileSync(path.join(__dirname, 'fixtures', 'templates.sql'), 'utf-8'),
 };
 
 describe('FlinkSQL Comprehensive Tests', () => {
@@ -13,4 +13,3 @@ describe('FlinkSQL Comprehensive Tests', () => {
         expect(parser.validate(features.templates).length).toBe(0);
     });
 });
-
