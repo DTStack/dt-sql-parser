@@ -195,23 +195,6 @@ export default abstract class BasicParser<
     }
 
     /**
-     * It convert tree to string, it's convenient to use in unit test.
-     * @param string input
-     */
-    public parserTreeToString(input: string): string {
-        this.parse(input);
-        return this._parserTree.toStringTree(this._parser.ruleNames);
-    }
-
-    /**
-     * Get List-like style tree string
-     * @param parserTree ProgramRuleContext
-     */
-    public toString(parserTree: PRC): string {
-        return parserTree.toStringTree(this._parser.ruleNames);
-    }
-
-    /**
      * @param listener Listener instance extends ParserListener
      * @param parserTree parser Tree
      */
