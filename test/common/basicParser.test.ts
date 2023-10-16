@@ -16,7 +16,7 @@ describe('BasicParser unit tests', () => {
         const sql = '袋鼠云数栈UED团队';
         const errors: any[] = [];
         const errorHandler: ErrorHandler<any> = (err) => {
-            errors.push(err)
+            errors.push(err);
         };
         const lexer = flinkParser.createLexer(sql, errorHandler);
         const tokenStream = new CommonTokenStream(lexer);
@@ -103,27 +103,30 @@ describe('BasicParser unit tests', () => {
     });
 
     test('Split sql', () => {
-        const sql = 'SHOW TABLES;\nSELECT * FROM tb;'
+        const sql = 'SHOW TABLES;\nSELECT * FROM tb;';
         const sqlSlices = flinkParser.splitSQLByStatement(sql);
 
         expect(sqlSlices.length).toBe(2);
 
         expect(sqlSlices[0].text).toBe('SHOW TABLES;');
-        expect(sql.slice(sqlSlices[0].startIndex, sqlSlices[0].endIndex+1)).toBe(sqlSlices[0].text);
+        expect(sql.slice(sqlSlices[0].startIndex, sqlSlices[0].endIndex + 1)).toBe(
+            sqlSlices[0].text
+        );
         expect(sqlSlices[0].startLine).toBe(1);
         expect(sqlSlices[0].endLine).toBe(1);
 
         expect(sqlSlices[1].text).toBe('SELECT * FROM tb;');
-        expect(sql.slice(sqlSlices[1].startIndex, sqlSlices[1].endIndex+1)).toBe(sqlSlices[1].text);
+        expect(sql.slice(sqlSlices[1].startIndex, sqlSlices[1].endIndex + 1)).toBe(
+            sqlSlices[1].text
+        );
         expect(sqlSlices[1].startLine).toBe(2);
         expect(sqlSlices[1].endLine).toBe(2);
     });
 
     test('Split sql with errors', () => {
-        const sql = 'SHOW TABLES;\nSELECT * FOM tb;'
+        const sql = 'SHOW TABLES;\nSELECT * FOM tb;';
         const sqlSlices = flinkParser.splitSQLByStatement(sql);
 
         expect(sqlSlices).toBeNull();
     });
-
 });

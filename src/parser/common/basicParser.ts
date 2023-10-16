@@ -50,7 +50,6 @@ export default abstract class BasicParser<
         this._parseErrors.push(error);
     };
 
-
     /**
      * PreferredRules for antlr4-c3
      */
@@ -94,7 +93,7 @@ export default abstract class BasicParser<
     public createLexer(input: string, errorListener?: ErrorHandler<any>) {
         const charStreams = CharStreams.fromString(input.toUpperCase());
         const lexer = this.createLexerFormCharStream(charStreams);
-        if(errorListener) {
+        if (errorListener) {
             lexer.removeErrorListeners();
             lexer.addErrorListener(new ParseErrorListener(errorListener));
         }
@@ -110,7 +109,7 @@ export default abstract class BasicParser<
         const tokenStream = new CommonTokenStream(lexer);
         const parser = this.createParserFromTokenStream(tokenStream);
 
-        if(errorListener) {
+        if (errorListener) {
             parser.removeErrorListeners();
             parser.addErrorListener(new ParseErrorListener(errorListener));
         }
@@ -224,8 +223,8 @@ export default abstract class BasicParser<
      * @param input source string
      */
     public splitSQLByStatement(input): TextSlice[] {
-        const errors =  this.validate(input);
-        if(errors.length) {
+        const errors = this.validate(input);
+        if (errors.length) {
             return null;
         }
         const splitListener = this.splitListener;
