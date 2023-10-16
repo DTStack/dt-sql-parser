@@ -1,7 +1,10 @@
-import { Token, Recognizer, ParserErrorListener, RecognitionException } from 'antlr4ts';
+import { Token, Recognizer, ANTLRErrorListener, RecognitionException } from 'antlr4ts';
 import { ATNSimulator } from 'antlr4ts/atn/ATNSimulator';
 
-export interface ParserError {
+/**
+ * Converted from {@link SyntaxError}.
+ */
+export interface ParseError {
     startLine: number;
     endLine: number;
     startCol: number;
@@ -9,6 +12,9 @@ export interface ParserError {
     message: string;
 }
 
+/**
+ * The type of error resulting from lexical parsing and parsing.
+ */
 export interface SyntaxError<T> {
     recognizer: Recognizer<T, ATNSimulator>;
     offendingSymbol: Token;
@@ -18,9 +24,13 @@ export interface SyntaxError<T> {
     e: RecognitionException;
 }
 
-export type ErrorHandler<T> = (err: ParserError, originalError: SyntaxError<T>) => void;
+/**
+ * ErrorHandler will be invoked when it encounters a parsing error.
+ * Includes lexical errors and parsing errors.
+ */
+export type ErrorHandler<T> = (parseError: ParseError, originalError: SyntaxError<T>) => void;
 
-export default class CustomParserErrorListener implements ParserErrorListener {
+export default class ParseErrorListener implements ANTLRErrorListener<Token> {
     private _errorHandler;
 
     constructor(errorListener: ErrorHandler<Token>) {

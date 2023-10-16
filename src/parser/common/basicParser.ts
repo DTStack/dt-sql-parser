@@ -17,7 +17,7 @@ import {
     WordRange,
     TextSlice,
 } from './basic-parser-types';
-import ParserErrorListener, { ParserError, ErrorHandler } from './parserErrorListener';
+import ParseErrorListener, { ParseError, ErrorHandler } from './parseErrorListener';
 
 interface IParser<IParserRuleContext extends ParserRuleContext> extends Parser {
     // Customized in our parser
@@ -43,7 +43,7 @@ export default abstract class BasicParser<
     protected _parser: P;
     protected _parseTree: PRC;
     protected _parsedInput: string = null;
-    protected _parseErrors: ParserError[];
+    protected _parseErrors: ParseError[];
     /** members for cache end */
 
     private _errorHandler: ErrorHandler<any> = (error) => {
@@ -97,7 +97,7 @@ export default abstract class BasicParser<
         const lexer = this.createLexerFormCharStream(charStreams);
         if(errorListener) {
             lexer.removeErrorListeners();
-            lexer.addErrorListener(new ParserErrorListener(this._errorHandler));
+            lexer.addErrorListener(new ParseErrorListener(this._errorHandler));
         }
         return lexer;
     }
@@ -113,14 +113,14 @@ export default abstract class BasicParser<
 
         if(errorListener) {
             parser.removeErrorListeners();
-            parser.addErrorListener(new ParserErrorListener(this._errorHandler));
+            parser.addErrorListener(new ParseErrorListener(this._errorHandler));
         }
 
         return parser;
     }
 
     /**
-     * parse input string and return parseTree.
+     * Parse input string and return parseTree.
      * @param input string
      * @param errorListener listen parse errors and lexer errors.
      * @returns parseTree
@@ -143,7 +143,7 @@ export default abstract class BasicParser<
         this._lexer = this.createLexerFormCharStream(this._charStreams);
 
         this._lexer.removeErrorListeners();
-        this._lexer.addErrorListener(new ParserErrorListener(this._errorHandler));
+        this._lexer.addErrorListener(new ParseErrorListener(this._errorHandler));
 
         this._tokenStream = new CommonTokenStream(this._lexer);
         /**
@@ -177,7 +177,7 @@ export default abstract class BasicParser<
         this._parsedInput = input;
 
         parser.removeErrorListeners();
-        parser.addErrorListener(new ParserErrorListener(this._errorHandler));
+        parser.addErrorListener(new ParseErrorListener(this._errorHandler));
 
         this._parseTree = parser.program();
 
@@ -189,7 +189,7 @@ export default abstract class BasicParser<
      * @param input source string
      * @returns syntax errors
      */
-    public validate(input: string): ParserError[] {
+    public validate(input: string): ParseError[] {
         this.parseWithCache(input);
         return this._parseErrors;
     }
@@ -225,7 +225,10 @@ export default abstract class BasicParser<
      * @param input source string
      */
     public splitSQLByStatement(input): TextSlice[] {
-        this.parseWithCache(input);
+        const errors =  this.validate(input);
+        if(errors.length) {
+            return null;
+        }
         const splitListener = this.splitListener;
         // TODO: add splitListener to all sqlParser implements add remove following if
         if (!splitListener) return null;
