@@ -92,10 +92,13 @@ export default abstract class BasicParser<
      * Create an antlr4 lexer from input.
      * @param input string
      */
-    public createLexer(input: string) {
+    public createLexer(input: string, errorListener?: ErrorHandler<any>) {
         const charStreams = CharStreams.fromString(input.toUpperCase());
         const lexer = this.createLexerFormCharStream(charStreams);
-
+        if(errorListener) {
+            lexer.removeErrorListeners();
+            lexer.addErrorListener(new ParserErrorListener(this._errorHandler));
+        }
         return lexer;
     }
 
@@ -103,11 +106,30 @@ export default abstract class BasicParser<
      * Create an antlr4 parser from input.
      * @param input string
      */
-    public createParser(input: string) {
-        const lexer = this.createLexer(input);
+    public createParser(input: string, errorListener?: ErrorHandler<any>) {
+        const lexer = this.createLexer(input, errorListener);
         const tokenStream = new CommonTokenStream(lexer);
         const parser = this.createParserFromTokenStream(tokenStream);
+
+        if(errorListener) {
+            parser.removeErrorListeners();
+            parser.addErrorListener(new ParserErrorListener(this._errorHandler));
+        }
+
         return parser;
+    }
+
+    /**
+     * parse input string and return parseTree.
+     * @param input string
+     * @param errorListener listen parse errors and lexer errors.
+     * @returns parserTree
+     */
+    public parse(input: string, errorListener?: ErrorHandler<any>) {
+        const parser = this.createParser(input, errorListener);
+        parser.buildParseTree = true;
+
+        return parser.program();
     }
 
     /**
@@ -115,17 +137,13 @@ export default abstract class BasicParser<
      * And the instances will be cache.
      * @param input string
      */
-    private createParserWithCache(input: string, errorListener?: ErrorHandler<any>): P {
+    private createParserWithCache(input: string): P {
         this._parserTree = null;
         this._charStreams = CharStreams.fromString(input.toUpperCase());
         this._lexer = this.createLexerFormCharStream(this._charStreams);
 
         this._lexer.removeErrorListeners();
-        if (errorListener) {
-            this._lexer.addErrorListener(new ParserErrorListener(errorListener));
-        } else {
-            this._lexer.addErrorListener(new ParserErrorListener(this._errorHandler));
-        }
+        this._lexer.addErrorListener(new ParserErrorListener(this._errorHandler));
 
         this._tokenStream = new CommonTokenStream(this._lexer);
         /**
@@ -147,23 +165,19 @@ export default abstract class BasicParser<
      * unless the errorListener parameter is passed.
      * @param input source string
      * @param errorListener listen errors
-     * @returns parserTree
+     * @returns parseTree
      */
-    public parse(input: string, errorListener?: ErrorHandler<any>) {
+    private parseWithCache(input: string, errorListener?: ErrorHandler<any>) {
         // Avoid parsing the same input repeatedly.
         if (this._parsedInput === input && !errorListener) {
             return this._parserTree;
         }
         this._parseErrors = [];
-        const parser = this.createParserWithCache(input, errorListener ?? this._errorHandler);
+        const parser = this.createParserWithCache(input);
         this._parsedInput = input;
 
         parser.removeErrorListeners();
-        if (errorListener) {
-            parser.addErrorListener(new ParserErrorListener(errorListener));
-        } else {
-            parser.addErrorListener(new ParserErrorListener(this._errorHandler));
-        }
+        parser.addErrorListener(new ParserErrorListener(this._errorHandler));
 
         this._parserTree = parser.program();
 
@@ -176,7 +190,7 @@ export default abstract class BasicParser<
      * @returns syntax errors
      */
     public validate(input: string): ParserError[] {
-        this.parse(input);
+        this.parseWithCache(input);
         return this._parseErrors;
     }
 
@@ -186,7 +200,7 @@ export default abstract class BasicParser<
      * @returns Token[]
      */
     public getAllTokens(input: string): Token[] {
-        this.parse(input);
+        this.parseWithCache(input);
         let allTokens = this._tokenStream.getTokens();
         if (allTokens[allTokens.length - 1].text === '<EOF>') {
             allTokens = allTokens.slice(0, -1);
@@ -211,7 +225,7 @@ export default abstract class BasicParser<
      * @param input source string
      */
     public splitSQLByStatement(input): TextSlice[] {
-        this.parse(input);
+        this.parseWithCache(input);
         const splitListener = this.splitListener;
         // TODO: add splitListener to all sqlParser implements add remove following if
         if (!splitListener) return null;
@@ -248,7 +262,7 @@ export default abstract class BasicParser<
         // TODO: add splitListener to all sqlParser implements add remove following if
         if (!splitListener) return null;
 
-        this.parse(input);
+        this.parseWithCache(input);
         let sqlParserIns = this._parser;
         const allTokens = this.getAllTokens(input);
         let caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
@@ -295,11 +309,14 @@ export default abstract class BasicParser<
 
                     const inputSlice = input.slice(lastStatementToken.startIndex);
                     const lexer = this.createLexer(inputSlice);
+                    lexer.removeErrorListeners();
+
                     const tokenStream = new CommonTokenStream(lexer);
                     tokenStream.fill();
                     const parser = this.createParserFromTokenStream(tokenStream);
                     parser.removeErrorListeners();
                     parser.buildParseTree = true;
+
                     sqlParserIns = parser;
                     c3Context = parser.program();
                 }
