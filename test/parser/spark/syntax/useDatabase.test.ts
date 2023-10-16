@@ -7,7 +7,7 @@ const features = {
     useDatabase: readSQL(__dirname, 'useDatabase.sql'),
 };
 
-describe('SparkSQL Insert Syntax Tests', () => {
+describe('SparkSQL Use Database Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {

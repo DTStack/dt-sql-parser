@@ -7,7 +7,7 @@ const features = {
     loadData: readSQL(__dirname, 'loadData.sql'),
 };
 
-describe('SparkSQL Insert Syntax Tests', () => {
+describe('SparkSQL Load Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {

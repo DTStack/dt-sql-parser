@@ -7,7 +7,7 @@ const features = {
     set: readSQL(__dirname, 'set.sql'),
 };
 
-describe('Spark set Syntax Tests', () => {
+describe('Spark Set Syntax Tests', () => {
     features.set.forEach((itemSql) => {
         it(itemSql, () => {
             expect(parser.validate(itemSql).length).toBe(0);

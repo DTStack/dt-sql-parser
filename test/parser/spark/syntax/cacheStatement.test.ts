@@ -7,7 +7,7 @@ const features = {
     cache: readSQL(__dirname, 'cache.sql'),
 };
 
-describe('Spark cache Syntax Tests', () => {
+describe('Spark Cache Syntax Tests', () => {
     features.cache.forEach((itemSql) => {
         it(itemSql, () => {
             expect(parser.validate(itemSql).length).toBe(0);

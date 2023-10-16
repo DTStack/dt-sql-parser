@@ -7,7 +7,7 @@ const features = {
     refresh: readSQL(__dirname, 'refresh.sql'),
 };
 
-describe('Spark refresh Syntax Tests', () => {
+describe('Spark Refresh Syntax Tests', () => {
     features.refresh.forEach((itemSql) => {
         it(itemSql, () => {
             expect(parser.validate(itemSql).length).toBe(0);

@@ -5,7 +5,7 @@ import HiveSQL from '../../../../src/parser/hive';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
-describe('Hive SQL Syntax Suggestion', () => {
+describe('Hive SQL Token Suggestion', () => {
     const parser = new HiveSQL();
 
     test('After ALTER', () => {

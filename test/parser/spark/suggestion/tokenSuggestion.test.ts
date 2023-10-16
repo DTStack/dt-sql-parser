@@ -5,7 +5,7 @@ import SparkSQL from '../../../../src/parser/spark';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
-describe('Spark SQL Syntax Suggestion', () => {
+describe('Spark SQL Token Suggestion', () => {
     const parser = new SparkSQL();
 
     test('After ALTER', () => {

@@ -9,7 +9,7 @@ const features = {
     alertView: readSQL(__dirname, 'alertView.sql'),
 };
 
-describe('SparkSQL Insert Syntax Tests', () => {
+describe('SparkSQL Alert Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {

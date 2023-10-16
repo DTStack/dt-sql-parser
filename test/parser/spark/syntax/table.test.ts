@@ -12,7 +12,7 @@ const features = {
     truncateTable: readSQL(__dirname, 'truncateTable.sql'),
 };
 
-describe('SparkSQL Insert Syntax Tests', () => {
+describe('SparkSQL About Table Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {
