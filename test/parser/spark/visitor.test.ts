@@ -7,7 +7,7 @@ describe('Spark SQL Visitor Tests', () => {
     const sql = `select id,name,sex from ${expectTableName};`;
     const parser = new SparkSQL();
 
-    const parserTree = parser.parse(sql, (error) => {
+    const parseTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);
     });
 
@@ -25,7 +25,7 @@ describe('Spark SQL Visitor Tests', () => {
             };
         }
         const visitor = new MyVisitor();
-        visitor.visit(parserTree);
+        visitor.visit(parseTree);
 
         expect(visitor.result).toBe(expectTableName);
     });

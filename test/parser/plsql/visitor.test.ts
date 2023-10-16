@@ -7,7 +7,7 @@ describe('PLSQL Visitor Tests', () => {
     const sql = `select id,name,sex from ${expectTableName};`;
     const parser = new PLSQL();
 
-    const parserTree = parser.parse(sql);
+    const parseTree = parser.parse(sql);
 
     test('Visitor visitTable_ref_list', () => {
         let result = '';
@@ -20,7 +20,7 @@ describe('PLSQL Visitor Tests', () => {
             };
         }
         const visitor: any = new MyVisitor();
-        visitor.visit(parserTree);
+        visitor.visit(parseTree);
 
         expect(result).toBe(expectTableName);
     });

@@ -8,7 +8,7 @@ describe('Flink SQL Listener Tests', () => {
     const sql = `select id,name,sex from ${expectTableName};`;
     const parser = new FlinkSQL();
 
-    const parserTree = parser.parse(sql);
+    const parseTree = parser.parse(sql);
 
     test('Listener enterTableName', async () => {
         let result = '';
@@ -19,7 +19,7 @@ describe('Flink SQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parserTree);
+        await parser.listen(listenTableName as ParseTreeListener, parseTree);
         expect(result).toBe(expectTableName);
     });
 });
