@@ -8,7 +8,7 @@ describe('HiveSQL Visitor Tests', () => {
     const sql = `select citycode,tc,inc_day from ${expectTableName} where inc_day='20190501' limit 100;`;
     const parser = new HiveSQL();
 
-    const parserTree = parser.parse(sql, (error) => {
+    const parseTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);
     });
 
@@ -25,7 +25,7 @@ describe('HiveSQL Visitor Tests', () => {
         }
 
         const visitor = new MyVisitor();
-        visitor.visit(parserTree as ProgramContext);
+        visitor.visit(parseTree as ProgramContext);
 
         expect(result).toBe(expectTableName);
     });

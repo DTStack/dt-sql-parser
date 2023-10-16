@@ -71,10 +71,13 @@ export interface Suggestions<T = WordRange> {
 }
 
 export interface TextSlice {
+    /** start at 0 */
     startIndex: number;
     endIndex: number;
+    /** start at 1 */
     startLine: number;
     endLine: number;
+    /** start at 1 */
     startColumn: number;
     endColumn: number;
     text: string;

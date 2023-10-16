@@ -7,7 +7,7 @@ describe('Spark SQL Listener Tests', () => {
     const sql = `select id,name,sex from ${expectTableName};`;
     const parser = new SparkSQL();
 
-    const parserTree = parser.parse(sql);
+    const parseTree = parser.parse(sql);
 
     test('Listener exitRelationPrimary', () => {
         let result = '';
@@ -18,7 +18,7 @@ describe('Spark SQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        parser.listen(listenTableName as ParseTreeListener, parserTree);
+        parser.listen(listenTableName as ParseTreeListener, parseTree);
         expect(result).toBe(expectTableName);
     });
 });

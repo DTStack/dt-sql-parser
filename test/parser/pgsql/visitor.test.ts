@@ -7,7 +7,7 @@ describe('Generic SQL Visitor Tests', () => {
     const sql = `select id,name,sex from ${expectTableName};`;
     const parser = new PostgresSQL();
 
-    const parserTree = parser.parse(sql, (error) => {
+    const parseTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);
     });
 
@@ -26,7 +26,7 @@ describe('Generic SQL Visitor Tests', () => {
             }
         }
         const visitor: any = new MyVisitor();
-        visitor.visit(parserTree);
+        visitor.visit(parseTree);
 
         expect(result).toBe(expectTableName);
     });

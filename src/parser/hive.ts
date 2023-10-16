@@ -1,13 +1,7 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
 import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
-import {
-    HiveSqlParser,
-    ProgramContext,
-    StatementContext,
-    ExplainStatementContext,
-    ExecStatementContext,
-} from '../lib/hive/HiveSqlParser';
+import { HiveSqlParser, ProgramContext, StatementContext } from '../lib/hive/HiveSqlParser';
 import BasicParser from './common/basicParser';
 import { HiveSqlParserListener } from '../lib/hive/HiveSqlParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';

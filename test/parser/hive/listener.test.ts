@@ -8,7 +8,7 @@ describe('HiveSQL Listener Tests', () => {
     test('Listener enterSelectList', async () => {
         const expectTableName = 'username';
         const sql = `select ${expectTableName} from tablename where inc_day='20190601' limit 1000;`;
-        const parserTree = parser.parse(sql);
+        const parseTree = parser.parse(sql);
 
         let result = '';
         class MyListener implements HiveSqlParserListener {
@@ -18,12 +18,12 @@ describe('HiveSQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parserTree as ProgramContext);
+        await parser.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
         expect(result).toBe(expectTableName.toUpperCase());
     });
     test('Listener enterCreateTable', async () => {
         const sql = `drop table table_name;`;
-        const parserTree = parser.parse(sql);
+        const parseTree = parser.parse(sql);
         let result = '';
         class MyListener implements HiveSqlParserListener {
             enterDropTableStatement(ctx) {
@@ -32,7 +32,7 @@ describe('HiveSQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parserTree as ProgramContext);
+        await parser.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
         expect(result).toBe('DROPTABLETABLE_NAME');
     });
 });
