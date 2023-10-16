@@ -214,7 +214,7 @@ export default abstract class BasicParser<
         this.parse(input);
         const splitListener = this.splitListener;
         // TODO: add splitListener to all sqlParser implements add remove following if
-        if (splitListener) return null;
+        if (!splitListener) return null;
 
         this.listen(splitListener, this._parserTree);
 
