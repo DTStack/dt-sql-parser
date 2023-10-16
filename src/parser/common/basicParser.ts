@@ -43,11 +43,10 @@ export default abstract class BasicParser<
     protected _parser: P;
     protected _parseTree: PRC;
     protected _parsedInput: string = null;
-    protected _parseErrors: ParseError[];
+    protected _parseErrors: ParseError[] = [];
     /** members for cache end */
 
     private _errorHandler: ErrorHandler<any> = (error) => {
-        debugger;
         this._parseErrors.push(error);
     };
 
@@ -97,7 +96,7 @@ export default abstract class BasicParser<
         const lexer = this.createLexerFormCharStream(charStreams);
         if(errorListener) {
             lexer.removeErrorListeners();
-            lexer.addErrorListener(new ParseErrorListener(this._errorHandler));
+            lexer.addErrorListener(new ParseErrorListener(errorListener));
         }
         return lexer;
     }
@@ -113,7 +112,7 @@ export default abstract class BasicParser<
 
         if(errorListener) {
             parser.removeErrorListeners();
-            parser.addErrorListener(new ParseErrorListener(this._errorHandler));
+            parser.addErrorListener(new ParseErrorListener(errorListener));
         }
 
         return parser;
