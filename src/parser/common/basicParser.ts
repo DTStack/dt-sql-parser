@@ -41,7 +41,7 @@ export default abstract class BasicParser<
     protected _lexer: L;
     protected _tokenStream: CommonTokenStream;
     protected _parser: P;
-    protected _parserTree: PRC;
+    protected _parseTree: PRC;
     protected _parsedInput: string = null;
     protected _parseErrors: ParserError[];
     /** members for cache end */
@@ -123,7 +123,7 @@ export default abstract class BasicParser<
      * parse input string and return parseTree.
      * @param input string
      * @param errorListener listen parse errors and lexer errors.
-     * @returns parserTree
+     * @returns parseTree
      */
     public parse(input: string, errorListener?: ErrorHandler<any>) {
         const parser = this.createParser(input, errorListener);
@@ -138,7 +138,7 @@ export default abstract class BasicParser<
      * @param input string
      */
     private createParserWithCache(input: string): P {
-        this._parserTree = null;
+        this._parseTree = null;
         this._charStreams = CharStreams.fromString(input.toUpperCase());
         this._lexer = this.createLexerFormCharStream(this._charStreams);
 
@@ -170,7 +170,7 @@ export default abstract class BasicParser<
     private parseWithCache(input: string, errorListener?: ErrorHandler<any>) {
         // Avoid parsing the same input repeatedly.
         if (this._parsedInput === input && !errorListener) {
-            return this._parserTree;
+            return this._parseTree;
         }
         this._parseErrors = [];
         const parser = this.createParserWithCache(input);
@@ -179,9 +179,9 @@ export default abstract class BasicParser<
         parser.removeErrorListeners();
         parser.addErrorListener(new ParserErrorListener(this._errorHandler));
 
-        this._parserTree = parser.program();
+        this._parseTree = parser.program();
 
-        return this._parserTree;
+        return this._parseTree;
     }
 
     /**
@@ -210,13 +210,13 @@ export default abstract class BasicParser<
 
     /**
      * @param listener Listener instance extends ParserListener
-     * @param parserTree parser Tree
+     * @param parseTree parser Tree
      */
     public listen<PTL extends ParseTreeListener = ParseTreeListener>(
         listener: PTL,
-        parserTree: PRC
+        parseTree: PRC
     ) {
-        ParseTreeWalker.DEFAULT.walk(listener, parserTree);
+        ParseTreeWalker.DEFAULT.walk(listener, parseTree);
     }
 
     /**
@@ -230,7 +230,7 @@ export default abstract class BasicParser<
         // TODO: add splitListener to all sqlParser implements add remove following if
         if (!splitListener) return null;
 
-        this.listen(splitListener, this._parserTree);
+        this.listen(splitListener, this._parseTree);
 
         const res = splitListener.statementsContext.map((context) => {
             const { start, stop } = context;
@@ -266,7 +266,7 @@ export default abstract class BasicParser<
         let sqlParserIns = this._parser;
         const allTokens = this.getAllTokens(input);
         let caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
-        let c3Context: ParserRuleContext = this._parserTree;
+        let c3Context: ParserRuleContext = this._parseTree;
         let tokenIndexOffset: number = 0;
 
         if (!caretTokenIndex && caretTokenIndex !== 0) return null;
@@ -275,7 +275,7 @@ export default abstract class BasicParser<
          * Split sql by statement.
          * Try to collect candidates from the caret statement only.
          */
-        this.listen(splitListener, this._parserTree);
+        this.listen(splitListener, this._parseTree);
 
         // If there are multiple statements.
         if (splitListener.statementsContext.length > 1) {
@@ -296,7 +296,7 @@ export default abstract class BasicParser<
                 /**
                  * If caretStatementContext is not found and it follows all statements.
                  * Reparses part of the input following the penultimate statement.
-                 * And c3 will collect candidates in the new parserTreeContext.
+                 * And c3 will collect candidates in the new parseTreeContext.
                  */
                 if (caretTokenIndex > lastStatementToken?.tokenIndex) {
                     /**
