@@ -104,11 +104,11 @@ statement
     | KW_ALTER KW_TABLE tableName
         KW_DROP (KW_COLUMN | KW_COLUMNS) (ifExists)?
         multipartIdentifierList
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName)
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
         KW_RENAME KW_TO multipartIdentifier
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName)
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
         KW_SET KW_TBLPROPERTIES propertyList
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName)
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
         KW_UNSET KW_TBLPROPERTIES (ifExists)? propertyList
     | KW_ALTER KW_TABLE table=tableName
         (KW_ALTER | KW_CHANGE) KW_COLUMN? column=multipartIdentifier
@@ -124,11 +124,11 @@ statement
         KW_SET KW_SERDE stringLit (KW_WITH KW_SERDEPROPERTIES propertyList)?
     | KW_ALTER KW_TABLE tableName (partitionSpec)?
         KW_SET KW_SERDEPROPERTIES propertyList
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName) KW_ADD (ifNotExists)?
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_ADD (ifNotExists)?
         partitionSpecLocation+
     | KW_ALTER KW_TABLE tableName
         partitionSpec KW_RENAME KW_TO partitionSpec
-    | KW_ALTER (KW_TABLE | KW_VIEW) (tableName | viewName)
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
         KW_DROP (ifExists)? partitionSpec (COMMA partitionSpec)* KW_PURGE?
     | KW_ALTER KW_TABLE tableName
         (partitionSpec)? KW_SET locationSpec
