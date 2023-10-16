@@ -18,51 +18,7 @@ export interface SyntaxError<T> {
     e: RecognitionException;
 }
 
-export type ErrorHandler<T> = (err: ParserError, errOption: SyntaxError<T>) => void;
-
-export class ParserErrorCollector implements ParserErrorListener {
-    private _parseErrors: ParserError[] = [];
-    private _syntaxErrors: SyntaxError<Token>[] = [];
-
-    syntaxError(
-        recognizer: Recognizer<Token, ATNSimulator>,
-        offendingSymbol: Token,
-        line: number,
-        charPositionInLine: number,
-        msg: string,
-        e: RecognitionException
-    ) {
-        let endCol = charPositionInLine + 1;
-        if (offendingSymbol && offendingSymbol.text !== null) {
-            endCol = charPositionInLine + (offendingSymbol.text?.length ?? 0);
-        }
-        this._parseErrors.push({
-            startLine: line,
-            endLine: line,
-            startCol: charPositionInLine,
-            endCol: endCol,
-            message: msg,
-        });
-
-        this._syntaxErrors.push({
-            e,
-            line,
-            msg,
-            recognizer,
-            offendingSymbol,
-            charPositionInLine,
-        });
-    }
-
-    clear() {
-        this._parseErrors = [];
-        this._syntaxErrors = [];
-    }
-
-    get parserErrors() {
-        return this._parseErrors;
-    }
-}
+export type ErrorHandler<T> = (err: ParserError, originalError: SyntaxError<T>) => void;
 
 export default class CustomParserErrorListener implements ParserErrorListener {
     private _errorHandler;
@@ -73,7 +29,7 @@ export default class CustomParserErrorListener implements ParserErrorListener {
 
     syntaxError(
         recognizer: Recognizer<Token, ATNSimulator>,
-        offendingSymbol: Token,
+        offendingSymbol,
         line: number,
         charPositionInLine: number,
         msg: string,

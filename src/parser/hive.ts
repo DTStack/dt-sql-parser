@@ -5,8 +5,6 @@ import {
     HiveSqlParser,
     ProgramContext,
     StatementContext,
-    ExplainStatementContext,
-    ExecStatementContext,
 } from '../lib/hive/HiveSqlParser';
 import BasicParser from './common/basicParser';
 import { HiveSqlParserListener } from '../lib/hive/HiveSqlParserListener';

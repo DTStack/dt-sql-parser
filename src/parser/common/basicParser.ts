@@ -17,11 +17,7 @@ import {
     WordRange,
     TextSlice,
 } from './basic-parser-types';
-import ParserErrorListener, {
-    ParserError,
-    ErrorHandler,
-    ParserErrorCollector,
-} from './parserErrorListener';
+import ParserErrorListener, { ParserError, ErrorHandler } from './parserErrorListener';
 
 interface IParser<IParserRuleContext extends ParserRuleContext> extends Parser {
     // Customized in our parser
@@ -40,13 +36,21 @@ export default abstract class BasicParser<
     PRC extends ParserRuleContext = ParserRuleContext,
     P extends IParser<PRC> = IParser<PRC>,
 > {
+    /** members for cache start */
     protected _charStreams: CodePointCharStream;
     protected _lexer: L;
     protected _tokenStream: CommonTokenStream;
     protected _parser: P;
     protected _parserTree: PRC;
-    protected _errorCollector: ParserErrorCollector = new ParserErrorCollector();
     protected _parsedInput: string = null;
+    protected _parseErrors: ParserError[];
+    /** members for cache end */
+
+    private _errorHandler: ErrorHandler<any> = (error) => {
+        debugger;
+        this._parseErrors.push(error);
+    };
+
 
     /**
      * PreferredRules for antlr4-c3
@@ -54,7 +58,7 @@ export default abstract class BasicParser<
     protected abstract preferredRules: Set<number>;
 
     /**
-     * Create a antrl4 Lexer instance
+     * Create a antlr4 Lexer instance.
      * @param input source string
      */
     protected abstract createLexerFormCharStream(charStreams: CodePointCharStream): L;
@@ -70,8 +74,7 @@ export default abstract class BasicParser<
      * @param candidates candidate list
      * @param allTokens all tokens from input
      * @param caretTokenIndex tokenIndex of caretPosition
-     * @param tokenIndexOffset offset of the tokenIndex in the candidates
-     * compared to the tokenIndex in allTokens
+     * @param tokenIndexOffset offset of the tokenIndex in the candidates compared to the tokenIndex in allTokens
      */
     protected abstract processCandidates(
         candidates: CandidatesCollection,
@@ -86,7 +89,7 @@ export default abstract class BasicParser<
     protected abstract get splitListener(): SplitListener;
 
     /**
-     * Create an anltr4 lexer from input.
+     * Create an antlr4 lexer from input.
      * @param input string
      */
     public createLexer(input: string) {
@@ -97,7 +100,7 @@ export default abstract class BasicParser<
     }
 
     /**
-     * Create an anltr4 parser from input.
+     * Create an antlr4 parser from input.
      * @param input string
      */
     public createParser(input: string) {
@@ -108,16 +111,28 @@ export default abstract class BasicParser<
     }
 
     /**
-     * Create an anltr4 parser from input.
+     * Create an antlr4 parser from input.
      * And the instances will be cache.
      * @param input string
      */
-    protected createParserWithCache(input: string): P {
+    private createParserWithCache(input: string, errorListener?: ErrorHandler<any>): P {
         this._parserTree = null;
         this._charStreams = CharStreams.fromString(input.toUpperCase());
         this._lexer = this.createLexerFormCharStream(this._charStreams);
 
+        this._lexer.removeErrorListeners();
+        if (errorListener) {
+            this._lexer.addErrorListener(new ParserErrorListener(errorListener));
+        } else {
+            this._lexer.addErrorListener(new ParserErrorListener(this._errorHandler));
+        }
+
         this._tokenStream = new CommonTokenStream(this._lexer);
+        /**
+         * All tokens are generated in advance.
+         * This can cause performance degradation, but it seems necessary for now.
+         * Because the tokens will be used multiple times.
+         */
         this._tokenStream.fill();
 
         this._parser = this.createParserFromTokenStream(this._tokenStream);
@@ -139,16 +154,15 @@ export default abstract class BasicParser<
         if (this._parsedInput === input && !errorListener) {
             return this._parserTree;
         }
-
-        const parser = this.createParserWithCache(input);
+        this._parseErrors = [];
+        const parser = this.createParserWithCache(input, errorListener ?? this._errorHandler);
         this._parsedInput = input;
 
         parser.removeErrorListeners();
-        this._errorCollector.clear();
-
-        parser.addErrorListener(this._errorCollector);
         if (errorListener) {
             parser.addErrorListener(new ParserErrorListener(errorListener));
+        } else {
+            parser.addErrorListener(new ParserErrorListener(this._errorHandler));
         }
 
         this._parserTree = parser.program();
@@ -163,12 +177,11 @@ export default abstract class BasicParser<
      */
     public validate(input: string): ParserError[] {
         this.parse(input);
-        const lexerError = [];
-        return lexerError.concat(this._errorCollector.parserErrors);
+        return this._parseErrors;
     }
 
     /**
-     * Get all Tokens of input string，'<EOF>' is not included
+     * Get all Tokens of input string，'<EOF>' is not included.
      * @param input source string
      * @returns Token[]
      */
@@ -180,6 +193,7 @@ export default abstract class BasicParser<
         }
         return allTokens;
     }
+
     /**
      * It convert tree to string, it's convenient to use in unit test.
      * @param string input
@@ -216,6 +230,9 @@ export default abstract class BasicParser<
     public splitSQLByStatement(input): TextSlice[] {
         this.parse(input);
         const splitListener = this.splitListener;
+        // TODO: add splitListener to all sqlParser implements add remove following if
+        if (splitListener) return null;
+
         this.listen(splitListener, this._parserTree);
 
         const res = splitListener.statementsContext.map((context) => {
