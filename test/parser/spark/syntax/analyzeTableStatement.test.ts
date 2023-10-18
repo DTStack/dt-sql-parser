@@ -7,7 +7,7 @@ const features = {
     analyzeTable: readSQL(__dirname, 'analyzeTable.sql'),
 };
 
-describe('Spark analyzeTable Syntax Tests', () => {
+describe('Spark Analyze Table Syntax Tests', () => {
     features.analyzeTable.forEach((itemSql) => {
         it(itemSql, () => {
             expect(parser.validate(itemSql).length).toBe(0);

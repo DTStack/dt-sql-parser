@@ -9,7 +9,7 @@ const features = {
     createView: readSQL(__dirname, 'createView.sql'),
 };
 
-describe('SparkSQL Insert Syntax Tests', () => {
+describe('SparkSQL Create Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {

@@ -31,7 +31,7 @@ const features = {
     selectDistributeBy: readSQL(__dirname, 'selectDistributeBy.sql'),
     selectClusterBy: readSQL(__dirname, 'selectClusterBy.sql'),
 };
-describe('Spark select Syntax Tests', () => {
+describe('Spark Select Syntax Tests', () => {
     features.selectAggregateFn.forEach((itemSql) => {
         it(itemSql, () => {
             expect(parser.validate(itemSql).length).toBe(0);

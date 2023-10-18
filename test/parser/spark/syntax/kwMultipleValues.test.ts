@@ -12,7 +12,7 @@ const features = {
     kwMultipleValues: readSQL(__dirname, 'kwMultipleValues.sql'),
 };
 
-describe('SparkSQL Insert Syntax Tests', () => {
+describe('SparkSQL Keyword Has Multiple Values Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {

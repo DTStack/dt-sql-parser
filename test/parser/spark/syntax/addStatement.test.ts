@@ -7,7 +7,7 @@ const features = {
     add: readSQL(__dirname, 'add.sql'),
 };
 
-describe('Spark add Syntax Tests', () => {
+describe('Spark Add Syntax Tests', () => {
     features.add.forEach((itemSql) => {
         it(itemSql, () => {
             expect(parser.validate(itemSql).length).toBe(0);
