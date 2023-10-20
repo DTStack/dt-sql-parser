@@ -53,7 +53,7 @@ yarn add dt-sql-parser
 <br/>
 
 ## 使用
-在开始使用前，需要先了解基本的使用方式。`dt-sql-parser` 为不同类型的 SQL分别提供相应的 SQL Parser 类：
+在开始使用前，需要先了解基本用法。`dt-sql-parser` 为不同类型的 SQL 分别提供相应的 SQL Parser 类：
 ```javascript
 import { GenericSQL, FlinkSQL, SparkSQL, HiveSQL, PLSQL, PostgresSQL, TrinoSQL } from 'dt-sql-parser';
 ```
@@ -64,8 +64,6 @@ const parser = new GenericSQL();
 ```
 
 下文中的使用示例将使用 `GenericSQL`，其他 SQL 类型的 Parser 使用方式与`GenericSQL` 相同。
-
-<br/>
 
 ### 语法校验（Syntax Validation）
 ```javascript
@@ -112,8 +110,6 @@ console.log(errors);
 
 先实例化 Parser 对象，然后使用 `validate` 方法对 SQL 语句进行校验，如果校验失败，则返回一个包含 `error` 信息的数组。
 
-<br/>
-
 ### 词法分析（Tokenizer）
 
 必要场景下，可单独对 SQL 语句进行词法分析，获取所有的 Tokens 对象：
@@ -142,8 +138,6 @@ console.log(tokens)
 ]
 */
 ```
-
-<br/>
 
 ### 访问者模式（Visitor）
 
@@ -180,8 +174,6 @@ TableName user1
 
 > 提示：使用 Visitor 模式时，节点的方法名称可以在对应 SQL 目录下的 Visitor 文件中查找
 
-<br/>
-
 ### 监听器（Listener）
 
 Listener 模式，利用 [ANTLR4](https://github.com/antlr/antlr4) 提供的 `ParseTreeWalker` 对象遍历 AST，进入各个节点时调用对应的方法。
@@ -214,8 +206,6 @@ TableName user1
 ```
 
 > 提示：使用 Listener 模式时，节点的方法名称可以在对应 SQL 目录下的 Listener 文件中查找
-
-<br/>
 
 ### SQL 按语句切割
 以 `FlinkSQL` 为例：
@@ -251,9 +241,7 @@ console.log(sqlSlices)
 
 ```
 
-<br/>
-
-### 自动补全（Auto Complete）
+### 自动补全（Code Completion）
 在 sql 的指定位置上获取自动补全信息，以 `FlinkSQL` 为例：
 
 调用 `getSuggestionAtCaretPosition` 方法，传入 sql 内容和需要自动补全的位置的行列号。
@@ -311,8 +299,6 @@ console.log(sqlSlices)
     */
     ```
 语法相关自动补全信息返回一个数组，数组中每一项代表该位置可以填写什么语法，比如上例中的输出结果代表该位置可以填写**表名**或者**视图名称**。其中 `syntaxContextType` 是可以补全的语法类型，`wordRanges` 则是已经填写的内容。
-
-<br/>
 
 ### 其他 API
 
