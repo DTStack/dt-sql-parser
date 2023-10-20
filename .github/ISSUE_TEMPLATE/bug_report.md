@@ -6,9 +6,11 @@ labels: ''
 assignees: ''
 
 ---
+**Version**
+e.g. v3.0.5
 
 **The Type of SQL**
-e.g. Impala
+e.g. SparkSQL | FlinkSQL | HiveSQL | Impala
 
 **Your Code**
 e.g. parser.parserSql(....);
