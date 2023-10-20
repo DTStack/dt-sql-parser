@@ -15,7 +15,7 @@ English | [简体中文](./README-zh_CN.md)
 
 dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
 
-Besides, it provides some helper methods, like **split** SQL, and **Auto-Complete**.
+Additionally, it provides auxiliary functions such as SQL splitting and Auto-Complete.
 
 **Supported SQL**:
 
@@ -27,7 +27,7 @@ Besides, it provides some helper methods, like **split** SQL, and **Auto-Complet
 - PostgreSQL
 - Trino SQL
 
-**Supported helper methods**
+**Supported auxiliary methods**
 
 | SQL Type    | SQL Split | Auto-Complete |
 | ----------- | -------- | -------- |
@@ -63,19 +63,18 @@ yarn add dt-sql-parser
 <br/>
 
 ## Usage
-Before you get started, you need to understand the basics of how to use it. `dt-sql-parser` provides SQL parser classes for different types of supported SQL:
+We recommend learning the Fundamentals usage before continuing. The dt-sql-parser library provides SQL Parser classes for different types of SQL.
 ```javascript
 import { GenericSQL, FlinkSQL, SparkSQL, HiveSQL, PLSQL, PostgresSQL, TrinoSQL } from 'dt-sql-parser';
 ```
 
-Before using syntax validation, autocompletion, and other method, you need to instantiate the Parser of the corresponding SQL type, taking `GenericSQL` as an example:
+Before employing syntax validation, code completion, and other features, it is necessary to instantiate the Parser of the relevant SQL type.
+For instance, one can consider using `GenericSQL` as an example:
 ```javascript
 const parser = new GenericSQL();
 ```
 
-The usage examples below will use `GenericSQL`, and Parser for other SQL types will be used in the same way as `GenericSQL`.
-
-<br/>
+The following usage examples will utilize the `GenericSQL`, and the Parser for other SQL types will be employed in a similar manner as `GenericSQL`.
 
 ### Syntax Validation
 ```javascript
@@ -123,8 +122,6 @@ Output:
 We instanced a Parser object, and use the **validate** method to check the SQL syntax, if failed
 returns an array object includes **error** message.
 
-<br/>
-
 ### Tokenizer
 
 Get all **tokens** by the Parser:
@@ -153,8 +150,6 @@ console.log(tokens)
 ]
 */
 ```
-
-<br/>
 
 ### Visitor
 
@@ -192,8 +187,6 @@ TableName user1
 
 > Tips: The node's method name can be found in the Visitor file under the corresponding SQL directory
 
-<br/>
-
 ### Listener
 
 Access the specified node in the AST by the Listener
@@ -228,9 +221,7 @@ TableName user1
 
 > Tips: The node's method name can be found in the Listener file under the corresponding SQL directory
 
-<br/>
-
-### Split sql by statement
+### Splitting SQL statements
 Take `FlinkSQL` as an example:
 ```javascript
 import { FlinkSQL } from 'dt-sql-parser';
@@ -264,13 +255,12 @@ console.log(sqlSlices)
 
 ```
 
-<br/>
+### Code Completion
+Obtaining autocomplete information at a specified position in SQL.
+We can refer to the example of using `FlinkSQL`.
 
-### Auto Complete
-Get the autocomplete information in the specified position of sql, using `FlinkSQL` as an example:
-
-Call the `getSuggestionAtCaretPosition` method, passing in the SQL content and the row and column numbers of the position that need to be autocompleted.
-+ Get a list of keyword candidates
+Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the row and column numbers indicating the position where auto-completion is desired.
++ keyword candidates list
 
     ```javascript
     import { FlinkSQL } from 'dt-sql-parser';
@@ -284,7 +274,7 @@ Call the `getSuggestionAtCaretPosition` method, passing in the SQL content and t
     [ 'CATALOG', 'FUNCTION', 'TEMPORARY', 'VIEW', 'DATABASE', 'TABLE' ] 
     */ 
     ```
-+  Gets syntax-related autocompletion information
++  Obtaining information related to grammar completion
     ```javascript
     const parser = new FlinkSQL();
     const sql = 'SELECT * FROM tb';
@@ -323,14 +313,12 @@ Call the `getSuggestionAtCaretPosition` method, passing in the SQL content and t
     ]
     */
     ```
-Syntax-related autocomplete information returns an array, and each item in the array represents what syntax can be filled in at that position, such as the output result in the above example represents that the position can be filled in **table name** or **view name**. The `syntaxContextType` is a syntax type that can be completed, and `wordRanges` is what has been filled in.
-
-<br/>
+The grammar-related autocomplete information returns an array, where each item represents what grammar can be filled in at that position. For example, the output in the above example represents that the position can be filled with either a **table name** or **a view name**. In this case, `syntaxContextType` represents the type of grammar that can be completed, and `wordRanges` represents the content that has already been filled.
 
 ### Other API
 
-- `createLexer` Create an instance of Antlr4 Lexer and return;
-- `createParser` Create an instance of Antlr4 parser and return;
+- `createLexer` Create an instance of Antlr4 Lexer and return it;
+- `createParser` Create an instance of Antlr4 parser and return it;
 - `parse` Parses the input SQL and returns the parse tree;
 
 <br/>
