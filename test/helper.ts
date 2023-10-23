@@ -68,3 +68,15 @@ export function getReportTableHeader(title: string) {
 export function exportReportTable(markdown: string, output: string) {
     fs.writeFileSync(path.join(output, 'benchmark.md'), markdown);
 }
+
+export function commentOtherLine(sqlContent: string, line: number) {
+    const slices = sqlContent.split('\n').map((item, index) => {
+        if (index !== line - 1) {
+            return '-- ' + item;
+        } else {
+            return item;
+        }
+    });
+
+    return slices.join('\n');
+}
