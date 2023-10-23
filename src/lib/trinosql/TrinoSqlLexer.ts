@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/trinosql/TrinoSql.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/trinosql/TrinoSql.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ATN } from "antlr4ts/atn/ATN";
@@ -32,238 +32,238 @@ export class TrinoSqlLexer extends Lexer {
 	public static readonly T__13 = 14;
 	public static readonly T__14 = 15;
 	public static readonly T__15 = 16;
-	public static readonly ADD = 17;
-	public static readonly ADMIN = 18;
-	public static readonly AFTER = 19;
-	public static readonly ALL = 20;
-	public static readonly ALTER = 21;
-	public static readonly ANALYZE = 22;
-	public static readonly AND = 23;
-	public static readonly ANY = 24;
-	public static readonly ARRAY = 25;
-	public static readonly AS = 26;
-	public static readonly ASC = 27;
-	public static readonly AT = 28;
-	public static readonly AUTHORIZATION = 29;
-	public static readonly BERNOULLI = 30;
-	public static readonly BETWEEN = 31;
-	public static readonly BY = 32;
-	public static readonly CALL = 33;
-	public static readonly CASCADE = 34;
-	public static readonly CASE = 35;
-	public static readonly CAST = 36;
-	public static readonly CATALOGS = 37;
-	public static readonly COLUMN = 38;
-	public static readonly COLUMNS = 39;
-	public static readonly COMMENT = 40;
-	public static readonly COMMIT = 41;
-	public static readonly COMMITTED = 42;
-	public static readonly CONSTRAINT = 43;
-	public static readonly CREATE = 44;
-	public static readonly CROSS = 45;
-	public static readonly CUBE = 46;
-	public static readonly CURRENT = 47;
-	public static readonly CURRENT_CATALOG = 48;
-	public static readonly CURRENT_DATE = 49;
-	public static readonly CURRENT_PATH = 50;
-	public static readonly CURRENT_ROLE = 51;
-	public static readonly CURRENT_SCHEMA = 52;
-	public static readonly CURRENT_TIME = 53;
-	public static readonly CURRENT_TIMESTAMP = 54;
-	public static readonly CURRENT_USER = 55;
-	public static readonly DATA = 56;
-	public static readonly DATE = 57;
-	public static readonly DAY = 58;
-	public static readonly DEFAULT = 59;
-	public static readonly DEALLOCATE = 60;
-	public static readonly DEFINER = 61;
-	public static readonly DELETE = 62;
-	public static readonly DESC = 63;
-	public static readonly DESCRIBE = 64;
-	public static readonly DEFINE = 65;
-	public static readonly DISTINCT = 66;
-	public static readonly DISTRIBUTED = 67;
-	public static readonly DOUBLE = 68;
-	public static readonly DROP = 69;
-	public static readonly ELSE = 70;
-	public static readonly EMPTY = 71;
-	public static readonly END = 72;
-	public static readonly ESCAPE = 73;
-	public static readonly EXCEPT = 74;
-	public static readonly EXCLUDING = 75;
-	public static readonly EXECUTE = 76;
-	public static readonly EXISTS = 77;
-	public static readonly EXPLAIN = 78;
-	public static readonly EXTRACT = 79;
-	public static readonly FALSE = 80;
-	public static readonly FETCH = 81;
-	public static readonly FILTER = 82;
-	public static readonly FINAL = 83;
-	public static readonly FIRST = 84;
-	public static readonly FOLLOWING = 85;
-	public static readonly FOR = 86;
-	public static readonly FORMAT = 87;
-	public static readonly FROM = 88;
-	public static readonly FULL = 89;
-	public static readonly FUNCTIONS = 90;
-	public static readonly GRANT = 91;
-	public static readonly GRANTED = 92;
-	public static readonly GRANTS = 93;
-	public static readonly DENY = 94;
-	public static readonly GRAPHVIZ = 95;
-	public static readonly GROUP = 96;
-	public static readonly GROUPING = 97;
-	public static readonly GROUPS = 98;
-	public static readonly HAVING = 99;
-	public static readonly HOUR = 100;
-	public static readonly IF = 101;
-	public static readonly IGNORE = 102;
-	public static readonly IN = 103;
-	public static readonly INCLUDING = 104;
-	public static readonly INITIAL = 105;
-	public static readonly INNER = 106;
-	public static readonly INPUT = 107;
-	public static readonly INSERT = 108;
-	public static readonly INTERSECT = 109;
-	public static readonly INTERVAL = 110;
-	public static readonly INTO = 111;
-	public static readonly INVOKER = 112;
-	public static readonly IO = 113;
-	public static readonly IS = 114;
-	public static readonly ISOLATION = 115;
-	public static readonly JOIN = 116;
-	public static readonly JSON = 117;
-	public static readonly LAST = 118;
-	public static readonly LATERAL = 119;
-	public static readonly LEFT = 120;
-	public static readonly LEVEL = 121;
-	public static readonly LIKE = 122;
-	public static readonly LIMIT = 123;
-	public static readonly LOCAL = 124;
-	public static readonly LOCALTIME = 125;
-	public static readonly LOCALTIMESTAMP = 126;
-	public static readonly LOGICAL = 127;
-	public static readonly MAP = 128;
-	public static readonly MATCH = 129;
-	public static readonly MATCHED = 130;
-	public static readonly MATCHES = 131;
-	public static readonly MATCH_RECOGNIZE = 132;
-	public static readonly MATERIALIZED = 133;
-	public static readonly MEASURES = 134;
-	public static readonly MERGE = 135;
-	public static readonly MINUTE = 136;
-	public static readonly MONTH = 137;
-	public static readonly NATURAL = 138;
-	public static readonly NEXT = 139;
-	public static readonly NFC = 140;
-	public static readonly NFD = 141;
-	public static readonly NFKC = 142;
-	public static readonly NFKD = 143;
-	public static readonly NO = 144;
-	public static readonly NONE = 145;
-	public static readonly NORMALIZE = 146;
-	public static readonly NOT = 147;
-	public static readonly NULL = 148;
-	public static readonly NULLIF = 149;
-	public static readonly NULLS = 150;
-	public static readonly OFFSET = 151;
-	public static readonly OMIT = 152;
-	public static readonly ON = 153;
-	public static readonly ONE = 154;
-	public static readonly ONLY = 155;
-	public static readonly OPTION = 156;
-	public static readonly OR = 157;
-	public static readonly ORDER = 158;
-	public static readonly ORDINALITY = 159;
-	public static readonly OUTER = 160;
-	public static readonly OUTPUT = 161;
-	public static readonly OVER = 162;
-	public static readonly PARTITION = 163;
-	public static readonly PARTITIONS = 164;
-	public static readonly PAST = 165;
-	public static readonly PATH = 166;
-	public static readonly PATTERN = 167;
-	public static readonly PER = 168;
-	public static readonly PERMUTE = 169;
-	public static readonly POSITION = 170;
-	public static readonly PRECEDING = 171;
-	public static readonly PRECISION = 172;
-	public static readonly PREPARE = 173;
-	public static readonly PRIVILEGES = 174;
-	public static readonly PROPERTIES = 175;
-	public static readonly RANGE = 176;
-	public static readonly READ = 177;
-	public static readonly RECURSIVE = 178;
-	public static readonly REFRESH = 179;
-	public static readonly RENAME = 180;
-	public static readonly REPEATABLE = 181;
-	public static readonly REPLACE = 182;
-	public static readonly RESET = 183;
-	public static readonly RESPECT = 184;
-	public static readonly RESTRICT = 185;
-	public static readonly REVOKE = 186;
-	public static readonly RIGHT = 187;
-	public static readonly ROLE = 188;
-	public static readonly ROLES = 189;
-	public static readonly ROLLBACK = 190;
-	public static readonly ROLLUP = 191;
-	public static readonly ROW = 192;
-	public static readonly ROWS = 193;
-	public static readonly RUNNING = 194;
-	public static readonly SCHEMA = 195;
-	public static readonly SCHEMAS = 196;
-	public static readonly SECOND = 197;
-	public static readonly SECURITY = 198;
-	public static readonly SEEK = 199;
-	public static readonly SELECT = 200;
-	public static readonly SERIALIZABLE = 201;
-	public static readonly SESSION = 202;
-	public static readonly SET = 203;
-	public static readonly SETS = 204;
-	public static readonly SHOW = 205;
-	public static readonly SOME = 206;
-	public static readonly START = 207;
-	public static readonly STATS = 208;
-	public static readonly SUBSET = 209;
-	public static readonly SUBSTRING = 210;
-	public static readonly SYSTEM = 211;
-	public static readonly TABLE = 212;
-	public static readonly TABLES = 213;
-	public static readonly TABLESAMPLE = 214;
-	public static readonly TEXT = 215;
-	public static readonly THEN = 216;
-	public static readonly TIES = 217;
-	public static readonly TIME = 218;
-	public static readonly TIMESTAMP = 219;
-	public static readonly TO = 220;
-	public static readonly TRANSACTION = 221;
-	public static readonly TRUNCATE = 222;
-	public static readonly TRUE = 223;
-	public static readonly TRY_CAST = 224;
-	public static readonly TYPE = 225;
-	public static readonly UESCAPE = 226;
-	public static readonly UNBOUNDED = 227;
-	public static readonly UNCOMMITTED = 228;
-	public static readonly UNION = 229;
-	public static readonly UNMATCHED = 230;
-	public static readonly UNNEST = 231;
-	public static readonly UPDATE = 232;
-	public static readonly USE = 233;
-	public static readonly USER = 234;
-	public static readonly USING = 235;
-	public static readonly VALIDATE = 236;
-	public static readonly VALUES = 237;
-	public static readonly VERBOSE = 238;
-	public static readonly VIEW = 239;
-	public static readonly WHEN = 240;
-	public static readonly WHERE = 241;
-	public static readonly WINDOW = 242;
-	public static readonly WITH = 243;
-	public static readonly WITHOUT = 244;
-	public static readonly WORK = 245;
-	public static readonly WRITE = 246;
-	public static readonly YEAR = 247;
-	public static readonly ZONE = 248;
+	public static readonly KW_ADD = 17;
+	public static readonly KW_ADMIN = 18;
+	public static readonly KW_AFTER = 19;
+	public static readonly KW_ALL = 20;
+	public static readonly KW_ALTER = 21;
+	public static readonly KW_ANALYZE = 22;
+	public static readonly KW_AND = 23;
+	public static readonly KW_ANY = 24;
+	public static readonly KW_ARRAY = 25;
+	public static readonly KW_AS = 26;
+	public static readonly KW_ASC = 27;
+	public static readonly KW_AT = 28;
+	public static readonly KW_AUTHORIZATION = 29;
+	public static readonly KW_BERNOULLI = 30;
+	public static readonly KW_BETWEEN = 31;
+	public static readonly KW_BY = 32;
+	public static readonly KW_CALL = 33;
+	public static readonly KW_CASCADE = 34;
+	public static readonly KW_CASE = 35;
+	public static readonly KW_CAST = 36;
+	public static readonly KW_CATALOGS = 37;
+	public static readonly KW_COLUMN = 38;
+	public static readonly KW_COLUMNS = 39;
+	public static readonly KW_COMMENT = 40;
+	public static readonly KW_COMMIT = 41;
+	public static readonly KW_COMMITTED = 42;
+	public static readonly KW_CONSTRAINT = 43;
+	public static readonly KW_CREATE = 44;
+	public static readonly KW_CROSS = 45;
+	public static readonly KW_CUBE = 46;
+	public static readonly KW_CURRENT = 47;
+	public static readonly KW_CURRENT_CATALOG = 48;
+	public static readonly KW_CURRENT_DATE = 49;
+	public static readonly KW_CURRENT_PATH = 50;
+	public static readonly KW_CURRENT_ROLE = 51;
+	public static readonly KW_CURRENT_SCHEMA = 52;
+	public static readonly KW_CURRENT_TIME = 53;
+	public static readonly KW_CURRENT_TIMESTAMP = 54;
+	public static readonly KW_CURRENT_USER = 55;
+	public static readonly KW_DATA = 56;
+	public static readonly KW_DATE = 57;
+	public static readonly KW_DAY = 58;
+	public static readonly KW_DEFAULT = 59;
+	public static readonly KW_DEALLOCATE = 60;
+	public static readonly KW_DEFINER = 61;
+	public static readonly KW_DELETE = 62;
+	public static readonly KW_DESC = 63;
+	public static readonly KW_DESCRIBE = 64;
+	public static readonly KW_DEFINE = 65;
+	public static readonly KW_DISTINCT = 66;
+	public static readonly KW_DISTRIBUTED = 67;
+	public static readonly KW_DOUBLE = 68;
+	public static readonly KW_DROP = 69;
+	public static readonly KW_ELSE = 70;
+	public static readonly KW_EMPTY = 71;
+	public static readonly KW_END = 72;
+	public static readonly KW_ESCAPE = 73;
+	public static readonly KW_EXCEPT = 74;
+	public static readonly KW_EXCLUDING = 75;
+	public static readonly KW_EXECUTE = 76;
+	public static readonly KW_EXISTS = 77;
+	public static readonly KW_EXPLAIN = 78;
+	public static readonly KW_EXTRACT = 79;
+	public static readonly KW_FALSE = 80;
+	public static readonly KW_FETCH = 81;
+	public static readonly KW_FILTER = 82;
+	public static readonly KW_FINAL = 83;
+	public static readonly KW_FIRST = 84;
+	public static readonly KW_FOLLOWING = 85;
+	public static readonly KW_FOR = 86;
+	public static readonly KW_FORMAT = 87;
+	public static readonly KW_FROM = 88;
+	public static readonly KW_FULL = 89;
+	public static readonly KW_FUNCTIONS = 90;
+	public static readonly KW_GRANT = 91;
+	public static readonly KW_GRANTED = 92;
+	public static readonly KW_GRANTS = 93;
+	public static readonly KW_DENY = 94;
+	public static readonly KW_GRAPHVIZ = 95;
+	public static readonly KW_GROUP = 96;
+	public static readonly KW_GROUPING = 97;
+	public static readonly KW_GROUPS = 98;
+	public static readonly KW_HAVING = 99;
+	public static readonly KW_HOUR = 100;
+	public static readonly KW_IF = 101;
+	public static readonly KW_IGNORE = 102;
+	public static readonly KW_IN = 103;
+	public static readonly KW_INCLUDING = 104;
+	public static readonly KW_INITIAL = 105;
+	public static readonly KW_INNER = 106;
+	public static readonly KW_INPUT = 107;
+	public static readonly KW_INSERT = 108;
+	public static readonly KW_INTERSECT = 109;
+	public static readonly KW_INTERVAL = 110;
+	public static readonly KW_INTO = 111;
+	public static readonly KW_INVOKER = 112;
+	public static readonly KW_IO = 113;
+	public static readonly KW_IS = 114;
+	public static readonly KW_ISOLATION = 115;
+	public static readonly KW_JOIN = 116;
+	public static readonly KW_JSON = 117;
+	public static readonly KW_LAST = 118;
+	public static readonly KW_LATERAL = 119;
+	public static readonly KW_LEFT = 120;
+	public static readonly KW_LEVEL = 121;
+	public static readonly KW_LIKE = 122;
+	public static readonly KW_LIMIT = 123;
+	public static readonly KW_LOCAL = 124;
+	public static readonly KW_LOCALTIME = 125;
+	public static readonly KW_LOCALTIMESTAMP = 126;
+	public static readonly KW_LOGICAL = 127;
+	public static readonly KW_MAP = 128;
+	public static readonly KW_MATCH = 129;
+	public static readonly KW_MATCHED = 130;
+	public static readonly KW_MATCHES = 131;
+	public static readonly KW_MATCH_RECOGNIZE = 132;
+	public static readonly KW_MATERIALIZED = 133;
+	public static readonly KW_MEASURES = 134;
+	public static readonly KW_MERGE = 135;
+	public static readonly KW_MINUTE = 136;
+	public static readonly KW_MONTH = 137;
+	public static readonly KW_NATURAL = 138;
+	public static readonly KW_NEXT = 139;
+	public static readonly KW_NFC = 140;
+	public static readonly KW_NFD = 141;
+	public static readonly KW_NFKC = 142;
+	public static readonly KW_NFKD = 143;
+	public static readonly KW_NO = 144;
+	public static readonly KW_NONE = 145;
+	public static readonly KW_NORMALIZE = 146;
+	public static readonly KW_NOT = 147;
+	public static readonly KW_NULL = 148;
+	public static readonly KW_NULLIF = 149;
+	public static readonly KW_NULLS = 150;
+	public static readonly KW_OFFSET = 151;
+	public static readonly KW_OMIT = 152;
+	public static readonly KW_ON = 153;
+	public static readonly KW_ONE = 154;
+	public static readonly KW_ONLY = 155;
+	public static readonly KW_OPTION = 156;
+	public static readonly KW_OR = 157;
+	public static readonly KW_ORDER = 158;
+	public static readonly KW_ORDINALITY = 159;
+	public static readonly KW_OUTER = 160;
+	public static readonly KW_OUTPUT = 161;
+	public static readonly KW_OVER = 162;
+	public static readonly KW_PARTITION = 163;
+	public static readonly KW_PARTITIONS = 164;
+	public static readonly KW_PAST = 165;
+	public static readonly KW_PATH = 166;
+	public static readonly KW_PATTERN = 167;
+	public static readonly KW_PER = 168;
+	public static readonly KW_PERMUTE = 169;
+	public static readonly KW_POSITION = 170;
+	public static readonly KW_PRECEDING = 171;
+	public static readonly KW_PRECISION = 172;
+	public static readonly KW_PREPARE = 173;
+	public static readonly KW_PRIVILEGES = 174;
+	public static readonly KW_PROPERTIES = 175;
+	public static readonly KW_RANGE = 176;
+	public static readonly KW_READ = 177;
+	public static readonly KW_RECURSIVE = 178;
+	public static readonly KW_REFRESH = 179;
+	public static readonly KW_RENAME = 180;
+	public static readonly KW_REPEATABLE = 181;
+	public static readonly KW_REPLACE = 182;
+	public static readonly KW_RESET = 183;
+	public static readonly KW_RESPECT = 184;
+	public static readonly KW_RESTRICT = 185;
+	public static readonly KW_REVOKE = 186;
+	public static readonly KW_RIGHT = 187;
+	public static readonly KW_ROLE = 188;
+	public static readonly KW_ROLES = 189;
+	public static readonly KW_ROLLBACK = 190;
+	public static readonly KW_ROLLUP = 191;
+	public static readonly KW_ROW = 192;
+	public static readonly KW_ROWS = 193;
+	public static readonly KW_RUNNING = 194;
+	public static readonly KW_SCHEMA = 195;
+	public static readonly KW_SCHEMAS = 196;
+	public static readonly KW_SECOND = 197;
+	public static readonly KW_SECURITY = 198;
+	public static readonly KW_SEEK = 199;
+	public static readonly KW_SELECT = 200;
+	public static readonly KW_SERIALIZABLE = 201;
+	public static readonly KW_SESSION = 202;
+	public static readonly KW_SET = 203;
+	public static readonly KW_SETS = 204;
+	public static readonly KW_SHOW = 205;
+	public static readonly KW_SOME = 206;
+	public static readonly KW_START = 207;
+	public static readonly KW_STATS = 208;
+	public static readonly KW_SUBSET = 209;
+	public static readonly KW_SUBSTRING = 210;
+	public static readonly KW_SYSTEM = 211;
+	public static readonly KW_TABLE = 212;
+	public static readonly KW_TABLES = 213;
+	public static readonly KW_TABLESAMPLE = 214;
+	public static readonly KW_TEXT = 215;
+	public static readonly KW_THEN = 216;
+	public static readonly KW_TIES = 217;
+	public static readonly KW_TIME = 218;
+	public static readonly KW_TIMESTAMP = 219;
+	public static readonly KW_TO = 220;
+	public static readonly KW_TRANSACTION = 221;
+	public static readonly KW_TRUNCATE = 222;
+	public static readonly KW_TRUE = 223;
+	public static readonly KW_TRY_CAST = 224;
+	public static readonly KW_TYPE = 225;
+	public static readonly KW_UESCAPE = 226;
+	public static readonly KW_UNBOUNDED = 227;
+	public static readonly KW_UNCOMMITTED = 228;
+	public static readonly KW_UNION = 229;
+	public static readonly KW_UNMATCHED = 230;
+	public static readonly KW_UNNEST = 231;
+	public static readonly KW_UPDATE = 232;
+	public static readonly KW_USE = 233;
+	public static readonly KW_USER = 234;
+	public static readonly KW_USING = 235;
+	public static readonly KW_VALIDATE = 236;
+	public static readonly KW_VALUES = 237;
+	public static readonly KW_VERBOSE = 238;
+	public static readonly KW_VIEW = 239;
+	public static readonly KW_WHEN = 240;
+	public static readonly KW_WHERE = 241;
+	public static readonly KW_WINDOW = 242;
+	public static readonly KW_WITH = 243;
+	public static readonly KW_WITHOUT = 244;
+	public static readonly KW_WORK = 245;
+	public static readonly KW_WRITE = 246;
+	public static readonly KW_YEAR = 247;
+	public static readonly KW_ZONE = 248;
 	public static readonly EQ = 249;
 	public static readonly NEQ = 250;
 	public static readonly LT = 251;
@@ -305,48 +305,56 @@ export class TrinoSqlLexer extends Lexer {
 
 	public static readonly ruleNames: string[] = [
 		"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8", 
-		"T__9", "T__10", "T__11", "T__12", "T__13", "T__14", "T__15", "ADD", "ADMIN", 
-		"AFTER", "ALL", "ALTER", "ANALYZE", "AND", "ANY", "ARRAY", "AS", "ASC", 
-		"AT", "AUTHORIZATION", "BERNOULLI", "BETWEEN", "BY", "CALL", "CASCADE", 
-		"CASE", "CAST", "CATALOGS", "COLUMN", "COLUMNS", "COMMENT", "COMMIT", 
-		"COMMITTED", "CONSTRAINT", "CREATE", "CROSS", "CUBE", "CURRENT", "CURRENT_CATALOG", 
-		"CURRENT_DATE", "CURRENT_PATH", "CURRENT_ROLE", "CURRENT_SCHEMA", "CURRENT_TIME", 
-		"CURRENT_TIMESTAMP", "CURRENT_USER", "DATA", "DATE", "DAY", "DEFAULT", 
-		"DEALLOCATE", "DEFINER", "DELETE", "DESC", "DESCRIBE", "DEFINE", "DISTINCT", 
-		"DISTRIBUTED", "DOUBLE", "DROP", "ELSE", "EMPTY", "END", "ESCAPE", "EXCEPT", 
-		"EXCLUDING", "EXECUTE", "EXISTS", "EXPLAIN", "EXTRACT", "FALSE", "FETCH", 
-		"FILTER", "FINAL", "FIRST", "FOLLOWING", "FOR", "FORMAT", "FROM", "FULL", 
-		"FUNCTIONS", "GRANT", "GRANTED", "GRANTS", "DENY", "GRAPHVIZ", "GROUP", 
-		"GROUPING", "GROUPS", "HAVING", "HOUR", "IF", "IGNORE", "IN", "INCLUDING", 
-		"INITIAL", "INNER", "INPUT", "INSERT", "INTERSECT", "INTERVAL", "INTO", 
-		"INVOKER", "IO", "IS", "ISOLATION", "JOIN", "JSON", "LAST", "LATERAL", 
-		"LEFT", "LEVEL", "LIKE", "LIMIT", "LOCAL", "LOCALTIME", "LOCALTIMESTAMP", 
-		"LOGICAL", "MAP", "MATCH", "MATCHED", "MATCHES", "MATCH_RECOGNIZE", "MATERIALIZED", 
-		"MEASURES", "MERGE", "MINUTE", "MONTH", "NATURAL", "NEXT", "NFC", "NFD", 
-		"NFKC", "NFKD", "NO", "NONE", "NORMALIZE", "NOT", "NULL", "NULLIF", "NULLS", 
-		"OFFSET", "OMIT", "ON", "ONE", "ONLY", "OPTION", "OR", "ORDER", "ORDINALITY", 
-		"OUTER", "OUTPUT", "OVER", "PARTITION", "PARTITIONS", "PAST", "PATH", 
-		"PATTERN", "PER", "PERMUTE", "POSITION", "PRECEDING", "PRECISION", "PREPARE", 
-		"PRIVILEGES", "PROPERTIES", "RANGE", "READ", "RECURSIVE", "REFRESH", "RENAME", 
-		"REPEATABLE", "REPLACE", "RESET", "RESPECT", "RESTRICT", "REVOKE", "RIGHT", 
-		"ROLE", "ROLES", "ROLLBACK", "ROLLUP", "ROW", "ROWS", "RUNNING", "SCHEMA", 
-		"SCHEMAS", "SECOND", "SECURITY", "SEEK", "SELECT", "SERIALIZABLE", "SESSION", 
-		"SET", "SETS", "SHOW", "SOME", "START", "STATS", "SUBSET", "SUBSTRING", 
-		"SYSTEM", "TABLE", "TABLES", "TABLESAMPLE", "TEXT", "THEN", "TIES", "TIME", 
-		"TIMESTAMP", "TO", "TRANSACTION", "TRUNCATE", "TRUE", "TRY_CAST", "TYPE", 
-		"UESCAPE", "UNBOUNDED", "UNCOMMITTED", "UNION", "UNMATCHED", "UNNEST", 
-		"UPDATE", "USE", "USER", "USING", "VALIDATE", "VALUES", "VERBOSE", "VIEW", 
-		"WHEN", "WHERE", "WINDOW", "WITH", "WITHOUT", "WORK", "WRITE", "YEAR", 
-		"ZONE", "EQ", "NEQ", "LT", "LTE", "GT", "GTE", "PLUS", "MINUS", "ASTERISK", 
-		"SLASH", "PERCENT", "CONCAT", "QUESTION_MARK", "STRING", "UNICODE_STRING", 
-		"BINARY_LITERAL", "INTEGER_VALUE", "DECIMAL_VALUE", "DOUBLE_VALUE", "IDENTIFIER", 
-		"DIGIT_IDENTIFIER", "QUOTED_IDENTIFIER", "BACKQUOTED_IDENTIFIER", "SEMICOLON", 
-		"EXPONENT", "DIGIT", "LETTER", "SIMPLE_COMMENT", "BRACKETED_COMMENT", 
-		"WS", "UNRECOGNIZED",
+		"T__9", "T__10", "T__11", "T__12", "T__13", "T__14", "T__15", "KW_ADD", 
+		"KW_ADMIN", "KW_AFTER", "KW_ALL", "KW_ALTER", "KW_ANALYZE", "KW_AND", 
+		"KW_ANY", "KW_ARRAY", "KW_AS", "KW_ASC", "KW_AT", "KW_AUTHORIZATION", 
+		"KW_BERNOULLI", "KW_BETWEEN", "KW_BY", "KW_CALL", "KW_CASCADE", "KW_CASE", 
+		"KW_CAST", "KW_CATALOGS", "KW_COLUMN", "KW_COLUMNS", "KW_COMMENT", "KW_COMMIT", 
+		"KW_COMMITTED", "KW_CONSTRAINT", "KW_CREATE", "KW_CROSS", "KW_CUBE", "KW_CURRENT", 
+		"KW_CURRENT_CATALOG", "KW_CURRENT_DATE", "KW_CURRENT_PATH", "KW_CURRENT_ROLE", 
+		"KW_CURRENT_SCHEMA", "KW_CURRENT_TIME", "KW_CURRENT_TIMESTAMP", "KW_CURRENT_USER", 
+		"KW_DATA", "KW_DATE", "KW_DAY", "KW_DEFAULT", "KW_DEALLOCATE", "KW_DEFINER", 
+		"KW_DELETE", "KW_DESC", "KW_DESCRIBE", "KW_DEFINE", "KW_DISTINCT", "KW_DISTRIBUTED", 
+		"KW_DOUBLE", "KW_DROP", "KW_ELSE", "KW_EMPTY", "KW_END", "KW_ESCAPE", 
+		"KW_EXCEPT", "KW_EXCLUDING", "KW_EXECUTE", "KW_EXISTS", "KW_EXPLAIN", 
+		"KW_EXTRACT", "KW_FALSE", "KW_FETCH", "KW_FILTER", "KW_FINAL", "KW_FIRST", 
+		"KW_FOLLOWING", "KW_FOR", "KW_FORMAT", "KW_FROM", "KW_FULL", "KW_FUNCTIONS", 
+		"KW_GRANT", "KW_GRANTED", "KW_GRANTS", "KW_DENY", "KW_GRAPHVIZ", "KW_GROUP", 
+		"KW_GROUPING", "KW_GROUPS", "KW_HAVING", "KW_HOUR", "KW_IF", "KW_IGNORE", 
+		"KW_IN", "KW_INCLUDING", "KW_INITIAL", "KW_INNER", "KW_INPUT", "KW_INSERT", 
+		"KW_INTERSECT", "KW_INTERVAL", "KW_INTO", "KW_INVOKER", "KW_IO", "KW_IS", 
+		"KW_ISOLATION", "KW_JOIN", "KW_JSON", "KW_LAST", "KW_LATERAL", "KW_LEFT", 
+		"KW_LEVEL", "KW_LIKE", "KW_LIMIT", "KW_LOCAL", "KW_LOCALTIME", "KW_LOCALTIMESTAMP", 
+		"KW_LOGICAL", "KW_MAP", "KW_MATCH", "KW_MATCHED", "KW_MATCHES", "KW_MATCH_RECOGNIZE", 
+		"KW_MATERIALIZED", "KW_MEASURES", "KW_MERGE", "KW_MINUTE", "KW_MONTH", 
+		"KW_NATURAL", "KW_NEXT", "KW_NFC", "KW_NFD", "KW_NFKC", "KW_NFKD", "KW_NO", 
+		"KW_NONE", "KW_NORMALIZE", "KW_NOT", "KW_NULL", "KW_NULLIF", "KW_NULLS", 
+		"KW_OFFSET", "KW_OMIT", "KW_ON", "KW_ONE", "KW_ONLY", "KW_OPTION", "KW_OR", 
+		"KW_ORDER", "KW_ORDINALITY", "KW_OUTER", "KW_OUTPUT", "KW_OVER", "KW_PARTITION", 
+		"KW_PARTITIONS", "KW_PAST", "KW_PATH", "KW_PATTERN", "KW_PER", "KW_PERMUTE", 
+		"KW_POSITION", "KW_PRECEDING", "KW_PRECISION", "KW_PREPARE", "KW_PRIVILEGES", 
+		"KW_PROPERTIES", "KW_RANGE", "KW_READ", "KW_RECURSIVE", "KW_REFRESH", 
+		"KW_RENAME", "KW_REPEATABLE", "KW_REPLACE", "KW_RESET", "KW_RESPECT", 
+		"KW_RESTRICT", "KW_REVOKE", "KW_RIGHT", "KW_ROLE", "KW_ROLES", "KW_ROLLBACK", 
+		"KW_ROLLUP", "KW_ROW", "KW_ROWS", "KW_RUNNING", "KW_SCHEMA", "KW_SCHEMAS", 
+		"KW_SECOND", "KW_SECURITY", "KW_SEEK", "KW_SELECT", "KW_SERIALIZABLE", 
+		"KW_SESSION", "KW_SET", "KW_SETS", "KW_SHOW", "KW_SOME", "KW_START", "KW_STATS", 
+		"KW_SUBSET", "KW_SUBSTRING", "KW_SYSTEM", "KW_TABLE", "KW_TABLES", "KW_TABLESAMPLE", 
+		"KW_TEXT", "KW_THEN", "KW_TIES", "KW_TIME", "KW_TIMESTAMP", "KW_TO", "KW_TRANSACTION", 
+		"KW_TRUNCATE", "KW_TRUE", "KW_TRY_CAST", "KW_TYPE", "KW_UESCAPE", "KW_UNBOUNDED", 
+		"KW_UNCOMMITTED", "KW_UNION", "KW_UNMATCHED", "KW_UNNEST", "KW_UPDATE", 
+		"KW_USE", "KW_USER", "KW_USING", "KW_VALIDATE", "KW_VALUES", "KW_VERBOSE", 
+		"KW_VIEW", "KW_WHEN", "KW_WHERE", "KW_WINDOW", "KW_WITH", "KW_WITHOUT", 
+		"KW_WORK", "KW_WRITE", "KW_YEAR", "KW_ZONE", "EQ", "NEQ", "LT", "LTE", 
+		"GT", "GTE", "PLUS", "MINUS", "ASTERISK", "SLASH", "PERCENT", "CONCAT", 
+		"QUESTION_MARK", "STRING", "UNICODE_STRING", "BINARY_LITERAL", "INTEGER_VALUE", 
+		"DECIMAL_VALUE", "DOUBLE_VALUE", "IDENTIFIER", "DIGIT_IDENTIFIER", "QUOTED_IDENTIFIER", 
+		"BACKQUOTED_IDENTIFIER", "SEMICOLON", "EXPONENT", "DIGIT", "LETTER", "SIMPLE_COMMENT", 
+		"BRACKETED_COMMENT", "WS", "UNRECOGNIZED",
 	];
 
 	private static readonly _LITERAL_NAMES: Array<string | undefined> = [
-		undefined, "'.'", "'('", "')'", "','", "'SKIP'", "'->'", "'['", "']'", 
+		undefined, "'('", "')'", "','", "'.'", "'SKIP'", "'->'", "'['", "']'", 
 		"'|'", "'^'", "'$'", "'{-'", "'-}'", "'{'", "'}'", "'=>'", "'ADD'", "'ADMIN'", 
 		"'AFTER'", "'ALL'", "'ALTER'", "'ANALYZE'", "'AND'", "'ANY'", "'ARRAY'", 
 		"'AS'", "'ASC'", "'AT'", "'AUTHORIZATION'", "'BERNOULLI'", "'BETWEEN'", 
@@ -392,43 +400,51 @@ export class TrinoSqlLexer extends Lexer {
 	private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, "ADD", "ADMIN", "AFTER", "ALL", "ALTER", 
-		"ANALYZE", "AND", "ANY", "ARRAY", "AS", "ASC", "AT", "AUTHORIZATION", 
-		"BERNOULLI", "BETWEEN", "BY", "CALL", "CASCADE", "CASE", "CAST", "CATALOGS", 
-		"COLUMN", "COLUMNS", "COMMENT", "COMMIT", "COMMITTED", "CONSTRAINT", "CREATE", 
-		"CROSS", "CUBE", "CURRENT", "CURRENT_CATALOG", "CURRENT_DATE", "CURRENT_PATH", 
-		"CURRENT_ROLE", "CURRENT_SCHEMA", "CURRENT_TIME", "CURRENT_TIMESTAMP", 
-		"CURRENT_USER", "DATA", "DATE", "DAY", "DEFAULT", "DEALLOCATE", "DEFINER", 
-		"DELETE", "DESC", "DESCRIBE", "DEFINE", "DISTINCT", "DISTRIBUTED", "DOUBLE", 
-		"DROP", "ELSE", "EMPTY", "END", "ESCAPE", "EXCEPT", "EXCLUDING", "EXECUTE", 
-		"EXISTS", "EXPLAIN", "EXTRACT", "FALSE", "FETCH", "FILTER", "FINAL", "FIRST", 
-		"FOLLOWING", "FOR", "FORMAT", "FROM", "FULL", "FUNCTIONS", "GRANT", "GRANTED", 
-		"GRANTS", "DENY", "GRAPHVIZ", "GROUP", "GROUPING", "GROUPS", "HAVING", 
-		"HOUR", "IF", "IGNORE", "IN", "INCLUDING", "INITIAL", "INNER", "INPUT", 
-		"INSERT", "INTERSECT", "INTERVAL", "INTO", "INVOKER", "IO", "IS", "ISOLATION", 
-		"JOIN", "JSON", "LAST", "LATERAL", "LEFT", "LEVEL", "LIKE", "LIMIT", "LOCAL", 
-		"LOCALTIME", "LOCALTIMESTAMP", "LOGICAL", "MAP", "MATCH", "MATCHED", "MATCHES", 
-		"MATCH_RECOGNIZE", "MATERIALIZED", "MEASURES", "MERGE", "MINUTE", "MONTH", 
-		"NATURAL", "NEXT", "NFC", "NFD", "NFKC", "NFKD", "NO", "NONE", "NORMALIZE", 
-		"NOT", "NULL", "NULLIF", "NULLS", "OFFSET", "OMIT", "ON", "ONE", "ONLY", 
-		"OPTION", "OR", "ORDER", "ORDINALITY", "OUTER", "OUTPUT", "OVER", "PARTITION", 
-		"PARTITIONS", "PAST", "PATH", "PATTERN", "PER", "PERMUTE", "POSITION", 
-		"PRECEDING", "PRECISION", "PREPARE", "PRIVILEGES", "PROPERTIES", "RANGE", 
-		"READ", "RECURSIVE", "REFRESH", "RENAME", "REPEATABLE", "REPLACE", "RESET", 
-		"RESPECT", "RESTRICT", "REVOKE", "RIGHT", "ROLE", "ROLES", "ROLLBACK", 
-		"ROLLUP", "ROW", "ROWS", "RUNNING", "SCHEMA", "SCHEMAS", "SECOND", "SECURITY", 
-		"SEEK", "SELECT", "SERIALIZABLE", "SESSION", "SET", "SETS", "SHOW", "SOME", 
-		"START", "STATS", "SUBSET", "SUBSTRING", "SYSTEM", "TABLE", "TABLES", 
-		"TABLESAMPLE", "TEXT", "THEN", "TIES", "TIME", "TIMESTAMP", "TO", "TRANSACTION", 
-		"TRUNCATE", "TRUE", "TRY_CAST", "TYPE", "UESCAPE", "UNBOUNDED", "UNCOMMITTED", 
-		"UNION", "UNMATCHED", "UNNEST", "UPDATE", "USE", "USER", "USING", "VALIDATE", 
-		"VALUES", "VERBOSE", "VIEW", "WHEN", "WHERE", "WINDOW", "WITH", "WITHOUT", 
-		"WORK", "WRITE", "YEAR", "ZONE", "EQ", "NEQ", "LT", "LTE", "GT", "GTE", 
-		"PLUS", "MINUS", "ASTERISK", "SLASH", "PERCENT", "CONCAT", "QUESTION_MARK", 
-		"STRING", "UNICODE_STRING", "BINARY_LITERAL", "INTEGER_VALUE", "DECIMAL_VALUE", 
-		"DOUBLE_VALUE", "IDENTIFIER", "DIGIT_IDENTIFIER", "QUOTED_IDENTIFIER", 
-		"BACKQUOTED_IDENTIFIER", "SEMICOLON", "SIMPLE_COMMENT", "BRACKETED_COMMENT", 
-		"WS", "UNRECOGNIZED",
+		undefined, undefined, undefined, "KW_ADD", "KW_ADMIN", "KW_AFTER", "KW_ALL", 
+		"KW_ALTER", "KW_ANALYZE", "KW_AND", "KW_ANY", "KW_ARRAY", "KW_AS", "KW_ASC", 
+		"KW_AT", "KW_AUTHORIZATION", "KW_BERNOULLI", "KW_BETWEEN", "KW_BY", "KW_CALL", 
+		"KW_CASCADE", "KW_CASE", "KW_CAST", "KW_CATALOGS", "KW_COLUMN", "KW_COLUMNS", 
+		"KW_COMMENT", "KW_COMMIT", "KW_COMMITTED", "KW_CONSTRAINT", "KW_CREATE", 
+		"KW_CROSS", "KW_CUBE", "KW_CURRENT", "KW_CURRENT_CATALOG", "KW_CURRENT_DATE", 
+		"KW_CURRENT_PATH", "KW_CURRENT_ROLE", "KW_CURRENT_SCHEMA", "KW_CURRENT_TIME", 
+		"KW_CURRENT_TIMESTAMP", "KW_CURRENT_USER", "KW_DATA", "KW_DATE", "KW_DAY", 
+		"KW_DEFAULT", "KW_DEALLOCATE", "KW_DEFINER", "KW_DELETE", "KW_DESC", "KW_DESCRIBE", 
+		"KW_DEFINE", "KW_DISTINCT", "KW_DISTRIBUTED", "KW_DOUBLE", "KW_DROP", 
+		"KW_ELSE", "KW_EMPTY", "KW_END", "KW_ESCAPE", "KW_EXCEPT", "KW_EXCLUDING", 
+		"KW_EXECUTE", "KW_EXISTS", "KW_EXPLAIN", "KW_EXTRACT", "KW_FALSE", "KW_FETCH", 
+		"KW_FILTER", "KW_FINAL", "KW_FIRST", "KW_FOLLOWING", "KW_FOR", "KW_FORMAT", 
+		"KW_FROM", "KW_FULL", "KW_FUNCTIONS", "KW_GRANT", "KW_GRANTED", "KW_GRANTS", 
+		"KW_DENY", "KW_GRAPHVIZ", "KW_GROUP", "KW_GROUPING", "KW_GROUPS", "KW_HAVING", 
+		"KW_HOUR", "KW_IF", "KW_IGNORE", "KW_IN", "KW_INCLUDING", "KW_INITIAL", 
+		"KW_INNER", "KW_INPUT", "KW_INSERT", "KW_INTERSECT", "KW_INTERVAL", "KW_INTO", 
+		"KW_INVOKER", "KW_IO", "KW_IS", "KW_ISOLATION", "KW_JOIN", "KW_JSON", 
+		"KW_LAST", "KW_LATERAL", "KW_LEFT", "KW_LEVEL", "KW_LIKE", "KW_LIMIT", 
+		"KW_LOCAL", "KW_LOCALTIME", "KW_LOCALTIMESTAMP", "KW_LOGICAL", "KW_MAP", 
+		"KW_MATCH", "KW_MATCHED", "KW_MATCHES", "KW_MATCH_RECOGNIZE", "KW_MATERIALIZED", 
+		"KW_MEASURES", "KW_MERGE", "KW_MINUTE", "KW_MONTH", "KW_NATURAL", "KW_NEXT", 
+		"KW_NFC", "KW_NFD", "KW_NFKC", "KW_NFKD", "KW_NO", "KW_NONE", "KW_NORMALIZE", 
+		"KW_NOT", "KW_NULL", "KW_NULLIF", "KW_NULLS", "KW_OFFSET", "KW_OMIT", 
+		"KW_ON", "KW_ONE", "KW_ONLY", "KW_OPTION", "KW_OR", "KW_ORDER", "KW_ORDINALITY", 
+		"KW_OUTER", "KW_OUTPUT", "KW_OVER", "KW_PARTITION", "KW_PARTITIONS", "KW_PAST", 
+		"KW_PATH", "KW_PATTERN", "KW_PER", "KW_PERMUTE", "KW_POSITION", "KW_PRECEDING", 
+		"KW_PRECISION", "KW_PREPARE", "KW_PRIVILEGES", "KW_PROPERTIES", "KW_RANGE", 
+		"KW_READ", "KW_RECURSIVE", "KW_REFRESH", "KW_RENAME", "KW_REPEATABLE", 
+		"KW_REPLACE", "KW_RESET", "KW_RESPECT", "KW_RESTRICT", "KW_REVOKE", "KW_RIGHT", 
+		"KW_ROLE", "KW_ROLES", "KW_ROLLBACK", "KW_ROLLUP", "KW_ROW", "KW_ROWS", 
+		"KW_RUNNING", "KW_SCHEMA", "KW_SCHEMAS", "KW_SECOND", "KW_SECURITY", "KW_SEEK", 
+		"KW_SELECT", "KW_SERIALIZABLE", "KW_SESSION", "KW_SET", "KW_SETS", "KW_SHOW", 
+		"KW_SOME", "KW_START", "KW_STATS", "KW_SUBSET", "KW_SUBSTRING", "KW_SYSTEM", 
+		"KW_TABLE", "KW_TABLES", "KW_TABLESAMPLE", "KW_TEXT", "KW_THEN", "KW_TIES", 
+		"KW_TIME", "KW_TIMESTAMP", "KW_TO", "KW_TRANSACTION", "KW_TRUNCATE", "KW_TRUE", 
+		"KW_TRY_CAST", "KW_TYPE", "KW_UESCAPE", "KW_UNBOUNDED", "KW_UNCOMMITTED", 
+		"KW_UNION", "KW_UNMATCHED", "KW_UNNEST", "KW_UPDATE", "KW_USE", "KW_USER", 
+		"KW_USING", "KW_VALIDATE", "KW_VALUES", "KW_VERBOSE", "KW_VIEW", "KW_WHEN", 
+		"KW_WHERE", "KW_WINDOW", "KW_WITH", "KW_WITHOUT", "KW_WORK", "KW_WRITE", 
+		"KW_YEAR", "KW_ZONE", "EQ", "NEQ", "LT", "LTE", "GT", "GTE", "PLUS", "MINUS", 
+		"ASTERISK", "SLASH", "PERCENT", "CONCAT", "QUESTION_MARK", "STRING", "UNICODE_STRING", 
+		"BINARY_LITERAL", "INTEGER_VALUE", "DECIMAL_VALUE", "DOUBLE_VALUE", "IDENTIFIER", 
+		"DIGIT_IDENTIFIER", "QUOTED_IDENTIFIER", "BACKQUOTED_IDENTIFIER", "SEMICOLON", 
+		"SIMPLE_COMMENT", "BRACKETED_COMMENT", "WS", "UNRECOGNIZED",
 	];
 	public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(TrinoSqlLexer._LITERAL_NAMES, TrinoSqlLexer._SYMBOLIC_NAMES, []);
 
@@ -953,9 +969,9 @@ export class TrinoSqlLexer extends Lexer {
 		"\x02\x02\u0223\u0970\x03\x02\x02\x02\u0225\u0979\x03\x02\x02\x02\u0227" +
 		"\u097B\x03\x02\x02\x02\u0229\u097D\x03\x02\x02\x02\u022B\u098E\x03\x02" +
 		"\x02\x02\u022D\u099D\x03\x02\x02\x02\u022F\u09A3\x03\x02\x02\x02\u0231" +
-		"\u0232\x070\x02\x02\u0232\x04\x03\x02\x02\x02\u0233\u0234\x07*\x02\x02" +
-		"\u0234\x06\x03\x02\x02\x02\u0235\u0236\x07+\x02\x02\u0236\b\x03\x02\x02" +
-		"\x02\u0237\u0238\x07.\x02\x02\u0238\n\x03\x02\x02\x02\u0239\u023A\x07" +
+		"\u0232\x07*\x02\x02\u0232\x04\x03\x02\x02\x02\u0233\u0234\x07+\x02\x02" +
+		"\u0234\x06\x03\x02\x02\x02\u0235\u0236\x07.\x02\x02\u0236\b\x03\x02\x02" +
+		"\x02\u0237\u0238\x070\x02\x02\u0238\n\x03\x02\x02\x02\u0239\u023A\x07" +
 		"U\x02\x02\u023A\u023B\x07M\x02\x02\u023B\u023C\x07K\x02\x02\u023C\u023D" +
 		"\x07R\x02\x02\u023D\f\x03\x02\x02\x02\u023E\u023F\x07/\x02\x02\u023F\u0240" +
 		"\x07@\x02\x02\u0240\x0E\x03\x02\x02\x02\u0241\u0242\x07]\x02\x02\u0242" +

@@ -1,9 +1,9 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/trinosql/TrinoSql.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/trinosql/TrinoSql.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 
-import { TableNameContext } from "./TrinoSqlParser";
+import { TableOrViewRelationContext } from "./TrinoSqlParser";
 import { SubqueryRelationContext } from "./TrinoSqlParser";
 import { UnnestContext } from "./TrinoSqlParser";
 import { LateralContext } from "./TrinoSqlParser";
@@ -42,10 +42,6 @@ import { GroupedPatternContext } from "./TrinoSqlParser";
 import { PartitionStartAnchorContext } from "./TrinoSqlParser";
 import { PartitionEndAnchorContext } from "./TrinoSqlParser";
 import { ExcludedPatternContext } from "./TrinoSqlParser";
-import { ZeroOrMoreQuantifierContext } from "./TrinoSqlParser";
-import { OneOrMoreQuantifierContext } from "./TrinoSqlParser";
-import { ZeroOrOneQuantifierContext } from "./TrinoSqlParser";
-import { RangeQuantifierContext } from "./TrinoSqlParser";
 import { DefaultPropertyValueContext } from "./TrinoSqlParser";
 import { NonDefaultPropertyValueContext } from "./TrinoSqlParser";
 import { ExplainFormatContext } from "./TrinoSqlParser";
@@ -54,29 +50,78 @@ import { SingleGroupingSetContext } from "./TrinoSqlParser";
 import { RollupContext } from "./TrinoSqlParser";
 import { CubeContext } from "./TrinoSqlParser";
 import { MultipleGroupingSetsContext } from "./TrinoSqlParser";
-import { ReadUncommittedContext } from "./TrinoSqlParser";
-import { ReadCommittedContext } from "./TrinoSqlParser";
-import { RepeatableReadContext } from "./TrinoSqlParser";
-import { SerializableContext } from "./TrinoSqlParser";
 import { ValueExpressionDefaultContext } from "./TrinoSqlParser";
 import { AtTimeZoneContext } from "./TrinoSqlParser";
 import { ArithmeticUnaryContext } from "./TrinoSqlParser";
 import { ArithmeticBinaryContext } from "./TrinoSqlParser";
 import { ConcatenationContext } from "./TrinoSqlParser";
-import { BasicStringLiteralContext } from "./TrinoSqlParser";
-import { UnicodeStringLiteralContext } from "./TrinoSqlParser";
 import { QuantifiedPrimaryContext } from "./TrinoSqlParser";
 import { PatternConcatenationContext } from "./TrinoSqlParser";
 import { PatternAlternationContext } from "./TrinoSqlParser";
 import { SpecifiedPrincipalContext } from "./TrinoSqlParser";
 import { CurrentUserGrantorContext } from "./TrinoSqlParser";
 import { CurrentRoleGrantorContext } from "./TrinoSqlParser";
-import { UnspecifiedPrincipalContext } from "./TrinoSqlParser";
-import { UserPrincipalContext } from "./TrinoSqlParser";
-import { RolePrincipalContext } from "./TrinoSqlParser";
 import { UnboundedFrameContext } from "./TrinoSqlParser";
 import { CurrentRowBoundContext } from "./TrinoSqlParser";
 import { BoundedFrameContext } from "./TrinoSqlParser";
+import { QueryPrimaryDefaultContext } from "./TrinoSqlParser";
+import { TableContext } from "./TrinoSqlParser";
+import { InlineTableContext } from "./TrinoSqlParser";
+import { SubqueryContext } from "./TrinoSqlParser";
+import { NullLiteralContext } from "./TrinoSqlParser";
+import { IntervalLiteralContext } from "./TrinoSqlParser";
+import { TypeConstructorContext } from "./TrinoSqlParser";
+import { NumericLiteralContext } from "./TrinoSqlParser";
+import { BooleanLiteralContext } from "./TrinoSqlParser";
+import { StringLiteralContext } from "./TrinoSqlParser";
+import { BinaryLiteralContext } from "./TrinoSqlParser";
+import { ParameterContext } from "./TrinoSqlParser";
+import { PositionContext } from "./TrinoSqlParser";
+import { RowConstructorContext } from "./TrinoSqlParser";
+import { FunctionCallContext } from "./TrinoSqlParser";
+import { MeasureContext } from "./TrinoSqlParser";
+import { LambdaContext } from "./TrinoSqlParser";
+import { SubqueryExpressionContext } from "./TrinoSqlParser";
+import { ExistsContext } from "./TrinoSqlParser";
+import { SimpleCaseContext } from "./TrinoSqlParser";
+import { SearchedCaseContext } from "./TrinoSqlParser";
+import { CastContext } from "./TrinoSqlParser";
+import { ArrayConstructorContext } from "./TrinoSqlParser";
+import { SubscriptContext } from "./TrinoSqlParser";
+import { ColumnReferenceContext } from "./TrinoSqlParser";
+import { DereferenceContext } from "./TrinoSqlParser";
+import { SpecialDateTimeFunctionContext } from "./TrinoSqlParser";
+import { CurrentUserContext } from "./TrinoSqlParser";
+import { CurrentCatalogContext } from "./TrinoSqlParser";
+import { CurrentSchemaContext } from "./TrinoSqlParser";
+import { CurrentPathContext } from "./TrinoSqlParser";
+import { SubstringContext } from "./TrinoSqlParser";
+import { NormalizeContext } from "./TrinoSqlParser";
+import { ExtractContext } from "./TrinoSqlParser";
+import { ParenthesizedExpressionContext } from "./TrinoSqlParser";
+import { GroupingOperationContext } from "./TrinoSqlParser";
+import { SelectSingleContext } from "./TrinoSqlParser";
+import { SelectAllContext } from "./TrinoSqlParser";
+import { QualifiedArgumentContext } from "./TrinoSqlParser";
+import { UnqualifiedArgumentContext } from "./TrinoSqlParser";
+import { PositionalArgumentContext } from "./TrinoSqlParser";
+import { NamedArgumentContext } from "./TrinoSqlParser";
+import { MergeUpdateContext } from "./TrinoSqlParser";
+import { MergeDeleteContext } from "./TrinoSqlParser";
+import { MergeInsertContext } from "./TrinoSqlParser";
+import { ZeroOrMoreQuantifierContext } from "./TrinoSqlParser";
+import { OneOrMoreQuantifierContext } from "./TrinoSqlParser";
+import { ZeroOrOneQuantifierContext } from "./TrinoSqlParser";
+import { RangeQuantifierContext } from "./TrinoSqlParser";
+import { ReadUncommittedContext } from "./TrinoSqlParser";
+import { ReadCommittedContext } from "./TrinoSqlParser";
+import { RepeatableReadContext } from "./TrinoSqlParser";
+import { SerializableContext } from "./TrinoSqlParser";
+import { BasicStringLiteralContext } from "./TrinoSqlParser";
+import { UnicodeStringLiteralContext } from "./TrinoSqlParser";
+import { UnspecifiedPrincipalContext } from "./TrinoSqlParser";
+import { UserPrincipalContext } from "./TrinoSqlParser";
+import { RolePrincipalContext } from "./TrinoSqlParser";
 import { StatementDefaultContext } from "./TrinoSqlParser";
 import { UseContext } from "./TrinoSqlParser";
 import { CreateSchemaContext } from "./TrinoSqlParser";
@@ -151,56 +196,11 @@ import { ShowTableCommentContext } from "./TrinoSqlParser";
 import { ShowColumnCommentContext } from "./TrinoSqlParser";
 import { TimeZoneIntervalContext } from "./TrinoSqlParser";
 import { TimeZoneStringContext } from "./TrinoSqlParser";
-import { QueryPrimaryDefaultContext } from "./TrinoSqlParser";
-import { TableContext } from "./TrinoSqlParser";
-import { InlineTableContext } from "./TrinoSqlParser";
-import { SubqueryContext } from "./TrinoSqlParser";
-import { NullLiteralContext } from "./TrinoSqlParser";
-import { IntervalLiteralContext } from "./TrinoSqlParser";
-import { TypeConstructorContext } from "./TrinoSqlParser";
-import { NumericLiteralContext } from "./TrinoSqlParser";
-import { BooleanLiteralContext } from "./TrinoSqlParser";
-import { StringLiteralContext } from "./TrinoSqlParser";
-import { BinaryLiteralContext } from "./TrinoSqlParser";
-import { ParameterContext } from "./TrinoSqlParser";
-import { PositionContext } from "./TrinoSqlParser";
-import { RowConstructorContext } from "./TrinoSqlParser";
-import { FunctionCallContext } from "./TrinoSqlParser";
-import { MeasureContext } from "./TrinoSqlParser";
-import { LambdaContext } from "./TrinoSqlParser";
-import { SubqueryExpressionContext } from "./TrinoSqlParser";
-import { ExistsContext } from "./TrinoSqlParser";
-import { SimpleCaseContext } from "./TrinoSqlParser";
-import { SearchedCaseContext } from "./TrinoSqlParser";
-import { CastContext } from "./TrinoSqlParser";
-import { ArrayConstructorContext } from "./TrinoSqlParser";
-import { SubscriptContext } from "./TrinoSqlParser";
-import { ColumnReferenceContext } from "./TrinoSqlParser";
-import { DereferenceContext } from "./TrinoSqlParser";
-import { SpecialDateTimeFunctionContext } from "./TrinoSqlParser";
-import { CurrentUserContext } from "./TrinoSqlParser";
-import { CurrentCatalogContext } from "./TrinoSqlParser";
-import { CurrentSchemaContext } from "./TrinoSqlParser";
-import { CurrentPathContext } from "./TrinoSqlParser";
-import { SubstringContext } from "./TrinoSqlParser";
-import { NormalizeContext } from "./TrinoSqlParser";
-import { ExtractContext } from "./TrinoSqlParser";
-import { ParenthesizedExpressionContext } from "./TrinoSqlParser";
-import { GroupingOperationContext } from "./TrinoSqlParser";
 import { IsolationLevelContext } from "./TrinoSqlParser";
 import { TransactionAccessModeContext } from "./TrinoSqlParser";
-import { SelectSingleContext } from "./TrinoSqlParser";
-import { SelectAllContext } from "./TrinoSqlParser";
 import { PredicatedContext } from "./TrinoSqlParser";
 import { LogicalNotContext } from "./TrinoSqlParser";
 import { LogicalBinaryContext } from "./TrinoSqlParser";
-import { QualifiedArgumentContext } from "./TrinoSqlParser";
-import { UnqualifiedArgumentContext } from "./TrinoSqlParser";
-import { PositionalArgumentContext } from "./TrinoSqlParser";
-import { NamedArgumentContext } from "./TrinoSqlParser";
-import { MergeUpdateContext } from "./TrinoSqlParser";
-import { MergeDeleteContext } from "./TrinoSqlParser";
-import { MergeInsertContext } from "./TrinoSqlParser";
 import { ProgramContext } from "./TrinoSqlParser";
 import { StatementsContext } from "./TrinoSqlParser";
 import { SingleStatementContext } from "./TrinoSqlParser";
@@ -284,6 +284,19 @@ import { CallArgumentContext } from "./TrinoSqlParser";
 import { PathElementContext } from "./TrinoSqlParser";
 import { PathSpecificationContext } from "./TrinoSqlParser";
 import { PrivilegeContext } from "./TrinoSqlParser";
+import { TableOrViewNameContext } from "./TrinoSqlParser";
+import { TableNameContext } from "./TrinoSqlParser";
+import { TableNameCreateContext } from "./TrinoSqlParser";
+import { ViewNameContext } from "./TrinoSqlParser";
+import { ViewNameCreateContext } from "./TrinoSqlParser";
+import { TablePathContext } from "./TrinoSqlParser";
+import { ViewPathContext } from "./TrinoSqlParser";
+import { SchemaNameContext } from "./TrinoSqlParser";
+import { SchemaNameCreateContext } from "./TrinoSqlParser";
+import { SchemaPathContext } from "./TrinoSqlParser";
+import { CatalogNameContext } from "./TrinoSqlParser";
+import { CatalogNameCreateContext } from "./TrinoSqlParser";
+import { FunctionNameContext } from "./TrinoSqlParser";
 import { QualifiedNameContext } from "./TrinoSqlParser";
 import { GrantorContext } from "./TrinoSqlParser";
 import { PrincipalContext } from "./TrinoSqlParser";
@@ -299,17 +312,17 @@ import { NonReservedContext } from "./TrinoSqlParser";
  */
 export interface TrinoSqlListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by the `tableName`
+	 * Enter a parse tree produced by the `tableOrViewRelation`
 	 * labeled alternative in `TrinoSqlParser.relationPrimary`.
 	 * @param ctx the parse tree
 	 */
-	enterTableName?: (ctx: TableNameContext) => void;
+	enterTableOrViewRelation?: (ctx: TableOrViewRelationContext) => void;
 	/**
-	 * Exit a parse tree produced by the `tableName`
+	 * Exit a parse tree produced by the `tableOrViewRelation`
 	 * labeled alternative in `TrinoSqlParser.relationPrimary`.
 	 * @param ctx the parse tree
 	 */
-	exitTableName?: (ctx: TableNameContext) => void;
+	exitTableOrViewRelation?: (ctx: TableOrViewRelationContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `subqueryRelation`
@@ -806,58 +819,6 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	exitExcludedPattern?: (ctx: ExcludedPatternContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `zeroOrMoreQuantifier`
-	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
-	 * @param ctx the parse tree
-	 */
-	enterZeroOrMoreQuantifier?: (ctx: ZeroOrMoreQuantifierContext) => void;
-	/**
-	 * Exit a parse tree produced by the `zeroOrMoreQuantifier`
-	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
-	 * @param ctx the parse tree
-	 */
-	exitZeroOrMoreQuantifier?: (ctx: ZeroOrMoreQuantifierContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `oneOrMoreQuantifier`
-	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
-	 * @param ctx the parse tree
-	 */
-	enterOneOrMoreQuantifier?: (ctx: OneOrMoreQuantifierContext) => void;
-	/**
-	 * Exit a parse tree produced by the `oneOrMoreQuantifier`
-	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
-	 * @param ctx the parse tree
-	 */
-	exitOneOrMoreQuantifier?: (ctx: OneOrMoreQuantifierContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `zeroOrOneQuantifier`
-	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
-	 * @param ctx the parse tree
-	 */
-	enterZeroOrOneQuantifier?: (ctx: ZeroOrOneQuantifierContext) => void;
-	/**
-	 * Exit a parse tree produced by the `zeroOrOneQuantifier`
-	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
-	 * @param ctx the parse tree
-	 */
-	exitZeroOrOneQuantifier?: (ctx: ZeroOrOneQuantifierContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `rangeQuantifier`
-	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
-	 * @param ctx the parse tree
-	 */
-	enterRangeQuantifier?: (ctx: RangeQuantifierContext) => void;
-	/**
-	 * Exit a parse tree produced by the `rangeQuantifier`
-	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
-	 * @param ctx the parse tree
-	 */
-	exitRangeQuantifier?: (ctx: RangeQuantifierContext) => void;
-
-	/**
 	 * Enter a parse tree produced by the `defaultPropertyValue`
 	 * labeled alternative in `TrinoSqlParser.propertyValue`.
 	 * @param ctx the parse tree
@@ -962,58 +923,6 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	exitMultipleGroupingSets?: (ctx: MultipleGroupingSetsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `readUncommitted`
-	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
-	 * @param ctx the parse tree
-	 */
-	enterReadUncommitted?: (ctx: ReadUncommittedContext) => void;
-	/**
-	 * Exit a parse tree produced by the `readUncommitted`
-	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
-	 * @param ctx the parse tree
-	 */
-	exitReadUncommitted?: (ctx: ReadUncommittedContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `readCommitted`
-	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
-	 * @param ctx the parse tree
-	 */
-	enterReadCommitted?: (ctx: ReadCommittedContext) => void;
-	/**
-	 * Exit a parse tree produced by the `readCommitted`
-	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
-	 * @param ctx the parse tree
-	 */
-	exitReadCommitted?: (ctx: ReadCommittedContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `repeatableRead`
-	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
-	 * @param ctx the parse tree
-	 */
-	enterRepeatableRead?: (ctx: RepeatableReadContext) => void;
-	/**
-	 * Exit a parse tree produced by the `repeatableRead`
-	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
-	 * @param ctx the parse tree
-	 */
-	exitRepeatableRead?: (ctx: RepeatableReadContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `serializable`
-	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
-	 * @param ctx the parse tree
-	 */
-	enterSerializable?: (ctx: SerializableContext) => void;
-	/**
-	 * Exit a parse tree produced by the `serializable`
-	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
-	 * @param ctx the parse tree
-	 */
-	exitSerializable?: (ctx: SerializableContext) => void;
-
-	/**
 	 * Enter a parse tree produced by the `valueExpressionDefault`
 	 * labeled alternative in `TrinoSqlParser.valueExpression`.
 	 * @param ctx the parse tree
@@ -1077,32 +986,6 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitConcatenation?: (ctx: ConcatenationContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `basicStringLiteral`
-	 * labeled alternative in `TrinoSqlParser.string`.
-	 * @param ctx the parse tree
-	 */
-	enterBasicStringLiteral?: (ctx: BasicStringLiteralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `basicStringLiteral`
-	 * labeled alternative in `TrinoSqlParser.string`.
-	 * @param ctx the parse tree
-	 */
-	exitBasicStringLiteral?: (ctx: BasicStringLiteralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `unicodeStringLiteral`
-	 * labeled alternative in `TrinoSqlParser.string`.
-	 * @param ctx the parse tree
-	 */
-	enterUnicodeStringLiteral?: (ctx: UnicodeStringLiteralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `unicodeStringLiteral`
-	 * labeled alternative in `TrinoSqlParser.string`.
-	 * @param ctx the parse tree
-	 */
-	exitUnicodeStringLiteral?: (ctx: UnicodeStringLiteralContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `quantifiedPrimary`
@@ -1183,45 +1066,6 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	exitCurrentRoleGrantor?: (ctx: CurrentRoleGrantorContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `unspecifiedPrincipal`
-	 * labeled alternative in `TrinoSqlParser.principal`.
-	 * @param ctx the parse tree
-	 */
-	enterUnspecifiedPrincipal?: (ctx: UnspecifiedPrincipalContext) => void;
-	/**
-	 * Exit a parse tree produced by the `unspecifiedPrincipal`
-	 * labeled alternative in `TrinoSqlParser.principal`.
-	 * @param ctx the parse tree
-	 */
-	exitUnspecifiedPrincipal?: (ctx: UnspecifiedPrincipalContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `userPrincipal`
-	 * labeled alternative in `TrinoSqlParser.principal`.
-	 * @param ctx the parse tree
-	 */
-	enterUserPrincipal?: (ctx: UserPrincipalContext) => void;
-	/**
-	 * Exit a parse tree produced by the `userPrincipal`
-	 * labeled alternative in `TrinoSqlParser.principal`.
-	 * @param ctx the parse tree
-	 */
-	exitUserPrincipal?: (ctx: UserPrincipalContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `rolePrincipal`
-	 * labeled alternative in `TrinoSqlParser.principal`.
-	 * @param ctx the parse tree
-	 */
-	enterRolePrincipal?: (ctx: RolePrincipalContext) => void;
-	/**
-	 * Exit a parse tree produced by the `rolePrincipal`
-	 * labeled alternative in `TrinoSqlParser.principal`.
-	 * @param ctx the parse tree
-	 */
-	exitRolePrincipal?: (ctx: RolePrincipalContext) => void;
-
-	/**
 	 * Enter a parse tree produced by the `unboundedFrame`
 	 * labeled alternative in `TrinoSqlParser.frameBound`.
 	 * @param ctx the parse tree
@@ -1259,6 +1103,760 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitBoundedFrame?: (ctx: BoundedFrameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `queryPrimaryDefault`
+	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
+	 * @param ctx the parse tree
+	 */
+	enterQueryPrimaryDefault?: (ctx: QueryPrimaryDefaultContext) => void;
+	/**
+	 * Exit a parse tree produced by the `queryPrimaryDefault`
+	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
+	 * @param ctx the parse tree
+	 */
+	exitQueryPrimaryDefault?: (ctx: QueryPrimaryDefaultContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `table`
+	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
+	 * @param ctx the parse tree
+	 */
+	enterTable?: (ctx: TableContext) => void;
+	/**
+	 * Exit a parse tree produced by the `table`
+	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
+	 * @param ctx the parse tree
+	 */
+	exitTable?: (ctx: TableContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `inlineTable`
+	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
+	 * @param ctx the parse tree
+	 */
+	enterInlineTable?: (ctx: InlineTableContext) => void;
+	/**
+	 * Exit a parse tree produced by the `inlineTable`
+	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
+	 * @param ctx the parse tree
+	 */
+	exitInlineTable?: (ctx: InlineTableContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `subquery`
+	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
+	 * @param ctx the parse tree
+	 */
+	enterSubquery?: (ctx: SubqueryContext) => void;
+	/**
+	 * Exit a parse tree produced by the `subquery`
+	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
+	 * @param ctx the parse tree
+	 */
+	exitSubquery?: (ctx: SubqueryContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `nullLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterNullLiteral?: (ctx: NullLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `nullLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitNullLiteral?: (ctx: NullLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `intervalLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `intervalLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `typeConstructor`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterTypeConstructor?: (ctx: TypeConstructorContext) => void;
+	/**
+	 * Exit a parse tree produced by the `typeConstructor`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitTypeConstructor?: (ctx: TypeConstructorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `numericLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterNumericLiteral?: (ctx: NumericLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `numericLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitNumericLiteral?: (ctx: NumericLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `booleanLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterBooleanLiteral?: (ctx: BooleanLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `booleanLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitBooleanLiteral?: (ctx: BooleanLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `stringLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterStringLiteral?: (ctx: StringLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `stringLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitStringLiteral?: (ctx: StringLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `binaryLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterBinaryLiteral?: (ctx: BinaryLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `binaryLiteral`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitBinaryLiteral?: (ctx: BinaryLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `parameter`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterParameter?: (ctx: ParameterContext) => void;
+	/**
+	 * Exit a parse tree produced by the `parameter`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitParameter?: (ctx: ParameterContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `position`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterPosition?: (ctx: PositionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `position`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitPosition?: (ctx: PositionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `rowConstructor`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterRowConstructor?: (ctx: RowConstructorContext) => void;
+	/**
+	 * Exit a parse tree produced by the `rowConstructor`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitRowConstructor?: (ctx: RowConstructorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `functionCall`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionCall?: (ctx: FunctionCallContext) => void;
+	/**
+	 * Exit a parse tree produced by the `functionCall`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionCall?: (ctx: FunctionCallContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `measure`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterMeasure?: (ctx: MeasureContext) => void;
+	/**
+	 * Exit a parse tree produced by the `measure`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitMeasure?: (ctx: MeasureContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `lambda`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterLambda?: (ctx: LambdaContext) => void;
+	/**
+	 * Exit a parse tree produced by the `lambda`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitLambda?: (ctx: LambdaContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `subqueryExpression`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterSubqueryExpression?: (ctx: SubqueryExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `subqueryExpression`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitSubqueryExpression?: (ctx: SubqueryExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `exists`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterExists?: (ctx: ExistsContext) => void;
+	/**
+	 * Exit a parse tree produced by the `exists`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitExists?: (ctx: ExistsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `simpleCase`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterSimpleCase?: (ctx: SimpleCaseContext) => void;
+	/**
+	 * Exit a parse tree produced by the `simpleCase`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitSimpleCase?: (ctx: SimpleCaseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `searchedCase`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterSearchedCase?: (ctx: SearchedCaseContext) => void;
+	/**
+	 * Exit a parse tree produced by the `searchedCase`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitSearchedCase?: (ctx: SearchedCaseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `cast`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterCast?: (ctx: CastContext) => void;
+	/**
+	 * Exit a parse tree produced by the `cast`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitCast?: (ctx: CastContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `arrayConstructor`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterArrayConstructor?: (ctx: ArrayConstructorContext) => void;
+	/**
+	 * Exit a parse tree produced by the `arrayConstructor`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitArrayConstructor?: (ctx: ArrayConstructorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `subscript`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterSubscript?: (ctx: SubscriptContext) => void;
+	/**
+	 * Exit a parse tree produced by the `subscript`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitSubscript?: (ctx: SubscriptContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `columnReference`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnReference?: (ctx: ColumnReferenceContext) => void;
+	/**
+	 * Exit a parse tree produced by the `columnReference`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnReference?: (ctx: ColumnReferenceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `dereference`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterDereference?: (ctx: DereferenceContext) => void;
+	/**
+	 * Exit a parse tree produced by the `dereference`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitDereference?: (ctx: DereferenceContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `specialDateTimeFunction`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterSpecialDateTimeFunction?: (ctx: SpecialDateTimeFunctionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `specialDateTimeFunction`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitSpecialDateTimeFunction?: (ctx: SpecialDateTimeFunctionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `currentUser`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterCurrentUser?: (ctx: CurrentUserContext) => void;
+	/**
+	 * Exit a parse tree produced by the `currentUser`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitCurrentUser?: (ctx: CurrentUserContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `currentCatalog`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterCurrentCatalog?: (ctx: CurrentCatalogContext) => void;
+	/**
+	 * Exit a parse tree produced by the `currentCatalog`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitCurrentCatalog?: (ctx: CurrentCatalogContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `currentSchema`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterCurrentSchema?: (ctx: CurrentSchemaContext) => void;
+	/**
+	 * Exit a parse tree produced by the `currentSchema`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitCurrentSchema?: (ctx: CurrentSchemaContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `currentPath`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterCurrentPath?: (ctx: CurrentPathContext) => void;
+	/**
+	 * Exit a parse tree produced by the `currentPath`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitCurrentPath?: (ctx: CurrentPathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `substring`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterSubstring?: (ctx: SubstringContext) => void;
+	/**
+	 * Exit a parse tree produced by the `substring`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitSubstring?: (ctx: SubstringContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `normalize`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterNormalize?: (ctx: NormalizeContext) => void;
+	/**
+	 * Exit a parse tree produced by the `normalize`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitNormalize?: (ctx: NormalizeContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `extract`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterExtract?: (ctx: ExtractContext) => void;
+	/**
+	 * Exit a parse tree produced by the `extract`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitExtract?: (ctx: ExtractContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `parenthesizedExpression`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `parenthesizedExpression`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `groupingOperation`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupingOperation?: (ctx: GroupingOperationContext) => void;
+	/**
+	 * Exit a parse tree produced by the `groupingOperation`
+	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupingOperation?: (ctx: GroupingOperationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `selectSingle`
+	 * labeled alternative in `TrinoSqlParser.selectItem`.
+	 * @param ctx the parse tree
+	 */
+	enterSelectSingle?: (ctx: SelectSingleContext) => void;
+	/**
+	 * Exit a parse tree produced by the `selectSingle`
+	 * labeled alternative in `TrinoSqlParser.selectItem`.
+	 * @param ctx the parse tree
+	 */
+	exitSelectSingle?: (ctx: SelectSingleContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `selectAll`
+	 * labeled alternative in `TrinoSqlParser.selectItem`.
+	 * @param ctx the parse tree
+	 */
+	enterSelectAll?: (ctx: SelectAllContext) => void;
+	/**
+	 * Exit a parse tree produced by the `selectAll`
+	 * labeled alternative in `TrinoSqlParser.selectItem`.
+	 * @param ctx the parse tree
+	 */
+	exitSelectAll?: (ctx: SelectAllContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `qualifiedArgument`
+	 * labeled alternative in `TrinoSqlParser.pathElement`.
+	 * @param ctx the parse tree
+	 */
+	enterQualifiedArgument?: (ctx: QualifiedArgumentContext) => void;
+	/**
+	 * Exit a parse tree produced by the `qualifiedArgument`
+	 * labeled alternative in `TrinoSqlParser.pathElement`.
+	 * @param ctx the parse tree
+	 */
+	exitQualifiedArgument?: (ctx: QualifiedArgumentContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `unqualifiedArgument`
+	 * labeled alternative in `TrinoSqlParser.pathElement`.
+	 * @param ctx the parse tree
+	 */
+	enterUnqualifiedArgument?: (ctx: UnqualifiedArgumentContext) => void;
+	/**
+	 * Exit a parse tree produced by the `unqualifiedArgument`
+	 * labeled alternative in `TrinoSqlParser.pathElement`.
+	 * @param ctx the parse tree
+	 */
+	exitUnqualifiedArgument?: (ctx: UnqualifiedArgumentContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `positionalArgument`
+	 * labeled alternative in `TrinoSqlParser.callArgument`.
+	 * @param ctx the parse tree
+	 */
+	enterPositionalArgument?: (ctx: PositionalArgumentContext) => void;
+	/**
+	 * Exit a parse tree produced by the `positionalArgument`
+	 * labeled alternative in `TrinoSqlParser.callArgument`.
+	 * @param ctx the parse tree
+	 */
+	exitPositionalArgument?: (ctx: PositionalArgumentContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `namedArgument`
+	 * labeled alternative in `TrinoSqlParser.callArgument`.
+	 * @param ctx the parse tree
+	 */
+	enterNamedArgument?: (ctx: NamedArgumentContext) => void;
+	/**
+	 * Exit a parse tree produced by the `namedArgument`
+	 * labeled alternative in `TrinoSqlParser.callArgument`.
+	 * @param ctx the parse tree
+	 */
+	exitNamedArgument?: (ctx: NamedArgumentContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `mergeUpdate`
+	 * labeled alternative in `TrinoSqlParser.mergeCase`.
+	 * @param ctx the parse tree
+	 */
+	enterMergeUpdate?: (ctx: MergeUpdateContext) => void;
+	/**
+	 * Exit a parse tree produced by the `mergeUpdate`
+	 * labeled alternative in `TrinoSqlParser.mergeCase`.
+	 * @param ctx the parse tree
+	 */
+	exitMergeUpdate?: (ctx: MergeUpdateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `mergeDelete`
+	 * labeled alternative in `TrinoSqlParser.mergeCase`.
+	 * @param ctx the parse tree
+	 */
+	enterMergeDelete?: (ctx: MergeDeleteContext) => void;
+	/**
+	 * Exit a parse tree produced by the `mergeDelete`
+	 * labeled alternative in `TrinoSqlParser.mergeCase`.
+	 * @param ctx the parse tree
+	 */
+	exitMergeDelete?: (ctx: MergeDeleteContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `mergeInsert`
+	 * labeled alternative in `TrinoSqlParser.mergeCase`.
+	 * @param ctx the parse tree
+	 */
+	enterMergeInsert?: (ctx: MergeInsertContext) => void;
+	/**
+	 * Exit a parse tree produced by the `mergeInsert`
+	 * labeled alternative in `TrinoSqlParser.mergeCase`.
+	 * @param ctx the parse tree
+	 */
+	exitMergeInsert?: (ctx: MergeInsertContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `zeroOrMoreQuantifier`
+	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
+	 * @param ctx the parse tree
+	 */
+	enterZeroOrMoreQuantifier?: (ctx: ZeroOrMoreQuantifierContext) => void;
+	/**
+	 * Exit a parse tree produced by the `zeroOrMoreQuantifier`
+	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
+	 * @param ctx the parse tree
+	 */
+	exitZeroOrMoreQuantifier?: (ctx: ZeroOrMoreQuantifierContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `oneOrMoreQuantifier`
+	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
+	 * @param ctx the parse tree
+	 */
+	enterOneOrMoreQuantifier?: (ctx: OneOrMoreQuantifierContext) => void;
+	/**
+	 * Exit a parse tree produced by the `oneOrMoreQuantifier`
+	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
+	 * @param ctx the parse tree
+	 */
+	exitOneOrMoreQuantifier?: (ctx: OneOrMoreQuantifierContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `zeroOrOneQuantifier`
+	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
+	 * @param ctx the parse tree
+	 */
+	enterZeroOrOneQuantifier?: (ctx: ZeroOrOneQuantifierContext) => void;
+	/**
+	 * Exit a parse tree produced by the `zeroOrOneQuantifier`
+	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
+	 * @param ctx the parse tree
+	 */
+	exitZeroOrOneQuantifier?: (ctx: ZeroOrOneQuantifierContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `rangeQuantifier`
+	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
+	 * @param ctx the parse tree
+	 */
+	enterRangeQuantifier?: (ctx: RangeQuantifierContext) => void;
+	/**
+	 * Exit a parse tree produced by the `rangeQuantifier`
+	 * labeled alternative in `TrinoSqlParser.patternQuantifier`.
+	 * @param ctx the parse tree
+	 */
+	exitRangeQuantifier?: (ctx: RangeQuantifierContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `readUncommitted`
+	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
+	 * @param ctx the parse tree
+	 */
+	enterReadUncommitted?: (ctx: ReadUncommittedContext) => void;
+	/**
+	 * Exit a parse tree produced by the `readUncommitted`
+	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
+	 * @param ctx the parse tree
+	 */
+	exitReadUncommitted?: (ctx: ReadUncommittedContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `readCommitted`
+	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
+	 * @param ctx the parse tree
+	 */
+	enterReadCommitted?: (ctx: ReadCommittedContext) => void;
+	/**
+	 * Exit a parse tree produced by the `readCommitted`
+	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
+	 * @param ctx the parse tree
+	 */
+	exitReadCommitted?: (ctx: ReadCommittedContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `repeatableRead`
+	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
+	 * @param ctx the parse tree
+	 */
+	enterRepeatableRead?: (ctx: RepeatableReadContext) => void;
+	/**
+	 * Exit a parse tree produced by the `repeatableRead`
+	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
+	 * @param ctx the parse tree
+	 */
+	exitRepeatableRead?: (ctx: RepeatableReadContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `serializable`
+	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
+	 * @param ctx the parse tree
+	 */
+	enterSerializable?: (ctx: SerializableContext) => void;
+	/**
+	 * Exit a parse tree produced by the `serializable`
+	 * labeled alternative in `TrinoSqlParser.levelOfIsolation`.
+	 * @param ctx the parse tree
+	 */
+	exitSerializable?: (ctx: SerializableContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `basicStringLiteral`
+	 * labeled alternative in `TrinoSqlParser.string`.
+	 * @param ctx the parse tree
+	 */
+	enterBasicStringLiteral?: (ctx: BasicStringLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `basicStringLiteral`
+	 * labeled alternative in `TrinoSqlParser.string`.
+	 * @param ctx the parse tree
+	 */
+	exitBasicStringLiteral?: (ctx: BasicStringLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `unicodeStringLiteral`
+	 * labeled alternative in `TrinoSqlParser.string`.
+	 * @param ctx the parse tree
+	 */
+	enterUnicodeStringLiteral?: (ctx: UnicodeStringLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `unicodeStringLiteral`
+	 * labeled alternative in `TrinoSqlParser.string`.
+	 * @param ctx the parse tree
+	 */
+	exitUnicodeStringLiteral?: (ctx: UnicodeStringLiteralContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `unspecifiedPrincipal`
+	 * labeled alternative in `TrinoSqlParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	enterUnspecifiedPrincipal?: (ctx: UnspecifiedPrincipalContext) => void;
+	/**
+	 * Exit a parse tree produced by the `unspecifiedPrincipal`
+	 * labeled alternative in `TrinoSqlParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	exitUnspecifiedPrincipal?: (ctx: UnspecifiedPrincipalContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `userPrincipal`
+	 * labeled alternative in `TrinoSqlParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	enterUserPrincipal?: (ctx: UserPrincipalContext) => void;
+	/**
+	 * Exit a parse tree produced by the `userPrincipal`
+	 * labeled alternative in `TrinoSqlParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	exitUserPrincipal?: (ctx: UserPrincipalContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `rolePrincipal`
+	 * labeled alternative in `TrinoSqlParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	enterRolePrincipal?: (ctx: RolePrincipalContext) => void;
+	/**
+	 * Exit a parse tree produced by the `rolePrincipal`
+	 * labeled alternative in `TrinoSqlParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	exitRolePrincipal?: (ctx: RolePrincipalContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `statementDefault`
@@ -2223,474 +2821,6 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	exitTimeZoneString?: (ctx: TimeZoneStringContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `queryPrimaryDefault`
-	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterQueryPrimaryDefault?: (ctx: QueryPrimaryDefaultContext) => void;
-	/**
-	 * Exit a parse tree produced by the `queryPrimaryDefault`
-	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitQueryPrimaryDefault?: (ctx: QueryPrimaryDefaultContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `table`
-	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterTable?: (ctx: TableContext) => void;
-	/**
-	 * Exit a parse tree produced by the `table`
-	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitTable?: (ctx: TableContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `inlineTable`
-	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterInlineTable?: (ctx: InlineTableContext) => void;
-	/**
-	 * Exit a parse tree produced by the `inlineTable`
-	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitInlineTable?: (ctx: InlineTableContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `subquery`
-	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterSubquery?: (ctx: SubqueryContext) => void;
-	/**
-	 * Exit a parse tree produced by the `subquery`
-	 * labeled alternative in `TrinoSqlParser.queryPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitSubquery?: (ctx: SubqueryContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `nullLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterNullLiteral?: (ctx: NullLiteralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `nullLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitNullLiteral?: (ctx: NullLiteralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `intervalLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `intervalLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `typeConstructor`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterTypeConstructor?: (ctx: TypeConstructorContext) => void;
-	/**
-	 * Exit a parse tree produced by the `typeConstructor`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitTypeConstructor?: (ctx: TypeConstructorContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `numericLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterNumericLiteral?: (ctx: NumericLiteralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `numericLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitNumericLiteral?: (ctx: NumericLiteralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `booleanLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterBooleanLiteral?: (ctx: BooleanLiteralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `booleanLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitBooleanLiteral?: (ctx: BooleanLiteralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `stringLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterStringLiteral?: (ctx: StringLiteralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `stringLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitStringLiteral?: (ctx: StringLiteralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `binaryLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterBinaryLiteral?: (ctx: BinaryLiteralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `binaryLiteral`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitBinaryLiteral?: (ctx: BinaryLiteralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `parameter`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterParameter?: (ctx: ParameterContext) => void;
-	/**
-	 * Exit a parse tree produced by the `parameter`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitParameter?: (ctx: ParameterContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `position`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterPosition?: (ctx: PositionContext) => void;
-	/**
-	 * Exit a parse tree produced by the `position`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitPosition?: (ctx: PositionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `rowConstructor`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterRowConstructor?: (ctx: RowConstructorContext) => void;
-	/**
-	 * Exit a parse tree produced by the `rowConstructor`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitRowConstructor?: (ctx: RowConstructorContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `functionCall`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterFunctionCall?: (ctx: FunctionCallContext) => void;
-	/**
-	 * Exit a parse tree produced by the `functionCall`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitFunctionCall?: (ctx: FunctionCallContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `measure`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterMeasure?: (ctx: MeasureContext) => void;
-	/**
-	 * Exit a parse tree produced by the `measure`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitMeasure?: (ctx: MeasureContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `lambda`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterLambda?: (ctx: LambdaContext) => void;
-	/**
-	 * Exit a parse tree produced by the `lambda`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitLambda?: (ctx: LambdaContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `subqueryExpression`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterSubqueryExpression?: (ctx: SubqueryExpressionContext) => void;
-	/**
-	 * Exit a parse tree produced by the `subqueryExpression`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitSubqueryExpression?: (ctx: SubqueryExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `exists`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterExists?: (ctx: ExistsContext) => void;
-	/**
-	 * Exit a parse tree produced by the `exists`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitExists?: (ctx: ExistsContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `simpleCase`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterSimpleCase?: (ctx: SimpleCaseContext) => void;
-	/**
-	 * Exit a parse tree produced by the `simpleCase`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitSimpleCase?: (ctx: SimpleCaseContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `searchedCase`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterSearchedCase?: (ctx: SearchedCaseContext) => void;
-	/**
-	 * Exit a parse tree produced by the `searchedCase`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitSearchedCase?: (ctx: SearchedCaseContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `cast`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterCast?: (ctx: CastContext) => void;
-	/**
-	 * Exit a parse tree produced by the `cast`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitCast?: (ctx: CastContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `arrayConstructor`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterArrayConstructor?: (ctx: ArrayConstructorContext) => void;
-	/**
-	 * Exit a parse tree produced by the `arrayConstructor`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitArrayConstructor?: (ctx: ArrayConstructorContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `subscript`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterSubscript?: (ctx: SubscriptContext) => void;
-	/**
-	 * Exit a parse tree produced by the `subscript`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitSubscript?: (ctx: SubscriptContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `columnReference`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterColumnReference?: (ctx: ColumnReferenceContext) => void;
-	/**
-	 * Exit a parse tree produced by the `columnReference`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitColumnReference?: (ctx: ColumnReferenceContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `dereference`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterDereference?: (ctx: DereferenceContext) => void;
-	/**
-	 * Exit a parse tree produced by the `dereference`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitDereference?: (ctx: DereferenceContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `specialDateTimeFunction`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterSpecialDateTimeFunction?: (ctx: SpecialDateTimeFunctionContext) => void;
-	/**
-	 * Exit a parse tree produced by the `specialDateTimeFunction`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitSpecialDateTimeFunction?: (ctx: SpecialDateTimeFunctionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `currentUser`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterCurrentUser?: (ctx: CurrentUserContext) => void;
-	/**
-	 * Exit a parse tree produced by the `currentUser`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitCurrentUser?: (ctx: CurrentUserContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `currentCatalog`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterCurrentCatalog?: (ctx: CurrentCatalogContext) => void;
-	/**
-	 * Exit a parse tree produced by the `currentCatalog`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitCurrentCatalog?: (ctx: CurrentCatalogContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `currentSchema`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterCurrentSchema?: (ctx: CurrentSchemaContext) => void;
-	/**
-	 * Exit a parse tree produced by the `currentSchema`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitCurrentSchema?: (ctx: CurrentSchemaContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `currentPath`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterCurrentPath?: (ctx: CurrentPathContext) => void;
-	/**
-	 * Exit a parse tree produced by the `currentPath`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitCurrentPath?: (ctx: CurrentPathContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `substring`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterSubstring?: (ctx: SubstringContext) => void;
-	/**
-	 * Exit a parse tree produced by the `substring`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitSubstring?: (ctx: SubstringContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `normalize`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterNormalize?: (ctx: NormalizeContext) => void;
-	/**
-	 * Exit a parse tree produced by the `normalize`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitNormalize?: (ctx: NormalizeContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `extract`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterExtract?: (ctx: ExtractContext) => void;
-	/**
-	 * Exit a parse tree produced by the `extract`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitExtract?: (ctx: ExtractContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `parenthesizedExpression`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => void;
-	/**
-	 * Exit a parse tree produced by the `parenthesizedExpression`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `groupingOperation`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterGroupingOperation?: (ctx: GroupingOperationContext) => void;
-	/**
-	 * Exit a parse tree produced by the `groupingOperation`
-	 * labeled alternative in `TrinoSqlParser.primaryExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitGroupingOperation?: (ctx: GroupingOperationContext) => void;
-
-	/**
 	 * Enter a parse tree produced by the `isolationLevel`
 	 * labeled alternative in `TrinoSqlParser.transactionMode`.
 	 * @param ctx the parse tree
@@ -2715,32 +2845,6 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitTransactionAccessMode?: (ctx: TransactionAccessModeContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `selectSingle`
-	 * labeled alternative in `TrinoSqlParser.selectItem`.
-	 * @param ctx the parse tree
-	 */
-	enterSelectSingle?: (ctx: SelectSingleContext) => void;
-	/**
-	 * Exit a parse tree produced by the `selectSingle`
-	 * labeled alternative in `TrinoSqlParser.selectItem`.
-	 * @param ctx the parse tree
-	 */
-	exitSelectSingle?: (ctx: SelectSingleContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `selectAll`
-	 * labeled alternative in `TrinoSqlParser.selectItem`.
-	 * @param ctx the parse tree
-	 */
-	enterSelectAll?: (ctx: SelectAllContext) => void;
-	/**
-	 * Exit a parse tree produced by the `selectAll`
-	 * labeled alternative in `TrinoSqlParser.selectItem`.
-	 * @param ctx the parse tree
-	 */
-	exitSelectAll?: (ctx: SelectAllContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `predicated`
@@ -2780,97 +2884,6 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitLogicalBinary?: (ctx: LogicalBinaryContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `qualifiedArgument`
-	 * labeled alternative in `TrinoSqlParser.pathElement`.
-	 * @param ctx the parse tree
-	 */
-	enterQualifiedArgument?: (ctx: QualifiedArgumentContext) => void;
-	/**
-	 * Exit a parse tree produced by the `qualifiedArgument`
-	 * labeled alternative in `TrinoSqlParser.pathElement`.
-	 * @param ctx the parse tree
-	 */
-	exitQualifiedArgument?: (ctx: QualifiedArgumentContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `unqualifiedArgument`
-	 * labeled alternative in `TrinoSqlParser.pathElement`.
-	 * @param ctx the parse tree
-	 */
-	enterUnqualifiedArgument?: (ctx: UnqualifiedArgumentContext) => void;
-	/**
-	 * Exit a parse tree produced by the `unqualifiedArgument`
-	 * labeled alternative in `TrinoSqlParser.pathElement`.
-	 * @param ctx the parse tree
-	 */
-	exitUnqualifiedArgument?: (ctx: UnqualifiedArgumentContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `positionalArgument`
-	 * labeled alternative in `TrinoSqlParser.callArgument`.
-	 * @param ctx the parse tree
-	 */
-	enterPositionalArgument?: (ctx: PositionalArgumentContext) => void;
-	/**
-	 * Exit a parse tree produced by the `positionalArgument`
-	 * labeled alternative in `TrinoSqlParser.callArgument`.
-	 * @param ctx the parse tree
-	 */
-	exitPositionalArgument?: (ctx: PositionalArgumentContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `namedArgument`
-	 * labeled alternative in `TrinoSqlParser.callArgument`.
-	 * @param ctx the parse tree
-	 */
-	enterNamedArgument?: (ctx: NamedArgumentContext) => void;
-	/**
-	 * Exit a parse tree produced by the `namedArgument`
-	 * labeled alternative in `TrinoSqlParser.callArgument`.
-	 * @param ctx the parse tree
-	 */
-	exitNamedArgument?: (ctx: NamedArgumentContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `mergeUpdate`
-	 * labeled alternative in `TrinoSqlParser.mergeCase`.
-	 * @param ctx the parse tree
-	 */
-	enterMergeUpdate?: (ctx: MergeUpdateContext) => void;
-	/**
-	 * Exit a parse tree produced by the `mergeUpdate`
-	 * labeled alternative in `TrinoSqlParser.mergeCase`.
-	 * @param ctx the parse tree
-	 */
-	exitMergeUpdate?: (ctx: MergeUpdateContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `mergeDelete`
-	 * labeled alternative in `TrinoSqlParser.mergeCase`.
-	 * @param ctx the parse tree
-	 */
-	enterMergeDelete?: (ctx: MergeDeleteContext) => void;
-	/**
-	 * Exit a parse tree produced by the `mergeDelete`
-	 * labeled alternative in `TrinoSqlParser.mergeCase`.
-	 * @param ctx the parse tree
-	 */
-	exitMergeDelete?: (ctx: MergeDeleteContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `mergeInsert`
-	 * labeled alternative in `TrinoSqlParser.mergeCase`.
-	 * @param ctx the parse tree
-	 */
-	enterMergeInsert?: (ctx: MergeInsertContext) => void;
-	/**
-	 * Exit a parse tree produced by the `mergeInsert`
-	 * labeled alternative in `TrinoSqlParser.mergeCase`.
-	 * @param ctx the parse tree
-	 */
-	exitMergeInsert?: (ctx: MergeInsertContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `TrinoSqlParser.program`.
@@ -3784,6 +3797,149 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitPrivilege?: (ctx: PrivilegeContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.tableOrViewName`.
+	 * @param ctx the parse tree
+	 */
+	enterTableOrViewName?: (ctx: TableOrViewNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.tableOrViewName`.
+	 * @param ctx the parse tree
+	 */
+	exitTableOrViewName?: (ctx: TableOrViewNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.tableName`.
+	 * @param ctx the parse tree
+	 */
+	enterTableName?: (ctx: TableNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.tableName`.
+	 * @param ctx the parse tree
+	 */
+	exitTableName?: (ctx: TableNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.tableNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterTableNameCreate?: (ctx: TableNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.tableNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitTableNameCreate?: (ctx: TableNameCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.viewName`.
+	 * @param ctx the parse tree
+	 */
+	enterViewName?: (ctx: ViewNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.viewName`.
+	 * @param ctx the parse tree
+	 */
+	exitViewName?: (ctx: ViewNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.viewNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterViewNameCreate?: (ctx: ViewNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.viewNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitViewNameCreate?: (ctx: ViewNameCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.tablePath`.
+	 * @param ctx the parse tree
+	 */
+	enterTablePath?: (ctx: TablePathContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.tablePath`.
+	 * @param ctx the parse tree
+	 */
+	exitTablePath?: (ctx: TablePathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.viewPath`.
+	 * @param ctx the parse tree
+	 */
+	enterViewPath?: (ctx: ViewPathContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.viewPath`.
+	 * @param ctx the parse tree
+	 */
+	exitViewPath?: (ctx: ViewPathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.schemaName`.
+	 * @param ctx the parse tree
+	 */
+	enterSchemaName?: (ctx: SchemaNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.schemaName`.
+	 * @param ctx the parse tree
+	 */
+	exitSchemaName?: (ctx: SchemaNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.schemaNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterSchemaNameCreate?: (ctx: SchemaNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.schemaNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitSchemaNameCreate?: (ctx: SchemaNameCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.schemaPath`.
+	 * @param ctx the parse tree
+	 */
+	enterSchemaPath?: (ctx: SchemaPathContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.schemaPath`.
+	 * @param ctx the parse tree
+	 */
+	exitSchemaPath?: (ctx: SchemaPathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.catalogName`.
+	 * @param ctx the parse tree
+	 */
+	enterCatalogName?: (ctx: CatalogNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.catalogName`.
+	 * @param ctx the parse tree
+	 */
+	exitCatalogName?: (ctx: CatalogNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.catalogNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterCatalogNameCreate?: (ctx: CatalogNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.catalogNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitCatalogNameCreate?: (ctx: CatalogNameCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.functionName`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionName?: (ctx: FunctionNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.functionName`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionName?: (ctx: FunctionNameContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `TrinoSqlParser.qualifiedName`.
