@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.4](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.3...v4.0.0-beta.4.4) (2023-10-24)
+
+
+### Bug Fixes
+
+* correct import path of CaretPosition ([9a93be6](https://github.com/DTStack/dt-sql-parser/commit/9a93be64afa3079562e35d9da21267c0d4beddbb))
+
 ## [4.0.0-beta.4.3](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.1...v4.0.0-beta.4.3) (2023-10-20)
 
 
