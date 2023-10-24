@@ -1,0 +1,13 @@
+ALTER ;
+
+CREATE ;
+
+DEALLOCATE ;
+
+DELETE ;
+
+DESCRIBE ;
+
+DROP ;
+
+INSERT ;

@@ -55,7 +55,7 @@ describe('Flink SQL Syntax Suggestion', () => {
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
-        console.log(syntaxes);
+
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['cat', '.']);
     });
