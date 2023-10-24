@@ -29,15 +29,15 @@ Additionally, it provides auxiliary functions such as SQL splitting and Auto-Com
 
 **Supported auxiliary methods**
 
-| SQL Type    | SQL Split | Auto-Complete |
-| ----------- | -------- | -------- |
-| Generic SQL | WIP      | WIP      |
-| Flink SQL   | ✅        | ✅        |
-| Spark SQL   | ✅        | ✅        |
-| Hive SQL    | ✅        | ✅        |
-| PL/SQL      | WIP      | WIP      |
-| Postgre SQL | WIP      | WIP      |
-| Trino SQL   | WIP      | WIP      |
+| SQL Type    | SQL Split | Code-Completion |
+| ----------- | --------  | -------- |
+| Generic SQL | WIP       | WIP      |
+| Flink SQL   | ✅        | ✅       |
+| Spark SQL   | ✅        | ✅       |
+| Hive SQL    | ✅        | ✅       |
+| PL/SQL      | WIP       | WIP      |
+| Postgre SQL | WIP       | WIP      |
+| Trino SQL   | ✅        | ✅       |
 
 >Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
 
