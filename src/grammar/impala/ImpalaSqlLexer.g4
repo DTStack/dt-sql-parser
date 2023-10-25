@@ -19,319 +19,385 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-lexer grammar ImpalaLexer;
+lexer grammar ImpalaSqlLexer;
 
 options { caseInsensitive = true; }
 
-KW_ABORT_ON_ERROR                      : 'ABORT_ON_ERROR';
-KW_ADD                                 : 'ADD';
-KW_AGGREGATE                           : 'AGGREGATE';
-KW_ALL                                 : 'ALL';
-KW_ALLOW_ERASURE_CODED_FILES           : 'ALLOW_ERASURE_CODED_FILES';
-KW_ALLOW_UNSUPPORTED_FORMATS           : 'ALLOW_UNSUPPORTED_FORMATS';
-KW_ALTER                               : 'ALTER';
-KW_ANALYTIC                            : 'ANALYTIC';
-KW_ANALYZE                             : 'ANALYZE';
-KW_ANTI                                : 'ANTI';
-KW_APPX_COUNT_DISTINCT                 : 'APPX_COUNT_DISTINCT';
-KW_ARRAY                               : 'ARRAY';
-KW_AS                                  : 'AS';
-KW_ASC                                 : 'ASC';
-KW_AUTHORIZATION                       : 'AUTHORIZATION';
-KW_AUTO_ENCODING                       : 'AUTO_ENCODING';
-KW_AVRO                                : 'AVRO';
-KW_BATCH_SIZE                          : 'BATCH_SIZE';
-KW_BIGINT                              : 'BIGINT';
-KW_BIT_SHIFFLE                         : 'BIT_SHIFFLE';
-KW_BLOCK_SIZE                          : 'BLOCK_SIZE';
-KW_BOOLEAN                             : 'BOOLEAN';
-KW_BROADCAST_BYTES_LIMIT               : 'BROADCAST_BYTES_LIMIT';
-KW_BUFFER_POOL_LIMIT                   : 'BUFFER_POOL_LIMIT';
-KW_BY                                  : 'BY';
-KW_CACHED                              : 'CACHED';
-KW_CASCADE                             : 'CASCADE';
-KW_CHANGE                              : 'CHANGE';
-KW_CHAR                                : 'CHAR';
-KW_CLOSEFN                             : 'CLOSEFN';
-KW_COLUMN                              : 'COLUMN';
-KW_COLUMNS                             : 'COLUMNS';
-KW_COMMENT                             : 'COMMENT';
-KW_COMPRESSION                         : 'COMPRESSION';
-KW_COMPRESSION_CODEC                   : 'COMPRESSION_CODEC';
-KW_COMPUTE                             : 'COMPUTE';
-KW_COMPUTE_STATS_MIN_SAMPLE_SIZE       : 'COMPUTE_STATS_MIN_SAMPLE_SIZE';
-KW_CREATE                              : 'CREATE';
-KW_CROSS                               : 'CROSS';
-KW_CURRENT                             : 'CURRENT';
-KW_DATA                                : 'DATA';
-KW_DATABASE                            : 'DATABASE';
-KW_DATABASES                           : 'DATABASES';
-KW_DEBUG_ACTION                        : 'DEBUG_ACTION';
-KW_DECIMAL                             : 'DECIMAL';
-KW_DECIMAL_V2                          : 'DECIMAL_V2';
-KW_DEFAULT                             : 'DEFAULT';
-KW_DEFAULT_FILE_FORMAT                 : 'DEFAULT_FILE_FORMAT';
-KW_DEFAULT_HINTS_INSERT_STATEMENT      : 'DEFAULT_HINTS_INSERT_STATEMENT';
-KW_DEFAULT_JOIN_DISTRIBUTION_MODE      : 'DEFAULT_JOIN_DISTRIBUTION_MODE';
-KW_DEFAULT_SPILLABLE_BUFFER_SIZE       : 'DEFAULT_SPILLABLE_BUFFER_SIZE';
-KW_DEFAULT_TRANSACTIONAL_TYPE          : 'DEFAULT_TRANSACTIONAL_TYPE';
-KW_DELETE                              : 'DELETE';
-KW_DELETE_STATS_IN_TRUNCATE            : 'DELETE_STATS_IN_TRUNCATE';
-KW_DELIMITED                           : 'DELIMITED';
-KW_DESC                                : 'DESC';
-KW_DESCRIBE                            : 'DESCRIBE';
-KW_DICT_ENCODING                       : 'DICT_ENCODING';
-KW_DISABLE_CODEGEN                     : 'DISABLE_CODEGEN';
-KW_DISABLE_CODEGEN_ROWS_THRESHOLD      : 'DISABLE_CODEGEN_ROWS_THRESHOLD';
-KW_DISABLE_HBASE_NUM_ROWS_ESTIMATE     : 'DISABLE_HBASE_NUM_ROWS_ESTIMATE';
-KW_DISABLE_ROW_RUNTIME_FILTERING       : 'DISABLE_ROW_RUNTIME_FILTERING';
-KW_DISABLE_STREAMING_PREAGGREGATIONS   : 'DISABLE_STREAMING_PREAGGREGATIONS';
-KW_DISABLE_UNSAFE_SPILLS               : 'DISABLE_UNSAFE_SPILLS';
-KW_DISTINCT                            : 'DISTINCT';
-KW_DOUBLE                              : 'DOUBLE';
-KW_DROP                                : 'DROP';
-KW_ENABLE_EXPR_REWRITES                : 'ENABLE_EXPR_REWRITES';
-KW_ENCODING                            : 'ENCODING';
-KW_ESCAPED                             : 'ESCAPED';
-KW_ESTIMATE                            : 'ESTIMATE';
-KW_EXEC_SINGLE_NODE_ROWS_THRESHOLD     : 'EXEC_SINGLE_NODE_ROWS_THRESHOLD';
-KW_EXEC_TIME_LIMIT_S                   : 'EXEC_TIME_LIMIT_S';
-KW_EXISTS                              : 'EXISTS';
-KW_EXPAND_COMPLEX_TYPES                : 'EXPAND_COMPLEX_TYPES';
-KW_EXPLAIN                             : 'EXPLAIN';
-KW_EXPLAIN_LEVEL                       : 'EXPLAIN_LEVEL';
-KW_EXTENDED                            : 'EXTENDED';
-KW_EXTERNAL                            : 'EXTERNAL';
-KW_FALSE                               : 'FALSE';
-KW_FETCH_ROWS_TIMEOUT_MS               : 'FETCH_ROWS_TIMEOUT_MS';
-KW_FIELDS                              : 'FIELDS';
-KW_FILEFORMAT                          : 'FILEFORMAT';
-KW_FILES                               : 'FILES';
-KW_FINALIZE_FN                         : 'FINALIZE_FN';
-KW_FIRST                               : 'FIRST';
-KW_FLOAT                               : 'FLOAT';
-KW_FORMAT                              : 'FORMAT';
-KW_FORMATTED                           : 'FORMATTED';
-KW_FROM                                : 'FROM';
-KW_FULL                                : 'FULL';
-KW_FUNCTION                            : 'FUNCTION';
-KW_FUNCTIONS                           : 'FUNCTIONS';
-KW_GRANT                               : 'GRANT';
-KW_GROUP                               : 'GROUP';
-KW_HAVING                              : 'HAVING';
-KW_HBASE_CACHE_BLOCKS                  : 'HBASE_CACHE_BLOCKS';
-KW_HBASE_CACHING                       : 'HBASE_CACHING';
-KW_IDLE_SESSION_TIMEOUT                : 'IDLE_SESSION_TIMEOUT';
-KW_IF                                  : 'IF';
-KW_IN                                  : 'IN';
-KW_INCREMENTAL                         : 'INCREMENTAL';
-KW_INIT_FN                             : 'INIT_FN';
-KW_INNER                               : 'INNER';
-KW_INPATH                              : 'INPATH';
-KW_INSERT                              : 'INSERT';
-KW_INT                                 : 'INT';
-KW_INTERMEDIATE                        : 'INTERMEDIATE';
-KW_INTO                                : 'INTO';
-KW_INVALIDATE                          : 'INVALIDATE';
-KW_IS                                  : 'IS';
-KW_JOIN                                : 'JOIN';
-KW_JOIN_ROWS_PRODUCED_LIMIT            : 'JOIN_ROWS_PRODUCED_LIMIT';
-KW_KUDU_READ_MODE                      : 'KUDU_READ_MODE';
-KW_LAST                                : 'LAST';
-KW_LEFT                                : 'LEFT';
-KW_LEVEL                               : 'LEVEL';
-KW_LIKE                                : 'LIKE';
-KW_LIMIT                               : 'LIMIT';
-KW_LINES                               : 'LINES';
-KW_LIVE_PROGRESS                       : 'LIVE_PROGRESS';
-KW_LIVE_SUMMARY                        : 'LIVE_SUMMARY';
-KW_LOAD                                : 'LOAD';
-KW_LOCATION                            : 'LOCATION';
-KW_LZ4                                 : 'LZ4';
-KW_MAP                                 : 'MAP';
-KW_MAX_ERRORS                          : 'MAX_ERRORS';
-KW_MAX_MEM_ESTIMATE_FOR_ADMISSION      : 'MAX_MEM_ESTIMATE_FOR_ADMISSION';
-KW_MAX_RESULT_SPOOLING_MEM             : 'MAX_RESULT_SPOOLING_MEM';
-KW_MAX_ROW_SIZE                        : 'MAX_ROW_SIZE';
-KW_MAX_SCAN_RANGE_LENGTH               : 'MAX_SCAN_RANGE_LENGTH';
-KW_MAX_SPILLED_RESULT_SPOOLING_MEM     : 'MAX_SPILLED_RESULT_SPOOLING_MEM';
-KW_MEM_LIMIT                           : 'MEM_LIMIT';
-KW_MERGE_FN                            : 'MERGE_FN';
-KW_METADATA                            : 'METADATA';
-KW_MIN_SPILLABLE_BUFFER_SIZE           : 'MIN_SPILLABLE_BUFFER_SIZE';
-KW_MT_DOP                              : 'MT_DOP';
-KW_NONE                                : 'NONE';
-KW_NOSHUFFLE                           : 'NOSHUFFLE';
-KW_NOT                                 : 'NOT';
-KW_NULL_                               : 'NULL';
-KW_NULLS                               : 'NULLS';
-KW_NUM_NODES                           : 'NUM_NODES';
-KW_NUM_ROWS_PRODUCED_LIMIT             : 'NUM_ROWS_PRODUCED_LIMIT';
-KW_NUM_SCANNER_THREADS                 : 'NUM_SCANNER_THREADS';
-KW_OFFSET                              : 'OFFSET';
-KW_ON                                  : 'ON';
-KW_ONE                                 : 'ONE';
-KW_OPTIMIZE_PARTITION_KEY_SCANS        : 'OPTIMIZE_PARTITION_KEY_SCANS';
-KW_ORDER                               : 'ORDER';
-KW_OUTER                               : 'OUTER';
-KW_OVERWRITE                           : 'OVERWRITE';
-KW_OWNER                               : 'OWNER';
-KW_PARQUET                             : 'PARQUET';
-KW_PARQUET_ANNOTATE_STRINGS_UTF8       : 'PARQUET_ANNOTATE_STRINGS_UTF8';
-KW_PARQUET_ARRAY_RESOLUTION            : 'PARQUET_ARRAY_RESOLUTION';
-KW_PARQUET_COMPRESSION_CODEC           : 'PARQUET_COMPRESSION_CODEC';
-KW_PARQUET_DICTIONARY_FILTERING        : 'PARQUET_DICTIONARY_FILTERING';
-KW_PARQUET_FALLBACK_SCHEMA_RESOLUTION  : 'PARQUET_FALLBACK_SCHEMA_RESOLUTION';
-KW_PARQUET_FILE_SIZE                   : 'PARQUET_FILE_SIZE';
-KW_PARQUET_OBJECT_STORE_SPLIT_SIZE     : 'PARQUET_OBJECT_STORE_SPLIT_SIZE';
-KW_PARQUET_PAGE_ROW_COUNT_LIMIT        : 'PARQUET_PAGE_ROW_COUNT_LIMIT';
-KW_PARQUET_READ_PAGE_INDEX             : 'PARQUET_READ_PAGE_INDEX';
-KW_PARQUET_READ_STATISTICS             : 'PARQUET_READ_STATISTICS';
-KW_PARQUET_WRITE_PAGE_INDEX            : 'PARQUET_WRITE_PAGE_INDEX';
-KW_PARTITION                           : 'PARTITION';
-KW_PARTITIONS                          : 'PARTITIONS';
-KW_PERCENT                             : 'PERCENT';
-KW_PLAIN_ENCODING                      : 'PLAIN_ENCODING';
-KW_PREFETCH_MODE                       : 'PREFETCH_MODE';
-KW_PREFIX_ENCODING                     : 'PREFIX_ENCODING';
-KW_PREPARE_FN                          : 'PREPARE_FN';
-KW_PURGE                               : 'PURGE';
-KW_QUERY_TIMEOUT_S                     : 'QUERY_TIMEOUT_S';
-KW_RANGE                               : 'RANGE';
-KW_RCFILE                              : 'RCFILE';
-KW_RECOVER                             : 'RECOVER';
-KW_REFRESH                             : 'REFRESH';
-KW_REFRESH_UPDATED_HMS_PARTITIONS      : 'REFRESH_UPDATED_HMS_PARTITIONS';
-KW_RENAME                              : 'RENAME';
-KW_REPEATABLE                          : 'REPEATABLE';
-KW_REPLACE                             : 'REPLACE';
-KW_REPLICA_PREFERENCE                  : 'REPLICA_PREFERENCE';
-KW_REPLICATION                         : 'REPLICATION';
-KW_REQUEST_POOL                        : 'REQUEST_POOL';
-KW_RESOURCE_TRACE_RATIO                : 'RESOURCE_TRACE_RATIO';
-KW_RESTRICT                            : 'RESTRICT';
-KW_RETRY_FAILED_QUERIES                : 'RETRY_FAILED_QUERIES';
-KW_RETURNS                             : 'RETURNS';
-KW_REVOKE                              : 'REVOKE';
-KW_RIGHT                               : 'RIGHT';
-KW_RLE                                 : 'RLE';
-KW_ROLE                                : 'ROLE';
-KW_ROLES                               : 'ROLES';
-KW_ROW                                 : 'ROW';
-KW_RUNTIME_BLOOM_FILTER_SIZE           : 'RUNTIME_BLOOM_FILTER_SIZE';
-KW_RUNTIME_FILTER_MAX_SIZE             : 'RUNTIME_FILTER_MAX_SIZE';
-KW_RUNTIME_FILTER_MIN_SIZE             : 'RUNTIME_FILTER_MIN_SIZE';
-KW_RUNTIME_FILTER_MODE                 : 'RUNTIME_FILTER_MODE';
-KW_RUNTIME_FILTER_WAIT_TIME_MS         : 'RUNTIME_FILTER_WAIT_TIME_MS';
-KW_S3_SKIP_INSERT_STAGING              : 'S3_SKIP_INSERT_STAGING';
-KW_SAMPLE                              : 'SAMPLE';
-KW_SCAN_BYTES_LIMIT                    : 'SCAN_BYTES_LIMIT';
-KW_SCHEDULE_RANDOM_REPLICA             : 'SCHEDULE_RANDOM_REPLICA';
-KW_SCHEMA                              : 'SCHEMA';
-KW_SCHEMAS                             : 'SCHEMAS';
-KW_SCRATCH_LIMIT                       : 'SCRATCH_LIMIT';
-KW_SELECT                              : 'SELECT';
-KW_SEQUENCEFILE                        : 'SEQUENCEFILE';
-KW_SERDEPROPERTIES                     : 'SERDEPROPERTIES';
-KW_SERIALIZE_FN                        : 'SERIALIZE_FN';
-KW_SERVER                              : 'SERVER';
-KW_SET                                 : 'SET';
-KW_SHOW                                : 'SHOW';
-KW_SHUFFLE                             : 'SHUFFLE';
-KW_SHUFFLE_DISTINCT_EXPRS              : 'SHUFFLE_DISTINCT_EXPRS';
-KW_SHUTDOWN                            : 'SHUTDOWN';
-KW_SMALLINT                            : 'SMALLINT';
-KW_SNAPPY                              : 'SNAPPY';
-KW_SPOOL_QUERY_RESULTS                 : 'SPOOL_QUERY_RESULTS';
-KW_STATISTICS                          : 'STATISTICS';
-KW_STATS                               : 'STATS';
-KW_STORED                              : 'STORED';
-KW_STRAIGHT_JOIN                       : 'STRAIGHT_JOIN';
-KW_STRING                              : 'STRING';
-KW_STRUCT                              : 'STRUCT';
-KW_SUPPORT_START_OVER                  : 'SUPPORT_START_OVER';
-KW_SYMBOL                              : 'SYMBOL';
-KW_SYNC_DDL                            : 'SYNC_DDL';
-KW_SYSTEM                              : 'SYSTEM';
-KW_TABLE                               : 'TABLE';
-KW_TABLES                              : 'TABLES';
-KW_TABLESAMPLE                         : 'TABLESAMPLE';
-KW_TBLPROPERTIES                       : 'TBLPROPERTIES';
-KW_TERMINATED                          : 'TERMINATED';
-KW_TEXTFILE                            : 'TEXTFILE';
-KW_THREAD_RESERVATION_AGGREGATE_LIMIT  : 'THREAD_RESERVATION_AGGREGATE_LIMIT';
-KW_THREAD_RESERVATION_LIMIT            : 'THREAD_RESERVATION_LIMIT';
-KW_TIMESTAMP                           : 'TIMESTAMP';
-KW_TIMEZONE                            : 'TIMEZONE';
-KW_TINYINT                             : 'TINYINT';
-KW_TO                                  : 'TO';
-KW_TOPN_BYTES_LIMIT                    : 'TOPN_BYTES_LIMIT';
-KW_TRUE                                : 'TRUE';
-KW_TRUNCATE                            : 'TRUNCATE';
-KW_UNCACHED                            : 'UNCACHED';
-KW_UNION                               : 'UNION';
-KW_UPDATE                              : 'UPDATE';
-KW_UPDATE_FN                           : 'UPDATE_FN';
-KW_UPSERT                              : 'UPSERT';
-KW_URI                                 : 'URI';
-KW_USE                                 : 'USE';
-KW_USER                                : 'USER';
-KW_UTF8_MODE                           : 'UTF8_MODE';
-KW_VALUE                               : 'VALUE';
-KW_VALUES                              : 'VALUES';
-KW_VARCHAR                             : 'VARCHAR';
-KW_VIEW                                : 'VIEW';
-KW_WHERE                               : 'WHERE';
-KW_WITH                                : 'WITH';
-KW_ZERO                                : 'ZERO';
-KW_ZLIB                                : 'ZLIB';
+KW_ADD                                    : 'ADD';
+KW_ADMIN                                  : 'ADMIN';
+KW_ALL                                    : 'ALL';
+KW_ANALYZE                                : 'ANALYZE';
+KW_ANALYTIC                               : 'ANALYTIC';
+KW_ALTER                                  : 'ALTER';
+KW_AND                                    : 'AND';
+KW_ANY                                    : 'ANY';
+KW_ANTI                                   : 'ANTI';
+KW_ARCHIVE                                : 'ARCHIVE';
+KW_ARRAY                                  : 'ARRAY';
+KW_AS                                     : 'AS';
+KW_ASC                                    : 'ASC';
+KW_AT                                     : 'AT';
+KW_AGGREGATE                              : 'AGGREGATE';
+KW_AUTHORIZATION                          : 'AUTHORIZATION';
+KW_BERNOULLI                              : 'BERNOULLI';
+KW_BETWEEN                                : 'BETWEEN';
+KW_BLOCK_SIZE                             : 'BLOCK_SIZE';
+KW_PARTITIONED                            : 'PARTITIONED';
+KW_PREPARE_FN                             : 'PREPARE_FN';
+KW_TEMPORARY                              : 'TEMPORARY';
+KW_EXTERNAL                               : 'EXTERNAL';
+KW_CLOSEFN                                : 'CLOSEFN';
+KW_SORT                                   : 'SORT';
+KW_SORTED                                 : 'SORTED';
+KW_BUCKETS                                : 'BUCKETS';
+KW_PURGE                                  : 'PURGE';
+KW_STOR                                   : 'STORED';
+KW_STORED_AS                              : 'STORED AS';
+KW_LOCATION                               : 'LOCATION';
+KW_TBLPROPERTIES                          : 'TBLPROPERTIES';
+KW_DBPROPERTIES                           : 'DBPROPERTIES';
+KW_BY                                     : 'BY';
+KW_CALL                                   : 'CALL';
+KW_CASCADE                                : 'CASCADE';
+KW_CASE                                   : 'CASE';
+KW_CAST                                   : 'CAST';
+KW_CACHED                                 : 'CACHED';
+KW_CATALOGS                               : 'CATALOGS';
+KW_COLUMN                                 : 'COLUMN';
+KW_COLUMNS                                : 'COLUMNS';
+KW_COMMENT                                : 'COMMENT';
+KW_COMMIT                                 : 'COMMIT';
+KW_COMMITTED                              : 'COMMITTED';
+KW_COMPRESSION                            : 'COMPRESSION';
+KW_COMPUTE                                : 'COMPUTE';
+KW_CONSTRAINT                             : 'CONSTRAINT';
+KW_CREATE                                 : 'CREATE';
+KW_CROSS                                  : 'CROSS';
+KW_CUBE                                   : 'CUBE';
+KW_CURRENT                                : 'CURRENT';
+KW_CURRENT_DATE                           : 'CURRENT_DATE';
+KW_CURRENT_PATH                           : 'CURRENT_PATH';
+KW_CURRENT_ROLE                           : 'CURRENT_ROLE';
+KW_CURRENT_TIME                           : 'CURRENT_TIME';
+KW_CURRENT_TIMESTAMP                      : 'CURRENT_TIMESTAMP';
+KW_CURRENT_USER                           : 'CURRENT_USER';
+KW_DATA                                   : 'DATA';
+KW_DATABASE                               : 'DATABASE';
+KW_DATABASES                              : 'DATABASES';
+KW_DATE                                   : 'DATE';
+KW_DAY                                    : 'DAY';
+KW_DAYS                                   : 'DAYS';
+KW_DEALLOCATE                             : 'DEALLOCATE';
+KW_DEFINER                                : 'DEFINER';
+KW_DELETE                                 : 'DELETE';
+KW_DEFAULT                                : 'DEFAULT';
+KW_DELIMITED                              : 'DELIMITED ';
+KW_DISABLE                                : 'DISABLE';
+KW_UPDATE                                 : 'UPDATE';
+KW_DESC                                   : 'DESC';
+KW_DESCRIBE                               : 'DESCRIBE';
+KW_DISTINCT                               : 'DISTINCT';
+KW_DROP                                   : 'DROP';
+KW_ELSE                                   : 'ELSE';
+KW_ENABLE                                 : 'ENABLE';
+KW_ENCODING                               : 'ENCODING';
+KW_END                                    : 'END';
+KW_ESCAPE                                 : 'ESCAPE';
+KW_ESCAPED                                : 'ESCAPED';
+KW_EXCEPT                                 : 'EXCEPT';
+KW_EXCLUDING                              : 'EXCLUDING';
+KW_EXECUTE                                : 'EXECUTE';
+KW_EXISTS                                 : 'EXISTS';
+KW_EXPLAIN                                : 'EXPLAIN';
+KW_EXTRACT                                : 'EXTRACT';
+KW_EXTENDED                               : 'EXTENDED';
+KW_FALSE                                  : 'FALSE';
+KW_FETCH                                  : 'FETCH';
+KW_FIELDS                                 : 'FIELDS';
+KW_FILE                                   : 'FILE';
+KW_FILES                                  : 'FILES';
+KW_FILTER                                 : 'FILTER';
+KW_FIRST                                  : 'FIRST';
+KW_FINALIZE_FN                            : 'FINALIZE_FN';
+KW_FOLLOWING                              : 'FOLLOWING';
+KW_FOR                                    : 'FOR';
+KW_FORMAT                                 : 'FORMAT';
+KW_FORMATTED                              : 'FORMATTED';
+KW_FROM                                   : 'FROM';
+KW_FULL                                   : 'FULL';
+KW_FUNCTION                               : 'FUNCTION';
+KW_FUNCTIONS                              : 'FUNCTIONS';
+KW_GRANT                                  : 'GRANT';
+KW_GRANTED                                : 'GRANTED';
+KW_GRANTS                                 : 'GRANTS';
+KW_GRAPHVIZ                               : 'GRAPHVIZ';
+KW_GROUP                                  : 'GROUP';
+KW_GROUPING                               : 'GROUPING';
+KW_HASH                                   : 'HASH';
+KW_HAVING                                 : 'HAVING';
+KW_HOUR                                   : 'HOUR';
+KW_HOURS                                  : 'HOURS';
+KW_IF                                     : 'IF';
+KW_IN                                     : 'IN';
+KW_INCLUDING                              : 'INCLUDING';
+KW_INCREMENTAL                            : 'INCREMENTAL';
+KW_INNER                                  : 'INNER';
+KW_INPATH                                 : 'INPATH';
+KW_INPUT                                  : 'INPUT';
+KW_INSERT                                 : 'INSERT';
+KW_INTERSECT                              : 'INTERSECT';
+KW_INTERVAL                               : 'INTERVAL';
+KW_INTERMEDIATE                           : 'INTERMEDIATE';
+KW_INTO                                   : 'INTO';
+KW_INVOKER                                : 'INVOKER';
+KW_INIT_FN                                : 'INIT_FN';
+KW_INVALIDATE                             : 'INVALIDATE';
+KW_IO                                     : 'IO';
+KW_IS                                     : 'IS';
+KW_ISOLATION                              : 'ISOLATION';
+KW_JAR                                    : 'JAR';
+KW_JSON                                   : 'JSON';
+KW_JOIN                                   : 'JOIN';
+KW_KEY                                    : 'KEY';
+KW_KUDU                                   : 'KUDU';
+KW_LAST                                   : 'LAST';
+KW_LATERAL                                : 'LATERAL';
+KW_LEFT                                   : 'LEFT';
+KW_LEVEL                                  : 'LEVEL';
+KW_LIKE                                   : 'LIKE';
+KW_LIMIT                                  : 'LIMIT';
+KW_LINES                                  : 'LINES';
+KW_LOAD                                   : 'LOAD';
+KW_LOCALTIME                              : 'LOCALTIME';
+KW_LOCALTIMESTAMP                         : 'LOCALTIMESTAMP';
+KW_LOGICAL                                : 'LOGICAL';
+KW_METADATA                               : 'METADATA';
+KW_MATERIALIZED                           : 'MATERIALIZED';
+KW_MAP                                    : 'MAP';
+KW_MINUTE                                 : 'MINUTE';
+KW_MINUTES                                : 'MINUTES';
+KW_MONTH                                  : 'MONTH';
+KW_MONTHS                                 : 'MONTHS';
+KW_NATURAL                                : 'NATURAL';
+KW_MERGE_FN                               : 'MERGE_FN';
+KW_NEXT                                   : 'NEXT';
+KW_NFC                                    : 'NFC';
+KW_NFD                                    : 'NFD';
+KW_NFKC                                   : 'NFKC';
+KW_NFKD                                   : 'NFKD';
+KW_NO                                     : 'NO';
+KW_NONE                                   : 'NONE';
+KW_NORMALIZE                              : 'NORMALIZE';
+KW_NOT                                    : 'NOT';
+KW_NULL                                   : 'NULL';
+KW_NULLIF                                 : 'NULLIF';
+KW_NULLS                                  : 'NULLS';
+KW_OFFSET                                 : 'OFFSET';
+KW_ON                                     : 'ON';
+KW_ONLY                                   : 'ONLY';
+KW_OPTION                                 : 'OPTION';
+KW_OR                                     : 'OR';
+KW_ORDER                                  : 'ORDER';
+KW_ORDINALITY                             : 'ORDINALITY';
+KW_OUTER                                  : 'OUTER';
+KW_OUTPUT                                 : 'OUTPUT';
+KW_OWNER                                  : 'OWNER';
+KW_OVER                                   : 'OVER';
+KW_OVERWRITE                              : 'OVERWRITE';
+KW_PARTITION                              : 'PARTITION';
+KW_PARTITIONS                             : 'PARTITIONS';
+KW_PATH                                   : 'PATH';
+KW_PARQUET                                : 'PARQUET';
+KW_POSITION                               : 'POSITION';
+KW_PRECEDING                              : 'PRECEDING';
+KW_PREPARE                                : 'PREPARE';
+KW_PRIMARY                                : 'PRIMARY';
+KW_REPLICATION                            : 'REPLICATION';
+KW_PRIVILEGES                             : 'PRIVILEGES';
+KW_PROPERTIES                             : 'PROPERTIES';
+KW_RANGE                                  : 'RANGE';
+KW_READ                                   : 'READ';
+KW_RELOAD                                 : 'RELOAD';
+KW_RECURSIVE                              : 'RECURSIVE';
+KW_RENAME                                 : 'RENAME';
+KW_REPEATABLE                             : 'REPEATABLE';
+KW_REPLACE                                : 'REPLACE';
+KW_REWRITE                                : 'REWRITE';
+KW_RESET                                  : 'RESET';
+KW_RESTRICT                               : 'RESTRICT';
+KW_RETURNS                                : 'RETURNS';
+KW_REVOKE                                 : 'REVOKE';
+KW_REFRESH                                : 'REFRESH';
+KW_RIGHT                                  : 'RIGHT';
+KW_ROLE                                   : 'ROLE';
+KW_ROLES                                  : 'ROLES';
+KW_ROLLBACK                               : 'ROLLBACK';
+KW_ROLLUP                                 : 'ROLLUP';
+KW_ROW                                    : 'ROW';
+KW_ROWS                                   : 'ROWS';
+KW_SCHEMA                                 : 'SCHEMA';
+KW_SCHEMAS                                : 'SCHEMAS';
+KW_SECOND                                 : 'SECOND';
+KW_SECONDS                                : 'SECONDS';
+KW_SECURITY                               : 'SECURITY';
+KW_SELECT                                 : 'SELECT';
+KW_SERDEPROPERTIES                        : 'SERDEPROPERTIES';
+KW_SERIALIZABLE                           : 'SERIALIZABLE';
+KW_SESSION                                : 'SESSION';
+KW_SET                                    : 'SET';
+KW_SETS                                   : 'SETS';
+KW_SEMI                                   : 'SEMI';
+KW_SERVER                                 : 'SERVER';
+KW_SHOW                                   : 'SHOW';
+KW_SHUTDOWN                               : 'SHUTDOWN';
+KW_SOME                                   : 'SOME';
+KW_START                                  : 'START';
+KW_STATS                                  : 'STATS';
+KW_STRUCT                                 : 'STRUCT';
+KW_STRAIGHT_JOIN                          : 'STRAIGHT_JOIN';
+KW_SUBSTRING                              : 'SUBSTRING';
+KW_SYSTEM                                 : 'SYSTEM';
+KW_SYMBOL                                 : 'SYMBOL';
+KW_SERIALIZE_FN                           : 'SERIALIZE_FN';
+KW_TABLE                                  : 'TABLE';
+KW_TABLES                                 : 'TABLES';
+KW_TABLESAMPLE                            : 'TABLESAMPLE';
+KW_TEXT                                   : 'TEXT';
+KW_TERMINATED                             : 'TERMINATED ';
+KW_THEN                                   : 'THEN';
+KW_TIES                                   : 'TIES';
+KW_TIME                                   : 'TIME';
+KW_TIMESTAMP                              : 'TIMESTAMP';
+KW_TO                                     : 'TO';
+KW_TRANSACTION                            : 'TRANSACTION';
+KW_TRUE                                   : 'TRUE';
+KW_TRY_CAST                               : 'TRY_CAST';
+KW_TRUNCATE                               : 'TRUNCATE';
+KW_TYPE                                   : 'TYPE';
+KW_UNCACHED                               : 'UNCACHED';
+KW_UESCAPE                                : 'UESCAPE';
+KW_UNBOUNDED                              : 'UNBOUNDED';
+KW_UNCOMMITTED                            : 'UNCOMMITTED';
+KW_UNION                                  : 'UNION';
+KW_UNNEST                                 : 'UNNEST';
+KW_USE                                    : 'USE';
+KW_USER                                   : 'USER';
+KW_USING                                  : 'USING';
+KW_UPDATE_FN                              : 'UPDATE_FN';
+KW_UPSERT                                 : 'UPSERT';
+KW_URI                                    : 'URI';
+KW_VALIDATE                               : 'VALIDATE';
+KW_VALUES                                 : 'VALUES';
+KW_VERBOSE                                : 'VERBOSE';
+KW_VIEW                                   : 'VIEW';
+KW_VIEWS                                  : 'VIEWS';
+KW_WHEN                                   : 'WHEN';
+KW_WHERE                                  : 'WHERE';
+KW_WITH                                   : 'WITH';
+KW_WORK                                   : 'WORK';
+KW_WRITE                                  : 'WRITE';
+KW_YEAR                                   : 'YEAR';
+KW_YEARS                                  : 'YEARS';
+KW_ZONE                                   : 'ZONE';
 
-WHITE_SPACE                            : [ \t\r\n]+                    -> skip;
+EQ  : '=';
+NEQ : '<>' | '!=';
+LT  : '<';
+LTE : '<=';
+GT  : '>';
+GTE : '>=';
+PLUS: '+';
+MINUS: '-';
+ASTERISK: '*';
+SLASH: '/';
+PERCENT: '%';
+CONCAT: '||';
 
-SQL_COMMENT                            : '/*' (SQL_COMMENT | .)*? '*/' -> channel(HIDDEN);
-LINE_COMMENT                           : '--' ~[\r\n]*                 -> channel(HIDDEN);
+STRING
+    : '\'' ( ~'\'' | '\'\'' )* '\''
+    | '"' ( ~'"' | '""' )* '"'
+    ;
 
-DOUBLE_QUOTE_ID                        : '"' ~'"'+ '"';
-SINGLE_QUOTE                           : '\'';
+UNICODE_STRING
+    : 'U&\'' ( ~'\'' | '\'\'' )* '\''
+    ;
 
-ID                                     : [A-Z_] [A-Z0-9_]*;
+// Note: we allow any character inside the binary literal and validate
+// its a correct literal when the AST is being constructed. This
+// allows us to provide more meaningful error messages to the user
+BINARY_LITERAL
+    :  'X\'' (~'\'')* '\''
+    ;
 
-STRING_LITERAL                         : '\'' (~'\'' | '\'\'')* '\'';
-DECIMAL_LITERAL                        : DEC_DIGIT+;
-FLOAT_LITERAL                          : DEC_DOT_DEC;
-REAL_LITERAL                           : (DECIMAL_LITERAL | DEC_DOT_DEC) ('E' [+-]? DEC_DIGIT+);
-CHAR_LITERAL                           : '\'' (~['\\\r\n] | EscapeSequence) '\'';
+INTEGER_VALUE
+    : DIGIT+
+    ;
 
-NE                                     : '!=';
-LTGT                                   : '<>';
-EQ                                     : '=';
-GT                                     : '>';
-GE                                     : '>=';
-LT                                     : '<';
-LE                                     : '<=';
-EXCLAMATION                            : '!';
-PIPE_PIPE                              : '||';
-DOT                                    : '.';
-UNDERLINE                              : '_';
-LR_BRACKET                             : '(';
-RR_BRACKET                             : ')';
-COMMA                                  : ',';
-SEMI                                   : ';';
-STAR                                   : '*';
-DIVIDE                                 : '/';
-MODULE                                 : '%';
-PLUS                                   : '+';
-MINUS                                  : '-';
-COLON                                  : ':';
-PLACEHOLDER                            : '?';
+DECIMAL_VALUE
+    : DIGIT+ '.' DIGIT*
+    | '.' DIGIT+
+    ;
 
+DOUBLE_VALUE
+    : DIGIT+ ('.' DIGIT*)? EXPONENT
+    | '.' DIGIT+ EXPONENT
+    ;
 
-fragment HexDigit                      : [0-9a-f] ;
-fragment LETTER                        : [A-Z_];
-fragment DEC_DOT_DEC                   : (DEC_DIGIT+ '.' DEC_DIGIT+ |  DEC_DIGIT+ '.' | '.' DEC_DIGIT+);
-fragment DEC_DIGIT                     : [0-9];
-fragment EscapeSequence
-    : '\\' [btnfr"'\\]
-    | '\\' ([0-3]? [0-7])? [0-7]
-    | '\\' 'u'+ HexDigit HexDigit HexDigit HexDigit
+IDENTIFIER
+    : (LETTER | '_') (LETTER | DIGIT | '_' | '@' | ':')*
+    ;
+
+DIGIT_IDENTIFIER
+    : DIGIT (LETTER | DIGIT | '_' | '@' | ':')+
+    ;
+
+QUOTED_IDENTIFIER
+    : '"' ( ~'"' | '""' )* '"'
+    ;
+
+BACKQUOTED_IDENTIFIER
+    : '`' ( ~'`' | '``' )* '`'
+    ;
+
+TIME_WITH_TIME_ZONE
+    : 'TIME' WS 'WITH' WS 'TIME' WS 'ZONE'
+    ;
+
+TIMESTAMP_WITH_TIME_ZONE
+    : 'TIMESTAMP' WS 'WITH' WS 'TIME' WS 'ZONE'
+    ;
+
+DOUBLE_PRECISION
+    : 'DOUBLE' WS 'PRECISION'
+    ;
+
+fragment EXPONENT
+    : 'E' [+-]? DIGIT+
+    ;
+
+fragment DIGIT
+    : [0-9]
+    ;
+
+fragment LETTER
+    : [A-Z]
+    ;
+
+SIMPLE_COMMENT
+    : '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN)
+    ;
+
+BRACKETED_COMMENT
+    : '/*' .*? '*/' -> channel(HIDDEN)
+    ;
+
+WS
+    : [ \r\n\t]+ -> channel(HIDDEN)
+    ;
+
+// Catch-all for anything we can't recognize.
+// We use this to be able to ignore and recover all the text
+// when splitting statements with DelimiterLexer
+UNRECOGNIZED
+    : .
     ;

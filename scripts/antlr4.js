@@ -8,7 +8,7 @@ const chalk = require('chalk');
 const grammarsPath = path.resolve(__dirname, '../src/grammar');
 const outputPath = path.resolve(__dirname, '../src/lib');
 
-const languageEntries = fs.readdirSync(grammarsPath).filter((item) => item !== 'impala'); // impala is not support yet.
+const languageEntries = fs.readdirSync(grammarsPath);
 
 const baseCmd = 'antlr4ts -visitor -listener -Xexact-output-dir -o';
 
