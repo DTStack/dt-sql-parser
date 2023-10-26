@@ -147,7 +147,7 @@ columnName
     ;
 
 columnNameList
-    : LR_BRACKET columnName (',' columnName)* RR_BRACKET
+    : LR_BRACKET columnName (COMMA columnName)* RR_BRACKET
     ;
 
 columnType
@@ -165,15 +165,15 @@ columnType
     ;
 
 lengthOneDimension
-    : '(' decimalLiteral ')'
+    : LR_BRACKET decimalLiteral RR_BRACKET
     ;
 
 lengthTwoOptionalDimension
-    : '(' decimalLiteral (',' decimalLiteral)? ')'
+    : LR_BRACKET decimalLiteral (COMMA decimalLiteral)? RR_BRACKET
     ;
 
 lengthTwoStringDimension
-    : '(' stringLiteral (',' stringLiteral)? ')'
+    : LR_BRACKET stringLiteral (COMMA stringLiteral)? RR_BRACKET
     ;
 
 lengthOneTypeDimension
@@ -234,13 +234,13 @@ partitionDefinition
     ;
 
 transformList
-    : '(' transform (',' transform)* ')'
+    : LR_BRACKET transform (COMMA transform)* RR_BRACKET
     ;
 
 transform
     : qualifiedName                                                           #identityTransform
     | transformName=identifier
-      '(' transformArgument (',' transformArgument)* ')'  #applyTransform
+      LR_BRACKET transformArgument (COMMA transformArgument)* RR_BRACKET  #applyTransform
     ;
 
 transformArgument
@@ -391,7 +391,7 @@ insertMulStatement
 queryStatement
     : valuesCaluse
     | withClause queryStatement
-    | '(' queryStatement ')'
+    | LR_BRACKET queryStatement RR_BRACKET
     | left=queryStatement operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT) KW_ALL? right=queryStatement orderByCaluse? limitClause?
     | selectClause orderByCaluse? limitClause?
     | selectStatement orderByCaluse? limitClause?
@@ -554,7 +554,7 @@ havingClause
     ;
 
 windowClause
-    : KW_WINDOW namedWindow (',' namedWindow)*
+    : KW_WINDOW namedWindow (COMMA namedWindow)*
     ;
 
 namedWindow
@@ -662,7 +662,7 @@ expression
 
 booleanExpression
     : KW_NOT booleanExpression                                        #logicalNot
-    | KW_EXISTS '(' queryStatement ')'                                         #exists
+    | KW_EXISTS LR_BRACKET queryStatement RR_BRACKET                                         #exists
     | valueExpression predicate?                                   #predicated
     | left=booleanExpression operator=KW_AND right=booleanExpression  #logicalBinary
     | left=booleanExpression operator=KW_OR right=booleanExpression   #logicalBinary
@@ -674,9 +674,9 @@ predicate
         kind=KW_BETWEEN (KW_ASYMMETRIC | KW_SYMMETRIC)? 
         lower=valueExpression KW_AND 
         upper=valueExpression
-    | KW_NOT? kind=KW_IN '(' expression (',' expression)* ')'
-    | KW_NOT? kind=KW_IN '(' queryStatement ')'
-    | kind=KW_EXISTS '(' queryStatement ')'
+    | KW_NOT? kind=KW_IN LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | KW_NOT? kind=KW_IN LR_BRACKET queryStatement RR_BRACKET
+    | kind=KW_EXISTS LR_BRACKET queryStatement RR_BRACKET
     | KW_NOT? kind=KW_RLIKE pattern=valueExpression
     | likePredicate
     | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL)
@@ -685,18 +685,18 @@ predicate
     ;
 
 likePredicate
-    : KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) ('('')' | '(' expression (',' expression)* ')')
+    : KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) (LR_BRACKET RR_BRACKET | LR_BRACKET expression (COMMA expression)* RR_BRACKET)
     | KW_NOT? kind=KW_LIKE pattern=valueExpression (KW_ESCAPE stringLiteral)?
     ;
 
 valueExpression
     : primaryExpression                                                                      #valueExpressionDefault
-    | operator=('-' | '+' | '~') valueExpression                                        #arithmeticUnary
-    | left=valueExpression operator=('*' | '/' | '%' | KW_DIV) right=valueExpression #arithmeticBinary
-    | left=valueExpression operator=('+' | '-' | DOUBLE_VERTICAL_SIGN) right=valueExpression       #arithmeticBinary
-    | left=valueExpression operator='&' right=valueExpression                          #arithmeticBinary
-    | left=valueExpression operator='^' right=valueExpression                                #arithmeticBinary
-    | left=valueExpression operator='|' right=valueExpression                               #arithmeticBinary
+    | operator=(HYPNEN_SIGN | ADD_SIGN | BIT_NOT_OP) valueExpression                                        #arithmeticUnary
+    | left=valueExpression operator=(ASTERISK_SIGN | SLASH_SIGN | PENCENT_SIGN | KW_DIV) right=valueExpression #arithmeticBinary
+    | left=valueExpression operator=(ADD_SIGN | HYPNEN_SIGN | DOUBLE_VERTICAL_SIGN) right=valueExpression       #arithmeticBinary
+    | left=valueExpression operator=BIT_AND_OP right=valueExpression                          #arithmeticBinary
+    | left=valueExpression operator=BIT_XOR_OP right=valueExpression                                #arithmeticBinary
+    | left=valueExpression operator=BIT_OR_OP right=valueExpression                               #arithmeticBinary
     | left=valueExpression comparisonOperator right=valueExpression                          #comparison
     | left=valueExpression right=SLASH_TEXT                                                #arithmeticBinaryAlternate
     ;
@@ -704,30 +704,30 @@ valueExpression
 primaryExpression
     : KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                                   #searchedCase
     | KW_CASE value=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END                  #simpleCase
-    | KW_CAST '(' expression KW_AS columnType ')'                                                      #cast
-    // | STRUCT '(' (argument+=namedExpression (',' argument+=namedExpression)*)? ')'             #struct
-    | KW_FIRST '(' expression (KW_IGNORE KW_NULLS)? ')'                                                 #first
-    | KW_LAST '(' expression (KW_IGNORE KW_NULLS)? ')'                                                  #last
-    | KW_POSITION '(' substr=valueExpression KW_IN str=valueExpression ')'                           #position
+    | KW_CAST LR_BRACKET expression KW_AS columnType RR_BRACKET                                                      #cast
+    // | STRUCT LR_BRACKET (argument+=namedExpression (COMMA argument+=namedExpression)*)? RR_BRACKET             #struct
+    | KW_FIRST LR_BRACKET expression (KW_IGNORE KW_NULLS)? RR_BRACKET                                                 #first
+    | KW_LAST LR_BRACKET expression (KW_IGNORE KW_NULLS)? RR_BRACKET                                                  #last
+    | KW_POSITION LR_BRACKET substr=valueExpression KW_IN str=valueExpression RR_BRACKET                           #position
     | constant                                                                                 #constantDefault
-    | '*'                                                                                 #star
-    | uid '.' '*'                                                                #star
-    // | '(' namedExpression (',' namedExpression)+ ')'                                           #rowConstructor
-    | '(' queryStatement ')'                                                                            #subqueryExpression
-    | functionName '(' (setQuantifier? functionParam (',' functionParam)*)? ')'                      #functionCall
+    | ASTERISK_SIGN                                                                                 #star
+    | uid DOT ASTERISK_SIGN                                                                #star
+    // | LR_BRACKET namedExpression (COMMA namedExpression)+ RR_BRACKET                                           #rowConstructor
+    | LR_BRACKET queryStatement RR_BRACKET                                                                            #subqueryExpression
+    | functionName LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET                      #functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
     | identifier                                                                               #columnReference
     | dereferenceDefinition                                                                                      #dereference
-    | '(' expression ')'                                                                       #parenthesizedExpression
-    // | EXTRACT '(' field=identifier KW_FROM source=valueExpression ')'                             #extract
-    // | (SUBSTR | SUBSTRING) '(' str=valueExpression (KW_FROM | ',') pos=valueExpression
-    //   ((KW_FOR | ',') len=valueExpression)? ')'                                                   #substring
-    // | TRIM '(' trimOption=(BOTH | LEADING | TRAILING)? (trimStr=valueExpression)?
-    //    KW_FROM srcStr=valueExpression ')'                                                         #trim
-    // | OVERLAY '(' input=valueExpression PLACING replace=valueExpression
-    //   KW_FROM position=valueExpression (KW_FOR length=valueExpression)? ')'                          #overlay
+    | LR_BRACKET expression RR_BRACKET                                                                       #parenthesizedExpression
+    // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract
+    // | (SUBSTR | SUBSTRING) LR_BRACKET str=valueExpression (KW_FROM | COMMA) pos=valueExpression
+    //   ((KW_FOR | COMMA) len=valueExpression)? RR_BRACKET                                                   #substring
+    // | TRIM LR_BRACKET trimOption=(BOTH | LEADING | TRAILING)? (trimStr=valueExpression)?
+    //    KW_FROM srcStr=valueExpression RR_BRACKET                                                         #trim
+    // | OVERLAY LR_BRACKET input=valueExpression PLACING replace=valueExpression
+    //   KW_FROM position=valueExpression (KW_FOR length=valueExpression)? RR_BRACKET                          #overlay
     ;
 
 functionNameCreate
@@ -782,7 +782,7 @@ unitToUnitInterval
     ;
 
 intervalValue
-    : ('+' | '-')? (DIG_LITERAL | REAL_LITERAL)
+    : (ADD_SIGN | HYPNEN_SIGN)? (DIG_LITERAL | REAL_LITERAL)
     | STRING_LITERAL
     ;
 
@@ -804,7 +804,7 @@ errorCapturingIdentifierExtra
     ;
 
 identifierList
-    : '(' identifierSeq ')'
+    : LR_BRACKET identifierSeq RR_BRACKET
     ;
 
 identifierSeq
@@ -880,7 +880,7 @@ ifExists
     : KW_IF KW_EXISTS;
 
 tablePropertyList
-    : '(' tableProperty (',' tableProperty)* ')'
+    : LR_BRACKET tableProperty (COMMA tableProperty)* RR_BRACKET
     ;
 
 tableProperty
@@ -901,45 +901,45 @@ tablePropertyValue
 
 logicalOperator
     : KW_AND
-    | '&' '&'
+    | BIT_AND_OP BIT_AND_OP
     | KW_OR 
-    | '|' '|'
+    | BIT_OR_OP BIT_OR_OP
     ;
 
 comparisonOperator
-    : '=' 
-    | '>' 
-    | '<' 
-    | '<' '=' 
-    | '>' '='
-    | '<' '>' 
-    | '!' '=' 
-    | '<' '=' '>'
+    : EQUAL_SYMBOL 
+    | GREATER_SYMBOL 
+    | LESS_SYMBOL 
+    | LESS_SYMBOL EQUAL_SYMBOL 
+    | GREATER_SYMBOL EQUAL_SYMBOL
+    | LESS_SYMBOL GREATER_SYMBOL 
+    | EXCLAMATION_SYMBOL EQUAL_SYMBOL 
+    | LESS_SYMBOL EQUAL_SYMBOL GREATER_SYMBOL
     ;
 
 bitOperator
-    : '<' '<' 
-    | '>' '>' 
-    | '&' 
-    | '^' 
-    | '|'
+    : LESS_SYMBOL LESS_SYMBOL 
+    | GREATER_SYMBOL GREATER_SYMBOL 
+    | BIT_AND_OP 
+    | BIT_XOR_OP 
+    | BIT_OR_OP
     ;
 
 mathOperator
-    : '*' 
+    : ASTERISK_SIGN 
     | SLASH_SIGN 
     | PENCENT_SIGN 
     | KW_DIV 
-    | '+' 
-    | '-' 
+    | ADD_SIGN 
+    | HYPNEN_SIGN 
     | DOUBLE_HYPNEN_SIGN
     ;
 
 unaryOperator
-    : '!' 
-    | '~' 
+    : EXCLAMATION_SYMBOL 
+    | BIT_NOT_OP 
     | ADD_SIGN 
-    | '-' 
+    | HYPNEN_SIGN 
     | KW_NOT
     ;
 
