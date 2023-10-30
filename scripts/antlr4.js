@@ -62,7 +62,7 @@ function main() {
             compile(language);
         });
     } else if (argv.lang) {
-        // compile single: yarn antlr4 --lang=generic
+        // compile single: yarn antlr4 --lang=mysql
         const supportedLanguage = languageEntries.some((language) => language === argv.lang);
         if (supportedLanguage) {
             compile(argv.lang);

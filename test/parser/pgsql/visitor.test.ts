@@ -2,7 +2,7 @@ import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor
 import { PostgreSQLParserVisitor } from '../../../src/lib/pgsql/PostgreSQLParserVisitor';
 import PostgresSQL from '../../../src/parser/pgsql';
 
-describe('Generic SQL Visitor Tests', () => {
+describe('MySQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
     const parser = new PostgresSQL();

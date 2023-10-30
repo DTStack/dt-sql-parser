@@ -1,4 +1,4 @@
-export { default as GenericSQL } from './generic';
+export { default as MySQL } from './mysql';
 export { default as PLSQL } from './plsql';
 export { default as HiveSQL } from './hive';
 export { default as FlinkSQL } from './flinksql';
