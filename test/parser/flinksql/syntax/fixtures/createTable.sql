@@ -109,7 +109,7 @@ CREATE TABLE catalog1.db1.table1 (
     attr17 MAP<INT, BIGINT>,
     name1 VARCHAR(64),
     message ROW<data ROW<UPO_TIMESTAMP VARCHAR(20)>>,
-    raw RAW('class', 'snapshot')
+    `raw` RAW('class', 'snapshot')
 ) WITH ('connector' = 'kafka');
 
 CREATE TABLE IF NOT EXISTS tbl1 (

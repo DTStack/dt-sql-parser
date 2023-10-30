@@ -414,7 +414,7 @@ withItemName
     ;
 
 selectStatement
-    : selectClause fromClause whereClause? groupByClause? havingClause? windowClause?
+    : selectClause fromClause? whereClause? groupByClause? havingClause? windowClause?
     | selectClause fromClause matchRecognizeClause
     ;
 
@@ -721,6 +721,7 @@ primaryExpression
     | identifier                                                                               #columnReference
     | dereferenceDefinition                                                                                      #dereference
     | LR_BRACKET expression RR_BRACKET                                                                       #parenthesizedExpression
+    | KW_CURRENT_TIMESTAMP                                                                      #dateFunctionExpression
     // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract
     // | (SUBSTR | SUBSTRING) LR_BRACKET str=valueExpression (KW_FROM | COMMA) pos=valueExpression
     //   ((KW_FOR | COMMA) len=valueExpression)? RR_BRACKET                                                   #substring
@@ -736,7 +737,6 @@ functionNameCreate
 
 functionName
     : reservedKeywordsUsedAsFuncName
-    | nonReservedKeywords
     | uid
     ;
 
@@ -784,10 +784,6 @@ unitToUnitInterval
 intervalValue
     : (ADD_SIGN | HYPNEN_SIGN)? (DIG_LITERAL | REAL_LITERAL)
     | STRING_LITERAL
-    ;
-
-columnAlias
-    : KW_AS? identifier identifierList?
     ;
 
 tableAlias
@@ -1013,11 +1009,14 @@ timeIntervalUnit
     ;
 
 reservedKeywordsUsedAsFuncParam
-    : KW_LEADING
-    | KW_TRAILING
-    | KW_BOTH
+    : KW_ARRAY
     | KW_ALL
+    | KW_BOTH
+    | KW_CURRENT_TIMESTAMP
     | KW_DISTINCT
+    | KW_LEADING
+    | KW_TRAILING
+    | KW_VALUE
     | ASTERISK_SIGN
     ;
 
@@ -1025,405 +1024,140 @@ reservedKeywordsUsedAsFuncName
     : KW_ABS
     | KW_ARRAY
     | KW_AVG
+    | KW_CARDINALITY
     | KW_CAST
     | KW_CEIL
+    | KW_CEILING
     | KW_COALESCE
     | KW_COLLECT
     | KW_COUNT
+    | KW_CUME_DIST
+    | KW_CURRENT_DATE
+    | KW_CURRENT_TIME
+    | KW_CURRENT_TIMESTAMP
     | KW_DATE
+    | KW_DAYOFWEEK
+    | KW_DAYOFYEAR
+    | KW_DENSE_RANK
+    | KW_ELEMENT
+    | KW_EXP
+    | KW_EXTRACT
+    | KW_FIRST_VALUE
+    | KW_FLOOR
     | KW_GROUPING
     | KW_HOUR
     | KW_IF
     | KW_LAG
+    | KW_LAST_VALUE
+    | KW_LEAD
     | KW_LEFT
+    | KW_LN
+    | KW_LOCALTIME
+    | KW_LOCALTIMESTAMP
+    | KW_LOWER
     | KW_MAP
+    | KW_MAX
+    | KW_MIN
     | KW_MINUTE
+    | KW_MOD
     | KW_MONTH
+    | KW_NULLIF
+    | KW_NTILE
     | KW_OVERLAY
+    | KW_PERCENT_RANK
     | KW_POSITION
     | KW_POWER
     | KW_QUARTER
     | KW_ROW
     | KW_ROWS
+    | KW_ROW_NUMBER
     | KW_RANK
     | KW_RIGHT
     | KW_SECOND
+    | KW_STDDEV_POP
+    | KW_STDDEV_SAMP
     | KW_SUBSTRING
     | KW_SUM
     | KW_TIME
     | KW_TIMESTAMP
+    | KW_TIMESTAMP_DIFF
+    | KW_TRIM
     | KW_TRUNCATE
+    | KW_TRY_CAST
     | KW_UPPER
+    | KW_VAR_POP
+    | KW_VAR_SAMP
     | KW_WEEK
     | KW_YEAR
     ;
 
-reservedKeywords
-    : KW_ABS
-    | KW_ALL
-    | KW_ALLOW
-    | KW_ALTER 
-    | KW_AND
-    | KW_ANY
-    | KW_ARE
-    | KW_ARRAY
-    | KW_AS
-    | KW_ASYMMETRIC
-    | KW_AT
-    | KW_AVG
-    | KW_BEGIN
-    | KW_BETWEEN
-    | KW_BIGINT
-    | KW_BINARY
-    | KW_BIT
-    | KW_BLOB
-    | KW_BOOLEAN
-    | KW_BOTH
-    | KW_BY
-    | KW_CALL
-    | KW_CALLED
-    | KW_CASCADED
-    | KW_CASE
-    | KW_CAST
-    | KW_CEIL
-    | KW_CHAR
-    | KW_CHARACTER
-    | KW_CHECK
-    | KW_CLOB
-    | KW_CLOSE
-    | KW_COALESCE
-    | KW_COLLATE
-    | KW_COLLECT
-    | KW_COLUMN
-    | KW_COMMIT
-    | KW_CONNECT
-    | KW_CONSTRAINT
-    | KW_CONTAINS
-    | KW_CONVERT
-    | KW_COUNT
-    | KW_CREATE
-    | KW_CROSS
-    | KW_CUBE
-    | KW_CURRENT
-    | KW_CURSOR
-    | KW_CYCLE
-    | KW_DATE
-    | KW_DATETIME
-    | KW_DAY
-    | KW_DEC
-    | KW_DECIMAL
-    | KW_DECLARE
-    | KW_DEFAULT
-    | KW_DEFINE
-    | KW_DELETE
-    | KW_DESCRIBE
-    | KW_DISTINCT
-    | KW_DOUBLE
-    | KW_DROP
-    | KW_EACH
-    | KW_ELSE
-    | KW_END
-    | KW_EQUALS
-    | KW_EXCEPT
-    | KW_EXECUTE
-    | KW_EXISTS
-    | KW_EXPLAIN
-    | KW_EXTERNAL
-    | KW_EXTRACT
-    | KW_FALSE
-    | KW_FLOAT
-    | KW_FOR
-    | KW_FROM
-    | KW_FULL
-    | KW_FUNCTION
-    | KW_GLOBAL
-    | KW_GRANT
-    | KW_GROUP
-    | KW_GROUPING
-    | KW_GROUPS
-    | KW_HAVING
-    | KW_HOUR
-    | KW_IMPORT
-    | KW_IN
-    | KW_INCLUDING
-    | KW_INNER
-    | KW_INOUT
-    | KW_INSERT
-    | KW_INT
-    | KW_INTEGER
-    | KW_INTERSECT
-    | KW_INTERVAL
-    | KW_INTO
-    | KW_IS
-    | KW_JOIN
-    | KW_LAG
-    | KW_LANGUAGE
-    | KW_LATERAL
-    | KW_LEADING
-    | KW_LEFT
-    | KW_LIKE
-    | KW_LIMIT
-    | KW_LOCAL
-    | KW_MATCH
-    | KW_MATCH_RECOGNIZE
-    | KW_MEASURES
-    | KW_MERGE
-    | KW_METADATA
-    | KW_MINUS
-    | KW_MINUTE
-    | KW_MODIFIES
-    | KW_MODULE
-    | KW_MONTH
-    | KW_MULTISET
-    | KW_NATURAL
-    | KW_NEXT
-    | KW_NO
-    | KW_NONE
-    | KW_NOT
-    | KW_NULL
-    | KW_NUMERIC
-    | KW_OF
-    | KW_OFFSET
-    | KW_ON
-    | KW_ONE
-    | KW_OR
-    | KW_ORDER
-    | KW_OUT
-    | KW_OUTER
-    | KW_OVER
-    | KW_OVERLAY
-    | KW_PARTITION
-    | KW_PATTERN
-    | KW_PER
-    | KW_PERCENT
-    | KW_PERIOD
-    | KW_POSITION
-    | KW_PRIMARY
-    | KW_RANGE
-    | KW_RANK
-    | KW_RESET
-    | KW_REVOKE
-    | KW_RIGHT
-    | KW_RLIKE
-    | KW_ROLLBACK
-    | KW_ROLLUP
-    | KW_ROW
-    | KW_ROWS
-    | KW_SECOND
-    | KW_SELECT
-    | KW_SET
-    | KW_SHOW
-    | KW_SIMILAR
-    | KW_SKIP
-    | KW_SMALLINT
-    | KW_START
-    | KW_STATIC
-    | KW_SUBSTRING
-    | KW_SUM
-    | KW_SYSTEM_TIME
-    | KW_SYSTEM
-    | KW_SYSTEM_TIME
-    | KW_SYSTEM_USER
-    | KW_TABLE
-    | KW_TABLESAMPLE
-    | KW_THEN
-    | KW_TIME
-    | KW_TIMESTAMP
-    | KW_TINYINT
-    | KW_TO
-    | KW_TRUE
-    | KW_TRUNCATE
-    | KW_UNION
-    | KW_UNIQUE
-    | KW_UNKNOWN
-    | KW_UNNEST
-    | KW_UPPER
-    | KW_UPSERT
-    | KW_USER
-    | KW_USING
-    | KW_VALUE
-    | KW_VALUES
-    | KW_VARBINARY
-    | KW_VARCHAR
-    | KW_WHEN
-    | KW_WHERE
-    | KW_WINDOW
-    | KW_WITH
-    | KW_WITHIN
-    | KW_WITHOUT
-    | KW_YEAR
-    ;
-
 nonReservedKeywords
-    :KW_ADD                           
-    |KW_ADMIN                         
-    |KW_AFTER                         
-    |KW_ANALYZE                       
-    |KW_ASC                           
-    |KW_BEFORE                        
-    |KW_BYTES                         
-    |KW_CASCADE                       
-    |KW_CATALOG                       
-    |KW_CATALOGS                      
-    |KW_CENTURY                       
-    |KW_CHAIN                         
-    |KW_CHANGELOG_MODE                
-    |KW_CHARACTERS                    
-    |KW_COMMENT                       
-    |KW_COMPACT                       
-    |KW_COLUMNS                       
-    |KW_CONSTRAINTS                   
-    |KW_CONSTRUCTOR                   
-    |KW_CUMULATE                      
-    |KW_DATA                          
-    |KW_DATABASE                      
-    |KW_DATABASES                     
-    |KW_DAYS                          
-    |KW_DECADE                        
-    |KW_DEFINED                       
-    |KW_DESC                          
-    |KW_DESCRIPTOR                    
-    |KW_DIV                           
-    |KW_ENCODING                      
-    |KW_ENFORCED                      
-    |KW_ENGINE                        
-    |KW_ERROR                         
-    |KW_ESTIMATED_COST                
-    |KW_EXCEPTION                     
-    |KW_EXCLUDE                       
-    |KW_EXCLUDING                     
-    |KW_EXTENDED                      
-    |KW_FILE                          
-    |KW_FINAL                         
-    |KW_FIRST                         
-    |KW_FOLLOWING                     
-    |KW_FORMAT                        
-    |KW_FORTRAN                       
-    |KW_FOUND                         
-    |KW_FRAC_SECOND                   
-    |KW_FUNCTIONS                     
-    |KW_GENERAL                       
-    |KW_GENERATED                     
-    |KW_GO                            
-    |KW_GOTO                          
-    |KW_GRANTED                       
-    |KW_HOP                           
-    |KW_HOURS                         
-    |KW_IF                            
-    |KW_IGNORE                        
-    |KW_INCREMENT                     
-    |KW_INPUT                         
-    |KW_INVOKER                       
-    |KW_JAR                           
-    |KW_JARS                          
-    |KW_JAVA                          
-    |KW_JSON                          
-    |KW_JSON_EXECUTION_PLAN           
-    |KW_KEY                           
-    |KW_KEY_MEMBER                    
-    |KW_KEY_TYPE                      
-    |KW_LABEL                         
-    |KW_LAST                          
-    |KW_LENGTH                        
-    |KW_LEVEL                         
-    |KW_LOAD                          
-    |KW_MAP                           
-    |KW_MICROSECOND                   
-    |KW_MILLENNIUM                    
-    |KW_MILLISECOND                   
-    |KW_MINUTES                       
-    |KW_MINVALUE                      
-    |KW_MODIFY                        
-    |KW_MODULES                       
-    |KW_MONTHS                        
-    |KW_NANOSECOND                    
-    |KW_NULLS                         
-    |KW_NUMBER                        
-    |KW_OPTION                        
-    |KW_OPTIONS                       
-    |KW_ORDERING                      
-    |KW_OUTPUT                        
-    |KW_OVERWRITE                     
-    |KW_OVERWRITING                   
-    |KW_PARTITIONED                   
-    |KW_PARTITIONS                    
-    |KW_PASSING                       
-    |KW_PAST                          
-    |KW_PATH                          
-    |KW_PLACING                       
-    |KW_PLAN                          
-    |KW_PRECEDING                     
-    |KW_PRESERVE                      
-    |KW_PRIOR                         
-    |KW_PRIVILEGES                    
-    |KW_PUBLIC                        
-    |KW_PYTHON                        
-    |KW_PYTHON_FILES                  
-    |KW_PYTHON_REQUIREMENTS           
-    |KW_PYTHON_DEPENDENCIES           
-    |KW_PYTHON_JAR                    
-    |KW_PYTHON_ARCHIVES               
-    |KW_PYTHON_PARAMETER              
-    |KW_QUARTER                       
-    |KW_RAW                           
-    |KW_READ                          
-    |KW_RELATIVE                      
-    |KW_REMOVE                        
-    |KW_RENAME                        
-    |KW_REPLACE                       
-    |KW_RESPECT                       
-    |KW_RESTART                       
-    |KW_RESTRICT                      
-    |KW_ROLE                          
-    |KW_ROW_COUNT                     
-    |KW_SCALA                         
-    |KW_SCALAR                        
-    |KW_SCALE                         
-    |KW_SCHEMA                        
-    |KW_SECONDS                       
-    |KW_SECTION                       
-    |KW_SECURITY                      
-    |KW_SELF                          
-    |KW_SERVER                        
-    |KW_SERVER_NAME                   
-    |KW_SESSION                       
-    |KW_SETS                          
-    |KW_SIMPLE                        
-    |KW_SIZE                          
-    |KW_SLIDE                         
-    |KW_SOURCE                        
-    |KW_SPACE                         
-    |KW_STATE                         
-    |KW_STATEMENT                     
-    |KW_STEP                          
-    |KW_STRING                        
-    |KW_STRUCTURE                     
-    |KW_STYLE                         
-    |KW_TABLES                        
-    |KW_TEMPORARY                     
-    |KW_TIMECOL                       
-    |KW_TIMESTAMP_LTZ                 
-    |KW_TIMESTAMPADD                  
-    |KW_TIMESTAMPDIFF                 
-    |KW_TRANSFORM                     
-    |KW_TUMBLE                        
-    |KW_TYPE                          
-    |KW_UNDER                         
-    |KW_UNLOAD                        
-    |KW_USAGE                         
-    |KW_USE                           
-    |KW_UTF16                         
-    |KW_UTF32                         
-    |KW_UTF8                          
-    |KW_VERSION                       
-    |KW_VIEW                          
-    |KW_VIEWS                         
-    |KW_VIRTUAL                       
-    |KW_WATERMARK                     
-    |KW_WATERMARKS                    
-    |KW_WEEK                          
-    |KW_WORK                          
-    |KW_WRAPPER                       
-    |KW_YEARS                         
-    |KW_ZONE                          
+    : KW_ADD
+    | KW_AFTER
+    | KW_ASC
+    | KW_CASCADE
+    | KW_CATALOG
+    | KW_CENTURY
+    | KW_CONFIG
+    | KW_CONSTRAINTS
+    | KW_CUMULATE
+    | KW_DATA
+    | KW_DATABASE
+    | KW_DAYS
+    | KW_DECADE
+    | KW_DESC
+    | KW_DESCRIPTOR
+    | KW_DIV
+    | KW_ENGINE
+    | KW_EPOCH
+    | KW_EXCLUDING
+    | KW_FILE
+    | KW_FIRST
+    | KW_GENERATED
+    | KW_HOP
+    | KW_HOURS
+    | KW_IGNORE
+    | KW_INCLUDING
+    | KW_JAR
+    | KW_JARS
+    | KW_JAVA
+    | KW_KEY
+    | KW_LAST
+    | KW_LOAD
+    | KW_MAP
+    | KW_MICROSECOND
+    | KW_MILLENNIUM
+    | KW_MILLISECOND
+    | KW_MINUTES
+    | KW_MONTHS
+    | KW_NANOSECOND
+    | KW_NULLS
+    | KW_OPTIONS
+    | KW_PAST
+    | KW_PLAN
+    | KW_PRECEDING
+    | KW_PYTHON
+    | KW_PYTHON_ARCHIVES
+    | KW_PYTHON_DEPENDENCIES
+    | KW_PYTHON_FILES
+    | KW_PYTHON_JAR
+    | KW_PYTHON_PARAMETER
+    | KW_PYTHON_REQUIREMENTS
+    | KW_QUARTER
+    | KW_REMOVE
+    | KW_RESTRICT
+    | KW_SECONDS
+    | KW_SESSION
+    | KW_SETS
+    | KW_SIZE
+    | KW_SLIDE
+    | KW_STEP
+    | KW_TEMPORARY
+    | KW_TIMECOL
+    | KW_TUMBLE
+    | KW_UNLOAD
+    | KW_VIEW
+    | KW_WEEK
+    | KW_YEARS
+    | KW_ZONE                       
     ;

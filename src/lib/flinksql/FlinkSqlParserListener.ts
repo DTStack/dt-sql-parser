@@ -25,6 +25,7 @@ import { SubscriptContext } from "./FlinkSqlParser";
 import { ColumnReferenceContext } from "./FlinkSqlParser";
 import { DereferenceContext } from "./FlinkSqlParser";
 import { ParenthesizedExpressionContext } from "./FlinkSqlParser";
+import { DateFunctionExpressionContext } from "./FlinkSqlParser";
 import { ErrorIdentContext } from "./FlinkSqlParser";
 import { RealIdentContext } from "./FlinkSqlParser";
 import { IdentityTransformContext } from "./FlinkSqlParser";
@@ -181,7 +182,6 @@ import { MultiUnitsIntervalContext } from "./FlinkSqlParser";
 import { ErrorCapturingUnitToUnitIntervalContext } from "./FlinkSqlParser";
 import { UnitToUnitIntervalContext } from "./FlinkSqlParser";
 import { IntervalValueContext } from "./FlinkSqlParser";
-import { ColumnAliasContext } from "./FlinkSqlParser";
 import { TableAliasContext } from "./FlinkSqlParser";
 import { ErrorCapturingIdentifierContext } from "./FlinkSqlParser";
 import { ErrorCapturingIdentifierExtraContext } from "./FlinkSqlParser";
@@ -222,7 +222,6 @@ import { TimePointUnitContext } from "./FlinkSqlParser";
 import { TimeIntervalUnitContext } from "./FlinkSqlParser";
 import { ReservedKeywordsUsedAsFuncParamContext } from "./FlinkSqlParser";
 import { ReservedKeywordsUsedAsFuncNameContext } from "./FlinkSqlParser";
-import { ReservedKeywordsContext } from "./FlinkSqlParser";
 import { NonReservedKeywordsContext } from "./FlinkSqlParser";
 
 
@@ -516,6 +515,19 @@ export interface FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `dateFunctionExpression`
+	 * labeled alternative in `FlinkSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	enterDateFunctionExpression?: (ctx: DateFunctionExpressionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `dateFunctionExpression`
+	 * labeled alternative in `FlinkSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 */
+	exitDateFunctionExpression?: (ctx: DateFunctionExpressionContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `errorIdent`
@@ -2252,17 +2264,6 @@ export interface FlinkSqlParserListener extends ParseTreeListener {
 	exitIntervalValue?: (ctx: IntervalValueContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.columnAlias`.
-	 * @param ctx the parse tree
-	 */
-	enterColumnAlias?: (ctx: ColumnAliasContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.columnAlias`.
-	 * @param ctx the parse tree
-	 */
-	exitColumnAlias?: (ctx: ColumnAliasContext) => void;
-
-	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.tableAlias`.
 	 * @param ctx the parse tree
 	 */
@@ -2701,17 +2702,6 @@ export interface FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitReservedKeywordsUsedAsFuncName?: (ctx: ReservedKeywordsUsedAsFuncNameContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.reservedKeywords`.
-	 * @param ctx the parse tree
-	 */
-	enterReservedKeywords?: (ctx: ReservedKeywordsContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.reservedKeywords`.
-	 * @param ctx the parse tree
-	 */
-	exitReservedKeywords?: (ctx: ReservedKeywordsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.nonReservedKeywords`.
