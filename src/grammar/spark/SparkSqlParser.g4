@@ -450,7 +450,7 @@ viewNameCreate : viewIdentifier;
 viewName : viewIdentifier;
 
 identifierReference
-    : KW_IDENTIFIER_KW LEFT_PAREN expression RIGHT_PAREN
+    : KW_IDENTIFIER LEFT_PAREN expression RIGHT_PAREN
     | multipartIdentifier
     ;
 
@@ -471,11 +471,11 @@ multiInsertQueryBody
 queryTerm
     : queryPrimary
     | left=queryTerm {this.legacy_setops_precedence_enabled}?
-        operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT | KW_SETMINUS) setQuantifier? right=queryTerm
+        operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
     | left=queryTerm {!this.legacy_setops_precedence_enabled}?
         operator=KW_INTERSECT setQuantifier? right=queryTerm
     | left=queryTerm {!this.legacy_setops_precedence_enabled}?
-        operator=(KW_UNION | KW_EXCEPT | KW_SETMINUS) setQuantifier? right=queryTerm
+        operator=(KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
     ;
 
 queryPrimary
@@ -968,7 +968,7 @@ primaryExpression
     | qualifiedName DOT ASTERISK
     | LEFT_PAREN namedExpression (COMMA namedExpression)+ RIGHT_PAREN
     | LEFT_PAREN query RIGHT_PAREN
-    | KW_IDENTIFIER_KW LEFT_PAREN expression RIGHT_PAREN
+    | KW_IDENTIFIER LEFT_PAREN expression RIGHT_PAREN
     | functionName LEFT_PAREN (setQuantifier? functionArgument
        (COMMA functionArgument)*)? RIGHT_PAREN
        (KW_FILTER LEFT_PAREN KW_WHERE where=booleanExpression RIGHT_PAREN)?
@@ -1200,7 +1200,7 @@ qualifiedNameList
     ;
 
 functionName
-    : KW_IDENTIFIER_KW LEFT_PAREN expression RIGHT_PAREN
+    : KW_IDENTIFIER LEFT_PAREN expression RIGHT_PAREN
     | qualifiedName
     | KW_FILTER
     | KW_LEFT
@@ -1391,7 +1391,7 @@ ansiNonReserved
     | KW_GROUPING
     | KW_HOUR
     | KW_HOURS
-    | KW_IDENTIFIER_KW
+    | KW_IDENTIFIER
     | KW_IF
     | KW_IGNORE
     | KW_IMPORT
@@ -1494,7 +1494,7 @@ ansiNonReserved
     | KW_SERDE
     | KW_SERDEPROPERTIES
     | KW_SET
-    | KW_SETMINUS
+    | KW_MINUS
     | KW_SETS
     | KW_SHORT
     | KW_SHOW
@@ -1586,7 +1586,7 @@ strictNonReserved
     | KW_ON
     | KW_RIGHT
     | KW_SEMI
-    | KW_SETMINUS
+    | KW_MINUS
     | KW_UNION
     | KW_USING
     ;
@@ -1715,7 +1715,7 @@ nonReserved
     | KW_HAVING
     | KW_HOUR
     | KW_HOURS
-    | KW_IDENTIFIER_KW
+    | KW_IDENTIFIER
     | KW_IF
     | KW_IGNORE
     | KW_IMPORT
