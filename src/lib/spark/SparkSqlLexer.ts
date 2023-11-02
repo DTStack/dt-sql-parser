@@ -149,7 +149,7 @@ export class SparkSqlLexer extends Lexer {
 	public static readonly KW_BINARY_HEX = 131;
 	public static readonly KW_HOUR = 132;
 	public static readonly KW_HOURS = 133;
-	public static readonly KW_IDENTIFIER_KW = 134;
+	public static readonly KW_IDENTIFIER = 134;
 	public static readonly KW_IF = 135;
 	public static readonly KW_IGNORE = 136;
 	public static readonly KW_IMPORT = 137;
@@ -278,7 +278,7 @@ export class SparkSqlLexer extends Lexer {
 	public static readonly KW_SERDEPROPERTIES = 260;
 	public static readonly KW_SESSION_USER = 261;
 	public static readonly KW_SET = 262;
-	public static readonly KW_SETMINUS = 263;
+	public static readonly KW_MINUS = 263;
 	public static readonly KW_SETS = 264;
 	public static readonly KW_SHORT = 265;
 	public static readonly KW_SHOW = 266;
@@ -436,7 +436,7 @@ export class SparkSqlLexer extends Lexer {
 		"KW_FIRST", "KW_FLOAT", "KW_FOLLOWING", "KW_FOR", "KW_FOREIGN", "KW_FORMAT", 
 		"KW_FORMATTED", "KW_FROM", "KW_FULL", "KW_FUNCTION", "KW_FUNCTIONS", "KW_GENERATED", 
 		"KW_GLOBAL", "KW_GRANT", "KW_GROUP", "KW_GROUPING", "KW_HAVING", "KW_BINARY_HEX", 
-		"KW_HOUR", "KW_HOURS", "KW_IDENTIFIER_KW", "KW_IF", "KW_IGNORE", "KW_IMPORT", 
+		"KW_HOUR", "KW_HOURS", "KW_IDENTIFIER", "KW_IF", "KW_IGNORE", "KW_IMPORT", 
 		"KW_IN", "KW_INCLUDE", "KW_INDEX", "KW_INDEXES", "KW_INNER", "KW_INPATH", 
 		"KW_INPUTFORMAT", "KW_INSERT", "KW_INTERSECT", "KW_INTERVAL", "KW_INT", 
 		"KW_INTEGER", "KW_INTO", "KW_IS", "KW_ITEMS", "KW_JOIN", "KW_KEYS", "KW_LAST", 
@@ -459,7 +459,7 @@ export class SparkSqlLexer extends Lexer {
 		"KW_REVOKE", "KW_RIGHT", "KW_RLIKE", "KW_REGEXP", "KW_ROLE", "KW_ROLES", 
 		"KW_ROLLBACK", "KW_ROLLUP", "KW_ROW", "KW_ROWS", "KW_SECOND", "KW_SECONDS", 
 		"KW_SCHEMA", "KW_SCHEMAS", "KW_SELECT", "KW_SEMI", "KW_SEPARATED", "KW_SERDE", 
-		"KW_SERDEPROPERTIES", "KW_SESSION_USER", "KW_SET", "KW_SETMINUS", "KW_SETS", 
+		"KW_SERDEPROPERTIES", "KW_SESSION_USER", "KW_SET", "KW_MINUS", "KW_SETS", 
 		"KW_SHORT", "KW_SHOW", "KW_SINGLE", "KW_SKEWED", "KW_SMALLINT", "KW_SOME", 
 		"KW_SORT", "KW_SORTED", "KW_SOURCE", "KW_START", "KW_STATISTICS", "KW_STORED", 
 		"KW_STRATIFY", "KW_STRING", "KW_STRUCT", "KW_SUBSTR", "KW_SUBSTRING", 
@@ -570,7 +570,7 @@ export class SparkSqlLexer extends Lexer {
 		"KW_FIRST", "KW_FLOAT", "KW_FOLLOWING", "KW_FOR", "KW_FOREIGN", "KW_FORMAT", 
 		"KW_FORMATTED", "KW_FROM", "KW_FULL", "KW_FUNCTION", "KW_FUNCTIONS", "KW_GENERATED", 
 		"KW_GLOBAL", "KW_GRANT", "KW_GROUP", "KW_GROUPING", "KW_HAVING", "KW_BINARY_HEX", 
-		"KW_HOUR", "KW_HOURS", "KW_IDENTIFIER_KW", "KW_IF", "KW_IGNORE", "KW_IMPORT", 
+		"KW_HOUR", "KW_HOURS", "KW_IDENTIFIER", "KW_IF", "KW_IGNORE", "KW_IMPORT", 
 		"KW_IN", "KW_INCLUDE", "KW_INDEX", "KW_INDEXES", "KW_INNER", "KW_INPATH", 
 		"KW_INPUTFORMAT", "KW_INSERT", "KW_INTERSECT", "KW_INTERVAL", "KW_INT", 
 		"KW_INTEGER", "KW_INTO", "KW_IS", "KW_ITEMS", "KW_JOIN", "KW_KEYS", "KW_LAST", 
@@ -593,7 +593,7 @@ export class SparkSqlLexer extends Lexer {
 		"KW_REVOKE", "KW_RIGHT", "KW_RLIKE", "KW_REGEXP", "KW_ROLE", "KW_ROLES", 
 		"KW_ROLLBACK", "KW_ROLLUP", "KW_ROW", "KW_ROWS", "KW_SECOND", "KW_SECONDS", 
 		"KW_SCHEMA", "KW_SCHEMAS", "KW_SELECT", "KW_SEMI", "KW_SEPARATED", "KW_SERDE", 
-		"KW_SERDEPROPERTIES", "KW_SESSION_USER", "KW_SET", "KW_SETMINUS", "KW_SETS", 
+		"KW_SERDEPROPERTIES", "KW_SESSION_USER", "KW_SET", "KW_MINUS", "KW_SETS", 
 		"KW_SHORT", "KW_SHOW", "KW_SINGLE", "KW_SKEWED", "KW_SMALLINT", "KW_SOME", 
 		"KW_SORT", "KW_SORTED", "KW_SOURCE", "KW_START", "KW_STATISTICS", "KW_STORED", 
 		"KW_STRATIFY", "KW_STRING", "KW_STRUCT", "KW_SUBSTR", "KW_SUBSTRING", 
