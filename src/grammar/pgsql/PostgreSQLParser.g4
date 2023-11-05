@@ -153,7 +153,11 @@ alteroptrolelist: alteroptroleelem*;
 alteroptroleelem:
 	KW_PASSWORD (sconst | KW_NULL_P)
 	| (KW_ENCRYPTED | KW_UNENCRYPTED) KW_PASSWORD sconst
-	| KW_INHERIT
+	| (KW_INHERIT | KW_NOINHERIT)
+	| (KW_CREATEUSER | KW_NOCREATEUSER)
+	| (KW_CREATEROLE | KW_NOCREATEROLE)
+	| (KW_CREATEDB | KW_NOCREATEDB)
+	| (KW_SUPERUSER | KW_NOSUPERUSER)
 	| KW_CONNECTION KW_LIMIT signediconst
 	| KW_VALID KW_UNTIL sconst
 	| KW_USER role_list
@@ -179,7 +183,7 @@ alterrolesetstmt:
 droprolestmt:
 	KW_DROP (KW_ROLE | KW_USER | KW_GROUP_P) (KW_IF_P KW_EXISTS)? role_list;
 
-creategroupstmt: KW_CREATE KW_GROUP_P roleid opt_with? optrolelist;
+creategroupstmt: KW_CREATE KW_GROUP_P groupname opt_with? optrolelist;
 
 altergroupstmt: KW_ALTER KW_GROUP_P rolespec add_drop KW_USER role_list;
 
@@ -515,7 +519,7 @@ tableelement: columnDef | tablelikeclause | tableconstraint;
 
 typedtableelement: columnOptions | tableconstraint;
 
-columnDef: colid typename (KW_COLLATE any_name)? create_generic_options? colquallist;
+columnDef: colid typename create_generic_options? (KW_COLLATE any_name)? colquallist;
 
 columnOptions: colid (KW_WITH KW_OPTIONS)? colquallist;
 
@@ -888,11 +892,15 @@ createtrigstmt:
 	KW_CREATE KW_TRIGGER name triggeractiontime triggerevents KW_ON qualified_name triggerreferencing?
 		triggerforspec? triggerwhen? KW_EXECUTE function_or_procedure func_name OPEN_PAREN
 		triggerfuncargs CLOSE_PAREN
-	| KW_CREATE KW_CONSTRAINT KW_TRIGGER name KW_AFTER triggerevents KW_ON qualified_name optconstrfromtable?
-		constraintattributespec KW_FOR KW_EACH KW_ROW triggerwhen? KW_EXECUTE function_or_procedure func_name
+	| KW_CREATE KW_CONSTRAINT? KW_TRIGGER name triggeractiontime triggerevents KW_ON qualified_name optconstrfromtable?
+		constraintattributespec foreachrow? triggerwhen? KW_EXECUTE function_or_procedure func_name
 		OPEN_PAREN triggerfuncargs CLOSE_PAREN;
 
 triggeractiontime: KW_BEFORE | KW_AFTER | KW_INSTEAD KW_OF;
+
+foreachrow: KW_FOR KW_EACH? roworstatment;
+ 
+roworstatment: KW_ROW | KW_STATEMENT;
 
 triggerevents: triggeroneevent (KW_OR triggeroneevent)*;
 
@@ -1317,7 +1325,9 @@ createfunctionstmt:
 			func_return
 			| KW_TABLE OPEN_PAREN table_func_column_list CLOSE_PAREN
 		)
-	)? createfunc_opt_list;
+	)? createfunc_opt_list (KW_WITH attrilist)?; // TODO --> WITH 后面的( attribute [, ...] )表达式还需要再修改
+
+attrilist: OPEN_PAREN colid (COMMA colid)* CLOSE_PAREN;
 
 opt_or_replace: KW_OR KW_REPLACE;
 
@@ -1868,7 +1878,7 @@ analyzestmt:
 vac_analyze_option_list:
 	vac_analyze_option_elem (COMMA vac_analyze_option_elem)*;
 
-analyze_keyword: KW_ANALYSE | KW_ANALYSE;
+analyze_keyword: KW_ANALYZE | KW_ANALYSE;
 
 vac_analyze_option_elem:
 	vac_analyze_option_name vac_analyze_option_arg?;
@@ -2847,6 +2857,8 @@ opt_uescape: KW_UESCAPE anysconst;
 
 signediconst: iconst | PLUS iconst | MINUS iconst;
 
+groupname: rolespec;
+
 roleid: rolespec;
 
 rolespec: nonreservedword | KW_CURRENT_USER | KW_SESSION_USER;
@@ -3283,7 +3295,7 @@ type_func_name_keyword:
 reserved_keyword:
 	KW_ALL
 	| KW_ANALYSE
-	| KW_ANALYSE
+	| KW_ANALYZE
 	| KW_AND
 	| KW_ANY
 	| KW_ARRAY
