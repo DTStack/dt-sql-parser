@@ -72,7 +72,7 @@ CREATE SCHEMA database1.schema1.table1;
 CREATE SCHEMA schemaname AUTHORIZATION username;
 
 -- The Public Schema
-CREATE TABLE public.products(col1 int);
+CREATE TABLE public7.products(col1 int);
 
 -- Inheritance
 CREATE TABLE capitals (
@@ -282,25 +282,8 @@ SERVER film_server;
 CREATE OR REPLACE FUNCTION
     name ( INOUT argname int DEFAULT a>3)
     RETURNS integer
-    AS 'obj_file';
-    -- WITH ('isStrict','isCachable'); // TODO --> 加上WITH目前是有问题的，需要进一步修改g4文件
-
--- CREATE [ OR REPLACE ] FUNCTION
---     name ( [ [ argmode ] [ argname ] argtype [ { DEFAULT | = } default_expr ] [, ...] ] )
---     [ RETURNS rettype
---       | RETURNS TABLE ( column_name column_type [, ...] ) ]
---   { LANGUAGE lang_name
---     | WINDOW
---     | IMMUTABLE | STABLE | VOLATILE | [ NOT ] LEAKPROOF
---     | CALLED ON NULL INPUT | RETURNS NULL ON NULL INPUT | STRICT
---     | [ EXTERNAL ] SECURITY INVOKER | [ EXTERNAL ] SECURITY DEFINER
---     | COST execution_cost
---     | ROWS result_rows
---     | SET configuration_parameter { TO value | = value | FROM CURRENT }
---     | AS 'definition'
---     | AS 'obj_file', 'link_symbol'
---   } ...
---     [ WITH ( attribute [, ...] ) ]
+    AS 'obj_file'
+    WITH (isStrict, isCachable);
 
 -- CREATE GROUP
 CREATE GROUP group_name WITH SUPERUSER;

@@ -2079,7 +2079,7 @@ select_clause: simple_select | select_with_parens;
 simple_select: (
 		KW_SELECT (
 			opt_all_clause? into_clause? opt_target_list?
-			| distinct_clause? target_list
+			| distinct_clause? target_list?
 		) into_clause? from_clause? where_clause? group_clause? having_clause? window_clause?
 		| values_clause
 		| KW_TABLE relation_expr
