@@ -13,9 +13,9 @@ English | [简体中文](./README-zh_CN.md)
 [online-chat-img]: https://img.shields.io/discord/920616811261743104?logo=Molecule
 [online-chat-url]: https://discord.gg/uVvq6mfPfa
 
-dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** domain. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
+dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** field. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
 
-Additionally, it provides auxiliary functions such as SQL splitting and Auto-Complete.
+Additionally, it provides auxiliary functions such as SQL splitting and code completion.
 
 **Supported SQL**:
 
@@ -256,10 +256,10 @@ console.log(sqlSlices)
 ```
 
 ### Code Completion
-Obtaining autocomplete information at a specified position in SQL.
+Obtaining code completion information at a specified position in SQL.
 We can refer to the example of using `FlinkSQL`.
 
-Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the row and column numbers indicating the position where auto-completion is desired.
+Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the row and column numbers indicating the position where code completion is desired.
 + keyword candidates list
 
     ```javascript
@@ -313,7 +313,7 @@ Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the r
     ]
     */
     ```
-The grammar-related autocomplete information returns an array, where each item represents what grammar can be filled in at that position. For example, the output in the above example represents that the position can be filled with either a **table name** or **a view name**. In this case, `syntaxContextType` represents the type of grammar that can be completed, and `wordRanges` represents the content that has already been filled.
+The grammar-related code completion information returns an array, where each item represents what grammar can be filled in at that position. For example, the output in the above example represents that the position can be filled with either a **table name** or **a view name**. In this case, `syntaxContextType` represents the type of grammar that can be completed, and `wordRanges` represents the content that has already been filled.
 
 ### Other API
 
