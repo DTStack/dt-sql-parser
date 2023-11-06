@@ -1205,7 +1205,27 @@ privileges:
 	| KW_ALL
 	| KW_ALL KW_PRIVILEGES
 	| KW_ALL OPEN_PAREN columnlist CLOSE_PAREN
-	| KW_ALL KW_PRIVILEGES OPEN_PAREN columnlist CLOSE_PAREN;
+	| KW_ALL KW_PRIVILEGES OPEN_PAREN columnlist CLOSE_PAREN
+	| beforeprivilegeselectlist
+	;
+
+beforeprivilegeselectlist: beforeprivilegeselect (COMMA beforeprivilegeselect)*;
+
+beforeprivilegeselect:
+	KW_SELECT
+	| KW_INSERT
+	| KW_UPDATE
+	| KW_DELETE_P
+	| KW_TRUNCATE
+	| KW_PEFERENCES
+	| KW_TRIGGER
+	| KW_USAGE
+	| KW_CREATE
+	| KW_CONNECT
+	| KW_TEMPORARY
+	| KW_TEMP
+	| KW_EXECUTE
+	;
 
 privilege_list: privilege (COMMA privilege)*;
 
@@ -2232,7 +2252,7 @@ join_type: (KW_FULL | KW_LEFT | KW_RIGHT | KW_INNER_P) KW_OUTER_P?;
 join_qual: KW_USING OPEN_PAREN name_list CLOSE_PAREN | KW_ON a_expr;
 
 relation_expr:
-	qualified_name STAR?
+	 KW_ONLY? qualified_name STAR?
 	| KW_ONLY (
 		qualified_name
 		| OPEN_PAREN qualified_name CLOSE_PAREN
@@ -2861,7 +2881,7 @@ groupname: rolespec;
 
 roleid: rolespec;
 
-rolespec: nonreservedword | KW_CURRENT_USER | KW_SESSION_USER;
+rolespec: nonreservedword | KW_CURRENT_USER | KW_SESSION_USER | KW_PUBLIC;
 
 role_list: rolespec (COMMA rolespec)*;
 
