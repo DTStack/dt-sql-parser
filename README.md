@@ -15,7 +15,7 @@ English | [简体中文](./README-zh_CN.md)
 
 dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** field. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
 
-Additionally, it provides auxiliary functions such as SQL splitting and code completion.
+Additionally, it provides auxiliary functions such as **SQL splitting** and **code completion**.
 
 **Supported SQL**:
 
@@ -29,15 +29,15 @@ Additionally, it provides auxiliary functions such as SQL splitting and code com
 
 **Supported auxiliary methods**
 
-| SQL Type    | SQL Split | Code-Completion |
-| ----------- | --------  | -------- |
-| Generic SQL | WIP       | WIP      |
-| Flink SQL   | ✅        | ✅       |
-| Spark SQL   | ✅        | ✅       |
-| Hive SQL    | ✅        | ✅       |
-| PL/SQL      | WIP       | WIP      |
-| Postgre SQL | WIP       | WIP      |
-| Trino SQL   | ✅        | ✅       |
+| SQL Type    | SQL Spliting | Code Completion |
+| ----------- | ------------ | --------------- |
+| Generic SQL | WIP          | WIP             |
+| Flink SQL   | ✅           | ✅              |
+| Spark SQL   | ✅           | ✅              |
+| Hive SQL    | ✅           | ✅              |
+| PL/SQL      | WIP          | WIP             |
+| Postgre SQL | WIP          | WIP             |
+| Trino SQL   | ✅           | ✅              |
 
 >Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
 
