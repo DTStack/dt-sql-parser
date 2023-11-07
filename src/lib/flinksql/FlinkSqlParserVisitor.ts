@@ -25,6 +25,7 @@ import { SubscriptContext } from "./FlinkSqlParser";
 import { ColumnReferenceContext } from "./FlinkSqlParser";
 import { DereferenceContext } from "./FlinkSqlParser";
 import { ParenthesizedExpressionContext } from "./FlinkSqlParser";
+import { DateFunctionExpressionContext } from "./FlinkSqlParser";
 import { ErrorIdentContext } from "./FlinkSqlParser";
 import { RealIdentContext } from "./FlinkSqlParser";
 import { IdentityTransformContext } from "./FlinkSqlParser";
@@ -181,7 +182,6 @@ import { MultiUnitsIntervalContext } from "./FlinkSqlParser";
 import { ErrorCapturingUnitToUnitIntervalContext } from "./FlinkSqlParser";
 import { UnitToUnitIntervalContext } from "./FlinkSqlParser";
 import { IntervalValueContext } from "./FlinkSqlParser";
-import { ColumnAliasContext } from "./FlinkSqlParser";
 import { TableAliasContext } from "./FlinkSqlParser";
 import { ErrorCapturingIdentifierContext } from "./FlinkSqlParser";
 import { ErrorCapturingIdentifierExtraContext } from "./FlinkSqlParser";
@@ -222,7 +222,6 @@ import { TimePointUnitContext } from "./FlinkSqlParser";
 import { TimeIntervalUnitContext } from "./FlinkSqlParser";
 import { ReservedKeywordsUsedAsFuncParamContext } from "./FlinkSqlParser";
 import { ReservedKeywordsUsedAsFuncNameContext } from "./FlinkSqlParser";
-import { ReservedKeywordsContext } from "./FlinkSqlParser";
 import { NonReservedKeywordsContext } from "./FlinkSqlParser";
 
 
@@ -409,6 +408,14 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dateFunctionExpression`
+	 * labeled alternative in `FlinkSqlParser.primaryExpression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDateFunctionExpression?: (ctx: DateFunctionExpressionContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `errorIdent`
@@ -1512,13 +1519,6 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	visitIntervalValue?: (ctx: IntervalValueContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.columnAlias`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitColumnAlias?: (ctx: ColumnAliasContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.tableAlias`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1797,13 +1797,6 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitReservedKeywordsUsedAsFuncName?: (ctx: ReservedKeywordsUsedAsFuncNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.reservedKeywords`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitReservedKeywords?: (ctx: ReservedKeywordsContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.nonReservedKeywords`.
