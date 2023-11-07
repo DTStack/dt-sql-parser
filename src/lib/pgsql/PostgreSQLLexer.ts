@@ -75,25 +75,25 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_DO = 57;
 	public static readonly KW_ELSE = 58;
 	public static readonly KW_EXCEPT = 59;
-	public static readonly KW_FALSE_P = 60;
+	public static readonly KW_FALSE = 60;
 	public static readonly KW_FETCH = 61;
 	public static readonly KW_FOR = 62;
 	public static readonly KW_FOREIGN = 63;
 	public static readonly KW_FROM = 64;
 	public static readonly KW_GRANT = 65;
-	public static readonly KW_GROUP_P = 66;
+	public static readonly KW_GROUP = 66;
 	public static readonly KW_HAVING = 67;
-	public static readonly KW_IN_P = 68;
+	public static readonly KW_IN = 68;
 	public static readonly KW_INITIALLY = 69;
 	public static readonly KW_INTERSECT = 70;
 	public static readonly KW_INTO = 71;
-	public static readonly KW_LATERAL_P = 72;
+	public static readonly KW_LATERAL = 72;
 	public static readonly KW_LEADING = 73;
 	public static readonly KW_LIMIT = 74;
 	public static readonly KW_LOCALTIME = 75;
 	public static readonly KW_LOCALTIMESTAMP = 76;
 	public static readonly KW_NOT = 77;
-	public static readonly KW_NULL_P = 78;
+	public static readonly KW_NULL = 78;
 	public static readonly KW_OFFSET = 79;
 	public static readonly KW_ON = 80;
 	public static readonly KW_ONLY = 81;
@@ -111,7 +111,7 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_THEN = 93;
 	public static readonly KW_TO = 94;
 	public static readonly KW_TRAILING = 95;
-	public static readonly KW_TRUE_P = 96;
+	public static readonly KW_TRUE = 96;
 	public static readonly KW_UNION = 97;
 	public static readonly KW_UNIQUE = 98;
 	public static readonly KW_USER = 99;
@@ -130,7 +130,7 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_FREEZE = 112;
 	public static readonly KW_FULL = 113;
 	public static readonly KW_ILIKE = 114;
-	public static readonly KW_INNER_P = 115;
+	public static readonly KW_INNER = 115;
 	public static readonly KW_IS = 116;
 	public static readonly KW_ISNULL = 117;
 	public static readonly KW_JOIN = 118;
@@ -138,17 +138,17 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_LIKE = 120;
 	public static readonly KW_NATURAL = 121;
 	public static readonly KW_NOTNULL = 122;
-	public static readonly KW_OUTER_P = 123;
+	public static readonly KW_OUTER = 123;
 	public static readonly KW_OVER = 124;
 	public static readonly KW_OVERLAPS = 125;
 	public static readonly KW_RIGHT = 126;
 	public static readonly KW_SIMILAR = 127;
 	public static readonly KW_VERBOSE = 128;
-	public static readonly KW_ABORT_P = 129;
-	public static readonly KW_ABSOLUTE_P = 130;
+	public static readonly KW_ABORT = 129;
+	public static readonly KW_ABSOLUTE = 130;
 	public static readonly KW_ACCESS = 131;
 	public static readonly KW_ACTION = 132;
-	public static readonly KW_ADD_P = 133;
+	public static readonly KW_ADD = 133;
 	public static readonly KW_ADMIN = 134;
 	public static readonly KW_AFTER = 135;
 	public static readonly KW_AGGREGATE = 136;
@@ -161,7 +161,7 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_ATTRIBUTE = 143;
 	public static readonly KW_BACKWARD = 144;
 	public static readonly KW_BEFORE = 145;
-	public static readonly KW_BEGIN_P = 146;
+	public static readonly KW_BEGIN = 146;
 	public static readonly KW_BY = 147;
 	public static readonly KW_CACHE = 148;
 	public static readonly KW_CALLED = 149;
@@ -181,37 +181,37 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_CONFIGURATION = 163;
 	public static readonly KW_CONNECTION = 164;
 	public static readonly KW_CONSTRAINTS = 165;
-	public static readonly KW_CONTENT_P = 166;
-	public static readonly KW_CONTINUE_P = 167;
-	public static readonly KW_CONVERSION_P = 168;
+	public static readonly KW_CONTENT = 166;
+	public static readonly KW_CONTINUE = 167;
+	public static readonly KW_CONVERSION = 168;
 	public static readonly KW_COPY = 169;
 	public static readonly KW_COST = 170;
 	public static readonly KW_CSV = 171;
 	public static readonly KW_CURSOR = 172;
 	public static readonly KW_CYCLE = 173;
-	public static readonly KW_DATA_P = 174;
+	public static readonly KW_DATA = 174;
 	public static readonly KW_DATABASE = 175;
-	public static readonly KW_DAY_P = 176;
+	public static readonly KW_DAY = 176;
 	public static readonly KW_DEALLOCATE = 177;
 	public static readonly KW_DECLARE = 178;
 	public static readonly KW_DEFAULTS = 179;
 	public static readonly KW_DEFERRED = 180;
 	public static readonly KW_DEFINER = 181;
-	public static readonly KW_DELETE_P = 182;
+	public static readonly KW_DELETE = 182;
 	public static readonly KW_DELIMITER = 183;
 	public static readonly KW_DELIMITERS = 184;
 	public static readonly KW_DICTIONARY = 185;
-	public static readonly KW_DISABLE_P = 186;
+	public static readonly KW_DISABLE = 186;
 	public static readonly KW_DISCARD = 187;
-	public static readonly KW_DOCUMENT_P = 188;
-	public static readonly KW_DOMAIN_P = 189;
-	public static readonly KW_DOUBLE_P = 190;
+	public static readonly KW_DOCUMENT = 188;
+	public static readonly KW_DOMAIN = 189;
+	public static readonly KW_DOUBLE = 190;
 	public static readonly KW_DROP = 191;
 	public static readonly KW_EACH = 192;
-	public static readonly KW_ENABLE_P = 193;
+	public static readonly KW_ENABLE = 193;
 	public static readonly KW_ENCODING = 194;
 	public static readonly KW_ENCRYPTED = 195;
-	public static readonly KW_ENUM_P = 196;
+	public static readonly KW_ENUM = 196;
 	public static readonly KW_ESCAPE = 197;
 	public static readonly KW_EVENT = 198;
 	public static readonly KW_EXCLUDE = 199;
@@ -222,7 +222,7 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_EXTENSION = 204;
 	public static readonly KW_EXTERNAL = 205;
 	public static readonly KW_FAMILY = 206;
-	public static readonly KW_FIRST_P = 207;
+	public static readonly KW_FIRST = 207;
 	public static readonly KW_FOLLOWING = 208;
 	public static readonly KW_FORCE = 209;
 	public static readonly KW_FORWARD = 210;
@@ -231,14 +231,14 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_GLOBAL = 213;
 	public static readonly KW_GRANTED = 214;
 	public static readonly KW_HANDLER = 215;
-	public static readonly KW_HEADER_P = 216;
+	public static readonly KW_HEADER = 216;
 	public static readonly KW_HOLD = 217;
-	public static readonly KW_HOUR_P = 218;
-	public static readonly KW_IDENTITY_P = 219;
-	public static readonly KW_IF_P = 220;
+	public static readonly KW_HOUR = 218;
+	public static readonly KW_IDENTITY = 219;
+	public static readonly KW_IF = 220;
 	public static readonly KW_IMMEDIATE = 221;
 	public static readonly KW_IMMUTABLE = 222;
-	public static readonly KW_IMPLICIT_P = 223;
+	public static readonly KW_IMPLICIT = 223;
 	public static readonly KW_INCLUDING = 224;
 	public static readonly KW_INCREMENT = 225;
 	public static readonly KW_INDEX = 226;
@@ -254,7 +254,7 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_CREATEUSER = 236;
 	public static readonly KW_NOCREATEUSER = 237;
 	public static readonly KW_INHERITS = 238;
-	public static readonly KW_INLINE_P = 239;
+	public static readonly KW_INLINE = 239;
 	public static readonly KW_INSENSITIVE = 240;
 	public static readonly KW_INSERT = 241;
 	public static readonly KW_INSTEAD = 242;
@@ -263,33 +263,33 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_KEY = 245;
 	public static readonly KW_LABEL = 246;
 	public static readonly KW_LANGUAGE = 247;
-	public static readonly KW_LARGE_P = 248;
-	public static readonly KW_LAST_P = 249;
+	public static readonly KW_LARGE = 248;
+	public static readonly KW_LAST = 249;
 	public static readonly KW_LEAKPROOF = 250;
 	public static readonly KW_LEVEL = 251;
 	public static readonly KW_LISTEN = 252;
 	public static readonly KW_LOAD = 253;
 	public static readonly KW_LOCAL = 254;
 	public static readonly KW_LOCATION = 255;
-	public static readonly KW_LOCK_P = 256;
+	public static readonly KW_LOCK = 256;
 	public static readonly KW_MAPPING = 257;
 	public static readonly KW_MATCH = 258;
 	public static readonly KW_MATERIALIZED = 259;
 	public static readonly KW_MAXVALUE = 260;
-	public static readonly KW_MINUTE_P = 261;
+	public static readonly KW_MINUTE = 261;
 	public static readonly KW_MINVALUE = 262;
 	public static readonly KW_MODE = 263;
-	public static readonly KW_MONTH_P = 264;
+	public static readonly KW_MONTH = 264;
 	public static readonly KW_MOVE = 265;
-	public static readonly KW_NAME_P = 266;
+	public static readonly KW_NAME = 266;
 	public static readonly KW_NAMES = 267;
 	public static readonly KW_NEXT = 268;
 	public static readonly KW_NO = 269;
 	public static readonly KW_NOTHING = 270;
 	public static readonly KW_NOTIFY = 271;
 	public static readonly KW_NOWAIT = 272;
-	public static readonly KW_NULLS_P = 273;
-	public static readonly KW_OBJECT_P = 274;
+	public static readonly KW_NULLS = 273;
+	public static readonly KW_OBJECT = 274;
 	public static readonly KW_OF = 275;
 	public static readonly KW_OFF = 276;
 	public static readonly KW_OIDS = 277;
@@ -322,7 +322,7 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_REF = 304;
 	public static readonly KW_REFRESH = 305;
 	public static readonly KW_REINDEX = 306;
-	public static readonly KW_RELATIVE_P = 307;
+	public static readonly KW_RELATIVE = 307;
 	public static readonly KW_RELEASE = 308;
 	public static readonly KW_RENAME = 309;
 	public static readonly KW_REPEATABLE = 310;
@@ -341,7 +341,7 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_SCHEMA = 323;
 	public static readonly KW_SCROLL = 324;
 	public static readonly KW_SEARCH = 325;
-	public static readonly KW_SECOND_P = 326;
+	public static readonly KW_SECOND = 326;
 	public static readonly KW_SECURITY = 327;
 	public static readonly KW_SEQUENCE = 328;
 	public static readonly KW_SEQUENCES = 329;
@@ -354,29 +354,29 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_SIMPLE = 336;
 	public static readonly KW_SNAPSHOT = 337;
 	public static readonly KW_STABLE = 338;
-	public static readonly KW_STANDALONE_P = 339;
+	public static readonly KW_STANDALONE = 339;
 	public static readonly KW_START = 340;
 	public static readonly KW_STATEMENT = 341;
 	public static readonly KW_STATISTICS = 342;
 	public static readonly KW_STDIN = 343;
 	public static readonly KW_STDOUT = 344;
 	public static readonly KW_STORAGE = 345;
-	public static readonly KW_STRICT_P = 346;
-	public static readonly KW_STRIP_P = 347;
+	public static readonly KW_STRICT = 346;
+	public static readonly KW_STRIP = 347;
 	public static readonly KW_SYSID = 348;
-	public static readonly KW_SYSTEM_P = 349;
+	public static readonly KW_SYSTEM = 349;
 	public static readonly KW_TABLES = 350;
 	public static readonly KW_TABLESPACE = 351;
 	public static readonly KW_TEMP = 352;
 	public static readonly KW_TEMPLATE = 353;
 	public static readonly KW_TEMPORARY = 354;
-	public static readonly KW_TEXT_P = 355;
+	public static readonly KW_TEXT = 355;
 	public static readonly KW_TRANSACTION = 356;
 	public static readonly KW_TRIGGER = 357;
 	public static readonly KW_TRUNCATE = 358;
 	public static readonly KW_TRUSTED = 359;
-	public static readonly KW_TYPE_P = 360;
-	public static readonly KW_TYPES_P = 361;
+	public static readonly KW_TYPE = 360;
+	public static readonly KW_TYPES = 361;
 	public static readonly KW_UNBOUNDED = 362;
 	public static readonly KW_UNCOMMITTED = 363;
 	public static readonly KW_UNENCRYPTED = 364;
@@ -390,33 +390,33 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_VALIDATE = 372;
 	public static readonly KW_VALIDATOR = 373;
 	public static readonly KW_VARYING = 374;
-	public static readonly KW_VERSION_P = 375;
+	public static readonly KW_VERSION = 375;
 	public static readonly KW_VIEW = 376;
 	public static readonly KW_VOLATILE = 377;
-	public static readonly KW_WHITESPACE_P = 378;
+	public static readonly KW_WHITESPACE = 378;
 	public static readonly KW_WITHOUT = 379;
 	public static readonly KW_WORK = 380;
 	public static readonly KW_WRAPPER = 381;
 	public static readonly KW_WRITE = 382;
-	public static readonly KW_XML_P = 383;
-	public static readonly KW_YEAR_P = 384;
-	public static readonly KW_YES_P = 385;
+	public static readonly KW_XML = 383;
+	public static readonly KW_YEAR = 384;
+	public static readonly KW_YES = 385;
 	public static readonly KW_ZONE = 386;
 	public static readonly KW_BETWEEN = 387;
 	public static readonly KW_BIGINT = 388;
 	public static readonly KW_BIT = 389;
-	public static readonly KW_BOOLEAN_P = 390;
-	public static readonly KW_CHAR_P = 391;
+	public static readonly KW_BOOLEAN = 390;
+	public static readonly KW_CHAR = 391;
 	public static readonly KW_CHARACTER = 392;
 	public static readonly KW_COALESCE = 393;
 	public static readonly KW_DEC = 394;
-	public static readonly KW_DECIMAL_P = 395;
+	public static readonly KW_DECIMAL = 395;
 	public static readonly KW_EXISTS = 396;
 	public static readonly KW_EXTRACT = 397;
-	public static readonly KW_FLOAT_P = 398;
+	public static readonly KW_FLOAT = 398;
 	public static readonly KW_GREATEST = 399;
 	public static readonly KW_INOUT = 400;
-	public static readonly KW_INT_P = 401;
+	public static readonly KW_INT = 401;
 	public static readonly KW_INTEGER = 402;
 	public static readonly KW_INTERVAL = 403;
 	public static readonly KW_LEAST = 404;
@@ -449,7 +449,7 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_XMLROOT = 431;
 	public static readonly KW_XMLSERIALIZE = 432;
 	public static readonly KW_CALL = 433;
-	public static readonly KW_CURRENT_P = 434;
+	public static readonly KW_CURRENT = 434;
 	public static readonly KW_ATTACH = 435;
 	public static readonly KW_DETACH = 436;
 	public static readonly KW_EXPRESSION = 437;
@@ -459,28 +459,28 @@ export class PostgreSQLLexer extends Lexer {
 	public static readonly KW_INCLUDE = 441;
 	public static readonly KW_ROUTINE = 442;
 	public static readonly KW_TRANSFORM = 443;
-	public static readonly KW_IMPORT_P = 444;
+	public static readonly KW_IMPORT = 444;
 	public static readonly KW_POLICY = 445;
 	public static readonly KW_METHOD = 446;
 	public static readonly KW_REFERENCING = 447;
 	public static readonly KW_NEW = 448;
 	public static readonly KW_OLD = 449;
-	public static readonly KW_VALUE_P = 450;
+	public static readonly KW_VALUE = 450;
 	public static readonly KW_SUBSCRIPTION = 451;
 	public static readonly KW_PUBLICATION = 452;
-	public static readonly KW_OUT_P = 453;
-	public static readonly KW_END_P = 454;
+	public static readonly KW_OUT = 453;
+	public static readonly KW_END = 454;
 	public static readonly KW_ROUTINES = 455;
 	public static readonly KW_SCHEMAS = 456;
 	public static readonly KW_PROCEDURES = 457;
-	public static readonly KW_INPUT_P = 458;
+	public static readonly KW_INPUT = 458;
 	public static readonly KW_SUPPORT = 459;
 	public static readonly KW_PARALLEL = 460;
-	public static readonly KW_SQL_P = 461;
+	public static readonly KW_SQL = 461;
 	public static readonly KW_DEPENDS = 462;
 	public static readonly KW_OVERRIDING = 463;
 	public static readonly KW_CONFLICT = 464;
-	public static readonly KW_SKIP_P = 465;
+	public static readonly KW_SKIP = 465;
 	public static readonly KW_LOCKED = 466;
 	public static readonly KW_TIES = 467;
 	public static readonly KW_ROLLUP = 468;
@@ -610,92 +610,91 @@ export class PostgreSQLLexer extends Lexer {
 		"KW_COLLATE", "KW_COLUMN", "KW_CONSTRAINT", "KW_CREATE", "KW_CURRENT_CATALOG", 
 		"KW_CURRENT_DATE", "KW_CURRENT_ROLE", "KW_CURRENT_TIME", "KW_CURRENT_TIMESTAMP", 
 		"KW_CURRENT_USER", "KW_DEFAULT", "KW_DEFERRABLE", "KW_DESC", "KW_DISTINCT", 
-		"KW_DO", "KW_ELSE", "KW_EXCEPT", "KW_FALSE_P", "KW_FETCH", "KW_FOR", "KW_FOREIGN", 
-		"KW_FROM", "KW_GRANT", "KW_GROUP_P", "KW_HAVING", "KW_IN_P", "KW_INITIALLY", 
-		"KW_INTERSECT", "KW_INTO", "KW_LATERAL_P", "KW_LEADING", "KW_LIMIT", "KW_LOCALTIME", 
-		"KW_LOCALTIMESTAMP", "KW_NOT", "KW_NULL_P", "KW_OFFSET", "KW_ON", "KW_ONLY", 
+		"KW_DO", "KW_ELSE", "KW_EXCEPT", "KW_FALSE", "KW_FETCH", "KW_FOR", "KW_FOREIGN", 
+		"KW_FROM", "KW_GRANT", "KW_GROUP", "KW_HAVING", "KW_IN", "KW_INITIALLY", 
+		"KW_INTERSECT", "KW_INTO", "KW_LATERAL", "KW_LEADING", "KW_LIMIT", "KW_LOCALTIME", 
+		"KW_LOCALTIMESTAMP", "KW_NOT", "KW_NULL", "KW_OFFSET", "KW_ON", "KW_ONLY", 
 		"KW_OR", "KW_ORDER", "KW_PLACING", "KW_PRIMARY", "KW_REFERENCES", "KW_RETURNING", 
 		"KW_SELECT", "KW_SESSION_USER", "KW_SOME", "KW_SYMMETRIC", "KW_TABLE", 
-		"KW_THEN", "KW_TO", "KW_TRAILING", "KW_TRUE_P", "KW_UNION", "KW_UNIQUE", 
+		"KW_THEN", "KW_TO", "KW_TRAILING", "KW_TRUE", "KW_UNION", "KW_UNIQUE", 
 		"KW_USER", "KW_USING", "KW_VARIADIC", "KW_WHEN", "KW_WHERE", "KW_WINDOW", 
 		"KW_WITH", "KW_AUTHORIZATION", "KW_BINARY", "KW_COLLATION", "KW_CONCURRENTLY", 
-		"KW_CROSS", "KW_CURRENT_SCHEMA", "KW_FREEZE", "KW_FULL", "KW_ILIKE", "KW_INNER_P", 
+		"KW_CROSS", "KW_CURRENT_SCHEMA", "KW_FREEZE", "KW_FULL", "KW_ILIKE", "KW_INNER", 
 		"KW_IS", "KW_ISNULL", "KW_JOIN", "KW_LEFT", "KW_LIKE", "KW_NATURAL", "KW_NOTNULL", 
-		"KW_OUTER_P", "KW_OVER", "KW_OVERLAPS", "KW_RIGHT", "KW_SIMILAR", "KW_VERBOSE", 
-		"KW_ABORT_P", "KW_ABSOLUTE_P", "KW_ACCESS", "KW_ACTION", "KW_ADD_P", "KW_ADMIN", 
+		"KW_OUTER", "KW_OVER", "KW_OVERLAPS", "KW_RIGHT", "KW_SIMILAR", "KW_VERBOSE", 
+		"KW_ABORT", "KW_ABSOLUTE", "KW_ACCESS", "KW_ACTION", "KW_ADD", "KW_ADMIN", 
 		"KW_AFTER", "KW_AGGREGATE", "KW_ALSO", "KW_ALTER", "KW_ALWAYS", "KW_ASSERTION", 
 		"KW_ASSIGNMENT", "KW_AT", "KW_ATTRIBUTE", "KW_BACKWARD", "KW_BEFORE", 
-		"KW_BEGIN_P", "KW_BY", "KW_CACHE", "KW_CALLED", "KW_CASCADE", "KW_CASCADED", 
+		"KW_BEGIN", "KW_BY", "KW_CACHE", "KW_CALLED", "KW_CASCADE", "KW_CASCADED", 
 		"KW_CATALOG", "KW_CHAIN", "KW_CHARACTERISTICS", "KW_CHECKPOINT", "KW_CLASS", 
 		"KW_CLOSE", "KW_CLUSTER", "KW_COMMENT", "KW_COMMENTS", "KW_COMMIT", "KW_COMMITTED", 
-		"KW_CONFIGURATION", "KW_CONNECTION", "KW_CONSTRAINTS", "KW_CONTENT_P", 
-		"KW_CONTINUE_P", "KW_CONVERSION_P", "KW_COPY", "KW_COST", "KW_CSV", "KW_CURSOR", 
-		"KW_CYCLE", "KW_DATA_P", "KW_DATABASE", "KW_DAY_P", "KW_DEALLOCATE", "KW_DECLARE", 
-		"KW_DEFAULTS", "KW_DEFERRED", "KW_DEFINER", "KW_DELETE_P", "KW_DELIMITER", 
-		"KW_DELIMITERS", "KW_DICTIONARY", "KW_DISABLE_P", "KW_DISCARD", "KW_DOCUMENT_P", 
-		"KW_DOMAIN_P", "KW_DOUBLE_P", "KW_DROP", "KW_EACH", "KW_ENABLE_P", "KW_ENCODING", 
-		"KW_ENCRYPTED", "KW_ENUM_P", "KW_ESCAPE", "KW_EVENT", "KW_EXCLUDE", "KW_EXCLUDING", 
-		"KW_EXCLUSIVE", "KW_EXECUTE", "KW_EXPLAIN", "KW_EXTENSION", "KW_EXTERNAL", 
-		"KW_FAMILY", "KW_FIRST_P", "KW_FOLLOWING", "KW_FORCE", "KW_FORWARD", "KW_FUNCTION", 
-		"KW_FUNCTIONS", "KW_GLOBAL", "KW_GRANTED", "KW_HANDLER", "KW_HEADER_P", 
-		"KW_HOLD", "KW_HOUR_P", "KW_IDENTITY_P", "KW_IF_P", "KW_IMMEDIATE", "KW_IMMUTABLE", 
-		"KW_IMPLICIT_P", "KW_INCLUDING", "KW_INCREMENT", "KW_INDEX", "KW_INDEXES", 
-		"KW_INHERIT", "KW_NOINHERIT", "KW_SUPERUSER", "KW_NOSUPERUSER", "KW_CREATEDB", 
-		"KW_NOCREATEDB", "KW_CREATEROLE", "KW_NOCREATEROLE", "KW_CREATEUSER", 
-		"KW_NOCREATEUSER", "KW_INHERITS", "KW_INLINE_P", "KW_INSENSITIVE", "KW_INSERT", 
-		"KW_INSTEAD", "KW_INVOKER", "KW_ISOLATION", "KW_KEY", "KW_LABEL", "KW_LANGUAGE", 
-		"KW_LARGE_P", "KW_LAST_P", "KW_LEAKPROOF", "KW_LEVEL", "KW_LISTEN", "KW_LOAD", 
-		"KW_LOCAL", "KW_LOCATION", "KW_LOCK_P", "KW_MAPPING", "KW_MATCH", "KW_MATERIALIZED", 
-		"KW_MAXVALUE", "KW_MINUTE_P", "KW_MINVALUE", "KW_MODE", "KW_MONTH_P", 
-		"KW_MOVE", "KW_NAME_P", "KW_NAMES", "KW_NEXT", "KW_NO", "KW_NOTHING", 
-		"KW_NOTIFY", "KW_NOWAIT", "KW_NULLS_P", "KW_OBJECT_P", "KW_OF", "KW_OFF", 
-		"KW_OIDS", "KW_OPERATOR", "KW_OPTION", "KW_OPTIONS", "KW_OWNED", "KW_OWNER", 
-		"KW_PARSER", "KW_PARTIAL", "KW_PARTITION", "KW_PASSING", "KW_PASSWORD", 
-		"KW_PLANS", "KW_PRECEDING", "KW_PREPARE", "KW_PREPARED", "KW_PRESERVE", 
-		"KW_PRIOR", "KW_PRIVILEGES", "KW_PROCEDURAL", "KW_PROCEDURE", "KW_PROGRAM", 
-		"KW_QUOTE", "KW_RANGE", "KW_READ", "KW_REASSIGN", "KW_RECHECK", "KW_RECURSIVE", 
-		"KW_REF", "KW_REFRESH", "KW_REINDEX", "KW_RELATIVE_P", "KW_RELEASE", "KW_RENAME", 
-		"KW_REPEATABLE", "KW_REPLACE", "KW_REPLICA", "KW_RESET", "KW_RESTART", 
-		"KW_RESTRICT", "KW_RETURNS", "KW_REVOKE", "KW_ROLE", "KW_ROLLBACK", "KW_ROWS", 
-		"KW_RULE", "KW_SAVEPOINT", "KW_SCHEMA", "KW_SCROLL", "KW_SEARCH", "KW_SECOND_P", 
-		"KW_SECURITY", "KW_SEQUENCE", "KW_SEQUENCES", "KW_SERIALIZABLE", "KW_SERVER", 
-		"KW_SESSION", "KW_SET", "KW_SHARE", "KW_SHOW", "KW_SIMPLE", "KW_SNAPSHOT", 
-		"KW_STABLE", "KW_STANDALONE_P", "KW_START", "KW_STATEMENT", "KW_STATISTICS", 
-		"KW_STDIN", "KW_STDOUT", "KW_STORAGE", "KW_STRICT_P", "KW_STRIP_P", "KW_SYSID", 
-		"KW_SYSTEM_P", "KW_TABLES", "KW_TABLESPACE", "KW_TEMP", "KW_TEMPLATE", 
-		"KW_TEMPORARY", "KW_TEXT_P", "KW_TRANSACTION", "KW_TRIGGER", "KW_TRUNCATE", 
-		"KW_TRUSTED", "KW_TYPE_P", "KW_TYPES_P", "KW_UNBOUNDED", "KW_UNCOMMITTED", 
-		"KW_UNENCRYPTED", "KW_UNKNOWN", "KW_UNLISTEN", "KW_UNLOGGED", "KW_UNTIL", 
-		"KW_UPDATE", "KW_VACUUM", "KW_VALID", "KW_VALIDATE", "KW_VALIDATOR", "KW_VARYING", 
-		"KW_VERSION_P", "KW_VIEW", "KW_VOLATILE", "KW_WHITESPACE_P", "KW_WITHOUT", 
-		"KW_WORK", "KW_WRAPPER", "KW_WRITE", "KW_XML_P", "KW_YEAR_P", "KW_YES_P", 
-		"KW_ZONE", "KW_BETWEEN", "KW_BIGINT", "KW_BIT", "KW_BOOLEAN_P", "KW_CHAR_P", 
-		"KW_CHARACTER", "KW_COALESCE", "KW_DEC", "KW_DECIMAL_P", "KW_EXISTS", 
-		"KW_EXTRACT", "KW_FLOAT_P", "KW_GREATEST", "KW_INOUT", "KW_INT_P", "KW_INTEGER", 
-		"KW_INTERVAL", "KW_LEAST", "KW_NATIONAL", "KW_NCHAR", "KW_NONE", "KW_NULLIF", 
-		"KW_NUMERIC", "KW_OVERLAY", "KW_POSITION", "KW_PRECISION", "KW_REAL", 
-		"KW_ROW", "KW_SETOF", "KW_SMALLINT", "KW_SUBSTRING", "KW_TIME", "KW_TIMESTAMP", 
-		"KW_TREAT", "KW_TRIM", "KW_VALUES", "KW_VARCHAR", "KW_XMLATTRIBUTES", 
+		"KW_CONFIGURATION", "KW_CONNECTION", "KW_CONSTRAINTS", "KW_CONTENT", "KW_CONTINUE", 
+		"KW_CONVERSION", "KW_COPY", "KW_COST", "KW_CSV", "KW_CURSOR", "KW_CYCLE", 
+		"KW_DATA", "KW_DATABASE", "KW_DAY", "KW_DEALLOCATE", "KW_DECLARE", "KW_DEFAULTS", 
+		"KW_DEFERRED", "KW_DEFINER", "KW_DELETE", "KW_DELIMITER", "KW_DELIMITERS", 
+		"KW_DICTIONARY", "KW_DISABLE", "KW_DISCARD", "KW_DOCUMENT", "KW_DOMAIN", 
+		"KW_DOUBLE", "KW_DROP", "KW_EACH", "KW_ENABLE", "KW_ENCODING", "KW_ENCRYPTED", 
+		"KW_ENUM", "KW_ESCAPE", "KW_EVENT", "KW_EXCLUDE", "KW_EXCLUDING", "KW_EXCLUSIVE", 
+		"KW_EXECUTE", "KW_EXPLAIN", "KW_EXTENSION", "KW_EXTERNAL", "KW_FAMILY", 
+		"KW_FIRST", "KW_FOLLOWING", "KW_FORCE", "KW_FORWARD", "KW_FUNCTION", "KW_FUNCTIONS", 
+		"KW_GLOBAL", "KW_GRANTED", "KW_HANDLER", "KW_HEADER", "KW_HOLD", "KW_HOUR", 
+		"KW_IDENTITY", "KW_IF", "KW_IMMEDIATE", "KW_IMMUTABLE", "KW_IMPLICIT", 
+		"KW_INCLUDING", "KW_INCREMENT", "KW_INDEX", "KW_INDEXES", "KW_INHERIT", 
+		"KW_NOINHERIT", "KW_SUPERUSER", "KW_NOSUPERUSER", "KW_CREATEDB", "KW_NOCREATEDB", 
+		"KW_CREATEROLE", "KW_NOCREATEROLE", "KW_CREATEUSER", "KW_NOCREATEUSER", 
+		"KW_INHERITS", "KW_INLINE", "KW_INSENSITIVE", "KW_INSERT", "KW_INSTEAD", 
+		"KW_INVOKER", "KW_ISOLATION", "KW_KEY", "KW_LABEL", "KW_LANGUAGE", "KW_LARGE", 
+		"KW_LAST", "KW_LEAKPROOF", "KW_LEVEL", "KW_LISTEN", "KW_LOAD", "KW_LOCAL", 
+		"KW_LOCATION", "KW_LOCK", "KW_MAPPING", "KW_MATCH", "KW_MATERIALIZED", 
+		"KW_MAXVALUE", "KW_MINUTE", "KW_MINVALUE", "KW_MODE", "KW_MONTH", "KW_MOVE", 
+		"KW_NAME", "KW_NAMES", "KW_NEXT", "KW_NO", "KW_NOTHING", "KW_NOTIFY", 
+		"KW_NOWAIT", "KW_NULLS", "KW_OBJECT", "KW_OF", "KW_OFF", "KW_OIDS", "KW_OPERATOR", 
+		"KW_OPTION", "KW_OPTIONS", "KW_OWNED", "KW_OWNER", "KW_PARSER", "KW_PARTIAL", 
+		"KW_PARTITION", "KW_PASSING", "KW_PASSWORD", "KW_PLANS", "KW_PRECEDING", 
+		"KW_PREPARE", "KW_PREPARED", "KW_PRESERVE", "KW_PRIOR", "KW_PRIVILEGES", 
+		"KW_PROCEDURAL", "KW_PROCEDURE", "KW_PROGRAM", "KW_QUOTE", "KW_RANGE", 
+		"KW_READ", "KW_REASSIGN", "KW_RECHECK", "KW_RECURSIVE", "KW_REF", "KW_REFRESH", 
+		"KW_REINDEX", "KW_RELATIVE", "KW_RELEASE", "KW_RENAME", "KW_REPEATABLE", 
+		"KW_REPLACE", "KW_REPLICA", "KW_RESET", "KW_RESTART", "KW_RESTRICT", "KW_RETURNS", 
+		"KW_REVOKE", "KW_ROLE", "KW_ROLLBACK", "KW_ROWS", "KW_RULE", "KW_SAVEPOINT", 
+		"KW_SCHEMA", "KW_SCROLL", "KW_SEARCH", "KW_SECOND", "KW_SECURITY", "KW_SEQUENCE", 
+		"KW_SEQUENCES", "KW_SERIALIZABLE", "KW_SERVER", "KW_SESSION", "KW_SET", 
+		"KW_SHARE", "KW_SHOW", "KW_SIMPLE", "KW_SNAPSHOT", "KW_STABLE", "KW_STANDALONE", 
+		"KW_START", "KW_STATEMENT", "KW_STATISTICS", "KW_STDIN", "KW_STDOUT", 
+		"KW_STORAGE", "KW_STRICT", "KW_STRIP", "KW_SYSID", "KW_SYSTEM", "KW_TABLES", 
+		"KW_TABLESPACE", "KW_TEMP", "KW_TEMPLATE", "KW_TEMPORARY", "KW_TEXT", 
+		"KW_TRANSACTION", "KW_TRIGGER", "KW_TRUNCATE", "KW_TRUSTED", "KW_TYPE", 
+		"KW_TYPES", "KW_UNBOUNDED", "KW_UNCOMMITTED", "KW_UNENCRYPTED", "KW_UNKNOWN", 
+		"KW_UNLISTEN", "KW_UNLOGGED", "KW_UNTIL", "KW_UPDATE", "KW_VACUUM", "KW_VALID", 
+		"KW_VALIDATE", "KW_VALIDATOR", "KW_VARYING", "KW_VERSION", "KW_VIEW", 
+		"KW_VOLATILE", "KW_WHITESPACE", "KW_WITHOUT", "KW_WORK", "KW_WRAPPER", 
+		"KW_WRITE", "KW_XML", "KW_YEAR", "KW_YES", "KW_ZONE", "KW_BETWEEN", "KW_BIGINT", 
+		"KW_BIT", "KW_BOOLEAN", "KW_CHAR", "KW_CHARACTER", "KW_COALESCE", "KW_DEC", 
+		"KW_DECIMAL", "KW_EXISTS", "KW_EXTRACT", "KW_FLOAT", "KW_GREATEST", "KW_INOUT", 
+		"KW_INT", "KW_INTEGER", "KW_INTERVAL", "KW_LEAST", "KW_NATIONAL", "KW_NCHAR", 
+		"KW_NONE", "KW_NULLIF", "KW_NUMERIC", "KW_OVERLAY", "KW_POSITION", "KW_PRECISION", 
+		"KW_REAL", "KW_ROW", "KW_SETOF", "KW_SMALLINT", "KW_SUBSTRING", "KW_TIME", 
+		"KW_TIMESTAMP", "KW_TREAT", "KW_TRIM", "KW_VALUES", "KW_VARCHAR", "KW_XMLATTRIBUTES", 
 		"KW_XMLCONCAT", "KW_XMLELEMENT", "KW_XMLEXISTS", "KW_XMLFOREST", "KW_XMLPARSE", 
-		"KW_XMLPI", "KW_XMLROOT", "KW_XMLSERIALIZE", "KW_CALL", "KW_CURRENT_P", 
+		"KW_XMLPI", "KW_XMLROOT", "KW_XMLSERIALIZE", "KW_CALL", "KW_CURRENT", 
 		"KW_ATTACH", "KW_DETACH", "KW_EXPRESSION", "KW_GENERATED", "KW_LOGGED", 
-		"KW_STORED", "KW_INCLUDE", "KW_ROUTINE", "KW_TRANSFORM", "KW_IMPORT_P", 
-		"KW_POLICY", "KW_METHOD", "KW_REFERENCING", "KW_NEW", "KW_OLD", "KW_VALUE_P", 
-		"KW_SUBSCRIPTION", "KW_PUBLICATION", "KW_OUT_P", "KW_END_P", "KW_ROUTINES", 
-		"KW_SCHEMAS", "KW_PROCEDURES", "KW_INPUT_P", "KW_SUPPORT", "KW_PARALLEL", 
-		"KW_SQL_P", "KW_DEPENDS", "KW_OVERRIDING", "KW_CONFLICT", "KW_SKIP_P", 
-		"KW_LOCKED", "KW_TIES", "KW_ROLLUP", "KW_CUBE", "KW_GROUPING", "KW_SETS", 
-		"KW_TABLESAMPLE", "KW_ORDINALITY", "KW_XMLTABLE", "KW_COLUMNS", "KW_XMLNAMESPACES", 
-		"KW_ROWTYPE", "KW_NORMALIZED", "KW_WITHIN", "KW_FILTER", "KW_GROUPS", 
-		"KW_OTHERS", "KW_NFC", "KW_NFD", "KW_NFKC", "KW_NFKD", "KW_UESCAPE", "KW_VIEWS", 
-		"KW_NORMALIZE", "KW_DUMP", "KW_PRINT_STRICT_PARAMS", "KW_VARIABLE_CONFLICT", 
-		"KW_ERROR", "KW_USE_VARIABLE", "KW_USE_COLUMN", "KW_ALIAS", "KW_CONSTANT", 
-		"KW_PERFORM", "KW_GET", "KW_DIAGNOSTICS", "KW_STACKED", "KW_ELSIF", "KW_WHILE", 
-		"KW_REVERSE", "KW_FOREACH", "KW_SLICE", "KW_EXIT", "KW_RETURN", "KW_QUERY", 
-		"KW_RAISE", "KW_SQLSTATE", "KW_DEBUG", "KW_LOG", "KW_INFO", "KW_NOTICE", 
-		"KW_WARNING", "KW_EXCEPTION", "KW_ASSERT", "KW_LOOP", "KW_OPEN", "KW_PEFERENCES", 
-		"KW_USAGE", "KW_CONNECT", "KW_PUBLIC", "Identifier", "IdentifierStartChar", 
-		"IdentifierChar", "StrictIdentifierChar", "QuotedIdentifier", "UnterminatedQuotedIdentifier", 
+		"KW_STORED", "KW_INCLUDE", "KW_ROUTINE", "KW_TRANSFORM", "KW_IMPORT", 
+		"KW_POLICY", "KW_METHOD", "KW_REFERENCING", "KW_NEW", "KW_OLD", "KW_VALUE", 
+		"KW_SUBSCRIPTION", "KW_PUBLICATION", "KW_OUT", "KW_END", "KW_ROUTINES", 
+		"KW_SCHEMAS", "KW_PROCEDURES", "KW_INPUT", "KW_SUPPORT", "KW_PARALLEL", 
+		"KW_SQL", "KW_DEPENDS", "KW_OVERRIDING", "KW_CONFLICT", "KW_SKIP", "KW_LOCKED", 
+		"KW_TIES", "KW_ROLLUP", "KW_CUBE", "KW_GROUPING", "KW_SETS", "KW_TABLESAMPLE", 
+		"KW_ORDINALITY", "KW_XMLTABLE", "KW_COLUMNS", "KW_XMLNAMESPACES", "KW_ROWTYPE", 
+		"KW_NORMALIZED", "KW_WITHIN", "KW_FILTER", "KW_GROUPS", "KW_OTHERS", "KW_NFC", 
+		"KW_NFD", "KW_NFKC", "KW_NFKD", "KW_UESCAPE", "KW_VIEWS", "KW_NORMALIZE", 
+		"KW_DUMP", "KW_PRINT_STRICT_PARAMS", "KW_VARIABLE_CONFLICT", "KW_ERROR", 
+		"KW_USE_VARIABLE", "KW_USE_COLUMN", "KW_ALIAS", "KW_CONSTANT", "KW_PERFORM", 
+		"KW_GET", "KW_DIAGNOSTICS", "KW_STACKED", "KW_ELSIF", "KW_WHILE", "KW_REVERSE", 
+		"KW_FOREACH", "KW_SLICE", "KW_EXIT", "KW_RETURN", "KW_QUERY", "KW_RAISE", 
+		"KW_SQLSTATE", "KW_DEBUG", "KW_LOG", "KW_INFO", "KW_NOTICE", "KW_WARNING", 
+		"KW_EXCEPTION", "KW_ASSERT", "KW_LOOP", "KW_OPEN", "KW_PEFERENCES", "KW_USAGE", 
+		"KW_CONNECT", "KW_PUBLIC", "Identifier", "IdentifierStartChar", "IdentifierChar", 
+		"StrictIdentifierChar", "QuotedIdentifier", "UnterminatedQuotedIdentifier", 
 		"InvalidQuotedIdentifier", "InvalidUnterminatedQuotedIdentifier", "UnicodeQuotedIdentifier", 
 		"UnterminatedUnicodeQuotedIdentifier", "InvalidUnicodeQuotedIdentifier", 
 		"InvalidUnterminatedUnicodeQuotedIdentifier", "StringConstant", "UnterminatedStringConstant", 
@@ -819,93 +818,92 @@ export class PostgreSQLLexer extends Lexer {
 		"KW_CREATE", "KW_CURRENT_CATALOG", "KW_CURRENT_DATE", "KW_CURRENT_ROLE", 
 		"KW_CURRENT_TIME", "KW_CURRENT_TIMESTAMP", "KW_CURRENT_USER", "KW_DEFAULT", 
 		"KW_DEFERRABLE", "KW_DESC", "KW_DISTINCT", "KW_DO", "KW_ELSE", "KW_EXCEPT", 
-		"KW_FALSE_P", "KW_FETCH", "KW_FOR", "KW_FOREIGN", "KW_FROM", "KW_GRANT", 
-		"KW_GROUP_P", "KW_HAVING", "KW_IN_P", "KW_INITIALLY", "KW_INTERSECT", 
-		"KW_INTO", "KW_LATERAL_P", "KW_LEADING", "KW_LIMIT", "KW_LOCALTIME", "KW_LOCALTIMESTAMP", 
-		"KW_NOT", "KW_NULL_P", "KW_OFFSET", "KW_ON", "KW_ONLY", "KW_OR", "KW_ORDER", 
+		"KW_FALSE", "KW_FETCH", "KW_FOR", "KW_FOREIGN", "KW_FROM", "KW_GRANT", 
+		"KW_GROUP", "KW_HAVING", "KW_IN", "KW_INITIALLY", "KW_INTERSECT", "KW_INTO", 
+		"KW_LATERAL", "KW_LEADING", "KW_LIMIT", "KW_LOCALTIME", "KW_LOCALTIMESTAMP", 
+		"KW_NOT", "KW_NULL", "KW_OFFSET", "KW_ON", "KW_ONLY", "KW_OR", "KW_ORDER", 
 		"KW_PLACING", "KW_PRIMARY", "KW_REFERENCES", "KW_RETURNING", "KW_SELECT", 
 		"KW_SESSION_USER", "KW_SOME", "KW_SYMMETRIC", "KW_TABLE", "KW_THEN", "KW_TO", 
-		"KW_TRAILING", "KW_TRUE_P", "KW_UNION", "KW_UNIQUE", "KW_USER", "KW_USING", 
+		"KW_TRAILING", "KW_TRUE", "KW_UNION", "KW_UNIQUE", "KW_USER", "KW_USING", 
 		"KW_VARIADIC", "KW_WHEN", "KW_WHERE", "KW_WINDOW", "KW_WITH", "KW_AUTHORIZATION", 
 		"KW_BINARY", "KW_COLLATION", "KW_CONCURRENTLY", "KW_CROSS", "KW_CURRENT_SCHEMA", 
-		"KW_FREEZE", "KW_FULL", "KW_ILIKE", "KW_INNER_P", "KW_IS", "KW_ISNULL", 
-		"KW_JOIN", "KW_LEFT", "KW_LIKE", "KW_NATURAL", "KW_NOTNULL", "KW_OUTER_P", 
-		"KW_OVER", "KW_OVERLAPS", "KW_RIGHT", "KW_SIMILAR", "KW_VERBOSE", "KW_ABORT_P", 
-		"KW_ABSOLUTE_P", "KW_ACCESS", "KW_ACTION", "KW_ADD_P", "KW_ADMIN", "KW_AFTER", 
+		"KW_FREEZE", "KW_FULL", "KW_ILIKE", "KW_INNER", "KW_IS", "KW_ISNULL", 
+		"KW_JOIN", "KW_LEFT", "KW_LIKE", "KW_NATURAL", "KW_NOTNULL", "KW_OUTER", 
+		"KW_OVER", "KW_OVERLAPS", "KW_RIGHT", "KW_SIMILAR", "KW_VERBOSE", "KW_ABORT", 
+		"KW_ABSOLUTE", "KW_ACCESS", "KW_ACTION", "KW_ADD", "KW_ADMIN", "KW_AFTER", 
 		"KW_AGGREGATE", "KW_ALSO", "KW_ALTER", "KW_ALWAYS", "KW_ASSERTION", "KW_ASSIGNMENT", 
-		"KW_AT", "KW_ATTRIBUTE", "KW_BACKWARD", "KW_BEFORE", "KW_BEGIN_P", "KW_BY", 
+		"KW_AT", "KW_ATTRIBUTE", "KW_BACKWARD", "KW_BEFORE", "KW_BEGIN", "KW_BY", 
 		"KW_CACHE", "KW_CALLED", "KW_CASCADE", "KW_CASCADED", "KW_CATALOG", "KW_CHAIN", 
 		"KW_CHARACTERISTICS", "KW_CHECKPOINT", "KW_CLASS", "KW_CLOSE", "KW_CLUSTER", 
 		"KW_COMMENT", "KW_COMMENTS", "KW_COMMIT", "KW_COMMITTED", "KW_CONFIGURATION", 
-		"KW_CONNECTION", "KW_CONSTRAINTS", "KW_CONTENT_P", "KW_CONTINUE_P", "KW_CONVERSION_P", 
-		"KW_COPY", "KW_COST", "KW_CSV", "KW_CURSOR", "KW_CYCLE", "KW_DATA_P", 
-		"KW_DATABASE", "KW_DAY_P", "KW_DEALLOCATE", "KW_DECLARE", "KW_DEFAULTS", 
-		"KW_DEFERRED", "KW_DEFINER", "KW_DELETE_P", "KW_DELIMITER", "KW_DELIMITERS", 
-		"KW_DICTIONARY", "KW_DISABLE_P", "KW_DISCARD", "KW_DOCUMENT_P", "KW_DOMAIN_P", 
-		"KW_DOUBLE_P", "KW_DROP", "KW_EACH", "KW_ENABLE_P", "KW_ENCODING", "KW_ENCRYPTED", 
-		"KW_ENUM_P", "KW_ESCAPE", "KW_EVENT", "KW_EXCLUDE", "KW_EXCLUDING", "KW_EXCLUSIVE", 
-		"KW_EXECUTE", "KW_EXPLAIN", "KW_EXTENSION", "KW_EXTERNAL", "KW_FAMILY", 
-		"KW_FIRST_P", "KW_FOLLOWING", "KW_FORCE", "KW_FORWARD", "KW_FUNCTION", 
-		"KW_FUNCTIONS", "KW_GLOBAL", "KW_GRANTED", "KW_HANDLER", "KW_HEADER_P", 
-		"KW_HOLD", "KW_HOUR_P", "KW_IDENTITY_P", "KW_IF_P", "KW_IMMEDIATE", "KW_IMMUTABLE", 
-		"KW_IMPLICIT_P", "KW_INCLUDING", "KW_INCREMENT", "KW_INDEX", "KW_INDEXES", 
-		"KW_INHERIT", "KW_NOINHERIT", "KW_SUPERUSER", "KW_NOSUPERUSER", "KW_CREATEDB", 
-		"KW_NOCREATEDB", "KW_CREATEROLE", "KW_NOCREATEROLE", "KW_CREATEUSER", 
-		"KW_NOCREATEUSER", "KW_INHERITS", "KW_INLINE_P", "KW_INSENSITIVE", "KW_INSERT", 
-		"KW_INSTEAD", "KW_INVOKER", "KW_ISOLATION", "KW_KEY", "KW_LABEL", "KW_LANGUAGE", 
-		"KW_LARGE_P", "KW_LAST_P", "KW_LEAKPROOF", "KW_LEVEL", "KW_LISTEN", "KW_LOAD", 
-		"KW_LOCAL", "KW_LOCATION", "KW_LOCK_P", "KW_MAPPING", "KW_MATCH", "KW_MATERIALIZED", 
-		"KW_MAXVALUE", "KW_MINUTE_P", "KW_MINVALUE", "KW_MODE", "KW_MONTH_P", 
-		"KW_MOVE", "KW_NAME_P", "KW_NAMES", "KW_NEXT", "KW_NO", "KW_NOTHING", 
-		"KW_NOTIFY", "KW_NOWAIT", "KW_NULLS_P", "KW_OBJECT_P", "KW_OF", "KW_OFF", 
-		"KW_OIDS", "KW_OPERATOR", "KW_OPTION", "KW_OPTIONS", "KW_OWNED", "KW_OWNER", 
-		"KW_PARSER", "KW_PARTIAL", "KW_PARTITION", "KW_PASSING", "KW_PASSWORD", 
-		"KW_PLANS", "KW_PRECEDING", "KW_PREPARE", "KW_PREPARED", "KW_PRESERVE", 
-		"KW_PRIOR", "KW_PRIVILEGES", "KW_PROCEDURAL", "KW_PROCEDURE", "KW_PROGRAM", 
-		"KW_QUOTE", "KW_RANGE", "KW_READ", "KW_REASSIGN", "KW_RECHECK", "KW_RECURSIVE", 
-		"KW_REF", "KW_REFRESH", "KW_REINDEX", "KW_RELATIVE_P", "KW_RELEASE", "KW_RENAME", 
-		"KW_REPEATABLE", "KW_REPLACE", "KW_REPLICA", "KW_RESET", "KW_RESTART", 
-		"KW_RESTRICT", "KW_RETURNS", "KW_REVOKE", "KW_ROLE", "KW_ROLLBACK", "KW_ROWS", 
-		"KW_RULE", "KW_SAVEPOINT", "KW_SCHEMA", "KW_SCROLL", "KW_SEARCH", "KW_SECOND_P", 
-		"KW_SECURITY", "KW_SEQUENCE", "KW_SEQUENCES", "KW_SERIALIZABLE", "KW_SERVER", 
-		"KW_SESSION", "KW_SET", "KW_SHARE", "KW_SHOW", "KW_SIMPLE", "KW_SNAPSHOT", 
-		"KW_STABLE", "KW_STANDALONE_P", "KW_START", "KW_STATEMENT", "KW_STATISTICS", 
-		"KW_STDIN", "KW_STDOUT", "KW_STORAGE", "KW_STRICT_P", "KW_STRIP_P", "KW_SYSID", 
-		"KW_SYSTEM_P", "KW_TABLES", "KW_TABLESPACE", "KW_TEMP", "KW_TEMPLATE", 
-		"KW_TEMPORARY", "KW_TEXT_P", "KW_TRANSACTION", "KW_TRIGGER", "KW_TRUNCATE", 
-		"KW_TRUSTED", "KW_TYPE_P", "KW_TYPES_P", "KW_UNBOUNDED", "KW_UNCOMMITTED", 
-		"KW_UNENCRYPTED", "KW_UNKNOWN", "KW_UNLISTEN", "KW_UNLOGGED", "KW_UNTIL", 
-		"KW_UPDATE", "KW_VACUUM", "KW_VALID", "KW_VALIDATE", "KW_VALIDATOR", "KW_VARYING", 
-		"KW_VERSION_P", "KW_VIEW", "KW_VOLATILE", "KW_WHITESPACE_P", "KW_WITHOUT", 
-		"KW_WORK", "KW_WRAPPER", "KW_WRITE", "KW_XML_P", "KW_YEAR_P", "KW_YES_P", 
-		"KW_ZONE", "KW_BETWEEN", "KW_BIGINT", "KW_BIT", "KW_BOOLEAN_P", "KW_CHAR_P", 
-		"KW_CHARACTER", "KW_COALESCE", "KW_DEC", "KW_DECIMAL_P", "KW_EXISTS", 
-		"KW_EXTRACT", "KW_FLOAT_P", "KW_GREATEST", "KW_INOUT", "KW_INT_P", "KW_INTEGER", 
-		"KW_INTERVAL", "KW_LEAST", "KW_NATIONAL", "KW_NCHAR", "KW_NONE", "KW_NULLIF", 
-		"KW_NUMERIC", "KW_OVERLAY", "KW_POSITION", "KW_PRECISION", "KW_REAL", 
-		"KW_ROW", "KW_SETOF", "KW_SMALLINT", "KW_SUBSTRING", "KW_TIME", "KW_TIMESTAMP", 
-		"KW_TREAT", "KW_TRIM", "KW_VALUES", "KW_VARCHAR", "KW_XMLATTRIBUTES", 
+		"KW_CONNECTION", "KW_CONSTRAINTS", "KW_CONTENT", "KW_CONTINUE", "KW_CONVERSION", 
+		"KW_COPY", "KW_COST", "KW_CSV", "KW_CURSOR", "KW_CYCLE", "KW_DATA", "KW_DATABASE", 
+		"KW_DAY", "KW_DEALLOCATE", "KW_DECLARE", "KW_DEFAULTS", "KW_DEFERRED", 
+		"KW_DEFINER", "KW_DELETE", "KW_DELIMITER", "KW_DELIMITERS", "KW_DICTIONARY", 
+		"KW_DISABLE", "KW_DISCARD", "KW_DOCUMENT", "KW_DOMAIN", "KW_DOUBLE", "KW_DROP", 
+		"KW_EACH", "KW_ENABLE", "KW_ENCODING", "KW_ENCRYPTED", "KW_ENUM", "KW_ESCAPE", 
+		"KW_EVENT", "KW_EXCLUDE", "KW_EXCLUDING", "KW_EXCLUSIVE", "KW_EXECUTE", 
+		"KW_EXPLAIN", "KW_EXTENSION", "KW_EXTERNAL", "KW_FAMILY", "KW_FIRST", 
+		"KW_FOLLOWING", "KW_FORCE", "KW_FORWARD", "KW_FUNCTION", "KW_FUNCTIONS", 
+		"KW_GLOBAL", "KW_GRANTED", "KW_HANDLER", "KW_HEADER", "KW_HOLD", "KW_HOUR", 
+		"KW_IDENTITY", "KW_IF", "KW_IMMEDIATE", "KW_IMMUTABLE", "KW_IMPLICIT", 
+		"KW_INCLUDING", "KW_INCREMENT", "KW_INDEX", "KW_INDEXES", "KW_INHERIT", 
+		"KW_NOINHERIT", "KW_SUPERUSER", "KW_NOSUPERUSER", "KW_CREATEDB", "KW_NOCREATEDB", 
+		"KW_CREATEROLE", "KW_NOCREATEROLE", "KW_CREATEUSER", "KW_NOCREATEUSER", 
+		"KW_INHERITS", "KW_INLINE", "KW_INSENSITIVE", "KW_INSERT", "KW_INSTEAD", 
+		"KW_INVOKER", "KW_ISOLATION", "KW_KEY", "KW_LABEL", "KW_LANGUAGE", "KW_LARGE", 
+		"KW_LAST", "KW_LEAKPROOF", "KW_LEVEL", "KW_LISTEN", "KW_LOAD", "KW_LOCAL", 
+		"KW_LOCATION", "KW_LOCK", "KW_MAPPING", "KW_MATCH", "KW_MATERIALIZED", 
+		"KW_MAXVALUE", "KW_MINUTE", "KW_MINVALUE", "KW_MODE", "KW_MONTH", "KW_MOVE", 
+		"KW_NAME", "KW_NAMES", "KW_NEXT", "KW_NO", "KW_NOTHING", "KW_NOTIFY", 
+		"KW_NOWAIT", "KW_NULLS", "KW_OBJECT", "KW_OF", "KW_OFF", "KW_OIDS", "KW_OPERATOR", 
+		"KW_OPTION", "KW_OPTIONS", "KW_OWNED", "KW_OWNER", "KW_PARSER", "KW_PARTIAL", 
+		"KW_PARTITION", "KW_PASSING", "KW_PASSWORD", "KW_PLANS", "KW_PRECEDING", 
+		"KW_PREPARE", "KW_PREPARED", "KW_PRESERVE", "KW_PRIOR", "KW_PRIVILEGES", 
+		"KW_PROCEDURAL", "KW_PROCEDURE", "KW_PROGRAM", "KW_QUOTE", "KW_RANGE", 
+		"KW_READ", "KW_REASSIGN", "KW_RECHECK", "KW_RECURSIVE", "KW_REF", "KW_REFRESH", 
+		"KW_REINDEX", "KW_RELATIVE", "KW_RELEASE", "KW_RENAME", "KW_REPEATABLE", 
+		"KW_REPLACE", "KW_REPLICA", "KW_RESET", "KW_RESTART", "KW_RESTRICT", "KW_RETURNS", 
+		"KW_REVOKE", "KW_ROLE", "KW_ROLLBACK", "KW_ROWS", "KW_RULE", "KW_SAVEPOINT", 
+		"KW_SCHEMA", "KW_SCROLL", "KW_SEARCH", "KW_SECOND", "KW_SECURITY", "KW_SEQUENCE", 
+		"KW_SEQUENCES", "KW_SERIALIZABLE", "KW_SERVER", "KW_SESSION", "KW_SET", 
+		"KW_SHARE", "KW_SHOW", "KW_SIMPLE", "KW_SNAPSHOT", "KW_STABLE", "KW_STANDALONE", 
+		"KW_START", "KW_STATEMENT", "KW_STATISTICS", "KW_STDIN", "KW_STDOUT", 
+		"KW_STORAGE", "KW_STRICT", "KW_STRIP", "KW_SYSID", "KW_SYSTEM", "KW_TABLES", 
+		"KW_TABLESPACE", "KW_TEMP", "KW_TEMPLATE", "KW_TEMPORARY", "KW_TEXT", 
+		"KW_TRANSACTION", "KW_TRIGGER", "KW_TRUNCATE", "KW_TRUSTED", "KW_TYPE", 
+		"KW_TYPES", "KW_UNBOUNDED", "KW_UNCOMMITTED", "KW_UNENCRYPTED", "KW_UNKNOWN", 
+		"KW_UNLISTEN", "KW_UNLOGGED", "KW_UNTIL", "KW_UPDATE", "KW_VACUUM", "KW_VALID", 
+		"KW_VALIDATE", "KW_VALIDATOR", "KW_VARYING", "KW_VERSION", "KW_VIEW", 
+		"KW_VOLATILE", "KW_WHITESPACE", "KW_WITHOUT", "KW_WORK", "KW_WRAPPER", 
+		"KW_WRITE", "KW_XML", "KW_YEAR", "KW_YES", "KW_ZONE", "KW_BETWEEN", "KW_BIGINT", 
+		"KW_BIT", "KW_BOOLEAN", "KW_CHAR", "KW_CHARACTER", "KW_COALESCE", "KW_DEC", 
+		"KW_DECIMAL", "KW_EXISTS", "KW_EXTRACT", "KW_FLOAT", "KW_GREATEST", "KW_INOUT", 
+		"KW_INT", "KW_INTEGER", "KW_INTERVAL", "KW_LEAST", "KW_NATIONAL", "KW_NCHAR", 
+		"KW_NONE", "KW_NULLIF", "KW_NUMERIC", "KW_OVERLAY", "KW_POSITION", "KW_PRECISION", 
+		"KW_REAL", "KW_ROW", "KW_SETOF", "KW_SMALLINT", "KW_SUBSTRING", "KW_TIME", 
+		"KW_TIMESTAMP", "KW_TREAT", "KW_TRIM", "KW_VALUES", "KW_VARCHAR", "KW_XMLATTRIBUTES", 
 		"KW_XMLCONCAT", "KW_XMLELEMENT", "KW_XMLEXISTS", "KW_XMLFOREST", "KW_XMLPARSE", 
-		"KW_XMLPI", "KW_XMLROOT", "KW_XMLSERIALIZE", "KW_CALL", "KW_CURRENT_P", 
+		"KW_XMLPI", "KW_XMLROOT", "KW_XMLSERIALIZE", "KW_CALL", "KW_CURRENT", 
 		"KW_ATTACH", "KW_DETACH", "KW_EXPRESSION", "KW_GENERATED", "KW_LOGGED", 
-		"KW_STORED", "KW_INCLUDE", "KW_ROUTINE", "KW_TRANSFORM", "KW_IMPORT_P", 
-		"KW_POLICY", "KW_METHOD", "KW_REFERENCING", "KW_NEW", "KW_OLD", "KW_VALUE_P", 
-		"KW_SUBSCRIPTION", "KW_PUBLICATION", "KW_OUT_P", "KW_END_P", "KW_ROUTINES", 
-		"KW_SCHEMAS", "KW_PROCEDURES", "KW_INPUT_P", "KW_SUPPORT", "KW_PARALLEL", 
-		"KW_SQL_P", "KW_DEPENDS", "KW_OVERRIDING", "KW_CONFLICT", "KW_SKIP_P", 
-		"KW_LOCKED", "KW_TIES", "KW_ROLLUP", "KW_CUBE", "KW_GROUPING", "KW_SETS", 
-		"KW_TABLESAMPLE", "KW_ORDINALITY", "KW_XMLTABLE", "KW_COLUMNS", "KW_XMLNAMESPACES", 
-		"KW_ROWTYPE", "KW_NORMALIZED", "KW_WITHIN", "KW_FILTER", "KW_GROUPS", 
-		"KW_OTHERS", "KW_NFC", "KW_NFD", "KW_NFKC", "KW_NFKD", "KW_UESCAPE", "KW_VIEWS", 
-		"KW_NORMALIZE", "KW_DUMP", "KW_PRINT_STRICT_PARAMS", "KW_VARIABLE_CONFLICT", 
-		"KW_ERROR", "KW_USE_VARIABLE", "KW_USE_COLUMN", "KW_ALIAS", "KW_CONSTANT", 
-		"KW_PERFORM", "KW_GET", "KW_DIAGNOSTICS", "KW_STACKED", "KW_ELSIF", "KW_WHILE", 
-		"KW_REVERSE", "KW_FOREACH", "KW_SLICE", "KW_EXIT", "KW_RETURN", "KW_QUERY", 
-		"KW_RAISE", "KW_SQLSTATE", "KW_DEBUG", "KW_LOG", "KW_INFO", "KW_NOTICE", 
-		"KW_WARNING", "KW_EXCEPTION", "KW_ASSERT", "KW_LOOP", "KW_OPEN", "KW_PEFERENCES", 
-		"KW_USAGE", "KW_CONNECT", "KW_PUBLIC", "Identifier", "QuotedIdentifier", 
-		"UnterminatedQuotedIdentifier", "InvalidQuotedIdentifier", "InvalidUnterminatedQuotedIdentifier", 
-		"UnicodeQuotedIdentifier", "UnterminatedUnicodeQuotedIdentifier", "InvalidUnicodeQuotedIdentifier", 
+		"KW_STORED", "KW_INCLUDE", "KW_ROUTINE", "KW_TRANSFORM", "KW_IMPORT", 
+		"KW_POLICY", "KW_METHOD", "KW_REFERENCING", "KW_NEW", "KW_OLD", "KW_VALUE", 
+		"KW_SUBSCRIPTION", "KW_PUBLICATION", "KW_OUT", "KW_END", "KW_ROUTINES", 
+		"KW_SCHEMAS", "KW_PROCEDURES", "KW_INPUT", "KW_SUPPORT", "KW_PARALLEL", 
+		"KW_SQL", "KW_DEPENDS", "KW_OVERRIDING", "KW_CONFLICT", "KW_SKIP", "KW_LOCKED", 
+		"KW_TIES", "KW_ROLLUP", "KW_CUBE", "KW_GROUPING", "KW_SETS", "KW_TABLESAMPLE", 
+		"KW_ORDINALITY", "KW_XMLTABLE", "KW_COLUMNS", "KW_XMLNAMESPACES", "KW_ROWTYPE", 
+		"KW_NORMALIZED", "KW_WITHIN", "KW_FILTER", "KW_GROUPS", "KW_OTHERS", "KW_NFC", 
+		"KW_NFD", "KW_NFKC", "KW_NFKD", "KW_UESCAPE", "KW_VIEWS", "KW_NORMALIZE", 
+		"KW_DUMP", "KW_PRINT_STRICT_PARAMS", "KW_VARIABLE_CONFLICT", "KW_ERROR", 
+		"KW_USE_VARIABLE", "KW_USE_COLUMN", "KW_ALIAS", "KW_CONSTANT", "KW_PERFORM", 
+		"KW_GET", "KW_DIAGNOSTICS", "KW_STACKED", "KW_ELSIF", "KW_WHILE", "KW_REVERSE", 
+		"KW_FOREACH", "KW_SLICE", "KW_EXIT", "KW_RETURN", "KW_QUERY", "KW_RAISE", 
+		"KW_SQLSTATE", "KW_DEBUG", "KW_LOG", "KW_INFO", "KW_NOTICE", "KW_WARNING", 
+		"KW_EXCEPTION", "KW_ASSERT", "KW_LOOP", "KW_OPEN", "KW_PEFERENCES", "KW_USAGE", 
+		"KW_CONNECT", "KW_PUBLIC", "Identifier", "QuotedIdentifier", "UnterminatedQuotedIdentifier", 
+		"InvalidQuotedIdentifier", "InvalidUnterminatedQuotedIdentifier", "UnicodeQuotedIdentifier", 
+		"UnterminatedUnicodeQuotedIdentifier", "InvalidUnicodeQuotedIdentifier", 
 		"InvalidUnterminatedUnicodeQuotedIdentifier", "StringConstant", "UnterminatedStringConstant", 
 		"UnicodeEscapeStringConstant", "UnterminatedUnicodeEscapeStringConstant", 
 		"BeginDollarStringConstant", "BinaryStringConstant", "UnterminatedBinaryStringConstant", 
