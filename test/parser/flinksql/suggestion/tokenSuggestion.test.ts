@@ -53,8 +53,8 @@ describe('Flink SQL Token Suggestion', () => {
             'CURRENT',
             'CATALOGS',
             'DATABASES',
-            'JARS',
             'VIEWS',
+            'JARS',
         ]);
     });
 });

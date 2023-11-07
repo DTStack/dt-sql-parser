@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.5](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.4...v4.0.0-beta.4.5) (2023-11-02)
+
+
+### Features
+
+* add sideEffects field to trigger treeShaking ([#198](https://github.com/DTStack/dt-sql-parser/issues/198)) ([fc4fdbf](https://github.com/DTStack/dt-sql-parser/commit/fc4fdbfbf55364eb142402008d5059cdb80c31e0))
+
+
+### Bug Fixes
+
+* [#197](https://github.com/DTStack/dt-sql-parser/issues/197) keyword rename like value more ([56c410e](https://github.com/DTStack/dt-sql-parser/commit/56c410ebb1ea31752bfbda41b1d651b216d68a5d))
+
 ## [4.0.0-beta.4.4](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.3...v4.0.0-beta.4.4) (2023-10-24)
 
 
