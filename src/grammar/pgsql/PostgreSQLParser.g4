@@ -1,9 +1,3 @@
-
-/**
- * based on 
- * https://github.com/antlr/grammars-v4/blob/master/sql/postgresql/PostgreSQLLexer.g4
- */
-
 /*
  * [The "MIT license"]
  * Copyright (C) 2014 Sam Harwell, Tunnel Vision Laboratories, LLC
@@ -29,7 +23,12 @@
  *    promote the sale, use or other dealings in this Software without prior
  *    written authorization from Tunnel Vision Laboratories, LLC.
  */
- 
+
+/**
+ * This file is an adaptation of antlr's sql/postgresql/PostgreSQLParser.g4 grammar.
+ * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/postgresql/PostgreSQLParser.g4
+ */
+
 /**
  * Reference Doc: https://www.postgresql.org/docs/9.3/sql-commands.html
  */
