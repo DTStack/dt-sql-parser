@@ -178,7 +178,7 @@ alterrolestmt:
 opt_in_database: | KW_IN_P KW_DATABASE name;
 
 alterrolesetstmt:
-	KW_ALTER (KW_ROLE | KW_USER) KW_ALL? rolespec opt_in_database setresetclause;
+	KW_ALTER (KW_ROLE | KW_USER) (KW_ALL | rolespec) opt_in_database setresetclause;
 
 droprolestmt:
 	KW_DROP (KW_ROLE | KW_USER | KW_GROUP_P) (KW_IF_P KW_EXISTS)? role_list;
@@ -802,7 +802,7 @@ alter_generic_option_elem:
 	generic_option_elem
 	| KW_SET generic_option_elem
 	| KW_ADD_P generic_option_elem
-	| KW_DROP generic_option_name;
+	| KW_DROP generic_option_elem;
 
 generic_option_elem: generic_option_name generic_option_arg;
 
