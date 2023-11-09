@@ -1,7 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/pgsql/PostgreSQLParser.g4 by ANTLR 4.9.0-SNAPSHOT
-
-
-import PostgreSQLParserBase from "./PostgreSQLParserBase";
+// Generated from /Users/xuxiaoqi/Documents/work/daishu-code/dt-sql-parser/src/grammar/pgsql/PostgreSQLParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -103,6 +100,7 @@ import { Copy_generic_opt_arg_listContext } from "./PostgreSQLParser";
 import { Copy_generic_opt_arg_list_itemContext } from "./PostgreSQLParser";
 import { CreatestmtContext } from "./PostgreSQLParser";
 import { OpttempContext } from "./PostgreSQLParser";
+import { Table_column_listContext } from "./PostgreSQLParser";
 import { OpttableelementlistContext } from "./PostgreSQLParser";
 import { OpttypedtableelementlistContext } from "./PostgreSQLParser";
 import { TableelementlistContext } from "./PostgreSQLParser";
@@ -115,7 +113,8 @@ import { ColquallistContext } from "./PostgreSQLParser";
 import { ColconstraintContext } from "./PostgreSQLParser";
 import { ColconstraintelemContext } from "./PostgreSQLParser";
 import { Generated_whenContext } from "./PostgreSQLParser";
-import { ConstraintattrContext } from "./PostgreSQLParser";
+import { Deferrable_triggerContext } from "./PostgreSQLParser";
+import { Initially_triggerContext } from "./PostgreSQLParser";
 import { TablelikeclauseContext } from "./PostgreSQLParser";
 import { TablelikeoptionlistContext } from "./PostgreSQLParser";
 import { TablelikeoptionContext } from "./PostgreSQLParser";
@@ -219,6 +218,8 @@ import { CreateamstmtContext } from "./PostgreSQLParser";
 import { Am_typeContext } from "./PostgreSQLParser";
 import { CreatetrigstmtContext } from "./PostgreSQLParser";
 import { TriggeractiontimeContext } from "./PostgreSQLParser";
+import { ForeachrowContext } from "./PostgreSQLParser";
+import { RoworstatmentContext } from "./PostgreSQLParser";
 import { TriggereventsContext } from "./PostgreSQLParser";
 import { TriggeroneeventContext } from "./PostgreSQLParser";
 import { TriggerreferencingContext } from "./PostgreSQLParser";
@@ -294,6 +295,8 @@ import { Opt_from_inContext } from "./PostgreSQLParser";
 import { GrantstmtContext } from "./PostgreSQLParser";
 import { RevokestmtContext } from "./PostgreSQLParser";
 import { PrivilegesContext } from "./PostgreSQLParser";
+import { BeforeprivilegeselectlistContext } from "./PostgreSQLParser";
+import { BeforeprivilegeselectContext } from "./PostgreSQLParser";
 import { Privilege_listContext } from "./PostgreSQLParser";
 import { PrivilegeContext } from "./PostgreSQLParser";
 import { Privilege_targetContext } from "./PostgreSQLParser";
@@ -324,6 +327,7 @@ import { Opt_classContext } from "./PostgreSQLParser";
 import { Opt_asc_descContext } from "./PostgreSQLParser";
 import { Opt_nulls_orderContext } from "./PostgreSQLParser";
 import { CreatefunctionstmtContext } from "./PostgreSQLParser";
+import { AttrilistContext } from "./PostgreSQLParser";
 import { Opt_or_replaceContext } from "./PostgreSQLParser";
 import { Func_argsContext } from "./PostgreSQLParser";
 import { Func_args_listContext } from "./PostgreSQLParser";
@@ -677,6 +681,7 @@ import { Opt_target_listContext } from "./PostgreSQLParser";
 import { Target_listContext } from "./PostgreSQLParser";
 import { Target_elContext } from "./PostgreSQLParser";
 import { Qualified_name_listContext } from "./PostgreSQLParser";
+import { Table_qualified_nameContext } from "./PostgreSQLParser";
 import { Qualified_nameContext } from "./PostgreSQLParser";
 import { Name_listContext } from "./PostgreSQLParser";
 import { NameContext } from "./PostgreSQLParser";
@@ -692,10 +697,15 @@ import { SconstContext } from "./PostgreSQLParser";
 import { AnysconstContext } from "./PostgreSQLParser";
 import { Opt_uescapeContext } from "./PostgreSQLParser";
 import { SignediconstContext } from "./PostgreSQLParser";
+import { GroupnameContext } from "./PostgreSQLParser";
 import { RoleidContext } from "./PostgreSQLParser";
 import { RolespecContext } from "./PostgreSQLParser";
 import { Role_listContext } from "./PostgreSQLParser";
 import { ColidContext } from "./PostgreSQLParser";
+import { Index_method_choicesContext } from "./PostgreSQLParser";
+import { Exclude_elementContext } from "./PostgreSQLParser";
+import { Index_paramentersContext } from "./PostgreSQLParser";
+import { WherePredicateContext } from "./PostgreSQLParser";
 import { Type_function_nameContext } from "./PostgreSQLParser";
 import { NonreservedwordContext } from "./PostgreSQLParser";
 import { CollabelContext } from "./PostgreSQLParser";
@@ -1519,6 +1529,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitOpttemp?: (ctx: OpttempContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.table_column_list`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTable_column_list?: (ctx: Table_column_listContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.opttableelementlist`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1603,11 +1620,18 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitGenerated_when?: (ctx: Generated_whenContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.constraintattr`.
+	 * Visit a parse tree produced by `PostgreSQLParser.deferrable_trigger`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitConstraintattr?: (ctx: ConstraintattrContext) => Result;
+	visitDeferrable_trigger?: (ctx: Deferrable_triggerContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.initially_trigger`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInitially_trigger?: (ctx: Initially_triggerContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.tablelikeclause`.
@@ -2331,6 +2355,20 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitTriggeractiontime?: (ctx: TriggeractiontimeContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.foreachrow`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitForeachrow?: (ctx: ForeachrowContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.roworstatment`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRoworstatment?: (ctx: RoworstatmentContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.triggerevents`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2856,6 +2894,20 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitPrivileges?: (ctx: PrivilegesContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.beforeprivilegeselectlist`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitBeforeprivilegeselectlist?: (ctx: BeforeprivilegeselectlistContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.beforeprivilegeselect`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitBeforeprivilegeselect?: (ctx: BeforeprivilegeselectContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.privilege_list`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3064,6 +3116,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitCreatefunctionstmt?: (ctx: CreatefunctionstmtContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.attrilist`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAttrilist?: (ctx: AttrilistContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.opt_or_replace`.
@@ -5537,6 +5596,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitQualified_name_list?: (ctx: Qualified_name_listContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.table_qualified_name`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTable_qualified_name?: (ctx: Table_qualified_nameContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.qualified_name`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -5642,6 +5708,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitSignediconst?: (ctx: SignediconstContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.groupname`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGroupname?: (ctx: GroupnameContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.roleid`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -5668,6 +5741,34 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitColid?: (ctx: ColidContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.index_method_choices`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitIndex_method_choices?: (ctx: Index_method_choicesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.exclude_element`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitExclude_element?: (ctx: Exclude_elementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.index_paramenters`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitIndex_paramenters?: (ctx: Index_paramentersContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.wherePredicate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitWherePredicate?: (ctx: WherePredicateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.type_function_name`.
