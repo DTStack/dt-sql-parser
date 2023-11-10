@@ -58,11 +58,15 @@ ALTER CONVERSION name SET SCHEMA new_schema;
 ALTER DATABASE name WITH CONNECTION LIMIT connlimit;
 ALTER DATABASE name RENAME TO new_name;
 ALTER DATABASE name OWNER TO new_owner;
+ALTER DATABASE name OWNER TO CURRENT_ROLE;
+ALTER DATABASE name OWNER TO CURRENT_USER;
+ALTER DATABASE name OWNER TO SESSION_USER;
 ALTER DATABASE name SET TABLESPACE new_tablespace;
 ALTER DATABASE name SET configuration_parameter TO DEFAULT;
 ALTER DATABASE name SET configuration_parameter FROM CURRENT;
 ALTER DATABASE name RESET configuration_parameter;
 ALTER DATABASE name RESET ALL;
+ALTER DATABASE name;
 
 -- ALTER DEFAULT PRIVILEGES
 ALTER DEFAULT PRIVILEGES
@@ -164,10 +168,20 @@ ALTER INDEX IF EXISTS name RENAME TO new_name;
 ALTER INDEX IF EXISTS name SET TABLESPACE tablespace_name;
 ALTER INDEX IF EXISTS name SET ( storage_parameter = value2 );
 ALTER INDEX IF EXISTS name RESET ( storage_parameter );
+ALTER INDEX name ATTACH PARTITION index_name;
+ALTER INDEX name NO DEPENDS ON EXTENSION extension_name;
+ALTER INDEX IF EXISTS name ALTER COLUMN column_number
+    SET STATISTICS 5;
+ALTER INDEX ALL IN TABLESPACE name OWNED BY role_name,role_name2 
+    SET TABLESPACE new_tablespace NOWAIT;
+
 
 -- ALTER LANGUAGE
 ALTER PROCEDURAL LANGUAGE name RENAME TO new_name;
 ALTER LANGUAGE name OWNER TO new_owner;
+ALTER LANGUAGE name OWNER TO CURRENT_ROLE;
+ALTER LANGUAGE name OWNER TO CURRENT_USER;
+ALTER LANGUAGE name OWNER TO SESSION_USER;
 
 -- ALTER LARGE OBJECT
 ALTER LARGE OBJECT 32423 OWNER TO new_owner;
@@ -203,6 +217,33 @@ ALTER OPERATOR FAMILY name USING index_method RENAME TO new_name;
 ALTER OPERATOR FAMILY name USING index_method OWNER TO new_owner;
 ALTER OPERATOR FAMILY name USING index_method SET SCHEMA new_schema;
 
+-- ALTER POLICY
+ALTER POLICY name ON table_name RENAME TO new_name;
+ALTER POLICY name ON table_name
+    TO role_name, PUBLIC, CURRENT_ROLE, CURRENT_USER, SESSION_USER
+    USING ( using_expression )
+    WITH CHECK ( check_expression );
+
+-- ALTER PROCEDURE
+ALTER PROCEDURE name ( IN argname integer, IN argname int)
+    RESET ALL RESTRICT;
+ALTER PROCEDURE name (  IN argname integer )
+    RENAME TO new_name;
+ALTER PROCEDURE name ( IN argname integer)
+    OWNER TO CURRENT_ROLE;
+ALTER PROCEDURE name ( IN argname integer)
+    SET SCHEMA new_schema;
+ALTER PROCEDURE name ( IN argname integer)
+    NO DEPENDS ON EXTENSION extension_name;
+
+-- ALTER PUBLICATION
+ALTER PUBLICATION name ADD TABLE ONLY table_name * ( column_name,column_name2) WHERE ( expression>3 );
+ALTER PUBLICATION name SET TABLE ONLY table_name * ( column_name,column_name2) WHERE ( expression ), TABLE ONLY table_name * ( column_name,column_name2) WHERE ( expression );
+ALTER PUBLICATION name DROP TABLE ONLY table_name * ( column_name,column_name2) WHERE ( expression );
+ALTER PUBLICATION name SET ( publication_parameter = value, parameters2 )
+ALTER PUBLICATION name OWNER TO CURRENT_ROLE;
+ALTER PUBLICATION name RENAME TO new_name;
+
 -- ALTER ROLE
 ALTER ROLE name WITH SUPERUSER CREATEDB CREATEROLE VALID UNTIL 'timestamp';
 ALTER ROLE name RENAME TO new_name;
@@ -210,6 +251,20 @@ ALTER ROLE ALL IN DATABASE database_name SET configuration_parameter = DEFAULT;
 ALTER ROLE name IN DATABASE database_name SET configuration_parameter FROM CURRENT;
 ALTER ROLE ALL IN DATABASE database_name RESET configuration_parameter;
 ALTER ROLE name IN DATABASE database_name RESET ALL;
+
+-- ALTER ROUTINE
+ALTER ROUTINE name ( IN argname integer)
+    COST execution_cost RESTRICT;
+ALTER ROUTINE name
+    COST execution_cost IMMUTABLE LEAKPROOF SECURITY INVOKER ROWS result_rows SET configuration_parameter TO DEFAULT SET configuration_parameter FROM CURRENT RESET configuration_parameter RESET ALL;
+ALTER ROUTINE name ( IN argname integer)
+    RENAME TO new_name;
+ALTER ROUTINE name ( IN argname integer)
+    OWNER TO CURRENT_ROLE;
+ALTER ROUTINE name ( IN argname integer)
+    SET SCHEMA new_schema;
+ALTER ROUTINE name ( IN argname integer)
+    NO DEPENDS ON EXTENSION extension_name;
 
 -- ALTER RULE
 ALTER RULE name ON table_name RENAME TO new_name;
@@ -222,6 +277,7 @@ ALTER SCHEMA name OWNER TO new_owner;
 ALTER SEQUENCE IF EXISTS name INCREMENT BY 324
 MINVALUE 34  MAXVALUE 66 
 START WITH 12 RESTART WITH 34 
+RESTART WITH restart
 CACHE 324 NO CYCLE
 OWNED BY table_name.column_name;
 ALTER SEQUENCE name OWNER TO new_owner;
@@ -233,18 +289,52 @@ ALTER SERVER name VERSION 'new_version' OPTIONS ( ADD option 'value', SET option
 ALTER SERVER name OWNER TO new_owner;
 ALTER SERVER name RENAME TO new_name;
 
+-- ALTER STATISTICS
+ALTER STATISTICS name OWNER TO CURRENT_ROLE;
+ALTER STATISTICS name OWNER TO CURRENT_USER;
+ALTER STATISTICS name OWNER TO SESSION_USER;
+ALTER STATISTICS name RENAME TO new_name;
+ALTER STATISTICS name SET SCHEMA new_schema;
+ALTER STATISTICS name SET STATISTICS 23;
+
+-- ALTER SUBSCRIPTION
+ALTER SUBSCRIPTION name CONNECTION 'conninfo';
+ALTER SUBSCRIPTION name SET PUBLICATION  publication_name,publication_name1 WITH ( publication_option = value) ;
+ALTER SUBSCRIPTION name ADD PUBLICATION publication_name WITH ( publication_option );
+ALTER SUBSCRIPTION name DROP PUBLICATION publication_name WITH ( publication_option);
+ALTER SUBSCRIPTION name REFRESH PUBLICATION WITH ( refresh_option = value);
+ALTER SUBSCRIPTION name ENABLE;
+ALTER SUBSCRIPTION name DISABLE;
+ALTER SUBSCRIPTION name SET ( subscription_parameter = value);
+ALTER SUBSCRIPTION name SKIP ( skip_option = value );
+ALTER SUBSCRIPTION name OWNER TO CURRENT_ROLE;
+ALTER SUBSCRIPTION name RENAME TO new_name;
+
+-- ALTER SYSTEM
+ALTER SYSTEM SET configuration_parameter TO DEFAULT;
+ALTER SYSTEM RESET configuration_parameter;
+ALTER SYSTEM RESET ALL;
+
 -- ALTER TABLE
 ALTER TABLE IF EXISTS ONLY name *
 ALTER COLUMN column_name SET DEFAULT expression, DISABLE RULE rewrite_rule_name, ADD CONSTRAINT constraint_name
     UNIQUE USING INDEX index_name DEFERRABLE INITIALLY DEFERRED;
 ALTER TABLE name 
-RENAME column_name TO new_column_name;
+RENAME COLUMN column_name TO new_column_name;
 ALTER TABLE IF EXISTS ONLY name *
     RENAME CONSTRAINT constraint_name TO new_constraint_name;
 ALTER TABLE IF EXISTS name
     RENAME TO new_name;
 ALTER TABLE name
     SET SCHEMA new_schema;
+ALTER TABLE ALL IN TABLESPACE name OWNED BY role_name,role_name2
+    SET TABLESPACE new_tablespace NOWAIT;
+ALTER TABLE IF EXISTS name
+    ATTACH PARTITION partition_name FOR VALUES FROM (MINVALUE, x>3) TO (MAXVALUE,MAXVALUE);
+ALTER TABLE orders
+    ATTACH PARTITION orders_p4 FOR VALUES WITH (MODULUS 4, REMAINDER 4);
+ALTER TABLE IF EXISTS name
+    DETACH PARTITION partition_name CONCURRENTLY;
 
 -- ALTER TABLESPACE
 ALTER TABLESPACE name RENAME TO new_name;
@@ -311,4 +401,5 @@ ALTER VIEW IF EXISTS name RENAME TO new_name;
 ALTER VIEW name SET SCHEMA new_schema;
 ALTER VIEW IF EXISTS name SET ( view_option_name = view_option_value, view_option_name2 = view_option_value2);
 ALTER VIEW name RESET ( view_option_name, view_option_name );
+
 
