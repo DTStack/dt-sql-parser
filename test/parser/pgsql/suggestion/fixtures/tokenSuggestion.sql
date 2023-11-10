@@ -1,0 +1,14 @@
+ALTER 
+;
+CREATE 
+;
+DELETE 
+;
+COMMENT 
+;
+DROP 
+;
+INSERT 
+;
+GRANT 
+;

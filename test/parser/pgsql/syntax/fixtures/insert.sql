@@ -31,7 +31,7 @@ INSERT INTO reservation VALUES
 
 -- INSERT
 WITH RECURSIVE a AS (SELECT * from bt )
-INSERT INTO table_name ( column_name, column_name2)
+INSERT INTO table_name.dt ( column_name, column_name2)
     VALUES (1, 2)
     RETURNING * ;
 INSERT INTO films DEFAULT VALUES;

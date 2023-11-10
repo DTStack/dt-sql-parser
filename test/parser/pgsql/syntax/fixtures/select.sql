@@ -1,5 +1,17 @@
 -- SELECT
-WITH RECURSIVE query_name (id) AS (SELECT id FROM table_expression) SELECT ALL random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) UNION ALL (SELECT * FROM others) ORDER BY salary DESC LIMIT ALL OFFSET start FETCH NEXT ROWS ONLY FOR UPDATE;
+WITH RECURSIVE query_name (id) AS (SELECT id FROM table_expression) 
+SELECT ALL ON (col1,col2) random() AS name1 FROM table_expression 
+WHERE name1=name1 
+GROUP BY DISTINCT id  
+HAVING sum(len) < interval '5 hours' 
+WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC)
+ UNION ALL (SELECT * FROM others) 
+ ORDER BY salary DESC 
+ LIMIT ALL 
+ OFFSET start ROWS 
+ FETCH NEXT ROWS ONLY
+  FOR UPDATE OF table_name, table_name2 NOWAIT;
+SELECT;
 
 WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) INTERSECT DISTINCT (SELECT * FROM others) ORDER BY salary ASC LIMIT ALL OFFSET start FETCH NEXT ROW ONLY FOR NO KEY UPDATE;
 
@@ -9,7 +21,7 @@ WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT ON (co
 
 -- SELECT INTO
 WITH RECURSIVE query_name (id) AS (SELECT id FROM table_expression)
-SELECT DISTINCT ON (col2)
+SELECT DISTINCT ON (col2, col3)
 INTO TEMPORARY TABLE new_table
     FROM from_item
     WHERE name2=name1
@@ -22,6 +34,7 @@ INTO TEMPORARY TABLE new_table
     OFFSET start ROW
     FETCH FIRST 234 ROWS ONLY
     FOR UPDATE OF table_name  NOWAIT;
+SELECT INTO new_table;
 
 -- The Most Easy
 SELECT * ;
