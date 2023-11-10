@@ -1,14 +1,12 @@
-ALTER 
-;
-CREATE 
-;
-DELETE 
-;
-COMMENT 
-;
-DROP 
-;
-INSERT 
-;
-GRANT 
-;
+DROP ;
+
+ALTER ;
+
+INSERT ;
+
+DELETE ;
+
+CREATE ;
+
+
+

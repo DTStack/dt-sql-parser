@@ -555,8 +555,14 @@ CREATE TEXT SEARCH TEMPLATE name (
     LEXIZE = lexize_function
 );
 
+-- CREATE TRANSFORM
+CREATE OR REPLACE TRANSFORM FOR type_name LANGUAGE lang_name (
+    FROM SQL WITH FUNCTION from_sql_function_name (argument_type),
+    TO SQL WITH FUNCTION to_sql_function_name (argument_type )
+);
+
 -- CREATE TRIGGER
-CREATE CONSTRAINT TRIGGER trig_name INSTEAD OF INSERT OR UPDATE
+CREATE OR REPLACE CONSTRAINT TRIGGER trig_name INSTEAD OF INSERT OR UPDATE
     ON table_name
     FROM referenced_table_name
     DEFERRABLE INITIALLY IMMEDIATE

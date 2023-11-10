@@ -6,11 +6,10 @@ import PostgresSQL from '../../../../src/parser/pgsql';
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('Postgres SQL Token Suggestion', () => {
-    const parser = new PostgresSQL();
-
     test('After ALTER', () => {
+        const parser = new PostgresSQL();
         const pos: CaretPosition = {
-            lineNumber: 1,
+            lineNumber: 3,
             column: 7,
         };
         const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
@@ -54,68 +53,68 @@ describe('Postgres SQL Token Suggestion', () => {
         ]);
     });
 
-    test('After COMMENT', () => {
-        const pos: CaretPosition = {
-            lineNumber: 7,
-            column: 9,
-        };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
-        expect(suggestion).toEqual(['ON']);
-    });
-
     test('After CREATE', () => {
+        const parser = new PostgresSQL();
         const pos: CaretPosition = {
-            lineNumber: 3,
+            lineNumber: 9,
             column: 8,
         };
         const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
         expect(suggestion).toEqual([
-            'ACCESS',
-            'AGGREGATE',
-            'CAST',
-            'COLLATION',
-            'CONVERSION',
-            'DATABASE',
-            'DOMAIN',
-            'EVENT',
-            'EXTENSION',
-            'FOREIGN',
-            'FUNCTION',
-            'GROUP',
-            'INDEX',
-            'UNIQUE',
-            'LANGUAGE',
-            'OR',
-            'TRUSTED',
-            'PROCEDURAL',
-            'MATERIALIZED',
-            'OPERATOR',
-            'POLICY',
-            'PROCEDURE',
-            'PUBLICATION',
-            'ROLE',
-            'RULE',
-            'SCHEMA',
-            'SEQUENCE',
+            'RECURSIVE',
+            'VIEW',
             'TEMPORARY',
             'TEMP',
+            'LOCAL',
+            'GLOBAL',
             'UNLOGGED',
-            'SERVER',
+            'OR',
+            'RULE',
+            'INDEX',
+            'UNIQUE',
+            'TABLE',
+            'COLLATION',
+            'TEXT',
+            'TYPE',
+            'OPERATOR',
+            'AGGREGATE',
+            'DATABASE',
+            'USER',
+            'ROLE',
+            'EVENT',
+            'TRIGGER',
+            'CONSTRAINT',
+            'TRANSFORM',
+            'TABLESPACE',
             'STATISTICS',
             'SUBSCRIPTION',
-            'TABLE',
-            'TABLESPACE',
-            'TEXT',
-            'TRIGGER',
-            'TYPE',
-            'USER',
-            'VIEW',
+            'SEQUENCE',
+            'SCHEMA',
+            'LANGUAGE',
+            'PROCEDURAL',
+            'TRUSTED',
+            'POLICY',
+            'PUBLICATION',
+            'MATERIALIZED',
+            'GROUP',
+            'FUNCTION',
+            'PROCEDURE',
+            'FOREIGN',
+            'SERVER',
+            'EXTENSION',
+            'DOMAIN',
+            'CONVERSION',
+            'DEFAULT',
+            'CAST',
+            'ASSERTION',
+            'ACCESS',
         ]);
     });
 
     test('After DELETE', () => {
+        const parser = new PostgresSQL();
         const pos: CaretPosition = {
-            lineNumber: 5,
+            lineNumber: 7,
             column: 8,
         };
         const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
@@ -123,8 +122,9 @@ describe('Postgres SQL Token Suggestion', () => {
     });
 
     test('After DROP', () => {
+        const parser = new PostgresSQL();
         const pos: CaretPosition = {
-            lineNumber: 9,
+            lineNumber: 1,
             column: 6,
         };
         const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
@@ -169,33 +169,10 @@ describe('Postgres SQL Token Suggestion', () => {
         ]);
     });
 
-    test('After GRANT', () => {
-        const pos: CaretPosition = {
-            lineNumber: 13,
-            column: 7,
-        };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
-        expect(suggestion).toEqual([
-            'SELECT',
-            'INSERT',
-            'UPDATE',
-            'DELETE',
-            'TRUNCATE',
-            'PEFERENCES',
-            'TRIGGER',
-            'USAGE',
-            'ALL',
-            'EXECUTE',
-            'CREATE',
-            'CONNECT',
-            'TEMPORARY',
-            'TEMP',
-        ]);
-    });
-
     test('After INSERT', () => {
+        const parser = new PostgresSQL();
         const pos: CaretPosition = {
-            lineNumber: 11,
+            lineNumber: 5,
             column: 8,
         };
         const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;

@@ -19,7 +19,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
 
     test('Insert table ', () => {
         const pos: CaretPosition = {
-            lineNumber: 5,
+            lineNumber: 3,
             column: 18,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
@@ -47,7 +47,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
 
     test('Select table ', () => {
         const pos: CaretPosition = {
-            lineNumber: 3,
+            lineNumber: 5,
             column: 18,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
@@ -89,7 +89,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
 
     test('Drop view ', () => {
         const pos: CaretPosition = {
-            lineNumber: 11,
+            lineNumber: 13,
             column: 15,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
@@ -98,12 +98,12 @@ describe('Postgre SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'v']);
     });
 
     test('Alter view ', () => {
         const pos: CaretPosition = {
-            lineNumber: 13,
+            lineNumber: 11,
             column: 16,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
@@ -112,7 +112,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'c']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'v']);
     });
 
     test('Create function ', () => {
@@ -140,7 +140,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['fn3']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['fn1']);
     });
 
     test('Create database', () => {
@@ -160,6 +160,20 @@ describe('Postgre SQL Syntax Suggestion', () => {
     test('Drop database', () => {
         const pos: CaretPosition = {
             lineNumber: 21,
+            column: 17,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db']);
+    });
+
+    test('Alter database', () => {
+        const pos: CaretPosition = {
+            lineNumber: 23,
             column: 18,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
@@ -168,21 +182,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
-    });
-
-    test('Alter database', () => {
-        const pos: CaretPosition = {
-            lineNumber: 23,
-            column: 19,
-        };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
-        const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
-        );
-
-        expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db']);
     });
 
     test('Create schema', () => {
