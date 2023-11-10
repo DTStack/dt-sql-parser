@@ -998,10 +998,10 @@ createamstmt:
 am_type: KW_INDEX | KW_TABLE;
 
 createtrigstmt:
-	KW_CREATE KW_TRIGGER name triggeractiontime triggerevents KW_ON qualified_name triggerreferencing?
+	KW_CREATE opt_or_replace? KW_TRIGGER name triggeractiontime triggerevents KW_ON qualified_name triggerreferencing?
 		triggerforspec? triggerwhen? KW_EXECUTE function_or_procedure usualName OPEN_PAREN
 		triggerfuncargs CLOSE_PAREN
-	| KW_CREATE KW_CONSTRAINT? KW_TRIGGER name triggeractiontime triggerevents KW_ON qualified_name optconstrfromtable?
+	| KW_CREATE opt_or_replace? KW_CONSTRAINT? KW_TRIGGER name triggeractiontime triggerevents KW_ON qualified_name optconstrfromtable?
 		constraintattributespec foreachrow? triggerwhen? KW_EXECUTE function_or_procedure usualName
 		OPEN_PAREN triggerfuncargs CLOSE_PAREN;
 
