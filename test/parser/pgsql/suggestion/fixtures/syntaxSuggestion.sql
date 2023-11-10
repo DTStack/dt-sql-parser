@@ -10,7 +10,7 @@ CREATE OR REPLACE VIEW db.v;
 
 ALTER VIEW db.v ;
 
-DROP VIEW db.v ;
+DROP VIEW db. ;
 
 CREATE FUNCTION fn1;
 

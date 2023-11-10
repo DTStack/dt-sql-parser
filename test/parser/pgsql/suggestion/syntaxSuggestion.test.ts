@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
 import PgSQL from '../../../../src/parser/pgsql';
+import { commentOtherLine } from '../../../helper';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'syntaxSuggestion.sql'),
@@ -22,7 +23,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 3,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -36,7 +40,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -50,7 +57,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -64,7 +74,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
         );
@@ -78,7 +91,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 28,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
         );
@@ -90,15 +106,18 @@ describe('Postgre SQL Syntax Suggestion', () => {
     test('Drop view ', () => {
         const pos: CaretPosition = {
             lineNumber: 13,
-            column: 15,
+            column: 14,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'v']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
     });
 
     test('Alter view ', () => {
@@ -106,7 +125,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 11,
             column: 16,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
@@ -120,7 +142,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 15,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION_CREATE
         );
@@ -134,7 +159,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 17,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
         );
@@ -148,7 +176,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 19,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
         );
@@ -162,7 +193,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 21,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
         );
@@ -176,7 +210,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 23,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
         );
@@ -190,7 +227,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 25,
             column: 40,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
         );
@@ -204,7 +244,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 27,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
         );
@@ -218,7 +261,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 29,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
         );
