@@ -2,17 +2,21 @@ import fs from 'fs';
 import path from 'path';
 import { CaretPosition } from '../../../../src/parser/common/basic-parser-types';
 import PostgresSQL from '../../../../src/parser/pgsql';
+import { commentOtherLine } from '../../../helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('Postgres SQL Token Suggestion', () => {
+    const parser = new PostgresSQL();
     test('After ALTER', () => {
-        const parser = new PostgresSQL();
         const pos: CaretPosition = {
             lineNumber: 3,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual([
             'TYPE',
             'TEXT',
@@ -54,12 +58,14 @@ describe('Postgres SQL Token Suggestion', () => {
     });
 
     test('After CREATE', () => {
-        const parser = new PostgresSQL();
         const pos: CaretPosition = {
             lineNumber: 9,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual([
             'RECURSIVE',
             'VIEW',
@@ -112,22 +118,26 @@ describe('Postgres SQL Token Suggestion', () => {
     });
 
     test('After DELETE', () => {
-        const parser = new PostgresSQL();
         const pos: CaretPosition = {
             lineNumber: 7,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual(['FROM']);
     });
 
     test('After DROP', () => {
-        const parser = new PostgresSQL();
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual([
             'OPERATOR',
             'ROUTINE',
@@ -170,12 +180,14 @@ describe('Postgres SQL Token Suggestion', () => {
     });
 
     test('After INSERT', () => {
-        const parser = new PostgresSQL();
         const pos: CaretPosition = {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual(['INTO']);
     });
 });
