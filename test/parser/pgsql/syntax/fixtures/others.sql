@@ -1,21 +1,32 @@
 -- ABORT
 ABORT WORK;
 ABORT TRANSACTION;
+ABORT AND NO CHAIN;
 
 -- ANALYZE
 ANALYZE VERBOSE table_name ( column_name, column_name2);
+ANALYZE VERBOSE;
+ANALYZE SKIP_LOCKED true;
+ANALYZE BUFFER_USAGE_LIMIT 4;
 ANALYZE;
 
 -- BEGIN
 BEGIN WORK ISOLATION LEVEL READ UNCOMMITTED
     READ WRITE
     NOT DEFERRABLE;
+
+-- CALL
+CALL name (name => value);
+CALL name;
+
 -- CHECKPOINT
 CHECKPOINT;
 
 -- CLUSTER
 CLUSTER VERBOSE table_name USING index_name;
+CLUSTER (VERBOSE, VERBOSE TRUE) table_name USING index_name;
 CLUSTER VERBOSE;
+CLUSTER;
 
 -- CLOSE
 CLOSE ALL;
@@ -23,10 +34,14 @@ CLOSE name_2;
 
 -- COMMENT
 COMMENT ON
+ACCESS METHOD object_name IS 'text';
+COMMENT ON
 AGGREGATE agg_name (agg_type, agg_type2) IS 'text';
 COMMENT ON CAST (source_type AS target_type) IS 'text';
 COMMENT ON COLLATION object_name IS 'text';
-COMMENT ON COLUMN relation_name.column_name IS 'text'
+COMMENT ON COLUMN relation_name.column_name IS 'text';
+COMMENT ON CONSTRAINT constraint_name ON table_name IS 'text'
+COMMENT ON CONSTRAINT constraint_name ON DOMAIN domain_name IS 'text'
 COMMENT ON CONVERSION object_name IS 'text';
 COMMENT ON CONSTRAINT constraint_name ON table_name IS 'text';
 COMMENT ON DATABASE object_name IS 'text';
@@ -42,12 +57,18 @@ COMMENT ON MATERIALIZED VIEW object_name IS 'text';
 COMMENT ON OPERATOR -(int, NONE) IS 'text';
 COMMENT ON OPERATOR CLASS object_name USING index_method IS 'text';
 COMMENT ON OPERATOR FAMILY object_name USING index_method IS 'text';
+COMMENT ON POLICY policy_name ON table_name IS 'text';
 COMMENT ON PROCEDURAL LANGUAGE object_name IS 'text';
+COMMENT ON PROCEDURE procedure_name IS 'text';;
+COMMENT ON PUBLICATION object_name IS 'text';
 COMMENT ON ROLE object_name IS 'text';
+COMMENT ON ROUTINE routine_name IS 'text';
 COMMENT ON RULE rule_name ON table_name IS 'text';
 COMMENT ON SCHEMA object_name IS 'text';
 COMMENT ON SEQUENCE object_name IS 'text';
 COMMENT ON SERVER object_name IS 'text';
+COMMENT ON STATISTICS object_name IS 'text';
+COMMENT ON SUBSCRIPTION object_name IS 'text';
 COMMENT ON TABLE object_name IS 'text';
 COMMENT ON TABLESPACE object_name IS 'text';
 COMMENT ON TEXT SEARCH CONFIGURATION object_name IS 'text';
@@ -61,6 +82,7 @@ COMMENT ON VIEW object_name IS 'text';
 -- COMMIT
 COMMIT TRANSACTION;
 COMMIT WORK;
+COMMIT AND NO CHAIN;
 
 -- COMMIT PREPARED
 COMMIT PREPARED 'foobar';
@@ -111,6 +133,7 @@ EXECUTE name ( parameter, parameter2);
 -- EXPLAIN
 EXPLAIN ( ANALYZE 'true',VERBOSE true,  COSTS TRUE, FORMAT TEXT) SELECT * FROM no_nw;
 EXPLAIN ANALYZE VERBOSE SELECT * FROM no_nw;
+EXPLAIN SELECT * FROM no_nw;
 
 -- FETCH
 FETCH NEXT FROM cursor_name;
@@ -135,6 +158,12 @@ GRANT CREATE, CONNECT, TEMPORARY, TEMP
     TO GROUP role_name, PUBLIC WITH GRANT OPTION;
 GRANT role_name TO role_name;
 
+-- IMPORT FOREIGN SCHEMA
+IMPORT FOREIGN SCHEMA remote_schema
+    LIMIT TO ( table_name)
+    FROM SERVER server_name
+    INTO local_schema
+    OPTIONS ( option 'value');
 
 -- LISTEN
 LISTEN channel;
@@ -143,12 +172,16 @@ LISTEN channel;
 LOAD 'filename';
 
 -- LOCK  
--- lockmode：ACCESS SHARE | ROW SHARE | ROW EXCLUSIVE | SHARE UPDATE EXCLUSIVE
--- | SHARE | SHARE ROW EXCLUSIVE | EXCLUSIVE | ACCESS EXCLUSIVE
 LOCK TABLE ONLY name * IN ACCESS SHARE MODE NOWAIT;
 
 -- MOVE
 MOVE NEXT FROM cursor_name;
+
+-- MERGE
+WITH query_name (id) AS (SELECT id FROM table_expression)
+MERGE INTO ONLY target_table_name * AS target_alias
+USING ONLY source_table_name * ON s.winename = w.winename
+WHEN MATCHED AND s.winename = w.winename THEN UPDATE SET column_name = DEFAULT;
 
 -- NOTIFY
 NOTIFY virtual, 'This is the payload';
@@ -166,7 +199,7 @@ REASSIGN OWNED BY old_role TO new_role;
 REFRESH MATERIALIZED VIEW name WITH NO DATA;
 
 -- REINDEX
-REINDEX DATABASE name FORCE;
+REINDEX DATABASE CONCURRENTLY name FORCE;
 REINDEX TABLE name;
 REINDEX INDEX name;
 REINDEX SYSTEM name;
@@ -182,13 +215,13 @@ RESET ALL;
 REVOKE GRANT OPTION FOR
 REFERENCES, CREATE
     ON TABLE table_name
-    FROM GROUP role_name, PUBLIC
+    FROM GROUP role_name, PUBLIC, SESSION_USER
     RESTRICT;
-REVOKE ALL PRIVILEGES ON accounts FROM PUBLIC;
-REVOKE CREATE ON SCHEMA public_name FROM PUBLIC;
+REVOKE ALL PRIVILEGES ON accounts FROM CURRENT_USER;
+REVOKE CREATE ON SCHEMA public_name FROM CURRENT_ROLE;
 
 -- ROLLBACK
-ROLLBACK TRANSACTION;
+ROLLBACK TRANSACTION AND NO CHAIN;
 ROLLBACK WORK;
 
 -- ROLLBACK PREPARED
@@ -268,7 +301,7 @@ UNLISTEN *;
 UNLISTEN channel;
 
 -- VACUUM
-VACUUM ( FULL, FREEZE, VERBOSE, ANALYZE) table_name (column_name, column_name2);
+VACUUM ( FULL, FREEZE, VERBOSE, ANALYZE, DISABLE_PAGE_SKIPPING, SKIP_LOCKED, INDEX_CLEANUP, PROCESS_MAIN, PROCESS_TOAST, TRUNCATE, PARALLEL 4,SKIP_DATABASE_STATS, ONLY_DATABASE_STATS, BUFFER_USAGE_LIMIT) table_name (column_name, column_name2);
 VACUUM FULL FREEZE VERBOSE  table_name;
 VACUUM FULL FREEZE VERBOSE ANALYZE table_name (column_name,column_name2);
 VACUUM ANALYZE;
@@ -281,7 +314,4 @@ VALUES (1, '3'), (3, 'sdsd')
     OFFSET 324 ROW
     FETCH NEXT 343 ROWS ONLY ;
 VALUES (1, '3'), (3, 'sdsd');
-
--- Caveats
-ANALYZE measurement;
 
