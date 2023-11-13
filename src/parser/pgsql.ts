@@ -1,7 +1,7 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
 import { PostgreSQLLexer } from '../lib/pgsql/PostgreSQLLexer';
-import { PostgreSQLParser, ProgramContext } from '../lib/pgsql/PostgreSQLParser';
+import { PostgreSQLParser, ProgramContext, StmtContext } from '../lib/pgsql/PostgreSQLParser';
 import BasicParser from './common/basicParser';
 import { PostgreSQLParserListener } from '../lib/pgsql/PostgreSQLParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
@@ -126,13 +126,13 @@ export default class PostgresSQL extends BasicParser<
 }
 
 export class PgSqlSplitListener implements PostgreSQLParserListener {
-    private _statementContext: ProgramContext[] = [];
+    private _statementContext: StmtContext[] = [];
 
-    exitProgram = (ctx: ProgramContext) => {
+    enterStmt = (ctx: StmtContext) => {
         this._statementContext.push(ctx);
     };
 
-    enterProgram = (ctx: ProgramContext) => {};
+    exitStmt = (ctx: StmtContext) => {};
 
     get statementsContext() {
         return this._statementContext;
