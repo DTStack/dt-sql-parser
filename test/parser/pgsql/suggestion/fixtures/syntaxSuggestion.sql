@@ -1,4 +1,4 @@
-CREATE TABLE db. ();
+CREATE TABLE db.  ();
 
 INSERT INTO db.tb ;
 

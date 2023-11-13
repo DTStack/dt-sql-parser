@@ -291,8 +291,10 @@ import { DropstmtContext } from "./PostgreSQLParser";
 import { DropviewstmtContext } from "./PostgreSQLParser";
 import { ViewNameListContext } from "./PostgreSQLParser";
 import { DropschemastmtContext } from "./PostgreSQLParser";
+import { Object_type_any_name_listContext } from "./PostgreSQLParser";
 import { Object_type_any_nameContext } from "./PostgreSQLParser";
 import { Object_type_nameContext } from "./PostgreSQLParser";
+import { Drop_typeContext } from "./PostgreSQLParser";
 import { Drop_type_nameContext } from "./PostgreSQLParser";
 import { Object_type_name_on_any_nameContext } from "./PostgreSQLParser";
 import { Any_name_listContext } from "./PostgreSQLParser";
@@ -351,6 +353,8 @@ import { Func_argsContext } from "./PostgreSQLParser";
 import { Func_args_listContext } from "./PostgreSQLParser";
 import { Usual_with_argtypes_listContext } from "./PostgreSQLParser";
 import { Usual_with_argtypesContext } from "./PostgreSQLParser";
+import { Procedure_with_argtypes_listContext } from "./PostgreSQLParser";
+import { Procedure_with_argtypesContext } from "./PostgreSQLParser";
 import { Function_with_argtypes_listContext } from "./PostgreSQLParser";
 import { Function_with_argtypesContext } from "./PostgreSQLParser";
 import { Func_args_with_defaultsContext } from "./PostgreSQLParser";
@@ -375,6 +379,7 @@ import { Opt_definitionContext } from "./PostgreSQLParser";
 import { Table_func_columnContext } from "./PostgreSQLParser";
 import { Table_func_column_listContext } from "./PostgreSQLParser";
 import { AlterfunctionstmtContext } from "./PostgreSQLParser";
+import { AlterFunctionTypeClauseContext } from "./PostgreSQLParser";
 import { Alterfunc_opt_listContext } from "./PostgreSQLParser";
 import { Opt_restrictContext } from "./PostgreSQLParser";
 import { RemovefuncstmtContext } from "./PostgreSQLParser";
@@ -708,17 +713,26 @@ import { Opt_target_listContext } from "./PostgreSQLParser";
 import { Target_listContext } from "./PostgreSQLParser";
 import { Target_elContext } from "./PostgreSQLParser";
 import { Qualified_name_listContext } from "./PostgreSQLParser";
+import { TableNameListContext } from "./PostgreSQLParser";
+import { SchemaNameListContext } from "./PostgreSQLParser";
+import { DatabaseNameListContext } from "./PostgreSQLParser";
+import { ProcedureNameListContext } from "./PostgreSQLParser";
+import { CreateTablespaceNameContext } from "./PostgreSQLParser";
+import { TablespaceNameContext } from "./PostgreSQLParser";
 import { CreateTableNameContext } from "./PostgreSQLParser";
 import { TableNameContext } from "./PostgreSQLParser";
 import { CreateViewNameContext } from "./PostgreSQLParser";
 import { ViewNameContext } from "./PostgreSQLParser";
 import { Qualified_nameContext } from "./PostgreSQLParser";
+import { Tablespace_name_listContext } from "./PostgreSQLParser";
 import { Name_listContext } from "./PostgreSQLParser";
 import { CreateDatabaseNameContext } from "./PostgreSQLParser";
 import { DatabaseNameContext } from "./PostgreSQLParser";
 import { SchemaNameContext } from "./PostgreSQLParser";
 import { CreateRoutineNameContext } from "./PostgreSQLParser";
 import { RoutineNameContext } from "./PostgreSQLParser";
+import { ProcedureNameContext } from "./PostgreSQLParser";
+import { CreateProcedureNameContext } from "./PostgreSQLParser";
 import { NameContext } from "./PostgreSQLParser";
 import { Attr_nameContext } from "./PostgreSQLParser";
 import { File_nameContext } from "./PostgreSQLParser";
@@ -2911,6 +2925,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitDropschemastmt?: (ctx: DropschemastmtContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.object_type_any_name_list`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitObject_type_any_name_list?: (ctx: Object_type_any_name_listContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.object_type_any_name`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2923,6 +2944,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitObject_type_name?: (ctx: Object_type_nameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.drop_type`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDrop_type?: (ctx: Drop_typeContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.drop_type_name`.
@@ -3331,6 +3359,20 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitUsual_with_argtypes?: (ctx: Usual_with_argtypesContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.procedure_with_argtypes_list`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitProcedure_with_argtypes_list?: (ctx: Procedure_with_argtypes_listContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.procedure_with_argtypes`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitProcedure_with_argtypes?: (ctx: Procedure_with_argtypesContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.function_with_argtypes_list`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3497,6 +3539,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitAlterfunctionstmt?: (ctx: AlterfunctionstmtContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.alterFunctionTypeClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterFunctionTypeClause?: (ctx: AlterFunctionTypeClauseContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.alterfunc_opt_list`.
@@ -5830,6 +5879,48 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitQualified_name_list?: (ctx: Qualified_name_listContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.tableNameList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTableNameList?: (ctx: TableNameListContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.schemaNameList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSchemaNameList?: (ctx: SchemaNameListContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.databaseNameList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDatabaseNameList?: (ctx: DatabaseNameListContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.procedureNameList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitProcedureNameList?: (ctx: ProcedureNameListContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.createTablespaceName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateTablespaceName?: (ctx: CreateTablespaceNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.tablespaceName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTablespaceName?: (ctx: TablespaceNameContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.createTableName`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -5863,6 +5954,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitQualified_name?: (ctx: Qualified_nameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.tablespace_name_list`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTablespace_name_list?: (ctx: Tablespace_name_listContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.name_list`.
@@ -5905,6 +6003,20 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitRoutineName?: (ctx: RoutineNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.procedureName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitProcedureName?: (ctx: ProcedureNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.createProcedureName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateProcedureName?: (ctx: CreateProcedureNameContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.name`.

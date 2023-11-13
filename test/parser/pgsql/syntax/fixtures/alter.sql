@@ -205,6 +205,14 @@ ALTER OPERATOR = ( integer , NONE ) SET SCHEMA new_schema;
 ALTER OPERATOR CLASS name USING index_method RENAME TO new_name;
 ALTER OPERATOR CLASS name USING index_method OWNER TO new_owner;
 ALTER OPERATOR CLASS name USING index_method SET SCHEMA new_schema;
+ALTER OPERATOR FAMILY name USING index_method ADD
+    OPERATOR 1 > ( int, int )
+              FOR SEARCH,
+              FUNCTION 24 ( int)
+              function_name( int );
+
+ALTER OPERATOR FAMILY name USING index_method DROP
+OPERATOR 32 ( op_typ ),FUNCTION 34 ( op_type);
 
 -- ALTER OPERATOR FAMILY
 ALTER OPERATOR FAMILY name USING index_method ADD

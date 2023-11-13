@@ -31,6 +31,8 @@ export default class PostgresSQL extends BasicParser<
         PostgreSQLParser.RULE_viewName, // view name
         PostgreSQLParser.RULE_createDatabaseName, // database name that will be created
         PostgreSQLParser.RULE_databaseName, // database name
+        PostgreSQLParser.RULE_createProcedureName, // procedure name that will be created
+        PostgreSQLParser.RULE_procedureName, // procedure name
     ]);
 
     protected get splitListener() {
@@ -95,6 +97,14 @@ export default class PostgresSQL extends BasicParser<
                     syntaxContextType = SyntaxContextType.DATABASE;
                     break;
                 }
+                case PostgreSQLParser.RULE_createProcedureName: {
+                    syntaxContextType = SyntaxContextType.PROCEDURE_CREATE;
+                    break;
+                }
+                case PostgreSQLParser.RULE_procedureName: {
+                    syntaxContextType = SyntaxContextType.PROCEDURE;
+                    break;
+                }
                 default:
                     break;
             }
@@ -126,13 +136,13 @@ export default class PostgresSQL extends BasicParser<
 }
 
 export class PgSqlSplitListener implements PostgreSQLParserListener {
-    private _statementContext: StmtContext[] = [];
+    private _statementContext: ProgramContext[] = [];
 
-    enterStmt = (ctx: StmtContext) => {
+    enterProgram = (ctx: ProgramContext) => {
         this._statementContext.push(ctx);
     };
 
-    exitStmt = (ctx: StmtContext) => {};
+    exitProgram = (ctx: ProgramContext) => {};
 
     get statementsContext() {
         return this._statementContext;
