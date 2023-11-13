@@ -51,10 +51,19 @@ import { CreateKuduTableAsSelectContext } from "./ImpalaSqlParserParser";
 import { RenameTableContext } from "./ImpalaSqlParserParser";
 import { AddColumnsContext } from "./ImpalaSqlParserParser";
 import { ReplaceColumnsContext } from "./ImpalaSqlParserParser";
+import { EditColumnDefineContext } from "./ImpalaSqlParserParser";
 import { AddSingleColumnContext } from "./ImpalaSqlParserParser";
 import { DropSingleColumnContext } from "./ImpalaSqlParserParser";
 import { AlterTableOwnerContext } from "./ImpalaSqlParserParser";
 import { AlterTableKuduOnlyContext } from "./ImpalaSqlParserParser";
+import { AlterTableNonKuduContext } from "./ImpalaSqlParserParser";
+import { AddPartitionByValueContext } from "./ImpalaSqlParserParser";
+import { AddPartitionByRangeContext } from "./ImpalaSqlParserParser";
+import { DropPartitionByValueContext } from "./ImpalaSqlParserParser";
+import { RecoverPartitionsContext } from "./ImpalaSqlParserParser";
+import { AlterFormatContext } from "./ImpalaSqlParserParser";
+import { AlterStatsKeyContext } from "./ImpalaSqlParserParser";
+import { AlterPartitionCacheContext } from "./ImpalaSqlParserParser";
 import { DropTableContext } from "./ImpalaSqlParserParser";
 import { TruncateTableContext } from "./ImpalaSqlParserParser";
 import { CreateViewContext } from "./ImpalaSqlParserParser";
@@ -143,9 +152,6 @@ import { LogicalBinaryContext } from "./ImpalaSqlParserParser";
 import { QualifiedArgumentContext } from "./ImpalaSqlParserParser";
 import { UnqualifiedArgumentContext } from "./ImpalaSqlParserParser";
 import { ProgramContext } from "./ImpalaSqlParserParser";
-import { SingleStatementContext } from "./ImpalaSqlParserParser";
-import { StandaloneExpressionContext } from "./ImpalaSqlParserParser";
-import { StandalonePathSpecificationContext } from "./ImpalaSqlParserParser";
 import { StatementContext } from "./ImpalaSqlParserParser";
 import { AssignmentListContext } from "./ImpalaSqlParserParser";
 import { AssignmentItemContext } from "./ImpalaSqlParserParser";
@@ -158,6 +164,16 @@ import { KuduTableElementContext } from "./ImpalaSqlParserParser";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParserParser";
 import { ColumnSpecWithKuduContext } from "./ImpalaSqlParserParser";
 import { KuduAttributesContext } from "./ImpalaSqlParserParser";
+import { KuduStorageAttrContext } from "./ImpalaSqlParserParser";
+import { StatsKeyContext } from "./ImpalaSqlParserParser";
+import { TableOrSerdePropertitiesContext } from "./ImpalaSqlParserParser";
+import { FileFormatContext } from "./ImpalaSqlParserParser";
+import { PartitionSpecContext } from "./ImpalaSqlParserParser";
+import { KuduPartitionSpecContext } from "./ImpalaSqlParserParser";
+import { ConstantsContext } from "./ImpalaSqlParserParser";
+import { CacheSpecContext } from "./ImpalaSqlParserParser";
+import { RangeOperatorContext } from "./ImpalaSqlParserParser";
+import { PartitionColContext } from "./ImpalaSqlParserParser";
 import { LikeClauseContext } from "./ImpalaSqlParserParser";
 import { HintClauseContext } from "./ImpalaSqlParserParser";
 import { PropertiesContext } from "./ImpalaSqlParserParser";
@@ -608,6 +624,14 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitReplaceColumns?: (ctx: ReplaceColumnsContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by the `editColumnDefine`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitEditColumnDefine?: (ctx: EditColumnDefineContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by the `addSingleColumn`
 	 * labeled alternative in `ImpalaSqlParserParser.statement`.
 	 * @param ctx the parse tree
@@ -638,6 +662,70 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitAlterTableKuduOnly?: (ctx: AlterTableKuduOnlyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterTableNonKudu`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterTableNonKudu?: (ctx: AlterTableNonKuduContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `addPartitionByValue`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAddPartitionByValue?: (ctx: AddPartitionByValueContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `addPartitionByRange`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAddPartitionByRange?: (ctx: AddPartitionByRangeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropPartitionByValue`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropPartitionByValue?: (ctx: DropPartitionByValueContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `recoverPartitions`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRecoverPartitions?: (ctx: RecoverPartitionsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterFormat`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterFormat?: (ctx: AlterFormatContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterStatsKey`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterStatsKey?: (ctx: AlterStatsKeyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterPartitionCache`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterPartitionCache?: (ctx: AlterPartitionCacheContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `dropTable`
@@ -1343,27 +1431,6 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitProgram?: (ctx: ProgramContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParserParser.singleStatement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSingleStatement?: (ctx: SingleStatementContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `ImpalaSqlParserParser.standaloneExpression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitStandaloneExpression?: (ctx: StandaloneExpressionContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `ImpalaSqlParserParser.standalonePathSpecification`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitStandalonePathSpecification?: (ctx: StandalonePathSpecificationContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `ImpalaSqlParserParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1446,6 +1513,76 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitKuduAttributes?: (ctx: KuduAttributesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.kuduStorageAttr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitKuduStorageAttr?: (ctx: KuduStorageAttrContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.statsKey`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitStatsKey?: (ctx: StatsKeyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.tableOrSerdePropertities`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTableOrSerdePropertities?: (ctx: TableOrSerdePropertitiesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.fileFormat`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFileFormat?: (ctx: FileFormatContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.partitionSpec`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPartitionSpec?: (ctx: PartitionSpecContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.kuduPartitionSpec`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitKuduPartitionSpec?: (ctx: KuduPartitionSpecContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.constants`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitConstants?: (ctx: ConstantsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.cacheSpec`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCacheSpec?: (ctx: CacheSpecContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.rangeOperator`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRangeOperator?: (ctx: RangeOperatorContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.partitionCol`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPartitionCol?: (ctx: PartitionColContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParserParser.likeClause`.

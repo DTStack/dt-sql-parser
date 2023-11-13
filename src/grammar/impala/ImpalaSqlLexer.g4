@@ -63,6 +63,7 @@ KW_CASE                                   : 'CASE';
 KW_CAST                                   : 'CAST';
 KW_CACHED                                 : 'CACHED';
 KW_CATALOGS                               : 'CATALOGS';
+KW_CHANGE                                 : 'CHANGE';
 KW_COLUMN                                 : 'COLUMN';
 KW_COLUMNS                                : 'COLUMNS';
 KW_COMMENT                                : 'COMMENT';
@@ -91,7 +92,7 @@ KW_DEALLOCATE                             : 'DEALLOCATE';
 KW_DEFINER                                : 'DEFINER';
 KW_DELETE                                 : 'DELETE';
 KW_DEFAULT                                : 'DEFAULT';
-KW_DELIMITED                              : 'DELIMITED ';
+KW_DELIMITED                              : 'DELIMITED';
 KW_DISABLE                                : 'DISABLE';
 KW_UPDATE                                 : 'UPDATE';
 KW_DESC                                   : 'DESC';
@@ -115,6 +116,7 @@ KW_FALSE                                  : 'FALSE';
 KW_FETCH                                  : 'FETCH';
 KW_FIELDS                                 : 'FIELDS';
 KW_FILE                                   : 'FILE';
+KW_FILEFORMAT                             : 'FILEFORMAT';
 KW_FILES                                  : 'FILES';
 KW_FILTER                                 : 'FILTER';
 KW_FIRST                                  : 'FIRST';
@@ -218,6 +220,7 @@ KW_PROPERTIES                             : 'PROPERTIES';
 KW_RANGE                                  : 'RANGE';
 KW_READ                                   : 'READ';
 KW_RELOAD                                 : 'RELOAD';
+KW_RECOVER                                : 'RECOVER';
 KW_RECURSIVE                              : 'RECURSIVE';
 KW_RENAME                                 : 'RENAME';
 KW_REPEATABLE                             : 'REPEATABLE';
@@ -228,6 +231,8 @@ KW_RESTRICT                               : 'RESTRICT';
 KW_RETURNS                                : 'RETURNS';
 KW_REVOKE                                 : 'REVOKE';
 KW_REFRESH                                : 'REFRESH';
+KW_REGEXP                                 : 'REGEXP';
+KW_RLIKE                                  : 'RLIKE';
 KW_RIGHT                                  : 'RIGHT';
 KW_ROLE                                   : 'ROLE';
 KW_ROLES                                  : 'ROLES';
@@ -241,6 +246,7 @@ KW_SECOND                                 : 'SECOND';
 KW_SECONDS                                : 'SECONDS';
 KW_SECURITY                               : 'SECURITY';
 KW_SELECT                                 : 'SELECT';
+KW_SERDE                                  : 'SERDE';
 KW_SERDEPROPERTIES                        : 'SERDEPROPERTIES';
 KW_SERIALIZABLE                           : 'SERIALIZABLE';
 KW_SESSION                                : 'SESSION';
@@ -287,6 +293,7 @@ KW_UPDATE_FN                              : 'UPDATE_FN';
 KW_UPSERT                                 : 'UPSERT';
 KW_URI                                    : 'URI';
 KW_VALIDATE                               : 'VALIDATE';
+KW_VALUE                                  : 'VALUE';
 KW_VALUES                                 : 'VALUES';
 KW_VERBOSE                                : 'VERBOSE';
 KW_VIEW                                   : 'VIEW';
@@ -299,6 +306,12 @@ KW_WRITE                                  : 'WRITE';
 KW_YEAR                                   : 'YEAR';
 KW_YEARS                                  : 'YEARS';
 KW_ZONE                                   : 'ZONE';
+KW_TEXTFILE                               : 'TEXTFILE'; // 文本文件格式
+KW_ORC                                    : 'ORC'; //ORC文件格式
+KW_AVRO                                   : 'AVRO'; //Avro文件格式
+KW_SEQUENCEFILE                           : 'SEQUENCEFILE'; //Sequence文件格式
+KW_RCFILE                                 : 'RCFILE'; //RC文件格式
+
 
 EQ  : '=';
 NEQ : '<>' | '!=';
@@ -312,6 +325,20 @@ ASTERISK: '*';
 SLASH: '/';
 PERCENT: '%';
 CONCAT: '||';
+
+DOT : '.';
+SEMICOLON: ';';
+COMMA: ',';
+COLON : ':' ;
+LPAREN : '(' ;
+RPAREN : ')' ;
+LSQUARE : '[' ;
+RSQUARE : ']' ;
+LCURLY : '{';
+RCURLY : '}';
+
+BITWISEOR : '|';
+QUESTION : '?';
 
 STRING
     : '\'' ( ~'\'' | '\'\'' )* '\''
@@ -393,11 +420,4 @@ BRACKETED_COMMENT
 
 WS
     : [ \r\n\t]+ -> channel(HIDDEN)
-    ;
-
-// Catch-all for anything we can't recognize.
-// We use this to be able to ignore and recover all the text
-// when splitting statements with DelimiterLexer
-UNRECOGNIZED
-    : .
     ;

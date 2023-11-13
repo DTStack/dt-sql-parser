@@ -10,33 +10,15 @@ T__8=9
 T__9=10
 T__10=11
 T__11=12
-T__12=13
-T__13=14
-T__14=15
-T__15=16
-T__16=17
-T__17=18
-T__18=19
-T__19=20
-T__20=21
-'('=1
-','=2
-')'=3
-'{'=4
-'}'=5
-'|'=6
-':'=7
-'-- +SHUFFLE'=8
-'-- +NOSHUFFLE -- +CLUSTERED'=9
-'/* +SHUFFLE */'=10
-'/* +NOSHUFFLE */'=11
-'/* +CLUSTERED */'=12
-'[SHUFFLE]'=13
-'[NOSHUFFLE]'=14
-'.'=15
-'?'=16
-'->'=17
-'['=18
-']'=19
-'<'=20
-'>'=21
+'statsKey=numDVs'=1
+'statsKey=numNulls'=2
+'statsKey=avgSize'=3
+'statsKey=maxSize'=4
+'-- +SHUFFLE'=5
+'-- +NOSHUFFLE -- +CLUSTERED'=6
+'/* +SHUFFLE */'=7
+'/* +NOSHUFFLE */'=8
+'/* +CLUSTERED */'=9
+'[SHUFFLE]'=10
+'[NOSHUFFLE]'=11
+'->'=12

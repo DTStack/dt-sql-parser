@@ -51,10 +51,19 @@ import { CreateKuduTableAsSelectContext } from "./ImpalaSqlParserParser";
 import { RenameTableContext } from "./ImpalaSqlParserParser";
 import { AddColumnsContext } from "./ImpalaSqlParserParser";
 import { ReplaceColumnsContext } from "./ImpalaSqlParserParser";
+import { EditColumnDefineContext } from "./ImpalaSqlParserParser";
 import { AddSingleColumnContext } from "./ImpalaSqlParserParser";
 import { DropSingleColumnContext } from "./ImpalaSqlParserParser";
 import { AlterTableOwnerContext } from "./ImpalaSqlParserParser";
 import { AlterTableKuduOnlyContext } from "./ImpalaSqlParserParser";
+import { AlterTableNonKuduContext } from "./ImpalaSqlParserParser";
+import { AddPartitionByValueContext } from "./ImpalaSqlParserParser";
+import { AddPartitionByRangeContext } from "./ImpalaSqlParserParser";
+import { DropPartitionByValueContext } from "./ImpalaSqlParserParser";
+import { RecoverPartitionsContext } from "./ImpalaSqlParserParser";
+import { AlterFormatContext } from "./ImpalaSqlParserParser";
+import { AlterStatsKeyContext } from "./ImpalaSqlParserParser";
+import { AlterPartitionCacheContext } from "./ImpalaSqlParserParser";
 import { DropTableContext } from "./ImpalaSqlParserParser";
 import { TruncateTableContext } from "./ImpalaSqlParserParser";
 import { CreateViewContext } from "./ImpalaSqlParserParser";
@@ -143,9 +152,6 @@ import { LogicalBinaryContext } from "./ImpalaSqlParserParser";
 import { QualifiedArgumentContext } from "./ImpalaSqlParserParser";
 import { UnqualifiedArgumentContext } from "./ImpalaSqlParserParser";
 import { ProgramContext } from "./ImpalaSqlParserParser";
-import { SingleStatementContext } from "./ImpalaSqlParserParser";
-import { StandaloneExpressionContext } from "./ImpalaSqlParserParser";
-import { StandalonePathSpecificationContext } from "./ImpalaSqlParserParser";
 import { StatementContext } from "./ImpalaSqlParserParser";
 import { AssignmentListContext } from "./ImpalaSqlParserParser";
 import { AssignmentItemContext } from "./ImpalaSqlParserParser";
@@ -158,6 +164,16 @@ import { KuduTableElementContext } from "./ImpalaSqlParserParser";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParserParser";
 import { ColumnSpecWithKuduContext } from "./ImpalaSqlParserParser";
 import { KuduAttributesContext } from "./ImpalaSqlParserParser";
+import { KuduStorageAttrContext } from "./ImpalaSqlParserParser";
+import { StatsKeyContext } from "./ImpalaSqlParserParser";
+import { TableOrSerdePropertitiesContext } from "./ImpalaSqlParserParser";
+import { FileFormatContext } from "./ImpalaSqlParserParser";
+import { PartitionSpecContext } from "./ImpalaSqlParserParser";
+import { KuduPartitionSpecContext } from "./ImpalaSqlParserParser";
+import { ConstantsContext } from "./ImpalaSqlParserParser";
+import { CacheSpecContext } from "./ImpalaSqlParserParser";
+import { RangeOperatorContext } from "./ImpalaSqlParserParser";
+import { PartitionColContext } from "./ImpalaSqlParserParser";
 import { LikeClauseContext } from "./ImpalaSqlParserParser";
 import { HintClauseContext } from "./ImpalaSqlParserParser";
 import { PropertiesContext } from "./ImpalaSqlParserParser";
@@ -845,6 +861,19 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitReplaceColumns?: (ctx: ReplaceColumnsContext) => void;
 
 	/**
+	 * Enter a parse tree produced by the `editColumnDefine`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterEditColumnDefine?: (ctx: EditColumnDefineContext) => void;
+	/**
+	 * Exit a parse tree produced by the `editColumnDefine`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitEditColumnDefine?: (ctx: EditColumnDefineContext) => void;
+
+	/**
 	 * Enter a parse tree produced by the `addSingleColumn`
 	 * labeled alternative in `ImpalaSqlParserParser.statement`.
 	 * @param ctx the parse tree
@@ -895,6 +924,110 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAlterTableKuduOnly?: (ctx: AlterTableKuduOnlyContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `alterTableNonKudu`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterTableNonKudu?: (ctx: AlterTableNonKuduContext) => void;
+	/**
+	 * Exit a parse tree produced by the `alterTableNonKudu`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterTableNonKudu?: (ctx: AlterTableNonKuduContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `addPartitionByValue`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAddPartitionByValue?: (ctx: AddPartitionByValueContext) => void;
+	/**
+	 * Exit a parse tree produced by the `addPartitionByValue`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAddPartitionByValue?: (ctx: AddPartitionByValueContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `addPartitionByRange`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAddPartitionByRange?: (ctx: AddPartitionByRangeContext) => void;
+	/**
+	 * Exit a parse tree produced by the `addPartitionByRange`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAddPartitionByRange?: (ctx: AddPartitionByRangeContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `dropPartitionByValue`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterDropPartitionByValue?: (ctx: DropPartitionByValueContext) => void;
+	/**
+	 * Exit a parse tree produced by the `dropPartitionByValue`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitDropPartitionByValue?: (ctx: DropPartitionByValueContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `recoverPartitions`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterRecoverPartitions?: (ctx: RecoverPartitionsContext) => void;
+	/**
+	 * Exit a parse tree produced by the `recoverPartitions`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitRecoverPartitions?: (ctx: RecoverPartitionsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `alterFormat`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterFormat?: (ctx: AlterFormatContext) => void;
+	/**
+	 * Exit a parse tree produced by the `alterFormat`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterFormat?: (ctx: AlterFormatContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `alterStatsKey`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterStatsKey?: (ctx: AlterStatsKeyContext) => void;
+	/**
+	 * Exit a parse tree produced by the `alterStatsKey`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterStatsKey?: (ctx: AlterStatsKeyContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `alterPartitionCache`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterPartitionCache?: (ctx: AlterPartitionCacheContext) => void;
+	/**
+	 * Exit a parse tree produced by the `alterPartitionCache`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterPartitionCache?: (ctx: AlterPartitionCacheContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `dropTable`
@@ -2039,39 +2172,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitProgram?: (ctx: ProgramContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParserParser.singleStatement`.
-	 * @param ctx the parse tree
-	 */
-	enterSingleStatement?: (ctx: SingleStatementContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParserParser.singleStatement`.
-	 * @param ctx the parse tree
-	 */
-	exitSingleStatement?: (ctx: SingleStatementContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParserParser.standaloneExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterStandaloneExpression?: (ctx: StandaloneExpressionContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParserParser.standaloneExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitStandaloneExpression?: (ctx: StandaloneExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParserParser.standalonePathSpecification`.
-	 * @param ctx the parse tree
-	 */
-	enterStandalonePathSpecification?: (ctx: StandalonePathSpecificationContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParserParser.standalonePathSpecification`.
-	 * @param ctx the parse tree
-	 */
-	exitStandalonePathSpecification?: (ctx: StandalonePathSpecificationContext) => void;
-
-	/**
 	 * Enter a parse tree produced by `ImpalaSqlParserParser.statement`.
 	 * @param ctx the parse tree
 	 */
@@ -2202,6 +2302,116 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitKuduAttributes?: (ctx: KuduAttributesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.kuduStorageAttr`.
+	 * @param ctx the parse tree
+	 */
+	enterKuduStorageAttr?: (ctx: KuduStorageAttrContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.kuduStorageAttr`.
+	 * @param ctx the parse tree
+	 */
+	exitKuduStorageAttr?: (ctx: KuduStorageAttrContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.statsKey`.
+	 * @param ctx the parse tree
+	 */
+	enterStatsKey?: (ctx: StatsKeyContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.statsKey`.
+	 * @param ctx the parse tree
+	 */
+	exitStatsKey?: (ctx: StatsKeyContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.tableOrSerdePropertities`.
+	 * @param ctx the parse tree
+	 */
+	enterTableOrSerdePropertities?: (ctx: TableOrSerdePropertitiesContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.tableOrSerdePropertities`.
+	 * @param ctx the parse tree
+	 */
+	exitTableOrSerdePropertities?: (ctx: TableOrSerdePropertitiesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.fileFormat`.
+	 * @param ctx the parse tree
+	 */
+	enterFileFormat?: (ctx: FileFormatContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.fileFormat`.
+	 * @param ctx the parse tree
+	 */
+	exitFileFormat?: (ctx: FileFormatContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.partitionSpec`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionSpec?: (ctx: PartitionSpecContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.partitionSpec`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionSpec?: (ctx: PartitionSpecContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.kuduPartitionSpec`.
+	 * @param ctx the parse tree
+	 */
+	enterKuduPartitionSpec?: (ctx: KuduPartitionSpecContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.kuduPartitionSpec`.
+	 * @param ctx the parse tree
+	 */
+	exitKuduPartitionSpec?: (ctx: KuduPartitionSpecContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.constants`.
+	 * @param ctx the parse tree
+	 */
+	enterConstants?: (ctx: ConstantsContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.constants`.
+	 * @param ctx the parse tree
+	 */
+	exitConstants?: (ctx: ConstantsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.cacheSpec`.
+	 * @param ctx the parse tree
+	 */
+	enterCacheSpec?: (ctx: CacheSpecContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.cacheSpec`.
+	 * @param ctx the parse tree
+	 */
+	exitCacheSpec?: (ctx: CacheSpecContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.rangeOperator`.
+	 * @param ctx the parse tree
+	 */
+	enterRangeOperator?: (ctx: RangeOperatorContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.rangeOperator`.
+	 * @param ctx the parse tree
+	 */
+	exitRangeOperator?: (ctx: RangeOperatorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParserParser.partitionCol`.
+	 * @param ctx the parse tree
+	 */
+	enterPartitionCol?: (ctx: PartitionColContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParserParser.partitionCol`.
+	 * @param ctx the parse tree
+	 */
+	exitPartitionCol?: (ctx: PartitionColContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParserParser.likeClause`.

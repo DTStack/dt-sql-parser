@@ -25,19 +25,7 @@ options
     tokenVocab=ImpalaSqlLexer;
 }
 
-program : (singleStatement | standaloneExpression | standalonePathSpecification) EOF;
-
-singleStatement
-    : statement EOF
-    ;
-
-standaloneExpression
-    : expression EOF
-    ;
-
-standalonePathSpecification
-    : pathSpecification EOF
-    ;
+program : (statement SEMICOLON?)* EOF;
 
 statement
     : query                                                            #statementDefault
@@ -47,9 +35,9 @@ statement
     | KW_ALTER KW_DATABASE qualifiedName KW_SET KW_OWNER (KW_USER | KW_ROLE) identifier         #alterSchema
     | KW_DROP (KW_SCHEMA | KW_DATABASE) (KW_IF KW_EXISTS)? qualifiedName (KW_CASCADE | KW_RESTRICT)?     #dropSchema
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-            ('(' tableElement (',' tableElement)* ')')?
-            (KW_PARTITIONED KW_BY '('partitionedBy')')?
-            (KW_SORT KW_BY '(' sortedBy ')')?
+            (LPAREN tableElement (COMMA tableElement)* RPAREN)?
+            (KW_PARTITIONED KW_BY LPAREN partitionedBy RPAREN)?
+            (KW_SORT KW_BY LPAREN sortedBy RPAREN)?
             (KW_COMMENT comment=string)?
             (KW_ROW KW_FORMAT rowFormat)?
             (KW_WITH KW_SERDEPROPERTIES serdProp=properties)?
@@ -64,25 +52,35 @@ statement
         (KW_STORED_AS stored_as=identifier)?
         (KW_LOCATION location=string)?                                             #createTableLike
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-        ('(' kuduTableElement (',' kuduTableElement)* (',' KW_PRIMARY KW_KEY  columnAliases)? ')')?
+        (LPAREN kuduTableElement (COMMA kuduTableElement)* (COMMA KW_PRIMARY KW_KEY  columnAliases)? RPAREN)?
         (KW_PARTITION KW_BY .*)?
         (KW_COMMENT string)?
         KW_STORED_AS KW_KUDU
         (KW_TBLPROPERTIES tblProp=properties)?                            #createKuduTable
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-        ('(' KW_PRIMARY KW_KEY  columnAliases? ')')?
+        (LPAREN KW_PRIMARY KW_KEY  columnAliases? RPAREN)?
         (KW_PARTITION KW_BY .*)?
         (KW_COMMENT string)?
         KW_STORED_AS KW_KUDU
         (KW_TBLPROPERTIES tblProp=properties)?
         KW_AS query                                                       #createKuduTableAsSelect
     | KW_ALTER KW_TABLE from=qualifiedName KW_RENAME KW_TO to=qualifiedName        #renameTable
-    | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_COLUMNS '(' columnSpecWithKudu (',' columnSpecWithKudu)* ')'        #addColumns
-    | KW_ALTER KW_TABLE qualifiedName KW_REPLACE KW_COLUMNS '(' columnSpecWithKudu (',' columnSpecWithKudu)* ')'        #replaceColumns
+    | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)* RPAREN        #addColumns
+    | KW_ALTER KW_TABLE qualifiedName KW_REPLACE KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)* RPAREN        #replaceColumns
+    | KW_ALTER KW_TABLE qualifiedName KW_CHANGE KW_COLUMN columnSpecWithKudu      #editColumnDefine
     | KW_ALTER KW_TABLE qualifiedName KW_ADD KW_COLUMN (KW_IF KW_NOT KW_EXISTS)? columnSpecWithKudu        #addSingleColumn
     | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_COLUMN)? identifier        #dropSingleColumn
     | KW_ALTER KW_TABLE qualifiedName KW_SET KW_OWNER (KW_USER | KW_ROLE) identifier        #alterTableOwner
-    | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier '{' (KW_SET expression expression | KW_DROP KW_DEFAULT) '}'        #alterTableKuduOnly
+    | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier LCURLY (KW_SET kuduStorageAttr | KW_DROP KW_DEFAULT) RCURLY        #alterTableKuduOnly
+    | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier KW_SET KW_COMMENT string      #alterTableNonKudu
+    | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_PARTITION partitionSpec (KW_LOCATION string)? (cacheSpec)?     #addPartitionByValue
+    | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_RANGE KW_PARTITION kuduPartitionSpec      #addPartitionByRange
+    | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_PARTITION partitionSpec KW_PURGE?    #dropPartitionByValue
+    | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_RANGE KW_PARTITION kuduPartitionSpec      #addPartitionByRange
+    | KW_ALTER KW_TABLE qualifiedName KW_RECOVER KW_PARTITIONS      #recoverPartitions
+    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET LCURLY ((KW_FILEFORMAT fileFormat) | (KW_ROW KW_FORMAT rowFormat) | (KW_LOCATION string) | (KW_TBLPROPERTIES tableOrSerdePropertities) | (KW_SERDEPROPERTIES tableOrSerdePropertities)) RCURLY      #alterFormat
+    | KW_ALTER KW_TABLE qualifiedName identifier LPAREN statsKey RPAREN   #alterStatsKey
+    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET LCURLY ((KW_CACHED KW_IN string (KW_WITH KW_REPLICATION EQ number)?) | KW_UNCACHED) RCURLY   #alterPartitionCache
     | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? qualifiedName KW_PURGE?                     #dropTable
     | KW_TRUNCATE KW_TABLE? (KW_IF KW_EXISTS)? qualifiedName                       #truncateTable
     | KW_CREATE KW_VIEW (KW_IF KW_NOT KW_EXISTS)?  qualifiedName viewColumns?
@@ -94,11 +92,11 @@ statement
     | KW_ALTER KW_VIEW qualifiedName KW_SET KW_OWNER (KW_USER|KW_ROLE) qualifiedName                  #alterViewOwner
     | KW_DROP KW_VIEW (KW_IF KW_EXISTS)? qualifiedName                             #dropView
     | KW_DESCRIBE KW_DATABASE? (KW_FORMATTED|KW_EXTENDED)? qualifiedName           #describeDbOrTable
-    | KW_COMPUTE KW_STATS qualifiedName  (columnAliases)? (KW_TABLESAMPLE KW_SYSTEM '('number')' (KW_REPEATABLE'('number')')?)?    #computeStats
+    | KW_COMPUTE KW_STATS qualifiedName  (columnAliases)? (KW_TABLESAMPLE KW_SYSTEM LPAREN number RPAREN (KW_REPEATABLE LPAREN number RPAREN)?)?    #computeStats
     | KW_COMPUTE KW_INCREMENTAL KW_STATS qualifiedName (KW_PARTITION expression)?                                                        #computeIncrementalStats
     | KW_DROP KW_STATS qualifiedName                                          #dropStats
-    | KW_DROP KW_INCREMENTAL KW_STATS qualifiedName KW_PARTITION '('expression')'         #dropIncrementalStats
-    | KW_CREATE KW_AGGREGATE? KW_FUNCTION (KW_IF KW_NOT KW_EXISTS)? qualifiedName ('('(type (',' type)*)? ')')?
+    | KW_DROP KW_INCREMENTAL KW_STATS qualifiedName KW_PARTITION LPAREN expression RPAREN         #dropIncrementalStats
+    | KW_CREATE KW_AGGREGATE? KW_FUNCTION (KW_IF KW_NOT KW_EXISTS)? qualifiedName (LPAREN(type (COMMA type)*)? RPAREN)?
              (KW_RETURNS type)?
              (KW_INTERMEDIATE type)?
              KW_LOCATION STRING
@@ -110,37 +108,37 @@ statement
              (KW_SERIALIZE_FN EQ STRING)?
              (KW_FINALIZE_FN EQ STRING)?                                  #createFunction
     | KW_REFRESH KW_FUNCTIONS qualifiedName                                 #refreshFunction
-    | KW_DROP KW_AGGREGATE? KW_FUNCTION (KW_IF KW_EXISTS)? qualifiedName ('('(type (',' type)*)? ')')?       #dropFunction
+    | KW_DROP KW_AGGREGATE? KW_FUNCTION (KW_IF KW_EXISTS)? qualifiedName (LPAREN(type (COMMA type)*)? RPAREN)?       #dropFunction
     | KW_CREATE KW_ROLE name=identifier                                      #createRole
     | KW_DROP KW_ROLE name=identifier                                        #dropRole
     | KW_GRANT KW_ROLE identifier KW_TO KW_GROUP identifier                        #grantRole
-    | KW_GRANT (privilege (',' privilege)* | KW_ALL)
+    | KW_GRANT (privilege (COMMA privilege)* | KW_ALL)
             KW_ON objectType qualifiedName KW_TO grantee=principal (KW_WITH KW_GRANT KW_OPTION)?            #grant
     | KW_REVOKE KW_ROLE identifier KW_FROM KW_GROUP identifier                                                   #revokeRole
-    | KW_REVOKE (KW_GRANT KW_OPTION KW_FOR)? (privilege (',' privilege)* | KW_ALL)
+    | KW_REVOKE (KW_GRANT KW_OPTION KW_FOR)? (privilege (COMMA privilege)* | KW_ALL)
             KW_ON objectType qualifiedName KW_FROM grantee=principal          #revoke
     | with? KW_INSERT hintClause? (KW_INTO | KW_OVERWRITE) KW_TABLE? qualifiedName
             columnAliases?
-            (KW_PARTITION '('expression(',' expression)*')')?
+            (KW_PARTITION LPAREN expression(COMMA expression)*RPAREN)?
             hintClause? query                                           #insertInto
     | KW_DELETE KW_FROM? qualifiedName (KW_WHERE booleanExpression)?                                   #delete
-    | KW_DELETE expression (KW_AS? identifier)? KW_FROM? relation ((',' relation)*)? (KW_WHERE booleanExpression)?                                   #deleteTableRef
-    | KW_UPDATE qualifiedName KW_SET assignmentList (KW_FROM relation (',' relation)*)? (KW_WHERE booleanExpression)?    #updateTable
+    | KW_DELETE expression (KW_AS? identifier)? KW_FROM? relation ((COMMA relation)*)? (KW_WHERE booleanExpression)?                                   #deleteTableRef
+    | KW_UPDATE qualifiedName KW_SET assignmentList (KW_FROM relation (COMMA relation)*)? (KW_WHERE booleanExpression)?    #updateTable
     | KW_UPSERT hintClause? KW_INTO KW_TABLE? qualifiedName
              columnAliases?
              hintClause? query                                          #upsert
     | KW_SHOW (KW_SCHEMAS | KW_DATABASES)
-             (KW_LIKE? pattern=string ('|' string)*)?                                         #showSchemas
+             (KW_LIKE? pattern=string (BITWISEOR string)*)?                                         #showSchemas
     | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) qualifiedName)?
-             (KW_LIKE? pattern=string ('|' string)*)?                                        #showTables
+             (KW_LIKE? pattern=string (BITWISEOR string)*)?                                        #showTables
     | KW_SHOW (KW_AGGREGATE | KW_ANALYTIC)? KW_FUNCTIONS (KW_IN qualifiedName)?
-             (KW_LIKE? pattern=string ('|' string)*)?                                  #showFunctions
+             (KW_LIKE? pattern=string (BITWISEOR string)*)?                                  #showFunctions
     | KW_SHOW KW_CREATE KW_TABLE qualifiedName                                  #showCreateTable
     | KW_SHOW KW_CREATE KW_VIEW qualifiedName                                  #showCreateView
     | KW_SHOW KW_TABLE KW_STATS qualifiedName                                                      #showTableStats
     | KW_SHOW KW_COLUMN KW_STATS qualifiedName                                                     #showColumnStats
     | KW_SHOW (KW_RANGE)? KW_PARTITIONS qualifiedName                                              #showPartitions
-    | KW_SHOW KW_FILES KW_IN qualifiedName (KW_PARTITION '('expression (',' expression)?')')?         #showFiles
+    | KW_SHOW KW_FILES KW_IN qualifiedName (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?         #showFiles
     | KW_SHOW (KW_CURRENT)? KW_ROLES                                                               #showRoles
     | KW_SHOW KW_ROLE KW_GRANT KW_GROUP identifier                                                    #showRoleGrant
     | KW_SHOW KW_GRANT KW_ROLE identifier                                                          #showGrantRole
@@ -149,16 +147,16 @@ statement
     | KW_COMMENT KW_ON (KW_DATABASE|KW_TABLE|KW_COLUMN) qualifiedName KW_IS (string | KW_NULL)                 #addComments
     | KW_EXPLAIN statement                                                                   #explain
     | KW_SET (KW_ALL | identifier EQ expression)?                                               #setSession
-    | ':'KW_SHUTDOWN '(' (string)? (':' expression)? (',' expression )? ')'                  #shutdown
+    | COLON KW_SHUTDOWN LPAREN (string)? (COLON expression)? (COMMA expression )? RPAREN                  #shutdown
     | KW_INVALIDATE KW_METADATA qualifiedName                                                   #invalidateMeta
     | KW_LOAD KW_DATA KW_INPATH STRING (KW_OVERWRITE)? KW_INTO KW_TABLE qualifiedName
-        (KW_PARTITION '('expression (',' expression)?')')?                                   #loadData
-    | KW_REFRESH qualifiedName (KW_PARTITION '('expression (',' expression)?')')?               #refreshMeta
+        (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?                                   #loadData
+    | KW_REFRESH qualifiedName (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?               #refreshMeta
     | KW_REFRESH KW_AUTHORIZATION                                                               #refreshAuth
     ;
 
 assignmentList
-    :  assignmentItem (',' assignmentItem)*
+    :  assignmentItem (COMMA assignmentItem)*
     ;
 
 assignmentItem
@@ -166,7 +164,7 @@ assignmentItem
     ;
 
 viewColumns
-    : '(' identifier (KW_COMMENT string)? (',' identifier (KW_COMMENT string)?)* ')'
+    : LPAREN identifier (KW_COMMENT string)? (COMMA identifier (KW_COMMENT string)?)* RPAREN
     ;
 
 query
@@ -174,7 +172,7 @@ query
     ;
 
 with
-    : KW_WITH namedQuery (',' namedQuery)*
+    : KW_WITH namedQuery (COMMA namedQuery)*
     ;
 
 tableElement
@@ -196,8 +194,67 @@ kuduColumnDefinition
 columnSpecWithKudu
     : identifier type (KW_COMMENT string)? (kuduAttributes)?
     ;
+
 kuduAttributes
-    : '{' ((KW_NOT)? KW_NULL | KW_ENCODING expression | KW_COMPRESSION expression | KW_DEFAULT expression | KW_BLOCK_SIZE number) '}'
+    : LCURLY ((KW_NOT)? KW_NULL | kuduStorageAttr) RCURLY
+    ;
+
+kuduStorageAttr
+    : KW_ENCODING expression
+    | KW_COMPRESSION expression
+    | KW_DEFAULT expression
+    | KW_BLOCK_SIZE number
+    ;
+statsKey
+    : 'statsKey=numDVs'
+    | 'statsKey=numNulls'
+    | 'statsKey=avgSize'
+    | 'statsKey=maxSize'
+    ;
+tableOrSerdePropertities
+    : LPAREN identifier EQ constants (COMMA identifier EQ constants)*? RPAREN
+    ;
+fileFormat
+    : KW_TEXTFILE
+    | KW_PARQUET
+    | KW_ORC
+    | KW_AVRO
+    | KW_SEQUENCEFILE
+    | KW_RCFILE
+    ;
+partitionSpec
+    : LPAREN identifier partitionCol constants RPAREN
+    ;
+kuduPartitionSpec
+    : KW_VALUE partitionCol constants | constants rangeOperator KW_VALUES rangeOperator constants
+    ;
+constants
+    : INTEGER_VALUE
+    | DECIMAL_VALUE
+    | DOUBLE_VALUE
+    | string
+    | booleanValue
+    ;
+
+cacheSpec
+    : KW_CACHED KW_IN identifier (KW_WITH KW_REPLICATION EQ number)?
+    | KW_UNCACHED
+    ;
+
+rangeOperator
+    :
+    | LT
+    | LTE
+    | GT
+    | GTE
+    ;
+partitionCol
+    : EQ
+    | NEQ
+    | KW_LIKE
+    | KW_RLIKE
+    | KW_REGEXP
+    | rangeOperator
     ;
 
 likeClause
@@ -210,15 +267,15 @@ hintClause
     ;
 
 properties
-    : '(' property (',' property)* ')'
+    : LPAREN property (COMMA property)* RPAREN
     ;
 
 partitionedBy
-    : columnDefinition (',' columnDefinition)*
+    : columnDefinition (COMMA columnDefinition)*
     ;
 
 sortedBy
-    : expression (',' expression)*
+    : expression (COMMA expression)*
     ;
 
 rowFormat
@@ -231,7 +288,7 @@ property
 
 queryNoWith:
       queryTerm
-      (KW_ORDER KW_BY sortItem (',' sortItem)*)?
+      (KW_ORDER KW_BY sortItem (COMMA sortItem)*)?
       (KW_LIMIT rows=INTEGER_VALUE  (KW_OFFSET offset=INTEGER_VALUE )?)?
     ;
 
@@ -244,8 +301,8 @@ queryTerm
 queryPrimary
     : querySpecification                   #queryPrimaryDefault
     | KW_TABLE qualifiedName                  #table
-    | KW_VALUES expression (',' expression)*  #inlineTable
-    | '(' queryNoWith  ')'                 #subquery
+    | KW_VALUES expression (COMMA expression)*  #inlineTable
+    | LPAREN queryNoWith  RPAREN                 #subquery
     ;
 
 sortItem
@@ -253,15 +310,15 @@ sortItem
     ;
 
 querySpecification
-    : KW_SELECT setQuantifier? (KW_STRAIGHT_JOIN)? selectItem (',' selectItem)*
-      (KW_FROM relation (',' relation)*)?
+    : KW_SELECT setQuantifier? (KW_STRAIGHT_JOIN)? selectItem (COMMA selectItem)*
+      (KW_FROM relation (COMMA relation)*)?
       (KW_WHERE where=booleanExpression)?
       (KW_GROUP KW_BY groupBy)?
       (KW_HAVING having=booleanExpression)?
     ;
 
 groupBy
-    : setQuantifier? groupingElement (',' groupingElement)*
+    : setQuantifier? groupingElement (COMMA groupingElement)*
     ;
 
 groupingElement
@@ -269,12 +326,12 @@ groupingElement
     ;
 
 groupingSet
-    : '(' (expression (',' expression)*)? ')'
+    : LPAREN (expression (COMMA expression)*)? RPAREN
     | expression
     ;
 
 namedQuery
-    : name=identifier (columnAliases)? KW_AS '(' query ')'
+    : name=identifier (columnAliases)? KW_AS LPAREN query RPAREN
     ;
 
 setQuantifier
@@ -284,7 +341,7 @@ setQuantifier
 
 selectItem
     : expression (KW_AS? identifier)?  #selectSingle
-    | qualifiedName '.' ASTERISK    #selectAll
+    | qualifiedName DOT ASTERISK    #selectAll
     | ASTERISK                      #selectAll
     ;
 
@@ -311,12 +368,12 @@ joinType
 
 joinCriteria
     : KW_ON booleanExpression
-    | KW_USING '(' identifier (',' identifier)* ')'
+    | KW_USING LPAREN identifier (COMMA identifier)* RPAREN
     ;
 
 sampledRelation
     : aliasedRelation (
-        KW_TABLESAMPLE sampleType '(' percentage=expression ')'
+        KW_TABLESAMPLE sampleType LPAREN percentage=expression RPAREN
       )?
     ;
 
@@ -330,15 +387,15 @@ aliasedRelation
     ;
 
 columnAliases
-    : '(' identifier (',' identifier)* ')'
+    : LPAREN identifier (COMMA identifier)* RPAREN
     ;
 
 relationPrimary
     : qualifiedName                                                   #tableName
-    | '(' query ')'                                                   #subqueryRelation
-    | KW_UNNEST '(' expression (',' expression)* ')' (KW_WITH KW_ORDINALITY)?  #unnest
-    | KW_LATERAL '(' query ')'                                           #lateral
-    | '(' relation ')'                                                #parenthesizedRelation
+    | LPAREN query RPAREN                                                   #subqueryRelation
+    | KW_UNNEST LPAREN expression (COMMA expression)* RPAREN (KW_WITH KW_ORDINALITY)?  #unnest
+    | KW_LATERAL LPAREN query RPAREN                                           #lateral
+    | LPAREN relation RPAREN                                                #parenthesizedRelation
     ;
 
 expression
@@ -355,10 +412,10 @@ booleanExpression
 // workaround for https://github.com/antlr/antlr4/issues/780
 predicate[ParserRuleContext value]
     : comparisonOperator right=valueExpression                            #comparison
-    | comparisonOperator comparisonQuantifier '(' query ')'               #quantifiedComparison
+    | comparisonOperator comparisonQuantifier LPAREN query RPAREN               #quantifiedComparison
     | KW_NOT? KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression        #between
-    | KW_NOT? KW_IN '(' expression (',' expression)* ')'                        #inList
-    | KW_NOT? KW_IN '(' query ')'                                               #inSubquery
+    | KW_NOT? KW_IN LPAREN expression (COMMA expression)* RPAREN                        #inList
+    | KW_NOT? KW_IN LPAREN query RPAREN                                               #inSubquery
     | KW_NOT? KW_LIKE pattern=valueExpression (KW_ESCAPE escape=valueExpression)?  #like
     | KW_IS KW_NOT? KW_NULL                                                        #nullPredicate
     | KW_IS KW_NOT? KW_DISTINCT KW_FROM right=valueExpression                         #distinctFrom
@@ -381,38 +438,38 @@ primaryExpression
     | booleanValue                                                                        #booleanLiteral
     | string                                                                              #stringLiteral
     | BINARY_LITERAL                                                                      #binaryLiteral
-    | '?'                                                                                 #parameter
-    | KW_POSITION '(' valueExpression KW_IN valueExpression ')'                                 #position
-    | '(' expression (',' expression)+ ')'                                                #rowConstructor
-    | KW_ROW '(' expression (',' expression)* ')'                                            #rowConstructor
-    | qualifiedName '(' ASTERISK ')' filter? over?                                        #functionCall
-    | qualifiedName '(' (setQuantifier? expression (',' expression)*)?
-        (KW_ORDER KW_BY sortItem (',' sortItem)*)? ')' filter? over?                            #functionCall
+    | QUESTION                                                                                 #parameter
+    | KW_POSITION LPAREN valueExpression KW_IN valueExpression RPAREN                                 #position
+    | LPAREN expression (COMMA expression)+ RPAREN                                                #rowConstructor
+    | KW_ROW LPAREN expression (COMMA expression)* RPAREN                                            #rowConstructor
+    | qualifiedName LPAREN ASTERISK RPAREN filter? over?                                        #functionCall
+    | qualifiedName LPAREN (setQuantifier? expression (COMMA expression)*)?
+        (KW_ORDER KW_BY sortItem (COMMA sortItem)*)? RPAREN filter? over?                            #functionCall
     | identifier '->' expression                                                          #lambda
-    | '(' (identifier (',' identifier)*)? ')' '->' expression                             #lambda
-    | '(' query ')'                                                                       #subqueryExpression
+    | LPAREN (identifier (COMMA identifier)*)? RPAREN '->' expression                             #lambda
+    | LPAREN query RPAREN                                                                       #subqueryExpression
     // This is an extension to ANSI SQL, which considers KW_EXISTS to be a <boolean expression>
-    | KW_EXISTS '(' query ')'                                                                #exists
+    | KW_EXISTS LPAREN query RPAREN                                                                #exists
     | KW_CASE valueExpression whenClause+ (KW_ELSE elseExpression=expression)? KW_END              #simpleCase
     | KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                              #searchedCase
-    | KW_CAST '(' expression KW_AS type ')'                                                     #cast
-    | KW_TRY_CAST '(' expression KW_AS type ')'                                                 #cast
-    | KW_ARRAY '[' (expression (',' expression)*)? ']'                                       #arrayConstructor
-    | value=primaryExpression '[' index=valueExpression ']'                               #subscript
+    | KW_CAST LPAREN expression KW_AS type RPAREN                                                     #cast
+    | KW_TRY_CAST LPAREN expression KW_AS type RPAREN                                                 #cast
+    | KW_ARRAY LSQUARE (expression (COMMA expression)*)? RSQUARE                                       #arrayConstructor
+    | value=primaryExpression LSQUARE index=valueExpression RSQUARE                               #subscript
     | identifier                                                                          #columnReference
-    | base=primaryExpression '.' fieldName=identifier                                     #dereference
+    | base=primaryExpression DOT fieldName=identifier                                     #dereference
     | name=KW_CURRENT_DATE                                                                   #specialDateTimeFunction
-    | name=KW_CURRENT_TIME ('(' precision=INTEGER_VALUE  ')')?                                #specialDateTimeFunction
-    | name=KW_CURRENT_TIMESTAMP ('(' precision=INTEGER_VALUE  ')')?                           #specialDateTimeFunction
-    | name=KW_LOCALTIME ('(' precision=INTEGER_VALUE  ')')?                                   #specialDateTimeFunction
-    | name=KW_LOCALTIMESTAMP ('(' precision=INTEGER_VALUE  ')')?                              #specialDateTimeFunction
+    | name=KW_CURRENT_TIME (LPAREN precision=INTEGER_VALUE  RPAREN)?                                #specialDateTimeFunction
+    | name=KW_CURRENT_TIMESTAMP (LPAREN precision=INTEGER_VALUE  RPAREN)?                           #specialDateTimeFunction
+    | name=KW_LOCALTIME (LPAREN precision=INTEGER_VALUE  RPAREN)?                                   #specialDateTimeFunction
+    | name=KW_LOCALTIMESTAMP (LPAREN precision=INTEGER_VALUE  RPAREN)?                              #specialDateTimeFunction
     | name=KW_CURRENT_USER                                                                   #currentUser
     | name=KW_CURRENT_PATH                                                                   #currentPath
-    | KW_SUBSTRING '(' valueExpression KW_FROM valueExpression (KW_FOR valueExpression)? ')'       #substring
-    | KW_NORMALIZE '(' valueExpression (',' normalForm)? ')'                                 #normalize
-    | KW_EXTRACT '(' identifier KW_FROM valueExpression ')'                                     #extract
-    | '(' expression ')'                                                                  #parenthesizedExpression
-    | KW_GROUPING '(' (qualifiedName (',' qualifiedName)*)? ')'                              #groupingOperation
+    | KW_SUBSTRING LPAREN valueExpression KW_FROM valueExpression (KW_FOR valueExpression)? RPAREN       #substring
+    | KW_NORMALIZE LPAREN valueExpression (COMMA normalForm)? RPAREN                                 #normalize
+    | KW_EXTRACT LPAREN identifier KW_FROM valueExpression RPAREN                                     #extract
+    | LPAREN expression RPAREN                                                                  #parenthesizedExpression
+    | KW_GROUPING LPAREN (qualifiedName (COMMA qualifiedName)*)? RPAREN                              #groupingOperation
     ;
 
 string
@@ -434,9 +491,9 @@ booleanValue
 
 interval
     : INTEGER_VALUE  intervalField
-    | '(' INTEGER_VALUE  ')' intervalField
+    | LPAREN INTEGER_VALUE  RPAREN intervalField
     | KW_INTERVAL INTEGER_VALUE  intervalField
-    | KW_INTERVAL '(' INTEGER_VALUE  ')' intervalField
+    | KW_INTERVAL LPAREN INTEGER_VALUE  RPAREN intervalField
     ;
 
 intervalField
@@ -449,10 +506,10 @@ normalForm
 
 type
     : type KW_ARRAY
-    | KW_ARRAY '<' type '>'
-    | KW_MAP '<' type ',' type '>'
-    | KW_STRUCT '<' identifier ':' type (',' identifier ':' type)* '>'
-    | baseType ('(' typeParameter (',' typeParameter)* ')')?
+    | KW_ARRAY LT type GT
+    | KW_MAP LT type COMMA type GT
+    | KW_STRUCT LT identifier COLON type (COMMA identifier COLON type)* GT
+    | baseType (LPAREN typeParameter (COMMA typeParameter)* RPAREN)?
     ;
 
 typeParameter
@@ -471,15 +528,15 @@ whenClause
     ;
 
 filter
-    : KW_FILTER '(' KW_WHERE booleanExpression ')'
+    : KW_FILTER LPAREN KW_WHERE booleanExpression RPAREN
     ;
 
 over
-    : KW_OVER '('
-        (KW_PARTITION KW_BY partition+=expression (',' partition+=expression)*)?
-        (KW_ORDER KW_BY sortItem (',' sortItem)*)?
+    : KW_OVER LPAREN
+        (KW_PARTITION KW_BY partition+=expression (COMMA partition+=expression)*)?
+        (KW_ORDER KW_BY sortItem (COMMA sortItem)*)?
         windowFrame?
-      ')'
+      RPAREN
     ;
 
 windowFrame
@@ -497,22 +554,22 @@ frameBound
     ;
 
 pathElement
-    : identifier '.' identifier     #qualifiedArgument
+    : identifier DOT identifier     #qualifiedArgument
     | identifier                    #unqualifiedArgument
     ;
 
 pathSpecification
-    : pathElement (',' pathElement)*
+    : pathElement (COMMA pathElement)*
     ;
 
 privilege
-    : KW_CREATE | KW_INSERT | KW_REFRESH | KW_SELECT ('('columnName=identifier')')?
+    : KW_CREATE | KW_INSERT | KW_REFRESH | KW_SELECT (LPARENcolumnName=identifier RPAREN)?
     ;
 objectType
     : KW_SERVER | KW_URI | KW_DATABASE | KW_TABLE
     ;
 qualifiedName
-    : identifier ('.' identifier)*
+    : identifier (DOT identifier)*
     ;
 
 principal
