@@ -23,6 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+// https://github.com/antlr/grammars-v4/blob/master/sql/mysql/Positive-Technologies/MySqlLexer.g4
+
 lexer grammar MySqlLexer;
 
 options { caseInsensitive = true; }
@@ -42,6 +44,7 @@ LINE_COMMENT:                        (
 // Keywords
 // Common Keywords
 
+KW_ACTIVE:                              'ACTIVE';
 KW_ADD:                                 'ADD';
 KW_ALL:                                 'ALL';
 KW_ALTER:                               'ALTER';
@@ -108,6 +111,7 @@ KW_FORCE:                               'FORCE';
 KW_FOREIGN:                             'FOREIGN';
 KW_FROM:                                'FROM';
 KW_FULLTEXT:                            'FULLTEXT';
+KW_GENERATE:                           'GENERATE';
 KW_GENERATED:                           'GENERATED';
 KW_GET:                                 'GET';
 KW_GRANT:                               'GRANT';
@@ -119,6 +123,7 @@ KW_IF:                                  'IF';
 KW_IGNORE:                              'IGNORE';
 KW_IGNORED:                             'IGNORED';
 KW_IN:                                  'IN';
+KW_INACTIVE:                            'INACTIVE';
 KW_INDEX:                               'INDEX';
 KW_INFILE:                              'INFILE';
 KW_INNER:                               'INNER';
@@ -158,6 +163,7 @@ KW_NOT:                                 'NOT';
 KW_NO_WRITE_TO_BINLOG:                  'NO_WRITE_TO_BINLOG';
 KW_NULL_LITERAL:                        'NULL';
 KW_NUMBER:                              'NUMBER';
+KW_STREAM:                              'STREAM';
 KW_ON:                                  'ON';
 KW_OPTIMIZE:                            'OPTIMIZE';
 KW_OPTION:                              'OPTION';
@@ -176,6 +182,7 @@ KW_PURGE:                               'PURGE';
 KW_RANGE:                               'RANGE';
 KW_READ:                                'READ';
 KW_READS:                               'READS';
+KW_REFERENCE:                           'REFERENCE';
 KW_REFERENCES:                          'REFERENCES';
 KW_REGEXP:                              'REGEXP';
 KW_RELEASE:                             'RELEASE';
@@ -197,8 +204,7 @@ KW_SET:                                 'SET';
 KW_SEPARATOR:                           'SEPARATOR';
 KW_SHOW:                                'SHOW';
 KW_SIGNAL:                              'SIGNAL';
-// 未使用
-KW_SKIP_:                                'SKIP';
+KW_SKIP:                                'SKIP';
 KW_SKIP_QUERY_REWRITE:                  'SKIP_QUERY_REWRITE';
 KW_SPATIAL:                             'SPATIAL';
 KW_SQL:                                 'SQL';
@@ -231,6 +237,7 @@ KW_USAGE:                               'USAGE';
 KW_USE:                                 'USE';
 KW_USING:                               'USING';
 KW_VALUES:                              'VALUES';
+KW_VCPU:                                'VCPU';
 KW_WHEN:                                'WHEN';
 KW_WHERE:                               'WHERE';
 KW_WHILE:                               'WHILE';
@@ -399,6 +406,7 @@ KW_AFTER:                               'AFTER';
 KW_AGGREGATE:                           'AGGREGATE';
 KW_ALGORITHM:                           'ALGORITHM';
 KW_ANY:                                 'ANY';
+KW_ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS: 'ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS';
 KW_AT:                                  'AT';
 KW_AUTHORS:                             'AUTHORS';
 KW_AUTOCOMMIT:                          'AUTOCOMMIT';
@@ -418,7 +426,7 @@ KW_CHAIN:                               'CHAIN';
 KW_CHANGED:                             'CHANGED';
 KW_CHANNEL:                             'CHANNEL';
 KW_CHECKSUM:                            'CHECKSUM';
-KW_PAGE_CHECKSUM:                       'PAGE_CHECKSUM';
+KW_CHALLENGE_RESPONSE:                  'CHALLENGE_RESPONSE';
 KW_CIPHER:                              'CIPHER';
 KW_CLASS_ORIGIN:                        'CLASS_ORIGIN';
 KW_CLIENT:                              'CLIENT';
@@ -433,6 +441,7 @@ KW_COMMENT:                             'COMMENT';
 KW_COMMIT:                              'COMMIT';
 KW_COMPACT:                             'COMPACT';
 KW_COMPLETION:                          'COMPLETION';
+KW_COMPONENT:                           'COMPONENT';
 KW_COMPRESSED:                          'COMPRESSED';
 KW_COMPRESSION:                         'COMPRESSION';
 KW_CONCURRENT:                          'CONCURRENT';
@@ -487,12 +496,14 @@ KW_EXPIRE:                              'EXPIRE';
 KW_EXPORT:                              'EXPORT';
 KW_EXTENDED:                            'EXTENDED';
 KW_EXTENT_SIZE:                         'EXTENT_SIZE';
+KW_FACTOR:                              'FACTOR';
 KW_FAILED_LOGIN_ATTEMPTS:               'FAILED_LOGIN_ATTEMPTS';
 KW_FAST:                                'FAST';
 KW_FAULTS:                              'FAULTS';
 KW_FIELDS:                              'FIELDS';
 KW_FILE_BLOCK_SIZE:                     'FILE_BLOCK_SIZE';
 KW_FILTER:                              'FILTER';
+KW_FINISH:                              'FINISH';
 KW_FIRST:                               'FIRST';
 KW_FIXED:                               'FIXED';
 KW_FLUSH:                               'FLUSH';
@@ -502,9 +513,12 @@ KW_FOUND:                               'FOUND';
 KW_FULL:                                'FULL';
 KW_FUNCTION:                            'FUNCTION';
 KW_GENERAL:                             'GENERAL';
+KW_GET_MASTER_PUBLIC_KEY:               'GET_MASTER_PUBLIC_KEY';
+KW_GET_SOURCE_PUBLIC_KEY:               'GET_SOURCE_PUBLIC_KEY';
 KW_GLOBAL:                              'GLOBAL';
 KW_GRANTS:                              'GRANTS';
 KW_GROUP_REPLICATION:                   'GROUP_REPLICATION';
+KW_GTID_ONLY:                           'GTID_ONLY';
 KW_HANDLER:                             'HANDLER';
 KW_HASH:                                'HASH';
 KW_HELP:                                'HELP';
@@ -517,7 +531,9 @@ KW_IMPORT:                              'IMPORT';
 // 未使用
 KW_INCREMENT:                           'INCREMENT';
 KW_INDEXES:                             'INDEXES';
+KW_INITIAL:                            'INITIAL';
 KW_INITIAL_SIZE:                        'INITIAL_SIZE';
+KW_INITIATE:                            'INITIATE';
 KW_INPLACE:                             'INPLACE';
 KW_INSERT_METHOD:                       'INSERT_METHOD';
 KW_INSTALL:                             'INSTALL';
@@ -543,6 +559,7 @@ KW_LOGFILE:                             'LOGFILE';
 KW_LOGS:                                'LOGS';
 KW_MASTER:                              'MASTER';
 KW_MASTER_AUTO_POSITION:                'MASTER_AUTO_POSITION';
+KW_MASTER_COMPRESSION_ALGORITHMS:       'MASTER_COMPRESSION_ALGORITHMS';
 KW_MASTER_CONNECT_RETRY:                'MASTER_CONNECT_RETRY';
 KW_MASTER_DELAY:                        'MASTER_DELAY';
 KW_MASTER_HEARTBEAT_PERIOD:             'MASTER_HEARTBEAT_PERIOD';
@@ -551,6 +568,7 @@ KW_MASTER_LOG_FILE:                     'MASTER_LOG_FILE';
 KW_MASTER_LOG_POS:                      'MASTER_LOG_POS';
 KW_MASTER_PASSWORD:                     'MASTER_PASSWORD';
 KW_MASTER_PORT:                         'MASTER_PORT';
+KW_MASTER_PUBLIC_KEY_PATH:              'MASTER_PUBLIC_KEY_PATH';
 KW_MASTER_RETRY_COUNT:                  'MASTER_RETRY_COUNT';
 KW_MASTER_SSL:                          'MASTER_SSL';
 KW_MASTER_SSL_CA:                       'MASTER_SSL_CA';
@@ -560,8 +578,10 @@ KW_MASTER_SSL_CIPHER:                   'MASTER_SSL_CIPHER';
 KW_MASTER_SSL_CRL:                      'MASTER_SSL_CRL';
 KW_MASTER_SSL_CRLPATH:                  'MASTER_SSL_CRLPATH';
 KW_MASTER_SSL_KEY:                      'MASTER_SSL_KEY';
+KW_MASTER_TLS_CIPHERSUITES:             'MASTER_TLS_CIPHERSUITES';
 KW_MASTER_TLS_VERSION:                  'MASTER_TLS_VERSION';
 KW_MASTER_USER:                         'MASTER_USER';
+KW_MASTER_ZSTD_COMPRESSION_LEVEL:       'MASTER_ZSTD_COMPRESSION_LEVEL';
 KW_MAX_CONNECTIONS_PER_HOUR:            'MAX_CONNECTIONS_PER_HOUR';
 KW_MAX_QUERIES_PER_HOUR:                'MAX_QUERIES_PER_HOUR';
 KW_MAX_ROWS:                            'MAX_ROWS';
@@ -583,6 +603,7 @@ KW_MYSQL_ERRNO:                         'MYSQL_ERRNO';
 KW_NAME:                                'NAME';
 KW_NAMES:                               'NAMES';
 KW_NCHAR:                               'NCHAR';
+KW_NETWORK_NAMESPACE:                   'NETWORK_NAMESPACE';
 KW_NEVER:                               'NEVER';
 KW_NEXT:                                'NEXT';
 KW_NO:                                  'NO';
@@ -599,10 +620,12 @@ KW_NOWAIT:                              'NOWAIT';
 KW_NODEGROUP:                           'NODEGROUP';
 KW_NONE:                                'NONE';
 KW_ODBC:                                'ODBC';
+KW_OFF:                                 'OFF';
 KW_OFFLINE:                             'OFFLINE';
 KW_OFFSET:                              'OFFSET';
 KW_OF:                                  'OF';
 KW_OJ:                                  'OJ';
+KW_OLD:                                 'OLD';
 KW_OLD_PASSWORD:                        'OLD_PASSWORD';
 KW_ONE:                                 'ONE';
 KW_ONLINE:                              'ONLINE';
@@ -613,6 +636,7 @@ KW_OPTIONS:                             'OPTIONS';
 KW_OWNER:                               'OWNER';
 KW_PACK_KEYS:                           'PACK_KEYS';
 KW_PAGE:                                'PAGE';
+KW_PAGE_CHECKSUM:                       'PAGE_CHECKSUM';
 KW_PAGE_COMPRESSED:                     'PAGE_COMPRESSED';
 KW_PAGE_COMPRESSION_LEVEL:              'PAGE_COMPRESSION_LEVEL';
 KW_PARSER:                              'PARSER';
@@ -621,6 +645,8 @@ KW_PARTITIONING:                        'PARTITIONING';
 KW_PARTITIONS:                          'PARTITIONS';
 KW_PASSWORD:                            'PASSWORD';
 KW_PASSWORD_LOCK_TIME:                  'PASSWORD_LOCK_TIME';
+KW_PERSIST:                             'PERSIST';
+KW_PERSIST_ONLY:                        'PERSIST_ONLY';
 KW_PHASE:                               'PHASE';
 KW_PLUGIN:                              'PLUGIN';
 KW_PLUGIN_DIR:                          'PLUGIN_DIR';
@@ -631,6 +657,7 @@ KW_PRECEDING:                           'PRECEDING';
 KW_PREPARE:                             'PREPARE';
 KW_PRESERVE:                            'PRESERVE';
 KW_PREV:                                'PREV';
+KW_PRIVILEGE_CHECKS_USER:               'PRIVILEGE_CHECKS_USER';
 KW_PROCESSLIST:                         'PROCESSLIST';
 KW_PROFILE:                             'PROFILE';
 KW_PROFILES:                            'PROFILES';
@@ -642,6 +669,7 @@ KW_RECOVER:                             'RECOVER';
 KW_RECURSIVE:                           'RECURSIVE';
 KW_REDO_BUFFER_SIZE:                    'REDO_BUFFER_SIZE';
 KW_REDUNDANT:                           'REDUNDANT';
+KW_REGISTRATION:                        'REGISTRATION';
 KW_RELAY:                               'RELAY';
 KW_RELAY_LOG_FILE:                      'RELAY_LOG_FILE';
 KW_RELAY_LOG_POS:                       'RELAY_LOG_POS';
@@ -649,6 +677,8 @@ KW_RELAYLOG:                            'RELAYLOG';
 KW_REMOVE:                              'REMOVE';
 KW_REORGANIZE:                          'REORGANIZE';
 KW_REPAIR:                              'REPAIR';
+KW_REPLICA:                             'REPLICA';
+KW_REPLICAS:                               'REPLICAS';
 KW_REPLICATE_DO_DB:                     'REPLICATE_DO_DB';
 KW_REPLICATE_DO_TABLE:                  'REPLICATE_DO_TABLE';
 KW_REPLICATE_IGNORE_DB:                 'REPLICATE_IGNORE_DB';
@@ -657,8 +687,9 @@ KW_REPLICATE_REWRITE_DB:                'REPLICATE_REWRITE_DB';
 KW_REPLICATE_WILD_DO_TABLE:             'REPLICATE_WILD_DO_TABLE';
 KW_REPLICATE_WILD_IGNORE_TABLE:         'REPLICATE_WILD_IGNORE_TABLE';
 KW_REPLICATION:                         'REPLICATION';
+KW_REQUIRE_ROW_FORMAT:                  'REQUIRE_ROW_FORMAT';
+KW_REQUIRE_TABLE_PRIMARY_KEY_CHECK:     'REQUIRE_TABLE_PRIMARY_KEY_CHECK';
 KW_RESET:                               'RESET';
-// 未使用
 KW_RESTART:                             'RESTART';
 KW_RESUME:                              'RESUME';
 KW_RETURNED_SQLSTATE:                   'RETURNED_SQLSTATE';
@@ -692,6 +723,33 @@ KW_SOME:                                'SOME';
 KW_SONAME:                              'SONAME';
 KW_SOUNDS:                              'SOUNDS';
 KW_SOURCE:                              'SOURCE';
+KW_SOURCE_BIND:                         'SOURCE_BIND';
+KW_SOURCE_HOST:                         'SOURCE_HOST';
+KW_SOURCE_USER:                         'SOURCE_USER';
+KW_SOURCE_PASSWORD:                     'SOURCE_PASSWORD';
+KW_SOURCE_PORT:                         'SOURCE_PORT';
+KW_SOURCE_LOG_FILE:                     'SOURCE_LOG_FILE';
+KW_SOURCE_LOG_POS:                      'SOURCE_LOG_POS';
+KW_SOURCE_AUTO_POSITION:                'SOURCE_AUTO_POSITION';
+KW_SOURCE_HEARTBEAT_PERIOD:             'SOURCE_HEARTBEAT_PERIOD';
+KW_SOURCE_CONNECT_RETRY:                'SOURCE_CONNECT_RETRY';
+KW_SOURCE_RETRY_COUNT:                  'SOURCE_RETRY_COUNT';
+KW_SOURCE_CONNECTION_AUTO_FAILOVER:     'SOURCE_CONNECTION_AUTO_FAILOVER';
+KW_SOURCE_DELAY:                        'SOURCE_DELAY';
+KW_SOURCE_COMPRESSION_ALGORITHMS:       'SOURCE_COMPRESSION_ALGORITHMS';
+KW_SOURCE_ZSTD_COMPRESSION_LEVEL:       'SOURCE_ZSTD_COMPRESSION_LEVEL';
+KW_SOURCE_SSL:                          'SOURCE_SSL';
+KW_SOURCE_SSL_CA:                       'SOURCE_SSL_CA';
+KW_SOURCE_SSL_CAPATH:                   'SOURCE_SSL_CAPATH';
+KW_SOURCE_SSL_CERT:                     'SOURCE_SSL_CERT';
+KW_SOURCE_SSL_CRL:                      'SOURCE_SSL_CRL';
+KW_SOURCE_SSL_CRLPATH:                  'SOURCE_SSL_CRLPATH';
+KW_SOURCE_SSL_KEY:                      'SOURCE_SSL_KEY';
+KW_SOURCE_SSL_CIPHER:                   'SOURCE_SSL_CIPHER';
+KW_SOURCE_SSL_VERIFY_SERVER_CERT:       'SOURCE_SSL_VERIFY_SERVER_CERT';
+KW_SOURCE_TLS_VERSION:                  'SOURCE_TLS_VERSION';
+KW_SOURCE_TLS_CIPHERSUITES:             'SOURCE_TLS_CIPHERSUITES';
+KW_SOURCE_PUBLIC_KEY_PATH:              'SOURCE_PUBLIC_KEY_PATH';
 KW_SQL_AFTER_GTIDS:                     'SQL_AFTER_GTIDS';
 KW_SQL_AFTER_MTS_GAPS:                  'SQL_AFTER_MTS_GAPS';
 KW_SQL_BEFORE_GTIDS:                    'SQL_BEFORE_GTIDS';
@@ -725,6 +783,7 @@ KW_THAN:                                'THAN';
 KW_TRADITIONAL:                         'TRADITIONAL';
 KW_TRANSACTION:                         'TRANSACTION';
 KW_TRANSACTIONAL:                       'TRANSACTIONAL';
+KW_TREE:                                'TREE';
 KW_TRIGGERS:                            'TRIGGERS';
 KW_TRUNCATE:                            'TRUNCATE';
 KW_UNBOUNDED:                           'UNBOUNDED';
@@ -733,6 +792,7 @@ KW_UNDOFILE:                            'UNDOFILE';
 KW_UNDO_BUFFER_SIZE:                    'UNDO_BUFFER_SIZE';
 KW_UNINSTALL:                           'UNINSTALL';
 KW_UNKNOWN:                             'UNKNOWN';
+KW_UNREGISTER:                          'UNREGISTER';
 KW_UNTIL:                               'UNTIL';
 KW_UPGRADE:                             'UPGRADE';
 KW_USER:                                'USER';
@@ -783,10 +843,12 @@ KW_ADMIN:                               'ADMIN';
 KW_APPLICATION_PASSWORD_ADMIN:          'APPLICATION_PASSWORD_ADMIN';
 KW_AUDIT_ABORT_EXEMPT:                  'AUDIT_ABORT_EXEMPT';
 KW_AUDIT_ADMIN:                         'AUDIT_ADMIN';
+KW_AUTHENTICATION:                      'AUTHENTICATION';
 KW_AUTHENTICATION_POLICY_ADMIN:         'AUTHENTICATION_POLICY_ADMIN';
 KW_BACKUP_ADMIN:                        'BACKUP_ADMIN';
 KW_BINLOG_ADMIN:                        'BINLOG_ADMIN';
 KW_BINLOG_ENCRYPTION_ADMIN:             'BINLOG_ENCRYPTION_ADMIN';
+KW_CLONE:                               'CLONE';
 KW_CLONE_ADMIN:                         'CLONE_ADMIN';
 KW_CONNECTION_ADMIN:                    'CONNECTION_ADMIN';
 KW_ENCRYPTION_KEY_ADMIN:                'ENCRYPTION_KEY_ADMIN';
@@ -812,6 +874,7 @@ KW_PROCESS:                             'PROCESS';
 KW_RELOAD:                              'RELOAD';
 KW_REPLICATION_APPLIER:                 'REPLICATION_APPLIER';
 KW_REPLICATION_SLAVE_ADMIN:             'REPLICATION_SLAVE_ADMIN';
+KW_RESOURCE:                            'RESOURCE';
 KW_RESOURCE_GROUP_ADMIN:                'RESOURCE_GROUP_ADMIN';
 KW_RESOURCE_GROUP_USER:                 'RESOURCE_GROUP_USER';
 KW_ROLE_ADMIN:                          'ROLE_ADMIN';
@@ -1016,6 +1079,7 @@ KW_INET_ATON:                           'INET_ATON';
 KW_INET_NTOA:                           'INET_NTOA';
 KW_INSTR:                               'INSTR';
 KW_INTERIORRINGN:                       'INTERIORRINGN';
+KW_INTERSECT:                           'INTERSECT';
 KW_INTERSECTS:                          'INTERSECTS';
 KW_ISCLOSED:                            'ISCLOSED';
 KW_ISEMPTY:                             'ISEMPTY';
@@ -1179,8 +1243,10 @@ KW_ST_Y:                                'ST_Y';
 KW_SUBDATE:                             'SUBDATE';
 KW_SUBSTRING_INDEX:                     'SUBSTRING_INDEX';
 KW_SUBTIME:                             'SUBTIME';
+KW_SYSTEM:                              'SYSTEM';
 KW_SYSTEM_USER:                         'SYSTEM_USER';
 KW_TAN:                                 'TAN';
+KW_THREAD_PRIORITY:                     'THREAD_PRIORITY';
 KW_TIMEDIFF:                            'TIMEDIFF';
 KW_TIMESTAMPADD:                        'TIMESTAMPADD';
 KW_TIMESTAMPDIFF:                       'TIMESTAMPDIFF';
@@ -1191,6 +1257,7 @@ KW_TO_BASE64:                           'TO_BASE64';
 KW_TO_DAYS:                             'TO_DAYS';
 KW_TO_SECONDS:                          'TO_SECONDS';
 KW_TP_CONNECTION_ADMIN:                 'TP_CONNECTION_ADMIN';
+KW_TYPE:                                'TYPE';
 KW_UCASE:                               'UCASE';
 KW_UNCOMPRESS:                          'UNCOMPRESS';
 KW_UNCOMPRESSED_LENGTH:                 'UNCOMPRESSED_LENGTH';
@@ -1266,6 +1333,7 @@ AT_SIGN:                             '@';
 ZERO_DECIMAL:                        '0';
 ONE_DECIMAL:                         '1';
 TWO_DECIMAL:                         '2';
+THREE_DECIMAL:                       '3';
 SINGLE_QUOTE_SYMB:                   '\'';
 DOUBLE_QUOTE_SYMB:                   '"';
 REVERSE_QUOTE_SYMB:                  '`';
@@ -1276,23 +1344,15 @@ fragment QUOTE_SYMB
     ;
 
 
-
 // Charsets
-
 CHARSET_REVERSE_QOUTE_STRING:        '`' CHARSET_NAME '`';
 
 
-
 // File's sizes
-
-
 FILESIZE_LITERAL:                    DEC_DIGIT+ ('K'|'M'|'G'|'T');
 
 
-
 // Literal Primitives
-
-
 START_NATIONAL_STRING_LITERAL:       'N' SQUOTA_STRING;
 STRING_LITERAL:                      DQUOTA_STRING | SQUOTA_STRING | BQUOTA_STRING;
 DECIMAL_LITERAL:                     DEC_DIGIT+;
@@ -1329,6 +1389,10 @@ LOCAL_ID:                            AT_SIGN
                                        STRING_LITERAL | [A-Z0-9._$\u0080-\uFFFF]+
                                      );
 GLOBAL_ID:                           AT_SIGN AT_SIGN
+                                     (
+                                       [A-Z0-9._$\u0080-\uFFFF]+ | BQUOTA_STRING
+                                     );
+PERSIST_ID:                           AT_SIGN AT_SIGN
                                      (
                                        [A-Z0-9._$\u0080-\uFFFF]+ | BQUOTA_STRING
                                      );
