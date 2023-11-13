@@ -23,6 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+// https://github.com/antlr/grammars-v4/blob/master/sql/mysql/Positive-Technologies/MySqlParser.g4
 // SQL Statements: https://dev.mysql.com/doc/refman/8.0/en/sql-statements.html
 
 
@@ -62,16 +63,16 @@ ddlStatement
     | alterServer | alterTable | alterTablespace | alterView
     | dropDatabase | dropEvent | dropIndex
     | dropLogfileGroup | dropProcedure | dropFunction
-    | dropServer | dropTable | dropTablespace
+    | dropServer | dropSpatial | dropTable | dropTablespace
     | dropTrigger | dropView | dropRole | setRole
     | renameTable | truncateTable
     ;
 
 dmlStatement
-    : selectStatement | insertStatement | updateStatement
-    | deleteStatement | replaceStatement | callStatement
-    | loadDataStatement | loadXmlStatement | doStatement
-    | handlerStatement | valuesStatement | withStatement
+    : selectStatement | setOperations | insertStatement | updateStatement
+    | deleteStatement | replaceStatement | callStatement | interSectStatement
+    | loadDataStatement | loadXmlStatement | parenthesizedQuery | doStatement
+    | handlerStatement | importTableStatement | valuesStatement | withStatement
     | tableStatement
     ;
 
@@ -83,8 +84,8 @@ transactionStatement
     ;
 
 replicationStatement
-    : changeMaster | changeReplicationFilter | purgeBinaryLogs
-    | resetMaster | resetSlave | startSlave | stopSlave
+    : changeMaster | changeReplicationFilter | changeReplicationSource | purgeBinaryLogs
+    | startSlaveOrReplica | stopSlaveOrReplica
     | startGroupReplication | stopGroupReplication
     | xaStartTransaction | xaEndTransaction | xaPrepareStatement
     | xaCommitWork | xaRollbackWork | xaRecoverWork
@@ -106,17 +107,18 @@ compoundStatement
 administrationStatement
     : alterUser | createUser | dropUser | grantStatement
     | grantProxy | renameUser | revokeStatement
-    | revokeProxy | analyzeTable | checkTable
+    | alterResourceGroup | createResourceGroup | dropResourceGroup | setResourceGroup
+    | analyzeTable | checkTable
     | checksumTable | optimizeTable | repairTable
-    | createUdfunction | installPlugin | uninstallPlugin
-    | setStatement | showStatement | binlogStatement
+    | installComponent | uninstallComponent | installPlugin | uninstallPlugin
+    | cloneStatement | setStatement | showStatement | binlogStatement
     | cacheIndexStatement | flushStatement | killStatement
-    | loadIndexIntoCache | resetStatement
+    | loadIndexIntoCache | resetStatement | resetPersist | resetAllChannel | reStartStatement
     | shutdownStatement
     ;
 
 utilityStatement
-    : simpleDescribeStatement | fullDescribeStatement
+    : simpleDescribeStatement | fullDescribeStatement | analyzeDescribeStatement
     | helpStatement | useStatement | signalStatement
     | resignalStatement | diagnosticsStatement
     ;
@@ -128,11 +130,11 @@ utilityStatement
 
 createDatabase
     : KW_CREATE dbFormat=(KW_DATABASE | KW_SCHEMA)
-      ifNotExists? uid createDatabaseOption*
+      ifNotExists? databaseNameCreate createDatabaseOption*
     ;
 
 createEvent
-    : KW_CREATE ownerStatement? KW_EVENT ifNotExists? fullId
+    : KW_CREATE ownerStatement? KW_EVENT ifNotExists? event_name=fullId
       KW_ON KW_SCHEDULE scheduleExpression
       (KW_ON KW_COMPLETION KW_NOT? KW_PRESERVE)? enableType?
       (KW_COMMENT STRING_LITERAL)?
@@ -143,7 +145,7 @@ createIndex
     : KW_CREATE
       intimeAction=(KW_ONLINE | KW_OFFLINE)?
       indexCategory=(KW_UNIQUE | KW_FULLTEXT | KW_SPATIAL)? KW_INDEX
-      uid indexType?
+      indexNameCreate indexType?
       KW_ON tableName indexColumnNames
       indexOption*
       (
@@ -153,90 +155,78 @@ createIndex
     ;
 
 createLogfileGroup
-    : KW_CREATE KW_LOGFILE KW_GROUP uid
+    : KW_CREATE KW_LOGFILE KW_GROUP logfileGroupName=uid
       KW_ADD KW_UNDOFILE undoFile=STRING_LITERAL
       (KW_INITIAL_SIZE '='? initSize=fileSizeLiteral)?
       (KW_UNDO_BUFFER_SIZE '='? undoSize=fileSizeLiteral)?
       (KW_REDO_BUFFER_SIZE '='? redoSize=fileSizeLiteral)?
-      (KW_NODEGROUP '='? uid)?
+      (KW_NODEGROUP '='? nodegroup=uid)?
       KW_WAIT?
       (KW_COMMENT '='? comment=STRING_LITERAL)?
       KW_ENGINE '='? engineName
     ;
 
 createProcedure
-    : KW_CREATE ownerStatement?
-      KW_PROCEDURE fullId
+    : KW_CREATE ownerStatement? KW_PROCEDURE ifNotExists? sp_name=fullId
       '(' procedureParameter? (',' procedureParameter)* ')'
       routineOption*
       routineBody
     ;
 
-createFunction
-    : KW_CREATE ownerStatement? KW_AGGREGATE?
-      KW_FUNCTION ifNotExists? fullId
-      '(' functionParameter? (',' functionParameter)* ')'
-      KW_RETURNS dataType
-      routineOption*
-      (routineBody | returnStatement)
-    ;
-
 createRole
-    : KW_CREATE KW_ROLE ifNotExists? roleName (',' roleName)*
+    : KW_CREATE KW_ROLE ifNotExists? userOrRoleNames
     ;
 
 createServer
-    : KW_CREATE KW_SERVER uid
-    KW_FOREIGN KW_DATA KW_WRAPPER wrapperName=(KW_MYSQL | STRING_LITERAL)
-    KW_OPTIONS '(' serverOption (',' serverOption)* ')'
+    : KW_CREATE KW_SERVER servername=uid
+        KW_FOREIGN KW_DATA KW_WRAPPER wrapperName=(KW_MYSQL | STRING_LITERAL)
+        KW_OPTIONS '(' serverOption (',' serverOption)* ')'
     ;
 
 createTable
-    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists?
-       tableName
-       (
-         KW_LIKE tableName
-         | '(' KW_LIKE parenthesisTable=tableName ')'
-       )                                                            #copyCreateTable
-    | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists?
-       tableName createDefinitions?
-       ( tableOption (','? tableOption)* )?
-       partitionDefinitions? keyViolate=(KW_IGNORE | KW_REPLACE)?
-       KW_AS? selectStatement                                          #queryCreateTable
-    | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists?
-       tableName createDefinitions
-       ( tableOption (','? tableOption)* )?
-       partitionDefinitions?                                        #columnCreateTable
+    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate
+        createDefinitions
+        (tableOption (','? tableOption)* )?
+        partitionDefinitions?                                         #copyCreateTable
+    | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate
+        createDefinitions?
+        (tableOption (','? tableOption)*)?
+        partitionDefinitions?
+        (KW_IGNORE | KW_REPLACE)?
+        KW_AS? selectStatement                                        #columnCreateTable
+    | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate
+       (KW_LIKE tableName | '(' KW_LIKE tableName ')')                #queryCreateTable
     ;
 
 createTablespaceInnodb
-    : KW_CREATE KW_TABLESPACE uid
-      KW_ADD KW_DATAFILE datafile=STRING_LITERAL
+    : KW_CREATE KW_UNDO? KW_TABLESPACE tablespaceNameCreate
+      (KW_ADD KW_DATAFILE datafile=STRING_LITERAL)?
+      (KW_AUTOEXTEND_SIZE '='? autoextendSize=fileSizeLiteral)?
       (KW_FILE_BLOCK_SIZE '=' fileBlockSize=fileSizeLiteral)?
       (KW_ENGINE '='? engineName)?
+      (KW_ENGINE_ATTRIBUTE '='? STRING_LITERAL)?
     ;
 
 createTablespaceNdb
-    : KW_CREATE KW_TABLESPACE uid
+    : KW_CREATE KW_UNDO? KW_TABLESPACE tablespaceNameCreate
       KW_ADD KW_DATAFILE datafile=STRING_LITERAL
-      KW_USE KW_LOGFILE KW_GROUP uid
+      KW_USE KW_LOGFILE KW_GROUP logfileGroupName=uid
       (KW_EXTENT_SIZE '='? extentSize=fileSizeLiteral)?
       (KW_INITIAL_SIZE '='? initialSize=fileSizeLiteral)?
       (KW_AUTOEXTEND_SIZE '='? autoextendSize=fileSizeLiteral)?
       (KW_MAX_SIZE '='? maxSize=fileSizeLiteral)?
-      (KW_NODEGROUP '='? uid)?
+      (KW_NODEGROUP '='? nodegroup=uid)?
       KW_WAIT?
       (KW_COMMENT '='? comment=STRING_LITERAL)?
       KW_ENGINE '='? engineName
     ;
 
 createTrigger
-    : KW_CREATE ownerStatement?
-      KW_TRIGGER thisTrigger=fullId
+    : KW_CREATE ownerStatement? KW_TRIGGER ifNotExists? trigger_name=fullId
       triggerTime=(KW_BEFORE | KW_AFTER)
       triggerEvent=(KW_INSERT | KW_UPDATE | KW_DELETE)
       KW_ON tableName KW_FOR KW_EACH KW_ROW
-      (triggerPlace=(KW_FOLLOWS | KW_PRECEDES) otherTrigger=fullId)?
+      (triggerPlace=(KW_FOLLOWS | KW_PRECEDES) other_trigger_name=fullId)?
       routineBody
     ;
 
@@ -245,16 +235,8 @@ withClause
     ;
 
 commonTableExpressions
-    : cteName ('(' cteColumnName (',' cteColumnName)* ')')?  KW_AS '(' dmlStatement ')'
+    : cteName=uid ('(' cteColumnName=uid (',' cteColumnName=uid)* ')')?  KW_AS '(' dmlStatement ')'
       (',' commonTableExpressions)?
-    ;
-
-cteName
-    : uid
-    ;
-
-cteColumnName
-    : uid
     ;
 
 createView
@@ -264,7 +246,7 @@ createView
       )?
       ownerStatement?
       (KW_SQL KW_SECURITY secContext=(KW_DEFINER | KW_INVOKER))?
-      KW_VIEW fullId ('(' uidList ')')? KW_AS
+      KW_VIEW viewNameCreate ('(' columnNames ')')? KW_AS
       (
         '(' withClause? selectStatement ')'
         |
@@ -289,7 +271,7 @@ charSet
     ;
 
 currentUserExpression
-    : KW_CURRENT_USER ( '(' ')')?
+    : (KW_CURRENT_USER | KW_USER) ( '(' ')')?
     ;
 
 ownerStatement
@@ -339,7 +321,7 @@ indexType
 indexOption
     : KW_KEY_BLOCK_SIZE EQUAL_SYMBOL? fileSizeLiteral
     | indexType
-    | KW_WITH KW_PARSER uid
+    | KW_WITH KW_PARSER parserName=uid
     | KW_COMMENT STRING_LITERAL
     | (KW_VISIBLE | KW_INVISIBLE)
     | KW_ENGINE_ATTRIBUTE EQUAL_SYMBOL? STRING_LITERAL
@@ -347,11 +329,7 @@ indexOption
     ;
 
 procedureParameter
-    : direction=(KW_IN | KW_OUT | KW_INOUT)? uid dataType
-    ;
-
-functionParameter
-    : uid dataType
+    : direction=(KW_IN | KW_OUT | KW_INOUT)? paramName=uid dataType
     ;
 
 routineOption
@@ -380,13 +358,26 @@ createDefinitions
     ;
 
 createDefinition
-    : fullColumnName columnDefinition                               #columnDeclaration
-    | tableConstraint KW_NOT? KW_ENFORCED?                                #constraintDeclaration
-    | indexColumnDefinition                                         #indexDeclaration
+    : columnName columnDefinition
+    | (KW_INDEX | KW_KEY) indexName? indexType? indexColumnNames indexOption*
+    | (KW_FULLTEXT | KW_SPATIAL) (KW_INDEX | KW_KEY)? indexName? indexColumnNames indexOption*
+    | constraintSymbol? KW_PRIMARY KW_KEY indexType? indexColumnNames indexOption*
+    | constraintSymbol? KW_UNIQUE (KW_INDEX | KW_KEY)? indexName? indexType? indexColumnNames indexOption*
+    | constraintSymbol? KW_FOREIGN KW_KEY indexName? indexColumnNames referenceDefinition
+    | KW_CHECK '(' expression ')'
+    | checkConstraintDefinition
+    ;
+
+checkConstraintDefinition
+    : constraintSymbol? KW_CHECK '(' expression ')' (KW_NOT? KW_ENFORCED)?
+    ;
+
+constraintSymbol
+    : KW_CONSTRAINT symbol=uid?
     ;
 
 columnDefinition
-    : dataType columnConstraint* KW_NOT? KW_ENFORCED?
+    : dataType columnConstraint*
     ;
 
 columnConstraint
@@ -404,22 +395,7 @@ columnConstraint
     | KW_COLLATE collationName                                         #collateColumnConstraint
     | (KW_GENERATED KW_ALWAYS)? KW_AS '(' expression ')' (KW_VIRTUAL | KW_STORED)? #generatedColumnConstraint
     | KW_SERIAL KW_DEFAULT KW_VALUE                                          #serialDefaultColumnConstraint
-    | (KW_CONSTRAINT name=uid?)?
-      KW_CHECK '(' expression ')'                                      #checkColumnConstraint
-    ;
-
-tableConstraint
-    : (KW_CONSTRAINT name=uid?)?
-      KW_PRIMARY KW_KEY index=uid? indexType?
-      indexColumnNames indexOption*                                 #primaryKeyTableConstraint
-    | (KW_CONSTRAINT name=uid?)?
-      KW_UNIQUE indexFormat=(KW_INDEX | KW_KEY)? index=uid?
-      indexType? indexColumnNames indexOption*                      #uniqueKeyTableConstraint
-    | (KW_CONSTRAINT name=uid?)?
-      KW_FOREIGN KW_KEY index=uid? indexColumnNames
-      referenceDefinition                                           #foreignKeyTableConstraint
-    | (KW_CONSTRAINT name=uid?)?
-      KW_CHECK '(' expression ')'                                      #checkTableConstraint
+    | checkConstraintDefinition                                             #checkExpr
     ;
 
 referenceDefinition
@@ -443,13 +419,6 @@ referenceControlType
     : KW_RESTRICT | KW_CASCADE | KW_SET KW_NULL_LITERAL | KW_NO KW_ACTION | KW_SET KW_DEFAULT
     ;
 
-indexColumnDefinition
-    : indexFormat=(KW_INDEX | KW_KEY) uid? indexType?
-      indexColumnNames indexOption*                                 #simpleIndexDeclaration
-    | (KW_FULLTEXT | KW_SPATIAL)
-      indexFormat=(KW_INDEX | KW_KEY)? uid?
-      indexColumnNames indexOption*                                 #specialIndexDeclaration
-    ;
 
 tableOption
     : KW_ENGINE '='? engineName?                                                       #tableOptionEngine
@@ -486,11 +455,11 @@ tableOption
     | KW_STATS_AUTO_RECALC '='? extBoolValue=(KW_DEFAULT | '0' | '1')                     #tableOptionRecalculation
     | KW_STATS_PERSISTENT '='? extBoolValue=(KW_DEFAULT | '0' | '1')                      #tableOptionPersistent
     | KW_STATS_SAMPLE_PAGES '='? (KW_DEFAULT | decimalLiteral)                            #tableOptionSamplePage
-    | KW_TABLESPACE uid tablespaceStorage?                                             #tableOptionTablespace
+    | KW_TABLESPACE tablespaceName tablespaceStorage?                                             #tableOptionTablespace
     | KW_TABLE_TYPE '=' tableType                                                      #tableOptionTableType
     | tablespaceStorage                                                             #tableOptionTablespace
     | KW_TRANSACTIONAL '='? ('0' | '1')                                                #tableOptionTransactional
-    | KW_UNION '='? '(' tables ')'                                                     #tableOptionUnion
+    | KW_UNION '='? '(' tableNames ')'                                                     #tableOptionUnion
     ;
 
 tableType
@@ -514,40 +483,40 @@ partitionDefinitions
 partitionFunctionDefinition
     : KW_LINEAR? KW_HASH '(' expression ')'                               #partitionFunctionHash
     | KW_LINEAR? KW_KEY (KW_ALGORITHM '=' algType=('1' | '2'))?
-      '(' uidList? ')'                                              #partitionFunctionKey // Optional uidList for MySQL only
-    | KW_RANGE ( '(' expression ')' | KW_COLUMNS '(' uidList ')' )        #partitionFunctionRange
-    | KW_LIST ( '(' expression ')' | KW_COLUMNS '(' uidList ')' )         #partitionFunctionList
+      '(' columnNames? ')'                                              #partitionFunctionKey
+    | KW_RANGE ( '(' expression ')' | KW_COLUMNS '(' columnNames ')' )        #partitionFunctionRange
+    | KW_LIST ( '(' expression ')' | KW_COLUMNS '(' columnNames ')' )         #partitionFunctionList
     ;
 
 subpartitionFunctionDefinition
     : KW_LINEAR? KW_HASH '(' expression ')'                               #subPartitionFunctionHash
     | KW_LINEAR? KW_KEY (KW_ALGORITHM '=' algType=('1' | '2'))?
-      '(' uidList ')'                                               #subPartitionFunctionKey
+      '(' columnNames ')'                                               #subPartitionFunctionKey
     ;
 
 partitionDefinition
-    : KW_PARTITION uid KW_VALUES KW_LESS KW_THAN
+    : KW_PARTITION partitionName KW_VALUES KW_LESS KW_THAN
       '('
           partitionDefinerAtom (',' partitionDefinerAtom)*
       ')'
       partitionOption*
       ( '(' subpartitionDefinition (',' subpartitionDefinition)* ')' )?       #partitionComparison
-    | KW_PARTITION uid KW_VALUES KW_LESS KW_THAN
+    | KW_PARTITION partitionName KW_VALUES KW_LESS KW_THAN
       partitionDefinerAtom partitionOption*
       ( '(' subpartitionDefinition (',' subpartitionDefinition)* ')' )?       #partitionComparison
-    | KW_PARTITION uid KW_VALUES KW_IN
+    | KW_PARTITION partitionName KW_VALUES KW_IN
       '('
           partitionDefinerAtom (',' partitionDefinerAtom)*
       ')'
       partitionOption*
       ( '(' subpartitionDefinition (',' subpartitionDefinition)* ')' )?       #partitionListAtom
-    | KW_PARTITION uid KW_VALUES KW_IN
+    | KW_PARTITION partitionName KW_VALUES KW_IN
       '('
           partitionDefinerVector (',' partitionDefinerVector)*
       ')'
       partitionOption*
       ( '(' subpartitionDefinition (',' subpartitionDefinition)* ')' )?       #partitionListVector
-    | KW_PARTITION uid partitionOption*
+    | KW_PARTITION partitionName partitionOption*
       ( '(' subpartitionDefinition (',' subpartitionDefinition)* ')' )?       #partitionSimple
     ;
 
@@ -560,7 +529,7 @@ partitionDefinerVector
     ;
 
 subpartitionDefinition
-    : KW_SUBPARTITION uid partitionOption*
+    : KW_SUBPARTITION logicalName=uid partitionOption*
     ;
 
 partitionOption
@@ -570,31 +539,31 @@ partitionOption
     | KW_INDEX KW_DIRECTORY '='? indexDirectory=STRING_LITERAL            #partitionOptionIndexDirectory
     | KW_MAX_ROWS '='? maxRows=decimalLiteral                          #partitionOptionMaxRows
     | KW_MIN_ROWS '='? minRows=decimalLiteral                          #partitionOptionMinRows
-    | KW_TABLESPACE '='? tablespace=uid                                #partitionOptionTablespace
+    | KW_TABLESPACE '='? tablespaceName                                #partitionOptionTablespace
     | KW_NODEGROUP '='? nodegroup=uid                                  #partitionOptionNodeGroup
     ;
 
 //    Alter statements
 
 alterDatabase
-    : KW_ALTER dbFormat=(KW_DATABASE | KW_SCHEMA) uid?
+    : KW_ALTER dbFormat=(KW_DATABASE | KW_SCHEMA) databaseName?
       createDatabaseOption+                                         #alterSimpleDatabase
-    | KW_ALTER dbFormat=(KW_DATABASE | KW_SCHEMA) uid
+    | KW_ALTER dbFormat=(KW_DATABASE | KW_SCHEMA) databaseName
       KW_UPGRADE KW_DATA KW_DIRECTORY KW_NAME                                   #alterUpgradeName
     ;
 
 alterEvent
     : KW_ALTER ownerStatement?
-      KW_EVENT fullId
+      KW_EVENT event_name=fullId
       (KW_ON KW_SCHEDULE scheduleExpression)?
       (KW_ON KW_COMPLETION KW_NOT? KW_PRESERVE)?
-      (KW_RENAME KW_TO fullId)? enableType?
+      (KW_RENAME KW_TO new_event_name=fullId)? enableType?
       (KW_COMMENT STRING_LITERAL)?
       (KW_DO routineBody)?
     ;
 
 alterFunction
-    : KW_ALTER KW_FUNCTION fullId routineOption*
+    : KW_ALTER KW_FUNCTION functionName routineOption*
     ;
 
 alterInstance
@@ -602,34 +571,38 @@ alterInstance
     ;
 
 alterLogfileGroup
-    : KW_ALTER KW_LOGFILE KW_GROUP uid
+    : KW_ALTER KW_LOGFILE KW_GROUP logfileGroupName=uid
       KW_ADD KW_UNDOFILE STRING_LITERAL
       (KW_INITIAL_SIZE '='? fileSizeLiteral)?
       KW_WAIT? KW_ENGINE '='? engineName
     ;
 
 alterProcedure
-    : KW_ALTER KW_PROCEDURE fullId routineOption*
+    : KW_ALTER KW_PROCEDURE proc_name=fullId routineOption*
     ;
 
 alterServer
-    : KW_ALTER KW_SERVER uid KW_OPTIONS
+    : KW_ALTER KW_SERVER serverName=uid KW_OPTIONS
       '(' serverOption (',' serverOption)* ')'
     ;
 
 alterTable
-    : KW_ALTER intimeAction=(KW_ONLINE | KW_OFFLINE)?
-      KW_IGNORE? KW_TABLE tableName waitNowaitClause?
-      (alterSpecification (',' alterSpecification)*)?
-      partitionDefinitions?
+    : KW_ALTER KW_TABLE tableName
+      (alterOption (',' alterOption)*)?
+      (alterPartitionSpecification alterPartitionSpecification*)?
     ;
 
 alterTablespace
-    : KW_ALTER KW_TABLESPACE uid
-      objectAction=(KW_ADD | KW_DROP) KW_DATAFILE STRING_LITERAL
-      (KW_INITIAL_SIZE '=' fileSizeLiteral)?
+    : KW_ALTER KW_UNDO? KW_TABLESPACE tablespaceName
+      (KW_ADD | KW_DROP) KW_DATAFILE STRING_LITERAL
+      (KW_INITIAL_SIZE '='? fileSizeLiteral)?
       KW_WAIT?
-      KW_ENGINE '='? engineName
+      (KW_RENAME KW_TO tablespaceNameCreate)?
+      (KW_AUTOEXTEND_SIZE '='? fileSizeLiteral)?
+      (KW_SET (KW_ACTIVE | KW_INACTIVE))?
+      (KW_ENCRYPTION '='? STRING_LITERAL)? // STRING_LITERAL is 'Y' or 'N'
+      (KW_ENGINE '='? engineName)?
+      (KW_ENGINE_ATTRIBUTE '='? STRING_LITERAL)?
     ;
 
 alterView
@@ -639,108 +612,73 @@ alterView
       )?
       ownerStatement?
       (KW_SQL KW_SECURITY secContext=(KW_DEFINER | KW_INVOKER))?
-      KW_VIEW fullId ('(' uidList ')')? KW_AS selectStatement
+      KW_VIEW viewName ('(' columnNames ')')? KW_AS selectStatement
       (KW_WITH checkOpt=(KW_CASCADED | KW_LOCAL)? KW_CHECK KW_OPTION)?
     ;
 
-// details
-
-alterSpecification
+alterOption
     : tableOption (','? tableOption)*                               #alterByTableOption
-    | KW_ADD KW_COLUMN? uid columnDefinition (KW_FIRST | KW_AFTER uid)?         #alterByAddColumn
-    | KW_ADD KW_COLUMN?
-        '('
-          uid columnDefinition ( ',' uid columnDefinition)*
-        ')'                                                         #alterByAddColumns
-    | KW_ADD indexFormat=(KW_INDEX | KW_KEY) uid? indexType?
-      indexColumnNames indexOption*                                 #alterByAddIndex
-    | KW_ADD (KW_CONSTRAINT name=uid?)? KW_PRIMARY KW_KEY index=uid?
-      indexType? indexColumnNames indexOption*                      #alterByAddPrimaryKey
-    | KW_ADD (KW_CONSTRAINT name=uid?)? KW_UNIQUE
-      indexFormat=(KW_INDEX | KW_KEY)? indexName=uid?
-      indexType? indexColumnNames indexOption*                      #alterByAddUniqueKey
-    | KW_ADD keyType=(KW_FULLTEXT | KW_SPATIAL)
-      indexFormat=(KW_INDEX | KW_KEY)? uid?
-      indexColumnNames indexOption*                                 #alterByAddSpecialIndex
-    | KW_ADD (KW_CONSTRAINT name=uid?)? KW_FOREIGN KW_KEY
-      indexName=uid? indexColumnNames referenceDefinition           #alterByAddForeignKey
-    | KW_ADD (KW_CONSTRAINT name=uid?)? KW_CHECK ( uid | stringLiteral | '(' expression ')' )
-      KW_NOT? KW_ENFORCED?                                                #alterByAddCheckTableConstraint
-    | KW_ALTER (KW_CONSTRAINT name=uid?)? KW_CHECK ( uid | stringLiteral | '(' expression ')' )
-      KW_NOT? KW_ENFORCED?                                                #alterByAlterCheckTableConstraint
-    | KW_ADD (KW_CONSTRAINT name=uid?)? KW_CHECK '(' expression ')'          #alterByAddCheckTableConstraint
-    | KW_ALGORITHM '='? algType=(KW_DEFAULT | KW_INSTANT | KW_INPLACE | KW_COPY)   #alterBySetAlgorithm
-    | KW_ALTER KW_COLUMN? uid
-      (KW_SET KW_DEFAULT defaultValue | KW_DROP KW_DEFAULT)                     #alterByChangeDefault
-    | KW_CHANGE KW_COLUMN? oldColumn=uid
-      newColumn=uid columnDefinition
-      (KW_FIRST | KW_AFTER afterColumn=uid)?                              #alterByChangeColumn
-    | KW_RENAME KW_COLUMN oldColumn=uid KW_TO newColumn=uid                  #alterByRenameColumn
+    | KW_ADD KW_COLUMN? columnName columnDefinition (KW_FIRST | KW_AFTER columnName)?            #alterByAddColumn
+    | KW_ADD KW_COLUMN? '(' columnName columnDefinition ( ',' columnName columnDefinition)* ')'  #alterByAddColumns
+    | KW_ADD (KW_INDEX | KW_KEY) indexName? indexType? indexColumnNames indexOption*    #alterByAddIndex
+    | KW_ADD (KW_FULLTEXT | KW_SPATIAL) (KW_INDEX | KW_KEY)? indexName? indexColumnNames indexOption*     #alterByAddSpecialIndex
+    | KW_ADD (KW_CONSTRAINT symbol=uid?)? KW_PRIMARY KW_KEY indexType? indexColumnNames indexOption*   #alterByAddPrimaryKey
+    | KW_ADD (KW_CONSTRAINT symbol=uid?)? KW_UNIQUE (KW_INDEX | KW_KEY)? indexName? indexType? indexColumnNames indexOption*  #alterByAddUniqueKey
+    | KW_ADD (KW_CONSTRAINT symbol=uid?)? KW_FOREIGN KW_KEY indexName? indexColumnNames referenceDefinition   #alterByAddForeignKey
+    | KW_ADD checkConstraintDefinition?   #alterByAddCheckTableConstraint
+    | KW_DROP (KW_CHECK | KW_CONSTRAINT) symbol=uid   #alterByDropConstraintCheck
+    | KW_ALTER (KW_CHECK | KW_CONSTRAINT) symbol=uid KW_NOT? KW_ENFORCED?   #alterByAlterCheckTableConstraint
+    | KW_ALGORITHM '='? (KW_DEFAULT | KW_INSTANT | KW_INPLACE | KW_COPY)   #alterBySetAlgorithm
+    | KW_ALTER KW_COLUMN? columnName (KW_SET KW_DEFAULT defaultValue | KW_SET (KW_VISIBLE | KW_INVISIBLE) | KW_DROP KW_DEFAULT)    #alterByAlterColumnDefault
+    | KW_ALTER KW_INDEX indexName (KW_VISIBLE | KW_INVISIBLE)   #alterByAlterIndexVisibility
+    | KW_CHANGE KW_COLUMN? oldColumn=columnName newColumn=columnNameCreate columnDefinition (KW_FIRST | KW_AFTER columnName)?    #alterByChangeColumn
+    | KW_DEFAULT? KW_CHARACTER KW_SET '=' charsetName (KW_COLLATE '='? collationName)?   #alterByDefaultCharset
+    | KW_CONVERT KW_TO (KW_CHARSET | KW_CHARACTER KW_SET) charsetName (KW_COLLATE collationName)?   #alterByConvertCharset
+    | (KW_DISABLE | KW_ENABLE) KW_KEYS      #alterKeys
+    | (KW_DISCARD | KW_IMPORT) KW_TABLESPACE   #alterTablespaceOption
+    | KW_DROP KW_COLUMN? columnName      #alterByDropColumn
+    | KW_DROP (KW_INDEX | KW_KEY) indexName       #alterByDropIndex
+    | KW_DROP KW_PRIMARY KW_KEY           #alterByDropPrimaryKey
+    | KW_DROP KW_FOREIGN KW_KEY fk_symbol=uid       #alterByDropForeignKey
+    | KW_FORCE                            #alterByForce
     | KW_LOCK '='? lockType=(KW_DEFAULT | KW_NONE | KW_SHARED | KW_EXCLUSIVE)      #alterByLock
-    | KW_MODIFY KW_COLUMN?
-      uid columnDefinition (KW_FIRST | KW_AFTER uid)?                     #alterByModifyColumn
-    | KW_DROP KW_COLUMN? uid KW_RESTRICT?                                    #alterByDropColumn
-    | KW_DROP (KW_CONSTRAINT | KW_CHECK) uid                                 #alterByDropConstraintCheck
-    | KW_DROP KW_PRIMARY KW_KEY                                              #alterByDropPrimaryKey
-    | KW_DROP indexFormat=(KW_INDEX | KW_KEY) uid                            #alterByDropIndex
-    | KW_RENAME indexFormat=(KW_INDEX | KW_KEY) uid KW_TO uid                   #alterByRenameIndex
-    | KW_ALTER KW_COLUMN? uid (
-        KW_SET KW_DEFAULT ( stringLiteral | '(' expression ')' )
-        | KW_SET (KW_VISIBLE | KW_INVISIBLE)
-        | KW_DROP KW_DEFAULT)                                             #alterByAlterColumnDefault
-    | KW_ALTER KW_INDEX uid (KW_VISIBLE | KW_INVISIBLE)                         #alterByAlterIndexVisibility
-    | KW_DROP KW_FOREIGN KW_KEY uid                                          #alterByDropForeignKey
-    | KW_DISABLE KW_KEYS                                                  #alterByDisableKeys
-    | KW_ENABLE KW_KEYS                                                   #alterByEnableKeys
-    | KW_RENAME renameFormat=(KW_TO | KW_AS)? (uid | fullId)                 #alterByRename
-    | KW_ORDER KW_BY uidList                                              #alterByOrder
-    | KW_CONVERT KW_TO (KW_CHARSET | KW_CHARACTER KW_SET) charsetName
-      (KW_COLLATE collationName)?                                      #alterByConvertCharset
-    | KW_DEFAULT? KW_CHARACTER KW_SET '=' charsetName
-      (KW_COLLATE '=' collationName)?                                  #alterByDefaultCharset
-    | KW_DISCARD KW_TABLESPACE                                            #alterByDiscardTablespace
-    | KW_IMPORT KW_TABLESPACE                                             #alterByImportTablespace
-    | KW_FORCE                                                         #alterByForce
-    | validationFormat=(KW_WITHOUT | KW_WITH) KW_VALIDATION                  #alterByValidate
-    | KW_ADD KW_COLUMN?
-        '(' createDefinition (',' createDefinition)* ')'            #alterByAddDefinitions
+    | KW_MODIFY KW_COLUMN? columnName columnDefinition (KW_FIRST | KW_AFTER columnName)?         #alterByModifyColumn
+    | KW_ORDER KW_BY columnNames                                              #alterByOrder
+    | KW_RENAME KW_COLUMN olcdColumn=columnName KW_TO newColumn=columnNameCreate               #alterByRenameColumn
+    | KW_RENAME indexFormat=(KW_INDEX | KW_KEY) indexName KW_TO indexNameCreate             #alterByRenameIndex
+    | KW_RENAME renameFormat=(KW_TO | KW_AS)? tableNameCreate                 #alterByRename
+    | (KW_WITHOUT | KW_WITH) KW_VALIDATION                  #alterByValidate
     | alterPartitionSpecification                                   #alterPartition
     ;
 
 alterPartitionSpecification
-    : KW_ADD KW_PARTITION
-      '(' partitionDefinition (',' partitionDefinition)* ')'        #alterByAddPartition
-    | KW_DROP KW_PARTITION uidList                                        #alterByDropPartition
-    | KW_DISCARD KW_PARTITION (uidList | KW_ALL) KW_TABLESPACE                  #alterByDiscardPartition
-    | KW_IMPORT KW_PARTITION (uidList | KW_ALL) KW_TABLESPACE                   #alterByImportPartition
-    | KW_TRUNCATE KW_PARTITION (uidList | KW_ALL)                            #alterByTruncatePartition
+    : KW_ADD KW_PARTITION '(' partitionDefinition (',' partitionDefinition)* ')'        #alterByAddPartition
+    | KW_DROP KW_PARTITION partitionNames                                        #alterByDropPartition
+    | KW_DISCARD KW_PARTITION (partitionNames | KW_ALL) KW_TABLESPACE                  #alterByDiscardPartition
+    | KW_IMPORT KW_PARTITION (partitionNames | KW_ALL) KW_TABLESPACE                   #alterByImportPartition
+    | KW_TRUNCATE KW_PARTITION (partitionNames | KW_ALL)                            #alterByTruncatePartition
     | KW_COALESCE KW_PARTITION decimalLiteral                             #alterByCoalescePartition
-    | KW_REORGANIZE KW_PARTITION uidList
-      KW_INTO '(' partitionDefinition (',' partitionDefinition)* ')'   #alterByReorganizePartition
-    | KW_EXCHANGE KW_PARTITION uid KW_WITH KW_TABLE tableName
-      (validationFormat=(KW_WITH | KW_WITHOUT) KW_VALIDATION)?               #alterByExchangePartition
-    | KW_ANALYZE KW_PARTITION (uidList | KW_ALL)                             #alterByAnalyzePartition
-    | KW_CHECK KW_PARTITION (uidList | KW_ALL)                               #alterByCheckPartition
-    | KW_OPTIMIZE KW_PARTITION (uidList | KW_ALL)                            #alterByOptimizePartition
-    | KW_REBUILD KW_PARTITION (uidList | KW_ALL)                             #alterByRebuildPartition
-    | KW_REPAIR KW_PARTITION (uidList | KW_ALL)                              #alterByRepairPartition
+    | KW_REORGANIZE KW_PARTITION partitionNames KW_INTO '(' partitionDefinition (',' partitionDefinition)* ')'   #alterByReorganizePartition
+    | KW_EXCHANGE KW_PARTITION partitionName KW_WITH KW_TABLE tableName (validationFormat=(KW_WITH | KW_WITHOUT) KW_VALIDATION)?               #alterByExchangePartition
+    | KW_ANALYZE KW_PARTITION (partitionNames | KW_ALL)                             #alterByAnalyzePartition
+    | KW_CHECK KW_PARTITION (partitionNames | KW_ALL)                               #alterByCheckPartition
+    | KW_OPTIMIZE KW_PARTITION (partitionNames | KW_ALL)                            #alterByOptimizePartition
+    | KW_REBUILD KW_PARTITION (partitionNames | KW_ALL)                             #alterByRebuildPartition
+    | KW_REPAIR KW_PARTITION (partitionNames | KW_ALL)                              #alterByRepairPartition
     | KW_REMOVE KW_PARTITIONING                                           #alterByRemovePartitioning
     | KW_UPGRADE KW_PARTITIONING                                          #alterByUpgradePartitioning
     ;
 
-//    Drop statements
-
 dropDatabase
-    : KW_DROP dbFormat=(KW_DATABASE | KW_SCHEMA) ifExists? uid
+    : KW_DROP dbFormat=(KW_DATABASE | KW_SCHEMA) ifExists? databaseName
     ;
 
 dropEvent
-    : KW_DROP KW_EVENT ifExists? fullId
+    : KW_DROP KW_EVENT ifExists? event_name=fullId
     ;
 
 dropIndex
-    : KW_DROP KW_INDEX intimeAction=(KW_ONLINE | KW_OFFLINE)?
-      uid KW_ON tableName
+    : KW_DROP KW_INDEX intimeAction=(KW_ONLINE | KW_OFFLINE)? indexName KW_ON tableName
       (
         KW_ALGORITHM '='? algType=(KW_DEFAULT | KW_INPLACE | KW_COPY)
         | KW_LOCK '='?
@@ -749,75 +687,67 @@ dropIndex
     ;
 
 dropLogfileGroup
-    : KW_DROP KW_LOGFILE KW_GROUP uid KW_ENGINE '=' engineName
+    : KW_DROP KW_LOGFILE KW_GROUP logfileGroupName=uid KW_ENGINE '='? engineName
     ;
 
 dropProcedure
-    : KW_DROP KW_PROCEDURE ifExists? fullId
+    : KW_DROP KW_PROCEDURE ifExists? sp_name=fullId
     ;
 
 dropFunction
-    : KW_DROP KW_FUNCTION ifExists? fullId
+    : KW_DROP KW_FUNCTION ifExists? functionName
     ;
 
 dropServer
-    : KW_DROP KW_SERVER ifExists? uid
+    : KW_DROP KW_SERVER ifExists? serverName=uid
+    ;
+
+dropSpatial
+    : KW_DROP KW_SPATIAL KW_REFERENCE KW_SYSTEM ifExists? DECIMAL_LITERAL
     ;
 
 dropTable
     : KW_DROP KW_TEMPORARY? KW_TABLE ifExists?
-      tables dropType=(KW_RESTRICT | KW_CASCADE)?
+      tableNames dropType=(KW_RESTRICT | KW_CASCADE)?
     ;
 
 dropTablespace
-    : KW_DROP KW_TABLESPACE uid (KW_ENGINE '='? engineName)?
+    : KW_DROP KW_UNDO? KW_TABLESPACE tablespaceName (KW_ENGINE '='? engineName)?
     ;
 
 dropTrigger
-    : KW_DROP KW_TRIGGER ifExists? fullId
+    : KW_DROP KW_TRIGGER ifExists? trigger_name=fullId
     ;
 
 dropView
     : KW_DROP KW_VIEW ifExists?
-      fullId (',' fullId)* dropType=(KW_RESTRICT | KW_CASCADE)?
+      viewName (',' viewName)* dropType=(KW_RESTRICT | KW_CASCADE)?
     ;
 
 dropRole
-    : KW_DROP KW_ROLE ifExists? roleName (',' roleName)*
+    : KW_DROP KW_ROLE ifExists? userOrRoleNames
     ;
 
 setRole
-    : KW_SET KW_DEFAULT KW_ROLE (KW_NONE | KW_ALL | roleName (',' roleName)*)
-      KW_TO (userName | uid) (',' (userName | uid))*
+    : KW_SET KW_DEFAULT KW_ROLE (KW_NONE | KW_ALL | userOrRoleNames)
+      KW_TO (userOrRoleName) (',' (userOrRoleName))*
     | KW_SET KW_ROLE roleOption
     ;
 
-//    Other DDL statements
-
 renameTable
-    : KW_RENAME KW_TABLE
-    renameTableClause (',' renameTableClause)*
+    : KW_RENAME KW_TABLE renameTableClause (',' renameTableClause)*
     ;
 
 renameTableClause
-    : tableName KW_TO tableName
+    : tableName KW_TO tableNameCreate
     ;
 
 truncateTable
     : KW_TRUNCATE KW_TABLE? tableName
     ;
 
-
-// Data Manipulation Language
-
-//    Primary DML Statements
-
-
 callStatement
-    : KW_CALL fullId
-      (
-        '(' (constants | expressions)? ')'
-      )?
+    : KW_CALL sp_name=fullId ('(' (constants | expressions)? ')')?
     ;
 
 deleteStatement
@@ -836,21 +766,34 @@ handlerStatement
     ;
 
 insertStatement
-    : KW_INSERT
-      priority=(KW_LOW_PRIORITY | KW_DELAYED | KW_HIGH_PRIORITY)?
+    : KW_INSERT priority=(KW_LOW_PRIORITY | KW_DELAYED | KW_HIGH_PRIORITY)?
       KW_IGNORE? KW_INTO? tableName
-      (KW_PARTITION '(' partitions=uidList? ')' )?
-      (
-        ('(' columns=fullColumnNameList ')')? insertStatementValue (KW_AS? uid)?
-        | KW_SET
-            setFirst=updatedElement
-            (',' setElements+=updatedElement)*
-      )
+      (KW_PARTITION '(' partitionNames? ')' )?
+      (fullColumnNames? (valuesOrValueList | selectOrTableOrValues)?  asRowAlias? | setAssignmentList)
+      asRowAlias?
       (
         KW_ON KW_DUPLICATE KW_KEY KW_UPDATE
         duplicatedFirst=updatedElement
         (',' duplicatedElements+=updatedElement)*
       )?
+    ;
+
+asRowAlias
+    : KW_AS rowAlias=uid(fullColumnNames)?
+    ;
+
+selectOrTableOrValues
+    : selectStatement
+    | KW_TABLE tableName
+    | rowValuesList
+    ;
+
+interSectStatement
+    : interSectQuery (KW_INTERSECT (KW_ALL | KW_DISTINCT)? interSectQuery)+
+    ;
+
+interSectQuery
+    : '('? querySpecification ')'?
     ;
 
 loadDataStatement
@@ -859,7 +802,7 @@ loadDataStatement
       KW_LOCAL? KW_INFILE filename=STRING_LITERAL
       violation=(KW_REPLACE | KW_IGNORE)?
       KW_INTO KW_TABLE tableName
-      (KW_PARTITION '(' uidList ')' )?
+      (KW_PARTITION '(' partitionNames ')' )?
       (KW_CHARACTER KW_SET charset=charsetName)?
       (
         fieldsFormat=(KW_FIELDS | KW_COLUMNS)
@@ -883,26 +826,30 @@ loadXmlStatement
       violation=(KW_REPLACE | KW_IGNORE)?
       KW_INTO KW_TABLE tableName
       (KW_CHARACTER KW_SET charset=charsetName)?
-      (KW_ROWS KW_IDENTIFIED KW_BY '<' tag=STRING_LITERAL '>')?
+      (KW_ROWS KW_IDENTIFIED KW_BY '<'? tag=STRING_LITERAL '>'?)?
       ( KW_IGNORE decimalLiteral linesFormat=(KW_LINES | KW_ROWS) )?
       ( '(' assignmentField (',' assignmentField)* ')' )?
       (KW_SET updatedElement (',' updatedElement)*)?
     ;
 
+parenthesizedQuery
+    : '(' parenthesizedQueryExpression orderByClause? limitClause? ')' orderByClause? limitClause? intoClause?
+    ;
+
 replaceStatement
     : KW_REPLACE priority=(KW_LOW_PRIORITY | KW_DELAYED)?
       KW_INTO? tableName
-      (KW_PARTITION '(' partitions=uidList ')' )?
+      (KW_PARTITION '(' partitionNames ')' )?
       (
-        ('(' columns=uidList ')')? insertStatementValue
-        | KW_SET
-          setFirst=updatedElement
-          (',' setElements+=updatedElement)*
+        ('(' columnNames ')')? replaceStatementValuesOrSelectOrTable
+        | setAssignmentList
       )
     ;
 
+// into clause within a given statement can appear only once
 selectStatement
     : querySpecification lockClause?                                #simpleSelect
+    | querySpecificationNointo lockClause? intoClause?    #simpleSelect
     | queryExpression lockClause?                                   #parenthesisSelect
     | querySpecificationNointo unionStatement+
         (
@@ -919,44 +866,79 @@ selectStatement
     | querySpecificationNointo (',' lateralStatement)+              #withLateralStatement
     ;
 
+// https://dev.mysql.com/doc/refman/8.0/en/set-operations.html
+setOperations
+    : withClause? queryExpressionBody orderByClause? limitClause? intoClause?
+    ;
+
+queryExpressionBody
+    : queryItem
+    | queryExpressionBody KW_UNION (KW_ALL | KW_DISTINCT)? queryItem
+    | queryExpressionBody KW_EXCEPT (KW_ALL | KW_DISTINCT)? queryItem
+    ;
+queryItem
+    : queryPrimary
+    | queryItem KW_INTERSECT (KW_ALL | KW_DISTINCT)? queryPrimary
+    ;
+queryPrimary
+    : queryBlock
+    | '(' queryExpressionBody orderByClause? limitClause? intoClause? ')'
+    ;
+
 updateStatement
     : singleUpdateStatement | multipleUpdateStatement
     ;
 
 // https://dev.mysql.com/doc/refman/8.0/en/values.html
 valuesStatement
-    : KW_VALUES
-    '(' expressionsWithDefaults? ')'
-    (',' '(' expressionsWithDefaults? ')')*
+    : rowValuesList (KW_ORDER KW_BY indexColumnName)? (KW_LIMIT limitClauseAtom)?
     ;
 
-// details
-
-insertStatementValue
-    : selectStatement
-    | insertFormat=(KW_VALUES | KW_VALUE)
-      '(' expressionsWithDefaults? ')'
-        (',' '(' expressionsWithDefaults? ')')*
-    ;
-
-updatedElement
-    : fullColumnName '=' (expression | KW_DEFAULT)
-    ;
-
-assignmentField
-    : uid | LOCAL_ID
-    ;
-
-lockClause
-    : KW_FOR KW_UPDATE | KW_LOCK KW_IN KW_SHARE KW_MODE
-    ;
 
 //    Detailed DML Statements
 
+parenthesizedQueryExpression
+    : queryBlock ((KW_UNION | KW_INTERSECT | KW_EXCEPT) queryBlock)* orderByClause? limitClause? intoClause?
+    ;
+
+queryBlock
+    : selectStatement
+    | tableStatement
+    | valuesStatement
+    ;
+
+replaceStatementValuesOrSelectOrTable
+    : selectStatement
+    | KW_TABLE tableName
+    | valuesOrValueList
+    | rowValuesList
+    ;
+
+rowValuesList
+    : KW_VALUES KW_ROW expressionsWithDefaults (',' KW_ROW expressionsWithDefaults)*
+    ;
+
+setAssignmentList
+    : KW_SET setFirst=updatedElement (',' setElements+=updatedElement)*
+    ;
+
+updatedElement
+    : columnName '=' expressionOrDefault
+    ;
+
+assignmentField
+    : var_name=uid | LOCAL_ID
+    ;
+
+lockClause
+    : KW_FOR (KW_UPDATE | KW_SHARE) (KW_OF tableName (',' tableName)*)? ((KW_NOWAIT | KW_SKIP) KW_LOCKED)?
+    | KW_LOCK KW_IN KW_SHARE KW_MODE
+    ;
+
 singleDeleteStatement
     : KW_DELETE priority=KW_LOW_PRIORITY? KW_QUICK? KW_IGNORE?
-    KW_FROM tableName (KW_AS? uid)?
-      (KW_PARTITION '(' uidList ')' )?
+    KW_FROM tableName (KW_AS? table_alias=uid)?
+      (KW_PARTITION '(' partitionNames ')' )?
       (KW_WHERE expression)?
       orderByClause? (KW_LIMIT limitClauseAtom)?
     ;
@@ -974,13 +956,13 @@ multipleDeleteStatement
     ;
 
 handlerOpenStatement
-    : KW_HANDLER tableName KW_OPEN (KW_AS? uid)?
+    : KW_HANDLER tableName KW_OPEN (KW_AS? table_alias=uid)?
     ;
 
 handlerReadIndexStatement
-    : KW_HANDLER tableName KW_READ index=uid
+    : KW_HANDLER tableName KW_READ indexName
       (
-        comparisonOperator '(' constants ')'
+        comparisonBase '(' constants ')'
         | moveOrder=(KW_FIRST | KW_NEXT | KW_PREV | KW_LAST)
       )
       (KW_WHERE expression)? (KW_LIMIT limitClauseAtom)?
@@ -995,8 +977,12 @@ handlerCloseStatement
     : KW_HANDLER tableName KW_CLOSE
     ;
 
+importTableStatement
+    : KW_IMPORT KW_TABLE KW_FROM stringLiteral (',' stringLiteral)*
+    ;
+
 singleUpdateStatement
-    : KW_UPDATE priority=KW_LOW_PRIORITY? KW_IGNORE? tableName (KW_AS? uid)?
+    : KW_UPDATE priority=KW_LOW_PRIORITY? KW_IGNORE? tableName (KW_AS? table_alias=uid)?
       KW_SET updatedElement (',' updatedElement)*
       (KW_WHERE expression)? orderByClause? limitClause?
     ;
@@ -1029,20 +1015,21 @@ tableSource
 
 tableSourceItem
     : tableName
-      (KW_PARTITION '(' uidList ')' )? (KW_AS? alias=uid)?
+      (KW_PARTITION '(' partitionNames ')' )? (KW_AS? alias=uid)?
       (indexHint (',' indexHint)* )?                                #atomTableItem
-    | (
-      selectStatement
-      | '(' parenthesisSubquery=selectStatement ')'
-      )
-      KW_AS? alias=uid                                                 #subqueryTableItem
+    | KW_LATERAL? ( selectStatement | '(' parenthesisSubquery=selectStatement ')') KW_AS? alias=uid fullColumnNames?      #subqueryTableItem
     | '(' tableSources ')'                                          #tableSourcesItem
+    ;
+
+// (col_list) | (col_alias [, col_alias] ...)
+fullColumnNames
+    : '(' columnNames ')'
     ;
 
 indexHint
     : indexHintAction=(KW_USE | KW_IGNORE | KW_FORCE)
-      keyFormat=(KW_INDEX|KW_KEY) ( KW_FOR indexHintType)?
-      '(' uidList ')'
+      keyFormat=(KW_INDEX | KW_KEY) ( KW_FOR indexHintType)?
+      '(' indexNames? ')'
     ;
 
 indexHintType
@@ -1051,14 +1038,16 @@ indexHintType
 
 joinPart
     : (KW_INNER | KW_CROSS)? KW_JOIN KW_LATERAL? tableSourceItem joinSpec*      #innerJoin
-    | KW_STRAIGHT_JOIN tableSourceItem (KW_ON expression)*                #straightJoin
+    | KW_STRAIGHT_JOIN tableSourceItem joinSpec*                #straightJoin
     | (KW_LEFT | KW_RIGHT) KW_OUTER? KW_JOIN KW_LATERAL? tableSourceItem joinSpec* #outerJoin
-    | KW_NATURAL ((KW_LEFT | KW_RIGHT) KW_OUTER?)? KW_JOIN tableSourceItem         #naturalJoin
+    | KW_NATURAL ((KW_INNER | (KW_LEFT | KW_RIGHT)) KW_OUTER?)? KW_JOIN tableSourceItem         #naturalJoin
     ;
+
+
 
 joinSpec
     : (KW_ON expression)
-    | KW_USING '(' uidList ')'
+    | KW_USING '(' columnNames ')'
     ;
 
 //    Select Statement's Details
@@ -1073,11 +1062,12 @@ queryExpressionNointo
     | '(' queryExpressionNointo ')'
     ;
 
+// into clause within a given statement can appear only once
 querySpecification
-    : KW_SELECT selectSpec* selectElements selectIntoExpression?
+    : KW_SELECT selectSpec* selectElements intoClause?
       fromClause groupByClause? havingClause? windowClause? orderByClause? limitClause?
     | KW_SELECT selectSpec* selectElements
-    fromClause groupByClause? havingClause? windowClause? orderByClause? limitClause? selectIntoExpression?
+      fromClause groupByClause? havingClause? windowClause? orderByClause? limitClause? intoClause?
     ;
 
 querySpecificationNointo
@@ -1097,7 +1087,7 @@ unionStatement
 lateralStatement
     : KW_LATERAL (querySpecificationNointo |
                queryExpressionNointo |
-               ('(' (querySpecificationNointo | queryExpressionNointo) ')' (KW_AS? uid)?)
+               ('(' (querySpecificationNointo | queryExpressionNointo) ')' (KW_AS? alias=uid)?)
               )
     ;
 
@@ -1109,7 +1099,7 @@ jsonTable
         STRING_LITERAL ','
         STRING_LITERAL
         KW_COLUMNS '(' jsonColumnList ')'
-      ')' (KW_AS? uid)?
+      ')' (KW_AS? alias=uid)?
     ;
 
 jsonColumnList
@@ -1117,7 +1107,7 @@ jsonColumnList
     ;
 
 jsonColumn
-    : fullColumnName ( KW_FOR KW_ORDINALITY
+    : columnName ( KW_FOR KW_ORDINALITY
                      | dataType ( KW_PATH STRING_LITERAL jsonOnEmpty? jsonOnError?
                                 | KW_EXISTS KW_PATH STRING_LITERAL ) )
     | KW_NESTED KW_PATH? STRING_LITERAL KW_COLUMNS '(' jsonColumnList ')'
@@ -1146,13 +1136,13 @@ selectElements
     ;
 
 selectElement
-    : fullId '.' '*'                                                #selectStarElement
-    | fullColumnName (KW_AS? uid)?                                     #selectColumnElement
-    | functionCall (KW_AS? uid)?                                       #selectFunctionElement
-    | (LOCAL_ID VAR_ASSIGN)? expression (KW_AS? uid)?                  #selectExpressionElement
+    : select_element=fullId '.' '*'                                                #selectStarElement
+    | columnName (KW_AS? alias=uid)?                                     #selectColumnElement
+    | functionCall (KW_AS? alias=uid)?                                       #selectFunctionElement
+    | (LOCAL_ID VAR_ASSIGN)? expression (KW_AS? alias=uid)?                  #selectExpressionElement
     ;
 
-selectIntoExpression
+intoClause
     : KW_INTO assignmentField (',' assignmentField )*                  #selectIntoVariables
     | KW_INTO KW_DUMPFILE STRING_LITERAL                                  #selectIntoDumpFile
     | (
@@ -1238,19 +1228,19 @@ rollbackWork
     ;
 
 savepointStatement
-    : KW_SAVEPOINT uid
+    : KW_SAVEPOINT identifier=uid
     ;
 
 rollbackStatement
-    : KW_ROLLBACK KW_WORK? KW_TO KW_SAVEPOINT? uid
+    : KW_ROLLBACK KW_WORK? KW_TO KW_SAVEPOINT? identifier=uid
     ;
 
 releaseStatement
-    : KW_RELEASE KW_SAVEPOINT uid
+    : KW_RELEASE KW_SAVEPOINT identifier=uid
     ;
 
 lockTables
-    : KW_LOCK (KW_TABLE | KW_TABLES) lockTableElement (',' lockTableElement)* waitNowaitClause?
+    : KW_LOCK (KW_TABLE | KW_TABLES) lockTableElement (',' lockTableElement)*
     ;
 
 unlockTables
@@ -1276,7 +1266,7 @@ transactionMode
     ;
 
 lockTableElement
-    : tableName (KW_AS? uid)? lockAction
+    : tableName (KW_AS? alias=uid)? lockAction
     ;
 
 lockAction
@@ -1302,13 +1292,15 @@ transactionLevel
 //    Base Replication
 
 changeMaster
-    : KW_CHANGE KW_MASTER KW_TO
-      masterOption (',' masterOption)* channelOption?
+    : KW_CHANGE KW_MASTER KW_TO masterOption (',' masterOption)* channelOption?
     ;
 
 changeReplicationFilter
-    : KW_CHANGE KW_REPLICATION KW_FILTER
-      replicationFilter (',' replicationFilter)*
+    : KW_CHANGE KW_REPLICATION KW_FILTER replicationFilter (',' replicationFilter)* channelOption?
+    ;
+
+changeReplicationSource
+    : KW_CHANGE KW_REPLICATION KW_SOURCE KW_TO replicationSourceOption (',' replicationSourceOption)* channelOption?
     ;
 
 purgeBinaryLogs
@@ -1319,57 +1311,91 @@ purgeBinaryLogs
        )
     ;
 
-resetMaster
-    : KW_RESET KW_MASTER
-    ;
-
-resetSlave
-    : KW_RESET KW_SLAVE KW_ALL? channelOption?
-    ;
-
-startSlave
-    : KW_START KW_SLAVE (threadType (',' threadType)*)?
+startSlaveOrReplica
+    : KW_START (KW_SLAVE | KW_REPLICA) (threadType (',' threadType)*)?
       (KW_UNTIL untilOption)?
-      connectionOption* channelOption?
+      connectionOptions* channelOption?
     ;
 
-stopSlave
-    : KW_STOP KW_SLAVE (threadType (',' threadType)*)?
+stopSlaveOrReplica
+    : KW_STOP (KW_SLAVE | KW_REPLICA) (threadType (',' threadType)*)? channelOption?
     ;
 
 startGroupReplication
-    : KW_START KW_GROUP_REPLICATION
+    : KW_START KW_GROUP_REPLICATION (KW_USER '=' STRING_LITERAL)? (',' KW_PASSWORD '=' STRING_LITERAL)? (',' KW_DEFAULT_AUTH '=' STRING_LITERAL)?
     ;
 
 stopGroupReplication
     : KW_STOP KW_GROUP_REPLICATION
     ;
 
-// details
-
 masterOption
     : stringMasterOption '=' STRING_LITERAL                         #masterStringOption
     | decimalMasterOption '=' decimalLiteral                        #masterDecimalOption
     | boolMasterOption '=' boolVal=('0' | '1')                      #masterBoolOption
-    | KW_MASTER_HEARTBEAT_PERIOD '=' REAL_LITERAL                      #masterRealOption
-    | KW_IGNORE_SERVER_IDS '=' '(' (uid (',' uid)*)? ')'               #masterUidListOption
+    | v8NewMasterOption                                             #v8AddMasterOption
+    | KW_IGNORE_SERVER_IDS '=' '(' (server_id=uid (',' server_id=uid)*)? ')'            #masterUidListOption
     ;
-
 stringMasterOption
     : KW_MASTER_BIND | KW_MASTER_HOST | KW_MASTER_USER | KW_MASTER_PASSWORD
-    | KW_MASTER_LOG_FILE | KW_RELAY_LOG_FILE | KW_MASTER_SSL_CA
-    | KW_MASTER_SSL_CAPATH | KW_MASTER_SSL_CERT | KW_MASTER_SSL_CRL
+    | KW_MASTER_LOG_FILE | KW_RELAY_LOG_FILE | KW_MASTER_COMPRESSION_ALGORITHMS
+    | KW_MASTER_SSL_CA | KW_MASTER_SSL_CAPATH | KW_MASTER_SSL_CERT | KW_MASTER_SSL_CRL
     | KW_MASTER_SSL_CRLPATH | KW_MASTER_SSL_KEY | KW_MASTER_SSL_CIPHER
-    | KW_MASTER_TLS_VERSION
+    | KW_MASTER_TLS_VERSION | KW_MASTER_TLS_CIPHERSUITES | KW_MASTER_PUBLIC_KEY_PATH
+    | KW_NETWORK_NAMESPACE
     ;
 decimalMasterOption
-    : KW_MASTER_PORT | KW_MASTER_CONNECT_RETRY | KW_MASTER_RETRY_COUNT
-    | KW_MASTER_DELAY | KW_MASTER_LOG_POS | KW_RELAY_LOG_POS
+    : KW_MASTER_PORT | KW_MASTER_LOG_POS | KW_RELAY_LOG_POS | KW_MASTER_HEARTBEAT_PERIOD
+    | KW_MASTER_CONNECT_RETRY | KW_MASTER_RETRY_COUNT | KW_MASTER_DELAY | KW_MASTER_ZSTD_COMPRESSION_LEVEL
+    ;
+boolMasterOption
+    : KW_REQUIRE_ROW_FORMAT
+    | KW_MASTER_AUTO_POSITION
+    | KW_SOURCE_CONNECTION_AUTO_FAILOVER
+    | KW_MASTER_SSL
+    | KW_MASTER_SSL_VERIFY_SERVER_CERT
+    | KW_GET_MASTER_PUBLIC_KEY
+    | KW_GTID_ONLY
+    ;
+// https://dev.mysql.com/doc/refman/8.0/en/change-master-to.html
+v8NewMasterOption
+    : KW_PRIVILEGE_CHECKS_USER '=' (STRING_LITERAL | KW_NULL_LITERAL)
+    | KW_REQUIRE_TABLE_PRIMARY_KEY_CHECK '=' (KW_STREAM | KW_ON | KW_OFF)
+    | KW_ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS '=' (KW_OFF | KW_LOCAL | gtuidSet)
     ;
 
-boolMasterOption
-    : KW_MASTER_AUTO_POSITION | KW_MASTER_SSL
-    | KW_MASTER_SSL_VERIFY_SERVER_CERT
+replicationSourceOption
+    : stringSourceOption '=' STRING_LITERAL                         #sourceStringOption
+    | decimalSourceOption '=' decimalLiteral                        #sourceDecimalOption
+    | boolSourceOption '=' boolVal=('0' | '1')                      #sourceBoolOption
+    | otherSourceOption                                             #sourceOtherOption
+    | KW_IGNORE_SERVER_IDS '=' '(' (server_id=uid (',' server_id=uid)*)? ')'            #sourceUidListOption
+    ;
+stringSourceOption
+    : KW_SOURCE_BIND | KW_SOURCE_HOST | KW_SOURCE_USER | KW_SOURCE_PASSWORD
+    | KW_SOURCE_LOG_FILE | KW_RELAY_LOG_FILE | KW_SOURCE_COMPRESSION_ALGORITHMS
+    | KW_SOURCE_SSL_CA | KW_SOURCE_SSL_CAPATH | KW_SOURCE_SSL_CERT | KW_SOURCE_SSL_CRL
+    | KW_SOURCE_SSL_CRLPATH | KW_SOURCE_SSL_KEY | KW_SOURCE_SSL_CIPHER
+    | KW_SOURCE_TLS_VERSION | KW_SOURCE_TLS_CIPHERSUITES | KW_SOURCE_PUBLIC_KEY_PATH
+    | KW_NETWORK_NAMESPACE
+    ;
+decimalSourceOption
+    : KW_SOURCE_PORT | KW_SOURCE_LOG_POS | KW_RELAY_LOG_POS | KW_SOURCE_HEARTBEAT_PERIOD
+    | KW_SOURCE_CONNECT_RETRY | KW_SOURCE_RETRY_COUNT | KW_SOURCE_DELAY | KW_SOURCE_ZSTD_COMPRESSION_LEVEL
+    ;
+boolSourceOption
+    : KW_REQUIRE_ROW_FORMAT
+    | KW_SOURCE_AUTO_POSITION
+    | KW_SOURCE_CONNECTION_AUTO_FAILOVER
+    | KW_SOURCE_SSL
+    | KW_SOURCE_SSL_VERIFY_SERVER_CERT
+    | KW_GET_SOURCE_PUBLIC_KEY
+    | KW_GTID_ONLY
+    ;
+otherSourceOption
+    : KW_PRIVILEGE_CHECKS_USER '=' (STRING_LITERAL | KW_NULL_LITERAL)
+    | KW_REQUIRE_TABLE_PRIMARY_KEY_CHECK '=' (KW_STREAM | KW_ON | KW_OFF | KW_GENERATE)
+    | KW_ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS '=' (KW_OFF | KW_LOCAL | gtuidSet)
     ;
 
 channelOption
@@ -1377,10 +1403,10 @@ channelOption
     ;
 
 replicationFilter
-    : KW_REPLICATE_DO_DB '=' '(' uidList ')'                           #doDbReplication
-    | KW_REPLICATE_IGNORE_DB '=' '(' uidList ')'                       #ignoreDbReplication
-    | KW_REPLICATE_DO_TABLE '=' '(' tables ')'                         #doTableReplication
-    | KW_REPLICATE_IGNORE_TABLE '=' '(' tables ')'                     #ignoreTableReplication
+    : KW_REPLICATE_DO_DB '=' '(' databaseName (',' databaseName)* ')'                           #doDbReplication
+    | KW_REPLICATE_IGNORE_DB '=' '(' databaseName (',' databaseName)* ')'                       #ignoreDbReplication
+    | KW_REPLICATE_DO_TABLE '=' '(' tableNames ')'                         #doTableReplication
+    | KW_REPLICATE_IGNORE_TABLE '=' '(' tableNames ')'                     #ignoreTableReplication
     | KW_REPLICATE_WILD_DO_TABLE '=' '(' simpleStrings ')'             #wildDoTableReplication
     | KW_REPLICATE_WILD_IGNORE_TABLE
        '=' '(' simpleStrings ')'                                    #wildIgnoreTableReplication
@@ -1397,16 +1423,14 @@ threadType
     ;
 
 untilOption
-    : gtids=(KW_SQL_BEFORE_GTIDS | KW_SQL_AFTER_GTIDS)
-      '=' gtuidSet                                                  #gtidsUntilOption
-    | KW_MASTER_LOG_FILE '=' STRING_LITERAL
-      ',' KW_MASTER_LOG_POS '=' decimalLiteral                         #masterLogUntilOption
-    | KW_RELAY_LOG_FILE '=' STRING_LITERAL
-      ',' KW_RELAY_LOG_POS '=' decimalLiteral                          #relayLogUntilOption
-    | KW_SQL_AFTER_MTS_GAPS                                            #sqlGapsUntilOption
+    : gtids=(KW_SQL_BEFORE_GTIDS | KW_SQL_AFTER_GTIDS) '=' gtuidSet                     #gtidsUntilOption
+    | KW_MASTER_LOG_FILE '=' STRING_LITERAL ',' KW_MASTER_LOG_POS '=' decimalLiteral    #masterLogUntilOption
+    | KW_SOURCE_LOG_FILE '=' STRING_LITERAL ',' KW_SOURCE_LOG_POS '=' decimalLiteral    #sourceLogUntilOption
+    | KW_RELAY_LOG_FILE '=' STRING_LITERAL ',' KW_RELAY_LOG_POS '=' decimalLiteral      #relayLogUntilOption
+    | KW_SQL_AFTER_MTS_GAPS                                                             #sqlGapsUntilOption
     ;
 
-connectionOption
+connectionOptions
     : KW_USER '=' conOptUser=STRING_LITERAL                            #userConnectionOption
     | KW_PASSWORD '=' conOptPassword=STRING_LITERAL                    #passwordConnectionOption
     | KW_DEFAULT_AUTH '=' conOptDefAuth=STRING_LITERAL                 #defaultAuthConnectionOption
@@ -1446,42 +1470,35 @@ xaRecoverWork
     ;
 
 
-// Prepared Statements
-
 prepareStatement
-    : KW_PREPARE uid KW_FROM
+    : KW_PREPARE stmt_name=uid KW_FROM
       (query=STRING_LITERAL | variable=LOCAL_ID)
     ;
 
 executeStatement
-    : KW_EXECUTE uid (KW_USING userVariables)?
+    : KW_EXECUTE stmt_name=uid (KW_USING userVariables)?
     ;
 
 deallocatePrepare
-    : dropFormat=(KW_DEALLOCATE | KW_DROP) KW_PREPARE uid
+    : dropFormat=(KW_DEALLOCATE | KW_DROP) KW_PREPARE stmt_name=uid
     ;
-
-
-// Compound Statements
 
 routineBody
     : blockStatement | sqlStatement
     ;
 
-// details
-
 blockStatement
-    : (uid ':')? KW_BEGIN
+    : (begin=uid ':')? KW_BEGIN
         (declareVariable SEMI)*
         (declareCondition SEMI)*
         (declareCursor SEMI)*
         (declareHandler SEMI)*
         procedureSqlStatement*
-      KW_END uid?
+      KW_END end=uid?
     ;
 
 caseStatement
-    : KW_CASE (uid | expression)? caseAlternative+
+    : KW_CASE (case_value=uid | expression)? caseAlternative+
       (KW_ELSE procedureSqlStatement+)?
       KW_END KW_CASE
     ;
@@ -1495,24 +1512,24 @@ ifStatement
     ;
 
 iterateStatement
-    : KW_ITERATE uid
+    : KW_ITERATE label=uid
     ;
 
 leaveStatement
-    : KW_LEAVE uid
+    : KW_LEAVE label=uid
     ;
 
 loopStatement
-    : (uid ':')?
+    : (begin_label=uid ':')?
       KW_LOOP procedureSqlStatement+
-      KW_END KW_LOOP uid?
+      KW_END KW_LOOP end_label=uid?
     ;
 
 repeatStatement
-    : (uid ':')?
+    : (begin_label=uid ':')?
       KW_REPEAT procedureSqlStatement+
       KW_UNTIL expression
-      KW_END KW_REPEAT uid?
+      KW_END KW_REPEAT end_label=uid?
     ;
 
 returnStatement
@@ -1520,31 +1537,29 @@ returnStatement
     ;
 
 whileStatement
-    : (uid ':')?
+    : (begin_label=uid ':')?
       KW_WHILE expression
       KW_DO procedureSqlStatement+
-      KW_END KW_WHILE uid?
+      KW_END KW_WHILE end_label=uid?
     ;
 
 cursorStatement
-    : KW_CLOSE uid                                                     #CloseCursor
-    | KW_FETCH (KW_NEXT? KW_FROM)? uid KW_INTO uidList                          #FetchCursor
-    | KW_OPEN uid                                                      #OpenCursor
+    : KW_CLOSE cursor_name=uid                                                     #CloseCursor
+    | KW_FETCH (KW_NEXT? KW_FROM)? cursor_name=uid KW_INTO var_names=uidList                 #FetchCursor
+    | KW_OPEN cursor_name=uid                                                      #OpenCursor
     ;
 
-// details
-
 declareVariable
-    : KW_DECLARE uidList dataType (KW_DEFAULT expression)?
+    : KW_DECLARE var_names=uidList dataType (KW_DEFAULT expression)?
     ;
 
 declareCondition
-    : KW_DECLARE uid KW_CONDITION KW_FOR
+    : KW_DECLARE condition_name=uid KW_CONDITION KW_FOR
       ( decimalLiteral | KW_SQLSTATE KW_VALUE? STRING_LITERAL)
     ;
 
 declareCursor
-    : KW_DECLARE uid KW_CURSOR KW_FOR selectStatement
+    : KW_DECLARE condition_name=uid KW_CURSOR KW_FOR selectStatement
     ;
 
 declareHandler
@@ -1557,7 +1572,7 @@ declareHandler
 handlerConditionValue
     : decimalLiteral                                                #handlerConditionCode
     | KW_SQLSTATE KW_VALUE? STRING_LITERAL                                #handlerConditionState
-    | uid                                                           #handlerConditionName
+    | condition_name=uid                                                           #handlerConditionName
     | KW_SQLWARNING                                                    #handlerConditionWarning
     | KW_NOT KW_FOUND                                                     #handlerConditionNotfound
     | KW_SQLEXCEPTION                                                  #handlerConditionException
@@ -1582,33 +1597,26 @@ elifAlternative
 //    Account management statements
 
 alterUser
-    : KW_ALTER KW_USER
-      userSpecification (',' userSpecification)*                    #alterUserMysqlV56
-    | KW_ALTER KW_USER ifExists?
-        userAuthOption (',' userAuthOption)*
-        (
-          KW_REQUIRE
-          (tlsNone=KW_NONE | tlsOption (KW_AND? tlsOption)* )
-        )?
+    : KW_ALTER KW_USER ifExists? (
+      (userSpecification (',' userSpecification)*)
+      | (
+        alterUserAuthOption (',' alterUserAuthOption)*
+        (KW_REQUIRE (KW_NONE | tlsOption (KW_AND? tlsOption)* ))?
         (KW_WITH userResourceOption+)?
         (userPasswordOption | userLockOption)*
-        (KW_COMMENT STRING_LITERAL | KW_ATTRIBUTE STRING_LITERAL)?        #alterUserMysqlV80
-    | KW_ALTER KW_USER ifExists?
-      (userName | uid) KW_DEFAULT KW_ROLE roleOption                      #alterUserMysqlV80
+        ((KW_COMMENT | KW_ATTRIBUTE) STRING_LITERAL)?
+      ) | ((userOrRoleName) KW_DEFAULT KW_ROLE roleOption)
+    )
     ;
 
 createUser
-    : KW_CREATE KW_USER userAuthOption (',' userAuthOption)*              #createUserMysqlV56
-    | KW_CREATE KW_USER ifNotExists?
-        userAuthOption (',' userAuthOption)*
+    : KW_CREATE KW_USER ifNotExists?
+        userName createUserAuthOption? (',' userName createUserAuthOption?)*
         (KW_DEFAULT KW_ROLE roleOption)?
-        (
-          KW_REQUIRE
-          (tlsNone=KW_NONE | tlsOption (KW_AND? tlsOption)* )
-        )?
+        (KW_REQUIRE (KW_NONE | tlsOption (KW_AND? tlsOption)*))?
         (KW_WITH userResourceOption+)?
         (userPasswordOption | userLockOption)*
-        (KW_COMMENT STRING_LITERAL |  KW_ATTRIBUTE STRING_LITERAL)?       #createUserMysqlV80
+        ((KW_COMMENT | KW_ATTRIBUTE) STRING_LITERAL)?
     ;
 
 dropUser
@@ -1617,26 +1625,21 @@ dropUser
 
 grantStatement
     : KW_GRANT privelegeClause (',' privelegeClause)*
-      KW_ON
-      privilegeObject=(KW_TABLE | KW_FUNCTION | KW_PROCEDURE)?
-      privilegeLevel
-      KW_TO userAuthOption (',' userAuthOption)*
-      (
-          KW_REQUIRE
-          (tlsNone=KW_NONE | tlsOption (KW_AND? tlsOption)* )
-        )?
+      KW_ON privilegeObjectType? privilegeLevel
+      KW_TO ((userAuthOption (',' userAuthOption)*) | userOrRoleNames)
+      (KW_REQUIRE (tlsNone=KW_NONE | tlsOption (KW_AND? tlsOption)*))?
       (KW_WITH (KW_GRANT KW_OPTION | userResourceOption)* )?
-      (KW_AS userName KW_WITH KW_ROLE roleOption)?
-    | KW_GRANT (userName | uid) (',' (userName | uid))*
-      KW_TO (userName | uid) (',' (userName | uid))*
+      (KW_AS userName (KW_WITH KW_ROLE roleOption)?)?
+    | KW_GRANT (KW_PROXY KW_ON)? (userOrRoleName) (',' (userOrRoleName))*
+      KW_TO (userOrRoleName) (',' (userOrRoleName))*
       (KW_WITH KW_ADMIN KW_OPTION)?
     ;
 
 roleOption
     : KW_DEFAULT
     | KW_NONE
-    | KW_ALL (KW_EXCEPT userName (',' userName)*)?
-    | userName (',' userName)*
+    | KW_ALL (KW_EXCEPT userOrRoleNames)?
+    | userOrRoleNames
     ;
 
 grantProxy
@@ -1645,37 +1648,85 @@ grantProxy
       (KW_WITH KW_GRANT KW_OPTION)?
     ;
 
+alterResourceGroup
+    : KW_ALTER KW_RESOURCE KW_GROUP groupName
+      (KW_VCPU '='? resourceGroupVcpuSpec)?
+      (KW_THREAD_PRIORITY '='? decimalLiteral)?
+      ((KW_ENABLE | KW_DISABLE) KW_FORCE?)?
+    ;
+
+createResourceGroup
+    : KW_CREATE KW_RESOURCE KW_GROUP groupNameCreate
+      KW_TYPE '=' (KW_SYSTEM | KW_USER)
+      (KW_VCPU '='? resourceGroupVcpuSpec)?
+      (KW_THREAD_PRIORITY '='? decimalLiteral)?
+      (KW_ENABLE | KW_DISABLE)?
+    ;
+
+dropResourceGroup
+    : KW_DROP KW_RESOURCE KW_GROUP groupName KW_FORCE?
+    ;
+
+setResourceGroup
+    : KW_SET KW_RESOURCE KW_GROUP groupName (KW_FOR decimalLiteral (',' decimalLiteral)*)?
+    ;
+
+resourceGroupVcpuSpec
+    : (decimalLiteral | decimalLiteral MINUS decimalLiteral) (',' resourceGroupVcpuSpec)*
+    ;
+
 renameUser
     : KW_RENAME KW_USER
       renameUserClause (',' renameUserClause)*
     ;
 
 revokeStatement
-    : KW_REVOKE privelegeClause (',' privelegeClause)*
-      KW_ON
-      privilegeObject=(KW_TABLE | KW_FUNCTION | KW_PROCEDURE)?
-      privilegeLevel
-      KW_FROM userName (',' userName)*                                 #detailRevoke
-    | KW_REVOKE KW_ALL KW_PRIVILEGES? ',' KW_GRANT KW_OPTION
-      KW_FROM userName (',' userName)*                                 #shortRevoke
-    | KW_REVOKE (userName | uid) (',' (userName | uid))*
-      KW_FROM (userName | uid) (',' (userName | uid))*                 #roleRevoke
+    : KW_REVOKE ifExists? privelegeClause (',' privelegeClause)*
+        KW_ON privilegeObjectType? privilegeLevel
+        KW_FROM userOrRoleNames
+        ignoreUnknownUser?                                         #detailRevoke
+    | KW_REVOKE ifExists? KW_ALL KW_PRIVILEGES? ',' KW_GRANT KW_OPTION
+        KW_FROM userOrRoleNames ignoreUnknownUser?                 #shortRevoke
+    | KW_REVOKE ifExists? (KW_PROXY KW_ON)? userOrRoleNames
+        KW_FROM userOrRoleNames ignoreUnknownUser?                 #proxyAndRoleRevoke
     ;
 
-revokeProxy
-    : KW_REVOKE KW_PROXY KW_ON onUser=userName
-      KW_FROM fromFirst=userName (',' fromOther+=userName)*
+ignoreUnknownUser
+    : KW_IGNORE KW_UNKNOWN KW_USER
+    ;
+
+privilegeObjectType
+    : KW_TABLE | KW_FUNCTION | KW_PROCEDURE
     ;
 
 setPasswordStatement
-    : KW_SET KW_PASSWORD (KW_FOR userName)?
-      '=' ( passwordFunctionClause | STRING_LITERAL)
+    : KW_SET KW_PASSWORD (KW_FOR userName)? '=' ( passwordFunctionClause | STRING_LITERAL)   #v57
+    | KW_SET KW_PASSWORD (KW_FOR userName)? (KW_TO KW_RANDOM | '=' STRING_LITERAL) (KW_REPLACE STRING_LITERAL)? (KW_RETAIN KW_CURRENT KW_PASSWORD)?  #v80
     ;
-
-// details
 
 userSpecification
     : userName userPasswordOption
+    ;
+
+alterUserAuthOption
+    : userName KW_IDENTIFIED KW_BY STRING_LITERAL authOptionClause
+    | userName KW_IDENTIFIED KW_BY KW_RANDOM KW_PASSWORD authOptionClause
+    | userName KW_IDENTIFIED KW_WITH authenticationRule
+    | userName KW_DISCARD KW_OLD KW_PASSWORD
+    | userName ((KW_ADD | KW_MODIFY | KW_DROP) factor factorAuthOption?)+
+    | userName registrationOption?
+    | userName
+    ;
+
+// createUser auth_option, 2fa_auth_option, 3fa_auth_option
+createUserAuthOption
+    : KW_IDENTIFIED KW_BY (STRING_LITERAL | (KW_RANDOM KW_PASSWORD) | (KW_PASSWORD STRING_LITERAL)) (KW_AND createUserAuthOption)?
+    | KW_IDENTIFIED KW_WITH authPlugin=uid ((KW_BY (STRING_LITERAL | (KW_RANDOM KW_PASSWORD))) | KW_AS STRING_LITERAL)? (KW_AND createUserAuthOption)?
+    | KW_IDENTIFIED KW_WITH authPlugin=uid createUserInitialAuthOption?
+    ;
+createUserInitialAuthOption
+    : KW_INITIAL KW_AUTHENTICATION KW_IDENTIFIED KW_BY ((KW_RANDOM KW_PASSWORD) | STRING_LITERAL)
+    | KW_INITIAL KW_AUTHENTICATION KW_IDENTIFIED KW_WITH authPlugin=uid KW_AS STRING_LITERAL
     ;
 
 userAuthOption
@@ -1691,10 +1742,10 @@ authOptionClause
     ;
 
 authenticationRule
-    : authPlugin
+    : authPlugin=uid
       ((KW_BY | KW_USING | KW_AS) (STRING_LITERAL | KW_RANDOM KW_PASSWORD)
       authOptionClause)?                                            #module
-    | authPlugin
+    | authPlugin=uid
       KW_USING passwordFunctionClause                                  #passwordModuleOption
     ;
 
@@ -1730,8 +1781,22 @@ userLockOption
     : KW_ACCOUNT lockType=(KW_LOCK | KW_UNLOCK)
     ;
 
+factorAuthOption
+    : KW_IDENTIFIED (KW_WITH authPlugin=uid)? ((KW_BY (STRING_LITERAL | (KW_RANDOM KW_PASSWORD))) | KW_AS STRING_LITERAL)
+    ;
+
+registrationOption
+    : factor KW_INITIATE KW_REGISTRATION
+    | factor KW_FINISH KW_REGISTRATION KW_SET KW_CHALLENGE_RESPONSE KW_AS STRING_LITERAL
+    | factor KW_UNREGISTER
+    ;
+
+factor
+    : (TWO_DECIMAL | THREE_DECIMAL) KW_FACTOR
+    ;
+
 privelegeClause
-    : privilege ( '(' uidList ')' )?
+    : privilege ( '(' columnNames ')' )?
     ;
 
 privilege
@@ -1774,56 +1839,72 @@ renameUserClause
 //    Table maintenance statements
 
 analyzeTable
-    : KW_ANALYZE actionOption=(KW_NO_WRITE_TO_BINLOG | KW_LOCAL)?
-       (KW_TABLE | KW_TABLES) tables
-       ( KW_UPDATE KW_HISTOGRAM KW_ON fullColumnName (',' fullColumnName)* (KW_WITH decimalLiteral KW_BUCKETS)? )?
-       ( KW_DROP KW_HISTOGRAM KW_ON fullColumnName (',' fullColumnName)* )?
+    : KW_ANALYZE tableActionOption? KW_TABLE tableNames
+    | KW_ANALYZE tableActionOption? KW_TABLE tableName KW_UPDATE KW_HISTOGRAM KW_ON columnNames (KW_WITH decimalLiteral KW_BUCKETS)?
+    | KW_ANALYZE tableActionOption? KW_TABLE tableName KW_UPDATE KW_HISTOGRAM KW_ON columnName (KW_USING KW_DATA STRING_LITERAL)?
+    | KW_ANALYZE tableActionOption? KW_TABLE tableName KW_DROP KW_HISTOGRAM KW_ON columnNames
     ;
 
 checkTable
-    : KW_CHECK KW_TABLE tables checkTableOption*
+    : KW_CHECK KW_TABLE tableNames checkTableOption*
     ;
 
 checksumTable
-    : KW_CHECKSUM KW_TABLE tables actionOption=(KW_QUICK | KW_EXTENDED)?
+    : KW_CHECKSUM KW_TABLE tableNames actionOption=(KW_QUICK | KW_EXTENDED)?
     ;
 
 optimizeTable
-    : KW_OPTIMIZE actionOption=(KW_NO_WRITE_TO_BINLOG | KW_LOCAL)?
-      (KW_TABLE | KW_TABLES) tables
+    : KW_OPTIMIZE tableActionOption?
+      (KW_TABLE | KW_TABLES) tableNames
     ;
 
 repairTable
-    : KW_REPAIR actionOption=(KW_NO_WRITE_TO_BINLOG | KW_LOCAL)?
-      KW_TABLE tables
+    : KW_REPAIR tableActionOption?
+      KW_TABLE tableNames
       KW_QUICK? KW_EXTENDED? KW_USE_FRM?
     ;
 
-// details
+tableActionOption
+    : KW_NO_WRITE_TO_BINLOG | KW_LOCAL
+    ;
 
 checkTableOption
     : KW_FOR KW_UPGRADE | KW_QUICK | KW_FAST | KW_MEDIUM | KW_EXTENDED | KW_CHANGED
     ;
 
-
-//    Plugin and udf statements
-
-createUdfunction
-    : KW_CREATE KW_AGGREGATE? KW_FUNCTION ifNotExists? uid
+createFunction
+    : KW_CREATE KW_AGGREGATE? KW_FUNCTION ifNotExists? functionNameCreate
       KW_RETURNS returnType=(KW_STRING | KW_INTEGER | KW_REAL | KW_DECIMAL)
       KW_SONAME STRING_LITERAL
     ;
 
+installComponent
+    : KW_INSTALL KW_COMPONENT component_name=uid (',' component_name=uid)* (KW_SET variableExpr (',' variableExpr)*)?
+    ;
+variableExpr
+    : (KW_GLOBAL | GLOBAL_ID | KW_PERSIST | PERSIST_ID) system_var_name=fullId '=' expression
+    ;
+
+uninstallComponent
+    : KW_UNINSTALL KW_COMPONENT component_name=uid (',' component_name=uid)*
+    ;
+
 installPlugin
-    : KW_INSTALL KW_PLUGIN uid KW_SONAME STRING_LITERAL
+    : KW_INSTALL KW_PLUGIN pluginName=uid KW_SONAME STRING_LITERAL
     ;
 
 uninstallPlugin
-    : KW_UNINSTALL KW_PLUGIN uid
+    : KW_UNINSTALL KW_PLUGIN pluginName=uid
     ;
 
 
-//    Set and show statements
+cloneStatement
+    : KW_CLONE KW_LOCAL KW_DATA KW_DIRECTORY '='? STRING_LITERAL
+    | KW_CLONE KW_INSTANCE KW_FROM userHostPort
+        KW_IDENTIFIED KW_BY STRING_LITERAL
+        (KW_DATA KW_DIRECTORY '='? STRING_LITERAL)?
+        (KW_REQUIRE KW_NO? KW_SSL)?
+    ;
 
 setStatement
     : KW_SET variableClause ('=' | ':=') (expression | KW_ON)
@@ -1834,31 +1915,25 @@ setStatement
     | setPasswordStatement                                                      #setPassword
     | setTransactionStatement                                                   #setTransaction
     | setAutocommitStatement                                                    #setAutocommit
-    | KW_SET fullId ('=' | ':=') expression
-      (',' fullId ('=' | ':=') expression)*                                     #setNewValueInsideTrigger
+    | KW_SET system_var_name=fullId ('=' | ':=') expression (',' system_var_name=fullId ('=' | ':=') expression)*    #setNewValueInsideTrigger
     ;
 
 showStatement
     : KW_SHOW logFormat=(KW_BINARY | KW_MASTER) KW_LOGS                         #showMasterLogs
-    | KW_SHOW logFormat=(KW_BINLOG | KW_RELAYLOG)
-      KW_EVENTS (KW_IN filename=STRING_LITERAL)?
+    | KW_SHOW logFormat=(KW_BINLOG | KW_RELAYLOG) KW_EVENTS
+        (KW_IN filename=STRING_LITERAL)?
         (KW_FROM fromPosition=decimalLiteral)?
-        (KW_LIMIT
-          (offset=decimalLiteral ',')?
-          rowCount=decimalLiteral
-        )?                                                          #showLogEvents
+        (KW_LIMIT (offset=decimalLiteral ',')? rowCount=decimalLiteral)?
+        channelOption?       #showLogEvents
     | KW_SHOW showCommonEntity showFilter?                             #showObjectFilter
-    | KW_SHOW KW_FULL? columnsFormat=(KW_COLUMNS | KW_FIELDS)
+    | KW_SHOW KW_EXTENDED? KW_FULL? columnsFormat=(KW_COLUMNS | KW_FIELDS)
       tableFormat=(KW_FROM | KW_IN) tableName
-        (schemaFormat=(KW_FROM | KW_IN) uid)? showFilter?                 #showColumns
-    | KW_SHOW KW_CREATE schemaFormat=(KW_DATABASE | KW_SCHEMA)
-      ifNotExists? uid                                              #showCreateDb
-    | KW_SHOW KW_CREATE
-        namedEntity=(
-          KW_EVENT | KW_FUNCTION | KW_PROCEDURE
-          | KW_TABLE | KW_TRIGGER | KW_VIEW
-        )
-        fullId                                                      #showCreateFullIdObject
+        (schemaFormat=(KW_FROM | KW_IN) databaseName)? showFilter?                 #showColumns
+    | KW_SHOW KW_CREATE (KW_DATABASE | KW_SCHEMA) ifNotExists? databaseNameCreate      #showCreateDb
+    | KW_SHOW KW_CREATE (KW_EVENT | KW_PROCEDURE | KW_TRIGGER) fullId    #showCreateFullIdObject
+    | KW_SHOW KW_CREATE KW_FUNCTION functionNameCreate    #showCreateFunction
+    | KW_SHOW KW_CREATE KW_VIEW viewNameCreate    #showCreateView
+    | KW_SHOW KW_CREATE KW_TABLE tableNameCreate                    #showCreateTable
     | KW_SHOW KW_CREATE KW_USER userName                                     #showCreateUser
     | KW_SHOW KW_ENGINE engineName engineOption=(KW_STATUS | KW_MUTEX)          #showEngine
     | KW_SHOW showGlobalInfoClause                                     #showGlobalInfo
@@ -1868,32 +1943,29 @@ showStatement
           rowCount=decimalLiteral
         )?                                                          #showErrors
     | KW_SHOW KW_COUNT '(' '*' ')' errorFormat=(KW_ERRORS | KW_WARNINGS)        #showCountErrors
-    | KW_SHOW showSchemaEntity
-        (schemaFormat=(KW_FROM | KW_IN) uid)? showFilter?                 #showSchemaFilter
-    | KW_SHOW routine=(KW_FUNCTION | KW_PROCEDURE) KW_CODE fullId               #showRoutine
-    | KW_SHOW KW_GRANTS (KW_FOR userName)?                                   #showGrants
-    | KW_SHOW indexFormat=(KW_INDEX | KW_INDEXES | KW_KEYS)
+    | KW_SHOW showSchemaEntity (schemaFormat=(KW_FROM | KW_IN) databaseName)? showFilter?          #showSchemaFilter
+    | KW_SHOW KW_PROCEDURE KW_CODE proc_name=fullId               #showPercedureCode
+    | KW_SHOW KW_FUNCTION KW_CODE functionName               #showFunctionCode
+    | KW_SHOW KW_GRANTS (KW_FOR userOrRoleName (KW_USING userOrRoleNames)?)?                                   #showGrants
+    | KW_SHOW KW_EXTENDED? indexFormat=(KW_INDEX | KW_INDEXES | KW_KEYS)
       tableFormat=(KW_FROM | KW_IN) tableName
-        (schemaFormat=(KW_FROM | KW_IN) uid)? (KW_WHERE expression)?         #showIndexes
-    | KW_SHOW KW_OPEN KW_TABLES ( schemaFormat=(KW_FROM | KW_IN) uid)?
-      showFilter?                                                   #showOpenTables
-    | KW_SHOW KW_PROFILE showProfileType (',' showProfileType)*
+        (schemaFormat=(KW_FROM | KW_IN) databaseName)? (KW_WHERE expression)?         #showIndexes
+    | KW_SHOW KW_OPEN KW_TABLES ((KW_FROM | KW_IN) databaseName)? showFilter?     #showOpenTables
+    | KW_SHOW KW_PROFILE (showProfileType (',' showProfileType)*)?
         (KW_FOR KW_QUERY queryCount=decimalLiteral)?
-        (KW_LIMIT
-          (offset=decimalLiteral ',')?
-          rowCount=decimalLiteral
-        )                                                           #showProfile
-    | KW_SHOW KW_SLAVE KW_STATUS (KW_FOR KW_CHANNEL STRING_LITERAL)?               #showSlaveStatus
+        (KW_LIMIT rowCount=decimalLiteral (KW_OFFSET offset=decimalLiteral)?)?       #showProfile
+    | KW_SHOW (KW_REPLICA | KW_SLAVE) KW_STATUS channelOption?               #showSlaveStatus
+    | KW_SHOW KW_REPLICAS              #showReplicas
     ;
 
 // details
 
 variableClause
-    : LOCAL_ID | GLOBAL_ID | ( ('@' '@')? (KW_GLOBAL | KW_SESSION | KW_LOCAL)  )? uid
+    : LOCAL_ID | GLOBAL_ID | (('@' '@')? (KW_GLOBAL | KW_PERSIST | KW_PERSIST_ONLY | KW_SESSION | KW_LOCAL))? target=uid
     ;
 
 showCommonEntity
-    : KW_CHARACTER KW_SET | KW_COLLATION | KW_DATABASES | KW_SCHEMAS
+    : KW_CHARACTER KW_SET | KW_CHARSET | KW_COLLATION | KW_DATABASES | KW_SCHEMAS
     | KW_FUNCTION KW_STATUS | KW_PROCEDURE KW_STATUS
     | (KW_GLOBAL | KW_SESSION)? (KW_STATUS | KW_VARIABLES)
     ;
@@ -1910,7 +1982,7 @@ showGlobalInfoClause
     ;
 
 showSchemaEntity
-    : KW_EVENTS | KW_TABLE KW_STATUS | KW_FULL? KW_TABLES | KW_TRIGGERS
+    : KW_EVENTS | KW_TABLE KW_STATUS | KW_EXTENDED? KW_FULL? KW_TABLES | KW_TRIGGERS
     ;
 
 showProfileType
@@ -1926,13 +1998,13 @@ binlogStatement
     ;
 
 cacheIndexStatement
-    : KW_CACHE KW_INDEX tableIndexes (',' tableIndexes)*
-      ( KW_PARTITION '(' (uidList | KW_ALL) ')' )?
-      KW_IN schema=uid
+    : KW_CACHE KW_INDEX
+        (tableIndex (',' tableIndex)* | tableName KW_PARTITION '(' (partitionNames | KW_ALL) ')')
+        KW_IN databaseName
     ;
 
 flushStatement
-    : KW_FLUSH flushFormat=(KW_NO_WRITE_TO_BINLOG | KW_LOCAL)?
+    : KW_FLUSH tableActionOption?
       flushOption (',' flushOption)*
     ;
 
@@ -1945,20 +2017,32 @@ loadIndexIntoCache
       loadedTableIndexes (',' loadedTableIndexes)*
     ;
 
-// remark reset (maser | slave) describe in replication's
-//  statements section
 resetStatement
-    : KW_RESET KW_QUERY KW_CACHE
+    : KW_RESET resetOption (',' resetOption)*
+    ;
+
+resetOption
+    : KW_MASTER | KW_REPLICA | KW_QUERY KW_CACHE | KW_SLAVE
+    ;
+
+resetPersist
+    : KW_RESET KW_PERSIST (ifExists? system_var_name=uid)?
+    ;
+
+resetAllChannel
+    : KW_RESET (KW_REPLICA | KW_SLAVE) KW_ALL? channelOption?
+    ;
+
+reStartStatement
+    : KW_RESTART
     ;
 
 shutdownStatement
     : KW_SHUTDOWN
     ;
 
-// details
-
-tableIndexes
-    : tableName ( indexFormat=(KW_INDEX | KW_KEY)? '(' uidList ')' )?
+tableIndex
+    : tableName (indexFormat=(KW_INDEX | KW_KEY) '(' indexNames ')')?
     ;
 
 flushOption
@@ -1971,7 +2055,7 @@ flushOption
         | KW_USER_RESOURCES | KW_TABLES (KW_WITH KW_READ KW_LOCK)?
        )                                                            #simpleFlushOption
     | KW_RELAY KW_LOGS channelOption?                                     #channelFlushOption
-    | (KW_TABLE | KW_TABLES) tables? flushTableOption?                    #tableFlushOption
+    | (KW_TABLE | KW_TABLES) tableNames? flushTableOption?                    #tableFlushOption
     ;
 
 flushTableOption
@@ -1981,28 +2065,24 @@ flushTableOption
 
 loadedTableIndexes
     : tableName
-      ( KW_PARTITION '(' (partitionList=uidList | KW_ALL) ')' )?
-      ( indexFormat=(KW_INDEX | KW_KEY)? '(' indexList=uidList ')' )?
+      ( KW_PARTITION '(' (partitionNames | KW_ALL) ')' )?
+      ( indexFormat=(KW_INDEX | KW_KEY)? '(' indexNames ')' )?
       (KW_IGNORE KW_LEAVES)?
     ;
 
-
-// Utility Statements
-
-
 simpleDescribeStatement
     : command=(KW_EXPLAIN | KW_DESCRIBE | KW_DESC) tableName
-      (column=uid | pattern=STRING_LITERAL)?
+      (column=columnName | pattern=STRING_LITERAL)?
     ;
 
 fullDescribeStatement
     : command=(KW_EXPLAIN | KW_DESCRIBE | KW_DESC)
-      (
-        formatType=(KW_EXTENDED | KW_PARTITIONS | KW_FORMAT )
-        '='
-        formatValue=(KW_TRADITIONAL | KW_JSON)
-      )?
-      describeObjectClause
+        (KW_EXTENDED | KW_PARTITIONS | KW_FORMAT '=' (KW_TRADITIONAL | KW_JSON | KW_TREE))?
+        describeObjectClause
+    ;
+
+analyzeDescribeStatement
+    : command=(KW_EXPLAIN | KW_DESCRIBE | KW_DESC) KW_ANALYZE (KW_FORMAT '=' KW_TREE)? selectStatement
     ;
 
 helpStatement
@@ -2010,7 +2090,7 @@ helpStatement
     ;
 
 useStatement
-    : KW_USE uid
+    : KW_USE databaseName
     ;
 
 signalStatement
@@ -2070,40 +2150,105 @@ diagnosticsConditionInformationName
     | KW_CURSOR_NAME
     ;
 
-// details
-
 describeObjectClause
-    : (
-        selectStatement | deleteStatement | insertStatement
-        | replaceStatement | updateStatement
-      )                                                             #describeStatements
-    | KW_FOR KW_CONNECTION uid                                            #describeConnection
+    : (selectStatement | deleteStatement | insertStatement | replaceStatement | updateStatement)    #describeStatements
+    | KW_FOR KW_CONNECTION connection_id=uid                                            #describeConnection
     ;
 
 
-// Common Clauses
-
-//    DB Objects
-
-fullId
-    : uid (DOT_ID | '.' uid)?
+databaseNameCreate
+    : fullId
+    ;
+databaseName
+    : fullId
     ;
 
+functionNameCreate
+    : fullId
+    ;
+functionName
+    : fullId
+    ;
+
+viewNameCreate
+    : fullId
+    ;
+viewName
+    : fullId
+    ;
+
+indexNameCreate
+    : uid
+    ;
+indexNames
+    : indexName (',' indexName)*
+    ;
+indexName
+    : uid
+    ;
+
+groupNameCreate
+    : uid
+    ;
+groupName
+    : uid
+    ;
+
+tableNameCreate
+    : fullId
+    ;
+tableNames
+    : tableName (',' tableName)*
+    ;
 tableName
     : fullId
     ;
 
-roleName
+userOrRoleNames
+    : userOrRoleName (',' userOrRoleName)*
+    ;
+userOrRoleName
     : userName | uid
     ;
 
-fullColumnName
+columnNameCreate
+    : uid (dottedId dottedId? )?
+    | .? dottedId dottedId?
+    ;
+columnNames
+    : columnName (',' columnName)*
+    ;
+columnName
     : uid (dottedId dottedId? )?
     | .? dottedId dottedId?
     ;
 
+tablespaceNameCreate
+    : uid
+    ;
+tablespaceName
+    : uid
+    ;
+
+partitionNameCreate
+    : uid
+    ;
+partitionNames
+    : partitionName (',' partitionName)*
+    ;
+partitionName
+    : uid
+    ;
+
 indexColumnName
-    : ((uid | STRING_LITERAL) ('(' decimalLiteral ')')? | expression) sortType=(KW_ASC | KW_DESC)?
+    : (uid ('(' decimalLiteral ')')? | expression) sortType=(KW_ASC | KW_DESC)?
+    ;
+
+userHostPort
+    : userAtHost COLON_SYMB decimalLiteral
+    ;
+userAtHost
+    : simpleUserName HOST_IP_ADDRESS
     ;
 
 simpleUserName
@@ -2112,9 +2257,8 @@ simpleUserName
     | KW_ADMIN
     | keywordsCanBeId;
 hostName: (LOCAL_ID | HOST_IP_ADDRESS | '@' );
- userName
-    : simpleUserName
-    | simpleUserName hostName
+userName
+    : simpleUserName hostName?
     | currentUserExpression;
 
 mysqlVariable
@@ -2130,7 +2274,7 @@ charsetName
     ;
 
 collationName
-    : uid | STRING_LITERAL;
+    : uid;
 
 engineName
     : engineNameBase
@@ -2163,10 +2307,13 @@ xuidStringId
     | HEXADECIMAL_LITERAL+
     ;
 
-authPlugin
-    : uid | STRING_LITERAL
+fullId
+    : uid dottedId?
     ;
 
+uidList
+    : uid (',' uid)*
+    ;
 uid
     : simpleId
     //| DOUBLE_QUOTE_ID
@@ -2192,11 +2339,8 @@ dottedId
     | '.' uid
     ;
 
-
-//    Literals
-
 decimalLiteral
-    : DECIMAL_LITERAL | ZERO_DECIMAL | ONE_DECIMAL | TWO_DECIMAL | REAL_LITERAL
+    : DECIMAL_LITERAL | ZERO_DECIMAL | ONE_DECIMAL | TWO_DECIMAL | THREE_DECIMAL | REAL_LITERAL
     ;
 
 fileSizeLiteral
@@ -2311,19 +2455,6 @@ lengthTwoOptionalDimension
     ;
 
 
-//    Common Lists
-
-uidList
-    : uid (',' uid)*
-    ;
-
-fullColumnNameList
-    : fullColumnName (',' fullColumnName)*
-    ;
-
-tables
-    : tableName (',' tableName)*
-    ;
 
 indexColumnNames
     : '(' indexColumnName (',' indexColumnName)* ')'
@@ -2333,8 +2464,18 @@ expressions
     : expression (',' expression)*
     ;
 
+valuesOrValueList
+    : (KW_VALUES | KW_VALUE) expressionsWithDefaults (',' expressionsWithDefaults)*
+    ;
+
+// (valueList)
 expressionsWithDefaults
-    : expressionOrDefault (',' expressionOrDefault)*
+    : '(' expressionOrDefault (',' expressionOrDefault)* ')'
+    ;
+
+// value
+expressionOrDefault
+    : expression | KW_DEFAULT
     ;
 
 constants
@@ -2370,14 +2511,9 @@ currentTimestamp
     )
     ;
 
-expressionOrDefault
-    : expression | KW_DEFAULT
-    ;
-
 ifExists
     : KW_IF KW_EXISTS
     ;
-
 
 ifNotExists
     : KW_IF KW_NOT KW_EXISTS
@@ -2385,11 +2521,6 @@ ifNotExists
 
 orReplace
     : KW_OR KW_REPLACE
-    ;
-
-waitNowaitClause
-    : KW_WAIT decimalLiteral
-    | KW_NOWAIT
     ;
 
 //    Functions
@@ -2412,7 +2543,7 @@ specificFunction
     | KW_CONVERT '(' expression separator=',' convertedDataType ')'    #dataTypeFunctionCall
     | KW_CONVERT '(' expression KW_USING charsetName ')'                  #dataTypeFunctionCall
     | KW_CAST '(' expression KW_AS convertedDataType ')'                  #dataTypeFunctionCall
-    | KW_VALUES '(' fullColumnName ')'                                 #valuesFunctionCall
+    | KW_VALUES '(' columnName ')'                                 #valuesFunctionCall
     | KW_CASE expression caseFuncAlternative+
       (KW_ELSE elseArg=functionArg)? KW_END                               #caseExpressionFunctionCall
     | KW_CASE caseFuncAlternative+
@@ -2559,13 +2690,11 @@ frameClause
     ;
 
 frameUnits
-    : KW_ROWS
-    | KW_RANGE
+    : KW_ROWS | KW_RANGE
     ;
 
 frameExtent
-    : frameRange
-    | frameBetween
+    : frameRange | frameBetween
     ;
 
 frameBetween
@@ -2592,19 +2721,15 @@ scalarFunctionName
     ;
 
 passwordFunctionClause
-    : functionName=(KW_PASSWORD | KW_OLD_PASSWORD) '(' functionArg ')'
+    : (KW_PASSWORD | KW_OLD_PASSWORD) '(' functionArg ')'
     ;
 
 functionArgs
-    : (constant | fullColumnName | functionCall | expression)
-    (
-      ','
-      (constant | fullColumnName | functionCall | expression)
-    )*
+    : functionArg (',' functionArg)*
     ;
 
 functionArg
-    : constant | fullColumnName | functionCall | expression
+    : constant | columnName | functionCall | expression
     ;
 
 
@@ -2636,7 +2761,7 @@ predicate
 // Add in ASTVisitor nullNotnull in constant
 expressionAtom
     : constant                                                      #constantExpressionAtom
-    | fullColumnName                                                #fullColumnNameExpressionAtom
+    | columnName                                                #columnNameExpressionAtom
     | functionCall                                                  #functionCallExpressionAtom
     | expressionAtom KW_COLLATE collationName                          #collateExpressionAtom
     | mysqlVariable                                                 #mysqlVariableExpressionAtom
@@ -2658,8 +2783,12 @@ unaryOperator
     ;
 
 comparisonOperator
-    : '=' | '>' | '<' | '<' '=' | '>' '='
+    : comparisonBase
     | '<' '>' | '!' '=' | '<' '=' '>'
+    ;
+
+comparisonBase
+    : '=' | '>' | '<' | '<' '=' | '>' '='
     ;
 
 logicalOperator
