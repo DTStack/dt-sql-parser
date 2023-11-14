@@ -65,22 +65,22 @@ statement
         (KW_TBLPROPERTIES tblProp=properties)?
         KW_AS query                                                       #createKuduTableAsSelect
     | KW_ALTER KW_TABLE from=qualifiedName KW_RENAME KW_TO to=qualifiedName        #renameTable
-    | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)* RPAREN        #addColumns
-    | KW_ALTER KW_TABLE qualifiedName KW_REPLACE KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)* RPAREN        #replaceColumns
+    | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)*? RPAREN        #addColumns
+    | KW_ALTER KW_TABLE qualifiedName KW_REPLACE KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)*? RPAREN        #replaceColumns
     | KW_ALTER KW_TABLE qualifiedName KW_CHANGE KW_COLUMN columnSpecWithKudu      #editColumnDefine
     | KW_ALTER KW_TABLE qualifiedName KW_ADD KW_COLUMN (KW_IF KW_NOT KW_EXISTS)? columnSpecWithKudu        #addSingleColumn
     | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_COLUMN)? identifier        #dropSingleColumn
     | KW_ALTER KW_TABLE qualifiedName KW_SET KW_OWNER (KW_USER | KW_ROLE) identifier        #alterTableOwner
-    | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier LCURLY (KW_SET kuduStorageAttr | KW_DROP KW_DEFAULT) RCURLY        #alterTableKuduOnly
+    | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier (KW_SET kuduStorageAttr | KW_DROP KW_DEFAULT)        #alterTableKuduOnly
     | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier KW_SET KW_COMMENT string      #alterTableNonKudu
     | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_PARTITION partitionSpec (KW_LOCATION string)? (cacheSpec)?     #addPartitionByValue
     | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_RANGE KW_PARTITION kuduPartitionSpec      #addPartitionByRange
     | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_PARTITION partitionSpec KW_PURGE?    #dropPartitionByValue
     | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_RANGE KW_PARTITION kuduPartitionSpec      #addPartitionByRange
     | KW_ALTER KW_TABLE qualifiedName KW_RECOVER KW_PARTITIONS      #recoverPartitions
-    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET LCURLY ((KW_FILEFORMAT fileFormat) | (KW_ROW KW_FORMAT rowFormat) | (KW_LOCATION string) | (KW_TBLPROPERTIES tableOrSerdePropertities) | (KW_SERDEPROPERTIES tableOrSerdePropertities)) RCURLY      #alterFormat
-    | KW_ALTER KW_TABLE qualifiedName identifier LPAREN statsKey RPAREN   #alterStatsKey
-    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET LCURLY ((KW_CACHED KW_IN string (KW_WITH KW_REPLICATION EQ number)?) | KW_UNCACHED) RCURLY   #alterPartitionCache
+    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET ((KW_FILEFORMAT fileFormat) | (KW_ROW KW_FORMAT rowFormat) | (KW_LOCATION string) | (KW_TBLPROPERTIES tableOrSerdePropertities) | (KW_SERDEPROPERTIES tableOrSerdePropertities))      #alterFormat
+    | KW_ALTER KW_TABLE qualifiedName KW_SET KW_COLUMN KW_STATS identifier LPAREN statsKey EQ string (COMMA statsKey EQ string)? RPAREN   #alterStatsKey
+    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET ((KW_CACHED KW_IN string (KW_WITH KW_REPLICATION EQ number)?) | KW_UNCACHED)   #alterPartitionCache
     | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? qualifiedName KW_PURGE?                     #dropTable
     | KW_TRUNCATE KW_TABLE? (KW_IF KW_EXISTS)? qualifiedName                       #truncateTable
     | KW_CREATE KW_VIEW (KW_IF KW_NOT KW_EXISTS)?  qualifiedName viewColumns?
@@ -196,7 +196,7 @@ columnSpecWithKudu
     ;
 
 kuduAttributes
-    : LCURLY ((KW_NOT)? KW_NULL | kuduStorageAttr) RCURLY
+    : ((KW_NOT)? KW_NULL | kuduStorageAttr)
     ;
 
 kuduStorageAttr
@@ -206,10 +206,10 @@ kuduStorageAttr
     | KW_BLOCK_SIZE number
     ;
 statsKey
-    : 'statsKey=numDVs'
-    | 'statsKey=numNulls'
-    | 'statsKey=avgSize'
-    | 'statsKey=maxSize'
+    :  STATS_NUMDVS
+    |  STATS_NUMNULLS
+    |  STATS_AVGSIZE
+    |  STATS_MAXSIZE
     ;
 tableOrSerdePropertities
     : LPAREN identifier EQ constants (COMMA identifier EQ constants)*? RPAREN
@@ -223,7 +223,7 @@ fileFormat
     | KW_RCFILE
     ;
 partitionSpec
-    : LPAREN identifier partitionCol constants RPAREN
+    : LPAREN identifier partitionCol constants (COMMA identifier partitionCol constants)? RPAREN
     ;
 kuduPartitionSpec
     : KW_VALUE partitionCol constants | constants rangeOperator KW_VALUES rangeOperator constants
@@ -254,6 +254,8 @@ partitionCol
     | KW_LIKE
     | KW_RLIKE
     | KW_REGEXP
+    | KW_BETWEEN
+    | KW_IN
     | rangeOperator
     ;
 

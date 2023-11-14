@@ -313,6 +313,12 @@ KW_SEQUENCEFILE                           : 'SEQUENCEFILE'; //Sequence文件格�
 KW_RCFILE                                 : 'RCFILE'; //RC文件格式
 
 
+// TODO: 这种写法是否正确
+STATS_NUMDVS   : '\'NUMDVS\'';
+STATS_NUMNULLS : '\'NUMNULLS\'';
+STATS_AVGSIZE  : '\'AVGSIZE\'';
+STATS_MAXSIZE  : '\'MAXSIZE\'';
+
 EQ  : '=';
 NEQ : '<>' | '!=';
 LT  : '<';
