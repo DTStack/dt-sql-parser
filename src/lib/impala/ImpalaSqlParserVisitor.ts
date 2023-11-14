@@ -34,8 +34,9 @@ import { ArithmeticBinaryContext } from "./ImpalaSqlParserParser";
 import { ConcatenationContext } from "./ImpalaSqlParserParser";
 import { BasicStringLiteralContext } from "./ImpalaSqlParserParser";
 import { UnicodeStringLiteralContext } from "./ImpalaSqlParserParser";
-import { UnspecifiedPrincipalContext } from "./ImpalaSqlParserParser";
 import { RolePrincipalContext } from "./ImpalaSqlParserParser";
+import { UserPrincipalContext } from "./ImpalaSqlParserParser";
+import { GroupPrincipalContext } from "./ImpalaSqlParserParser";
 import { UnboundedFrameContext } from "./ImpalaSqlParserParser";
 import { CurrentRowBoundContext } from "./ImpalaSqlParserParser";
 import { BoundedFrameContext } from "./ImpalaSqlParserParser";
@@ -85,7 +86,6 @@ import { CreateRoleContext } from "./ImpalaSqlParserParser";
 import { DropRoleContext } from "./ImpalaSqlParserParser";
 import { GrantRoleContext } from "./ImpalaSqlParserParser";
 import { GrantContext } from "./ImpalaSqlParserParser";
-import { RevokeRoleContext } from "./ImpalaSqlParserParser";
 import { RevokeContext } from "./ImpalaSqlParserParser";
 import { InsertIntoContext } from "./ImpalaSqlParserParser";
 import { DeleteContext } from "./ImpalaSqlParserParser";
@@ -490,20 +490,28 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitUnicodeStringLiteral?: (ctx: UnicodeStringLiteralContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by the `unspecifiedPrincipal`
-	 * labeled alternative in `ImpalaSqlParserParser.principal`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitUnspecifiedPrincipal?: (ctx: UnspecifiedPrincipalContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by the `rolePrincipal`
 	 * labeled alternative in `ImpalaSqlParserParser.principal`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitRolePrincipal?: (ctx: RolePrincipalContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `userPrincipal`
+	 * labeled alternative in `ImpalaSqlParserParser.principal`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitUserPrincipal?: (ctx: UserPrincipalContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `groupPrincipal`
+	 * labeled alternative in `ImpalaSqlParserParser.principal`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGroupPrincipal?: (ctx: GroupPrincipalContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `unboundedFrame`
@@ -896,14 +904,6 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitGrant?: (ctx: GrantContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `revokeRole`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitRevokeRole?: (ctx: RevokeRoleContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `revoke`

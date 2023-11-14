@@ -4,5 +4,6 @@ DROP VIEW my_db.my_view;
 DROP VIEW IF EXISTS my_view;
 DROP VIEW IF EXISTS my_db.my_view;
 
+-- example
 drop view unimportant;
 drop view my_db.trivial;

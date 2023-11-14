@@ -5,6 +5,6 @@ DROP TABLE IF EXISTS my_table;
 DROP TABLE IF EXISTS my_db.my_table;
 DROP TABLE IF EXISTS my_db.my_table PURGE;
 
-
+-- example
 drop table unimportant;
-drop table temporary.trivial;
+drop table my_db.trivial;

@@ -111,11 +111,11 @@ statement
     | KW_CREATE KW_ROLE name=identifier                                      #createRole
     | KW_DROP KW_ROLE name=identifier                                        #dropRole
     | KW_GRANT KW_ROLE identifier KW_TO KW_GROUP identifier                        #grantRole
-    | KW_GRANT (privilege (COMMA privilege)* | KW_ALL)
-            KW_ON objectType qualifiedName KW_TO grantee=principal (KW_WITH KW_GRANT KW_OPTION)?            #grant
-    | KW_REVOKE KW_ROLE identifier KW_FROM KW_GROUP identifier                                                   #revokeRole
-    | KW_REVOKE (KW_GRANT KW_OPTION KW_FOR)? (privilege (COMMA privilege)* | KW_ALL)
-            KW_ON objectType qualifiedName KW_FROM grantee=principal          #revoke
+    // TODO: (qualifiedName)? 是否需要
+    | KW_GRANT privilege KW_ON objectType (qualifiedName)? KW_TO grantee=principal           #grant
+    | KW_REVOKE KW_ROLE identifier KW_FROM KW_GROUP identifier                             #grantRole
+    // TODO: (qualifiedName)? 是否需要
+    | KW_REVOKE (KW_GRANT KW_OPTION KW_FOR)? privilege KW_ON objectType (qualifiedName)? KW_FROM (grantee=principal | (KW_ROLE)? identifier)          #revoke
     | with? KW_INSERT hintClause? (KW_INTO | KW_OVERWRITE) KW_TABLE? qualifiedName
             columnAliases?
             (KW_PARTITION LPAREN expression(COMMA expression)*RPAREN)?
@@ -564,7 +564,7 @@ pathSpecification
     ;
 
 privilege
-    : KW_CREATE | KW_INSERT | KW_REFRESH | KW_SELECT (LPARENcolumnName=identifier RPAREN)?
+    : KW_ALL | KW_ALTER | KW_DROP | KW_CREATE | KW_INSERT | KW_REFRESH | KW_SELECT (LPAREN columnName=identifier RPAREN)?
     ;
 objectType
     : KW_SERVER | KW_URI | KW_DATABASE | KW_TABLE
@@ -574,8 +574,9 @@ qualifiedName
     ;
 
 principal
-    : identifier            #unspecifiedPrincipal
-    | KW_ROLE identifier       #rolePrincipal
+    : KW_ROLE identifier       #rolePrincipal
+    | KW_USER identifier       #userPrincipal
+    | KW_GROUP identifier      #groupPrincipal
     ;
 
 identifier

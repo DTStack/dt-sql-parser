@@ -32,6 +32,7 @@ ALTER VIEW v1 UNSET TBLPROPERTIES ('tblp1', 'tblp2');
 ALTER VIEW db.v1 UNSET TBLPROPERTIES ('tblp1');
 ALTER VIEW db.v1 UNSET TBLPROPERTIES ('tblp1', 'tblp2', 'tblp3');
 
+-- example
 ALTER VIEW v1 AS SELECT x, UPPER(s) s FROM t2;
 ALTER VIEW v1 (c1, c2) AS SELECT x, UPPER(s) s FROM t2;
 ALTER VIEW v7 (c1 COMMENT 'Comment for c1', c2) AS SELECT t1.c1, t1.c2 FROM t1;

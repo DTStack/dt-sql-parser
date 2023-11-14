@@ -10,6 +10,7 @@ COMPUTE STATS my_table TABLESAMPLE SYSTEM(2) REPEATABLE(456);
 COMPUTE INCREMENTAL STATS my_table;
 COMPUTE INCREMENTAL STATS my_table PARTITION (date='2023-11-14');
 
+-- example
 compute stats t1;
 compute incremental stats int_partitions partition (x < 100);
 compute incremental stats int_partitions partition (x in (100, 150, 200));

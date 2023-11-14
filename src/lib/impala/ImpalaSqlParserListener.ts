@@ -34,8 +34,9 @@ import { ArithmeticBinaryContext } from "./ImpalaSqlParserParser";
 import { ConcatenationContext } from "./ImpalaSqlParserParser";
 import { BasicStringLiteralContext } from "./ImpalaSqlParserParser";
 import { UnicodeStringLiteralContext } from "./ImpalaSqlParserParser";
-import { UnspecifiedPrincipalContext } from "./ImpalaSqlParserParser";
 import { RolePrincipalContext } from "./ImpalaSqlParserParser";
+import { UserPrincipalContext } from "./ImpalaSqlParserParser";
+import { GroupPrincipalContext } from "./ImpalaSqlParserParser";
 import { UnboundedFrameContext } from "./ImpalaSqlParserParser";
 import { CurrentRowBoundContext } from "./ImpalaSqlParserParser";
 import { BoundedFrameContext } from "./ImpalaSqlParserParser";
@@ -85,7 +86,6 @@ import { CreateRoleContext } from "./ImpalaSqlParserParser";
 import { DropRoleContext } from "./ImpalaSqlParserParser";
 import { GrantRoleContext } from "./ImpalaSqlParserParser";
 import { GrantContext } from "./ImpalaSqlParserParser";
-import { RevokeRoleContext } from "./ImpalaSqlParserParser";
 import { RevokeContext } from "./ImpalaSqlParserParser";
 import { InsertIntoContext } from "./ImpalaSqlParserParser";
 import { DeleteContext } from "./ImpalaSqlParserParser";
@@ -642,19 +642,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitUnicodeStringLiteral?: (ctx: UnicodeStringLiteralContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `unspecifiedPrincipal`
-	 * labeled alternative in `ImpalaSqlParserParser.principal`.
-	 * @param ctx the parse tree
-	 */
-	enterUnspecifiedPrincipal?: (ctx: UnspecifiedPrincipalContext) => void;
-	/**
-	 * Exit a parse tree produced by the `unspecifiedPrincipal`
-	 * labeled alternative in `ImpalaSqlParserParser.principal`.
-	 * @param ctx the parse tree
-	 */
-	exitUnspecifiedPrincipal?: (ctx: UnspecifiedPrincipalContext) => void;
-
-	/**
 	 * Enter a parse tree produced by the `rolePrincipal`
 	 * labeled alternative in `ImpalaSqlParserParser.principal`.
 	 * @param ctx the parse tree
@@ -666,6 +653,32 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitRolePrincipal?: (ctx: RolePrincipalContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `userPrincipal`
+	 * labeled alternative in `ImpalaSqlParserParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	enterUserPrincipal?: (ctx: UserPrincipalContext) => void;
+	/**
+	 * Exit a parse tree produced by the `userPrincipal`
+	 * labeled alternative in `ImpalaSqlParserParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	exitUserPrincipal?: (ctx: UserPrincipalContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `groupPrincipal`
+	 * labeled alternative in `ImpalaSqlParserParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupPrincipal?: (ctx: GroupPrincipalContext) => void;
+	/**
+	 * Exit a parse tree produced by the `groupPrincipal`
+	 * labeled alternative in `ImpalaSqlParserParser.principal`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupPrincipal?: (ctx: GroupPrincipalContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `unboundedFrame`
@@ -1303,19 +1316,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitGrant?: (ctx: GrantContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `revokeRole`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	enterRevokeRole?: (ctx: RevokeRoleContext) => void;
-	/**
-	 * Exit a parse tree produced by the `revokeRole`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	exitRevokeRole?: (ctx: RevokeRoleContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `revoke`

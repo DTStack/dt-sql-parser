@@ -8,5 +8,6 @@ DROP SCHEMA IF EXISTS my_database;
 DROP SCHEMA my_database RESTRICT;
 DROP SCHEMA IF EXISTS my_database CASCADE;
 
+-- example
 drop database temp;
 drop database temp cascade;

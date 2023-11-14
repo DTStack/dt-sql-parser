@@ -12,4 +12,5 @@ DROP FUNCTION IF EXISTS  my_func;
 DROP FUNCTION my_func;
 DROP FUNCTION IF EXISTS my_db.my_func;
 
+-- example
 drop function my_func;
