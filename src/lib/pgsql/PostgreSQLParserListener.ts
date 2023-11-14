@@ -758,6 +758,7 @@ import { Exclude_elementContext } from "./PostgreSQLParser";
 import { Index_paramentersContext } from "./PostgreSQLParser";
 import { WherePredicateContext } from "./PostgreSQLParser";
 import { Type_function_nameContext } from "./PostgreSQLParser";
+import { Type_usual_nameContext } from "./PostgreSQLParser";
 import { NonreservedwordContext } from "./PostgreSQLParser";
 import { CollabelContext } from "./PostgreSQLParser";
 import { IdentifierContext } from "./PostgreSQLParser";
@@ -9219,6 +9220,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitType_function_name?: (ctx: Type_function_nameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.type_usual_name`.
+	 * @param ctx the parse tree
+	 */
+	enterType_usual_name?: (ctx: Type_usual_nameContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.type_usual_name`.
+	 * @param ctx the parse tree
+	 */
+	exitType_usual_name?: (ctx: Type_usual_nameContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword`.

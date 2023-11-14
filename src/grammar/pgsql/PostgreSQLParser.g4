@@ -3063,7 +3063,7 @@ createFuncName: type_function_name | colid indirection;
 
 funcName: type_function_name | colid indirection;
 
-usualName: type_function_name | colid indirection;
+usualName: type_usual_name | colid indirection;
 
 aexprconst:
 	iconst
@@ -3131,6 +3131,12 @@ wherePredicate:
 	KW_WHERE identifier;
 
 type_function_name:
+	identifier
+	| unreserved_keyword
+	| plsql_unreserved_keyword
+	| type_func_name_keyword;
+
+type_usual_name:
 	identifier
 	| unreserved_keyword
 	| plsql_unreserved_keyword

@@ -758,6 +758,7 @@ import { Exclude_elementContext } from "./PostgreSQLParser";
 import { Index_paramentersContext } from "./PostgreSQLParser";
 import { WherePredicateContext } from "./PostgreSQLParser";
 import { Type_function_nameContext } from "./PostgreSQLParser";
+import { Type_usual_nameContext } from "./PostgreSQLParser";
 import { NonreservedwordContext } from "./PostgreSQLParser";
 import { CollabelContext } from "./PostgreSQLParser";
 import { IdentifierContext } from "./PostgreSQLParser";
@@ -6192,6 +6193,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitType_function_name?: (ctx: Type_function_nameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.type_usual_name`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitType_usual_name?: (ctx: Type_usual_nameContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.nonreservedword`.
