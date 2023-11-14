@@ -70,6 +70,8 @@ import { CreateViewContext } from "./ImpalaSqlParserParser";
 import { AlterViewContext } from "./ImpalaSqlParserParser";
 import { RenameViewContext } from "./ImpalaSqlParserParser";
 import { AlterViewOwnerContext } from "./ImpalaSqlParserParser";
+import { AlterSetViewTblpropertiesContext } from "./ImpalaSqlParserParser";
+import { AlterUnSetViewTblpropertiesContext } from "./ImpalaSqlParserParser";
 import { DropViewContext } from "./ImpalaSqlParserParser";
 import { DescribeDbOrTableContext } from "./ImpalaSqlParserParser";
 import { ComputeStatsContext } from "./ImpalaSqlParserParser";
@@ -1106,6 +1108,32 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAlterViewOwner?: (ctx: AlterViewOwnerContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `alterSetViewTblproperties`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterSetViewTblproperties?: (ctx: AlterSetViewTblpropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by the `alterSetViewTblproperties`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterSetViewTblproperties?: (ctx: AlterSetViewTblpropertiesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `alterUnSetViewTblproperties`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAlterUnSetViewTblproperties?: (ctx: AlterUnSetViewTblpropertiesContext) => void;
+	/**
+	 * Exit a parse tree produced by the `alterUnSetViewTblproperties`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAlterUnSetViewTblproperties?: (ctx: AlterUnSetViewTblpropertiesContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `dropView`

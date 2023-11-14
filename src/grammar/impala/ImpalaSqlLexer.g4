@@ -286,6 +286,7 @@ KW_UNBOUNDED                              : 'UNBOUNDED';
 KW_UNCOMMITTED                            : 'UNCOMMITTED';
 KW_UNION                                  : 'UNION';
 KW_UNNEST                                 : 'UNNEST';
+KW_UNSET                                  : 'UNSET';
 KW_USE                                    : 'USE';
 KW_USER                                   : 'USER';
 KW_USING                                  : 'USING';

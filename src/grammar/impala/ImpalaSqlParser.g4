@@ -83,13 +83,12 @@ statement
     | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET ((KW_CACHED KW_IN string (KW_WITH KW_REPLICATION EQ number)?) | KW_UNCACHED)   #alterPartitionCache
     | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? qualifiedName KW_PURGE?                     #dropTable
     | KW_TRUNCATE KW_TABLE? (KW_IF KW_EXISTS)? qualifiedName                       #truncateTable
-    | KW_CREATE KW_VIEW (KW_IF KW_NOT KW_EXISTS)?  qualifiedName viewColumns?
-            (KW_COMMENT string)?
-            KW_AS query                                                    #createView
-    | KW_ALTER KW_VIEW qualifiedName viewColumns?
-            KW_AS query                                                    #alterView
+    | KW_CREATE KW_VIEW (KW_IF KW_NOT KW_EXISTS)?  qualifiedName viewColumns? (KW_COMMENT string)? KW_AS query                                                    #createView
+    | KW_ALTER KW_VIEW qualifiedName viewColumns? KW_AS query                                                    #alterView
     | KW_ALTER KW_VIEW qualifiedName KW_RENAME KW_TO qualifiedName                  #renameView
     | KW_ALTER KW_VIEW qualifiedName KW_SET KW_OWNER (KW_USER|KW_ROLE) qualifiedName                  #alterViewOwner
+    | KW_ALTER KW_VIEW qualifiedName KW_SET KW_TBLPROPERTIES LPAREN identifier EQ identifier (COMMA identifier EQ identifier)*? RPAREN                  #alterSetViewTblproperties
+    | KW_ALTER KW_VIEW qualifiedName KW_UNSET KW_TBLPROPERTIES LPAREN identifier (COMMA identifier)*? RPAREN                  #alterUnSetViewTblproperties
     | KW_DROP KW_VIEW (KW_IF KW_EXISTS)? qualifiedName                             #dropView
     | KW_DESCRIBE KW_DATABASE? (KW_FORMATTED|KW_EXTENDED)? qualifiedName           #describeDbOrTable
     | KW_COMPUTE KW_STATS qualifiedName  (columnAliases)? (KW_TABLESAMPLE KW_SYSTEM LPAREN number RPAREN (KW_REPEATABLE LPAREN number RPAREN)?)?    #computeStats
