@@ -73,14 +73,14 @@ statement
     | KW_ALTER KW_TABLE qualifiedName KW_SET KW_OWNER (KW_USER | KW_ROLE) identifier        #alterTableOwner
     | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier (KW_SET kuduStorageAttr | KW_DROP KW_DEFAULT)        #alterTableKuduOnly
     | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier KW_SET KW_COMMENT string      #alterTableNonKudu
-    | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_PARTITION partitionSpec (KW_LOCATION string)? (cacheSpec)?     #addPartitionByValue
+    | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_PARTITION expression (KW_LOCATION string)? (cacheSpec)?     #addPartitionByValue
     | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_RANGE KW_PARTITION kuduPartitionSpec      #addPartitionByRange
-    | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_PARTITION partitionSpec KW_PURGE?    #dropPartitionByValue
+    | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_PARTITION expression KW_PURGE?    #dropPartitionByValue
     | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_RANGE KW_PARTITION kuduPartitionSpec      #addPartitionByRange
     | KW_ALTER KW_TABLE qualifiedName KW_RECOVER KW_PARTITIONS      #recoverPartitions
-    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET ((KW_FILEFORMAT fileFormat) | (KW_ROW KW_FORMAT rowFormat) | (KW_LOCATION string) | (KW_TBLPROPERTIES tableOrSerdePropertities) | (KW_SERDEPROPERTIES tableOrSerdePropertities))      #alterFormat
+    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION expression)? KW_SET ((KW_FILEFORMAT fileFormat) | (KW_ROW KW_FORMAT rowFormat) | (KW_LOCATION string) | (KW_TBLPROPERTIES tableOrSerdePropertities) | (KW_SERDEPROPERTIES tableOrSerdePropertities))      #alterFormat
     | KW_ALTER KW_TABLE qualifiedName KW_SET KW_COLUMN KW_STATS identifier LPAREN statsKey EQ string (COMMA statsKey EQ string)? RPAREN   #alterStatsKey
-    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION partitionSpec)? KW_SET ((KW_CACHED KW_IN string (KW_WITH KW_REPLICATION EQ number)?) | KW_UNCACHED)   #alterPartitionCache
+    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION expression)? KW_SET ((KW_CACHED KW_IN string (KW_WITH KW_REPLICATION EQ number)?) | KW_UNCACHED)   #alterPartitionCache
     | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? qualifiedName KW_PURGE?                     #dropTable
     | KW_TRUNCATE KW_TABLE? (KW_IF KW_EXISTS)? qualifiedName                       #truncateTable
     | KW_CREATE KW_VIEW (KW_IF KW_NOT KW_EXISTS)?  qualifiedName viewColumns? (KW_COMMENT string)? KW_AS query                                                    #createView

@@ -108,9 +108,8 @@ ALTER TABLE my_table PARTITION (date = '2023-01-01')  SET UNCACHED;
 -- example
 alter table historical_data drop partition (year < 1995);
 alter table historical_data drop partition (year < 1995, last_name like 'A%');
--- TODO: 复杂的 partition_desc
--- alter table historical_data drop partition (year = 1996 and month between 1 and 6);
--- alter table fast_growing_data partition (year = 2016, month in (10,11,12)) set fileformat parquet;
+alter table historical_data drop partition (year = 1996 and month between 1 and 6);
+alter table fast_growing_data partition (year = 2016, month in (10,11,12)) set fileformat parquet;
 alter table d1.mobile rename to mobile;
 alter table d2.mobile rename to d3.mobile;
 alter table p1 add partition (month=1, day=1);

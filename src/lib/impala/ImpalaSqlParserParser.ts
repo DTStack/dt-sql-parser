@@ -1787,7 +1787,7 @@ export class ImpalaSqlParserParser extends Parser {
 				this.state = 523;
 				this.match(ImpalaSqlParserParser.KW_PARTITION);
 				this.state = 524;
-				this.partitionSpec();
+				this.expression();
 				this.state = 527;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -1875,7 +1875,7 @@ export class ImpalaSqlParserParser extends Parser {
 				this.state = 553;
 				this.match(ImpalaSqlParserParser.KW_PARTITION);
 				this.state = 554;
-				this.partitionSpec();
+				this.expression();
 				this.state = 556;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
@@ -1957,7 +1957,7 @@ export class ImpalaSqlParserParser extends Parser {
 					this.state = 579;
 					this.match(ImpalaSqlParserParser.KW_PARTITION);
 					this.state = 580;
-					this.partitionSpec();
+					this.expression();
 					}
 				}
 
@@ -2089,7 +2089,7 @@ export class ImpalaSqlParserParser extends Parser {
 					this.state = 620;
 					this.match(ImpalaSqlParserParser.KW_PARTITION);
 					this.state = 621;
-					this.partitionSpec();
+					this.expression();
 					}
 				}
 
@@ -10839,7 +10839,7 @@ export class ImpalaSqlParserParser extends Parser {
 		"\x02\u0208\u0209\x07w\x02\x02\u0209\u020A\x07\xAA\x02\x02\u020A\u020C" +
 		"\x07X\x02\x02\u020B\u0208\x03\x02\x02\x02\u020B\u020C\x03\x02\x02\x02" +
 		"\u020C\u020D\x03\x02\x02\x02\u020D\u020E\x07\xBA\x02\x02\u020E\u0211\x05" +
-		"$\x13\x02\u020F\u0210\x07!\x02\x02\u0210\u0212\x05n8\x02\u0211\u020F\x03" +
+		"d3\x02\u020F\u0210\x07!\x02\x02\u0210\u0212\x05n8\x02\u0211\u020F\x03" +
 		"\x02\x02\x02\u0211\u0212\x03\x02\x02\x02\u0212\u0214\x03\x02\x02\x02\u0213" +
 		"\u0215\x05*\x16\x02\u0214\u0213\x03\x02\x02\x02\u0214\u0215\x03\x02\x02" +
 		"\x02\u0215\u04E2\x03\x02\x02\x02\u0216\u0217\x07\b\x02\x02\u0217\u0218" +
@@ -10851,25 +10851,25 @@ export class ImpalaSqlParserParser extends Parser {
 		"\x07\b\x02\x02\u0224\u0225\x07\xF5\x02\x02\u0225\u0226\x05\x94K\x02\u0226" +
 		"\u0229\x07N\x02\x02\u0227\u0228\x07w\x02\x02\u0228\u022A\x07X\x02\x02" +
 		"\u0229\u0227\x03\x02\x02\x02\u0229\u022A\x03\x02\x02\x02\u022A\u022B\x03" +
-		"\x02\x02\x02\u022B\u022C\x07\xBA\x02\x02\u022C\u022E\x05$\x13\x02\u022D" +
-		"\u022F\x07\x1E\x02\x02\u022E\u022D\x03\x02\x02\x02\u022E\u022F\x03\x02" +
-		"\x02\x02\u022F\u04E2\x03\x02\x02\x02\u0230\u0231\x07\b\x02\x02\u0231\u0232" +
-		"\x07\xF5\x02\x02\u0232\u0233\x05\x94K\x02\u0233\u0236\x07N\x02\x02\u0234" +
-		"\u0235\x07w\x02\x02\u0235\u0237\x07X\x02\x02\u0236\u0234\x03\x02\x02\x02" +
-		"\u0236\u0237\x03\x02\x02\x02\u0237\u0238\x03\x02\x02\x02\u0238\u0239\x07" +
-		"\xC5\x02\x02\u0239\u023A\x07\xBA\x02\x02\u023A\u023B\x05&\x14\x02\u023B" +
-		"\u04E2\x03\x02\x02\x02\u023C\u023D\x07\b\x02\x02\u023D\u023E\x07\xF5\x02" +
-		"\x02\u023E\u023F\x05\x94K\x02\u023F\u0240\x07\xC8\x02\x02\u0240\u0241" +
-		"\x07\xBB\x02\x02\u0241\u04E2\x03\x02\x02\x02\u0242\u0243\x07\b\x02\x02" +
-		"\u0243\u0244\x07\xF5\x02\x02\u0244\u0247\x05\x94K\x02\u0245\u0246\x07" +
-		"\xBA\x02\x02\u0246\u0248\x05$\x13\x02\u0247\u0245\x03\x02\x02\x02\u0247" +
-		"\u0248\x03\x02\x02\x02\u0248\u0249\x03\x02\x02\x02\u0249\u0255\x07\xE6" +
-		"\x02\x02\u024A\u024B\x07`\x02\x02\u024B\u0256\x05\"\x12\x02\u024C\u024D" +
-		"\x07\xDA\x02\x02\u024D\u024E\x07g\x02\x02\u024E\u0256\x05:\x1E\x02\u024F" +
-		"\u0250\x07!\x02\x02\u0250\u0256\x05n8\x02\u0251\u0252\x07\"\x02\x02\u0252" +
-		"\u0256\x05 \x11\x02\u0253\u0254\x07\xE3\x02\x02\u0254\u0256\x05 \x11\x02" +
-		"\u0255\u024A\x03\x02\x02\x02\u0255\u024C\x03\x02\x02\x02\u0255\u024F\x03" +
-		"\x02\x02\x02\u0255\u0251\x03\x02\x02\x02\u0255\u0253\x03\x02\x02\x02\u0256" +
+		"\x02\x02\x02\u022B\u022C\x07\xBA\x02\x02\u022C\u022E\x05d3\x02\u022D\u022F" +
+		"\x07\x1E\x02\x02\u022E\u022D\x03\x02\x02\x02\u022E\u022F\x03\x02\x02\x02" +
+		"\u022F\u04E2\x03\x02\x02\x02\u0230\u0231\x07\b\x02\x02\u0231\u0232\x07" +
+		"\xF5\x02\x02\u0232\u0233\x05\x94K\x02\u0233\u0236\x07N\x02\x02\u0234\u0235" +
+		"\x07w\x02\x02\u0235\u0237\x07X\x02\x02\u0236\u0234\x03\x02\x02\x02\u0236" +
+		"\u0237\x03\x02\x02\x02\u0237\u0238\x03\x02\x02\x02\u0238\u0239\x07\xC5" +
+		"\x02\x02\u0239\u023A\x07\xBA\x02\x02\u023A\u023B\x05&\x14\x02\u023B\u04E2" +
+		"\x03\x02\x02\x02\u023C\u023D\x07\b\x02\x02\u023D\u023E\x07\xF5\x02\x02" +
+		"\u023E\u023F\x05\x94K\x02\u023F\u0240\x07\xC8\x02\x02\u0240\u0241\x07" +
+		"\xBB\x02\x02\u0241\u04E2\x03\x02\x02\x02\u0242\u0243\x07\b\x02\x02\u0243" +
+		"\u0244\x07\xF5\x02\x02\u0244\u0247\x05\x94K\x02\u0245\u0246\x07\xBA\x02" +
+		"\x02\u0246\u0248\x05d3\x02\u0247\u0245\x03\x02\x02\x02\u0247\u0248\x03" +
+		"\x02\x02\x02\u0248\u0249\x03\x02\x02\x02\u0249\u0255\x07\xE6\x02\x02\u024A" +
+		"\u024B\x07`\x02\x02\u024B\u0256\x05\"\x12\x02\u024C\u024D\x07\xDA\x02" +
+		"\x02\u024D\u024E\x07g\x02\x02\u024E\u0256\x05:\x1E\x02\u024F\u0250\x07" +
+		"!\x02\x02\u0250\u0256\x05n8\x02\u0251\u0252\x07\"\x02\x02\u0252\u0256" +
+		"\x05 \x11\x02\u0253\u0254\x07\xE3\x02\x02\u0254\u0256\x05 \x11\x02\u0255" +
+		"\u024A\x03\x02\x02\x02\u0255\u024C\x03\x02\x02\x02\u0255\u024F\x03\x02" +
+		"\x02\x02\u0255\u0251\x03\x02\x02\x02\u0255\u0253\x03\x02\x02\x02\u0256" +
 		"\u04E2\x03\x02\x02\x02\u0257\u0258\x07\b\x02\x02\u0258\u0259\x07\xF5\x02" +
 		"\x02\u0259\u025A\x05\x94K\x02\u025A\u025B\x07\xE6\x02\x02\u025B\u025C" +
 		"\x07,\x02\x02\u025C\u025D\x07\xEE\x02\x02\u025D\u025E\x05\x98M\x02\u025E" +
@@ -10880,56 +10880,56 @@ export class ImpalaSqlParserParser extends Parser {
 		"\x02\x02\u0268\u0269\x03\x02\x02\x02\u0269\u026A\x07\u0139\x02\x02\u026A" +
 		"\u04E2\x03\x02\x02\x02\u026B\u026C\x07\b\x02\x02\u026C\u026D\x07\xF5\x02" +
 		"\x02\u026D\u0270\x05\x94K\x02\u026E\u026F\x07\xBA\x02\x02\u026F\u0271" +
-		"\x05$\x13\x02\u0270\u026E\x03\x02\x02\x02\u0270\u0271\x03\x02\x02\x02" +
-		"\u0271\u0272\x03\x02\x02\x02\u0272\u027D\x07\xE6\x02\x02\u0273\u0274\x07" +
-		")\x02\x02\u0274\u0275\x07x\x02\x02\u0275\u027A\x05n8\x02\u0276\u0277\x07" +
-		"\u0119\x02\x02\u0277\u0278\x07\xC2\x02\x02\u0278\u0279\x07\u0128\x02\x02" +
-		"\u0279\u027B\x05\x9AN\x02\u027A\u0276\x03\x02\x02\x02\u027A\u027B\x03" +
-		"\x02\x02\x02\u027B\u027E\x03\x02\x02\x02\u027C\u027E\x07\u0104\x02\x02" +
-		"\u027D\u0273\x03\x02\x02\x02\u027D\u027C\x03\x02\x02\x02\u027E\u04E2\x03" +
-		"\x02\x02\x02\u027F\u0280\x07N\x02\x02\u0280\u0283\x07\xF5\x02\x02\u0281" +
-		"\u0282\x07w\x02\x02\u0282\u0284\x07X\x02\x02\u0283\u0281\x03\x02\x02\x02" +
-		"\u0283\u0284\x03\x02\x02\x02\u0284\u0285\x03\x02\x02\x02\u0285\u0287\x05" +
-		"\x94K\x02\u0286\u0288\x07\x1E\x02\x02\u0287\u0286\x03\x02\x02\x02\u0287" +
-		"\u0288\x03\x02\x02\x02\u0288\u04E2\x03\x02\x02\x02\u0289\u028B\x07\u0102" +
-		"\x02\x02\u028A\u028C\x07\xF5\x02\x02\u028B\u028A\x03\x02\x02\x02\u028B" +
-		"\u028C\x03\x02\x02\x02\u028C\u028F\x03\x02\x02\x02\u028D\u028E\x07w\x02" +
-		"\x02\u028E\u0290\x07X\x02\x02\u028F\u028D\x03\x02\x02\x02\u028F\u0290" +
-		"\x03\x02\x02\x02\u0290\u0291\x03\x02\x02\x02\u0291\u04E2\x05\x94K\x02" +
-		"\u0292\u0293\x074\x02\x02\u0293\u0297\x07\u0115\x02\x02\u0294\u0295\x07" +
-		"w\x02\x02\u0295\u0296\x07\xAA\x02\x02\u0296\u0298\x07X\x02\x02\u0297\u0294" +
-		"\x03\x02\x02\x02\u0297\u0298\x03\x02\x02\x02\u0298\u0299\x03\x02\x02\x02" +
-		"\u0299\u029B\x05\x94K\x02\u029A\u029C\x05\n\x06\x02\u029B\u029A\x03\x02" +
-		"\x02\x02\u029B\u029C\x03\x02\x02\x02\u029C\u029F\x03\x02\x02\x02\u029D" +
-		"\u029E\x07.\x02\x02\u029E\u02A0\x05n8\x02\u029F\u029D\x03\x02\x02\x02" +
-		"\u029F\u02A0\x03\x02\x02\x02\u02A0\u02A1\x03\x02\x02\x02\u02A1\u02A2\x07" +
-		"\x0E\x02\x02\u02A2\u02A3\x05\f\x07\x02\u02A3\u04E2\x03\x02\x02\x02\u02A4" +
-		"\u02A5\x07\b\x02\x02\u02A5\u02A6\x07\u0115\x02\x02\u02A6\u02A8\x05\x94" +
-		"K\x02\u02A7\u02A9\x05\n\x06\x02\u02A8\u02A7\x03\x02\x02\x02\u02A8\u02A9" +
-		"\x03\x02\x02\x02\u02A9\u02AA\x03\x02\x02\x02\u02AA\u02AB\x07\x0E\x02\x02" +
-		"\u02AB\u02AC\x05\f\x07\x02\u02AC\u04E2\x03\x02\x02\x02\u02AD\u02AE\x07" +
-		"\b\x02\x02\u02AE\u02AF\x07\u0115\x02\x02\u02AF\u02B0\x05\x94K\x02\u02B0" +
-		"\u02B1\x07\xCA\x02\x02\u02B1\u02B2\x07\xFE\x02\x02\u02B2\u02B3\x05\x94" +
-		"K\x02\u02B3\u04E2\x03\x02\x02\x02\u02B4\u02B5\x07\b\x02\x02\u02B5\u02B6" +
-		"\x07\u0115\x02\x02\u02B6\u02B7\x05\x94K\x02\u02B7\u02B8\x07\xE6\x02\x02" +
-		"\u02B8\u02B9\x07\xB7\x02\x02\u02B9\u02BA\t\x03\x02\x02\u02BA\u02BB\x05" +
-		"\x94K\x02\u02BB\u04E2\x03\x02\x02\x02\u02BC\u02BD\x07\b\x02\x02\u02BD" +
-		"\u02BE\x07\u0115\x02\x02\u02BE\u02BF\x05\x94K\x02\u02BF\u02C0\x07\xE6" +
-		"\x02\x02\u02C0\u02C1\x07\"\x02\x02\u02C1\u02C2\x07\u0138\x02\x02\u02C2" +
-		"\u02C3\x05\x98M\x02\u02C3\u02C4\x07\u0128\x02\x02\u02C4\u02CC\x05\x98" +
-		"M\x02\u02C5\u02C6\x07\u0136\x02\x02\u02C6\u02C7\x05\x98M\x02\u02C7\u02C8" +
-		"\x07\u0128\x02\x02\u02C8\u02C9\x05\x98M\x02\u02C9\u02CB\x03\x02\x02\x02" +
-		"\u02CA\u02C5\x03\x02\x02\x02\u02CB\u02CE\x03\x02\x02\x02\u02CC\u02CD\x03" +
-		"\x02\x02\x02\u02CC\u02CA\x03\x02\x02\x02\u02CD\u02CF\x03\x02\x02\x02\u02CE" +
-		"\u02CC\x03\x02\x02\x02\u02CF\u02D0\x07\u0139\x02\x02\u02D0\u04E2\x03\x02" +
-		"\x02\x02\u02D1\u02D2\x07\b\x02\x02\u02D2\u02D3\x07\u0115\x02\x02\u02D3" +
-		"\u02D4\x05\x94K\x02\u02D4\u02D5\x07\u010A\x02\x02\u02D5\u02D6\x07\"\x02" +
-		"\x02\u02D6\u02D7\x07\u0138\x02\x02\u02D7\u02DC\x05\x98M\x02\u02D8\u02D9" +
-		"\x07\u0136\x02\x02\u02D9\u02DB\x05\x98M\x02\u02DA\u02D8\x03\x02\x02\x02" +
-		"\u02DB\u02DE\x03\x02\x02\x02\u02DC\u02DD\x03\x02\x02\x02\u02DC\u02DA\x03" +
-		"\x02\x02\x02\u02DD\u02DF\x03\x02\x02\x02\u02DE\u02DC\x03\x02\x02\x02\u02DF" +
-		"\u02E0\x07\u0139\x02\x02\u02E0\u04E2\x03\x02\x02\x02\u02E1\u02E2\x07N" +
-		"\x02\x02\u02E2\u02E5\x07\u0115\x02\x02\u02E3\u02E4\x07";
+		"\x05d3\x02\u0270\u026E\x03\x02\x02\x02\u0270\u0271\x03\x02\x02\x02\u0271" +
+		"\u0272\x03\x02\x02\x02\u0272\u027D\x07\xE6\x02\x02\u0273\u0274\x07)\x02" +
+		"\x02\u0274\u0275\x07x\x02\x02\u0275\u027A\x05n8\x02\u0276\u0277\x07\u0119" +
+		"\x02\x02\u0277\u0278\x07\xC2\x02\x02\u0278\u0279\x07\u0128\x02\x02\u0279" +
+		"\u027B\x05\x9AN\x02\u027A\u0276\x03\x02\x02\x02\u027A\u027B\x03\x02\x02" +
+		"\x02\u027B\u027E\x03\x02\x02\x02\u027C\u027E\x07\u0104\x02\x02\u027D\u0273" +
+		"\x03\x02\x02\x02\u027D\u027C\x03\x02\x02\x02\u027E\u04E2\x03\x02\x02\x02" +
+		"\u027F\u0280\x07N\x02\x02\u0280\u0283\x07\xF5\x02\x02\u0281\u0282\x07" +
+		"w\x02\x02\u0282\u0284\x07X\x02\x02\u0283\u0281\x03\x02\x02\x02\u0283\u0284" +
+		"\x03\x02\x02\x02\u0284\u0285\x03\x02\x02\x02\u0285\u0287\x05\x94K\x02" +
+		"\u0286\u0288\x07\x1E\x02\x02\u0287\u0286\x03\x02\x02\x02\u0287\u0288\x03" +
+		"\x02\x02\x02\u0288\u04E2\x03\x02\x02\x02\u0289\u028B\x07\u0102\x02\x02" +
+		"\u028A\u028C\x07\xF5\x02\x02\u028B\u028A\x03\x02\x02\x02\u028B\u028C\x03" +
+		"\x02\x02\x02\u028C\u028F\x03\x02\x02\x02\u028D\u028E\x07w\x02\x02\u028E" +
+		"\u0290\x07X\x02\x02\u028F\u028D\x03\x02\x02\x02\u028F\u0290\x03\x02\x02" +
+		"\x02\u0290\u0291\x03\x02\x02\x02\u0291\u04E2\x05\x94K\x02\u0292\u0293" +
+		"\x074\x02\x02\u0293\u0297\x07\u0115\x02\x02\u0294\u0295\x07w\x02\x02\u0295" +
+		"\u0296\x07\xAA\x02\x02\u0296\u0298\x07X\x02\x02\u0297\u0294\x03\x02\x02" +
+		"\x02\u0297\u0298\x03\x02\x02\x02\u0298\u0299\x03\x02\x02\x02\u0299\u029B" +
+		"\x05\x94K\x02\u029A\u029C\x05\n\x06\x02\u029B\u029A\x03\x02\x02\x02\u029B" +
+		"\u029C\x03\x02\x02\x02\u029C\u029F\x03\x02\x02\x02\u029D\u029E\x07.\x02" +
+		"\x02\u029E\u02A0\x05n8\x02\u029F\u029D\x03\x02\x02\x02\u029F\u02A0\x03" +
+		"\x02\x02\x02\u02A0\u02A1\x03\x02\x02\x02\u02A1\u02A2\x07\x0E\x02\x02\u02A2" +
+		"\u02A3\x05\f\x07\x02\u02A3\u04E2\x03\x02\x02\x02\u02A4\u02A5\x07\b\x02" +
+		"\x02\u02A5\u02A6\x07\u0115\x02\x02\u02A6\u02A8\x05\x94K\x02\u02A7\u02A9" +
+		"\x05\n\x06\x02\u02A8\u02A7\x03\x02\x02\x02\u02A8\u02A9\x03\x02\x02\x02" +
+		"\u02A9\u02AA\x03\x02\x02\x02\u02AA\u02AB\x07\x0E\x02\x02\u02AB\u02AC\x05" +
+		"\f\x07\x02\u02AC\u04E2\x03\x02\x02\x02\u02AD\u02AE\x07\b\x02\x02\u02AE" +
+		"\u02AF\x07\u0115\x02\x02\u02AF\u02B0\x05\x94K\x02\u02B0\u02B1\x07\xCA" +
+		"\x02\x02\u02B1\u02B2\x07\xFE\x02\x02\u02B2\u02B3\x05\x94K\x02\u02B3\u04E2" +
+		"\x03\x02\x02\x02\u02B4\u02B5\x07\b\x02\x02\u02B5\u02B6\x07\u0115\x02\x02" +
+		"\u02B6\u02B7\x05\x94K\x02\u02B7\u02B8\x07\xE6\x02\x02\u02B8\u02B9\x07" +
+		"\xB7\x02\x02\u02B9\u02BA\t\x03\x02\x02\u02BA\u02BB\x05\x94K\x02\u02BB" +
+		"\u04E2\x03\x02\x02\x02\u02BC\u02BD\x07\b\x02\x02\u02BD\u02BE\x07\u0115" +
+		"\x02\x02\u02BE\u02BF\x05\x94K\x02\u02BF\u02C0\x07\xE6\x02\x02\u02C0\u02C1" +
+		"\x07\"\x02\x02\u02C1\u02C2\x07\u0138\x02\x02\u02C2\u02C3\x05\x98M\x02" +
+		"\u02C3\u02C4\x07\u0128\x02\x02\u02C4\u02CC\x05\x98M\x02\u02C5\u02C6\x07" +
+		"\u0136\x02\x02\u02C6\u02C7\x05\x98M\x02\u02C7\u02C8\x07\u0128\x02\x02" +
+		"\u02C8\u02C9\x05\x98M\x02\u02C9\u02CB\x03\x02\x02\x02\u02CA\u02C5\x03" +
+		"\x02\x02\x02\u02CB\u02CE\x03\x02\x02\x02\u02CC\u02CD\x03\x02\x02\x02\u02CC" +
+		"\u02CA\x03\x02\x02\x02\u02CD\u02CF\x03\x02\x02\x02\u02CE\u02CC\x03\x02" +
+		"\x02\x02\u02CF\u02D0\x07\u0139\x02\x02\u02D0\u04E2\x03\x02\x02\x02\u02D1" +
+		"\u02D2\x07\b\x02\x02\u02D2\u02D3\x07\u0115\x02\x02\u02D3\u02D4\x05\x94" +
+		"K\x02\u02D4\u02D5\x07\u010A\x02\x02\u02D5\u02D6\x07\"\x02\x02\u02D6\u02D7" +
+		"\x07\u0138\x02\x02\u02D7\u02DC\x05\x98M\x02\u02D8\u02D9\x07\u0136\x02" +
+		"\x02\u02D9\u02DB\x05\x98M\x02\u02DA\u02D8\x03\x02\x02\x02\u02DB\u02DE" +
+		"\x03\x02\x02\x02\u02DC\u02DD\x03\x02\x02\x02\u02DC\u02DA\x03\x02\x02\x02" +
+		"\u02DD\u02DF\x03\x02\x02\x02\u02DE\u02DC\x03\x02\x02\x02\u02DF\u02E0\x07" +
+		"\u0139\x02\x02\u02E0\u04E2\x03\x02\x02\x02\u02E1\u02E2\x07N\x02\x02\u02E2" +
+		"\u02E5\x07\u0115\x02\x02\u02E3\u02E4\x07";
 	private static readonly _serializedATNSegment2: string =
 		"w\x02\x02\u02E4\u02E6\x07X\x02\x02\u02E5\u02E3\x03\x02\x02\x02\u02E5\u02E6" +
 		"\x03\x02\x02\x02\u02E6\u02E7\x03\x02\x02\x02\u02E7\u04E2\x05\x94K\x02" +
@@ -12743,8 +12743,8 @@ export class AddPartitionByValueContext extends StatementContext {
 	}
 	public KW_ADD(): TerminalNode { return this.getToken(ImpalaSqlParserParser.KW_ADD, 0); }
 	public KW_PARTITION(): TerminalNode { return this.getToken(ImpalaSqlParserParser.KW_PARTITION, 0); }
-	public partitionSpec(): PartitionSpecContext {
-		return this.getRuleContext(0, PartitionSpecContext);
+	public expression(): ExpressionContext {
+		return this.getRuleContext(0, ExpressionContext);
 	}
 	public KW_IF(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_IF, 0); }
 	public KW_NOT(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_NOT, 0); }
@@ -12830,8 +12830,8 @@ export class DropPartitionByValueContext extends StatementContext {
 	}
 	public KW_DROP(): TerminalNode { return this.getToken(ImpalaSqlParserParser.KW_DROP, 0); }
 	public KW_PARTITION(): TerminalNode { return this.getToken(ImpalaSqlParserParser.KW_PARTITION, 0); }
-	public partitionSpec(): PartitionSpecContext {
-		return this.getRuleContext(0, PartitionSpecContext);
+	public expression(): ExpressionContext {
+		return this.getRuleContext(0, ExpressionContext);
 	}
 	public KW_IF(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_IF, 0); }
 	public KW_EXISTS(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_EXISTS, 0); }
@@ -12902,8 +12902,8 @@ export class AlterFormatContext extends StatementContext {
 	}
 	public KW_SET(): TerminalNode { return this.getToken(ImpalaSqlParserParser.KW_SET, 0); }
 	public KW_PARTITION(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_PARTITION, 0); }
-	public partitionSpec(): PartitionSpecContext | undefined {
-		return this.tryGetRuleContext(0, PartitionSpecContext);
+	public expression(): ExpressionContext | undefined {
+		return this.tryGetRuleContext(0, ExpressionContext);
 	}
 	public KW_FILEFORMAT(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_FILEFORMAT, 0); }
 	public fileFormat(): FileFormatContext | undefined {
@@ -13024,8 +13024,8 @@ export class AlterPartitionCacheContext extends StatementContext {
 	public KW_SET(): TerminalNode { return this.getToken(ImpalaSqlParserParser.KW_SET, 0); }
 	public KW_UNCACHED(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_UNCACHED, 0); }
 	public KW_PARTITION(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_PARTITION, 0); }
-	public partitionSpec(): PartitionSpecContext | undefined {
-		return this.tryGetRuleContext(0, PartitionSpecContext);
+	public expression(): ExpressionContext | undefined {
+		return this.tryGetRuleContext(0, ExpressionContext);
 	}
 	public KW_CACHED(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_CACHED, 0); }
 	public KW_IN(): TerminalNode | undefined { return this.tryGetToken(ImpalaSqlParserParser.KW_IN, 0); }
