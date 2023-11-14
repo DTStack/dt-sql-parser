@@ -94,7 +94,7 @@ statement
     | KW_COMPUTE KW_STATS qualifiedName  (columnAliases)? (KW_TABLESAMPLE KW_SYSTEM LPAREN number RPAREN (KW_REPEATABLE LPAREN number RPAREN)?)?    #computeStats
     | KW_COMPUTE KW_INCREMENTAL KW_STATS qualifiedName (KW_PARTITION expression)?                                                        #computeIncrementalStats
     | KW_DROP KW_STATS qualifiedName                                          #dropStats
-    | KW_DROP KW_INCREMENTAL KW_STATS qualifiedName KW_PARTITION LPAREN expression RPAREN         #dropIncrementalStats
+    | KW_DROP KW_INCREMENTAL KW_STATS qualifiedName KW_PARTITION  expression         #dropIncrementalStats
     | KW_CREATE KW_AGGREGATE? KW_FUNCTION (KW_IF KW_NOT KW_EXISTS)? qualifiedName (LPAREN(type (COMMA type)*)? RPAREN)?
              (KW_RETURNS type)?
              (KW_INTERMEDIATE type)?
