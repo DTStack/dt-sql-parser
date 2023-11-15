@@ -14,6 +14,9 @@ const features = {
     invalidates: readSQL(__dirname, 'invalidate_metadata.sql'),
     set: readSQL(__dirname, 'set.sql'),
     shutdown: readSQL(__dirname, 'shutdown.sql'),
+    truncate: readSQL(__dirname, 'truncate_table.sql'),
+    use: readSQL(__dirname, 'use.sql'),
+    values: readSQL(__dirname, 'values.sql'),
 };
 
 describe('ImpalaSQL Other Syntax Tests', () => {
@@ -82,6 +85,27 @@ describe('ImpalaSQL Other Syntax Tests', () => {
     });
     describe('SHUTDOWN STATEMENT', () => {
         features.shutdown.forEach((db) => {
+            it(db, () => {
+                expect(parser.validate(db).length).toBe(0);
+            });
+        });
+    });
+    describe('TRUNCATE TABLE STATEMENT', () => {
+        features.truncate.forEach((db) => {
+            it(db, () => {
+                expect(parser.validate(db).length).toBe(0);
+            });
+        });
+    });
+    describe('USE STATEMENT', () => {
+        features.use.forEach((db) => {
+            it(db, () => {
+                expect(parser.validate(db).length).toBe(0);
+            });
+        });
+    });
+    describe('VALUES STATEMENT', () => {
+        features.values.forEach((db) => {
             it(db, () => {
                 expect(parser.validate(db).length).toBe(0);
             });

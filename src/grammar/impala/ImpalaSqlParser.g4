@@ -151,7 +151,7 @@ statement
     | KW_COMMENT KW_ON (KW_DATABASE|KW_TABLE|KW_COLUMN) qualifiedName KW_IS (string | KW_NULL)                 #addComments
     | KW_EXPLAIN statement                                                                   #explain
     | KW_SET (KW_ALL | identifier EQ expression)?                                               #setSession
-    | COLON KW_SHUTDOWN LPAREN (string)? (COLON expression)? (COMMA? expression )? RPAREN                  #shutdown
+    | COLON KW_SHUTDOWN LPAREN (string)? (COLON expression)? (COMMA expression )? (expression)? RPAREN                  #shutdown
     | KW_INVALIDATE KW_METADATA qualifiedName                                                   #invalidateMeta
     | KW_LOAD KW_DATA KW_INPATH STRING (KW_OVERWRITE)? KW_INTO KW_TABLE qualifiedName
         (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?                                   #loadData
@@ -440,7 +440,7 @@ primaryExpression
     | BINARY_LITERAL                                                                      #binaryLiteral
     | QUESTION                                                                                 #parameter
     | KW_POSITION LPAREN valueExpression KW_IN valueExpression RPAREN                                 #position
-    | LPAREN expression (COMMA expression)+ RPAREN                                                #rowConstructor
+    | LPAREN expression (KW_AS type)? (COMMA expression (KW_AS type)?)*? RPAREN                                                #rowConstructor
     | KW_ROW LPAREN expression (COMMA expression)* RPAREN                                            #rowConstructor
     | qualifiedName LPAREN ASTERISK RPAREN filter? over?                                        #functionCall
     | qualifiedName LPAREN (setQuantifier? expression (COMMA expression)*)?
