@@ -145,9 +145,9 @@ statement
     | KW_SHOW KW_FILES KW_IN qualifiedName (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?         #showFiles
     | KW_SHOW (KW_CURRENT)? KW_ROLES                                                               #showRoles
     | KW_SHOW KW_ROLE KW_GRANT KW_GROUP identifier                                                    #showRoleGrant
-    | KW_SHOW KW_GRANT KW_ROLE identifier                                                          #showGrantRole
-    | KW_SHOW KW_GRANT KW_USER identifier
-        (KW_ON (KW_SERVER | KW_DATABASE | KW_TABLE | KW_URI) (qualifiedName)? )?                         #showGrantUser
+    | KW_SHOW KW_GRANT (KW_ROLE | KW_USER) identifier                                                          #showGrantRole
+    | KW_SHOW KW_GRANT (KW_USER | KW_ROLE | KW_GROUP) identifier
+        (KW_ON (KW_SERVER | KW_DATABASE | KW_TABLE | KW_COLUMN | KW_URI) (qualifiedName)? )                         #showGrantUser
     | KW_COMMENT KW_ON (KW_DATABASE|KW_TABLE|KW_COLUMN) qualifiedName KW_IS (string | KW_NULL)                 #addComments
     | KW_EXPLAIN statement                                                                   #explain
     | KW_SET (KW_ALL | identifier EQ expression)?                                               #setSession
