@@ -118,10 +118,8 @@ statement
     | KW_CREATE KW_ROLE name=identifier                                      #createRole
     | KW_DROP KW_ROLE name=identifier                                        #dropRole
     | KW_GRANT KW_ROLE identifier KW_TO KW_GROUP identifier                        #grantRole
-    // TODO: (qualifiedName)? 是否需要
     | KW_GRANT privilege KW_ON objectType (qualifiedName)? KW_TO grantee=principal           #grant
     | KW_REVOKE KW_ROLE identifier KW_FROM KW_GROUP identifier                             #grantRole
-    // TODO: (qualifiedName)? 是否需要
     | KW_REVOKE (KW_GRANT KW_OPTION KW_FOR)? privilege KW_ON objectType (qualifiedName)? KW_FROM (grantee=principal | (KW_ROLE)? identifier)          #revoke
     | with? KW_INSERT hintClause? (KW_INTO | KW_OVERWRITE) KW_TABLE? qualifiedName
             columnAliases?
