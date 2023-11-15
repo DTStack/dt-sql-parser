@@ -8,8 +8,8 @@ specifiers:
   '@swc/jest': ^0.2.26
   '@types/jest': ^29.5.1
   '@types/node': ^18.15.11
-  antlr4-c3: ^3.0.1
-  antlr4ts: ^0.5.0-alpha.4
+  antlr4-c3: 3.1.1
+  antlr4ts: 0.5.0-alpha.4
   antlr4ts-cli: ^0.5.0-alpha.4
   chalk: 4.1.2
   commitizen: ^4.3.0
@@ -23,7 +23,7 @@ specifiers:
   yargs-parser: ^21.1.1
 
 dependencies:
-  antlr4-c3: 3.0.1
+  antlr4-c3: 3.1.1
   antlr4ts: 0.5.0-alpha.4
 
 devDependencies:
@@ -1212,8 +1212,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /antlr4-c3/3.0.1:
-    resolution: {integrity: sha512-Vbizas0WK4Id6l1f48ANYHFZgfzmj82LZx4OuB/a87vCpyoUwofrlJ+sCiL1qT/D2SWf8HEcBPCsgskdx8NnzQ==}
+  /antlr4-c3/3.1.1:
+    resolution: {integrity: sha512-S7DixV12kxWexTkQYGvooCgHYU5AjF74oYio+ZNgm0XN3EzxDY3J6Si9GprQ4KksvgWwK//EgZnL/26WB+bOpw==}
     dependencies:
       antlr4ts: 0.5.0-alpha.4
     dev: false

@@ -1076,10 +1076,10 @@ ansi-styles@^6.0.0:
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-6.2.1.tgz#0e62320cf99c21afff3b3012192546aacbfb05c5"
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
 
-antlr4-c3@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmmirror.com/antlr4-c3/-/antlr4-c3-3.0.1.tgz#e9b6ba7b796e7afc35630ffa6fac4d915f152c99"
-  integrity sha512-Vbizas0WK4Id6l1f48ANYHFZgfzmj82LZx4OuB/a87vCpyoUwofrlJ+sCiL1qT/D2SWf8HEcBPCsgskdx8NnzQ==
+antlr4-c3@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npmmirror.com/antlr4-c3/-/antlr4-c3-3.1.1.tgz#f3d579e17c925d9e3cc984ed0ecb5095fce1611f"
+  integrity sha512-S7DixV12kxWexTkQYGvooCgHYU5AjF74oYio+ZNgm0XN3EzxDY3J6Si9GprQ4KksvgWwK//EgZnL/26WB+bOpw==
   dependencies:
     antlr4ts "0.5.0-alpha.4"
 
@@ -1088,7 +1088,7 @@ antlr4ts-cli@^0.5.0-alpha.4:
   resolved "https://registry.yarnpkg.com/antlr4ts-cli/-/antlr4ts-cli-0.5.0-alpha.4.tgz#f3bfc37f10131e78d7b981c397a2aaa0450b67f6"
   integrity sha512-lVPVBTA2CVHRYILSKilL6Jd4hAumhSZZWA7UbQNQrmaSSj7dPmmYaN4bOmZG79cOy0lS00i4LY68JZZjZMWVrw==
 
-antlr4ts@0.5.0-alpha.4, antlr4ts@^0.5.0-alpha.4:
+antlr4ts@0.5.0-alpha.4:
   version "0.5.0-alpha.4"
   resolved "https://registry.npmmirror.com/antlr4ts/-/antlr4ts-0.5.0-alpha.4.tgz#71702865a87478ed0b40c0709f422cf14d51652a"
   integrity sha512-WPQDt1B74OfPv/IMS2ekXAKkTZIHl88uMetg6q3OTqgFxZ/dxDXI0EWLyZid/1Pe6hTftyg5N7gel5wNAGxXyQ==
