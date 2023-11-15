@@ -12,6 +12,8 @@ const features = {
     describes: readSQL(__dirname, 'describe.sql'),
     explains: readSQL(__dirname, 'explain.sql'),
     invalidates: readSQL(__dirname, 'invalidate_metadata.sql'),
+    set: readSQL(__dirname, 'set.sql'),
+    shutdown: readSQL(__dirname, 'shutdown.sql'),
 };
 
 describe('ImpalaSQL Other Syntax Tests', () => {
@@ -66,6 +68,20 @@ describe('ImpalaSQL Other Syntax Tests', () => {
     });
     describe('INVALIDATE METADATA STATEMENT', () => {
         features.invalidates.forEach((db) => {
+            it(db, () => {
+                expect(parser.validate(db).length).toBe(0);
+            });
+        });
+    });
+    describe('SET STATEMENT', () => {
+        features.set.forEach((db) => {
+            it(db, () => {
+                expect(parser.validate(db).length).toBe(0);
+            });
+        });
+    });
+    describe('SHUTDOWN STATEMENT', () => {
+        features.shutdown.forEach((db) => {
             it(db, () => {
                 expect(parser.validate(db).length).toBe(0);
             });

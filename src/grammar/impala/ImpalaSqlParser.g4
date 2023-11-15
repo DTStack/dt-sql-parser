@@ -151,11 +151,11 @@ statement
     | KW_COMMENT KW_ON (KW_DATABASE|KW_TABLE|KW_COLUMN) qualifiedName KW_IS (string | KW_NULL)                 #addComments
     | KW_EXPLAIN statement                                                                   #explain
     | KW_SET (KW_ALL | identifier EQ expression)?                                               #setSession
-    | COLON KW_SHUTDOWN LPAREN (string)? (COLON expression)? (COMMA expression )? RPAREN                  #shutdown
+    | COLON KW_SHUTDOWN LPAREN (string)? (COLON expression)? (COMMA? expression )? RPAREN                  #shutdown
     | KW_INVALIDATE KW_METADATA qualifiedName                                                   #invalidateMeta
     | KW_LOAD KW_DATA KW_INPATH STRING (KW_OVERWRITE)? KW_INTO KW_TABLE qualifiedName
         (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?                                   #loadData
-    | KW_REFRESH qualifiedName (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?               #refreshMeta
+    | KW_REFRESH qualifiedName (KW_PARTITION LPAREN expression (COMMA expression)*? RPAREN)?               #refreshMeta
     | KW_REFRESH KW_AUTHORIZATION                                                               #refreshAuth
     ;
 
