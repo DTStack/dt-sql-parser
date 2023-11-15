@@ -9,3 +9,5 @@ DELETE FROM ONLY table_name * AS alias
 USING using_list 
 WHERE y > 4
 RETURNING *;
+
+DELETE FROM table_name;

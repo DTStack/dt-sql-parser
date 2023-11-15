@@ -33,6 +33,10 @@ export enum SyntaxContextType {
     FUNCTION = 'function',
     /** function name that will be created */
     FUNCTION_CREATE = 'functionCreate',
+    /** procedure name */
+    PROCEDURE = 'procedure',
+    /** procedure name that will be created */
+    PROCEDURE_CREATE = 'procedureCreate',
 }
 
 export interface WordRange {

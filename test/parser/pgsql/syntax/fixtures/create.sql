@@ -156,6 +156,11 @@ CREATE TYPE floatrange AS RANGE (
     subtype_diff = float8mi
 );
 
+-- CREATE ACCESS METHOD
+CREATE ACCESS METHOD name
+    TYPE TABLE
+    HANDLER handler_function;
+
 -- CREATE AGGREGATE
 CREATE AGGREGATE agg_name1 ( int, integer) (
     SFUNC = sfunc,
@@ -203,7 +208,11 @@ CREATE CAST (source_type3 AS target_type3)
 CREATE COLLATION coll_name (
     LOCALE = locale,
     LC_COLLATE = lc_collate,
-    LC_CTYPE = lc_ctype
+    LC_CTYPE = lc_ctype,
+    PROVIDER = provider,
+    DETERMINISTIC = boolean,
+    RULES = rules,
+    VERSION = version
 );
 CREATE COLLATION coll_name FROM existing_collation;
 
@@ -219,10 +228,19 @@ CREATE DATABASE name1
     OWNER = user_name
     TEMPLATE = template
     ENCODING = encoding
+    STRATEGY = strategy
+    LOCALE = locale
     LC_COLLATE = lc_collate
     LC_CTYPE = lc_ctype
+    ICU_LOCALE = icu_locale
+    ICU_RULES = icu_rules
+    LOCALE_PROVIDER = locale_provider
+    COLLATION_VERSION = collation_version
     TABLESPACE = tablespace_name
-    CONNECTION LIMIT = connlimit;
+    ALLOW_CONNECTIONS = allowconn 
+    CONNECTION LIMIT = connlimit
+    IS_TEMPLATE = istemplate
+    OID = oid;
 CREATE DATABASE name2;
 
 -- CREATE DOMAIN
@@ -286,22 +304,39 @@ CREATE OR REPLACE FUNCTION
     WITH (isStrict, isCachable);
 
 -- CREATE GROUP
-CREATE GROUP group_name WITH SUPERUSER;
+CREATE GROUP group_name WITH SUPERUSER NOSUPERUSER CREATEDB NOCREATEDB
+    CREATEROLE NOCREATEROLE
+    INHERIT NOINHERIT
+    LOGIN NOLOGIN
+    REPLICATION NOREPLICATION
+    BYPASSRLS NOBYPASSRLS
+    CONNECTION LIMIT 234
+    ENCRYPTED PASSWORD 'password'
+    VALID UNTIL '2023-09-23'
+    IN ROLE role_name, role_name1
+    IN GROUP role_name
+    ROLE role_name
+    ADMIN role_name
+    USER role_name
+    SYSID 757;
 CREATE GROUP group_name WITH ENCRYPTED PASSWORD 'password';
 CREATE GROUP group_name;
 
 -- CREATE INDEX
 CREATE UNIQUE INDEX CONCURRENTLY index_name ON table_name USING btree
     ((a > 4) COLLATE collation_name ASC NULLS LAST )
+    INCLUDE (column_name1, clou_2)
+    NULLS NOT DISTINCT
     WITH ( storage_parameter = 1) 
     TABLESPACE tablespace_name
     WHERE (y > 4);
 CREATE INDEX ON table_name (col1);
 
 -- CREATE LANGUAGE
-CREATE OR REPLACE PROCEDURAL LANGUAGE lan_name
 CREATE OR REPLACE TRUSTED PROCEDURAL LANGUAGE lan_name1
     HANDLER call_handler INLINE inline_handler VALIDATOR valfunction;
+CREATE LANGUAGE name;
+CREATE LANGUAGE name HANDLER call_handler;
 
 -- CREATE MATERIALIZED VIEW
 CREATE MATERIALIZED VIEW table_name
@@ -340,6 +375,33 @@ FOR TYPE _int4 USING gist AS
 
 -- CREATE OPERATOR FAMILY
 CREATE OPERATOR FAMILY name USING index_method;
+
+-- CREATE POLICY
+CREATE POLICY name ON table_name
+AS PERMISSIVE
+    FOR INSERT
+    TO PUBLIC
+    USING ( using_expression )
+    WITH CHECK ( check_expression );
+CREATE POLICY name ON table_name;
+
+-- CREATE PROCEDURE
+CREATE OR REPLACE PROCEDURE
+    name ( IN argname int DEFAULT default_expr)
+    LANGUAGE lang_name
+    TRANSFORM { FOR TYPE type_name } 
+    EXTERNAL SECURITY INVOKER
+    EXTERNAL SECURITY DEFINER
+    SET configuration_parameter FROM CURRENT
+    AS 'definition'
+    AS 'obj_file', 'link_symbol'
+    sql_body;
+
+-- CREATE PUBLICATION
+CREATE PUBLICATION name
+    FOR ALL TABLES, FOR publication_object
+    WITH ( publication_parameter = value);
+CREATE PUBLICATION name;
 
 -- CREATE ROLE
 CREATE ROLE name WITH SUPERUSER CREATEDB CREATEROLE 
@@ -384,6 +446,63 @@ CREATE SERVER server_name TYPE 'server_type' VERSION 'server_version'
     FOREIGN DATA WRAPPER fdw_name
     OPTIONS ( option 'value', option 'value3');
 CREATE SERVER server_name FOREIGN DATA WRAPPER fdw_name;
+
+-- CREATE STATISTICS
+CREATE STATISTICS IF NOT EXISTS statistics_name
+    ON ( expression )
+    FROM table_name;
+CREATE STATISTICS IF NOT EXISTS statistics_name 
+( statistics_kind )
+    ON column_name, ( expression )
+    FROM table_name;
+CREATE STATISTICS ON column_name, column_name FROM table_name;
+
+-- CREATE SUBSCRIPTION
+CREATE SUBSCRIPTION subscription_name
+    CONNECTION 'conninfo'
+    PUBLICATION publication_name, publication_name1
+    WITH ( subscription_parameter = value, subscription_parameter = value);
+CREATE SUBSCRIPTION subscription_name
+    CONNECTION 'conninfo'
+    PUBLICATION publication_name;
+
+-- CREATE TABLE
+CREATE UNLOGGED TABLE IF NOT EXISTS table_name (
+  column_name int STORAGE PLAIN COMPRESSION compression_method COLLATE collation_name NOT NULL,
+  CONSTRAINT constraint_name 
+  CHECK ( expression>3 ) NO INHERIT ,
+  LIKE source_table 
+)
+INHERITS ( parent_table,  parent_table)
+PARTITION BY RANGE ( column_name COLLATE collation_name opclass)
+USING method
+WITH ( storage_parameter = value)
+ON COMMIT PRESERVE ROWS
+TABLESPACE tablespace_name;
+CREATE TABLE table_name (column_name int);
+CREATE GLOBAL TEMPORARY TABLE table_name
+    OF int ( column_name WITH OPTIONS GENERATED ALWAYS AS ( generation_expr ) STORED
+)
+PARTITION BY HASH ( ( expression>3 ) COLLATE collation_name opclass)
+USING method
+WITH ( storage_parameter = value )
+ON COMMIT PRESERVE ROWS
+TABLESPACE tablespace_name;
+CREATE TABLE table_name OF type_name;
+CREATE TABLE table_name
+    PARTITION OF parent_table (
+  column_name WITH OPTIONS NOT NULL
+  NULL
+  CHECK ( expression ) NO INHERIT
+  DEFAULT default_expr
+  GENERATED ALWAYS AS ( generation_expr ) STORED
+  GENERATED BY DEFAULT AS IDENTITY ( AS data_type ) 
+  UNIQUE NULLS NOT DISTINCT INCLUDE ( column_name ) 
+  PRIMARY KEY WITH ( storage_parameter = value )
+  REFERENCES reftable ( refcolumn ) MATCH FULL 
+    ON DELETE NO ACTION ON UPDATE RESTRICT 
+DEFERRABLE  INITIALLY DEFERRED
+)  FOR VALUES FROM (MINVALUE, x>3) TO (MAXVALUE,MAXVALUE);
 
 -- CREATE TABLE AS
 CREATE GLOBAL TEMPORARY TABLE table_name
@@ -436,8 +555,14 @@ CREATE TEXT SEARCH TEMPLATE name (
     LEXIZE = lexize_function
 );
 
+-- CREATE TRANSFORM
+CREATE OR REPLACE TRANSFORM FOR type_name LANGUAGE lang_name (
+    FROM SQL WITH FUNCTION from_sql_function_name (argument_type),
+    TO SQL WITH FUNCTION to_sql_function_name (argument_type )
+);
+
 -- CREATE TRIGGER
-CREATE CONSTRAINT TRIGGER trig_name INSTEAD OF INSERT OR UPDATE
+CREATE OR REPLACE CONSTRAINT TRIGGER trig_name INSTEAD OF INSERT OR UPDATE
     ON table_name
     FROM referenced_table_name
     DEFERRABLE INITIALLY IMMEDIATE
