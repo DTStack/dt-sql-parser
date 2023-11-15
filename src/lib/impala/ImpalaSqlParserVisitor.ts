@@ -168,9 +168,7 @@ import { ColumnSpecWithKuduContext } from "./ImpalaSqlParserParser";
 import { KuduAttributesContext } from "./ImpalaSqlParserParser";
 import { KuduStorageAttrContext } from "./ImpalaSqlParserParser";
 import { StatsKeyContext } from "./ImpalaSqlParserParser";
-import { TableOrSerdePropertitiesContext } from "./ImpalaSqlParserParser";
 import { FileFormatContext } from "./ImpalaSqlParserParser";
-import { PartitionSpecContext } from "./ImpalaSqlParserParser";
 import { KuduPartitionSpecContext } from "./ImpalaSqlParserParser";
 import { ConstantsContext } from "./ImpalaSqlParserParser";
 import { CacheSpecContext } from "./ImpalaSqlParserParser";
@@ -1547,25 +1545,11 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitStatsKey?: (ctx: StatsKeyContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParserParser.tableOrSerdePropertities`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTableOrSerdePropertities?: (ctx: TableOrSerdePropertitiesContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `ImpalaSqlParserParser.fileFormat`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitFileFormat?: (ctx: FileFormatContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `ImpalaSqlParserParser.partitionSpec`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitPartitionSpec?: (ctx: PartitionSpecContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParserParser.kuduPartitionSpec`.

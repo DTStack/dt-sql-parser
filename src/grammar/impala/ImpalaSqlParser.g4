@@ -78,34 +78,41 @@ statement
     | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_PARTITION expression KW_PURGE?    #dropPartitionByValue
     | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_IF KW_EXISTS)? KW_RANGE KW_PARTITION kuduPartitionSpec      #addPartitionByRange
     | KW_ALTER KW_TABLE qualifiedName KW_RECOVER KW_PARTITIONS      #recoverPartitions
-    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION expression)? KW_SET ((KW_FILEFORMAT fileFormat) | (KW_ROW KW_FORMAT rowFormat) | (KW_LOCATION string) | (KW_TBLPROPERTIES tableOrSerdePropertities) | (KW_SERDEPROPERTIES tableOrSerdePropertities))      #alterFormat
+    | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION expression)? KW_SET ((KW_FILEFORMAT fileFormat) | (KW_ROW KW_FORMAT rowFormat) | (KW_LOCATION string) | (KW_TBLPROPERTIES tblProp=properties) | (KW_SERDEPROPERTIES tblProp=properties))      #alterFormat
     | KW_ALTER KW_TABLE qualifiedName KW_SET KW_COLUMN KW_STATS identifier LPAREN statsKey EQ string (COMMA statsKey EQ string)? RPAREN   #alterStatsKey
     | KW_ALTER KW_TABLE qualifiedName (KW_PARTITION expression)? KW_SET ((KW_CACHED KW_IN string (KW_WITH KW_REPLICATION EQ number)?) | KW_UNCACHED)   #alterPartitionCache
     | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? qualifiedName KW_PURGE?                     #dropTable
     | KW_TRUNCATE KW_TABLE? (KW_IF KW_EXISTS)? qualifiedName                       #truncateTable
-    | KW_CREATE KW_VIEW (KW_IF KW_NOT KW_EXISTS)?  qualifiedName viewColumns? (KW_COMMENT string)? KW_AS query                                                    #createView
+    | KW_CREATE KW_VIEW (KW_IF KW_NOT KW_EXISTS)?  qualifiedName viewColumns? (KW_COMMENT string)? (KW_TBLPROPERTIES tblProp=properties)? KW_AS query                                                    #createView
     | KW_ALTER KW_VIEW qualifiedName viewColumns? KW_AS query                                                    #alterView
     | KW_ALTER KW_VIEW qualifiedName KW_RENAME KW_TO qualifiedName                  #renameView
     | KW_ALTER KW_VIEW qualifiedName KW_SET KW_OWNER (KW_USER|KW_ROLE) qualifiedName                  #alterViewOwner
-    | KW_ALTER KW_VIEW qualifiedName KW_SET KW_TBLPROPERTIES LPAREN identifier EQ identifier (COMMA identifier EQ identifier)*? RPAREN                  #alterSetViewTblproperties
-    | KW_ALTER KW_VIEW qualifiedName KW_UNSET KW_TBLPROPERTIES LPAREN identifier (COMMA identifier)*? RPAREN                  #alterUnSetViewTblproperties
+    | KW_ALTER KW_VIEW qualifiedName KW_SET KW_TBLPROPERTIES tblProp=properties                  #alterSetViewTblproperties
+    | KW_ALTER KW_VIEW qualifiedName KW_UNSET KW_TBLPROPERTIES tblProp=properties                  #alterUnSetViewTblproperties
     | KW_DROP KW_VIEW (KW_IF KW_EXISTS)? qualifiedName                             #dropView
     | KW_DESCRIBE KW_DATABASE? (KW_FORMATTED|KW_EXTENDED)? qualifiedName           #describeDbOrTable
     | KW_COMPUTE KW_STATS qualifiedName  (columnAliases)? (KW_TABLESAMPLE KW_SYSTEM LPAREN number RPAREN (KW_REPEATABLE LPAREN number RPAREN)?)?    #computeStats
     | KW_COMPUTE KW_INCREMENTAL KW_STATS qualifiedName (KW_PARTITION expression)?                                                        #computeIncrementalStats
     | KW_DROP KW_STATS qualifiedName                                          #dropStats
     | KW_DROP KW_INCREMENTAL KW_STATS qualifiedName KW_PARTITION  expression         #dropIncrementalStats
+    | KW_CREATE KW_FUNCTION (KW_IF KW_NOT KW_EXISTS)? qualifiedName (LPAREN(type (COMMA type)*)? RPAREN)?
+        KW_RETURNS type
+        KW_LOCATION STRING
+        KW_SYMBOL EQ symbol=string  #createFunction
+    | KW_CREATE KW_FUNCTION (KW_IF KW_NOT KW_EXISTS)? qualifiedName
+        KW_LOCATION STRING
+        KW_SYMBOL EQ symbol=string   #createFunction
     | KW_CREATE KW_AGGREGATE? KW_FUNCTION (KW_IF KW_NOT KW_EXISTS)? qualifiedName (LPAREN(type (COMMA type)*)? RPAREN)?
-             (KW_RETURNS type)?
-             (KW_INTERMEDIATE type)?
-             KW_LOCATION STRING
-             (KW_SYMBOL EQ symbol=string)?
-             (KW_INIT_FN EQ STRING)?
-             (KW_UPDATE_FN EQ STRING)?
-             (KW_MERGE_FN EQ STRING)?
-             (KW_CLOSEFN EQ STRING)?
-             (KW_SERIALIZE_FN EQ STRING)?
-             (KW_FINALIZE_FN EQ STRING)?                                  #createFunction
+        KW_RETURNS type
+        (KW_INTERMEDIATE type)?
+        KW_LOCATION STRING
+        (KW_INIT_FN EQ STRING)?
+        KW_UPDATE_FN EQ STRING
+        KW_MERGE_FN EQ STRING
+        (KW_PREPARE_FN EQ STRING)?
+        (KW_CLOSEFN EQ STRING)?
+        (KW_SERIALIZE_FN EQ STRING)?
+        (KW_FINALIZE_FN EQ STRING)?                                  #createFunction
     | KW_REFRESH KW_FUNCTIONS qualifiedName                                 #refreshFunction
     | KW_DROP KW_AGGREGATE? KW_FUNCTION (KW_IF KW_EXISTS)? qualifiedName (LPAREN(type (COMMA type)*)? RPAREN)?       #dropFunction
     | KW_CREATE KW_ROLE name=identifier                                      #createRole
@@ -210,9 +217,6 @@ statsKey
     |  STATS_AVGSIZE
     |  STATS_MAXSIZE
     ;
-tableOrSerdePropertities
-    : LPAREN identifier EQ constants (COMMA identifier EQ constants)*? RPAREN
-    ;
 fileFormat
     : KW_TEXTFILE
     | KW_PARQUET
@@ -220,9 +224,6 @@ fileFormat
     | KW_AVRO
     | KW_SEQUENCEFILE
     | KW_RCFILE
-    ;
-partitionSpec
-    : LPAREN identifier partitionCol constants (COMMA identifier partitionCol constants)? RPAREN
     ;
 kuduPartitionSpec
     : KW_VALUE partitionCol constants | constants rangeOperator KW_VALUES rangeOperator constants
@@ -284,7 +285,7 @@ rowFormat
     ;
 
 property
-    : identifier EQ expression
+    : identifier (EQ expression)?
     ;
 
 queryNoWith:

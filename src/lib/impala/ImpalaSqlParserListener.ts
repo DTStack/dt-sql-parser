@@ -168,9 +168,7 @@ import { ColumnSpecWithKuduContext } from "./ImpalaSqlParserParser";
 import { KuduAttributesContext } from "./ImpalaSqlParserParser";
 import { KuduStorageAttrContext } from "./ImpalaSqlParserParser";
 import { StatsKeyContext } from "./ImpalaSqlParserParser";
-import { TableOrSerdePropertitiesContext } from "./ImpalaSqlParserParser";
 import { FileFormatContext } from "./ImpalaSqlParserParser";
-import { PartitionSpecContext } from "./ImpalaSqlParserParser";
 import { KuduPartitionSpecContext } from "./ImpalaSqlParserParser";
 import { ConstantsContext } from "./ImpalaSqlParserParser";
 import { CacheSpecContext } from "./ImpalaSqlParserParser";
@@ -2354,17 +2352,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitStatsKey?: (ctx: StatsKeyContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParserParser.tableOrSerdePropertities`.
-	 * @param ctx the parse tree
-	 */
-	enterTableOrSerdePropertities?: (ctx: TableOrSerdePropertitiesContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParserParser.tableOrSerdePropertities`.
-	 * @param ctx the parse tree
-	 */
-	exitTableOrSerdePropertities?: (ctx: TableOrSerdePropertitiesContext) => void;
-
-	/**
 	 * Enter a parse tree produced by `ImpalaSqlParserParser.fileFormat`.
 	 * @param ctx the parse tree
 	 */
@@ -2374,17 +2361,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFileFormat?: (ctx: FileFormatContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParserParser.partitionSpec`.
-	 * @param ctx the parse tree
-	 */
-	enterPartitionSpec?: (ctx: PartitionSpecContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParserParser.partitionSpec`.
-	 * @param ctx the parse tree
-	 */
-	exitPartitionSpec?: (ctx: PartitionSpecContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParserParser.kuduPartitionSpec`.
