@@ -1556,7 +1556,7 @@ aggr_args:
 
 aggr_args_list: aggr_arg (COMMA aggr_arg)*;
 
-aggregate_with_argtypes: usualName aggr_args;
+aggregate_with_argtypes: funcName aggr_args;
 
 aggregate_with_argtypes_list:
 	aggregate_with_argtypes (COMMA aggregate_with_argtypes)*;
@@ -2448,7 +2448,7 @@ publication_relation_expr_list: publication_relation_expr (COMMA publication_rel
 relation_expr_opt_alias: relation_expr (KW_AS? colid)?;
 
 tablesample_clause:
-	KW_TABLESAMPLE usualName OPEN_PAREN expr_list CLOSE_PAREN opt_repeatable_clause?;
+	KW_TABLESAMPLE funcName OPEN_PAREN expr_list CLOSE_PAREN opt_repeatable_clause?;
 
 opt_repeatable_clause: KW_REPEATABLE OPEN_PAREN a_expr CLOSE_PAREN;
 
@@ -2768,7 +2768,7 @@ c_expr:
 plsqlvariablename: PLSQLVARIABLENAME;
 
 func_application:
-	usualName (OPEN_PAREN (
+	funcName (OPEN_PAREN (
 		func_arg_list (COMMA KW_VARIADIC func_arg_expr)? opt_sort_clause?
 		| KW_VARIADIC func_arg_expr opt_sort_clause?
 		| (KW_ALL | KW_DISTINCT) func_arg_list opt_sort_clause?
@@ -3071,7 +3071,7 @@ aexprconst:
 	| sconst
 	| bconst
 	| xconst
-	| usualName (
+	| funcName (
 		sconst
 		| OPEN_PAREN func_arg_list opt_sort_clause? CLOSE_PAREN sconst
 	)
