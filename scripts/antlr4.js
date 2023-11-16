@@ -15,8 +15,10 @@ const baseCmd = 'antlr4ts -visitor -listener -Xexact-output-dir -o';
 function compile(language) {
     const cmd = `${baseCmd} ${outputPath}/${language} ${grammarsPath}/${language}/*.g4`;
 
-    console.info(chalk.green(`\nRemoving:`, chalk.gray(`${outputPath}/${language}/*`)));
-    fs.rmSync(`${outputPath}/${language}`, { recursive: true });
+    if (fs.existsSync(`${outputPath}/${language}`)) {
+        console.info(chalk.green(`\nRemoving:`, chalk.gray(`${outputPath}/${language}/*`)));
+        fs.rmSync(`${outputPath}/${language}`, { recursive: true });
+    }
 
     console.info(chalk.green('Executing:'), chalk.gray(cmd));
     exec(cmd, (err) => {
