@@ -127,19 +127,7 @@ stmt:
 	| deletestmt
 	| discardstmt
 	| dostmt
-	| dropcaststmt
-	| dropopclassstmt
-	| dropopfamilystmt
-	| dropownedstmt
-	| dropviewstmt
-	| dropschemastmt
 	| dropstmt
-	| dropsubscriptionstmt
-	| droptablespacestmt
-	| droptransformstmt
-	| droprolestmt
-	| dropusermappingstmt
-	| dropdbstmt
 	| executestmt
 	| explainstmt
 	| fetchstmt
@@ -250,9 +238,6 @@ routine_action:  KW_IMMUTABLE | KW_STABLE | KW_VOLATILE
     | KW_SET name KW_FROM KW_CURRENT
     | KW_RESET name
     | KW_RESET KW_ALL;
-
-droprolestmt:
-	KW_DROP (KW_ROLE | KW_USER | KW_GROUP) opt_if_exists? role_list;
 
 creategroupstmt: KW_CREATE KW_GROUP groupname opt_with? optrolelist;
 
@@ -821,8 +806,6 @@ createtablespacestmt:
 
 opttablespaceowner: KW_OWNER rolespec;
 
-droptablespacestmt: KW_DROP KW_TABLESPACE opt_if_exists? tablespace_name;
-
 createextensionstmt:
 	KW_CREATE KW_EXTENSION opt_if_not_exists? name opt_with? create_extension_opt_list;
 
@@ -932,9 +915,6 @@ createusermappingstmt:
 	KW_CREATE KW_USER KW_MAPPING opt_if_not_exists? KW_FOR auth_ident KW_SERVER name create_generic_options?;
 
 auth_ident: rolespec | KW_USER;
-
-dropusermappingstmt:
-	KW_DROP KW_USER KW_MAPPING opt_if_exists? KW_FOR auth_ident KW_SERVER name;
 
 alterusermappingstmt:
 	KW_ALTER KW_USER KW_MAPPING KW_FOR auth_ident KW_SERVER name alter_generic_options;
@@ -1152,18 +1132,22 @@ opclass_drop:
 	KW_OPERATOR iconst OPEN_PAREN type_list CLOSE_PAREN
 	| KW_FUNCTION iconst OPEN_PAREN type_list CLOSE_PAREN;
 
-dropopclassstmt:
-	KW_DROP KW_OPERATOR KW_CLASS opt_if_exists? any_name KW_USING name opt_drop_behavior?;
-
-dropopfamilystmt:
-	KW_DROP KW_OPERATOR KW_FAMILY opt_if_exists? any_name KW_USING name opt_drop_behavior?;
-
-dropownedstmt: KW_DROP KW_OWNED KW_BY role_list opt_drop_behavior?;
-
 reassignownedstmt: KW_REASSIGN KW_OWNED KW_BY role_list KW_TO rolespec;
 
 dropstmt:
-	KW_DROP object_type_any_name_list opt_drop_behavior?
+	  KW_DROP KW_TABLE opt_if_exists? table_name_list opt_drop_behavior?
+	| KW_DROP KW_SEQUENCE opt_if_exists? name_list opt_drop_behavior?
+	| KW_DROP KW_VIEW opt_if_exists? view_nameList opt_drop_behavior?
+	| KW_DROP KW_MATERIALIZED KW_VIEW opt_if_exists? view_nameList opt_drop_behavior?
+	| KW_DROP KW_INDEX opt_if_exists? name_list opt_drop_behavior?
+	| KW_DROP KW_FOREIGN KW_TABLE opt_if_exists? table_name_list opt_drop_behavior?
+	| KW_DROP KW_COLLATION opt_if_exists? name_list opt_drop_behavior?
+	| KW_DROP KW_CONVERSION opt_if_exists? name_list opt_drop_behavior?
+	| KW_DROP KW_STATISTICS opt_if_exists? name_list opt_drop_behavior?
+	| KW_DROP KW_TEXT KW_SEARCH KW_PARSER opt_if_exists? name_list opt_drop_behavior?
+	| KW_DROP KW_TEXT KW_SEARCH KW_DICTIONARY opt_if_exists? name_list opt_drop_behavior?
+	| KW_DROP KW_TEXT KW_SEARCH KW_TEMPLATE opt_if_exists? name_list opt_drop_behavior?
+	| KW_DROP KW_TEXT KW_SEARCH KW_CONFIGURATION opt_if_exists? name_list opt_drop_behavior?
 	| KW_DROP KW_ACCESS KW_METHOD opt_if_exists? name_list opt_drop_behavior?
 	| KW_DROP KW_EVENT KW_TRIGGER opt_if_exists? name_list opt_drop_behavior?
 	| KW_DROP KW_EXTENSION opt_if_exists? name_list opt_drop_behavior?
@@ -1172,33 +1156,27 @@ dropstmt:
 	| KW_DROP KW_PUBLICATION opt_if_exists? name_list opt_drop_behavior?
 	| KW_DROP KW_SERVER opt_if_exists? name_list opt_drop_behavior?
 	| KW_DROP KW_SCHEMA opt_if_exists? schema_name_list opt_drop_behavior?
-	| KW_DROP object_type_name_on_any_name opt_if_exists? name KW_ON any_name opt_drop_behavior?
+	| KW_DROP KW_POLICY opt_if_exists? name KW_ON any_name opt_drop_behavior?
+	| KW_DROP KW_RULE opt_if_exists? name KW_ON any_name opt_drop_behavior?
+	| KW_DROP KW_TRIGGER opt_if_exists? name KW_ON any_name opt_drop_behavior?
 	| KW_DROP KW_TYPE opt_if_exists? type_name_list opt_drop_behavior?
 	| KW_DROP KW_DOMAIN opt_if_exists? type_name_list opt_drop_behavior?
-	| KW_DROP KW_INDEX KW_CONCURRENTLY opt_if_exists? any_name_list opt_drop_behavior?;
-
-dropviewstmt:
-	KW_DROP KW_VIEW opt_if_exists? view_nameList opt_drop_behavior?;
+	| KW_DROP KW_INDEX KW_CONCURRENTLY opt_if_exists? any_name_list opt_drop_behavior?
+	| KW_DROP KW_CAST opt_if_exists? OPEN_PAREN typename KW_AS typename CLOSE_PAREN opt_drop_behavior?
+	| KW_DROP KW_OPERATOR KW_CLASS opt_if_exists? any_name KW_USING name opt_drop_behavior?
+	| KW_DROP KW_OPERATOR KW_FAMILY opt_if_exists? any_name KW_USING name opt_drop_behavior?
+	| KW_DROP KW_OWNED KW_BY role_list opt_drop_behavior?
+	| KW_DROP KW_VIEW opt_if_exists? view_nameList opt_drop_behavior?
+	| KW_DROP KW_SUBSCRIPTION opt_if_exists? name opt_drop_behavior?
+	| KW_DROP KW_TABLESPACE opt_if_exists? tablespace_name
+	| KW_DROP KW_TRANSFORM opt_if_exists? KW_FOR typename KW_LANGUAGE name opt_drop_behavior?
+	| KW_DROP (KW_ROLE | KW_USER | KW_GROUP) opt_if_exists? role_list
+	| KW_DROP KW_USER KW_MAPPING opt_if_exists? KW_FOR auth_ident KW_SERVER name
+	| KW_DROP KW_DATABASE opt_if_exists? database_name (
+		opt_with? OPEN_PAREN drop_option_list CLOSE_PAREN
+	)?;
 
 view_nameList: view_name (COMMA view_name)*;
-
-dropschemastmt:
-	KW_DROP KW_SCHEMA opt_if_exists? schema_name (COMMA schema_name)* opt_drop_behavior?;
-
-object_type_any_name_list: 
-	KW_TABLE opt_if_exists? table_name_list
-	| KW_SEQUENCE opt_if_exists? name_list
-	| KW_VIEW opt_if_exists? view_nameList
-	| KW_MATERIALIZED KW_VIEW opt_if_exists? view_nameList
-	| KW_INDEX opt_if_exists? name_list
-	| KW_FOREIGN KW_TABLE opt_if_exists? table_name_list
-	| KW_COLLATION opt_if_exists? name_list
-	| KW_CONVERSION opt_if_exists? name_list
-	| KW_STATISTICS opt_if_exists? name_list
-	| KW_TEXT KW_SEARCH KW_PARSER opt_if_exists? name_list
-	| KW_TEXT KW_SEARCH KW_DICTIONARY opt_if_exists? name_list
-	| KW_TEXT KW_SEARCH KW_TEMPLATE opt_if_exists? name_list
-	| KW_TEXT KW_SEARCH KW_CONFIGURATION opt_if_exists? name_list;
 
 object_type_any_name:
 	KW_TABLE table_name
@@ -1253,9 +1231,10 @@ commentstmt:
 	| KW_COMMENT KW_ON KW_AGGREGATE aggregate_with_argtypes KW_IS comment_text
 	| KW_COMMENT KW_ON KW_FUNCTION function_with_argtypes KW_IS comment_text
 	| KW_COMMENT KW_ON KW_OPERATOR operator_with_argtypes KW_IS comment_text
-	| KW_COMMENT KW_ON KW_CONSTRAINT name KW_ON any_name KW_IS comment_text
-	| KW_COMMENT KW_ON KW_CONSTRAINT name KW_ON KW_DOMAIN any_name KW_IS comment_text
-	| KW_COMMENT KW_ON object_type_name_on_any_name name KW_ON any_name KW_IS comment_text
+	| KW_COMMENT KW_ON KW_CONSTRAINT name KW_ON KW_DOMAIN? any_name KW_IS comment_text
+	| KW_COMMENT KW_ON KW_POLICY name KW_ON any_name KW_IS comment_text
+	| KW_COMMENT KW_ON KW_RULE name KW_ON any_name KW_IS comment_text
+	| KW_COMMENT KW_ON KW_TRIGGER name KW_ON any_name KW_IS comment_text
 	| KW_COMMENT KW_ON KW_PROCEDURE procedure_with_argtypes KW_IS comment_text
 	| KW_COMMENT KW_ON KW_ROUTINE function_with_argtypes KW_IS comment_text
 	| KW_COMMENT KW_ON KW_TRANSFORM KW_FOR typename KW_LANGUAGE name KW_IS comment_text
@@ -1625,9 +1604,6 @@ createcaststmt:
 
 cast_context: KW_AS KW_IMPLICIT | KW_AS KW_ASSIGNMENT;
 
-dropcaststmt:
-	KW_DROP KW_CAST opt_if_exists? OPEN_PAREN typename KW_AS typename CLOSE_PAREN opt_drop_behavior?;
-
 opt_if_exists: KW_IF KW_EXISTS;
 
 createtransformstmt:
@@ -1641,9 +1617,6 @@ transform_element_list:
 		function_with_argtypes
 	| KW_FROM KW_SQL KW_WITH KW_FUNCTION function_with_argtypes
 	| KW_TO KW_SQL KW_WITH KW_FUNCTION function_with_argtypes;
-
-droptransformstmt:
-	KW_DROP KW_TRANSFORM opt_if_exists? KW_FOR typename KW_LANGUAGE name opt_drop_behavior?;
 
 reindexstmt:
 	KW_REINDEX reindex_target_type
@@ -1830,8 +1803,6 @@ altersubscriptionstmt:
 	| KW_ALTER KW_SUBSCRIPTION name KW_SKIP OPEN_PAREN old_aggr_elem CLOSE_PAREN
 	| KW_ALTER KW_SUBSCRIPTION name KW_OWNER KW_TO rolespec;
 
-dropsubscriptionstmt:
-	KW_DROP KW_SUBSCRIPTION opt_if_exists? name opt_drop_behavior?;
 
 rulestmt:
 	KW_CREATE opt_or_replace? KW_RULE name KW_AS KW_ON event KW_TO qualified_name where_clause? KW_DO opt_instead?
@@ -1940,11 +1911,6 @@ alterdatabasestmt:
 	);
 
 alterdatabasesetstmt: KW_ALTER KW_DATABASE database_name setresetclause?;
-
-dropdbstmt:
-	KW_DROP KW_DATABASE opt_if_exists? database_name (
-		opt_with? OPEN_PAREN drop_option_list CLOSE_PAREN
-	)?;
 
 drop_option_list: drop_option (COMMA drop_option)*;
 
