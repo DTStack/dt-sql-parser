@@ -21,18 +21,18 @@ export default class PostgresSQL extends BasicParser<
     }
 
     protected preferredRules: Set<number> = new Set([
-        PostgreSQLParser.RULE_createTableName, // table name
-        PostgreSQLParser.RULE_tableName, // table name that will be created
-        PostgreSQLParser.RULE_funcName, // function name
-        PostgreSQLParser.RULE_createFuncName, // function name that will be created
-        PostgreSQLParser.RULE_createSchemaName, // schema name that will be created
-        PostgreSQLParser.RULE_schemaName, // schema name
-        PostgreSQLParser.RULE_createViewName, // view name that will be created
-        PostgreSQLParser.RULE_viewName, // view name
-        PostgreSQLParser.RULE_createDatabaseName, // database name that will be created
-        PostgreSQLParser.RULE_databaseName, // database name
-        PostgreSQLParser.RULE_createProcedureName, // procedure name that will be created
-        PostgreSQLParser.RULE_procedureName, // procedure name
+        PostgreSQLParser.RULE_table_name_create, // table name
+        PostgreSQLParser.RULE_table_name, // table name that will be created
+        PostgreSQLParser.RULE_function_name, // function name
+        PostgreSQLParser.RULE_function_name_create, // function name that will be created
+        PostgreSQLParser.RULE_schema_name_create, // schema name that will be created
+        PostgreSQLParser.RULE_schema_name, // schema name
+        PostgreSQLParser.RULE_view_name_create, // view name that will be created
+        PostgreSQLParser.RULE_view_name, // view name
+        PostgreSQLParser.RULE_database_name_create, // database name that will be created
+        PostgreSQLParser.RULE_database_name, // database name
+        PostgreSQLParser.RULE_procedure_name_create, // procedure name that will be created
+        PostgreSQLParser.RULE_procedure_name, // procedure name
     ]);
 
     protected get splitListener() {
@@ -57,51 +57,51 @@ export default class PostgresSQL extends BasicParser<
 
             let syntaxContextType: SyntaxContextType;
             switch (ruleType) {
-                case PostgreSQLParser.RULE_createTableName: {
+                case PostgreSQLParser.RULE_table_name_create: {
                     syntaxContextType = SyntaxContextType.TABLE_CREATE;
                     break;
                 }
-                case PostgreSQLParser.RULE_tableName: {
+                case PostgreSQLParser.RULE_table_name: {
                     syntaxContextType = SyntaxContextType.TABLE;
                     break;
                 }
-                case PostgreSQLParser.RULE_createFuncName: {
+                case PostgreSQLParser.RULE_function_name_create: {
                     syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
                     break;
                 }
-                case PostgreSQLParser.RULE_funcName: {
+                case PostgreSQLParser.RULE_function_name: {
                     syntaxContextType = SyntaxContextType.FUNCTION;
                     break;
                 }
-                case PostgreSQLParser.RULE_createSchemaName: {
+                case PostgreSQLParser.RULE_schema_name_create: {
                     syntaxContextType = SyntaxContextType.DATABASE_CREATE;
                     break;
                 }
-                case PostgreSQLParser.RULE_schemaName: {
+                case PostgreSQLParser.RULE_schema_name: {
                     syntaxContextType = SyntaxContextType.DATABASE;
                     break;
                 }
-                case PostgreSQLParser.RULE_createViewName: {
+                case PostgreSQLParser.RULE_view_name_create: {
                     syntaxContextType = SyntaxContextType.VIEW_CREATE;
                     break;
                 }
-                case PostgreSQLParser.RULE_viewName: {
+                case PostgreSQLParser.RULE_view_name: {
                     syntaxContextType = SyntaxContextType.VIEW;
                     break;
                 }
-                case PostgreSQLParser.RULE_createDatabaseName: {
+                case PostgreSQLParser.RULE_database_name_create: {
                     syntaxContextType = SyntaxContextType.DATABASE_CREATE;
                     break;
                 }
-                case PostgreSQLParser.RULE_databaseName: {
+                case PostgreSQLParser.RULE_database_name: {
                     syntaxContextType = SyntaxContextType.DATABASE;
                     break;
                 }
-                case PostgreSQLParser.RULE_createProcedureName: {
+                case PostgreSQLParser.RULE_procedure_name_create: {
                     syntaxContextType = SyntaxContextType.PROCEDURE_CREATE;
                     break;
                 }
-                case PostgreSQLParser.RULE_procedureName: {
+                case PostgreSQLParser.RULE_procedure_name: {
                     syntaxContextType = SyntaxContextType.PROCEDURE;
                     break;
                 }
