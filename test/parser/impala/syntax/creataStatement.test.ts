@@ -7,6 +7,7 @@ const features = {
     dbs: readSQL(__dirname, 'create_db.sql'),
     functions: readSQL(__dirname, 'create_function.sql'),
     roles: readSQL(__dirname, 'create_role.sql'),
+    tables: readSQL(__dirname, 'create_table.sql'),
     views: readSQL(__dirname, 'create_view.sql'),
 };
 
@@ -27,6 +28,13 @@ describe('ImpalaSQL Create Syntax Tests', () => {
     });
     describe('CREATE ROLE', () => {
         features.roles.forEach((db) => {
+            it(db, () => {
+                expect(parser.validate(db).length).toBe(0);
+            });
+        });
+    });
+    describe('CREATE TABLE', () => {
+        features.tables.forEach((db) => {
             it(db, () => {
                 expect(parser.validate(db).length).toBe(0);
             });

@@ -46,6 +46,7 @@ import { CreateSchemaContext } from "./ImpalaSqlParserParser";
 import { AlterSchemaContext } from "./ImpalaSqlParserParser";
 import { DropSchemaContext } from "./ImpalaSqlParserParser";
 import { CreateTableContext } from "./ImpalaSqlParserParser";
+import { CreateTableSelectContext } from "./ImpalaSqlParserParser";
 import { CreateTableLikeContext } from "./ImpalaSqlParserParser";
 import { CreateKuduTableContext } from "./ImpalaSqlParserParser";
 import { CreateKuduTableAsSelectContext } from "./ImpalaSqlParserParser";
@@ -155,12 +156,15 @@ import { QualifiedArgumentContext } from "./ImpalaSqlParserParser";
 import { UnqualifiedArgumentContext } from "./ImpalaSqlParserParser";
 import { ProgramContext } from "./ImpalaSqlParserParser";
 import { StatementContext } from "./ImpalaSqlParserParser";
+import { CreateCommonItemContext } from "./ImpalaSqlParserParser";
 import { AssignmentListContext } from "./ImpalaSqlParserParser";
 import { AssignmentItemContext } from "./ImpalaSqlParserParser";
 import { ViewColumnsContext } from "./ImpalaSqlParserParser";
 import { QueryContext } from "./ImpalaSqlParserParser";
 import { WithContext } from "./ImpalaSqlParserParser";
 import { TableElementContext } from "./ImpalaSqlParserParser";
+import { ConstraintSpecificationContext } from "./ImpalaSqlParserParser";
+import { ForeignKeySpecificationContext } from "./ImpalaSqlParserParser";
 import { ColumnDefinitionContext } from "./ImpalaSqlParserParser";
 import { KuduTableElementContext } from "./ImpalaSqlParserParser";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParserParser";
@@ -169,6 +173,9 @@ import { KuduAttributesContext } from "./ImpalaSqlParserParser";
 import { KuduStorageAttrContext } from "./ImpalaSqlParserParser";
 import { StatsKeyContext } from "./ImpalaSqlParserParser";
 import { FileFormatContext } from "./ImpalaSqlParserParser";
+import { KuduPartitionClauseContext } from "./ImpalaSqlParserParser";
+import { HashClauseContext } from "./ImpalaSqlParserParser";
+import { RangeClauseContext } from "./ImpalaSqlParserParser";
 import { KuduPartitionSpecContext } from "./ImpalaSqlParserParser";
 import { ConstantsContext } from "./ImpalaSqlParserParser";
 import { CacheSpecContext } from "./ImpalaSqlParserParser";
@@ -582,6 +589,14 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitCreateTable?: (ctx: CreateTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createTableSelect`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateTableSelect?: (ctx: CreateTableSelectContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `createTableLike`
@@ -1454,6 +1469,13 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitStatement?: (ctx: StatementContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.createCommonItem`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateCommonItem?: (ctx: CreateCommonItemContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `ImpalaSqlParserParser.assignmentList`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1494,6 +1516,20 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitTableElement?: (ctx: TableElementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.constraintSpecification`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitConstraintSpecification?: (ctx: ConstraintSpecificationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.foreignKeySpecification`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitForeignKeySpecification?: (ctx: ForeignKeySpecificationContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParserParser.columnDefinition`.
@@ -1550,6 +1586,27 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitFileFormat?: (ctx: FileFormatContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.kuduPartitionClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitKuduPartitionClause?: (ctx: KuduPartitionClauseContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.hashClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitHashClause?: (ctx: HashClauseContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParserParser.rangeClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRangeClause?: (ctx: RangeClauseContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParserParser.kuduPartitionSpec`.

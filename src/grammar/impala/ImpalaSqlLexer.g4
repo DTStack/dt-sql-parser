@@ -125,6 +125,7 @@ KW_FOLLOWING                              : 'FOLLOWING';
 KW_FOR                                    : 'FOR';
 KW_FORMAT                                 : 'FORMAT';
 KW_FORMATTED                              : 'FORMATTED';
+KW_FOREIGN                                : 'FOREIGN';
 KW_FROM                                   : 'FROM';
 KW_FULL                                   : 'FULL';
 KW_FUNCTION                               : 'FUNCTION';
@@ -312,6 +313,9 @@ KW_ORC                                    : 'ORC'; //ORC文件格式
 KW_AVRO                                   : 'AVRO'; //Avro文件格式
 KW_SEQUENCEFILE                           : 'SEQUENCEFILE'; //Sequence文件格式
 KW_RCFILE                                 : 'RCFILE'; //RC文件格式
+KW_REFERENCES                             : 'REFERENCES';
+KW_NOVALIDATE                             : 'NOVALIDATE';
+KW_RELY                                   : 'RELY';
 
 
 // TODO: 这种写法是否正确

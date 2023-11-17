@@ -35,31 +35,27 @@ statement
     | KW_ALTER KW_DATABASE qualifiedName KW_SET KW_OWNER (KW_USER | KW_ROLE) identifier         #alterSchema
     | KW_DROP (KW_SCHEMA | KW_DATABASE) (KW_IF KW_EXISTS)? qualifiedName (KW_CASCADE | KW_RESTRICT)?     #dropSchema
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-            (LPAREN tableElement (COMMA tableElement)* RPAREN)?
-            (KW_PARTITIONED KW_BY LPAREN partitionedBy RPAREN)?
-            (KW_SORT KW_BY LPAREN sortedBy RPAREN)?
-            (KW_COMMENT comment=string)?
-            (KW_ROW KW_FORMAT rowFormat)?
-            (KW_WITH KW_SERDEPROPERTIES serdProp=properties)?
-            (KW_STORED_AS stored_as=identifier)?
-            (KW_LOCATION location=string)?
-            (KW_CACHED KW_IN cacheName=qualifiedName (KW_WITH KW_REPLICATION EQ INTEGER_VALUE )? | KW_UNCACHED)?
-            (KW_TBLPROPERTIES tblProp=properties)?
-            (KW_AS query)?                                                         #createTable
+        (LPAREN tableElement (COMMA tableElement)* RPAREN)?
+        (KW_PARTITIONED KW_BY partitionedBy)?
+        createCommonItem
+        (KW_AS query)?                                                         #createTable
+    | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
+        (KW_PARTITIONED KW_BY columnAliases)?
+        createCommonItem
+        (KW_AS query)?                                                         #createTableSelect
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
         KW_LIKE (likeTableName=qualifiedName | KW_PARQUET parquet=string)
-        (KW_COMMENT comment=string)?
-        (KW_STORED_AS stored_as=identifier)?
-        (KW_LOCATION location=string)?                                             #createTableLike
+        (KW_PARTITIONED KW_BY partitionedBy)?
+        createCommonItem                                             #createTableLike
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-        (LPAREN kuduTableElement (COMMA kuduTableElement)* (COMMA KW_PRIMARY KW_KEY  columnAliases)? RPAREN)?
-        (KW_PARTITION KW_BY .*)?
+        (LPAREN kuduTableElement (COMMA kuduTableElement)* (COMMA KW_PRIMARY KW_KEY columnAliases)? RPAREN)?
+        (KW_PARTITION KW_BY kuduPartitionClause)?
         (KW_COMMENT string)?
         KW_STORED_AS KW_KUDU
         (KW_TBLPROPERTIES tblProp=properties)?                            #createKuduTable
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-        (LPAREN KW_PRIMARY KW_KEY  columnAliases? RPAREN)?
-        (KW_PARTITION KW_BY .*)?
+        (KW_PRIMARY KW_KEY columnAliases?)?
+        (KW_PARTITION KW_BY kuduPartitionClause)?
         (KW_COMMENT string)?
         KW_STORED_AS KW_KUDU
         (KW_TBLPROPERTIES tblProp=properties)?
@@ -158,6 +154,17 @@ statement
     | KW_REFRESH qualifiedName (KW_PARTITION LPAREN expression (COMMA expression)*? RPAREN)?               #refreshMeta
     | KW_REFRESH KW_AUTHORIZATION                                                               #refreshAuth
     ;
+createCommonItem
+    :
+    (KW_SORT KW_BY columnAliases)?
+    (KW_COMMENT comment=string)?
+    (KW_ROW KW_FORMAT rowFormat)?
+    (KW_WITH KW_SERDEPROPERTIES serdProp=properties)?
+    (KW_STORED_AS fileFormat)?
+    (KW_LOCATION location=string)?
+    (KW_CACHED KW_IN cacheName=qualifiedName (KW_WITH KW_REPLICATION EQ INTEGER_VALUE )? | KW_UNCACHED)?
+    (KW_TBLPROPERTIES tblProp=properties)?
+    ;
 
 assignmentList
     :  assignmentItem (COMMA assignmentItem)*
@@ -180,7 +187,15 @@ with
     ;
 
 tableElement
-    : columnDefinition
+    : identifier type constraintSpecification? (KW_COMMENT string)?
+    ;
+constraintSpecification
+    :
+    KW_PRIMARY KW_KEY columnAliases (KW_DISABLE)? (KW_NOVALIDATE)? (KW_RELY)? ((COMMA foreignKeySpecification | foreignKeySpecification) (COMMA foreignKeySpecification)*?)?
+    ;
+foreignKeySpecification
+    :
+    KW_FOREIGN KW_KEY columnAliases KW_REFERENCES tblName=qualifiedName columnAliases (KW_DISABLE)? (KW_NOVALIDATE)? (KW_RELY)?
     ;
 
 columnDefinition
@@ -192,7 +207,7 @@ kuduTableElement
     ;
 
 kuduColumnDefinition
-    : identifier type (kuduAttributes)? (KW_COMMENT string)? (KW_PRIMARY KW_KEY )?
+    : identifier type (kuduAttributes kuduAttributes*?)? (KW_COMMENT string)? (KW_PRIMARY KW_KEY )?
     ;
 
 columnSpecWithKudu
@@ -222,6 +237,15 @@ fileFormat
     | KW_AVRO
     | KW_SEQUENCEFILE
     | KW_RCFILE
+    ;
+kuduPartitionClause
+    : (hashClause (COMMA hashClause)*? (COMMA rangeClause)?) | rangeClause
+    ;
+hashClause
+    : KW_HASH columnAliases? KW_PARTITIONS number
+    ;
+rangeClause
+    : KW_RANGE columnAliases? LPAREN (KW_PARTITION kuduPartitionSpec (COMMA KW_PARTITION kuduPartitionSpec)*?) RPAREN
     ;
 kuduPartitionSpec
     : KW_VALUE partitionCol constants | constants rangeOperator KW_VALUES rangeOperator constants
@@ -271,7 +295,7 @@ properties
     ;
 
 partitionedBy
-    : columnDefinition (COMMA columnDefinition)*
+    : LPAREN columnDefinition (COMMA columnDefinition)*? RPAREN
     ;
 
 sortedBy
