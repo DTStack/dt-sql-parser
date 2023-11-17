@@ -340,8 +340,8 @@ import { AttrilistContext } from "./PostgreSQLParser";
 import { Opt_or_replaceContext } from "./PostgreSQLParser";
 import { Func_argsContext } from "./PostgreSQLParser";
 import { Func_args_listContext } from "./PostgreSQLParser";
-import { Usual_with_argtypes_listContext } from "./PostgreSQLParser";
-import { Usual_with_argtypesContext } from "./PostgreSQLParser";
+import { Routine_with_argtypes_listContext } from "./PostgreSQLParser";
+import { Routine_with_argtypesContext } from "./PostgreSQLParser";
 import { Procedure_with_argtypes_listContext } from "./PostgreSQLParser";
 import { Procedure_with_argtypesContext } from "./PostgreSQLParser";
 import { Function_with_argtypes_listContext } from "./PostgreSQLParser";
@@ -4607,26 +4607,26 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitFunc_args_list?: (ctx: Func_args_listContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `PostgreSQLParser.usual_with_argtypes_list`.
+	 * Enter a parse tree produced by `PostgreSQLParser.routine_with_argtypes_list`.
 	 * @param ctx the parse tree
 	 */
-	enterUsual_with_argtypes_list?: (ctx: Usual_with_argtypes_listContext) => void;
+	enterRoutine_with_argtypes_list?: (ctx: Routine_with_argtypes_listContext) => void;
 	/**
-	 * Exit a parse tree produced by `PostgreSQLParser.usual_with_argtypes_list`.
+	 * Exit a parse tree produced by `PostgreSQLParser.routine_with_argtypes_list`.
 	 * @param ctx the parse tree
 	 */
-	exitUsual_with_argtypes_list?: (ctx: Usual_with_argtypes_listContext) => void;
+	exitRoutine_with_argtypes_list?: (ctx: Routine_with_argtypes_listContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `PostgreSQLParser.usual_with_argtypes`.
+	 * Enter a parse tree produced by `PostgreSQLParser.routine_with_argtypes`.
 	 * @param ctx the parse tree
 	 */
-	enterUsual_with_argtypes?: (ctx: Usual_with_argtypesContext) => void;
+	enterRoutine_with_argtypes?: (ctx: Routine_with_argtypesContext) => void;
 	/**
-	 * Exit a parse tree produced by `PostgreSQLParser.usual_with_argtypes`.
+	 * Exit a parse tree produced by `PostgreSQLParser.routine_with_argtypes`.
 	 * @param ctx the parse tree
 	 */
-	exitUsual_with_argtypes?: (ctx: Usual_with_argtypesContext) => void;
+	exitRoutine_with_argtypes?: (ctx: Routine_with_argtypesContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.procedure_with_argtypes_list`.
