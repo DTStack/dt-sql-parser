@@ -33,7 +33,6 @@ import { AlterroutinestmtContext } from "./PostgreSQLParser";
 import { Alter_routine_cluaseContext } from "./PostgreSQLParser";
 import { Routine_action_listContext } from "./PostgreSQLParser";
 import { Routine_actionContext } from "./PostgreSQLParser";
-import { DroprolestmtContext } from "./PostgreSQLParser";
 import { CreategroupstmtContext } from "./PostgreSQLParser";
 import { AltergroupstmtContext } from "./PostgreSQLParser";
 import { Add_dropContext } from "./PostgreSQLParser";
@@ -183,7 +182,6 @@ import { Opt_validatorContext } from "./PostgreSQLParser";
 import { Opt_proceduralContext } from "./PostgreSQLParser";
 import { CreatetablespacestmtContext } from "./PostgreSQLParser";
 import { OpttablespaceownerContext } from "./PostgreSQLParser";
-import { DroptablespacestmtContext } from "./PostgreSQLParser";
 import { CreateextensionstmtContext } from "./PostgreSQLParser";
 import { Create_extension_opt_listContext } from "./PostgreSQLParser";
 import { Create_extension_opt_itemContext } from "./PostgreSQLParser";
@@ -215,7 +213,6 @@ import { Import_qualification_typeContext } from "./PostgreSQLParser";
 import { Import_qualificationContext } from "./PostgreSQLParser";
 import { CreateusermappingstmtContext } from "./PostgreSQLParser";
 import { Auth_identContext } from "./PostgreSQLParser";
-import { DropusermappingstmtContext } from "./PostgreSQLParser";
 import { AlterusermappingstmtContext } from "./PostgreSQLParser";
 import { CreatepolicystmtContext } from "./PostgreSQLParser";
 import { AlterpolicystmtContext } from "./PostgreSQLParser";
@@ -283,15 +280,9 @@ import { CreateopfamilystmtContext } from "./PostgreSQLParser";
 import { AlteropfamilystmtContext } from "./PostgreSQLParser";
 import { Opclass_drop_listContext } from "./PostgreSQLParser";
 import { Opclass_dropContext } from "./PostgreSQLParser";
-import { DropopclassstmtContext } from "./PostgreSQLParser";
-import { DropopfamilystmtContext } from "./PostgreSQLParser";
-import { DropownedstmtContext } from "./PostgreSQLParser";
 import { ReassignownedstmtContext } from "./PostgreSQLParser";
 import { DropstmtContext } from "./PostgreSQLParser";
-import { DropviewstmtContext } from "./PostgreSQLParser";
 import { View_nameListContext } from "./PostgreSQLParser";
-import { DropschemastmtContext } from "./PostgreSQLParser";
-import { Object_type_any_name_listContext } from "./PostgreSQLParser";
 import { Object_type_any_nameContext } from "./PostgreSQLParser";
 import { Object_type_nameContext } from "./PostgreSQLParser";
 import { Object_type_name_on_any_nameContext } from "./PostgreSQLParser";
@@ -391,11 +382,9 @@ import { Dostmt_opt_listContext } from "./PostgreSQLParser";
 import { Dostmt_opt_itemContext } from "./PostgreSQLParser";
 import { CreatecaststmtContext } from "./PostgreSQLParser";
 import { Cast_contextContext } from "./PostgreSQLParser";
-import { DropcaststmtContext } from "./PostgreSQLParser";
 import { Opt_if_existsContext } from "./PostgreSQLParser";
 import { CreatetransformstmtContext } from "./PostgreSQLParser";
 import { Transform_element_listContext } from "./PostgreSQLParser";
-import { DroptransformstmtContext } from "./PostgreSQLParser";
 import { ReindexstmtContext } from "./PostgreSQLParser";
 import { Reindex_target_typeContext } from "./PostgreSQLParser";
 import { Reindex_target_multitableContext } from "./PostgreSQLParser";
@@ -422,7 +411,6 @@ import { CreatesubscriptionstmtContext } from "./PostgreSQLParser";
 import { Publication_name_listContext } from "./PostgreSQLParser";
 import { Publication_name_itemContext } from "./PostgreSQLParser";
 import { AltersubscriptionstmtContext } from "./PostgreSQLParser";
-import { DropsubscriptionstmtContext } from "./PostgreSQLParser";
 import { RulestmtContext } from "./PostgreSQLParser";
 import { RuleactionlistContext } from "./PostgreSQLParser";
 import { RuleactionmultiContext } from "./PostgreSQLParser";
@@ -451,7 +439,6 @@ import { Createdb_opt_nameContext } from "./PostgreSQLParser";
 import { Opt_equalContext } from "./PostgreSQLParser";
 import { AlterdatabasestmtContext } from "./PostgreSQLParser";
 import { AlterdatabasesetstmtContext } from "./PostgreSQLParser";
-import { DropdbstmtContext } from "./PostgreSQLParser";
 import { Drop_option_listContext } from "./PostgreSQLParser";
 import { Drop_optionContext } from "./PostgreSQLParser";
 import { AltercollationstmtContext } from "./PostgreSQLParser";
@@ -1114,13 +1101,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitRoutine_action?: (ctx: Routine_actionContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.droprolestmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDroprolestmt?: (ctx: DroprolestmtContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.creategroupstmt`.
@@ -2166,13 +2146,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitOpttablespaceowner?: (ctx: OpttablespaceownerContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.droptablespacestmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDroptablespacestmt?: (ctx: DroptablespacestmtContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.createextensionstmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2388,13 +2361,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitAuth_ident?: (ctx: Auth_identContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropusermappingstmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropusermappingstmt?: (ctx: DropusermappingstmtContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.alterusermappingstmt`.
@@ -2866,27 +2832,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitOpclass_drop?: (ctx: Opclass_dropContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropopclassstmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropopclassstmt?: (ctx: DropopclassstmtContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropopfamilystmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropopfamilystmt?: (ctx: DropopfamilystmtContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropownedstmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropownedstmt?: (ctx: DropownedstmtContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.reassignownedstmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2901,32 +2846,11 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitDropstmt?: (ctx: DropstmtContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropviewstmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropviewstmt?: (ctx: DropviewstmtContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.view_nameList`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitView_nameList?: (ctx: View_nameListContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropschemastmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropschemastmt?: (ctx: DropschemastmtContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.object_type_any_name_list`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitObject_type_any_name_list?: (ctx: Object_type_any_name_listContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.object_type_any_name`.
@@ -3622,13 +3546,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitCast_context?: (ctx: Cast_contextContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropcaststmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropcaststmt?: (ctx: DropcaststmtContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.opt_if_exists`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3648,13 +3565,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitTransform_element_list?: (ctx: Transform_element_listContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.droptransformstmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDroptransformstmt?: (ctx: DroptransformstmtContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.reindexstmt`.
@@ -3837,13 +3747,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitAltersubscriptionstmt?: (ctx: AltersubscriptionstmtContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropsubscriptionstmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropsubscriptionstmt?: (ctx: DropsubscriptionstmtContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.rulestmt`.
@@ -4040,13 +3943,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitAlterdatabasesetstmt?: (ctx: AlterdatabasesetstmtContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.dropdbstmt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitDropdbstmt?: (ctx: DropdbstmtContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.drop_option_list`.
