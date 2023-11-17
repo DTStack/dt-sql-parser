@@ -340,8 +340,8 @@ import { AttrilistContext } from "./PostgreSQLParser";
 import { Opt_or_replaceContext } from "./PostgreSQLParser";
 import { Func_argsContext } from "./PostgreSQLParser";
 import { Func_args_listContext } from "./PostgreSQLParser";
-import { Usual_with_argtypes_listContext } from "./PostgreSQLParser";
-import { Usual_with_argtypesContext } from "./PostgreSQLParser";
+import { Routine_with_argtypes_listContext } from "./PostgreSQLParser";
+import { Routine_with_argtypesContext } from "./PostgreSQLParser";
 import { Procedure_with_argtypes_listContext } from "./PostgreSQLParser";
 import { Procedure_with_argtypesContext } from "./PostgreSQLParser";
 import { Function_with_argtypes_listContext } from "./PostgreSQLParser";
@@ -3252,18 +3252,18 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitFunc_args_list?: (ctx: Func_args_listContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.usual_with_argtypes_list`.
+	 * Visit a parse tree produced by `PostgreSQLParser.routine_with_argtypes_list`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitUsual_with_argtypes_list?: (ctx: Usual_with_argtypes_listContext) => Result;
+	visitRoutine_with_argtypes_list?: (ctx: Routine_with_argtypes_listContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.usual_with_argtypes`.
+	 * Visit a parse tree produced by `PostgreSQLParser.routine_with_argtypes`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitUsual_with_argtypes?: (ctx: Usual_with_argtypesContext) => Result;
+	visitRoutine_with_argtypes?: (ctx: Routine_with_argtypesContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.procedure_with_argtypes_list`.

@@ -835,7 +835,7 @@ alterextensioncontentsstmt:
 	| KW_ALTER KW_EXTENSION name add_drop KW_OPERATOR KW_CLASS any_name KW_USING name
 	| KW_ALTER KW_EXTENSION name add_drop KW_OPERATOR KW_FAMILY any_name KW_USING name
 	| KW_ALTER KW_EXTENSION name add_drop KW_PROCEDURE procedure_with_argtypes
-	| KW_ALTER KW_EXTENSION name add_drop KW_ROUTINE function_with_argtypes
+	| KW_ALTER KW_EXTENSION name add_drop KW_ROUTINE routine_with_argtypes
 	| KW_ALTER KW_EXTENSION name add_drop KW_TRANSFORM KW_FOR typename KW_LANGUAGE name
 	| KW_ALTER KW_EXTENSION name add_drop KW_TYPE typename;
 
@@ -1236,7 +1236,7 @@ commentstmt:
 	| KW_COMMENT KW_ON KW_RULE name KW_ON any_name KW_IS comment_text
 	| KW_COMMENT KW_ON KW_TRIGGER name KW_ON any_name KW_IS comment_text
 	| KW_COMMENT KW_ON KW_PROCEDURE procedure_with_argtypes KW_IS comment_text
-	| KW_COMMENT KW_ON KW_ROUTINE function_with_argtypes KW_IS comment_text
+	| KW_COMMENT KW_ON KW_ROUTINE routine_with_argtypes KW_IS comment_text
 	| KW_COMMENT KW_ON KW_TRANSFORM KW_FOR typename KW_LANGUAGE name KW_IS comment_text
 	| KW_COMMENT KW_ON KW_OPERATOR KW_CLASS any_name KW_USING name KW_IS comment_text
 	| KW_COMMENT KW_ON KW_OPERATOR KW_FAMILY any_name KW_USING name KW_IS comment_text
@@ -1255,7 +1255,7 @@ seclabelstmt:
 	| KW_SECURITY KW_LABEL opt_provider? KW_ON KW_FUNCTION function_with_argtypes KW_IS security_label
 	| KW_SECURITY KW_LABEL opt_provider? KW_ON KW_LARGE KW_OBJECT numericonly KW_IS security_label
 	| KW_SECURITY KW_LABEL opt_provider? KW_ON KW_PROCEDURE procedure_with_argtypes KW_IS security_label
-	| KW_SECURITY KW_LABEL opt_provider? KW_ON KW_ROUTINE function_with_argtypes KW_IS security_label;
+	| KW_SECURITY KW_LABEL opt_provider? KW_ON KW_ROUTINE routine_with_argtypes KW_IS security_label;
 
 opt_provider: KW_FOR nonreservedword_or_sconst;
 
@@ -1335,7 +1335,7 @@ privilege_target:
 	| KW_FOREIGN KW_SERVER name_list
 	| KW_FUNCTION function_with_argtypes_list
 	| KW_PROCEDURE procedure_with_argtypes_list
-	| KW_ROUTINE usual_with_argtypes_list
+	| KW_ROUTINE routine_with_argtypes_list
 	| KW_DATABASE database_nameList
 	| KW_DOMAIN any_name_list
 	| KW_LANGUAGE name_list
@@ -1444,11 +1444,11 @@ func_args: OPEN_PAREN func_args_list? CLOSE_PAREN;
 
 func_args_list: func_arg (COMMA func_arg)*;
 
-usual_with_argtypes_list:
-	usual_with_argtypes (COMMA usual_with_argtypes)*;
+routine_with_argtypes_list:
+	routine_with_argtypes (COMMA routine_with_argtypes)*;
 
-usual_with_argtypes:
-	usual_name func_args
+routine_with_argtypes:
+	routine_name func_args
 	| type_func_name_keyword
 	| colid indirection?;
 
@@ -1560,7 +1560,7 @@ table_func_column_list:
 alterfunctionstmt:
 	KW_ALTER alterFunctionTypeClause alterfunc_opt_list opt_restrict?;
 
-alterFunctionTypeClause: KW_FUNCTION function_with_argtypes | KW_PROCEDURE procedure_with_argtypes | KW_ROUTINE usual_with_argtypes;
+alterFunctionTypeClause: KW_FUNCTION function_with_argtypes | KW_PROCEDURE procedure_with_argtypes | KW_ROUTINE routine_with_argtypes;
 
 alterfunc_opt_list: common_func_opt_item+;
 
@@ -1569,7 +1569,7 @@ opt_restrict: KW_RESTRICT;
 removefuncstmt:
 	KW_DROP KW_FUNCTION opt_if_exists? function_with_argtypes_list opt_drop_behavior?
 	| KW_DROP KW_PROCEDURE opt_if_exists? procedure_with_argtypes_list opt_drop_behavior?
-	| KW_DROP KW_ROUTINE opt_if_exists? usual_with_argtypes_list opt_drop_behavior?;
+	| KW_DROP KW_ROUTINE opt_if_exists? routine_with_argtypes_list opt_drop_behavior?;
 
 removeaggrstmt:
 	KW_DROP KW_AGGREGATE opt_if_exists? aggregate_with_argtypes_list opt_drop_behavior?;
@@ -1653,7 +1653,7 @@ renamestmt:
 	| KW_ALTER KW_POLICY opt_if_exists? name KW_ON qualified_name KW_RENAME KW_TO name
 	| KW_ALTER KW_PROCEDURE procedure_with_argtypes KW_RENAME KW_TO procedure_name_create
 	| KW_ALTER KW_PUBLICATION name KW_RENAME KW_TO name
-	| KW_ALTER KW_ROUTINE function_with_argtypes KW_RENAME KW_TO name
+	| KW_ALTER KW_ROUTINE routine_with_argtypes KW_RENAME KW_TO name
 	| KW_ALTER KW_SCHEMA schema_name KW_RENAME KW_TO schema_name_create
 	| KW_ALTER KW_SERVER name KW_RENAME KW_TO name
 	| KW_ALTER KW_SUBSCRIPTION name KW_RENAME KW_TO name
@@ -1689,7 +1689,7 @@ opt_set_data: KW_SET KW_DATA;
 alterobjectdependsstmt:
 	KW_ALTER KW_FUNCTION function_with_argtypes opt_no? KW_DEPENDS KW_ON KW_EXTENSION name
 	| KW_ALTER KW_PROCEDURE procedure_with_argtypes opt_no? KW_DEPENDS KW_ON KW_EXTENSION name
-	| KW_ALTER KW_ROUTINE function_with_argtypes opt_no? KW_DEPENDS KW_ON KW_EXTENSION name
+	| KW_ALTER KW_ROUTINE routine_with_argtypes opt_no? KW_DEPENDS KW_ON KW_EXTENSION name
 	| KW_ALTER KW_TRIGGER name KW_ON qualified_name opt_no? KW_DEPENDS KW_ON KW_EXTENSION name
 	| KW_ALTER KW_MATERIALIZED KW_VIEW view_name opt_no? KW_DEPENDS KW_ON KW_EXTENSION name
 	| KW_ALTER KW_INDEX qualified_name opt_no? KW_DEPENDS KW_ON KW_EXTENSION name;
@@ -1707,7 +1707,7 @@ alterobjectschemastmt:
 	| KW_ALTER KW_OPERATOR KW_CLASS any_name KW_USING name KW_SET KW_SCHEMA schema_name_create
 	| KW_ALTER KW_OPERATOR KW_FAMILY any_name KW_USING name KW_SET KW_SCHEMA schema_name_create
 	| KW_ALTER KW_PROCEDURE procedure_with_argtypes KW_SET KW_SCHEMA schema_name_create
-	| KW_ALTER KW_ROUTINE function_with_argtypes KW_SET KW_SCHEMA schema_name_create
+	| KW_ALTER KW_ROUTINE routine_with_argtypes KW_SET KW_SCHEMA schema_name_create
 	| KW_ALTER KW_TABLE opt_if_exists? relation_expr KW_SET KW_SCHEMA schema_name_create
 	| KW_ALTER KW_STATISTICS any_name KW_SET KW_SCHEMA schema_name_create
 	| KW_ALTER KW_TEXT KW_SEARCH KW_PARSER any_name KW_SET KW_SCHEMA schema_name_create
@@ -1752,7 +1752,7 @@ alterownerstmt:
 	| KW_ALTER KW_OPERATOR KW_CLASS any_name KW_USING name KW_OWNER KW_TO rolespec
 	| KW_ALTER KW_OPERATOR KW_FAMILY any_name KW_USING name KW_OWNER KW_TO rolespec
 	| KW_ALTER KW_PROCEDURE procedure_with_argtypes KW_OWNER KW_TO rolespec
-	| KW_ALTER KW_ROUTINE function_with_argtypes KW_OWNER KW_TO rolespec
+	| KW_ALTER KW_ROUTINE routine_with_argtypes KW_OWNER KW_TO rolespec
 	| KW_ALTER KW_SCHEMA schema_name KW_OWNER KW_TO rolespec
 	| KW_ALTER KW_TYPE any_name KW_OWNER KW_TO rolespec
 	| KW_ALTER KW_TABLESPACE tablespace_name KW_OWNER KW_TO rolespec
