@@ -122,7 +122,7 @@ statement
             (KW_PARTITION LPAREN expression(COMMA expression)*RPAREN)?
             hintClause? query                                           #insertInto
     | KW_DELETE KW_FROM? qualifiedName (KW_WHERE booleanExpression)?                                   #delete
-    | KW_DELETE expression (KW_AS? identifier)? KW_FROM? relation ((COMMA relation)*)? (KW_WHERE booleanExpression)?                                   #deleteTableRef
+    | KW_DELETE expression (KW_AS? identifier)? KW_FROM relation (COMMA relation)*? (KW_WHERE booleanExpression)?                                   #deleteTableRef
     | KW_UPDATE qualifiedName KW_SET assignmentList (KW_FROM relation (COMMA relation)*)? (KW_WHERE booleanExpression)?    #updateTable
     | KW_UPSERT hintClause? KW_INTO KW_TABLE? qualifiedName
              columnAliases?
@@ -248,14 +248,7 @@ rangeClause
     : KW_RANGE columnAliases? LPAREN (KW_PARTITION kuduPartitionSpec (COMMA KW_PARTITION kuduPartitionSpec)*?) RPAREN
     ;
 kuduPartitionSpec
-    : KW_VALUE partitionCol constants | constants rangeOperator KW_VALUES rangeOperator constants
-    ;
-constants
-    : INTEGER_VALUE
-    | DECIMAL_VALUE
-    | DOUBLE_VALUE
-    | string
-    | booleanValue
+    : KW_VALUE partitionCol expression | expression rangeOperator KW_VALUES rangeOperator expression
     ;
 
 cacheSpec
@@ -313,7 +306,7 @@ property
 queryNoWith:
       queryTerm
       (KW_ORDER KW_BY sortItem (COMMA sortItem)*)?
-      (KW_LIMIT rows=INTEGER_VALUE  (KW_OFFSET offset=INTEGER_VALUE )?)?
+      (KW_LIMIT rows=expression (KW_OFFSET offset=INTEGER_VALUE )?)?
     ;
 
 queryTerm
@@ -326,7 +319,7 @@ queryPrimary
     : querySpecification                   #queryPrimaryDefault
     | KW_TABLE qualifiedName                  #table
     | KW_VALUES expression (COMMA expression)*  #inlineTable
-    | LPAREN queryNoWith  RPAREN                 #subquery
+    | LPAREN queryNoWith RPAREN                 #subquery
     ;
 
 sortItem
@@ -397,7 +390,7 @@ joinCriteria
 
 sampledRelation
     : aliasedRelation (
-        KW_TABLESAMPLE sampleType LPAREN percentage=expression RPAREN
+        KW_TABLESAMPLE sampleType LPAREN percentage=expression RPAREN (KW_REPEATABLE LPAREN seed=expression RPAREN)?
       )?
     ;
 
@@ -433,7 +426,6 @@ booleanExpression
     | left=booleanExpression operator=KW_OR right=booleanExpression   #logicalBinary
     ;
 
-// workaround for https://github.com/antlr/antlr4/issues/780
 predicate[ParserRuleContext value]
     : comparisonOperator right=valueExpression                            #comparison
     | comparisonOperator comparisonQuantifier LPAREN query RPAREN               #quantifiedComparison
@@ -441,6 +433,7 @@ predicate[ParserRuleContext value]
     | KW_NOT? KW_IN LPAREN expression (COMMA expression)* RPAREN                        #inList
     | KW_NOT? KW_IN LPAREN query RPAREN                                               #inSubquery
     | KW_NOT? KW_LIKE pattern=valueExpression (KW_ESCAPE escape=valueExpression)?  #like
+    | KW_REGEXP pattern=valueExpression                      #REGEXP
     | KW_IS KW_NOT? KW_NULL                                                        #nullPredicate
     | KW_IS KW_NOT? KW_DISTINCT KW_FROM right=valueExpression                         #distinctFrom
     ;
@@ -616,31 +609,135 @@ number
     | MINUS? INTEGER_VALUE   #integerLiteral
     ;
 
+
 nonReserved
-    // IMPORTANT: this rule must only contain tokens. Nested rules are not supported. See SqlParser.exitNonReserved
-    : KW_ADD | KW_ADMIN | KW_ALL | KW_ANALYZE | KW_ANY | KW_ARRAY | KW_ASC | KW_AT
-    | KW_BERNOULLI
-    | KW_CALL | KW_CASCADE | KW_CATALOGS | KW_COLUMN | KW_COLUMNS | KW_COMMENT | KW_COMMIT | KW_COMMITTED | KW_CURRENT
-    | KW_DATA | KW_DATABASE | KW_DATABASES | KW_DATE | KW_DAY | KW_DAYS | KW_DEFINER | KW_DESC
-    | KW_EXCLUDING | KW_EXPLAIN
-    | KW_FETCH | KW_FILTER | KW_FIRST | KW_FOLLOWING | KW_FORMAT | KW_FUNCTIONS
-    | KW_GRANT | KW_GRANTED | KW_GRANTS | KW_GRAPHVIZ
-    | KW_HOUR
-    | KW_IF | KW_INCLUDING | KW_INPUT | KW_INTERVAL | KW_INVOKER | KW_IO | KW_ISOLATION
-    | KW_JSON
-    | KW_LAST | KW_LATERAL | KW_LEVEL | KW_LIMIT | KW_LOGICAL
-    | KW_MAP | KW_MINUTE | KW_MONTH
-    | KW_NEXT | KW_NFC | KW_NFD | KW_NFKC | KW_NFKD | KW_NO | KW_NONE | KW_NULLIF | KW_NULLS
-    | KW_OFFSET | KW_ONLY | KW_OPTION | KW_ORDINALITY | KW_OUTPUT | KW_OVER
-    | KW_PARTITION | KW_PARTITIONS | KW_PARQUET | KW_PATH | KW_POSITION | KW_PRECEDING | KW_PRIVILEGES | KW_PROPERTIES
-    | KW_RANGE | KW_READ | KW_RENAME | KW_REPEATABLE | KW_REPLACE | KW_RESET | KW_RESTRICT | KW_REVOKE | KW_ROLE | KW_ROLES | KW_ROLLBACK | KW_ROW | KW_ROWS
-    | KW_SCHEMA | KW_SCHEMAS | KW_SECOND | KW_SECONDS | KW_SECURITY | KW_SERIALIZABLE | KW_SESSION | KW_SET | KW_SETS
-    | KW_SHOW | KW_SOME | KW_START | KW_STATS | KW_SUBSTRING | KW_SYSTEM
-    | KW_TABLES | KW_TABLESAMPLE | KW_TEXT | KW_TIES | KW_TIME | KW_TIMESTAMP | KW_TO | KW_TRANSACTION | KW_TRY_CAST | KW_TYPE
-    | KW_UNBOUNDED | KW_UNCOMMITTED | KW_USE | KW_USER
-    | KW_VALIDATE | KW_VERBOSE | KW_VIEW | KW_VIEWS
-    | KW_WORK | KW_WRITE
-    | KW_YEAR
-    | KW_ZONE
-    | KW_DEFAULT
-    ;
+// IMPORTANT: this rule must only contain tokens. Nested rules are not supported. See SqlParser.exitNonReserved
+	:KW_ADD
+	| KW_ADMIN
+	| KW_ALL
+	| KW_ANALYZE
+	| KW_ANY
+	| KW_ARRAY
+	| KW_ASC
+	| KW_AT
+	| KW_BERNOULLI
+	| KW_CALL
+	| KW_CASCADE
+	| KW_CATALOGS
+	| KW_COLUMN
+	| KW_COLUMNS
+	| KW_COMMENT
+	| KW_COMMIT
+	| KW_COMMITTED
+	| KW_CURRENT
+	| KW_DATA
+	| KW_DATABASE
+	| KW_DATABASES
+	| KW_DATE
+	| KW_DAY
+	| KW_DAYS
+	| KW_DEFINER
+	| KW_DESC
+	| KW_EXCLUDING
+	| KW_EXPLAIN
+	| KW_FETCH
+	| KW_FILTER
+	| KW_FIRST
+	| KW_FOLLOWING
+	| KW_FORMAT
+	| KW_FUNCTIONS
+	| KW_GRANT
+	| KW_GRANTED
+	| KW_GRANTS
+	| KW_GRAPHVIZ
+	| KW_HOUR
+	| KW_IF
+	| KW_INCLUDING
+	| KW_INPUT
+	| KW_INTERVAL
+	| KW_INVOKER
+	| KW_IO
+	| KW_ISOLATION
+	| KW_JSON
+	| KW_LAST
+	| KW_LATERAL
+	| KW_LEVEL
+	| KW_LIMIT
+	| KW_LOGICAL
+	| KW_MAP
+	| KW_MINUTE
+	| KW_MONTH
+	| KW_NEXT
+	| KW_NFC
+	| KW_NFD
+	| KW_NFKC
+	| KW_NFKD
+	| KW_NO
+	| KW_NONE
+	| KW_NULLIF
+	| KW_NULLS
+	| KW_OFFSET
+	| KW_ONLY
+	| KW_OPTION
+	| KW_ORDINALITY
+	| KW_OUTPUT
+	| KW_OVER
+	| KW_PARTITION
+	| KW_PARTITIONS
+	| KW_PARQUET
+	| KW_PATH
+	| KW_POSITION
+	| KW_PRECEDING
+	| KW_PRIVILEGES
+	| KW_PROPERTIES
+	| KW_RANGE
+	| KW_READ
+	| KW_RENAME
+	| KW_REPEATABLE
+	| KW_REPLACE
+	| KW_RESET
+	| KW_RESTRICT
+	| KW_REVOKE
+	| KW_ROLE
+	| KW_ROLES
+	| KW_ROLLBACK
+	| KW_ROW
+	| KW_ROWS
+	| KW_SCHEMA
+	| KW_SCHEMAS
+	| KW_SECOND
+	| KW_SECONDS
+	| KW_SECURITY
+	| KW_SERIALIZABLE
+	| KW_SESSION
+	| KW_SET
+	| KW_SETS
+	| KW_SHOW
+	| KW_SOME
+	| KW_START
+	| KW_STATS
+	| KW_SUBSTRING
+	| KW_SYSTEM
+	| KW_TABLES
+	| KW_TABLESAMPLE
+	| KW_TEXT
+	| KW_TIES
+	| KW_TIME
+	| KW_TIMESTAMP
+	| KW_TO
+	| KW_TRANSACTION
+	| KW_TRY_CAST
+	| KW_TYPE
+	| KW_UNBOUNDED
+	| KW_UNCOMMITTED
+	| KW_USE
+	| KW_USER
+	| KW_VALIDATE
+	| KW_VERBOSE
+	| KW_VIEW
+	| KW_VIEWS
+	| KW_WORK
+	| KW_WRITE
+	| KW_YEAR
+	| KW_ZONE
+	| KW_DEFAULT;

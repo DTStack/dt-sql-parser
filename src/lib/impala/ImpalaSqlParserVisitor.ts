@@ -16,6 +16,7 @@ import { BetweenContext } from "./ImpalaSqlParserParser";
 import { InListContext } from "./ImpalaSqlParserParser";
 import { InSubqueryContext } from "./ImpalaSqlParserParser";
 import { LikeContext } from "./ImpalaSqlParserParser";
+import { REGEXPContext } from "./ImpalaSqlParserParser";
 import { NullPredicateContext } from "./ImpalaSqlParserParser";
 import { DistinctFromContext } from "./ImpalaSqlParserParser";
 import { DecimalLiteralContext } from "./ImpalaSqlParserParser";
@@ -177,7 +178,6 @@ import { KuduPartitionClauseContext } from "./ImpalaSqlParserParser";
 import { HashClauseContext } from "./ImpalaSqlParserParser";
 import { RangeClauseContext } from "./ImpalaSqlParserParser";
 import { KuduPartitionSpecContext } from "./ImpalaSqlParserParser";
-import { ConstantsContext } from "./ImpalaSqlParserParser";
 import { CacheSpecContext } from "./ImpalaSqlParserParser";
 import { RangeOperatorContext } from "./ImpalaSqlParserParser";
 import { PartitionColContext } from "./ImpalaSqlParserParser";
@@ -349,6 +349,14 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitLike?: (ctx: LikeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `REGEXP`
+	 * labeled alternative in `ImpalaSqlParserParser.predicate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitREGEXP?: (ctx: REGEXPContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `nullPredicate`
@@ -1614,13 +1622,6 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitKuduPartitionSpec?: (ctx: KuduPartitionSpecContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `ImpalaSqlParserParser.constants`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitConstants?: (ctx: ConstantsContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParserParser.cacheSpec`.

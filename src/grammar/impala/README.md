@@ -1,3 +1,3 @@
 # Impala SQL Grammar
 
-SQL-like HiveQL, [Hive Grammar](https://github.com/apache/hive/tree/master/hplsql/src/main/antlr4/org/apache/hive/hplsql)
+SQL-like ImpalaSQL, [Impala Grammar](https://github.com/openlookeng/hetu-core/blob/master/hetu-sql-migration-tool/src/main/antlr4/io/hetu/core/migration/source/impala/ImpalaSql.g4)

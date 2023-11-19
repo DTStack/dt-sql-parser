@@ -16,6 +16,7 @@ import { BetweenContext } from "./ImpalaSqlParserParser";
 import { InListContext } from "./ImpalaSqlParserParser";
 import { InSubqueryContext } from "./ImpalaSqlParserParser";
 import { LikeContext } from "./ImpalaSqlParserParser";
+import { REGEXPContext } from "./ImpalaSqlParserParser";
 import { NullPredicateContext } from "./ImpalaSqlParserParser";
 import { DistinctFromContext } from "./ImpalaSqlParserParser";
 import { DecimalLiteralContext } from "./ImpalaSqlParserParser";
@@ -177,7 +178,6 @@ import { KuduPartitionClauseContext } from "./ImpalaSqlParserParser";
 import { HashClauseContext } from "./ImpalaSqlParserParser";
 import { RangeClauseContext } from "./ImpalaSqlParserParser";
 import { KuduPartitionSpecContext } from "./ImpalaSqlParserParser";
-import { ConstantsContext } from "./ImpalaSqlParserParser";
 import { CacheSpecContext } from "./ImpalaSqlParserParser";
 import { RangeOperatorContext } from "./ImpalaSqlParserParser";
 import { PartitionColContext } from "./ImpalaSqlParserParser";
@@ -411,6 +411,19 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitLike?: (ctx: LikeContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `REGEXP`
+	 * labeled alternative in `ImpalaSqlParserParser.predicate`.
+	 * @param ctx the parse tree
+	 */
+	enterREGEXP?: (ctx: REGEXPContext) => void;
+	/**
+	 * Exit a parse tree produced by the `REGEXP`
+	 * labeled alternative in `ImpalaSqlParserParser.predicate`.
+	 * @param ctx the parse tree
+	 */
+	exitREGEXP?: (ctx: REGEXPContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `nullPredicate`
@@ -2458,17 +2471,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitKuduPartitionSpec?: (ctx: KuduPartitionSpecContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParserParser.constants`.
-	 * @param ctx the parse tree
-	 */
-	enterConstants?: (ctx: ConstantsContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParserParser.constants`.
-	 * @param ctx the parse tree
-	 */
-	exitConstants?: (ctx: ConstantsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParserParser.cacheSpec`.
