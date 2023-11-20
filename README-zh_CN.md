@@ -21,14 +21,14 @@ dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发�
 
 **SQL 辅助方法支持**
 
-| SQL 类型     | SQL 切割 | 自动补全   |
+| SQL 类型     | SQL 切割 | 自动补全  |
 | ----------- | -------- | -------- |
 | Generic SQL | WIP      | WIP      |
 | Flink SQL   | ✅       | ✅       |
 | Spark SQL   | ✅       | ✅       |
 | Hive SQL    | ✅       | ✅       |
-| PL/SQL      | WIP      | WIP      |
-| Postgre SQL | WIP      | WIP      |
+| PL/SQL      | WIP      | WIP     |
+| PostgreSQL  | ✅       | ✅       |
 | Trino SQL   | ✅       | ✅       |
 
 > 提示：当前的 Parser 是 `Javascript` 语言版本，如果有必要，可以尝试编译 Grammar 文件到其他目标语言

@@ -35,8 +35,8 @@ Additionally, it provides auxiliary functions such as **SQL splitting** and **co
 | Flink SQL   | ✅           | ✅              |
 | Spark SQL   | ✅           | ✅              |
 | Hive SQL    | ✅           | ✅              |
-| PL/SQL      | WIP          | WIP             |
-| Postgre SQL | WIP          | WIP             |
+| PL/SQL      | WIP          | WIP            |
+| PostgreSQL  | ✅           | ✅              |
 | Trino SQL   | ✅           | ✅              |
 
 >Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
@@ -68,13 +68,13 @@ We recommend learning the Fundamentals usage before continuing. The dt-sql-parse
 import { GenericSQL, FlinkSQL, SparkSQL, HiveSQL, PLSQL, PostgresSQL, TrinoSQL } from 'dt-sql-parser';
 ```
 
-Before employing syntax validation, code completion, and other features, it is necessary to instantiate the Parser of the relevant SQL type.
+Before using syntax validation, code completion, and other features, it is necessary to instantiate the Parser of the relevant SQL type.
 For instance, one can consider using `GenericSQL` as an example:
 ```javascript
 const parser = new GenericSQL();
 ```
 
-The following usage examples will utilize the `GenericSQL`, and the Parser for other SQL types will be employed in a similar manner as `GenericSQL`.
+The following usage examples will utilize the `GenericSQL`, and the Parser for other SQL types will be used in a similar manner as `GenericSQL`.
 
 ### Syntax Validation
 ```javascript
