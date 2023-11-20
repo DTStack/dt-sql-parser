@@ -37,6 +37,10 @@ export enum SyntaxContextType {
     PROCEDURE = 'procedure',
     /** procedure name that will be created */
     PROCEDURE_CREATE = 'procedureCreate',
+    /** column name */
+    COLUMN = 'column',
+    /** column name that will be created */
+    COLUMN_CREATE = 'columnCreate',
 }
 
 export interface WordRange {
