@@ -1,0 +1,58 @@
+-- https://dev.mysql.com/doc/refman/8.0/en/change-replication-source-to.html
+
+/* CHANGE REPLICATION SOURCE TO option [, option] ... [ channel_option ]
+
+option: {
+    SOURCE_BIND = 'interface_name'
+  | SOURCE_HOST = 'host_name'
+  | SOURCE_USER = 'user_name'
+  | SOURCE_PASSWORD = 'password'
+  | SOURCE_PORT = port_num
+  | PRIVILEGE_CHECKS_USER = {NULL | 'account'}
+  | REQUIRE_ROW_FORMAT = {0|1}
+  | REQUIRE_TABLE_PRIMARY_KEY_CHECK = {STREAM | ON | OFF | GENERATE}
+  | ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS = {OFF | LOCAL | uuid}
+  | SOURCE_LOG_FILE = 'source_log_name'
+  | SOURCE_LOG_POS = source_log_pos
+  | SOURCE_AUTO_POSITION = {0|1}
+  | RELAY_LOG_FILE = 'relay_log_name'
+  | RELAY_LOG_POS = relay_log_pos
+  | SOURCE_HEARTBEAT_PERIOD = interval
+  | SOURCE_CONNECT_RETRY = interval
+  | SOURCE_RETRY_COUNT = count
+  | SOURCE_CONNECTION_AUTO_FAILOVER = {0|1}
+  | SOURCE_DELAY = interval
+  | SOURCE_COMPRESSION_ALGORITHMS = 'algorithm[,algorithm][,algorithm]'
+  | SOURCE_ZSTD_COMPRESSION_LEVEL = level
+  | SOURCE_SSL = {0|1}
+  | SOURCE_SSL_CA = 'ca_file_name'
+  | SOURCE_SSL_CAPATH = 'ca_directory_name'
+  | SOURCE_SSL_CERT = 'cert_file_name'
+  | SOURCE_SSL_CRL = 'crl_file_name'
+  | SOURCE_SSL_CRLPATH = 'crl_directory_name'
+  | SOURCE_SSL_KEY = 'key_file_name'
+  | SOURCE_SSL_CIPHER = 'cipher_list'
+  | SOURCE_SSL_VERIFY_SERVER_CERT = {0|1}
+  | SOURCE_TLS_VERSION = 'protocol_list'
+  | SOURCE_TLS_CIPHERSUITES = 'ciphersuite_list'
+  | SOURCE_PUBLIC_KEY_PATH = 'key_file_name'
+  | GET_SOURCE_PUBLIC_KEY = {0|1}
+  | NETWORK_NAMESPACE = 'namespace'
+  | IGNORE_SERVER_IDS = (server_id_list),
+  | GTID_ONLY = {0|1}
+}
+
+channel_option:
+    FOR CHANNEL channel
+
+server_id_list:
+    [server_id [, server_id] ... ] */
+
+
+CHANGE REPLICATION SOURCE TO SOURCE_BIND = 'interface_name', SOURCE_HOST = 'host_name', SOURCE_USER = 'user_name', SOURCE_PASSWORD = 'password', SOURCE_PORT = 3011, SOURCE_LOG_FILE = 'source_log_name', SOURCE_LOG_POS = 10, RELAY_LOG_FILE = 'relay_log_name', RELAY_LOG_POS = 5, SOURCE_HEARTBEAT_PERIOD = 6, SOURCE_CONNECT_RETRY = 7, SOURCE_RETRY_COUNT = 4, SOURCE_DELAY = 8, SOURCE_COMPRESSION_ALGORITHMS = 'zlib,zstd', SOURCE_ZSTD_COMPRESSION_LEVEL = 11, SOURCE_SSL_CA = 'ca_file_name', SOURCE_SSL_CAPATH = 'ca_directory_name', SOURCE_SSL_CERT = 'cert_file_name', SOURCE_SSL_CRL = 'crl_file_name', SOURCE_SSL_CRLPATH = 'crl_directory_name', SOURCE_SSL_KEY = 'key_file_name', SOURCE_SSL_CIPHER = 'cipher_list', SOURCE_TLS_VERSION = 'protocol_list', SOURCE_TLS_CIPHERSUITES = 'ciphersuite_list', SOURCE_PUBLIC_KEY_PATH = 'key_file_name', NETWORK_NAMESPACE = 'namespace', IGNORE_SERVER_IDS = ('127.0.0.1', '127.0.0.1') FOR CHANNEL 'channel';
+CHANGE REPLICATION SOURCE TO PRIVILEGE_CHECKS_USER = NULL, REQUIRE_ROW_FORMAT = 0, REQUIRE_TABLE_PRIMARY_KEY_CHECK = STREAM, ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS = OFF, SOURCE_AUTO_POSITION = 0, SOURCE_CONNECTION_AUTO_FAILOVER = 1, SOURCE_SSL = 1, SOURCE_SSL_VERIFY_SERVER_CERT = 0, GET_SOURCE_PUBLIC_KEY = 1, GTID_ONLY = 1 FOR CHANNEL 'channel';
+CHANGE REPLICATION SOURCE TO PRIVILEGE_CHECKS_USER = 'account', REQUIRE_ROW_FORMAT = 0, REQUIRE_TABLE_PRIMARY_KEY_CHECK = GENERATE, ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS = LOCAL, SOURCE_AUTO_POSITION = 0, SOURCE_CONNECTION_AUTO_FAILOVER = 1, SOURCE_SSL = 1, SOURCE_SSL_VERIFY_SERVER_CERT = 0, GET_SOURCE_PUBLIC_KEY = 1, GTID_ONLY = 1 FOR CHANNEL 'channel';
+
+CHANGE REPLICATION SOURCE TO SOURCE_HOST='source2.example.com', SOURCE_USER='replication', SOURCE_PASSWORD='password', SOURCE_PORT=3306, SOURCE_LOG_FILE='source2-bin.001', SOURCE_LOG_POS=4, SOURCE_CONNECT_RETRY=10;
+CHANGE REPLICATION SOURCE TO SOURCE_HOST='source3.example.com', SOURCE_USER='replication', SOURCE_PASSWORD='password', SOURCE_PORT=3306, SOURCE_AUTO_POSITION = 1 FOR CHANNEL "source_3";
+CHANGE REPLICATION SOURCE TO RELAY_LOG_FILE='replica-relay-bin.006', RELAY_LOG_POS=4025;
