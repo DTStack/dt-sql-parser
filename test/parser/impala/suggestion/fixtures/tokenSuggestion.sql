@@ -1,0 +1,11 @@
+ALTER ;
+
+CREATE ;
+
+DELETE ;
+
+DROP ;
+
+INSERT ;
+
+SHOW ;

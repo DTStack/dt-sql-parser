@@ -88,13 +88,10 @@ ALTER TABLE my_table PARTITION (category = 'Books') SET TBLPROPERTIES ('compress
 ALTER TABLE my_table SET SERDEPROPERTIES ('field.delim' = '|');
 ALTER TABLE my_table PARTITION (date = '2023-01-01') SET SERDEPROPERTIES ('serialization.null.format' = '\N');
 
--- TODO
 /* ALTER TABLE name colname
   ('statsKey'='val', ...) */
--- ALTER TABLE my_table age ('statsKey=numDVs');
--- ALTER TABLE my_table age ('statsKey=numNulls');
--- ALTER TABLE my_table age ('statsKey=avgSize');
--- ALTER TABLE my_table age ('statsKey=maxSize');
+alter table t1 set column stats x ('numDVs'='2','numNulls'='0');
+alter table t1 set column stats s ('numdvs'='3','maxsize'='4');
 
 -- ALTER TABLE name [PARTITION (partition_spec)] SET { CACHED IN 'pool_name' [WITH REPLICATION = integer] | UNCACHED }
 ALTER TABLE my_table SET CACHED IN 'pool_name';
@@ -103,7 +100,6 @@ ALTER TABLE my_table SET CACHED IN 'pool_name' WITH REPLICATION = 3 ;
 ALTER TABLE my_table PARTITION (date = '2023-01-01') SET CACHED IN 'pool_name' WITH REPLICATION = 2;
 ALTER TABLE my_table SET UNCACHED;
 ALTER TABLE my_table PARTITION (date = '2023-01-01')  SET UNCACHED;
-
 
 -- example
 alter table historical_data drop partition (year < 1995);
@@ -131,8 +127,7 @@ alter table p1 partition (month=2, day=2) set fileformat parquet;
 alter table partition_t add partition (y=2000);
 ALTER TABLE t1 ADD COLUMNS (y STRING ENCODING prefix_encoding);
 ALTER TABLE t1 ADD COLUMNS (z INT DEFAULT 10);
--- TODO: 和语法文件对应不上
--- ALTER TABLE t1 ADD COLUMNS (a STRING NOT NULL DEFAULT '', t TIMESTAMP COMPRESSION default_compression);
+ALTER TABLE t1 ADD COLUMNS (a STRING NOT NULL DEFAULT '', t TIMESTAMP COMPRESSION default_compression);
 alter table kt alter column s set encoding prefix_encoding;
 alter table kt alter x set block_size 2048;
 alter table kt alter column t set compression zlib;

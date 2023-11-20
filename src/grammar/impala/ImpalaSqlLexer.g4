@@ -51,8 +51,7 @@ KW_SORT                                   : 'SORT';
 KW_SORTED                                 : 'SORTED';
 KW_BUCKETS                                : 'BUCKETS';
 KW_PURGE                                  : 'PURGE';
-KW_STOR                                   : 'STORED';
-KW_STORED_AS                              : 'STORED AS';
+KW_STORED                                 : 'STORED';
 KW_LOCATION                               : 'LOCATION';
 KW_TBLPROPERTIES                          : 'TBLPROPERTIES';
 KW_DBPROPERTIES                           : 'DBPROPERTIES';
@@ -317,8 +316,6 @@ KW_REFERENCES                             : 'REFERENCES';
 KW_NOVALIDATE                             : 'NOVALIDATE';
 KW_RELY                                   : 'RELY';
 
-
-// TODO: 这种写法是否正确
 STATS_NUMDVS   : '\'NUMDVS\'';
 STATS_NUMNULLS : '\'NUMNULLS\'';
 STATS_AVGSIZE  : '\'AVGSIZE\'';

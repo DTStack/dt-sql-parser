@@ -46,16 +46,14 @@ import { UseContext } from "./ImpalaSqlParserParser";
 import { CreateSchemaContext } from "./ImpalaSqlParserParser";
 import { AlterSchemaContext } from "./ImpalaSqlParserParser";
 import { DropSchemaContext } from "./ImpalaSqlParserParser";
-import { CreateTableContext } from "./ImpalaSqlParserParser";
 import { CreateTableSelectContext } from "./ImpalaSqlParserParser";
 import { CreateTableLikeContext } from "./ImpalaSqlParserParser";
-import { CreateKuduTableContext } from "./ImpalaSqlParserParser";
 import { CreateKuduTableAsSelectContext } from "./ImpalaSqlParserParser";
 import { RenameTableContext } from "./ImpalaSqlParserParser";
+import { AddSingleColumnContext } from "./ImpalaSqlParserParser";
 import { AddColumnsContext } from "./ImpalaSqlParserParser";
 import { ReplaceColumnsContext } from "./ImpalaSqlParserParser";
 import { EditColumnDefineContext } from "./ImpalaSqlParserParser";
-import { AddSingleColumnContext } from "./ImpalaSqlParserParser";
 import { DropSingleColumnContext } from "./ImpalaSqlParserParser";
 import { AlterTableOwnerContext } from "./ImpalaSqlParserParser";
 import { AlterTableKuduOnlyContext } from "./ImpalaSqlParserParser";
@@ -163,7 +161,6 @@ import { AssignmentItemContext } from "./ImpalaSqlParserParser";
 import { ViewColumnsContext } from "./ImpalaSqlParserParser";
 import { QueryContext } from "./ImpalaSqlParserParser";
 import { WithContext } from "./ImpalaSqlParserParser";
-import { TableElementContext } from "./ImpalaSqlParserParser";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParserParser";
 import { ForeignKeySpecificationContext } from "./ImpalaSqlParserParser";
 import { ColumnDefinitionContext } from "./ImpalaSqlParserParser";
@@ -803,19 +800,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitDropSchema?: (ctx: DropSchemaContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `createTable`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	enterCreateTable?: (ctx: CreateTableContext) => void;
-	/**
-	 * Exit a parse tree produced by the `createTable`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	exitCreateTable?: (ctx: CreateTableContext) => void;
-
-	/**
 	 * Enter a parse tree produced by the `createTableSelect`
 	 * labeled alternative in `ImpalaSqlParserParser.statement`.
 	 * @param ctx the parse tree
@@ -842,19 +826,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitCreateTableLike?: (ctx: CreateTableLikeContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `createKuduTable`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	enterCreateKuduTable?: (ctx: CreateKuduTableContext) => void;
-	/**
-	 * Exit a parse tree produced by the `createKuduTable`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	exitCreateKuduTable?: (ctx: CreateKuduTableContext) => void;
-
-	/**
 	 * Enter a parse tree produced by the `createKuduTableAsSelect`
 	 * labeled alternative in `ImpalaSqlParserParser.statement`.
 	 * @param ctx the parse tree
@@ -879,6 +850,19 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitRenameTable?: (ctx: RenameTableContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `addSingleColumn`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	enterAddSingleColumn?: (ctx: AddSingleColumnContext) => void;
+	/**
+	 * Exit a parse tree produced by the `addSingleColumn`
+	 * labeled alternative in `ImpalaSqlParserParser.statement`.
+	 * @param ctx the parse tree
+	 */
+	exitAddSingleColumn?: (ctx: AddSingleColumnContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `addColumns`
@@ -918,19 +902,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitEditColumnDefine?: (ctx: EditColumnDefineContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `addSingleColumn`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	enterAddSingleColumn?: (ctx: AddSingleColumnContext) => void;
-	/**
-	 * Exit a parse tree produced by the `addSingleColumn`
-	 * labeled alternative in `ImpalaSqlParserParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	exitAddSingleColumn?: (ctx: AddSingleColumnContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `dropSingleColumn`
@@ -2306,17 +2277,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitWith?: (ctx: WithContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParserParser.tableElement`.
-	 * @param ctx the parse tree
-	 */
-	enterTableElement?: (ctx: TableElementContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParserParser.tableElement`.
-	 * @param ctx the parse tree
-	 */
-	exitTableElement?: (ctx: TableElementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParserParser.constraintSpecification`.

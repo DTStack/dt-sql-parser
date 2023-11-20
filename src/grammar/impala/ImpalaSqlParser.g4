@@ -35,36 +35,26 @@ statement
     | KW_ALTER KW_DATABASE qualifiedName KW_SET KW_OWNER (KW_USER | KW_ROLE) identifier         #alterSchema
     | KW_DROP (KW_SCHEMA | KW_DATABASE) (KW_IF KW_EXISTS)? qualifiedName (KW_CASCADE | KW_RESTRICT)?     #dropSchema
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-        (LPAREN tableElement (COMMA tableElement)* RPAREN)?
-        (KW_PARTITIONED KW_BY partitionedBy)?
-        createCommonItem
-        (KW_AS query)?                                                         #createTable
-    | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-        (KW_PARTITIONED KW_BY columnAliases)?
+        (LPAREN columnDefinition (COMMA columnDefinition)* (COMMA constraintSpecification)? RPAREN)?
+        (KW_PARTITIONED KW_BY partitionedBy | columnAliases )?
         createCommonItem
         (KW_AS query)?                                                         #createTableSelect
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
-        KW_LIKE (likeTableName=qualifiedName | KW_PARQUET parquet=string)
         (KW_PARTITIONED KW_BY partitionedBy)?
         createCommonItem                                             #createTableLike
     | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
         (LPAREN kuduTableElement (COMMA kuduTableElement)* (COMMA KW_PRIMARY KW_KEY columnAliases)? RPAREN)?
-        (KW_PARTITION KW_BY kuduPartitionClause)?
-        (KW_COMMENT string)?
-        KW_STORED_AS KW_KUDU
-        (KW_TBLPROPERTIES tblProp=properties)?                            #createKuduTable
-    | KW_CREATE KW_EXTERNAL? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tblName=qualifiedName
         (KW_PRIMARY KW_KEY columnAliases?)?
         (KW_PARTITION KW_BY kuduPartitionClause)?
         (KW_COMMENT string)?
-        KW_STORED_AS KW_KUDU
+        KW_STORED KW_AS KW_KUDU
         (KW_TBLPROPERTIES tblProp=properties)?
-        KW_AS query                                                       #createKuduTableAsSelect
+        (KW_AS query)?                                                       #createKuduTableAsSelect
     | KW_ALTER KW_TABLE from=qualifiedName KW_RENAME KW_TO to=qualifiedName        #renameTable
+    | KW_ALTER KW_TABLE qualifiedName KW_ADD KW_COLUMN (KW_IF KW_NOT KW_EXISTS)? columnSpecWithKudu        #addSingleColumn
     | KW_ALTER KW_TABLE qualifiedName KW_ADD (KW_IF KW_NOT KW_EXISTS)? KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)*? RPAREN        #addColumns
     | KW_ALTER KW_TABLE qualifiedName KW_REPLACE KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)*? RPAREN        #replaceColumns
     | KW_ALTER KW_TABLE qualifiedName KW_CHANGE KW_COLUMN columnSpecWithKudu      #editColumnDefine
-    | KW_ALTER KW_TABLE qualifiedName KW_ADD KW_COLUMN (KW_IF KW_NOT KW_EXISTS)? columnSpecWithKudu        #addSingleColumn
     | KW_ALTER KW_TABLE qualifiedName KW_DROP (KW_COLUMN)? identifier        #dropSingleColumn
     | KW_ALTER KW_TABLE qualifiedName KW_SET KW_OWNER (KW_USER | KW_ROLE) identifier        #alterTableOwner
     | KW_ALTER KW_TABLE qualifiedName KW_ALTER (KW_COLUMN)? identifier (KW_SET kuduStorageAttr | KW_DROP KW_DEFAULT)        #alterTableKuduOnly
@@ -160,7 +150,7 @@ createCommonItem
     (KW_COMMENT comment=string)?
     (KW_ROW KW_FORMAT rowFormat)?
     (KW_WITH KW_SERDEPROPERTIES serdProp=properties)?
-    (KW_STORED_AS fileFormat)?
+    (KW_STORED KW_AS fileFormat)?
     (KW_LOCATION location=string)?
     (KW_CACHED KW_IN cacheName=qualifiedName (KW_WITH KW_REPLICATION EQ INTEGER_VALUE )? | KW_UNCACHED)?
     (KW_TBLPROPERTIES tblProp=properties)?
@@ -186,12 +176,9 @@ with
     : KW_WITH namedQuery (COMMA namedQuery)*
     ;
 
-tableElement
-    : identifier type constraintSpecification? (KW_COMMENT string)?
-    ;
 constraintSpecification
     :
-    KW_PRIMARY KW_KEY columnAliases (KW_DISABLE)? (KW_NOVALIDATE)? (KW_RELY)? ((COMMA foreignKeySpecification | foreignKeySpecification) (COMMA foreignKeySpecification)*?)?
+    KW_PRIMARY KW_KEY columnAliases (KW_DISABLE)? (KW_NOVALIDATE | COMMA KW_NOVALIDATE)? (KW_RELY | COMMA KW_RELY)? ((COMMA foreignKeySpecification | foreignKeySpecification) (COMMA foreignKeySpecification)*?)?
     ;
 foreignKeySpecification
     :
@@ -211,7 +198,7 @@ kuduColumnDefinition
     ;
 
 columnSpecWithKudu
-    : identifier type (KW_COMMENT string)? (kuduAttributes)?
+    : identifier type (KW_COMMENT string)? (kuduAttributes kuduAttributes*?)?
     ;
 
 kuduAttributes

@@ -179,14 +179,12 @@ CREATE TABLE games3 (id BIGINT, play ARRAY < MAP < STRING, BIGINT > >) STORED AS
 
 create table unsorted (x bigint);
 
+CREATE TABLE pk(col1 INT, col2 STRING, PRIMARY KEY(col1, col2));
 
--- TODO: 语法文件里面没有这种语法
--- CREATE TABLE pk(col1 INT, col2 STRING, PRIMARY KEY(col1, col2));
+CREATE TABLE fk(id INT, col1 INT, col2 STRING, PRIMARY KEY(id),
+  FOREIGN KEY(col1, col2) REFERENCES pk(col1, col2));
 
--- CREATE TABLE fk(id INT, col1 INT, col2 STRING, PRIMARY KEY(id),
---   FOREIGN KEY(col1, col2) REFERENCES pk(col1, col2));
+CREATE TABLE pk(id INT, PRIMARY KEY(id) DISABLE, NOVALIDATE, RELY);
 
--- CREATE TABLE pk(id INT, PRIMARY KEY(id) DISABLE, NOVALIDATE, RELY);
-
--- CREATE TABLE fk(id INT, col1 INT, col2 STRING, PRIMARY KEY(id),
---   FOREIGN KEY(col1, col2) REFERENCES pk(col1, col2));
+CREATE TABLE fk(id INT, col1 INT, col2 STRING, PRIMARY KEY(id),
+  FOREIGN KEY(col1, col2) REFERENCES pk(col1, col2));

@@ -1,5 +1,6 @@
 -- example
 -- JOINS
+SELECT * from a;
 SELECT t1.c1, t2.c2 FROM t1 JOIN t2
   ON t1.id = t2.id and t1.type_flag = t2.type_flag
   WHERE t1.c1 > 100;
@@ -91,7 +92,7 @@ select x as "Top 3" from numbers order by x desc limit 3;
 
 -- TODO:LIMIT 后面跟内置的函数
 SELECT x FROM t1 LIMIT length('hello world');
--- SELECT x FROM t1 LIMIT cast(truncate(9.9) AS INT);
+SELECT x FROM t1 LIMIT cast(truncate(9.9) AS INT);
 
 -- UNION
 select * from (select x from few_ints union all select x from few_ints) as t1 order by x;
@@ -127,9 +128,6 @@ select count(*) from sample_demo_partitions
 
 -- WITH
 with t1 as (select 1), t2 as (select 2) insert into tab select * from t1 union all select * from t2;
-
--- TODO: 和语法文件定义有差距
--- with t1 as (select 1) (with t2 as (select 2) select * from t2) union all select * from t1;
 
 -- DISTINCT
 SELECT COUNT(DISTINCT c_salutation, c_last_name) FROM customer;
