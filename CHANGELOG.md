@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.6](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.5...v4.0.0-beta.4.6) (2023-11-20)
+
+
+### Features
+
+* improve pgsql grammar and add unit tests([#201](https://github.com/DTStack/dt-sql-parser/issues/201)) ([2e6d18e](https://github.com/DTStack/dt-sql-parser/commit/2e6d18e7dce19ec7e4a9a44b208b445ac17e69ae))
+* pgsql: optimize drop rule's content ([adeb26b](https://github.com/DTStack/dt-sql-parser/commit/adeb26b7dff98d917d3608834880735bc76f89b1))
+* pgsql: update routine's name ([a5757a3](https://github.com/DTStack/dt-sql-parser/commit/a5757a30b6a65118cd5d6e71e46194ef2fe43926))
+* **pgsql: upgrade rules' name:** pgsql: upgrade rules' name ([4736a65](https://github.com/DTStack/dt-sql-parser/commit/4736a65e0c3acbb22b1c0490b6f2b60787dae4f7))
+* upgrade antlr4-c3 and fix the version ([1711feb](https://github.com/DTStack/dt-sql-parser/commit/1711febca7abdbe19f8ad0220a6fb841d8a54740))
+
 ## [4.0.0-beta.4.5](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.4...v4.0.0-beta.4.5) (2023-11-02)
 
 
