@@ -1,0 +1,48 @@
+-- https://dev.mysql.com/doc/refman/8.0/en/analyze-table.html
+
+/* ANALYZE [NO_WRITE_TO_BINLOG | LOCAL]
+    TABLE tbl_name [, tbl_name] ...
+
+ANALYZE [NO_WRITE_TO_BINLOG | LOCAL]
+    TABLE tbl_name
+    UPDATE HISTOGRAM ON col_name [, col_name] ...
+        [WITH N BUCKETS]
+
+ANALYZE [NO_WRITE_TO_BINLOG | LOCAL]
+    TABLE tbl_name
+    UPDATE HISTOGRAM ON col_name [USING DATA 'json_data']
+
+ANALYZE [NO_WRITE_TO_BINLOG | LOCAL]
+    TABLE tbl_name
+    DROP HISTOGRAM ON col_name [, col_name] ... */
+
+
+ANALYZE TABLE t UPDATE HISTOGRAM ON c1, c2, c3 WITH 10 BUCKETS;
+ANALYZE TABLE t UPDATE HISTOGRAM ON c1, c3 WITH 10 BUCKETS;
+ANALYZE TABLE t DROP HISTOGRAM ON c2;
+ANALYZE TABLE t UPDATE HISTOGRAM ON c1;
+ANALYZE TABLE t DROP HISTOGRAM ON c1;
+ANALYZE TABLE t UPDATE HISTOGRAM ON c1 USING DATA '{"buckets": [[206, 0.0625], [456, 0.125], [608, 0.1875]], "data-type": "int", "null-values": 0.0, "collation-id": 8, "last-updated": "2022-10-11 16:13:14.563319", "sampling-rate": 1.0, "histogram-type": "singleton", "number-of-buckets-specified": 100}';
+
+
+ANALYZE NO_WRITE_TO_BINLOG TABLE t1, t2, t3;
+ANALYZE LOCAL TABLE t1, t2, t3;
+ANALYZE TABLE t1, t2, t3;
+
+ANALYZE NO_WRITE_TO_BINLOG TABLE t1 UPDATE HISTOGRAM ON c1, c2, c3 WITH 12 BUCKETS;
+ANALYZE NO_WRITE_TO_BINLOG TABLE t1 UPDATE HISTOGRAM ON c1, c2, c3;
+ANALYZE NO_WRITE_TO_BINLOG TABLE t1 UPDATE HISTOGRAM ON c1 WITH 13 BUCKETS;
+ANALYZE LOCAL TABLE t1 UPDATE HISTOGRAM ON c1, c2, c3;
+ANALYZE LOCAL TABLE t1 UPDATE HISTOGRAM ON c1;
+ANALYZE LOCAL TABLE t1 UPDATE HISTOGRAM ON c1 WITH 14 BUCKETS;
+ANALYZE TABLE t1 UPDATE HISTOGRAM ON c1 WITH 14 BUCKETS;
+
+ANALYZE NO_WRITE_TO_BINLOG TABLE t1 UPDATE HISTOGRAM ON c1 USING DATA '{"buckets": [[206, 0.0625], [456, 0.125], [608, 0.1875]], "data-type": "int", "null-values": 0.0, "collation-id": 8, "last-updated": "2022-10-11 16:13:14.563319", "sampling-rate": 1.0, "histogram-type": "singleton", "number-of-buckets-specified": 100}';
+ANALYZE NO_WRITE_TO_BINLOG TABLE t1 UPDATE HISTOGRAM ON c1;
+ANALYZE LOCAL TABLE t1 UPDATE HISTOGRAM ON c1 USING DATA '{"buckets": [[206, 0.0625], [456, 0.125], [608, 0.1875]], "data-type": "int", "null-values": 0.0, "collation-id": 8, "last-updated": "2022-10-11 16:13:14.563319", "sampling-rate": 1.0, "histogram-type": "singleton", "number-of-buckets-specified": 100}';
+ANALYZE LOCAL TABLE t1 UPDATE HISTOGRAM ON c1;
+ANALYZE TABLE t1 UPDATE HISTOGRAM ON c1;
+
+ANALYZE NO_WRITE_TO_BINLOG TABLE t1 DROP HISTOGRAM ON c1, c2, c3;
+ANALYZE LOCAL TABLE t1 DROP HISTOGRAM ON c1, c2, c3;
+ANALYZE TABLE t1 DROP HISTOGRAM ON c1, c2, c3;
