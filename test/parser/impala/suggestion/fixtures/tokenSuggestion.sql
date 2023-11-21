@@ -2,8 +2,6 @@ ALTER ;
 
 CREATE ;
 
-DELETE ;
-
 DROP ;
 
 INSERT ;

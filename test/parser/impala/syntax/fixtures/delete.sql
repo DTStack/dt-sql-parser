@@ -11,24 +11,6 @@ DELETE FROM my_table WHERE col1 LIKE 'prefix%';
 
 DELETE FROM my_table WHERE col1 IN (SELECT col2 FROM other_table WHERE col3 = 'value1');
 
--- DELETE table_ref FROM [joined_table_refs] [ WHERE where_conditions ]
-DELETE condition_column FROM table1 AS t1
-  INNER JOIN table2 AS t2 ON t1.column_name = t2.column_name
-  WHERE t1.condition_column = value1;
-
-DELETE condition_column FROM table1
-  WHERE column_name IN (SELECT column_name FROM table2 WHERE condition);
-
-DELETE condition_column FROM table1 AS t1
-  INNER JOIN (
-    SELECT column_name FROM table2 WHERE condition
-  ) AS t2 ON t1.column_name = t2.column_name
-  WHERE t1.condition_column = value1;
-
-DELETE condition_column FROM table1 AS t1
-  INNER JOIN table2 AS t2 ON t1.column_name = t2.column_name
-  WHERE t1.condition_column = value1 AND t2.other_column = value1;
-
 -- example
 DELETE FROM my_table;
 

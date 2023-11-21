@@ -150,8 +150,8 @@ create table range_t1 (x bigint, s string, s2 string, primary key (x, s))
   partition by range (x)
     (
       partition 0 <= values <= 49, partition 50 <= values <= 100,
-      partition value < 0, partition 100 < values <= 500
-      -- partition values < 0, partition 100 < values TODO: 原本示例，我觉得有问题
+      partition value < 0, partition 100 < values <= 500,
+      partition values < 0, partition 100 < values
     )
   stored as kudu;
 

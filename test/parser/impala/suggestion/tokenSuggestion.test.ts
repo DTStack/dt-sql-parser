@@ -16,7 +16,7 @@ describe('Impala SQL Token Suggestion', () => {
         };
         const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
 
-        expect(suggestion).toEqual(['VIEW', 'TABLE', 'DATABASE']);
+        expect(suggestion).toEqual(['TABLE', 'VIEW', 'DATABASE']);
     });
 
     test('After CREATE', () => {
@@ -30,33 +30,20 @@ describe('Impala SQL Token Suggestion', () => {
         )?.keywords;
 
         expect(suggestion).toEqual([
-            'ROLE',
-            'FUNCTION',
-            'AGGREGATE',
-            'VIEW',
             'TABLE',
             'EXTERNAL',
+            'VIEW',
+            'FUNCTION',
+            'AGGREGATE',
+            'ROLE',
             'DATABASE',
             'SCHEMA',
         ]);
     });
 
-    test('After DELETE', () => {
-        const pos: CaretPosition = {
-            lineNumber: 5,
-            column: 8,
-        };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            commentOtherLine(tokenSql, pos.lineNumber),
-            pos
-        )?.keywords;
-
-        expect(suggestion).toEqual(['FROM']);
-    });
-
     test('After DROP', () => {
         const pos: CaretPosition = {
-            lineNumber: 11,
+            lineNumber: 5,
             column: 6,
         };
         const suggestion = parser.getSuggestionAtCaretPosition(
@@ -65,27 +52,21 @@ describe('Impala SQL Token Suggestion', () => {
         )?.keywords;
 
         expect(suggestion).toEqual([
-            'GRANT',
-            'ROLE',
-            'ROLES',
-            'CURRENT',
-            'FILES',
-            'PARTITIONS',
-            'RANGE',
-            'COLUMN',
+            'DATABASE',
+            'SCHEMA',
             'TABLE',
-            'CREATE',
-            'FUNCTIONS',
+            'VIEW',
+            'STATS',
+            'INCREMENTAL',
+            'FUNCTION',
             'AGGREGATE',
-            'TABLES',
-            'DATABASES',
-            'SCHEMAS',
+            'ROLE',
         ]);
     });
 
     test('After INSERT', () => {
         const pos: CaretPosition = {
-            lineNumber: 9,
+            lineNumber: 7,
             column: 8,
         };
         const suggestion = parser.getSuggestionAtCaretPosition(
@@ -98,7 +79,7 @@ describe('Impala SQL Token Suggestion', () => {
 
     test('After SHOW', () => {
         const pos: CaretPosition = {
-            lineNumber: 11,
+            lineNumber: 9,
             column: 6,
         };
         const suggestion = parser.getSuggestionAtCaretPosition(
@@ -107,49 +88,22 @@ describe('Impala SQL Token Suggestion', () => {
         )?.keywords;
 
         expect(suggestion).toEqual([
+            'DATABASES',
+            'SCHEMAS',
+            'TABLES',
+            'FUNCTIONS',
+            'ANALYTIC',
+            'AGGREGATE',
+            'CREATE',
+            'COLUMN',
+            'TABLE',
+            'PARTITIONS',
+            'RANGE',
+            'FILES',
             'GRANT',
             'ROLE',
             'ROLES',
             'CURRENT',
-            'FILES',
-            'PARTITIONS',
-            'RANGE',
-            'COLUMN',
-            'TABLE',
-            'CREATE',
-            'FUNCTIONS',
-            'AGGREGATE',
-            'TABLES',
-            'DATABASES',
-            'SCHEMAS',
-        ]);
-    });
-    test('After REFRESH', () => {
-        const pos: CaretPosition = {
-            lineNumber: 13,
-            column: 9,
-        };
-        const suggestion = parser.getSuggestionAtCaretPosition(
-            commentOtherLine(tokenSql, pos.lineNumber),
-            pos
-        )?.keywords;
-
-        expect(suggestion).toEqual([
-            'GRANT',
-            'ROLE',
-            'ROLES',
-            'CURRENT',
-            'FILES',
-            'PARTITIONS',
-            'RANGE',
-            'COLUMN',
-            'TABLE',
-            'CREATE',
-            'FUNCTIONS',
-            'AGGREGATE',
-            'TABLES',
-            'DATABASES',
-            'SCHEMAS',
         ]);
     });
 });

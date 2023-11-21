@@ -1,11 +1,7 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
 import { ImpalaSqlLexer } from '../lib/impala/ImpalaSqlLexer';
-import {
-    ImpalaSqlParserParser,
-    ProgramContext,
-    StatementContext,
-} from '../lib/impala/ImpalaSqlParserParser';
+import { ImpalaSqlParser, ProgramContext, StatementContext } from '../lib/impala/ImpalaSqlParser';
 import BasicParser from './common/basicParser';
 import { ImpalaSqlParserListener } from '../lib/impala/ImpalaSqlParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
@@ -13,7 +9,7 @@ import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic
 export default class ImpalaSQL extends BasicParser<
     ImpalaSqlLexer,
     ProgramContext,
-    ImpalaSqlParserParser
+    ImpalaSqlParser
 > {
     protected createLexerFormCharStream(charStreams) {
         const lexer = new ImpalaSqlLexer(charStreams);
@@ -21,7 +17,7 @@ export default class ImpalaSQL extends BasicParser<
     }
 
     protected createParserFromTokenStream(tokenStream) {
-        return new ImpalaSqlParserParser(tokenStream);
+        return new ImpalaSqlParser(tokenStream);
     }
 
     protected preferredRules: Set<number> = new Set([]);

@@ -90,8 +90,7 @@ select ss_wholesale_cost, avg(ss_quantity * ss_sales_price) as avg_revenue_per_s
 
 select x as "Top 3" from numbers order by x desc limit 3;
 
--- TODO:LIMIT 后面跟内置的函数
-SELECT x FROM t1 LIMIT length('hello world');
+SELECT X FROM T1 LIMIT LENGTH('HELLO WORLD');
 SELECT x FROM t1 LIMIT cast(truncate(9.9) AS INT);
 
 -- UNION

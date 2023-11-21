@@ -67,17 +67,6 @@ VALUES
     (1, 'new_value1', 'new_value2'),
     (2, 'new_value3', 'new_value4');
 
--- --TODO: [NOSHUFFLE] 匹配失败
---  UPSERT INTO my_table [NOSHUFFLE]
---  SELECT
---  id,
---  'new_value1',
---  'new_value2'
---  FROM
---  other_table
---  WHERE
---  condition;
-
 -- example
 UPSERT INTO kudu_table (pk, c1, c2, c3)
 VALUES
