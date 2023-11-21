@@ -76,8 +76,6 @@ KW_CONVERT:                             'CONVERT';
 KW_CREATE:                              'CREATE';
 KW_CROSS:                               'CROSS';
 KW_CURRENT:                             'CURRENT';
-// 未使用
-KW_CURRENT_ROLE:                        'CURRENT_ROLE';
 KW_CURRENT_USER:                        'CURRENT_USER';
 KW_CURSOR:                              'CURSOR';
 KW_DATABASE:                            'DATABASE';
@@ -147,7 +145,6 @@ KW_LINEAR:                              'LINEAR';
 KW_LINES:                               'LINES';
 KW_LOAD:                                'LOAD';
 KW_LOCK:                                'LOCK';
-// 未使用
 KW_LOCKED:                              'LOCKED';
 KW_LOOP:                                'LOOP';
 KW_LOW_PRIORITY:                        'LOW_PRIORITY';
@@ -155,8 +152,6 @@ KW_MASTER_BIND:                         'MASTER_BIND';
 KW_MASTER_SSL_VERIFY_SERVER_CERT:       'MASTER_SSL_VERIFY_SERVER_CERT';
 KW_MATCH:                               'MATCH';
 KW_MAXVALUE:                            'MAXVALUE';
-// 未使用
-KW_MINVALUE:                            'MINVALUE';
 KW_MODIFIES:                            'MODIFIES';
 KW_NATURAL:                             'NATURAL';
 KW_NOT:                                 'NOT';
@@ -217,8 +212,6 @@ KW_SQL_SMALL_RESULT:                    'SQL_SMALL_RESULT';
 KW_SSL:                                 'SSL';
 KW_STACKED:                             'STACKED';
 KW_STARTING:                            'STARTING';
-// 未使用
-KW_STATEMENT:                           'STATEMENT';
 KW_STRAIGHT_JOIN:                       'STRAIGHT_JOIN';
 KW_TABLE:                               'TABLE';
 KW_TERMINATED:                          'TERMINATED';
@@ -456,8 +449,6 @@ KW_CONTEXT:                             'CONTEXT';
 KW_CONTRIBUTORS:                        'CONTRIBUTORS';
 KW_COPY:                                'COPY';
 KW_CPU:                                 'CPU';
-// 未使用
-KW_CYCLE:                               'CYCLE';
 KW_CURSOR_NAME:                         'CURSOR_NAME';
 KW_DATA:                                'DATA';
 KW_DATAFILE:                            'DATAFILE';
@@ -475,8 +466,6 @@ KW_DUMPFILE:                            'DUMPFILE';
 KW_DUPLICATE:                           'DUPLICATE';
 KW_DYNAMIC:                             'DYNAMIC';
 KW_ENABLE:                              'ENABLE';
-// 未使用
-KW_ENCRYPTED:                           'ENCRYPTED';
 KW_ENCRYPTION:                          'ENCRYPTION';
 KW_ENCRYPTION_KEY_ID:                   'ENCRYPTION_KEY_ID';
 KW_END:                                 'END';
@@ -528,8 +517,6 @@ KW_HOSTS:                               'HOSTS';
 KW_IDENTIFIED:                          'IDENTIFIED';
 KW_IGNORE_SERVER_IDS:                   'IGNORE_SERVER_IDS';
 KW_IMPORT:                              'IMPORT';
-// 未使用
-KW_INCREMENT:                           'INCREMENT';
 KW_INDEXES:                             'INDEXES';
 KW_INITIAL:                            'INITIAL';
 KW_INITIAL_SIZE:                        'INITIAL_SIZE';
@@ -607,15 +594,7 @@ KW_NETWORK_NAMESPACE:                   'NETWORK_NAMESPACE';
 KW_NEVER:                               'NEVER';
 KW_NEXT:                                'NEXT';
 KW_NO:                                  'NO';
-// 未使用
-KW_NOCACHE:                             'NOCACHE';
 KW_NOCOPY:                              'NOCOPY';
-// 未使用
-KW_NOCYCLE:                             'NOCYCLE';
-// 未使用
-KW_NOMAXVALUE:                          'NOMAXVALUE';
-// 未使用
-KW_NOMINVALUE:                          'NOMINVALUE';
 KW_NOWAIT:                              'NOWAIT';
 KW_NODEGROUP:                           'NODEGROUP';
 KW_NONE:                                'NONE';
@@ -707,8 +686,6 @@ KW_RTREE:                               'RTREE';
 KW_SAVEPOINT:                           'SAVEPOINT';
 KW_SCHEDULE:                            'SCHEDULE';
 KW_SECURITY:                            'SECURITY';
-// 未使用
-KW_SEQUENCE:                            'SEQUENCE';
 KW_SERVER:                              'SERVER';
 KW_SESSION:                             'SESSION';
 KW_SHARE:                               'SHARE';
@@ -813,8 +790,6 @@ KW_WRAPPER:                             'WRAPPER';
 KW_X509:                                'X509';
 KW_XA:                                  'XA';
 KW_XML:                                 'XML';
-// 未使用
-KW_YES:                                 'YES';
 
 // Date format Keywords
 

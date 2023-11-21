@@ -35,12 +35,12 @@ options { tokenVocab = MySqlLexer; }
 // Top Level Description
 
 program
-    : sqlStatements? (MINUS MINUS)? EOF
+    : sqlStatements? EOF
     ;
 
 sqlStatements
-    : (sqlStatement (MINUS MINUS)? SEMI? | emptyStatement_)*
-    (sqlStatement ((MINUS MINUS)? SEMI)? | emptyStatement_)
+    : (sqlStatement | emptyStatement_)*
+        (sqlStatement SEMI? | emptyStatement_)
     ;
 
 sqlStatement
