@@ -2535,102 +2535,25 @@ functionCall
     ;
 
 specificFunction
-    : (
-      KW_CURRENT_DATE | KW_CURRENT_TIME | KW_CURRENT_TIMESTAMP
-      | KW_LOCALTIME | KW_UTC_TIMESTAMP | KW_SCHEMA
-      ) ('(' ')')?                                                  #simpleFunctionCall
-    | currentUserExpression                                         #currentUser
-    | KW_CONVERT '(' expression separator=',' convertedDataType ')'    #dataTypeFunctionCall
-    | KW_CONVERT '(' expression KW_USING charsetName ')'                  #dataTypeFunctionCall
-    | KW_CAST '(' expression KW_AS convertedDataType ')'                  #dataTypeFunctionCall
-    | KW_VALUES '(' columnName ')'                                 #valuesFunctionCall
-    | KW_CASE expression caseFuncAlternative+
-      (KW_ELSE elseArg=functionArg)? KW_END                               #caseExpressionFunctionCall
-    | KW_CASE caseFuncAlternative+
-      (KW_ELSE elseArg=functionArg)? KW_END                               #caseFunctionCall
-    | KW_CHAR '(' functionArgs  (KW_USING charsetName)? ')'               #charFunctionCall
-    | KW_POSITION
-      '('
-          (
-            positionString=stringLiteral
-            | positionExpression=expression
-          )
-          KW_IN
-          (
-            inString=stringLiteral
-            | inExpression=expression
-          )
-      ')'                                                           #positionFunctionCall
-    | (KW_SUBSTR | KW_SUBSTRING)
-      '('
-        (
-          sourceString=stringLiteral
-          | sourceExpression=expression
-        ) KW_FROM
-        (
-          fromDecimal=decimalLiteral
-          | fromExpression=expression
-        )
-        (
-          KW_FOR
-          (
-            forDecimal=decimalLiteral
-            | forExpression=expression
-          )
-        )?
-      ')'                                                           #substrFunctionCall
-    | KW_TRIM
-      '('
-        positioinForm=(KW_BOTH | KW_LEADING | KW_TRAILING)
-        (
-          sourceString=stringLiteral
-          | sourceExpression=expression
-        )?
-        KW_FROM
-        (
-          fromString=stringLiteral
-          | fromExpression=expression
-        )
-      ')'                                                           #trimFunctionCall
-    | KW_TRIM
-      '('
-        (
-          sourceString=stringLiteral
-          | sourceExpression=expression
-        )
-        KW_FROM
-        (
-          fromString=stringLiteral
-          | fromExpression=expression
-        )
-      ')'                                                           #trimFunctionCall
-    | KW_WEIGHT_STRING
-      '('
-        (stringLiteral | expression)
-        (KW_AS stringFormat=(KW_CHAR | KW_BINARY)
-        '(' decimalLiteral ')' )?  levelsInWeightString?
-      ')'                                                           #weightFunctionCall
-    | KW_EXTRACT
-      '('
-        intervalType
-        KW_FROM
-        (
-          sourceString=stringLiteral
-          | sourceExpression=expression
-        )
-      ')'                                                           #extractFunctionCall
-    | KW_GET_FORMAT
-      '('
-        datetimeFormat=(KW_DATE | KW_TIME | KW_DATETIME)
-        ',' stringLiteral
-      ')'                                                           #getFormatFunctionCall
-    | KW_JSON_VALUE
-      '(' expression
-       ',' expression
-         (KW_RETURNING convertedDataType)?
-         jsonOnEmpty?
-         jsonOnError?
-       ')'                                                          #jsonValueFunctionCall
+    : (KW_CURRENT_DATE | KW_CURRENT_TIME | KW_CURRENT_TIMESTAMP | KW_LOCALTIME | KW_UTC_TIMESTAMP | KW_SCHEMA) ('(' ')')?                                   #simpleFunctionCall
+    | currentUserExpression                                                                                                                                 #currentUser
+    | KW_CONVERT '(' expression separator=',' convertedDataType ')'                                                                                         #dataTypeFunctionCall
+    | KW_CONVERT '(' expression KW_USING charsetName ')'                                                                                                    #dataTypeFunctionCall
+    | KW_CAST '(' expression KW_AS convertedDataType ')'                                                                                                    #dataTypeFunctionCall
+    | KW_VALUES '(' columnName ')'                                                                                                                          #valuesFunctionCall
+    | KW_CASE expression caseFuncAlternative+ (KW_ELSE elseArg=functionArg)? KW_END                                                                         #caseExpressionFunctionCall
+    | KW_CASE caseFuncAlternative+ (KW_ELSE elseArg=functionArg)? KW_END                                                                                    #caseFunctionCall
+    | KW_CHAR '(' functionArgs  (KW_USING charsetName)? ')'                                                                                                 #charFunctionCall
+    | KW_POSITION '(' (positionString=stringLiteral | positionExpression=expression) KW_IN ( inString=stringLiteral | inExpression=expression)')'           #positionFunctionCall
+    | (KW_SUBSTR | KW_SUBSTRING) '(' (sourceString=stringLiteral | sourceExpression=expression) KW_FROM
+        (fromDecimal=decimalLiteral | fromExpression=expression) (KW_FOR (forDecimal=decimalLiteral | forExpression=expression))? ')'                       #substrFunctionCall
+    | KW_TRIM '(' positioinForm=(KW_BOTH | KW_LEADING | KW_TRAILING) (sourceString=stringLiteral | sourceExpression=expression)? KW_FROM
+        (fromString=stringLiteral | fromExpression=expression) ')'                                                                                          #trimFunctionCall
+    | KW_TRIM '(' (sourceString=stringLiteral | sourceExpression=expression) KW_FROM (fromString=stringLiteral | fromExpression=expression) ')'             #trimFunctionCall
+    | KW_WEIGHT_STRING '(' (stringLiteral | expression) (KW_AS stringFormat=(KW_CHAR | KW_BINARY) '(' decimalLiteral ')' )?  levelsInWeightString? ')'      #weightFunctionCall
+    | KW_EXTRACT '(' intervalType KW_FROM (sourceString=stringLiteral | sourceExpression=expression) ')'                                                    #extractFunctionCall
+    | KW_GET_FORMAT '(' datetimeFormat=(KW_DATE | KW_TIME | KW_DATETIME) ',' stringLiteral ')'                                                              #getFormatFunctionCall
+    | KW_JSON_VALUE '(' expression ',' expression (KW_RETURNING convertedDataType)? jsonOnEmpty? jsonOnError? ')'                                           #jsonValueFunctionCall
     ;
 
 caseFuncAlternative
@@ -2639,10 +2562,8 @@ caseFuncAlternative
     ;
 
 levelsInWeightString
-    : KW_LEVEL levelInWeightListElement
-      (',' levelInWeightListElement)*                               #levelWeightList
-    | KW_LEVEL
-      firstLevel=decimalLiteral '-' lastLevel=decimalLiteral        #levelWeightRange
+    : KW_LEVEL levelInWeightListElement (',' levelInWeightListElement)*         #levelWeightList
+    | KW_LEVEL firstLevel=decimalLiteral '-' lastLevel=decimalLiteral           #levelWeightRange
     ;
 
 levelInWeightListElement
