@@ -20,7 +20,16 @@ export default class ImpalaSQL extends BasicParser<
         return new ImpalaSqlParser(tokenStream);
     }
 
-    protected preferredRules: Set<number> = new Set([]);
+    protected preferredRules: Set<number> = new Set([
+        ImpalaSqlParser.RULE_functionNameCreate,
+        ImpalaSqlParser.RULE_tableNameCreate,
+        ImpalaSqlParser.RULE_viewNameCreate,
+        ImpalaSqlParser.RULE_databaseNameCreate,
+        ImpalaSqlParser.RULE_tableNamePath,
+        ImpalaSqlParser.RULE_functionNamePath,
+        ImpalaSqlParser.RULE_viewNamePath,
+        ImpalaSqlParser.RULE_databaseNamePath,
+    ]);
 
     protected get splitListener() {
         return new ImpalaSqlSplitListener();
@@ -44,6 +53,38 @@ export default class ImpalaSQL extends BasicParser<
 
             let syntaxContextType: SyntaxContextType;
             switch (ruleType) {
+                case ImpalaSqlParser.RULE_functionNameCreate: {
+                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
+                    break;
+                }
+                case ImpalaSqlParser.RULE_tableNameCreate: {
+                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
+                    break;
+                }
+                case ImpalaSqlParser.RULE_databaseNameCreate: {
+                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    break;
+                }
+                case ImpalaSqlParser.RULE_viewNameCreate: {
+                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    break;
+                }
+                case ImpalaSqlParser.RULE_databaseNamePath: {
+                    syntaxContextType = SyntaxContextType.DATABASE;
+                    break;
+                }
+                case ImpalaSqlParser.RULE_tableNamePath: {
+                    syntaxContextType = SyntaxContextType.TABLE;
+                    break;
+                }
+                case ImpalaSqlParser.RULE_viewNamePath: {
+                    syntaxContextType = SyntaxContextType.VIEW;
+                    break;
+                }
+                case ImpalaSqlParser.RULE_functionNamePath: {
+                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    break;
+                }
                 default:
                     break;
             }

@@ -95,7 +95,7 @@ import { CreateRoleContext } from "./ImpalaSqlParser";
 import { CreateAggregateFunctionContext } from "./ImpalaSqlParser";
 import { CreateFunctionContext } from "./ImpalaSqlParser";
 import { AlterStatementContext } from "./ImpalaSqlParser";
-import { AlterSchemaContext } from "./ImpalaSqlParser";
+import { AlterDatabaseContext } from "./ImpalaSqlParser";
 import { AlterStatsKeyContext } from "./ImpalaSqlParser";
 import { AlterPartitionCacheContext } from "./ImpalaSqlParser";
 import { EditColumnDefineContext } from "./ImpalaSqlParser";
@@ -120,7 +120,8 @@ import { ComputeStatsContext } from "./ImpalaSqlParser";
 import { ComputeIncrementalStatsContext } from "./ImpalaSqlParser";
 import { DropStatementContext } from "./ImpalaSqlParser";
 import { DropSchemaContext } from "./ImpalaSqlParser";
-import { DropViewOrTableContext } from "./ImpalaSqlParser";
+import { DropViewContext } from "./ImpalaSqlParser";
+import { DropTableContext } from "./ImpalaSqlParser";
 import { DropIncrementalStatsContext } from "./ImpalaSqlParser";
 import { DropFunctionContext } from "./ImpalaSqlParser";
 import { DropRoleContext } from "./ImpalaSqlParser";
@@ -140,14 +141,22 @@ import { ShowStatementContext } from "./ImpalaSqlParser";
 import { ShowSchemasContext } from "./ImpalaSqlParser";
 import { ShowTablesContext } from "./ImpalaSqlParser";
 import { ShowFunctionsContext } from "./ImpalaSqlParser";
-import { ShowCreateViewOrTableContext } from "./ImpalaSqlParser";
-import { ShowColumnOrTableStatsContext } from "./ImpalaSqlParser";
+import { ShowCreateTableContext } from "./ImpalaSqlParser";
+import { ShowCreateViewContext } from "./ImpalaSqlParser";
+import { ShowTableStatsContext } from "./ImpalaSqlParser";
+import { ShowColumnStatsContext } from "./ImpalaSqlParser";
 import { ShowPartitionsContext } from "./ImpalaSqlParser";
 import { ShowFilesContext } from "./ImpalaSqlParser";
 import { ShowRolesContext } from "./ImpalaSqlParser";
 import { ShowRoleGrantContext } from "./ImpalaSqlParser";
-import { ShowGrantContext } from "./ImpalaSqlParser";
+import { ShowGrantsContext } from "./ImpalaSqlParser";
+import { ShowDatabaseGrantContext } from "./ImpalaSqlParser";
+import { ShowTableGrantContext } from "./ImpalaSqlParser";
+import { ShowColumnGrantContext } from "./ImpalaSqlParser";
 import { AddCommentsContext } from "./ImpalaSqlParser";
+import { AddDatabaseCommentsContext } from "./ImpalaSqlParser";
+import { AddTbaleCommentsContext } from "./ImpalaSqlParser";
+import { AddColumnCommentsContext } from "./ImpalaSqlParser";
 import { ExplainContext } from "./ImpalaSqlParser";
 import { SetSessionContext } from "./ImpalaSqlParser";
 import { ShutdownContext } from "./ImpalaSqlParser";
@@ -159,6 +168,15 @@ import { RefreshAuthContext } from "./ImpalaSqlParser";
 import { RefreshFunctionContext } from "./ImpalaSqlParser";
 import { IfExistsContext } from "./ImpalaSqlParser";
 import { IfNotExistsContext } from "./ImpalaSqlParser";
+import { TableNameCreateContext } from "./ImpalaSqlParser";
+import { DatabaseNameCreateContext } from "./ImpalaSqlParser";
+import { ViewNameCreateContext } from "./ImpalaSqlParser";
+import { FunctionNameCreateContext } from "./ImpalaSqlParser";
+import { DatabaseNamePathContext } from "./ImpalaSqlParser";
+import { TableNamePathContext } from "./ImpalaSqlParser";
+import { ViewNamePathContext } from "./ImpalaSqlParser";
+import { FunctionNamePathContext } from "./ImpalaSqlParser";
+import { ColumnNamePathContext } from "./ImpalaSqlParser";
 import { CreateCommonItemContext } from "./ImpalaSqlParser";
 import { AssignmentListContext } from "./ImpalaSqlParser";
 import { AssignmentItemContext } from "./ImpalaSqlParser";
@@ -1412,15 +1430,15 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitAlterStatement?: (ctx: AlterStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.alterSchema`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.alterDatabase`.
 	 * @param ctx the parse tree
 	 */
-	enterAlterSchema?: (ctx: AlterSchemaContext) => void;
+	enterAlterDatabase?: (ctx: AlterDatabaseContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.alterSchema`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.alterDatabase`.
 	 * @param ctx the parse tree
 	 */
-	exitAlterSchema?: (ctx: AlterSchemaContext) => void;
+	exitAlterDatabase?: (ctx: AlterDatabaseContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.alterStatsKey`.
@@ -1687,15 +1705,26 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitDropSchema?: (ctx: DropSchemaContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.dropViewOrTable`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.dropView`.
 	 * @param ctx the parse tree
 	 */
-	enterDropViewOrTable?: (ctx: DropViewOrTableContext) => void;
+	enterDropView?: (ctx: DropViewContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.dropViewOrTable`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.dropView`.
 	 * @param ctx the parse tree
 	 */
-	exitDropViewOrTable?: (ctx: DropViewOrTableContext) => void;
+	exitDropView?: (ctx: DropViewContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.dropTable`.
+	 * @param ctx the parse tree
+	 */
+	enterDropTable?: (ctx: DropTableContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.dropTable`.
+	 * @param ctx the parse tree
+	 */
+	exitDropTable?: (ctx: DropTableContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.dropIncrementalStats`.
@@ -1907,26 +1936,48 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitShowFunctions?: (ctx: ShowFunctionsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.showCreateViewOrTable`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.showCreateTable`.
 	 * @param ctx the parse tree
 	 */
-	enterShowCreateViewOrTable?: (ctx: ShowCreateViewOrTableContext) => void;
+	enterShowCreateTable?: (ctx: ShowCreateTableContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.showCreateViewOrTable`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.showCreateTable`.
 	 * @param ctx the parse tree
 	 */
-	exitShowCreateViewOrTable?: (ctx: ShowCreateViewOrTableContext) => void;
+	exitShowCreateTable?: (ctx: ShowCreateTableContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.showColumnOrTableStats`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.showCreateView`.
 	 * @param ctx the parse tree
 	 */
-	enterShowColumnOrTableStats?: (ctx: ShowColumnOrTableStatsContext) => void;
+	enterShowCreateView?: (ctx: ShowCreateViewContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.showColumnOrTableStats`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.showCreateView`.
 	 * @param ctx the parse tree
 	 */
-	exitShowColumnOrTableStats?: (ctx: ShowColumnOrTableStatsContext) => void;
+	exitShowCreateView?: (ctx: ShowCreateViewContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.showTableStats`.
+	 * @param ctx the parse tree
+	 */
+	enterShowTableStats?: (ctx: ShowTableStatsContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.showTableStats`.
+	 * @param ctx the parse tree
+	 */
+	exitShowTableStats?: (ctx: ShowTableStatsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.showColumnStats`.
+	 * @param ctx the parse tree
+	 */
+	enterShowColumnStats?: (ctx: ShowColumnStatsContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.showColumnStats`.
+	 * @param ctx the parse tree
+	 */
+	exitShowColumnStats?: (ctx: ShowColumnStatsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.showPartitions`.
@@ -1973,15 +2024,48 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitShowRoleGrant?: (ctx: ShowRoleGrantContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.showGrant`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.showGrants`.
 	 * @param ctx the parse tree
 	 */
-	enterShowGrant?: (ctx: ShowGrantContext) => void;
+	enterShowGrants?: (ctx: ShowGrantsContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.showGrant`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.showGrants`.
 	 * @param ctx the parse tree
 	 */
-	exitShowGrant?: (ctx: ShowGrantContext) => void;
+	exitShowGrants?: (ctx: ShowGrantsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.showDatabaseGrant`.
+	 * @param ctx the parse tree
+	 */
+	enterShowDatabaseGrant?: (ctx: ShowDatabaseGrantContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.showDatabaseGrant`.
+	 * @param ctx the parse tree
+	 */
+	exitShowDatabaseGrant?: (ctx: ShowDatabaseGrantContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.showTableGrant`.
+	 * @param ctx the parse tree
+	 */
+	enterShowTableGrant?: (ctx: ShowTableGrantContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.showTableGrant`.
+	 * @param ctx the parse tree
+	 */
+	exitShowTableGrant?: (ctx: ShowTableGrantContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.showColumnGrant`.
+	 * @param ctx the parse tree
+	 */
+	enterShowColumnGrant?: (ctx: ShowColumnGrantContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.showColumnGrant`.
+	 * @param ctx the parse tree
+	 */
+	exitShowColumnGrant?: (ctx: ShowColumnGrantContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.addComments`.
@@ -1993,6 +2077,39 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAddComments?: (ctx: AddCommentsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.addDatabaseComments`.
+	 * @param ctx the parse tree
+	 */
+	enterAddDatabaseComments?: (ctx: AddDatabaseCommentsContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.addDatabaseComments`.
+	 * @param ctx the parse tree
+	 */
+	exitAddDatabaseComments?: (ctx: AddDatabaseCommentsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.addTbaleComments`.
+	 * @param ctx the parse tree
+	 */
+	enterAddTbaleComments?: (ctx: AddTbaleCommentsContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.addTbaleComments`.
+	 * @param ctx the parse tree
+	 */
+	exitAddTbaleComments?: (ctx: AddTbaleCommentsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.addColumnComments`.
+	 * @param ctx the parse tree
+	 */
+	enterAddColumnComments?: (ctx: AddColumnCommentsContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.addColumnComments`.
+	 * @param ctx the parse tree
+	 */
+	exitAddColumnComments?: (ctx: AddColumnCommentsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.explain`.
@@ -2114,6 +2231,105 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitIfNotExists?: (ctx: IfNotExistsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.tableNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterTableNameCreate?: (ctx: TableNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.tableNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitTableNameCreate?: (ctx: TableNameCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.databaseNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterDatabaseNameCreate?: (ctx: DatabaseNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.databaseNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitDatabaseNameCreate?: (ctx: DatabaseNameCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.viewNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterViewNameCreate?: (ctx: ViewNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.viewNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitViewNameCreate?: (ctx: ViewNameCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.functionNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionNameCreate?: (ctx: FunctionNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.functionNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionNameCreate?: (ctx: FunctionNameCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.databaseNamePath`.
+	 * @param ctx the parse tree
+	 */
+	enterDatabaseNamePath?: (ctx: DatabaseNamePathContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.databaseNamePath`.
+	 * @param ctx the parse tree
+	 */
+	exitDatabaseNamePath?: (ctx: DatabaseNamePathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.tableNamePath`.
+	 * @param ctx the parse tree
+	 */
+	enterTableNamePath?: (ctx: TableNamePathContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.tableNamePath`.
+	 * @param ctx the parse tree
+	 */
+	exitTableNamePath?: (ctx: TableNamePathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.viewNamePath`.
+	 * @param ctx the parse tree
+	 */
+	enterViewNamePath?: (ctx: ViewNamePathContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.viewNamePath`.
+	 * @param ctx the parse tree
+	 */
+	exitViewNamePath?: (ctx: ViewNamePathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.functionNamePath`.
+	 * @param ctx the parse tree
+	 */
+	enterFunctionNamePath?: (ctx: FunctionNamePathContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.functionNamePath`.
+	 * @param ctx the parse tree
+	 */
+	exitFunctionNamePath?: (ctx: FunctionNamePathContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.columnNamePath`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.columnNamePath`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.createCommonItem`.

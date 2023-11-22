@@ -1,0 +1,23 @@
+SELECT * FROM cat. ;
+
+CREATE TABLE cat.db ;
+
+SHOW TABLES FROM cat;
+
+ALTER DATABASE cat.;
+
+DROP VIEW v;
+
+SELECT * FROM ;
+
+CREATE VIEW cv;
+
+SELECT name, calculate_age(birthdate) AS age FROM students;
+
+CREATE FUNCTION fnc;
+
+SHOW COLUMN STATS vie;
+
+SHOW CREATE TABLE tb1;
+
+SHOW CREATE VIEW v1;
