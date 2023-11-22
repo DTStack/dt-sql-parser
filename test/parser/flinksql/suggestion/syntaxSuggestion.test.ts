@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
 import FlinkSQL from '../../../../src/parser/flinksql';
+import { commentOtherLine } from '../../../helper';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'syntaxSuggestion.sql'),
@@ -37,7 +38,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.CATALOG
         );
@@ -51,7 +55,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 3,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -65,7 +72,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
         );
@@ -79,7 +89,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 21,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
         );
@@ -93,7 +106,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
         );
@@ -107,7 +123,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 11,
             column: 12,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
@@ -121,7 +140,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 13,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
@@ -135,7 +157,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 15,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
         );
@@ -149,7 +174,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 17,
             column: 27,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
         );
@@ -163,7 +191,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 19,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION_CREATE
         );
@@ -177,7 +208,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 21,
             column: 22,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
@@ -191,7 +225,10 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 23,
             column: 22,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -205,12 +242,151 @@ describe('Flink SQL Syntax Suggestion', () => {
             lineNumber: 25,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['v1']);
+    });
+
+    test('Select columns', () => {
+        const pos: CaretPosition = {
+            lineNumber: 27,
+            column: 11,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col']);
+    });
+
+    test('Select columns from table', () => {
+        const pos: CaretPosition = {
+            lineNumber: 29,
+            column: 11,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col']);
+    });
+
+    test('Select multiple columns from table', () => {
+        const pos: CaretPosition = {
+            lineNumber: 31,
+            column: 13,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('Select order by column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 33,
+            column: 27,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('Select group by column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 35,
+            column: 30,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb', '.']);
+    });
+
+    test('Insert into spec columns', () => {
+        const pos: CaretPosition = {
+            lineNumber: 37,
+            column: 26,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb', '.', 'c']);
+    });
+
+    test('Watermark for', () => {
+        const pos: CaretPosition = {
+            lineNumber: 39,
+            column: 56,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('Create table new columns', () => {
+        const pos: CaretPosition = {
+            lineNumber: 41,
+            column: 25,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
     });
 });
