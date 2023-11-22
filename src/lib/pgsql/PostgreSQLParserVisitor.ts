@@ -114,6 +114,7 @@ import { TableelementlistContext } from "./PostgreSQLParser";
 import { TypedtableelementlistContext } from "./PostgreSQLParser";
 import { TableelementContext } from "./PostgreSQLParser";
 import { TypedtableelementContext } from "./PostgreSQLParser";
+import { ColumnDefCluaseContext } from "./PostgreSQLParser";
 import { ColumnDefContext } from "./PostgreSQLParser";
 import { CompressionCluaseContext } from "./PostgreSQLParser";
 import { StorageCluaseContext } from "./PostgreSQLParser";
@@ -133,7 +134,6 @@ import { ConstraintelemContext } from "./PostgreSQLParser";
 import { Opt_no_inheritContext } from "./PostgreSQLParser";
 import { Opt_column_listContext } from "./PostgreSQLParser";
 import { ColumnlistContext } from "./PostgreSQLParser";
-import { ColumnElemContext } from "./PostgreSQLParser";
 import { Opt_c_includeContext } from "./PostgreSQLParser";
 import { Key_matchContext } from "./PostgreSQLParser";
 import { ExclusionconstraintlistContext } from "./PostgreSQLParser";
@@ -287,6 +287,9 @@ import { Object_type_any_nameContext } from "./PostgreSQLParser";
 import { Object_type_nameContext } from "./PostgreSQLParser";
 import { Object_type_name_on_any_nameContext } from "./PostgreSQLParser";
 import { Any_name_listContext } from "./PostgreSQLParser";
+import { Table_column_nameContext } from "./PostgreSQLParser";
+import { Relation_column_nameContext } from "./PostgreSQLParser";
+import { Relation_nameContext } from "./PostgreSQLParser";
 import { Any_nameContext } from "./PostgreSQLParser";
 import { AttrsContext } from "./PostgreSQLParser";
 import { Type_name_listContext } from "./PostgreSQLParser";
@@ -717,6 +720,8 @@ import { Routine_name_createContext } from "./PostgreSQLParser";
 import { Routine_nameContext } from "./PostgreSQLParser";
 import { Procedure_nameContext } from "./PostgreSQLParser";
 import { Procedure_name_createContext } from "./PostgreSQLParser";
+import { Column_nameContext } from "./PostgreSQLParser";
+import { Column_name_createContext } from "./PostgreSQLParser";
 import { NameContext } from "./PostgreSQLParser";
 import { Attr_nameContext } from "./PostgreSQLParser";
 import { File_nameContext } from "./PostgreSQLParser";
@@ -1670,6 +1675,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitTypedtableelement?: (ctx: TypedtableelementContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.columnDefCluase`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnDefCluase?: (ctx: ColumnDefCluaseContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.columnDef`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1801,13 +1813,6 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitColumnlist?: (ctx: ColumnlistContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.columnElem`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitColumnElem?: (ctx: ColumnElemContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.opt_c_include`.
@@ -2879,6 +2884,27 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitAny_name_list?: (ctx: Any_name_listContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.table_column_name`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTable_column_name?: (ctx: Table_column_nameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.relation_column_name`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRelation_column_name?: (ctx: Relation_column_nameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.relation_name`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRelation_name?: (ctx: Relation_nameContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.any_name`.
@@ -5889,6 +5915,20 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitProcedure_name_create?: (ctx: Procedure_name_createContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.column_name`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumn_name?: (ctx: Column_nameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.column_name_create`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumn_name_create?: (ctx: Column_name_createContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.name`.
