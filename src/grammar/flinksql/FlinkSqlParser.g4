@@ -139,8 +139,12 @@ columnOptionDefinition
     ;
 
 physicalColumnDefinition
-    : columnName columnType columnConstraint? commentSpec?
+    : columnNameCreate columnType columnConstraint? commentSpec?
     ;
+
+columnNameCreate
+    : uid
+    | expression;
 
 columnName
     : uid | expression
@@ -197,7 +201,7 @@ commentSpec
     ;
 
 metadataColumnDefinition
-    : columnName columnType KW_METADATA (KW_FROM metadataKey)? KW_VIRTUAL?
+    : columnNameCreate columnType KW_METADATA (KW_FROM metadataKey)? KW_VIRTUAL?
     ;
 
 metadataKey
@@ -205,7 +209,7 @@ metadataKey
     ;
 
 computedColumnDefinition
-    : columnName KW_AS computedColumnExpression commentSpec?
+    : columnNameCreate KW_AS computedColumnExpression commentSpec?
     ;
 
 // 计算表达式
@@ -214,7 +218,7 @@ computedColumnExpression
     ;
 
 watermarkDefinition
-    : KW_WATERMARK KW_FOR expression KW_AS expression
+    : KW_WATERMARK KW_FOR columnName KW_AS expression
     ;
 
 tableConstraint
@@ -238,9 +242,9 @@ transformList
     ;
 
 transform
-    : qualifiedName                                                           #identityTransform
-    | transformName=identifier
-      LR_BRACKET transformArgument (COMMA transformArgument)* RR_BRACKET  #applyTransform
+    : columnName                                              #identityTransform
+    | qualifiedName                                           #columnTransform                   
+    | LR_BRACKET transformArgument (COMMA transformArgument)* RR_BRACKET  #applyTransform
     ;
 
 transformArgument
@@ -424,7 +428,7 @@ selectClause
 
 projectItemDefinition
     : overWindowItem
-    | expression (KW_AS? expression)?
+    | columnName  (KW_AS? expression )?
     ;
 
 overWindowItem
@@ -501,12 +505,12 @@ timeIntervalParamName
     ;
 
 columnDescriptor
-    : KW_DESCRIPTOR LR_BRACKET uid RR_BRACKET
+    : KW_DESCRIPTOR LR_BRACKET columnName RR_BRACKET
     ;
 
 joinCondition
     : KW_ON booleanExpression
-    | KW_USING LR_BRACKET uid (COMMA uid)* RR_BRACKET
+    | KW_USING columnNameList
     ;
 
 whereClause
@@ -518,7 +522,7 @@ groupByClause
     ;
 
 groupItemDefinition
-    : expression
+    : columnName
     | groupWindowFunction
     | LR_BRACKET RR_BRACKET
     | LR_BRACKET expression (COMMA expression)* RR_BRACKET
@@ -588,7 +592,7 @@ orderByCaluse
     ;
 
 orderItemDefition
-    : expression ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
+    : columnName ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
     ;
 
 limitClause
@@ -596,7 +600,7 @@ limitClause
     ;
 
 partitionByClause
-    : KW_PARTITION KW_BY expression (COMMA expression)*
+    : KW_PARTITION KW_BY columnName (COMMA columnName)*
     ;
 
 quantifiers
