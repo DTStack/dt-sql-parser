@@ -145,6 +145,7 @@ import { ColumnNameTypeOrConstraintListContext } from "./HiveSqlParser";
 import { ColumnNameColonTypeListContext } from "./HiveSqlParser";
 import { ColumnNameListContext } from "./HiveSqlParser";
 import { ColumnNameContext } from "./HiveSqlParser";
+import { ColumnNameCreateContext } from "./HiveSqlParser";
 import { ExtColumnNameContext } from "./HiveSqlParser";
 import { ColumnNameOrderListContext } from "./HiveSqlParser";
 import { ColumnParenthesesListContext } from "./HiveSqlParser";
@@ -309,7 +310,6 @@ import { DataConnectorTypeContext } from "./HiveSqlParser";
 import { DcPropertiesContext } from "./HiveSqlParser";
 import { DropDataConnectorStatementContext } from "./HiveSqlParser";
 import { TableAllColumnsContext } from "./HiveSqlParser";
-import { TableOrColumnContext } from "./HiveSqlParser";
 import { DefaultValueContext } from "./HiveSqlParser";
 import { ExpressionListContext } from "./HiveSqlParser";
 import { AliasListContext } from "./HiveSqlParser";
@@ -2092,6 +2092,17 @@ export interface HiveSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumnName?: (ctx: ColumnNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `HiveSqlParser.columnNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnNameCreate?: (ctx: ColumnNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `HiveSqlParser.columnNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnNameCreate?: (ctx: ColumnNameCreateContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `HiveSqlParser.extColumnName`.
@@ -3896,17 +3907,6 @@ export interface HiveSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitTableAllColumns?: (ctx: TableAllColumnsContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `HiveSqlParser.tableOrColumn`.
-	 * @param ctx the parse tree
-	 */
-	enterTableOrColumn?: (ctx: TableOrColumnContext) => void;
-	/**
-	 * Exit a parse tree produced by `HiveSqlParser.tableOrColumn`.
-	 * @param ctx the parse tree
-	 */
-	exitTableOrColumn?: (ctx: TableOrColumnContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `HiveSqlParser.defaultValue`.
