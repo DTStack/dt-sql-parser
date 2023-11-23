@@ -52,7 +52,7 @@ statement:
 	| KW_DROP KW_SCHEMA (KW_IF KW_EXISTS)? schemaName (KW_CASCADE | KW_RESTRICT)?	# dropSchema
 	| KW_ALTER KW_SCHEMA schemaName KW_RENAME KW_TO schemaNameCreate				# renameSchema
 	| KW_ALTER KW_SCHEMA schemaName KW_SET KW_AUTHORIZATION principal		# setSchemaAuthorization
-	| KW_CREATE KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tableNameCreate columnAliases? (
+	| KW_CREATE KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tableNameCreate columnListCreate? (
 		KW_COMMENT string
 	)? (KW_WITH properties)? KW_AS (query | '(' query ')') (
 		KW_WITH (KW_NO)? KW_DATA
@@ -61,18 +61,18 @@ statement:
 		',' tableElement
 	)* ')' (KW_COMMENT string)? (KW_WITH properties)?										# createTable
 	| KW_DROP KW_TABLE (KW_IF KW_EXISTS)? tableName											# dropTable
-	| KW_INSERT KW_INTO tableName columnAliases? query								# insertInto
+	| KW_INSERT KW_INTO tableName columnList? query								# insertInto
 	| KW_DELETE KW_FROM tableName (KW_WHERE booleanExpression)?	# delete
 	| KW_TRUNCATE KW_TABLE tableName						# truncateTable 
 	| KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? from = tableName KW_RENAME KW_TO to = tableNameCreate	# renameTable
 	| KW_COMMENT KW_ON KW_TABLE tableName KW_IS (string | KW_NULL)								# commentTable
-	| KW_COMMENT KW_ON KW_COLUMN qualifiedName KW_IS (string | KW_NULL)							# commentColumn
+	| KW_COMMENT KW_ON KW_COLUMN columnName KW_IS (string | KW_NULL)							# commentColumn
 	| KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName KW_RENAME KW_COLUMN (
 		KW_IF KW_EXISTS
-	)? from = identifier KW_TO to = identifier # renameColumn
+	)? from = columnName KW_TO to = columnNameCreate # renameColumn
 	| KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName KW_DROP KW_COLUMN (
 		KW_IF KW_EXISTS
-	)? column = qualifiedName # dropColumn
+	)? column = columnName # dropColumn
 	| KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName KW_ADD KW_COLUMN (
 		KW_IF KW_NOT KW_EXISTS
 	)? column = columnDefinition										# addColumn
@@ -173,7 +173,7 @@ statement:
 	)* (KW_WHERE where = booleanExpression)?													# update
 	| KW_MERGE KW_INTO tableName (KW_AS? identifier)? KW_USING relation KW_ON expression mergeCase+	# merge
 	| KW_SHOW KW_COMMENT KW_ON KW_TABLE tableName													# showTableComment
-	| KW_SHOW KW_COMMENT KW_ON KW_COLUMN qualifiedName													# showColumnComment;
+	| KW_SHOW KW_COMMENT KW_ON KW_COLUMN columnName													# showColumnComment;
 
 query: with? queryNoWith;
 
@@ -182,7 +182,7 @@ with: KW_WITH KW_RECURSIVE? namedQuery (',' namedQuery)*;
 tableElement: columnDefinition | likeClause;
 
 columnDefinition:
-	identifier type (KW_NOT KW_NULL)? (KW_COMMENT string)? (
+	columnNameCreate type (KW_NOT KW_NULL)? (KW_COMMENT string)? (
 		KW_WITH properties
 	)?;
 
@@ -230,7 +230,7 @@ queryPrimary:
 	| '(' queryNoWith ')'					# subquery;
 
 sortItem:
-	expression ordering = (KW_ASC | KW_DESC)? (
+	(columnName | expression) ordering = (KW_ASC | KW_DESC)? (
 		KW_NULLS nullOrdering = (KW_FIRST | KW_LAST)
 	)?;
 
@@ -245,12 +245,16 @@ groupBy: setQuantifier? groupingElement (',' groupingElement)*;
 
 groupingElement:
 	groupingSet												# singleGroupingSet
-	| KW_ROLLUP '(' (expression (',' expression)*)? ')'		# rollup
-	| KW_CUBE '(' (expression (',' expression)*)? ')'			# cube
+	| KW_ROLLUP '(' (groupingTerm (',' groupingTerm)*)? ')'		# rollup
+	| KW_CUBE '(' (groupingTerm (',' groupingTerm)*)? ')'			# cube
 	| KW_GROUPING KW_SETS '(' groupingSet (',' groupingSet)* ')'	# multipleGroupingSets;
 
 groupingSet:
-	'(' (expression (',' expression)*)? ')'
+	'(' (groupingTerm (',' groupingTerm)*)? ')'
+	| groupingTerm;
+
+groupingTerm: 
+	columnName
 	| expression;
 
 windowDefinition:
@@ -267,7 +271,7 @@ namedQuery: name = identifier (columnAliases)? KW_AS '(' query ')';
 setQuantifier: KW_DISTINCT | KW_ALL;
 
 selectItem:
-	expression (KW_AS? identifier)?							# selectSingle
+	(columnName | expression) (KW_AS? identifier)?							# selectSingle
 	| primaryExpression '.' ASTERISK (KW_AS columnAliases)?	# selectAll
 	| ASTERISK												# selectAll;
 
@@ -334,6 +338,10 @@ variableDefinition: identifier KW_AS expression;
 
 aliasedRelation:
 	relationPrimary (KW_AS? identifier columnAliases?)?;
+
+columnListCreate: '(' columnNameCreate (',' columnNameCreate)* ')';
+
+columnList: '(' columnName (',' columnName)* ')';
 
 columnAliases: '(' identifier (',' identifier)* ')';
 
@@ -610,6 +618,10 @@ catalogName: catalog = identifier;
 catalogNameCreate: catalog = identifier;
 
 functionName: qualifiedName;
+
+columnName: qualifiedName ;
+
+columnNameCreate: identifier;
 
 qualifiedName: identifier ('.' identifier)*;
 
