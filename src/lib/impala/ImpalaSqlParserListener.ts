@@ -3,11 +3,6 @@
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 
-import { TableNameContext } from "./ImpalaSqlParser";
-import { SubqueryRelationContext } from "./ImpalaSqlParser";
-import { UnnestContext } from "./ImpalaSqlParser";
-import { LateralContext } from "./ImpalaSqlParser";
-import { ParenthesizedRelationContext } from "./ImpalaSqlParser";
 import { JoinRelationContext } from "./ImpalaSqlParser";
 import { RelationDefaultContext } from "./ImpalaSqlParser";
 import { ComparisonContext } from "./ImpalaSqlParser";
@@ -225,6 +220,9 @@ import { SampleTypeContext } from "./ImpalaSqlParser";
 import { AliasedRelationContext } from "./ImpalaSqlParser";
 import { ColumnAliasesContext } from "./ImpalaSqlParser";
 import { RelationPrimaryContext } from "./ImpalaSqlParser";
+import { SubQueryRelationContext } from "./ImpalaSqlParser";
+import { UnnestContext } from "./ImpalaSqlParser";
+import { ParenthesizedRelationContext } from "./ImpalaSqlParser";
 import { ExpressionContext } from "./ImpalaSqlParser";
 import { BooleanExpressionContext } from "./ImpalaSqlParser";
 import { PredicateContext } from "./ImpalaSqlParser";
@@ -261,71 +259,6 @@ import { NonReservedContext } from "./ImpalaSqlParser";
  * `ImpalaSqlParser`.
  */
 export interface ImpalaSqlParserListener extends ParseTreeListener {
-	/**
-	 * Enter a parse tree produced by the `tableName`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterTableName?: (ctx: TableNameContext) => void;
-	/**
-	 * Exit a parse tree produced by the `tableName`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitTableName?: (ctx: TableNameContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `subqueryRelation`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterSubqueryRelation?: (ctx: SubqueryRelationContext) => void;
-	/**
-	 * Exit a parse tree produced by the `subqueryRelation`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitSubqueryRelation?: (ctx: SubqueryRelationContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `unnest`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterUnnest?: (ctx: UnnestContext) => void;
-	/**
-	 * Exit a parse tree produced by the `unnest`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitUnnest?: (ctx: UnnestContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `lateral`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterLateral?: (ctx: LateralContext) => void;
-	/**
-	 * Exit a parse tree produced by the `lateral`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitLateral?: (ctx: LateralContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `parenthesizedRelation`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	enterParenthesizedRelation?: (ctx: ParenthesizedRelationContext) => void;
-	/**
-	 * Exit a parse tree produced by the `parenthesizedRelation`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 */
-	exitParenthesizedRelation?: (ctx: ParenthesizedRelationContext) => void;
-
 	/**
 	 * Enter a parse tree produced by the `joinRelation`
 	 * labeled alternative in `ImpalaSqlParser.relation`.
@@ -2858,6 +2791,39 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitRelationPrimary?: (ctx: RelationPrimaryContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.subQueryRelation`.
+	 * @param ctx the parse tree
+	 */
+	enterSubQueryRelation?: (ctx: SubQueryRelationContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.subQueryRelation`.
+	 * @param ctx the parse tree
+	 */
+	exitSubQueryRelation?: (ctx: SubQueryRelationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.unnest`.
+	 * @param ctx the parse tree
+	 */
+	enterUnnest?: (ctx: UnnestContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.unnest`.
+	 * @param ctx the parse tree
+	 */
+	exitUnnest?: (ctx: UnnestContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.parenthesizedRelation`.
+	 * @param ctx the parse tree
+	 */
+	enterParenthesizedRelation?: (ctx: ParenthesizedRelationContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.parenthesizedRelation`.
+	 * @param ctx the parse tree
+	 */
+	exitParenthesizedRelation?: (ctx: ParenthesizedRelationContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.expression`.

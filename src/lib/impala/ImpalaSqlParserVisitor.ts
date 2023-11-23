@@ -3,11 +3,6 @@
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
 
-import { TableNameContext } from "./ImpalaSqlParser";
-import { SubqueryRelationContext } from "./ImpalaSqlParser";
-import { UnnestContext } from "./ImpalaSqlParser";
-import { LateralContext } from "./ImpalaSqlParser";
-import { ParenthesizedRelationContext } from "./ImpalaSqlParser";
 import { JoinRelationContext } from "./ImpalaSqlParser";
 import { RelationDefaultContext } from "./ImpalaSqlParser";
 import { ComparisonContext } from "./ImpalaSqlParser";
@@ -225,6 +220,9 @@ import { SampleTypeContext } from "./ImpalaSqlParser";
 import { AliasedRelationContext } from "./ImpalaSqlParser";
 import { ColumnAliasesContext } from "./ImpalaSqlParser";
 import { RelationPrimaryContext } from "./ImpalaSqlParser";
+import { SubQueryRelationContext } from "./ImpalaSqlParser";
+import { UnnestContext } from "./ImpalaSqlParser";
+import { ParenthesizedRelationContext } from "./ImpalaSqlParser";
 import { ExpressionContext } from "./ImpalaSqlParser";
 import { BooleanExpressionContext } from "./ImpalaSqlParser";
 import { PredicateContext } from "./ImpalaSqlParser";
@@ -264,46 +262,6 @@ import { NonReservedContext } from "./ImpalaSqlParser";
  * operations with no return type.
  */
 export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
-	/**
-	 * Visit a parse tree produced by the `tableName`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTableName?: (ctx: TableNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `subqueryRelation`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSubqueryRelation?: (ctx: SubqueryRelationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `unnest`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitUnnest?: (ctx: UnnestContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `lateral`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitLateral?: (ctx: LateralContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `parenthesizedRelation`
-	 * labeled alternative in `ImpalaSqlParser.relationPrimary`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitParenthesizedRelation?: (ctx: ParenthesizedRelationContext) => Result;
-
 	/**
 	 * Visit a parse tree produced by the `joinRelation`
 	 * labeled alternative in `ImpalaSqlParser.relation`.
@@ -1895,6 +1853,27 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitRelationPrimary?: (ctx: RelationPrimaryContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.subQueryRelation`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSubQueryRelation?: (ctx: SubQueryRelationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.unnest`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitUnnest?: (ctx: UnnestContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.parenthesizedRelation`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitParenthesizedRelation?: (ctx: ParenthesizedRelationContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.expression`.

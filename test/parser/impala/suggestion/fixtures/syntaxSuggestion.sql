@@ -1,20 +1,32 @@
 SELECT * FROM cat. ;
 
-CREATE TABLE cat.db ;
+SELECT name, calculate_age(birthdate) AS age FROM students;
 
-SHOW TABLES FROM cat;
+ALTER DATABASE cat;
 
-ALTER DATABASE cat.;
+ALTER TABLE my_table CHANGE COLUMN age;
+
+ALTER VIEW my_view;
 
 DROP VIEW v;
 
-SELECT * FROM ;
+DROP DATABASE my_db;
+
+DROP TABLE my_table;
+
+DROP FUNCTION my_func;
+
+DELETE FROM my_table WHERE col1 LIKE 'prefix%';
 
 CREATE VIEW cv;
 
-SELECT name, calculate_age(birthdate) AS age FROM students;
+CREATE TABLE cat.db ;
 
 CREATE FUNCTION fnc;
+
+CREATE DATABASE FIRST_DB;
+
+SHOW TABLES FROM cat;
 
 SHOW COLUMN STATS vie;
 

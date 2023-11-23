@@ -29,6 +29,7 @@ export default class ImpalaSQL extends BasicParser<
         ImpalaSqlParser.RULE_functionNamePath,
         ImpalaSqlParser.RULE_viewNamePath,
         ImpalaSqlParser.RULE_databaseNamePath,
+        ImpalaSqlParser.RULE_columnNamePath,
     ]);
 
     protected get splitListener() {
@@ -84,6 +85,9 @@ export default class ImpalaSQL extends BasicParser<
                 case ImpalaSqlParser.RULE_functionNamePath: {
                     syntaxContextType = SyntaxContextType.FUNCTION;
                     break;
+                }
+                case ImpalaSqlParser.RULE_columnNamePath: {
+                    syntaxContextType = SyntaxContextType.COLUMN;
                 }
                 default:
                     break;

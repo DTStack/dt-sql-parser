@@ -54,7 +54,7 @@ statement
 
 statementDefault: query;
 
-use: KW_USE schema=identifier;
+use: KW_USE databaseNamePath;
 
 createStatement
     : createSchema
@@ -77,7 +77,7 @@ createTableSelect
 
 createTableLike
     : KW_CREATE KW_EXTERNAL? KW_TABLE ifNotExists? tableNameCreate
-        KW_LIKE (likeTableName=qualifiedName | KW_PARQUET parquet=stringLiteral)
+        KW_LIKE (tableNamePath | KW_PARQUET parquet=stringLiteral)
         (KW_PARTITIONED KW_BY partitionedBy)?
         createCommonItem
     ;
@@ -172,7 +172,7 @@ dropPartitionByRangeOrValue: KW_ALTER KW_TABLE tableNamePath KW_DROP ifExists? (
 
 alterView: KW_ALTER KW_VIEW viewNamePath viewColumns? KW_AS query;
 
-renameView: KW_ALTER KW_VIEW viewNamePath KW_RENAME KW_TO qualifiedName;
+renameView: KW_ALTER KW_VIEW viewNamePath KW_RENAME KW_TO viewNamePath;
 
 alterViewOwner: KW_ALTER KW_VIEW viewNamePath KW_SET KW_OWNER (KW_USER|KW_ROLE) qualifiedName;
 
@@ -244,11 +244,11 @@ deleteStatement
     | deleteTableRef
     ;
 
-delete: KW_DELETE KW_FROM? qualifiedName (KW_WHERE booleanExpression)?;
+delete: KW_DELETE KW_FROM? tableNamePath (KW_WHERE booleanExpression)?;
 
-deleteTableRef: KW_DELETE qualifiedName (KW_AS? identifier)? KW_FROM (relation (COMMA relation)*)? (KW_WHERE booleanExpression)?;
+deleteTableRef: KW_DELETE tableNamePath (KW_AS? identifier)? KW_FROM (relation (COMMA relation)*)? (KW_WHERE booleanExpression)?;
 
-updateStatement: KW_UPDATE qualifiedName KW_SET assignmentList (KW_FROM relation (COMMA relation)*)? (KW_WHERE booleanExpression)?;
+updateStatement: KW_UPDATE tableNamePath KW_SET assignmentList (KW_FROM relation (COMMA relation)*)? (KW_WHERE booleanExpression)?;
 
 upsertStatement: KW_UPSERT KW_INTO KW_TABLE? tableNamePath columnAliases? query;
 
@@ -376,7 +376,7 @@ viewNameCreate
     | identifier (DOT identifier)?
     ;
 
-functionNameCreate: qualifiedName;
+functionNameCreate: identifier;
 
 databaseNamePath: identifier;
 
@@ -390,7 +390,7 @@ viewNamePath
     | identifier (DOT identifier)?
     ;
 
-functionNamePath: qualifiedName;
+functionNamePath: identifier;
 
 columnNamePath
     : identifier
@@ -437,7 +437,7 @@ constraintSpecification
 
 foreignKeySpecification
     :
-    KW_FOREIGN KW_KEY columnAliases KW_REFERENCES tblName=qualifiedName columnAliases (KW_DISABLE)? (KW_NOVALIDATE)? (KW_RELY)?
+    KW_FOREIGN KW_KEY columnAliases KW_REFERENCES tableNamePath columnAliases (KW_DISABLE)? (KW_NOVALIDATE)? (KW_RELY)?
     ;
 
 columnDefinition
@@ -592,7 +592,7 @@ groupingSet
     ;
 
 namedQuery
-    : name=identifier (columnAliases)? KW_AS LPAREN query RPAREN
+    : name=identifier (columnAliases)? KW_AS subQueryRelation
     ;
 
 setQuantifier
@@ -652,12 +652,15 @@ columnAliases
     ;
 
 relationPrimary
-    : qualifiedName                                                   #tableName
-    | LPAREN query RPAREN                                                   #subqueryRelation
-    | KW_UNNEST LPAREN expression (COMMA expression)* RPAREN (KW_WITH KW_ORDINALITY)?  #unnest
-    | KW_LATERAL LPAREN query RPAREN                                           #lateral
-    | LPAREN relation RPAREN                                                #parenthesizedRelation
+    : tableNamePath
+    | KW_LATERAL? subQueryRelation
+    | unnest
+    | parenthesizedRelation
     ;
+
+subQueryRelation: LPAREN query RPAREN;
+unnest: KW_UNNEST LPAREN expression (COMMA expression)* RPAREN (KW_WITH KW_ORDINALITY)?;
+parenthesizedRelation: LPAREN relation RPAREN;
 
 expression
     : booleanExpression
@@ -672,10 +675,10 @@ booleanExpression
 
 predicate[ParserRuleContext value]
     : comparisonOperator right=valueExpression                            #comparison
-    | comparisonOperator comparisonQuantifier LPAREN query RPAREN               #quantifiedComparison
+    | comparisonOperator comparisonQuantifier subQueryRelation               #quantifiedComparison
     | KW_NOT? KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression        #between
     | KW_NOT? KW_IN LPAREN expression (COMMA expression)* RPAREN                        #inList
-    | KW_NOT? KW_IN LPAREN query RPAREN                                               #inSubquery
+    | KW_NOT? KW_IN subQueryRelation                                               #inSubquery
     | KW_NOT? KW_LIKE pattern=valueExpression (KW_ESCAPE escape=valueExpression)?  #like
     | KW_REGEXP pattern=valueExpression                      #REGEXP
     | KW_IS KW_NOT? KW_NULL                                                        #nullPredicate
@@ -703,8 +706,8 @@ primaryExpression
     | KW_POSITION LPAREN valueExpression KW_IN valueExpression RPAREN                                 #position
     | LPAREN expression (KW_AS type)? (COMMA expression (KW_AS type)?)*? RPAREN                                                #rowConstructor
     | KW_ROW LPAREN expression (COMMA expression)* RPAREN                                            #rowConstructor
-    | qualifiedName LPAREN ASTERISK RPAREN filter? over?                                        #functionCall
-    | qualifiedName LPAREN (setQuantifier? expression (COMMA expression)*)?
+    | functionNamePath LPAREN ASTERISK RPAREN filter? over?                                        #functionCall
+    | functionNamePath LPAREN (setQuantifier? expression (COMMA expression)*)?
         (KW_ORDER KW_BY sortItem (COMMA sortItem)*)? RPAREN filter? over?                            #functionCall
     | identifier RIGHT_ARROW expression                                                          #lambda
     | LPAREN (identifier (COMMA identifier)*)? RPAREN RIGHT_ARROW expression                             #lambda
