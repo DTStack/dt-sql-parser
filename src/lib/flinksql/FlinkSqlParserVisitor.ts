@@ -1,4 +1,4 @@
-// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/liuyi/Desktop/Projects/dtstack/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -10,7 +10,6 @@ import { ValueExpressionDefaultContext } from "./FlinkSqlParser";
 import { ArithmeticUnaryContext } from "./FlinkSqlParser";
 import { ArithmeticBinaryContext } from "./FlinkSqlParser";
 import { ComparisonContext } from "./FlinkSqlParser";
-import { ArithmeticBinaryAlternateContext } from "./FlinkSqlParser";
 import { SearchedCaseContext } from "./FlinkSqlParser";
 import { SimpleCaseContext } from "./FlinkSqlParser";
 import { CastContext } from "./FlinkSqlParser";
@@ -288,14 +287,6 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitComparison?: (ctx: ComparisonContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `arithmeticBinaryAlternate`
-	 * labeled alternative in `FlinkSqlParser.valueExpression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitArithmeticBinaryAlternate?: (ctx: ArithmeticBinaryAlternateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `searchedCase`

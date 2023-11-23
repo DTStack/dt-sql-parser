@@ -1,4 +1,4 @@
-// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/liuyi/Desktop/Projects/dtstack/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
@@ -10,7 +10,6 @@ import { ValueExpressionDefaultContext } from "./FlinkSqlParser";
 import { ArithmeticUnaryContext } from "./FlinkSqlParser";
 import { ArithmeticBinaryContext } from "./FlinkSqlParser";
 import { ComparisonContext } from "./FlinkSqlParser";
-import { ArithmeticBinaryAlternateContext } from "./FlinkSqlParser";
 import { SearchedCaseContext } from "./FlinkSqlParser";
 import { SimpleCaseContext } from "./FlinkSqlParser";
 import { CastContext } from "./FlinkSqlParser";
@@ -320,19 +319,6 @@ export interface FlinkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitComparison?: (ctx: ComparisonContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `arithmeticBinaryAlternate`
-	 * labeled alternative in `FlinkSqlParser.valueExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterArithmeticBinaryAlternate?: (ctx: ArithmeticBinaryAlternateContext) => void;
-	/**
-	 * Exit a parse tree produced by the `arithmeticBinaryAlternate`
-	 * labeled alternative in `FlinkSqlParser.valueExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitArithmeticBinaryAlternate?: (ctx: ArithmeticBinaryAlternateContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `searchedCase`

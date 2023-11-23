@@ -16,7 +16,7 @@ ADD PYTHON_DEPENDENCIES WITH /dependencies.txt RENAME dependencies.txt;
 
 ADD PYTHON_JAR WITH /python_jar.jar RENAME py_jar.jar;
 
-ADD PYTHON_PARAMETER /parameter.py;
+ADD PYTHON_PARAMETER my_parameter.py;
 
 ADD PYTHON_ARCHIVES WITH /archives.py RENAME archive.tx;
 
