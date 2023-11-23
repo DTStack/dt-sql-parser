@@ -182,7 +182,7 @@ alterUnSetOrSetViewTblproperties: KW_ALTER KW_VIEW viewNamePath (KW_UNSET | KW_S
 
 truncateTable: KW_TRUNCATE KW_TABLE? ifExists? tableNamePath;
 
-describeStatement: KW_DESCRIBE KW_DATABASE? (KW_FORMATTED | KW_EXTENDED)? databaseNamePath;
+describeStatement: KW_DESCRIBE KW_DATABASE? (KW_FORMATTED | KW_EXTENDED)? qualifiedName;
 
 computeStatement
     : computeStats
@@ -331,7 +331,7 @@ addComments
 
 addDatabaseComments: KW_COMMENT KW_ON KW_DATABASE databaseNamePath KW_IS (stringLiteral | KW_NULL);
 
-addTbaleComments: KW_COMMENT KW_ON  KW_TABLE tableNamePath KW_IS (stringLiteral | KW_NULL);
+addTbaleComments: KW_COMMENT KW_ON KW_TABLE tableNamePath KW_IS (stringLiteral | KW_NULL);
 
 addColumnComments: KW_COMMENT KW_ON KW_COLUMN columnNamePath KW_IS (stringLiteral | KW_NULL);
 
@@ -376,7 +376,7 @@ viewNameCreate
     | identifier (DOT identifier)?
     ;
 
-functionNameCreate: identifier;
+functionNameCreate: identifier | identifier (DOT identifier)?;
 
 databaseNamePath: identifier;
 
@@ -390,7 +390,7 @@ viewNamePath
     | identifier (DOT identifier)?
     ;
 
-functionNamePath: identifier;
+functionNamePath: identifier | identifier (DOT identifier)?;
 
 columnNamePath
     : identifier
@@ -719,7 +719,7 @@ primaryExpression
     | KW_TRY_CAST LPAREN expression KW_AS type RPAREN                                                 #cast
     | KW_ARRAY LSQUARE (expression (COMMA expression)*)? RSQUARE                                       #arrayConstructor
     | value=primaryExpression LSQUARE index=valueExpression RSQUARE                               #subscript
-    | identifier                                                                          #columnReference
+    | columnNamePath                                                                          #columnReference
     | base=primaryExpression DOT fieldName=identifier                                     #dereference
     | name=KW_CURRENT_DATE                                                                   #specialDateTimeFunction
     | name=KW_CURRENT_TIME (LPAREN precision=INTEGER_VALUE  RPAREN)?                                #specialDateTimeFunction

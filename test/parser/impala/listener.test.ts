@@ -12,7 +12,7 @@ describe('impala SQL Listener Tests', () => {
     test('Listener enterTableName', async () => {
         let result = '';
         class MyListener implements ImpalaSqlParserListener {
-            enterTableName = (ctx): void => {
+            enterTableNamePath = (ctx): void => {
                 result = ctx.text.toLowerCase();
             };
         }

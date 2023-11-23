@@ -48,7 +48,7 @@ SELECT id, item FROM games, games.score
   WHERE item > 1000000
 ORDER BY id, item desc;
 
-SELECT id, info.key1 AS k, info.value1 AS v from games3, games3.play AS plays, games3.play.item AS info
+SELECT id, info.key1 AS k, info.value1 AS v from games3, games3.play AS plays, games3.item AS info
   WHERE info.KEY1 = 'score' AND info.VALUE1 > 1000000
 ORDER BY id, info.value1 desc;
 

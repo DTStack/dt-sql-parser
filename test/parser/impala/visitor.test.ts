@@ -20,7 +20,7 @@ describe('impala SQL Visitor Tests', () => {
             protected defaultResult() {
                 return result;
             }
-            visitTableName = (ctx): void => {
+            visitTableNamePath = (ctx): void => {
                 result = ctx.text.toLowerCase();
             };
         }

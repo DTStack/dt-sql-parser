@@ -276,4 +276,32 @@ describe('Impala SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['v1']);
     });
+
+    test('Select group by', () => {
+        const pos: CaretPosition = {
+            lineNumber: 37,
+            column: 22,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['id']);
+    });
+
+    test('Select order by', () => {
+        const pos: CaretPosition = {
+            lineNumber: 39,
+            column: 22,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['id']);
+    });
 });

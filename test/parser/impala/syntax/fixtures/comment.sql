@@ -9,7 +9,7 @@ COMMENT ON TABLE my_table IS 'This is my table.';
 COMMENT ON TABLE my_table IS NULL;
 
 -- COMMENT ON COLUMN [db_name.]table_name.column_name IS {'comment' | NULL}
-COMMENT ON TABLE my_database.my_table.age IS 'save for age.';
-COMMENT ON TABLE my_database.my_table.age IS NULL;
-COMMENT ON TABLE my_table.age IS 'This is my table.';
-COMMENT ON TABLE my_table.age IS NULL;
+COMMENT ON COLUMN my_database.my_table.age IS 'save for age.';
+COMMENT ON COLUMN my_database.my_table.age IS NULL;
+COMMENT ON COLUMN my_table.age IS 'This is my table.';
+COMMENT ON COLUMN my_table.age IS NULL;
