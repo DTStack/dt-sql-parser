@@ -101,7 +101,7 @@ dtAddStatement
     ;
 
 dtFilePath
-    : SLASH_TEXT+
+    : (SLASH_SIGN? uid)+
     ;
 
 // Create statements
@@ -698,7 +698,6 @@ valueExpression
     | left=valueExpression operator=BIT_XOR_OP right=valueExpression                                #arithmeticBinary
     | left=valueExpression operator=BIT_OR_OP right=valueExpression                               #arithmeticBinary
     | left=valueExpression comparisonOperator right=valueExpression                          #comparison
-    | left=valueExpression right=SLASH_TEXT                                                #arithmeticBinaryAlternate
     ;
 
 primaryExpression
