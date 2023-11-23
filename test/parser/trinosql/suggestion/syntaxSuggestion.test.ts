@@ -198,4 +198,161 @@ describe('Trino SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb']);
     });
+
+    test('Comment on column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 21,
+            column: 22,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb', '.']);
+    });
+
+    test('RENAME column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 23,
+            column: 30,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('RENAME column to', () => {
+        const pos: CaretPosition = {
+            lineNumber: 25,
+            column: 37,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('Drop column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 27,
+            column: 31,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('Alter table add column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 29,
+            column: 32,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['zi']);
+    });
+
+    test('Show comment on column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 31,
+            column: 28,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb', '.', 'c']);
+    });
+
+    test('Insert into spec column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 33,
+            column: 21,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('Select order by', () => {
+        const pos: CaretPosition = {
+            lineNumber: 35,
+            column: 27,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('Select group by', () => {
+        const pos: CaretPosition = {
+            lineNumber: 37,
+            column: 27,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
 });
