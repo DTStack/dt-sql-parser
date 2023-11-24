@@ -181,7 +181,9 @@ MOVE NEXT FROM cursor_name;
 WITH query_name (id) AS (SELECT id FROM table_expression)
 MERGE INTO ONLY target_table_name * AS target_alias
 USING ONLY source_table_name * ON s.winename = w.winename
-WHEN MATCHED AND s.winename = w.winename THEN UPDATE SET column_name = DEFAULT;
+WHEN MATCHED AND s.winename = w.winename THEN UPDATE SET column_name = stock + 3
+WHEN NOT MATCHED AND stock_delta + stock > 0 THEN INSERT ( column_name) OVERRIDING SYSTEM VALUE VALUES (s.winename)
+WHEN MATCHED THEN DELETE;
 
 -- NOTIFY
 NOTIFY virtual, 'This is the payload';

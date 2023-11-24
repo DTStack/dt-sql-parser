@@ -48,9 +48,11 @@ import { Var_nameContext } from "./PostgreSQLParser";
 import { Var_listContext } from "./PostgreSQLParser";
 import { Var_valueContext } from "./PostgreSQLParser";
 import { Iso_levelContext } from "./PostgreSQLParser";
+import { Opt_boolean_or_string_columnContext } from "./PostgreSQLParser";
 import { Opt_boolean_or_stringContext } from "./PostgreSQLParser";
 import { Zone_valueContext } from "./PostgreSQLParser";
 import { Opt_encodingContext } from "./PostgreSQLParser";
+import { Nonreservedword_or_sconst_columnContext } from "./PostgreSQLParser";
 import { Nonreservedword_or_sconstContext } from "./PostgreSQLParser";
 import { VariableresetstmtContext } from "./PostgreSQLParser";
 import { Reset_restContext } from "./PostgreSQLParser";
@@ -747,6 +749,7 @@ import { Exclude_elementContext } from "./PostgreSQLParser";
 import { Index_paramentersContext } from "./PostgreSQLParser";
 import { Type_function_nameContext } from "./PostgreSQLParser";
 import { Type_usual_nameContext } from "./PostgreSQLParser";
+import { Nonreservedword_columnContext } from "./PostgreSQLParser";
 import { NonreservedwordContext } from "./PostgreSQLParser";
 import { CollabelContext } from "./PostgreSQLParser";
 import { IdentifierContext } from "./PostgreSQLParser";
@@ -850,6 +853,7 @@ import { Join_conditionContext } from "./PostgreSQLParser";
 import { Merge_when_clauseContext } from "./PostgreSQLParser";
 import { Merge_insertContext } from "./PostgreSQLParser";
 import { Merge_updateContext } from "./PostgreSQLParser";
+import { Default_values_or_valuesContext } from "./PostgreSQLParser";
 import { ExprofdefaultlistContext } from "./PostgreSQLParser";
 import { ExprofdefaultContext } from "./PostgreSQLParser";
 import { Stmt_closeContext } from "./PostgreSQLParser";
@@ -1400,6 +1404,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitIso_level?: (ctx: Iso_levelContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.opt_boolean_or_string_column`.
+	 * @param ctx the parse tree
+	 */
+	enterOpt_boolean_or_string_column?: (ctx: Opt_boolean_or_string_columnContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.opt_boolean_or_string_column`.
+	 * @param ctx the parse tree
+	 */
+	exitOpt_boolean_or_string_column?: (ctx: Opt_boolean_or_string_columnContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.opt_boolean_or_string`.
 	 * @param ctx the parse tree
 	 */
@@ -1431,6 +1446,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitOpt_encoding?: (ctx: Opt_encodingContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword_or_sconst_column`.
+	 * @param ctx the parse tree
+	 */
+	enterNonreservedword_or_sconst_column?: (ctx: Nonreservedword_or_sconst_columnContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.nonreservedword_or_sconst_column`.
+	 * @param ctx the parse tree
+	 */
+	exitNonreservedword_or_sconst_column?: (ctx: Nonreservedword_or_sconst_columnContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword_or_sconst`.
@@ -9089,6 +9115,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitType_usual_name?: (ctx: Type_usual_nameContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword_column`.
+	 * @param ctx the parse tree
+	 */
+	enterNonreservedword_column?: (ctx: Nonreservedword_columnContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.nonreservedword_column`.
+	 * @param ctx the parse tree
+	 */
+	exitNonreservedword_column?: (ctx: Nonreservedword_columnContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword`.
 	 * @param ctx the parse tree
 	 */
@@ -10220,6 +10257,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitMerge_update?: (ctx: Merge_updateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.default_values_or_values`.
+	 * @param ctx the parse tree
+	 */
+	enterDefault_values_or_values?: (ctx: Default_values_or_valuesContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.default_values_or_values`.
+	 * @param ctx the parse tree
+	 */
+	exitDefault_values_or_values?: (ctx: Default_values_or_valuesContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.exprofdefaultlist`.
