@@ -295,6 +295,12 @@ iso_level:
 	| KW_REPEATABLE KW_READ
 	| KW_SERIALIZABLE;
 
+opt_boolean_or_string_column: 
+	KW_TRUE
+	| KW_FALSE
+	| KW_ON
+	| nonreservedword_or_sconst_column;
+
 opt_boolean_or_string:
 	KW_TRUE
 	| KW_FALSE
@@ -311,6 +317,8 @@ zone_value:
 	| KW_LOCAL;
 
 opt_encoding: sconst | KW_DEFAULT;
+
+nonreservedword_or_sconst_column: nonreservedword_column | sconst;
 
 nonreservedword_or_sconst: nonreservedword | sconst;
 
@@ -545,7 +553,7 @@ copy_generic_opt_arg_list:
 		COMMA copy_generic_opt_arg_list_item
 	)*;
 
-copy_generic_opt_arg_list_item: opt_boolean_or_string;
+copy_generic_opt_arg_list_item: opt_boolean_or_string_column;
 
 createstmt:
 	KW_CREATE opttemp? KW_TABLE opt_if_not_exists? table_name_create (
@@ -1670,7 +1678,7 @@ renamestmt:
 	| KW_ALTER KW_FOREIGN KW_TABLE opt_if_exists? relation_expr KW_RENAME KW_TO table_name_create
 	| KW_ALTER KW_TABLE opt_if_exists? relation_expr KW_RENAME opt_column? column_name KW_TO column_name_create
 	| KW_ALTER KW_VIEW opt_if_exists? view_name KW_RENAME opt_column? column_name KW_TO column_name_create
-	| KW_ALTER KW_MATERIALIZED KW_VIEW opt_if_exists? view_name KW_RENAME opt_column? name KW_TO name
+	| KW_ALTER KW_MATERIALIZED KW_VIEW opt_if_exists? view_name KW_RENAME opt_column? column_name KW_TO column_name_create
 	| KW_ALTER KW_TABLE opt_if_exists? relation_expr KW_RENAME KW_CONSTRAINT name KW_TO name
 	| KW_ALTER KW_FOREIGN KW_TABLE opt_if_exists? relation_expr KW_RENAME opt_column? column_name KW_TO column_name_create
 	| KW_ALTER KW_RULE name KW_ON qualified_name KW_RENAME KW_TO name
@@ -1969,7 +1977,7 @@ cluster_index_specification: KW_USING name;
 
 vacuumstmt:
 	KW_VACUUM opt_full? opt_freeze? opt_verbose? opt_analyze? opt_vacuum_relation_list?
-	| KW_VACUUM OPEN_PAREN vac_analyze_option_list CLOSE_PAREN opt_vacuum_relation_list?;
+	| KW_VACUUM (OPEN_PAREN vac_analyze_option_list CLOSE_PAREN)? opt_vacuum_relation_list?;
 
 analyzestmt:
 	analyze_keyword opt_verbose? opt_vacuum_relation_list?
@@ -2058,12 +2066,9 @@ insertstmt:
 insert_target: table_name (KW_AS colid)?;
 
 insert_rest:
-	selectstmt
-	| KW_OVERRIDING override_kind KW_VALUE selectstmt
-	| OPEN_PAREN insert_column_list CLOSE_PAREN (
+	(OPEN_PAREN insert_column_list CLOSE_PAREN)? (
 		KW_OVERRIDING override_kind KW_VALUE
-	)? selectstmt
-	| KW_DEFAULT KW_VALUES;
+	)? (default_values_or_values | selectstmt);
 
 override_kind: KW_USER | KW_SYSTEM;
 
@@ -2189,9 +2194,9 @@ common_table_expr:
 	name opt_name_list? KW_AS opt_materialized? OPEN_PAREN preparablestmt CLOSE_PAREN search_cluase? cycle_cluase?;
 
 search_cluase: 
-	KW_SEARCH (KW_BREADTH | KW_DEPTH) KW_FIRST KW_BY columnlist KW_SET name;
+	KW_SEARCH (KW_BREADTH | KW_DEPTH) KW_FIRST KW_BY columnlist KW_SET column_name;
 
-cycle_cluase: KW_CYCLE columnlist KW_SET column_name KW_TO name KW_DEFAULT name KW_USING column_name;
+cycle_cluase: KW_CYCLE columnlist KW_SET column_name (KW_TO name KW_DEFAULT name)? KW_USING column_name;
 
 opt_materialized: KW_MATERIALIZED | KW_NOT KW_MATERIALIZED;
 
@@ -3053,6 +3058,8 @@ type_usual_name:
 	| plsql_unreserved_keyword
 	| type_func_name_keyword;
 
+nonreservedword_column: column_name | type_func_name_keyword;
+
 nonreservedword:
 	identifier
 	| unreserved_keyword
@@ -3866,9 +3873,9 @@ opt_fetch_direction:
 
 stmt_move: KW_MOVE opt_fetch_direction? cursor_variable SEMI;
 
-mergestmt: with_clause? KW_MERGE KW_INTO (KW_ONLY)? table_name (STAR)? (KW_AS colid?)? KW_USING data_source KW_ON join_condition merge_when_clause+;
+mergestmt: with_clause? KW_MERGE KW_INTO (KW_ONLY)? table_name (STAR)? (KW_AS? colid)? KW_USING data_source KW_ON join_condition merge_when_clause+;
 
-data_source: (KW_ONLY)? table_name (STAR)? | ( select_no_parens | values_clause ) (KW_AS? colid)?;
+data_source: ((KW_ONLY)? table_name (STAR)? | ( select_no_parens | values_clause ) )(KW_AS? colid)?;
 
 join_condition: a_expr;
 
@@ -3877,12 +3884,14 @@ merge_when_clause:
 	| KW_WHEN KW_NOT KW_MATCHED (KW_AND a_expr)? KW_THEN (merge_insert | KW_DO KW_NOTHING);
 
 merge_insert: 
-	KW_INSERT columnlist? (KW_OVERRIDING (KW_SYSTEM | KW_USER) KW_VALUE)? (KW_VALUES exprofdefaultlist | KW_DEFAULT KW_VALUES) ;
+	KW_INSERT (OPEN_PAREN columnlist CLOSE_PAREN)? (KW_OVERRIDING (KW_SYSTEM | KW_USER) KW_VALUE)? default_values_or_values ;
 
 merge_update: 
 	KW_UPDATE KW_SET (column_name EQUAL exprofdefault
-	| columnlist EQUAL exprofdefaultlist)+
+	| OPEN_PAREN columnlist CLOSE_PAREN EQUAL OPEN_PAREN exprofdefaultlist CLOSE_PAREN)+
 	;
+
+default_values_or_values: KW_VALUES exprofdefaultlist | KW_DEFAULT KW_VALUES;
 
 exprofdefaultlist: OPEN_PAREN exprofdefault (COMMA exprofdefault)* CLOSE_PAREN;
 
