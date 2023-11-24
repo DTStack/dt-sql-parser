@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "4.0.0-beta.4.6",
+  "version": "4.0.0-beta.4.7",
   "description": "SQL Parsers for BigData, built with antlr4",
   "keywords": [
     "sql",

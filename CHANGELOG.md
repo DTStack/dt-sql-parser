@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.7](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.6...v4.0.0-beta.4.7) (2023-11-24)
+
+
+### Features
+
+* add column to syntaxContextType ([00b66cc](https://github.com/DTStack/dt-sql-parser/commit/00b66ccf4476a7ead6558677e858449c3c4693ec))
+
+
+### Bug Fixes
+
+* [#213](https://github.com/DTStack/dt-sql-parser/issues/213) flinksql expression syntax ([#215](https://github.com/DTStack/dt-sql-parser/issues/215)) ([6bbcb3c](https://github.com/DTStack/dt-sql-parser/commit/6bbcb3c8d33d45b26a87f47485dd75b6648da2a6))
+
 ## [4.0.0-beta.4.6](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.5...v4.0.0-beta.4.6) (2023-11-20)
 
 
