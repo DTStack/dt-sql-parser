@@ -2272,7 +2272,8 @@ group_by_item:
 	| empty_grouping_set
 	| cube_clause
 	| rollup_clause
-	| grouping_sets_clause;
+	| grouping_sets_clause
+	| OPEN_PAREN expr_list CLOSE_PAREN;
 
 empty_grouping_set: OPEN_PAREN CLOSE_PAREN;
 
@@ -2670,6 +2671,7 @@ c_expr:
 	| KW_GROUPING OPEN_PAREN expr_list CLOSE_PAREN							# c_expr_expr
 	| /*22*/ KW_UNIQUE select_with_parens									# c_expr_expr
 	| columnref															# c_expr_expr
+	| column_name														# c_expr_expr
 	| aexprconst														# c_expr_expr
 	| plsqlvariablename													# c_expr_expr
 	| OPEN_PAREN a_expr_in_parens = a_expr CLOSE_PAREN opt_indirection	# c_expr_expr
@@ -2903,10 +2905,10 @@ case_default: KW_ELSE a_expr;
 
 case_arg: a_expr;
 
-columnref: colid indirection?;
+columnref: (colid | column_name) indirection?;
 
 indirection_el:
-	DOT (attr_name | STAR)
+	DOT (attr_name | column_name | STAR)
 	| OPEN_BRACKET (
 		a_expr
 		| opt_slice_bound? COLON opt_slice_bound?
