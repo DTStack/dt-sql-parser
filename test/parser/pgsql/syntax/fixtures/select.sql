@@ -13,6 +13,8 @@ WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC)
   FOR UPDATE OF table_name, table_name2 NOWAIT;
 SELECT;
 
+SELECT * FROM db.tbs GROUP BY (col1 > 3, col2 < 8) ORDER BY col3 > 9;
+
 WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) INTERSECT DISTINCT (SELECT * FROM others) ORDER BY salary ASC LIMIT ALL OFFSET start FETCH NEXT ROW ONLY FOR NO KEY UPDATE;
 
 WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT ON (col1) random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) EXCEPT (SELECT * FROM others) ORDER BY salary USING > NULL FIRST LIMIT 40 OFFSET start FETCH NEXT ROW ONLY FOR SHARE;

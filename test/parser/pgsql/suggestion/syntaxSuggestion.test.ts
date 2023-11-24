@@ -52,7 +52,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db']);
     });
 
-    test('Select table ', () => {
+    test('Select table', () => {
         const pos: CaretPosition = {
             lineNumber: 5,
             column: 18,
@@ -725,15 +725,28 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 65,
             column: 132,
         };
+        const pos1: CaretPosition = {
+            lineNumber: 65,
+            column: 106,
+        };
         const syntaxes = parser.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
+        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos1.lineNumber),
+            pos1
+        )?.syntax;
         const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+        const suggestion1 = syntaxes1?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col_name']);
+        expect(suggestion1).not.toBeUndefined();
+        expect(suggestion1?.wordRanges.map((token) => token.text)).toEqual(['stock_delta']);
     });
     test('REVOKE With Column', () => {
         const pos: CaretPosition = {
@@ -919,5 +932,47 @@ describe('Postgre SQL Syntax Suggestion', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col1']);
         expect(suggestion1).not.toBeUndefined();
         expect(suggestion1?.wordRanges.map((token) => token.text)).toEqual(['col2']);
+    });
+    test('Select table with expression', () => {
+        const pos1: CaretPosition = {
+            lineNumber: 77,
+            column: 36,
+        };
+        const pos2: CaretPosition = {
+            lineNumber: 77,
+            column: 46,
+        };
+        const pos3: CaretPosition = {
+            lineNumber: 77,
+            column: 65,
+        };
+        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos1.lineNumber),
+            pos1
+        )?.syntax;
+        const syntaxes2 = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos2.lineNumber),
+            pos2
+        )?.syntax;
+        const syntaxes3 = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos3.lineNumber),
+            pos3
+        )?.syntax;
+        const suggestion1 = syntaxes1?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+        const suggestion2 = syntaxes2?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+        const suggestion3 = syntaxes3?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+        );
+
+        expect(suggestion1).not.toBeUndefined();
+        expect(suggestion1?.wordRanges.map((token) => token.text)).toEqual(['col1']);
+        expect(suggestion2).not.toBeUndefined();
+        expect(suggestion2?.wordRanges.map((token) => token.text)).toEqual(['col2']);
+        expect(suggestion3).not.toBeUndefined();
+        expect(suggestion3?.wordRanges.map((token) => token.text)).toEqual(['col3']);
     });
 });
