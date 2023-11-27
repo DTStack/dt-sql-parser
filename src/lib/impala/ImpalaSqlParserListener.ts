@@ -78,8 +78,7 @@ import { LogicalNotContext } from "./ImpalaSqlParser";
 import { LogicalBinaryContext } from "./ImpalaSqlParser";
 import { ProgramContext } from "./ImpalaSqlParser";
 import { StatementContext } from "./ImpalaSqlParser";
-import { StatementDefaultContext } from "./ImpalaSqlParser";
-import { UseContext } from "./ImpalaSqlParser";
+import { UseStatementContext } from "./ImpalaSqlParser";
 import { CreateStatementContext } from "./ImpalaSqlParser";
 import { CreateTableSelectContext } from "./ImpalaSqlParser";
 import { CreateTableLikeContext } from "./ImpalaSqlParser";
@@ -108,7 +107,7 @@ import { RenameViewContext } from "./ImpalaSqlParser";
 import { AlterViewOwnerContext } from "./ImpalaSqlParser";
 import { RenameTableContext } from "./ImpalaSqlParser";
 import { AlterUnSetOrSetViewTblpropertiesContext } from "./ImpalaSqlParser";
-import { TruncateTableContext } from "./ImpalaSqlParser";
+import { TruncateTableStatementContext } from "./ImpalaSqlParser";
 import { DescribeStatementContext } from "./ImpalaSqlParser";
 import { ComputeStatementContext } from "./ImpalaSqlParser";
 import { ComputeStatsContext } from "./ImpalaSqlParser";
@@ -148,15 +147,15 @@ import { ShowGrantsContext } from "./ImpalaSqlParser";
 import { ShowDatabaseGrantContext } from "./ImpalaSqlParser";
 import { ShowTableGrantContext } from "./ImpalaSqlParser";
 import { ShowColumnGrantContext } from "./ImpalaSqlParser";
-import { AddCommentsContext } from "./ImpalaSqlParser";
+import { AddCommentStatementContext } from "./ImpalaSqlParser";
 import { AddDatabaseCommentsContext } from "./ImpalaSqlParser";
-import { AddTbaleCommentsContext } from "./ImpalaSqlParser";
+import { AddTableCommentsContext } from "./ImpalaSqlParser";
 import { AddColumnCommentsContext } from "./ImpalaSqlParser";
-import { ExplainContext } from "./ImpalaSqlParser";
-import { SetSessionContext } from "./ImpalaSqlParser";
-import { ShutdownContext } from "./ImpalaSqlParser";
-import { InvalidateMetaContext } from "./ImpalaSqlParser";
-import { LoadDataContext } from "./ImpalaSqlParser";
+import { ExplainStatementContext } from "./ImpalaSqlParser";
+import { SetStatementContext } from "./ImpalaSqlParser";
+import { ShutdownStatementContext } from "./ImpalaSqlParser";
+import { InvalidateMetaStatementContext } from "./ImpalaSqlParser";
+import { LoadDataStatementContext } from "./ImpalaSqlParser";
 import { RefreshStatementContext } from "./ImpalaSqlParser";
 import { RefreshMetaContext } from "./ImpalaSqlParser";
 import { RefreshAuthContext } from "./ImpalaSqlParser";
@@ -172,11 +171,12 @@ import { TableNamePathContext } from "./ImpalaSqlParser";
 import { ViewNamePathContext } from "./ImpalaSqlParser";
 import { FunctionNamePathContext } from "./ImpalaSqlParser";
 import { ColumnNamePathContext } from "./ImpalaSqlParser";
+import { TableOrViewPathContext } from "./ImpalaSqlParser";
 import { CreateCommonItemContext } from "./ImpalaSqlParser";
 import { AssignmentListContext } from "./ImpalaSqlParser";
 import { AssignmentItemContext } from "./ImpalaSqlParser";
 import { ViewColumnsContext } from "./ImpalaSqlParser";
-import { QueryContext } from "./ImpalaSqlParser";
+import { QueryStatementContext } from "./ImpalaSqlParser";
 import { WithContext } from "./ImpalaSqlParser";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParser";
 import { ForeignKeySpecificationContext } from "./ImpalaSqlParser";
@@ -1231,26 +1231,15 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitStatement?: (ctx: StatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.statementDefault`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.useStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterStatementDefault?: (ctx: StatementDefaultContext) => void;
+	enterUseStatement?: (ctx: UseStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.statementDefault`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.useStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitStatementDefault?: (ctx: StatementDefaultContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.use`.
-	 * @param ctx the parse tree
-	 */
-	enterUse?: (ctx: UseContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.use`.
-	 * @param ctx the parse tree
-	 */
-	exitUse?: (ctx: UseContext) => void;
+	exitUseStatement?: (ctx: UseStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.createStatement`.
@@ -1561,15 +1550,15 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitAlterUnSetOrSetViewTblproperties?: (ctx: AlterUnSetOrSetViewTblpropertiesContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.truncateTable`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.truncateTableStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterTruncateTable?: (ctx: TruncateTableContext) => void;
+	enterTruncateTableStatement?: (ctx: TruncateTableStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.truncateTable`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.truncateTableStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitTruncateTable?: (ctx: TruncateTableContext) => void;
+	exitTruncateTableStatement?: (ctx: TruncateTableStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.describeStatement`.
@@ -2001,15 +1990,15 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitShowColumnGrant?: (ctx: ShowColumnGrantContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.addComments`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.addCommentStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterAddComments?: (ctx: AddCommentsContext) => void;
+	enterAddCommentStatement?: (ctx: AddCommentStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.addComments`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.addCommentStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitAddComments?: (ctx: AddCommentsContext) => void;
+	exitAddCommentStatement?: (ctx: AddCommentStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.addDatabaseComments`.
@@ -2023,15 +2012,15 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitAddDatabaseComments?: (ctx: AddDatabaseCommentsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.addTbaleComments`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.addTableComments`.
 	 * @param ctx the parse tree
 	 */
-	enterAddTbaleComments?: (ctx: AddTbaleCommentsContext) => void;
+	enterAddTableComments?: (ctx: AddTableCommentsContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.addTbaleComments`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.addTableComments`.
 	 * @param ctx the parse tree
 	 */
-	exitAddTbaleComments?: (ctx: AddTbaleCommentsContext) => void;
+	exitAddTableComments?: (ctx: AddTableCommentsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.addColumnComments`.
@@ -2045,59 +2034,59 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitAddColumnComments?: (ctx: AddColumnCommentsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.explain`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.explainStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterExplain?: (ctx: ExplainContext) => void;
+	enterExplainStatement?: (ctx: ExplainStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.explain`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.explainStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitExplain?: (ctx: ExplainContext) => void;
+	exitExplainStatement?: (ctx: ExplainStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.setSession`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.setStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterSetSession?: (ctx: SetSessionContext) => void;
+	enterSetStatement?: (ctx: SetStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.setSession`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.setStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitSetSession?: (ctx: SetSessionContext) => void;
+	exitSetStatement?: (ctx: SetStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.shutdown`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.shutdownStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterShutdown?: (ctx: ShutdownContext) => void;
+	enterShutdownStatement?: (ctx: ShutdownStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.shutdown`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.shutdownStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitShutdown?: (ctx: ShutdownContext) => void;
+	exitShutdownStatement?: (ctx: ShutdownStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.invalidateMeta`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.invalidateMetaStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterInvalidateMeta?: (ctx: InvalidateMetaContext) => void;
+	enterInvalidateMetaStatement?: (ctx: InvalidateMetaStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.invalidateMeta`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.invalidateMetaStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitInvalidateMeta?: (ctx: InvalidateMetaContext) => void;
+	exitInvalidateMetaStatement?: (ctx: InvalidateMetaStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.loadData`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.loadDataStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterLoadData?: (ctx: LoadDataContext) => void;
+	enterLoadDataStatement?: (ctx: LoadDataStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.loadData`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.loadDataStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitLoadData?: (ctx: LoadDataContext) => void;
+	exitLoadDataStatement?: (ctx: LoadDataStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.refreshStatement`.
@@ -2265,6 +2254,17 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.tableOrViewPath`.
+	 * @param ctx the parse tree
+	 */
+	enterTableOrViewPath?: (ctx: TableOrViewPathContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.tableOrViewPath`.
+	 * @param ctx the parse tree
+	 */
+	exitTableOrViewPath?: (ctx: TableOrViewPathContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.createCommonItem`.
 	 * @param ctx the parse tree
 	 */
@@ -2309,15 +2309,15 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitViewColumns?: (ctx: ViewColumnsContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.query`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.queryStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterQuery?: (ctx: QueryContext) => void;
+	enterQueryStatement?: (ctx: QueryStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.query`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.queryStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitQuery?: (ctx: QueryContext) => void;
+	exitQueryStatement?: (ctx: QueryStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.with`.

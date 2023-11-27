@@ -78,8 +78,7 @@ import { LogicalNotContext } from "./ImpalaSqlParser";
 import { LogicalBinaryContext } from "./ImpalaSqlParser";
 import { ProgramContext } from "./ImpalaSqlParser";
 import { StatementContext } from "./ImpalaSqlParser";
-import { StatementDefaultContext } from "./ImpalaSqlParser";
-import { UseContext } from "./ImpalaSqlParser";
+import { UseStatementContext } from "./ImpalaSqlParser";
 import { CreateStatementContext } from "./ImpalaSqlParser";
 import { CreateTableSelectContext } from "./ImpalaSqlParser";
 import { CreateTableLikeContext } from "./ImpalaSqlParser";
@@ -108,7 +107,7 @@ import { RenameViewContext } from "./ImpalaSqlParser";
 import { AlterViewOwnerContext } from "./ImpalaSqlParser";
 import { RenameTableContext } from "./ImpalaSqlParser";
 import { AlterUnSetOrSetViewTblpropertiesContext } from "./ImpalaSqlParser";
-import { TruncateTableContext } from "./ImpalaSqlParser";
+import { TruncateTableStatementContext } from "./ImpalaSqlParser";
 import { DescribeStatementContext } from "./ImpalaSqlParser";
 import { ComputeStatementContext } from "./ImpalaSqlParser";
 import { ComputeStatsContext } from "./ImpalaSqlParser";
@@ -148,15 +147,15 @@ import { ShowGrantsContext } from "./ImpalaSqlParser";
 import { ShowDatabaseGrantContext } from "./ImpalaSqlParser";
 import { ShowTableGrantContext } from "./ImpalaSqlParser";
 import { ShowColumnGrantContext } from "./ImpalaSqlParser";
-import { AddCommentsContext } from "./ImpalaSqlParser";
+import { AddCommentStatementContext } from "./ImpalaSqlParser";
 import { AddDatabaseCommentsContext } from "./ImpalaSqlParser";
-import { AddTbaleCommentsContext } from "./ImpalaSqlParser";
+import { AddTableCommentsContext } from "./ImpalaSqlParser";
 import { AddColumnCommentsContext } from "./ImpalaSqlParser";
-import { ExplainContext } from "./ImpalaSqlParser";
-import { SetSessionContext } from "./ImpalaSqlParser";
-import { ShutdownContext } from "./ImpalaSqlParser";
-import { InvalidateMetaContext } from "./ImpalaSqlParser";
-import { LoadDataContext } from "./ImpalaSqlParser";
+import { ExplainStatementContext } from "./ImpalaSqlParser";
+import { SetStatementContext } from "./ImpalaSqlParser";
+import { ShutdownStatementContext } from "./ImpalaSqlParser";
+import { InvalidateMetaStatementContext } from "./ImpalaSqlParser";
+import { LoadDataStatementContext } from "./ImpalaSqlParser";
 import { RefreshStatementContext } from "./ImpalaSqlParser";
 import { RefreshMetaContext } from "./ImpalaSqlParser";
 import { RefreshAuthContext } from "./ImpalaSqlParser";
@@ -172,11 +171,12 @@ import { TableNamePathContext } from "./ImpalaSqlParser";
 import { ViewNamePathContext } from "./ImpalaSqlParser";
 import { FunctionNamePathContext } from "./ImpalaSqlParser";
 import { ColumnNamePathContext } from "./ImpalaSqlParser";
+import { TableOrViewPathContext } from "./ImpalaSqlParser";
 import { CreateCommonItemContext } from "./ImpalaSqlParser";
 import { AssignmentListContext } from "./ImpalaSqlParser";
 import { AssignmentItemContext } from "./ImpalaSqlParser";
 import { ViewColumnsContext } from "./ImpalaSqlParser";
-import { QueryContext } from "./ImpalaSqlParser";
+import { QueryStatementContext } from "./ImpalaSqlParser";
 import { WithContext } from "./ImpalaSqlParser";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParser";
 import { ForeignKeySpecificationContext } from "./ImpalaSqlParser";
@@ -861,18 +861,11 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitStatement?: (ctx: StatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.statementDefault`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.useStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStatementDefault?: (ctx: StatementDefaultContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.use`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitUse?: (ctx: UseContext) => Result;
+	visitUseStatement?: (ctx: UseStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.createStatement`.
@@ -1071,11 +1064,11 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitAlterUnSetOrSetViewTblproperties?: (ctx: AlterUnSetOrSetViewTblpropertiesContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.truncateTable`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.truncateTableStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitTruncateTable?: (ctx: TruncateTableContext) => Result;
+	visitTruncateTableStatement?: (ctx: TruncateTableStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.describeStatement`.
@@ -1351,11 +1344,11 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitShowColumnGrant?: (ctx: ShowColumnGrantContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.addComments`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.addCommentStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitAddComments?: (ctx: AddCommentsContext) => Result;
+	visitAddCommentStatement?: (ctx: AddCommentStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.addDatabaseComments`.
@@ -1365,11 +1358,11 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitAddDatabaseComments?: (ctx: AddDatabaseCommentsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.addTbaleComments`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.addTableComments`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitAddTbaleComments?: (ctx: AddTbaleCommentsContext) => Result;
+	visitAddTableComments?: (ctx: AddTableCommentsContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.addColumnComments`.
@@ -1379,39 +1372,39 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitAddColumnComments?: (ctx: AddColumnCommentsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.explain`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.explainStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitExplain?: (ctx: ExplainContext) => Result;
+	visitExplainStatement?: (ctx: ExplainStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.setSession`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.setStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitSetSession?: (ctx: SetSessionContext) => Result;
+	visitSetStatement?: (ctx: SetStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.shutdown`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.shutdownStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitShutdown?: (ctx: ShutdownContext) => Result;
+	visitShutdownStatement?: (ctx: ShutdownStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.invalidateMeta`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.invalidateMetaStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitInvalidateMeta?: (ctx: InvalidateMetaContext) => Result;
+	visitInvalidateMetaStatement?: (ctx: InvalidateMetaStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.loadData`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.loadDataStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitLoadData?: (ctx: LoadDataContext) => Result;
+	visitLoadDataStatement?: (ctx: LoadDataStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.refreshStatement`.
@@ -1519,6 +1512,13 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.tableOrViewPath`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTableOrViewPath?: (ctx: TableOrViewPathContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.createCommonItem`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1547,11 +1547,11 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitViewColumns?: (ctx: ViewColumnsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.query`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.queryStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitQuery?: (ctx: QueryContext) => Result;
+	visitQueryStatement?: (ctx: QueryStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.with`.

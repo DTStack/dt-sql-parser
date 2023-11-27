@@ -221,10 +221,10 @@ describe('Impala SQL Syntax Suggestion', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['FIRST_DB']);
     });
 
-    test('Show tables from', () => {
+    test('Show tables in', () => {
         const pos: CaretPosition = {
             lineNumber: 29,
-            column: 21,
+            column: 19,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(

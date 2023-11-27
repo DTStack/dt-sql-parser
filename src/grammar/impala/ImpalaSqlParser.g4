@@ -22,11 +22,11 @@ options
 program : (statement SEMICOLON?)* EOF;
 
 statement
-    : statementDefault
-    | use
+    : queryStatement
+    | useStatement
     | createStatement
     | alterStatement
-    | truncateTable
+    | truncateTableStatement
     | describeStatement
     | computeStatement
     | dropStatement
@@ -37,18 +37,16 @@ statement
     | updateStatement
     | upsertStatement
     | showStatement
-    | addComments
-    | explain
-    | setSession
-    | shutdown
-    | invalidateMeta
-    | loadData
+    | addCommentStatement
+    | explainStatement
+    | setStatement
+    | shutdownStatement
+    | invalidateMetaStatement
+    | loadDataStatement
     | refreshStatement
     ;
 
-statementDefault: query;
-
-use: KW_USE databaseNamePath;
+useStatement: KW_USE databaseNamePath;
 
 createStatement
     : createSchema
@@ -66,7 +64,7 @@ createTableSelect
         (LPAREN columnDefinition (COMMA columnDefinition)* (COMMA constraintSpecification)? RPAREN)?
         (KW_PARTITIONED KW_BY (partitionedBy | columnAliases) )?
         createCommonItem
-        (KW_AS query)?
+        (KW_AS queryStatement)?
     ;
 
 createTableLike
@@ -84,10 +82,10 @@ createKuduTableAsSelect
         (KW_COMMENT stringLiteral)?
         KW_STORED KW_AS KW_KUDU
         (KW_TBLPROPERTIES tblProp=properties)?
-        (KW_AS query)?
+        (KW_AS queryStatement)?
     ;
 
-createView: KW_CREATE KW_VIEW ifNotExists? viewNameCreate viewColumns? (KW_COMMENT stringLiteral)? (KW_TBLPROPERTIES tblProp=properties)? KW_AS query;
+createView: KW_CREATE KW_VIEW ifNotExists? viewNameCreate viewColumns? (KW_COMMENT stringLiteral)? (KW_TBLPROPERTIES tblProp=properties)? KW_AS queryStatement;
 
 createSchema:
     KW_CREATE (KW_SCHEMA | KW_DATABASE) ifNotExists? databaseNameCreate
@@ -164,28 +162,28 @@ recoverPartitions: KW_ALTER KW_TABLE tableNamePath KW_RECOVER KW_PARTITIONS;
 
 dropPartitionByRangeOrValue: KW_ALTER KW_TABLE tableNamePath KW_DROP ifExists? (KW_PARTITION expression KW_PURGE? | KW_RANGE KW_PARTITION kuduPartitionSpec);
 
-alterView: KW_ALTER KW_VIEW viewNamePath viewColumns? KW_AS query;
+alterView: KW_ALTER KW_VIEW viewNamePath viewColumns? KW_AS queryStatement;
 
 renameView: KW_ALTER KW_VIEW viewNamePath KW_RENAME KW_TO viewNamePath;
 
-alterViewOwner: KW_ALTER KW_VIEW viewNamePath KW_SET KW_OWNER (KW_USER|KW_ROLE) qualifiedName;
+alterViewOwner: KW_ALTER KW_VIEW viewNamePath KW_SET KW_OWNER (KW_USER | KW_ROLE) qualifiedName;
 
 renameTable: KW_ALTER KW_TABLE tableNamePath KW_RENAME KW_TO tableNamePath;
 
 alterUnSetOrSetViewTblproperties: KW_ALTER KW_VIEW viewNamePath (KW_UNSET | KW_SET) KW_TBLPROPERTIES tblProp=properties;
 
-truncateTable: KW_TRUNCATE KW_TABLE? ifExists? tableNamePath;
+truncateTableStatement: KW_TRUNCATE KW_TABLE? ifExists? tableNamePath;
 
-describeStatement: KW_DESCRIBE KW_DATABASE? (KW_FORMATTED | KW_EXTENDED)? qualifiedName;
+describeStatement: KW_DESCRIBE KW_DATABASE? (KW_FORMATTED | KW_EXTENDED)? (tableNamePath | databaseNamePath | columnNamePath);
 
 computeStatement
     : computeStats
     | computeIncrementalStats
     ;
 
-computeStats: KW_COMPUTE KW_STATS qualifiedName (columnAliases)? (KW_TABLESAMPLE KW_SYSTEM LPAREN number RPAREN (KW_REPEATABLE LPAREN number RPAREN)?)?;
+computeStats: KW_COMPUTE KW_STATS tableNamePath (columnAliases)? (KW_TABLESAMPLE KW_SYSTEM LPAREN number RPAREN (KW_REPEATABLE LPAREN number RPAREN)?)?;
 
-computeIncrementalStats: KW_COMPUTE KW_INCREMENTAL KW_STATS qualifiedName (KW_PARTITION expression)?;
+computeIncrementalStats: KW_COMPUTE KW_INCREMENTAL KW_STATS tableNamePath (KW_PARTITION expression)?;
 
 dropStatement
     : dropRole
@@ -202,7 +200,7 @@ dropView: KW_DROP KW_VIEW ifExists? viewNamePath;
 
 dropTable: KW_DROP KW_TABLE ifExists? tableNamePath KW_PURGE?;
 
-dropIncrementalStats: KW_DROP (KW_INCREMENTAL)? KW_STATS qualifiedName (KW_PARTITION expression)?;
+dropIncrementalStats: KW_DROP KW_INCREMENTAL? KW_STATS tableNamePath (KW_PARTITION expression)?;
 
 dropFunction: KW_DROP KW_AGGREGATE? KW_FUNCTION ifExists? functionNamePath (LPAREN(type (COMMA type)*)? RPAREN)?;
 
@@ -230,7 +228,7 @@ insertStatement
     : with? KW_INSERT (KW_INTO | KW_OVERWRITE) KW_TABLE? tableNamePath
         columnAliases?
         (KW_PARTITION LPAREN expression(COMMA expression)*RPAREN)?
-        query
+        queryStatement
     ;
 
 deleteStatement
@@ -244,7 +242,7 @@ deleteTableRef: KW_DELETE tableNamePath (KW_AS? identifier)? KW_FROM (relation (
 
 updateStatement: KW_UPDATE tableNamePath KW_SET assignmentList (KW_FROM relation (COMMA relation)*)? (KW_WHERE booleanExpression)?;
 
-upsertStatement: KW_UPSERT KW_INTO KW_TABLE? tableNamePath columnAliases? query;
+upsertStatement: KW_UPSERT KW_INTO KW_TABLE? tableNamePath columnAliases? queryStatement;
 
 showStatement
     : showRoles
@@ -268,13 +266,13 @@ showSchemas
 
 showTables
     :
-    KW_SHOW KW_TABLES ((KW_FROM | KW_IN) tableNamePath)?
+    KW_SHOW KW_TABLES (KW_IN tableNamePath)?
         (KW_LIKE? pattern=stringLiteral (BITWISEOR stringLiteral)*)?
     ;
 
 showFunctions
     :
-    KW_SHOW (KW_AGGREGATE | KW_ANALYTIC)? KW_FUNCTIONS (KW_IN functionNamePath)?
+    KW_SHOW (KW_AGGREGATE | KW_ANALYTIC)? KW_FUNCTIONS (KW_IN databaseNamePath)?
         (KW_LIKE? pattern=stringLiteral (BITWISEOR stringLiteral)*)?
     ;
 
@@ -286,9 +284,9 @@ showTableStats: KW_SHOW KW_TABLE KW_STATS tableNamePath;
 
 showColumnStats: KW_SHOW KW_COLUMN KW_STATS tableNamePath;
 
-showPartitions: KW_SHOW (KW_RANGE)? KW_PARTITIONS qualifiedName;
+showPartitions: KW_SHOW (KW_RANGE)? KW_PARTITIONS tableNamePath;
 
-showFiles: KW_SHOW KW_FILES KW_IN qualifiedName (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?;
+showFiles: KW_SHOW KW_FILES KW_IN tableNamePath (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?;
 
 showRoles: KW_SHOW (KW_CURRENT)? KW_ROLES;
 
@@ -317,34 +315,34 @@ showColumnGrant:
         (KW_ON KW_COLUMN (columnNamePath)?)?
     ;
 
-addComments
+addCommentStatement
     : addDatabaseComments
-    | addTbaleComments
+    | addTableComments
     | addColumnComments
     ;
 
 addDatabaseComments: KW_COMMENT KW_ON KW_DATABASE databaseNamePath KW_IS (stringLiteral | KW_NULL);
 
-addTbaleComments: KW_COMMENT KW_ON KW_TABLE tableNamePath KW_IS (stringLiteral | KW_NULL);
+addTableComments: KW_COMMENT KW_ON KW_TABLE tableNamePath KW_IS (stringLiteral | KW_NULL);
 
 addColumnComments: KW_COMMENT KW_ON KW_COLUMN columnNamePath KW_IS (stringLiteral | KW_NULL);
 
-explain: KW_EXPLAIN statement;
+explainStatement: KW_EXPLAIN statement;
 
-setSession: KW_SET (KW_ALL | identifier EQ expression)?;
+setStatement: KW_SET (KW_ALL | identifier EQ expression)?;
 
-shutdown: COLON KW_SHUTDOWN LPAREN (stringLiteral? | stringLiteral (COMMA expression)? | expression) RPAREN;
+shutdownStatement: COLON KW_SHUTDOWN LPAREN (stringLiteral? | stringLiteral (COMMA expression)? | expression) RPAREN;
 
-invalidateMeta: KW_INVALIDATE KW_METADATA qualifiedName;
+invalidateMetaStatement: KW_INVALIDATE KW_METADATA tableNamePath;
 
-loadData:
+loadDataStatement:
     KW_LOAD KW_DATA KW_INPATH STRING (KW_OVERWRITE)? KW_INTO KW_TABLE tableNamePath
         (KW_PARTITION LPAREN expression (COMMA expression)?RPAREN)?
     ;
 
 refreshStatement: refreshMeta | refreshAuth | refreshFunction;
 
-refreshMeta: KW_REFRESH qualifiedName (KW_PARTITION LPAREN expression (COMMA expression)*? RPAREN)?;
+refreshMeta: KW_REFRESH tableNamePath (KW_PARTITION LPAREN expression (COMMA expression)*? RPAREN)?;
 
 refreshAuth: KW_REFRESH KW_AUTHORIZATION;
 
@@ -392,6 +390,8 @@ columnNamePath
     | identifier DOT identifier (DOT identifier)?
     ;
 
+tableOrViewPath: tableNamePath | viewNamePath;
+
 createCommonItem
     :
     (KW_SORT KW_BY columnAliases)?
@@ -416,7 +416,7 @@ viewColumns
     : LPAREN identifier (KW_COMMENT stringLiteral)? (COMMA identifier (KW_COMMENT stringLiteral)?)* RPAREN
     ;
 
-query
+queryStatement
     :  with? queryNoWith
     ;
 
@@ -646,14 +646,16 @@ columnAliases
     ;
 
 relationPrimary
-    : tableNamePath
+    : tableOrViewPath
     | KW_LATERAL? subQueryRelation
     | unnest
     | parenthesizedRelation
     ;
 
-subQueryRelation: LPAREN query RPAREN;
+subQueryRelation: LPAREN queryStatement RPAREN;
+
 unnest: KW_UNNEST LPAREN expression (COMMA expression)* RPAREN (KW_WITH KW_ORDINALITY)?;
+
 parenthesizedRelation: LPAREN relation RPAREN;
 
 expression
@@ -705,8 +707,8 @@ primaryExpression
         (KW_ORDER KW_BY sortItem (COMMA sortItem)*)? RPAREN filter? over?                            #functionCall
     | identifier RIGHT_ARROW expression                                                          #lambda
     | LPAREN (identifier (COMMA identifier)*)? RPAREN RIGHT_ARROW expression                             #lambda
-    | LPAREN query RPAREN                                                                       #subqueryExpression
-    | KW_EXISTS LPAREN query RPAREN                                                                #exists
+    | LPAREN queryStatement RPAREN                                                                       #subqueryExpression
+    | KW_EXISTS LPAREN queryStatement RPAREN                                                                #exists
     | KW_CASE valueExpression whenClause+ (KW_ELSE elseExpression=expression)? KW_END              #simpleCase
     | KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                              #searchedCase
     | KW_CAST LPAREN expression KW_AS type RPAREN                                                     #cast

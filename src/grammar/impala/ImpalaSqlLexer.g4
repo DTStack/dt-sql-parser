@@ -240,11 +240,11 @@ KW_WHERE                                  : 'WHERE';
 KW_WITH                                   : 'WITH';
 KW_YEAR                                   : 'YEAR';
 KW_YEARS                                  : 'YEARS';
-KW_TEXTFILE                               : 'TEXTFILE'; // 文本文件格式
-KW_ORC                                    : 'ORC'; //ORC文件格式
-KW_AVRO                                   : 'AVRO'; //Avro文件格式
-KW_SEQUENCEFILE                           : 'SEQUENCEFILE'; //Sequence文件格式
-KW_RCFILE                                 : 'RCFILE'; //RC文件格式
+KW_TEXTFILE                               : 'TEXTFILE';
+KW_ORC                                    : 'ORC';
+KW_AVRO                                   : 'AVRO';
+KW_SEQUENCEFILE                           : 'SEQUENCEFILE';
+KW_RCFILE                                 : 'RCFILE';
 KW_REFERENCES                             : 'REFERENCES';
 KW_NOVALIDATE                             : 'NOVALIDATE';
 KW_RELY                                   : 'RELY';
