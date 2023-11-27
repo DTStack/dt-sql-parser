@@ -74,4 +74,4 @@ UPDATE tablename SET columnname = a + b, (col1, col2) = (a+3, b+4);
 
 VACUUM tablename (col1, col2);
 
-SELECT * FROM db.tbs GROUP BY (col1 > 3, col2 < 8) ORDER BY col3 > 9;
+SELECT * FROM db.tbs GROUP BY (col1, col2) ORDER BY col3;

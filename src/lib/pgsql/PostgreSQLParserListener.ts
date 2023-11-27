@@ -673,8 +673,10 @@ import { Qual_opContext } from "./PostgreSQLParser";
 import { Qual_all_opContext } from "./PostgreSQLParser";
 import { Subquery_OpContext } from "./PostgreSQLParser";
 import { Expr_listContext } from "./PostgreSQLParser";
+import { Column_expr_list_noparenContext } from "./PostgreSQLParser";
 import { Column_expr_listContext } from "./PostgreSQLParser";
 import { Column_exprContext } from "./PostgreSQLParser";
+import { Column_expr_noparenContext } from "./PostgreSQLParser";
 import { Func_arg_listContext } from "./PostgreSQLParser";
 import { Func_arg_exprContext } from "./PostgreSQLParser";
 import { Type_listContext } from "./PostgreSQLParser";
@@ -8279,6 +8281,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitExpr_list?: (ctx: Expr_listContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.column_expr_list_noparen`.
+	 * @param ctx the parse tree
+	 */
+	enterColumn_expr_list_noparen?: (ctx: Column_expr_list_noparenContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.column_expr_list_noparen`.
+	 * @param ctx the parse tree
+	 */
+	exitColumn_expr_list_noparen?: (ctx: Column_expr_list_noparenContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.column_expr_list`.
 	 * @param ctx the parse tree
 	 */
@@ -8299,6 +8312,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumn_expr?: (ctx: Column_exprContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.column_expr_noparen`.
+	 * @param ctx the parse tree
+	 */
+	enterColumn_expr_noparen?: (ctx: Column_expr_noparenContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.column_expr_noparen`.
+	 * @param ctx the parse tree
+	 */
+	exitColumn_expr_noparen?: (ctx: Column_expr_noparenContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.func_arg_list`.

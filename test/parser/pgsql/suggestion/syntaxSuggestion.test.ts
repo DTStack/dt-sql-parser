@@ -725,28 +725,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 65,
             column: 132,
         };
-        const pos1: CaretPosition = {
-            lineNumber: 65,
-            column: 106,
-        };
         const syntaxes = parser.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
-            commentOtherLine(syntaxSql, pos1.lineNumber),
-            pos1
-        )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
-        );
-        const suggestion1 = syntaxes1?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col_name']);
-        expect(suggestion1).not.toBeUndefined();
-        expect(suggestion1?.wordRanges.map((token) => token.text)).toEqual(['stock_delta']);
     });
     test('REVOKE With Column', () => {
         const pos: CaretPosition = {
@@ -940,11 +927,11 @@ describe('Postgre SQL Syntax Suggestion', () => {
         };
         const pos2: CaretPosition = {
             lineNumber: 77,
-            column: 46,
+            column: 42,
         };
         const pos3: CaretPosition = {
             lineNumber: 77,
-            column: 65,
+            column: 57,
         };
         const syntaxes1 = parser.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),

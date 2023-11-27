@@ -673,8 +673,10 @@ import { Qual_opContext } from "./PostgreSQLParser";
 import { Qual_all_opContext } from "./PostgreSQLParser";
 import { Subquery_OpContext } from "./PostgreSQLParser";
 import { Expr_listContext } from "./PostgreSQLParser";
+import { Column_expr_list_noparenContext } from "./PostgreSQLParser";
 import { Column_expr_listContext } from "./PostgreSQLParser";
 import { Column_exprContext } from "./PostgreSQLParser";
+import { Column_expr_noparenContext } from "./PostgreSQLParser";
 import { Func_arg_listContext } from "./PostgreSQLParser";
 import { Func_arg_exprContext } from "./PostgreSQLParser";
 import { Type_listContext } from "./PostgreSQLParser";
@@ -5592,6 +5594,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitExpr_list?: (ctx: Expr_listContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.column_expr_list_noparen`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumn_expr_list_noparen?: (ctx: Column_expr_list_noparenContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.column_expr_list`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -5604,6 +5613,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitColumn_expr?: (ctx: Column_exprContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.column_expr_noparen`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumn_expr_noparen?: (ctx: Column_expr_noparenContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.func_arg_list`.

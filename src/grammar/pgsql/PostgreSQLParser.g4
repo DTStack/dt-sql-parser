@@ -2227,7 +2227,7 @@ sort_clause: KW_ORDER KW_BY sortby_list;
 sortby_list: sortby (COMMA sortby)*;
 
 sortby:
-	a_expr (KW_USING qual_all_op | opt_asc_desc)? opt_nulls_order?;
+	column_expr_noparen (KW_USING qual_all_op | opt_asc_desc)? opt_nulls_order?;
 
 select_limit:
 	limit_clause offset_clause?
@@ -2268,18 +2268,18 @@ group_clause: KW_GROUP KW_BY group_by_list;
 group_by_list: group_by_item (COMMA group_by_item)*;
 
 group_by_item:
-	a_expr
+	column_expr_noparen
 	| empty_grouping_set
 	| cube_clause
 	| rollup_clause
 	| grouping_sets_clause
-	| OPEN_PAREN expr_list CLOSE_PAREN;
+	| OPEN_PAREN column_expr_list_noparen CLOSE_PAREN;
 
 empty_grouping_set: OPEN_PAREN CLOSE_PAREN;
 
-rollup_clause: KW_ROLLUP OPEN_PAREN expr_list CLOSE_PAREN;
+rollup_clause: KW_ROLLUP OPEN_PAREN column_expr_list_noparen CLOSE_PAREN;
 
-cube_clause: KW_CUBE OPEN_PAREN expr_list CLOSE_PAREN;
+cube_clause: KW_CUBE OPEN_PAREN column_expr_list_noparen CLOSE_PAREN;
 
 grouping_sets_clause:
 	KW_GROUPING KW_SETS OPEN_PAREN group_by_list CLOSE_PAREN;
@@ -2339,7 +2339,7 @@ func_alias_clause:
 
 join_type: (KW_FULL | KW_LEFT | KW_RIGHT | KW_INNER) KW_OUTER?;
 
-join_qual: KW_USING OPEN_PAREN name_list CLOSE_PAREN | KW_ON a_expr;
+join_qual: KW_USING OPEN_PAREN columnlist CLOSE_PAREN | KW_ON a_expr;
 
 relation_expr:
 	 KW_ONLY? table_name STAR? columnlist? where_clause?
@@ -2381,7 +2381,7 @@ opt_col_def_list:
 
 opt_ordinality: KW_WITH KW_ORDINALITY;
 
-where_clause: KW_WHERE a_expr;
+where_clause: KW_WHERE column_expr_noparen;
 
 where_or_current_clause:
 	KW_WHERE (KW_CURRENT KW_OF cursor_name | a_expr);
@@ -2670,8 +2670,7 @@ c_expr:
 	| PARAM opt_indirection												# c_expr_expr
 	| KW_GROUPING OPEN_PAREN expr_list CLOSE_PAREN							# c_expr_expr
 	| /*22*/ KW_UNIQUE select_with_parens									# c_expr_expr
-	| columnref															# c_expr_expr
-	| column_name														# c_expr_expr
+	| columnref													# c_expr_expr
 	| aexprconst														# c_expr_expr
 	| plsqlvariablename													# c_expr_expr
 	| OPEN_PAREN a_expr_in_parens = a_expr CLOSE_PAREN opt_indirection	# c_expr_expr
@@ -2846,9 +2845,13 @@ subquery_Op:
 
 expr_list: a_expr (COMMA a_expr)*;
 
+column_expr_list_noparen: column_expr_noparen (COMMA column_expr_noparen)*;
+
 column_expr_list: column_expr (COMMA column_expr)*;
 
 column_expr: column_name | (OPEN_PAREN a_expr CLOSE_PAREN);
+
+column_expr_noparen: column_name | a_expr;
 
 func_arg_list: func_arg_expr (COMMA func_arg_expr)*;
 
@@ -2905,10 +2908,10 @@ case_default: KW_ELSE a_expr;
 
 case_arg: a_expr;
 
-columnref: (colid | column_name) indirection?;
+columnref: colid indirection?;
 
 indirection_el:
-	DOT (attr_name | column_name | STAR)
+	DOT (attr_name | STAR)
 	| OPEN_BRACKET (
 		a_expr
 		| opt_slice_bound? COLON opt_slice_bound?
@@ -2925,7 +2928,7 @@ opt_target_list: target_list;
 target_list: target_el (COMMA target_el)*;
 
 target_el:
-	a_expr (KW_AS collabel | identifier |)	# target_label
+	column_expr_noparen (KW_AS collabel | identifier |)	# target_label
 	| STAR								# target_star;
 
 qualified_name_list: qualified_name (COMMA qualified_name)*;
