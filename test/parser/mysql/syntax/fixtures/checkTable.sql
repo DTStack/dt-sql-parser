@@ -1,0 +1,19 @@
+-- https://dev.mysql.com/doc/refman/8.0/en/check-table.html
+
+/* CHECK TABLE tbl_name [, tbl_name] ... [option] ...
+
+option: {
+    FOR UPGRADE
+  | QUICK
+  | FAST
+  | MEDIUM
+  | EXTENDED
+  | CHANGED
+} */
+
+
+CHECK TABLE t1, t2, t3 FOR UPGRADE QUICK FAST MEDIUM EXTENDED CHANGED;
+CHECK TABLE t1 FOR UPGRADE QUICK FAST MEDIUM EXTENDED CHANGED;
+CHECK TABLE t1 FOR UPGRADE QUICK;
+CHECK TABLE t1 FAST MEDIUM EXTENDED CHANGED;
+CHECK TABLE t1;

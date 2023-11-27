@@ -19,7 +19,7 @@ yarn test
 Compile one language:
 
 ```bash
-yarn antlr4 --lang=generic 
+yarn antlr4 --lang=mysql 
 ```
 
 Compile all languages:

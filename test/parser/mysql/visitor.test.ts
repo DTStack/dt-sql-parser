@@ -1,11 +1,11 @@
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
-import { PostgreSQLParserVisitor } from '../../../src/lib/pgsql/PostgreSQLParserVisitor';
-import PostgresSQL from '../../../src/parser/pgsql';
+import MySQL from '../../../src/parser/mysql';
+import { MySqlParserVisitor } from '../../../src/lib/mysql/MySqlParserVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree';
 
 describe('MySQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new PostgresSQL();
+    const parser = new MySQL();
 
     const parseTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);
@@ -13,19 +13,16 @@ describe('MySQL Visitor Tests', () => {
 
     test('Visitor visitTableName', () => {
         let result = '';
-        class MyVisitor
-            extends AbstractParseTreeVisitor<any>
-            implements PostgreSQLParserVisitor<any>
-        {
+        class MyVisitor extends AbstractParseTreeVisitor<any> implements MySqlParserVisitor<any> {
             protected defaultResult() {
                 return result;
             }
 
-            visitTable_ref(ctx) {
+            visitTableName = (ctx): void => {
                 result = ctx.text.toLowerCase();
-            }
+            };
         }
-        const visitor: any = new MyVisitor();
+        const visitor = new MyVisitor();
         visitor.visit(parseTree);
 
         expect(result).toBe(expectTableName);
