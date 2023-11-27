@@ -12,12 +12,6 @@
  * limitations under the License.
  */
 
- /**
- * This file is an adaptation of hetu-core/hetu-sql-migration-tool/src/main/antlr4/io/hetu/core/migration/source/impala/ImpalaSql.g4
- * Reference: https://github.com/openlookeng/hetu-core/blob/master/hetu-sql-migration-tool/src/main/antlr4/io/hetu/core/migration/source/impala/ImpalaSql.g4
- */
-
-
 parser grammar ImpalaSqlParser;
 
 options
