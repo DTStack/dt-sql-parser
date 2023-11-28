@@ -228,6 +228,7 @@ import { QuerySpecificationContext } from "./TrinoSqlParser";
 import { GroupByContext } from "./TrinoSqlParser";
 import { GroupingElementContext } from "./TrinoSqlParser";
 import { GroupingSetContext } from "./TrinoSqlParser";
+import { GroupingTermContext } from "./TrinoSqlParser";
 import { WindowDefinitionContext } from "./TrinoSqlParser";
 import { WindowSpecificationContext } from "./TrinoSqlParser";
 import { NamedQueryContext } from "./TrinoSqlParser";
@@ -246,6 +247,8 @@ import { SkipToContext } from "./TrinoSqlParser";
 import { SubsetDefinitionContext } from "./TrinoSqlParser";
 import { VariableDefinitionContext } from "./TrinoSqlParser";
 import { AliasedRelationContext } from "./TrinoSqlParser";
+import { ColumnListCreateContext } from "./TrinoSqlParser";
+import { ColumnListContext } from "./TrinoSqlParser";
 import { ColumnAliasesContext } from "./TrinoSqlParser";
 import { RelationPrimaryContext } from "./TrinoSqlParser";
 import { ExpressionContext } from "./TrinoSqlParser";
@@ -297,6 +300,8 @@ import { SchemaPathContext } from "./TrinoSqlParser";
 import { CatalogNameContext } from "./TrinoSqlParser";
 import { CatalogNameCreateContext } from "./TrinoSqlParser";
 import { FunctionNameContext } from "./TrinoSqlParser";
+import { ColumnNameContext } from "./TrinoSqlParser";
+import { ColumnNameCreateContext } from "./TrinoSqlParser";
 import { QualifiedNameContext } from "./TrinoSqlParser";
 import { GrantorContext } from "./TrinoSqlParser";
 import { PrincipalContext } from "./TrinoSqlParser";
@@ -2088,6 +2093,13 @@ export interface TrinoSqlVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitGroupingSet?: (ctx: GroupingSetContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `TrinoSqlParser.groupingTerm`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGroupingTerm?: (ctx: GroupingTermContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `TrinoSqlParser.windowDefinition`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2212,6 +2224,20 @@ export interface TrinoSqlVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitAliasedRelation?: (ctx: AliasedRelationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `TrinoSqlParser.columnListCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnListCreate?: (ctx: ColumnListCreateContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `TrinoSqlParser.columnList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnList?: (ctx: ColumnListContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `TrinoSqlParser.columnAliases`.
@@ -2569,6 +2595,20 @@ export interface TrinoSqlVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitFunctionName?: (ctx: FunctionNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `TrinoSqlParser.columnName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnName?: (ctx: ColumnNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `TrinoSqlParser.columnNameCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnNameCreate?: (ctx: ColumnNameCreateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `TrinoSqlParser.qualifiedName`.

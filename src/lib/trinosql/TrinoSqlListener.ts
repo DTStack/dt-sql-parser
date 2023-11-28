@@ -228,6 +228,7 @@ import { QuerySpecificationContext } from "./TrinoSqlParser";
 import { GroupByContext } from "./TrinoSqlParser";
 import { GroupingElementContext } from "./TrinoSqlParser";
 import { GroupingSetContext } from "./TrinoSqlParser";
+import { GroupingTermContext } from "./TrinoSqlParser";
 import { WindowDefinitionContext } from "./TrinoSqlParser";
 import { WindowSpecificationContext } from "./TrinoSqlParser";
 import { NamedQueryContext } from "./TrinoSqlParser";
@@ -246,6 +247,8 @@ import { SkipToContext } from "./TrinoSqlParser";
 import { SubsetDefinitionContext } from "./TrinoSqlParser";
 import { VariableDefinitionContext } from "./TrinoSqlParser";
 import { AliasedRelationContext } from "./TrinoSqlParser";
+import { ColumnListCreateContext } from "./TrinoSqlParser";
+import { ColumnListContext } from "./TrinoSqlParser";
 import { ColumnAliasesContext } from "./TrinoSqlParser";
 import { RelationPrimaryContext } from "./TrinoSqlParser";
 import { ExpressionContext } from "./TrinoSqlParser";
@@ -297,6 +300,8 @@ import { SchemaPathContext } from "./TrinoSqlParser";
 import { CatalogNameContext } from "./TrinoSqlParser";
 import { CatalogNameCreateContext } from "./TrinoSqlParser";
 import { FunctionNameContext } from "./TrinoSqlParser";
+import { ColumnNameContext } from "./TrinoSqlParser";
+import { ColumnNameCreateContext } from "./TrinoSqlParser";
 import { QualifiedNameContext } from "./TrinoSqlParser";
 import { GrantorContext } from "./TrinoSqlParser";
 import { PrincipalContext } from "./TrinoSqlParser";
@@ -3183,6 +3188,17 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	exitGroupingSet?: (ctx: GroupingSetContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.groupingTerm`.
+	 * @param ctx the parse tree
+	 */
+	enterGroupingTerm?: (ctx: GroupingTermContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.groupingTerm`.
+	 * @param ctx the parse tree
+	 */
+	exitGroupingTerm?: (ctx: GroupingTermContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `TrinoSqlParser.windowDefinition`.
 	 * @param ctx the parse tree
 	 */
@@ -3379,6 +3395,28 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAliasedRelation?: (ctx: AliasedRelationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.columnListCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnListCreate?: (ctx: ColumnListCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.columnListCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnListCreate?: (ctx: ColumnListCreateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.columnList`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnList?: (ctx: ColumnListContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.columnList`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnList?: (ctx: ColumnListContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `TrinoSqlParser.columnAliases`.
@@ -3940,6 +3978,28 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitFunctionName?: (ctx: FunctionNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.columnName`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnName?: (ctx: ColumnNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.columnName`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnName?: (ctx: ColumnNameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `TrinoSqlParser.columnNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnNameCreate?: (ctx: ColumnNameCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `TrinoSqlParser.columnNameCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnNameCreate?: (ctx: ColumnNameCreateContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `TrinoSqlParser.qualifiedName`.

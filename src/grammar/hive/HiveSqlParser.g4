@@ -814,11 +814,15 @@ columnNameList
     ;
 
 columnName
+    : id_ (DOT id_)*
+    ;
+
+columnNameCreate
     : id_
     ;
 
 extColumnName
-    : id_ (DOT (KW_ELEM_TYPE | KW_KEY_TYPE | KW_VALUE_TYPE | id_))*
+    : columnName (DOT (KW_ELEM_TYPE | KW_KEY_TYPE | KW_VALUE_TYPE | id_))*
     ;
 
 columnNameOrderList
@@ -921,7 +925,7 @@ nullOrdering
     ;
 
 columnNameOrder
-    : id_ orderSpec=orderSpecification? nullSpec=nullOrdering?
+    : columnName orderSpec=orderSpecification? nullSpec=nullOrdering?
     ;
 
 columnNameCommentList
@@ -929,7 +933,7 @@ columnNameCommentList
     ;
 
 columnNameComment
-    : colName=id_ (KW_COMMENT comment=StringLiteral)?
+    : colName=columnNameCreate (KW_COMMENT comment=StringLiteral)?
     ;
 
 orderSpecificationRewrite
@@ -938,11 +942,11 @@ orderSpecificationRewrite
     ;
 
 columnRefOrder
-    : expression orderSpec=orderSpecificationRewrite? nullSpec=nullOrdering?
+    : (columnName | expression) orderSpec=orderSpecificationRewrite? nullSpec=nullOrdering?
     ;
 
 columnNameType
-    : colName=id_ colType (KW_COMMENT comment=StringLiteral)?
+    : colName=columnNameCreate colType (KW_COMMENT comment=StringLiteral)?
     ;
 
 columnNameTypeOrConstraint
@@ -956,7 +960,7 @@ tableConstraint
     ;
 
 columnNameTypeConstraint
-    : colName=id_ colType columnConstraint? (KW_COMMENT comment=StringLiteral)?
+    : colName=columnNameCreate colType columnConstraint? (KW_COMMENT comment=StringLiteral)?
     ;
 
 columnConstraint
@@ -1012,7 +1016,7 @@ constraintOptsAlter
     ;
 
 columnNameColonType
-    : colName=id_ COLON colType (KW_COMMENT comment=StringLiteral)?
+    : colName=columnNameCreate COLON colType (KW_COMMENT comment=StringLiteral)?
     ;
 
 colType
@@ -1198,7 +1202,7 @@ deleteStatement
 
 /*SET <columName> = (3 + col2)*/
 columnAssignmentClause
-    : tableOrColumn EQUAL precedencePlusExpressionOrDefault
+    : columnName EQUAL precedencePlusExpressionOrDefault
     ;
 
 precedencePlusExpressionOrDefault
@@ -1461,12 +1465,12 @@ alterStatementSuffixDropConstraint
     ;
 
 alterStatementSuffixRenameCol
-    : KW_CHANGE KW_COLUMN? oldName=id_ newName=id_ colType alterColumnConstraint?
+    : KW_CHANGE KW_COLUMN? oldName=columnName newName=columnNameCreate colType alterColumnConstraint?
         (KW_COMMENT comment=StringLiteral)? alterStatementChangeColPosition? restrictOrCascade?
     ;
 
 alterStatementSuffixUpdateStatsCol
-    : KW_UPDATE KW_STATISTICS KW_FOR KW_COLUMN? colName=id_ KW_SET tableProperties (KW_COMMENT comment=StringLiteral)?
+    : KW_UPDATE KW_STATISTICS KW_FOR KW_COLUMN? colName=columnName KW_SET tableProperties (KW_COMMENT comment=StringLiteral)?
     ;
 
 alterStatementSuffixUpdateStats
@@ -1574,7 +1578,7 @@ alterStatementSuffixRenamePart
     ;
 
 alterStatementSuffixStatsPart
-    : KW_UPDATE KW_STATISTICS KW_FOR KW_COLUMN? colName=id_ KW_SET tableProperties (KW_COMMENT comment=StringLiteral)?
+    : KW_UPDATE KW_STATISTICS KW_FOR KW_COLUMN? colName=columnName KW_SET tableProperties (KW_COMMENT comment=StringLiteral)?
     ;
 
 alterStatementSuffixMergeFiles
@@ -1716,11 +1720,6 @@ dropDataConnectorStatement
 tableAllColumns
     : STAR
     | tableOrView DOT STAR
-    ;
-
-// (table|column)
-tableOrColumn
-    : id_
     ;
 
 defaultValue
@@ -1964,7 +1963,7 @@ selectTrfmClause
 
 selectItem
     : tableAllColumns
-    | (expression (KW_AS? id_ | KW_AS LPAREN id_ (COMMA id_)* RPAREN)?)
+    | ((columnName | expression) (KW_AS? id_ | KW_AS LPAREN id_ (COMMA id_)* RPAREN)?)
     ;
 
 trfmClause
@@ -2035,7 +2034,8 @@ groupByClause
 
 // support for new and old rollup/cube syntax
 groupby_expression
-    : rollupStandard
+    : columnName
+    | rollupStandard
     | rollupOldSyntax
     | groupByEmpty
     ;
@@ -2339,8 +2339,8 @@ atomExpression
     | whenExpression
     | subQueryExpression
     | function_
-    | tableOrColumn
     | expressionsInParenthesis
+    | id_
     ;
 
 precedenceFieldExpression

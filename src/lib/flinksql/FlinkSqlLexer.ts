@@ -1,4 +1,4 @@
-// Generated from /Users/liuyi/Desktop/Projects/dtstack/dt-sql-parser/src/grammar/flinksql/FlinkSqlLexer.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/flinksql/FlinkSqlLexer.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ATN } from "antlr4ts/atn/ATN";

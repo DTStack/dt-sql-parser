@@ -1,4 +1,4 @@
-// Generated from /Users/liuyi/Desktop/Projects/dtstack/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/flinksql/FlinkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -28,6 +28,7 @@ import { DateFunctionExpressionContext } from "./FlinkSqlParser";
 import { ErrorIdentContext } from "./FlinkSqlParser";
 import { RealIdentContext } from "./FlinkSqlParser";
 import { IdentityTransformContext } from "./FlinkSqlParser";
+import { ColumnTransformContext } from "./FlinkSqlParser";
 import { ApplyTransformContext } from "./FlinkSqlParser";
 import { LogicalNotContext } from "./FlinkSqlParser";
 import { ExistsContext } from "./FlinkSqlParser";
@@ -60,6 +61,7 @@ import { SimpleCreateTableContext } from "./FlinkSqlParser";
 import { CreateTableAsSelectContext } from "./FlinkSqlParser";
 import { ColumnOptionDefinitionContext } from "./FlinkSqlParser";
 import { PhysicalColumnDefinitionContext } from "./FlinkSqlParser";
+import { ColumnNameCreateContext } from "./FlinkSqlParser";
 import { ColumnNameContext } from "./FlinkSqlParser";
 import { ColumnNameListContext } from "./FlinkSqlParser";
 import { ColumnTypeContext } from "./FlinkSqlParser";
@@ -433,6 +435,14 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	visitIdentityTransform?: (ctx: IdentityTransformContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by the `columnTransform`
+	 * labeled alternative in `FlinkSqlParser.transform`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnTransform?: (ctx: ColumnTransformContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by the `applyTransform`
 	 * labeled alternative in `FlinkSqlParser.transform`.
 	 * @param ctx the parse tree
@@ -661,6 +671,13 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitPhysicalColumnDefinition?: (ctx: PhysicalColumnDefinitionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `FlinkSqlParser.columnNameCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnNameCreate?: (ctx: ColumnNameCreateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.columnName`.

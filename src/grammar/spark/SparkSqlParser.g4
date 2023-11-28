@@ -22,30 +22,6 @@ parser grammar SparkSqlParser;
 
 options { tokenVocab = SparkSqlLexer; }
 
-@members {
-  /**
-   * When false, KW_INTERSECT is given the greater precedence over the other set
-   * operations (KW_UNION, KW_EXCEPT and MINUS) as per the SQL standard.
-   */
-  public legacy_setops_precedence_enabled = false;
-
-  /**
-   * When false, a literal with an exponent would be converted into
-   * double type rather than decimal type.
-   */
-  public legacy_exponent_literal_as_decimal_enabled = false;
-
-  /**
-   * When true, the behavior of keywords follows ANSI SQL standard.
-   */
-  public SQL_standard_keyword_behavior = false;
-
-  /**
-   * When true, double quoted literals are identifiers rather than STRINGs.
-   */
-  public double_quoted_identifiers = false;
-}
-
 program
     : singleStatement* EOF
     ;
@@ -86,24 +62,19 @@ statement
         createTableClauses
         (KW_AS? query)?
     | KW_ANALYZE KW_TABLE tableName partitionSpec? KW_COMPUTE KW_STATISTICS
-        (identifier | KW_FOR KW_COLUMNS identifierSeq | KW_FOR KW_ALL KW_COLUMNS)?
+        (KW_NOSCAN | KW_FOR KW_COLUMNS columnNameSeq | KW_FOR KW_ALL KW_COLUMNS)?
     | KW_ANALYZE KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)? KW_COMPUTE KW_STATISTICS
-        (identifier)?
+        (KW_NOSCAN)?
     | KW_ALTER KW_TABLE tableName
-        KW_ADD (KW_COLUMN | KW_COLUMNS)
-        qualifiedColTypeWithPositionList
+        KW_ADD KW_COLUMN qualifiedColTypeWithPositionForAdd
     | KW_ALTER KW_TABLE tableName
-        KW_ADD (KW_COLUMN | KW_COLUMNS)
-        LEFT_PAREN qualifiedColTypeWithPositionList RIGHT_PAREN
+        KW_ADD KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForAdd RIGHT_PAREN
     | KW_ALTER KW_TABLE table=tableName
-        KW_RENAME KW_COLUMN
-        multipartIdentifier KW_TO errorCapturingIdentifier
+        KW_RENAME KW_COLUMN columnName KW_TO columnNameCreate
     | KW_ALTER KW_TABLE tableName
-        KW_DROP (KW_COLUMN | KW_COLUMNS) (ifExists)?
-        LEFT_PAREN multipartIdentifierList RIGHT_PAREN
+        KW_DROP KW_COLUMN (ifExists)? columnName
     | KW_ALTER KW_TABLE tableName
-        KW_DROP (KW_COLUMN | KW_COLUMNS) (ifExists)?
-        multipartIdentifierList
+        KW_DROP KW_COLUMNS (ifExists)? LEFT_PAREN columnNameSeq RIGHT_PAREN
     | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
         KW_RENAME KW_TO multipartIdentifier
     | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
@@ -111,14 +82,14 @@ statement
     | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
         KW_UNSET KW_TBLPROPERTIES (ifExists)? propertyList
     | KW_ALTER KW_TABLE table=tableName
-        (KW_ALTER | KW_CHANGE) KW_COLUMN? column=multipartIdentifier
+        (KW_ALTER | KW_CHANGE) KW_COLUMN? column=columnName
         alterColumnAction?
     | KW_ALTER KW_TABLE table=tableName partitionSpec?
         KW_CHANGE KW_COLUMN?
-        colName=multipartIdentifier colType colPosition?
+        colName=columnName colType colPosition?
     | KW_ALTER KW_TABLE table=tableName partitionSpec?
         KW_REPLACE KW_COLUMNS
-        LEFT_PAREN qualifiedColTypeWithPositionList
+        LEFT_PAREN qualifiedColTypeWithPositionSeqForReplace
         RIGHT_PAREN
     | KW_ALTER KW_TABLE tableName (partitionSpec)?
         KW_SET KW_SERDE stringLit (KW_WITH KW_SERDEPROPERTIES propertyList)?
@@ -162,7 +133,7 @@ statement
     | KW_SHOW KW_TBLPROPERTIES table=tableName
         (LEFT_PAREN key=propertyKey RIGHT_PAREN)?
     | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) table=tableName
-        ((KW_FROM | KW_IN) multipartIdentifier)?
+        ((KW_FROM | KW_IN) dbSchemaName)?
     | KW_SHOW KW_VIEWS ((KW_FROM | KW_IN) dbSchemaName)?
         (KW_LIKE? pattern=stringLit)?
     | KW_SHOW KW_PARTITIONS tableName partitionSpec?
@@ -306,8 +277,8 @@ query
     ;
 
 insertInto
-    : KW_INSERT KW_OVERWRITE KW_TABLE? tableName (partitionSpec (ifNotExists)?)?  ((KW_BY KW_NAME) | identifierList)?
-    | KW_INSERT KW_INTO KW_TABLE? tableName partitionSpec? (ifNotExists)? ((KW_BY KW_NAME) | identifierList)?
+    : KW_INSERT KW_OVERWRITE KW_TABLE? tableName (partitionSpec (ifNotExists)?)?  ((KW_BY KW_NAME) | (LEFT_PAREN columnNameSeq RIGHT_PAREN ))?
+    | KW_INSERT KW_INTO KW_TABLE? tableName partitionSpec? (ifNotExists)? ((KW_BY KW_NAME) | (LEFT_PAREN columnNameSeq RIGHT_PAREN ))?
     | KW_INSERT KW_INTO KW_TABLE? tableName KW_REPLACE whereClause
     | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY path=stringLit rowFormat? createFileFormat?
     | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY (path=stringLit)? tableProvider (KW_OPTIONS options=propertyList)?
@@ -443,11 +414,22 @@ dmlStatementNoWith
     ;
 
 dbSchemaName: identifierReference;
+
 dbSchemaNameCreate: identifierReference;
-tableNameCreate : tableIdentifier;
-tableName : tableIdentifier;
-viewNameCreate : viewIdentifier;
-viewName : viewIdentifier;
+
+tableNameCreate: tableIdentifier;
+
+tableName: tableIdentifier;
+
+viewNameCreate: viewIdentifier;
+
+viewName: viewIdentifier;
+
+columnName: multipartIdentifier;
+ 
+columnNameSeq: columnName (COMMA columnName)* ;
+
+columnNameCreate: errorCapturingIdentifier;
 
 identifierReference
     : KW_IDENTIFIER LEFT_PAREN expression RIGHT_PAREN
@@ -470,11 +452,11 @@ multiInsertQueryBody
 
 queryTerm
     : queryPrimary
-    | left=queryTerm {this.legacy_setops_precedence_enabled}?
+    | left=queryTerm 
         operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
-    | left=queryTerm {!this.legacy_setops_precedence_enabled}?
+    | left=queryTerm 
         operator=KW_INTERSECT setQuantifier? right=queryTerm
-    | left=queryTerm {!this.legacy_setops_precedence_enabled}?
+    | left=queryTerm
         operator=(KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
     ;
 
@@ -487,7 +469,7 @@ queryPrimary
     ;
 
 sortItem
-    : expression ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
+    : (columnName | expression) ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
     ;
 
 fromStatement
@@ -620,7 +602,8 @@ aggregationClause
     ;
 
 groupByClause
-    : groupingAnalytics
+    : columnName
+    | groupingAnalytics
     | expression
     ;
 
@@ -635,8 +618,9 @@ groupingElement
     ;
 
 groupingSet
-    : LEFT_PAREN (expression (COMMA expression)*)? RIGHT_PAREN
+    : columnName
     | expression
+    | LEFT_PAREN ((columnName | expression) (COMMA (columnName | expression))*)? RIGHT_PAREN
     ;
 
 pivotClause
@@ -870,7 +854,7 @@ viewIdentifier
     ;
 
 namedExpression
-    : expression (KW_AS? (name=errorCapturingIdentifier | identifierList))?
+    : (columnName | expression) (KW_AS? (name=errorCapturingIdentifier | identifierList))?
     ;
 
 namedExpressionSeq
@@ -1097,13 +1081,22 @@ dataType
       (COMMA INTEGER_VALUE)* RIGHT_PAREN)?
     ;
 
-qualifiedColTypeWithPositionList
-    : qualifiedColTypeWithPosition (COMMA qualifiedColTypeWithPosition)*
+qualifiedColTypeWithPositionSeqForAdd
+    : qualifiedColTypeWithPositionForAdd (COMMA qualifiedColTypeWithPositionForAdd)*
     ;
 
-qualifiedColTypeWithPosition
-    : name=multipartIdentifier dataType colDefinitionDescriptorWithPosition*
+qualifiedColTypeWithPositionForAdd
+    : name=columnNameCreate dataType colDefinitionDescriptorWithPosition*
     ;
+
+qualifiedColTypeWithPositionSeqForReplace
+    : qualifiedColTypeWithPositionForReplace (COMMA qualifiedColTypeWithPositionForReplace)*
+    ;
+
+qualifiedColTypeWithPositionForReplace
+    : name=columnName dataType colDefinitionDescriptorWithPosition*
+    ;
+
 
 colDefinitionDescriptorWithPosition
     : KW_NOT KW_NULL
@@ -1133,7 +1126,7 @@ createOrReplaceTableColTypeList
     ;
 
 createOrReplaceTableColType
-    : colName=errorCapturingIdentifier dataType colDefinitionOption*
+    : colName=columnNameCreate dataType colDefinitionOption*
     ;
 
 colDefinitionOption
@@ -1230,19 +1223,19 @@ errorCapturingIdentifierExtra
 
 identifier
     : strictIdentifier
-    | {!this.SQL_standard_keyword_behavior}? strictNonReserved
+    | strictNonReserved
     ;
 
 strictIdentifier
     : IDENTIFIER
     | quotedIdentifier
-    | {this.SQL_standard_keyword_behavior}? ansiNonReserved
-    | {!this.SQL_standard_keyword_behavior}? nonReserved
+    | ansiNonReserved
+    | nonReserved
     ;
 
 quotedIdentifier
     : BACKQUOTED_IDENTIFIER
-    | {this.double_quoted_identifiers}? DOUBLEQUOTED_STRING
+    | DOUBLEQUOTED_STRING
     ;
 
 backQuotedIdentifier
@@ -1250,9 +1243,9 @@ backQuotedIdentifier
     ;
 
 number
-    : {!this.legacy_exponent_literal_as_decimal_enabled}? MINUS? EXPONENT_VALUE
-    | {!this.legacy_exponent_literal_as_decimal_enabled}? MINUS? DECIMAL_VALUE
-    | {this.legacy_exponent_literal_as_decimal_enabled}? MINUS? (EXPONENT_VALUE | DECIMAL_VALUE)
+    : MINUS? EXPONENT_VALUE
+    | MINUS? DECIMAL_VALUE
+    | MINUS? (EXPONENT_VALUE | DECIMAL_VALUE)
     | MINUS? INTEGER_VALUE
     | MINUS? BIGINT_LITERAL
     | MINUS? SMALLINT_LITERAL
@@ -1273,7 +1266,7 @@ alterColumnAction
 
 stringLit
     : STRING_LITERAL
-    | {!this.double_quoted_identifiers}? DOUBLEQUOTED_STRING
+    | DOUBLEQUOTED_STRING
     ;
 
 comment
