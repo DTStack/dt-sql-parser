@@ -1,4 +1,4 @@
-// Generated from /Users/liuyi/Desktop/Projects/dtstack/dt-sql-parser/src/grammar/spark/SparkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from /Users/hayden/Desktop/dt-works/dt-sql-parser/src/grammar/spark/SparkSqlParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -48,6 +48,9 @@ import { TableNameCreateContext } from "./SparkSqlParser";
 import { TableNameContext } from "./SparkSqlParser";
 import { ViewNameCreateContext } from "./SparkSqlParser";
 import { ViewNameContext } from "./SparkSqlParser";
+import { ColumnNameContext } from "./SparkSqlParser";
+import { ColumnNameSeqContext } from "./SparkSqlParser";
+import { ColumnNameCreateContext } from "./SparkSqlParser";
 import { IdentifierReferenceContext } from "./SparkSqlParser";
 import { QueryOrganizationContext } from "./SparkSqlParser";
 import { MultiInsertQueryBodyContext } from "./SparkSqlParser";
@@ -159,8 +162,10 @@ import { UnitInUnitToUnitContext } from "./SparkSqlParser";
 import { ColPositionContext } from "./SparkSqlParser";
 import { TypeContext } from "./SparkSqlParser";
 import { DataTypeContext } from "./SparkSqlParser";
-import { QualifiedColTypeWithPositionListContext } from "./SparkSqlParser";
-import { QualifiedColTypeWithPositionContext } from "./SparkSqlParser";
+import { QualifiedColTypeWithPositionSeqForAddContext } from "./SparkSqlParser";
+import { QualifiedColTypeWithPositionForAddContext } from "./SparkSqlParser";
+import { QualifiedColTypeWithPositionSeqForReplaceContext } from "./SparkSqlParser";
+import { QualifiedColTypeWithPositionForReplaceContext } from "./SparkSqlParser";
 import { ColDefinitionDescriptorWithPositionContext } from "./SparkSqlParser";
 import { DefaultExpressionContext } from "./SparkSqlParser";
 import { VariableDefaultExpressionContext } from "./SparkSqlParser";
@@ -520,6 +525,27 @@ export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitViewName?: (ctx: ViewNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.columnName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnName?: (ctx: ColumnNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.columnNameSeq`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnNameSeq?: (ctx: ColumnNameSeqContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.columnNameCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnNameCreate?: (ctx: ColumnNameCreateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SparkSqlParser.identifierReference`.
@@ -1299,18 +1325,32 @@ export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	visitDataType?: (ctx: DataTypeContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `SparkSqlParser.qualifiedColTypeWithPositionList`.
+	 * Visit a parse tree produced by `SparkSqlParser.qualifiedColTypeWithPositionSeqForAdd`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitQualifiedColTypeWithPositionList?: (ctx: QualifiedColTypeWithPositionListContext) => Result;
+	visitQualifiedColTypeWithPositionSeqForAdd?: (ctx: QualifiedColTypeWithPositionSeqForAddContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `SparkSqlParser.qualifiedColTypeWithPosition`.
+	 * Visit a parse tree produced by `SparkSqlParser.qualifiedColTypeWithPositionForAdd`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitQualifiedColTypeWithPosition?: (ctx: QualifiedColTypeWithPositionContext) => Result;
+	visitQualifiedColTypeWithPositionForAdd?: (ctx: QualifiedColTypeWithPositionForAddContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.qualifiedColTypeWithPositionSeqForReplace`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQualifiedColTypeWithPositionSeqForReplace?: (ctx: QualifiedColTypeWithPositionSeqForReplaceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.qualifiedColTypeWithPositionForReplace`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQualifiedColTypeWithPositionForReplace?: (ctx: QualifiedColTypeWithPositionForReplaceContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SparkSqlParser.colDefinitionDescriptorWithPosition`.
