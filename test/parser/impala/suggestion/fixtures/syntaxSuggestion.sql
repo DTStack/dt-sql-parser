@@ -43,3 +43,5 @@ CREATE TABLE census_data (last_name STRING);
 ALTER TABLE my_table ADD COLUMN age INT COMMENT 'Updated Age';
 
 CREATE TABLE kudu_no_partition_by_clause (id bigint PRIMARY KEY, s STRING, b BOOLEAN ) STORED AS KUDU;
+
+CREATE TABLE PARTITIONS_YES PARTITIONED BY (YEAR, MONTH);
