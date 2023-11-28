@@ -62,7 +62,7 @@ createStatement
 createTableSelect
     : KW_CREATE KW_EXTERNAL? KW_TABLE ifNotExists? tableNameCreate
         (LPAREN columnDefinition (COMMA columnDefinition)* (COMMA constraintSpecification)? RPAREN)?
-        (KW_PARTITIONED KW_BY (partitionedBy | columnAliases) )?
+        (KW_PARTITIONED KW_BY (partitionedBy | createColumnAliases) )?
         createCommonItem
         (KW_AS queryStatement)?
     ;
@@ -129,7 +129,7 @@ alterStatement
     | alterTableNonKuduOrKuduOnly
     | addSingleColumn
     | replaceOrAddColumns
-    | editColumnDefine
+    | changeColumnDefine
     | alterStatsKey
     | alterPartitionCache
     | alterDropSingleColumn
@@ -142,7 +142,7 @@ alterStatsKey: KW_ALTER KW_TABLE tableNamePath KW_SET KW_COLUMN KW_STATS columnN
 
 alterPartitionCache: KW_ALTER KW_TABLE tableNamePath (KW_PARTITION expression)? KW_SET ((KW_CACHED KW_IN stringLiteral (KW_WITH KW_REPLICATION EQ number)?) | KW_UNCACHED);
 
-editColumnDefine: KW_ALTER KW_TABLE tableNamePath KW_CHANGE KW_COLUMN columnSpecWithKudu;
+changeColumnDefine: KW_ALTER KW_TABLE tableNamePath KW_CHANGE KW_COLUMN columnSpecWithKudu;
 
 alterDropSingleColumn: KW_ALTER KW_TABLE tableNamePath KW_DROP (KW_COLUMN)? columnNamePath;
 
@@ -150,7 +150,7 @@ alterTableOwner: KW_ALTER KW_TABLE tableNamePath KW_SET KW_OWNER (KW_USER | KW_R
 
 replaceOrAddColumns: KW_ALTER KW_TABLE tableNamePath (KW_REPLACE | KW_ADD ifNotExists?) KW_COLUMNS LPAREN columnSpecWithKudu (COMMA columnSpecWithKudu)*? RPAREN;
 
-addSingleColumn: KW_ALTER KW_TABLE tableNamePath KW_ADD KW_COLUMN ifNotExists? columnSpecWithKudu;
+addSingleColumn: KW_ALTER KW_TABLE tableNamePath KW_ADD KW_COLUMN ifNotExists? createColumnSpecWithKudu;
 
 alterTableNonKuduOrKuduOnly: KW_ALTER KW_TABLE tableNamePath KW_ALTER (KW_COLUMN)? columnNamePath (KW_SET (kuduStorageAttr | KW_COMMENT stringLiteral ) | KW_DROP KW_DEFAULT);
 
@@ -364,6 +364,8 @@ viewNameCreate: qualifiedName;
 
 functionNameCreate: qualifiedName;
 
+columnNamePathCreate: qualifiedName;
+
 databaseNamePath: qualifiedName;
 
 tableNamePath: identifier (DOT identifier)*;
@@ -419,7 +421,7 @@ foreignKeySpecification
     ;
 
 columnDefinition
-    : columnNamePath type (KW_COMMENT stringLiteral)?
+    : columnNamePathCreate type (KW_COMMENT stringLiteral)?
     ;
 
 kuduTableElement
@@ -427,11 +429,15 @@ kuduTableElement
     ;
 
 kuduColumnDefinition
-    : columnNamePath type (kuduAttributes kuduAttributes*?)? (KW_COMMENT stringLiteral)? (KW_PRIMARY KW_KEY )?
+    : columnNamePathCreate type (kuduAttributes kuduAttributes*?)? (KW_COMMENT stringLiteral)? (KW_PRIMARY KW_KEY )?
     ;
 
 columnSpecWithKudu
     : columnNamePath type (KW_COMMENT stringLiteral)? (kuduAttributes kuduAttributes*?)?
+    ;
+
+createColumnSpecWithKudu
+    : columnNamePathCreate type (KW_COMMENT stringLiteral)? (kuduAttributes kuduAttributes*?)?
     ;
 
 kuduAttributes
@@ -627,6 +633,10 @@ aliasedRelation
 
 columnAliases
     : LPAREN columnNamePath (COMMA columnNamePath)* RPAREN
+    ;
+
+createColumnAliases
+    : LPAREN columnNamePathCreate (COMMA columnNamePathCreate)* RPAREN
     ;
 
 relationPrimary

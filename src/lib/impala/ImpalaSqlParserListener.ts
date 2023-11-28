@@ -92,7 +92,7 @@ import { AlterStatementContext } from "./ImpalaSqlParser";
 import { AlterDatabaseContext } from "./ImpalaSqlParser";
 import { AlterStatsKeyContext } from "./ImpalaSqlParser";
 import { AlterPartitionCacheContext } from "./ImpalaSqlParser";
-import { EditColumnDefineContext } from "./ImpalaSqlParser";
+import { ChangeColumnDefineContext } from "./ImpalaSqlParser";
 import { AlterDropSingleColumnContext } from "./ImpalaSqlParser";
 import { AlterTableOwnerContext } from "./ImpalaSqlParser";
 import { ReplaceOrAddColumnsContext } from "./ImpalaSqlParser";
@@ -166,6 +166,7 @@ import { TableNameCreateContext } from "./ImpalaSqlParser";
 import { DatabaseNameCreateContext } from "./ImpalaSqlParser";
 import { ViewNameCreateContext } from "./ImpalaSqlParser";
 import { FunctionNameCreateContext } from "./ImpalaSqlParser";
+import { ColumnNamePathCreateContext } from "./ImpalaSqlParser";
 import { DatabaseNamePathContext } from "./ImpalaSqlParser";
 import { TableNamePathContext } from "./ImpalaSqlParser";
 import { ViewNamePathContext } from "./ImpalaSqlParser";
@@ -184,6 +185,7 @@ import { ColumnDefinitionContext } from "./ImpalaSqlParser";
 import { KuduTableElementContext } from "./ImpalaSqlParser";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParser";
 import { ColumnSpecWithKuduContext } from "./ImpalaSqlParser";
+import { CreateColumnSpecWithKuduContext } from "./ImpalaSqlParser";
 import { KuduAttributesContext } from "./ImpalaSqlParser";
 import { KuduStorageAttrContext } from "./ImpalaSqlParser";
 import { StatsKeyContext } from "./ImpalaSqlParser";
@@ -219,6 +221,7 @@ import { SampledRelationContext } from "./ImpalaSqlParser";
 import { SampleTypeContext } from "./ImpalaSqlParser";
 import { AliasedRelationContext } from "./ImpalaSqlParser";
 import { ColumnAliasesContext } from "./ImpalaSqlParser";
+import { CreateColumnAliasesContext } from "./ImpalaSqlParser";
 import { RelationPrimaryContext } from "./ImpalaSqlParser";
 import { SubQueryRelationContext } from "./ImpalaSqlParser";
 import { UnnestContext } from "./ImpalaSqlParser";
@@ -1386,15 +1389,15 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitAlterPartitionCache?: (ctx: AlterPartitionCacheContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.editColumnDefine`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.changeColumnDefine`.
 	 * @param ctx the parse tree
 	 */
-	enterEditColumnDefine?: (ctx: EditColumnDefineContext) => void;
+	enterChangeColumnDefine?: (ctx: ChangeColumnDefineContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.editColumnDefine`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.changeColumnDefine`.
 	 * @param ctx the parse tree
 	 */
-	exitEditColumnDefine?: (ctx: EditColumnDefineContext) => void;
+	exitChangeColumnDefine?: (ctx: ChangeColumnDefineContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.alterDropSingleColumn`.
@@ -2200,6 +2203,17 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitFunctionNameCreate?: (ctx: FunctionNameCreateContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.columnNamePathCreate`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnNamePathCreate?: (ctx: ColumnNamePathCreateContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.columnNamePathCreate`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnNamePathCreate?: (ctx: ColumnNamePathCreateContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.databaseNamePath`.
 	 * @param ctx the parse tree
 	 */
@@ -2396,6 +2410,17 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumnSpecWithKudu?: (ctx: ColumnSpecWithKuduContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.createColumnSpecWithKudu`.
+	 * @param ctx the parse tree
+	 */
+	enterCreateColumnSpecWithKudu?: (ctx: CreateColumnSpecWithKuduContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.createColumnSpecWithKudu`.
+	 * @param ctx the parse tree
+	 */
+	exitCreateColumnSpecWithKudu?: (ctx: CreateColumnSpecWithKuduContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.kuduAttributes`.
@@ -2781,6 +2806,17 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumnAliases?: (ctx: ColumnAliasesContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
+	 * @param ctx the parse tree
+	 */
+	enterCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
+	 * @param ctx the parse tree
+	 */
+	exitCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.relationPrimary`.

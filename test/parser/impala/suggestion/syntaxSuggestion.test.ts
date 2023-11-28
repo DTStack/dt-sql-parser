@@ -304,4 +304,46 @@ describe('Impala SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['id']);
     });
+
+    test('Create Table column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 41,
+            column: 36,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['last_name']);
+    });
+
+    test('Alert Table column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 43,
+            column: 36,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['age']);
+    });
+
+    test('Create Table kudu', () => {
+        const pos: CaretPosition = {
+            lineNumber: 45,
+            column: 45,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['id']);
+    });
 });

@@ -92,7 +92,7 @@ import { AlterStatementContext } from "./ImpalaSqlParser";
 import { AlterDatabaseContext } from "./ImpalaSqlParser";
 import { AlterStatsKeyContext } from "./ImpalaSqlParser";
 import { AlterPartitionCacheContext } from "./ImpalaSqlParser";
-import { EditColumnDefineContext } from "./ImpalaSqlParser";
+import { ChangeColumnDefineContext } from "./ImpalaSqlParser";
 import { AlterDropSingleColumnContext } from "./ImpalaSqlParser";
 import { AlterTableOwnerContext } from "./ImpalaSqlParser";
 import { ReplaceOrAddColumnsContext } from "./ImpalaSqlParser";
@@ -166,6 +166,7 @@ import { TableNameCreateContext } from "./ImpalaSqlParser";
 import { DatabaseNameCreateContext } from "./ImpalaSqlParser";
 import { ViewNameCreateContext } from "./ImpalaSqlParser";
 import { FunctionNameCreateContext } from "./ImpalaSqlParser";
+import { ColumnNamePathCreateContext } from "./ImpalaSqlParser";
 import { DatabaseNamePathContext } from "./ImpalaSqlParser";
 import { TableNamePathContext } from "./ImpalaSqlParser";
 import { ViewNamePathContext } from "./ImpalaSqlParser";
@@ -184,6 +185,7 @@ import { ColumnDefinitionContext } from "./ImpalaSqlParser";
 import { KuduTableElementContext } from "./ImpalaSqlParser";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParser";
 import { ColumnSpecWithKuduContext } from "./ImpalaSqlParser";
+import { CreateColumnSpecWithKuduContext } from "./ImpalaSqlParser";
 import { KuduAttributesContext } from "./ImpalaSqlParser";
 import { KuduStorageAttrContext } from "./ImpalaSqlParser";
 import { StatsKeyContext } from "./ImpalaSqlParser";
@@ -219,6 +221,7 @@ import { SampledRelationContext } from "./ImpalaSqlParser";
 import { SampleTypeContext } from "./ImpalaSqlParser";
 import { AliasedRelationContext } from "./ImpalaSqlParser";
 import { ColumnAliasesContext } from "./ImpalaSqlParser";
+import { CreateColumnAliasesContext } from "./ImpalaSqlParser";
 import { RelationPrimaryContext } from "./ImpalaSqlParser";
 import { SubQueryRelationContext } from "./ImpalaSqlParser";
 import { UnnestContext } from "./ImpalaSqlParser";
@@ -960,11 +963,11 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitAlterPartitionCache?: (ctx: AlterPartitionCacheContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.editColumnDefine`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.changeColumnDefine`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitEditColumnDefine?: (ctx: EditColumnDefineContext) => Result;
+	visitChangeColumnDefine?: (ctx: ChangeColumnDefineContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.alterDropSingleColumn`.
@@ -1478,6 +1481,13 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitFunctionNameCreate?: (ctx: FunctionNameCreateContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.columnNamePathCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnNamePathCreate?: (ctx: ColumnNamePathCreateContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.databaseNamePath`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1602,6 +1612,13 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitColumnSpecWithKudu?: (ctx: ColumnSpecWithKuduContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.createColumnSpecWithKudu`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateColumnSpecWithKudu?: (ctx: CreateColumnSpecWithKuduContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.kuduAttributes`.
@@ -1847,6 +1864,13 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitColumnAliases?: (ctx: ColumnAliasesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.relationPrimary`.

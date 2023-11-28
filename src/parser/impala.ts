@@ -25,6 +25,7 @@ export default class ImpalaSQL extends BasicParser<
         ImpalaSqlParser.RULE_tableNameCreate,
         ImpalaSqlParser.RULE_viewNameCreate,
         ImpalaSqlParser.RULE_databaseNameCreate,
+        ImpalaSqlParser.RULE_columnNamePathCreate,
         ImpalaSqlParser.RULE_tableNamePath,
         ImpalaSqlParser.RULE_functionNamePath,
         ImpalaSqlParser.RULE_viewNamePath,
@@ -68,6 +69,10 @@ export default class ImpalaSQL extends BasicParser<
                 }
                 case ImpalaSqlParser.RULE_viewNameCreate: {
                     syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    break;
+                }
+                case ImpalaSqlParser.RULE_columnNamePathCreate: {
+                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
                     break;
                 }
                 case ImpalaSqlParser.RULE_databaseNamePath: {
