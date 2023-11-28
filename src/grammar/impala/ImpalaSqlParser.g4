@@ -174,7 +174,7 @@ alterUnSetOrSetViewTblproperties: KW_ALTER KW_VIEW viewNamePath (KW_UNSET | KW_S
 
 truncateTableStatement: KW_TRUNCATE KW_TABLE? ifExists? tableNamePath;
 
-describeStatement: KW_DESCRIBE KW_DATABASE? (KW_FORMATTED | KW_EXTENDED)? (tableNamePath | databaseNamePath | columnNamePath);
+describeStatement: KW_DESCRIBE KW_DATABASE? (KW_FORMATTED | KW_EXTENDED)? qualifiedName;
 
 computeStatement
     : computeStats
@@ -356,39 +356,23 @@ ifNotExists
     : KW_IF KW_NOT KW_EXISTS
     ;
 
-tableNameCreate
-    : identifier
-    | identifier (DOT identifier)?
-    ;
+tableNameCreate: qualifiedName;
 
-databaseNameCreate: identifier;
+databaseNameCreate: qualifiedName;
 
-viewNameCreate
-    : identifier
-    | identifier (DOT identifier)?
-    ;
+viewNameCreate: qualifiedName;
 
-functionNameCreate: identifier | identifier (DOT identifier)?;
+functionNameCreate: qualifiedName;
 
-databaseNamePath: identifier;
+databaseNamePath: qualifiedName;
 
-tableNamePath
-    : identifier
-    | identifier (DOT identifier)?
-    ;
+tableNamePath: qualifiedName;
 
-viewNamePath
-    : identifier
-    | identifier (DOT identifier)?
-    ;
+viewNamePath: qualifiedName;
 
-functionNamePath: identifier | identifier (DOT identifier)?;
+functionNamePath: qualifiedName;
 
-columnNamePath
-    : identifier
-    | identifier (DOT identifier)?
-    | identifier DOT identifier (DOT identifier)?
-    ;
+columnNamePath: qualifiedName;
 
 tableOrViewPath: tableNamePath | viewNamePath;
 
@@ -942,4 +926,9 @@ nonReserved
 	| KW_VIEWS
 	| KW_YEAR
 	| KW_DEFAULT
+    | KW_TEXTFILE
+    | KW_ORC
+    | KW_AVRO
+    | KW_SEQUENCEFILE
+    | KW_RCFILE
     ;

@@ -1,4 +1,4 @@
-SELECT * FROM cat. ;
+SELECT * FROM cat;
 
 SELECT name, calculate_age(birthdate) AS age FROM students;
 

@@ -14,7 +14,7 @@ describe('Impala SQL Syntax Suggestion', () => {
     test('Select table', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
-            column: 19,
+            column: 18,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
@@ -22,7 +22,7 @@ describe('Impala SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['cat', '.']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['cat']);
     });
 
     test('Function call', () => {
