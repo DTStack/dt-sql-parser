@@ -24,7 +24,8 @@ THE SOFTWARE.
 */
 
 // https://github.com/antlr/grammars-v4/blob/master/sql/mysql/Positive-Technologies/MySqlParser.g4
-// SQL Statements: https://dev.mysql.com/doc/refman/8.0/en/sql-statements.html
+// SQL Statements v8.0: https://dev.mysql.com/doc/refman/8.0/en/sql-statements.html
+// SQL Statements v5.7: https://dev.mysql.com/doc/refman/5.7/en/sql-statements.html
 
 
 parser grammar MySqlParser;
@@ -1136,10 +1137,10 @@ selectElements
     ;
 
 selectElement
-    : select_element=fullId '.' '*'                                                #selectStarElement
-    | columnName (KW_AS? alias=uid)?                                     #selectColumnElement
-    | functionCall (KW_AS? alias=uid)?                                       #selectFunctionElement
-    | (LOCAL_ID VAR_ASSIGN)? expression (KW_AS? alias=uid)?                  #selectExpressionElement
+    : select_element=fullId '.' '*'                                  #selectStarElement
+    | columnName (KW_AS? alias=uid)?                                 #selectColumnElement
+    | functionCall (KW_AS? alias=uid)?                               #selectFunctionElement
+    | (LOCAL_ID VAR_ASSIGN)? expression (KW_AS? alias=uid)?          #selectExpressionElement
     ;
 
 intoClause
@@ -2335,7 +2336,7 @@ simpleId
     ;
 
 dottedId
-    : DOT_ID
+    : DOT ID
     | '.' uid
     ;
 
@@ -2530,7 +2531,7 @@ functionCall
     | aggregateWindowedFunction                                     #aggregateFunctionCall
     | nonAggregateWindowedFunction                                  #nonAggregateFunctionCall
     | scalarFunctionName '(' functionArgs? ')'                      #scalarFunctionCall
-    | fullId '(' functionArgs? ')'                                  #udfFunctionCall
+    | functionName '(' functionArgs? ')'                            #udfFunctionCall
     | passwordFunctionClause                                        #passwordFunctionCall
     ;
 
