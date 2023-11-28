@@ -33,6 +33,8 @@ export default class PostgresSQL extends BasicParser<
         PostgreSQLParser.RULE_database_name, // database name
         PostgreSQLParser.RULE_procedure_name_create, // procedure name that will be created
         PostgreSQLParser.RULE_procedure_name, // procedure name
+        PostgreSQLParser.RULE_column_name_create, // column name that will be created
+        PostgreSQLParser.RULE_column_name, // column name
     ]);
 
     protected get splitListener() {
@@ -103,6 +105,14 @@ export default class PostgresSQL extends BasicParser<
                 }
                 case PostgreSQLParser.RULE_procedure_name: {
                     syntaxContextType = SyntaxContextType.PROCEDURE;
+                    break;
+                }
+                case PostgreSQLParser.RULE_column_name_create: {
+                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    break;
+                }
+                case PostgreSQLParser.RULE_column_name: {
+                    syntaxContextType = SyntaxContextType.COLUMN;
                     break;
                 }
                 default:

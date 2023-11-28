@@ -48,9 +48,11 @@ import { Var_nameContext } from "./PostgreSQLParser";
 import { Var_listContext } from "./PostgreSQLParser";
 import { Var_valueContext } from "./PostgreSQLParser";
 import { Iso_levelContext } from "./PostgreSQLParser";
+import { Opt_boolean_or_string_columnContext } from "./PostgreSQLParser";
 import { Opt_boolean_or_stringContext } from "./PostgreSQLParser";
 import { Zone_valueContext } from "./PostgreSQLParser";
 import { Opt_encodingContext } from "./PostgreSQLParser";
+import { Nonreservedword_or_sconst_columnContext } from "./PostgreSQLParser";
 import { Nonreservedword_or_sconstContext } from "./PostgreSQLParser";
 import { VariableresetstmtContext } from "./PostgreSQLParser";
 import { Reset_restContext } from "./PostgreSQLParser";
@@ -114,6 +116,7 @@ import { TableelementlistContext } from "./PostgreSQLParser";
 import { TypedtableelementlistContext } from "./PostgreSQLParser";
 import { TableelementContext } from "./PostgreSQLParser";
 import { TypedtableelementContext } from "./PostgreSQLParser";
+import { ColumnDefCluaseContext } from "./PostgreSQLParser";
 import { ColumnDefContext } from "./PostgreSQLParser";
 import { CompressionCluaseContext } from "./PostgreSQLParser";
 import { StorageCluaseContext } from "./PostgreSQLParser";
@@ -133,7 +136,6 @@ import { ConstraintelemContext } from "./PostgreSQLParser";
 import { Opt_no_inheritContext } from "./PostgreSQLParser";
 import { Opt_column_listContext } from "./PostgreSQLParser";
 import { ColumnlistContext } from "./PostgreSQLParser";
-import { ColumnElemContext } from "./PostgreSQLParser";
 import { Opt_c_includeContext } from "./PostgreSQLParser";
 import { Key_matchContext } from "./PostgreSQLParser";
 import { ExclusionconstraintlistContext } from "./PostgreSQLParser";
@@ -287,6 +289,9 @@ import { Object_type_any_nameContext } from "./PostgreSQLParser";
 import { Object_type_nameContext } from "./PostgreSQLParser";
 import { Object_type_name_on_any_nameContext } from "./PostgreSQLParser";
 import { Any_name_listContext } from "./PostgreSQLParser";
+import { Table_column_nameContext } from "./PostgreSQLParser";
+import { Relation_column_nameContext } from "./PostgreSQLParser";
+import { Relation_nameContext } from "./PostgreSQLParser";
 import { Any_nameContext } from "./PostgreSQLParser";
 import { AttrsContext } from "./PostgreSQLParser";
 import { Type_name_listContext } from "./PostgreSQLParser";
@@ -668,8 +673,10 @@ import { Qual_opContext } from "./PostgreSQLParser";
 import { Qual_all_opContext } from "./PostgreSQLParser";
 import { Subquery_OpContext } from "./PostgreSQLParser";
 import { Expr_listContext } from "./PostgreSQLParser";
+import { Column_expr_list_noparenContext } from "./PostgreSQLParser";
 import { Column_expr_listContext } from "./PostgreSQLParser";
 import { Column_exprContext } from "./PostgreSQLParser";
+import { Column_expr_noparenContext } from "./PostgreSQLParser";
 import { Func_arg_listContext } from "./PostgreSQLParser";
 import { Func_arg_exprContext } from "./PostgreSQLParser";
 import { Type_listContext } from "./PostgreSQLParser";
@@ -717,6 +724,8 @@ import { Routine_name_createContext } from "./PostgreSQLParser";
 import { Routine_nameContext } from "./PostgreSQLParser";
 import { Procedure_nameContext } from "./PostgreSQLParser";
 import { Procedure_name_createContext } from "./PostgreSQLParser";
+import { Column_nameContext } from "./PostgreSQLParser";
+import { Column_name_createContext } from "./PostgreSQLParser";
 import { NameContext } from "./PostgreSQLParser";
 import { Attr_nameContext } from "./PostgreSQLParser";
 import { File_nameContext } from "./PostgreSQLParser";
@@ -742,6 +751,7 @@ import { Exclude_elementContext } from "./PostgreSQLParser";
 import { Index_paramentersContext } from "./PostgreSQLParser";
 import { Type_function_nameContext } from "./PostgreSQLParser";
 import { Type_usual_nameContext } from "./PostgreSQLParser";
+import { Nonreservedword_columnContext } from "./PostgreSQLParser";
 import { NonreservedwordContext } from "./PostgreSQLParser";
 import { CollabelContext } from "./PostgreSQLParser";
 import { IdentifierContext } from "./PostgreSQLParser";
@@ -845,6 +855,7 @@ import { Join_conditionContext } from "./PostgreSQLParser";
 import { Merge_when_clauseContext } from "./PostgreSQLParser";
 import { Merge_insertContext } from "./PostgreSQLParser";
 import { Merge_updateContext } from "./PostgreSQLParser";
+import { Default_values_or_valuesContext } from "./PostgreSQLParser";
 import { ExprofdefaultlistContext } from "./PostgreSQLParser";
 import { ExprofdefaultContext } from "./PostgreSQLParser";
 import { Stmt_closeContext } from "./PostgreSQLParser";
@@ -1395,6 +1406,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitIso_level?: (ctx: Iso_levelContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.opt_boolean_or_string_column`.
+	 * @param ctx the parse tree
+	 */
+	enterOpt_boolean_or_string_column?: (ctx: Opt_boolean_or_string_columnContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.opt_boolean_or_string_column`.
+	 * @param ctx the parse tree
+	 */
+	exitOpt_boolean_or_string_column?: (ctx: Opt_boolean_or_string_columnContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.opt_boolean_or_string`.
 	 * @param ctx the parse tree
 	 */
@@ -1426,6 +1448,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitOpt_encoding?: (ctx: Opt_encodingContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword_or_sconst_column`.
+	 * @param ctx the parse tree
+	 */
+	enterNonreservedword_or_sconst_column?: (ctx: Nonreservedword_or_sconst_columnContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.nonreservedword_or_sconst_column`.
+	 * @param ctx the parse tree
+	 */
+	exitNonreservedword_or_sconst_column?: (ctx: Nonreservedword_or_sconst_columnContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword_or_sconst`.
@@ -2121,6 +2154,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitTypedtableelement?: (ctx: TypedtableelementContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.columnDefCluase`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnDefCluase?: (ctx: ColumnDefCluaseContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.columnDefCluase`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnDefCluase?: (ctx: ColumnDefCluaseContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.columnDef`.
 	 * @param ctx the parse tree
 	 */
@@ -2328,17 +2372,6 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumnlist?: (ctx: ColumnlistContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `PostgreSQLParser.columnElem`.
-	 * @param ctx the parse tree
-	 */
-	enterColumnElem?: (ctx: ColumnElemContext) => void;
-	/**
-	 * Exit a parse tree produced by `PostgreSQLParser.columnElem`.
-	 * @param ctx the parse tree
-	 */
-	exitColumnElem?: (ctx: ColumnElemContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.opt_c_include`.
@@ -4022,6 +4055,39 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitAny_name_list?: (ctx: Any_name_listContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.table_column_name`.
+	 * @param ctx the parse tree
+	 */
+	enterTable_column_name?: (ctx: Table_column_nameContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.table_column_name`.
+	 * @param ctx the parse tree
+	 */
+	exitTable_column_name?: (ctx: Table_column_nameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.relation_column_name`.
+	 * @param ctx the parse tree
+	 */
+	enterRelation_column_name?: (ctx: Relation_column_nameContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.relation_column_name`.
+	 * @param ctx the parse tree
+	 */
+	exitRelation_column_name?: (ctx: Relation_column_nameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.relation_name`.
+	 * @param ctx the parse tree
+	 */
+	enterRelation_name?: (ctx: Relation_nameContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.relation_name`.
+	 * @param ctx the parse tree
+	 */
+	exitRelation_name?: (ctx: Relation_nameContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.any_name`.
@@ -8215,6 +8281,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitExpr_list?: (ctx: Expr_listContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.column_expr_list_noparen`.
+	 * @param ctx the parse tree
+	 */
+	enterColumn_expr_list_noparen?: (ctx: Column_expr_list_noparenContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.column_expr_list_noparen`.
+	 * @param ctx the parse tree
+	 */
+	exitColumn_expr_list_noparen?: (ctx: Column_expr_list_noparenContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.column_expr_list`.
 	 * @param ctx the parse tree
 	 */
@@ -8235,6 +8312,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumn_expr?: (ctx: Column_exprContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.column_expr_noparen`.
+	 * @param ctx the parse tree
+	 */
+	enterColumn_expr_noparen?: (ctx: Column_expr_noparenContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.column_expr_noparen`.
+	 * @param ctx the parse tree
+	 */
+	exitColumn_expr_noparen?: (ctx: Column_expr_noparenContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.func_arg_list`.
@@ -8754,6 +8842,28 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitProcedure_name_create?: (ctx: Procedure_name_createContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.column_name`.
+	 * @param ctx the parse tree
+	 */
+	enterColumn_name?: (ctx: Column_nameContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.column_name`.
+	 * @param ctx the parse tree
+	 */
+	exitColumn_name?: (ctx: Column_nameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.column_name_create`.
+	 * @param ctx the parse tree
+	 */
+	enterColumn_name_create?: (ctx: Column_name_createContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.column_name_create`.
+	 * @param ctx the parse tree
+	 */
+	exitColumn_name_create?: (ctx: Column_name_createContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.name`.
 	 * @param ctx the parse tree
 	 */
@@ -9027,6 +9137,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitType_usual_name?: (ctx: Type_usual_nameContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword_column`.
+	 * @param ctx the parse tree
+	 */
+	enterNonreservedword_column?: (ctx: Nonreservedword_columnContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.nonreservedword_column`.
+	 * @param ctx the parse tree
+	 */
+	exitNonreservedword_column?: (ctx: Nonreservedword_columnContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.nonreservedword`.
@@ -10160,6 +10281,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitMerge_update?: (ctx: Merge_updateContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.default_values_or_values`.
+	 * @param ctx the parse tree
+	 */
+	enterDefault_values_or_values?: (ctx: Default_values_or_valuesContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.default_values_or_values`.
+	 * @param ctx the parse tree
+	 */
+	exitDefault_values_or_values?: (ctx: Default_values_or_valuesContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.exprofdefaultlist`.
