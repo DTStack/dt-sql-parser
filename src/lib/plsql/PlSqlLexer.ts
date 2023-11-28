@@ -1,4 +1,4 @@
-// Generated from /Users/ziv/github.com/dt-sql-parser/src/grammar/plsql/PlSqlLexer.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from dt-sql-parser/src/grammar/plsql/PlSqlLexer.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import PlSqlBaseLexer from "./PlSqlBaseLexer";

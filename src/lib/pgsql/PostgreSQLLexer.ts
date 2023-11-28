@@ -1,4 +1,4 @@
-// Generated from /Users/xuxiaoqi/Documents/work/daishu-code/dt-sql-parser/src/grammar/pgsql/PostgreSQLLexer.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from dt-sql-parser/src/grammar/pgsql/PostgreSQLLexer.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ATN } from "antlr4ts/atn/ATN";

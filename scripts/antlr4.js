@@ -4,6 +4,7 @@ const fs = require('fs');
 const argv = require('yargs-parser')(process.argv.slice(2));
 const inquirer = require('inquirer');
 const chalk = require('chalk');
+const { cleanComment } = require('./cleanComment');
 
 const grammarsPath = path.resolve(__dirname, '../src/grammar');
 const outputPath = path.resolve(__dirname, '../src/lib');
@@ -29,7 +30,8 @@ function compile(language) {
                 chalk.gray(err)
             );
         } else {
-            console.log(chalk.greenBright(`\nCompile ${language} succeeded!`));
+            cleanComment(language);
+            console.log(chalk.greenBright(`Compile ${language} succeeded!`));
         }
     });
 }
