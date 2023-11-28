@@ -52,15 +52,6 @@ CREATE TABLE ctas_t1
   STORED AS KUDU
   AS SELECT id, s FROM kudu_t1;
 
--- 无 [NON UNIQUE] 语法
--- CREATE TABLE pk_at_end
--- (
--- col1 BIGINT,
--- col2 STRING,
--- col3 BOOLEAN,
--- [NON UNIQUE] PRIMARY KEY (col1)
--- ) PARTITION BY HASH(col1) PARTITIONS 2 STORED AS KUDU;
-
 CREATE TABLE pk_multiple_columns
 (
   col1 BIGINT,

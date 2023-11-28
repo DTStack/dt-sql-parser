@@ -223,6 +223,7 @@ import { RelationPrimaryContext } from "./ImpalaSqlParser";
 import { SubQueryRelationContext } from "./ImpalaSqlParser";
 import { UnnestContext } from "./ImpalaSqlParser";
 import { ParenthesizedRelationContext } from "./ImpalaSqlParser";
+import { ColumnItemContext } from "./ImpalaSqlParser";
 import { ExpressionContext } from "./ImpalaSqlParser";
 import { BooleanExpressionContext } from "./ImpalaSqlParser";
 import { PredicateContext } from "./ImpalaSqlParser";
@@ -2824,6 +2825,17 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitParenthesizedRelation?: (ctx: ParenthesizedRelationContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.columnItem`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnItem?: (ctx: ColumnItemContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.columnItem`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnItem?: (ctx: ColumnItemContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.expression`.

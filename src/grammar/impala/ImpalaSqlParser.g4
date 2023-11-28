@@ -366,9 +366,9 @@ functionNameCreate: qualifiedName;
 
 databaseNamePath: qualifiedName;
 
-tableNamePath: qualifiedName;
+tableNamePath: identifier (DOT identifier)*;
 
-viewNamePath: qualifiedName;
+viewNamePath: identifier (DOT identifier)*;
 
 functionNamePath: qualifiedName;
 
@@ -397,7 +397,7 @@ assignmentItem
     ;
 
 viewColumns
-    : LPAREN identifier (KW_COMMENT stringLiteral)? (COMMA identifier (KW_COMMENT stringLiteral)?)* RPAREN
+    : LPAREN columnNamePath (KW_COMMENT stringLiteral)? (COMMA identifier (KW_COMMENT stringLiteral)?)* RPAREN
     ;
 
 queryStatement
@@ -419,7 +419,7 @@ foreignKeySpecification
     ;
 
 columnDefinition
-    : identifier type (KW_COMMENT stringLiteral)?
+    : columnNamePath type (KW_COMMENT stringLiteral)?
     ;
 
 kuduTableElement
@@ -545,7 +545,7 @@ queryPrimary
     ;
 
 sortItem
-    : expression ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrdering=(KW_FIRST | KW_LAST))?
+    : columnItem ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrdering=(KW_FIRST | KW_LAST))?
     ;
 
 querySpecification
@@ -565,8 +565,8 @@ groupingElement
     ;
 
 groupingSet
-    : LPAREN (expression (COMMA expression)*)? RPAREN
-    | expression
+    : LPAREN (columnItem (COMMA columnItem)*)? RPAREN
+    | columnItem
     ;
 
 namedQuery
@@ -579,7 +579,7 @@ setQuantifier
     ;
 
 selectItem
-    : expression (KW_AS? identifier)?  #selectSingle
+    : columnItem (KW_AS? identifier)?  #selectSingle
     | qualifiedName DOT ASTERISK    #selectAll
     | ASTERISK                      #selectAll
     ;
@@ -642,6 +642,8 @@ unnest: KW_UNNEST LPAREN expression (COMMA expression)* RPAREN (KW_WITH KW_ORDIN
 
 parenthesizedRelation: LPAREN relation RPAREN;
 
+columnItem: columnNamePath | expression;
+
 expression
     : booleanExpression
     ;
@@ -699,7 +701,7 @@ primaryExpression
     | KW_TRY_CAST LPAREN expression KW_AS type RPAREN                                                 #cast
     | KW_ARRAY LSQUARE (expression (COMMA expression)*)? RSQUARE                                       #arrayConstructor
     | value=primaryExpression LSQUARE index=valueExpression RSQUARE                               #subscript
-    | columnNamePath                                                                          #columnReference
+    | identifier                                                                          #columnReference
     | base=primaryExpression DOT fieldName=identifier                                     #dereference
     | name=KW_CURRENT_DATE                                                                   #specialDateTimeFunction
     | name=KW_CURRENT_TIME (LPAREN precision=INTEGER_VALUE  RPAREN)?                                #specialDateTimeFunction

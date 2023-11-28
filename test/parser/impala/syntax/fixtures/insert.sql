@@ -7,19 +7,19 @@ INSERT [hint_clause] { INTO | OVERWRITE } [TABLE] table_name
 | VALUES (value [, value ...]) [, (value [, value ...]) ...]
 } */
 -- INSERT [hint_clause] { INTO | OVERWRITE } table_name [hint_clause] select_statement
-INSERT /* +SHUFFLE */ INTO my_table -- +SHUFFLE
+INSERT INTO my_table
 SELECT
     *
 from
     my_table1;
 
-INSERT OVERWRITE my_table -- +SHUFFLE
+INSERT OVERWRITE my_table
 SELECT
     *
 from
     my_table1;
 
-INSERT -- +NOSHUFFLE -- +CLUSTERED
+INSERT
 INTO target_table
 SELECT
     val1,
@@ -52,9 +52,8 @@ FROM
     dual;
 
 -- INSERT [hint_clause] { INTO | OVERWRITE } table_name [hint_clause] VALUES (value [, value ...]) [, (value [, value ...]) ...]
-INSERT -- +NOSHUFFLE -- +CLUSTERED
+INSERT
 OVERWRITE target_table (col1, col2, col3) PARTITION (year BETWEEN 2016 AND 2030, month IN (10, 11, 12))
-/* +SHUFFLE */
 VALUES
     (col1, 'a'),
     (col2, 'b'),
