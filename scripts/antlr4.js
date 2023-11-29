@@ -16,7 +16,7 @@ const baseCmd = 'antlr4ts -visitor -listener -Xexact-output-dir -o';
 function compile(language) {
     const cmd = `${baseCmd} ${outputPath}/${language} ${grammarsPath}/${language}/*.g4`;
 
-    if (fs.existsSync(`${outputPath}/${language}`)) {
+    if (language !== 'plsql' && fs.existsSync(`${outputPath}/${language}`)) {
         console.info(chalk.green(`\nRemoving:`, chalk.gray(`${outputPath}/${language}/*`)));
         fs.rmSync(`${outputPath}/${language}`, { recursive: true });
     }
