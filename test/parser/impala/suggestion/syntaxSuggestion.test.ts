@@ -346,4 +346,18 @@ describe('Impala SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['id']);
     });
+
+    test('Create Table partitions', () => {
+        const pos: CaretPosition = {
+            lineNumber: 47,
+            column: 49,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['YEAR']);
+    });
 });
