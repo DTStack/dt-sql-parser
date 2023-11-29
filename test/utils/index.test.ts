@@ -1,10 +1,10 @@
-import { lexer, splitSql, cleanSql } from '../../src/utils';
-import { TokenType } from '../../src/utils/token';
+import { legacy_lexer, legacy_splitSql, legacy_cleanSql } from '../../src/utils';
+import { Legacy_TokenType } from '../../src/utils/token';
 
 describe('utils', () => {
     test('split single sql', () => {
         const sql = 'select id,name from user';
-        const result = splitSql(sql);
+        const result = legacy_splitSql(sql);
         expect(result.length).toEqual(1);
     });
 
@@ -16,14 +16,14 @@ describe('utils', () => {
             xxx
         */
         select user from b`;
-        const result = splitSql(sql);
+        const result = legacy_splitSql(sql);
         expect(result.length).toEqual(2);
     });
 
     test('split special quotation sql', () => {
         const sql = `select regexp_replace('a', 'bc', 'xfe'feefe', '233'); 
             select regexp_replace('abc', "fe", '233');`;
-        const result = splitSql(sql);
+        const result = legacy_splitSql(sql);
         expect(result.length).toEqual(2);
     });
 
@@ -45,7 +45,7 @@ describe('utils', () => {
         FROM cte_sales_amounts
         WHERE year = 2018;
         SELECT * FROM table;`;
-        const result = splitSql(sql);
+        const result = legacy_splitSql(sql);
         expect(result.length).toEqual(2);
     });
 
@@ -57,14 +57,14 @@ describe('utils', () => {
             xxx
         */
         select user from b;`;
-        const result = lexer(sql);
+        const result = legacy_lexer(sql);
         expect(result.length).toEqual(4);
     });
     test('lexer for comments', () => {
         const sql = `select * from a;--comments`;
         const expected = `--comments`;
-        const result = lexer(sql);
-        const comments = result.find((token) => token.type === TokenType.Comment);
+        const result = legacy_lexer(sql);
+        const comments = result.find((token) => token.type === Legacy_TokenType.Comment);
         expect(comments?.value).toEqual(expected);
     });
     test('cleanSql', () => {
@@ -75,7 +75,7 @@ describe('utils', () => {
             xxx
         */
         select user from b`;
-        const result = cleanSql(sql);
+        const result = legacy_cleanSql(sql);
         expect(result.indexOf('xxx')).toEqual(-1);
     });
 
@@ -83,7 +83,7 @@ describe('utils', () => {
         const sql = `   
         select * from a;    `;
         const expected = 'select * from a;';
-        const result = cleanSql(sql);
+        const result = legacy_cleanSql(sql);
         expect(result).toEqual(expected);
     });
 });
