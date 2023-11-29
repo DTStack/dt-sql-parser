@@ -1,4 +1,7 @@
-export enum TokenType {
+/**
+ * @deprecated will be removed in future.
+ */
+export enum Legacy_TokenType {
     /**
      * Enclosed in single/double/back quotation, `` Symbol
      * 'abc', "abc", `abc`
@@ -32,10 +35,11 @@ export enum TokenType {
 }
 
 /**
+ * @deprecated will be removed in future.
  * Token object
  */
-export interface Token {
-    type: TokenType;
+export interface Legacy_Token {
+    type: Legacy_TokenType;
     value: string;
     start: number;
     end: number;
@@ -44,14 +48,15 @@ export interface Token {
 }
 
 /**
- *  Token recognition rules
+ * @deprecated will be removed in future.
+ * Token recognition rules
  */
-export const TokenReg = {
-    [TokenType.StatementTerminator]: /[;]/,
-    [TokenType.SingleQuotation]: /['|\']/,
-    [TokenType.DoubleQuotation]: /["]/,
-    [TokenType.BackQuotation]: /[`]/,
-    [TokenType.LeftSmallBracket]: /[(]/,
-    [TokenType.RightSmallBracket]: /[)]/,
-    [TokenType.Comma]: /[,]/,
+export const Legacy_TokenReg = {
+    [Legacy_TokenType.StatementTerminator]: /[;]/,
+    [Legacy_TokenType.SingleQuotation]: /['|\']/,
+    [Legacy_TokenType.DoubleQuotation]: /["]/,
+    [Legacy_TokenType.BackQuotation]: /[`]/,
+    [Legacy_TokenType.LeftSmallBracket]: /[(]/,
+    [Legacy_TokenType.RightSmallBracket]: /[)]/,
+    [Legacy_TokenType.Comma]: /[,]/,
 };

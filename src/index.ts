@@ -1,5 +1,4 @@
 export * from './parser';
-export * from './utils';
 export * from './lib/flinksql/FlinkSqlParserListener';
 export * from './lib/flinksql/FlinkSqlParserVisitor';
 export * from './lib/mysql/MySqlParserVisitor';
@@ -20,3 +19,8 @@ export { SyntaxContextType } from './parser/common/basic-parser-types';
 
 export type * from './parser/common/basic-parser-types';
 export type { SyntaxError, ParseError, ErrorHandler } from './parser/common/parseErrorListener';
+
+/**
+ * @deprecated legacy, will be removed.
+ */
+export * from './utils';
