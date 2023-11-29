@@ -14,6 +14,8 @@ export * from './lib/pgsql/PostgreSQLParserListener';
 export * from './lib/pgsql/PostgreSQLParserVisitor';
 export * from './lib/trinosql/TrinoSqlListener';
 export * from './lib/trinosql/TrinoSqlVisitor';
+export * from './lib/impala/ImpalaSqlParserListener';
+export * from './lib/impala/ImpalaSqlParserVisitor';
 export { SyntaxContextType } from './parser/common/basic-parser-types';
 
 export type * from './parser/common/basic-parser-types';
