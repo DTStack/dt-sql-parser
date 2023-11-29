@@ -1,20 +1,19 @@
-import { TokenType, Token, TokenReg } from './token';
+import { Legacy_TokenType, Legacy_Token, Legacy_TokenReg } from './token';
 
 /**
- * 获取 注释 以及 分隔符 等词法信息
  * @param {String} sql
+ * @deprecated use parser.createLexer() instead.
  */
-function lexer(input: string): Token[] {
-    // 记录当前字符的位置
+function legacy_lexer(input: string): Legacy_Token[] {
     let current = 0;
     let line = 1;
-    // 最终的 TokenTypes 结果
-    const tokens: Token[] = [];
+    const tokens: Legacy_Token[] = [];
 
-    /**
-     * 提取 TokenType
-     */
-    const extract = (currentChar: string, validator: RegExp, TokenType: TokenType): Token => {
+    const extract = (
+        currentChar: string,
+        validator: RegExp,
+        TokenType: Legacy_TokenType
+    ): Legacy_Token => {
         let value = '';
         const start = current;
         while (validator.test(currentChar)) {
@@ -30,9 +29,6 @@ function lexer(input: string): Token[] {
         };
     };
 
-    /**
-     * 过滤函数内容
-     */
     const matchFunction = () => {
         const bracketNum = [current];
         for (let i = current + 1; i < input.length; i++) {
@@ -40,16 +36,16 @@ function lexer(input: string): Token[] {
             if (currentChar === '\n') {
                 line++;
             }
-            if (TokenReg.LeftSmallBracket.test(currentChar)) {
+            if (Legacy_TokenReg.LeftSmallBracket.test(currentChar)) {
                 bracketNum.push(i);
             }
-            if (TokenReg.RightSmallBracket.test(currentChar)) {
+            if (Legacy_TokenReg.RightSmallBracket.test(currentChar)) {
                 const start = bracketNum.pop();
                 const end = i + 1;
                 if (bracketNum.length === 0) {
                     current = end;
                     tokens.push({
-                        type: TokenType.FunctionArguments,
+                        type: Legacy_TokenType.FunctionArguments,
                         value: input.slice(start, end),
                         start,
                         lineNumber: line,
@@ -61,10 +57,11 @@ function lexer(input: string): Token[] {
         }
     };
 
-    /**
-     * 过滤（提取） 引号中的内容
-     */
-    const matchQuotation = (currentChar: string, validator: RegExp, TokenType: TokenType) => {
+    const matchQuotation = (
+        currentChar: string,
+        validator: RegExp,
+        TokenType: Legacy_TokenType
+    ) => {
         do {
             if (currentChar === '\n') {
                 line++;
@@ -78,36 +75,32 @@ function lexer(input: string): Token[] {
     while (current < input.length) {
         let char = input[current];
 
-        // 按顺序处理 括号函数 换行符 反引号 单引号 双引号 注释 分号
-        // 引号内 可能包含注释包含的符号以及分号 所以优先处理引号里面的内容 去除干扰信息
-
         if (char === '\n') {
             line++;
             current++;
             continue;
         }
 
-        if (TokenReg.LeftSmallBracket.test(char)) {
+        if (Legacy_TokenReg.LeftSmallBracket.test(char)) {
             matchFunction();
             continue;
         }
 
-        if (TokenReg.BackQuotation.test(char)) {
-            matchQuotation(char, TokenReg.BackQuotation, TokenType.BackQuotation);
+        if (Legacy_TokenReg.BackQuotation.test(char)) {
+            matchQuotation(char, Legacy_TokenReg.BackQuotation, Legacy_TokenType.BackQuotation);
             continue;
         }
 
-        if (TokenReg.SingleQuotation.test(char)) {
-            matchQuotation(char, TokenReg.SingleQuotation, TokenType.SingleQuotation);
+        if (Legacy_TokenReg.SingleQuotation.test(char)) {
+            matchQuotation(char, Legacy_TokenReg.SingleQuotation, Legacy_TokenType.SingleQuotation);
             continue;
         }
 
-        if (TokenReg.DoubleQuotation.test(char)) {
-            matchQuotation(char, TokenReg.DoubleQuotation, TokenType.DoubleQuotation);
+        if (Legacy_TokenReg.DoubleQuotation.test(char)) {
+            matchQuotation(char, Legacy_TokenReg.DoubleQuotation, Legacy_TokenType.DoubleQuotation);
             continue;
         }
 
-        // 处理单行注释，以--开始，\n 结束
         if (char === '-' && input[current + 1] === '-') {
             let value = '';
             const start = current;
@@ -117,7 +110,7 @@ function lexer(input: string): Token[] {
                 char = input[++current];
             }
             tokens.push({
-                type: TokenType.Comment,
+                type: Legacy_TokenType.Comment,
                 value,
                 start: start,
                 lineNumber: line,
@@ -126,7 +119,6 @@ function lexer(input: string): Token[] {
             continue;
         }
 
-        // 处理多行注释，以 /* 开始， */结束
         if (char === '/' && input[current + 1] === '*') {
             let value = '';
             const start = current;
@@ -143,7 +135,7 @@ function lexer(input: string): Token[] {
             ++current;
 
             tokens.push({
-                type: TokenType.Comment,
+                type: Legacy_TokenType.Comment,
                 value,
                 start: start,
                 lineNumber: startLine,
@@ -152,12 +144,11 @@ function lexer(input: string): Token[] {
             continue;
         }
 
-        // 处理结束符 ;
-        if (TokenReg.StatementTerminator.test(char)) {
+        if (Legacy_TokenReg.StatementTerminator.test(char)) {
             const newToken = extract(
                 char,
-                TokenReg.StatementTerminator,
-                TokenType.StatementTerminator
+                Legacy_TokenReg.StatementTerminator,
+                Legacy_TokenType.StatementTerminator
             );
             tokens.push(newToken);
             continue;
@@ -169,15 +160,16 @@ function lexer(input: string): Token[] {
 }
 
 /**
- * 分割sql
+ * split sql
  * @param {String} sql
+ * @deprecated use parser.splitSQLByStatement() instead.
  */
-function splitSql(sql: string) {
-    const tokens = lexer(sql);
+function legacy_splitSql(sql: string) {
+    const tokens = legacy_lexer(sql);
     const sqlArr = [];
     let startIndex = 0;
-    tokens.forEach((ele: Token) => {
-        if (ele.type === TokenType.StatementTerminator) {
+    tokens.forEach((ele: Legacy_Token) => {
+        if (ele.type === Legacy_TokenType.StatementTerminator) {
             sqlArr.push(sql.slice(startIndex, ele.end));
             startIndex = ele.end;
         }
@@ -189,16 +181,17 @@ function splitSql(sql: string) {
 }
 
 /**
- * 清除注释和前后空格
+ * clean comment
  * @param {String} sql
+ * @deprecated will be removed in future.
  */
-function cleanSql(sql: string) {
-    sql = sql.trim(); // 删除前后空格
-    const tokens = lexer(sql);
+function legacy_cleanSql(sql: string) {
+    sql = sql.trim();
+    const tokens = legacy_lexer(sql);
     let resultSql = '';
     let startIndex = 0;
-    tokens.forEach((ele: Token) => {
-        if (ele.type === TokenType.Comment) {
+    tokens.forEach((ele: Legacy_Token) => {
+        if (ele.type === Legacy_TokenType.Comment) {
             resultSql += sql.slice(startIndex, ele.start);
             startIndex = ele.end + 1;
         }
@@ -206,4 +199,4 @@ function cleanSql(sql: string) {
     resultSql += sql.slice(startIndex);
     return resultSql;
 }
-export { cleanSql, splitSql, lexer };
+export { legacy_cleanSql, legacy_splitSql, legacy_lexer };
