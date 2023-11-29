@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.8](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.7...v4.0.0-beta.4.8) (2023-11-29)
+
+
+### Features
+
+* [#190](https://github.com/DTStack/dt-sql-parser/issues/190) improve mysql grammer ([#196](https://github.com/DTStack/dt-sql-parser/issues/196)) ([428d851](https://github.com/DTStack/dt-sql-parser/commit/428d851913dffff317776928c8cdc1e10d1808e6))
+* deprecate legacy util ([#223](https://github.com/DTStack/dt-sql-parser/issues/223)) ([340ccae](https://github.com/DTStack/dt-sql-parser/commit/340ccae7d702c2fd479799e3ddd7b15ae37a6bd7))
+* export impala listener and visitor ([329f161](https://github.com/DTStack/dt-sql-parser/commit/329f161d2d5743d1dd576acb99f66fbced9ccdef))
+* mysql auto complete ([#219](https://github.com/DTStack/dt-sql-parser/issues/219)) ([3dadc0c](https://github.com/DTStack/dt-sql-parser/commit/3dadc0c4b517f7be80b1349112d2763c00172539))
+* pgsql collect column name ([#216](https://github.com/DTStack/dt-sql-parser/issues/216)) ([db05cb3](https://github.com/DTStack/dt-sql-parser/commit/db05cb3e4f3409fbfa188bb3aed2c80023636c44))
+* recomplie plsql parser ([a98f7f9](https://github.com/DTStack/dt-sql-parser/commit/a98f7f938a8977b227d0c26db390badb5744f584))
+* support impala ([#184](https://github.com/DTStack/dt-sql-parser/issues/184)) ([e203f1a](https://github.com/DTStack/dt-sql-parser/commit/e203f1a48aec65353ba472c15868087569d8358d))
+
+
+### Bug Fixes
+
+* add partitioned by sql unit test and compile impala ([#221](https://github.com/DTStack/dt-sql-parser/issues/221)) ([4be3640](https://github.com/DTStack/dt-sql-parser/commit/4be3640219cada34781f9f8fe97608b2ab7e0cbc))
+
 ## [4.0.0-beta.4.7](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.6...v4.0.0-beta.4.7) (2023-11-24)
 
 
