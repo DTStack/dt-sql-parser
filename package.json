@@ -1,6 +1,7 @@
 {
   "name": "dt-sql-parser",
   "version": "4.0.0-beta.4.7",
+  "authors": "DTStack Corporation",
   "description": "SQL Parsers for BigData, built with antlr4",
   "keywords": [
     "sql",
@@ -29,7 +30,6 @@
     "lint-fix": "prettier --write '**/*.ts' --config ./.prettierrc",
     "cleanComment": "node ./scripts/cleanCommentCli.js"
   },
-  "author": "dt-insight-front",
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
