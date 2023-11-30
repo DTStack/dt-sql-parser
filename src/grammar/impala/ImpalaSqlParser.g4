@@ -32,28 +32,28 @@ sqlStatements
 emptyStatement: SEMICOLON;
 
 sqlStatement
-    : queryStatement emptyStatement?
-    | useStatement emptyStatement?
-    | createStatement emptyStatement?
-    | alterStatement emptyStatement?
-    | truncateTableStatement emptyStatement?
-    | describeStatement emptyStatement?
-    | computeStatement emptyStatement?
-    | dropStatement emptyStatement?
-    | grantStatement emptyStatement?
-    | revokeStatement emptyStatement?
-    | insertStatement emptyStatement?
-    | deleteStatement emptyStatement?
-    | updateStatement emptyStatement?
-    | upsertStatement emptyStatement?
-    | showStatement emptyStatement?
-    | addCommentStatement emptyStatement?
-    | explainStatement emptyStatement?
-    | setStatement emptyStatement?
-    | shutdownStatement emptyStatement?
-    | invalidateMetaStatement emptyStatement?
-    | loadDataStatement emptyStatement?
-    | refreshStatement emptyStatement?
+    : queryStatement SEMICOLON?
+    | useStatement SEMICOLON?
+    | createStatement SEMICOLON?
+    | alterStatement SEMICOLON?
+    | truncateTableStatement SEMICOLON?
+    | describeStatement SEMICOLON?
+    | computeStatement SEMICOLON?
+    | dropStatement SEMICOLON?
+    | grantStatement SEMICOLON?
+    | revokeStatement SEMICOLON?
+    | insertStatement SEMICOLON?
+    | deleteStatement SEMICOLON?
+    | updateStatement SEMICOLON?
+    | upsertStatement SEMICOLON?
+    | showStatement SEMICOLON?
+    | addCommentStatement SEMICOLON?
+    | explainStatement SEMICOLON?
+    | setStatement SEMICOLON?
+    | shutdownStatement SEMICOLON?
+    | invalidateMetaStatement SEMICOLON?
+    | loadDataStatement SEMICOLON?
+    | refreshStatement SEMICOLON?
     ;
 
 useStatement: KW_USE databaseNamePath;
