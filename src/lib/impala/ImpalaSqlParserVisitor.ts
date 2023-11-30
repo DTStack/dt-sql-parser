@@ -12,7 +12,7 @@ import { InListContext } from "./ImpalaSqlParser";
 import { InSubqueryContext } from "./ImpalaSqlParser";
 import { LikeContext } from "./ImpalaSqlParser";
 import { REGEXPContext } from "./ImpalaSqlParser";
-import { NullPredicateContext } from "./ImpalaSqlParser";
+import { NullOrUnKnownOrBooleanPredicateContext } from "./ImpalaSqlParser";
 import { DistinctFromContext } from "./ImpalaSqlParser";
 import { DecimalLiteralContext } from "./ImpalaSqlParser";
 import { DoubleLiteralContext } from "./ImpalaSqlParser";
@@ -78,6 +78,9 @@ import { LogicalNotContext } from "./ImpalaSqlParser";
 import { LogicalBinaryContext } from "./ImpalaSqlParser";
 import { ProgramContext } from "./ImpalaSqlParser";
 import { StatementContext } from "./ImpalaSqlParser";
+import { SqlStatementsContext } from "./ImpalaSqlParser";
+import { EmptyStatementContext } from "./ImpalaSqlParser";
+import { SqlStatementContext } from "./ImpalaSqlParser";
 import { UseStatementContext } from "./ImpalaSqlParser";
 import { CreateStatementContext } from "./ImpalaSqlParser";
 import { CreateTableSelectContext } from "./ImpalaSqlParser";
@@ -339,12 +342,12 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitREGEXP?: (ctx: REGEXPContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by the `nullPredicate`
+	 * Visit a parse tree produced by the `nullOrUnKnownOrBooleanPredicate`
 	 * labeled alternative in `ImpalaSqlParser.predicate`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitNullPredicate?: (ctx: NullPredicateContext) => Result;
+	visitNullOrUnKnownOrBooleanPredicate?: (ctx: NullOrUnKnownOrBooleanPredicateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `distinctFrom`
@@ -863,6 +866,27 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitStatement?: (ctx: StatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.sqlStatements`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSqlStatements?: (ctx: SqlStatementsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.emptyStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitEmptyStatement?: (ctx: EmptyStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.sqlStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSqlStatement?: (ctx: SqlStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.useStatement`.

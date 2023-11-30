@@ -1,7 +1,11 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
 import { ImpalaSqlLexer } from '../lib/impala/ImpalaSqlLexer';
-import { ImpalaSqlParser, ProgramContext, StatementContext } from '../lib/impala/ImpalaSqlParser';
+import {
+    ImpalaSqlParser,
+    ProgramContext,
+    SqlStatementContext,
+} from '../lib/impala/ImpalaSqlParser';
 import BasicParser from './common/basicParser';
 import { ImpalaSqlParserListener } from '../lib/impala/ImpalaSqlParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
@@ -125,13 +129,13 @@ export default class ImpalaSQL extends BasicParser<
 }
 
 export class ImpalaSqlSplitListener implements ImpalaSqlParserListener {
-    private _statementContext: StatementContext[] = [];
+    private _statementContext: SqlStatementContext[] = [];
 
-    exitStatement = (ctx: StatementContext) => {
+    exitSqlStatement = (ctx: SqlStatementContext) => {
         this._statementContext.push(ctx);
     };
 
-    enterStatement = (ctx: StatementContext) => {};
+    enterSqlStatement = (ctx: SqlStatementContext) => {};
 
     get statementsContext() {
         return this._statementContext;
