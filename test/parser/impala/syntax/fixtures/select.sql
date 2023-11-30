@@ -189,3 +189,28 @@ select appx_median(x) from million_numbers;
 select count(x) as higher from million_numbers where x > (select appx_median(x) from million_numbers);
 
 select avg(length(s)) from t1;
+
+select 'fooBar' ilike 'FOOBAR';
+
+select 'ABCXYZ' not ilike 'ab_xyz';
+
+select 1 not in (1,null,2,3);
+
+SELECT c1 AS "starts with vowel" FROM t2 WHERE upper(substr(c1,1,1)) IN ('A','E','I','O','U');
+
+select 'abcABCaabbcc' iregexp '^[a-c]+$';
+
+select null is distinct from null, null != null;
+
+select
+  'x' is distinct from 'x ' as string_with_trailing_spaces,
+  cast('x' as char(5)) is distinct from cast('x ' as char(5)) as char_with_trailing_spaces;
+
+select assertion, b, b is true, b is false, b is unknown
+  from boolean_test;
+
+select true and null;
+
+select c_first_name, c_last_name from customer where lower(trim(c_last_name)) regexp '^de.*';
+
+select c_first_name, c_last_name from customer where lower(trim(c_last_name)) rlike '^de.*';
