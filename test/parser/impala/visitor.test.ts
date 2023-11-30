@@ -11,7 +11,7 @@ describe('impala SQL Visitor Tests', () => {
         console.log('Parse error:', error);
     });
 
-    test('Visitor visitTableName', () => {
+    test('Visitor visitTableNamePath', () => {
         let result = '';
         class MyVisitor
             extends AbstractParseTreeVisitor<any>

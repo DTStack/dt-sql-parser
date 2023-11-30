@@ -12,7 +12,7 @@ import { InListContext } from "./ImpalaSqlParser";
 import { InSubqueryContext } from "./ImpalaSqlParser";
 import { LikeContext } from "./ImpalaSqlParser";
 import { REGEXPContext } from "./ImpalaSqlParser";
-import { NullPredicateContext } from "./ImpalaSqlParser";
+import { NullOrUnKnownOrBooleanPredicateContext } from "./ImpalaSqlParser";
 import { DistinctFromContext } from "./ImpalaSqlParser";
 import { DecimalLiteralContext } from "./ImpalaSqlParser";
 import { DoubleLiteralContext } from "./ImpalaSqlParser";
@@ -78,6 +78,9 @@ import { LogicalNotContext } from "./ImpalaSqlParser";
 import { LogicalBinaryContext } from "./ImpalaSqlParser";
 import { ProgramContext } from "./ImpalaSqlParser";
 import { StatementContext } from "./ImpalaSqlParser";
+import { SqlStatementsContext } from "./ImpalaSqlParser";
+import { EmptyStatementContext } from "./ImpalaSqlParser";
+import { SqlStatementContext } from "./ImpalaSqlParser";
 import { UseStatementContext } from "./ImpalaSqlParser";
 import { CreateStatementContext } from "./ImpalaSqlParser";
 import { CreateTableSelectContext } from "./ImpalaSqlParser";
@@ -381,17 +384,17 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitREGEXP?: (ctx: REGEXPContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `nullPredicate`
+	 * Enter a parse tree produced by the `nullOrUnKnownOrBooleanPredicate`
 	 * labeled alternative in `ImpalaSqlParser.predicate`.
 	 * @param ctx the parse tree
 	 */
-	enterNullPredicate?: (ctx: NullPredicateContext) => void;
+	enterNullOrUnKnownOrBooleanPredicate?: (ctx: NullOrUnKnownOrBooleanPredicateContext) => void;
 	/**
-	 * Exit a parse tree produced by the `nullPredicate`
+	 * Exit a parse tree produced by the `nullOrUnKnownOrBooleanPredicate`
 	 * labeled alternative in `ImpalaSqlParser.predicate`.
 	 * @param ctx the parse tree
 	 */
-	exitNullPredicate?: (ctx: NullPredicateContext) => void;
+	exitNullOrUnKnownOrBooleanPredicate?: (ctx: NullOrUnKnownOrBooleanPredicateContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `distinctFrom`
@@ -1233,6 +1236,39 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitStatement?: (ctx: StatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.sqlStatements`.
+	 * @param ctx the parse tree
+	 */
+	enterSqlStatements?: (ctx: SqlStatementsContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.sqlStatements`.
+	 * @param ctx the parse tree
+	 */
+	exitSqlStatements?: (ctx: SqlStatementsContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.emptyStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterEmptyStatement?: (ctx: EmptyStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.emptyStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitEmptyStatement?: (ctx: EmptyStatementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.sqlStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterSqlStatement?: (ctx: SqlStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.sqlStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitSqlStatement?: (ctx: SqlStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.useStatement`.

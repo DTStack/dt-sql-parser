@@ -19,31 +19,41 @@ options
     tokenVocab=ImpalaSqlLexer;
 }
 
-program : (statement SEMICOLON?)* EOF;
+program: statement EOF;
 
 statement
-    : queryStatement
-    | useStatement
-    | createStatement
-    | alterStatement
-    | truncateTableStatement
-    | describeStatement
-    | computeStatement
-    | dropStatement
-    | grantStatement
-    | revokeStatement
-    | insertStatement
-    | deleteStatement
-    | updateStatement
-    | upsertStatement
-    | showStatement
-    | addCommentStatement
-    | explainStatement
-    | setStatement
-    | shutdownStatement
-    | invalidateMetaStatement
-    | loadDataStatement
-    | refreshStatement
+    : sqlStatements EOF
+    ;
+
+sqlStatements
+    : (sqlStatement | emptyStatement)*
+    ;
+
+emptyStatement: SEMICOLON;
+
+sqlStatement
+    : queryStatement SEMICOLON?
+    | useStatement SEMICOLON?
+    | createStatement SEMICOLON?
+    | alterStatement SEMICOLON?
+    | truncateTableStatement SEMICOLON?
+    | describeStatement SEMICOLON?
+    | computeStatement SEMICOLON?
+    | dropStatement SEMICOLON?
+    | grantStatement SEMICOLON?
+    | revokeStatement SEMICOLON?
+    | insertStatement SEMICOLON?
+    | deleteStatement SEMICOLON?
+    | updateStatement SEMICOLON?
+    | upsertStatement SEMICOLON?
+    | showStatement SEMICOLON?
+    | addCommentStatement SEMICOLON?
+    | explainStatement SEMICOLON?
+    | setStatement SEMICOLON?
+    | shutdownStatement SEMICOLON?
+    | invalidateMetaStatement SEMICOLON?
+    | loadDataStatement SEMICOLON?
+    | refreshStatement SEMICOLON?
     ;
 
 useStatement: KW_USE databaseNamePath;
@@ -671,9 +681,9 @@ predicate[ParserRuleContext value]
     | KW_NOT? KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression        #between
     | KW_NOT? KW_IN LPAREN expression (COMMA expression)* RPAREN                        #inList
     | KW_NOT? KW_IN subQueryRelation                                               #inSubquery
-    | KW_NOT? KW_LIKE pattern=valueExpression (KW_ESCAPE escape=valueExpression)?  #like
-    | KW_REGEXP pattern=valueExpression                      #REGEXP
-    | KW_IS KW_NOT? KW_NULL                                                        #nullPredicate
+    | KW_NOT? (KW_LIKE | KW_ILIKE | KW_RLIKE) pattern=valueExpression (KW_ESCAPE escape=valueExpression)?  #like
+    | (KW_REGEXP | KW_IREGEXP) pattern=valueExpression                      #REGEXP
+    | KW_IS KW_NOT? (KW_NULL | KW_UNKNOWN | KW_TRUE | KW_FALSE)                                                    #nullOrUnKnownOrBooleanPredicate
     | KW_IS KW_NOT? KW_DISTINCT KW_FROM right=valueExpression                         #distinctFrom
     ;
 
@@ -934,6 +944,7 @@ nonReserved
 	| KW_UNBOUNDED
 	| KW_USE
 	| KW_USER
+    | KW_UNKNOWN
 	| KW_VIEW
 	| KW_VIEWS
 	| KW_YEAR
@@ -943,4 +954,6 @@ nonReserved
     | KW_AVRO
     | KW_SEQUENCEFILE
     | KW_RCFILE
+    | KW_IREGEXP
+    | KW_ILIKE
     ;
