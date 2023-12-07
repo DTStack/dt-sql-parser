@@ -4,8 +4,7 @@ import { FlinkSqlLexer } from '../lib/flinksql/FlinkSqlLexer';
 import {
     FlinkSqlParser,
     ProgramContext,
-    SqlStatementContext,
-    SqlStatementsContext,
+    SingleStatementContext,
 } from '../lib/flinksql/FlinkSqlParser';
 import { FlinkSqlParserListener } from '../lib/flinksql/FlinkSqlParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
@@ -134,13 +133,13 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
 }
 
 export class FlinkSqlSplitListener implements FlinkSqlParserListener {
-    private _statementsContext: SqlStatementContext[] = [];
+    private _statementsContext: SingleStatementContext[] = [];
 
-    exitSqlStatement = (ctx: SqlStatementContext) => {
+    exitSingleStatement = (ctx: SingleStatementContext) => {
         this._statementsContext.push(ctx);
     };
 
-    enterSqlStatements = (ctx: SqlStatementsContext) => {};
+    enterSingleStatement = (ctx: SingleStatementContext) => {};
 
     get statementsContext() {
         return this._statementsContext;
