@@ -83,13 +83,13 @@ insert into
 select
     *
 from
-    default.tab1;
+    default1.tab1;
 
 insert overwrite table parquet_table
 select
     *
 from
-    default.tab1
+    default1.tab1
 limit
     3;
 

@@ -382,7 +382,7 @@ tableNamePath: identifier (DOT identifier)*;
 
 viewNamePath: identifier (DOT identifier)*;
 
-functionNamePath: qualifiedName;
+functionNamePath: reservedKeywordsUsedAsFuncName | qualifiedName;
 
 columnNamePath: qualifiedName;
 
@@ -861,99 +861,59 @@ number
     | MINUS? INTEGER_VALUE   #integerLiteral
     ;
 
+reservedKeywordsUsedAsFuncName
+    : KW_TRUNCATE
+    | KW_CAST
+    | KW_CURRENT_DATE
+    | KW_CURRENT_TIMESTAMP
+    | KW_DAY
+    | KW_EXTRACT
+    | KW_HOUR
+    | KW_MINUTE
+    | KW_MONTH
+    | KW_SECOND
+    | KW_YEAR
+    | KW_CASE
+    | KW_LEFT
+    | KW_REPLACE
+    | KW_RIGHT
+    | KW_SUBSTRING
+    | KW_USER
+    ;
 
 nonReserved
 // IMPORTANT: this rule must only contain tokens. Nested rules are not supported. See SqlParser.exitNonReserved
-	: KW_ADD
-	| KW_ALL
-	| KW_ANY
-	| KW_ARRAY
-	| KW_ASC
-	| KW_AT
-	| KW_BERNOULLI
-	| KW_CASCADE
-	| KW_COLUMN
-	| KW_COLUMNS
-	| KW_COMMENT
-	| KW_CURRENT
-	| KW_DATA
-	| KW_DATABASE
-	| KW_DATABASES
+    : KW_BERNOULLI
 	| KW_DAY
 	| KW_DAYS
-	| KW_DESC
 	| KW_EXCLUDING
-	| KW_EXPLAIN
-	| KW_FILTER
-	| KW_FIRST
-	| KW_FOLLOWING
-	| KW_FORMAT
-	| KW_FUNCTIONS
-	| KW_GRANT
 	| KW_HOUR
-	| KW_IF
 	| KW_INCLUDING
-	| KW_INTERVAL
-	| KW_LAST
-	| KW_LATERAL
-	| KW_LIMIT
-	| KW_MAP
 	| KW_MINUTE
+	| KW_MINUTES
 	| KW_MONTH
+	| KW_MONTHS
 	| KW_NFC
 	| KW_NFD
 	| KW_NFKC
 	| KW_NFKD
-	| KW_NULLS
-	| KW_OFFSET
 	| KW_OPTION
 	| KW_ORDINALITY
-	| KW_OVER
-	| KW_PARTITION
-	| KW_PARTITIONS
-	| KW_PARQUET
-	| KW_POSITION
-	| KW_PRECEDING
 	| KW_PRIVILEGES
 	| KW_PROPERTIES
-	| KW_RANGE
-	| KW_RENAME
-	| KW_REPEATABLE
-	| KW_REPLACE
-	| KW_RESTRICT
-	| KW_REVOKE
-	| KW_ROLE
-	| KW_ROLES
-	| KW_ROW
-	| KW_ROWS
-	| KW_SCHEMA
-	| KW_SCHEMAS
 	| KW_SECOND
 	| KW_SECONDS
-	| KW_SET
-	| KW_SHOW
-	| KW_SOME
-	| KW_STATS
 	| KW_SUBSTRING
 	| KW_SYSTEM
-	| KW_TABLES
-	| KW_TABLESAMPLE
-    | KW_TRUNCATE
-	| KW_TO
 	| KW_TRY_CAST
-	| KW_UNBOUNDED
-	| KW_USE
 	| KW_USER
-    | KW_UNKNOWN
-	| KW_VIEW
 	| KW_VIEWS
 	| KW_YEAR
-	| KW_DEFAULT
-    | KW_TEXTFILE
     | KW_ORC
-    | KW_AVRO
-    | KW_SEQUENCEFILE
-    | KW_RCFILE
-    | KW_IREGEXP
-    | KW_ILIKE
+	| KW_CURRENT_TIMESTAMP
+	| KW_CURRENT_USER
+	| KW_EXTRACT
+	| KW_KEY
+	| KW_LOCALTIME
+	| KW_SHUTDOWN
     ;

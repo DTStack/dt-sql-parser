@@ -258,6 +258,7 @@ import { QualifiedNameContext } from "./ImpalaSqlParser";
 import { PrincipalContext } from "./ImpalaSqlParser";
 import { IdentifierContext } from "./ImpalaSqlParser";
 import { NumberContext } from "./ImpalaSqlParser";
+import { ReservedKeywordsUsedAsFuncNameContext } from "./ImpalaSqlParser";
 import { NonReservedContext } from "./ImpalaSqlParser";
 
 
@@ -3216,6 +3217,17 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitNumber?: (ctx: NumberContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.reservedKeywordsUsedAsFuncName`.
+	 * @param ctx the parse tree
+	 */
+	enterReservedKeywordsUsedAsFuncName?: (ctx: ReservedKeywordsUsedAsFuncNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.reservedKeywordsUsedAsFuncName`.
+	 * @param ctx the parse tree
+	 */
+	exitReservedKeywordsUsedAsFuncName?: (ctx: ReservedKeywordsUsedAsFuncNameContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.nonReserved`.
