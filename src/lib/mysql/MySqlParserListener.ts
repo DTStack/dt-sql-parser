@@ -301,7 +301,7 @@ import { DetailRevokeContext } from "./MySqlParser";
 import { ShortRevokeContext } from "./MySqlParser";
 import { ProxyAndRoleRevokeContext } from "./MySqlParser";
 import { ProgramContext } from "./MySqlParser";
-import { SqlStatementsContext } from "./MySqlParser";
+import { SingleStatementContext } from "./MySqlParser";
 import { SqlStatementContext } from "./MySqlParser";
 import { EmptyStatement_Context } from "./MySqlParser";
 import { DdlStatementContext } from "./MySqlParser";
@@ -4600,15 +4600,15 @@ export interface MySqlParserListener extends ParseTreeListener {
 	exitProgram?: (ctx: ProgramContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `MySqlParser.sqlStatements`.
+	 * Enter a parse tree produced by `MySqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterSqlStatements?: (ctx: SqlStatementsContext) => void;
+	enterSingleStatement?: (ctx: SingleStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `MySqlParser.sqlStatements`.
+	 * Exit a parse tree produced by `MySqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitSqlStatements?: (ctx: SqlStatementsContext) => void;
+	exitSingleStatement?: (ctx: SingleStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `MySqlParser.sqlStatement`.

@@ -1,7 +1,7 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
 import { MySqlLexer } from '../lib/mysql/MySqlLexer';
-import { MySqlParser, ProgramContext, SqlStatementsContext } from '../lib/mysql/MySqlParser';
+import { MySqlParser, ProgramContext, SingleStatementContext } from '../lib/mysql/MySqlParser';
 import BasicParser from './common/basicParser';
 import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic-parser-types';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
@@ -30,7 +30,7 @@ export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySql
     ]);
 
     protected get splitListener() {
-        return new mysqlSplitListener();
+        return new MysqlSplitListener();
     }
 
     protected processCandidates(
@@ -123,14 +123,14 @@ export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySql
     }
 }
 
-export class mysqlSplitListener implements MySqlParserListener {
-    private _statementsContext: SqlStatementsContext[] = [];
+export class MysqlSplitListener implements MySqlParserListener {
+    private _statementsContext: SingleStatementContext[] = [];
 
-    exitSqlStatements = (ctx: SqlStatementsContext) => {
+    exitSingleStatement = (ctx: SingleStatementContext) => {
         this._statementsContext.push(ctx);
     };
 
-    enterSqlStatements = (ctx: SqlStatementsContext) => {};
+    enterSingleStatement = (ctx: SingleStatementContext) => {};
 
     get statementsContext() {
         return this._statementsContext;

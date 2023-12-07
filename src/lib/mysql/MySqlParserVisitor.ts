@@ -301,7 +301,7 @@ import { DetailRevokeContext } from "./MySqlParser";
 import { ShortRevokeContext } from "./MySqlParser";
 import { ProxyAndRoleRevokeContext } from "./MySqlParser";
 import { ProgramContext } from "./MySqlParser";
-import { SqlStatementsContext } from "./MySqlParser";
+import { SingleStatementContext } from "./MySqlParser";
 import { SqlStatementContext } from "./MySqlParser";
 import { EmptyStatement_Context } from "./MySqlParser";
 import { DdlStatementContext } from "./MySqlParser";
@@ -3114,11 +3114,11 @@ export interface MySqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitProgram?: (ctx: ProgramContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `MySqlParser.sqlStatements`.
+	 * Visit a parse tree produced by `MySqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitSqlStatements?: (ctx: SqlStatementsContext) => Result;
+	visitSingleStatement?: (ctx: SingleStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `MySqlParser.sqlStatement`.
