@@ -258,6 +258,7 @@ import { QualifiedNameContext } from "./ImpalaSqlParser";
 import { PrincipalContext } from "./ImpalaSqlParser";
 import { IdentifierContext } from "./ImpalaSqlParser";
 import { NumberContext } from "./ImpalaSqlParser";
+import { ReservedKeywordsUsedAsFuncNameContext } from "./ImpalaSqlParser";
 import { NonReservedContext } from "./ImpalaSqlParser";
 
 
@@ -2126,6 +2127,13 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitNumber?: (ctx: NumberContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.reservedKeywordsUsedAsFuncName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitReservedKeywordsUsedAsFuncName?: (ctx: ReservedKeywordsUsedAsFuncNameContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.nonReserved`.
