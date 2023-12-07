@@ -15,7 +15,7 @@ import { In_expr_selectContext } from "./PostgreSQLParser";
 import { In_expr_listContext } from "./PostgreSQLParser";
 import { ProgramContext } from "./PostgreSQLParser";
 import { PlsqlrootContext } from "./PostgreSQLParser";
-import { StmtmultiContext } from "./PostgreSQLParser";
+import { SingleStmtContext } from "./PostgreSQLParser";
 import { StmtContext } from "./PostgreSQLParser";
 import { PlsqlconsolecommandContext } from "./PostgreSQLParser";
 import { CallstmtContext } from "./PostgreSQLParser";
@@ -1043,15 +1043,15 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitPlsqlroot?: (ctx: PlsqlrootContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `PostgreSQLParser.stmtmulti`.
+	 * Enter a parse tree produced by `PostgreSQLParser.singleStmt`.
 	 * @param ctx the parse tree
 	 */
-	enterStmtmulti?: (ctx: StmtmultiContext) => void;
+	enterSingleStmt?: (ctx: SingleStmtContext) => void;
 	/**
-	 * Exit a parse tree produced by `PostgreSQLParser.stmtmulti`.
+	 * Exit a parse tree produced by `PostgreSQLParser.singleStmt`.
 	 * @param ctx the parse tree
 	 */
-	exitStmtmulti?: (ctx: StmtmultiContext) => void;
+	exitSingleStmt?: (ctx: SingleStmtContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.stmt`.

@@ -40,11 +40,11 @@ options {
 	tokenVocab = PostgreSQLLexer;
 }
 
-program: stmtmulti;
+program: singleStmt* EOF;
 
 plsqlroot: pl_function;
 
-stmtmulti: (stmt SEMI?)*;
+singleStmt: stmt SEMI?;
 
 stmt:
 	altereventtrigstmt

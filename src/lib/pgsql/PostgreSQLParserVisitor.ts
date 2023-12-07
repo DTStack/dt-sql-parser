@@ -15,7 +15,7 @@ import { In_expr_selectContext } from "./PostgreSQLParser";
 import { In_expr_listContext } from "./PostgreSQLParser";
 import { ProgramContext } from "./PostgreSQLParser";
 import { PlsqlrootContext } from "./PostgreSQLParser";
-import { StmtmultiContext } from "./PostgreSQLParser";
+import { SingleStmtContext } from "./PostgreSQLParser";
 import { StmtContext } from "./PostgreSQLParser";
 import { PlsqlconsolecommandContext } from "./PostgreSQLParser";
 import { CallstmtContext } from "./PostgreSQLParser";
@@ -988,11 +988,11 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitPlsqlroot?: (ctx: PlsqlrootContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `PostgreSQLParser.stmtmulti`.
+	 * Visit a parse tree produced by `PostgreSQLParser.singleStmt`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStmtmulti?: (ctx: StmtmultiContext) => Result;
+	visitSingleStmt?: (ctx: SingleStmtContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.stmt`.
