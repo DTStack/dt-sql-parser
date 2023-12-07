@@ -22,23 +22,38 @@ describe('impala SQL Listener Tests', () => {
         expect(result).toBe(expectTableName);
     });
 
-    test('Listener sql', async () => {
-        const sql = `SELECT id FROM games ORDER BY score DESC;\nSHOW SCHEMAS LIKE 'xxx';`;
-        const sqlSlices = parser.splitSQLByStatement(sql);
-        expect(sqlSlices.length).toBe(2);
+    test('Split sql listener', async () => {
+        const singleStatementArr = [
+            `SELECT id FROM games ORDER BY score;`,
 
-        expect(sqlSlices[0].text).toBe('SELECT id FROM games ORDER BY score DESC;');
-        expect(sql.slice(sqlSlices[0].startIndex, sqlSlices[0].endIndex + 1)).toBe(
-            sqlSlices[0].text
-        );
+            `INSERT INTO country_page_view
+            SELECT user1, cnt FROM page_view_source`,
+
+            `CREATE TABLE sorted_census_data
+            SORT BY (last_name, state)
+            STORED AS PARQUET
+            AS SELECT last_name, first_name, state, address
+              FROM unsorted_census_data;`,
+        ];
+        const sql = singleStatementArr.join('\n');
+        const sqlSlices = parser.splitSQLByStatement(sql);
+
+        expect(sqlSlices).not.toBeNull();
+
+        // check text in result
+        expect(sqlSlices.map((item) => item.text)).toEqual(singleStatementArr);
+
+        // check startIndex and endIndex in result
+        sqlSlices.forEach((slice, index) => {
+            expect(sql.slice(slice.startIndex, slice.endIndex + 1)).toBe(singleStatementArr[index]);
+        });
+
+        // check lineNumber in result
         expect(sqlSlices[0].startLine).toBe(1);
         expect(sqlSlices[0].endLine).toBe(1);
-
-        expect(sqlSlices[1].text).toBe(`SHOW SCHEMAS LIKE 'xxx';`);
-        expect(sql.slice(sqlSlices[1].startIndex, sqlSlices[1].endIndex + 1)).toBe(
-            sqlSlices[1].text
-        );
         expect(sqlSlices[1].startLine).toBe(2);
-        expect(sqlSlices[1].endLine).toBe(2);
+        expect(sqlSlices[1].endLine).toBe(3);
+        expect(sqlSlices[2].startLine).toBe(4);
+        expect(sqlSlices[2].endLine).toBe(8);
     });
 });
