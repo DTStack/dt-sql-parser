@@ -4,7 +4,7 @@ import { ImpalaSqlLexer } from '../lib/impala/ImpalaSqlLexer';
 import {
     ImpalaSqlParser,
     ProgramContext,
-    SqlStatementContext,
+    SingleStatementContext,
 } from '../lib/impala/ImpalaSqlParser';
 import BasicParser from './common/basicParser';
 import { ImpalaSqlParserListener } from '../lib/impala/ImpalaSqlParserListener';
@@ -129,13 +129,13 @@ export default class ImpalaSQL extends BasicParser<
 }
 
 export class ImpalaSqlSplitListener implements ImpalaSqlParserListener {
-    private _statementContext: SqlStatementContext[] = [];
+    private _statementContext: SingleStatementContext[] = [];
 
-    exitSqlStatement = (ctx: SqlStatementContext) => {
+    exitSingleStatement = (ctx: SingleStatementContext) => {
         this._statementContext.push(ctx);
     };
 
-    enterSqlStatement = (ctx: SqlStatementContext) => {};
+    enterSingleStatement = (ctx: SingleStatementContext) => {};
 
     get statementsContext() {
         return this._statementContext;

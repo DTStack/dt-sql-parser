@@ -77,9 +77,7 @@ import { PredicatedContext } from "./ImpalaSqlParser";
 import { LogicalNotContext } from "./ImpalaSqlParser";
 import { LogicalBinaryContext } from "./ImpalaSqlParser";
 import { ProgramContext } from "./ImpalaSqlParser";
-import { StatementContext } from "./ImpalaSqlParser";
-import { SqlStatementsContext } from "./ImpalaSqlParser";
-import { EmptyStatementContext } from "./ImpalaSqlParser";
+import { SingleStatementContext } from "./ImpalaSqlParser";
 import { SqlStatementContext } from "./ImpalaSqlParser";
 import { UseStatementContext } from "./ImpalaSqlParser";
 import { CreateStatementContext } from "./ImpalaSqlParser";
@@ -1228,37 +1226,15 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitProgram?: (ctx: ProgramContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.statement`.
+	 * Enter a parse tree produced by `ImpalaSqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterStatement?: (ctx: StatementContext) => void;
+	enterSingleStatement?: (ctx: SingleStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.statement`.
+	 * Exit a parse tree produced by `ImpalaSqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitStatement?: (ctx: StatementContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.sqlStatements`.
-	 * @param ctx the parse tree
-	 */
-	enterSqlStatements?: (ctx: SqlStatementsContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.sqlStatements`.
-	 * @param ctx the parse tree
-	 */
-	exitSqlStatements?: (ctx: SqlStatementsContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.emptyStatement`.
-	 * @param ctx the parse tree
-	 */
-	enterEmptyStatement?: (ctx: EmptyStatementContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.emptyStatement`.
-	 * @param ctx the parse tree
-	 */
-	exitEmptyStatement?: (ctx: EmptyStatementContext) => void;
+	exitSingleStatement?: (ctx: SingleStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.sqlStatement`.

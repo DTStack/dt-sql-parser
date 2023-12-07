@@ -77,9 +77,7 @@ import { PredicatedContext } from "./ImpalaSqlParser";
 import { LogicalNotContext } from "./ImpalaSqlParser";
 import { LogicalBinaryContext } from "./ImpalaSqlParser";
 import { ProgramContext } from "./ImpalaSqlParser";
-import { StatementContext } from "./ImpalaSqlParser";
-import { SqlStatementsContext } from "./ImpalaSqlParser";
-import { EmptyStatementContext } from "./ImpalaSqlParser";
+import { SingleStatementContext } from "./ImpalaSqlParser";
 import { SqlStatementContext } from "./ImpalaSqlParser";
 import { UseStatementContext } from "./ImpalaSqlParser";
 import { CreateStatementContext } from "./ImpalaSqlParser";
@@ -862,25 +860,11 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitProgram?: (ctx: ProgramContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.statement`.
+	 * Visit a parse tree produced by `ImpalaSqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStatement?: (ctx: StatementContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.sqlStatements`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSqlStatements?: (ctx: SqlStatementsContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.emptyStatement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitEmptyStatement?: (ctx: EmptyStatementContext) => Result;
+	visitSingleStatement?: (ctx: SingleStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.sqlStatement`.

@@ -19,41 +19,35 @@ options
     tokenVocab=ImpalaSqlLexer;
 }
 
-program: statement EOF;
+program: singleStatement* EOF;
 
-statement
-    : sqlStatements EOF
+singleStatement
+    : sqlStatement SEMICOLON?
     ;
-
-sqlStatements
-    : (sqlStatement | emptyStatement)*
-    ;
-
-emptyStatement: SEMICOLON;
 
 sqlStatement
-    : queryStatement SEMICOLON?
-    | useStatement SEMICOLON?
-    | createStatement SEMICOLON?
-    | alterStatement SEMICOLON?
-    | truncateTableStatement SEMICOLON?
-    | describeStatement SEMICOLON?
-    | computeStatement SEMICOLON?
-    | dropStatement SEMICOLON?
-    | grantStatement SEMICOLON?
-    | revokeStatement SEMICOLON?
-    | insertStatement SEMICOLON?
-    | deleteStatement SEMICOLON?
-    | updateStatement SEMICOLON?
-    | upsertStatement SEMICOLON?
-    | showStatement SEMICOLON?
-    | addCommentStatement SEMICOLON?
-    | explainStatement SEMICOLON?
-    | setStatement SEMICOLON?
-    | shutdownStatement SEMICOLON?
-    | invalidateMetaStatement SEMICOLON?
-    | loadDataStatement SEMICOLON?
-    | refreshStatement SEMICOLON?
+    : queryStatement
+    | useStatement
+    | createStatement
+    | alterStatement
+    | truncateTableStatement
+    | describeStatement
+    | computeStatement
+    | dropStatement
+    | grantStatement
+    | revokeStatement
+    | insertStatement
+    | deleteStatement
+    | updateStatement
+    | upsertStatement
+    | showStatement
+    | addCommentStatement
+    | explainStatement
+    | setStatement
+    | shutdownStatement
+    | invalidateMetaStatement
+    | loadDataStatement
+    | refreshStatement
     ;
 
 useStatement: KW_USE databaseNamePath;
@@ -337,7 +331,7 @@ addTableComments: KW_COMMENT KW_ON KW_TABLE tableNamePath KW_IS (stringLiteral |
 
 addColumnComments: KW_COMMENT KW_ON KW_COLUMN columnNamePath KW_IS (stringLiteral | KW_NULL);
 
-explainStatement: KW_EXPLAIN statement;
+explainStatement: KW_EXPLAIN sqlStatement;
 
 setStatement: KW_SET (KW_ALL | identifier EQ expression)?;
 
