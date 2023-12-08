@@ -617,7 +617,8 @@ colconstraintelem:
 		KW_IDENTITY optparenthesizedseqoptlist?
 		| OPEN_PAREN a_expr CLOSE_PAREN KW_STORED
 	)
-	| KW_REFERENCES qualified_name opt_column_list? key_match? key_actions?;
+	| KW_REFERENCES qualified_name opt_column_list? key_match? key_actions?
+	| opt_collate;
 
 nulls_distinct: KW_NULLS KW_NOT? KW_DISTINCT;
 
@@ -1406,7 +1407,7 @@ defacl_privilege_target:
 
 indexstmt:
 	KW_CREATE opt_unique? KW_INDEX opt_concurrently? opt_if_not_exists? opt_index_name? KW_ON relation_expr access_method_clause
-		? OPEN_PAREN index_params CLOSE_PAREN opt_include? opt_reloptions? opttablespace?
+		? OPEN_PAREN index_params CLOSE_PAREN opt_include? nulls_distinct? opt_reloptions? opttablespace?
 		where_clause?;
 
 opt_unique: KW_UNIQUE;
@@ -1981,7 +1982,7 @@ vacuumstmt:
 
 analyzestmt:
 	analyze_keyword opt_verbose? opt_vacuum_relation_list?
-	| analyze_keyword OPEN_PAREN vac_analyze_option_list CLOSE_PAREN opt_vacuum_relation_list?;
+	| analyze_keyword OPEN_PAREN analyze_options_list CLOSE_PAREN opt_vacuum_relation_list?;
 
 vac_analyze_option_list:
 	vac_analyze_option_elem (COMMA vac_analyze_option_elem)*;
@@ -1997,7 +1998,15 @@ vac_analyze_option_arg: opt_boolean_or_string | numericonly;
 
 opt_analyze: analyze_keyword;
 
+analyze_options_list: analyze_option_elem (COMMA analyze_option_elem)*;
+
+analyze_option_elem: opt_verbose | opt_skiplock | opt_buffer_usage_limit; // support on v12+
+
 opt_verbose: KW_VERBOSE (KW_FALSE | KW_TRUE)?;
+
+opt_skiplock: KW_SKIP_LOCKED (KW_FALSE | KW_TRUE)?;
+
+opt_buffer_usage_limit: KW_BUFFER_USAGE_LIMIT (numericonly | sconst);
 
 opt_full: KW_FULL;
 
@@ -2229,15 +2238,19 @@ sortby_list: sortby (COMMA sortby)*;
 sortby:
 	column_expr_noparen (KW_USING qual_all_op | opt_asc_desc)? opt_nulls_order?;
 
-select_limit:
+select_limit: // https://www.postgresql.org/docs/16/sql-select.html#SQL-LIMIT
 	limit_clause offset_clause?
-	| offset_clause limit_clause?;
+	| offset_clause fetch_clause?
+	| fetch_clause offset_clause?
+	;
 
 opt_select_limit: select_limit;
 
 limit_clause:
-	KW_LIMIT select_limit_value (COMMA select_offset_value)?
-	| KW_FETCH first_or_next (
+	KW_LIMIT select_limit_value (COMMA select_offset_value)?;
+	
+fetch_clause:
+	KW_FETCH first_or_next (
 		select_fetch_first_value row_or_rows (KW_ONLY | KW_WITH KW_TIES)
 		| row_or_rows (KW_ONLY | KW_WITH KW_TIES)
 	);
@@ -2263,7 +2276,7 @@ row_or_rows: KW_ROW | KW_ROWS;
 
 first_or_next: KW_FIRST | KW_NEXT;
 
-group_clause: KW_GROUP KW_BY group_by_list;
+group_clause: KW_GROUP KW_BY (all_or_distinct)? group_by_list;
 
 group_by_list: group_by_item (COMMA group_by_item)*;
 
@@ -3110,6 +3123,7 @@ unreserved_keyword:
 	| KW_BACKWARD
 	| KW_BEFORE
 	| KW_BEGIN
+	| KW_BUFFER_USAGE_LIMIT
 	| KW_BY
 	| KW_CACHE
 	| KW_CALL
@@ -3330,6 +3344,7 @@ unreserved_keyword:
 	| KW_SHOW
 	| KW_SIMPLE
 	| KW_SKIP
+	| KW_SKIP_LOCKED
 	| KW_SNAPSHOT
 	| KW_SQL
 	| KW_STABLE

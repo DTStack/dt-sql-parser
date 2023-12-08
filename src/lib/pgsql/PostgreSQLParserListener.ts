@@ -466,7 +466,11 @@ import { Vac_analyze_option_elemContext } from "./PostgreSQLParser";
 import { Vac_analyze_option_nameContext } from "./PostgreSQLParser";
 import { Vac_analyze_option_argContext } from "./PostgreSQLParser";
 import { Opt_analyzeContext } from "./PostgreSQLParser";
+import { Analyze_options_listContext } from "./PostgreSQLParser";
+import { Analyze_option_elemContext } from "./PostgreSQLParser";
 import { Opt_verboseContext } from "./PostgreSQLParser";
+import { Opt_skiplockContext } from "./PostgreSQLParser";
+import { Opt_buffer_usage_limitContext } from "./PostgreSQLParser";
 import { Opt_fullContext } from "./PostgreSQLParser";
 import { Opt_freezeContext } from "./PostgreSQLParser";
 import { Opt_name_listContext } from "./PostgreSQLParser";
@@ -538,6 +542,7 @@ import { SortbyContext } from "./PostgreSQLParser";
 import { Select_limitContext } from "./PostgreSQLParser";
 import { Opt_select_limitContext } from "./PostgreSQLParser";
 import { Limit_clauseContext } from "./PostgreSQLParser";
+import { Fetch_clauseContext } from "./PostgreSQLParser";
 import { Offset_clauseContext } from "./PostgreSQLParser";
 import { Select_limit_valueContext } from "./PostgreSQLParser";
 import { Select_offset_valueContext } from "./PostgreSQLParser";
@@ -6004,6 +6009,28 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	exitOpt_analyze?: (ctx: Opt_analyzeContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.analyze_options_list`.
+	 * @param ctx the parse tree
+	 */
+	enterAnalyze_options_list?: (ctx: Analyze_options_listContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.analyze_options_list`.
+	 * @param ctx the parse tree
+	 */
+	exitAnalyze_options_list?: (ctx: Analyze_options_listContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.analyze_option_elem`.
+	 * @param ctx the parse tree
+	 */
+	enterAnalyze_option_elem?: (ctx: Analyze_option_elemContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.analyze_option_elem`.
+	 * @param ctx the parse tree
+	 */
+	exitAnalyze_option_elem?: (ctx: Analyze_option_elemContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.opt_verbose`.
 	 * @param ctx the parse tree
 	 */
@@ -6013,6 +6040,28 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitOpt_verbose?: (ctx: Opt_verboseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.opt_skiplock`.
+	 * @param ctx the parse tree
+	 */
+	enterOpt_skiplock?: (ctx: Opt_skiplockContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.opt_skiplock`.
+	 * @param ctx the parse tree
+	 */
+	exitOpt_skiplock?: (ctx: Opt_skiplockContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.opt_buffer_usage_limit`.
+	 * @param ctx the parse tree
+	 */
+	enterOpt_buffer_usage_limit?: (ctx: Opt_buffer_usage_limitContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.opt_buffer_usage_limit`.
+	 * @param ctx the parse tree
+	 */
+	exitOpt_buffer_usage_limit?: (ctx: Opt_buffer_usage_limitContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.opt_full`.
@@ -6794,6 +6843,17 @@ export interface PostgreSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitLimit_clause?: (ctx: Limit_clauseContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `PostgreSQLParser.fetch_clause`.
+	 * @param ctx the parse tree
+	 */
+	enterFetch_clause?: (ctx: Fetch_clauseContext) => void;
+	/**
+	 * Exit a parse tree produced by `PostgreSQLParser.fetch_clause`.
+	 * @param ctx the parse tree
+	 */
+	exitFetch_clause?: (ctx: Fetch_clauseContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `PostgreSQLParser.offset_clause`.

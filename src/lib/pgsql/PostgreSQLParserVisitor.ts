@@ -466,7 +466,11 @@ import { Vac_analyze_option_elemContext } from "./PostgreSQLParser";
 import { Vac_analyze_option_nameContext } from "./PostgreSQLParser";
 import { Vac_analyze_option_argContext } from "./PostgreSQLParser";
 import { Opt_analyzeContext } from "./PostgreSQLParser";
+import { Analyze_options_listContext } from "./PostgreSQLParser";
+import { Analyze_option_elemContext } from "./PostgreSQLParser";
 import { Opt_verboseContext } from "./PostgreSQLParser";
+import { Opt_skiplockContext } from "./PostgreSQLParser";
+import { Opt_buffer_usage_limitContext } from "./PostgreSQLParser";
 import { Opt_fullContext } from "./PostgreSQLParser";
 import { Opt_freezeContext } from "./PostgreSQLParser";
 import { Opt_name_listContext } from "./PostgreSQLParser";
@@ -538,6 +542,7 @@ import { SortbyContext } from "./PostgreSQLParser";
 import { Select_limitContext } from "./PostgreSQLParser";
 import { Opt_select_limitContext } from "./PostgreSQLParser";
 import { Limit_clauseContext } from "./PostgreSQLParser";
+import { Fetch_clauseContext } from "./PostgreSQLParser";
 import { Offset_clauseContext } from "./PostgreSQLParser";
 import { Select_limit_valueContext } from "./PostgreSQLParser";
 import { Select_offset_valueContext } from "./PostgreSQLParser";
@@ -4145,11 +4150,39 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	visitOpt_analyze?: (ctx: Opt_analyzeContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.analyze_options_list`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAnalyze_options_list?: (ctx: Analyze_options_listContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.analyze_option_elem`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAnalyze_option_elem?: (ctx: Analyze_option_elemContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.opt_verbose`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitOpt_verbose?: (ctx: Opt_verboseContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.opt_skiplock`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitOpt_skiplock?: (ctx: Opt_skiplockContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.opt_buffer_usage_limit`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitOpt_buffer_usage_limit?: (ctx: Opt_buffer_usage_limitContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.opt_full`.
@@ -4647,6 +4680,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitLimit_clause?: (ctx: Limit_clauseContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.fetch_clause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFetch_clause?: (ctx: Fetch_clauseContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.offset_clause`.
