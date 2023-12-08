@@ -1,25 +1,24 @@
 -- SELECT
 WITH RECURSIVE query_name (id) AS (SELECT id FROM table_expression) 
-SELECT ALL ON (col1,col2) random() AS name1 FROM table_expression 
+SELECT DISTINCT ON (col1,col2) random() AS name1 FROM table_expression 
 WHERE name1=name1 
 GROUP BY DISTINCT id  
 HAVING sum(len) < interval '5 hours' 
 WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC)
  UNION ALL (SELECT * FROM others) 
  ORDER BY salary DESC 
- LIMIT ALL 
- OFFSET start ROWS 
  FETCH NEXT ROWS ONLY
+ OFFSET start ROWS 
   FOR UPDATE OF table_name, table_name2 NOWAIT;
 SELECT;
 
 SELECT * FROM db.tbs GROUP BY (col1 > 3, col2 < 8) ORDER BY col3 > 9;
 
-WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) INTERSECT DISTINCT (SELECT * FROM others) ORDER BY salary ASC LIMIT ALL OFFSET start FETCH NEXT ROW ONLY FOR NO KEY UPDATE;
+WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) INTERSECT DISTINCT (SELECT * FROM others) ORDER BY salary ASC OFFSET start FETCH NEXT ROW ONLY FOR NO KEY UPDATE;
 
-WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT ON (col1) random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) EXCEPT (SELECT * FROM others) ORDER BY salary USING > NULL FIRST LIMIT 40 OFFSET start FETCH NEXT ROW ONLY FOR SHARE;
+WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT ON (col1) random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) EXCEPT (SELECT * FROM others) ORDER BY salary USING > NULLS FIRST OFFSET start FETCH NEXT ROW ONLY FOR SHARE;
 
-WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT ON (col1) random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) EXCEPT (SELECT * FROM others) ORDER BY salary USING > NULL FIRST LIMIT 40 OFFSET start FETCH NEXT ROW ONLY FOR KEY SHARE OF table_name NOWAIT;
+WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT ON (col1) random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) EXCEPT (SELECT * FROM others) ORDER BY salary USING > NULLS FIRST OFFSET start FETCH NEXT ROW ONLY FOR KEY SHARE OF table_name NOWAIT;
 
 -- SELECT INTO
 WITH RECURSIVE query_name (id) AS (SELECT id FROM table_expression)
@@ -34,7 +33,6 @@ INTO TEMPORARY TABLE new_table
     ORDER BY expression_1 USING  > NULLS FIRST
     LIMIT ALL
     OFFSET start ROW
-    FETCH FIRST 234 ROWS ONLY
     FOR UPDATE OF table_name  NOWAIT;
 SELECT INTO new_table;
 

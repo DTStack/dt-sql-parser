@@ -36,8 +36,7 @@ import { PredicatedContext } from "./FlinkSqlParser";
 import { LogicalBinaryContext } from "./FlinkSqlParser";
 import { LogicalNestedContext } from "./FlinkSqlParser";
 import { ProgramContext } from "./FlinkSqlParser";
-import { StatementContext } from "./FlinkSqlParser";
-import { SqlStatementsContext } from "./FlinkSqlParser";
+import { SingleStatementContext } from "./FlinkSqlParser";
 import { SqlStatementContext } from "./FlinkSqlParser";
 import { EmptyStatementContext } from "./FlinkSqlParser";
 import { DdlStatementContext } from "./FlinkSqlParser";
@@ -498,18 +497,11 @@ export interface FlinkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	visitProgram?: (ctx: ProgramContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.statement`.
+	 * Visit a parse tree produced by `FlinkSqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitStatement?: (ctx: StatementContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `FlinkSqlParser.sqlStatements`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSqlStatements?: (ctx: SqlStatementsContext) => Result;
+	visitSingleStatement?: (ctx: SingleStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `FlinkSqlParser.sqlStatement`.

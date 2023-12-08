@@ -36,12 +36,12 @@ options { tokenVocab = MySqlLexer; }
 // Top Level Description
 
 program
-    : sqlStatements? EOF
+    : singleStatement* EOF
     ;
 
-sqlStatements
-    : (sqlStatement | emptyStatement_)*
-        (sqlStatement SEMI? | emptyStatement_)
+singleStatement
+    : sqlStatement SEMI?
+    | emptyStatement_
     ;
 
 sqlStatement

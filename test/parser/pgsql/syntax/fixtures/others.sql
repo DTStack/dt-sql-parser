@@ -6,8 +6,11 @@ ABORT AND NO CHAIN;
 -- ANALYZE
 ANALYZE VERBOSE table_name ( column_name, column_name2);
 ANALYZE VERBOSE;
-ANALYZE SKIP_LOCKED true;
-ANALYZE BUFFER_USAGE_LIMIT 4;
+ANALYZE (VERBOSE false);
+ANALYZE (SKIP_LOCKED true);
+ANALYZE (BUFFER_USAGE_LIMIT 4);
+ANALYZE (SKIP_LOCKED false, SKIP_LOCKED false, BUFFER_USAGE_LIMIT '4KB');
+ANALYZE (SKIP_LOCKED false, SKIP_LOCKED false, BUFFER_USAGE_LIMIT '4KB') table_name ( column_name, column_name2);
 ANALYZE;
 
 -- BEGIN
@@ -59,7 +62,7 @@ COMMENT ON OPERATOR CLASS object_name USING index_method IS 'text';
 COMMENT ON OPERATOR FAMILY object_name USING index_method IS 'text';
 COMMENT ON POLICY policy_name ON table_name IS 'text';
 COMMENT ON PROCEDURAL LANGUAGE object_name IS 'text';
-COMMENT ON PROCEDURE procedure_name IS 'text';;
+COMMENT ON PROCEDURE procedure_name IS 'text';
 COMMENT ON PUBLICATION object_name IS 'text';
 COMMENT ON ROLE object_name IS 'text';
 COMMENT ON ROUTINE routine_name IS 'text';
@@ -120,8 +123,8 @@ DISCARD ALL;
 DISCARD TEMP;
 
 -- DO
-DO LANGUAGE lang_name '$$DECLARE' r record;
-DO '$$DECLARE' r record;
+DO LANGUAGE lang_name '$$DECLARE';
+DO '$$DECLARE';
 
 -- END
 END TRANSACTION;
@@ -201,10 +204,10 @@ REASSIGN OWNED BY old_role TO new_role;
 REFRESH MATERIALIZED VIEW name WITH NO DATA;
 
 -- REINDEX
-REINDEX DATABASE CONCURRENTLY name FORCE;
-REINDEX TABLE name;
-REINDEX INDEX name;
-REINDEX SYSTEM name;
+REINDEX DATABASE CONCURRENTLY dbname;
+REINDEX TABLE tbname;
+REINDEX INDEX indexname;
+REINDEX SYSTEM sysname;
 
 -- RELEASE SAVEPOINT
 RELEASE SAVEPOINT savepoint_name;
@@ -313,7 +316,6 @@ ANALYZE;
 VALUES (1, '3'), (3, 'sdsd')
     ORDER BY sort_expression ASC
     LIMIT 20
-    OFFSET 324 ROW
-    FETCH NEXT 343 ROWS ONLY ;
+    OFFSET 324 ROWS;
 VALUES (1, '3'), (3, 'sdsd');
 

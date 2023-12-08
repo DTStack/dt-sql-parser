@@ -36,8 +36,7 @@ import { PredicatedContext } from "./FlinkSqlParser";
 import { LogicalBinaryContext } from "./FlinkSqlParser";
 import { LogicalNestedContext } from "./FlinkSqlParser";
 import { ProgramContext } from "./FlinkSqlParser";
-import { StatementContext } from "./FlinkSqlParser";
-import { SqlStatementsContext } from "./FlinkSqlParser";
+import { SingleStatementContext } from "./FlinkSqlParser";
 import { SqlStatementContext } from "./FlinkSqlParser";
 import { EmptyStatementContext } from "./FlinkSqlParser";
 import { DdlStatementContext } from "./FlinkSqlParser";
@@ -659,26 +658,15 @@ export interface FlinkSqlParserListener extends ParseTreeListener {
 	exitProgram?: (ctx: ProgramContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.statement`.
+	 * Enter a parse tree produced by `FlinkSqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterStatement?: (ctx: StatementContext) => void;
+	enterSingleStatement?: (ctx: SingleStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.statement`.
+	 * Exit a parse tree produced by `FlinkSqlParser.singleStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitStatement?: (ctx: StatementContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `FlinkSqlParser.sqlStatements`.
-	 * @param ctx the parse tree
-	 */
-	enterSqlStatements?: (ctx: SqlStatementsContext) => void;
-	/**
-	 * Exit a parse tree produced by `FlinkSqlParser.sqlStatements`.
-	 * @param ctx the parse tree
-	 */
-	exitSqlStatements?: (ctx: SqlStatementsContext) => void;
+	exitSingleStatement?: (ctx: SingleStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `FlinkSqlParser.sqlStatement`.

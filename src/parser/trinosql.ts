@@ -1,7 +1,11 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
 import { TrinoSqlLexer } from '../lib/trinosql/TrinoSqlLexer';
-import { TrinoSqlParser, ProgramContext, StatementContext } from '../lib/trinosql/TrinoSqlParser';
+import {
+    TrinoSqlParser,
+    ProgramContext,
+    SingleStatementContext,
+} from '../lib/trinosql/TrinoSqlParser';
 import { TrinoSqlListener } from '../lib/trinosql/TrinoSqlListener';
 import BasicParser from './common/basicParser';
 import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic-parser-types';
@@ -125,9 +129,9 @@ export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext,
 }
 
 export class TrinoSqlSplitListener implements TrinoSqlListener {
-    private _statementsContext: StatementContext[] = [];
+    private _statementsContext: SingleStatementContext[] = [];
 
-    exitStatement = (ctx: StatementContext) => {
+    exitSingleStatement = (ctx: SingleStatementContext) => {
         this._statementsContext.push(ctx);
     };
 
