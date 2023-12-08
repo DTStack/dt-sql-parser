@@ -34,5 +34,5 @@ UPDATE ONLY table_name * AS alias
     SET column_name = DEFAULT, (column_name, column_nam2) = ROW ( a+1,DEFAULT)
     FROM from_list
     WHERE a=b
-    RETURNING * AS output_name;
+    RETURNING column_name AS output_name;
 UPDATE table_name SET column_name = a + 3;

@@ -244,9 +244,9 @@ CREATE DATABASE name1
 CREATE DATABASE name2;
 
 -- CREATE DOMAIN
-CREATE DOMAIN name AS data_type
-COLLATE collation
-DEFAULT expression
+CREATE DOMAIN domain_name AS data_type
+COLLATE col
+DEFAULT expr
 CONSTRAINT constraint_name NOT NULL
 NULL
 CHECK(
@@ -389,7 +389,7 @@ CREATE POLICY name ON table_name;
 CREATE OR REPLACE PROCEDURE
     name ( IN argname int DEFAULT default_expr)
     LANGUAGE lang_name
-    TRANSFORM { FOR TYPE type_name } 
+    TRANSFORM FOR TYPE type_name
     EXTERNAL SECURITY INVOKER
     EXTERNAL SECURITY DEFINER
     SET configuration_parameter FROM CURRENT
@@ -399,7 +399,7 @@ CREATE OR REPLACE PROCEDURE
 
 -- CREATE PUBLICATION
 CREATE PUBLICATION name
-    FOR ALL TABLES, FOR publication_object
+    FOR ALL TABLES
     WITH ( publication_parameter = value);
 CREATE PUBLICATION name;
 
