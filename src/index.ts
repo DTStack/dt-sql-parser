@@ -18,7 +18,7 @@ export * from './lib/impala/ImpalaSqlParserVisitor';
 export { SyntaxContextType } from './parser/common/basic-parser-types';
 
 export type * from './parser/common/basic-parser-types';
-export type { SyntaxError, ParseError, ErrorHandler } from './parser/common/parseErrorListener';
+export type { SyntaxError, ParseError, ErrorListener } from './parser/common/parseErrorListener';
 
 /**
  * @deprecated legacy, will be removed.

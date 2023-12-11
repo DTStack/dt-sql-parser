@@ -25,16 +25,16 @@ export interface SyntaxError<T> {
 }
 
 /**
- * ErrorHandler will be invoked when it encounters a parsing error.
+ * ErrorListener will be invoked when it encounters a parsing error.
  * Includes lexical errors and parsing errors.
  */
-export type ErrorHandler<T> = (parseError: ParseError, originalError: SyntaxError<T>) => void;
+export type ErrorListener<T> = (parseError: ParseError, originalError: SyntaxError<T>) => void;
 
 export default class ParseErrorListener implements ANTLRErrorListener<Token> {
-    private _errorHandler;
+    private _errorListener;
 
-    constructor(errorListener: ErrorHandler<Token>) {
-        this._errorHandler = errorListener;
+    constructor(errorListener: ErrorListener<Token>) {
+        this._errorListener = errorListener;
     }
 
     syntaxError(
@@ -49,8 +49,8 @@ export default class ParseErrorListener implements ANTLRErrorListener<Token> {
         if (offendingSymbol && offendingSymbol.text !== null) {
             endCol = charPositionInLine + offendingSymbol.text.length;
         }
-        if (this._errorHandler) {
-            this._errorHandler(
+        if (this._errorListener) {
+            this._errorListener(
                 {
                     startLine: line,
                     endLine: line,
