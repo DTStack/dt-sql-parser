@@ -18,6 +18,7 @@ import {
     TextSlice,
 } from './basic-parser-types';
 import ParseErrorListener, { ParseError, ErrorListener } from './parseErrorListener';
+import { ErrorStrategy } from './errorStrategy';
 
 interface IParser<IParserRuleContext extends ParserRuleContext> extends Parser {
     // Customized in our parser
@@ -126,6 +127,7 @@ export default abstract class BasicParser<
     public parse(input: string, errorListener?: ErrorListener<any>) {
         const parser = this.createParser(input, errorListener);
         parser.buildParseTree = true;
+        parser.errorHandler = new ErrorStrategy();
 
         return parser.program();
     }
@@ -153,6 +155,7 @@ export default abstract class BasicParser<
 
         this._parser = this.createParserFromTokenStream(this._tokenStream);
         this._parser.buildParseTree = true;
+        this._parser.errorHandler = new ErrorStrategy();
 
         return this._parser;
     }
@@ -317,6 +320,7 @@ export default abstract class BasicParser<
                     const parser = this.createParserFromTokenStream(tokenStream);
                     parser.removeErrorListeners();
                     parser.buildParseTree = true;
+                    parser.errorHandler = new ErrorStrategy();
 
                     sqlParserIns = parser;
                     c3Context = parser.program();
