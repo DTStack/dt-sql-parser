@@ -17,7 +17,8 @@ import {
     WordRange,
     TextSlice,
 } from './basic-parser-types';
-import ParseErrorListener, { ParseError, ErrorHandler } from './parseErrorListener';
+import ParseErrorListener, { ParseError, ErrorListener } from './parseErrorListener';
+import { ErrorStrategy } from './errorStrategy';
 
 interface IParser<IParserRuleContext extends ParserRuleContext> extends Parser {
     // Customized in our parser
@@ -46,7 +47,7 @@ export default abstract class BasicParser<
     protected _parseErrors: ParseError[] = [];
     /** members for cache end */
 
-    private _errorHandler: ErrorHandler<any> = (error) => {
+    private _errorListener: ErrorListener<any> = (error) => {
         this._parseErrors.push(error);
     };
 
@@ -90,7 +91,7 @@ export default abstract class BasicParser<
      * Create an antlr4 lexer from input.
      * @param input string
      */
-    public createLexer(input: string, errorListener?: ErrorHandler<any>) {
+    public createLexer(input: string, errorListener?: ErrorListener<any>) {
         const charStreams = CharStreams.fromString(input.toUpperCase());
         const lexer = this.createLexerFormCharStream(charStreams);
         if (errorListener) {
@@ -104,7 +105,7 @@ export default abstract class BasicParser<
      * Create an antlr4 parser from input.
      * @param input string
      */
-    public createParser(input: string, errorListener?: ErrorHandler<any>) {
+    public createParser(input: string, errorListener?: ErrorListener<any>) {
         const lexer = this.createLexer(input, errorListener);
         const tokenStream = new CommonTokenStream(lexer);
         const parser = this.createParserFromTokenStream(tokenStream);
@@ -123,9 +124,10 @@ export default abstract class BasicParser<
      * @param errorListener listen parse errors and lexer errors.
      * @returns parseTree
      */
-    public parse(input: string, errorListener?: ErrorHandler<any>) {
+    public parse(input: string, errorListener?: ErrorListener<any>) {
         const parser = this.createParser(input, errorListener);
         parser.buildParseTree = true;
+        parser.errorHandler = new ErrorStrategy();
 
         return parser.program();
     }
@@ -141,7 +143,7 @@ export default abstract class BasicParser<
         this._lexer = this.createLexerFormCharStream(this._charStreams);
 
         this._lexer.removeErrorListeners();
-        this._lexer.addErrorListener(new ParseErrorListener(this._errorHandler));
+        this._lexer.addErrorListener(new ParseErrorListener(this._errorListener));
 
         this._tokenStream = new CommonTokenStream(this._lexer);
         /**
@@ -153,6 +155,7 @@ export default abstract class BasicParser<
 
         this._parser = this.createParserFromTokenStream(this._tokenStream);
         this._parser.buildParseTree = true;
+        this._parser.errorHandler = new ErrorStrategy();
 
         return this._parser;
     }
@@ -165,7 +168,7 @@ export default abstract class BasicParser<
      * @param errorListener listen errors
      * @returns parseTree
      */
-    private parseWithCache(input: string, errorListener?: ErrorHandler<any>) {
+    private parseWithCache(input: string, errorListener?: ErrorListener<any>) {
         // Avoid parsing the same input repeatedly.
         if (this._parsedInput === input && !errorListener) {
             return this._parseTree;
@@ -175,7 +178,7 @@ export default abstract class BasicParser<
         this._parsedInput = input;
 
         parser.removeErrorListeners();
-        parser.addErrorListener(new ParseErrorListener(this._errorHandler));
+        parser.addErrorListener(new ParseErrorListener(this._errorListener));
 
         this._parseTree = parser.program();
 
@@ -317,6 +320,7 @@ export default abstract class BasicParser<
                     const parser = this.createParserFromTokenStream(tokenStream);
                     parser.removeErrorListeners();
                     parser.buildParseTree = true;
+                    parser.errorHandler = new ErrorStrategy();
 
                     sqlParserIns = parser;
                     c3Context = parser.program();
