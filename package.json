@@ -28,6 +28,7 @@
     "release": "node ./scripts/release.js",
     "lint": "prettier --check '**/*.ts' --config ./.prettierrc",
     "lint-fix": "prettier --write '**/*.ts' --config ./.prettierrc",
+    "format-g4": "antlr-format -c ./antlr.format.json -v ./src/grammar/**/*.g4",
     "cleanComment": "node ./scripts/cleanCommentCli.js"
   },
   "license": "MIT",
@@ -39,6 +40,7 @@
     "@swc/jest": "^0.2.26",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.15.11",
+    "antlr-format-cli": "^1.2.1",
     "antlr4ts-cli": "^0.5.0-alpha.4",
     "chalk": "4.1.2",
     "commitizen": "^4.3.0",
