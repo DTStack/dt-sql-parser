@@ -277,55 +277,74 @@ export default abstract class BasicParser<
 
         /**
          * Split sql by statement.
-         * Try to collect candidates from the caret statement only.
+         * Try to collect candidates in as small a range as possible.
          */
         this.listen(splitListener, this._parseTree);
+        const statementCount = splitListener.statementsContext?.length;
+        const statementsContext = splitListener.statementsContext;
 
         // If there are multiple statements.
-        if (splitListener.statementsContext.length > 1) {
-            // find statement rule context where caretPosition is located.
-            const caretStatementContext = splitListener?.statementsContext.find((ctx) => {
-                return (
-                    caretTokenIndex <= ctx.stop?.tokenIndex &&
-                    caretTokenIndex >= ctx.start.tokenIndex
-                );
-            });
+        if (statementCount > 1) {
+            /**
+             * Find a minimum valid range, reparse the fragment, and provide a new parse tree to C3.
+             * The boundaries of this range must be statements with no syntax errors.
+             * This can ensure the stable performance of the C3.
+             */
+            let startStatement: ParserRuleContext;
+            let stopStatement: ParserRuleContext;
 
-            if (caretStatementContext) {
-                c3Context = caretStatementContext;
-            } else {
-                const lastStatementToken =
-                    splitListener.statementsContext[splitListener?.statementsContext.length - 1]
-                        .start;
+            for (let index = 0; index < statementCount; index++) {
+                const ctx = statementsContext[index];
+                const isCurrentCtxValid = !ctx.exception;
+                if (!isCurrentCtxValid) continue;
+
                 /**
-                 * If caretStatementContext is not found and it follows all statements.
-                 * Reparses part of the input following the penultimate statement.
-                 * And c3 will collect candidates in the new parseTreeContext.
+                 * Ensure that the statementContext before the left boundary
+                 * and the last sentence on the right border are qualified SQL statements.
                  */
-                if (caretTokenIndex > lastStatementToken?.tokenIndex) {
-                    /**
-                     * Save offset of the tokenIndex in the partInput
-                     * compared to the tokenIndex in the whole input
-                     */
-                    tokenIndexOffset = lastStatementToken?.tokenIndex;
-                    // Correct caretTokenIndex
-                    caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+                const isPrevCtxValid = index === 0 || !statementsContext[index - 1]?.exception;
+                const isNextCtxValid =
+                    index === statementCount - 1 || !statementsContext[index + 1]?.exception;
 
-                    const inputSlice = input.slice(lastStatementToken.startIndex);
-                    const lexer = this.createLexer(inputSlice);
-                    lexer.removeErrorListeners();
+                if (ctx.stop.tokenIndex < caretTokenIndex && isPrevCtxValid) {
+                    startStatement = ctx;
+                }
 
-                    const tokenStream = new CommonTokenStream(lexer);
-                    tokenStream.fill();
-                    const parser = this.createParserFromTokenStream(tokenStream);
-                    parser.removeErrorListeners();
-                    parser.buildParseTree = true;
-                    parser.errorHandler = new ErrorStrategy();
-
-                    sqlParserIns = parser;
-                    c3Context = parser.program();
+                if (!stopStatement && ctx.start.tokenIndex > caretTokenIndex && isNextCtxValid) {
+                    stopStatement = ctx;
+                    break;
                 }
             }
+
+            // A boundary consisting of the index of the input.
+            const startIndex = startStatement?.start?.startIndex ?? 0;
+            const stopIndex = stopStatement?.stop?.stopIndex ?? input.length - 1;
+
+            /**
+             * Save offset of the tokenIndex in the partInput
+             * compared to the tokenIndex in the whole input
+             */
+            tokenIndexOffset = startStatement?.start?.tokenIndex ?? 0;
+            caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+
+            /**
+             * Reparse the input fragment，
+             * and c3 will collect candidates in the newly generated parseTree.
+             */
+            const inputSlice = input.slice(startIndex, stopIndex);
+
+            const lexer = this.createLexer(inputSlice);
+            lexer.removeErrorListeners();
+            const tokenStream = new CommonTokenStream(lexer);
+            tokenStream.fill();
+
+            const parser = this.createParserFromTokenStream(tokenStream);
+            parser.removeErrorListeners();
+            parser.buildParseTree = true;
+            parser.errorHandler = new ErrorStrategy();
+
+            sqlParserIns = parser;
+            c3Context = parser.program();
         }
 
         const core = new CodeCompletionCore(sqlParserIns);
