@@ -47,6 +47,9 @@ Additionally, it provides auxiliary functions such as **SQL splitting** and **co
 
 We have provided [monaco-sql-languages](https://github.com/DTStack/monaco-sql-languages), it is easily to integrate with `monaco-editor`.
 
+>Tips: If you want to run `dt-sql-parser` in browser, don't forget to install the `assert` and `util` polyfills, and define the global variable `process.env`.
+  None of this is needed in the node environment, because node has them built-in.
+
 <br/>
 
 ## Installation
