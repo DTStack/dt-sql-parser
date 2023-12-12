@@ -18,16 +18,22 @@
  * Reference: https://github.com/apache/spark/blob/master/sql/api/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBaseParser.g4
  */
 
+// $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
+// $antlr-format allowShortRulesOnASingleLine false, allowShortBlocksOnASingleLine true, alignSemicolons hanging, alignColons hanging
+// $antlr-format spaceBeforeAssignmentOperators false, keepEmptyLinesAtTheStartOfBlocks true
+
 parser grammar SparkSqlParser;
 
-options { tokenVocab = SparkSqlLexer; }
+options {
+    tokenVocab=SparkSqlLexer;
+}
 
 program
     : singleStatement* EOF
     ;
 
 singleStatement
-    : statement SEMICOLON ?
+    : statement SEMICOLON?
     ;
 
 statement
@@ -36,150 +42,117 @@ statement
     | KW_USE dbSchemaName
     | KW_USE dbSchema dbSchemaName
     | KW_SET KW_CATALOG (identifier | stringLit)
-    | KW_CREATE dbSchema (ifNotExists)? dbSchemaNameCreate
-        (commentSpec |
-         locationSpec |
-         (KW_WITH (KW_DBPROPERTIES | KW_PROPERTIES) propertyList))*
-    | KW_ALTER dbSchema dbSchemaName
-        KW_SET (KW_DBPROPERTIES | KW_PROPERTIES) propertyList
-    | KW_ALTER dbSchema dbSchemaName
-        KW_SET locationSpec
-    | KW_DROP dbSchema (ifExists)? dbSchemaName
-        (KW_RESTRICT | KW_CASCADE)?
-    | KW_SHOW dbSchemas ((KW_FROM | KW_IN) multipartIdentifier)?
-        (KW_LIKE? pattern=stringLit)?
-    | createTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider?
-        createTableClauses
-        (KW_AS? query)?
-    | KW_CREATE KW_TABLE (ifNotExists)? target=tableNameCreate
-        KW_LIKE source=tableName
-        (tableProvider |
-        rowFormat |
-        createFileFormat |
-        locationSpec |
-        (KW_TBLPROPERTIES tableProps=propertyList))*
-    | replaceTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider?
-        createTableClauses
-        (KW_AS? query)?
-    | KW_ANALYZE KW_TABLE tableName partitionSpec? KW_COMPUTE KW_STATISTICS
-        (KW_NOSCAN | KW_FOR KW_COLUMNS columnNameSeq | KW_FOR KW_ALL KW_COLUMNS)?
-    | KW_ANALYZE KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)? KW_COMPUTE KW_STATISTICS
-        (KW_NOSCAN)?
-    | KW_ALTER KW_TABLE tableName
-        KW_ADD KW_COLUMN qualifiedColTypeWithPositionForAdd
-    | KW_ALTER KW_TABLE tableName
-        KW_ADD KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForAdd RIGHT_PAREN
-    | KW_ALTER KW_TABLE table=tableName
-        KW_RENAME KW_COLUMN columnName KW_TO columnNameCreate
-    | KW_ALTER KW_TABLE tableName
-        KW_DROP KW_COLUMN (ifExists)? columnName
-    | KW_ALTER KW_TABLE tableName
-        KW_DROP KW_COLUMNS (ifExists)? LEFT_PAREN columnNameSeq RIGHT_PAREN
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
-        KW_RENAME KW_TO multipartIdentifier
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
-        KW_SET KW_TBLPROPERTIES propertyList
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
-        KW_UNSET KW_TBLPROPERTIES (ifExists)? propertyList
-    | KW_ALTER KW_TABLE table=tableName
-        (KW_ALTER | KW_CHANGE) KW_COLUMN? column=columnName
-        alterColumnAction?
-    | KW_ALTER KW_TABLE table=tableName partitionSpec?
-        KW_CHANGE KW_COLUMN?
-        colName=columnName colType colPosition?
-    | KW_ALTER KW_TABLE table=tableName partitionSpec?
-        KW_REPLACE KW_COLUMNS
-        LEFT_PAREN qualifiedColTypeWithPositionSeqForReplace
-        RIGHT_PAREN
-    | KW_ALTER KW_TABLE tableName (partitionSpec)?
-        KW_SET KW_SERDE stringLit (KW_WITH KW_SERDEPROPERTIES propertyList)?
-    | KW_ALTER KW_TABLE tableName (partitionSpec)?
-        KW_SET KW_SERDEPROPERTIES propertyList
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_ADD (ifNotExists)?
-        partitionSpecLocation+
-    | KW_ALTER KW_TABLE tableName
-        partitionSpec KW_RENAME KW_TO partitionSpec
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName)
-        KW_DROP (ifExists)? partitionSpec (COMMA partitionSpec)* KW_PURGE?
-    | KW_ALTER KW_TABLE tableName
-        (partitionSpec)? KW_SET locationSpec
+    | KW_CREATE dbSchema (ifNotExists)? dbSchemaNameCreate (
+        commentSpec
+        | locationSpec
+        | (KW_WITH (KW_DBPROPERTIES | KW_PROPERTIES) propertyList)
+    )*
+    | KW_ALTER dbSchema dbSchemaName KW_SET (KW_DBPROPERTIES | KW_PROPERTIES) propertyList
+    | KW_ALTER dbSchema dbSchemaName KW_SET locationSpec
+    | KW_DROP dbSchema (ifExists)? dbSchemaName (KW_RESTRICT | KW_CASCADE)?
+    | KW_SHOW dbSchemas ((KW_FROM | KW_IN) multipartIdentifier)? (KW_LIKE? pattern=stringLit)?
+    | createTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider? createTableClauses (
+        KW_AS? query
+    )?
+    | KW_CREATE KW_TABLE (ifNotExists)? target=tableNameCreate KW_LIKE source=tableName (
+        tableProvider
+        | rowFormat
+        | createFileFormat
+        | locationSpec
+        | (KW_TBLPROPERTIES tableProps=propertyList)
+    )*
+    | replaceTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider? createTableClauses (
+        KW_AS? query
+    )?
+    | KW_ANALYZE KW_TABLE tableName partitionSpec? KW_COMPUTE KW_STATISTICS (
+        KW_NOSCAN
+        | KW_FOR KW_COLUMNS columnNameSeq
+        | KW_FOR KW_ALL KW_COLUMNS
+    )?
+    | KW_ANALYZE KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)? KW_COMPUTE KW_STATISTICS (KW_NOSCAN)?
+    | KW_ALTER KW_TABLE tableName KW_ADD KW_COLUMN qualifiedColTypeWithPositionForAdd
+    | KW_ALTER KW_TABLE tableName KW_ADD KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForAdd RIGHT_PAREN
+    | KW_ALTER KW_TABLE table=tableName KW_RENAME KW_COLUMN columnName KW_TO columnNameCreate
+    | KW_ALTER KW_TABLE tableName KW_DROP KW_COLUMN (ifExists)? columnName
+    | KW_ALTER KW_TABLE tableName KW_DROP KW_COLUMNS (ifExists)? LEFT_PAREN columnNameSeq RIGHT_PAREN
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_RENAME KW_TO multipartIdentifier
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_SET KW_TBLPROPERTIES propertyList
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_UNSET KW_TBLPROPERTIES (ifExists)? propertyList
+    | KW_ALTER KW_TABLE table=tableName (KW_ALTER | KW_CHANGE) KW_COLUMN? column=columnName alterColumnAction?
+    | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_CHANGE KW_COLUMN? colName=columnName colType colPosition?
+    | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_REPLACE KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForReplace RIGHT_PAREN
+    | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET KW_SERDE stringLit (
+        KW_WITH KW_SERDEPROPERTIES propertyList
+    )?
+    | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET KW_SERDEPROPERTIES propertyList
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_ADD (ifNotExists)? partitionSpecLocation+
+    | KW_ALTER KW_TABLE tableName partitionSpec KW_RENAME KW_TO partitionSpec
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_DROP (ifExists)? partitionSpec (
+        COMMA partitionSpec
+    )* KW_PURGE?
+    | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET locationSpec
     | KW_ALTER KW_TABLE tableName KW_RECOVER KW_PARTITIONS
     | KW_DROP KW_TABLE (ifExists)? tableName KW_PURGE?
     | KW_DROP KW_VIEW (ifExists)? viewName
-    | KW_CREATE (KW_OR KW_REPLACE)? (KW_GLOBAL? KW_TEMPORARY)?
-        KW_VIEW (ifNotExists)? viewNameCreate
-        identifierCommentList?
-        (commentSpec |
-         (KW_PARTITIONED KW_ON identifierList) |
-         (KW_TBLPROPERTIES propertyList))*
-        KW_AS query
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_GLOBAL? KW_TEMPORARY KW_VIEW
-        viewNameCreate (LEFT_PAREN colTypeList RIGHT_PAREN)? tableProvider
-        (KW_OPTIONS propertyList)?
+    | KW_CREATE (KW_OR KW_REPLACE)? (KW_GLOBAL? KW_TEMPORARY)? KW_VIEW (ifNotExists)? viewNameCreate identifierCommentList? (
+        commentSpec
+        | (KW_PARTITIONED KW_ON identifierList)
+        | (KW_TBLPROPERTIES propertyList)
+    )* KW_AS query
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_GLOBAL? KW_TEMPORARY KW_VIEW viewNameCreate (
+        LEFT_PAREN colTypeList RIGHT_PAREN
+    )? tableProvider (KW_OPTIONS propertyList)?
     | KW_ALTER KW_VIEW viewName KW_AS? query
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_TEMPORARY? KW_FUNCTION (ifNotExists)?
-        functionNameCreate KW_AS className=stringLit
-        (KW_USING resource (COMMA resource)*)?
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_TEMPORARY? KW_FUNCTION (ifNotExists)? functionNameCreate KW_AS className=stringLit (
+        KW_USING resource (COMMA resource)*
+    )?
     | KW_DROP KW_TEMPORARY? KW_FUNCTION (ifExists)? functionName
-    | KW_DECLARE (KW_OR KW_REPLACE)? KW_VARIABLE?
-        functionName dataType? variableDefaultExpression?
+    | KW_DECLARE (KW_OR KW_REPLACE)? KW_VARIABLE? functionName dataType? variableDefaultExpression?
     | KW_DROP KW_TEMPORARY KW_VARIABLE (ifExists)? (tableName | viewName | functionName)
-    | KW_EXPLAIN (KW_LOGICAL | KW_FORMATTED | KW_EXTENDED | KW_CODEGEN | KW_COST)?
-        statement
-    | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)?
-        (KW_LIKE? pattern=stringLit)?
-    | KW_SHOW KW_TABLE KW_EXTENDED ((KW_FROM | KW_IN) ns=dbSchemaName)?
-        KW_LIKE pattern=stringLit partitionSpec?
-    | KW_SHOW KW_TBLPROPERTIES table=tableName
-        (LEFT_PAREN key=propertyKey RIGHT_PAREN)?
-    | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) table=tableName
-        ((KW_FROM | KW_IN) dbSchemaName)?
-    | KW_SHOW KW_VIEWS ((KW_FROM | KW_IN) dbSchemaName)?
-        (KW_LIKE? pattern=stringLit)?
+    | KW_EXPLAIN (KW_LOGICAL | KW_FORMATTED | KW_EXTENDED | KW_CODEGEN | KW_COST)? statement
+    | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)? (KW_LIKE? pattern=stringLit)?
+    | KW_SHOW KW_TABLE KW_EXTENDED ((KW_FROM | KW_IN) ns=dbSchemaName)? KW_LIKE pattern=stringLit partitionSpec?
+    | KW_SHOW KW_TBLPROPERTIES table=tableName (LEFT_PAREN key=propertyKey RIGHT_PAREN)?
+    | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) table=tableName ((KW_FROM | KW_IN) dbSchemaName)?
+    | KW_SHOW KW_VIEWS ((KW_FROM | KW_IN) dbSchemaName)? (KW_LIKE? pattern=stringLit)?
     | KW_SHOW KW_PARTITIONS tableName partitionSpec?
-    | KW_SHOW functionKind? KW_FUNCTIONS ((KW_FROM | KW_IN) ns=dbSchemaName)?
-        (KW_LIKE? (legacy=multipartIdentifier | pattern=stringLit))?
+    | KW_SHOW functionKind? KW_FUNCTIONS ((KW_FROM | KW_IN) ns=dbSchemaName)? (
+        KW_LIKE? (legacy=multipartIdentifier | pattern=stringLit)
+    )?
     | KW_SHOW KW_CREATE KW_TABLE tableName (KW_AS KW_SERDE)?
     | KW_SHOW KW_CURRENT dbSchema
     | KW_SHOW KW_CATALOGS (KW_LIKE? pattern=stringLit)?
     | (KW_DESC | KW_DESCRIBE) KW_FUNCTION KW_EXTENDED? describeFuncName
     | (KW_DESC | KW_DESCRIBE) KW_DATABASE KW_EXTENDED? dbSchemaName
-    | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)?
-        tableName partitionSpec? describeColName?
+    | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)? tableName partitionSpec? describeColName?
     | (KW_DESC | KW_DESCRIBE) KW_QUERY? query
-    | KW_COMMENT KW_ON dbSchema dbSchemaName KW_IS
-        comment
+    | KW_COMMENT KW_ON dbSchema dbSchemaName KW_IS comment
     | KW_COMMENT KW_ON KW_TABLE tableName KW_IS comment
     | KW_REFRESH KW_TABLE tableName
     | KW_REFRESH KW_FUNCTION functionName
     | KW_REFRESH (stringLit | .*?)
-    | KW_CACHE KW_LAZY? KW_TABLE tableName
-        (KW_OPTIONS options=propertyList)? (KW_AS? query)?
+    | KW_CACHE KW_LAZY? KW_TABLE tableName (KW_OPTIONS options=propertyList)? (KW_AS? query)?
     | KW_UNCACHE KW_TABLE (ifExists)? tableName
     | KW_CLEAR KW_CACHE
-    | KW_LOAD KW_DATA KW_LOCAL? KW_INPATH path=stringLit KW_OVERWRITE? KW_INTO KW_TABLE
-        tableName partitionSpec?
+    | KW_LOAD KW_DATA KW_LOCAL? KW_INPATH path=stringLit KW_OVERWRITE? KW_INTO KW_TABLE tableName partitionSpec?
     | KW_TRUNCATE KW_TABLE tableName partitionSpec?
-    | (KW_MSCK)? KW_REPAIR KW_TABLE tableName
-        (option=(KW_ADD|KW_DROP|KW_SYNC) KW_PARTITIONS)?
+    | (KW_MSCK)? KW_REPAIR KW_TABLE tableName (option=(KW_ADD | KW_DROP | KW_SYNC) KW_PARTITIONS)?
     | op=(KW_ADD | KW_LIST) identifier .*?
     | KW_SET KW_ROLE .*?
     | KW_SET KW_TIME KW_ZONE interval
     | KW_SET KW_TIME KW_ZONE timezone
     | KW_SET KW_TIME KW_ZONE .*?
     | KW_SET (KW_VARIABLE | KW_VAR) assignmentList
-    | KW_SET (KW_VARIABLE | KW_VAR) LEFT_PAREN multipartIdentifierList RIGHT_PAREN EQ
-          LEFT_PAREN query RIGHT_PAREN
+    | KW_SET (KW_VARIABLE | KW_VAR) LEFT_PAREN multipartIdentifierList RIGHT_PAREN EQ LEFT_PAREN query RIGHT_PAREN
     | KW_SET configKey EQ configValue
     | KW_SET configKey (EQ .*?)?
     | KW_SET .*? EQ configValue
     | KW_SET .*?
     | KW_RESET configKey
     | KW_RESET .*?
-    | KW_CREATE KW_INDEX (ifNotExists)? identifier KW_ON KW_TABLE?
-        tableName (KW_USING indexType=identifier)?
-        LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN
-        (KW_OPTIONS options=propertyList)?
+    | KW_CREATE KW_INDEX (ifNotExists)? identifier KW_ON KW_TABLE? tableName (
+        KW_USING indexType=identifier
+    )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)?
     | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName
     | unsupportedHiveNativeCommands .*?
     ;
@@ -253,15 +226,13 @@ replaceTableHeader
     ;
 
 bucketSpec
-    : KW_CLUSTERED KW_BY identifierList
-      (KW_SORTED KW_BY orderedIdentifierList)?
-      KW_INTO INTEGER_VALUE KW_BUCKETS
+    : KW_CLUSTERED KW_BY identifierList (KW_SORTED KW_BY orderedIdentifierList)? KW_INTO INTEGER_VALUE KW_BUCKETS
     ;
 
 skewSpec
-    : KW_SKEWED KW_BY identifierList
-      KW_ON (constantList | nestedConstantList)
-      (KW_STORED KW_AS KW_DIRECTORIES)?
+    : KW_SKEWED KW_BY identifierList KW_ON (constantList | nestedConstantList) (
+        KW_STORED KW_AS KW_DIRECTORIES
+    )?
     ;
 
 locationSpec
@@ -277,11 +248,19 @@ query
     ;
 
 insertInto
-    : KW_INSERT KW_OVERWRITE KW_TABLE? tableName (partitionSpec (ifNotExists)?)?  ((KW_BY KW_NAME) | (LEFT_PAREN columnNameSeq RIGHT_PAREN ))?
-    | KW_INSERT KW_INTO KW_TABLE? tableName partitionSpec? (ifNotExists)? ((KW_BY KW_NAME) | (LEFT_PAREN columnNameSeq RIGHT_PAREN ))?
+    : KW_INSERT KW_OVERWRITE KW_TABLE? tableName (partitionSpec (ifNotExists)?)? (
+        (KW_BY KW_NAME)
+        | (LEFT_PAREN columnNameSeq RIGHT_PAREN)
+    )?
+    | KW_INSERT KW_INTO KW_TABLE? tableName partitionSpec? (ifNotExists)? (
+        (KW_BY KW_NAME)
+        | (LEFT_PAREN columnNameSeq RIGHT_PAREN)
+    )?
     | KW_INSERT KW_INTO KW_TABLE? tableName KW_REPLACE whereClause
     | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY path=stringLit rowFormat? createFileFormat?
-    | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY (path=stringLit)? tableProvider (KW_OPTIONS options=propertyList)?
+    | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY (path=stringLit)? tableProvider (
+        KW_OPTIONS options=propertyList
+    )?
     ;
 
 partitionSpecLocation
@@ -334,15 +313,17 @@ tableProvider
     ;
 
 createTableClauses
-    :((KW_OPTIONS options=expressionPropertyList) |
-     (KW_PARTITIONED KW_BY partitioning=partitionFieldList) |
-     skewSpec |
-     bucketSpec |
-     rowFormat |
-     createFileFormat |
-     locationSpec |
-     commentSpec |
-     (KW_TBLPROPERTIES tableProps=propertyList))*
+    : (
+        (KW_OPTIONS options=expressionPropertyList)
+        | (KW_PARTITIONED KW_BY partitioning=partitionFieldList)
+        | skewSpec
+        | bucketSpec
+        | rowFormat
+        | createFileFormat
+        | locationSpec
+        | commentSpec
+        | (KW_TBLPROPERTIES tableProps=propertyList)
+    )*
     ;
 
 propertyList
@@ -404,32 +385,47 @@ dmlStatementNoWith
     | fromClause multiInsertQueryBody+
     | KW_DELETE KW_FROM tableName tableAlias whereClause?
     | KW_UPDATE tableName tableAlias setClause whereClause?
-    | KW_MERGE KW_INTO target=tableName targetAlias=tableAlias
-        KW_USING (source=identifierReference |
-          LEFT_PAREN sourceQuery=query RIGHT_PAREN) sourceAlias=tableAlias
-        KW_ON mergeCondition=booleanExpression
-        matchedClause*
-        notMatchedClause*
-        notMatchedBySourceClause*
+    | KW_MERGE KW_INTO target=tableName targetAlias=tableAlias KW_USING (
+        source=identifierReference
+        | LEFT_PAREN sourceQuery=query RIGHT_PAREN
+    ) sourceAlias=tableAlias KW_ON mergeCondition=booleanExpression matchedClause* notMatchedClause* notMatchedBySourceClause*
     ;
 
-dbSchemaName: identifierReference;
+dbSchemaName
+    : identifierReference
+    ;
 
-dbSchemaNameCreate: identifierReference;
+dbSchemaNameCreate
+    : identifierReference
+    ;
 
-tableNameCreate: tableIdentifier;
+tableNameCreate
+    : tableIdentifier
+    ;
 
-tableName: tableIdentifier;
+tableName
+    : tableIdentifier
+    ;
 
-viewNameCreate: viewIdentifier;
+viewNameCreate
+    : viewIdentifier
+    ;
 
-viewName: viewIdentifier;
+viewName
+    : viewIdentifier
+    ;
 
-columnName: multipartIdentifier;
- 
-columnNameSeq: columnName (COMMA columnName)* ;
+columnName
+    : multipartIdentifier
+    ;
 
-columnNameCreate: errorCapturingIdentifier;
+columnNameSeq
+    : columnName (COMMA columnName)*
+    ;
+
+columnNameCreate
+    : errorCapturingIdentifier
+    ;
 
 identifierReference
     : KW_IDENTIFIER LEFT_PAREN expression RIGHT_PAREN
@@ -437,13 +433,11 @@ identifierReference
     ;
 
 queryOrganization
-    : (KW_ORDER KW_BY order+=sortItem (COMMA order+=sortItem)*)?
-      (KW_CLUSTER KW_BY clusterBy+=expression (COMMA clusterBy+=expression)*)?
-      (KW_DISTRIBUTE KW_BY distributeBy+=expression (COMMA distributeBy+=expression)*)?
-      (KW_SORT KW_BY sort+=sortItem (COMMA sort+=sortItem)*)?
-      windowClause?
-      (KW_LIMIT (KW_ALL | limit=expression))?
-      (KW_OFFSET offset=expression)?
+    : (KW_ORDER KW_BY order+=sortItem (COMMA order+=sortItem)*)? (
+        KW_CLUSTER KW_BY clusterBy+=expression (COMMA clusterBy+=expression)*
+    )? (KW_DISTRIBUTE KW_BY distributeBy+=expression (COMMA distributeBy+=expression)*)? (
+        KW_SORT KW_BY sort+=sortItem (COMMA sort+=sortItem)*
+    )? windowClause? (KW_LIMIT (KW_ALL | limit=expression))? (KW_OFFSET offset=expression)?
     ;
 
 multiInsertQueryBody
@@ -452,12 +446,9 @@ multiInsertQueryBody
 
 queryTerm
     : queryPrimary
-    | left=queryTerm 
-        operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
-    | left=queryTerm 
-        operator=KW_INTERSECT setQuantifier? right=queryTerm
-    | left=queryTerm
-        operator=(KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
+    | left=queryTerm operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
+    | left=queryTerm operator=KW_INTERSECT setQuantifier? right=queryTerm
+    | left=queryTerm operator=(KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
     ;
 
 queryPrimary
@@ -469,7 +460,9 @@ queryPrimary
     ;
 
 sortItem
-    : (columnName | expression) ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
+    : (columnName | expression) ordering=(KW_ASC | KW_DESC)? (
+        KW_NULLS nullOrder=(KW_LAST | KW_FIRST)
+    )?
     ;
 
 fromStatement
@@ -477,45 +470,27 @@ fromStatement
     ;
 
 fromStatementBody
-    : transformClause
-      whereClause?
-      queryOrganization
-    | selectClause
-      lateralView*
-      whereClause?
-      aggregationClause?
-      havingClause?
-      windowClause?
-      queryOrganization
+    : transformClause whereClause? queryOrganization
+    | selectClause lateralView* whereClause? aggregationClause? havingClause? windowClause? queryOrganization
     ;
 
 querySpecification
-    : transformClause
-      fromClause?
-      lateralView*
-      whereClause?
-      aggregationClause?
-      havingClause?
-      windowClause?
-    | selectClause
-      fromClause?
-      lateralView*
-      whereClause?
-      aggregationClause?
-      havingClause?
-      windowClause?
+    : transformClause fromClause? lateralView* whereClause? aggregationClause? havingClause? windowClause?
+    | selectClause fromClause? lateralView* whereClause? aggregationClause? havingClause? windowClause?
     ;
 
 transformClause
-    : (KW_SELECT kind=KW_TRANSFORM LEFT_PAREN setQuantifier? expressionSeq RIGHT_PAREN
-            | kind=KW_MAP setQuantifier? expressionSeq
-            | kind=KW_REDUCE setQuantifier? expressionSeq)
-      inRowFormat=rowFormat?
-      (KW_RECORDWRITER recordWriter=stringLit)?
-      KW_USING script=stringLit
-      (KW_AS (identifierSeq | colTypeList | (LEFT_PAREN (identifierSeq | colTypeList) RIGHT_PAREN)))?
-      outRowFormat=rowFormat?
-      (KW_RECORDREADER recordReader=stringLit)?
+    : (
+        KW_SELECT kind=KW_TRANSFORM LEFT_PAREN setQuantifier? expressionSeq RIGHT_PAREN
+        | kind=KW_MAP setQuantifier? expressionSeq
+        | kind=KW_REDUCE setQuantifier? expressionSeq
+    ) inRowFormat=rowFormat? (KW_RECORDWRITER recordWriter=stringLit)? KW_USING script=stringLit (
+        KW_AS (
+            identifierSeq
+            | colTypeList
+            | (LEFT_PAREN (identifierSeq | colTypeList) RIGHT_PAREN)
+        )
+    )? outRowFormat=rowFormat? (KW_RECORDREADER recordReader=stringLit)?
     ;
 
 selectClause
@@ -529,6 +504,7 @@ setClause
 matchedClause
     : KW_WHEN KW_MATCHED (KW_AND matchedCond=booleanExpression)? KW_THEN matchedAction
     ;
+
 notMatchedClause
     : KW_WHEN KW_NOT KW_MATCHED (KW_BY KW_TARGET)? (KW_AND notMatchedCond=booleanExpression)? KW_THEN notMatchedAction
     ;
@@ -545,8 +521,9 @@ matchedAction
 
 notMatchedAction
     : KW_INSERT ASTERISK
-    | KW_INSERT LEFT_PAREN multipartIdentifierList RIGHT_PAREN
-        KW_VALUES LEFT_PAREN expression (COMMA expression)* RIGHT_PAREN
+    | KW_INSERT LEFT_PAREN multipartIdentifierList RIGHT_PAREN KW_VALUES LEFT_PAREN expression (
+        COMMA expression
+    )* RIGHT_PAREN
     ;
 
 notMatchedBySourceAction
@@ -576,7 +553,9 @@ hint
 
 hintStatement
     : hintName=identifier
-    | hintName=identifier LEFT_PAREN parameters+=primaryExpression (COMMA parameters+=primaryExpression)* RIGHT_PAREN
+    | hintName=identifier LEFT_PAREN parameters+=primaryExpression (
+        COMMA parameters+=primaryExpression
+    )* RIGHT_PAREN
     ;
 
 fromClause
@@ -584,7 +563,9 @@ fromClause
     ;
 
 functionKind
-    : KW_USER | KW_SYSTEM | KW_ALL
+    : KW_USER
+    | KW_SYSTEM
+    | KW_ALL
     ;
 
 temporalClause
@@ -593,12 +574,14 @@ temporalClause
     ;
 
 aggregationClause
-    : KW_GROUP KW_BY groupingExpressionsWithGroupingAnalytics+=groupByClause
-        (COMMA groupingExpressionsWithGroupingAnalytics+=groupByClause)*
+    : KW_GROUP KW_BY groupingExpressionsWithGroupingAnalytics+=groupByClause (
+        COMMA groupingExpressionsWithGroupingAnalytics+=groupByClause
+    )*
     | KW_GROUP KW_BY groupingExpressions+=expression (COMMA groupingExpressions+=expression)* (
-      KW_WITH kind=KW_ROLLUP
-    | KW_WITH kind=KW_CUBE
-    | kind=KW_GROUPING KW_SETS LEFT_PAREN groupingSet (COMMA groupingSet)* RIGHT_PAREN)?
+        KW_WITH kind=KW_ROLLUP
+        | KW_WITH kind=KW_CUBE
+        | kind=KW_GROUPING KW_SETS LEFT_PAREN groupingSet (COMMA groupingSet)* RIGHT_PAREN
+    )?
     ;
 
 groupByClause
@@ -624,7 +607,9 @@ groupingSet
     ;
 
 pivotClause
-    : KW_PIVOT LEFT_PAREN aggregates=namedExpressionSeq KW_FOR pivotColumn KW_IN LEFT_PAREN pivotValues+=pivotValue (COMMA pivotValues+=pivotValue)* RIGHT_PAREN RIGHT_PAREN
+    : KW_PIVOT LEFT_PAREN aggregates=namedExpressionSeq KW_FOR pivotColumn KW_IN LEFT_PAREN pivotValues+=pivotValue (
+        COMMA pivotValues+=pivotValue
+    )* RIGHT_PAREN RIGHT_PAREN
     ;
 
 pivotColumn
@@ -637,9 +622,9 @@ pivotValue
     ;
 
 unpivotClause
-    : KW_UNPIVOT nullOperator=unpivotNullClause? LEFT_PAREN
-        operator=unpivotOperator
-      RIGHT_PAREN (KW_AS? identifier)?
+    : KW_UNPIVOT nullOperator=unpivotNullClause? LEFT_PAREN operator=unpivotOperator RIGHT_PAREN (
+        KW_AS? identifier
+    )?
     ;
 
 unpivotNullClause
@@ -651,13 +636,17 @@ unpivotOperator
     ;
 
 unpivotSingleValueColumnClause
-    : unpivotValueColumn KW_FOR unpivotNameColumn KW_IN LEFT_PAREN unpivotColumns+=unpivotColumnAndAlias (COMMA unpivotColumns+=unpivotColumnAndAlias)* RIGHT_PAREN
+    : unpivotValueColumn KW_FOR unpivotNameColumn KW_IN LEFT_PAREN unpivotColumns+=unpivotColumnAndAlias (
+        COMMA unpivotColumns+=unpivotColumnAndAlias
+    )* RIGHT_PAREN
     ;
 
 unpivotMultiValueColumnClause
-    : LEFT_PAREN unpivotValueColumns+=unpivotValueColumn (COMMA unpivotValueColumns+=unpivotValueColumn)* RIGHT_PAREN
-      KW_FOR unpivotNameColumn
-      KW_IN LEFT_PAREN unpivotColumnSets+=unpivotColumnSet (COMMA unpivotColumnSets+=unpivotColumnSet)* RIGHT_PAREN
+    : LEFT_PAREN unpivotValueColumns+=unpivotValueColumn (
+        COMMA unpivotValueColumns+=unpivotValueColumn
+    )* RIGHT_PAREN KW_FOR unpivotNameColumn KW_IN LEFT_PAREN unpivotColumnSets+=unpivotColumnSet (
+        COMMA unpivotColumnSets+=unpivotColumnSet
+    )* RIGHT_PAREN
     ;
 
 unpivotColumnSet
@@ -685,13 +674,17 @@ unpivotAlias
     ;
 
 ifNotExists
-    : KW_IF KW_NOT KW_EXISTS;
+    : KW_IF KW_NOT KW_EXISTS
+    ;
 
 ifExists
-    : KW_IF KW_EXISTS;
+    : KW_IF KW_EXISTS
+    ;
 
 lateralView
-    : KW_LATERAL KW_VIEW (KW_OUTER)? viewName LEFT_PAREN (expression (COMMA expression)*)? RIGHT_PAREN tableAlias (KW_AS? colName+=identifier (COMMA colName+=identifier)*)?
+    : KW_LATERAL KW_VIEW (KW_OUTER)? viewName LEFT_PAREN (expression (COMMA expression)*)? RIGHT_PAREN tableAlias (
+        KW_AS? colName+=identifier (COMMA colName+=identifier)*
+    )?
     ;
 
 setQuantifier
@@ -731,14 +724,17 @@ joinCriteria
     ;
 
 sample
-    : KW_TABLESAMPLE LEFT_PAREN sampleMethod? RIGHT_PAREN (KW_REPEATABLE LEFT_PAREN seed=INTEGER_VALUE RIGHT_PAREN)?
+    : KW_TABLESAMPLE LEFT_PAREN sampleMethod? RIGHT_PAREN (
+        KW_REPEATABLE LEFT_PAREN seed=INTEGER_VALUE RIGHT_PAREN
+    )?
     ;
 
 sampleMethod
     : negativeSign=MINUS? percentage=(INTEGER_VALUE | DECIMAL_VALUE) KW_PERCENTLIT
     | expression KW_ROWS
-    | sampleType=KW_BUCKET numerator=INTEGER_VALUE KW_OUT KW_OF denominator=INTEGER_VALUE
-        (KW_ON (identifier | qualifiedName LEFT_PAREN RIGHT_PAREN))?
+    | sampleType=KW_BUCKET numerator=INTEGER_VALUE KW_OUT KW_OF denominator=INTEGER_VALUE (
+        KW_ON (identifier | qualifiedName LEFT_PAREN RIGHT_PAREN)
+    )?
     | bytes=expression
     ;
 
@@ -767,8 +763,7 @@ identifierComment
     ;
 
 relationPrimary
-    : identifierReference temporalClause?
-      sample? tableAlias
+    : identifierReference temporalClause? sample? tableAlias
     | LEFT_PAREN query RIGHT_PAREN sample? tableAlias
     | LEFT_PAREN relation RIGHT_PAREN sample? tableAlias
     | inlineTable
@@ -786,13 +781,19 @@ functionTableSubqueryArgument
     ;
 
 tableArgumentPartitioning
-    : ((KW_WITH KW_SINGLE KW_PARTITION)
-        | ((KW_PARTITION | KW_DISTRIBUTE) KW_BY
-            (((LEFT_PAREN partition+=expression (COMMA partition+=expression)* RIGHT_PAREN))
-            | partition+=expression)))
-      ((KW_ORDER | KW_SORT) KW_BY
-        (((LEFT_PAREN sortItem (COMMA sortItem)* RIGHT_PAREN)
-        | sortItem)))?
+    : (
+        (KW_WITH KW_SINGLE KW_PARTITION)
+        | (
+            (KW_PARTITION | KW_DISTRIBUTE) KW_BY (
+                ((LEFT_PAREN partition+=expression (COMMA partition+=expression)* RIGHT_PAREN))
+                | partition+=expression
+            )
+        )
+    ) (
+        (KW_ORDER | KW_SORT) KW_BY (
+            ((LEFT_PAREN sortItem (COMMA sortItem)* RIGHT_PAREN) | sortItem)
+        )
+    )?
     ;
 
 functionTableNamedArgumentExpression
@@ -810,9 +811,7 @@ functionTableArgument
     ;
 
 functionTable
-    : functionName LEFT_PAREN
-      (functionTableArgument (COMMA functionTableArgument)*)?
-      RIGHT_PAREN tableAlias
+    : functionName LEFT_PAREN (functionTableArgument (COMMA functionTableArgument)*)? RIGHT_PAREN tableAlias
     ;
 
 tableAlias
@@ -821,12 +820,15 @@ tableAlias
 
 rowFormat
     : KW_ROW KW_FORMAT KW_SERDE name=stringLit (KW_WITH KW_SERDEPROPERTIES props=propertyList)?
-    | KW_ROW KW_FORMAT KW_DELIMITED
-      (KW_FIELDS KW_TERMINATED KW_BY fieldsTerminatedBy=stringLit (KW_ESCAPED KW_BY escapedBy=stringLit)?)?
-      (KW_COLLECTION KW_ITEMS KW_TERMINATED KW_BY collectionItemsTerminatedBy=stringLit)?
-      (KW_MAP KW_KEYS KW_TERMINATED KW_BY keysTerminatedBy=stringLit)?
-      (KW_LINES KW_TERMINATED KW_BY linesSeparatedBy=stringLit)?
-      (KW_NULL KW_DEFINED KW_AS nullDefinedAs=stringLit)?
+    | KW_ROW KW_FORMAT KW_DELIMITED (
+        KW_FIELDS KW_TERMINATED KW_BY fieldsTerminatedBy=stringLit (
+            KW_ESCAPED KW_BY escapedBy=stringLit
+        )?
+    )? (KW_COLLECTION KW_ITEMS KW_TERMINATED KW_BY collectionItemsTerminatedBy=stringLit)? (
+        KW_MAP KW_KEYS KW_TERMINATED KW_BY keysTerminatedBy=stringLit
+    )? (KW_LINES KW_TERMINATED KW_BY linesSeparatedBy=stringLit)? (
+        KW_NULL KW_DEFINED KW_AS nullDefinedAs=stringLit
+    )?
     ;
 
 multipartIdentifierList
@@ -872,8 +874,7 @@ partitionField
 
 transform
     : qualifiedName
-    | transformName=identifier
-      LEFT_PAREN transformArgument (COMMA transformArgument)* RIGHT_PAREN
+    | transformName=identifier LEFT_PAREN transformArgument (COMMA transformArgument)* RIGHT_PAREN
     ;
 
 transformArgument
@@ -911,7 +912,10 @@ predicate
     | KW_NOT? kind=KW_IN LEFT_PAREN expression (COMMA expression)* RIGHT_PAREN
     | KW_NOT? kind=KW_IN LEFT_PAREN query RIGHT_PAREN
     | KW_NOT? kind=(KW_RLIKE | KW_REGEXP) pattern=valueExpression
-    | KW_NOT? kind=(KW_LIKE | KW_ILIKE) quantifier=(KW_ANY | KW_SOME | KW_ALL) (LEFT_PAREN RIGHT_PAREN | LEFT_PAREN expression (COMMA expression)* RIGHT_PAREN)
+    | KW_NOT? kind=(KW_LIKE | KW_ILIKE) quantifier=(KW_ANY | KW_SOME | KW_ALL) (
+        LEFT_PAREN RIGHT_PAREN
+        | LEFT_PAREN expression (COMMA expression)* RIGHT_PAREN
+    )
     | KW_NOT? kind=(KW_LIKE | KW_ILIKE) pattern=valueExpression (KW_ESCAPE escapeChar=stringLit)?
     | KW_IS KW_NOT? kind=KW_NULL
     | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN)
@@ -930,15 +934,29 @@ valueExpression
     ;
 
 datetimeUnit
-    : KW_YEAR | KW_QUARTER | KW_MONTH
-    | KW_WEEK | KW_DAY | KW_DAYOFYEAR
-    | KW_HOUR | KW_MINUTE | KW_SECOND | KW_MILLISECOND | KW_MICROSECOND
+    : KW_YEAR
+    | KW_QUARTER
+    | KW_MONTH
+    | KW_WEEK
+    | KW_DAY
+    | KW_DAYOFYEAR
+    | KW_HOUR
+    | KW_MINUTE
+    | KW_SECOND
+    | KW_MILLISECOND
+    | KW_MICROSECOND
     ;
 
 primaryExpression
     : name=(KW_CURRENT_DATE | KW_CURRENT_TIMESTAMP | KW_CURRENT_USER | KW_USER | KW_SESSION_USER)
-    | name=(KW_TIMESTAMPADD | KW_DATEADD | KW_DATE_ADD) LEFT_PAREN (unit=datetimeUnit | invalidUnit=stringLit) COMMA unitsAmount=valueExpression COMMA timestamp=valueExpression RIGHT_PAREN
-    | name=(KW_TIMESTAMPDIFF | KW_DATEDIFF | KW_DATE_DIFF | KW_TIMEDIFF) LEFT_PAREN (unit=datetimeUnit | invalidUnit=stringLit) COMMA startTimestamp=valueExpression COMMA endTimestamp=valueExpression RIGHT_PAREN
+    | name=(KW_TIMESTAMPADD | KW_DATEADD | KW_DATE_ADD) LEFT_PAREN (
+        unit=datetimeUnit
+        | invalidUnit=stringLit
+    ) COMMA unitsAmount=valueExpression COMMA timestamp=valueExpression RIGHT_PAREN
+    | name=(KW_TIMESTAMPDIFF | KW_DATEDIFF | KW_DATE_DIFF | KW_TIMEDIFF) LEFT_PAREN (
+        unit=datetimeUnit
+        | invalidUnit=stringLit
+    ) COMMA startTimestamp=valueExpression COMMA endTimestamp=valueExpression RIGHT_PAREN
     | KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END
     | KW_CASE expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END
     | name=(KW_CAST | KW_TRY_CAST) LEFT_PAREN expression KW_AS dataType RIGHT_PAREN
@@ -953,10 +971,9 @@ primaryExpression
     | LEFT_PAREN namedExpression (COMMA namedExpression)+ RIGHT_PAREN
     | LEFT_PAREN query RIGHT_PAREN
     | KW_IDENTIFIER LEFT_PAREN expression RIGHT_PAREN
-    | functionName LEFT_PAREN (setQuantifier? functionArgument
-       (COMMA functionArgument)*)? RIGHT_PAREN
-       (KW_FILTER LEFT_PAREN KW_WHERE where=booleanExpression RIGHT_PAREN)?
-       (nullsOption=(KW_IGNORE | KW_RESPECT) KW_NULLS)? ( KW_OVER windowSpec)?
+    | functionName LEFT_PAREN (setQuantifier? functionArgument (COMMA functionArgument)*)? RIGHT_PAREN (
+        KW_FILTER LEFT_PAREN KW_WHERE where=booleanExpression RIGHT_PAREN
+    )? (nullsOption=(KW_IGNORE | KW_RESPECT) KW_NULLS)? (KW_OVER windowSpec)?
     | identifier ARROW expression
     | LEFT_PAREN identifier (COMMA identifier)+ RIGHT_PAREN ARROW expression
     | value=primaryExpression LEFT_BRACKET index=valueExpression RIGHT_BRACKET
@@ -964,20 +981,26 @@ primaryExpression
     | base=primaryExpression DOT fieldName=identifier
     | LEFT_PAREN expression RIGHT_PAREN
     | KW_EXTRACT LEFT_PAREN field=identifier KW_FROM source=valueExpression RIGHT_PAREN
-    | (KW_SUBSTR | KW_SUBSTRING) LEFT_PAREN str=valueExpression (KW_FROM | COMMA) pos=valueExpression
-      ((KW_FOR | COMMA) len=valueExpression)? RIGHT_PAREN
-    | KW_TRIM LEFT_PAREN trimOption=(KW_BOTH | KW_LEADING | KW_TRAILING)? (trimStr=valueExpression)?
-       KW_FROM srcStr=valueExpression RIGHT_PAREN
-    | KW_OVERLAY LEFT_PAREN input=valueExpression KW_PLACING replace=valueExpression
-      KW_FROM position=valueExpression (KW_FOR length=valueExpression)? RIGHT_PAREN
-    | name=(KW_PERCENTILE_CONT | KW_PERCENTILE_DISC) LEFT_PAREN percentage=valueExpression RIGHT_PAREN
-        KW_WITHIN KW_GROUP LEFT_PAREN KW_ORDER KW_BY sortItem RIGHT_PAREN
-        (KW_FILTER LEFT_PAREN KW_WHERE where=booleanExpression RIGHT_PAREN)? ( KW_OVER windowSpec)?
+    | (KW_SUBSTR | KW_SUBSTRING) LEFT_PAREN str=valueExpression (KW_FROM | COMMA) pos=valueExpression (
+        (KW_FOR | COMMA) len=valueExpression
+    )? RIGHT_PAREN
+    | KW_TRIM LEFT_PAREN trimOption=(KW_BOTH | KW_LEADING | KW_TRAILING)? (
+        trimStr=valueExpression
+    )? KW_FROM srcStr=valueExpression RIGHT_PAREN
+    | KW_OVERLAY LEFT_PAREN input=valueExpression KW_PLACING replace=valueExpression KW_FROM position=valueExpression (
+        KW_FOR length=valueExpression
+    )? RIGHT_PAREN
+    | name=(KW_PERCENTILE_CONT | KW_PERCENTILE_DISC) LEFT_PAREN percentage=valueExpression RIGHT_PAREN KW_WITHIN KW_GROUP LEFT_PAREN KW_ORDER KW_BY
+        sortItem RIGHT_PAREN (KW_FILTER LEFT_PAREN KW_WHERE where=booleanExpression RIGHT_PAREN)? (
+        KW_OVER windowSpec
+    )?
     ;
 
 literalType
     : KW_DATE
-    | KW_TIMESTAMP | KW_TIMESTAMP_LTZ | KW_TIMESTAMP_NTZ
+    | KW_TIMESTAMP
+    | KW_TIMESTAMP_LTZ
+    | KW_TIMESTAMP_NTZ
     | KW_INTERVAL
     | KW_BINARY_HEX
     | unsupportedType=identifier
@@ -995,19 +1018,40 @@ constant
     ;
 
 comparisonOperator
-    : EQ | NEQ | NEQJ | LT | LTE | GT | GTE | NSEQ
+    : EQ
+    | NEQ
+    | NEQJ
+    | LT
+    | LTE
+    | GT
+    | GTE
+    | NSEQ
     ;
 
 arithmeticOperator
-    : PLUS | MINUS | ASTERISK | SLASH | PERCENT | KW_DIV | TILDE | AMPERSAND | PIPE | CONCAT_PIPE | HAT
+    : PLUS
+    | MINUS
+    | ASTERISK
+    | SLASH
+    | PERCENT
+    | KW_DIV
+    | TILDE
+    | AMPERSAND
+    | PIPE
+    | CONCAT_PIPE
+    | HAT
     ;
 
 predicateOperator
-    : KW_OR | KW_AND | KW_IN | KW_NOT
+    : KW_OR
+    | KW_AND
+    | KW_IN
+    | KW_NOT
     ;
 
 booleanValue
-    : KW_TRUE | KW_FALSE
+    : KW_TRUE
+    | KW_FALSE
     ;
 
 interval
@@ -1031,42 +1075,76 @@ unitToUnitInterval
     ;
 
 intervalValue
-    : (PLUS | MINUS)?
-      (INTEGER_VALUE | DECIMAL_VALUE | stringLit)
+    : (PLUS | MINUS)? (INTEGER_VALUE | DECIMAL_VALUE | stringLit)
     ;
 
 unitInMultiUnits
-    : KW_NANOSECOND | KW_NANOSECONDS | KW_MICROSECOND | KW_MICROSECONDS | KW_MILLISECOND | KW_MILLISECONDS
-    | KW_SECOND | KW_SECONDS | KW_MINUTE | KW_MINUTES | KW_HOUR | KW_HOURS | KW_DAY | KW_DAYS | KW_WEEK | KW_WEEKS
-    | KW_MONTH | KW_MONTHS | KW_YEAR | KW_YEARS
+    : KW_NANOSECOND
+    | KW_NANOSECONDS
+    | KW_MICROSECOND
+    | KW_MICROSECONDS
+    | KW_MILLISECOND
+    | KW_MILLISECONDS
+    | KW_SECOND
+    | KW_SECONDS
+    | KW_MINUTE
+    | KW_MINUTES
+    | KW_HOUR
+    | KW_HOURS
+    | KW_DAY
+    | KW_DAYS
+    | KW_WEEK
+    | KW_WEEKS
+    | KW_MONTH
+    | KW_MONTHS
+    | KW_YEAR
+    | KW_YEARS
     ;
 
 unitInUnitToUnit
-    : KW_SECOND | KW_MINUTE | KW_HOUR | KW_DAY | KW_MONTH | KW_YEAR
+    : KW_SECOND
+    | KW_MINUTE
+    | KW_HOUR
+    | KW_DAY
+    | KW_MONTH
+    | KW_YEAR
     ;
 
 colPosition
-    : position=KW_FIRST | position=KW_AFTER afterCol=errorCapturingIdentifier
+    : position=KW_FIRST
+    | position=KW_AFTER afterCol=errorCapturingIdentifier
     ;
 
 type
     : KW_BOOLEAN
-    | KW_TINYINT | KW_BYTE
-    | KW_SMALLINT | KW_SHORT
-    | KW_INT | KW_INTEGER
-    | KW_BIGINT | KW_LONG
-    | KW_FLOAT | KW_REAL
+    | KW_TINYINT
+    | KW_BYTE
+    | KW_SMALLINT
+    | KW_SHORT
+    | KW_INT
+    | KW_INTEGER
+    | KW_BIGINT
+    | KW_LONG
+    | KW_FLOAT
+    | KW_REAL
     | KW_DOUBLE
     | KW_DATE
-    | KW_TIMESTAMP | KW_TIMESTAMP_NTZ | KW_TIMESTAMP_LTZ
+    | KW_TIMESTAMP
+    | KW_TIMESTAMP_NTZ
+    | KW_TIMESTAMP_LTZ
     | KW_STRING
-    | KW_CHARACTER | KW_CHAR
+    | KW_CHARACTER
+    | KW_CHAR
     | KW_VARCHAR
     | KW_BINARY
-    | KW_DECIMAL | KW_DEC | KW_NUMERIC
+    | KW_DECIMAL
+    | KW_DEC
+    | KW_NUMERIC
     | KW_VOID
     | KW_INTERVAL
-    | KW_ARRAY | KW_STRUCT | KW_MAP
+    | KW_ARRAY
+    | KW_STRUCT
+    | KW_MAP
     | unsupportedType=identifier
     ;
 
@@ -1075,10 +1153,10 @@ dataType
     | complex=KW_MAP LT dataType COMMA dataType GT
     | complex=KW_STRUCT (LT complexColTypeList? GT | NEQ)
     | KW_INTERVAL (KW_YEAR | KW_MONTH) (KW_TO KW_MONTH)?
-    | KW_INTERVAL (KW_DAY | KW_HOUR | KW_MINUTE | KW_SECOND)
-      (KW_TO (KW_HOUR | KW_MINUTE | KW_SECOND))?
-    | type (LEFT_PAREN INTEGER_VALUE
-      (COMMA INTEGER_VALUE)* RIGHT_PAREN)?
+    | KW_INTERVAL (KW_DAY | KW_HOUR | KW_MINUTE | KW_SECOND) (
+        KW_TO (KW_HOUR | KW_MINUTE | KW_SECOND)
+    )?
+    | type (LEFT_PAREN INTEGER_VALUE (COMMA INTEGER_VALUE)* RIGHT_PAREN)?
     ;
 
 qualifiedColTypeWithPositionSeqForAdd
@@ -1096,7 +1174,6 @@ qualifiedColTypeWithPositionSeqForReplace
 qualifiedColTypeWithPositionForReplace
     : name=columnName dataType colDefinitionDescriptorWithPosition*
     ;
-
 
 colDefinitionDescriptorWithPosition
     : KW_NOT KW_NULL
@@ -1163,12 +1240,14 @@ namedWindow
 windowSpec
     : name=errorCapturingIdentifier
     | LEFT_PAREN name=errorCapturingIdentifier RIGHT_PAREN
-    | LEFT_PAREN
-      ( KW_CLUSTER KW_BY partition+=expression (COMMA partition+=expression)*
-      | ((KW_PARTITION | KW_DISTRIBUTE) KW_BY partition+=expression (COMMA partition+=expression)*)?
-        ((KW_ORDER | KW_SORT) KW_BY sortItem (COMMA sortItem)*)?)
-      windowFrame?
-      RIGHT_PAREN
+    | LEFT_PAREN (
+        KW_CLUSTER KW_BY partition+=expression (COMMA partition+=expression)*
+        | (
+            (KW_PARTITION | KW_DISTRIBUTE) KW_BY partition+=expression (
+                COMMA partition+=expression
+            )*
+        )? ((KW_ORDER | KW_SORT) KW_BY sortItem (COMMA sortItem)*)?
+    ) windowFrame? RIGHT_PAREN
     ;
 
 /**
@@ -1290,7 +1369,7 @@ version
 // You can find the full keywords list by searching "Start of the keywords list" in this file.
 // The non-reserved keywords are listed below. Keywords not in this list are reserved keywords.
 ansiNonReserved
-//--ANSI-NON-RESERVED-START
+    //--ANSI-NON-RESERVED-START
     : KW_ADD
     | KW_AFTER
     | KW_ALTER
@@ -1553,7 +1632,7 @@ ansiNonReserved
     | KW_YEAR
     | KW_YEARS
     | KW_ZONE
-//--ANSI-NON-RESERVED-END
+    //--ANSI-NON-RESERVED-END
     ;
 
 // When `SQL_standard_keyword_behavior=false`, there are 2 kinds of keywords in Spark SQL.
@@ -1585,7 +1664,7 @@ strictNonReserved
     ;
 
 nonReserved
-//--DEFAULT-NON-RESERVED-START
+    //--DEFAULT-NON-RESERVED-START
     : KW_ADD
     | KW_AFTER
     | KW_ALL
@@ -1907,5 +1986,5 @@ nonReserved
     | KW_YEAR
     | KW_YEARS
     | KW_ZONE
-//--DEFAULT-NON-RESERVED-END
+    //--DEFAULT-NON-RESERVED-END
     ;

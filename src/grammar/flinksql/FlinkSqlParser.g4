@@ -1,8 +1,16 @@
+// $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
+// $antlr-format allowShortRulesOnASingleLine false, allowShortBlocksOnASingleLine true, alignSemicolons hanging, alignColons hanging
+// $antlr-format spaceBeforeAssignmentOperators false, keepEmptyLinesAtTheStartOfBlocks true
+
 parser grammar FlinkSqlParser;
 
-options { tokenVocab=FlinkSqlLexer; }
+options {
+    tokenVocab=FlinkSqlLexer;
+}
 
-program: singleStatement* EOF;
+program
+    : singleStatement* EOF
+    ;
 
 singleStatement
     : sqlStatement SEMICOLON?
@@ -10,10 +18,18 @@ singleStatement
     ;
 
 sqlStatement
-    : ddlStatement | dmlStatement | describeStatement  
-    | explainStatement | useStatement | showStatememt 
-    | loadStatement | unloadStatememt | setStatememt 
-    | resetStatememt | jarStatememt | dtAddStatement 
+    : ddlStatement
+    | dmlStatement
+    | describeStatement
+    | explainStatement
+    | useStatement
+    | showStatememt
+    | loadStatement
+    | unloadStatememt
+    | setStatememt
+    | resetStatememt
+    | jarStatememt
+    | dtAddStatement
     ;
 
 emptyStatement
@@ -21,13 +37,25 @@ emptyStatement
     ;
 
 ddlStatement
-    : createTable | createDatabase | createView | createFunction | createCatalog
-    | alterTable | alertView | alterDatabase | alterFunction
-    | dropCatalog | dropTable | dropDatabase | dropView | dropFunction
+    : createTable
+    | createDatabase
+    | createView
+    | createFunction
+    | createCatalog
+    | alterTable
+    | alertView
+    | alterDatabase
+    | alterFunction
+    | dropCatalog
+    | dropTable
+    | dropDatabase
+    | dropView
+    | dropFunction
     ;
 
 dmlStatement
-    : queryStatement | insertStatement
+    : queryStatement
+    | insertStatement
     ;
 
 // some statemen
@@ -36,7 +64,11 @@ describeStatement
     ;
 
 explainStatement
-    : KW_EXPLAIN (explainDetails | KW_PLAN KW_FOR)? (dmlStatement | insertSimpleStatement | insertMulStatement)
+    : KW_EXPLAIN (explainDetails | KW_PLAN KW_FOR)? (
+        dmlStatement
+        | insertSimpleStatement
+        | insertMulStatement
+    )
     ;
 
 explainDetails
@@ -44,11 +76,13 @@ explainDetails
     ;
 
 explainDetail
-    : KW_CHANGELOG_MODE | KW_JSON_EXECUTION_PLAN | KW_ESTIMATED_COST
+    : KW_CHANGELOG_MODE
+    | KW_JSON_EXECUTION_PLAN
+    | KW_ESTIMATED_COST
     ;
 
 useStatement
-    : KW_USE KW_CATALOG catalogPath 
+    : KW_USE KW_CATALOG catalogPath
     | KW_USE databasePath
     | useModuleStatement
     ;
@@ -60,8 +94,8 @@ useModuleStatement
 showStatememt
     : KW_SHOW (KW_CATALOGS | KW_DATABASES | KW_VIEWS | KW_JARS)
     | KW_SHOW KW_CURRENT (KW_CATALOG | KW_DATABASE)
-    | KW_SHOW KW_TABLES (( KW_FROM | KW_IN ) databasePath)? likePredicate?
-    | KW_SHOW KW_COLUMNS ( KW_FROM | KW_IN ) (viewPath| tablePath) likePredicate?
+    | KW_SHOW KW_TABLES (( KW_FROM | KW_IN) databasePath)? likePredicate?
+    | KW_SHOW KW_COLUMNS ( KW_FROM | KW_IN) (viewPath | tablePath) likePredicate?
     | KW_SHOW KW_CREATE (KW_TABLE tablePath | KW_VIEW viewPath)
     | KW_SHOW KW_USER? KW_FUNCTIONS
     | KW_SHOW KW_FULL? KW_MODULES
@@ -70,7 +104,7 @@ showStatememt
 loadStatement
     : KW_LOAD KW_MODULE uid (KW_WITH tablePropertyList)?
     ;
-    
+
 unloadStatememt
     : KW_UNLOAD KW_MODULE uid
     ;
@@ -82,7 +116,7 @@ setStatememt
 resetStatememt
     : KW_RESET tablePropertyKey?
     ;
-    
+
 jarStatememt
     : (KW_ADD | KW_REMOVE) KW_JAR jarFileName
     ;
@@ -91,7 +125,13 @@ jarStatememt
 dtAddStatement
     : KW_ADD KW_JAR KW_WITH dtFilePath (KW_AS uid)?
     | KW_ADD KW_FILE KW_WITH dtFilePath (KW_AS uid)? (KW_RENAME uid)?
-    | KW_ADD (KW_PYTHON_FILES | KW_PYTHON_REQUIREMENTS | KW_PYTHON_DEPENDENCIES | KW_PYTHON_JAR | KW_PYTHON_ARCHIVES) KW_WITH dtFilePath KW_RENAME uid
+    | KW_ADD (
+        KW_PYTHON_FILES
+        | KW_PYTHON_REQUIREMENTS
+        | KW_PYTHON_DEPENDENCIES
+        | KW_PYTHON_JAR
+        | KW_PYTHON_ARCHIVES
+    ) KW_WITH dtFilePath KW_RENAME uid
     | KW_ADD KW_PYTHON_PARAMETER dtFilePath
     | KW_ADD KW_ENGINE KW_FILE KW_WITH dtFilePath KW_RENAME uid KW_KEY uid
     | KW_ADD KW_CONFIG KW_FILE KW_WITH dtFilePath KW_FOR uid KW_AS uid
@@ -106,19 +146,12 @@ dtFilePath
 createTable
     : (simpleCreateTable | createTableAsSelect)
     ;
-    
+
 simpleCreateTable
-    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tablePathCreate
-    LR_BRACKET 
-        columnOptionDefinition (COMMA columnOptionDefinition)*
-        (COMMA watermarkDefinition)?
-        (COMMA tableConstraint)?
-        (COMMA selfDefinitionClause)?
-    RR_BRACKET
-    commentSpec?
-    partitionDefinition?
-    withOption
-    likeDefinition?
+    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tablePathCreate LR_BRACKET columnOptionDefinition (
+        COMMA columnOptionDefinition
+    )* (COMMA watermarkDefinition)? (COMMA tableConstraint)? (COMMA selfDefinitionClause)? RR_BRACKET commentSpec? partitionDefinition? withOption
+        likeDefinition?
     ;
 
 /*
@@ -141,10 +174,12 @@ physicalColumnDefinition
 
 columnNameCreate
     : uid
-    | expression;
+    | expression
+    ;
 
 columnName
-    : uid | expression
+    : uid
+    | expression
     ;
 
 columnNameList
@@ -153,9 +188,21 @@ columnNameList
 
 columnType
     : typeName=(KW_DATE | KW_BOOLEAN | KW_NULL)
-    | typeName=(KW_CHAR | KW_VARCHAR | KW_STRING | KW_BINARY | KW_VARBINARY | KW_BYTES
-        | KW_TINYINT | KW_SMALLINT |KW_INT | KW_INTEGER | KW_BIGINT
-        | KW_TIME | KW_TIMESTAMP_LTZ | KW_DATETIME
+    | typeName=(
+        KW_CHAR
+        | KW_VARCHAR
+        | KW_STRING
+        | KW_BINARY
+        | KW_VARBINARY
+        | KW_BYTES
+        | KW_TINYINT
+        | KW_SMALLINT
+        | KW_INT
+        | KW_INTEGER
+        | KW_BIGINT
+        | KW_TIME
+        | KW_TIMESTAMP_LTZ
+        | KW_DATETIME
     ) lengthOneDimension?
     | typeName=KW_TIMESTAMP lengthOneDimension? ((KW_WITHOUT | KW_WITH) KW_LOCAL? KW_TIME KW_ZONE)?
     | typeName=(KW_DECIMAL | KW_DEC | KW_NUMERIC | KW_FLOAT | KW_DOUBLE) lengthTwoOptionalDimension?
@@ -190,7 +237,8 @@ rowTypeDimension
     ;
 
 columnConstraint
-    :(KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY (KW_NOT KW_ENFORCED)? | KW_NOT? KW_NULL
+    : (KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY (KW_NOT KW_ENFORCED)?
+    | KW_NOT? KW_NULL
     ;
 
 commentSpec
@@ -239,9 +287,9 @@ transformList
     ;
 
 transform
-    : columnName                                              #identityTransform
-    | qualifiedName                                           #columnTransform                   
-    | LR_BRACKET transformArgument (COMMA transformArgument)* RR_BRACKET  #applyTransform
+    : columnName                                                         # identityTransform
+    | qualifiedName                                                      # columnTransform
+    | LR_BRACKET transformArgument (COMMA transformArgument)* RR_BRACKET # applyTransform
     ;
 
 transformArgument
@@ -271,11 +319,13 @@ createView
     ;
 
 createFunction
-    : KW_CREATE (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifNotExists? functionNameCreate KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))? usingClause?
+    : KW_CREATE (KW_TEMPORARY | KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifNotExists? functionNameCreate KW_AS identifier (
+        KW_LANGUAGE (KW_JAVA | KW_SCALA | KW_PYTHON)
+    )? usingClause?
     ;
 
 usingClause
-    : KW_USING KW_JAR jarFileName (COMMA KW_JAR jarFileName)* 
+    : KW_USING KW_JAR jarFileName (COMMA KW_JAR jarFileName)*
     ;
 
 jarFileName
@@ -287,7 +337,13 @@ jarFileName
 // it only includes rename, set key, add constraint, drop constraint, add unique
 
 alterTable
-    : KW_ALTER KW_TABLE ifExists? tablePath (renameDefinition | setKeyValueDefinition | addConstraint | dropConstraint | addUnique)
+    : KW_ALTER KW_TABLE ifExists? tablePath (
+        renameDefinition
+        | setKeyValueDefinition
+        | addConstraint
+        | dropConstraint
+        | addUnique
+    )
     ;
 
 renameDefinition
@@ -323,9 +379,10 @@ alterDatabase
     ;
 
 alterFunction
-    : KW_ALTER (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? functionName KW_AS identifier (KW_LANGUAGE (KW_JAVA|KW_SCALA|KW_PYTHON))?  // TODO
+    : KW_ALTER (KW_TEMPORARY | KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? functionName KW_AS identifier (
+        KW_LANGUAGE (KW_JAVA | KW_SCALA | KW_PYTHON)
+    )? // TODO
     ;
-
 
 // Drop statements
 
@@ -346,20 +403,19 @@ dropView
     ;
 
 dropFunction
-    : KW_DROP (KW_TEMPORARY|KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? functionName
+    : KW_DROP (KW_TEMPORARY | KW_TEMPORARY KW_SYSTEM)? KW_FUNCTION ifExists? functionName
     ;
-
 
 // Insert statements
 
 insertStatement
-: (KW_EXECUTE? insertSimpleStatement)
-	| insertMulStatementCompatibility | (KW_EXECUTE insertMulStatement)
+    : (KW_EXECUTE? insertSimpleStatement)
+    | insertMulStatementCompatibility
+    | (KW_EXECUTE insertMulStatement)
     ;
 
 insertSimpleStatement
-    : KW_INSERT (KW_INTO | KW_OVERWRITE) tablePath
-    (
+    : KW_INSERT (KW_INTO | KW_OVERWRITE) tablePath (
         insertPartitionDefinition? columnNameList? queryStatement
         | valuesDefinition
     )
@@ -374,13 +430,11 @@ valuesDefinition
     ;
 
 valuesRowDefinition
-    : LR_BRACKET
-        constant (COMMA constant)*
-    RR_BRACKET
+    : LR_BRACKET constant (COMMA constant)* RR_BRACKET
     ;
 
 insertMulStatementCompatibility
-	: KW_BEGIN KW_STATEMENT KW_SET SEMICOLON (insertSimpleStatement SEMICOLON)+ KW_END
+    : KW_BEGIN KW_STATEMENT KW_SET SEMICOLON (insertSimpleStatement SEMICOLON)+ KW_END
     ;
 
 insertMulStatement
@@ -399,7 +453,7 @@ queryStatement
     ;
 
 valuesCaluse
-    : KW_VALUES expression (COMMA expression )*
+    : KW_VALUES expression (COMMA expression)*
     ;
 
 withClause
@@ -420,12 +474,15 @@ selectStatement
     ;
 
 selectClause
-    : KW_SELECT setQuantifier? (ASTERISK_SIGN | projectItemDefinition (COMMA projectItemDefinition)*)
+    : KW_SELECT setQuantifier? (
+        ASTERISK_SIGN
+        | projectItemDefinition (COMMA projectItemDefinition)*
+    )
     ;
 
 projectItemDefinition
     : overWindowItem
-    | columnName  (KW_AS? expression )?
+    | columnName (KW_AS? expression)?
     ;
 
 overWindowItem
@@ -481,7 +538,7 @@ windoTVFName
     : KW_TUMBLE
     | KW_HOP
     | KW_CUMULATE
-;
+    ;
 
 windowTVFParam
     : KW_TABLE timeAttrColumn
@@ -563,25 +620,12 @@ namedWindow
     ;
 
 windowSpec
-    : name=errorCapturingIdentifier?
-    LR_BRACKET
-        partitionByClause?
-        orderByCaluse?
-        windowFrame?
-    RR_BRACKET
+    : name=errorCapturingIdentifier? LR_BRACKET partitionByClause? orderByCaluse? windowFrame? RR_BRACKET
     ;
 
 matchRecognizeClause
-    : KW_MATCH_RECOGNIZE 
-    LR_BRACKET 
-        partitionByClause?
-        orderByCaluse?
-        measuresClause?
-        outputMode?
-        afterMatchStrategy?
-        patternDefination?
-        patternVariablesDefination
-    RR_BRACKET ( KW_AS? identifier )?
+    : KW_MATCH_RECOGNIZE LR_BRACKET partitionByClause? orderByCaluse? measuresClause? outputMode? afterMatchStrategy? patternDefination?
+        patternVariablesDefination RR_BRACKET (KW_AS? identifier)?
     ;
 
 orderByCaluse
@@ -605,7 +649,7 @@ quantifiers
     | (ADD_SIGN)
     | (QUESTION_MARK_SIGN)
     | (LB_BRACKET DIG_LITERAL COMMA DIG_LITERAL RB_BRACKET)
-    | (LB_BRACKET DIG_LITERAL COMMA  RB_BRACKET)
+    | (LB_BRACKET DIG_LITERAL COMMA RB_BRACKET)
     | (LB_BRACKET COMMA DIG_LITERAL RB_BRACKET)
     ;
 
@@ -614,11 +658,7 @@ measuresClause
     ;
 
 patternDefination
-    : KW_PATTERN 
-    LR_BRACKET
-        patternVariable+
-    RR_BRACKET 
-    withinClause?
+    : KW_PATTERN LR_BRACKET patternVariable+ RR_BRACKET withinClause?
     ;
 
 patternVariable
@@ -631,7 +671,7 @@ outputMode
     ;
 
 afterMatchStrategy
-    : KW_AFTER KW_MATCH KW_SKIP KW_PAST KW_LAST KW_ROW 
+    : KW_AFTER KW_MATCH KW_SKIP KW_PAST KW_LAST KW_ROW
     | KW_AFTER KW_MATCH KW_SKIP KW_TO KW_NEXT KW_ROW
     | KW_AFTER KW_MATCH KW_SKIP KW_TO KW_LAST unquotedIdentifier
     | KW_AFTER KW_MATCH KW_SKIP KW_TO KW_FIRST unquotedIdentifier
@@ -654,7 +694,6 @@ withinClause
     : KW_WITHIN timeIntervalExpression
     ;
 
-
 // expression
 
 expression
@@ -662,19 +701,16 @@ expression
     ;
 
 booleanExpression
-    : KW_NOT booleanExpression                                        #logicalNot
-    | KW_EXISTS LR_BRACKET queryStatement RR_BRACKET                                         #exists
-    | valueExpression predicate?                                   #predicated
-    | left=booleanExpression operator=KW_AND right=booleanExpression  #logicalBinary
-    | left=booleanExpression operator=KW_OR right=booleanExpression   #logicalBinary
-    | booleanExpression KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL) #logicalNested
+    : KW_NOT booleanExpression                                                         # logicalNot
+    | KW_EXISTS LR_BRACKET queryStatement RR_BRACKET                                   # exists
+    | valueExpression predicate?                                                       # predicated
+    | left=booleanExpression operator=KW_AND right=booleanExpression                   # logicalBinary
+    | left=booleanExpression operator=KW_OR right=booleanExpression                    # logicalBinary
+    | booleanExpression KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL) # logicalNested
     ;
 
 predicate
-    : KW_NOT? 
-        kind=KW_BETWEEN (KW_ASYMMETRIC | KW_SYMMETRIC)? 
-        lower=valueExpression KW_AND 
-        upper=valueExpression
+    : KW_NOT? kind=KW_BETWEEN (KW_ASYMMETRIC | KW_SYMMETRIC)? lower=valueExpression KW_AND upper=valueExpression
     | KW_NOT? kind=KW_IN LR_BRACKET expression (COMMA expression)* RR_BRACKET
     | KW_NOT? kind=KW_IN LR_BRACKET queryStatement RR_BRACKET
     | kind=KW_EXISTS LR_BRACKET queryStatement RR_BRACKET
@@ -686,42 +722,45 @@ predicate
     ;
 
 likePredicate
-    : KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) (LR_BRACKET RR_BRACKET | LR_BRACKET expression (COMMA expression)* RR_BRACKET)
+    : KW_NOT? kind=KW_LIKE quantifier=(KW_ANY | KW_ALL) (
+        LR_BRACKET RR_BRACKET
+        | LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    )
     | KW_NOT? kind=KW_LIKE pattern=valueExpression (KW_ESCAPE stringLiteral)?
     ;
 
 valueExpression
-    : primaryExpression                                                                      #valueExpressionDefault
-    | operator=(HYPNEN_SIGN | ADD_SIGN | BIT_NOT_OP) valueExpression                                        #arithmeticUnary
-    | left=valueExpression operator=(ASTERISK_SIGN | SLASH_SIGN | PENCENT_SIGN | KW_DIV) right=valueExpression #arithmeticBinary
-    | left=valueExpression operator=(ADD_SIGN | HYPNEN_SIGN | DOUBLE_VERTICAL_SIGN) right=valueExpression       #arithmeticBinary
-    | left=valueExpression operator=BIT_AND_OP right=valueExpression                          #arithmeticBinary
-    | left=valueExpression operator=BIT_XOR_OP right=valueExpression                                #arithmeticBinary
-    | left=valueExpression operator=BIT_OR_OP right=valueExpression                               #arithmeticBinary
-    | left=valueExpression comparisonOperator right=valueExpression                          #comparison
+    : primaryExpression                                                                                        # valueExpressionDefault
+    | operator=(HYPNEN_SIGN | ADD_SIGN | BIT_NOT_OP) valueExpression                                           # arithmeticUnary
+    | left=valueExpression operator=(ASTERISK_SIGN | SLASH_SIGN | PENCENT_SIGN | KW_DIV) right=valueExpression # arithmeticBinary
+    | left=valueExpression operator=(ADD_SIGN | HYPNEN_SIGN | DOUBLE_VERTICAL_SIGN) right=valueExpression      # arithmeticBinary
+    | left=valueExpression operator=BIT_AND_OP right=valueExpression                                           # arithmeticBinary
+    | left=valueExpression operator=BIT_XOR_OP right=valueExpression                                           # arithmeticBinary
+    | left=valueExpression operator=BIT_OR_OP right=valueExpression                                            # arithmeticBinary
+    | left=valueExpression comparisonOperator right=valueExpression                                            # comparison
     ;
 
 primaryExpression
-    : KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                                   #searchedCase
-    | KW_CASE value=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END                  #simpleCase
-    | KW_CAST LR_BRACKET expression KW_AS columnType RR_BRACKET                                                      #cast
+    : KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                  # searchedCase
+    | KW_CASE value=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END # simpleCase
+    | KW_CAST LR_BRACKET expression KW_AS columnType RR_BRACKET                        # cast
     // | STRUCT LR_BRACKET (argument+=namedExpression (COMMA argument+=namedExpression)*)? RR_BRACKET             #struct
-    | KW_FIRST LR_BRACKET expression (KW_IGNORE KW_NULLS)? RR_BRACKET                                                 #first
-    | KW_LAST LR_BRACKET expression (KW_IGNORE KW_NULLS)? RR_BRACKET                                                  #last
-    | KW_POSITION LR_BRACKET substr=valueExpression KW_IN str=valueExpression RR_BRACKET                           #position
-    | constant                                                                                 #constantDefault
-    | ASTERISK_SIGN                                                                                 #star
-    | uid DOT ASTERISK_SIGN                                                                #star
+    | KW_FIRST LR_BRACKET expression (KW_IGNORE KW_NULLS)? RR_BRACKET                    # first
+    | KW_LAST LR_BRACKET expression (KW_IGNORE KW_NULLS)? RR_BRACKET                     # last
+    | KW_POSITION LR_BRACKET substr=valueExpression KW_IN str=valueExpression RR_BRACKET # position
+    | constant                                                                           # constantDefault
+    | ASTERISK_SIGN                                                                      # star
+    | uid DOT ASTERISK_SIGN                                                              # star
     // | LR_BRACKET namedExpression (COMMA namedExpression)+ RR_BRACKET                                           #rowConstructor
-    | LR_BRACKET queryStatement RR_BRACKET                                                                            #subqueryExpression
-    | functionName LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET                      #functionCall
+    | LR_BRACKET queryStatement RR_BRACKET                                                      # subqueryExpression
+    | functionName LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET # functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
-    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET                                   #subscript
-    | identifier                                                                               #columnReference
-    | dereferenceDefinition                                                                                      #dereference
-    | LR_BRACKET expression RR_BRACKET                                                                       #parenthesizedExpression
-    | KW_CURRENT_TIMESTAMP                                                                      #dateFunctionExpression
+    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
+    | identifier                                                          # columnReference
+    | dereferenceDefinition                                               # dereference
+    | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression
+    | KW_CURRENT_TIMESTAMP                                                # dateFunctionExpression
     // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract
     // | (SUBSTR | SUBSTRING) LR_BRACKET str=valueExpression (KW_FROM | COMMA) pos=valueExpression
     //   ((KW_FOR | COMMA) len=valueExpression)? RR_BRACKET                                                   #substring
@@ -758,7 +797,8 @@ correlationName
     ;
 
 qualifiedName
-    : identifier | dereferenceDefinition
+    : identifier
+    | dereferenceDefinition
     ;
 
 timeIntervalExpression
@@ -795,8 +835,8 @@ errorCapturingIdentifier
     ;
 
 errorCapturingIdentifierExtra
-    : (KW_MINUS identifier)+    #errorIdent
-    |                        #realIdent
+    : (KW_MINUS identifier)+ # errorIdent
+    |                        # realIdent
     ;
 
 identifierList
@@ -808,13 +848,14 @@ identifierSeq
     ;
 
 identifier
-    : unquotedIdentifier         #unquotedIdentifierAlternative
-    | quotedIdentifier           #quotedIdentifierAlternative
-    | nonReservedKeywords        #nonReservedKeywordsAlternative
+    : unquotedIdentifier  # unquotedIdentifierAlternative
+    | quotedIdentifier    # quotedIdentifierAlternative
+    | nonReservedKeywords # nonReservedKeywordsAlternative
     ;
 
 unquotedIdentifier
-    : DIG_LITERAL | ID_LITERAL
+    : DIG_LITERAL
+    | ID_LITERAL
     ;
 
 quotedIdentifier
@@ -870,10 +911,12 @@ withOption
     ;
 
 ifNotExists
-    : KW_IF KW_NOT KW_EXISTS;
+    : KW_IF KW_NOT KW_EXISTS
+    ;
 
 ifExists
-    : KW_IF KW_EXISTS;
+    : KW_IF KW_EXISTS
+    ;
 
 tablePropertyList
     : LR_BRACKET tableProperty (COMMA tableProperty)* RR_BRACKET
@@ -884,7 +927,8 @@ tableProperty
     ;
 
 tablePropertyKey
-    : identifier | dereferenceDefinition
+    : identifier
+    | dereferenceDefinition
     | STRING_LITERAL
     ;
 
@@ -898,56 +942,56 @@ tablePropertyValue
 logicalOperator
     : KW_AND
     | BIT_AND_OP BIT_AND_OP
-    | KW_OR 
+    | KW_OR
     | BIT_OR_OP BIT_OR_OP
     ;
 
 comparisonOperator
-    : EQUAL_SYMBOL 
-    | GREATER_SYMBOL 
-    | LESS_SYMBOL 
-    | LESS_SYMBOL EQUAL_SYMBOL 
+    : EQUAL_SYMBOL
+    | GREATER_SYMBOL
+    | LESS_SYMBOL
+    | LESS_SYMBOL EQUAL_SYMBOL
     | GREATER_SYMBOL EQUAL_SYMBOL
-    | LESS_SYMBOL GREATER_SYMBOL 
-    | EXCLAMATION_SYMBOL EQUAL_SYMBOL 
+    | LESS_SYMBOL GREATER_SYMBOL
+    | EXCLAMATION_SYMBOL EQUAL_SYMBOL
     | LESS_SYMBOL EQUAL_SYMBOL GREATER_SYMBOL
     ;
 
 bitOperator
-    : LESS_SYMBOL LESS_SYMBOL 
-    | GREATER_SYMBOL GREATER_SYMBOL 
-    | BIT_AND_OP 
-    | BIT_XOR_OP 
+    : LESS_SYMBOL LESS_SYMBOL
+    | GREATER_SYMBOL GREATER_SYMBOL
+    | BIT_AND_OP
+    | BIT_XOR_OP
     | BIT_OR_OP
     ;
 
 mathOperator
-    : ASTERISK_SIGN 
-    | SLASH_SIGN 
-    | PENCENT_SIGN 
-    | KW_DIV 
-    | ADD_SIGN 
-    | HYPNEN_SIGN 
+    : ASTERISK_SIGN
+    | SLASH_SIGN
+    | PENCENT_SIGN
+    | KW_DIV
+    | ADD_SIGN
+    | HYPNEN_SIGN
     | DOUBLE_HYPNEN_SIGN
     ;
 
 unaryOperator
-    : EXCLAMATION_SYMBOL 
-    | BIT_NOT_OP 
-    | ADD_SIGN 
-    | HYPNEN_SIGN 
+    : EXCLAMATION_SYMBOL
+    | BIT_NOT_OP
+    | ADD_SIGN
+    | HYPNEN_SIGN
     | KW_NOT
     ;
 
 constant
     : timeIntervalExpression
     | timePointLiteral
-    | stringLiteral                                             // 引号包含的字符串
-    | HYPNEN_SIGN? decimalLiteral                                // 正/负整数
-    | booleanLiteral                                            // 布尔值
-    | REAL_LITERAL                                              // 小数
+    | stringLiteral               // 引号包含的字符串
+    | HYPNEN_SIGN? decimalLiteral // 正/负整数
+    | booleanLiteral              // 布尔值
+    | REAL_LITERAL                // 小数
     | BIT_STRING
-    | KW_NOT? KW_NULL                                           // 空 | 非空
+    | KW_NOT? KW_NULL // 空 | 非空
     ;
 
 timePointLiteral
@@ -963,7 +1007,9 @@ decimalLiteral
     ;
 
 booleanLiteral
-    : KW_TRUE | KW_FALSE;
+    : KW_TRUE
+    | KW_FALSE
+    ;
 
 setQuantifier
     : KW_DISTINCT
@@ -1159,5 +1205,5 @@ nonReservedKeywords
     | KW_VIEW
     | KW_WEEK
     | KW_YEARS
-    | KW_ZONE                       
+    | KW_ZONE
     ;
