@@ -8,7 +8,7 @@ import {
 } from '../lib/spark/SparkSqlParser';
 import BasicParser from './common/basicParser';
 import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic-parser-types';
-import { SparkSqlParserListener } from 'src/lib/spark/SparkSqlParserListener';
+import { SparkSqlParserListener } from '../lib/spark/SparkSqlParserListener';
 
 export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext, SparkSqlParser> {
     protected createLexerFormCharStream(charStreams) {
