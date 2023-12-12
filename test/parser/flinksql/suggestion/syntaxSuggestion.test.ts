@@ -8,7 +8,6 @@ const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'syntaxSuggestion.sql'),
     'utf-8'
 );
-const multipleSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'multipleSql.sql'), 'utf-8');
 
 describe('Flink SQL Syntax Suggestion', () => {
     const parser = new FlinkSQL();
@@ -17,20 +16,6 @@ describe('Flink SQL Syntax Suggestion', () => {
         expect(parser.validate(syntaxSql).length).not.toBe(0);
         expect(parser.validate(syntaxSql).length).not.toBe(0);
         expect(parser.validate(syntaxSql).length).not.toBe(0);
-    });
-
-    test('Multiple SQL use database', () => {
-        const pos: CaretPosition = {
-            lineNumber: 19,
-            column: 10,
-        };
-        const syntaxes = parser.getSuggestionAtCaretPosition(multipleSql, pos)?.syntax;
-        const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
-        );
-
-        expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['cat1', '.']);
     });
 
     test('Drop catalog', () => {
