@@ -4,7 +4,7 @@ import { MySqlLexer } from '../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext, SingleStatementContext } from '../lib/mysql/MySqlParser';
 import BasicParser from './common/basicParser';
 import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic-parser-types';
-import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
+import { MySqlParserListener } from '../lib/mysql/MySqlParserListener';
 
 export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySqlParser> {
     protected createLexerFormCharStream(charStreams): MySqlLexer {
