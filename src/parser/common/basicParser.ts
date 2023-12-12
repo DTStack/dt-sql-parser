@@ -9,7 +9,7 @@ import {
 } from 'antlr4ts';
 import { ParseTreeWalker, ParseTreeListener } from 'antlr4ts/tree';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
-import { findCaretTokenIndex } from '../../utils/findCaretTokenIndex';
+import { findCaretTokenIndex } from './utils/findCaretTokenIndex';
 import {
     CaretPosition,
     Suggestions,
