@@ -5,23 +5,23 @@ import { ATNSimulator } from 'antlr4ts/atn/ATNSimulator';
  * Converted from {@link SyntaxError}.
  */
 export interface ParseError {
-    startLine: number;
-    endLine: number;
-    startCol: number;
-    endCol: number;
-    message: string;
+    readonly startLine: number;
+    readonly endLine: number;
+    readonly startCol: number;
+    readonly endCol: number;
+    readonly message: string;
 }
 
 /**
  * The type of error resulting from lexical parsing and parsing.
  */
 export interface SyntaxError<T> {
-    recognizer: Recognizer<T, ATNSimulator>;
-    offendingSymbol: Token;
-    line: number;
-    charPositionInLine: number;
-    msg: string;
-    e: RecognitionException;
+    readonly recognizer: Recognizer<T, ATNSimulator>;
+    readonly offendingSymbol: Token;
+    readonly line: number;
+    readonly charPositionInLine: number;
+    readonly msg: string;
+    readonly e: RecognitionException;
 }
 
 /**
