@@ -1,4 +1,4 @@
- /**
+/**
  * Oracle(c) PL/SQL 11g Parser
  *
  * Copyright (c) 2009-2011 Alexandre Porcelli <alexandre.porcelli@gmail.com>
@@ -23,17 +23,24 @@
  * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/plsql/PlSqlParser.g4
  */
 
+// $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
+// $antlr-format allowShortRulesOnASingleLine false, allowShortBlocksOnASingleLine true, alignSemicolons hanging, alignColons hanging
+// $antlr-format spaceBeforeAssignmentOperators false, keepEmptyLinesAtTheStartOfBlocks true
+
 parser grammar PlSqlParser;
 
 options {
     tokenVocab=PlSqlLexer;
     superClass=PlSqlBaseParser;
 }
+
 @parser::header {
 import PlSqlBaseParser from './PlSqlBaseParser';
 }
 
-program: sql_script SEMICOLON? EOF;
+program
+    : sql_script SEMICOLON? EOF
+    ;
 
 sql_script
     : (unit_statement | sql_plus_command)*
@@ -58,17 +65,14 @@ unit_statement
     | alter_materialized_view_log
     | alter_user
     | alter_view
-
     | analyze
     | associate_statistics
     | audit_traditional
     | unified_auditing
-
     | create_function_body
     | create_procedure_body
     | create_package
     | create_package_body
-
     | create_index
     | create_table
     | create_tablespace
@@ -79,12 +83,10 @@ unit_statement
     | create_materialized_view
     | create_materialized_view_log
     | create_user
-
     | create_sequence
     | create_trigger
     | create_type
     | create_synonym
-
     | drop_function
     | drop_package
     | drop_procedure
@@ -95,16 +97,11 @@ unit_statement
     | drop_table
     | drop_view
     | drop_index
-
     | rename_object
-
     | comment_on_column
     | comment_on_table
-
     | anonymous_block
-
     | grant_statement
-
     | procedure_call
     ;
 
@@ -121,9 +118,15 @@ alter_function
     ;
 
 create_function_body
-    : CREATE (OR REPLACE)? FUNCTION function_name ('(' parameter (',' parameter)* ')')?
-      RETURN type_spec (invoker_rights_clause | parallel_enable_clause | result_cache_clause | DETERMINISTIC)*
-      ((PIPELINED? (IS | AS) (DECLARE? seq_of_declare_specs? body | call_spec)) | (PIPELINED | AGGREGATE) USING implementation_type_name) ';'
+    : CREATE (OR REPLACE)? FUNCTION function_name ('(' parameter (',' parameter)* ')')? RETURN type_spec (
+        invoker_rights_clause
+        | parallel_enable_clause
+        | result_cache_clause
+        | DETERMINISTIC
+    )* (
+        (PIPELINED? (IS | AS) (DECLARE? seq_of_declare_specs? body | call_spec))
+        | (PIPELINED | AGGREGATE) USING implementation_type_name
+    ) ';'
     ;
 
 // Creation Function - Specific Clauses
@@ -155,15 +158,22 @@ drop_package
     ;
 
 alter_package
-    : ALTER PACKAGE package_name COMPILE DEBUG? (PACKAGE | BODY | SPECIFICATION)? compiler_parameters_clause* (REUSE SETTINGS)? ';'
+    : ALTER PACKAGE package_name COMPILE DEBUG? (PACKAGE | BODY | SPECIFICATION)? compiler_parameters_clause* (
+        REUSE SETTINGS
+    )? ';'
     ;
 
 create_package
-    : CREATE (OR REPLACE)? PACKAGE (schema_object_name '.')? package_name invoker_rights_clause? (IS | AS) package_obj_spec* END package_name? ';'
+    : CREATE (OR REPLACE)? PACKAGE (schema_object_name '.')? package_name invoker_rights_clause? (
+        IS
+        | AS
+    ) package_obj_spec* END package_name? ';'
     ;
 
 create_package_body
-    : CREATE (OR REPLACE)? PACKAGE BODY (schema_object_name '.')? package_name (IS | AS) package_obj_body* (BEGIN seq_of_statements)? END package_name? ';'
+    : CREATE (OR REPLACE)? PACKAGE BODY (schema_object_name '.')? package_name (IS | AS) package_obj_body* (
+        BEGIN seq_of_statements
+    )? END package_name? ';'
     ;
 
 // Create Package Specific Clauses
@@ -180,12 +190,13 @@ package_obj_spec
     ;
 
 procedure_spec
-    : PROCEDURE identifier ('(' parameter ( ',' parameter )* ')')? ';'
+    : PROCEDURE identifier ('(' parameter ( ',' parameter)* ')')? ';'
     ;
 
 function_spec
-    : FUNCTION identifier ('(' parameter ( ',' parameter)* ')')?
-      RETURN type_spec PIPELINED? DETERMINISTIC? (RESULT_CACHE)? ';'
+    : FUNCTION identifier ('(' parameter ( ',' parameter)* ')')? RETURN type_spec PIPELINED? DETERMINISTIC? (
+        RESULT_CACHE
+    )? ';'
     ;
 
 package_obj_body
@@ -211,20 +222,30 @@ alter_procedure
     ;
 
 function_body
-    : FUNCTION identifier ('(' parameter (',' parameter)* ')')?
-      RETURN type_spec (invoker_rights_clause | parallel_enable_clause | result_cache_clause | DETERMINISTIC)*
-      ((PIPELINED? DETERMINISTIC? (IS | AS) (DECLARE? seq_of_declare_specs? body | call_spec)) | (PIPELINED | AGGREGATE) USING implementation_type_name) ';'
+    : FUNCTION identifier ('(' parameter (',' parameter)* ')')? RETURN type_spec (
+        invoker_rights_clause
+        | parallel_enable_clause
+        | result_cache_clause
+        | DETERMINISTIC
+    )* (
+        (PIPELINED? DETERMINISTIC? (IS | AS) (DECLARE? seq_of_declare_specs? body | call_spec))
+        | (PIPELINED | AGGREGATE) USING implementation_type_name
+    ) ';'
     ;
 
 procedure_body
-    : PROCEDURE identifier ('(' parameter (',' parameter)* ')')? (IS | AS)
-      (DECLARE? seq_of_declare_specs? body | call_spec | EXTERNAL) ';'
+    : PROCEDURE identifier ('(' parameter (',' parameter)* ')')? (IS | AS) (
+        DECLARE? seq_of_declare_specs? body
+        | call_spec
+        | EXTERNAL
+    ) ';'
     ;
 
 create_procedure_body
-    : CREATE (OR REPLACE)? PROCEDURE procedure_name ('(' parameter (',' parameter)* ')')?
-      invoker_rights_clause? (IS | AS)
-      (DECLARE? seq_of_declare_specs? body | call_spec | EXTERNAL) ';'
+    : CREATE (OR REPLACE)? PROCEDURE procedure_name ('(' parameter (',' parameter)* ')')? invoker_rights_clause? (
+        IS
+        | AS
+    ) (DECLARE? seq_of_declare_specs? body | call_spec | EXTERNAL) ';'
     ;
 
 // Trigger DDLs
@@ -234,14 +255,19 @@ drop_trigger
     ;
 
 alter_trigger
-    : ALTER TRIGGER alter_trigger_name=trigger_name
-      ((ENABLE | DISABLE) | RENAME TO rename_trigger_name=trigger_name | COMPILE DEBUG? compiler_parameters_clause* (REUSE SETTINGS)?) ';'
+    : ALTER TRIGGER alter_trigger_name=trigger_name (
+        (ENABLE | DISABLE)
+        | RENAME TO rename_trigger_name=trigger_name
+        | COMPILE DEBUG? compiler_parameters_clause* (REUSE SETTINGS)?
+    ) ';'
     ;
 
 create_trigger
-    : CREATE ( OR REPLACE )? TRIGGER trigger_name
-      (simple_dml_trigger | compound_dml_trigger | non_dml_trigger)
-      trigger_follows_clause? (ENABLE | DISABLE)? trigger_when_clause? trigger_body ';'
+    : CREATE (OR REPLACE)? TRIGGER trigger_name (
+        simple_dml_trigger
+        | compound_dml_trigger
+        | non_dml_trigger
+    ) trigger_follows_clause? (ENABLE | DISABLE)? trigger_when_clause? trigger_body ';'
     ;
 
 trigger_follows_clause
@@ -330,14 +356,14 @@ drop_type
     ;
 
 alter_type
-    : ALTER TYPE type_name
-    (compile_type_clause
-    | replace_type_clause
-    //TODO | {input.LT(2).getText().equalsIgnoreCase("attribute")}? alter_attribute_definition
-    | alter_method_spec
-    | alter_collection_clauses
-    | modifier_clause
-    | overriding_subprogram_spec
+    : ALTER TYPE type_name (
+        compile_type_clause
+        | replace_type_clause
+        //TODO | {input.LT(2).getText().equalsIgnoreCase("attribute")}? alter_attribute_definition
+        | alter_method_spec
+        | alter_collection_clauses
+        | modifier_clause
+        | overriding_subprogram_spec
     ) dependent_handling_clause? ';'
     ;
 
@@ -383,8 +409,9 @@ type_definition
     ;
 
 object_type_def
-    : invoker_rights_clause? (object_as_part | object_under_part) sqlj_object_type?
-      ('(' object_member_spec (',' object_member_spec)* ')')? modifier_clause*
+    : invoker_rights_clause? (object_as_part | object_under_part) sqlj_object_type? (
+        '(' object_member_spec (',' object_member_spec)* ')'
+    )? modifier_clause*
     ;
 
 object_as_part
@@ -422,19 +449,23 @@ subprog_decl_in_type
     ;
 
 proc_decl_in_type
-    : PROCEDURE procedure_name '(' type_elements_parameter (',' type_elements_parameter)* ')'
-      (IS | AS) (call_spec | DECLARE? seq_of_declare_specs? body ';')
+    : PROCEDURE procedure_name '(' type_elements_parameter (',' type_elements_parameter)* ')' (
+        IS
+        | AS
+    ) (call_spec | DECLARE? seq_of_declare_specs? body ';')
     ;
 
 func_decl_in_type
-    : FUNCTION function_name ('(' type_elements_parameter (',' type_elements_parameter)* ')')?
-      RETURN type_spec (IS | AS) (call_spec | DECLARE? seq_of_declare_specs? body ';')
+    : FUNCTION function_name ('(' type_elements_parameter (',' type_elements_parameter)* ')')? RETURN type_spec (
+        IS
+        | AS
+    ) (call_spec | DECLARE? seq_of_declare_specs? body ';')
     ;
 
 constructor_declaration
-    : FINAL? INSTANTIABLE? CONSTRUCTOR FUNCTION type_spec
-      ('(' (SELF IN OUT type_spec ',') type_elements_parameter (',' type_elements_parameter)*  ')')?
-      RETURN SELF AS RESULT (IS | AS) (call_spec | DECLARE? seq_of_declare_specs? body ';')
+    : FINAL? INSTANTIABLE? CONSTRUCTOR FUNCTION type_spec (
+        '(' (SELF IN OUT type_spec ',') type_elements_parameter (',' type_elements_parameter)* ')'
+    )? RETURN SELF AS RESULT (IS | AS) (call_spec | DECLARE? seq_of_declare_specs? body ';')
     ;
 
 // Common Type Clauses
@@ -472,24 +503,29 @@ overriding_subprogram_spec
     ;
 
 overriding_function_spec
-    : FUNCTION function_name ('(' type_elements_parameter (',' type_elements_parameter)* ')')?
-      RETURN (type_spec | SELF AS RESULT)
-     (PIPELINED? (IS | AS) (DECLARE? seq_of_declare_specs? body))? ';'?
+    : FUNCTION function_name ('(' type_elements_parameter (',' type_elements_parameter)* ')')? RETURN (
+        type_spec
+        | SELF AS RESULT
+    ) (PIPELINED? (IS | AS) (DECLARE? seq_of_declare_specs? body))? ';'?
     ;
 
 type_procedure_spec
-    : PROCEDURE procedure_name '(' type_elements_parameter (',' type_elements_parameter)* ')' ((IS | AS) call_spec)?
+    : PROCEDURE procedure_name '(' type_elements_parameter (',' type_elements_parameter)* ')' (
+        (IS | AS) call_spec
+    )?
     ;
 
 type_function_spec
-    : FUNCTION function_name ('(' type_elements_parameter (',' type_elements_parameter)* ')')?
-      RETURN (type_spec | SELF AS RESULT) ((IS | AS) call_spec | EXTERNAL VARIABLE? NAME expression)?
+    : FUNCTION function_name ('(' type_elements_parameter (',' type_elements_parameter)* ')')? RETURN (
+        type_spec
+        | SELF AS RESULT
+    ) ((IS | AS) call_spec | EXTERNAL VARIABLE? NAME expression)?
     ;
 
 constructor_spec
-    : FINAL? INSTANTIABLE? CONSTRUCTOR FUNCTION
-      type_spec ('(' (SELF IN OUT type_spec ',') type_elements_parameter (',' type_elements_parameter)*  ')')?
-      RETURN SELF AS RESULT ((IS | AS) call_spec)?
+    : FINAL? INSTANTIABLE? CONSTRUCTOR FUNCTION type_spec (
+        '(' (SELF IN OUT type_spec ',') type_elements_parameter (',' type_elements_parameter)* ')'
+    )? RETURN SELF AS RESULT ((IS | AS) call_spec)?
     ;
 
 map_order_function_spec
@@ -521,11 +557,13 @@ alter_sequence
 
 alter_session
     : ALTER SESSION (
-        ADVISE ( COMMIT | ROLLBACK | NOTHING )
+        ADVISE ( COMMIT | ROLLBACK | NOTHING)
         | CLOSE DATABASE LINK parameter_name
         | enable_or_disable COMMIT IN PROCEDURE
         | enable_or_disable GUARD
-        | (enable_or_disable | FORCE) PARALLEL (DML | DDL | QUERY) (PARALLEL (literal | parameter_name))?
+        | (enable_or_disable | FORCE) PARALLEL (DML | DDL | QUERY) (
+            PARALLEL (literal | parameter_name)
+        )?
         | SET alter_session_set_clause
     )
     ;
@@ -559,10 +597,11 @@ sequence_start_clause
     ;
 
 create_index
-    : CREATE (UNIQUE | BITMAP)? INDEX index_name
-       ON (cluster_index_clause | table_index_clause | bitmap_join_index_clause)
-       UNUSABLE?
-       ';'
+    : CREATE (UNIQUE | BITMAP)? INDEX index_name ON (
+        cluster_index_clause
+        | table_index_clause
+        | bitmap_join_index_clause
+    ) UNUSABLE? ';'
     ;
 
 cluster_index_clause
@@ -574,13 +613,13 @@ cluster_name
     ;
 
 table_index_clause
-    : tableview_name table_alias? '(' index_expr (ASC | DESC)?  (',' index_expr (ASC | DESC)? )* ')'
-          index_properties?
+    : tableview_name table_alias? '(' index_expr (ASC | DESC)? (',' index_expr (ASC | DESC)?)* ')' index_properties?
     ;
+
 bitmap_join_index_clause
-    : tableview_name '(' (tableview_name | table_alias)? column_name (ASC | DESC)?  (',' (tableview_name | table_alias)? column_name (ASC | DESC)? )* ')'
-        FROM tableview_name table_alias (',' tableview_name table_alias)*
-        where_clause local_partitioned_index? index_attributes?
+    : tableview_name '(' (tableview_name | table_alias)? column_name (ASC | DESC)? (
+        ',' (tableview_name | table_alias)? column_name (ASC | DESC)?
+    )* ')' FROM tableview_name table_alias (',' tableview_name table_alias)* where_clause local_partitioned_index? index_attributes?
     ;
 
 index_expr
@@ -594,43 +633,50 @@ index_properties
     ;
 
 domain_index_clause
-    : indextype local_domain_index_clause? parallel_clause? (PARAMETERS '(' odci_parameters ')' )?
+    : indextype local_domain_index_clause? parallel_clause? (PARAMETERS '(' odci_parameters ')')?
     ;
 
 local_domain_index_clause
-    : LOCAL ('(' PARTITION partition_name (PARAMETERS '(' odci_parameters ')' )?  (',' PARTITION partition_name (PARAMETERS '(' odci_parameters ')' )? )* ')' )?
+    : LOCAL (
+        '(' PARTITION partition_name (PARAMETERS '(' odci_parameters ')')? (
+            ',' PARTITION partition_name (PARAMETERS '(' odci_parameters ')')?
+        )* ')'
+    )?
     ;
 
 xmlindex_clause
-    : (XDB '.')? XMLINDEX local_xmlindex_clause?
-        parallel_clause? //TODO xmlindex_parameters_clause?
+    : (XDB '.')? XMLINDEX local_xmlindex_clause? parallel_clause? //TODO xmlindex_parameters_clause?
     ;
 
 local_xmlindex_clause
-    : LOCAL ('(' PARTITION partition_name (',' PARTITION partition_name //TODO xmlindex_parameters_clause?
-                                                       )* ')')?
+    : LOCAL (
+        '(' PARTITION partition_name (
+            ',' PARTITION partition_name //TODO xmlindex_parameters_clause?
+        )* ')'
+    )?
     ;
 
 global_partitioned_index
-    : GLOBAL PARTITION BY (RANGE '(' column_name (',' column_name)* ')' '(' index_partitioning_clause ')'
-                          | HASH '(' column_name (',' column_name)* ')'
-                                            (individual_hash_partitions
-                                            | hash_partitions_by_quantity
-                                            )
-                          )
+    : GLOBAL PARTITION BY (
+        RANGE '(' column_name (',' column_name)* ')' '(' index_partitioning_clause ')'
+        | HASH '(' column_name (',' column_name)* ')' (
+            individual_hash_partitions
+            | hash_partitions_by_quantity
+        )
+    )
     ;
 
 index_partitioning_clause
-    : PARTITION partition_name? VALUES LESS THAN '(' literal (',' literal)* ')'
-        segment_attributes_clause?
+    : PARTITION partition_name? VALUES LESS THAN '(' literal (',' literal)* ')' segment_attributes_clause?
     ;
 
 local_partitioned_index
-    : LOCAL (on_range_partitioned_table
-            | on_list_partitioned_table
-            | on_hash_partitioned_table
-            | on_comp_partitioned_table
-            )?
+    : LOCAL (
+        on_range_partitioned_table
+        | on_list_partitioned_table
+        | on_hash_partitioned_table
+        | on_comp_partitioned_table
+    )?
     ;
 
 on_range_partitioned_table
@@ -642,9 +688,7 @@ on_list_partitioned_table
     ;
 
 partitioned_table
-    :  PARTITION partition_name?
-        (segment_attributes_clause | key_compression)*
-        UNUSABLE?
+    : PARTITION partition_name? (segment_attributes_clause | key_compression)* UNUSABLE?
     ;
 
 on_hash_partitioned_table
@@ -653,18 +697,17 @@ on_hash_partitioned_table
     ;
 
 on_hash_partitioned_clause
-    : PARTITION partition_name? (TABLESPACE tablespace)?
-        key_compression? UNUSABLE?
+    : PARTITION partition_name? (TABLESPACE tablespace)? key_compression? UNUSABLE?
     ;
+
 on_comp_partitioned_table
-    : (STORE IN '(' tablespace (',' tablespace)* ')' )?
-        '(' on_comp_partitioned_clause (',' on_comp_partitioned_clause)* ')'
+    : (STORE IN '(' tablespace (',' tablespace)* ')')? '(' on_comp_partitioned_clause (
+        ',' on_comp_partitioned_clause
+    )* ')'
     ;
 
 on_comp_partitioned_clause
-    : PARTITION partition_name?
-        (segment_attributes_clause | key_compression)*
-        UNUSABLE index_subpartition_clause?
+    : PARTITION partition_name? (segment_attributes_clause | key_compression)* UNUSABLE index_subpartition_clause?
     ;
 
 index_subpartition_clause
@@ -673,8 +716,7 @@ index_subpartition_clause
     ;
 
 index_subpartition_subclause
-    : SUBPARTITION subpartition_name? (TABLESPACE tablespace)?
-        key_compression? UNUSABLE?
+    : SUBPARTITION subpartition_name? (TABLESPACE tablespace)? key_compression? UNUSABLE?
     ;
 
 odci_parameters
@@ -691,13 +733,14 @@ alter_index
     ;
 
 alter_index_ops_set1
-    : ( deallocate_unused_clause
-      | allocate_extent_clause
-      | shrink_clause
-      | parallel_clause
-      | physical_attributes_clause
-      | logging_clause
-      )+
+    : (
+        deallocate_unused_clause
+        | allocate_extent_clause
+        | shrink_clause
+        | parallel_clause
+        | physical_attributes_clause
+        | logging_clause
+    )+
     ;
 
 alter_index_ops_set2
@@ -725,20 +768,16 @@ monitoring_nomonitoring
     ;
 
 rebuild_clause
-    : REBUILD ( PARTITION partition_name
-              | SUBPARTITION subpartition_name
-              | REVERSE
-              | NOREVERSE
-              )?
-              ( parallel_clause
-              | TABLESPACE tablespace
-              | PARAMETERS '(' odci_parameters ')'
-//TODO        | xmlindex_parameters_clause
-              | ONLINE
-              | physical_attributes_clause
-              | key_compression
-              | logging_clause
-              )*
+    : REBUILD (PARTITION partition_name | SUBPARTITION subpartition_name | REVERSE | NOREVERSE)? (
+        parallel_clause
+        | TABLESPACE tablespace
+        | PARAMETERS '(' odci_parameters ')'
+        //TODO        | xmlindex_parameters_clause
+        | ONLINE
+        | physical_attributes_clause
+        | key_compression
+        | logging_clause
+    )*
     ;
 
 alter_index_partitioning
@@ -753,16 +792,15 @@ alter_index_partitioning
     ;
 
 modify_index_default_attrs
-    : MODIFY DEFAULT ATTRIBUTES (FOR PARTITION partition_name)?
-         ( physical_attributes_clause
-         | TABLESPACE (tablespace | DEFAULT)
-         | logging_clause
-         )
+    : MODIFY DEFAULT ATTRIBUTES (FOR PARTITION partition_name)? (
+        physical_attributes_clause
+        | TABLESPACE (tablespace | DEFAULT)
+        | logging_clause
+    )
     ;
 
 add_hash_index_partition
-    : ADD PARTITION partition_name? (TABLESPACE tablespace)?
-        key_compression? parallel_clause?
+    : ADD PARTITION partition_name? (TABLESPACE tablespace)? key_compression? parallel_clause?
     ;
 
 coalesce_index_partition
@@ -770,13 +808,13 @@ coalesce_index_partition
     ;
 
 modify_index_partition
-    : MODIFY PARTITION partition_name
-        ( modify_index_partitions_ops+
+    : MODIFY PARTITION partition_name (
+        modify_index_partitions_ops+
         | PARAMETERS '(' odci_parameters ')'
         | COALESCE
         | UPDATE BLOCK REFERENCES
         | UNUSABLE
-        )
+    )
     ;
 
 modify_index_partitions_ops
@@ -788,8 +826,7 @@ modify_index_partitions_ops
     ;
 
 rename_index_partition
-    : RENAME (PARTITION partition_name | SUBPARTITION subpartition_name)
-         TO new_partition_name
+    : RENAME (PARTITION partition_name | SUBPARTITION subpartition_name) TO new_partition_name
     ;
 
 drop_index_partition
@@ -797,23 +834,26 @@ drop_index_partition
     ;
 
 split_index_partition
-    : SPLIT PARTITION partition_name_old AT '(' literal (',' literal)* ')'
-        (INTO '(' index_partition_description ',' index_partition_description ')' ) ? parallel_clause?
+    : SPLIT PARTITION partition_name_old AT '(' literal (',' literal)* ')' (
+        INTO '(' index_partition_description ',' index_partition_description ')'
+    )? parallel_clause?
     ;
 
 index_partition_description
-    : PARTITION (partition_name ( (segment_attributes_clause | key_compression)+
-                                | PARAMETERS '(' odci_parameters ')'
-                                )
-                                UNUSABLE?
-                )?
+    : PARTITION (
+        partition_name (
+            (segment_attributes_clause | key_compression)+
+            | PARAMETERS '(' odci_parameters ')'
+        ) UNUSABLE?
+    )?
     ;
 
 modify_index_subpartition
-    : MODIFY SUBPARTITION subpartition_name (UNUSABLE
-                                            | allocate_extent_clause
-                                            | deallocate_unused_clause
-                                            )
+    : MODIFY SUBPARTITION subpartition_name (
+        UNUSABLE
+        | allocate_extent_clause
+        | deallocate_unused_clause
+    )
     ;
 
 partition_name_old
@@ -829,26 +869,24 @@ new_index_name
     ;
 
 create_user
-    : CREATE USER
-      user_object_name
-        ( identified_by
-          | identified_other_clause
-          | user_tablespace_clause
-          | quota_clause
-          | profile_clause
-          | password_expire_clause
-          | user_lock_clause
-          | user_editions_clause
-          | container_clause
-        )+ ';'
+    : CREATE USER user_object_name (
+        identified_by
+        | identified_other_clause
+        | user_tablespace_clause
+        | quota_clause
+        | profile_clause
+        | password_expire_clause
+        | user_lock_clause
+        | user_editions_clause
+        | container_clause
+    )+ ';'
     ;
 
 // The standard clauses only permit one user per statement.
 // The proxy clause allows multiple users for a proxy designation.
 alter_user
-    : ALTER USER
-      user_object_name
-        ( alter_identified_by
+    : ALTER USER user_object_name (
+        alter_identified_by
         | identified_other_clause
         | user_tablespace_clause
         | quota_clause
@@ -859,9 +897,8 @@ alter_user
         | alter_user_editions_clause
         | container_clause
         | container_data_clause
-        )+
-      ';'
-      | user_object_name (',' user_object_name)* proxy_clause ';'
+    )+ ';'
+    | user_object_name (',' user_object_name)* proxy_clause ';'
     ;
 
 alter_identified_by
@@ -915,13 +952,12 @@ alter_user_editions_clause
 
 proxy_clause
     : REVOKE CONNECT THROUGH (ENTERPRISE USERS | user_object_name)
-    | GRANT CONNECT THROUGH
-        ( ENTERPRISE USERS
-        | user_object_name
-            (WITH (NO ROLES | ROLE role_clause))?
-            (AUTHENTICATION REQUIRED)?
-            (AUTHENTICATED USING (PASSWORD | CERTIFICATE | DISTINGUISHED NAME))?
-        )
+    | GRANT CONNECT THROUGH (
+        ENTERPRISE USERS
+        | user_object_name (WITH (NO ROLES | ROLE role_clause))? (AUTHENTICATION REQUIRED)? (
+            AUTHENTICATED USING (PASSWORD | CERTIFICATE | DISTINGUISHED NAME)
+        )?
+    )
     ;
 
 container_names
@@ -943,34 +979,26 @@ container_data_clause
 
 // https://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_4005.htm#SQLRF01105
 analyze
-    : ( ANALYZE (TABLE tableview_name | INDEX index_name) partition_extention_clause?
-      | ANALYZE CLUSTER cluster_name
-      )
-
-      ( validation_clauses
-      | LIST CHAINED ROWS into_clause1?
-      | DELETE SYSTEM? STATISTICS
-      )
-      ';'
+    : (
+        ANALYZE (TABLE tableview_name | INDEX index_name) partition_extention_clause?
+        | ANALYZE CLUSTER cluster_name
+    ) (validation_clauses | LIST CHAINED ROWS into_clause1? | DELETE SYSTEM? STATISTICS) ';'
     ;
 
 partition_extention_clause
-    : PARTITION ( '(' partition_name ')'
-                | FOR '(' partition_key_value (',' partition_key_value)* ')'
-                )
-    | SUBPARTITION ( '(' subpartition_name ')'
-                   | FOR '(' subpartition_key_value (',' subpartition_key_value)* ')'
-                   )
+    : PARTITION (
+        '(' partition_name ')'
+        | FOR '(' partition_key_value (',' partition_key_value)* ')'
+    )
+    | SUBPARTITION (
+        '(' subpartition_name ')'
+        | FOR '(' subpartition_key_value (',' subpartition_key_value)* ')'
+    )
     ;
 
 validation_clauses
     : VALIDATE REF UPDATE (SET DANGLING TO NULL_)?
-    | VALIDATE STRUCTURE
-        ( CASCADE FAST
-        | CASCADE online_or_offline? into_clause?
-        | CASCADE
-        )?
-        online_or_offline? into_clause?
+    | VALIDATE STRUCTURE (CASCADE FAST | CASCADE online_or_offline? into_clause? | CASCADE)? online_or_offline? into_clause?
     ;
 
 online_or_offline
@@ -993,10 +1021,7 @@ subpartition_key_value
 
 //https://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_4006.htm#SQLRF01106
 associate_statistics
-    : ASSOCIATE STATISTICS
-        WITH (column_association | function_association)
-        storage_table_clause?
-      ';'
+    : ASSOCIATE STATISTICS WITH (column_association | function_association) storage_table_clause? ';'
     ;
 
 column_association
@@ -1004,23 +1029,22 @@ column_association
     ;
 
 function_association
-    : ( FUNCTIONS function_name (',' function_name)*
-      | PACKAGES package_name (',' package_name)*
-      | TYPES type_name (',' type_name)*
-      | INDEXES index_name (',' index_name)*
-      | INDEXTYPES indextype_name (',' indextype_name)*
-      )
-
-      ( using_statistics_type
-      | default_cost_clause (',' default_selectivity_clause)?
-      | default_selectivity_clause (',' default_cost_clause)?
-      )
+    : (
+        FUNCTIONS function_name (',' function_name)*
+        | PACKAGES package_name (',' package_name)*
+        | TYPES type_name (',' type_name)*
+        | INDEXES index_name (',' index_name)*
+        | INDEXTYPES indextype_name (',' indextype_name)*
+    ) (
+        using_statistics_type
+        | default_cost_clause (',' default_selectivity_clause)?
+        | default_selectivity_clause (',' default_cost_clause)?
+    )
     ;
 
 indextype_name
     : id_expression
     ;
-
 
 using_statistics_type
     : USING (statistics_type_name | NULL_)
@@ -1060,13 +1084,12 @@ storage_table_clause
 
 // https://docs.oracle.com/database/121/SQLRF/statements_4008.htm#SQLRF56110
 unified_auditing
-    : {this.isVersion12()}?
-      AUDIT (POLICY policy_name ((BY | EXCEPT) audit_user (',' audit_user)* )?
-                                (WHENEVER NOT? SUCCESSFUL)?
-            | CONTEXT NAMESPACE oracle_namespace
-                      ATTRIBUTES attribute_name (',' attribute_name)* (BY audit_user (',' audit_user)*)?
-            )
-      ';'
+    : {this.isVersion12()}? AUDIT (
+        POLICY policy_name ((BY | EXCEPT) audit_user (',' audit_user)*)? (WHENEVER NOT? SUCCESSFUL)?
+        | CONTEXT NAMESPACE oracle_namespace ATTRIBUTES attribute_name (',' attribute_name)* (
+            BY audit_user (',' audit_user)*
+        )?
+    ) ';'
     ;
 
 policy_name
@@ -1077,14 +1100,12 @@ policy_name
 // https://docs.oracle.com/database/121/SQLRF/statements_4007.htm#SQLRF01107
 
 audit_traditional
-    : AUDIT ( audit_operation_clause (auditing_by_clause | IN SESSION CURRENT)?
-            | audit_schema_object_clause
-            | NETWORK
-            | audit_direct_path
-            )
-        (BY (SESSION | ACCESS) )? (WHENEVER NOT? SUCCESSFUL)?
-        audit_container_clause?
-      ';'
+    : AUDIT (
+        audit_operation_clause (auditing_by_clause | IN SESSION CURRENT)?
+        | audit_schema_object_clause
+        | NETWORK
+        | audit_direct_path
+    ) (BY (SESSION | ACCESS))? (WHENEVER NOT? SUCCESSFUL)? audit_container_clause? ';'
     ;
 
 audit_direct_path
@@ -1096,9 +1117,10 @@ audit_container_clause
     ;
 
 audit_operation_clause
-    : ( (sql_statement_shortcut | ALL STATEMENTS?)  (',' (sql_statement_shortcut | ALL STATEMENTS?) )*
-      | (system_privilege | ALL PRIVILEGES)  (',' (system_privilege | ALL PRIVILEGES) )*
-      )
+    : (
+        (sql_statement_shortcut | ALL STATEMENTS?) (',' (sql_statement_shortcut | ALL STATEMENTS?))*
+        | (system_privilege | ALL PRIVILEGES) (',' (system_privilege | ALL PRIVILEGES))*
+    )
     ;
 
 auditing_by_clause
@@ -1110,7 +1132,7 @@ audit_user
     ;
 
 audit_schema_object_clause
-    : ( sql_operation (',' sql_operation)* | ALL) auditing_on_clause
+    : (sql_operation (',' sql_operation)* | ALL) auditing_on_clause
     ;
 
 sql_operation
@@ -1131,12 +1153,13 @@ sql_operation
     ;
 
 auditing_on_clause
-    : ON ( object_name
-         | DIRECTORY regular_id
-         | MINING MODEL model_name
-         | {this.isVersion12()}? SQL TRANSLATION PROFILE profile_name
-         | DEFAULT
-         )
+    : ON (
+        object_name
+        | DIRECTORY regular_id
+        | MINING MODEL model_name
+        | {this.isVersion12()}? SQL TRANSLATION PROFILE profile_name
+        | DEFAULT
+    )
     ;
 
 model_name
@@ -1206,19 +1229,11 @@ rename_object
     ;
 
 grant_statement
-    : GRANT
-        ( ','?
-          (role_name
-          | system_privilege
-          | object_privilege paren_column_list?
-          )
-        )+
-      (ON grant_object_name)?
-      TO (grantee_name | PUBLIC) (',' (grantee_name | PUBLIC) )*
-      (WITH (ADMIN | DELEGATE) OPTION)?
-      (WITH HIERARCHY OPTION)?
-      (WITH GRANT OPTION)?
-      container_clause? ';'
+    : GRANT (','? (role_name | system_privilege | object_privilege paren_column_list?))+ (
+        ON grant_object_name
+    )? TO (grantee_name | PUBLIC) (',' (grantee_name | PUBLIC))* (WITH (ADMIN | DELEGATE) OPTION)? (
+        WITH HIERARCHY OPTION
+    )? (WITH GRANT OPTION)? container_clause? ';'
     ;
 
 container_clause
@@ -1226,8 +1241,7 @@ container_clause
     ;
 
 create_directory
-    : CREATE (OR REPLACE)? DIRECTORY directory_name AS directory_path
-      ';'
+    : CREATE (OR REPLACE)? DIRECTORY directory_name AS directory_path ';'
     ;
 
 directory_name
@@ -1241,11 +1255,10 @@ directory_path
 // https://docs.oracle.com/cd/E11882_01/appdev.112/e25519/alter_library.htm#LNPLS99946
 // https://docs.oracle.com/database/121/LNPLS/alter_library.htm#LNPLS99946
 alter_library
-    : ALTER LIBRARY library_name
-       ( COMPILE library_debug? compiler_parameters_clause* (REUSE SETTINGS)?
-       | library_editionable
-       )
-     ';'
+    : ALTER LIBRARY library_name (
+        COMPILE library_debug? compiler_parameters_clause* (REUSE SETTINGS)?
+        | library_editionable
+    ) ';'
     ;
 
 library_editionable
@@ -1255,7 +1268,6 @@ library_editionable
 library_debug
     : {this.isVersion12()}? DEBUG
     ;
-
 
 compiler_parameters_clause
     : parameter_name EQUALS_OP parameter_value
@@ -1272,18 +1284,18 @@ library_name
 // https://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_4004.htm#SQLRF01104
 // https://docs.oracle.com/database/121/SQLRF/statements_4004.htm#SQLRF01104
 alter_view
-    : ALTER VIEW tableview_name
-       ( ADD out_of_line_constraint
-       | MODIFY CONSTRAINT constraint_name (RELY | NORELY)
-       | DROP ( CONSTRAINT constraint_name
-              | PRIMARY KEY
-              | UNIQUE '(' column_name (',' column_name)* ')'
-              )
-       | COMPILE
-       | READ (ONLY | WRITE)
-       | alter_view_editionable?
-       )
-      ';'
+    : ALTER VIEW tableview_name (
+        ADD out_of_line_constraint
+        | MODIFY CONSTRAINT constraint_name (RELY | NORELY)
+        | DROP (
+            CONSTRAINT constraint_name
+            | PRIMARY KEY
+            | UNIQUE '(' column_name (',' column_name)* ')'
+        )
+        | COMPILE
+        | READ (ONLY | WRITE)
+        | alter_view_editionable?
+    ) ';'
     ;
 
 alter_view_editionable
@@ -1291,38 +1303,35 @@ alter_view_editionable
     ;
 
 create_view
-    : CREATE (OR REPLACE)? (OR? FORCE)? EDITIONABLE? EDITIONING? VIEW
-      tableview_name view_options?
-      AS select_only_statement subquery_restriction_clause?
+    : CREATE (OR REPLACE)? (OR? FORCE)? EDITIONABLE? EDITIONING? VIEW tableview_name view_options? AS select_only_statement
+        subquery_restriction_clause?
     ;
 
 view_options
-    :  view_alias_constraint
+    : view_alias_constraint
     | object_view_clause
-//  | xmltype_view_clause //TODO
+    //  | xmltype_view_clause //TODO
     ;
 
 view_alias_constraint
-    : '(' ( ','? (table_alias inline_constraint* | out_of_line_constraint) )+ ')'
+    : '(' (','? (table_alias inline_constraint* | out_of_line_constraint))+ ')'
     ;
 
 object_view_clause
-    : OF type_name
-       ( WITH OBJECT (IDENTIFIER|ID|OID) ( DEFAULT | '(' REGULAR_ID (',' REGULAR_ID)* ')' )
-       | UNDER tableview_name
-       )
-       ( '(' ( ','? (out_of_line_constraint | REGULAR_ID inline_constraint ) )+ ')' )*
+    : OF type_name (
+        WITH OBJECT (IDENTIFIER | ID | OID) (DEFAULT | '(' REGULAR_ID (',' REGULAR_ID)* ')')
+        | UNDER tableview_name
+    ) ('(' ( ','? (out_of_line_constraint | REGULAR_ID inline_constraint))+ ')')*
     ;
 
 inline_constraint
-    : (CONSTRAINT constraint_name)?
-        ( NOT? NULL_
+    : (CONSTRAINT constraint_name)? (
+        NOT? NULL_
         | UNIQUE
         | PRIMARY KEY
         | references_clause
         | check_constraint
-        )
-      constraint_state?
+    ) constraint_state?
     ;
 
 inline_ref_constraint
@@ -1334,48 +1343,48 @@ inline_ref_constraint
 out_of_line_ref_constraint
     : SCOPE FOR '(' ref_col_or_attr=regular_id ')' IS tableview_name
     | REF '(' ref_col_or_attr=regular_id ')' WITH ROWID
-    | (CONSTRAINT constraint_name)? FOREIGN KEY '(' ( ','? ref_col_or_attr=regular_id)+ ')' references_clause constraint_state?
+    | (CONSTRAINT constraint_name)? FOREIGN KEY '(' (','? ref_col_or_attr=regular_id)+ ')' references_clause constraint_state?
     ;
 
 out_of_line_constraint
-    : ( (CONSTRAINT constraint_name)?
-          ( UNIQUE '(' column_name (',' column_name)* ')'
-          | PRIMARY KEY '(' column_name (',' column_name)* ')'
-          | foreign_key_clause
-          | CHECK '(' expression ')'
-          )
-       )
-      constraint_state?
+    : (
+        (CONSTRAINT constraint_name)? (
+            UNIQUE '(' column_name (',' column_name)* ')'
+            | PRIMARY KEY '(' column_name (',' column_name)* ')'
+            | foreign_key_clause
+            | CHECK '(' expression ')'
+        )
+    ) constraint_state?
     ;
 
 constraint_state
-    : ( NOT? DEFERRABLE
-      | INITIALLY (IMMEDIATE|DEFERRED)
-      | (RELY|NORELY)
-      | (ENABLE|DISABLE)
-      | (VALIDATE|NOVALIDATE)
-      | using_index_clause
-      )+
+    : (
+        NOT? DEFERRABLE
+        | INITIALLY (IMMEDIATE | DEFERRED)
+        | (RELY | NORELY)
+        | (ENABLE | DISABLE)
+        | (VALIDATE | NOVALIDATE)
+        | using_index_clause
+    )+
     ;
 
 alter_tablespace
-    : ALTER TABLESPACE tablespace
-       ( DEFAULT table_compression? storage_clause?
-       | MINIMUM EXTENT size_clause
-       | RESIZE size_clause
-       | COALESCE
-       | SHRINK SPACE_KEYWORD (KEEP size_clause)?
-       | RENAME TO new_tablespace_name
-       | begin_or_end BACKUP
-       | datafile_tempfile_clauses
-       | tablespace_logging_clauses
-       | tablespace_group_clause
-       | tablespace_state_clauses
-       | autoextend_clause
-       | flashback_mode_clause
-       | tablespace_retention_clause
-       )
-     ';'
+    : ALTER TABLESPACE tablespace (
+        DEFAULT table_compression? storage_clause?
+        | MINIMUM EXTENT size_clause
+        | RESIZE size_clause
+        | COALESCE
+        | SHRINK SPACE_KEYWORD (KEEP size_clause)?
+        | RENAME TO new_tablespace_name
+        | begin_or_end BACKUP
+        | datafile_tempfile_clauses
+        | tablespace_logging_clauses
+        | tablespace_group_clause
+        | tablespace_state_clauses
+        | autoextend_clause
+        | flashback_mode_clause
+        | tablespace_retention_clause
+    ) ';'
     ;
 
 datafile_tempfile_clauses
@@ -1416,17 +1425,16 @@ new_tablespace_name
     ;
 
 create_tablespace
-    : CREATE (BIGFILE | SMALLFILE)?
-        ( permanent_tablespace_clause
+    : CREATE (BIGFILE | SMALLFILE)? (
+        permanent_tablespace_clause
         | temporary_tablespace_clause
         | undo_tablespace_clause
-        )
-      ';'
+    ) ';'
     ;
 
 permanent_tablespace_clause
-    : TABLESPACE id_expression datafile_specification?
-        ( MINIMUM EXTENT size_clause
+    : TABLESPACE id_expression datafile_specification? (
+        MINIMUM EXTENT size_clause
         | BLOCKSIZE size_clause
         | logging_clause
         | FORCE LOGGING
@@ -1436,7 +1444,7 @@ permanent_tablespace_clause
         | extent_management_clause
         | segment_management_clause
         | flashback_mode_clause
-        )*
+    )*
     ;
 
 tablespace_encryption_spec
@@ -1445,15 +1453,12 @@ tablespace_encryption_spec
 
 logging_clause
     : LOGGING
-     | NOLOGGING
-     | FILESYSTEM_LIKE_LOGGING
+    | NOLOGGING
+    | FILESYSTEM_LIKE_LOGGING
     ;
 
 extent_management_clause
-    : EXTENT MANAGEMENT LOCAL
-        ( AUTOALLOCATE
-        | UNIFORM (SIZE size_clause)?
-        )?
+    : EXTENT MANAGEMENT LOCAL (AUTOALLOCATE | UNIFORM (SIZE size_clause)?)?
     ;
 
 segment_management_clause
@@ -1461,15 +1466,11 @@ segment_management_clause
     ;
 
 temporary_tablespace_clause
-    : TEMPORARY TABLESPACE tablespace_name=id_expression
-        tempfile_specification?
-        tablespace_group_clause? extent_management_clause?
+    : TEMPORARY TABLESPACE tablespace_name=id_expression tempfile_specification? tablespace_group_clause? extent_management_clause?
     ;
 
 undo_tablespace_clause
-    : UNDO TABLESPACE tablespace_name=id_expression
-        datafile_specification?
-        extent_management_clause? tablespace_retention_clause?
+    : UNDO TABLESPACE tablespace_name=id_expression datafile_specification? extent_management_clause? tablespace_retention_clause?
     ;
 
 tablespace_retention_clause
@@ -1479,31 +1480,25 @@ tablespace_retention_clause
 // asm_filename is just a charater string.  Would need to parse the string
 // to find diskgroup...
 datafile_specification
-    : DATAFILE
-	  (','? datafile_tempfile_spec)
+    : DATAFILE (','? datafile_tempfile_spec)
     ;
 
 tempfile_specification
-    : TEMPFILE
-	  (','? datafile_tempfile_spec)
+    : TEMPFILE (','? datafile_tempfile_spec)
     ;
 
 datafile_tempfile_spec
     : (CHAR_STRING)? (SIZE size_clause)? REUSE? autoextend_clause?
     ;
 
-
 redo_log_file_spec
-    : (DATAFILE CHAR_STRING
-      | '(' ( ','? CHAR_STRING )+ ')'
-      )?
-        (SIZE size_clause)?
-        (BLOCKSIZE size_clause)?
-        REUSE?
+    : (DATAFILE CHAR_STRING | '(' ( ','? CHAR_STRING)+ ')')? (SIZE size_clause)? (
+        BLOCKSIZE size_clause
+    )? REUSE?
     ;
 
 autoextend_clause
-    : AUTOEXTEND (OFF | ON (NEXT size_clause)? maxsize_clause? )
+    : AUTOEXTEND (OFF | ON (NEXT size_clause)? maxsize_clause?)
     ;
 
 maxsize_clause
@@ -1520,46 +1515,43 @@ parallel_clause
     ;
 
 alter_materialized_view
-    : ALTER MATERIALIZED VIEW tableview_name
-       ( physical_attributes_clause
-       | modify_mv_column_clause
-       | table_compression
-       | lob_storage_clause (',' lob_storage_clause)*
-       | modify_lob_storage_clause (',' modify_lob_storage_clause)*
-//TODO | alter_table_partitioning
-       | parallel_clause
-       | logging_clause
-       | allocate_extent_clause
-       | deallocate_unused_clause
-       | shrink_clause
-       | (cache_or_nocache)
-       )?
-       alter_iot_clauses?
-       (USING INDEX physical_attributes_clause)?
-       alter_mv_option1?
-       ( enable_or_disable QUERY REWRITE
-       | COMPILE
-       | CONSIDER FRESH
-       )?
-     ';'
+    : ALTER MATERIALIZED VIEW tableview_name (
+        physical_attributes_clause
+        | modify_mv_column_clause
+        | table_compression
+        | lob_storage_clause (',' lob_storage_clause)*
+        | modify_lob_storage_clause (',' modify_lob_storage_clause)*
+        //TODO | alter_table_partitioning
+        | parallel_clause
+        | logging_clause
+        | allocate_extent_clause
+        | deallocate_unused_clause
+        | shrink_clause
+        | (cache_or_nocache)
+    )? alter_iot_clauses? (USING INDEX physical_attributes_clause)? alter_mv_option1? (
+        enable_or_disable QUERY REWRITE
+        | COMPILE
+        | CONSIDER FRESH
+    )? ';'
     ;
 
 alter_mv_option1
     : alter_mv_refresh
-//TODO  | MODIFY scoped_table_ref_constraint
+    //TODO  | MODIFY scoped_table_ref_constraint
     ;
 
 alter_mv_refresh
-    : REFRESH ( FAST
-              | COMPLETE
-              | FORCE
-              | ON (DEMAND | COMMIT)
-              | START WITH expression
-              | NEXT expression
-              | WITH PRIMARY KEY
-              | USING DEFAULT? MASTER ROLLBACK SEGMENT rollback_segment?
-              | USING (ENFORCED | TRUSTED) CONSTRAINTS
-              )+
+    : REFRESH (
+        FAST
+        | COMPLETE
+        | FORCE
+        | ON (DEMAND | COMMIT)
+        | START WITH expression
+        | NEXT expression
+        | WITH PRIMARY KEY
+        | USING DEFAULT? MASTER ROLLBACK SEGMENT rollback_segment?
+        | USING (ENFORCED | TRUSTED) CONSTRAINTS
+    )+
     ;
 
 rollback_segment
@@ -1571,20 +1563,19 @@ modify_mv_column_clause
     ;
 
 alter_materialized_view_log
-    : ALTER MATERIALIZED VIEW LOG FORCE? ON tableview_name
-       ( physical_attributes_clause
-       | add_mv_log_column_clause
-//TODO | alter_table_partitioning
-       | parallel_clause
-       | logging_clause
-       | allocate_extent_clause
-       | shrink_clause
-       | move_mv_log_clause
-       | cache_or_nocache
-       )?
-       mv_log_augmentation? mv_log_purge_clause?
-      ';'
+    : ALTER MATERIALIZED VIEW LOG FORCE? ON tableview_name (
+        physical_attributes_clause
+        | add_mv_log_column_clause
+        //TODO | alter_table_partitioning
+        | parallel_clause
+        | logging_clause
+        | allocate_extent_clause
+        | shrink_clause
+        | move_mv_log_clause
+        | cache_or_nocache
+    )? mv_log_augmentation? mv_log_purge_clause? ';'
     ;
+
 add_mv_log_column_clause
     : ADD '(' column_name ')'
     ;
@@ -1594,92 +1585,74 @@ move_mv_log_clause
     ;
 
 mv_log_augmentation
-    : ADD ( ( OBJECT ID
-            | PRIMARY KEY
-            | ROWID
-            | SEQUENCE
-            )
-            ('(' column_name (',' column_name)* ')')?
-
-          | '(' column_name (',' column_name)* ')'
-          )
-          new_values_clause?
+    : ADD (
+        (OBJECT ID | PRIMARY KEY | ROWID | SEQUENCE) ('(' column_name (',' column_name)* ')')?
+        | '(' column_name (',' column_name)* ')'
+    ) new_values_clause?
     ;
 
 create_materialized_view_log
-    : CREATE MATERIALIZED VIEW LOG ON tableview_name
-        ( ( physical_attributes_clause
-          | TABLESPACE tablespace_name=id_expression
-          | logging_clause
-          | (CACHE | NOCACHE)
-          )+
-         )?
-        parallel_clause?
-        // table_partitioning_clauses TODO
-        ( WITH
-           ( ','?
-             ( OBJECT ID
-             | PRIMARY KEY
-             | ROWID
-             | SEQUENCE
-             | COMMIT SCN
-             )
-           )*
-           ('(' ( ','? regular_id )+ ')' new_values_clause? )?
-           mv_log_purge_clause?
-        )*
+    : CREATE MATERIALIZED VIEW LOG ON tableview_name (
+        (
+            physical_attributes_clause
+            | TABLESPACE tablespace_name=id_expression
+            | logging_clause
+            | (CACHE | NOCACHE)
+        )+
+    )? parallel_clause?
+    // table_partitioning_clauses TODO
+    (
+        WITH (','? ( OBJECT ID | PRIMARY KEY | ROWID | SEQUENCE | COMMIT SCN))* (
+            '(' ( ','? regular_id)+ ')' new_values_clause?
+        )? mv_log_purge_clause?
+    )*
     ;
 
 new_values_clause
-    : (INCLUDING | EXCLUDING ) NEW VALUES
+    : (INCLUDING | EXCLUDING) NEW VALUES
     ;
 
 mv_log_purge_clause
-    : PURGE
-         ( IMMEDIATE (SYNCHRONOUS | ASYNCHRONOUS)?
-      // |START WITH CLAUSES TODO
-         )
+    : PURGE (
+        IMMEDIATE (SYNCHRONOUS | ASYNCHRONOUS)?
+        // |START WITH CLAUSES TODO
+    )
     ;
 
 create_materialized_view
-    : CREATE MATERIALIZED VIEW tableview_name
-      (OF type_name )?
-//scoped_table_ref and column alias goes here  TODO
-        ( ON PREBUILT TABLE ( (WITH | WITHOUT) REDUCED PRECISION)?
-        | physical_properties?  (CACHE | NOCACHE)? parallel_clause? build_clause?
-        )
-        ( USING INDEX ( (physical_attributes_clause | TABLESPACE mv_tablespace=id_expression)+ )*
+    : CREATE MATERIALIZED VIEW tableview_name (OF type_name)?
+    //scoped_table_ref and column alias goes here  TODO
+    (
+        ON PREBUILT TABLE ( (WITH | WITHOUT) REDUCED PRECISION)?
+        | physical_properties? (CACHE | NOCACHE)? parallel_clause? build_clause?
+    ) (
+        USING INDEX ((physical_attributes_clause | TABLESPACE mv_tablespace=id_expression)+)*
         | USING NO INDEX
-        )?
-        create_mv_refresh?
-        (FOR UPDATE)?
-        ( (DISABLE | ENABLE) QUERY REWRITE )?
-        AS select_only_statement
-        ';'
+    )? create_mv_refresh? (FOR UPDATE)? ((DISABLE | ENABLE) QUERY REWRITE)? AS select_only_statement ';'
     ;
 
 create_mv_refresh
-    : ( NEVER REFRESH
-      | REFRESH
-         ( (FAST | COMPLETE | FORCE)
-         | ON (DEMAND | COMMIT)
-         | (START WITH | NEXT) //date goes here TODO
-         | WITH (PRIMARY KEY | ROWID)
-         | USING
-             ( DEFAULT (MASTER | LOCAL)? ROLLBACK SEGMENT
-             | (MASTER | LOCAL)? ROLLBACK SEGMENT rb_segment=REGULAR_ID
-             )
-         | USING (ENFORCED | TRUSTED) CONSTRAINTS
-         )+
-      )
+    : (
+        NEVER REFRESH
+        | REFRESH (
+            (FAST | COMPLETE | FORCE)
+            | ON (DEMAND | COMMIT)
+            | (START WITH | NEXT) //date goes here TODO
+            | WITH (PRIMARY KEY | ROWID)
+            | USING (
+                DEFAULT (MASTER | LOCAL)? ROLLBACK SEGMENT
+                | (MASTER | LOCAL)? ROLLBACK SEGMENT rb_segment=REGULAR_ID
+            )
+            | USING (ENFORCED | TRUSTED) CONSTRAINTS
+        )+
+    )
     ;
 
 create_context
-    : CREATE (OR REPLACE)? CONTEXT oracle_namespace USING (schema_object_name '.')? package_name
-           (INITIALIZED (EXTERNALLY | GLOBALLY)
-           | ACCESSED GLOBALLY
-           )?
-      ';'
+    : CREATE (OR REPLACE)? CONTEXT oracle_namespace USING (schema_object_name '.')? package_name (
+        INITIALIZED (EXTERNALLY | GLOBALLY)
+        | ACCESSED GLOBALLY
+    )? ';'
     ;
 
 oracle_namespace
@@ -1688,33 +1661,33 @@ oracle_namespace
 
 //https://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_5001.htm#SQLRF01201
 create_cluster
-    : CREATE CLUSTER  cluster_name '(' column_name datatype SORT? (',' column_name datatype SORT?)* ')'
-          ( physical_attributes_clause
-          | SIZE size_clause
-          | TABLESPACE tablespace
-          | INDEX
-          | (SINGLE TABLE)? HASHKEYS UNSIGNED_INTEGER (HASH IS expression)?
-          )*
-          parallel_clause? (ROWDEPENDENCIES | NOROWDEPENDENCIES)?
-          (CACHE | NOCACHE)?
-          ';'
+    : CREATE CLUSTER cluster_name '(' column_name datatype SORT? (',' column_name datatype SORT?)* ')' (
+        physical_attributes_clause
+        | SIZE size_clause
+        | TABLESPACE tablespace
+        | INDEX
+        | (SINGLE TABLE)? HASHKEYS UNSIGNED_INTEGER (HASH IS expression)?
+    )* parallel_clause? (ROWDEPENDENCIES | NOROWDEPENDENCIES)? (CACHE | NOCACHE)? ';'
     ;
 
 create_table
-    : CREATE (GLOBAL TEMPORARY)? TABLE tableview_name
-        (relational_table | object_table | xmltype_table) (AS select_only_statement)?
-      ';'
+    : CREATE (GLOBAL TEMPORARY)? TABLE tableview_name (
+        relational_table
+        | object_table
+        | xmltype_table
+    ) (AS select_only_statement)? ';'
     ;
 
 xmltype_table
-    : OF XMLTYPE ('(' object_properties ')')?
-         (XMLTYPE xmltype_storage)? xmlschema_spec? xmltype_virtual_columns?
-         (ON COMMIT (DELETE | PRESERVE) ROWS)? oid_clause? oid_index_clause?
-         physical_properties? column_properties? table_partitioning_clauses?
-         (CACHE | NOCACHE)? (RESULT_CACHE '(' MODE (DEFAULT | FORCE) ')')?
-         parallel_clause? (ROWDEPENDENCIES | NOROWDEPENDENCIES)?
-	 (enable_disable_clause+)? row_movement_clause?
-         flashback_archive_clause?
+    : OF XMLTYPE ('(' object_properties ')')? (XMLTYPE xmltype_storage)? xmlschema_spec? xmltype_virtual_columns? (
+        ON COMMIT (DELETE | PRESERVE) ROWS
+    )? oid_clause? oid_index_clause? physical_properties? column_properties? table_partitioning_clauses? (
+        CACHE
+        | NOCACHE
+    )? (RESULT_CACHE '(' MODE (DEFAULT | FORCE) ')')? parallel_clause? (
+        ROWDEPENDENCIES
+        | NOROWDEPENDENCIES
+    )? (enable_disable_clause+)? row_movement_clause? flashback_archive_clause?
     ;
 
 xmltype_virtual_columns
@@ -1726,26 +1699,32 @@ xmltype_column_properties
     ;
 
 xmltype_storage
-    : STORE  AS (OBJECT RELATIONAL
-                | (SECUREFILE | BASICFILE)? (CLOB | BINARY XML) (lob_segname ('(' lob_parameters ')')? | '(' lob_parameters ')')?
-                )
+    : STORE AS (
+        OBJECT RELATIONAL
+        | (SECUREFILE | BASICFILE)? (CLOB | BINARY XML) (
+            lob_segname ('(' lob_parameters ')')?
+            | '(' lob_parameters ')'
+        )?
+    )
     | STORE VARRAYS AS (LOBS | TABLES)
     ;
 
 xmlschema_spec
-    : (XMLSCHEMA DELIMITED_ID)? ELEMENT DELIMITED_ID
-         (allow_or_disallow NONSCHEMA)?
-         (allow_or_disallow ANYSCHEMA)?
+    : (XMLSCHEMA DELIMITED_ID)? ELEMENT DELIMITED_ID (allow_or_disallow NONSCHEMA)? (
+        allow_or_disallow ANYSCHEMA
+    )?
     ;
 
 object_table
-    : OF type_name object_table_substitution?
-      ('(' object_properties (',' object_properties)* ')')?
-      (ON COMMIT (DELETE | PRESERVE) ROWS)? oid_clause? oid_index_clause?
-      physical_properties? column_properties? table_partitioning_clauses?
-      (CACHE | NOCACHE)? (RESULT_CACHE '(' MODE (DEFAULT | FORCE) ')')?
-      parallel_clause? (ROWDEPENDENCIES | NOROWDEPENDENCIES)?
-      (enable_disable_clause+)? row_movement_clause? flashback_archive_clause?
+    : OF type_name object_table_substitution? ('(' object_properties (',' object_properties)* ')')? (
+        ON COMMIT (DELETE | PRESERVE) ROWS
+    )? oid_clause? oid_index_clause? physical_properties? column_properties? table_partitioning_clauses? (
+        CACHE
+        | NOCACHE
+    )? (RESULT_CACHE '(' MODE (DEFAULT | FORCE) ')')? parallel_clause? (
+        ROWDEPENDENCIES
+        | NOROWDEPENDENCIES
+    )? (enable_disable_clause+)? row_movement_clause? flashback_archive_clause?
     ;
 
 oid_index_clause
@@ -1757,7 +1736,10 @@ oid_clause
     ;
 
 object_properties
-    : (column_name | attribute_name) (DEFAULT expression)? (inline_constraint (',' inline_constraint)* | inline_ref_constraint)?
+    : (column_name | attribute_name) (DEFAULT expression)? (
+        inline_constraint (',' inline_constraint)*
+        | inline_ref_constraint
+    )?
     | out_of_line_constraint
     | out_of_line_ref_constraint
     | supplemental_logging_props
@@ -1768,22 +1750,21 @@ object_table_substitution
     ;
 
 relational_table
-    : ('(' relational_property (',' relational_property)* ')')?
-      (ON COMMIT (DELETE | PRESERVE) ROWS)?
-      physical_properties? column_properties? table_partitioning_clauses?
-      (CACHE | NOCACHE)? (RESULT_CACHE '(' MODE (DEFAULT | FORCE) ')')?
-      parallel_clause?
-      (ROWDEPENDENCIES | NOROWDEPENDENCIES)?
-      (enable_disable_clause+)? row_movement_clause? flashback_archive_clause?
+    : ('(' relational_property (',' relational_property)* ')')? (
+        ON COMMIT (DELETE | PRESERVE) ROWS
+    )? physical_properties? column_properties? table_partitioning_clauses? (CACHE | NOCACHE)? (
+        RESULT_CACHE '(' MODE (DEFAULT | FORCE) ')'
+    )? parallel_clause? (ROWDEPENDENCIES | NOROWDEPENDENCIES)? (enable_disable_clause+)? row_movement_clause? flashback_archive_clause?
     ;
 
 relational_property
-    : (column_definition
+    : (
+        column_definition
         | virtual_column_definition
         | out_of_line_constraint
         | out_of_line_ref_constraint
         | supplemental_logging_props
-        )
+    )
     ;
 
 table_partitioning_clauses
@@ -1798,30 +1779,37 @@ table_partitioning_clauses
     ;
 
 range_partitions
-    : PARTITION BY RANGE '(' column_name (',' column_name)* ')'
-        (INTERVAL '(' expression ')' (STORE IN '(' tablespace (',' tablespace)* ')' )? )?
-          '(' PARTITION partition_name? range_values_clause table_partition_description (',' PARTITION partition_name? range_values_clause table_partition_description)* ')'
+    : PARTITION BY RANGE '(' column_name (',' column_name)* ')' (
+        INTERVAL '(' expression ')' (STORE IN '(' tablespace (',' tablespace)* ')')?
+    )? '(' PARTITION partition_name? range_values_clause table_partition_description (
+        ',' PARTITION partition_name? range_values_clause table_partition_description
+    )* ')'
     ;
 
 list_partitions
-    : PARTITION BY LIST '(' column_name ')'
-        '(' PARTITION partition_name? list_values_clause table_partition_description  (',' PARTITION partition_name? list_values_clause table_partition_description )* ')'
+    : PARTITION BY LIST '(' column_name ')' '(' PARTITION partition_name? list_values_clause table_partition_description (
+        ',' PARTITION partition_name? list_values_clause table_partition_description
+    )* ')'
     ;
 
 hash_partitions
-    : PARTITION BY HASH '(' column_name (',' column_name)* ')'
-        (individual_hash_partitions | hash_partitions_by_quantity)
+    : PARTITION BY HASH '(' column_name (',' column_name)* ')' (
+        individual_hash_partitions
+        | hash_partitions_by_quantity
+    )
     ;
 
 individual_hash_partitions
-    : '(' PARTITION partition_name? partitioning_storage_clause? (',' PARTITION partition_name? partitioning_storage_clause?)* ')'
+    : '(' PARTITION partition_name? partitioning_storage_clause? (
+        ',' PARTITION partition_name? partitioning_storage_clause?
+    )* ')'
     ;
 
 hash_partitions_by_quantity
-    : PARTITIONS hash_partition_quantity
-       (STORE IN '(' tablespace (',' tablespace)* ')')?
-         (table_compression | key_compression)?
-         (OVERFLOW STORE IN '(' tablespace (',' tablespace)* ')' )?
+    : PARTITIONS hash_partition_quantity (STORE IN '(' tablespace (',' tablespace)* ')')? (
+        table_compression
+        | key_compression
+    )? (OVERFLOW STORE IN '(' tablespace (',' tablespace)* ')')?
     ;
 
 hash_partition_quantity
@@ -1829,27 +1817,33 @@ hash_partition_quantity
     ;
 
 composite_range_partitions
-    : PARTITION BY RANGE '(' column_name (',' column_name)* ')'
-       (INTERVAL '(' expression ')' (STORE IN '(' tablespace (',' tablespace)* ')' )? )?
-       (subpartition_by_range | subpartition_by_list | subpartition_by_hash)
-         '(' range_partition_desc (',' range_partition_desc)* ')'
+    : PARTITION BY RANGE '(' column_name (',' column_name)* ')' (
+        INTERVAL '(' expression ')' (STORE IN '(' tablespace (',' tablespace)* ')')?
+    )? (subpartition_by_range | subpartition_by_list | subpartition_by_hash) '(' range_partition_desc (
+        ',' range_partition_desc
+    )* ')'
     ;
 
 composite_list_partitions
-    : PARTITION BY LIST '(' column_name ')'
-       (subpartition_by_range | subpartition_by_list | subpartition_by_hash)
-        '(' list_partition_desc (',' list_partition_desc)* ')'
+    : PARTITION BY LIST '(' column_name ')' (
+        subpartition_by_range
+        | subpartition_by_list
+        | subpartition_by_hash
+    ) '(' list_partition_desc (',' list_partition_desc)* ')'
     ;
 
 composite_hash_partitions
-    : PARTITION BY HASH '(' (',' column_name)+ ')'
-       (subpartition_by_range | subpartition_by_list | subpartition_by_hash)
-         (individual_hash_partitions | hash_partitions_by_quantity)
+    : PARTITION BY HASH '(' (',' column_name)+ ')' (
+        subpartition_by_range
+        | subpartition_by_list
+        | subpartition_by_hash
+    ) (individual_hash_partitions | hash_partitions_by_quantity)
     ;
 
 reference_partitioning
-    : PARTITION BY REFERENCE '(' regular_id ')'
-             ('(' reference_partition_desc (',' reference_partition_desc)* ')')?
+    : PARTITION BY REFERENCE '(' regular_id ')' (
+        '(' reference_partition_desc (',' reference_partition_desc)* ')'
+    )?
     ;
 
 reference_partition_desc
@@ -1857,44 +1851,49 @@ reference_partition_desc
     ;
 
 system_partitioning
-    : PARTITION BY SYSTEM
-       (PARTITIONS UNSIGNED_INTEGER | reference_partition_desc (',' reference_partition_desc)*)?
+    : PARTITION BY SYSTEM (
+        PARTITIONS UNSIGNED_INTEGER
+        | reference_partition_desc (',' reference_partition_desc)*
+    )?
     ;
 
 range_partition_desc
-    : PARTITION partition_name? range_values_clause table_partition_description
-        ( ( '(' ( range_subpartition_desc (',' range_subpartition_desc)*
+    : PARTITION partition_name? range_values_clause table_partition_description (
+        (
+            '(' (
+                range_subpartition_desc (',' range_subpartition_desc)*
                 | list_subpartition_desc (',' list_subpartition_desc)*
                 | individual_hash_subparts (',' individual_hash_subparts)*
-                )
-            ')'
-          | hash_subparts_by_quantity
-          )
-        )?
+            ) ')'
+            | hash_subparts_by_quantity
+        )
+    )?
     ;
 
 list_partition_desc
-    : PARTITION partition_name? list_values_clause table_partition_description
-        ( ( '(' ( range_subpartition_desc (',' range_subpartition_desc)*
+    : PARTITION partition_name? list_values_clause table_partition_description (
+        (
+            '(' (
+                range_subpartition_desc (',' range_subpartition_desc)*
                 | list_subpartition_desc (',' list_subpartition_desc)*
                 | individual_hash_subparts (',' individual_hash_subparts)*
-                )
-            ')'
-          | hash_subparts_by_quantity
-          )
-        )?
+            ) ')'
+            | hash_subparts_by_quantity
+        )
+    )?
     ;
 
 subpartition_template
-    : SUBPARTITION TEMPLATE
-        ( ( '(' ( range_subpartition_desc (',' range_subpartition_desc)*
+    : SUBPARTITION TEMPLATE (
+        (
+            '(' (
+                range_subpartition_desc (',' range_subpartition_desc)*
                 | list_subpartition_desc (',' list_subpartition_desc)*
                 | individual_hash_subparts (',' individual_hash_subparts)*
-                )
-            ')'
-          | hash_subpartition_quantity
-          )
+            ) ')'
+            | hash_subpartition_quantity
         )
+    )
     ;
 
 hash_subpartition_quantity
@@ -1910,10 +1909,10 @@ subpartition_by_list
     ;
 
 subpartition_by_hash
-    : SUBPARTITION BY HASH '(' column_name (',' column_name)* ')'
-       (SUBPARTITIONS UNSIGNED_INTEGER (STORE IN '(' tablespace (',' tablespace)* ')' )?
-       | subpartition_template
-       )?
+    : SUBPARTITION BY HASH '(' column_name (',' column_name)* ')' (
+        SUBPARTITIONS UNSIGNED_INTEGER (STORE IN '(' tablespace (',' tablespace)* ')')?
+        | subpartition_template
+    )?
     ;
 
 subpartition_name
@@ -1933,7 +1932,7 @@ individual_hash_subparts
     ;
 
 hash_subparts_by_quantity
-    : SUBPARTITIONS UNSIGNED_INTEGER (STORE IN '(' tablespace (',' tablespace)* ')' )?
+    : SUBPARTITIONS UNSIGNED_INTEGER (STORE IN '(' tablespace (',' tablespace)* ')')?
     ;
 
 range_values_clause
@@ -1945,28 +1944,27 @@ list_values_clause
     ;
 
 table_partition_description
-    : deferred_segment_creation? segment_attributes_clause?
-        (table_compression | key_compression)?
-        (OVERFLOW segment_attributes_clause? )?
-        (lob_storage_clause | varray_col_properties | nested_table_col_properties)?
+    : deferred_segment_creation? segment_attributes_clause? (table_compression | key_compression)? (
+        OVERFLOW segment_attributes_clause?
+    )? (lob_storage_clause | varray_col_properties | nested_table_col_properties)?
     ;
 
 partitioning_storage_clause
-    : ( TABLESPACE tablespace
-      | OVERFLOW (TABLESPACE tablespace)?
-      | table_compression
-      | key_compression
-      | lob_partitioning_storage
-      | VARRAY varray_item STORE AS (BASICFILE | SECUREFILE)? LOB lob_segname
-      )+
+    : (
+        TABLESPACE tablespace
+        | OVERFLOW (TABLESPACE tablespace)?
+        | table_compression
+        | key_compression
+        | lob_partitioning_storage
+        | VARRAY varray_item STORE AS (BASICFILE | SECUREFILE)? LOB lob_segname
+    )+
     ;
 
 lob_partitioning_storage
-    : LOB '(' lob_item ')'
-       STORE AS (BASICFILE | SECUREFILE)?
-               (lob_segname ('(' TABLESPACE tablespace ')' )?
-               | '(' TABLESPACE tablespace ')'
-               )
+    : LOB '(' lob_item ')' STORE AS (BASICFILE | SECUREFILE)? (
+        lob_segname ('(' TABLESPACE tablespace ')')?
+        | '(' TABLESPACE tablespace ')'
+    )
     ;
 
 //Technically, this should only allow 'K' | 'M' | 'G' | 'T' | 'P' | 'E'
@@ -1975,40 +1973,34 @@ size_clause
     : UNSIGNED_INTEGER REGULAR_ID?
     ;
 
-
 table_compression
-    : COMPRESS
-        ( BASIC
-        | FOR ( OLTP
-              | (QUERY | ARCHIVE) (LOW | HIGH)?
-              )
-        )?
+    : COMPRESS (BASIC | FOR ( OLTP | (QUERY | ARCHIVE) (LOW | HIGH)?))?
     | NOCOMPRESS
     ;
 
 physical_attributes_clause
-    : (PCTFREE pctfree=UNSIGNED_INTEGER
-      | PCTUSED pctused=UNSIGNED_INTEGER
-      | INITRANS inittrans=UNSIGNED_INTEGER
-      | storage_clause
-      )+
+    : (
+        PCTFREE pctfree=UNSIGNED_INTEGER
+        | PCTUSED pctused=UNSIGNED_INTEGER
+        | INITRANS inittrans=UNSIGNED_INTEGER
+        | storage_clause
+    )+
     ;
 
 storage_clause
-    : STORAGE '('
-         (INITIAL initial_size=size_clause
-         | NEXT next_size=size_clause
-         | MINEXTENTS minextents=(UNSIGNED_INTEGER | UNLIMITED)
-         | MAXEXTENTS minextents=(UNSIGNED_INTEGER | UNLIMITED)
-         | PCTINCREASE pctincrease=UNSIGNED_INTEGER
-         | FREELISTS freelists=UNSIGNED_INTEGER
-         | FREELIST GROUPS freelist_groups=UNSIGNED_INTEGER
-         | OPTIMAL (size_clause | NULL_ )
-         | BUFFER_POOL (KEEP | RECYCLE | DEFAULT)
-         | FLASH_CACHE (KEEP | NONE | DEFAULT)
-         | ENCRYPT
-         )+
-       ')'
+    : STORAGE '(' (
+        INITIAL initial_size=size_clause
+        | NEXT next_size=size_clause
+        | MINEXTENTS minextents=(UNSIGNED_INTEGER | UNLIMITED)
+        | MAXEXTENTS minextents=(UNSIGNED_INTEGER | UNLIMITED)
+        | PCTINCREASE pctincrease=UNSIGNED_INTEGER
+        | FREELISTS freelists=UNSIGNED_INTEGER
+        | FREELIST GROUPS freelist_groups=UNSIGNED_INTEGER
+        | OPTIMAL (size_clause | NULL_)
+        | BUFFER_POOL (KEEP | RECYCLE | DEFAULT)
+        | FLASH_CACHE (KEEP | NONE | DEFAULT)
+        | ENCRYPT
+    )+ ')'
     ;
 
 deferred_segment_creation
@@ -2016,14 +2008,11 @@ deferred_segment_creation
     ;
 
 segment_attributes_clause
-    : ( physical_attributes_clause
-      | TABLESPACE tablespace_name=id_expression
-      | logging_clause
-      )+
+    : (physical_attributes_clause | TABLESPACE tablespace_name=id_expression | logging_clause)+
     ;
 
 physical_properties
-    : deferred_segment_creation?  segment_attributes_clause table_compression?
+    : deferred_segment_creation? segment_attributes_clause table_compression?
     ;
 
 row_movement_clause
@@ -2040,10 +2029,12 @@ log_grp
     ;
 
 supplemental_table_logging
-    : ADD SUPPLEMENTAL LOG  (supplemental_log_grp_clause | supplemental_id_key_clause)
-       (',' SUPPLEMENTAL LOG  (supplemental_log_grp_clause | supplemental_id_key_clause) )*
-    | DROP SUPPLEMENTAL LOG (supplemental_id_key_clause | GROUP log_grp)
-        (',' SUPPLEMENTAL LOG (supplemental_id_key_clause | GROUP log_grp) )*
+    : ADD SUPPLEMENTAL LOG (supplemental_log_grp_clause | supplemental_id_key_clause) (
+        ',' SUPPLEMENTAL LOG (supplemental_log_grp_clause | supplemental_id_key_clause)
+    )*
+    | DROP SUPPLEMENTAL LOG (supplemental_id_key_clause | GROUP log_grp) (
+        ',' SUPPLEMENTAL LOG (supplemental_id_key_clause | GROUP log_grp)
+    )*
     ;
 
 supplemental_log_grp_clause
@@ -2051,24 +2042,17 @@ supplemental_log_grp_clause
     ;
 
 supplemental_id_key_clause
-    : DATA '('( ','? ( ALL
-                     | PRIMARY KEY
-                     | UNIQUE
-                     | FOREIGN KEY
-                     )
-              )+
-           ')'
-      COLUMNS
+    : DATA '(' (','? ( ALL | PRIMARY KEY | UNIQUE | FOREIGN KEY))+ ')' COLUMNS
     ;
 
 allocate_extent_clause
-    : ALLOCATE EXTENT
-       ( '(' ( SIZE size_clause
-             | DATAFILE datafile=CHAR_STRING
-             | INSTANCE inst_num=UNSIGNED_INTEGER
-             )+
-         ')'
-       )?
+    : ALLOCATE EXTENT (
+        '(' (
+            SIZE size_clause
+            | DATAFILE datafile=CHAR_STRING
+            | INSTANCE inst_num=UNSIGNED_INTEGER
+        )+ ')'
+    )?
     ;
 
 deallocate_unused_clause
@@ -2103,6 +2087,7 @@ enable_or_disable
     : ENABLE
     | DISABLE
     ;
+
 allow_or_disallow
     : ALLOW
     | DISALLOW
@@ -2112,8 +2097,12 @@ allow_or_disallow
 
 create_synonym
     // Synonym's schema cannot be specified for public synonyms
-    : CREATE (OR REPLACE)? PUBLIC SYNONYM synonym_name FOR (schema_name PERIOD)? schema_object_name (AT_SIGN link_name)?
-    | CREATE (OR REPLACE)? SYNONYM (schema_name PERIOD)? synonym_name FOR (schema_name PERIOD)? schema_object_name (AT_SIGN link_name)?
+    : CREATE (OR REPLACE)? PUBLIC SYNONYM synonym_name FOR (schema_name PERIOD)? schema_object_name (
+        AT_SIGN link_name
+    )?
+    | CREATE (OR REPLACE)? SYNONYM (schema_name PERIOD)? synonym_name FOR (schema_name PERIOD)? schema_object_name (
+        AT_SIGN link_name
+    )?
     ;
 
 comment_on_table
@@ -2121,15 +2110,13 @@ comment_on_table
     ;
 
 alter_cluster
-    : ALTER CLUSTER  cluster_name
-        ( physical_attributes_clause
+    : ALTER CLUSTER cluster_name (
+        physical_attributes_clause
         | SIZE size_clause
         | allocate_extent_clause
         | deallocate_unused_clause
         | cache_or_nocache
-        )+
-        parallel_clause?
-        ';'
+    )+ parallel_clause? ';'
     ;
 
 cache_or_nocache
@@ -2142,18 +2129,17 @@ database_name
     ;
 
 alter_database
-    : ALTER DATABASE database_name?
-       ( startup_clauses
-       | recovery_clauses
-       | database_file_clauses
-       | logfile_clauses
-       | controlfile_clauses
-       | standby_database_clauses
-       | default_settings_clause
-       | instance_clauses
-       | security_clause
-       )
-      ';'
+    : ALTER DATABASE database_name? (
+        startup_clauses
+        | recovery_clauses
+        | database_file_clauses
+        | logfile_clauses
+        | controlfile_clauses
+        | standby_database_clauses
+        | default_settings_clause
+        | instance_clauses
+        | security_clause
+    ) ';'
     ;
 
 startup_clauses
@@ -2184,57 +2170,62 @@ begin_or_end
     ;
 
 general_recovery
-    : RECOVER AUTOMATIC? (FROM CHAR_STRING)?
-       ( (full_database_recovery | partial_database_recovery | LOGFILE CHAR_STRING )?
-         ((TEST | ALLOW UNSIGNED_INTEGER CORRUPTION | parallel_clause)+ )?
-       | CONTINUE DEFAULT?
-       | CANCEL
-       )
+    : RECOVER AUTOMATIC? (FROM CHAR_STRING)? (
+        (full_database_recovery | partial_database_recovery | LOGFILE CHAR_STRING)? (
+            (TEST | ALLOW UNSIGNED_INTEGER CORRUPTION | parallel_clause)+
+        )?
+        | CONTINUE DEFAULT?
+        | CANCEL
+    )
     ;
 
 //Need to come back to
 full_database_recovery
-    : STANDBY? DATABASE
-          ((UNTIL (CANCEL |TIME CHAR_STRING | CHANGE UNSIGNED_INTEGER | CONSISTENT)
-           | USING BACKUP CONTROLFILE
-           )+
-          )?
+    : STANDBY? DATABASE (
+        (
+            UNTIL (CANCEL | TIME CHAR_STRING | CHANGE UNSIGNED_INTEGER | CONSISTENT)
+            | USING BACKUP CONTROLFILE
+        )+
+    )?
     ;
 
 partial_database_recovery
     : TABLESPACE tablespace (',' tablespace)*
-    | DATAFILE CHAR_STRING | filenumber (',' CHAR_STRING | filenumber)*
+    | DATAFILE CHAR_STRING
+    | filenumber (',' CHAR_STRING | filenumber)*
     | partial_database_recovery_10g
     ;
 
 partial_database_recovery_10g
-    : {this.isVersion10()}? STANDBY
-      ( TABLESPACE tablespace (',' tablespace)*
-      | DATAFILE CHAR_STRING | filenumber (',' CHAR_STRING | filenumber)*
-      )
-      UNTIL (CONSISTENT WITH)? CONTROLFILE
+    : {this.isVersion10()}? STANDBY (
+        TABLESPACE tablespace (',' tablespace)*
+        | DATAFILE CHAR_STRING
+        | filenumber (',' CHAR_STRING | filenumber)*
+    ) UNTIL (CONSISTENT WITH)? CONTROLFILE
     ;
 
-
 managed_standby_recovery
-    : RECOVER (MANAGED STANDBY DATABASE
-               ((USING CURRENT LOGFILE
+    : RECOVER (
+        MANAGED STANDBY DATABASE (
+            (
+                USING CURRENT LOGFILE
                 | DISCONNECT (FROM SESSION)?
                 | NODELAY
                 | UNTIL CHANGE UNSIGNED_INTEGER
                 | UNTIL CONSISTENT
                 | parallel_clause
-                )+
-               | FINISH
-               | CANCEL
-               )?
-              | TO LOGICAL STANDBY (db_name | KEEP IDENTITY)
-              )
+            )+
+            | FINISH
+            | CANCEL
+        )?
+        | TO LOGICAL STANDBY (db_name | KEEP IDENTITY)
+    )
     ;
 
 db_name
     : regular_id
     ;
+
 database_file_clauses
     : RENAME FILE filename (',' filename)* TO filename
     | create_datafile_clause
@@ -2243,35 +2234,36 @@ database_file_clauses
     ;
 
 create_datafile_clause
-    : CREATE DATAFILE (filename | filenumber) (',' (filename | filenumber) )*
-        (AS (NEW) )?
+    : CREATE DATAFILE (filename | filenumber) (',' (filename | filenumber))* (AS (NEW))?
     ;
 
 alter_datafile_clause
-    : DATAFILE (filename|filenumber) (',' (filename|filenumber) )*
-        ( ONLINE
+    : DATAFILE (filename | filenumber) (',' (filename | filenumber))* (
+        ONLINE
         | OFFLINE (FOR DROP)?
         | RESIZE size_clause
         | autoextend_clause
         | END BACKUP
-        )
+    )
     ;
 
 alter_tempfile_clause
-    : TEMPFILE (filename | filenumber) (',' (filename | filenumber) )*
-        ( RESIZE size_clause
+    : TEMPFILE (filename | filenumber) (',' (filename | filenumber))* (
+        RESIZE size_clause
         | autoextend_clause
         | DROP (INCLUDING DATAFILES)
         | ONLINE
         | OFFLINE
-        )
+    )
     ;
 
 logfile_clauses
     : (ARCHIVELOG MANUAL? | NOARCHIVELOG)
     | NO? FORCE LOGGING
     | RENAME FILE filename (',' filename)* TO filename
-    | CLEAR UNARCHIVED? LOGFILE logfile_descriptor (',' logfile_descriptor)* (UNRECOVERABLE DATAFILE)?
+    | CLEAR UNARCHIVED? LOGFILE logfile_descriptor (',' logfile_descriptor)* (
+        UNRECOVERABLE DATAFILE
+    )?
     | add_logfile_clauses
     | drop_logfile_clauses
     | switch_logfile_clause
@@ -2279,23 +2271,24 @@ logfile_clauses
     ;
 
 add_logfile_clauses
-    : ADD STANDBY? LOGFILE
-             (
-//TODO        (INSTANCE CHAR_STRING | THREAD UNSIGNED_INTEGER)?
-               (log_file_group   redo_log_file_spec)+
-             | MEMBER filename REUSE? (',' filename REUSE?)* TO logfile_descriptor (',' logfile_descriptor)*
-             )
+    : ADD STANDBY? LOGFILE (
+        //TODO        (INSTANCE CHAR_STRING | THREAD UNSIGNED_INTEGER)?
+        (log_file_group redo_log_file_spec)+
+        | MEMBER filename REUSE? (',' filename REUSE?)* TO logfile_descriptor (
+            ',' logfile_descriptor
+        )*
+    )
     ;
 
 log_file_group
-    :(','? (THREAD UNSIGNED_INTEGER)? GROUP UNSIGNED_INTEGER)
+    : (','? (THREAD UNSIGNED_INTEGER)? GROUP UNSIGNED_INTEGER)
     ;
 
 drop_logfile_clauses
-    : DROP STANDBY?
-          LOGFILE (logfile_descriptor (',' logfile_descriptor)*
-                  | MEMBER filename (',' filename)*
-                  )
+    : DROP STANDBY? LOGFILE (
+        logfile_descriptor (',' logfile_descriptor)*
+        | MEMBER filename (',' filename)*
+    )
     ;
 
 switch_logfile_clause
@@ -2303,11 +2296,7 @@ switch_logfile_clause
     ;
 
 supplemental_db_logging
-    :  add_or_drop
-          SUPPLEMENTAL LOG (DATA
-                           | supplemental_id_key_clause
-                           | supplemental_plsql_clause
-                           )
+    : add_or_drop SUPPLEMENTAL LOG (DATA | supplemental_id_key_clause | supplemental_plsql_clause)
     ;
 
 add_or_drop
@@ -2331,19 +2320,19 @@ controlfile_clauses
     ;
 
 trace_file_clause
-    : TRACE (AS filename REUSE?)? (RESETLOGS|NORESETLOGS)?
+    : TRACE (AS filename REUSE?)? (RESETLOGS | NORESETLOGS)?
     ;
 
 standby_database_clauses
-    : ( activate_standby_db_clause
-      | maximize_standby_db_clause
-      | register_logfile_clause
-      | commit_switchover_clause
-      | start_standby_clause
-      | stop_standby_clause
-      | convert_database_clause
-      )
-      parallel_clause?
+    : (
+        activate_standby_db_clause
+        | maximize_standby_db_clause
+        | register_logfile_clause
+        | commit_switchover_clause
+        | start_standby_clause
+        | stop_standby_clause
+        | convert_database_clause
+    ) parallel_clause?
     ;
 
 activate_standby_db_clause
@@ -2360,24 +2349,27 @@ register_logfile_clause
     ;
 
 commit_switchover_clause
-    : (PREPARE | COMMIT) TO SWITCHOVER
-        ((TO (((PHYSICAL | LOGICAL)? PRIMARY |  PHYSICAL? STANDBY)
-           ((WITH | WITHOUT)? SESSION SHUTDOWN (WAIT | NOWAIT) )?
-          | LOGICAL STANDBY
-          )
-         | LOGICAL STANDBY
-         )
+    : (PREPARE | COMMIT) TO SWITCHOVER (
+        (
+            TO (
+                ((PHYSICAL | LOGICAL)? PRIMARY | PHYSICAL? STANDBY) (
+                    (WITH | WITHOUT)? SESSION SHUTDOWN (WAIT | NOWAIT)
+                )?
+                | LOGICAL STANDBY
+            )
+            | LOGICAL STANDBY
+        )
         | CANCEL
-        )?
+    )?
     ;
 
 start_standby_clause
-    : START LOGICAL STANDBY APPLY IMMEDIATE? NODELAY?
-        ( NEW PRIMARY regular_id
+    : START LOGICAL STANDBY APPLY IMMEDIATE? NODELAY? (
+        NEW PRIMARY regular_id
         | INITIAL scn_value=UNSIGNED_INTEGER?
         | SKIP_ FAILED TRANSACTION
         | FINISH
-        )?
+    )?
     ;
 
 stop_standby_clause
@@ -2433,17 +2425,14 @@ filename
     ;
 
 alter_table
-    : ALTER TABLE tableview_name
-      (
-      | alter_table_properties
-      | constraint_clauses
-      | column_clauses
-//TODO      | alter_table_partitioning
-//TODO      | alter_external_table
-      | move_table_clause
-      )
-      ((enable_disable_clause | enable_or_disable (TABLE LOCK | ALL TRIGGERS) )+)?
-      ';'
+    : ALTER TABLE tableview_name (
+        | alter_table_properties
+        | constraint_clauses
+        | column_clauses
+        //TODO      | alter_table_partitioning
+        //TODO      | alter_external_table
+        | move_table_clause
+    ) ((enable_disable_clause | enable_or_disable (TABLE LOCK | ALL TRIGGERS))+)? ';'
     ;
 
 alter_table_properties
@@ -2456,21 +2445,21 @@ alter_table_properties
     ;
 
 alter_table_properties_1
-    : ( physical_attributes_clause
-      | logging_clause
-      | table_compression
-      | supplemental_table_logging
-      | allocate_extent_clause
-      | deallocate_unused_clause
-      | (CACHE | NOCACHE)
-      | RESULT_CACHE '(' MODE (DEFAULT | FORCE) ')'
-      | upgrade_table_clause
-      | records_per_block_clause
-      | parallel_clause
-      | row_movement_clause
-      | flashback_archive_clause
-      )+
-      alter_iot_clauses?
+    : (
+        physical_attributes_clause
+        | logging_clause
+        | table_compression
+        | supplemental_table_logging
+        | allocate_extent_clause
+        | deallocate_unused_clause
+        | (CACHE | NOCACHE)
+        | RESULT_CACHE '(' MODE (DEFAULT | FORCE) ')'
+        | upgrade_table_clause
+        | records_per_block_clause
+        | parallel_clause
+        | row_movement_clause
+        | flashback_archive_clause
+    )+ alter_iot_clauses?
     ;
 
 alter_iot_clauses
@@ -2486,37 +2475,43 @@ alter_mapping_table_clause
 
 alter_overflow_clause
     : add_overflow_clause
-    | OVERFLOW (segment_attributes_clause | allocate_extent_clause | shrink_clause | deallocate_unused_clause)+
+    | OVERFLOW (
+        segment_attributes_clause
+        | allocate_extent_clause
+        | shrink_clause
+        | deallocate_unused_clause
+    )+
     ;
 
 add_overflow_clause
-    : ADD OVERFLOW segment_attributes_clause? ('(' PARTITION segment_attributes_clause? (',' PARTITION segment_attributes_clause?)*  ')' )?
+    : ADD OVERFLOW segment_attributes_clause? (
+        '(' PARTITION segment_attributes_clause? (',' PARTITION segment_attributes_clause?)* ')'
+    )?
     ;
 
-
 enable_disable_clause
-    : (ENABLE | DISABLE) (VALIDATE | NOVALIDATE)?
-         (UNIQUE '(' column_name (',' column_name)* ')'
-         | PRIMARY KEY
-         | CONSTRAINT constraint_name
-         ) using_index_clause? exceptions_clause?
-         CASCADE? ((KEEP | DROP) INDEX)?
+    : (ENABLE | DISABLE) (VALIDATE | NOVALIDATE)? (
+        UNIQUE '(' column_name (',' column_name)* ')'
+        | PRIMARY KEY
+        | CONSTRAINT constraint_name
+    ) using_index_clause? exceptions_clause? CASCADE? ((KEEP | DROP) INDEX)?
     ;
 
 using_index_clause
-    : USING INDEX (index_name | '(' create_index ')' | index_attributes )?
+    : USING INDEX (index_name | '(' create_index ')' | index_attributes)?
     ;
 
 index_attributes
-    : ( physical_attributes_clause
-      | logging_clause
-      | TABLESPACE (tablespace | DEFAULT)
-      | key_compression
-      | sort_or_nosort
-      | REVERSE
-      | visible_or_invisible
-      | parallel_clause
-      )+
+    : (
+        physical_attributes_clause
+        | logging_clause
+        | TABLESPACE (tablespace | DEFAULT)
+        | key_compression
+        | sort_or_nosort
+        | REVERSE
+        | visible_or_invisible
+        | parallel_clause
+    )+
     ;
 
 sort_or_nosort
@@ -2529,7 +2524,9 @@ exceptions_clause
     ;
 
 move_table_clause
-    : MOVE ONLINE? segment_attributes_clause? table_compression? index_org_table_clause? ((lob_storage_clause | varray_col_properties)+)? parallel_clause?
+    : MOVE ONLINE? segment_attributes_clause? table_compression? index_org_table_clause? (
+        (lob_storage_clause | varray_col_properties)+
+    )? parallel_clause?
     ;
 
 index_org_table_clause
@@ -2578,27 +2575,32 @@ new_column_name
     ;
 
 add_modify_drop_column_clauses
-    : (add_column_clause
-      |modify_column_clauses
-      |drop_column_clause
-      )+
+    : (add_column_clause | modify_column_clauses | drop_column_clause)+
     ;
 
 drop_column_clause
-    : SET UNUSED (COLUMN column_name| ('(' column_name (',' column_name)* ')' )) (CASCADE CONSTRAINTS | INVALIDATE)*
-    | DROP (COLUMN column_name | '(' column_name (',' column_name)* ')' ) (CASCADE CONSTRAINTS | INVALIDATE)* (CHECKPOINT UNSIGNED_INTEGER)?
+    : SET UNUSED (COLUMN column_name | ('(' column_name (',' column_name)* ')')) (
+        CASCADE CONSTRAINTS
+        | INVALIDATE
+    )*
+    | DROP (COLUMN column_name | '(' column_name (',' column_name)* ')') (
+        CASCADE CONSTRAINTS
+        | INVALIDATE
+    )* (CHECKPOINT UNSIGNED_INTEGER)?
     | DROP (UNUSED COLUMNS | COLUMNS CONTINUE) (CHECKPOINT UNSIGNED_INTEGER)
     ;
 
 modify_column_clauses
-    : MODIFY ('(' modify_col_properties (',' modify_col_properties)* ')'
-             | modify_col_properties
-             | modify_col_substitutable
-             )
+    : MODIFY (
+        '(' modify_col_properties (',' modify_col_properties)* ')'
+        | modify_col_properties
+        | modify_col_substitutable
+    )
     ;
 
 modify_col_properties
-    : column_name datatype? (DEFAULT expression)? (ENCRYPT encryption_spec | DECRYPT)? inline_constraint* lob_storage_clause? //TODO alter_xmlschema_clause
+    : column_name datatype? (DEFAULT expression)? (ENCRYPT encryption_spec | DECRYPT)? inline_constraint* lob_storage_clause?
+    //TODO alter_xmlschema_clause
     ;
 
 modify_col_substitutable
@@ -2606,24 +2608,26 @@ modify_col_substitutable
     ;
 
 add_column_clause
-    : ADD ('(' (column_definition | virtual_column_definition) (',' (column_definition
-              | virtual_column_definition)
-              )*
-          ')'
-          | ( column_definition | virtual_column_definition ))
-       column_properties?
+    : ADD (
+        '(' (column_definition | virtual_column_definition) (
+            ',' (column_definition | virtual_column_definition)
+        )* ')'
+        | ( column_definition | virtual_column_definition)
+    ) column_properties?
     ;
 
 varray_col_properties
-    : VARRAY varray_item ( substitutable_column_clause? varray_storage_clause
-                         | substitutable_column_clause
-                         )
+    : VARRAY varray_item (
+        substitutable_column_clause? varray_storage_clause
+        | substitutable_column_clause
+    )
     ;
 
 varray_storage_clause
-    : STORE AS (SECUREFILE|BASICFILE)? LOB ( lob_segname? '(' lob_storage_parameters ')'
-                                           | lob_segname
-                                           )
+    : STORE AS (SECUREFILE | BASICFILE)? LOB (
+        lob_segname? '(' lob_storage_parameters ')'
+        | lob_segname
+    )
     ;
 
 lob_segname
@@ -2635,14 +2639,23 @@ lob_item
     ;
 
 lob_storage_parameters
-    :  TABLESPACE tablespace | (lob_parameters storage_clause? )
-    |  storage_clause
+    : TABLESPACE tablespace
+    | (lob_parameters storage_clause?)
+    | storage_clause
     ;
 
 lob_storage_clause
-    : LOB ( '(' lob_item (',' lob_item)* ')' STORE AS ( (SECUREFILE|BASICFILE) | '(' lob_storage_parameters ')' )+
-          | '(' lob_item ')' STORE AS ( (SECUREFILE | BASICFILE) | lob_segname | '(' lob_storage_parameters ')' )+
-          )
+    : LOB (
+        '(' lob_item (',' lob_item)* ')' STORE AS (
+            (SECUREFILE | BASICFILE)
+            | '(' lob_storage_parameters ')'
+        )+
+        | '(' lob_item ')' STORE AS (
+            (SECUREFILE | BASICFILE)
+            | lob_segname
+            | '(' lob_storage_parameters ')'
+        )+
+    )
     ;
 
 modify_lob_storage_clause
@@ -2650,34 +2663,36 @@ modify_lob_storage_clause
     ;
 
 modify_lob_parameters
-    : ( storage_clause
-      | (PCTVERSION | FREEPOOLS) UNSIGNED_INTEGER
-      | REBUILD FREEPOOLS
-      | lob_retention_clause
-      | lob_deduplicate_clause
-      | lob_compression_clause
-      | ENCRYPT encryption_spec
-      | DECRYPT
-      | CACHE
-      | (CACHE | NOCACHE | CACHE READS) logging_clause?
-      | allocate_extent_clause
-      | shrink_clause
-      | deallocate_unused_clause
-     )+
+    : (
+        storage_clause
+        | (PCTVERSION | FREEPOOLS) UNSIGNED_INTEGER
+        | REBUILD FREEPOOLS
+        | lob_retention_clause
+        | lob_deduplicate_clause
+        | lob_compression_clause
+        | ENCRYPT encryption_spec
+        | DECRYPT
+        | CACHE
+        | (CACHE | NOCACHE | CACHE READS) logging_clause?
+        | allocate_extent_clause
+        | shrink_clause
+        | deallocate_unused_clause
+    )+
     ;
 
 lob_parameters
-    : ( (ENABLE | DISABLE) STORAGE IN ROW
-      | CHUNK UNSIGNED_INTEGER
-      | PCTVERSION UNSIGNED_INTEGER
-      | FREEPOOLS UNSIGNED_INTEGER
-      | lob_retention_clause
-      | lob_deduplicate_clause
-      | lob_compression_clause
-      | ENCRYPT encryption_spec
-      | DECRYPT
-      | (CACHE | NOCACHE | CACHE READS) logging_clause?
-      )+
+    : (
+        (ENABLE | DISABLE) STORAGE IN ROW
+        | CHUNK UNSIGNED_INTEGER
+        | PCTVERSION UNSIGNED_INTEGER
+        | FREEPOOLS UNSIGNED_INTEGER
+        | lob_retention_clause
+        | lob_deduplicate_clause
+        | lob_compression_clause
+        | ENCRYPT encryption_spec
+        | DECRYPT
+        | (CACHE | NOCACHE | CACHE READS) logging_clause?
+    )+
     ;
 
 lob_deduplicate_clause
@@ -2695,8 +2710,9 @@ lob_retention_clause
     ;
 
 encryption_spec
-    : (USING  CHAR_STRING)? (IDENTIFIED BY REGULAR_ID)? CHAR_STRING? (NO? SALT)?
+    : (USING CHAR_STRING)? (IDENTIFIED BY REGULAR_ID)? CHAR_STRING? (NO? SALT)?
     ;
+
 tablespace
     : regular_id
     ;
@@ -2713,13 +2729,13 @@ column_properties
     ;
 
 column_definition
-    : column_name (datatype | type_name)
-         SORT?  (DEFAULT expression)? (ENCRYPT (USING  CHAR_STRING)? (IDENTIFIED BY regular_id)? CHAR_STRING? (NO? SALT)? )?  (inline_constraint* | inline_ref_constraint)
+    : column_name (datatype | type_name) SORT? (DEFAULT expression)? (
+        ENCRYPT (USING CHAR_STRING)? (IDENTIFIED BY regular_id)? CHAR_STRING? (NO? SALT)?
+    )? (inline_constraint* | inline_ref_constraint)
     ;
 
 virtual_column_definition
-    : column_name datatype? autogenerated_sequence_definition?
-        VIRTUAL? inline_constraint*
+    : column_name datatype? autogenerated_sequence_definition? VIRTUAL? inline_constraint*
     ;
 
 autogenerated_sequence_definition
@@ -2727,15 +2743,10 @@ autogenerated_sequence_definition
     ;
 
 nested_table_col_properties
-    : NESTED TABLE  (nested_item | COLUMN_VALUE) substitutable_column_clause? (LOCAL | GLOBAL)?
-       STORE AS tableview_name ( '(' ( '(' object_properties ')'
-                                     | physical_properties
-                                     | column_properties
-                                     )+
-                                  ')'
-                               )?
-        (RETURN AS? (LOCATOR | VALUE) )?
-     ;
+    : NESTED TABLE (nested_item | COLUMN_VALUE) substitutable_column_clause? (LOCAL | GLOBAL)? STORE AS tableview_name (
+        '(' ('(' object_properties ')' | physical_properties | column_properties)+ ')'
+    )? (RETURN AS? (LOCATOR | VALUE))?
+    ;
 
 nested_item
     : regular_id
@@ -2760,8 +2771,12 @@ object_type_col_properties
 
 constraint_clauses
     : ADD '(' (out_of_line_constraint* | out_of_line_ref_constraint) ')'
-    | ADD  (out_of_line_constraint* | out_of_line_ref_constraint)
-    | MODIFY (CONSTRAINT constraint_name | PRIMARY KEY | UNIQUE '(' column_name (',' column_name)* ')')  constraint_state CASCADE?
+    | ADD (out_of_line_constraint* | out_of_line_ref_constraint)
+    | MODIFY (
+        CONSTRAINT constraint_name
+        | PRIMARY KEY
+        | UNIQUE '(' column_name (',' column_name)* ')'
+    ) constraint_state CASCADE?
     | RENAME CONSTRAINT old_constraint_name TO new_constraint_name
     | drop_constraint_clause+
     ;
@@ -2775,14 +2790,13 @@ new_constraint_name
     ;
 
 drop_constraint_clause
-    : DROP  drop_primary_key_or_unique_or_generic_clause
+    : DROP drop_primary_key_or_unique_or_generic_clause
     ;
 
 drop_primary_key_or_unique_or_generic_clause
     : (PRIMARY KEY | UNIQUE '(' column_name (',' column_name)* ')') CASCADE? (KEEP | DROP)?
     | CONSTRAINT constraint_name CASCADE?
     ;
-
 
 check_constraint
     : CHECK '(' condition ')' DISABLE?
@@ -2873,7 +2887,9 @@ subtype_declaration
 // cursor_declaration incorportates curscursor_body and cursor_spec
 
 cursor_declaration
-    : CURSOR identifier ('(' parameter_spec (',' parameter_spec)* ')' )? (RETURN type_spec)? (IS select_statement)? ';'
+    : CURSOR identifier ('(' parameter_spec (',' parameter_spec)* ')')? (RETURN type_spec)? (
+        IS select_statement
+    )? ';'
     ;
 
 parameter_spec
@@ -2885,11 +2901,13 @@ exception_declaration
     ;
 
 pragma_declaration
-    : PRAGMA (SERIALLY_REUSABLE
-    | AUTONOMOUS_TRANSACTION
-    | EXCEPTION_INIT '(' exception_name ',' numeric_negative ')'
-    | INLINE '(' id1=identifier ',' expression ')'
-    | RESTRICT_REFERENCES '(' (identifier | DEFAULT) (',' identifier)+ ')') ';'
+    : PRAGMA (
+        SERIALLY_REUSABLE
+        | AUTONOMOUS_TRANSACTION
+        | EXCEPTION_INIT '(' exception_name ',' numeric_negative ')'
+        | INLINE '(' id1=identifier ',' expression ')'
+        | RESTRICT_REFERENCES '(' (identifier | DEFAULT) (',' identifier)+ ')'
+    ) ';'
     ;
 
 // Record Declaration Specific Clauses
@@ -3036,7 +3054,8 @@ procedure_call
     ;
 
 pipe_row_statement
-    : PIPE ROW '(' expression ')';
+    : PIPE ROW '(' expression ')'
+    ;
 
 body
     : BEGIN seq_of_statements (EXCEPTION exception_handler+)? END label_name?
@@ -3066,7 +3085,11 @@ sql_statement
     ;
 
 execute_immediate
-    : EXECUTE IMMEDIATE expression (into_clause using_clause? | using_clause dynamic_returning_clause? | dynamic_returning_clause)?
+    : EXECUTE IMMEDIATE expression (
+        into_clause using_clause?
+        | using_clause dynamic_returning_clause?
+        | dynamic_returning_clause
+    )?
     ;
 
 // Execute Immediate Specific Clause
@@ -3105,7 +3128,10 @@ open_statement
     ;
 
 fetch_statement
-    : FETCH cursor_name (it1=INTO variable_name (',' variable_name)* | BULK COLLECT INTO variable_name (',' variable_name)*)
+    : FETCH cursor_name (
+        it1=INTO variable_name (',' variable_name)*
+        | BULK COLLECT INTO variable_name (',' variable_name)*
+    )
     ;
 
 open_for_statement
@@ -3123,19 +3149,25 @@ transaction_control_statements
     ;
 
 set_transaction_command
-    : SET TRANSACTION
-      (READ (ONLY | WRITE) | ISOLATION LEVEL (SERIALIZABLE | READ COMMITTED) | USE ROLLBACK SEGMENT rollback_segment_name)?
-      (NAME quoted_string)?
+    : SET TRANSACTION (
+        READ (ONLY | WRITE)
+        | ISOLATION LEVEL (SERIALIZABLE | READ COMMITTED)
+        | USE ROLLBACK SEGMENT rollback_segment_name
+    )? (NAME quoted_string)?
     ;
 
 set_constraint_command
-    : SET (CONSTRAINT | CONSTRAINTS) (ALL | constraint_name (',' constraint_name)*) (IMMEDIATE | DEFERRED)
+    : SET (CONSTRAINT | CONSTRAINTS) (ALL | constraint_name (',' constraint_name)*) (
+        IMMEDIATE
+        | DEFERRED
+    )
     ;
 
 commit_statement
-    : COMMIT WORK?
-      (COMMENT expression | FORCE (CORRUPT_XID expression | CORRUPT_XID_ALL | expression (',' expression)?))?
-      write_clause?
+    : COMMIT WORK? (
+        COMMENT expression
+        | FORCE (CORRUPT_XID expression | CORRUPT_XID_ALL | expression (',' expression)?)
+    )? write_clause?
     ;
 
 write_clause
@@ -3172,8 +3204,13 @@ seq_of_statements
 */
 
 explain_statement
-    : EXPLAIN PLAN (SET STATEMENT_ID '=' quoted_string)? (INTO tableview_name)?
-      FOR (select_statement | update_statement | delete_statement | insert_statement | merge_statement)
+    : EXPLAIN PLAN (SET STATEMENT_ID '=' quoted_string)? (INTO tableview_name)? FOR (
+        select_statement
+        | update_statement
+        | delete_statement
+        | insert_statement
+        | merge_statement
+    )
     ;
 
 select_only_statement
@@ -3191,13 +3228,13 @@ subquery_factoring_clause
     ;
 
 factoring_element
-    : query_name paren_column_list? AS '(' subquery order_by_clause? ')'
-      search_clause? cycle_clause?
+    : query_name paren_column_list? AS '(' subquery order_by_clause? ')' search_clause? cycle_clause?
     ;
 
 search_clause
-    : SEARCH (DEPTH | BREADTH) FIRST BY column_name ASC? DESC? (NULLS FIRST)? (NULLS LAST)?
-      (',' column_name ASC? DESC? (NULLS FIRST)? (NULLS LAST)?)* SET column_name
+    : SEARCH (DEPTH | BREADTH) FIRST BY column_name ASC? DESC? (NULLS FIRST)? (NULLS LAST)? (
+        ',' column_name ASC? DESC? (NULLS FIRST)? (NULLS LAST)?
+    )* SET column_name
     ;
 
 cycle_clause
@@ -3218,8 +3255,8 @@ subquery_operation_part
     ;
 
 query_block
-    : SELECT (DISTINCT | UNIQUE | ALL)? selected_list
-      into_clause? from_clause? where_clause? hierarchical_query_clause? group_by_clause? model_clause? order_by_clause?
+    : SELECT (DISTINCT | UNIQUE | ALL)? selected_list into_clause? from_clause? where_clause? hierarchical_query_clause? group_by_clause? model_clause
+        ? order_by_clause?
     ;
 
 selected_list
@@ -3254,14 +3291,16 @@ table_ref_aux
     ;
 
 table_ref_aux_internal
-    : dml_table_expression_clause (pivot_clause | unpivot_clause)?                 # table_ref_aux_internal_one
-    | '(' table_ref subquery_operation_part* ')' (pivot_clause | unpivot_clause)?  # table_ref_aux_internal_two
-    | ONLY '(' dml_table_expression_clause ')'                                     # table_ref_aux_internal_three
+    : dml_table_expression_clause (pivot_clause | unpivot_clause)?                # table_ref_aux_internal_one
+    | '(' table_ref subquery_operation_part* ')' (pivot_clause | unpivot_clause)? # table_ref_aux_internal_two
+    | ONLY '(' dml_table_expression_clause ')'                                    # table_ref_aux_internal_three
     ;
 
 join_clause
-    : query_partition_clause? (CROSS | NATURAL)? (INNER | outer_join_type)?
-      JOIN table_ref_aux query_partition_clause? (join_on_part | join_using_part)*
+    : query_partition_clause? (CROSS | NATURAL)? (INNER | outer_join_type)? JOIN table_ref_aux query_partition_clause? (
+        join_on_part
+        | join_using_part
+    )*
     ;
 
 join_on_part
@@ -3311,8 +3350,7 @@ pivot_in_clause_elements
     ;
 
 unpivot_clause
-    : UNPIVOT ((INCLUDE | EXCLUDE) NULLS)?
-    '(' (column_name | paren_column_list) pivot_for_clause unpivot_in_clause ')'
+    : UNPIVOT ((INCLUDE | EXCLUDE) NULLS)? '(' (column_name | paren_column_list) pivot_for_clause unpivot_in_clause ')'
     ;
 
 unpivot_in_clause
@@ -3320,8 +3358,7 @@ unpivot_in_clause
     ;
 
 unpivot_in_elements
-    : (column_name | paren_column_list)
-      (AS (constant | '(' constant (',' constant)* ')'))?
+    : (column_name | paren_column_list) (AS (constant | '(' constant (',' constant)* ')'))?
     ;
 
 hierarchical_query_clause
@@ -3392,7 +3429,7 @@ model_column_partition_part
     ;
 
 model_column_list
-    : '(' model_column (',' model_column)*  ')'
+    : '(' model_column (',' model_column)* ')'
     ;
 
 model_column
@@ -3460,8 +3497,10 @@ update_statement
 // Update Specific Clauses
 
 update_set_clause
-    : SET
-      (column_based_update_set_clause (',' column_based_update_set_clause)* | VALUE '(' identifier ')' '=' expression)
+    : SET (
+        column_based_update_set_clause (',' column_based_update_set_clause)*
+        | VALUE '(' identifier ')' '=' expression
+    )
     ;
 
 column_based_update_set_clause
@@ -3512,9 +3551,10 @@ values_clause
     ;
 
 merge_statement
-    : MERGE INTO tableview_name table_alias? USING selected_tableview ON '(' condition ')'
-      (merge_update_clause merge_insert_clause? | merge_insert_clause merge_update_clause?)?
-      error_logging_clause?
+    : MERGE INTO tableview_name table_alias? USING selected_tableview ON '(' condition ')' (
+        merge_update_clause merge_insert_clause?
+        | merge_insert_clause merge_update_clause?
+    )? error_logging_clause?
     ;
 
 // Merge Specific Clauses
@@ -3532,8 +3572,7 @@ merge_update_delete_part
     ;
 
 merge_insert_clause
-    : WHEN NOT MATCHED THEN INSERT paren_column_list?
-      VALUES '(' expressions? ')' where_clause?
+    : WHEN NOT MATCHED THEN INSERT paren_column_list? VALUES '(' expressions? ')' where_clause?
     ;
 
 selected_tableview
@@ -3636,11 +3675,16 @@ unary_logical_expression
     : NOT? multiset_expression (IS NOT? logical_operation)*
     ;
 
-logical_operation:
-        (NULL_
-        | NAN | PRESENT
-        | INFINITE | A_LETTER SET | EMPTY
-        | OF TYPE? '(' ONLY? type_spec (',' type_spec)* ')')
+logical_operation
+    : (
+        NULL_
+        | NAN
+        | PRESENT
+        | INFINITE
+        | A_LETTER SET
+        | EMPTY
+        | OF TYPE? '(' ONLY? type_spec (',' type_spec)* ')'
+    )
     ;
 
 multiset_expression
@@ -3653,10 +3697,13 @@ relational_expression
     ;
 
 compound_expression
-    : concatenation
-      (NOT? ( IN in_elements
+    : concatenation (
+        NOT? (
+            IN in_elements
             | BETWEEN between_elements
-            | like_type=(LIKE | LIKEC | LIKE2 | LIKE4) concatenation (ESCAPE concatenation)?))?
+            | like_type=(LIKE | LIKEC | LIKE2 | LIKE4) concatenation (ESCAPE concatenation)?
+        )
+    )?
     ;
 
 relational_operator
@@ -3678,8 +3725,7 @@ between_elements
     ;
 
 concatenation
-    : model_expression
-        (AT (LOCAL | TIME ZONE concatenation) | interval_expression)?
+    : model_expression (AT (LOCAL | TIME ZONE concatenation) | interval_expression)?
     | concatenation op=(ASTERISK | SOLIDUS) concatenation
     | concatenation op=(PLUS_SIGN | MINUS_SIGN) concatenation
     | concatenation BAR BAR concatenation
@@ -3701,15 +3747,17 @@ model_expression_element
     ;
 
 single_column_for_loop
-    : FOR column_name
-       ( IN '(' expressions? ')'
-       | (LIKE expression)? FROM fromExpr=expression TO toExpr=expression
-         action_type=(INCREMENT | DECREMENT) action_expr=expression)
+    : FOR column_name (
+        IN '(' expressions? ')'
+        | (LIKE expression)? FROM fromExpr=expression TO toExpr=expression action_type=(
+            INCREMENT
+            | DECREMENT
+        ) action_expr=expression
+    )
     ;
 
 multi_column_for_loop
-    : FOR paren_column_list
-      IN  '(' (subquery | '(' expressions? ')') ')'
+    : FOR paren_column_list IN '(' (subquery | '(' expressions? ')') ')'
     ;
 
 unary_expression
@@ -3717,12 +3765,12 @@ unary_expression
     | PRIOR unary_expression
     | CONNECT_BY_ROOT unary_expression
     | /*TODO {input.LT(1).getText().equalsIgnoreCase("new") && !input.LT(2).getText().equals(".")}?*/ NEW unary_expression
-    |  DISTINCT unary_expression
-    |  ALL unary_expression
-    |  /*TODO{(input.LA(1) == CASE || input.LA(2) == CASE)}?*/ case_statement/*[false]*/
-    |  quantified_expression
-    |  standard_function
-    |  atom
+    | DISTINCT unary_expression
+    | ALL unary_expression
+    | /*TODO{(input.LA(1) == CASE || input.LA(2) == CASE)}?*/ case_statement /*[false]*/
+    | quantified_expression
+    | standard_function
+    | atom
     ;
 
 case_statement /*TODO [boolean isStatementParameter]
@@ -3737,7 +3785,7 @@ TODO scope    {
 // CASE
 
 simple_case_statement
-    : label_name? ck1=CASE expression simple_case_when_part+  case_else_part? END CASE? label_name?
+    : label_name? ck1=CASE expression simple_case_when_part+ case_else_part? END CASE? label_name?
     ;
 
 simple_case_when_part
@@ -3771,9 +3819,10 @@ quantified_expression
 
 string_function
     : SUBSTR '(' expression ',' expression (',' expression)? ')'
-    | TO_CHAR '(' (table_element | standard_function | expression)
-                  (',' quoted_string)? (',' quoted_string)? ')'
-    | DECODE '(' expressions  ')'
+    | TO_CHAR '(' (table_element | standard_function | expression) (',' quoted_string)? (
+        ',' quoted_string
+    )? ')'
+    | DECODE '(' expressions ')'
     | CHR '(' concatenation USING NCHAR_CS ')'
     | NVL '(' expression ',' expression ')'
     | TRIM '(' ((LEADING | TRAILING | BOTH)? quoted_string? FROM)? concatenation ')'
@@ -3798,51 +3847,51 @@ numeric_function_wrapper
     ;
 
 numeric_function
-   : SUM '(' (DISTINCT | ALL)? expression ')'
-   | COUNT '(' ( ASTERISK | ((DISTINCT | UNIQUE | ALL)? concatenation)? ) ')' over_clause?
-   | ROUND '(' expression (',' UNSIGNED_INTEGER)?  ')'
-   | AVG '(' (DISTINCT | ALL)? expression ')'
-   | MAX '(' (DISTINCT | ALL)? expression ')'
-   | LEAST '(' expressions ')'
-   | GREATEST '(' expressions ')'
-   ;
+    : SUM '(' (DISTINCT | ALL)? expression ')'
+    | COUNT '(' (ASTERISK | ((DISTINCT | UNIQUE | ALL)? concatenation)?) ')' over_clause?
+    | ROUND '(' expression (',' UNSIGNED_INTEGER)? ')'
+    | AVG '(' (DISTINCT | ALL)? expression ')'
+    | MAX '(' (DISTINCT | ALL)? expression ')'
+    | LEAST '(' expressions ')'
+    | GREATEST '(' expressions ')'
+    ;
 
 other_function
     : over_clause_keyword function_argument_analytic over_clause?
     | /*TODO stantard_function_enabling_using*/ regular_id function_argument_modeling using_clause?
-    | COUNT '(' ( ASTERISK | (DISTINCT | UNIQUE | ALL)? concatenation) ')' over_clause?
+    | COUNT '(' (ASTERISK | (DISTINCT | UNIQUE | ALL)? concatenation) ')' over_clause?
     | (CAST | XMLCAST) '(' (MULTISET '(' subquery ')' | concatenation) AS type_spec ')'
     | COALESCE '(' table_element (',' (numeric | quoted_string))? ')'
     | COLLECT '(' (DISTINCT | UNIQUE)? concatenation collect_order_by_part? ')'
     | within_or_over_clause_keyword function_argument within_or_over_part+
-    | cursor_name ( PERCENT_ISOPEN | PERCENT_FOUND | PERCENT_NOTFOUND | PERCENT_ROWCOUNT )
+    | cursor_name (PERCENT_ISOPEN | PERCENT_FOUND | PERCENT_NOTFOUND | PERCENT_ROWCOUNT)
     | DECOMPOSE '(' concatenation (CANONICAL | COMPATIBILITY)? ')'
     | EXTRACT '(' regular_id FROM concatenation ')'
     | (FIRST_VALUE | LAST_VALUE) function_argument_analytic respect_or_ignore_nulls? over_clause
-    | standard_prediction_function_keyword
-      '(' expressions cost_matrix_clause? using_clause? ')'
+    | standard_prediction_function_keyword '(' expressions cost_matrix_clause? using_clause? ')'
     | TRANSLATE '(' expression (USING (CHAR_CS | NCHAR_CS))? (',' expression)* ')'
     | TREAT '(' expression AS REF? type_spec ')'
     | TRIM '(' ((LEADING | TRAILING | BOTH)? quoted_string? FROM)? concatenation ')'
     | XMLAGG '(' expression order_by_clause? ')' ('.' general_element_part)?
-    | (XMLCOLATTVAL | XMLFOREST)
-      '(' xml_multiuse_expression_element (',' xml_multiuse_expression_element)* ')' ('.' general_element_part)?
-    | XMLELEMENT
-      '(' (ENTITYESCAPING | NOENTITYESCAPING)? (NAME | EVALNAME)? expression
-       (/*TODO{input.LT(2).getText().equalsIgnoreCase("xmlattributes")}?*/ ',' xml_attributes_clause)?
-       (',' expression column_alias?)* ')' ('.' general_element_part)?
+    | (XMLCOLATTVAL | XMLFOREST) '(' xml_multiuse_expression_element (
+        ',' xml_multiuse_expression_element
+    )* ')' ('.' general_element_part)?
+    | XMLELEMENT '(' (ENTITYESCAPING | NOENTITYESCAPING)? (NAME | EVALNAME)? expression (
+        /*TODO{input.LT(2).getText().equalsIgnoreCase("xmlattributes")}?*/ ',' xml_attributes_clause
+    )? (',' expression column_alias?)* ')' ('.' general_element_part)?
     | XMLEXISTS '(' expression xml_passing_clause? ')'
     | XMLPARSE '(' (DOCUMENT | CONTENT) concatenation WELLFORMED? ')' ('.' general_element_part)?
-    | XMLPI
-      '(' (NAME identifier | EVALNAME concatenation) (',' concatenation)? ')' ('.' general_element_part)?
-    | XMLQUERY
-      '(' concatenation xml_passing_clause? RETURNING CONTENT (NULL_ ON EMPTY)? ')' ('.' general_element_part)?
-    | XMLROOT
-      '(' concatenation (',' xmlroot_param_version_part)? (',' xmlroot_param_standalone_part)? ')' ('.' general_element_part)?
-    | XMLSERIALIZE
-      '(' (DOCUMENT | CONTENT) concatenation (AS type_spec)?
-      xmlserialize_param_enconding_part? xmlserialize_param_version_part? xmlserialize_param_ident_part? ((HIDE | SHOW) DEFAULTS)? ')'
-      ('.' general_element_part)?
+    | XMLPI '(' (NAME identifier | EVALNAME concatenation) (',' concatenation)? ')' (
+        '.' general_element_part
+    )?
+    | XMLQUERY '(' concatenation xml_passing_clause? RETURNING CONTENT (NULL_ ON EMPTY)? ')' (
+        '.' general_element_part
+    )?
+    | XMLROOT '(' concatenation (',' xmlroot_param_version_part)? (
+        ',' xmlroot_param_standalone_part
+    )? ')' ('.' general_element_part)?
+    | XMLSERIALIZE '(' (DOCUMENT | CONTENT) concatenation (AS type_spec)? xmlserialize_param_enconding_part? xmlserialize_param_version_part?
+        xmlserialize_param_ident_part? ((HIDE | SHOW) DEFAULTS)? ')' ('.' general_element_part)?
     | xmltable
     ;
 
@@ -3889,8 +3938,7 @@ over_clause
     ;
 
 windowing_clause
-    : windowing_type
-      (BETWEEN windowing_elements AND windowing_elements | windowing_elements)
+    : windowing_type (BETWEEN windowing_elements AND windowing_elements | windowing_elements)
     ;
 
 windowing_type
@@ -3922,7 +3970,10 @@ within_or_over_part
     ;
 
 cost_matrix_clause
-    : COST (MODEL AUTO? | '(' cost_class_name (',' cost_class_name)* ')' VALUES '(' expressions? ')')
+    : COST (
+        MODEL AUTO?
+        | '(' cost_class_name (',' cost_class_name)* ')' VALUES '(' expressions? ')'
+    )
     ;
 
 xml_passing_clause
@@ -3930,19 +3981,17 @@ xml_passing_clause
     ;
 
 xml_attributes_clause
-    : XMLATTRIBUTES
-     '(' (ENTITYESCAPING | NOENTITYESCAPING)? (SCHEMACHECK | NOSCHEMACHECK)?
-     xml_multiuse_expression_element (',' xml_multiuse_expression_element)* ')'
+    : XMLATTRIBUTES '(' (ENTITYESCAPING | NOENTITYESCAPING)? (SCHEMACHECK | NOSCHEMACHECK)? xml_multiuse_expression_element (
+        ',' xml_multiuse_expression_element
+    )* ')'
     ;
 
 xml_namespaces_clause
-    : XMLNAMESPACES
-      '(' (concatenation column_alias)? (',' concatenation column_alias)* xml_general_default_part? ')'
+    : XMLNAMESPACES '(' (concatenation column_alias)? (',' concatenation column_alias)* xml_general_default_part? ')'
     ;
 
 xml_table_column
-    : xml_column_name
-      (FOR ORDINALITY | type_spec (PATH concatenation)? xml_general_default_part?)
+    : xml_column_name (FOR ORDINALITY | type_spec (PATH concatenation)? xml_general_default_part?)
     ;
 
 xml_general_default_part
@@ -3987,13 +4036,14 @@ sql_plus_command
     ;
 
 whenever_command
-    : WHENEVER (SQLERROR | OSERROR)
-         ( EXIT (SUCCESS | FAILURE | WARNING | variable_name) (COMMIT | ROLLBACK)
-         | CONTINUE (COMMIT | ROLLBACK | NONE))
+    : WHENEVER (SQLERROR | OSERROR) (
+        EXIT (SUCCESS | FAILURE | WARNING | variable_name) (COMMIT | ROLLBACK)
+        | CONTINUE (COMMIT | ROLLBACK | NONE)
+    )
     ;
 
 set_command
-    : SET regular_id (CHAR_STRING | ON | OFF | /*EXACT_NUM_LIT*/numeric | regular_id)
+    : SET regular_id (CHAR_STRING | ON | OFF | /*EXACT_NUM_LIT*/ numeric | regular_id)
     ;
 
 // Common
@@ -4156,13 +4206,17 @@ column_name
     ;
 
 tableview_name
-    : identifier ('.' id_expression)?
-          (AT_SIGN link_name | /*TODO{!(input.LA(2) == BY)}?*/ partition_extension_clause)?
+    : identifier ('.' id_expression)? (
+        AT_SIGN link_name
+        | /*TODO{!(input.LA(2) == BY)}?*/ partition_extension_clause
+    )?
     | xmltable outer_join_sign?
     ;
 
 xmltable
-    : XMLTABLE '(' (xml_namespaces_clause ',')? concatenation xml_passing_clause? (COLUMNS xml_table_column (',' xml_table_column)*)? ')' ('.' general_element_part)?
+    : XMLTABLE '(' (xml_namespaces_clause ',')? concatenation xml_passing_clause? (
+        COLUMNS xml_table_column (',' xml_table_column)*
+    )? ')' ('.' general_element_part)?
     ;
 
 char_set_name
@@ -4222,9 +4276,11 @@ function_argument_analytic
     ;
 
 function_argument_modeling
-    : '(' column_name (',' (numeric | NULL_) (',' (numeric | NULL_))?)?
-      USING (tableview_name '.' ASTERISK | ASTERISK | expression column_alias? (',' expression column_alias?)*)
-      ')' keep_clause?
+    : '(' column_name (',' (numeric | NULL_) (',' (numeric | NULL_))?)? USING (
+        tableview_name '.' ASTERISK
+        | ASTERISK
+        | expression column_alias? (',' expression column_alias?)*
+    ) ')' keep_clause?
     ;
 
 respect_or_ignore_nulls
@@ -4308,9 +4364,8 @@ native_datatype_element
 
 bind_variable
     : (BINDVAR | ':' UNSIGNED_INTEGER)
-      // Pro*C/C++ indicator variables
-      (INDICATOR? (BINDVAR | ':' UNSIGNED_INTEGER))?
-      ('.' general_element_part)*
+    // Pro*C/C++ indicator variables
+    (INDICATOR? (BINDVAR | ':' UNSIGNED_INTEGER))? ('.' general_element_part)*
     ;
 
 general_element
@@ -4402,7 +4457,7 @@ system_privilege
     | SET CONTAINER
     | CREATE ANY? PROCEDURE
     | (ALTER | DROP | EXECUTE) ANY PROCEDURE
-    | (CREATE | ALTER | DROP ) PROFILE
+    | (CREATE | ALTER | DROP) PROFILE
     | CREATE ROLE
     | (ALTER | DROP | GRANT) ANY ROLE
     | (CREATE | ALTER | DROP) ROLLBACK SEGMENT
@@ -4452,10 +4507,16 @@ system_privilege
 
 constant
     : TIMESTAMP (quoted_string | bind_variable) (AT TIME ZONE quoted_string)?
-    | INTERVAL (quoted_string | bind_variable | general_element_part)
-      (YEAR | MONTH | DAY | HOUR | MINUTE | SECOND)
-      ('(' (UNSIGNED_INTEGER | bind_variable) (',' (UNSIGNED_INTEGER | bind_variable) )? ')')?
-      (TO ( DAY | HOUR | MINUTE | SECOND ('(' (UNSIGNED_INTEGER | bind_variable) ')')?))?
+    | INTERVAL (quoted_string | bind_variable | general_element_part) (
+        YEAR
+        | MONTH
+        | DAY
+        | HOUR
+        | MINUTE
+        | SECOND
+    ) ('(' (UNSIGNED_INTEGER | bind_variable) (',' (UNSIGNED_INTEGER | bind_variable))? ')')? (
+        TO (DAY | HOUR | MINUTE | SECOND ('(' (UNSIGNED_INTEGER | bind_variable) ')')?)
+    )?
     | numeric
     | DATE quoted_string
     | quoted_string
