@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { CaretPosition } from '../../../../src/parser/common/basic-parser-types';
 import FlinkSQL from '../../../../src/parser/flinksql';
+import { commentOtherLine } from '../../../helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
@@ -13,7 +14,10 @@ describe('Flink SQL Token Suggestion', () => {
             lineNumber: 3,
             column: 5,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual(['MODULES', 'CATALOG']);
     });
@@ -23,7 +27,10 @@ describe('Flink SQL Token Suggestion', () => {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual([
             'CATALOG',
@@ -40,7 +47,10 @@ describe('Flink SQL Token Suggestion', () => {
             lineNumber: 7,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual([
             'MODULES',

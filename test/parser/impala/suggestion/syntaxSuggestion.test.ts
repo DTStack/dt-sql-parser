@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
 import ImpalaSQL from '../../../../src/parser/impala';
+import { commentOtherLine } from '../../../helper';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'syntaxSuggestion.sql'),
@@ -16,7 +17,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -30,7 +34,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 3,
             column: 27,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
         );
@@ -44,7 +51,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
         );
@@ -58,7 +68,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 21,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -72,7 +85,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 39,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
         );
@@ -86,7 +102,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
@@ -100,7 +119,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 11,
             column: 12,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
@@ -114,7 +136,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 13,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
         );
@@ -128,7 +153,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 15,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -142,7 +170,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 17,
             column: 22,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
         );
@@ -156,7 +187,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 19,
             column: 21,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -170,7 +204,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 21,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
         );
@@ -184,7 +221,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 23,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
         );
@@ -198,7 +238,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 25,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION_CREATE
         );
@@ -212,7 +255,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 27,
             column: 25,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
         );
@@ -226,7 +272,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 29,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -240,7 +289,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 31,
             column: 22,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -254,7 +306,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 33,
             column: 22,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
@@ -268,7 +323,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 35,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
         );
@@ -282,7 +340,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 37,
             column: 22,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
         );
@@ -296,7 +357,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 39,
             column: 22,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
         );
@@ -310,7 +374,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 41,
             column: 36,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
         );
@@ -324,7 +391,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 43,
             column: 36,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
         );
@@ -338,7 +408,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 45,
             column: 45,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
         );
@@ -352,7 +425,10 @@ describe('Impala SQL Syntax Suggestion', () => {
             lineNumber: 47,
             column: 49,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
         );

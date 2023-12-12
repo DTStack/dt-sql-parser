@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { CaretPosition } from '../../../../src/parser/common/basic-parser-types';
 import HiveSQL from '../../../../src/parser/hive';
+import { commentOtherLine } from '../../../helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
@@ -13,7 +14,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual([
             'APPLICATION',
             'GROUP',
@@ -37,7 +41,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 3,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual([
             'CONNECTOR',
             'APPLICATION',
@@ -69,7 +76,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual(['FROM']);
     });
 
@@ -78,7 +88,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 7,
             column: 10,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual([
             'EXTENDED',
             'FORMATTED',
@@ -94,7 +107,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 9,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual([
             'CONNECTOR',
             'APPLICATION',
@@ -121,7 +137,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 11,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual(['TABLE']);
     });
 
@@ -130,7 +149,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 13,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual(['FROM', 'TABLE', 'EXTERNAL']);
     });
 
@@ -139,7 +161,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 15,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual(['INTO', 'OVERWRITE']);
     });
 
@@ -148,7 +173,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 17,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual(['DATA']);
     });
 
@@ -157,7 +185,10 @@ describe('Hive SQL Token Suggestion', () => {
             lineNumber: 19,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
         expect(suggestion).toEqual([
             'CURRENT',
             'ROLES',

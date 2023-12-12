@@ -14,7 +14,10 @@ describe('Impala SQL Token Suggestion', () => {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual(['TABLE', 'VIEW', 'DATABASE']);
     });
