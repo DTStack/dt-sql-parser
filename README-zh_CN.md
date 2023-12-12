@@ -44,6 +44,8 @@ dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发�
 ## 与 MonacoEditor 集成
 我们提供了[monaco-sql-languages](https://github.com/DTStack/monaco-sql-languages)，通过它你可以轻易的将`dt-sql-parser`与`monaco-editor`集成。
 
+>提示：如果想要在浏览器中运行 `dt-sql-parser`，请不要忘记安装 `assert` 和 `util` 的 polyfills 包，另外还需要定义全局变量 `process.env`。 在 node 环境中则不需要，因为 node 内置了这些。
+
 <br/>
 
 ## 安装
