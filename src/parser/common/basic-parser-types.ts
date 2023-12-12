@@ -4,9 +4,9 @@
  */
 export interface CaretPosition {
     /** start at 1 */
-    lineNumber: number;
+    readonly lineNumber: number;
     /** start at 1 */
-    column: number;
+    readonly column: number;
 }
 
 /**
@@ -45,23 +45,23 @@ export enum SyntaxContextType {
 
 export interface WordRange {
     /** content of word */
-    text: string;
+    readonly text: string;
     /** start at 0 */
-    startIndex: number;
-    stopIndex: number;
+    readonly startIndex: number;
+    readonly stopIndex: number;
     /** start at 1 */
-    line: number;
+    readonly line: number;
     /** start at 1 */
-    startColumn: number;
-    stopColumn: number;
+    readonly startColumn: number;
+    readonly stopColumn: number;
 }
 
 /**
  * Suggested information analyzed from the input
  */
 export interface SyntaxSuggestion<T = WordRange> {
-    syntaxContextType: SyntaxContextType;
-    wordRanges: T[];
+    readonly syntaxContextType: SyntaxContextType;
+    readonly wordRanges: T[];
 }
 
 /**
@@ -71,22 +71,22 @@ export interface Suggestions<T = WordRange> {
     /**
      * Suggestions about syntax
      */
-    syntax: SyntaxSuggestion<T>[];
+    readonly syntax: SyntaxSuggestion<T>[];
     /**
      * Suggestions about keywords
      */
-    keywords: string[];
+    readonly keywords: string[];
 }
 
 export interface TextSlice {
     /** start at 0 */
-    startIndex: number;
-    endIndex: number;
+    readonly startIndex: number;
+    readonly endIndex: number;
     /** start at 1 */
-    startLine: number;
-    endLine: number;
+    readonly startLine: number;
+    readonly endLine: number;
     /** start at 1 */
-    startColumn: number;
-    endColumn: number;
-    text: string;
+    readonly startColumn: number;
+    readonly endColumn: number;
+    readonly text: string;
 }
