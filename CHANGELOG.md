@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.9](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.8...v4.0.0-beta.4.9) (2023-12-13)
+
+
+### Features
+
+* add ErrorStrategy([#230](https://github.com/DTStack/dt-sql-parser/issues/230)) ([ee8b468](https://github.com/DTStack/dt-sql-parser/commit/ee8b468778d6c109402ee9f110c34bac2eca17db))
+* add readonly modifier ([17eba1f](https://github.com/DTStack/dt-sql-parser/commit/17eba1f2aa6cee44920086ba363ecb9cc26b5efd))
+* optimize suggestion ([#231](https://github.com/DTStack/dt-sql-parser/issues/231)) ([3c7c59f](https://github.com/DTStack/dt-sql-parser/commit/3c7c59fb70e47b1052a6a15d120a9220e17fa0c1))
+
+
+### Bug Fixes
+
+*  add missing expression predicate to impala parser([#225](https://github.com/DTStack/dt-sql-parser/issues/225)) ([484c881](https://github.com/DTStack/dt-sql-parser/commit/484c88158370a2a8017d5988adec3d23dfdcbe3b))
+* correct import path ([96b0376](https://github.com/DTStack/dt-sql-parser/commit/96b037651072d4e30d232af0a23aaed28bda4cc8))
+* **impala:** update impala nonReserved and keywords use as functionName ([#229](https://github.com/DTStack/dt-sql-parser/issues/229)) ([8c594cf](https://github.com/DTStack/dt-sql-parser/commit/8c594cf0f25f8c852c14350b78395834e85540c7))
+
 ## [4.0.0-beta.4.8](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.7...v4.0.0-beta.4.8) (2023-11-29)
 
 
