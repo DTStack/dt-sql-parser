@@ -300,7 +300,7 @@ export default abstract class BasicParser<
 
                 /**
                  * Ensure that the statementContext before the left boundary
-                 * and the last sentence on the right border are qualified SQL statements.
+                 * and the last statementContext on the right boundary are qualified SQL statements.
                  */
                 const isPrevCtxValid = index === 0 || !statementsContext[index - 1]?.exception;
                 const isNextCtxValid =
@@ -321,7 +321,7 @@ export default abstract class BasicParser<
             const stopIndex = stopStatement?.stop?.stopIndex ?? input.length - 1;
 
             /**
-             * Save offset of the tokenIndex in the partInput
+             * Save offset of the tokenIndex in the range of input
              * compared to the tokenIndex in the whole input
              */
             tokenIndexOffset = startStatement?.start?.tokenIndex ?? 0;
