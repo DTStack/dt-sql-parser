@@ -27,7 +27,7 @@ describe('MySQL Transactional and Locking, Replication, Prepared Compound and Ut
             it(sql, () => {
                 const result = parser.validate(sql);
                 if (result.length) {
-                    console.log(result, `\n请检查 sql: ${sql}`);
+                    console.log(result, `\nPlease check sql: ${sql}`);
                 }
                 expect(result.length).toBe(0);
             });
