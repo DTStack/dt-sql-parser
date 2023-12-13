@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
-        "baseUrl": "./",
         "sourceMap": false,
         "allowJs":true,
         "target": "es6",
@@ -15,7 +14,7 @@
         "skipLibCheck": true,
         "paths": {
             "antlr4": [
-                "node_modules/antlr4/src/antlr4/index"
+                "./node_modules/antlr4/src/antlr4/index"
             ]
         },
         "types": [
