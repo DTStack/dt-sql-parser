@@ -42,7 +42,7 @@ describe('MySQL Database Administration Syntax Tests', () => {
             it(sql, () => {
                 const result = parser.validate(sql);
                 if (result.length) {
-                    console.log(result, `\n请检查 sql: ${sql}`);
+                    console.log(result, `\nPlease check sql: ${sql}`);
                 }
                 expect(result.length).toBe(0);
             });

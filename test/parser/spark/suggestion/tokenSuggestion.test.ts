@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { CaretPosition } from '../../../../src/parser/common/basic-parser-types';
 import SparkSQL from '../../../../src/parser/spark';
+import { commentOtherLine } from '../../../helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
@@ -13,7 +14,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual(['TABLE', 'INDEX', 'VIEW', 'DATABASE', 'NAMESPACE', 'SCHEMA']);
     });
@@ -23,7 +27,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 3,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual([
             'TEMPORARY',
@@ -46,7 +53,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual(['FROM']);
     });
@@ -56,7 +66,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 7,
             column: 10,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual([
             'WITH',
@@ -79,7 +92,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 9,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual([
             'TEMPORARY',
@@ -99,7 +115,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 11,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual(['OVERWRITE', 'INTO']);
     });
@@ -109,7 +128,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 13,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual(['DATA']);
     });
@@ -119,7 +141,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 15,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual([
             'LOCKS',
@@ -154,7 +179,10 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 17,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(tokenSql, pos)?.keywords;
+        const suggestion = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
 
         expect(suggestion).toEqual(['TABLE']);
     });
