@@ -12,11 +12,6 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "paths": {
-            "antlr4": [
-                "./node_modules/antlr4/src/antlr4/index"
-            ]
-        },
         "types": [
             "node",
             "jest"
@@ -27,6 +22,7 @@
             "./src/typings"
         ]
     },
+    "isolatedModules": true,
     "include": [
         "./src/**/*"
     ],
