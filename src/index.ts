@@ -11,7 +11,7 @@ export {
     PLSQL,
 } from './parser';
 
-export {
+export type {
     MySqlParserListener,
     MySqlParserVisitor,
     FlinkSqlParserListener,
