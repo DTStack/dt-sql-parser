@@ -163,35 +163,49 @@ console.log(tokens)
 
 Traverse the tree node by the Visitor:
 
-```javascript
-import { MySQL, MySqlParserVisitor } from 'dt-sql-parser';
+```typescript
+import { MySQL, AbstractParseTreeVisitor } from 'dt-sql-parser';
+import type { MySqlParserVisitor } from 'dt-sql-parser';
 
-const parser = new MySQL()
-const sql = `select id,name from user1;`
-// parseTree
-const tree = parser.parse(sql)
-class MyVisitor extends MySqlParserVisitor {
-    // overwrite visitTableName
-    visitTableName(ctx) {
-        let tableName = ctx.getText().toLowerCase()
-        console.log('TableName', tableName)
+const parser = new MySQL();
+const sql = `select id,name from user1;`;
+const tree = parser.parse(sql);
+
+type Result = string;
+
+class MyVisitor extends AbstractParseTreeVisitor<Result> implements MySqlParserVisitor<Result> {
+    protected defaultResult() {
+        return '';
     }
-    // overwrite visitSelectElements
+    visitTableName(ctx) {
+        let tableName = ctx.text.toLowerCase();
+        console.log('TableName:', tableName);
+        return '';
+    }
     visitSelectElements(ctx) {
-        let selectElements = ctx.getText().toLowerCase()
-        console.log('SelectElements', selectElements)
+        let selectElements = ctx.text.toLowerCase();
+        console.log('SelectElements:', selectElements);
+        return '';
+    }
+    visitProgram(ctx) {
+        return 'Return by program node'
     }
 }
-const visitor = new MyVisitor()
-visitor.visit(tree)
+const visitor = new MyVisitor();
+const result = visitor.visit(tree);
+
+console.log(result);
 ```
 
 *output:*
 
 ```javascript
 /*
-SelectElements id,name
-TableName user1
+SelectElements: id,name
+TableName: user1
+*/
+/*
+Return by program node
 */
 ```
 
@@ -201,34 +215,34 @@ TableName user1
 
 Access the specified node in the AST by the Listener
 
-```javascript
-import { MySQL, MySqlParserListener } from 'dt-sql-parser';
+```typescript
+import { MySQL } from 'dt-sql-parser';
+import type { MySqlParserListener } from 'dt-sql-parser';
 
 const parser = new MySQL();
-const sql = 'select id,name from user1;'
-// parseTree
-const tree = parser.parse(sql)
-class MyListener extends MySqlParserListener {
+const sql = 'select id,name from user1;';
+const parseTree = parser.parse(sql);
+
+class MyListener implements MySqlParserListener {
     enterTableName(ctx) {
-        let tableName = ctx.getText().toLowerCase()
-        console.log('TableName', tableName)
+        let tableName = ctx.text.toLowerCase();
+        console.log('TableName:', tableName);
     }
     enterSelectElements(ctx) {
-        let selectElements = ctx.getText().toLowerCase()
-        console.log('SelectElements', selectElements)
+        let selectElements = ctx.text.toLowerCase();
+        console.log('SelectElements:', selectElements);
     }
 }
 const listenTableName = new MyListener();
-parser.listen(listenTableName, tree);
-
+parser.listen(listenTableName as MySqlParserListener, parseTree);
 ```
 
 *output:*
 
 ```javascript
 /*
-SelectElements id,name
-TableName user1
+SelectElements: id,name
+TableName: user1
 */
 ```
 
