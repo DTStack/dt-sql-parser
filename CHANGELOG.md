@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.10](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.9...v4.0.0-beta.4.10) (2023-12-19)
+
+
+### Features
+
+* export visitor and listener as type ([d4c97ef](https://github.com/DTStack/dt-sql-parser/commit/d4c97ef833c1c38410930c4094c71359b483332a))
+
 ## [4.0.0-beta.4.9](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.8...v4.0.0-beta.4.9) (2023-12-13)
 
 
