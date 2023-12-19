@@ -1,11 +1,9 @@
-import impalaSQL from '../../../src/parser/impala';
-import { ImpalaSqlParserVisitor } from '../../../src/lib/impala/ImpalaSqlParserVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree';
+import { ImpalaSQL, ImpalaSqlParserVisitor, AbstractParseTreeVisitor } from '../../filters';
 
 describe('impala SQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new impalaSQL();
+    const parser = new ImpalaSQL();
 
     const parseTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);

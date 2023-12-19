@@ -1,4 +1,4 @@
-import MySQL from '../../../src/parser/mysql';
+import { MySQL } from '../../filters';
 
 describe('MySQL Lexer tests', () => {
     const parser = new MySQL();

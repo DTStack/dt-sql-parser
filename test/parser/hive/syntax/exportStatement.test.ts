@@ -1,4 +1,4 @@
-import HiveSQL from '../../../../src/parser/hive';
+import { HiveSQL } from '../../../filters';
 import { readSQL } from '../../../helper';
 
 const features = {

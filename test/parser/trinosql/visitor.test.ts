@@ -1,11 +1,9 @@
-import trinoSQL from '../../../src/parser/trinosql';
-import { TrinoSqlVisitor } from '../../../src/lib/trinosql/TrinoSqlVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree';
+import { TrinoSQL, TrinoSqlVisitor, AbstractParseTreeVisitor } from '../../filters';
 
 describe('trino SQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new trinoSQL();
+    const parser = new TrinoSQL();
 
     const parseTree = parser.parse(sql, (error) => {
         console.log('Parse error:', error);

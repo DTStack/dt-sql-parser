@@ -1,6 +1,5 @@
-import MySQL from '../../../src/parser/mysql';
-import { MysqlSplitListener } from '../../../src/parser/mysql';
-import { MySqlParserListener } from '../../../src/lib/mysql/MySqlParserListener';
+import { MySQL } from '../../filters';
+import { MysqlSplitListener, MySqlParserListener } from '../../filters';
 
 const validSQL1 = `INSERT INTO country_page_view
 VALUES ('Chinese', 'mumiao', 18),

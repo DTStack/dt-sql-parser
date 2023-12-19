@@ -1,11 +1,9 @@
-import impalaSQL from '../../../src/parser/impala';
-import { ImpalaSqlParserListener } from '../../../src/lib/impala/ImpalaSqlParserListener';
-import { ParseTreeListener } from 'antlr4ts/tree';
+import { ImpalaSQL, ImpalaSqlParserListener, ParseTreeListener } from '../../filters';
 
 describe('impala SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new impalaSQL();
+    const parser = new ImpalaSQL();
 
     const parseTree = parser.parse(sql);
 

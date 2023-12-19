@@ -1,7 +1,9 @@
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
-import { HiveSqlParserVisitor } from '../../../src/lib/hive/HiveSqlParserVisitor';
-import HiveSQL from '../../../src/parser/hive';
-import { ProgramContext } from '../../../src/lib/hive/HiveSqlParser';
+import {
+    HiveSQL,
+    HiveSqlParserVisitor,
+    AbstractParseTreeVisitor,
+    HiveSqlParserRuleContext,
+} from '../../filters';
 
 describe('HiveSQL Visitor Tests', () => {
     const expectTableName = 'dm_gis.dlv_addr_tc_count';
@@ -25,7 +27,7 @@ describe('HiveSQL Visitor Tests', () => {
         }
 
         const visitor = new MyVisitor();
-        visitor.visit(parseTree as ProgramContext);
+        visitor.visit(parseTree as HiveSqlParserRuleContext.ProgramContext);
 
         expect(result).toBe(expectTableName);
     });

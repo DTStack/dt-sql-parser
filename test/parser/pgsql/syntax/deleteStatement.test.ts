@@ -1,7 +1,7 @@
-import PgSQL from '../../../../src/parser/pgsql';
+import { PostgresSQL } from '../../../filters';
 import { readSQL } from '../../../helper';
 
-const parser = new PgSQL();
+const parser = new PostgresSQL();
 
 const features = {
     deletes: readSQL(__dirname, 'delete.sql'),

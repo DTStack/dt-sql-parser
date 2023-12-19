@@ -1,6 +1,4 @@
-import PgSQL from '../../../src/parser/pgsql';
-import { PgSqlSplitListener } from '../../../src/parser/pgsql';
-import { PostgreSQLParserListener } from '../../../src/lib/pgsql/PostgreSQLParserListener';
+import { PostgresSQL, PgSqlSplitListener, PostgreSQLParserListener } from '../../filters';
 
 const validSQL1 = `INSERT INTO country_page_view
 VALUES ('Chinese', 'mumiao', 18),
@@ -9,7 +7,7 @@ const validSQL2 = 'SELECT * FROM tb;';
 const inValidSQL = 'CREATE TABLE';
 
 describe('PgSQL ErrorStrategy test', () => {
-    const pgSQL = new PgSQL();
+    const pgSQL = new PostgresSQL();
 
     // TODO: handle unexpected case
     // test('begin inValid', () => {

@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
-import SparkSQL from '../../../../src/parser/spark';
+import { SparkSQL, CaretPosition, SyntaxContextType } from '../../../filters';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'multipleStatement.sql'),

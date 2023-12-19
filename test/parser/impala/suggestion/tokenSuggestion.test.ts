@@ -1,13 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition } from '../../../../src/parser/common/basic-parser-types';
-import impalaSQL from '../../../../src/parser/impala';
+import { ImpalaSQL, CaretPosition } from '../../../filters';
 import { commentOtherLine } from '../../../helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('Impala SQL Token Suggestion', () => {
-    const parser = new impalaSQL();
+    const parser = new ImpalaSQL();
 
     test('After ALTER', () => {
         const pos: CaretPosition = {

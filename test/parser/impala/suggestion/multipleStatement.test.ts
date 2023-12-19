@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
-import ImpalaSQL from '../../../../src/parser/impala';
+import { ImpalaSQL, CaretPosition, SyntaxContextType } from '../../../filters';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'multipleStatement.sql'),

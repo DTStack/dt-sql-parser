@@ -1,7 +1,9 @@
-import FlinkSQL from '../../../src/parser/flinksql';
-import { FlinkSqlParserListener } from '../../../src/lib/flinksql/FlinkSqlParserListener';
-import { TableExpressionContext } from '../../../src/lib/flinksql/FlinkSqlParser';
-import { ParseTreeListener } from 'antlr4ts/tree';
+import {
+    FlinkSQL,
+    FlinkSqlParserListener,
+    FlinkSqlParserRuleContext,
+    ParseTreeListener,
+} from '../../filters';
 
 describe('Flink SQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -13,7 +15,9 @@ describe('Flink SQL Listener Tests', () => {
     test('Listener enterTableName', async () => {
         let result = '';
         class MyListener implements FlinkSqlParserListener {
-            enterTableExpression = (ctx: TableExpressionContext): void => {
+            enterTableExpression = (
+                ctx: FlinkSqlParserRuleContext.TableExpressionContext
+            ): void => {
                 result = ctx.text.toLowerCase();
             };
         }

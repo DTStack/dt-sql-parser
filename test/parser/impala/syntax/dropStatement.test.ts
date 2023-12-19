@@ -1,4 +1,4 @@
-import ImpalaSQL from '../../../../src/parser/impala';
+import { ImpalaSQL } from '../../../filters';
 import { readSQL } from '../../../helper';
 
 const parser = new ImpalaSQL();

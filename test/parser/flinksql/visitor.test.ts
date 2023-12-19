@@ -1,6 +1,4 @@
-import FlinkSQL from '../../../src/parser/flinksql';
-import { FlinkSqlParserVisitor } from '../../../src/lib/flinksql/FlinkSqlParserVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree';
+import { FlinkSQL, AbstractParseTreeVisitor, FlinkSqlParserVisitor } from '../../filters';
 
 describe('Flink SQL Visitor Tests', () => {
     const expectTableName = 'user1';

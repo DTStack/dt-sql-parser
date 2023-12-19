@@ -1,6 +1,4 @@
-import { ParseTreeListener } from 'antlr4ts/tree';
-import { PlSqlParserListener } from '../../../src/lib/plsql/PlSqlParserListener';
-import PLSQL from '../../../src/parser/plsql';
+import { PLSQL, PlSqlParserListener, ParseTreeListener } from '../../filters';
 
 describe('PLSQL Listener Tests', () => {
     const expectTableName = 'user1';

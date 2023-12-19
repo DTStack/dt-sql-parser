@@ -1,6 +1,4 @@
-import { ParseTreeListener } from 'antlr4ts/tree';
-import { PostgreSQLParserListener } from '../../../src/lib/pgsql/PostgreSQLParserListener';
-import PostgresSQL from '../../../src/parser/pgsql';
+import { PostgresSQL, PostgreSQLParserListener, ParseTreeListener } from '../../filters';
 
 describe('PostgresSQL Listener Tests', () => {
     const expectTableName = 'user1';

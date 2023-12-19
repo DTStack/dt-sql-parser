@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
-import PgSQL from '../../../../src/parser/pgsql';
+import { CaretPosition, SyntaxContextType, PostgresSQL } from '../../../filters';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'multipleStatement.sql'),
@@ -9,7 +8,7 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('PgSQL Multiple Statements Syntax Suggestion', () => {
-    const parser = new PgSQL();
+    const parser = new PostgresSQL();
 
     test('Create table ', () => {
         const pos: CaretPosition = {

@@ -1,4 +1,4 @@
-import SparkSQL from '../../../src/parser/spark';
+import { SparkSQL } from '../../filters';
 
 describe('SparkSQL Lexer tests', () => {
     const parser = new SparkSQL();

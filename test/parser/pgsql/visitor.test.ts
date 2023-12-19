@@ -1,6 +1,4 @@
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
-import { PostgreSQLParserVisitor } from '../../../src/lib/pgsql/PostgreSQLParserVisitor';
-import PostgresSQL from '../../../src/parser/pgsql';
+import { PostgresSQL, AbstractParseTreeVisitor, PostgreSQLParserVisitor } from '../../filters';
 
 describe('MySQL Visitor Tests', () => {
     const expectTableName = 'user1';

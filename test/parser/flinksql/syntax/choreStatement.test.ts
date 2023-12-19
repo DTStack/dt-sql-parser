@@ -1,4 +1,4 @@
-import FlinkSQL from '../../../../src/parser/flinksql';
+import { FlinkSQL } from '../../../filters';
 import { readSQL } from '../../../helper';
 
 // 综合测试的 sql 不做切割
