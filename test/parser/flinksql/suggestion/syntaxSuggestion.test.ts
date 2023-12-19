@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
-import FlinkSQL from '../../../../src/parser/flinksql';
+import { CaretPosition, SyntaxContextType, FlinkSQL } from '../../../filters';
 import { commentOtherLine } from '../../../helper';
 
 const syntaxSql = fs.readFileSync(

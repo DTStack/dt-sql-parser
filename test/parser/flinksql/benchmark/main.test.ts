@@ -1,7 +1,4 @@
-import path from 'path';
-import { writeFileSync } from 'node:fs';
-
-import FlinkSQL from '../../../../src/parser/flinksql';
+import { FlinkSQL } from '../../../filters';
 import {
     readSQL,
     benchmark,

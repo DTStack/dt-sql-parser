@@ -1,6 +1,4 @@
-import FlinkSQL from '../../../src/parser/flinksql';
-import { FlinkSqlSplitListener } from '../../../src/parser/flinksql';
-import { FlinkSqlParserListener } from '../../../src/lib/flinksql/FlinkSqlParserListener';
+import { FlinkSQL, FlinkSqlSplitListener, FlinkSqlParserListener } from '../../filters';
 
 const validSQL1 = `INSERT INTO country_page_view
 VALUES ('Chinese', 'mumiao', 18),

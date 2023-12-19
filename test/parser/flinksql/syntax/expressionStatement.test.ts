@@ -1,4 +1,4 @@
-import FlinkSQL from '../../../../src/parser/flinksql';
+import { FlinkSQL } from '../../../filters';
 import { readSQL } from '../../../helper';
 
 const features = {

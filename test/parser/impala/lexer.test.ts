@@ -1,4 +1,4 @@
-import ImpalaSQL from '../../../src/parser/impala';
+import { ImpalaSQL } from '../../filters';
 
 describe('ImpalaSQL Lexer tests', () => {
     const parser = new ImpalaSQL();

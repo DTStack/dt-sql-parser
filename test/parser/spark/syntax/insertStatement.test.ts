@@ -1,4 +1,4 @@
-import SparkSQL from '../../../../src/parser/spark';
+import { SparkSQL } from '../../../filters';
 import { readSQL } from '../../../helper';
 
 const parser = new SparkSQL();

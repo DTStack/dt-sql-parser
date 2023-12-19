@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition } from '../../../../src/parser/common/basic-parser-types';
-import TrinoSQL from '../../../../src/parser/trinosql';
+import { TrinoSQL, CaretPosition } from '../../../filters';
 import { commentOtherLine } from '../../../helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');

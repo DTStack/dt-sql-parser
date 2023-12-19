@@ -1,4 +1,4 @@
-import PLSQL from '../../../src/parser/plsql';
+import { PLSQL } from '../../filters';
 
 describe('PLSQL Lexer tests', () => {
     const parser = new PLSQL();

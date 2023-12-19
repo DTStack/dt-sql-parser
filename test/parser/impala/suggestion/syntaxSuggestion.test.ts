@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
-import ImpalaSQL from '../../../../src/parser/impala';
+import { ImpalaSQL, CaretPosition, SyntaxContextType } from '../../../filters';
 import { commentOtherLine } from '../../../helper';
 
 const syntaxSql = fs.readFileSync(

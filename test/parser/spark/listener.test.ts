@@ -1,6 +1,4 @@
-import { ParseTreeListener } from 'antlr4ts/tree';
-import { SparkSqlParserListener } from '../../../src/lib/spark/SparkSqlParserListener';
-import SparkSQL from '../../../src/parser/spark';
+import { SparkSQL, ParseTreeListener, SparkSqlParserListener } from '../../filters';
 
 describe('Spark SQL Listener Tests', () => {
     const expectTableName = 'user1';

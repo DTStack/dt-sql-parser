@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition, SyntaxContextType } from '../../../../src/parser/common/basic-parser-types';
-import PgSQL from '../../../../src/parser/pgsql';
+import { PostgresSQL, CaretPosition, SyntaxContextType } from '../../../filters';
 import { commentOtherLine } from '../../../helper';
 
 const syntaxSql = fs.readFileSync(
@@ -10,7 +9,7 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('Postgre SQL Syntax Suggestion', () => {
-    const parser = new PgSQL();
+    const parser = new PostgresSQL();
 
     test('Validate Syntax SQL', () => {
         expect(parser.validate(syntaxSql).length).not.toBe(0);

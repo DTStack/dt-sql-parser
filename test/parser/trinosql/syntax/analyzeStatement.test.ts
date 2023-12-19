@@ -1,4 +1,4 @@
-import TrinoSQL from '../../../../src/parser/trinosql';
+import { TrinoSQL } from '../../../filters';
 import { readSQL } from '../../../helper';
 
 const features = {
