@@ -180,8 +180,9 @@ class MyVisitor extends AbstractParseTreeVisitor<Result> implements MySqlParserV
         console.log('SelectElements', selectElements);
         return '';
     }
-    visitProgram(ctx) {
-        return 'Return by program node'
+    visitProgram(ctx) { // program 是根规则
+        this.visitChildren(ctx);
+        return 'Return by program context'
     }
 }
 const visitor = new MyVisitor();
