@@ -244,7 +244,7 @@ export default abstract class BasicParser<
                 startLine: start.line,
                 endLine: stop.line,
                 startColumn: start.charPositionInLine + 1,
-                endColumn: stop.charPositionInLine + stop.text.length,
+                endColumn: stop.charPositionInLine + 1 + stop.text.length,
                 text: this._parsedInput.slice(start.startIndex, stop.stopIndex + 1),
             };
         });
@@ -364,10 +364,10 @@ export default abstract class BasicParser<
                     return {
                         text: this._parsedInput.slice(token.startIndex, token.stopIndex + 1),
                         startIndex: token.startIndex,
-                        stopIndex: token.stopIndex,
+                        endIndex: token.stopIndex,
                         line: token.line,
                         startColumn: token.charPositionInLine + 1,
-                        stopColumn: token.charPositionInLine + token.text.length,
+                        stopColumn: token.charPositionInLine + 1 + token.text.length,
                     };
                 });
                 return {
