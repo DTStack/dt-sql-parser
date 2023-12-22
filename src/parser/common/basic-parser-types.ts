@@ -48,11 +48,13 @@ export interface WordRange {
     readonly text: string;
     /** start at 0 */
     readonly startIndex: number;
-    readonly stopIndex: number;
+    /** end at ..n-1 */
+    readonly endIndex: number;
     /** start at 1 */
     readonly line: number;
     /** start at 1 */
     readonly startColumn: number;
+    /** end at ..n + 1 */
     readonly stopColumn: number;
 }
 
@@ -81,12 +83,15 @@ export interface Suggestions<T = WordRange> {
 export interface TextSlice {
     /** start at 0 */
     readonly startIndex: number;
+    /** end at ..n-1 */
     readonly endIndex: number;
     /** start at 1 */
     readonly startLine: number;
+    /** end at ..n */
     readonly endLine: number;
     /** start at 1 */
     readonly startColumn: number;
+    /** end at ..n + 1 */
     readonly endColumn: number;
     readonly text: string;
 }

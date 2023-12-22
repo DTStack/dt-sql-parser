@@ -290,7 +290,7 @@ console.log(sqlSlices)
 Obtaining code completion information at a specified position in SQL.
 We can refer to the example of using `FlinkSQL`.
 
-Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the row and column numbers indicating the position where code completion is desired.
+Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the row and column numbers indicating the position where code completion is desired. The following are some additional explanations about [CaretPosition](#caretposition-of-code-completion).
 + **keyword candidates list**
 
     ```javascript
@@ -358,6 +358,76 @@ The grammar-related code completion information returns an array, where each ite
 
 <br/>
 
+## Position and Range
+Some return results of the APIs provided by `dt-sql-parser` contain text information, among which the range and start value of line number, column number and index may cause some confusion.
+
+### Index
+The index starts at 0. In the programming field, it is more intuitive.
+
+![index-image](./docs/images/index.png)
+
+For an index range, the start index starts from 0 and ends with n-1, as shown in the figure above, an index range of blue text should be represented as follows:
+
+```javascript
+{
+    startIndex: 0,
+    endIndex: 3
+}
+```
+
+### Line
+The line starts at 1.
+
+![line-image](./docs/images/line.png)
+
+For a range of multiple lines, the line number starts from 1 and ends with n. A range of the first and second lines is represented as follows:
+
+```javascript
+{
+    startLine: 1,
+    endLine: 2
+}
+```
+
+### Column 
+The column also starts at 1.
+
+![column-image](./docs/images/column.png)
+
+It is easier to understand by comparing the column number with the cursor position of the editor. For a range of multiple columns, the column number starts from 1 and ends with n+1, as shown in the figure above, a range of blue text columns is represented as follows:
+
+```javascript
+{
+    startColumn: 1,
+    endColumn: 5
+}
+```
+
+### CaretPosition Of Code Completion
+The code completion of `dt-sql-parser` was designed to be used in the editor, so the format of the second parameter (CaretPosition) of the `getSuggestionAtCaretPosition` method is line and column number instead of character position index. This makes it easier to integrate the code completion into the editor. For the editor, it only needs to get the text content and cursor position in the editor at a specific time to call the code completion of `dt-sql-parser`, without any additional calculation.
+
+But in some other scenarios, you may need to get the caret position required by the code completion through conversion or calculation. Then, there are some precautions that you may need to care about before that.
+
+The code completion of `dt-sql-parser` depends on [antlr4-c3](https://github.com/mike-lischke/antlr4-c3), which is a great library. The code completion of `dt-sql-parser` is just encapsulated and converted based on antlr4-c3, including converting the line and column number information into the token index required by antlr4-c3, as shown in the figure below:
+
+![column-image](./docs/images/token.png)
+
+Regard the column in the figure as the cursor position, and put this text into the editor, you will get 13 possible cursor positions, while for dt-sql-parser, this text will generate 4 Tokens after being parsed. An important strategy of the code completion is: **When the cursor (CaretPosition) has not completely left a Token, dt-sql-parser thinks that this Token has not been completed, and the code completion will infer what can be filled in the position of this Token.**
+
+For example, if you want to know what to fill in after `SHOW` through the code completion, the caret position should be:
+
+```javascript
+{
+    lineNumber: 1,
+    column: 6
+}
+```
+
+At this time, dt-sql-parser will think that `SHOW` is already a complete Token, and it should infer what can be filled in after `SHOW`. If the column in the passed-in caret position is 5, then dt-sql-parser will think that `SHOW` has not been completed, and then infer what can be filled in the position of `SHOW`. In other words, in the figure above, `column: 5` belongs to `token: 0`, and `column: 6` belongs to `token: 1`.
+
+For the editor, this strategy is also more intuitive. After the user enters `SHOW`, before pressing the space key, the user probably has not finished entering, maybe the user wants to enter something like `SHOWS`. When the user presses the space key, the editor thinks that the user wants to enter the next Token, and it is time to ask dt-sql-parser what can be filled in the next Token position.
+
+<br/>
 ## License
 
 [MIT](./LICENSE)

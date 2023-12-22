@@ -5,10 +5,14 @@ import { ATNSimulator } from 'antlr4ts/atn/ATNSimulator';
  * Converted from {@link SyntaxError}.
  */
 export interface ParseError {
+    /** start at 1 */
     readonly startLine: number;
+    /** end at ..n */
     readonly endLine: number;
-    readonly startCol: number;
-    readonly endCol: number;
+    /** start at 1 */
+    readonly startColumn: number;
+    /** end at ..n + 1 */
+    readonly endColumn: number;
     readonly message: string;
 }
 
@@ -31,7 +35,7 @@ export interface SyntaxError<T> {
 export type ErrorListener<T> = (parseError: ParseError, originalError: SyntaxError<T>) => void;
 
 export default class ParseErrorListener implements ANTLRErrorListener<Token> {
-    private _errorListener;
+    private _errorListener: ErrorListener<Token>;
 
     constructor(errorListener: ErrorListener<Token>) {
         this._errorListener = errorListener;
@@ -54,8 +58,8 @@ export default class ParseErrorListener implements ANTLRErrorListener<Token> {
                 {
                     startLine: line,
                     endLine: line,
-                    startCol: charPositionInLine,
-                    endCol: endCol,
+                    startColumn: charPositionInLine + 1,
+                    endColumn: endCol + 1,
                     message: msg,
                 },
                 {
