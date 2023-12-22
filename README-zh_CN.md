@@ -282,7 +282,7 @@ console.log(sqlSlices)
 ### 自动补全（Code Completion）
 在 sql 文本的指定位置上获取自动补全信息，以 `FlinkSQL` 为例：
 
-调用 `getSuggestionAtCaretPosition` 方法，传入 sql 内容和指定位置的行列号。
+调用 `getSuggestionAtCaretPosition` 方法，传入 sql 内容和指定位置的行列号，下文中有一些关于[自动补全位置](#自动补全功能的-caretposition)的补充说明。
 + **获取关键字候选项列表**
 
     ```javascript
@@ -352,6 +352,75 @@ console.log(sqlSlices)
 - `createLexer` 创建一个 Antlr4 Lexer 实例并返回；
 - `createParser` 创建一个 Antlr4 Parser 实例并返回；
 - `parse` 解析输入的 sql，并返回解析树；
+
+<br/>
+
+## 关于文本位置和文本范围
+`dt-sql-parser` 提供的部分 API 的返回结果中包含文本信息，其中关于行号、列数以及索引的范围和起始值可能会带来一些困惑。
+
+### 索引（index）
+索引从 0 开始，在编程领域，索引从 0 开始更符合直觉
+
+![index-image](./docs/images/index.png)
+
+对于一个索引范围，起始索引从 0 开始，以 n-1 结束，如上图中，一个圈定蓝色文本的索引范围应该这样表示：
+
+```javascript
+{
+    startIndex: 0,
+    endIndex: 3
+}
+```
+
+### 行号（line）
+行号（line）从 1 开始
+
+![line-image](./docs/images/line.png)
+
+对于一个圈定多行的范围，行号从 1 开始，以 n 结束，一个圈定第一行和第二行的范围这样表示：
+```javascript
+{
+    startLine: 1,
+    endLine: 2
+}
+```
+
+### 列数（column）
+列数也从 1 开始
+
+![column-image](./docs/images/column.png)
+
+将列数类比为编辑器的光标位置会更加容易理解。对于一个圈定多列的范围，列数从 1 开始，以 n+1 结束，如上图中，一个圈定蓝色文本的列数范围这样表示：
+
+```javascript
+{
+    startColumn: 1,
+    endColumn: 5
+}
+```
+
+### 自动补全功能的 CaretPosition
+dt-sql-parser 的自动补全功能在设计之初就是为了在编辑器中使用，所以 `getSuggestionAtCaretPosition` 方法的第二个参数（位置信息）的格式为行列号而不是字符位置索引。这可以让自动补全功能更容易的集成到编辑器中。对于编辑器来说，只需要在特定的时机获取编辑器内的文本内容以及光标位置即可调用 `dt-sql-parser` 的自动补全功能，而不需要任何额外的计算。
+
+但是在一些其他场景下，你可能需要通过转换或者计算来得到自动补全功能所需要的位置信息，那么在此之前，有一些注意事项可能是你需要关心的。
+
+dt-sql-parser 的自动补全功能依赖于 [antlr4-c3](https://github.com/mike-lischke/antlr4-c3), 这是一个很棒的库。dt-sql-parser 的自动补全功能只是基于 antlr4-c3 做了一些封装和转换，包括将行列号信息转换成 antlr4-c3 需要的 token 索引，以下图为例：
+
+![column-image](./docs/images/token.png)
+
+将图中的 column 视作为光标位置，这段文本放到编辑器中，会得到 13 个可能的光标位置，而对于 dt-sql-parser 来说，这段文本被解析后会生成 4 个 Token。自动补全功能的一个重要策略是：**当光标（自动补全位置）还没有完全离开某个 Token 时，dt-sql-parser 就认为这个 Token 还没有完成，自动补全功能将会去推断这个 Token 所在的位置可以填什么。**
+
+举个例子，如果想要通过自动补全功能知道 `SHOW` 后面应该填什么， 那么对应的位置信息应该是：
+```javascript
+{
+    lineNumber: 1,
+    column: 6
+}
+```
+
+此时，dt-sql-parser 会认为 `SHOW` 已经是一个完整的 Token 了，应该去推断 `SHOW` 后面可以填什么。如果传入的位置信息中 column 是 5， 那么 dt-sql-parser 会认为 `SHOW` 还没有被完成，进而去推断 `SHOW` 的位置可以填什么。也即在上图中 `column: 5` 属于 `token: 0`，`column: 6` 属于 `token: 1`。
+
+对于编辑器来说，这种策略也更符合直觉。当用户输入了 `SHOW` 以后，在没有敲击空格键之前，用户大概率还没有输入完成，也许用户想要输入的是 `SHOWS` 之类的。当用户敲击了空格键，编辑器会认为用户想要输入下一个 Token，是时候询问 dt-sql-parser 下一个 Token 位置可以填哪些东西了。
 
 <br/>
 
