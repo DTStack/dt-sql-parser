@@ -10,6 +10,7 @@ import {
 import { ParseTreeWalker, ParseTreeListener } from 'antlr4ts/tree';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { findCaretTokenIndex } from './utils/findCaretTokenIndex';
+import { ctxToText, tokenToWord } from './utils/textAndWord';
 import {
     CaretPosition,
     Suggestions,
@@ -237,16 +238,7 @@ export default abstract class BasicParser<
         this.listen(splitListener, this._parseTree);
 
         const res = splitListener.statementsContext.map((context) => {
-            const { start, stop } = context;
-            return {
-                startIndex: start.startIndex,
-                endIndex: stop.stopIndex,
-                startLine: start.line,
-                endLine: stop.line,
-                startColumn: start.charPositionInLine + 1,
-                endColumn: stop.charPositionInLine + 1 + stop.text.length,
-                text: this._parsedInput.slice(start.startIndex, stop.stopIndex + 1),
-            };
+            return ctxToText(context, this._parsedInput);
         });
 
         return res;
@@ -361,14 +353,7 @@ export default abstract class BasicParser<
         const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(
             (syntaxCtx) => {
                 const wordRanges: WordRange[] = syntaxCtx.wordRanges.map((token) => {
-                    return {
-                        text: this._parsedInput.slice(token.startIndex, token.stopIndex + 1),
-                        startIndex: token.startIndex,
-                        endIndex: token.stopIndex,
-                        line: token.line,
-                        startColumn: token.charPositionInLine + 1,
-                        stopColumn: token.charPositionInLine + 1 + token.text.length,
-                    };
+                    return tokenToWord(token, this._parsedInput);
                 });
                 return {
                     syntaxContextType: syntaxCtx.syntaxContextType,

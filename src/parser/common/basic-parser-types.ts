@@ -43,9 +43,7 @@ export enum SyntaxContextType {
     COLUMN_CREATE = 'columnCreate',
 }
 
-export interface WordRange {
-    /** content of word */
-    readonly text: string;
+export interface WordPosition {
     /** start at 0 */
     readonly startIndex: number;
     /** end at ..n-1 */
@@ -55,7 +53,12 @@ export interface WordRange {
     /** start at 1 */
     readonly startColumn: number;
     /** end at ..n + 1 */
-    readonly stopColumn: number;
+    readonly endColumn: number;
+}
+
+export interface WordRange extends WordPosition {
+    /** content of word */
+    readonly text: string;
 }
 
 /**
@@ -80,7 +83,7 @@ export interface Suggestions<T = WordRange> {
     readonly keywords: string[];
 }
 
-export interface TextSlice {
+export interface TextPosition {
     /** start at 0 */
     readonly startIndex: number;
     /** end at ..n-1 */
@@ -93,5 +96,8 @@ export interface TextSlice {
     readonly startColumn: number;
     /** end at ..n + 1 */
     readonly endColumn: number;
+}
+
+export interface TextSlice extends TextPosition {
     readonly text: string;
 }
