@@ -11,7 +11,7 @@ export default class PostgresSQL extends BasicParser<
     ProgramContext,
     PostgreSQLParser
 > {
-    protected createLexerFormCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams) {
         const lexer = new PostgreSQLLexer(charStreams);
         return lexer;
     }

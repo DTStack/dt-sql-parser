@@ -60,7 +60,7 @@ export default abstract class BasicParser<
      * Create a antlr4 Lexer instance.
      * @param input source string
      */
-    protected abstract createLexerFormCharStream(charStreams: CodePointCharStream): L;
+    protected abstract createLexerFromCharStream(charStreams: CodePointCharStream): L;
 
     /**
      * Create Parser by CommonTokenStream
@@ -93,7 +93,7 @@ export default abstract class BasicParser<
      */
     public createLexer(input: string, errorListener?: ErrorListener<any>) {
         const charStreams = CharStreams.fromString(input.toUpperCase());
-        const lexer = this.createLexerFormCharStream(charStreams);
+        const lexer = this.createLexerFromCharStream(charStreams);
         if (errorListener) {
             lexer.removeErrorListeners();
             lexer.addErrorListener(new ParseErrorListener(errorListener));
@@ -140,7 +140,7 @@ export default abstract class BasicParser<
     private createParserWithCache(input: string): P {
         this._parseTree = null;
         this._charStreams = CharStreams.fromString(input.toUpperCase());
-        this._lexer = this.createLexerFormCharStream(this._charStreams);
+        this._lexer = this.createLexerFromCharStream(this._charStreams);
 
         this._lexer.removeErrorListeners();
         this._lexer.addErrorListener(new ParseErrorListener(this._errorListener));

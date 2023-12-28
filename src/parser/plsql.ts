@@ -6,7 +6,7 @@ import BasicParser from './common/basicParser';
 import { Suggestions } from './common/basic-parser-types';
 
 export default class PLSQL extends BasicParser<PlSqlLexer, ProgramContext, PlSqlParser> {
-    protected createLexerFormCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams) {
         const lexer = new PlSqlLexer(charStreams);
         return lexer;
     }

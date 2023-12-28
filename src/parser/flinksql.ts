@@ -11,7 +11,7 @@ import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic
 import BasicParser from './common/basicParser';
 
 export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
-    protected createLexerFormCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams) {
         const lexer = new FlinkSqlLexer(charStreams);
         return lexer;
     }
