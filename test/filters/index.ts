@@ -61,3 +61,5 @@ export { SparkSqlSplitListener } from '../../src/parser/spark';
 export { PgSqlSplitListener } from '../../src/parser/pgsql';
 export { TrinoSqlSplitListener } from '../../src/parser/trinosql';
 export { ImpalaSqlSplitListener } from '../../src/parser/impala';
+
+export { MySqlCollectListener } from '../../src/parser/mysqlCollectListener';
