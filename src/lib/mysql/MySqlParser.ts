@@ -4069,7 +4069,7 @@ export class MySqlParser extends Parser {
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 65, this._ctx) ) {
 			case 1:
-				_localctx = new CopyCreateTableContext(_localctx);
+				_localctx = new QueryCreateTableContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
 				this.state = 1199;
@@ -4097,148 +4097,67 @@ export class MySqlParser extends Parser {
 					break;
 				}
 				this.state = 1207;
-				this.tableNameCreate();
-				this.state = 1208;
-				this.createDefinitions();
-				this.state = 1219;
+				(_localctx as QueryCreateTableContext)._tb = this.tableNameCreate();
+				this.state = 1209;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 51, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 49, this._ctx) ) {
 				case 1:
 					{
-					this.state = 1209;
-					this.tableOption();
-					this.state = 1216;
-					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 50, this._ctx);
-					while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
-						if (_alt === 1) {
-							{
-							{
-							this.state = 1211;
-							this._errHandler.sync(this);
-							_la = this._input.LA(1);
-							if (_la === MySqlParser.COMMA) {
-								{
-								this.state = 1210;
-								this.match(MySqlParser.COMMA);
-								}
-							}
-
-							this.state = 1213;
-							this.tableOption();
-							}
-							}
-						}
-						this.state = 1218;
-						this._errHandler.sync(this);
-						_alt = this.interpreter.adaptivePredict(this._input, 50, this._ctx);
-					}
+					this.state = 1208;
+					(_localctx as QueryCreateTableContext)._cok = this.createDefinitions();
 					}
 					break;
 				}
-				this.state = 1222;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-				if (_la === MySqlParser.KW_PARTITION) {
-					{
-					this.state = 1221;
-					this.partitionDefinitions();
-					}
-				}
-
-				}
-				break;
-
-			case 2:
-				_localctx = new ColumnCreateTableContext(_localctx);
-				this.enterOuterAlt(_localctx, 2);
-				{
-				this.state = 1224;
-				this.match(MySqlParser.KW_CREATE);
-				this.state = 1226;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-				if (_la === MySqlParser.KW_TEMPORARY) {
-					{
-					this.state = 1225;
-					this.match(MySqlParser.KW_TEMPORARY);
-					}
-				}
-
-				this.state = 1228;
-				this.match(MySqlParser.KW_TABLE);
-				this.state = 1230;
-				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 54, this._ctx) ) {
-				case 1:
-					{
-					this.state = 1229;
-					this.ifNotExists();
-					}
-					break;
-				}
-				this.state = 1232;
-				this.tableNameCreate();
-				this.state = 1234;
-				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 55, this._ctx) ) {
-				case 1:
-					{
-					this.state = 1233;
-					this.createDefinitions();
-					}
-					break;
-				}
-				this.state = 1246;
+				this.state = 1221;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (((((_la - 26)) & ~0x1F) === 0 && ((1 << (_la - 26)) & ((1 << (MySqlParser.KW_CHARACTER - 26)) | (1 << (MySqlParser.KW_COLLATE - 26)) | (1 << (MySqlParser.KW_DEFAULT - 26)))) !== 0) || _la === MySqlParser.KW_INDEX || _la === MySqlParser.KW_UNION || _la === MySqlParser.KW_CHAR || ((((_la - 314)) & ~0x1F) === 0 && ((1 << (_la - 314)) & ((1 << (MySqlParser.KW_AUTOEXTEND_SIZE - 314)) | (1 << (MySqlParser.KW_AUTO_INCREMENT - 314)) | (1 << (MySqlParser.KW_AVG_ROW_LENGTH - 314)) | (1 << (MySqlParser.KW_CHECKSUM - 314)) | (1 << (MySqlParser.KW_COMMENT - 314)))) !== 0) || ((((_la - 346)) & ~0x1F) === 0 && ((1 << (_la - 346)) & ((1 << (MySqlParser.KW_COMPRESSION - 346)) | (1 << (MySqlParser.KW_CONNECTION - 346)) | (1 << (MySqlParser.KW_DATA - 346)) | (1 << (MySqlParser.KW_DELAY_KEY_WRITE - 346)) | (1 << (MySqlParser.KW_ENCRYPTION - 346)) | (1 << (MySqlParser.KW_ENCRYPTION_KEY_ID - 346)))) !== 0) || _la === MySqlParser.KW_ENGINE || _la === MySqlParser.KW_INSERT_METHOD || _la === MySqlParser.KW_KEY_BLOCK_SIZE || _la === MySqlParser.KW_MAX_ROWS || _la === MySqlParser.KW_MIN_ROWS || ((((_la - 520)) & ~0x1F) === 0 && ((1 << (_la - 520)) & ((1 << (MySqlParser.KW_PACK_KEYS - 520)) | (1 << (MySqlParser.KW_PAGE_CHECKSUM - 520)) | (1 << (MySqlParser.KW_PAGE_COMPRESSED - 520)) | (1 << (MySqlParser.KW_PAGE_COMPRESSION_LEVEL - 520)) | (1 << (MySqlParser.KW_PASSWORD - 520)))) !== 0) || _la === MySqlParser.KW_ROW_FORMAT || ((((_la - 640)) & ~0x1F) === 0 && ((1 << (_la - 640)) & ((1 << (MySqlParser.KW_START - 640)) | (1 << (MySqlParser.KW_STATS_AUTO_RECALC - 640)) | (1 << (MySqlParser.KW_STATS_PERSISTENT - 640)) | (1 << (MySqlParser.KW_STATS_SAMPLE_PAGES - 640)) | (1 << (MySqlParser.KW_STORAGE - 640)) | (1 << (MySqlParser.KW_TABLESPACE - 640)) | (1 << (MySqlParser.KW_TABLE_TYPE - 640)) | (1 << (MySqlParser.KW_TRANSACTIONAL - 640)))) !== 0) || ((((_la - 823)) & ~0x1F) === 0 && ((1 << (_la - 823)) & ((1 << (MySqlParser.KW_CHARSET - 823)) | (1 << (MySqlParser.KW_ENGINE_ATTRIBUTE - 823)) | (1 << (MySqlParser.KW_SECONDARY_ENGINE_ATTRIBUTE - 823)))) !== 0) || _la === MySqlParser.STRING_LITERAL) {
 					{
-					this.state = 1236;
+					this.state = 1211;
 					this.tableOption();
-					this.state = 1243;
+					this.state = 1218;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 					while (((((_la - 26)) & ~0x1F) === 0 && ((1 << (_la - 26)) & ((1 << (MySqlParser.KW_CHARACTER - 26)) | (1 << (MySqlParser.KW_COLLATE - 26)) | (1 << (MySqlParser.KW_DEFAULT - 26)))) !== 0) || _la === MySqlParser.KW_INDEX || _la === MySqlParser.KW_UNION || _la === MySqlParser.KW_CHAR || ((((_la - 314)) & ~0x1F) === 0 && ((1 << (_la - 314)) & ((1 << (MySqlParser.KW_AUTOEXTEND_SIZE - 314)) | (1 << (MySqlParser.KW_AUTO_INCREMENT - 314)) | (1 << (MySqlParser.KW_AVG_ROW_LENGTH - 314)) | (1 << (MySqlParser.KW_CHECKSUM - 314)) | (1 << (MySqlParser.KW_COMMENT - 314)))) !== 0) || ((((_la - 346)) & ~0x1F) === 0 && ((1 << (_la - 346)) & ((1 << (MySqlParser.KW_COMPRESSION - 346)) | (1 << (MySqlParser.KW_CONNECTION - 346)) | (1 << (MySqlParser.KW_DATA - 346)) | (1 << (MySqlParser.KW_DELAY_KEY_WRITE - 346)) | (1 << (MySqlParser.KW_ENCRYPTION - 346)) | (1 << (MySqlParser.KW_ENCRYPTION_KEY_ID - 346)))) !== 0) || _la === MySqlParser.KW_ENGINE || _la === MySqlParser.KW_INSERT_METHOD || _la === MySqlParser.KW_KEY_BLOCK_SIZE || _la === MySqlParser.KW_MAX_ROWS || _la === MySqlParser.KW_MIN_ROWS || ((((_la - 520)) & ~0x1F) === 0 && ((1 << (_la - 520)) & ((1 << (MySqlParser.KW_PACK_KEYS - 520)) | (1 << (MySqlParser.KW_PAGE_CHECKSUM - 520)) | (1 << (MySqlParser.KW_PAGE_COMPRESSED - 520)) | (1 << (MySqlParser.KW_PAGE_COMPRESSION_LEVEL - 520)) | (1 << (MySqlParser.KW_PASSWORD - 520)))) !== 0) || _la === MySqlParser.KW_ROW_FORMAT || ((((_la - 640)) & ~0x1F) === 0 && ((1 << (_la - 640)) & ((1 << (MySqlParser.KW_START - 640)) | (1 << (MySqlParser.KW_STATS_AUTO_RECALC - 640)) | (1 << (MySqlParser.KW_STATS_PERSISTENT - 640)) | (1 << (MySqlParser.KW_STATS_SAMPLE_PAGES - 640)) | (1 << (MySqlParser.KW_STORAGE - 640)) | (1 << (MySqlParser.KW_TABLESPACE - 640)) | (1 << (MySqlParser.KW_TABLE_TYPE - 640)) | (1 << (MySqlParser.KW_TRANSACTIONAL - 640)))) !== 0) || ((((_la - 823)) & ~0x1F) === 0 && ((1 << (_la - 823)) & ((1 << (MySqlParser.KW_CHARSET - 823)) | (1 << (MySqlParser.KW_ENGINE_ATTRIBUTE - 823)) | (1 << (MySqlParser.KW_SECONDARY_ENGINE_ATTRIBUTE - 823)))) !== 0) || _la === MySqlParser.COMMA || _la === MySqlParser.STRING_LITERAL) {
 						{
 						{
-						this.state = 1238;
+						this.state = 1213;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
 						if (_la === MySqlParser.COMMA) {
 							{
-							this.state = 1237;
+							this.state = 1212;
 							this.match(MySqlParser.COMMA);
 							}
 						}
 
-						this.state = 1240;
+						this.state = 1215;
 						this.tableOption();
 						}
 						}
-						this.state = 1245;
+						this.state = 1220;
 						this._errHandler.sync(this);
 						_la = this._input.LA(1);
 					}
 					}
 				}
 
-				this.state = 1249;
+				this.state = 1224;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la === MySqlParser.KW_PARTITION) {
 					{
-					this.state = 1248;
+					this.state = 1223;
 					this.partitionDefinitions();
 					}
 				}
 
-				this.state = 1252;
+				this.state = 1227;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la === MySqlParser.KW_IGNORE || _la === MySqlParser.KW_REPLACE) {
 					{
-					this.state = 1251;
+					this.state = 1226;
 					_la = this._input.LA(1);
 					if (!(_la === MySqlParser.KW_IGNORE || _la === MySqlParser.KW_REPLACE)) {
 					this._errHandler.recoverInline(this);
@@ -4253,77 +4172,158 @@ export class MySqlParser extends Parser {
 					}
 				}
 
-				this.state = 1255;
+				this.state = 1230;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la === MySqlParser.KW_AS) {
 					{
-					this.state = 1254;
+					this.state = 1229;
 					this.match(MySqlParser.KW_AS);
 					}
 				}
 
-				this.state = 1257;
+				this.state = 1232;
 				this.selectStatement();
 				}
 				break;
 
-			case 3:
-				_localctx = new QueryCreateTableContext(_localctx);
-				this.enterOuterAlt(_localctx, 3);
+			case 2:
+				_localctx = new CopyCreateTableContext(_localctx);
+				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1259;
+				this.state = 1234;
 				this.match(MySqlParser.KW_CREATE);
-				this.state = 1261;
+				this.state = 1236;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la === MySqlParser.KW_TEMPORARY) {
 					{
-					this.state = 1260;
+					this.state = 1235;
 					this.match(MySqlParser.KW_TEMPORARY);
 					}
 				}
 
-				this.state = 1263;
+				this.state = 1238;
 				this.match(MySqlParser.KW_TABLE);
-				this.state = 1265;
+				this.state = 1240;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 63, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 57, this._ctx) ) {
 				case 1:
 					{
-					this.state = 1264;
+					this.state = 1239;
 					this.ifNotExists();
 					}
 					break;
 				}
-				this.state = 1267;
+				this.state = 1242;
 				this.tableNameCreate();
-				this.state = 1275;
+				this.state = 1250;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
 				case MySqlParser.KW_LIKE:
 					{
-					this.state = 1268;
+					this.state = 1243;
 					this.match(MySqlParser.KW_LIKE);
-					this.state = 1269;
+					this.state = 1244;
 					this.tableName();
 					}
 					break;
 				case MySqlParser.LR_BRACKET:
 					{
-					this.state = 1270;
+					this.state = 1245;
 					this.match(MySqlParser.LR_BRACKET);
-					this.state = 1271;
+					this.state = 1246;
 					this.match(MySqlParser.KW_LIKE);
-					this.state = 1272;
+					this.state = 1247;
 					this.tableName();
-					this.state = 1273;
+					this.state = 1248;
 					this.match(MySqlParser.RR_BRACKET);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
+				}
+				break;
+
+			case 3:
+				_localctx = new ColumnCreateTableContext(_localctx);
+				this.enterOuterAlt(_localctx, 3);
+				{
+				this.state = 1252;
+				this.match(MySqlParser.KW_CREATE);
+				this.state = 1254;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === MySqlParser.KW_TEMPORARY) {
+					{
+					this.state = 1253;
+					this.match(MySqlParser.KW_TEMPORARY);
+					}
+				}
+
+				this.state = 1256;
+				this.match(MySqlParser.KW_TABLE);
+				this.state = 1258;
+				this._errHandler.sync(this);
+				switch ( this.interpreter.adaptivePredict(this._input, 60, this._ctx) ) {
+				case 1:
+					{
+					this.state = 1257;
+					this.ifNotExists();
+					}
+					break;
+				}
+				this.state = 1260;
+				this.tableNameCreate();
+				this.state = 1261;
+				this.createDefinitions();
+				this.state = 1272;
+				this._errHandler.sync(this);
+				switch ( this.interpreter.adaptivePredict(this._input, 63, this._ctx) ) {
+				case 1:
+					{
+					this.state = 1262;
+					this.tableOption();
+					this.state = 1269;
+					this._errHandler.sync(this);
+					_alt = this.interpreter.adaptivePredict(this._input, 62, this._ctx);
+					while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+						if (_alt === 1) {
+							{
+							{
+							this.state = 1264;
+							this._errHandler.sync(this);
+							_la = this._input.LA(1);
+							if (_la === MySqlParser.COMMA) {
+								{
+								this.state = 1263;
+								this.match(MySqlParser.COMMA);
+								}
+							}
+
+							this.state = 1266;
+							this.tableOption();
+							}
+							}
+						}
+						this.state = 1271;
+						this._errHandler.sync(this);
+						_alt = this.interpreter.adaptivePredict(this._input, 62, this._ctx);
+					}
+					}
+					break;
+				}
+				this.state = 1275;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la === MySqlParser.KW_PARTITION) {
+					{
+					this.state = 1274;
+					this.partitionDefinitions();
+					}
+				}
+
 				}
 				break;
 			}
@@ -6362,7 +6362,7 @@ export class MySqlParser extends Parser {
 				this.enterOuterAlt(_localctx, 1);
 				{
 				this.state = 1687;
-				this.columnName();
+				this.columnNameCreate();
 				this.state = 1688;
 				this.columnDefinition();
 				}
@@ -49677,76 +49677,76 @@ export class MySqlParser extends Parser {
 		"\x14\x03\x14\x03\x14\x03\x14\x03\x14\x03\x14\x03\x14\x03\x14\x03\x14\x03" +
 		"\x14\x03\x14\x07\x14\u04AB\n\x14\f\x14\x0E\x14\u04AE\v\x14\x03\x14\x03" +
 		"\x14\x03\x15\x03\x15\x05\x15\u04B4\n\x15\x03\x15\x03\x15\x05\x15\u04B8" +
-		"\n\x15\x03\x15\x03\x15\x03\x15\x03\x15\x05\x15\u04BE\n\x15\x03\x15\x07" +
-		"\x15\u04C1\n\x15\f\x15\x0E\x15\u04C4\v\x15\x05\x15\u04C6\n\x15\x03\x15" +
-		"\x05\x15\u04C9\n\x15\x03\x15\x03\x15\x05\x15\u04CD\n\x15\x03\x15\x03\x15" +
-		"\x05\x15\u04D1\n\x15\x03\x15\x03\x15\x05\x15\u04D5\n\x15\x03\x15\x03\x15" +
-		"\x05\x15\u04D9\n\x15\x03\x15\x07\x15\u04DC\n\x15\f\x15\x0E\x15\u04DF\v" +
-		"\x15\x05\x15\u04E1\n\x15\x03\x15\x05\x15\u04E4\n\x15\x03\x15\x05\x15\u04E7" +
-		"\n\x15\x03\x15\x05\x15\u04EA\n\x15\x03\x15\x03\x15\x03\x15\x03\x15\x05" +
-		"\x15\u04F0\n\x15\x03\x15\x03\x15\x05\x15\u04F4\n\x15\x03\x15\x03\x15\x03" +
-		"\x15\x03\x15\x03\x15\x03\x15\x03\x15\x03\x15\x05\x15\u04FE\n\x15\x05\x15" +
-		"\u0500\n\x15\x03\x16\x03\x16\x05\x16\u0504\n\x16\x03\x16\x03\x16\x03\x16" +
-		"\x03\x16\x03\x16\x05\x16\u050B\n\x16\x03\x16\x03\x16\x05\x16\u050F\n\x16" +
-		"\x03\x16\x05\x16\u0512\n\x16\x03\x16\x03\x16\x03\x16\x05\x16\u0517\n\x16" +
-		"\x03\x16\x03\x16\x05\x16\u051B\n\x16\x03\x16\x05\x16\u051E\n\x16\x03\x16" +
-		"\x03\x16\x05\x16\u0522\n\x16\x03\x16\x05\x16\u0525\n\x16\x03\x17\x03\x17" +
-		"\x05\x17\u0529\n\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03" +
-		"\x17\x03\x17\x03\x17\x03\x17\x03\x17\x05\x17\u0536\n\x17\x03\x17\x05\x17" +
-		"\u0539\n\x17\x03\x17\x03\x17\x05\x17\u053D\n\x17\x03\x17\x05\x17\u0540" +
-		"\n\x17\x03\x17\x03\x17\x05\x17\u0544\n\x17\x03\x17\x05\x17\u0547\n\x17" +
-		"\x03\x17\x03\x17\x05\x17\u054B\n\x17\x03\x17\x05\x17\u054E\n\x17\x03\x17" +
-		"\x03\x17\x05\x17\u0552\n\x17\x03\x17\x05\x17\u0555\n\x17\x03\x17\x05\x17" +
-		"\u0558\n\x17\x03\x17\x03\x17\x05\x17\u055C\n\x17\x03\x17\x05\x17\u055F" +
-		"\n\x17\x03\x17\x03\x17\x05\x17\u0563\n\x17\x03\x17\x03\x17\x03\x18\x03" +
-		"\x18\x05\x18\u0569\n\x18\x03\x18\x03\x18\x05\x18\u056D\n\x18\x03\x18\x03" +
-		"\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x05" +
-		"\x18\u0579\n\x18\x03\x18\x03\x18\x03\x19\x03\x19\x05\x19\u057F\n\x19\x03" +
-		"\x19\x03\x19\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x07\x1A\u0588\n\x1A" +
-		"\f\x1A\x0E\x1A\u058B\v\x1A\x03\x1A\x03\x1A\x05\x1A\u058F\n\x1A\x03\x1A" +
-		"\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x05\x1A\u0597\n\x1A\x03\x1B\x03" +
-		"\x1B\x05\x1B\u059B\n\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05A0\n\x1B\x03" +
-		"\x1B\x05\x1B\u05A3\n\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05A8\n\x1B\x03" +
-		"\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05B0\n\x1B\x03\x1B" +
-		"\x03\x1B\x03\x1B\x05\x1B\u05B5\n\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x05" +
-		"\x1B\u05BB\n\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05C0\n\x1B\x03\x1B\x03" +
-		"\x1B\x05\x1B\u05C4\n\x1B\x05\x1B\u05C6\n\x1B\x03\x1C\x05\x1C\u05C9\n\x1C" +
-		"\x03\x1C\x03\x1C\x05\x1C\u05CD\n\x1C\x03\x1C\x03\x1C\x05\x1C\u05D1\n\x1C" +
-		"\x03\x1C\x05\x1C\u05D4\n\x1C\x03\x1C\x03\x1C\x05\x1C\u05D8\n\x1C\x03\x1C" +
-		"\x03\x1C\x05\x1C\u05DC\n\x1C\x03\x1C\x03\x1C\x05\x1C\u05E0\n\x1C\x03\x1C" +
-		"\x03\x1C\x03\x1C\x03\x1C\x05\x1C\u05E6\n\x1C\x03\x1C\x05\x1C\u05E9\n\x1C" +
-		"\x03\x1D\x03\x1D\x03\x1D\x03\x1D\x03\x1D\x05\x1D\u05F0\n\x1D\x03\x1E\x03" +
-		"\x1E\x03\x1E\x05\x1E\u05F5\n\x1E\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x05\x1F" +
-		"\u05FB\n\x1F\x03 \x03 \x03 \x07 \u0600\n \f \x0E \u0603\v \x03 \x03 \x03" +
-		" \x05 \u0608\n \x03 \x03 \x03 \x03 \x07 \u060E\n \f \x0E \u0611\v \x05" +
-		" \u0613\n \x03 \x03 \x03 \x07 \u0618\n \f \x0E \u061B\v \x05 \u061D\n" +
-		" \x05 \u061F\n \x03!\x03!\x03!\x03!\x05!\u0625\n!\x03\"\x03\"\x03\"\x03" +
-		"\"\x05\"\u062B\n\"\x03\"\x03\"\x03#\x03#\x03#\x03#\x03#\x03#\x03#\x03" +
-		"#\x03#\x03#\x03#\x03#\x03#\x05#\u063C\n#\x03$\x03$\x03$\x03$\x03$\x05" +
-		"$\u0643\n$\x03%\x03%\x03%\x03&\x03&\x05&\u064A\n&\x03&\x03&\x03&\x03&" +
-		"\x03&\x03&\x03&\x03&\x03&\x03&\x05&\u0656\n&\x03&\x03&\x03&\x05&\u065B" +
-		"\n&\x03&\x05&\u065E\n&\x03\'\x05\'\u0661\n\'\x03\'\x03\'\x03\'\x03(\x03" +
-		"(\x03(\x03(\x03(\x05(\u066B\n(\x03(\x03(\x03(\x03(\x03(\x03(\x03(\x03" +
-		"(\x03(\x03(\x03(\x05(\u0678\n(\x03(\x03(\x03(\x05(\u067D\n(\x03)\x03)" +
-		"\x03)\x03)\x03)\x03)\x03)\x03)\x03)\x03)\x03)\x03)\x03)\x03)\x05)\u068D" +
-		"\n)\x03*\x03*\x03*\x03*\x07*\u0693\n*\f*\x0E*\u0696\v*\x03*\x03*\x03+" +
-		"\x03+\x03+\x03+\x03+\x05+\u069F\n+\x03+\x05+\u06A2\n+\x03+\x03+\x07+\u06A6" +
-		"\n+\f+\x0E+\u06A9\v+\x03+\x03+\x05+\u06AD\n+\x03+\x05+\u06B0\n+\x03+\x03" +
-		"+\x07+\u06B4\n+\f+\x0E+\u06B7\v+\x03+\x05+\u06BA\n+\x03+\x03+\x03+\x05" +
-		"+\u06BF\n+\x03+\x03+\x07+\u06C3\n+\f+\x0E+\u06C6\v+\x03+\x05+\u06C9\n" +
-		"+\x03+\x03+\x05+\u06CD\n+\x03+\x05+\u06D0\n+\x03+\x05+\u06D3\n+\x03+\x03" +
-		"+\x07+\u06D7\n+\f+\x0E+\u06DA\v+\x03+\x05+\u06DD\n+\x03+\x03+\x03+\x05" +
-		"+\u06E2\n+\x03+\x03+\x03+\x03+\x03+\x03+\x03+\x03+\x03+\x05+\u06ED\n+" +
-		"\x03,\x05,\u06F0\n,\x03,\x03,\x03,\x03,\x03,\x05,\u06F7\n,\x03,\x05,\u06FA" +
-		"\n,\x03-\x03-\x05-\u06FE\n-\x03.\x03.\x07.\u0702\n.\f.\x0E.\u0705\v.\x03" +
-		"/\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x05/\u0710\n/\x03/\x05/\u0713" +
-		"\n/\x03/\x03/\x03/\x05/\u0718\n/\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x03" +
-		"/\x03/\x03/\x03/\x05/\u0725\n/\x03/\x03/\x03/\x03/\x03/\x05/\u072C\n/" +
-		"\x03/\x03/\x03/\x03/\x05/\u0732\n/\x030\x030\x030\x050\u0737\n0\x030\x03" +
-		"0\x050\u073B\n0\x030\x050\u073E\n0\x031\x031\x031\x031\x031\x031\x051" +
-		"\u0746\n1\x031\x031\x031\x031\x031\x031\x051\u074E\n1\x051\u0750\n1\x03" +
-		"2\x032\x032\x032\x032\x032\x032\x032\x052\u075A\n2\x033\x033\x053\u075E" +
-		"\n3\x033\x053\u0761\n3\x033\x033\x053\u0765\n3\x033\x033\x033\x053\u076A" +
+		"\n\x15\x03\x15\x03\x15\x05\x15\u04BC\n\x15\x03\x15\x03\x15\x05\x15\u04C0" +
+		"\n\x15\x03\x15\x07\x15\u04C3\n\x15\f\x15\x0E\x15\u04C6\v\x15\x05\x15\u04C8" +
+		"\n\x15\x03\x15\x05\x15\u04CB\n\x15\x03\x15\x05\x15\u04CE\n\x15\x03\x15" +
+		"\x05\x15\u04D1\n\x15\x03\x15\x03\x15\x03\x15\x03\x15\x05\x15\u04D7\n\x15" +
+		"\x03\x15\x03\x15\x05\x15\u04DB\n\x15\x03\x15\x03\x15\x03\x15\x03\x15\x03" +
+		"\x15\x03\x15\x03\x15\x03\x15\x05\x15\u04E5\n\x15\x03\x15\x03\x15\x05\x15" +
+		"\u04E9\n\x15\x03\x15\x03\x15\x05\x15\u04ED\n\x15\x03\x15\x03\x15\x03\x15" +
+		"\x03\x15\x05\x15\u04F3\n\x15\x03\x15\x07\x15\u04F6\n\x15\f\x15\x0E\x15" +
+		"\u04F9\v\x15\x05\x15\u04FB\n\x15\x03\x15\x05\x15\u04FE\n\x15\x05\x15\u0500" +
+		"\n\x15\x03\x16\x03\x16\x05\x16\u0504\n\x16\x03\x16\x03\x16\x03\x16\x03" +
+		"\x16\x03\x16\x05\x16\u050B\n\x16\x03\x16\x03\x16\x05\x16\u050F\n\x16\x03" +
+		"\x16\x05\x16\u0512\n\x16\x03\x16\x03\x16\x03\x16\x05\x16\u0517\n\x16\x03" +
+		"\x16\x03\x16\x05\x16\u051B\n\x16\x03\x16\x05\x16\u051E\n\x16\x03\x16\x03" +
+		"\x16\x05\x16\u0522\n\x16\x03\x16\x05\x16\u0525\n\x16\x03\x17\x03\x17\x05" +
+		"\x17\u0529\n\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17" +
+		"\x03\x17\x03\x17\x03\x17\x03\x17\x05\x17\u0536\n\x17\x03\x17\x05\x17\u0539" +
+		"\n\x17\x03\x17\x03\x17\x05\x17\u053D\n\x17\x03\x17\x05\x17\u0540\n\x17" +
+		"\x03\x17\x03\x17\x05\x17\u0544\n\x17\x03\x17\x05\x17\u0547\n\x17\x03\x17" +
+		"\x03\x17\x05\x17\u054B\n\x17\x03\x17\x05\x17\u054E\n\x17\x03\x17\x03\x17" +
+		"\x05\x17\u0552\n\x17\x03\x17\x05\x17\u0555\n\x17\x03\x17\x05\x17\u0558" +
+		"\n\x17\x03\x17\x03\x17\x05\x17\u055C\n\x17\x03\x17\x05\x17\u055F\n\x17" +
+		"\x03\x17\x03\x17\x05\x17\u0563\n\x17\x03\x17\x03\x17\x03\x18\x03\x18\x05" +
+		"\x18\u0569\n\x18\x03\x18\x03\x18\x05\x18\u056D\n\x18\x03\x18\x03\x18\x03" +
+		"\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x05\x18\u0579" +
+		"\n\x18\x03\x18\x03\x18\x03\x19\x03\x19\x05\x19\u057F\n\x19\x03\x19\x03" +
+		"\x19\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x07\x1A\u0588\n\x1A\f\x1A" +
+		"\x0E\x1A\u058B\v\x1A\x03\x1A\x03\x1A\x05\x1A\u058F\n\x1A\x03\x1A\x03\x1A" +
+		"\x03\x1A\x03\x1A\x03\x1A\x03\x1A\x05\x1A\u0597\n\x1A\x03\x1B\x03\x1B\x05" +
+		"\x1B\u059B\n\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05A0\n\x1B\x03\x1B\x05" +
+		"\x1B\u05A3\n\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05A8\n\x1B\x03\x1B\x03" +
+		"\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05B0\n\x1B\x03\x1B\x03\x1B" +
+		"\x03\x1B\x05\x1B\u05B5\n\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05BB" +
+		"\n\x1B\x03\x1B\x03\x1B\x03\x1B\x05\x1B\u05C0\n\x1B\x03\x1B\x03\x1B\x05" +
+		"\x1B\u05C4\n\x1B\x05\x1B\u05C6\n\x1B\x03\x1C\x05\x1C\u05C9\n\x1C\x03\x1C" +
+		"\x03\x1C\x05\x1C\u05CD\n\x1C\x03\x1C\x03\x1C\x05\x1C\u05D1\n\x1C\x03\x1C" +
+		"\x05\x1C\u05D4\n\x1C\x03\x1C\x03\x1C\x05\x1C\u05D8\n\x1C\x03\x1C\x03\x1C" +
+		"\x05\x1C\u05DC\n\x1C\x03\x1C\x03\x1C\x05\x1C\u05E0\n\x1C\x03\x1C\x03\x1C" +
+		"\x03\x1C\x03\x1C\x05\x1C\u05E6\n\x1C\x03\x1C\x05\x1C\u05E9\n\x1C\x03\x1D" +
+		"\x03\x1D\x03\x1D\x03\x1D\x03\x1D\x05\x1D\u05F0\n\x1D\x03\x1E\x03\x1E\x03" +
+		"\x1E\x05\x1E\u05F5\n\x1E\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x05\x1F\u05FB" +
+		"\n\x1F\x03 \x03 \x03 \x07 \u0600\n \f \x0E \u0603\v \x03 \x03 \x03 \x05" +
+		" \u0608\n \x03 \x03 \x03 \x03 \x07 \u060E\n \f \x0E \u0611\v \x05 \u0613" +
+		"\n \x03 \x03 \x03 \x07 \u0618\n \f \x0E \u061B\v \x05 \u061D\n \x05 \u061F" +
+		"\n \x03!\x03!\x03!\x03!\x05!\u0625\n!\x03\"\x03\"\x03\"\x03\"\x05\"\u062B" +
+		"\n\"\x03\"\x03\"\x03#\x03#\x03#\x03#\x03#\x03#\x03#\x03#\x03#\x03#\x03" +
+		"#\x03#\x03#\x05#\u063C\n#\x03$\x03$\x03$\x03$\x03$\x05$\u0643\n$\x03%" +
+		"\x03%\x03%\x03&\x03&\x05&\u064A\n&\x03&\x03&\x03&\x03&\x03&\x03&\x03&" +
+		"\x03&\x03&\x03&\x05&\u0656\n&\x03&\x03&\x03&\x05&\u065B\n&\x03&\x05&\u065E" +
+		"\n&\x03\'\x05\'\u0661\n\'\x03\'\x03\'\x03\'\x03(\x03(\x03(\x03(\x03(\x05" +
+		"(\u066B\n(\x03(\x03(\x03(\x03(\x03(\x03(\x03(\x03(\x03(\x03(\x03(\x05" +
+		"(\u0678\n(\x03(\x03(\x03(\x05(\u067D\n(\x03)\x03)\x03)\x03)\x03)\x03)" +
+		"\x03)\x03)\x03)\x03)\x03)\x03)\x03)\x03)\x05)\u068D\n)\x03*\x03*\x03*" +
+		"\x03*\x07*\u0693\n*\f*\x0E*\u0696\v*\x03*\x03*\x03+\x03+\x03+\x03+\x03" +
+		"+\x05+\u069F\n+\x03+\x05+\u06A2\n+\x03+\x03+\x07+\u06A6\n+\f+\x0E+\u06A9" +
+		"\v+\x03+\x03+\x05+\u06AD\n+\x03+\x05+\u06B0\n+\x03+\x03+\x07+\u06B4\n" +
+		"+\f+\x0E+\u06B7\v+\x03+\x05+\u06BA\n+\x03+\x03+\x03+\x05+\u06BF\n+\x03" +
+		"+\x03+\x07+\u06C3\n+\f+\x0E+\u06C6\v+\x03+\x05+\u06C9\n+\x03+\x03+\x05" +
+		"+\u06CD\n+\x03+\x05+\u06D0\n+\x03+\x05+\u06D3\n+\x03+\x03+\x07+\u06D7" +
+		"\n+\f+\x0E+\u06DA\v+\x03+\x05+\u06DD\n+\x03+\x03+\x03+\x05+\u06E2\n+\x03" +
+		"+\x03+\x03+\x03+\x03+\x03+\x03+\x03+\x03+\x05+\u06ED\n+\x03,\x05,\u06F0" +
+		"\n,\x03,\x03,\x03,\x03,\x03,\x05,\u06F7\n,\x03,\x05,\u06FA\n,\x03-\x03" +
+		"-\x05-\u06FE\n-\x03.\x03.\x07.\u0702\n.\f.\x0E.\u0705\v.\x03/\x03/\x03" +
+		"/\x03/\x03/\x03/\x03/\x03/\x03/\x05/\u0710\n/\x03/\x05/\u0713\n/\x03/" +
+		"\x03/\x03/\x05/\u0718\n/\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x03/" +
+		"\x03/\x03/\x05/\u0725\n/\x03/\x03/\x03/\x03/\x03/\x05/\u072C\n/\x03/\x03" +
+		"/\x03/\x03/\x05/\u0732\n/\x030\x030\x030\x050\u0737\n0\x030\x030\x050" +
+		"\u073B\n0\x030\x050\u073E\n0\x031\x031\x031\x031\x031\x031\x051\u0746" +
+		"\n1\x031\x031\x031\x031\x031\x031\x051\u074E\n1\x051\u0750\n1\x032\x03" +
+		"2\x032\x032\x032\x032\x032\x032\x052\u075A\n2\x033\x033\x053\u075E\n3" +
+		"\x033\x053\u0761\n3\x033\x033\x053\u0765\n3\x033\x033\x033\x053\u076A" +
 		"\n3\x033\x033\x033\x053\u076F\n3\x033\x033\x033\x053\u0774\n3\x033\x03" +
 		"3\x053\u0778\n3\x033\x033\x053\u077C\n3\x033\x033\x053\u0780\n3\x033\x03" +
 		"3\x053\u0784\n3\x033\x033\x053\u0788\n3\x033\x033\x053\u078C\n3\x033\x03" +
@@ -51009,62 +51009,62 @@ export class MySqlParser extends Parser {
 		"\x03\x02\x02\x02\u04B3\u04B4\x03\x02\x02\x02\u04B4\u04B5\x03\x02\x02\x02" +
 		"\u04B5\u04B7\x07\xAF\x02\x02\u04B6\u04B8\x05\u02FC\u017F\x02\u04B7\u04B6" +
 		"\x03\x02\x02\x02\u04B7\u04B8\x03\x02\x02\x02\u04B8\u04B9\x03\x02\x02\x02" +
-		"\u04B9\u04BA\x05\u028C\u0147\x02\u04BA\u04C5\x05R*\x02\u04BB\u04C2\x05" +
-		"d3\x02\u04BC\u04BE\x07\u0366\x02\x02\u04BD\u04BC\x03\x02\x02\x02\u04BD" +
-		"\u04BE\x03\x02\x02\x02\u04BE\u04BF\x03\x02\x02\x02\u04BF\u04C1\x05d3\x02" +
-		"\u04C0\u04BD\x03\x02\x02\x02\u04C1\u04C4\x03\x02\x02\x02\u04C2\u04C0\x03" +
-		"\x02\x02\x02\u04C2\u04C3\x03\x02\x02\x02\u04C3\u04C6\x03\x02\x02\x02\u04C4" +
-		"\u04C2\x03\x02\x02\x02\u04C5\u04BB\x03\x02\x02\x02\u04C5\u04C6\x03\x02" +
-		"\x02\x02\u04C6\u04C8\x03\x02\x02\x02\u04C7\u04C9\x05j6\x02\u04C8\u04C7" +
-		"\x03\x02\x02\x02\u04C8\u04C9\x03\x02\x02\x02\u04C9\u0500\x03\x02\x02\x02" +
-		"\u04CA\u04CC\x07$\x02\x02\u04CB\u04CD\x07\u0296\x02\x02\u04CC\u04CB\x03" +
-		"\x02\x02\x02\u04CC\u04CD\x03\x02\x02\x02\u04CD\u04CE\x03\x02\x02\x02\u04CE" +
-		"\u04D0\x07\xAF\x02\x02\u04CF\u04D1\x05\u02FC\u017F\x02\u04D0\u04CF\x03" +
-		"\x02\x02\x02\u04D0\u04D1\x03\x02\x02\x02\u04D1\u04D2\x03\x02\x02\x02\u04D2" +
-		"\u04D4\x05\u028C\u0147\x02\u04D3\u04D5\x05R*\x02\u04D4\u04D3\x03\x02\x02" +
-		"\x02\u04D4\u04D5\x03\x02\x02\x02\u04D5\u04E0\x03\x02\x02\x02\u04D6\u04DD" +
-		"\x05d3\x02\u04D7\u04D9\x07\u0366\x02\x02\u04D8\u04D7\x03\x02\x02\x02\u04D8" +
-		"\u04D9\x03\x02\x02\x02\u04D9\u04DA\x03\x02\x02\x02\u04DA\u04DC\x05d3\x02" +
-		"\u04DB\u04D8\x03\x02\x02\x02\u04DC\u04DF\x03\x02\x02\x02\u04DD\u04DB\x03" +
-		"\x02\x02\x02\u04DD\u04DE\x03\x02\x02\x02\u04DE\u04E1\x03\x02\x02\x02\u04DF" +
-		"\u04DD\x03\x02\x02\x02\u04E0\u04D6\x03\x02\x02\x02\u04E0\u04E1\x03\x02" +
-		"\x02\x02\u04E1\u04E3\x03\x02\x02\x02\u04E2\u04E4\x05j6\x02\u04E3\u04E2" +
-		"\x03\x02\x02\x02\u04E3\u04E4\x03\x02\x02\x02\u04E4\u04E6\x03\x02\x02\x02" +
-		"\u04E5\u04E7\t\b\x02\x02\u04E6\u04E5\x03\x02\x02\x02\u04E6\u04E7\x03\x02" +
-		"\x02\x02\u04E7\u04E9\x03\x02\x02\x02\u04E8\u04EA\x07\x0F\x02\x02\u04E9" +
-		"\u04E8\x03\x02\x02\x02\u04E9\u04EA\x03\x02\x02\x02\u04EA\u04EB\x03\x02" +
-		"\x02\x02\u04EB\u04EC\x05\xCEh\x02\u04EC\u0500\x03\x02\x02\x02\u04ED\u04EF" +
-		"\x07$\x02\x02\u04EE\u04F0\x07\u0296\x02\x02\u04EF\u04EE\x03\x02\x02\x02" +
-		"\u04EF\u04F0\x03\x02\x02\x02\u04F0\u04F1\x03\x02\x02\x02\u04F1\u04F3\x07" +
-		"\xAF\x02\x02\u04F2\u04F4\x05\u02FC\u017F\x02\u04F3\u04F2\x03\x02\x02\x02" +
-		"\u04F3\u04F4\x03\x02\x02\x02\u04F4\u04F5\x03\x02\x02\x02\u04F5\u04FD\x05" +
-		"\u028C\u0147\x02\u04F6\u04F7\x07e\x02\x02\u04F7\u04FE\x05\u0290\u0149" +
-		"\x02\u04F8\u04F9\x07\u0364\x02\x02\u04F9\u04FA\x07e\x02\x02\u04FA\u04FB" +
-		"\x05\u0290\u0149\x02\u04FB\u04FC\x07\u0365\x02\x02\u04FC\u04FE\x03\x02" +
-		"\x02\x02\u04FD\u04F6\x03\x02\x02\x02\u04FD\u04F8\x03\x02\x02\x02\u04FE" +
-		"\u0500\x03\x02\x02\x02\u04FF\u04B1\x03\x02\x02\x02\u04FF\u04CA\x03\x02" +
-		"\x02\x02\u04FF\u04ED\x03\x02\x02\x02\u0500)\x03\x02\x02\x02\u0501\u0503" +
-		"\x07$\x02\x02\u0502\u0504\x07\xB6\x02\x02\u0503\u0502\x03\x02\x02\x02" +
-		"\u0503\u0504\x03\x02\x02\x02\u0504\u0505\x03\x02\x02\x02\u0505\u0506\x07" +
-		"\u0294\x02\x02\u0506\u050A\x05\u029C\u014F\x02\u0507\u0508\x07\b\x02\x02" +
-		"\u0508\u0509\x07\u016B\x02\x02\u0509\u050B\x07\u0374\x02\x02\u050A\u0507" +
-		"\x03\x02\x02\x02\u050A\u050B\x03\x02\x02\x02\u050B\u0511\x03\x02\x02\x02" +
-		"\u050C\u050E\x07\u013C\x02\x02\u050D\u050F\x07\u035B\x02\x02\u050E\u050D" +
-		"\x03\x02\x02\x02\u050E\u050F\x03\x02\x02\x02\u050F\u0510\x03\x02\x02\x02" +
-		"\u0510\u0512\x05\u02CE\u0168\x02\u0511\u050C\x03\x02\x02\x02\u0511\u0512" +
-		"\x03\x02\x02\x02\u0512\u0516\x03\x02\x02\x02\u0513\u0514\x07\u0191\x02" +
-		"\x02\u0514\u0515\x07\u035B\x02\x02\u0515\u0517\x05\u02CE\u0168\x02\u0516" +
-		"\u0513\x03\x02\x02\x02\u0516\u0517\x03\x02\x02\x02\u0517\u051D\x03\x02" +
-		"\x02\x02\u0518\u051A\x07\u017E\x02\x02\u0519\u051B\x07\u035B\x02\x02\u051A" +
-		"\u0519\x03\x02\x02\x02\u051A\u051B\x03\x02\x02\x02\u051B\u051C\x03\x02" +
-		"\x02\x02\u051C\u051E\x05\u02B8\u015D\x02\u051D\u0518\x03\x02\x02\x02\u051D" +
-		"\u051E\x03\x02\x02\x02\u051E\u0524\x03\x02\x02\x02\u051F\u0521\x07\u033B" +
-		"\x02\x02\u0520\u0522\x07\u035B\x02\x02\u0521\u0520\x03\x02\x02\x02\u0521" +
-		"\u0522\x03\x02\x02\x02\u0522\u0523\x03\x02\x02\x02\u0523\u0525\x07\u0374" +
-		"\x02\x02\u0524\u051F\x03\x02\x02\x02\u0524\u0525\x03\x02\x02\x02\u0525" +
-		"+\x03\x02\x02\x02\u0526\u0528\x07$\x02\x02\u0527\u0529\x07\xB6\x02\x02" +
-		"\u0528\u0527\x03\x02\x02\x02\u0528\u0529\x03\x02\x02\x02\u0529\u052A\x03" +
-		"\x02\x02\x02\u052A\u052B\x07\u0294\x02\x02\u052B\u052C\x05\u029C\u014F" +
+		"\u04B9\u04BB\x05\u028C\u0147\x02\u04BA\u04BC\x05R*\x02\u04BB\u04BA\x03" +
+		"\x02\x02\x02\u04BB\u04BC\x03\x02\x02\x02\u04BC\u04C7\x03\x02\x02\x02\u04BD" +
+		"\u04C4\x05d3\x02\u04BE\u04C0\x07\u0366\x02\x02\u04BF\u04BE\x03\x02\x02" +
+		"\x02\u04BF\u04C0\x03\x02\x02\x02\u04C0\u04C1\x03\x02\x02\x02\u04C1\u04C3" +
+		"\x05d3\x02\u04C2\u04BF\x03\x02\x02\x02\u04C3\u04C6\x03\x02\x02\x02\u04C4" +
+		"\u04C2\x03\x02\x02\x02\u04C4\u04C5\x03\x02\x02\x02\u04C5\u04C8\x03\x02" +
+		"\x02\x02\u04C6\u04C4\x03\x02\x02\x02\u04C7\u04BD\x03\x02\x02\x02\u04C7" +
+		"\u04C8\x03\x02\x02\x02\u04C8\u04CA\x03\x02\x02\x02\u04C9\u04CB\x05j6\x02" +
+		"\u04CA\u04C9\x03\x02\x02\x02\u04CA\u04CB\x03\x02\x02\x02\u04CB\u04CD\x03" +
+		"\x02\x02\x02\u04CC\u04CE\t\b\x02\x02\u04CD\u04CC\x03\x02\x02\x02\u04CD" +
+		"\u04CE\x03\x02\x02\x02\u04CE\u04D0\x03\x02\x02\x02\u04CF\u04D1\x07\x0F" +
+		"\x02\x02\u04D0\u04CF\x03\x02\x02\x02\u04D0\u04D1\x03\x02\x02\x02\u04D1" +
+		"\u04D2\x03\x02\x02\x02\u04D2\u04D3\x05\xCEh\x02\u04D3\u0500\x03\x02\x02" +
+		"\x02\u04D4\u04D6\x07$\x02\x02\u04D5\u04D7\x07\u0296\x02\x02\u04D6\u04D5" +
+		"\x03\x02\x02\x02\u04D6\u04D7\x03\x02\x02\x02\u04D7\u04D8\x03\x02\x02\x02" +
+		"\u04D8\u04DA\x07\xAF\x02\x02\u04D9\u04DB\x05\u02FC\u017F\x02\u04DA\u04D9" +
+		"\x03\x02\x02\x02\u04DA\u04DB\x03\x02\x02\x02\u04DB\u04DC\x03\x02\x02\x02" +
+		"\u04DC\u04E4\x05\u028C\u0147\x02\u04DD\u04DE\x07e\x02\x02\u04DE\u04E5" +
+		"\x05\u0290\u0149\x02\u04DF\u04E0\x07\u0364\x02\x02\u04E0\u04E1\x07e\x02" +
+		"\x02\u04E1\u04E2\x05\u0290\u0149\x02\u04E2\u04E3\x07\u0365\x02\x02\u04E3" +
+		"\u04E5\x03\x02\x02\x02\u04E4\u04DD\x03\x02\x02\x02\u04E4\u04DF\x03\x02" +
+		"\x02\x02\u04E5\u0500\x03\x02\x02\x02\u04E6\u04E8\x07$\x02\x02\u04E7\u04E9" +
+		"\x07\u0296\x02\x02\u04E8\u04E7\x03\x02\x02\x02\u04E8\u04E9\x03\x02\x02" +
+		"\x02\u04E9\u04EA\x03\x02\x02\x02\u04EA\u04EC\x07\xAF\x02\x02\u04EB\u04ED" +
+		"\x05\u02FC\u017F\x02\u04EC\u04EB\x03\x02\x02\x02\u04EC\u04ED\x03\x02\x02" +
+		"\x02\u04ED\u04EE\x03\x02\x02\x02\u04EE\u04EF\x05\u028C\u0147\x02\u04EF" +
+		"\u04FA\x05R*\x02\u04F0\u04F7\x05d3\x02\u04F1\u04F3\x07\u0366\x02\x02\u04F2" +
+		"\u04F1\x03\x02\x02\x02\u04F2\u04F3\x03\x02\x02\x02\u04F3\u04F4\x03\x02" +
+		"\x02\x02\u04F4\u04F6\x05d3\x02\u04F5\u04F2\x03\x02\x02\x02\u04F6\u04F9" +
+		"\x03\x02\x02\x02\u04F7\u04F5\x03\x02\x02\x02\u04F7\u04F8\x03\x02\x02\x02" +
+		"\u04F8\u04FB\x03\x02\x02\x02\u04F9\u04F7\x03\x02\x02\x02\u04FA\u04F0\x03" +
+		"\x02\x02\x02\u04FA\u04FB\x03\x02\x02\x02\u04FB\u04FD\x03\x02\x02\x02\u04FC" +
+		"\u04FE\x05j6\x02\u04FD\u04FC\x03\x02\x02\x02\u04FD\u04FE\x03\x02\x02\x02" +
+		"\u04FE\u0500\x03\x02\x02\x02\u04FF\u04B1\x03\x02\x02\x02\u04FF\u04D4\x03" +
+		"\x02\x02\x02\u04FF\u04E6\x03\x02\x02\x02\u0500)\x03\x02\x02\x02\u0501" +
+		"\u0503\x07$\x02\x02\u0502\u0504\x07\xB6\x02\x02\u0503\u0502\x03\x02\x02" +
+		"\x02\u0503\u0504\x03\x02\x02\x02\u0504\u0505\x03\x02\x02\x02\u0505\u0506" +
+		"\x07\u0294\x02\x02\u0506\u050A\x05\u029C\u014F\x02\u0507\u0508\x07\b\x02" +
+		"\x02\u0508\u0509\x07\u016B\x02\x02\u0509\u050B\x07\u0374\x02\x02\u050A" +
+		"\u0507\x03\x02\x02\x02\u050A\u050B\x03\x02\x02\x02\u050B\u0511\x03\x02" +
+		"\x02\x02\u050C\u050E\x07\u013C\x02\x02\u050D\u050F\x07\u035B\x02\x02\u050E" +
+		"\u050D\x03\x02\x02\x02\u050E\u050F\x03\x02\x02\x02\u050F\u0510\x03\x02" +
+		"\x02\x02\u0510\u0512\x05\u02CE\u0168\x02\u0511\u050C\x03\x02\x02\x02\u0511" +
+		"\u0512\x03\x02\x02\x02\u0512\u0516\x03\x02\x02\x02\u0513\u0514\x07\u0191" +
+		"\x02\x02\u0514\u0515\x07\u035B\x02\x02\u0515\u0517\x05\u02CE\u0168\x02" +
+		"\u0516\u0513\x03\x02\x02\x02\u0516\u0517\x03\x02\x02\x02\u0517\u051D\x03" +
+		"\x02\x02\x02\u0518\u051A\x07\u017E\x02\x02\u0519\u051B\x07\u035B\x02\x02" +
+		"\u051A\u0519\x03\x02\x02\x02\u051A\u051B\x03\x02\x02\x02\u051B\u051C\x03" +
+		"\x02\x02\x02\u051C\u051E\x05\u02B8\u015D\x02\u051D\u0518\x03\x02\x02\x02" +
+		"\u051D\u051E\x03\x02\x02\x02\u051E\u0524\x03\x02\x02\x02\u051F\u0521\x07" +
+		"\u033B\x02\x02\u0520\u0522\x07\u035B\x02\x02\u0521\u0520\x03\x02\x02\x02" +
+		"\u0521\u0522\x03\x02\x02\x02\u0522\u0523\x03\x02\x02\x02\u0523\u0525\x07" +
+		"\u0374\x02\x02\u0524\u051F\x03\x02\x02\x02\u0524\u0525\x03\x02\x02\x02" +
+		"\u0525+\x03\x02\x02\x02\u0526\u0528\x07$\x02\x02\u0527\u0529\x07\xB6\x02" +
+		"\x02\u0528\u0527\x03\x02\x02\x02\u0528\u0529\x03\x02\x02\x02\u0529\u052A" +
+		"\x03\x02\x02\x02\u052A\u052B\x07\u0294\x02\x02\u052B\u052C\x05\u029C\u014F" +
 		"\x02\u052C\u052D\x07\b\x02\x02\u052D\u052E\x07\u016B\x02\x02\u052E\u052F" +
 		"\x07\u0374\x02\x02\u052F\u0530\x07\xBD\x02\x02\u0530\u0531\x07\u01C5\x02" +
 		"\x02\u0531\u0532\x07L\x02\x02\u0532\u0538\x05\u02C6\u0164\x02\u0533\u0535" +
@@ -51246,7 +51246,7 @@ export class MySqlParser extends Parser {
 		"\u0691\u0693\x05T+\x02\u0692\u0690\x03\x02\x02\x02\u0693\u0696\x03\x02" +
 		"\x02\x02\u0694\u0692\x03\x02\x02\x02\u0694\u0695\x03\x02\x02\x02\u0695" +
 		"\u0697\x03\x02\x02\x02\u0696\u0694\x03\x02\x02\x02\u0697\u0698\x07\u0365" +
-		"\x02\x02\u0698S\x03\x02\x02\x02\u0699\u069A\x05\u029A\u014E\x02\u069A" +
+		"\x02\x02\u0698S\x03\x02\x02\x02\u0699\u069A\x05\u0296\u014C\x02\u069A" +
 		"\u069B\x05Z.\x02\u069B\u06ED\x03\x02\x02\x02\u069C\u069E\t\x14\x02\x02" +
 		"\u069D\u069F\x05\u0286\u0144\x02\u069E\u069D\x03\x02\x02\x02\u069E\u069F" +
 		"\x03\x02\x02\x02\u069F\u06A1\x03\x02\x02\x02\u06A0\u06A2\x05H%\x02\u06A1" +
@@ -54421,8 +54421,8 @@ export class MySqlParser extends Parser {
 		"\u03ED\u03F7\u03FC\u0402\u0407\u040B\u0414\u0417\u041A\u041E\u0425\u0428" +
 		"\u042D\u0435\u043A\u043F\u0442\u0444\u0450\u0453\u0457\u045A\u045E\u0461" +
 		"\u0465\u0468\u046B\u046F\u0472\u0476\u047C\u0480\u0485\u048B\u0492\u049A" +
-		"\u04AC\u04B3\u04B7\u04BD\u04C2\u04C5\u04C8\u04CC\u04D0\u04D4\u04D8\u04DD" +
-		"\u04E0\u04E3\u04E6\u04E9\u04EF\u04F3\u04FD\u04FF\u0503\u050A\u050E\u0511" +
+		"\u04AC\u04B3\u04B7\u04BB\u04BF\u04C4\u04C7\u04CA\u04CD\u04D0\u04D6\u04DA" +
+		"\u04E4\u04E8\u04EC\u04F2\u04F7\u04FA\u04FD\u04FF\u0503\u050A\u050E\u0511" +
 		"\u0516\u051A\u051D\u0521\u0524\u0528\u0535\u0538\u053C\u053F\u0543\u0546" +
 		"\u054A\u054D\u0551\u0554\u0557\u055B\u055E\u0562\u0568\u056C\u0578\u057E" +
 		"\u0589\u058E\u0596\u059A\u059F\u05A2\u05A7\u05AF\u05B4\u05BA\u05BF\u05C3" +
@@ -55859,7 +55859,115 @@ export class CreateTableContext extends ParserRuleContext {
 		super.copyFrom(ctx);
 	}
 }
+export class QueryCreateTableContext extends CreateTableContext {
+	public _tb!: TableNameCreateContext;
+	public _cok!: CreateDefinitionsContext;
+	public KW_CREATE(): TerminalNode { return this.getToken(MySqlParser.KW_CREATE, 0); }
+	public KW_TABLE(): TerminalNode { return this.getToken(MySqlParser.KW_TABLE, 0); }
+	public selectStatement(): SelectStatementContext {
+		return this.getRuleContext(0, SelectStatementContext);
+	}
+	public tableNameCreate(): TableNameCreateContext {
+		return this.getRuleContext(0, TableNameCreateContext);
+	}
+	public KW_TEMPORARY(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_TEMPORARY, 0); }
+	public ifNotExists(): IfNotExistsContext | undefined {
+		return this.tryGetRuleContext(0, IfNotExistsContext);
+	}
+	public tableOption(): TableOptionContext[];
+	public tableOption(i: number): TableOptionContext;
+	public tableOption(i?: number): TableOptionContext | TableOptionContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(TableOptionContext);
+		} else {
+			return this.getRuleContext(i, TableOptionContext);
+		}
+	}
+	public partitionDefinitions(): PartitionDefinitionsContext | undefined {
+		return this.tryGetRuleContext(0, PartitionDefinitionsContext);
+	}
+	public KW_AS(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_AS, 0); }
+	public createDefinitions(): CreateDefinitionsContext | undefined {
+		return this.tryGetRuleContext(0, CreateDefinitionsContext);
+	}
+	public KW_IGNORE(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_IGNORE, 0); }
+	public KW_REPLACE(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_REPLACE, 0); }
+	public COMMA(): TerminalNode[];
+	public COMMA(i: number): TerminalNode;
+	public COMMA(i?: number): TerminalNode | TerminalNode[] {
+		if (i === undefined) {
+			return this.getTokens(MySqlParser.COMMA);
+		} else {
+			return this.getToken(MySqlParser.COMMA, i);
+		}
+	}
+	constructor(ctx: CreateTableContext) {
+		super(ctx.parent, ctx.invokingState);
+		this.copyFrom(ctx);
+	}
+	// @Override
+	public enterRule(listener: MySqlParserListener): void {
+		if (listener.enterQueryCreateTable) {
+			listener.enterQueryCreateTable(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: MySqlParserListener): void {
+		if (listener.exitQueryCreateTable) {
+			listener.exitQueryCreateTable(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: MySqlParserVisitor<Result>): Result {
+		if (visitor.visitQueryCreateTable) {
+			return visitor.visitQueryCreateTable(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
 export class CopyCreateTableContext extends CreateTableContext {
+	public KW_CREATE(): TerminalNode { return this.getToken(MySqlParser.KW_CREATE, 0); }
+	public KW_TABLE(): TerminalNode { return this.getToken(MySqlParser.KW_TABLE, 0); }
+	public tableNameCreate(): TableNameCreateContext {
+		return this.getRuleContext(0, TableNameCreateContext);
+	}
+	public KW_LIKE(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_LIKE, 0); }
+	public tableName(): TableNameContext | undefined {
+		return this.tryGetRuleContext(0, TableNameContext);
+	}
+	public LR_BRACKET(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.LR_BRACKET, 0); }
+	public RR_BRACKET(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.RR_BRACKET, 0); }
+	public KW_TEMPORARY(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_TEMPORARY, 0); }
+	public ifNotExists(): IfNotExistsContext | undefined {
+		return this.tryGetRuleContext(0, IfNotExistsContext);
+	}
+	constructor(ctx: CreateTableContext) {
+		super(ctx.parent, ctx.invokingState);
+		this.copyFrom(ctx);
+	}
+	// @Override
+	public enterRule(listener: MySqlParserListener): void {
+		if (listener.enterCopyCreateTable) {
+			listener.enterCopyCreateTable(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: MySqlParserListener): void {
+		if (listener.exitCopyCreateTable) {
+			listener.exitCopyCreateTable(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: MySqlParserVisitor<Result>): Result {
+		if (visitor.visitCopyCreateTable) {
+			return visitor.visitCopyCreateTable(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class ColumnCreateTableContext extends CreateTableContext {
 	public KW_CREATE(): TerminalNode { return this.getToken(MySqlParser.KW_CREATE, 0); }
 	public KW_TABLE(): TerminalNode { return this.getToken(MySqlParser.KW_TABLE, 0); }
 	public tableNameCreate(): TableNameCreateContext {
@@ -55899,71 +56007,6 @@ export class CopyCreateTableContext extends CreateTableContext {
 	}
 	// @Override
 	public enterRule(listener: MySqlParserListener): void {
-		if (listener.enterCopyCreateTable) {
-			listener.enterCopyCreateTable(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: MySqlParserListener): void {
-		if (listener.exitCopyCreateTable) {
-			listener.exitCopyCreateTable(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: MySqlParserVisitor<Result>): Result {
-		if (visitor.visitCopyCreateTable) {
-			return visitor.visitCopyCreateTable(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class ColumnCreateTableContext extends CreateTableContext {
-	public KW_CREATE(): TerminalNode { return this.getToken(MySqlParser.KW_CREATE, 0); }
-	public KW_TABLE(): TerminalNode { return this.getToken(MySqlParser.KW_TABLE, 0); }
-	public tableNameCreate(): TableNameCreateContext {
-		return this.getRuleContext(0, TableNameCreateContext);
-	}
-	public selectStatement(): SelectStatementContext {
-		return this.getRuleContext(0, SelectStatementContext);
-	}
-	public KW_TEMPORARY(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_TEMPORARY, 0); }
-	public ifNotExists(): IfNotExistsContext | undefined {
-		return this.tryGetRuleContext(0, IfNotExistsContext);
-	}
-	public createDefinitions(): CreateDefinitionsContext | undefined {
-		return this.tryGetRuleContext(0, CreateDefinitionsContext);
-	}
-	public tableOption(): TableOptionContext[];
-	public tableOption(i: number): TableOptionContext;
-	public tableOption(i?: number): TableOptionContext | TableOptionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(TableOptionContext);
-		} else {
-			return this.getRuleContext(i, TableOptionContext);
-		}
-	}
-	public partitionDefinitions(): PartitionDefinitionsContext | undefined {
-		return this.tryGetRuleContext(0, PartitionDefinitionsContext);
-	}
-	public KW_AS(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_AS, 0); }
-	public KW_IGNORE(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_IGNORE, 0); }
-	public KW_REPLACE(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_REPLACE, 0); }
-	public COMMA(): TerminalNode[];
-	public COMMA(i: number): TerminalNode;
-	public COMMA(i?: number): TerminalNode | TerminalNode[] {
-		if (i === undefined) {
-			return this.getTokens(MySqlParser.COMMA);
-		} else {
-			return this.getToken(MySqlParser.COMMA, i);
-		}
-	}
-	constructor(ctx: CreateTableContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: MySqlParserListener): void {
 		if (listener.enterColumnCreateTable) {
 			listener.enterColumnCreateTable(this);
 		}
@@ -55978,47 +56021,6 @@ export class ColumnCreateTableContext extends CreateTableContext {
 	public accept<Result>(visitor: MySqlParserVisitor<Result>): Result {
 		if (visitor.visitColumnCreateTable) {
 			return visitor.visitColumnCreateTable(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class QueryCreateTableContext extends CreateTableContext {
-	public KW_CREATE(): TerminalNode { return this.getToken(MySqlParser.KW_CREATE, 0); }
-	public KW_TABLE(): TerminalNode { return this.getToken(MySqlParser.KW_TABLE, 0); }
-	public tableNameCreate(): TableNameCreateContext {
-		return this.getRuleContext(0, TableNameCreateContext);
-	}
-	public KW_LIKE(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_LIKE, 0); }
-	public tableName(): TableNameContext | undefined {
-		return this.tryGetRuleContext(0, TableNameContext);
-	}
-	public LR_BRACKET(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.LR_BRACKET, 0); }
-	public RR_BRACKET(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.RR_BRACKET, 0); }
-	public KW_TEMPORARY(): TerminalNode | undefined { return this.tryGetToken(MySqlParser.KW_TEMPORARY, 0); }
-	public ifNotExists(): IfNotExistsContext | undefined {
-		return this.tryGetRuleContext(0, IfNotExistsContext);
-	}
-	constructor(ctx: CreateTableContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: MySqlParserListener): void {
-		if (listener.enterQueryCreateTable) {
-			listener.enterQueryCreateTable(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: MySqlParserListener): void {
-		if (listener.exitQueryCreateTable) {
-			listener.exitQueryCreateTable(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: MySqlParserVisitor<Result>): Result {
-		if (visitor.visitQueryCreateTable) {
-			return visitor.visitQueryCreateTable(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -57252,8 +57254,8 @@ export class CreateDefinitionsContext extends ParserRuleContext {
 
 
 export class CreateDefinitionContext extends ParserRuleContext {
-	public columnName(): ColumnNameContext | undefined {
-		return this.tryGetRuleContext(0, ColumnNameContext);
+	public columnNameCreate(): ColumnNameCreateContext | undefined {
+		return this.tryGetRuleContext(0, ColumnNameCreateContext);
 	}
 	public columnDefinition(): ColumnDefinitionContext | undefined {
 		return this.tryGetRuleContext(0, ColumnDefinitionContext);
