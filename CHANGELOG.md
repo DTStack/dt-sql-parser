@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.11](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.10...v4.0.0-beta.4.11) (2024-01-04)
+
+
+### Bug Fixes
+
+* rename createLexerFormCharStream to createLexerFromCharStream ([#243](https://github.com/DTStack/dt-sql-parser/issues/243)) ([4d19f05](https://github.com/DTStack/dt-sql-parser/commit/4d19f058900d973155e648816abc3b2c24ee97de))
+
 ## [4.0.0-beta.4.10](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.9...v4.0.0-beta.4.10) (2023-12-19)
 
 
