@@ -11,7 +11,7 @@ import BasicParser from './common/basicParser';
 import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic-parser-types';
 
 export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
-    protected createLexerFormCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams) {
         const lexer = new TrinoSqlLexer(charStreams);
         return lexer;
     }

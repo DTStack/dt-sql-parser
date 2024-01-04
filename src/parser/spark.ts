@@ -11,7 +11,7 @@ import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic
 import { SparkSqlParserListener } from '../lib/spark/SparkSqlParserListener';
 
 export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext, SparkSqlParser> {
-    protected createLexerFormCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams) {
         const lexer = new SparkSqlLexer(charStreams);
         return lexer;
     }

@@ -7,7 +7,7 @@ import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic
 import { MySqlParserListener } from '../lib/mysql/MySqlParserListener';
 
 export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySqlParser> {
-    protected createLexerFormCharStream(charStreams): MySqlLexer {
+    protected createLexerFromCharStream(charStreams): MySqlLexer {
         const lexer = new MySqlLexer(charStreams);
         return lexer;
     }

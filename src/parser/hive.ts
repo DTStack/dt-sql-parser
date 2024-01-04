@@ -7,7 +7,7 @@ import { HiveSqlParserListener } from '../lib/hive/HiveSqlParserListener';
 import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
 
 export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, HiveSqlParser> {
-    protected createLexerFormCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams) {
         const lexer = new HiveSqlLexer(charStreams);
         return lexer;
     }

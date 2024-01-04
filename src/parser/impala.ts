@@ -15,7 +15,7 @@ export default class ImpalaSQL extends BasicParser<
     ProgramContext,
     ImpalaSqlParser
 > {
-    protected createLexerFormCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams) {
         const lexer = new ImpalaSqlLexer(charStreams);
         return lexer;
     }
