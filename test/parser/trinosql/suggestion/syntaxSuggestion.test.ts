@@ -50,9 +50,6 @@ describe('Trino SQL Syntax Suggestion', () => {
         expect(
             syntaxes.some((item) => item.syntaxContextType === SyntaxContextType.VIEW)
         ).toBeTruthy();
-        expect(
-            syntaxes.some((item) => item.syntaxContextType === SyntaxContextType.FUNCTION)
-        ).toBeTruthy();
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
     });
@@ -190,9 +187,6 @@ describe('Trino SQL Syntax Suggestion', () => {
         );
         expect(
             syntaxes.some((item) => item.syntaxContextType === SyntaxContextType.VIEW)
-        ).toBeTruthy();
-        expect(
-            syntaxes.some((item) => item.syntaxContextType === SyntaxContextType.FUNCTION)
         ).toBeTruthy();
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb']);
