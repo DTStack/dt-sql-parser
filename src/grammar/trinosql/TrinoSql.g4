@@ -17,7 +17,6 @@
  * Reference: https://github.com/trinodb/trino/blob/385/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4
  */
 
-
 // $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
 // $antlr-format allowShortRulesOnASingleLine false, allowShortBlocksOnASingleLine true, alignSemicolons hanging, alignColons hanging
 // $antlr-format spaceBeforeAssignmentOperators false, keepEmptyLinesAtTheStartOfBlocks true
@@ -35,7 +34,10 @@ program
 
 statements
     : singleStatement
-    | standaloneExpression
+    ;
+
+standaloneClause
+    : standaloneExpression
     | standalonePathSpecification
     | standaloneType
     | standaloneRowPattern
