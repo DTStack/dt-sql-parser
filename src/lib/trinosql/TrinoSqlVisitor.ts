@@ -203,6 +203,7 @@ import { LogicalNotContext } from "./TrinoSqlParser";
 import { LogicalBinaryContext } from "./TrinoSqlParser";
 import { ProgramContext } from "./TrinoSqlParser";
 import { StatementsContext } from "./TrinoSqlParser";
+import { StandaloneClauseContext } from "./TrinoSqlParser";
 import { SingleStatementContext } from "./TrinoSqlParser";
 import { StandaloneExpressionContext } from "./TrinoSqlParser";
 import { StandalonePathSpecificationContext } from "./TrinoSqlParser";
@@ -1916,6 +1917,13 @@ export interface TrinoSqlVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitStatements?: (ctx: StatementsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `TrinoSqlParser.standaloneClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitStandaloneClause?: (ctx: StandaloneClauseContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `TrinoSqlParser.singleStatement`.
