@@ -1,5 +1,5 @@
-import { FlinkSQL } from '../../../filters';
-import { readSQL } from '../../../helper';
+import FlinkSQL from 'src/parser/flinksql';
+import { readSQL } from 'test/helper';
 
 const features = {
     describes: readSQL(__dirname, 'describe.sql'),

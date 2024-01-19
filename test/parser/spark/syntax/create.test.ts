@@ -1,5 +1,5 @@
-import { SparkSQL } from '../../../filters';
-import { readSQL } from '../../../helper';
+import SparkSQL from 'src/parser/spark';
+import { readSQL } from 'test/helper';
 
 const parser = new SparkSQL();
 

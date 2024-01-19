@@ -1,4 +1,6 @@
-import { ImpalaSQL, ImpalaSqlParserVisitor, AbstractParseTreeVisitor } from '../../filters';
+import ImpalaSQL from 'src/parser/impala';
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { ImpalaSqlParserVisitor } from 'src/lib/impala/ImpalaSqlParserVisitor';
 
 describe('impala SQL Visitor Tests', () => {
     const expectTableName = 'user1';

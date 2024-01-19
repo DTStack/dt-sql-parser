@@ -1,4 +1,4 @@
-import { FlinkSQL } from '../../filters';
+import FlinkSQL from 'src/parser/flinksql';
 
 describe('FlinkSQL Lexer tests', () => {
     const parser = new FlinkSQL();

@@ -1,4 +1,6 @@
-import { PLSQL, AbstractParseTreeVisitor, PlSqlParserVisitor } from '../../filters';
+import PLSQL from 'src/parser/plsql';
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { PlSqlParserVisitor } from 'src/lib/plsql/PlSqlParserVisitor';
 
 describe('PLSQL Visitor Tests', () => {
     const expectTableName = 'user1';

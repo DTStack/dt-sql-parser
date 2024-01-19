@@ -1,4 +1,6 @@
-import { TrinoSQL, TrinoSqlVisitor, AbstractParseTreeVisitor } from '../../filters';
+import TrinoSQL from 'src/parser/trinosql';
+import { TrinoSqlVisitor } from 'src/lib/trinosql/TrinoSqlVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
 
 describe('trino SQL Visitor Tests', () => {
     const expectTableName = 'user1';

@@ -1,4 +1,5 @@
-import { PostgresSQL, PgSqlSplitListener, PostgreSQLParserListener } from '../../filters';
+import PostgresSQL, { PgSqlSplitListener } from 'src/parser/pgsql';
+import { PostgreSQLParserListener } from 'src/lib/pgsql/PostgreSQLParserListener';
 
 const validSQL1 = `INSERT INTO country_page_view
 VALUES ('Chinese', 'mumiao', 18),

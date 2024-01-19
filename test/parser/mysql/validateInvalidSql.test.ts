@@ -1,4 +1,4 @@
-import { MySQL } from '../../filters';
+import MySQL from 'src/parser/mysql';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;

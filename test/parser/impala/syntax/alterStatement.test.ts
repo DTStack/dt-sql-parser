@@ -1,5 +1,5 @@
-import { ImpalaSQL } from '../../../filters';
-import { readSQL } from '../../../helper';
+import ImpalaSQL from 'src/parser/impala';
+import { readSQL } from 'test/helper';
 
 const parser = new ImpalaSQL();
 

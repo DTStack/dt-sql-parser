@@ -1,5 +1,5 @@
-import { MySQL } from '../../../filters';
-import { readSQL } from '../../../helper';
+import MySQL from 'src/parser/mysql';
+import { readSQL } from 'test/helper';
 
 const parser = new MySQL();
 

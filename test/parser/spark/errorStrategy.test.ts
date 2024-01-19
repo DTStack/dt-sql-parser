@@ -1,4 +1,5 @@
-import { SparkSQL, SparkSqlSplitListener, SparkSqlParserListener } from '../../filters';
+import SparkSQL, { SparkSqlSplitListener } from 'src/parser/spark';
+import { SparkSqlParserListener } from 'src/lib/spark/SparkSqlParserListener';
 
 const validSQL1 = `INSERT INTO country_page_view
 VALUES ('Chinese', 'mumiao', 18),

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { FlinkSQL } from '../../../filters';
+import FlinkSQL from 'src/parser/flinksql';
 
 // 注释 sql 不做切割
 const features = {

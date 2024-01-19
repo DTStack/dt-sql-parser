@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition, SyntaxContextType, HiveSQL } from '../../../filters';
+import HiveSQL from 'src/parser/hive';
+import { CaretPosition, SyntaxContextType } from 'src/parser/common/basic-parser-types';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'multipleStatement.sql'),

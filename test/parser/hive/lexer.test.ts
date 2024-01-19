@@ -1,4 +1,4 @@
-import { HiveSQL } from '../../filters';
+import HiveSQL from 'src/parser/hive';
 
 describe('HiveSQL Lexer tests', () => {
     const parser = new HiveSQL();

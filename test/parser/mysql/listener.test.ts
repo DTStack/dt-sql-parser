@@ -1,5 +1,6 @@
-import { MySQL } from '../../filters';
-import { MySqlParserListener, ParseTreeListener } from '../../filters';
+import MySQL from 'src/parser/mysql';
+import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
+import { ParseTreeListener } from 'antlr4ts/tree/ParseTreeListener';
 
 describe('MySQL Listener Tests', () => {
     const expectTableName = 'user1';

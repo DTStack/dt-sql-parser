@@ -1,11 +1,11 @@
-import { FlinkSQL } from '../../../filters';
+import FlinkSQL from 'src/parser/flinksql';
 import {
     readSQL,
     benchmark,
     getReportTableHeader,
     getReportTableRow,
     exportReportTable,
-} from '../../../helper';
+} from 'test/helper';
 
 const features = {
     selectTable: readSQL(__dirname, 'selectTable.sql'),

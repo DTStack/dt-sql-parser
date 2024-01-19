@@ -1,4 +1,4 @@
-import { PostgresSQL } from '../../filters';
+import PostgresSQL from 'src/parser/pgsql';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;

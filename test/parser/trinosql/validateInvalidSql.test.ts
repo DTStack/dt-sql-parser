@@ -1,4 +1,4 @@
-import { TrinoSQL } from '../../filters';
+import TrinoSQL from 'src/parser/trinosql';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;

@@ -1,4 +1,5 @@
-import { TrinoSQL, TrinoSqlSplitListener, TrinoSqlListener } from '../../filters';
+import TrinoSQL, { TrinoSqlSplitListener } from 'src/parser/trinosql';
+import { TrinoSqlListener } from 'src/lib/trinosql/TrinoSqlListener';
 
 const validSQL1 = `INSERT INTO country_page_view
 VALUES ('Chinese', 'mumiao', 18),
