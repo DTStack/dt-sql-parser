@@ -23,7 +23,7 @@
     "prepublishOnly": "npm run build",
     "antlr4": "node ./scripts/antlr4.js",
     "build": "rm -rf dist && tsc",
-    "check-types": "tsc -p ./tsconfig.check.json",
+    "check-types": "tsc -p ./tsconfig.json && tsc -p ./test/tsconfig.json",
     "test": "NODE_OPTIONS=--max_old_space_size=4096 && jest",
     "release": "node ./scripts/release.js",
     "lint": "prettier --check '**/*.ts' --config ./.prettierrc",
