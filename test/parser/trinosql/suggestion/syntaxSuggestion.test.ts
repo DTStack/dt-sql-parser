@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { TrinoSQL, CaretPosition, SyntaxContextType } from '../../../filters';
-import { commentOtherLine } from '../../../helper';
+import TrinoSQL from 'src/parser/trinosql';
+import { CaretPosition, SyntaxContextType } from 'src/parser/common/basic-parser-types';
+import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'syntaxSuggestion.sql'),

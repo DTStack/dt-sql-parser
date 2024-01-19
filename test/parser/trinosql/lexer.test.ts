@@ -1,4 +1,4 @@
-import { TrinoSQL } from '../../filters';
+import TrinoSQL from 'src/parser/trinosql';
 
 describe('trinoSQL Lexer tests', () => {
     const parser = new TrinoSQL();

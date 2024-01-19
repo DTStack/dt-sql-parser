@@ -1,5 +1,5 @@
-import { TrinoSQL } from '../../../filters';
-import { readSQL } from '../../../helper';
+import TrinoSQL from 'src/parser/trinosql';
+import { readSQL } from 'test/helper';
 
 const features = {
     comment: readSQL(__dirname, 'comment.sql'),

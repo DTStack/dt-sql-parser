@@ -1,5 +1,5 @@
-import { PostgresSQL } from '../../../filters';
-import { readSQL } from '../../../helper';
+import PostgresSQL from 'src/parser/pgsql';
+import { readSQL } from 'test/helper';
 
 const parser = new PostgresSQL();
 

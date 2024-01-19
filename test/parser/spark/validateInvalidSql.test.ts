@@ -1,4 +1,4 @@
-import { SparkSQL } from '../../filters';
+import SparkSQL from 'src/parser/spark';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;

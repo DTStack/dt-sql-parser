@@ -1,4 +1,4 @@
-import { HiveSQL } from '../../filters';
+import HiveSQL from 'src/parser/hive';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;

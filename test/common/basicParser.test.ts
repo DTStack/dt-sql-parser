@@ -1,4 +1,7 @@
-import { CommonTokenStream, ErrorListener, FlinkSQL, FlinkSqlLexer } from '../filters';
+import FlinkSQL from 'src/parser/flinksql';
+import { FlinkSqlLexer } from 'src/lib/flinksql/FlinkSqlLexer';
+import { ErrorListener } from 'src/parser/common/parseErrorListener';
+import { CommonTokenStream } from 'antlr4ts';
 
 describe('BasicParser unit tests', () => {
     const flinkParser = new FlinkSQL();

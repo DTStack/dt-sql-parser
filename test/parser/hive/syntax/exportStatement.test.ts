@@ -1,5 +1,5 @@
-import { HiveSQL } from '../../../filters';
-import { readSQL } from '../../../helper';
+import HiveSQL from 'src/parser/hive';
+import { readSQL } from 'test/helper';
 
 const features = {
     exports: readSQL(__dirname, 'export.sql'),

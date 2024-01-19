@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { MySQL, CaretPosition } from '../../../filters';
-import { commentOtherLine } from '../../../helper';
+import MySQL from 'src/parser/mysql';
+import { CaretPosition } from 'src/parser/common/basic-parser-types';
+import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 

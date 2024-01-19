@@ -1,4 +1,4 @@
-import { ImpalaSQL } from '../../filters';
+import ImpalaSQL from 'src/parser/impala';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;

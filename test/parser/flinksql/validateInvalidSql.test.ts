@@ -1,4 +1,4 @@
-import { FlinkSQL } from '../../filters';
+import FlinkSQL from 'src/parser/flinksql';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;

@@ -1,4 +1,5 @@
-import { HiveSQL, HiveSqlSplitListener, HiveSqlParserListener } from '../../filters';
+import HiveSQL, { HiveSqlSplitListener } from 'src/parser/hive';
+import { HiveSqlParserListener } from 'src/lib';
 
 const validSQL1 = `INSERT INTO country_page_view
 VALUES ('Chinese', 'mumiao', 18),
