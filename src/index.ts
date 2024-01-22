@@ -34,11 +34,11 @@ export { SyntaxContextType } from './parser/common/basic-parser-types';
 
 export type {
     CaretPosition,
-    WordRange,
     Suggestions,
     SyntaxSuggestion,
-    TextSlice,
 } from './parser/common/basic-parser-types';
+
+export type { WordRange, TextSlice } from './parser/common/textAndWord';
 
 export type { SyntaxError, ParseError, ErrorListener } from './parser/common/parseErrorListener';
 
