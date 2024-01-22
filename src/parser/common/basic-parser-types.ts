@@ -1,3 +1,5 @@
+import { WordRange } from './textAndWord';
+
 /**
  * The insertion position of the candidate list.
  * Such as cursor position
@@ -43,21 +45,6 @@ export enum SyntaxContextType {
     COLUMN_CREATE = 'columnCreate',
 }
 
-export interface WordRange {
-    /** content of word */
-    readonly text: string;
-    /** start at 0 */
-    readonly startIndex: number;
-    /** end at ..n-1 */
-    readonly endIndex: number;
-    /** start at 1 */
-    readonly line: number;
-    /** start at 1 */
-    readonly startColumn: number;
-    /** end at ..n + 1 */
-    readonly stopColumn: number;
-}
-
 /**
  * Suggested information analyzed from the input
  */
@@ -78,20 +65,4 @@ export interface Suggestions<T = WordRange> {
      * Suggestions about keywords
      */
     readonly keywords: string[];
-}
-
-export interface TextSlice {
-    /** start at 0 */
-    readonly startIndex: number;
-    /** end at ..n-1 */
-    readonly endIndex: number;
-    /** start at 1 */
-    readonly startLine: number;
-    /** end at ..n */
-    readonly endLine: number;
-    /** start at 1 */
-    readonly startColumn: number;
-    /** end at ..n + 1 */
-    readonly endColumn: number;
-    readonly text: string;
 }
