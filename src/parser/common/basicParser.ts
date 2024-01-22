@@ -10,14 +10,9 @@ import {
     ParseTreeListener,
 } from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
-import { findCaretTokenIndex } from './utils/findCaretTokenIndex';
-import {
-    CaretPosition,
-    Suggestions,
-    SyntaxSuggestion,
-    WordRange,
-    TextSlice,
-} from './basic-parser-types';
+import { findCaretTokenIndex } from './findCaretTokenIndex';
+import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
+import { CaretPosition, Suggestions, SyntaxSuggestion } from './basic-parser-types';
 import ParseErrorListener, { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
 
@@ -238,16 +233,7 @@ export default abstract class BasicParser<
         this.listen(splitListener, this._parseTree);
 
         const res = splitListener.statementsContext.map((context) => {
-            const { start, stop } = context;
-            return {
-                startIndex: start.start,
-                endIndex: stop.stop,
-                startLine: start.line,
-                endLine: stop.line,
-                startColumn: start.column + 1,
-                endColumn: stop.column + 1 + stop.text.length,
-                text: this._parsedInput.slice(start.start, stop.stop + 1),
-            };
+            return ctxToText(context, this._parsedInput);
         });
 
         return res;
@@ -362,14 +348,7 @@ export default abstract class BasicParser<
         const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(
             (syntaxCtx) => {
                 const wordRanges: WordRange[] = syntaxCtx.wordRanges.map((token) => {
-                    return {
-                        text: this._parsedInput.slice(token.start, token.stop + 1),
-                        startIndex: token.start,
-                        endIndex: token.stop,
-                        line: token.line,
-                        startColumn: token.column + 1,
-                        stopColumn: token.column + 1 + token.text.length,
-                    };
+                    return tokenToWord(token, this._parsedInput);
                 });
                 return {
                     syntaxContextType: syntaxCtx.syntaxContextType,
