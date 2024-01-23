@@ -211,7 +211,7 @@ export default abstract class BasicParser<
      */
     public listen<PTL extends ParseTreeListener = ParseTreeListener>(
         listener: PTL,
-        parseTree: PRC
+        parseTree: ParserRuleContext
     ) {
         ParseTreeWalker.DEFAULT.walk(listener, parseTree);
     }
