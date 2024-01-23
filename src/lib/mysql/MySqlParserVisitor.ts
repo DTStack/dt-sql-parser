@@ -22,9 +22,9 @@ import { CreateLogfileGroupContext } from "./MySqlParser.js";
 import { CreateProcedureContext } from "./MySqlParser.js";
 import { CreateRoleContext } from "./MySqlParser.js";
 import { CreateServerContext } from "./MySqlParser.js";
+import { QueryCreateTableContext } from "./MySqlParser.js";
 import { CopyCreateTableContext } from "./MySqlParser.js";
 import { ColumnCreateTableContext } from "./MySqlParser.js";
-import { QueryCreateTableContext } from "./MySqlParser.js";
 import { CreateTablespaceInnodbContext } from "./MySqlParser.js";
 import { CreateTablespaceNdbContext } from "./MySqlParser.js";
 import { CreateTriggerContext } from "./MySqlParser.js";
@@ -804,6 +804,13 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitCreateServer?: (ctx: CreateServerContext) => Result;
     /**
+     * Visit a parse tree produced by the `queryCreateTable`
+     * labeled alternative in `MySqlParser.createTable`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitQueryCreateTable?: (ctx: QueryCreateTableContext) => Result;
+    /**
      * Visit a parse tree produced by the `copyCreateTable`
      * labeled alternative in `MySqlParser.createTable`.
      * @param ctx the parse tree
@@ -817,13 +824,6 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitColumnCreateTable?: (ctx: ColumnCreateTableContext) => Result;
-    /**
-     * Visit a parse tree produced by the `queryCreateTable`
-     * labeled alternative in `MySqlParser.createTable`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitQueryCreateTable?: (ctx: QueryCreateTableContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.createTablespaceInnodb`.
      * @param ctx the parse tree

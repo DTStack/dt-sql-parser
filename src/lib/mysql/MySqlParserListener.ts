@@ -22,9 +22,9 @@ import { CreateLogfileGroupContext } from "./MySqlParser.js";
 import { CreateProcedureContext } from "./MySqlParser.js";
 import { CreateRoleContext } from "./MySqlParser.js";
 import { CreateServerContext } from "./MySqlParser.js";
+import { QueryCreateTableContext } from "./MySqlParser.js";
 import { CopyCreateTableContext } from "./MySqlParser.js";
 import { ColumnCreateTableContext } from "./MySqlParser.js";
-import { QueryCreateTableContext } from "./MySqlParser.js";
 import { CreateTablespaceInnodbContext } from "./MySqlParser.js";
 import { CreateTablespaceNdbContext } from "./MySqlParser.js";
 import { CreateTriggerContext } from "./MySqlParser.js";
@@ -877,6 +877,18 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitCreateServer?: (ctx: CreateServerContext) => void;
     /**
+     * Enter a parse tree produced by the `queryCreateTable`
+     * labeled alternative in `MySqlParser.createTable`.
+     * @param ctx the parse tree
+     */
+    enterQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
+    /**
+     * Exit a parse tree produced by the `queryCreateTable`
+     * labeled alternative in `MySqlParser.createTable`.
+     * @param ctx the parse tree
+     */
+    exitQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
+    /**
      * Enter a parse tree produced by the `copyCreateTable`
      * labeled alternative in `MySqlParser.createTable`.
      * @param ctx the parse tree
@@ -900,18 +912,6 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnCreateTable?: (ctx: ColumnCreateTableContext) => void;
-    /**
-     * Enter a parse tree produced by the `queryCreateTable`
-     * labeled alternative in `MySqlParser.createTable`.
-     * @param ctx the parse tree
-     */
-    enterQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
-    /**
-     * Exit a parse tree produced by the `queryCreateTable`
-     * labeled alternative in `MySqlParser.createTable`.
-     * @param ctx the parse tree
-     */
-    exitQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.createTablespaceInnodb`.
      * @param ctx the parse tree
