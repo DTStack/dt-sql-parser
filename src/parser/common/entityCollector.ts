@@ -4,6 +4,9 @@ import { WordPosition, TextPosition } from './textAndWord';
 import { ctxToText, ctxToWord } from './textAndWord';
 import SimpleStack from './simpleStack';
 
+/**
+ * TODO: more stmt type should be supported.
+ */
 export enum StmtContextType {
     /** A self-contained and complete statement */
     COMMON_STMT = 'commonStmt',
@@ -53,8 +56,8 @@ export interface EntityContext extends BaseAliasContext {
     readonly text: string;
     readonly position: WordPosition;
     readonly belongStmt: StmtContext;
-    relatedEntities?: EntityContext[];
-    columns?: EntityContext[];
+    relatedEntities: EntityContext[] | null;
+    columns: EntityContext[] | null;
 }
 
 export function toEntityContext(
@@ -71,20 +74,26 @@ export function toEntityContext(
         text,
         position,
         belongStmt,
+        relatedEntities: null,
+        columns: null,
         ...finalAlias,
     };
 }
 
+/**
+ * @todo: Handle alias, includes column alias, table alias, query as alias and so on.
+ * @todo: [may be need] Combine the entities in each clause.
+ */
 abstract class EntityCollector {
     constructor(input: string) {
         this._input = input;
-        this._results = new Set();
+        this._entitiesSet = new Set();
         this._stmtStack = new SimpleStack();
         this._entityStack = new SimpleStack();
         this._rootStmt = null;
     }
     private readonly _input: string;
-    private readonly _results: Set<EntityContext>;
+    private readonly _entitiesSet: Set<EntityContext>;
     /** Staging statements that have already entered. */
     private readonly _stmtStack: SimpleStack<StmtContext>;
     /** Staging entities inside a single statement or clause. */
@@ -95,12 +104,12 @@ abstract class EntityCollector {
      * */
     private _rootStmt: StmtContext;
 
-    get results() {
-        return Array.from(this._results);
+    getEntities() {
+        return Array.from(this._entitiesSet);
     }
 
     enterProgram() {
-        this._results.clear();
+        this._entitiesSet.clear();
         this._stmtStack.clear();
         this._entityStack.clear();
         this._rootStmt = null;
@@ -149,7 +158,7 @@ abstract class EntityCollector {
             alias
         );
         if (this._stmtStack.isEmpty()) {
-            this._results.add(entityContext);
+            this._entitiesSet.add(entityContext);
         } else {
             // If is inside a statement
             this._entityStack.push(entityContext);
@@ -174,17 +183,15 @@ abstract class EntityCollector {
 
         let tmpResults = entitiesInsideStmt;
 
-        if (stmtContext.stmtContextType === StmtContextType.CREATE_TABLE_STMT) {
-            tmpResults = this.combineRootStmtEntities(stmtContext, entitiesInsideStmt);
-        }
+        tmpResults = this.combineRootStmtEntities(stmtContext, entitiesInsideStmt);
 
         while (tmpResults.length) {
-            this._results.add(tmpResults.shift());
+            this._entitiesSet.add(tmpResults.shift());
         }
     }
 
     /**
-     * Aggregate all entities under a rootStmt.
+     * Combined all entities under a rootStmt.
      */
     protected abstract combineRootStmtEntities(
         stmtContext: StmtContext,
