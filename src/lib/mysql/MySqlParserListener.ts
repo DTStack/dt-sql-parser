@@ -186,9 +186,9 @@ import { MasterLogUntilOptionContext } from "./MySqlParser";
 import { SourceLogUntilOptionContext } from "./MySqlParser";
 import { RelayLogUntilOptionContext } from "./MySqlParser";
 import { SqlGapsUntilOptionContext } from "./MySqlParser";
+import { QueryCreateTableContext } from "./MySqlParser";
 import { CopyCreateTableContext } from "./MySqlParser";
 import { ColumnCreateTableContext } from "./MySqlParser";
-import { QueryCreateTableContext } from "./MySqlParser";
 import { PartitionFunctionHashContext } from "./MySqlParser";
 import { PartitionFunctionKeyContext } from "./MySqlParser";
 import { PartitionFunctionRangeContext } from "./MySqlParser";
@@ -3107,6 +3107,19 @@ export interface MySqlParserListener extends ParseTreeListener {
 	exitSqlGapsUntilOption?: (ctx: SqlGapsUntilOptionContext) => void;
 
 	/**
+	 * Enter a parse tree produced by the `queryCreateTable`
+	 * labeled alternative in `MySqlParser.createTable`.
+	 * @param ctx the parse tree
+	 */
+	enterQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
+	/**
+	 * Exit a parse tree produced by the `queryCreateTable`
+	 * labeled alternative in `MySqlParser.createTable`.
+	 * @param ctx the parse tree
+	 */
+	exitQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
+
+	/**
 	 * Enter a parse tree produced by the `copyCreateTable`
 	 * labeled alternative in `MySqlParser.createTable`.
 	 * @param ctx the parse tree
@@ -3131,19 +3144,6 @@ export interface MySqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumnCreateTable?: (ctx: ColumnCreateTableContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `queryCreateTable`
-	 * labeled alternative in `MySqlParser.createTable`.
-	 * @param ctx the parse tree
-	 */
-	enterQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
-	/**
-	 * Exit a parse tree produced by the `queryCreateTable`
-	 * labeled alternative in `MySqlParser.createTable`.
-	 * @param ctx the parse tree
-	 */
-	exitQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `partitionFunctionHash`

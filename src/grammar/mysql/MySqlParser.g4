@@ -272,16 +272,16 @@ createServer
     ;
 
 createTable
-    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate createDefinitions (
+    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tb= tableNameCreate col=createDefinitions? (
         tableOption (','? tableOption)*
-    )? partitionDefinitions? # copyCreateTable
-    | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate createDefinitions? (
-        tableOption (','? tableOption)*
-    )? partitionDefinitions? (KW_IGNORE | KW_REPLACE)? KW_AS? selectStatement # columnCreateTable
+    )? partitionDefinitions? (KW_IGNORE | KW_REPLACE)? KW_AS? selectStatement # queryCreateTable
     | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate (
         KW_LIKE tableName
         | '(' KW_LIKE tableName ')'
-    ) # queryCreateTable
+    ) # copyCreateTable
+    | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate createDefinitions (
+        tableOption (','? tableOption)*
+    )? partitionDefinitions? # columnCreateTable
     ;
 
 createTablespaceInnodb
@@ -325,7 +325,7 @@ commonTableExpressions
 createView
     : KW_CREATE orReplace? (KW_ALGORITHM '=' algType=(KW_UNDEFINED | KW_MERGE | KW_TEMPTABLE))? ownerStatement? (
         KW_SQL KW_SECURITY secContext=(KW_DEFINER | KW_INVOKER)
-    )? KW_VIEW viewNameCreate ('(' columnNames ')')? KW_AS (
+    )? KW_VIEW viewNameCreate ('(' columnNameCreate (',' columnNameCreate)* ')')? KW_AS (
         '(' withClause? selectStatement ')'
         | withClause? selectStatement (
             KW_WITH checkOption=(KW_CASCADED | KW_LOCAL)? KW_CHECK KW_OPTION
@@ -437,7 +437,7 @@ createDefinitions
     ;
 
 createDefinition
-    : columnName columnDefinition
+    : columnNameCreate columnDefinition
     | (KW_INDEX | KW_KEY) indexName? indexType? indexColumnNames indexOption*
     | (KW_FULLTEXT | KW_SPATIAL) (KW_INDEX | KW_KEY)? indexName? indexColumnNames indexOption*
     | constraintSymbol? KW_PRIMARY KW_KEY indexType? indexColumnNames indexOption*
