@@ -186,9 +186,9 @@ import { MasterLogUntilOptionContext } from "./MySqlParser";
 import { SourceLogUntilOptionContext } from "./MySqlParser";
 import { RelayLogUntilOptionContext } from "./MySqlParser";
 import { SqlGapsUntilOptionContext } from "./MySqlParser";
+import { QueryCreateTableContext } from "./MySqlParser";
 import { CopyCreateTableContext } from "./MySqlParser";
 import { ColumnCreateTableContext } from "./MySqlParser";
-import { QueryCreateTableContext } from "./MySqlParser";
 import { PartitionFunctionHashContext } from "./MySqlParser";
 import { PartitionFunctionKeyContext } from "./MySqlParser";
 import { PartitionFunctionRangeContext } from "./MySqlParser";
@@ -2195,6 +2195,14 @@ export interface MySqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitSqlGapsUntilOption?: (ctx: SqlGapsUntilOptionContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by the `queryCreateTable`
+	 * labeled alternative in `MySqlParser.createTable`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQueryCreateTable?: (ctx: QueryCreateTableContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by the `copyCreateTable`
 	 * labeled alternative in `MySqlParser.createTable`.
 	 * @param ctx the parse tree
@@ -2209,14 +2217,6 @@ export interface MySqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitColumnCreateTable?: (ctx: ColumnCreateTableContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `queryCreateTable`
-	 * labeled alternative in `MySqlParser.createTable`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitQueryCreateTable?: (ctx: QueryCreateTableContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `partitionFunctionHash`
