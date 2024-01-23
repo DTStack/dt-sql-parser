@@ -7,8 +7,9 @@ import {
     SingleStatementContext,
 } from '../lib/flinksql/FlinkSqlParser';
 import { FlinkSqlParserListener } from '../lib/flinksql/FlinkSqlParserListener';
-import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
 import BasicParser from './common/basicParser';
+import { StmtContextType } from './common/entityCollector';
 
 export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -56,50 +57,50 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: SyntaxContextType;
+            let syntaxContextType: EntityContextType | StmtContextType;
             switch (ruleType) {
                 case FlinkSqlParser.RULE_catalogPath: {
-                    syntaxContextType = SyntaxContextType.CATALOG;
+                    syntaxContextType = EntityContextType.CATALOG;
                     break;
                 }
                 case FlinkSqlParser.RULE_databasePath: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                    syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
                 case FlinkSqlParser.RULE_databasePathCreate: {
-                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
                 case FlinkSqlParser.RULE_tablePath: {
-                    syntaxContextType = SyntaxContextType.TABLE;
+                    syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
                 case FlinkSqlParser.RULE_tablePathCreate: {
-                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
+                    syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
                 case FlinkSqlParser.RULE_viewPath: {
-                    syntaxContextType = SyntaxContextType.VIEW;
+                    syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
                 case FlinkSqlParser.RULE_viewPathCreate: {
-                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
                 case FlinkSqlParser.RULE_functionName: {
-                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 case FlinkSqlParser.RULE_functionNameCreate: {
-                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
+                    syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
                 case FlinkSqlParser.RULE_columnName: {
-                    syntaxContextType = SyntaxContextType.COLUMN;
+                    syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
                 case FlinkSqlParser.RULE_columnNameCreate: {
-                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
                 default:

@@ -3,8 +3,9 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { MySqlLexer } from '../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext, SingleStatementContext } from '../lib/mysql/MySqlParser';
 import BasicParser from './common/basicParser';
-import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic-parser-types';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from './common/basic-parser-types';
 import { MySqlParserListener } from '../lib/mysql/MySqlParserListener';
+import { StmtContextType } from './common/entityCollector';
 
 export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySqlParser> {
     protected createLexerFromCharStream(charStreams): MySqlLexer {
@@ -50,46 +51,46 @@ export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySql
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: SyntaxContextType;
+            let syntaxContextType: EntityContextType | StmtContextType;
             switch (ruleType) {
                 case MySqlParser.RULE_databaseName: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                    syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
                 case MySqlParser.RULE_databaseNameCreate: {
-                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
                 case MySqlParser.RULE_tableName: {
-                    syntaxContextType = SyntaxContextType.TABLE;
+                    syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
                 case MySqlParser.RULE_tableNameCreate: {
-                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
+                    syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
                 case MySqlParser.RULE_viewName: {
-                    syntaxContextType = SyntaxContextType.VIEW;
+                    syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
                 case MySqlParser.RULE_viewNameCreate: {
-                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
                 case MySqlParser.RULE_functionName: {
-                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 case MySqlParser.RULE_functionNameCreate: {
-                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
+                    syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
                 case MySqlParser.RULE_columnName: {
-                    syntaxContextType = SyntaxContextType.COLUMN;
+                    syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
                 case MySqlParser.RULE_columnNameCreate: {
-                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
                 default:

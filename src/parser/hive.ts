@@ -4,7 +4,8 @@ import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
 import { HiveSqlParser, ProgramContext, StatementContext } from '../lib/hive/HiveSqlParser';
 import BasicParser from './common/basicParser';
 import { HiveSqlParserListener } from '../lib/hive/HiveSqlParserListener';
-import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
+import { StmtContextType } from './common/entityCollector';
 
 export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, HiveSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -50,47 +51,47 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: SyntaxContextType;
+            let syntaxContextType: EntityContextType | StmtContextType;
             switch (ruleType) {
                 case HiveSqlParser.RULE_dbSchemaName: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                    syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
                 case HiveSqlParser.RULE_dbSchemaNameCreate: {
-                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
                 case HiveSqlParser.RULE_tableName: {
-                    syntaxContextType = SyntaxContextType.TABLE;
+                    syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
                 case HiveSqlParser.RULE_tableNameCreate: {
-                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
+                    syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
                 case HiveSqlParser.RULE_viewName: {
-                    syntaxContextType = SyntaxContextType.VIEW;
+                    syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
                 case HiveSqlParser.RULE_viewNameCreate: {
-                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
                 case HiveSqlParser.RULE_functionNameForDDL:
                 case HiveSqlParser.RULE_functionNameForInvoke: {
-                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 case HiveSqlParser.RULE_functionNameCreate: {
-                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
+                    syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
                 case HiveSqlParser.RULE_columnName: {
-                    syntaxContextType = SyntaxContextType.COLUMN;
+                    syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
                 case HiveSqlParser.RULE_columnNameCreate: {
-                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
                 default:

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import PostgresSQL from 'src/parser/pgsql';
-import { CaretPosition, SyntaxContextType } from 'src/parser/common/basic-parser-types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -28,7 +28,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -45,7 +45,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -62,7 +62,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -95,13 +95,13 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos2
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion2 = syntaxes2?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -122,7 +122,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -139,7 +139,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -156,7 +156,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -173,7 +173,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -190,7 +190,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -207,7 +207,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -224,7 +224,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -241,7 +241,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -258,7 +258,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -275,7 +275,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -292,7 +292,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -317,10 +317,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             posCreate
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestionCreate = syntaxesCreate?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -357,13 +357,13 @@ describe('Postgre SQL Syntax Suggestion', () => {
             posAction
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestionCreate = syntaxesCreate?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
         const suggestionAction = syntaxesAction?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -386,7 +386,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -402,7 +402,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -434,13 +434,13 @@ describe('Postgre SQL Syntax Suggestion', () => {
             posAction
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestionCreate = syntaxesCreate?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestionAction = syntaxesAction?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -463,7 +463,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -479,7 +479,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -511,13 +511,13 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos2
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion2 = syntaxes2?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col_name']);
@@ -537,7 +537,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -553,7 +553,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -585,13 +585,13 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos2
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion2 = syntaxes2?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -611,7 +611,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col_name']);
@@ -627,7 +627,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -651,10 +651,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos1
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -672,7 +672,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -704,13 +704,13 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos2
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion2 = syntaxes2?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -730,7 +730,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col_name']);
@@ -745,7 +745,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['co_name']);
@@ -761,7 +761,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['columnname']);
@@ -817,23 +817,23 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos5
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion2 = syntaxes2?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion3 = syntaxes3?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion4 = syntaxes4?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         const suggestion5 = syntaxes5?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -876,13 +876,13 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos2
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion2 = syntaxes2?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['columnname']);
@@ -910,10 +910,10 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos1
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col1']);
@@ -946,13 +946,13 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos3
         )?.syntax;
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion2 = syntaxes2?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         const suggestion3 = syntaxes3?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion1).not.toBeUndefined();

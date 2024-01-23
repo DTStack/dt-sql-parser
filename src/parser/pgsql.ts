@@ -4,7 +4,8 @@ import { PostgreSQLLexer } from '../lib/pgsql/PostgreSQLLexer';
 import { PostgreSQLParser, ProgramContext, SingleStmtContext } from '../lib/pgsql/PostgreSQLParser';
 import BasicParser from './common/basicParser';
 import { PostgreSQLParserListener } from '../lib/pgsql/PostgreSQLParserListener';
-import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
+import { StmtContextType } from './common/entityCollector';
 
 export default class PostgresSQL extends BasicParser<
     PostgreSQLLexer,
@@ -57,62 +58,62 @@ export default class PostgresSQL extends BasicParser<
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: SyntaxContextType;
+            let syntaxContextType: EntityContextType | StmtContextType;
             switch (ruleType) {
                 case PostgreSQLParser.RULE_table_name_create: {
-                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
+                    syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
                 case PostgreSQLParser.RULE_table_name: {
-                    syntaxContextType = SyntaxContextType.TABLE;
+                    syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
                 case PostgreSQLParser.RULE_function_name_create: {
-                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
+                    syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
                 case PostgreSQLParser.RULE_function_name: {
-                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 case PostgreSQLParser.RULE_schema_name_create: {
-                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
                 case PostgreSQLParser.RULE_schema_name: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                    syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
                 case PostgreSQLParser.RULE_view_name_create: {
-                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
                 case PostgreSQLParser.RULE_view_name: {
-                    syntaxContextType = SyntaxContextType.VIEW;
+                    syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
                 case PostgreSQLParser.RULE_database_name_create: {
-                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
                 case PostgreSQLParser.RULE_database_name: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                    syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
                 case PostgreSQLParser.RULE_procedure_name_create: {
-                    syntaxContextType = SyntaxContextType.PROCEDURE_CREATE;
+                    syntaxContextType = EntityContextType.PROCEDURE_CREATE;
                     break;
                 }
                 case PostgreSQLParser.RULE_procedure_name: {
-                    syntaxContextType = SyntaxContextType.PROCEDURE;
+                    syntaxContextType = EntityContextType.PROCEDURE;
                     break;
                 }
                 case PostgreSQLParser.RULE_column_name_create: {
-                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
                 case PostgreSQLParser.RULE_column_name: {
-                    syntaxContextType = SyntaxContextType.COLUMN;
+                    syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
                 default:

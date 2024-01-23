@@ -8,7 +8,8 @@ import {
 } from '../lib/impala/ImpalaSqlParser';
 import BasicParser from './common/basicParser';
 import { ImpalaSqlParserListener } from '../lib/impala/ImpalaSqlParserListener';
-import { SyntaxContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
+import { StmtContextType } from './common/entityCollector';
 
 export default class ImpalaSQL extends BasicParser<
     ImpalaSqlLexer,
@@ -57,46 +58,46 @@ export default class ImpalaSQL extends BasicParser<
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: SyntaxContextType;
+            let syntaxContextType: EntityContextType | StmtContextType;
             switch (ruleType) {
                 case ImpalaSqlParser.RULE_functionNameCreate: {
-                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
+                    syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
                 case ImpalaSqlParser.RULE_tableNameCreate: {
-                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
+                    syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
                 case ImpalaSqlParser.RULE_databaseNameCreate: {
-                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
                 case ImpalaSqlParser.RULE_viewNameCreate: {
-                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
                 case ImpalaSqlParser.RULE_columnNamePathCreate: {
-                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
                 case ImpalaSqlParser.RULE_databaseNamePath: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                    syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
                 case ImpalaSqlParser.RULE_tableNamePath: {
-                    syntaxContextType = SyntaxContextType.TABLE;
+                    syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
                 case ImpalaSqlParser.RULE_viewNamePath: {
-                    syntaxContextType = SyntaxContextType.VIEW;
+                    syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
                 case ImpalaSqlParser.RULE_functionNamePath: {
-                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 case ImpalaSqlParser.RULE_columnNamePath: {
-                    syntaxContextType = SyntaxContextType.COLUMN;
+                    syntaxContextType = EntityContextType.COLUMN;
                 }
                 default:
                     break;

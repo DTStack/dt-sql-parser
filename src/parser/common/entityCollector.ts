@@ -1,5 +1,5 @@
 import { ParserRuleContext } from 'antlr4ts';
-import { SyntaxContextType } from './basic-parser-types';
+import { EntityContextType } from './basic-parser-types';
 import { WordPosition, TextPosition } from './textAndWord';
 import { ctxToText, ctxToWord } from './textAndWord';
 import SimpleStack from './simpleStack';
@@ -49,7 +49,7 @@ const baseAlias: BaseAliasContext = {
 };
 
 export interface EntityContext extends BaseAliasContext {
-    readonly entityContextType: SyntaxContextType;
+    readonly entityContextType: EntityContextType;
     readonly text: string;
     readonly position: WordPosition;
     readonly belongStmt: StmtContext;
@@ -59,7 +59,7 @@ export interface EntityContext extends BaseAliasContext {
 
 export function toEntityContext(
     ctx: ParserRuleContext,
-    type: SyntaxContextType,
+    type: EntityContextType,
     input: string,
     belongStmt: StmtContext,
     alias?: BaseAliasContext
@@ -138,7 +138,7 @@ abstract class EntityCollector {
 
     protected pushEntity(
         ctx: ParserRuleContext,
-        type: SyntaxContextType,
+        type: EntityContextType,
         alias?: BaseAliasContext
     ) {
         const entityContext = toEntityContext(

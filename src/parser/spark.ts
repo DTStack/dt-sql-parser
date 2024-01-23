@@ -7,8 +7,9 @@ import {
     SingleStatementContext,
 } from '../lib/spark/SparkSqlParser';
 import BasicParser from './common/basicParser';
-import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic-parser-types';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from './common/basic-parser-types';
 import { SparkSqlParserListener } from '../lib/spark/SparkSqlParserListener';
+import { StmtContextType } from './common/entityCollector';
 
 export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext, SparkSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -55,46 +56,46 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: SyntaxContextType;
+            let syntaxContextType: EntityContextType | StmtContextType;
             switch (ruleType) {
                 case SparkSqlParser.RULE_dbSchemaName: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                    syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
                 case SparkSqlParser.RULE_dbSchemaNameCreate: {
-                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
                 case SparkSqlParser.RULE_tableName: {
-                    syntaxContextType = SyntaxContextType.TABLE;
+                    syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
                 case SparkSqlParser.RULE_tableNameCreate: {
-                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
+                    syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
                 case SparkSqlParser.RULE_viewName: {
-                    syntaxContextType = SyntaxContextType.VIEW;
+                    syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
                 case SparkSqlParser.RULE_viewNameCreate: {
-                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
                 case SparkSqlParser.RULE_functionName: {
-                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 case SparkSqlParser.RULE_functionNameCreate: {
-                    syntaxContextType = SyntaxContextType.FUNCTION_CREATE;
+                    syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
                 case SparkSqlParser.RULE_columnName: {
-                    syntaxContextType = SyntaxContextType.COLUMN;
+                    syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
                 case SparkSqlParser.RULE_columnNameCreate: {
-                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
                 default:
