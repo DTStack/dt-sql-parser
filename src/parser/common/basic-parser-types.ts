@@ -1,4 +1,5 @@
 import { WordRange } from './textAndWord';
+import { StmtContextType } from './entityCollector';
 
 /**
  * The insertion position of the candidate list.
@@ -14,7 +15,7 @@ export interface CaretPosition {
 /**
  * Syntax context type at caret position
  */
-export enum SyntaxContextType {
+export enum EntityContextType {
     /** catalog name */
     CATALOG = 'catalog',
     /** catalog name that will be created  */
@@ -49,7 +50,7 @@ export enum SyntaxContextType {
  * Suggested information analyzed from the input
  */
 export interface SyntaxSuggestion<T = WordRange> {
-    readonly syntaxContextType: SyntaxContextType;
+    readonly syntaxContextType: EntityContextType | StmtContextType;
     readonly wordRanges: T[];
 }
 

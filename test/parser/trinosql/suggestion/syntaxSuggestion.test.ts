@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import TrinoSQL from 'src/parser/trinosql';
-import { CaretPosition, SyntaxContextType } from 'src/parser/common/basic-parser-types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -29,7 +29,7 @@ describe('Trino SQL Syntax Suggestion', () => {
         )?.syntax;
 
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'tb']);
@@ -45,11 +45,11 @@ describe('Trino SQL Syntax Suggestion', () => {
                 ?.syntax ?? [];
 
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(
-            syntaxes.some((item) => item.syntaxContextType === SyntaxContextType.VIEW)
+            syntaxes.some((item) => item.syntaxContextType === EntityContextType.VIEW)
         ).toBeTruthy();
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
@@ -65,7 +65,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -82,7 +82,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -99,7 +99,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -116,7 +116,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -133,7 +133,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -150,7 +150,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -167,7 +167,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -184,10 +184,10 @@ describe('Trino SQL Syntax Suggestion', () => {
                 ?.syntax ?? [];
 
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
         expect(
-            syntaxes.some((item) => item.syntaxContextType === SyntaxContextType.VIEW)
+            syntaxes.some((item) => item.syntaxContextType === EntityContextType.VIEW)
         ).toBeTruthy();
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb']);
@@ -203,7 +203,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -221,7 +221,7 @@ describe('Trino SQL Syntax Suggestion', () => {
         )?.syntax;
 
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -239,7 +239,7 @@ describe('Trino SQL Syntax Suggestion', () => {
         )?.syntax;
 
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -257,7 +257,7 @@ describe('Trino SQL Syntax Suggestion', () => {
         )?.syntax;
 
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -275,7 +275,7 @@ describe('Trino SQL Syntax Suggestion', () => {
         )?.syntax;
 
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -292,7 +292,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -309,7 +309,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -326,7 +326,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -343,7 +343,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
