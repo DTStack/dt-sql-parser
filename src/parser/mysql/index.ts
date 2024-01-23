@@ -1,11 +1,14 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
-import { MySqlLexer } from '../lib/mysql/MySqlLexer';
-import { MySqlParser, ProgramContext, SingleStatementContext } from '../lib/mysql/MySqlParser';
-import BasicParser from './common/basicParser';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from './common/basic-parser-types';
-import { MySqlParserListener } from '../lib/mysql/MySqlParserListener';
-import { StmtContextType } from './common/entityCollector';
+import { MySqlLexer } from '../../lib/mysql/MySqlLexer';
+import { MySqlParser, ProgramContext } from '../../lib/mysql/MySqlParser';
+import BasicParser from '../common/basicParser';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
+import { StmtContextType } from '../common/entityCollector';
+import MysqlSplitListener from './mysqlSplitListener';
+import MySqlEntityCollector from './mysqlEntityCollector';
+
+export { MySqlEntityCollector, MysqlSplitListener };
 
 export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySqlParser> {
     protected createLexerFromCharStream(charStreams): MySqlLexer {
@@ -121,19 +124,5 @@ export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySql
             syntax: originalSyntaxSuggestions,
             keywords,
         };
-    }
-}
-
-export class MysqlSplitListener implements MySqlParserListener {
-    private _statementsContext: SingleStatementContext[] = [];
-
-    exitSingleStatement = (ctx: SingleStatementContext) => {
-        this._statementsContext.push(ctx);
-    };
-
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
-
-    get statementsContext() {
-        return this._statementsContext;
     }
 }
