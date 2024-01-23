@@ -8,7 +8,8 @@ import {
 } from '../lib/trinosql/TrinoSqlParser';
 import { TrinoSqlListener } from '../lib/trinosql/TrinoSqlListener';
 import BasicParser from './common/basicParser';
-import { Suggestions, SyntaxContextType, SyntaxSuggestion } from './common/basic-parser-types';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from './common/basic-parser-types';
+import { StmtContextType } from './common/entityCollector';
 
 export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -56,46 +57,46 @@ export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext,
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: SyntaxContextType;
+            let syntaxContextType: EntityContextType | StmtContextType;
             switch (ruleType) {
                 case TrinoSqlParser.RULE_catalogName: {
-                    syntaxContextType = SyntaxContextType.CATALOG;
+                    syntaxContextType = EntityContextType.CATALOG;
                     break;
                 }
                 case TrinoSqlParser.RULE_schemaName: {
-                    syntaxContextType = SyntaxContextType.DATABASE;
+                    syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
                 case TrinoSqlParser.RULE_schemaNameCreate: {
-                    syntaxContextType = SyntaxContextType.DATABASE_CREATE;
+                    syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
                 case TrinoSqlParser.RULE_tableName: {
-                    syntaxContextType = SyntaxContextType.TABLE;
+                    syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
                 case TrinoSqlParser.RULE_tableNameCreate: {
-                    syntaxContextType = SyntaxContextType.TABLE_CREATE;
+                    syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
                 case TrinoSqlParser.RULE_viewName: {
-                    syntaxContextType = SyntaxContextType.VIEW;
+                    syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
                 case TrinoSqlParser.RULE_viewNameCreate: {
-                    syntaxContextType = SyntaxContextType.VIEW_CREATE;
+                    syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
                 case TrinoSqlParser.RULE_functionName: {
-                    syntaxContextType = SyntaxContextType.FUNCTION;
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 case TrinoSqlParser.RULE_columnNameCreate: {
-                    syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
                 case TrinoSqlParser.RULE_columnName: {
-                    syntaxContextType = SyntaxContextType.COLUMN;
+                    syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
                 default:

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import TrinoSQL from 'src/parser/trinosql';
-import { CaretPosition, SyntaxContextType } from 'src/parser/common/basic-parser-types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'multipleStatement.sql'),
@@ -18,7 +18,7 @@ describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -32,7 +32,7 @@ describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -46,7 +46,7 @@ describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -60,7 +60,7 @@ describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
