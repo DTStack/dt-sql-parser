@@ -127,10 +127,6 @@ export default class MySqlEntityCollector extends EntityCollector implements MyS
         this.popStmt();
     }
 
-    enterCreateTable(ctx: CreateTableContext) {
-        this.pushStmt(ctx, StmtContextType.CREATE_TABLE_STMT);
-    }
-
     enterQueryCreateTable(ctx: QueryCreateTableContext) {
         this.pushStmt(ctx, StmtContextType.CREATE_TABLE_STMT);
     }
