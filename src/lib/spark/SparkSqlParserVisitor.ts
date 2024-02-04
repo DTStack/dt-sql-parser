@@ -3,6 +3,103 @@
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
 
+import { InsertFromQueryContext } from "./SparkSqlParser";
+import { MultipleInsertContext } from "./SparkSqlParser";
+import { DeleteFromTableContext } from "./SparkSqlParser";
+import { UpdateTableContext } from "./SparkSqlParser";
+import { MergeIntoTableContext } from "./SparkSqlParser";
+import { QueryStatementContext } from "./SparkSqlParser";
+import { StatementDefaultContext } from "./SparkSqlParser";
+import { DmlStatementContext } from "./SparkSqlParser";
+import { UseNamespaceContext } from "./SparkSqlParser";
+import { SetCatalogContext } from "./SparkSqlParser";
+import { CreateNamespaceContext } from "./SparkSqlParser";
+import { SetNamespacePropertiesContext } from "./SparkSqlParser";
+import { SetNamespaceLocationContext } from "./SparkSqlParser";
+import { DropNamespaceContext } from "./SparkSqlParser";
+import { ShowNamespacesContext } from "./SparkSqlParser";
+import { CreateTableContext } from "./SparkSqlParser";
+import { CreateTableLikeContext } from "./SparkSqlParser";
+import { ReplaceTableContext } from "./SparkSqlParser";
+import { AnalyzeContext } from "./SparkSqlParser";
+import { AnalyzeTablesContext } from "./SparkSqlParser";
+import { AlterTableAddColumnContext } from "./SparkSqlParser";
+import { AlterTableAddColumnsContext } from "./SparkSqlParser";
+import { RenameTableColumnContext } from "./SparkSqlParser";
+import { AlterTableDropColumnContext } from "./SparkSqlParser";
+import { DropTableColumnsContext } from "./SparkSqlParser";
+import { RenameTableContext } from "./SparkSqlParser";
+import { SetTablePropertiesContext } from "./SparkSqlParser";
+import { UnsetTablePropertiesContext } from "./SparkSqlParser";
+import { AlterTableAlterColumnContext } from "./SparkSqlParser";
+import { HiveChangeColumnContext } from "./SparkSqlParser";
+import { HiveReplaceColumnsContext } from "./SparkSqlParser";
+import { SetTableSerDeContext } from "./SparkSqlParser";
+import { SetTableSerDePropertiesContext } from "./SparkSqlParser";
+import { AddTablePartitionContext } from "./SparkSqlParser";
+import { RenameTablePartitionContext } from "./SparkSqlParser";
+import { DropTablePartitionsContext } from "./SparkSqlParser";
+import { SetTableLocationContext } from "./SparkSqlParser";
+import { RecoverPartitionsContext } from "./SparkSqlParser";
+import { AlterMaterializedViewRewriteContext } from "./SparkSqlParser";
+import { AlterMaterializedViewPropertiesContext } from "./SparkSqlParser";
+import { DropTableContext } from "./SparkSqlParser";
+import { DropViewContext } from "./SparkSqlParser";
+import { DropMaterializedViewContext } from "./SparkSqlParser";
+import { CreateViewContext } from "./SparkSqlParser";
+import { CreateTempViewUsingContext } from "./SparkSqlParser";
+import { AlterViewQueryContext } from "./SparkSqlParser";
+import { CreateFunctionContext } from "./SparkSqlParser";
+import { CreateMaterializedViewContext } from "./SparkSqlParser";
+import { DropFunctionContext } from "./SparkSqlParser";
+import { DeclareVariableContext } from "./SparkSqlParser";
+import { DropVariableContext } from "./SparkSqlParser";
+import { ExplainStatementContext } from "./SparkSqlParser";
+import { ShowTablesContext } from "./SparkSqlParser";
+import { ShowTableExtendedContext } from "./SparkSqlParser";
+import { ShowTblPropertiesContext } from "./SparkSqlParser";
+import { ShowColumnsContext } from "./SparkSqlParser";
+import { ShowViewsContext } from "./SparkSqlParser";
+import { ShowPartitionsContext } from "./SparkSqlParser";
+import { ShowFunctionsContext } from "./SparkSqlParser";
+import { ShowCreateTableContext } from "./SparkSqlParser";
+import { ShowCurrentNamespaceContext } from "./SparkSqlParser";
+import { ShowCatalogsContext } from "./SparkSqlParser";
+import { ShowMaterializedViewsContext } from "./SparkSqlParser";
+import { ShowCreateMaterializedViewContext } from "./SparkSqlParser";
+import { DescribeFunctionContext } from "./SparkSqlParser";
+import { DescribeNamespaceContext } from "./SparkSqlParser";
+import { DescribeRelationContext } from "./SparkSqlParser";
+import { DescribeQueryContext } from "./SparkSqlParser";
+import { CommentNamespaceContext } from "./SparkSqlParser";
+import { CommentTableContext } from "./SparkSqlParser";
+import { RefreshTableContext } from "./SparkSqlParser";
+import { RefreshFunctionContext } from "./SparkSqlParser";
+import { RefreshResourceContext } from "./SparkSqlParser";
+import { RefreshMaterializedViewContext } from "./SparkSqlParser";
+import { CacheTableContext } from "./SparkSqlParser";
+import { UnCacheTableContext } from "./SparkSqlParser";
+import { ClearCacheContext } from "./SparkSqlParser";
+import { LoadDataContext } from "./SparkSqlParser";
+import { TruncateTableContext } from "./SparkSqlParser";
+import { RepairTableContext } from "./SparkSqlParser";
+import { ManageResourceContext } from "./SparkSqlParser";
+import { FailNativeCommandContext } from "./SparkSqlParser";
+import { SetTimeZoneIntervalContext } from "./SparkSqlParser";
+import { SetTimeZoneContext } from "./SparkSqlParser";
+import { SetTimeZoneAnyContext } from "./SparkSqlParser";
+import { SetVariableAssignmentContext } from "./SparkSqlParser";
+import { SetVariableMultiAssignmentContext } from "./SparkSqlParser";
+import { SetConfigContext } from "./SparkSqlParser";
+import { SetConfigAndValueContext } from "./SparkSqlParser";
+import { SetConfigAnyKeyContext } from "./SparkSqlParser";
+import { SetAnyContext } from "./SparkSqlParser";
+import { ResetConfigContext } from "./SparkSqlParser";
+import { ResetAnyContext } from "./SparkSqlParser";
+import { CreateIndexContext } from "./SparkSqlParser";
+import { DropIndexContext } from "./SparkSqlParser";
+import { OptimizeTableContext } from "./SparkSqlParser";
+import { UnsupportHiveCommandsContext } from "./SparkSqlParser";
 import { ProgramContext } from "./SparkSqlParser";
 import { SingleStatementContext } from "./SparkSqlParser";
 import { StatementContext } from "./SparkSqlParser";
@@ -21,8 +118,8 @@ import { InsertIntoContext } from "./SparkSqlParser";
 import { PartitionSpecLocationContext } from "./SparkSqlParser";
 import { PartitionSpecContext } from "./SparkSqlParser";
 import { PartitionValContext } from "./SparkSqlParser";
-import { DbSchemaContext } from "./SparkSqlParser";
-import { DbSchemasContext } from "./SparkSqlParser";
+import { NamespaceContext } from "./SparkSqlParser";
+import { NamespacesContext } from "./SparkSqlParser";
 import { DescribeFuncNameContext } from "./SparkSqlParser";
 import { DescribeColNameContext } from "./SparkSqlParser";
 import { CtesContext } from "./SparkSqlParser";
@@ -42,8 +139,8 @@ import { FileFormatContext } from "./SparkSqlParser";
 import { StorageHandlerContext } from "./SparkSqlParser";
 import { ResourceContext } from "./SparkSqlParser";
 import { DmlStatementNoWithContext } from "./SparkSqlParser";
-import { DbSchemaNameContext } from "./SparkSqlParser";
-import { DbSchemaNameCreateContext } from "./SparkSqlParser";
+import { NamespaceNameContext } from "./SparkSqlParser";
+import { NamespaceNameCreateContext } from "./SparkSqlParser";
 import { TableNameCreateContext } from "./SparkSqlParser";
 import { TableNameContext } from "./SparkSqlParser";
 import { ViewNameCreateContext } from "./SparkSqlParser";
@@ -213,6 +310,782 @@ import { NonReservedContext } from "./SparkSqlParser";
  */
 export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	/**
+	 * Visit a parse tree produced by the `insertFromQuery`
+	 * labeled alternative in `SparkSqlParser.dmlStatementNoWith`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitInsertFromQuery?: (ctx: InsertFromQueryContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `multipleInsert`
+	 * labeled alternative in `SparkSqlParser.dmlStatementNoWith`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMultipleInsert?: (ctx: MultipleInsertContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `deleteFromTable`
+	 * labeled alternative in `SparkSqlParser.dmlStatementNoWith`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDeleteFromTable?: (ctx: DeleteFromTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `updateTable`
+	 * labeled alternative in `SparkSqlParser.dmlStatementNoWith`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitUpdateTable?: (ctx: UpdateTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `mergeIntoTable`
+	 * labeled alternative in `SparkSqlParser.dmlStatementNoWith`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMergeIntoTable?: (ctx: MergeIntoTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `queryStatement`
+	 * labeled alternative in `SparkSqlParser.query`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQueryStatement?: (ctx: QueryStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `statementDefault`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitStatementDefault?: (ctx: StatementDefaultContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dmlStatement`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDmlStatement?: (ctx: DmlStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `useNamespace`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitUseNamespace?: (ctx: UseNamespaceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setCatalog`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetCatalog?: (ctx: SetCatalogContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createNamespace`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateNamespace?: (ctx: CreateNamespaceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setNamespaceProperties`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetNamespaceProperties?: (ctx: SetNamespacePropertiesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setNamespaceLocation`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetNamespaceLocation?: (ctx: SetNamespaceLocationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropNamespace`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropNamespace?: (ctx: DropNamespaceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showNamespaces`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowNamespaces?: (ctx: ShowNamespacesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateTable?: (ctx: CreateTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createTableLike`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateTableLike?: (ctx: CreateTableLikeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `replaceTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitReplaceTable?: (ctx: ReplaceTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `analyze`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAnalyze?: (ctx: AnalyzeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `analyzeTables`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAnalyzeTables?: (ctx: AnalyzeTablesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterTableAddColumn`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterTableAddColumn?: (ctx: AlterTableAddColumnContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterTableAddColumns`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterTableAddColumns?: (ctx: AlterTableAddColumnsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `renameTableColumn`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRenameTableColumn?: (ctx: RenameTableColumnContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterTableDropColumn`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterTableDropColumn?: (ctx: AlterTableDropColumnContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropTableColumns`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropTableColumns?: (ctx: DropTableColumnsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `renameTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRenameTable?: (ctx: RenameTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setTableProperties`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetTableProperties?: (ctx: SetTablePropertiesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `unsetTableProperties`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitUnsetTableProperties?: (ctx: UnsetTablePropertiesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterTableAlterColumn`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterTableAlterColumn?: (ctx: AlterTableAlterColumnContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `hiveChangeColumn`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitHiveChangeColumn?: (ctx: HiveChangeColumnContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `hiveReplaceColumns`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitHiveReplaceColumns?: (ctx: HiveReplaceColumnsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setTableSerDe`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetTableSerDe?: (ctx: SetTableSerDeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setTableSerDeProperties`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetTableSerDeProperties?: (ctx: SetTableSerDePropertiesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `addTablePartition`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAddTablePartition?: (ctx: AddTablePartitionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `renameTablePartition`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRenameTablePartition?: (ctx: RenameTablePartitionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropTablePartitions`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropTablePartitions?: (ctx: DropTablePartitionsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setTableLocation`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetTableLocation?: (ctx: SetTableLocationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `recoverPartitions`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRecoverPartitions?: (ctx: RecoverPartitionsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterMaterializedViewRewrite`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterMaterializedViewRewrite?: (ctx: AlterMaterializedViewRewriteContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterMaterializedViewProperties`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterMaterializedViewProperties?: (ctx: AlterMaterializedViewPropertiesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropTable?: (ctx: DropTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropView`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropView?: (ctx: DropViewContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropMaterializedView`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropMaterializedView?: (ctx: DropMaterializedViewContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createView`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateView?: (ctx: CreateViewContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createTempViewUsing`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateTempViewUsing?: (ctx: CreateTempViewUsingContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `alterViewQuery`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAlterViewQuery?: (ctx: AlterViewQueryContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createFunction`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateFunction?: (ctx: CreateFunctionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createMaterializedView`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateMaterializedView?: (ctx: CreateMaterializedViewContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropFunction`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropFunction?: (ctx: DropFunctionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `declareVariable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDeclareVariable?: (ctx: DeclareVariableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropVariable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropVariable?: (ctx: DropVariableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `explainStatement`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitExplainStatement?: (ctx: ExplainStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showTables`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowTables?: (ctx: ShowTablesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showTableExtended`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowTableExtended?: (ctx: ShowTableExtendedContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showTblProperties`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowTblProperties?: (ctx: ShowTblPropertiesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showColumns`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowColumns?: (ctx: ShowColumnsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showViews`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowViews?: (ctx: ShowViewsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showPartitions`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowPartitions?: (ctx: ShowPartitionsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showFunctions`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowFunctions?: (ctx: ShowFunctionsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showCreateTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowCreateTable?: (ctx: ShowCreateTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showCurrentNamespace`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowCurrentNamespace?: (ctx: ShowCurrentNamespaceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showCatalogs`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowCatalogs?: (ctx: ShowCatalogsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showMaterializedViews`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowMaterializedViews?: (ctx: ShowMaterializedViewsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `showCreateMaterializedView`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitShowCreateMaterializedView?: (ctx: ShowCreateMaterializedViewContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `describeFunction`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDescribeFunction?: (ctx: DescribeFunctionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `describeNamespace`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDescribeNamespace?: (ctx: DescribeNamespaceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `describeRelation`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDescribeRelation?: (ctx: DescribeRelationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `describeQuery`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDescribeQuery?: (ctx: DescribeQueryContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `commentNamespace`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCommentNamespace?: (ctx: CommentNamespaceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `commentTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCommentTable?: (ctx: CommentTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `refreshTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRefreshTable?: (ctx: RefreshTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `refreshFunction`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRefreshFunction?: (ctx: RefreshFunctionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `refreshResource`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRefreshResource?: (ctx: RefreshResourceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `refreshMaterializedView`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRefreshMaterializedView?: (ctx: RefreshMaterializedViewContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `cacheTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCacheTable?: (ctx: CacheTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `unCacheTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitUnCacheTable?: (ctx: UnCacheTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `clearCache`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClearCache?: (ctx: ClearCacheContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `loadData`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitLoadData?: (ctx: LoadDataContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `truncateTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTruncateTable?: (ctx: TruncateTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `repairTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRepairTable?: (ctx: RepairTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `manageResource`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitManageResource?: (ctx: ManageResourceContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `failNativeCommand`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFailNativeCommand?: (ctx: FailNativeCommandContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setTimeZoneInterval`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetTimeZoneInterval?: (ctx: SetTimeZoneIntervalContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setTimeZone`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetTimeZone?: (ctx: SetTimeZoneContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setTimeZoneAny`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetTimeZoneAny?: (ctx: SetTimeZoneAnyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setVariableAssignment`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetVariableAssignment?: (ctx: SetVariableAssignmentContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setVariableMultiAssignment`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetVariableMultiAssignment?: (ctx: SetVariableMultiAssignmentContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setConfig`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetConfig?: (ctx: SetConfigContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setConfigAndValue`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetConfigAndValue?: (ctx: SetConfigAndValueContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setConfigAnyKey`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetConfigAnyKey?: (ctx: SetConfigAnyKeyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `setAny`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetAny?: (ctx: SetAnyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `resetConfig`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitResetConfig?: (ctx: ResetConfigContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `resetAny`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitResetAny?: (ctx: ResetAnyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `createIndex`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCreateIndex?: (ctx: CreateIndexContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `dropIndex`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitDropIndex?: (ctx: DropIndexContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `optimizeTable`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitOptimizeTable?: (ctx: OptimizeTableContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by the `unsupportHiveCommands`
+	 * labeled alternative in `SparkSqlParser.statement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitUnsupportHiveCommands?: (ctx: UnsupportHiveCommandsContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `SparkSqlParser.program`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -339,18 +1212,18 @@ export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	visitPartitionVal?: (ctx: PartitionValContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `SparkSqlParser.dbSchema`.
+	 * Visit a parse tree produced by `SparkSqlParser.namespace`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDbSchema?: (ctx: DbSchemaContext) => Result;
+	visitNamespace?: (ctx: NamespaceContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `SparkSqlParser.dbSchemas`.
+	 * Visit a parse tree produced by `SparkSqlParser.namespaces`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDbSchemas?: (ctx: DbSchemasContext) => Result;
+	visitNamespaces?: (ctx: NamespacesContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SparkSqlParser.describeFuncName`.
@@ -486,18 +1359,18 @@ export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	visitDmlStatementNoWith?: (ctx: DmlStatementNoWithContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `SparkSqlParser.dbSchemaName`.
+	 * Visit a parse tree produced by `SparkSqlParser.namespaceName`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDbSchemaName?: (ctx: DbSchemaNameContext) => Result;
+	visitNamespaceName?: (ctx: NamespaceNameContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `SparkSqlParser.dbSchemaNameCreate`.
+	 * Visit a parse tree produced by `SparkSqlParser.namespaceNameCreate`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitDbSchemaNameCreate?: (ctx: DbSchemaNameCreateContext) => Result;
+	visitNamespaceNameCreate?: (ctx: NamespaceNameCreateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SparkSqlParser.tableNameCreate`.
