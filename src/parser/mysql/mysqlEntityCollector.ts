@@ -2,7 +2,6 @@ import type {
     ColumnCreateTableContext,
     ColumnNameCreateContext,
     CopyCreateTableContext,
-    CreateTableContext,
     CreateViewContext,
     DatabaseNameContext,
     DatabaseNameCreateContext,
@@ -42,7 +41,6 @@ export default class MySqlEntityCollector extends EntityCollector implements MyS
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]
     ): EntityContext[] {
-        debugger;
         const columns: EntityContext[] = [];
         const relatedEntities: EntityContext[] = [];
         let mainEntity: EntityContext = null;
