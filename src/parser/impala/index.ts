@@ -1,15 +1,14 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
-import { ImpalaSqlLexer } from '../lib/impala/ImpalaSqlLexer';
-import {
-    ImpalaSqlParser,
-    ProgramContext,
-    SingleStatementContext,
-} from '../lib/impala/ImpalaSqlParser';
-import BasicParser from './common/basicParser';
-import { ImpalaSqlParserListener } from '../lib/impala/ImpalaSqlParserListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
-import { StmtContextType } from './common/entityCollector';
+import { ImpalaSqlLexer } from '../../lib/impala/ImpalaSqlLexer';
+import { ImpalaSqlParser, ProgramContext } from '../../lib/impala/ImpalaSqlParser';
+import BasicParser from '../common/basicParser';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
+import { StmtContextType } from '../common/entityCollector';
+import { ImpalaSqlSplitListener } from './impalaSplitListener';
+import ImpaleSqlEntityCollector from './impalaEntityCollector';
+
+export { ImpaleSqlEntityCollector, ImpalaSqlSplitListener };
 
 export default class ImpalaSQL extends BasicParser<
     ImpalaSqlLexer,
@@ -126,19 +125,5 @@ export default class ImpalaSQL extends BasicParser<
             syntax: originalSyntaxSuggestions,
             keywords,
         };
-    }
-}
-
-export class ImpalaSqlSplitListener implements ImpalaSqlParserListener {
-    private _statementContext: SingleStatementContext[] = [];
-
-    exitSingleStatement = (ctx: SingleStatementContext) => {
-        this._statementContext.push(ctx);
-    };
-
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
-
-    get statementsContext() {
-        return this._statementContext;
     }
 }

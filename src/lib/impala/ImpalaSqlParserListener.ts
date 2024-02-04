@@ -182,6 +182,7 @@ import { QueryStatementContext } from "./ImpalaSqlParser";
 import { WithContext } from "./ImpalaSqlParser";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParser";
 import { ForeignKeySpecificationContext } from "./ImpalaSqlParser";
+import { ColumnSpecContext } from "./ImpalaSqlParser";
 import { ColumnDefinitionContext } from "./ImpalaSqlParser";
 import { KuduTableElementContext } from "./ImpalaSqlParser";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParser";
@@ -222,7 +223,6 @@ import { SampledRelationContext } from "./ImpalaSqlParser";
 import { SampleTypeContext } from "./ImpalaSqlParser";
 import { AliasedRelationContext } from "./ImpalaSqlParser";
 import { ColumnAliasesContext } from "./ImpalaSqlParser";
-import { CreateColumnAliasesContext } from "./ImpalaSqlParser";
 import { RelationPrimaryContext } from "./ImpalaSqlParser";
 import { SubQueryRelationContext } from "./ImpalaSqlParser";
 import { UnnestContext } from "./ImpalaSqlParser";
@@ -2381,6 +2381,17 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	exitForeignKeySpecification?: (ctx: ForeignKeySpecificationContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `ImpalaSqlParser.columnSpec`.
+	 * @param ctx the parse tree
+	 */
+	enterColumnSpec?: (ctx: ColumnSpecContext) => void;
+	/**
+	 * Exit a parse tree produced by `ImpalaSqlParser.columnSpec`.
+	 * @param ctx the parse tree
+	 */
+	exitColumnSpec?: (ctx: ColumnSpecContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.columnDefinition`.
 	 * @param ctx the parse tree
 	 */
@@ -2819,17 +2830,6 @@ export interface ImpalaSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumnAliases?: (ctx: ColumnAliasesContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
-	 * @param ctx the parse tree
-	 */
-	enterCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => void;
-	/**
-	 * Exit a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
-	 * @param ctx the parse tree
-	 */
-	exitCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ImpalaSqlParser.relationPrimary`.

@@ -182,6 +182,7 @@ import { QueryStatementContext } from "./ImpalaSqlParser";
 import { WithContext } from "./ImpalaSqlParser";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParser";
 import { ForeignKeySpecificationContext } from "./ImpalaSqlParser";
+import { ColumnSpecContext } from "./ImpalaSqlParser";
 import { ColumnDefinitionContext } from "./ImpalaSqlParser";
 import { KuduTableElementContext } from "./ImpalaSqlParser";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParser";
@@ -222,7 +223,6 @@ import { SampledRelationContext } from "./ImpalaSqlParser";
 import { SampleTypeContext } from "./ImpalaSqlParser";
 import { AliasedRelationContext } from "./ImpalaSqlParser";
 import { ColumnAliasesContext } from "./ImpalaSqlParser";
-import { CreateColumnAliasesContext } from "./ImpalaSqlParser";
 import { RelationPrimaryContext } from "./ImpalaSqlParser";
 import { SubQueryRelationContext } from "./ImpalaSqlParser";
 import { UnnestContext } from "./ImpalaSqlParser";
@@ -1595,6 +1595,13 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	visitForeignKeySpecification?: (ctx: ForeignKeySpecificationContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `ImpalaSqlParser.columnSpec`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitColumnSpec?: (ctx: ColumnSpecContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.columnDefinition`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1873,13 +1880,6 @@ export interface ImpalaSqlParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitColumnAliases?: (ctx: ColumnAliasesContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ImpalaSqlParser.relationPrimary`.
