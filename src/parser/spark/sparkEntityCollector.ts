@@ -46,7 +46,6 @@ export default class SparkEntityCollector
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]
     ): EntityContext[] {
-        debugger;
         const columns: EntityContext[] = [];
         const relatedEntities: EntityContext[] = [];
         let mainEntity: EntityContext = null;
