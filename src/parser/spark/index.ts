@@ -1,15 +1,14 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
-import { SparkSqlLexer } from '../lib/spark/SparkSqlLexer';
-import {
-    SparkSqlParser,
-    ProgramContext,
-    SingleStatementContext,
-} from '../lib/spark/SparkSqlParser';
-import BasicParser from './common/basicParser';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from './common/basic-parser-types';
-import { SparkSqlParserListener } from '../lib/spark/SparkSqlParserListener';
-import { StmtContextType } from './common/entityCollector';
+import { SparkSqlLexer } from '../../lib/spark/SparkSqlLexer';
+import { SparkSqlParser, ProgramContext } from '../../lib/spark/SparkSqlParser';
+import BasicParser from '../common/basicParser';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
+import { StmtContextType } from '../common/entityCollector';
+import SparkSqlSplitListener from './sparkSplitListener';
+import SparkEntityCollector from './sparkEntityCollector';
+
+export { SparkSqlSplitListener, SparkEntityCollector };
 
 export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext, SparkSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -23,8 +22,8 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
     }
 
     protected preferredRules: Set<number> = new Set([
-        SparkSqlParser.RULE_dbSchemaName,
-        SparkSqlParser.RULE_dbSchemaNameCreate,
+        SparkSqlParser.RULE_namespaceName,
+        SparkSqlParser.RULE_namespaceNameCreate,
         SparkSqlParser.RULE_tableName,
         SparkSqlParser.RULE_tableNameCreate,
         SparkSqlParser.RULE_viewName,
@@ -58,11 +57,11 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
 
             let syntaxContextType: EntityContextType | StmtContextType;
             switch (ruleType) {
-                case SparkSqlParser.RULE_dbSchemaName: {
+                case SparkSqlParser.RULE_namespaceName: {
                     syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
-                case SparkSqlParser.RULE_dbSchemaNameCreate: {
+                case SparkSqlParser.RULE_namespaceNameCreate: {
                     syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
@@ -126,19 +125,5 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
             syntax: originalSyntaxSuggestions,
             keywords,
         };
-    }
-}
-
-export class SparkSqlSplitListener implements SparkSqlParserListener {
-    private _statementsContext: SingleStatementContext[] = [];
-
-    exitSingleStatement = (ctx: SingleStatementContext) => {
-        this._statementsContext.push(ctx);
-    };
-
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
-
-    get statementsContext() {
-        return this._statementsContext;
     }
 }
