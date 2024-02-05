@@ -574,6 +574,7 @@ import { Func_alias_clauseContext } from "./PostgreSQLParser";
 import { Join_typeContext } from "./PostgreSQLParser";
 import { Join_qualContext } from "./PostgreSQLParser";
 import { Relation_exprContext } from "./PostgreSQLParser";
+import { View_relation_exprContext } from "./PostgreSQLParser";
 import { Publication_relation_exprContext } from "./PostgreSQLParser";
 import { Relation_expr_listContext } from "./PostgreSQLParser";
 import { Publication_relation_expr_listContext } from "./PostgreSQLParser";
@@ -4904,6 +4905,13 @@ export interface PostgreSQLParserVisitor<Result> extends ParseTreeVisitor<Result
 	 * @return the visitor result
 	 */
 	visitRelation_expr?: (ctx: Relation_exprContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `PostgreSQLParser.view_relation_expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitView_relation_expr?: (ctx: View_relation_exprContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `PostgreSQLParser.publication_relation_expr`.
