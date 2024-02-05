@@ -25,7 +25,7 @@ describe('PgSQL Multiple Statements Syntax Suggestion', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
     });
 
-    test('Select from table', () => {
+    test('Select from table or view', () => {
         const pos: CaretPosition = {
             lineNumber: 9,
             column: 18,
@@ -34,9 +34,14 @@ describe('PgSQL Multiple Statements Syntax Suggestion', () => {
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
         );
+        const suggestionVw = syntaxes?.find(
+            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+        );
 
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+        expect(suggestionVw).not.toBeUndefined();
+        expect(suggestionVw?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
     });
 
     test('Insert into table ', () => {
