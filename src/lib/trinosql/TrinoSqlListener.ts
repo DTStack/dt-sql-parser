@@ -113,6 +113,7 @@ import { ZeroOrMoreQuantifierContext } from "./TrinoSqlParser";
 import { OneOrMoreQuantifierContext } from "./TrinoSqlParser";
 import { ZeroOrOneQuantifierContext } from "./TrinoSqlParser";
 import { RangeQuantifierContext } from "./TrinoSqlParser";
+import { QueryStatementContext } from "./TrinoSqlParser";
 import { ReadUncommittedContext } from "./TrinoSqlParser";
 import { ReadCommittedContext } from "./TrinoSqlParser";
 import { RepeatableReadContext } from "./TrinoSqlParser";
@@ -1746,6 +1747,19 @@ export interface TrinoSqlListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitRangeQuantifier?: (ctx: RangeQuantifierContext) => void;
+
+	/**
+	 * Enter a parse tree produced by the `queryStatement`
+	 * labeled alternative in `TrinoSqlParser.query`.
+	 * @param ctx the parse tree
+	 */
+	enterQueryStatement?: (ctx: QueryStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by the `queryStatement`
+	 * labeled alternative in `TrinoSqlParser.query`.
+	 * @param ctx the parse tree
+	 */
+	exitQueryStatement?: (ctx: QueryStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `readUncommitted`
