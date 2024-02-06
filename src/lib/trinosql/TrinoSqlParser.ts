@@ -3358,6 +3358,7 @@ export class TrinoSqlParser extends antlr.Parser {
         this.enterRule(localContext, 18, TrinoSqlParser.RULE_query);
         let _la: number;
         try {
+            localContext = new QueryStatementContext(localContext);
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 1039;
@@ -16394,28 +16395,37 @@ export class QueryContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
+    public override get ruleIndex(): number {
+        return TrinoSqlParser.RULE_query;
+    }
+    public override copyFrom(ctx: QueryContext): void {
+        super.copyFrom(ctx);
+    }
+}
+export class QueryStatementContext extends QueryContext {
+    public constructor(ctx: QueryContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
     public queryNoWith(): QueryNoWithContext {
         return this.getRuleContext(0, QueryNoWithContext)!;
     }
     public with(): WithContext | null {
         return this.getRuleContext(0, WithContext);
     }
-    public override get ruleIndex(): number {
-        return TrinoSqlParser.RULE_query;
-    }
     public override enterRule(listener: TrinoSqlListener): void {
-        if(listener.enterQuery) {
-             listener.enterQuery(this);
+        if(listener.enterQueryStatement) {
+             listener.enterQueryStatement(this);
         }
     }
     public override exitRule(listener: TrinoSqlListener): void {
-        if(listener.exitQuery) {
-             listener.exitQuery(this);
+        if(listener.exitQueryStatement) {
+             listener.exitQueryStatement(this);
         }
     }
     public override accept<Result>(visitor: TrinoSqlVisitor<Result>): Result | null {
-        if (visitor.visitQuery) {
-            return visitor.visitQuery(this);
+        if (visitor.visitQueryStatement) {
+            return visitor.visitQueryStatement(this);
         } else {
             return visitor.visitChildren(this);
         }

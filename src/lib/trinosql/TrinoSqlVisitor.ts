@@ -83,7 +83,7 @@ import { UpdateContext } from "./TrinoSqlParser.js";
 import { MergeContext } from "./TrinoSqlParser.js";
 import { ShowTableCommentContext } from "./TrinoSqlParser.js";
 import { ShowColumnCommentContext } from "./TrinoSqlParser.js";
-import { QueryContext } from "./TrinoSqlParser.js";
+import { QueryStatementContext } from "./TrinoSqlParser.js";
 import { WithContext } from "./TrinoSqlParser.js";
 import { TableElementContext } from "./TrinoSqlParser.js";
 import { ColumnDefinitionContext } from "./TrinoSqlParser.js";
@@ -844,11 +844,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitShowColumnComment?: (ctx: ShowColumnCommentContext) => Result;
     /**
-     * Visit a parse tree produced by `TrinoSqlParser.query`.
+     * Visit a parse tree produced by the `queryStatement`
+     * labeled alternative in `TrinoSqlParser.query`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitQuery?: (ctx: QueryContext) => Result;
+    visitQueryStatement?: (ctx: QueryStatementContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.with`.
      * @param ctx the parse tree
