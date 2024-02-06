@@ -26,3 +26,5 @@ body:
     attributes:
       label: Description
       description: Please describe your feature request.
+    validations:
+      required: true
