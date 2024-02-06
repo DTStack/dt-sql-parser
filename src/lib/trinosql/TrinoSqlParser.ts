@@ -3490,6 +3490,7 @@ export class TrinoSqlParser extends Parser {
 		this.enterRule(_localctx, 18, TrinoSqlParser.RULE_query);
 		let _la: number;
 		try {
+			_localctx = new QueryStatementContext(_localctx);
 			this.enterOuterAlt(_localctx, 1);
 			{
 			this.state = 1039;
@@ -16758,33 +16759,42 @@ export class ShowColumnCommentContext extends StatementContext {
 
 
 export class QueryContext extends ParserRuleContext {
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return TrinoSqlParser.RULE_query; }
+	public copyFrom(ctx: QueryContext): void {
+		super.copyFrom(ctx);
+	}
+}
+export class QueryStatementContext extends QueryContext {
 	public queryNoWith(): QueryNoWithContext {
 		return this.getRuleContext(0, QueryNoWithContext);
 	}
 	public with(): WithContext | undefined {
 		return this.tryGetRuleContext(0, WithContext);
 	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
+	constructor(ctx: QueryContext) {
+		super(ctx.parent, ctx.invokingState);
+		this.copyFrom(ctx);
 	}
 	// @Override
-	public get ruleIndex(): number { return TrinoSqlParser.RULE_query; }
-	// @Override
 	public enterRule(listener: TrinoSqlListener): void {
-		if (listener.enterQuery) {
-			listener.enterQuery(this);
+		if (listener.enterQueryStatement) {
+			listener.enterQueryStatement(this);
 		}
 	}
 	// @Override
 	public exitRule(listener: TrinoSqlListener): void {
-		if (listener.exitQuery) {
-			listener.exitQuery(this);
+		if (listener.exitQueryStatement) {
+			listener.exitQueryStatement(this);
 		}
 	}
 	// @Override
 	public accept<Result>(visitor: TrinoSqlVisitor<Result>): Result {
-		if (visitor.visitQuery) {
-			return visitor.visitQuery(this);
+		if (visitor.visitQueryStatement) {
+			return visitor.visitQueryStatement(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

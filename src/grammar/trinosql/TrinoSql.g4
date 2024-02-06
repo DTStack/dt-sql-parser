@@ -174,7 +174,7 @@ statement
     ;
 
 query
-    : with? queryNoWith
+    : with? queryNoWith # queryStatement
     ;
 
 with
