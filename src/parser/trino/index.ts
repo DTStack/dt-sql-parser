@@ -1,15 +1,14 @@
 import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
-import { TrinoSqlLexer } from '../lib/trinosql/TrinoSqlLexer';
-import {
-    TrinoSqlParser,
-    ProgramContext,
-    SingleStatementContext,
-} from '../lib/trinosql/TrinoSqlParser';
-import { TrinoSqlListener } from '../lib/trinosql/TrinoSqlListener';
-import BasicParser from './common/basicParser';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from './common/basic-parser-types';
-import { StmtContextType } from './common/entityCollector';
+import { TrinoSqlLexer } from '../../lib/trinosql/TrinoSqlLexer';
+import { TrinoSqlParser, ProgramContext } from '../../lib/trinosql/TrinoSqlParser';
+import BasicParser from '../common/basicParser';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
+import { StmtContextType } from '../common/entityCollector';
+import TrinoSqlSplitListener from './trinoSplitListener';
+import TrinoEntityCollector from './trinoEntityCollector';
+
+export { TrinoSqlSplitListener, TrinoEntityCollector };
 
 export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -126,22 +125,5 @@ export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext,
             syntax: originalSyntaxSuggestions,
             keywords,
         };
-    }
-}
-
-export class TrinoSqlSplitListener implements TrinoSqlListener {
-    private _statementsContext: SingleStatementContext[] = [];
-
-    exitSingleStatement = (ctx: SingleStatementContext) => {
-        this._statementsContext.push(ctx);
-    };
-
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
-
-    get statementsContext() {
-        return this._statementsContext;
     }
 }
