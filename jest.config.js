@@ -17,13 +17,13 @@ module.exports = {
     clearMocks: true,
 
     // Indicates whether the coverage information should be collected while executing the test
-    collectCoverage: true,
+    collectCoverage: false,
 
     // An array of glob patterns indicating a set of files for which coverage information should be collected
     // collectCoverageFrom: undefined,
 
     // The directory where Jest should output its coverage files
-    coverageDirectory: 'coverage',
+    // coverageDirectory: 'coverage',
 
     // An array of regexp pattern strings used to skip coverage collection
     // coveragePathIgnorePatterns: [
@@ -76,7 +76,7 @@ module.exports = {
     // ],
 
     // An array of file extensions your modules use
-    moduleFileExtensions: ['js', 'mjs', 'cjs', 'jsx', 'ts', 'tsx', 'json', 'node'],
+    moduleFileExtensions: ['js', 'mjs', 'ts'],
 
     // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
     moduleNameMapper: {
@@ -166,10 +166,11 @@ module.exports = {
     // A map from regular expressions to paths to transformers
     transform: {
         '\\.[jt]sx?$': ['@swc/jest'],
+        '\\.mjs$': ['@swc/jest'],
     },
 
     // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-    extensionsToTreatAsEsm: ['.ts', '.tsx'],
+    extensionsToTreatAsEsm: ['.ts'],
     // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
     // unmockedModulePathPatterns: undefined,
 
@@ -181,4 +182,6 @@ module.exports = {
 
     // Whether to use watchman for file crawling
     // watchman: true
+
+    transformIgnorePatterns: ['dist/', '<rootDir>/node_modules/.pnpm/(?!(antlr4ng|antlr4-c3)@)'],
 };

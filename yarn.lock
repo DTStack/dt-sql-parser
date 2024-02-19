@@ -1157,27 +1157,27 @@ antlr-format-cli@^1.2.1:
     glob "10.3.10"
     ts-json-schema-generator "1.4.0"
 
-antlr4-c3@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.npmmirror.com/antlr4-c3/-/antlr4-c3-3.1.1.tgz#f3d579e17c925d9e3cc984ed0ecb5095fce1611f"
-  integrity sha512-S7DixV12kxWexTkQYGvooCgHYU5AjF74oYio+ZNgm0XN3EzxDY3J6Si9GprQ4KksvgWwK//EgZnL/26WB+bOpw==
+antlr4-c3@3.3.6:
+  version "3.3.6"
+  resolved "https://registry.npmmirror.com/antlr4-c3/-/antlr4-c3-3.3.6.tgz#ac40f9e3b875e2411ab0ffddbf7bf96ed63e1bbe"
+  integrity sha512-gheQXG0acgFWKEqfHUxT1bC0tA/wxuy+F6452yhAkPEwkAAYZJWan3VNpvzAe1Fpg3IRiZn1vCRVur+O8MBHCQ==
   dependencies:
-    antlr4ts "0.5.0-alpha.4"
+    antlr4ng "2.0.10"
+
+antlr4ng-cli@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmmirror.com/antlr4ng-cli/-/antlr4ng-cli-1.0.7.tgz#af99ae8533c2b7e7b735fef3787c02d6adbd3f4f"
+  integrity sha512-qN2FsDBmLvsQcA5CWTrPz8I8gNXeS1fgXBBhI78VyxBSBV/EJgqy8ks6IDTC9jyugpl40csCQ4sL5K4i2YZ/2w==
+
+antlr4ng@2.0.10:
+  version "2.0.10"
+  resolved "https://registry.npmmirror.com/antlr4ng/-/antlr4ng-2.0.10.tgz#950a68499a13ab8a8aa088676b9adca9f71586b6"
+  integrity sha512-cDXmkjum5TSgtgKyKtNN3Zk8ebXeZXOHS7e5pIAnyuKdAQB1r/EzJl+1Vro5JdJCWfgtZ2IqJ3KNvRNuCMjgmQ==
 
 antlr4ng@2.0.2:
   version "2.0.2"
   resolved "https://registry.npmmirror.com/antlr4ng/-/antlr4ng-2.0.2.tgz#31d224cc45e578b78ef77fccf9316d133d7cc81c"
   integrity sha512-Fhs3AvhoGigRt3RpHw0wGA7n03j9BpskH9yCUViNB7NtKuCA+imy2orEZ8qcgPG98f7IryEPYlG9sx99f3ZOyw==
-
-antlr4ts-cli@^0.5.0-alpha.4:
-  version "0.5.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/antlr4ts-cli/-/antlr4ts-cli-0.5.0-alpha.4.tgz#f3bfc37f10131e78d7b981c397a2aaa0450b67f6"
-  integrity sha512-lVPVBTA2CVHRYILSKilL6Jd4hAumhSZZWA7UbQNQrmaSSj7dPmmYaN4bOmZG79cOy0lS00i4LY68JZZjZMWVrw==
-
-antlr4ts@0.5.0-alpha.4:
-  version "0.5.0-alpha.4"
-  resolved "https://registry.npmmirror.com/antlr4ts/-/antlr4ts-0.5.0-alpha.4.tgz#71702865a87478ed0b40c0709f422cf14d51652a"
-  integrity sha512-WPQDt1B74OfPv/IMS2ekXAKkTZIHl88uMetg6q3OTqgFxZ/dxDXI0EWLyZid/1Pe6hTftyg5N7gel5wNAGxXyQ==
 
 anymatch@^3.0.3:
   version "3.1.3"
