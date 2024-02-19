@@ -1,6 +1,4 @@
-import { Parser } from "antlr4ts/Parser";
-import { TokenStream } from "antlr4ts/TokenStream";
-
+import { Parser, TokenStream } from "antlr4ng";
 export default abstract class PlSqlBaseParser extends Parser {
 
     private _isVersion10: boolean = false;
