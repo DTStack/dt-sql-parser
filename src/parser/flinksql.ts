@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { FlinkSqlLexer } from '../lib/flinksql/FlinkSqlLexer';
 import {
@@ -139,7 +139,10 @@ export class FlinkSqlSplitListener implements FlinkSqlParserListener {
         this._statementsContext.push(ctx);
     };
 
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 
     get statementsContext() {
         return this._statementsContext;

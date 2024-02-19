@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { ImpalaSqlLexer } from '../lib/impala/ImpalaSqlLexer';
 import {
@@ -135,7 +135,10 @@ export class ImpalaSqlSplitListener implements ImpalaSqlParserListener {
         this._statementContext.push(ctx);
     };
 
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 
     get statementsContext() {
         return this._statementContext;

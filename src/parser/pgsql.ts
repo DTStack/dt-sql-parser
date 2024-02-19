@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { PostgreSQLLexer } from '../lib/pgsql/PostgreSQLLexer';
 import { PostgreSQLParser, ProgramContext, SingleStmtContext } from '../lib/pgsql/PostgreSQLParser';
@@ -152,7 +152,10 @@ export class PgSqlSplitListener implements PostgreSQLParserListener {
         this._statementsContext.push(ctx);
     };
 
-    enterSingleStmt = (ctx: SingleStmtContext) => {};
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 
     get statementsContext() {
         return this._statementsContext;
