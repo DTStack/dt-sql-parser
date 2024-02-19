@@ -1,6 +1,6 @@
-import { ParseTreeListener } from 'antlr4ts/tree/ParseTreeListener';
+import { ParseTreeListener } from 'antlr4ng';
 import HiveSQL from 'src/parser/hive';
-import { ProgramContext } from 'src/lib/hive/HiveSqlParser';
+import { ProgramContext, SelectItemContext } from 'src/lib/hive/HiveSqlParser';
 import { HiveSqlParserListener } from 'src/lib/hive/HiveSqlParserListener';
 
 describe('HiveSQL Listener Tests', () => {
@@ -12,14 +12,18 @@ describe('HiveSQL Listener Tests', () => {
 
         let result = '';
         class MyListener implements HiveSqlParserListener {
-            enterSelectItem(ctx) {
-                result = ctx.text;
+            enterSelectItem(ctx: SelectItemContext) {
+                result = ctx.getText();
             }
+            visitTerminal() {}
+            visitErrorNode() {}
+            enterEveryRule() {}
+            exitEveryRule() {}
         }
         const listenTableName = new MyListener();
 
         await parser.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
-        expect(result).toBe(expectTableName.toUpperCase());
+        expect(result).toBe(expectTableName);
     });
     test('Listener enterCreateTable', async () => {
         const sql = `drop table table_name;`;
@@ -27,13 +31,18 @@ describe('HiveSQL Listener Tests', () => {
         let result = '';
         class MyListener implements HiveSqlParserListener {
             enterDropTableStatement(ctx) {
-                result = ctx.text;
+                result = ctx.getText();
             }
+
+            visitTerminal() {}
+            visitErrorNode() {}
+            enterEveryRule() {}
+            exitEveryRule() {}
         }
         const listenTableName = new MyListener();
 
         await parser.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
-        expect(result).toBe('DROPTABLETABLE_NAME');
+        expect(result).toBe('droptabletable_name');
     });
 
     test('Split sql listener', async () => {

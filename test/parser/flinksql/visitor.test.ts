@@ -1,6 +1,7 @@
 import FlinkSQL from 'src/parser/flinksql';
 import { FlinkSqlParserVisitor } from 'src/lib/flinksql/FlinkSqlParserVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ng';
+import { TableExpressionContext } from 'src/lib/flinksql/FlinkSqlParser';
 
 describe('Flink SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -8,7 +9,7 @@ describe('Flink SQL Visitor Tests', () => {
     const parser = new FlinkSQL();
 
     const parseTree = parser.parse(sql, (error) => {
-        console.log('Parse error:', error);
+        console.error('Parse error:', error);
     });
 
     test('Visitor visitTableName', () => {
@@ -20,9 +21,9 @@ describe('Flink SQL Visitor Tests', () => {
             protected defaultResult() {
                 return result;
             }
-            visitTableExpression = (ctx): void => {
-                result = ctx.text.toLowerCase();
-            };
+            visitTableExpression(ctx: TableExpressionContext) {
+                result = ctx.getText().toLowerCase();
+            }
         }
         const visitor: any = new MyVisitor();
         visitor.visit(parseTree);

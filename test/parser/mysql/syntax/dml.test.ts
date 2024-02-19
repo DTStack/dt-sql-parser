@@ -33,7 +33,7 @@ describe('MySQL DML Syntax Tests', () => {
             it(sql, () => {
                 const result = parser.validate(sql);
                 if (result.length) {
-                    console.log(result, `\nPlease check sql: ${sql}`);
+                    console.error(result, `\nPlease check sql: ${sql}`);
                 }
                 expect(result.length).toBe(0);
             });

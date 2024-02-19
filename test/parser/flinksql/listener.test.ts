@@ -1,4 +1,4 @@
-import { ParseTreeListener } from 'antlr4ts/tree/ParseTreeListener';
+import { ErrorNode, ParseTreeListener, ParserRuleContext, TerminalNode } from 'antlr4ng';
 import FlinkSQL from 'src/parser/flinksql';
 import { FlinkSqlParserListener } from 'src/lib/flinksql/FlinkSqlParserListener';
 import { TableExpressionContext } from 'src/lib/flinksql/FlinkSqlParser';
@@ -14,12 +14,16 @@ describe('Flink SQL Listener Tests', () => {
         let result = '';
         class MyListener implements FlinkSqlParserListener {
             enterTableExpression = (ctx: TableExpressionContext): void => {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             };
+            visitTerminal(node: TerminalNode): void {}
+            visitErrorNode(node: ErrorNode): void {}
+            enterEveryRule(node: ParserRuleContext): void {}
+            exitEveryRule(node: ParserRuleContext): void {}
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parseTree);
+        await parser.listen(listenTableName, parseTree);
         expect(result).toBe(expectTableName);
     });
 

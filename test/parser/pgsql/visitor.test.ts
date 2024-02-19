@@ -1,5 +1,5 @@
 import PostgresSQL from 'src/parser/pgsql';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { PostgreSQLParserVisitor } from 'src/lib/pgsql/PostgreSQLParserVisitor';
 
 describe('MySQL Visitor Tests', () => {
@@ -8,7 +8,7 @@ describe('MySQL Visitor Tests', () => {
     const parser = new PostgresSQL();
 
     const parseTree = parser.parse(sql, (error) => {
-        console.log('Parse error:', error);
+        console.error('Parse error:', error);
     });
 
     test('Visitor visitTableName', () => {
@@ -22,7 +22,7 @@ describe('MySQL Visitor Tests', () => {
             }
 
             visitTable_ref(ctx) {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             }
         }
         const visitor: any = new MyVisitor();

@@ -1,6 +1,6 @@
 import SparkSQL from 'src/parser/spark';
 import { SparkSqlParserListener } from 'src/lib/spark/SparkSqlParserListener';
-import { ParseTreeListener } from 'antlr4ts/tree/ParseTreeListener';
+import { ParseTreeListener } from 'antlr4ng';
 
 describe('Spark SQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -13,8 +13,12 @@ describe('Spark SQL Listener Tests', () => {
         let result = '';
         class MyListener implements SparkSqlParserListener {
             exitRelationPrimary = (ctx): void => {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             };
+            visitTerminal() {}
+            visitErrorNode() {}
+            enterEveryRule() {}
+            exitEveryRule() {}
         }
         const listenTableName = new MyListener();
 

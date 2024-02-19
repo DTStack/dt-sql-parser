@@ -1,6 +1,6 @@
 import PostgresSQL from 'src/parser/pgsql';
 import { PostgreSQLParserListener } from 'src/lib/pgsql/PostgreSQLParserListener';
-import { ParseTreeListener } from 'antlr4ts/tree/ParseTreeListener';
+import { ParseTreeListener } from 'antlr4ng';
 
 describe('PostgresSQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -13,8 +13,12 @@ describe('PostgresSQL Listener Tests', () => {
         let result = '';
         class MyListener implements PostgreSQLParserListener {
             enterTable_ref(ctx) {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             }
+            visitTerminal() {}
+            visitErrorNode() {}
+            enterEveryRule() {}
+            exitEveryRule() {}
         }
         const listenTableName = new MyListener();
 
