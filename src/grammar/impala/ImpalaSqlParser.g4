@@ -21,6 +21,7 @@ parser grammar ImpalaSqlParser;
 options
 {
     tokenVocab=ImpalaSqlLexer;
+    caseInsensitive= true;
 }
 
 program

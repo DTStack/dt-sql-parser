@@ -23,6 +23,10 @@
 
 grammar TrinoSql;
 
+options {
+    caseInsensitive= true;
+}
+
 tokens {
     DELIMITER
 }
@@ -1231,7 +1235,7 @@ fragment EXPONENT: 'E' [+-]? DIGIT+;
 
 fragment DIGIT: [0-9];
 
-fragment LETTER: [A-Za-z];
+fragment LETTER: [A-Z];
 
 SIMPLE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 

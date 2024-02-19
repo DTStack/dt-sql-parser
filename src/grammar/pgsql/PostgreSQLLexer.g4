@@ -36,6 +36,10 @@
 
 lexer grammar PostgreSQLLexer;
 
+options {
+    caseInsensitive= true;
+}
+
 /**
  * Reference Doc: https://www.postgresql.org/docs/16.1/sql-commands.html
  */
@@ -673,9 +677,9 @@ KW_BUFFER_USAGE_LIMIT : 'BUFFER_USAGE_LIMIT';
 Identifier: IdentifierStartChar IdentifierChar*;
 
 fragment IdentifierStartChar: // these are the valid identifier start characters below 0x7F
-    [a-zA-Z_]
+    [A-Z_]
     | // these are the valid characters from 0x80 to 0xFF
-    [\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]
+    [\u00AA\u00B5\u00BA\u00C0-\u00D6\u00F8-\u00FF]
     | // these are the letters above 0xFF which only need a single UTF-16 code unit
     [\u0100-\uD7FF\uE000-\uFFFF]
     | // letters which require multiple UTF-16 code units
@@ -771,7 +775,7 @@ InvalidUnterminatedBinaryStringConstant: 'B' UnterminatedStringConstant;
 
 HexadecimalStringConstant: UnterminatedHexadecimalStringConstant '\'';
 
-UnterminatedHexadecimalStringConstant: 'X' '\'' [0-9a-fA-F]*;
+UnterminatedHexadecimalStringConstant: 'X' '\'' [0-9A-F]*;
 
 InvalidHexadecimalStringConstant: InvalidUnterminatedHexadecimalStringConstant '\'';
 
@@ -791,7 +795,7 @@ Numeric:
 
 fragment Digits: [0-9]+;
 
-PLSQLVARIABLENAME: ':' [a-zA-Z_] [a-zA-Z_0-9$]*;
+PLSQLVARIABLENAME: ':' [A-Z_] [A-Z_0-9$]*;
 
 PLSQLIDENTIFIER: ':"' ('\\' . | '""' | ~ ('"' | '\\'))* '"';
 //
@@ -861,13 +865,13 @@ fragment EscapeStringText: (
         '\'\''
         | '\\' (
             // two-digit hex escapes are still valid when treated as single-digit escapes
-            'x' [0-9a-fA-F]
-            | 'u' [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F]
-            | 'U' [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F]
+            'x' [0-9A-F]
+            | 'u' [0-9A-F] [0-9A-F] [0-9A-F] [0-9A-F]
+            | 'U' [0-9A-F] [0-9A-F] [0-9A-F] [0-9A-F] [0-9A-F] [0-9A-F] [0-9A-F] [0-9A-F]
             |
             // Any character other than the Unicode escapes can follow a backslash. Some have
             // special meaning, but that doesn't affect the syntax.
-            ~ [xuU]
+            ~ [xu]
         )
         | ~ ['\\]
     )*;

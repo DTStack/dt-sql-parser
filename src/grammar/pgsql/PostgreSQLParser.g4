@@ -41,6 +41,7 @@ parser grammar PostgreSQLParser;
 
 options {
     tokenVocab= PostgreSQLLexer;
+    caseInsensitive= true;
 }
 
 program

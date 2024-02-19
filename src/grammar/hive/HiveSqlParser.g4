@@ -29,6 +29,7 @@ parser grammar HiveSqlParser;
 options
 {
     tokenVocab=HiveSqlLexer;
+    caseInsensitive= true;
 }
 
 program

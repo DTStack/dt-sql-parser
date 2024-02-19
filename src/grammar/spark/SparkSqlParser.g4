@@ -26,6 +26,7 @@ parser grammar SparkSqlParser;
 
 options {
     tokenVocab=SparkSqlLexer;
+    caseInsensitive= true;
 }
 
 program
@@ -128,9 +129,6 @@ statement
     | (KW_DESC | KW_DESCRIBE) KW_QUERY? query
     | KW_COMMENT KW_ON dbSchema dbSchemaName KW_IS comment
     | KW_COMMENT KW_ON KW_TABLE tableName KW_IS comment
-    | KW_REFRESH KW_TABLE tableName
-    | KW_REFRESH KW_FUNCTION functionName
-    | KW_REFRESH (stringLit | .*?)
     | KW_CACHE KW_LAZY? KW_TABLE tableName (KW_OPTIONS options=propertyList)? (KW_AS? query)?
     | KW_UNCACHE KW_TABLE (ifExists)? tableName
     | KW_CLEAR KW_CACHE
@@ -138,6 +136,9 @@ statement
     | KW_TRUNCATE KW_TABLE tableName partitionSpec?
     | (KW_MSCK)? KW_REPAIR KW_TABLE tableName (option=(KW_ADD | KW_DROP | KW_SYNC) KW_PARTITIONS)?
     | op=(KW_ADD | KW_LIST) identifier .*?
+    | KW_REFRESH KW_TABLE tableName
+    | KW_REFRESH KW_FUNCTION functionName
+    | KW_REFRESH (stringLit | .*?)
     | KW_SET KW_ROLE .*?
     | KW_SET KW_TIME KW_ZONE interval
     | KW_SET KW_TIME KW_ZONE timezone
