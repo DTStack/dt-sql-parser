@@ -7,6 +7,7 @@ const features = {
     createDatabase: readSQL(__dirname, 'createDatabase.sql'),
     createFunction: readSQL(__dirname, 'createFunction.sql'),
     createView: readSQL(__dirname, 'createView.sql'),
+    createMaterializedView: readSQL(__dirname, 'createMaterializedView.sql'),
 };
 
 describe('SparkSQL Create Syntax Tests', () => {

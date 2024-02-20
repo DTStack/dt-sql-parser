@@ -51,6 +51,8 @@ import { ViewNameContext } from "./SparkSqlParser";
 import { ColumnNameContext } from "./SparkSqlParser";
 import { ColumnNameSeqContext } from "./SparkSqlParser";
 import { ColumnNameCreateContext } from "./SparkSqlParser";
+import { MaterializedViewNameContext } from "./SparkSqlParser";
+import { MaterializedViewNameCreateContext } from "./SparkSqlParser";
 import { IdentifierReferenceContext } from "./SparkSqlParser";
 import { QueryOrganizationContext } from "./SparkSqlParser";
 import { MultiInsertQueryBodyContext } from "./SparkSqlParser";
@@ -130,6 +132,7 @@ import { MultipartIdentifierPropertyListContext } from "./SparkSqlParser";
 import { MultipartIdentifierPropertyContext } from "./SparkSqlParser";
 import { TableIdentifierContext } from "./SparkSqlParser";
 import { ViewIdentifierContext } from "./SparkSqlParser";
+import { MaterializedViewIdentifierContext } from "./SparkSqlParser";
 import { NamedExpressionContext } from "./SparkSqlParser";
 import { NamedExpressionSeqContext } from "./SparkSqlParser";
 import { PartitionFieldListContext } from "./SparkSqlParser";
@@ -179,6 +182,7 @@ import { ComplexColTypeListContext } from "./SparkSqlParser";
 import { ComplexColTypeContext } from "./SparkSqlParser";
 import { WhenClauseContext } from "./SparkSqlParser";
 import { WindowClauseContext } from "./SparkSqlParser";
+import { ZorderClauseContext } from "./SparkSqlParser";
 import { NamedWindowContext } from "./SparkSqlParser";
 import { WindowSpecContext } from "./SparkSqlParser";
 import { WindowFrameContext } from "./SparkSqlParser";
@@ -546,6 +550,20 @@ export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitColumnNameCreate?: (ctx: ColumnNameCreateContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.materializedViewName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMaterializedViewName?: (ctx: MaterializedViewNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.materializedViewNameCreate`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMaterializedViewNameCreate?: (ctx: MaterializedViewNameCreateContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SparkSqlParser.identifierReference`.
@@ -1101,6 +1119,13 @@ export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	visitViewIdentifier?: (ctx: ViewIdentifierContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `SparkSqlParser.materializedViewIdentifier`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMaterializedViewIdentifier?: (ctx: MaterializedViewIdentifierContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `SparkSqlParser.namedExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1442,6 +1467,13 @@ export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitWindowClause?: (ctx: WindowClauseContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.zorderClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitZorderClause?: (ctx: ZorderClauseContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SparkSqlParser.namedWindow`.

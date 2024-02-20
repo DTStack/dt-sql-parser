@@ -19,7 +19,15 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['TABLE', 'INDEX', 'VIEW', 'DATABASE', 'NAMESPACE', 'SCHEMA']);
+        expect(suggestion).toEqual([
+            'TABLE',
+            'INDEX',
+            'VIEW',
+            'MATERIALIZED',
+            'DATABASE',
+            'NAMESPACE',
+            'SCHEMA',
+        ]);
     });
 
     test('After CREATE', () => {
@@ -36,6 +44,7 @@ describe('Spark SQL Token Suggestion', () => {
             'TEMPORARY',
             'INDEX',
             'ROLE',
+            'MATERIALIZED',
             'FUNCTION',
             'OR',
             'GLOBAL',
@@ -102,6 +111,7 @@ describe('Spark SQL Token Suggestion', () => {
             'INDEX',
             'ROLE',
             'FUNCTION',
+            'MATERIALIZED',
             'VIEW',
             'TABLE',
             'DATABASE',
@@ -157,6 +167,7 @@ describe('Spark SQL Token Suggestion', () => {
             'PRINCIPALS',
             'ROLE',
             'GRANT',
+            'MATERIALIZED',
             'CATALOGS',
             'FUNCTIONS',
             'ALL',

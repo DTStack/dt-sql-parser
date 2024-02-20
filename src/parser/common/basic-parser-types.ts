@@ -29,6 +29,10 @@ export enum SyntaxContextType {
     VIEW = 'view',
     /** view name path that will be created */
     VIEW_CREATE = 'viewCreate',
+    /** materialized view name path, such as db.mv */
+    MATERIALIZED_VIEW = 'materializedView',
+    /** materialized view name that will be created */
+    MATERIALIZED_VIEW_CREATE = 'materializedViewCreate',
     /** function name */
     FUNCTION = 'function',
     /** function name that will be created */

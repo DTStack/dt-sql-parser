@@ -32,6 +32,8 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
         SparkSqlParser.RULE_functionNameCreate,
         SparkSqlParser.RULE_columnName,
         SparkSqlParser.RULE_columnNameCreate,
+        SparkSqlParser.RULE_materializedViewName,
+        SparkSqlParser.RULE_materializedViewNameCreate,
     ]);
 
     protected get splitListener() {
@@ -95,6 +97,14 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
                 }
                 case SparkSqlParser.RULE_columnNameCreate: {
                     syntaxContextType = SyntaxContextType.COLUMN_CREATE;
+                    break;
+                }
+                case SparkSqlParser.RULE_materializedViewName: {
+                    syntaxContextType = SyntaxContextType.MATERIALIZED_VIEW;
+                    break;
+                }
+                case SparkSqlParser.RULE_materializedViewNameCreate: {
+                    syntaxContextType = SyntaxContextType.MATERIALIZED_VIEW_CREATE;
                     break;
                 }
                 default:

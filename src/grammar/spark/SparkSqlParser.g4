@@ -92,8 +92,11 @@ statement
     )* KW_PURGE?
     | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET locationSpec
     | KW_ALTER KW_TABLE tableName KW_RECOVER KW_PARTITIONS
+    | KW_ALTER KW_MATERIALIZED KW_VIEW materializedViewName (KW_ENABLE | KW_DISABLE) KW_REWRITE
+    | KW_ALTER KW_MATERIALIZED KW_VIEW materializedViewName KW_SET KW_TBLPROPERTIES propertyList
     | KW_DROP KW_TABLE (ifExists)? tableName KW_PURGE?
     | KW_DROP KW_VIEW (ifExists)? viewName
+    | KW_DROP KW_MATERIALIZED KW_VIEW (ifExists)? materializedViewName
     | KW_CREATE (KW_OR KW_REPLACE)? (KW_GLOBAL? KW_TEMPORARY)? KW_VIEW (ifNotExists)? viewNameCreate identifierCommentList? (
         commentSpec
         | (KW_PARTITIONED KW_ON identifierList)
@@ -106,6 +109,19 @@ statement
     | KW_CREATE (KW_OR KW_REPLACE)? KW_TEMPORARY? KW_FUNCTION (ifNotExists)? functionNameCreate KW_AS className=stringLit (
         KW_USING resource (COMMA resource)*
     )?
+    |
+    // Self developed materialized view syntax by dtstack, spark not support now.
+    KW_CREATE KW_MATERIALIZED KW_VIEW (ifNotExists)? materializedViewNameCreate tableProvider? (
+        (KW_OPTIONS options=propertyList)
+        | (KW_PARTITIONED KW_BY partitioning=partitionFieldList)
+        | skewSpec
+        | bucketSpec
+        | rowFormat
+        | createFileFormat
+        | locationSpec
+        | commentSpec
+        | (KW_TBLPROPERTIES tableProps=propertyList)
+    )* KW_AS query
     | KW_DROP KW_TEMPORARY? KW_FUNCTION (ifExists)? functionName
     | KW_DECLARE (KW_OR KW_REPLACE)? KW_VARIABLE? functionName dataType? variableDefaultExpression?
     | KW_DROP KW_TEMPORARY KW_VARIABLE (ifExists)? (tableName | viewName | functionName)
@@ -122,6 +138,10 @@ statement
     | KW_SHOW KW_CREATE KW_TABLE tableName (KW_AS KW_SERDE)?
     | KW_SHOW KW_CURRENT dbSchema
     | KW_SHOW KW_CATALOGS (KW_LIKE? pattern=stringLit)?
+    | KW_SHOW KW_MATERIALIZED KW_VIEWS ((KW_FROM | KW_IN) multipartIdentifier)? (
+        KW_LIKE? pattern=stringLit
+    )?
+    | KW_SHOW KW_CREATE KW_MATERIALIZED KW_VIEWS materializedViewName (KW_AS KW_SERDE)?
     | (KW_DESC | KW_DESCRIBE) KW_FUNCTION KW_EXTENDED? describeFuncName
     | (KW_DESC | KW_DESCRIBE) KW_DATABASE KW_EXTENDED? dbSchemaName
     | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)? tableName partitionSpec? describeColName?
@@ -131,6 +151,7 @@ statement
     | KW_REFRESH KW_TABLE tableName
     | KW_REFRESH KW_FUNCTION functionName
     | KW_REFRESH (stringLit | .*?)
+    | KW_REFRESH KW_MATERIALIZED KW_VIEW materializedViewName
     | KW_CACHE KW_LAZY? KW_TABLE tableName (KW_OPTIONS options=propertyList)? (KW_AS? query)?
     | KW_UNCACHE KW_TABLE (ifExists)? tableName
     | KW_CLEAR KW_CACHE
@@ -154,6 +175,7 @@ statement
         KW_USING indexType=identifier
     )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)?
     | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName
+    | KW_OPTIMIZE multipartIdentifier whereClause? zorderClause
     | unsupportedHiveNativeCommands .*?
     ;
 
@@ -425,6 +447,14 @@ columnNameSeq
 
 columnNameCreate
     : errorCapturingIdentifier
+    ;
+
+materializedViewName
+    : materializedViewIdentifier
+    ;
+
+materializedViewNameCreate
+    : materializedViewIdentifier
     ;
 
 identifierReference
@@ -855,6 +885,10 @@ viewIdentifier
     : (db=errorCapturingIdentifier DOT)? view=errorCapturingIdentifier
     ;
 
+materializedViewIdentifier
+    : (db=errorCapturingIdentifier DOT)? materializedView=errorCapturingIdentifier
+    ;
+
 namedExpression
     : (columnName | expression) (KW_AS? (name=errorCapturingIdentifier | identifierList))?
     ;
@@ -1231,6 +1265,10 @@ whenClause
 
 windowClause
     : KW_WINDOW namedWindow (COMMA namedWindow)*
+    ;
+
+zorderClause
+    : KW_ZORDER KW_BY order+=multipartIdentifier (',' order+=multipartIdentifier)*
     ;
 
 namedWindow
@@ -1847,6 +1885,7 @@ nonReserved
     | KW_OF
     | KW_OFFSET
     | KW_ONLY
+    | KW_OPTIMIZE
     | KW_OPTION
     | KW_OPTIONS
     | KW_OR
@@ -1986,5 +2025,6 @@ nonReserved
     | KW_YEAR
     | KW_YEARS
     | KW_ZONE
+    | KW_ZORDER
     //--DEFAULT-NON-RESERVED-END
     ;
