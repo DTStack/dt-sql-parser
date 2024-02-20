@@ -6745,7 +6745,7 @@ export class TrinoSqlParser extends antlr.Parser {
         }
         return localContext;
     }
-    public predicate(value: ParserRuleContext): PredicateContext {
+    public predicate(value: antlr.ParserRuleContext): PredicateContext {
         let localContext = new PredicateContext(this.context, this.state, value);
         this.enterRule(localContext, 106, TrinoSqlParser.RULE_predicate);
         let _la: number;
@@ -18900,8 +18900,8 @@ export class LogicalBinaryContext extends BooleanExpressionContext {
 
 
 export class PredicateContext extends antlr.ParserRuleContext {
-    public value: ParserRuleContext;
-    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number, value: ParserRuleContext) {
+    public value: antlr.ParserRuleContext;
+    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number, value: antlr.ParserRuleContext) {
         super(parent, invokingState);
         this.value = value;
     }
