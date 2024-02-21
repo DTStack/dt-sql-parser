@@ -1,23 +1,21 @@
 /**
-   Licensed to the Apache Software Foundation (ASF) under one or more
-   contributor license agreements.  See the NOTICE file distributed with
-   this work for additional information regarding copyright ownership.
-   The ASF licenses this file to You under the Apache License, Version 2.0
-   (the "License"); you may not use this file except in compliance with
-   the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-*/
+ Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.
+ See the NOTICE file distributed with this work for additional information regarding copyright
+ ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License. You may obtain a copy of the
+ License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software distributed under the License
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ implied. See the License for the specific language governing permissions and limitations under the
+ License.
+ */
 
 /**
- * This file is an adaptation of antlr/grammars-v4's sql/hive/v4/HiveParser.g4 grammar.
- * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/hive/v4/HiveParser.g4
+ * This file is an adaptation of antlr/grammars-v4's sql/hive/v4/HiveParser.g4 grammar. Reference:
+ * https://github.com/antlr/grammars-v4/blob/master/sql/hive/v4/HiveParser.g4
  */
 
 // $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
@@ -1095,7 +1093,10 @@ fromStatement
     ;
 
 singleFromStatement
-    : fromClause b+=body+
+    : fromClause insertClause selectClause lateralView? whereClause? groupByClause? havingClause? window_clause? qualifyClause? orderByClause?
+        clusterByClause? distributeByClause? sortByClause? limitClause? # fromInsertStmt
+    | fromClause selectClause lateralView? whereClause? groupByClause? havingClause? window_clause? qualifyClause? orderByClause? clusterByClause?
+        distributeByClause? sortByClause? limitClause? # fromSelectStmt
     ;
 
 /*
@@ -1105,8 +1106,8 @@ The valuesClause rule below ensures that the parse tree for
 very similar to the tree for "insert into table FOO select a,b from BAR".
 */
 regularBody
-    : i=insertClause s=selectStatement
-    | selectStatement
+    : i=insertClause s=selectStatement # insertStmt
+    | selectStatement                  # selectStmt
     ;
 
 atomSelectStatement
@@ -1125,13 +1126,6 @@ setOpSelectStatement
 
 selectStatementWithCTE
     : w=withClause? selectStatement
-    ;
-
-body
-    : insertClause selectClause lateralView? whereClause? groupByClause? havingClause? window_clause? qualifyClause? orderByClause? clusterByClause?
-        distributeByClause? sortByClause? limitClause?
-    | selectClause lateralView? whereClause? groupByClause? havingClause? window_clause? qualifyClause? orderByClause? clusterByClause?
-        distributeByClause? sortByClause? limitClause?
     ;
 
 insertClause
@@ -1667,7 +1661,7 @@ dropDataConnectorStatement
 
 tableAllColumns
     : STAR
-    | tableOrView DOT STAR
+    | id_ DOT STAR
     ;
 
 defaultValue

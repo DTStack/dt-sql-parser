@@ -1,11 +1,15 @@
 import { Token } from 'antlr4ts';
 import { CandidatesCollection } from 'antlr4-c3';
-import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
-import { HiveSqlParser, ProgramContext, StatementContext } from '../lib/hive/HiveSqlParser';
-import BasicParser from './common/basicParser';
-import { HiveSqlParserListener } from '../lib/hive/HiveSqlParserListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
-import { StmtContextType } from './common/entityCollector';
+import { HiveSqlLexer } from '../../lib/hive/HiveSqlLexer';
+import { HiveSqlParser, ProgramContext } from '../../lib/hive/HiveSqlParser';
+import BasicParser from '../common/basicParser';
+
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
+import { StmtContextType } from '../common/entityCollector';
+import { HiveSqlSplitListener } from './hiveSplitListener';
+import HiveEntityCollector from './hiveEntityCollector';
+
+export { HiveEntityCollector, HiveSqlSplitListener };
 
 export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, HiveSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -121,19 +125,5 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
             syntax: originalSyntaxSuggestions,
             keywords,
         };
-    }
-}
-
-export class HiveSqlSplitListener implements HiveSqlParserListener {
-    private _statementContext: StatementContext[] = [];
-
-    exitStatement = (ctx: StatementContext) => {
-        this._statementContext.push(ctx);
-    };
-
-    enterStatement = (ctx: StatementContext) => {};
-
-    get statementsContext() {
-        return this._statementContext;
     }
 }
