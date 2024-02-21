@@ -51,8 +51,6 @@ import { ViewNameContext } from "./SparkSqlParser";
 import { ColumnNameContext } from "./SparkSqlParser";
 import { ColumnNameSeqContext } from "./SparkSqlParser";
 import { ColumnNameCreateContext } from "./SparkSqlParser";
-import { MaterializedViewNameContext } from "./SparkSqlParser";
-import { MaterializedViewNameCreateContext } from "./SparkSqlParser";
 import { IdentifierReferenceContext } from "./SparkSqlParser";
 import { QueryOrganizationContext } from "./SparkSqlParser";
 import { MultiInsertQueryBodyContext } from "./SparkSqlParser";
@@ -132,7 +130,6 @@ import { MultipartIdentifierPropertyListContext } from "./SparkSqlParser";
 import { MultipartIdentifierPropertyContext } from "./SparkSqlParser";
 import { TableIdentifierContext } from "./SparkSqlParser";
 import { ViewIdentifierContext } from "./SparkSqlParser";
-import { MaterializedViewIdentifierContext } from "./SparkSqlParser";
 import { NamedExpressionContext } from "./SparkSqlParser";
 import { NamedExpressionSeqContext } from "./SparkSqlParser";
 import { PartitionFieldListContext } from "./SparkSqlParser";
@@ -739,28 +736,6 @@ export interface SparkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColumnNameCreate?: (ctx: ColumnNameCreateContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `SparkSqlParser.materializedViewName`.
-	 * @param ctx the parse tree
-	 */
-	enterMaterializedViewName?: (ctx: MaterializedViewNameContext) => void;
-	/**
-	 * Exit a parse tree produced by `SparkSqlParser.materializedViewName`.
-	 * @param ctx the parse tree
-	 */
-	exitMaterializedViewName?: (ctx: MaterializedViewNameContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `SparkSqlParser.materializedViewNameCreate`.
-	 * @param ctx the parse tree
-	 */
-	enterMaterializedViewNameCreate?: (ctx: MaterializedViewNameCreateContext) => void;
-	/**
-	 * Exit a parse tree produced by `SparkSqlParser.materializedViewNameCreate`.
-	 * @param ctx the parse tree
-	 */
-	exitMaterializedViewNameCreate?: (ctx: MaterializedViewNameCreateContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SparkSqlParser.identifierReference`.
@@ -1630,17 +1605,6 @@ export interface SparkSqlParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitViewIdentifier?: (ctx: ViewIdentifierContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `SparkSqlParser.materializedViewIdentifier`.
-	 * @param ctx the parse tree
-	 */
-	enterMaterializedViewIdentifier?: (ctx: MaterializedViewIdentifierContext) => void;
-	/**
-	 * Exit a parse tree produced by `SparkSqlParser.materializedViewIdentifier`.
-	 * @param ctx the parse tree
-	 */
-	exitMaterializedViewIdentifier?: (ctx: MaterializedViewIdentifierContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `SparkSqlParser.namedExpression`.
