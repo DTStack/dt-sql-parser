@@ -4,12 +4,13 @@ import { readSQL } from 'test/helper';
 const parser = new SparkSQL();
 
 const features = {
-    alertDatabase: readSQL(__dirname, 'alertDatabase.sql'),
-    alertTable: readSQL(__dirname, 'alertTable.sql'),
-    alertView: readSQL(__dirname, 'alertView.sql'),
+    alterDatabase: readSQL(__dirname, 'alterDatabase.sql'),
+    altertTable: readSQL(__dirname, 'alterTable.sql'),
+    alterView: readSQL(__dirname, 'alterView.sql'),
+    alterMaterializedView: readSQL(__dirname, 'alterMaterializedView.sql'),
 };
 
-describe('SparkSQL Alert Syntax Tests', () => {
+describe('SparkSQL Alter Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {

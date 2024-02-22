@@ -141,7 +141,7 @@ statement
     | KW_SHOW KW_MATERIALIZED KW_VIEWS ((KW_FROM | KW_IN) db_name=dbSchemaName)? (
         KW_LIKE? pattern=stringLit
     )?
-    | KW_SHOW KW_CREATE KW_MATERIALIZED KW_VIEWS viewName (KW_AS KW_SERDE)?
+    | KW_SHOW KW_CREATE KW_MATERIALIZED KW_VIEW viewName (KW_AS KW_SERDE)?
     | (KW_DESC | KW_DESCRIBE) KW_FUNCTION KW_EXTENDED? describeFuncName
     | (KW_DESC | KW_DESCRIBE) KW_DATABASE KW_EXTENDED? dbSchemaName
     | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)? tableName partitionSpec? describeColName?
@@ -175,7 +175,7 @@ statement
         KW_USING indexType=identifier
     )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)?
     | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName
-    | KW_OPTIMIZE multipartIdentifier whereClause? zorderClause
+    | KW_OPTIMIZE tableName whereClause? zorderClause
     | unsupportedHiveNativeCommands .*?
     ;
 
@@ -1256,7 +1256,7 @@ windowClause
     ;
 
 zorderClause
-    : KW_ZORDER KW_BY order+=multipartIdentifier (COMMA order+=multipartIdentifier)*
+    : KW_ZORDER KW_BY columnNameSeq
     ;
 
 namedWindow
