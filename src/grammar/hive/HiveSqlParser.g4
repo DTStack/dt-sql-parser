@@ -1660,8 +1660,7 @@ dropDataConnectorStatement
     ;
 
 tableAllColumns
-    : STAR
-    | id_ DOT STAR
+    : (id_ DOT)* STAR
     ;
 
 defaultValue
