@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { HiveSqlLexer } from '../lib/hive/HiveSqlLexer';
 import { HiveSqlParser, ProgramContext, StatementContext } from '../lib/hive/HiveSqlParser';
@@ -130,7 +130,10 @@ export class HiveSqlSplitListener implements HiveSqlParserListener {
         this._statementContext.push(ctx);
     };
 
-    enterStatement = (ctx: StatementContext) => {};
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 
     get statementsContext() {
         return this._statementContext;

@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { SparkSqlLexer } from '../lib/spark/SparkSqlLexer';
 import {
@@ -135,7 +135,10 @@ export class SparkSqlSplitListener implements SparkSqlParserListener {
         this._statementsContext.push(ctx);
     };
 
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 
     get statementsContext() {
         return this._statementsContext;

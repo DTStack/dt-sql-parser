@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { TrinoSqlLexer } from '../lib/trinosql/TrinoSqlLexer';
 import {
@@ -134,6 +134,11 @@ export class TrinoSqlSplitListener implements TrinoSqlListener {
     exitSingleStatement = (ctx: SingleStatementContext) => {
         this._statementsContext.push(ctx);
     };
+
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 
     get statementsContext() {
         return this._statementsContext;
