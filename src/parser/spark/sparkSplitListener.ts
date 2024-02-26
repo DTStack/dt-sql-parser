@@ -14,4 +14,8 @@ export default class SparkSqlSplitListener implements SparkSqlParserListener {
     get statementsContext() {
         return this._statementsContext;
     }
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 }

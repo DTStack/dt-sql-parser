@@ -2,6 +2,10 @@ import { SingleStatementContext } from '../../lib/mysql/MySqlParser';
 import { MySqlParserListener } from '../../lib/mysql/MySqlParserListener';
 
 export default class MysqlSplitListener implements MySqlParserListener {
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
     private _statementsContext: SingleStatementContext[] = [];
 
     exitSingleStatement = (ctx: SingleStatementContext) => {

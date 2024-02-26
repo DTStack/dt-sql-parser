@@ -23,6 +23,11 @@ import EntityCollector, {
 } from '../common/entityCollector';
 
 export default class HiveEntityCollector extends EntityCollector implements HiveSqlParserListener {
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
+
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import TrinoSQL from 'src/parser/trino';
 import { TrinoSqlSplitListener, TrinoEntityCollector } from 'src/parser/trino';
-import { ParseTreeListener } from 'antlr4ts/tree';
+import { ParseTreeListener } from 'antlr4ng';
 import { TrinoSqlListener } from 'src/lib/trinosql/TrinoSqlListener';
 import { EntityContextType } from 'src/parser/common/basic-parser-types';
 import { StmtContextType } from 'src/parser/common/entityCollector';

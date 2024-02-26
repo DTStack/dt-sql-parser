@@ -11,4 +11,9 @@ export default class TrinoSqlSplitListener implements TrinoSqlListener {
     get statementsContext() {
         return this._statementsContext;
     }
+
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 }

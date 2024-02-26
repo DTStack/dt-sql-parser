@@ -24,6 +24,10 @@ export default class ImpalaEntityCollector
     extends EntityCollector
     implements ImpalaSqlParserListener
 {
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]

@@ -1,4 +1,4 @@
-import { ParserRuleContext } from 'antlr4ts';
+import { ParserRuleContext } from 'antlr4ng';
 import { EntityContextType } from './basic-parser-types';
 import { WordPosition, TextPosition } from './textAndWord';
 import { ctxToText, ctxToWord } from './textAndWord';

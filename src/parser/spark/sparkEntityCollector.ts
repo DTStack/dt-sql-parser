@@ -29,6 +29,10 @@ export default class SparkEntityCollector
     extends EntityCollector
     implements SparkSqlParserListener
 {
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]

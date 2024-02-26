@@ -6,7 +6,7 @@ import { StmtContextType } from 'src/parser/common/entityCollector';
 import ImpalaSQL from 'src/parser/impala';
 import { ImpalaSqlParserListener } from 'src/lib/impala/ImpalaSqlParserListener';
 import ImpalaEntityCollector from 'src/parser/impala/impalaEntityCollector';
-import { ParseTreeListener } from 'antlr4ts/tree';
+import { ParseTreeListener } from 'antlr4ng';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
 

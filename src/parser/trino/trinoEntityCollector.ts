@@ -24,6 +24,10 @@ import EntityCollector, {
 } from '../common/entityCollector';
 
 export default class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]

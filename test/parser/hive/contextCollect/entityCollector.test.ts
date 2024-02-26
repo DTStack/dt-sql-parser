@@ -1,4 +1,4 @@
-import { ParseTreeListener } from 'antlr4ts/tree';
+import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
 import { HiveSqlParserListener } from 'src/lib/hive/HiveSqlParserListener';

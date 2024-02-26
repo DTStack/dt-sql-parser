@@ -13,4 +13,9 @@ export class HiveSqlSplitListener implements HiveSqlParserListener {
     get statementsContext() {
         return this._statementContext;
     }
+
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 }

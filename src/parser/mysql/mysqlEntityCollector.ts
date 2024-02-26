@@ -24,6 +24,10 @@ import EntityCollector, {
 } from '../common/entityCollector';
 
 export default class MySqlEntityCollector extends EntityCollector implements MySqlParserListener {
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]
