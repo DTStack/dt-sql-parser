@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { PlSqlLexer } from '../lib/plsql/PlSqlLexer';
 import { PlSqlParser, ProgramContext } from '../lib/plsql/PlSqlParser';

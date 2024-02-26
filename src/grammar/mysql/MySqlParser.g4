@@ -35,6 +35,7 @@ parser grammar MySqlParser;
 
 options {
     tokenVocab= MySqlLexer;
+    caseInsensitive= true;
 }
 
 // Top Level Description

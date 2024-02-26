@@ -1,4 +1,4 @@
-import { Lexer } from "antlr4ts/Lexer";
+import { Lexer } from "antlr4ng";
 
 export default abstract class PlSqlBaseLexer extends Lexer {
 

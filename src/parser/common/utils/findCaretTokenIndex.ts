@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CaretPosition } from '../basic-parser-types';
 
 /**
@@ -15,15 +15,11 @@ export function findCaretTokenIndex(caretPosition: CaretPosition, allTokens: Tok
     while (left <= right) {
         const mid = left + ((right - left) >> 1);
         const token = allTokens[mid];
-        if (
-            token.line > caretLine ||
-            (token.line === caretLine && token.charPositionInLine + 1 >= caretCol)
-        ) {
+        if (token.line > caretLine || (token.line === caretLine && token.column + 1 >= caretCol)) {
             right = mid - 1;
         } else if (
             token.line < caretLine ||
-            (token.line === caretLine &&
-                token.charPositionInLine + token.text.length + 1 < caretCol)
+            (token.line === caretLine && token.column + token.text.length + 1 < caretCol)
         ) {
             left = mid + 1;
         } else {

@@ -1,4 +1,4 @@
-export { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+export { AbstractParseTreeVisitor } from 'antlr4ng';
 
 export {
     MySQL,

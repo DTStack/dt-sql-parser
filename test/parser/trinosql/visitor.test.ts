@@ -1,6 +1,6 @@
 import TrinoSQL from 'src/parser/trinosql';
 import { TrinoSqlVisitor } from 'src/lib/trinosql/TrinoSqlVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 describe('trino SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -8,7 +8,7 @@ describe('trino SQL Visitor Tests', () => {
     const parser = new TrinoSQL();
 
     const parseTree = parser.parse(sql, (error) => {
-        console.log('Parse error:', error);
+        console.error('Parse error:', error);
     });
 
     test('Visitor visitTableName', () => {
@@ -18,7 +18,7 @@ describe('trino SQL Visitor Tests', () => {
                 return result;
             }
             visitTableName = (ctx): void => {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             };
         }
         const visitor: any = new MyVisitor();

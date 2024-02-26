@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ts';
+import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { MySqlLexer } from '../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext, SingleStatementContext } from '../lib/mysql/MySqlParser';
@@ -130,7 +130,10 @@ export class MysqlSplitListener implements MySqlParserListener {
         this._statementsContext.push(ctx);
     };
 
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
+    visitTerminal() {}
+    visitErrorNode() {}
+    enterEveryRule() {}
+    exitEveryRule() {}
 
     get statementsContext() {
         return this._statementsContext;

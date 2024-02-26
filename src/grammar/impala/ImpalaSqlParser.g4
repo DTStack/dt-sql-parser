@@ -21,6 +21,7 @@ parser grammar ImpalaSqlParser;
 options
 {
     tokenVocab=ImpalaSqlLexer;
+    caseInsensitive= true;
 }
 
 program
@@ -873,7 +874,7 @@ booleanExpression
     | left=booleanExpression operator=KW_OR right=booleanExpression  # logicalBinary
     ;
 
-predicate[ParserRuleContext value]
+predicate[antlr.ParserRuleContext value]
     : comparisonOperator right=valueExpression                              # comparison
     | comparisonOperator comparisonQuantifier subQueryRelation              # quantifiedComparison
     | KW_NOT? KW_BETWEEN lower=valueExpression KW_AND upper=valueExpression # between

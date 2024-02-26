@@ -50,7 +50,7 @@ export function benchmark(name: string, fn: Function, times: number = 1): [numbe
     const msg = `Benchmark: ${name} executed ${times} times. Total time: ${totalTime.toFixed(
         2
     )}ms. Average time: ${averageTime.toFixed(2)}ms`;
-    console.log(msg);
+    console.info(msg);
 
     return [totalTime, averageTime, msg];
 }

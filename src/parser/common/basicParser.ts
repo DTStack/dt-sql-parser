@@ -4,10 +4,11 @@ import {
     Token,
     CharStreams,
     CommonTokenStream,
-    CodePointCharStream,
+    CharStream,
     ParserRuleContext,
-} from 'antlr4ts';
-import { ParseTreeWalker, ParseTreeListener } from 'antlr4ts/tree';
+    ParseTreeWalker,
+    ParseTreeListener,
+} from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { findCaretTokenIndex } from './utils/findCaretTokenIndex';
 import {
@@ -38,7 +39,7 @@ export default abstract class BasicParser<
     P extends IParser<PRC> = IParser<PRC>,
 > {
     /** members for cache start */
-    protected _charStreams: CodePointCharStream;
+    protected _charStreams: CharStream;
     protected _lexer: L;
     protected _tokenStream: CommonTokenStream;
     protected _parser: P;
@@ -60,7 +61,7 @@ export default abstract class BasicParser<
      * Create a antlr4 Lexer instance.
      * @param input source string
      */
-    protected abstract createLexerFromCharStream(charStreams: CodePointCharStream): L;
+    protected abstract createLexerFromCharStream(charStreams: CharStream): L;
 
     /**
      * Create Parser by CommonTokenStream
@@ -92,7 +93,7 @@ export default abstract class BasicParser<
      * @param input string
      */
     public createLexer(input: string, errorListener?: ErrorListener<any>) {
-        const charStreams = CharStreams.fromString(input.toUpperCase());
+        const charStreams = CharStreams.fromString(input);
         const lexer = this.createLexerFromCharStream(charStreams);
         if (errorListener) {
             lexer.removeErrorListeners();
@@ -126,7 +127,7 @@ export default abstract class BasicParser<
      */
     public parse(input: string, errorListener?: ErrorListener<any>) {
         const parser = this.createParser(input, errorListener);
-        parser.buildParseTree = true;
+        parser.buildParseTrees = true;
         parser.errorHandler = new ErrorStrategy();
 
         return parser.program();
@@ -139,7 +140,7 @@ export default abstract class BasicParser<
      */
     private createParserWithCache(input: string): P {
         this._parseTree = null;
-        this._charStreams = CharStreams.fromString(input.toUpperCase());
+        this._charStreams = CharStreams.fromString(input);
         this._lexer = this.createLexerFromCharStream(this._charStreams);
 
         this._lexer.removeErrorListeners();
@@ -154,7 +155,7 @@ export default abstract class BasicParser<
         this._tokenStream.fill();
 
         this._parser = this.createParserFromTokenStream(this._tokenStream);
-        this._parser.buildParseTree = true;
+        this._parser.buildParseTrees = true;
         this._parser.errorHandler = new ErrorStrategy();
 
         return this._parser;
@@ -239,13 +240,13 @@ export default abstract class BasicParser<
         const res = splitListener.statementsContext.map((context) => {
             const { start, stop } = context;
             return {
-                startIndex: start.startIndex,
-                endIndex: stop.stopIndex,
+                startIndex: start.start,
+                endIndex: stop.stop,
                 startLine: start.line,
                 endLine: stop.line,
-                startColumn: start.charPositionInLine + 1,
-                endColumn: stop.charPositionInLine + 1 + stop.text.length,
-                text: this._parsedInput.slice(start.startIndex, stop.stopIndex + 1),
+                startColumn: start.column + 1,
+                endColumn: stop.column + 1 + stop.text.length,
+                text: this._parsedInput.slice(start.start, stop.stop + 1),
             };
         });
 
@@ -317,8 +318,8 @@ export default abstract class BasicParser<
             }
 
             // A boundary consisting of the index of the input.
-            const startIndex = startStatement?.start?.startIndex ?? 0;
-            const stopIndex = stopStatement?.stop?.stopIndex ?? input.length - 1;
+            const startIndex = startStatement?.start?.start ?? 0;
+            const stopIndex = stopStatement?.stop?.stop ?? input.length - 1;
 
             /**
              * Save offset of the tokenIndex in the range of input
@@ -340,7 +341,7 @@ export default abstract class BasicParser<
 
             const parser = this.createParserFromTokenStream(tokenStream);
             parser.removeErrorListeners();
-            parser.buildParseTree = true;
+            parser.buildParseTrees = true;
             parser.errorHandler = new ErrorStrategy();
 
             sqlParserIns = parser;
@@ -362,12 +363,12 @@ export default abstract class BasicParser<
             (syntaxCtx) => {
                 const wordRanges: WordRange[] = syntaxCtx.wordRanges.map((token) => {
                     return {
-                        text: this._parsedInput.slice(token.startIndex, token.stopIndex + 1),
-                        startIndex: token.startIndex,
-                        endIndex: token.stopIndex,
+                        text: this._parsedInput.slice(token.start, token.stop + 1),
+                        startIndex: token.start,
+                        endIndex: token.stop,
                         line: token.line,
-                        startColumn: token.charPositionInLine + 1,
-                        stopColumn: token.charPositionInLine + 1 + token.text.length,
+                        startColumn: token.column + 1,
+                        stopColumn: token.column + 1 + token.text.length,
                     };
                 });
                 return {

@@ -1,5 +1,5 @@
 import PLSQL from 'src/parser/plsql';
-import { ParseTreeListener } from 'antlr4ts/tree/ParseTreeListener';
+import { ParseTreeListener } from 'antlr4ng';
 import { PlSqlParserListener } from 'src/lib/plsql/PlSqlParserListener';
 
 describe('PLSQL Listener Tests', () => {
@@ -13,8 +13,12 @@ describe('PLSQL Listener Tests', () => {
         let result = '';
         class MyListener implements PlSqlParserListener {
             enterTable_ref_list = (ctx): void => {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             };
+            visitTerminal() {}
+            visitErrorNode() {}
+            enterEveryRule() {}
+            exitEveryRule() {}
         }
         const listenTableName = new MyListener();
 

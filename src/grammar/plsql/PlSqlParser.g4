@@ -32,6 +32,7 @@ parser grammar PlSqlParser;
 options {
     tokenVocab=PlSqlLexer;
     superClass=PlSqlBaseParser;
+    caseInsensitive= true;
 }
 
 @parser::header {

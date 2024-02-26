@@ -21,9 +21,9 @@ describe('PgSQL ErrorStrategy test', () => {
     //     const statementCount = splitListener.statementsContext.length;
     //     splitListener.statementsContext.map((item, index) => {
     //         if(index !== statementCount-1 && index !== statementCount - 2) {
-    //             expect(item.exception).not.toBe(undefined);
+    //             expect(item.exception).not.toBe(null);
     //         } else {
-    //             expect(item.exception).toBe(undefined);
+    //             expect(item.exception).toBe(null);
     //         }
     //     })
     // });
@@ -38,9 +38,9 @@ describe('PgSQL ErrorStrategy test', () => {
         const statementCount = splitListener.statementsContext.length;
         splitListener.statementsContext.map((item, index) => {
             if (index !== statementCount - 1 && index !== 0) {
-                expect(item.exception).not.toBe(undefined);
+                expect(item.exception).not.toBe(null);
             } else {
-                expect(item.exception).toBe(undefined);
+                expect(item.exception).toBe(null);
             }
         });
     });
@@ -54,9 +54,9 @@ describe('PgSQL ErrorStrategy test', () => {
 
         splitListener.statementsContext.map((item, index) => {
             if (index !== 0 && index !== 1) {
-                expect(item.exception).not.toBe(undefined);
+                expect(item.exception).not.toBe(null);
             } else {
-                expect(item.exception).toBe(undefined);
+                expect(item.exception).toBe(null);
             }
         });
     });

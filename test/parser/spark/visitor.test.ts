@@ -1,6 +1,6 @@
 import SparkSQL from 'src/parser/spark';
 import { SparkSqlParserVisitor } from 'src/lib/spark/SparkSqlParserVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 describe('Spark SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -8,7 +8,7 @@ describe('Spark SQL Visitor Tests', () => {
     const parser = new SparkSQL();
 
     const parseTree = parser.parse(sql, (error) => {
-        console.log('Parse error:', error);
+        console.error('Parse error:', error);
     });
 
     test('Visitor visitRelationPrimary', () => {
@@ -21,7 +21,7 @@ describe('Spark SQL Visitor Tests', () => {
                 return this.result;
             }
             visitRelationPrimary = (ctx): void => {
-                this.result = ctx.text.toLowerCase();
+                this.result = ctx.getText().toLowerCase();
             };
         }
         const visitor = new MyVisitor();

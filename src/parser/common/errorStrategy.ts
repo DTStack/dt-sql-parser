@@ -1,10 +1,12 @@
-import { DefaultErrorStrategy } from 'antlr4ts/DefaultErrorStrategy';
-import { Parser } from 'antlr4ts/Parser';
-import { InputMismatchException } from 'antlr4ts/InputMismatchException';
-import { IntervalSet } from 'antlr4ts/misc/IntervalSet';
-import { ParserRuleContext } from 'antlr4ts/ParserRuleContext';
-import { RecognitionException } from 'antlr4ts/RecognitionException';
-import { Token } from 'antlr4ts/Token';
+import {
+    DefaultErrorStrategy,
+    Parser,
+    InputMismatchException,
+    IntervalSet,
+    ParserRuleContext,
+    RecognitionException,
+    Token,
+} from 'antlr4ng';
 
 /**
  * Base on DefaultErrorStrategy.
@@ -33,7 +35,7 @@ export class ErrorStrategy extends DefaultErrorStrategy {
         if (!this.lastErrorStates) {
             this.lastErrorStates = new IntervalSet();
         }
-        this.lastErrorStates.add(recognizer.state);
+        this.lastErrorStates.addOne(recognizer.state);
         let followSet: IntervalSet = this.getErrorRecoverySet(recognizer);
         this.consumeUntil(recognizer, followSet);
     }
@@ -43,11 +45,7 @@ export class ErrorStrategy extends DefaultErrorStrategy {
         if (this.nextTokensContext === undefined) {
             e = new InputMismatchException(recognizer);
         } else {
-            e = new InputMismatchException(
-                recognizer,
-                this.nextTokensState,
-                this.nextTokensContext
-            );
+            e = new InputMismatchException(recognizer);
         }
 
         // Mark the context as an anomaly

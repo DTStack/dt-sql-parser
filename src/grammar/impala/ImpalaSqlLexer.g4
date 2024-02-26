@@ -27,7 +27,7 @@ THE SOFTWARE.
 lexer grammar ImpalaSqlLexer;
 
 options {
-    caseInsensitive=true;
+    caseInsensitive= true;
 }
 
 KW_ADD               : 'ADD';

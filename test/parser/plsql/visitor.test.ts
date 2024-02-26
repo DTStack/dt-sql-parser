@@ -1,5 +1,5 @@
 import PLSQL from 'src/parser/plsql';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { PlSqlParserVisitor } from 'src/lib/plsql/PlSqlParserVisitor';
 
 describe('PLSQL Visitor Tests', () => {
@@ -16,7 +16,7 @@ describe('PLSQL Visitor Tests', () => {
                 return result;
             }
             visitTable_ref_list = (ctx): void => {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             };
         }
         const visitor: any = new MyVisitor();

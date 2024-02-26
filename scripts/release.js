@@ -53,15 +53,13 @@ function execStandardVersion(res) {
     cmd += ` --tag-prefix ${tagPrefix} `;
     cmd += ' --infile CHANGELOG.md ';
 
-    console.log(`Executing: ${cmd} \n`);
+    console.info(`Executing: ${cmd} \n`);
 
     runCommand(cmd)
         .then(({ message }) => {
-            console.log('Please checkout recent commit, and then');
-            console.log(
-                'Push branch and new tag to github, publish package to npm'
-            );
-            // message && console.log(message)
+            console.info('Please checkout recent commit, and then');
+            console.info('Push branch and new tag to github, publish package to npm');
+            // message && console.info(message)
         })
         .catch(({ error, code }) => {
             code && console.error('Error: process exit code' + code);
