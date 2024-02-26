@@ -11,7 +11,7 @@ const outputPath = path.resolve(__dirname, '../src/lib');
 
 const languageEntries = fs.readdirSync(grammarsPath);
 
-const baseCmd = 'antlr4ts -visitor -listener -Xexact-output-dir -o';
+const baseCmd = 'antlr4ng -Dlanguage=TypeScript -visitor -listener -Xexact-output-dir -o';
 
 function compile(language) {
     const cmd = `${baseCmd} ${outputPath}/${language} ${grammarsPath}/${language}/*.g4`;
@@ -31,7 +31,7 @@ function compile(language) {
             );
         } else {
             cleanComment(language);
-            console.log(chalk.greenBright(`Compile ${language} succeeded!`));
+            console.info(chalk.greenBright(`Compile ${language} succeeded!`));
         }
     });
 }
