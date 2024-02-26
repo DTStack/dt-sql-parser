@@ -453,7 +453,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -470,7 +470,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -487,7 +487,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -504,7 +504,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -521,7 +521,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -538,7 +538,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -555,7 +555,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -572,7 +572,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -589,7 +589,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();

@@ -35,7 +35,7 @@ describe('PgSQL Multiple Statements Syntax Suggestion', () => {
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
         const suggestionVw = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
