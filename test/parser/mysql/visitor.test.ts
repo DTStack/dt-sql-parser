@@ -1,6 +1,6 @@
 import MySQL from 'src/parser/mysql';
 import { MySqlParserVisitor } from 'src/lib/mysql/MySqlParserVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 describe('MySQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -8,7 +8,7 @@ describe('MySQL Visitor Tests', () => {
     const parser = new MySQL();
 
     const parseTree = parser.parse(sql, (error) => {
-        console.log('Parse error:', error);
+        console.error('Parse error:', error);
     });
 
     test('Visitor visitTableName', () => {
@@ -19,7 +19,7 @@ describe('MySQL Visitor Tests', () => {
             }
 
             visitTableName = (ctx): void => {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             };
         }
         const visitor = new MyVisitor();

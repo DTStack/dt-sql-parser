@@ -1,8 +1,8 @@
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 import HiveSQL from 'src/parser/hive';
 import { HiveSqlParserVisitor } from 'src/lib/hive/HiveSqlParserVisitor';
-import { ProgramContext } from 'src/lib/hive/HiveSqlParser';
+import { ProgramContext, TableNameContext } from 'src/lib/hive/HiveSqlParser';
 
 describe('HiveSQL Visitor Tests', () => {
     const expectTableName = 'dm_gis.dlv_addr_tc_count';
@@ -10,7 +10,7 @@ describe('HiveSQL Visitor Tests', () => {
     const parser = new HiveSQL();
 
     const parseTree = parser.parse(sql, (error) => {
-        console.log('Parse error:', error);
+        console.error('Parse error:', error);
     });
 
     test('Visitor visitTableName', () => {
@@ -20,8 +20,8 @@ describe('HiveSQL Visitor Tests', () => {
                 return result;
             }
 
-            visitTableName(ctx) {
-                result = ctx.text.toLowerCase();
+            visitTableName(ctx: TableNameContext) {
+                result = ctx.getText().toLowerCase();
             }
         }
 

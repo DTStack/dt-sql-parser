@@ -1,6 +1,6 @@
 import MySQL from 'src/parser/mysql';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
-import { ParseTreeListener } from 'antlr4ts/tree/ParseTreeListener';
+import { ParseTreeListener } from 'antlr4ng';
 
 describe('MySQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -13,8 +13,12 @@ describe('MySQL Listener Tests', () => {
         let result = '';
         class MyListener implements MySqlParserListener {
             enterTableName = (ctx): void => {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             };
+            visitTerminal() {}
+            visitErrorNode() {}
+            enterEveryRule() {}
+            exitEveryRule() {}
         }
         const listenTableName: any = new MyListener();
 

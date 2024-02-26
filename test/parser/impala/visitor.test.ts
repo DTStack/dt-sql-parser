@@ -1,5 +1,5 @@
 import ImpalaSQL from 'src/parser/impala';
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
+import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { ImpalaSqlParserVisitor } from 'src/lib/impala/ImpalaSqlParserVisitor';
 
 describe('impala SQL Visitor Tests', () => {
@@ -8,7 +8,7 @@ describe('impala SQL Visitor Tests', () => {
     const parser = new ImpalaSQL();
 
     const parseTree = parser.parse(sql, (error) => {
-        console.log('Parse error:', error);
+        console.error('Parse error:', error);
     });
 
     test('Visitor visitTableNamePath', () => {
@@ -21,7 +21,7 @@ describe('impala SQL Visitor Tests', () => {
                 return result;
             }
             visitTableNamePath = (ctx): void => {
-                result = ctx.text.toLowerCase();
+                result = ctx.getText().toLowerCase();
             };
         }
         const visitor: any = new MyVisitor();
