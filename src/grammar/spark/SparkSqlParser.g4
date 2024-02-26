@@ -92,8 +92,11 @@ statement
     )* KW_PURGE?
     | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET locationSpec
     | KW_ALTER KW_TABLE tableName KW_RECOVER KW_PARTITIONS
+    | KW_ALTER KW_MATERIALIZED KW_VIEW viewName (KW_ENABLE | KW_DISABLE) KW_REWRITE
+    | KW_ALTER KW_MATERIALIZED KW_VIEW viewName KW_SET KW_TBLPROPERTIES propertyList
     | KW_DROP KW_TABLE (ifExists)? tableName KW_PURGE?
     | KW_DROP KW_VIEW (ifExists)? viewName
+    | KW_DROP KW_MATERIALIZED KW_VIEW (ifExists)? viewName
     | KW_CREATE (KW_OR KW_REPLACE)? (KW_GLOBAL? KW_TEMPORARY)? KW_VIEW (ifNotExists)? viewNameCreate identifierCommentList? (
         commentSpec
         | (KW_PARTITIONED KW_ON identifierList)
@@ -106,6 +109,19 @@ statement
     | KW_CREATE (KW_OR KW_REPLACE)? KW_TEMPORARY? KW_FUNCTION (ifNotExists)? functionNameCreate KW_AS className=stringLit (
         KW_USING resource (COMMA resource)*
     )?
+    |
+    // Self developed materialized view syntax by dtstack, spark not support now.
+    KW_CREATE KW_MATERIALIZED KW_VIEW (ifNotExists)? viewNameCreate tableProvider? (
+        (KW_OPTIONS options=propertyList)
+        | (KW_PARTITIONED KW_BY partitioning=partitionFieldList)
+        | skewSpec
+        | bucketSpec
+        | rowFormat
+        | createFileFormat
+        | locationSpec
+        | commentSpec
+        | (KW_TBLPROPERTIES tableProps=propertyList)
+    )* KW_AS query
     | KW_DROP KW_TEMPORARY? KW_FUNCTION (ifExists)? functionName
     | KW_DECLARE (KW_OR KW_REPLACE)? KW_VARIABLE? functionName dataType? variableDefaultExpression?
     | KW_DROP KW_TEMPORARY KW_VARIABLE (ifExists)? (tableName | viewName | functionName)
@@ -122,6 +138,10 @@ statement
     | KW_SHOW KW_CREATE KW_TABLE tableName (KW_AS KW_SERDE)?
     | KW_SHOW KW_CURRENT dbSchema
     | KW_SHOW KW_CATALOGS (KW_LIKE? pattern=stringLit)?
+    | KW_SHOW KW_MATERIALIZED KW_VIEWS ((KW_FROM | KW_IN) db_name=dbSchemaName)? (
+        KW_LIKE? pattern=stringLit
+    )?
+    | KW_SHOW KW_CREATE KW_MATERIALIZED KW_VIEW viewName (KW_AS KW_SERDE)?
     | (KW_DESC | KW_DESCRIBE) KW_FUNCTION KW_EXTENDED? describeFuncName
     | (KW_DESC | KW_DESCRIBE) KW_DATABASE KW_EXTENDED? dbSchemaName
     | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)? tableName partitionSpec? describeColName?
@@ -131,6 +151,7 @@ statement
     | KW_REFRESH KW_TABLE tableName
     | KW_REFRESH KW_FUNCTION functionName
     | KW_REFRESH (stringLit | .*?)
+    | KW_REFRESH KW_MATERIALIZED KW_VIEW viewName
     | KW_CACHE KW_LAZY? KW_TABLE tableName (KW_OPTIONS options=propertyList)? (KW_AS? query)?
     | KW_UNCACHE KW_TABLE (ifExists)? tableName
     | KW_CLEAR KW_CACHE
@@ -154,6 +175,7 @@ statement
         KW_USING indexType=identifier
     )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)?
     | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName
+    | KW_OPTIMIZE tableName whereClause? zorderClause
     | unsupportedHiveNativeCommands .*?
     ;
 
@@ -1233,6 +1255,10 @@ windowClause
     : KW_WINDOW namedWindow (COMMA namedWindow)*
     ;
 
+zorderClause
+    : KW_ZORDER KW_BY columnNameSeq
+    ;
+
 namedWindow
     : name=errorCapturingIdentifier KW_AS windowSpec
     ;
@@ -1436,10 +1462,12 @@ ansiNonReserved
     | KW_DFS
     | KW_DIRECTORIES
     | KW_DIRECTORY
+    | KW_DISABLE
     | KW_DISTRIBUTE
     | KW_DIV
     | KW_DOUBLE
     | KW_DROP
+    | KW_ENABLE
     | KW_ESCAPED
     | KW_EXCHANGE
     | KW_EXCLUDE
@@ -1495,6 +1523,7 @@ ansiNonReserved
     | KW_MACRO
     | KW_MAP
     | KW_MATCHED
+    | KW_MATERIALIZED
     | KW_MERGE
     | KW_MICROSECOND
     | KW_MICROSECONDS
@@ -1514,6 +1543,7 @@ ansiNonReserved
     | KW_NULLS
     | KW_NUMERIC
     | KW_OF
+    | KW_OPTIMIZE
     | KW_OPTION
     | KW_OPTIONS
     | KW_OUT
@@ -1549,6 +1579,7 @@ ansiNonReserved
     | KW_RESPECT
     | KW_RESTRICT
     | KW_REVOKE
+    | KW_REWRITE
     | KW_RLIKE
     | KW_REGEXP
     | KW_ROLE
@@ -1632,6 +1663,7 @@ ansiNonReserved
     | KW_YEAR
     | KW_YEARS
     | KW_ZONE
+    | KW_ZORDER
     //--ANSI-NON-RESERVED-END
     ;
 
@@ -1747,12 +1779,14 @@ nonReserved
     | KW_DFS
     | KW_DIRECTORIES
     | KW_DIRECTORY
+    | KW_DISABLE
     | KW_DISTINCT
     | KW_DISTRIBUTE
     | KW_DIV
     | KW_DOUBLE
     | KW_DROP
     | KW_ELSE
+    | KW_ENABLE
     | KW_END
     | KW_ESCAPE
     | KW_ESCAPED
@@ -1824,6 +1858,7 @@ nonReserved
     | KW_MACRO
     | KW_MAP
     | KW_MATCHED
+    | KW_MATERIALIZED
     | KW_MERGE
     | KW_MICROSECOND
     | KW_MICROSECONDS
@@ -1847,6 +1882,7 @@ nonReserved
     | KW_OF
     | KW_OFFSET
     | KW_ONLY
+    | KW_OPTIMIZE
     | KW_OPTION
     | KW_OPTIONS
     | KW_OR
@@ -1890,6 +1926,7 @@ nonReserved
     | KW_RESPECT
     | KW_RESTRICT
     | KW_REVOKE
+    | KW_REWRITE
     | KW_RLIKE
     | KW_REGEXP
     | KW_ROLE
@@ -1986,5 +2023,6 @@ nonReserved
     | KW_YEAR
     | KW_YEARS
     | KW_ZONE
+    | KW_ZORDER
     //--DEFAULT-NON-RESERVED-END
     ;

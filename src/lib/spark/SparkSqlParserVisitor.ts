@@ -179,6 +179,7 @@ import { ComplexColTypeListContext } from "./SparkSqlParser";
 import { ComplexColTypeContext } from "./SparkSqlParser";
 import { WhenClauseContext } from "./SparkSqlParser";
 import { WindowClauseContext } from "./SparkSqlParser";
+import { ZorderClauseContext } from "./SparkSqlParser";
 import { NamedWindowContext } from "./SparkSqlParser";
 import { WindowSpecContext } from "./SparkSqlParser";
 import { WindowFrameContext } from "./SparkSqlParser";
@@ -1442,6 +1443,13 @@ export interface SparkSqlParserVisitor<Result> extends ParseTreeVisitor<Result> 
 	 * @return the visitor result
 	 */
 	visitWindowClause?: (ctx: WindowClauseContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `SparkSqlParser.zorderClause`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitZorderClause?: (ctx: ZorderClauseContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `SparkSqlParser.namedWindow`.

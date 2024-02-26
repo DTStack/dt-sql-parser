@@ -8,6 +8,7 @@ const features = {
     dropFunction: readSQL(__dirname, 'dropFunction.sql'),
     dropTable: readSQL(__dirname, 'dropTable.sql'),
     dropView: readSQL(__dirname, 'dropView.sql'),
+    dropMaterializedView: readSQL(__dirname, 'dropMaterializedView.sql'),
 };
 
 describe('SparkSQL Drop Syntax Tests', () => {
