@@ -25,6 +25,10 @@
 
 lexer grammar SparkSqlLexer;
 
+options {
+    caseInsensitive= true;
+}
+
 @members {
   /**
    * When true, parser should throw ParseException for unclosed bracketed comment.
@@ -469,7 +473,7 @@ fragment EXPONENT: 'E' [+-]? DIGIT+;
 
 fragment DIGIT: [0-9];
 
-fragment LETTER: [A-Za-z];
+fragment LETTER: [A-Z];
 
 SIMPLE_COMMENT: '--' ('\\\n' | ~[\r\n])* '\r'? '\n'? -> channel(HIDDEN);
 

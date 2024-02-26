@@ -27,8 +27,9 @@
 
 lexer grammar HiveSqlLexer;
 
-// unsupported option caseInsensitive in antlr4@4.9
-// options { caseInsensitive = true; }
+options {
+    caseInsensitive= true;
+}
 
 // Keywords
 KW_ABORT                : 'ABORT';
@@ -502,7 +503,7 @@ Identifier: (Letter | Digit) (Letter | Digit | '_')* | QuotedIdentifier | '`' Re
 
 fragment QuotedIdentifier: '`' ('``' | ~'`')* '`';
 
-fragment Letter: 'A' ..'Z' | 'a' ..'z';
+fragment Letter: 'A' ..'Z';
 
 fragment HexDigit: 'A' ..'F';
 

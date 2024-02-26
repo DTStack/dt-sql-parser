@@ -6,6 +6,7 @@ parser grammar FlinkSqlParser;
 
 options {
     tokenVocab=FlinkSqlLexer;
+    caseInsensitive= true;
 }
 
 program

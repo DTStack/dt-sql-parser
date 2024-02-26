@@ -5,6 +5,10 @@
 
 lexer grammar FlinkSqlLexer;
 
+options {
+    caseInsensitive= true;
+}
+
 // SKIP
 
 SPACE         : [ \t\r\n]+                                                         -> channel(HIDDEN);
@@ -585,9 +589,9 @@ ID_LITERAL : ID_LITERAL_FRAG;
 
 fragment JAR_FILE_PARTTARN : '`' ( '\\' . | '``' | ~('`' | '\\'))* '`';
 fragment EXPONENT_NUM_PART : 'E' [-+]? DEC_DIGIT+;
-fragment ID_LITERAL_FRAG   : [A-Z_0-9a-z]*? [A-Z_a-z]+? [A-Z_0-9a-z]*;
+fragment ID_LITERAL_FRAG   : [A-Z_0-9]*? [A-Z_]+? [A-Z_0-9]*;
 fragment DEC_DIGIT         : [0-9];
-fragment DEC_LETTER        : [A-Za-z];
+fragment DEC_LETTER        : [A-Z];
 fragment DQUOTA_STRING     : '"' ( '\\' . | '""' | ~('"' | '\\'))* '"';
 fragment SQUOTA_STRING     : '\'' ('\\' . | '\'\'' | ~('\'' | '\\'))* '\'';
 fragment BIT_STRING_L      : 'B' '\'' [01]+ '\'';

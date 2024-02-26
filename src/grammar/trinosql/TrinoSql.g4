@@ -23,6 +23,10 @@
 
 grammar TrinoSql;
 
+options {
+    caseInsensitive= true;
+}
+
 tokens {
     DELIMITER
 }
@@ -419,7 +423,7 @@ booleanExpression
     ;
 
 // workaround for https://github.com/antlr/antlr4/issues/780
-predicate[ParserRuleContext value]
+predicate[antlr.ParserRuleContext value]
     : comparisonOperator right= valueExpression                                     # comparison
     | comparisonOperator comparisonQuantifier '(' query ')'                         # quantifiedComparison
     | KW_NOT? KW_BETWEEN lower= valueExpression KW_AND upper= valueExpression       # between
@@ -1231,7 +1235,7 @@ fragment EXPONENT: 'E' [+-]? DIGIT+;
 
 fragment DIGIT: [0-9];
 
-fragment LETTER: [A-Za-z];
+fragment LETTER: [A-Z];
 
 SIMPLE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 

@@ -2366,7 +2366,7 @@ BIT_STRING_LIT: 'B' ('\'' [01]* '\'')+;
 //  Rule #284 <HEX_STRING_LIT> - subtoken typecast in <REGULAR_ID>
 //  Lowercase 'x' is a usual addition to the standard
 
-HEX_STRING_LIT : 'X' ('\'' [A-Fa-f0-9]* '\'')+;
+HEX_STRING_LIT : 'X' ('\'' [A-F0-9]* '\'')+;
 DOUBLE_PERIOD  : '..';
 PERIOD         : '.';
 
@@ -2468,10 +2468,8 @@ REMARK_COMMENT:
 PROMPT_MESSAGE: 'PRO' {this.IsNewlineAtPos(-4)}? 'MPT'? (' ' ~('\r' | '\n')*)? NEWLINE_EOF;
 
 // TODO: should starts with newline
-START_CMD
-    //: 'STA' 'RT'? SPACE ~('\r' | '\n')* NEWLINE_EOF
-    : // https://docs.oracle.com/cd/B19306_01/server.102/b14357/ch12002.htm
-    '@' {this.IsNewlineAtPos(-2)}? '@'? ~('\r' | '\n')* NEWLINE_EOF; // https://docs.oracle.com/cd/B19306_01/server.102/b14357/ch12003.htm
+START_CMD: // https://docs.oracle.com/cd/B19306_01/server.102/b14357/ch12002.htm
+    '@'    {this.IsNewlineAtPos(-2)}? '@'? ~('\r' | '\n')* NEWLINE_EOF; // https://docs.oracle.com/cd/B19306_01/server.102/b14357/ch12003.htm
 
 REGULAR_ID: SIMPLE_LETTER (SIMPLE_LETTER | '$' | '_' | '#' | [0-9])*;
 
@@ -2481,7 +2479,7 @@ SPACES: [ \t\r\n]+ -> channel(HIDDEN);
 
 fragment NEWLINE_EOF    : NEWLINE | EOF;
 fragment QUESTION_MARK  : '?';
-fragment SIMPLE_LETTER  : [a-zA-Z];
+fragment SIMPLE_LETTER  : [A-Z];
 fragment FLOAT_FRAGMENT : UNSIGNED_INTEGER* '.'? UNSIGNED_INTEGER+;
 fragment NEWLINE        : '\r'? '\n';
 fragment SPACE          : [ \t];

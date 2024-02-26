@@ -26,6 +26,7 @@ parser grammar SparkSqlParser;
 
 options {
     tokenVocab=SparkSqlLexer;
+    caseInsensitive= true;
 }
 
 program
