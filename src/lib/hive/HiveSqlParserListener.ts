@@ -204,13 +204,14 @@ import { QueryStatementExpressionBodyContext } from "./HiveSqlParser.js";
 import { WithClauseContext } from "./HiveSqlParser.js";
 import { CteStatementContext } from "./HiveSqlParser.js";
 import { FromStatementContext } from "./HiveSqlParser.js";
-import { SingleFromStatementContext } from "./HiveSqlParser.js";
-import { RegularBodyContext } from "./HiveSqlParser.js";
+import { FromInsertStmtContext } from "./HiveSqlParser.js";
+import { FromSelectStmtContext } from "./HiveSqlParser.js";
+import { InsertStmtContext } from "./HiveSqlParser.js";
+import { SelectStmtContext } from "./HiveSqlParser.js";
 import { AtomSelectStatementContext } from "./HiveSqlParser.js";
 import { SelectStatementContext } from "./HiveSqlParser.js";
 import { SetOpSelectStatementContext } from "./HiveSqlParser.js";
 import { SelectStatementWithCTEContext } from "./HiveSqlParser.js";
-import { BodyContext } from "./HiveSqlParser.js";
 import { InsertClauseContext } from "./HiveSqlParser.js";
 import { DestinationContext } from "./HiveSqlParser.js";
 import { LimitClauseContext } from "./HiveSqlParser.js";
@@ -2542,25 +2543,53 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitFromStatement?: (ctx: FromStatementContext) => void;
     /**
-     * Enter a parse tree produced by `HiveSqlParser.singleFromStatement`.
+     * Enter a parse tree produced by the `fromInsertStmt`
+     * labeled alternative in `HiveSqlParser.singleFromStatement`.
      * @param ctx the parse tree
      */
-    enterSingleFromStatement?: (ctx: SingleFromStatementContext) => void;
+    enterFromInsertStmt?: (ctx: FromInsertStmtContext) => void;
     /**
-     * Exit a parse tree produced by `HiveSqlParser.singleFromStatement`.
+     * Exit a parse tree produced by the `fromInsertStmt`
+     * labeled alternative in `HiveSqlParser.singleFromStatement`.
      * @param ctx the parse tree
      */
-    exitSingleFromStatement?: (ctx: SingleFromStatementContext) => void;
+    exitFromInsertStmt?: (ctx: FromInsertStmtContext) => void;
     /**
-     * Enter a parse tree produced by `HiveSqlParser.regularBody`.
+     * Enter a parse tree produced by the `fromSelectStmt`
+     * labeled alternative in `HiveSqlParser.singleFromStatement`.
      * @param ctx the parse tree
      */
-    enterRegularBody?: (ctx: RegularBodyContext) => void;
+    enterFromSelectStmt?: (ctx: FromSelectStmtContext) => void;
     /**
-     * Exit a parse tree produced by `HiveSqlParser.regularBody`.
+     * Exit a parse tree produced by the `fromSelectStmt`
+     * labeled alternative in `HiveSqlParser.singleFromStatement`.
      * @param ctx the parse tree
      */
-    exitRegularBody?: (ctx: RegularBodyContext) => void;
+    exitFromSelectStmt?: (ctx: FromSelectStmtContext) => void;
+    /**
+     * Enter a parse tree produced by the `insertStmt`
+     * labeled alternative in `HiveSqlParser.regularBody`.
+     * @param ctx the parse tree
+     */
+    enterInsertStmt?: (ctx: InsertStmtContext) => void;
+    /**
+     * Exit a parse tree produced by the `insertStmt`
+     * labeled alternative in `HiveSqlParser.regularBody`.
+     * @param ctx the parse tree
+     */
+    exitInsertStmt?: (ctx: InsertStmtContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectStmt`
+     * labeled alternative in `HiveSqlParser.regularBody`.
+     * @param ctx the parse tree
+     */
+    enterSelectStmt?: (ctx: SelectStmtContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectStmt`
+     * labeled alternative in `HiveSqlParser.regularBody`.
+     * @param ctx the parse tree
+     */
+    exitSelectStmt?: (ctx: SelectStmtContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.atomSelectStatement`.
      * @param ctx the parse tree
@@ -2601,16 +2630,6 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSelectStatementWithCTE?: (ctx: SelectStatementWithCTEContext) => void;
-    /**
-     * Enter a parse tree produced by `HiveSqlParser.body`.
-     * @param ctx the parse tree
-     */
-    enterBody?: (ctx: BodyContext) => void;
-    /**
-     * Exit a parse tree produced by `HiveSqlParser.body`.
-     * @param ctx the parse tree
-     */
-    exitBody?: (ctx: BodyContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.insertClause`.
      * @param ctx the parse tree

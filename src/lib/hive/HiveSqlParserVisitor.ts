@@ -204,13 +204,14 @@ import { QueryStatementExpressionBodyContext } from "./HiveSqlParser.js";
 import { WithClauseContext } from "./HiveSqlParser.js";
 import { CteStatementContext } from "./HiveSqlParser.js";
 import { FromStatementContext } from "./HiveSqlParser.js";
-import { SingleFromStatementContext } from "./HiveSqlParser.js";
-import { RegularBodyContext } from "./HiveSqlParser.js";
+import { FromInsertStmtContext } from "./HiveSqlParser.js";
+import { FromSelectStmtContext } from "./HiveSqlParser.js";
+import { InsertStmtContext } from "./HiveSqlParser.js";
+import { SelectStmtContext } from "./HiveSqlParser.js";
 import { AtomSelectStatementContext } from "./HiveSqlParser.js";
 import { SelectStatementContext } from "./HiveSqlParser.js";
 import { SetOpSelectStatementContext } from "./HiveSqlParser.js";
 import { SelectStatementWithCTEContext } from "./HiveSqlParser.js";
-import { BodyContext } from "./HiveSqlParser.js";
 import { InsertClauseContext } from "./HiveSqlParser.js";
 import { DestinationContext } from "./HiveSqlParser.js";
 import { LimitClauseContext } from "./HiveSqlParser.js";
@@ -1741,17 +1742,33 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitFromStatement?: (ctx: FromStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.singleFromStatement`.
+     * Visit a parse tree produced by the `fromInsertStmt`
+     * labeled alternative in `HiveSqlParser.singleFromStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSingleFromStatement?: (ctx: SingleFromStatementContext) => Result;
+    visitFromInsertStmt?: (ctx: FromInsertStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.regularBody`.
+     * Visit a parse tree produced by the `fromSelectStmt`
+     * labeled alternative in `HiveSqlParser.singleFromStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitRegularBody?: (ctx: RegularBodyContext) => Result;
+    visitFromSelectStmt?: (ctx: FromSelectStmtContext) => Result;
+    /**
+     * Visit a parse tree produced by the `insertStmt`
+     * labeled alternative in `HiveSqlParser.regularBody`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitInsertStmt?: (ctx: InsertStmtContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectStmt`
+     * labeled alternative in `HiveSqlParser.regularBody`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectStmt?: (ctx: SelectStmtContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.atomSelectStatement`.
      * @param ctx the parse tree
@@ -1776,12 +1793,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitSelectStatementWithCTE?: (ctx: SelectStatementWithCTEContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.body`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitBody?: (ctx: BodyContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.insertClause`.
      * @param ctx the parse tree
