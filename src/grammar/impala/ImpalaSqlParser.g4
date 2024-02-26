@@ -75,7 +75,7 @@ createStatement
 createTableSelect
     : KW_CREATE KW_EXTERNAL? KW_TABLE ifNotExists? tableNameCreate (
         LPAREN columnDefinition (COMMA columnDefinition)* (COMMA constraintSpecification)? RPAREN
-    )? (KW_PARTITIONED KW_BY (partitionedBy | createColumnAliases))? createCommonItem (
+    )? (KW_PARTITIONED KW_BY (partitionedBy | columnAliases))? createCommonItem (
         KW_AS queryStatement
     )?
     ;
@@ -582,8 +582,8 @@ assignmentItem
     ;
 
 viewColumns
-    : LPAREN columnNamePath (KW_COMMENT stringLiteral)? (
-        COMMA identifier (KW_COMMENT stringLiteral)?
+    : LPAREN columnNamePathCreate (KW_COMMENT stringLiteral)? (
+        COMMA columnNamePathCreate (KW_COMMENT stringLiteral)?
     )* RPAREN
     ;
 
@@ -610,6 +610,10 @@ foreignKeySpecification
     )? (KW_RELY)?
     ;
 
+columnSpec
+    : columnNamePath type (KW_COMMENT stringLiteral)?
+    ;
+
 columnDefinition
     : columnNamePathCreate type (KW_COMMENT stringLiteral)?
     ;
@@ -625,7 +629,7 @@ kuduColumnDefinition
     ;
 
 columnSpecWithKudu
-    : columnNamePath type (KW_COMMENT stringLiteral)? (kuduAttributes kuduAttributes*?)?
+    : columnSpec? (kuduAttributes kuduAttributes*?)?
     ;
 
 createColumnSpecWithKudu
@@ -712,7 +716,7 @@ properties
     ;
 
 partitionedBy
-    : LPAREN columnDefinition (COMMA columnDefinition)*? RPAREN
+    : LPAREN columnSpec (COMMA columnSpec)*? RPAREN
     ;
 
 sortedBy
@@ -833,10 +837,6 @@ aliasedRelation
 
 columnAliases
     : LPAREN columnNamePath (COMMA columnNamePath)* RPAREN
-    ;
-
-createColumnAliases
-    : LPAREN columnNamePathCreate (COMMA columnNamePathCreate)* RPAREN
     ;
 
 relationPrimary

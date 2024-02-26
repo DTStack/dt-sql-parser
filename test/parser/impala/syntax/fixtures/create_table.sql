@@ -179,3 +179,7 @@ CREATE TABLE pk(id INT, PRIMARY KEY(id) DISABLE, NOVALIDATE, RELY);
 
 CREATE TABLE fk(id INT, col1 INT, col2 STRING, PRIMARY KEY(id),
   FOREIGN KEY(col1, col2) REFERENCES pk(col1, col2));
+
+CREATE TABLE new_Table like old_table;
+
+CREATE TABLE new_Table like old_table partitioned by (year int) SORT BY (last_name, state);

@@ -430,7 +430,7 @@ describe('Impala SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();

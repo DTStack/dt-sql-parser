@@ -109,6 +109,7 @@ import { QueryStatementContext } from "./ImpalaSqlParser.js";
 import { WithContext } from "./ImpalaSqlParser.js";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParser.js";
 import { ForeignKeySpecificationContext } from "./ImpalaSqlParser.js";
+import { ColumnSpecContext } from "./ImpalaSqlParser.js";
 import { ColumnDefinitionContext } from "./ImpalaSqlParser.js";
 import { KuduTableElementContext } from "./ImpalaSqlParser.js";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParser.js";
@@ -155,7 +156,6 @@ import { SampledRelationContext } from "./ImpalaSqlParser.js";
 import { SampleTypeContext } from "./ImpalaSqlParser.js";
 import { AliasedRelationContext } from "./ImpalaSqlParser.js";
 import { ColumnAliasesContext } from "./ImpalaSqlParser.js";
-import { CreateColumnAliasesContext } from "./ImpalaSqlParser.js";
 import { RelationPrimaryContext } from "./ImpalaSqlParser.js";
 import { SubQueryRelationContext } from "./ImpalaSqlParser.js";
 import { UnnestContext } from "./ImpalaSqlParser.js";
@@ -890,6 +890,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitForeignKeySpecification?: (ctx: ForeignKeySpecificationContext) => Result;
     /**
+     * Visit a parse tree produced by `ImpalaSqlParser.columnSpec`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnSpec?: (ctx: ColumnSpecContext) => Result;
+    /**
      * Visit a parse tree produced by `ImpalaSqlParser.columnDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1176,12 +1182,6 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitColumnAliases?: (ctx: ColumnAliasesContext) => Result;
-    /**
-     * Visit a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.relationPrimary`.
      * @param ctx the parse tree
