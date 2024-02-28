@@ -27,7 +27,7 @@ import { CreategroupstmtContext } from "./PostgreSQLParser.js";
 import { AltergroupstmtContext } from "./PostgreSQLParser.js";
 import { Add_dropContext } from "./PostgreSQLParser.js";
 import { CreateschemastmtContext } from "./PostgreSQLParser.js";
-import { Schema_name_createContext } from "./PostgreSQLParser.js";
+import { SchemaNameCreateContext } from "./PostgreSQLParser.js";
 import { OptschemaeltlistContext } from "./PostgreSQLParser.js";
 import { Schema_stmtContext } from "./PostgreSQLParser.js";
 import { VariablesetstmtContext } from "./PostgreSQLParser.js";
@@ -97,7 +97,7 @@ import { Copy_generic_opt_elemContext } from "./PostgreSQLParser.js";
 import { Copy_generic_opt_argContext } from "./PostgreSQLParser.js";
 import { Copy_generic_opt_arg_listContext } from "./PostgreSQLParser.js";
 import { Copy_generic_opt_arg_list_itemContext } from "./PostgreSQLParser.js";
-import { CreatestmtContext } from "./PostgreSQLParser.js";
+import { ColumnCreateTableContext } from "./PostgreSQLParser.js";
 import { OpttempContext } from "./PostgreSQLParser.js";
 import { Table_column_listContext } from "./PostgreSQLParser.js";
 import { OpttableelementlistContext } from "./PostgreSQLParser.js";
@@ -106,8 +106,7 @@ import { TableelementlistContext } from "./PostgreSQLParser.js";
 import { TypedtableelementlistContext } from "./PostgreSQLParser.js";
 import { TableelementContext } from "./PostgreSQLParser.js";
 import { TypedtableelementContext } from "./PostgreSQLParser.js";
-import { ColumnDefCluaseContext } from "./PostgreSQLParser.js";
-import { ColumnDefContext } from "./PostgreSQLParser.js";
+import { Column_defContext } from "./PostgreSQLParser.js";
 import { CompressionCluaseContext } from "./PostgreSQLParser.js";
 import { StorageCluaseContext } from "./PostgreSQLParser.js";
 import { ColumnOptionsContext } from "./PostgreSQLParser.js";
@@ -125,7 +124,9 @@ import { TableconstraintContext } from "./PostgreSQLParser.js";
 import { ConstraintelemContext } from "./PostgreSQLParser.js";
 import { Opt_no_inheritContext } from "./PostgreSQLParser.js";
 import { Opt_column_listContext } from "./PostgreSQLParser.js";
-import { ColumnlistContext } from "./PostgreSQLParser.js";
+import { Create_opt_column_listContext } from "./PostgreSQLParser.js";
+import { Column_listContext } from "./PostgreSQLParser.js";
+import { Create_column_listContext } from "./PostgreSQLParser.js";
 import { Opt_c_includeContext } from "./PostgreSQLParser.js";
 import { Key_matchContext } from "./PostgreSQLParser.js";
 import { ExclusionconstraintlistContext } from "./PostgreSQLParser.js";
@@ -149,10 +150,10 @@ import { OptconstablespaceContext } from "./PostgreSQLParser.js";
 import { ExistingindexContext } from "./PostgreSQLParser.js";
 import { CreatestatsstmtContext } from "./PostgreSQLParser.js";
 import { AlterstatsstmtContext } from "./PostgreSQLParser.js";
-import { CreateasstmtContext } from "./PostgreSQLParser.js";
+import { QueryCreateTableContext } from "./PostgreSQLParser.js";
 import { Create_as_targetContext } from "./PostgreSQLParser.js";
 import { Opt_with_dataContext } from "./PostgreSQLParser.js";
-import { CreatematviewstmtContext } from "./PostgreSQLParser.js";
+import { CreateMaterializedViewContext } from "./PostgreSQLParser.js";
 import { Create_mv_targetContext } from "./PostgreSQLParser.js";
 import { OptnologContext } from "./PostgreSQLParser.js";
 import { RefreshmatviewstmtContext } from "./PostgreSQLParser.js";
@@ -199,7 +200,8 @@ import { Opt_typeContext } from "./PostgreSQLParser.js";
 import { Foreign_server_versionContext } from "./PostgreSQLParser.js";
 import { Opt_foreign_server_versionContext } from "./PostgreSQLParser.js";
 import { AlterforeignserverstmtContext } from "./PostgreSQLParser.js";
-import { CreateforeigntablestmtContext } from "./PostgreSQLParser.js";
+import { CreateForeignTableContext } from "./PostgreSQLParser.js";
+import { CreatePartitionForeignTableContext } from "./PostgreSQLParser.js";
 import { ImportforeignschemastmtContext } from "./PostgreSQLParser.js";
 import { Import_qualification_typeContext } from "./PostgreSQLParser.js";
 import { Import_qualificationContext } from "./PostgreSQLParser.js";
@@ -423,10 +425,10 @@ import { Transaction_mode_itemContext } from "./PostgreSQLParser.js";
 import { Transaction_mode_listContext } from "./PostgreSQLParser.js";
 import { Transaction_mode_list_or_emptyContext } from "./PostgreSQLParser.js";
 import { Opt_transaction_chainContext } from "./PostgreSQLParser.js";
-import { ViewstmtContext } from "./PostgreSQLParser.js";
+import { CreateViewContext } from "./PostgreSQLParser.js";
 import { Opt_check_optionContext } from "./PostgreSQLParser.js";
 import { LoadstmtContext } from "./PostgreSQLParser.js";
-import { CreatedbstmtContext } from "./PostgreSQLParser.js";
+import { CreateDatabaseContext } from "./PostgreSQLParser.js";
 import { Createdb_opt_listContext } from "./PostgreSQLParser.js";
 import { Createdb_opt_itemsContext } from "./PostgreSQLParser.js";
 import { Createdb_opt_itemContext } from "./PostgreSQLParser.js";
@@ -479,7 +481,7 @@ import { PreparablestmtContext } from "./PostgreSQLParser.js";
 import { ExecutestmtContext } from "./PostgreSQLParser.js";
 import { Execute_param_clauseContext } from "./PostgreSQLParser.js";
 import { DeallocatestmtContext } from "./PostgreSQLParser.js";
-import { InsertstmtContext } from "./PostgreSQLParser.js";
+import { InsertStatementContext } from "./PostgreSQLParser.js";
 import { Insert_targetContext } from "./PostgreSQLParser.js";
 import { Insert_restContext } from "./PostgreSQLParser.js";
 import { Override_kindContext } from "./PostgreSQLParser.js";
@@ -504,7 +506,7 @@ import { DeclarecursorstmtContext } from "./PostgreSQLParser.js";
 import { Cursor_nameContext } from "./PostgreSQLParser.js";
 import { Cursor_optionsContext } from "./PostgreSQLParser.js";
 import { Opt_holdContext } from "./PostgreSQLParser.js";
-import { SelectstmtContext } from "./PostgreSQLParser.js";
+import { SelectStatementContext } from "./PostgreSQLParser.js";
 import { Select_with_parensContext } from "./PostgreSQLParser.js";
 import { Select_no_parensContext } from "./PostgreSQLParser.js";
 import { Select_clauseContext } from "./PostgreSQLParser.js";
@@ -710,29 +712,29 @@ import { Table_name_listContext } from "./PostgreSQLParser.js";
 import { Schema_name_listContext } from "./PostgreSQLParser.js";
 import { Database_nameListContext } from "./PostgreSQLParser.js";
 import { Procedure_name_listContext } from "./PostgreSQLParser.js";
-import { Tablespace_name_createContext } from "./PostgreSQLParser.js";
-import { Tablespace_nameContext } from "./PostgreSQLParser.js";
-import { Table_name_createContext } from "./PostgreSQLParser.js";
-import { Table_nameContext } from "./PostgreSQLParser.js";
-import { View_name_createContext } from "./PostgreSQLParser.js";
-import { View_nameContext } from "./PostgreSQLParser.js";
+import { TablespaceNameCreateContext } from "./PostgreSQLParser.js";
+import { TablespaceNameContext } from "./PostgreSQLParser.js";
+import { TableNameCreateContext } from "./PostgreSQLParser.js";
+import { TableNameContext } from "./PostgreSQLParser.js";
+import { ViewNameCreateContext } from "./PostgreSQLParser.js";
+import { ViewNameContext } from "./PostgreSQLParser.js";
 import { Qualified_nameContext } from "./PostgreSQLParser.js";
 import { Tablespace_name_listContext } from "./PostgreSQLParser.js";
 import { Name_listContext } from "./PostgreSQLParser.js";
-import { Database_name_createContext } from "./PostgreSQLParser.js";
-import { Database_nameContext } from "./PostgreSQLParser.js";
-import { Schema_nameContext } from "./PostgreSQLParser.js";
-import { Routine_name_createContext } from "./PostgreSQLParser.js";
-import { Routine_nameContext } from "./PostgreSQLParser.js";
-import { Procedure_nameContext } from "./PostgreSQLParser.js";
-import { Procedure_name_createContext } from "./PostgreSQLParser.js";
-import { Column_nameContext } from "./PostgreSQLParser.js";
-import { Column_name_createContext } from "./PostgreSQLParser.js";
+import { DatabaseNameCreateContext } from "./PostgreSQLParser.js";
+import { DatabaseNameContext } from "./PostgreSQLParser.js";
+import { SchemaNameContext } from "./PostgreSQLParser.js";
+import { RoutineNameCreateContext } from "./PostgreSQLParser.js";
+import { RoutineNameContext } from "./PostgreSQLParser.js";
+import { ProcedureNameContext } from "./PostgreSQLParser.js";
+import { ProcedureNameCreateContext } from "./PostgreSQLParser.js";
+import { ColumnNameContext } from "./PostgreSQLParser.js";
+import { ColumnNameCreateContext } from "./PostgreSQLParser.js";
 import { NameContext } from "./PostgreSQLParser.js";
 import { Attr_nameContext } from "./PostgreSQLParser.js";
 import { File_nameContext } from "./PostgreSQLParser.js";
-import { Function_name_createContext } from "./PostgreSQLParser.js";
-import { Function_nameContext } from "./PostgreSQLParser.js";
+import { FunctionNameCreateContext } from "./PostgreSQLParser.js";
+import { FunctionNameContext } from "./PostgreSQLParser.js";
 import { Usual_nameContext } from "./PostgreSQLParser.js";
 import { AexprconstContext } from "./PostgreSQLParser.js";
 import { XconstContext } from "./PostgreSQLParser.js";
@@ -1133,15 +1135,17 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitCreateschemastmt?: (ctx: CreateschemastmtContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.schema_name_create`.
+     * Enter a parse tree produced by the `schemaNameCreate`
+     * labeled alternative in `PostgreSQLParser.schema_name_create`.
      * @param ctx the parse tree
      */
-    enterSchema_name_create?: (ctx: Schema_name_createContext) => void;
+    enterSchemaNameCreate?: (ctx: SchemaNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.schema_name_create`.
+     * Exit a parse tree produced by the `schemaNameCreate`
+     * labeled alternative in `PostgreSQLParser.schema_name_create`.
      * @param ctx the parse tree
      */
-    exitSchema_name_create?: (ctx: Schema_name_createContext) => void;
+    exitSchemaNameCreate?: (ctx: SchemaNameCreateContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.optschemaeltlist`.
      * @param ctx the parse tree
@@ -1833,15 +1837,17 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitCopy_generic_opt_arg_list_item?: (ctx: Copy_generic_opt_arg_list_itemContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.createstmt`.
+     * Enter a parse tree produced by the `columnCreateTable`
+     * labeled alternative in `PostgreSQLParser.createstmt`.
      * @param ctx the parse tree
      */
-    enterCreatestmt?: (ctx: CreatestmtContext) => void;
+    enterColumnCreateTable?: (ctx: ColumnCreateTableContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.createstmt`.
+     * Exit a parse tree produced by the `columnCreateTable`
+     * labeled alternative in `PostgreSQLParser.createstmt`.
      * @param ctx the parse tree
      */
-    exitCreatestmt?: (ctx: CreatestmtContext) => void;
+    exitColumnCreateTable?: (ctx: ColumnCreateTableContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.opttemp`.
      * @param ctx the parse tree
@@ -1923,25 +1929,15 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitTypedtableelement?: (ctx: TypedtableelementContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.columnDefCluase`.
+     * Enter a parse tree produced by `PostgreSQLParser.column_def`.
      * @param ctx the parse tree
      */
-    enterColumnDefCluase?: (ctx: ColumnDefCluaseContext) => void;
+    enterColumn_def?: (ctx: Column_defContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.columnDefCluase`.
+     * Exit a parse tree produced by `PostgreSQLParser.column_def`.
      * @param ctx the parse tree
      */
-    exitColumnDefCluase?: (ctx: ColumnDefCluaseContext) => void;
-    /**
-     * Enter a parse tree produced by `PostgreSQLParser.columnDef`.
-     * @param ctx the parse tree
-     */
-    enterColumnDef?: (ctx: ColumnDefContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSQLParser.columnDef`.
-     * @param ctx the parse tree
-     */
-    exitColumnDef?: (ctx: ColumnDefContext) => void;
+    exitColumn_def?: (ctx: Column_defContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.compressionCluase`.
      * @param ctx the parse tree
@@ -2113,15 +2109,35 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitOpt_column_list?: (ctx: Opt_column_listContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.columnlist`.
+     * Enter a parse tree produced by `PostgreSQLParser.create_opt_column_list`.
      * @param ctx the parse tree
      */
-    enterColumnlist?: (ctx: ColumnlistContext) => void;
+    enterCreate_opt_column_list?: (ctx: Create_opt_column_listContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.columnlist`.
+     * Exit a parse tree produced by `PostgreSQLParser.create_opt_column_list`.
      * @param ctx the parse tree
      */
-    exitColumnlist?: (ctx: ColumnlistContext) => void;
+    exitCreate_opt_column_list?: (ctx: Create_opt_column_listContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSQLParser.column_list`.
+     * @param ctx the parse tree
+     */
+    enterColumn_list?: (ctx: Column_listContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSQLParser.column_list`.
+     * @param ctx the parse tree
+     */
+    exitColumn_list?: (ctx: Column_listContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSQLParser.create_column_list`.
+     * @param ctx the parse tree
+     */
+    enterCreate_column_list?: (ctx: Create_column_listContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSQLParser.create_column_list`.
+     * @param ctx the parse tree
+     */
+    exitCreate_column_list?: (ctx: Create_column_listContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.opt_c_include`.
      * @param ctx the parse tree
@@ -2353,15 +2369,17 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitAlterstatsstmt?: (ctx: AlterstatsstmtContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.createasstmt`.
+     * Enter a parse tree produced by the `queryCreateTable`
+     * labeled alternative in `PostgreSQLParser.createasstmt`.
      * @param ctx the parse tree
      */
-    enterCreateasstmt?: (ctx: CreateasstmtContext) => void;
+    enterQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.createasstmt`.
+     * Exit a parse tree produced by the `queryCreateTable`
+     * labeled alternative in `PostgreSQLParser.createasstmt`.
      * @param ctx the parse tree
      */
-    exitCreateasstmt?: (ctx: CreateasstmtContext) => void;
+    exitQueryCreateTable?: (ctx: QueryCreateTableContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.create_as_target`.
      * @param ctx the parse tree
@@ -2383,15 +2401,17 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitOpt_with_data?: (ctx: Opt_with_dataContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.creatematviewstmt`.
+     * Enter a parse tree produced by the `createMaterializedView`
+     * labeled alternative in `PostgreSQLParser.creatematviewstmt`.
      * @param ctx the parse tree
      */
-    enterCreatematviewstmt?: (ctx: CreatematviewstmtContext) => void;
+    enterCreateMaterializedView?: (ctx: CreateMaterializedViewContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.creatematviewstmt`.
+     * Exit a parse tree produced by the `createMaterializedView`
+     * labeled alternative in `PostgreSQLParser.creatematviewstmt`.
      * @param ctx the parse tree
      */
-    exitCreatematviewstmt?: (ctx: CreatematviewstmtContext) => void;
+    exitCreateMaterializedView?: (ctx: CreateMaterializedViewContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.create_mv_target`.
      * @param ctx the parse tree
@@ -2853,15 +2873,29 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitAlterforeignserverstmt?: (ctx: AlterforeignserverstmtContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.createforeigntablestmt`.
+     * Enter a parse tree produced by the `createForeignTable`
+     * labeled alternative in `PostgreSQLParser.createforeigntablestmt`.
      * @param ctx the parse tree
      */
-    enterCreateforeigntablestmt?: (ctx: CreateforeigntablestmtContext) => void;
+    enterCreateForeignTable?: (ctx: CreateForeignTableContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.createforeigntablestmt`.
+     * Exit a parse tree produced by the `createForeignTable`
+     * labeled alternative in `PostgreSQLParser.createforeigntablestmt`.
      * @param ctx the parse tree
      */
-    exitCreateforeigntablestmt?: (ctx: CreateforeigntablestmtContext) => void;
+    exitCreateForeignTable?: (ctx: CreateForeignTableContext) => void;
+    /**
+     * Enter a parse tree produced by the `createPartitionForeignTable`
+     * labeled alternative in `PostgreSQLParser.createforeigntablestmt`.
+     * @param ctx the parse tree
+     */
+    enterCreatePartitionForeignTable?: (ctx: CreatePartitionForeignTableContext) => void;
+    /**
+     * Exit a parse tree produced by the `createPartitionForeignTable`
+     * labeled alternative in `PostgreSQLParser.createforeigntablestmt`.
+     * @param ctx the parse tree
+     */
+    exitCreatePartitionForeignTable?: (ctx: CreatePartitionForeignTableContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.importforeignschemastmt`.
      * @param ctx the parse tree
@@ -5093,15 +5127,17 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitOpt_transaction_chain?: (ctx: Opt_transaction_chainContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.viewstmt`.
+     * Enter a parse tree produced by the `createView`
+     * labeled alternative in `PostgreSQLParser.viewstmt`.
      * @param ctx the parse tree
      */
-    enterViewstmt?: (ctx: ViewstmtContext) => void;
+    enterCreateView?: (ctx: CreateViewContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.viewstmt`.
+     * Exit a parse tree produced by the `createView`
+     * labeled alternative in `PostgreSQLParser.viewstmt`.
      * @param ctx the parse tree
      */
-    exitViewstmt?: (ctx: ViewstmtContext) => void;
+    exitCreateView?: (ctx: CreateViewContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.opt_check_option`.
      * @param ctx the parse tree
@@ -5123,15 +5159,17 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitLoadstmt?: (ctx: LoadstmtContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.createdbstmt`.
+     * Enter a parse tree produced by the `createDatabase`
+     * labeled alternative in `PostgreSQLParser.createdbstmt`.
      * @param ctx the parse tree
      */
-    enterCreatedbstmt?: (ctx: CreatedbstmtContext) => void;
+    enterCreateDatabase?: (ctx: CreateDatabaseContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.createdbstmt`.
+     * Exit a parse tree produced by the `createDatabase`
+     * labeled alternative in `PostgreSQLParser.createdbstmt`.
      * @param ctx the parse tree
      */
-    exitCreatedbstmt?: (ctx: CreatedbstmtContext) => void;
+    exitCreateDatabase?: (ctx: CreateDatabaseContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.createdb_opt_list`.
      * @param ctx the parse tree
@@ -5653,15 +5691,17 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitDeallocatestmt?: (ctx: DeallocatestmtContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.insertstmt`.
+     * Enter a parse tree produced by the `insertStatement`
+     * labeled alternative in `PostgreSQLParser.insertstmt`.
      * @param ctx the parse tree
      */
-    enterInsertstmt?: (ctx: InsertstmtContext) => void;
+    enterInsertStatement?: (ctx: InsertStatementContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.insertstmt`.
+     * Exit a parse tree produced by the `insertStatement`
+     * labeled alternative in `PostgreSQLParser.insertstmt`.
      * @param ctx the parse tree
      */
-    exitInsertstmt?: (ctx: InsertstmtContext) => void;
+    exitInsertStatement?: (ctx: InsertStatementContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.insert_target`.
      * @param ctx the parse tree
@@ -5903,15 +5943,17 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitOpt_hold?: (ctx: Opt_holdContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.selectstmt`.
+     * Enter a parse tree produced by the `selectStatement`
+     * labeled alternative in `PostgreSQLParser.selectstmt`.
      * @param ctx the parse tree
      */
-    enterSelectstmt?: (ctx: SelectstmtContext) => void;
+    enterSelectStatement?: (ctx: SelectStatementContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.selectstmt`.
+     * Exit a parse tree produced by the `selectStatement`
+     * labeled alternative in `PostgreSQLParser.selectstmt`.
      * @param ctx the parse tree
      */
-    exitSelectstmt?: (ctx: SelectstmtContext) => void;
+    exitSelectStatement?: (ctx: SelectStatementContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.select_with_parens`.
      * @param ctx the parse tree
@@ -7983,65 +8025,77 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitProcedure_name_list?: (ctx: Procedure_name_listContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.tablespace_name_create`.
+     * Enter a parse tree produced by the `tablespaceNameCreate`
+     * labeled alternative in `PostgreSQLParser.tablespace_name_create`.
      * @param ctx the parse tree
      */
-    enterTablespace_name_create?: (ctx: Tablespace_name_createContext) => void;
+    enterTablespaceNameCreate?: (ctx: TablespaceNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.tablespace_name_create`.
+     * Exit a parse tree produced by the `tablespaceNameCreate`
+     * labeled alternative in `PostgreSQLParser.tablespace_name_create`.
      * @param ctx the parse tree
      */
-    exitTablespace_name_create?: (ctx: Tablespace_name_createContext) => void;
+    exitTablespaceNameCreate?: (ctx: TablespaceNameCreateContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.tablespace_name`.
+     * Enter a parse tree produced by the `tablespaceName`
+     * labeled alternative in `PostgreSQLParser.tablespace_name`.
      * @param ctx the parse tree
      */
-    enterTablespace_name?: (ctx: Tablespace_nameContext) => void;
+    enterTablespaceName?: (ctx: TablespaceNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.tablespace_name`.
+     * Exit a parse tree produced by the `tablespaceName`
+     * labeled alternative in `PostgreSQLParser.tablespace_name`.
      * @param ctx the parse tree
      */
-    exitTablespace_name?: (ctx: Tablespace_nameContext) => void;
+    exitTablespaceName?: (ctx: TablespaceNameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.table_name_create`.
+     * Enter a parse tree produced by the `tableNameCreate`
+     * labeled alternative in `PostgreSQLParser.table_name_create`.
      * @param ctx the parse tree
      */
-    enterTable_name_create?: (ctx: Table_name_createContext) => void;
+    enterTableNameCreate?: (ctx: TableNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.table_name_create`.
+     * Exit a parse tree produced by the `tableNameCreate`
+     * labeled alternative in `PostgreSQLParser.table_name_create`.
      * @param ctx the parse tree
      */
-    exitTable_name_create?: (ctx: Table_name_createContext) => void;
+    exitTableNameCreate?: (ctx: TableNameCreateContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.table_name`.
+     * Enter a parse tree produced by the `tableName`
+     * labeled alternative in `PostgreSQLParser.table_name`.
      * @param ctx the parse tree
      */
-    enterTable_name?: (ctx: Table_nameContext) => void;
+    enterTableName?: (ctx: TableNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.table_name`.
+     * Exit a parse tree produced by the `tableName`
+     * labeled alternative in `PostgreSQLParser.table_name`.
      * @param ctx the parse tree
      */
-    exitTable_name?: (ctx: Table_nameContext) => void;
+    exitTableName?: (ctx: TableNameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.view_name_create`.
+     * Enter a parse tree produced by the `viewNameCreate`
+     * labeled alternative in `PostgreSQLParser.view_name_create`.
      * @param ctx the parse tree
      */
-    enterView_name_create?: (ctx: View_name_createContext) => void;
+    enterViewNameCreate?: (ctx: ViewNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.view_name_create`.
+     * Exit a parse tree produced by the `viewNameCreate`
+     * labeled alternative in `PostgreSQLParser.view_name_create`.
      * @param ctx the parse tree
      */
-    exitView_name_create?: (ctx: View_name_createContext) => void;
+    exitViewNameCreate?: (ctx: ViewNameCreateContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.view_name`.
+     * Enter a parse tree produced by the `viewName`
+     * labeled alternative in `PostgreSQLParser.view_name`.
      * @param ctx the parse tree
      */
-    enterView_name?: (ctx: View_nameContext) => void;
+    enterViewName?: (ctx: ViewNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.view_name`.
+     * Exit a parse tree produced by the `viewName`
+     * labeled alternative in `PostgreSQLParser.view_name`.
      * @param ctx the parse tree
      */
-    exitView_name?: (ctx: View_nameContext) => void;
+    exitViewName?: (ctx: ViewNameContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.qualified_name`.
      * @param ctx the parse tree
@@ -8073,95 +8127,113 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitName_list?: (ctx: Name_listContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.database_name_create`.
+     * Enter a parse tree produced by the `databaseNameCreate`
+     * labeled alternative in `PostgreSQLParser.database_name_create`.
      * @param ctx the parse tree
      */
-    enterDatabase_name_create?: (ctx: Database_name_createContext) => void;
+    enterDatabaseNameCreate?: (ctx: DatabaseNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.database_name_create`.
+     * Exit a parse tree produced by the `databaseNameCreate`
+     * labeled alternative in `PostgreSQLParser.database_name_create`.
      * @param ctx the parse tree
      */
-    exitDatabase_name_create?: (ctx: Database_name_createContext) => void;
+    exitDatabaseNameCreate?: (ctx: DatabaseNameCreateContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.database_name`.
+     * Enter a parse tree produced by the `databaseName`
+     * labeled alternative in `PostgreSQLParser.database_name`.
      * @param ctx the parse tree
      */
-    enterDatabase_name?: (ctx: Database_nameContext) => void;
+    enterDatabaseName?: (ctx: DatabaseNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.database_name`.
+     * Exit a parse tree produced by the `databaseName`
+     * labeled alternative in `PostgreSQLParser.database_name`.
      * @param ctx the parse tree
      */
-    exitDatabase_name?: (ctx: Database_nameContext) => void;
+    exitDatabaseName?: (ctx: DatabaseNameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.schema_name`.
+     * Enter a parse tree produced by the `schemaName`
+     * labeled alternative in `PostgreSQLParser.schema_name`.
      * @param ctx the parse tree
      */
-    enterSchema_name?: (ctx: Schema_nameContext) => void;
+    enterSchemaName?: (ctx: SchemaNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.schema_name`.
+     * Exit a parse tree produced by the `schemaName`
+     * labeled alternative in `PostgreSQLParser.schema_name`.
      * @param ctx the parse tree
      */
-    exitSchema_name?: (ctx: Schema_nameContext) => void;
+    exitSchemaName?: (ctx: SchemaNameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.routine_name_create`.
+     * Enter a parse tree produced by the `routineNameCreate`
+     * labeled alternative in `PostgreSQLParser.routine_name_create`.
      * @param ctx the parse tree
      */
-    enterRoutine_name_create?: (ctx: Routine_name_createContext) => void;
+    enterRoutineNameCreate?: (ctx: RoutineNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.routine_name_create`.
+     * Exit a parse tree produced by the `routineNameCreate`
+     * labeled alternative in `PostgreSQLParser.routine_name_create`.
      * @param ctx the parse tree
      */
-    exitRoutine_name_create?: (ctx: Routine_name_createContext) => void;
+    exitRoutineNameCreate?: (ctx: RoutineNameCreateContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.routine_name`.
+     * Enter a parse tree produced by the `routineName`
+     * labeled alternative in `PostgreSQLParser.routine_name`.
      * @param ctx the parse tree
      */
-    enterRoutine_name?: (ctx: Routine_nameContext) => void;
+    enterRoutineName?: (ctx: RoutineNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.routine_name`.
+     * Exit a parse tree produced by the `routineName`
+     * labeled alternative in `PostgreSQLParser.routine_name`.
      * @param ctx the parse tree
      */
-    exitRoutine_name?: (ctx: Routine_nameContext) => void;
+    exitRoutineName?: (ctx: RoutineNameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.procedure_name`.
+     * Enter a parse tree produced by the `procedureName`
+     * labeled alternative in `PostgreSQLParser.procedure_name`.
      * @param ctx the parse tree
      */
-    enterProcedure_name?: (ctx: Procedure_nameContext) => void;
+    enterProcedureName?: (ctx: ProcedureNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.procedure_name`.
+     * Exit a parse tree produced by the `procedureName`
+     * labeled alternative in `PostgreSQLParser.procedure_name`.
      * @param ctx the parse tree
      */
-    exitProcedure_name?: (ctx: Procedure_nameContext) => void;
+    exitProcedureName?: (ctx: ProcedureNameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.procedure_name_create`.
+     * Enter a parse tree produced by the `procedureNameCreate`
+     * labeled alternative in `PostgreSQLParser.procedure_name_create`.
      * @param ctx the parse tree
      */
-    enterProcedure_name_create?: (ctx: Procedure_name_createContext) => void;
+    enterProcedureNameCreate?: (ctx: ProcedureNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.procedure_name_create`.
+     * Exit a parse tree produced by the `procedureNameCreate`
+     * labeled alternative in `PostgreSQLParser.procedure_name_create`.
      * @param ctx the parse tree
      */
-    exitProcedure_name_create?: (ctx: Procedure_name_createContext) => void;
+    exitProcedureNameCreate?: (ctx: ProcedureNameCreateContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.column_name`.
+     * Enter a parse tree produced by the `columnName`
+     * labeled alternative in `PostgreSQLParser.column_name`.
      * @param ctx the parse tree
      */
-    enterColumn_name?: (ctx: Column_nameContext) => void;
+    enterColumnName?: (ctx: ColumnNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.column_name`.
+     * Exit a parse tree produced by the `columnName`
+     * labeled alternative in `PostgreSQLParser.column_name`.
      * @param ctx the parse tree
      */
-    exitColumn_name?: (ctx: Column_nameContext) => void;
+    exitColumnName?: (ctx: ColumnNameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.column_name_create`.
+     * Enter a parse tree produced by the `columnNameCreate`
+     * labeled alternative in `PostgreSQLParser.column_name_create`.
      * @param ctx the parse tree
      */
-    enterColumn_name_create?: (ctx: Column_name_createContext) => void;
+    enterColumnNameCreate?: (ctx: ColumnNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.column_name_create`.
+     * Exit a parse tree produced by the `columnNameCreate`
+     * labeled alternative in `PostgreSQLParser.column_name_create`.
      * @param ctx the parse tree
      */
-    exitColumn_name_create?: (ctx: Column_name_createContext) => void;
+    exitColumnNameCreate?: (ctx: ColumnNameCreateContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.name`.
      * @param ctx the parse tree
@@ -8193,25 +8265,29 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitFile_name?: (ctx: File_nameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.function_name_create`.
+     * Enter a parse tree produced by the `functionNameCreate`
+     * labeled alternative in `PostgreSQLParser.function_name_create`.
      * @param ctx the parse tree
      */
-    enterFunction_name_create?: (ctx: Function_name_createContext) => void;
+    enterFunctionNameCreate?: (ctx: FunctionNameCreateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.function_name_create`.
+     * Exit a parse tree produced by the `functionNameCreate`
+     * labeled alternative in `PostgreSQLParser.function_name_create`.
      * @param ctx the parse tree
      */
-    exitFunction_name_create?: (ctx: Function_name_createContext) => void;
+    exitFunctionNameCreate?: (ctx: FunctionNameCreateContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.function_name`.
+     * Enter a parse tree produced by the `functionName`
+     * labeled alternative in `PostgreSQLParser.function_name`.
      * @param ctx the parse tree
      */
-    enterFunction_name?: (ctx: Function_nameContext) => void;
+    enterFunctionName?: (ctx: FunctionNameContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.function_name`.
+     * Exit a parse tree produced by the `functionName`
+     * labeled alternative in `PostgreSQLParser.function_name`.
      * @param ctx the parse tree
      */
-    exitFunction_name?: (ctx: Function_nameContext) => void;
+    exitFunctionName?: (ctx: FunctionNameContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.usual_name`.
      * @param ctx the parse tree
