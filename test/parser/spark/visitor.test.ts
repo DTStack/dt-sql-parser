@@ -11,7 +11,7 @@ describe('Spark SQL Visitor Tests', () => {
         console.error('Parse error:', error);
     });
 
-    test('Visitor visitRelationPrimary', () => {
+    test('Visitor visitTableName', () => {
         class MyVisitor
             extends AbstractParseTreeVisitor<any>
             implements SparkSqlParserVisitor<any>
@@ -20,7 +20,7 @@ describe('Spark SQL Visitor Tests', () => {
             protected defaultResult() {
                 return this.result;
             }
-            visitRelationPrimary = (ctx): void => {
+            visitTableName = (ctx): void => {
                 this.result = ctx.getText().toLowerCase();
             };
         }
