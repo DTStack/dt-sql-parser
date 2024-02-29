@@ -43,14 +43,13 @@ export interface TextSlice extends TextPosition {
 export function tokenToWord(token: Token, input: string): WordPosition & { text: string } {
     const startIndex = token.start;
     const endIndex = token.stop;
-    const text = input.slice(startIndex, endIndex + 1);
     return {
-        text,
+        text: token.text,
         line: token.line,
         startIndex,
         endIndex,
         startColumn: token.column + 1,
-        endColumn: token.column + 1 + text.length,
+        endColumn: token.column + 1 + token.text.length,
     };
 }
 
