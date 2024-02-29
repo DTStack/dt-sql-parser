@@ -219,11 +219,8 @@ import { LoadDataStatementContext } from "./MySqlParser.js";
 import { LoadXmlStatementContext } from "./MySqlParser.js";
 import { ParenthesizedQueryContext } from "./MySqlParser.js";
 import { ReplaceStatementContext } from "./MySqlParser.js";
-import { SimpleSelectContext } from "./MySqlParser.js";
-import { ParenthesisSelectContext } from "./MySqlParser.js";
-import { UnionSelectContext } from "./MySqlParser.js";
-import { UnionParenthesisSelectContext } from "./MySqlParser.js";
-import { WithLateralStatementContext } from "./MySqlParser.js";
+import { UnionAndLateralSelectContext } from "./MySqlParser.js";
+import { SelectExpressionContext } from "./MySqlParser.js";
 import { SetOperationsContext } from "./MySqlParser.js";
 import { QueryExpressionBodyContext } from "./MySqlParser.js";
 import { QueryItemContext } from "./MySqlParser.js";
@@ -265,10 +262,7 @@ import { OuterJoinContext } from "./MySqlParser.js";
 import { NaturalJoinContext } from "./MySqlParser.js";
 import { JoinSpecContext } from "./MySqlParser.js";
 import { QueryExpressionContext } from "./MySqlParser.js";
-import { QueryExpressionNointoContext } from "./MySqlParser.js";
 import { QuerySpecificationContext } from "./MySqlParser.js";
-import { QuerySpecificationNointoContext } from "./MySqlParser.js";
-import { UnionParenthesisContext } from "./MySqlParser.js";
 import { UnionStatementContext } from "./MySqlParser.js";
 import { LateralStatementContext } from "./MySqlParser.js";
 import { JsonTableContext } from "./MySqlParser.js";
@@ -278,10 +272,10 @@ import { JsonOnEmptyContext } from "./MySqlParser.js";
 import { JsonOnErrorContext } from "./MySqlParser.js";
 import { SelectSpecContext } from "./MySqlParser.js";
 import { SelectElementsContext } from "./MySqlParser.js";
+import { SelectExpressionElementContext } from "./MySqlParser.js";
+import { SelectFunctionElementContext } from "./MySqlParser.js";
 import { SelectStarElementContext } from "./MySqlParser.js";
 import { SelectColumnElementContext } from "./MySqlParser.js";
-import { SelectFunctionElementContext } from "./MySqlParser.js";
-import { SelectExpressionElementContext } from "./MySqlParser.js";
 import { SelectIntoVariablesContext } from "./MySqlParser.js";
 import { SelectIntoDumpFileContext } from "./MySqlParser.js";
 import { SelectIntoTextFileContext } from "./MySqlParser.js";
@@ -2112,40 +2106,19 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitReplaceStatement?: (ctx: ReplaceStatementContext) => Result;
     /**
-     * Visit a parse tree produced by the `simpleSelect`
+     * Visit a parse tree produced by the `unionAndLateralSelect`
      * labeled alternative in `MySqlParser.selectStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSimpleSelect?: (ctx: SimpleSelectContext) => Result;
+    visitUnionAndLateralSelect?: (ctx: UnionAndLateralSelectContext) => Result;
     /**
-     * Visit a parse tree produced by the `parenthesisSelect`
+     * Visit a parse tree produced by the `selectExpression`
      * labeled alternative in `MySqlParser.selectStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitParenthesisSelect?: (ctx: ParenthesisSelectContext) => Result;
-    /**
-     * Visit a parse tree produced by the `unionSelect`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitUnionSelect?: (ctx: UnionSelectContext) => Result;
-    /**
-     * Visit a parse tree produced by the `unionParenthesisSelect`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitUnionParenthesisSelect?: (ctx: UnionParenthesisSelectContext) => Result;
-    /**
-     * Visit a parse tree produced by the `withLateralStatement`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitWithLateralStatement?: (ctx: WithLateralStatementContext) => Result;
+    visitSelectExpression?: (ctx: SelectExpressionContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.setOperations`.
      * @param ctx the parse tree
@@ -2403,29 +2376,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitQueryExpression?: (ctx: QueryExpressionContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.queryExpressionNointo`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitQueryExpressionNointo?: (ctx: QueryExpressionNointoContext) => Result;
-    /**
      * Visit a parse tree produced by `MySqlParser.querySpecification`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitQuerySpecification?: (ctx: QuerySpecificationContext) => Result;
-    /**
-     * Visit a parse tree produced by `MySqlParser.querySpecificationNointo`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitQuerySpecificationNointo?: (ctx: QuerySpecificationNointoContext) => Result;
-    /**
-     * Visit a parse tree produced by `MySqlParser.unionParenthesis`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitUnionParenthesis?: (ctx: UnionParenthesisContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.unionStatement`.
      * @param ctx the parse tree
@@ -2481,6 +2436,20 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitSelectElements?: (ctx: SelectElementsContext) => Result;
     /**
+     * Visit a parse tree produced by the `selectExpressionElement`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectExpressionElement?: (ctx: SelectExpressionElementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectFunctionElement`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectFunctionElement?: (ctx: SelectFunctionElementContext) => Result;
+    /**
      * Visit a parse tree produced by the `selectStarElement`
      * labeled alternative in `MySqlParser.selectElement`.
      * @param ctx the parse tree
@@ -2494,20 +2463,6 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitSelectColumnElement?: (ctx: SelectColumnElementContext) => Result;
-    /**
-     * Visit a parse tree produced by the `selectFunctionElement`
-     * labeled alternative in `MySqlParser.selectElement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSelectFunctionElement?: (ctx: SelectFunctionElementContext) => Result;
-    /**
-     * Visit a parse tree produced by the `selectExpressionElement`
-     * labeled alternative in `MySqlParser.selectElement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSelectExpressionElement?: (ctx: SelectExpressionElementContext) => Result;
     /**
      * Visit a parse tree produced by the `selectIntoVariables`
      * labeled alternative in `MySqlParser.intoClause`.
