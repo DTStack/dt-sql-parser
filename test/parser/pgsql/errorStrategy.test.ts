@@ -1,4 +1,4 @@
-import PostgresSQL, { PgSqlSplitListener } from 'src/parser/pgsql';
+import PostgresSQL, { PostgreSqlSplitListener } from 'src/parser/pgsql';
 import { PostgreSQLParserListener } from 'src/lib/pgsql/PostgreSQLParserListener';
 
 const validSQL1 = `INSERT INTO country_page_view
@@ -15,7 +15,7 @@ describe('PgSQL ErrorStrategy test', () => {
     //     const sql = [inValidSQL, validSQL1, validSQL2].join('\n');
     //     // parse with empty errorListener
     //     const parseTree = pgSQL.parse(sql, () => {});
-    //     const splitListener = new PgSqlSplitListener();
+    //     const splitListener = new PostgreSqlSplitListener();
     //     pgSQL.listen(splitListener as PostgreSQLParserListener, parseTree);
 
     //     const statementCount = splitListener.statementsContext.length;
@@ -32,7 +32,7 @@ describe('PgSQL ErrorStrategy test', () => {
         const sql = [validSQL1, inValidSQL, validSQL2].join('\n');
         // parse with empty errorListener
         const parseTree = pgSQL.parse(sql, () => {});
-        const splitListener = new PgSqlSplitListener();
+        const splitListener = new PostgreSqlSplitListener();
         pgSQL.listen(splitListener as PostgreSQLParserListener, parseTree);
 
         const statementCount = splitListener.statementsContext.length;
@@ -49,7 +49,7 @@ describe('PgSQL ErrorStrategy test', () => {
         const sql = [validSQL1, validSQL2, inValidSQL].join('\n');
         // parse with empty errorListener
         const parseTree = pgSQL.parse(sql, () => {});
-        const splitListener = new PgSqlSplitListener();
+        const splitListener = new PostgreSqlSplitListener();
         pgSQL.listen(splitListener as PostgreSQLParserListener, parseTree);
 
         splitListener.statementsContext.map((item, index) => {

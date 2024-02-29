@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import PostgresSQL from 'src/parser/pgsql';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import PostgresSQL from 'src/parser/pgsql';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -98,7 +98,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
         const suggestion1 = syntaxes1?.find(
-            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
         const suggestion2 = syntaxes2?.find(
             (syn) => syn.syntaxContextType === EntityContextType.COLUMN
@@ -537,7 +537,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
@@ -611,7 +611,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col_name']);
