@@ -886,15 +886,15 @@ opt_column_list
     : OPEN_PAREN column_list CLOSE_PAREN
     ;
 
-create_opt_column_list
-    : OPEN_PAREN create_column_list CLOSE_PAREN
+opt_column_list_create
+    : OPEN_PAREN column_list_create CLOSE_PAREN
     ;
 
 column_list
     : column_name (COMMA column_name)*
     ;
 
-create_column_list
+column_list_create
     : column_name_create (COMMA column_name_create)*
     ;
 
@@ -1008,7 +1008,7 @@ createasstmt
     ;
 
 create_as_target
-    : table_name_create create_opt_column_list? table_access_method_clause? optwith? oncommitoption? opttablespace?
+    : table_name_create opt_column_list_create? table_access_method_clause? optwith? oncommitoption? opttablespace?
     ;
 
 opt_with_data
@@ -1020,7 +1020,7 @@ creatematviewstmt
     ;
 
 create_mv_target
-    : view_name_create create_opt_column_list? table_access_method_clause? opt_reloptions? opttablespace?
+    : view_name_create opt_column_list_create? table_access_method_clause? opt_reloptions? opttablespace?
     ;
 
 optnolog
@@ -2601,7 +2601,7 @@ opt_transaction_chain
 
 viewstmt
     : KW_CREATE (KW_OR KW_REPLACE)? opttemp? (
-        KW_VIEW view_name_create create_opt_column_list? opt_reloptions?
+        KW_VIEW view_name_create opt_column_list_create? opt_reloptions?
         | KW_RECURSIVE KW_VIEW view_name_create OPEN_PAREN column_list CLOSE_PAREN opt_reloptions?
     ) KW_AS selectstmt opt_check_option? # createView
     ;

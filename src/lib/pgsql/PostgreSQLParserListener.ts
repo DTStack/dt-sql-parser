@@ -124,9 +124,9 @@ import { TableconstraintContext } from "./PostgreSQLParser.js";
 import { ConstraintelemContext } from "./PostgreSQLParser.js";
 import { Opt_no_inheritContext } from "./PostgreSQLParser.js";
 import { Opt_column_listContext } from "./PostgreSQLParser.js";
-import { Create_opt_column_listContext } from "./PostgreSQLParser.js";
+import { Opt_column_list_createContext } from "./PostgreSQLParser.js";
 import { Column_listContext } from "./PostgreSQLParser.js";
-import { Create_column_listContext } from "./PostgreSQLParser.js";
+import { Column_list_createContext } from "./PostgreSQLParser.js";
 import { Opt_c_includeContext } from "./PostgreSQLParser.js";
 import { Key_matchContext } from "./PostgreSQLParser.js";
 import { ExclusionconstraintlistContext } from "./PostgreSQLParser.js";
@@ -2109,15 +2109,15 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitOpt_column_list?: (ctx: Opt_column_listContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.create_opt_column_list`.
+     * Enter a parse tree produced by `PostgreSQLParser.opt_column_list_create`.
      * @param ctx the parse tree
      */
-    enterCreate_opt_column_list?: (ctx: Create_opt_column_listContext) => void;
+    enterOpt_column_list_create?: (ctx: Opt_column_list_createContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.create_opt_column_list`.
+     * Exit a parse tree produced by `PostgreSQLParser.opt_column_list_create`.
      * @param ctx the parse tree
      */
-    exitCreate_opt_column_list?: (ctx: Create_opt_column_listContext) => void;
+    exitOpt_column_list_create?: (ctx: Opt_column_list_createContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.column_list`.
      * @param ctx the parse tree
@@ -2129,15 +2129,15 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitColumn_list?: (ctx: Column_listContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.create_column_list`.
+     * Enter a parse tree produced by `PostgreSQLParser.column_list_create`.
      * @param ctx the parse tree
      */
-    enterCreate_column_list?: (ctx: Create_column_listContext) => void;
+    enterColumn_list_create?: (ctx: Column_list_createContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.create_column_list`.
+     * Exit a parse tree produced by `PostgreSQLParser.column_list_create`.
      * @param ctx the parse tree
      */
-    exitCreate_column_list?: (ctx: Create_column_listContext) => void;
+    exitColumn_list_create?: (ctx: Column_list_createContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.opt_c_include`.
      * @param ctx the parse tree

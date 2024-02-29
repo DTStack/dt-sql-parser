@@ -1306,9 +1306,9 @@ tableconstraint
 constraintelem
 opt_no_inherit
 opt_column_list
-create_opt_column_list
+opt_column_list_create
 column_list
-create_column_list
+column_list_create
 opt_c_include
 key_match
 exclusionconstraintlist

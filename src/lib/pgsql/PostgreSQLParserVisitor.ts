@@ -124,9 +124,9 @@ import { TableconstraintContext } from "./PostgreSQLParser.js";
 import { ConstraintelemContext } from "./PostgreSQLParser.js";
 import { Opt_no_inheritContext } from "./PostgreSQLParser.js";
 import { Opt_column_listContext } from "./PostgreSQLParser.js";
-import { Create_opt_column_listContext } from "./PostgreSQLParser.js";
+import { Opt_column_list_createContext } from "./PostgreSQLParser.js";
 import { Column_listContext } from "./PostgreSQLParser.js";
-import { Create_column_listContext } from "./PostgreSQLParser.js";
+import { Column_list_createContext } from "./PostgreSQLParser.js";
 import { Opt_c_includeContext } from "./PostgreSQLParser.js";
 import { Key_matchContext } from "./PostgreSQLParser.js";
 import { ExclusionconstraintlistContext } from "./PostgreSQLParser.js";
@@ -1626,11 +1626,11 @@ export class PostgreSQLParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitOpt_column_list?: (ctx: Opt_column_listContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSQLParser.create_opt_column_list`.
+     * Visit a parse tree produced by `PostgreSQLParser.opt_column_list_create`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreate_opt_column_list?: (ctx: Create_opt_column_listContext) => Result;
+    visitOpt_column_list_create?: (ctx: Opt_column_list_createContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSQLParser.column_list`.
      * @param ctx the parse tree
@@ -1638,11 +1638,11 @@ export class PostgreSQLParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitColumn_list?: (ctx: Column_listContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSQLParser.create_column_list`.
+     * Visit a parse tree produced by `PostgreSQLParser.column_list_create`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreate_column_list?: (ctx: Create_column_listContext) => Result;
+    visitColumn_list_create?: (ctx: Column_list_createContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSQLParser.opt_c_include`.
      * @param ctx the parse tree
