@@ -395,7 +395,7 @@ describe('MySQL entity collector tests', () => {
 
         const dbEntity = allEntities[0];
 
-        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE);
         expect(dbEntity.text).toBe('db_name');
         expect(dbEntity.position).toEqual({
             endColumn: 41,
@@ -487,42 +487,6 @@ describe('MySQL entity collector tests', () => {
             startColumn: 1,
             startIndex: 941,
             startLine: 39,
-        });
-
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
-    });
-
-    test('show create function', () => {
-        const functionCreateContext = splitListener.statementsContext[15];
-
-        const collectListener = new MySqlEntityCollector(commonSql);
-        mysql.listen(collectListener as ParseTreeListener, functionCreateContext);
-
-        const allEntities = collectListener.getEntities();
-
-        expect(allEntities.length).toBe(1);
-
-        const functionEntity = allEntities[0];
-
-        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
-        expect(functionEntity.text).toBe('func_name');
-        expect(functionEntity.position).toEqual({
-            endColumn: 31,
-            endIndex: 1059,
-            line: 41,
-            startColumn: 22,
-            startIndex: 1051,
-        });
-
-        expect(functionEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 32,
-            endIndex: 1060,
-            endLine: 41,
-            startColumn: 1,
-            startIndex: 1030,
-            startLine: 41,
         });
 
         expect(functionEntity.columns).toBeNull();

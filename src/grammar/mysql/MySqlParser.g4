@@ -2052,15 +2052,15 @@ showStatement
     | KW_SHOW KW_EXTENDED? KW_FULL? columnsFormat=(KW_COLUMNS | KW_FIELDS) tableFormat=(
         KW_FROM
         | KW_IN
-    ) tableName (schemaFormat=(KW_FROM | KW_IN) databaseName)? showFilter?        # showColumns
-    | KW_SHOW KW_CREATE (KW_DATABASE | KW_SCHEMA) ifNotExists? databaseNameCreate # showCreateDb
-    | KW_SHOW KW_CREATE (KW_EVENT | KW_PROCEDURE | KW_TRIGGER) fullId             # showCreateFullIdObject
-    | KW_SHOW KW_CREATE KW_FUNCTION functionNameCreate                            # showCreateFunction
-    | KW_SHOW KW_CREATE KW_VIEW viewNameCreate                                    # showCreateView
-    | KW_SHOW KW_CREATE KW_TABLE tableNameCreate                                  # showCreateTable
-    | KW_SHOW KW_CREATE KW_USER userName                                          # showCreateUser
-    | KW_SHOW KW_ENGINE engineName engineOption=(KW_STATUS | KW_MUTEX)            # showEngine
-    | KW_SHOW showGlobalInfoClause                                                # showGlobalInfo
+    ) tableName (schemaFormat=(KW_FROM | KW_IN) databaseName)? showFilter?  # showColumns
+    | KW_SHOW KW_CREATE (KW_DATABASE | KW_SCHEMA) ifNotExists? databaseName # showCreateDb
+    | KW_SHOW KW_CREATE (KW_EVENT | KW_PROCEDURE | KW_TRIGGER) fullId       # showCreateFullIdObject
+    | KW_SHOW KW_CREATE KW_FUNCTION functionName                            # showCreateFunction
+    | KW_SHOW KW_CREATE KW_VIEW viewName                                    # showCreateView
+    | KW_SHOW KW_CREATE KW_TABLE tableName                                  # showCreateTable
+    | KW_SHOW KW_CREATE KW_USER userName                                    # showCreateUser
+    | KW_SHOW KW_ENGINE engineName engineOption=(KW_STATUS | KW_MUTEX)      # showEngine
+    | KW_SHOW showGlobalInfoClause                                          # showGlobalInfo
     | KW_SHOW errorFormat=(KW_ERRORS | KW_WARNINGS) (
         KW_LIMIT (offset=decimalLiteral ',')? rowCount=decimalLiteral
     )?                                                                                    # showErrors

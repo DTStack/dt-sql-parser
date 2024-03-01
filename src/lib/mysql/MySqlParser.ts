@@ -34257,7 +34257,7 @@ export class MySqlParser extends antlr.Parser {
                     break;
                 }
                 this.state = 6339;
-                this.databaseNameCreate();
+                this.databaseName();
                 }
                 break;
             case 6:
@@ -34292,7 +34292,7 @@ export class MySqlParser extends antlr.Parser {
                 this.state = 6346;
                 this.match(MySqlParser.KW_FUNCTION);
                 this.state = 6347;
-                this.functionNameCreate();
+                this.functionName();
                 }
                 break;
             case 8:
@@ -34306,7 +34306,7 @@ export class MySqlParser extends antlr.Parser {
                 this.state = 6350;
                 this.match(MySqlParser.KW_VIEW);
                 this.state = 6351;
-                this.viewNameCreate();
+                this.viewName();
                 }
                 break;
             case 9:
@@ -34320,7 +34320,7 @@ export class MySqlParser extends antlr.Parser {
                 this.state = 6354;
                 this.match(MySqlParser.KW_TABLE);
                 this.state = 6355;
-                this.tableNameCreate();
+                this.tableName();
                 }
                 break;
             case 10:
@@ -50867,12 +50867,12 @@ export class MySqlParser extends antlr.Parser {
         1,0,0,0,6329,6331,1,0,0,0,6330,6332,3,564,282,0,6331,6330,1,0,0,
         0,6331,6332,1,0,0,0,6332,6470,1,0,0,0,6333,6334,5,157,0,0,6334,6335,
         5,34,0,0,6335,6337,7,0,0,0,6336,6338,3,762,381,0,6337,6336,1,0,0,
-        0,6337,6338,1,0,0,0,6338,6339,1,0,0,0,6339,6470,3,628,314,0,6340,
+        0,6337,6338,1,0,0,0,6338,6339,1,0,0,0,6339,6470,3,630,315,0,6340,
         6341,5,157,0,0,6341,6342,5,34,0,0,6342,6343,7,96,0,0,6343,6470,3,
         704,352,0,6344,6345,5,157,0,0,6345,6346,5,34,0,0,6346,6347,5,409,
-        0,0,6347,6470,3,632,316,0,6348,6349,5,157,0,0,6349,6350,5,34,0,0,
-        6350,6351,5,684,0,0,6351,6470,3,636,318,0,6352,6353,5,157,0,0,6353,
-        6354,5,34,0,0,6354,6355,5,173,0,0,6355,6470,3,650,325,0,6356,6357,
+        0,0,6347,6470,3,634,317,0,6348,6349,5,157,0,0,6349,6350,5,34,0,0,
+        6350,6351,5,684,0,0,6351,6470,3,638,319,0,6352,6353,5,157,0,0,6353,
+        6354,5,34,0,0,6354,6355,5,173,0,0,6355,6470,3,654,327,0,6356,6357,
         5,157,0,0,6357,6358,5,34,0,0,6358,6359,5,678,0,0,6359,6470,3,686,
         343,0,6360,6361,5,157,0,0,6361,6362,5,380,0,0,6362,6363,3,694,347,
         0,6363,6364,7,97,0,0,6364,6470,1,0,0,0,6365,6366,5,157,0,0,6366,
@@ -74569,8 +74569,8 @@ export class ShowCreateFunctionContext extends ShowStatementContext {
     public KW_FUNCTION(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_FUNCTION, 0)!;
     }
-    public functionNameCreate(): FunctionNameCreateContext {
-        return this.getRuleContext(0, FunctionNameCreateContext)!;
+    public functionName(): FunctionNameContext {
+        return this.getRuleContext(0, FunctionNameContext)!;
     }
     public override enterRule(listener: MySqlParserListener): void {
         if(listener.enterShowCreateFunction) {
@@ -74778,8 +74778,8 @@ export class ShowCreateDbContext extends ShowStatementContext {
     public KW_CREATE(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_CREATE, 0)!;
     }
-    public databaseNameCreate(): DatabaseNameCreateContext {
-        return this.getRuleContext(0, DatabaseNameCreateContext)!;
+    public databaseName(): DatabaseNameContext {
+        return this.getRuleContext(0, DatabaseNameContext)!;
     }
     public KW_DATABASE(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_DATABASE, 0);
@@ -75156,8 +75156,8 @@ export class ShowCreateTableContext extends ShowStatementContext {
     public KW_TABLE(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_TABLE, 0)!;
     }
-    public tableNameCreate(): TableNameCreateContext {
-        return this.getRuleContext(0, TableNameCreateContext)!;
+    public tableName(): TableNameContext {
+        return this.getRuleContext(0, TableNameContext)!;
     }
     public override enterRule(listener: MySqlParserListener): void {
         if(listener.enterShowCreateTable) {
@@ -75330,8 +75330,8 @@ export class ShowCreateViewContext extends ShowStatementContext {
     public KW_VIEW(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_VIEW, 0)!;
     }
-    public viewNameCreate(): ViewNameCreateContext {
-        return this.getRuleContext(0, ViewNameCreateContext)!;
+    public viewName(): ViewNameContext {
+        return this.getRuleContext(0, ViewNameContext)!;
     }
     public override enterRule(listener: MySqlParserListener): void {
         if(listener.enterShowCreateView) {
