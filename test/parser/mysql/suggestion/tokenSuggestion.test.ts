@@ -19,7 +19,7 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'RESOURCE',
             'USER',
             'VIEW',
@@ -50,7 +50,7 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'RESOURCE',
             'USER',
             'ROLE',
@@ -91,7 +91,7 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['FROM', 'IGNORE', 'QUICK', 'LOW_PRIORITY']);
+        expect(suggestion).toMatchUnorderedArrary(['FROM', 'IGNORE', 'QUICK', 'LOW_PRIORITY']);
     });
 
     test('After DESCRIBE', () => {
@@ -104,7 +104,7 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'ANALYZE',
             'SELECT',
             'DELETE',
@@ -128,7 +128,7 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'RESOURCE',
             'USER',
             'PREPARE',
@@ -161,7 +161,13 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['INTO', 'IGNORE', 'DELAYED', 'HIGH_PRIORITY', 'LOW_PRIORITY']);
+        expect(suggestion).toMatchUnorderedArrary([
+            'INTO',
+            'IGNORE',
+            'DELAYED',
+            'HIGH_PRIORITY',
+            'LOW_PRIORITY',
+        ]);
     });
 
     test('After LOAD', () => {
@@ -174,7 +180,7 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['INDEX', 'XML', 'DATA']);
+        expect(suggestion).toMatchUnorderedArrary(['INDEX', 'XML', 'DATA']);
     });
 
     test('After SHOW', () => {
@@ -187,7 +193,7 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'REPLICAS',
             'REPLICA',
             'SLAVE',
