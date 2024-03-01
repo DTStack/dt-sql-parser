@@ -540,13 +540,10 @@ alter_table_cmd
     | KW_DROP KW_COLUMN? opt_if_exists? column_name opt_drop_behavior?
     | KW_ADD KW_COLUMN? opt_if_not_exists? columnDefCluase
     | KW_ALTER KW_COLUMN? column_name alter_column_default
-    | KW_ALTER KW_COLUMN? column_name KW_DROP KW_NOT KW_NULL
-    | KW_ALTER KW_COLUMN? column_name KW_SET KW_NOT KW_NULL
+    | KW_ALTER KW_COLUMN? column_name (KW_DROP | KW_SET) KW_NOT KW_NULL
     | KW_ALTER KW_COLUMN? column_name KW_DROP KW_EXPRESSION opt_if_exists?
     | KW_ALTER KW_COLUMN? column_name KW_SET KW_STATISTICS signediconst
-    | KW_ALTER KW_COLUMN? column_name KW_SET KW_STATISTICS signediconst
-    | KW_ALTER KW_COLUMN? column_name KW_SET reloptions
-    | KW_ALTER KW_COLUMN? column_name KW_RESET reloptions
+    | KW_ALTER KW_COLUMN? column_name (KW_SET | KW_RESET) reloptions
     | KW_ALTER KW_COLUMN? column_name KW_SET KW_STORAGE colid
     | KW_ALTER KW_COLUMN? column_name KW_ADD KW_GENERATED generated_when KW_AS KW_IDENTITY optparenthesizedseqoptlist?
     | KW_ALTER KW_COLUMN? column_name alter_identity_column_option_list
