@@ -15,14 +15,11 @@ import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
 import { CaretPosition, Suggestions, SyntaxSuggestion } from './basic-parser-types';
 import ParseErrorListener, { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
+import SplitListener from './splitListener';
 
 interface IParser<IParserRuleContext extends ParserRuleContext> extends Parser {
     // Customized in our parser
     program(): IParserRuleContext;
-}
-
-interface SplitListener extends ParseTreeListener {
-    statementsContext: ParserRuleContext[];
 }
 
 /**
@@ -81,7 +78,7 @@ export default abstract class BasicParser<
     /**
      * Get splitListener instance.
      */
-    protected abstract get splitListener(): SplitListener;
+    protected abstract get splitListener(): SplitListener<ParserRuleContext>;
 
     /**
      * Create an antlr4 lexer from input.
