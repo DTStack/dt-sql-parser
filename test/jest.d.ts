@@ -6,7 +6,7 @@ namespace jest {
          *
          * Make sure expected array has no duplicate item.
          *
-         * Every item must be simple data type, like string, number, etc.
+         * Every item must be primitive type, like string, number, etc.
          *
          * @example
          * expect(['a', 'b']).toMatchUnorderedArrary(['b', 'a']) // pass
