@@ -19,7 +19,7 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'TABLE',
             'INDEX',
             'VIEW',
@@ -40,7 +40,7 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'TEMPORARY',
             'INDEX',
             'ROLE',
@@ -67,7 +67,7 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['FROM']);
+        expect(suggestion).toMatchUnorderedArrary(['FROM']);
     });
 
     test('After DESCRIBE', () => {
@@ -80,7 +80,7 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'WITH',
             'SELECT',
             'MAP',
@@ -106,7 +106,7 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'TEMPORARY',
             'INDEX',
             'ROLE',
@@ -130,7 +130,7 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['OVERWRITE', 'INTO']);
+        expect(suggestion).toMatchUnorderedArrary(['OVERWRITE', 'INTO']);
     });
 
     test('After LOAD', () => {
@@ -143,7 +143,7 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['DATA']);
+        expect(suggestion).toMatchUnorderedArrary(['DATA']);
     });
 
     test('After SHOW', () => {
@@ -156,7 +156,7 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual([
+        expect(suggestion).toMatchUnorderedArrary([
             'LOCKS',
             'INDEXES',
             'TRANSACTIONS',
@@ -195,6 +195,6 @@ describe('Spark SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['TABLE']);
+        expect(suggestion).toMatchUnorderedArrary(['TABLE']);
     });
 });
