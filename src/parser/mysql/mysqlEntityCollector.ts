@@ -2,6 +2,8 @@ import type {
     ColumnCreateTableContext,
     ColumnNameCreateContext,
     CopyCreateTableContext,
+    CreateDatabaseContext,
+    CreateFunctionContext,
     CreateViewContext,
     DatabaseNameContext,
     DatabaseNameCreateContext,
@@ -24,10 +26,6 @@ import EntityCollector, {
 } from '../common/entityCollector';
 
 export default class MySqlEntityCollector extends EntityCollector implements MySqlParserListener {
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]
@@ -206,6 +204,22 @@ export default class MySqlEntityCollector extends EntityCollector implements MyS
     }
 
     exitInsertStatement(ctx: InsertStatementContext) {
+        this.popStmt();
+    }
+
+    enterCreateDatabase(ctx: CreateDatabaseContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_DATABASE_STMT);
+    }
+
+    exitCreateDatabase(ctx: CreateDatabaseContext) {
+        this.popStmt();
+    }
+
+    enterCreateFunction(ctx: CreateFunctionContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
+    }
+
+    exitCreateFunction(ctx: CreateFunctionContext) {
         this.popStmt();
     }
 }

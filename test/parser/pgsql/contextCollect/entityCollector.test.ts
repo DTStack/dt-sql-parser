@@ -19,7 +19,7 @@ describe('PostgreSQL entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(9);
+        expect(splitListener.statementsContext.length).toBe(10);
     });
 
     test('create database', () => {
@@ -403,5 +403,42 @@ describe('PostgreSQL entity collector tests', () => {
 
         expect(tableInsertEntity.columns).toBeNull();
         expect(tableInsertEntity.relatedEntities).toBeNull();
+    });
+
+    test('create function', () => {
+        const testingContext = splitListener.statementsContext[9];
+
+        const collectListener = new PostgreSQLEntityCollector(commonSql);
+        postgreSql.listen(collectListener as ParseTreeListener, testingContext);
+
+        const allEntities = collectListener.getEntities();
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('get_color_note');
+        expect(functionEntity.position).toEqual({
+            endColumn: 31,
+            endIndex: 1388,
+            line: 47,
+            startColumn: 17,
+            startIndex: 1375,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_FUNCTION_STMT
+        );
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 15,
+            endIndex: 1477,
+            endLine: 49,
+            startColumn: 1,
+            startIndex: 1359,
+            startLine: 47,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
     });
 });

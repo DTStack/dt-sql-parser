@@ -20,7 +20,7 @@ describe('SparkSQL entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(10);
+        expect(splitListener.statementsContext.length).toBe(12);
     });
 
     test('create table like', () => {
@@ -262,7 +262,9 @@ describe('SparkSQL entity collector tests', () => {
         const sourceTableEntity = allEntities[0];
 
         expect(sourceTableEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
-        expect(sourceTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
+        expect(sourceTableEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_DATABASE_STMT
+        );
         expect(sourceTableEntity.text).toBe('customer_db');
     });
 
@@ -280,5 +282,81 @@ describe('SparkSQL entity collector tests', () => {
         expect(sourceTableEntity.entityContextType).toBe(EntityContextType.DATABASE);
         expect(sourceTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
         expect(sourceTableEntity.text).toBe('ns1');
+    });
+
+    test('create function', () => {
+        const functionContext = splitListener.statementsContext[10];
+
+        const collectListener = new SparkEntityCollector(commonSql);
+        spark.listen(collectListener as ParseTreeListener, functionContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('simple_udf');
+        expect(functionEntity.position).toEqual({
+            endColumn: 38,
+            endIndex: 905,
+            line: 28,
+            startColumn: 28,
+            startIndex: 896,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_FUNCTION_STMT
+        );
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 54,
+            endIndex: 921,
+            endLine: 28,
+            startColumn: 1,
+            startIndex: 869,
+            startLine: 28,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
+    });
+
+    test('create xxx function', () => {
+        const functionContext = splitListener.statementsContext[11];
+
+        const collectListener = new SparkEntityCollector(commonSql);
+        spark.listen(collectListener as ParseTreeListener, functionContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('simple_udf');
+        expect(functionEntity.position).toEqual({
+            endColumn: 27,
+            endIndex: 950,
+            line: 30,
+            startColumn: 17,
+            startIndex: 941,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_FUNCTION_STMT
+        );
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 43,
+            endIndex: 966,
+            endLine: 30,
+            startColumn: 1,
+            startIndex: 925,
+            startLine: 30,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
     });
 });

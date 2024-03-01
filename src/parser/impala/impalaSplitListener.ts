@@ -1,20 +1,12 @@
 import { SingleStatementContext } from '../../lib/impala/ImpalaSqlParser';
 import { ImpalaSqlParserListener } from '../../lib/impala/ImpalaSqlParserListener';
+import SplitListener from '../common/splitListener';
 
-export class ImpalaSqlSplitListener implements ImpalaSqlParserListener {
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
-    private _statementContext: SingleStatementContext[] = [];
-
+export class ImpalaSqlSplitListener
+    extends SplitListener<SingleStatementContext>
+    implements ImpalaSqlParserListener
+{
     exitSingleStatement = (ctx: SingleStatementContext) => {
-        this._statementContext.push(ctx);
+        this._statementsContext.push(ctx);
     };
-
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
-
-    get statementsContext() {
-        return this._statementContext;
-    }
 }

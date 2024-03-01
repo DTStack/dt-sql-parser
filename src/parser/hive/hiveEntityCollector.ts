@@ -2,12 +2,17 @@ import { EntityContextType } from '../..';
 import { HiveSqlParserListener } from '../../lib';
 import {
     ColumnNameCreateContext,
+    CreateDatabaseStatementContext,
+    CreateFunctionStatementContext,
     CreateMaterializedViewStatementContext,
     CreateTableStatementContext,
     CreateViewStatementContext,
+    DbSchemaNameContext,
+    DbSchemaNameCreateContext,
     FromInsertStmtContext,
     FromSelectStmtContext,
     FromStatementContext,
+    FunctionNameCreateContext,
     InsertStmtContext,
     SelectStatementContext,
     StatementContext,
@@ -23,11 +28,6 @@ import EntityCollector, {
 } from '../common/entityCollector';
 
 export default class HiveEntityCollector extends EntityCollector implements HiveSqlParserListener {
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
-
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]
@@ -108,6 +108,18 @@ export default class HiveEntityCollector extends EntityCollector implements Hive
         this.pushEntity(ctx, EntityContextType.VIEW);
     };
 
+    exitDbSchemaNameCreate(ctx: DbSchemaNameCreateContext) {
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE);
+    }
+
+    exitDbSchemaName(ctx: DbSchemaNameContext) {
+        this.pushEntity(ctx, EntityContextType.DATABASE);
+    }
+
+    exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
+        this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE);
+    }
+
     /** ===== Statement begin */
     enterStatement = (ctx: StatementContext) => {
         this.pushStmt(ctx, StmtContextType.COMMON_STMT);
@@ -172,4 +184,20 @@ export default class HiveEntityCollector extends EntityCollector implements Hive
     exitFromInsertStmt = (ctx: FromInsertStmtContext) => {
         this.popStmt();
     };
+
+    enterCreateDatabaseStatement(ctx: CreateDatabaseStatementContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_DATABASE_STMT);
+    }
+
+    exitCreateDatabaseStatement(ctx: CreateDatabaseStatementContext) {
+        this.popStmt();
+    }
+
+    enterFunctionNameCreate(ctx: FunctionNameCreateContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
+    }
+
+    exitCreateFunctionStatement(ctx: CreateFunctionStatementContext) {
+        this.popStmt();
+    }
 }

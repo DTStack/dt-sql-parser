@@ -20,7 +20,7 @@ describe('MySQL entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(10);
+        expect(splitListener.statementsContext.length).toBe(16);
     });
 
     test('create table by columns', () => {
@@ -309,5 +309,223 @@ describe('MySQL entity collector tests', () => {
         expect(allEntities[0].entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(allEntities[0].text).toBe('db.new_view');
         expect(allEntities[0].belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
+    });
+
+    test('create database', () => {
+        const dbCreateContext = splitListener.statementsContext[10];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, dbCreateContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(dbEntity.text).toBe('db_name');
+        expect(dbEntity.position).toEqual({
+            endColumn: 24,
+            endIndex: 778,
+            line: 31,
+            startColumn: 17,
+            startIndex: 772,
+        });
+
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 47,
+            endIndex: 801,
+            endLine: 31,
+            startColumn: 1,
+            startIndex: 756,
+            startLine: 31,
+        });
+
+        expect(dbEntity.columns).toBeNull();
+        expect(dbEntity.relatedEntities).toBeNull();
+    });
+
+    test('create schema', () => {
+        const schemaCreateContext = splitListener.statementsContext[11];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, schemaCreateContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const schemaEntity = allEntities[0];
+
+        expect(schemaEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(schemaEntity.text).toBe('db_name');
+        expect(schemaEntity.position).toEqual({
+            endColumn: 36,
+            endIndex: 839,
+            line: 33,
+            startColumn: 29,
+            startIndex: 833,
+        });
+
+        expect(schemaEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
+        expect(schemaEntity.belongStmt.position).toEqual({
+            endColumn: 59,
+            endIndex: 862,
+            endLine: 33,
+            startColumn: 1,
+            startIndex: 805,
+            startLine: 33,
+        });
+
+        expect(schemaEntity.columns).toBeNull();
+        expect(schemaEntity.relatedEntities).toBeNull();
+    });
+
+    test('show create database', () => {
+        const dbCreateContext = splitListener.statementsContext[12];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, dbCreateContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(dbEntity.text).toBe('db_name');
+        expect(dbEntity.position).toEqual({
+            endColumn: 41,
+            endIndex: 905,
+            line: 35,
+            startColumn: 34,
+            startIndex: 899,
+        });
+
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 42,
+            endIndex: 906,
+            endLine: 35,
+            startColumn: 1,
+            startIndex: 866,
+            startLine: 35,
+        });
+
+        expect(dbEntity.columns).toBeNull();
+        expect(dbEntity.relatedEntities).toBeNull();
+    });
+
+    test('drop database', () => {
+        const dbDropContext = splitListener.statementsContext[13];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, dbDropContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE);
+        expect(dbEntity.text).toBe('db_name');
+        expect(dbEntity.position).toEqual({
+            endColumn: 30,
+            endIndex: 937,
+            line: 37,
+            startColumn: 23,
+            startIndex: 931,
+        });
+
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 31,
+            endIndex: 938,
+            endLine: 37,
+            startColumn: 1,
+            startIndex: 909,
+            startLine: 37,
+        });
+
+        expect(dbEntity.columns).toBeNull();
+        expect(dbEntity.relatedEntities).toBeNull();
+    });
+
+    test('create function', () => {
+        const functionCreateContext = splitListener.statementsContext[14];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, functionCreateContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('my_concat_ws');
+        expect(functionEntity.position).toEqual({
+            endColumn: 43,
+            endIndex: 982,
+            line: 39,
+            startColumn: 31,
+            startIndex: 971,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_FUNCTION_STMT
+        );
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 87,
+            endIndex: 1026,
+            endLine: 39,
+            startColumn: 1,
+            startIndex: 941,
+            startLine: 39,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
+    });
+
+    test('show create function', () => {
+        const functionCreateContext = splitListener.statementsContext[15];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, functionCreateContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('func_name');
+        expect(functionEntity.position).toEqual({
+            endColumn: 31,
+            endIndex: 1059,
+            line: 41,
+            startColumn: 22,
+            startIndex: 1051,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 32,
+            endIndex: 1060,
+            endLine: 41,
+            startColumn: 1,
+            startIndex: 1030,
+            startLine: 41,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
     });
 });

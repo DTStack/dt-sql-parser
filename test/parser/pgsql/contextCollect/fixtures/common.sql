@@ -43,3 +43,7 @@ SELECT DISTINCT ON (col1,col2) random() AS name1 FROM table_expression1 WHERE na
 
 INSERT INTO insert_films (code, title, did, date_prod, kind)
     VALUES ('T_601', 'Yojimbo', 106, DEFAULT, 'Drama');
+
+CREATE FUNCTION get_color_note (rainbow) RETURNS text AS
+  'SELECT note FROM my_colors WHERE color = $1'
+  LANGUAGE SQL;

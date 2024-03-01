@@ -31,3 +31,20 @@ SELECT * from a;
 SELECT t1.c1, t2.c2 FROM t1 JOIN t2
   ON t1.id = t2.id and t1.type_flag = t2.type_flag
   WHERE t1.c1 > 100;
+
+CREATE DATABASE my_db LOCATION '/path/to/partition';
+
+CREATE SCHEMA IF NOT EXISTS my_schema COMMENT 'my first schema' LOCATION '/path/to/partition';
+
+COMMENT ON DATABASE my_database IS 'This is my database.';
+
+CREATE AGGREGATE FUNCTION function_name(arg_type1, arg_type2)
+RETURNS return_type
+LOCATION 'hdfs_path'
+UPDATE_FN='update_function'
+MERGE_FN='merge_function';
+
+CREATE FUNCTION function_name(arg_type1, arg_type2)
+RETURNS return_type
+LOCATION 'hdfs_path_to_dot_so'
+SYMBOL='symbol_name';
