@@ -1,10 +1,17 @@
 import { ImpalaSqlParserListener } from '../../lib';
 import {
     ColumnNamePathCreateContext,
+    CreateAggregateFunctionContext,
+    CreateFunctionContext,
     CreateKuduTableAsSelectContext,
+    CreateSchemaContext,
     CreateTableLikeContext,
     CreateTableSelectContext,
     CreateViewContext,
+    DatabaseNameCreateContext,
+    DatabaseNamePathContext,
+    FunctionNameCreateContext,
+    FunctionNamePathContext,
     InsertStatementContext,
     QueryStatementContext,
     SingleStatementContext,
@@ -24,10 +31,6 @@ export default class ImpalaEntityCollector
     extends EntityCollector
     implements ImpalaSqlParserListener
 {
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]
@@ -108,6 +111,18 @@ export default class ImpalaEntityCollector
         this.pushEntity(ctx, EntityContextType.VIEW);
     }
 
+    exitDatabaseNamePath(ctx: DatabaseNamePathContext) {
+        this.pushEntity(ctx, EntityContextType.DATABASE);
+    }
+
+    exitDatabaseNameCreate(ctx: DatabaseNameCreateContext) {
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE);
+    }
+
+    exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
+        this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE);
+    }
+
     /** ===== Statement begin */
     enterSingleStatement(ctx: SingleStatementContext) {
         this.pushStmt(ctx, StmtContextType.COMMON_STMT);
@@ -162,6 +177,30 @@ export default class ImpalaEntityCollector
     }
 
     exitInsertStatement(ctx: InsertStatementContext) {
+        this.popStmt();
+    }
+
+    enterCreateSchema(ctx: CreateSchemaContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_DATABASE_STMT);
+    }
+
+    exitCreateSchema(ctx: CreateSchemaContext) {
+        this.popStmt();
+    }
+
+    enterCreateAggregateFunction(ctx: CreateAggregateFunctionContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
+    }
+
+    exitCreateAggregateFunction(ctx: CreateAggregateFunctionContext) {
+        this.popStmt();
+    }
+
+    enterCreateFunction(ctx: CreateFunctionContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
+    }
+
+    exitCreateFunction(ctx: CreateFunctionContext) {
         this.popStmt();
     }
 }

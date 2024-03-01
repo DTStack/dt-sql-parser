@@ -24,3 +24,7 @@ INSERT OVERWRITE DIRECTORY '/path/to/output/directory' SELECT * FROM from_tb WHE
 CREATE DATABASE IF NOT EXISTS customer_db;
 
 USE NAMESPACE ns1;
+
+CREATE OR REPLACE FUNCTION simple_udf AS 'SimpleUdfR';
+
+CREATE FUNCTION simple_udf AS 'SimpleUdfR';

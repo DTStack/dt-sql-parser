@@ -6,6 +6,7 @@ import type {
     CreateMaterializedViewContext,
     CreatePartitionForeignTableContext,
     CreateViewContext,
+    CreatefunctionstmtContext,
     DatabaseNameContext,
     DatabaseNameCreateContext,
     FunctionNameCreateContext,
@@ -30,10 +31,6 @@ export default class PostgreSQLEntityCollector
     extends EntityCollector
     implements PostgreSQLParserListener
 {
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]
@@ -204,6 +201,14 @@ export default class PostgreSQLEntityCollector
     }
 
     exitInsertStatement(ctx: InsertStatementContext) {
+        this.popStmt();
+    }
+
+    enterCreatefunctionstmt(ctx: CreatefunctionstmtContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
+    }
+
+    exitCreatefunctionstmt(ctx: CreatefunctionstmtContext) {
         this.popStmt();
     }
 }

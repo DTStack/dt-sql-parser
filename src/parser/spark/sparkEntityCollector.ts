@@ -16,6 +16,8 @@ import type {
     MultipleInsertContext,
     CreateViewContext,
     CreateTempViewUsingContext,
+    CreateNamespaceContext,
+    CreateFunctionContext,
 } from '../../lib/spark/SparkSqlParser';
 import type { SparkSqlParserListener } from '../../lib/spark/SparkSqlParserListener';
 import { EntityContextType } from '../common/basic-parser-types';
@@ -29,10 +31,6 @@ export default class SparkEntityCollector
     extends EntityCollector
     implements SparkSqlParserListener
 {
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
     combineRootStmtEntities(
         stmtContext: StmtContext,
         entitiesInsideStmt: EntityContext[]
@@ -195,6 +193,22 @@ export default class SparkEntityCollector
     }
 
     exitMultipleInsert(ctx: MultipleInsertContext) {
+        this.popStmt();
+    }
+
+    enterCreateNamespace(ctx: CreateNamespaceContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_DATABASE_STMT);
+    }
+
+    exitCreateNamespace(ctx: CreateNamespaceContext) {
+        this.popStmt();
+    }
+
+    enterCreateFunction(ctx: CreateFunctionContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
+    }
+
+    exitCreateFunction(ctx: CreateFunctionContext) {
         this.popStmt();
     }
 }

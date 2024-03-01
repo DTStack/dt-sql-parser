@@ -48,3 +48,13 @@ FROM source_table;
 FROM page_view_stg pvs
 INSERT OVERWRITE TABLE page_view PARTITION(dt='2008-06-08', country)
 SELECT pvs.viewTime, pvs.userid, pvs.page_url, pvs.referrer_url, null, null, pvs.ip, pvs.cnt;
+
+CREATE DATABASE mydb;
+
+CREATE REMOTE DATABASE mydb;
+
+SHOW LOCKS DATABASE db1;
+
+CREATE FUNCTION base_analizer AS 'com.udf.BaseFieldUDF';
+
+CREATE TEMPORARY FUNCTION flat_analizer AS 'com.udtf.EventJsonUDTF';

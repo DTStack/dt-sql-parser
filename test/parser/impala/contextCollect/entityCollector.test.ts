@@ -21,7 +21,7 @@ describe('ImpalaSQL entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(9);
+        expect(splitListener.statementsContext.length).toBe(14);
     });
 
     test('create table by like', () => {
@@ -411,5 +411,190 @@ describe('ImpalaSQL entity collector tests', () => {
         expect(tableEntity2.columns).toBeNull();
         expect(tableEntity2.relatedEntities).toBeNull();
         expect(tableEntity2.belongStmt).toBe(tableEntity1.belongStmt);
+    });
+
+    test('create db', () => {
+        const columnCreateTableContext = splitListener.statementsContext[9];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(dbEntity.text).toBe('my_db');
+        expect(dbEntity.position).toEqual({
+            endColumn: 22,
+            endIndex: 1046,
+            line: 35,
+            startColumn: 17,
+            startIndex: 1042,
+        });
+
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 52,
+            endIndex: 1076,
+            endLine: 35,
+            startColumn: 1,
+            startIndex: 1026,
+            startLine: 35,
+        });
+
+        expect(dbEntity.columns).toBeNull();
+        expect(dbEntity.relatedEntities).toBeNull();
+    });
+
+    test('create schema', () => {
+        const columnCreateTableContext = splitListener.statementsContext[10];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const schemaEntity = allEntities[0];
+
+        expect(schemaEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(schemaEntity.text).toBe('my_schema');
+        expect(schemaEntity.position).toEqual({
+            endColumn: 38,
+            endIndex: 1116,
+            line: 37,
+            startColumn: 29,
+            startIndex: 1108,
+        });
+
+        expect(schemaEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
+        expect(schemaEntity.belongStmt.position).toEqual({
+            endColumn: 94,
+            endIndex: 1172,
+            endLine: 37,
+            startColumn: 1,
+            startIndex: 1080,
+            startLine: 37,
+        });
+
+        expect(schemaEntity.columns).toBeNull();
+        expect(schemaEntity.relatedEntities).toBeNull();
+    });
+
+    test('comment dbName', () => {
+        const columnCreateTableContext = splitListener.statementsContext[11];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE);
+        expect(dbEntity.text).toBe('my_database');
+        expect(dbEntity.position).toEqual({
+            endColumn: 32,
+            endIndex: 1206,
+            line: 39,
+            startColumn: 21,
+            startIndex: 1196,
+        });
+
+        // 由于没有处理 comment 语句，所以当前是处于 COMMON_STMT
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 59,
+            endIndex: 1233,
+            endLine: 39,
+            startColumn: 1,
+            startIndex: 1176,
+            startLine: 39,
+        });
+
+        expect(dbEntity.columns).toBeNull();
+        expect(dbEntity.relatedEntities).toBeNull();
+    });
+
+    test('create aggregate function', () => {
+        const columnCreateTableContext = splitListener.statementsContext[12];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('function_name');
+        expect(functionEntity.position).toEqual({
+            endColumn: 40,
+            endIndex: 1274,
+            line: 41,
+            startColumn: 27,
+            startIndex: 1262,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_FUNCTION_STMT
+        );
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 26,
+            endIndex: 1391,
+            endLine: 45,
+            startColumn: 1,
+            startIndex: 1236,
+            startLine: 41,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
+    });
+
+    test('create function', () => {
+        const columnCreateTableContext = splitListener.statementsContext[13];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('function_name');
+        expect(functionEntity.position).toEqual({
+            endColumn: 30,
+            endIndex: 1423,
+            line: 47,
+            startColumn: 17,
+            startIndex: 1411,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_FUNCTION_STMT
+        );
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 21,
+            endIndex: 1517,
+            endLine: 50,
+            startColumn: 1,
+            startIndex: 1395,
+            startLine: 47,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
     });
 });

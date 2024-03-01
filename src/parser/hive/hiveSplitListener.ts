@@ -1,21 +1,12 @@
 import { StatementContext } from '../../lib/hive/HiveSqlParser';
 import { HiveSqlParserListener } from '../../lib/hive/HiveSqlParserListener';
+import SplitListener from '../common/splitListener';
 
-export class HiveSqlSplitListener implements HiveSqlParserListener {
-    private _statementContext: StatementContext[] = [];
-
+export class HiveSqlSplitListener
+    extends SplitListener<StatementContext>
+    implements HiveSqlParserListener
+{
     exitStatement = (ctx: StatementContext) => {
-        this._statementContext.push(ctx);
+        this._statementsContext.push(ctx);
     };
-
-    enterStatement = (ctx: StatementContext) => {};
-
-    get statementsContext() {
-        return this._statementContext;
-    }
-
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
 }

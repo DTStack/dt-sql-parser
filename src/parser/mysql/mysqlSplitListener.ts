@@ -1,20 +1,12 @@
 import { SingleStatementContext } from '../../lib/mysql/MySqlParser';
 import { MySqlParserListener } from '../../lib/mysql/MySqlParserListener';
+import SplitListener from '../common/splitListener';
 
-export default class MysqlSplitListener implements MySqlParserListener {
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
-    private _statementsContext: SingleStatementContext[] = [];
-
+export default class MysqlSplitListener
+    extends SplitListener<SingleStatementContext>
+    implements MySqlParserListener
+{
     exitSingleStatement = (ctx: SingleStatementContext) => {
         this._statementsContext.push(ctx);
     };
-
-    enterSingleStatement = (ctx: SingleStatementContext) => {};
-
-    get statementsContext() {
-        return this._statementsContext;
-    }
 }

@@ -10,6 +10,7 @@ import { FlinkSqlParserListener } from '../lib/flinksql/FlinkSqlParserListener';
 import { EntityContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
 import BasicParser from './common/basicParser';
 import { StmtContextType } from './common/entityCollector';
+import SplitListener from './common/splitListener';
 
 export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -133,19 +134,11 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
     }
 }
 
-export class FlinkSqlSplitListener implements FlinkSqlParserListener {
-    private _statementsContext: SingleStatementContext[] = [];
-
+export class FlinkSqlSplitListener
+    extends SplitListener<SingleStatementContext>
+    implements FlinkSqlParserListener
+{
     exitSingleStatement = (ctx: SingleStatementContext) => {
         this._statementsContext.push(ctx);
     };
-
-    visitTerminal() {}
-    visitErrorNode() {}
-    enterEveryRule() {}
-    exitEveryRule() {}
-
-    get statementsContext() {
-        return this._statementsContext;
-    }
 }

@@ -20,7 +20,7 @@ describe('Hive entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(13);
+        expect(splitListener.statementsContext.length).toBe(18);
     });
 
     test('create table by like', () => {
@@ -564,5 +564,189 @@ describe('Hive entity collector tests', () => {
         expect(fromTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
         expect(fromTableEntity.text).toBe('page_view_stg');
         expect(fromTableEntity.belongStmt).toEqual(insertTableEntity.belongStmt);
+    });
+
+    test('create db', () => {
+        const columnCreateTableContext = splitListener.statementsContext[13];
+
+        const collectListener = new HiveEntityCollector(commonSql);
+        hiveSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(dbEntity.text).toBe('mydb');
+        expect(dbEntity.position).toEqual({
+            endColumn: 21,
+            endIndex: 1393,
+            line: 52,
+            startColumn: 17,
+            startIndex: 1390,
+        });
+
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 21,
+            endIndex: 1393,
+            endLine: 52,
+            startColumn: 1,
+            startIndex: 1374,
+            startLine: 52,
+        });
+
+        expect(dbEntity.columns).toBeNull();
+        expect(dbEntity.relatedEntities).toBeNull();
+    });
+
+    test('create remote db', () => {
+        const columnCreateTableContext = splitListener.statementsContext[14];
+
+        const collectListener = new HiveEntityCollector(commonSql);
+        hiveSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(dbEntity.text).toBe('mydb');
+        expect(dbEntity.position).toEqual({
+            endColumn: 28,
+            endIndex: 1423,
+            line: 54,
+            startColumn: 24,
+            startIndex: 1420,
+        });
+
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 28,
+            endIndex: 1423,
+            endLine: 54,
+            startColumn: 1,
+            startIndex: 1397,
+            startLine: 54,
+        });
+
+        expect(dbEntity.columns).toBeNull();
+        expect(dbEntity.relatedEntities).toBeNull();
+    });
+
+    test('show locks db', () => {
+        const dbContext = splitListener.statementsContext[15];
+
+        const collectListener = new HiveEntityCollector(commonSql);
+        hiveSql.listen(collectListener as ParseTreeListener, dbContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE);
+        expect(dbEntity.text).toBe('db1');
+        expect(dbEntity.position).toEqual({
+            endColumn: 24,
+            endIndex: 1449,
+            line: 56,
+            startColumn: 21,
+            startIndex: 1447,
+        });
+
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 25,
+            endIndex: 1450,
+            endLine: 56,
+            startColumn: 1,
+            startIndex: 1427,
+            startLine: 56,
+        });
+
+        expect(dbEntity.columns).toBeNull();
+        expect(dbEntity.relatedEntities).toBeNull();
+    });
+
+    test('create function', () => {
+        const functionCreateContext = splitListener.statementsContext[16];
+
+        const collectListener = new HiveEntityCollector(commonSql);
+        hiveSql.listen(collectListener as ParseTreeListener, functionCreateContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('base_analizer');
+        expect(functionEntity.position).toEqual({
+            endColumn: 30,
+            endIndex: 1481,
+            line: 58,
+            startColumn: 17,
+            startIndex: 1469,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_FUNCTION_STMT
+        );
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 30,
+            endIndex: 1481,
+            endLine: 58,
+            startColumn: 17,
+            startIndex: 1469,
+            startLine: 58,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
+    });
+
+    test('create temporary function', () => {
+        const functionCreateContext = splitListener.statementsContext[17];
+
+        const collectListener = new HiveEntityCollector(commonSql);
+        hiveSql.listen(collectListener as ParseTreeListener, functionCreateContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const functionEntity = allEntities[0];
+
+        expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
+        expect(functionEntity.text).toBe('flat_analizer');
+        expect(functionEntity.position).toEqual({
+            endColumn: 40,
+            endIndex: 1549,
+            line: 60,
+            startColumn: 27,
+            startIndex: 1537,
+        });
+
+        expect(functionEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_FUNCTION_STMT
+        );
+        expect(functionEntity.belongStmt.position).toEqual({
+            endColumn: 40,
+            endIndex: 1549,
+            endLine: 60,
+            startColumn: 27,
+            startIndex: 1537,
+            startLine: 60,
+        });
+
+        expect(functionEntity.columns).toBeNull();
+        expect(functionEntity.relatedEntities).toBeNull();
     });
 });

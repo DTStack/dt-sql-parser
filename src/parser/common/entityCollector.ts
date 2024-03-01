@@ -15,6 +15,7 @@ export enum StmtContextType {
     CREATE_VIEW_STMT = 'createViewStmt',
     SELECT_STMT = 'selectStmt',
     INSERT_STMT = 'insertStmt',
+    CREATE_FUNCTION_STMT = 'createFunctionStmt',
 }
 
 export interface StmtContext {
@@ -104,6 +105,14 @@ abstract class EntityCollector {
      * unless there are only commonStmts in the _stmtStack.
      * */
     private _rootStmt: StmtContext;
+
+    visitTerminal() {}
+
+    visitErrorNode() {}
+
+    enterEveryRule() {}
+
+    exitEveryRule() {}
 
     getEntities() {
         return Array.from(this._entitiesSet);
