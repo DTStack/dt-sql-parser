@@ -405,7 +405,11 @@ describe('Postgre SQL Syntax Suggestion', () => {
             (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['column_name']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([
+            'table_name',
+            '.',
+            'column_name',
+        ]);
     });
 
     test('Alter Table With Column', () => {
@@ -764,7 +768,11 @@ describe('Postgre SQL Syntax Suggestion', () => {
             (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['columnname']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([
+            'tablename',
+            '.',
+            'columnname',
+        ]);
     });
 
     test('Select With Column', () => {

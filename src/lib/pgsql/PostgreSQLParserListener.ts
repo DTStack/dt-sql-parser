@@ -281,14 +281,13 @@ import { Object_type_any_nameContext } from "./PostgreSQLParser.js";
 import { Object_type_nameContext } from "./PostgreSQLParser.js";
 import { Object_type_name_on_any_nameContext } from "./PostgreSQLParser.js";
 import { Any_name_listContext } from "./PostgreSQLParser.js";
-import { Table_column_nameContext } from "./PostgreSQLParser.js";
 import { Relation_column_nameContext } from "./PostgreSQLParser.js";
 import { Relation_nameContext } from "./PostgreSQLParser.js";
 import { Any_nameContext } from "./PostgreSQLParser.js";
 import { AttrsContext } from "./PostgreSQLParser.js";
 import { Type_name_listContext } from "./PostgreSQLParser.js";
 import { TruncatestmtContext } from "./PostgreSQLParser.js";
-import { Opt_restart_seqsContext } from "./PostgreSQLParser.js";
+import { Truncate_tableContext } from "./PostgreSQLParser.js";
 import { CommentstmtContext } from "./PostgreSQLParser.js";
 import { Comment_textContext } from "./PostgreSQLParser.js";
 import { SeclabelstmtContext } from "./PostgreSQLParser.js";
@@ -389,7 +388,6 @@ import { Reindex_option_listContext } from "./PostgreSQLParser.js";
 import { Reindex_option_elemContext } from "./PostgreSQLParser.js";
 import { AltertblspcstmtContext } from "./PostgreSQLParser.js";
 import { RenamestmtContext } from "./PostgreSQLParser.js";
-import { Opt_columnContext } from "./PostgreSQLParser.js";
 import { Opt_set_dataContext } from "./PostgreSQLParser.js";
 import { AlterobjectdependsstmtContext } from "./PostgreSQLParser.js";
 import { Opt_noContext } from "./PostgreSQLParser.js";
@@ -3687,16 +3685,6 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitAny_name_list?: (ctx: Any_name_listContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.table_column_name`.
-     * @param ctx the parse tree
-     */
-    enterTable_column_name?: (ctx: Table_column_nameContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSQLParser.table_column_name`.
-     * @param ctx the parse tree
-     */
-    exitTable_column_name?: (ctx: Table_column_nameContext) => void;
-    /**
      * Enter a parse tree produced by `PostgreSQLParser.relation_column_name`.
      * @param ctx the parse tree
      */
@@ -3757,15 +3745,15 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      */
     exitTruncatestmt?: (ctx: TruncatestmtContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSQLParser.opt_restart_seqs`.
+     * Enter a parse tree produced by `PostgreSQLParser.truncate_table`.
      * @param ctx the parse tree
      */
-    enterOpt_restart_seqs?: (ctx: Opt_restart_seqsContext) => void;
+    enterTruncate_table?: (ctx: Truncate_tableContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSQLParser.opt_restart_seqs`.
+     * Exit a parse tree produced by `PostgreSQLParser.truncate_table`.
      * @param ctx the parse tree
      */
-    exitOpt_restart_seqs?: (ctx: Opt_restart_seqsContext) => void;
+    exitTruncate_table?: (ctx: Truncate_tableContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.commentstmt`.
      * @param ctx the parse tree
@@ -4766,16 +4754,6 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitRenamestmt?: (ctx: RenamestmtContext) => void;
-    /**
-     * Enter a parse tree produced by `PostgreSQLParser.opt_column`.
-     * @param ctx the parse tree
-     */
-    enterOpt_column?: (ctx: Opt_columnContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSQLParser.opt_column`.
-     * @param ctx the parse tree
-     */
-    exitOpt_column?: (ctx: Opt_columnContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSQLParser.opt_set_data`.
      * @param ctx the parse tree

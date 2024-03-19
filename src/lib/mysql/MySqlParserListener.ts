@@ -219,11 +219,8 @@ import { LoadDataStatementContext } from "./MySqlParser.js";
 import { LoadXmlStatementContext } from "./MySqlParser.js";
 import { ParenthesizedQueryContext } from "./MySqlParser.js";
 import { ReplaceStatementContext } from "./MySqlParser.js";
-import { SimpleSelectContext } from "./MySqlParser.js";
-import { ParenthesisSelectContext } from "./MySqlParser.js";
-import { UnionSelectContext } from "./MySqlParser.js";
-import { UnionParenthesisSelectContext } from "./MySqlParser.js";
-import { WithLateralStatementContext } from "./MySqlParser.js";
+import { UnionAndLateralSelectContext } from "./MySqlParser.js";
+import { SelectExpressionContext } from "./MySqlParser.js";
 import { SetOperationsContext } from "./MySqlParser.js";
 import { QueryExpressionBodyContext } from "./MySqlParser.js";
 import { QueryItemContext } from "./MySqlParser.js";
@@ -265,10 +262,7 @@ import { OuterJoinContext } from "./MySqlParser.js";
 import { NaturalJoinContext } from "./MySqlParser.js";
 import { JoinSpecContext } from "./MySqlParser.js";
 import { QueryExpressionContext } from "./MySqlParser.js";
-import { QueryExpressionNointoContext } from "./MySqlParser.js";
 import { QuerySpecificationContext } from "./MySqlParser.js";
-import { QuerySpecificationNointoContext } from "./MySqlParser.js";
-import { UnionParenthesisContext } from "./MySqlParser.js";
 import { UnionStatementContext } from "./MySqlParser.js";
 import { LateralStatementContext } from "./MySqlParser.js";
 import { JsonTableContext } from "./MySqlParser.js";
@@ -278,10 +272,10 @@ import { JsonOnEmptyContext } from "./MySqlParser.js";
 import { JsonOnErrorContext } from "./MySqlParser.js";
 import { SelectSpecContext } from "./MySqlParser.js";
 import { SelectElementsContext } from "./MySqlParser.js";
+import { SelectExpressionElementContext } from "./MySqlParser.js";
+import { SelectFunctionElementContext } from "./MySqlParser.js";
 import { SelectStarElementContext } from "./MySqlParser.js";
 import { SelectColumnElementContext } from "./MySqlParser.js";
-import { SelectFunctionElementContext } from "./MySqlParser.js";
-import { SelectExpressionElementContext } from "./MySqlParser.js";
 import { SelectIntoVariablesContext } from "./MySqlParser.js";
 import { SelectIntoDumpFileContext } from "./MySqlParser.js";
 import { SelectIntoTextFileContext } from "./MySqlParser.js";
@@ -3099,65 +3093,29 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitReplaceStatement?: (ctx: ReplaceStatementContext) => void;
     /**
-     * Enter a parse tree produced by the `simpleSelect`
+     * Enter a parse tree produced by the `unionAndLateralSelect`
      * labeled alternative in `MySqlParser.selectStatement`.
      * @param ctx the parse tree
      */
-    enterSimpleSelect?: (ctx: SimpleSelectContext) => void;
+    enterUnionAndLateralSelect?: (ctx: UnionAndLateralSelectContext) => void;
     /**
-     * Exit a parse tree produced by the `simpleSelect`
+     * Exit a parse tree produced by the `unionAndLateralSelect`
      * labeled alternative in `MySqlParser.selectStatement`.
      * @param ctx the parse tree
      */
-    exitSimpleSelect?: (ctx: SimpleSelectContext) => void;
+    exitUnionAndLateralSelect?: (ctx: UnionAndLateralSelectContext) => void;
     /**
-     * Enter a parse tree produced by the `parenthesisSelect`
+     * Enter a parse tree produced by the `selectExpression`
      * labeled alternative in `MySqlParser.selectStatement`.
      * @param ctx the parse tree
      */
-    enterParenthesisSelect?: (ctx: ParenthesisSelectContext) => void;
+    enterSelectExpression?: (ctx: SelectExpressionContext) => void;
     /**
-     * Exit a parse tree produced by the `parenthesisSelect`
+     * Exit a parse tree produced by the `selectExpression`
      * labeled alternative in `MySqlParser.selectStatement`.
      * @param ctx the parse tree
      */
-    exitParenthesisSelect?: (ctx: ParenthesisSelectContext) => void;
-    /**
-     * Enter a parse tree produced by the `unionSelect`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     */
-    enterUnionSelect?: (ctx: UnionSelectContext) => void;
-    /**
-     * Exit a parse tree produced by the `unionSelect`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     */
-    exitUnionSelect?: (ctx: UnionSelectContext) => void;
-    /**
-     * Enter a parse tree produced by the `unionParenthesisSelect`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     */
-    enterUnionParenthesisSelect?: (ctx: UnionParenthesisSelectContext) => void;
-    /**
-     * Exit a parse tree produced by the `unionParenthesisSelect`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     */
-    exitUnionParenthesisSelect?: (ctx: UnionParenthesisSelectContext) => void;
-    /**
-     * Enter a parse tree produced by the `withLateralStatement`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     */
-    enterWithLateralStatement?: (ctx: WithLateralStatementContext) => void;
-    /**
-     * Exit a parse tree produced by the `withLateralStatement`
-     * labeled alternative in `MySqlParser.selectStatement`.
-     * @param ctx the parse tree
-     */
-    exitWithLateralStatement?: (ctx: WithLateralStatementContext) => void;
+    exitSelectExpression?: (ctx: SelectExpressionContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.setOperations`.
      * @param ctx the parse tree
@@ -3589,16 +3547,6 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitQueryExpression?: (ctx: QueryExpressionContext) => void;
     /**
-     * Enter a parse tree produced by `MySqlParser.queryExpressionNointo`.
-     * @param ctx the parse tree
-     */
-    enterQueryExpressionNointo?: (ctx: QueryExpressionNointoContext) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.queryExpressionNointo`.
-     * @param ctx the parse tree
-     */
-    exitQueryExpressionNointo?: (ctx: QueryExpressionNointoContext) => void;
-    /**
      * Enter a parse tree produced by `MySqlParser.querySpecification`.
      * @param ctx the parse tree
      */
@@ -3608,26 +3556,6 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitQuerySpecification?: (ctx: QuerySpecificationContext) => void;
-    /**
-     * Enter a parse tree produced by `MySqlParser.querySpecificationNointo`.
-     * @param ctx the parse tree
-     */
-    enterQuerySpecificationNointo?: (ctx: QuerySpecificationNointoContext) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.querySpecificationNointo`.
-     * @param ctx the parse tree
-     */
-    exitQuerySpecificationNointo?: (ctx: QuerySpecificationNointoContext) => void;
-    /**
-     * Enter a parse tree produced by `MySqlParser.unionParenthesis`.
-     * @param ctx the parse tree
-     */
-    enterUnionParenthesis?: (ctx: UnionParenthesisContext) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.unionParenthesis`.
-     * @param ctx the parse tree
-     */
-    exitUnionParenthesis?: (ctx: UnionParenthesisContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.unionStatement`.
      * @param ctx the parse tree
@@ -3719,6 +3647,30 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitSelectElements?: (ctx: SelectElementsContext) => void;
     /**
+     * Enter a parse tree produced by the `selectExpressionElement`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    enterSelectExpressionElement?: (ctx: SelectExpressionElementContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectExpressionElement`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    exitSelectExpressionElement?: (ctx: SelectExpressionElementContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectFunctionElement`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    enterSelectFunctionElement?: (ctx: SelectFunctionElementContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectFunctionElement`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    exitSelectFunctionElement?: (ctx: SelectFunctionElementContext) => void;
+    /**
      * Enter a parse tree produced by the `selectStarElement`
      * labeled alternative in `MySqlParser.selectElement`.
      * @param ctx the parse tree
@@ -3742,30 +3694,6 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSelectColumnElement?: (ctx: SelectColumnElementContext) => void;
-    /**
-     * Enter a parse tree produced by the `selectFunctionElement`
-     * labeled alternative in `MySqlParser.selectElement`.
-     * @param ctx the parse tree
-     */
-    enterSelectFunctionElement?: (ctx: SelectFunctionElementContext) => void;
-    /**
-     * Exit a parse tree produced by the `selectFunctionElement`
-     * labeled alternative in `MySqlParser.selectElement`.
-     * @param ctx the parse tree
-     */
-    exitSelectFunctionElement?: (ctx: SelectFunctionElementContext) => void;
-    /**
-     * Enter a parse tree produced by the `selectExpressionElement`
-     * labeled alternative in `MySqlParser.selectElement`.
-     * @param ctx the parse tree
-     */
-    enterSelectExpressionElement?: (ctx: SelectExpressionElementContext) => void;
-    /**
-     * Exit a parse tree produced by the `selectExpressionElement`
-     * labeled alternative in `MySqlParser.selectElement`.
-     * @param ctx the parse tree
-     */
-    exitSelectExpressionElement?: (ctx: SelectExpressionElementContext) => void;
     /**
      * Enter a parse tree produced by the `selectIntoVariables`
      * labeled alternative in `MySqlParser.intoClause`.

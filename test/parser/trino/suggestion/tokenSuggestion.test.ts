@@ -19,7 +19,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['VIEW', 'MATERIALIZED', 'TABLE', 'SCHEMA']);
+        expect(suggestion).toMatchUnorderedArrary(['VIEW', 'MATERIALIZED', 'TABLE', 'SCHEMA']);
     });
 
     test('After CREATE', () => {
@@ -32,7 +32,14 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['ROLE', 'VIEW', 'OR', 'MATERIALIZED', 'TABLE', 'SCHEMA']);
+        expect(suggestion).toMatchUnorderedArrary([
+            'ROLE',
+            'VIEW',
+            'OR',
+            'MATERIALIZED',
+            'TABLE',
+            'SCHEMA',
+        ]);
     });
 
     test('After DEALLOCATE', () => {
@@ -45,7 +52,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['PREPARE']);
+        expect(suggestion).toMatchUnorderedArrary(['PREPARE']);
     });
 
     test('After DELETE', () => {
@@ -58,7 +65,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['FROM']);
+        expect(suggestion).toMatchUnorderedArrary(['FROM']);
     });
 
     test('After DESCRIBE', () => {
@@ -71,7 +78,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['OUTPUT', 'INPUT']);
+        expect(suggestion).toMatchUnorderedArrary(['OUTPUT', 'INPUT']);
     });
 
     test('After DROP', () => {
@@ -84,7 +91,13 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['ROLE', 'VIEW', 'MATERIALIZED', 'TABLE', 'SCHEMA']);
+        expect(suggestion).toMatchUnorderedArrary([
+            'ROLE',
+            'VIEW',
+            'MATERIALIZED',
+            'TABLE',
+            'SCHEMA',
+        ]);
     });
 
     test('After INSERT', () => {
@@ -97,6 +110,6 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toEqual(['INTO']);
+        expect(suggestion).toMatchUnorderedArrary(['INTO']);
     });
 });

@@ -10,6 +10,7 @@ import type {
     FunctionNameCreateContext,
     InsertStatementContext,
     QueryCreateTableContext,
+    SelectExpressionContext,
     SelectStatementContext,
     SingleStatementContext,
     TableNameContext,
@@ -167,35 +168,19 @@ export default class MySqlEntityCollector extends EntityCollector implements MyS
         this.popStmt();
     }
 
-    enterParenthesisSelect(ctx: SelectStatementContext) {
+    enterUnionAndLateralSelect(ctx: SelectStatementContext) {
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
     }
 
-    exitParenthesisSelect(ctx: SelectStatementContext) {
+    exitUnionAndLateralSelect(ctx: SelectStatementContext) {
         this.popStmt();
     }
 
-    enterUnionSelect(ctx: SelectStatementContext) {
+    enterSelectExpression(ctx: SelectStatementContext) {
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
     }
 
-    exitUnionSelect(ctx: SelectStatementContext) {
-        this.popStmt();
-    }
-
-    enterParenthesisUnionSelect(ctx: SelectStatementContext) {
-        this.pushStmt(ctx, StmtContextType.SELECT_STMT);
-    }
-
-    exitParenthesisUnionSelect(ctx: SelectStatementContext) {
-        this.popStmt();
-    }
-
-    enterWithLateralStatement(ctx: SelectStatementContext) {
-        this.pushStmt(ctx, StmtContextType.SELECT_STMT);
-    }
-
-    exitWithLateralStatement(ctx: SelectStatementContext) {
+    exitSelectExpression(ctx: SelectStatementContext) {
         this.popStmt();
     }
 

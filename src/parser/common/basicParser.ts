@@ -8,6 +8,7 @@ import {
     ParserRuleContext,
     ParseTreeWalker,
     ParseTreeListener,
+    PredictionMode,
 } from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
@@ -102,7 +103,7 @@ export default abstract class BasicParser<
         const lexer = this.createLexer(input, errorListener);
         const tokenStream = new CommonTokenStream(lexer);
         const parser = this.createParserFromTokenStream(tokenStream);
-
+        parser.interpreter.predictionMode = PredictionMode.SLL;
         if (errorListener) {
             parser.removeErrorListeners();
             parser.addErrorListener(new ParseErrorListener(errorListener));
@@ -147,6 +148,7 @@ export default abstract class BasicParser<
         this._tokenStream.fill();
 
         this._parser = this.createParserFromTokenStream(this._tokenStream);
+        this._parser.interpreter.predictionMode = PredictionMode.SLL;
         this._parser.buildParseTrees = true;
         this._parser.errorHandler = new ErrorStrategy();
 
@@ -323,6 +325,7 @@ export default abstract class BasicParser<
             tokenStream.fill();
 
             const parser = this.createParserFromTokenStream(tokenStream);
+            parser.interpreter.predictionMode = PredictionMode.SLL;
             parser.removeErrorListeners();
             parser.buildParseTrees = true;
             parser.errorHandler = new ErrorStrategy();

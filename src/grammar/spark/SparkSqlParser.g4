@@ -716,7 +716,8 @@ setQuantifier
     ;
 
 relation
-    : KW_LATERAL? relationPrimary relationExtension*
+    : tableName
+    | KW_LATERAL? relationPrimary relationExtension*
     ;
 
 relationExtension
@@ -1939,7 +1940,6 @@ nonReserved
     | KW_SCHEMAS
     | KW_SECOND
     | KW_SECONDS
-    | KW_SELECT
     | KW_SEPARATED
     | KW_SERDE
     | KW_SERDEPROPERTIES

@@ -20,7 +20,7 @@ describe('MySQL entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(16);
+        expect(splitListener.statementsContext.length).toBe(15);
     });
 
     test('create table by columns', () => {
