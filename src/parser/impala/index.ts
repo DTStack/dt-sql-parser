@@ -6,9 +6,9 @@ import BasicParser from '../common/basicParser';
 import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
 import { StmtContextType } from '../common/entityCollector';
 import { ImpalaSqlSplitListener } from './impalaSplitListener';
-import ImpaleSqlEntityCollector from './impalaEntityCollector';
+import ImpalaEntityCollector from './impalaEntityCollector';
 
-export { ImpaleSqlEntityCollector, ImpalaSqlSplitListener };
+export { ImpalaEntityCollector, ImpalaSqlSplitListener };
 
 export default class ImpalaSQL extends BasicParser<
     ImpalaSqlLexer,
@@ -39,6 +39,10 @@ export default class ImpalaSQL extends BasicParser<
 
     protected get splitListener() {
         return new ImpalaSqlSplitListener();
+    }
+
+    protected createEntityCollector(input: string) {
+        return new ImpalaEntityCollector(input);
     }
 
     protected processCandidates(

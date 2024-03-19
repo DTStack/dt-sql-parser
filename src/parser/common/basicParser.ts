@@ -17,6 +17,8 @@ import { CaretPosition, Suggestions, SyntaxSuggestion } from './basic-parser-typ
 import ParseErrorListener, { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
 import type SplitListener from './splitListener';
+import type EntityCollector from './entityCollector';
+import { EntityContext } from './entityCollector';
 
 /**
  * Custom Parser class, subclass needs extends it.
@@ -72,9 +74,14 @@ export default abstract class BasicParser<
     ): Suggestions<Token>;
 
     /**
-     * Get splitListener instance.
+     * Get a new splitListener instance.
      */
     protected abstract get splitListener(): SplitListener<ParserRuleContext>;
+
+    /**
+     * Get a new entityCollector instance.
+     */
+    protected abstract createEntityCollector(input: string): EntityCollector;
 
     /**
      * Create an antlr4 lexer from input.
@@ -221,7 +228,7 @@ export default abstract class BasicParser<
             return null;
         }
         const splitListener = this.splitListener;
-        // TODO: add splitListener to all sqlParser implements add remove following if
+        // TODO: add splitListener to all sqlParser implements and remove following if
         if (!splitListener) return null;
 
         this.listen(splitListener, this._parseTree);
@@ -244,7 +251,7 @@ export default abstract class BasicParser<
         caretPosition: CaretPosition
     ): Suggestions | null {
         const splitListener = this.splitListener;
-        // TODO: add splitListener to all sqlParser implements add remove following if
+        // TODO: add splitListener to all sqlParser implements and remove following if
         if (!splitListener) return null;
 
         this.parseWithCache(input);
@@ -355,5 +362,32 @@ export default abstract class BasicParser<
             syntax: syntaxSuggestions,
             keywords: originalSuggestions.keywords,
         };
+    }
+
+    public geAllEntities(input: string, caretPosition?: CaretPosition): EntityContext[] | null {
+        const collectListener = this.createEntityCollector(input);
+        // TODO: add entityCollector to all sqlParser implements and remove following if
+        if (!collectListener) {
+            return null;
+        }
+        // const parser = this.parseWithCache(input);
+
+        // parser.entityCollecting = true;
+        // if(caretPosition) {
+        //     const allTokens = this.getAllTokens(input);
+        //     const tokenIndex = findCaretTokenIndex(caretPosition, allTokens);
+        //     parser.caretTokenIndex = tokenIndex;
+        // }
+
+        // const parseTree = parser.program();
+
+        const parseTree = this.parseWithCache(input);
+
+        this.listen(collectListener, parseTree);
+
+        // parser.caretTokenIndex = -1;
+        // parser.entityCollecting = false;
+
+        return collectListener.getEntities();
     }
 }

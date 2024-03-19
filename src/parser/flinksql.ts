@@ -41,6 +41,10 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
         return new FlinkSqlSplitListener();
     }
 
+    protected createEntityCollector(input: string) {
+        return null;
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],

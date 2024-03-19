@@ -25,6 +25,10 @@ export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext,
         return new TrinoSqlSplitListener();
     }
 
+    protected createEntityCollector(input: string) {
+        return new TrinoEntityCollector(input);
+    }
+
     protected preferredRules: Set<number> = new Set([
         TrinoSqlParser.RULE_catalogName,
         TrinoSqlParser.RULE_catalogNameCreate,

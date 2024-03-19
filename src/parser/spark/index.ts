@@ -38,6 +38,10 @@ export default class SparkSQL extends BasicParser<SparkSqlLexer, ProgramContext,
         return new SparkSqlSplitListener();
     }
 
+    protected createEntityCollector(input: string) {
+        return new SparkEntityCollector(input);
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
