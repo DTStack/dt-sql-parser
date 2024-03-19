@@ -279,14 +279,13 @@ import { Object_type_any_nameContext } from "./PostgreSQLParser.js";
 import { Object_type_nameContext } from "./PostgreSQLParser.js";
 import { Object_type_name_on_any_nameContext } from "./PostgreSQLParser.js";
 import { Any_name_listContext } from "./PostgreSQLParser.js";
-import { Table_column_nameContext } from "./PostgreSQLParser.js";
 import { Relation_column_nameContext } from "./PostgreSQLParser.js";
 import { Relation_nameContext } from "./PostgreSQLParser.js";
 import { Any_nameContext } from "./PostgreSQLParser.js";
 import { AttrsContext } from "./PostgreSQLParser.js";
 import { Type_name_listContext } from "./PostgreSQLParser.js";
 import { TruncatestmtContext } from "./PostgreSQLParser.js";
-import { Opt_restart_seqsContext } from "./PostgreSQLParser.js";
+import { Truncate_tableContext } from "./PostgreSQLParser.js";
 import { CommentstmtContext } from "./PostgreSQLParser.js";
 import { Comment_textContext } from "./PostgreSQLParser.js";
 import { SeclabelstmtContext } from "./PostgreSQLParser.js";
@@ -387,7 +386,6 @@ import { Reindex_option_listContext } from "./PostgreSQLParser.js";
 import { Reindex_option_elemContext } from "./PostgreSQLParser.js";
 import { AltertblspcstmtContext } from "./PostgreSQLParser.js";
 import { RenamestmtContext } from "./PostgreSQLParser.js";
-import { Opt_columnContext } from "./PostgreSQLParser.js";
 import { Opt_set_dataContext } from "./PostgreSQLParser.js";
 import { AlterobjectdependsstmtContext } from "./PostgreSQLParser.js";
 import { Opt_noContext } from "./PostgreSQLParser.js";
@@ -2552,12 +2550,6 @@ export class PostgreSQLParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAny_name_list?: (ctx: Any_name_listContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSQLParser.table_column_name`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitTable_column_name?: (ctx: Table_column_nameContext) => Result;
-    /**
      * Visit a parse tree produced by `PostgreSQLParser.relation_column_name`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -2594,11 +2586,11 @@ export class PostgreSQLParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTruncatestmt?: (ctx: TruncatestmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSQLParser.opt_restart_seqs`.
+     * Visit a parse tree produced by `PostgreSQLParser.truncate_table`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_restart_seqs?: (ctx: Opt_restart_seqsContext) => Result;
+    visitTruncate_table?: (ctx: Truncate_tableContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSQLParser.commentstmt`.
      * @param ctx the parse tree
@@ -3199,12 +3191,6 @@ export class PostgreSQLParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitRenamestmt?: (ctx: RenamestmtContext) => Result;
-    /**
-     * Visit a parse tree produced by `PostgreSQLParser.opt_column`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitOpt_column?: (ctx: Opt_columnContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSQLParser.opt_set_data`.
      * @param ctx the parse tree

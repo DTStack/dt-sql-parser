@@ -9,10 +9,10 @@ describe('Spark SQL Listener Tests', () => {
 
     const parseTree = parser.parse(sql);
 
-    test('Listener exitRelationPrimary', () => {
+    test('Listener exitTableName', () => {
         let result = '';
         class MyListener implements SparkSqlParserListener {
-            exitRelationPrimary = (ctx): void => {
+            exitTableName = (ctx): void => {
                 result = ctx.getText().toLowerCase();
             };
             visitTerminal() {}

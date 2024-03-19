@@ -325,13 +325,11 @@ set_rest
     ;
 
 generic_set
-    : (var_name | KW_ALL) (KW_TO | EQUAL)? (var_list | KW_DEFAULT)?
+    : (KW_ALL | var_name) (KW_TO | EQUAL)? (KW_DEFAULT | var_list)?
     ;
 
 set_rest_more
-    : generic_set
-    | var_name KW_FROM KW_CURRENT
-    | KW_TIME KW_ZONE zone_value
+    : KW_TIME KW_ZONE zone_value
     | KW_CATALOG sconst
     | KW_SCHEMA schema_name
     | KW_NAMES opt_encoding?
@@ -339,6 +337,8 @@ set_rest_more
     | KW_SESSION KW_AUTHORIZATION nonreservedword_or_sconst
     | KW_XML KW_OPTION document_or_content
     | KW_TRANSACTION KW_SNAPSHOT sconst
+    | var_name KW_FROM KW_CURRENT
+    | generic_set
     ;
 
 var_name
@@ -404,15 +404,15 @@ variableresetstmt
     ;
 
 reset_rest
-    : generic_reset
-    | KW_TIME KW_ZONE
+    : KW_TIME KW_ZONE
     | KW_TRANSACTION KW_ISOLATION KW_LEVEL
     | KW_SESSION KW_AUTHORIZATION
+    | generic_reset
     ;
 
 generic_reset
-    : var_name
-    | KW_ALL
+    : KW_ALL
+    | var_name
     ;
 
 setresetclause
@@ -513,45 +513,19 @@ index_partition_cmd
     ;
 
 alter_table_cmd
-    : KW_ADD opt_column? opt_if_not_exists? columnDefCluase
-    | KW_ALTER opt_column? column_name alter_column_default
-    | KW_ALTER opt_column? column_name KW_DROP KW_NOT KW_NULL
-    | KW_ALTER opt_column? column_name KW_SET KW_NOT KW_NULL
-    | KW_ALTER opt_column? column_name KW_DROP KW_EXPRESSION opt_if_exists?
-    | KW_ALTER opt_column? column_name KW_SET KW_STATISTICS signediconst
-    | KW_ALTER opt_column? column_name KW_SET KW_STATISTICS signediconst
-    | KW_ALTER opt_column? column_name KW_SET reloptions
-    | KW_ALTER opt_column? column_name KW_RESET reloptions
-    | KW_ALTER opt_column? column_name KW_SET KW_STORAGE colid
-    | KW_ALTER opt_column? column_name KW_ADD KW_GENERATED generated_when KW_AS KW_IDENTITY optparenthesizedseqoptlist?
-    | KW_ALTER opt_column? column_name alter_identity_column_option_list
-    | KW_ALTER opt_column? column_name KW_DROP KW_IDENTITY opt_if_exists?
-    | KW_DROP opt_column? opt_if_exists? column_name opt_drop_behavior?
-    | KW_ALTER opt_column? column_name opt_set_data? KW_TYPE typename opt_collate_clause? alter_using?
-    | KW_ALTER opt_column? column_name alter_generic_options
-    | KW_ADD tableconstraint
+    : KW_ADD (KW_CONSTRAINT name)? constraintelem
     | KW_ALTER KW_CONSTRAINT name constraintattributespec
     | KW_VALIDATE KW_CONSTRAINT name
     | KW_DROP KW_CONSTRAINT opt_if_exists? name opt_drop_behavior?
     | KW_SET KW_WITHOUT KW_OIDS
     | KW_CLUSTER KW_ON name
     | KW_SET KW_WITHOUT KW_CLUSTER
-    | KW_SET KW_LOGGED
-    | KW_SET KW_UNLOGGED
-    | KW_ENABLE KW_TRIGGER name
-    | KW_ENABLE KW_ALWAYS KW_TRIGGER name
-    | KW_ENABLE KW_REPLICA KW_TRIGGER name
-    | KW_ENABLE KW_TRIGGER KW_ALL
-    | KW_ENABLE KW_TRIGGER KW_USER
-    | KW_DISABLE KW_TRIGGER name
-    | KW_DISABLE KW_TRIGGER KW_ALL
-    | KW_DISABLE KW_TRIGGER KW_USER
-    | KW_ENABLE KW_RULE name
-    | KW_ENABLE KW_ALWAYS KW_RULE name
-    | KW_ENABLE KW_REPLICA KW_RULE name
+    | KW_SET (KW_LOGGED | KW_UNLOGGED)
+    | KW_ENABLE (KW_REPLICA | KW_ALWAYS)? KW_TRIGGER
+    | KW_DISABLE KW_TRIGGER (KW_ALL | KW_USER | name)
+    | KW_ENABLE (KW_ALWAYS | KW_REPLICA) KW_RULE name
     | KW_DISABLE KW_RULE name
-    | KW_INHERIT qualified_name
-    | KW_NO KW_INHERIT qualified_name
+    | KW_NO? KW_INHERIT qualified_name
     | KW_OF any_name
     | KW_NOT KW_OF
     | KW_OWNER KW_TO rolespec
@@ -563,6 +537,19 @@ alter_table_cmd
     | KW_DISABLE KW_ROW KW_LEVEL KW_SECURITY
     | KW_FORCE KW_ROW KW_LEVEL KW_SECURITY
     | KW_NO KW_FORCE KW_ROW KW_LEVEL KW_SECURITY
+    | KW_DROP KW_COLUMN? opt_if_exists? column_name opt_drop_behavior?
+    | KW_ADD KW_COLUMN? opt_if_not_exists? columnDefCluase
+    | KW_ALTER KW_COLUMN? column_name alter_column_default
+    | KW_ALTER KW_COLUMN? column_name (KW_DROP | KW_SET) KW_NOT KW_NULL
+    | KW_ALTER KW_COLUMN? column_name KW_DROP KW_EXPRESSION opt_if_exists?
+    | KW_ALTER KW_COLUMN? column_name KW_SET KW_STATISTICS signediconst
+    | KW_ALTER KW_COLUMN? column_name (KW_SET | KW_RESET) reloptions
+    | KW_ALTER KW_COLUMN? column_name KW_SET KW_STORAGE colid
+    | KW_ALTER KW_COLUMN? column_name KW_ADD KW_GENERATED generated_when KW_AS KW_IDENTITY optparenthesizedseqoptlist?
+    | KW_ALTER KW_COLUMN? column_name alter_identity_column_option_list
+    | KW_ALTER KW_COLUMN? column_name KW_DROP KW_IDENTITY opt_if_exists?
+    | KW_ALTER KW_COLUMN? column_name opt_set_data? KW_TYPE typename opt_collate_clause? alter_using?
+    | KW_ALTER KW_COLUMN? column_name alter_generic_options
     | alter_generic_options
     ;
 
@@ -1058,7 +1045,7 @@ seqoptelem
     | KW_MAXVALUE numericonly
     | KW_MINVALUE numericonly
     | KW_NO (KW_MAXVALUE | KW_MINVALUE | KW_CYCLE)
-    | KW_OWNED KW_BY table_column_name
+    | KW_OWNED KW_BY column_name
     | KW_SEQUENCE KW_NAME any_name
     | KW_START opt_with? numericonly
     | KW_RESTART opt_with? numericonly?
@@ -1478,9 +1465,7 @@ altereventtrigstmt
     ;
 
 enable_trigger
-    : KW_ENABLE
-    | KW_ENABLE KW_REPLICA
-    | KW_ENABLE KW_ALWAYS
+    : KW_ENABLE (KW_REPLICA | KW_ALWAYS)?
     | KW_DISABLE
     ;
 
@@ -1547,9 +1532,9 @@ enum_val_list
     ;
 
 alterenumstmt
-    : KW_ALTER KW_TYPE any_name KW_ADD KW_VALUE opt_if_not_exists? sconst
-    | KW_ALTER KW_TYPE any_name KW_ADD KW_VALUE opt_if_not_exists? sconst KW_BEFORE sconst
-    | KW_ALTER KW_TYPE any_name KW_ADD KW_VALUE opt_if_not_exists? sconst KW_AFTER sconst
+    : KW_ALTER KW_TYPE any_name KW_ADD KW_VALUE opt_if_not_exists? sconst (
+        (KW_BEFORE | KW_AFTER) sconst
+    )?
     | KW_ALTER KW_TYPE any_name KW_RENAME KW_VALUE sconst KW_TO sconst
     ;
 
@@ -1660,19 +1645,14 @@ view_nameList
     ;
 
 object_type_any_name
-    : KW_TABLE table_name
-    | KW_SEQUENCE any_name
-    | KW_VIEW view_name
-    | KW_MATERIALIZED KW_VIEW view_name
+    : KW_FOREIGN? KW_TABLE table_name
+    | KW_MATERIALIZED? KW_VIEW view_name
     | KW_INDEX any_name
-    | KW_FOREIGN KW_TABLE table_name
     | KW_COLLATION any_name
     | KW_CONVERSION any_name
     | KW_STATISTICS any_name
-    | KW_TEXT KW_SEARCH KW_PARSER any_name
-    | KW_TEXT KW_SEARCH KW_DICTIONARY any_name
-    | KW_TEXT KW_SEARCH KW_TEMPLATE any_name
-    | KW_TEXT KW_SEARCH KW_CONFIGURATION any_name
+    | KW_SEQUENCE any_name
+    | KW_TEXT KW_SEARCH (KW_PARSER | KW_DICTIONARY | KW_TEMPLATE | KW_CONFIGURATION) any_name
     ;
 
 object_type_name
@@ -1700,10 +1680,6 @@ any_name_list
     : any_name (COMMA any_name)*
     ;
 
-table_column_name
-    : table_name DOT column_name
-    ;
-
 relation_column_name
     : relation_name DOT column_name
     ;
@@ -1725,12 +1701,13 @@ type_name_list
     ;
 
 truncatestmt
-    : KW_TRUNCATE opt_table? relation_expr_list opt_restart_seqs? opt_drop_behavior?
+    : KW_TRUNCATE KW_TABLE? truncate_table (COMMA truncate_table)* (
+        (KW_CONTINUE | KW_RESTART) KW_IDENTITY
+    )? opt_drop_behavior?
     ;
 
-opt_restart_seqs
-    : KW_CONTINUE KW_IDENTITY
-    | KW_RESTART KW_IDENTITY
+truncate_table
+    : KW_ONLY? table_name STAR?
     ;
 
 commentstmt
@@ -1762,9 +1739,7 @@ comment_text
     ;
 
 seclabelstmt
-    : KW_SECURITY KW_LABEL opt_provider? KW_ON object_type_any_name KW_IS security_label
-    | KW_SECURITY KW_LABEL opt_provider? KW_ON KW_COLUMN table_column_name KW_IS security_label
-    | KW_SECURITY KW_LABEL opt_provider? KW_ON object_type_name KW_IS security_label
+    : KW_SECURITY KW_LABEL opt_provider? KW_ON KW_COLUMN column_name KW_IS security_label
     | KW_SECURITY KW_LABEL opt_provider? KW_ON KW_TYPE typename KW_IS security_label
     | KW_SECURITY KW_LABEL opt_provider? KW_ON KW_DOMAIN typename KW_IS security_label
     | KW_SECURITY KW_LABEL opt_provider? KW_ON KW_AGGREGATE aggregate_with_argtypes KW_IS security_label
@@ -1772,6 +1747,8 @@ seclabelstmt
     | KW_SECURITY KW_LABEL opt_provider? KW_ON KW_LARGE KW_OBJECT numericonly KW_IS security_label
     | KW_SECURITY KW_LABEL opt_provider? KW_ON KW_PROCEDURE procedure_with_argtypes KW_IS security_label
     | KW_SECURITY KW_LABEL opt_provider? KW_ON KW_ROUTINE routine_with_argtypes KW_IS security_label
+    | KW_SECURITY KW_LABEL opt_provider? KW_ON object_type_any_name KW_IS security_label
+    | KW_SECURITY KW_LABEL opt_provider? KW_ON object_type_name KW_IS security_label
     ;
 
 opt_provider
@@ -2335,11 +2312,11 @@ renamestmt
     | KW_ALTER KW_MATERIALIZED KW_VIEW opt_if_exists? view_name KW_RENAME KW_TO view_name_create
     | KW_ALTER KW_INDEX opt_if_exists? qualified_name KW_RENAME KW_TO name
     | KW_ALTER KW_FOREIGN KW_TABLE opt_if_exists? relation_expr KW_RENAME KW_TO table_name_create
-    | KW_ALTER KW_TABLE opt_if_exists? relation_expr KW_RENAME opt_column? column_name KW_TO column_name_create
-    | KW_ALTER KW_VIEW opt_if_exists? view_name KW_RENAME opt_column? column_name KW_TO column_name_create
-    | KW_ALTER KW_MATERIALIZED KW_VIEW opt_if_exists? view_name KW_RENAME opt_column? column_name KW_TO column_name_create
+    | KW_ALTER KW_TABLE opt_if_exists? relation_expr KW_RENAME KW_COLUMN? column_name KW_TO column_name_create
+    | KW_ALTER KW_VIEW opt_if_exists? view_name KW_RENAME KW_COLUMN? column_name KW_TO column_name_create
+    | KW_ALTER KW_MATERIALIZED KW_VIEW opt_if_exists? view_name KW_RENAME KW_COLUMN? column_name KW_TO column_name_create
     | KW_ALTER KW_TABLE opt_if_exists? relation_expr KW_RENAME KW_CONSTRAINT name KW_TO name
-    | KW_ALTER KW_FOREIGN KW_TABLE opt_if_exists? relation_expr KW_RENAME opt_column? column_name KW_TO column_name_create
+    | KW_ALTER KW_FOREIGN KW_TABLE opt_if_exists? relation_expr KW_RENAME KW_COLUMN? column_name KW_TO column_name_create
     | KW_ALTER KW_RULE name KW_ON qualified_name KW_RENAME KW_TO name
     | KW_ALTER KW_TRIGGER name KW_ON qualified_name KW_RENAME KW_TO name
     | KW_ALTER KW_EVENT KW_TRIGGER name KW_RENAME KW_TO name
@@ -2353,10 +2330,6 @@ renamestmt
     | KW_ALTER KW_TEXT KW_SEARCH KW_CONFIGURATION any_name KW_RENAME KW_TO name
     | KW_ALTER KW_TYPE any_name KW_RENAME KW_TO name
     | KW_ALTER KW_TYPE any_name KW_RENAME KW_ATTRIBUTE name KW_TO name opt_drop_behavior?
-    ;
-
-opt_column
-    : KW_COLUMN
     ;
 
 opt_set_data
@@ -2560,17 +2533,15 @@ transactionstmt
     : KW_ABORT opt_transaction? opt_transaction_chain?
     | KW_BEGIN opt_transaction? transaction_mode_list_or_empty?
     | KW_START KW_TRANSACTION transaction_mode_list_or_empty?
-    | KW_COMMIT opt_transaction? opt_transaction_chain?
     | KW_END opt_transaction? opt_transaction_chain?
-    | KW_ROLLBACK opt_transaction? opt_transaction_chain?
     | KW_SAVEPOINT colid
-    | KW_RELEASE KW_SAVEPOINT colid
-    | KW_RELEASE colid
-    | KW_ROLLBACK opt_transaction? KW_TO KW_SAVEPOINT colid
-    | KW_ROLLBACK opt_transaction? KW_TO colid
+    | KW_RELEASE KW_SAVEPOINT? colid
     | KW_PREPARE KW_TRANSACTION sconst
     | KW_COMMIT KW_PREPARED sconst
+    | KW_COMMIT opt_transaction? opt_transaction_chain?
     | KW_ROLLBACK KW_PREPARED sconst
+    | KW_ROLLBACK opt_transaction? KW_TO KW_SAVEPOINT? colid
+    | KW_ROLLBACK opt_transaction? opt_transaction_chain?
     ;
 
 opt_transaction
@@ -2630,13 +2601,13 @@ createdb_opt_item
     ;
 
 createdb_opt_name
-    : identifier
-    | KW_CONNECTION KW_LIMIT
+    : KW_CONNECTION KW_LIMIT
     | KW_ENCODING
     | KW_LOCATION
     | KW_OWNER
     | KW_TABLESPACE
     | KW_TEMPLATE
+    | identifier
     ;
 
 opt_equal
@@ -2645,9 +2616,8 @@ opt_equal
 
 alterdatabasestmt
     : KW_ALTER KW_DATABASE database_name (
-        (KW_WITH? createdb_opt_list)?
-        | createdb_opt_list?
-        | (KW_SET KW_TABLESPACE tablespace_name_create)?
+        (KW_SET KW_TABLESPACE tablespace_name_create)?
+        | (KW_WITH? createdb_opt_list)?
     )
     ;
 
@@ -2869,10 +2839,7 @@ execute_param_clause
     ;
 
 deallocatestmt
-    : KW_DEALLOCATE name
-    | KW_DEALLOCATE KW_PREPARE name
-    | KW_DEALLOCATE KW_ALL
-    | KW_DEALLOCATE KW_PREPARE KW_ALL
+    : KW_DEALLOCATE KW_PREPARE? (name | KW_ALL)
     ;
 
 insertstmt
@@ -3150,7 +3117,7 @@ fetch_clause
     ;
 
 offset_clause
-    : KW_OFFSET (select_offset_value | select_fetch_first_value row_or_rows)
+    : KW_OFFSET (select_fetch_first_value row_or_rows | select_offset_value)
     ;
 
 select_limit_value
@@ -3163,9 +3130,9 @@ select_offset_value
     ;
 
 select_fetch_first_value
-    : c_expr
-    | PLUS i_or_f_const
+    : PLUS i_or_f_const
     | MINUS i_or_f_const
+    | c_expr
     ;
 
 i_or_f_const
@@ -3303,13 +3270,13 @@ join_qual
     ;
 
 relation_expr
-    : KW_ONLY? table_name STAR? columnlist? where_clause?
+    : KW_ONLY? table_name STAR?
     | KW_ONLY ( table_name | OPEN_PAREN table_name CLOSE_PAREN)
     | KW_IN KW_SCHEMA (schema_name | KW_CURRENT_SCHEMA)
     ;
 
 view_relation_expr
-    : KW_ONLY? view_name STAR? columnlist? where_clause?
+    : KW_ONLY? view_name STAR?
     ;
 
 publication_relation_expr
@@ -3737,7 +3704,6 @@ c_expr
     | PARAM opt_indirection                                           # c_expr_expr
     | KW_GROUPING OPEN_PAREN expr_list CLOSE_PAREN                    # c_expr_expr
     | /*22*/ KW_UNIQUE select_with_parens                             # c_expr_expr
-    | columnref                                                       # c_expr_expr
     | aexprconst                                                      # c_expr_expr
     | plsqlvariablename                                               # c_expr_expr
     | OPEN_PAREN a_expr_in_parens= a_expr CLOSE_PAREN opt_indirection # c_expr_expr
@@ -3747,6 +3713,7 @@ c_expr
     | explicit_row                                                    # c_expr_expr
     | implicit_row                                                    # c_expr_expr
     | row KW_OVERLAPS row /* 14*/                                     # c_expr_expr
+    | columnref                                                       # c_expr_expr
     ;
 
 plsqlvariablename
@@ -3921,7 +3888,7 @@ explicit_row
     ;
 
 implicit_row
-    : OPEN_PAREN expr_list COMMA a_expr CLOSE_PAREN
+    : OPEN_PAREN a_expr COMMA expr_list CLOSE_PAREN
     ;
 
 sub_type
@@ -4203,7 +4170,7 @@ procedure_name_create
     ;
 
 column_name
-    : colid
+    : colid indirection_el*
     ;
 
 column_name_create
@@ -5509,7 +5476,6 @@ plsql_unreserved_keyword
     | KW_CHAIN
     | KW_CLOSE
     | KW_COLLATE
-    | KW_COLUMN
     //| COLUMN_NAME
     | KW_COMMIT
     | KW_CONSTANT

@@ -902,18 +902,27 @@ replaceStatement
     )? (('(' columnNames ')')? replaceStatementValuesOrSelectOrTable | setAssignmentList)
     ;
 
-// into clause within a given statement can appear only once
+// selectStatement
+//     : querySpecification lockClause?                   # simpleSelect
+//     | querySpecificationNointo lockClause? intoClause? # simpleSelect
+//     | queryExpression lockClause?                      # parenthesisSelect
+//     | querySpecificationNointo unionStatement+ (
+//         KW_UNION unionType=(KW_ALL | KW_DISTINCT)? (querySpecification | queryExpression)
+//     )? orderByClause? limitClause? lockClause? # unionSelect
+//     | queryExpressionNointo unionParenthesis+ (
+//         KW_UNION unionType=(KW_ALL | KW_DISTINCT)? queryExpression
+//     )? orderByClause? limitClause? lockClause?         # unionParenthesisSelect
+//     | querySpecificationNointo (',' lateralStatement)+ # withLateralStatement
+//     ;
+
+// TODO: Simplify the rules to fit SLL(*) Mode
 selectStatement
-    : querySpecification lockClause?                   # simpleSelect
-    | querySpecificationNointo lockClause? intoClause? # simpleSelect
-    | queryExpression lockClause?                      # parenthesisSelect
-    | querySpecificationNointo unionStatement+ (
+    : querySpecification unionStatement* (
         KW_UNION unionType=(KW_ALL | KW_DISTINCT)? (querySpecification | queryExpression)
-    )? orderByClause? limitClause? lockClause? # unionSelect
-    | queryExpressionNointo unionParenthesis+ (
+    )? (',' lateralStatement)* orderByClause? limitClause? lockClause? intoClause? # unionAndLateralSelect
+    | queryExpression unionStatement* (
         KW_UNION unionType=(KW_ALL | KW_DISTINCT)? queryExpression
-    )? orderByClause? limitClause? lockClause?         # unionParenthesisSelect
-    | querySpecificationNointo (',' lateralStatement)+ # withLateralStatement
+    )? orderByClause? limitClause? lockClause? # selectExpression
     ;
 
 // https://dev.mysql.com/doc/refman/8.0/en/set-operations.html
@@ -1106,34 +1115,24 @@ queryExpression
     | '(' queryExpression ')'
     ;
 
-queryExpressionNointo
-    : '(' querySpecificationNointo ')'
-    | '(' queryExpressionNointo ')'
-    ;
-
-// into clause within a given statement can appear only once
+/**
+ * TODO: intoClause is allowed to appear multiple times, 
+ * which is inconsistent with the actual syntax, 
+ * but is currently unsolvable because the correct syntax cannot be handled by SLL(*) Mode
+ */
 querySpecification
-    : KW_SELECT selectSpec* selectElements intoClause? fromClause groupByClause? havingClause? windowClause? orderByClause? limitClause?
-    | KW_SELECT selectSpec* selectElements fromClause groupByClause? havingClause? windowClause? orderByClause? limitClause? intoClause?
-    ;
-
-querySpecificationNointo
-    : KW_SELECT selectSpec* selectElements fromClause groupByClause? havingClause? windowClause? orderByClause? limitClause?
-    ;
-
-unionParenthesis
-    : KW_UNION unionType=(KW_ALL | KW_DISTINCT)? queryExpressionNointo
+    : KW_SELECT selectSpec* selectElements intoClause? fromClause groupByClause? havingClause? windowClause? orderByClause? limitClause? intoClause?
     ;
 
 unionStatement
-    : KW_UNION unionType=(KW_ALL | KW_DISTINCT)? (querySpecificationNointo | queryExpressionNointo)
+    : KW_UNION unionType=(KW_ALL | KW_DISTINCT)? (querySpecification | queryExpression)
     ;
 
 lateralStatement
     : KW_LATERAL (
-        querySpecificationNointo
-        | queryExpressionNointo
-        | ('(' (querySpecificationNointo | queryExpressionNointo) ')' (KW_AS? alias=uid)?)
+        querySpecification
+        | queryExpression
+        | ('(' (querySpecification | queryExpression) ')' (KW_AS? alias=uid)?)
     )
     ;
 
@@ -1187,10 +1186,10 @@ selectElements
     ;
 
 selectElement
-    : select_element=fullId '.' '*'                         # selectStarElement
-    | columnName (KW_AS? alias=uid)?                        # selectColumnElement
+    : (LOCAL_ID VAR_ASSIGN)? expression (KW_AS? alias=uid)? # selectExpressionElement
     | functionCall (KW_AS? alias=uid)?                      # selectFunctionElement
-    | (LOCAL_ID VAR_ASSIGN)? expression (KW_AS? alias=uid)? # selectExpressionElement
+    | select_element=fullId '.' '*'                         # selectStarElement
+    | columnName (KW_AS? alias=uid)?                        # selectColumnElement
     ;
 
 intoClause
@@ -1767,13 +1766,14 @@ userSpecification
     ;
 
 alterUserAuthOption
-    : userName KW_IDENTIFIED KW_BY STRING_LITERAL authOptionClause
-    | userName KW_IDENTIFIED KW_BY KW_RANDOM KW_PASSWORD authOptionClause
-    | userName KW_IDENTIFIED KW_WITH authenticationRule
-    | userName KW_DISCARD KW_OLD KW_PASSWORD
-    | userName ((KW_ADD | KW_MODIFY | KW_DROP) factor factorAuthOption?)+
-    | userName registrationOption?
-    | userName
+    : userName (
+        KW_IDENTIFIED KW_BY STRING_LITERAL authOptionClause
+        | KW_IDENTIFIED KW_BY KW_RANDOM KW_PASSWORD authOptionClause
+        | KW_IDENTIFIED KW_WITH authenticationRule
+        | KW_DISCARD KW_OLD KW_PASSWORD
+        | ((KW_ADD | KW_MODIFY | KW_DROP) factor factorAuthOption?)+
+        | registrationOption
+    )?
     ;
 
 // createUser auth_option, 2fa_auth_option, 3fa_auth_option
