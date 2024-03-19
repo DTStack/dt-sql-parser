@@ -3,6 +3,9 @@
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./FlinkSqlParser.js";
 import { SingleStatementContext } from "./FlinkSqlParser.js";
 import { SqlStatementContext } from "./FlinkSqlParser.js";

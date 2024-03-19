@@ -11,7 +11,10 @@ import { FlinkSqlParserVisitor } from "./FlinkSqlParserVisitor.js";
 type int = number;
 
 
-export class FlinkSqlParser extends antlr.Parser {
+import SQLParserBase from '../SQLParserBase';
+
+
+export class FlinkSqlParser extends SQLParserBase {
     public static readonly SPACE = 1;
     public static readonly COMMENT_INPUT = 2;
     public static readonly LINE_COMMENT = 3;

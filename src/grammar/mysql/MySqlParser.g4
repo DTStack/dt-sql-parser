@@ -36,6 +36,11 @@ parser grammar MySqlParser;
 options {
     tokenVocab= MySqlLexer;
     caseInsensitive= true;
+    superClass=SQLParserBase;
+}
+
+@header {
+import SQLParserBase from '../SQLParserBase';
 }
 
 // Top Level Description
@@ -212,8 +217,8 @@ administrationStatement
     ;
 
 utilityStatement
-    : simpleDescribeStatement
-    | fullDescribeStatement
+    : fullDescribeStatement
+    | simpleDescribeStatement
     | analyzeDescribeStatement
     | helpStatement
     | useStatement
@@ -2396,6 +2401,7 @@ columnNames
 columnName
     : uid (dottedId dottedId?)?
     | .? dottedId dottedId?
+    | {this.shouldMatchEmpty()}?
     ;
 
 tablespaceNameCreate
@@ -2751,12 +2757,12 @@ orReplace
 //    Functions
 
 functionCall
-    : specificFunction                         # specificFunctionCall
-    | aggregateWindowedFunction                # aggregateFunctionCall
-    | nonAggregateWindowedFunction             # nonAggregateFunctionCall
-    | scalarFunctionName '(' functionArgs? ')' # scalarFunctionCall
-    | functionName '(' functionArgs? ')'       # udfFunctionCall
-    | passwordFunctionClause                   # passwordFunctionCall
+    : specificFunction                                    # specificFunctionCall
+    | aggregateWindowedFunction                           # aggregateFunctionCall
+    | nonAggregateWindowedFunction                        # nonAggregateFunctionCall
+    | scalarFunctionName ('(' ')' | '(' functionArgs ')') # scalarFunctionCall
+    | functionName ('(' ')' | '(' functionArgs ')')       # udfFunctionCall
+    | passwordFunctionClause                              # passwordFunctionCall
     ;
 
 specificFunction
@@ -2925,7 +2931,6 @@ functionArgs
 
 functionArg
     : constant
-    | columnName
     | functionCall
     | expression
     ;
@@ -2941,22 +2946,23 @@ expression
     ;
 
 predicate
-    : predicate KW_NOT? KW_IN '(' (selectStatement | expressions) ')'                             # inPredicate
-    | predicate KW_IS nullNotnull                                                                 # isNullPredicate
-    | left=predicate comparisonOperator right=predicate                                           # binaryComparisonPredicate
-    | predicate comparisonOperator quantifier=(KW_ALL | KW_ANY | KW_SOME) '(' selectStatement ')' # subqueryComparisonPredicate
-    | predicate KW_NOT? KW_BETWEEN predicate KW_AND predicate                                     # betweenPredicate
-    | predicate KW_SOUNDS KW_LIKE predicate                                                       # soundsLikePredicate
-    | predicate KW_NOT? KW_LIKE predicate (KW_ESCAPE STRING_LITERAL)?                             # likePredicate
-    | predicate KW_NOT? regex=(KW_REGEXP | KW_RLIKE) predicate                                    # regexpPredicate
-    | predicate KW_MEMBER KW_OF '(' predicate ')'                                                 # jsonMemberOfPredicate
-    | expressionAtom                                                                              # expressionAtomPredicate
+    : predicate KW_NOT? KW_IN '(' (selectStatement | expressions) ')' # inPredicate
+    | predicate KW_IS nullNotnull                                     # isNullPredicate
+    | predicate comparisonOperator (
+        quantifier=(KW_ALL | KW_ANY | KW_SOME) '(' subQuery=selectStatement ')'
+        | right=predicate
+    )                                                                 # binaryComparisonPredicate
+    | predicate KW_NOT? KW_BETWEEN predicate KW_AND predicate         # betweenPredicate
+    | predicate KW_SOUNDS KW_LIKE predicate                           # soundsLikePredicate
+    | predicate KW_NOT? KW_LIKE predicate (KW_ESCAPE STRING_LITERAL)? # likePredicate
+    | predicate KW_NOT? regex=(KW_REGEXP | KW_RLIKE) predicate        # regexpPredicate
+    | predicate KW_MEMBER KW_OF '(' predicate ')'                     # jsonMemberOfPredicate
+    | expressionAtom                                                  # expressionAtomPredicate
     ;
 
 // Add in ASTVisitor nullNotnull in constant
 expressionAtom
     : constant                                              # constantExpressionAtom
-    | columnName                                            # columnNameExpressionAtom
     | functionCall                                          # functionCallExpressionAtom
     | expressionAtom KW_COLLATE collationName               # collateExpressionAtom
     | mysqlVariable                                         # mysqlVariableExpressionAtom
@@ -2968,9 +2974,10 @@ expressionAtom
     | KW_EXISTS '(' selectStatement ')'                     # existsExpressionAtom
     | '(' selectStatement ')'                               # subqueryExpressionAtom
     | KW_INTERVAL expression intervalType                   # intervalExpressionAtom
+    | left=expressionAtom jsonOperator right=expressionAtom # jsonExpressionAtom
     | left=expressionAtom bitOperator right=expressionAtom  # bitExpressionAtom
     | left=expressionAtom mathOperator right=expressionAtom # mathExpressionAtom
-    | left=expressionAtom jsonOperator right=expressionAtom # jsonExpressionAtom
+    | columnName                                            # columnNameExpressionAtom
     ;
 
 unaryOperator
@@ -2982,18 +2989,18 @@ unaryOperator
     ;
 
 comparisonOperator
-    : comparisonBase
-    | '<' '>'
+    : '<' '>'
     | '!' '='
     | '<' '=' '>'
+    | comparisonBase
     ;
 
 comparisonBase
-    : '='
+    : '<' '='
+    | '>' '='
+    | '='
     | '>'
     | '<'
-    | '<' '='
-    | '>' '='
     ;
 
 logicalOperator

@@ -7,6 +7,11 @@ parser grammar FlinkSqlParser;
 options {
     tokenVocab=FlinkSqlLexer;
     caseInsensitive= true;
+    superClass=SQLParserBase;
+}
+
+@header {
+import SQLParserBase from '../SQLParserBase';
 }
 
 program

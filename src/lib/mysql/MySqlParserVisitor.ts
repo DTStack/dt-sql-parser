@@ -3,6 +3,9 @@
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./MySqlParser.js";
 import { SingleStatementContext } from "./MySqlParser.js";
 import { SqlStatementContext } from "./MySqlParser.js";
@@ -635,7 +638,6 @@ import { LogicalExpressionContext } from "./MySqlParser.js";
 import { PredicateExpressionContext } from "./MySqlParser.js";
 import { SoundsLikePredicateContext } from "./MySqlParser.js";
 import { ExpressionAtomPredicateContext } from "./MySqlParser.js";
-import { SubqueryComparisonPredicateContext } from "./MySqlParser.js";
 import { JsonMemberOfPredicateContext } from "./MySqlParser.js";
 import { BinaryComparisonPredicateContext } from "./MySqlParser.js";
 import { InPredicateContext } from "./MySqlParser.js";
@@ -4745,13 +4747,6 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitExpressionAtomPredicate?: (ctx: ExpressionAtomPredicateContext) => Result;
-    /**
-     * Visit a parse tree produced by the `subqueryComparisonPredicate`
-     * labeled alternative in `MySqlParser.predicate`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSubqueryComparisonPredicate?: (ctx: SubqueryComparisonPredicateContext) => Result;
     /**
      * Visit a parse tree produced by the `jsonMemberOfPredicate`
      * labeled alternative in `MySqlParser.predicate`.

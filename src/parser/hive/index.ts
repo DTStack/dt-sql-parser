@@ -39,6 +39,10 @@ export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, H
         return new HiveSqlSplitListener();
     }
 
+    protected createEntityCollector(input: string) {
+        return new HiveEntityCollector(input);
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],

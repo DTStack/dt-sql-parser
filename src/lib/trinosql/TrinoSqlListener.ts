@@ -3,6 +3,9 @@
 import { ErrorNode, ParseTreeListener, ParserRuleContext, TerminalNode } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./TrinoSqlParser.js";
 import { StatementsContext } from "./TrinoSqlParser.js";
 import { StandaloneClauseContext } from "./TrinoSqlParser.js";

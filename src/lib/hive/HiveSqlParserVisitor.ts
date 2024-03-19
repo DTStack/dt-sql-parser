@@ -3,6 +3,9 @@
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./HiveSqlParser.js";
 import { StatementContext } from "./HiveSqlParser.js";
 import { ExplainStatementContext } from "./HiveSqlParser.js";

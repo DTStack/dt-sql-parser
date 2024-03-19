@@ -3,6 +3,9 @@
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./SparkSqlParser.js";
 import { SingleStatementContext } from "./SparkSqlParser.js";
 import { StatementDefaultContext } from "./SparkSqlParser.js";

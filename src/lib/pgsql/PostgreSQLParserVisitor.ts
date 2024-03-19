@@ -3,6 +3,9 @@
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./PostgreSQLParser.js";
 import { PlsqlrootContext } from "./PostgreSQLParser.js";
 import { SingleStmtContext } from "./PostgreSQLParser.js";
@@ -727,6 +730,7 @@ import { RoutineNameContext } from "./PostgreSQLParser.js";
 import { ProcedureNameContext } from "./PostgreSQLParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSQLParser.js";
 import { ColumnNameContext } from "./PostgreSQLParser.js";
+import { ColumnNameMatchContext } from "./PostgreSQLParser.js";
 import { ColumnNameCreateContext } from "./PostgreSQLParser.js";
 import { NameContext } from "./PostgreSQLParser.js";
 import { Attr_nameContext } from "./PostgreSQLParser.js";
@@ -5273,6 +5277,13 @@ export class PostgreSQLParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by the `columnNameMatch`
+     * labeled alternative in `PostgreSQLParser.column_name`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNameMatch?: (ctx: ColumnNameMatchContext) => Result;
     /**
      * Visit a parse tree produced by the `columnNameCreate`
      * labeled alternative in `PostgreSQLParser.column_name_create`.
