@@ -3272,7 +3272,7 @@ join_qual
     ;
 
 relation_expr
-    : KW_ONLY? table_name STAR? column_list? where_clause?
+    : KW_ONLY? table_name STAR?
     | KW_ONLY ( table_name | OPEN_PAREN table_name CLOSE_PAREN)
     | KW_IN KW_SCHEMA (schema_name | KW_CURRENT_SCHEMA)
     ;
@@ -3951,13 +3951,13 @@ column_expr_list
     ;
 
 column_expr
-    : column_name
-    | (OPEN_PAREN a_expr CLOSE_PAREN)
+    : (OPEN_PAREN a_expr CLOSE_PAREN)
+    | column_name
     ;
 
 column_expr_noparen
-    : column_name
-    | a_expr
+    : a_expr
+    | column_name
     ;
 
 func_arg_list
