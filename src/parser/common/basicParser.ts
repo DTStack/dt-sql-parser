@@ -1,5 +1,4 @@
 import {
-    Parser,
     Lexer,
     Token,
     CharStreams,
@@ -11,17 +10,13 @@ import {
     PredictionMode,
 } from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
+import SQLParserBase from '../../lib/SQLParserBase';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
 import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
 import { CaretPosition, Suggestions, SyntaxSuggestion } from './basic-parser-types';
 import ParseErrorListener, { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
-import SplitListener from './splitListener';
-
-interface IParser<IParserRuleContext extends ParserRuleContext> extends Parser {
-    // Customized in our parser
-    program(): IParserRuleContext;
-}
+import type SplitListener from './splitListener';
 
 /**
  * Custom Parser class, subclass needs extends it.
@@ -29,7 +24,7 @@ interface IParser<IParserRuleContext extends ParserRuleContext> extends Parser {
 export default abstract class BasicParser<
     L extends Lexer = Lexer,
     PRC extends ParserRuleContext = ParserRuleContext,
-    P extends IParser<PRC> = IParser<PRC>,
+    P extends SQLParserBase<PRC> = SQLParserBase<PRC>,
 > {
     /** members for cache start */
     protected _charStreams: CharStream;
