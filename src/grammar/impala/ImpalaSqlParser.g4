@@ -22,6 +22,11 @@ options
 {
     tokenVocab=ImpalaSqlLexer;
     caseInsensitive= true;
+    superClass=SQLParserBase;
+}
+
+@header {
+import SQLParserBase from '../SQLParserBase';
 }
 
 program
@@ -75,7 +80,7 @@ createStatement
 createTableSelect
     : KW_CREATE KW_EXTERNAL? KW_TABLE ifNotExists? tableNameCreate (
         LPAREN columnDefinition (COMMA columnDefinition)* (COMMA constraintSpecification)? RPAREN
-    )? (KW_PARTITIONED KW_BY (partitionedBy | columnAliases))? createCommonItem (
+    )? (KW_PARTITIONED KW_BY (columnAliases | partitionedBy))? createCommonItem (
         KW_AS queryStatement
     )?
     ;
@@ -555,6 +560,7 @@ functionNamePath
 
 columnNamePath
     : qualifiedName
+    | {this.shouldMatchEmpty()}?
     ;
 
 tableOrViewPath

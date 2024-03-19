@@ -42,6 +42,11 @@ parser grammar PostgreSQLParser;
 options {
     tokenVocab= PostgreSQLLexer;
     caseInsensitive= true;
+    superClass=SQLParserBase;
+}
+
+@header {
+import SQLParserBase from '../SQLParserBase';
 }
 
 program
@@ -4172,7 +4177,8 @@ procedure_name_create
     ;
 
 column_name
-    : colid indirection_el* # columnName
+    : colid indirection_el*      # columnName
+    | {this.shouldMatchEmpty()}? # columnNameMatch
     ;
 
 column_name_create

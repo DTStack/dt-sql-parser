@@ -28,6 +28,11 @@ options
 {
     tokenVocab=HiveSqlLexer;
     caseInsensitive= true;
+    superClass=SQLParserBase;
+}
+
+@header {
+import SQLParserBase from '../SQLParserBase';
 }
 
 program
@@ -802,6 +807,7 @@ columnNameList
 
 columnName
     : id_ (DOT id_)*
+    | {this.shouldMatchEmpty()}?
     ;
 
 columnNameCreate
@@ -1859,6 +1865,7 @@ VALUES(1),(2) means 2 rows, 1 column each.
 VALUES(1,2),(3,4) means 2 rows, 2 columns each.
 VALUES(1,2,3) means 1 row, 3 columns
 */
+
 valuesClause
     : KW_VALUES valuesTableConstructor
     ;

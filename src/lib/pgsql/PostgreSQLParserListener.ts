@@ -3,6 +3,9 @@
 import { ErrorNode, ParseTreeListener, ParserRuleContext, TerminalNode } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./PostgreSQLParser.js";
 import { PlsqlrootContext } from "./PostgreSQLParser.js";
 import { SingleStmtContext } from "./PostgreSQLParser.js";
@@ -727,6 +730,7 @@ import { RoutineNameContext } from "./PostgreSQLParser.js";
 import { ProcedureNameContext } from "./PostgreSQLParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSQLParser.js";
 import { ColumnNameContext } from "./PostgreSQLParser.js";
+import { ColumnNameMatchContext } from "./PostgreSQLParser.js";
 import { ColumnNameCreateContext } from "./PostgreSQLParser.js";
 import { NameContext } from "./PostgreSQLParser.js";
 import { Attr_nameContext } from "./PostgreSQLParser.js";
@@ -8200,6 +8204,18 @@ export class PostgreSQLParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by the `columnNameMatch`
+     * labeled alternative in `PostgreSQLParser.column_name`.
+     * @param ctx the parse tree
+     */
+    enterColumnNameMatch?: (ctx: ColumnNameMatchContext) => void;
+    /**
+     * Exit a parse tree produced by the `columnNameMatch`
+     * labeled alternative in `PostgreSQLParser.column_name`.
+     * @param ctx the parse tree
+     */
+    exitColumnNameMatch?: (ctx: ColumnNameMatchContext) => void;
     /**
      * Enter a parse tree produced by the `columnNameCreate`
      * labeled alternative in `PostgreSQLParser.column_name_create`.

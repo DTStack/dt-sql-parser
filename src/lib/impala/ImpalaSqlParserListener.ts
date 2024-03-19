@@ -3,6 +3,9 @@
 import { ErrorNode, ParseTreeListener, ParserRuleContext, TerminalNode } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./ImpalaSqlParser.js";
 import { SingleStatementContext } from "./ImpalaSqlParser.js";
 import { SqlStatementContext } from "./ImpalaSqlParser.js";
