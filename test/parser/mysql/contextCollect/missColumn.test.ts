@@ -10,7 +10,7 @@ describe('MySQL entity collector test with missing column', () => {
     test('no column', () => {
         const postgreSql = new PostgreSQL();
 
-        const allEntities = postgreSql.geAllEntities(missingColumnSql1, {
+        const allEntities = postgreSql.getAllEntities(missingColumnSql1, {
             lineNumber: 1,
             column: 8,
         });
@@ -29,7 +29,7 @@ describe('MySQL entity collector test with missing column', () => {
     test('column list with trailing comma', () => {
         const postgreSql = new PostgreSQL();
 
-        const allEntities = postgreSql.geAllEntities(missingColumnSql2, {
+        const allEntities = postgreSql.getAllEntities(missingColumnSql2, {
             lineNumber: 1,
             column: 20,
         });
