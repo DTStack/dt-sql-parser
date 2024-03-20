@@ -46,8 +46,8 @@ export default class PostgresSQL extends BasicParser<
         return new PostgreSqlSplitListener();
     }
 
-    protected createEntityCollector(input: string) {
-        return new PostgreSQLEntityCollector(input);
+    protected createEntityCollector(input: string, caretTokenIndex?: number) {
+        return new PostgreSQLEntityCollector(input, caretTokenIndex);
     }
 
     protected processCandidates(

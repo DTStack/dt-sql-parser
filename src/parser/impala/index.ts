@@ -41,8 +41,8 @@ export default class ImpalaSQL extends BasicParser<
         return new ImpalaSqlSplitListener();
     }
 
-    protected createEntityCollector(input: string) {
-        return new ImpalaEntityCollector(input);
+    protected createEntityCollector(input: string, caretTokenIndex?: number) {
+        return new ImpalaEntityCollector(input, caretTokenIndex);
     }
 
     protected processCandidates(
