@@ -37,8 +37,8 @@ export default class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySql
         return new MysqlSplitListener();
     }
 
-    protected createEntityCollector(input: string) {
-        return new MySqlEntityCollector(input);
+    protected createEntityCollector(input: string, caretTokenIndex?: number) {
+        return new MySqlEntityCollector(input, caretTokenIndex);
     }
 
     protected processCandidates(

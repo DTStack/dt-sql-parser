@@ -81,7 +81,10 @@ export default abstract class BasicParser<
     /**
      * Get a new entityCollector instance.
      */
-    protected abstract createEntityCollector(input: string): EntityCollector;
+    protected abstract createEntityCollector(
+        input: string,
+        caretTokenIndex?: number
+    ): EntityCollector;
 
     /**
      * Create an antlr4 lexer from input.
@@ -364,13 +367,16 @@ export default abstract class BasicParser<
         };
     }
 
-    public geAllEntities(input: string, caretPosition?: CaretPosition): EntityContext[] | null {
-        const collectListener = this.createEntityCollector(input);
+    public getAllEntities(input: string, caretPosition?: CaretPosition): EntityContext[] | null {
+        const allTokens = this.getAllTokens(input);
+        const caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
+
+        const collectListener = this.createEntityCollector(input, caretTokenIndex);
         // TODO: add entityCollector to all sqlParser implements and remove following if
         if (!collectListener) {
             return null;
         }
-        // const parser = this.parseWithCache(input);
+        // const parser = this.createParserWithCache(input);
 
         // parser.entityCollecting = true;
         // if(caretPosition) {

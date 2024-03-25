@@ -21,7 +21,7 @@ export default class PLSQL extends BasicParser<PlSqlLexer, ProgramContext, PlSql
         return null as any;
     }
 
-    protected createEntityCollector(input: string) {
+    protected createEntityCollector(input: string, caretTokenIndex?: number) {
         return null;
     }
 

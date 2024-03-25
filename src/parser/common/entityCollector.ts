@@ -21,8 +21,9 @@ export enum StmtContextType {
 export interface StmtContext {
     readonly stmtContextType: StmtContextType;
     readonly position: TextPosition;
-    readonly rootStmt?: StmtContext | null;
-    readonly parentStmt?: StmtContext | null;
+    readonly rootStmt: StmtContext | null;
+    readonly parentStmt: StmtContext | null;
+    readonly isContainCaret?: boolean;
 }
 
 export function toStmtContext(
@@ -30,7 +31,8 @@ export function toStmtContext(
     type: StmtContextType,
     input: string,
     rootStmt: StmtContext | null,
-    parentStmt: StmtContext | null
+    parentStmt: StmtContext | null,
+    isContainCaret?: boolean
 ): StmtContext {
     const { text: _, ...position } = ctxToText(ctx, input);
     return {
@@ -38,6 +40,7 @@ export function toStmtContext(
         position,
         rootStmt: rootStmt ?? null,
         parentStmt: parentStmt ?? null,
+        isContainCaret,
     };
 }
 
@@ -87,14 +90,16 @@ export function toEntityContext(
  * @todo: [may be need] Combine the entities in each clause.
  */
 abstract class EntityCollector {
-    constructor(input: string) {
+    constructor(input: string, caretTokenIndex?: number) {
         this._input = input;
+        this._caretTokenIndex = caretTokenIndex ?? -1;
         this._entitiesSet = new Set();
         this._stmtStack = new SimpleStack();
         this._entityStack = new SimpleStack();
         this._rootStmt = null;
     }
     private readonly _input: string;
+    private readonly _caretTokenIndex: number;
     private readonly _entitiesSet: Set<EntityContext>;
     /** Staging statements that have already entered. */
     private readonly _stmtStack: SimpleStack<StmtContext>;
@@ -126,12 +131,19 @@ abstract class EntityCollector {
     }
 
     protected pushStmt(ctx: ParserRuleContext, type: StmtContextType) {
+        let isContainCaret;
+        if (this._caretTokenIndex >= 0) {
+            isContainCaret =
+                ctx.start.tokenIndex <= this._caretTokenIndex &&
+                ctx.stop?.tokenIndex >= this._caretTokenIndex;
+        }
         const stmtContext = toStmtContext(
             ctx,
             type,
             this._input,
             this._rootStmt,
-            this._stmtStack.peek()
+            this._stmtStack.peek(),
+            isContainCaret
         );
         if (
             this._stmtStack.isEmpty() ||
