@@ -1,7 +1,7 @@
 import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
-import { TrinoSqlLexer } from '../../lib/trinosql/TrinoSqlLexer';
-import { TrinoSqlParser, ProgramContext } from '../../lib/trinosql/TrinoSqlParser';
+import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
+import { TrinoSqlParser, ProgramContext } from '../../lib/trino/TrinoSqlParser';
 import BasicParser from '../common/basicParser';
 import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
 import { StmtContextType } from '../common/entityCollector';

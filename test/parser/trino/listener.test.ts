@@ -1,5 +1,5 @@
 import TrinoSQL from 'src/parser/trino';
-import { TrinoSqlListener } from 'src/lib/trinosql/TrinoSqlListener';
+import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
 import { ParseTreeListener } from 'antlr4ng';
 
 describe('trino SQL Listener Tests', () => {

@@ -1,4 +1,4 @@
-// Generated from dt-sql-parser/src/grammar/trinosql/TrinoSql.g4 by ANTLR 4.13.1
+// Generated from dt-sql-parser/src/grammar/trino/TrinoSql.g4 by ANTLR 4.13.1
 
 import * as antlr from "antlr4ng";
 import { Token } from "antlr4ng";

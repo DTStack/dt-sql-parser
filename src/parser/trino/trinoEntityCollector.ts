@@ -14,8 +14,8 @@ import type {
     TableNameCreateContext,
     ViewNameContext,
     ViewNameCreateContext,
-} from '../../lib/trinosql/TrinoSqlParser';
-import type { TrinoSqlListener } from '../../lib/trinosql/TrinoSqlListener';
+} from '../../lib/trino/TrinoSqlParser';
+import type { TrinoSqlListener } from '../../lib/trino/TrinoSqlListener';
 import { EntityContextType } from '../common/basic-parser-types';
 import EntityCollector, { StmtContextType } from '../common/entityCollector';
 

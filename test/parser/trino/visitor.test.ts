@@ -1,5 +1,5 @@
 import TrinoSQL from 'src/parser/trino';
-import { TrinoSqlVisitor } from 'src/lib/trinosql/TrinoSqlVisitor';
+import { TrinoSqlVisitor } from 'src/lib/trino/TrinoSqlVisitor';
 import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 describe('trino SQL Visitor Tests', () => {

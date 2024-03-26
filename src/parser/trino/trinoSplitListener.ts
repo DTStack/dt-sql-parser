@@ -1,5 +1,5 @@
-import { SingleStatementContext } from '../../lib/trinosql/TrinoSqlParser';
-import { TrinoSqlListener } from '../../lib/trinosql/TrinoSqlListener';
+import { SingleStatementContext } from '../../lib/trino/TrinoSqlParser';
+import { TrinoSqlListener } from '../../lib/trino/TrinoSqlListener';
 import SplitListener from '../common/splitListener';
 
 export default class TrinoSqlSplitListener

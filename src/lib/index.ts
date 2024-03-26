@@ -16,8 +16,8 @@ export { SparkSqlParserVisitor } from './spark/SparkSqlParserVisitor';
 export { PostgreSqlParserListener } from './postgresql/PostgreSqlParserListener';
 export { PostgreSqlParserVisitor } from './postgresql/PostgreSqlParserVisitor';
 
-export { TrinoSqlListener } from './trinosql/TrinoSqlListener';
-export { TrinoSqlVisitor } from './trinosql/TrinoSqlVisitor';
+export { TrinoSqlListener } from './trino/TrinoSqlListener';
+export { TrinoSqlVisitor } from './trino/TrinoSqlVisitor';
 
 export { ImpalaSqlParserListener } from './impala/ImpalaSqlParserListener';
 export { ImpalaSqlParserVisitor } from './impala/ImpalaSqlParserVisitor';
