@@ -3,11 +3,11 @@ import { FlinkSqlLexer } from 'src/lib/flink/FlinkSqlLexer';
 import { ErrorListener } from 'src/parser/common/parseErrorListener';
 import { CommonTokenStream } from 'antlr4ng';
 
-describe('BasicParser unit tests', () => {
-    const flinkParser = new FlinkSQL();
+describe('BasicSQL unit tests', () => {
+    const flink = new FlinkSQL();
     test('Create lexer', () => {
         const sql = 'SELECT * FROM tb1';
-        const lexer = flinkParser.createLexer(sql);
+        const lexer = flink.createLexer(sql);
 
         expect(lexer).not.toBeUndefined();
         expect(lexer).not.toBeNull();
@@ -19,7 +19,7 @@ describe('BasicParser unit tests', () => {
         const errorListener: ErrorListener<any> = (err) => {
             errors.push(err);
         };
-        const lexer = flinkParser.createLexer(sql, errorListener);
+        const lexer = flink.createLexer(sql, errorListener);
         const tokenStream = new CommonTokenStream(lexer);
         tokenStream.fill();
         expect(errors.length).not.toBe(0);
@@ -27,7 +27,7 @@ describe('BasicParser unit tests', () => {
 
     test('Create parser', () => {
         const sql = 'SELECT * FROM tb1';
-        const parser = flinkParser.createParser(sql);
+        const parser = flink.createParser(sql);
 
         expect(parser).not.toBeUndefined();
         expect(parser).not.toBeNull();
@@ -39,7 +39,7 @@ describe('BasicParser unit tests', () => {
         const errorListener: ErrorListener<any> = (err) => {
             errors.push(err);
         };
-        const parser = flinkParser.createParser(sql, errorListener);
+        const parser = flink.createParser(sql, errorListener);
         parser.program();
         expect(errors.length).not.toBe(0);
     });
@@ -50,7 +50,7 @@ describe('BasicParser unit tests', () => {
         const errorListener: ErrorListener<any> = (err) => {
             errors.push(err);
         };
-        const parser = flinkParser.createParser(sql, errorListener);
+        const parser = flink.createParser(sql, errorListener);
         parser.program();
         expect(errors.length).not.toBe(0);
     });
@@ -61,7 +61,7 @@ describe('BasicParser unit tests', () => {
         const errorListener: ErrorListener<any> = (err) => {
             errors.push(err);
         };
-        const parseTree = flinkParser.parse(sql, errorListener);
+        const parseTree = flink.parse(sql, errorListener);
 
         expect(parseTree).not.toBeUndefined();
         expect(parseTree).not.toBeNull();
@@ -74,7 +74,7 @@ describe('BasicParser unit tests', () => {
         const errorListener: ErrorListener<any> = (err) => {
             errors.push(err);
         };
-        const parseTree = flinkParser.parse(sql, errorListener);
+        const parseTree = flink.parse(sql, errorListener);
 
         expect(parseTree).not.toBeUndefined();
         expect(parseTree).not.toBeNull();
@@ -83,7 +83,7 @@ describe('BasicParser unit tests', () => {
 
     test('Get All tokens', () => {
         const sql = 'SELECT * FROM tbl1;';
-        const tokens = flinkParser.getAllTokens(sql);
+        const tokens = flink.getAllTokens(sql);
 
         expect(tokens.length).toBe(8);
         expect(tokens[0].type).toBe(FlinkSqlLexer.KW_SELECT);
@@ -98,14 +98,14 @@ describe('BasicParser unit tests', () => {
 
     test('Get All tokens with error', () => {
         const sql = '袋鼠云数栈UED团队';
-        const tokens = flinkParser.getAllTokens(sql);
+        const tokens = flink.getAllTokens(sql);
         expect(tokens.length).toBe(1);
         expect(tokens[0].type).toBe(FlinkSqlLexer.ID_LITERAL);
     });
 
     test('Split sql', () => {
         const sql = 'SHOW TABLES;\nSELECT * FROM tb;';
-        const sqlSlices = flinkParser.splitSQLByStatement(sql);
+        const sqlSlices = flink.splitSQLByStatement(sql);
 
         expect(sqlSlices.length).toBe(2);
 
@@ -126,7 +126,7 @@ describe('BasicParser unit tests', () => {
 
     test('Split sql with errors', () => {
         const sql = 'SHOW TABLES;\nSELECT * FOM tb;';
-        const sqlSlices = flinkParser.splitSQLByStatement(sql);
+        const sqlSlices = flink.splitSQLByStatement(sql);
 
         expect(sqlSlices).toBeNull();
     });

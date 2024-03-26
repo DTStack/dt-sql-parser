@@ -2,10 +2,10 @@ import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { PlSqlLexer } from '../lib/plsql/PlSqlLexer';
 import { PlSqlParser, ProgramContext } from '../lib/plsql/PlSqlParser';
-import { BasicParser } from './common/basicParser';
+import { BasicSQL } from './common/basicSQL';
 import { Suggestions } from './common/basic-parser-types';
 
-export class PLSQL extends BasicParser<PlSqlLexer, ProgramContext, PlSqlParser> {
+export class PLSQL extends BasicSQL<PlSqlLexer, ProgramContext, PlSqlParser> {
     protected createLexerFromCharStream(charStreams) {
         return new PlSqlLexer(charStreams);
     }

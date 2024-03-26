@@ -21,9 +21,9 @@ import type { EntityCollector } from './entityCollector';
 import { EntityContext } from './entityCollector';
 
 /**
- * Custom Parser class, subclass needs extends it.
+ * Basic SQL class, every sql needs extends it.
  */
-export abstract class BasicParser<
+export abstract class BasicSQL<
     L extends Lexer = Lexer,
     PRC extends ParserRuleContext = ParserRuleContext,
     P extends SQLParserBase<PRC> = SQLParserBase<PRC>,

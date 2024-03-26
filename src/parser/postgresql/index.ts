@@ -4,14 +4,14 @@ import { Token } from 'antlr4ng';
 import { PostgreSqlLexer } from '../../lib/postgresql/PostgreSqlLexer';
 import { PostgreSqlParser, ProgramContext } from '../../lib/postgresql/PostgreSqlParser';
 import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
-import { BasicParser } from '../common/basicParser';
+import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { PostgreSqlEntityCollector } from './postgreEntityCollector';
 import { PostgreSqlSplitListener } from './postgreSplitListener';
 
 export { PostgreSqlEntityCollector, PostgreSqlSplitListener };
 
-export class PostgreSQL extends BasicParser<PostgreSqlLexer, ProgramContext, PostgreSqlParser> {
+export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, PostgreSqlParser> {
     protected createLexerFromCharStream(charStreams) {
         return new PostgreSqlLexer(charStreams);
     }

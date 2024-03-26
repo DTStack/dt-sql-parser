@@ -2,7 +2,7 @@ import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { MySqlLexer } from '../../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext } from '../../lib/mysql/MySqlParser';
-import { BasicParser } from '../common/basicParser';
+import { BasicSQL } from '../common/basicSQL';
 import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
 import { StmtContextType } from '../common/entityCollector';
 import { MysqlSplitListener } from './mysqlSplitListener';
@@ -10,7 +10,7 @@ import { MySqlEntityCollector } from './mysqlEntityCollector';
 
 export { MySqlEntityCollector, MysqlSplitListener };
 
-export class MySQL extends BasicParser<MySqlLexer, ProgramContext, MySqlParser> {
+export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
     protected createLexerFromCharStream(charStreams): MySqlLexer {
         return new MySqlLexer(charStreams);
     }

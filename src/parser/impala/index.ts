@@ -2,7 +2,7 @@ import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { ImpalaSqlLexer } from '../../lib/impala/ImpalaSqlLexer';
 import { ImpalaSqlParser, ProgramContext } from '../../lib/impala/ImpalaSqlParser';
-import { BasicParser } from '../common/basicParser';
+import { BasicSQL } from '../common/basicSQL';
 import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
 import { StmtContextType } from '../common/entityCollector';
 import { ImpalaSqlSplitListener } from './impalaSplitListener';
@@ -10,7 +10,7 @@ import { ImpalaEntityCollector } from './impalaEntityCollector';
 
 export { ImpalaEntityCollector, ImpalaSqlSplitListener };
 
-export class ImpalaSQL extends BasicParser<ImpalaSqlLexer, ProgramContext, ImpalaSqlParser> {
+export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSqlParser> {
     protected createLexerFromCharStream(charStreams) {
         return new ImpalaSqlLexer(charStreams);
     }

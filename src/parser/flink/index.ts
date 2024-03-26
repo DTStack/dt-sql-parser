@@ -3,14 +3,14 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { FlinkSqlLexer } from '../../lib/flink/FlinkSqlLexer';
 import { FlinkSqlParser, ProgramContext } from '../../lib/flink/FlinkSqlParser';
 import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
-import { BasicParser } from '../common/basicParser';
+import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { FlinkSqlSplitListener } from './flinkSplitListener';
 import { FlinkEntityCollector } from './flinkEntityCollector';
 
 export { FlinkSqlSplitListener, FlinkEntityCollector };
 
-export class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
+export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
     protected createLexerFromCharStream(charStreams) {
         return new FlinkSqlLexer(charStreams);
     }

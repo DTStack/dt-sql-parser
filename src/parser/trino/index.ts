@@ -2,7 +2,7 @@ import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
 import { TrinoSqlParser, ProgramContext } from '../../lib/trino/TrinoSqlParser';
-import { BasicParser } from '../common/basicParser';
+import { BasicSQL } from '../common/basicSQL';
 import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
 import { StmtContextType } from '../common/entityCollector';
 import { TrinoSqlSplitListener } from './trinoSplitListener';
@@ -10,7 +10,7 @@ import { TrinoEntityCollector } from './trinoEntityCollector';
 
 export { TrinoSqlSplitListener, TrinoEntityCollector };
 
-export class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
+export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
     protected createLexerFromCharStream(charStreams) {
         return new TrinoSqlLexer(charStreams);
     }
