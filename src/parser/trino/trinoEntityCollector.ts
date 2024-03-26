@@ -17,72 +17,9 @@ import type {
 } from '../../lib/trinosql/TrinoSqlParser';
 import type { TrinoSqlListener } from '../../lib/trinosql/TrinoSqlListener';
 import { EntityContextType } from '../common/basic-parser-types';
-import EntityCollector, {
-    EntityContext,
-    StmtContext,
-    StmtContextType,
-} from '../common/entityCollector';
+import EntityCollector, { StmtContextType } from '../common/entityCollector';
 
 export default class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {
-    combineRootStmtEntities(
-        stmtContext: StmtContext,
-        entitiesInsideStmt: EntityContext[]
-    ): EntityContext[] {
-        if (
-            stmtContext.stmtContextType === StmtContextType.CREATE_TABLE_STMT ||
-            stmtContext.stmtContextType === StmtContextType.CREATE_VIEW_STMT
-        ) {
-            return this.combineCreateTableOrViewStmtEntities(stmtContext, entitiesInsideStmt);
-        }
-        return entitiesInsideStmt;
-    }
-
-    combineCreateTableOrViewStmtEntities(
-        stmtContext: StmtContext,
-        entitiesInsideStmt: EntityContext[]
-    ): EntityContext[] {
-        const columns: EntityContext[] = [];
-        const relatedEntities: EntityContext[] = [];
-        let mainEntity: EntityContext = null;
-        const finalEntities = entitiesInsideStmt.reduce((result, entity) => {
-            if (entity.belongStmt !== stmtContext) {
-                if (
-                    entity.entityContextType !== EntityContextType.COLUMN &&
-                    entity.entityContextType !== EntityContextType.COLUMN_CREATE
-                ) {
-                    relatedEntities.push(entity);
-                    result.push(entity);
-                }
-                return result;
-            }
-
-            if (entity.entityContextType === EntityContextType.COLUMN_CREATE) {
-                columns.push(entity);
-            } else if (
-                entity.entityContextType === EntityContextType.TABLE_CREATE ||
-                entity.entityContextType === EntityContextType.VIEW_CREATE
-            ) {
-                mainEntity = entity;
-                result.push(entity);
-                return result;
-            } else if (entity.entityContextType !== EntityContextType.COLUMN) {
-                relatedEntities.push(entity);
-                result.push(entity);
-            }
-            return result;
-        }, []);
-
-        if (columns.length) {
-            mainEntity.columns = columns;
-        }
-
-        if (relatedEntities.length) {
-            mainEntity.relatedEntities = relatedEntities;
-        }
-
-        return finalEntities;
-    }
-
     /** ====== Entity Begin */
     exitSchemaName(ctx: SchemaNameContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE);
