@@ -39,7 +39,7 @@ export interface SyntaxError<T> {
  */
 export type ErrorListener<T> = (parseError: ParseError, originalError: SyntaxError<T>) => void;
 
-export default class ParseErrorListener implements ANTLRErrorListener {
+export class ParseErrorListener implements ANTLRErrorListener {
     private _errorListener: ErrorListener<Token>;
 
     constructor(errorListener: ErrorListener<Token>) {

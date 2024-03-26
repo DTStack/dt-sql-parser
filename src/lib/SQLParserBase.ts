@@ -1,5 +1,5 @@
 import * as antlr from "antlr4ng";
-export default abstract class SQLParserBase<T = antlr.ParserRuleContext>  extends antlr.Parser{
+export abstract class SQLParserBase<T = antlr.ParserRuleContext> extends antlr.Parser{
     public constructor(input: antlr.TokenStream) {
         super(input);
     }

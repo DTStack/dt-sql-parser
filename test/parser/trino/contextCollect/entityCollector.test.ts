@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import TrinoSQL from 'src/parser/trino';
-import { TrinoSqlSplitListener, TrinoEntityCollector } from 'src/parser/trino';
+import { TrinoSQL, TrinoSqlSplitListener, TrinoEntityCollector } from 'src/parser/trino';
 import { ParseTreeListener } from 'antlr4ng';
 import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
 import { EntityContextType } from 'src/parser/common/basic-parser-types';

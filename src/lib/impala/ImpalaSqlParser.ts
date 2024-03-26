@@ -11,7 +11,7 @@ import { ImpalaSqlParserVisitor } from "./ImpalaSqlParserVisitor.js";
 type int = number;
 
 
-import SQLParserBase from '../SQLParserBase';
+import { SQLParserBase } from '../SQLParserBase';
 
 
 export class ImpalaSqlParser extends SQLParserBase {

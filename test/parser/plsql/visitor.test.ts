@@ -1,13 +1,13 @@
-import PLSQL from 'src/parser/plsql';
+import { PLSQL } from 'src/parser/plsql';
 import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { PlSqlParserVisitor } from 'src/lib/plsql/PlSqlParserVisitor';
 
 describe('PLSQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new PLSQL();
+    const plsql = new PLSQL();
 
-    const parseTree = parser.parse(sql);
+    const parseTree = plsql.parse(sql);
 
     test('Visitor visitTable_ref_list', () => {
         let result = '';

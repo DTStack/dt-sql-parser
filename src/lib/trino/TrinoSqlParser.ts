@@ -11,7 +11,7 @@ import { TrinoSqlVisitor } from "./TrinoSqlVisitor.js";
 type int = number;
 
 
-import SQLParserBase from '../SQLParserBase';
+import { SQLParserBase } from '../SQLParserBase';
 
 
 export class TrinoSqlParser extends SQLParserBase {

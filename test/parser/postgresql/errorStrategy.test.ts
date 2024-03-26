@@ -1,4 +1,4 @@
-import PostgreSQL, { PostgreSqlSplitListener } from 'src/parser/postgresql';
+import { PostgreSQL, PostgreSqlSplitListener } from 'src/parser/postgresql';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
 
 const validSQL1 = `INSERT INTO country_page_view
@@ -15,7 +15,7 @@ describe('PgSQL ErrorStrategy test', () => {
     //     const sql = [inValidSQL, validSQL1, validSQL2].join('\n');
     //     // parse with empty errorListener
     //     const parseTree = pgSQL.parse(sql, () => {});
-    //     const splitListener = new PostgreSqlSplitListener();
+    //     const splitListener = new PostgreSQLSplitListener();
     //     pgSQL.listen(splitListener as PostgreSqlParserListener, parseTree);
 
     //     const statementCount = splitListener.statementsContext.length;

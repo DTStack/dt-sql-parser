@@ -1,4 +1,4 @@
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 import { readSQL } from 'test/helper';
 
 const features = {
@@ -10,30 +10,30 @@ const features = {
 };
 
 describe('FlinkSQL Drop Statements Tests', () => {
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
     features.table.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(flink.validate(sql).length).toBe(0);
         });
     });
     features.view.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(flink.validate(sql).length).toBe(0);
         });
     });
     features.function.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(flink.validate(sql).length).toBe(0);
         });
     });
     features.catalog.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(flink.validate(sql).length).toBe(0);
         });
     });
     features.database.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(flink.validate(sql).length).toBe(0);
         });
     });
 });

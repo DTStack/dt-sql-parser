@@ -1,13 +1,13 @@
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { PostgreSqlParserVisitor } from 'src/lib/postgresql/PostgreSqlParserVisitor';
 
 describe('MySQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new PostgreSQL();
+    const postgresql = new PostgreSQL();
 
-    const parseTree = parser.parse(sql, (error) => {
+    const parseTree = postgresql.parse(sql, (error) => {
         console.error('Parse error:', error);
     });
 

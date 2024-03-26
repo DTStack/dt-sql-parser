@@ -1,16 +1,16 @@
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;
 
 describe('Flink SQL validate invalid sql', () => {
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
 
     test('validate random text', () => {
-        expect(parser.validate(randomText).length).not.toBe(0);
+        expect(flink.validate(randomText).length).not.toBe(0);
     });
 
     test('validate unComplete sql', () => {
-        expect(parser.validate(unCompleteSQL).length).not.toBe(0);
+        expect(flink.validate(unCompleteSQL).length).not.toBe(0);
     });
 });

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 
 const syntaxSql = fs.readFileSync(
@@ -9,14 +9,14 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('PgSQL Multiple Statements Syntax Suggestion', () => {
-    const parser = new PostgreSQL();
+    const postgresql = new PostgreSQL();
 
     test('Create table ', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 14,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
@@ -30,7 +30,7 @@ describe('PgSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 9,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -49,7 +49,7 @@ describe('PgSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 15,
             column: 13,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -63,7 +63,7 @@ describe('PgSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 21,
             column: 65,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );

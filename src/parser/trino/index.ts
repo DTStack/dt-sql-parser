@@ -2,23 +2,21 @@ import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
 import { TrinoSqlParser, ProgramContext } from '../../lib/trino/TrinoSqlParser';
-import BasicParser from '../common/basicParser';
+import { BasicParser } from '../common/basicParser';
 import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
 import { StmtContextType } from '../common/entityCollector';
-import TrinoSqlSplitListener from './trinoSplitListener';
-import TrinoEntityCollector from './trinoEntityCollector';
+import { TrinoSqlSplitListener } from './trinoSplitListener';
+import { TrinoEntityCollector } from './trinoEntityCollector';
 
 export { TrinoSqlSplitListener, TrinoEntityCollector };
 
-export default class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
+export class TrinoSQL extends BasicParser<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
     protected createLexerFromCharStream(charStreams) {
-        const lexer = new TrinoSqlLexer(charStreams);
-        return lexer;
+        return new TrinoSqlLexer(charStreams);
     }
 
     protected createParserFromTokenStream(tokenStream) {
-        const parser = new TrinoSqlParser(tokenStream);
-        return parser;
+        return new TrinoSqlParser(tokenStream);
     }
 
     protected get splitListener() {

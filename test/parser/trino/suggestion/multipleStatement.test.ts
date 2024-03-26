@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import TrinoSQL from 'src/parser/trino';
+import { TrinoSQL } from 'src/parser/trino';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 
 const syntaxSql = fs.readFileSync(
@@ -9,14 +9,14 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
 
     test('Create table ', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 14,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = trino.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
@@ -30,7 +30,7 @@ describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 9,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = trino.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -44,7 +44,7 @@ describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 15,
             column: 13,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = trino.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -58,7 +58,7 @@ describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 21,
             column: 65,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = trino.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );

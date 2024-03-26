@@ -1,7 +1,7 @@
-import ImpalaSQL from 'src/parser/impala';
+import { ImpalaSQL } from 'src/parser/impala';
 import { readSQL } from 'test/helper';
 
-const parser = new ImpalaSQL();
+const impala = new ImpalaSQL();
 
 const features = {
     dbs: readSQL(__dirname, 'create_db.sql'),
@@ -15,35 +15,35 @@ describe('ImpalaSQL Create Syntax Tests', () => {
     describe('CREATE DB', () => {
         features.dbs.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('CREATE FUNCTION', () => {
         features.functions.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('CREATE ROLE', () => {
         features.roles.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('CREATE TABLE', () => {
         features.tables.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('CREATE VIEW', () => {
         features.views.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });

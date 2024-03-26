@@ -1,7 +1,7 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
-const parser = new HiveSQL();
+const hive = new HiveSQL();
 
 const features = {
     insertFromQueries: readSQL(__dirname, 'insertFromQuery.sql'),
@@ -11,13 +11,13 @@ const features = {
 describe('HiveSQL Insert Syntax Tests', () => {
     features.insertFromQueries.forEach((ifq) => {
         it(ifq, () => {
-            expect(parser.validate(ifq).length).toBe(0);
+            expect(hive.validate(ifq).length).toBe(0);
         });
     });
 
     features.insertFromValues.forEach((ifv) => {
         it(ifv, () => {
-            expect(parser.validate(ifv).length).toBe(0);
+            expect(hive.validate(ifv).length).toBe(0);
         });
     });
 });

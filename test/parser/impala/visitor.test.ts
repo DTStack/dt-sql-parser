@@ -1,13 +1,13 @@
-import ImpalaSQL from 'src/parser/impala';
+import { ImpalaSQL } from 'src/parser/impala';
 import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { ImpalaSqlParserVisitor } from 'src/lib/impala/ImpalaSqlParserVisitor';
 
 describe('impala SQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new ImpalaSQL();
+    const impala = new ImpalaSQL();
 
-    const parseTree = parser.parse(sql, (error) => {
+    const parseTree = impala.parse(sql, (error) => {
         console.error('Parse error:', error);
     });
 

@@ -20,12 +20,9 @@ import {
     ViewPathCreateContext,
 } from '../../lib/flink/FlinkSqlParser';
 import { FlinkSqlParserListener } from '../../lib/flink/FlinkSqlParserListener';
-import EntityCollector, { StmtContextType } from '../common/entityCollector';
+import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
-export default class FlinkEntityCollector
-    extends EntityCollector
-    implements FlinkSqlParserListener
-{
+export class FlinkEntityCollector extends EntityCollector implements FlinkSqlParserListener {
     /** ====== Entity Begin */
     exitCatalogPathCreate(ctx: CatalogPathCreateContext) {
         this.pushEntity(ctx, EntityContextType.CATALOG_CREATE);

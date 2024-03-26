@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import ImpalaSQL from 'src/parser/impala';
+import { ImpalaSQL } from 'src/parser/impala';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 

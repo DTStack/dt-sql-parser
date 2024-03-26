@@ -1,4 +1,4 @@
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 import { readSQL } from 'test/helper';
 
 // 综合测试的 sql 不做切割
@@ -7,11 +7,11 @@ const features = {
 };
 
 describe('FlinkSQL Chore Syntax Tests', () => {
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
 
     features.chores.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(flink.validate(sql).length).toBe(0);
         });
     });
 });

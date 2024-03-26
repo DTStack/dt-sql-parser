@@ -1,6 +1,6 @@
 import { TokenStream } from "antlr4ng";
-import SQLParserBase from "../SQLParserBase";
-export default abstract class PlSqlBaseParser extends SQLParserBase {
+import {SQLParserBase} from "../SQLParserBase";
+export abstract class PlSqlBaseParser extends SQLParserBase {
 
     private _isVersion10: boolean = false;
     private _isVersion12: boolean = true;

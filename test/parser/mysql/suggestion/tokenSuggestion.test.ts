@@ -1,20 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import MySQL from 'src/parser/mysql';
+import { MySQL } from 'src/parser/mysql';
 import { CaretPosition } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('MySQL Token Suggestion', () => {
-    const parser = new MySQL();
+    const mysql = new MySQL();
 
     test('After ALTER', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = mysql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -45,7 +45,7 @@ describe('MySQL Token Suggestion', () => {
             lineNumber: 3,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = mysql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -86,7 +86,7 @@ describe('MySQL Token Suggestion', () => {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = mysql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -99,7 +99,7 @@ describe('MySQL Token Suggestion', () => {
             lineNumber: 7,
             column: 10,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = mysql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -123,7 +123,7 @@ describe('MySQL Token Suggestion', () => {
             lineNumber: 9,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = mysql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -156,7 +156,7 @@ describe('MySQL Token Suggestion', () => {
             lineNumber: 11,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = mysql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -175,7 +175,7 @@ describe('MySQL Token Suggestion', () => {
             lineNumber: 13,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = mysql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -188,7 +188,7 @@ describe('MySQL Token Suggestion', () => {
             lineNumber: 15,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = mysql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;

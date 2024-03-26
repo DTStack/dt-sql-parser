@@ -32,7 +32,7 @@ options
 }
 
 @header {
-import SQLParserBase from '../SQLParserBase';
+import { SQLParserBase } from '../SQLParserBase';
 }
 
 program

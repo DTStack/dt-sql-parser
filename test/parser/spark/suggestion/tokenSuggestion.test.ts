@@ -1,20 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import SparkSQL from 'src/parser/spark';
+import { SparkSQL } from 'src/parser/spark';
 import { CaretPosition } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('Spark SQL Token Suggestion', () => {
-    const parser = new SparkSQL();
+    const spark = new SparkSQL();
 
     test('After ALTER', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -35,7 +35,7 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 3,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -62,7 +62,7 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -75,7 +75,7 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 7,
             column: 10,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -101,7 +101,7 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 9,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -125,7 +125,7 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 11,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -138,7 +138,7 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 13,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -151,7 +151,7 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 15,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -190,7 +190,7 @@ describe('Spark SQL Token Suggestion', () => {
             lineNumber: 17,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = spark.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;

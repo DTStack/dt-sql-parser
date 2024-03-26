@@ -1,13 +1,13 @@
-import SparkSQL from 'src/parser/spark';
+import { SparkSQL } from 'src/parser/spark';
 import { SparkSqlParserVisitor } from 'src/lib/spark/SparkSqlParserVisitor';
 import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 describe('Spark SQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new SparkSQL();
+    const spark = new SparkSQL();
 
-    const parseTree = parser.parse(sql, (error) => {
+    const parseTree = spark.parse(sql, (error) => {
         console.error('Parse error:', error);
     });
 

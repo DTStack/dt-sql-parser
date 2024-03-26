@@ -1,4 +1,4 @@
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 import { FlinkSqlParserVisitor } from 'src/lib/flink/FlinkSqlParserVisitor';
 import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { TableExpressionContext } from 'src/lib/flink/FlinkSqlParser';
@@ -6,9 +6,9 @@ import { TableExpressionContext } from 'src/lib/flink/FlinkSqlParser';
 describe('Flink SQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
 
-    const parseTree = parser.parse(sql, (error) => {
+    const parseTree = flink.parse(sql, (error) => {
         console.error('Parse error:', error);
     });
 

@@ -1,12 +1,12 @@
 # FlinkSQL Benchmark
 | Name | Rows | Times | Total Time(ms) | Average Time(ms) |
 | ---- | ---- | ---- | ---- | ---- |
-| CreateTable | 100 | 1 | 126.40 | 126.40 |
-| CreateTable | 1000 | 1 | 53.91 | 53.91 |
-| CreateTable | 5000 | 1 | 208.61 | 208.61 |
-| SelectTable | 100 | 1 | 494.47 | 494.47 |
-| SelectTable | 1000 | 1 | 42.09 | 42.09 |
-| SelectTable | 5000 | 1 | 478.65 | 478.65 |
-| InsertTable | 100 | 1 | 9.04 | 9.04 |
-| InsertTable | 1000 | 1 | 40.75 | 40.75 |
-| InsertTable | 5000 | 1 | 246.81 | 246.81 |
+| CreateTable | 100 | 1 | 193.17 | 193.17 |
+| CreateTable | 1000 | 1 | 70.31 | 70.31 |
+| CreateTable | 5000 | 1 | 201.97 | 201.97 |
+| SelectTable | 100 | 1 | 596.33 | 596.33 |
+| SelectTable | 1000 | 1 | 62.44 | 62.44 |
+| SelectTable | 5000 | 1 | 583.94 | 583.94 |
+| InsertTable | 100 | 1 | 8.52 | 8.52 |
+| InsertTable | 1000 | 1 | 47.36 | 47.36 |
+| InsertTable | 5000 | 1 | 268.04 | 268.04 |

@@ -4,7 +4,7 @@ import * as antlr from "antlr4ng";
 import { Token } from "antlr4ng";
 
 
-import PlSqlBaseLexer from "./PlSqlBaseLexer";
+import { PlSqlBaseLexer } from "./PlSqlBaseLexer";
 
 
 export class PlSqlLexer extends PlSqlBaseLexer {

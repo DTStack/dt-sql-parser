@@ -1,7 +1,7 @@
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { readSQL } from 'test/helper';
 
-const parser = new PostgreSQL();
+const postgresql = new PostgreSQL();
 
 const features = {
     updates: readSQL(__dirname, 'update.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('PgSQL Update Syntax Tests', () => {
     features.updates.forEach((update) => {
         it(update, () => {
-            expect(parser.validate(update).length).toBe(0);
+            expect(postgresql.validate(update).length).toBe(0);
         });
     });
 });

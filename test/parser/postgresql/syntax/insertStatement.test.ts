@@ -1,7 +1,7 @@
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { readSQL } from 'test/helper';
 
-const parser = new PostgreSQL();
+const postgresql = new PostgreSQL();
 
 const features = {
     inserts: readSQL(__dirname, 'insert.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('PgSQL Insert Syntax Tests', () => {
     features.inserts.forEach((insertItem) => {
         it(insertItem, () => {
-            expect(parser.validate(insertItem).length).toBe(0);
+            expect(postgresql.validate(insertItem).length).toBe(0);
         });
     });
 });

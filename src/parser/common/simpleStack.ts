@@ -1,4 +1,4 @@
-class SimpleStack<T> {
+export class SimpleStack<T> {
     constructor() {
         this.stack = [];
     }
@@ -28,5 +28,3 @@ class SimpleStack<T> {
         return this.stack.length === 0;
     }
 }
-
-export default SimpleStack;

@@ -3,22 +3,20 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { FlinkSqlLexer } from '../../lib/flink/FlinkSqlLexer';
 import { FlinkSqlParser, ProgramContext } from '../../lib/flink/FlinkSqlParser';
 import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
-import BasicParser from '../common/basicParser';
+import { BasicParser } from '../common/basicParser';
 import { StmtContextType } from '../common/entityCollector';
 import { FlinkSqlSplitListener } from './flinkSplitListener';
-import FlinkEntityCollector from './flinkEntityCollector';
+import { FlinkEntityCollector } from './flinkEntityCollector';
 
 export { FlinkSqlSplitListener, FlinkEntityCollector };
 
-export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
+export class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
     protected createLexerFromCharStream(charStreams) {
-        const lexer = new FlinkSqlLexer(charStreams);
-        return lexer;
+        return new FlinkSqlLexer(charStreams);
     }
 
     protected createParserFromTokenStream(tokenStream) {
-        const parser = new FlinkSqlParser(tokenStream);
-        return parser;
+        return new FlinkSqlParser(tokenStream);
     }
 
     protected preferredRules = new Set([

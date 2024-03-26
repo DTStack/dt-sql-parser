@@ -21,12 +21,9 @@ import {
     ViewNamePathContext,
 } from '../../lib/impala/ImpalaSqlParser';
 import { EntityContextType } from '../common/basic-parser-types';
-import EntityCollector, { StmtContextType } from '../common/entityCollector';
+import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
-export default class ImpalaEntityCollector
-    extends EntityCollector
-    implements ImpalaSqlParserListener
-{
+export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlParserListener {
     /** ===== Entity begin */
     exitTableNameCreate(ctx: TableNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE);

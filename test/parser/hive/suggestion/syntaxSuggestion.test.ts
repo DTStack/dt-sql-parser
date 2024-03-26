@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
@@ -10,12 +10,12 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('Hive SQL Syntax Suggestion', () => {
-    const parser = new HiveSQL();
+    const hive = new HiveSQL();
 
     test('Validate Syntax SQL', () => {
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
+        expect(hive.validate(syntaxSql).length).not.toBe(0);
+        expect(hive.validate(syntaxSql).length).not.toBe(0);
+        expect(hive.validate(syntaxSql).length).not.toBe(0);
     });
 
     test('Insert table ', () => {
@@ -23,7 +23,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -40,7 +40,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 3,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -57,7 +57,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -74,7 +74,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -91,7 +91,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 28,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -108,7 +108,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 11,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -125,7 +125,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 13,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -142,7 +142,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 15,
             column: 27,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -159,7 +159,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 17,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -176,7 +176,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 19,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -193,7 +193,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 23,
             column: 8,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -210,7 +210,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 25,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -227,7 +227,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 27,
             column: 32,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -244,7 +244,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 29,
             column: 31,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -261,7 +261,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 31,
             column: 115,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -282,7 +282,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 33,
             column: 31,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -299,7 +299,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 35,
             column: 45,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -316,7 +316,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 37,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -333,7 +333,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 39,
             column: 14,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -350,7 +350,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             lineNumber: 41,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = hive.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;

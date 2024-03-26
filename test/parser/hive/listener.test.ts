@@ -1,14 +1,14 @@
 import { ParseTreeListener } from 'antlr4ng';
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { ProgramContext, SelectItemContext } from 'src/lib/hive/HiveSqlParser';
 import { HiveSqlParserListener } from 'src/lib/hive/HiveSqlParserListener';
 
 describe('HiveSQL Listener Tests', () => {
-    const parser = new HiveSQL();
+    const hive = new HiveSQL();
     test('Listener enterSelectList', async () => {
         const expectTableName = 'username';
         const sql = `select ${expectTableName} from tablename where inc_day='20190601' limit 1000;`;
-        const parseTree = parser.parse(sql);
+        const parseTree = hive.parse(sql);
 
         let result = '';
         class MyListener implements HiveSqlParserListener {
@@ -22,12 +22,12 @@ describe('HiveSQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
+        await hive.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
         expect(result).toBe(expectTableName);
     });
     test('Listener enterCreateTable', async () => {
         const sql = `drop table table_name;`;
-        const parseTree = parser.parse(sql);
+        const parseTree = hive.parse(sql);
         let result = '';
         class MyListener implements HiveSqlParserListener {
             enterDropTableStatement(ctx) {
@@ -41,7 +41,7 @@ describe('HiveSQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
+        await hive.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
         expect(result).toBe('droptabletable_name');
     });
 
@@ -67,7 +67,7 @@ describe('HiveSQL Listener Tests', () => {
                 key_value_pair;`,
         ];
         const sql = singleStatementArr.join('\n');
-        const sqlSlices = parser.splitSQLByStatement(sql);
+        const sqlSlices = hive.splitSQLByStatement(sql);
 
         expect(sqlSlices).not.toBeNull();
 

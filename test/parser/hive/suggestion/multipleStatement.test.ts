@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 
 const syntaxSql = fs.readFileSync(
@@ -9,14 +9,14 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('HiveSQL Multiple Statements Syntax Suggestion', () => {
-    const parser = new HiveSQL();
+    const hive = new HiveSQL();
 
     test('Select from table ', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = hive.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -30,7 +30,7 @@ describe('HiveSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 9,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = hive.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
@@ -44,7 +44,7 @@ describe('HiveSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 15,
             column: 13,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = hive.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -58,7 +58,7 @@ describe('HiveSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 21,
             column: 75,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = hive.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );

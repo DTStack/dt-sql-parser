@@ -1,8 +1,8 @@
 import { SingleStmtContext } from '../../lib/postgresql/PostgreSqlParser';
 import { PostgreSqlParserListener } from '../../lib/postgresql/PostgreSqlParserListener';
-import SplitListener from '../common/splitListener';
+import { SplitListener } from '../common/splitListener';
 
-export default class PostgreSqlSplitListener
+export class PostgreSqlSplitListener
     extends SplitListener<SingleStmtContext>
     implements PostgreSqlParserListener
 {

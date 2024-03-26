@@ -36,7 +36,7 @@ options {
 }
 
 @parser::header {
-import PlSqlBaseParser from './PlSqlBaseParser';
+import { PlSqlBaseParser } from './PlSqlBaseParser';
 }
 
 program

@@ -1,7 +1,7 @@
-import MySQL from 'src/parser/mysql';
+import { MySQL } from 'src/parser/mysql';
 import { readSQL } from 'test/helper';
 
-const parser = new MySQL();
+const mysql = new MySQL();
 
 const features = {
     call: readSQL(__dirname, 'call.sql'),
@@ -31,7 +31,7 @@ describe('MySQL DML Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {
-                const result = parser.validate(sql);
+                const result = mysql.validate(sql);
                 if (result.length) {
                     console.error(result, `\nPlease check sql: ${sql}`);
                 }

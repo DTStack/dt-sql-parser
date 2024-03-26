@@ -4,7 +4,8 @@ import path from 'path';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
 import { EntityContextType } from 'src/parser/common/basic-parser-types';
 import { StmtContextType } from 'src/parser/common/entityCollector';
-import PostgreSql, {
+import {
+    PostgreSQL,
     PostgreSqlEntityCollector,
     PostgreSqlSplitListener,
 } from 'src/parser/postgresql';
@@ -12,7 +13,7 @@ import PostgreSql, {
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
 
 describe('PostgreSql entity collector tests', () => {
-    const postgreSql = new PostgreSql();
+    const postgreSql = new PostgreSQL();
     const parseTree = postgreSql.parse(commonSql);
     const splitListener = new PostgreSqlSplitListener();
     postgreSql.listen(splitListener as PostgreSqlParserListener, parseTree);

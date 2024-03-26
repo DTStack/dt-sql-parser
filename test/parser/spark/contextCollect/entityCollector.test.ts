@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import SparkSQL from 'src/parser/spark';
-import { SparkSqlSplitListener, SparkEntityCollector } from 'src/parser/spark';
+import { SparkSQL, SparkSqlSplitListener, SparkEntityCollector } from 'src/parser/spark';
 import { ParseTreeListener } from 'antlr4ng';
 import { SparkSqlParserListener } from 'src/lib/spark/SparkSqlParserListener';
 import { EntityContextType } from 'src/parser/common/basic-parser-types';

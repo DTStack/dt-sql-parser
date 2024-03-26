@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import PostgreSql from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
@@ -10,7 +10,7 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('PostgreSql Syntax Suggestion with collect entity', () => {
-    const postgre = new PostgreSql();
+    const postgre = new PostgreSQL();
 
     test('select with no column', () => {
         const pos: CaretPosition = {

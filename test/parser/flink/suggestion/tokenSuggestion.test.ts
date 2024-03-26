@@ -1,20 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 import { CaretPosition } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('Flink SQL Token Suggestion', () => {
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
 
     test('Use Statement ', () => {
         const pos: CaretPosition = {
             lineNumber: 3,
             column: 5,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = flink.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -27,7 +27,7 @@ describe('Flink SQL Token Suggestion', () => {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = flink.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -47,7 +47,7 @@ describe('Flink SQL Token Suggestion', () => {
             lineNumber: 7,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = flink.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;

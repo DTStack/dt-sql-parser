@@ -1,4 +1,4 @@
-import TrinoSQL from 'src/parser/trino';
+import { TrinoSQL } from 'src/parser/trino';
 import { readSQL } from 'test/helper';
 
 const features = {
@@ -11,36 +11,36 @@ const features = {
 };
 
 describe('TrinoSQL Create Statements Syntax Tests', () => {
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
     features.table.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.view.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.schema.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
 
     features.tableAsSelect.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.role.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.materializedView.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
 });

@@ -10,20 +10,20 @@ import {
     PredictionMode,
 } from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
-import SQLParserBase from '../../lib/SQLParserBase';
+import { SQLParserBase } from '../../lib/SQLParserBase';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
 import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
 import { CaretPosition, Suggestions, SyntaxSuggestion } from './basic-parser-types';
-import ParseErrorListener, { ParseError, ErrorListener } from './parseErrorListener';
+import { ParseError, ErrorListener, ParseErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
-import type SplitListener from './splitListener';
-import type EntityCollector from './entityCollector';
+import type { SplitListener } from './splitListener';
+import type { EntityCollector } from './entityCollector';
 import { EntityContext } from './entityCollector';
 
 /**
  * Custom Parser class, subclass needs extends it.
  */
-export default abstract class BasicParser<
+export abstract class BasicParser<
     L extends Lexer = Lexer,
     PRC extends ParserRuleContext = ParserRuleContext,
     P extends SQLParserBase<PRC> = SQLParserBase<PRC>,

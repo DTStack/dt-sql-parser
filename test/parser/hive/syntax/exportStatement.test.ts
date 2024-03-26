@@ -1,4 +1,4 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
 const features = {
@@ -6,11 +6,11 @@ const features = {
 };
 
 describe('HiveSQL Export Syntax Tests', () => {
-    const parser = new HiveSQL();
+    const hive = new HiveSQL();
 
     features.exports.forEach((exp) => {
         it(exp, () => {
-            expect(parser.validate(exp).length).toBe(0);
+            expect(hive.validate(exp).length).toBe(0);
         });
     });
 });

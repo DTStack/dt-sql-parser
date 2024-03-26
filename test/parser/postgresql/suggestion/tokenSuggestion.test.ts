@@ -1,19 +1,19 @@
 import fs from 'fs';
 import path from 'path';
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { CaretPosition } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('Postgres SQL Token Suggestion', () => {
-    const parser = new PostgreSQL();
+    const postgresql = new PostgreSQL();
     test('After ALTER', () => {
         const pos: CaretPosition = {
             lineNumber: 3,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -62,7 +62,7 @@ describe('Postgres SQL Token Suggestion', () => {
             lineNumber: 9,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -122,7 +122,7 @@ describe('Postgres SQL Token Suggestion', () => {
             lineNumber: 7,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -134,7 +134,7 @@ describe('Postgres SQL Token Suggestion', () => {
             lineNumber: 1,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -184,7 +184,7 @@ describe('Postgres SQL Token Suggestion', () => {
             lineNumber: 5,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;

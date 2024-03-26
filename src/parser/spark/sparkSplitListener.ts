@@ -1,9 +1,9 @@
 import { SingleStatementContext } from '../../lib/spark/SparkSqlParser';
 
 import { SparkSqlParserListener } from '../../lib/spark/SparkSqlParserListener';
-import SplitListener from '../common/splitListener';
+import { SplitListener } from '../common/splitListener';
 
-export default class SparkSqlSplitListener
+export class SparkSqlSplitListener
     extends SplitListener<SingleStatementContext>
     implements SparkSqlParserListener
 {

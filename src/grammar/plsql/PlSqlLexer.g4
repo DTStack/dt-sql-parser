@@ -35,7 +35,7 @@ options {
     caseInsensitive= true;
 }
 @lexer::header {
-import PlSqlBaseLexer from "./PlSqlBaseLexer";
+import { PlSqlBaseLexer } from "./PlSqlBaseLexer";
 }
 
 ABORT                          : 'ABORT';

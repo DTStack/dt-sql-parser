@@ -11,7 +11,7 @@ import { SparkSqlParserVisitor } from "./SparkSqlParserVisitor.js";
 type int = number;
 
 
-import SQLParserBase from '../SQLParserBase';
+import { SQLParserBase } from '../SQLParserBase';
 
 
 export class SparkSqlParser extends SQLParserBase {

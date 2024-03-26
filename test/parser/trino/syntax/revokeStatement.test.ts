@@ -1,4 +1,4 @@
-import TrinoSQL from 'src/parser/trino';
+import { TrinoSQL } from 'src/parser/trino';
 import { readSQL } from 'test/helper';
 
 const features = {
@@ -7,16 +7,16 @@ const features = {
 };
 
 describe('TrinoSQL Revoke Statements Syntax Tests', () => {
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
     // revoke statements
     features.revoke.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.revokeRoles.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
 });

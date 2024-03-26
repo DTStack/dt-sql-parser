@@ -4,7 +4,7 @@ import * as antlr from "antlr4ng";
 import { Token } from "antlr4ng";
 
 
-import SQLParserBase from '../SQLParserBase';
+import { SQLParserBase } from '../SQLParserBase';
 
 
 export class TrinoSqlLexer extends antlr.Lexer {

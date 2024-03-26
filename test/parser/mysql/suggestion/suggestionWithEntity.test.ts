@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import MySQL from 'src/parser/mysql';
+import { MySQL } from 'src/parser/mysql';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 

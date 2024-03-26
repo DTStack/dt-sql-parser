@@ -1,7 +1,7 @@
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { readSQL } from 'test/helper';
 
-const parser = new PostgreSQL();
+const postgresql = new PostgreSQL();
 
 const features = {
     alters: readSQL(__dirname, 'alter.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('PgSQL Create Syntax Tests', () => {
     features.alters.forEach((alters) => {
         it(alters, () => {
-            expect(parser.validate(alters).length).toBe(0);
+            expect(postgresql.validate(alters).length).toBe(0);
         });
     });
 });

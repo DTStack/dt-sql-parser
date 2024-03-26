@@ -1,7 +1,7 @@
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 import { readSQL } from 'test/helper';
 
-const parser = new FlinkSQL();
+const flink = new FlinkSQL();
 
 const features = {
     base: readSQL(__dirname, 'select.sql'),
@@ -19,7 +19,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('Base Select', () => {
         features.base.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });
@@ -27,7 +27,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('With Clause Select', () => {
         features.withClause.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });
@@ -35,7 +35,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('Select DISTINCT', () => {
         features.distinct.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });
@@ -43,7 +43,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('Select Window TVF', () => {
         features.windowTVF.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });
@@ -51,7 +51,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('Select Aggregation', () => {
         features.aggregation.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });
@@ -59,7 +59,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('Select Join', () => {
         features.join.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });
@@ -67,7 +67,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('Select Set Operations', () => {
         features.setOperation.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });
@@ -75,7 +75,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('Select Pattern Recognition', () => {
         features.pattern.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });
@@ -83,7 +83,7 @@ describe('FlinkSQL Query Statement Tests', () => {
     describe('Select Where', () => {
         features.where.forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(flink.validate(sql).length).toBe(0);
             });
         });
     });

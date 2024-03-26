@@ -1,6 +1,6 @@
 import { StatementContext } from '../../lib/hive/HiveSqlParser';
 import { HiveSqlParserListener } from '../../lib/hive/HiveSqlParserListener';
-import SplitListener from '../common/splitListener';
+import { SplitListener } from '../common/splitListener';
 
 export class HiveSqlSplitListener
     extends SplitListener<StatementContext>

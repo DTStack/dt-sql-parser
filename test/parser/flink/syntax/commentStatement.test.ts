@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 
 // 注释 sql 不做切割
 const features = {
@@ -8,9 +8,9 @@ const features = {
 };
 
 describe('FlinkSQL Comment Syntax Tests', () => {
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
 
     test('Comment SQL Statement', () => {
-        expect(parser.validate(features.comments).length).toBe(0);
+        expect(flink.validate(features.comments).length).toBe(0);
     });
 });

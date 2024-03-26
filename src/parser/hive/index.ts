@@ -2,19 +2,18 @@ import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { HiveSqlLexer } from '../../lib/hive/HiveSqlLexer';
 import { HiveSqlParser, ProgramContext } from '../../lib/hive/HiveSqlParser';
-import BasicParser from '../common/basicParser';
+import { BasicParser } from '../common/basicParser';
 
 import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
 import { StmtContextType } from '../common/entityCollector';
 import { HiveSqlSplitListener } from './hiveSplitListener';
-import HiveEntityCollector from './hiveEntityCollector';
+import { HiveEntityCollector } from './hiveEntityCollector';
 
 export { HiveEntityCollector, HiveSqlSplitListener };
 
-export default class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, HiveSqlParser> {
+export class HiveSQL extends BasicParser<HiveSqlLexer, ProgramContext, HiveSqlParser> {
     protected createLexerFromCharStream(charStreams) {
-        const lexer = new HiveSqlLexer(charStreams);
-        return lexer;
+        return new HiveSqlLexer(charStreams);
     }
 
     protected createParserFromTokenStream(tokenStream) {

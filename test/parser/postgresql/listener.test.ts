@@ -1,13 +1,13 @@
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
 import { ParseTreeListener } from 'antlr4ng';
 
 describe('PostgreSQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new PostgreSQL();
+    const postgresql = new PostgreSQL();
 
-    const parseTree = parser.parse(sql);
+    const parseTree = postgresql.parse(sql);
 
     test('Listener enterTableName', async () => {
         let result = '';
@@ -22,7 +22,7 @@ describe('PostgreSQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parseTree);
+        await postgresql.listen(listenTableName as ParseTreeListener, parseTree);
         expect(result).toBe(expectTableName);
     });
 
@@ -41,7 +41,7 @@ describe('PostgreSQL Listener Tests', () => {
                 WITH NO DATA;`,
         ];
         const sql = singleStatementArr.join('\n');
-        const sqlSlices = parser.splitSQLByStatement(sql);
+        const sqlSlices = postgresql.splitSQLByStatement(sql);
 
         expect(sqlSlices).not.toBeNull();
 

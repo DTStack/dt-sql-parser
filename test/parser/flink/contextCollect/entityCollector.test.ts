@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { ParseTreeListener } from 'antlr4ng';
-import FlinkSQL, { FlinkEntityCollector, FlinkSqlSplitListener } from 'src/parser/flink';
+import { FlinkSQL, FlinkEntityCollector, FlinkSqlSplitListener } from 'src/parser/flink';
 import { FlinkSqlParserListener } from 'src/lib/flink/FlinkSqlParserListener';
 import { EntityContextType } from 'src/parser/common/basic-parser-types';
 import { StmtContextType } from 'src/parser/common/entityCollector';

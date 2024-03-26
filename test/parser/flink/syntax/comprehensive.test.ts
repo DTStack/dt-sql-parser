@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 
 // 综合测试的 sql 不做切割
 const features = {
@@ -8,8 +8,8 @@ const features = {
 };
 
 describe('FlinkSQL Comprehensive Tests', () => {
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
     test('Stream SQL templates', () => {
-        expect(parser.validate(features.templates).length).toBe(0);
+        expect(flink.validate(features.templates).length).toBe(0);
     });
 });

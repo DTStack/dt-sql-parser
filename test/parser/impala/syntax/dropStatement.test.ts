@@ -1,7 +1,7 @@
-import ImpalaSQL from 'src/parser/impala';
+import { ImpalaSQL } from 'src/parser/impala';
 import { readSQL } from 'test/helper';
 
-const parser = new ImpalaSQL();
+const impala = new ImpalaSQL();
 
 const features = {
     dbs: readSQL(__dirname, 'drop_db.sql'),
@@ -16,42 +16,42 @@ describe('ImpalaSQL Drop Syntax Tests', () => {
     describe('DROP DATABASE', () => {
         features.dbs.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('DROP FUNCTION', () => {
         features.functions.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('DROP ROLE', () => {
         features.roles.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('DROP STATS', () => {
         features.stats.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('DROP TABLE', () => {
         features.tables.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('DROP VIEW', () => {
         features.views.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });

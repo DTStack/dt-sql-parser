@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -10,12 +10,12 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('Postgre SQL Syntax Suggestion', () => {
-    const parser = new PostgreSQL();
+    const postgresql = new PostgreSQL();
 
     test('Validate Syntax SQL', () => {
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
+        expect(postgresql.validate(syntaxSql).length).not.toBe(0);
+        expect(postgresql.validate(syntaxSql).length).not.toBe(0);
+        expect(postgresql.validate(syntaxSql).length).not.toBe(0);
     });
 
     test('Insert table ', () => {
@@ -23,7 +23,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 3,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -40,7 +40,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -57,7 +57,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -82,15 +82,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 67,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
-        const syntaxes2 = parser.getSuggestionAtCaretPosition(
+        const syntaxes2 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos2.lineNumber),
             pos2
         )?.syntax;
@@ -117,7 +117,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 28,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -134,7 +134,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 13,
             column: 14,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -151,7 +151,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 11,
             column: 16,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -168,7 +168,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 15,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -185,7 +185,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 17,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -202,7 +202,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 19,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -219,7 +219,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 21,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -236,7 +236,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 23,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -253,7 +253,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 25,
             column: 40,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -270,7 +270,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 27,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -287,7 +287,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 29,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -308,11 +308,11 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 31,
             column: 69,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxesCreate = parser.getSuggestionAtCaretPosition(
+        const syntaxesCreate = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, posCreate.lineNumber),
             posCreate
         )?.syntax;
@@ -344,15 +344,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 35,
             column: 52,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxesCreate = parser.getSuggestionAtCaretPosition(
+        const syntaxesCreate = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, posCreate.lineNumber),
             posCreate
         )?.syntax;
-        const syntaxesAction = parser.getSuggestionAtCaretPosition(
+        const syntaxesAction = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, posAction.lineNumber),
             posAction
         )?.syntax;
@@ -381,7 +381,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 37,
             column: 58,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -397,7 +397,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 39,
             column: 52,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -425,15 +425,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 41,
             column: 53,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxesCreate = parser.getSuggestionAtCaretPosition(
+        const syntaxesCreate = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, posCreate.lineNumber),
             posCreate
         )?.syntax;
-        const syntaxesAction = parser.getSuggestionAtCaretPosition(
+        const syntaxesAction = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, posAction.lineNumber),
             posAction
         )?.syntax;
@@ -462,7 +462,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 43,
             column: 32,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -478,7 +478,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 45,
             column: 44,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -502,15 +502,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 47,
             column: 84,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
-        const syntaxes2 = parser.getSuggestionAtCaretPosition(
+        const syntaxes2 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos2.lineNumber),
             pos2
         )?.syntax;
@@ -536,7 +536,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 49,
             column: 45,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -552,7 +552,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 51,
             column: 54,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -576,15 +576,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 53,
             column: 71,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
-        const syntaxes2 = parser.getSuggestionAtCaretPosition(
+        const syntaxes2 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos2.lineNumber),
             pos2
         )?.syntax;
@@ -610,7 +610,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 55,
             column: 46,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -626,7 +626,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 57,
             column: 33,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -646,11 +646,11 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 59,
             column: 93,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
@@ -671,7 +671,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 61,
             column: 27,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -695,15 +695,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 63,
             column: 114,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
-        const syntaxes2 = parser.getSuggestionAtCaretPosition(
+        const syntaxes2 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos2.lineNumber),
             pos2
         )?.syntax;
@@ -729,7 +729,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 65,
             column: 132,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -744,7 +744,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 67,
             column: 23,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -760,7 +760,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 69,
             column: 46,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -800,27 +800,27 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 71,
             column: 162,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
-        const syntaxes2 = parser.getSuggestionAtCaretPosition(
+        const syntaxes2 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos2.lineNumber),
             pos2
         )?.syntax;
-        const syntaxes3 = parser.getSuggestionAtCaretPosition(
+        const syntaxes3 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos3.lineNumber),
             pos3
         )?.syntax;
-        const syntaxes4 = parser.getSuggestionAtCaretPosition(
+        const syntaxes4 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos4.lineNumber),
             pos4
         )?.syntax;
-        const syntaxes5 = parser.getSuggestionAtCaretPosition(
+        const syntaxes5 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos5.lineNumber),
             pos5
         )?.syntax;
@@ -871,15 +871,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 73,
             column: 53,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
-        const syntaxes2 = parser.getSuggestionAtCaretPosition(
+        const syntaxes2 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos2.lineNumber),
             pos2
         )?.syntax;
@@ -909,11 +909,11 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 75,
             column: 29,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
@@ -941,15 +941,15 @@ describe('Postgre SQL Syntax Suggestion', () => {
             lineNumber: 77,
             column: 57,
         };
-        const syntaxes1 = parser.getSuggestionAtCaretPosition(
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos1.lineNumber),
             pos1
         )?.syntax;
-        const syntaxes2 = parser.getSuggestionAtCaretPosition(
+        const syntaxes2 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos2.lineNumber),
             pos2
         )?.syntax;
-        const syntaxes3 = parser.getSuggestionAtCaretPosition(
+        const syntaxes3 = postgresql.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos3.lineNumber),
             pos3
         )?.syntax;

@@ -2,7 +2,7 @@ import { ParserRuleContext } from 'antlr4ng';
 import { EntityContextType } from './basic-parser-types';
 import { WordPosition, TextPosition } from './textAndWord';
 import { ctxToText, ctxToWord } from './textAndWord';
-import SimpleStack from './simpleStack';
+import { SimpleStack } from './simpleStack';
 
 /**
  * TODO: more stmt type should be supported.
@@ -90,7 +90,7 @@ export function toEntityContext(
  * @todo: Handle alias, includes column alias, table alias, query as alias and so on.
  * @todo: [may be need] Combine the entities in each clause.
  */
-abstract class EntityCollector {
+export abstract class EntityCollector {
     constructor(input: string, caretTokenIndex?: number) {
         this._input = input;
         this._caretTokenIndex = caretTokenIndex ?? -1;
@@ -275,5 +275,3 @@ abstract class EntityCollector {
         return finalEntities;
     }
 }
-
-export default EntityCollector;

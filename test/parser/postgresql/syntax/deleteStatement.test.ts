@@ -1,7 +1,7 @@
-import PostgreSQL from 'src/parser/postgresql';
+import { PostgreSQL } from 'src/parser/postgresql';
 import { readSQL } from 'test/helper';
 
-const parser = new PostgreSQL();
+const postgresql = new PostgreSQL();
 
 const features = {
     deletes: readSQL(__dirname, 'delete.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('PgSQL Delete Syntax Tests', () => {
     features.deletes.forEach((deleteItem) => {
         it(deleteItem, () => {
-            expect(parser.validate(deleteItem).length).toBe(0);
+            expect(postgresql.validate(deleteItem).length).toBe(0);
         });
     });
 });

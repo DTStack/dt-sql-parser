@@ -1,4 +1,4 @@
-import ImpalaSQL, { ImpalaSqlSplitListener } from 'src/parser/impala';
+import { ImpalaSQL, ImpalaSqlSplitListener } from 'src/parser/impala';
 import { ImpalaSqlParserListener } from 'src/lib/impala/ImpalaSqlParserListener';
 
 const validSQL1 = `INSERT INTO country_page_view

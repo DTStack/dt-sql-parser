@@ -1,14 +1,14 @@
-import { ErrorNode, ParseTreeListener, ParserRuleContext, TerminalNode } from 'antlr4ng';
-import FlinkSQL from 'src/parser/flink';
+import { ErrorNode, ParserRuleContext, TerminalNode } from 'antlr4ng';
+import { FlinkSQL } from 'src/parser/flink';
 import { FlinkSqlParserListener } from 'src/lib/flink/FlinkSqlParserListener';
 import { TableExpressionContext } from 'src/lib/flink/FlinkSqlParser';
 
 describe('Flink SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
 
-    const parseTree = parser.parse(sql);
+    const parseTree = flink.parse(sql);
 
     test('Listener enterTableName', async () => {
         let result = '';
@@ -23,7 +23,7 @@ describe('Flink SQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName, parseTree);
+        await flink.listen(listenTableName, parseTree);
         expect(result).toBe(expectTableName);
     });
 
@@ -46,7 +46,7 @@ describe('Flink SQL Listener Tests', () => {
             `;`,
         ];
         const sql = singleStatementArr.join('\n');
-        const sqlSlices = parser.splitSQLByStatement(sql);
+        const sqlSlices = flink.splitSQLByStatement(sql);
 
         expect(sqlSlices).not.toBeNull();
 

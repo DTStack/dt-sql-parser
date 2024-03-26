@@ -2,22 +2,17 @@ import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { ImpalaSqlLexer } from '../../lib/impala/ImpalaSqlLexer';
 import { ImpalaSqlParser, ProgramContext } from '../../lib/impala/ImpalaSqlParser';
-import BasicParser from '../common/basicParser';
+import { BasicParser } from '../common/basicParser';
 import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
 import { StmtContextType } from '../common/entityCollector';
 import { ImpalaSqlSplitListener } from './impalaSplitListener';
-import ImpalaEntityCollector from './impalaEntityCollector';
+import { ImpalaEntityCollector } from './impalaEntityCollector';
 
 export { ImpalaEntityCollector, ImpalaSqlSplitListener };
 
-export default class ImpalaSQL extends BasicParser<
-    ImpalaSqlLexer,
-    ProgramContext,
-    ImpalaSqlParser
-> {
+export class ImpalaSQL extends BasicParser<ImpalaSqlLexer, ProgramContext, ImpalaSqlParser> {
     protected createLexerFromCharStream(charStreams) {
-        const lexer = new ImpalaSqlLexer(charStreams);
-        return lexer;
+        return new ImpalaSqlLexer(charStreams);
     }
 
     protected createParserFromTokenStream(tokenStream) {

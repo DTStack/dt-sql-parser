@@ -21,9 +21,9 @@ import {
     ViewNameContext,
     ViewNameCreateContext,
 } from '../../lib/hive/HiveSqlParser';
-import EntityCollector, { StmtContextType } from '../common/entityCollector';
+import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
-export default class HiveEntityCollector extends EntityCollector implements HiveSqlParserListener {
+export class HiveEntityCollector extends EntityCollector implements HiveSqlParserListener {
     /** ====== Entity Begin */
     exitTableNameCreate = (ctx: TableNameCreateContext) => {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE);

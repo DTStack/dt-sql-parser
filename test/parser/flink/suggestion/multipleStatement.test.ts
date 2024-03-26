@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 
 const syntaxSql = fs.readFileSync(
@@ -9,14 +9,14 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('FlinkSQL Multiple Statements Syntax Suggestion', () => {
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
 
     test('Select from table ', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = flink.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -30,7 +30,7 @@ describe('FlinkSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 16,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = flink.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
@@ -44,7 +44,7 @@ describe('FlinkSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 22,
             column: 13,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = flink.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -58,7 +58,7 @@ describe('FlinkSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 31,
             column: 9,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = flink.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );

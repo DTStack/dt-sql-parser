@@ -3,7 +3,7 @@
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
 
-import SQLParserBase from '../SQLParserBase';
+import { SQLParserBase } from '../SQLParserBase';
 
 
 import { ProgramContext } from "./FlinkSqlParser.js";

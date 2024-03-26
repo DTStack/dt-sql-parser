@@ -21,12 +21,9 @@ import type {
 } from '../../lib/postgresql/PostgreSqlParser';
 import type { PostgreSqlParserListener } from '../../lib/postgresql/PostgreSqlParserListener';
 import { EntityContextType } from '../common/basic-parser-types';
-import EntityCollector, { StmtContextType } from '../common/entityCollector';
+import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
-export default class PostgreSqlEntityCollector
-    extends EntityCollector
-    implements PostgreSqlParserListener
-{
+export class PostgreSqlEntityCollector extends EntityCollector implements PostgreSqlParserListener {
     /** ====== Entity Begin */
     exitDatabaseName(ctx: DatabaseNameContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE);

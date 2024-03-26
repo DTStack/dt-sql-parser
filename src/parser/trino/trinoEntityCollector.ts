@@ -17,9 +17,9 @@ import type {
 } from '../../lib/trino/TrinoSqlParser';
 import type { TrinoSqlListener } from '../../lib/trino/TrinoSqlListener';
 import { EntityContextType } from '../common/basic-parser-types';
-import EntityCollector, { StmtContextType } from '../common/entityCollector';
+import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
-export default class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {
+export class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {
     /** ====== Entity Begin */
     exitSchemaName(ctx: SchemaNameContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE);

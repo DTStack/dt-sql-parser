@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import MySQL from 'src/parser/mysql';
+import { MySQL } from 'src/parser/mysql';
 import { MySqlEntityCollector, MysqlSplitListener } from 'src/parser/mysql';
 import { ParseTreeListener } from 'antlr4ng';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';

@@ -1,4 +1,4 @@
-import FlinkSQL from 'src/parser/flink';
+import { FlinkSQL } from 'src/parser/flink';
 import { readSQL } from 'test/helper';
 
 const features = {
@@ -6,11 +6,11 @@ const features = {
 };
 
 describe('FlinkSQL Describe Syntax Tests', () => {
-    const parser = new FlinkSQL();
+    const flink = new FlinkSQL();
 
     features.describes.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(flink.validate(sql).length).toBe(0);
         });
     });
 });
