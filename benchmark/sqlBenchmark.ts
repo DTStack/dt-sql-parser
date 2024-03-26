@@ -85,6 +85,7 @@ class SqlBenchmark {
         const caches = Object.keys(require.cache);
         const cacheModules = [
             path.join(__dirname, `../src/parser/${this.language}.ts`),
+            path.join(__dirname, `../src/parser/common/`),
             path.join(__dirname, `../src/lib/${this.language}/`),
             path.normalize(require.resolve('antlr4ng')),
         ];
