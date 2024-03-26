@@ -1,16 +1,14 @@
 import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
-import { FlinkSqlLexer } from '../lib/flinksql/FlinkSqlLexer';
-import {
-    FlinkSqlParser,
-    ProgramContext,
-    SingleStatementContext,
-} from '../lib/flinksql/FlinkSqlParser';
-import { FlinkSqlParserListener } from '../lib/flinksql/FlinkSqlParserListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from './common/basic-parser-types';
-import BasicParser from './common/basicParser';
-import { StmtContextType } from './common/entityCollector';
-import SplitListener from './common/splitListener';
+import { FlinkSqlLexer } from '../../lib/flinksql/FlinkSqlLexer';
+import { FlinkSqlParser, ProgramContext } from '../../lib/flinksql/FlinkSqlParser';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
+import BasicParser from '../common/basicParser';
+import { StmtContextType } from '../common/entityCollector';
+import { FlinkSqlSplitListener } from './flinkSplitListener';
+import FlinkEntityCollector from './flinkEntityCollector';
+
+export { FlinkSqlSplitListener, FlinkEntityCollector };
 
 export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext, FlinkSqlParser> {
     protected createLexerFromCharStream(charStreams) {
@@ -42,7 +40,7 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return null;
+        return new FlinkEntityCollector(input, caretTokenIndex);
     }
 
     protected processCandidates(
@@ -136,13 +134,4 @@ export default class FlinkSQL extends BasicParser<FlinkSqlLexer, ProgramContext,
             keywords,
         };
     }
-}
-
-export class FlinkSqlSplitListener
-    extends SplitListener<SingleStatementContext>
-    implements FlinkSqlParserListener
-{
-    exitSingleStatement = (ctx: SingleStatementContext) => {
-        this._statementsContext.push(ctx);
-    };
 }
