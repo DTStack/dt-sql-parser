@@ -15,7 +15,7 @@
 
 /**
  * This file is an adaptation of spark's spark/sql/api/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBaseParser.g4 grammar.
- * Reference: https://github.com/apache/spark/blob/master/sql/api/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBaseParser.g4
+ * Reference: https://github.com/apache/spark/blob/v3.5.0/sql/api/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBaseParser.g4
  */
 
 // $antlr-format alignTrailingComments true, columnLimit 150, minEmptyLines 1, maxEmptyLinesToKeep 1, reflowComments false, useTab false
@@ -27,6 +27,11 @@ parser grammar SparkSqlParser;
 options {
     tokenVocab=SparkSqlLexer;
     caseInsensitive= true;
+    superClass=SQLParserBase;
+}
+
+@header {
+import SQLParserBase from '../SQLParserBase';
 }
 
 program
@@ -38,78 +43,78 @@ singleStatement
     ;
 
 statement
-    : query
-    | ctes? dmlStatementNoWith
-    | KW_USE dbSchemaName
-    | KW_USE dbSchema dbSchemaName
-    | KW_SET KW_CATALOG (identifier | stringLit)
-    | KW_CREATE dbSchema (ifNotExists)? dbSchemaNameCreate (
+    : query                                      # statementDefault
+    | ctes? dmlStatementNoWith                   # dmlStatement
+    | KW_USE namespace? namespaceName            # useNamespace
+    | KW_SET KW_CATALOG (identifier | stringLit) # setCatalog
+    | KW_CREATE namespace (ifNotExists)? namespaceNameCreate (
         commentSpec
         | locationSpec
         | (KW_WITH (KW_DBPROPERTIES | KW_PROPERTIES) propertyList)
-    )*
-    | KW_ALTER dbSchema dbSchemaName KW_SET (KW_DBPROPERTIES | KW_PROPERTIES) propertyList
-    | KW_ALTER dbSchema dbSchemaName KW_SET locationSpec
-    | KW_DROP dbSchema (ifExists)? dbSchemaName (KW_RESTRICT | KW_CASCADE)?
-    | KW_SHOW dbSchemas ((KW_FROM | KW_IN) multipartIdentifier)? (KW_LIKE? pattern=stringLit)?
+    )*                                                                                          # createNamespace
+    | KW_ALTER namespace namespaceName KW_SET (KW_DBPROPERTIES | KW_PROPERTIES) propertyList    # setNamespaceProperties
+    | KW_ALTER namespace namespaceName KW_SET locationSpec                                      # setNamespaceLocation
+    | KW_DROP namespace (ifExists)? namespaceName (KW_RESTRICT | KW_CASCADE)?                   # dropNamespace
+    | KW_SHOW namespaces ((KW_FROM | KW_IN) multipartIdentifier)? (KW_LIKE? pattern=stringLit)? # showNamespaces
     | createTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider? createTableClauses (
         KW_AS? query
-    )?
+    )? # createTable
     | KW_CREATE KW_TABLE (ifNotExists)? target=tableNameCreate KW_LIKE source=tableName (
         tableProvider
         | rowFormat
         | createFileFormat
         | locationSpec
         | (KW_TBLPROPERTIES tableProps=propertyList)
-    )*
+    )* # createTableLike
     | replaceTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider? createTableClauses (
         KW_AS? query
-    )?
+    )? # replaceTable
     | KW_ANALYZE KW_TABLE tableName partitionSpec? KW_COMPUTE KW_STATISTICS (
         KW_NOSCAN
         | KW_FOR KW_COLUMNS columnNameSeq
         | KW_FOR KW_ALL KW_COLUMNS
-    )?
-    | KW_ANALYZE KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)? KW_COMPUTE KW_STATISTICS (KW_NOSCAN)?
-    | KW_ALTER KW_TABLE tableName KW_ADD KW_COLUMN qualifiedColTypeWithPositionForAdd
-    | KW_ALTER KW_TABLE tableName KW_ADD KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForAdd RIGHT_PAREN
-    | KW_ALTER KW_TABLE table=tableName KW_RENAME KW_COLUMN columnName KW_TO columnNameCreate
-    | KW_ALTER KW_TABLE tableName KW_DROP KW_COLUMN (ifExists)? columnName
-    | KW_ALTER KW_TABLE tableName KW_DROP KW_COLUMNS (ifExists)? LEFT_PAREN columnNameSeq RIGHT_PAREN
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_RENAME KW_TO multipartIdentifier
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_SET KW_TBLPROPERTIES propertyList
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_UNSET KW_TBLPROPERTIES (ifExists)? propertyList
-    | KW_ALTER KW_TABLE table=tableName (KW_ALTER | KW_CHANGE) KW_COLUMN? column=columnName alterColumnAction?
-    | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_CHANGE KW_COLUMN? colName=columnName colType colPosition?
-    | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_REPLACE KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForReplace RIGHT_PAREN
+    )?                                                                                                                                        # analyze
+    | KW_ANALYZE KW_TABLES ((KW_FROM | KW_IN) namespaceName)? KW_COMPUTE KW_STATISTICS (KW_NOSCAN)?                                           # analyzeTables
+    | KW_ALTER KW_TABLE tableName KW_ADD KW_COLUMN qualifiedColTypeWithPositionForAdd                                                         # alterTableAddColumn
+    | KW_ALTER KW_TABLE tableName KW_ADD KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForAdd RIGHT_PAREN                              # alterTableAddColumns
+    | KW_ALTER KW_TABLE table=tableName KW_RENAME KW_COLUMN columnName KW_TO columnNameCreate                                                 # renameTableColumn
+    | KW_ALTER KW_TABLE tableName KW_DROP KW_COLUMN (ifExists)? columnName                                                                    # alterTableDropColumn
+    | KW_ALTER KW_TABLE tableName KW_DROP KW_COLUMNS (ifExists)? LEFT_PAREN columnNameSeq RIGHT_PAREN                                         # dropTableColumns
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_RENAME KW_TO multipartIdentifier                                                    # renameTable
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_SET KW_TBLPROPERTIES propertyList                                                   # setTableProperties
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_UNSET KW_TBLPROPERTIES (ifExists)? propertyList                                     # unsetTableProperties
+    | KW_ALTER KW_TABLE table=tableName (KW_ALTER | KW_CHANGE) KW_COLUMN? column=columnName alterColumnAction?                                # alterTableAlterColumn
+    | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_CHANGE KW_COLUMN? colName=columnName colType colPosition?                           # hiveChangeColumn
+    | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_REPLACE KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForReplace RIGHT_PAREN #
+        hiveReplaceColumns
     | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET KW_SERDE stringLit (
         KW_WITH KW_SERDEPROPERTIES propertyList
-    )?
-    | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET KW_SERDEPROPERTIES propertyList
-    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_ADD (ifNotExists)? partitionSpecLocation+
-    | KW_ALTER KW_TABLE tableName partitionSpec KW_RENAME KW_TO partitionSpec
+    )?                                                                                              # setTableSerDe
+    | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET KW_SERDEPROPERTIES propertyList           # setTableSerDeProperties
+    | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_ADD (ifNotExists)? partitionSpecLocation+ # addTablePartition
+    | KW_ALTER KW_TABLE tableName partitionSpec KW_RENAME KW_TO partitionSpec                       # renameTablePartition
     | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_DROP (ifExists)? partitionSpec (
         COMMA partitionSpec
-    )* KW_PURGE?
-    | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET locationSpec
-    | KW_ALTER KW_TABLE tableName KW_RECOVER KW_PARTITIONS
-    | KW_ALTER KW_MATERIALIZED KW_VIEW viewName (KW_ENABLE | KW_DISABLE) KW_REWRITE
-    | KW_ALTER KW_MATERIALIZED KW_VIEW viewName KW_SET KW_TBLPROPERTIES propertyList
-    | KW_DROP KW_TABLE (ifExists)? tableName KW_PURGE?
-    | KW_DROP KW_VIEW (ifExists)? viewName
-    | KW_DROP KW_MATERIALIZED KW_VIEW (ifExists)? viewName
+    )* KW_PURGE?                                                                     # dropTablePartitions
+    | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET locationSpec               # setTableLocation
+    | KW_ALTER KW_TABLE tableName KW_RECOVER KW_PARTITIONS                           # recoverPartitions
+    | KW_ALTER KW_MATERIALIZED KW_VIEW viewName (KW_ENABLE | KW_DISABLE) KW_REWRITE  # alterMaterializedViewRewrite
+    | KW_ALTER KW_MATERIALIZED KW_VIEW viewName KW_SET KW_TBLPROPERTIES propertyList # alterMaterializedViewProperties
+    | KW_DROP KW_TABLE (ifExists)? tableName KW_PURGE?                               # dropTable
+    | KW_DROP KW_VIEW (ifExists)? viewName                                           # dropView
+    | KW_DROP KW_MATERIALIZED KW_VIEW (ifExists)? viewName                           # dropMaterializedView
     | KW_CREATE (KW_OR KW_REPLACE)? (KW_GLOBAL? KW_TEMPORARY)? KW_VIEW (ifNotExists)? viewNameCreate identifierCommentList? (
         commentSpec
         | (KW_PARTITIONED KW_ON identifierList)
         | (KW_TBLPROPERTIES propertyList)
-    )* KW_AS query
+    )* KW_AS query # createView
     | KW_CREATE (KW_OR KW_REPLACE)? KW_GLOBAL? KW_TEMPORARY KW_VIEW viewNameCreate (
         LEFT_PAREN colTypeList RIGHT_PAREN
-    )? tableProvider (KW_OPTIONS propertyList)?
-    | KW_ALTER KW_VIEW viewName KW_AS? query
+    )? tableProvider (KW_OPTIONS propertyList)? # createTempViewUsing
+    | KW_ALTER KW_VIEW viewName KW_AS? query    # alterViewQuery
     | KW_CREATE (KW_OR KW_REPLACE)? KW_TEMPORARY? KW_FUNCTION (ifNotExists)? functionNameCreate KW_AS className=stringLit (
         KW_USING resource (COMMA resource)*
-    )?
+    )? # createFunction
     |
     // Self developed materialized view syntax by dtstack, spark not support now.
     KW_CREATE KW_MATERIALIZED KW_VIEW (ifNotExists)? viewNameCreate tableProvider? (
@@ -122,62 +127,62 @@ statement
         | locationSpec
         | commentSpec
         | (KW_TBLPROPERTIES tableProps=propertyList)
-    )* KW_AS query
-    | KW_DROP KW_TEMPORARY? KW_FUNCTION (ifExists)? functionName
-    | KW_DECLARE (KW_OR KW_REPLACE)? KW_VARIABLE? functionName dataType? variableDefaultExpression?
-    | KW_DROP KW_TEMPORARY KW_VARIABLE (ifExists)? (tableName | viewName | functionName)
-    | KW_EXPLAIN (KW_LOGICAL | KW_FORMATTED | KW_EXTENDED | KW_CODEGEN | KW_COST)? statement
-    | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) dbSchemaName)? (KW_LIKE? pattern=stringLit)?
-    | KW_SHOW KW_TABLE KW_EXTENDED ((KW_FROM | KW_IN) ns=dbSchemaName)? KW_LIKE pattern=stringLit partitionSpec?
-    | KW_SHOW KW_TBLPROPERTIES table=tableName (LEFT_PAREN key=propertyKey RIGHT_PAREN)?
-    | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) table=tableName ((KW_FROM | KW_IN) dbSchemaName)?
-    | KW_SHOW KW_VIEWS ((KW_FROM | KW_IN) dbSchemaName)? (KW_LIKE? pattern=stringLit)?
-    | KW_SHOW KW_PARTITIONS tableName partitionSpec?
-    | KW_SHOW functionKind? KW_FUNCTIONS ((KW_FROM | KW_IN) ns=dbSchemaName)? (
+    )* KW_AS query                                                                                                # createMaterializedView
+    | KW_DROP KW_TEMPORARY? KW_FUNCTION (ifExists)? functionName                                                  # dropFunction
+    | KW_DECLARE (KW_OR KW_REPLACE)? KW_VARIABLE? functionName dataType? variableDefaultExpression?               # declareVariable
+    | KW_DROP KW_TEMPORARY KW_VARIABLE (ifExists)? (tableName | viewName | functionName)                          # dropVariable
+    | KW_EXPLAIN (KW_LOGICAL | KW_FORMATTED | KW_EXTENDED | KW_CODEGEN | KW_COST)? statement                      # explainStatement
+    | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) namespaceName)? (KW_LIKE? pattern=stringLit)?                          # showTables
+    | KW_SHOW KW_TABLE KW_EXTENDED ((KW_FROM | KW_IN) ns=namespaceName)? KW_LIKE pattern=stringLit partitionSpec? # showTableExtended
+    | KW_SHOW KW_TBLPROPERTIES table=tableName (LEFT_PAREN key=propertyKey RIGHT_PAREN)?                          # showTblProperties
+    | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) table=tableName ((KW_FROM | KW_IN) namespaceName)?                     # showColumns
+    | KW_SHOW KW_VIEWS ((KW_FROM | KW_IN) namespaceName)? (KW_LIKE? pattern=stringLit)?                           # showViews
+    | KW_SHOW KW_PARTITIONS tableName partitionSpec?                                                              # showPartitions
+    | KW_SHOW functionKind? KW_FUNCTIONS ((KW_FROM | KW_IN) ns=namespaceName)? (
         KW_LIKE? (legacy=multipartIdentifier | pattern=stringLit)
-    )?
-    | KW_SHOW KW_CREATE KW_TABLE tableName (KW_AS KW_SERDE)?
-    | KW_SHOW KW_CURRENT dbSchema
-    | KW_SHOW KW_CATALOGS (KW_LIKE? pattern=stringLit)?
-    | KW_SHOW KW_MATERIALIZED KW_VIEWS ((KW_FROM | KW_IN) db_name=dbSchemaName)? (
+    )?                                                       # showFunctions
+    | KW_SHOW KW_CREATE KW_TABLE tableName (KW_AS KW_SERDE)? # showCreateTable
+    | KW_SHOW KW_CURRENT namespace                           # showCurrentNamespace
+    | KW_SHOW KW_CATALOGS (KW_LIKE? pattern=stringLit)?      # showCatalogs
+    | KW_SHOW KW_MATERIALIZED KW_VIEWS ((KW_FROM | KW_IN) db_name=namespaceName)? (
         KW_LIKE? pattern=stringLit
-    )?
-    | KW_SHOW KW_CREATE KW_MATERIALIZED KW_VIEW viewName (KW_AS KW_SERDE)?
-    | (KW_DESC | KW_DESCRIBE) KW_FUNCTION KW_EXTENDED? describeFuncName
-    | (KW_DESC | KW_DESCRIBE) KW_DATABASE KW_EXTENDED? dbSchemaName
-    | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)? tableName partitionSpec? describeColName?
-    | (KW_DESC | KW_DESCRIBE) KW_QUERY? query
-    | KW_COMMENT KW_ON dbSchema dbSchemaName KW_IS comment
-    | KW_COMMENT KW_ON KW_TABLE tableName KW_IS comment
-    | KW_REFRESH KW_TABLE tableName
-    | KW_REFRESH KW_FUNCTION functionName
-    | KW_REFRESH (stringLit | .*?)
-    | KW_REFRESH KW_MATERIALIZED KW_VIEW viewName
-    | KW_CACHE KW_LAZY? KW_TABLE tableName (KW_OPTIONS options=propertyList)? (KW_AS? query)?
-    | KW_UNCACHE KW_TABLE (ifExists)? tableName
-    | KW_CLEAR KW_CACHE
-    | KW_LOAD KW_DATA KW_LOCAL? KW_INPATH path=stringLit KW_OVERWRITE? KW_INTO KW_TABLE tableName partitionSpec?
-    | KW_TRUNCATE KW_TABLE tableName partitionSpec?
-    | (KW_MSCK)? KW_REPAIR KW_TABLE tableName (option=(KW_ADD | KW_DROP | KW_SYNC) KW_PARTITIONS)?
-    | op=(KW_ADD | KW_LIST) identifier .*?
-    | KW_SET KW_ROLE .*?
-    | KW_SET KW_TIME KW_ZONE interval
-    | KW_SET KW_TIME KW_ZONE timezone
-    | KW_SET KW_TIME KW_ZONE .*?
-    | KW_SET (KW_VARIABLE | KW_VAR) assignmentList
-    | KW_SET (KW_VARIABLE | KW_VAR) LEFT_PAREN multipartIdentifierList RIGHT_PAREN EQ LEFT_PAREN query RIGHT_PAREN
-    | KW_SET configKey EQ configValue
-    | KW_SET configKey (EQ .*?)?
-    | KW_SET .*? EQ configValue
-    | KW_SET .*?
-    | KW_RESET configKey
-    | KW_RESET .*?
+    )?                                                                                                                 # showMaterializedViews
+    | KW_SHOW KW_CREATE KW_MATERIALIZED KW_VIEW viewName (KW_AS KW_SERDE)?                                             # showCreateMaterializedView
+    | (KW_DESC | KW_DESCRIBE) KW_FUNCTION KW_EXTENDED? describeFuncName                                                # describeFunction
+    | (KW_DESC | KW_DESCRIBE) KW_DATABASE KW_EXTENDED? namespaceName                                                   # describeNamespace
+    | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)? tableName partitionSpec? describeColName? # describeRelation
+    | (KW_DESC | KW_DESCRIBE) KW_QUERY? query                                                                          # describeQuery
+    | KW_COMMENT KW_ON namespace namespaceName KW_IS comment                                                           # commentNamespace
+    | KW_COMMENT KW_ON KW_TABLE tableName KW_IS comment                                                                # commentTable
+    | KW_REFRESH KW_TABLE tableName                                                                                    # refreshTable
+    | KW_REFRESH KW_FUNCTION functionName                                                                              # refreshFunction
+    | KW_REFRESH (stringLit | .*?)                                                                                     # refreshResource
+    | KW_REFRESH KW_MATERIALIZED KW_VIEW viewName                                                                      # refreshMaterializedView
+    | KW_CACHE KW_LAZY? KW_TABLE tableName (KW_OPTIONS options=propertyList)? (KW_AS? query)?                          # cacheTable
+    | KW_UNCACHE KW_TABLE (ifExists)? tableName                                                                        # unCacheTable
+    | KW_CLEAR KW_CACHE                                                                                                # clearCache
+    | KW_LOAD KW_DATA KW_LOCAL? KW_INPATH path=stringLit KW_OVERWRITE? KW_INTO KW_TABLE tableName partitionSpec?       # loadData
+    | KW_TRUNCATE KW_TABLE tableName partitionSpec?                                                                    # truncateTable
+    | (KW_MSCK)? KW_REPAIR KW_TABLE tableName (option=(KW_ADD | KW_DROP | KW_SYNC) KW_PARTITIONS)?                     # repairTable
+    | op=(KW_ADD | KW_LIST) identifier .*?                                                                             # manageResource
+    | KW_SET KW_ROLE .*?                                                                                               # failNativeCommand
+    | KW_SET KW_TIME KW_ZONE interval                                                                                  # setTimeZoneInterval
+    | KW_SET KW_TIME KW_ZONE timezone                                                                                  # setTimeZone
+    | KW_SET KW_TIME KW_ZONE .*?                                                                                       # setTimeZoneAny
+    | KW_SET (KW_VARIABLE | KW_VAR) assignmentList                                                                     # setVariableAssignment
+    | KW_SET (KW_VARIABLE | KW_VAR) LEFT_PAREN multipartIdentifierList RIGHT_PAREN EQ LEFT_PAREN query RIGHT_PAREN     # setVariableMultiAssignment
+    | KW_SET configKey EQ configValue                                                                                  # setConfig
+    | KW_SET configKey (EQ .*?)?                                                                                       # setConfigAndValue
+    | KW_SET .*? EQ configValue                                                                                        # setConfigAnyKey
+    | KW_SET .*?                                                                                                       # setAny
+    | KW_RESET configKey                                                                                               # resetConfig
+    | KW_RESET .*?                                                                                                     # resetAny
     | KW_CREATE KW_INDEX (ifNotExists)? identifier KW_ON KW_TABLE? tableName (
         KW_USING indexType=identifier
-    )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)?
-    | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName
-    | KW_OPTIMIZE tableName whereClause? zorderClause
-    | unsupportedHiveNativeCommands .*?
+    )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)? # createIndex
+    | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName                          # dropIndex
+    | KW_OPTIMIZE tableName whereClause? zorderClause                                            # optimizeTable
+    | unsupportedHiveNativeCommands .*?                                                          # unsupportHiveCommands
     ;
 
 timezone
@@ -267,7 +272,7 @@ commentSpec
     ;
 
 query
-    : ctes? queryTerm queryOrganization
+    : ctes? queryTerm queryOrganization # queryStatement
     ;
 
 insertInto
@@ -299,13 +304,13 @@ partitionVal
     | identifier EQ KW_DEFAULT
     ;
 
-dbSchema
+namespace
     : KW_NAMESPACE
     | KW_DATABASE
     | KW_SCHEMA
     ;
 
-dbSchemas
+namespaces
     : KW_NAMESPACES
     | KW_DATABASES
     | KW_SCHEMAS
@@ -404,21 +409,21 @@ resource
     ;
 
 dmlStatementNoWith
-    : insertInto query
-    | fromClause multiInsertQueryBody+
-    | KW_DELETE KW_FROM tableName tableAlias whereClause?
-    | KW_UPDATE tableName tableAlias setClause whereClause?
+    : insertInto query                                      # insertFromQuery
+    | fromClause multiInsertQueryBody+                      # multipleInsert
+    | KW_DELETE KW_FROM tableName tableAlias whereClause?   # deleteFromTable
+    | KW_UPDATE tableName tableAlias setClause whereClause? # updateTable
     | KW_MERGE KW_INTO target=tableName targetAlias=tableAlias KW_USING (
         source=identifierReference
         | LEFT_PAREN sourceQuery=query RIGHT_PAREN
-    ) sourceAlias=tableAlias KW_ON mergeCondition=booleanExpression matchedClause* notMatchedClause* notMatchedBySourceClause*
+    ) sourceAlias=tableAlias KW_ON mergeCondition=booleanExpression matchedClause* notMatchedClause* notMatchedBySourceClause* # mergeIntoTable
     ;
 
-dbSchemaName
+namespaceName
     : identifierReference
     ;
 
-dbSchemaNameCreate
+namespaceNameCreate
     : identifierReference
     ;
 
@@ -440,6 +445,7 @@ viewName
 
 columnName
     : multipartIdentifier
+    | {this.shouldMatchEmpty()}?
     ;
 
 columnNameSeq
@@ -782,11 +788,11 @@ identifierCommentList
     ;
 
 identifierComment
-    : identifier commentSpec?
+    : columnNameCreate commentSpec?
     ;
 
 relationPrimary
-    : identifierReference temporalClause? sample? tableAlias
+    : (tableName | viewName | identifierReference) temporalClause? sample? tableAlias
     | LEFT_PAREN query RIGHT_PAREN sample? tableAlias
     | LEFT_PAREN relation RIGHT_PAREN sample? tableAlias
     | inlineTable
@@ -1811,7 +1817,7 @@ nonReserved
     | KW_FOREIGN
     | KW_FORMAT
     | KW_FORMATTED
-    | KW_FROM
+    // | KW_FROM
     | KW_FUNCTION
     | KW_FUNCTIONS
     | KW_GENERATED
@@ -1967,7 +1973,7 @@ nonReserved
     | KW_SYSTEM
     | KW_SYSTEM_TIME
     | KW_SYSTEM_VERSION
-    | KW_TABLE
+    // | KW_TABLE
     | KW_TABLES
     | KW_TABLESAMPLE
     | KW_TARGET

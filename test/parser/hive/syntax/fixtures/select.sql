@@ -239,3 +239,8 @@ EXPLAIN LOCKS UPDATE target SET b = 1 WHERE p IN (SELECT t.q1 FROM source t WHER
 
 -- LanguageManual Explain -- User-level Explain Output
 EXPLAIN select sum(hash(key)), sum(hash(value)) from src_orc_merge_test_part where ds='2012-01-03' and ts='2012-01-03+14:46:31';
+
+-- FROM xx SELECT
+FROM table_name_1 SELECT col1, col2;
+
+FROM a JOIN b ON (a.id = b.id AND a.department = b.department) SELECT a.*;

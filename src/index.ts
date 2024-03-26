@@ -30,19 +30,29 @@ export type {
     ImpalaSqlParserVisitor,
 } from './lib';
 
-export { SyntaxContextType } from './parser/common/basic-parser-types';
+export { EntityContextType } from './parser/common/basic-parser-types';
+
+export {
+    /**
+     * @deprecated SyntaxContextType has been renamed to {@link EntityContextType},
+     * It will be removed when the stable version is released.
+     */
+    EntityContextType as SyntaxContextType,
+} from './parser/common/basic-parser-types';
 
 export type {
     CaretPosition,
-    WordRange,
     Suggestions,
     SyntaxSuggestion,
-    TextSlice,
 } from './parser/common/basic-parser-types';
+
+export type { WordRange, TextSlice } from './parser/common/textAndWord';
 
 export type { SyntaxError, ParseError, ErrorListener } from './parser/common/parseErrorListener';
 
+export type { StmtContextType, StmtContext, EntityContext } from './parser/common/entityCollector';
+
 /**
- * @deprecated legacy, will be removed.
+ * @deprecated Legacy utils will be removed when the stable version is released.
  */
 export * from './utils';

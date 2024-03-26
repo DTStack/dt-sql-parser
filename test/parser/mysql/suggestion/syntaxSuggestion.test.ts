@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import MySQL from 'src/parser/mysql';
-import { SyntaxContextType, CaretPosition } from 'src/parser/common/basic-parser-types';
+import { EntityContextType, CaretPosition } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -26,7 +26,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -43,7 +43,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -60,7 +60,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -77,7 +77,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -94,7 +94,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -111,7 +111,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -128,7 +128,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -145,7 +145,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -162,7 +162,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -179,7 +179,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -196,7 +196,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -213,7 +213,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -230,7 +230,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -247,7 +247,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -264,7 +264,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -281,7 +281,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -298,7 +298,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -315,7 +315,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -332,7 +332,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -349,7 +349,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -366,7 +366,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -383,7 +383,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -400,7 +400,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -417,7 +417,7 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -434,10 +434,78 @@ describe('MySQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('show create function', () => {
+        const pos: CaretPosition = {
+            lineNumber: 51,
+            column: 31,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['func_name']);
+    });
+
+    test('show create table', () => {
+        const pos: CaretPosition = {
+            lineNumber: 53,
+            column: 27,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tbl_name']);
+    });
+
+    test('show create dbName', () => {
+        const pos: CaretPosition = {
+            lineNumber: 55,
+            column: 43,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db_name']);
+    });
+
+    test('show create view', () => {
+        const pos: CaretPosition = {
+            lineNumber: 57,
+            column: 24,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['test', '.', 'v']);
     });
 });

@@ -25,6 +25,11 @@ grammar TrinoSql;
 
 options {
     caseInsensitive= true;
+    superClass=SQLParserBase;
+}
+
+@header {
+import SQLParserBase from '../SQLParserBase';
 }
 
 tokens {
@@ -173,12 +178,12 @@ statement
         KW_WHERE where= booleanExpression
     )?                                                                                              # update
     | KW_MERGE KW_INTO tableName (KW_AS? identifier)? KW_USING relation KW_ON expression mergeCase+ # merge
-    | KW_SHOW KW_COMMENT KW_ON KW_TABLE tableName                                                   # showTableComment
-    | KW_SHOW KW_COMMENT KW_ON KW_COLUMN columnName                                                 # showColumnComment
+    | KW_SHOW KW_COMMENT KW_ON KW_TABLE tableName                                                   # showTableComment  // dtstack
+    | KW_SHOW KW_COMMENT KW_ON KW_COLUMN columnName                                                 # showColumnComment // dtstack
     ;
 
 query
-    : with? queryNoWith
+    : with? queryNoWith # queryStatement
     ;
 
 with
@@ -746,6 +751,7 @@ functionName
 
 columnName
     : qualifiedName
+    | {this.shouldMatchEmpty()}?
     ;
 
 columnNameCreate

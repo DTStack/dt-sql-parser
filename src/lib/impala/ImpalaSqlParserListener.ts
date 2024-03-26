@@ -3,6 +3,9 @@
 import { ErrorNode, ParseTreeListener, ParserRuleContext, TerminalNode } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./ImpalaSqlParser.js";
 import { SingleStatementContext } from "./ImpalaSqlParser.js";
 import { SqlStatementContext } from "./ImpalaSqlParser.js";
@@ -109,6 +112,7 @@ import { QueryStatementContext } from "./ImpalaSqlParser.js";
 import { WithContext } from "./ImpalaSqlParser.js";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParser.js";
 import { ForeignKeySpecificationContext } from "./ImpalaSqlParser.js";
+import { ColumnSpecContext } from "./ImpalaSqlParser.js";
 import { ColumnDefinitionContext } from "./ImpalaSqlParser.js";
 import { KuduTableElementContext } from "./ImpalaSqlParser.js";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParser.js";
@@ -155,7 +159,6 @@ import { SampledRelationContext } from "./ImpalaSqlParser.js";
 import { SampleTypeContext } from "./ImpalaSqlParser.js";
 import { AliasedRelationContext } from "./ImpalaSqlParser.js";
 import { ColumnAliasesContext } from "./ImpalaSqlParser.js";
-import { CreateColumnAliasesContext } from "./ImpalaSqlParser.js";
 import { RelationPrimaryContext } from "./ImpalaSqlParser.js";
 import { SubQueryRelationContext } from "./ImpalaSqlParser.js";
 import { UnnestContext } from "./ImpalaSqlParser.js";
@@ -1311,6 +1314,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      */
     exitForeignKeySpecification?: (ctx: ForeignKeySpecificationContext) => void;
     /**
+     * Enter a parse tree produced by `ImpalaSqlParser.columnSpec`.
+     * @param ctx the parse tree
+     */
+    enterColumnSpec?: (ctx: ColumnSpecContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.columnSpec`.
+     * @param ctx the parse tree
+     */
+    exitColumnSpec?: (ctx: ColumnSpecContext) => void;
+    /**
      * Enter a parse tree produced by `ImpalaSqlParser.columnDefinition`.
      * @param ctx the parse tree
      */
@@ -1792,16 +1805,6 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnAliases?: (ctx: ColumnAliasesContext) => void;
-    /**
-     * Enter a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
-     * @param ctx the parse tree
-     */
-    enterCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => void;
-    /**
-     * Exit a parse tree produced by `ImpalaSqlParser.createColumnAliases`.
-     * @param ctx the parse tree
-     */
-    exitCreateColumnAliases?: (ctx: CreateColumnAliasesContext) => void;
     /**
      * Enter a parse tree produced by `ImpalaSqlParser.relationPrimary`.
      * @param ctx the parse tree

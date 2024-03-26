@@ -3,6 +3,9 @@
 import { ErrorNode, ParseTreeListener, ParserRuleContext, TerminalNode } from "antlr4ng";
 
 
+import SQLParserBase from '../SQLParserBase';
+
+
 import { ProgramContext } from "./TrinoSqlParser.js";
 import { StatementsContext } from "./TrinoSqlParser.js";
 import { StandaloneClauseContext } from "./TrinoSqlParser.js";
@@ -83,7 +86,7 @@ import { UpdateContext } from "./TrinoSqlParser.js";
 import { MergeContext } from "./TrinoSqlParser.js";
 import { ShowTableCommentContext } from "./TrinoSqlParser.js";
 import { ShowColumnCommentContext } from "./TrinoSqlParser.js";
-import { QueryContext } from "./TrinoSqlParser.js";
+import { QueryStatementContext } from "./TrinoSqlParser.js";
 import { WithContext } from "./TrinoSqlParser.js";
 import { TableElementContext } from "./TrinoSqlParser.js";
 import { ColumnDefinitionContext } from "./TrinoSqlParser.js";
@@ -1233,15 +1236,17 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitShowColumnComment?: (ctx: ShowColumnCommentContext) => void;
     /**
-     * Enter a parse tree produced by `TrinoSqlParser.query`.
+     * Enter a parse tree produced by the `queryStatement`
+     * labeled alternative in `TrinoSqlParser.query`.
      * @param ctx the parse tree
      */
-    enterQuery?: (ctx: QueryContext) => void;
+    enterQueryStatement?: (ctx: QueryStatementContext) => void;
     /**
-     * Exit a parse tree produced by `TrinoSqlParser.query`.
+     * Exit a parse tree produced by the `queryStatement`
+     * labeled alternative in `TrinoSqlParser.query`.
      * @param ctx the parse tree
      */
-    exitQuery?: (ctx: QueryContext) => void;
+    exitQueryStatement?: (ctx: QueryStatementContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.with`.
      * @param ctx the parse tree

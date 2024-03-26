@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import HiveSQL from 'src/parser/hive';
-import { CaretPosition, SyntaxContextType } from 'src/parser/common/basic-parser-types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -28,7 +28,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -45,7 +45,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -62,7 +62,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -79,7 +79,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.TABLE
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -96,7 +96,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -113,7 +113,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.VIEW
+            (syn) => syn.syntaxContextType === EntityContextType.VIEW
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -130,7 +130,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -147,7 +147,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.FUNCTION
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -164,7 +164,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -181,7 +181,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.DATABASE
+            (syn) => syn.syntaxContextType === EntityContextType.DATABASE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -198,7 +198,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -215,7 +215,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -232,7 +232,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -249,7 +249,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -266,7 +266,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -287,7 +287,7 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
         expect(suggestion).not.toBeUndefined();
@@ -304,10 +304,61 @@ describe('Hive SQL Syntax Suggestion', () => {
             pos
         )?.syntax;
         const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === SyntaxContextType.COLUMN_CREATE
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
         );
 
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['new']);
+    });
+
+    test('From Table Select', () => {
+        const pos: CaretPosition = {
+            lineNumber: 37,
+            column: 18,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['table_name_1']);
+    });
+
+    test('From Table Select join', () => {
+        const pos: CaretPosition = {
+            lineNumber: 39,
+            column: 14,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['b']);
+    });
+
+    test('From Table Insert', () => {
+        const pos: CaretPosition = {
+            lineNumber: 41,
+            column: 19,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['page_view_stg']);
     });
 });

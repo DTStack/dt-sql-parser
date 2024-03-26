@@ -33,3 +33,9 @@ MERGE INTO tablename USING tablename2 ON (tablename.id = tablename2.id) WHEN MAT
 ALTER TABLE tbl CHANGE COLUMN  ;
 
 ALTER TABLE tbl CHANGE COLUMN tbl.oldcol new ;
+
+FROM table_name_1 SELECT col1, col2;
+
+FROM a JOIN b ON (a.id = b.id AND a.department = b.department) SELECT a.*;
+
+FROM page_view_stg INSERT;

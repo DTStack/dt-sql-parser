@@ -1,5 +1,4 @@
 import {
-    Parser,
     Lexer,
     Token,
     CharStreams,
@@ -11,25 +10,15 @@ import {
     PredictionMode,
 } from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
-import { findCaretTokenIndex } from './utils/findCaretTokenIndex';
-import {
-    CaretPosition,
-    Suggestions,
-    SyntaxSuggestion,
-    WordRange,
-    TextSlice,
-} from './basic-parser-types';
+import SQLParserBase from '../../lib/SQLParserBase';
+import { findCaretTokenIndex } from './findCaretTokenIndex';
+import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
+import { CaretPosition, Suggestions, SyntaxSuggestion } from './basic-parser-types';
 import ParseErrorListener, { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
-
-interface IParser<IParserRuleContext extends ParserRuleContext> extends Parser {
-    // Customized in our parser
-    program(): IParserRuleContext;
-}
-
-interface SplitListener extends ParseTreeListener {
-    statementsContext: ParserRuleContext[];
-}
+import type SplitListener from './splitListener';
+import type EntityCollector from './entityCollector';
+import { EntityContext } from './entityCollector';
 
 /**
  * Custom Parser class, subclass needs extends it.
@@ -37,7 +26,7 @@ interface SplitListener extends ParseTreeListener {
 export default abstract class BasicParser<
     L extends Lexer = Lexer,
     PRC extends ParserRuleContext = ParserRuleContext,
-    P extends IParser<PRC> = IParser<PRC>,
+    P extends SQLParserBase<PRC> = SQLParserBase<PRC>,
 > {
     /** members for cache start */
     protected _charStreams: CharStream;
@@ -85,9 +74,17 @@ export default abstract class BasicParser<
     ): Suggestions<Token>;
 
     /**
-     * Get splitListener instance.
+     * Get a new splitListener instance.
      */
-    protected abstract get splitListener(): SplitListener;
+    protected abstract get splitListener(): SplitListener<ParserRuleContext>;
+
+    /**
+     * Get a new entityCollector instance.
+     */
+    protected abstract createEntityCollector(
+        input: string,
+        caretTokenIndex?: number
+    ): EntityCollector;
 
     /**
      * Create an antlr4 lexer from input.
@@ -218,7 +215,7 @@ export default abstract class BasicParser<
      */
     public listen<PTL extends ParseTreeListener = ParseTreeListener>(
         listener: PTL,
-        parseTree: PRC
+        parseTree: ParserRuleContext
     ) {
         ParseTreeWalker.DEFAULT.walk(listener, parseTree);
     }
@@ -234,22 +231,13 @@ export default abstract class BasicParser<
             return null;
         }
         const splitListener = this.splitListener;
-        // TODO: add splitListener to all sqlParser implements add remove following if
+        // TODO: add splitListener to all sqlParser implements and remove following if
         if (!splitListener) return null;
 
         this.listen(splitListener, this._parseTree);
 
         const res = splitListener.statementsContext.map((context) => {
-            const { start, stop } = context;
-            return {
-                startIndex: start.start,
-                endIndex: stop.stop,
-                startLine: start.line,
-                endLine: stop.line,
-                startColumn: start.column + 1,
-                endColumn: stop.column + 1 + stop.text.length,
-                text: this._parsedInput.slice(start.start, stop.stop + 1),
-            };
+            return ctxToText(context, this._parsedInput);
         });
 
         return res;
@@ -266,7 +254,7 @@ export default abstract class BasicParser<
         caretPosition: CaretPosition
     ): Suggestions | null {
         const splitListener = this.splitListener;
-        // TODO: add splitListener to all sqlParser implements add remove following if
+        // TODO: add splitListener to all sqlParser implements and remove following if
         if (!splitListener) return null;
 
         this.parseWithCache(input);
@@ -365,14 +353,7 @@ export default abstract class BasicParser<
         const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(
             (syntaxCtx) => {
                 const wordRanges: WordRange[] = syntaxCtx.wordRanges.map((token) => {
-                    return {
-                        text: this._parsedInput.slice(token.start, token.stop + 1),
-                        startIndex: token.start,
-                        endIndex: token.stop,
-                        line: token.line,
-                        startColumn: token.column + 1,
-                        stopColumn: token.column + 1 + token.text.length,
-                    };
+                    return tokenToWord(token, this._parsedInput);
                 });
                 return {
                     syntaxContextType: syntaxCtx.syntaxContextType,
@@ -384,5 +365,35 @@ export default abstract class BasicParser<
             syntax: syntaxSuggestions,
             keywords: originalSuggestions.keywords,
         };
+    }
+
+    public getAllEntities(input: string, caretPosition?: CaretPosition): EntityContext[] | null {
+        const allTokens = this.getAllTokens(input);
+        const caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
+
+        const collectListener = this.createEntityCollector(input, caretTokenIndex);
+        // TODO: add entityCollector to all sqlParser implements and remove following if
+        if (!collectListener) {
+            return null;
+        }
+        // const parser = this.createParserWithCache(input);
+
+        // parser.entityCollecting = true;
+        // if(caretPosition) {
+        //     const allTokens = this.getAllTokens(input);
+        //     const tokenIndex = findCaretTokenIndex(caretPosition, allTokens);
+        //     parser.caretTokenIndex = tokenIndex;
+        // }
+
+        // const parseTree = parser.program();
+
+        const parseTree = this.parseWithCache(input);
+
+        this.listen(collectListener, parseTree);
+
+        // parser.caretTokenIndex = -1;
+        // parser.entityCollecting = false;
+
+        return collectListener.getEntities();
     }
 }

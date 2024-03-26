@@ -36,6 +36,11 @@ parser grammar MySqlParser;
 options {
     tokenVocab= MySqlLexer;
     caseInsensitive= true;
+    superClass=SQLParserBase;
+}
+
+@header {
+import SQLParserBase from '../SQLParserBase';
 }
 
 // Top Level Description
@@ -212,8 +217,8 @@ administrationStatement
     ;
 
 utilityStatement
-    : simpleDescribeStatement
-    | fullDescribeStatement
+    : fullDescribeStatement
+    | simpleDescribeStatement
     | analyzeDescribeStatement
     | helpStatement
     | useStatement
@@ -273,16 +278,16 @@ createServer
     ;
 
 createTable
-    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate createDefinitions (
+    : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tb= tableNameCreate col=createDefinitions? (
         tableOption (','? tableOption)*
-    )? partitionDefinitions? # copyCreateTable
-    | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate createDefinitions? (
-        tableOption (','? tableOption)*
-    )? partitionDefinitions? (KW_IGNORE | KW_REPLACE)? KW_AS? selectStatement # columnCreateTable
+    )? partitionDefinitions? (KW_IGNORE | KW_REPLACE)? KW_AS? selectStatement # queryCreateTable
     | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate (
         KW_LIKE tableName
         | '(' KW_LIKE tableName ')'
-    ) # queryCreateTable
+    ) # copyCreateTable
+    | KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tableNameCreate createDefinitions (
+        tableOption (','? tableOption)*
+    )? partitionDefinitions? # columnCreateTable
     ;
 
 createTablespaceInnodb
@@ -326,7 +331,7 @@ commonTableExpressions
 createView
     : KW_CREATE orReplace? (KW_ALGORITHM '=' algType=(KW_UNDEFINED | KW_MERGE | KW_TEMPTABLE))? ownerStatement? (
         KW_SQL KW_SECURITY secContext=(KW_DEFINER | KW_INVOKER)
-    )? KW_VIEW viewNameCreate ('(' columnNames ')')? KW_AS (
+    )? KW_VIEW viewNameCreate ('(' columnNameCreate (',' columnNameCreate)* ')')? KW_AS (
         '(' withClause? selectStatement ')'
         | withClause? selectStatement (
             KW_WITH checkOption=(KW_CASCADED | KW_LOCAL)? KW_CHECK KW_OPTION
@@ -438,7 +443,7 @@ createDefinitions
     ;
 
 createDefinition
-    : columnName columnDefinition
+    : columnNameCreate columnDefinition
     | (KW_INDEX | KW_KEY) indexName? indexType? indexColumnNames indexOption*
     | (KW_FULLTEXT | KW_SPATIAL) (KW_INDEX | KW_KEY)? indexName? indexColumnNames indexOption*
     | constraintSymbol? KW_PRIMARY KW_KEY indexType? indexColumnNames indexOption*
@@ -2052,15 +2057,15 @@ showStatement
     | KW_SHOW KW_EXTENDED? KW_FULL? columnsFormat=(KW_COLUMNS | KW_FIELDS) tableFormat=(
         KW_FROM
         | KW_IN
-    ) tableName (schemaFormat=(KW_FROM | KW_IN) databaseName)? showFilter?        # showColumns
-    | KW_SHOW KW_CREATE (KW_DATABASE | KW_SCHEMA) ifNotExists? databaseNameCreate # showCreateDb
-    | KW_SHOW KW_CREATE (KW_EVENT | KW_PROCEDURE | KW_TRIGGER) fullId             # showCreateFullIdObject
-    | KW_SHOW KW_CREATE KW_FUNCTION functionNameCreate                            # showCreateFunction
-    | KW_SHOW KW_CREATE KW_VIEW viewNameCreate                                    # showCreateView
-    | KW_SHOW KW_CREATE KW_TABLE tableNameCreate                                  # showCreateTable
-    | KW_SHOW KW_CREATE KW_USER userName                                          # showCreateUser
-    | KW_SHOW KW_ENGINE engineName engineOption=(KW_STATUS | KW_MUTEX)            # showEngine
-    | KW_SHOW showGlobalInfoClause                                                # showGlobalInfo
+    ) tableName (schemaFormat=(KW_FROM | KW_IN) databaseName)? showFilter?  # showColumns
+    | KW_SHOW KW_CREATE (KW_DATABASE | KW_SCHEMA) ifNotExists? databaseName # showCreateDb
+    | KW_SHOW KW_CREATE (KW_EVENT | KW_PROCEDURE | KW_TRIGGER) fullId       # showCreateFullIdObject
+    | KW_SHOW KW_CREATE KW_FUNCTION functionName                            # showCreateFunction
+    | KW_SHOW KW_CREATE KW_VIEW viewName                                    # showCreateView
+    | KW_SHOW KW_CREATE KW_TABLE tableName                                  # showCreateTable
+    | KW_SHOW KW_CREATE KW_USER userName                                    # showCreateUser
+    | KW_SHOW KW_ENGINE engineName engineOption=(KW_STATUS | KW_MUTEX)      # showEngine
+    | KW_SHOW showGlobalInfoClause                                          # showGlobalInfo
     | KW_SHOW errorFormat=(KW_ERRORS | KW_WARNINGS) (
         KW_LIMIT (offset=decimalLiteral ',')? rowCount=decimalLiteral
     )?                                                                                    # showErrors
@@ -2396,6 +2401,7 @@ columnNames
 columnName
     : uid (dottedId dottedId?)?
     | .? dottedId dottedId?
+    | {this.shouldMatchEmpty()}?
     ;
 
 tablespaceNameCreate
@@ -2751,12 +2757,12 @@ orReplace
 //    Functions
 
 functionCall
-    : specificFunction                         # specificFunctionCall
-    | aggregateWindowedFunction                # aggregateFunctionCall
-    | nonAggregateWindowedFunction             # nonAggregateFunctionCall
-    | scalarFunctionName '(' functionArgs? ')' # scalarFunctionCall
-    | functionName '(' functionArgs? ')'       # udfFunctionCall
-    | passwordFunctionClause                   # passwordFunctionCall
+    : specificFunction                                    # specificFunctionCall
+    | aggregateWindowedFunction                           # aggregateFunctionCall
+    | nonAggregateWindowedFunction                        # nonAggregateFunctionCall
+    | scalarFunctionName ('(' ')' | '(' functionArgs ')') # scalarFunctionCall
+    | functionName ('(' ')' | '(' functionArgs ')')       # udfFunctionCall
+    | passwordFunctionClause                              # passwordFunctionCall
     ;
 
 specificFunction
@@ -2925,7 +2931,6 @@ functionArgs
 
 functionArg
     : constant
-    | columnName
     | functionCall
     | expression
     ;
@@ -2941,22 +2946,23 @@ expression
     ;
 
 predicate
-    : predicate KW_NOT? KW_IN '(' (selectStatement | expressions) ')'                             # inPredicate
-    | predicate KW_IS nullNotnull                                                                 # isNullPredicate
-    | left=predicate comparisonOperator right=predicate                                           # binaryComparisonPredicate
-    | predicate comparisonOperator quantifier=(KW_ALL | KW_ANY | KW_SOME) '(' selectStatement ')' # subqueryComparisonPredicate
-    | predicate KW_NOT? KW_BETWEEN predicate KW_AND predicate                                     # betweenPredicate
-    | predicate KW_SOUNDS KW_LIKE predicate                                                       # soundsLikePredicate
-    | predicate KW_NOT? KW_LIKE predicate (KW_ESCAPE STRING_LITERAL)?                             # likePredicate
-    | predicate KW_NOT? regex=(KW_REGEXP | KW_RLIKE) predicate                                    # regexpPredicate
-    | predicate KW_MEMBER KW_OF '(' predicate ')'                                                 # jsonMemberOfPredicate
-    | expressionAtom                                                                              # expressionAtomPredicate
+    : predicate KW_NOT? KW_IN '(' (selectStatement | expressions) ')' # inPredicate
+    | predicate KW_IS nullNotnull                                     # isNullPredicate
+    | predicate comparisonOperator (
+        quantifier=(KW_ALL | KW_ANY | KW_SOME) '(' subQuery=selectStatement ')'
+        | right=predicate
+    )                                                                 # binaryComparisonPredicate
+    | predicate KW_NOT? KW_BETWEEN predicate KW_AND predicate         # betweenPredicate
+    | predicate KW_SOUNDS KW_LIKE predicate                           # soundsLikePredicate
+    | predicate KW_NOT? KW_LIKE predicate (KW_ESCAPE STRING_LITERAL)? # likePredicate
+    | predicate KW_NOT? regex=(KW_REGEXP | KW_RLIKE) predicate        # regexpPredicate
+    | predicate KW_MEMBER KW_OF '(' predicate ')'                     # jsonMemberOfPredicate
+    | expressionAtom                                                  # expressionAtomPredicate
     ;
 
 // Add in ASTVisitor nullNotnull in constant
 expressionAtom
     : constant                                              # constantExpressionAtom
-    | columnName                                            # columnNameExpressionAtom
     | functionCall                                          # functionCallExpressionAtom
     | expressionAtom KW_COLLATE collationName               # collateExpressionAtom
     | mysqlVariable                                         # mysqlVariableExpressionAtom
@@ -2968,9 +2974,10 @@ expressionAtom
     | KW_EXISTS '(' selectStatement ')'                     # existsExpressionAtom
     | '(' selectStatement ')'                               # subqueryExpressionAtom
     | KW_INTERVAL expression intervalType                   # intervalExpressionAtom
+    | left=expressionAtom jsonOperator right=expressionAtom # jsonExpressionAtom
     | left=expressionAtom bitOperator right=expressionAtom  # bitExpressionAtom
     | left=expressionAtom mathOperator right=expressionAtom # mathExpressionAtom
-    | left=expressionAtom jsonOperator right=expressionAtom # jsonExpressionAtom
+    | columnName                                            # columnNameExpressionAtom
     ;
 
 unaryOperator
@@ -2982,18 +2989,18 @@ unaryOperator
     ;
 
 comparisonOperator
-    : comparisonBase
-    | '<' '>'
+    : '<' '>'
     | '!' '='
     | '<' '=' '>'
+    | comparisonBase
     ;
 
 comparisonBase
-    : '='
+    : '<' '='
+    | '>' '='
+    | '='
     | '>'
     | '<'
-    | '<' '='
-    | '>' '='
     ;
 
 logicalOperator
