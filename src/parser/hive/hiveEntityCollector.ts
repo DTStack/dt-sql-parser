@@ -1,4 +1,4 @@
-import { EntityContextType } from '../..';
+import { EntityContextType } from '../../parser/common/basic-parser-types';
 import { HiveSqlParserListener } from '../../lib';
 import {
     ColumnNameCreateContext,

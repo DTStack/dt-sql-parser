@@ -1,5 +1,5 @@
-export { FlinkSqlParserListener } from './flinksql/FlinkSqlParserListener';
-export { FlinkSqlParserVisitor } from './flinksql/FlinkSqlParserVisitor';
+export { FlinkSqlParserListener } from './flink/FlinkSqlParserListener';
+export { FlinkSqlParserVisitor } from './flink/FlinkSqlParserVisitor';
 
 export { MySqlParserListener } from './mysql/MySqlParserListener';
 export { MySqlParserVisitor } from './mysql/MySqlParserVisitor';

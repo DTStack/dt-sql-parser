@@ -1,5 +1,5 @@
-import FlinkSQL from 'src/parser/flinksql';
-import { FlinkSqlLexer } from 'src/lib/flinksql/FlinkSqlLexer';
+import FlinkSQL from 'src/parser/flink';
+import { FlinkSqlLexer } from 'src/lib/flink/FlinkSqlLexer';
 import { ErrorListener } from 'src/parser/common/parseErrorListener';
 import { CommonTokenStream } from 'antlr4ng';
 
