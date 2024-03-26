@@ -13,8 +13,8 @@ export { PlSqlParserVisitor } from './plsql/PlSqlParserVisitor';
 export { SparkSqlParserListener } from './spark/SparkSqlParserListener';
 export { SparkSqlParserVisitor } from './spark/SparkSqlParserVisitor';
 
-export { PostgreSQLParserListener } from './pgsql/PostgreSQLParserListener';
-export { PostgreSQLParserVisitor } from './pgsql/PostgreSQLParserVisitor';
+export { PostgreSqlParserListener } from './postgresql/PostgreSqlParserListener';
+export { PostgreSqlParserVisitor } from './postgresql/PostgreSqlParserVisitor';
 
 export { TrinoSqlListener } from './trinosql/TrinoSqlListener';
 export { TrinoSqlVisitor } from './trinosql/TrinoSqlVisitor';

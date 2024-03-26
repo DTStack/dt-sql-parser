@@ -9,7 +9,7 @@ const syntaxSql = fs.readFileSync(
     'utf-8'
 );
 
-describe('PostgreSQL Syntax Suggestion with collect entity', () => {
+describe('PostgreSql Syntax Suggestion with collect entity', () => {
     const spark = new SparkSQL();
 
     test('select with no column', () => {
