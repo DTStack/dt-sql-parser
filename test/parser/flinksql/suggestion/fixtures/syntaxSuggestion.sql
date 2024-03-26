@@ -32,7 +32,7 @@ SELECT col,  FROM tb1;
 
 SELECT * FROM tb ORDER BY ;
 
-SELECT * FROM tb GROUP BY tb. ;
+SELECT * FROM tb GROUP BY ;
 
 INSERT INTO tb (col, tb.c );
 

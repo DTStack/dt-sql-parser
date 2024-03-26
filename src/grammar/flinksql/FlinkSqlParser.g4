@@ -185,7 +185,7 @@ columnNameCreate
 
 columnName
     : uid
-    | expression
+    | {this.shouldMatchEmpty()}?
     ;
 
 columnNameList
@@ -294,7 +294,6 @@ transformList
 
 transform
     : columnName                                                         # identityTransform
-    | qualifiedName                                                      # columnTransform
     | LR_BRACKET transformArgument (COMMA transformArgument)* RR_BRACKET # applyTransform
     ;
 
@@ -489,6 +488,7 @@ selectClause
 projectItemDefinition
     : overWindowItem
     | columnName (KW_AS? expression)?
+    | expression (KW_AS? columnName)?
     ;
 
 overWindowItem
@@ -588,6 +588,7 @@ groupItemDefinition
     | LR_BRACKET expression (COMMA expression)* RR_BRACKET
     | groupingSetsNotaionName LR_BRACKET expression (COMMA expression)* RR_BRACKET
     | groupingSets LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
+    | expression
     ;
 
 groupingSets

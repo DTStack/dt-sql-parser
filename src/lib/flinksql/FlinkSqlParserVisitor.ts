@@ -54,7 +54,6 @@ import { SelfDefinitionClauseContext } from "./FlinkSqlParser.js";
 import { PartitionDefinitionContext } from "./FlinkSqlParser.js";
 import { TransformListContext } from "./FlinkSqlParser.js";
 import { IdentityTransformContext } from "./FlinkSqlParser.js";
-import { ColumnTransformContext } from "./FlinkSqlParser.js";
 import { ApplyTransformContext } from "./FlinkSqlParser.js";
 import { TransformArgumentContext } from "./FlinkSqlParser.js";
 import { LikeDefinitionContext } from "./FlinkSqlParser.js";
@@ -519,13 +518,6 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitIdentityTransform?: (ctx: IdentityTransformContext) => Result;
-    /**
-     * Visit a parse tree produced by the `columnTransform`
-     * labeled alternative in `FlinkSqlParser.transform`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitColumnTransform?: (ctx: ColumnTransformContext) => Result;
     /**
      * Visit a parse tree produced by the `applyTransform`
      * labeled alternative in `FlinkSqlParser.transform`.

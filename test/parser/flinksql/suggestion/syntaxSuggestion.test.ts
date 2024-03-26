@@ -310,7 +310,7 @@ describe('Flink SQL Syntax Suggestion', () => {
     test('Select group by column', () => {
         const pos: CaretPosition = {
             lineNumber: 35,
-            column: 30,
+            column: 27,
         };
         const syntaxes = parser.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
@@ -321,7 +321,7 @@ describe('Flink SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb', '.']);
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
     });
 
     test('Insert into spec columns', () => {
