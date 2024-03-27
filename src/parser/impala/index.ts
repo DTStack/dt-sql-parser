@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ng';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { ImpalaSqlLexer } from '../../lib/impala/ImpalaSqlLexer';
 import { ImpalaSqlParser, ProgramContext } from '../../lib/impala/ImpalaSqlParser';
@@ -11,11 +11,11 @@ import { ImpalaEntityCollector } from './impalaEntityCollector';
 export { ImpalaEntityCollector, ImpalaSqlSplitListener };
 
 export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSqlParser> {
-    protected createLexerFromCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams: CharStream) {
         return new ImpalaSqlLexer(charStreams);
     }
 
-    protected createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream: CommonTokenStream) {
         return new ImpalaSqlParser(tokenStream);
     }
 
@@ -56,7 +56,7 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: EntityContextType | StmtContextType;
+            let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
                 case ImpalaSqlParser.RULE_functionNameCreate: {
                     syntaxContextType = EntityContextType.FUNCTION_CREATE;
@@ -112,7 +112,7 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
         for (let candidate of candidates.tokens) {
             const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
             const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (symbolicName && symbolicName.startsWith('KW_')) {
+            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
                 const keyword =
                     displayName.startsWith("'") && displayName.endsWith("'")
                         ? displayName.slice(1, -1)

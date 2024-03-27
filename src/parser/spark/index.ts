@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ng';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { SparkSqlLexer } from '../../lib/spark/SparkSqlLexer';
 import { SparkSqlParser, ProgramContext } from '../../lib/spark/SparkSqlParser';
@@ -11,11 +11,11 @@ import { SparkEntityCollector } from './sparkEntityCollector';
 export { SparkSqlSplitListener, SparkEntityCollector };
 
 export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlParser> {
-    protected createLexerFromCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams: CharStream) {
         return new SparkSqlLexer(charStreams);
     }
 
-    protected createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream: CommonTokenStream) {
         return new SparkSqlParser(tokenStream);
     }
 
@@ -57,7 +57,7 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: EntityContextType | StmtContextType;
+            let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
                 case SparkSqlParser.RULE_namespaceName: {
                     syntaxContextType = EntityContextType.DATABASE;
@@ -114,7 +114,7 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         for (const candidate of candidates.tokens) {
             const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
             const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (symbolicName && symbolicName.startsWith('KW_')) {
+            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
                 const keyword =
                     displayName.startsWith("'") && displayName.endsWith("'")
                         ? displayName.slice(1, -1)

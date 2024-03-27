@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ng';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { PlSqlLexer } from '../lib/plsql/PlSqlLexer';
 import { PlSqlParser, ProgramContext } from '../lib/plsql/PlSqlParser';
@@ -6,11 +6,11 @@ import { BasicSQL } from './common/basicSQL';
 import { Suggestions } from './common/types';
 
 export class PLSQL extends BasicSQL<PlSqlLexer, ProgramContext, PlSqlParser> {
-    protected createLexerFromCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams: CharStream) {
         return new PlSqlLexer(charStreams);
     }
 
-    protected createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream: CommonTokenStream) {
         return new PlSqlParser(tokenStream);
     }
 
@@ -21,7 +21,7 @@ export class PLSQL extends BasicSQL<PlSqlLexer, ProgramContext, PlSqlParser> {
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return null;
+        return null as any;
     }
 
     protected processCandidates(

@@ -24,9 +24,9 @@ export interface ParseError {
 /**
  * The type of error resulting from lexical parsing and parsing.
  */
-export interface SyntaxError<T> {
+export interface SyntaxError {
     readonly recognizer: Recognizer<ATNSimulator>;
-    readonly offendingSymbol: Token;
+    readonly offendingSymbol: Token | null;
     readonly line: number;
     readonly charPositionInLine: number;
     readonly msg: string;
@@ -37,12 +37,12 @@ export interface SyntaxError<T> {
  * ErrorListener will be invoked when it encounters a parsing error.
  * Includes lexical errors and parsing errors.
  */
-export type ErrorListener<T> = (parseError: ParseError, originalError: SyntaxError<T>) => void;
+export type ErrorListener = (parseError: ParseError, originalError: SyntaxError) => void;
 
 export class ParseErrorListener implements ANTLRErrorListener {
-    private _errorListener: ErrorListener<Token>;
+    private _errorListener: ErrorListener;
 
-    constructor(errorListener: ErrorListener<Token>) {
+    constructor(errorListener: ErrorListener) {
         this._errorListener = errorListener;
     }
 
@@ -54,7 +54,7 @@ export class ParseErrorListener implements ANTLRErrorListener {
 
     syntaxError(
         recognizer: Recognizer<ATNSimulator>,
-        offendingSymbol,
+        offendingSymbol: Token | null,
         line: number,
         charPositionInLine: number,
         msg: string,

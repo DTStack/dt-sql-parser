@@ -11,7 +11,6 @@ import {
     DbSchemaNameCreateContext,
     FromInsertStmtContext,
     FromSelectStmtContext,
-    FromStatementContext,
     FunctionNameCreateContext,
     InsertStmtContext,
     SelectStatementContext,

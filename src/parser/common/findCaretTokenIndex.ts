@@ -7,7 +7,10 @@ import { CaretPosition } from './types';
  * @param allTokens all the tokens
  * @returns caretTokenIndex
  */
-export function findCaretTokenIndex(caretPosition: CaretPosition, allTokens: Token[]) {
+export function findCaretTokenIndex(
+    caretPosition: CaretPosition,
+    allTokens: Token[]
+): number | undefined {
     const { lineNumber: caretLine, column: caretCol } = caretPosition;
     let left = 0;
     let right = allTokens.length - 1;
@@ -19,12 +22,12 @@ export function findCaretTokenIndex(caretPosition: CaretPosition, allTokens: Tok
             right = mid - 1;
         } else if (
             token.line < caretLine ||
-            (token.line === caretLine && token.column + token.text.length + 1 < caretCol)
+            (token.line === caretLine && token.column + (token.text?.length ?? 0) + 1 < caretCol)
         ) {
             left = mid + 1;
         } else {
             return allTokens[mid].tokenIndex;
         }
     }
-    return null;
+    return void 0;
 }

@@ -34,8 +34,10 @@ export function toStmtContext(
     rootStmt: StmtContext | null,
     parentStmt: StmtContext | null,
     isContainCaret?: boolean
-): StmtContext {
-    const { text: _, ...position } = ctxToText(ctx, input);
+): StmtContext | null {
+    const text = ctxToText(ctx, input);
+    if (!text) return null;
+    const { text: _, ...position } = text;
     return {
         stmtContextType: type,
         position,
@@ -72,8 +74,10 @@ export function toEntityContext(
     input: string,
     belongStmt: StmtContext,
     alias?: BaseAliasContext
-): EntityContext {
-    const { text, ...position } = ctxToWord(ctx, input);
+): EntityContext | null {
+    const word = ctxToWord(ctx, input);
+    if (!word) return null;
+    const { text, ...position } = word;
     const finalAlias = Object.assign({}, baseAlias, alias ?? {});
     return {
         entityContextType: type,
@@ -110,7 +114,7 @@ export abstract class EntityCollector {
      * Always point to the first non-commonStmt at the bottom of the _stmtStack,
      * unless there are only commonStmts in the _stmtStack.
      * */
-    private _rootStmt: StmtContext;
+    private _rootStmt: StmtContext | null;
 
     visitTerminal() {}
 
@@ -132,11 +136,13 @@ export abstract class EntityCollector {
     }
 
     protected pushStmt(ctx: ParserRuleContext, type: StmtContextType) {
-        let isContainCaret;
+        let isContainCaret: boolean | undefined;
         if (this._caretTokenIndex >= 0) {
             isContainCaret =
+                !!ctx.start &&
+                !!ctx.stop &&
                 ctx.start.tokenIndex <= this._caretTokenIndex &&
-                ctx.stop?.tokenIndex >= this._caretTokenIndex;
+                ctx.stop.tokenIndex >= this._caretTokenIndex;
         }
         const stmtContext = toStmtContext(
             ctx,
@@ -146,20 +152,22 @@ export abstract class EntityCollector {
             this._stmtStack.peek(),
             isContainCaret
         );
-        if (
-            this._stmtStack.isEmpty() ||
-            this._stmtStack.peek()?.stmtContextType === StmtContextType.COMMON_STMT
-        ) {
-            this._rootStmt = stmtContext;
+        if (stmtContext) {
+            if (
+                this._stmtStack.isEmpty() ||
+                this._stmtStack.peek()?.stmtContextType === StmtContextType.COMMON_STMT
+            ) {
+                this._rootStmt = stmtContext;
+            }
+            this._stmtStack.push(stmtContext);
         }
-        this._stmtStack.push(stmtContext);
 
         return stmtContext;
     }
 
     protected popStmt() {
         const stmtContext = this._stmtStack.pop();
-        if (this._rootStmt === stmtContext) {
+        if (stmtContext && this._rootStmt === stmtContext) {
             this._rootStmt = this._stmtStack.peek();
             if (!this._entityStack.isEmpty()) {
                 this.combineEntitiesAndAdd(stmtContext);
@@ -180,11 +188,13 @@ export abstract class EntityCollector {
             this._stmtStack.peek(),
             alias
         );
-        if (this._stmtStack.isEmpty()) {
-            this._entitiesSet.add(entityContext);
-        } else {
-            // If is inside a statement
-            this._entityStack.push(entityContext);
+        if (entityContext) {
+            if (this._stmtStack.isEmpty()) {
+                this._entitiesSet.add(entityContext);
+            } else {
+                // If is inside a statement
+                this._entityStack.push(entityContext);
+            }
         }
         return entityContext;
     }
@@ -204,12 +214,11 @@ export abstract class EntityCollector {
             entitiesInsideStmt.unshift(this._entityStack.pop());
         }
 
-        let tmpResults = entitiesInsideStmt;
+        const combinedEntities = this.combineRootStmtEntities(stmtContext, entitiesInsideStmt);
 
-        tmpResults = this.combineRootStmtEntities(stmtContext, entitiesInsideStmt);
-
-        while (tmpResults.length) {
-            this._entitiesSet.add(tmpResults.shift());
+        while (combinedEntities.length) {
+            const entity = combinedEntities.shift();
+            entity && this._entitiesSet.add(entity);
         }
     }
 
@@ -235,7 +244,7 @@ export abstract class EntityCollector {
     ): EntityContext[] {
         const columns: EntityContext[] = [];
         const relatedEntities: EntityContext[] = [];
-        let mainEntity: EntityContext = null;
+        let mainEntity: EntityContext | null = null;
         const finalEntities = entitiesInsideStmt.reduce((result, entity) => {
             if (entity.belongStmt !== stmtContext) {
                 if (
@@ -262,14 +271,14 @@ export abstract class EntityCollector {
                 result.push(entity);
             }
             return result;
-        }, []);
+        }, [] as EntityContext[]);
 
-        if (columns.length) {
-            mainEntity.columns = columns;
+        if (mainEntity && columns.length) {
+            (mainEntity as EntityContext).columns = columns;
         }
 
-        if (relatedEntities.length) {
-            mainEntity.relatedEntities = relatedEntities;
+        if (mainEntity && relatedEntities.length) {
+            (mainEntity as EntityContext).relatedEntities = relatedEntities;
         }
 
         return finalEntities;

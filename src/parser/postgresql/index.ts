@@ -1,5 +1,5 @@
 import { CandidatesCollection } from 'antlr4-c3';
-import { Token } from 'antlr4ng';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 
 import { PostgreSqlLexer } from '../../lib/postgresql/PostgreSqlLexer';
 import { PostgreSqlParser, ProgramContext } from '../../lib/postgresql/PostgreSqlParser';
@@ -12,11 +12,11 @@ import { PostgreSqlSplitListener } from './postgreSplitListener';
 export { PostgreSqlEntityCollector, PostgreSqlSplitListener };
 
 export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, PostgreSqlParser> {
-    protected createLexerFromCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams: CharStream) {
         return new PostgreSqlLexer(charStreams);
     }
 
-    protected createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream: CommonTokenStream) {
         return new PostgreSqlParser(tokenStream);
     }
 
@@ -61,7 +61,7 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: EntityContextType | StmtContextType;
+            let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
                 case PostgreSqlParser.RULE_table_name_create: {
                     syntaxContextType = EntityContextType.TABLE_CREATE;
@@ -134,7 +134,7 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         for (let candidate of candidates.tokens) {
             const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
             const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (symbolicName && symbolicName.startsWith('KW_')) {
+            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
                 const keyword =
                     displayName.startsWith("'") && displayName.endsWith("'")
                         ? displayName.slice(1, -1)
