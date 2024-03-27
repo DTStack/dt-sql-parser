@@ -1,4 +1,3 @@
-import { ErrorNode, ParserRuleContext, TerminalNode } from 'antlr4ng';
 import { FlinkSQL } from 'src/parser/flink';
 import { FlinkSqlParserListener } from 'src/lib/flink/FlinkSqlParserListener';
 import { TableExpressionContext } from 'src/lib/flink/FlinkSqlParser';
@@ -11,20 +10,17 @@ describe('Flink SQL Listener Tests', () => {
     const parseTree = flink.parse(sql);
 
     test('Listener enterTableName', async () => {
-        let result = '';
-        class MyListener implements FlinkSqlParserListener {
-            enterTableExpression = (ctx: TableExpressionContext): void => {
-                result = ctx.getText().toLowerCase();
-            };
-            visitTerminal(node: TerminalNode): void {}
-            visitErrorNode(node: ErrorNode): void {}
-            enterEveryRule(node: ParserRuleContext): void {}
-            exitEveryRule(node: ParserRuleContext): void {}
-        }
-        const listenTableName = new MyListener();
+        class MyListener extends FlinkSqlParserListener {
+            result = '';
 
-        await flink.listen(listenTableName, parseTree);
-        expect(result).toBe(expectTableName);
+            enterTableExpression = (ctx: TableExpressionContext): void => {
+                this.result = ctx.getText().toLowerCase();
+            };
+        }
+        const listener = new MyListener();
+
+        flink.listen(listener, parseTree);
+        expect(listener.result).toBe(expectTableName);
     });
 
     test('Split sql listener', async () => {

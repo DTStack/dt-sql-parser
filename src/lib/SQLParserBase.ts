@@ -12,7 +12,7 @@ export abstract class SQLParserBase<T = antlr.ParserRuleContext> extends antlr.P
 
     public shouldMatchEmpty () {
         return this.entityCollecting
-            && this.tokenStream.LT(-1).tokenIndex <= this.caretTokenIndex
-            && this.tokenStream.LT(1).tokenIndex >= this.caretTokenIndex
+            && (this.tokenStream.LT(-1)?.tokenIndex ?? Infinity) <= this.caretTokenIndex
+            && (this.tokenStream.LT(1)?.tokenIndex ?? -Infinity) >= this.caretTokenIndex
     }
 }

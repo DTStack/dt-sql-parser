@@ -1,6 +1,5 @@
 import { TrinoSQL } from 'src/parser/trino';
 import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
-import { ParseTreeListener } from 'antlr4ng';
 
 describe('trino SQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -10,20 +9,16 @@ describe('trino SQL Listener Tests', () => {
     const parseTree = trino.parse(sql);
 
     test('Listener enterTableName', async () => {
-        let result = '';
-        class MyListener implements TrinoSqlListener {
+        class MyListener extends TrinoSqlListener {
+            result = '';
             enterTableName = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+                this.result = ctx.getText().toLowerCase();
             };
-            visitTerminal() {}
-            visitErrorNode() {}
-            enterEveryRule() {}
-            exitEveryRule() {}
         }
-        const listenTableName = new MyListener();
+        const listener = new MyListener();
 
-        await trino.listen(listenTableName as ParseTreeListener, parseTree);
-        expect(result).toBe(expectTableName);
+        trino.listen(listener, parseTree);
+        expect(listener.result).toBe(expectTableName);
     });
 
     test('Split sql listener', async () => {

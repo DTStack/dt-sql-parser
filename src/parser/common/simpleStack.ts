@@ -9,7 +9,7 @@ export class SimpleStack<T> {
     }
 
     pop(): T {
-        return this.stack.pop();
+        return this.stack.pop() as T;
     }
 
     peek(): T {

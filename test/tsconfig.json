@@ -3,6 +3,13 @@
     "compilerOptions": {
         "baseUrl": "../",
         "noEmit": true,
+        "allowSyntheticDefaultImports": true,
+        "strictNullChecks": false,
+        "noUnusedLocals": true,
+        "noImplicitAny": false,
+        "noImplicitOverride": false,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
         "paths": {
             "src/*": ["src/*"],
             "test/*": ["test/*"]

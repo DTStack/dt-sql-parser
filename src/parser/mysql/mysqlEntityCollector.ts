@@ -10,7 +10,6 @@ import type {
     FunctionNameCreateContext,
     InsertStatementContext,
     QueryCreateTableContext,
-    SelectExpressionContext,
     SelectStatementContext,
     SingleStatementContext,
     TableNameContext,

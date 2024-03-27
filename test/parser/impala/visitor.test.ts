@@ -1,5 +1,4 @@
 import { ImpalaSQL } from 'src/parser/impala';
-import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { ImpalaSqlParserVisitor } from 'src/lib/impala/ImpalaSqlParserVisitor';
 
 describe('impala SQL Visitor Tests', () => {
@@ -12,20 +11,22 @@ describe('impala SQL Visitor Tests', () => {
     });
 
     test('Visitor visitTableNamePath', () => {
-        let result = '';
-        class MyVisitor
-            extends AbstractParseTreeVisitor<any>
-            implements ImpalaSqlParserVisitor<any>
-        {
-            protected defaultResult() {
-                return result;
+        class MyVisitor extends ImpalaSqlParserVisitor<string> {
+            defaultResult(): string {
+                return '';
             }
-            visitTableNamePath = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+            aggregateResult(aggregate: string, nextResult: string): string {
+                return aggregate + nextResult;
+            }
+            visitProgram = (ctx) => {
+                return this.visitChildren(ctx);
+            };
+            visitTableNamePath = (ctx) => {
+                return ctx.getText().toLowerCase();
             };
         }
-        const visitor: any = new MyVisitor();
-        visitor.visit(parseTree);
+        const visitor = new MyVisitor();
+        const result = visitor.visit(parseTree);
 
         expect(result).toBe(expectTableName);
     });

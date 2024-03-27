@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ng';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { HiveSqlLexer } from '../../lib/hive/HiveSqlLexer';
 import { HiveSqlParser, ProgramContext } from '../../lib/hive/HiveSqlParser';
@@ -12,11 +12,11 @@ import { HiveEntityCollector } from './hiveEntityCollector';
 export { HiveEntityCollector, HiveSqlSplitListener };
 
 export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParser> {
-    protected createLexerFromCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams: CharStream) {
         return new HiveSqlLexer(charStreams);
     }
 
-    protected createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream: CommonTokenStream) {
         return new HiveSqlParser(tokenStream);
     }
 
@@ -58,7 +58,7 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: EntityContextType | StmtContextType;
+            let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
                 case HiveSqlParser.RULE_dbSchemaName: {
                     syntaxContextType = EntityContextType.DATABASE;
@@ -116,7 +116,7 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         for (let candidate of candidates.tokens) {
             const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
             const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (symbolicName && symbolicName.startsWith('KW_')) {
+            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
                 const keyword =
                     displayName.startsWith("'") && displayName.endsWith("'")
                         ? displayName.slice(1, -1)

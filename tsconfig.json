@@ -7,10 +7,17 @@
         "module": "ESNext",
         "moduleResolution": "node",
         "declaration": true,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
+        "strictNullChecks": true,
+        "noUnusedLocals": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
         "skipLibCheck": true,
         "types": [
             "node",
@@ -19,7 +26,6 @@
         "typeRoots": [
             "node",
             "node_modules/@types",
-            "./src/typings"
         ]
     },
     "isolatedModules": true,

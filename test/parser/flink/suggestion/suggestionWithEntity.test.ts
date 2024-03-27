@@ -23,8 +23,6 @@ describe('Flink SQL Syntax Suggestion with collect entity', () => {
         };
         const sql = commentOtherLine(syntaxSql, pos.lineNumber);
 
-        const parseTree = flink.parse(sql);
-
         const syntaxes = flink.getSuggestionAtCaretPosition(sql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.COLUMN

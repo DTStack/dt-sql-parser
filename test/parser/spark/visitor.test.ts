@@ -1,6 +1,5 @@
 import { SparkSQL } from 'src/parser/spark';
 import { SparkSqlParserVisitor } from 'src/lib/spark/SparkSqlParserVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 describe('Spark SQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -12,21 +11,23 @@ describe('Spark SQL Visitor Tests', () => {
     });
 
     test('Visitor visitTableName', () => {
-        class MyVisitor
-            extends AbstractParseTreeVisitor<any>
-            implements SparkSqlParserVisitor<any>
-        {
-            result: string = '';
-            protected defaultResult() {
-                return this.result;
+        class MyVisitor extends SparkSqlParserVisitor<string> {
+            defaultResult(): string {
+                return '';
             }
-            visitTableName = (ctx): void => {
-                this.result = ctx.getText().toLowerCase();
+            aggregateResult(aggregate: string, nextResult: string): string {
+                return aggregate + nextResult;
+            }
+            visitProgram = (ctx) => {
+                return this.visitChildren(ctx);
+            };
+            visitTableName = (ctx) => {
+                return ctx.getText().toLowerCase();
             };
         }
         const visitor = new MyVisitor();
-        visitor.visit(parseTree);
+        const result = visitor.visit(parseTree);
 
-        expect(visitor.result).toBe(expectTableName);
+        expect(result).toBe(expectTableName);
     });
 });

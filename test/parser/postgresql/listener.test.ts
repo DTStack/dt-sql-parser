@@ -1,6 +1,5 @@
 import { PostgreSQL } from 'src/parser/postgresql';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
-import { ParseTreeListener } from 'antlr4ng';
 
 describe('PostgreSQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -10,20 +9,16 @@ describe('PostgreSQL Listener Tests', () => {
     const parseTree = postgresql.parse(sql);
 
     test('Listener enterTableName', async () => {
-        let result = '';
-        class MyListener implements PostgreSqlParserListener {
-            enterTable_ref(ctx) {
-                result = ctx.getText().toLowerCase();
-            }
-            visitTerminal() {}
-            visitErrorNode() {}
-            enterEveryRule() {}
-            exitEveryRule() {}
+        class MyListener extends PostgreSqlParserListener {
+            result = '';
+            enterTable_ref = (ctx) => {
+                this.result = ctx.getText().toLowerCase();
+            };
         }
-        const listenTableName = new MyListener();
+        const listener = new MyListener();
 
-        await postgresql.listen(listenTableName as ParseTreeListener, parseTree);
-        expect(result).toBe(expectTableName);
+        postgresql.listen(listener, parseTree);
+        expect(listener.result).toBe(expectTableName);
     });
 
     test('Split sql listener', async () => {

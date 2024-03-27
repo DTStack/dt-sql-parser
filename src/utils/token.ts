@@ -41,7 +41,7 @@ export enum Legacy_TokenType {
 export interface Legacy_Token {
     type: Legacy_TokenType;
     value: string;
-    start: number;
+    start?: number;
     end: number;
     lineNumber: number;
     message?: string;

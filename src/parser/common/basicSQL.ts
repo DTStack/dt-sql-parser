@@ -33,12 +33,12 @@ export abstract class BasicSQL<
     protected _lexer: L;
     protected _tokenStream: CommonTokenStream;
     protected _parser: P;
-    protected _parseTree: PRC;
-    protected _parsedInput: string = null;
+    protected _parseTree: PRC | null;
+    protected _parsedInput: string;
     protected _parseErrors: ParseError[] = [];
     /** members for cache end */
 
-    private _errorListener: ErrorListener<any> = (error) => {
+    private _errorListener: ErrorListener = (error) => {
         this._parseErrors.push(error);
     };
 
@@ -90,7 +90,7 @@ export abstract class BasicSQL<
      * Create an antlr4 lexer from input.
      * @param input string
      */
-    public createLexer(input: string, errorListener?: ErrorListener<any>) {
+    public createLexer(input: string, errorListener?: ErrorListener) {
         const charStreams = CharStreams.fromString(input);
         const lexer = this.createLexerFromCharStream(charStreams);
         if (errorListener) {
@@ -104,7 +104,7 @@ export abstract class BasicSQL<
      * Create an antlr4 parser from input.
      * @param input string
      */
-    public createParser(input: string, errorListener?: ErrorListener<any>) {
+    public createParser(input: string, errorListener?: ErrorListener) {
         const lexer = this.createLexer(input, errorListener);
         const tokenStream = new CommonTokenStream(lexer);
         const parser = this.createParserFromTokenStream(tokenStream);
@@ -123,7 +123,7 @@ export abstract class BasicSQL<
      * @param errorListener listen parse errors and lexer errors.
      * @returns parseTree
      */
-    public parse(input: string, errorListener?: ErrorListener<any>) {
+    public parse(input: string, errorListener?: ErrorListener) {
         const parser = this.createParser(input, errorListener);
         parser.buildParseTrees = true;
         parser.errorHandler = new ErrorStrategy();
@@ -168,9 +168,9 @@ export abstract class BasicSQL<
      * @param errorListener listen errors
      * @returns parseTree
      */
-    private parseWithCache(input: string, errorListener?: ErrorListener<any>) {
+    private parseWithCache(input: string, errorListener?: ErrorListener): PRC {
         // Avoid parsing the same input repeatedly.
-        if (this._parsedInput === input && !errorListener) {
+        if (this._parsedInput === input && !errorListener && this._parseTree) {
             return this._parseTree;
         }
         this._parseErrors = [];
@@ -225,9 +225,9 @@ export abstract class BasicSQL<
      * If exist syntax error it will return null.
      * @param input source string
      */
-    public splitSQLByStatement(input): TextSlice[] {
+    public splitSQLByStatement(input: string): TextSlice[] | null {
         const errors = this.validate(input);
-        if (errors.length) {
+        if (errors.length || !this._parseTree) {
             return null;
         }
         const splitListener = this.splitListener;
@@ -236,9 +236,11 @@ export abstract class BasicSQL<
 
         this.listen(splitListener, this._parseTree);
 
-        const res = splitListener.statementsContext.map((context) => {
-            return ctxToText(context, this._parsedInput);
-        });
+        const res = splitListener.statementsContext
+            .map((context) => {
+                return ctxToText(context, this._parsedInput);
+            })
+            .filter(Boolean) as TextSlice[];
 
         return res;
     }
@@ -258,6 +260,8 @@ export abstract class BasicSQL<
         if (!splitListener) return null;
 
         this.parseWithCache(input);
+        if (!this._parseTree) return null;
+
         let sqlParserIns = this._parser;
         const allTokens = this.getAllTokens(input);
         let caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
@@ -281,8 +285,8 @@ export abstract class BasicSQL<
              * The boundaries of this range must be statements with no syntax errors.
              * This can ensure the stable performance of the C3.
              */
-            let startStatement: ParserRuleContext;
-            let stopStatement: ParserRuleContext;
+            let startStatement: ParserRuleContext | null = null;
+            let stopStatement: ParserRuleContext | null = null;
 
             for (let index = 0; index < statementCount; index++) {
                 const ctx = statementsContext[index];
@@ -297,11 +301,16 @@ export abstract class BasicSQL<
                 const isNextCtxValid =
                     index === statementCount - 1 || !statementsContext[index + 1]?.exception;
 
-                if (ctx.stop.tokenIndex < caretTokenIndex && isPrevCtxValid) {
+                if (ctx.stop && ctx.stop.tokenIndex < caretTokenIndex && isPrevCtxValid) {
                     startStatement = ctx;
                 }
 
-                if (!stopStatement && ctx.start.tokenIndex > caretTokenIndex && isNextCtxValid) {
+                if (
+                    ctx.start &&
+                    !stopStatement &&
+                    ctx.start.tokenIndex > caretTokenIndex &&
+                    isNextCtxValid
+                ) {
                     stopStatement = ctx;
                     break;
                 }
@@ -369,7 +378,9 @@ export abstract class BasicSQL<
 
     public getAllEntities(input: string, caretPosition?: CaretPosition): EntityContext[] | null {
         const allTokens = this.getAllTokens(input);
-        const caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
+        const caretTokenIndex = caretPosition
+            ? findCaretTokenIndex(caretPosition, allTokens)
+            : void 0;
 
         const collectListener = this.createEntityCollector(input, caretTokenIndex);
         // TODO: add entityCollector to all sqlParser implements and remove following if

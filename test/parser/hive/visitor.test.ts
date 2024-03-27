@@ -1,5 +1,3 @@
-import { AbstractParseTreeVisitor } from 'antlr4ng';
-
 import { HiveSQL } from 'src/parser/hive';
 import { HiveSqlParserVisitor } from 'src/lib/hive/HiveSqlParserVisitor';
 import { ProgramContext, TableNameContext } from 'src/lib/hive/HiveSqlParser';
@@ -14,19 +12,23 @@ describe('HiveSQL Visitor Tests', () => {
     });
 
     test('Visitor visitTableName', () => {
-        let result = '';
-        class MyVisitor extends AbstractParseTreeVisitor<any> implements HiveSqlParserVisitor<any> {
-            defaultResult() {
-                return result;
+        class MyVisitor extends HiveSqlParserVisitor<string> {
+            defaultResult(): string {
+                return '';
             }
-
-            visitTableName(ctx: TableNameContext) {
-                result = ctx.getText().toLowerCase();
+            aggregateResult(aggregate: string, nextResult: string): string {
+                return aggregate + nextResult;
             }
+            visitProgram = (ctx: ProgramContext) => {
+                return this.visitChildren(ctx);
+            };
+            visitTableName = (ctx: TableNameContext) => {
+                return ctx.getText().toLowerCase();
+            };
         }
 
         const visitor = new MyVisitor();
-        visitor.visit(parseTree as ProgramContext);
+        const result = visitor.visit(parseTree);
 
         expect(result).toBe(expectTableName);
     });

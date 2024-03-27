@@ -13,10 +13,10 @@ import {
  * The difference is that it assigns exception to the context.exception when it encounters error.
  */
 export class ErrorStrategy extends DefaultErrorStrategy {
-    public recover(recognizer: Parser, e: RecognitionException): void {
+    public override recover(recognizer: Parser, e: RecognitionException): void {
         // Mark the context as an anomaly
         for (
-            let context: ParserRuleContext | undefined = recognizer.context;
+            let context: ParserRuleContext | null = recognizer.context;
             context;
             context = context.parent
         ) {
@@ -40,7 +40,7 @@ export class ErrorStrategy extends DefaultErrorStrategy {
         this.consumeUntil(recognizer, followSet);
     }
 
-    public recoverInline(recognizer: Parser): Token {
+    public override recoverInline(recognizer: Parser): Token {
         let e: RecognitionException;
         if (this.nextTokensContext === undefined) {
             e = new InputMismatchException(recognizer);
@@ -50,7 +50,7 @@ export class ErrorStrategy extends DefaultErrorStrategy {
 
         // Mark the context as an anomaly
         for (
-            let context: ParserRuleContext | undefined = recognizer.context;
+            let context: ParserRuleContext | null = recognizer.context;
             context;
             context = context.parent
         ) {

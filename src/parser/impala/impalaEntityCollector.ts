@@ -11,7 +11,6 @@ import {
     DatabaseNameCreateContext,
     DatabaseNamePathContext,
     FunctionNameCreateContext,
-    FunctionNamePathContext,
     InsertStatementContext,
     QueryStatementContext,
     SingleStatementContext,

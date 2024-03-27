@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ng';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
 import { TrinoSqlParser, ProgramContext } from '../../lib/trino/TrinoSqlParser';
@@ -11,11 +11,11 @@ import { TrinoEntityCollector } from './trinoEntityCollector';
 export { TrinoSqlSplitListener, TrinoEntityCollector };
 
 export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
-    protected createLexerFromCharStream(charStreams) {
+    protected createLexerFromCharStream(charStreams: CharStream) {
         return new TrinoSqlLexer(charStreams);
     }
 
-    protected createParserFromTokenStream(tokenStream) {
+    protected createParserFromTokenStream(tokenStream: CommonTokenStream) {
         return new TrinoSqlParser(tokenStream);
     }
 
@@ -58,7 +58,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: EntityContextType | StmtContextType;
+            let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
                 case TrinoSqlParser.RULE_catalogName: {
                     syntaxContextType = EntityContextType.CATALOG;
@@ -115,7 +115,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         for (let candidate of candidates.tokens) {
             const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
             const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (symbolicName && symbolicName.startsWith('KW_')) {
+            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
                 const keyword =
                     displayName.startsWith("'") && displayName.endsWith("'")
                         ? displayName.slice(1, -1)

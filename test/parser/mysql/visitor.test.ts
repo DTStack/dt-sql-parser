@@ -1,6 +1,5 @@
 import { MySQL } from 'src/parser/mysql';
 import { MySqlParserVisitor } from 'src/lib/mysql/MySqlParserVisitor';
-import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 describe('MySQL Visitor Tests', () => {
     const expectTableName = 'user1';
@@ -12,18 +11,22 @@ describe('MySQL Visitor Tests', () => {
     });
 
     test('Visitor visitTableName', () => {
-        let result = '';
-        class MyVisitor extends AbstractParseTreeVisitor<any> implements MySqlParserVisitor<any> {
-            protected defaultResult() {
-                return result;
+        class MyVisitor extends MySqlParserVisitor<string> {
+            defaultResult(): string {
+                return '';
             }
-
-            visitTableName = (ctx): void => {
-                result = ctx.getText().toLowerCase();
+            aggregateResult(aggregate: string, nextResult: string): string {
+                return aggregate + nextResult;
+            }
+            visitProgram = (ctx) => {
+                return this.visitChildren(ctx);
+            };
+            visitTableName = (ctx) => {
+                return ctx.getText().toLowerCase();
             };
         }
         const visitor = new MyVisitor();
-        visitor.visit(parseTree);
+        const result = visitor.visit(parseTree);
 
         expect(result).toBe(expectTableName);
     });

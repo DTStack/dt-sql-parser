@@ -1,6 +1,5 @@
-import { ParseTreeListener } from 'antlr4ng';
 import { HiveSQL } from 'src/parser/hive';
-import { ProgramContext, SelectItemContext } from 'src/lib/hive/HiveSqlParser';
+import { SelectItemContext } from 'src/lib/hive/HiveSqlParser';
 import { HiveSqlParserListener } from 'src/lib/hive/HiveSqlParserListener';
 
 describe('HiveSQL Listener Tests', () => {
@@ -10,39 +9,33 @@ describe('HiveSQL Listener Tests', () => {
         const sql = `select ${expectTableName} from tablename where inc_day='20190601' limit 1000;`;
         const parseTree = hive.parse(sql);
 
-        let result = '';
-        class MyListener implements HiveSqlParserListener {
-            enterSelectItem(ctx: SelectItemContext) {
-                result = ctx.getText();
-            }
-            visitTerminal() {}
-            visitErrorNode() {}
-            enterEveryRule() {}
-            exitEveryRule() {}
-        }
-        const listenTableName = new MyListener();
+        class MyListener extends HiveSqlParserListener {
+            result = '';
 
-        await hive.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
-        expect(result).toBe(expectTableName);
+            enterSelectItem = (ctx: SelectItemContext) => {
+                this.result = ctx.getText();
+            };
+        }
+        const listener = new MyListener();
+
+        hive.listen(listener, parseTree);
+        expect(listener.result).toBe(expectTableName);
     });
+
     test('Listener enterCreateTable', async () => {
         const sql = `drop table table_name;`;
         const parseTree = hive.parse(sql);
-        let result = '';
-        class MyListener implements HiveSqlParserListener {
-            enterDropTableStatement(ctx) {
-                result = ctx.getText();
-            }
+        class MyListener extends HiveSqlParserListener {
+            result = '';
 
-            visitTerminal() {}
-            visitErrorNode() {}
-            enterEveryRule() {}
-            exitEveryRule() {}
+            enterDropTableStatement = (ctx) => {
+                this.result = ctx.getText();
+            };
         }
-        const listenTableName = new MyListener();
+        const listener = new MyListener();
 
-        await hive.listen(listenTableName as ParseTreeListener, parseTree as ProgramContext);
-        expect(result).toBe('droptabletable_name');
+        hive.listen(listener, parseTree);
+        expect(listener.result).toBe('droptabletable_name');
     });
 
     test('Split sql listener', async () => {

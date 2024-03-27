@@ -1,5 +1,4 @@
 import { PostgreSQL } from 'src/parser/postgresql';
-import { AbstractParseTreeVisitor } from 'antlr4ng';
 import { PostgreSqlParserVisitor } from 'src/lib/postgresql/PostgreSqlParserVisitor';
 
 describe('MySQL Visitor Tests', () => {
@@ -12,21 +11,22 @@ describe('MySQL Visitor Tests', () => {
     });
 
     test('Visitor visitTableName', () => {
-        let result = '';
-        class MyVisitor
-            extends AbstractParseTreeVisitor<any>
-            implements PostgreSqlParserVisitor<any>
-        {
-            protected defaultResult() {
-                return result;
+        class MyVisitor extends PostgreSqlParserVisitor<string> {
+            defaultResult(): string {
+                return '';
             }
-
-            visitTable_ref(ctx) {
-                result = ctx.getText().toLowerCase();
+            aggregateResult(aggregate: string, nextResult: string): string {
+                return aggregate + nextResult;
             }
+            visitProgram = (ctx) => {
+                return this.visitChildren(ctx);
+            };
+            visitTable_ref = (ctx) => {
+                return ctx.getText().toLowerCase();
+            };
         }
-        const visitor: any = new MyVisitor();
-        visitor.visit(parseTree);
+        const visitor = new MyVisitor();
+        const result = visitor.visit(parseTree);
 
         expect(result).toBe(expectTableName);
     });

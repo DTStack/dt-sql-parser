@@ -67,9 +67,16 @@ function main() {
         });
     } else if (argv.lang) {
         // compile single: yarn antlr4 --lang=mysql
-        const supportedLanguage = languageEntries.some((language) => language === argv.lang);
-        if (supportedLanguage) {
-            compile(argv.lang);
+        const supportedLanguage = languageEntries.find((language) =>
+            language.startsWith(argv.lang)
+        );
+
+        if (argv.lang === 'all') {
+            languageEntries.forEach((language) => {
+                compile(language);
+            });
+        } else if (supportedLanguage) {
+            compile(supportedLanguage);
         } else {
             console.error(
                 chalk.bold.red('\n[Invalid language]:'),

@@ -1,4 +1,4 @@
-import { Token } from 'antlr4ng';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { MySqlLexer } from '../../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext } from '../../lib/mysql/MySqlParser';
@@ -11,11 +11,11 @@ import { MySqlEntityCollector } from './mysqlEntityCollector';
 export { MySqlEntityCollector, MysqlSplitListener };
 
 export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
-    protected createLexerFromCharStream(charStreams): MySqlLexer {
+    protected createLexerFromCharStream(charStreams: CharStream): MySqlLexer {
         return new MySqlLexer(charStreams);
     }
 
-    protected createParserFromTokenStream(tokenStream): MySqlParser {
+    protected createParserFromTokenStream(tokenStream: CommonTokenStream): MySqlParser {
         return new MySqlParser(tokenStream);
     }
 
@@ -57,7 +57,7 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
                 caretTokenIndex + tokenIndexOffset + 1
             );
 
-            let syntaxContextType: EntityContextType | StmtContextType;
+            let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
                 case MySqlParser.RULE_databaseName: {
                     syntaxContextType = EntityContextType.DATABASE;
@@ -114,7 +114,7 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         for (const candidate of candidates.tokens) {
             const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
             const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (symbolicName && symbolicName.startsWith('KW_')) {
+            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
                 const keyword =
                     displayName.startsWith("'") && displayName.endsWith("'")
                         ? displayName.slice(1, -1)

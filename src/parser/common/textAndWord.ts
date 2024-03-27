@@ -43,20 +43,27 @@ export interface TextSlice extends TextPosition {
 export function tokenToWord(token: Token, input: string): WordPosition & { text: string } {
     const startIndex = token.start;
     const endIndex = token.stop;
+    const text = token.text ?? '';
     return {
-        text: token.text,
+        text,
         line: token.line,
         startIndex,
         endIndex,
         startColumn: token.column + 1,
-        endColumn: token.column + 1 + token.text.length,
+        endColumn: token.column + 1 + text.length,
     };
 }
 
 /**
  * Convert ParserRuleContext to Word
  */
-export function ctxToWord(ctx: ParserRuleContext, input: string): WordPosition & { text: string } {
+export function ctxToWord(
+    ctx: ParserRuleContext,
+    input: string
+): (WordPosition & { text: string }) | null {
+    if (!ctx.start || !ctx.stop) {
+        return null;
+    }
     const startIndex = ctx.start.start;
     const endIndex = ctx.stop.stop;
     const text = input.slice(startIndex, endIndex + 1);
@@ -66,14 +73,20 @@ export function ctxToWord(ctx: ParserRuleContext, input: string): WordPosition &
         startIndex,
         endIndex,
         startColumn: ctx.start.column + 1,
-        endColumn: ctx.stop.column + 1 + ctx.stop.text.length,
+        endColumn: ctx.stop.column + 1 + (ctx.stop.text?.length ?? 0),
     };
 }
 
 /**
  * Convert ParserRuleContext to Text
  */
-export function ctxToText(ctx: ParserRuleContext, input: string): TextPosition & { text: string } {
+export function ctxToText(
+    ctx: ParserRuleContext,
+    input: string
+): (TextPosition & { text: string }) | null {
+    if (!ctx.start || !ctx.stop) {
+        return null;
+    }
     const startIndex = ctx.start.start;
     const endIndex = ctx.stop.stop;
     const text = input.slice(startIndex, endIndex + 1);
@@ -84,6 +97,6 @@ export function ctxToText(ctx: ParserRuleContext, input: string): TextPosition &
         startIndex,
         endIndex,
         startColumn: ctx.start.column + 1,
-        endColumn: ctx.stop.column + 1 + ctx.stop.text.length,
+        endColumn: ctx.stop.column + 1 + (ctx.stop.text?.length ?? 0),
     };
 }
