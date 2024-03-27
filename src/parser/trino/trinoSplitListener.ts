@@ -1,12 +1,12 @@
-import { SingleStatementContext } from '../../lib/trinosql/TrinoSqlParser';
-import { TrinoSqlListener } from '../../lib/trinosql/TrinoSqlListener';
-import SplitListener from '../common/splitListener';
+import { SingleStatementContext } from '../../lib/trino/TrinoSqlParser';
+import { TrinoSqlListener } from '../../lib/trino/TrinoSqlListener';
+import { SplitListener } from '../common/splitListener';
 
-export default class TrinoSqlSplitListener
+export class TrinoSqlSplitListener
     extends SplitListener<SingleStatementContext>
     implements TrinoSqlListener
 {
-    exitSingleStatement = (ctx: SingleStatementContext) => {
+    exitSingleStatement(ctx: SingleStatementContext) {
         this._statementsContext.push(ctx);
-    };
+    }
 }

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import TrinoSQL from 'src/parser/trino';
-import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import { TrinoSQL } from 'src/parser/trino';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -9,7 +9,7 @@ const syntaxSql = fs.readFileSync(
     'utf-8'
 );
 
-describe('PostgreSQL Syntax Suggestion with collect entity', () => {
+describe('PostgreSql Syntax Suggestion with collect entity', () => {
     const trino = new TrinoSQL();
 
     test('select with no column', () => {

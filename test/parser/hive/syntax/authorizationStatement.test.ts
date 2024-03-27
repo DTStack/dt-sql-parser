@@ -1,7 +1,7 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
-const parser = new HiveSQL();
+const hive = new HiveSQL();
 
 const features = {
     manageRoles: readSQL(__dirname, 'authorization.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('HiveSQL Related To Authorization Tests', () => {
     features.manageRoles.forEach((manageRole) => {
         it(manageRole, () => {
-            expect(parser.validate(manageRole).length).toBe(0);
+            expect(hive.validate(manageRole).length).toBe(0);
         });
     });
 });

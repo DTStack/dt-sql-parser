@@ -1,4 +1,4 @@
-import TrinoSQL from 'src/parser/trino';
+import { TrinoSQL } from 'src/parser/trino';
 import { readSQL } from 'test/helper';
 
 const features = {
@@ -9,26 +9,26 @@ const features = {
 };
 
 describe('TrinoSQL Set Statements Syntax Tests', () => {
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
     // set statements
     features.role.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.path.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.session.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.timeZone.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
 });

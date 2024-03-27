@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import SparkSQL from 'src/parser/spark';
-import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import { SparkSQL } from 'src/parser/spark';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'multipleStatement.sql'),
@@ -9,14 +9,14 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('SparkSQL Multiple Statements Syntax Suggestion', () => {
-    const parser = new SparkSQL();
+    const spark = new SparkSQL();
 
     test('Create table ', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 14,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = spark.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE_CREATE
         );
@@ -30,7 +30,7 @@ describe('SparkSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 9,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = spark.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -44,7 +44,7 @@ describe('SparkSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 15,
             column: 13,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = spark.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
@@ -58,7 +58,7 @@ describe('SparkSQL Multiple Statements Syntax Suggestion', () => {
             lineNumber: 21,
             column: 65,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
+        const syntaxes = spark.getSuggestionAtCaretPosition(syntaxSql, pos)?.syntax;
         const suggestion = syntaxes?.find(
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );

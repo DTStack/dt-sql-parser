@@ -1,4 +1,4 @@
-import MySQL, { MysqlSplitListener } from 'src/parser/mysql';
+import { MySQL, MysqlSplitListener } from 'src/parser/mysql';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
 
 const validSQL1 = `INSERT INTO country_page_view

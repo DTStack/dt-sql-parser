@@ -1,13 +1,13 @@
-import MySQL from 'src/parser/mysql';
+import { MySQL } from 'src/parser/mysql';
 import { MySqlParserVisitor } from 'src/lib/mysql/MySqlParserVisitor';
 import { AbstractParseTreeVisitor } from 'antlr4ng';
 
 describe('MySQL Visitor Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new MySQL();
+    const mysql = new MySQL();
 
-    const parseTree = parser.parse(sql, (error) => {
+    const parseTree = mysql.parse(sql, (error) => {
         console.error('Parse error:', error);
     });
 

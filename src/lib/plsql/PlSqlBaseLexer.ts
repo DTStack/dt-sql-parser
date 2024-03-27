@@ -1,6 +1,6 @@
 import { Lexer } from "antlr4ng";
 
-export default abstract class PlSqlBaseLexer extends Lexer {
+export abstract class PlSqlBaseLexer extends Lexer {
 
     _interp: any;
 

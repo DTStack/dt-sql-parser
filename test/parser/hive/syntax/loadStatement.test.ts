@@ -1,7 +1,7 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
-const parser = new HiveSQL();
+const hive = new HiveSQL();
 
 const features = {
     loads: readSQL(__dirname, 'load.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('HiveSQL Load Syntax Tests', () => {
     features.loads.forEach((load) => {
         it(load, () => {
-            expect(parser.validate(load).length).toBe(0);
+            expect(hive.validate(load).length).toBe(0);
         });
     });
 });

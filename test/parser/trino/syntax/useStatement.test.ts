@@ -1,4 +1,4 @@
-import TrinoSQL from 'src/parser/trino';
+import { TrinoSQL } from 'src/parser/trino';
 import { readSQL } from 'test/helper';
 
 const features = {
@@ -6,11 +6,11 @@ const features = {
 };
 
 describe('TrinoSQL Use Statements Syntax Tests', () => {
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
     // use statements
     features.use.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
 });

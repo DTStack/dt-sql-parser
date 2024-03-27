@@ -14,12 +14,12 @@ import type {
     TableNameCreateContext,
     ViewNameContext,
     ViewNameCreateContext,
-} from '../../lib/trinosql/TrinoSqlParser';
-import type { TrinoSqlListener } from '../../lib/trinosql/TrinoSqlListener';
-import { EntityContextType } from '../common/basic-parser-types';
-import EntityCollector, { StmtContextType } from '../common/entityCollector';
+} from '../../lib/trino/TrinoSqlParser';
+import type { TrinoSqlListener } from '../../lib/trino/TrinoSqlListener';
+import { EntityContextType } from '../common/types';
+import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
-export default class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {
+export class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {
     /** ====== Entity Begin */
     exitSchemaName(ctx: SchemaNameContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE);

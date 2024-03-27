@@ -1,4 +1,4 @@
-import HiveSQL, { HiveSqlSplitListener } from 'src/parser/hive';
+import { HiveSQL, HiveSqlSplitListener } from 'src/parser/hive';
 import { HiveSqlParserListener } from 'src/lib';
 
 const validSQL1 = `INSERT INTO country_page_view

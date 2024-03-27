@@ -1,7 +1,7 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
-const parser = new HiveSQL();
+const hive = new HiveSQL();
 
 const features = {
     selects: readSQL(__dirname, 'select.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('HiveSQL Select Syntax Tests', () => {
     features.selects.forEach((select) => {
         it(select, () => {
-            expect(parser.validate(select).length).toBe(0);
+            expect(hive.validate(select).length).toBe(0);
         });
     });
 });

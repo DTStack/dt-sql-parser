@@ -1,20 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import TrinoSQL from 'src/parser/trino';
-import { CaretPosition } from 'src/parser/common/basic-parser-types';
+import { TrinoSQL } from 'src/parser/trino';
+import { CaretPosition } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('Trino SQL Token Suggestion', () => {
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
 
     test('After ALTER', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = trino.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -27,7 +27,7 @@ describe('Trino SQL Token Suggestion', () => {
             lineNumber: 3,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = trino.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -47,7 +47,7 @@ describe('Trino SQL Token Suggestion', () => {
             lineNumber: 5,
             column: 12,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = trino.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -60,7 +60,7 @@ describe('Trino SQL Token Suggestion', () => {
             lineNumber: 7,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = trino.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -73,7 +73,7 @@ describe('Trino SQL Token Suggestion', () => {
             lineNumber: 9,
             column: 10,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = trino.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -86,7 +86,7 @@ describe('Trino SQL Token Suggestion', () => {
             lineNumber: 11,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = trino.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -105,7 +105,7 @@ describe('Trino SQL Token Suggestion', () => {
             lineNumber: 13,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = trino.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;

@@ -1,13 +1,13 @@
-import MySQL from 'src/parser/mysql';
+import { MySQL } from 'src/parser/mysql';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
 import { ParseTreeListener } from 'antlr4ng';
 
 describe('MySQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new MySQL();
+    const mysql = new MySQL();
 
-    const parseTree = parser.parse(sql);
+    const parseTree = mysql.parse(sql);
 
     test('Listener enterTableName', async () => {
         let result = '';
@@ -22,7 +22,7 @@ describe('MySQL Listener Tests', () => {
         }
         const listenTableName: any = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parseTree);
+        await mysql.listen(listenTableName as ParseTreeListener, parseTree);
         expect(result).toBe(expectTableName);
     });
 
@@ -43,7 +43,7 @@ describe('MySQL Listener Tests', () => {
             `;`,
         ];
         const sql = singleStatementArr.join('\n');
-        const sqlSlices = parser.splitSQLByStatement(sql);
+        const sqlSlices = mysql.splitSQLByStatement(sql);
 
         expect(sqlSlices).not.toBeNull();
 

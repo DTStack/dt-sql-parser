@@ -1,13 +1,13 @@
-import SparkSQL from 'src/parser/spark';
+import { SparkSQL } from 'src/parser/spark';
 import { SparkSqlParserListener } from 'src/lib/spark/SparkSqlParserListener';
 import { ParseTreeListener } from 'antlr4ng';
 
 describe('Spark SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new SparkSQL();
+    const spark = new SparkSQL();
 
-    const parseTree = parser.parse(sql);
+    const parseTree = spark.parse(sql);
 
     test('Listener exitTableName', () => {
         let result = '';
@@ -22,7 +22,7 @@ describe('Spark SQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        parser.listen(listenTableName as ParseTreeListener, parseTree);
+        spark.listen(listenTableName as ParseTreeListener, parseTree);
         expect(result).toBe(expectTableName);
     });
 
@@ -43,7 +43,7 @@ describe('Spark SQL Listener Tests', () => {
         ];
 
         const sql = singleStatementArr.join('\n');
-        const sqlSlices = parser.splitSQLByStatement(sql);
+        const sqlSlices = spark.splitSQLByStatement(sql);
 
         expect(sqlSlices).not.toBeNull();
 

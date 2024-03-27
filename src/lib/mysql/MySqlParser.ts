@@ -11,7 +11,7 @@ import { MySqlParserVisitor } from "./MySqlParserVisitor.js";
 type int = number;
 
 
-import SQLParserBase from '../SQLParserBase';
+import { SQLParserBase } from '../SQLParserBase';
 
 
 export class MySqlParser extends SQLParserBase {

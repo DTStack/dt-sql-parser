@@ -1,7 +1,7 @@
-import SparkSQL from 'src/parser/spark';
+import { SparkSQL } from 'src/parser/spark';
 import { readSQL } from 'test/helper';
 
-const parser = new SparkSQL();
+const spark = new SparkSQL();
 
 const features = {
     selectAggregateFn: readSQL(__dirname, 'selectAggregateFn.sql'),
@@ -34,132 +34,132 @@ const features = {
 describe('Spark Select Syntax Tests', () => {
     features.selectAggregateFn.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectCase.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectCET.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectWindowFn.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectWhere.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectUnPivot.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectTVF.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectTransform.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectTableSample.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectSortBy.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectPivot.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectOrderBy.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectOffset.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectLimit.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectLike.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectLateralView.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectLateralSubQuery.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectJoin.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectInlineTable.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectHiving.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectHint.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectGroupBy.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectFile.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectExplain.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectDistributeBy.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
     features.selectClusterBy.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
 });

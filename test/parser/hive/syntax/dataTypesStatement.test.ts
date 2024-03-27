@@ -1,7 +1,7 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
-const parser = new HiveSQL();
+const hive = new HiveSQL();
 
 const features = {
     dataTypes: readSQL(__dirname, 'dataTypes.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('HiveSQL Check Data Types Tests', () => {
     features.dataTypes.forEach((dataType) => {
         it(dataType, () => {
-            expect(parser.validate(dataType).length).toBe(0);
+            expect(hive.validate(dataType).length).toBe(0);
         });
     });
 });

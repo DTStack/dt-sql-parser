@@ -1,7 +1,7 @@
-import ImpalaSQL from 'src/parser/impala';
+import { ImpalaSQL } from 'src/parser/impala';
 import { readSQL } from 'test/helper';
 
-const parser = new ImpalaSQL();
+const impala = new ImpalaSQL();
 
 const features = {
     computeStats: readSQL(__dirname, 'compute_stats.sql'),
@@ -23,91 +23,91 @@ describe('ImpalaSQL Other Syntax Tests', () => {
     describe('COMPUTE STATS', () => {
         features.computeStats.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('COMMENT STATEMENT', () => {
         features.comments.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('GRANT STATEMENT', () => {
         features.grants.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('REVOKE STATEMENT', () => {
         features.revokes.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('LOAD DATA STATEMENT', () => {
         features.loadData.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('DESCRIBE STATEMENT', () => {
         features.describes.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('EXPLAIN STATEMENT', () => {
         features.explains.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('INVALIDATE METADATA STATEMENT', () => {
         features.invalidates.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('SET STATEMENT', () => {
         features.set.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('SHUTDOWN STATEMENT', () => {
         features.shutdown.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('TRUNCATE TABLE STATEMENT', () => {
         features.truncate.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('USE STATEMENT', () => {
         features.use.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });
     describe('VALUES STATEMENT', () => {
         features.values.forEach((db) => {
             it(db, () => {
-                expect(parser.validate(db).length).toBe(0);
+                expect(impala.validate(db).length).toBe(0);
             });
         });
     });

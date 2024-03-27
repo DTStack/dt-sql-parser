@@ -1,11 +1,11 @@
-import PLSQL from 'src/parser/plsql';
+import { PLSQL } from 'src/parser/plsql';
 
 describe('PLSQL Syntax Tests', () => {
-    const parser = new PLSQL();
+    const plsql = new PLSQL();
 
     test('Test simple select Statement', () => {
         const sql = 'select id,name from user1;';
-        const result = parser.validate(sql);
+        const result = plsql.validate(sql);
 
         expect(result.length).toBe(0);
     });
@@ -17,7 +17,7 @@ describe('PLSQL Syntax Tests', () => {
             where r.c1 = a.c2
             order by reportlevel, eid
         `;
-        const result = parser.validate(sql);
+        const result = plsql.validate(sql);
         expect(result.length).toBe(0);
     });
 });

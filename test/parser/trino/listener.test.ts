@@ -1,13 +1,13 @@
-import TrinoSQL from 'src/parser/trino';
-import { TrinoSqlListener } from 'src/lib/trinosql/TrinoSqlListener';
+import { TrinoSQL } from 'src/parser/trino';
+import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
 import { ParseTreeListener } from 'antlr4ng';
 
 describe('trino SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
 
-    const parseTree = parser.parse(sql);
+    const parseTree = trino.parse(sql);
 
     test('Listener enterTableName', async () => {
         let result = '';
@@ -22,7 +22,7 @@ describe('trino SQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parseTree);
+        await trino.listen(listenTableName as ParseTreeListener, parseTree);
         expect(result).toBe(expectTableName);
     });
 
@@ -36,7 +36,7 @@ describe('trino SQL Listener Tests', () => {
             `CREATE TABLE IF NOT EXISTS foo AS SELECT * FROM t;`,
         ];
         const sql = singleStatementArr.join('\n');
-        const sqlSlices = parser.splitSQLByStatement(sql);
+        const sqlSlices = trino.splitSQLByStatement(sql);
 
         expect(sqlSlices).not.toBeNull();
 

@@ -1,7 +1,7 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
-const parser = new HiveSQL();
+const hive = new HiveSQL();
 
 const features = {
     merges: readSQL(__dirname, 'merge.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('HiveSQL Merge Syntax Tests', () => {
     features.merges.forEach((merge) => {
         it(merge, () => {
-            expect(parser.validate(merge).length).toBe(0);
+            expect(hive.validate(merge).length).toBe(0);
         });
     });
 });

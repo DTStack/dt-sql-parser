@@ -1,4 +1,4 @@
-abstract class SplitListener<T> {
+export abstract class SplitListener<T> {
     protected _statementsContext: T[] = [];
 
     visitTerminal() {}
@@ -13,5 +13,3 @@ abstract class SplitListener<T> {
         return this._statementsContext;
     }
 }
-
-export default SplitListener;

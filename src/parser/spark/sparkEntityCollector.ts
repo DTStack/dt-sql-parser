@@ -20,13 +20,10 @@ import type {
     CreateFunctionContext,
 } from '../../lib/spark/SparkSqlParser';
 import type { SparkSqlParserListener } from '../../lib/spark/SparkSqlParserListener';
-import { EntityContextType } from '../common/basic-parser-types';
-import EntityCollector, { StmtContextType } from '../common/entityCollector';
+import { EntityContextType } from '../common/types';
+import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
-export default class SparkEntityCollector
-    extends EntityCollector
-    implements SparkSqlParserListener
-{
+export class SparkEntityCollector extends EntityCollector implements SparkSqlParserListener {
     /** ====== Entity Begin */
     exitNamespaceName(ctx: NamespaceNameContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE);

@@ -1,7 +1,7 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
-const parser = new HiveSQL();
+const hive = new HiveSQL();
 
 const features = {
     aborts: readSQL(__dirname, 'abort.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('HiveSQL Abort Syntax Tests', () => {
     features.aborts.forEach((ab) => {
         it(ab, () => {
-            expect(parser.validate(ab).length).toBe(0);
+            expect(hive.validate(ab).length).toBe(0);
         });
     });
 });

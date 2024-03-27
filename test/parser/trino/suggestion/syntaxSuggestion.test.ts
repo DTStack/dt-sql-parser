@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import TrinoSQL from 'src/parser/trino';
-import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import { TrinoSQL } from 'src/parser/trino';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -10,12 +10,12 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('Trino SQL Syntax Suggestion', () => {
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
 
     test('Validate Syntax SQL', () => {
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
+        expect(trino.validate(syntaxSql).length).not.toBe(0);
+        expect(trino.validate(syntaxSql).length).not.toBe(0);
+        expect(trino.validate(syntaxSql).length).not.toBe(0);
     });
 
     test('Insert table ', () => {
@@ -23,7 +23,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -41,7 +41,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             column: 20,
         };
         const syntaxes =
-            parser.getSuggestionAtCaretPosition(commentOtherLine(syntaxSql, pos.lineNumber), pos)
+            trino.getSuggestionAtCaretPosition(commentOtherLine(syntaxSql, pos.lineNumber), pos)
                 ?.syntax ?? [];
 
         const suggestion = syntaxes?.find(
@@ -60,7 +60,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -77,7 +77,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -94,7 +94,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 28,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -111,7 +111,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 11,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -128,7 +128,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 13,
             column: 27,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -145,7 +145,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 15,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -162,7 +162,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 17,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -180,7 +180,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             column: 21,
         };
         const syntaxes =
-            parser.getSuggestionAtCaretPosition(commentOtherLine(syntaxSql, pos.lineNumber), pos)
+            trino.getSuggestionAtCaretPosition(commentOtherLine(syntaxSql, pos.lineNumber), pos)
                 ?.syntax ?? [];
 
         const suggestion = syntaxes?.find(
@@ -198,7 +198,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 21,
             column: 22,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -215,7 +215,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 23,
             column: 30,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -233,7 +233,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 25,
             column: 37,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -251,7 +251,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 27,
             column: 31,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -269,7 +269,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 29,
             column: 32,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -287,7 +287,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 31,
             column: 28,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -304,7 +304,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 33,
             column: 21,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -321,7 +321,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 35,
             column: 27,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -338,7 +338,7 @@ describe('Trino SQL Syntax Suggestion', () => {
             lineNumber: 37,
             column: 27,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = trino.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;

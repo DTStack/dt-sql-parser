@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import SparkSQL from 'src/parser/spark';
-import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import { SparkSQL } from 'src/parser/spark';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -10,12 +10,12 @@ const syntaxSql = fs.readFileSync(
 );
 
 describe('Spark SQL Syntax Suggestion', () => {
-    const parser = new SparkSQL();
+    const spark = new SparkSQL();
 
     test('Validate Syntax SQL', () => {
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
-        expect(parser.validate(syntaxSql).length).not.toBe(0);
+        expect(spark.validate(syntaxSql).length).not.toBe(0);
+        expect(spark.validate(syntaxSql).length).not.toBe(0);
+        expect(spark.validate(syntaxSql).length).not.toBe(0);
     });
 
     test('Insert table ', () => {
@@ -23,7 +23,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 1,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -40,7 +40,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 3,
             column: 18,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -57,7 +57,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 5,
             column: 17,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -74,7 +74,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 7,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -91,7 +91,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 9,
             column: 28,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -108,7 +108,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 11,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -125,7 +125,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 13,
             column: 20,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -142,7 +142,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 15,
             column: 27,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -159,7 +159,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 17,
             column: 19,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -176,7 +176,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 19,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -193,7 +193,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 21,
             column: 63,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -210,7 +210,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 23,
             column: 55,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -227,7 +227,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 25,
             column: 39,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -244,7 +244,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 27,
             column: 48,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -261,7 +261,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 29,
             column: 49,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -278,7 +278,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 31,
             column: 41,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -295,7 +295,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 33,
             column: 24,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -312,7 +312,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 35,
             column: 29,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -329,7 +329,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 37,
             column: 8,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -346,7 +346,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 39,
             column: 13,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -363,7 +363,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 41,
             column: 8,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -380,7 +380,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 43,
             column: 13,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -397,7 +397,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 45,
             column: 32,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -414,7 +414,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 47,
             column: 39,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -431,7 +431,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 49,
             column: 37,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -448,7 +448,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 51,
             column: 31,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -465,7 +465,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 53,
             column: 29,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -482,7 +482,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 55,
             column: 30,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -499,7 +499,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 57,
             column: 32,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -516,7 +516,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 59,
             column: 36,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -533,7 +533,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 61,
             column: 32,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -550,7 +550,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 63,
             column: 15,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -567,7 +567,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 65,
             column: 26,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;
@@ -584,7 +584,7 @@ describe('Spark SQL Syntax Suggestion', () => {
             lineNumber: 67,
             column: 33,
         };
-        const syntaxes = parser.getSuggestionAtCaretPosition(
+        const syntaxes = spark.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
             pos
         )?.syntax;

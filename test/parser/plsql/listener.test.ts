@@ -1,13 +1,13 @@
-import PLSQL from 'src/parser/plsql';
+import { PLSQL } from 'src/parser/plsql';
 import { ParseTreeListener } from 'antlr4ng';
 import { PlSqlParserListener } from 'src/lib/plsql/PlSqlParserListener';
 
 describe('PLSQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new PLSQL();
+    const plsql = new PLSQL();
 
-    const parseTree = parser.parse(sql);
+    const parseTree = plsql.parse(sql);
 
     test('Listener enterTableName', async () => {
         let result = '';
@@ -22,7 +22,7 @@ describe('PLSQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parseTree);
+        await plsql.listen(listenTableName as ParseTreeListener, parseTree);
         expect(result).toBe(expectTableName);
     });
 });

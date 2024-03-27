@@ -1,4 +1,4 @@
-import TrinoSQL from 'src/parser/trino';
+import { TrinoSQL } from 'src/parser/trino';
 import { readSQL } from 'test/helper';
 
 const features = {
@@ -17,66 +17,66 @@ const features = {
 };
 
 describe('TrinoSQL Select Statements Syntax Tests', () => {
-    const parser = new TrinoSQL();
+    const trino = new TrinoSQL();
     features.select.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithClause.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithSetOperations.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
 
     features.selectWithSubQueries.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithTableSample.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithRowType.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithOffset.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithJoin.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithFetch.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithUNNEST.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithExists.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
     features.selectWithUnion.forEach((sql) => {
         it(sql, () => {
-            expect(parser.validate(sql).length).toBe(0);
+            expect(trino.validate(sql).length).toBe(0);
         });
     });
 });

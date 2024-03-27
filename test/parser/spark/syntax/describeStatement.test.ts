@@ -1,7 +1,7 @@
-import SparkSQL from 'src/parser/spark';
+import { SparkSQL } from 'src/parser/spark';
 import { readSQL } from 'test/helper';
 
-const parser = new SparkSQL();
+const spark = new SparkSQL();
 
 const features = {
     describe: readSQL(__dirname, 'describe.sql'),
@@ -10,7 +10,7 @@ const features = {
 describe('Spark Describe Syntax Tests', () => {
     features.describe.forEach((itemSql) => {
         it(itemSql, () => {
-            expect(parser.validate(itemSql).length).toBe(0);
+            expect(spark.validate(itemSql).length).toBe(0);
         });
     });
 });

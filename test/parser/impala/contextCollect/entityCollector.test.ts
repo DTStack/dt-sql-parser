@@ -1,11 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { ImpalaSqlSplitListener } from 'src/parser/impala';
-import { EntityContextType } from 'src/parser/common/basic-parser-types';
+import { EntityContextType } from 'src/parser/common/types';
 import { StmtContextType } from 'src/parser/common/entityCollector';
-import ImpalaSQL from 'src/parser/impala';
+import { ImpalaSQL, ImpalaEntityCollector, ImpalaSqlSplitListener } from 'src/parser/impala';
 import { ImpalaSqlParserListener } from 'src/lib/impala/ImpalaSqlParserListener';
-import ImpalaEntityCollector from 'src/parser/impala/impalaEntityCollector';
 import { ParseTreeListener } from 'antlr4ng';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');

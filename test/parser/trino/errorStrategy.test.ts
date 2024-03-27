@@ -1,5 +1,5 @@
-import TrinoSQL, { TrinoSqlSplitListener } from 'src/parser/trino';
-import { TrinoSqlListener } from 'src/lib/trinosql/TrinoSqlListener';
+import { TrinoSQL, TrinoSqlSplitListener } from 'src/parser/trino';
+import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
 
 const validSQL1 = `INSERT INTO country_page_view
 VALUES ('Chinese', 'mumiao', 18),

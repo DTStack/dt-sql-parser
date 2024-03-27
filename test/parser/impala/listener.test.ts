@@ -1,13 +1,13 @@
-import ImpalaSQL from 'src/parser/impala';
+import { ImpalaSQL } from 'src/parser/impala';
 import { ImpalaSqlParserListener } from 'src/lib/impala/ImpalaSqlParserListener';
 import { ParseTreeListener } from 'antlr4ng';
 
 describe('impala SQL Listener Tests', () => {
     const expectTableName = 'user1';
     const sql = `select id,name,sex from ${expectTableName};`;
-    const parser = new ImpalaSQL();
+    const impala = new ImpalaSQL();
 
-    const parseTree = parser.parse(sql);
+    const parseTree = impala.parse(sql);
 
     test('Listener enterTableNamePath', async () => {
         let result = '';
@@ -23,7 +23,7 @@ describe('impala SQL Listener Tests', () => {
         }
         const listenTableName = new MyListener();
 
-        await parser.listen(listenTableName as ParseTreeListener, parseTree);
+        await impala.listen(listenTableName as ParseTreeListener, parseTree);
         expect(result).toBe(expectTableName);
     });
 
@@ -41,7 +41,7 @@ describe('impala SQL Listener Tests', () => {
               FROM unsorted_census_data;`,
         ];
         const sql = singleStatementArr.join('\n');
-        const sqlSlices = parser.splitSQLByStatement(sql);
+        const sqlSlices = impala.splitSQLByStatement(sql);
 
         expect(sqlSlices).not.toBeNull();
 

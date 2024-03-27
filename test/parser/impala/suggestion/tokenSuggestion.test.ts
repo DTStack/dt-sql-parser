@@ -1,20 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import ImpalaSQL from 'src/parser/impala';
-import { CaretPosition } from 'src/parser/common/basic-parser-types';
+import { ImpalaSQL } from 'src/parser/impala';
+import { CaretPosition } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 
 describe('Impala SQL Token Suggestion', () => {
-    const parser = new ImpalaSQL();
+    const impala = new ImpalaSQL();
 
     test('After ALTER', () => {
         const pos: CaretPosition = {
             lineNumber: 1,
             column: 7,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = impala.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -27,7 +27,7 @@ describe('Impala SQL Token Suggestion', () => {
             lineNumber: 3,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = impala.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -49,7 +49,7 @@ describe('Impala SQL Token Suggestion', () => {
             lineNumber: 5,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = impala.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -72,7 +72,7 @@ describe('Impala SQL Token Suggestion', () => {
             lineNumber: 7,
             column: 8,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = impala.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
@@ -85,7 +85,7 @@ describe('Impala SQL Token Suggestion', () => {
             lineNumber: 9,
             column: 6,
         };
-        const suggestion = parser.getSuggestionAtCaretPosition(
+        const suggestion = impala.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;

@@ -1,16 +1,16 @@
-import MySQL from 'src/parser/mysql';
+import { MySQL } from 'src/parser/mysql';
 
 const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const unCompleteSQL = `CREATE TABLE`;
 
 describe('MySQL validate invalid sql', () => {
-    const parser = new MySQL();
+    const mysql = new MySQL();
 
     test('validate random text', () => {
-        expect(parser.validate(randomText).length).not.toBe(0);
+        expect(mysql.validate(randomText).length).not.toBe(0);
     });
 
     test('validate unComplete sql', () => {
-        expect(parser.validate(unCompleteSQL).length).not.toBe(0);
+        expect(mysql.validate(unCompleteSQL).length).not.toBe(0);
     });
 });

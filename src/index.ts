@@ -5,7 +5,7 @@ export {
     FlinkSQL,
     SparkSQL,
     HiveSQL,
-    PostgresSQL,
+    PostgreSQL,
     TrinoSQL,
     ImpalaSQL,
     PLSQL,
@@ -22,15 +22,15 @@ export type {
     HiveSqlParserVisitor,
     PlSqlParserListener,
     PlSqlParserVisitor,
-    PostgreSQLParserListener,
-    PostgreSQLParserVisitor,
+    PostgreSqlParserListener,
+    PostgreSqlParserVisitor,
     TrinoSqlListener,
     TrinoSqlVisitor,
     ImpalaSqlParserListener,
     ImpalaSqlParserVisitor,
 } from './lib';
 
-export { EntityContextType } from './parser/common/basic-parser-types';
+export { EntityContextType } from './parser/common/types';
 
 export {
     /**
@@ -38,13 +38,9 @@ export {
      * It will be removed when the stable version is released.
      */
     EntityContextType as SyntaxContextType,
-} from './parser/common/basic-parser-types';
+} from './parser/common/types';
 
-export type {
-    CaretPosition,
-    Suggestions,
-    SyntaxSuggestion,
-} from './parser/common/basic-parser-types';
+export type { CaretPosition, Suggestions, SyntaxSuggestion } from './parser/common/types';
 
 export type { WordRange, TextSlice } from './parser/common/textAndWord';
 

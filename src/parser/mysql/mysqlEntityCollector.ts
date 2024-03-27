@@ -19,10 +19,10 @@ import type {
     ViewNameCreateContext,
 } from '../../lib/mysql/MySqlParser';
 import type { MySqlParserListener } from '../../lib/mysql/MySqlParserListener';
-import { EntityContextType } from '../common/basic-parser-types';
-import EntityCollector, { StmtContextType } from '../common/entityCollector';
+import { EntityContextType } from '../common/types';
+import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
-export default class MySqlEntityCollector extends EntityCollector implements MySqlParserListener {
+export class MySqlEntityCollector extends EntityCollector implements MySqlParserListener {
     /** ====== Entity Begin */
     exitDatabaseName(ctx: DatabaseNameContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE);

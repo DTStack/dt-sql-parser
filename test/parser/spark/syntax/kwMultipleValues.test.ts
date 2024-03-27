@@ -1,7 +1,7 @@
-import SparkSQL from 'src/parser/spark';
+import { SparkSQL } from 'src/parser/spark';
 import { readSQL } from 'test/helper';
 
-const parser = new SparkSQL();
+const spark = new SparkSQL();
 
 /**
  * 关键词有多个值
@@ -16,7 +16,7 @@ describe('SparkSQL Keyword Has Multiple Values Syntax Tests', () => {
     Object.keys(features).forEach((key) => {
         features[key].forEach((sql) => {
             it(sql, () => {
-                expect(parser.validate(sql).length).toBe(0);
+                expect(spark.validate(sql).length).toBe(0);
             });
         });
     });

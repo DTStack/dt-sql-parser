@@ -1,8 +1,8 @@
-export { default as MySQL } from './mysql';
-export { default as PLSQL } from './plsql';
-export { default as HiveSQL } from './hive';
-export { default as FlinkSQL } from './flinksql';
-export { default as SparkSQL } from './spark';
-export { default as PostgresSQL } from './pgsql';
-export { default as TrinoSQL } from './trino';
-export { default as ImpalaSQL } from './impala';
+export { MySQL } from './mysql';
+export { PLSQL } from './plsql';
+export { HiveSQL } from './hive';
+export { FlinkSQL } from './flink';
+export { SparkSQL } from './spark';
+export { PostgreSQL } from './postgresql';
+export { TrinoSQL } from './trino';
+export { ImpalaSQL } from './impala';

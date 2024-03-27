@@ -1,7 +1,7 @@
-import HiveSQL from 'src/parser/hive';
+import { HiveSQL } from 'src/parser/hive';
 import { readSQL } from 'test/helper';
 
-const parser = new HiveSQL();
+const hive = new HiveSQL();
 
 const features = {
     drops: readSQL(__dirname, 'drop.sql'),
@@ -11,13 +11,13 @@ const features = {
 describe('HiveSQL Drop Syntax Tests', () => {
     features.drops.forEach((drop) => {
         it(drop, () => {
-            expect(parser.validate(drop).length).toBe(0);
+            expect(hive.validate(drop).length).toBe(0);
         });
     });
 
     features.reloads.forEach((reload) => {
         it(reload, () => {
-            expect(parser.validate(reload).length).toBe(0);
+            expect(hive.validate(reload).length).toBe(0);
         });
     });
 });

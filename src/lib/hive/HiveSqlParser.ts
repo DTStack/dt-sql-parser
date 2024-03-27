@@ -11,7 +11,7 @@ import { HiveSqlParserVisitor } from "./HiveSqlParserVisitor.js";
 type int = number;
 
 
-import SQLParserBase from '../SQLParserBase';
+import { SQLParserBase } from '../SQLParserBase';
 
 
 export class HiveSqlParser extends SQLParserBase {
