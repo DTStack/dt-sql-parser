@@ -25,25 +25,25 @@ import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class HiveEntityCollector extends EntityCollector implements HiveSqlParserListener {
     /** ====== Entity Begin */
-    exitTableNameCreate = (ctx: TableNameCreateContext) => {
+    exitTableNameCreate(ctx: TableNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE);
-    };
+    }
 
-    exitTableName = (ctx: TableNameContext) => {
+    exitTableName(ctx: TableNameContext) {
         this.pushEntity(ctx, EntityContextType.TABLE);
-    };
+    }
 
-    exitColumnNameCreate = (ctx: ColumnNameCreateContext) => {
+    exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE);
-    };
+    }
 
-    exitViewNameCreate = (ctx: ViewNameCreateContext) => {
+    exitViewNameCreate(ctx: ViewNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.VIEW_CREATE);
-    };
+    }
 
-    exitViewName = (ctx: ViewNameContext) => {
+    exitViewName(ctx: ViewNameContext) {
         this.pushEntity(ctx, EntityContextType.VIEW);
-    };
+    }
 
     exitDbSchemaNameCreate(ctx: DbSchemaNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE_CREATE);
@@ -57,70 +57,70 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
         this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE);
     }
 
-    /** ===== Statement begin */
-    enterStatement = (ctx: StatementContext) => {
+    /** ==== Statement begin */
+    enterStatement(ctx: StatementContext) {
         this.pushStmt(ctx, StmtContextType.COMMON_STMT);
-    };
+    }
 
-    exitStatement = () => {
+    exitStatement() {
         this.popStmt();
-    };
+    }
 
-    enterCreateTableStatement = (ctx: CreateTableStatementContext) => {
+    enterCreateTableStatement(ctx: CreateTableStatementContext) {
         this.pushStmt(ctx, StmtContextType.CREATE_TABLE_STMT);
-    };
+    }
 
-    exitCreateTableStatement = () => {
+    exitCreateTableStatement() {
         this.popStmt();
-    };
+    }
 
-    enterSelectStatement = (ctx: SelectStatementContext) => {
+    enterSelectStatement(ctx: SelectStatementContext) {
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
-    };
+    }
 
-    exitSelectStatement = (ctx: SelectStatementContext) => {
+    exitSelectStatement(ctx: SelectStatementContext) {
         this.popStmt();
-    };
+    }
 
-    enterFromSelectStmt = (ctx: FromSelectStmtContext) => {
+    enterFromSelectStmt(ctx: FromSelectStmtContext) {
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
-    };
+    }
 
-    exitFromSelectStmt = (ctx: FromSelectStmtContext) => {
+    exitFromSelectStmt(ctx: FromSelectStmtContext) {
         this.popStmt();
-    };
+    }
 
-    enterCreateViewStatement = (ctx: CreateViewStatementContext) => {
+    enterCreateViewStatement(ctx: CreateViewStatementContext) {
         this.pushStmt(ctx, StmtContextType.CREATE_VIEW_STMT);
-    };
+    }
 
-    exitCreateViewStatement = (ctx: CreateViewStatementContext) => {
+    exitCreateViewStatement(ctx: CreateViewStatementContext) {
         this.popStmt();
-    };
+    }
 
-    enterCreateMaterializedViewStatement = (ctx: CreateMaterializedViewStatementContext) => {
+    enterCreateMaterializedViewStatement(ctx: CreateMaterializedViewStatementContext) {
         this.pushStmt(ctx, StmtContextType.CREATE_VIEW_STMT);
-    };
+    }
 
-    exitCreateMaterializedViewStatement = (ctx: CreateMaterializedViewStatementContext) => {
+    exitCreateMaterializedViewStatement(ctx: CreateMaterializedViewStatementContext) {
         this.popStmt();
-    };
+    }
 
-    enterInsertStmt = (ctx: InsertStmtContext) => {
+    enterInsertStmt(ctx: InsertStmtContext) {
         this.pushStmt(ctx, StmtContextType.INSERT_STMT);
-    };
+    }
 
-    exitInsertStmt = (ctx: InsertStmtContext) => {
+    exitInsertStmt(ctx: InsertStmtContext) {
         this.popStmt();
-    };
+    }
 
-    enterFromInsertStmt = (ctx: FromInsertStmtContext) => {
+    enterFromInsertStmt(ctx: FromInsertStmtContext) {
         this.pushStmt(ctx, StmtContextType.INSERT_STMT);
-    };
+    }
 
-    exitFromInsertStmt = (ctx: FromInsertStmtContext) => {
+    exitFromInsertStmt(ctx: FromInsertStmtContext) {
         this.popStmt();
-    };
+    }
 
     enterCreateDatabaseStatement(ctx: CreateDatabaseStatementContext) {
         this.pushStmt(ctx, StmtContextType.CREATE_DATABASE_STMT);

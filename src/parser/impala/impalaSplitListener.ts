@@ -6,7 +6,7 @@ export class ImpalaSqlSplitListener
     extends SplitListener<SingleStatementContext>
     implements ImpalaSqlParserListener
 {
-    exitSingleStatement = (ctx: SingleStatementContext) => {
+    exitSingleStatement(ctx: SingleStatementContext) {
         this._statementsContext.push(ctx);
-    };
+    }
 }

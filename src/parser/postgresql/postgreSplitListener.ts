@@ -6,7 +6,7 @@ export class PostgreSqlSplitListener
     extends SplitListener<SingleStmtContext>
     implements PostgreSqlParserListener
 {
-    exitSingleStmt = (ctx: SingleStmtContext) => {
+    exitSingleStmt(ctx: SingleStmtContext) {
         this._statementsContext.push(ctx);
-    };
+    }
 }

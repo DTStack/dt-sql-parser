@@ -7,7 +7,7 @@ export class SparkSqlSplitListener
     extends SplitListener<SingleStatementContext>
     implements SparkSqlParserListener
 {
-    exitSingleStatement = (ctx: SingleStatementContext) => {
+    exitSingleStatement(ctx: SingleStatementContext) {
         this._statementsContext.push(ctx);
-    };
+    }
 }

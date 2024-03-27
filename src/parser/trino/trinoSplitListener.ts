@@ -6,7 +6,7 @@ export class TrinoSqlSplitListener
     extends SplitListener<SingleStatementContext>
     implements TrinoSqlListener
 {
-    exitSingleStatement = (ctx: SingleStatementContext) => {
+    exitSingleStatement(ctx: SingleStatementContext) {
         this._statementsContext.push(ctx);
-    };
+    }
 }

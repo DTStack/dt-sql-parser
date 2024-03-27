@@ -6,7 +6,7 @@ export class HiveSqlSplitListener
     extends SplitListener<StatementContext>
     implements HiveSqlParserListener
 {
-    exitStatement = (ctx: StatementContext) => {
+    exitStatement(ctx: StatementContext) {
         this._statementsContext.push(ctx);
-    };
+    }
 }

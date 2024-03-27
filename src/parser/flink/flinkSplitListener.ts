@@ -6,7 +6,7 @@ export class FlinkSqlSplitListener
     extends SplitListener<SingleStatementContext>
     implements FlinkSqlParserListener
 {
-    exitSingleStatement = (ctx: SingleStatementContext) => {
+    exitSingleStatement(ctx: SingleStatementContext) {
         this._statementsContext.push(ctx);
-    };
+    }
 }
