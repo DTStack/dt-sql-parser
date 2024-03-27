@@ -15,7 +15,7 @@ describe('BasicSQL unit tests', () => {
 
     test('Create lexer with errorListener', () => {
         const sql = '袋鼠云数栈UED团队';
-        const errors: any[] = [];
+        const errors = [];
         const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
@@ -35,7 +35,7 @@ describe('BasicSQL unit tests', () => {
 
     test('Create parser with errorListener (lexer error)', () => {
         const sql = '袋鼠云数栈UED团队';
-        const errors: any[] = [];
+        const errors = [];
         const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
@@ -46,7 +46,7 @@ describe('BasicSQL unit tests', () => {
 
     test('Create parser with errorListener (parse error)', () => {
         const sql = 'SHOW TA';
-        const errors: any[] = [];
+        const errors = [];
         const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
@@ -57,7 +57,7 @@ describe('BasicSQL unit tests', () => {
 
     test('Parse right input', () => {
         const sql = 'SELECT * FROM tb1';
-        const errors: any[] = [];
+        const errors = [];
         const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
@@ -70,7 +70,7 @@ describe('BasicSQL unit tests', () => {
 
     test('Parse wrong input', () => {
         const sql = '袋鼠云数栈UED团队';
-        const errors: any[] = [];
+        const errors = [];
         const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
