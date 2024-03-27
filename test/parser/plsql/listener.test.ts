@@ -1,5 +1,4 @@
 import { PLSQL } from 'src/parser/plsql';
-import { ParseTreeListener } from 'antlr4ng';
 import { PlSqlParserListener } from 'src/lib/plsql/PlSqlParserListener';
 
 describe('PLSQL Listener Tests', () => {
@@ -10,19 +9,16 @@ describe('PLSQL Listener Tests', () => {
     const parseTree = plsql.parse(sql);
 
     test('Listener enterTableName', async () => {
-        let result = '';
-        class MyListener implements PlSqlParserListener {
-            enterTable_ref_list = (ctx): void => {
-                result = ctx.getText().toLowerCase();
-            };
-            visitTerminal() {}
-            visitErrorNode() {}
-            enterEveryRule() {}
-            exitEveryRule() {}
-        }
-        const listenTableName = new MyListener();
+        class MyListener extends PlSqlParserListener {
+            result = '';
 
-        await plsql.listen(listenTableName as ParseTreeListener, parseTree);
-        expect(result).toBe(expectTableName);
+            enterTable_ref_list = (ctx) => {
+                this.result = ctx.getText().toLowerCase();
+            };
+        }
+        const listener = new MyListener();
+
+        plsql.listen(listener, parseTree);
+        expect(listener.result).toBe(expectTableName);
     });
 });

@@ -16,7 +16,7 @@ describe('BasicSQL unit tests', () => {
     test('Create lexer with errorListener', () => {
         const sql = '袋鼠云数栈UED团队';
         const errors: any[] = [];
-        const errorListener: ErrorListener<any> = (err) => {
+        const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
         const lexer = flink.createLexer(sql, errorListener);
@@ -36,7 +36,7 @@ describe('BasicSQL unit tests', () => {
     test('Create parser with errorListener (lexer error)', () => {
         const sql = '袋鼠云数栈UED团队';
         const errors: any[] = [];
-        const errorListener: ErrorListener<any> = (err) => {
+        const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
         const parser = flink.createParser(sql, errorListener);
@@ -47,7 +47,7 @@ describe('BasicSQL unit tests', () => {
     test('Create parser with errorListener (parse error)', () => {
         const sql = 'SHOW TA';
         const errors: any[] = [];
-        const errorListener: ErrorListener<any> = (err) => {
+        const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
         const parser = flink.createParser(sql, errorListener);
@@ -58,7 +58,7 @@ describe('BasicSQL unit tests', () => {
     test('Parse right input', () => {
         const sql = 'SELECT * FROM tb1';
         const errors: any[] = [];
-        const errorListener: ErrorListener<any> = (err) => {
+        const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
         const parseTree = flink.parse(sql, errorListener);
@@ -71,7 +71,7 @@ describe('BasicSQL unit tests', () => {
     test('Parse wrong input', () => {
         const sql = '袋鼠云数栈UED团队';
         const errors: any[] = [];
-        const errorListener: ErrorListener<any> = (err) => {
+        const errorListener: ErrorListener = (err) => {
             errors.push(err);
         };
         const parseTree = flink.parse(sql, errorListener);

@@ -1,6 +1,5 @@
 import { MySQL } from 'src/parser/mysql';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
-import { ParseTreeListener } from 'antlr4ng';
 
 describe('MySQL Listener Tests', () => {
     const expectTableName = 'user1';
@@ -10,20 +9,17 @@ describe('MySQL Listener Tests', () => {
     const parseTree = mysql.parse(sql);
 
     test('Listener enterTableName', async () => {
-        let result = '';
-        class MyListener implements MySqlParserListener {
-            enterTableName = (ctx): void => {
-                result = ctx.getText().toLowerCase();
-            };
-            visitTerminal() {}
-            visitErrorNode() {}
-            enterEveryRule() {}
-            exitEveryRule() {}
-        }
-        const listenTableName: any = new MyListener();
+        class MyListener extends MySqlParserListener {
+            result = '';
 
-        await mysql.listen(listenTableName as ParseTreeListener, parseTree);
-        expect(result).toBe(expectTableName);
+            enterTableName = (ctx): void => {
+                this.result = ctx.getText().toLowerCase();
+            };
+        }
+        const listener = new MyListener();
+
+        mysql.listen(listener, parseTree);
+        expect(listener.result).toBe(expectTableName);
     });
 
     test('Split sql listener', async () => {
