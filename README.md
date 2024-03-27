@@ -13,42 +13,27 @@
 
 English | [简体中文](./README-zh_CN.md)
 
-dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** field. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **syntax validation**, **tokenizer**, **traverse** the AST, and so on features.
+dt-sql-parser is a **SQL Parser** project built with [ANTLR4](https://github.com/antlr/antlr4), and it's mainly for the **BigData** field. The [ANTLR4](https://github.com/antlr/antlr4) generated the basic Parser, Visitor, and Listener, so it's easy to complete the **Lexer**, **Parser**, **traverse the AST**, and so on features.
 
-Additionally, it provides auxiliary functions such as **SQL splitting** and **code completion**.
+Additionally, it provides advanced features such as **SQL Validation**, **Code Completion** and **Collecting Table and Columns in SQL**.
 
 **Supported SQL**:
 
 - MySQL
-- Flink SQL
-- Spark SQL
-- Hive SQL
+- Flink
+- Spark
+- Hive
 - PostgreSQL
-- Trino SQL
-- Impala SQL
+- Trino
+- Impala
 
-**Supported auxiliary methods**
-
-| SQL Type    | SQL Spliting | Code Completion |
-| ----------- | ------------ | --------------- |
-| MySQL       | ✅           | ✅               |
-| Flink SQL   | ✅           | ✅               |
-| Spark SQL   | ✅           | ✅               |
-| Hive SQL    | ✅           | ✅               |
-| PostgreSQL  | ✅           | ✅               |
-| Trino SQL   | ✅           | ✅               |
-| Impala SQL  | ✅           | ✅               |
-
->Tips: This project is the default for Javascript language, also you can try to compile it to other languages if you need.
+>Tips: This project is the default for Typescript target, also you can try to compile it to other languages if you need.
 
 <br/>
 
 ## Integrating SQL Parser with Monaco Editor
 
-We have provided [monaco-sql-languages](https://github.com/DTStack/monaco-sql-languages), it is easily to integrate with `monaco-editor`.
-
->Tips: If you want to run `dt-sql-parser` in browser, don't forget to install the `assert` and `util` polyfills, and define the global variable `process.env`.
-  None of this is needed in the node environment, because node has them built-in.
+We also have provided [monaco-sql-languages](https://github.com/DTStack/monaco-sql-languages) to easily to integrate `dt-sql-parser` with `monaco-editor`.
 
 <br/>
 
@@ -65,45 +50,30 @@ yarn add dt-sql-parser
 <br/>
 
 ## Usage
-We recommend learning the Fundamentals usage before continuing. The dt-sql-parser library provides SQL Parser classes for different types of SQL.
+We recommend learning the fundamentals usage before continuing. The dt-sql-parser library provides SQL classes for different types of SQL.
 ```javascript
-import { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgresSQL, TrinoSQL, ImpalaSQL } from 'dt-sql-parser';
+import { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgreSQL, TrinoSQL, ImpalaSQL } from 'dt-sql-parser';
 ```
 
 Before using syntax validation, code completion, and other features, it is necessary to instantiate the Parser of the relevant SQL type.
 For instance, one can consider using `MySQL` as an example:
 ```javascript
-const parser = new MySQL();
+const mysql = new MySQL();
 ```
 
 The following usage examples will utilize the `MySQL`, and the Parser for other SQL types will be used in a similar manner as `MySQL`.
 
 ### Syntax Validation
+First instanced a Parser object, then call the **validate** method on the SQL instance to validate the sql content, if failed returns an array includes **error** message.
+
 ```javascript
 import { MySQL } from 'dt-sql-parser';
 
-const parser = new MySQL();
+const mysql = new MySQL();
+const incorrectSql = 'selec id,name from user1;';
+const errors = mysql.validate(incorrectSql);
 
-const correctSql = 'select id,name from user1;';
-const errors = parser.validate(correctSql);
 console.log(errors); 
-```
-
-*output:*
-
-```javascript
-/* 
-[]
-*/
-```
-
-**Validate failed:**
-
-```javascript
-const incorrectSql = 'selec id,name from user1;'
-const errors = parser.validate(incorrectSql);
-console.log(errors); 
-
 ```
 
 *output:*
@@ -116,25 +86,24 @@ console.log(errors);
     endLine: 1,
     startCol: 0,
     startLine: 1,
-    message: "mismatched input 'SELEC' expecting {<EOF>, 'ALTER', 'ANALYZE', 'CALL', 'CHANGE', 'CHECK', 'CREATE', 'DELETE', 'DESC', 'DESCRIBE', 'DROP', 'EXPLAIN', 'GET', 'GRANT', 'INSERT', 'KILL', 'LOAD', 'LOCK', 'OPTIMIZE', 'PURGE', 'RELEASE', 'RENAME', 'REPLACE', 'RESIGNAL', 'REVOKE', 'SELECT', 'SET', 'SHOW', 'SIGNAL', 'UNLOCK', 'UPDATE', 'USE', 'BEGIN', 'BINLOG', 'CACHE', 'CHECKSUM', 'COMMIT', 'DEALLOCATE', 'DO', 'FLUSH', 'HANDLER', 'HELP', 'INSTALL', 'PREPARE', 'REPAIR', 'RESET', 'ROLLBACK', 'SAVEPOINT', 'START', 'STOP', 'TRUNCATE', 'UNINSTALL', 'XA', 'EXECUTE', 'SHUTDOWN', '--', '(', ';'}"
+    message: "..."
   }
 ]
 */
 ```
 
-We instanced a Parser object, and use the **validate** method to check the SQL syntax, if failed
-returns an array object includes **error** message.
 
 ### Tokenizer
 
-Get all **tokens** by the Parser:
+Call the `getAllTokens` method on the SQL instance:
 
 ```javascript
 import { MySQL } from 'dt-sql-parser';
 
-const parser = new MySQL()
+const mysql = new MySQL()
 const sql = 'select id,name,sex from user1;'
-const tokens = parser.getAllTokens(sql)
+const tokens = mysql.getAllTokens(sql)
+
 console.log(tokens)
 ```
 
@@ -164,36 +133,28 @@ console.log(tokens)
 Traverse the tree node by the Visitor:
 
 ```typescript
-import { MySQL, AbstractParseTreeVisitor } from 'dt-sql-parser';
-import type { MySqlParserVisitor } from 'dt-sql-parser';
+import { MySQL, MySqlParserVisitor } from 'dt-sql-parser';
 
-const parser = new MySQL();
-const sql = `select id,name from user1;`;
-const tree = parser.parse(sql);
+const mysql = new MySQL();
+const sql = `select id, name from user1;`;
+const parseTree = mysql.parse(sql);
 
-type Result = string;
-
-class MyVisitor extends AbstractParseTreeVisitor<Result> implements MySqlParserVisitor<Result> {
-    protected defaultResult() {
+class MyVisitor extends MySqlParserVisitor<string> {
+    defaultResult(): string {
         return '';
     }
-    visitTableName(ctx) {
-        let tableName = ctx.text.toLowerCase();
-        console.log('TableName:', tableName);
-        return '';
+    aggregateResult(aggregate: string, nextResult: string): string {
+        return aggregate + nextResult;
     }
-    visitSelectElements(ctx) {
-        let selectElements = ctx.text.toLowerCase();
-        console.log('SelectElements:', selectElements);
-        return '';
-    }
-    visitProgram(ctx) { // program is root rule
-        this.visitChildren(ctx);
-        return 'Return by program context'
-    }
+    visitProgram = (ctx) => {
+        return this.visitChildren(ctx);
+    };
+    visitTableName = (ctx) => {
+        return ctx.getText();
+    };
 }
 const visitor = new MyVisitor();
-const result = visitor.visit(tree);
+const result = visitor.visit(parseTree);
 
 console.log(result);
 ```
@@ -202,60 +163,52 @@ console.log(result);
 
 ```javascript
 /*
-SelectElements: id,name
-TableName: user1
-*/
-/*
-Return by program node
+user1
 */
 ```
-
-> Tips: The node's method name can be found in the Visitor file under the corresponding SQL directory
 
 ### Listener
 
 Access the specified node in the AST by the Listener
 
 ```typescript
-import { MySQL } from 'dt-sql-parser';
-import type { MySqlParserListener } from 'dt-sql-parser';
+import { MySQL, MySqlParserListener } from 'dt-sql-parser';
 
-const parser = new MySQL();
-const sql = 'select id,name from user1;';
-const parseTree = parser.parse(sql);
+const mysql = new MySQL();
+const sql = 'select id, name from user1;';
+const parseTree = mysql.parse(sql);
 
-class MyListener implements MySqlParserListener {
-    enterTableName(ctx) {
-        let tableName = ctx.text.toLowerCase();
-        console.log('TableName:', tableName);
-    }
-    enterSelectElements(ctx) {
-        let selectElements = ctx.text.toLowerCase();
-        console.log('SelectElements:', selectElements);
-    }
+class MyListener extends MySqlParserListener {
+    result = '';
+    enterTableName = (ctx): void => {
+        this.result = ctx.getText();
+    };
 }
-const listenTableName = new MyListener();
-parser.listen(listenTableName as MySqlParserListener, parseTree);
+
+const listener = new MyListener();
+mysql.listen(listener, parseTree);
+
+console.log(listener.result)
 ```
 
 *output:*
 
 ```javascript
 /*
-SelectElements: id,name
-TableName: user1
+user1
 */
 ```
 
-> Tips: The node's method name can be found in the Listener file under the corresponding SQL directory
-
 ### Splitting SQL statements
-Take `FlinkSQL` as an example:
+Take `FlinkSQL` as an example, call the `splitSQLByStatement` method on the SQL instance:
+
 ```javascript
 import { FlinkSQL } from 'dt-sql-parser';
-const parser = new FlinkSQL();
+
+const flink = new FlinkSQL();
 const sql = 'SHOW TABLES;\nSELECT * FROM tb;';
-const sqlSlices = parser.splitSQLByStatement(sql);
+const sqlSlices = flink.splitSQLByStatement(sql);
+
 console.log(sqlSlices)
 ```
 
@@ -290,15 +243,17 @@ console.log(sqlSlices)
 Obtaining code completion information at a specified position in SQL.
 We can refer to the example of using `FlinkSQL`.
 
-Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the row and column numbers indicating the position where code completion is desired. The following are some additional explanations about [CaretPosition](#caretposition-of-code-completion).
+Call the `getAllEntities` method on the SQL instance, pass the SQL content and the row and column numbers indicating the position where code completion is desired. The following are some additional explanations about [CaretPosition](#caretposition-of-code-completion).
 + **keyword candidates list**
 
     ```javascript
     import { FlinkSQL } from 'dt-sql-parser';
-    const parser = new FlinkSQL();
+  
+    const flink = new FlinkSQL();
     const sql = 'CREATE ';
     const pos = { lineNumber: 1, column: 16 }; // the end position
-    const keywords = parser.getSuggestionAtCaretPosition(sql, pos)?.keywords;
+    const keywords = flink.getSuggestionAtCaretPosition(sql, pos)?.keywords;
+  
     console.log(keywords);
     ```
     *output:*
@@ -309,10 +264,13 @@ Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the r
     ```
 +  **Obtaining information related to grammar completion**
     ```javascript
-    const parser = new FlinkSQL();
+    import { FlinkSQL } from 'dt-sql-parser';
+
+    const flink = new FlinkSQL();
     const sql = 'SELECT * FROM tb';
     const pos = { lineNumber: 1, column: 16 }; // after 'tb'
-    const syntaxSuggestions = parser.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+    const syntaxSuggestions = flink.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+
     console.log(syntaxSuggestions);
     ```
     *output:*
@@ -349,6 +307,55 @@ Invoke the `getSuggestionAtCaretPosition` method, pass the SQL content and the r
     */
     ```
 The grammar-related code completion information returns an array, where each item represents what grammar can be filled in at that position. For example, the output in the above example represents that the position can be filled with either a **table name** or **a view name**. In this case, `syntaxContextType` represents the type of grammar that can be completed, and `wordRanges` represents the content that has already been filled.
+
+
+### 获取 SQL 中出现的实体（表名、字段名等）
+Call the `getAllEntities` method on the SQL instance, and pass in the sql text and the row and column numbers at the specified location to easily get them.
+
+```typescript
+  import { FlinkSQL } from 'dt-sql-parser';
+
+  const flink = new FlinkSQL();
+  const sql = 'SELECT * FROM tb;';
+  const pos = { lineNumber: 1, column: 16 }; // tb 的后面
+  const entities = flink.getAllEntities(sql, pos);
+
+  console.log(entities);
+```
+
+*output*
+
+```typescript
+/*
+  [
+    {
+      entityContextType: 'table',
+      text: 'tb',
+      position: {
+        line: 1,
+        startIndex: 14,
+        endIndex: 15,
+        startColumn: 15,
+        endColumn: 17
+      },
+      belongStmt: {
+        stmtContextType: 'selectStmt',
+        position: [Object],
+        rootStmt: [Object],
+        parentStmt: [Object],
+        isContainCaret: true
+      },
+      relatedEntities: null,
+      columns: null,
+      isAlias: false,
+      origin: null,
+      alias: null
+    }
+  ]
+*/
+```
+
+Position is not required, if the position is passed, then in the collected entities, if the entity is located under the statement where the corresponding position is located, then the statement object to which the entity belongs will be marked with 'isContainCaret', which can help you quickly filter out the required entities when combined with the code completion function.
 
 ### Other API
 
@@ -428,6 +435,7 @@ At this time, dt-sql-parser will think that `SHOW` is already a complete Token, 
 For the editor, this strategy is also more intuitive. After the user enters `SHOW`, before pressing the space key, the user probably has not finished entering, maybe the user wants to enter something like `SHOWS`. When the user presses the space key, the editor thinks that the user wants to enter the next Token, and it is time to ask dt-sql-parser what can be filled in the next Token position.
 
 <br/>
+
 ## License
 
 [MIT](./LICENSE)
