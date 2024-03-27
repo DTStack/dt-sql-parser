@@ -1,5 +1,3 @@
-export { AbstractParseTreeVisitor } from 'antlr4ng';
-
 export {
     MySQL,
     FlinkSQL,
