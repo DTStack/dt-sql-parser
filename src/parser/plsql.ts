@@ -3,7 +3,7 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { PlSqlLexer } from '../lib/plsql/PlSqlLexer';
 import { PlSqlParser, ProgramContext } from '../lib/plsql/PlSqlParser';
 import { BasicSQL } from './common/basicSQL';
-import { Suggestions } from './common/basic-parser-types';
+import { Suggestions } from './common/types';
 
 export class PLSQL extends BasicSQL<PlSqlLexer, ProgramContext, PlSqlParser> {
     protected createLexerFromCharStream(charStreams) {

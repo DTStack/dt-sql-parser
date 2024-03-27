@@ -16,7 +16,7 @@ import type {
     ViewNameCreateContext,
 } from '../../lib/trino/TrinoSqlParser';
 import type { TrinoSqlListener } from '../../lib/trino/TrinoSqlListener';
-import { EntityContextType } from '../common/basic-parser-types';
+import { EntityContextType } from '../common/types';
 import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {

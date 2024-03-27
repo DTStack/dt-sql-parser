@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { MySQL } from 'src/parser/mysql';
-import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'multipleStatement.sql'),

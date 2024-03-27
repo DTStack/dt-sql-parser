@@ -4,7 +4,7 @@ import { MySQL } from 'src/parser/mysql';
 import { MySqlEntityCollector, MysqlSplitListener } from 'src/parser/mysql';
 import { ParseTreeListener } from 'antlr4ng';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
-import { EntityContextType } from 'src/parser/common/basic-parser-types';
+import { EntityContextType } from 'src/parser/common/types';
 import { StmtContextType } from 'src/parser/common/entityCollector';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');

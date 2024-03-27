@@ -20,7 +20,7 @@ import {
     ViewNameCreateContext,
     ViewNamePathContext,
 } from '../../lib/impala/ImpalaSqlParser';
-import { EntityContextType } from '../common/basic-parser-types';
+import { EntityContextType } from '../common/types';
 import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlParserListener {

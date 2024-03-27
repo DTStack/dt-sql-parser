@@ -19,7 +19,7 @@ import type {
     ViewNameCreateContext,
 } from '../../lib/mysql/MySqlParser';
 import type { MySqlParserListener } from '../../lib/mysql/MySqlParserListener';
-import { EntityContextType } from '../common/basic-parser-types';
+import { EntityContextType } from '../common/types';
 import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class MySqlEntityCollector extends EntityCollector implements MySqlParserListener {

@@ -4,7 +4,7 @@ import { HiveSqlLexer } from '../../lib/hive/HiveSqlLexer';
 import { HiveSqlParser, ProgramContext } from '../../lib/hive/HiveSqlParser';
 import { BasicSQL } from '../common/basicSQL';
 
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { HiveSqlSplitListener } from './hiveSplitListener';
 import { HiveEntityCollector } from './hiveEntityCollector';

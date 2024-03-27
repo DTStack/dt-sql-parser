@@ -1,5 +1,5 @@
 import { ParserRuleContext } from 'antlr4ng';
-import { EntityContextType } from './basic-parser-types';
+import { EntityContextType } from './types';
 import { WordPosition, TextPosition } from './textAndWord';
 import { ctxToText, ctxToWord } from './textAndWord';
 import { SimpleStack } from './simpleStack';
@@ -11,7 +11,7 @@ export enum StmtContextType {
     /** A self-contained and complete statement */
     COMMON_STMT = 'commonStmt',
     CREATE_CATALOG_STMT = 'createCatalogStmt',
-    CREATE_DATABASE_STMT = 'crateDatabaseStmt',
+    CREATE_DATABASE_STMT = 'createDatabaseStmt',
     CREATE_TABLE_STMT = 'createTableStmt',
     CREATE_VIEW_STMT = 'createViewStmt',
     SELECT_STMT = 'selectStmt',

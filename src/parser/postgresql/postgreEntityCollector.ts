@@ -20,7 +20,7 @@ import type {
     ViewNameCreateContext,
 } from '../../lib/postgresql/PostgreSqlParser';
 import type { PostgreSqlParserListener } from '../../lib/postgresql/PostgreSqlParserListener';
-import { EntityContextType } from '../common/basic-parser-types';
+import { EntityContextType } from '../common/types';
 import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class PostgreSqlEntityCollector extends EntityCollector implements PostgreSqlParserListener {

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { PostgreSQL } from 'src/parser/postgresql';
-import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'multipleStatement.sql'),

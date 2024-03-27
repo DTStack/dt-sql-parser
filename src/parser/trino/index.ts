@@ -3,7 +3,7 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
 import { TrinoSqlParser, ProgramContext } from '../../lib/trino/TrinoSqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { TrinoSqlSplitListener } from './trinoSplitListener';
 import { TrinoEntityCollector } from './trinoEntityCollector';

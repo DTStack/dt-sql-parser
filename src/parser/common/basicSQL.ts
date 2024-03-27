@@ -13,7 +13,7 @@ import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { SQLParserBase } from '../../lib/SQLParserBase';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
 import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
-import { CaretPosition, Suggestions, SyntaxSuggestion } from './basic-parser-types';
+import { CaretPosition, Suggestions, SyntaxSuggestion } from './types';
 import { ParseError, ErrorListener, ParseErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
 import type { SplitListener } from './splitListener';

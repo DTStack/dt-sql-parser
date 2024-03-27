@@ -2,7 +2,7 @@ import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
-import { EntityContextType } from 'src/parser/common/basic-parser-types';
+import { EntityContextType } from 'src/parser/common/types';
 import { StmtContextType } from 'src/parser/common/entityCollector';
 import {
     PostgreSQL,

@@ -1,4 +1,4 @@
-import { EntityContextType } from '../common/basic-parser-types';
+import { EntityContextType } from '../common/types';
 import {
     CatalogPathContext,
     CatalogPathCreateContext,

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { PostgreSQL } from 'src/parser/postgresql';
 import { commentOtherLine } from 'test/helper';
 

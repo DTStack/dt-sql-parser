@@ -3,7 +3,7 @@ import path from 'path';
 import { TrinoSQL, TrinoSqlSplitListener, TrinoEntityCollector } from 'src/parser/trino';
 import { ParseTreeListener } from 'antlr4ng';
 import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
-import { EntityContextType } from 'src/parser/common/basic-parser-types';
+import { EntityContextType } from 'src/parser/common/types';
 import { StmtContextType } from 'src/parser/common/entityCollector';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');

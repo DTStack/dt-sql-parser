@@ -3,7 +3,7 @@ import { Token } from 'antlr4ng';
 
 import { PostgreSqlLexer } from '../../lib/postgresql/PostgreSqlLexer';
 import { PostgreSqlParser, ProgramContext } from '../../lib/postgresql/PostgreSqlParser';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { PostgreSqlEntityCollector } from './postgreEntityCollector';

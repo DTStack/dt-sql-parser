@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { EntityContextType } from 'src/parser/common/basic-parser-types';
+import { EntityContextType } from 'src/parser/common/types';
 import { StmtContextType } from 'src/parser/common/entityCollector';
 import { ImpalaSQL, ImpalaEntityCollector, ImpalaSqlSplitListener } from 'src/parser/impala';
 import { ImpalaSqlParserListener } from 'src/lib/impala/ImpalaSqlParserListener';

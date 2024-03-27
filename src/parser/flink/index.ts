@@ -2,7 +2,7 @@ import { Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
 import { FlinkSqlLexer } from '../../lib/flink/FlinkSqlLexer';
 import { FlinkSqlParser, ProgramContext } from '../../lib/flink/FlinkSqlParser';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { FlinkSqlSplitListener } from './flinkSplitListener';

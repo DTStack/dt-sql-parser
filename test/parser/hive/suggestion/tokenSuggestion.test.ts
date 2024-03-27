@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { commentOtherLine } from 'test/helper';
 import { HiveSQL } from 'src/parser/hive';
-import { CaretPosition } from 'src/parser/common/basic-parser-types';
+import { CaretPosition } from 'src/parser/common/types';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
 

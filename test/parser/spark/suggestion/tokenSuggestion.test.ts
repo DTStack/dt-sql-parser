@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { SparkSQL } from 'src/parser/spark';
-import { CaretPosition } from 'src/parser/common/basic-parser-types';
+import { CaretPosition } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');

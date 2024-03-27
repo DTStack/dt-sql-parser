@@ -20,7 +20,7 @@ import type {
     CreateFunctionContext,
 } from '../../lib/spark/SparkSqlParser';
 import type { SparkSqlParserListener } from '../../lib/spark/SparkSqlParserListener';
-import { EntityContextType } from '../common/basic-parser-types';
+import { EntityContextType } from '../common/types';
 import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class SparkEntityCollector extends EntityCollector implements SparkSqlParserListener {

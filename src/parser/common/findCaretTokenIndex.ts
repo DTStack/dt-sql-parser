@@ -1,5 +1,5 @@
 import { Token } from 'antlr4ng';
-import { CaretPosition } from './basic-parser-types';
+import { CaretPosition } from './types';
 
 /**
  * find token index via caret position (cursor position)

@@ -3,7 +3,7 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { MySqlLexer } from '../../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext } from '../../lib/mysql/MySqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { MysqlSplitListener } from './mysqlSplitListener';
 import { MySqlEntityCollector } from './mysqlEntityCollector';

@@ -3,7 +3,7 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { ImpalaSqlLexer } from '../../lib/impala/ImpalaSqlLexer';
 import { ImpalaSqlParser, ProgramContext } from '../../lib/impala/ImpalaSqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/basic-parser-types';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { ImpalaSqlSplitListener } from './impalaSplitListener';
 import { ImpalaEntityCollector } from './impalaEntityCollector';

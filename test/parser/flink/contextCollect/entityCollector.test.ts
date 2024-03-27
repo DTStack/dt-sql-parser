@@ -3,7 +3,7 @@ import path from 'path';
 import { ParseTreeListener } from 'antlr4ng';
 import { FlinkSQL, FlinkEntityCollector, FlinkSqlSplitListener } from 'src/parser/flink';
 import { FlinkSqlParserListener } from 'src/lib/flink/FlinkSqlParserListener';
-import { EntityContextType } from 'src/parser/common/basic-parser-types';
+import { EntityContextType } from 'src/parser/common/types';
 import { StmtContextType } from 'src/parser/common/entityCollector';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');

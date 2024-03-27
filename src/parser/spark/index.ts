@@ -3,7 +3,7 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { SparkSqlLexer } from '../../lib/spark/SparkSqlLexer';
 import { SparkSqlParser, ProgramContext } from '../../lib/spark/SparkSqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/basic-parser-types';
+import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { SparkSqlSplitListener } from './sparkSplitListener';
 import { SparkEntityCollector } from './sparkEntityCollector';

@@ -2,7 +2,7 @@ import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
 import { HiveSqlParserListener } from 'src/lib/hive/HiveSqlParserListener';
-import { EntityContextType } from 'src/parser/common/basic-parser-types';
+import { EntityContextType } from 'src/parser/common/types';
 import { HiveSQL, HiveEntityCollector } from 'src/parser/hive';
 import { HiveSqlSplitListener } from 'src/parser/hive/hiveSplitListener';
 import { StmtContextType } from 'src/parser/common/entityCollector';

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { SparkSQL } from 'src/parser/spark';
-import { CaretPosition, EntityContextType } from 'src/parser/common/basic-parser-types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
