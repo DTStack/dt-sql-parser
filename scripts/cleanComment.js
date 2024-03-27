@@ -19,7 +19,9 @@ function processFile(filePath) {
         if (slices.length !== 2) return;
         firstLineContent = `// Generated from dt-sql-parser/src/grammar/` + slices[1];
 
-        fs.writeFileSync(filePath, firstLineContent + restContent, 'utf-8');
+        const tsNoCheckComment = '\n\n// @ts-nocheck';
+
+        fs.writeFileSync(filePath, firstLineContent + tsNoCheckComment + restContent, 'utf-8');
     } catch (error) {
         console.error(error);
     }

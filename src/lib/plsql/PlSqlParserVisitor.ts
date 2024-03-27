@@ -1,5 +1,7 @@
 // Generated from dt-sql-parser/src/grammar/plsql/PlSqlParser.g4 by ANTLR 4.13.1
 
+// @ts-nocheck
+
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
 

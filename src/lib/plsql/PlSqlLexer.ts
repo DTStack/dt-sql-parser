@@ -1,5 +1,7 @@
 // Generated from dt-sql-parser/src/grammar/plsql/PlSqlLexer.g4 by ANTLR 4.13.1
 
+// @ts-nocheck
+
 import * as antlr from "antlr4ng";
 import { Token } from "antlr4ng";
 
