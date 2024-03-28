@@ -13,38 +13,26 @@
 
 [English](./README.md) | 简体中文
 
-dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的， 针对大数据领域的 **SQL Parser** 项目。通过[ANTLR4](https://github.com/antlr/antlr4) 生成的 Parser、Visitor 和 Listener，我们可以轻松的做到对 SQL 语句的**语法检查**（Syntax Validation）、**词法分析**（Tokenizer)、 **遍历 AST** 节点等功能。此外，还提供了一些辅助方法, 例如 **SQL 切割（Split）**、**自动补全**等。
+dt-sql-parser 是一个基于 [ANTLR4](https://github.com/antlr/antlr4) 开发的， 针对大数据领域的 **SQL Parser** 项目。通过[ANTLR4](https://github.com/antlr/antlr4) 生成的 Parser、Visitor 和 Listener，我们可以轻松的做到对 SQL 语句的 **词法分析**（Lexer)、**语法分析**（Parser）、**遍历 AST** 节点等功能。
+
+此外，还提供了一些高级功能，例如 **SQL 校验**、 **自动补全**、**收集表名字段名** 等。
 
 **已支持的 SQL 类型：**
 
 - MySQL
-- Flink SQL
-- Spark SQL
-- Hive SQL
+- Flink
+- Spark
+- Hive
 - PostgreSQL
-- Trino SQL
-- Impala SQL
+- Trino
+- Impala
 
-**SQL 辅助方法支持**
-
-| SQL 类型     | SQL 切割 | 自动补全   |
-| ----------- | -------- | -------- |
-| MySQL       | ✅       | ✅        |
-| Flink SQL   | ✅       | ✅        |
-| Spark SQL   | ✅       | ✅        |
-| Hive SQL    | ✅       | ✅        |
-| PostgreSQL  | ✅       | ✅        |
-| Trino SQL   | ✅       | ✅        |
-| Impala SQL  | ✅       | ✅        |
-
-> 提示：当前的 Parser 是 `Javascript` 语言版本，如果有必要，可以尝试编译 Grammar 文件到其他目标语言。
+> 提示：当前所有的 SQL Parser 是 `Typescript` 语言版本，如果有需要，可以尝试编译 Grammar 文件到其他目标语言。
 
 <br/>
 
 ## 与 MonacoEditor 集成
 我们提供了[monaco-sql-languages](https://github.com/DTStack/monaco-sql-languages)，通过它你可以轻易的将`dt-sql-parser`与`monaco-editor`集成。
-
->提示：如果想要在浏览器中运行 `dt-sql-parser`，请不要忘记安装 `assert` 和 `util` 的 polyfills 包，另外还需要定义全局变量 `process.env`。 在 node 环境中则不需要，因为 node 内置了这些。
 
 <br/>
 
@@ -61,48 +49,33 @@ yarn add dt-sql-parser
 <br/>
 
 ## 使用
-在开始使用前，需要先了解基本用法。`dt-sql-parser` 为不同类型的 SQL 分别提供相应的 SQL Parser 类：
-```javascript
-import { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgresSQL, TrinoSQL, ImpalaSQL } from 'dt-sql-parser';
+在开始使用前，需要先了解基本用法。`dt-sql-parser` 为不同类型的 SQL 分别提供相应的 SQL 类：
+```typescript
+import { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgreSQL, TrinoSQL, ImpalaSQL } from 'dt-sql-parser';
 ```
 
-在使用语法校验，自动补全等功能之前，需要先实例化对应 SQL 类型的 Parser，以 `MySQL` 为例：
-```javascript
-const parser = new MySQL();
+在使用语法校验，自动补全等功能之前，需要先实例化对应 SQL 类，以 `MySQL` 为例：
+```typescript
+const mysql = new MySQL();
 ```
 
 下文中的使用示例将使用 `MySQL`，其他 SQL 类型的 Parser 使用方式与`MySQL` 相同。
 
 ### 语法校验（Syntax Validation）
-```javascript
+先实例化 SQL 类，然后调用 SQL 实例上的 `validate` 方法对 SQL 语句进行校验，如果校验失败，则返回一个包含 `error` 信息的数组。
+```typescript
 import { MySQL } from 'dt-sql-parser';
 
-const parser = new MySQL();
+const mysql = new MySQL();
+const incorrectSql = 'selec id,name from user1;';
+const errors = mysql.validate(incorrectSql);
 
-const correctSql = 'select id,name from user1;';
-const errors = parser.validate(correctSql);
 console.log(errors); 
 ```
 
 *输出：*
 
-```javascript
-/*
-[]
-*/
-```
-
-**校验失败示例：**
-
-```javascript
-const incorrectSql = 'selec id,name from user1;'
-const errors = parser.validate(incorrectSql);
-console.log(errors); 
-```
-
-*输出：*
-
-```javascript
+```typescript
 /*
 [
   {
@@ -110,30 +83,30 @@ console.log(errors);
     endLine: 1,
     startCol: 0,
     startLine: 1,
-    message: "mismatched input 'SELEC' expecting {<EOF>, 'ALTER', 'ANALYZE', 'CALL', 'CHANGE', 'CHECK', 'CREATE', 'DELETE', 'DESC', 'DESCRIBE', 'DROP', 'EXPLAIN', 'GET', 'GRANT', 'INSERT', 'KILL', 'LOAD', 'LOCK', 'OPTIMIZE', 'PURGE', 'RELEASE', 'RENAME', 'REPLACE', 'RESIGNAL', 'REVOKE', 'SELECT', 'SET', 'SHOW', 'SIGNAL', 'UNLOCK', 'UPDATE', 'USE', 'BEGIN', 'BINLOG', 'CACHE', 'CHECKSUM', 'COMMIT', 'DEALLOCATE', 'DO', 'FLUSH', 'HANDLER', 'HELP', 'INSTALL', 'PREPARE', 'REPAIR', 'RESET', 'ROLLBACK', 'SAVEPOINT', 'START', 'STOP', 'TRUNCATE', 'UNINSTALL', 'XA', 'EXECUTE', 'SHUTDOWN', '--', '(', ';'}"
+    message: "...“
   }
 ]
 */
 ```
 
-先实例化 Parser 对象，然后使用 `validate` 方法对 SQL 语句进行校验，如果校验失败，则返回一个包含 `error` 信息的数组。
 
 ### 词法分析（Tokenizer）
 
-部分场景下，可以通过 `getAllTokens` 单独对 SQL 语句进行词法分析，获取所有的 Tokens 对象：
+通过调用 SQL 实例上的 `getAllTokens`方法，可以对 SQL 语句进行词法分析，获取所有的 Tokens 对象：
 
-```javascript
+```typescript
 import { MySQL } from 'dt-sql-parser';
 
-const parser = new MySQL()
+const mysql = new MySQL();
 const sql = 'select id,name,sex from user1;'
-const tokens = parser.getAllTokens(sql)
-console.log(tokens)
+const tokens = mysql.getAllTokens(sql);
+
+console.log(tokens);
 ```
 
 *输出：*
 
-```javascript
+```typescript
 /*
 [
   {
@@ -154,52 +127,40 @@ console.log(tokens)
 
 ### 访问者模式（Visitor）
 
-使用 Visitor 模式访问 AST 中的指定节点
+使用 Visitor 模式访问 AST 中的指定节点，并计算出结果：
 
 ```typescript
-import { MySQL, AbstractParseTreeVisitor } from 'dt-sql-parser';
-import type { MySqlParserVisitor } from 'dt-sql-parser';
+import { MySQL, MySqlParserVisitor } from 'dt-sql-parser';
 
-const parser = new MySQL();
-const sql = `select id,name from user1;`;
-const tree = parser.parse(sql);
+const mysql = new MySQL();
+const sql = `select id, name from user1;`;
+const parseTree = mysql.parse(sql);
 
-type Result = string;
-
-class MyVisitor extends AbstractParseTreeVisitor<Result> implements MySqlParserVisitor<Result> {
-    protected defaultResult() {
+class MyVisitor extends MySqlParserVisitor<string> {
+    defaultResult(): string {
         return '';
     }
-    visitTableName(ctx) {
-        let tableName = ctx.text.toLowerCase();
-        console.log('TableName', tableName);
-        return '';
+    aggregateResult(aggregate: string, nextResult: string): string {
+        return aggregate + nextResult;
     }
-    visitSelectElements(ctx) {
-        let selectElements = ctx.text.toLowerCase();
-        console.log('SelectElements', selectElements);
-        return '';
-    }
-    visitProgram(ctx) { // program 是根规则
-        this.visitChildren(ctx);
-        return 'Return by program context'
-    }
+    visitProgram = (ctx) => {
+        return this.visitChildren(ctx);
+    };
+    visitTableName = (ctx) => {
+        return ctx.getText();
+    };
 }
 const visitor = new MyVisitor();
-const result = visitor.visit(tree);
+const result = visitor.visit(parseTree);
 
 console.log(result);
 ```
 
 *输出：*
 
-```javascript
+```typescript
 /*
-SelectElements id,name
-TableName user1
-*/
-/*
-Return by program node
+user1
 */
 ```
 
@@ -210,51 +171,48 @@ Return by program node
 Listener 模式，利用 [ANTLR4](https://github.com/antlr/antlr4) 提供的 `ParseTreeWalker` 对象遍历 AST，进入各个节点时调用对应的方法。
 
 ```typescript
-import { MySQL } from 'dt-sql-parser';
-import type { MySqlParserListener } from 'dt-sql-parser';
+import { MySQL, MySqlParserListener } from 'dt-sql-parser';
 
-const parser = new MySQL();
-const sql = 'select id,name from user1;';
-const parseTree = parser.parse(sql);
+const mysql = new MySQL();
+const sql = 'select id, name from user1;';
+const parseTree = mysql.parse(sql);
 
-class MyListener implements MySqlParserListener {
-    enterTableName(ctx) {
-        let tableName = ctx.text.toLowerCase();
-        console.log('TableName:', tableName);
-    }
-    enterSelectElements(ctx) {
-        let selectElements = ctx.text.toLowerCase();
-        console.log('SelectElements:', selectElements);
-    }
+class MyListener extends MySqlParserListener {
+    result = '';
+    enterTableName = (ctx): void => {
+        this.result = ctx.getText();
+    };
 }
-const listenTableName = new MyListener();
-parser.listen(listenTableName as MySqlParserListener, parseTree);
+
+const listener = new MyListener();
+mysql.listen(listener, parseTree);
+
+console.log(listener.result)
 ```
 
 *输出：*
 
-```javascript
+```typescript
 /*
-SelectElements id,name
-TableName user1
+user1
 */
 ```
 
-> 提示：使用 Listener 模式时，节点的方法名称可以在对应 SQL 目录下的 Listener 文件中查找
-
 ### SQL 按语句切割
-以 `FlinkSQL` 为例：
-```javascript
+调用 SQL 实例上的 `splitSQLByStatement` 方法，以 `FlinkSQL` 为例：
+```typescript
 import { FlinkSQL } from 'dt-sql-parser';
-const parser = new FlinkSQL();
+
+const flink = new FlinkSQL();
 const sql = 'SHOW TABLES;\nSELECT * FROM tb;';
-const sqlSlices = parser.splitSQLByStatement(sql);
+const sqlSlices = flink.splitSQLByStatement(sql);
+
 console.log(sqlSlices)
 ```
 
 *输出：*
 
-```javascript
+```typescript
 /*
 [
   {
@@ -280,40 +238,44 @@ console.log(sqlSlices)
 ```
 
 ### 自动补全（Code Completion）
-在 sql 文本的指定位置上获取自动补全信息，以 `FlinkSQL` 为例：
+在 sql 文本的指定位置上获取自动补全信息，以 `FlinkSQL` 为例，调用 SQL 实例上的 `getSuggestionAtCaretPosition` 方法，传入 sql 文本和指定位置的行列号：
 
-调用 `getSuggestionAtCaretPosition` 方法，传入 sql 内容和指定位置的行列号，下文中有一些关于[自动补全位置](#自动补全功能的-caretposition)的补充说明。
+> 下文中有一些关于[自动补全位置](#自动补全功能的-caretposition)的补充说明。
+
 + **获取关键字候选项列表**
 
-    ```javascript
+    ```typescript
     import { FlinkSQL } from 'dt-sql-parser';
-    const parser = new FlinkSQL();
+  
+    const flink = new FlinkSQL();
     const sql = 'CREATE ';
     const pos = { lineNumber: 1, column: 16 }; // 最后一个位置
-    const keywords = parser.getSuggestionAtCaretPosition(sql, pos)?.keywords;
+    const keywords = flink.getSuggestionAtCaretPosition(sql, pos)?.keywords;
+  
     console.log(keywords);
     ```
     *输出：*
 
-    ```javascript
+    ```typescript
     /*
     [ 'CATALOG', 'FUNCTION', 'TEMPORARY', 'VIEW', 'DATABASE', 'TABLE' ] 
     */ 
     ```
 + **获取语法相关自动补全信息**
-    ```javascript
-    const parser = new FlinkSQL();
+    ```typescript
+    import { FlinkSQL } from 'dt-sql-parser';
+
+    const flink = new FlinkSQL();
     const sql = 'SELECT * FROM tb';
     const pos = { lineNumber: 1, column: 16 }; // tb 的后面
-    const syntaxSuggestions = parser.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+    const syntaxSuggestions = flink.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+  
     console.log(syntaxSuggestions);
-
-
     ```
 
     *输出：*
 
-    ```javascript
+    ```typescript
     /*
     [
       {
@@ -347,6 +309,53 @@ console.log(sqlSlices)
     ```
 语法相关自动补全信息返回一个数组，数组中每一项代表该位置可以填写什么语法，比如上例中的输出结果代表该位置可以填写**表名**或者**视图名称**。其中 `syntaxContextType` 是可以补全的语法类型，`wordRanges` 是已经填写的内容。
 
+### 获取 SQL 中出现的实体（表名、字段名等）
+调用 SQL 实例上的 `getAllEntities` 方法，传入 sql 文本和指定位置的行列号即可轻松获取。
+```typescript
+  import { FlinkSQL } from 'dt-sql-parser';
+
+  const flink = new FlinkSQL();
+  const sql = 'SELECT * FROM tb;';
+  const pos = { lineNumber: 1, column: 16 }; // tb 的后面
+  const entities = flink.getAllEntities(sql, pos);
+
+  console.log(entities);
+```
+
+*输出*
+
+```typescript
+/*
+  [
+    {
+      entityContextType: 'table',
+      text: 'tb',
+      position: {
+        line: 1,
+        startIndex: 14,
+        endIndex: 15,
+        startColumn: 15,
+        endColumn: 17
+      },
+      belongStmt: {
+        stmtContextType: 'selectStmt',
+        position: [Object],
+        rootStmt: [Object],
+        parentStmt: [Object],
+        isContainCaret: true
+      },
+      relatedEntities: null,
+      columns: null,
+      isAlias: false,
+      origin: null,
+      alias: null
+    }
+  ]
+*/
+```
+
+行列号信息不是必传的，如果传了行列号信息，那么收集到的实体中，如果实体位于对应行列号所在的语句下，那么实体的所属的语句对象上会带有 `isContainCaret` 标识，这在与自动补全功能结合时，可以帮助你快速筛选出需要的实体信息。
+
 ### 其他 API
 
 - `createLexer` 创建一个 Antlr4 Lexer 实例并返回；
@@ -365,7 +374,7 @@ console.log(sqlSlices)
 
 对于一个索引范围，起始索引从 0 开始，以 n-1 结束，如上图中，一个圈定蓝色文本的索引范围应该这样表示：
 
-```javascript
+```typescript
 {
     startIndex: 0,
     endIndex: 3
@@ -378,7 +387,7 @@ console.log(sqlSlices)
 ![line-image](./docs/images/line.png)
 
 对于一个圈定多行的范围，行号从 1 开始，以 n 结束，一个圈定第一行和第二行的范围这样表示：
-```javascript
+```typescript
 {
     startLine: 1,
     endLine: 2
@@ -392,7 +401,7 @@ console.log(sqlSlices)
 
 将列数类比为编辑器的光标位置会更加容易理解。对于一个圈定多列的范围，列数从 1 开始，以 n+1 结束，如上图中，一个圈定蓝色文本的列数范围这样表示：
 
-```javascript
+```typescript
 {
     startColumn: 1,
     endColumn: 5
@@ -404,14 +413,14 @@ dt-sql-parser 的自动补全功能在设计之初就是为了在编辑器中使
 
 但是在一些其他场景下，你可能需要通过转换或者计算来得到自动补全功能所需要的位置信息，那么在此之前，有一些注意事项可能是你需要关心的。
 
-dt-sql-parser 的自动补全功能依赖于 [antlr4-c3](https://github.com/mike-lischke/antlr4-c3), 这是一个很棒的库。dt-sql-parser 的自动补全功能只是基于 antlr4-c3 做了一些封装和转换，包括将行列号信息转换成 antlr4-c3 需要的 token 索引，以下图为例：
+dt-sql-parser 的自动补全功能依赖于 [antlr4-c3](https://github.com/mike-lischke/antlr4-c3)，这是一个很棒的库。dt-sql-parser 的自动补全功能只是基于 antlr4-c3 做了一些封装和转换，包括将行列号信息转换成 antlr4-c3 需要的 token 索引，以下图为例：
 
 ![column-image](./docs/images/token.png)
 
 将图中的 column 视作为光标位置，这段文本放到编辑器中，会得到 13 个可能的光标位置，而对于 dt-sql-parser 来说，这段文本被解析后会生成 4 个 Token。自动补全功能的一个重要策略是：**当光标（自动补全位置）还没有完全离开某个 Token 时，dt-sql-parser 就认为这个 Token 还没有完成，自动补全功能将会去推断这个 Token 所在的位置可以填什么。**
 
 举个例子，如果想要通过自动补全功能知道 `SHOW` 后面应该填什么， 那么对应的位置信息应该是：
-```javascript
+```typescript
 {
     lineNumber: 1,
     column: 6
@@ -423,6 +432,7 @@ dt-sql-parser 的自动补全功能依赖于 [antlr4-c3](https://github.com/mike
 对于编辑器来说，这种策略也更符合直觉。当用户输入了 `SHOW` 以后，在没有敲击空格键之前，用户大概率还没有输入完成，也许用户想要输入的是 `SHOWS` 之类的。当用户敲击了空格键，编辑器会认为用户想要输入下一个 Token，是时候询问 dt-sql-parser 下一个 Token 位置可以填哪些东西了。
 
 <br/>
+
 
 ## 许可证
 
