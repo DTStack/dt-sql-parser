@@ -7,6 +7,8 @@ import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/type
 import { StmtContextType } from '../common/entityCollector';
 import { ImpalaSqlSplitListener } from './impalaSplitListener';
 import { ImpalaEntityCollector } from './impalaEntityCollector';
+import { ErrorListener } from '../common/parseErrorListener';
+import { ImpalaErrorListener } from './ImpalaErrorListener';
 
 export { ImpalaEntityCollector, ImpalaSqlSplitListener };
 
@@ -34,6 +36,10 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
 
     protected get splitListener() {
         return new ImpalaSqlSplitListener();
+    }
+
+    protected createErrorListener(_errorListener: ErrorListener) {
+        return new ImpalaErrorListener(_errorListener, this.preferredRules);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

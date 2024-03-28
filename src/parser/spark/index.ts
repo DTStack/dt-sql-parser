@@ -7,6 +7,8 @@ import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/type
 import { StmtContextType } from '../common/entityCollector';
 import { SparkSqlSplitListener } from './sparkSplitListener';
 import { SparkEntityCollector } from './sparkEntityCollector';
+import { SparkErrorListener } from './sparkErrorListener';
+import { ErrorListener } from '../common/parseErrorListener';
 
 export { SparkSqlSplitListener, SparkEntityCollector };
 
@@ -34,6 +36,10 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
 
     protected get splitListener() {
         return new SparkSqlSplitListener();
+    }
+
+    protected createErrorListener(_errorListener: ErrorListener) {
+        return new SparkErrorListener(_errorListener, this.preferredRules);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

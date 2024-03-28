@@ -24,6 +24,10 @@ export class PLSQL extends BasicSQL<PlSqlLexer, ProgramContext, PlSqlParser> {
         return null as any;
     }
 
+    protected createErrorListener() {
+        return null as any;
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
