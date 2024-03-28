@@ -8,6 +8,7 @@ import {
     ParseTreeWalker,
     ParseTreeListener,
     PredictionMode,
+    ANTLRErrorListener,
 } from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { SQLParserBase } from '../../lib/SQLParserBase';
@@ -79,6 +80,11 @@ export abstract class BasicSQL<
     protected abstract get splitListener(): SplitListener<ParserRuleContext>;
 
     /**
+     * Get a new errorListener instance.
+     */
+    protected abstract createErrorListener(errorListener: ErrorListener<any>): ANTLRErrorListener;
+
+    /**
      * Get a new entityCollector instance.
      */
     protected abstract createEntityCollector(
@@ -95,7 +101,7 @@ export abstract class BasicSQL<
         const lexer = this.createLexerFromCharStream(charStreams);
         if (errorListener) {
             lexer.removeErrorListeners();
-            lexer.addErrorListener(new ParseErrorListener(errorListener));
+            lexer.addErrorListener(this.createErrorListener(errorListener));
         }
         return lexer;
     }
@@ -111,7 +117,7 @@ export abstract class BasicSQL<
         parser.interpreter.predictionMode = PredictionMode.SLL;
         if (errorListener) {
             parser.removeErrorListeners();
-            parser.addErrorListener(new ParseErrorListener(errorListener));
+            parser.addErrorListener(this.createErrorListener(errorListener));
         }
 
         return parser;
@@ -142,7 +148,7 @@ export abstract class BasicSQL<
         this._lexer = this.createLexerFromCharStream(this._charStreams);
 
         this._lexer.removeErrorListeners();
-        this._lexer.addErrorListener(new ParseErrorListener(this._errorListener));
+        this._lexer.addErrorListener(this.createErrorListener(this._errorListener));
 
         this._tokenStream = new CommonTokenStream(this._lexer);
         /**
@@ -178,7 +184,7 @@ export abstract class BasicSQL<
         this._parsedInput = input;
 
         parser.removeErrorListeners();
-        parser.addErrorListener(new ParseErrorListener(this._errorListener));
+        parser.addErrorListener(this.createErrorListener(this._errorListener));
 
         this._parseTree = parser.program();
 
