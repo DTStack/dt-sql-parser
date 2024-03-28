@@ -51,7 +51,7 @@ yarn add dt-sql-parser
 ## 使用
 在开始使用前，需要先了解基本用法。`dt-sql-parser` 为不同类型的 SQL 分别提供相应的 SQL 类：
 ```typescript
-import { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgresQL, TrinoSQL, ImpalaSQL } from 'dt-sql-parser';
+import { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgreSQL, TrinoSQL, ImpalaSQL } from 'dt-sql-parser';
 ```
 
 在使用语法校验，自动补全等功能之前，需要先实例化对应 SQL 类，以 `MySQL` 为例：
