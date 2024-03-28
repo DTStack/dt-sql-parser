@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.12](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.11...v4.0.0-beta.4.12) (2024-03-28)
+
+
+### Features
+
+* add toMatchUnorderedArrary matcher and apply it ([#271](https://github.com/DTStack/dt-sql-parser/issues/271)) ([a05f099](https://github.com/DTStack/dt-sql-parser/commit/a05f099aa1ad555c408bc2018240fb4611ec09b8))
+* collect entity ([#265](https://github.com/DTStack/dt-sql-parser/issues/265)) ([a997211](https://github.com/DTStack/dt-sql-parser/commit/a99721162be0d463b513f53bb13ada6d10168548)), closes [#256](https://github.com/DTStack/dt-sql-parser/issues/256) [#263](https://github.com/DTStack/dt-sql-parser/issues/263) [#268](https://github.com/DTStack/dt-sql-parser/issues/268)
+* migrate to antlr4ng ([#267](https://github.com/DTStack/dt-sql-parser/issues/267)) ([195878d](https://github.com/DTStack/dt-sql-parser/commit/195878da9bb1ff8011b5d60c02389fa66d2bc0b8))
+* **spark:** support materialized view for spark sql ([#262](https://github.com/DTStack/dt-sql-parser/issues/262)) ([5ce89cb](https://github.com/DTStack/dt-sql-parser/commit/5ce89cb421de18330d56e23a4ab5b658b2130a0b))
+* use SLL mode ([#269](https://github.com/DTStack/dt-sql-parser/issues/269)) ([3f62ad0](https://github.com/DTStack/dt-sql-parser/commit/3f62ad0d3241f574f7caaa8fc52a6e8189484e91))
+
+
+### Bug Fixes
+
+* **pgsql:** (issue [#255](https://github.com/DTStack/dt-sql-parser/issues/255)) select from support view name ([#257](https://github.com/DTStack/dt-sql-parser/issues/257)) ([337885b](https://github.com/DTStack/dt-sql-parser/commit/337885be8bb011fefff39bb1b5078b74e5168b90))
+* trino validation ([#248](https://github.com/DTStack/dt-sql-parser/issues/248)) ([1038a3a](https://github.com/DTStack/dt-sql-parser/commit/1038a3a828a60b4382dcddf8bb08bd0dc8be78da)), closes [#246](https://github.com/DTStack/dt-sql-parser/issues/246)
+
 ## [4.0.0-beta.4.11](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.10...v4.0.0-beta.4.11) (2024-01-04)
 
 
