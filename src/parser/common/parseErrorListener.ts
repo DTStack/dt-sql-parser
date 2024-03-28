@@ -4,6 +4,11 @@ import {
     ANTLRErrorListener,
     RecognitionException,
     ATNSimulator,
+    LexerNoViableAltException,
+    Lexer,
+    Parser,
+    InputMismatchException,
+    NoViableAltException,
 } from 'antlr4ng';
 
 /**
@@ -39,7 +44,7 @@ export interface SyntaxError {
  */
 export type ErrorListener = (parseError: ParseError, originalError: SyntaxError) => void;
 
-export class ParseErrorListener implements ANTLRErrorListener {
+export abstract class ParseErrorListener implements ANTLRErrorListener {
     private _errorListener: ErrorListener;
 
     constructor(errorListener: ErrorListener) {
@@ -52,6 +57,8 @@ export class ParseErrorListener implements ANTLRErrorListener {
 
     reportContextSensitivity() {}
 
+    protected abstract getExpectedText(parser: Parser, token: Token): string;
+
     syntaxError(
         recognizer: Recognizer<ATNSimulator>,
         offendingSymbol: Token | null,
@@ -60,6 +67,74 @@ export class ParseErrorListener implements ANTLRErrorListener {
         msg: string,
         e: RecognitionException
     ) {
+        let message = '';
+        // If not undefined then offendingSymbol is of type Token.
+        if (offendingSymbol) {
+            let token = offendingSymbol as Token;
+            const parser = recognizer as Parser;
+
+            // judge token is EOF
+            const isEof = token.type === Token.EOF;
+            if (isEof) {
+                token = parser.tokenStream.get(token.tokenIndex - 1);
+            }
+            const wrongText = token.text ?? '';
+
+            const isInComplete = isEof && wrongText !== ' ';
+
+            const expectedText = isInComplete ? '' : this.getExpectedText(parser, token);
+
+            if (!e) {
+                // handle missing or unwanted tokens.
+                message = msg;
+                if (msg.includes('extraneous')) {
+                    message = `'${wrongText}' is not valid at this position${
+                        expectedText.length ? `, expecting ${expectedText}` : ''
+                    }`;
+                }
+            } else {
+                // handle mismatch exception or no viable alt exception
+                if (e instanceof InputMismatchException || e instanceof NoViableAltException) {
+                    if (isEof) {
+                        message = `statement is incomplete`;
+                    } else {
+                        message = `'${wrongText}' is not valid at this position`;
+                    }
+                    if (expectedText.length > 0) {
+                        message += `, expecting ${expectedText}`;
+                    }
+                } else {
+                    message = msg;
+                }
+            }
+        } else {
+            // No offending symbol, which indicates this is a lexer error.
+            if (e instanceof LexerNoViableAltException) {
+                const lexer = recognizer as Lexer;
+                const input = lexer.inputStream;
+                let text = lexer.getErrorDisplay(
+                    input.getText(lexer._tokenStartCharIndex, input.index)
+                );
+                switch (text[0]) {
+                    case '/':
+                        message = 'Unfinished multiline comment';
+                        break;
+                    case '"':
+                        message = 'Unfinished double quoted string literal';
+                        break;
+                    case "'":
+                        message = 'Unfinished single quoted string literal';
+                        break;
+                    case '`':
+                        message = 'Unfinished back tick quoted string literal';
+                        break;
+
+                    default:
+                        message = '"' + text + '" is no valid input at all';
+                        break;
+                }
+            }
+        }
         let endCol = charPositionInLine + 1;
         if (offendingSymbol && offendingSymbol.text !== null) {
             endCol = charPositionInLine + offendingSymbol.text.length;
@@ -71,7 +146,7 @@ export class ParseErrorListener implements ANTLRErrorListener {
                     endLine: line,
                     startColumn: charPositionInLine + 1,
                     endColumn: endCol + 1,
-                    message: msg,
+                    message: message,
                 },
                 {
                     e,
