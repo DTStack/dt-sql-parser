@@ -1,22 +1,23 @@
 import { CodeCompletionCore } from 'antlr4-c3';
 import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
-import { MySqlParser } from '../../lib/mysql/MySqlParser';
+import { TrinoSqlParser } from '../../lib/trino/TrinoSqlParser';
 
-export class MysqlErrorListener extends ParseErrorListener {
+export class TrinoErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
 
     private objectNames: Map<number, string> = new Map([
-        [MySqlParser.RULE_databaseName, 'database'],
-        [MySqlParser.RULE_databaseNameCreate, 'database'],
-        [MySqlParser.RULE_tableName, 'table'],
-        [MySqlParser.RULE_tableNameCreate, 'table'],
-        [MySqlParser.RULE_viewName, 'view'],
-        [MySqlParser.RULE_viewNameCreate, 'view'],
-        [MySqlParser.RULE_functionName, 'function'],
-        [MySqlParser.RULE_functionNameCreate, 'function'],
-        [MySqlParser.RULE_columnName, 'column'],
-        [MySqlParser.RULE_columnNameCreate, 'column'],
+        [TrinoSqlParser.RULE_catalogName, 'database'],
+        [TrinoSqlParser.RULE_catalogNameCreate, 'database'],
+        [TrinoSqlParser.RULE_tableName, 'table'],
+        [TrinoSqlParser.RULE_tableNameCreate, 'table'],
+        [TrinoSqlParser.RULE_viewName, 'view'],
+        [TrinoSqlParser.RULE_viewNameCreate, 'view'],
+        [TrinoSqlParser.RULE_schemaName, 'schema'],
+        [TrinoSqlParser.RULE_schemaNameCreate, 'schema'],
+        [TrinoSqlParser.RULE_functionName, 'function'],
+        [TrinoSqlParser.RULE_columnName, 'column'],
+        [TrinoSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
     constructor(errorListener: ErrorListener, preferredRules: Set<number>) {
@@ -42,11 +43,12 @@ export class MysqlErrorListener extends ParseErrorListener {
                 const [ruleType] = candidate;
                 const name = this.objectNames.get(ruleType);
                 switch (ruleType) {
-                    case MySqlParser.RULE_databaseName:
-                    case MySqlParser.RULE_tableName:
-                    case MySqlParser.RULE_functionName:
-                    case MySqlParser.RULE_viewName:
-                    case MySqlParser.RULE_columnName: {
+                    case TrinoSqlParser.RULE_catalogName:
+                    case TrinoSqlParser.RULE_schemaName:
+                    case TrinoSqlParser.RULE_tableName:
+                    case TrinoSqlParser.RULE_viewName:
+                    case TrinoSqlParser.RULE_functionName:
+                    case TrinoSqlParser.RULE_columnName: {
                         if (!name) {
                             expectedText = 'a new object name';
                         } else {
@@ -54,11 +56,11 @@ export class MysqlErrorListener extends ParseErrorListener {
                         }
                         break;
                     }
-                    case MySqlParser.RULE_databaseNameCreate:
-                    case MySqlParser.RULE_tableNameCreate:
-                    case MySqlParser.RULE_functionNameCreate:
-                    case MySqlParser.RULE_viewNameCreate:
-                    case MySqlParser.RULE_columnNameCreate: {
+                    case TrinoSqlParser.RULE_catalogNameCreate:
+                    case TrinoSqlParser.RULE_tableNameCreate:
+                    case TrinoSqlParser.RULE_schemaNameCreate:
+                    case TrinoSqlParser.RULE_viewNameCreate:
+                    case TrinoSqlParser.RULE_tableNameCreate: {
                         if (!name) {
                             expectedText = 'an existing object';
                         } else {

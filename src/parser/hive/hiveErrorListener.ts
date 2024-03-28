@@ -1,22 +1,23 @@
 import { CodeCompletionCore } from 'antlr4-c3';
 import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
-import { MySqlParser } from '../../lib/mysql/MySqlParser';
+import { HiveSqlParser } from '../../lib/hive/HiveSqlParser';
 
-export class MysqlErrorListener extends ParseErrorListener {
+export class HiveErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
 
     private objectNames: Map<number, string> = new Map([
-        [MySqlParser.RULE_databaseName, 'database'],
-        [MySqlParser.RULE_databaseNameCreate, 'database'],
-        [MySqlParser.RULE_tableName, 'table'],
-        [MySqlParser.RULE_tableNameCreate, 'table'],
-        [MySqlParser.RULE_viewName, 'view'],
-        [MySqlParser.RULE_viewNameCreate, 'view'],
-        [MySqlParser.RULE_functionName, 'function'],
-        [MySqlParser.RULE_functionNameCreate, 'function'],
-        [MySqlParser.RULE_columnName, 'column'],
-        [MySqlParser.RULE_columnNameCreate, 'column'],
+        [HiveSqlParser.RULE_dbSchemaName, 'database'],
+        [HiveSqlParser.RULE_dbSchemaNameCreate, 'database'],
+        [HiveSqlParser.RULE_tableName, 'table'],
+        [HiveSqlParser.RULE_tableNameCreate, 'table'],
+        [HiveSqlParser.RULE_viewName, 'view'],
+        [HiveSqlParser.RULE_viewNameCreate, 'view'],
+        [HiveSqlParser.RULE_functionNameForDDL, 'function'],
+        [HiveSqlParser.RULE_functionNameForInvoke, 'function'],
+        [HiveSqlParser.RULE_functionNameCreate, 'function'],
+        [HiveSqlParser.RULE_columnName, 'column'],
+        [HiveSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
     constructor(errorListener: ErrorListener, preferredRules: Set<number>) {
@@ -42,11 +43,12 @@ export class MysqlErrorListener extends ParseErrorListener {
                 const [ruleType] = candidate;
                 const name = this.objectNames.get(ruleType);
                 switch (ruleType) {
-                    case MySqlParser.RULE_databaseName:
-                    case MySqlParser.RULE_tableName:
-                    case MySqlParser.RULE_functionName:
-                    case MySqlParser.RULE_viewName:
-                    case MySqlParser.RULE_columnName: {
+                    case HiveSqlParser.RULE_dbSchemaName:
+                    case HiveSqlParser.RULE_tableName:
+                    case HiveSqlParser.RULE_viewName:
+                    case HiveSqlParser.RULE_functionNameForDDL:
+                    case HiveSqlParser.RULE_functionNameForInvoke:
+                    case HiveSqlParser.RULE_columnName: {
                         if (!name) {
                             expectedText = 'a new object name';
                         } else {
@@ -54,11 +56,11 @@ export class MysqlErrorListener extends ParseErrorListener {
                         }
                         break;
                     }
-                    case MySqlParser.RULE_databaseNameCreate:
-                    case MySqlParser.RULE_tableNameCreate:
-                    case MySqlParser.RULE_functionNameCreate:
-                    case MySqlParser.RULE_viewNameCreate:
-                    case MySqlParser.RULE_columnNameCreate: {
+                    case HiveSqlParser.RULE_dbSchemaNameCreate:
+                    case HiveSqlParser.RULE_tableNameCreate:
+                    case HiveSqlParser.RULE_functionNameCreate:
+                    case HiveSqlParser.RULE_viewNameCreate:
+                    case HiveSqlParser.RULE_columnNameCreate: {
                         if (!name) {
                             expectedText = 'an existing object';
                         } else {

@@ -1,22 +1,26 @@
 import { CodeCompletionCore } from 'antlr4-c3';
 import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
-import { MySqlParser } from '../../lib/mysql/MySqlParser';
+import { PostgreSqlParser } from '../../lib/postgresql/PostgreSqlParser';
 
-export class MysqlErrorListener extends ParseErrorListener {
+export class PostgreSqlErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
 
     private objectNames: Map<number, string> = new Map([
-        [MySqlParser.RULE_databaseName, 'database'],
-        [MySqlParser.RULE_databaseNameCreate, 'database'],
-        [MySqlParser.RULE_tableName, 'table'],
-        [MySqlParser.RULE_tableNameCreate, 'table'],
-        [MySqlParser.RULE_viewName, 'view'],
-        [MySqlParser.RULE_viewNameCreate, 'view'],
-        [MySqlParser.RULE_functionName, 'function'],
-        [MySqlParser.RULE_functionNameCreate, 'function'],
-        [MySqlParser.RULE_columnName, 'column'],
-        [MySqlParser.RULE_columnNameCreate, 'column'],
+        [PostgreSqlParser.RULE_database_name, 'database'],
+        [PostgreSqlParser.RULE_database_name_create, 'database'],
+        [PostgreSqlParser.RULE_table_name, 'table'],
+        [PostgreSqlParser.RULE_table_name_create, 'table'],
+        [PostgreSqlParser.RULE_view_name, 'view'],
+        [PostgreSqlParser.RULE_view_name_create, 'view'],
+        [PostgreSqlParser.RULE_function_name, 'function'],
+        [PostgreSqlParser.RULE_function_name_create, 'function'],
+        [PostgreSqlParser.RULE_column_name, 'column'],
+        [PostgreSqlParser.RULE_column_name_create, 'column'],
+        [PostgreSqlParser.RULE_schema_name_create, 'schema'],
+        [PostgreSqlParser.RULE_schema_name, 'schema'],
+        [PostgreSqlParser.RULE_procedure_name_create, 'procedure'],
+        [PostgreSqlParser.RULE_procedure_name, 'procedure'],
     ]);
 
     constructor(errorListener: ErrorListener, preferredRules: Set<number>) {
@@ -42,11 +46,13 @@ export class MysqlErrorListener extends ParseErrorListener {
                 const [ruleType] = candidate;
                 const name = this.objectNames.get(ruleType);
                 switch (ruleType) {
-                    case MySqlParser.RULE_databaseName:
-                    case MySqlParser.RULE_tableName:
-                    case MySqlParser.RULE_functionName:
-                    case MySqlParser.RULE_viewName:
-                    case MySqlParser.RULE_columnName: {
+                    case PostgreSqlParser.RULE_table_name:
+                    case PostgreSqlParser.RULE_function_name:
+                    case PostgreSqlParser.RULE_schema_name:
+                    case PostgreSqlParser.RULE_view_name:
+                    case PostgreSqlParser.RULE_database_name:
+                    case PostgreSqlParser.RULE_procedure_name:
+                    case PostgreSqlParser.RULE_column_name: {
                         if (!name) {
                             expectedText = 'a new object name';
                         } else {
@@ -54,11 +60,13 @@ export class MysqlErrorListener extends ParseErrorListener {
                         }
                         break;
                     }
-                    case MySqlParser.RULE_databaseNameCreate:
-                    case MySqlParser.RULE_tableNameCreate:
-                    case MySqlParser.RULE_functionNameCreate:
-                    case MySqlParser.RULE_viewNameCreate:
-                    case MySqlParser.RULE_columnNameCreate: {
+                    case PostgreSqlParser.RULE_table_name_create:
+                    case PostgreSqlParser.RULE_function_name_create:
+                    case PostgreSqlParser.RULE_schema_name_create:
+                    case PostgreSqlParser.RULE_view_name_create:
+                    case PostgreSqlParser.RULE_database_name_create:
+                    case PostgreSqlParser.RULE_procedure_name_create:
+                    case PostgreSqlParser.RULE_column_name_create: {
                         if (!name) {
                             expectedText = 'an existing object';
                         } else {

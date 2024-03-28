@@ -1,22 +1,22 @@
 import { CodeCompletionCore } from 'antlr4-c3';
 import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
-import { MySqlParser } from '../../lib/mysql/MySqlParser';
+import { SparkSqlParser } from '../../lib/spark/SparkSqlParser';
 
-export class MysqlErrorListener extends ParseErrorListener {
+export class SparkErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
 
     private objectNames: Map<number, string> = new Map([
-        [MySqlParser.RULE_databaseName, 'database'],
-        [MySqlParser.RULE_databaseNameCreate, 'database'],
-        [MySqlParser.RULE_tableName, 'table'],
-        [MySqlParser.RULE_tableNameCreate, 'table'],
-        [MySqlParser.RULE_viewName, 'view'],
-        [MySqlParser.RULE_viewNameCreate, 'view'],
-        [MySqlParser.RULE_functionName, 'function'],
-        [MySqlParser.RULE_functionNameCreate, 'function'],
-        [MySqlParser.RULE_columnName, 'column'],
-        [MySqlParser.RULE_columnNameCreate, 'column'],
+        [SparkSqlParser.RULE_namespaceName, 'namespace'],
+        [SparkSqlParser.RULE_namespaceNameCreate, 'namespace'],
+        [SparkSqlParser.RULE_tableName, 'table'],
+        [SparkSqlParser.RULE_tableNameCreate, 'table'],
+        [SparkSqlParser.RULE_viewName, 'view'],
+        [SparkSqlParser.RULE_viewNameCreate, 'view'],
+        [SparkSqlParser.RULE_functionName, 'function'],
+        [SparkSqlParser.RULE_functionNameCreate, 'function'],
+        [SparkSqlParser.RULE_columnName, 'column'],
+        [SparkSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
     constructor(errorListener: ErrorListener, preferredRules: Set<number>) {
@@ -42,11 +42,11 @@ export class MysqlErrorListener extends ParseErrorListener {
                 const [ruleType] = candidate;
                 const name = this.objectNames.get(ruleType);
                 switch (ruleType) {
-                    case MySqlParser.RULE_databaseName:
-                    case MySqlParser.RULE_tableName:
-                    case MySqlParser.RULE_functionName:
-                    case MySqlParser.RULE_viewName:
-                    case MySqlParser.RULE_columnName: {
+                    case SparkSqlParser.RULE_namespaceName:
+                    case SparkSqlParser.RULE_tableName:
+                    case SparkSqlParser.RULE_viewName:
+                    case SparkSqlParser.RULE_functionName:
+                    case SparkSqlParser.RULE_columnName: {
                         if (!name) {
                             expectedText = 'a new object name';
                         } else {
@@ -54,11 +54,11 @@ export class MysqlErrorListener extends ParseErrorListener {
                         }
                         break;
                     }
-                    case MySqlParser.RULE_databaseNameCreate:
-                    case MySqlParser.RULE_tableNameCreate:
-                    case MySqlParser.RULE_functionNameCreate:
-                    case MySqlParser.RULE_viewNameCreate:
-                    case MySqlParser.RULE_columnNameCreate: {
+                    case SparkSqlParser.RULE_namespaceNameCreate:
+                    case SparkSqlParser.RULE_tableNameCreate:
+                    case SparkSqlParser.RULE_functionNameCreate:
+                    case SparkSqlParser.RULE_viewNameCreate:
+                    case SparkSqlParser.RULE_columnNameCreate: {
                         if (!name) {
                             expectedText = 'an existing object';
                         } else {
