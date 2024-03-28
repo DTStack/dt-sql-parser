@@ -8,6 +8,8 @@ import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/type
 import { StmtContextType } from '../common/entityCollector';
 import { HiveSqlSplitListener } from './hiveSplitListener';
 import { HiveEntityCollector } from './hiveEntityCollector';
+import { ErrorListener } from '../common/parseErrorListener';
+import { HiveErrorListener } from './hiveErrorListener';
 
 export { HiveEntityCollector, HiveSqlSplitListener };
 
@@ -36,6 +38,10 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
 
     protected get splitListener() {
         return new HiveSqlSplitListener();
+    }
+
+    protected createErrorListener(_errorListener: ErrorListener) {
+        return new HiveErrorListener(_errorListener, this.preferredRules);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

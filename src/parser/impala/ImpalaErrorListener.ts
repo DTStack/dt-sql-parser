@@ -1,22 +1,22 @@
 import { CodeCompletionCore } from 'antlr4-c3';
 import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
-import { MySqlParser } from '../../lib/mysql/MySqlParser';
+import { ImpalaSqlParser } from '../../lib/impala/ImpalaSqlParser';
 
-export class MysqlErrorListener extends ParseErrorListener {
+export class ImpalaErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
 
     private objectNames: Map<number, string> = new Map([
-        [MySqlParser.RULE_databaseName, 'database'],
-        [MySqlParser.RULE_databaseNameCreate, 'database'],
-        [MySqlParser.RULE_tableName, 'table'],
-        [MySqlParser.RULE_tableNameCreate, 'table'],
-        [MySqlParser.RULE_viewName, 'view'],
-        [MySqlParser.RULE_viewNameCreate, 'view'],
-        [MySqlParser.RULE_functionName, 'function'],
-        [MySqlParser.RULE_functionNameCreate, 'function'],
-        [MySqlParser.RULE_columnName, 'column'],
-        [MySqlParser.RULE_columnNameCreate, 'column'],
+        [ImpalaSqlParser.RULE_databaseNamePath, 'database'],
+        [ImpalaSqlParser.RULE_databaseNameCreate, 'database'],
+        [ImpalaSqlParser.RULE_tableNamePath, 'table'],
+        [ImpalaSqlParser.RULE_tableNameCreate, 'table'],
+        [ImpalaSqlParser.RULE_viewNamePath, 'view'],
+        [ImpalaSqlParser.RULE_viewNameCreate, 'view'],
+        [ImpalaSqlParser.RULE_functionNamePath, 'function'],
+        [ImpalaSqlParser.RULE_functionNameCreate, 'function'],
+        [ImpalaSqlParser.RULE_columnNamePath, 'column'],
+        [ImpalaSqlParser.RULE_columnNamePathCreate, 'column'],
     ]);
 
     constructor(errorListener: ErrorListener, preferredRules: Set<number>) {
@@ -42,11 +42,11 @@ export class MysqlErrorListener extends ParseErrorListener {
                 const [ruleType] = candidate;
                 const name = this.objectNames.get(ruleType);
                 switch (ruleType) {
-                    case MySqlParser.RULE_databaseName:
-                    case MySqlParser.RULE_tableName:
-                    case MySqlParser.RULE_functionName:
-                    case MySqlParser.RULE_viewName:
-                    case MySqlParser.RULE_columnName: {
+                    case ImpalaSqlParser.RULE_databaseNamePath:
+                    case ImpalaSqlParser.RULE_tableNamePath:
+                    case ImpalaSqlParser.RULE_functionNamePath:
+                    case ImpalaSqlParser.RULE_viewNamePath:
+                    case ImpalaSqlParser.RULE_columnNamePath: {
                         if (!name) {
                             expectedText = 'a new object name';
                         } else {
@@ -54,11 +54,11 @@ export class MysqlErrorListener extends ParseErrorListener {
                         }
                         break;
                     }
-                    case MySqlParser.RULE_databaseNameCreate:
-                    case MySqlParser.RULE_tableNameCreate:
-                    case MySqlParser.RULE_functionNameCreate:
-                    case MySqlParser.RULE_viewNameCreate:
-                    case MySqlParser.RULE_columnNameCreate: {
+                    case ImpalaSqlParser.RULE_databaseNameCreate:
+                    case ImpalaSqlParser.RULE_tableNameCreate:
+                    case ImpalaSqlParser.RULE_functionNameCreate:
+                    case ImpalaSqlParser.RULE_viewNameCreate:
+                    case ImpalaSqlParser.RULE_columnNamePathCreate: {
                         if (!name) {
                             expectedText = 'an existing object';
                         } else {

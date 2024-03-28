@@ -7,6 +7,8 @@ import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/type
 import { StmtContextType } from '../common/entityCollector';
 import { TrinoSqlSplitListener } from './trinoSplitListener';
 import { TrinoEntityCollector } from './trinoEntityCollector';
+import { ErrorListener } from '../common/parseErrorListener';
+import { TrinoErrorListener } from './trinoErrorListener';
 
 export { TrinoSqlSplitListener, TrinoEntityCollector };
 
@@ -21,6 +23,10 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
 
     protected get splitListener() {
         return new TrinoSqlSplitListener();
+    }
+
+    protected createErrorListener(_errorListener: ErrorListener) {
+        return new TrinoErrorListener(_errorListener, this.preferredRules);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

@@ -15,7 +15,7 @@ import { SQLParserBase } from '../../lib/SQLParserBase';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
 import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
 import { CaretPosition, Suggestions, SyntaxSuggestion } from './types';
-import { ParseError, ErrorListener, ParseErrorListener } from './parseErrorListener';
+import { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
 import type { SplitListener } from './splitListener';
 import type { EntityCollector } from './entityCollector';
@@ -82,7 +82,7 @@ export abstract class BasicSQL<
     /**
      * Get a new errorListener instance.
      */
-    protected abstract createErrorListener(errorListener: ErrorListener<any>): ANTLRErrorListener;
+    protected abstract createErrorListener(errorListener: ErrorListener): ANTLRErrorListener;
 
     /**
      * Get a new entityCollector instance.

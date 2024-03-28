@@ -1,22 +1,23 @@
 import { CodeCompletionCore } from 'antlr4-c3';
 import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
-import { MySqlParser } from '../../lib/mysql/MySqlParser';
+import { FlinkSqlParser } from '../../lib/flink/FlinkSqlParser';
 
-export class MysqlErrorListener extends ParseErrorListener {
+export class FlinkErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
 
     private objectNames: Map<number, string> = new Map([
-        [MySqlParser.RULE_databaseName, 'database'],
-        [MySqlParser.RULE_databaseNameCreate, 'database'],
-        [MySqlParser.RULE_tableName, 'table'],
-        [MySqlParser.RULE_tableNameCreate, 'table'],
-        [MySqlParser.RULE_viewName, 'view'],
-        [MySqlParser.RULE_viewNameCreate, 'view'],
-        [MySqlParser.RULE_functionName, 'function'],
-        [MySqlParser.RULE_functionNameCreate, 'function'],
-        [MySqlParser.RULE_columnName, 'column'],
-        [MySqlParser.RULE_columnNameCreate, 'column'],
+        [FlinkSqlParser.RULE_catalogPath, 'catalog'],
+        [FlinkSqlParser.RULE_databasePath, 'database'],
+        [FlinkSqlParser.RULE_databasePathCreate, 'database'],
+        [FlinkSqlParser.RULE_tablePath, 'table'],
+        [FlinkSqlParser.RULE_tablePathCreate, 'table'],
+        [FlinkSqlParser.RULE_viewPath, 'view'],
+        [FlinkSqlParser.RULE_viewPathCreate, 'view'],
+        [FlinkSqlParser.RULE_functionName, 'function'],
+        [FlinkSqlParser.RULE_functionNameCreate, 'function'],
+        [FlinkSqlParser.RULE_columnName, 'column'],
+        [FlinkSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
     constructor(errorListener: ErrorListener, preferredRules: Set<number>) {
@@ -42,11 +43,11 @@ export class MysqlErrorListener extends ParseErrorListener {
                 const [ruleType] = candidate;
                 const name = this.objectNames.get(ruleType);
                 switch (ruleType) {
-                    case MySqlParser.RULE_databaseName:
-                    case MySqlParser.RULE_tableName:
-                    case MySqlParser.RULE_functionName:
-                    case MySqlParser.RULE_viewName:
-                    case MySqlParser.RULE_columnName: {
+                    case FlinkSqlParser.RULE_databasePath:
+                    case FlinkSqlParser.RULE_tablePath:
+                    case FlinkSqlParser.RULE_viewPath:
+                    case FlinkSqlParser.RULE_functionName:
+                    case FlinkSqlParser.RULE_columnName: {
                         if (!name) {
                             expectedText = 'a new object name';
                         } else {
@@ -54,11 +55,11 @@ export class MysqlErrorListener extends ParseErrorListener {
                         }
                         break;
                     }
-                    case MySqlParser.RULE_databaseNameCreate:
-                    case MySqlParser.RULE_tableNameCreate:
-                    case MySqlParser.RULE_functionNameCreate:
-                    case MySqlParser.RULE_viewNameCreate:
-                    case MySqlParser.RULE_columnNameCreate: {
+                    case FlinkSqlParser.RULE_databasePathCreate:
+                    case FlinkSqlParser.RULE_tablePathCreate:
+                    case FlinkSqlParser.RULE_functionNameCreate:
+                    case FlinkSqlParser.RULE_viewPathCreate:
+                    case FlinkSqlParser.RULE_columnNameCreate: {
                         if (!name) {
                             expectedText = 'an existing object';
                         } else {
