@@ -241,7 +241,6 @@ console.log(sqlSlices)
 
 ### Code Completion
 Obtaining code completion information at a specified position in SQL.
-We can refer to the example of using `FlinkSQL`.
 
 Call the `getAllEntities` method on the SQL instance, pass the SQL content and the row and column numbers indicating the position where code completion is desired. The following are some additional explanations about [CaretPosition](#caretposition-of-code-completion).
 + **keyword candidates list**
@@ -309,7 +308,7 @@ Call the `getAllEntities` method on the SQL instance, pass the SQL content and t
 The grammar-related code completion information returns an array, where each item represents what grammar can be filled in at that position. For example, the output in the above example represents that the position can be filled with either a **table name** or **a view name**. In this case, `syntaxContextType` represents the type of grammar that can be completed, and `wordRanges` represents the content that has already been filled.
 
 
-### 获取 SQL 中出现的实体（表名、字段名等）
+### Get all entities in SQL (e.g. table, column)
 Call the `getAllEntities` method on the SQL instance, and pass in the sql text and the row and column numbers at the specified location to easily get them.
 
 ```typescript
@@ -355,7 +354,7 @@ Call the `getAllEntities` method on the SQL instance, and pass in the sql text a
 */
 ```
 
-Position is not required, if the position is passed, then in the collected entities, if the entity is located under the statement where the corresponding position is located, then the statement object to which the entity belongs will be marked with 'isContainCaret', which can help you quickly filter out the required entities when combined with the code completion function.
+Position is not required, if the position is passed, then in the collected entities, if the entity is located under the statement where the corresponding position is located, then the statement object to which the entity belongs will be marked with `isContainCaret`, which can help you quickly filter out the required entities when combined with the code completion function.
 
 ### Other API
 
