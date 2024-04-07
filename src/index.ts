@@ -9,7 +9,7 @@ export {
     PLSQL,
 } from './parser';
 
-export type {
+export {
     MySqlParserListener,
     MySqlParserVisitor,
     FlinkSqlParserListener,
