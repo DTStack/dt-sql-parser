@@ -2,6 +2,7 @@ import { CodeCompletionCore } from 'antlr4-c3';
 import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
 import { TrinoSqlParser } from '../../lib/trino/TrinoSqlParser';
+import { LOCALE_TYPE } from '../common/types';
 
 export class TrinoErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
@@ -20,8 +21,8 @@ export class TrinoErrorListener extends ParseErrorListener {
         [TrinoSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
-    constructor(errorListener: ErrorListener, preferredRules: Set<number>) {
-        super(errorListener);
+    constructor(errorListener: ErrorListener, preferredRules: Set<number>, locale: LOCALE_TYPE) {
+        super(errorListener, locale);
         this.preferredRules = preferredRules;
     }
 
@@ -50,9 +51,9 @@ export class TrinoErrorListener extends ParseErrorListener {
                     case TrinoSqlParser.RULE_functionName:
                     case TrinoSqlParser.RULE_columnName: {
                         if (!name) {
-                            expectedText = 'a new object name';
+                            expectedText = '{newObj}';
                         } else {
-                            expectedText = `a new ${name} name`;
+                            expectedText = `{new}${name}`;
                         }
                         break;
                     }
@@ -62,9 +63,9 @@ export class TrinoErrorListener extends ParseErrorListener {
                     case TrinoSqlParser.RULE_viewNameCreate:
                     case TrinoSqlParser.RULE_tableNameCreate: {
                         if (!name) {
-                            expectedText = 'an existing object';
+                            expectedText = '{existingObj}';
                         } else {
-                            expectedText = `an existing ${name}`;
+                            expectedText = `{existing}${name}`;
                         }
                         break;
                     }
@@ -72,7 +73,7 @@ export class TrinoErrorListener extends ParseErrorListener {
             }
         }
         if (candidates.tokens.size) {
-            expectedText += expectedText ? ' or a keyword' : 'a keyword';
+            expectedText += expectedText ? '{orKeyword}' : '{keyword}';
         }
         return expectedText;
     }

@@ -14,7 +14,7 @@ import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { SQLParserBase } from '../../lib/SQLParserBase';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
 import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
-import { CaretPosition, Suggestions, SyntaxSuggestion } from './types';
+import { CaretPosition, LOCALE_TYPE, Suggestions, SyntaxSuggestion } from './types';
 import { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
 import type { SplitListener } from './splitListener';
@@ -91,6 +91,8 @@ export abstract class BasicSQL<
         input: string,
         caretTokenIndex?: number
     ): EntityCollector;
+
+    public locale: LOCALE_TYPE = 'en_US';
 
     /**
      * Create an antlr4 lexer from input.

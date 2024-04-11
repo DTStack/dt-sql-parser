@@ -39,7 +39,7 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
     }
 
     protected createErrorListener(_errorListener: ErrorListener) {
-        return new ImpalaErrorListener(_errorListener, this.preferredRules);
+        return new ImpalaErrorListener(_errorListener, this.preferredRules, this.locale);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

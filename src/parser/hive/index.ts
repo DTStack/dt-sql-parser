@@ -41,7 +41,7 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
     }
 
     protected createErrorListener(_errorListener: ErrorListener) {
-        return new HiveErrorListener(_errorListener, this.preferredRules);
+        return new HiveErrorListener(_errorListener, this.preferredRules, this.locale);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

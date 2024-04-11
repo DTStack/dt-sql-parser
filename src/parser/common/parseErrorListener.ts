@@ -10,6 +10,8 @@ import {
     InputMismatchException,
     NoViableAltException,
 } from 'antlr4ng';
+import { LOCALE_TYPE } from './types';
+import { transformToI18n } from './transformToI18n';
 
 /**
  * Converted from {@link SyntaxError}.
@@ -46,8 +48,10 @@ export type ErrorListener = (parseError: ParseError, originalError: SyntaxError)
 
 export abstract class ParseErrorListener implements ANTLRErrorListener {
     private _errorListener: ErrorListener;
+    private locale: LOCALE_TYPE;
 
-    constructor(errorListener: ErrorListener) {
+    constructor(errorListener: ErrorListener, locale: LOCALE_TYPE = 'en_US') {
+        this.locale = locale;
         this._errorListener = errorListener;
     }
 
@@ -88,20 +92,32 @@ export abstract class ParseErrorListener implements ANTLRErrorListener {
                 // handle missing or unwanted tokens.
                 message = msg;
                 if (msg.includes('extraneous')) {
-                    message = `'${wrongText}' is not valid at this position${
-                        expectedText.length ? `, expecting ${expectedText}` : ''
+                    message = `'${wrongText}' {noValidPosition}${
+                        expectedText.length ? `{expecting}${expectedText}` : ''
                     }`;
+                }
+                if (msg.includes('missing')) {
+                    const regex = /missing\s+'([^']+)'/;
+                    const match = msg.match(regex);
+                    message = `{missing}`;
+                    if (match) {
+                        const missKeyword = match[1];
+                        message += `'${missKeyword}'`;
+                    } else {
+                        message += `{keyword}`;
+                    }
+                    message += `{at}'${wrongText}'`;
                 }
             } else {
                 // handle mismatch exception or no viable alt exception
                 if (e instanceof InputMismatchException || e instanceof NoViableAltException) {
                     if (isEof) {
-                        message = `statement is incomplete`;
+                        message = `{stmtInComplete}`;
                     } else {
-                        message = `'${wrongText}' is not valid at this position`;
+                        message = `'${wrongText}' {noValidPosition}`;
                     }
                     if (expectedText.length > 0) {
-                        message += `, expecting ${expectedText}`;
+                        message += `{expecting}${expectedText}`;
                     }
                 } else {
                     message = msg;
@@ -117,24 +133,25 @@ export abstract class ParseErrorListener implements ANTLRErrorListener {
                 );
                 switch (text[0]) {
                     case '/':
-                        message = 'Unfinished multiline comment';
+                        message = '{unfinishedMultilineComment}';
                         break;
                     case '"':
-                        message = 'Unfinished double quoted string literal';
+                        message = '{unfinishedDoubleQuoted}';
                         break;
                     case "'":
-                        message = 'Unfinished single quoted string literal';
+                        message = '{unfinishedSingleQuoted}';
                         break;
                     case '`':
-                        message = 'Unfinished back tick quoted string literal';
+                        message = '{unfinishedTickQuoted}';
                         break;
 
                     default:
-                        message = '"' + text + '" is no valid input at all';
+                        message = '"' + text + '" {noValidInput}';
                         break;
                 }
             }
         }
+        message = transformToI18n(message, this.locale);
         let endCol = charPositionInLine + 1;
         if (offendingSymbol && offendingSymbol.text !== null) {
             endCol = charPositionInLine + offendingSymbol.text.length;
@@ -146,7 +163,7 @@ export abstract class ParseErrorListener implements ANTLRErrorListener {
                     endLine: line,
                     startColumn: charPositionInLine + 1,
                     endColumn: endCol + 1,
-                    message: message,
+                    message,
                 },
                 {
                     e,

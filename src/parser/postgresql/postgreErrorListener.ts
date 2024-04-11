@@ -2,6 +2,7 @@ import { CodeCompletionCore } from 'antlr4-c3';
 import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
 import { PostgreSqlParser } from '../../lib/postgresql/PostgreSqlParser';
+import { LOCALE_TYPE } from '../common/types';
 
 export class PostgreSqlErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
@@ -23,8 +24,8 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
         [PostgreSqlParser.RULE_procedure_name, 'procedure'],
     ]);
 
-    constructor(errorListener: ErrorListener, preferredRules: Set<number>) {
-        super(errorListener);
+    constructor(errorListener: ErrorListener, preferredRules: Set<number>, locale: LOCALE_TYPE) {
+        super(errorListener, locale);
         this.preferredRules = preferredRules;
     }
 
@@ -54,9 +55,9 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
                     case PostgreSqlParser.RULE_procedure_name:
                     case PostgreSqlParser.RULE_column_name: {
                         if (!name) {
-                            expectedText = 'a new object name';
+                            expectedText = '{newObj}';
                         } else {
-                            expectedText = `a new ${name} name`;
+                            expectedText = `{new}${name}`;
                         }
                         break;
                     }
@@ -68,9 +69,9 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
                     case PostgreSqlParser.RULE_procedure_name_create:
                     case PostgreSqlParser.RULE_column_name_create: {
                         if (!name) {
-                            expectedText = 'an existing object';
+                            expectedText = '{existingObj}';
                         } else {
-                            expectedText = `an existing ${name}`;
+                            expectedText = `{existing}${name}`;
                         }
                         break;
                     }
@@ -78,7 +79,7 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
             }
         }
         if (candidates.tokens.size) {
-            expectedText += expectedText ? ' or a keyword' : 'a keyword';
+            expectedText += expectedText ? '{orKeyword}' : '{keyword}';
         }
         return expectedText;
     }

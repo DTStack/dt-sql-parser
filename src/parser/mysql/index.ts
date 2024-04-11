@@ -39,7 +39,7 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
     }
 
     protected createErrorListener(_errorListener: ErrorListener) {
-        return new MysqlErrorListener(_errorListener, this.preferredRules);
+        return new MysqlErrorListener(_errorListener, this.preferredRules, this.locale);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
