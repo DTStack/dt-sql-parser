@@ -105,3 +105,16 @@ CREATE MANAGED TABLE managed_table (
 ) COMMENT '测试分桶' CLUSTERED BY(id) SORTED BY (id) INTO 4 BUCKETS STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler';
 
 CREATE TABLE list_bucket_multiple (col1 STRING, col2 INT, col3 STRING) SKEWED BY (col1, col2) ON (('s1', 1), ('s3', 3), ('s13', 13), ('s78', 78)) STORED AS JSONFILE;
+
+-- dtstack SparkSQL/HiveSQL lifecycle
+CREATE TABLE IF NOT EXISTS t1 (
+    id INT COMMENT '索引',
+    name STRING COMMENT '姓名',
+    age SMALLINT COMMENT '年龄'
+) COMMENT "t1表" lifecycle 29;
+
+-- dtstack SparkSQL/HiveSQL lifecycle
+CREATE MANAGED TABLE managed_table (
+    id INT COMMENT 'ID',
+    name STRING COMMENT '名称'
+) COMMENT '测试分桶' lifecycle 29 CLUSTERED BY(id) SORTED BY (id) INTO 4 BUCKETS STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler';

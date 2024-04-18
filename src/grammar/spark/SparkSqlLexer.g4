@@ -217,6 +217,7 @@ KW_LATERAL           : 'LATERAL';
 KW_LAZY              : 'LAZY';
 KW_LEADING           : 'LEADING';
 KW_LEFT              : 'LEFT';
+KW_LIFECYCLE         : 'LIFECYCLE';
 KW_LIKE              : 'LIKE';
 KW_ILIKE             : 'ILIKE';
 KW_LIMIT             : 'LIMIT';

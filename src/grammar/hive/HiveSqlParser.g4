@@ -657,6 +657,11 @@ tableComment
     : KW_COMMENT comment=StringLiteral
     ;
 
+// dtstack SparkSQL/HiveSQL lifecycle
+tableLifecycle
+    : KW_LIFECYCLE Number
+    ;
+
 createTablePartitionSpec
     : KW_PARTITIONED KW_BY (
         LPAREN (opt1=createTablePartitionColumnTypeSpec | opt2=createTablePartitionColumnSpec)
@@ -1630,13 +1635,17 @@ Rules for parsing createtable
 createTableStatement
     : KW_CREATE temp=KW_TEMPORARY? trans=KW_TRANSACTIONAL? ext=KW_EXTERNAL? KW_TABLE ifNotExists? name=tableNameCreate (
         likeTableOrFile createTablePartitionSpec? tableRowFormat? tableFileFormat? tableLocation? tablePropertiesPrefixed?
-        | (LPAREN columnNameTypeOrConstraintList RPAREN)? tableComment? createTablePartitionSpec? tableBuckets? tableSkewed? tableRowFormat?
-            tableFileFormat? tableLocation? tablePropertiesPrefixed? (KW_AS selectStatementWithCTE)?
+        | (LPAREN columnNameTypeOrConstraintList RPAREN)? tableComment? tableLifecycle? createTablePartitionSpec? tableBuckets? tableSkewed?
+            tableRowFormat? tableFileFormat? tableLocation? tablePropertiesPrefixed? (
+            KW_AS selectStatementWithCTE
+        )?
     )
     | KW_CREATE mgd=KW_MANAGED KW_TABLE ifNotExists? name=tableNameCreate (
         likeTableOrFile tableRowFormat? tableFileFormat? tableLocation? tablePropertiesPrefixed?
-        | (LPAREN columnNameTypeOrConstraintList RPAREN)? tableComment? createTablePartitionSpec? tableBuckets? tableSkewed? tableRowFormat?
-            tableFileFormat? tableLocation? tablePropertiesPrefixed? (KW_AS selectStatementWithCTE)?
+        | (LPAREN columnNameTypeOrConstraintList RPAREN)? tableComment? tableLifecycle? createTablePartitionSpec? tableBuckets? tableSkewed?
+            tableRowFormat? tableFileFormat? tableLocation? tablePropertiesPrefixed? (
+            KW_AS selectStatementWithCTE
+        )?
     )
     ;
 
@@ -2685,6 +2694,7 @@ nonReserved
     | KW_KILL
     | KW_LAST
     | KW_LEVEL
+    | KW_LIFECYCLE
     | KW_LIMIT
     | KW_LINES
     | KW_LOAD

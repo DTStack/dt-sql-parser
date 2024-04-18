@@ -118,6 +118,7 @@ import { ExecutedAsSpecContext } from "./HiveSqlParser.js";
 import { DefinedAsSpecContext } from "./HiveSqlParser.js";
 import { ShowStmtIdentifierContext } from "./HiveSqlParser.js";
 import { TableCommentContext } from "./HiveSqlParser.js";
+import { TableLifecycleContext } from "./HiveSqlParser.js";
 import { CreateTablePartitionSpecContext } from "./HiveSqlParser.js";
 import { CreateTablePartitionColumnTypeSpecContext } from "./HiveSqlParser.js";
 import { CreateTablePartitionColumnSpecContext } from "./HiveSqlParser.js";
@@ -1200,6 +1201,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitTableComment?: (ctx: TableCommentContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.tableLifecycle`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableLifecycle?: (ctx: TableLifecycleContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.createTablePartitionSpec`.
      * @param ctx the parse tree
