@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.13](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.12...v4.0.0-beta.4.13) (2024-04-19)
+
+
+### Features
+
+* [#290](https://github.com/DTStack/dt-sql-parser/issues/290) support dtstack SparkSQL/HiveSQL lifecycle ([#292](https://github.com/DTStack/dt-sql-parser/issues/292)) ([da77180](https://github.com/DTStack/dt-sql-parser/commit/da77180a50456e3cdc165cd6a7e06be563a31f23))
+
+
+### Bug Fixes
+
+* [#285](https://github.com/DTStack/dt-sql-parser/issues/285) No longer just export types from libs ([#286](https://github.com/DTStack/dt-sql-parser/issues/286)) ([8bb27ee](https://github.com/DTStack/dt-sql-parser/commit/8bb27ee771b4b1ecf4b6660b5fb87184188ba7e2))
+
 ## [4.0.0-beta.4.12](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.11...v4.0.0-beta.4.12) (2024-03-28)
 
 
