@@ -221,6 +221,7 @@ import { IntervalContext } from "./ImpalaSqlParser.js";
 import { IntervalFieldContext } from "./ImpalaSqlParser.js";
 import { NormalFormContext } from "./ImpalaSqlParser.js";
 import { TypeContext } from "./ImpalaSqlParser.js";
+import { DataTypeContext } from "./ImpalaSqlParser.js";
 import { TypeParameterContext } from "./ImpalaSqlParser.js";
 import { BaseTypeContext } from "./ImpalaSqlParser.js";
 import { WhenClauseContext } from "./ImpalaSqlParser.js";
@@ -2501,6 +2502,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitType?: (ctx: TypeContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.dataType`.
+     * @param ctx the parse tree
+     */
+    enterDataType?: (ctx: DataTypeContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.dataType`.
+     * @param ctx the parse tree
+     */
+    exitDataType?: (ctx: DataTypeContext) => void;
     /**
      * Enter a parse tree produced by `ImpalaSqlParser.typeParameter`.
      * @param ctx the parse tree
