@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.14](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.13...v4.0.0-beta.4.14) (2024-04-19)
+
+
+### Bug Fixes
+
+* [#290](https://github.com/DTStack/dt-sql-parser/issues/290) hive lifecycle ([#293](https://github.com/DTStack/dt-sql-parser/issues/293)) ([37974ca](https://github.com/DTStack/dt-sql-parser/commit/37974ca0cb8146b0350740cc8d2fb2e6d2d4ee63))
+
 ## [4.0.0-beta.4.13](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.12...v4.0.0-beta.4.13) (2024-04-19)
 
 
