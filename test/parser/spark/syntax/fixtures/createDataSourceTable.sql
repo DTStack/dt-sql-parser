@@ -66,3 +66,10 @@ CREATE TABLE student_bucket
     )
     SELECT * FROM tmpTable
 );
+
+-- dtstack SparkSQL/HiveSQL lifecycle
+CREATE TABLE IF NOT EXISTS t1 (
+    id INT COMMENT '索引',
+    name STRING COMMENT '姓名',
+    age SMALLINT COMMENT '年龄'
+) COMMENT "t1表" lifecycle 29;

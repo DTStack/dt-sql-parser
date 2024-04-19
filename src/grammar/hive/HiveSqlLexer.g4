@@ -214,6 +214,7 @@ KW_LEADING              : 'LEADING';
 KW_LEFT                 : 'LEFT';
 KW_LESS                 : 'LESS';
 KW_LEVEL                : 'LEVEL';
+KW_LIFECYCLE            : 'LIFECYCLE';
 KW_LIKE                 : 'LIKE';
 KW_LIMIT                : 'LIMIT';
 KW_LINES                : 'LINES';

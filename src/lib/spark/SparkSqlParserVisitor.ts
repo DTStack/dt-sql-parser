@@ -124,6 +124,7 @@ import { CtesContext } from "./SparkSqlParser.js";
 import { NamedQueryContext } from "./SparkSqlParser.js";
 import { TableProviderContext } from "./SparkSqlParser.js";
 import { CreateTableClausesContext } from "./SparkSqlParser.js";
+import { TableLifecycleContext } from "./SparkSqlParser.js";
 import { PropertyListContext } from "./SparkSqlParser.js";
 import { PropertyContext } from "./SparkSqlParser.js";
 import { PropertyKeyContext } from "./SparkSqlParser.js";
@@ -1099,6 +1100,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitCreateTableClauses?: (ctx: CreateTableClausesContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.tableLifecycle`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableLifecycle?: (ctx: TableLifecycleContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.propertyList`.
      * @param ctx the parse tree

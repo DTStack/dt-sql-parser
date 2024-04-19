@@ -22,3 +22,11 @@ CREATE TABLE Student_Duple like Student
     ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     STORED AS TEXTFILE
     TBLPROPERTIES ('owner'='xxxx');
+
+
+
+-- dtstack SparkSQL/HiveSQL lifecycle
+CREATE TABLE Student_Duple like Student
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE
+    TBLPROPERTIES ('owner'='xxxx') lifecycle 29;

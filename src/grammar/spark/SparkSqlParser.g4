@@ -65,6 +65,7 @@ statement
         | createFileFormat
         | locationSpec
         | (KW_TBLPROPERTIES tableProps=propertyList)
+        | tableLifecycle
     )* # createTableLike
     | replaceTableHeader (LEFT_PAREN createOrReplaceTableColTypeList RIGHT_PAREN)? tableProvider? createTableClauses (
         KW_AS? query
@@ -351,7 +352,13 @@ createTableClauses
         | locationSpec
         | commentSpec
         | (KW_TBLPROPERTIES tableProps=propertyList)
+        | tableLifecycle
     )*
+    ;
+
+// dtstack SparkSQL/HiveSQL lifecycle
+tableLifecycle
+    : KW_LIFECYCLE INTEGER_VALUE
     ;
 
 propertyList
@@ -1849,6 +1856,7 @@ nonReserved
     | KW_LAST
     | KW_LAZY
     | KW_LEADING
+    | KW_LIFECYCLE
     | KW_LIKE
     | KW_LONG
     | KW_ILIKE
