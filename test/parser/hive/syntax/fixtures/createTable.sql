@@ -112,9 +112,14 @@ CREATE TABLE IF NOT EXISTS t1 (
     name STRING COMMENT '姓名',
     age SMALLINT COMMENT '年龄'
 ) COMMENT "t1表" lifecycle 29;
-
--- dtstack SparkSQL/HiveSQL lifecycle
 CREATE MANAGED TABLE managed_table (
     id INT COMMENT 'ID',
     name STRING COMMENT '名称'
-) COMMENT '测试分桶' lifecycle 29 CLUSTERED BY(id) SORTED BY (id) INTO 4 BUCKETS STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler';
+) COMMENT '测试分桶' CLUSTERED BY(id) SORTED BY (id) INTO 4 BUCKETS STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler' lifecycle 29;
+CREATE TABLE employee (
+    eid int,
+    name String,
+    salary String,
+    destination String)
+    STORED AS ORC
+    lifecycle 10;
