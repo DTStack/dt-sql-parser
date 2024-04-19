@@ -221,6 +221,7 @@ import { IntervalContext } from "./ImpalaSqlParser.js";
 import { IntervalFieldContext } from "./ImpalaSqlParser.js";
 import { NormalFormContext } from "./ImpalaSqlParser.js";
 import { TypeContext } from "./ImpalaSqlParser.js";
+import { DataTypeContext } from "./ImpalaSqlParser.js";
 import { TypeParameterContext } from "./ImpalaSqlParser.js";
 import { BaseTypeContext } from "./ImpalaSqlParser.js";
 import { WhenClauseContext } from "./ImpalaSqlParser.js";
@@ -1594,6 +1595,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitType?: (ctx: TypeContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.dataType`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDataType?: (ctx: DataTypeContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.typeParameter`.
      * @param ctx the parse tree

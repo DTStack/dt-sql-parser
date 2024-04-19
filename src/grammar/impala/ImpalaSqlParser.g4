@@ -265,7 +265,7 @@ computeStats
     ;
 
 computeIncrementalStats
-    : KW_COMPUTE KW_INCREMENTAL KW_STATS tableNamePath (KW_PARTITION expression)?
+    : KW_COMPUTE KW_INCREMENTAL KW_STATS tableNamePath (KW_PARTITION LPAREN expression RPAREN)?
     ;
 
 dropStatement
@@ -1004,7 +1004,29 @@ type
     | KW_ARRAY LT type GT
     | KW_MAP LT type COMMA type GT
     | KW_STRUCT LT identifier COLON type (COMMA identifier COLON type)* GT
-    | baseType (LPAREN typeParameter (COMMA typeParameter)* RPAREN)?
+    | (baseType | dataType) (LPAREN typeParameter (COMMA typeParameter)* RPAREN)?
+    ;
+
+dataType
+    : KW_ARRAY
+    | KW_BINARY
+    | KW_BIGINT
+    | KW_BOOLEAN
+    | KW_CHAR
+    | KW_DATE
+    | KW_DECIMAL
+    | KW_DOUBLE
+    | KW_FLOAT
+    | KW_INT
+    | KW_MAP
+    | KW_REAL
+    | KW_SMALLINT
+    | KW_STRING
+    | KW_STRUCT
+    | KW_TIMESTAMP
+    | KW_TINYINT
+    | KW_VARCHAR
+    | KW_COMPLEX
     ;
 
 typeParameter
@@ -1125,6 +1147,7 @@ nonReserved
     // IMPORTANT: this rule must only contain tokens. Nested rules are not supported. See SqlParser.exitNonReserved
     : KW_BERNOULLI
     | KW_DAY
+    | KW_DATE
     | KW_DAYS
     | KW_EXCLUDING
     | KW_HOUR
