@@ -1003,7 +1003,7 @@ type
     : type KW_ARRAY
     | KW_ARRAY LT type GT
     | KW_MAP LT type COMMA type GT
-    | KW_STRUCT LT identifier COLON type (COMMA identifier COLON type)* GT
+    | KW_STRUCT LT identifier type (COMMA identifier type)* GT
     | (baseType | dataType) (LPAREN typeParameter (COMMA typeParameter)* RPAREN)?
     ;
 

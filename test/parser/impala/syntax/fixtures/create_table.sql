@@ -207,3 +207,8 @@ CREATE TABLE IF NOT EXISTS t1 (
   id19 COMPLEX,
   id19 ARRAY<INT>
 );
+
+CREATE TABLE IF NOT EXISTS t1 (
+  id INT,
+  person STRUCT<first_name: STRING, last_name: VARCHAR(256)>
+) PARTITIONED BY (student STRUCT<id: INT, name: VARCHAR(256), height: STRING, cost: DECIMAL(38, 0)>);
