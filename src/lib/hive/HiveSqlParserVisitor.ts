@@ -486,6 +486,7 @@ import { HintArgsContext } from "./HiveSqlParser.js";
 import { HintArgNameContext } from "./HiveSqlParser.js";
 import { PrepareStatementContext } from "./HiveSqlParser.js";
 import { ExecuteStatementContext } from "./HiveSqlParser.js";
+import { SetConfigPropertiesStatementContext } from "./HiveSqlParser.js";
 import { ExecuteParamListContext } from "./HiveSqlParser.js";
 import { ResourcePlanDdlStatementsContext } from "./HiveSqlParser.js";
 import { RpAssignContext } from "./HiveSqlParser.js";
@@ -3413,6 +3414,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitExecuteStatement?: (ctx: ExecuteStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.setConfigPropertiesStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSetConfigPropertiesStatement?: (ctx: SetConfigPropertiesStatementContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.executeParamList`.
      * @param ctx the parse tree

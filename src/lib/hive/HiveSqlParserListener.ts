@@ -486,6 +486,7 @@ import { HintArgsContext } from "./HiveSqlParser.js";
 import { HintArgNameContext } from "./HiveSqlParser.js";
 import { PrepareStatementContext } from "./HiveSqlParser.js";
 import { ExecuteStatementContext } from "./HiveSqlParser.js";
+import { SetConfigPropertiesStatementContext } from "./HiveSqlParser.js";
 import { ExecuteParamListContext } from "./HiveSqlParser.js";
 import { ResourcePlanDdlStatementsContext } from "./HiveSqlParser.js";
 import { RpAssignContext } from "./HiveSqlParser.js";
@@ -5326,6 +5327,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitExecuteStatement?: (ctx: ExecuteStatementContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.setConfigPropertiesStatement`.
+     * @param ctx the parse tree
+     */
+    enterSetConfigPropertiesStatement?: (ctx: SetConfigPropertiesStatementContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.setConfigPropertiesStatement`.
+     * @param ctx the parse tree
+     */
+    exitSetConfigPropertiesStatement?: (ctx: SetConfigPropertiesStatementContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.executeParamList`.
      * @param ctx the parse tree

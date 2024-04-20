@@ -90,6 +90,7 @@ execStatement
     | mergeStatement
     | prepareStatement
     | executeStatement
+    | setConfigPropertiesStatement
     ;
 
 loadStatement
@@ -2217,6 +2218,7 @@ constant
     | booleanValue
     | KW_NULL
     | prepareStmtParam
+    | Identifier
     ;
 
 prepareStmtParam
@@ -2896,6 +2898,63 @@ prepareStatement
 
 executeStatement
     : KW_EXECUTE id_ KW_USING executeParamList
+    ;
+
+setConfigPropertiesStatement
+    : KW_SET configPropertiesItem (DOT configPropertiesItem)* EQUAL .*?
+    ;
+
+configPropertiesItem
+    : id_
+    | KW_JOIN
+    | KW_PARTITION
+    | KW_MAP
+    | KW_REDUCE
+    | KW_USER
+    | KW_PERCENT
+    | KW_INTERVAL
+    | KW_ROWS
+    | KW_UNION
+    | KW_GROUP
+    | KW_MERGE
+    | KW_NULL
+    | KW_FETCH
+    | KW_LOCAL
+    | KW_DROP
+    | KW_TABLE
+    | KW_ON
+    | KW_ROW
+    | KW_GROUPING
+    | KW_SET
+    | KW_FORCE
+    | KW_START
+    | KW_INSERT
+    | KW_CONF
+    | KW_INTO
+    | KW_UNIQUE
+    | KW_COLUMN
+    | KW_TRANSFORM
+    | KW_DISTINCT
+    | KW_IN
+    | KW_REFERENCES
+    | KW_TIMESTAMP
+    | KW_ONLY
+    | KW_END
+    | KW_FUNCTION
+    | KW_UPDATE
+    | KW_AUTHORIZATION
+    | KW_DDL
+    | KW_VALUES
+    | KW_TIME
+    | KW_IS
+    | KW_FOR
+    | KW_NOT
+    | KW_BINARY
+    | KW_USING
+    | KW_READS
+    | KW_BETWEEN
+    | KW_CURRENT
+    | KW_AS
     ;
 
 //TODO: instead of constant using expression will provide richer and broader parameters
