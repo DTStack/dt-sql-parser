@@ -7,3 +7,5 @@ DROP ;
 INSERT ;
 
 SHOW ;
+
+CREATE TABLE t1 (id );

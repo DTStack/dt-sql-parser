@@ -109,4 +109,38 @@ describe('Impala SQL Token Suggestion', () => {
             'CURRENT',
         ]);
     });
+
+    test('Create table with column dataType', () => {
+        const pos: CaretPosition = {
+            lineNumber: 11,
+            column: 21,
+        };
+        const suggestion = impala.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        const dataTypes = [
+            'INT',
+            'BINARY',
+            'BIGINT',
+            'BOOLEAN',
+            'CHAR',
+            'DATE',
+            'DECIMAL',
+            'DOUBLE',
+            'INT',
+            'MAP',
+            'REAL',
+            'SMALLINT',
+            'FLOAT',
+            'STRING',
+            'STRUCT',
+            'TIMESTAMP',
+            'TINYINT',
+            'VARCHAR',
+            'COMPLEX',
+        ];
+
+        expect(dataTypes.every((dataType) => suggestion.includes(dataType))).toBe(true);
+    });
 });

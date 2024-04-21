@@ -183,3 +183,32 @@ CREATE TABLE fk(id INT, col1 INT, col2 STRING, PRIMARY KEY(id),
 CREATE TABLE new_Table like old_table;
 
 CREATE TABLE new_Table like old_table partitioned by (year int) SORT BY (last_name, state);
+
+CREATE TABLE IF NOT EXISTS t1 (id INT);
+CREATE TABLE IF NOT EXISTS t1 (
+  id1 INT,
+  id2 BINARY,
+  id3 BIGINT,
+  id4 BOOLEAN,
+  id5 CHAR(4),
+  id6 DATE,
+  id7 DECIMAL(38, 0),
+  id8 DOUBLE,
+  id9 INT,
+  id10 MAP<INT, DOUBLE>,
+  id11 REAL,
+  id12 SMALLINT,
+  id13 FLOAT,
+  id14 STRING,
+  id15 STRUCT,
+  id16 TIMESTAMP,
+  id17 TINYINT,
+  id18 VARCHAR(256),
+  id19 COMPLEX,
+  id19 ARRAY<INT>
+);
+
+CREATE TABLE IF NOT EXISTS t1 (
+  id INT,
+  person STRUCT<first_name: STRING, last_name: VARCHAR(256)>
+) PARTITIONED BY (student STRUCT<id: INT, name: VARCHAR(256), height: STRING, cost: DECIMAL(38, 0)>);
