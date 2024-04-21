@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.4.15](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.14...v4.0.0-beta.4.15) (2024-04-21)
+
+
+### Bug Fixes
+
+* [#295](https://github.com/DTStack/dt-sql-parser/issues/295) [#297](https://github.com/DTStack/dt-sql-parser/issues/297) optimize impala data types suggestion and create table ([#296](https://github.com/DTStack/dt-sql-parser/issues/296)) ([31b57a4](https://github.com/DTStack/dt-sql-parser/commit/31b57a494be5cb5a8145ab48348f797fa6e0c261))
+* [#298](https://github.com/DTStack/dt-sql-parser/issues/298) support hive set configuration properties ([#299](https://github.com/DTStack/dt-sql-parser/issues/299)) ([0e752fb](https://github.com/DTStack/dt-sql-parser/commit/0e752fb9a84655322666a1ba26204f7b4be4abb0))
+
 ## [4.0.0-beta.4.14](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.13...v4.0.0-beta.4.14) (2024-04-19)
 
 
