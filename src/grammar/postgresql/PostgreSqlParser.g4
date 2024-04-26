@@ -5556,7 +5556,6 @@ plsql_unreserved_keyword
     | KW_SLICE
     | KW_SQLSTATE
     | KW_STACKED
-    | KW_TABLE
     //| TABLE_NAME
     | KW_TYPE
     | KW_USE_COLUMN

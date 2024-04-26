@@ -970,4 +970,36 @@ describe('Postgre SQL Syntax Suggestion', () => {
         expect(suggestion3).not.toBeUndefined();
         expect(suggestion3?.wordRanges.map((token) => token.text)).toEqual(['col3']);
     });
+
+    test('TRUNCATE TABLE', () => {
+        const pos1: CaretPosition = {
+            lineNumber: 79,
+            column: 16,
+        };
+        const pos2: CaretPosition = {
+            lineNumber: 81,
+            column: 18,
+        };
+
+        const syntaxes1 = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos1.lineNumber),
+            pos1
+        )?.syntax;
+        const syntaxes2 = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos2.lineNumber),
+            pos2
+        )?.syntax;
+
+        const suggestion1 = syntaxes1?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+        const suggestion2 = syntaxes2?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion1).not.toBeUndefined();
+        expect(suggestion1?.wordRanges.map((token) => token.text)).toEqual([]);
+        expect(suggestion2).not.toBeUndefined();
+        expect(suggestion2?.wordRanges.map((token) => token.text)).toEqual(['t1']);
+    });
 });
