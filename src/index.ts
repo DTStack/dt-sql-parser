@@ -1,13 +1,4 @@
-export {
-    MySQL,
-    FlinkSQL,
-    SparkSQL,
-    HiveSQL,
-    PostgreSQL,
-    TrinoSQL,
-    ImpalaSQL,
-    PLSQL,
-} from './parser';
+export { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgreSQL, TrinoSQL, ImpalaSQL } from './parser';
 
 export {
     MySqlParserListener,
@@ -18,8 +9,6 @@ export {
     SparkSqlParserVisitor,
     HiveSqlParserListener,
     HiveSqlParserVisitor,
-    PlSqlParserListener,
-    PlSqlParserVisitor,
     PostgreSqlParserListener,
     PostgreSqlParserVisitor,
     TrinoSqlListener,
