@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.15...v4.0.0) (2024-04-28)
+
+
+### Bug Fixes
+
+* [#301](https://github.com/DTStack/dt-sql-parser/issues/301) pgsql truncate table suggestion ([#302](https://github.com/DTStack/dt-sql-parser/issues/302)) ([25358ec](https://github.com/DTStack/dt-sql-parser/commit/25358ec65353129933c0711212f2f90d854fa242))
+
 ## [4.0.0-beta.4.15](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.14...v4.0.0-beta.4.15) (2024-04-21)
 
 
