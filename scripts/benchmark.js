@@ -5,9 +5,10 @@ const argv = require('yargs-parser')(process.argv.slice(2));
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 
-const outputPath = path.resolve(__dirname, '../src/grammar');
-
-const languageEntries = fs.readdirSync(outputPath);
+const outputPath = path.resolve(__dirname, '../src/lib');
+const languages = fs.readdirSync(outputPath).filter((item) => {
+    return fs.statSync(path.join(outputPath, item)).isDirectory();
+});
 
 const cmd = 'tsx';
 
@@ -28,7 +29,7 @@ function prompt() {
                 type: 'list',
                 name: 'language',
                 message: 'Which language you want to run benchmark (or all languages)',
-                choices: ['All Languages', ...languageEntries],
+                choices: ['All Languages', ...languages],
                 loop: true,
             },
         ])
@@ -39,7 +40,7 @@ function prompt() {
 
 function main() {
     if (argv.lang) {
-        const supportedLanguage = languageEntries.some((language) => language === argv.lang);
+        const supportedLanguage = languages.some((language) => language === argv.lang);
         if (supportedLanguage || argv.lang === 'All Languages') {
             runBenchmark(argv.lang);
         } else {

@@ -1,0 +1,12 @@
+{
+    "create": {
+        "validate": ["$sql"],
+        "getAllTokens": ["$sql"],
+        "getAllEntities": ["$sql", { "lineNumber": 8, "column": 1 }]
+    },
+    "select": {
+        "validate": ["$sql"],
+        "getAllTokens": ["$sql"],
+        "getAllEntities": ["$sql", { "lineNumber": 8, "column": 1 }]
+    }
+}

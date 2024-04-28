@@ -2,7 +2,7 @@ import path from 'path';
 import { MarkdownWritter } from './markdownWritter';
 import envinfo from 'envinfo';
 import { Table } from 'console-table-printer';
-import BasicParser from '../src/parser/common/basicParser';
+import { BasicSQL } from '../src/parser/common/basicSQL';
 import fs from 'fs';
 
 export type BenchmarkResult = {
@@ -38,7 +38,7 @@ const tableColumns = [
     },
     {
         name: 'loopTimes',
-        title: 'Loop',
+        title: 'Loops',
     },
     {
         name: 'type',
@@ -46,16 +46,23 @@ const tableColumns = [
     },
 ];
 
+/**
+ * Key is sql directory name, value is module export name.
+ */
 export const languageNameMap = {
     hive: 'HiveSQL',
     mysql: 'MySQL',
     plsql: 'PLSQL',
-    flinksql: 'FlinkSQL',
+    flink: 'FlinkSQL',
     spark: 'SparkSQL',
-    pgsql: 'PostgresSQL',
-    trinosql: 'TrinoSQL',
+    postgresql: 'PostgreSQL',
+    trino: 'TrinoSQL',
     impala: 'ImpalaSQL',
 };
+
+export type Language = keyof typeof languageNameMap;
+
+export const languages = Object.keys(languageNameMap) as Language[];
 
 class SqlBenchmark {
     constructor(language: string) {
@@ -81,11 +88,11 @@ class SqlBenchmark {
      *
      * Due to the presence of ATN cache in antlr4, we will clear the module cache to ensure that each parser is brand new and with no cache.
      */
-    getSqlParser(): BasicParser {
+    getSqlParser(): BasicSQL {
         const caches = Object.keys(require.cache);
         const cacheModules = [
-            path.join(__dirname, `../src/parser/${this.language}.ts`),
             path.join(__dirname, `../src/parser/common/`),
+            path.join(__dirname, `../src/parser/${this.language}/`),
             path.join(__dirname, `../src/lib/${this.language}/`),
             path.normalize(require.resolve('antlr4ng')),
         ];
@@ -94,28 +101,34 @@ class SqlBenchmark {
                 cacheModules.some((cacheModuleName) => moduleName.includes(cacheModuleName))
             )
             .forEach((moduleName) => delete require.cache[moduleName]);
-        const Parser = require(path.join(__dirname, `../src/parser/${this.language}.ts`)).default;
+        const Parser = require(path.join(__dirname, `../src/parser/${this.language}/index.ts`))[
+            languageNameMap[this.language]
+        ];
         return new Parser();
     }
 
     /**
      * @param type Which parser method you want to run
      * @param name Benchmark name
-     * @param sql SQL string
+     * @param params Parser method parameters
+     * @param params Rows count of sql
      * @param loopTimes Loop times, default run 3 times
      */
-    run(type: string, name: string, sql: string, loopTimes: number = this._DEFAULT_LOOP_TIMES) {
+    run(
+        type: string,
+        name: string,
+        params: any[],
+        sqlRows: number,
+        loopTimes: number = this._DEFAULT_LOOP_TIMES
+    ) {
         const costTimes: number[] = [];
         const lastResult =
             this._lastResultsCache?.find((item) => item.type === type && item.name === name) ?? {};
-        const rows = sql.split('\n').length;
-
         for (let i = 0; i < loopTimes; i++) {
             const parser = this.getSqlParser();
             if (!parser[type] || typeof parser[type] !== 'function') return;
-
             const startTime = performance.now();
-            parser[type](sql);
+            parser[type](...params);
             const costTime = performance.now() - startTime;
 
             costTimes.push(Math.round(costTime));
@@ -128,7 +141,7 @@ class SqlBenchmark {
             lastCostTime: lastResult['avgTime'],
             costTimes,
             loopTimes,
-            rows,
+            rows: sqlRows,
             type,
         };
 
