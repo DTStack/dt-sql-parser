@@ -1,5 +1,4 @@
 export { MySQL } from './mysql';
-export { PLSQL } from './plsql';
 export { HiveSQL } from './hive';
 export { FlinkSQL } from './flink';
 export { SparkSQL } from './spark';

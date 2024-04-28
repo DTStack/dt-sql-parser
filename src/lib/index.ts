@@ -7,9 +7,6 @@ export { MySqlParserVisitor } from './mysql/MySqlParserVisitor';
 export { HiveSqlParserListener } from './hive/HiveSqlParserListener';
 export { HiveSqlParserVisitor } from './hive/HiveSqlParserVisitor';
 
-export { PlSqlParserListener } from './plsql/PlSqlParserListener';
-export { PlSqlParserVisitor } from './plsql/PlSqlParserVisitor';
-
 export { SparkSqlParserListener } from './spark/SparkSqlParserListener';
 export { SparkSqlParserVisitor } from './spark/SparkSqlParserVisitor';
 
