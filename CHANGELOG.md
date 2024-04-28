@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0...v4.0.1) (2024-04-28)
+
+
+### Features
+
+* deprecate legacy APIs ([#304](https://github.com/DTStack/dt-sql-parser/issues/304)) ([f1c3bbe](https://github.com/DTStack/dt-sql-parser/commit/f1c3bbe17c2f48a55f8ac1664ce635323c88b579))
+
 ## [4.0.0](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0-beta.4.15...v4.0.0) (2024-04-28)
 
 
