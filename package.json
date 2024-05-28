@@ -29,7 +29,8 @@
     "lint": "prettier --check '**/*.ts' --config ./.prettierrc",
     "lint-fix": "prettier --write '**/*.ts' --config ./.prettierrc",
     "format-g4": "antlr-format -c ./antlr.format.json -v ./src/grammar/**/*.g4",
-    "cleanComment": "node ./scripts/cleanCommentCli.js"
+    "cleanComment": "node ./scripts/cleanCommentCli.js",
+    "test-kijin-temp": "NODE_OPTIONS=--max_old_space_size=4096 && jest test/parser/postgresql/suggestion/suggestionWithEntity.test.ts"
   },
   "license": "MIT",
   "devDependencies": {

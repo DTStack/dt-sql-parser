@@ -17,6 +17,7 @@ export enum StmtContextType {
     SELECT_STMT = 'selectStmt',
     INSERT_STMT = 'insertStmt',
     CREATE_FUNCTION_STMT = 'createFunctionStmt',
+    ALTER_TABLE_STMT = 'alterTableStmt',
 }
 
 export interface StmtContext {
