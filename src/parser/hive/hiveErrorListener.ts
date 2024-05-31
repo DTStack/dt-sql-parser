@@ -39,6 +39,7 @@ export class HiveErrorListener extends ParseErrorListener {
         const candidates = core.collectCandidates(token.tokenIndex, currentContext);
 
         if (candidates.rules.size) {
+            const result: string[] = [];
             // get expectedText as collect rules first
             for (const candidate of candidates.rules) {
                 const [ruleType] = candidate;
@@ -50,11 +51,7 @@ export class HiveErrorListener extends ParseErrorListener {
                     case HiveSqlParser.RULE_functionNameForDDL:
                     case HiveSqlParser.RULE_functionNameForInvoke:
                     case HiveSqlParser.RULE_columnName: {
-                        if (!name) {
-                            expectedText = '{newObj}';
-                        } else {
-                            expectedText = `{new}${name}`;
-                        }
+                        result.push(`{existing}${name}`);
                         break;
                     }
                     case HiveSqlParser.RULE_dbSchemaNameCreate:
@@ -62,15 +59,12 @@ export class HiveErrorListener extends ParseErrorListener {
                     case HiveSqlParser.RULE_functionNameCreate:
                     case HiveSqlParser.RULE_viewNameCreate:
                     case HiveSqlParser.RULE_columnNameCreate: {
-                        if (!name) {
-                            expectedText = '{existingObj}';
-                        } else {
-                            expectedText = `{existing}${name}`;
-                        }
+                        result.push(`{new}${name}`);
                         break;
                     }
                 }
             }
+            expectedText = result.join('{or}');
         }
         if (candidates.tokens.size) {
             expectedText += expectedText ? '{orKeyword}' : '{keyword}';

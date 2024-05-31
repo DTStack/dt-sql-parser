@@ -42,6 +42,7 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
         const candidates = core.collectCandidates(token.tokenIndex, currentContext);
 
         if (candidates.rules.size) {
+            const result: string[] = [];
             // get expectedText as collect rules first
             for (const candidate of candidates.rules) {
                 const [ruleType] = candidate;
@@ -54,11 +55,7 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
                     case PostgreSqlParser.RULE_database_name:
                     case PostgreSqlParser.RULE_procedure_name:
                     case PostgreSqlParser.RULE_column_name: {
-                        if (!name) {
-                            expectedText = '{newObj}';
-                        } else {
-                            expectedText = `{new}${name}`;
-                        }
+                        result.push(`{existing}${name}`);
                         break;
                     }
                     case PostgreSqlParser.RULE_table_name_create:
@@ -68,15 +65,12 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
                     case PostgreSqlParser.RULE_database_name_create:
                     case PostgreSqlParser.RULE_procedure_name_create:
                     case PostgreSqlParser.RULE_column_name_create: {
-                        if (!name) {
-                            expectedText = '{existingObj}';
-                        } else {
-                            expectedText = `{existing}${name}`;
-                        }
+                        result.push(`{new}${name}`);
                         break;
                     }
                 }
             }
+            expectedText = result.join('{or}');
         }
         if (candidates.tokens.size) {
             expectedText += expectedText ? '{orKeyword}' : '{keyword}';

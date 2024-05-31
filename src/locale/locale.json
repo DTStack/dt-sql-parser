@@ -15,7 +15,8 @@
         "orKeyword": "或者一个关键字",
         "keyword": "一个关键字",
         "missing": "缺少",
-        "at": "在"
+        "at": "在",
+        "or": "或者"
     },
     "en_US": {
         "stmtInComplete": "statement is incomplete",
@@ -33,6 +34,7 @@
         "orKeyword": " or a keyword",
         "keyword": "a keyword",
         "missing": "missing ",
-        "at": " at "
+        "at": " at ",
+        "or": " or "
     }
 }

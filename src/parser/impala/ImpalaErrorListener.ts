@@ -38,6 +38,7 @@ export class ImpalaErrorListener extends ParseErrorListener {
         const candidates = core.collectCandidates(token.tokenIndex, currentContext);
 
         if (candidates.rules.size) {
+            const result: string[] = [];
             // get expectedText as collect rules first
             for (const candidate of candidates.rules) {
                 const [ruleType] = candidate;
@@ -48,11 +49,7 @@ export class ImpalaErrorListener extends ParseErrorListener {
                     case ImpalaSqlParser.RULE_functionNamePath:
                     case ImpalaSqlParser.RULE_viewNamePath:
                     case ImpalaSqlParser.RULE_columnNamePath: {
-                        if (!name) {
-                            expectedText = '{newObj}';
-                        } else {
-                            expectedText = `{new}${name}`;
-                        }
+                        result.push(`{existing}${name}`);
                         break;
                     }
                     case ImpalaSqlParser.RULE_databaseNameCreate:
@@ -60,15 +57,12 @@ export class ImpalaErrorListener extends ParseErrorListener {
                     case ImpalaSqlParser.RULE_functionNameCreate:
                     case ImpalaSqlParser.RULE_viewNameCreate:
                     case ImpalaSqlParser.RULE_columnNamePathCreate: {
-                        if (!name) {
-                            expectedText = '{existingObj}';
-                        } else {
-                            expectedText = `{existing}${name}`;
-                        }
+                        result.push(`{new}${name}`);
                         break;
                     }
                 }
             }
+            expectedText = result.join(`{or}`);
         }
         if (candidates.tokens.size) {
             expectedText += expectedText ? '{orKeyword}' : '{keyword}';

@@ -9,6 +9,7 @@ export class FlinkErrorListener extends ParseErrorListener {
 
     private objectNames: Map<number, string> = new Map([
         [FlinkSqlParser.RULE_catalogPath, 'catalog'],
+        [FlinkSqlParser.RULE_catalogPathCreate, 'catalog'],
         [FlinkSqlParser.RULE_databasePath, 'database'],
         [FlinkSqlParser.RULE_databasePathCreate, 'database'],
         [FlinkSqlParser.RULE_tablePath, 'table'],
@@ -39,6 +40,7 @@ export class FlinkErrorListener extends ParseErrorListener {
         const candidates = core.collectCandidates(token.tokenIndex, currentContext);
 
         if (candidates.rules.size) {
+            const result: string[] = [];
             // get expectedText as collect rules first
             for (const candidate of candidates.rules) {
                 const [ruleType] = candidate;
@@ -48,28 +50,23 @@ export class FlinkErrorListener extends ParseErrorListener {
                     case FlinkSqlParser.RULE_tablePath:
                     case FlinkSqlParser.RULE_viewPath:
                     case FlinkSqlParser.RULE_functionName:
-                    case FlinkSqlParser.RULE_columnName: {
-                        if (!name) {
-                            expectedText = '{newObj}';
-                        } else {
-                            expectedText = `{new}${name}`;
-                        }
+                    case FlinkSqlParser.RULE_columnName:
+                    case FlinkSqlParser.RULE_catalogPath: {
+                        result.push(`{existing}${name}`);
                         break;
                     }
                     case FlinkSqlParser.RULE_databasePathCreate:
                     case FlinkSqlParser.RULE_tablePathCreate:
                     case FlinkSqlParser.RULE_functionNameCreate:
                     case FlinkSqlParser.RULE_viewPathCreate:
-                    case FlinkSqlParser.RULE_columnNameCreate: {
-                        if (!name) {
-                            expectedText = '{existingObj}';
-                        } else {
-                            expectedText = `{existing}${name}`;
-                        }
+                    case FlinkSqlParser.RULE_columnNameCreate:
+                    case FlinkSqlParser.RULE_catalogPathCreate: {
+                        result.push(`{new}${name}`);
                         break;
                     }
                 }
             }
+            expectedText = result.join('{or}');
         }
         if (candidates.tokens.size) {
             expectedText += expectedText ? '{orKeyword}' : '{keyword}';

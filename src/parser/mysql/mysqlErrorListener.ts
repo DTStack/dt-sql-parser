@@ -38,6 +38,7 @@ export class MysqlErrorListener extends ParseErrorListener {
         const candidates = core.collectCandidates(token.tokenIndex, currentContext);
 
         if (candidates.rules.size) {
+            const result: string[] = [];
             // get expectedText as collect rules first
             for (const candidate of candidates.rules) {
                 const [ruleType] = candidate;
@@ -48,11 +49,7 @@ export class MysqlErrorListener extends ParseErrorListener {
                     case MySqlParser.RULE_functionName:
                     case MySqlParser.RULE_viewName:
                     case MySqlParser.RULE_columnName: {
-                        if (!name) {
-                            expectedText = '{newObj}';
-                        } else {
-                            expectedText = `{new}${name}`;
-                        }
+                        result.push(`{existing}${name}`);
                         break;
                     }
                     case MySqlParser.RULE_databaseNameCreate:
@@ -60,15 +57,12 @@ export class MysqlErrorListener extends ParseErrorListener {
                     case MySqlParser.RULE_functionNameCreate:
                     case MySqlParser.RULE_viewNameCreate:
                     case MySqlParser.RULE_columnNameCreate: {
-                        if (!name) {
-                            expectedText = '{existingObj}';
-                        } else {
-                            expectedText = `{existing}${name}`;
-                        }
+                        result.push(`{new}${name}`);
                         break;
                     }
                 }
             }
+            expectedText = result.join(`{or}`);
         }
         if (candidates.tokens.size) {
             expectedText += expectedText ? '{orKeyword}' : '{keyword}';

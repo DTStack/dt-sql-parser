@@ -38,6 +38,7 @@ export class SparkErrorListener extends ParseErrorListener {
         const candidates = core.collectCandidates(token.tokenIndex, currentContext);
 
         if (candidates.rules.size) {
+            const result = [];
             // get expectedText as collect rules first
             for (const candidate of candidates.rules) {
                 const [ruleType] = candidate;
@@ -48,11 +49,7 @@ export class SparkErrorListener extends ParseErrorListener {
                     case SparkSqlParser.RULE_viewName:
                     case SparkSqlParser.RULE_functionName:
                     case SparkSqlParser.RULE_columnName: {
-                        if (!name) {
-                            expectedText = '{newObj}';
-                        } else {
-                            expectedText = `{new}${name}`;
-                        }
+                        result.push(`{existing}${name}`);
                         break;
                     }
                     case SparkSqlParser.RULE_namespaceNameCreate:
@@ -60,15 +57,12 @@ export class SparkErrorListener extends ParseErrorListener {
                     case SparkSqlParser.RULE_functionNameCreate:
                     case SparkSqlParser.RULE_viewNameCreate:
                     case SparkSqlParser.RULE_columnNameCreate: {
-                        if (!name) {
-                            expectedText = '{existingObj}';
-                        } else {
-                            expectedText = `{existing}${name}`;
-                        }
+                        result.push(`{new}${name}`);
                         break;
                     }
                 }
             }
+            expectedText = result.join('{or}');
         }
         if (candidates.tokens.size) {
             expectedText += expectedText ? '{orKeyword}' : '{keyword}';

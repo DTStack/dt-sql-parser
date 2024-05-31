@@ -8,8 +8,8 @@ export class TrinoErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
 
     private objectNames: Map<number, string> = new Map([
-        [TrinoSqlParser.RULE_catalogName, 'database'],
-        [TrinoSqlParser.RULE_catalogNameCreate, 'database'],
+        [TrinoSqlParser.RULE_catalogName, 'catalog'],
+        [TrinoSqlParser.RULE_catalogNameCreate, 'catalog'],
         [TrinoSqlParser.RULE_tableName, 'table'],
         [TrinoSqlParser.RULE_tableNameCreate, 'table'],
         [TrinoSqlParser.RULE_viewName, 'view'],
@@ -39,6 +39,7 @@ export class TrinoErrorListener extends ParseErrorListener {
         const candidates = core.collectCandidates(token.tokenIndex, currentContext);
 
         if (candidates.rules.size) {
+            const result: string[] = [];
             // get expectedText as collect rules first
             for (const candidate of candidates.rules) {
                 const [ruleType] = candidate;
@@ -50,11 +51,7 @@ export class TrinoErrorListener extends ParseErrorListener {
                     case TrinoSqlParser.RULE_viewName:
                     case TrinoSqlParser.RULE_functionName:
                     case TrinoSqlParser.RULE_columnName: {
-                        if (!name) {
-                            expectedText = '{newObj}';
-                        } else {
-                            expectedText = `{new}${name}`;
-                        }
+                        result.push(`{existing}${name}`);
                         break;
                     }
                     case TrinoSqlParser.RULE_catalogNameCreate:
@@ -62,15 +59,12 @@ export class TrinoErrorListener extends ParseErrorListener {
                     case TrinoSqlParser.RULE_schemaNameCreate:
                     case TrinoSqlParser.RULE_viewNameCreate:
                     case TrinoSqlParser.RULE_tableNameCreate: {
-                        if (!name) {
-                            expectedText = '{existingObj}';
-                        } else {
-                            expectedText = `{existing}${name}`;
-                        }
+                        result.push(`{new}${name}`);
                         break;
                     }
                 }
             }
+            expectedText = result.join('{or}');
         }
         if (candidates.tokens.size) {
             expectedText += expectedText ? '{orKeyword}' : '{keyword}';
