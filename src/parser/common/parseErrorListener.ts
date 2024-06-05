@@ -11,7 +11,7 @@ import {
     NoViableAltException,
 } from 'antlr4ng';
 import { LOCALE_TYPE } from './types';
-import { transformToI18n } from './transformToI18n';
+import { transform } from './transform';
 
 /**
  * Converted from {@link SyntaxError}.
@@ -151,7 +151,7 @@ export abstract class ParseErrorListener implements ANTLRErrorListener {
                 }
             }
         }
-        message = transformToI18n(message, this.locale);
+        message = transform(message, this.locale);
         let endCol = charPositionInLine + 1;
         if (offendingSymbol && offendingSymbol.text !== null) {
             endCol = charPositionInLine + offendingSymbol.text.length;

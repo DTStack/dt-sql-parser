@@ -1,12 +1,12 @@
 import { LOCALE_TYPE } from './types';
-import i18n from '../../locale/locale.json';
+import { i18n } from '../../locale/locale';
 
 /**
  * transform message to locale language
  * @param message error msg
  * @param locale language setting
  */
-function transformToI18n(message: string, locale: LOCALE_TYPE) {
+function transform(message: string, locale: LOCALE_TYPE) {
     const regex = /{([^}]+)}/g;
     return message.replace(
         regex,
@@ -14,4 +14,4 @@ function transformToI18n(message: string, locale: LOCALE_TYPE) {
     );
 }
 
-export { transformToI18n };
+export { transform };
