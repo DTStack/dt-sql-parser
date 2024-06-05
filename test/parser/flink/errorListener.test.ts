@@ -22,14 +22,14 @@ describe('FlinkSQL validate invalid sql and test msg', () => {
     test('validate unComplete sql1', () => {
         const errors = flink.validate(sql1);
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('statement is incomplete');
+        expect(errors[0].message).toBe('Statement is incomplete');
     });
 
     test('validate unComplete sql2', () => {
         const errors = flink.validate(sql2);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(
-            'statement is incomplete, expecting an existing table or an existing view or a keyword'
+            'Statement is incomplete, expecting an existing table or an existing view or a keyword'
         );
     });
 
@@ -52,7 +52,7 @@ describe('FlinkSQL validate invalid sql and test msg', () => {
         const errors = flink.validate(sql5);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(
-            `statement is incomplete, expecting a new view or a keyword`
+            `Statement is incomplete, expecting a new view or a keyword`
         );
     });
 
@@ -60,7 +60,7 @@ describe('FlinkSQL validate invalid sql and test msg', () => {
         const errors = flink.validate(sql6);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(
-            `statement is incomplete, expecting an existing catalog or a keyword`
+            `Statement is incomplete, expecting an existing catalog or a keyword`
         );
     });
 
