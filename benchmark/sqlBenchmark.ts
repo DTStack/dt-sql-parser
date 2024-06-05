@@ -208,6 +208,11 @@ class SqlBenchmark {
         );
         const currentVersion = require('../package.json').version;
         const parsedEnvInfo = JSON.parse(envInfo);
+
+        if (!fs.existsSync(path.join(__dirname, `./reports`))) {
+            fs.mkdirSync(path.join(__dirname, `./reports`), { recursive: true });
+        }
+
         const writePath = path.join(__dirname, `./reports/${this.language}.benchmark.md`);
         const writter = new MarkdownWritter(writePath);
         writter.writeHeader('Benchmark', 2);

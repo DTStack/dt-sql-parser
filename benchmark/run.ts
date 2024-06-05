@@ -31,7 +31,6 @@ const testFiles: TestFile[] = [
         sqlFileName: 'select.sql',
         loopTimes: 3,
         testTypes: ['validate', 'getAllTokens'],
-        excludes: ['plsql', 'postgresql'],
     },
     {
         name: 'Select All Entities',
@@ -45,7 +44,6 @@ const testFiles: TestFile[] = [
         sqlFileName: 'create.sql',
         loopTimes: 3,
         testTypes: ['validate', 'getAllTokens'],
-        excludes: ['plsql', 'postgresql'],
     },
 ];
 
