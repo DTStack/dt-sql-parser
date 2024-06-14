@@ -489,7 +489,6 @@ import { Cursor_variableContext } from "./PostgreSqlParser.js";
 import { Exception_sectContext } from "./PostgreSqlParser.js";
 import { Proc_conditionContext } from "./PostgreSqlParser.js";
 import { Any_identifierContext } from "./PostgreSqlParser.js";
-import { Plsql_unreserved_keywordContext } from "./PostgreSqlParser.js";
 import { Sql_expressionContext } from "./PostgreSqlParser.js";
 
 
@@ -3433,12 +3432,6 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitAny_identifier?: (ctx: Any_identifierContext) => Result;
-    /**
-     * Visit a parse tree produced by `PostgreSqlParser.plsql_unreserved_keyword`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitPlsql_unreserved_keyword?: (ctx: Plsql_unreserved_keywordContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.sql_expression`.
      * @param ctx the parse tree

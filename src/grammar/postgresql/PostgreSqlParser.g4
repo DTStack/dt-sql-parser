@@ -609,9 +609,9 @@ tableelementlist
     ;
 
 tableelement
-    : column_def
+    : (KW_CONSTRAINT colid)? constraintelem
+    | column_def
     | KW_LIKE qualified_name ((KW_INCLUDING | KW_EXCLUDING) tablelikeoption)*
-    | (KW_CONSTRAINT colid)? constraintelem
     ;
 
 typedtableelement
@@ -2788,28 +2788,24 @@ role_list
 
 colid
     : identifier
-    | unreserved_keyword
     | col_name_keyword
-    | plsql_unreserved_keyword
     ;
 
 type_function_name
     : identifier
-    | unreserved_keyword
-    | plsql_unreserved_keyword
     | type_func_name_keyword
     ;
 
 nonreservedword
     : identifier
-    | unreserved_keyword
     | col_name_keyword
     | type_func_name_keyword
     ;
 
 collabel
-    : nonreservedword
-    | plsql_unreserved_keyword
+    : identifier
+    | col_name_keyword
+    | type_func_name_keyword
     | reserved_keyword
     ;
 
@@ -2820,7 +2816,7 @@ identifier
     | UnicodeQuotedIdentifier
     | PLSQLVARIABLENAME
     | PLSQLIDENTIFIER
-    | plsql_unreserved_keyword
+    | unreserved_keyword
     ;
 
 unreserved_keyword
@@ -3125,6 +3121,39 @@ unreserved_keyword
     | KW_YEAR
     | KW_YES
     | KW_ZONE
+    | KW_ALIAS
+    | KW_ASSERT
+    | KW_CONSTANT
+    | KW_DEBUG
+    | KW_DEFAULT
+    | KW_DIAGNOSTICS
+    | KW_DUMP
+    | KW_ELSIF
+    | KW_ERROR
+    | KW_EXCEPTION
+    | KW_EXIT
+    | KW_GET
+    | KW_INFO
+    | KW_IS
+    | KW_LOG
+    | KW_NOTICE
+    | KW_OPEN
+    | KW_PUBLIC
+    | KW_PERFORM
+    | KW_PRINT_STRICT_PARAMS
+    | KW_QUERY
+    | KW_RAISE
+    | KW_RETURN
+    | KW_REVERSE
+    | KW_ROWTYPE
+    | KW_SLICE
+    | KW_SQLSTATE
+    | KW_STACKED
+    | KW_USE_COLUMN
+    | KW_USE_VARIABLE
+    | KW_VARIABLE_CONFLICT
+    | KW_WARNING
+    | KW_OUTER
     ;
 
 col_name_keyword
@@ -3600,73 +3629,7 @@ proc_condition
 
 any_identifier
     : colid
-    | plsql_unreserved_keyword
-    ;
-
-plsql_unreserved_keyword
-    : KW_ABSOLUTE
-    | KW_ALIAS
-    | KW_AND
-    | KW_ARRAY
-    | KW_ASSERT
-    | KW_BACKWARD
-    | KW_CALL
-    | KW_CHAIN
-    | KW_CLOSE
-    | KW_COLLATE
-    | KW_COMMIT
-    | KW_CONSTANT
-    | KW_CONSTRAINT
-    | KW_CONTINUE
-    | KW_CURRENT
-    | KW_CURSOR
-    | KW_DEBUG
-    | KW_DEFAULT
-    | KW_DIAGNOSTICS
-    | KW_DO
-    | KW_DUMP
-    | KW_ELSIF
-    | KW_ERROR
-    | KW_EXCEPTION
-    | KW_EXIT
-    | KW_FETCH
-    | KW_FIRST
-    | KW_FORWARD
-    | KW_GET
-    | KW_INFO
-    | KW_INSERT
-    | KW_IS
-    | KW_LAST
-    | KW_LOG
-    | KW_MOVE
-    | KW_NEXT
-    | KW_NO
-    | KW_NOTICE
-    | KW_OPEN
-    | KW_OPTION
-    | KW_PERFORM
-    | KW_PRINT_STRICT_PARAMS
-    | KW_PRIOR
-    | KW_QUERY
-    | KW_RAISE
-    | KW_RELATIVE
-    | KW_RESET
-    | KW_RETURN
-    | KW_REVERSE
-    | KW_ROLLBACK
-    | KW_ROWTYPE
-    | KW_SCHEMA
-    | KW_SCROLL
-    | KW_SET
-    | KW_SLICE
-    | KW_SQLSTATE
-    | KW_STACKED
-    | KW_TYPE
-    | KW_USE_COLUMN
-    | KW_USE_VARIABLE
-    | KW_VARIABLE_CONFLICT
-    | KW_WARNING
-    | KW_OUTER
+    | unreserved_keyword
     ;
 
 sql_expression

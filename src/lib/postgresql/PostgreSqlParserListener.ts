@@ -489,7 +489,6 @@ import { Cursor_variableContext } from "./PostgreSqlParser.js";
 import { Exception_sectContext } from "./PostgreSqlParser.js";
 import { Proc_conditionContext } from "./PostgreSqlParser.js";
 import { Any_identifierContext } from "./PostgreSqlParser.js";
-import { Plsql_unreserved_keywordContext } from "./PostgreSqlParser.js";
 import { Sql_expressionContext } from "./PostgreSqlParser.js";
 
 
@@ -5400,16 +5399,6 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitAny_identifier?: (ctx: Any_identifierContext) => void;
-    /**
-     * Enter a parse tree produced by `PostgreSqlParser.plsql_unreserved_keyword`.
-     * @param ctx the parse tree
-     */
-    enterPlsql_unreserved_keyword?: (ctx: Plsql_unreserved_keywordContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSqlParser.plsql_unreserved_keyword`.
-     * @param ctx the parse tree
-     */
-    exitPlsql_unreserved_keyword?: (ctx: Plsql_unreserved_keywordContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.sql_expression`.
      * @param ctx the parse tree
