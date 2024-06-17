@@ -231,8 +231,6 @@ export abstract class BasicSQL<
             return null;
         }
         const splitListener = this.splitListener;
-        // TODO: add splitListener to all sqlParser implements and remove following if
-        if (!splitListener) return null;
 
         this.listen(splitListener, this._parseTree);
 
@@ -256,8 +254,6 @@ export abstract class BasicSQL<
         caretPosition: CaretPosition
     ): Suggestions | null {
         const splitListener = this.splitListener;
-        // TODO: add splitListener to all sqlParser implements and remove following if
-        if (!splitListener) return null;
 
         this.parseWithCache(input);
         if (!this._parseTree) return null;
@@ -383,10 +379,6 @@ export abstract class BasicSQL<
             : void 0;
 
         const collectListener = this.createEntityCollector(input, caretTokenIndex);
-        // TODO: add entityCollector to all sqlParser implements and remove following if
-        if (!collectListener) {
-            return null;
-        }
         // const parser = this.createParserWithCache(input);
 
         // parser.entityCollecting = true;
