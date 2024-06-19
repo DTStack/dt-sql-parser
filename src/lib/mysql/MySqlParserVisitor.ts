@@ -605,8 +605,8 @@ import { SimpleFunctionCallContext } from "./MySqlParser.js";
 import { CurrentUserContext } from "./MySqlParser.js";
 import { DataTypeFunctionCallContext } from "./MySqlParser.js";
 import { ValuesFunctionCallContext } from "./MySqlParser.js";
-import { CaseExpressionFunctionCallContext } from "./MySqlParser.js";
 import { CaseFunctionCallContext } from "./MySqlParser.js";
+import { CaseExpressionFunctionCallContext } from "./MySqlParser.js";
 import { CharFunctionCallContext } from "./MySqlParser.js";
 import { PositionFunctionCallContext } from "./MySqlParser.js";
 import { SubstrFunctionCallContext } from "./MySqlParser.js";
@@ -4522,19 +4522,19 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitValuesFunctionCall?: (ctx: ValuesFunctionCallContext) => Result;
     /**
-     * Visit a parse tree produced by the `caseExpressionFunctionCall`
-     * labeled alternative in `MySqlParser.specificFunction`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitCaseExpressionFunctionCall?: (ctx: CaseExpressionFunctionCallContext) => Result;
-    /**
      * Visit a parse tree produced by the `caseFunctionCall`
      * labeled alternative in `MySqlParser.specificFunction`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitCaseFunctionCall?: (ctx: CaseFunctionCallContext) => Result;
+    /**
+     * Visit a parse tree produced by the `caseExpressionFunctionCall`
+     * labeled alternative in `MySqlParser.specificFunction`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCaseExpressionFunctionCall?: (ctx: CaseExpressionFunctionCallContext) => Result;
     /**
      * Visit a parse tree produced by the `charFunctionCall`
      * labeled alternative in `MySqlParser.specificFunction`.

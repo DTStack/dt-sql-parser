@@ -5,6 +5,7 @@ const mysql = new MySQL();
 
 const features = {
     call: readSQL(__dirname, 'call.sql'),
+    case: readSQL(__dirname, 'case.sql'),
     delete: readSQL(__dirname, 'delete.sql'),
     do: readSQL(__dirname, 'do.sql'),
     handler: readSQL(__dirname, 'handler.sql'),
