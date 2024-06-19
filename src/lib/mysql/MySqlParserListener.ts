@@ -605,8 +605,8 @@ import { SimpleFunctionCallContext } from "./MySqlParser.js";
 import { CurrentUserContext } from "./MySqlParser.js";
 import { DataTypeFunctionCallContext } from "./MySqlParser.js";
 import { ValuesFunctionCallContext } from "./MySqlParser.js";
-import { CaseExpressionFunctionCallContext } from "./MySqlParser.js";
 import { CaseFunctionCallContext } from "./MySqlParser.js";
+import { CaseExpressionFunctionCallContext } from "./MySqlParser.js";
 import { CharFunctionCallContext } from "./MySqlParser.js";
 import { PositionFunctionCallContext } from "./MySqlParser.js";
 import { SubstrFunctionCallContext } from "./MySqlParser.js";
@@ -7159,18 +7159,6 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitValuesFunctionCall?: (ctx: ValuesFunctionCallContext) => void;
     /**
-     * Enter a parse tree produced by the `caseExpressionFunctionCall`
-     * labeled alternative in `MySqlParser.specificFunction`.
-     * @param ctx the parse tree
-     */
-    enterCaseExpressionFunctionCall?: (ctx: CaseExpressionFunctionCallContext) => void;
-    /**
-     * Exit a parse tree produced by the `caseExpressionFunctionCall`
-     * labeled alternative in `MySqlParser.specificFunction`.
-     * @param ctx the parse tree
-     */
-    exitCaseExpressionFunctionCall?: (ctx: CaseExpressionFunctionCallContext) => void;
-    /**
      * Enter a parse tree produced by the `caseFunctionCall`
      * labeled alternative in `MySqlParser.specificFunction`.
      * @param ctx the parse tree
@@ -7182,6 +7170,18 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitCaseFunctionCall?: (ctx: CaseFunctionCallContext) => void;
+    /**
+     * Enter a parse tree produced by the `caseExpressionFunctionCall`
+     * labeled alternative in `MySqlParser.specificFunction`.
+     * @param ctx the parse tree
+     */
+    enterCaseExpressionFunctionCall?: (ctx: CaseExpressionFunctionCallContext) => void;
+    /**
+     * Exit a parse tree produced by the `caseExpressionFunctionCall`
+     * labeled alternative in `MySqlParser.specificFunction`.
+     * @param ctx the parse tree
+     */
+    exitCaseExpressionFunctionCall?: (ctx: CaseExpressionFunctionCallContext) => void;
     /**
      * Enter a parse tree produced by the `charFunctionCall`
      * labeled alternative in `MySqlParser.specificFunction`.
