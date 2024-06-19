@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.2](https://github.com/DTStack/dt-sql-parser/compare/v4.0.1...v4.0.2) (2024-06-19)
+
+
+### Features
+
+* add benchmark test suite ([#273](https://github.com/DTStack/dt-sql-parser/issues/273)) ([de1bd9d](https://github.com/DTStack/dt-sql-parser/commit/de1bd9de4cb7c3b42d51bedd79635eb91afba9ed))
+
+
+### Bug Fixes
+
+* **benchmark:** add reports dir judge and remove plsql and include pgsql ([9c534c2](https://github.com/DTStack/dt-sql-parser/commit/9c534c25cacba3cfba6bd234c68e8f27bd90b2e2))
+* mysql case when ([#317](https://github.com/DTStack/dt-sql-parser/issues/317)) ([fea1ad1](https://github.com/DTStack/dt-sql-parser/commit/fea1ad1a357b70291a240eca6d2058bab9b49469))
+
 ### [4.0.1](https://github.com/DTStack/dt-sql-parser/compare/v4.0.0...v4.0.1) (2024-04-28)
 
 
