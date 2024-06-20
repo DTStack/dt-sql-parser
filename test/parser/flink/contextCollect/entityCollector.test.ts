@@ -60,7 +60,6 @@ describe('Flink entity collector tests', () => {
         expect(tableCreateEntity.comment).toBe("'test table comment ABC.'");
 
         expect(tableCreateEntity.columns.length).toBe(2);
-        console.log(tableCreateEntity.columns);
         tableCreateEntity.columns.forEach((columEntity) => {
             expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
             expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
@@ -312,7 +311,6 @@ describe('Flink entity collector tests', () => {
         flink.listen(collectListener as ParseTreeListener, insertTableContext);
 
         const allEntities = collectListener.getEntities();
-        console.log(allEntities);
         expect(allEntities.length).toBe(2);
 
         expect(allEntities[0].entityContextType).toBe(EntityContextType.VIEW_CREATE);
