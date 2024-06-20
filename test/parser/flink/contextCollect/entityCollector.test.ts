@@ -1,10 +1,10 @@
+import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
-import { ParseTreeListener } from 'antlr4ng';
-import { FlinkSQL, FlinkEntityCollector, FlinkSqlSplitListener } from 'src/parser/flink';
 import { FlinkSqlParserListener } from 'src/lib/flink/FlinkSqlParserListener';
-import { EntityContextType } from 'src/parser/common/types';
 import { StmtContextType } from 'src/parser/common/entityCollector';
+import { EntityContextType } from 'src/parser/common/types';
+import { FlinkEntityCollector, FlinkSQL, FlinkSqlSplitListener } from 'src/parser/flink';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
 
@@ -49,16 +49,18 @@ describe('Flink entity collector tests', () => {
         );
         expect(tableCreateEntity.belongStmt.position).toEqual({
             startIndex: 0,
-            endIndex: 85,
+            endIndex: 180,
             startLine: 1,
             endLine: 1,
             startColumn: 1,
-            endColumn: 87,
+            endColumn: 182,
         });
 
         expect(tableCreateEntity.relatedEntities).toBeNull();
+        expect(tableCreateEntity.comment).toBe("'test table comment ABC.'");
 
         expect(tableCreateEntity.columns.length).toBe(2);
+        console.log(tableCreateEntity.columns);
         tableCreateEntity.columns.forEach((columEntity) => {
             expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
             expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
@@ -66,6 +68,9 @@ describe('Flink entity collector tests', () => {
                 commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
             );
         });
+        expect(tableCreateEntity.columns[0].comment).toBe("'col1'");
+        expect(tableCreateEntity.columns[0].colType).toBe('BIGINT');
+        expect(tableCreateEntity.columns[1].colType).toBe('STRING');
     });
 
     test('create table as select', () => {
@@ -83,8 +88,8 @@ describe('Flink entity collector tests', () => {
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('my_ctas_table');
         expect(tableCreateEntity.position).toEqual({
-            startIndex: 102,
-            endIndex: 114,
+            startIndex: 197,
+            endIndex: 209,
             line: 3,
             startColumn: 14,
             endColumn: 27,
@@ -94,8 +99,8 @@ describe('Flink entity collector tests', () => {
             StmtContextType.CREATE_TABLE_STMT
         );
         expect(tableCreateEntity.belongStmt.position).toEqual({
-            startIndex: 89,
-            endIndex: 228,
+            startIndex: 184,
+            endIndex: 323,
             startLine: 3,
             endLine: 11,
             startColumn: 1,
@@ -113,8 +118,8 @@ describe('Flink entity collector tests', () => {
         expect(allEntities[1].text).toBe('source_table');
         expect(allEntities[1].belongStmt.rootStmt).toBe(allEntities[0].belongStmt);
         expect(allEntities[1].position).toEqual({
-            startIndex: 191,
-            endIndex: 202,
+            startIndex: 286,
+            endIndex: 297,
             line: 9,
             startColumn: 5,
             endColumn: 17,
@@ -307,11 +312,12 @@ describe('Flink entity collector tests', () => {
         flink.listen(collectListener as ParseTreeListener, insertTableContext);
 
         const allEntities = collectListener.getEntities();
-
+        console.log(allEntities);
         expect(allEntities.length).toBe(2);
 
         expect(allEntities[0].entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(allEntities[0].text).toBe('view1');
+        expect(allEntities[0].comment).toBe("'this is a view'");
         expect(allEntities[0].belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
 
         expect(allEntities[1].entityContextType).toBe(EntityContextType.TABLE);
@@ -333,21 +339,22 @@ describe('Flink entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(dbEntity.text).toBe('db1');
+        expect(dbEntity.comment).toBe("'this is a created database'");
         expect(dbEntity.position).toEqual({
             endColumn: 34,
-            endIndex: 1160,
+            endIndex: 1280,
             line: 44,
             startColumn: 31,
-            startIndex: 1158,
+            startIndex: 1278,
         });
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
         expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 82,
-            endIndex: 1208,
+            endColumn: 119,
+            endIndex: 1365,
             endLine: 44,
             startColumn: 1,
-            startIndex: 1128,
+            startIndex: 1248,
             startLine: 44,
         });
 
@@ -371,10 +378,10 @@ describe('Flink entity collector tests', () => {
         expect(functionEntity.text).toBe('tempFunction');
         expect(functionEntity.position).toEqual({
             endColumn: 43,
-            endIndex: 1253,
+            endIndex: 1410,
             line: 46,
             startColumn: 31,
-            startIndex: 1242,
+            startIndex: 1399,
         });
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
@@ -382,10 +389,10 @@ describe('Flink entity collector tests', () => {
         );
         expect(functionEntity.belongStmt.position).toEqual({
             endColumn: 58,
-            endIndex: 1268,
+            endIndex: 1425,
             endLine: 46,
             startColumn: 1,
-            startIndex: 1212,
+            startIndex: 1369,
             startLine: 46,
         });
 
