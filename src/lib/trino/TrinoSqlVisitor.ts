@@ -10,14 +10,16 @@ import { SQLParserBase } from '../SQLParserBase';
 
 import { ProgramContext } from "./TrinoSqlParser.js";
 import { StatementsContext } from "./TrinoSqlParser.js";
-import { StandaloneClauseContext } from "./TrinoSqlParser.js";
 import { SingleStatementContext } from "./TrinoSqlParser.js";
 import { StandaloneExpressionContext } from "./TrinoSqlParser.js";
 import { StandalonePathSpecificationContext } from "./TrinoSqlParser.js";
 import { StandaloneTypeContext } from "./TrinoSqlParser.js";
 import { StandaloneRowPatternContext } from "./TrinoSqlParser.js";
+import { StandaloneFunctionSpecificationContext } from "./TrinoSqlParser.js";
 import { StatementDefaultContext } from "./TrinoSqlParser.js";
 import { UseContext } from "./TrinoSqlParser.js";
+import { CreateCatalogContext } from "./TrinoSqlParser.js";
+import { DropCatalogContext } from "./TrinoSqlParser.js";
 import { CreateSchemaContext } from "./TrinoSqlParser.js";
 import { DropSchemaContext } from "./TrinoSqlParser.js";
 import { RenameSchemaContext } from "./TrinoSqlParser.js";
@@ -28,12 +30,15 @@ import { DropTableContext } from "./TrinoSqlParser.js";
 import { InsertIntoContext } from "./TrinoSqlParser.js";
 import { DeleteContext } from "./TrinoSqlParser.js";
 import { TruncateTableContext } from "./TrinoSqlParser.js";
-import { RenameTableContext } from "./TrinoSqlParser.js";
 import { CommentTableContext } from "./TrinoSqlParser.js";
+import { CommentViewContext } from "./TrinoSqlParser.js";
 import { CommentColumnContext } from "./TrinoSqlParser.js";
+import { RenameTableContext } from "./TrinoSqlParser.js";
+import { AddColumnContext } from "./TrinoSqlParser.js";
 import { RenameColumnContext } from "./TrinoSqlParser.js";
 import { DropColumnContext } from "./TrinoSqlParser.js";
-import { AddColumnContext } from "./TrinoSqlParser.js";
+import { SetColumnTypeContext } from "./TrinoSqlParser.js";
+import { DropNotNullConstraintContext } from "./TrinoSqlParser.js";
 import { SetTableAuthorizationContext } from "./TrinoSqlParser.js";
 import { SetTablePropertiesContext } from "./TrinoSqlParser.js";
 import { TableExecuteContext } from "./TrinoSqlParser.js";
@@ -48,20 +53,24 @@ import { DropViewContext } from "./TrinoSqlParser.js";
 import { RenameViewContext } from "./TrinoSqlParser.js";
 import { SetViewAuthorizationContext } from "./TrinoSqlParser.js";
 import { CallContext } from "./TrinoSqlParser.js";
+import { CreateFunctionContext } from "./TrinoSqlParser.js";
+import { DropFunctionContext } from "./TrinoSqlParser.js";
 import { CreateRoleContext } from "./TrinoSqlParser.js";
 import { DropRoleContext } from "./TrinoSqlParser.js";
 import { GrantRolesContext } from "./TrinoSqlParser.js";
+import { GrantPrivilegesContext } from "./TrinoSqlParser.js";
 import { RevokeRolesContext } from "./TrinoSqlParser.js";
-import { SetRoleContext } from "./TrinoSqlParser.js";
-import { GrantContext } from "./TrinoSqlParser.js";
+import { RevokePrivilegesContext } from "./TrinoSqlParser.js";
 import { DenyContext } from "./TrinoSqlParser.js";
-import { RevokeContext } from "./TrinoSqlParser.js";
+import { SetRoleContext } from "./TrinoSqlParser.js";
 import { ShowGrantsContext } from "./TrinoSqlParser.js";
 import { ExplainContext } from "./TrinoSqlParser.js";
+import { ExplainAnalyzeContext } from "./TrinoSqlParser.js";
 import { ShowCreateTableContext } from "./TrinoSqlParser.js";
 import { ShowCreateSchemaContext } from "./TrinoSqlParser.js";
 import { ShowCreateViewContext } from "./TrinoSqlParser.js";
 import { ShowCreateMaterializedViewContext } from "./TrinoSqlParser.js";
+import { ShowCreateFunctionContext } from "./TrinoSqlParser.js";
 import { ShowTablesContext } from "./TrinoSqlParser.js";
 import { ShowSchemasContext } from "./TrinoSqlParser.js";
 import { ShowCatalogsContext } from "./TrinoSqlParser.js";
@@ -72,6 +81,8 @@ import { ShowRolesContext } from "./TrinoSqlParser.js";
 import { ShowRoleGrantsContext } from "./TrinoSqlParser.js";
 import { ShowFunctionsContext } from "./TrinoSqlParser.js";
 import { ShowSessionContext } from "./TrinoSqlParser.js";
+import { SetSessionAuthorizationContext } from "./TrinoSqlParser.js";
+import { ResetSessionAuthorizationContext } from "./TrinoSqlParser.js";
 import { SetSessionContext } from "./TrinoSqlParser.js";
 import { ResetSessionContext } from "./TrinoSqlParser.js";
 import { StartTransactionContext } from "./TrinoSqlParser.js";
@@ -80,6 +91,7 @@ import { RollbackContext } from "./TrinoSqlParser.js";
 import { PrepareContext } from "./TrinoSqlParser.js";
 import { DeallocateContext } from "./TrinoSqlParser.js";
 import { ExecuteContext } from "./TrinoSqlParser.js";
+import { ExecuteImmediateContext } from "./TrinoSqlParser.js";
 import { DescribeInputContext } from "./TrinoSqlParser.js";
 import { DescribeOutputContext } from "./TrinoSqlParser.js";
 import { SetPathContext } from "./TrinoSqlParser.js";
@@ -88,6 +100,8 @@ import { UpdateContext } from "./TrinoSqlParser.js";
 import { MergeContext } from "./TrinoSqlParser.js";
 import { ShowTableCommentContext } from "./TrinoSqlParser.js";
 import { ShowColumnCommentContext } from "./TrinoSqlParser.js";
+import { RootQueryContext } from "./TrinoSqlParser.js";
+import { WithFunctionContext } from "./TrinoSqlParser.js";
 import { QueryStatementContext } from "./TrinoSqlParser.js";
 import { WithContext } from "./TrinoSqlParser.js";
 import { TableElementContext } from "./TrinoSqlParser.js";
@@ -128,6 +142,9 @@ import { JoinTypeContext } from "./TrinoSqlParser.js";
 import { JoinCriteriaContext } from "./TrinoSqlParser.js";
 import { SampledRelationContext } from "./TrinoSqlParser.js";
 import { SampleTypeContext } from "./TrinoSqlParser.js";
+import { TrimsSpecificationContext } from "./TrinoSqlParser.js";
+import { ListAggOverflowBehaviorContext } from "./TrinoSqlParser.js";
+import { ListaggCountIndicationContext } from "./TrinoSqlParser.js";
 import { PatternRecognitionContext } from "./TrinoSqlParser.js";
 import { MeasureDefinitionContext } from "./TrinoSqlParser.js";
 import { RowsPerMatchContext } from "./TrinoSqlParser.js";
@@ -139,15 +156,37 @@ import { AliasedRelationContext } from "./TrinoSqlParser.js";
 import { ColumnListCreateContext } from "./TrinoSqlParser.js";
 import { ColumnListContext } from "./TrinoSqlParser.js";
 import { ColumnAliasesContext } from "./TrinoSqlParser.js";
-import { TableOrViewRelationContext } from "./TrinoSqlParser.js";
+import { TableNameContext } from "./TrinoSqlParser.js";
 import { SubqueryRelationContext } from "./TrinoSqlParser.js";
 import { UnnestContext } from "./TrinoSqlParser.js";
 import { LateralContext } from "./TrinoSqlParser.js";
+import { TableFunctionInvocationContext } from "./TrinoSqlParser.js";
 import { ParenthesizedRelationContext } from "./TrinoSqlParser.js";
+import { JsonTableContext } from "./TrinoSqlParser.js";
+import { OrdinalityColumnContext } from "./TrinoSqlParser.js";
+import { ValueColumnContext } from "./TrinoSqlParser.js";
+import { QueryColumnContext } from "./TrinoSqlParser.js";
+import { NestedColumnsContext } from "./TrinoSqlParser.js";
+import { LeafPlanContext } from "./TrinoSqlParser.js";
+import { JoinPlanContext } from "./TrinoSqlParser.js";
+import { UnionPlanContext } from "./TrinoSqlParser.js";
+import { CrossPlanContext } from "./TrinoSqlParser.js";
+import { JsonTablePathNameContext } from "./TrinoSqlParser.js";
+import { PlanPrimaryContext } from "./TrinoSqlParser.js";
+import { JsonTableDefaultPlanContext } from "./TrinoSqlParser.js";
+import { TableFunctionCallContext } from "./TrinoSqlParser.js";
+import { TableFunctionArgumentContext } from "./TrinoSqlParser.js";
+import { TableArgumentContext } from "./TrinoSqlParser.js";
+import { TableArgumentTableContext } from "./TrinoSqlParser.js";
+import { TableArgumentQueryContext } from "./TrinoSqlParser.js";
+import { DescriptorArgumentContext } from "./TrinoSqlParser.js";
+import { DescriptorFieldContext } from "./TrinoSqlParser.js";
+import { CopartitionTablesContext } from "./TrinoSqlParser.js";
 import { ExpressionContext } from "./TrinoSqlParser.js";
 import { LogicalNotContext } from "./TrinoSqlParser.js";
 import { PredicatedContext } from "./TrinoSqlParser.js";
-import { LogicalBinaryContext } from "./TrinoSqlParser.js";
+import { OrContext } from "./TrinoSqlParser.js";
+import { AndContext } from "./TrinoSqlParser.js";
 import { ComparisonContext } from "./TrinoSqlParser.js";
 import { QuantifiedComparisonContext } from "./TrinoSqlParser.js";
 import { BetweenContext } from "./TrinoSqlParser.js";
@@ -163,36 +202,56 @@ import { ArithmeticUnaryContext } from "./TrinoSqlParser.js";
 import { AtTimeZoneContext } from "./TrinoSqlParser.js";
 import { DereferenceContext } from "./TrinoSqlParser.js";
 import { TypeConstructorContext } from "./TrinoSqlParser.js";
-import { SpecialDateTimeFunctionContext } from "./TrinoSqlParser.js";
+import { JsonValueContext } from "./TrinoSqlParser.js";
+import { CurrentDateContext } from "./TrinoSqlParser.js";
 import { SubstringContext } from "./TrinoSqlParser.js";
 import { CastContext } from "./TrinoSqlParser.js";
 import { LambdaContext } from "./TrinoSqlParser.js";
 import { ParenthesizedExpressionContext } from "./TrinoSqlParser.js";
+import { TrimContext } from "./TrinoSqlParser.js";
 import { ParameterContext } from "./TrinoSqlParser.js";
 import { NormalizeContext } from "./TrinoSqlParser.js";
+import { LocalTimestampContext } from "./TrinoSqlParser.js";
+import { JsonObjectContext } from "./TrinoSqlParser.js";
 import { IntervalLiteralContext } from "./TrinoSqlParser.js";
 import { NumericLiteralContext } from "./TrinoSqlParser.js";
 import { BooleanLiteralContext } from "./TrinoSqlParser.js";
+import { JsonArrayContext } from "./TrinoSqlParser.js";
 import { SimpleCaseContext } from "./TrinoSqlParser.js";
 import { ColumnReferenceContext } from "./TrinoSqlParser.js";
 import { NullLiteralContext } from "./TrinoSqlParser.js";
 import { RowConstructorContext } from "./TrinoSqlParser.js";
 import { SubscriptContext } from "./TrinoSqlParser.js";
+import { JsonExistsContext } from "./TrinoSqlParser.js";
 import { CurrentPathContext } from "./TrinoSqlParser.js";
 import { SubqueryExpressionContext } from "./TrinoSqlParser.js";
 import { BinaryLiteralContext } from "./TrinoSqlParser.js";
+import { CurrentTimeContext } from "./TrinoSqlParser.js";
+import { LocalTimeContext } from "./TrinoSqlParser.js";
 import { CurrentUserContext } from "./TrinoSqlParser.js";
+import { JsonQueryContext } from "./TrinoSqlParser.js";
 import { MeasureContext } from "./TrinoSqlParser.js";
 import { ExtractContext } from "./TrinoSqlParser.js";
 import { StringLiteralContext } from "./TrinoSqlParser.js";
 import { ArrayConstructorContext } from "./TrinoSqlParser.js";
 import { FunctionCallContext } from "./TrinoSqlParser.js";
+import { CurrentTimestampContext } from "./TrinoSqlParser.js";
 import { CurrentSchemaContext } from "./TrinoSqlParser.js";
 import { ExistsContext } from "./TrinoSqlParser.js";
 import { PositionContext } from "./TrinoSqlParser.js";
+import { ListaggContext } from "./TrinoSqlParser.js";
 import { SearchedCaseContext } from "./TrinoSqlParser.js";
 import { CurrentCatalogContext } from "./TrinoSqlParser.js";
 import { GroupingOperationContext } from "./TrinoSqlParser.js";
+import { JsonPathInvocationContext } from "./TrinoSqlParser.js";
+import { JsonValueExpressionContext } from "./TrinoSqlParser.js";
+import { JsonRepresentationContext } from "./TrinoSqlParser.js";
+import { JsonArgumentContext } from "./TrinoSqlParser.js";
+import { JsonExistsErrorBehaviorContext } from "./TrinoSqlParser.js";
+import { JsonValueBehaviorContext } from "./TrinoSqlParser.js";
+import { JsonQueryWrapperBehaviorContext } from "./TrinoSqlParser.js";
+import { JsonQueryBehaviorContext } from "./TrinoSqlParser.js";
+import { JsonObjectMemberContext } from "./TrinoSqlParser.js";
 import { ProcessingModeContext } from "./TrinoSqlParser.js";
 import { NullTreatmentContext } from "./TrinoSqlParser.js";
 import { BasicStringLiteralContext } from "./TrinoSqlParser.js";
@@ -254,23 +313,51 @@ import { NamedArgumentContext } from "./TrinoSqlParser.js";
 import { QualifiedArgumentContext } from "./TrinoSqlParser.js";
 import { UnqualifiedArgumentContext } from "./TrinoSqlParser.js";
 import { PathSpecificationContext } from "./TrinoSqlParser.js";
+import { FunctionSpecificationContext } from "./TrinoSqlParser.js";
+import { FunctionDeclarationContext } from "./TrinoSqlParser.js";
+import { ParameterDeclarationContext } from "./TrinoSqlParser.js";
+import { ReturnsClauseContext } from "./TrinoSqlParser.js";
+import { LanguageCharacteristicContext } from "./TrinoSqlParser.js";
+import { DeterministicCharacteristicContext } from "./TrinoSqlParser.js";
+import { ReturnsNullOnNullInputCharacteristicContext } from "./TrinoSqlParser.js";
+import { CalledOnNullInputCharacteristicContext } from "./TrinoSqlParser.js";
+import { SecurityCharacteristicContext } from "./TrinoSqlParser.js";
+import { CommentCharacteristicContext } from "./TrinoSqlParser.js";
+import { ReturnStatementContext } from "./TrinoSqlParser.js";
+import { AssignmentStatementContext } from "./TrinoSqlParser.js";
+import { SimpleCaseStatementContext } from "./TrinoSqlParser.js";
+import { SearchedCaseStatementContext } from "./TrinoSqlParser.js";
+import { IfStatementContext } from "./TrinoSqlParser.js";
+import { IterateStatementContext } from "./TrinoSqlParser.js";
+import { LeaveStatementContext } from "./TrinoSqlParser.js";
+import { CompoundStatementContext } from "./TrinoSqlParser.js";
+import { LoopStatementContext } from "./TrinoSqlParser.js";
+import { WhileStatementContext } from "./TrinoSqlParser.js";
+import { RepeatStatementContext } from "./TrinoSqlParser.js";
+import { CaseStatementWhenClauseContext } from "./TrinoSqlParser.js";
+import { ElseIfClauseContext } from "./TrinoSqlParser.js";
+import { ElseClauseContext } from "./TrinoSqlParser.js";
+import { VariableDeclarationContext } from "./TrinoSqlParser.js";
+import { SqlStatementListContext } from "./TrinoSqlParser.js";
 import { PrivilegeContext } from "./TrinoSqlParser.js";
+import { EntityKindContext } from "./TrinoSqlParser.js";
+import { GrantObjectContext } from "./TrinoSqlParser.js";
 import { TableOrViewNameContext } from "./TrinoSqlParser.js";
-import { TableNameContext } from "./TrinoSqlParser.js";
+import { TableRefContext } from "./TrinoSqlParser.js";
 import { TableNameCreateContext } from "./TrinoSqlParser.js";
-import { ViewNameContext } from "./TrinoSqlParser.js";
+import { ViewRefContext } from "./TrinoSqlParser.js";
 import { ViewNameCreateContext } from "./TrinoSqlParser.js";
-import { TablePathContext } from "./TrinoSqlParser.js";
-import { ViewPathContext } from "./TrinoSqlParser.js";
-import { SchemaNameContext } from "./TrinoSqlParser.js";
+import { SchemaRefContext } from "./TrinoSqlParser.js";
 import { SchemaNameCreateContext } from "./TrinoSqlParser.js";
-import { SchemaPathContext } from "./TrinoSqlParser.js";
-import { CatalogNameContext } from "./TrinoSqlParser.js";
+import { CatalogRefContext } from "./TrinoSqlParser.js";
 import { CatalogNameCreateContext } from "./TrinoSqlParser.js";
 import { FunctionNameContext } from "./TrinoSqlParser.js";
-import { ColumnNameContext } from "./TrinoSqlParser.js";
+import { FunctionNameCreateContext } from "./TrinoSqlParser.js";
+import { ColumnRefContext } from "./TrinoSqlParser.js";
 import { ColumnNameCreateContext } from "./TrinoSqlParser.js";
 import { QualifiedNameContext } from "./TrinoSqlParser.js";
+import { QueryPeriodContext } from "./TrinoSqlParser.js";
+import { RangeTypeContext } from "./TrinoSqlParser.js";
 import { SpecifiedPrincipalContext } from "./TrinoSqlParser.js";
 import { CurrentUserGrantorContext } from "./TrinoSqlParser.js";
 import { CurrentRoleGrantorContext } from "./TrinoSqlParser.js";
@@ -278,6 +365,7 @@ import { UnspecifiedPrincipalContext } from "./TrinoSqlParser.js";
 import { UserPrincipalContext } from "./TrinoSqlParser.js";
 import { RolePrincipalContext } from "./TrinoSqlParser.js";
 import { RolesContext } from "./TrinoSqlParser.js";
+import { PrivilegeOrRoleContext } from "./TrinoSqlParser.js";
 import { UnquotedIdentifierContext } from "./TrinoSqlParser.js";
 import { QuotedIdentifierContext } from "./TrinoSqlParser.js";
 import { BackQuotedIdentifierContext } from "./TrinoSqlParser.js";
@@ -285,6 +373,8 @@ import { DigitIdentifierContext } from "./TrinoSqlParser.js";
 import { DecimalLiteralContext } from "./TrinoSqlParser.js";
 import { DoubleLiteralContext } from "./TrinoSqlParser.js";
 import { IntegerLiteralContext } from "./TrinoSqlParser.js";
+import { IdentifierUserContext } from "./TrinoSqlParser.js";
+import { StringUserContext } from "./TrinoSqlParser.js";
 import { NonReservedContext } from "./TrinoSqlParser.js";
 
 
@@ -308,12 +398,6 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitStatements?: (ctx: StatementsContext) => Result;
-    /**
-     * Visit a parse tree produced by `TrinoSqlParser.standaloneClause`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitStandaloneClause?: (ctx: StandaloneClauseContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.singleStatement`.
      * @param ctx the parse tree
@@ -345,6 +429,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitStandaloneRowPattern?: (ctx: StandaloneRowPatternContext) => Result;
     /**
+     * Visit a parse tree produced by `TrinoSqlParser.standaloneFunctionSpecification`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitStandaloneFunctionSpecification?: (ctx: StandaloneFunctionSpecificationContext) => Result;
+    /**
      * Visit a parse tree produced by the `statementDefault`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -358,6 +448,20 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitUse?: (ctx: UseContext) => Result;
+    /**
+     * Visit a parse tree produced by the `createCatalog`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCreateCatalog?: (ctx: CreateCatalogContext) => Result;
+    /**
+     * Visit a parse tree produced by the `dropCatalog`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDropCatalog?: (ctx: DropCatalogContext) => Result;
     /**
      * Visit a parse tree produced by the `createSchema`
      * labeled alternative in `TrinoSqlParser.statement`.
@@ -429,13 +533,6 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitTruncateTable?: (ctx: TruncateTableContext) => Result;
     /**
-     * Visit a parse tree produced by the `renameTable`
-     * labeled alternative in `TrinoSqlParser.statement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitRenameTable?: (ctx: RenameTableContext) => Result;
-    /**
      * Visit a parse tree produced by the `commentTable`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -443,12 +540,33 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitCommentTable?: (ctx: CommentTableContext) => Result;
     /**
+     * Visit a parse tree produced by the `commentView`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCommentView?: (ctx: CommentViewContext) => Result;
+    /**
      * Visit a parse tree produced by the `commentColumn`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitCommentColumn?: (ctx: CommentColumnContext) => Result;
+    /**
+     * Visit a parse tree produced by the `renameTable`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitRenameTable?: (ctx: RenameTableContext) => Result;
+    /**
+     * Visit a parse tree produced by the `addColumn`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAddColumn?: (ctx: AddColumnContext) => Result;
     /**
      * Visit a parse tree produced by the `renameColumn`
      * labeled alternative in `TrinoSqlParser.statement`.
@@ -464,12 +582,19 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitDropColumn?: (ctx: DropColumnContext) => Result;
     /**
-     * Visit a parse tree produced by the `addColumn`
+     * Visit a parse tree produced by the `setColumnType`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAddColumn?: (ctx: AddColumnContext) => Result;
+    visitSetColumnType?: (ctx: SetColumnTypeContext) => Result;
+    /**
+     * Visit a parse tree produced by the `dropNotNullConstraint`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDropNotNullConstraint?: (ctx: DropNotNullConstraintContext) => Result;
     /**
      * Visit a parse tree produced by the `setTableAuthorization`
      * labeled alternative in `TrinoSqlParser.statement`.
@@ -569,6 +694,20 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitCall?: (ctx: CallContext) => Result;
     /**
+     * Visit a parse tree produced by the `createFunction`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCreateFunction?: (ctx: CreateFunctionContext) => Result;
+    /**
+     * Visit a parse tree produced by the `dropFunction`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDropFunction?: (ctx: DropFunctionContext) => Result;
+    /**
      * Visit a parse tree produced by the `createRole`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -590,6 +729,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitGrantRoles?: (ctx: GrantRolesContext) => Result;
     /**
+     * Visit a parse tree produced by the `grantPrivileges`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitGrantPrivileges?: (ctx: GrantPrivilegesContext) => Result;
+    /**
      * Visit a parse tree produced by the `revokeRoles`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -597,19 +743,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitRevokeRoles?: (ctx: RevokeRolesContext) => Result;
     /**
-     * Visit a parse tree produced by the `setRole`
+     * Visit a parse tree produced by the `revokePrivileges`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSetRole?: (ctx: SetRoleContext) => Result;
-    /**
-     * Visit a parse tree produced by the `grant`
-     * labeled alternative in `TrinoSqlParser.statement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitGrant?: (ctx: GrantContext) => Result;
+    visitRevokePrivileges?: (ctx: RevokePrivilegesContext) => Result;
     /**
      * Visit a parse tree produced by the `deny`
      * labeled alternative in `TrinoSqlParser.statement`.
@@ -618,12 +757,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitDeny?: (ctx: DenyContext) => Result;
     /**
-     * Visit a parse tree produced by the `revoke`
+     * Visit a parse tree produced by the `setRole`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitRevoke?: (ctx: RevokeContext) => Result;
+    visitSetRole?: (ctx: SetRoleContext) => Result;
     /**
      * Visit a parse tree produced by the `showGrants`
      * labeled alternative in `TrinoSqlParser.statement`.
@@ -638,6 +777,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitExplain?: (ctx: ExplainContext) => Result;
+    /**
+     * Visit a parse tree produced by the `explainAnalyze`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitExplainAnalyze?: (ctx: ExplainAnalyzeContext) => Result;
     /**
      * Visit a parse tree produced by the `showCreateTable`
      * labeled alternative in `TrinoSqlParser.statement`.
@@ -666,6 +812,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitShowCreateMaterializedView?: (ctx: ShowCreateMaterializedViewContext) => Result;
+    /**
+     * Visit a parse tree produced by the `showCreateFunction`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitShowCreateFunction?: (ctx: ShowCreateFunctionContext) => Result;
     /**
      * Visit a parse tree produced by the `showTables`
      * labeled alternative in `TrinoSqlParser.statement`.
@@ -737,6 +890,20 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitShowSession?: (ctx: ShowSessionContext) => Result;
     /**
+     * Visit a parse tree produced by the `setSessionAuthorization`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSetSessionAuthorization?: (ctx: SetSessionAuthorizationContext) => Result;
+    /**
+     * Visit a parse tree produced by the `resetSessionAuthorization`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitResetSessionAuthorization?: (ctx: ResetSessionAuthorizationContext) => Result;
+    /**
      * Visit a parse tree produced by the `setSession`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -793,6 +960,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitExecute?: (ctx: ExecuteContext) => Result;
     /**
+     * Visit a parse tree produced by the `executeImmediate`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitExecuteImmediate?: (ctx: ExecuteImmediateContext) => Result;
+    /**
      * Visit a parse tree produced by the `describeInput`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -848,6 +1022,18 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitShowColumnComment?: (ctx: ShowColumnCommentContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.rootQuery`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitRootQuery?: (ctx: RootQueryContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.withFunction`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitWithFunction?: (ctx: WithFunctionContext) => Result;
     /**
      * Visit a parse tree produced by the `queryStatement`
      * labeled alternative in `TrinoSqlParser.query`.
@@ -1106,6 +1292,24 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitSampleType?: (ctx: SampleTypeContext) => Result;
     /**
+     * Visit a parse tree produced by `TrinoSqlParser.trimsSpecification`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTrimsSpecification?: (ctx: TrimsSpecificationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.listAggOverflowBehavior`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitListAggOverflowBehavior?: (ctx: ListAggOverflowBehaviorContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.listaggCountIndication`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitListaggCountIndication?: (ctx: ListaggCountIndicationContext) => Result;
+    /**
      * Visit a parse tree produced by `TrinoSqlParser.patternRecognition`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1172,12 +1376,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitColumnAliases?: (ctx: ColumnAliasesContext) => Result;
     /**
-     * Visit a parse tree produced by the `tableOrViewRelation`
+     * Visit a parse tree produced by the `tableName`
      * labeled alternative in `TrinoSqlParser.relationPrimary`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTableOrViewRelation?: (ctx: TableOrViewRelationContext) => Result;
+    visitTableName?: (ctx: TableNameContext) => Result;
     /**
      * Visit a parse tree produced by the `subqueryRelation`
      * labeled alternative in `TrinoSqlParser.relationPrimary`.
@@ -1200,12 +1404,150 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitLateral?: (ctx: LateralContext) => Result;
     /**
+     * Visit a parse tree produced by the `tableFunctionInvocation`
+     * labeled alternative in `TrinoSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableFunctionInvocation?: (ctx: TableFunctionInvocationContext) => Result;
+    /**
      * Visit a parse tree produced by the `parenthesizedRelation`
      * labeled alternative in `TrinoSqlParser.relationPrimary`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitParenthesizedRelation?: (ctx: ParenthesizedRelationContext) => Result;
+    /**
+     * Visit a parse tree produced by the `jsonTable`
+     * labeled alternative in `TrinoSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonTable?: (ctx: JsonTableContext) => Result;
+    /**
+     * Visit a parse tree produced by the `ordinalityColumn`
+     * labeled alternative in `TrinoSqlParser.jsonTableColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitOrdinalityColumn?: (ctx: OrdinalityColumnContext) => Result;
+    /**
+     * Visit a parse tree produced by the `valueColumn`
+     * labeled alternative in `TrinoSqlParser.jsonTableColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitValueColumn?: (ctx: ValueColumnContext) => Result;
+    /**
+     * Visit a parse tree produced by the `queryColumn`
+     * labeled alternative in `TrinoSqlParser.jsonTableColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitQueryColumn?: (ctx: QueryColumnContext) => Result;
+    /**
+     * Visit a parse tree produced by the `nestedColumns`
+     * labeled alternative in `TrinoSqlParser.jsonTableColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitNestedColumns?: (ctx: NestedColumnsContext) => Result;
+    /**
+     * Visit a parse tree produced by the `leafPlan`
+     * labeled alternative in `TrinoSqlParser.jsonTableSpecificPlan`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitLeafPlan?: (ctx: LeafPlanContext) => Result;
+    /**
+     * Visit a parse tree produced by the `joinPlan`
+     * labeled alternative in `TrinoSqlParser.jsonTableSpecificPlan`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJoinPlan?: (ctx: JoinPlanContext) => Result;
+    /**
+     * Visit a parse tree produced by the `unionPlan`
+     * labeled alternative in `TrinoSqlParser.jsonTableSpecificPlan`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitUnionPlan?: (ctx: UnionPlanContext) => Result;
+    /**
+     * Visit a parse tree produced by the `crossPlan`
+     * labeled alternative in `TrinoSqlParser.jsonTableSpecificPlan`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCrossPlan?: (ctx: CrossPlanContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonTablePathName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonTablePathName?: (ctx: JsonTablePathNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.planPrimary`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPlanPrimary?: (ctx: PlanPrimaryContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonTableDefaultPlan`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonTableDefaultPlan?: (ctx: JsonTableDefaultPlanContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.tableFunctionCall`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableFunctionCall?: (ctx: TableFunctionCallContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.tableFunctionArgument`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableFunctionArgument?: (ctx: TableFunctionArgumentContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.tableArgument`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableArgument?: (ctx: TableArgumentContext) => Result;
+    /**
+     * Visit a parse tree produced by the `tableArgumentTable`
+     * labeled alternative in `TrinoSqlParser.tableArgumentRelation`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableArgumentTable?: (ctx: TableArgumentTableContext) => Result;
+    /**
+     * Visit a parse tree produced by the `tableArgumentQuery`
+     * labeled alternative in `TrinoSqlParser.tableArgumentRelation`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableArgumentQuery?: (ctx: TableArgumentQueryContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.descriptorArgument`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDescriptorArgument?: (ctx: DescriptorArgumentContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.descriptorField`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDescriptorField?: (ctx: DescriptorFieldContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.copartitionTables`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCopartitionTables?: (ctx: CopartitionTablesContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.expression`.
      * @param ctx the parse tree
@@ -1227,12 +1569,19 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitPredicated?: (ctx: PredicatedContext) => Result;
     /**
-     * Visit a parse tree produced by the `logicalBinary`
+     * Visit a parse tree produced by the `or`
      * labeled alternative in `TrinoSqlParser.booleanExpression`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitLogicalBinary?: (ctx: LogicalBinaryContext) => Result;
+    visitOr?: (ctx: OrContext) => Result;
+    /**
+     * Visit a parse tree produced by the `and`
+     * labeled alternative in `TrinoSqlParser.booleanExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAnd?: (ctx: AndContext) => Result;
     /**
      * Visit a parse tree produced by the `comparison`
      * labeled alternative in `TrinoSqlParser.predicate`.
@@ -1339,12 +1688,19 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitTypeConstructor?: (ctx: TypeConstructorContext) => Result;
     /**
-     * Visit a parse tree produced by the `specialDateTimeFunction`
+     * Visit a parse tree produced by the `jsonValue`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSpecialDateTimeFunction?: (ctx: SpecialDateTimeFunctionContext) => Result;
+    visitJsonValue?: (ctx: JsonValueContext) => Result;
+    /**
+     * Visit a parse tree produced by the `currentDate`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCurrentDate?: (ctx: CurrentDateContext) => Result;
     /**
      * Visit a parse tree produced by the `substring`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
@@ -1374,6 +1730,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => Result;
     /**
+     * Visit a parse tree produced by the `trim`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTrim?: (ctx: TrimContext) => Result;
+    /**
      * Visit a parse tree produced by the `parameter`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
      * @param ctx the parse tree
@@ -1387,6 +1750,20 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitNormalize?: (ctx: NormalizeContext) => Result;
+    /**
+     * Visit a parse tree produced by the `localTimestamp`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitLocalTimestamp?: (ctx: LocalTimestampContext) => Result;
+    /**
+     * Visit a parse tree produced by the `jsonObject`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonObject?: (ctx: JsonObjectContext) => Result;
     /**
      * Visit a parse tree produced by the `intervalLiteral`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
@@ -1408,6 +1785,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitBooleanLiteral?: (ctx: BooleanLiteralContext) => Result;
+    /**
+     * Visit a parse tree produced by the `jsonArray`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonArray?: (ctx: JsonArrayContext) => Result;
     /**
      * Visit a parse tree produced by the `simpleCase`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
@@ -1444,6 +1828,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitSubscript?: (ctx: SubscriptContext) => Result;
     /**
+     * Visit a parse tree produced by the `jsonExists`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonExists?: (ctx: JsonExistsContext) => Result;
+    /**
      * Visit a parse tree produced by the `currentPath`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
      * @param ctx the parse tree
@@ -1465,12 +1856,33 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitBinaryLiteral?: (ctx: BinaryLiteralContext) => Result;
     /**
+     * Visit a parse tree produced by the `currentTime`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCurrentTime?: (ctx: CurrentTimeContext) => Result;
+    /**
+     * Visit a parse tree produced by the `localTime`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitLocalTime?: (ctx: LocalTimeContext) => Result;
+    /**
      * Visit a parse tree produced by the `currentUser`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitCurrentUser?: (ctx: CurrentUserContext) => Result;
+    /**
+     * Visit a parse tree produced by the `jsonQuery`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonQuery?: (ctx: JsonQueryContext) => Result;
     /**
      * Visit a parse tree produced by the `measure`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
@@ -1507,6 +1919,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitFunctionCall?: (ctx: FunctionCallContext) => Result;
     /**
+     * Visit a parse tree produced by the `currentTimestamp`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCurrentTimestamp?: (ctx: CurrentTimestampContext) => Result;
+    /**
      * Visit a parse tree produced by the `currentSchema`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
      * @param ctx the parse tree
@@ -1528,6 +1947,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitPosition?: (ctx: PositionContext) => Result;
     /**
+     * Visit a parse tree produced by the `listagg`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitListagg?: (ctx: ListaggContext) => Result;
+    /**
      * Visit a parse tree produced by the `searchedCase`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
      * @param ctx the parse tree
@@ -1548,6 +1974,60 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitGroupingOperation?: (ctx: GroupingOperationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonPathInvocation`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonPathInvocation?: (ctx: JsonPathInvocationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonValueExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonValueExpression?: (ctx: JsonValueExpressionContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonRepresentation`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonRepresentation?: (ctx: JsonRepresentationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonArgument`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonArgument?: (ctx: JsonArgumentContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonExistsErrorBehavior`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonExistsErrorBehavior?: (ctx: JsonExistsErrorBehaviorContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonValueBehavior`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonValueBehavior?: (ctx: JsonValueBehaviorContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonQueryWrapperBehavior`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonQueryWrapperBehavior?: (ctx: JsonQueryWrapperBehaviorContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonQueryBehavior`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonQueryBehavior?: (ctx: JsonQueryBehaviorContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.jsonObjectMember`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonObjectMember?: (ctx: JsonObjectMemberContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.processingMode`.
      * @param ctx the parse tree
@@ -1959,11 +2439,196 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitPathSpecification?: (ctx: PathSpecificationContext) => Result;
     /**
+     * Visit a parse tree produced by `TrinoSqlParser.functionSpecification`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFunctionSpecification?: (ctx: FunctionSpecificationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.functionDeclaration`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFunctionDeclaration?: (ctx: FunctionDeclarationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.parameterDeclaration`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitParameterDeclaration?: (ctx: ParameterDeclarationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.returnsClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitReturnsClause?: (ctx: ReturnsClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by the `languageCharacteristic`
+     * labeled alternative in `TrinoSqlParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitLanguageCharacteristic?: (ctx: LanguageCharacteristicContext) => Result;
+    /**
+     * Visit a parse tree produced by the `deterministicCharacteristic`
+     * labeled alternative in `TrinoSqlParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDeterministicCharacteristic?: (ctx: DeterministicCharacteristicContext) => Result;
+    /**
+     * Visit a parse tree produced by the `returnsNullOnNullInputCharacteristic`
+     * labeled alternative in `TrinoSqlParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitReturnsNullOnNullInputCharacteristic?: (ctx: ReturnsNullOnNullInputCharacteristicContext) => Result;
+    /**
+     * Visit a parse tree produced by the `calledOnNullInputCharacteristic`
+     * labeled alternative in `TrinoSqlParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCalledOnNullInputCharacteristic?: (ctx: CalledOnNullInputCharacteristicContext) => Result;
+    /**
+     * Visit a parse tree produced by the `securityCharacteristic`
+     * labeled alternative in `TrinoSqlParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSecurityCharacteristic?: (ctx: SecurityCharacteristicContext) => Result;
+    /**
+     * Visit a parse tree produced by the `commentCharacteristic`
+     * labeled alternative in `TrinoSqlParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCommentCharacteristic?: (ctx: CommentCharacteristicContext) => Result;
+    /**
+     * Visit a parse tree produced by the `returnStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitReturnStatement?: (ctx: ReturnStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `assignmentStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAssignmentStatement?: (ctx: AssignmentStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `simpleCaseStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSimpleCaseStatement?: (ctx: SimpleCaseStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `searchedCaseStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSearchedCaseStatement?: (ctx: SearchedCaseStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `ifStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIfStatement?: (ctx: IfStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `iterateStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIterateStatement?: (ctx: IterateStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `leaveStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitLeaveStatement?: (ctx: LeaveStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `compoundStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCompoundStatement?: (ctx: CompoundStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `loopStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitLoopStatement?: (ctx: LoopStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `whileStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitWhileStatement?: (ctx: WhileStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `repeatStatement`
+     * labeled alternative in `TrinoSqlParser.controlStatement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitRepeatStatement?: (ctx: RepeatStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.caseStatementWhenClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCaseStatementWhenClause?: (ctx: CaseStatementWhenClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.elseIfClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitElseIfClause?: (ctx: ElseIfClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.elseClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitElseClause?: (ctx: ElseClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.variableDeclaration`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitVariableDeclaration?: (ctx: VariableDeclarationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.sqlStatementList`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSqlStatementList?: (ctx: SqlStatementListContext) => Result;
+    /**
      * Visit a parse tree produced by `TrinoSqlParser.privilege`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitPrivilege?: (ctx: PrivilegeContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.entityKind`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEntityKind?: (ctx: EntityKindContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.grantObject`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitGrantObject?: (ctx: GrantObjectContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.tableOrViewName`.
      * @param ctx the parse tree
@@ -1971,11 +2636,11 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitTableOrViewName?: (ctx: TableOrViewNameContext) => Result;
     /**
-     * Visit a parse tree produced by `TrinoSqlParser.tableName`.
+     * Visit a parse tree produced by `TrinoSqlParser.tableRef`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTableName?: (ctx: TableNameContext) => Result;
+    visitTableRef?: (ctx: TableRefContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.tableNameCreate`.
      * @param ctx the parse tree
@@ -1983,11 +2648,11 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitTableNameCreate?: (ctx: TableNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by `TrinoSqlParser.viewName`.
+     * Visit a parse tree produced by `TrinoSqlParser.viewRef`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitViewName?: (ctx: ViewNameContext) => Result;
+    visitViewRef?: (ctx: ViewRefContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.viewNameCreate`.
      * @param ctx the parse tree
@@ -1995,23 +2660,11 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitViewNameCreate?: (ctx: ViewNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by `TrinoSqlParser.tablePath`.
+     * Visit a parse tree produced by `TrinoSqlParser.schemaRef`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTablePath?: (ctx: TablePathContext) => Result;
-    /**
-     * Visit a parse tree produced by `TrinoSqlParser.viewPath`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitViewPath?: (ctx: ViewPathContext) => Result;
-    /**
-     * Visit a parse tree produced by `TrinoSqlParser.schemaName`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSchemaName?: (ctx: SchemaNameContext) => Result;
+    visitSchemaRef?: (ctx: SchemaRefContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.schemaNameCreate`.
      * @param ctx the parse tree
@@ -2019,17 +2672,11 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitSchemaNameCreate?: (ctx: SchemaNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by `TrinoSqlParser.schemaPath`.
+     * Visit a parse tree produced by `TrinoSqlParser.catalogRef`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSchemaPath?: (ctx: SchemaPathContext) => Result;
-    /**
-     * Visit a parse tree produced by `TrinoSqlParser.catalogName`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitCatalogName?: (ctx: CatalogNameContext) => Result;
+    visitCatalogRef?: (ctx: CatalogRefContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.catalogNameCreate`.
      * @param ctx the parse tree
@@ -2043,11 +2690,17 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitFunctionName?: (ctx: FunctionNameContext) => Result;
     /**
-     * Visit a parse tree produced by `TrinoSqlParser.columnName`.
+     * Visit a parse tree produced by `TrinoSqlParser.functionNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitColumnName?: (ctx: ColumnNameContext) => Result;
+    visitFunctionNameCreate?: (ctx: FunctionNameCreateContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.columnRef`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnRef?: (ctx: ColumnRefContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.columnNameCreate`.
      * @param ctx the parse tree
@@ -2060,6 +2713,18 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitQualifiedName?: (ctx: QualifiedNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.queryPeriod`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitQueryPeriod?: (ctx: QueryPeriodContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.rangeType`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitRangeType?: (ctx: RangeTypeContext) => Result;
     /**
      * Visit a parse tree produced by the `specifiedPrincipal`
      * labeled alternative in `TrinoSqlParser.grantor`.
@@ -2109,6 +2774,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitRoles?: (ctx: RolesContext) => Result;
     /**
+     * Visit a parse tree produced by `TrinoSqlParser.privilegeOrRole`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPrivilegeOrRole?: (ctx: PrivilegeOrRoleContext) => Result;
+    /**
      * Visit a parse tree produced by the `unquotedIdentifier`
      * labeled alternative in `TrinoSqlParser.identifier`.
      * @param ctx the parse tree
@@ -2157,6 +2828,20 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitIntegerLiteral?: (ctx: IntegerLiteralContext) => Result;
+    /**
+     * Visit a parse tree produced by the `identifierUser`
+     * labeled alternative in `TrinoSqlParser.authorizationUser`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIdentifierUser?: (ctx: IdentifierUserContext) => Result;
+    /**
+     * Visit a parse tree produced by the `stringUser`
+     * labeled alternative in `TrinoSqlParser.authorizationUser`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitStringUser?: (ctx: StringUserContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.nonReserved`.
      * @param ctx the parse tree

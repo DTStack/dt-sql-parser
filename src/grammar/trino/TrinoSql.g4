@@ -71,104 +71,101 @@ standaloneFunctionSpecification
     ;
 
 statement
-    : rootQuery                                       # statementDefault
-    | KW_USE schema=identifier                        # use
-    | KW_USE catalog=identifier '.' schema=identifier # use
-    | KW_CREATE KW_CATALOG (KW_IF KW_NOT KW_EXISTS)? catalog=identifier KW_USING connectorName=identifier (
+    : rootQuery        # statementDefault
+    | KW_USE schemaRef # use
+    | KW_CREATE KW_CATALOG (KW_IF KW_NOT KW_EXISTS)? catalog=catalogNameCreate KW_USING connectorName=identifier (
         KW_COMMENT string
     )? (KW_AUTHORIZATION principal)? (KW_WITH properties)?                                 # createCatalog
-    | KW_DROP KW_CATALOG (KW_IF KW_EXISTS)? catalog=identifier (KW_CASCADE | KW_RESTRICT)? # dropCatalog
-    | KW_CREATE KW_SCHEMA (KW_IF KW_NOT KW_EXISTS)? qualifiedName (KW_AUTHORIZATION principal)? (
+    | KW_DROP KW_CATALOG (KW_IF KW_EXISTS)? catalog=catalogRef (KW_CASCADE | KW_RESTRICT)? # dropCatalog
+    | KW_CREATE KW_SCHEMA (KW_IF KW_NOT KW_EXISTS)? schemaNameCreate (KW_AUTHORIZATION principal)? (
         KW_WITH properties
-    )?                                                                               # createSchema
-    | KW_DROP KW_SCHEMA (KW_IF KW_EXISTS)? qualifiedName (KW_CASCADE | KW_RESTRICT)? # dropSchema
-    | KW_ALTER KW_SCHEMA qualifiedName KW_RENAME KW_TO identifier                    # renameSchema
-    | KW_ALTER KW_SCHEMA qualifiedName KW_SET KW_AUTHORIZATION principal             # setSchemaAuthorization
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? qualifiedName columnAliases? (
+    )?                                                                           # createSchema
+    | KW_DROP KW_SCHEMA (KW_IF KW_EXISTS)? schemaRef (KW_CASCADE | KW_RESTRICT)? # dropSchema
+    | KW_ALTER KW_SCHEMA schemaRef KW_RENAME KW_TO schemaNameCreate              # renameSchema
+    | KW_ALTER KW_SCHEMA schemaRef KW_SET KW_AUTHORIZATION principal             # setSchemaAuthorization
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tableNameCreate columnListCreate? (
         KW_COMMENT string
     )? (KW_WITH properties)? KW_AS (rootQuery | '(' rootQuery ')') (KW_WITH (KW_NO)? KW_DATA)? # createTableAsSelect
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? qualifiedName '(' tableElement (
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tableNameCreate '(' tableElement (
         ',' tableElement
-    )* ')' (KW_COMMENT string)? (KW_WITH properties)?                                          # createTable
-    | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? qualifiedName                                        # dropTable
-    | KW_INSERT KW_INTO qualifiedName columnAliases? rootQuery                                 # insertInto
-    | KW_DELETE KW_FROM qualifiedName (KW_WHERE booleanExpression)?                            # delete
-    | KW_TRUNCATE KW_TABLE qualifiedName                                                       # truncateTable
-    | KW_COMMENT KW_ON KW_TABLE qualifiedName KW_IS (string | KW_NULL)                         # commentTable
-    | KW_COMMENT KW_ON KW_VIEW qualifiedName KW_IS (string | KW_NULL)                          # commentView
-    | KW_COMMENT KW_ON KW_COLUMN qualifiedName KW_IS (string | KW_NULL)                        # commentColumn
-    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? from=qualifiedName KW_RENAME KW_TO to=qualifiedName # renameTable
-    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=qualifiedName KW_ADD KW_COLUMN (
-        KW_IF KW_NOT KW_EXISTS
-    )? column=columnDefinition                                                                                                                   # addColumn
-    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=qualifiedName KW_RENAME KW_COLUMN (KW_IF KW_EXISTS)? from=qualifiedName KW_TO to=identifier # renameColumn
-    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=qualifiedName KW_DROP KW_COLUMN (KW_IF KW_EXISTS)? column=qualifiedName                     # dropColumn
-    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=qualifiedName KW_ALTER KW_COLUMN columnRef=qualifiedName KW_SET KW_DATA KW_TYPE type        # setColumnType
-    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=qualifiedName KW_ALTER KW_COLUMN columnRef=identifier KW_DROP KW_NOT KW_NULL                # dropNotNullConstraint
-    | KW_ALTER KW_TABLE tableName=qualifiedName KW_SET KW_AUTHORIZATION principal                                                                # setTableAuthorization
-    | KW_ALTER KW_TABLE tableName=qualifiedName KW_SET KW_PROPERTIES propertyAssignments                                                         # setTableProperties
-    | KW_ALTER KW_TABLE tableName=qualifiedName KW_EXECUTE procedureName=identifier (
+    )* ')' (KW_COMMENT string)? (KW_WITH properties)?                                                                                         # createTable
+    | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? tableRef                                                                                            # dropTable
+    | KW_INSERT KW_INTO tableRef columnList? rootQuery                                                                                        # insertInto
+    | KW_DELETE KW_FROM tableRef (KW_WHERE booleanExpression)?                                                                                # delete
+    | KW_TRUNCATE KW_TABLE tableRef                                                                                                           # truncateTable
+    | KW_COMMENT KW_ON KW_TABLE tableRef KW_IS (string | KW_NULL)                                                                             # commentTable
+    | KW_COMMENT KW_ON KW_VIEW viewRef KW_IS (string | KW_NULL)                                                                               # commentView
+    | KW_COMMENT KW_ON KW_COLUMN columnRef KW_IS (string | KW_NULL)                                                                           # commentColumn
+    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? from=tableRef KW_RENAME KW_TO to=tableNameCreate                                                   # renameTable
+    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=tableRef KW_ADD KW_COLUMN (KW_IF KW_NOT KW_EXISTS)? column=columnDefinition              # addColumn
+    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=tableRef KW_RENAME KW_COLUMN (KW_IF KW_EXISTS)? from=columnRef KW_TO to=columnNameCreate # renameColumn
+    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=tableRef KW_DROP KW_COLUMN (KW_IF KW_EXISTS)? column=columnRef                           # dropColumn
+    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=tableRef KW_ALTER KW_COLUMN column=columnRef KW_SET KW_DATA KW_TYPE type                 # setColumnType
+    | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=tableRef KW_ALTER KW_COLUMN column=columnRef KW_DROP KW_NOT KW_NULL                      # dropNotNullConstraint
+    | KW_ALTER KW_TABLE tableName=tableRef KW_SET KW_AUTHORIZATION principal                                                                  # setTableAuthorization
+    | KW_ALTER KW_TABLE tableName=tableRef KW_SET KW_PROPERTIES propertyAssignments                                                           # setTableProperties
+    | KW_ALTER KW_TABLE tableName=tableRef KW_EXECUTE procedureName=functionName (
         '(' (callArgument (',' callArgument)*)? ')'
-    )? (KW_WHERE where=booleanExpression)?           # tableExecute
-    | KW_ANALYZE qualifiedName (KW_WITH properties)? # analyze
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_MATERIALIZED KW_VIEW (KW_IF KW_NOT KW_EXISTS)? qualifiedName (
+    )? (KW_WHERE where=booleanExpression)?      # tableExecute
+    | KW_ANALYZE tableRef (KW_WITH properties)? # analyze
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_MATERIALIZED KW_VIEW (KW_IF KW_NOT KW_EXISTS)? viewNameCreate (
         KW_GRACE KW_PERIOD interval
     )? (KW_COMMENT string)? (KW_WITH properties)? KW_AS rootQuery # createMaterializedView
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_VIEW qualifiedName (KW_COMMENT string)? (
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_VIEW viewNameCreate (KW_COMMENT string)? (
         KW_SECURITY (KW_DEFINER | KW_INVOKER)
-    )? (KW_WITH properties)? KW_AS rootQuery                                                                  # createView
-    | KW_REFRESH KW_MATERIALIZED KW_VIEW qualifiedName                                                        # refreshMaterializedView
-    | KW_DROP KW_MATERIALIZED KW_VIEW (KW_IF KW_EXISTS)? qualifiedName                                        # dropMaterializedView
-    | KW_ALTER KW_MATERIALIZED KW_VIEW (KW_IF KW_EXISTS)? from=qualifiedName KW_RENAME KW_TO to=qualifiedName # renameMaterializedView
-    | KW_ALTER KW_MATERIALIZED KW_VIEW qualifiedName KW_SET KW_PROPERTIES propertyAssignments                 # setMaterializedViewProperties
-    | KW_DROP KW_VIEW (KW_IF KW_EXISTS)? qualifiedName                                                        # dropView
-    | KW_ALTER KW_VIEW from=qualifiedName KW_RENAME KW_TO to=qualifiedName                                    # renameView
-    | KW_ALTER KW_VIEW from=qualifiedName KW_SET KW_AUTHORIZATION principal                                   # setViewAuthorization
-    | KW_CALL qualifiedName '(' (callArgument (',' callArgument)*)? ')'                                       # call
-    | KW_CREATE (KW_OR KW_REPLACE)? functionSpecification                                                     # createFunction
-    | KW_DROP KW_FUNCTION (KW_IF KW_EXISTS)? functionDeclaration                                              # dropFunction
-    | KW_CREATE KW_ROLE name=identifier (KW_WITH KW_ADMIN grantor)? (KW_IN catalog=identifier)?               # createRole
-    | KW_DROP KW_ROLE name=identifier (KW_IN catalog=identifier)?                                             # dropRole
+    )? (KW_WITH properties)? KW_AS rootQuery                                                             # createView
+    | KW_REFRESH KW_MATERIALIZED KW_VIEW viewRef                                                         # refreshMaterializedView
+    | KW_DROP KW_MATERIALIZED KW_VIEW (KW_IF KW_EXISTS)? viewRef                                         # dropMaterializedView
+    | KW_ALTER KW_MATERIALIZED KW_VIEW (KW_IF KW_EXISTS)? from=viewRef KW_RENAME KW_TO to=viewNameCreate # renameMaterializedView
+    | KW_ALTER KW_MATERIALIZED KW_VIEW viewRef KW_SET KW_PROPERTIES propertyAssignments                  # setMaterializedViewProperties
+    | KW_DROP KW_VIEW (KW_IF KW_EXISTS)? viewRef                                                         # dropView
+    | KW_ALTER KW_VIEW from=viewRef KW_RENAME KW_TO to=viewNameCreate                                    # renameView
+    | KW_ALTER KW_VIEW from=viewRef KW_SET KW_AUTHORIZATION principal                                    # setViewAuthorization
+    | KW_CALL functionName '(' (callArgument (',' callArgument)*)? ')'                                   # call
+    | KW_CREATE (KW_OR KW_REPLACE)? functionSpecification                                                # createFunction
+    | KW_DROP KW_FUNCTION (KW_IF KW_EXISTS)? functionDeclaration                                         # dropFunction
+    | KW_CREATE KW_ROLE name=identifier (KW_WITH KW_ADMIN grantor)? (KW_IN catalog=catalogRef)?          # createRole
+    | KW_DROP KW_ROLE name=identifier (KW_IN catalog=catalogRef)?                                        # dropRole
     | KW_GRANT privilegeOrRole (',' privilegeOrRole)* KW_TO principal (',' principal)* (
         KW_WITH KW_ADMIN KW_OPTION
-    )? (KW_GRANTED KW_BY grantor)? (KW_IN catalog=identifier)? # grantRoles
+    )? (KW_GRANTED KW_BY grantor)? (KW_IN catalog=catalogRef)? # grantRoles
     | KW_GRANT ((privilegeOrRole (',' privilegeOrRole)*) | KW_ALL KW_PRIVILEGES) KW_ON grantObject KW_TO principal (
         KW_WITH KW_GRANT KW_OPTION
     )? # grantPrivileges
     | KW_REVOKE (KW_ADMIN KW_OPTION KW_FOR)? privilegeOrRole (',' privilegeOrRole)* KW_FROM principal (
         ',' principal
-    )* (KW_GRANTED KW_BY grantor)? (KW_IN catalog=identifier)? # revokeRoles
+    )* (KW_GRANTED KW_BY grantor)? (KW_IN catalog=catalogRef)? # revokeRoles
     | KW_REVOKE (KW_GRANT KW_OPTION KW_FOR)? (
         (privilegeOrRole (',' privilegeOrRole)*)
         | KW_ALL KW_PRIVILEGES
     ) KW_ON grantObject KW_FROM grantee=principal                                                           # revokePrivileges
     | KW_DENY (privilege (',' privilege)* | KW_ALL KW_PRIVILEGES) KW_ON grantObject KW_TO grantee=principal # deny
-    | KW_SET KW_ROLE (KW_ALL | KW_NONE | role=identifier) (KW_IN catalog=identifier)?                       # setRole
+    | KW_SET KW_ROLE (KW_ALL | KW_NONE | role=identifier) (KW_IN catalog=catalogRef)?                       # setRole
     | KW_SHOW KW_GRANTS (KW_ON grantObject)?                                                                # showGrants
     | KW_EXPLAIN ('(' explainOption (',' explainOption)* ')')? statement                                    # explain
     | KW_EXPLAIN KW_ANALYZE KW_VERBOSE? statement                                                           # explainAnalyze
-    | KW_SHOW KW_CREATE KW_TABLE qualifiedName                                                              # showCreateTable
-    | KW_SHOW KW_CREATE KW_SCHEMA qualifiedName                                                             # showCreateSchema
-    | KW_SHOW KW_CREATE KW_VIEW qualifiedName                                                               # showCreateView
-    | KW_SHOW KW_CREATE KW_MATERIALIZED KW_VIEW qualifiedName                                               # showCreateMaterializedView
-    | KW_SHOW KW_CREATE KW_FUNCTION qualifiedName                                                           # showCreateFunction
-    | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) qualifiedName)? (
+    | KW_SHOW KW_CREATE KW_TABLE tableRef                                                                   # showCreateTable
+    | KW_SHOW KW_CREATE KW_SCHEMA schemaRef                                                                 # showCreateSchema
+    | KW_SHOW KW_CREATE KW_VIEW viewRef                                                                     # showCreateView
+    | KW_SHOW KW_CREATE KW_MATERIALIZED KW_VIEW viewRef                                                     # showCreateMaterializedView
+    | KW_SHOW KW_CREATE KW_FUNCTION functionName                                                            # showCreateFunction
+    | KW_SHOW KW_TABLES ((KW_FROM | KW_IN) schemaRef)? (
         KW_LIKE pattern=string (KW_ESCAPE escape=string)?
     )? # showTables
-    | KW_SHOW KW_SCHEMAS ((KW_FROM | KW_IN) identifier)? (
+    | KW_SHOW KW_SCHEMAS ((KW_FROM | KW_IN) catalogRef)? (
         KW_LIKE pattern=string (KW_ESCAPE escape=string)?
     )?                                                                         # showSchemas
     | KW_SHOW KW_CATALOGS (KW_LIKE pattern=string (KW_ESCAPE escape=string)?)? # showCatalogs
-    | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) qualifiedName (
+    | KW_SHOW KW_COLUMNS (KW_FROM | KW_IN) tableOrViewName (
         KW_LIKE pattern=string (KW_ESCAPE escape=string)?
     )?                                                             # showColumns
-    | KW_SHOW KW_STATS KW_FOR qualifiedName                        # showStats
+    | KW_SHOW KW_STATS KW_FOR tableOrViewName                      # showStats
     | KW_SHOW KW_STATS KW_FOR '(' rootQuery ')'                    # showStatsForQuery
-    | KW_SHOW KW_CURRENT? KW_ROLES ((KW_FROM | KW_IN) identifier)? # showRoles
-    | KW_SHOW KW_ROLE KW_GRANTS ((KW_FROM | KW_IN) identifier)?    # showRoleGrants
-    | KW_DESCRIBE qualifiedName                                    # showColumns
-    | KW_DESC qualifiedName                                        # showColumns
-    | KW_SHOW KW_FUNCTIONS ((KW_FROM | KW_IN) qualifiedName)? (
+    | KW_SHOW KW_CURRENT? KW_ROLES ((KW_FROM | KW_IN) catalogRef)? # showRoles
+    | KW_SHOW KW_ROLE KW_GRANTS ((KW_FROM | KW_IN) catalogRef)?    # showRoleGrants
+    | KW_DESCRIBE tableOrViewName                                  # showColumns
+    | KW_DESC tableOrViewName                                      # showColumns
+    | KW_SHOW KW_FUNCTIONS ((KW_FROM | KW_IN) schemaRef)? (
         KW_LIKE pattern=string (KW_ESCAPE escape=string)?
     )?                                                                        # showFunctions
     | KW_SHOW KW_SESSION (KW_LIKE pattern=string (KW_ESCAPE escape=string)?)? # showSession
@@ -187,12 +184,12 @@ statement
     | KW_DESCRIBE KW_OUTPUT identifier                                        # describeOutput
     | KW_SET KW_PATH pathSpecification                                        # setPath
     | KW_SET KW_TIME KW_ZONE ( KW_LOCAL | expression)                         # setTimeZone
-    | KW_UPDATE qualifiedName KW_SET updateAssignment (',' updateAssignment)* (
+    | KW_UPDATE tableRef KW_SET updateAssignment (',' updateAssignment)* (
         KW_WHERE where=booleanExpression
-    )?                                                                                                  # update
-    | KW_MERGE KW_INTO qualifiedName (KW_AS? identifier)? KW_USING relation KW_ON expression mergeCase+ # merge
-    | KW_SHOW KW_COMMENT KW_ON KW_TABLE qualifiedName                                                   # showTableComment  // dtstack
-    | KW_SHOW KW_COMMENT KW_ON KW_COLUMN qualifiedName                                                  # showColumnComment // dtstack
+    )?                                                                                             # update
+    | KW_MERGE KW_INTO tableRef (KW_AS? identifier)? KW_USING relation KW_ON expression mergeCase+ # merge
+    | KW_SHOW KW_COMMENT KW_ON KW_TABLE tableRef                                                   # showTableComment  // dtstack
+    | KW_SHOW KW_COMMENT KW_ON KW_COLUMN columnRef                                                 # showColumnComment // dtstack
     ;
 
 rootQuery
@@ -204,7 +201,7 @@ withFunction
     ;
 
 query
-    : with? queryNoWith
+    : with? queryNoWith # queryStatement
     ;
 
 with
@@ -217,11 +214,11 @@ tableElement
     ;
 
 columnDefinition
-    : qualifiedName type (KW_NOT KW_NULL)? (KW_COMMENT string)? (KW_WITH properties)?
+    : columnNameCreate type (KW_NOT KW_NULL)? (KW_COMMENT string)? (KW_WITH properties)?
     ;
 
 likeClause
-    : KW_LIKE qualifiedName (optionType=( KW_INCLUDING | KW_EXCLUDING) KW_PROPERTIES)?
+    : KW_LIKE tableRef (optionType=( KW_INCLUDING | KW_EXCLUDING) KW_PROPERTIES)?
     ;
 
 properties
@@ -273,13 +270,15 @@ queryTerm
 
 queryPrimary
     : querySpecification                     # queryPrimaryDefault
-    | KW_TABLE qualifiedName                 # table
+    | KW_TABLE tableRef                      # table
     | KW_VALUES expression (',' expression)* # inlineTable
     | '(' queryNoWith ')'                    # subquery
     ;
 
 sortItem
-    : expression ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrdering=(KW_FIRST | KW_LAST))?
+    : (columnRef | expression) ordering=(KW_ASC | KW_DESC)? (
+        KW_NULLS nullOrdering=(KW_FIRST | KW_LAST)
+    )?
     ;
 
 querySpecification
@@ -302,7 +301,12 @@ groupingElement
     ;
 
 groupingSet
-    : '(' (expression (',' expression)*)? ')'
+    : '(' (groupingTerm (',' groupingTerm)*)? ')'
+    | groupingTerm
+    ;
+
+groupingTerm
+    : columnRef
     | expression
     ;
 
@@ -326,7 +330,7 @@ setQuantifier
     ;
 
 selectItem
-    : expression (KW_AS? identifier)?                       # selectSingle
+    : (columnRef | expression) (KW_AS? identifier)?         # selectSingle
     | primaryExpression '.' ASTERISK (KW_AS columnAliases)? # selectAll
     | ASTERISK                                              # selectAll
     ;
@@ -424,12 +428,20 @@ aliasedRelation
     : relationPrimary (KW_AS? identifier columnAliases?)?
     ;
 
+columnListCreate
+    : '(' columnNameCreate (',' columnNameCreate)* ')'
+    ;
+
+columnList
+    : '(' columnRef (',' columnRef)* ')'
+    ;
+
 columnAliases
     : '(' identifier (',' identifier)* ')'
     ;
 
 relationPrimary
-    : qualifiedName queryPeriod?                                              # tableName
+    : tableOrViewName queryPeriod?                                            # tableName
     | '(' query ')'                                                           # subqueryRelation
     | KW_UNNEST '(' expression (',' expression)* ')' (KW_WITH KW_ORDINALITY)? # unnest
     | KW_LATERAL '(' query ')'                                                # lateral
@@ -476,7 +488,7 @@ jsonTableDefaultPlan
     ;
 
 tableFunctionCall
-    : qualifiedName '(' (tableFunctionArgument (',' tableFunctionArgument)*)? (
+    : functionName '(' (tableFunctionArgument (',' tableFunctionArgument)*)? (
         KW_COPARTITION copartitionTables (',' copartitionTables)*
     )? ')'
     ;
@@ -497,8 +509,8 @@ tableArgument
     ;
 
 tableArgumentRelation
-    : KW_TABLE '(' qualifiedName ')' (KW_AS? identifier columnAliases?)? # tableArgumentTable
-    | KW_TABLE '(' query ')' (KW_AS? identifier columnAliases?)?         # tableArgumentQuery
+    : KW_TABLE '(' tableRef ')' (KW_AS? identifier columnAliases?)? # tableArgumentTable
+    | KW_TABLE '(' query ')' (KW_AS? identifier columnAliases?)?    # tableArgumentQuery
     ;
 
 descriptorArgument
@@ -561,9 +573,9 @@ primaryExpression
     | KW_ROW '(' expression (',' expression)* ')'               # rowConstructor
     | name=KW_LISTAGG '(' setQuantifier? expression (',' string)? (
         KW_ON KW_OVERFLOW listAggOverflowBehavior
-    )? ')' (KW_WITHIN KW_GROUP '(' KW_ORDER KW_BY sortItem (',' sortItem)* ')') filter?    # listagg
-    | processingMode? qualifiedName '(' (label=identifier '.')? ASTERISK ')' filter? over? # functionCall
-    | processingMode? qualifiedName '(' (setQuantifier? expression (',' expression)*)? (
+    )? ')' (KW_WITHIN KW_GROUP '(' KW_ORDER KW_BY sortItem (',' sortItem)* ')') filter?   # listagg
+    | processingMode? functionName '(' (label=identifier '.')? ASTERISK ')' filter? over? # functionCall
+    | processingMode? functionName '(' (setQuantifier? expression (',' expression)*)? (
         KW_ORDER KW_BY sortItem (',' sortItem)*
     )? ')' filter? (nullTreatment? over)?                     # functionCall
     | identifier over                                         # measure
@@ -859,7 +871,7 @@ functionSpecification
     ;
 
 functionDeclaration
-    : qualifiedName '(' (parameterDeclaration (',' parameterDeclaration)*)? ')'
+    : functionNameCreate '(' (parameterDeclaration (',' parameterDeclaration)*)? ')'
     ;
 
 parameterDeclaration
@@ -930,6 +942,70 @@ entityKind
 
 grantObject
     : entityKind? qualifiedName
+    ;
+
+tableOrViewName
+    : tableRef
+    | viewRef
+    ;
+
+tableRef
+    : table= identifier
+    | schema= identifier '.' table= identifier
+    | catalog= identifier '.' schema= identifier '.' table= identifier
+    ;
+
+tableNameCreate
+    : table= identifier
+    | schema= identifier '.' table= identifier
+    | catalog= identifier '.' schema= identifier '.' table= identifier
+    ;
+
+viewRef
+    : view= identifier
+    | schema= identifier '.' view= identifier
+    | catalog= identifier '.' schema= identifier '.' view= identifier
+    ;
+
+viewNameCreate
+    : view= identifier
+    | schema= identifier '.' view= identifier
+    | catalog= identifier '.' schema= identifier '.' view= identifier
+    ;
+
+schemaRef
+    : schema= identifier
+    | catalog= identifier '.' schema= identifier
+    ;
+
+schemaNameCreate
+    : schema= identifier
+    | catalog= identifier '.' schema= identifier
+    ;
+
+catalogRef
+    : catalog= identifier
+    ;
+
+catalogNameCreate
+    : catalog= identifier
+    ;
+
+functionName
+    : qualifiedName
+    ;
+
+functionNameCreate
+    : qualifiedName
+    ;
+
+columnRef
+    : qualifiedName
+    | {this.shouldMatchEmpty()}?
+    ;
+
+columnNameCreate
+    : identifier
     ;
 
 qualifiedName
