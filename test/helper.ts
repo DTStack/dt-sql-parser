@@ -11,7 +11,9 @@ export const readSQL = (dirname: string, fileName: string) => {
         tmp += char;
 
         const isMulti =
-            tmp.includes('EXECUTE STATEMENT SET') || tmp.includes('BEGIN STATEMENT SET;');
+            tmp.includes('EXECUTE STATEMENT SET') ||
+            tmp.includes('BEGIN STATEMENT SET;') ||
+            tmp.includes('BEGIN');
 
         if (!isMulti) {
             // 非批量的先简单按照分号切割
