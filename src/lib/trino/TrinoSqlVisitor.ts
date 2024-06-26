@@ -315,6 +315,7 @@ import { UnqualifiedArgumentContext } from "./TrinoSqlParser.js";
 import { PathSpecificationContext } from "./TrinoSqlParser.js";
 import { FunctionSpecificationContext } from "./TrinoSqlParser.js";
 import { FunctionDeclarationContext } from "./TrinoSqlParser.js";
+import { FunctionSignatureContext } from "./TrinoSqlParser.js";
 import { ParameterDeclarationContext } from "./TrinoSqlParser.js";
 import { ReturnsClauseContext } from "./TrinoSqlParser.js";
 import { LanguageCharacteristicContext } from "./TrinoSqlParser.js";
@@ -2450,6 +2451,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitFunctionDeclaration?: (ctx: FunctionDeclarationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.functionSignature`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFunctionSignature?: (ctx: FunctionSignatureContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.parameterDeclaration`.
      * @param ctx the parse tree

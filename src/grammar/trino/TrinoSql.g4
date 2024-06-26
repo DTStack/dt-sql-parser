@@ -123,7 +123,7 @@ statement
     | KW_ALTER KW_VIEW from=viewRef KW_SET KW_AUTHORIZATION principal                                    # setViewAuthorization
     | KW_CALL functionName '(' (callArgument (',' callArgument)*)? ')'                                   # call
     | KW_CREATE (KW_OR KW_REPLACE)? functionSpecification                                                # createFunction
-    | KW_DROP KW_FUNCTION (KW_IF KW_EXISTS)? functionDeclaration                                         # dropFunction
+    | KW_DROP KW_FUNCTION (KW_IF KW_EXISTS)? functionSignature                                           # dropFunction
     | KW_CREATE KW_ROLE name=identifier (KW_WITH KW_ADMIN grantor)? (KW_IN catalog=catalogRef)?          # createRole
     | KW_DROP KW_ROLE name=identifier (KW_IN catalog=catalogRef)?                                        # dropRole
     | KW_GRANT privilegeOrRole (',' privilegeOrRole)* KW_TO principal (',' principal)* (
@@ -872,6 +872,10 @@ functionSpecification
 
 functionDeclaration
     : functionNameCreate '(' (parameterDeclaration (',' parameterDeclaration)*)? ')'
+    ;
+
+functionSignature
+    : functionName '(' (parameterDeclaration (',' parameterDeclaration)*)? ')'
     ;
 
 parameterDeclaration

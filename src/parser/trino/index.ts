@@ -37,6 +37,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         TrinoSqlParser.RULE_viewRef,
         TrinoSqlParser.RULE_viewNameCreate,
         TrinoSqlParser.RULE_functionName,
+        TrinoSqlParser.RULE_functionNameCreate,
         TrinoSqlParser.RULE_columnRef,
         TrinoSqlParser.RULE_columnNameCreate,
     ]);
@@ -62,6 +63,10 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
             switch (ruleType) {
                 case TrinoSqlParser.RULE_catalogRef: {
                     syntaxContextType = EntityContextType.CATALOG;
+                    break;
+                }
+                case TrinoSqlParser.RULE_catalogNameCreate: {
+                    syntaxContextType = EntityContextType.CATALOG_CREATE;
                     break;
                 }
                 case TrinoSqlParser.RULE_schemaRef: {
@@ -90,6 +95,10 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                 }
                 case TrinoSqlParser.RULE_functionName: {
                     syntaxContextType = EntityContextType.FUNCTION;
+                    break;
+                }
+                case TrinoSqlParser.RULE_functionNameCreate: {
+                    syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
                 case TrinoSqlParser.RULE_columnNameCreate: {
