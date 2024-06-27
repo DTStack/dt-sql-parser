@@ -492,13 +492,13 @@ alter_table_cmd
     | KW_ALTER KW_COLUMN? column_name alter_identity_column_option+
     | KW_ALTER KW_COLUMN? column_name KW_DROP KW_IDENTITY opt_if_exists?
     | KW_ALTER KW_COLUMN? column_name (KW_SET KW_DATA)? KW_TYPE typename opt_collate_clause? (
-        KW_USING a_expr_qual
+        KW_USING expression
     )?
     | alter_generic_options
     ;
 
 alter_column_default
-    : KW_SET KW_DEFAULT a_expr_qual
+    : KW_SET KW_DEFAULT expression
     | KW_DROP KW_DEFAULT
     ;
 
@@ -677,11 +677,11 @@ colconstraintelem
     | KW_UNIQUE opt_definition? optconstablespace?
     | KW_UNIQUE nulls_distinct? index_paramenters_create
     | KW_PRIMARY KW_KEY opt_definition? optconstablespace?
-    | KW_CHECK OPEN_PAREN a_expr_qual CLOSE_PAREN (KW_NO KW_INHERIT)?
-    | KW_DEFAULT b_expr
+    | KW_CHECK OPEN_PAREN expression CLOSE_PAREN (KW_NO KW_INHERIT)?
+    | KW_DEFAULT primaryExpression
     | KW_GENERATED generated_when KW_AS (
         KW_IDENTITY optparenthesizedseqoptlist?
-        | OPEN_PAREN a_expr_qual CLOSE_PAREN KW_STORED
+        | OPEN_PAREN expression CLOSE_PAREN KW_STORED
     )
     | KW_REFERENCES qualified_name opt_column_list? key_match? key_actions?
     | opt_collate_clause
@@ -725,7 +725,7 @@ tableconstraint
     ;
 
 constraintelem
-    : KW_CHECK OPEN_PAREN a_expr_qual CLOSE_PAREN constraintattributespec
+    : KW_CHECK OPEN_PAREN expression CLOSE_PAREN constraintattributespec
     | (KW_UNIQUE | ( KW_PRIMARY KW_KEY)) (
         opt_column_list opt_c_include? opt_definition? optconstablespace? constraintattributespec
         | existingindex constraintattributespec
@@ -764,7 +764,7 @@ exclusionconstraintelem
     ;
 
 exclusionwhereclause
-    : KW_WHERE OPEN_PAREN a_expr_qual CLOSE_PAREN
+    : KW_WHERE OPEN_PAREN expression CLOSE_PAREN
     ;
 
 key_actions
@@ -800,7 +800,7 @@ part_params
     ;
 
 part_elem
-    : (column_name | func_expr_windowless | (OPEN_PAREN a_expr_qual CLOSE_PAREN)) opt_collate_clause? any_name?
+    : (column_name | func_expr_windowless | (OPEN_PAREN expression CLOSE_PAREN)) opt_collate_clause? any_name?
     ;
 
 table_access_method_clause
@@ -1062,11 +1062,11 @@ procedure_action
     ;
 
 rowsecurityoptionalexpr
-    : KW_USING OPEN_PAREN a_expr_qual CLOSE_PAREN
+    : KW_USING OPEN_PAREN expression CLOSE_PAREN
     ;
 
 rowsecurityoptionalwithcheck
-    : KW_WITH KW_CHECK OPEN_PAREN a_expr_qual CLOSE_PAREN
+    : KW_WITH KW_CHECK OPEN_PAREN expression CLOSE_PAREN
     ;
 
 rowsecuritydefaulttorole
@@ -1131,7 +1131,7 @@ triggerforspec
     ;
 
 triggerwhen
-    : KW_WHEN OPEN_PAREN a_expr_qual CLOSE_PAREN
+    : KW_WHEN OPEN_PAREN expression CLOSE_PAREN
     ;
 
 function_or_procedure
@@ -1183,7 +1183,7 @@ enable_trigger
     ;
 
 createassertionstmt
-    : KW_CREATE KW_ASSERTION any_name KW_CHECK OPEN_PAREN a_expr_qual CLOSE_PAREN constraintattributespec
+    : KW_CREATE KW_ASSERTION any_name KW_CHECK OPEN_PAREN expression CLOSE_PAREN constraintattributespec
     ;
 
 definestmt
@@ -1547,7 +1547,7 @@ index_elem_options
     ;
 
 index_elem
-    : (column_name | func_expr_windowless | OPEN_PAREN a_expr_qual CLOSE_PAREN) index_elem_options
+    : (column_name | func_expr_windowless | OPEN_PAREN expression CLOSE_PAREN) index_elem_options
     ;
 
 opt_include
@@ -1638,7 +1638,7 @@ func_type
     ;
 
 func_arg_with_default
-    : func_arg ((KW_DEFAULT | EQUAL) a_expr_qual)?
+    : func_arg ((KW_DEFAULT | EQUAL) expression)?
     ;
 
 aggr_args
@@ -2295,9 +2295,9 @@ set_clause_list
     ;
 
 set_clause
-    : insert_column_item EQUAL a_expr_qual
+    : insert_column_item EQUAL expression
     | OPEN_PAREN insert_column_list CLOSE_PAREN EQUAL (
-        KW_ROW? a_expr_qual
+        KW_ROW? expression
         | OPEN_PAREN select_clause CLOSE_PAREN
     )
     ;
@@ -2403,7 +2403,7 @@ select_limit
     ;
 
 limit_clause
-    : KW_LIMIT (a_expr_qual | KW_ALL) (COMMA a_expr_qual)?
+    : KW_LIMIT (expression | KW_ALL) (COMMA expression)?
     ;
 
 fetch_clause
@@ -2414,12 +2414,12 @@ fetch_clause
     ;
 
 offset_clause
-    : KW_OFFSET (select_fetch_first_value row_or_rows | a_expr_qual)
+    : KW_OFFSET (select_fetch_first_value row_or_rows | expression)
     ;
 
 select_fetch_first_value
     : (PLUS | MINUS) (Integral | Numeric)
-    | c_expr
+    | primaryExpression
     ;
 
 row_or_rows
@@ -2447,7 +2447,7 @@ empty_grouping_set
     ;
 
 having_clause
-    : KW_HAVING a_expr_qual
+    : KW_HAVING expression
     ;
 
 for_locking_clause
@@ -2510,7 +2510,7 @@ join_type
 
 join_qual
     : KW_USING opt_column_list
-    | KW_ON a_expr_qual
+    | KW_ON expression
     ;
 
 relation_expr
@@ -2546,7 +2546,7 @@ tablesample_clause
     ;
 
 opt_repeatable_clause
-    : KW_REPEATABLE OPEN_PAREN a_expr_qual CLOSE_PAREN
+    : KW_REPEATABLE OPEN_PAREN expression CLOSE_PAREN
     ;
 
 func_table
@@ -2568,7 +2568,7 @@ where_clause
     ;
 
 where_or_current_clause
-    : KW_WHERE (KW_CURRENT KW_OF colid | a_expr_qual)
+    : KW_WHERE (KW_CURRENT KW_OF colid | expression)
     ;
 
 tablefuncelementlist
@@ -2581,7 +2581,7 @@ tablefuncelement
 
 xmltable
     : KW_XMLTABLE OPEN_PAREN (
-        (KW_XMLNAMESPACES OPEN_PAREN xml_namespace_list CLOSE_PAREN COMMA)? c_expr xmlexists_argument KW_COLUMNS xmltable_column_list
+        (KW_XMLNAMESPACES OPEN_PAREN xml_namespace_list CLOSE_PAREN COMMA)? primaryExpression xmlexists_argument KW_COLUMNS xmltable_column_list
     ) CLOSE_PAREN
     ;
 
@@ -2598,7 +2598,7 @@ xmltable_column_option_list
     ;
 
 xmltable_column_option_el
-    : (KW_DEFAULT | identifier) a_expr_qual
+    : (KW_DEFAULT | identifier) expression
     | KW_NOT? KW_NULL
     ;
 
@@ -2607,8 +2607,8 @@ xml_namespace_list
     ;
 
 xml_namespace_el
-    : b_expr KW_AS collabel
-    | KW_DEFAULT b_expr
+    : primaryExpression KW_AS collabel
+    | KW_DEFAULT primaryExpression
     ;
 
 typename
@@ -2684,16 +2684,12 @@ interval_second
     : KW_SECOND (opt_float)?
     ;
 
-opt_escape
-    : KW_ESCAPE a_expr_qual
-    ;
-
 //precendence accroding to Table 4.2. Operator Precedence (highest to lowest)
 
 //https://www.postgresql.org/docs/12/sql-syntax-lexical.html#SQL-PRECEDENCE
 
 /*
- original version of a_expr, for info a_expr: c_expr //:: left PostgreSQL-style typecast | a_expr
+ original version of a_expr, for info a_expr: primaryExpression //:: left PostgreSQL-style typecast | a_expr
  TYPECAST typename -- 1 | a_expr KW_COLLATE any_name -- 2 | a_expr AT TIME ZONE a_expr-- 3 //right
  unary plus, unary minus | (PLUS| MINUS) a_expr -- 4 //left exponentiation | a_expr CARET a_expr --
  5 //left multiplication, division, modulo | a_expr (STAR | SLASH | PERCENT) a_expr -- 6 //left
@@ -2711,187 +2707,85 @@ opt_escape
  CLOSE_PAREN) -- 21 | UNIQUE select_with_parens -- 22 | KW_DEFAULT -- 23 ;
  */
 
-/*23*/
-
-/*moved to c_expr*/
-
-/*22*/
-
-/*moved to c_expr*/
-
-/*19*/
-
-a_expr_qual
-    : a_expr_lessless qual_op?
+comparisonOperator
+    : LT
+    | GT
+    | EQUAL
+    | LESS_EQUALS
+    | GREATER_EQUALS
+    | NOT_EQUALS
     ;
 
-/*18*/
-
-a_expr_lessless
-    : a_expr_or ((LESS_LESS | GREATER_GREATER) a_expr_or)*
+expression
+    : booleanExpression
     ;
 
-/*17*/
-
-a_expr_or
-    : a_expr_and (KW_OR a_expr_and)*
+booleanExpression
+    : valueExpression predicate[$valueExpression.ctx]?                  # predicated
+    | KW_NOT booleanExpression                                          # logicalNot
+    | left= booleanExpression operator= KW_AND right= booleanExpression # logicalBinary
+    | left= booleanExpression operator= KW_OR right= booleanExpression  # logicalBinary
     ;
 
-/*16*/
-
-a_expr_and
-    : a_expr_in (KW_AND a_expr_in)*
+predicate[antlr.ParserRuleContext value]
+    : comparisonOperator right= valueExpression # comparison
+    | comparisonOperator subquery_Op sub_type (
+        select_with_parens
+        | OPEN_PAREN expression CLOSE_PAREN
+    )                                                                         # quantifiedComparison
+    | KW_NOT? KW_BETWEEN lower= valueExpression KW_AND upper= valueExpression # between
+    | KW_NOT? KW_IN OPEN_PAREN expression (COMMA expression)* CLOSE_PAREN     # inList
+    | KW_NOT? KW_IN select_with_parens                                        # inSubquery
+    | KW_NOT? (KW_LIKE | KW_ILIKE | KW_SIMILAR KW_TO | KW_BETWEEN KW_SYMMETRIC?) pattern= valueExpression (
+        KW_ESCAPE escape= valueExpression
+    )?                                                         # like
+    | KW_IS KW_NOT? KW_NULL                                    # nullPredicate
+    | KW_IS KW_NOT? KW_DISTINCT KW_FROM right= valueExpression # distinctFrom
     ;
 
-/*20*/
-
-a_expr_in
-    : KW_NOT? a_expr_isnull (KW_NOT? KW_IN in_expr)?
+valueExpression
+    : primaryExpression                                                               # valueExpressionDefault
+    | valueExpression KW_AT KW_TIME KW_ZONE expression                                # atTimeZone
+    | operator= (MINUS | PLUS) valueExpression                                        # arithmeticUnary
+    | left= valueExpression operator= (STAR | SLASH | PERCENT) right= valueExpression # arithmeticBinary
+    | left= valueExpression operator= (PLUS | MINUS) right= valueExpression           # arithmeticBinary
+    | left= valueExpression CARET right= valueExpression                              # concatenation
     ;
 
-/*14*/
-
-/*moved to c_expr*/
-
-/*13*/
-
-a_expr_isnull
-    : a_expr_is_not (KW_ISNULL | KW_NOTNULL)?
-    ;
-
-/*12*/
-
-a_expr_is_not
-    : a_expr_compare (
-        KW_IS KW_NOT? (
-            KW_NULL
-            | KW_TRUE
-            | KW_FALSE
-            | KW_UNKNOWN
-            | KW_DISTINCT KW_FROM a_expr_qual
-            | KW_OF prep_type_clause
-            | KW_DOCUMENT
-            | unicode_normal_form? KW_NORMALIZED
-        )
-    )?
-    ;
-
-/*11*/
-
-a_expr_compare
-    : a_expr_like (
-        (LT | GT | EQUAL | LESS_EQUALS | GREATER_EQUALS | NOT_EQUALS) a_expr_like
-        | subquery_Op sub_type (select_with_parens | OPEN_PAREN a_expr_qual CLOSE_PAREN) /*21*/
-    )?
-    ;
-
-/*10*/
-
-a_expr_like
-    : a_expr_qual_op (
-        KW_NOT? (KW_LIKE | KW_ILIKE | KW_SIMILAR KW_TO | KW_BETWEEN KW_SYMMETRIC?) a_expr_qual_op opt_escape?
-    )?
-    ;
-
-/* 8*/
-
-a_expr_qual_op
-    : a_expr_unary_qualop (qual_op a_expr_unary_qualop)*
-    ;
-
-/* 9*/
-
-a_expr_unary_qualop
-    : qual_op? a_expr_add
-    ;
-
-/* 7*/
-
-a_expr_add
-    : a_expr_mul ((MINUS | PLUS) a_expr_mul)*
-    ;
-
-/* 6*/
-
-a_expr_mul
-    : a_expr_caret ((STAR | SLASH | PERCENT) a_expr_caret)*
-    ;
-
-/* 5*/
-
-a_expr_caret
-    : a_expr_unary_sign (CARET a_expr_qual)?
-    ;
-
-/* 4*/
-
-a_expr_unary_sign
-    : (MINUS | PLUS)? a_expr_at_time_zone /* */
-    ;
-
-/* 3*/
-
-a_expr_at_time_zone
-    : a_expr_collate (KW_AT KW_TIME KW_ZONE a_expr_qual)?
-    ;
-
-/* 2*/
-
-a_expr_collate
-    : a_expr_typecast (opt_collate_clause)?
-    ;
-
-/* 1*/
-
-a_expr_typecast
-    : c_expr (TYPECAST typename)*
-    ;
-
-b_expr
-    : c_expr
-    | b_expr TYPECAST typename
-    //right	unary plus, unary minus
-    | (PLUS | MINUS) b_expr
-    //(any other operator)	left	all other native and user-defined operators
-    | b_expr qual_op b_expr?
-    //< > = <= >= <>	 	comparison operators
-    //+ -	left	addition, subtraction
-    //* / %	left	multiplication, division, modulo
-    //^	left	exponentiation
-    | b_expr (
-        LT
-        | GT
-        | EQUAL
-        | LESS_EQUALS
-        | GREATER_EQUALS
-        | NOT_EQUALS
-        | PLUS
-        | MINUS
-        | STAR
-        | SLASH
-        | PERCENT
-        | CARET
-    ) b_expr
-    | qual_op b_expr
-    //S ISNULL NOTNULL	 	IS TRUE, IS FALSE, IS NULL, IS KW_DISTINCT FROM, etc
-    | b_expr KW_IS KW_NOT? (KW_DISTINCT KW_FROM b_expr | KW_OF prep_type_clause | KW_DOCUMENT)
-    ;
-
-c_expr
-    : (KW_EXISTS | KW_UNIQUE) select_with_parens                           # c_expr_exists
-    | KW_ARRAY (select_with_parens | array_expr)                           # c_expr_expr
-    | PARAM opt_indirection                                                # c_expr_expr
-    | KW_GROUPING execute_param_clause                                     # c_expr_expr
-    | aexprconst                                                           # c_expr_expr
-    | PLSQLVARIABLENAME                                                    # c_expr_expr
-    | OPEN_PAREN a_expr_in_parens= a_expr_qual CLOSE_PAREN opt_indirection # c_expr_expr
-    | KW_CASE a_expr_qual? when_clause+ (KW_ELSE a_expr_qual)? KW_END      # c_expr_case
-    | func_expr                                                            # c_expr_expr
-    | select_with_parens indirection?                                      # c_expr_expr
-    | explicit_row                                                         # c_expr_expr
-    | OPEN_PAREN a_expr_qual COMMA expr_list CLOSE_PAREN                   # c_expr_expr
-    | row KW_OVERLAPS row /* 14*/                                          # c_expr_expr
-    | qualified_name                                                       # c_expr_expr
+primaryExpression
+    : (KW_EXISTS | KW_UNIQUE) select_with_parens
+    | KW_ARRAY (select_with_parens | array_expr)
+    | PARAM opt_indirection
+    | KW_GROUPING execute_param_clause
+    | Integral
+    | Numeric
+    | BinaryStringConstant
+    | HexadecimalStringConstant
+    | function_name (sconst | OPEN_PAREN func_arg_list sort_clause? CLOSE_PAREN sconst)
+    | consttypename? sconst
+    | KW_INTERVAL ( sconst opt_interval? | opt_float sconst)
+    | KW_TRUE
+    | KW_FALSE
+    | KW_NULL
+    | PLSQLVARIABLENAME
+    | OPEN_PAREN a_expr_in_parens= expression CLOSE_PAREN opt_indirection
+    | KW_CASE expression? when_clause+ (KW_ELSE expression)? KW_END
+    | func_expr
+    | select_with_parens indirection?
+    | explicit_row
+    | OPEN_PAREN expression COMMA expr_list CLOSE_PAREN
+    | row KW_OVERLAPS row
+    | qualified_name
+    | primaryExpression TYPECAST typename
+    | (PLUS | MINUS) primaryExpression
+    | primaryExpression qual_op primaryExpression?
+    | primaryExpression mathop primaryExpression
+    | qual_op primaryExpression
+    | primaryExpression KW_IS KW_NOT? (
+        KW_DISTINCT KW_FROM primaryExpression
+        | KW_OF prep_type_clause
+        | KW_DOCUMENT
+    )
     ;
 
 func_application
@@ -2908,7 +2802,7 @@ func_application
 
 func_expr
     : func_application (KW_WITHIN KW_GROUP OPEN_PAREN sort_clause CLOSE_PAREN)? (
-        KW_FILTER OPEN_PAREN KW_WHERE a_expr_qual CLOSE_PAREN
+        KW_FILTER OPEN_PAREN KW_WHERE expression CLOSE_PAREN
     )? (KW_OVER (window_specification | colid))?
     | func_expr_common_subexpr
     ;
@@ -2919,7 +2813,7 @@ func_expr_windowless
     ;
 
 func_expr_common_subexpr
-    : KW_COLLATION KW_FOR OPEN_PAREN a_expr_qual CLOSE_PAREN
+    : KW_COLLATION KW_FOR OPEN_PAREN expression CLOSE_PAREN
     | KW_CURRENT_DATE
     | (KW_CURRENT_TIME | KW_CURRENT_TIMESTAMP | KW_LOCALTIME | KW_LOCALTIMESTAMP) (opt_float)?
     | KW_CURRENT_ROLE
@@ -2928,26 +2822,26 @@ func_expr_common_subexpr
     | KW_USER
     | KW_CURRENT_CATALOG
     | KW_CURRENT_SCHEMA
-    | (KW_CAST | KW_TREAT) OPEN_PAREN a_expr_qual KW_AS typename CLOSE_PAREN
+    | (KW_CAST | KW_TREAT) OPEN_PAREN expression KW_AS typename CLOSE_PAREN
     | KW_EXTRACT OPEN_PAREN extract_list? CLOSE_PAREN
-    | KW_NORMALIZE OPEN_PAREN a_expr_qual (COMMA unicode_normal_form)? CLOSE_PAREN
+    | KW_NORMALIZE OPEN_PAREN expression (COMMA unicode_normal_form)? CLOSE_PAREN
     | KW_OVERLAY OPEN_PAREN overlay_list CLOSE_PAREN
-    | KW_POSITION OPEN_PAREN (b_expr KW_IN b_expr)? CLOSE_PAREN
+    | KW_POSITION OPEN_PAREN (primaryExpression KW_IN primaryExpression)? CLOSE_PAREN
     | KW_SUBSTRING OPEN_PAREN substr_list? CLOSE_PAREN
     | KW_TRIM OPEN_PAREN (KW_BOTH | KW_LEADING | KW_TRAILING)? trim_list CLOSE_PAREN
-    | KW_NULLIF OPEN_PAREN a_expr_qual COMMA a_expr_qual CLOSE_PAREN
+    | KW_NULLIF OPEN_PAREN expression COMMA expression CLOSE_PAREN
     | (KW_COALESCE | KW_GREATEST | KW_LEAST | KW_XMLCONCAT) execute_param_clause
     | KW_XMLELEMENT OPEN_PAREN KW_NAME collabel (COMMA (xml_attributes | expr_list))? CLOSE_PAREN
-    | KW_XMLEXISTS OPEN_PAREN c_expr xmlexists_argument CLOSE_PAREN
+    | KW_XMLEXISTS OPEN_PAREN primaryExpression xmlexists_argument CLOSE_PAREN
     | KW_XMLFOREST OPEN_PAREN xml_attribute_list CLOSE_PAREN
-    | KW_XMLPARSE OPEN_PAREN document_or_content a_expr_qual xml_whitespace_option? CLOSE_PAREN
-    | KW_XMLPI OPEN_PAREN KW_NAME collabel (COMMA a_expr_qual)? CLOSE_PAREN
-    | KW_XMLROOT OPEN_PAREN KW_XML a_expr_qual COMMA xml_root_version opt_xml_root_standalone? CLOSE_PAREN
-    | KW_XMLSERIALIZE OPEN_PAREN document_or_content a_expr_qual KW_AS simpletypename CLOSE_PAREN
+    | KW_XMLPARSE OPEN_PAREN document_or_content expression xml_whitespace_option? CLOSE_PAREN
+    | KW_XMLPI OPEN_PAREN KW_NAME collabel (COMMA expression)? CLOSE_PAREN
+    | KW_XMLROOT OPEN_PAREN KW_XML expression COMMA xml_root_version opt_xml_root_standalone? CLOSE_PAREN
+    | KW_XMLSERIALIZE OPEN_PAREN document_or_content expression KW_AS simpletypename CLOSE_PAREN
     ;
 
 xml_root_version
-    : KW_VERSION (( KW_NO KW_VALUE) | a_expr_qual)
+    : KW_VERSION (( KW_NO KW_VALUE) | expression)
     ;
 
 opt_xml_root_standalone
@@ -2963,7 +2857,7 @@ xml_attribute_list
     ;
 
 xml_attribute_el
-    : a_expr_qual (KW_AS collabel)?
+    : expression (KW_AS collabel)?
     ;
 
 document_or_content
@@ -2976,7 +2870,7 @@ xml_whitespace_option
     ;
 
 xmlexists_argument
-    : KW_PASSING xml_passing_mech? c_expr xml_passing_mech?
+    : KW_PASSING xml_passing_mech? primaryExpression xml_passing_mech?
     ;
 
 xml_passing_mech
@@ -3010,13 +2904,13 @@ opt_frame_clause
     ;
 
 frame_bound
-    : (KW_UNBOUNDED | a_expr_qual) (KW_PRECEDING | KW_FOLLOWING)
+    : (KW_UNBOUNDED | expression) (KW_PRECEDING | KW_FOLLOWING)
     | KW_CURRENT KW_ROW
     ;
 
 row
     : explicit_row
-    | OPEN_PAREN expr_list COMMA a_expr_qual CLOSE_PAREN
+    | OPEN_PAREN expr_list COMMA expression CLOSE_PAREN
     ;
 
 explicit_row
@@ -3066,7 +2960,7 @@ subquery_Op
     ;
 
 expr_list
-    : a_expr_qual (COMMA a_expr_qual)*
+    : expression (COMMA expression)*
     ;
 
 column_expr_list_noparen
@@ -3078,12 +2972,12 @@ column_expr_list
     ;
 
 column_expr
-    : (OPEN_PAREN a_expr_qual CLOSE_PAREN)
+    : (OPEN_PAREN expression CLOSE_PAREN)
     | column_name
     ;
 
 column_expr_noparen
-    : a_expr_qual
+    : expression
     | column_name
     ;
 
@@ -3092,8 +2986,8 @@ func_arg_list
     ;
 
 func_arg_expr
-    : a_expr_qual
-    | type_function_name (COLON_EQUALS | EQUALS_GREATER) a_expr_qual
+    : expression
+    | type_function_name (COLON_EQUALS | EQUALS_GREATER) expression
     ;
 
 array_expr
@@ -3105,7 +2999,7 @@ array_expr_list
     ;
 
 extract_list
-    : extract_arg KW_FROM a_expr_qual
+    : extract_arg KW_FROM expression
     ;
 
 extract_arg
@@ -3127,32 +3021,27 @@ unicode_normal_form
     ;
 
 overlay_list
-    : a_expr_qual KW_PLACING a_expr_qual KW_FROM a_expr_qual (KW_FOR a_expr_qual)?
+    : expression KW_PLACING expression KW_FROM expression (KW_FOR expression)?
     ;
 
 substr_list
-    : a_expr_qual KW_FROM a_expr_qual (KW_FOR a_expr_qual)?
-    | a_expr_qual KW_FOR a_expr_qual (KW_FROM a_expr_qual)?
-    | a_expr_qual KW_SIMILAR a_expr_qual KW_ESCAPE a_expr_qual
+    : expression KW_FROM expression (KW_FOR expression)?
+    | expression KW_FOR expression (KW_FROM expression)?
+    | expression KW_SIMILAR expression KW_ESCAPE expression
     | expr_list
     ;
 
 trim_list
-    : (a_expr_qual? KW_FROM)? expr_list
-    ;
-
-in_expr
-    : select_with_parens   # in_expr_select
-    | execute_param_clause # in_expr_list
+    : (expression? KW_FROM)? expr_list
     ;
 
 when_clause
-    : KW_WHEN a_expr_qual KW_THEN a_expr_qual
+    : KW_WHEN expression KW_THEN expression
     ;
 
 indirection_el
     : DOT (collabel | STAR)
-    | OPEN_BRACKET (a_expr_qual | a_expr_qual? COLON a_expr_qual?) CLOSE_BRACKET
+    | OPEN_BRACKET (expression | expression? COLON expression?) CLOSE_BRACKET
     ;
 
 indirection
@@ -3280,20 +3169,6 @@ function_name
 usual_name
     : type_function_name
     | colid indirection
-    ;
-
-aexprconst
-    : Integral
-    | Numeric
-    | sconst
-    | BinaryStringConstant
-    | HexadecimalStringConstant
-    | function_name (sconst | OPEN_PAREN func_arg_list sort_clause? CLOSE_PAREN sconst)
-    | consttypename sconst
-    | KW_INTERVAL ( sconst opt_interval? | opt_float sconst)
-    | KW_TRUE
-    | KW_FALSE
-    | KW_NULL
     ;
 
 sconst
@@ -3956,7 +3831,7 @@ getdiag_list_item
     ;
 
 assign_var
-    : (any_name | PARAM) (OPEN_BRACKET a_expr_qual CLOSE_BRACKET)*
+    : (any_name | PARAM) (OPEN_BRACKET expression CLOSE_BRACKET)*
     ;
 
 stmt_if
@@ -3964,7 +3839,7 @@ stmt_if
     ;
 
 stmt_elsifs
-    : (KW_ELSIF a_expr_qual KW_THEN proc_sect)*
+    : (KW_ELSIF expression KW_THEN proc_sect)*
     ;
 
 stmt_else
@@ -3980,7 +3855,7 @@ case_when
     ;
 
 stmt_loop_while_for
-    : label_decl? ((KW_WHILE a_expr_qual) | (KW_FOR for_control))? loop_body
+    : label_decl? ((KW_WHILE expression) | (KW_FOR for_control))? loop_body
     ;
 
 //TODO: rewrite using read_sql_expression logic?
@@ -3990,8 +3865,8 @@ for_control
         colid execute_param_clause?
         | selectstmt
         | explainstmt
-        | KW_EXECUTE a_expr_qual opt_for_using_expression?
-        | KW_REVERSE? a_expr_qual DOT_DOT a_expr_qual (KW_BY a_expr_qual)?
+        | KW_EXECUTE expression opt_for_using_expression?
+        | KW_REVERSE? expression DOT_DOT expression (KW_BY expression)?
     )
     ;
 
@@ -4000,7 +3875,7 @@ opt_for_using_expression
     ;
 
 stmt_foreach_a
-    : label_decl? KW_FOREACH any_name_list (KW_SLICE Integral)? KW_IN KW_ARRAY a_expr_qual loop_body
+    : label_decl? KW_FOREACH any_name_list (KW_SLICE Integral)? KW_IN KW_ARRAY expression loop_body
     ;
 
 stmt_exit
@@ -4012,7 +3887,7 @@ stmt_exit
 stmt_return
     : KW_RETURN (
         KW_NEXT sql_expression
-        | KW_QUERY ( KW_EXECUTE a_expr_qual opt_for_using_expression | selectstmt)
+        | KW_QUERY ( KW_EXECUTE expression opt_for_using_expression | selectstmt)
         | sql_expression?
     ) SEMI
     ;
@@ -4047,11 +3922,11 @@ opt_stmt_raise_level
     ;
 
 opt_raise_list
-    : (COMMA a_expr_qual)+
+    : (COMMA expression)+
     ;
 
 opt_raise_using_elem
-    : identifier EQUAL a_expr_qual
+    : identifier EQUAL expression
     ;
 
 opt_raise_using_elem_list
@@ -4079,7 +3954,7 @@ stmt_execsql
 //EXECUTE command-string [ INTO [STRICT] target ] [ USING expression [, ... ] ];
 
 stmt_dynexecute
-    : KW_EXECUTE a_expr_qual (
+    : KW_EXECUTE expression (
         /*this is silly, but i have to time to find nice way to code */ opt_execute_into? opt_for_using_expression?
         | opt_for_using_expression? opt_execute_into?
         |
@@ -4111,7 +3986,7 @@ stmt_open
     ;
 
 opt_open_bound_list_item
-    : (colid COLON_EQUALS)? a_expr_qual
+    : (colid COLON_EQUALS)? expression
     ;
 
 opt_open_bound_list
@@ -4131,9 +4006,9 @@ opt_fetch_direction
     | KW_PRIOR
     | KW_FIRST
     | KW_LAST
-    | (KW_ABSOLUTE | KW_RELATIVE)? a_expr_qual
+    | (KW_ABSOLUTE | KW_RELATIVE)? expression
     | KW_ALL
-    | (KW_FORWARD | KW_BACKWARD) (a_expr_qual | KW_ALL)?
+    | (KW_FORWARD | KW_BACKWARD) (expression | KW_ALL)?
     ;
 
 //https://www.postgresql.org/docs/current/plpgsql-cursors.html#PLPGSQL-CURSOR-OPENING
@@ -4145,7 +4020,7 @@ stmt_move
     ;
 
 mergestmt
-    : with_clause? KW_MERGE KW_INTO (KW_ONLY)? table_name (STAR)? (KW_AS? colid)? KW_USING data_source KW_ON a_expr_qual merge_when_clause+
+    : with_clause? KW_MERGE KW_INTO (KW_ONLY)? table_name (STAR)? (KW_AS? colid)? KW_USING data_source KW_ON expression merge_when_clause+
     ;
 
 data_source
@@ -4153,12 +4028,8 @@ data_source
     ;
 
 merge_when_clause
-    : KW_WHEN KW_MATCHED (KW_AND a_expr_qual)? KW_THEN (
-        merge_update
-        | KW_DELETE
-        | KW_DO KW_NOTHING
-    )
-    | KW_WHEN KW_NOT KW_MATCHED (KW_AND a_expr_qual)? KW_THEN (merge_insert | KW_DO KW_NOTHING)
+    : KW_WHEN KW_MATCHED (KW_AND expression)? KW_THEN (merge_update | KW_DELETE | KW_DO KW_NOTHING)
+    | KW_WHEN KW_NOT KW_MATCHED (KW_AND expression)? KW_THEN (merge_insert | KW_DO KW_NOTHING)
     ;
 
 merge_insert

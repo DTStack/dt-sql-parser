@@ -457,29 +457,25 @@ import { Character_cContext } from "./PostgreSqlParser.js";
 import { ConstdatetimeContext } from "./PostgreSqlParser.js";
 import { Opt_intervalContext } from "./PostgreSqlParser.js";
 import { Interval_secondContext } from "./PostgreSqlParser.js";
-import { Opt_escapeContext } from "./PostgreSqlParser.js";
-import { A_expr_qualContext } from "./PostgreSqlParser.js";
-import { A_expr_lesslessContext } from "./PostgreSqlParser.js";
-import { A_expr_orContext } from "./PostgreSqlParser.js";
-import { A_expr_andContext } from "./PostgreSqlParser.js";
-import { A_expr_inContext } from "./PostgreSqlParser.js";
-import { A_expr_isnullContext } from "./PostgreSqlParser.js";
-import { A_expr_is_notContext } from "./PostgreSqlParser.js";
-import { A_expr_compareContext } from "./PostgreSqlParser.js";
-import { A_expr_likeContext } from "./PostgreSqlParser.js";
-import { A_expr_qual_opContext } from "./PostgreSqlParser.js";
-import { A_expr_unary_qualopContext } from "./PostgreSqlParser.js";
-import { A_expr_addContext } from "./PostgreSqlParser.js";
-import { A_expr_mulContext } from "./PostgreSqlParser.js";
-import { A_expr_caretContext } from "./PostgreSqlParser.js";
-import { A_expr_unary_signContext } from "./PostgreSqlParser.js";
-import { A_expr_at_time_zoneContext } from "./PostgreSqlParser.js";
-import { A_expr_collateContext } from "./PostgreSqlParser.js";
-import { A_expr_typecastContext } from "./PostgreSqlParser.js";
-import { B_exprContext } from "./PostgreSqlParser.js";
-import { C_expr_existsContext } from "./PostgreSqlParser.js";
-import { C_expr_exprContext } from "./PostgreSqlParser.js";
-import { C_expr_caseContext } from "./PostgreSqlParser.js";
+import { ComparisonOperatorContext } from "./PostgreSqlParser.js";
+import { ExpressionContext } from "./PostgreSqlParser.js";
+import { LogicalNotContext } from "./PostgreSqlParser.js";
+import { PredicatedContext } from "./PostgreSqlParser.js";
+import { LogicalBinaryContext } from "./PostgreSqlParser.js";
+import { ComparisonContext } from "./PostgreSqlParser.js";
+import { QuantifiedComparisonContext } from "./PostgreSqlParser.js";
+import { BetweenContext } from "./PostgreSqlParser.js";
+import { InListContext } from "./PostgreSqlParser.js";
+import { InSubqueryContext } from "./PostgreSqlParser.js";
+import { LikeContext } from "./PostgreSqlParser.js";
+import { NullPredicateContext } from "./PostgreSqlParser.js";
+import { DistinctFromContext } from "./PostgreSqlParser.js";
+import { ValueExpressionDefaultContext } from "./PostgreSqlParser.js";
+import { ConcatenationContext } from "./PostgreSqlParser.js";
+import { ArithmeticBinaryContext } from "./PostgreSqlParser.js";
+import { ArithmeticUnaryContext } from "./PostgreSqlParser.js";
+import { AtTimeZoneContext } from "./PostgreSqlParser.js";
+import { PrimaryExpressionContext } from "./PostgreSqlParser.js";
 import { Func_applicationContext } from "./PostgreSqlParser.js";
 import { Func_exprContext } from "./PostgreSqlParser.js";
 import { Func_expr_windowlessContext } from "./PostgreSqlParser.js";
@@ -523,8 +519,6 @@ import { Unicode_normal_formContext } from "./PostgreSqlParser.js";
 import { Overlay_listContext } from "./PostgreSqlParser.js";
 import { Substr_listContext } from "./PostgreSqlParser.js";
 import { Trim_listContext } from "./PostgreSqlParser.js";
-import { In_expr_selectContext } from "./PostgreSqlParser.js";
-import { In_expr_listContext } from "./PostgreSqlParser.js";
 import { When_clauseContext } from "./PostgreSqlParser.js";
 import { Indirection_elContext } from "./PostgreSqlParser.js";
 import { IndirectionContext } from "./PostgreSqlParser.js";
@@ -559,7 +553,6 @@ import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameContext } from "./PostgreSqlParser.js";
 import { Usual_nameContext } from "./PostgreSqlParser.js";
-import { AexprconstContext } from "./PostgreSqlParser.js";
 import { SconstContext } from "./PostgreSqlParser.js";
 import { AnysconstContext } from "./PostgreSqlParser.js";
 import { SignediconstContext } from "./PostgreSqlParser.js";
@@ -5162,241 +5155,227 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitInterval_second?: (ctx: Interval_secondContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.opt_escape`.
+     * Enter a parse tree produced by `PostgreSqlParser.comparisonOperator`.
      * @param ctx the parse tree
      */
-    enterOpt_escape?: (ctx: Opt_escapeContext) => void;
+    enterComparisonOperator?: (ctx: ComparisonOperatorContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.opt_escape`.
+     * Exit a parse tree produced by `PostgreSqlParser.comparisonOperator`.
      * @param ctx the parse tree
      */
-    exitOpt_escape?: (ctx: Opt_escapeContext) => void;
+    exitComparisonOperator?: (ctx: ComparisonOperatorContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_qual`.
+     * Enter a parse tree produced by `PostgreSqlParser.expression`.
      * @param ctx the parse tree
      */
-    enterA_expr_qual?: (ctx: A_expr_qualContext) => void;
+    enterExpression?: (ctx: ExpressionContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_qual`.
+     * Exit a parse tree produced by `PostgreSqlParser.expression`.
      * @param ctx the parse tree
      */
-    exitA_expr_qual?: (ctx: A_expr_qualContext) => void;
+    exitExpression?: (ctx: ExpressionContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_lessless`.
+     * Enter a parse tree produced by the `logicalNot`
+     * labeled alternative in `PostgreSqlParser.booleanExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_lessless?: (ctx: A_expr_lesslessContext) => void;
+    enterLogicalNot?: (ctx: LogicalNotContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_lessless`.
+     * Exit a parse tree produced by the `logicalNot`
+     * labeled alternative in `PostgreSqlParser.booleanExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_lessless?: (ctx: A_expr_lesslessContext) => void;
+    exitLogicalNot?: (ctx: LogicalNotContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_or`.
+     * Enter a parse tree produced by the `predicated`
+     * labeled alternative in `PostgreSqlParser.booleanExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_or?: (ctx: A_expr_orContext) => void;
+    enterPredicated?: (ctx: PredicatedContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_or`.
+     * Exit a parse tree produced by the `predicated`
+     * labeled alternative in `PostgreSqlParser.booleanExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_or?: (ctx: A_expr_orContext) => void;
+    exitPredicated?: (ctx: PredicatedContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_and`.
+     * Enter a parse tree produced by the `logicalBinary`
+     * labeled alternative in `PostgreSqlParser.booleanExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_and?: (ctx: A_expr_andContext) => void;
+    enterLogicalBinary?: (ctx: LogicalBinaryContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_and`.
+     * Exit a parse tree produced by the `logicalBinary`
+     * labeled alternative in `PostgreSqlParser.booleanExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_and?: (ctx: A_expr_andContext) => void;
+    exitLogicalBinary?: (ctx: LogicalBinaryContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_in`.
+     * Enter a parse tree produced by the `comparison`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    enterA_expr_in?: (ctx: A_expr_inContext) => void;
+    enterComparison?: (ctx: ComparisonContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_in`.
+     * Exit a parse tree produced by the `comparison`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    exitA_expr_in?: (ctx: A_expr_inContext) => void;
+    exitComparison?: (ctx: ComparisonContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_isnull`.
+     * Enter a parse tree produced by the `quantifiedComparison`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    enterA_expr_isnull?: (ctx: A_expr_isnullContext) => void;
+    enterQuantifiedComparison?: (ctx: QuantifiedComparisonContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_isnull`.
+     * Exit a parse tree produced by the `quantifiedComparison`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    exitA_expr_isnull?: (ctx: A_expr_isnullContext) => void;
+    exitQuantifiedComparison?: (ctx: QuantifiedComparisonContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_is_not`.
+     * Enter a parse tree produced by the `between`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    enterA_expr_is_not?: (ctx: A_expr_is_notContext) => void;
+    enterBetween?: (ctx: BetweenContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_is_not`.
+     * Exit a parse tree produced by the `between`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    exitA_expr_is_not?: (ctx: A_expr_is_notContext) => void;
+    exitBetween?: (ctx: BetweenContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_compare`.
+     * Enter a parse tree produced by the `inList`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    enterA_expr_compare?: (ctx: A_expr_compareContext) => void;
+    enterInList?: (ctx: InListContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_compare`.
+     * Exit a parse tree produced by the `inList`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    exitA_expr_compare?: (ctx: A_expr_compareContext) => void;
+    exitInList?: (ctx: InListContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_like`.
+     * Enter a parse tree produced by the `inSubquery`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    enterA_expr_like?: (ctx: A_expr_likeContext) => void;
+    enterInSubquery?: (ctx: InSubqueryContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_like`.
+     * Exit a parse tree produced by the `inSubquery`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    exitA_expr_like?: (ctx: A_expr_likeContext) => void;
+    exitInSubquery?: (ctx: InSubqueryContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_qual_op`.
+     * Enter a parse tree produced by the `like`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    enterA_expr_qual_op?: (ctx: A_expr_qual_opContext) => void;
+    enterLike?: (ctx: LikeContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_qual_op`.
+     * Exit a parse tree produced by the `like`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    exitA_expr_qual_op?: (ctx: A_expr_qual_opContext) => void;
+    exitLike?: (ctx: LikeContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_unary_qualop`.
+     * Enter a parse tree produced by the `nullPredicate`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    enterA_expr_unary_qualop?: (ctx: A_expr_unary_qualopContext) => void;
+    enterNullPredicate?: (ctx: NullPredicateContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_unary_qualop`.
+     * Exit a parse tree produced by the `nullPredicate`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    exitA_expr_unary_qualop?: (ctx: A_expr_unary_qualopContext) => void;
+    exitNullPredicate?: (ctx: NullPredicateContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_add`.
+     * Enter a parse tree produced by the `distinctFrom`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    enterA_expr_add?: (ctx: A_expr_addContext) => void;
+    enterDistinctFrom?: (ctx: DistinctFromContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_add`.
+     * Exit a parse tree produced by the `distinctFrom`
+     * labeled alternative in `PostgreSqlParser.predicate`.
      * @param ctx the parse tree
      */
-    exitA_expr_add?: (ctx: A_expr_addContext) => void;
+    exitDistinctFrom?: (ctx: DistinctFromContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_mul`.
+     * Enter a parse tree produced by the `valueExpressionDefault`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_mul?: (ctx: A_expr_mulContext) => void;
+    enterValueExpressionDefault?: (ctx: ValueExpressionDefaultContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_mul`.
+     * Exit a parse tree produced by the `valueExpressionDefault`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_mul?: (ctx: A_expr_mulContext) => void;
+    exitValueExpressionDefault?: (ctx: ValueExpressionDefaultContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_caret`.
+     * Enter a parse tree produced by the `concatenation`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_caret?: (ctx: A_expr_caretContext) => void;
+    enterConcatenation?: (ctx: ConcatenationContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_caret`.
+     * Exit a parse tree produced by the `concatenation`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_caret?: (ctx: A_expr_caretContext) => void;
+    exitConcatenation?: (ctx: ConcatenationContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_unary_sign`.
+     * Enter a parse tree produced by the `arithmeticBinary`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_unary_sign?: (ctx: A_expr_unary_signContext) => void;
+    enterArithmeticBinary?: (ctx: ArithmeticBinaryContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_unary_sign`.
+     * Exit a parse tree produced by the `arithmeticBinary`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_unary_sign?: (ctx: A_expr_unary_signContext) => void;
+    exitArithmeticBinary?: (ctx: ArithmeticBinaryContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_at_time_zone`.
+     * Enter a parse tree produced by the `arithmeticUnary`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_at_time_zone?: (ctx: A_expr_at_time_zoneContext) => void;
+    enterArithmeticUnary?: (ctx: ArithmeticUnaryContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_at_time_zone`.
+     * Exit a parse tree produced by the `arithmeticUnary`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_at_time_zone?: (ctx: A_expr_at_time_zoneContext) => void;
+    exitArithmeticUnary?: (ctx: ArithmeticUnaryContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_collate`.
+     * Enter a parse tree produced by the `atTimeZone`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_collate?: (ctx: A_expr_collateContext) => void;
+    enterAtTimeZone?: (ctx: AtTimeZoneContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_collate`.
+     * Exit a parse tree produced by the `atTimeZone`
+     * labeled alternative in `PostgreSqlParser.valueExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_collate?: (ctx: A_expr_collateContext) => void;
+    exitAtTimeZone?: (ctx: AtTimeZoneContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.a_expr_typecast`.
+     * Enter a parse tree produced by `PostgreSqlParser.primaryExpression`.
      * @param ctx the parse tree
      */
-    enterA_expr_typecast?: (ctx: A_expr_typecastContext) => void;
+    enterPrimaryExpression?: (ctx: PrimaryExpressionContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.a_expr_typecast`.
+     * Exit a parse tree produced by `PostgreSqlParser.primaryExpression`.
      * @param ctx the parse tree
      */
-    exitA_expr_typecast?: (ctx: A_expr_typecastContext) => void;
-    /**
-     * Enter a parse tree produced by `PostgreSqlParser.b_expr`.
-     * @param ctx the parse tree
-     */
-    enterB_expr?: (ctx: B_exprContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSqlParser.b_expr`.
-     * @param ctx the parse tree
-     */
-    exitB_expr?: (ctx: B_exprContext) => void;
-    /**
-     * Enter a parse tree produced by the `c_expr_exists`
-     * labeled alternative in `PostgreSqlParser.c_expr`.
-     * @param ctx the parse tree
-     */
-    enterC_expr_exists?: (ctx: C_expr_existsContext) => void;
-    /**
-     * Exit a parse tree produced by the `c_expr_exists`
-     * labeled alternative in `PostgreSqlParser.c_expr`.
-     * @param ctx the parse tree
-     */
-    exitC_expr_exists?: (ctx: C_expr_existsContext) => void;
-    /**
-     * Enter a parse tree produced by the `c_expr_expr`
-     * labeled alternative in `PostgreSqlParser.c_expr`.
-     * @param ctx the parse tree
-     */
-    enterC_expr_expr?: (ctx: C_expr_exprContext) => void;
-    /**
-     * Exit a parse tree produced by the `c_expr_expr`
-     * labeled alternative in `PostgreSqlParser.c_expr`.
-     * @param ctx the parse tree
-     */
-    exitC_expr_expr?: (ctx: C_expr_exprContext) => void;
-    /**
-     * Enter a parse tree produced by the `c_expr_case`
-     * labeled alternative in `PostgreSqlParser.c_expr`.
-     * @param ctx the parse tree
-     */
-    enterC_expr_case?: (ctx: C_expr_caseContext) => void;
-    /**
-     * Exit a parse tree produced by the `c_expr_case`
-     * labeled alternative in `PostgreSqlParser.c_expr`.
-     * @param ctx the parse tree
-     */
-    exitC_expr_case?: (ctx: C_expr_caseContext) => void;
+    exitPrimaryExpression?: (ctx: PrimaryExpressionContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.func_application`.
      * @param ctx the parse tree
@@ -5828,30 +5807,6 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitTrim_list?: (ctx: Trim_listContext) => void;
     /**
-     * Enter a parse tree produced by the `in_expr_select`
-     * labeled alternative in `PostgreSqlParser.in_expr`.
-     * @param ctx the parse tree
-     */
-    enterIn_expr_select?: (ctx: In_expr_selectContext) => void;
-    /**
-     * Exit a parse tree produced by the `in_expr_select`
-     * labeled alternative in `PostgreSqlParser.in_expr`.
-     * @param ctx the parse tree
-     */
-    exitIn_expr_select?: (ctx: In_expr_selectContext) => void;
-    /**
-     * Enter a parse tree produced by the `in_expr_list`
-     * labeled alternative in `PostgreSqlParser.in_expr`.
-     * @param ctx the parse tree
-     */
-    enterIn_expr_list?: (ctx: In_expr_listContext) => void;
-    /**
-     * Exit a parse tree produced by the `in_expr_list`
-     * labeled alternative in `PostgreSqlParser.in_expr`.
-     * @param ctx the parse tree
-     */
-    exitIn_expr_list?: (ctx: In_expr_listContext) => void;
-    /**
      * Enter a parse tree produced by `PostgreSqlParser.when_clause`.
      * @param ctx the parse tree
      */
@@ -6231,16 +6186,6 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitUsual_name?: (ctx: Usual_nameContext) => void;
-    /**
-     * Enter a parse tree produced by `PostgreSqlParser.aexprconst`.
-     * @param ctx the parse tree
-     */
-    enterAexprconst?: (ctx: AexprconstContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSqlParser.aexprconst`.
-     * @param ctx the parse tree
-     */
-    exitAexprconst?: (ctx: AexprconstContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.sconst`.
      * @param ctx the parse tree
