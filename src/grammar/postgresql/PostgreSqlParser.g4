@@ -1,27 +1,32 @@
 /*
- * [The "MIT license"] Copyright (C) 2014 Sam Harwell, Tunnel Vision Laboratories, LLC
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- * associated documentation files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+ * [The "MIT license"]
+ * Copyright (C) 2014 Sam Harwell, Tunnel Vision Laboratories, LLC
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * 1. The above copyright notice and this permission notice shall be included in all copies or
- * substantial portions of the Software. 2. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
- * ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
- * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE. 3. Except as contained in this notice, the name of Tunnel Vision
- * Laboratories, LLC. shall not be used in advertising or otherwise to promote the sale, use or
- * other dealings in this Software without prior written authorization from Tunnel Vision
- * Laboratories, LLC.
+ *
+ * 1. The above copyright notice and this permission notice shall be included in
+ *    all copies or substantial portions of the Software.
+ * 2. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ *    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ *    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ *    DEALINGS IN THE SOFTWARE.
+ * 3. Except as contained in this notice, the name of Tunnel Vision
+ *    Laboratories, LLC. shall not be used in advertising or otherwise to
+ *    promote the sale, use or other dealings in this Software without prior
+ *    written authorization from Tunnel Vision Laboratories, LLC.
  */
 
 /**
- * This file is an adaptation of antlr's sql/postgresql/PostgreSQLParser.g4 grammar. Reference:
- * https://github.com/antlr/grammars-v4/blob/master/sql/postgresql/PostgreSQLParser.g4
+ * This file is an adaptation of antlr's sql/postgresql/PostgreSQLParser.g4 grammar.
+ * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/postgresql/PostgreSQLParser.g4
  */
 
 /**
@@ -177,15 +182,7 @@ callstmt
     ;
 
 createrolestmt
-    : KW_CREATE KW_ROLE rolespec KW_WITH? optrolelist
-    ;
-
-optrolelist
-    : createoptroleelem*
-    ;
-
-alteroptrolelist
-    : alteroptroleelem*
+    : KW_CREATE KW_ROLE rolespec KW_WITH? createoptroleelem*
     ;
 
 alteroptroleelem
@@ -223,11 +220,11 @@ createoptroleelem
     ;
 
 createuserstmt
-    : KW_CREATE KW_USER rolespec KW_WITH? optrolelist
+    : KW_CREATE KW_USER rolespec KW_WITH? createoptroleelem*
     ;
 
 alterrolestmt
-    : KW_ALTER (KW_ROLE | KW_USER) rolespec KW_WITH? alteroptrolelist
+    : KW_ALTER (KW_ROLE | KW_USER) rolespec KW_WITH? alteroptroleelem*
     ;
 
 alterrolesetstmt
@@ -261,7 +258,7 @@ routine_action
     ;
 
 creategroupstmt
-    : KW_CREATE KW_GROUP rolespec KW_WITH? optrolelist
+    : KW_CREATE KW_GROUP rolespec KW_WITH? createoptroleelem*
     ;
 
 altergroupstmt
@@ -463,7 +460,7 @@ index_partition_cmd
 
 alter_table_cmd
     : KW_ADD (KW_CONSTRAINT colid)? constraintelem
-    | KW_ALTER KW_CONSTRAINT colid constraintattributespec
+    | KW_ALTER KW_CONSTRAINT colid constraintattributeElem*
     | KW_VALIDATE KW_CONSTRAINT colid
     | KW_DROP KW_CONSTRAINT opt_if_exists? colid opt_drop_behavior?
     | KW_SET KW_WITHOUT (KW_OIDS | KW_CLUSTER)
@@ -478,7 +475,7 @@ alter_table_cmd
     | KW_NOT KW_OF
     | KW_OWNER KW_TO rolespec
     | KW_SET KW_TABLESPACE tablespace_name_create
-    | KW_REPLICA KW_IDENTITY replica_identity
+    | KW_REPLICA KW_IDENTITY (KW_NOTHING | KW_FULL | KW_DEFAULT | existingindex)
     | (KW_ENABLE | KW_DISABLE | (KW_NO? KW_FORCE)) KW_ROW KW_LEVEL KW_SECURITY
     | KW_DROP KW_COLUMN? opt_if_exists? column_name opt_drop_behavior?
     | KW_ADD KW_COLUMN? opt_if_not_exists? column_def
@@ -488,8 +485,13 @@ alter_table_cmd
     | KW_ALTER KW_COLUMN? column_name KW_SET KW_STATISTICS signediconst
     | (KW_ALTER KW_COLUMN? column_name)? (KW_SET | KW_RESET) reloptions
     | KW_ALTER KW_COLUMN? column_name KW_SET KW_STORAGE colid
-    | KW_ALTER KW_COLUMN? column_name KW_ADD KW_GENERATED generated_when KW_AS KW_IDENTITY optparenthesizedseqoptlist?
-    | KW_ALTER KW_COLUMN? column_name alter_identity_column_option+
+    | KW_ALTER KW_COLUMN? column_name KW_ADD KW_GENERATED generated_when KW_AS KW_IDENTITY (
+        OPEN_PAREN seqoptelem+ CLOSE_PAREN
+    )?
+    | KW_ALTER KW_COLUMN? column_name (
+        KW_RESTART (KW_WITH? numericonly)?
+        | KW_SET (seqoptelem | KW_GENERATED generated_when)
+    )+
     | KW_ALTER KW_COLUMN? column_name KW_DROP KW_IDENTITY opt_if_exists?
     | KW_ALTER KW_COLUMN? column_name (KW_SET KW_DATA)? KW_TYPE typename opt_collate_clause? (
         KW_USING expression
@@ -511,47 +513,25 @@ opt_collate_clause
     : KW_COLLATE any_name
     ;
 
-replica_identity
-    : KW_NOTHING
-    | KW_FULL
-    | KW_DEFAULT
-    | existingindex
-    ;
-
 reloptions
-    : OPEN_PAREN reloption_list CLOSE_PAREN
+    : OPEN_PAREN reloption_elem (COMMA reloption_elem)* CLOSE_PAREN
     ;
 
 opt_reloptions
     : KW_WITH reloptions
     ;
 
-reloption_list
-    : reloption_elem (COMMA reloption_elem)*
-    ;
-
 reloption_elem
     : collabel (EQUAL def_arg | DOT def_elem)?
     ;
 
-alter_identity_column_option
-    : KW_RESTART (KW_WITH? numericonly)?
-    | KW_SET (seqoptelem | KW_GENERATED generated_when)
-    ;
-
 partitionboundspec
-    : KW_FOR KW_VALUES KW_WITH hash_partbound
+    : KW_FOR KW_VALUES KW_WITH OPEN_PAREN nonreservedword Integral (
+        COMMA (nonreservedword Integral)
+    )* CLOSE_PAREN
     | KW_FOR KW_VALUES KW_IN execute_param_clause
     | KW_FOR KW_VALUES KW_FROM execute_param_clause KW_TO execute_param_clause
     | KW_DEFAULT
-    ;
-
-hash_partbound_elem
-    : nonreservedword Integral
-    ;
-
-hash_partbound
-    : OPEN_PAREN hash_partbound_elem (COMMA hash_partbound_elem)* CLOSE_PAREN
     ;
 
 altercompositetypestmt
@@ -569,49 +549,39 @@ closeportalstmt
     ;
 
 copystmt
-    : KW_COPY KW_BINARY? table_name opt_column_list? (KW_FROM | KW_TO) KW_PROGRAM? copy_file_name copy_delimiter? KW_WITH? copy_options where_clause?
-    | KW_COPY OPEN_PAREN preparablestmt CLOSE_PAREN KW_TO KW_PROGRAM? copy_file_name KW_WITH? copy_options
-    ;
-
-copy_file_name
-    : sconst
-    | KW_STDIN
-    | KW_STDOUT
+    : KW_COPY KW_BINARY? table_name opt_column_list? (KW_FROM | KW_TO) KW_PROGRAM? (
+        sconst
+        | KW_STDIN
+        | KW_STDOUT
+    ) (KW_USING? KW_DELIMITERS sconst)? KW_WITH? copy_options where_clause?
+    | KW_COPY OPEN_PAREN preparablestmt CLOSE_PAREN KW_TO KW_PROGRAM? (
+        sconst
+        | KW_STDIN
+        | KW_STDOUT
+    ) KW_WITH? copy_options
     ;
 
 copy_options
-    : copy_opt_item*
+    : (
+        KW_BINARY
+        | KW_FREEZE
+        | (KW_NULL | KW_DELIMITER | KW_ESCAPE | KW_QUOTE) KW_AS? sconst
+        | KW_CSV
+        | KW_HEADER
+        | KW_FORCE KW_QUOTE (column_list | STAR)
+        | KW_FORCE KW_NOT? KW_NULL column_list
+        | KW_ENCODING sconst
+    )*
     | OPEN_PAREN copy_generic_opt_elem (COMMA copy_generic_opt_elem)* CLOSE_PAREN
     ;
 
-copy_opt_item
-    : KW_BINARY
-    | KW_FREEZE
-    | (KW_NULL | KW_DELIMITER | KW_ESCAPE | KW_QUOTE) KW_AS? sconst
-    | KW_CSV
-    | KW_HEADER
-    | KW_FORCE KW_QUOTE (column_list | STAR)
-    | KW_FORCE KW_NOT? KW_NULL column_list
-    | KW_ENCODING sconst
-    ;
-
-copy_delimiter
-    : KW_USING? KW_DELIMITERS sconst
-    ;
-
 copy_generic_opt_elem
-    : collabel copy_generic_opt_arg?
-    ;
-
-copy_generic_opt_arg
-    : opt_boolean_or_string
-    | numericonly
-    | STAR
-    | OPEN_PAREN copy_generic_opt_arg_list CLOSE_PAREN
-    ;
-
-copy_generic_opt_arg_list
-    : opt_boolean_or_string_column (COMMA opt_boolean_or_string_column)*
+    : collabel (
+        opt_boolean_or_string
+        | numericonly
+        | STAR
+        | OPEN_PAREN opt_boolean_or_string_column (COMMA opt_boolean_or_string_column)* CLOSE_PAREN
+    )?
     ;
 
 createstmt
@@ -631,81 +601,56 @@ opttemp
     ;
 
 opttypedtableelementlist
-    : OPEN_PAREN typedtableelementlist CLOSE_PAREN
+    : OPEN_PAREN typedtableelement (COMMA typedtableelement)* CLOSE_PAREN
     ;
 
 tableelementlist
     : tableelement (COMMA tableelement)*
     ;
 
-typedtableelementlist
-    : typedtableelement (COMMA typedtableelement)*
-    ;
-
 tableelement
     : column_def
-    | tablelikeclause
-    | tableconstraint
+    | KW_LIKE qualified_name ((KW_INCLUDING | KW_EXCLUDING) tablelikeoption)*
+    | (KW_CONSTRAINT colid)? constraintelem
     ;
 
 typedtableelement
-    : column_name_create (KW_WITH KW_OPTIONS)? colquallist
-    | tableconstraint
+    : column_name_create (KW_WITH KW_OPTIONS)? colconstraint*
+    | (KW_CONSTRAINT colid)? constraintelem
     ;
 
 column_def
-    : column_name_create typename create_generic_options? storageCluase? (KW_COMPRESSION colid)? (
-        opt_collate_clause
-    )? (KW_WITH KW_OPTIONS)? colquallist
-    ;
-
-storageCluase
-    : KW_STORAGE (KW_PLAIN | KW_EXTERNAL | KW_EXTENDED | KW_MAIN | KW_DEFAULT | colid)
-    ;
-
-colquallist
-    : colconstraint*
+    : column_name_create typename create_generic_options? (
+        KW_STORAGE (KW_PLAIN | KW_EXTERNAL | KW_EXTENDED | KW_MAIN | KW_DEFAULT | colid)
+    )? (KW_COMPRESSION colid)? (opt_collate_clause)? (KW_WITH KW_OPTIONS)? colconstraint*
     ;
 
 colconstraint
-    : (KW_CONSTRAINT colid)? colconstraintelem deferrable_trigger? initially_trigger?
-    | colconstraintelem deferrable_trigger? initially_trigger?
+    : (KW_CONSTRAINT colid)? colconstraintelem (KW_NOT? KW_DEFERRABLE)? (
+        KW_INITIALLY (KW_DEFERRED | KW_IMMEDIATE)
+    )?
     ;
 
 colconstraintelem
     : KW_NOT? KW_NULL
     | KW_UNIQUE opt_definition? optconstablespace?
-    | KW_UNIQUE nulls_distinct? index_paramenters_create
+    | KW_UNIQUE (KW_NULLS KW_NOT? KW_DISTINCT)? (
+        (KW_INCLUDE index_params)? with_clause? optconstablespace?
+    )
     | KW_PRIMARY KW_KEY opt_definition? optconstablespace?
     | KW_CHECK OPEN_PAREN expression CLOSE_PAREN (KW_NO KW_INHERIT)?
     | KW_DEFAULT primaryExpression
     | KW_GENERATED generated_when KW_AS (
-        KW_IDENTITY optparenthesizedseqoptlist?
+        KW_IDENTITY (OPEN_PAREN seqoptelem+ CLOSE_PAREN)?
         | OPEN_PAREN expression CLOSE_PAREN KW_STORED
     )
     | KW_REFERENCES qualified_name opt_column_list? key_match? key_actions?
     | opt_collate_clause
     ;
 
-nulls_distinct
-    : KW_NULLS KW_NOT? KW_DISTINCT
-    ;
-
 generated_when
     : KW_ALWAYS
     | KW_BY KW_DEFAULT
-    ;
-
-deferrable_trigger
-    : KW_NOT? KW_DEFERRABLE
-    ;
-
-initially_trigger
-    : KW_INITIALLY (KW_DEFERRED | KW_IMMEDIATE)
-    ;
-
-tablelikeclause
-    : KW_LIKE qualified_name ((KW_INCLUDING | KW_EXCLUDING) tablelikeoption)*
     ;
 
 tablelikeoption
@@ -720,19 +665,18 @@ tablelikeoption
     | KW_ALL
     ;
 
-tableconstraint
-    : (KW_CONSTRAINT colid)? constraintelem
-    ;
-
 constraintelem
-    : KW_CHECK OPEN_PAREN expression CLOSE_PAREN constraintattributespec
+    : KW_CHECK OPEN_PAREN expression CLOSE_PAREN constraintattributeElem*
     | (KW_UNIQUE | ( KW_PRIMARY KW_KEY)) (
-        opt_column_list opt_c_include? opt_definition? optconstablespace? constraintattributespec
-        | existingindex constraintattributespec
+        opt_column_list opt_c_include? opt_definition? optconstablespace? constraintattributeElem*
+        | existingindex constraintattributeElem*
     )
-    | KW_EXCLUDE table_access_method_clause? OPEN_PAREN exclusionconstraintlist CLOSE_PAREN opt_c_include? opt_definition? optconstablespace?
-        exclusionwhereclause? constraintattributespec
-    | KW_FOREIGN KW_KEY opt_column_list KW_REFERENCES qualified_name opt_column_list? key_match? key_actions? constraintattributespec
+    | KW_EXCLUDE table_access_method_clause? OPEN_PAREN exclusionconstraintelem (
+        COMMA exclusionconstraintelem
+    )* CLOSE_PAREN opt_c_include? opt_definition? optconstablespace? (
+        KW_WHERE OPEN_PAREN expression CLOSE_PAREN
+    )? constraintattributeElem*
+    | KW_FOREIGN KW_KEY opt_column_list KW_REFERENCES qualified_name opt_column_list? key_match? key_actions? constraintattributeElem*
     ;
 
 opt_column_list
@@ -755,16 +699,8 @@ key_match
     : KW_MATCH (KW_FULL | KW_PARTIAL | KW_SIMPLE)
     ;
 
-exclusionconstraintlist
-    : exclusionconstraintelem (COMMA exclusionconstraintelem)*
-    ;
-
 exclusionconstraintelem
     : index_elem KW_WITH (any_operator | KW_OPERATOR OPEN_PAREN any_operator CLOSE_PAREN)
-    ;
-
-exclusionwhereclause
-    : KW_WHERE OPEN_PAREN expression CLOSE_PAREN
     ;
 
 key_actions
@@ -792,11 +728,7 @@ optinherit
     ;
 
 partitionspec
-    : KW_PARTITION KW_BY colid part_params
-    ;
-
-part_params
-    : OPEN_PAREN part_elem (COMMA part_elem)* CLOSE_PAREN
+    : KW_PARTITION KW_BY colid OPEN_PAREN part_elem (COMMA part_elem)* CLOSE_PAREN
     ;
 
 part_elem
@@ -820,10 +752,6 @@ opttablespace
     : KW_TABLESPACE tablespace_name
     ;
 
-index_paramenters_create
-    : opt_include? with_clause? optconstablespace?
-    ;
-
 optconstablespace
     : KW_USING KW_INDEX opttablespace
     ;
@@ -834,7 +762,7 @@ existingindex
 
 createstatsstmt
     : KW_CREATE KW_STATISTICS (opt_if_not_exists? any_name)? opt_column_list? KW_ON (
-        column_expr_list
+        column_expr (COMMA column_expr)*
         | expr_list
     ) from_clause
     ;
@@ -856,11 +784,8 @@ opt_with_data
     ;
 
 creatematviewstmt
-    : KW_CREATE KW_UNLOGGED? KW_MATERIALIZED KW_VIEW opt_if_not_exists? create_mv_target KW_AS selectstmt opt_with_data? # createMaterializedView
-    ;
-
-create_mv_target
-    : view_name_create opt_column_list_create? table_access_method_clause? opt_reloptions? opttablespace?
+    : KW_CREATE KW_UNLOGGED? KW_MATERIALIZED KW_VIEW opt_if_not_exists? view_name_create opt_column_list_create? table_access_method_clause?
+        opt_reloptions? opttablespace? KW_AS selectstmt opt_with_data? # createMaterializedView
     ;
 
 refreshmatviewstmt
@@ -868,19 +793,11 @@ refreshmatviewstmt
     ;
 
 createseqstmt
-    : KW_CREATE opttemp? KW_SEQUENCE opt_if_not_exists? qualified_name seqoptlist?
+    : KW_CREATE opttemp? KW_SEQUENCE opt_if_not_exists? qualified_name (seqoptelem+)?
     ;
 
 alterseqstmt
-    : KW_ALTER KW_SEQUENCE opt_if_exists? qualified_name seqoptlist
-    ;
-
-optparenthesizedseqoptlist
-    : OPEN_PAREN seqoptlist CLOSE_PAREN
-    ;
-
-seqoptlist
-    : seqoptelem+
+    : KW_ALTER KW_SEQUENCE opt_if_exists? qualified_name seqoptelem+
     ;
 
 seqoptelem
@@ -900,10 +817,6 @@ numericonly
     | signediconst
     ;
 
-numericonly_list
-    : numericonly (COMMA numericonly)*
-    ;
-
 createplangstmt
     : KW_CREATE opt_or_replace? KW_TRUSTED? KW_PROCEDURAL? KW_LANGUAGE colid (
         KW_HANDLER any_name (KW_INLINE any_name)? (KW_VALIDATOR any_name | KW_NO KW_VALIDATOR)?
@@ -915,13 +828,11 @@ createtablespacestmt
     ;
 
 createextensionstmt
-    : KW_CREATE KW_EXTENSION opt_if_not_exists? colid KW_WITH? create_extension_opt_item*
-    ;
-
-create_extension_opt_item
-    : KW_SCHEMA schema_name
-    | (KW_VERSION | KW_FROM) nonreservedword_or_sconst
-    | KW_CASCADE
+    : KW_CREATE KW_EXTENSION opt_if_not_exists? colid KW_WITH? (
+        KW_SCHEMA schema_name
+        | (KW_VERSION | KW_FROM) nonreservedword_or_sconst
+        | KW_CASCADE
+    )*
     ;
 
 alterextensionstmt
@@ -945,7 +856,7 @@ alterextensioncontentsstmt
     ;
 
 createfdwstmt
-    : KW_CREATE KW_FOREIGN KW_DATA KW_WRAPPER colid fdw_options? create_generic_options?
+    : KW_CREATE KW_FOREIGN KW_DATA KW_WRAPPER colid (fdw_option+)? create_generic_options?
     ;
 
 fdw_option
@@ -953,31 +864,19 @@ fdw_option
     | KW_NO (KW_HANDLER | KW_VALIDATOR)
     ;
 
-fdw_options
-    : fdw_option+
-    ;
-
 alterfdwstmt
     : KW_ALTER KW_FOREIGN KW_DATA KW_WRAPPER colid (
-        fdw_options? alter_generic_options
-        | fdw_options
+        (fdw_option+)? alter_generic_options
+        | fdw_option+
     )
     ;
 
 create_generic_options
-    : KW_OPTIONS OPEN_PAREN generic_option_list CLOSE_PAREN
-    ;
-
-generic_option_list
-    : generic_option_elem (COMMA generic_option_elem)*
+    : KW_OPTIONS OPEN_PAREN generic_option_elem (COMMA generic_option_elem)* CLOSE_PAREN
     ;
 
 alter_generic_options
-    : KW_OPTIONS OPEN_PAREN alter_generic_option_list CLOSE_PAREN
-    ;
-
-alter_generic_option_list
-    : alter_generic_option_elem (COMMA alter_generic_option_elem)*
+    : KW_OPTIONS OPEN_PAREN alter_generic_option_elem (COMMA alter_generic_option_elem)* CLOSE_PAREN
     ;
 
 alter_generic_option_elem
@@ -1012,46 +911,37 @@ createforeigntablestmt
     ;
 
 importforeignschemastmt
-    : KW_IMPORT KW_FOREIGN KW_SCHEMA schema_name import_qualification? KW_FROM KW_SERVER colid KW_INTO colid create_generic_options?
-    ;
-
-import_qualification
-    : (KW_LIMIT KW_TO | KW_EXCEPT) OPEN_PAREN relation_expr_list CLOSE_PAREN
+    : KW_IMPORT KW_FOREIGN KW_SCHEMA schema_name (
+        (KW_LIMIT KW_TO | KW_EXCEPT) OPEN_PAREN relation_expr_list CLOSE_PAREN
+    )? KW_FROM KW_SERVER colid KW_INTO colid create_generic_options?
     ;
 
 createusermappingstmt
-    : KW_CREATE KW_USER KW_MAPPING opt_if_not_exists? KW_FOR auth_ident KW_SERVER colid create_generic_options?
-    ;
-
-auth_ident
-    : rolespec
-    | KW_USER
+    : KW_CREATE KW_USER KW_MAPPING opt_if_not_exists? KW_FOR (rolespec | KW_USER) KW_SERVER colid create_generic_options?
     ;
 
 alterusermappingstmt
-    : KW_ALTER KW_USER KW_MAPPING KW_FOR auth_ident KW_SERVER colid alter_generic_options
+    : KW_ALTER KW_USER KW_MAPPING KW_FOR (rolespec | KW_USER) KW_SERVER colid alter_generic_options
     ;
 
 createpolicystmt
-    : KW_CREATE KW_POLICY colid KW_ON qualified_name rowsecuritydefaultpermissive? (
-        KW_FOR row_security_cmd
-    )? rowsecuritydefaulttorole? rowsecurityoptionalexpr? rowsecurityoptionalwithcheck?
+    : KW_CREATE KW_POLICY colid KW_ON qualified_name (
+        KW_AS (KW_PERMISSIVE | KW_RESTRICTIVE | identifier)
+    )? (KW_FOR (KW_ALL | KW_SELECT | KW_INSERT | KW_UPDATE | KW_DELETE))? (KW_TO role_list)? rowsecurityoptionalexpr? rowsecurityoptionalwithcheck?
     ;
 
 alterpolicystmt
-    : KW_ALTER KW_POLICY colid KW_ON qualified_name rowsecuritydefaulttorole? rowsecurityoptionalexpr? rowsecurityoptionalwithcheck?
+    : KW_ALTER KW_POLICY colid KW_ON qualified_name (KW_TO role_list)? rowsecurityoptionalexpr? rowsecurityoptionalwithcheck?
     ;
 
 alterprocedurestmt
-    : KW_ALTER KW_PROCEDURE procedure_name func_args? procedure_cluase
-    ;
-
-procedure_cluase
-    : procedure_action (procedure_action)* KW_RESTRICT?
-    | KW_RENAME KW_TO procedure_name_create
-    | KW_OWNER KW_TO rolespec
-    | KW_SET KW_SCHEMA schema_name_create
-    | KW_NO? KW_DEPENDS KW_ON KW_EXTENSION colid
+    : KW_ALTER KW_PROCEDURE procedure_name func_args? (
+        procedure_action (procedure_action)* KW_RESTRICT?
+        | KW_RENAME KW_TO procedure_name_create
+        | KW_OWNER KW_TO rolespec
+        | KW_SET KW_SCHEMA schema_name_create
+        | KW_NO? KW_DEPENDS KW_ON KW_EXTENSION colid
+    )
     ;
 
 procedure_action
@@ -1069,42 +959,24 @@ rowsecurityoptionalwithcheck
     : KW_WITH KW_CHECK OPEN_PAREN expression CLOSE_PAREN
     ;
 
-rowsecuritydefaulttorole
-    : KW_TO role_list
-    ;
-
-rowsecuritydefaultpermissive
-    : KW_AS (KW_PERMISSIVE | KW_RESTRICTIVE | identifier)
-    ;
-
-row_security_cmd
-    : KW_ALL
-    | KW_SELECT
-    | KW_INSERT
-    | KW_UPDATE
-    | KW_DELETE
-    ;
-
 createamstmt
     : KW_CREATE KW_ACCESS KW_METHOD colid KW_TYPE (KW_INDEX | KW_TABLE) KW_HANDLER any_name
     ;
 
 createtrigstmt
-    : KW_CREATE opt_or_replace? KW_TRIGGER colid triggeractiontime triggerevents KW_ON table_name triggerreferencing? triggerforspec? triggerwhen?
-        KW_EXECUTE function_or_procedure OPEN_PAREN triggerfuncargs CLOSE_PAREN
+    : KW_CREATE opt_or_replace? KW_TRIGGER colid triggeractiontime triggerevents KW_ON table_name (
+        KW_REFERENCING ((KW_NEW | KW_OLD) (KW_TABLE | KW_ROW) KW_AS? colid)+
+    )? (KW_FOR KW_EACH? (KW_ROW | KW_STATEMENT))? triggerwhen? KW_EXECUTE function_or_procedure OPEN_PAREN triggerfuncargs CLOSE_PAREN
     | KW_CREATE opt_or_replace? KW_CONSTRAINT? KW_TRIGGER colid triggeractiontime triggerevents KW_ON table_name (
         KW_FROM qualified_name
-    )? constraintattributespec foreachrow? triggerwhen? KW_EXECUTE function_or_procedure OPEN_PAREN triggerfuncargs CLOSE_PAREN
+    )? constraintattributeElem* (KW_FOR KW_EACH? (KW_ROW | KW_STATEMENT))? triggerwhen? KW_EXECUTE function_or_procedure OPEN_PAREN triggerfuncargs
+        CLOSE_PAREN
     ;
 
 triggeractiontime
     : KW_BEFORE
     | KW_AFTER
     | KW_INSTEAD KW_OF
-    ;
-
-foreachrow
-    : KW_FOR KW_EACH? (KW_ROW | KW_STATEMENT)
     ;
 
 triggerevents
@@ -1116,18 +988,6 @@ triggeroneevent
     | KW_DELETE
     | KW_UPDATE (KW_OF column_list)?
     | KW_TRUNCATE
-    ;
-
-triggerreferencing
-    : KW_REFERENCING triggertransition+
-    ;
-
-triggertransition
-    : (KW_NEW | KW_OLD) (KW_TABLE | KW_ROW) KW_AS? colid
-    ;
-
-triggerforspec
-    : KW_FOR KW_EACH? (KW_ROW | KW_STATEMENT)
     ;
 
 triggerwhen
@@ -1150,10 +1010,6 @@ triggerfuncarg
     | collabel
     ;
 
-constraintattributespec
-    : constraintattributeElem*
-    ;
-
 constraintattributeElem
     : KW_NOT? KW_DEFERRABLE
     | KW_INITIALLY (KW_IMMEDIATE | KW_DEFERRED)
@@ -1162,28 +1018,21 @@ constraintattributeElem
     ;
 
 createeventtrigstmt
-    : KW_CREATE KW_EVENT KW_TRIGGER colid KW_ON collabel (KW_WHEN event_trigger_when_list)? KW_EXECUTE function_or_procedure empty_grouping_set
-    ;
-
-event_trigger_when_list
-    : event_trigger_when_item (KW_AND event_trigger_when_item)*
+    : KW_CREATE KW_EVENT KW_TRIGGER colid KW_ON collabel (
+        KW_WHEN event_trigger_when_item (KW_AND event_trigger_when_item)*
+    )? KW_EXECUTE function_or_procedure OPEN_PAREN CLOSE_PAREN
     ;
 
 event_trigger_when_item
-    : colid KW_IN OPEN_PAREN event_trigger_value_list CLOSE_PAREN
+    : colid KW_IN OPEN_PAREN sconst (notify_payload)* CLOSE_PAREN
     ;
 
 altereventtrigstmt
-    : KW_ALTER KW_EVENT KW_TRIGGER colid enable_trigger
-    ;
-
-enable_trigger
-    : KW_ENABLE (KW_REPLICA | KW_ALWAYS)?
-    | KW_DISABLE
+    : KW_ALTER KW_EVENT KW_TRIGGER colid (KW_ENABLE (KW_REPLICA | KW_ALWAYS)? | KW_DISABLE)
     ;
 
 createassertionstmt
-    : KW_CREATE KW_ASSERTION any_name KW_CHECK OPEN_PAREN expression CLOSE_PAREN constraintattributespec
+    : KW_CREATE KW_ASSERTION any_name KW_CHECK OPEN_PAREN expression CLOSE_PAREN constraintattributeElem*
     ;
 
 definestmt
@@ -1194,7 +1043,7 @@ definestmt
     | KW_CREATE KW_OPERATOR any_operator definition
     | KW_CREATE KW_TYPE any_name KW_AS (
         OPEN_PAREN tablefuncelementlist? CLOSE_PAREN
-        | KW_ENUM OPEN_PAREN event_trigger_value_list? CLOSE_PAREN
+        | KW_ENUM OPEN_PAREN (sconst (notify_payload)*)? CLOSE_PAREN
     )
     | KW_CREATE KW_TYPE any_name ((KW_AS KW_RANGE)? definition)?
     | KW_CREATE KW_TEXT KW_SEARCH (KW_PARSER | KW_DICTIONARY | KW_TEMPLATE | KW_CONFIGURATION) any_name definition
@@ -1202,11 +1051,7 @@ definestmt
     ;
 
 definition
-    : OPEN_PAREN def_list CLOSE_PAREN
-    ;
-
-def_list
-    : def_elem (COMMA def_elem)*
+    : OPEN_PAREN def_elem (COMMA def_elem)* CLOSE_PAREN
     ;
 
 def_elem
@@ -1226,10 +1071,6 @@ old_aggr_elem
     : identifier EQUAL def_arg
     ;
 
-event_trigger_value_list
-    : sconst (notify_payload)*
-    ;
-
 alterenumstmt
     : KW_ALTER KW_TYPE any_name KW_ADD KW_VALUE opt_if_not_exists? sconst (
         (KW_BEFORE | KW_AFTER) sconst
@@ -1242,35 +1083,26 @@ opt_if_not_exists
     ;
 
 createopclassstmt
-    : KW_CREATE KW_OPERATOR KW_CLASS any_name KW_DEFAULT? KW_FOR KW_TYPE typename table_access_method_clause opt_opfamily? KW_AS opclass_item_list
-    ;
-
-opclass_item_list
-    : opclass_item (COMMA opclass_item)*
+    : KW_CREATE KW_OPERATOR KW_CLASS any_name KW_DEFAULT? KW_FOR KW_TYPE typename table_access_method_clause (
+        KW_FAMILY any_name
+    )? KW_AS opclass_item (COMMA opclass_item)*
     ;
 
 opclass_item
-    : KW_OPERATOR Integral any_operator oper_argtypes? opclass_purpose? KW_RECHECK?
+    : KW_OPERATOR Integral any_operator oper_argtypes? (
+        KW_FOR (KW_SEARCH | (KW_ORDER KW_BY any_name))
+    )? KW_RECHECK?
     | KW_FUNCTION Integral prep_type_clause? function_with_argtypes
     | KW_STORAGE typename
     ;
 
-opt_opfamily
-    : KW_FAMILY any_name
-    ;
-
-opclass_purpose
-    : KW_FOR KW_SEARCH
-    | KW_FOR KW_ORDER KW_BY any_name
-    ;
-
 createopfamilystmt
-    : KW_CREATE KW_OPERATOR opt_opfamily table_access_method_clause
+    : KW_CREATE KW_OPERATOR KW_FAMILY any_name table_access_method_clause
     ;
 
 alteropfamilystmt
-    : KW_ALTER KW_OPERATOR opt_opfamily table_access_method_clause (
-        KW_ADD opclass_item_list
+    : KW_ALTER KW_OPERATOR KW_FAMILY any_name table_access_method_clause (
+        KW_ADD opclass_item (COMMA opclass_item)*
         | KW_DROP opclass_drop (COMMA opclass_drop)*
     )
     ;
@@ -1299,11 +1131,11 @@ dropstmt
         | KW_FOREIGN KW_DATA KW_WRAPPER
         | KW_TEXT KW_SEARCH (KW_PARSER | KW_DICTIONARY | KW_TEMPLATE | KW_CONFIGURATION)
     ) opt_if_exists? name_list opt_drop_behavior?
-    | KW_DROP KW_MATERIALIZED? KW_VIEW opt_if_exists? view_nameList opt_drop_behavior?
+    | KW_DROP KW_MATERIALIZED? KW_VIEW opt_if_exists? view_name (COMMA view_name)* opt_drop_behavior?
     | KW_DROP KW_FOREIGN? KW_TABLE opt_if_exists? table_name_list opt_drop_behavior?
     | KW_DROP KW_SCHEMA opt_if_exists? schema_name_list opt_drop_behavior?
     | KW_DROP (KW_POLICY | KW_RULE | KW_TRIGGER) opt_if_exists? colid KW_ON any_name opt_drop_behavior?
-    | KW_DROP (KW_TYPE | KW_DOMAIN) opt_if_exists? type_name_list opt_drop_behavior?
+    | KW_DROP (KW_TYPE | KW_DOMAIN) opt_if_exists? typename (COMMA typename)* opt_drop_behavior?
     | KW_DROP KW_INDEX KW_CONCURRENTLY opt_if_exists? any_name_list opt_drop_behavior?
     | KW_DROP KW_CAST opt_if_exists? OPEN_PAREN typename KW_AS typename CLOSE_PAREN opt_drop_behavior?
     | KW_DROP KW_OPERATOR (KW_CLASS | KW_FAMILY) opt_if_exists? any_name table_access_method_clause opt_drop_behavior?
@@ -1312,12 +1144,10 @@ dropstmt
     | KW_DROP KW_TABLESPACE opt_if_exists? tablespace_name
     | KW_DROP KW_TRANSFORM opt_if_exists? KW_FOR typename KW_LANGUAGE colid opt_drop_behavior?
     | KW_DROP (KW_ROLE | KW_USER | KW_GROUP) opt_if_exists? role_list
-    | KW_DROP KW_USER KW_MAPPING opt_if_exists? KW_FOR auth_ident KW_SERVER colid
-    | KW_DROP KW_DATABASE opt_if_exists? database_name (KW_WITH? drop_option_list)?
-    ;
-
-view_nameList
-    : view_name (COMMA view_name)*
+    | KW_DROP KW_USER KW_MAPPING opt_if_exists? KW_FOR (rolespec | KW_USER) KW_SERVER colid
+    | KW_DROP KW_DATABASE opt_if_exists? database_name (
+        KW_WITH? (OPEN_PAREN KW_FORCE (COMMA KW_FORCE)* CLOSE_PAREN)
+    )?
     ;
 
 object_type_any_name
@@ -1344,18 +1174,8 @@ object_type_name
     | opttablespace
     ;
 
-object_type_name_on_any_name
-    : KW_POLICY
-    | KW_RULE
-    | KW_TRIGGER
-    ;
-
 any_name_list
     : any_name (COMMA any_name)*
-    ;
-
-relation_column_name
-    : colid attrs? DOT column_name
     ;
 
 any_name
@@ -1364,10 +1184,6 @@ any_name
 
 attrs
     : (DOT collabel)+
-    ;
-
-type_name_list
-    : typename (COMMA typename)*
     ;
 
 truncatestmt
@@ -1384,7 +1200,7 @@ commentstmt
     : KW_COMMENT KW_ON (
         object_type_any_name
         | object_type_name
-        | KW_COLUMN relation_column_name
+        | KW_COLUMN (colid attrs?) DOT column_name
         | (KW_TYPE | KW_DOMAIN) typename
         | KW_AGGREGATE aggregate_with_argtypes
         | KW_FUNCTION function_with_argtypes
@@ -1432,7 +1248,7 @@ from_in
     ;
 
 grantstmt
-    : KW_GRANT privileges KW_ON privilege_target KW_TO grantee_list opt_grant_grant_option?
+    : KW_GRANT privileges KW_ON privilege_target KW_TO grantee_list (KW_WITH KW_GRANT KW_OPTION)?
     ;
 
 revokestmt
@@ -1440,7 +1256,7 @@ revokestmt
     ;
 
 privileges
-    : privilege_list
+    : privilege (COMMA privilege)*
     | KW_ALL KW_PRIVILEGES? (opt_column_list)?
     | beforeprivilegeselect (COMMA beforeprivilegeselect)*
     ;
@@ -1461,10 +1277,6 @@ beforeprivilegeselect
     | KW_EXECUTE
     ;
 
-privilege_list
-    : privilege (COMMA privilege)*
-    ;
-
 privilege
     : (KW_SELECT | KW_REFERENCES | KW_CREATE | colid) opt_column_list?
     ;
@@ -1478,47 +1290,39 @@ privilege_target
     | KW_ROUTINE routine_with_argtypes_list
     | KW_DATABASE database_nameList
     | (KW_DOMAIN | KW_TYPE) any_name_list
-    | KW_LARGE KW_OBJECT numericonly_list
+    | KW_LARGE KW_OBJECT numericonly (COMMA numericonly)*
     | KW_SCHEMA schema_name_list
     | KW_TABLESPACE tablespace_name_list
     | KW_ALL (KW_TABLES | KW_SEQUENCES | KW_FUNCTIONS | KW_PROCEDURES | KW_ROUTINES) KW_IN KW_SCHEMA schema_name_list
     ;
 
 grantee_list
-    : grantee (COMMA grantee)*
-    ;
-
-grantee
-    : KW_GROUP? rolespec
-    ;
-
-opt_grant_grant_option
-    : KW_WITH KW_GRANT KW_OPTION
+    : (KW_GROUP? rolespec) (COMMA (KW_GROUP? rolespec))*
     ;
 
 grantrolestmt
-    : KW_GRANT privilege_list rowsecuritydefaulttorole (KW_WITH KW_ADMIN KW_OPTION)? opt_granted_by?
+    : KW_GRANT privilege (COMMA privilege)* KW_TO role_list (KW_WITH KW_ADMIN KW_OPTION)? (
+        KW_GRANTED KW_BY rolespec
+    )?
     ;
 
 revokerolestmt
-    : KW_REVOKE (KW_ADMIN KW_OPTION KW_FOR)? privilege_list KW_FROM role_list opt_granted_by? opt_drop_behavior?
-    ;
-
-opt_granted_by
-    : KW_GRANTED KW_BY rolespec
+    : KW_REVOKE (KW_ADMIN KW_OPTION KW_FOR)? privilege (COMMA privilege)* KW_FROM role_list (
+        KW_GRANTED KW_BY rolespec
+    )? opt_drop_behavior?
     ;
 
 alterdefaultprivilegesstmt
-    : KW_ALTER KW_DEFAULT KW_PRIVILEGES defacloption* defaclaction
-    ;
-
-defacloption
-    : KW_IN KW_SCHEMA schema_name_list
-    | KW_FOR (KW_ROLE | KW_USER) role_list
+    : KW_ALTER KW_DEFAULT KW_PRIVILEGES (
+        KW_IN KW_SCHEMA schema_name_list
+        | KW_FOR (KW_ROLE | KW_USER) role_list
+    )* defaclaction
     ;
 
 defaclaction
-    : KW_GRANT privileges KW_ON defacl_privilege_target KW_TO grantee_list opt_grant_grant_option?
+    : KW_GRANT privileges KW_ON defacl_privilege_target KW_TO grantee_list (
+        KW_WITH KW_GRANT KW_OPTION
+    )?
     | KW_REVOKE (KW_GRANT KW_OPTION KW_FOR)? privileges KW_ON defacl_privilege_target KW_FROM grantee_list opt_drop_behavior?
     ;
 
@@ -1534,41 +1338,32 @@ defacl_privilege_target
 //create index
 
 indexstmt
-    : KW_CREATE KW_UNIQUE? KW_INDEX KW_CONCURRENTLY? opt_if_not_exists? colid? KW_ON relation_expr table_access_method_clause? index_params
-        opt_include? nulls_distinct? opt_reloptions? opttablespace? where_clause?
+    : KW_CREATE KW_UNIQUE? KW_INDEX KW_CONCURRENTLY? opt_if_not_exists? colid? KW_ON relation_expr table_access_method_clause? index_params (
+        KW_INCLUDE index_params
+    )? (KW_NULLS KW_NOT? KW_DISTINCT)? opt_reloptions? opttablespace? where_clause?
     ;
 
 index_params
     : OPEN_PAREN index_elem (COMMA index_elem)* CLOSE_PAREN
     ;
 
-index_elem_options
-    : opt_collate_clause? (any_name? | any_name reloptions) (KW_ASC | KW_DESC)? opt_nulls_order?
-    ;
-
 index_elem
-    : (column_name | func_expr_windowless | OPEN_PAREN expression CLOSE_PAREN) index_elem_options
-    ;
-
-opt_include
-    : KW_INCLUDE index_params
-    ;
-
-opt_nulls_order
-    : KW_NULLS (KW_FIRST | KW_LAST)
+    : (column_name | func_expr_windowless | OPEN_PAREN expression CLOSE_PAREN) opt_collate_clause? (
+        any_name?
+        | any_name reloptions
+    ) (KW_ASC | KW_DESC)? (KW_NULLS (KW_FIRST | KW_LAST))?
     ;
 
 createfunctionstmt
     : KW_CREATE opt_or_replace? (
         KW_FUNCTION function_name_create
         | KW_PROCEDURE procedure_name_create
-    ) func_args_with_defaults (KW_RETURNS (func_type | KW_TABLE table_func_column_list))? createfunc_opt_list (
-        KW_WITH attrilist
-    )?
-    ;
-
-attrilist
-    : OPEN_PAREN name_list CLOSE_PAREN
+    ) (OPEN_PAREN (func_arg_with_default (COMMA func_arg_with_default)*)? CLOSE_PAREN) (
+        KW_RETURNS (
+            func_type
+            | KW_TABLE (OPEN_PAREN table_func_column (COMMA table_func_column)* CLOSE_PAREN)
+        )
+    )? createfunc_opt_item+ (KW_WITH OPEN_PAREN name_list CLOSE_PAREN)?
     ;
 
 opt_or_replace
@@ -1613,14 +1408,6 @@ function_with_argtypes
     | qualified_name
     ;
 
-func_args_with_defaults
-    : OPEN_PAREN func_args_with_defaults_list? CLOSE_PAREN
-    ;
-
-func_args_with_defaults_list
-    : func_arg_with_default (COMMA func_arg_with_default)*
-    ;
-
 func_arg
     : (arg_class type_function_name? | type_function_name arg_class?)? func_type
     ;
@@ -1649,14 +1436,6 @@ aggregate_with_argtypes
     : function_name aggr_args
     ;
 
-aggregate_with_argtypes_list
-    : aggregate_with_argtypes (COMMA aggregate_with_argtypes)*
-    ;
-
-createfunc_opt_list
-    : createfunc_opt_item+
-    ;
-
 common_func_opt_item
     : (KW_RETURNS KW_NULL | KW_CALLED) KW_ON KW_NULL KW_INPUT
     | KW_STRICT
@@ -1676,7 +1455,7 @@ common_func_opt_item
 createfunc_opt_item
     : KW_AS sconst notify_payload
     | KW_LANGUAGE nonreservedword_or_sconst
-    | KW_TRANSFORM transform_type_name_list
+    | KW_TRANSFORM KW_FOR KW_TYPE typename (COMMA KW_FOR KW_TYPE typename)*
     | KW_WINDOW
     | KW_SET colid (KW_TO colid | EQUAL colid | KW_FROM KW_CURRENT)
     | KW_AS colid
@@ -1691,10 +1470,6 @@ createfunc_opt_item
 
 //    | KW_AS 'obj_file', 'link_symbol'
 
-transform_type_name_list
-    : KW_FOR KW_TYPE typename (COMMA KW_FOR KW_TYPE typename)*
-    ;
-
 opt_definition
     : KW_WITH definition
     ;
@@ -1703,18 +1478,12 @@ table_func_column
     : column_name func_type
     ;
 
-table_func_column_list
-    : OPEN_PAREN table_func_column (COMMA table_func_column)* CLOSE_PAREN
-    ;
-
 alterfunctionstmt
-    : KW_ALTER alterFunctionTypeClause common_func_opt_item+ KW_RESTRICT?
-    ;
-
-alterFunctionTypeClause
-    : KW_FUNCTION function_with_argtypes
-    | KW_PROCEDURE procedure_with_argtypes
-    | KW_ROUTINE routine_with_argtypes
+    : KW_ALTER (
+        KW_FUNCTION function_with_argtypes
+        | KW_PROCEDURE procedure_with_argtypes
+        | KW_ROUTINE routine_with_argtypes
+    ) common_func_opt_item+ KW_RESTRICT?
     ;
 
 removefuncstmt
@@ -1726,11 +1495,13 @@ removefuncstmt
     ;
 
 removeaggrstmt
-    : KW_DROP KW_AGGREGATE opt_if_exists? aggregate_with_argtypes_list opt_drop_behavior?
+    : KW_DROP KW_AGGREGATE opt_if_exists? (
+        aggregate_with_argtypes (COMMA aggregate_with_argtypes)*
+    ) opt_drop_behavior?
     ;
 
 removeoperstmt
-    : KW_DROP KW_OPERATOR opt_if_exists? operator_with_argtypes_list opt_drop_behavior?
+    : KW_DROP KW_OPERATOR opt_if_exists? (operator_with_argtypes (COMMA operator_with_argtypes)*) opt_drop_behavior?
     ;
 
 oper_argtypes
@@ -1741,32 +1512,23 @@ any_operator
     : (colid DOT)* all_op
     ;
 
-operator_with_argtypes_list
-    : operator_with_argtypes (COMMA operator_with_argtypes)*
-    ;
-
 operator_with_argtypes
     : any_operator oper_argtypes
     ;
 
 dostmt
-    : KW_DO dostmt_opt_item+
-    ;
-
-dostmt_opt_item
-    : sconst
-    | KW_LANGUAGE nonreservedword_or_sconst
+    : KW_DO (sconst | KW_LANGUAGE nonreservedword_or_sconst)+
     ;
 
 createcaststmt
     : KW_CREATE KW_CAST OPEN_PAREN typename KW_AS typename CLOSE_PAREN (
-        (KW_WITHOUT KW_FUNCTION cast_context?)
-        | (KW_WITH (KW_FUNCTION function_with_argtypes | KW_INOUT) cast_context?)
+        (KW_WITHOUT KW_FUNCTION (KW_AS (KW_ASSIGNMENT | KW_IMPLICIT))?)
+        | (
+            KW_WITH (KW_FUNCTION function_with_argtypes | KW_INOUT) (
+                KW_AS (KW_ASSIGNMENT | KW_IMPLICIT)
+            )?
+        )
     )
-    ;
-
-cast_context
-    : KW_AS (KW_ASSIGNMENT | KW_IMPLICIT)
     ;
 
 opt_if_exists
@@ -1774,12 +1536,10 @@ opt_if_exists
     ;
 
 createtransformstmt
-    : KW_CREATE opt_or_replace? KW_TRANSFORM KW_FOR typename KW_LANGUAGE colid OPEN_PAREN transform_element_list CLOSE_PAREN
-    ;
-
-transform_element_list
-    : KW_FROM sql_with_function (COMMA KW_TO sql_with_function)?
-    | KW_TO sql_with_function (COMMA KW_FROM sql_with_function)?
+    : KW_CREATE opt_or_replace? KW_TRANSFORM KW_FOR typename KW_LANGUAGE colid OPEN_PAREN (
+        KW_FROM sql_with_function (COMMA KW_TO sql_with_function)?
+        | KW_TO sql_with_function (COMMA KW_FROM sql_with_function)?
+    ) CLOSE_PAREN
     ;
 
 sql_with_function
@@ -1788,16 +1548,14 @@ sql_with_function
 
 reindexstmt
     : KW_REINDEX (OPEN_PAREN KW_VERBOSE (COMMA KW_VERBOSE)* CLOSE_PAREN)? (
-        reindex_target_multitable
+        (
+            KW_INDEX KW_CONCURRENTLY? qualified_name
+            | KW_TABLE KW_CONCURRENTLY? table_name
+            | KW_SCHEMA KW_CONCURRENTLY? schema_name
+            | KW_SYSTEM KW_CONCURRENTLY? colid
+            | KW_DATABASE KW_CONCURRENTLY? database_name
+        )
     )
-    ;
-
-reindex_target_multitable
-    : KW_INDEX KW_CONCURRENTLY? qualified_name
-    | KW_TABLE KW_CONCURRENTLY? table_name
-    | KW_SCHEMA KW_CONCURRENTLY? schema_name
-    | KW_SYSTEM KW_CONCURRENTLY? colid
-    | KW_DATABASE KW_CONCURRENTLY? database_name
     ;
 
 altertblspcstmt
@@ -1878,15 +1636,7 @@ operator_def_list
     ;
 
 operator_def_elem
-    : collabel EQUAL (KW_NONE | operator_def_arg)
-    ;
-
-operator_def_arg
-    : func_type
-    | reserved_keyword
-    | qual_all_op
-    | numericonly
-    | sconst
+    : collabel EQUAL (KW_NONE | func_type | reserved_keyword | qual_all_op | numericonly | sconst)
     ;
 
 altertypestmt
@@ -1926,12 +1676,7 @@ alterownerstmt
     ;
 
 createpublicationstmt
-    : KW_CREATE KW_PUBLICATION colid publication_for_tables? opt_definition?
-    ;
-
-publication_for_tables
-    : KW_FOR KW_TABLE relation_expr_list
-    | KW_FOR KW_ALL KW_TABLES
+    : KW_CREATE KW_PUBLICATION colid (KW_FOR KW_TABLE relation_expr_list | KW_FOR KW_ALL KW_TABLES)? opt_definition?
     ;
 
 alterpublicationstmt
@@ -1939,43 +1684,39 @@ alterpublicationstmt
         (KW_OWNER KW_TO rolespec)
         | (KW_SET definition)
         | (KW_RENAME KW_TO colid)
-        | (KW_ADD | KW_SET | KW_DROP) publication_relation_expr_list
+        | (KW_ADD | KW_SET | KW_DROP) publication_relation_expr (COMMA publication_relation_expr)*
     )
     ;
 
 createsubscriptionstmt
-    : KW_CREATE KW_SUBSCRIPTION colid KW_CONNECTION sconst KW_PUBLICATION publication_name_list opt_definition?
-    ;
-
-publication_name_list
-    : collabel (COMMA collabel)*
+    : KW_CREATE KW_SUBSCRIPTION colid KW_CONNECTION sconst KW_PUBLICATION (
+        collabel (COMMA collabel)*
+    ) opt_definition?
     ;
 
 altersubscriptionstmt
     : KW_ALTER KW_SUBSCRIPTION colid KW_SET definition
     | KW_ALTER KW_SUBSCRIPTION colid KW_CONNECTION sconst
     | KW_ALTER KW_SUBSCRIPTION colid KW_REFRESH KW_PUBLICATION opt_definition?
-    | KW_ALTER KW_SUBSCRIPTION colid (KW_SET | KW_ADD | KW_DROP) KW_PUBLICATION publication_name_list opt_definition?
+    | KW_ALTER KW_SUBSCRIPTION colid (KW_SET | KW_ADD | KW_DROP) KW_PUBLICATION (
+        collabel (COMMA collabel)*
+    ) opt_definition?
     | KW_ALTER KW_SUBSCRIPTION colid (KW_ENABLE | KW_DISABLE)
     | KW_ALTER KW_SUBSCRIPTION colid KW_SKIP OPEN_PAREN old_aggr_elem CLOSE_PAREN
     | KW_ALTER KW_SUBSCRIPTION colid KW_OWNER KW_TO rolespec
     ;
 
 rulestmt
-    : KW_CREATE opt_or_replace? KW_RULE colid KW_AS KW_ON event KW_TO qualified_name where_clause? KW_DO (
-        KW_INSTEAD
-        | KW_ALSO
-    )? ruleactionlist
-    ;
-
-ruleactionlist
-    : KW_NOTHING
-    | ruleactionstmt
-    | OPEN_PAREN ruleactionmulti CLOSE_PAREN
-    ;
-
-ruleactionmulti
-    : ruleactionstmt? (SEMI ruleactionstmt?)*
+    : KW_CREATE opt_or_replace? KW_RULE colid KW_AS KW_ON (
+        KW_SELECT
+        | KW_UPDATE
+        | KW_DELETE
+        | KW_INSERT
+    ) KW_TO qualified_name where_clause? KW_DO (KW_INSTEAD | KW_ALSO)? (
+        KW_NOTHING
+        | ruleactionstmt
+        | OPEN_PAREN (ruleactionstmt? (SEMI ruleactionstmt?)*) CLOSE_PAREN
+    )
     ;
 
 ruleactionstmt
@@ -1984,13 +1725,6 @@ ruleactionstmt
     | updatestmt
     | deletestmt
     | notifystmt
-    ;
-
-event
-    : KW_SELECT
-    | KW_UPDATE
-    | KW_DELETE
-    | KW_INSERT
     ;
 
 notifystmt
@@ -2039,11 +1773,7 @@ viewstmt
     : KW_CREATE (KW_OR KW_REPLACE)? opttemp? (
         KW_VIEW view_name_create opt_column_list_create? opt_reloptions?
         | KW_RECURSIVE KW_VIEW view_name_create opt_column_list opt_reloptions?
-    ) KW_AS selectstmt opt_check_option? # createView
-    ;
-
-opt_check_option
-    : KW_WITH (KW_CASCADED | KW_LOCAL)? KW_CHECK KW_OPTION
+    ) KW_AS selectstmt (KW_WITH (KW_CASCADED | KW_LOCAL)? KW_CHECK KW_OPTION)? # createView
     ;
 
 loadstmt
@@ -2051,40 +1781,30 @@ loadstmt
     ;
 
 createdbstmt
-    : KW_CREATE KW_DATABASE database_name_create KW_WITH? createdb_opt_items? # createDatabase
-    ;
-
-createdb_opt_items
-    : createdb_opt_item+
+    : KW_CREATE KW_DATABASE database_name_create KW_WITH? (createdb_opt_item+)? # createDatabase
     ;
 
 createdb_opt_item
-    : createdb_opt_name EQUAL? (signediconst | opt_boolean_or_string | KW_DEFAULT)
-    ;
-
-createdb_opt_name
-    : KW_CONNECTION KW_LIMIT
-    | KW_ENCODING
-    | KW_LOCATION
-    | KW_OWNER
-    | KW_TABLESPACE
-    | KW_TEMPLATE
-    | identifier
+    : (
+        KW_CONNECTION KW_LIMIT
+        | KW_ENCODING
+        | KW_LOCATION
+        | KW_OWNER
+        | KW_TABLESPACE
+        | KW_TEMPLATE
+        | identifier
+    ) EQUAL? (signediconst | opt_boolean_or_string | KW_DEFAULT)
     ;
 
 alterdatabasestmt
     : KW_ALTER KW_DATABASE database_name (
         (KW_SET KW_TABLESPACE tablespace_name_create)?
-        | (KW_WITH? createdb_opt_items)?
+        | (KW_WITH? createdb_opt_item+)?
     )
     ;
 
 alterdatabasesetstmt
     : KW_ALTER KW_DATABASE database_name setresetclause?
-    ;
-
-drop_option_list
-    : OPEN_PAREN KW_FORCE (COMMA KW_FORCE)* CLOSE_PAREN
     ;
 
 altercollationstmt
@@ -2096,14 +1816,14 @@ altersystemstmt
     ;
 
 createdomainstmt
-    : KW_CREATE KW_DOMAIN any_name KW_AS? typename colquallist
+    : KW_CREATE KW_DOMAIN any_name KW_AS? typename colconstraint*
     ;
 
 alterdomainstmt
     : KW_ALTER KW_DOMAIN any_name (
         alter_column_default
         | (KW_DROP | KW_SET) KW_NOT KW_NULL
-        | KW_ADD tableconstraint
+        | KW_ADD (KW_CONSTRAINT colid)? constraintelem
         | KW_DROP KW_CONSTRAINT opt_if_exists? colid opt_drop_behavior?
         | KW_VALIDATE KW_CONSTRAINT colid
     )
@@ -2125,11 +1845,7 @@ createconversionstmt
 
 clusterstmt
     : KW_CLUSTER opt_verbose? (table_name table_access_method_clause?)?
-    | KW_CLUSTER opt_verbose_list table_name table_access_method_clause?
-    ;
-
-opt_verbose_list
-    : OPEN_PAREN opt_verbose (COMMA opt_verbose)* CLOSE_PAREN
+    | KW_CLUSTER OPEN_PAREN opt_verbose (COMMA opt_verbose)* CLOSE_PAREN table_name table_access_method_clause?
     ;
 
 vacuumstmt
@@ -2137,11 +1853,10 @@ vacuumstmt
     ;
 
 analyzestmt
-    : analyze_keyword (opt_verbose? | OPEN_PAREN analyze_options_list CLOSE_PAREN) vacuum_relation_list?
-    ;
-
-vac_analyze_option_list
-    : vac_analyze_option_elem (COMMA vac_analyze_option_elem)*
+    : analyze_keyword (
+        opt_verbose?
+        | OPEN_PAREN analyze_option_elem (COMMA analyze_option_elem)* CLOSE_PAREN
+    ) vacuum_relation_list?
     ;
 
 analyze_keyword
@@ -2150,21 +1865,7 @@ analyze_keyword
     ;
 
 vac_analyze_option_elem
-    : vac_analyze_option_name vac_analyze_option_arg?
-    ;
-
-vac_analyze_option_name
-    : nonreservedword
-    | analyze_keyword
-    ;
-
-vac_analyze_option_arg
-    : opt_boolean_or_string
-    | numericonly
-    ;
-
-analyze_options_list
-    : analyze_option_elem (COMMA analyze_option_elem)*
+    : (nonreservedword | analyze_keyword) (opt_boolean_or_string | numericonly)?
     ;
 
 analyze_option_elem
@@ -2201,7 +1902,7 @@ explainablestmt
     ;
 
 explain_option_list
-    : OPEN_PAREN vac_analyze_option_list CLOSE_PAREN
+    : OPEN_PAREN vac_analyze_option_elem (COMMA vac_analyze_option_elem)* CLOSE_PAREN
     ;
 
 preparestmt
@@ -2209,7 +1910,7 @@ preparestmt
     ;
 
 prep_type_clause
-    : OPEN_PAREN type_name_list CLOSE_PAREN
+    : OPEN_PAREN typename (COMMA typename)* CLOSE_PAREN
     ;
 
 preparablestmt
@@ -2233,7 +1934,12 @@ deallocatestmt
     ;
 
 insertstmt
-    : with_clause? KW_INSERT KW_INTO table_name (KW_AS colid)? insert_rest opt_on_conflict? returning_clause? # insertStatement
+    : with_clause? KW_INSERT KW_INTO table_name (KW_AS colid)? insert_rest (
+        KW_ON KW_CONFLICT (index_params where_clause? | KW_ON KW_CONSTRAINT colid)? KW_DO (
+            KW_UPDATE KW_SET set_clause_list where_clause?
+            | KW_NOTHING
+        )
+    )? returning_clause? # insertStatement
     ;
 
 insert_rest
@@ -2251,18 +1957,6 @@ insert_column_item
     : column_name opt_indirection
     ;
 
-opt_on_conflict
-    : KW_ON KW_CONFLICT opt_conf_expr? KW_DO (
-        KW_UPDATE KW_SET set_clause_list where_clause?
-        | KW_NOTHING
-    )
-    ;
-
-opt_conf_expr
-    : index_params where_clause?
-    | KW_ON KW_CONSTRAINT colid
-    ;
-
 returning_clause
     : KW_RETURNING target_list
     ;
@@ -2272,18 +1966,13 @@ deletestmt
     ;
 
 lockstmt
-    : KW_LOCK KW_TABLE? relation_expr_list (KW_IN lock_type KW_MODE)? KW_NOWAIT?
-    ;
-
-lock_type
-    : (KW_ACCESS | KW_ROW) (KW_SHARE | KW_EXCLUSIVE)
-    | KW_SHARE (KW_UPDATE KW_EXCLUSIVE | KW_ROW KW_EXCLUSIVE)?
-    | KW_EXCLUSIVE
-    ;
-
-opt_nowait_or_skip
-    : KW_NOWAIT
-    | KW_SKIP KW_LOCKED
+    : KW_LOCK KW_TABLE? relation_expr_list (
+        KW_IN (
+            (KW_ACCESS | KW_ROW) (KW_SHARE | KW_EXCLUSIVE)
+            | KW_SHARE (KW_UPDATE KW_EXCLUSIVE | KW_ROW KW_EXCLUSIVE)?
+            | KW_EXCLUSIVE
+        ) KW_MODE
+    )? KW_NOWAIT?
     ;
 
 updatestmt
@@ -2303,11 +1992,9 @@ set_clause
     ;
 
 declarecursorstmt
-    : KW_DECLARE colid cursor_options KW_CURSOR ((KW_WITH | KW_WITHOUT) KW_HOLD)? KW_FOR selectstmt
-    ;
-
-cursor_options
-    : (opt_scrollable | KW_BINARY | KW_INSENSITIVE)*
+    : KW_DECLARE colid (((KW_NO? KW_SCROLL) | KW_BINARY | KW_INSENSITIVE)*) KW_CURSOR (
+        (KW_WITH | KW_WITHOUT) KW_HOLD
+    )? KW_FOR selectstmt
     ;
 
 /*
@@ -2351,7 +2038,7 @@ simple_select
     ;
 
 set_operator_with_all_or_distinct
-    : (KW_UNION | KW_INTERSECT | KW_EXCEPT) all_or_distinct?
+    : (KW_UNION | KW_INTERSECT | KW_EXCEPT) (KW_ALL | KW_DISTINCT)?
     ;
 
 with_clause
@@ -2379,11 +2066,6 @@ opttempTableName
     | KW_UNLOGGED? KW_TABLE? table_name_create
     ;
 
-all_or_distinct
-    : KW_ALL
-    | KW_DISTINCT
-    ;
-
 distinct_clause
     : KW_DISTINCT (KW_ON execute_param_clause)?
     ;
@@ -2393,7 +2075,9 @@ sort_clause
     ;
 
 sortby
-    : column_expr_noparen (KW_USING qual_all_op | (KW_ASC | KW_DESC))? opt_nulls_order?
+    : column_expr_noparen (KW_USING qual_all_op | (KW_ASC | KW_DESC))? (
+        KW_NULLS (KW_FIRST | KW_LAST)
+    )?
     ;
 
 select_limit
@@ -2408,13 +2092,12 @@ limit_clause
 
 fetch_clause
     : KW_FETCH (KW_FIRST | KW_NEXT) (
-        select_fetch_first_value row_or_rows (KW_ONLY | KW_WITH KW_TIES)
-        | row_or_rows (KW_ONLY | KW_WITH KW_TIES)
+        select_fetch_first_value? (KW_ROW | KW_ROWS) (KW_ONLY | KW_WITH KW_TIES)
     )
     ;
 
 offset_clause
-    : KW_OFFSET (select_fetch_first_value row_or_rows | expression)
+    : KW_OFFSET (select_fetch_first_value (KW_ROW | KW_ROWS) | expression)
     ;
 
 select_fetch_first_value
@@ -2422,13 +2105,8 @@ select_fetch_first_value
     | primaryExpression
     ;
 
-row_or_rows
-    : KW_ROW
-    | KW_ROWS
-    ;
-
 group_clause
-    : KW_GROUP KW_BY (all_or_distinct)? group_by_list
+    : KW_GROUP KW_BY (KW_ALL | KW_DISTINCT)? group_by_list
     ;
 
 group_by_list
@@ -2437,30 +2115,19 @@ group_by_list
 
 group_by_item
     : column_expr_noparen
-    | empty_grouping_set
-    | (KW_CUBE | KW_ROLLUP)? OPEN_PAREN column_expr_list_noparen CLOSE_PAREN
+    | OPEN_PAREN CLOSE_PAREN
+    | (KW_CUBE | KW_ROLLUP)? OPEN_PAREN (column_expr_noparen (COMMA column_expr_noparen)*) CLOSE_PAREN
     | KW_GROUPING KW_SETS OPEN_PAREN group_by_list CLOSE_PAREN
     ;
 
-empty_grouping_set
-    : OPEN_PAREN CLOSE_PAREN
-    ;
-
-having_clause
-    : KW_HAVING expression
-    ;
-
 for_locking_clause
-    : for_locking_item+
+    : (
+        KW_FOR ((KW_NO KW_KEY)? KW_UPDATE | KW_KEY? KW_SHARE) (KW_OF qualified_name_list)? (
+            KW_NOWAIT
+            | KW_SKIP KW_LOCKED
+        )?
+    )+
     | KW_FOR KW_READ KW_ONLY
-    ;
-
-for_locking_item
-    : for_locking_strength (KW_OF qualified_name_list)? opt_nowait_or_skip?
-    ;
-
-for_locking_strength
-    : KW_FOR ((KW_NO KW_KEY)? KW_UPDATE | KW_KEY? KW_SHARE)
     ;
 
 values_clause
@@ -2477,7 +2144,7 @@ from_list
 
 table_ref
     : (
-        (relation_expr | view_relation_expr) alias_clause? tablesample_clause?
+        (relation_expr | (KW_ONLY? view_name STAR? column_list? where_clause?)) alias_clause? tablesample_clause?
         | KW_LATERAL? (
             xmltable alias_clause?
             | func_table func_alias_clause?
@@ -2519,10 +2186,6 @@ relation_expr
     | KW_IN KW_SCHEMA (schema_name | KW_CURRENT_SCHEMA)
     ;
 
-view_relation_expr
-    : KW_ONLY? view_name STAR? column_list? where_clause?
-    ;
-
 publication_relation_expr
     : KW_TABLE truncate_table (opt_column_list)? where_clause?
     | KW_TABLE KW_ONLY ( table_name | OPEN_PAREN table_name CLOSE_PAREN)
@@ -2533,34 +2196,25 @@ relation_expr_list
     : relation_expr (COMMA relation_expr)*
     ;
 
-publication_relation_expr_list
-    : publication_relation_expr (COMMA publication_relation_expr)*
-    ;
-
 relation_expr_opt_alias
     : relation_expr (KW_AS? colid)?
     ;
 
 tablesample_clause
-    : KW_TABLESAMPLE function_name execute_param_clause opt_repeatable_clause?
-    ;
-
-opt_repeatable_clause
-    : KW_REPEATABLE OPEN_PAREN expression CLOSE_PAREN
+    : KW_TABLESAMPLE function_name execute_param_clause (
+        KW_REPEATABLE OPEN_PAREN expression CLOSE_PAREN
+    )?
     ;
 
 func_table
-    : (func_expr_windowless | (KW_ROWS KW_FROM OPEN_PAREN rowsfrom_list CLOSE_PAREN)) (
-        KW_WITH KW_ORDINALITY
-    )?
+    : (
+        func_expr_windowless
+        | (KW_ROWS KW_FROM OPEN_PAREN rowsfrom_item (COMMA rowsfrom_item)* CLOSE_PAREN)
+    ) (KW_WITH KW_ORDINALITY)?
     ;
 
 rowsfrom_item
     : func_expr_windowless (KW_AS OPEN_PAREN tablefuncelementlist CLOSE_PAREN)?
-    ;
-
-rowsfrom_list
-    : rowsfrom_item (COMMA rowsfrom_item)*
     ;
 
 where_clause
@@ -2581,29 +2235,16 @@ tablefuncelement
 
 xmltable
     : KW_XMLTABLE OPEN_PAREN (
-        (KW_XMLNAMESPACES OPEN_PAREN xml_namespace_list CLOSE_PAREN COMMA)? primaryExpression xmlexists_argument KW_COLUMNS xmltable_column_list
+        (KW_XMLNAMESPACES OPEN_PAREN xml_namespace_el (COMMA xml_namespace_el)* CLOSE_PAREN COMMA)? primaryExpression xmlexists_argument KW_COLUMNS
+            xmltable_column_el (COMMA xmltable_column_el)*
     ) CLOSE_PAREN
     ;
 
-xmltable_column_list
-    : xmltable_column_el (COMMA xmltable_column_el)*
-    ;
-
 xmltable_column_el
-    : colid (typename xmltable_column_option_list? | KW_FOR KW_ORDINALITY)
-    ;
-
-xmltable_column_option_list
-    : xmltable_column_option_el+
-    ;
-
-xmltable_column_option_el
-    : (KW_DEFAULT | identifier) expression
-    | KW_NOT? KW_NULL
-    ;
-
-xml_namespace_list
-    : xml_namespace_el (COMMA xml_namespace_el)*
+    : colid (
+        typename (((KW_DEFAULT | identifier) expression | KW_NOT? KW_NULL)+)?
+        | KW_FOR KW_ORDINALITY
+    )
     ;
 
 xml_namespace_el
@@ -2612,16 +2253,15 @@ xml_namespace_el
     ;
 
 typename
-    : KW_SETOF? simpletypename (opt_array_bounds | KW_ARRAY (OPEN_BRACKET Integral CLOSE_BRACKET)?)
+    : KW_SETOF? simpletypename (
+        ((OPEN_BRACKET Integral? CLOSE_BRACKET)*)
+        | KW_ARRAY (OPEN_BRACKET Integral CLOSE_BRACKET)?
+    )
     | qualified_name PERCENT (KW_ROWTYPE | KW_TYPE)
     ;
 
-opt_array_bounds
-    : (OPEN_BRACKET Integral? CLOSE_BRACKET)*
-    ;
-
 simpletypename
-    : generictype
+    : type_function_name attrs? execute_param_clause?
     | consttypename
     | KW_INTERVAL ( opt_interval? | opt_float)
     ;
@@ -2631,10 +2271,6 @@ consttypename
     | bit
     | character
     | constdatetime
-    ;
-
-generictype
-    : type_function_name attrs? execute_param_clause?
     ;
 
 numeric
@@ -2658,13 +2294,11 @@ bit
     ;
 
 character
-    : character_c (opt_float)?
-    ;
-
-character_c
-    : (KW_CHARACTER | KW_CHAR | KW_NCHAR) KW_VARYING?
-    | KW_VARCHAR
-    | KW_NATIONAL (KW_CHARACTER | KW_CHAR) KW_VARYING?
+    : (
+        (KW_CHARACTER | KW_CHAR | KW_NCHAR) KW_VARYING?
+        | KW_VARCHAR
+        | KW_NATIONAL (KW_CHARACTER | KW_CHAR) KW_VARYING?
+    ) (opt_float)?
     ;
 
 constdatetime
@@ -2823,33 +2457,29 @@ func_expr_common_subexpr
     | KW_CURRENT_CATALOG
     | KW_CURRENT_SCHEMA
     | (KW_CAST | KW_TREAT) OPEN_PAREN expression KW_AS typename CLOSE_PAREN
-    | KW_EXTRACT OPEN_PAREN extract_list? CLOSE_PAREN
+    | KW_EXTRACT OPEN_PAREN (extract_arg KW_FROM expression)? CLOSE_PAREN
     | KW_NORMALIZE OPEN_PAREN expression (COMMA unicode_normal_form)? CLOSE_PAREN
-    | KW_OVERLAY OPEN_PAREN overlay_list CLOSE_PAREN
+    | KW_OVERLAY OPEN_PAREN (
+        expression KW_PLACING expression KW_FROM expression (KW_FOR expression)?
+    ) CLOSE_PAREN
     | KW_POSITION OPEN_PAREN (primaryExpression KW_IN primaryExpression)? CLOSE_PAREN
     | KW_SUBSTRING OPEN_PAREN substr_list? CLOSE_PAREN
-    | KW_TRIM OPEN_PAREN (KW_BOTH | KW_LEADING | KW_TRAILING)? trim_list CLOSE_PAREN
+    | KW_TRIM OPEN_PAREN (KW_BOTH | KW_LEADING | KW_TRAILING)? ((expression? KW_FROM)? expr_list) CLOSE_PAREN
     | KW_NULLIF OPEN_PAREN expression COMMA expression CLOSE_PAREN
     | (KW_COALESCE | KW_GREATEST | KW_LEAST | KW_XMLCONCAT) execute_param_clause
-    | KW_XMLELEMENT OPEN_PAREN KW_NAME collabel (COMMA (xml_attributes | expr_list))? CLOSE_PAREN
+    | KW_XMLELEMENT OPEN_PAREN KW_NAME collabel (
+        COMMA ((KW_XMLATTRIBUTES OPEN_PAREN xml_attribute_list CLOSE_PAREN) | expr_list)
+    )? CLOSE_PAREN
     | KW_XMLEXISTS OPEN_PAREN primaryExpression xmlexists_argument CLOSE_PAREN
     | KW_XMLFOREST OPEN_PAREN xml_attribute_list CLOSE_PAREN
-    | KW_XMLPARSE OPEN_PAREN document_or_content expression xml_whitespace_option? CLOSE_PAREN
+    | KW_XMLPARSE OPEN_PAREN document_or_content expression (
+        (KW_PRESERVE | KW_STRIP) KW_WHITESPACE
+    )? CLOSE_PAREN
     | KW_XMLPI OPEN_PAREN KW_NAME collabel (COMMA expression)? CLOSE_PAREN
-    | KW_XMLROOT OPEN_PAREN KW_XML expression COMMA xml_root_version opt_xml_root_standalone? CLOSE_PAREN
+    | KW_XMLROOT OPEN_PAREN KW_XML expression COMMA KW_VERSION (( KW_NO KW_VALUE) | expression) (
+        COMMA KW_STANDALONE ((KW_NO? KW_VALUE) | KW_YES)
+    )? CLOSE_PAREN
     | KW_XMLSERIALIZE OPEN_PAREN document_or_content expression KW_AS simpletypename CLOSE_PAREN
-    ;
-
-xml_root_version
-    : KW_VERSION (( KW_NO KW_VALUE) | expression)
-    ;
-
-opt_xml_root_standalone
-    : COMMA KW_STANDALONE ((KW_NO? KW_VALUE) | KW_YES)
-    ;
-
-xml_attributes
-    : KW_XMLATTRIBUTES OPEN_PAREN xml_attribute_list CLOSE_PAREN
     ;
 
 xml_attribute_list
@@ -2865,10 +2495,6 @@ document_or_content
     | KW_CONTENT
     ;
 
-xml_whitespace_option
-    : (KW_PRESERVE | KW_STRIP) KW_WHITESPACE
-    ;
-
 xmlexists_argument
     : KW_PASSING xml_passing_mech? primaryExpression xml_passing_mech?
     ;
@@ -2878,11 +2504,7 @@ xml_passing_mech
     ;
 
 window_clause
-    : KW_WINDOW window_definition_list
-    ;
-
-window_definition_list
-    : window_definition (COMMA window_definition)*
+    : KW_WINDOW window_definition (COMMA window_definition)*
     ;
 
 window_definition
@@ -2955,20 +2577,11 @@ qual_all_op
 
 subquery_Op
     : qual_all_op
-    | KW_NOT? KW_LIKE
-    | KW_NOT? KW_ILIKE
+    | KW_NOT? (KW_LIKE | KW_ILIKE)
     ;
 
 expr_list
     : expression (COMMA expression)*
-    ;
-
-column_expr_list_noparen
-    : column_expr_noparen (COMMA column_expr_noparen)*
-    ;
-
-column_expr_list
-    : column_expr (COMMA column_expr)*
     ;
 
 column_expr
@@ -2991,15 +2604,7 @@ func_arg_expr
     ;
 
 array_expr
-    : OPEN_BRACKET (expr_list | array_expr_list)? CLOSE_BRACKET
-    ;
-
-array_expr_list
-    : array_expr (COMMA array_expr)*
-    ;
-
-extract_list
-    : extract_arg KW_FROM expression
+    : OPEN_BRACKET (expr_list | (array_expr (COMMA array_expr)*))? CLOSE_BRACKET
     ;
 
 extract_arg
@@ -3020,19 +2625,11 @@ unicode_normal_form
     | KW_NFKD
     ;
 
-overlay_list
-    : expression KW_PLACING expression KW_FROM expression (KW_FOR expression)?
-    ;
-
 substr_list
     : expression KW_FROM expression (KW_FOR expression)?
     | expression KW_FOR expression (KW_FROM expression)?
     | expression KW_SIMILAR expression KW_ESCAPE expression
     | expr_list
-    ;
-
-trim_list
-    : (expression? KW_FROM)? expr_list
     ;
 
 when_clause
@@ -3075,10 +2672,6 @@ schema_name_list
 
 database_nameList
     : database_name (COMMA database_name)*
-    ;
-
-procedure_name_list
-    : procedure_name (COMMA procedure_name)*
     ;
 
 tablespace_name_create
@@ -3164,11 +2757,6 @@ function_name_create
 function_name
     : type_function_name # functionName
     | colid indirection  # functionName
-    ;
-
-usual_name
-    : type_function_name
-    | colid indirection
     ;
 
 sconst
@@ -3704,31 +3292,10 @@ reserved_keyword
     | KW_WITH
     ;
 
-comp_option
-    : Operator KW_OPTION KW_DUMP
-    | Operator KW_PRINT_STRICT_PARAMS option_value
-    | Operator KW_VARIABLE_CONFLICT (KW_ERROR | KW_USE_VARIABLE | KW_USE_COLUMN)
-    ;
-
-option_value
-    : sconst
-    | reserved_keyword
-    | plsql_unreserved_keyword
-    | unreserved_keyword
-    ;
-
 // exception_sect means opt_exception_sect in original grammar, don't be confused!
 
 pl_block
-    : decl_sect KW_BEGIN proc_sect exception_sect? KW_END any_identifier?
-    ;
-
-decl_sect
-    : label_decl? (KW_DECLARE decl_stmts?)?
-    ;
-
-decl_stmts
-    : (decl_statement | KW_DECLARE | label_decl)+
+    : (label_decl? (KW_DECLARE ((decl_statement | KW_DECLARE | label_decl)+)?)?) KW_BEGIN proc_stmt* exception_sect? KW_END any_identifier?
     ;
 
 label_decl
@@ -3737,47 +3304,23 @@ label_decl
 
 decl_statement
     : any_identifier (
-        KW_ALIAS KW_FOR decl_aliasitem
+        KW_ALIAS KW_FOR (PARAM | colid)
         | KW_CONSTANT? typename (opt_collate_clause)? (KW_NOT KW_NULL)? (
-            decl_defkey sql_expression
+            ( assign_operator | KW_DEFAULT) sql_expression
         )?
-        | opt_scrollable? KW_CURSOR decl_cursor_args? (KW_IS | KW_FOR) selectstmt
+        | (KW_NO? KW_SCROLL)? KW_CURSOR (
+            OPEN_PAREN decl_cursor_arg (COMMA decl_cursor_arg)* CLOSE_PAREN
+        )? (KW_IS | KW_FOR) selectstmt
     ) SEMI
-    ;
-
-opt_scrollable
-    : KW_NO? KW_SCROLL
-    ;
-
-decl_cursor_args
-    : OPEN_PAREN decl_cursor_arglist CLOSE_PAREN
-    ;
-
-decl_cursor_arglist
-    : decl_cursor_arg (COMMA decl_cursor_arg)*
     ;
 
 decl_cursor_arg
     : any_identifier typename
     ;
 
-decl_aliasitem
-    : PARAM
-    | colid
-    ;
-
-decl_defkey
-    : assign_operator
-    | KW_DEFAULT
-    ;
-
 assign_operator
     : EQUAL
     | COLON_EQUALS
-    ;
-
-proc_sect
-    : proc_stmt*
     ;
 
 proc_stmt
@@ -3819,11 +3362,9 @@ stmt_assign
     ;
 
 stmt_getdiag
-    : KW_GET (KW_CURRENT | KW_STACKED)? KW_DIAGNOSTICS getdiag_list SEMI
-    ;
-
-getdiag_list
-    : getdiag_list_item (COMMA getdiag_list_item)*
+    : KW_GET (KW_CURRENT | KW_STACKED)? KW_DIAGNOSTICS (
+        getdiag_list_item (COMMA getdiag_list_item)*
+    ) SEMI
     ;
 
 getdiag_list_item
@@ -3835,23 +3376,15 @@ assign_var
     ;
 
 stmt_if
-    : KW_IF sql_expression KW_THEN proc_sect stmt_elsifs stmt_else? KW_END KW_IF SEMI
-    ;
-
-stmt_elsifs
-    : (KW_ELSIF expression KW_THEN proc_sect)*
+    : KW_IF sql_expression KW_THEN proc_stmt* ((KW_ELSIF expression KW_THEN proc_stmt*)*) stmt_else? KW_END KW_IF SEMI
     ;
 
 stmt_else
-    : KW_ELSE proc_sect
+    : KW_ELSE proc_stmt*
     ;
 
 stmt_case
-    : KW_CASE sql_expression? case_when+ stmt_else? KW_END KW_CASE SEMI
-    ;
-
-case_when
-    : KW_WHEN expr_list KW_THEN proc_sect
+    : KW_CASE sql_expression? (KW_WHEN expr_list KW_THEN proc_stmt*)+ stmt_else? KW_END KW_CASE SEMI
     ;
 
 stmt_loop_while_for
@@ -3865,13 +3398,9 @@ for_control
         colid execute_param_clause?
         | selectstmt
         | explainstmt
-        | KW_EXECUTE expression opt_for_using_expression?
+        | KW_EXECUTE expression (KW_USING expr_list)?
         | KW_REVERSE? expression DOT_DOT expression (KW_BY expression)?
     )
-    ;
-
-opt_for_using_expression
-    : KW_USING expr_list
     ;
 
 stmt_foreach_a
@@ -3887,7 +3416,7 @@ stmt_exit
 stmt_return
     : KW_RETURN (
         KW_NEXT sql_expression
-        | KW_QUERY ( KW_EXECUTE expression opt_for_using_expression | selectstmt)
+        | KW_QUERY ( KW_EXECUTE expression KW_USING expr_list | selectstmt)
         | sql_expression?
     ) SEMI
     ;
@@ -3906,31 +3435,16 @@ stmt_return
 
 stmt_raise
     : KW_RAISE (
-        opt_stmt_raise_level? (identifier | (KW_SQLSTATE sconst) | (sconst opt_raise_list?))? (
-            KW_USING opt_raise_using_elem_list
-        )? SEMI
+        (KW_DEBUG | KW_LOG | KW_INFO | KW_NOTICE | KW_WARNING | KW_EXCEPTION)? (
+            identifier
+            | (KW_SQLSTATE sconst)
+            | (sconst ((COMMA expression)+)?)
+        )? (KW_USING (opt_raise_using_elem (COMMA opt_raise_using_elem)*))? SEMI
     )?
-    ;
-
-opt_stmt_raise_level
-    : KW_DEBUG
-    | KW_LOG
-    | KW_INFO
-    | KW_NOTICE
-    | KW_WARNING
-    | KW_EXCEPTION
-    ;
-
-opt_raise_list
-    : (COMMA expression)+
     ;
 
 opt_raise_using_elem
     : identifier EQUAL expression
-    ;
-
-opt_raise_using_elem_list
-    : opt_raise_using_elem (COMMA opt_raise_using_elem)*
     ;
 
 stmt_assert
@@ -3938,7 +3452,7 @@ stmt_assert
     ;
 
 loop_body
-    : KW_LOOP proc_sect KW_END KW_LOOP any_identifier? SEMI
+    : KW_LOOP proc_stmt* KW_END KW_LOOP any_identifier? SEMI
     ;
 
 //TODO: looks like all other statements like INSERT/SELECT/UPDATE/DELETE are handled here;
@@ -3955,9 +3469,11 @@ stmt_execsql
 
 stmt_dynexecute
     : KW_EXECUTE expression (
-        /*this is silly, but i have to time to find nice way to code */ opt_execute_into? opt_for_using_expression?
-        | opt_for_using_expression? opt_execute_into?
-        |
+        /*this is silly, but i have to time to find nice way to code */ opt_execute_into? (
+            KW_USING expr_list
+        )?
+        | (KW_USING expr_list)? opt_execute_into?
+        | //TODO
     ) SEMI
     ;
 
@@ -3977,20 +3493,18 @@ opt_execute_into
 
 stmt_open
     : KW_OPEN (
-        cursor_variable opt_scrollable? KW_FOR (
+        cursor_variable (KW_NO? KW_SCROLL)? KW_FOR (
             selectstmt
-            | KW_EXECUTE sql_expression opt_for_using_expression?
+            | KW_EXECUTE sql_expression (KW_USING expr_list)?
         )
-        | colid (OPEN_PAREN opt_open_bound_list CLOSE_PAREN)?
+        | colid (
+            OPEN_PAREN (opt_open_bound_list_item (COMMA opt_open_bound_list_item)*) CLOSE_PAREN
+        )?
     ) SEMI
     ;
 
 opt_open_bound_list_item
     : (colid COLON_EQUALS)? expression
-    ;
-
-opt_open_bound_list
-    : opt_open_bound_list_item (COMMA opt_open_bound_list_item)*
     ;
 
 //https://www.postgresql.org/docs/current/plpgsql-cursors.html#PLPGSQL-CURSOR-OPENING
@@ -4039,17 +3553,13 @@ merge_insert
 merge_update
     : KW_UPDATE KW_SET (
         column_name EQUAL exprofdefault
-        | opt_column_list EQUAL OPEN_PAREN exprofdefaultlist CLOSE_PAREN
+        | opt_column_list EQUAL OPEN_PAREN exprofdefault (COMMA exprofdefault)* CLOSE_PAREN
     )+
     ;
 
 default_values_or_values
-    : KW_VALUES exprofdefaultlist
+    : KW_VALUES OPEN_PAREN exprofdefault (COMMA exprofdefault)* CLOSE_PAREN
     | KW_DEFAULT KW_VALUES
-    ;
-
-exprofdefaultlist
-    : OPEN_PAREN exprofdefault (COMMA exprofdefault)* CLOSE_PAREN
     ;
 
 exprofdefault
@@ -4080,15 +3590,7 @@ cursor_variable
     ;
 
 exception_sect
-    : KW_EXCEPTION proc_exception+
-    ;
-
-proc_exception
-    : KW_WHEN proc_conditions KW_THEN proc_sect
-    ;
-
-proc_conditions
-    : proc_condition (KW_OR proc_condition)*
+    : KW_EXCEPTION (KW_WHEN (proc_condition (KW_OR proc_condition)*) KW_THEN proc_stmt*)+
     ;
 
 proc_condition
@@ -4168,5 +3670,5 @@ plsql_unreserved_keyword
     ;
 
 sql_expression
-    : target_list? into_clause? from_clause? where_clause? group_clause? having_clause? window_clause?
+    : target_list? into_clause? from_clause? where_clause? group_clause? (KW_HAVING expression)? window_clause?
     ;
