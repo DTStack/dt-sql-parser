@@ -1,7 +1,7 @@
 import { ParserRuleContext, Token } from 'antlr4ng';
 
 import { SimpleStack } from './simpleStack';
-import { ctxToText, ctxToWord, TextPosition, tokenToWord, WordPosition } from './textAndWord';
+import { ctxToText, TextPosition, tokenToWord, WordPosition } from './textAndWord';
 import { EntityContextType } from './types';
 
 /**
@@ -109,9 +109,13 @@ export function toEntityContext(
     attrInfo?: attrInfo,
     alias?: BaseAliasContext
 ): EntityContext | FuncEntityContext | ColumnEntityContext | null {
-    const word = ctxToWord(ctx, input);
+    const word = ctxToText(ctx, input);
     if (!word) return null;
-    const { text, ...position } = word;
+    const { text, startLine, endLine, ...rest } = word;
+    const position = {
+        ...rest,
+        line: startLine,
+    };
     const finalAlias = Object.assign({}, baseAlias, alias ?? {});
     const extraInfo: ColumnEntityContext = {
         entityContextType: type,

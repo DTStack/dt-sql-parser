@@ -55,29 +55,6 @@ export function tokenToWord(token: Token, input: string): WordPosition & { text:
 }
 
 /**
- * Convert ParserRuleContext to Word
- */
-export function ctxToWord(
-    ctx: ParserRuleContext,
-    input: string
-): (WordPosition & { text: string }) | null {
-    if (!ctx.start || !ctx.stop) {
-        return null;
-    }
-    const startIndex = ctx.start.start;
-    const endIndex = ctx.stop.stop;
-    const text = input.slice(startIndex, endIndex + 1);
-    return {
-        text,
-        line: ctx.start.line,
-        startIndex,
-        endIndex,
-        startColumn: ctx.start.column + 1,
-        endColumn: ctx.stop.column + 1 + (ctx.stop.text?.length ?? 0),
-    };
-}
-
-/**
  * Convert ParserRuleContext to Text
  */
 export function ctxToText(
