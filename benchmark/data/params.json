@@ -1,0 +1,6 @@
+{
+    "suggestion": {
+        "getAllEntities": ["$sql", { "lineNumber": 974, "column": 37 }],
+        "getSuggestionAtCaretPosition": ["$sql", { "lineNumber": 974, "column": 37 }]
+    }
+}
