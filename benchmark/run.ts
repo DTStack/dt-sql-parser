@@ -5,66 +5,36 @@ import SqlBenchmark, { languageNameMap, languages } from './sqlBenchmark';
 import type { Language } from './sqlBenchmark';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
+import config from './benchmark.config';
 import { Table } from 'console-table-printer';
 
 const argv = argsParser(process.argv.slice(2));
 const isChooseAll = argv.lang === 'all';
-
-type TestFile = {
-    /** Benchmark Name */
-    name: string;
-    /** Test sql name */
-    sqlFileName: string;
-    /** Test run times */
-    loopTimes?: number;
-    /** Test method name of parser */
-    testTypes: string[];
-    /** Exclude languages */
-    excludes?: Language[];
-    /** Include languages */
-    includes?: Language[];
-};
-
-const testFiles: TestFile[] = [
-    {
-        name: 'Query Collection (100 Rows)',
-        sqlFileName: 'select.sql',
-        loopTimes: 3,
-        testTypes: ['validate', 'getAllTokens'],
-    },
-    {
-        name: 'Select All Entities',
-        sqlFileName: 'select.sql',
-        loopTimes: 1,
-        testTypes: ['getAllEntities'],
-        includes: ['hive'],
-    },
-    {
-        name: 'Create Table (100 Rows)',
-        sqlFileName: 'create.sql',
-        loopTimes: 3,
-        testTypes: ['validate', 'getAllTokens'],
-    },
-];
+const testFiles = config.testFiles;
 
 let benchmarkResults: SqlBenchmark[] = [];
 
-const readSql = (fileName: string, lang: string) => {
-    const sqlPath = path.join(__dirname, `./data/${lang}/${fileName}`);
+const readSql = (fileName: string) => {
+    const sqlPath = path.join(__dirname, `./data/${fileName}`);
     if (!fs.existsSync(sqlPath)) return '';
     return fs.readFileSync(sqlPath, 'utf-8');
 };
 
-const readParams = (lang: string) => {
-    const paramsPath = path.join(__dirname, `./data/${lang}/params.json`);
+const readParams = () => {
+    const paramsPath = path.join(__dirname, `./data/params.json`);
     if (!fs.existsSync(paramsPath)) return null;
     return fs.readFileSync(paramsPath, 'utf-8');
 };
 
 const getParams = (originalParams: any, sqlFileName: string, methodType: string): any[] => {
     if (!originalParams) return ['$sql'];
-    const fileName = sqlFileName.substring(0, sqlFileName.lastIndexOf('.sql') + 1);
-    return originalParams[fileName]?.[methodType] || ['$sql'];
+    try {
+        const params = JSON.parse(originalParams);
+        const fileName = sqlFileName.substring(0, sqlFileName.lastIndexOf('.sql'));
+        return params[fileName]?.[methodType] || ['$sql'];
+    } catch (error) {
+        return ['$sql'];
+    }
 };
 
 const askForSaveResult = () => {
@@ -144,12 +114,12 @@ const printSummaryReport = () => {
 
 const benchmark = (lang: Language) => {
     const sqlBenchmark = new SqlBenchmark(lang);
-    const originalParams = readParams(lang);
+    const originalParams = readParams();
 
     testFiles.forEach((testInfo) => {
         const { name, sqlFileName, testTypes, loopTimes, excludes, includes } = testInfo;
         if (excludes?.includes(lang) || (includes?.length && !includes.includes(lang))) return;
-        const sql = readSql(sqlFileName, lang);
+        const sql = readSql(sqlFileName);
         const sqlRows = sql.split('\n').length;
         testTypes.forEach((type) => {
             const params = getParams(originalParams, sqlFileName, type);

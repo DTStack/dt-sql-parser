@@ -15,10 +15,25 @@ export type BenchmarkResult = {
     lastCostTime?: number;
 };
 
+// 过滤掉异常数据，m为判断为异常值的标准差倍数
+const removeOutliers = (data, m = 2) => {
+    if (data.length <= 2) return data;
+    const mean = data.reduce((a, b) => a + b, 0) / data.length;
+    const standardDeviation = Math.sqrt(
+        data.map((x) => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / data.length
+    );
+
+    return data.filter((x) => Math.abs(x - mean) < m * standardDeviation);
+};
+
 const tableColumns = [
     {
         name: 'name',
         title: 'Benchmark Name',
+    },
+    {
+        name: 'type',
+        title: 'Method Name',
     },
     {
         name: 'rows',
@@ -40,10 +55,6 @@ const tableColumns = [
         name: 'loopTimes',
         title: 'Loops',
     },
-    {
-        name: 'type',
-        title: 'Type',
-    },
 ];
 
 /**
@@ -52,7 +63,6 @@ const tableColumns = [
 export const languageNameMap = {
     hive: 'HiveSQL',
     mysql: 'MySQL',
-    plsql: 'PLSQL',
     flink: 'FlinkSQL',
     spark: 'SparkSQL',
     postgresql: 'PostgreSQL',
@@ -74,12 +84,12 @@ class SqlBenchmark {
 
     public readonly language: string;
 
-    private _DEFAULT_LOOP_TIMES = 3;
+    private _DEFAULT_LOOP_TIMES = 5;
 
     /**
      * If current average time difference from last time grater than DIFF_RATIO, we will highlight that record.
      */
-    private _HIGHLIGHT_DIFF_RATIO = 0.1;
+    private _HIGHLIGHT_DIFF_RATIO = 0.15;
 
     private _lastResultsCache: BenchmarkResult[] | null = null;
 
@@ -90,17 +100,7 @@ class SqlBenchmark {
      */
     getSqlParser(): BasicSQL {
         const caches = Object.keys(require.cache);
-        const cacheModules = [
-            path.join(__dirname, `../src/parser/common/`),
-            path.join(__dirname, `../src/parser/${this.language}/`),
-            path.join(__dirname, `../src/lib/${this.language}/`),
-            path.normalize(require.resolve('antlr4ng')),
-        ];
-        caches
-            .filter((moduleName) =>
-                cacheModules.some((cacheModuleName) => moduleName.includes(cacheModuleName))
-            )
-            .forEach((moduleName) => delete require.cache[moduleName]);
+        caches.forEach((moduleName) => delete require.cache[moduleName]);
         const Parser = require(path.join(__dirname, `../src/parser/${this.language}/index.ts`))[
             languageNameMap[this.language]
         ];
@@ -111,7 +111,7 @@ class SqlBenchmark {
      * @param type Which parser method you want to run
      * @param name Benchmark name
      * @param params Parser method parameters
-     * @param params Rows count of sql
+     * @param sqlRows Rows count of sql
      * @param loopTimes Loop times, default run 3 times
      */
     run(
@@ -133,8 +133,10 @@ class SqlBenchmark {
 
             costTimes.push(Math.round(costTime));
         }
-
-        const avgTime = Math.round(costTimes.reduce((prev, curr) => prev + curr, 0) / loopTimes);
+        const filteredData = removeOutliers(costTimes);
+        const avgTime = Math.round(
+            filteredData.reduce((prev, curr) => prev + curr, 0) / filteredData.length
+        );
         const result = {
             name,
             avgTime,
