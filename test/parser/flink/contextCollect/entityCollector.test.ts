@@ -57,7 +57,14 @@ describe('Flink entity collector tests', () => {
         });
 
         expect(tableCreateEntity.relatedEntities).toBeNull();
-        expect(tableCreateEntity.comment).toBe("'test table comment ABC.'");
+        expect(tableCreateEntity.comment).toEqual({
+            text: "'test table comment ABC.'",
+            startIndex: 78,
+            endIndex: 102,
+            line: 1,
+            startColumn: 79,
+            endColumn: 104,
+        });
 
         expect(tableCreateEntity.columns.length).toBe(2);
         tableCreateEntity.columns.forEach((columEntity) => {
@@ -67,9 +74,30 @@ describe('Flink entity collector tests', () => {
                 commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
             );
         });
-        expect(tableCreateEntity.columns[0].comment).toBe("'col1'");
-        expect(tableCreateEntity.columns[0].colType).toBe('BIGINT');
-        expect(tableCreateEntity.columns[1].colType).toBe('STRING');
+        expect(tableCreateEntity.columns[0].comment).toEqual({
+            text: "'col1'",
+            startIndex: 47,
+            endIndex: 52,
+            line: 1,
+            startColumn: 48,
+            endColumn: 54,
+        });
+        expect(tableCreateEntity.columns[0].colType).toEqual({
+            text: 'BIGINT',
+            startIndex: 32,
+            endIndex: 37,
+            line: 1,
+            startColumn: 33,
+            endColumn: 39,
+        });
+        expect(tableCreateEntity.columns[1].colType).toEqual({
+            text: 'STRING',
+            startIndex: 62,
+            endIndex: 67,
+            line: 1,
+            startColumn: 63,
+            endColumn: 69,
+        });
     });
 
     test('create table as select', () => {
@@ -315,7 +343,14 @@ describe('Flink entity collector tests', () => {
 
         expect(allEntities[0].entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(allEntities[0].text).toBe('view1');
-        expect(allEntities[0].comment).toBe("'this is a view'");
+        expect(allEntities[0].comment).toEqual({
+            text: "'this is a view'",
+            startIndex: 1199,
+            endIndex: 1214,
+            line: 42,
+            startColumn: 39,
+            endColumn: 55,
+        });
         expect(allEntities[0].belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
 
         expect(allEntities[1].entityContextType).toBe(EntityContextType.TABLE);
@@ -337,7 +372,14 @@ describe('Flink entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(dbEntity.text).toBe('db1');
-        expect(dbEntity.comment).toBe("'this is a created database'");
+        expect(dbEntity.comment).toEqual({
+            text: "'this is a created database'",
+            startIndex: 1290,
+            endIndex: 1317,
+            line: 44,
+            startColumn: 43,
+            endColumn: 71,
+        });
         expect(dbEntity.position).toEqual({
             endColumn: 34,
             endIndex: 1280,
