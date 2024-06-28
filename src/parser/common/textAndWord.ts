@@ -40,7 +40,7 @@ export interface TextSlice extends TextPosition {
 /**
  * Convert Token to Word
  */
-export function tokenToWord(token: Token, input: string): WordPosition & { text: string } {
+export function tokenToWord(token: Token, input: string): WordRange {
     const startIndex = token.start;
     const endIndex = token.stop;
     const text = token.text ?? '';

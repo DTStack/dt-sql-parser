@@ -1,7 +1,7 @@
 import { ParserRuleContext, Token } from 'antlr4ng';
 
 import { SimpleStack } from './simpleStack';
-import { ctxToText, TextPosition, tokenToWord, WordPosition } from './textAndWord';
+import { ctxToText, TextPosition, tokenToWord, WordPosition, WordRange } from './textAndWord';
 import { EntityContextType } from './types';
 
 /**
@@ -82,17 +82,17 @@ export interface EntityContext extends BaseAliasContext {
     readonly belongStmt: StmtContext;
     relatedEntities: EntityContext[] | null;
     columns: ColumnEntityContext[] | null;
-    comment?: string;
+    comment?: WordRange;
 }
 
 export interface FuncEntityContext extends EntityContext {
-    argMode?: string;
-    argName?: string;
-    argType?: string;
+    argMode?: WordRange;
+    argName?: WordRange;
+    argType?: WordRange;
 }
 export interface ColumnEntityContext extends EntityContext {
-    colType?: string;
-    comment?: string;
+    colType?: WordRange;
+    comment?: WordRange;
 }
 
 interface attrInfo {
@@ -131,7 +131,7 @@ export function toEntityContext(
             const attributeName: attrName = attrInfo?.attrList[k];
             const attrToken = findAttribute(ctx, attributeName, attrInfo?.endContext);
             if (attrToken) {
-                const attrVal: string = tokenToWord(attrToken, input)?.text;
+                const attrVal: WordRange = tokenToWord(attrToken, input);
                 extraInfo[attrNameInRule[attributeName]] = attrVal;
             }
         }
