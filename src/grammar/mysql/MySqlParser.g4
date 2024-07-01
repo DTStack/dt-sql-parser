@@ -2779,8 +2779,8 @@ specificFunction
     | KW_CONVERT '(' expression KW_USING charsetName ')'                            # dataTypeFunctionCall
     | KW_CAST '(' expression KW_AS convertedDataType ')'                            # dataTypeFunctionCall
     | KW_VALUES '(' columnName ')'                                                  # valuesFunctionCall
-    | KW_CASE expression caseFuncAlternative+ (KW_ELSE elseArg=functionArg)? KW_END # caseExpressionFunctionCall
     | KW_CASE caseFuncAlternative+ (KW_ELSE elseArg=functionArg)? KW_END            # caseFunctionCall
+    | KW_CASE expression caseFuncAlternative+ (KW_ELSE elseArg=functionArg)? KW_END # caseExpressionFunctionCall
     | KW_CHAR '(' functionArgs (KW_USING charsetName)? ')'                          # charFunctionCall
     | KW_POSITION '(' (positionString=stringLiteral | positionExpression=expression) KW_IN (
         inString=stringLiteral

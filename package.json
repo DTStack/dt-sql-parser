@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "authors": "DTStack Corporation",
   "description": "SQL Parsers for BigData, built with antlr4",
   "keywords": [
@@ -29,7 +29,8 @@
     "lint": "prettier --check '**/*.ts' --config ./.prettierrc",
     "lint-fix": "prettier --write '**/*.ts' --config ./.prettierrc",
     "format-g4": "antlr-format -c ./antlr.format.json -v ./src/grammar/**/*.g4",
-    "cleanComment": "node ./scripts/cleanCommentCli.js"
+    "cleanComment": "node ./scripts/cleanCommentCli.js",
+    "benchmark": "node --no-warnings ./scripts/benchmark.js"
   },
   "license": "MIT",
   "devDependencies": {
@@ -44,6 +45,8 @@
     "antlr4ng-cli": "^1.0.7",
     "chalk": "4.1.2",
     "commitizen": "^4.3.0",
+    "console-table-printer": "^2.12.0",
+    "envinfo": "^7.11.1",
     "glob": "^10.3.10",
     "husky": "^8.0.3",
     "inquirer": "^8.2.2",
@@ -51,6 +54,7 @@
     "lint-staged": "12.5.0",
     "prettier": "^3.0.3",
     "standard-version": "^9.5.0",
+    "tsx": "^4.7.1",
     "typescript": "^5.0.4",
     "yargs-parser": "^21.1.1"
   },
