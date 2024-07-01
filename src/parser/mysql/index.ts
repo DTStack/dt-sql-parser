@@ -7,6 +7,8 @@ import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/type
 import { StmtContextType } from '../common/entityCollector';
 import { MysqlSplitListener } from './mysqlSplitListener';
 import { MySqlEntityCollector } from './mysqlEntityCollector';
+import { MysqlErrorListener } from './mysqlErrorListener';
+import { ErrorListener } from '../common/parseErrorListener';
 
 export { MySqlEntityCollector, MysqlSplitListener };
 
@@ -34,6 +36,10 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
 
     protected get splitListener() {
         return new MysqlSplitListener();
+    }
+
+    protected createErrorListener(_errorListener: ErrorListener) {
+        return new MysqlErrorListener(_errorListener, this.preferredRules, this.locale);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
