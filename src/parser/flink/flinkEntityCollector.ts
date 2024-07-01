@@ -1,4 +1,3 @@
-import { EntityContextType } from '../common/types';
 import {
     CatalogPathContext,
     CatalogPathCreateContext,
@@ -20,7 +19,8 @@ import {
     ViewPathCreateContext,
 } from '../../lib/flink/FlinkSqlParser';
 import { FlinkSqlParserListener } from '../../lib/flink/FlinkSqlParserListener';
-import { StmtContextType, EntityCollector } from '../common/entityCollector';
+import { attrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import { EntityContextType } from '../common/types';
 
 export class FlinkEntityCollector extends EntityCollector implements FlinkSqlParserListener {
     /** ====== Entity Begin */
@@ -33,7 +33,11 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitDatabasePathCreate(ctx: DatabasePathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE);
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
+            needCollectAttr: true,
+            attrList: [attrName.comment],
+            endContext: 'CreateDatabaseContext',
+        });
     }
 
     exitDatabasePath(ctx: DatabasePathContext) {
@@ -45,7 +49,11 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitTablePathCreate(ctx: TablePathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE);
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
+            needCollectAttr: true,
+            attrList: [attrName.comment],
+            endContext: 'CreateTableContext',
+        });
     }
 
     exitViewPath(ctx: ViewPathContext) {
@@ -53,11 +61,19 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitViewPathCreate(ctx: ViewPathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW_CREATE);
+        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
+            needCollectAttr: true,
+            attrList: [attrName.comment],
+            endContext: 'CreateViewContext',
+        });
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE);
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
+            needCollectAttr: true,
+            attrList: [attrName.comment, attrName.colType],
+            endContext: 'PhysicalColumnDefinitionContext',
+        });
     }
 
     exitFunctionNameCreate(ctx: FunctionNameCreateContext) {

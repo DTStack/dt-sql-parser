@@ -156,8 +156,9 @@ createTable
 simpleCreateTable
     : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tablePathCreate LR_BRACKET columnOptionDefinition (
         COMMA columnOptionDefinition
-    )* (COMMA watermarkDefinition)? (COMMA tableConstraint)? (COMMA selfDefinitionClause)? RR_BRACKET commentSpec? partitionDefinition? withOption
-        likeDefinition?
+    )* (COMMA watermarkDefinition)? (COMMA tableConstraint)? (COMMA selfDefinitionClause)? RR_BRACKET (
+        KW_COMMENT comment=STRING_LITERAL
+    )? partitionDefinition? withOption likeDefinition?
     ;
 
 /*
@@ -175,7 +176,7 @@ columnOptionDefinition
     ;
 
 physicalColumnDefinition
-    : columnNameCreate columnType columnConstraint? commentSpec?
+    : colName=columnNameCreate columnType columnConstraint? (KW_COMMENT comment=STRING_LITERAL)?
     ;
 
 columnNameCreate
@@ -193,8 +194,8 @@ columnNameList
     ;
 
 columnType
-    : typeName=(KW_DATE | KW_BOOLEAN | KW_NULL)
-    | typeName=(
+    : colType=(KW_DATE | KW_BOOLEAN | KW_NULL)
+    | colType=(
         KW_CHAR
         | KW_VARCHAR
         | KW_STRING
@@ -210,12 +211,12 @@ columnType
         | KW_TIMESTAMP_LTZ
         | KW_DATETIME
     ) lengthOneDimension?
-    | typeName=KW_TIMESTAMP lengthOneDimension? ((KW_WITHOUT | KW_WITH) KW_LOCAL? KW_TIME KW_ZONE)?
-    | typeName=(KW_DECIMAL | KW_DEC | KW_NUMERIC | KW_FLOAT | KW_DOUBLE) lengthTwoOptionalDimension?
-    | type=(KW_ARRAY | KW_MULTISET) lengthOneTypeDimension?
-    | type=KW_MAP mapTypeDimension?
-    | type=KW_ROW rowTypeDimension?
-    | type=KW_RAW lengthTwoStringDimension?
+    | colType=KW_TIMESTAMP lengthOneDimension? ((KW_WITHOUT | KW_WITH) KW_LOCAL? KW_TIME KW_ZONE)?
+    | colType=(KW_DECIMAL | KW_DEC | KW_NUMERIC | KW_FLOAT | KW_DOUBLE) lengthTwoOptionalDimension?
+    | colType=(KW_ARRAY | KW_MULTISET) lengthOneTypeDimension?
+    | colType=KW_MAP mapTypeDimension?
+    | colType=KW_ROW rowTypeDimension?
+    | colType=KW_RAW lengthTwoStringDimension?
     ;
 
 lengthOneDimension
@@ -247,12 +248,8 @@ columnConstraint
     | KW_NOT? KW_NULL
     ;
 
-commentSpec
-    : KW_COMMENT STRING_LITERAL
-    ;
-
 metadataColumnDefinition
-    : columnNameCreate columnType KW_METADATA (KW_FROM metadataKey)? KW_VIRTUAL?
+    : colName=columnNameCreate columnType KW_METADATA (KW_FROM metadataKey)? KW_VIRTUAL?
     ;
 
 metadataKey
@@ -260,7 +257,7 @@ metadataKey
     ;
 
 computedColumnDefinition
-    : columnNameCreate KW_AS computedColumnExpression commentSpec?
+    : colName=columnNameCreate KW_AS computedColumnExpression (KW_COMMENT comment=STRING_LITERAL)?
     ;
 
 // 计算表达式
@@ -316,11 +313,13 @@ createCatalog
     ;
 
 createDatabase
-    : KW_CREATE KW_DATABASE ifNotExists? databasePathCreate commentSpec? withOption
+    : KW_CREATE KW_DATABASE ifNotExists? databasePathCreate (KW_COMMENT comment=STRING_LITERAL)? withOption
     ;
 
 createView
-    : KW_CREATE KW_TEMPORARY? KW_VIEW ifNotExists? viewPathCreate columnNameList? commentSpec? KW_AS queryStatement
+    : KW_CREATE KW_TEMPORARY? KW_VIEW ifNotExists? viewPathCreate columnNameList? (
+        KW_COMMENT comment=STRING_LITERAL
+    )? KW_AS queryStatement
     ;
 
 createFunction

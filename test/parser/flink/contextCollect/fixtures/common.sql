@@ -1,4 +1,4 @@
-CREATE TABLE MyTable ('user_id' BIGINT, 'name' STRING) WITH ('connector' = 'oracle-x');
+CREATE TABLE MyTable ('user_id' BIGINT COMMENT 'col1', 'name' STRING) COMMENT 'test table comment ABC.' PARTITIONED BY (a, h) WITH ('connector' = 'kafka','kafka.topic' = 'log.test');
 
 CREATE TABLE my_ctas_table WITH ('connector' = 'kafka') 
 AS SELECT
@@ -39,8 +39,8 @@ EXECUTE STATEMENT SET BEGIN
         ('Amercian', 'georage', 22);
 END;
 
-CREATE VIEW view1(col1, col2) AS SELECT col3, col4 FROM tbl;
+CREATE VIEW view1(col1, col2) COMMENT 'this is a view' AS SELECT col3, col4 FROM tbl;
 
-CREATE DATABASE IF NOT EXISTS db1 WITH ('key1' = 'value1', 'key2.a' = 'value2.a');
+CREATE DATABASE IF NOT EXISTS db1 COMMENT 'this is a created database' WITH ('key1' = 'value1', 'key2.a' = 'value2.a');
 
 CREATE FUNCTION IF NOT EXISTS tempFunction AS 'SimpleUdf';

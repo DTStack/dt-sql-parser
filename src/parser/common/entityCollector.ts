@@ -1,8 +1,8 @@
-import { ParserRuleContext } from 'antlr4ng';
-import { EntityContextType } from './types';
-import { WordPosition, TextPosition } from './textAndWord';
-import { ctxToText, ctxToWord } from './textAndWord';
+import { ParserRuleContext, Token } from 'antlr4ng';
+
 import { SimpleStack } from './simpleStack';
+import { ctxToText, TextPosition, tokenToWord, WordPosition, WordRange } from './textAndWord';
+import { EntityContextType } from './types';
 
 /**
  * TODO: more stmt type should be supported.
@@ -59,14 +59,47 @@ const baseAlias: BaseAliasContext = {
     origin: null,
     alias: null,
 };
+/**
+ * @key comment 实体的comment统一同comment命名
+ * @key colType 实体中字段多一个type属性，如果直接用type命名，很容易在编译中重名，前后都会被加上下划线，所以用colType命名
+ * */
+export enum attrName {
+    comment = '_comment',
+    colType = '_colType',
+}
 
+export const attrNameInRule = {
+    [attrName.comment]: 'comment',
+    [attrName.colType]: 'colType',
+} as const;
+
+type ParserRuleContextWithAttr = ParserRuleContext & {
+    [k in attrName]?: Token;
+};
 export interface EntityContext extends BaseAliasContext {
     readonly entityContextType: EntityContextType;
     readonly text: string;
     readonly position: WordPosition;
     readonly belongStmt: StmtContext;
     relatedEntities: EntityContext[] | null;
-    columns: EntityContext[] | null;
+    columns: ColumnEntityContext[] | null;
+    comment?: WordRange;
+}
+
+export interface FuncEntityContext extends EntityContext {
+    argMode?: WordRange;
+    argName?: WordRange;
+    argType?: WordRange;
+}
+export interface ColumnEntityContext extends EntityContext {
+    colType?: WordRange;
+    comment?: WordRange;
+}
+
+interface attrInfo {
+    needCollectAttr: boolean;
+    attrList: attrName[];
+    endContext: string;
 }
 
 export function toEntityContext(
@@ -74,13 +107,18 @@ export function toEntityContext(
     type: EntityContextType,
     input: string,
     belongStmt: StmtContext,
+    attrInfo?: attrInfo,
     alias?: BaseAliasContext
-): EntityContext | null {
-    const word = ctxToWord(ctx, input);
+): EntityContext | FuncEntityContext | ColumnEntityContext | null {
+    const word = ctxToText(ctx, input);
     if (!word) return null;
-    const { text, ...position } = word;
+    const { text, startLine, endLine, ...rest } = word;
+    const position = {
+        ...rest,
+        line: startLine,
+    };
     const finalAlias = Object.assign({}, baseAlias, alias ?? {});
-    return {
+    const extraInfo: ColumnEntityContext = {
         entityContextType: type,
         text,
         position,
@@ -89,8 +127,61 @@ export function toEntityContext(
         columns: null,
         ...finalAlias,
     };
+    if (attrInfo?.needCollectAttr) {
+        for (let k = 0; k < attrInfo?.attrList?.length; k++) {
+            const attributeName: attrName = attrInfo?.attrList[k];
+            const attrToken = findAttribute(ctx, attributeName, attrInfo?.endContext);
+            if (attrToken) {
+                const attrVal: WordRange = tokenToWord(attrToken, input);
+                extraInfo[attrNameInRule[attributeName]] = attrVal;
+            }
+        }
+    }
+    return extraInfo;
 }
 
+export function findAttribute(
+    ctx: ParserRuleContextWithAttr | null,
+    keyName: attrName,
+    endContextName: string
+): Token | null {
+    const parent: ParserRuleContextWithAttr | null = ctx?.parent || null;
+    let attrVal: Token | null = null;
+    if (parent?.[keyName]) {
+        attrVal = parent?.[keyName] || null;
+        return attrVal;
+    } else {
+        if (parent?.constructor?.name !== endContextName) {
+            attrVal = findAttribute(parent, keyName, endContextName);
+        }
+        if (!attrVal) {
+            if (parent?.children) {
+                attrVal = findAttributeChildren(parent, keyName);
+            }
+        }
+    }
+    return attrVal;
+}
+
+function findAttributeChildren(
+    ctx: ParserRuleContextWithAttr | null,
+    keyName: attrName
+): Token | null {
+    const visitChildren = ctx?.children || [];
+    let attrVal: Token | null = null;
+    if (visitChildren.length) {
+        for (let i = 0; i < visitChildren.length; i++) {
+            const child = <ParserRuleContextWithAttr | null>visitChildren[i] || null;
+            if (child?.[keyName]) {
+                attrVal = child?.[keyName] || null;
+                return attrVal;
+            } else {
+                attrVal = findAttributeChildren(child, keyName);
+            }
+        }
+    }
+    return attrVal;
+}
 /**
  * @todo: Handle alias, includes column alias, table alias, query as alias and so on.
  * @todo: [may be need] Combine the entities in each clause.
@@ -180,6 +271,7 @@ export abstract class EntityCollector {
     protected pushEntity(
         ctx: ParserRuleContext,
         type: EntityContextType,
+        attrInfo?: attrInfo,
         alias?: BaseAliasContext
     ) {
         const entityContext = toEntityContext(
@@ -187,6 +279,7 @@ export abstract class EntityCollector {
             type,
             this._input,
             this._stmtStack.peek(),
+            attrInfo,
             alias
         );
         if (entityContext) {
