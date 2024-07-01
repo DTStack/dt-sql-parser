@@ -1,4 +1,5 @@
 import type {
+    AltertablestmtContext,
     ColumnCreateTableContext,
     ColumnNameCreateContext,
     CreateDatabaseContext,
@@ -143,6 +144,12 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitCreatefunctionstmt(ctx: CreatefunctionstmtContext) {
+        this.popStmt();
+    }
+    enterAltertablestmt(ctx: AltertablestmtContext) {
+        this.pushStmt(ctx, StmtContextType.ALTER_TABLE_STMT);
+    }
+    exitAltertablestmt(ctx: AltertablestmtContext) {
         this.popStmt();
     }
 }
