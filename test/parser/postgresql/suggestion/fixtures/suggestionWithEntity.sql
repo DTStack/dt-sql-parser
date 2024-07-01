@@ -9,3 +9,5 @@ INSERT INTO insert_tb SELECT id, age,  FROM from_tb;
 CREATE TABLE sorted_census_data AS SELECT  FROM unsorted_census_data;
 
 CREATE TABLE sorted_census_data AS SELECT id, age,  FROM unsorted_census_data;
+
+ALTER TABLE my_table DROP a_column;
