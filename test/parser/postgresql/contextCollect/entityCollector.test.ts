@@ -2,8 +2,12 @@ import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
+import {
+    isFuncEntityContext,
+    isNormalEntityContext,
+    StmtContextType,
+} from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
-import { StmtContextType } from 'src/parser/common/entityCollector';
 import {
     PostgreSQL,
     PostgreSqlEntityCollector,
@@ -76,14 +80,15 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 122,
         });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeNull();
 
-        expect(tableCreateEntity.columns).toBeNull();
-
-        expect(tableCreateEntity.relatedEntities.length).toBe(2);
-        tableCreateEntity.relatedEntities.forEach((relatedEntity) => {
-            expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
-            expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
-        });
+            expect(tableCreateEntity.relatedEntities.length).toBe(2);
+            tableCreateEntity.relatedEntities.forEach((relatedEntity) => {
+                expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
+                expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
+            });
+        }
 
         expect(allEntities[1].text).toBe('films');
         expect(allEntities[1].belongStmt.rootStmt).toBe(allEntities[0].belongStmt);
@@ -138,15 +143,19 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 2,
         });
-
-        expect(tableCreateEntity.columns.length).toBe(3);
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns.length).toBe(3);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+        }
     });
 
     test('create foreign table by columns', () => {
@@ -181,15 +190,19 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 19,
         });
-
-        expect(tableCreateEntity.columns.length).toBe(6);
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns.length).toBe(6);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+        }
     });
 
     test('create foreign table of partition', () => {
@@ -224,15 +237,16 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 21,
         });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeNull();
 
-        expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-
-        const relatedEntity = tableCreateEntity.relatedEntities[0];
-        expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
-        expect(relatedEntity.text).toBe('measurement');
+            const relatedEntity = tableCreateEntity.relatedEntities[0];
+            expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
+            expect(relatedEntity.text).toBe('measurement');
+        }
     });
 
     test('create view by select', () => {
@@ -265,15 +279,16 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 26,
         });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeNull();
 
-        expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-
-        const relatedEntity = tableCreateEntity.relatedEntities[0];
-        expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
-        expect(relatedEntity.text).toBe('films');
+            const relatedEntity = tableCreateEntity.relatedEntities[0];
+            expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
+            expect(relatedEntity.text).toBe('films');
+        }
     });
 
     test('create materialized view by columns', () => {
@@ -306,16 +321,20 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 17,
         });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns.length).toBe(2);
 
-        expect(tableCreateEntity.columns.length).toBe(2);
-
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+        }
     });
 
     test('select with clause', () => {
@@ -348,9 +367,10 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 36,
             endColumn: 67,
         });
-        expect(tableEntity1.columns).toBeNull();
-        expect(tableEntity1.relatedEntities).toBeNull();
-
+        if (isNormalEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeNull();
+            expect(tableEntity1.relatedEntities).toBeNull();
+        }
         expect(tableEntity2.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity2.text).toBe('table_expression1');
         expect(tableEntity2.position).toEqual({
@@ -370,8 +390,10 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 111,
         });
-        expect(tableEntity2.columns).toBeNull();
-        expect(tableEntity2.relatedEntities).toBeNull();
+        if (isNormalEntityContext(tableEntity2)) {
+            expect(tableEntity2.columns).toBeNull();
+            expect(tableEntity2.relatedEntities).toBeNull();
+        }
     });
 
     test('insert into table', () => {
@@ -404,9 +426,10 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 55,
         });
-
-        expect(tableInsertEntity.columns).toBeNull();
-        expect(tableInsertEntity.relatedEntities).toBeNull();
+        if (isNormalEntityContext(tableInsertEntity)) {
+            expect(tableInsertEntity.columns).toBeNull();
+            expect(tableInsertEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create function', () => {
@@ -441,8 +464,9 @@ describe('PostgreSql entity collector tests', () => {
             startIndex: 1359,
             startLine: 47,
         });
-
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.arguments).toBeNull();
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
     });
 });

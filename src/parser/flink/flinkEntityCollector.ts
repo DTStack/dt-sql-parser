@@ -19,7 +19,7 @@ import {
     ViewPathCreateContext,
 } from '../../lib/flink/FlinkSqlParser';
 import { FlinkSqlParserListener } from '../../lib/flink/FlinkSqlParserListener';
-import { attrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
 
 export class FlinkEntityCollector extends EntityCollector implements FlinkSqlParserListener {
@@ -34,8 +34,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
 
     exitDatabasePathCreate(ctx: DatabasePathCreateContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
-            needCollectAttr: true,
-            attrList: [attrName.comment],
+            attrList: [AttrName.comment],
             endContext: 'CreateDatabaseContext',
         });
     }
@@ -50,8 +49,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
 
     exitTablePathCreate(ctx: TablePathCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
-            needCollectAttr: true,
-            attrList: [attrName.comment],
+            attrList: [AttrName.comment],
             endContext: 'CreateTableContext',
         });
     }
@@ -62,16 +60,14 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
 
     exitViewPathCreate(ctx: ViewPathCreateContext) {
         this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
-            needCollectAttr: true,
-            attrList: [attrName.comment],
+            attrList: [AttrName.comment],
             endContext: 'CreateViewContext',
         });
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
-            needCollectAttr: true,
-            attrList: [attrName.comment, attrName.colType],
+            attrList: [AttrName.comment, AttrName.colType],
             endContext: 'PhysicalColumnDefinitionContext',
         });
     }

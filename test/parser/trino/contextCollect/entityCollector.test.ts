@@ -1,10 +1,10 @@
+import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
-import { TrinoSQL, TrinoSqlSplitListener, TrinoEntityCollector } from 'src/parser/trino';
-import { ParseTreeListener } from 'antlr4ng';
 import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
+import { isNormalEntityContext, StmtContextType } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
-import { StmtContextType } from 'src/parser/common/entityCollector';
+import { TrinoEntityCollector, TrinoSQL, TrinoSqlSplitListener } from 'src/parser/trino';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
 
@@ -55,15 +55,16 @@ describe('Trino entity collector tests', () => {
             startColumn: 1,
             endColumn: 70,
         });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            const beLikedEntity = allEntities[1];
 
-        const beLikedEntity = allEntities[1];
-
-        expect(tableCreateEntity.relatedEntities[0]).toBe(beLikedEntity);
-        expect(beLikedEntity.text).toBe('like_table');
-        expect(beLikedEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(beLikedEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(beLikedEntity);
+            expect(beLikedEntity.text).toBe('like_table');
+            expect(beLikedEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(beLikedEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+        }
     });
 
     test('create table as select', () => {
@@ -84,21 +85,25 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns.length).toBe(2);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
 
-        expect(tableCreateEntity.columns.length).toBe(2);
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-        expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
-
-        expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(originTableEntity.text).toBe('t');
-        expect(originTableEntity.belongStmt.rootStmt).toBe(tableCreateEntity.belongStmt);
+            expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(originTableEntity.text).toBe('t');
+            expect(originTableEntity.belongStmt.rootStmt).toBe(tableCreateEntity.belongStmt);
+        }
     });
 
     test('create view as select', () => {
@@ -117,10 +122,11 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(tableCreateEntity.text).toBe('a');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-
-        expect(tableCreateEntity.columns).toBeNull();
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-        expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        }
 
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(originTableEntity.text).toBe('t');
@@ -144,9 +150,11 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.text).toBe('a');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
 
-        expect(tableCreateEntity.columns).toBeNull();
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-        expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        }
 
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(originTableEntity.text).toBe('t');
@@ -169,8 +177,10 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.text).toBe('table1');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
 
-        expect(tableCreateEntity.columns).toBeNull();
-        expect(tableCreateEntity.relatedEntities).toBeNull();
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('insert into table as select', () => {

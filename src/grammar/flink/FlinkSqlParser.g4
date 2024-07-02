@@ -176,7 +176,7 @@ columnOptionDefinition
     ;
 
 physicalColumnDefinition
-    : colName=columnNameCreate columnType columnConstraint? (KW_COMMENT comment=STRING_LITERAL)?
+    : columnNameCreate columnType columnConstraint? (KW_COMMENT comment=STRING_LITERAL)?
     ;
 
 columnNameCreate
@@ -249,7 +249,7 @@ columnConstraint
     ;
 
 metadataColumnDefinition
-    : colName=columnNameCreate columnType KW_METADATA (KW_FROM metadataKey)? KW_VIRTUAL?
+    : columnNameCreate columnType KW_METADATA (KW_FROM metadataKey)? KW_VIRTUAL?
     ;
 
 metadataKey
@@ -257,7 +257,7 @@ metadataKey
     ;
 
 computedColumnDefinition
-    : colName=columnNameCreate KW_AS computedColumnExpression (KW_COMMENT comment=STRING_LITERAL)?
+    : columnNameCreate KW_AS computedColumnExpression (KW_COMMENT comment=STRING_LITERAL)?
     ;
 
 // 计算表达式
@@ -512,8 +512,8 @@ tableReference
     ;
 
 tablePrimary
-    : KW_TABLE? tablePath systemTimePeriod? (KW_AS? correlationName)?
-    | viewPath systemTimePeriod? (KW_AS? correlationName)?
+    : KW_TABLE? tablePath systemTimePeriod?
+    | viewPath systemTimePeriod?
     | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET functionParam (COMMA functionParam)* RR_BRACKET RR_BRACKET
     | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
@@ -833,7 +833,7 @@ intervalValue
     ;
 
 tableAlias
-    : KW_AS? identifier identifierList?
+    : KW_AS? alias=identifier identifierList?
     ;
 
 errorCapturingIdentifier

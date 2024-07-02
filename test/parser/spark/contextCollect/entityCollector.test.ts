@@ -1,10 +1,14 @@
+import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
-import { SparkSQL, SparkSqlSplitListener, SparkEntityCollector } from 'src/parser/spark';
-import { ParseTreeListener } from 'antlr4ng';
 import { SparkSqlParserListener } from 'src/lib/spark/SparkSqlParserListener';
+import {
+    isFuncEntityContext,
+    isNormalEntityContext,
+    StmtContextType,
+} from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
-import { StmtContextType } from 'src/parser/common/entityCollector';
+import { SparkEntityCollector, SparkSQL, SparkSqlSplitListener } from 'src/parser/spark';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
 
@@ -55,15 +59,16 @@ describe('SparkSQL entity collector tests', () => {
             startColumn: 1,
             endColumn: 52,
         });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            const beLikedEntity = allEntities[1];
 
-        const beLikedEntity = allEntities[1];
-
-        expect(tableCreateEntity.relatedEntities[0]).toBe(beLikedEntity);
-        expect(beLikedEntity.text).toBe('like_old_tb');
-        expect(beLikedEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(beLikedEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(beLikedEntity);
+            expect(beLikedEntity.text).toBe('like_old_tb');
+            expect(beLikedEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(beLikedEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+        }
     });
 
     test('create hive format table', () => {
@@ -99,17 +104,21 @@ describe('SparkSQL entity collector tests', () => {
             startColumn: 1,
             endColumn: 22,
         });
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities).toBeNull();
+            expect(tableCreateEntity.columns.length).toBe(2);
 
-        expect(tableCreateEntity.relatedEntities).toBeNull();
-        expect(tableCreateEntity.columns.length).toBe(2);
-
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+        }
     });
 
     test('create data source table', () => {
@@ -130,11 +139,11 @@ describe('SparkSQL entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-
-        expect(tableCreateEntity.columns).toBeNull();
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-        expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
-
+        if (isNormalEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        }
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(originTableEntity.text).toBe('student');
         expect(originTableEntity.belongStmt.rootStmt).toBe(tableCreateEntity.belongStmt);
@@ -156,15 +165,19 @@ describe('SparkSQL entity collector tests', () => {
         expect(viewEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(viewEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
         expect(viewEntity.text).toBe('new_view1');
-        expect(viewEntity.columns.length).toBe(2);
-        viewEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(viewEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
-
+        if (isNormalEntityContext(viewEntity)) {
+            expect(viewEntity.columns.length).toBe(2);
+            viewEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(viewEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+        }
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
         expect(tableEntity.belongStmt.rootStmt).toBe(viewEntity.belongStmt);
@@ -317,8 +330,10 @@ describe('SparkSQL entity collector tests', () => {
             startLine: 28,
         });
 
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.arguments).toBeNull();
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create xxx function', () => {
@@ -354,8 +369,9 @@ describe('SparkSQL entity collector tests', () => {
             startIndex: 925,
             startLine: 30,
         });
-
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.arguments).toBeNull();
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
     });
 });

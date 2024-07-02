@@ -47,57 +47,93 @@ export function toStmtContext(
     };
 }
 
-export interface BaseAliasContext {
-    readonly isAlias: boolean;
-    alias?: string | EntityContext | null;
-    origin?: string | EntityContext | StmtContext | null;
-}
-
-const baseAlias: BaseAliasContext = {
-    isAlias: false,
-    origin: null,
-    alias: null,
-};
 /**
- * @key comment 实体的comment统一同comment命名
- * @key colType 实体中字段多一个type属性，如果直接用type命名，很容易在编译中重名，前后都会被加上下划线，所以用colType命名
+ * @key comment entity's comment attribute
+ * @key colType column entity's type attribute
  * */
-export enum attrName {
+export enum AttrName {
     comment = '_comment',
     colType = '_colType',
+    alias = '_alias',
 }
-
-export const attrNameInRule = {
-    [attrName.comment]: 'comment',
-    [attrName.colType]: 'colType',
-} as const;
-
 type ParserRuleContextWithAttr = ParserRuleContext & {
-    [k in attrName]?: Token;
+    [K in AttrName]?: Token;
 };
-export interface EntityContext extends BaseAliasContext {
+
+export interface Argument {
+    argMode?: WordRange;
+    argName?: WordRange;
+    argType: WordRange;
+}
+export interface BaseEntityContext {
     readonly entityContextType: EntityContextType;
     readonly text: string;
     readonly position: WordPosition;
     readonly belongStmt: StmtContext;
-    relatedEntities: EntityContext[] | null;
+    readonly isAlias: boolean; // is alias entity
+    reference?: string | EntityContext | null; // reference entity
+    [AttrName.comment]?: WordRange | null;
+    [AttrName.alias]?: WordRange | null; // alias token
+}
+
+export interface NormalEntityContext extends BaseEntityContext {
+    relatedEntities: NormalEntityContext[] | null;
     columns: ColumnEntityContext[] | null;
-    comment?: WordRange;
 }
 
-export interface FuncEntityContext extends EntityContext {
-    argMode?: WordRange;
-    argName?: WordRange;
-    argType?: WordRange;
-}
-export interface ColumnEntityContext extends EntityContext {
-    colType?: WordRange;
-    comment?: WordRange;
+export interface ColumnEntityContext extends BaseEntityContext {
+    [AttrName.colType]?: WordRange | null;
 }
 
-interface attrInfo {
-    needCollectAttr: boolean;
-    attrList: attrName[];
+export interface FuncEntityContext extends BaseEntityContext {
+    relatedEntities: NormalEntityContext[] | null;
+    arguments?: Argument[] | null; // function arguments
+    returns?: Argument[] | null; // function return value
+}
+
+export type EntityContext = NormalEntityContext | FuncEntityContext | ColumnEntityContext;
+
+const baseEntity = {
+    isAlias: false,
+    reference: null,
+    [AttrName.alias]: null,
+    [AttrName.comment]: null,
+};
+export function setInitAttributes(arg: BaseEntityContext): EntityContext {
+    const entity: EntityContext = {
+        ...arg,
+    };
+    if (
+        arg.entityContextType === EntityContextType.FUNCTION ||
+        arg.entityContextType === EntityContextType.FUNCTION_CREATE
+    ) {
+        (entity as FuncEntityContext).relatedEntities = null;
+        (entity as FuncEntityContext).arguments = null;
+        (entity as FuncEntityContext).returns = null;
+    } else if (
+        arg.entityContextType === EntityContextType.COLUMN ||
+        arg.entityContextType === EntityContextType.COLUMN_CREATE
+    ) {
+        (entity as ColumnEntityContext)[AttrName.colType] = null;
+    } else {
+        (entity as NormalEntityContext).relatedEntities = null;
+        (entity as NormalEntityContext).columns = null;
+    }
+    return entity;
+}
+export function isNormalEntityContext(value: EntityContext): value is NormalEntityContext {
+    return 'columns' in value && 'relatedEntities' in value;
+}
+
+export function isFuncEntityContext(value: EntityContext): value is FuncEntityContext {
+    return 'params' in value && 'returns' in value && 'relatedEntities' in value;
+}
+
+export function isColumnEntityContext(value: EntityContext): value is ColumnEntityContext {
+    return AttrName.colType in value;
+}
+interface AttrInfo {
+    attrList: AttrName[];
     endContext: string;
 }
 
@@ -106,9 +142,8 @@ export function toEntityContext(
     type: EntityContextType,
     input: string,
     belongStmt: StmtContext,
-    attrInfo?: attrInfo,
-    alias?: BaseAliasContext
-): EntityContext | FuncEntityContext | ColumnEntityContext | null {
+    attrInfo?: AttrInfo
+): EntityContext | null {
     const word = ctxToText(ctx, input);
     if (!word) return null;
     const { text, startLine, endLine, ...rest } = word;
@@ -116,23 +151,22 @@ export function toEntityContext(
         ...rest,
         line: startLine,
     };
-    const finalAlias = Object.assign({}, baseAlias, alias ?? {});
-    const extraInfo: ColumnEntityContext = {
+    let extraInfo = setInitAttributes({
+        ...baseEntity,
         entityContextType: type,
         text,
         position,
         belongStmt,
-        relatedEntities: null,
-        columns: null,
-        ...finalAlias,
-    };
-    if (attrInfo?.needCollectAttr) {
+    });
+    if (attrInfo) {
         for (let k = 0; k < attrInfo?.attrList?.length; k++) {
-            const attributeName: attrName = attrInfo?.attrList[k];
+            const attributeName: AttrName = attrInfo?.attrList[k];
             const attrToken = findAttribute(ctx, attributeName, attrInfo?.endContext);
             if (attrToken) {
                 const attrVal: WordRange = tokenToWord(attrToken, input);
-                extraInfo[attrNameInRule[attributeName]] = attrVal;
+                extraInfo = Object.assign(extraInfo, {
+                    [attributeName]: attrVal,
+                });
             }
         }
     }
@@ -141,7 +175,7 @@ export function toEntityContext(
 
 export function findAttribute(
     ctx: ParserRuleContextWithAttr | null,
-    keyName: attrName,
+    keyName: AttrName,
     endContextName: string
 ): Token | null {
     const parent: ParserRuleContextWithAttr | null = ctx?.parent || null;
@@ -164,7 +198,7 @@ export function findAttribute(
 
 function findAttributeChildren(
     ctx: ParserRuleContextWithAttr | null,
-    keyName: attrName
+    keyName: AttrName
 ): Token | null {
     const visitChildren = ctx?.children || [];
     let attrVal: Token | null = null;
@@ -216,7 +250,7 @@ export abstract class EntityCollector {
     exitEveryRule() {}
 
     getEntities() {
-        return Array.from(this._entitiesSet);
+        return Array.from(this._entitiesSet) as EntityContext[];
     }
 
     enterProgram() {
@@ -267,19 +301,13 @@ export abstract class EntityCollector {
         return stmtContext;
     }
 
-    protected pushEntity(
-        ctx: ParserRuleContext,
-        type: EntityContextType,
-        attrInfo?: attrInfo,
-        alias?: BaseAliasContext
-    ) {
+    protected pushEntity(ctx: ParserRuleContext, type: EntityContextType, attrInfo?: AttrInfo) {
         const entityContext = toEntityContext(
             ctx,
             type,
             this._input,
             this._stmtStack.peek(),
-            attrInfo,
-            alias
+            attrInfo
         );
         if (entityContext) {
             if (this._stmtStack.isEmpty()) {
@@ -365,13 +393,20 @@ export abstract class EntityCollector {
             }
             return result;
         }, [] as EntityContext[]);
-
         if (mainEntity && columns.length) {
-            (mainEntity as EntityContext).columns = columns;
+            if (isNormalEntityContext(mainEntity)) {
+                mainEntity = Object.assign(mainEntity, {
+                    columns,
+                });
+            }
         }
 
         if (mainEntity && relatedEntities.length) {
-            (mainEntity as EntityContext).relatedEntities = relatedEntities;
+            if (isNormalEntityContext(mainEntity) || isFuncEntityContext(mainEntity)) {
+                mainEntity = Object.assign(mainEntity, {
+                    relatedEntities,
+                });
+            }
         }
 
         return finalEntities;
