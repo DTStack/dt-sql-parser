@@ -1,4 +1,6 @@
 import type {
+    CatalogNameCreateContext,
+    CatalogRefContext,
     ColumnNameCreateContext,
     CreateMaterializedViewContext,
     CreateSchemaContext,
@@ -6,14 +8,14 @@ import type {
     CreateTableContext,
     CreateViewContext,
     InsertIntoContext,
-    QueryStatementContext,
-    SchemaNameContext,
     SchemaNameCreateContext,
+    SchemaRefContext,
     SingleStatementContext,
-    TableNameContext,
     TableNameCreateContext,
-    ViewNameContext,
+    TableRefContext,
     ViewNameCreateContext,
+    ViewRefContext,
+    QueryStatementContext,
 } from '../../lib/trino/TrinoSqlParser';
 import type { TrinoSqlListener } from '../../lib/trino/TrinoSqlListener';
 import { EntityContextType } from '../common/types';
@@ -21,7 +23,15 @@ import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {
     /** ====== Entity Begin */
-    exitSchemaName(ctx: SchemaNameContext) {
+    exitCatalogRef(ctx: CatalogRefContext) {
+        this.pushEntity(ctx, EntityContextType.CATALOG);
+    }
+
+    exitCatalogNameCreate(ctx: CatalogNameCreateContext) {
+        this.pushEntity(ctx, EntityContextType.CATALOG_CREATE);
+    }
+
+    exitSchemaRef(ctx: SchemaRefContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE);
     }
 
@@ -29,7 +39,7 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
         this.pushEntity(ctx, EntityContextType.DATABASE_CREATE);
     }
 
-    exitTableName(ctx: TableNameContext) {
+    exitTableRef(ctx: TableRefContext) {
         this.pushEntity(ctx, EntityContextType.TABLE);
     }
 
@@ -37,7 +47,7 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE);
     }
 
-    exitViewName(ctx: ViewNameContext) {
+    exitViewRef(ctx: ViewRefContext) {
         this.pushEntity(ctx, EntityContextType.VIEW);
     }
 

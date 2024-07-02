@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { TrinoSQL } from 'src/parser/trino';
-import { CaretPosition } from 'src/parser/common/types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
@@ -34,11 +34,13 @@ describe('Trino SQL Token Suggestion', () => {
 
         expect(suggestion).toMatchUnorderedArrary([
             'ROLE',
-            'VIEW',
+            'FUNCTION',
             'OR',
+            'VIEW',
             'MATERIALIZED',
             'TABLE',
             'SCHEMA',
+            'CATALOG',
         ]);
     });
 
@@ -76,9 +78,17 @@ describe('Trino SQL Token Suggestion', () => {
         const suggestion = trino.getSuggestionAtCaretPosition(
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
-        )?.keywords;
+        );
 
-        expect(suggestion).toMatchUnorderedArrary(['OUTPUT', 'INPUT']);
+        expect(suggestion?.keywords?.includes('INPUT')).toBeTruthy();
+        expect(suggestion?.keywords?.includes('OUTPUT')).toBeTruthy();
+
+        expect(
+            suggestion?.syntax?.find((item) => item.syntaxContextType === EntityContextType.TABLE)
+        ).not.toBeUndefined();
+        expect(
+            suggestion?.syntax?.find((item) => item.syntaxContextType === EntityContextType.VIEW)
+        ).not.toBeUndefined();
     });
 
     test('After DROP', () => {
@@ -93,10 +103,12 @@ describe('Trino SQL Token Suggestion', () => {
 
         expect(suggestion).toMatchUnorderedArrary([
             'ROLE',
+            'FUNCTION',
             'VIEW',
             'MATERIALIZED',
             'TABLE',
             'SCHEMA',
+            'CATALOG',
         ]);
     });
 

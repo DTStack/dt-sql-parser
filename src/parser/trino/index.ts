@@ -28,16 +28,17 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
     }
 
     protected preferredRules: Set<number> = new Set([
-        TrinoSqlParser.RULE_catalogName,
+        TrinoSqlParser.RULE_catalogRef,
         TrinoSqlParser.RULE_catalogNameCreate,
-        TrinoSqlParser.RULE_schemaName,
+        TrinoSqlParser.RULE_schemaRef,
         TrinoSqlParser.RULE_schemaNameCreate,
-        TrinoSqlParser.RULE_tableName,
+        TrinoSqlParser.RULE_tableRef,
         TrinoSqlParser.RULE_tableNameCreate,
-        TrinoSqlParser.RULE_viewName,
+        TrinoSqlParser.RULE_viewRef,
         TrinoSqlParser.RULE_viewNameCreate,
         TrinoSqlParser.RULE_functionName,
-        TrinoSqlParser.RULE_columnName,
+        TrinoSqlParser.RULE_functionNameCreate,
+        TrinoSqlParser.RULE_columnRef,
         TrinoSqlParser.RULE_columnNameCreate,
     ]);
 
@@ -60,11 +61,15 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
-                case TrinoSqlParser.RULE_catalogName: {
+                case TrinoSqlParser.RULE_catalogRef: {
                     syntaxContextType = EntityContextType.CATALOG;
                     break;
                 }
-                case TrinoSqlParser.RULE_schemaName: {
+                case TrinoSqlParser.RULE_catalogNameCreate: {
+                    syntaxContextType = EntityContextType.CATALOG_CREATE;
+                    break;
+                }
+                case TrinoSqlParser.RULE_schemaRef: {
                     syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
@@ -72,7 +77,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                     syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
-                case TrinoSqlParser.RULE_tableName: {
+                case TrinoSqlParser.RULE_tableRef: {
                     syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
@@ -80,7 +85,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                     syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
-                case TrinoSqlParser.RULE_viewName: {
+                case TrinoSqlParser.RULE_viewRef: {
                     syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
@@ -92,11 +97,15 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                     syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
+                case TrinoSqlParser.RULE_functionNameCreate: {
+                    syntaxContextType = EntityContextType.FUNCTION_CREATE;
+                    break;
+                }
                 case TrinoSqlParser.RULE_columnNameCreate: {
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
-                case TrinoSqlParser.RULE_columnName: {
+                case TrinoSqlParser.RULE_columnRef: {
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }

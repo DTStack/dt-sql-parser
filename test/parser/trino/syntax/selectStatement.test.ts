@@ -14,6 +14,7 @@ const features = {
     selectWithUNNEST: readSQL(__dirname, 'select_with_ unnest.sql'),
     selectWithExists: readSQL(__dirname, 'select_with_exists.sql'),
     selectWithUnion: readSQL(__dirname, 'select_with_union.sql'),
+    selectFunctionTables: readSQL(__dirname, 'select_function_tables.sql'),
 };
 
 describe('TrinoSQL Select Statements Syntax Tests', () => {
@@ -75,6 +76,11 @@ describe('TrinoSQL Select Statements Syntax Tests', () => {
         });
     });
     features.selectWithUnion.forEach((sql) => {
+        it(sql, () => {
+            expect(trino.validate(sql).length).toBe(0);
+        });
+    });
+    features.selectFunctionTables.forEach((sql) => {
         it(sql, () => {
             expect(trino.validate(sql).length).toBe(0);
         });

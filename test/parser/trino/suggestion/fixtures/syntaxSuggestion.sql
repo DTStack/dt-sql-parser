@@ -35,3 +35,11 @@ INSERT INTO tb (id, );
 SELECT * FROM tb ORDER BY ;
 
 SELECT * FROM tb GROUP BY ;
+
+CREATE CATALOG  ;
+
+DROP CATALOG cat ;
+
+CREATE FUNCTION example.default. ;
+
+DROP FUNCTION  ;
