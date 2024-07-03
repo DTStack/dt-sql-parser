@@ -1,7 +1,14 @@
-import { ParserRuleContext, Token } from 'antlr4ng';
+import { isToken, ParserRuleContext, Token } from 'antlr4ng';
 
 import { SimpleStack } from './simpleStack';
-import { ctxToText, TextPosition, tokenToWord, WordPosition, WordRange } from './textAndWord';
+import {
+    ctxToText,
+    TextPosition,
+    TextSlice,
+    tokenToWord,
+    WordPosition,
+    WordRange,
+} from './textAndWord';
 import { EntityContextType } from './types';
 
 /**
@@ -129,6 +136,10 @@ export function isFuncEntityContext(value: EntityContext): value is FuncEntityCo
     return 'params' in value && 'returns' in value && 'relatedEntities' in value;
 }
 
+export function isWordRange(value: any): value is WordRange {
+    return 'line' in value;
+}
+
 export function isColumnEntityContext(value: EntityContext): value is ColumnEntityContext {
     return AttrName.colType in value;
 }
@@ -163,10 +174,29 @@ export function toEntityContext(
             const attributeName: AttrName = attrInfo?.attrList[k];
             const attrToken = findAttribute(ctx, attributeName, attrInfo?.endContext);
             if (attrToken) {
-                const attrVal: WordRange = tokenToWord(attrToken, input);
-                extraInfo = Object.assign(extraInfo, {
-                    [attributeName]: attrVal,
-                });
+                const attrVal: WordRange | TextSlice | null = isToken(attrToken)
+                    ? tokenToWord(attrToken, input)
+                    : ctxToText(attrToken, input);
+                if (attrVal) {
+                    if (isWordRange(attrVal)) {
+                        extraInfo = Object.assign(extraInfo, {
+                            [attributeName]: attrVal,
+                        });
+                    } else {
+                        const { startIndex, endIndex, startColumn, endColumn, text, ...rest } =
+                            attrVal;
+                        extraInfo = Object.assign(extraInfo, {
+                            [attributeName]: {
+                                startIndex,
+                                endIndex,
+                                startColumn,
+                                endColumn,
+                                text,
+                                line: rest?.startLine,
+                            },
+                        });
+                    }
+                }
             }
         }
     }
