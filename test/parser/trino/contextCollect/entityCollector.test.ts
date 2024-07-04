@@ -2,7 +2,7 @@ import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
 import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
-import { isNormalEntityContext, StmtContextType } from 'src/parser/common/entityCollector';
+import { isCommonEntityContext, StmtContextType } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
 import { TrinoEntityCollector, TrinoSQL, TrinoSqlSplitListener } from 'src/parser/trino';
 
@@ -55,7 +55,7 @@ describe('Trino entity collector tests', () => {
             startColumn: 1,
             endColumn: 70,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
             const beLikedEntity = allEntities[1];
@@ -85,7 +85,7 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns.length).toBe(2);
             tableCreateEntity.columns.forEach((columEntity) => {
                 expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
@@ -122,8 +122,8 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(tableCreateEntity.text).toBe('a');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-        if (isNormalEntityContext(tableCreateEntity)) {
-            expect(tableCreateEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
             expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
         }
@@ -150,8 +150,8 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.text).toBe('a');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
 
-        if (isNormalEntityContext(tableCreateEntity)) {
-            expect(tableCreateEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
             expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
         }
@@ -177,8 +177,8 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.text).toBe('table1');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
 
-        if (isNormalEntityContext(tableCreateEntity)) {
-            expect(tableCreateEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
             expect(tableCreateEntity.relatedEntities).toBeNull();
         }
     });

@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
 import {
+    isCommonEntityContext,
     isFuncEntityContext,
-    isNormalEntityContext,
     StmtContextType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
@@ -80,8 +80,8 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 122,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
-            expect(tableCreateEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
 
             expect(tableCreateEntity.relatedEntities.length).toBe(2);
             tableCreateEntity.relatedEntities.forEach((relatedEntity) => {
@@ -143,7 +143,7 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 2,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns.length).toBe(3);
             tableCreateEntity.columns.forEach((columEntity) => {
                 expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
@@ -190,7 +190,7 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 19,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns.length).toBe(6);
             tableCreateEntity.columns.forEach((columEntity) => {
                 expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
@@ -237,8 +237,8 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 21,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
-            expect(tableCreateEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
 
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
@@ -279,8 +279,8 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 26,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
-            expect(tableCreateEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
 
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
@@ -321,7 +321,7 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 17,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns.length).toBe(2);
 
             tableCreateEntity.columns.forEach((columEntity) => {
@@ -367,8 +367,8 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 36,
             endColumn: 67,
         });
-        if (isNormalEntityContext(tableEntity1)) {
-            expect(tableEntity1.columns).toBeNull();
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
             expect(tableEntity1.relatedEntities).toBeNull();
         }
         expect(tableEntity2.entityContextType).toBe(EntityContextType.TABLE);
@@ -390,8 +390,8 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 111,
         });
-        if (isNormalEntityContext(tableEntity2)) {
-            expect(tableEntity2.columns).toBeNull();
+        if (isCommonEntityContext(tableEntity2)) {
+            expect(tableEntity2.columns).toBeUndefined();
             expect(tableEntity2.relatedEntities).toBeNull();
         }
     });
@@ -426,8 +426,8 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 55,
         });
-        if (isNormalEntityContext(tableInsertEntity)) {
-            expect(tableInsertEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableInsertEntity)) {
+            expect(tableInsertEntity.columns).toBeUndefined();
             expect(tableInsertEntity.relatedEntities).toBeNull();
         }
     });

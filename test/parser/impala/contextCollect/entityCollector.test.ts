@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { ImpalaSqlParserListener } from 'src/lib/impala/ImpalaSqlParserListener';
 import {
+    isCommonEntityContext,
     isFuncEntityContext,
-    isNormalEntityContext,
     StmtContextType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
@@ -60,9 +60,9 @@ describe('ImpalaSQL entity collector tests', () => {
             startIndex: 0,
             startLine: 1,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
-            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.columns).toBeUndefined();
             expect(tableCreateEntity.relatedEntities[0]).toBe(likeTableEntity);
         }
         expect(likeTableEntity.text).toBe('old_table');
@@ -104,7 +104,7 @@ describe('ImpalaSQL entity collector tests', () => {
             startLine: 3,
         });
 
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).toBeNull();
             expect(tableCreateEntity.columns.length).toBe(2);
             tableCreateEntity.columns.forEach((columEntity) => {
@@ -155,9 +155,9 @@ describe('ImpalaSQL entity collector tests', () => {
             startLine: 5,
         });
 
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
-            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.columns).toBeUndefined();
 
             expect(fromCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
             expect(fromCreateEntity.text).toBe('unsorted_census_data');
@@ -200,9 +200,9 @@ describe('ImpalaSQL entity collector tests', () => {
             startLine: 11,
         });
 
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
-            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.columns).toBeUndefined();
 
             expect(fromCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
             expect(fromCreateEntity.text).toBe('kudu_t1');
@@ -244,7 +244,7 @@ describe('ImpalaSQL entity collector tests', () => {
             startLine: 16,
         });
 
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).toBeNull();
             expect(tableCreateEntity.columns.length).toBe(4);
             tableCreateEntity.columns.forEach((columEntity) => {
@@ -293,7 +293,7 @@ describe('ImpalaSQL entity collector tests', () => {
             startLine: 25,
         });
 
-        if (isNormalEntityContext(viewCreateEntity)) {
+        if (isCommonEntityContext(viewCreateEntity)) {
             expect(viewCreateEntity.relatedEntities[0]).toBe(fromCreateEntity);
             expect(viewCreateEntity.columns.length).toBe(2);
             viewCreateEntity.columns.forEach((columEntity) => {
@@ -345,8 +345,8 @@ describe('ImpalaSQL entity collector tests', () => {
             startIndex: 857,
             startLine: 27,
         });
-        if (isNormalEntityContext(tableInsertEntity)) {
-            expect(tableInsertEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableInsertEntity)) {
+            expect(tableInsertEntity.columns).toBeUndefined();
         }
 
         expect(fromTableEntity.entityContextType).toBe(EntityContextType.TABLE);
@@ -386,8 +386,8 @@ describe('ImpalaSQL entity collector tests', () => {
             startIndex: 899,
             startLine: 29,
         });
-        if (isNormalEntityContext(tableEntity1)) {
-            expect(tableEntity1.columns).toBeNull();
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
             expect(tableEntity1.relatedEntities).toBeNull();
         }
     });
@@ -424,8 +424,8 @@ describe('ImpalaSQL entity collector tests', () => {
             startIndex: 917,
             startLine: 31,
         });
-        if (isNormalEntityContext(tableEntity1)) {
-            expect(tableEntity1.columns).toBeNull();
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
             expect(tableEntity1.relatedEntities).toBeNull();
 
             expect(tableEntity2.entityContextType).toBe(EntityContextType.TABLE);
@@ -433,8 +433,8 @@ describe('ImpalaSQL entity collector tests', () => {
             expect(tableEntity2.text).toBe('t2');
         }
 
-        if (isNormalEntityContext(tableEntity2)) {
-            expect(tableEntity2.columns).toBeNull();
+        if (isCommonEntityContext(tableEntity2)) {
+            expect(tableEntity2.columns).toBeUndefined();
             expect(tableEntity2.relatedEntities).toBeNull();
             expect(tableEntity2.belongStmt).toBe(tableEntity1.belongStmt);
         }
@@ -472,8 +472,8 @@ describe('ImpalaSQL entity collector tests', () => {
             startLine: 35,
         });
 
-        if (isNormalEntityContext(dbEntity)) {
-            expect(dbEntity.columns).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
         }
     });
@@ -509,8 +509,8 @@ describe('ImpalaSQL entity collector tests', () => {
             startIndex: 1080,
             startLine: 37,
         });
-        if (isNormalEntityContext(schemaEntity)) {
-            expect(schemaEntity.columns).toBeNull();
+        if (isCommonEntityContext(schemaEntity)) {
+            expect(schemaEntity.columns).toBeUndefined();
             expect(schemaEntity.relatedEntities).toBeNull();
         }
     });
@@ -548,8 +548,8 @@ describe('ImpalaSQL entity collector tests', () => {
             startLine: 39,
         });
 
-        if (isNormalEntityContext(dbEntity)) {
-            expect(dbEntity.columns).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
         }
     });

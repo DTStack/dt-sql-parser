@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { SparkSqlParserListener } from 'src/lib/spark/SparkSqlParserListener';
 import {
+    isCommonEntityContext,
     isFuncEntityContext,
-    isNormalEntityContext,
     StmtContextType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
@@ -59,7 +59,7 @@ describe('SparkSQL entity collector tests', () => {
             startColumn: 1,
             endColumn: 52,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
             const beLikedEntity = allEntities[1];
@@ -104,7 +104,7 @@ describe('SparkSQL entity collector tests', () => {
             startColumn: 1,
             endColumn: 22,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).toBeNull();
             expect(tableCreateEntity.columns.length).toBe(2);
 
@@ -139,8 +139,8 @@ describe('SparkSQL entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        if (isNormalEntityContext(tableCreateEntity)) {
-            expect(tableCreateEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
             expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
         }
@@ -165,7 +165,7 @@ describe('SparkSQL entity collector tests', () => {
         expect(viewEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(viewEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
         expect(viewEntity.text).toBe('new_view1');
-        if (isNormalEntityContext(viewEntity)) {
+        if (isCommonEntityContext(viewEntity)) {
             expect(viewEntity.columns.length).toBe(2);
             viewEntity.columns.forEach((columEntity) => {
                 expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);

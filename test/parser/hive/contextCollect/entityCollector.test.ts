@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { HiveSqlParserListener } from 'src/lib/hive/HiveSqlParserListener';
 import {
+    isCommonEntityContext,
     isFuncEntityContext,
-    isNormalEntityContext,
     StmtContextType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
@@ -62,10 +62,10 @@ describe('Hive entity collector tests', () => {
             startColumn: 1,
         });
 
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).not.toBeNull();
             expect(tableCreateEntity.relatedEntities[0]).toEqual(tableLikeEntity);
-            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.columns).toBeUndefined();
         }
 
         expect(tableLikeEntity.entityContextType).toBe(EntityContextType.TABLE);
@@ -106,7 +106,7 @@ describe('Hive entity collector tests', () => {
             startIndex: 68,
             startLine: 3,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).toBeNull();
             expect(tableCreateEntity.columns).not.toBeNull();
             expect(tableCreateEntity.columns.length).toBe(3);
@@ -157,10 +157,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 202,
             startLine: 5,
         });
-        if (isNormalEntityContext(tableCreateEntity)) {
+        if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).not.toBeNull();
             expect(tableCreateEntity.relatedEntities[0]).toBe(tableFromEntity);
-            expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.columns).toBeUndefined();
         }
         expect(tableFromEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableFromEntity.text).toBe('origin_table');
@@ -199,10 +199,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 283,
             startLine: 11,
         });
-        if (isNormalEntityContext(viewCreateEntity)) {
+        if (isCommonEntityContext(viewCreateEntity)) {
             expect(viewCreateEntity.relatedEntities).not.toBeNull();
             expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
-            expect(viewCreateEntity.columns).toBeNull();
+            expect(viewCreateEntity.columns).toBeUndefined();
         }
         expect(viewSelectEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(viewSelectEntity.text).toBe('mydb.sale_tbl');
@@ -241,7 +241,7 @@ describe('Hive entity collector tests', () => {
             startIndex: 342,
             startLine: 14,
         });
-        if (isNormalEntityContext(viewCreateEntity)) {
+        if (isCommonEntityContext(viewCreateEntity)) {
             expect(viewCreateEntity.relatedEntities).not.toBeNull();
             expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
             expect(viewCreateEntity.columns).not.toBeNull();
@@ -295,10 +295,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 600,
             startLine: 27,
         });
-        if (isNormalEntityContext(viewCreateEntity)) {
+        if (isCommonEntityContext(viewCreateEntity)) {
             expect(viewCreateEntity.relatedEntities).not.toBeNull();
             expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
-            expect(viewCreateEntity.columns).toBeNull();
+            expect(viewCreateEntity.columns).toBeUndefined();
         }
         expect(viewSelectEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(viewSelectEntity.text).toBe('mydb.sale_tbl');
@@ -336,8 +336,8 @@ describe('Hive entity collector tests', () => {
             startIndex: 719,
             startLine: 32,
         });
-        if (isNormalEntityContext(selectTableEntity)) {
-            expect(selectTableEntity.columns).toBeNull();
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity.columns).toBeUndefined();
             expect(selectTableEntity.relatedEntities).toBeNull();
         }
     });
@@ -374,15 +374,15 @@ describe('Hive entity collector tests', () => {
             startIndex: 757,
             startLine: 34,
         });
-        if (isNormalEntityContext(selectTableEntity)) {
-            expect(selectTableEntity.columns).toBeNull();
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity.columns).toBeUndefined();
             expect(selectTableEntity.relatedEntities).toBeNull();
         }
 
         expect(selectTableEntity.belongStmt).toEqual(joinTableEntity.belongStmt);
         expect(joinTableEntity.text).toBe('b');
-        if (isNormalEntityContext(joinTableEntity)) {
-            expect(joinTableEntity.columns).toBeNull();
+        if (isCommonEntityContext(joinTableEntity)) {
+            expect(joinTableEntity.columns).toBeUndefined();
             expect(joinTableEntity.relatedEntities).toBeNull();
         }
     });
@@ -418,8 +418,8 @@ describe('Hive entity collector tests', () => {
             startIndex: 833,
             startLine: 36,
         });
-        if (isNormalEntityContext(selectTableEntity)) {
-            expect(selectTableEntity?.columns)?.toBeNull();
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity?.columns)?.toBeUndefined();
             expect(selectTableEntity.relatedEntities).toBeNull();
         }
     });
@@ -456,14 +456,14 @@ describe('Hive entity collector tests', () => {
             startIndex: 871,
             startLine: 38,
         });
-        if (isNormalEntityContext(selectTableEntity)) {
-            expect(selectTableEntity.columns).toBeNull();
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity.columns).toBeUndefined();
             expect(selectTableEntity.relatedEntities).toBeNull();
         }
         expect(selectTableEntity.belongStmt).toEqual(joinTableEntity.belongStmt);
         expect(joinTableEntity.text).toBe('b');
-        if (isNormalEntityContext(joinTableEntity)) {
-            expect(joinTableEntity.columns).toBeNull();
+        if (isCommonEntityContext(joinTableEntity)) {
+            expect(joinTableEntity.columns).toBeUndefined();
             expect(joinTableEntity.relatedEntities).toBeNull();
         }
     });
@@ -499,8 +499,8 @@ describe('Hive entity collector tests', () => {
             startIndex: 947,
             startLine: 40,
         });
-        if (isNormalEntityContext(insertTableEntity)) {
-            expect(insertTableEntity.columns).toBeNull();
+        if (isCommonEntityContext(insertTableEntity)) {
+            expect(insertTableEntity.columns).toBeUndefined();
             expect(insertTableEntity.relatedEntities).toBeNull();
         }
     });
@@ -537,8 +537,8 @@ describe('Hive entity collector tests', () => {
             startIndex: 1049,
             startLine: 43,
         });
-        if (isNormalEntityContext(insertTableEntity)) {
-            expect(insertTableEntity.columns).toBeNull();
+        if (isCommonEntityContext(insertTableEntity)) {
+            expect(insertTableEntity.columns).toBeUndefined();
             expect(insertTableEntity.relatedEntities).toBeNull();
         }
 
@@ -580,8 +580,8 @@ describe('Hive entity collector tests', () => {
             startIndex: 1187,
             startLine: 48,
         });
-        if (isNormalEntityContext(insertTableEntity)) {
-            expect(insertTableEntity.columns).toBeNull();
+        if (isCommonEntityContext(insertTableEntity)) {
+            expect(insertTableEntity.columns).toBeUndefined();
             expect(insertTableEntity.relatedEntities).toBeNull();
         }
 
@@ -621,8 +621,8 @@ describe('Hive entity collector tests', () => {
             startIndex: 1374,
             startLine: 52,
         });
-        if (isNormalEntityContext(dbEntity)) {
-            expect(dbEntity.columns).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
         }
     });
@@ -659,8 +659,8 @@ describe('Hive entity collector tests', () => {
             startLine: 54,
         });
 
-        if (isNormalEntityContext(dbEntity)) {
-            expect(dbEntity.columns).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
         }
     });
@@ -697,8 +697,8 @@ describe('Hive entity collector tests', () => {
             startLine: 56,
         });
 
-        if (isNormalEntityContext(dbEntity)) {
-            expect(dbEntity.columns).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
         }
     });
