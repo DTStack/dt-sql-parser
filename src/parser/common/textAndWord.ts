@@ -77,3 +77,12 @@ export function ctxToText(
         endColumn: ctx.stop.column + 1 + (ctx.stop.text?.length ?? 0),
     };
 }
+
+/**
+ * judge whether the context is a WordRange
+ * @param textOrWord TextSlice or WordRange object
+ * */
+export function isWordRange(textOrWord: TextSlice | WordRange): textOrWord is WordRange {
+    if (!textOrWord) return false;
+    return 'line' in textOrWord;
+}

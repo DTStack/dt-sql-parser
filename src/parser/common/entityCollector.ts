@@ -3,6 +3,7 @@ import { isToken, ParserRuleContext, Token } from 'antlr4ng';
 import { SimpleStack } from './simpleStack';
 import {
     ctxToText,
+    isWordRange,
     TextPosition,
     TextSlice,
     tokenToWord,
@@ -108,23 +109,25 @@ export interface FuncEntityContext extends BaseEntityContext {
 export type EntityContext = CommonEntityContext | FuncEntityContext | ColumnEntityContext;
 
 export function isCommonEntityContext(entity: EntityContext): entity is CommonEntityContext {
+    if (!entity) return false;
     return 'relatedEntities' in entity && !('arguments' in entity);
 }
 
 export function isFuncEntityContext(entity: EntityContext): entity is FuncEntityContext {
+    if (!entity) return false;
     return 'arguments' in entity;
 }
 
 export function isColumnEntityContext(entity: EntityContext): entity is ColumnEntityContext {
+    if (!entity) return false;
     return AttrName.colType in entity;
 }
 
-export function isWordRange(textOrWord: TextSlice | WordRange): textOrWord is WordRange {
-    return 'line' in textOrWord;
-}
-
+/**
+ *  what we need when collect attribute information
+ * */
 interface AttrInfo {
-    attrList: AttrName[];
+    attrNameList: AttrName[];
     endContext: string;
 }
 
@@ -165,8 +168,8 @@ export function toEntityContext(
             break;
     }
     if (attrInfo) {
-        for (let k = 0; k < attrInfo?.attrList?.length; k++) {
-            const attributeName: AttrName = attrInfo?.attrList[k];
+        for (let k = 0; k < attrInfo?.attrNameList?.length; k++) {
+            const attributeName: AttrName = attrInfo?.attrNameList[k];
             const attrToken = findAttribute(ctx, attributeName, attrInfo?.endContext);
             if (attrToken) {
                 const attrVal: WordRange | TextSlice | null = isToken(attrToken)

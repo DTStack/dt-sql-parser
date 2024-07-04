@@ -35,7 +35,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
 
     exitDatabasePathCreate(ctx: DatabasePathCreateContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
-            attrList: [AttrName.comment],
+            attrNameList: [AttrName.comment],
             endContext: CreateDatabaseContext.name,
         });
     }
@@ -50,7 +50,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
 
     exitTablePathCreate(ctx: TablePathCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
-            attrList: [AttrName.comment],
+            attrNameList: [AttrName.comment],
             endContext: CreateTableContext.name,
         });
     }
@@ -61,14 +61,14 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
 
     exitViewPathCreate(ctx: ViewPathCreateContext) {
         this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
-            attrList: [AttrName.comment],
+            attrNameList: [AttrName.comment],
             endContext: CreateViewContext.name,
         });
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
-            attrList: [AttrName.comment, AttrName.colType],
+            attrNameList: [AttrName.comment, AttrName.colType],
             endContext: PhysicalColumnDefinitionContext.name,
         });
     }
