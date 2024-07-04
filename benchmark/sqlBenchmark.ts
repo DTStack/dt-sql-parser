@@ -100,8 +100,15 @@ class SqlBenchmark {
      */
     getSqlParser(): BasicSQL {
         const caches = Object.keys(require.cache);
-        caches.forEach((moduleName) => delete require.cache[moduleName]);
-        const Parser = require(path.join(__dirname, `../src/parser/${this.language}/index.ts`))[
+        caches.forEach((moduleName) => {
+            const module = require.cache[moduleName]!;
+            // Fix Memory Leak
+            if (module.parent) {
+                module.parent.children = [];
+            }
+            delete require.cache[moduleName];
+        });
+        const Parser = require(path.resolve(`src/parser/${this.language}/index.ts`))[
             languageNameMap[this.language]
         ];
         return new Parser();
@@ -112,7 +119,7 @@ class SqlBenchmark {
      * @param name Benchmark name
      * @param params Parser method parameters
      * @param sqlRows Rows count of sql
-     * @param loopTimes Loop times, default run 3 times
+     * @param loopTimes Loop times, default run 5 times
      */
     run(
         type: string,
@@ -127,6 +134,7 @@ class SqlBenchmark {
         for (let i = 0; i < loopTimes; i++) {
             const parser = this.getSqlParser();
             if (!parser[type] || typeof parser[type] !== 'function') return;
+
             const startTime = performance.now();
             parser[type](...params);
             const costTime = performance.now() - startTime;
