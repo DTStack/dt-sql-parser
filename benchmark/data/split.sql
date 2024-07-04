@@ -1,1093 +1,1001 @@
-CREATE TEMPORARY TABLE list_bucket_multiple (col1 STRING, col2 INT, col3 STRING);
+CREATE TABLE table_0 (col1 INT, col2 INT, col3 INT);
 
-CREATE TEMPORARY EXTERNAL TABLE list_bucket_multiple (col1 STRING, col2 INT, col3 STRING);
+CREATE TABLE table_exists_0 (col1 INT, col2 INT, col3 INT);
 
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS list_bucket_multiple (col1 STRING, col2 INT, col3 STRING);
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS list_bucket_multiple (col1 STRING, col2 INT, col3 STRING) COMMENT 'this is a comment';
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS list_bucket_multiple (col1 STRING, col2 INT, col3 STRING) COMMENT 'this is a comment1' PARTITIONED BY (`date` STRING COMMENT 'column_comment');
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS list_bucket_multiple (col1 STRING, col2 INT, col3 STRING) COMMENT 'this is a comment2' PARTITIONED BY (`date` STRING COMMENT 'column_comment') CLUSTERED BY (col1, col2) INTO 32 BUCKETS;
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS list_bucket_multiple (col1 STRING, col2 INT, col3 STRING) COMMENT 'this is a comment3' PARTITIONED BY (`date` STRING COMMENT 'column_comment') CLUSTERED BY (col1, col2) SORTED BY (col1 ASC) INTO 22 BUCKETS;
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS list_bucket_multiple (col1 STRING, col2 INT, col3 STRING) COMMENT 'this is a comment4' PARTITIONED BY (`date` STRING COMMENT 'column_comment') CLUSTERED BY (col1, col2) SORTED BY (col1 ASC) INTO 34 BUCKETS SKEWED BY (col1, col2) ON (('s1', 1), ('s3', 3), ('s13', 13), ('s78', 78)) STORED AS DIRECTORIES;
-
-CREATE TABLE page_view(
-    viewTime INT,
-    userid BIGINT,
-    page_url STRING,
-    referrer_url STRING,
-    ip STRING COMMENT 'IP Address of the User'
-) COMMENT 'This is the page view table' PARTITIONED BY(dt STRING, country STRING) CLUSTERED BY(userid) SORTED BY(viewTime) INTO 32 BUCKETS ROW FORMAT DELIMITED FIELDS TERMINATED BY '\001' COLLECTION ITEMS TERMINATED BY '\002' MAP KEYS TERMINATED BY '\003' STORED AS SEQUENCEFILE;
-
-CREATE TEMPORARY EXTERNAL TABLE page_view(
-    viewTime INT,
-    userid BIGINT,
-    page_url STRING,
-    referrer_url STRING,
-    ip STRING COMMENT 'IP Address of the User'
-) COMMENT 'This is the page view table' PARTITIONED BY(dt STRING, country STRING) CLUSTERED BY(userid) SORTED BY(viewTime) INTO 32 BUCKETS ROW FORMAT DELIMITED FIELDS TERMINATED BY '\001' COLLECTION ITEMS TERMINATED BY '\002' MAP KEYS TERMINATED BY '\003' STORED AS TEXTFILE;
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS page_view(
-    viewTime INT,
-    userid BIGINT,
-    page_url STRING,
-    referrer_url STRING,
-    ip STRING COMMENT 'IP Address of the User'
-) COMMENT 'This is the page view table' PARTITIONED BY(dt STRING, country STRING) CLUSTERED BY(userid) SORTED BY(viewTime) INTO 32 BUCKETS ROW FORMAT DELIMITED FIELDS TERMINATED BY '\001' COLLECTION ITEMS TERMINATED BY '\002' MAP KEYS TERMINATED BY '\003' STORED AS RCFILE;
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS page_view(
-    viewTime INT,
-    userid BIGINT,
-    page_url STRING,
-    referrer_url STRING,
-    ip STRING COMMENT 'IP Address of the User'
-) COMMENT 'This is the page view table' PARTITIONED BY(dt STRING, country STRING) CLUSTERED BY(userid) SORTED BY(viewTime) INTO 32 BUCKETS ROW FORMAT DELIMITED FIELDS TERMINATED BY '\001' COLLECTION ITEMS TERMINATED BY '\002' MAP KEYS TERMINATED BY '\003' STORED AS ORC LOCATION '/hsd_path';
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS page_view(
-    viewTime INT,
-    userid BIGINT,
-    page_url STRING,
-    referrer_url STRING,
-    ip STRING COMMENT 'IP Address of the User'
-) COMMENT 'This is the page view table' PARTITIONED BY(dt STRING, country STRING) CLUSTERED BY(userid) SORTED BY(viewTime) INTO 32 BUCKETS ROW FORMAT DELIMITED FIELDS TERMINATED BY '\001' COLLECTION ITEMS TERMINATED BY '\002' MAP KEYS TERMINATED BY '\003' STORED AS PARQUET LOCATION '/hsd_path' AS
-SELECT
-    (key % 1024) new_key,
-    concat(key, value) key_value_pair
-FROM
-    key_value_store SORT BY new_key,
-    key_value_pair;
-
-
-CREATE TABLE list_bucket_single (key STRING, value STRING)
-  SKEWED BY (key) ON (1,5,6) STORED AS AVRO;
-
-CREATE TRANSACTIONAL TABLE transactional_table_test(key STRING, value STRING) PARTITIONED BY(ds STRING) STORED AS INPUTFORMAT 'inputfilename' OUTPUTFORMAT 'outputfilename';
-
-CREATE TABLE IF NOT EXISTS copy_table LIKE origin_table;
-
-CREATE TEMPORARY TABLE IF NOT EXISTS copy_table LIKE origin_table;
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS copy_table LIKE origin_table;
-
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS copy_table LIKE origin_table LOCATION '/hdfs_path';
-
-CREATE TABLE IF NOT EXISTS derived_table AS
+CREATE TABLE derived_table_0 AS
 SELECT
     *
 FROM
-    origin_table;
+    origin_table_0;
 
-CREATE TABLE `mydb.t1`(
-    `id` INT,
-    `dept_no` INT,
-    `addr` STRING,
-    `tel` STRING,
-    `hobby` ARRAY < STRING >,
-    `add` MAP < STRING,
-    STRING >
-) PARTITIONED BY(`date` STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' COLLECTION ITEMS TERMINATED BY '-' MAP KEYS TERMINATED BY ':';
+CREATE TABLE table_1 (col1 INT, col2 INT, col3 INT);
 
-CREATE EXTERNAL TABLE mydb.ext_table(
-    id INT,
-    name STRING,
-    hobby ARRAY < STRING >,
-    add
-        MAP < STRING,
-        STRING >
-) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' COLLECTION ITEMS TERMINATED BY '-' MAP KEYS TERMINATED BY ':' LOCATION '/user/mydb/ext_table' TBLPROPERTIES('author' = 'hayden', 'desc' = '一个外部测试表');
+CREATE TABLE table_exists_1 (col1 INT, col2 INT, col3 INT);
 
-CREATE MANAGED TABLE managed_table (
-    id INT COMMENT 'ID',
-    name STRING COMMENT '名称'
-) COMMENT '测试分桶' CLUSTERED BY(id) SORTED BY (id) INTO 4 BUCKETS STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler';
+CREATE TABLE derived_table_1 AS
+SELECT
+    *
+FROM
+    origin_table_1;
 
-CREATE TABLE list_bucket_multiple (col1 STRING, col2 INT, col3 STRING) SKEWED BY (col1, col2) ON (('s1', 1), ('s3', 3), ('s13', 13), ('s78', 78)) STORED AS JSONFILE;
-
-CREATE TABLE IF NOT EXISTS t1 (
-    id INT COMMENT '索引',
-    name STRING COMMENT '姓名',
-    age SMALLINT COMMENT '年龄'
-) COMMENT "t1表" lifecycle 29;
-CREATE MANAGED TABLE managed_table (
-    id INT COMMENT 'ID',
-    name STRING COMMENT '名称'
-) COMMENT '测试分桶' CLUSTERED BY(id) SORTED BY (id) INTO 4 BUCKETS STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler' lifecycle 29;
-CREATE TABLE employee (
-    eid int,
-    name String,
-    salary String,
-    destination String)
-    STORED AS ORC
-    lifecycle 10;
-
-
--- Select Syntax
 SELECT col1, col2 FROM table_name_1;
 
-SELECT ALL col3, col4 FROM table_name_2 WHERE amount > 10 AND region = "US" GROUP BY col5 ORDER BY col6 CLUSTER BY col7 LIMIT 2,5;
-
--- WHERE Clause
-SELECT * FROM sales WHERE amount > 10 AND region = "US";
-
--- ALL and DISTINCT Clauses
-SELECT DISTINCT col1 FROM t1;
-
--- Partition Based Queries
-SELECT page_views.*
-FROM page_views
-WHERE page_views.`date` >= '2018-03-01' AND page_views.`date` <= '2018-03-31';
-
-SELECT page_views.*
-FROM page_views JOIN dim_users
-  ON (page_views.user_id = dim_users.id AND page_views.adate >= '2008-03-01' AND page_views.adate <= '2008-03-31');
-
--- HAVING Clause
-SELECT col1 FROM t1 GROUP BY col1 HAVING SUM(col2) > 10;
-
-SELECT col1 FROM (SELECT col1, SUM(col2) AS col2sum FROM t1 GROUP BY col1) t2 WHERE t2.col2sum > 10;
-
--- LIMIT Clause
-SELECT * FROM customers LIMIT 5;
-
-SELECT * FROM customers ORDER BY create_date LIMIT 5;
-
-SELECT * FROM customers ORDER BY create_date LIMIT 2,5;
-
--- REGEX Column Specification
-SELECT `(ds|hr)?+.+` FROM sales;
-
--- Syntax of Sort By
-SELECT key, value FROM src SORT BY key ASC, value DESC;
-
--- Distribute By
-SELECT col1, col2 FROM t1 DISTRIBUTE BY col1 SORT BY col1 ASC, col2 DESC;
-
--- Join Syntax
-SELECT a.* FROM a JOIN b ON (a.id = b.id AND a.department = b.department);
-
--- MapJoin Restrictions
-SELECT /*+ MAPJOIN(b) */ a.key, a.value
-FROM a JOIN b ON a.key = b.key;
-
--- Union Syntax
--- UNION within a FROM Clause
-SELECT u.id, actions.adate
-FROM (
-    SELECT av.uid AS uid
-    FROM action_video av
-    WHERE av.adate = '2008-06-03'
-    UNION ALL
-    SELECT ac.uid AS uid
-    FROM action_comment ac
-    WHERE ac.adate = '2008-06-03'
- ) actions JOIN users u ON (u.id = actions.uid);
-
--- Unions in DDL and Insert Statements--Applying Subclauses
-SELECT key FROM (SELECT key FROM src ORDER BY key LIMIT 10)subq1
-UNION
-SELECT key FROM (SELECT key FROM src1 ORDER BY key LIMIT 10)subq2;
-
-SELECT key FROM src
-UNION
-SELECT key FROM src1 
-ORDER BY key LIMIT 10;
-
--- Unions in DDL and Insert Statements--Column Aliases for Schema Matching
-INSERT OVERWRITE TABLE target_table
-  SELECT name, id, category FROM source_table_1
-  UNION ALL
-  SELECT name, id, "Category159" as category FROM source_table_2;
-
--- Unions in DDL and Insert Statements--Column Type Conversion
-SELECT name, id, cast('2001-01-01' as date) d FROM source_table_1
-UNION ALL
-SELECT name, id, hiredate as d FROM source_table_2;
-
--- Sampling Bucketized Table
-SELECT *
-FROM source TABLESAMPLE(BUCKET 3 OUT OF 32 ON rand()) s;
-
--- Block Sampling
-SELECT *
-FROM source TABLESAMPLE(0.1 PERCENT) s;
-
-SELECT *
-FROM source TABLESAMPLE(100M) s;
-
--- Subqueries in the FROM Clause
-SELECT t3.col
-FROM (
-  SELECT a+b AS col
-  FROM t1
-  UNION ALL
-  SELECT c+d AS col
-  FROM t2
-) t3;
-
--- Subqueries in the WHERE Clause
-SELECT A
-FROM T1
-WHERE EXISTS (SELECT B FROM T2 WHERE T1.X = T2.Y);
-
--- explode (array)
-SELECT tf.* FROM (SELECT 0) t lateral view explode(ARRAY('A','B','C')) tf AS col;
--- explode (map)
-SELECT tf.* FROM (SELECT 0) t lateral view explode(map('A',10,'B',20,'C',30)) tf AS KEY,VALUE;
--- posexplode (array)
-SELECT tf.* FROM (SELECT 0) t lateral view posexplode(ARRAY('A','B','C')) tf AS pos,val;
--- inline (array of structs)
-SELECT tf.* FROM (SELECT 0) t lateral view inline(ARRAY(STRUCT('A',10,DATE '2015-01-01'),STRUCT('B',20,DATE '2016-02-02'))) tf AS col1,col2,col3;
--- stack (values)
-SELECT tf.* FROM (SELECT 0) t lateral view stack(2,'A',10,DATE '2015-01-01','B',20,DATE '2016-01-01') tf AS col0,col1,col2;
-
-
--- Lateral View Syntax
-SELECT adid, count(1)
-FROM pageAds LATERAL VIEW explode(adid_list) adTable AS adid
-GROUP BY adid;
-
--- Multiple Lateral Views
-SELECT * FROM exampleTable
-LATERAL VIEW explode(col1) myTable1 AS myCol1
-LATERAL VIEW explode(myCol1) myTable2 AS myCol2;
-
--- Outer Lateral Views
-SELECT * FROM src LATERAL VIEW explode(array()) C AS a limit 10;
-SELECT * FROM src LATERAL VIEW OUTER explode(array()) C AS a limit 10;
-
--- Windowing and Analytics Functions
-SELECT a, COUNT(b) OVER (PARTITION BY c, d)
-FROM T;
-
-SELECT a, SUM(b) OVER (PARTITION BY c, d ORDER BY e, f)
-FROM T;
-
-SELECT a, AVG(b) OVER (PARTITION BY c ORDER BY d ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING)
-FROM T;
-
-SELECT a, SUM(b) OVER w
-FROM T
-WINDOW w AS (PARTITION BY c ORDER BY d ROWS UNBOUNDED PRECEDING);
-
-SELECT a, LEAD(a) OVER (PARTITION BY b ORDER BY C)
-FROM T;
-
-SELECT a, LAG(a, 3, 0) OVER (PARTITION BY b ORDER BY C)
-FROM T;
-
-SELECT a, COUNT(distinct a) OVER (PARTITION BY b)
-FROM T;
-
--- Common Table Expression
--- chaining CTEs
-WITH q1 AS ( SELECT key FROM q2 WHERE key = '5'),
-q2 AS ( SELECT key FROM src WHERE key = '5')
-SELECT * FROM (SELECT key FROM q1) a;
-  
--- union example
-WITH q1 AS (SELECT * FROM src WHERE key= '5'),
-q2 AS (SELECT * FROM src s2 WHERE key = '4')
-SELECT * FROM q1 union all SELECT * FROM q2;
-
--- view example
-CREATE VIEW v1 AS
-WITH q1 AS ( SELECT key FROM src WHERE key = '5')
-SELECT * FROM q1;
-SELECT * FROM v1;
-  
--- view example, name collision
-CREATE VIEW v1 AS
-WITH q1 AS ( SELECT key FROM src WHERE key = '5')
-SELECT * FROM q1;
-WITH q1 AS ( SELECT key FROM src WHERE key = '4')
-SELECT * FROM v1;
-
--- GROUPING SETS clause
--- GROUPING SET queries and the equivalent GROUP BY queries
-SELECT a, b, SUM(c) FROM tab1 GROUP BY a, b GROUPING SETS ( (a,b) );
-
-SELECT a, b, SUM( c ) FROM tab1 GROUP BY a, b GROUPING SETS ( (a, b), a, b, ( ) );
-
--- Grouping__ID function
-SELECT key, value, GROUPING__ID, count(*)
-FROM T1
-GROUP BY key, value WITH ROLLUP;
-
--- Grouping function
-SELECT key, value, GROUPING__ID,
-  grouping(key, value), grouping(value, key), grouping(key), grouping(value),
-  count(*)
-FROM T1
-GROUP BY key, value WITH ROLLUP;
-
--- LanguageManual Explain -- EXPLAIN Syntax
-EXPLAIN
-FROM src INSERT OVERWRITE TABLE dest_g1 SELECT src.key, sum(substr(src.value,4)) GROUP BY src.key;
+SELECT col3, col4 FROM table_name_1 WHERE amount > 10 AND region = "US";
 
--- LanguageManual Explain -- The CBO Clause
-EXPLAIN CBO
-WITH customer_total_return AS
-(SELECT sr_customer_sk AS ctr_customer_sk,
-  sr_store_sk AS ctr_store_sk,
-  SUM(SR_FEE) AS ctr_total_return
-  FROM store_returns, date_dim
-  WHERE sr_returned_date_sk = d_date_sk
-    AND d_year =2000
-  GROUP BY sr_customer_sk, sr_store_sk)
-SELECT c_customer_id
-FROM customer_total_return ctr1, store, customer
-WHERE ctr1.ctr_total_return > (SELECT AVG(ctr_total_return)*1.2
-FROM customer_total_return ctr2
-WHERE ctr1.ctr_store_sk = ctr2.ctr_store_sk)
-  AND s_store_sk = ctr1.ctr_store_sk
-  AND s_state = 'NM'
-  AND ctr1.ctr_customer_sk = c_customer_sk
-ORDER BY c_customer_id
-LIMIT 100;
+SELECT * FROM sales_1 WHERE amount > 10 AND region = "US";
 
--- LanguageManual Explain -- The AST Clause
-EXPLAIN AST
-FROM src INSERT OVERWRITE TABLE dest_g1 SELECT src.key, sum(substr(src.value,4)) GROUP BY src.key;
+CREATE TABLE table_1 (col1 INT, col2 INT, col3 INT);
 
--- LanguageManual Explain -- The DEPENDENCY Clause
-EXPLAIN DEPENDENCY
-  SELECT key, count(1) FROM srcpart WHERE ds IS NOT NULL GROUP BY key;
+CREATE TABLE table_exists_1 (col1 INT, col2 INT, col3 INT);
 
--- LanguageManual Explain -- The AUTHORIZATION Clause
-EXPLAIN AUTHORIZATION
-  SELECT * FROM src JOIN srcpart;
+CREATE TABLE derived_table_1 AS
+SELECT
+    *
+FROM
+    origin_table_1;
 
--- LanguageManual Explain -- The LOCKS Clause
-EXPLAIN LOCKS UPDATE target SET b = 1 WHERE p IN (SELECT t.q1 FROM source t WHERE t.a1=5);
+CREATE TABLE table_2 (col1 INT, col2 INT, col3 INT);
 
--- LanguageManual Explain -- User-level Explain Output
-EXPLAIN select sum(hash(key)), sum(hash(value)) from src_orc_merge_test_part where ds='2012-01-03' and ts='2012-01-03+14:46:31';
+CREATE TABLE table_exists_2 (col1 INT, col2 INT, col3 INT);
 
--- FROM xx SELECT
-FROM table_name_1 SELECT col1, col2;
+CREATE TABLE derived_table_2 AS
+SELECT
+    *
+FROM
+    origin_table_2;
 
-FROM a JOIN b ON (a.id = b.id AND a.department = b.department) SELECT a.*;
+SELECT col1, col2 FROM table_name_2;
 
--- Show Databases
-SHOW SCHEMAS;
+SELECT col3, col4 FROM table_name_2 WHERE amount > 10 AND region = "US";
 
-SHOW DATABASES LIKE 'identifier_with_wildcards';
+SELECT * FROM sales_2 WHERE amount > 10 AND region = "US";
 
--- Show Connectors
-SHOW CONNECTORS;
+CREATE TABLE table_2 (col1 INT, col2 INT, col3 INT);
 
--- Show Tables
-SHOW TABLES;
+CREATE TABLE table_exists_2 (col1 INT, col2 INT, col3 INT);
 
-SHOW TABLES IN db1 'identifier_with_wildcards';
+CREATE TABLE derived_table_2 AS
+SELECT
+    *
+FROM
+    origin_table_2;
 
--- Show Views
-SHOW VIEWS;
+CREATE TABLE table_3 (col1 INT, col2 INT, col3 INT);
 
-SHOW VIEWS FROM schema1 LIKE 'pattern_with_wildcards';
+CREATE TABLE table_exists_3 (col1 INT, col2 INT, col3 INT);
 
-SHOW MATERIALIZED VIEWS IN database2 LIKE 'pattern_with_wildcards';
+CREATE TABLE derived_table_3 AS
+SELECT
+    *
+FROM
+    origin_table_3;
 
--- Show Partitions
-SHOW PARTITIONS tbl1;
+SELECT col1, col2 FROM table_name_3;
 
-SHOW PARTITIONS table_name PARTITION(ds='2010-03-03', hr='12');
+SELECT col3, col4 FROM table_name_3 WHERE amount > 10 AND region = "US";
 
-SHOW PARTITIONS databaseFoo.tableBar WHERE hr >= 10 AND ds='2010-03-03' ORDER BY hr DESC LIMIT 10;  
+SELECT * FROM sales_3 WHERE amount > 10 AND region = "US";
 
--- Show Table/Partition Extended
-SHOW TABLE EXTENDED LIKE part_table;
+CREATE TABLE table_3 (col1 INT, col2 INT, col3 INT);
 
-SHOW TABLE EXTENDED IN database3 LIKE 'identifier_with_wildcards' PARTITION(ds='2010-03-03', hr='12');
+CREATE TABLE table_exists_3 (col1 INT, col2 INT, col3 INT);
 
--- Show Table Properties
-SHOW TBLPROPERTIES tblname;
+CREATE TABLE derived_table_3 AS
+SELECT
+    *
+FROM
+    origin_table_3;
 
-SHOW TBLPROPERTIES tblname("foo");
+CREATE TABLE table_4 (col1 INT, col2 INT, col3 INT);
 
--- Show Create Table
-SHOW CREATE TABLE db.tbl1;
+CREATE TABLE table_exists_4 (col1 INT, col2 INT, col3 INT);
 
--- Show Indexes
-SHOW INDEX ON idx_tbl;
+CREATE TABLE derived_table_4 AS
+SELECT
+    *
+FROM
+    origin_table_4;
 
-SHOW FORMATTED INDEXES ON idx_tbl2 FROM db_1;
+SELECT col1, col2 FROM table_name_4;
 
--- Show Columns
-SHOW COLUMNS FROM tble;
+SELECT col3, col4 FROM table_name_4 WHERE amount > 10 AND region = "US";
 
-SHOW COLUMNS IN table_name FROM db_1 LIKE 'pattern_with_wildcards';
+SELECT * FROM sales_4 WHERE amount > 10 AND region = "US";
 
--- Show Functions
-SHOW FUNCTIONS;
+CREATE TABLE table_4 (col1 INT, col2 INT, col3 INT);
 
-SHOW FUNCTIONS LIKE "<pattern>";
+CREATE TABLE table_exists_4 (col1 INT, col2 INT, col3 INT);
 
--- Show Locks
-SHOW LOCKS tbl1;
+CREATE TABLE derived_table_4 AS
+SELECT
+    *
+FROM
+    origin_table_4;
 
-SHOW LOCKS tbl2 EXTENDED;
+CREATE TABLE table_5 (col1 INT, col2 INT, col3 INT);
 
-SHOW LOCKS tbl3 PARTITION (ds='2010-03-03', hr='12');
+CREATE TABLE table_exists_5 (col1 INT, col2 INT, col3 INT);
 
-SHOW LOCKS tbl4 PARTITION (ds='2010-03-03', hr='12') EXTENDED;
+CREATE TABLE derived_table_5 AS
+SELECT
+    *
+FROM
+    origin_table_5;
 
-SHOW LOCKS DATABASE db1; 
+SELECT col1, col2 FROM table_name_5;
 
--- Show Conf
-SHOW CONF 'conf1';
+SELECT col3, col4 FROM table_name_5 WHERE amount > 10 AND region = "US";
 
--- Show Transactions
-SHOW TRANSACTIONS;
+SELECT * FROM sales_5 WHERE amount > 10 AND region = "US";
 
--- Show Compactions
-SHOW COMPACTIONS;
+CREATE TABLE table_5 (col1 INT, col2 INT, col3 INT);
 
-SHOW COMPACTIONS DATABASE db1;
+CREATE TABLE table_exists_5 (col1 INT, col2 INT, col3 INT);
 
-SHOW COMPACTIONS tbl0;
+CREATE TABLE derived_table_5 AS
+SELECT
+    *
+FROM
+    origin_table_5;
 
-SHOW COMPACTIONS db1.tbl0 
-PARTITION (p=101,day='Monday') 
-POOL 'pool0' 
-TYPE 'minor' 
-STATUS 'ready for clean' 
-ORDER BY cq_table DESC, cq_state
-LIMIT 42;
+CREATE TABLE table_6 (col1 INT, col2 INT, col3 INT);
 
--- Show Roles
-SHOW ROLES;
+CREATE TABLE table_exists_6 (col1 INT, col2 INT, col3 INT);
 
-SHOW CURRENT ROLES;
+CREATE TABLE derived_table_6 AS
+SELECT
+    *
+FROM
+    origin_table_6;
 
--- Show Role Grant
-SHOW ROLE GRANT USER user1;
+SELECT col1, col2 FROM table_name_6;
 
-SHOW ROLE GRANT ROLE `role`;
+SELECT col3, col4 FROM table_name_6 WHERE amount > 10 AND region = "US";
 
--- Show Principals
-SHOW PRINCIPALS role1;
+SELECT * FROM sales_6 WHERE amount > 10 AND region = "US";
 
--- Show Grant
-SHOW GRANT USER ashutosh ON TABLE hivejiratable;
+CREATE TABLE table_6 (col1 INT, col2 INT, col3 INT);
 
-SHOW GRANT ROLE role1 ON ALL; 
+CREATE TABLE table_exists_6 (col1 INT, col2 INT, col3 INT);
 
-SHOW GRANT ON TABLE hivejiratable;
+CREATE TABLE derived_table_6 AS
+SELECT
+    *
+FROM
+    origin_table_6;
 
--- Rename Table
-ALTER TABLE tbl1 RENAME TO tbl2;
+CREATE TABLE table_7 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Properties
-ALTER TABLE mydb.tb22 SET TBLPROPERTIES ('creator'='hayden');
+CREATE TABLE table_exists_7 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Comment
-ALTER TABLE mydb.tb22 SET TBLPROPERTIES ('comment' = 'This is a new comment!');
+CREATE TABLE derived_table_7 AS
+SELECT
+    *
+FROM
+    origin_table_7;
 
--- Add SerDe Properties
-ALTER TABLE employee_tb SET SERDE 'com.dt.test'; 
+SELECT col1, col2 FROM table_name_7;
 
-ALTER TABLE employee_tb PARTITION (
-    `pt1`='1'
-) SET SERDE 'com.dt.test'; 
+SELECT col3, col4 FROM table_name_7 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE employee_tb 
-SET SERDE 'com.dt.test'
-WITH SERDEPROPERTIES ('field.delim' = ',');
+SELECT * FROM sales_7 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE employee_tb PARTITION (
-    `pt1`='1'
-)
-SET SERDE 'com.dt.test'
-WITH SERDEPROPERTIES ('field.delim' = ',');
+CREATE TABLE table_7 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE sale_rbl 
-PARTITION (
-    `pt1`='1'
-)
-SET SERDEPROPERTIES ('field.delim' = ',');
+CREATE TABLE table_exists_7 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE sale_rbl SET SERDEPROPERTIES ('field.delim' = ',');
+CREATE TABLE derived_table_7 AS
+SELECT
+    *
+FROM
+    origin_table_7;
 
--- Remove SerDe Properties
-ALTER TABLE sale_rbl UNSET SERDEPROPERTIES ('field.delim');
+CREATE TABLE table_8 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE sale_rbl PARTITION (
-    `pt1`='1'
-) UNSET SERDEPROPERTIES ('field.delim');
+CREATE TABLE table_exists_8 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Storage Properties
-ALTER TABLE students 
-CLUSTERED BY (id, `name`, age)
-SORTED BY (age)
-INTO 2 BUCKETS;
+CREATE TABLE derived_table_8 AS
+SELECT
+    *
+FROM
+    origin_table_8;
 
-ALTER TABLE students 
-CLUSTERED BY (id, `name`, age) 
-INTO 2 BUCKETS;
+SELECT col1, col2 FROM table_name_8;
 
--- Alter Table Skewed or Stored as Directories
-ALTER TABLE dt_shop 
-SKEWED BY (id, cost)
-ON (('id',1), ('cost', 1000));
+SELECT col3, col4 FROM table_name_8 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE dt_shop 
-SKEWED BY (id, cost)
-ON (('id',1), ('cost', 1000)) 
-STORED AS DIRECTORIES;
+SELECT * FROM sales_8 WHERE amount > 10 AND region = "US";
 
--- Alter Table Not Skewed
-ALTER TABLE dt_shop NOT SKEWED;
+CREATE TABLE table_8 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Not Stored as Directories
-ALTER TABLE dt_shop NOT STORED AS DIRECTORIES;
+CREATE TABLE table_exists_8 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Set Skewed Location
-ALTER TABLE dt_shop SET SKEWED LOCATION ('id'='location1', "cost"="loaction2"  );
+CREATE TABLE derived_table_8 AS
+SELECT
+    *
+FROM
+    origin_table_8;
 
--- Alter Table Constraints
-ALTER TABLE tbl1 
-ADD CONSTRAINT const1 
-PRIMARY KEY (id) 
-DISABLE NOVALIDATE;
+CREATE TABLE table_9 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl2 
-ADD CONSTRAINT const2 
-FOREIGN KEY (id, `name`) 
-REFERENCES refer_tb(rid, rname) 
-DISABLE NOVALIDATE RELY;
+CREATE TABLE table_exists_9 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl3
-ADD CONSTRAINT const3 
-UNIQUE (`name`, `age`) 
-DISABLE NOVALIDATE;
+CREATE TABLE derived_table_9 AS
+SELECT
+    *
+FROM
+    origin_table_9;
 
-ALTER TABLE tbl4 
-CHANGE COLUMN `col1` `col2` STRING CONSTRAINT const4 
-NOT NULL ENABLE;
+SELECT col1, col2 FROM table_name_9;
 
-ALTER TABLE tbl5 
-CHANGE COLUMN `col3` `col4` INT CONSTRAINT const5 
-DEFAULT 998 ENABLE;
+SELECT col3, col4 FROM table_name_9 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl6 
-CHANGE COLUMN col5 col6  MAP<STRING, STRING> CONSTRAINT const6 
-CHECK (1) ENABLE;
- 
-ALTER TABLE tbl7 DROP CONSTRAINT remove_const;
+SELECT * FROM sales_9 WHERE amount > 10 AND region = "US";
 
--- Alter Partition
+CREATE TABLE table_9 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE add_par_tbl 
-ADD 
-PARTITION (`pt1` = 1);
+CREATE TABLE table_exists_9 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE add_par_tbl 
-ADD 
-PARTITION (`pt1` = 1) LOCATION '/pat/loc';
+CREATE TABLE derived_table_9 AS
+SELECT
+    *
+FROM
+    origin_table_9;
 
-ALTER TABLE add_par_tbl 
-ADD 
-PARTITION (`pt1` = 1) LOCATION '/pat/loc' 
-PARTITION (`pt2` = 2, `pt3`=3) LOCATION '/pat/loc' ;
+CREATE TABLE table_10 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE add_par_tbl 
-ADD IF NOT EXISTS 
-PARTITION (`pt1` = 1);
+CREATE TABLE table_exists_10 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE add_par_tbl 
-ADD IF NOT EXISTS 
-PARTITION (`pt1` = 1) LOCATION '/pat/loc';
+CREATE TABLE derived_table_10 AS
+SELECT
+    *
+FROM
+    origin_table_10;
 
-ALTER TABLE add_par_tbl 
-ADD IF NOT EXISTS 
-PARTITION (`pt1` = 1) LOCATION '/pat/loc' 
-PARTITION (`pt2` = 2, `pt3`=3) LOCATION '/pat/loc';
+SELECT col1, col2 FROM table_name_10;
 
--- Rename Partition
-ALTER TABLE ren_par_tbl
-PARTITION (`pt1`=1) 
-RENAME TO PARTITION (`pt2`=2) ;
+SELECT col3, col4 FROM table_name_10 WHERE amount > 10 AND region = "US";
 
--- Exchange Partition
-ALTER TABLE ex_part_tbl2 
-EXCHANGE PARTITION (`pt1`=1)
-WITH TABLE ex_part_tbl1;
+SELECT * FROM sales_10 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE ex_part_tbl2 
-EXCHANGE PARTITION (`pt1`=1, `pt2`=2)
-WITH TABLE ex_part_tbl1;
+CREATE TABLE table_10 (col1 INT, col2 INT, col3 INT);
 
--- Recover Partitions
-MSCK TABLE rec_tbl;
+CREATE TABLE table_exists_10 (col1 INT, col2 INT, col3 INT);
 
-MSCK REPAIR TABLE rec_tbl;
+CREATE TABLE derived_table_10 AS
+SELECT
+    *
+FROM
+    origin_table_10;
 
-MSCK REPAIR TABLE rec_tbl SYNC PARTITIONS;
+CREATE TABLE table_11 (col1 INT, col2 INT, col3 INT);
 
-MSCK REPAIR TABLE rec_tbl ADD PARTITIONS;
+CREATE TABLE table_exists_11 (col1 INT, col2 INT, col3 INT);
 
-MSCK REPAIR TABLE rec_tbl DROP PARTITIONS;
+CREATE TABLE derived_table_11 AS
+SELECT
+    *
+FROM
+    origin_table_11;
 
-ALTER TABLE rec_tbl RECOVER PARTITIONS;
+SELECT col1, col2 FROM table_name_11;
 
--- Drop Partitions
-ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1);
+SELECT col3, col4 FROM table_name_11 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1, `pt2`=2);
+SELECT * FROM sales_11 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1) IGNORE PROTECTION;
+CREATE TABLE table_11 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1) IGNORE PROTECTION PURGE;
+CREATE TABLE table_exists_11 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE dr_tbl2 DROP IF EXISTS PARTITION (`pt2`=2) PURGE;
+CREATE TABLE derived_table_11 AS
+SELECT
+    *
+FROM
+    origin_table_11;
 
-ALTER TABLE dr_tbl2 DROP IF EXISTS PARTITION (`pt2`=2) IGNORE PROTECTION PURGE;
+CREATE TABLE table_12 (col1 INT, col2 INT, col3 INT);
 
--- Archive Partition
-ALTER TABLE arch_pt_tbl1 ARCHIVE PARTITION (`pt1`=1);
+CREATE TABLE table_exists_12 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE arch_pt_tbl2 UNARCHIVE PARTITION (`pt2`=2) ;
+CREATE TABLE derived_table_12 AS
+SELECT
+    *
+FROM
+    origin_table_12;
 
--- Alter Table/Partition File Format
-ALTER TABLE tbl1 SET FILEFORMAT orc;
+SELECT col1, col2 FROM table_name_12;
 
-ALTER TABLE tbl2 PARTITION (`pt1`=1) SET FILEFORMAT orc;
+SELECT col3, col4 FROM table_name_12 WHERE amount > 10 AND region = "US";
 
--- Alter Table/Partition Location
-ALTER TABLE tbl3 SET LOCATION "new location";
+SELECT * FROM sales_12 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl4 PARTITION (`pt1`=1) SET LOCATION "new location";
+CREATE TABLE table_12 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table/Partition Touch
-ALTER TABLE tbl5 TOUCH;
+CREATE TABLE table_exists_12 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl6 TOUCH PARTITION (`pt1`=1);
+CREATE TABLE derived_table_12 AS
+SELECT
+    *
+FROM
+    origin_table_12;
 
--- Alter Table/Partition Protections
-ALTER TABLE tbl7 ENABLE NO_DROP;
+CREATE TABLE table_13 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl7 DISABLE NO_DROP;
+CREATE TABLE table_exists_13 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl7 ENABLE NO_DROP CASCADE;
+CREATE TABLE derived_table_13 AS
+SELECT
+    *
+FROM
+    origin_table_13;
 
-ALTER TABLE tbl7 DISABLE NO_DROP CASCADE;
+SELECT col1, col2 FROM table_name_13;
 
-ALTER TABLE tbl8 PARTITION (`pt1`=1) DISABLE NO_DROP;
+SELECT col3, col4 FROM table_name_13 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl8 PARTITION (`pt1`=1) ENABLE NO_DROP;
+SELECT * FROM sales_13 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl8 PARTITION (`pt1`=1) DISABLE NO_DROP CASCADE;
+CREATE TABLE table_13 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl8 PARTITION (`pt1`=1) ENABLE NO_DROP CASCADE;
-  
-ALTER TABLE tbl9 DISABLE OFFLINE;
+CREATE TABLE table_exists_13 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl9 ENABLE OFFLINE;
+CREATE TABLE derived_table_13 AS
+SELECT
+    *
+FROM
+    origin_table_13;
 
-ALTER TABLE db1.tbl PARTITION (`pt1`=1) ENABLE OFFLINE;
+CREATE TABLE table_14 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE db1.tbl PARTITION (`pt1`=1) DISABLE OFFLINE;
+CREATE TABLE table_exists_14 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE foo PARTITION (ds='2008-04-08', hr=11) CHANGE COLUMN dec_column_name dec_column_name DECIMAL(38,18);
+CREATE TABLE derived_table_14 AS
+SELECT
+    *
+FROM
+    origin_table_14;
 
--- Alter Table/Partition Compact
-ALTER TABLE tbl_com COMPACT 'compaction_type';
+SELECT col1, col2 FROM table_name_14;
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type';
+SELECT col3, col4 FROM table_name_14 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT;
+SELECT * FROM sales_14 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT
-CLUSTERED INTO 1 BUCKETS;
+CREATE TABLE table_14 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT
-CLUSTERED INTO 1 BUCKETS
-ORDER BY col1;
+CREATE TABLE table_exists_14 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT
-CLUSTERED INTO 1 BUCKETS
-ORDER BY col1
-POOL 'pool1';
+CREATE TABLE derived_table_14 AS
+SELECT
+    *
+FROM
+    origin_table_14;
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT
-CLUSTERED INTO 1 BUCKETS
-ORDER BY col1
-POOL 'pool1'
-WITH OVERWRITE TBLPROPERTIES ("propKey1"="propVal");
+CREATE TABLE table_15 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table/Partition Concatenate
-ALTER TABLE tbl22 CONCATENATE;
+CREATE TABLE table_exists_15 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl23 PARTITION (pt1 = 'anyValue') CONCATENATE;
+CREATE TABLE derived_table_15 AS
+SELECT
+    *
+FROM
+    origin_table_15;
 
-ALTER TABLE tbl23 PARTITION (pt1 = 'anyValue', pt2 = 'anyValue2') CONCATENATE;
+SELECT col1, col2 FROM table_name_15;
 
--- Alter Table/Partition Update columns
-ALTER TABLE tbl24 UPDATE COLUMNS;
+SELECT col3, col4 FROM table_name_15 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl24 PARTITION (pt1 = 'partition_value') UPDATE COLUMNS;
+SELECT * FROM sales_15 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl24 PARTITION (pt1 = 'partition_value', pt2 = 'partition_value2') UPDATE COLUMNS;
+CREATE TABLE table_15 (col1 INT, col2 INT, col3 INT);
 
--- Change Column Name/Type/Position/Comment
-ALTER TABLE test_change CHANGE a a1 INT;
+CREATE TABLE table_exists_15 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change CHANGE COLUMN a a1 INT;
+CREATE TABLE derived_table_15 AS
+SELECT
+    *
+FROM
+    origin_table_15;
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE c c1 INT FIRST;
+CREATE TABLE table_16 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE c c1 INT FIRST;
+CREATE TABLE table_exists_16 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT FIRST;
+CREATE TABLE derived_table_16 AS
+SELECT
+    *
+FROM
+    origin_table_16;
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT FIRST;
+SELECT col1, col2 FROM table_name_16;
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT COMMENT 'this is comment1' FIRST;
+SELECT col3, col4 FROM table_name_16 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT COMMENT 'this is comment1' AFTER cc;
+SELECT * FROM sales_16 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT COMMENT 'this is comment1' FIRST CASCADE;
+CREATE TABLE table_16 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT COMMENT 'this is comment1' AFTER RESTRICT;
+CREATE TABLE table_exists_16 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change CHANGE a1 a1 INT COMMENT 'this is column a1' RESTRICT;
+CREATE TABLE derived_table_16 AS
+SELECT
+    *
+FROM
+    origin_table_16;
 
-ALTER TABLE test_change CHANGE a1 a2 STRING AFTER b CASCADE;
+CREATE TABLE table_17 (col1 INT, col2 INT, col3 INT);
 
--- Add/Replace Columns
-ALTER TABLE rp_col_tbl1 ADD COLUMNS (`col1` INT);
+CREATE TABLE table_exists_17 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE rp_col_tbl2 REPLACE COLUMNS (`col2` INT);
+CREATE TABLE derived_table_17 AS
+SELECT
+    *
+FROM
+    origin_table_17;
 
-ALTER TABLE rp_col_tbl1 ADD COLUMNS (`col1` INT) CASCADE;
+SELECT col1, col2 FROM table_name_17;
 
-ALTER TABLE rp_col_tbl2 REPLACE COLUMNS (`col2` INT) RESTRICT;
+SELECT col3, col4 FROM table_name_17 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE rp_col_tbl1 PARTITION (`pt1`=1) ADD COLUMNS (`col1` INT) CASCADE;
+SELECT * FROM sales_17 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE rp_col_tbl2 PARTITION (`pt1`=1) REPLACE COLUMNS (`col2` INT) RESTRICT;
+CREATE TABLE table_17 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE rp_col_tbl2 
-PARTITION (`pt1`=1)
-ADD COLUMNS (`col3` INT COMMENT 'a new col')
-CASCADE;
+CREATE TABLE table_exists_17 (col1 INT, col2 INT, col3 INT);
 
--- Partial Partition Specification 
-ALTER TABLE foo PARTITION (ds='2008-04-08', hr=11) CHANGE COLUMN dec_column_name dec_column_name DECIMAL(38,18);
+CREATE TABLE derived_table_17 AS
+SELECT
+    *
+FROM
+    origin_table_17;
 
--- Rename Table
-ALTER TABLE tbl1 RENAME TO tbl2;
+CREATE TABLE table_18 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Properties
-ALTER TABLE mydb.tb22 SET TBLPROPERTIES ('creator'='hayden');
+CREATE TABLE table_exists_18 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Comment
-ALTER TABLE mydb.tb22 SET TBLPROPERTIES ('comment' = 'This is a new comment!');
+CREATE TABLE derived_table_18 AS
+SELECT
+    *
+FROM
+    origin_table_18;
 
--- Add SerDe Properties
-ALTER TABLE employee_tb SET SERDE 'com.dt.test'; 
+SELECT col1, col2 FROM table_name_18;
 
-ALTER TABLE employee_tb PARTITION (
-    `pt1`='1'
-) SET SERDE 'com.dt.test'; 
+SELECT col3, col4 FROM table_name_18 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE employee_tb 
-SET SERDE 'com.dt.test'
-WITH SERDEPROPERTIES ('field.delim' = ',');
+SELECT * FROM sales_18 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE employee_tb PARTITION (
-    `pt1`='1'
-)
-SET SERDE 'com.dt.test'
-WITH SERDEPROPERTIES ('field.delim' = ',');
+CREATE TABLE table_18 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE sale_rbl 
-PARTITION (
-    `pt1`='1'
-)
-SET SERDEPROPERTIES ('field.delim' = ',');
+CREATE TABLE table_exists_18 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE sale_rbl SET SERDEPROPERTIES ('field.delim' = ',');
+CREATE TABLE derived_table_18 AS
+SELECT
+    *
+FROM
+    origin_table_18;
 
--- Remove SerDe Properties
-ALTER TABLE sale_rbl UNSET SERDEPROPERTIES ('field.delim');
+CREATE TABLE table_19 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE sale_rbl PARTITION (
-    `pt1`='1'
-) UNSET SERDEPROPERTIES ('field.delim');
+CREATE TABLE table_exists_19 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Storage Properties
-ALTER TABLE students 
-CLUSTERED BY (id, `name`, age)
-SORTED BY (age)
-INTO 2 BUCKETS;
+CREATE TABLE derived_table_19 AS
+SELECT
+    *
+FROM
+    origin_table_19;
 
-ALTER TABLE students 
-CLUSTERED BY (id, `name`, age) 
-INTO 2 BUCKETS;
+SELECT col1, col2 FROM table_name_19;
 
--- Alter Table Skewed or Stored as Directories
-ALTER TABLE dt_shop 
-SKEWED BY (id, cost)
-ON (('id',1), ('cost', 1000));
+SELECT col3, col4 FROM table_name_19 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE dt_shop 
-SKEWED BY (id, cost)
-ON (('id',1), ('cost', 1000)) 
-STORED AS DIRECTORIES;
+SELECT * FROM sales_19 WHERE amount > 10 AND region = "US";
 
--- Alter Table Not Skewed
-ALTER TABLE dt_shop NOT SKEWED;
+CREATE TABLE table_19 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Not Stored as Directories
-ALTER TABLE dt_shop NOT STORED AS DIRECTORIES;
+CREATE TABLE table_exists_19 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table Set Skewed Location
-ALTER TABLE dt_shop SET SKEWED LOCATION ('id'='location1', "cost"="loaction2"  );
+CREATE TABLE derived_table_19 AS
+SELECT
+    *
+FROM
+    origin_table_19;
 
--- Alter Table Constraints
-ALTER TABLE tbl1 
-ADD CONSTRAINT const1 
-PRIMARY KEY (id) 
-DISABLE NOVALIDATE;
+CREATE TABLE table_20 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl2 
-ADD CONSTRAINT const2 
-FOREIGN KEY (id, `name`) 
-REFERENCES refer_tb(rid, rname) 
-DISABLE NOVALIDATE RELY;
+CREATE TABLE table_exists_20 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl3
-ADD CONSTRAINT const3 
-UNIQUE (`name`, `age`) 
-DISABLE NOVALIDATE;
+CREATE TABLE derived_table_20 AS
+SELECT
+    *
+FROM
+    origin_table_20;
 
-ALTER TABLE tbl4 
-CHANGE COLUMN `col1` `col2` STRING CONSTRAINT const4 
-NOT NULL ENABLE;
+SELECT col1, col2 FROM table_name_20;
 
-ALTER TABLE tbl5 
-CHANGE COLUMN `col3` `col4` INT CONSTRAINT const5 
-DEFAULT 998 ENABLE;
+SELECT col3, col4 FROM table_name_20 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl6 
-CHANGE COLUMN col5 col6  MAP<STRING, STRING> CONSTRAINT const6 
-CHECK (1) ENABLE;
- 
-ALTER TABLE tbl7 DROP CONSTRAINT remove_const;
+SELECT * FROM sales_20 WHERE amount > 10 AND region = "US";
 
--- Alter Partition
+CREATE TABLE table_20 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE add_par_tbl 
-ADD 
-PARTITION (`pt1` = 1);
+CREATE TABLE table_exists_20 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE add_par_tbl 
-ADD 
-PARTITION (`pt1` = 1) LOCATION '/pat/loc';
+CREATE TABLE derived_table_20 AS
+SELECT
+    *
+FROM
+    origin_table_20;
 
-ALTER TABLE add_par_tbl 
-ADD 
-PARTITION (`pt1` = 1) LOCATION '/pat/loc' 
-PARTITION (`pt2` = 2, `pt3`=3) LOCATION '/pat/loc' ;
+CREATE TABLE table_21 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE add_par_tbl 
-ADD IF NOT EXISTS 
-PARTITION (`pt1` = 1);
+CREATE TABLE table_exists_21 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE add_par_tbl 
-ADD IF NOT EXISTS 
-PARTITION (`pt1` = 1) LOCATION '/pat/loc';
+CREATE TABLE derived_table_21 AS
+SELECT
+    *
+FROM
+    origin_table_21;
 
-ALTER TABLE add_par_tbl 
-ADD IF NOT EXISTS 
-PARTITION (`pt1` = 1) LOCATION '/pat/loc' 
-PARTITION (`pt2` = 2, `pt3`=3) LOCATION '/pat/loc';
+SELECT col1, col2 FROM table_name_21;
 
--- Rename Partition
-ALTER TABLE ren_par_tbl
-PARTITION (`pt1`=1) 
-RENAME TO PARTITION (`pt2`=2) ;
+SELECT col3, col4 FROM table_name_21 WHERE amount > 10 AND region = "US";
 
--- Exchange Partition
-ALTER TABLE ex_part_tbl2 
-EXCHANGE PARTITION (`pt1`=1)
-WITH TABLE ex_part_tbl1;
+SELECT * FROM sales_21 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE ex_part_tbl2 
-EXCHANGE PARTITION (`pt1`=1, `pt2`=2)
-WITH TABLE ex_part_tbl1;
+CREATE TABLE table_21 (col1 INT, col2 INT, col3 INT);
 
--- Recover Partitions
-MSCK TABLE rec_tbl;
+CREATE TABLE table_exists_21 (col1 INT, col2 INT, col3 INT);
 
-MSCK REPAIR TABLE rec_tbl;
+CREATE TABLE derived_table_21 AS
+SELECT
+    *
+FROM
+    origin_table_21;
 
-MSCK REPAIR TABLE rec_tbl SYNC PARTITIONS;
+CREATE TABLE table_22 (col1 INT, col2 INT, col3 INT);
 
-MSCK REPAIR TABLE rec_tbl ADD PARTITIONS;
+CREATE TABLE table_exists_22 (col1 INT, col2 INT, col3 INT);
 
-MSCK REPAIR TABLE rec_tbl DROP PARTITIONS;
+CREATE TABLE derived_table_22 AS
+SELECT
+    *
+FROM
+    origin_table_22;
 
-ALTER TABLE rec_tbl RECOVER PARTITIONS;
+SELECT col1, col2 FROM table_name_22;
 
--- Drop Partitions
-ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1);
+SELECT col3, col4 FROM table_name_22 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1, `pt2`=2);
+SELECT * FROM sales_22 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1) IGNORE PROTECTION;
+CREATE TABLE table_22 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE dr_tbl1 DROP PARTITION (`pt1`=1) IGNORE PROTECTION PURGE;
+CREATE TABLE table_exists_22 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE dr_tbl2 DROP IF EXISTS PARTITION (`pt2`=2) PURGE;
+CREATE TABLE derived_table_22 AS
+SELECT
+    *
+FROM
+    origin_table_22;
 
-ALTER TABLE dr_tbl2 DROP IF EXISTS PARTITION (`pt2`=2) IGNORE PROTECTION PURGE;
+CREATE TABLE table_23 (col1 INT, col2 INT, col3 INT);
 
--- Archive Partition
-ALTER TABLE arch_pt_tbl1 ARCHIVE PARTITION (`pt1`=1);
+CREATE TABLE table_exists_23 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE arch_pt_tbl2 UNARCHIVE PARTITION (`pt2`=2) ;
+CREATE TABLE derived_table_23 AS
+SELECT
+    *
+FROM
+    origin_table_23;
 
--- Alter Table/Partition File Format
-ALTER TABLE tbl1 SET FILEFORMAT orc;
+SELECT col1, col2 FROM table_name_23;
 
-ALTER TABLE tbl2 PARTITION (`pt1`=1) SET FILEFORMAT orc;
+SELECT col3, col4 FROM table_name_23 WHERE amount > 10 AND region = "US";
 
--- Alter Table/Partition Location
-ALTER TABLE tbl3 SET LOCATION "new location";
+SELECT * FROM sales_23 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl4 PARTITION (`pt1`=1) SET LOCATION "new location";
+CREATE TABLE table_23 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table/Partition Touch
-ALTER TABLE tbl5 TOUCH;
+CREATE TABLE table_exists_23 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl6 TOUCH PARTITION (`pt1`=1);
+CREATE TABLE derived_table_23 AS
+SELECT
+    *
+FROM
+    origin_table_23;
 
--- Alter Table/Partition Protections
-ALTER TABLE tbl7 ENABLE NO_DROP;
+CREATE TABLE table_24 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl7 DISABLE NO_DROP;
+CREATE TABLE table_exists_24 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl7 ENABLE NO_DROP CASCADE;
+CREATE TABLE derived_table_24 AS
+SELECT
+    *
+FROM
+    origin_table_24;
 
-ALTER TABLE tbl7 DISABLE NO_DROP CASCADE;
+SELECT col1, col2 FROM table_name_24;
 
-ALTER TABLE tbl8 PARTITION (`pt1`=1) DISABLE NO_DROP;
+SELECT col3, col4 FROM table_name_24 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl8 PARTITION (`pt1`=1) ENABLE NO_DROP;
+SELECT * FROM sales_24 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl8 PARTITION (`pt1`=1) DISABLE NO_DROP CASCADE;
+CREATE TABLE table_24 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl8 PARTITION (`pt1`=1) ENABLE NO_DROP CASCADE;
-  
-ALTER TABLE tbl9 DISABLE OFFLINE;
+CREATE TABLE table_exists_24 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl9 ENABLE OFFLINE;
+CREATE TABLE derived_table_24 AS
+SELECT
+    *
+FROM
+    origin_table_24;
 
-ALTER TABLE db1.tbl PARTITION (`pt1`=1) ENABLE OFFLINE;
+CREATE TABLE table_25 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE db1.tbl PARTITION (`pt1`=1) DISABLE OFFLINE;
+CREATE TABLE table_exists_25 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE foo PARTITION (ds='2008-04-08', hr=11) CHANGE COLUMN dec_column_name dec_column_name DECIMAL(38,18);
+CREATE TABLE derived_table_25 AS
+SELECT
+    *
+FROM
+    origin_table_25;
 
--- Alter Table/Partition Compact
-ALTER TABLE tbl_com COMPACT 'compaction_type';
+SELECT col1, col2 FROM table_name_25;
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type';
+SELECT col3, col4 FROM table_name_25 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT;
+SELECT * FROM sales_25 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT
-CLUSTERED INTO 1 BUCKETS;
+CREATE TABLE table_25 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT
-CLUSTERED INTO 1 BUCKETS
-ORDER BY col1;
+CREATE TABLE table_exists_25 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT
-CLUSTERED INTO 1 BUCKETS
-ORDER BY col1
-POOL 'pool1';
+CREATE TABLE derived_table_25 AS
+SELECT
+    *
+FROM
+    origin_table_25;
 
-ALTER TABLE tbl_com2 PARTITION (pt1 = 'partition_value')
-COMPACT 'compaction_type' AND WAIT
-CLUSTERED INTO 1 BUCKETS
-ORDER BY col1
-POOL 'pool1'
-WITH OVERWRITE TBLPROPERTIES ("propKey1"="propVal");
+CREATE TABLE table_26 (col1 INT, col2 INT, col3 INT);
 
--- Alter Table/Partition Concatenate
-ALTER TABLE tbl22 CONCATENATE;
+CREATE TABLE table_exists_26 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE tbl23 PARTITION (pt1 = 'anyValue') CONCATENATE;
+CREATE TABLE derived_table_26 AS
+SELECT
+    *
+FROM
+    origin_table_26;
 
-ALTER TABLE tbl23 PARTITION (pt1 = 'anyValue', pt2 = 'anyValue2') CONCATENATE;
+SELECT col1, col2 FROM table_name_26;
 
--- Alter Table/Partition Update columns
-ALTER TABLE tbl24 UPDATE COLUMNS;
+SELECT col3, col4 FROM table_name_26 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl24 PARTITION (pt1 = 'partition_value') UPDATE COLUMNS;
+SELECT * FROM sales_26 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE tbl24 PARTITION (pt1 = 'partition_value', pt2 = 'partition_value2') UPDATE COLUMNS;
+CREATE TABLE table_26 (col1 INT, col2 INT, col3 INT);
 
--- Change Column Name/Type/Position/Comment
-ALTER TABLE test_change CHANGE a a1 INT;
+CREATE TABLE table_exists_26 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change CHANGE COLUMN a a1 INT;
+CREATE TABLE derived_table_26 AS
+SELECT
+    *
+FROM
+    origin_table_26;
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE c c1 INT FIRST;
+CREATE TABLE table_27 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE c c1 INT FIRST;
+CREATE TABLE table_exists_27 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT FIRST;
+CREATE TABLE derived_table_27 AS
+SELECT
+    *
+FROM
+    origin_table_27;
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT FIRST;
+SELECT col1, col2 FROM table_name_27;
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT COMMENT 'this is comment1' FIRST;
+SELECT col3, col4 FROM table_name_27 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT COMMENT 'this is comment1' AFTER cc;
+SELECT * FROM sales_27 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT COMMENT 'this is comment1' FIRST CASCADE;
+CREATE TABLE table_27 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change PARTITION (pt1 = 'partition_value')  CHANGE COLUMN c c1 INT COMMENT 'this is comment1' AFTER RESTRICT;
+CREATE TABLE table_exists_27 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE test_change CHANGE a1 a1 INT COMMENT 'this is column a1' RESTRICT;
+CREATE TABLE derived_table_27 AS
+SELECT
+    *
+FROM
+    origin_table_27;
 
-ALTER TABLE test_change CHANGE a1 a2 STRING AFTER b CASCADE;
+CREATE TABLE table_28 (col1 INT, col2 INT, col3 INT);
 
--- Add/Replace Columns
-ALTER TABLE rp_col_tbl1 ADD COLUMNS (`col1` INT);
+CREATE TABLE table_exists_28 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE rp_col_tbl2 REPLACE COLUMNS (`col2` INT);
+CREATE TABLE derived_table_28 AS
+SELECT
+    *
+FROM
+    origin_table_28;
 
-ALTER TABLE rp_col_tbl1 ADD COLUMNS (`col1` INT) CASCADE;
+SELECT col1, col2 FROM table_name_28;
 
-ALTER TABLE rp_col_tbl2 REPLACE COLUMNS (`col2` INT) RESTRICT;
+SELECT col3, col4 FROM table_name_28 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE rp_col_tbl1 PARTITION (`pt1`=1) ADD COLUMNS (`col1` INT) CASCADE;
+SELECT * FROM sales_28 WHERE amount > 10 AND region = "US";
 
-ALTER TABLE rp_col_tbl2 PARTITION (`pt1`=1) REPLACE COLUMNS (`col2` INT) RESTRICT;
+CREATE TABLE table_28 (col1 INT, col2 INT, col3 INT);
 
-ALTER TABLE rp_col_tbl2 
-PARTITION (`pt1`=1)
-ADD COLUMNS (`col3` INT COMMENT 'a new col')
-CASCADE;
+CREATE TABLE table_exists_28 (col1 INT, col2 INT, col3 INT);
 
--- Partial Partition Specification 
-ALTER TABLE foo PARTITION (ds='2008-04-08', hr=11) CHANGE COLUMN dec_column_name dec_column_name DECIMAL(38,18);
+CREATE TABLE derived_table_28 AS
+SELECT
+    *
+FROM
+    origin_table_28;
+
+CREATE TABLE table_29 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_29 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_29 AS
+SELECT
+    *
+FROM
+    origin_table_29;
+
+SELECT col1, col2 FROM table_name_29;
+
+SELECT col3, col4 FROM table_name_29 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_29 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_29 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_29 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_29 AS
+SELECT
+    *
+FROM
+    origin_table_29;
+
+CREATE TABLE table_30 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_30 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_30 AS
+SELECT
+    *
+FROM
+    origin_table_30;
+
+SELECT col1, col2 FROM table_name_30;
+
+SELECT col3, col4 FROM table_name_30 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_30 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_30 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_30 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_30 AS
+SELECT
+    *
+FROM
+    origin_table_30;
+
+CREATE TABLE table_31 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_31 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_31 AS
+SELECT
+    *
+FROM
+    origin_table_31;
+
+SELECT col1, col2 FROM table_name_31;
+
+SELECT col3, col4 FROM table_name_31 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_31 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_31 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_31 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_31 AS
+SELECT
+    *
+FROM
+    origin_table_31;
+
+CREATE TABLE table_32 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_32 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_32 AS
+SELECT
+    *
+FROM
+    origin_table_32;
+
+SELECT col1, col2 FROM table_name_32;
+
+SELECT col3, col4 FROM table_name_32 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_32 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_32 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_32 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_32 AS
+SELECT
+    *
+FROM
+    origin_table_32;
+
+CREATE TABLE table_33 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_33 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_33 AS
+SELECT
+    *
+FROM
+    origin_table_33;
+
+SELECT col1, col2 FROM table_name_33;
+
+SELECT col3, col4 FROM table_name_33 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_33 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_33 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_33 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_33 AS
+SELECT
+    *
+FROM
+    origin_table_33;
+
+CREATE TABLE table_34 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_34 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_34 AS
+SELECT
+    *
+FROM
+    origin_table_34;
+
+SELECT col1, col2 FROM table_name_34;
+
+SELECT col3, col4 FROM table_name_34 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_34 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_34 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_34 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_34 AS
+SELECT
+    *
+FROM
+    origin_table_34;
+
+CREATE TABLE table_35 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_35 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_35 AS
+SELECT
+    *
+FROM
+    origin_table_35;
+
+SELECT col1, col2 FROM table_name_35;
+
+SELECT col3, col4 FROM table_name_35 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_35 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_35 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_35 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_35 AS
+SELECT
+    *
+FROM
+    origin_table_35;
+
+CREATE TABLE table_36 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_36 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_36 AS
+SELECT
+    *
+FROM
+    origin_table_36;
+
+SELECT col1, col2 FROM table_name_36;
+
+SELECT col3, col4 FROM table_name_36 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_36 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_36 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_36 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_36 AS
+SELECT
+    *
+FROM
+    origin_table_36;
+
+CREATE TABLE table_37 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_37 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_37 AS
+SELECT
+    *
+FROM
+    origin_table_37;
+
+SELECT col1, col2 FROM table_name_37;
+
+SELECT col3, col4 FROM table_name_37 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_37 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_37 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_37 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_37 AS
+SELECT
+    *
+FROM
+    origin_table_37;
+
+CREATE TABLE table_38 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_38 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_38 AS
+SELECT
+    *
+FROM
+    origin_table_38;
+
+SELECT col1, col2 FROM table_name_38;
+
+SELECT col3, col4 FROM table_name_38 WHERE amount > 10 AND region = "US";
+
+SELECT * FROM sales_38 WHERE amount > 10 AND region = "US";
+
+CREATE TABLE table_38 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_38 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_39 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE table_exists_39 (col1 INT, col2 INT, col3 INT);
+
+CREATE TABLE derived_table_39 AS
+SELECT
+    *
+FROM
+    origin_table_39;

@@ -92,8 +92,10 @@ const printSummaryReport = () => {
                 langsCostTime[lang] = costTime ?? '-';
             });
 
+            if (rows.some((row) => row.name === name && row.testType === testType)) return;
+
             rows.push({
-                name: name,
+                name,
                 testType,
                 ...langsCostTime,
             });

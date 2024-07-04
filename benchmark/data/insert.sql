@@ -1,4 +1,4 @@
-INSERT INTO my_table (id, value, name, age, bir, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11) VALUES
+INSERT INTO my_table VALUES
 ('id1', 'value1', 'name1', 'age1', 'bir1', 'a11', 'a21', 'a31', 'a41', 'a51', 'a61', 'a71', 'a81', 'a91', 'a101', 'a111'),
 ('id2', 'value2', 'name2', 'age2', 'bir2', 'a12', 'a22', 'a32', 'a42', 'a52', 'a62', 'a72', 'a82', 'a92', 'a102', 'a112'),
 ('id3', 'value3', 'name3', 'age3', 'bir3', 'a13', 'a23', 'a33', 'a43', 'a53', 'a63', 'a73', 'a83', 'a93', 'a103', 'a113'),
