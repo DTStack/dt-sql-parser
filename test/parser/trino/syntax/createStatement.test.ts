@@ -8,6 +8,8 @@ const features = {
     role: readSQL(__dirname, 'create_role.sql'),
     tableAsSelect: readSQL(__dirname, 'create_table_as_select.sql'),
     materializedView: readSQL(__dirname, 'create_materialized_view.sql'),
+    catalog: readSQL(__dirname, 'create_catalog.sql'),
+    function: readSQL(__dirname, 'create_function.sql'),
 };
 
 describe('TrinoSQL Create Statements Syntax Tests', () => {
@@ -39,6 +41,16 @@ describe('TrinoSQL Create Statements Syntax Tests', () => {
         });
     });
     features.materializedView.forEach((sql) => {
+        it(sql, () => {
+            expect(trino.validate(sql).length).toBe(0);
+        });
+    });
+    features.catalog.forEach((sql) => {
+        it(sql, () => {
+            expect(trino.validate(sql).length).toBe(0);
+        });
+    });
+    features.function.forEach((sql) => {
         it(sql, () => {
             expect(trino.validate(sql).length).toBe(0);
         });

@@ -8,6 +8,8 @@ const features = {
     role: readSQL(__dirname, 'drop_role.sql'),
     column: readSQL(__dirname, 'drop_column.sql'),
     materializedView: readSQL(__dirname, 'drop_materialized_view.sql'),
+    catalog: readSQL(__dirname, 'drop_catalog.sql'),
+    function: readSQL(__dirname, 'drop_function.sql'),
 };
 
 describe('TrinoSQL Drop Statements Syntax Tests', () => {
@@ -39,6 +41,16 @@ describe('TrinoSQL Drop Statements Syntax Tests', () => {
         });
     });
     features.materializedView.forEach((sql) => {
+        it(sql, () => {
+            expect(trino.validate(sql).length).toBe(0);
+        });
+    });
+    features.catalog.forEach((sql) => {
+        it(sql, () => {
+            expect(trino.validate(sql).length).toBe(0);
+        });
+    });
+    features.function.forEach((sql) => {
         it(sql, () => {
             expect(trino.validate(sql).length).toBe(0);
         });

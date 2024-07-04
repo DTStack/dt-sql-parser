@@ -349,4 +349,74 @@ describe('Trino SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
     });
+
+    test('Create Catalog', () => {
+        const pos: CaretPosition = {
+            lineNumber: 39,
+            column: 16,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.CATALOG_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+    test('Drop Catalog', () => {
+        const pos: CaretPosition = {
+            lineNumber: 41,
+            column: 17,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.CATALOG
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['cat']);
+    });
+    test('Create Function', () => {
+        const pos: CaretPosition = {
+            lineNumber: 43,
+            column: 33,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION_CREATE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([
+            'example',
+            '.',
+            'default',
+            '.',
+        ]);
+    });
+    test('Drop Function', () => {
+        const pos: CaretPosition = {
+            lineNumber: 45,
+            column: 15,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
 });

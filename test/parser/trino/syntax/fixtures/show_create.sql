@@ -10,7 +10,6 @@ SHOW CREATE MATERIALIZED VIEW cancelled_orders
 AS
     SELECT orderkey, totalprice
     FROM orders
-    WHERE orderstatus = 3;
+    WHERE orderstatus = 3;    
 
-    
-
+SHOW CREATE FUNCTION example.default.meaning_of_life;
