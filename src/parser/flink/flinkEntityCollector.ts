@@ -45,7 +45,17 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitTablePath(ctx: TablePathContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE);
+        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            needCollectAttr
+                ? {
+                      attrNameList: [AttrName.alias],
+                      endContext: QueryStatementContext.name,
+                  }
+                : undefined
+        );
     }
 
     exitTablePathCreate(ctx: TablePathCreateContext) {

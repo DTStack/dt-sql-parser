@@ -208,6 +208,14 @@ describe('Flink entity collector tests', () => {
 
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity.text).toBe('Orders');
+        expect(tableEntity[AttrName.alias]).toEqual({
+            text: 'o1',
+            startIndex: 607,
+            endIndex: 608,
+            line: 23,
+            startColumn: 45,
+            endColumn: 47,
+        });
         expect(tableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
         if (isCommonEntityContext(tableEntity)) {
             expect(tableEntity.columns).toBeUndefined();
@@ -360,8 +368,8 @@ describe('Flink entity collector tests', () => {
         expect(allEntities[0].text).toBe('view1');
         expect(allEntities[0][AttrName.comment]).toEqual({
             text: "'this is a view'",
-            startIndex: 1199,
-            endIndex: 1214,
+            startIndex: 1205,
+            endIndex: 1220,
             line: 42,
             startColumn: 39,
             endColumn: 55,
@@ -389,27 +397,27 @@ describe('Flink entity collector tests', () => {
         expect(dbEntity.text).toBe('db1');
         expect(dbEntity[AttrName.comment]).toEqual({
             text: "'this is a created database'",
-            startIndex: 1290,
-            endIndex: 1317,
+            startIndex: 1296,
+            endIndex: 1323,
             line: 44,
             startColumn: 43,
             endColumn: 71,
         });
         expect(dbEntity.position).toEqual({
             endColumn: 34,
-            endIndex: 1280,
+            endIndex: 1286,
             line: 44,
             startColumn: 31,
-            startIndex: 1278,
+            startIndex: 1284,
         });
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
         expect(dbEntity.belongStmt.position).toEqual({
             endColumn: 119,
-            endIndex: 1365,
+            endIndex: 1371,
             endLine: 44,
             startColumn: 1,
-            startIndex: 1248,
+            startIndex: 1254,
             startLine: 44,
         });
         if (isCommonEntityContext(dbEntity)) {
@@ -434,10 +442,10 @@ describe('Flink entity collector tests', () => {
         expect(functionEntity.text).toBe('tempFunction');
         expect(functionEntity.position).toEqual({
             endColumn: 43,
-            endIndex: 1410,
+            endIndex: 1416,
             line: 46,
             startColumn: 31,
-            startIndex: 1399,
+            startIndex: 1405,
         });
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
@@ -445,10 +453,10 @@ describe('Flink entity collector tests', () => {
         );
         expect(functionEntity.belongStmt.position).toEqual({
             endColumn: 58,
-            endIndex: 1425,
+            endIndex: 1431,
             endLine: 46,
             startColumn: 1,
-            startIndex: 1369,
+            startIndex: 1375,
             startLine: 46,
         });
         if (isFuncEntityContext(functionEntity)) {

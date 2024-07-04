@@ -277,6 +277,10 @@ export abstract class EntityCollector {
 
     exitEveryRule() {}
 
+    getRootStmt() {
+        return this._rootStmt;
+    }
+
     getEntities() {
         return Array.from(this._entitiesSet) as EntityContext[];
     }
