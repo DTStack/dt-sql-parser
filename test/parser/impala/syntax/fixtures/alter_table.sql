@@ -22,7 +22,8 @@ ALTER TABLE my_table DROP COLUMN column_name;
 ALTER TABLE my_table DROP column_name;
 
 -- ALTER TABLE name CHANGE column_name col_spec
-ALTER TABLE my_table CHANGE COLUMN age INT COMMENT 'Updated Age';
+ALTER TABLE my_table CHANGE age age INT COMMENT 'Updated Age';
+ALTER TABLE impala_test CHANGE outberth outberth string COMMENT '列注释';
 
 -- ALTER TABLE name SET OWNER USER user_name
 ALTER TABLE my_table SET OWNER USER user_name;

@@ -83,7 +83,7 @@ describe('Impala SQL Syntax Suggestion', () => {
     test('Alter table column', () => {
         const pos: CaretPosition = {
             lineNumber: 7,
-            column: 39,
+            column: 32,
         };
         const syntaxes = impala.getSuggestionAtCaretPosition(
             commentOtherLine(syntaxSql, pos.lineNumber),
