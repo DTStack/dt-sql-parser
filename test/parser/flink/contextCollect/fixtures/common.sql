@@ -20,7 +20,7 @@ CREATE TABLE Orders_with_watermark (
     INCLUDING GENERATED
 );
 
-SELECT order_id, price + tax FROM Orders AS o1;
+SELECT order_id, price + tax AS total FROM Order1 AS o1 JOIN Order2 AS t2 ON t1.id = t2.user_id;
 
 SELECT * FROM Orders LEFT JOIN Product ON Orders.product_id = Product.id;
 

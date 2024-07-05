@@ -128,7 +128,7 @@ export function isColumnEntityContext(entity: EntityContext): entity is ColumnEn
  * */
 interface AttrInfo {
     attrNameList: AttrName[];
-    endContext: string;
+    endContextList: string[];
 }
 
 export function toEntityContext(
@@ -170,7 +170,7 @@ export function toEntityContext(
     if (attrInfo) {
         for (let k = 0; k < attrInfo?.attrNameList?.length; k++) {
             const attributeName: AttrName = attrInfo?.attrNameList[k];
-            const attrToken = findAttribute(ctx, attributeName, attrInfo?.endContext);
+            const attrToken = findAttribute(ctx, attributeName, attrInfo?.endContextList);
             if (attrToken) {
                 const attrVal: WordRange | TextSlice | null = isToken(attrToken)
                     ? tokenToWord(attrToken, input)
@@ -204,7 +204,7 @@ export function toEntityContext(
 export function findAttribute(
     ctx: ParserRuleContextWithAttr | null,
     keyName: AttrName,
-    endContextName: string
+    endContextNameList: string[]
 ): Token | null {
     const parent: ParserRuleContextWithAttr | null = ctx?.parent || null;
     let attrVal: Token | null = null;
@@ -212,8 +212,8 @@ export function findAttribute(
         attrVal = parent?.[keyName] || null;
         return attrVal;
     } else {
-        if (parent?.constructor?.name !== endContextName) {
-            attrVal = findAttribute(parent, keyName, endContextName);
+        if (parent?.constructor?.name && !endContextNameList.includes(parent?.constructor?.name)) {
+            attrVal = findAttribute(parent, keyName, endContextNameList);
         }
         if (!attrVal) {
             if (parent?.children) {

@@ -202,24 +202,40 @@ describe('Flink entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(1);
+        expect(allEntities.length).toBe(2);
 
         const tableEntity = allEntities[0];
-
+        const tableEntity1 = allEntities[1];
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(tableEntity.text).toBe('Orders');
+        expect(tableEntity.text).toBe('Order1');
         expect(tableEntity[AttrName.alias]).toEqual({
             text: 'o1',
-            startIndex: 607,
-            endIndex: 608,
+            startIndex: 616,
+            endIndex: 617,
             line: 23,
-            startColumn: 45,
-            endColumn: 47,
+            startColumn: 54,
+            endColumn: 56,
         });
-        expect(tableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-        if (isCommonEntityContext(tableEntity)) {
-            expect(tableEntity.columns).toBeUndefined();
-            expect(tableEntity.relatedEntities).toBeNull();
+
+        expect(tableEntity1.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
+            expect(tableEntity1.relatedEntities).toBeNull();
+        }
+        expect(tableEntity1.entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntity1.text).toBe('Order2');
+        expect(tableEntity1[AttrName.alias]).toEqual({
+            text: 't2',
+            startIndex: 634,
+            endIndex: 635,
+            line: 23,
+            startColumn: 72,
+            endColumn: 74,
+        });
+        expect(tableEntity1.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
+            expect(tableEntity1.relatedEntities).toBeNull();
         }
     });
 
@@ -368,8 +384,8 @@ describe('Flink entity collector tests', () => {
         expect(allEntities[0].text).toBe('view1');
         expect(allEntities[0][AttrName.comment]).toEqual({
             text: "'this is a view'",
-            startIndex: 1205,
-            endIndex: 1220,
+            startIndex: 1254,
+            endIndex: 1269,
             line: 42,
             startColumn: 39,
             endColumn: 55,
@@ -397,27 +413,27 @@ describe('Flink entity collector tests', () => {
         expect(dbEntity.text).toBe('db1');
         expect(dbEntity[AttrName.comment]).toEqual({
             text: "'this is a created database'",
-            startIndex: 1296,
-            endIndex: 1323,
+            startIndex: 1345,
+            endIndex: 1372,
             line: 44,
             startColumn: 43,
             endColumn: 71,
         });
         expect(dbEntity.position).toEqual({
             endColumn: 34,
-            endIndex: 1286,
+            endIndex: 1335,
             line: 44,
             startColumn: 31,
-            startIndex: 1284,
+            startIndex: 1333,
         });
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
         expect(dbEntity.belongStmt.position).toEqual({
             endColumn: 119,
-            endIndex: 1371,
+            endIndex: 1420,
             endLine: 44,
             startColumn: 1,
-            startIndex: 1254,
+            startIndex: 1303,
             startLine: 44,
         });
         if (isCommonEntityContext(dbEntity)) {
@@ -442,10 +458,10 @@ describe('Flink entity collector tests', () => {
         expect(functionEntity.text).toBe('tempFunction');
         expect(functionEntity.position).toEqual({
             endColumn: 43,
-            endIndex: 1416,
+            endIndex: 1465,
             line: 46,
             startColumn: 31,
-            startIndex: 1405,
+            startIndex: 1454,
         });
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
@@ -453,10 +469,10 @@ describe('Flink entity collector tests', () => {
         );
         expect(functionEntity.belongStmt.position).toEqual({
             endColumn: 58,
-            endIndex: 1431,
+            endIndex: 1480,
             endLine: 46,
             startColumn: 1,
-            startIndex: 1375,
+            startIndex: 1424,
             startLine: 46,
         });
         if (isFuncEntityContext(functionEntity)) {

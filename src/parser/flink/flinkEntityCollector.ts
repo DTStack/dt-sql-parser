@@ -16,6 +16,7 @@ import {
     SqlStatementContext,
     TablePathContext,
     TablePathCreateContext,
+    TableReferenceContext,
     ViewPathContext,
     ViewPathCreateContext,
 } from '../../lib/flink/FlinkSqlParser';
@@ -36,7 +37,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     exitDatabasePathCreate(ctx: DatabasePathCreateContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
             attrNameList: [AttrName.comment],
-            endContext: CreateDatabaseContext.name,
+            endContextList: [CreateDatabaseContext.name],
         });
     }
 
@@ -52,7 +53,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
             needCollectAttr
                 ? {
                       attrNameList: [AttrName.alias],
-                      endContext: QueryStatementContext.name,
+                      endContextList: [TableReferenceContext.name],
                   }
                 : undefined
         );
@@ -61,7 +62,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     exitTablePathCreate(ctx: TablePathCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
             attrNameList: [AttrName.comment],
-            endContext: CreateTableContext.name,
+            endContextList: [CreateTableContext.name],
         });
     }
 
@@ -72,14 +73,14 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     exitViewPathCreate(ctx: ViewPathCreateContext) {
         this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
             attrNameList: [AttrName.comment],
-            endContext: CreateViewContext.name,
+            endContextList: [CreateViewContext.name],
         });
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
             attrNameList: [AttrName.comment, AttrName.colType],
-            endContext: PhysicalColumnDefinitionContext.name,
+            endContextList: [PhysicalColumnDefinitionContext.name],
         });
     }
 
