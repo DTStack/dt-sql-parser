@@ -169,7 +169,7 @@ alterPartitionCache
     ;
 
 changeColumnDefine
-    : KW_ALTER KW_TABLE tableNamePath KW_CHANGE KW_COLUMN columnSpecWithKudu
+    : KW_ALTER KW_TABLE tableNamePath KW_CHANGE columnNamePath columnSpecWithKudu
     ;
 
 alterDropSingleColumn
@@ -635,7 +635,7 @@ kuduColumnDefinition
     ;
 
 columnSpecWithKudu
-    : columnSpec? (kuduAttributes kuduAttributes*?)?
+    : columnSpec (kuduAttributes kuduAttributes*?)?
     ;
 
 createColumnSpecWithKudu

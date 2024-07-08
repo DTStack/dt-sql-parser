@@ -4,7 +4,7 @@ SELECT name, calculate_age(birthdate) AS age FROM students;
 
 ALTER DATABASE cat;
 
-ALTER TABLE my_table CHANGE COLUMN age;
+ALTER TABLE my_table CHANGE age age int;
 
 ALTER VIEW my_view;
 
