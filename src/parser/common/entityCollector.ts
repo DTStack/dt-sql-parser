@@ -104,7 +104,7 @@ export interface ColumnEntityContext extends BaseEntityContext {
 export interface FuncEntityContext extends BaseEntityContext {
     relatedEntities: CommonEntityContext[] | null;
     arguments: Argument[] | null; // function arguments
-    returns?: Argument[]; // function return value
+    returns?: Argument; // function return value
 }
 
 export type EntityContext = CommonEntityContext | FuncEntityContext | ColumnEntityContext;
