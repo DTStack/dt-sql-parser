@@ -1,5 +1,6 @@
 import { HiveSqlParserListener } from '../../lib';
 import {
+    ColumnNameCommentContext,
     ColumnNameCreateContext,
     ColumnNameTypeConstraintContext,
     CreateDatabaseStatementContext,
@@ -7,7 +8,6 @@ import {
     CreateMaterializedViewStatementContext,
     CreateTableStatementContext,
     CreateViewStatementContext,
-    DatabaseCommentContext,
     DbSchemaNameContext,
     DbSchemaNameCreateContext,
     FromInsertStmtContext,
@@ -16,7 +16,6 @@ import {
     InsertStmtContext,
     SelectStatementContext,
     StatementContext,
-    TableCommentContext,
     TableNameContext,
     TableNameCreateContext,
     TableSourceContext,
@@ -32,7 +31,7 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
     exitTableNameCreate(ctx: TableNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
             attrNameList: [AttrName.comment],
-            endContextList: [TableCommentContext.name],
+            endContextList: [CreateTableStatementContext.name],
         });
     }
 
@@ -53,14 +52,14 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
             attrNameList: [AttrName.comment, AttrName.colType],
-            endContextList: [ColumnNameTypeConstraintContext.name],
+            endContextList: [ColumnNameTypeConstraintContext.name, ColumnNameCommentContext.name],
         });
     }
 
     exitViewNameCreate(ctx: ViewNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
             attrNameList: [AttrName.comment],
-            endContextList: [TableCommentContext.name],
+            endContextList: [CreateViewStatementContext.name],
         });
     }
 
@@ -71,7 +70,7 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
     exitDbSchemaNameCreate(ctx: DbSchemaNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
             attrNameList: [AttrName.comment],
-            endContextList: [DatabaseCommentContext.name],
+            endContextList: [CreateDatabaseStatementContext.name],
         });
     }
 

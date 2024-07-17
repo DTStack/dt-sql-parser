@@ -1,10 +1,8 @@
 import {
     ColumnNameCreateContext,
-    CommentSpecContext,
     CreateFunctionContext,
     CreateNamespaceContext,
     CreateOrReplaceTableColTypeContext,
-    CreateTableClausesContext,
     CreateTableContext,
     CreateTableLikeContext,
     CreateTempViewUsingContext,
@@ -58,7 +56,7 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
     exitTableNameCreate(ctx: TableNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
             attrNameList: [AttrName.comment],
-            endContextList: [CreateTableClausesContext.name],
+            endContextList: [CreateTableContext.name],
         });
     }
 
@@ -81,7 +79,6 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
             attrNameList: [AttrName.comment, AttrName.colType],
             endContextList: [
-                CommentSpecContext.name,
                 CreateOrReplaceTableColTypeContext.name,
                 IdentifierCommentContext.name,
             ],

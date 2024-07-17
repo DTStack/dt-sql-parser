@@ -2,7 +2,6 @@ import { ImpalaSqlParserListener } from '../../lib';
 import {
     ColumnDefinitionContext,
     ColumnNamePathCreateContext,
-    CommentClauseContext,
     CreateAggregateFunctionContext,
     CreateFunctionContext,
     CreateKuduTableAsSelectContext,
@@ -32,7 +31,7 @@ export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlP
     exitTableNameCreate(ctx: TableNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
             attrNameList: [AttrName.comment],
-            endContextList: [CommentClauseContext.name],
+            endContextList: [CreateTableSelectContext.name, CreateKuduTableAsSelectContext.name],
         });
     }
 
