@@ -27,7 +27,8 @@ Additionally, it provides advanced features such as **SQL Validation**, **Code C
 - Trino
 - Impala
 
->Tips: This project is the default for Typescript target, also you can try to compile it to other languages if you need.
+>[!TIP]
+>This project is the default for Typescript target, also you can try to compile it to other languages if you need.
 
 <br/>
 
