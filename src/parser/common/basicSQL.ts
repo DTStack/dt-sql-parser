@@ -49,6 +49,11 @@ export abstract class BasicSQL<
     protected abstract preferredRules: Set<number>;
 
     /**
+     * keywords which can start a single statement
+     */
+    protected abstract statementStartKeywords: string[];
+
+    /**
      * Create a antlr4 Lexer instance.
      * @param input source string
      */
@@ -252,6 +257,63 @@ export abstract class BasicSQL<
     }
 
     /**
+     * Try to get a small range as possible after syntax error.
+     * @param allTokens all tokens from input
+     * @param caretTokenIndex tokenIndex of caretPosition
+     * @returns { startToken: Token; stopToken: Token }
+     */
+    private splitInputAfterSyntaxError(
+        allTokens: Token[],
+        caretTokenIndex: number
+    ): { startToken: Token; stopToken: Token } {
+        let startToken: Token | null = null;
+        for (let tokenIndex = caretTokenIndex; tokenIndex >= 0; tokenIndex--) {
+            const token = allTokens[tokenIndex];
+            // end with semi
+            if (token?.text === ';') {
+                startToken = allTokens[tokenIndex + 1];
+                break;
+            }
+            // keywords which can start a single statement
+            if (
+                this.statementStartKeywords.some((item) => item === token?.text) &&
+                tokenIndex !== 0
+            ) {
+                startToken = allTokens[tokenIndex - 1];
+                break;
+            }
+        }
+        // If there is no semicolon, start from the first token
+        if (startToken === null) {
+            startToken = allTokens[0];
+        }
+
+        let stopToken: Token | null = null;
+        for (let tokenIndex = caretTokenIndex; tokenIndex < allTokens.length; tokenIndex++) {
+            const token = allTokens[tokenIndex];
+            // end with semi
+            if (token?.text === ';') {
+                stopToken = token;
+                break;
+            }
+            // keywords which can start a single statement
+            if (
+                this.statementStartKeywords.some((item) => item === token?.text) &&
+                tokenIndex !== 0
+            ) {
+                stopToken = allTokens[tokenIndex - 1];
+                break;
+            }
+        }
+        // If there is no semicolon, start from the first token
+        if (stopToken === null) {
+            stopToken = allTokens[allTokens.length - 1];
+        }
+
+        return { startToken, stopToken };
+    }
+
+    /**
      * Get suggestions of syntax and token at caretPosition
      * @param input source string
      * @param caretPosition caret position, such as cursor position
@@ -282,53 +344,98 @@ export abstract class BasicSQL<
         const statementCount = splitListener.statementsContext?.length;
         const statementsContext = splitListener.statementsContext;
 
-        // If there are multiple statements.
-        if (statementCount > 1) {
-            /**
-             * Find a minimum valid range, reparse the fragment, and provide a new parse tree to C3.
-             * The boundaries of this range must be statements with no syntax errors.
-             * This can ensure the stable performance of the C3.
-             */
-            let startStatement: ParserRuleContext | null = null;
-            let stopStatement: ParserRuleContext | null = null;
+        const { startToken, stopToken } = this.splitInputAfterSyntaxError(
+            allTokens,
+            caretTokenIndex
+        );
 
-            for (let index = 0; index < statementCount; index++) {
-                const ctx = statementsContext[index];
-                const isCurrentCtxValid = !ctx.exception;
-                if (!isCurrentCtxValid) continue;
+        let startIndex: number = 0;
+        let stopIndex: number = 0;
+
+        /**
+         * If there is no semi
+         * and if there is no keyword which can start a single statement
+         * and if there are multiple statements
+         */
+        if (startToken.tokenIndex === 1 && stopToken.tokenIndex === allTokens.length - 1) {
+            if (statementCount > 1) {
+                /**
+                 * Find a minimum valid range, reparse the fragment, and provide a new parse tree to C3.
+                 * The boundaries of this range must be statements with no syntax errors.
+                 * This can ensure the stable performance of the C3.
+                 */
+                let startStatement: ParserRuleContext | null = null;
+                let stopStatement: ParserRuleContext | null = null;
+
+                for (let index = 0; index < statementCount; index++) {
+                    const ctx = statementsContext[index];
+                    const isCurrentCtxValid = !ctx.exception;
+                    if (!isCurrentCtxValid) continue;
+
+                    /**
+                     * Ensure that the statementContext before the left boundary
+                     * and the last statementContext on the right boundary are qualified SQL statements.
+                     */
+                    const isPrevCtxValid = index === 0 || !statementsContext[index - 1]?.exception;
+                    const isNextCtxValid =
+                        index === statementCount - 1 || !statementsContext[index + 1]?.exception;
+
+                    if (ctx.stop && ctx.stop.tokenIndex < caretTokenIndex && isPrevCtxValid) {
+                        startStatement = ctx;
+                    }
+
+                    if (
+                        ctx.start &&
+                        !stopStatement &&
+                        ctx.start.tokenIndex > caretTokenIndex &&
+                        isNextCtxValid
+                    ) {
+                        stopStatement = ctx;
+                        break;
+                    }
+                }
+
+                // A boundary consisting of the index of the input.
+                startIndex = startStatement?.start?.start ?? 0;
+                stopIndex = stopStatement?.stop?.stop ?? input.length - 1;
 
                 /**
-                 * Ensure that the statementContext before the left boundary
-                 * and the last statementContext on the right boundary are qualified SQL statements.
+                 * Save offset of the tokenIndex in the range of input
+                 * compared to the tokenIndex in the whole input
                  */
-                const isPrevCtxValid = index === 0 || !statementsContext[index - 1]?.exception;
-                const isNextCtxValid =
-                    index === statementCount - 1 || !statementsContext[index + 1]?.exception;
+                tokenIndexOffset = startStatement?.start?.tokenIndex ?? 0;
+                caretTokenIndex = caretTokenIndex - tokenIndexOffset;
 
-                if (ctx.stop && ctx.stop.tokenIndex < caretTokenIndex && isPrevCtxValid) {
-                    startStatement = ctx;
-                }
+                /**
+                 * Reparse the input fragment，
+                 * and c3 will collect candidates in the newly generated parseTree.
+                 */
+                const inputSlice = input.slice(startIndex, stopIndex);
 
-                if (
-                    ctx.start &&
-                    !stopStatement &&
-                    ctx.start.tokenIndex > caretTokenIndex &&
-                    isNextCtxValid
-                ) {
-                    stopStatement = ctx;
-                    break;
-                }
+                const lexer = this.createLexer(inputSlice);
+                lexer.removeErrorListeners();
+                const tokenStream = new CommonTokenStream(lexer);
+                tokenStream.fill();
+
+                const parser = this.createParserFromTokenStream(tokenStream);
+                parser.interpreter.predictionMode = PredictionMode.SLL;
+                parser.removeErrorListeners();
+                parser.buildParseTrees = true;
+                parser.errorHandler = new ErrorStrategy();
+
+                sqlParserIns = parser;
+                c3Context = parser.program();
             }
-
+        } else {
             // A boundary consisting of the index of the input.
-            const startIndex = startStatement?.start?.start ?? 0;
-            const stopIndex = stopStatement?.stop?.stop ?? input.length - 1;
+            startIndex = startToken?.start ?? 0;
+            stopIndex = stopToken?.stop + 1 ?? input.length;
 
             /**
              * Save offset of the tokenIndex in the range of input
              * compared to the tokenIndex in the whole input
              */
-            tokenIndexOffset = startStatement?.start?.tokenIndex ?? 0;
+            tokenIndexOffset = startToken?.tokenIndex ?? 0;
             caretTokenIndex = caretTokenIndex - tokenIndexOffset;
 
             /**

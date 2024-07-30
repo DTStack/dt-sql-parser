@@ -34,6 +34,8 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         MySqlParser.RULE_columnNameCreate,
     ]);
 
+    protected statementStartKeywords: string[] = ['SELECT', 'INSERT'];
+
     protected get splitListener() {
         return new MysqlSplitListener();
     }

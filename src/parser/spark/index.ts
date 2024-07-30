@@ -34,6 +34,8 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         SparkSqlParser.RULE_columnNameCreate,
     ]);
 
+    protected statementStartKeywords: string[] = ['SELECT', 'INSERT'];
+
     protected get splitListener() {
         return new SparkSqlSplitListener();
     }

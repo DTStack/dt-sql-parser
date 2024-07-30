@@ -21,6 +21,8 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         return new TrinoSqlParser(tokenStream);
     }
 
+    protected statementStartKeywords: string[] = ['SELECT', 'INSERT'];
+
     protected get splitListener() {
         return new TrinoSqlSplitListener();
     }

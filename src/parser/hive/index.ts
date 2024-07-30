@@ -36,6 +36,8 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         HiveSqlParser.RULE_columnNameCreate,
     ]);
 
+    protected statementStartKeywords: string[] = ['SELECT', 'INSERT'];
+
     protected get splitListener() {
         return new HiveSqlSplitListener();
     }
