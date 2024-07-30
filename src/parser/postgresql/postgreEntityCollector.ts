@@ -1,28 +1,32 @@
-import type {
-    AltertablestmtContext,
-    ColumnCreateTableContext,
-    ColumnNameCreateContext,
-    CreateDatabaseContext,
-    CreateForeignTableContext,
-    CreateMaterializedViewContext,
-    CreatePartitionForeignTableContext,
-    CreateViewContext,
-    CreatefunctionstmtContext,
-    DatabaseNameContext,
-    DatabaseNameCreateContext,
-    FunctionNameCreateContext,
-    InsertStatementContext,
-    QueryCreateTableContext,
-    SelectStatementContext,
-    SingleStmtContext,
-    TableNameContext,
-    TableNameCreateContext,
-    ViewNameContext,
-    ViewNameCreateContext,
+import {
+    type AltertablestmtContext,
+    Column_defContext,
+    type ColumnCreateTableContext,
+    type ColumnNameCreateContext,
+    type CreateDatabaseContext,
+    type CreateForeignTableContext,
+    type CreatefunctionstmtContext,
+    type CreateMaterializedViewContext,
+    type CreatePartitionForeignTableContext,
+    type CreateViewContext,
+    type DatabaseNameContext,
+    type DatabaseNameCreateContext,
+    type FunctionNameCreateContext,
+    type InsertStatementContext,
+    type ProcedureNameContext,
+    type ProcedureNameCreateContext,
+    type QueryCreateTableContext,
+    type SelectStatementContext,
+    type SingleStmtContext,
+    Table_refContext,
+    type TableNameContext,
+    type TableNameCreateContext,
+    type ViewNameContext,
+    type ViewNameCreateContext,
 } from '../../lib/postgresql/PostgreSqlParser';
 import type { PostgreSqlParserListener } from '../../lib/postgresql/PostgreSqlParserListener';
+import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
-import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class PostgreSqlEntityCollector extends EntityCollector implements PostgreSqlParserListener {
     /** ====== Entity Begin */
@@ -35,7 +39,17 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitTableName(ctx: TableNameContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE);
+        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            needCollectAttr
+                ? {
+                      attrNameList: [AttrName.alias],
+                      endContextList: [Table_refContext.name],
+                  }
+                : undefined
+        );
     }
 
     exitTableNameCreate(ctx: TableNameCreateContext) {
@@ -43,7 +57,17 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitViewName(ctx: ViewNameContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW);
+        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
+        this.pushEntity(
+            ctx,
+            EntityContextType.VIEW,
+            needCollectAttr
+                ? {
+                      attrNameList: [AttrName.alias],
+                      endContextList: [Table_refContext.name],
+                  }
+                : undefined
+        );
     }
 
     exitViewNameCreate(ctx: ViewNameCreateContext) {
@@ -55,7 +79,18 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE);
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
+            attrNameList: [AttrName.comment, AttrName.colType],
+            endContextList: [Column_defContext.name],
+        });
+    }
+
+    exitProcedureName(ctx: ProcedureNameContext) {
+        this.pushEntity(ctx, EntityContextType.PROCEDURE);
+    }
+
+    exitProcedureNameCreate(ctx: ProcedureNameCreateContext) {
+        this.pushEntity(ctx, EntityContextType.PROCEDURE_CREATE);
     }
 
     /** ===== Statement begin */
