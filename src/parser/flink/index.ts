@@ -35,6 +35,8 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         FlinkSqlParser.RULE_columnNameCreate,
     ]);
 
+    protected statementStartKeywords: string[] = ['SELECT', 'INSERT'];
+
     protected get splitListener() {
         return new FlinkSqlSplitListener();
     }

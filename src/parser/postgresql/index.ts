@@ -39,6 +39,8 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         PostgreSqlParser.RULE_column_name, // column name
     ]);
 
+    protected statementStartKeywords: string[] = [];
+
     protected get splitListener() {
         return new PostgreSqlSplitListener();
     }

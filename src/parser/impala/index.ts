@@ -34,6 +34,8 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
         ImpalaSqlParser.RULE_columnNamePath,
     ]);
 
+    protected statementStartKeywords: string[] = ['SELECT', 'INSERT'];
+
     protected get splitListener() {
         return new ImpalaSqlSplitListener();
     }
