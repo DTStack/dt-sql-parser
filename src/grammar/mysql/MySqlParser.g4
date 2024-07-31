@@ -75,6 +75,7 @@ ddlStatement
     | createLogfileGroup
     | createProcedure
     | createFunction
+    | createFunctionLoadable
     | createServer
     | createTable
     | createTablespaceInnodb
@@ -266,6 +267,22 @@ createProcedure
     )* ')' routineOption* routineBody
     ;
 
+createFunction
+    : KW_CREATE ownerStatement? KW_AGGREGATE? KW_FUNCTION ifNotExists? functionNameCreate '(' functionParameter? (
+        ',' functionParameter
+    )* ')' KW_RETURNS dataType routineOption* (routineBody | returnStatement)
+    ;
+
+// https://dev.mysql.com/doc/refman/8.0/en/create-function-loadable.html
+createFunctionLoadable
+    : KW_CREATE KW_AGGREGATE? KW_FUNCTION ifNotExists? functionNameCreate KW_RETURNS returnType=(
+        KW_STRING
+        | KW_INTEGER
+        | KW_REAL
+        | KW_DECIMAL
+    ) KW_SONAME STRING_LITERAL
+    ;
+
 createRole
     : KW_CREATE KW_ROLE ifNotExists? userOrRoleNames
     ;
@@ -418,6 +435,10 @@ indexOption
 
 procedureParameter
     : direction=(KW_IN | KW_OUT | KW_INOUT)? paramName=uid dataType
+    ;
+
+functionParameter
+    : paramName=uid dataType
     ;
 
 routineOption
@@ -1982,15 +2003,6 @@ checkTableOption
     | KW_MEDIUM
     | KW_EXTENDED
     | KW_CHANGED
-    ;
-
-createFunction
-    : KW_CREATE KW_AGGREGATE? KW_FUNCTION ifNotExists? functionNameCreate KW_RETURNS returnType=(
-        KW_STRING
-        | KW_INTEGER
-        | KW_REAL
-        | KW_DECIMAL
-    ) KW_SONAME STRING_LITERAL
     ;
 
 installComponent

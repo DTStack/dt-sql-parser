@@ -4,6 +4,7 @@ import type {
     CopyCreateTableContext,
     CreateDatabaseContext,
     CreateFunctionContext,
+    CreateFunctionLoadableContext,
     CreateViewContext,
     DatabaseNameContext,
     DatabaseNameCreateContext,
@@ -141,6 +142,14 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
     }
 
     exitCreateFunction(ctx: CreateFunctionContext) {
+        this.popStmt();
+    }
+
+    enterCreateFunctionLoadable(ctx: CreateFunctionLoadableContext) {
+        this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
+    }
+
+    exitCreateFunctionLoadable(ctx: CreateFunctionLoadableContext) {
         this.popStmt();
     }
 }
