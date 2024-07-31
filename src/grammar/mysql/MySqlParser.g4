@@ -310,7 +310,7 @@ createTablespaceNdb
     ;
 
 createTrigger
-    : KW_CREATE ownerStatement? KW_TRIGGER ifNotExists? trigger_name=fullId triggerTime=(
+    : KW_CREATE ownerStatement? ifNotExists? KW_TRIGGER ifNotExists? trigger_name=fullId triggerTime=(
         KW_BEFORE
         | KW_AFTER
     ) triggerEvent=(KW_INSERT | KW_UPDATE | KW_DELETE) KW_ON tableName KW_FOR KW_EACH KW_ROW (
@@ -907,19 +907,6 @@ replaceStatement
     )? (('(' columnNames ')')? replaceStatementValuesOrSelectOrTable | setAssignmentList)
     ;
 
-// selectStatement
-//     : querySpecification lockClause?                   # simpleSelect
-//     | querySpecificationNointo lockClause? intoClause? # simpleSelect
-//     | queryExpression lockClause?                      # parenthesisSelect
-//     | querySpecificationNointo unionStatement+ (
-//         KW_UNION unionType=(KW_ALL | KW_DISTINCT)? (querySpecification | queryExpression)
-//     )? orderByClause? limitClause? lockClause? # unionSelect
-//     | queryExpressionNointo unionParenthesis+ (
-//         KW_UNION unionType=(KW_ALL | KW_DISTINCT)? queryExpression
-//     )? orderByClause? limitClause? lockClause?         # unionParenthesisSelect
-//     | querySpecificationNointo (',' lateralStatement)+ # withLateralStatement
-//     ;
-
 // TODO: Simplify the rules to fit SLL(*) Mode
 selectStatement
     : querySpecification unionStatement* (
@@ -1127,6 +1114,7 @@ queryExpression
  */
 querySpecification
     : KW_SELECT selectSpec* selectElements intoClause? fromClause groupByClause? havingClause? windowClause? orderByClause? limitClause? intoClause?
+        unionStatement?
     ;
 
 unionStatement
@@ -3421,6 +3409,7 @@ keywordsCanBeId
     | KW_RESOURCE_GROUP_USER
     | KW_RESUME
     | KW_RETURNED_SQLSTATE
+    | KW_RETURNING
     | KW_RETURNS
     | KW_REUSE
     | KW_ROLE

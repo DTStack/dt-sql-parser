@@ -20,3 +20,5 @@ CREATE TRIGGER my_trigger AFTER DELETE ON your_table FOR EACH ROW SET NEW.column
 
 CREATE TRIGGER my_trigger AFTER INSERT ON your_table FOR EACH ROW FOLLOWS other_trigger_name SET NEW.column_name = some_value;
 CREATE TRIGGER my_trigger AFTER INSERT ON your_table FOR EACH ROW PRECEDES other_trigger_name SET NEW.column_name = some_value;
+
+CREATE TRIGGER IF NOT EXISTS my_trigger AFTER INSERT ON your_table FOR EACH ROW PRECEDES other_trigger_name SET NEW.column_name = some_value;
