@@ -1,4 +1,4 @@
-export const toMatchUnorderedArrary: jest.CustomMatcher = function (
+export const toMatchUnorderedArray: jest.CustomMatcher = function (
     actual: Array<unknown>,
     expected: Array<unknown>
 ) {

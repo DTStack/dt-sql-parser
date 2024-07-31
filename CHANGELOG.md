@@ -61,7 +61,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* add toMatchUnorderedArrary matcher and apply it ([#271](https://github.com/DTStack/dt-sql-parser/issues/271)) ([a05f099](https://github.com/DTStack/dt-sql-parser/commit/a05f099aa1ad555c408bc2018240fb4611ec09b8))
+* add toMatchUnorderedArray matcher and apply it ([#271](https://github.com/DTStack/dt-sql-parser/issues/271)) ([a05f099](https://github.com/DTStack/dt-sql-parser/commit/a05f099aa1ad555c408bc2018240fb4611ec09b8))
 * collect entity ([#265](https://github.com/DTStack/dt-sql-parser/issues/265)) ([a997211](https://github.com/DTStack/dt-sql-parser/commit/a99721162be0d463b513f53bb13ada6d10168548)), closes [#256](https://github.com/DTStack/dt-sql-parser/issues/256) [#263](https://github.com/DTStack/dt-sql-parser/issues/263) [#268](https://github.com/DTStack/dt-sql-parser/issues/268)
 * migrate to antlr4ng ([#267](https://github.com/DTStack/dt-sql-parser/issues/267)) ([195878d](https://github.com/DTStack/dt-sql-parser/commit/195878da9bb1ff8011b5d60c02389fa66d2bc0b8))
 * **spark:** support materialized view for spark sql ([#262](https://github.com/DTStack/dt-sql-parser/issues/262)) ([5ce89cb](https://github.com/DTStack/dt-sql-parser/commit/5ce89cb421de18330d56e23a4ab5b658b2130a0b))
