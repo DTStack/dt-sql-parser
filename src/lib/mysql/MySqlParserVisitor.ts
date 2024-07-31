@@ -25,6 +25,8 @@ import { CreateEventContext } from "./MySqlParser.js";
 import { CreateIndexContext } from "./MySqlParser.js";
 import { CreateLogfileGroupContext } from "./MySqlParser.js";
 import { CreateProcedureContext } from "./MySqlParser.js";
+import { CreateFunctionContext } from "./MySqlParser.js";
+import { CreateFunctionLoadableContext } from "./MySqlParser.js";
 import { CreateRoleContext } from "./MySqlParser.js";
 import { CreateServerContext } from "./MySqlParser.js";
 import { QueryCreateTableContext } from "./MySqlParser.js";
@@ -49,6 +51,7 @@ import { EnableTypeContext } from "./MySqlParser.js";
 import { IndexTypeContext } from "./MySqlParser.js";
 import { IndexOptionContext } from "./MySqlParser.js";
 import { ProcedureParameterContext } from "./MySqlParser.js";
+import { FunctionParameterContext } from "./MySqlParser.js";
 import { RoutineCommentContext } from "./MySqlParser.js";
 import { RoutineLanguageContext } from "./MySqlParser.js";
 import { RoutineBehaviorContext } from "./MySqlParser.js";
@@ -444,7 +447,6 @@ import { OptimizeTableContext } from "./MySqlParser.js";
 import { RepairTableContext } from "./MySqlParser.js";
 import { TableActionOptionContext } from "./MySqlParser.js";
 import { CheckTableOptionContext } from "./MySqlParser.js";
-import { CreateFunctionContext } from "./MySqlParser.js";
 import { InstallComponentContext } from "./MySqlParser.js";
 import { VariableExprContext } from "./MySqlParser.js";
 import { UninstallComponentContext } from "./MySqlParser.js";
@@ -790,6 +792,18 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitCreateProcedure?: (ctx: CreateProcedureContext) => Result;
     /**
+     * Visit a parse tree produced by `MySqlParser.createFunction`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCreateFunction?: (ctx: CreateFunctionContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.createFunctionLoadable`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCreateFunctionLoadable?: (ctx: CreateFunctionLoadableContext) => Result;
+    /**
      * Visit a parse tree produced by `MySqlParser.createRole`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -938,6 +952,12 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitProcedureParameter?: (ctx: ProcedureParameterContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.functionParameter`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFunctionParameter?: (ctx: FunctionParameterContext) => Result;
     /**
      * Visit a parse tree produced by the `routineComment`
      * labeled alternative in `MySqlParser.routineOption`.
@@ -3501,12 +3521,6 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitCheckTableOption?: (ctx: CheckTableOptionContext) => Result;
-    /**
-     * Visit a parse tree produced by `MySqlParser.createFunction`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitCreateFunction?: (ctx: CreateFunctionContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.installComponent`.
      * @param ctx the parse tree
