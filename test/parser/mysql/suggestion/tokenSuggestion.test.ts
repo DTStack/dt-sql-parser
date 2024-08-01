@@ -60,6 +60,7 @@ describe('MySQL Token Suggestion', () => {
             'ALGORITHM',
             'OR',
             'TRIGGER',
+            'IF',
             'TABLESPACE',
             'UNDO',
             'TABLE',

@@ -10,3 +10,4 @@ coverage
 gen/
 src/**/*.iml
 benchmark/reports/*
+*.tgz

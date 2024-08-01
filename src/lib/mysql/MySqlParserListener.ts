@@ -25,6 +25,8 @@ import { CreateEventContext } from "./MySqlParser.js";
 import { CreateIndexContext } from "./MySqlParser.js";
 import { CreateLogfileGroupContext } from "./MySqlParser.js";
 import { CreateProcedureContext } from "./MySqlParser.js";
+import { CreateFunctionContext } from "./MySqlParser.js";
+import { CreateFunctionLoadableContext } from "./MySqlParser.js";
 import { CreateRoleContext } from "./MySqlParser.js";
 import { CreateServerContext } from "./MySqlParser.js";
 import { QueryCreateTableContext } from "./MySqlParser.js";
@@ -49,6 +51,7 @@ import { EnableTypeContext } from "./MySqlParser.js";
 import { IndexTypeContext } from "./MySqlParser.js";
 import { IndexOptionContext } from "./MySqlParser.js";
 import { ProcedureParameterContext } from "./MySqlParser.js";
+import { FunctionParameterContext } from "./MySqlParser.js";
 import { RoutineCommentContext } from "./MySqlParser.js";
 import { RoutineLanguageContext } from "./MySqlParser.js";
 import { RoutineBehaviorContext } from "./MySqlParser.js";
@@ -444,7 +447,6 @@ import { OptimizeTableContext } from "./MySqlParser.js";
 import { RepairTableContext } from "./MySqlParser.js";
 import { TableActionOptionContext } from "./MySqlParser.js";
 import { CheckTableOptionContext } from "./MySqlParser.js";
-import { CreateFunctionContext } from "./MySqlParser.js";
 import { InstallComponentContext } from "./MySqlParser.js";
 import { VariableExprContext } from "./MySqlParser.js";
 import { UninstallComponentContext } from "./MySqlParser.js";
@@ -855,6 +857,26 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitCreateProcedure?: (ctx: CreateProcedureContext) => void;
     /**
+     * Enter a parse tree produced by `MySqlParser.createFunction`.
+     * @param ctx the parse tree
+     */
+    enterCreateFunction?: (ctx: CreateFunctionContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.createFunction`.
+     * @param ctx the parse tree
+     */
+    exitCreateFunction?: (ctx: CreateFunctionContext) => void;
+    /**
+     * Enter a parse tree produced by `MySqlParser.createFunctionLoadable`.
+     * @param ctx the parse tree
+     */
+    enterCreateFunctionLoadable?: (ctx: CreateFunctionLoadableContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.createFunctionLoadable`.
+     * @param ctx the parse tree
+     */
+    exitCreateFunctionLoadable?: (ctx: CreateFunctionLoadableContext) => void;
+    /**
      * Enter a parse tree produced by `MySqlParser.createRole`.
      * @param ctx the parse tree
      */
@@ -1104,6 +1126,16 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitProcedureParameter?: (ctx: ProcedureParameterContext) => void;
+    /**
+     * Enter a parse tree produced by `MySqlParser.functionParameter`.
+     * @param ctx the parse tree
+     */
+    enterFunctionParameter?: (ctx: FunctionParameterContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.functionParameter`.
+     * @param ctx the parse tree
+     */
+    exitFunctionParameter?: (ctx: FunctionParameterContext) => void;
     /**
      * Enter a parse tree produced by the `routineComment`
      * labeled alternative in `MySqlParser.routineOption`.
@@ -5440,16 +5472,6 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitCheckTableOption?: (ctx: CheckTableOptionContext) => void;
-    /**
-     * Enter a parse tree produced by `MySqlParser.createFunction`.
-     * @param ctx the parse tree
-     */
-    enterCreateFunction?: (ctx: CreateFunctionContext) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.createFunction`.
-     * @param ctx the parse tree
-     */
-    exitCreateFunction?: (ctx: CreateFunctionContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.installComponent`.
      * @param ctx the parse tree
