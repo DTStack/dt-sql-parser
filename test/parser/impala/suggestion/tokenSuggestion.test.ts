@@ -19,7 +19,7 @@ describe('Impala SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary(['TABLE', 'VIEW', 'DATABASE']);
+        expect(suggestion).toMatchUnorderedArray(['TABLE', 'VIEW', 'DATABASE']);
     });
 
     test('After CREATE', () => {
@@ -32,7 +32,7 @@ describe('Impala SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'TABLE',
             'EXTERNAL',
             'VIEW',
@@ -54,7 +54,7 @@ describe('Impala SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'DATABASE',
             'SCHEMA',
             'TABLE',
@@ -77,7 +77,7 @@ describe('Impala SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary(['INTO', 'OVERWRITE']);
+        expect(suggestion).toMatchUnorderedArray(['INTO', 'OVERWRITE']);
     });
 
     test('After SHOW', () => {
@@ -90,7 +90,7 @@ describe('Impala SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'DATABASES',
             'SCHEMAS',
             'TABLES',
