@@ -1,19 +1,17 @@
 import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
+import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
 import {
-  PostgreSqlParserListener,
-} from 'src/lib/postgresql/PostgreSqlParserListener';
-import {
-  isCommonEntityContext,
-  isFuncEntityContext,
-  StmtContextType,
+    isCommonEntityContext,
+    isFuncEntityContext,
+    StmtContextType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
 import {
-  PostgreSQL,
-  PostgreSqlEntityCollector,
-  PostgreSqlSplitListener,
+    PostgreSQL,
+    PostgreSqlEntityCollector,
+    PostgreSqlSplitListener,
 } from 'src/parser/postgresql';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
@@ -151,7 +149,10 @@ describe('PostgreSql entity collector tests', () => {
                 expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
                 expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
                 expect(columEntity.text).toBe(
-                    commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
                 );
             });
         }

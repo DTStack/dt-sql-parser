@@ -1,9 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import {
-  CaretPosition,
-  EntityContextType,
-} from 'src/parser/common/types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { TrinoSQL } from 'src/parser/trino';
 import { commentOtherLine } from 'test/helper';
 
