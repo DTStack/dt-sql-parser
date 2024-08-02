@@ -128,7 +128,7 @@ export function isColumnEntityContext(entity: EntityContext): entity is ColumnEn
  *  what we need when collect attribute information
  * */
 interface AttrInfo {
-    attrNameList: AttrName[];
+    attrName: AttrName;
     endContextList: string[];
 }
 
@@ -137,7 +137,7 @@ export function toEntityContext(
     type: EntityContextType,
     input: string,
     belongStmt: StmtContext,
-    attrInfo?: AttrInfo
+    attrInfo?: AttrInfo[]
 ): EntityContext | null {
     const word = ctxToText(ctx, input);
     if (!word) return null;
@@ -169,9 +169,9 @@ export function toEntityContext(
             break;
     }
     if (attrInfo) {
-        for (let k = 0; k < attrInfo?.attrNameList?.length; k++) {
-            const attributeName: AttrName = attrInfo?.attrNameList[k];
-            const attrToken = findAttribute(ctx, attributeName, attrInfo?.endContextList);
+        for (let k = 0; k < attrInfo.length; k++) {
+            const attributeName: AttrName = attrInfo[k]?.attrName;
+            const attrToken = findAttribute(ctx, attributeName, attrInfo[k]?.endContextList);
             if (attrToken) {
                 const attrVal: WordRange | TextSlice | null = isToken(attrToken)
                     ? tokenToWord(attrToken, input)
@@ -334,7 +334,7 @@ export abstract class EntityCollector {
         return stmtContext;
     }
 
-    protected pushEntity(ctx: ParserRuleContext, type: EntityContextType, attrInfo?: AttrInfo) {
+    protected pushEntity(ctx: ParserRuleContext, type: EntityContextType, attrInfo?: AttrInfo[]) {
         const entityContext = toEntityContext(
             ctx,
             type,

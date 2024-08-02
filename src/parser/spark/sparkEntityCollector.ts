@@ -33,10 +33,12 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
     }
 
     exitNamespaceNameCreate(ctx: NamespaceNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateNamespaceContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateNamespaceContext.name],
+            },
+        ]);
     }
 
     exitTableName(ctx: TableNameContext) {
@@ -45,19 +47,23 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
             ctx,
             EntityContextType.TABLE,
             needCollectAttr
-                ? {
-                      attrNameList: [AttrName.alias],
-                      endContextList: [RelationPrimaryContext.name],
-                  }
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [RelationPrimaryContext.name],
+                      },
+                  ]
                 : undefined
         );
     }
 
     exitTableNameCreate(ctx: TableNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateTableContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateTableContext.name],
+            },
+        ]);
     }
 
     exitViewName(ctx: ViewNameContext) {
@@ -65,10 +71,12 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
     }
 
     exitViewNameCreate(ctx: ViewNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateViewContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateViewContext.name],
+            },
+        ]);
     }
 
     exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
@@ -76,13 +84,19 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
-            attrNameList: [AttrName.comment, AttrName.colType],
-            endContextList: [
-                CreateOrReplaceTableColTypeContext.name,
-                IdentifierCommentContext.name,
-            ],
-        });
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [
+                    CreateOrReplaceTableColTypeContext.name,
+                    IdentifierCommentContext.name,
+                ],
+            },
+            {
+                attrName: AttrName.colType,
+                endContextList: [CreateOrReplaceTableColTypeContext.name],
+            },
+        ]);
     }
 
     /** ===== Statement begin */

@@ -29,10 +29,15 @@ import { EntityContextType } from '../common/types';
 export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlParserListener {
     /** ===== Entity begin */
     exitTableNameCreate(ctx: TableNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateTableSelectContext.name, CreateKuduTableAsSelectContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [
+                    CreateTableSelectContext.name,
+                    CreateKuduTableAsSelectContext.name,
+                ],
+            },
+        ]);
     }
 
     exitTableNamePath(ctx: TableNamePathContext) {
@@ -41,30 +46,44 @@ export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlP
             ctx,
             EntityContextType.TABLE,
             needCollectAttr
-                ? {
-                      attrNameList: [AttrName.alias],
-                      endContextList: [SampledRelationContext.name],
-                  }
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [SampledRelationContext.name],
+                      },
+                  ]
                 : undefined
         );
     }
 
     exitColumnNamePathCreate(ctx: ColumnNamePathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
-            attrNameList: [AttrName.comment, AttrName.colType],
-            endContextList: [
-                ColumnDefinitionContext.name,
-                KuduTableElementContext.name,
-                ViewColumnItemContext.name,
-            ],
-        });
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [
+                    ColumnDefinitionContext.name,
+                    KuduTableElementContext.name,
+                    ViewColumnItemContext.name,
+                ],
+            },
+            {
+                attrName: AttrName.colType,
+                endContextList: [
+                    ColumnDefinitionContext.name,
+                    KuduTableElementContext.name,
+                    ViewColumnItemContext.name,
+                ],
+            },
+        ]);
     }
 
     exitViewNameCreate(ctx: ViewNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateViewContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateViewContext.name],
+            },
+        ]);
     }
 
     exitViewNamePath(ctx: ViewNamePathContext) {
@@ -76,10 +95,12 @@ export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlP
     }
 
     exitDatabaseNameCreate(ctx: DatabaseNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateSchemaContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateSchemaContext.name],
+            },
+        ]);
     }
 
     exitFunctionNameCreate(ctx: FunctionNameCreateContext) {

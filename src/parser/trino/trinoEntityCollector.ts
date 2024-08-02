@@ -47,19 +47,23 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
             ctx,
             EntityContextType.TABLE,
             needCollectAttr
-                ? {
-                      attrNameList: [AttrName.alias],
-                      endContextList: [AliasedRelationContext.name],
-                  }
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [AliasedRelationContext.name],
+                      },
+                  ]
                 : undefined
         );
     }
 
     exitTableNameCreate(ctx: TableNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateTableContext.name, CreateTableAsSelectContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateTableContext.name, CreateTableAsSelectContext.name],
+            },
+        ]);
     }
 
     exitViewRef(ctx: ViewRefContext) {
@@ -67,17 +71,25 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
     }
 
     exitViewNameCreate(ctx: ViewNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateMaterializedViewContext.name, CreateViewContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateMaterializedViewContext.name, CreateViewContext.name],
+            },
+        ]);
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
-            attrNameList: [AttrName.comment, AttrName.colType],
-            endContextList: [ColumnDefinitionContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.colType,
+                endContextList: [ColumnDefinitionContext.name],
+            },
+            {
+                attrName: AttrName.comment,
+                endContextList: [ColumnDefinitionContext.name],
+            },
+        ]);
     }
 
     /** ===== Statement begin */

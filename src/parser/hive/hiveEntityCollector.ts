@@ -29,10 +29,12 @@ import { EntityContextType } from '../common/types';
 export class HiveEntityCollector extends EntityCollector implements HiveSqlParserListener {
     /** ====== Entity Begin */
     exitTableNameCreate(ctx: TableNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateTableStatementContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateTableStatementContext.name],
+            },
+        ]);
     }
 
     exitTableName(ctx: TableNameContext) {
@@ -41,26 +43,36 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
             ctx,
             EntityContextType.TABLE,
             needCollectAttr
-                ? {
-                      attrNameList: [AttrName.alias],
-                      endContextList: [TableSourceContext.name, UniqueJoinSourceContext.name],
-                  }
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [TableSourceContext.name, UniqueJoinSourceContext.name],
+                      },
+                  ]
                 : undefined
         );
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
-            attrNameList: [AttrName.comment, AttrName.colType],
-            endContextList: [ColumnNameTypeConstraintContext.name, ColumnNameCommentContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [ColumnNameCommentContext.name],
+            },
+            {
+                attrName: AttrName.colType,
+                endContextList: [ColumnNameTypeConstraintContext.name],
+            },
+        ]);
     }
 
     exitViewNameCreate(ctx: ViewNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateViewStatementContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateViewStatementContext.name],
+            },
+        ]);
     }
 
     exitViewName(ctx: ViewNameContext) {
@@ -68,10 +80,12 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
     }
 
     exitDbSchemaNameCreate(ctx: DbSchemaNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateDatabaseStatementContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateDatabaseStatementContext.name],
+            },
+        ]);
     }
 
     exitDbSchemaName(ctx: DbSchemaNameContext) {

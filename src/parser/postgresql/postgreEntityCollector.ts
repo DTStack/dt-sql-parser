@@ -44,10 +44,12 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
             ctx,
             EntityContextType.TABLE,
             needCollectAttr
-                ? {
-                      attrNameList: [AttrName.alias],
-                      endContextList: [Table_refContext.name],
-                  }
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [Table_refContext.name],
+                      },
+                  ]
                 : undefined
         );
     }
@@ -62,10 +64,12 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
             ctx,
             EntityContextType.VIEW,
             needCollectAttr
-                ? {
-                      attrNameList: [AttrName.alias],
-                      endContextList: [Table_refContext.name],
-                  }
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [Table_refContext.name],
+                      },
+                  ]
                 : undefined
         );
     }
@@ -79,10 +83,16 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
-            attrNameList: [AttrName.comment, AttrName.colType],
-            endContextList: [Column_defContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [Column_defContext.name],
+            },
+            {
+                attrName: AttrName.colType,
+                endContextList: [Column_defContext.name],
+            },
+        ]);
     }
 
     exitProcedureName(ctx: ProcedureNameContext) {
