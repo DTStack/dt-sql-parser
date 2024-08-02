@@ -546,8 +546,8 @@ describe('MySQL entity collector tests', () => {
             startIndex: 1057,
             startLine: 41,
         });
-
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
     });
 });

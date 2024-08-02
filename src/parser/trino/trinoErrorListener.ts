@@ -1,23 +1,24 @@
 import { CodeCompletionCore } from 'antlr4-c3';
-import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
+
 import { TrinoSqlParser } from '../../lib/trino/TrinoSqlParser';
+import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
 import { LOCALE_TYPE } from '../common/types';
 
 export class TrinoErrorListener extends ParseErrorListener {
     private preferredRules: Set<number>;
 
     private objectNames: Map<number, string> = new Map([
-        [TrinoSqlParser.RULE_catalogName, 'catalog'],
+        [TrinoSqlParser.RULE_catalogRef, 'catalog'],
         [TrinoSqlParser.RULE_catalogNameCreate, 'catalog'],
-        [TrinoSqlParser.RULE_tableName, 'table'],
+        [TrinoSqlParser.RULE_tableRef, 'table'],
         [TrinoSqlParser.RULE_tableNameCreate, 'table'],
-        [TrinoSqlParser.RULE_viewName, 'view'],
+        [TrinoSqlParser.RULE_viewRef, 'view'],
         [TrinoSqlParser.RULE_viewNameCreate, 'view'],
-        [TrinoSqlParser.RULE_schemaName, 'schema'],
+        [TrinoSqlParser.RULE_schemaRef, 'schema'],
         [TrinoSqlParser.RULE_schemaNameCreate, 'schema'],
         [TrinoSqlParser.RULE_functionName, 'function'],
-        [TrinoSqlParser.RULE_columnName, 'column'],
+        [TrinoSqlParser.RULE_columnRef, 'column'],
         [TrinoSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
@@ -45,12 +46,12 @@ export class TrinoErrorListener extends ParseErrorListener {
                 const [ruleType] = candidate;
                 const name = this.objectNames.get(ruleType);
                 switch (ruleType) {
-                    case TrinoSqlParser.RULE_catalogName:
-                    case TrinoSqlParser.RULE_schemaName:
-                    case TrinoSqlParser.RULE_tableName:
-                    case TrinoSqlParser.RULE_viewName:
+                    case TrinoSqlParser.RULE_catalogRef:
+                    case TrinoSqlParser.RULE_schemaRef:
+                    case TrinoSqlParser.RULE_tableRef:
+                    case TrinoSqlParser.RULE_viewRef:
                     case TrinoSqlParser.RULE_functionName:
-                    case TrinoSqlParser.RULE_columnName: {
+                    case TrinoSqlParser.RULE_columnRef: {
                         result.push(`{existing}${name}`);
                         break;
                     }
