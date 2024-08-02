@@ -144,7 +144,7 @@ describe('PostgreSql entity collector tests', () => {
             endColumn: 2,
         });
         if (isCommonEntityContext(tableCreateEntity)) {
-            expect(tableCreateEntity.columns.length).toBe(3);
+            expect(tableCreateEntity.columns.length).toBe(2);
             tableCreateEntity.columns.forEach((columEntity) => {
                 expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
                 expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
