@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
 import {
+    AttrName,
     isCommonEntityContext,
     isFuncEntityContext,
     StmtContextType,
@@ -27,7 +28,7 @@ describe('PostgreSql entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(10);
+        expect(splitListener.statementsContext.length).toBe(11);
     });
 
     test('create database', () => {
@@ -155,6 +156,22 @@ describe('PostgreSql entity collector tests', () => {
                     )
                 );
             });
+            expect(tableCreateEntity.columns[0][AttrName.colType]).toEqual({
+                text: 'integer',
+                startIndex: 290,
+                endIndex: 296,
+                line: 10,
+                startColumn: 13,
+                endColumn: 20,
+            });
+            expect(tableCreateEntity.columns[1][AttrName.colType]).toEqual({
+                text: 'varchar(40)',
+                startIndex: 311,
+                endIndex: 321,
+                line: 11,
+                startColumn: 13,
+                endColumn: 24,
+            });
         }
     });
 
@@ -201,6 +218,30 @@ describe('PostgreSql entity collector tests', () => {
                         columEntity.position.endIndex + 1
                     )
                 );
+            });
+            expect(tableCreateEntity.columns[0][AttrName.colType]).toEqual({
+                text: 'char(5)',
+                startIndex: 426,
+                endIndex: 432,
+                line: 16,
+                startColumn: 17,
+                endColumn: 24,
+            });
+            expect(tableCreateEntity.columns[1][AttrName.colType]).toEqual({
+                text: 'varchar(40)',
+                startIndex: 460,
+                endIndex: 470,
+                line: 17,
+                startColumn: 17,
+                endColumn: 28,
+            });
+            expect(tableCreateEntity.columns[3][AttrName.colType]).toEqual({
+                text: 'date',
+                startIndex: 532,
+                endIndex: 535,
+                line: 19,
+                startColumn: 17,
+                endColumn: 21,
             });
         }
     });
@@ -467,6 +508,73 @@ describe('PostgreSql entity collector tests', () => {
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.arguments).toBeNull();
             expect(functionEntity.relatedEntities).toBeNull();
+        }
+    });
+
+    test('select has table alias with clause', () => {
+        const testingContext = splitListener.statementsContext[10];
+
+        const collectListener = new PostgreSqlEntityCollector(commonSql);
+        postgreSql.listen(collectListener as ParseTreeListener, testingContext);
+
+        const allEntities = collectListener.getEntities();
+        expect(allEntities.length).toBe(2);
+
+        const tableEntity1 = allEntities[0];
+        const tableEntity2 = allEntities[1];
+        expect(tableEntity1.entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntity1.text).toBe('table_expression');
+        expect(tableEntity1.position).toEqual({
+            startIndex: 1531,
+            endIndex: 1546,
+            line: 51,
+            startColumn: 51,
+            endColumn: 67,
+        });
+
+        expect(tableEntity1.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+        expect(tableEntity1.belongStmt.position).toEqual({
+            startIndex: 1516,
+            endIndex: 1546,
+            startLine: 51,
+            endLine: 51,
+            startColumn: 36,
+            endColumn: 67,
+        });
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
+            expect(tableEntity1.relatedEntities).toBeNull();
+        }
+        expect(tableEntity2.entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntity2.text).toBe('table_expression1');
+        expect(tableEntity2.position).toEqual({
+            startIndex: 1604,
+            endIndex: 1620,
+            line: 52,
+            startColumn: 55,
+            endColumn: 72,
+        });
+
+        expect(tableEntity2.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+        expect(tableEntity2.belongStmt.position).toEqual({
+            startIndex: 1481,
+            endIndex: 1667,
+            startLine: 51,
+            endLine: 52,
+            startColumn: 1,
+            endColumn: 119,
+        });
+        expect(tableEntity2[AttrName.alias]).toEqual({
+            text: 'tb_1',
+            startIndex: 1625,
+            endIndex: 1628,
+            line: 52,
+            startColumn: 76,
+            endColumn: 80,
+        });
+        if (isCommonEntityContext(tableEntity2)) {
+            expect(tableEntity2.columns).toBeUndefined();
+            expect(tableEntity2.relatedEntities).toBeNull();
         }
     });
 });

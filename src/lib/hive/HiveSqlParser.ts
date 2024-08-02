@@ -10836,7 +10836,7 @@ export class HiveSqlParser extends SQLParserBase {
             this.state = 2290;
             localContext._colName = this.columnNameCreate();
             this.state = 2291;
-            this.columnType();
+            localContext._colType = this.columnType();
             this.state = 2293;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -16816,7 +16816,7 @@ export class HiveSqlParser extends SQLParserBase {
                 this.state = 3480;
                 this.function_();
                 this.state = 3481;
-                this.tableAlias();
+                localContext._alias = this.tableAlias();
                 this.state = 3491;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -16874,7 +16874,7 @@ export class HiveSqlParser extends SQLParserBase {
                     this.state = 3498;
                     this.function_();
                     this.state = 3499;
-                    this.tableAlias();
+                    localContext._alias = this.tableAlias();
                     this.state = 3509;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
@@ -16928,7 +16928,7 @@ export class HiveSqlParser extends SQLParserBase {
                     }
 
                     this.state = 3518;
-                    this.tableAlias();
+                    localContext._alias = this.tableAlias();
                     this.state = 3530;
                     this.errorHandler.sync(this);
                     switch (this.interpreter.adaptivePredict(this.tokenStream, 458, this.context) ) {
@@ -34747,15 +34747,16 @@ export class TableConstraintContext extends antlr.ParserRuleContext {
 
 export class ColumnNameTypeConstraintContext extends antlr.ParserRuleContext {
     public _colName?: ColumnNameCreateContext;
+    public _colType?: ColumnTypeContext;
     public _comment?: Token | null;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public columnType(): ColumnTypeContext {
-        return this.getRuleContext(0, ColumnTypeContext)!;
-    }
     public columnNameCreate(): ColumnNameCreateContext {
         return this.getRuleContext(0, ColumnNameCreateContext)!;
+    }
+    public columnType(): ColumnTypeContext {
+        return this.getRuleContext(0, ColumnTypeContext)!;
     }
     public columnConstraint(): ColumnConstraintContext | null {
         return this.getRuleContext(0, ColumnConstraintContext);
@@ -38744,6 +38745,7 @@ export class JoinTokenContext extends antlr.ParserRuleContext {
 
 
 export class LateralViewContext extends antlr.ParserRuleContext {
+    public _alias?: TableAliasContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }

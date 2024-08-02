@@ -1,8 +1,9 @@
-import type {
+import {
     ColumnCreateTableContext,
     ColumnNameCreateContext,
     CopyCreateTableContext,
     CreateDatabaseContext,
+    CreateDefinitionContext,
     CreateFunctionContext,
     CreateFunctionLoadableContext,
     CreateViewContext,
@@ -15,12 +16,13 @@ import type {
     SingleStatementContext,
     TableNameContext,
     TableNameCreateContext,
+    TableSourceContext,
     ViewNameContext,
     ViewNameCreateContext,
 } from '../../lib/mysql/MySqlParser';
 import type { MySqlParserListener } from '../../lib/mysql/MySqlParserListener';
+import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
-import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class MySqlEntityCollector extends EntityCollector implements MySqlParserListener {
     /** ====== Entity Begin */
@@ -33,11 +35,28 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
     }
 
     exitTableName(ctx: TableNameContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE);
+        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            needCollectAttr
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [TableSourceContext.name],
+                      },
+                  ]
+                : undefined
+        );
     }
 
     exitTableNameCreate(ctx: TableNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE);
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [ColumnCreateTableContext.name],
+            },
+        ]);
     }
 
     exitViewName(ctx: ViewNameContext) {
@@ -49,11 +68,25 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
     }
 
     exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE);
+        this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateFunctionContext.name],
+            },
+        ]);
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE);
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateDefinitionContext.name],
+            },
+            {
+                attrName: AttrName.colType,
+                endContextList: [CreateDefinitionContext.name],
+            },
+        ]);
     }
 
     /** ===== Statement begin */
