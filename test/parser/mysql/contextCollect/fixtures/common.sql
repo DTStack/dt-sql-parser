@@ -1,4 +1,4 @@
-CREATE TABLE new_tb_with_col (id int, age int);
+CREATE TABLE new_tb_with_col (id int COMMENT 'col1', age varchar(3)) COMMENT 'new_tb_with_col comment';
 
 CREATE TABLE new_tb_from_old AS
     SELECT 
@@ -18,7 +18,7 @@ SELECT * FROM select_tb LIMIT 5,10;
 
 SELECT * INTO @my_var FROM into_select_tb;
 
-SELECT * FROM from_tb LEFT JOIN join_tb ON (t1.a = t2.a);
+SELECT * FROM from_tb AS tb1 LEFT JOIN join_tb ON (t1.a = t2.a);
 
 INSERT INTO insert_tb (a,b,c) VALUES(1,2,3), (4,5,6), (7,8,9);
 
@@ -36,6 +36,6 @@ SHOW CREATE SCHEMA IF NOT EXISTS db_name;
 
 DROP SCHEMA IF EXISTS db_name;
 
-CREATE DEFINER = 'user' FUNCTION hello (s CHAR(20)) RETURNS CHAR(50) DETERMINISTIC RETURN CONCAT('Hello, ',s,'!');
+CREATE DEFINER = 'user' FUNCTION hello (s CHAR(20)) RETURNS CHAR(50) DETERMINISTIC COMMENT 'this is a defuner user function' RETURN CONCAT('Hello, ',s,'!');
 
 CREATE FUNCTION IF NOT EXISTS my_concat_ws RETURNS STRING SONAME 'udf_my_concat_ws.so';
