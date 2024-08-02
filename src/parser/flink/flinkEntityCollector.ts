@@ -35,10 +35,12 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitDatabasePathCreate(ctx: DatabasePathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateDatabaseContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateDatabaseContext.name],
+            },
+        ]);
     }
 
     exitDatabasePath(ctx: DatabasePathContext) {
@@ -51,19 +53,23 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
             ctx,
             EntityContextType.TABLE,
             needCollectAttr
-                ? {
-                      attrNameList: [AttrName.alias],
-                      endContextList: [TableReferenceContext.name],
-                  }
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [TableReferenceContext.name],
+                      },
+                  ]
                 : undefined
         );
     }
 
     exitTablePathCreate(ctx: TablePathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateTableContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateTableContext.name],
+            },
+        ]);
     }
 
     exitViewPath(ctx: ViewPathContext) {
@@ -71,17 +77,25 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitViewPathCreate(ctx: ViewPathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, {
-            attrNameList: [AttrName.comment],
-            endContextList: [CreateViewContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateViewContext.name],
+            },
+        ]);
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, {
-            attrNameList: [AttrName.comment, AttrName.colType],
-            endContextList: [PhysicalColumnDefinitionContext.name],
-        });
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [PhysicalColumnDefinitionContext.name],
+            },
+            {
+                attrName: AttrName.colType,
+                endContextList: [PhysicalColumnDefinitionContext.name],
+            },
+        ]);
     }
 
     exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
