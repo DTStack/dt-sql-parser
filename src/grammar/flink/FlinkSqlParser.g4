@@ -49,7 +49,7 @@ ddlStatement
     | createFunction
     | createCatalog
     | alterTable
-    | alertView
+    | alterView
     | alterDatabase
     | alterFunction
     | dropCatalog
@@ -375,7 +375,7 @@ notForced
     : KW_NOT KW_ENFORCED
     ;
 
-alertView
+alterView
     : KW_ALTER KW_VIEW viewPath (renameDefinition | KW_AS queryStatement)
     ;
 
