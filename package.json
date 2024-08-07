@@ -59,6 +59,10 @@
     "typescript": "^5.0.4",
     "yargs-parser": "^21.1.1"
   },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.7.0",
   "git repository": "https://github.com/DTStack/dt-sql-parser",
   "repository": "https://github.com/DTStack/dt-sql-parser",
   "publishConfig": {
