@@ -3,28 +3,28 @@ description: Suggest an idea for this project
 title: '[Feature Request]: '
 labels: []
 body:
-  - type: markdown
-    attributes:
-      value: |
-        To help us efficiently reviewing your feature request, please fill out this form.
+    - type: markdown
+      attributes:
+          value: |
+              To help us efficiently reviewing your feature request, please fill out this form.
 
-  - type: dropdown
-    id: sql-type
-    attributes:
-      label: Topic
-      options:
-        - Support new SQL
-        - Support new features on parser
-        - Enhance existing features 
-        - Documents
-        - Any Others
-    validations:
-      required: true
+    - type: dropdown
+      id: sql-type
+      attributes:
+          label: Topic
+          options:
+              - Support new SQL
+              - Support new features on parser
+              - Enhance existing features
+              - Documents
+              - Any Others
+      validations:
+          required: true
 
-  - type: textarea
-    id: description
-    attributes:
-      label: Description
-      description: Please describe your feature request.
-    validations:
-      required: true
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: Please describe your feature request.
+      validations:
+          required: true

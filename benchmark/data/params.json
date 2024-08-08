@@ -4,7 +4,7 @@
         "getSuggestionAtCaretPosition": ["$sql", { "lineNumber": 974, "column": 37 }]
     },
     "suggestion_flink": {
-         "getAllEntities": ["$sql", { "lineNumber": 1020, "column": 38 }],
+        "getAllEntities": ["$sql", { "lineNumber": 1020, "column": 38 }],
         "getSuggestionAtCaretPosition": ["$sql", { "lineNumber": 1020, "column": 38 }]
     }
 }

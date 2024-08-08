@@ -1,67 +1,66 @@
 name: Bug Report
 description: File a bug report
-title: "[Bug]: "
+title: '[Bug]: '
 labels: []
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to fill out this bug report!
 
-  - type: input
-    id: version
-    attributes:
-      label: Version
-      description: Which version did the problem appear on?
-      placeholder: v0.0.1
-    validations:
-      required: true
+    - type: input
+      id: version
+      attributes:
+          label: Version
+          description: Which version did the problem appear on?
+          placeholder: v0.0.1
+      validations:
+          required: true
 
-  - type: dropdown
-    id: sql-type
-    attributes:
-      label: Which SQL?
-      description: Which kind of SQL did the problem appear on?
-      options:
-        - MySQL
-        - Flink
-        - Spark
-        - Hive
-        - Postgre
-        - Trino
-        - Impala
-        - Any Others
-    validations:
-      required: true
+    - type: dropdown
+      id: sql-type
+      attributes:
+          label: Which SQL?
+          description: Which kind of SQL did the problem appear on?
+          options:
+              - MySQL
+              - Flink
+              - Spark
+              - Hive
+              - Postgre
+              - Trino
+              - Impala
+              - Any Others
+      validations:
+          required: true
 
-  - type: textarea
-    id: sql-content
-    attributes:
-      label:  SQL content
-      placeholder: SELECT * FROM table;
-      description: Please provide the minimal SQL text that reproduces the problem.
-      render: sql
+    - type: textarea
+      id: sql-content
+      attributes:
+          label: SQL content
+          placeholder: SELECT * FROM table;
+          description: Please provide the minimal SQL text that reproduces the problem.
+          render: sql
 
-  - type: textarea
-    id: js-code
-    attributes:
-      label:  JavaScript/TypeScript code
-      description: Please provide the minimal demo code that reproduces the problem.
-      render: typescript
+    - type: textarea
+      id: js-code
+      attributes:
+          label: JavaScript/TypeScript code
+          description: Please provide the minimal demo code that reproduces the problem.
+          render: typescript
 
-  - type: textarea
-    id: what-happened
-    attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-    validations:
-      required: true
+    - type: textarea
+      id: what-happened
+      attributes:
+          label: What happened?
+          description: Also tell us, what did you expect to happen?
+          placeholder: Tell us what you see!
+      validations:
+          required: true
 
-  - type: textarea
-    id: logs
-    attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
-
+    - type: textarea
+      id: logs
+      attributes:
+          label: Relevant log output
+          description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+          render: shell

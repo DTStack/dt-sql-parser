@@ -11,92 +11,88 @@ on:
 
 jobs:
     check:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          node-version: [18.x, 20.x]
-          # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [18.x, 20.x]
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-        - name: Install pnpm
-          uses: pnpm/action-setup@v4.0.0
-          with:
-              version: 9.7.0
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4.0.0
+              with:
+                  version: 9.7.0
 
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v4
-          with:
-              node-version: ${{ matrix.node-version }}
-              cache: 'pnpm'
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'pnpm'
 
-        - name: Install dependencies
-          run: pnpm install --frozen-lockfile
-        
-        - name: Run prettier lint
-          run: pnpm lint
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
 
-        - name: Run tsc check
-          run: pnpm check-types
+            - name: Run prettier check
+              run: pnpm prettier-check
 
+            - name: Run tsc check
+              run: pnpm check-types
 
     test:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          node-version: [18.x, 20.x]
-          # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [18.x, 20.x]
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-        - name: Install pnpm
-          uses: pnpm/action-setup@v4.0.0
-          with:
-              version: 9.7.0
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4.0.0
+              with:
+                  version: 9.7.0
 
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v4
-          with:
-              node-version: ${{ matrix.node-version }}
-              cache: 'pnpm'
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'pnpm'
 
-        - name: Install dependencies
-          run: pnpm install --frozen-lockfile
-  
-        - name: Run Units Test
-          run: pnpm test
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
 
+            - name: Run Units Test
+              run: pnpm test
 
     build:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          node-version: [18.x, 20.x]
-          # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [18.x, 20.x]
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-        - name: Install pnpm
-          uses: pnpm/action-setup@v4.0.0
-          with:
-              version: 9.7.0
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4.0.0
+              with:
+                  version: 9.7.0
 
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v4
-          with:
-              node-version: ${{ matrix.node-version }}
-              cache: 'pnpm'
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'pnpm'
 
-        - name: Install dependencies
-          run: pnpm install --frozen-lockfile
-        
-        - name: Run Build
-          run: pnpm build
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
 
-
+            - name: Run Build
+              run: pnpm build
