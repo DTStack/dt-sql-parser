@@ -433,6 +433,9 @@ dt-sql-parser 的自动补全功能依赖于 [antlr4-c3](https://github.com/mike
 
 <br/>
 
+## 贡献指南
+
+[CONTRIBUTING-zh_CN](./CONTRIBUTING-zh_CN.md)
 
 ## 许可证
 

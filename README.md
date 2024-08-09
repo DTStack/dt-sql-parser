@@ -436,6 +436,10 @@ For the editor, this strategy is also more intuitive. After the user enters `SHO
 
 <br/>
 
+## Contributing
+
+Refer to [CONTRIBUTING](./CONTRIBUTING.md)
+
 ## License
 
 [MIT](./LICENSE)
