@@ -2,7 +2,7 @@
     "compilerOptions": {
         "outDir": "./dist/",
         "sourceMap": false,
-        "allowJs":true,
+        "allowJs": true,
         "target": "es6",
         "module": "ESNext",
         "moduleResolution": "node",
@@ -14,27 +14,14 @@
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "forceConsistentCasingInFileNames": true,
-        "lib": [
-            "ESNext",
-            "DOM"
-        ],
+        "lib": ["ESNext", "DOM"],
         "skipLibCheck": true,
-        "types": [
-            "node",
-            "jest"
-        ],
-        "typeRoots": [
-            "node",
-            "node_modules/@types",
-        ]
+        "types": ["node", "jest"],
+        "typeRoots": ["node", "node_modules/@types"]
     },
     "isolatedModules": true,
-    "include": [
-        "./src/**/*"
-    ],
+    "include": ["./src/**/*"],
     "typeAcquisition": {
-        "include": [
-            "jest"
-        ]
+        "include": ["jest"]
     }
 }

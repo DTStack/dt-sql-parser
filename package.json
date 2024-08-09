@@ -4,13 +4,17 @@
   "authors": "DTStack Corporation",
   "description": "SQL Parsers for BigData, built with antlr4",
   "keywords": [
+    "antlr4",
     "sql",
     "parser",
-    "monaco-editor",
+    "code-completion",
     "hive",
     "spark",
     "flink",
-    "bigdata"
+    "mysql",
+    "postgresql",
+    "trino",
+    "impala"
   ],
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -26,13 +30,17 @@
     "check-types": "tsc -p ./tsconfig.json && tsc -p ./test/tsconfig.json",
     "test": "NODE_OPTIONS=--max_old_space_size=4096 && jest",
     "release": "node ./scripts/release.js",
-    "lint": "prettier --check '**/*.ts' --config ./.prettierrc",
-    "lint-fix": "prettier --write '**/*.ts' --config ./.prettierrc",
+    "prettier-check": "prettier --check .",
+    "format": "prettier --write .",
     "format-g4": "antlr-format -c ./antlr.format.json -v ./src/grammar/**/*.g4",
     "cleanComment": "node ./scripts/cleanCommentCli.js",
     "benchmark": "node --no-warnings ./scripts/benchmark.js"
   },
   "license": "MIT",
+  "dependencies": {
+    "antlr4-c3": "3.3.7",
+    "antlr4ng": "2.0.11"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
@@ -59,14 +67,27 @@
     "typescript": "^5.0.4",
     "yargs-parser": "^21.1.1"
   },
-  "git repository": "https://github.com/DTStack/dt-sql-parser",
-  "repository": "https://github.com/DTStack/dt-sql-parser",
+  "repository": {
+    "type": "git",
+		"url": "https://github.com/DTStack/dt-sql-parser.git"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "dependencies": {
-    "antlr4-c3": "3.3.7",
-    "antlr4ng": "2.0.11"
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
   },
-  "sideEffects": false
+  "packageManager": "pnpm@9.7.0",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/@commitlint/cz-commitlint"
+    }
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --ignore-unknown"
+    ],
+    "*.g4": ["antlr-format -c ./antlr.format.json -v"]
+  }
 }
