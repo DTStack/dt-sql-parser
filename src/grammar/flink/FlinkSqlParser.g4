@@ -1066,6 +1066,10 @@ reservedKeywordsUsedAsFuncParam
     | KW_ALL
     | KW_BOTH
     | KW_CURRENT_TIMESTAMP
+    | KW_CURRENT_DATE
+    | KW_CURRENT_TIME
+    | KW_LOCALTIME
+    | KW_LOCALTIMESTAMP
     | KW_DISTINCT
     | KW_LEADING
     | KW_TRAILING
