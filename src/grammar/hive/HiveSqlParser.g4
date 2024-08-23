@@ -887,7 +887,9 @@ tableConstraint
     ;
 
 columnNameTypeConstraint
-    : colName=columnNameCreate columnType columnConstraint? (KW_COMMENT comment=StringLiteral)?
+    : colName=columnNameCreate colType=columnType columnConstraint? (
+        KW_COMMENT comment=StringLiteral
+    )?
     ;
 
 columnConstraint
@@ -1363,10 +1365,12 @@ joinToken
     ;
 
 lateralView
-    : KW_LATERAL KW_VIEW KW_OUTER function_ tableAlias (KW_AS id_ (COMMA id_)*)?
+    : KW_LATERAL KW_VIEW KW_OUTER function_ alias=tableAlias (KW_AS id_ (COMMA id_)*)?
     | COMMA? KW_LATERAL (
-        KW_VIEW function_ tableAlias (KW_AS id_ (COMMA id_)*)?
-        | KW_TABLE LPAREN valuesClause RPAREN KW_AS? tableAlias (LPAREN id_ (COMMA id_)* RPAREN)?
+        KW_VIEW function_ alias=tableAlias (KW_AS id_ (COMMA id_)*)?
+        | KW_TABLE LPAREN valuesClause RPAREN KW_AS? alias=tableAlias (
+            LPAREN id_ (COMMA id_)* RPAREN
+        )?
     )
     ;
 

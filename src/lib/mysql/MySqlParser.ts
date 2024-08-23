@@ -6703,7 +6703,7 @@ export class MySqlParser extends SQLParserBase {
                 this.state = 1697;
                 this.match(MySqlParser.KW_COMMENT);
                 this.state = 1698;
-                this.match(MySqlParser.STRING_LITERAL);
+                (localContext as RoutineCommentContext)._comment = this.match(MySqlParser.STRING_LITERAL);
                 }
                 break;
             case MySqlParser.KW_LANGUAGE:
@@ -7368,7 +7368,7 @@ export class MySqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 1851;
-            this.dataType();
+            localContext._colType = this.dataType();
             this.state = 1855;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 172, this.context);
@@ -7518,7 +7518,7 @@ export class MySqlParser extends SQLParserBase {
                 this.state = 1877;
                 this.match(MySqlParser.KW_COMMENT);
                 this.state = 1878;
-                this.match(MySqlParser.STRING_LITERAL);
+                (localContext as CommentColumnConstraintContext)._comment = this.match(MySqlParser.STRING_LITERAL);
                 }
                 break;
             case MySqlParser.KW_COLUMN_FORMAT:
@@ -8149,7 +8149,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 1998;
-                this.match(MySqlParser.STRING_LITERAL);
+                (localContext as TableOptionCommentContext)._comment = this.match(MySqlParser.STRING_LITERAL);
                 }
                 break;
             case 10:
@@ -55075,6 +55075,7 @@ export class RoutineLanguageContext extends RoutineOptionContext {
     }
 }
 export class RoutineCommentContext extends RoutineOptionContext {
+    public _comment?: Token | null;
     public constructor(ctx: RoutineOptionContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
@@ -55463,6 +55464,7 @@ export class ConstraintSymbolContext extends antlr.ParserRuleContext {
 
 
 export class ColumnDefinitionContext extends antlr.ParserRuleContext {
+    public _colType?: DataTypeContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -55610,6 +55612,7 @@ export class AutoIncrementColumnConstraintContext extends ColumnConstraintContex
     }
 }
 export class CommentColumnConstraintContext extends ColumnConstraintContext {
+    public _comment?: Token | null;
     public constructor(ctx: ColumnConstraintContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
@@ -57075,6 +57078,7 @@ export class TableOptionSecondaryEngineAttributeContext extends TableOptionConte
     }
 }
 export class TableOptionCommentContext extends TableOptionContext {
+    public _comment?: Token | null;
     public constructor(ctx: TableOptionContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);

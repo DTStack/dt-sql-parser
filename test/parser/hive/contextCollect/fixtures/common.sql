@@ -58,3 +58,9 @@ SHOW LOCKS DATABASE db1;
 CREATE FUNCTION base_analizer AS 'com.udf.BaseFieldUDF';
 
 CREATE TEMPORARY FUNCTION flat_analizer AS 'com.udtf.EventJsonUDTF';
+
+CREATE TABLE test_change (a int, b varchar(255) COMMENT 'column 2', c int) COMMENT 'table test comment';
+
+CREATE DATABASE testdb COMMENT 'test database' LOCATION '/test/path';
+
+SELECT a.* FROM table_busi a JOIN table_issue b ON (a.id = b.id AND a.department = b.department);
