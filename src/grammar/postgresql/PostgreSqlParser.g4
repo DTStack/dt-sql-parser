@@ -620,7 +620,7 @@ typedtableelement
     ;
 
 column_def
-    : column_name_create typename create_generic_options? (
+    : column_name_create colType=typename create_generic_options? (
         KW_STORAGE (KW_PLAIN | KW_EXTERNAL | KW_EXTENDED | KW_MAIN | KW_DEFAULT | colid)
     )? (KW_COMPRESSION colid)? (opt_collate_clause)? (KW_WITH KW_OPTIONS)? colconstraint*
     ;
@@ -2163,12 +2163,12 @@ table_ref
     ;
 
 alias_clause
-    : KW_AS? colid (OPEN_PAREN name_list CLOSE_PAREN)?
+    : KW_AS? alias=colid (OPEN_PAREN name_list CLOSE_PAREN)?
     ;
 
 func_alias_clause
     : alias_clause
-    | (KW_AS colid? | colid) OPEN_PAREN tablefuncelementlist CLOSE_PAREN
+    | (KW_AS alias=colid? | alias=colid) OPEN_PAREN tablefuncelementlist CLOSE_PAREN
     ;
 
 join_type
@@ -2598,7 +2598,7 @@ func_arg_list
 func_arg_expr
     : column_name
     | expression
-    | type_function_name (COLON_EQUALS | EQUALS_GREATER) expression
+    | type_function_name ((COLON_EQUALS | EQUALS_GREATER) expression)?
     ;
 
 array_expr

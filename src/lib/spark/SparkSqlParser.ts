@@ -578,7 +578,7 @@ export class SparkSqlParser extends SQLParserBase {
     public static readonly RULE_defaultExpression = 165;
     public static readonly RULE_variableDefaultExpression = 166;
     public static readonly RULE_colTypeList = 167;
-    public static readonly RULE_colType = 168;
+    public static readonly RULE_columnType = 168;
     public static readonly RULE_createOrReplaceTableColTypeList = 169;
     public static readonly RULE_createOrReplaceTableColType = 170;
     public static readonly RULE_colDefinitionOption = 171;
@@ -605,7 +605,7 @@ export class SparkSqlParser extends SQLParserBase {
     public static readonly RULE_number = 192;
     public static readonly RULE_alterColumnAction = 193;
     public static readonly RULE_stringLit = 194;
-    public static readonly RULE_comment = 195;
+    public static readonly RULE_commentStr = 195;
     public static readonly RULE_version = 196;
     public static readonly RULE_ansiNonReserved = 197;
     public static readonly RULE_strictNonReserved = 198;
@@ -803,14 +803,14 @@ export class SparkSqlParser extends SQLParserBase {
         "qualifiedColTypeWithPositionForAdd", "qualifiedColTypeWithPositionSeqForReplace", 
         "qualifiedColTypeWithPositionForReplace", "colDefinitionDescriptorWithPosition", 
         "defaultExpression", "variableDefaultExpression", "colTypeList", 
-        "colType", "createOrReplaceTableColTypeList", "createOrReplaceTableColType", 
+        "columnType", "createOrReplaceTableColTypeList", "createOrReplaceTableColType", 
         "colDefinitionOption", "generationExpression", "complexColTypeList", 
         "complexColType", "whenClause", "windowClause", "zorderClause", 
         "namedWindow", "windowSpec", "windowFrame", "frameBound", "qualifiedNameList", 
         "functionName", "functionNameCreate", "qualifiedName", "errorCapturingIdentifier", 
         "errorCapturingIdentifierExtra", "identifier", "strictIdentifier", 
         "quotedIdentifier", "backQuotedIdentifier", "number", "alterColumnAction", 
-        "stringLit", "comment", "version", "ansiNonReserved", "strictNonReserved", 
+        "stringLit", "commentStr", "version", "ansiNonReserved", "strictNonReserved", 
         "nonReserved",
     ];
 
@@ -1790,7 +1790,7 @@ export class SparkSqlParser extends SQLParserBase {
                 this.state = 664;
                 (localContext as HiveChangeColumnContext)._colName = this.columnName();
                 this.state = 665;
-                this.colType();
+                this.columnType();
                 this.state = 667;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -3385,7 +3385,7 @@ export class SparkSqlParser extends SQLParserBase {
                 this.state = 1116;
                 this.match(SparkSqlParser.KW_IS);
                 this.state = 1117;
-                this.comment();
+                this.commentStr();
                 }
                 break;
             case 64:
@@ -3403,7 +3403,7 @@ export class SparkSqlParser extends SQLParserBase {
                 this.state = 1123;
                 this.match(SparkSqlParser.KW_IS);
                 this.state = 1124;
-                this.comment();
+                this.commentStr();
                 }
                 break;
             case 65:
@@ -5058,7 +5058,7 @@ export class SparkSqlParser extends SQLParserBase {
             this.state = 1566;
             this.match(SparkSqlParser.KW_COMMENT);
             this.state = 1567;
-            this.stringLit();
+            localContext._comment = this.stringLit();
             }
         }
         catch (re) {
@@ -12854,7 +12854,7 @@ export class SparkSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 2900;
-                this.strictIdentifier();
+                localContext._alias = this.strictIdentifier();
                 this.state = 2902;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 375, this.context) ) {
@@ -13803,7 +13803,7 @@ export class SparkSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 3033;
-                this.colType();
+                this.columnType();
                 }
                 break;
             }
@@ -16954,7 +16954,7 @@ export class SparkSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 3680;
-            this.colType();
+            this.columnType();
             this.state = 3685;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 475, this.context);
@@ -16965,7 +16965,7 @@ export class SparkSqlParser extends SQLParserBase {
                     this.state = 3681;
                     this.match(SparkSqlParser.COMMA);
                     this.state = 3682;
-                    this.colType();
+                    this.columnType();
                     }
                     }
                 }
@@ -16989,9 +16989,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public colType(): ColTypeContext {
-        let localContext = new ColTypeContext(this.context, this.state);
-        this.enterRule(localContext, 336, SparkSqlParser.RULE_colType);
+    public columnType(): ColumnTypeContext {
+        let localContext = new ColumnTypeContext(this.context, this.state);
+        this.enterRule(localContext, 336, SparkSqlParser.RULE_columnType);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -17088,7 +17088,7 @@ export class SparkSqlParser extends SQLParserBase {
             this.state = 3705;
             localContext._colName = this.columnNameCreate();
             this.state = 3706;
-            this.dataType();
+            localContext._colType = this.dataType();
             this.state = 3710;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -18474,9 +18474,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public comment(): CommentContext {
-        let localContext = new CommentContext(this.context, this.state);
-        this.enterRule(localContext, 390, SparkSqlParser.RULE_comment);
+    public commentStr(): CommentStrContext {
+        let localContext = new CommentStrContext(this.context, this.state);
+        this.enterRule(localContext, 390, SparkSqlParser.RULE_commentStr);
         try {
             this.state = 3958;
             this.errorHandler.sync(this);
@@ -22353,8 +22353,8 @@ export class CommentNamespaceContext extends StatementContext {
     public KW_IS(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.KW_IS, 0)!;
     }
-    public comment(): CommentContext {
-        return this.getRuleContext(0, CommentContext)!;
+    public commentStr(): CommentStrContext {
+        return this.getRuleContext(0, CommentStrContext)!;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
         if(listener.enterCommentNamespace) {
@@ -23024,8 +23024,8 @@ export class HiveChangeColumnContext extends StatementContext {
     public KW_CHANGE(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.KW_CHANGE, 0)!;
     }
-    public colType(): ColTypeContext {
-        return this.getRuleContext(0, ColTypeContext)!;
+    public columnType(): ColumnTypeContext {
+        return this.getRuleContext(0, ColumnTypeContext)!;
     }
     public tableName(): TableNameContext {
         return this.getRuleContext(0, TableNameContext)!;
@@ -23882,8 +23882,8 @@ export class CommentTableContext extends StatementContext {
     public KW_IS(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.KW_IS, 0)!;
     }
-    public comment(): CommentContext {
-        return this.getRuleContext(0, CommentContext)!;
+    public commentStr(): CommentStrContext {
+        return this.getRuleContext(0, CommentStrContext)!;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
         if(listener.enterCommentTable) {
@@ -25197,6 +25197,7 @@ export class LocationSpecContext extends antlr.ParserRuleContext {
 
 
 export class CommentSpecContext extends antlr.ParserRuleContext {
+    public _comment?: StringLitContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -30588,6 +30589,7 @@ export class FunctionTableContext extends antlr.ParserRuleContext {
 
 
 export class TableAliasContext extends antlr.ParserRuleContext {
+    public _alias?: StrictIdentifierContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -31140,8 +31142,8 @@ export class PartitionFieldContext extends antlr.ParserRuleContext {
     public transform(): TransformContext | null {
         return this.getRuleContext(0, TransformContext);
     }
-    public colType(): ColTypeContext | null {
-        return this.getRuleContext(0, ColTypeContext);
+    public columnType(): ColumnTypeContext | null {
+        return this.getRuleContext(0, ColumnTypeContext);
     }
     public override get ruleIndex(): number {
         return SparkSqlParser.RULE_partitionField;
@@ -33319,14 +33321,14 @@ export class ColTypeListContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colType(): ColTypeContext[];
-    public colType(i: number): ColTypeContext | null;
-    public colType(i?: number): ColTypeContext[] | ColTypeContext | null {
+    public columnType(): ColumnTypeContext[];
+    public columnType(i: number): ColumnTypeContext | null;
+    public columnType(i?: number): ColumnTypeContext[] | ColumnTypeContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColTypeContext);
+            return this.getRuleContexts(ColumnTypeContext);
         }
 
-        return this.getRuleContext(i, ColTypeContext);
+        return this.getRuleContext(i, ColumnTypeContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -33360,7 +33362,7 @@ export class ColTypeListContext extends antlr.ParserRuleContext {
 }
 
 
-export class ColTypeContext extends antlr.ParserRuleContext {
+export class ColumnTypeContext extends antlr.ParserRuleContext {
     public _colName?: ErrorCapturingIdentifierContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -33381,21 +33383,21 @@ export class ColTypeContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, CommentSpecContext);
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_colType;
+        return SparkSqlParser.RULE_columnType;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterColType) {
-             listener.enterColType(this);
+        if(listener.enterColumnType) {
+             listener.enterColumnType(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitColType) {
-             listener.exitColType(this);
+        if(listener.exitColumnType) {
+             listener.exitColumnType(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitColType) {
-            return visitor.visitColType(this);
+        if (visitor.visitColumnType) {
+            return visitor.visitColumnType(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -33450,14 +33452,15 @@ export class CreateOrReplaceTableColTypeListContext extends antlr.ParserRuleCont
 
 export class CreateOrReplaceTableColTypeContext extends antlr.ParserRuleContext {
     public _colName?: ColumnNameCreateContext;
+    public _colType?: DataTypeContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public dataType(): DataTypeContext {
-        return this.getRuleContext(0, DataTypeContext)!;
-    }
     public columnNameCreate(): ColumnNameCreateContext {
         return this.getRuleContext(0, ColumnNameCreateContext)!;
+    }
+    public dataType(): DataTypeContext {
+        return this.getRuleContext(0, DataTypeContext)!;
     }
     public colDefinitionOption(): ColDefinitionOptionContext[];
     public colDefinitionOption(i: number): ColDefinitionOptionContext | null;
@@ -34556,7 +34559,7 @@ export class StringLitContext extends antlr.ParserRuleContext {
 }
 
 
-export class CommentContext extends antlr.ParserRuleContext {
+export class CommentStrContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -34567,21 +34570,21 @@ export class CommentContext extends antlr.ParserRuleContext {
         return this.getToken(SparkSqlParser.KW_NULL, 0);
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_comment;
+        return SparkSqlParser.RULE_commentStr;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterComment) {
-             listener.enterComment(this);
+        if(listener.enterCommentStr) {
+             listener.enterCommentStr(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitComment) {
-             listener.exitComment(this);
+        if(listener.exitCommentStr) {
+             listener.exitCommentStr(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitComment) {
-            return visitor.visitComment(this);
+        if (visitor.visitCommentStr) {
+            return visitor.visitCommentStr(this);
         } else {
             return visitor.visitChildren(this);
         }
