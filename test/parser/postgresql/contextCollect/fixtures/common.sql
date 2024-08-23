@@ -47,3 +47,6 @@ INSERT INTO insert_films (code, title, did, date_prod, kind)
 CREATE FUNCTION get_color_note (rainbow) RETURNS text AS
   'SELECT note FROM my_colors WHERE color = $1'
   LANGUAGE SQL;
+
+WITH RECURSIVE query_name (id) AS (SELECT id FROM table_expression) 
+SELECT DISTINCT ON (col1,col2) random() AS name1 FROM table_expression1 AS tb_1 WHERE name1=name1 GROUP BY DISTINCT id;

@@ -442,7 +442,7 @@ functionParameter
     ;
 
 routineOption
-    : KW_COMMENT STRING_LITERAL                                                                  # routineComment
+    : KW_COMMENT comment=STRING_LITERAL                                                          # routineComment
     | KW_LANGUAGE KW_SQL                                                                         # routineLanguage
     | KW_NOT? KW_DETERMINISTIC                                                                   # routineBehavior
     | (KW_CONTAINS KW_SQL | KW_NO KW_SQL | KW_READS KW_SQL KW_DATA | KW_MODIFIES KW_SQL KW_DATA) # routineData
@@ -483,7 +483,7 @@ constraintSymbol
     ;
 
 columnDefinition
-    : dataType columnConstraint*
+    : colType=dataType columnConstraint*
     ;
 
 columnConstraint
@@ -494,7 +494,7 @@ columnConstraint
     | (KW_AUTO_INCREMENT | KW_ON KW_UPDATE currentTimestamp)                       # autoIncrementColumnConstraint
     | KW_PRIMARY? KW_KEY                                                           # primaryKeyColumnConstraint
     | KW_UNIQUE KW_KEY?                                                            # uniqueKeyColumnConstraint
-    | KW_COMMENT STRING_LITERAL                                                    # commentColumnConstraint
+    | KW_COMMENT comment=STRING_LITERAL                                            # commentColumnConstraint
     | KW_COLUMN_FORMAT colformat=(KW_FIXED | KW_DYNAMIC | KW_DEFAULT)              # formatColumnConstraint
     | KW_STORAGE storageval=(KW_DISK | KW_MEMORY | KW_DEFAULT)                     # storageColumnConstraint
     | referenceDefinition                                                          # referenceColumnConstraint
@@ -536,7 +536,7 @@ tableOption
     | KW_DEFAULT? charSet '='? (charsetName | KW_DEFAULT)              # tableOptionCharset
     | (KW_CHECKSUM | KW_PAGE_CHECKSUM) '='? boolValue=('0' | '1')      # tableOptionChecksum
     | KW_DEFAULT? KW_COLLATE '='? collationName                        # tableOptionCollate
-    | KW_COMMENT '='? STRING_LITERAL                                   # tableOptionComment
+    | KW_COMMENT '='? comment=STRING_LITERAL                           # tableOptionComment
     | KW_COMPRESSION '='? (STRING_LITERAL | ID)                        # tableOptionCompression
     | KW_CONNECTION '='? STRING_LITERAL                                # tableOptionConnection
     | (KW_DATA | KW_INDEX) KW_DIRECTORY '='? STRING_LITERAL            # tableOptionDataDirectory
