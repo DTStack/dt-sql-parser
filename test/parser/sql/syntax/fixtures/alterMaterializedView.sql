@@ -1,0 +1,13 @@
+-- ALTER MATERIALIZED VIEW view_identifier ENABLE|DISABLE REWRITE;
+
+ALTER MATERIALIZED VIEW mv ENABLE REWRITE;
+
+ALTER MATERIALIZED VIEW userDB.mv ENABLE REWRITE;
+
+ALTER MATERIALIZED VIEW mv DISABLE REWRITE;
+
+-- ALTER MATERIALIZED VIEW view_identifier SET TBLPROPERTIES ( property_name=property_value, ... );
+
+ALTER MATERIALIZED VIEW mv SET TBLPROPERTIES ('mv.enableAutoRefresh'='true', 'mv.refreshInterval'='10min');
+
+ALTER MATERIALIZED VIEW userDB.mv SET TBLPROPERTIES ('mv.enableAutoRefresh'='true', 'mv.refreshInterval'='10min');
