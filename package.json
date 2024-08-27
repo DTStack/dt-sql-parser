@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "4.0.2",
+  "version": "4.1.0-beta.0",
   "authors": "DTStack Corporation",
   "description": "SQL Parsers for BigData, built with antlr4",
   "keywords": [
@@ -69,7 +69,7 @@
   },
   "repository": {
     "type": "git",
-		"url": "https://github.com/DTStack/dt-sql-parser.git"
+    "url": "https://github.com/DTStack/dt-sql-parser.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -88,6 +88,8 @@
     "*": [
       "prettier --write --ignore-unknown"
     ],
-    "*.g4": ["antlr-format -c ./antlr.format.json -v"]
+    "*.g4": [
+      "antlr-format -c ./antlr.format.json -v"
+    ]
   }
 }
