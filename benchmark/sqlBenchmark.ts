@@ -16,14 +16,14 @@ export type BenchmarkResult = {
 };
 
 // 过滤掉异常数据，m为判断为异常值的标准差倍数
-const removeOutliers = (data, m = 2) => {
+const removeOutliers = (data, m = 1) => {
     if (data.length <= 2) return data;
     const mean = data.reduce((a, b) => a + b, 0) / data.length;
     const standardDeviation = Math.sqrt(
         data.map((x) => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / data.length
     );
 
-    return data.filter((x) => Math.abs(x - mean) < m * standardDeviation);
+    return data.filter((x) => Math.abs(x - mean) <= m * standardDeviation);
 };
 
 const tableColumns = [
@@ -57,6 +57,14 @@ const tableColumns = [
     },
 ];
 
+const releaseColumns = tableColumns.filter(
+    (column) => !['lastCostTime', 'costTimes', 'loopTimes'].includes(column.name)
+);
+
+const hotRunColumns = tableColumns.filter(
+    (column) => !['avgTime', 'lastCostTime'].includes(column.name)
+);
+
 /**
  * Key is sql directory name, value is module export name.
  */
@@ -75,14 +83,21 @@ export type Language = keyof typeof languageNameMap;
 export const languages = Object.keys(languageNameMap) as Language[];
 
 class SqlBenchmark {
-    constructor(language: string) {
+    constructor(language: string, isHot: boolean, isRelease: boolean) {
         this.language = language;
+        this.isHot = isHot;
+        this.isRelease = isRelease;
+
         this._lastResultsCache = this.getLastResults();
     }
 
     public results: BenchmarkResult[] = [];
 
     public readonly language: string;
+
+    public readonly isHot: boolean;
+
+    public readonly isRelease: boolean;
 
     private _DEFAULT_LOOP_TIMES = 5;
 
@@ -100,19 +115,28 @@ class SqlBenchmark {
      */
     getSqlParser(): BasicSQL {
         const caches = Object.keys(require.cache);
-        caches.forEach((moduleName) => {
-            const module = require.cache[moduleName]!;
-            // Fix Memory Leak
-            if (module.parent) {
-                module.parent.children = [];
-            }
-            delete require.cache[moduleName];
-        });
+        if (!this.isHot) {
+            caches
+                .filter((cache) => cache.includes('dt-sql-parser/src'))
+                .forEach((moduleName) => {
+                    const module = require.cache[moduleName]!;
+                    // Fix Memory Leak
+                    if (module.parent) {
+                        module.parent.children = [];
+                    }
+                    delete require.cache[moduleName];
+                });
+        }
+
         const Parser = require(path.resolve(`src/parser/${this.language}/index.ts`))[
             languageNameMap[this.language]
         ];
         return new Parser();
     }
+
+    getColumns = () => {
+        return this.isRelease ? releaseColumns : this.isHot ? hotRunColumns : tableColumns;
+    };
 
     /**
      * @param type Which parser method you want to run
@@ -128,9 +152,11 @@ class SqlBenchmark {
         sqlRows: number,
         loopTimes: number = this._DEFAULT_LOOP_TIMES
     ) {
+        let avgTime = 0;
         const costTimes: number[] = [];
         const lastResult =
             this._lastResultsCache?.find((item) => item.type === type && item.name === name) ?? {};
+
         for (let i = 0; i < loopTimes; i++) {
             const parser = this.getSqlParser();
             if (!parser[type] || typeof parser[type] !== 'function') return;
@@ -141,10 +167,16 @@ class SqlBenchmark {
 
             costTimes.push(Math.round(costTime));
         }
-        const filteredData = removeOutliers(costTimes);
-        const avgTime = Math.round(
-            filteredData.reduce((prev, curr) => prev + curr, 0) / filteredData.length
-        );
+
+        if (this.isHot) {
+            avgTime = costTimes[0];
+        } else {
+            const filteredData = removeOutliers(costTimes);
+            avgTime = Math.round(
+                filteredData.reduce((prev, curr) => prev + curr, 0) / filteredData.length
+            );
+        }
+
         const result = {
             name,
             avgTime,
@@ -160,10 +192,12 @@ class SqlBenchmark {
 
     getLastResults() {
         const reportPath = path.join(__dirname, `./reports/${this.language}.benchmark.md`);
-        if (!fs.existsSync(reportPath)) return null;
+        if (this.isRelease || !fs.existsSync(reportPath)) return null;
+
         const report = fs.readFileSync(reportPath, { encoding: 'utf-8' });
         const pattern = /<input .*? value=['"](.+?)['"]\s*\/>/;
         const match = pattern.exec(report);
+
         if (match) {
             const lastResultsStr = match[1];
             try {
@@ -174,6 +208,7 @@ class SqlBenchmark {
                 return null;
             }
         }
+
         return null;
     }
 
@@ -188,17 +223,18 @@ class SqlBenchmark {
                 lastCostTime !== undefined &&
                 Math.abs(lastCostTime - currentCostTime) / currentCostTime >
                     this._HIGHLIGHT_DIFF_RATIO;
-            const [color, icon] = isSignificantDiff
-                ? currentCostTime > lastCostTime
-                    ? ['red', '↓']
-                    : ['green', '↑']
-                : ['#FFF', ' '];
+            const [color, icon] =
+                isSignificantDiff && !this.isHot
+                    ? currentCostTime > lastCostTime
+                        ? ['red', '↑']
+                        : ['green', '↓']
+                    : ['#FFF', ' '];
 
             table.addRow(
                 {
                     ...record,
-                    lastCostTime: record.lastCostTime ?? '-',
-                    avgTime: record.avgTime + icon,
+                    lastCostTime: !this.isHot ? record.lastCostTime ?? '-' : '-',
+                    avgTime: !this.isHot ? record.avgTime + icon : '-',
                 },
                 {
                     color,
@@ -219,11 +255,13 @@ class SqlBenchmark {
         const currentVersion = require('../package.json').version;
         const parsedEnvInfo = JSON.parse(envInfo);
 
-        if (!fs.existsSync(path.join(__dirname, `./reports`))) {
-            fs.mkdirSync(path.join(__dirname, `./reports`), { recursive: true });
+        const baseDir = path.join(__dirname, this.isRelease ? '../benchmark_reports' : './reports');
+
+        if (!fs.existsSync(baseDir)) {
+            fs.mkdirSync(baseDir, { recursive: true });
         }
 
-        const writePath = path.join(__dirname, `./reports/${this.language}.benchmark.md`);
+        const writePath = path.join(baseDir, `./${this.language}.benchmark.md`);
         const writter = new MarkdownWritter(writePath);
         writter.writeHeader('Benchmark', 2);
         writter.writeLine();
@@ -239,21 +277,24 @@ class SqlBenchmark {
         writter.writeHeader('Device', 3);
         writter.writeText(parsedEnvInfo.System.OS);
         writter.writeText(parsedEnvInfo.System.CPU);
-        writter.writeText(parsedEnvInfo.System.Memory);
+        writter.writeText(parsedEnvInfo.System.Memory?.split('/')[1]?.trim());
         writter.writeLine();
 
         writter.writeHeader('Version', 3);
-        writter.writeText(`dt-sql-parser: ${currentVersion}`);
-        writter.writeText(`antlr4-c3: ${parsedEnvInfo.npmPackages['antlr4-c3']?.installed}`);
-        writter.writeText(`antlr4ng: ${parsedEnvInfo.npmPackages['antlr4ng']?.installed}`);
+        writter.writeText(`\`nodejs\`: ${process.version}`);
+        writter.writeText(`\`dt-sql-parser\`: ${currentVersion}`);
+        writter.writeText(`\`antlr4-c3\`: ${parsedEnvInfo.npmPackages['antlr4-c3']?.installed}`);
+        writter.writeText(`\`antlr4ng\`: ${parsedEnvInfo.npmPackages['antlr4ng']?.installed}`);
         writter.writeLine();
 
         writter.writeHeader('Report', 3);
-        writter.writeTable(tableColumns, this.results);
+
+        const columns = this.getColumns();
+        writter.writeTable(columns, this.results);
         writter.writeLine();
 
         // Save original data via hidden input
-        writter.writeHiddenInput(this.results);
+        !this.isRelease && writter.writeHiddenInput(this.results);
 
         writter.save();
 

@@ -34,7 +34,8 @@
     "format": "prettier --write .",
     "format-g4": "antlr-format -c ./antlr.format.json -v ./src/grammar/**/*.g4",
     "cleanComment": "node ./scripts/cleanCommentCli.js",
-    "benchmark": "node --no-warnings ./scripts/benchmark.js"
+    "benchmark": "node --no-warnings ./scripts/benchmark.js",
+    "benchmark:release": "node --no-warnings ./scripts/benchmark.js --release"
   },
   "license": "MIT",
   "dependencies": {

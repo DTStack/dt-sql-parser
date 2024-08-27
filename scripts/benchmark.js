@@ -11,15 +11,26 @@ const languages = fs.readdirSync(outputPath).filter((item) => {
     return fs.statSync(path.join(outputPath, item)).isDirectory();
 });
 
+const isRelease = !!argv.release;
 const cmd = 'tsx';
 
-function runBenchmark(language) {
+function runBenchmark(language, mode) {
     const lang = language === 'All Languages' ? 'all' : language;
-
-    const tsx = spawn(cmd, ['benchmark/run.ts', '--lang=' + lang, '--no-warnings'], {
-        cwd: process.cwd(),
-        stdio: ['inherit', process.stdout, 'pipe'],
-    });
+    const isHotRuns = mode === 'Hot runs';
+    const tsx = spawn(
+        cmd,
+        [
+            'benchmark/run.ts',
+            '--lang=' + lang,
+            isHotRuns ? '--hot' : '',
+            isRelease ? '--release' : '',
+            '--no-warnings',
+        ],
+        {
+            cwd: process.cwd(),
+            stdio: ['inherit', process.stdout, 'inherit'],
+        }
+    );
     console.info(chalk.green('Executing:'), chalk.gray(tsx.spawnargs.join(' ')));
 }
 
@@ -55,9 +66,15 @@ function prompt() {
                 choices: ['All Languages', ...languages],
                 loop: true,
             },
+            {
+                type: 'list',
+                name: 'mode',
+                message: 'Which mode you want to run',
+                choices: [{ name: 'Cold runs' }, { name: 'Hot runs', disabled: !!isRelease }],
+            },
         ])
         .then((result) => {
-            runBenchmark(result.language);
+            runBenchmark(result.language, result.mode);
         });
 }
 
