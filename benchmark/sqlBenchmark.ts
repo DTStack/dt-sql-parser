@@ -101,6 +101,8 @@ class SqlBenchmark {
 
     private _DEFAULT_LOOP_TIMES = 5;
 
+    private _RELEASE_LOOP_TIMES = 15;
+
     /**
      * If current average time difference from last time grater than DIFF_RATIO, we will highlight that record.
      */
@@ -110,28 +112,32 @@ class SqlBenchmark {
 
     /**
      * Returns SqlParser instance of specific language.
-     *
-     * Due to the presence of ATN cache in antlr4, we will clear the module cache to ensure that each parser is brand new and with no cache.
      */
     getSqlParser(): BasicSQL {
-        const caches = Object.keys(require.cache);
         if (!this.isHot) {
-            caches
-                .filter((cache) => cache.includes('dt-sql-parser/src'))
-                .forEach((moduleName) => {
-                    const module = require.cache[moduleName]!;
-                    // Fix Memory Leak
-                    if (module.parent) {
-                        module.parent.children = [];
-                    }
-                    delete require.cache[moduleName];
-                });
+            this.clearATNCache();
         }
-
         const Parser = require(path.resolve(`src/parser/${this.language}/index.ts`))[
             languageNameMap[this.language]
         ];
         return new Parser();
+    }
+
+    /**
+     * Due to the presence of ATN cache in antlr4, we will clear the module cache to ensure that each parser is brand new and with no cache.
+     */
+    clearATNCache() {
+        const caches = Object.keys(require.cache);
+        caches
+            .filter((cache) => cache.includes('dt-sql-parser/src'))
+            .forEach((moduleName) => {
+                const module = require.cache[moduleName]!;
+                // Fix Memory Leak
+                if (module.parent) {
+                    module.parent.children = [];
+                }
+                delete require.cache[moduleName];
+            });
     }
 
     getColumns = () => {
@@ -150,12 +156,17 @@ class SqlBenchmark {
         name: string,
         params: any[],
         sqlRows: number,
-        loopTimes: number = this._DEFAULT_LOOP_TIMES
+        loops: number = this._DEFAULT_LOOP_TIMES
     ) {
         let avgTime = 0;
+        let loopTimes = this.isRelease ? this._RELEASE_LOOP_TIMES : loops;
         const costTimes: number[] = [];
         const lastResult =
             this._lastResultsCache?.find((item) => item.type === type && item.name === name) ?? {};
+
+        if (this.isHot) {
+            this.clearATNCache();
+        }
 
         for (let i = 0; i < loopTimes; i++) {
             const parser = this.getSqlParser();
@@ -233,8 +244,8 @@ class SqlBenchmark {
             table.addRow(
                 {
                     ...record,
-                    lastCostTime: !this.isHot ? record.lastCostTime ?? '-' : '-',
-                    avgTime: !this.isHot ? record.avgTime + icon : '-',
+                    lastCostTime: record.lastCostTime ?? '-',
+                    avgTime: record.avgTime + icon,
                 },
                 {
                     color,
@@ -285,6 +296,10 @@ class SqlBenchmark {
         writter.writeText(`\`dt-sql-parser\`: ${currentVersion}`);
         writter.writeText(`\`antlr4-c3\`: ${parsedEnvInfo.npmPackages['antlr4-c3']?.installed}`);
         writter.writeText(`\`antlr4ng\`: ${parsedEnvInfo.npmPackages['antlr4ng']?.installed}`);
+        writter.writeLine();
+
+        writter.writeHeader('Running Mode', 3);
+        writter.writeText(this.isHot ? 'Hot Start' : 'Cold Start');
         writter.writeLine();
 
         writter.writeHeader('Report', 3);

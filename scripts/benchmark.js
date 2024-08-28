@@ -14,17 +14,21 @@ const languages = fs.readdirSync(outputPath).filter((item) => {
 const isRelease = !!argv.release;
 const cmd = 'tsx';
 
+const MIN_VERSION = '16.14.0';
+const RELEASE_VERSION = '21.6.1';
+const RECOMMENDED_VERSION = '18.20.3';
+
 function runBenchmark(language, mode) {
     const lang = language === 'All Languages' ? 'all' : language;
-    const isHotRuns = mode === 'Hot runs';
+    const isHotStart = mode === 'Hot start';
     const tsx = spawn(
         cmd,
         [
+            '--no-warnings',
             'benchmark/run.ts',
             '--lang=' + lang,
-            isHotRuns ? '--hot' : '',
+            isHotStart ? '--hot' : '',
             isRelease ? '--release' : '',
-            '--no-warnings',
         ],
         {
             cwd: process.cwd(),
@@ -36,27 +40,28 @@ function runBenchmark(language, mode) {
 
 function checkVersion() {
     const currentVersion = process.versions.node;
-    const minVersion = '16.14.0';
-    const recommendedVersion = '21.6.1';
-    if (semver.lt(currentVersion, minVersion)) {
+    if (semver.lt(currentVersion, MIN_VERSION)) {
         console.error(
             chalk.bold.red(
-                `Current Node.js version (v${currentVersion}) is lower than required version (v${minVersion})`
+                `Current Node.js version (v${currentVersion}) is lower than required version (v${MIN_VERSION}+)`
             )
         );
         return false;
     } else {
-        if (semver.lt(currentVersion, recommendedVersion))
-            console.warn(
-                chalk.bold.bgCyan(
-                    `Node.js version v${recommendedVersion} is recommended, otherwise there may be a memory leak!`
+        if (isRelease && semver.lt(currentVersion, RELEASE_VERSION)) {
+            console.error(
+                chalk.bold.red(
+                    `Node.js version higher than v${RELEASE_VERSION} is required for release benchmark!`
                 )
             );
+            return false;
+        }
         return true;
     }
 }
 
 function prompt() {
+    const isNodeVersionOk = semver.gte(process.versions.node, RECOMMENDED_VERSION);
     inquirer
         .prompt([
             {
@@ -70,7 +75,20 @@ function prompt() {
                 type: 'list',
                 name: 'mode',
                 message: 'Which mode you want to run',
-                choices: [{ name: 'Cold runs' }, { name: 'Hot runs', disabled: !!isRelease }],
+                choices: [
+                    {
+                        name:
+                            'Cold start' +
+                            (isNodeVersionOk
+                                ? ''
+                                : ` (Only supported on Node.js v${RECOMMENDED_VERSION}+)`),
+                        disabled: !isNodeVersionOk,
+                    },
+                    {
+                        name: 'Hot start',
+                        disabled: isRelease,
+                    },
+                ],
             },
         ])
         .then((result) => {

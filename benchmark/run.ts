@@ -10,8 +10,8 @@ import { Table } from 'console-table-printer';
 
 const argv = argsParser(process.argv.slice(2));
 const isChooseAll = argv.lang === 'all';
-const isHot = !!argv.hot;
-const isRelease = !!argv.release;
+const isHot = argv.hot !== undefined;
+const isRelease = argv.release !== undefined;
 const testFiles = config.testFiles;
 
 let benchmarkResults: SqlBenchmark[] = [];
@@ -146,7 +146,7 @@ function run() {
     } else {
         benchmark(argv.lang);
     }
-    !isHot && askForSaveResult();
+    askForSaveResult();
 }
 
 process.on('uncaughtException', (err) => console.log(err));
