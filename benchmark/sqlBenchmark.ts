@@ -128,8 +128,9 @@ class SqlBenchmark {
      */
     clearATNCache() {
         const caches = Object.keys(require.cache);
+        const sourcePath = path.join(__dirname, '../src');
         caches
-            .filter((cache) => cache.includes('dt-sql-parser/src'))
+            .filter((cache) => cache.includes(sourcePath))
             .forEach((moduleName) => {
                 const module = require.cache[moduleName]!;
                 // Fix Memory Leak
@@ -168,6 +169,10 @@ class SqlBenchmark {
             this.clearATNCache();
         }
 
+        if (this.isHot && loopTimes < 2) {
+            throw new Error('Hot start should run at least 2 times');
+        }
+
         for (let i = 0; i < loopTimes; i++) {
             const parser = this.getSqlParser();
             if (!parser[type] || typeof parser[type] !== 'function') return;
@@ -179,14 +184,10 @@ class SqlBenchmark {
             costTimes.push(Math.round(costTime));
         }
 
-        if (this.isHot) {
-            avgTime = costTimes[0];
-        } else {
-            const filteredData = removeOutliers(costTimes);
-            avgTime = Math.round(
-                filteredData.reduce((prev, curr) => prev + curr, 0) / filteredData.length
-            );
-        }
+        const filteredData = removeOutliers(this.isHot ? costTimes.slice(1) : costTimes);
+        avgTime = Math.round(
+            filteredData.reduce((prev, curr) => prev + curr, 0) / filteredData.length
+        );
 
         const result = {
             name,
@@ -202,7 +203,12 @@ class SqlBenchmark {
     }
 
     getLastResults() {
-        const reportPath = path.join(__dirname, `./reports/${this.language}.benchmark.md`);
+        const reportPath = path.join(
+            __dirname,
+            './reports',
+            this.isHot ? 'hot_start' : 'cold_start',
+            `${this.language}.benchmark.md`
+        );
         if (this.isRelease || !fs.existsSync(reportPath)) return null;
 
         const report = fs.readFileSync(reportPath, { encoding: 'utf-8' });
@@ -265,8 +271,11 @@ class SqlBenchmark {
         );
         const currentVersion = require('../package.json').version;
         const parsedEnvInfo = JSON.parse(envInfo);
-
-        const baseDir = path.join(__dirname, this.isRelease ? '../benchmark_reports' : './reports');
+        const baseDir = path.join(
+            __dirname,
+            this.isRelease ? '../benchmark_reports' : './reports',
+            this.isHot ? 'hot_start' : 'cold_start'
+        );
 
         if (!fs.existsSync(baseDir)) {
             fs.mkdirSync(baseDir, { recursive: true });
@@ -293,9 +302,9 @@ class SqlBenchmark {
 
         writter.writeHeader('Version', 3);
         writter.writeText(`\`nodejs\`: ${process.version}`);
-        writter.writeText(`\`dt-sql-parser\`: ${currentVersion}`);
-        writter.writeText(`\`antlr4-c3\`: ${parsedEnvInfo.npmPackages['antlr4-c3']?.installed}`);
-        writter.writeText(`\`antlr4ng\`: ${parsedEnvInfo.npmPackages['antlr4ng']?.installed}`);
+        writter.writeText(`\`dt-sql-parser\`: v${currentVersion}`);
+        writter.writeText(`\`antlr4-c3\`: v${parsedEnvInfo.npmPackages['antlr4-c3']?.installed}`);
+        writter.writeText(`\`antlr4ng\`: v${parsedEnvInfo.npmPackages['antlr4ng']?.installed}`);
         writter.writeLine();
 
         writter.writeHeader('Running Mode', 3);

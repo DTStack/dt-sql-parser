@@ -14,13 +14,13 @@ const languages = fs.readdirSync(outputPath).filter((item) => {
 const isRelease = !!argv.release;
 const cmd = 'tsx';
 
-const MIN_VERSION = '16.14.0';
-const RELEASE_VERSION = '21.6.1';
-const RECOMMENDED_VERSION = '18.20.3';
+const MIN_VERSION = '16.0.0';
+const RELEASE_VERSION = '21.0.0';
+const RECOMMENDED_VERSION = '18.0.0';
 
 function runBenchmark(language, mode) {
     const lang = language === 'All Languages' ? 'all' : language;
-    const isHotStart = mode === 'Hot start';
+    const isHotStart = mode === 'hot';
     const tsx = spawn(
         cmd,
         [
@@ -43,7 +43,7 @@ function checkVersion() {
     if (semver.lt(currentVersion, MIN_VERSION)) {
         console.error(
             chalk.bold.red(
-                `Current Node.js version (v${currentVersion}) is lower than required version (v${MIN_VERSION}+)`
+                `Current Node.js version (v${currentVersion}) is lower than required version (v${semver.major(MIN_VERSION)}.x)`
             )
         );
         return false;
@@ -51,7 +51,7 @@ function checkVersion() {
         if (isRelease && semver.lt(currentVersion, RELEASE_VERSION)) {
             console.error(
                 chalk.bold.red(
-                    `Node.js version higher than v${RELEASE_VERSION} is required for release benchmark!`
+                    `Node.js version v${semver.major(RELEASE_VERSION)}.x+ is required for release benchmark!`
                 )
             );
             return false;
@@ -81,12 +81,13 @@ function prompt() {
                             'Cold start' +
                             (isNodeVersionOk
                                 ? ''
-                                : ` (Only supported on Node.js v${RECOMMENDED_VERSION}+)`),
+                                : ` (Only supported on Node.js v${semver.major(RECOMMENDED_VERSION)}.x+)`),
+                        value: 'cold',
                         disabled: !isNodeVersionOk,
                     },
                     {
                         name: 'Hot start',
-                        disabled: isRelease,
+                        value: 'hot',
                     },
                 ],
             },
