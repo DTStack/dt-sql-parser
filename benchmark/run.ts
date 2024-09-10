@@ -10,6 +10,8 @@ import { Table } from 'console-table-printer';
 
 const argv = argsParser(process.argv.slice(2));
 const isChooseAll = argv.lang === 'all';
+const isHot = argv.hot !== undefined;
+const isRelease = argv.release !== undefined;
 const testFiles = config.testFiles;
 
 let benchmarkResults: SqlBenchmark[] = [];
@@ -115,7 +117,7 @@ const printSummaryReport = () => {
 };
 
 const benchmark = (lang: Language) => {
-    const sqlBenchmark = new SqlBenchmark(lang);
+    const sqlBenchmark = new SqlBenchmark(lang, isHot, isRelease);
     const originalParams = readParams();
 
     testFiles.forEach((testInfo) => {
