@@ -1,20 +1,20 @@
 /*
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 /**
- * This file is an adaptation of trino's trino/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4 grammar.
- * Reference: https://github.com/trinodb/trino/blob/385/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4
+ * This file is an adaptation of trino's
+ * trino/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4 grammar. Reference:
+ * https://github.com/trinodb/trino/blob/385/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4
  * current version 450
  */
 
@@ -330,9 +330,9 @@ setQuantifier
     ;
 
 selectItem
-    : (columnRef | expression) (KW_AS? alias=identifier)?   # selectSingle
+    : ASTERISK                                              # selectAll
     | primaryExpression '.' ASTERISK (KW_AS columnAliases)? # selectAll
-    | ASTERISK                                              # selectAll
+    | (columnRef | expression) (KW_AS? alias=identifier)?   # selectSingle
     ;
 
 relation
@@ -561,7 +561,7 @@ valueExpression
 primaryExpression
     : KW_NULL                                                   # nullLiteral
     | interval                                                  # intervalLiteral
-    | identifier string                                         # typeConstructor
+    | columnName string                                         # typeConstructor
     | KW_DOUBLE KW_PRECISION string                             # typeConstructor
     | number                                                    # numericLiteral
     | booleanValue                                              # booleanLiteral
@@ -590,7 +590,7 @@ primaryExpression
     | KW_TRY_CAST '(' expression KW_AS type ')'                                                           # cast
     | KW_ARRAY '[' (expression (',' expression)*)? ']'                                                    # arrayConstructor
     | value=primaryExpression '[' index=valueExpression ']'                                               # subscript
-    | identifier                                                                                          # columnReference
+    | columnName                                                                                          # columnReference
     | base=primaryExpression '.' fieldName=identifier                                                     # dereference
     | name=KW_CURRENT_DATE                                                                                # currentDate
     | name=KW_CURRENT_TIME ('(' precision=INTEGER_VALUE ')')?                                             # currentTime
@@ -1006,6 +1006,10 @@ functionNameCreate
 columnRef
     : qualifiedName
     | {this.shouldMatchEmpty()}?
+    ;
+
+columnName
+    : qualifiedName
     ;
 
 columnNameCreate
