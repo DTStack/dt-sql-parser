@@ -134,8 +134,8 @@ import { WindowDefinitionContext } from "./TrinoSqlParser.js";
 import { WindowSpecificationContext } from "./TrinoSqlParser.js";
 import { NamedQueryContext } from "./TrinoSqlParser.js";
 import { SetQuantifierContext } from "./TrinoSqlParser.js";
-import { SelectSingleContext } from "./TrinoSqlParser.js";
 import { SelectAllContext } from "./TrinoSqlParser.js";
+import { SelectSingleContext } from "./TrinoSqlParser.js";
 import { RelationDefaultContext } from "./TrinoSqlParser.js";
 import { JoinRelationContext } from "./TrinoSqlParser.js";
 import { JoinTypeContext } from "./TrinoSqlParser.js";
@@ -355,6 +355,7 @@ import { CatalogNameCreateContext } from "./TrinoSqlParser.js";
 import { FunctionNameContext } from "./TrinoSqlParser.js";
 import { FunctionNameCreateContext } from "./TrinoSqlParser.js";
 import { ColumnRefContext } from "./TrinoSqlParser.js";
+import { ColumnNameContext } from "./TrinoSqlParser.js";
 import { ColumnNameCreateContext } from "./TrinoSqlParser.js";
 import { QualifiedNameContext } from "./TrinoSqlParser.js";
 import { QueryPeriodContext } from "./TrinoSqlParser.js";
@@ -1839,18 +1840,6 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitSetQuantifier?: (ctx: SetQuantifierContext) => void;
     /**
-     * Enter a parse tree produced by the `selectSingle`
-     * labeled alternative in `TrinoSqlParser.selectItem`.
-     * @param ctx the parse tree
-     */
-    enterSelectSingle?: (ctx: SelectSingleContext) => void;
-    /**
-     * Exit a parse tree produced by the `selectSingle`
-     * labeled alternative in `TrinoSqlParser.selectItem`.
-     * @param ctx the parse tree
-     */
-    exitSelectSingle?: (ctx: SelectSingleContext) => void;
-    /**
      * Enter a parse tree produced by the `selectAll`
      * labeled alternative in `TrinoSqlParser.selectItem`.
      * @param ctx the parse tree
@@ -1862,6 +1851,18 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSelectAll?: (ctx: SelectAllContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectSingle`
+     * labeled alternative in `TrinoSqlParser.selectItem`.
+     * @param ctx the parse tree
+     */
+    enterSelectSingle?: (ctx: SelectSingleContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectSingle`
+     * labeled alternative in `TrinoSqlParser.selectItem`.
+     * @param ctx the parse tree
+     */
+    exitSelectSingle?: (ctx: SelectSingleContext) => void;
     /**
      * Enter a parse tree produced by the `relationDefault`
      * labeled alternative in `TrinoSqlParser.relation`.
@@ -4332,6 +4333,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnRef?: (ctx: ColumnRefContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.columnName`.
+     * @param ctx the parse tree
+     */
+    enterColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.columnName`.
+     * @param ctx the parse tree
+     */
+    exitColumnName?: (ctx: ColumnNameContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.columnNameCreate`.
      * @param ctx the parse tree
