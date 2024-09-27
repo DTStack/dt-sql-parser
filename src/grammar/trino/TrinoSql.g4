@@ -1,20 +1,20 @@
 /*
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 /**
- * This file is an adaptation of trino's trino/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4 grammar.
- * Reference: https://github.com/trinodb/trino/blob/385/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4
+ * This file is an adaptation of trino's
+ * trino/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4 grammar. Reference:
+ * https://github.com/trinodb/trino/blob/385/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4
  * current version 450
  */
 
@@ -91,7 +91,7 @@ statement
     )* ')' (KW_COMMENT comment=string)? (KW_WITH properties)?                                                                                 # createTable
     | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? tableRef                                                                                            # dropTable
     | KW_INSERT KW_INTO tableRef columnList? rootQuery                                                                                        # insertInto
-    | KW_DELETE KW_FROM tableRef (KW_WHERE booleanExpression)?                                                                                # delete
+    | KW_DELETE KW_FROM tableRef (KW_WHERE expressionWithCol)?                                                                                # delete
     | KW_TRUNCATE KW_TABLE tableRef                                                                                                           # truncateTable
     | KW_COMMENT KW_ON KW_TABLE tableRef KW_IS (string | KW_NULL)                                                                             # commentTable
     | KW_COMMENT KW_ON KW_VIEW viewRef KW_IS (string | KW_NULL)                                                                               # commentView
@@ -106,7 +106,7 @@ statement
     | KW_ALTER KW_TABLE tableName=tableRef KW_SET KW_PROPERTIES propertyAssignments                                                           # setTableProperties
     | KW_ALTER KW_TABLE tableName=tableRef KW_EXECUTE procedureName=functionName (
         '(' (callArgument (',' callArgument)*)? ')'
-    )? (KW_WHERE where=booleanExpression)?      # tableExecute
+    )? (KW_WHERE where=expressionWithCol)?      # tableExecute
     | KW_ANALYZE tableRef (KW_WITH properties)? # analyze
     | KW_CREATE (KW_OR KW_REPLACE)? KW_MATERIALIZED KW_VIEW (KW_IF KW_NOT KW_EXISTS)? viewNameCreate (
         KW_GRACE KW_PERIOD interval
@@ -185,7 +185,7 @@ statement
     | KW_SET KW_PATH pathSpecification                                        # setPath
     | KW_SET KW_TIME KW_ZONE ( KW_LOCAL | expression)                         # setTimeZone
     | KW_UPDATE tableRef KW_SET updateAssignment (',' updateAssignment)* (
-        KW_WHERE where=booleanExpression
+        KW_WHERE where=expressionWithCol
     )?                                                                                             # update
     | KW_MERGE KW_INTO tableRef (KW_AS? identifier)? KW_USING relation KW_ON expression mergeCase+ # merge
     | KW_SHOW KW_COMMENT KW_ON KW_TABLE tableRef                                                   # showTableComment  // dtstack
@@ -276,14 +276,14 @@ queryPrimary
     ;
 
 sortItem
-    : (columnRef | expression) ordering=(KW_ASC | KW_DESC)? (
+    : (columnRef | expressionWithCol) ordering=(KW_ASC | KW_DESC)? (
         KW_NULLS nullOrdering=(KW_FIRST | KW_LAST)
     )?
     ;
 
 querySpecification
     : KW_SELECT setQuantifier? selectItem (',' selectItem)* (KW_FROM relation (',' relation)*)? (
-        KW_WHERE where=booleanExpression
+        KW_WHERE where=expressionWithCol
     )? (KW_GROUP KW_BY groupBy)? (KW_HAVING having=booleanExpression)? (
         KW_WINDOW windowDefinition (',' windowDefinition)*
     )?
@@ -307,7 +307,7 @@ groupingSet
 
 groupingTerm
     : columnRef
-    | expression
+    | expressionWithCol
     ;
 
 windowDefinition
@@ -524,6 +524,11 @@ descriptorField
 
 copartitionTables
     : '(' qualifiedName ',' qualifiedName (',' qualifiedName)* ')'
+    ;
+
+expressionWithCol
+    : columnRef
+    | booleanExpression
     ;
 
 expression
@@ -765,7 +770,7 @@ whenClause
     ;
 
 filter
-    : KW_FILTER '(' KW_WHERE booleanExpression ')'
+    : KW_FILTER '(' KW_WHERE expressionWithCol ')'
     ;
 
 mergeCase

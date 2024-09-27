@@ -46,6 +46,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         TrinoSqlParser.RULE_functionNameCreate,
         TrinoSqlParser.RULE_columnRef,
         TrinoSqlParser.RULE_columnNameCreate,
+        TrinoSqlParser.RULE_expressionWithCol,
     ]);
 
     protected processCandidates(
@@ -111,7 +112,8 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
-                case TrinoSqlParser.RULE_columnRef: {
+                case TrinoSqlParser.RULE_columnRef:
+                case TrinoSqlParser.RULE_expressionWithCol: {
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
