@@ -1,11 +1,15 @@
+import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
-import { MySQL } from 'src/parser/mysql';
-import { MySqlEntityCollector, MysqlSplitListener } from 'src/parser/mysql';
-import { ParseTreeListener } from 'antlr4ng';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
+import {
+    AttrName,
+    isCommonEntityContext,
+    isFuncEntityContext,
+    StmtContextType,
+} from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
-import { StmtContextType } from 'src/parser/common/entityCollector';
+import { MySQL, MySqlEntityCollector, MysqlSplitListener } from 'src/parser/mysql';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
 
@@ -44,29 +48,67 @@ describe('MySQL entity collector tests', () => {
             startColumn: 14,
             endColumn: 29,
         });
+        expect(tableCreateEntity[AttrName.comment]).toEqual({
+            text: "'new_tb_with_col comment'",
+            startIndex: 77,
+            endIndex: 101,
+            line: 1,
+            startColumn: 78,
+            endColumn: 103,
+        });
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
         expect(tableCreateEntity.belongStmt.position).toEqual({
             startIndex: 0,
-            endIndex: 45,
+            endIndex: 101,
             startLine: 1,
             endLine: 1,
             startColumn: 1,
-            endColumn: 47,
+            endColumn: 103,
         });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities).toBeNull();
 
-        expect(tableCreateEntity.relatedEntities).toBeNull();
+            expect(tableCreateEntity.columns.length).toBe(2);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+            expect(tableCreateEntity.columns[0][AttrName.comment]).toEqual({
+                text: "'col1'",
+                startIndex: 45,
+                endIndex: 50,
+                line: 1,
+                startColumn: 46,
+                endColumn: 52,
+            });
 
-        expect(tableCreateEntity.columns.length).toBe(2);
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+            expect(tableCreateEntity.columns[0][AttrName.colType]).toEqual({
+                text: 'int',
+                startIndex: 33,
+                endIndex: 35,
+                line: 1,
+                startColumn: 34,
+                endColumn: 37,
+            });
+            expect(tableCreateEntity.columns[1][AttrName.comment]).toBeNull();
+            expect(tableCreateEntity.columns[1][AttrName.colType]).toEqual({
+                text: 'varchar(3)',
+                startIndex: 57,
+                endIndex: 66,
+                line: 1,
+                startColumn: 58,
+                endColumn: 68,
+            });
+        }
     });
 
     test('create table by select', () => {
@@ -84,8 +126,8 @@ describe('MySQL entity collector tests', () => {
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('new_tb_from_old');
         expect(tableCreateEntity.position).toEqual({
-            startIndex: 62,
-            endIndex: 76,
+            startIndex: 118,
+            endIndex: 132,
             line: 3,
             startColumn: 14,
             endColumn: 29,
@@ -95,27 +137,27 @@ describe('MySQL entity collector tests', () => {
             StmtContextType.CREATE_TABLE_STMT
         );
         expect(tableCreateEntity.belongStmt.position).toEqual({
-            startIndex: 49,
-            endIndex: 265,
+            startIndex: 105,
+            endIndex: 321,
             startLine: 3,
             endLine: 12,
             startColumn: 1,
             endColumn: 34,
         });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
 
-        expect(tableCreateEntity.columns).toBeNull();
-
-        expect(tableCreateEntity.relatedEntities.length).toBe(2);
-        tableCreateEntity.relatedEntities.forEach((relatedEntity) => {
-            expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
-            expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
-        });
-
+            expect(tableCreateEntity.relatedEntities.length).toBe(2);
+            tableCreateEntity.relatedEntities.forEach((relatedEntity) => {
+                expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
+                expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
+            });
+        }
         expect(allEntities[1].text).toBe('old_tb1');
         expect(allEntities[1].belongStmt.rootStmt).toBe(allEntities[0].belongStmt);
         expect(allEntities[1].position).toEqual({
-            startIndex: 161,
-            endIndex: 167,
+            startIndex: 217,
+            endIndex: 223,
             line: 8,
             startColumn: 9,
             endColumn: 16,
@@ -124,8 +166,8 @@ describe('MySQL entity collector tests', () => {
         expect(allEntities[2].text).toBe('old_tb2');
         expect(allEntities[2].belongStmt.rootStmt).toBe(allEntities[0].belongStmt);
         expect(allEntities[2].position).toEqual({
-            startIndex: 187,
-            endIndex: 193,
+            startIndex: 243,
+            endIndex: 249,
             line: 10,
             startColumn: 9,
             endColumn: 16,
@@ -150,11 +192,11 @@ describe('MySQL entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-
-        expect(tableCreateEntity.columns).toBeNull();
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-        expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
-
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        }
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(originTableEntity.text).toBe('old_tb');
         expect(originTableEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
@@ -174,9 +216,10 @@ describe('MySQL entity collector tests', () => {
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity.text).toBe('select_tb');
         expect(tableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-
-        expect(tableEntity.columns).toBeNull();
-        expect(tableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(tableEntity)) {
+            expect(tableEntity.columns).toBeUndefined();
+            expect(tableEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('select into from table', () => {
@@ -193,9 +236,10 @@ describe('MySQL entity collector tests', () => {
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity.text).toBe('into_select_tb');
         expect(tableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-
-        expect(tableEntity.columns).toBeNull();
-        expect(tableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(tableEntity)) {
+            expect(tableEntity.columns).toBeUndefined();
+            expect(tableEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('select from table join', () => {
@@ -213,16 +257,26 @@ describe('MySQL entity collector tests', () => {
         expect(tableEntity1.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity1.text).toBe('from_tb');
         expect(tableEntity1.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-
-        expect(tableEntity1.columns).toBeNull();
-        expect(tableEntity1.relatedEntities).toBeNull();
+        expect(tableEntity1[AttrName.alias]).toEqual({
+            text: 'tb1',
+            startIndex: 476,
+            endIndex: 478,
+            line: 21,
+            startColumn: 26,
+            endColumn: 29,
+        });
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
+            expect(tableEntity1.relatedEntities).toBeNull();
+        }
 
         expect(tableEntity2.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity2.text).toBe('join_tb');
         expect(tableEntity2.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-
-        expect(tableEntity2.columns).toBeNull();
-        expect(tableEntity2.relatedEntities).toBeNull();
+        if (isCommonEntityContext(tableEntity2)) {
+            expect(tableEntity2.columns).toBeUndefined();
+            expect(tableEntity2.relatedEntities).toBeNull();
+        }
 
         expect(tableEntity1.belongStmt).toBe(tableEntity2.belongStmt);
     });
@@ -241,9 +295,10 @@ describe('MySQL entity collector tests', () => {
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity.text).toBe('insert_tb');
         expect(tableEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
-
-        expect(tableEntity.columns).toBeNull();
-        expect(tableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(tableEntity)) {
+            expect(tableEntity.columns).toBeUndefined();
+            expect(tableEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('insert into table select', () => {
@@ -289,12 +344,15 @@ describe('MySQL entity collector tests', () => {
         expect(allEntities[0].entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(allEntities[0].text).toBe('new_view');
         expect(allEntities[0].belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-
-        expect(allEntities[0].columns.length).toBe(2);
-        expect(allEntities[0].columns[0].text).toBe('col1');
-        expect(allEntities[0].columns[1].text).toBe('col2');
-        expect(allEntities[0].columns[0].entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-        expect(allEntities[0].columns[0].belongStmt).toBe(allEntities[0].belongStmt);
+        if (isCommonEntityContext(allEntities[0])) {
+            expect(allEntities[0].columns.length).toBe(2);
+            expect(allEntities[0].columns[0].text).toBe('col1');
+            expect(allEntities[0].columns[1].text).toBe('col2');
+            expect(allEntities[0].columns[0].entityContextType).toBe(
+                EntityContextType.COLUMN_CREATE
+            );
+            expect(allEntities[0].columns[0].belongStmt).toBe(allEntities[0].belongStmt);
+        }
     });
 
     test('create view as select table', () => {
@@ -327,24 +385,25 @@ describe('MySQL entity collector tests', () => {
         expect(dbEntity.text).toBe('db_name');
         expect(dbEntity.position).toEqual({
             endColumn: 24,
-            endIndex: 778,
+            endIndex: 841,
             line: 31,
             startColumn: 17,
-            startIndex: 772,
+            startIndex: 835,
         });
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
         expect(dbEntity.belongStmt.position).toEqual({
             endColumn: 47,
-            endIndex: 801,
+            endIndex: 864,
             endLine: 31,
             startColumn: 1,
-            startIndex: 756,
+            startIndex: 819,
             startLine: 31,
         });
-
-        expect(dbEntity.columns).toBeNull();
-        expect(dbEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
+            expect(dbEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create schema', () => {
@@ -363,24 +422,25 @@ describe('MySQL entity collector tests', () => {
         expect(schemaEntity.text).toBe('db_name');
         expect(schemaEntity.position).toEqual({
             endColumn: 36,
-            endIndex: 839,
+            endIndex: 902,
             line: 33,
             startColumn: 29,
-            startIndex: 833,
+            startIndex: 896,
         });
 
         expect(schemaEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
         expect(schemaEntity.belongStmt.position).toEqual({
             endColumn: 59,
-            endIndex: 862,
+            endIndex: 925,
             endLine: 33,
             startColumn: 1,
-            startIndex: 805,
+            startIndex: 868,
             startLine: 33,
         });
-
-        expect(schemaEntity.columns).toBeNull();
-        expect(schemaEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(schemaEntity)) {
+            expect(schemaEntity.columns).toBeUndefined();
+            expect(schemaEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('show create database', () => {
@@ -399,24 +459,25 @@ describe('MySQL entity collector tests', () => {
         expect(dbEntity.text).toBe('db_name');
         expect(dbEntity.position).toEqual({
             endColumn: 41,
-            endIndex: 905,
+            endIndex: 968,
             line: 35,
             startColumn: 34,
-            startIndex: 899,
+            startIndex: 962,
         });
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
         expect(dbEntity.belongStmt.position).toEqual({
             endColumn: 42,
-            endIndex: 906,
+            endIndex: 969,
             endLine: 35,
             startColumn: 1,
-            startIndex: 866,
+            startIndex: 929,
             startLine: 35,
         });
-
-        expect(dbEntity.columns).toBeNull();
-        expect(dbEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
+            expect(dbEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('drop database', () => {
@@ -435,24 +496,25 @@ describe('MySQL entity collector tests', () => {
         expect(dbEntity.text).toBe('db_name');
         expect(dbEntity.position).toEqual({
             endColumn: 30,
-            endIndex: 937,
+            endIndex: 1000,
             line: 37,
             startColumn: 23,
-            startIndex: 931,
+            startIndex: 994,
         });
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
         expect(dbEntity.belongStmt.position).toEqual({
             endColumn: 31,
-            endIndex: 938,
+            endIndex: 1001,
             endLine: 37,
             startColumn: 1,
-            startIndex: 909,
+            startIndex: 972,
             startLine: 37,
         });
-
-        expect(dbEntity.columns).toBeNull();
-        expect(dbEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
+            expect(dbEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create function', () => {
@@ -471,26 +533,36 @@ describe('MySQL entity collector tests', () => {
         expect(functionEntity.text).toBe('hello');
         expect(functionEntity.position).toEqual({
             endColumn: 39,
-            endIndex: 978,
+            endIndex: 1041,
             line: 39,
             startColumn: 34,
-            startIndex: 974,
+            startIndex: 1037,
+        });
+
+        expect(functionEntity[AttrName.comment]).toEqual({
+            text: "'this is a defuner user function'",
+            endColumn: 125,
+            endIndex: 1127,
+            line: 39,
+            startColumn: 92,
+            startIndex: 1095,
         });
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
         expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 114,
-            endIndex: 1053,
+            endColumn: 156,
+            endIndex: 1158,
             endLine: 39,
             startColumn: 1,
-            startIndex: 941,
+            startIndex: 1004,
             startLine: 39,
         });
-
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.arguments).toBeNull();
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create function loadable', () => {
@@ -509,10 +581,10 @@ describe('MySQL entity collector tests', () => {
         expect(functionEntity.text).toBe('my_concat_ws');
         expect(functionEntity.position).toEqual({
             endColumn: 43,
-            endIndex: 1098,
+            endIndex: 1203,
             line: 41,
             startColumn: 31,
-            startIndex: 1087,
+            startIndex: 1192,
         });
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
@@ -520,14 +592,14 @@ describe('MySQL entity collector tests', () => {
         );
         expect(functionEntity.belongStmt.position).toEqual({
             endColumn: 87,
-            endIndex: 1142,
+            endIndex: 1247,
             endLine: 41,
             startColumn: 1,
-            startIndex: 1057,
+            startIndex: 1162,
             startLine: 41,
         });
-
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
     });
 });

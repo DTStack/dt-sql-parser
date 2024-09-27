@@ -1,3 +1,3 @@
-import { toMatchUnorderedArrary } from './matchers';
+import { toMatchUnorderedArray } from './matchers';
 
-expect.extend({ toMatchUnorderedArrary });
+expect.extend({ toMatchUnorderedArray });

@@ -85,7 +85,7 @@ statement
     | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_SET KW_TBLPROPERTIES propertyList                                                   # setTableProperties
     | KW_ALTER (KW_TABLE tableName | KW_VIEW viewName) KW_UNSET KW_TBLPROPERTIES (ifExists)? propertyList                                     # unsetTableProperties
     | KW_ALTER KW_TABLE table=tableName (KW_ALTER | KW_CHANGE) KW_COLUMN? column=columnName alterColumnAction?                                # alterTableAlterColumn
-    | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_CHANGE KW_COLUMN? colName=columnName colType colPosition?                           # hiveChangeColumn
+    | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_CHANGE KW_COLUMN? colName=columnName columnType colPosition?                        # hiveChangeColumn
     | KW_ALTER KW_TABLE table=tableName partitionSpec? KW_REPLACE KW_COLUMNS LEFT_PAREN qualifiedColTypeWithPositionSeqForReplace RIGHT_PAREN #
         hiveReplaceColumns
     | KW_ALTER KW_TABLE tableName (partitionSpec)? KW_SET KW_SERDE stringLit (
@@ -153,8 +153,8 @@ statement
     | (KW_DESC | KW_DESCRIBE) KW_DATABASE KW_EXTENDED? namespaceName                                                   # describeNamespace
     | (KW_DESC | KW_DESCRIBE) KW_TABLE? option=(KW_EXTENDED | KW_FORMATTED)? tableName partitionSpec? describeColName? # describeRelation
     | (KW_DESC | KW_DESCRIBE) KW_QUERY? query                                                                          # describeQuery
-    | KW_COMMENT KW_ON namespace namespaceName KW_IS comment                                                           # commentNamespace
-    | KW_COMMENT KW_ON KW_TABLE tableName KW_IS comment                                                                # commentTable
+    | KW_COMMENT KW_ON namespace namespaceName KW_IS commentStr                                                        # commentNamespace
+    | KW_COMMENT KW_ON KW_TABLE tableName KW_IS commentStr                                                             # commentTable
     | KW_REFRESH KW_TABLE tableName                                                                                    # refreshTable
     | KW_REFRESH KW_FUNCTION functionName                                                                              # refreshFunction
     | KW_REFRESH (stringLit | .*?)                                                                                     # refreshResource
@@ -269,7 +269,7 @@ locationSpec
     ;
 
 commentSpec
-    : KW_COMMENT stringLit
+    : KW_COMMENT comment=stringLit
     ;
 
 query
@@ -851,7 +851,7 @@ functionTable
     ;
 
 tableAlias
-    : (KW_AS? strictIdentifier identifierList?)?
+    : (KW_AS? alias=strictIdentifier identifierList?)?
     ;
 
 rowFormat
@@ -905,7 +905,7 @@ partitionFieldList
 
 partitionField
     : transform
-    | colType
+    | columnType
     ;
 
 transform
@@ -1227,10 +1227,10 @@ variableDefaultExpression
     ;
 
 colTypeList
-    : colType (COMMA colType)*
+    : columnType (COMMA columnType)*
     ;
 
-colType
+columnType
     : colName=errorCapturingIdentifier dataType (KW_NOT KW_NULL)? commentSpec?
     ;
 
@@ -1239,7 +1239,7 @@ createOrReplaceTableColTypeList
     ;
 
 createOrReplaceTableColType
-    : colName=columnNameCreate dataType colDefinitionOption*
+    : colName=columnNameCreate colType=dataType colDefinitionOption*
     ;
 
 colDefinitionOption
@@ -1388,7 +1388,7 @@ stringLit
     | DOUBLEQUOTED_STRING
     ;
 
-comment
+commentStr
     : stringLit
     | KW_NULL
     ;

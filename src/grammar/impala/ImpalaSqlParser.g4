@@ -96,20 +96,20 @@ createKuduTableAsSelect
     : KW_CREATE KW_EXTERNAL? KW_TABLE ifNotExists? tableNameCreate (
         LPAREN kuduTableElement (COMMA kuduTableElement)* (COMMA KW_PRIMARY KW_KEY columnAliases)? RPAREN
     )? (KW_PRIMARY KW_KEY columnAliases?)? (KW_PARTITION KW_BY kuduPartitionClause)? (
-        KW_COMMENT stringLiteral
+        commentClause
     )? KW_STORED KW_AS KW_KUDU (KW_TBLPROPERTIES tblProp=properties)? (KW_AS queryStatement)?
     ;
 
 createView
-    : KW_CREATE KW_VIEW ifNotExists? viewNameCreate viewColumns? (KW_COMMENT stringLiteral)? (
+    : KW_CREATE KW_VIEW ifNotExists? viewNameCreate viewColumns? commentClause? (
         KW_TBLPROPERTIES tblProp=properties
     )? KW_AS queryStatement
     ;
 
 createSchema
-    : KW_CREATE (KW_SCHEMA | KW_DATABASE) ifNotExists? databaseNameCreate (
-        KW_COMMENT comment=stringLiteral
-    )? (KW_LOCATION location=stringLiteral)?
+    : KW_CREATE (KW_SCHEMA | KW_DATABASE) ifNotExists? databaseNameCreate (commentClause)? (
+        KW_LOCATION location=stringLiteral
+    )?
     ;
 
 createRole
@@ -119,14 +119,14 @@ createRole
 createAggregateFunction
     : KW_CREATE KW_AGGREGATE? KW_FUNCTION ifNotExists? functionNameCreate (
         LPAREN (type (COMMA type)*)? RPAREN
-    )? KW_RETURNS type (KW_INTERMEDIATE type)? KW_LOCATION STRING (KW_INIT_FN EQ STRING)? KW_UPDATE_FN EQ STRING KW_MERGE_FN EQ STRING (
+    )? KW_RETURNS returnType=type (KW_INTERMEDIATE type)? KW_LOCATION STRING (KW_INIT_FN EQ STRING)? KW_UPDATE_FN EQ STRING KW_MERGE_FN EQ STRING (
         KW_PREPARE_FN EQ STRING
     )? (KW_CLOSEFN EQ STRING)? (KW_SERIALIZE_FN EQ STRING)? (KW_FINALIZE_FN EQ STRING)?
     ;
 
 createFunction
     : KW_CREATE KW_FUNCTION ifNotExists? functionNameCreate (LPAREN (type (COMMA type)*)? RPAREN)? (
-        KW_RETURNS type
+        KW_RETURNS returnType=type
     )? KW_LOCATION STRING KW_SYMBOL EQ symbol=stringLiteral
     ;
 
@@ -569,11 +569,9 @@ tableOrViewPath
     ;
 
 createCommonItem
-    : (KW_SORT KW_BY columnAliases)? (KW_COMMENT comment=stringLiteral)? (
-        KW_ROW KW_FORMAT rowFormat
-    )? (KW_WITH KW_SERDEPROPERTIES serdProp=properties)? (KW_STORED KW_AS fileFormat)? (
-        KW_LOCATION location=stringLiteral
-    )? (
+    : (KW_SORT KW_BY columnAliases)? commentClause? (KW_ROW KW_FORMAT rowFormat)? (
+        KW_WITH KW_SERDEPROPERTIES serdProp=properties
+    )? (KW_STORED KW_AS fileFormat)? (KW_LOCATION location=stringLiteral)? (
         KW_CACHED KW_IN cacheName=qualifiedName (KW_WITH KW_REPLICATION EQ INTEGER_VALUE)?
         | KW_UNCACHED
     )? (KW_TBLPROPERTIES tblProp=properties)?
@@ -588,9 +586,11 @@ assignmentItem
     ;
 
 viewColumns
-    : LPAREN columnNamePathCreate (KW_COMMENT stringLiteral)? (
-        COMMA columnNamePathCreate (KW_COMMENT stringLiteral)?
-    )* RPAREN
+    : LPAREN viewColumnItem? (COMMA viewColumnItem?)* RPAREN
+    ;
+
+viewColumnItem
+    : columnNamePathCreate commentClause?
     ;
 
 queryStatement
@@ -621,7 +621,7 @@ columnSpec
     ;
 
 columnDefinition
-    : columnNamePathCreate type (KW_COMMENT stringLiteral)?
+    : columnNamePathCreate colType=type commentClause?
     ;
 
 kuduTableElement
@@ -629,9 +629,13 @@ kuduTableElement
     ;
 
 kuduColumnDefinition
-    : columnNamePathCreate type (kuduAttributes kuduAttributes*?)? (KW_COMMENT stringLiteral)? (
+    : columnNamePathCreate colType=type (kuduAttributes kuduAttributes*?)? commentClause? (
         KW_PRIMARY KW_KEY
     )?
+    ;
+
+commentClause
+    : KW_COMMENT comment=stringLiteral
     ;
 
 columnSpecWithKudu
@@ -838,7 +842,7 @@ sampleType
     ;
 
 aliasedRelation
-    : relationPrimary (KW_AS? identifier columnAliases?)?
+    : relationPrimary (KW_AS? alias=identifier columnAliases?)?
     ;
 
 columnAliases

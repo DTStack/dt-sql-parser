@@ -110,6 +110,7 @@ import { CreateCommonItemContext } from "./ImpalaSqlParser.js";
 import { AssignmentListContext } from "./ImpalaSqlParser.js";
 import { AssignmentItemContext } from "./ImpalaSqlParser.js";
 import { ViewColumnsContext } from "./ImpalaSqlParser.js";
+import { ViewColumnItemContext } from "./ImpalaSqlParser.js";
 import { QueryStatementContext } from "./ImpalaSqlParser.js";
 import { WithContext } from "./ImpalaSqlParser.js";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParser.js";
@@ -118,6 +119,7 @@ import { ColumnSpecContext } from "./ImpalaSqlParser.js";
 import { ColumnDefinitionContext } from "./ImpalaSqlParser.js";
 import { KuduTableElementContext } from "./ImpalaSqlParser.js";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParser.js";
+import { CommentClauseContext } from "./ImpalaSqlParser.js";
 import { ColumnSpecWithKuduContext } from "./ImpalaSqlParser.js";
 import { CreateColumnSpecWithKuduContext } from "./ImpalaSqlParser.js";
 import { KuduAttributesContext } from "./ImpalaSqlParser.js";
@@ -872,6 +874,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitViewColumns?: (ctx: ViewColumnsContext) => Result;
     /**
+     * Visit a parse tree produced by `ImpalaSqlParser.viewColumnItem`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitViewColumnItem?: (ctx: ViewColumnItemContext) => Result;
+    /**
      * Visit a parse tree produced by `ImpalaSqlParser.queryStatement`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -919,6 +927,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitKuduColumnDefinition?: (ctx: KuduColumnDefinitionContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.commentClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCommentClause?: (ctx: CommentClauseContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.columnSpecWithKudu`.
      * @param ctx the parse tree

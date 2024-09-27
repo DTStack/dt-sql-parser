@@ -110,6 +110,7 @@ import { CreateCommonItemContext } from "./ImpalaSqlParser.js";
 import { AssignmentListContext } from "./ImpalaSqlParser.js";
 import { AssignmentItemContext } from "./ImpalaSqlParser.js";
 import { ViewColumnsContext } from "./ImpalaSqlParser.js";
+import { ViewColumnItemContext } from "./ImpalaSqlParser.js";
 import { QueryStatementContext } from "./ImpalaSqlParser.js";
 import { WithContext } from "./ImpalaSqlParser.js";
 import { ConstraintSpecificationContext } from "./ImpalaSqlParser.js";
@@ -118,6 +119,7 @@ import { ColumnSpecContext } from "./ImpalaSqlParser.js";
 import { ColumnDefinitionContext } from "./ImpalaSqlParser.js";
 import { KuduTableElementContext } from "./ImpalaSqlParser.js";
 import { KuduColumnDefinitionContext } from "./ImpalaSqlParser.js";
+import { CommentClauseContext } from "./ImpalaSqlParser.js";
 import { ColumnSpecWithKuduContext } from "./ImpalaSqlParser.js";
 import { CreateColumnSpecWithKuduContext } from "./ImpalaSqlParser.js";
 import { KuduAttributesContext } from "./ImpalaSqlParser.js";
@@ -1277,6 +1279,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      */
     exitViewColumns?: (ctx: ViewColumnsContext) => void;
     /**
+     * Enter a parse tree produced by `ImpalaSqlParser.viewColumnItem`.
+     * @param ctx the parse tree
+     */
+    enterViewColumnItem?: (ctx: ViewColumnItemContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.viewColumnItem`.
+     * @param ctx the parse tree
+     */
+    exitViewColumnItem?: (ctx: ViewColumnItemContext) => void;
+    /**
      * Enter a parse tree produced by `ImpalaSqlParser.queryStatement`.
      * @param ctx the parse tree
      */
@@ -1356,6 +1368,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitKuduColumnDefinition?: (ctx: KuduColumnDefinitionContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.commentClause`.
+     * @param ctx the parse tree
+     */
+    enterCommentClause?: (ctx: CommentClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.commentClause`.
+     * @param ctx the parse tree
+     */
+    exitCommentClause?: (ctx: CommentClauseContext) => void;
     /**
      * Enter a parse tree produced by `ImpalaSqlParser.columnSpecWithKudu`.
      * @param ctx the parse tree

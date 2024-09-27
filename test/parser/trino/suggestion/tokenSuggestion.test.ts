@@ -19,7 +19,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary(['VIEW', 'MATERIALIZED', 'TABLE', 'SCHEMA']);
+        expect(suggestion).toMatchUnorderedArray(['VIEW', 'MATERIALIZED', 'TABLE', 'SCHEMA']);
     });
 
     test('After CREATE', () => {
@@ -32,7 +32,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'ROLE',
             'FUNCTION',
             'OR',
@@ -54,7 +54,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary(['PREPARE']);
+        expect(suggestion).toMatchUnorderedArray(['PREPARE']);
     });
 
     test('After DELETE', () => {
@@ -67,7 +67,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary(['FROM']);
+        expect(suggestion).toMatchUnorderedArray(['FROM']);
     });
 
     test('After DESCRIBE', () => {
@@ -101,7 +101,7 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'ROLE',
             'FUNCTION',
             'VIEW',
@@ -122,6 +122,6 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary(['INTO']);
+        expect(suggestion).toMatchUnorderedArray(['INTO']);
     });
 });

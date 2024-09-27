@@ -18,7 +18,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'APPLICATION',
             'GROUP',
             'USER',
@@ -45,7 +45,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'CONNECTOR',
             'APPLICATION',
             'GROUP',
@@ -80,7 +80,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary(['FROM']);
+        expect(suggestion).toMatchUnorderedArray(['FROM']);
     });
 
     test('After DESCRIBE', () => {
@@ -92,7 +92,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'EXTENDED',
             'FORMATTED',
             'FUNCTION',
@@ -111,7 +111,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'CONNECTOR',
             'APPLICATION',
             'GROUP',
@@ -141,7 +141,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary(['TABLE']);
+        expect(suggestion).toMatchUnorderedArray(['TABLE']);
     });
 
     test('After IMPORT', () => {
@@ -153,7 +153,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary(['FROM', 'TABLE', 'EXTERNAL']);
+        expect(suggestion).toMatchUnorderedArray(['FROM', 'TABLE', 'EXTERNAL']);
     });
 
     test('After INSERT', () => {
@@ -165,7 +165,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary(['INTO', 'OVERWRITE']);
+        expect(suggestion).toMatchUnorderedArray(['INTO', 'OVERWRITE']);
     });
 
     test('After LOAD', () => {
@@ -177,7 +177,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary(['DATA']);
+        expect(suggestion).toMatchUnorderedArray(['DATA']);
     });
 
     test('After SHOW', () => {
@@ -189,7 +189,7 @@ describe('Hive SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'CURRENT',
             'ROLES',
             'PRINCIPALS',

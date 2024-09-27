@@ -40,7 +40,7 @@ export interface TextSlice extends TextPosition {
 /**
  * Convert Token to Word
  */
-export function tokenToWord(token: Token, input: string): WordPosition & { text: string } {
+export function tokenToWord(token: Token, input: string): WordRange {
     const startIndex = token.start;
     const endIndex = token.stop;
     const text = token.text ?? '';
@@ -51,29 +51,6 @@ export function tokenToWord(token: Token, input: string): WordPosition & { text:
         endIndex,
         startColumn: token.column + 1,
         endColumn: token.column + 1 + text.length,
-    };
-}
-
-/**
- * Convert ParserRuleContext to Word
- */
-export function ctxToWord(
-    ctx: ParserRuleContext,
-    input: string
-): (WordPosition & { text: string }) | null {
-    if (!ctx.start || !ctx.stop) {
-        return null;
-    }
-    const startIndex = ctx.start.start;
-    const endIndex = ctx.stop.stop;
-    const text = input.slice(startIndex, endIndex + 1);
-    return {
-        text,
-        line: ctx.start.line,
-        startIndex,
-        endIndex,
-        startColumn: ctx.start.column + 1,
-        endColumn: ctx.stop.column + 1 + (ctx.stop.text?.length ?? 0),
     };
 }
 
@@ -99,4 +76,13 @@ export function ctxToText(
         startColumn: ctx.start.column + 1,
         endColumn: ctx.stop.column + 1 + (ctx.stop.text?.length ?? 0),
     };
+}
+
+/**
+ * judge whether the context is a WordRange
+ * @param textOrWord TextSlice or WordRange object
+ * */
+export function isWordRange(textOrWord: TextSlice | WordRange): textOrWord is WordRange {
+    if (!textOrWord) return false;
+    return 'line' in textOrWord;
 }

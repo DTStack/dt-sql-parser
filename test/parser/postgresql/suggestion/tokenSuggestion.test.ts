@@ -17,7 +17,7 @@ describe('Postgres SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'TYPE',
             'TEXT',
             'STATISTICS',
@@ -66,7 +66,7 @@ describe('Postgres SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'RECURSIVE',
             'VIEW',
             'TEMPORARY',
@@ -126,7 +126,7 @@ describe('Postgres SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary(['FROM']);
+        expect(suggestion).toMatchUnorderedArray(['FROM']);
     });
 
     test('After DROP', () => {
@@ -138,7 +138,7 @@ describe('Postgres SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'OPERATOR',
             'ROUTINE',
             'PROCEDURE',
@@ -188,6 +188,6 @@ describe('Postgres SQL Token Suggestion', () => {
             commentOtherLine(tokenSql, pos.lineNumber),
             pos
         )?.keywords;
-        expect(suggestion).toMatchUnorderedArrary(['INTO']);
+        expect(suggestion).toMatchUnorderedArray(['INTO']);
     });
 });

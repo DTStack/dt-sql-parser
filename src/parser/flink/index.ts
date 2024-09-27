@@ -7,6 +7,8 @@ import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { FlinkSqlSplitListener } from './flinkSplitListener';
 import { FlinkEntityCollector } from './flinkEntityCollector';
+import { ErrorListener } from '../common/parseErrorListener';
+import { FlinkErrorListener } from './flinkErrorListener';
 
 export { FlinkSqlSplitListener, FlinkEntityCollector };
 
@@ -35,6 +37,10 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
 
     protected get splitListener() {
         return new FlinkSqlSplitListener();
+    }
+
+    protected createErrorListener(_errorListener: ErrorListener) {
+        return new FlinkErrorListener(_errorListener, this.preferredRules, this.locale);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

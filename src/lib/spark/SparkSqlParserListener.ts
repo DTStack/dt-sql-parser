@@ -270,7 +270,7 @@ import { ColDefinitionDescriptorWithPositionContext } from "./SparkSqlParser.js"
 import { DefaultExpressionContext } from "./SparkSqlParser.js";
 import { VariableDefaultExpressionContext } from "./SparkSqlParser.js";
 import { ColTypeListContext } from "./SparkSqlParser.js";
-import { ColTypeContext } from "./SparkSqlParser.js";
+import { ColumnTypeContext } from "./SparkSqlParser.js";
 import { CreateOrReplaceTableColTypeListContext } from "./SparkSqlParser.js";
 import { CreateOrReplaceTableColTypeContext } from "./SparkSqlParser.js";
 import { ColDefinitionOptionContext } from "./SparkSqlParser.js";
@@ -297,7 +297,7 @@ import { BackQuotedIdentifierContext } from "./SparkSqlParser.js";
 import { NumberContext } from "./SparkSqlParser.js";
 import { AlterColumnActionContext } from "./SparkSqlParser.js";
 import { StringLitContext } from "./SparkSqlParser.js";
-import { CommentContext } from "./SparkSqlParser.js";
+import { CommentStrContext } from "./SparkSqlParser.js";
 import { VersionContext } from "./SparkSqlParser.js";
 import { AnsiNonReservedContext } from "./SparkSqlParser.js";
 import { StrictNonReservedContext } from "./SparkSqlParser.js";
@@ -3124,15 +3124,15 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitColTypeList?: (ctx: ColTypeListContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.colType`.
+     * Enter a parse tree produced by `SparkSqlParser.columnType`.
      * @param ctx the parse tree
      */
-    enterColType?: (ctx: ColTypeContext) => void;
+    enterColumnType?: (ctx: ColumnTypeContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.colType`.
+     * Exit a parse tree produced by `SparkSqlParser.columnType`.
      * @param ctx the parse tree
      */
-    exitColType?: (ctx: ColTypeContext) => void;
+    exitColumnType?: (ctx: ColumnTypeContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.createOrReplaceTableColTypeList`.
      * @param ctx the parse tree
@@ -3394,15 +3394,15 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitStringLit?: (ctx: StringLitContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.comment`.
+     * Enter a parse tree produced by `SparkSqlParser.commentStr`.
      * @param ctx the parse tree
      */
-    enterComment?: (ctx: CommentContext) => void;
+    enterCommentStr?: (ctx: CommentStrContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.comment`.
+     * Exit a parse tree produced by `SparkSqlParser.commentStr`.
      * @param ctx the parse tree
      */
-    exitComment?: (ctx: CommentContext) => void;
+    exitCommentStr?: (ctx: CommentStrContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.version`.
      * @param ctx the parse tree

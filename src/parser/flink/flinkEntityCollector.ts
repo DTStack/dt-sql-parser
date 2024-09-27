@@ -1,4 +1,3 @@
-import { EntityContextType } from '../common/types';
 import {
     CatalogPathContext,
     CatalogPathCreateContext,
@@ -12,15 +11,18 @@ import {
     DatabasePathCreateContext,
     FunctionNameCreateContext,
     InsertStatementContext,
+    PhysicalColumnDefinitionContext,
     QueryStatementContext,
     SqlStatementContext,
     TablePathContext,
     TablePathCreateContext,
+    TableReferenceContext,
     ViewPathContext,
     ViewPathCreateContext,
 } from '../../lib/flink/FlinkSqlParser';
 import { FlinkSqlParserListener } from '../../lib/flink/FlinkSqlParserListener';
-import { StmtContextType, EntityCollector } from '../common/entityCollector';
+import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import { EntityContextType } from '../common/types';
 
 export class FlinkEntityCollector extends EntityCollector implements FlinkSqlParserListener {
     /** ====== Entity Begin */
@@ -33,7 +35,12 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitDatabasePathCreate(ctx: DatabasePathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE);
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateDatabaseContext.name],
+            },
+        ]);
     }
 
     exitDatabasePath(ctx: DatabasePathContext) {
@@ -41,11 +48,28 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitTablePath(ctx: TablePathContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE);
+        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            needCollectAttr
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [TableReferenceContext.name],
+                      },
+                  ]
+                : undefined
+        );
     }
 
     exitTablePathCreate(ctx: TablePathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE);
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateTableContext.name],
+            },
+        ]);
     }
 
     exitViewPath(ctx: ViewPathContext) {
@@ -53,11 +77,25 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitViewPathCreate(ctx: ViewPathCreateContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW_CREATE);
+        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateViewContext.name],
+            },
+        ]);
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE);
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [PhysicalColumnDefinitionContext.name],
+            },
+            {
+                attrName: AttrName.colType,
+                endContextList: [PhysicalColumnDefinitionContext.name],
+            },
+        ]);
     }
 
     exitFunctionNameCreate(ctx: FunctionNameCreateContext) {

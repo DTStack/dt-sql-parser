@@ -8,13 +8,14 @@ import {
     ParseTreeWalker,
     ParseTreeListener,
     PredictionMode,
+    ANTLRErrorListener,
 } from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { SQLParserBase } from '../../lib/SQLParserBase';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
 import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
-import { CaretPosition, Suggestions, SyntaxSuggestion } from './types';
-import { ParseError, ErrorListener, ParseErrorListener } from './parseErrorListener';
+import { CaretPosition, LOCALE_TYPE, Suggestions, SyntaxSuggestion } from './types';
+import { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
 import type { SplitListener } from './splitListener';
 import type { EntityCollector } from './entityCollector';
@@ -79,12 +80,19 @@ export abstract class BasicSQL<
     protected abstract get splitListener(): SplitListener<ParserRuleContext>;
 
     /**
+     * Get a new errorListener instance.
+     */
+    protected abstract createErrorListener(errorListener: ErrorListener): ANTLRErrorListener;
+
+    /**
      * Get a new entityCollector instance.
      */
     protected abstract createEntityCollector(
         input: string,
         caretTokenIndex?: number
     ): EntityCollector;
+
+    public locale: LOCALE_TYPE = 'en_US';
 
     /**
      * Create an antlr4 lexer from input.
@@ -95,7 +103,7 @@ export abstract class BasicSQL<
         const lexer = this.createLexerFromCharStream(charStreams);
         if (errorListener) {
             lexer.removeErrorListeners();
-            lexer.addErrorListener(new ParseErrorListener(errorListener));
+            lexer.addErrorListener(this.createErrorListener(errorListener));
         }
         return lexer;
     }
@@ -111,7 +119,7 @@ export abstract class BasicSQL<
         parser.interpreter.predictionMode = PredictionMode.SLL;
         if (errorListener) {
             parser.removeErrorListeners();
-            parser.addErrorListener(new ParseErrorListener(errorListener));
+            parser.addErrorListener(this.createErrorListener(errorListener));
         }
 
         return parser;
@@ -142,7 +150,7 @@ export abstract class BasicSQL<
         this._lexer = this.createLexerFromCharStream(this._charStreams);
 
         this._lexer.removeErrorListeners();
-        this._lexer.addErrorListener(new ParseErrorListener(this._errorListener));
+        this._lexer.addErrorListener(this.createErrorListener(this._errorListener));
 
         this._tokenStream = new CommonTokenStream(this._lexer);
         /**
@@ -178,7 +186,7 @@ export abstract class BasicSQL<
         this._parsedInput = input;
 
         parser.removeErrorListeners();
-        parser.addErrorListener(new ParseErrorListener(this._errorListener));
+        parser.addErrorListener(this.createErrorListener(this._errorListener));
 
         this._parseTree = parser.program();
 

@@ -959,7 +959,7 @@ colDefinitionDescriptorWithPosition
 defaultExpression
 variableDefaultExpression
 colTypeList
-colType
+columnType
 createOrReplaceTableColTypeList
 createOrReplaceTableColType
 colDefinitionOption
@@ -986,7 +986,7 @@ backQuotedIdentifier
 number
 alterColumnAction
 stringLit
-comment
+commentStr
 version
 ansiNonReserved
 strictNonReserved

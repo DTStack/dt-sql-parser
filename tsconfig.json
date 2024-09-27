@@ -15,6 +15,8 @@
         "noImplicitThis": true,
         "forceConsistentCasingInFileNames": true,
         "lib": ["ESNext", "DOM"],
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
         "skipLibCheck": true,
         "types": ["node", "jest"],
         "typeRoots": ["node", "node_modules/@types"]

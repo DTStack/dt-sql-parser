@@ -8,6 +8,8 @@ import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { PostgreSqlEntityCollector } from './postgreEntityCollector';
 import { PostgreSqlSplitListener } from './postgreSplitListener';
+import { ErrorListener } from '../common/parseErrorListener';
+import { PostgreSqlErrorListener } from './postgreErrorListener';
 
 export { PostgreSqlEntityCollector, PostgreSqlSplitListener };
 
@@ -39,6 +41,10 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
 
     protected get splitListener() {
         return new PostgreSqlSplitListener();
+    }
+
+    protected createErrorListener(_errorListener: ErrorListener) {
+        return new PostgreSqlErrorListener(_errorListener, this.preferredRules, this.locale);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
