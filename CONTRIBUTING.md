@@ -4,7 +4,7 @@ English | [简体中文](./CONTRIBUTING-zh_CN.md)
 
 ## Development
 
-> [!Tips]
+> [!Tip]
 > Before starting, you need to make sure your local Java environment is set up, otherwise you will not be able to generate from the grammar file. You can check it by running `java --version`.
 
 -   **Install dependencies**
