@@ -182,6 +182,7 @@ import { TableArgumentQueryContext } from "./TrinoSqlParser.js";
 import { DescriptorArgumentContext } from "./TrinoSqlParser.js";
 import { DescriptorFieldContext } from "./TrinoSqlParser.js";
 import { CopartitionTablesContext } from "./TrinoSqlParser.js";
+import { ExpressionWithColContext } from "./TrinoSqlParser.js";
 import { ExpressionContext } from "./TrinoSqlParser.js";
 import { LogicalNotContext } from "./TrinoSqlParser.js";
 import { PredicatedContext } from "./TrinoSqlParser.js";
@@ -2360,6 +2361,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitCopartitionTables?: (ctx: CopartitionTablesContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.expressionWithCol`.
+     * @param ctx the parse tree
+     */
+    enterExpressionWithCol?: (ctx: ExpressionWithColContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.expressionWithCol`.
+     * @param ctx the parse tree
+     */
+    exitExpressionWithCol?: (ctx: ExpressionWithColContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.expression`.
      * @param ctx the parse tree

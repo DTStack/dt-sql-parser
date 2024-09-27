@@ -182,6 +182,7 @@ import { TableArgumentQueryContext } from "./TrinoSqlParser.js";
 import { DescriptorArgumentContext } from "./TrinoSqlParser.js";
 import { DescriptorFieldContext } from "./TrinoSqlParser.js";
 import { CopartitionTablesContext } from "./TrinoSqlParser.js";
+import { ExpressionWithColContext } from "./TrinoSqlParser.js";
 import { ExpressionContext } from "./TrinoSqlParser.js";
 import { LogicalNotContext } from "./TrinoSqlParser.js";
 import { PredicatedContext } from "./TrinoSqlParser.js";
@@ -1549,6 +1550,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitCopartitionTables?: (ctx: CopartitionTablesContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.expressionWithCol`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitExpressionWithCol?: (ctx: ExpressionWithColContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.expression`.
      * @param ctx the parse tree

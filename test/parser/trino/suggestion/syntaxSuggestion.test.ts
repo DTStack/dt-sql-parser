@@ -419,4 +419,21 @@ describe('Trino SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
     });
+
+    test('GroupBy expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 47,
+            column: 46,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['sum', '(', ')', ' ']);
+    });
 });

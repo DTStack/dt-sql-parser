@@ -43,3 +43,5 @@ DROP CATALOG cat ;
 CREATE FUNCTION example.default. ;
 
 DROP FUNCTION  ;
+
+SELECT count(*) FROM customer GROUP BY sum() > 40000
