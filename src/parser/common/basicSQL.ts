@@ -21,6 +21,8 @@ import type { SplitListener } from './splitListener';
 import type { EntityCollector } from './entityCollector';
 import { EntityContext } from './entityCollector';
 
+const SEPARATOR: string = ';';
+
 /**
  * Basic SQL class, every sql needs extends it.
  */
@@ -65,13 +67,11 @@ export abstract class BasicSQL<
      * @param candidates candidate list
      * @param allTokens all tokens from input
      * @param caretTokenIndex tokenIndex of caretPosition
-     * @param tokenIndexOffset offset of the tokenIndex in the candidates compared to the tokenIndex in allTokens
      */
     protected abstract processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token>;
 
     /**
@@ -252,6 +252,67 @@ export abstract class BasicSQL<
     }
 
     /**
+     * Get the smaller range of input
+     * @param input string
+     * @param caretTokenIndex tokenIndex of caretPosition
+     * @returns inputSlice: string, caretTokenIndex: number, allTokens: Token[]
+     */
+    private splitInputBySeparator(
+        input: string,
+        caretTokenIndex: number
+    ): { inputSlice: string; caretTokenIndex: number; allTokens: Token[] } {
+        const allTokens = this.getAllTokens(input);
+
+        /**
+         * set startToken
+         */
+        let startToken: Token | null = null;
+        for (let tokenIndex = caretTokenIndex; tokenIndex >= 0; tokenIndex--) {
+            const token = allTokens[tokenIndex];
+            if (token?.text === SEPARATOR) {
+                startToken = allTokens[tokenIndex + 1];
+                break;
+            }
+        }
+        if (startToken === null) {
+            startToken = allTokens[0];
+        }
+
+        /**
+         * set stopToken
+         */
+        let stopToken: Token | null = null;
+        for (let tokenIndex = caretTokenIndex; tokenIndex < allTokens.length; tokenIndex++) {
+            const token = allTokens[tokenIndex];
+            if (token?.text === SEPARATOR) {
+                stopToken = token;
+                break;
+            }
+        }
+        if (stopToken === null) {
+            stopToken = allTokens[allTokens.length - 1];
+        }
+
+        let startIndex = startToken?.start ?? 0;
+        let stopIndex = stopToken?.stop + 1 ?? input.length;
+
+        /**
+         * Save offset of the tokenIndex in the range of input
+         * compared to the tokenIndex in the whole input
+         */
+        const tokenIndexOffset = startToken?.tokenIndex ?? 0;
+        const _caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+
+        /**
+         * Get the smaller range of _input
+         */
+        const _input = input.slice(startIndex, stopIndex);
+        const _allTokens = this.getAllTokens(_input);
+
+        return { inputSlice: _input, caretTokenIndex: _caretTokenIndex, allTokens: _allTokens };
+    }
+
+    /**
      * Get suggestions of syntax and token at caretPosition
      * @param input source string
      * @param caretPosition caret position, such as cursor position
@@ -262,12 +323,13 @@ export abstract class BasicSQL<
         caretPosition: CaretPosition
     ): Suggestions | null {
         const splitListener = this.splitListener;
+        let inputSlice = input;
 
-        this.parseWithCache(input);
+        this.parseWithCache(inputSlice);
         if (!this._parseTree) return null;
 
         let sqlParserIns = this._parser;
-        const allTokens = this.getAllTokens(input);
+        let allTokens = this.getAllTokens(inputSlice);
         let caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
         let c3Context: ParserRuleContext = this._parseTree;
         let tokenIndexOffset: number = 0;
@@ -321,8 +383,8 @@ export abstract class BasicSQL<
             }
 
             // A boundary consisting of the index of the input.
-            const startIndex = startStatement?.start?.start ?? 0;
-            const stopIndex = stopStatement?.stop?.stop ?? input.length - 1;
+            let startIndex = startStatement?.start?.start ?? 0;
+            let stopIndex = stopStatement?.stop?.stop ?? inputSlice.length - 1;
 
             /**
              * Save offset of the tokenIndex in the range of input
@@ -330,13 +392,28 @@ export abstract class BasicSQL<
              */
             tokenIndexOffset = startStatement?.start?.tokenIndex ?? 0;
             caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+            inputSlice = inputSlice.slice(startIndex, stopIndex);
+        }
 
-            /**
-             * Reparse the input fragment，
-             * and c3 will collect candidates in the newly generated parseTree.
-             */
-            const inputSlice = input.slice(startIndex, stopIndex);
+        /**
+         * Split the inputSlice by separator to get the smaller range of inputSlice.
+         */
+        if (inputSlice.includes(SEPARATOR)) {
+            const {
+                inputSlice: _input,
+                caretTokenIndex: _caretTokenIndex,
+                allTokens: _allTokens,
+            } = this.splitInputBySeparator(inputSlice, caretTokenIndex);
 
+            caretTokenIndex = _caretTokenIndex;
+            inputSlice = _input;
+            allTokens = _allTokens;
+        }
+
+        /**
+         * Reparse the input fragment, and c3 will collect candidates in the newly generated parseTree when input changed.
+         */
+        if (inputSlice !== input) {
             const lexer = this.createLexer(inputSlice);
             lexer.removeErrorListeners();
             const tokenStream = new CommonTokenStream(lexer);
@@ -356,12 +433,7 @@ export abstract class BasicSQL<
         core.preferredRules = this.preferredRules;
 
         const candidates = core.collectCandidates(caretTokenIndex, c3Context);
-        const originalSuggestions = this.processCandidates(
-            candidates,
-            allTokens,
-            caretTokenIndex,
-            tokenIndexOffset
-        );
+        const originalSuggestions = this.processCandidates(candidates, allTokens, caretTokenIndex);
 
         const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(
             (syntaxCtx) => {
