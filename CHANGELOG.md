@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0-beta.2](https://github.com/DTStack/dt-sql-parser/compare/v4.1.0-beta.0...v4.1.0-beta.2) (2024-09-29)
+
+
+### Features
+
+* add splitInputBySeparator ([417c063](https://github.com/DTStack/dt-sql-parser/commit/417c0639954c91e170ee14ef32bf0ac8bbb67a5a))
+
 ## [4.1.0-beta.0](https://github.com/DTStack/dt-sql-parser/compare/v4.0.1...v4.1.0-beta.0) (2024-08-27)
 
 
