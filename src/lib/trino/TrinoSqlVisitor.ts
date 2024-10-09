@@ -123,6 +123,7 @@ import { InlineTableContext } from "./TrinoSqlParser.js";
 import { SubqueryContext } from "./TrinoSqlParser.js";
 import { SortItemContext } from "./TrinoSqlParser.js";
 import { QuerySpecificationContext } from "./TrinoSqlParser.js";
+import { WhereClauseContext } from "./TrinoSqlParser.js";
 import { GroupByContext } from "./TrinoSqlParser.js";
 import { SingleGroupingSetContext } from "./TrinoSqlParser.js";
 import { RollupContext } from "./TrinoSqlParser.js";
@@ -355,6 +356,7 @@ import { CatalogNameCreateContext } from "./TrinoSqlParser.js";
 import { FunctionNameContext } from "./TrinoSqlParser.js";
 import { FunctionNameCreateContext } from "./TrinoSqlParser.js";
 import { ColumnRefContext } from "./TrinoSqlParser.js";
+import { ColumnNameContext } from "./TrinoSqlParser.js";
 import { ColumnNameCreateContext } from "./TrinoSqlParser.js";
 import { QualifiedNameContext } from "./TrinoSqlParser.js";
 import { QueryPeriodContext } from "./TrinoSqlParser.js";
@@ -1170,6 +1172,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitQuerySpecification?: (ctx: QuerySpecificationContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.whereClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitWhereClause?: (ctx: WhereClauseContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.groupBy`.
      * @param ctx the parse tree
@@ -2708,6 +2716,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitColumnRef?: (ctx: ColumnRefContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.columnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnName?: (ctx: ColumnNameContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.columnNameCreate`.
      * @param ctx the parse tree

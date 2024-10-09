@@ -43,3 +43,9 @@ DROP CATALOG cat ;
 CREATE FUNCTION example.default. ;
 
 DROP FUNCTION  ;
+
+SELECT count(*) FROM customer order BY sum()
+
+SELECT count(*) FROM customer where a > b
+
+SELECT product_id, SUM(amount) AS total_sales FROM sales HAVING SUM(amount) > 1000;
