@@ -123,6 +123,7 @@ import { InlineTableContext } from "./TrinoSqlParser.js";
 import { SubqueryContext } from "./TrinoSqlParser.js";
 import { SortItemContext } from "./TrinoSqlParser.js";
 import { QuerySpecificationContext } from "./TrinoSqlParser.js";
+import { WhereClauseContext } from "./TrinoSqlParser.js";
 import { GroupByContext } from "./TrinoSqlParser.js";
 import { SingleGroupingSetContext } from "./TrinoSqlParser.js";
 import { RollupContext } from "./TrinoSqlParser.js";
@@ -355,6 +356,7 @@ import { CatalogNameCreateContext } from "./TrinoSqlParser.js";
 import { FunctionNameContext } from "./TrinoSqlParser.js";
 import { FunctionNameCreateContext } from "./TrinoSqlParser.js";
 import { ColumnRefContext } from "./TrinoSqlParser.js";
+import { ColumnNameContext } from "./TrinoSqlParser.js";
 import { ColumnNameCreateContext } from "./TrinoSqlParser.js";
 import { QualifiedNameContext } from "./TrinoSqlParser.js";
 import { QueryPeriodContext } from "./TrinoSqlParser.js";
@@ -1720,6 +1722,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitQuerySpecification?: (ctx: QuerySpecificationContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.whereClause`.
+     * @param ctx the parse tree
+     */
+    enterWhereClause?: (ctx: WhereClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.whereClause`.
+     * @param ctx the parse tree
+     */
+    exitWhereClause?: (ctx: WhereClauseContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.groupBy`.
      * @param ctx the parse tree
@@ -4332,6 +4344,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnRef?: (ctx: ColumnRefContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.columnName`.
+     * @param ctx the parse tree
+     */
+    enterColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.columnName`.
+     * @param ctx the parse tree
+     */
+    exitColumnName?: (ctx: ColumnNameContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.columnNameCreate`.
      * @param ctx the parse tree
