@@ -124,7 +124,9 @@ import { SubqueryContext } from "./TrinoSqlParser.js";
 import { SortItemContext } from "./TrinoSqlParser.js";
 import { QuerySpecificationContext } from "./TrinoSqlParser.js";
 import { WhereClauseContext } from "./TrinoSqlParser.js";
+import { HavingClauseContext } from "./TrinoSqlParser.js";
 import { GroupByContext } from "./TrinoSqlParser.js";
+import { PartitionByContext } from "./TrinoSqlParser.js";
 import { SingleGroupingSetContext } from "./TrinoSqlParser.js";
 import { RollupContext } from "./TrinoSqlParser.js";
 import { CubeContext } from "./TrinoSqlParser.js";
@@ -1179,11 +1181,23 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitWhereClause?: (ctx: WhereClauseContext) => Result;
     /**
+     * Visit a parse tree produced by `TrinoSqlParser.havingClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitHavingClause?: (ctx: HavingClauseContext) => Result;
+    /**
      * Visit a parse tree produced by `TrinoSqlParser.groupBy`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitGroupBy?: (ctx: GroupByContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.partitionBy`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPartitionBy?: (ctx: PartitionByContext) => Result;
     /**
      * Visit a parse tree produced by the `singleGroupingSet`
      * labeled alternative in `TrinoSqlParser.groupingElement`.

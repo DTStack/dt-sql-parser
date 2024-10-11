@@ -124,7 +124,9 @@ import { SubqueryContext } from "./TrinoSqlParser.js";
 import { SortItemContext } from "./TrinoSqlParser.js";
 import { QuerySpecificationContext } from "./TrinoSqlParser.js";
 import { WhereClauseContext } from "./TrinoSqlParser.js";
+import { HavingClauseContext } from "./TrinoSqlParser.js";
 import { GroupByContext } from "./TrinoSqlParser.js";
+import { PartitionByContext } from "./TrinoSqlParser.js";
 import { SingleGroupingSetContext } from "./TrinoSqlParser.js";
 import { RollupContext } from "./TrinoSqlParser.js";
 import { CubeContext } from "./TrinoSqlParser.js";
@@ -1733,6 +1735,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitWhereClause?: (ctx: WhereClauseContext) => void;
     /**
+     * Enter a parse tree produced by `TrinoSqlParser.havingClause`.
+     * @param ctx the parse tree
+     */
+    enterHavingClause?: (ctx: HavingClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.havingClause`.
+     * @param ctx the parse tree
+     */
+    exitHavingClause?: (ctx: HavingClauseContext) => void;
+    /**
      * Enter a parse tree produced by `TrinoSqlParser.groupBy`.
      * @param ctx the parse tree
      */
@@ -1742,6 +1754,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitGroupBy?: (ctx: GroupByContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.partitionBy`.
+     * @param ctx the parse tree
+     */
+    enterPartitionBy?: (ctx: PartitionByContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.partitionBy`.
+     * @param ctx the parse tree
+     */
+    exitPartitionBy?: (ctx: PartitionByContext) => void;
     /**
      * Enter a parse tree produced by the `singleGroupingSet`
      * labeled alternative in `TrinoSqlParser.groupingElement`.

@@ -49,3 +49,7 @@ SELECT count(*) FROM customer order BY sum()
 SELECT count(*) FROM customer where a > b
 
 SELECT product_id, SUM(amount) AS total_sales FROM sales HAVING SUM(amount) > 1000;
+
+SELECT array_agg(x ORDER BY t.y) FROM t;
+
+SELECT orderId FROM orders WINDOW w AS (PARTITION BY clerk ORDER BY totalprice DESC)

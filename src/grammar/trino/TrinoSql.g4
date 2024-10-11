@@ -2,19 +2,22 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 /**
- * This file is an adaptation of trino's trino/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4 grammar.
- * Reference: https://github.com/trinodb/trino/blob/385/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4
+ * This file is an adaptation of trino's
+ * trino/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4 grammar. Reference:
+ * https://github.com/trinodb/trino/blob/385/core/trino-parser/src/main/antlr4/io/trino/sql/parser/SqlBase.g4
  * current version 450
  */
 
@@ -282,17 +285,23 @@ sortItem
 querySpecification
     : KW_SELECT setQuantifier? selectItem (',' selectItem)* (KW_FROM relation (',' relation)*)? (
         whereClause
-    )? (KW_GROUP KW_BY groupBy)? (KW_HAVING having=booleanExpression)? (
-        KW_WINDOW windowDefinition (',' windowDefinition)*
-    )?
+    )? (KW_GROUP KW_BY groupBy)? (havingClause)? (KW_WINDOW windowDefinition (',' windowDefinition)*)?
     ;
 
 whereClause
     : KW_WHERE where=booleanExpression
     ;
 
+havingClause
+    : KW_HAVING having=booleanExpression
+    ;
+
 groupBy
     : setQuantifier? groupingElement (',' groupingElement)*
+    ;
+
+partitionBy
+    : expression (',' expression)*
     ;
 
 groupingElement
@@ -317,9 +326,9 @@ windowDefinition
     ;
 
 windowSpecification
-    : (existingWindowName=identifier)? (
-        KW_PARTITION KW_BY partition+=expression (',' partition+=expression)*
-    )? (KW_ORDER KW_BY sortItem (',' sortItem)*)? windowFrame?
+    : (existingWindowName=identifier)? (KW_PARTITION KW_BY partitionBy)? (
+        KW_ORDER KW_BY sortItem (',' sortItem)*
+    )? windowFrame?
     ;
 
 namedQuery
@@ -385,11 +394,11 @@ listaggCountIndication
 
 patternRecognition
     : aliasedRelation (
-        KW_MATCH_RECOGNIZE '(' (
-            KW_PARTITION KW_BY partition+=expression (',' partition+=expression)*
-        )? (KW_ORDER KW_BY sortItem (',' sortItem)*)? (
-            KW_MEASURES measureDefinition (',' measureDefinition)*
-        )? rowsPerMatch? (KW_AFTER KW_MATCH skipTo)? (KW_INITIAL | KW_SEEK)? KW_PATTERN '(' rowPattern ')' (
+        KW_MATCH_RECOGNIZE '(' (KW_PARTITION KW_BY partitionBy)? (
+            KW_ORDER KW_BY sortItem (',' sortItem)*
+        )? (KW_MEASURES measureDefinition (',' measureDefinition)*)? rowsPerMatch? (
+            KW_AFTER KW_MATCH skipTo
+        )? (KW_INITIAL | KW_SEEK)? KW_PATTERN '(' rowPattern ')' (
             KW_SUBSET subsetDefinition (',' subsetDefinition)*
         )? KW_DEFINE variableDefinition (',' variableDefinition)* ')' (KW_AS? identifier columnAliases?)?
     )?
@@ -504,7 +513,7 @@ tableFunctionArgument
     ;
 
 tableArgument
-    : tableArgumentRelation (KW_PARTITION KW_BY ('(' (expression (',' expression)*)? ')' | expression))? (
+    : tableArgumentRelation (KW_PARTITION KW_BY ('(' partitionBy? ')' | expression))? (
         KW_PRUNE KW_WHEN KW_EMPTY
         | KW_KEEP KW_WHEN KW_EMPTY
     )? (KW_ORDER KW_BY ('(' sortItem (',' sortItem)* ')' | sortItem))?

@@ -120,7 +120,9 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                     if (
                         candidateRule.ruleList.includes(TrinoSqlParser.RULE_groupBy) ||
                         candidateRule.ruleList.includes(TrinoSqlParser.RULE_sortItem) ||
-                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_whereClause)
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_partitionBy)
                     ) {
                         syntaxContextType = EntityContextType.COLUMN;
                     }

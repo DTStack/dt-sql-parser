@@ -437,7 +437,7 @@ describe('Trino SQL Syntax Suggestion', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['sum', '(']);
     });
 
-    test('where expression column', () => {
+    test('Where expression column', () => {
         const pos: CaretPosition = {
             lineNumber: 49,
             column: 42,
@@ -454,7 +454,7 @@ describe('Trino SQL Syntax Suggestion', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['b']);
     });
 
-    test('having expression column', () => {
+    test('Having expression column', () => {
         const pos: CaretPosition = {
             lineNumber: 51,
             column: 75,
@@ -467,6 +467,41 @@ describe('Trino SQL Syntax Suggestion', () => {
             (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
 
-        expect(suggestion).toBeUndefined();
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['amount']);
+    });
+
+    test('Order by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 53,
+            column: 32,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['t', '.', 'y']);
+    });
+
+    test('Partition by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 55,
+            column: 59,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['clerk']);
     });
 });
