@@ -43,3 +43,17 @@ DROP CATALOG cat ;
 CREATE FUNCTION example.default. ;
 
 DROP FUNCTION  ;
+
+SELECT count(*) FROM customer order BY sum()
+
+SELECT count(*) FROM customer where a > b
+
+SELECT product_id, SUM(amount) AS total_sales FROM sales HAVING SUM(amount) > 1000;
+
+SELECT array_agg(x ORDER BY t.y) FROM t;
+
+SELECT orderId FROM orders WINDOW w AS (PARTITION BY clerk ORDER BY totalprice DESC)
+
+SELECT id, amount, CASE WHEN amount > 1000 THEN 'High' WHEN amount BETWEEN 500 AND 1000 THEN 'Medium' ELSE 'Low' END AS sales_category FROM sales;
+
+SELECT * FROM users CROSS JOIN UNNEST(friends) WITH ordinality;
