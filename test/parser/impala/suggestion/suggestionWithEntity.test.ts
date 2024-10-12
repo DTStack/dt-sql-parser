@@ -155,4 +155,124 @@ describe('Impala SQL Syntax Suggestion with collect entity', () => {
         expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
+
+    test('Where expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 13,
+            column: 52,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['t2', '.', 'id']);
+    });
+
+    test('Join expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 15,
+            column: 63,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['t2', '.', 'int_col']);
+    });
+
+    test('Select expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 17,
+            column: 52,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['page_views']);
+    });
+
+    test('Group by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 17,
+            column: 97,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['user_id']);
+    });
+
+    test('Order by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 17,
+            column: 151,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['page_views']);
+    });
+
+    test('Having expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 17,
+            column: 120,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['times_purchased']);
+    });
+
+    test('When case expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 19,
+            column: 69,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col2']);
+    });
+
+    test('Partition by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 21,
+            column: 91,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['id']);
+    });
 });

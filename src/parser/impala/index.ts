@@ -32,6 +32,7 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
         ImpalaSqlParser.RULE_viewNamePath,
         ImpalaSqlParser.RULE_databaseNamePath,
         ImpalaSqlParser.RULE_columnNamePath,
+        ImpalaSqlParser.RULE_columnName,
     ]);
 
     protected get splitListener() {
@@ -102,6 +103,18 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
                 }
                 case ImpalaSqlParser.RULE_columnNamePath: {
                     syntaxContextType = EntityContextType.COLUMN;
+                }
+                case ImpalaSqlParser.RULE_columnName: {
+                    if (
+                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_columnItem) ||
+                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_partitionByClause) ||
+                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_relation)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
                 }
                 default:
                     break;

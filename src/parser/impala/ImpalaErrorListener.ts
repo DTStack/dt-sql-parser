@@ -16,6 +16,7 @@ export class ImpalaErrorListener extends ParseErrorListener {
         [ImpalaSqlParser.RULE_viewNameCreate, 'view'],
         [ImpalaSqlParser.RULE_functionNamePath, 'function'],
         [ImpalaSqlParser.RULE_functionNameCreate, 'function'],
+        [ImpalaSqlParser.RULE_columnName, 'column'],
         [ImpalaSqlParser.RULE_columnNamePath, 'column'],
         [ImpalaSqlParser.RULE_columnNamePathCreate, 'column'],
     ]);
@@ -48,6 +49,7 @@ export class ImpalaErrorListener extends ParseErrorListener {
                     case ImpalaSqlParser.RULE_tableNamePath:
                     case ImpalaSqlParser.RULE_functionNamePath:
                     case ImpalaSqlParser.RULE_viewNamePath:
+                    case ImpalaSqlParser.RULE_columnName:
                     case ImpalaSqlParser.RULE_columnNamePath: {
                         result.push(`{existing}${name}`);
                         break;
