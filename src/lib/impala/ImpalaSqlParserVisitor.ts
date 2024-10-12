@@ -105,6 +105,7 @@ import { TableNamePathContext } from "./ImpalaSqlParser.js";
 import { ViewNamePathContext } from "./ImpalaSqlParser.js";
 import { FunctionNamePathContext } from "./ImpalaSqlParser.js";
 import { ColumnNamePathContext } from "./ImpalaSqlParser.js";
+import { ColumnNameContext } from "./ImpalaSqlParser.js";
 import { TableOrViewPathContext } from "./ImpalaSqlParser.js";
 import { CreateCommonItemContext } from "./ImpalaSqlParser.js";
 import { AssignmentListContext } from "./ImpalaSqlParser.js";
@@ -148,6 +149,8 @@ import { InlineTableContext } from "./ImpalaSqlParser.js";
 import { SubqueryContext } from "./ImpalaSqlParser.js";
 import { SortItemContext } from "./ImpalaSqlParser.js";
 import { QuerySpecificationContext } from "./ImpalaSqlParser.js";
+import { WhereClauseContext } from "./ImpalaSqlParser.js";
+import { HavingClauseContext } from "./ImpalaSqlParser.js";
 import { GroupByContext } from "./ImpalaSqlParser.js";
 import { SingleGroupingSetContext } from "./ImpalaSqlParser.js";
 import { GroupingSetContext } from "./ImpalaSqlParser.js";
@@ -228,6 +231,7 @@ import { TypeParameterContext } from "./ImpalaSqlParser.js";
 import { BaseTypeContext } from "./ImpalaSqlParser.js";
 import { WhenClauseContext } from "./ImpalaSqlParser.js";
 import { FilterContext } from "./ImpalaSqlParser.js";
+import { PartitionByClauseContext } from "./ImpalaSqlParser.js";
 import { OverContext } from "./ImpalaSqlParser.js";
 import { WindowFrameContext } from "./ImpalaSqlParser.js";
 import { UnboundedFrameContext } from "./ImpalaSqlParser.js";
@@ -844,6 +848,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
     /**
+     * Visit a parse tree produced by `ImpalaSqlParser.columnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
      * Visit a parse tree produced by `ImpalaSqlParser.tableOrViewPath`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1107,6 +1117,18 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitQuerySpecification?: (ctx: QuerySpecificationContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.whereClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitWhereClause?: (ctx: WhereClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.havingClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitHavingClause?: (ctx: HavingClauseContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.groupBy`.
      * @param ctx the parse tree
@@ -1639,6 +1661,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitFilter?: (ctx: FilterContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPartitionByClause?: (ctx: PartitionByClauseContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.over`.
      * @param ctx the parse tree

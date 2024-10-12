@@ -6,6 +6,7 @@ const sql2 = `SELECT * FROM `;
 const sql3 = `DROP VIEW IF EXIsST aaa aaa`;
 const sql4 = `SELECT * froma aaa`;
 const sql5 = `CREATE VIEW `;
+const sql6 = 'SELECT * FROM t1 LEFT OUTER JOIN t2 ON t1.int_col < ';
 
 describe('ImpalaSQL validate invalid sql and test msg', () => {
     const impala = new ImpalaSQL();
@@ -55,6 +56,14 @@ describe('ImpalaSQL validate invalid sql and test msg', () => {
         );
     });
 
+    test('validate unComplete sql6', () => {
+        const errors = impala.validate(sql6);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `'<' is not valid at this position, expecting an existing column or a keyword`
+        );
+    });
+
     test('validate random text cn', () => {
         impala.locale = 'zh_CN';
         const errors = impala.validate(randomText);
@@ -87,5 +96,11 @@ describe('ImpalaSQL validate invalid sql and test msg', () => {
         const errors = impala.validate(sql4);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(`'froma' 在此位置无效，期望一个关键字`);
+    });
+
+    test('validate unComplete sql6', () => {
+        const errors = impala.validate(sql6);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(`'<' 在此位置无效，期望一个存在的column或者一个关键字`);
     });
 });
