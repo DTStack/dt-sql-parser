@@ -69,6 +69,24 @@ describe('PgSQL Multiple Statements Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+        expect(suggestion?.wordRanges?.length).toBe(2);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 21,
+                startIndex: 682,
+                endIndex: 683,
+                startColumn: 62,
+                endColumn: 64,
+            },
+            {
+                text: '.',
+                line: 21,
+                startIndex: 684,
+                endIndex: 684,
+                startColumn: 64,
+                endColumn: 65,
+            },
+        ]);
     });
 });
