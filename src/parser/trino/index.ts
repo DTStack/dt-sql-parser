@@ -51,19 +51,15 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const startTokenIndex = candidateRule.startTokenIndex;
+            const tokenRanges = allTokens.slice(startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
