@@ -32,7 +32,17 @@ describe('Flink SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['cat']);
+        expect(suggestion?.wordRanges?.length).toBe(1);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'cat',
+                line: 1,
+                startIndex: 13,
+                endIndex: 15,
+                startColumn: 14,
+                endColumn: 17,
+            },
+        ]);
     });
 
     test('Select table', () => {
