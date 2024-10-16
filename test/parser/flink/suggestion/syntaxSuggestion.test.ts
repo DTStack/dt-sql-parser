@@ -374,4 +374,89 @@ describe('Flink SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
     });
+
+    test('Select expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 43,
+            column: 18,
+        };
+        const syntaxes = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['amount']);
+    });
+
+    test('Group by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 43,
+            column: 53,
+        };
+        const syntaxes = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['users']);
+    });
+
+    test('Having expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 43,
+            column: 72,
+        };
+        const syntaxes = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['amount']);
+    });
+
+    test('Limit by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 45,
+            column: 62,
+        };
+        const syntaxes = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['order_id']);
+    });
+
+    test('When by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 47,
+            column: 25,
+        };
+        const syntaxes = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['age']);
+    });
 });
