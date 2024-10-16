@@ -4,6 +4,7 @@ const randomText = `dhsdansdnkla ndjnsla ndnalks`;
 const sql1 = `ALTER VIEW`;
 const sql2 = `SELECT * FROM `;
 const sql3 = `DROP SCHEMA aaa aaa`;
+const sql4 = `SELECT name, age FROM person ORDER BY length( `;
 
 describe('SparkSQL validate invalid sql and test msg', () => {
     const spark = new SparkSQL();
@@ -38,6 +39,14 @@ describe('SparkSQL validate invalid sql and test msg', () => {
         );
     });
 
+    test('validate unComplete sql4', () => {
+        const errors = spark.validate(sql4);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `Statement is incomplete, expecting an existing function or an existing column or a keyword`
+        );
+    });
+
     test('validate random text cn', () => {
         spark.locale = 'zh_CN';
         const errors = spark.validate(randomText);
@@ -63,5 +72,13 @@ describe('SparkSQL validate invalid sql and test msg', () => {
         const errors = spark.validate(sql3);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(`'aaa' 在此位置无效，期望一个存在的namespace或者一个关键字`);
+    });
+
+    test('validate unComplete sql4', () => {
+        const errors = spark.validate(sql4);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `语句不完整，期望一个存在的function或者一个存在的column或者一个关键字`
+        );
     });
 });
