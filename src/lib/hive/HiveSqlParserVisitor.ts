@@ -137,6 +137,7 @@ import { ColumnNameTypeOrConstraintListContext } from "./HiveSqlParser.js";
 import { ColumnNameColonTypeListContext } from "./HiveSqlParser.js";
 import { ColumnNameListContext } from "./HiveSqlParser.js";
 import { ColumnNameContext } from "./HiveSqlParser.js";
+import { ColumnNamePathContext } from "./HiveSqlParser.js";
 import { ColumnNameCreateContext } from "./HiveSqlParser.js";
 import { ExtColumnNameContext } from "./HiveSqlParser.js";
 import { ColumnNameOrderListContext } from "./HiveSqlParser.js";
@@ -282,6 +283,7 @@ import { ExpressionsContext } from "./HiveSqlParser.js";
 import { ExpressionsInParenthesisContext } from "./HiveSqlParser.js";
 import { ExpressionsNotInParenthesisContext } from "./HiveSqlParser.js";
 import { OrderByClauseContext } from "./HiveSqlParser.js";
+import { PartitionByClauseContext } from "./HiveSqlParser.js";
 import { ClusterByClauseContext } from "./HiveSqlParser.js";
 import { DistributeByClauseContext } from "./HiveSqlParser.js";
 import { SortByClauseContext } from "./HiveSqlParser.js";
@@ -1140,6 +1142,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.columnNameCreate`.
      * @param ctx the parse tree
@@ -2014,6 +2022,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitOrderByClause?: (ctx: OrderByClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPartitionByClause?: (ctx: PartitionByClauseContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.clusterByClause`.
      * @param ctx the parse tree
