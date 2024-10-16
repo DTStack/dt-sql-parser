@@ -7,6 +7,7 @@ const sql3 = `DROP VIEW IF EXIsST aaa aaa`;
 const sql4 = `SELECT * froma aaa`;
 const sql5 = `CREATE VIEW `;
 const sql6 = `DROP CATALOG `;
+const sql7 = `SELECT SUM(amount) FROM Orders GROUP BY length(users) HAVING SUM( `;
 
 describe('FlinkSQL validate invalid sql and test msg', () => {
     const flink = new FlinkSQL();
@@ -64,6 +65,14 @@ describe('FlinkSQL validate invalid sql and test msg', () => {
         );
     });
 
+    test('validate unComplete sql7', () => {
+        const errors = flink.validate(sql7);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `Statement is incomplete, expecting an existing function or an existing column or a keyword`
+        );
+    });
+
     test('validate random text cn', () => {
         flink.locale = 'zh_CN';
         const errors = flink.validate(randomText);
@@ -96,5 +105,13 @@ describe('FlinkSQL validate invalid sql and test msg', () => {
         const errors = flink.validate(sql4);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(`'aaa' 在此位置无效，期望一个存在的column或者一个关键字`);
+    });
+
+    test('validate unComplete sql7 cn', () => {
+        const errors = flink.validate(sql7);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `语句不完整，期望一个存在的function或者一个存在的column或者一个关键字`
+        );
     });
 });
