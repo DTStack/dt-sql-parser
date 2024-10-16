@@ -5,6 +5,7 @@ const sql1 = `SHOW CREATE TABLE`;
 const sql2 = `CREATE DATABASE `;
 const sql3 = `SHOW CREATE DATABASE IF NOT EXIsST aaa aaa`;
 const sql4 = `SELECT * froma aaa`;
+const sql5 = `SELECT user, MAX(salary) FROM users where `;
 
 describe('MySQL validate invalid sql and test msg', () => {
     const mysql = new MySQL();
@@ -46,6 +47,14 @@ describe('MySQL validate invalid sql and test msg', () => {
         );
     });
 
+    test('validate unComplete sql5', () => {
+        const errors = mysql.validate(sql5);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `Statement is incomplete, expecting an existing function or an existing column or a keyword`
+        );
+    });
+
     test('validate random text cn', () => {
         mysql.locale = 'zh_CN';
         const errors = mysql.validate(randomText);
@@ -76,5 +85,13 @@ describe('MySQL validate invalid sql and test msg', () => {
         const errors = mysql.validate(sql4);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(`'froma' 在此位置无效，期望一个存在的column或者一个关键字`);
+    });
+
+    test('validate unComplete sql5 cn', () => {
+        const errors = mysql.validate(sql5);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `语句不完整，期望一个存在的function或者一个存在的column或者一个关键字`
+        );
     });
 });
