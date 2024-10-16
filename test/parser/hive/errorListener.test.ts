@@ -6,6 +6,7 @@ const sql2 = `SELECT * FROM `;
 const sql3 = `DROP VIEW IF EXIsST aaa aaa`;
 const sql4 = `SELECT * froma aaa`;
 const sql5 = `CREATE TABLE `;
+const sql6 = `SELECT col1 FROM t1 GROUP BY col1 HAVING SUM(col2 `;
 
 describe('HiveSQL validate invalid sql and test msg', () => {
     const hive = new HiveSQL();
@@ -55,6 +56,14 @@ describe('HiveSQL validate invalid sql and test msg', () => {
         );
     });
 
+    test('validate unComplete sql6', () => {
+        const errors = hive.validate(sql6);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `Statement is incomplete, expecting an existing function or an existing column or a keyword`
+        );
+    });
+
     test('validate random text cn', () => {
         hive.locale = 'zh_CN';
         const errors = hive.validate(randomText);
@@ -87,5 +96,19 @@ describe('HiveSQL validate invalid sql and test msg', () => {
         const errors = hive.validate(sql4);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(`'froma' 在此位置无效，期望一个关键字`);
+    });
+
+    test('validate unComplete sql5', () => {
+        const errors = hive.validate(sql5);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(`语句不完整，期望一个新的table或者一个关键字`);
+    });
+
+    test('validate unComplete sql6 cn', () => {
+        const errors = hive.validate(sql6);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `语句不完整，期望一个存在的function或者一个存在的column或者一个关键字`
+        );
     });
 });
