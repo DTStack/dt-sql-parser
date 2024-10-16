@@ -139,10 +139,14 @@ import { TableNameContext } from "./SparkSqlParser.js";
 import { ViewNameCreateContext } from "./SparkSqlParser.js";
 import { ViewNameContext } from "./SparkSqlParser.js";
 import { ColumnNameContext } from "./SparkSqlParser.js";
+import { ColumnNamePathContext } from "./SparkSqlParser.js";
 import { ColumnNameSeqContext } from "./SparkSqlParser.js";
 import { ColumnNameCreateContext } from "./SparkSqlParser.js";
 import { IdentifierReferenceContext } from "./SparkSqlParser.js";
 import { QueryOrganizationContext } from "./SparkSqlParser.js";
+import { LimitClauseContext } from "./SparkSqlParser.js";
+import { OrderOrSortByClauseContext } from "./SparkSqlParser.js";
+import { ClusterOrDistributeByContext } from "./SparkSqlParser.js";
 import { QueryTermContext } from "./SparkSqlParser.js";
 import { QueryPrimaryContext } from "./SparkSqlParser.js";
 import { SortItemContext } from "./SparkSqlParser.js";
@@ -1779,6 +1783,16 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
     /**
+     * Enter a parse tree produced by `SparkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
      * Enter a parse tree produced by `SparkSqlParser.columnNameSeq`.
      * @param ctx the parse tree
      */
@@ -1818,6 +1832,36 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitQueryOrganization?: (ctx: QueryOrganizationContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.limitClause`.
+     * @param ctx the parse tree
+     */
+    enterLimitClause?: (ctx: LimitClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.limitClause`.
+     * @param ctx the parse tree
+     */
+    exitLimitClause?: (ctx: LimitClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.orderOrSortByClause`.
+     * @param ctx the parse tree
+     */
+    enterOrderOrSortByClause?: (ctx: OrderOrSortByClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.orderOrSortByClause`.
+     * @param ctx the parse tree
+     */
+    exitOrderOrSortByClause?: (ctx: OrderOrSortByClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.clusterOrDistributeBy`.
+     * @param ctx the parse tree
+     */
+    enterClusterOrDistributeBy?: (ctx: ClusterOrDistributeByContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.clusterOrDistributeBy`.
+     * @param ctx the parse tree
+     */
+    exitClusterOrDistributeBy?: (ctx: ClusterOrDistributeByContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.queryTerm`.
      * @param ctx the parse tree

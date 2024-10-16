@@ -139,10 +139,14 @@ import { TableNameContext } from "./SparkSqlParser.js";
 import { ViewNameCreateContext } from "./SparkSqlParser.js";
 import { ViewNameContext } from "./SparkSqlParser.js";
 import { ColumnNameContext } from "./SparkSqlParser.js";
+import { ColumnNamePathContext } from "./SparkSqlParser.js";
 import { ColumnNameSeqContext } from "./SparkSqlParser.js";
 import { ColumnNameCreateContext } from "./SparkSqlParser.js";
 import { IdentifierReferenceContext } from "./SparkSqlParser.js";
 import { QueryOrganizationContext } from "./SparkSqlParser.js";
+import { LimitClauseContext } from "./SparkSqlParser.js";
+import { OrderOrSortByClauseContext } from "./SparkSqlParser.js";
+import { ClusterOrDistributeByContext } from "./SparkSqlParser.js";
 import { QueryTermContext } from "./SparkSqlParser.js";
 import { QueryPrimaryContext } from "./SparkSqlParser.js";
 import { SortItemContext } from "./SparkSqlParser.js";
@@ -1162,6 +1166,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
     /**
+     * Visit a parse tree produced by `SparkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
+    /**
      * Visit a parse tree produced by `SparkSqlParser.columnNameSeq`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1185,6 +1195,24 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitQueryOrganization?: (ctx: QueryOrganizationContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.limitClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitLimitClause?: (ctx: LimitClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.orderOrSortByClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitOrderOrSortByClause?: (ctx: OrderOrSortByClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.clusterOrDistributeBy`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitClusterOrDistributeBy?: (ctx: ClusterOrDistributeByContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.queryTerm`.
      * @param ctx the parse tree
