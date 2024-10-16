@@ -35,6 +35,7 @@ import { ColumnOptionDefinitionContext } from "./FlinkSqlParser.js";
 import { PhysicalColumnDefinitionContext } from "./FlinkSqlParser.js";
 import { ColumnNameCreateContext } from "./FlinkSqlParser.js";
 import { ColumnNameContext } from "./FlinkSqlParser.js";
+import { ColumnNamePathContext } from "./FlinkSqlParser.js";
 import { ColumnNameListContext } from "./FlinkSqlParser.js";
 import { ColumnTypeContext } from "./FlinkSqlParser.js";
 import { LengthOneDimensionContext } from "./FlinkSqlParser.js";
@@ -123,7 +124,7 @@ import { WindowClauseContext } from "./FlinkSqlParser.js";
 import { NamedWindowContext } from "./FlinkSqlParser.js";
 import { WindowSpecContext } from "./FlinkSqlParser.js";
 import { MatchRecognizeClauseContext } from "./FlinkSqlParser.js";
-import { OrderByCaluseContext } from "./FlinkSqlParser.js";
+import { OrderByClauseContext } from "./FlinkSqlParser.js";
 import { OrderItemDefitionContext } from "./FlinkSqlParser.js";
 import { LimitClauseContext } from "./FlinkSqlParser.js";
 import { PartitionByClauseContext } from "./FlinkSqlParser.js";
@@ -392,6 +393,12 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.columnNameList`.
      * @param ctx the parse tree
@@ -923,11 +930,11 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitMatchRecognizeClause?: (ctx: MatchRecognizeClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.orderByCaluse`.
+     * Visit a parse tree produced by `FlinkSqlParser.orderByClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOrderByCaluse?: (ctx: OrderByCaluseContext) => Result;
+    visitOrderByClause?: (ctx: OrderByClauseContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.orderItemDefition`.
      * @param ctx the parse tree

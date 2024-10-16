@@ -16,6 +16,7 @@ export class FlinkErrorListener extends ParseErrorListener {
         [FlinkSqlParser.RULE_functionName, 'function'],
         [FlinkSqlParser.RULE_functionNameCreate, 'function'],
         [FlinkSqlParser.RULE_columnName, 'column'],
+        [FlinkSqlParser.RULE_columnNamePath, 'column'],
         [FlinkSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
@@ -60,6 +61,7 @@ export class FlinkErrorListener extends ParseErrorListener {
                     case FlinkSqlParser.RULE_viewPath:
                     case FlinkSqlParser.RULE_functionName:
                     case FlinkSqlParser.RULE_columnName:
+                    case FlinkSqlParser.RULE_columnNamePath:
                     case FlinkSqlParser.RULE_catalogPath: {
                         result.push(`{existing}${name}`);
                         break;
