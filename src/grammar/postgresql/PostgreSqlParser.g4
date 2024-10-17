@@ -2395,10 +2395,7 @@ primaryExpression
     | Numeric
     | BinaryStringConstant
     | HexadecimalStringConstant
-    | function_name (
-        sconst
-        | OPEN_PAREN (column_name | func_arg_list) sort_clause? CLOSE_PAREN sconst
-    )
+    | function_name (sconst | OPEN_PAREN func_arg_list sort_clause? CLOSE_PAREN sconst)
     | consttypename? sconst
     | KW_INTERVAL ( sconst opt_interval? | opt_float sconst)
     | KW_TRUE
@@ -2427,8 +2424,7 @@ primaryExpression
 
 func_application
     : function_name OPEN_PAREN (
-        column_name
-        | func_arg_list (COMMA KW_VARIADIC func_arg_expr)? sort_clause?
+        func_arg_list (COMMA KW_VARIADIC func_arg_expr)? sort_clause?
         | KW_VARIADIC func_arg_expr sort_clause?
         | (KW_ALL | KW_DISTINCT) func_arg_list sort_clause?
         | STAR
@@ -2600,7 +2596,8 @@ func_arg_list
     ;
 
 func_arg_expr
-    : expression
+    : column_name
+    | expression
     | type_function_name (COLON_EQUALS | EQUALS_GREATER) expression
     ;
 
