@@ -45,6 +45,7 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         PostgreSqlParser.RULE_procedure_name, // procedure name
         PostgreSqlParser.RULE_column_name_create, // column name that will be created
         PostgreSqlParser.RULE_column_name, // column name
+        PostgreSqlParser.RULE_column_name_path, // column name
     ]);
 
     protected get splitListener() {
@@ -140,6 +141,20 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
                 }
                 case PostgreSqlParser.RULE_column_name: {
                     syntaxContextType = EntityContextType.COLUMN;
+                    break;
+                }
+                case PostgreSqlParser.RULE_column_name_path: {
+                    if (
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_group_clause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_sort_clause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_limit_clause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_where_clause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_having_clause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_window_clause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_triggerwhen)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
                     break;
                 }
                 default:

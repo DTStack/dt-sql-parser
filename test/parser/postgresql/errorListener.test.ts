@@ -5,6 +5,7 @@ const sql1 = `ALTER EVENT`;
 const sql2 = `CREATE FUNCTION `;
 const sql3 = `SELECT name, altitude FROM ONLY cities WHERE `;
 const sql4 = `DROP PROCEDURE name1 a`;
+const sql5 = `SELECT * FROM db.tbs GROUP BY sum( `;
 
 describe('PostgreSQL validate invalid sql and test msg', () => {
     const pgSQL = new PostgreSQL();
@@ -42,6 +43,14 @@ describe('PostgreSQL validate invalid sql and test msg', () => {
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(
             `'a' is not valid at this position, expecting an existing procedure or a keyword`
+        );
+    });
+
+    test('validate unComplete sql5', () => {
+        const errors = pgSQL.validate(sql5);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `Statement is incomplete, expecting an existing column or an existing function or a keyword`
         );
     });
 
