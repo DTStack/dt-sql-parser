@@ -374,6 +374,7 @@ import { Document_or_contentContext } from "./PostgreSqlParser.js";
 import { Xmlexists_argumentContext } from "./PostgreSqlParser.js";
 import { Xml_passing_mechContext } from "./PostgreSqlParser.js";
 import { Window_clauseContext } from "./PostgreSqlParser.js";
+import { Having_clauseContext } from "./PostgreSqlParser.js";
 import { Window_definitionContext } from "./PostgreSqlParser.js";
 import { Over_clauseContext } from "./PostgreSqlParser.js";
 import { Window_specificationContext } from "./PostgreSqlParser.js";
@@ -425,6 +426,7 @@ import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
 import { ColumnNameMatchContext } from "./PostgreSqlParser.js";
+import { Column_name_pathContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameContext } from "./PostgreSqlParser.js";
@@ -2723,6 +2725,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitWindow_clause?: (ctx: Window_clauseContext) => Result;
     /**
+     * Visit a parse tree produced by `PostgreSqlParser.having_clause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitHaving_clause?: (ctx: Having_clauseContext) => Result;
+    /**
      * Visit a parse tree produced by `PostgreSqlParser.window_definition`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -3045,6 +3053,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitColumnNameMatch?: (ctx: ColumnNameMatchContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.column_name_path`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumn_name_path?: (ctx: Column_name_pathContext) => Result;
     /**
      * Visit a parse tree produced by the `columnNameCreate`
      * labeled alternative in `PostgreSqlParser.column_name_create`.

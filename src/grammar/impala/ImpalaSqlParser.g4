@@ -344,18 +344,18 @@ deleteStatement
     ;
 
 delete
-    : KW_DELETE KW_FROM? tableNamePath (KW_WHERE booleanExpression)?
+    : KW_DELETE KW_FROM? tableNamePath (whereClause)?
     ;
 
 deleteTableRef
     : KW_DELETE tableNamePath (KW_AS? identifier)? KW_FROM (relation (COMMA relation)*)? (
-        KW_WHERE booleanExpression
+        whereClause
     )?
     ;
 
 updateStatement
     : KW_UPDATE tableNamePath KW_SET assignmentList (KW_FROM relation (COMMA relation)*)? (
-        KW_WHERE booleanExpression
+        whereClause
     )?
     ;
 
@@ -561,6 +561,10 @@ functionNamePath
 columnNamePath
     : qualifiedName
     | {this.shouldMatchEmpty()}?
+    ;
+
+columnName
+    : qualifiedName
     ;
 
 tableOrViewPath
@@ -769,9 +773,15 @@ sortItem
 querySpecification
     : KW_SELECT setQuantifier? (KW_STRAIGHT_JOIN)? selectItem (COMMA selectItem)* (
         KW_FROM relation (COMMA relation)*
-    )? (KW_WHERE where=booleanExpression)? (KW_GROUP KW_BY groupBy)? (
-        KW_HAVING having=booleanExpression
-    )?
+    )? (whereClause)? (KW_GROUP KW_BY groupBy)? (havingClause)?
+    ;
+
+whereClause
+    : KW_WHERE where=booleanExpression
+    ;
+
+havingClause
+    : KW_HAVING having=booleanExpression
     ;
 
 groupBy
@@ -933,7 +943,7 @@ primaryExpression
     | KW_TRY_CAST LPAREN expression KW_AS type RPAREN                                              # cast
     | KW_ARRAY LSQUARE (expression (COMMA expression)*)? RSQUARE                                   # arrayConstructor
     | value=primaryExpression LSQUARE index=valueExpression RSQUARE                                # subscript
-    | identifier                                                                                   # columnReference
+    | columnName                                                                                   # columnReference
     | base=primaryExpression DOT fieldName=identifier                                              # dereference
     | name=KW_CURRENT_DATE                                                                         # specialDateTimeFunction
     | name=KW_CURRENT_TIME (LPAREN precision=INTEGER_VALUE RPAREN)?                                # specialDateTimeFunction
@@ -1050,11 +1060,15 @@ whenClause
     ;
 
 filter
-    : KW_FILTER LPAREN KW_WHERE booleanExpression RPAREN
+    : KW_FILTER LPAREN whereClause RPAREN
+    ;
+
+partitionByClause
+    : partition+=expression (COMMA partition+=expression)*
     ;
 
 over
-    : KW_OVER LPAREN (KW_PARTITION KW_BY partition+=expression (COMMA partition+=expression)*)? (
+    : KW_OVER LPAREN (KW_PARTITION KW_BY partitionByClause)? (
         KW_ORDER KW_BY sortItem (COMMA sortItem)*
     )? windowFrame? RPAREN
     ;
@@ -1093,7 +1107,7 @@ privilege
     | KW_CREATE
     | KW_INSERT
     | KW_REFRESH
-    | KW_SELECT (LPAREN columnName=identifier RPAREN)?
+    | KW_SELECT (LPAREN name=identifier RPAREN)?
     ;
 
 objectType

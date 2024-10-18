@@ -35,6 +35,7 @@ import { ColumnOptionDefinitionContext } from "./FlinkSqlParser.js";
 import { PhysicalColumnDefinitionContext } from "./FlinkSqlParser.js";
 import { ColumnNameCreateContext } from "./FlinkSqlParser.js";
 import { ColumnNameContext } from "./FlinkSqlParser.js";
+import { ColumnNamePathContext } from "./FlinkSqlParser.js";
 import { ColumnNameListContext } from "./FlinkSqlParser.js";
 import { ColumnTypeContext } from "./FlinkSqlParser.js";
 import { LengthOneDimensionContext } from "./FlinkSqlParser.js";
@@ -123,7 +124,7 @@ import { WindowClauseContext } from "./FlinkSqlParser.js";
 import { NamedWindowContext } from "./FlinkSqlParser.js";
 import { WindowSpecContext } from "./FlinkSqlParser.js";
 import { MatchRecognizeClauseContext } from "./FlinkSqlParser.js";
-import { OrderByCaluseContext } from "./FlinkSqlParser.js";
+import { OrderByClauseContext } from "./FlinkSqlParser.js";
 import { OrderItemDefitionContext } from "./FlinkSqlParser.js";
 import { LimitClauseContext } from "./FlinkSqlParser.js";
 import { PartitionByClauseContext } from "./FlinkSqlParser.js";
@@ -497,6 +498,16 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
     /**
      * Enter a parse tree produced by `FlinkSqlParser.columnNameList`.
      * @param ctx the parse tree
@@ -1382,15 +1393,15 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      */
     exitMatchRecognizeClause?: (ctx: MatchRecognizeClauseContext) => void;
     /**
-     * Enter a parse tree produced by `FlinkSqlParser.orderByCaluse`.
+     * Enter a parse tree produced by `FlinkSqlParser.orderByClause`.
      * @param ctx the parse tree
      */
-    enterOrderByCaluse?: (ctx: OrderByCaluseContext) => void;
+    enterOrderByClause?: (ctx: OrderByClauseContext) => void;
     /**
-     * Exit a parse tree produced by `FlinkSqlParser.orderByCaluse`.
+     * Exit a parse tree produced by `FlinkSqlParser.orderByClause`.
      * @param ctx the parse tree
      */
-    exitOrderByCaluse?: (ctx: OrderByCaluseContext) => void;
+    exitOrderByClause?: (ctx: OrderByClauseContext) => void;
     /**
      * Enter a parse tree produced by `FlinkSqlParser.orderItemDefition`.
      * @param ctx the parse tree
