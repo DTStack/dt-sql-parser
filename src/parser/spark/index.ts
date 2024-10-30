@@ -4,12 +4,19 @@ import { processTokenCandidates } from '../common/tokenUtils';
 import { SparkSqlLexer } from '../../lib/spark/SparkSqlLexer';
 import { ProgramContext, SparkSqlParser } from '../../lib/spark/SparkSqlParser';
 import { BasicSQL } from '../common/basicSQL';
+import {
+    Suggestions,
+    EntityContextType,
+    SyntaxSuggestion,
+    CaretPosition,
+    SemanticCollectOptions,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { SparkEntityCollector } from './sparkEntityCollector';
 import { SparkErrorListener } from './sparkErrorListener';
 import { SparkSqlSplitListener } from './sparkSplitListener';
+import { SparkSemanticContextCollector } from './sparkSemanticContextCollector';
 
 export { SparkEntityCollector, SparkSqlSplitListener };
 
@@ -45,6 +52,15 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
     }
     protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
         return new SparkEntityCollector(input, allTokens, caretTokenIndex);
+    }
+
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new SparkSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
     protected processCandidates(

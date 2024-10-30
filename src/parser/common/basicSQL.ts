@@ -14,12 +14,19 @@ import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { SQLParserBase } from '../../lib/SQLParserBase';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
 import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
-import { CaretPosition, LOCALE_TYPE, Suggestions, SyntaxSuggestion } from './types';
+import {
+    CaretPosition,
+    LOCALE_TYPE,
+    SemanticCollectOptions,
+    Suggestions,
+    SyntaxSuggestion,
+} from './types';
 import { ParseError, ErrorListener } from './parseErrorListener';
 import { ErrorStrategy } from './errorStrategy';
 import type { SplitListener } from './splitListener';
 import type { EntityCollector } from './entityCollector';
 import { EntityContext } from './entityCollector';
+import SemanticContextCollector from './semanticContextCollector';
 
 /**
  * Basic SQL class, every sql needs extends it.
@@ -94,6 +101,16 @@ export abstract class BasicSQL<
     ): EntityCollector;
 
     public locale: LOCALE_TYPE = 'en_US';
+
+    /**
+     * Get a new semanticContextCollector instance.
+     */
+    protected abstract createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ): SemanticContextCollector;
 
     /**
      * Create an antlr4 lexer from input.
@@ -451,5 +468,30 @@ export abstract class BasicSQL<
         // parser.entityCollecting = false;
 
         return collectListener.getEntities();
+    }
+
+    /**
+     * Get semantic context infos
+     * @param input source string
+     * @param caretPosition caret position, such as cursor position
+     * @param options semantic context options
+     * @returns analyzed semantic context
+     */
+    public getSemanticContextAtCaretPosition(
+        input: string,
+        caretPosition: CaretPosition,
+        options?: SemanticCollectOptions
+    ) {
+        const allTokens = this.getAllTokens(input);
+        const parseTree = this.parseWithCache(input);
+        const statementContextListener = this.createSemanticContextCollector(
+            input,
+            caretPosition,
+            allTokens,
+            options
+        );
+        this.listen(statementContextListener, parseTree);
+
+        return statementContextListener.semanticContext;
     }
 }
