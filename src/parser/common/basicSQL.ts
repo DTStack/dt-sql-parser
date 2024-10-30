@@ -20,6 +20,7 @@ import { ErrorStrategy } from './errorStrategy';
 import type { SplitListener } from './splitListener';
 import type { EntityCollector } from './entityCollector';
 import { EntityContext } from './entityCollector';
+import SemanticContextCollector from './semanticContextCollector';
 
 /**
  * Basic SQL class, every sql needs extends it.
@@ -93,6 +94,15 @@ export abstract class BasicSQL<
     ): EntityCollector;
 
     public locale: LOCALE_TYPE = 'en_US';
+
+    /**
+     * Get a new semanticContextCollector instance.
+     */
+    protected abstract createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[]
+    ): SemanticContextCollector;
 
     /**
      * Create an antlr4 lexer from input.
@@ -450,5 +460,24 @@ export abstract class BasicSQL<
         // parser.entityCollecting = false;
 
         return collectListener.getEntities();
+    }
+
+    /**
+     * Get semantic context infos
+     * @param input source string
+     * @param caretPosition caret position, such as cursor position
+     * @returns analyzed semantic context
+     */
+    public getSemanticContextAtCaretPosition(input: string, caretPosition: CaretPosition) {
+        const allTokens = this.getAllTokens(input);
+        const parseTree = this.parseWithCache(input);
+        const statementContextListener = this.createSemanticContextCollector(
+            input,
+            caretPosition,
+            allTokens
+        );
+        this.listen(statementContextListener, parseTree);
+
+        return statementContextListener.semanticContext;
     }
 }
