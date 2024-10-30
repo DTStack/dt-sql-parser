@@ -69,3 +69,7 @@ export interface Suggestions<T = WordRange> {
 }
 
 export type LOCALE_TYPE = 'zh_CN' | 'en_US';
+
+export interface SemanticContext {
+    isNewStatement: boolean;
+}
