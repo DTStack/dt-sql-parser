@@ -17,16 +17,13 @@ abstract class SemanticContextCollector {
         if (allTokens?.length) {
             let i = tokenIndex ? tokenIndex - 1 : allTokens.length - 1;
             /**
-             * Find the previous no-white-space token.
+             * Find the previous no-hidden token.
              * If can't find tokenIndex or current token is whiteSpace at caretPosition,
              * prevTokenIndex is useful to help us determine if it is new statement.
              */
             while (i >= 0) {
-                const isWhiteSpaceToken =
-                    allTokens[i].type === this.getWhiteSpaceRuleType() ||
-                    allTokens[i].text === '\n';
                 if (
-                    !isWhiteSpaceToken &&
+                    allTokens[i].channel !== Token.HIDDEN_CHANNEL &&
                     (allTokens[i].line < caretPosition?.lineNumber ||
                         (allTokens[i].line === caretPosition.lineNumber &&
                             allTokens[i].column < caretPosition.column))
@@ -61,12 +58,23 @@ abstract class SemanticContextCollector {
 
     abstract getStatementRuleType(): number;
 
-    private getPrevStatementRule(node: TerminalNode | ErrorNode | ParserRuleContext) {
+    private previousStatementHasError(node: TerminalNode | ErrorNode | ParserRuleContext) {
         let parent = node.parent as ParserRuleContext;
-        if (!parent) return null;
+        if (!parent) return false;
+
         const currentNodeIndex = parent.children!.findIndex((child) => child === node);
-        if (currentNodeIndex <= 0) return null;
-        return parent.children![currentNodeIndex - 1];
+        if (currentNodeIndex <= 0) return false;
+
+        for (let i = currentNodeIndex - 1; i >= 0; i--) {
+            const prevNode = parent.children![i];
+            if (
+                prevNode instanceof ErrorNode ||
+                (prevNode instanceof ParserRuleContext && prevNode.exception !== null)
+            )
+                return true;
+        }
+
+        return false;
     }
 
     /**
@@ -99,7 +107,9 @@ abstract class SemanticContextCollector {
             ctx.exception === null;
 
         if (isWhiteSpaceToken && (isPrevTokenSplitSymbol || isPrevTokenEndOfStatement)) {
-            this._isNewStatement = true;
+            if (!this.previousStatementHasError(ctx)) {
+                this._isNewStatement = true;
+            }
         }
     }
 
@@ -118,22 +128,12 @@ abstract class SemanticContextCollector {
 
         let parent: ParserRuleContext | null = node.parent as ParserRuleContext;
         let currentNode: TerminalNode | ParserRuleContext = node;
+
         /**
          * The error node is a direct child node of the program node
          */
-        if (parent.ruleIndex === this.getStatementRuleType() || this.getIsRootRuleNode(parent)) {
-            const prevStatementRule = this.getPrevStatementRule(currentNode);
-            if (
-                prevStatementRule instanceof TerminalNode ||
-                (prevStatementRule &&
-                    ((prevStatementRule as ParserRuleContext).exception !== null ||
-                        (prevStatementRule as ParserRuleContext).ruleIndex !==
-                            this.getStatementRuleType()))
-            ) {
-                this._isNewStatement = false;
-            } else {
-                this._isNewStatement = true;
-            }
+        if (this.getIsRootRuleNode(parent)) {
+            this._isNewStatement = !this.previousStatementHasError(currentNode);
             return;
         }
 
@@ -160,16 +160,13 @@ abstract class SemanticContextCollector {
             const currentStatementRuleIndex =
                 programRule?.children?.findIndex((node) => node === parent) || -1;
             if (currentStatementRuleIndex > 0) {
-                const prevStatementRule = programRule!.children![
-                    currentStatementRuleIndex - 1
-                ] as ParserRuleContext;
                 /**
                  * When you typed a keyword and doesn't match any rule, you will get a EOF error,
                  * For example, just typed 'CREATE', 'INSERT'.
                  */
                 const isStatementEOF = parent.exception?.offendingToken?.text === '<EOF>';
                 isNewStatement =
-                    prevStatementRule.exception !== null && !isStatementEOF
+                    this.previousStatementHasError(parent) && !isStatementEOF
                         ? false
                         : isNewStatement;
             }
@@ -211,10 +208,7 @@ abstract class SemanticContextCollector {
             const currentStatementRuleIndex =
                 programRule?.children?.findIndex((node) => node === parent) || -1;
             if (currentStatementRuleIndex > 0) {
-                const prevStatementRule = programRule!.children![
-                    currentStatementRuleIndex - 1
-                ] as ParserRuleContext;
-                isNewStatement = prevStatementRule.exception !== null ? false : isNewStatement;
+                isNewStatement = this.previousStatementHasError(parent) ? false : isNewStatement;
             }
         }
 
