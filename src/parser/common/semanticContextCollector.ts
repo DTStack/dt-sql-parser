@@ -33,7 +33,14 @@ abstract class SemanticContextCollector {
                 }
                 i--;
             }
-            if (tokenIndex === 0 || i === -1) {
+
+            // Current token is the first token of tokenStream or the previous token is semicolon
+            if (
+                tokenIndex === 0 ||
+                i === -1 ||
+                (this._prevTokenIndex &&
+                    this._allTokens[this._prevTokenIndex].text === SQL_SPLIT_SYMBOL_TEXT)
+            ) {
                 this._isNewStatement = true;
             }
         }
@@ -86,7 +93,7 @@ abstract class SemanticContextCollector {
 
     /**
      * Caret position is white space, so it will not visited as terminal node or error node.
-     * We can find the previous no-white-space token,
+     * We can find the first previous no-white-space token,
      * and if previous token is the last leaf node of the statement,
      * it can be considered as being in the context of new statement
      */
@@ -97,19 +104,13 @@ abstract class SemanticContextCollector {
             // PostgreSQL whiteSpace not inlcudes '\n' symbol
             this._allTokens[this._tokenIndex]?.text === '\n';
 
-        const isPrevTokenSplitSymbol =
-            this._prevTokenIndex &&
-            this._allTokens[this._prevTokenIndex].text === SQL_SPLIT_SYMBOL_TEXT;
-
         const isPrevTokenEndOfStatement =
-            this._prevTokenIndex !== undefined &&
-            ctx.stop?.tokenIndex === this._prevTokenIndex &&
-            ctx.exception === null;
+            this._prevTokenIndex && ctx.stop?.tokenIndex === this._prevTokenIndex;
 
-        if (isWhiteSpaceToken && (isPrevTokenSplitSymbol || isPrevTokenEndOfStatement)) {
-            if (!this.previousStatementHasError(ctx)) {
-                this._isNewStatement = true;
-            }
+        if (isWhiteSpaceToken && isPrevTokenEndOfStatement && ctx.exception === null) {
+            this._isNewStatement = !this.previousStatementHasError(ctx)
+                ? true
+                : this._isNewStatement;
         }
     }
 
@@ -117,14 +118,7 @@ abstract class SemanticContextCollector {
      * Uncomplete keyword will be error node
      */
     visitErrorNode(node: ErrorNode): void {
-        if (node.symbol.tokenIndex !== this._tokenIndex) return;
-        if (
-            this._prevTokenIndex &&
-            this._allTokens[this._prevTokenIndex].text === SQL_SPLIT_SYMBOL_TEXT
-        ) {
-            this._isNewStatement = true;
-            return;
-        }
+        if (node.symbol.tokenIndex !== this._tokenIndex || this._isNewStatement) return;
 
         let parent: ParserRuleContext | null = node.parent as ParserRuleContext;
         let currentNode: TerminalNode | ParserRuleContext = node;
@@ -176,14 +170,7 @@ abstract class SemanticContextCollector {
     }
 
     visitTerminal(node: TerminalNode): void {
-        if (node.symbol.tokenIndex !== this._tokenIndex) return;
-        if (
-            this._prevTokenIndex &&
-            this._allTokens[this._prevTokenIndex].text === SQL_SPLIT_SYMBOL_TEXT
-        ) {
-            this._isNewStatement = true;
-            return;
-        }
+        if (node.symbol.tokenIndex !== this._tokenIndex || this._isNewStatement) return;
 
         let currentNode: TerminalNode | ParserRuleContext = node;
         let parent = node.parent as ParserRuleContext | null;
