@@ -654,3 +654,4 @@ set hive.test.mode.prefix = true;
 set hive.test.mode.samplefreq = true;
 set hive.test.mode.nosamplelist = true;
 set hive.exec.submit.local.task.via.child = true;
+set hive.xx.select.result.encode.enabled=true;

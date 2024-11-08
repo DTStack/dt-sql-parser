@@ -2224,6 +2224,7 @@ sql11ReservedKeywordsUsedAsFunctionName
 
 configPropertiesItem
     : id_
+    | KW_SELECT
     | KW_JOIN
     | KW_PARTITION
     | KW_MAP
