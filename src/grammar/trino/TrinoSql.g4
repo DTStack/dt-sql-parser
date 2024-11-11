@@ -1644,11 +1644,11 @@ fragment DIGIT: [0-9];
 
 fragment LETTER: [A-Z];
 
-SIMPLE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
+LINE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 
 BRACKETED_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
 
-WS: [ \r\n\t]+ -> channel(HIDDEN);
+WHITE_SPACE: [ \r\n\t]+ -> channel(HIDDEN);
 
 // Catch-all for anything we can't recognize.
 // We use this to be able to ignore and recover all the text
