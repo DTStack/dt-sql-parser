@@ -14,7 +14,7 @@ class PostgreSemanticContextCollector
     }
 
     enterSingleStmt(ctx: SingleStmtContext) {
-        this.statementVisitor(ctx);
+        this.visitStatement(ctx);
     }
 }
 

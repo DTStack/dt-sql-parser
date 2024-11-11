@@ -13,7 +13,7 @@ class MySqlSemanticContextCollector
         return MySqlParser.RULE_singleStatement;
     }
     enterSingleStatement(ctx: SingleStatementContext) {
-        this.statementVisitor(ctx);
+        this.visitStatement(ctx);
     }
 }
 

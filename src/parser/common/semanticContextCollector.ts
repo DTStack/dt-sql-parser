@@ -6,7 +6,7 @@ export const SQL_SPLIT_SYMBOL_TEXT = ';';
 
 abstract class SemanticContextCollector {
     constructor(_input: string, caretPosition: CaretPosition, allTokens: Token[]) {
-        // If caretPosition is whiteSpace, tokenIndex may be undefined.
+        // If caretPosition token is whiteSpace, tokenIndex may be undefined.
         const tokenIndex = findCaretTokenIndex(caretPosition, allTokens);
 
         if (tokenIndex !== undefined) {
@@ -17,14 +17,15 @@ abstract class SemanticContextCollector {
         if (allTokens?.length) {
             let i = tokenIndex ? tokenIndex - 1 : allTokens.length - 1;
             /**
-             * Find the previous no-hidden token.
+             * Link to @case4 and @case5
+             * Find the previous unhidden token.
              * If can't find tokenIndex or current token is whiteSpace at caretPosition,
              * prevTokenIndex is useful to help us determine if it is new statement.
              */
             while (i >= 0) {
                 if (
                     allTokens[i].channel !== Token.HIDDEN_CHANNEL &&
-                    (allTokens[i].line < caretPosition?.lineNumber ||
+                    (allTokens[i].line < caretPosition.lineNumber ||
                         (allTokens[i].line === caretPosition.lineNumber &&
                             allTokens[i].column < caretPosition.column))
                 ) {
@@ -34,7 +35,10 @@ abstract class SemanticContextCollector {
                 i--;
             }
 
-            // Current token is the first token of tokenStream or the previous token is semicolon
+            /**
+             * We can directly conclude newStatement semantics when current token is
+             * the first token of tokenStream or the previous token is semicolon
+             */
             if (
                 tokenIndex === 0 ||
                 i === -1 ||
@@ -48,10 +52,27 @@ abstract class SemanticContextCollector {
 
     private _tokenIndex: number;
     private _allTokens: Token[] = [];
+
+    /**
+     * If current caret position is in a newStatement semantics, it needs to follow some cases:
+     * @case1 there is no statement node with an error before the current statement in the parse tree;
+     *
+     * @case2 if it is an uncomplete keyword, it will be parsed as an `ErrorNode`
+     * and need be a direct child node of `program`;
+     *
+     * @case3 if it is a complete keyword, the parsed TerminalNode or ErrorNode should be
+     * the first leaf node of current statement rule;
+     *
+     * @case4 if it is whiteSpace in caret position, we can't visit it in antlr4 listener,
+     * so we find the first unhidden token before the whiteSpace token, and the unhidden token
+     * should be the last leaf node of statement its belongs to;
+     *
+     * @case5 if the previous token is split symbol like `;`, ignore case1 and forcefully judged as newStatement.
+     */
     private _isNewStatement: boolean = false;
 
     /**
-     * Prev tokenIndex that not white space before current tokenIndex or cart position
+     * Prev tokenIndex that not white space before current tokenIndex or caret position
      */
     private _prevTokenIndex: number;
 
@@ -65,7 +86,7 @@ abstract class SemanticContextCollector {
 
     abstract getStatementRuleType(): number;
 
-    private previousStatementHasError(node: TerminalNode | ErrorNode | ParserRuleContext) {
+    private prevStatementHasError(node: TerminalNode | ErrorNode | ParserRuleContext) {
         let parent = node.parent as ParserRuleContext;
         if (!parent) return false;
 
@@ -85,19 +106,17 @@ abstract class SemanticContextCollector {
     }
 
     /**
-     * Most root rules is program.
+     * Most root rule is `program`.
      */
-    private getIsRootRuleNode(node: TerminalNode | ErrorNode | ParserRuleContext) {
+    private isRootRule(node: TerminalNode | ErrorNode | ParserRuleContext) {
         return node instanceof ParserRuleContext && node?.parent === null;
     }
 
     /**
-     * Caret position is white space, so it will not visited as terminal node or error node.
-     * We can find the first previous no-white-space token,
-     * and if previous token is the last leaf node of the statement,
-     * it can be considered as being in the context of new statement
+     * link to @case4
+     * It should be called in each language's own `enterStatement`.
      */
-    protected statementVisitor(ctx: ParserRuleContext) {
+    protected visitStatement(ctx: ParserRuleContext) {
         const isWhiteSpaceToken =
             this._tokenIndex === undefined ||
             this._allTokens[this._tokenIndex]?.type === this.getWhiteSpaceRuleType() ||
@@ -108,9 +127,7 @@ abstract class SemanticContextCollector {
             this._prevTokenIndex && ctx.stop?.tokenIndex === this._prevTokenIndex;
 
         if (isWhiteSpaceToken && isPrevTokenEndOfStatement && ctx.exception === null) {
-            this._isNewStatement = !this.previousStatementHasError(ctx)
-                ? true
-                : this._isNewStatement;
+            this._isNewStatement = !this.prevStatementHasError(ctx) ? true : this._isNewStatement;
         }
     }
 
@@ -124,14 +141,16 @@ abstract class SemanticContextCollector {
         let currentNode: TerminalNode | ParserRuleContext = node;
 
         /**
+         * Link to @case2
          * The error node is a direct child node of the program node
          */
-        if (this.getIsRootRuleNode(parent)) {
-            this._isNewStatement = !this.previousStatementHasError(currentNode);
+        if (this.isRootRule(parent)) {
+            this._isNewStatement = !this.prevStatementHasError(currentNode);
             return;
         }
 
         /**
+         * Link to @case3
          * Error node must be the first leaf node of the statement parse tree.
          **/
         while (parent !== null && parent.ruleIndex !== this.getStatementRuleType()) {
@@ -147,6 +166,7 @@ abstract class SemanticContextCollector {
         let isNewStatement = true;
 
         /**
+         * Link to @case1
          * Previous statement must have no exception
          */
         if (parent?.ruleIndex === this.getStatementRuleType()) {
@@ -160,9 +180,7 @@ abstract class SemanticContextCollector {
                  */
                 const isStatementEOF = parent.exception?.offendingToken?.text === '<EOF>';
                 isNewStatement =
-                    this.previousStatementHasError(parent) && !isStatementEOF
-                        ? false
-                        : isNewStatement;
+                    this.prevStatementHasError(parent) && !isStatementEOF ? false : isNewStatement;
             }
         }
 
@@ -176,6 +194,7 @@ abstract class SemanticContextCollector {
         let parent = node.parent as ParserRuleContext | null;
 
         /**
+         * Link to @case3
          * Current terminal node must be the first leaf node of the statement parse tree.
          **/
         while (parent !== null && parent.ruleIndex !== this.getStatementRuleType()) {
@@ -190,12 +209,16 @@ abstract class SemanticContextCollector {
 
         let isNewStatement = true;
 
+        /**
+         * Link to @case1
+         * Previous statement must have no exception
+         */
         if (parent?.ruleIndex === this.getStatementRuleType()) {
             const programRule = parent.parent;
             const currentStatementRuleIndex =
                 programRule?.children?.findIndex((node) => node === parent) || -1;
             if (currentStatementRuleIndex > 0) {
-                isNewStatement = this.previousStatementHasError(parent) ? false : isNewStatement;
+                isNewStatement = this.prevStatementHasError(parent) ? false : isNewStatement;
             }
         }
 

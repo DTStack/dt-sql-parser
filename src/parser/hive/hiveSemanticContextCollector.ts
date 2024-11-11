@@ -13,7 +13,7 @@ class HiveSemanticContextCollector
         return HiveSqlParser.RULE_statement;
     }
     enterStatement(ctx: StatementContext) {
-        this.statementVisitor(ctx);
+        this.visitStatement(ctx);
     }
 }
 
