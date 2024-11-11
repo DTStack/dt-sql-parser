@@ -10,7 +10,7 @@ class TrinoSemanticContextCollector extends SemanticContextCollector implements 
         return TrinoSqlParser.RULE_statements;
     }
     enterStatements(ctx: StatementsContext) {
-        this.statementVisitor(ctx);
+        this.visitStatement(ctx);
     }
 }
 

@@ -13,7 +13,7 @@ class ImpalaSemanticContextCollector
         return ImpalaSqlParser.RULE_singleStatement;
     }
     enterSingleStatement(ctx: SingleStatementContext) {
-        this.statementVisitor(ctx);
+        this.visitStatement(ctx);
     }
 }
 
