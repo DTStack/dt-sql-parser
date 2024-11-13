@@ -156,6 +156,7 @@ import { LastContext } from "./FlinkSqlParser.js";
 import { StarContext } from "./FlinkSqlParser.js";
 import { SubscriptContext } from "./FlinkSqlParser.js";
 import { SubqueryExpressionContext } from "./FlinkSqlParser.js";
+import { KeyOfMapContext } from "./FlinkSqlParser.js";
 import { CastContext } from "./FlinkSqlParser.js";
 import { ConstantDefaultContext } from "./FlinkSqlParser.js";
 import { ParenthesizedExpressionContext } from "./FlinkSqlParser.js";
@@ -1136,6 +1137,13 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitSubqueryExpression?: (ctx: SubqueryExpressionContext) => Result;
+    /**
+     * Visit a parse tree produced by the `keyOfMap`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitKeyOfMap?: (ctx: KeyOfMapContext) => Result;
     /**
      * Visit a parse tree produced by the `cast`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.

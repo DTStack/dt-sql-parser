@@ -763,6 +763,7 @@ primaryExpression
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
+    | value=primaryExpression DOT key=valueExpression                     # keyOfMap
     | identifier                                                          # columnReference
     | dereferenceDefinition                                               # dereference
     | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression

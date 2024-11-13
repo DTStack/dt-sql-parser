@@ -156,6 +156,7 @@ import { LastContext } from "./FlinkSqlParser.js";
 import { StarContext } from "./FlinkSqlParser.js";
 import { SubscriptContext } from "./FlinkSqlParser.js";
 import { SubqueryExpressionContext } from "./FlinkSqlParser.js";
+import { KeyOfMapContext } from "./FlinkSqlParser.js";
 import { CastContext } from "./FlinkSqlParser.js";
 import { ConstantDefaultContext } from "./FlinkSqlParser.js";
 import { ParenthesizedExpressionContext } from "./FlinkSqlParser.js";
@@ -1743,6 +1744,18 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSubqueryExpression?: (ctx: SubqueryExpressionContext) => void;
+    /**
+     * Enter a parse tree produced by the `keyOfMap`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterKeyOfMap?: (ctx: KeyOfMapContext) => void;
+    /**
+     * Exit a parse tree produced by the `keyOfMap`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitKeyOfMap?: (ctx: KeyOfMapContext) => void;
     /**
      * Enter a parse tree produced by the `cast`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.
