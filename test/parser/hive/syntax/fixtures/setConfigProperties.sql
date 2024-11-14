@@ -654,3 +654,10 @@ set hive.test.mode.prefix = true;
 set hive.test.mode.samplefreq = true;
 set hive.test.mode.nosamplelist = true;
 set hive.exec.submit.local.task.via.child = true;
+
+
+SET hivevar:A = 1;
+-- SELECT ${A};
+-- SELECT ${hivevar:A};
+SELECT `_A`;
+SELECT `_hivevar:A`;
