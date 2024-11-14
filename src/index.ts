@@ -27,4 +27,10 @@ export type { WordRange, TextSlice } from './parser/common/textAndWord';
 
 export type { SyntaxError, ParseError, ErrorListener } from './parser/common/parseErrorListener';
 
-export type { StmtContext, EntityContext } from './parser/common/entityCollector';
+export type {
+    StmtContext,
+    EntityContext,
+    CommonEntityContext,
+    ColumnEntityContext,
+    FuncEntityContext,
+} from './parser/common/entityCollector';
