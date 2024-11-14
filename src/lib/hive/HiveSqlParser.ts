@@ -23343,7 +23343,7 @@ export class HiveSqlParser extends SQLParserBase {
         let localContext = new ConfigPropertiesItemContext(this.context, this.state);
         this.enterRule(localContext, 648, HiveSqlParser.RULE_configPropertiesItem);
         try {
-            this.state = 4541;
+            this.state = 4542;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case HiveSqlParser.KW_ABORT:
@@ -23592,346 +23592,353 @@ export class HiveSqlParser extends SQLParserBase {
                 this.id_();
                 }
                 break;
-            case HiveSqlParser.KW_JOIN:
+            case HiveSqlParser.KW_SELECT:
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 4492;
+                this.match(HiveSqlParser.KW_SELECT);
+                }
+                break;
+            case HiveSqlParser.KW_JOIN:
+                this.enterOuterAlt(localContext, 3);
+                {
+                this.state = 4493;
                 this.match(HiveSqlParser.KW_JOIN);
                 }
                 break;
             case HiveSqlParser.KW_PARTITION:
-                this.enterOuterAlt(localContext, 3);
+                this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 4493;
+                this.state = 4494;
                 this.match(HiveSqlParser.KW_PARTITION);
                 }
                 break;
             case HiveSqlParser.KW_MAP:
-                this.enterOuterAlt(localContext, 4);
+                this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 4494;
+                this.state = 4495;
                 this.match(HiveSqlParser.KW_MAP);
                 }
                 break;
             case HiveSqlParser.KW_REDUCE:
-                this.enterOuterAlt(localContext, 5);
+                this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 4495;
+                this.state = 4496;
                 this.match(HiveSqlParser.KW_REDUCE);
                 }
                 break;
             case HiveSqlParser.KW_USER:
-                this.enterOuterAlt(localContext, 6);
+                this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 4496;
+                this.state = 4497;
                 this.match(HiveSqlParser.KW_USER);
                 }
                 break;
             case HiveSqlParser.KW_PERCENT:
-                this.enterOuterAlt(localContext, 7);
+                this.enterOuterAlt(localContext, 8);
                 {
-                this.state = 4497;
+                this.state = 4498;
                 this.match(HiveSqlParser.KW_PERCENT);
                 }
                 break;
             case HiveSqlParser.KW_INTERVAL:
-                this.enterOuterAlt(localContext, 8);
+                this.enterOuterAlt(localContext, 9);
                 {
-                this.state = 4498;
+                this.state = 4499;
                 this.match(HiveSqlParser.KW_INTERVAL);
                 }
                 break;
             case HiveSqlParser.KW_ROWS:
-                this.enterOuterAlt(localContext, 9);
+                this.enterOuterAlt(localContext, 10);
                 {
-                this.state = 4499;
+                this.state = 4500;
                 this.match(HiveSqlParser.KW_ROWS);
                 }
                 break;
             case HiveSqlParser.KW_UNION:
-                this.enterOuterAlt(localContext, 10);
+                this.enterOuterAlt(localContext, 11);
                 {
-                this.state = 4500;
+                this.state = 4501;
                 this.match(HiveSqlParser.KW_UNION);
                 }
                 break;
             case HiveSqlParser.KW_GROUP:
-                this.enterOuterAlt(localContext, 11);
+                this.enterOuterAlt(localContext, 12);
                 {
-                this.state = 4501;
+                this.state = 4502;
                 this.match(HiveSqlParser.KW_GROUP);
                 }
                 break;
             case HiveSqlParser.KW_MERGE:
-                this.enterOuterAlt(localContext, 12);
+                this.enterOuterAlt(localContext, 13);
                 {
-                this.state = 4502;
+                this.state = 4503;
                 this.match(HiveSqlParser.KW_MERGE);
                 }
                 break;
             case HiveSqlParser.KW_NULL:
-                this.enterOuterAlt(localContext, 13);
+                this.enterOuterAlt(localContext, 14);
                 {
-                this.state = 4503;
+                this.state = 4504;
                 this.match(HiveSqlParser.KW_NULL);
                 }
                 break;
             case HiveSqlParser.KW_FETCH:
-                this.enterOuterAlt(localContext, 14);
+                this.enterOuterAlt(localContext, 15);
                 {
-                this.state = 4504;
+                this.state = 4505;
                 this.match(HiveSqlParser.KW_FETCH);
                 }
                 break;
             case HiveSqlParser.KW_LOCAL:
-                this.enterOuterAlt(localContext, 15);
+                this.enterOuterAlt(localContext, 16);
                 {
-                this.state = 4505;
+                this.state = 4506;
                 this.match(HiveSqlParser.KW_LOCAL);
                 }
                 break;
             case HiveSqlParser.KW_DROP:
-                this.enterOuterAlt(localContext, 16);
+                this.enterOuterAlt(localContext, 17);
                 {
-                this.state = 4506;
+                this.state = 4507;
                 this.match(HiveSqlParser.KW_DROP);
                 }
                 break;
             case HiveSqlParser.KW_TABLE:
-                this.enterOuterAlt(localContext, 17);
+                this.enterOuterAlt(localContext, 18);
                 {
-                this.state = 4507;
+                this.state = 4508;
                 this.match(HiveSqlParser.KW_TABLE);
                 }
                 break;
             case HiveSqlParser.KW_ON:
-                this.enterOuterAlt(localContext, 18);
+                this.enterOuterAlt(localContext, 19);
                 {
-                this.state = 4508;
+                this.state = 4509;
                 this.match(HiveSqlParser.KW_ON);
                 }
                 break;
             case HiveSqlParser.KW_ROW:
-                this.enterOuterAlt(localContext, 19);
+                this.enterOuterAlt(localContext, 20);
                 {
-                this.state = 4509;
+                this.state = 4510;
                 this.match(HiveSqlParser.KW_ROW);
                 }
                 break;
             case HiveSqlParser.KW_GROUPING:
-                this.enterOuterAlt(localContext, 20);
+                this.enterOuterAlt(localContext, 21);
                 {
-                this.state = 4510;
+                this.state = 4511;
                 this.match(HiveSqlParser.KW_GROUPING);
                 }
                 break;
             case HiveSqlParser.KW_SET:
-                this.enterOuterAlt(localContext, 21);
+                this.enterOuterAlt(localContext, 22);
                 {
-                this.state = 4511;
+                this.state = 4512;
                 this.match(HiveSqlParser.KW_SET);
                 }
                 break;
             case HiveSqlParser.KW_FORCE:
-                this.enterOuterAlt(localContext, 22);
+                this.enterOuterAlt(localContext, 23);
                 {
-                this.state = 4512;
+                this.state = 4513;
                 this.match(HiveSqlParser.KW_FORCE);
                 }
                 break;
             case HiveSqlParser.KW_START:
-                this.enterOuterAlt(localContext, 23);
+                this.enterOuterAlt(localContext, 24);
                 {
-                this.state = 4513;
+                this.state = 4514;
                 this.match(HiveSqlParser.KW_START);
                 }
                 break;
             case HiveSqlParser.KW_INSERT:
-                this.enterOuterAlt(localContext, 24);
+                this.enterOuterAlt(localContext, 25);
                 {
-                this.state = 4514;
+                this.state = 4515;
                 this.match(HiveSqlParser.KW_INSERT);
                 }
                 break;
             case HiveSqlParser.KW_CONF:
-                this.enterOuterAlt(localContext, 25);
+                this.enterOuterAlt(localContext, 26);
                 {
-                this.state = 4515;
+                this.state = 4516;
                 this.match(HiveSqlParser.KW_CONF);
                 }
                 break;
             case HiveSqlParser.KW_INTO:
-                this.enterOuterAlt(localContext, 26);
+                this.enterOuterAlt(localContext, 27);
                 {
-                this.state = 4516;
+                this.state = 4517;
                 this.match(HiveSqlParser.KW_INTO);
                 }
                 break;
             case HiveSqlParser.KW_UNIQUE:
-                this.enterOuterAlt(localContext, 27);
+                this.enterOuterAlt(localContext, 28);
                 {
-                this.state = 4517;
+                this.state = 4518;
                 this.match(HiveSqlParser.KW_UNIQUE);
                 }
                 break;
             case HiveSqlParser.KW_COLUMN:
-                this.enterOuterAlt(localContext, 28);
+                this.enterOuterAlt(localContext, 29);
                 {
-                this.state = 4518;
+                this.state = 4519;
                 this.match(HiveSqlParser.KW_COLUMN);
                 }
                 break;
             case HiveSqlParser.KW_TRANSFORM:
-                this.enterOuterAlt(localContext, 29);
+                this.enterOuterAlt(localContext, 30);
                 {
-                this.state = 4519;
+                this.state = 4520;
                 this.match(HiveSqlParser.KW_TRANSFORM);
                 }
                 break;
             case HiveSqlParser.KW_DISTINCT:
-                this.enterOuterAlt(localContext, 30);
+                this.enterOuterAlt(localContext, 31);
                 {
-                this.state = 4520;
+                this.state = 4521;
                 this.match(HiveSqlParser.KW_DISTINCT);
                 }
                 break;
             case HiveSqlParser.KW_IN:
-                this.enterOuterAlt(localContext, 31);
+                this.enterOuterAlt(localContext, 32);
                 {
-                this.state = 4521;
+                this.state = 4522;
                 this.match(HiveSqlParser.KW_IN);
                 }
                 break;
             case HiveSqlParser.KW_REFERENCES:
-                this.enterOuterAlt(localContext, 32);
+                this.enterOuterAlt(localContext, 33);
                 {
-                this.state = 4522;
+                this.state = 4523;
                 this.match(HiveSqlParser.KW_REFERENCES);
                 }
                 break;
             case HiveSqlParser.KW_TIMESTAMP:
-                this.enterOuterAlt(localContext, 33);
+                this.enterOuterAlt(localContext, 34);
                 {
-                this.state = 4523;
+                this.state = 4524;
                 this.match(HiveSqlParser.KW_TIMESTAMP);
                 }
                 break;
             case HiveSqlParser.KW_ONLY:
-                this.enterOuterAlt(localContext, 34);
+                this.enterOuterAlt(localContext, 35);
                 {
-                this.state = 4524;
+                this.state = 4525;
                 this.match(HiveSqlParser.KW_ONLY);
                 }
                 break;
             case HiveSqlParser.KW_END:
-                this.enterOuterAlt(localContext, 35);
+                this.enterOuterAlt(localContext, 36);
                 {
-                this.state = 4525;
+                this.state = 4526;
                 this.match(HiveSqlParser.KW_END);
                 }
                 break;
             case HiveSqlParser.KW_FUNCTION:
-                this.enterOuterAlt(localContext, 36);
+                this.enterOuterAlt(localContext, 37);
                 {
-                this.state = 4526;
+                this.state = 4527;
                 this.match(HiveSqlParser.KW_FUNCTION);
                 }
                 break;
             case HiveSqlParser.KW_UPDATE:
-                this.enterOuterAlt(localContext, 37);
+                this.enterOuterAlt(localContext, 38);
                 {
-                this.state = 4527;
+                this.state = 4528;
                 this.match(HiveSqlParser.KW_UPDATE);
                 }
                 break;
             case HiveSqlParser.KW_AUTHORIZATION:
-                this.enterOuterAlt(localContext, 38);
+                this.enterOuterAlt(localContext, 39);
                 {
-                this.state = 4528;
+                this.state = 4529;
                 this.match(HiveSqlParser.KW_AUTHORIZATION);
                 }
                 break;
             case HiveSqlParser.KW_DDL:
-                this.enterOuterAlt(localContext, 39);
+                this.enterOuterAlt(localContext, 40);
                 {
-                this.state = 4529;
+                this.state = 4530;
                 this.match(HiveSqlParser.KW_DDL);
                 }
                 break;
             case HiveSqlParser.KW_VALUES:
-                this.enterOuterAlt(localContext, 40);
+                this.enterOuterAlt(localContext, 41);
                 {
-                this.state = 4530;
+                this.state = 4531;
                 this.match(HiveSqlParser.KW_VALUES);
                 }
                 break;
             case HiveSqlParser.KW_TIME:
-                this.enterOuterAlt(localContext, 41);
+                this.enterOuterAlt(localContext, 42);
                 {
-                this.state = 4531;
+                this.state = 4532;
                 this.match(HiveSqlParser.KW_TIME);
                 }
                 break;
             case HiveSqlParser.KW_IS:
-                this.enterOuterAlt(localContext, 42);
+                this.enterOuterAlt(localContext, 43);
                 {
-                this.state = 4532;
+                this.state = 4533;
                 this.match(HiveSqlParser.KW_IS);
                 }
                 break;
             case HiveSqlParser.KW_FOR:
-                this.enterOuterAlt(localContext, 43);
+                this.enterOuterAlt(localContext, 44);
                 {
-                this.state = 4533;
+                this.state = 4534;
                 this.match(HiveSqlParser.KW_FOR);
                 }
                 break;
             case HiveSqlParser.KW_NOT:
-                this.enterOuterAlt(localContext, 44);
+                this.enterOuterAlt(localContext, 45);
                 {
-                this.state = 4534;
+                this.state = 4535;
                 this.match(HiveSqlParser.KW_NOT);
                 }
                 break;
             case HiveSqlParser.KW_BINARY:
-                this.enterOuterAlt(localContext, 45);
+                this.enterOuterAlt(localContext, 46);
                 {
-                this.state = 4535;
+                this.state = 4536;
                 this.match(HiveSqlParser.KW_BINARY);
                 }
                 break;
             case HiveSqlParser.KW_USING:
-                this.enterOuterAlt(localContext, 46);
+                this.enterOuterAlt(localContext, 47);
                 {
-                this.state = 4536;
+                this.state = 4537;
                 this.match(HiveSqlParser.KW_USING);
                 }
                 break;
             case HiveSqlParser.KW_READS:
-                this.enterOuterAlt(localContext, 47);
+                this.enterOuterAlt(localContext, 48);
                 {
-                this.state = 4537;
+                this.state = 4538;
                 this.match(HiveSqlParser.KW_READS);
                 }
                 break;
             case HiveSqlParser.KW_BETWEEN:
-                this.enterOuterAlt(localContext, 48);
+                this.enterOuterAlt(localContext, 49);
                 {
-                this.state = 4538;
+                this.state = 4539;
                 this.match(HiveSqlParser.KW_BETWEEN);
                 }
                 break;
             case HiveSqlParser.KW_CURRENT:
-                this.enterOuterAlt(localContext, 49);
+                this.enterOuterAlt(localContext, 50);
                 {
-                this.state = 4539;
+                this.state = 4540;
                 this.match(HiveSqlParser.KW_CURRENT);
                 }
                 break;
             case HiveSqlParser.KW_AS:
-                this.enterOuterAlt(localContext, 50);
+                this.enterOuterAlt(localContext, 51);
                 {
-                this.state = 4540;
+                this.state = 4541;
                 this.match(HiveSqlParser.KW_AS);
                 }
                 break;
@@ -23958,53 +23965,53 @@ export class HiveSqlParser extends SQLParserBase {
         this.enterRule(localContext, 650, HiveSqlParser.RULE_resourcePlanDdlStatements);
         let _la: number;
         try {
-            this.state = 4708;
+            this.state = 4709;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 612, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 4543;
-                this.match(HiveSqlParser.KW_CREATE);
                 this.state = 4544;
-                this.match(HiveSqlParser.KW_RESOURCE);
+                this.match(HiveSqlParser.KW_CREATE);
                 this.state = 4545;
+                this.match(HiveSqlParser.KW_RESOURCE);
+                this.state = 4546;
                 this.match(HiveSqlParser.KW_PLAN);
-                this.state = 4547;
+                this.state = 4548;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 151) {
                     {
-                    this.state = 4546;
+                    this.state = 4547;
                     this.ifNotExists();
                     }
                 }
 
-                this.state = 4558;
+                this.state = 4559;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 598, this.context) ) {
                 case 1:
                     {
-                    this.state = 4549;
-                    localContext._name = this.id_();
                     this.state = 4550;
-                    this.match(HiveSqlParser.KW_LIKE);
+                    localContext._name = this.id_();
                     this.state = 4551;
+                    this.match(HiveSqlParser.KW_LIKE);
+                    this.state = 4552;
                     localContext._likeName = this.id_();
                     }
                     break;
                 case 2:
                     {
-                    this.state = 4553;
+                    this.state = 4554;
                     localContext._name = this.id_();
-                    this.state = 4556;
+                    this.state = 4557;
                     this.errorHandler.sync(this);
                     switch (this.interpreter.adaptivePredict(this.tokenStream, 597, this.context) ) {
                     case 1:
                         {
-                        this.state = 4554;
-                        this.match(HiveSqlParser.KW_WITH);
                         this.state = 4555;
+                        this.match(HiveSqlParser.KW_WITH);
+                        this.state = 4556;
                         this.rpAssignList();
                         }
                         break;
@@ -24017,57 +24024,57 @@ export class HiveSqlParser extends SQLParserBase {
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 4560;
-                this.match(HiveSqlParser.KW_ALTER);
                 this.state = 4561;
-                this.match(HiveSqlParser.KW_RESOURCE);
+                this.match(HiveSqlParser.KW_ALTER);
                 this.state = 4562;
-                this.match(HiveSqlParser.KW_PLAN);
+                this.match(HiveSqlParser.KW_RESOURCE);
                 this.state = 4563;
+                this.match(HiveSqlParser.KW_PLAN);
+                this.state = 4564;
                 localContext._name = this.id_();
-                this.state = 4588;
+                this.state = 4589;
                 this.errorHandler.sync(this);
                 switch (this.tokenStream.LA(1)) {
                 case HiveSqlParser.KW_VALIDATE:
                     {
-                    this.state = 4564;
+                    this.state = 4565;
                     this.match(HiveSqlParser.KW_VALIDATE);
                     }
                     break;
                 case HiveSqlParser.KW_DISABLE:
                 case HiveSqlParser.KW_DISABLED:
                     {
-                    this.state = 4565;
+                    this.state = 4566;
                     this.disable();
                     }
                     break;
                 case HiveSqlParser.KW_SET:
                     {
-                    this.state = 4566;
-                    this.match(HiveSqlParser.KW_SET);
                     this.state = 4567;
+                    this.match(HiveSqlParser.KW_SET);
+                    this.state = 4568;
                     this.rpAssignList();
                     }
                     break;
                 case HiveSqlParser.KW_UNSET:
                     {
-                    this.state = 4568;
-                    this.match(HiveSqlParser.KW_UNSET);
                     this.state = 4569;
+                    this.match(HiveSqlParser.KW_UNSET);
+                    this.state = 4570;
                     this.rpUnassign();
-                    this.state = 4574;
+                    this.state = 4575;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                     while (_la === 397) {
                         {
                         {
-                        this.state = 4570;
-                        this.match(HiveSqlParser.COMMA);
                         this.state = 4571;
+                        this.match(HiveSqlParser.COMMA);
+                        this.state = 4572;
                         this.rpUnassign();
                         }
                         }
-                        this.state = 4576;
+                        this.state = 4577;
                         this.errorHandler.sync(this);
                         _la = this.tokenStream.LA(1);
                     }
@@ -24075,24 +24082,24 @@ export class HiveSqlParser extends SQLParserBase {
                     break;
                 case HiveSqlParser.KW_RENAME:
                     {
-                    this.state = 4577;
-                    this.match(HiveSqlParser.KW_RENAME);
                     this.state = 4578;
-                    this.match(HiveSqlParser.KW_TO);
+                    this.match(HiveSqlParser.KW_RENAME);
                     this.state = 4579;
+                    this.match(HiveSqlParser.KW_TO);
+                    this.state = 4580;
                     localContext._newName = this.id_();
                     }
                     break;
                 case HiveSqlParser.KW_ACTIVATE:
                     {
-                    this.state = 4580;
+                    this.state = 4581;
                     this.activate();
-                    this.state = 4582;
+                    this.state = 4583;
                     this.errorHandler.sync(this);
                     switch (this.interpreter.adaptivePredict(this.tokenStream, 600, this.context) ) {
                     case 1:
                         {
-                        this.state = 4581;
+                        this.state = 4582;
                         this.enable();
                         }
                         break;
@@ -24102,14 +24109,14 @@ export class HiveSqlParser extends SQLParserBase {
                 case HiveSqlParser.KW_ENABLE:
                 case HiveSqlParser.KW_ENABLED:
                     {
-                    this.state = 4584;
+                    this.state = 4585;
                     this.enable();
-                    this.state = 4586;
+                    this.state = 4587;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                     if (_la === 2) {
                         {
-                        this.state = 4585;
+                        this.state = 4586;
                         this.activate();
                         }
                     }
@@ -24124,88 +24131,88 @@ export class HiveSqlParser extends SQLParserBase {
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 4590;
-                this.match(HiveSqlParser.KW_DROP);
                 this.state = 4591;
-                this.match(HiveSqlParser.KW_RESOURCE);
+                this.match(HiveSqlParser.KW_DROP);
                 this.state = 4592;
+                this.match(HiveSqlParser.KW_RESOURCE);
+                this.state = 4593;
                 this.match(HiveSqlParser.KW_PLAN);
-                this.state = 4594;
+                this.state = 4595;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 151) {
                     {
-                    this.state = 4593;
+                    this.state = 4594;
                     this.ifExists();
                     }
                 }
 
-                this.state = 4596;
+                this.state = 4597;
                 localContext._name = this.id_();
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 4599;
+                this.state = 4600;
                 this.errorHandler.sync(this);
                 switch (this.tokenStream.LA(1)) {
                 case HiveSqlParser.KW_ENABLE:
                 case HiveSqlParser.KW_ENABLED:
                     {
-                    this.state = 4597;
+                    this.state = 4598;
                     this.enable();
                     }
                     break;
                 case HiveSqlParser.KW_DISABLE:
                 case HiveSqlParser.KW_DISABLED:
                     {
-                    this.state = 4598;
+                    this.state = 4599;
                     this.disable();
                     }
                     break;
                 default:
                     throw new antlr.NoViableAltException(this);
                 }
-                this.state = 4601;
-                this.match(HiveSqlParser.KW_WORKLOAD);
                 this.state = 4602;
+                this.match(HiveSqlParser.KW_WORKLOAD);
+                this.state = 4603;
                 this.match(HiveSqlParser.KW_MANAGEMENT);
                 }
                 break;
             case 5:
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 4604;
+                this.state = 4605;
                 this.match(HiveSqlParser.KW_REPLACE);
-                this.state = 4616;
+                this.state = 4617;
                 this.errorHandler.sync(this);
                 switch (this.tokenStream.LA(1)) {
                 case HiveSqlParser.KW_ACTIVE:
                     {
-                    this.state = 4605;
-                    this.match(HiveSqlParser.KW_ACTIVE);
                     this.state = 4606;
-                    this.match(HiveSqlParser.KW_RESOURCE);
+                    this.match(HiveSqlParser.KW_ACTIVE);
                     this.state = 4607;
-                    this.match(HiveSqlParser.KW_PLAN);
+                    this.match(HiveSqlParser.KW_RESOURCE);
                     this.state = 4608;
-                    this.match(HiveSqlParser.KW_WITH);
+                    this.match(HiveSqlParser.KW_PLAN);
                     this.state = 4609;
+                    this.match(HiveSqlParser.KW_WITH);
+                    this.state = 4610;
                     localContext._src = this.id_();
                     }
                     break;
                 case HiveSqlParser.KW_RESOURCE:
                     {
-                    this.state = 4610;
-                    this.match(HiveSqlParser.KW_RESOURCE);
                     this.state = 4611;
-                    this.match(HiveSqlParser.KW_PLAN);
+                    this.match(HiveSqlParser.KW_RESOURCE);
                     this.state = 4612;
-                    localContext._dest = this.id_();
+                    this.match(HiveSqlParser.KW_PLAN);
                     this.state = 4613;
-                    this.match(HiveSqlParser.KW_WITH);
+                    localContext._dest = this.id_();
                     this.state = 4614;
+                    this.match(HiveSqlParser.KW_WITH);
+                    this.state = 4615;
                     localContext._src = this.id_();
                     }
                     break;
@@ -24217,93 +24224,93 @@ export class HiveSqlParser extends SQLParserBase {
             case 6:
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 4618;
-                this.match(HiveSqlParser.KW_CREATE);
                 this.state = 4619;
-                this.match(HiveSqlParser.KW_TRIGGER);
+                this.match(HiveSqlParser.KW_CREATE);
                 this.state = 4620;
-                localContext._rpName = this.id_();
+                this.match(HiveSqlParser.KW_TRIGGER);
                 this.state = 4621;
-                this.match(HiveSqlParser.DOT);
+                localContext._rpName = this.id_();
                 this.state = 4622;
-                localContext._triggerName = this.id_();
+                this.match(HiveSqlParser.DOT);
                 this.state = 4623;
-                this.match(HiveSqlParser.KW_WHEN);
+                localContext._triggerName = this.id_();
                 this.state = 4624;
-                this.triggerAtomExpression();
+                this.match(HiveSqlParser.KW_WHEN);
                 this.state = 4625;
-                this.match(HiveSqlParser.KW_DO);
+                this.triggerAtomExpression();
                 this.state = 4626;
+                this.match(HiveSqlParser.KW_DO);
+                this.state = 4627;
                 this.triggerActionExpression();
                 }
                 break;
             case 7:
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 4628;
-                this.match(HiveSqlParser.KW_ALTER);
                 this.state = 4629;
-                this.match(HiveSqlParser.KW_TRIGGER);
+                this.match(HiveSqlParser.KW_ALTER);
                 this.state = 4630;
-                localContext._rpName = this.id_();
+                this.match(HiveSqlParser.KW_TRIGGER);
                 this.state = 4631;
-                this.match(HiveSqlParser.DOT);
+                localContext._rpName = this.id_();
                 this.state = 4632;
+                this.match(HiveSqlParser.DOT);
+                this.state = 4633;
                 localContext._triggerName = this.id_();
-                this.state = 4649;
+                this.state = 4650;
                 this.errorHandler.sync(this);
                 switch (this.tokenStream.LA(1)) {
                 case HiveSqlParser.KW_WHEN:
                     {
-                    this.state = 4633;
-                    this.match(HiveSqlParser.KW_WHEN);
                     this.state = 4634;
-                    this.triggerAtomExpression();
+                    this.match(HiveSqlParser.KW_WHEN);
                     this.state = 4635;
-                    this.match(HiveSqlParser.KW_DO);
+                    this.triggerAtomExpression();
                     this.state = 4636;
+                    this.match(HiveSqlParser.KW_DO);
+                    this.state = 4637;
                     this.triggerActionExpression();
                     }
                     break;
                 case HiveSqlParser.KW_ADD:
                 case HiveSqlParser.KW_DROP:
                     {
-                    this.state = 4642;
+                    this.state = 4643;
                     this.errorHandler.sync(this);
                     switch (this.tokenStream.LA(1)) {
                     case HiveSqlParser.KW_ADD:
                         {
-                        this.state = 4638;
-                        this.match(HiveSqlParser.KW_ADD);
                         this.state = 4639;
+                        this.match(HiveSqlParser.KW_ADD);
+                        this.state = 4640;
                         this.match(HiveSqlParser.KW_TO);
                         }
                         break;
                     case HiveSqlParser.KW_DROP:
                         {
-                        this.state = 4640;
-                        this.match(HiveSqlParser.KW_DROP);
                         this.state = 4641;
+                        this.match(HiveSqlParser.KW_DROP);
+                        this.state = 4642;
                         this.match(HiveSqlParser.KW_FROM);
                         }
                         break;
                     default:
                         throw new antlr.NoViableAltException(this);
                     }
-                    this.state = 4647;
+                    this.state = 4648;
                     this.errorHandler.sync(this);
                     switch (this.tokenStream.LA(1)) {
                     case HiveSqlParser.KW_POOL:
                         {
-                        this.state = 4644;
-                        this.match(HiveSqlParser.KW_POOL);
                         this.state = 4645;
+                        this.match(HiveSqlParser.KW_POOL);
+                        this.state = 4646;
                         localContext._poolName = this.poolPath();
                         }
                         break;
                     case HiveSqlParser.KW_UNMANAGED:
                         {
-                        this.state = 4646;
+                        this.state = 4647;
                         this.match(HiveSqlParser.KW_UNMANAGED);
                         }
                         break;
@@ -24320,73 +24327,73 @@ export class HiveSqlParser extends SQLParserBase {
             case 8:
                 this.enterOuterAlt(localContext, 8);
                 {
-                this.state = 4651;
-                this.match(HiveSqlParser.KW_DROP);
                 this.state = 4652;
-                this.match(HiveSqlParser.KW_TRIGGER);
+                this.match(HiveSqlParser.KW_DROP);
                 this.state = 4653;
-                localContext._rpName = this.id_();
+                this.match(HiveSqlParser.KW_TRIGGER);
                 this.state = 4654;
-                this.match(HiveSqlParser.DOT);
+                localContext._rpName = this.id_();
                 this.state = 4655;
+                this.match(HiveSqlParser.DOT);
+                this.state = 4656;
                 localContext._triggerName = this.id_();
                 }
                 break;
             case 9:
                 this.enterOuterAlt(localContext, 9);
                 {
-                this.state = 4657;
-                this.match(HiveSqlParser.KW_CREATE);
                 this.state = 4658;
-                this.match(HiveSqlParser.KW_POOL);
+                this.match(HiveSqlParser.KW_CREATE);
                 this.state = 4659;
-                localContext._rpName = this.id_();
+                this.match(HiveSqlParser.KW_POOL);
                 this.state = 4660;
-                this.match(HiveSqlParser.DOT);
+                localContext._rpName = this.id_();
                 this.state = 4661;
-                this.poolPath();
+                this.match(HiveSqlParser.DOT);
                 this.state = 4662;
-                this.match(HiveSqlParser.KW_WITH);
+                this.poolPath();
                 this.state = 4663;
+                this.match(HiveSqlParser.KW_WITH);
+                this.state = 4664;
                 this.poolAssignList();
                 }
                 break;
             case 10:
                 this.enterOuterAlt(localContext, 10);
                 {
-                this.state = 4665;
-                this.match(HiveSqlParser.KW_ALTER);
                 this.state = 4666;
-                this.match(HiveSqlParser.KW_POOL);
+                this.match(HiveSqlParser.KW_ALTER);
                 this.state = 4667;
-                localContext._rpName = this.id_();
+                this.match(HiveSqlParser.KW_POOL);
                 this.state = 4668;
-                this.match(HiveSqlParser.DOT);
+                localContext._rpName = this.id_();
                 this.state = 4669;
+                this.match(HiveSqlParser.DOT);
+                this.state = 4670;
                 this.poolPath();
-                this.state = 4677;
+                this.state = 4678;
                 this.errorHandler.sync(this);
                 switch (this.tokenStream.LA(1)) {
                 case HiveSqlParser.KW_SET:
                     {
-                    this.state = 4670;
-                    this.match(HiveSqlParser.KW_SET);
                     this.state = 4671;
+                    this.match(HiveSqlParser.KW_SET);
+                    this.state = 4672;
                     this.poolAssignList();
                     }
                     break;
                 case HiveSqlParser.KW_UNSET:
                     {
-                    this.state = 4672;
-                    this.match(HiveSqlParser.KW_UNSET);
                     this.state = 4673;
+                    this.match(HiveSqlParser.KW_UNSET);
+                    this.state = 4674;
                     this.match(HiveSqlParser.KW_SCHEDULING_POLICY);
                     }
                     break;
                 case HiveSqlParser.KW_ADD:
                 case HiveSqlParser.KW_DROP:
                     {
-                    this.state = 4674;
+                    this.state = 4675;
                     _la = this.tokenStream.LA(1);
                     if(!(_la === 4 || _la === 101)) {
                     this.errorHandler.recoverInline(this);
@@ -24395,9 +24402,9 @@ export class HiveSqlParser extends SQLParserBase {
                         this.errorHandler.reportMatch(this);
                         this.consume();
                     }
-                    this.state = 4675;
-                    this.match(HiveSqlParser.KW_TRIGGER);
                     this.state = 4676;
+                    this.match(HiveSqlParser.KW_TRIGGER);
+                    this.state = 4677;
                     localContext._triggerName = this.id_();
                     }
                     break;
@@ -24409,22 +24416,22 @@ export class HiveSqlParser extends SQLParserBase {
             case 11:
                 this.enterOuterAlt(localContext, 11);
                 {
-                this.state = 4679;
-                this.match(HiveSqlParser.KW_DROP);
                 this.state = 4680;
-                this.match(HiveSqlParser.KW_POOL);
+                this.match(HiveSqlParser.KW_DROP);
                 this.state = 4681;
-                localContext._rpName = this.id_();
+                this.match(HiveSqlParser.KW_POOL);
                 this.state = 4682;
-                this.match(HiveSqlParser.DOT);
+                localContext._rpName = this.id_();
                 this.state = 4683;
+                this.match(HiveSqlParser.DOT);
+                this.state = 4684;
                 this.poolPath();
                 }
                 break;
             case 12:
                 this.enterOuterAlt(localContext, 12);
                 {
-                this.state = 4685;
+                this.state = 4686;
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 9 || _la === 58)) {
                 this.errorHandler.recoverInline(this);
@@ -24433,46 +24440,46 @@ export class HiveSqlParser extends SQLParserBase {
                     this.errorHandler.reportMatch(this);
                     this.consume();
                 }
-                this.state = 4686;
-                localContext._mappingType = this.mappingTypes();
                 this.state = 4687;
-                this.match(HiveSqlParser.KW_MAPPING);
+                localContext._mappingType = this.mappingTypes();
                 this.state = 4688;
-                this.match(HiveSqlParser.StringLiteral);
+                this.match(HiveSqlParser.KW_MAPPING);
                 this.state = 4689;
-                this.match(HiveSqlParser.KW_IN);
+                this.match(HiveSqlParser.StringLiteral);
                 this.state = 4690;
+                this.match(HiveSqlParser.KW_IN);
+                this.state = 4691;
                 localContext._rpName = this.id_();
-                this.state = 4694;
+                this.state = 4695;
                 this.errorHandler.sync(this);
                 switch (this.tokenStream.LA(1)) {
                 case HiveSqlParser.KW_TO:
                     {
-                    this.state = 4691;
-                    this.match(HiveSqlParser.KW_TO);
                     this.state = 4692;
+                    this.match(HiveSqlParser.KW_TO);
+                    this.state = 4693;
                     localContext._path = this.poolPath();
                     }
                     break;
                 case HiveSqlParser.KW_UNMANAGED:
                     {
-                    this.state = 4693;
+                    this.state = 4694;
                     this.match(HiveSqlParser.KW_UNMANAGED);
                     }
                     break;
                 default:
                     throw new antlr.NoViableAltException(this);
                 }
-                this.state = 4699;
+                this.state = 4700;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 611, this.context) ) {
                 case 1:
                     {
-                    this.state = 4696;
-                    this.match(HiveSqlParser.KW_WITH);
                     this.state = 4697;
-                    this.match(HiveSqlParser.KW_ORDER);
+                    this.match(HiveSqlParser.KW_WITH);
                     this.state = 4698;
+                    this.match(HiveSqlParser.KW_ORDER);
+                    this.state = 4699;
                     localContext._order = this.match(HiveSqlParser.Number);
                     }
                     break;
@@ -24482,17 +24489,17 @@ export class HiveSqlParser extends SQLParserBase {
             case 13:
                 this.enterOuterAlt(localContext, 13);
                 {
-                this.state = 4701;
-                this.match(HiveSqlParser.KW_DROP);
                 this.state = 4702;
-                localContext._mappingType = this.mappingTypes();
+                this.match(HiveSqlParser.KW_DROP);
                 this.state = 4703;
-                this.match(HiveSqlParser.KW_MAPPING);
+                localContext._mappingType = this.mappingTypes();
                 this.state = 4704;
-                this.match(HiveSqlParser.StringLiteral);
+                this.match(HiveSqlParser.KW_MAPPING);
                 this.state = 4705;
-                this.match(HiveSqlParser.KW_IN);
+                this.match(HiveSqlParser.StringLiteral);
                 this.state = 4706;
+                this.match(HiveSqlParser.KW_IN);
+                this.state = 4707;
                 localContext._rpName = this.id_();
                 }
                 break;
@@ -24519,7 +24526,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4710;
+            this.state = 4711;
             _la = this.tokenStream.LA(1);
             if(!(_la === 14 || _la === 144 || _la === 369)) {
             this.errorHandler.recoverInline(this);
@@ -24548,30 +24555,30 @@ export class HiveSqlParser extends SQLParserBase {
         let localContext = new RpAssignContext(this.context, this.state);
         this.enterRule(localContext, 654, HiveSqlParser.RULE_rpAssign);
         try {
-            this.state = 4719;
+            this.state = 4720;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case HiveSqlParser.KW_QUERY_PARALLELISM:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 4712;
-                this.match(HiveSqlParser.KW_QUERY_PARALLELISM);
                 this.state = 4713;
-                this.match(HiveSqlParser.EQUAL);
+                this.match(HiveSqlParser.KW_QUERY_PARALLELISM);
                 this.state = 4714;
+                this.match(HiveSqlParser.EQUAL);
+                this.state = 4715;
                 localContext._parallelism = this.match(HiveSqlParser.Number);
                 }
                 break;
             case HiveSqlParser.KW_DEFAULT:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 4715;
-                this.match(HiveSqlParser.KW_DEFAULT);
                 this.state = 4716;
-                this.match(HiveSqlParser.KW_POOL);
+                this.match(HiveSqlParser.KW_DEFAULT);
                 this.state = 4717;
-                this.match(HiveSqlParser.EQUAL);
+                this.match(HiveSqlParser.KW_POOL);
                 this.state = 4718;
+                this.match(HiveSqlParser.EQUAL);
+                this.state = 4719;
                 this.poolPath();
                 }
                 break;
@@ -24600,21 +24607,21 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4721;
+            this.state = 4722;
             this.rpAssign();
-            this.state = 4726;
+            this.state = 4727;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 397) {
                 {
                 {
-                this.state = 4722;
-                this.match(HiveSqlParser.COMMA);
                 this.state = 4723;
+                this.match(HiveSqlParser.COMMA);
+                this.state = 4724;
                 this.rpAssign();
                 }
                 }
-                this.state = 4728;
+                this.state = 4729;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -24638,22 +24645,22 @@ export class HiveSqlParser extends SQLParserBase {
         let localContext = new RpUnassignContext(this.context, this.state);
         this.enterRule(localContext, 658, HiveSqlParser.RULE_rpUnassign);
         try {
-            this.state = 4732;
+            this.state = 4733;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case HiveSqlParser.KW_QUERY_PARALLELISM:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 4729;
+                this.state = 4730;
                 this.match(HiveSqlParser.KW_QUERY_PARALLELISM);
                 }
                 break;
             case HiveSqlParser.KW_DEFAULT:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 4730;
-                this.match(HiveSqlParser.KW_DEFAULT);
                 this.state = 4731;
+                this.match(HiveSqlParser.KW_DEFAULT);
+                this.state = 4732;
                 this.match(HiveSqlParser.KW_POOL);
                 }
                 break;
@@ -24681,16 +24688,16 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4734;
+            this.state = 4735;
             this.match(HiveSqlParser.KW_ACTIVATE);
-            this.state = 4737;
+            this.state = 4738;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 616, this.context) ) {
             case 1:
                 {
-                this.state = 4735;
-                this.match(HiveSqlParser.KW_WITH);
                 this.state = 4736;
+                this.match(HiveSqlParser.KW_WITH);
+                this.state = 4737;
                 this.match(HiveSqlParser.KW_REPLACE);
                 }
                 break;
@@ -24718,7 +24725,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4739;
+            this.state = 4740;
             _la = this.tokenStream.LA(1);
             if(!(_la === 106 || _la === 107)) {
             this.errorHandler.recoverInline(this);
@@ -24750,7 +24757,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4741;
+            this.state = 4742;
             _la = this.tokenStream.LA(1);
             if(!(_la === 94 || _la === 95)) {
             this.errorHandler.recoverInline(this);
@@ -24782,7 +24789,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4743;
+            this.state = 4744;
             _la = this.tokenStream.LA(1);
             if(!(_la === 392 || _la === 393)) {
             this.errorHandler.recoverInline(this);
@@ -24814,7 +24821,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4745;
+            this.state = 4746;
             _la = this.tokenStream.LA(1);
             if(!(_la === 208 || _la === 209)) {
             this.errorHandler.recoverInline(this);
@@ -24846,7 +24853,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4747;
+            this.state = 4748;
             _la = this.tokenStream.LA(1);
             if(!(_la === 381 || _la === 382)) {
             this.errorHandler.recoverInline(this);
@@ -24878,7 +24885,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4749;
+            this.state = 4750;
             _la = this.tokenStream.LA(1);
             if(!(_la === 73 || _la === 74)) {
             this.errorHandler.recoverInline(this);
@@ -24910,7 +24917,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4751;
+            this.state = 4752;
             _la = this.tokenStream.LA(1);
             if(!(_la === 148 || _la === 149)) {
             this.errorHandler.recoverInline(this);
@@ -24942,7 +24949,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4753;
+            this.state = 4754;
             _la = this.tokenStream.LA(1);
             if(!(_la === 206 || _la === 207)) {
             this.errorHandler.recoverInline(this);
@@ -24974,7 +24981,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4755;
+            this.state = 4756;
             _la = this.tokenStream.LA(1);
             if(!(_la === 297 || _la === 298)) {
             this.errorHandler.recoverInline(this);
@@ -25006,7 +25013,7 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4757;
+            this.state = 4758;
             _la = this.tokenStream.LA(1);
             if(!(((((_la - 80)) & ~0x1F) === 0 && ((1 << (_la - 80)) & 7) !== 0))) {
             this.errorHandler.recoverInline(this);
@@ -25038,23 +25045,23 @@ export class HiveSqlParser extends SQLParserBase {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4759;
+            this.state = 4760;
             this.id_();
-            this.state = 4764;
+            this.state = 4765;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 617, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
                 if (alternative === 1) {
                     {
                     {
-                    this.state = 4760;
-                    this.match(HiveSqlParser.DOT);
                     this.state = 4761;
+                    this.match(HiveSqlParser.DOT);
+                    this.state = 4762;
                     this.id_();
                     }
                     }
                 }
-                this.state = 4766;
+                this.state = 4767;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 617, this.context);
             }
@@ -25081,11 +25088,11 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4767;
-            this.id_();
             this.state = 4768;
-            this.match(HiveSqlParser.GREATERTHAN);
+            this.id_();
             this.state = 4769;
+            this.match(HiveSqlParser.GREATERTHAN);
+            this.state = 4770;
             _la = this.tokenStream.LA(1);
             if(!(_la === 426 || _la === 431)) {
             this.errorHandler.recoverInline(this);
@@ -25114,24 +25121,24 @@ export class HiveSqlParser extends SQLParserBase {
         let localContext = new TriggerActionExpressionContext(this.context, this.state);
         this.enterRule(localContext, 686, HiveSqlParser.RULE_triggerActionExpression);
         try {
-            this.state = 4775;
+            this.state = 4776;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case HiveSqlParser.KW_KILL:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 4771;
+                this.state = 4772;
                 this.match(HiveSqlParser.KW_KILL);
                 }
                 break;
             case HiveSqlParser.KW_MOVE:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 4772;
-                this.match(HiveSqlParser.KW_MOVE);
                 this.state = 4773;
-                this.match(HiveSqlParser.KW_TO);
+                this.match(HiveSqlParser.KW_MOVE);
                 this.state = 4774;
+                this.match(HiveSqlParser.KW_TO);
+                this.state = 4775;
                 this.poolPath();
                 }
                 break;
@@ -25159,46 +25166,46 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4789;
+            this.state = 4790;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case HiveSqlParser.KW_ALLOC_FRACTION:
                 {
-                this.state = 4777;
-                this.match(HiveSqlParser.KW_ALLOC_FRACTION);
                 this.state = 4778;
-                this.match(HiveSqlParser.EQUAL);
+                this.match(HiveSqlParser.KW_ALLOC_FRACTION);
                 this.state = 4779;
+                this.match(HiveSqlParser.EQUAL);
+                this.state = 4780;
                 localContext._allocFraction = this.match(HiveSqlParser.Number);
                 }
                 break;
             case HiveSqlParser.KW_QUERY_PARALLELISM:
                 {
-                this.state = 4780;
-                this.match(HiveSqlParser.KW_QUERY_PARALLELISM);
                 this.state = 4781;
-                this.match(HiveSqlParser.EQUAL);
+                this.match(HiveSqlParser.KW_QUERY_PARALLELISM);
                 this.state = 4782;
+                this.match(HiveSqlParser.EQUAL);
+                this.state = 4783;
                 localContext._parallelism = this.match(HiveSqlParser.Number);
                 }
                 break;
             case HiveSqlParser.KW_SCHEDULING_POLICY:
                 {
-                this.state = 4783;
-                this.match(HiveSqlParser.KW_SCHEDULING_POLICY);
                 this.state = 4784;
-                this.match(HiveSqlParser.EQUAL);
+                this.match(HiveSqlParser.KW_SCHEDULING_POLICY);
                 this.state = 4785;
+                this.match(HiveSqlParser.EQUAL);
+                this.state = 4786;
                 localContext._policy = this.match(HiveSqlParser.StringLiteral);
                 }
                 break;
             case HiveSqlParser.KW_PATH:
                 {
-                this.state = 4786;
-                this.match(HiveSqlParser.KW_PATH);
                 this.state = 4787;
-                this.match(HiveSqlParser.EQUAL);
+                this.match(HiveSqlParser.KW_PATH);
                 this.state = 4788;
+                this.match(HiveSqlParser.EQUAL);
+                this.state = 4789;
                 localContext._path = this.poolPath();
                 }
                 break;
@@ -25228,21 +25235,21 @@ export class HiveSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 4791;
+            this.state = 4792;
             this.poolAssign();
-            this.state = 4796;
+            this.state = 4797;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 397) {
                 {
                 {
-                this.state = 4792;
-                this.match(HiveSqlParser.COMMA);
                 this.state = 4793;
+                this.match(HiveSqlParser.COMMA);
+                this.state = 4794;
                 this.poolAssign();
                 }
                 }
-                this.state = 4798;
+                this.state = 4799;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -25279,7 +25286,7 @@ export class HiveSqlParser extends SQLParserBase {
     }
 
     public static readonly _serializedATN: number[] = [
-        4,1,438,4800,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,
+        4,1,438,4801,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,
         7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,
         13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
         20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,
@@ -25727,60 +25734,60 @@ export class HiveSqlParser extends SQLParserBase {
         1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,
         1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,
         1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,
-        1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,3,324,4542,
-        8,324,1,325,1,325,1,325,1,325,3,325,4548,8,325,1,325,1,325,1,325,
-        1,325,1,325,1,325,1,325,3,325,4557,8,325,3,325,4559,8,325,1,325,
+        1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,1,324,3,324,
+        4543,8,324,1,325,1,325,1,325,1,325,3,325,4549,8,325,1,325,1,325,
+        1,325,1,325,1,325,1,325,1,325,3,325,4558,8,325,3,325,4560,8,325,
         1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
-        5,325,4573,8,325,10,325,12,325,4576,9,325,1,325,1,325,1,325,1,325,
-        1,325,3,325,4583,8,325,1,325,1,325,3,325,4587,8,325,3,325,4589,8,
-        325,1,325,1,325,1,325,1,325,3,325,4595,8,325,1,325,1,325,1,325,3,
-        325,4600,8,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,
-        325,1,325,1,325,1,325,1,325,1,325,1,325,3,325,4617,8,325,1,325,1,
-        325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
+        1,325,5,325,4574,8,325,10,325,12,325,4577,9,325,1,325,1,325,1,325,
+        1,325,1,325,3,325,4584,8,325,1,325,1,325,3,325,4588,8,325,3,325,
+        4590,8,325,1,325,1,325,1,325,1,325,3,325,4596,8,325,1,325,1,325,
+        1,325,3,325,4601,8,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
+        1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,3,325,4618,8,325,
         1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
-        1,325,3,325,4643,8,325,1,325,1,325,1,325,3,325,4648,8,325,3,325,
-        4650,8,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
         1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
-        1,325,1,325,1,325,1,325,1,325,1,325,3,325,4678,8,325,1,325,1,325,
+        1,325,1,325,3,325,4644,8,325,1,325,1,325,1,325,3,325,4649,8,325,
+        3,325,4651,8,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
         1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
-        1,325,1,325,3,325,4695,8,325,1,325,1,325,1,325,3,325,4700,8,325,
-        1,325,1,325,1,325,1,325,1,325,1,325,1,325,3,325,4709,8,325,1,326,
-        1,326,1,327,1,327,1,327,1,327,1,327,1,327,1,327,3,327,4720,8,327,
-        1,328,1,328,1,328,5,328,4725,8,328,10,328,12,328,4728,9,328,1,329,
-        1,329,1,329,3,329,4733,8,329,1,330,1,330,1,330,3,330,4738,8,330,
-        1,331,1,331,1,332,1,332,1,333,1,333,1,334,1,334,1,335,1,335,1,336,
-        1,336,1,337,1,337,1,338,1,338,1,339,1,339,1,340,1,340,1,341,1,341,
-        1,341,5,341,4763,8,341,10,341,12,341,4766,9,341,1,342,1,342,1,342,
-        1,342,1,343,1,343,1,343,1,343,3,343,4776,8,343,1,344,1,344,1,344,
-        1,344,1,344,1,344,1,344,1,344,1,344,1,344,1,344,1,344,3,344,4790,
-        8,344,1,345,1,345,1,345,5,345,4795,8,345,10,345,12,345,4798,9,345,
-        1,345,1,813,0,346,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,
-        34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,
-        78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,
-        116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,146,
-        148,150,152,154,156,158,160,162,164,166,168,170,172,174,176,178,
-        180,182,184,186,188,190,192,194,196,198,200,202,204,206,208,210,
-        212,214,216,218,220,222,224,226,228,230,232,234,236,238,240,242,
-        244,246,248,250,252,254,256,258,260,262,264,266,268,270,272,274,
-        276,278,280,282,284,286,288,290,292,294,296,298,300,302,304,306,
-        308,310,312,314,316,318,320,322,324,326,328,330,332,334,336,338,
-        340,342,344,346,348,350,352,354,356,358,360,362,364,366,368,370,
-        372,374,376,378,380,382,384,386,388,390,392,394,396,398,400,402,
-        404,406,408,410,412,414,416,418,420,422,424,426,428,430,432,434,
-        436,438,440,442,444,446,448,450,452,454,456,458,460,462,464,466,
-        468,470,472,474,476,478,480,482,484,486,488,490,492,494,496,498,
-        500,502,504,506,508,510,512,514,516,518,520,522,524,526,528,530,
-        532,534,536,538,540,542,544,546,548,550,552,554,556,558,560,562,
-        564,566,568,570,572,574,576,578,580,582,584,586,588,590,592,594,
-        596,598,600,602,604,606,608,610,612,614,616,618,620,622,624,626,
-        628,630,632,634,636,638,640,642,644,646,648,650,652,654,656,658,
-        660,662,664,666,668,670,672,674,676,678,680,682,684,686,688,690,
-        0,60,2,0,57,57,172,172,4,0,91,91,121,121,226,226,325,325,2,0,50,
-        50,346,346,2,0,34,34,282,282,1,0,89,90,2,0,139,139,154,154,2,0,67,
-        67,295,295,2,0,68,68,296,296,1,0,155,156,2,0,114,114,307,307,11,
-        0,7,7,9,9,58,58,86,86,101,101,155,155,161,161,190,190,299,299,309,
-        309,365,365,3,0,4,4,101,101,326,326,3,0,15,15,128,128,170,170,1,
-        0,141,142,2,0,30,30,351,351,2,0,217,217,373,373,2,0,214,214,272,
+        1,325,1,325,1,325,1,325,1,325,1,325,1,325,3,325,4679,8,325,1,325,
+        1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,
+        1,325,1,325,1,325,3,325,4696,8,325,1,325,1,325,1,325,3,325,4701,
+        8,325,1,325,1,325,1,325,1,325,1,325,1,325,1,325,3,325,4710,8,325,
+        1,326,1,326,1,327,1,327,1,327,1,327,1,327,1,327,1,327,3,327,4721,
+        8,327,1,328,1,328,1,328,5,328,4726,8,328,10,328,12,328,4729,9,328,
+        1,329,1,329,1,329,3,329,4734,8,329,1,330,1,330,1,330,3,330,4739,
+        8,330,1,331,1,331,1,332,1,332,1,333,1,333,1,334,1,334,1,335,1,335,
+        1,336,1,336,1,337,1,337,1,338,1,338,1,339,1,339,1,340,1,340,1,341,
+        1,341,1,341,5,341,4764,8,341,10,341,12,341,4767,9,341,1,342,1,342,
+        1,342,1,342,1,343,1,343,1,343,1,343,3,343,4777,8,343,1,344,1,344,
+        1,344,1,344,1,344,1,344,1,344,1,344,1,344,1,344,1,344,1,344,3,344,
+        4791,8,344,1,345,1,345,1,345,5,345,4796,8,345,10,345,12,345,4799,
+        9,345,1,345,1,813,0,346,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,
+        30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,
+        74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,
+        114,116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,
+        146,148,150,152,154,156,158,160,162,164,166,168,170,172,174,176,
+        178,180,182,184,186,188,190,192,194,196,198,200,202,204,206,208,
+        210,212,214,216,218,220,222,224,226,228,230,232,234,236,238,240,
+        242,244,246,248,250,252,254,256,258,260,262,264,266,268,270,272,
+        274,276,278,280,282,284,286,288,290,292,294,296,298,300,302,304,
+        306,308,310,312,314,316,318,320,322,324,326,328,330,332,334,336,
+        338,340,342,344,346,348,350,352,354,356,358,360,362,364,366,368,
+        370,372,374,376,378,380,382,384,386,388,390,392,394,396,398,400,
+        402,404,406,408,410,412,414,416,418,420,422,424,426,428,430,432,
+        434,436,438,440,442,444,446,448,450,452,454,456,458,460,462,464,
+        466,468,470,472,474,476,478,480,482,484,486,488,490,492,494,496,
+        498,500,502,504,506,508,510,512,514,516,518,520,522,524,526,528,
+        530,532,534,536,538,540,542,544,546,548,550,552,554,556,558,560,
+        562,564,566,568,570,572,574,576,578,580,582,584,586,588,590,592,
+        594,596,598,600,602,604,606,608,610,612,614,616,618,620,622,624,
+        626,628,630,632,634,636,638,640,642,644,646,648,650,652,654,656,
+        658,660,662,664,666,668,670,672,674,676,678,680,682,684,686,688,
+        690,0,60,2,0,57,57,172,172,4,0,91,91,121,121,226,226,325,325,2,0,
+        50,50,346,346,2,0,34,34,282,282,1,0,89,90,2,0,139,139,154,154,2,
+        0,67,67,295,295,2,0,68,68,296,296,1,0,155,156,2,0,114,114,307,307,
+        11,0,7,7,9,9,58,58,86,86,101,101,155,155,161,161,190,190,299,299,
+        309,309,365,365,3,0,4,4,101,101,326,326,3,0,15,15,128,128,170,170,
+        1,0,141,142,2,0,30,30,351,351,2,0,217,217,373,373,2,0,214,214,272,
         272,2,0,18,18,89,89,2,0,130,130,177,177,2,0,39,39,376,376,4,0,112,
         112,164,164,205,205,356,356,2,0,7,7,96,96,2,0,125,125,350,350,2,
         0,225,225,391,391,2,0,42,42,315,315,2,0,189,189,196,196,2,0,426,
@@ -25807,7 +25814,7 @@ export class HiveSqlParser extends SQLParserBase {
         198,198,264,264,311,311,337,337,2,0,4,4,101,101,2,0,9,9,58,58,3,
         0,14,14,144,144,369,369,1,0,106,107,1,0,94,95,1,0,392,393,1,0,208,
         209,1,0,381,382,1,0,73,74,1,0,148,149,1,0,206,207,1,0,297,298,1,
-        0,80,82,5390,0,695,1,0,0,0,2,702,1,0,0,0,4,707,1,0,0,0,6,741,1,0,
+        0,80,82,5392,0,695,1,0,0,0,2,702,1,0,0,0,4,707,1,0,0,0,6,741,1,0,
         0,0,8,743,1,0,0,0,10,816,1,0,0,0,12,818,1,0,0,0,14,834,1,0,0,0,16,
         843,1,0,0,0,18,851,1,0,0,0,20,864,1,0,0,0,22,875,1,0,0,0,24,880,
         1,0,0,0,26,891,1,0,0,0,28,954,1,0,0,0,30,956,1,0,0,0,32,959,1,0,
@@ -25887,13 +25894,13 @@ export class HiveSqlParser extends SQLParserBase {
         1,0,0,0,618,4412,1,0,0,0,620,4417,1,0,0,0,622,4425,1,0,0,0,624,4433,
         1,0,0,0,626,4437,1,0,0,0,628,4449,1,0,0,0,630,4454,1,0,0,0,632,4465,
         1,0,0,0,634,4472,1,0,0,0,636,4474,1,0,0,0,638,4478,1,0,0,0,640,4480,
-        1,0,0,0,642,4485,1,0,0,0,644,4487,1,0,0,0,646,4489,1,0,0,0,648,4541,
-        1,0,0,0,650,4708,1,0,0,0,652,4710,1,0,0,0,654,4719,1,0,0,0,656,4721,
-        1,0,0,0,658,4732,1,0,0,0,660,4734,1,0,0,0,662,4739,1,0,0,0,664,4741,
-        1,0,0,0,666,4743,1,0,0,0,668,4745,1,0,0,0,670,4747,1,0,0,0,672,4749,
-        1,0,0,0,674,4751,1,0,0,0,676,4753,1,0,0,0,678,4755,1,0,0,0,680,4757,
-        1,0,0,0,682,4759,1,0,0,0,684,4767,1,0,0,0,686,4775,1,0,0,0,688,4789,
-        1,0,0,0,690,4791,1,0,0,0,692,694,3,2,1,0,693,692,1,0,0,0,694,697,
+        1,0,0,0,642,4485,1,0,0,0,644,4487,1,0,0,0,646,4489,1,0,0,0,648,4542,
+        1,0,0,0,650,4709,1,0,0,0,652,4711,1,0,0,0,654,4720,1,0,0,0,656,4722,
+        1,0,0,0,658,4733,1,0,0,0,660,4735,1,0,0,0,662,4740,1,0,0,0,664,4742,
+        1,0,0,0,666,4744,1,0,0,0,668,4746,1,0,0,0,670,4748,1,0,0,0,672,4750,
+        1,0,0,0,674,4752,1,0,0,0,676,4754,1,0,0,0,678,4756,1,0,0,0,680,4758,
+        1,0,0,0,682,4760,1,0,0,0,684,4768,1,0,0,0,686,4776,1,0,0,0,688,4790,
+        1,0,0,0,690,4792,1,0,0,0,692,694,3,2,1,0,693,692,1,0,0,0,694,697,
         1,0,0,0,695,693,1,0,0,0,695,696,1,0,0,0,696,698,1,0,0,0,697,695,
         1,0,0,0,698,699,5,0,0,1,699,1,1,0,0,0,700,703,3,4,2,0,701,703,3,
         10,5,0,702,700,1,0,0,0,702,701,1,0,0,0,703,705,1,0,0,0,704,706,5,
@@ -27242,172 +27249,173 @@ export class HiveSqlParser extends SQLParserBase {
         1,0,0,0,4479,639,1,0,0,0,4480,4483,3,638,319,0,4481,4482,5,395,0,
         0,4482,4484,3,638,319,0,4483,4481,1,0,0,0,4483,4484,1,0,0,0,4484,
         641,1,0,0,0,4485,4486,3,638,319,0,4486,643,1,0,0,0,4487,4488,7,45,
-        0,0,4488,645,1,0,0,0,4489,4490,7,46,0,0,4490,647,1,0,0,0,4491,4542,
-        3,638,319,0,4492,4542,5,171,0,0,4493,4542,5,237,0,0,4494,4542,5,
-        198,0,0,4495,4542,5,268,0,0,4496,4542,5,369,0,0,4497,4542,5,241,
-        0,0,4498,4542,5,165,0,0,4499,4542,5,292,0,0,4500,4542,5,356,0,0,
-        4501,4542,5,144,0,0,4502,4542,5,203,0,0,4503,4542,5,219,0,0,4504,
-        4542,5,126,0,0,4505,4542,5,188,0,0,4506,4542,5,101,0,0,4507,4542,
-        5,329,0,0,4508,4542,5,224,0,0,4509,4542,5,291,0,0,4510,4542,5,145,
-        0,0,4511,4542,5,304,0,0,4512,4542,5,135,0,0,4513,4542,5,318,0,0,
-        4514,4542,5,161,0,0,4515,4542,5,54,0,0,4516,4542,5,166,0,0,4517,
-        4542,5,358,0,0,4518,4542,5,45,0,0,4519,4542,5,347,0,0,4520,4542,
-        5,96,0,0,4521,4542,5,154,0,0,4522,4542,5,269,0,0,4523,4542,5,337,
-        0,0,4524,4542,5,225,0,0,4525,4542,5,108,0,0,4526,4542,5,141,0,0,
-        4527,4542,5,365,0,0,4528,4542,5,21,0,0,4529,4542,5,78,0,0,4530,4542,
-        5,374,0,0,4531,4542,5,336,0,0,4532,4542,5,167,0,0,4533,4542,5,134,
-        0,0,4534,4542,5,216,0,0,4535,4542,5,27,0,0,4536,4542,5,370,0,0,4537,
-        4542,5,263,0,0,4538,4542,5,25,0,0,4539,4542,5,62,0,0,4540,4542,5,
-        17,0,0,4541,4491,1,0,0,0,4541,4492,1,0,0,0,4541,4493,1,0,0,0,4541,
-        4494,1,0,0,0,4541,4495,1,0,0,0,4541,4496,1,0,0,0,4541,4497,1,0,0,
-        0,4541,4498,1,0,0,0,4541,4499,1,0,0,0,4541,4500,1,0,0,0,4541,4501,
-        1,0,0,0,4541,4502,1,0,0,0,4541,4503,1,0,0,0,4541,4504,1,0,0,0,4541,
-        4505,1,0,0,0,4541,4506,1,0,0,0,4541,4507,1,0,0,0,4541,4508,1,0,0,
-        0,4541,4509,1,0,0,0,4541,4510,1,0,0,0,4541,4511,1,0,0,0,4541,4512,
-        1,0,0,0,4541,4513,1,0,0,0,4541,4514,1,0,0,0,4541,4515,1,0,0,0,4541,
-        4516,1,0,0,0,4541,4517,1,0,0,0,4541,4518,1,0,0,0,4541,4519,1,0,0,
-        0,4541,4520,1,0,0,0,4541,4521,1,0,0,0,4541,4522,1,0,0,0,4541,4523,
-        1,0,0,0,4541,4524,1,0,0,0,4541,4525,1,0,0,0,4541,4526,1,0,0,0,4541,
-        4527,1,0,0,0,4541,4528,1,0,0,0,4541,4529,1,0,0,0,4541,4530,1,0,0,
-        0,4541,4531,1,0,0,0,4541,4532,1,0,0,0,4541,4533,1,0,0,0,4541,4534,
-        1,0,0,0,4541,4535,1,0,0,0,4541,4536,1,0,0,0,4541,4537,1,0,0,0,4541,
-        4538,1,0,0,0,4541,4539,1,0,0,0,4541,4540,1,0,0,0,4542,649,1,0,0,
-        0,4543,4544,5,58,0,0,4544,4545,5,280,0,0,4545,4547,5,243,0,0,4546,
-        4548,3,32,16,0,4547,4546,1,0,0,0,4547,4548,1,0,0,0,4548,4558,1,0,
-        0,0,4549,4550,3,638,319,0,4550,4551,5,184,0,0,4551,4552,3,638,319,
-        0,4552,4559,1,0,0,0,4553,4556,3,638,319,0,4554,4555,5,387,0,0,4555,
-        4557,3,656,328,0,4556,4554,1,0,0,0,4556,4557,1,0,0,0,4557,4559,1,
-        0,0,0,4558,4549,1,0,0,0,4558,4553,1,0,0,0,4559,4709,1,0,0,0,4560,
-        4561,5,9,0,0,4561,4562,5,280,0,0,4562,4563,5,243,0,0,4563,4588,3,
-        638,319,0,4564,4589,5,373,0,0,4565,4589,3,664,332,0,4566,4567,5,
-        304,0,0,4567,4589,3,656,328,0,4568,4569,5,363,0,0,4569,4574,3,658,
-        329,0,4570,4571,5,397,0,0,4571,4573,3,658,329,0,4572,4570,1,0,0,
-        0,4573,4576,1,0,0,0,4574,4572,1,0,0,0,4574,4575,1,0,0,0,4575,4589,
-        1,0,0,0,4576,4574,1,0,0,0,4577,4578,5,274,0,0,4578,4579,5,341,0,
-        0,4579,4589,3,638,319,0,4580,4582,3,660,330,0,4581,4583,3,662,331,
-        0,4582,4581,1,0,0,0,4582,4583,1,0,0,0,4583,4589,1,0,0,0,4584,4586,
-        3,662,331,0,4585,4587,3,660,330,0,4586,4585,1,0,0,0,4586,4587,1,
-        0,0,0,4587,4589,1,0,0,0,4588,4564,1,0,0,0,4588,4565,1,0,0,0,4588,
-        4566,1,0,0,0,4588,4568,1,0,0,0,4588,4577,1,0,0,0,4588,4580,1,0,0,
-        0,4588,4584,1,0,0,0,4589,4709,1,0,0,0,4590,4591,5,101,0,0,4591,4592,
-        5,280,0,0,4592,4594,5,243,0,0,4593,4595,3,30,15,0,4594,4593,1,0,
-        0,0,4594,4595,1,0,0,0,4595,4596,1,0,0,0,4596,4709,3,638,319,0,4597,
-        4600,3,662,331,0,4598,4600,3,664,332,0,4599,4597,1,0,0,0,4599,4598,
-        1,0,0,0,4600,4601,1,0,0,0,4601,4602,5,390,0,0,4602,4603,5,197,0,
-        0,4603,4709,1,0,0,0,4604,4616,5,278,0,0,4605,4606,5,3,0,0,4606,4607,
-        5,280,0,0,4607,4608,5,243,0,0,4608,4609,5,387,0,0,4609,4617,3,638,
-        319,0,4610,4611,5,280,0,0,4611,4612,5,243,0,0,4612,4613,3,638,319,
-        0,4613,4614,5,387,0,0,4614,4615,3,638,319,0,4615,4617,1,0,0,0,4616,
-        4605,1,0,0,0,4616,4610,1,0,0,0,4617,4709,1,0,0,0,4618,4619,5,58,
-        0,0,4619,4620,5,348,0,0,4620,4621,3,638,319,0,4621,4622,5,395,0,
-        0,4622,4623,3,638,319,0,4623,4624,5,383,0,0,4624,4625,3,684,342,
-        0,4625,4626,5,99,0,0,4626,4627,3,686,343,0,4627,4709,1,0,0,0,4628,
-        4629,5,9,0,0,4629,4630,5,348,0,0,4630,4631,3,638,319,0,4631,4632,
-        5,395,0,0,4632,4649,3,638,319,0,4633,4634,5,383,0,0,4634,4635,3,
-        684,342,0,4635,4636,5,99,0,0,4636,4637,3,686,343,0,4637,4650,1,0,
-        0,0,4638,4639,5,4,0,0,4639,4643,5,341,0,0,4640,4641,5,101,0,0,4641,
-        4643,5,139,0,0,4642,4638,1,0,0,0,4642,4640,1,0,0,0,4643,4647,1,0,
-        0,0,4644,4645,5,246,0,0,4645,4648,3,682,341,0,4646,4648,5,362,0,
-        0,4647,4644,1,0,0,0,4647,4646,1,0,0,0,4648,4650,1,0,0,0,4649,4633,
-        1,0,0,0,4649,4642,1,0,0,0,4650,4709,1,0,0,0,4651,4652,5,101,0,0,
-        4652,4653,5,348,0,0,4653,4654,3,638,319,0,4654,4655,5,395,0,0,4655,
-        4656,3,638,319,0,4656,4709,1,0,0,0,4657,4658,5,58,0,0,4658,4659,
-        5,246,0,0,4659,4660,3,638,319,0,4660,4661,5,395,0,0,4661,4662,3,
-        682,341,0,4662,4663,5,387,0,0,4663,4664,3,690,345,0,4664,4709,1,
-        0,0,0,4665,4666,5,9,0,0,4666,4667,5,246,0,0,4667,4668,3,638,319,
-        0,4668,4669,5,395,0,0,4669,4677,3,682,341,0,4670,4671,5,304,0,0,
-        4671,4678,3,690,345,0,4672,4673,5,363,0,0,4673,4678,5,294,0,0,4674,
-        4675,7,47,0,0,4675,4676,5,348,0,0,4676,4678,3,638,319,0,4677,4670,
-        1,0,0,0,4677,4672,1,0,0,0,4677,4674,1,0,0,0,4678,4709,1,0,0,0,4679,
-        4680,5,101,0,0,4680,4681,5,246,0,0,4681,4682,3,638,319,0,4682,4683,
-        5,395,0,0,4683,4684,3,682,341,0,4684,4709,1,0,0,0,4685,4686,7,48,
-        0,0,4686,4687,3,652,326,0,4687,4688,5,200,0,0,4688,4689,5,426,0,
-        0,4689,4690,5,154,0,0,4690,4694,3,638,319,0,4691,4692,5,341,0,0,
-        4692,4695,3,682,341,0,4693,4695,5,362,0,0,4694,4691,1,0,0,0,4694,
-        4693,1,0,0,0,4695,4699,1,0,0,0,4696,4697,5,387,0,0,4697,4698,5,229,
-        0,0,4698,4700,5,431,0,0,4699,4696,1,0,0,0,4699,4700,1,0,0,0,4700,
-        4709,1,0,0,0,4701,4702,5,101,0,0,4702,4703,3,652,326,0,4703,4704,
-        5,200,0,0,4704,4705,5,426,0,0,4705,4706,5,154,0,0,4706,4707,3,638,
-        319,0,4707,4709,1,0,0,0,4708,4543,1,0,0,0,4708,4560,1,0,0,0,4708,
-        4590,1,0,0,0,4708,4599,1,0,0,0,4708,4604,1,0,0,0,4708,4618,1,0,0,
-        0,4708,4628,1,0,0,0,4708,4651,1,0,0,0,4708,4657,1,0,0,0,4708,4665,
-        1,0,0,0,4708,4679,1,0,0,0,4708,4685,1,0,0,0,4708,4701,1,0,0,0,4709,
-        651,1,0,0,0,4710,4711,7,49,0,0,4711,653,1,0,0,0,4712,4713,5,259,
-        0,0,4713,4714,5,405,0,0,4714,4720,5,431,0,0,4715,4716,5,83,0,0,4716,
-        4717,5,246,0,0,4717,4718,5,405,0,0,4718,4720,3,682,341,0,4719,4712,
-        1,0,0,0,4719,4715,1,0,0,0,4720,655,1,0,0,0,4721,4726,3,654,327,0,
-        4722,4723,5,397,0,0,4723,4725,3,654,327,0,4724,4722,1,0,0,0,4725,
-        4728,1,0,0,0,4726,4724,1,0,0,0,4726,4727,1,0,0,0,4727,657,1,0,0,
-        0,4728,4726,1,0,0,0,4729,4733,5,259,0,0,4730,4731,5,83,0,0,4731,
-        4733,5,246,0,0,4732,4729,1,0,0,0,4732,4730,1,0,0,0,4733,659,1,0,
-        0,0,4734,4737,5,2,0,0,4735,4736,5,387,0,0,4736,4738,5,278,0,0,4737,
-        4735,1,0,0,0,4737,4738,1,0,0,0,4738,661,1,0,0,0,4739,4740,7,50,0,
-        0,4740,663,1,0,0,0,4741,4742,7,51,0,0,4742,665,1,0,0,0,4743,4744,
-        7,52,0,0,4744,667,1,0,0,0,4745,4746,7,53,0,0,4746,669,1,0,0,0,4747,
-        4748,7,54,0,0,4748,671,1,0,0,0,4749,4750,7,55,0,0,4750,673,1,0,0,
-        0,4751,4752,7,56,0,0,4752,675,1,0,0,0,4753,4754,7,57,0,0,4754,677,
-        1,0,0,0,4755,4756,7,58,0,0,4756,679,1,0,0,0,4757,4758,7,59,0,0,4758,
-        681,1,0,0,0,4759,4764,3,638,319,0,4760,4761,5,395,0,0,4761,4763,
-        3,638,319,0,4762,4760,1,0,0,0,4763,4766,1,0,0,0,4764,4762,1,0,0,
-        0,4764,4765,1,0,0,0,4765,683,1,0,0,0,4766,4764,1,0,0,0,4767,4768,
-        3,638,319,0,4768,4769,5,411,0,0,4769,4770,7,26,0,0,4770,685,1,0,
-        0,0,4771,4776,5,176,0,0,4772,4773,5,211,0,0,4773,4774,5,341,0,0,
-        4774,4776,3,682,341,0,4775,4771,1,0,0,0,4775,4772,1,0,0,0,4776,687,
-        1,0,0,0,4777,4778,5,8,0,0,4778,4779,5,405,0,0,4779,4790,5,431,0,
-        0,4780,4781,5,259,0,0,4781,4782,5,405,0,0,4782,4790,5,431,0,0,4783,
-        4784,5,294,0,0,4784,4785,5,405,0,0,4785,4790,5,426,0,0,4786,4787,
-        5,240,0,0,4787,4788,5,405,0,0,4788,4790,3,682,341,0,4789,4777,1,
-        0,0,0,4789,4780,1,0,0,0,4789,4783,1,0,0,0,4789,4786,1,0,0,0,4790,
-        689,1,0,0,0,4791,4796,3,688,344,0,4792,4793,5,397,0,0,4793,4795,
-        3,688,344,0,4794,4792,1,0,0,0,4795,4798,1,0,0,0,4796,4794,1,0,0,
-        0,4796,4797,1,0,0,0,4797,691,1,0,0,0,4798,4796,1,0,0,0,621,695,702,
-        705,711,717,724,734,737,741,756,763,769,774,779,782,806,813,816,
-        821,826,832,836,849,853,857,862,869,873,878,885,889,894,942,949,
-        954,977,981,985,988,992,997,1003,1007,1013,1015,1026,1030,1037,1045,
-        1048,1053,1057,1060,1070,1078,1082,1085,1089,1093,1096,1101,1107,
-        1112,1117,1121,1132,1134,1138,1148,1152,1158,1161,1168,1173,1181,
-        1186,1190,1198,1203,1209,1215,1218,1221,1224,1233,1241,1246,1254,
-        1261,1264,1267,1269,1280,1282,1285,1288,1291,1294,1297,1299,1311,
-        1317,1325,1327,1337,1370,1375,1379,1383,1390,1397,1403,1407,1410,
-        1417,1440,1445,1449,1457,1466,1473,1479,1486,1489,1495,1502,1510,
-        1519,1528,1535,1555,1562,1564,1571,1581,1589,1593,1597,1610,1619,
-        1635,1639,1644,1649,1652,1655,1658,1661,1664,1669,1678,1682,1689,
-        1692,1695,1698,1710,1716,1742,1750,1754,1757,1760,1763,1766,1769,
-        1772,1775,1784,1794,1797,1817,1823,1829,1832,1834,1841,1848,1861,
-        1866,1875,1883,1891,1904,1917,1933,1937,1952,1958,1961,1964,1967,
-        1970,1974,1989,1992,2003,2017,2051,2059,2064,2072,2077,2082,2089,
-        2097,2105,2113,2118,2128,2132,2140,2149,2152,2156,2163,2169,2173,
-        2179,2183,2195,2204,2215,2219,2226,2238,2248,2251,2258,2264,2268,
-        2271,2274,2280,2284,2288,2293,2297,2301,2305,2313,2317,2321,2325,
-        2329,2337,2341,2345,2353,2358,2363,2367,2371,2378,2387,2395,2407,
-        2425,2428,2434,2460,2463,2469,2477,2485,2498,2505,2508,2511,2514,
-        2517,2520,2523,2526,2529,2532,2535,2540,2543,2546,2549,2552,2555,
-        2558,2561,2564,2567,2570,2572,2578,2582,2585,2588,2591,2594,2597,
-        2604,2608,2611,2614,2617,2620,2623,2630,2633,2641,2645,2652,2654,
-        2657,2662,2665,2669,2674,2680,2688,2696,2706,2709,2713,2717,2722,
-        2729,2733,2735,2739,2746,2751,2764,2772,2791,2801,2814,2824,2828,
-        2832,2838,2845,2852,2861,2868,2888,2891,2905,2920,2924,2944,2956,
-        2962,2965,2968,2974,2980,2987,2995,3001,3005,3010,3013,3017,3024,
-        3029,3034,3037,3039,3047,3055,3059,3063,3067,3084,3101,3108,3117,
-        3122,3125,3128,3132,3147,3161,3164,3175,3179,3182,3185,3189,3194,
-        3197,3200,3203,3206,3209,3215,3218,3221,3224,3227,3230,3233,3236,
-        3239,3242,3246,3248,3254,3259,3262,3265,3268,3271,3277,3280,3283,
-        3286,3289,3292,3295,3298,3301,3304,3308,3310,3312,3317,3322,3326,
-        3330,3335,3340,3349,3359,3367,3379,3382,3388,3395,3402,3409,3416,
-        3425,3429,3436,3441,3445,3449,3452,3455,3466,3470,3472,3475,3488,
-        3491,3494,3506,3509,3516,3525,3530,3532,3534,3551,3554,3562,3565,
-        3569,3572,3575,3578,3581,3593,3601,3608,3611,3618,3621,3626,3633,
-        3641,3649,3654,3658,3663,3670,3684,3687,3691,3702,3712,3715,3722,
-        3731,3734,3740,3743,3750,3755,3758,3771,3777,3779,3787,3790,3800,
-        3805,3807,3819,3825,3827,3834,3841,3855,3861,3864,3867,3870,3879,
-        3886,3892,3901,3905,3913,3923,3933,3938,3942,3948,3953,3963,3967,
-        3970,3975,3978,3982,3987,3998,4000,4009,4028,4038,4041,4048,4051,
-        4061,4068,4071,4073,4084,4094,4096,4105,4110,4119,4132,4136,4148,
-        4152,4161,4180,4198,4210,4225,4229,4245,4252,4266,4271,4281,4283,
-        4291,4299,4307,4315,4323,4331,4342,4346,4354,4370,4374,4379,4392,
-        4401,4403,4412,4417,4423,4430,4435,4444,4452,4460,4468,4478,4483,
-        4541,4547,4556,4558,4574,4582,4586,4588,4594,4599,4616,4642,4647,
-        4649,4677,4694,4699,4708,4719,4726,4732,4737,4764,4775,4789,4796
+        0,0,4488,645,1,0,0,0,4489,4490,7,46,0,0,4490,647,1,0,0,0,4491,4543,
+        3,638,319,0,4492,4543,5,299,0,0,4493,4543,5,171,0,0,4494,4543,5,
+        237,0,0,4495,4543,5,198,0,0,4496,4543,5,268,0,0,4497,4543,5,369,
+        0,0,4498,4543,5,241,0,0,4499,4543,5,165,0,0,4500,4543,5,292,0,0,
+        4501,4543,5,356,0,0,4502,4543,5,144,0,0,4503,4543,5,203,0,0,4504,
+        4543,5,219,0,0,4505,4543,5,126,0,0,4506,4543,5,188,0,0,4507,4543,
+        5,101,0,0,4508,4543,5,329,0,0,4509,4543,5,224,0,0,4510,4543,5,291,
+        0,0,4511,4543,5,145,0,0,4512,4543,5,304,0,0,4513,4543,5,135,0,0,
+        4514,4543,5,318,0,0,4515,4543,5,161,0,0,4516,4543,5,54,0,0,4517,
+        4543,5,166,0,0,4518,4543,5,358,0,0,4519,4543,5,45,0,0,4520,4543,
+        5,347,0,0,4521,4543,5,96,0,0,4522,4543,5,154,0,0,4523,4543,5,269,
+        0,0,4524,4543,5,337,0,0,4525,4543,5,225,0,0,4526,4543,5,108,0,0,
+        4527,4543,5,141,0,0,4528,4543,5,365,0,0,4529,4543,5,21,0,0,4530,
+        4543,5,78,0,0,4531,4543,5,374,0,0,4532,4543,5,336,0,0,4533,4543,
+        5,167,0,0,4534,4543,5,134,0,0,4535,4543,5,216,0,0,4536,4543,5,27,
+        0,0,4537,4543,5,370,0,0,4538,4543,5,263,0,0,4539,4543,5,25,0,0,4540,
+        4543,5,62,0,0,4541,4543,5,17,0,0,4542,4491,1,0,0,0,4542,4492,1,0,
+        0,0,4542,4493,1,0,0,0,4542,4494,1,0,0,0,4542,4495,1,0,0,0,4542,4496,
+        1,0,0,0,4542,4497,1,0,0,0,4542,4498,1,0,0,0,4542,4499,1,0,0,0,4542,
+        4500,1,0,0,0,4542,4501,1,0,0,0,4542,4502,1,0,0,0,4542,4503,1,0,0,
+        0,4542,4504,1,0,0,0,4542,4505,1,0,0,0,4542,4506,1,0,0,0,4542,4507,
+        1,0,0,0,4542,4508,1,0,0,0,4542,4509,1,0,0,0,4542,4510,1,0,0,0,4542,
+        4511,1,0,0,0,4542,4512,1,0,0,0,4542,4513,1,0,0,0,4542,4514,1,0,0,
+        0,4542,4515,1,0,0,0,4542,4516,1,0,0,0,4542,4517,1,0,0,0,4542,4518,
+        1,0,0,0,4542,4519,1,0,0,0,4542,4520,1,0,0,0,4542,4521,1,0,0,0,4542,
+        4522,1,0,0,0,4542,4523,1,0,0,0,4542,4524,1,0,0,0,4542,4525,1,0,0,
+        0,4542,4526,1,0,0,0,4542,4527,1,0,0,0,4542,4528,1,0,0,0,4542,4529,
+        1,0,0,0,4542,4530,1,0,0,0,4542,4531,1,0,0,0,4542,4532,1,0,0,0,4542,
+        4533,1,0,0,0,4542,4534,1,0,0,0,4542,4535,1,0,0,0,4542,4536,1,0,0,
+        0,4542,4537,1,0,0,0,4542,4538,1,0,0,0,4542,4539,1,0,0,0,4542,4540,
+        1,0,0,0,4542,4541,1,0,0,0,4543,649,1,0,0,0,4544,4545,5,58,0,0,4545,
+        4546,5,280,0,0,4546,4548,5,243,0,0,4547,4549,3,32,16,0,4548,4547,
+        1,0,0,0,4548,4549,1,0,0,0,4549,4559,1,0,0,0,4550,4551,3,638,319,
+        0,4551,4552,5,184,0,0,4552,4553,3,638,319,0,4553,4560,1,0,0,0,4554,
+        4557,3,638,319,0,4555,4556,5,387,0,0,4556,4558,3,656,328,0,4557,
+        4555,1,0,0,0,4557,4558,1,0,0,0,4558,4560,1,0,0,0,4559,4550,1,0,0,
+        0,4559,4554,1,0,0,0,4560,4710,1,0,0,0,4561,4562,5,9,0,0,4562,4563,
+        5,280,0,0,4563,4564,5,243,0,0,4564,4589,3,638,319,0,4565,4590,5,
+        373,0,0,4566,4590,3,664,332,0,4567,4568,5,304,0,0,4568,4590,3,656,
+        328,0,4569,4570,5,363,0,0,4570,4575,3,658,329,0,4571,4572,5,397,
+        0,0,4572,4574,3,658,329,0,4573,4571,1,0,0,0,4574,4577,1,0,0,0,4575,
+        4573,1,0,0,0,4575,4576,1,0,0,0,4576,4590,1,0,0,0,4577,4575,1,0,0,
+        0,4578,4579,5,274,0,0,4579,4580,5,341,0,0,4580,4590,3,638,319,0,
+        4581,4583,3,660,330,0,4582,4584,3,662,331,0,4583,4582,1,0,0,0,4583,
+        4584,1,0,0,0,4584,4590,1,0,0,0,4585,4587,3,662,331,0,4586,4588,3,
+        660,330,0,4587,4586,1,0,0,0,4587,4588,1,0,0,0,4588,4590,1,0,0,0,
+        4589,4565,1,0,0,0,4589,4566,1,0,0,0,4589,4567,1,0,0,0,4589,4569,
+        1,0,0,0,4589,4578,1,0,0,0,4589,4581,1,0,0,0,4589,4585,1,0,0,0,4590,
+        4710,1,0,0,0,4591,4592,5,101,0,0,4592,4593,5,280,0,0,4593,4595,5,
+        243,0,0,4594,4596,3,30,15,0,4595,4594,1,0,0,0,4595,4596,1,0,0,0,
+        4596,4597,1,0,0,0,4597,4710,3,638,319,0,4598,4601,3,662,331,0,4599,
+        4601,3,664,332,0,4600,4598,1,0,0,0,4600,4599,1,0,0,0,4601,4602,1,
+        0,0,0,4602,4603,5,390,0,0,4603,4604,5,197,0,0,4604,4710,1,0,0,0,
+        4605,4617,5,278,0,0,4606,4607,5,3,0,0,4607,4608,5,280,0,0,4608,4609,
+        5,243,0,0,4609,4610,5,387,0,0,4610,4618,3,638,319,0,4611,4612,5,
+        280,0,0,4612,4613,5,243,0,0,4613,4614,3,638,319,0,4614,4615,5,387,
+        0,0,4615,4616,3,638,319,0,4616,4618,1,0,0,0,4617,4606,1,0,0,0,4617,
+        4611,1,0,0,0,4618,4710,1,0,0,0,4619,4620,5,58,0,0,4620,4621,5,348,
+        0,0,4621,4622,3,638,319,0,4622,4623,5,395,0,0,4623,4624,3,638,319,
+        0,4624,4625,5,383,0,0,4625,4626,3,684,342,0,4626,4627,5,99,0,0,4627,
+        4628,3,686,343,0,4628,4710,1,0,0,0,4629,4630,5,9,0,0,4630,4631,5,
+        348,0,0,4631,4632,3,638,319,0,4632,4633,5,395,0,0,4633,4650,3,638,
+        319,0,4634,4635,5,383,0,0,4635,4636,3,684,342,0,4636,4637,5,99,0,
+        0,4637,4638,3,686,343,0,4638,4651,1,0,0,0,4639,4640,5,4,0,0,4640,
+        4644,5,341,0,0,4641,4642,5,101,0,0,4642,4644,5,139,0,0,4643,4639,
+        1,0,0,0,4643,4641,1,0,0,0,4644,4648,1,0,0,0,4645,4646,5,246,0,0,
+        4646,4649,3,682,341,0,4647,4649,5,362,0,0,4648,4645,1,0,0,0,4648,
+        4647,1,0,0,0,4649,4651,1,0,0,0,4650,4634,1,0,0,0,4650,4643,1,0,0,
+        0,4651,4710,1,0,0,0,4652,4653,5,101,0,0,4653,4654,5,348,0,0,4654,
+        4655,3,638,319,0,4655,4656,5,395,0,0,4656,4657,3,638,319,0,4657,
+        4710,1,0,0,0,4658,4659,5,58,0,0,4659,4660,5,246,0,0,4660,4661,3,
+        638,319,0,4661,4662,5,395,0,0,4662,4663,3,682,341,0,4663,4664,5,
+        387,0,0,4664,4665,3,690,345,0,4665,4710,1,0,0,0,4666,4667,5,9,0,
+        0,4667,4668,5,246,0,0,4668,4669,3,638,319,0,4669,4670,5,395,0,0,
+        4670,4678,3,682,341,0,4671,4672,5,304,0,0,4672,4679,3,690,345,0,
+        4673,4674,5,363,0,0,4674,4679,5,294,0,0,4675,4676,7,47,0,0,4676,
+        4677,5,348,0,0,4677,4679,3,638,319,0,4678,4671,1,0,0,0,4678,4673,
+        1,0,0,0,4678,4675,1,0,0,0,4679,4710,1,0,0,0,4680,4681,5,101,0,0,
+        4681,4682,5,246,0,0,4682,4683,3,638,319,0,4683,4684,5,395,0,0,4684,
+        4685,3,682,341,0,4685,4710,1,0,0,0,4686,4687,7,48,0,0,4687,4688,
+        3,652,326,0,4688,4689,5,200,0,0,4689,4690,5,426,0,0,4690,4691,5,
+        154,0,0,4691,4695,3,638,319,0,4692,4693,5,341,0,0,4693,4696,3,682,
+        341,0,4694,4696,5,362,0,0,4695,4692,1,0,0,0,4695,4694,1,0,0,0,4696,
+        4700,1,0,0,0,4697,4698,5,387,0,0,4698,4699,5,229,0,0,4699,4701,5,
+        431,0,0,4700,4697,1,0,0,0,4700,4701,1,0,0,0,4701,4710,1,0,0,0,4702,
+        4703,5,101,0,0,4703,4704,3,652,326,0,4704,4705,5,200,0,0,4705,4706,
+        5,426,0,0,4706,4707,5,154,0,0,4707,4708,3,638,319,0,4708,4710,1,
+        0,0,0,4709,4544,1,0,0,0,4709,4561,1,0,0,0,4709,4591,1,0,0,0,4709,
+        4600,1,0,0,0,4709,4605,1,0,0,0,4709,4619,1,0,0,0,4709,4629,1,0,0,
+        0,4709,4652,1,0,0,0,4709,4658,1,0,0,0,4709,4666,1,0,0,0,4709,4680,
+        1,0,0,0,4709,4686,1,0,0,0,4709,4702,1,0,0,0,4710,651,1,0,0,0,4711,
+        4712,7,49,0,0,4712,653,1,0,0,0,4713,4714,5,259,0,0,4714,4715,5,405,
+        0,0,4715,4721,5,431,0,0,4716,4717,5,83,0,0,4717,4718,5,246,0,0,4718,
+        4719,5,405,0,0,4719,4721,3,682,341,0,4720,4713,1,0,0,0,4720,4716,
+        1,0,0,0,4721,655,1,0,0,0,4722,4727,3,654,327,0,4723,4724,5,397,0,
+        0,4724,4726,3,654,327,0,4725,4723,1,0,0,0,4726,4729,1,0,0,0,4727,
+        4725,1,0,0,0,4727,4728,1,0,0,0,4728,657,1,0,0,0,4729,4727,1,0,0,
+        0,4730,4734,5,259,0,0,4731,4732,5,83,0,0,4732,4734,5,246,0,0,4733,
+        4730,1,0,0,0,4733,4731,1,0,0,0,4734,659,1,0,0,0,4735,4738,5,2,0,
+        0,4736,4737,5,387,0,0,4737,4739,5,278,0,0,4738,4736,1,0,0,0,4738,
+        4739,1,0,0,0,4739,661,1,0,0,0,4740,4741,7,50,0,0,4741,663,1,0,0,
+        0,4742,4743,7,51,0,0,4743,665,1,0,0,0,4744,4745,7,52,0,0,4745,667,
+        1,0,0,0,4746,4747,7,53,0,0,4747,669,1,0,0,0,4748,4749,7,54,0,0,4749,
+        671,1,0,0,0,4750,4751,7,55,0,0,4751,673,1,0,0,0,4752,4753,7,56,0,
+        0,4753,675,1,0,0,0,4754,4755,7,57,0,0,4755,677,1,0,0,0,4756,4757,
+        7,58,0,0,4757,679,1,0,0,0,4758,4759,7,59,0,0,4759,681,1,0,0,0,4760,
+        4765,3,638,319,0,4761,4762,5,395,0,0,4762,4764,3,638,319,0,4763,
+        4761,1,0,0,0,4764,4767,1,0,0,0,4765,4763,1,0,0,0,4765,4766,1,0,0,
+        0,4766,683,1,0,0,0,4767,4765,1,0,0,0,4768,4769,3,638,319,0,4769,
+        4770,5,411,0,0,4770,4771,7,26,0,0,4771,685,1,0,0,0,4772,4777,5,176,
+        0,0,4773,4774,5,211,0,0,4774,4775,5,341,0,0,4775,4777,3,682,341,
+        0,4776,4772,1,0,0,0,4776,4773,1,0,0,0,4777,687,1,0,0,0,4778,4779,
+        5,8,0,0,4779,4780,5,405,0,0,4780,4791,5,431,0,0,4781,4782,5,259,
+        0,0,4782,4783,5,405,0,0,4783,4791,5,431,0,0,4784,4785,5,294,0,0,
+        4785,4786,5,405,0,0,4786,4791,5,426,0,0,4787,4788,5,240,0,0,4788,
+        4789,5,405,0,0,4789,4791,3,682,341,0,4790,4778,1,0,0,0,4790,4781,
+        1,0,0,0,4790,4784,1,0,0,0,4790,4787,1,0,0,0,4791,689,1,0,0,0,4792,
+        4797,3,688,344,0,4793,4794,5,397,0,0,4794,4796,3,688,344,0,4795,
+        4793,1,0,0,0,4796,4799,1,0,0,0,4797,4795,1,0,0,0,4797,4798,1,0,0,
+        0,4798,691,1,0,0,0,4799,4797,1,0,0,0,621,695,702,705,711,717,724,
+        734,737,741,756,763,769,774,779,782,806,813,816,821,826,832,836,
+        849,853,857,862,869,873,878,885,889,894,942,949,954,977,981,985,
+        988,992,997,1003,1007,1013,1015,1026,1030,1037,1045,1048,1053,1057,
+        1060,1070,1078,1082,1085,1089,1093,1096,1101,1107,1112,1117,1121,
+        1132,1134,1138,1148,1152,1158,1161,1168,1173,1181,1186,1190,1198,
+        1203,1209,1215,1218,1221,1224,1233,1241,1246,1254,1261,1264,1267,
+        1269,1280,1282,1285,1288,1291,1294,1297,1299,1311,1317,1325,1327,
+        1337,1370,1375,1379,1383,1390,1397,1403,1407,1410,1417,1440,1445,
+        1449,1457,1466,1473,1479,1486,1489,1495,1502,1510,1519,1528,1535,
+        1555,1562,1564,1571,1581,1589,1593,1597,1610,1619,1635,1639,1644,
+        1649,1652,1655,1658,1661,1664,1669,1678,1682,1689,1692,1695,1698,
+        1710,1716,1742,1750,1754,1757,1760,1763,1766,1769,1772,1775,1784,
+        1794,1797,1817,1823,1829,1832,1834,1841,1848,1861,1866,1875,1883,
+        1891,1904,1917,1933,1937,1952,1958,1961,1964,1967,1970,1974,1989,
+        1992,2003,2017,2051,2059,2064,2072,2077,2082,2089,2097,2105,2113,
+        2118,2128,2132,2140,2149,2152,2156,2163,2169,2173,2179,2183,2195,
+        2204,2215,2219,2226,2238,2248,2251,2258,2264,2268,2271,2274,2280,
+        2284,2288,2293,2297,2301,2305,2313,2317,2321,2325,2329,2337,2341,
+        2345,2353,2358,2363,2367,2371,2378,2387,2395,2407,2425,2428,2434,
+        2460,2463,2469,2477,2485,2498,2505,2508,2511,2514,2517,2520,2523,
+        2526,2529,2532,2535,2540,2543,2546,2549,2552,2555,2558,2561,2564,
+        2567,2570,2572,2578,2582,2585,2588,2591,2594,2597,2604,2608,2611,
+        2614,2617,2620,2623,2630,2633,2641,2645,2652,2654,2657,2662,2665,
+        2669,2674,2680,2688,2696,2706,2709,2713,2717,2722,2729,2733,2735,
+        2739,2746,2751,2764,2772,2791,2801,2814,2824,2828,2832,2838,2845,
+        2852,2861,2868,2888,2891,2905,2920,2924,2944,2956,2962,2965,2968,
+        2974,2980,2987,2995,3001,3005,3010,3013,3017,3024,3029,3034,3037,
+        3039,3047,3055,3059,3063,3067,3084,3101,3108,3117,3122,3125,3128,
+        3132,3147,3161,3164,3175,3179,3182,3185,3189,3194,3197,3200,3203,
+        3206,3209,3215,3218,3221,3224,3227,3230,3233,3236,3239,3242,3246,
+        3248,3254,3259,3262,3265,3268,3271,3277,3280,3283,3286,3289,3292,
+        3295,3298,3301,3304,3308,3310,3312,3317,3322,3326,3330,3335,3340,
+        3349,3359,3367,3379,3382,3388,3395,3402,3409,3416,3425,3429,3436,
+        3441,3445,3449,3452,3455,3466,3470,3472,3475,3488,3491,3494,3506,
+        3509,3516,3525,3530,3532,3534,3551,3554,3562,3565,3569,3572,3575,
+        3578,3581,3593,3601,3608,3611,3618,3621,3626,3633,3641,3649,3654,
+        3658,3663,3670,3684,3687,3691,3702,3712,3715,3722,3731,3734,3740,
+        3743,3750,3755,3758,3771,3777,3779,3787,3790,3800,3805,3807,3819,
+        3825,3827,3834,3841,3855,3861,3864,3867,3870,3879,3886,3892,3901,
+        3905,3913,3923,3933,3938,3942,3948,3953,3963,3967,3970,3975,3978,
+        3982,3987,3998,4000,4009,4028,4038,4041,4048,4051,4061,4068,4071,
+        4073,4084,4094,4096,4105,4110,4119,4132,4136,4148,4152,4161,4180,
+        4198,4210,4225,4229,4245,4252,4266,4271,4281,4283,4291,4299,4307,
+        4315,4323,4331,4342,4346,4354,4370,4374,4379,4392,4401,4403,4412,
+        4417,4423,4430,4435,4444,4452,4460,4468,4478,4483,4542,4548,4557,
+        4559,4575,4583,4587,4589,4595,4600,4617,4643,4648,4650,4678,4695,
+        4700,4709,4720,4727,4733,4738,4765,4776,4790,4797
     ];
 
     private static __ATN: antlr.ATN;
@@ -44235,6 +44243,9 @@ export class ConfigPropertiesItemContext extends antlr.ParserRuleContext {
     }
     public id_(): Id_Context | null {
         return this.getRuleContext(0, Id_Context);
+    }
+    public KW_SELECT(): antlr.TerminalNode | null {
+        return this.getToken(HiveSqlParser.KW_SELECT, 0);
     }
     public KW_JOIN(): antlr.TerminalNode | null {
         return this.getToken(HiveSqlParser.KW_JOIN, 0);
