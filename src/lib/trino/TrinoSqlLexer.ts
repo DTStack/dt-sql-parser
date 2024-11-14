@@ -345,9 +345,9 @@ export class TrinoSqlLexer extends antlr.Lexer {
     public static readonly DIGIT_IDENTIFIER = 333;
     public static readonly QUOTED_IDENTIFIER = 334;
     public static readonly BACKQUOTED_IDENTIFIER = 335;
-    public static readonly SIMPLE_COMMENT = 336;
+    public static readonly LINE_COMMENT = 336;
     public static readonly BRACKETED_COMMENT = 337;
-    public static readonly WS = 338;
+    public static readonly WHITE_SPACE = 338;
     public static readonly UNRECOGNIZED = 339;
 
     public static readonly channelNames = [
@@ -474,8 +474,8 @@ export class TrinoSqlLexer extends antlr.Lexer {
         "SLASH", "PERCENT", "CONCAT", "QUESTION_MARK", "SEMICOLON", "STRING", 
         "UNICODE_STRING", "BINARY_LITERAL", "INTEGER_VALUE", "DECIMAL_VALUE", 
         "DOUBLE_VALUE", "IDENTIFIER", "DIGIT_IDENTIFIER", "QUOTED_IDENTIFIER", 
-        "BACKQUOTED_IDENTIFIER", "SIMPLE_COMMENT", "BRACKETED_COMMENT", 
-        "WS", "UNRECOGNIZED"
+        "BACKQUOTED_IDENTIFIER", "LINE_COMMENT", "BRACKETED_COMMENT", "WHITE_SPACE", 
+        "UNRECOGNIZED"
     ];
 
     public static readonly modeNames = [
@@ -547,7 +547,7 @@ export class TrinoSqlLexer extends antlr.Lexer {
         "DOUBLE_VALUE", "IDENTIFIER", "DIGIT_IDENTIFIER", "QUOTED_IDENTIFIER", 
         "BACKQUOTED_IDENTIFIER", "DECIMAL_INTEGER", "HEXADECIMAL_INTEGER", 
         "OCTAL_INTEGER", "BINARY_INTEGER", "EXPONENT", "DIGIT", "LETTER", 
-        "SIMPLE_COMMENT", "BRACKETED_COMMENT", "WS", "UNRECOGNIZED",
+        "LINE_COMMENT", "BRACKETED_COMMENT", "WHITE_SPACE", "UNRECOGNIZED",
     ];
 
 
