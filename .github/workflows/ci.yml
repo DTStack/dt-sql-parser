@@ -42,7 +42,7 @@ jobs:
               run: pnpm check-types
 
             - name: Run antlr4 all sql
-              run: pnpm antlr4 --lang all
+              run: pnpm antlr4 --all --check
 
     test:
         runs-on: ubuntu-latest
