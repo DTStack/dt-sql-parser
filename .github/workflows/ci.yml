@@ -41,6 +41,9 @@ jobs:
             - name: Run tsc check
               run: pnpm check-types
 
+            - name: Run antlr4 all sql
+              run: pnpm antlr4 --lang all
+
     test:
         runs-on: ubuntu-latest
         strategy:
