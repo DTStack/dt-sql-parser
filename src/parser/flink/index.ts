@@ -40,7 +40,8 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
     }
 
     protected createErrorListener(_errorListener: ErrorListener) {
-        return new FlinkErrorListener(_errorListener, this.preferredRules, this.locale);
+        const parserContext = this;
+        return new FlinkErrorListener(_errorListener, parserContext, this.preferredRules);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

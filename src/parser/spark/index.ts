@@ -39,7 +39,8 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
     }
 
     protected createErrorListener(_errorListener: ErrorListener) {
-        return new SparkErrorListener(_errorListener, this.preferredRules, this.locale);
+        const parserContext = this;
+        return new SparkErrorListener(_errorListener, parserContext, this.preferredRules);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
