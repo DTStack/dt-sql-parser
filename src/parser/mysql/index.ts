@@ -38,7 +38,7 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         return new MysqlSplitListener();
     }
 
-    protected createErrorListener(_errorListener: ErrorListener) {
+    protected createErrorListener(_errorListener: ErrorListener): MysqlErrorListener {
         const parserContext = this;
         return new MysqlErrorListener(_errorListener, parserContext, this.preferredRules);
     }

@@ -1,8 +1,7 @@
 import { CodeCompletionCore } from 'antlr4-c3';
-import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
+import { ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
 import { ImpalaSqlParser } from '../../lib/impala/ImpalaSqlParser';
-import { LOCALE_TYPE } from '../common/types';
 
 export class ImpalaErrorListener extends ParseErrorListener {
     private objectNames: Map<number, string> = new Map([

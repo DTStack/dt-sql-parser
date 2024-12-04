@@ -40,7 +40,7 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         return new HiveSqlSplitListener();
     }
 
-    protected createErrorListener(_errorListener: ErrorListener) {
+    protected createErrorListener(_errorListener: ErrorListener): HiveErrorListener {
         const parserContext = this;
         return new HiveErrorListener(_errorListener, parserContext, this.preferredRules);
     }

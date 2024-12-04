@@ -25,7 +25,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         return new TrinoSqlSplitListener();
     }
 
-    protected createErrorListener(_errorListener: ErrorListener) {
+    protected createErrorListener(_errorListener: ErrorListener): TrinoErrorListener {
         const parserContext = this;
         return new TrinoErrorListener(_errorListener, parserContext, this.preferredRules);
     }

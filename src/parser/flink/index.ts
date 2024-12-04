@@ -39,7 +39,7 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         return new FlinkSqlSplitListener();
     }
 
-    protected createErrorListener(_errorListener: ErrorListener) {
+    protected createErrorListener(_errorListener: ErrorListener): FlinkErrorListener {
         const parserContext = this;
         return new FlinkErrorListener(_errorListener, parserContext, this.preferredRules);
     }
