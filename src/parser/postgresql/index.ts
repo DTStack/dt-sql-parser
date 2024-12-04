@@ -43,8 +43,9 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         return new PostgreSqlSplitListener();
     }
 
-    protected createErrorListener(_errorListener: ErrorListener) {
-        return new PostgreSqlErrorListener(_errorListener, this.preferredRules, this.locale);
+    protected createErrorListener(_errorListener: ErrorListener): PostgreSqlErrorListener {
+        const parserContext = this;
+        return new PostgreSqlErrorListener(_errorListener, parserContext, this.preferredRules);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {

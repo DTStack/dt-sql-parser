@@ -10,8 +10,8 @@ import {
     InputMismatchException,
     NoViableAltException,
 } from 'antlr4ng';
-import { LOCALE_TYPE } from './types';
 import { transform } from './transform';
+import { BasicSQL } from './basicSQL';
 
 /**
  * Converted from {@link SyntaxError}.
@@ -48,10 +48,19 @@ export type ErrorListener = (parseError: ParseError, originalError: SyntaxError)
 
 export abstract class ParseErrorListener implements ANTLRErrorListener {
     private _errorListener: ErrorListener;
-    private locale: LOCALE_TYPE;
+    protected preferredRules: Set<number>;
+    protected get locale() {
+        return this.parserContext.locale;
+    }
+    protected parserContext: BasicSQL;
 
-    constructor(errorListener: ErrorListener, locale: LOCALE_TYPE = 'en_US') {
-        this.locale = locale;
+    constructor(
+        errorListener: ErrorListener,
+        parserContext: BasicSQL,
+        preferredRules: Set<number>
+    ) {
+        this.parserContext = parserContext;
+        this.preferredRules = preferredRules;
         this._errorListener = errorListener;
     }
 

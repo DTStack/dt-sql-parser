@@ -38,8 +38,9 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
         return new ImpalaSqlSplitListener();
     }
 
-    protected createErrorListener(_errorListener: ErrorListener) {
-        return new ImpalaErrorListener(_errorListener, this.preferredRules, this.locale);
+    protected createErrorListener(_errorListener: ErrorListener): ImpalaErrorListener {
+        const parserContext = this;
+        return new ImpalaErrorListener(_errorListener, parserContext, this.preferredRules);
     }
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
