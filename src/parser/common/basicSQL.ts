@@ -383,7 +383,6 @@ export abstract class BasicSQL<
 
         const allTokens = this.getAllTokens(input);
         let caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
-        debugger;
 
         if (!caretTokenIndex && caretTokenIndex !== 0) return null;
 
