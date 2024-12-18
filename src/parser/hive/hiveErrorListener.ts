@@ -16,6 +16,7 @@ export class HiveErrorListener extends ParseErrorListener {
         [HiveSqlParser.RULE_functionNameCreate, 'function'],
         [HiveSqlParser.RULE_columnName, 'column'],
         [HiveSqlParser.RULE_columnNameCreate, 'column'],
+        [HiveSqlParser.RULE_columnNamePath, 'column'],
     ]);
 
     public getExpectedText(parser: Parser, token: Token) {
@@ -59,7 +60,8 @@ export class HiveErrorListener extends ParseErrorListener {
                     case HiveSqlParser.RULE_viewName:
                     case HiveSqlParser.RULE_functionNameForDDL:
                     case HiveSqlParser.RULE_functionNameForInvoke:
-                    case HiveSqlParser.RULE_columnName: {
+                    case HiveSqlParser.RULE_columnName:
+                    case HiveSqlParser.RULE_columnNamePath: {
                         result.push(`{existing}${name}`);
                         break;
                     }

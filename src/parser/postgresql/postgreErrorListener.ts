@@ -14,6 +14,7 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
         [PostgreSqlParser.RULE_function_name, 'function'],
         [PostgreSqlParser.RULE_function_name_create, 'function'],
         [PostgreSqlParser.RULE_column_name, 'column'],
+        [PostgreSqlParser.RULE_column_name_path, 'column'],
         [PostgreSqlParser.RULE_column_name_create, 'column'],
         [PostgreSqlParser.RULE_schema_name_create, 'schema'],
         [PostgreSqlParser.RULE_schema_name, 'schema'],
@@ -63,8 +64,11 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
                     case PostgreSqlParser.RULE_view_name:
                     case PostgreSqlParser.RULE_database_name:
                     case PostgreSqlParser.RULE_procedure_name:
-                    case PostgreSqlParser.RULE_column_name: {
-                        result.push(`{existing}${name}`);
+                    case PostgreSqlParser.RULE_column_name:
+                    case PostgreSqlParser.RULE_column_name_path: {
+                        if (!result.includes(`{existing}${name}`)) {
+                            result.push(`{existing}${name}`);
+                        }
                         break;
                     }
                     case PostgreSqlParser.RULE_table_name_create:
