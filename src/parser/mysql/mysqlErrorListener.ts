@@ -1,12 +1,9 @@
 import { CodeCompletionCore } from 'antlr4-c3';
-import { ErrorListener, ParseErrorListener } from '../common/parseErrorListener';
+import { ParseErrorListener } from '../common/parseErrorListener';
 import { Parser, Token } from 'antlr4ng';
 import { MySqlParser } from '../../lib/mysql/MySqlParser';
-import { LOCALE_TYPE } from '../common/types';
 
 export class MysqlErrorListener extends ParseErrorListener {
-    private preferredRules: Set<number>;
-
     private objectNames: Map<number, string> = new Map([
         [MySqlParser.RULE_databaseName, 'database'],
         [MySqlParser.RULE_databaseNameCreate, 'database'],
@@ -20,22 +17,34 @@ export class MysqlErrorListener extends ParseErrorListener {
         [MySqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
-    constructor(errorListener: ErrorListener, preferredRules: Set<number>, locale: LOCALE_TYPE) {
-        super(errorListener, locale);
-        this.preferredRules = preferredRules;
-    }
-
     public getExpectedText(parser: Parser, token: Token) {
         let expectedText = '';
+        const input = this.parserContext.getParsedInput();
 
+        /**
+         * Get the program context.
+         * When called error listener, `this._parseTree` is still `undefined`,
+         * so we can't use cached parseTree in `getMinimumParserInfo`
+         */
         let currentContext = parser.context ?? undefined;
         while (currentContext?.parent) {
             currentContext = currentContext.parent;
         }
 
-        const core = new CodeCompletionCore(parser);
+        const parserInfo = this.parserContext.getMinimumParserInfo(
+            input,
+            token.tokenIndex,
+            currentContext
+        );
+
+        if (!parserInfo) return '';
+
+        const { parser: c3Parser, newTokenIndex, parseTree: c3Context } = parserInfo;
+
+        const core = new CodeCompletionCore(c3Parser);
         core.preferredRules = this.preferredRules;
-        const candidates = core.collectCandidates(token.tokenIndex, currentContext);
+
+        const candidates = core.collectCandidates(newTokenIndex, c3Context);
 
         if (candidates.rules.size) {
             const result: string[] = [];
