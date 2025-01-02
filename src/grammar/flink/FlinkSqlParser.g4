@@ -241,6 +241,7 @@ mapTypeDimension
 
 rowTypeDimension
     : LESS_SYMBOL columnName columnType (COMMA columnName columnType)* GREATER_SYMBOL
+    | LR_BRACKET columnName columnType (COMMA columnName columnType)* RR_BRACKET
     ;
 
 columnConstraint
@@ -647,7 +648,7 @@ limitClause
     ;
 
 partitionByClause
-    : KW_PARTITION KW_BY columnName (COMMA columnName)*
+    : KW_PARTITION KW_BY (columnName | primaryExpression) (COMMA (columnName | primaryExpression))*
     ;
 
 quantifiers
