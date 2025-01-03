@@ -357,6 +357,57 @@ Call the `getAllEntities` method on the SQL instance, and pass in the sql text a
 
 Position is not required, if the position is passed, then in the collected entities, if the entity is located under the statement where the corresponding position is located, then the statement object to which the entity belongs will be marked with `isContainCaret`, which can help you quickly filter out the required entities when combined with the code completion function.
 
+### Get semantic context information
+
+Call the `getSemanticContextAtCaretPosition` method on the SQL instance, passing in the sql text and the line and column numbers at the specified position, for example:
+
+```typescript
+import { HiveSQL } from 'dt-sql-parser';
+
+const hive = new HiveSQL();
+const sql = 'SELECT * FROM tb;';
+const pos = { lineNumber: 1, column: 18 }; // after 'tb;'
+const semanticContext = hive.getSemanticContextAtCaretPosition(sql, pos);
+
+console.log(semanticContext);
+```
+
+*output*
+
+```typescript
+/*
+{
+  isStatementBeginning: true,
+}
+*/
+```
+
+Currently, the semantic context information that can be collected is as follows. If there are more requirements, please submit an [issue](https://github.com/DTStack/dt-sql-parser/issues).
+
+- `isStatementBeginning` Whether the current input position is the beginning of a statement
+
+The **default strategy** for `isStatementBeginning` is `SqlSplitStrategy.STRICT`
+
+There are two optional strategies:
+- `SqlSplitStrategy.STRICT` Strict strategy, only the statement delimiter `;` is used as the identifier for the end of the previous statement
+- `SqlSplitStrategy.LOOSE` Loose strategy, based on the syntax parsing tree to split SQL
+
+The difference between the two strategies:
+For example, if the input SQL is:
+```sql
+CREATE TABLE tb (id INT)
+
+SELECT
+```
+In the `SqlSplitStrategy.STRICT` strategy, `isStatementBeginning` is `false`, because the CREATE statement is not terminated by a semicolon.
+
+In the `SqlSplitStrategy.LOOSE` strategy, `isStatementBeginning` is `true`, because the syntax parsing tree splits the SQL into two independent statements: CREATE and SELECT.
+
+You can set the strategy through the third `options` parameter:
+```typescript
+hive.getSemanticContextAtCaretPosition(sql, pos, { splitSqlStrategy: SqlSplitStrategy.LOOSE });
+```
+
 ### Other API
 
 - `createLexer` Create an instance of Antlr4 Lexer and return it;
