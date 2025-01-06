@@ -635,3 +635,13 @@ WITH ( view_option_name = 2321, view_option_name2='ewfwe')
 AS SELECT * FROM my_view;
 CREATE VIEW view_name AS SELECT * FROM my_view;
 
+
+-- CREATE HASH PARITION TABLE
+CREATE TABLE table_name (
+    column1 INT,
+    column2 INT
+)
+PARTITION BY HASH (column1);
+
+CREATE TABLE p0 PARTITION OF table_name
+FOR VALUES WITH (MODULUS 4, REMAINDER 0);
