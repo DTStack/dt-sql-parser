@@ -23,8 +23,8 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         return new TrinoSqlSplitListener();
     }
 
-    protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return new TrinoEntityCollector(input, caretTokenIndex);
+    protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
+        return new TrinoEntityCollector(input, allTokens, caretTokenIndex);
     }
 
     protected preferredRules: Set<number> = new Set([

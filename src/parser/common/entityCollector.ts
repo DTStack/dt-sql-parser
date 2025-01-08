@@ -1,4 +1,4 @@
-import { ParserRuleContext } from 'antlr4ng';
+import { ParserRuleContext, Token } from 'antlr4ng';
 import { EntityContextType } from './types';
 import { WordPosition, TextPosition } from './textAndWord';
 import { ctxToText, ctxToWord } from './textAndWord';
@@ -96,8 +96,9 @@ export function toEntityContext(
  * @todo: [may be need] Combine the entities in each clause.
  */
 export abstract class EntityCollector {
-    constructor(input: string, caretTokenIndex?: number) {
+    constructor(input: string, allTokens?: Token[], caretTokenIndex?: number) {
         this._input = input;
+        this._allTokens = allTokens || [];
         this._caretTokenIndex = caretTokenIndex ?? -1;
         this._entitiesSet = new Set();
         this._stmtStack = new SimpleStack();
@@ -105,6 +106,7 @@ export abstract class EntityCollector {
         this._rootStmt = null;
     }
     private readonly _input: string;
+    private readonly _allTokens: Token[];
     private readonly _caretTokenIndex: number;
     private readonly _entitiesSet: Set<EntityContext>;
     /** Staging statements that have already entered. */
@@ -136,6 +138,23 @@ export abstract class EntityCollector {
         this._rootStmt = null;
     }
 
+    /**
+     * The antlr4 will ignore hidden tokens, if we type whitespace at the end of a statement,
+     * the whitespace token will not as stop token, so we consider the whitespace token as a part of the nonhidden token in front of it
+     */
+    protected getPrevNonHiddenTokenIndex(caretTokenIndex: number) {
+        if (this._allTokens[caretTokenIndex].channel !== Token.HIDDEN_CHANNEL)
+            return caretTokenIndex;
+        for (let i = caretTokenIndex - 1; i >= 0; i--) {
+            const token = this._allTokens[i];
+            if (token.channel !== Token.HIDDEN_CHANNEL) {
+                // If prev nonhidden token is ';', the current token does not belong to any statement.
+                return token.text === ';' ? +Infinity : token.tokenIndex;
+            }
+        }
+        return +Infinity;
+    }
+
     protected pushStmt(ctx: ParserRuleContext, type: StmtContextType) {
         let isContainCaret: boolean | undefined;
         if (this._caretTokenIndex >= 0) {
@@ -143,7 +162,7 @@ export abstract class EntityCollector {
                 !!ctx.start &&
                 !!ctx.stop &&
                 ctx.start.tokenIndex <= this._caretTokenIndex &&
-                ctx.stop.tokenIndex >= this._caretTokenIndex;
+                ctx.stop.tokenIndex >= this.getPrevNonHiddenTokenIndex(this._caretTokenIndex);
         }
         const stmtContext = toStmtContext(
             ctx,

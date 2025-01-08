@@ -41,8 +41,8 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         return new PostgreSqlSplitListener();
     }
 
-    protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return new PostgreSqlEntityCollector(input, caretTokenIndex);
+    protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
+        return new PostgreSqlEntityCollector(input, allTokens, caretTokenIndex);
     }
 
     protected processCandidates(
