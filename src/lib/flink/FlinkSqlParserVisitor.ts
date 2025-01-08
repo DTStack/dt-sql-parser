@@ -73,7 +73,7 @@ import { AddConstraintContext } from "./FlinkSqlParser.js";
 import { DropConstraintContext } from "./FlinkSqlParser.js";
 import { AddUniqueContext } from "./FlinkSqlParser.js";
 import { NotForcedContext } from "./FlinkSqlParser.js";
-import { AlertViewContext } from "./FlinkSqlParser.js";
+import { AlterViewContext } from "./FlinkSqlParser.js";
 import { AlterDatabaseContext } from "./FlinkSqlParser.js";
 import { AlterFunctionContext } from "./FlinkSqlParser.js";
 import { DropCatalogContext } from "./FlinkSqlParser.js";
@@ -624,11 +624,11 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitNotForced?: (ctx: NotForcedContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.alertView`.
+     * Visit a parse tree produced by `FlinkSqlParser.alterView`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlertView?: (ctx: AlertViewContext) => Result;
+    visitAlterView?: (ctx: AlterViewContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.alterDatabase`.
      * @param ctx the parse tree

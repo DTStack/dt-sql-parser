@@ -622,7 +622,7 @@ export class FlinkSqlParser extends SQLParserBase {
     public static readonly RULE_dropConstraint = 61;
     public static readonly RULE_addUnique = 62;
     public static readonly RULE_notForced = 63;
-    public static readonly RULE_alertView = 64;
+    public static readonly RULE_alterView = 64;
     public static readonly RULE_alterDatabase = 65;
     public static readonly RULE_alterFunction = 66;
     public static readonly RULE_dropCatalog = 67;
@@ -975,7 +975,7 @@ export class FlinkSqlParser extends SQLParserBase {
         "likeDefinition", "likeOption", "createCatalog", "createDatabase", 
         "createView", "createFunction", "usingClause", "jarFileName", "alterTable", 
         "renameDefinition", "setKeyValueDefinition", "addConstraint", "dropConstraint", 
-        "addUnique", "notForced", "alertView", "alterDatabase", "alterFunction", 
+        "addUnique", "notForced", "alterView", "alterDatabase", "alterFunction", 
         "dropCatalog", "dropTable", "dropDatabase", "dropView", "dropFunction", 
         "insertStatement", "insertSimpleStatement", "insertPartitionDefinition", 
         "valuesDefinition", "valuesRowDefinition", "insertMulStatementCompatibility", 
@@ -1315,7 +1315,7 @@ export class FlinkSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 7);
                 {
                 this.state = 413;
-                this.alertView();
+                this.alterView();
                 }
                 break;
             case 8:
@@ -4457,9 +4457,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alertView(): AlertViewContext {
-        let localContext = new AlertViewContext(this.context, this.state);
-        this.enterRule(localContext, 128, FlinkSqlParser.RULE_alertView);
+    public alterView(): AlterViewContext {
+        let localContext = new AlterViewContext(this.context, this.state);
+        this.enterRule(localContext, 128, FlinkSqlParser.RULE_alterView);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -12777,8 +12777,8 @@ export class DdlStatementContext extends antlr.ParserRuleContext {
     public alterTable(): AlterTableContext | null {
         return this.getRuleContext(0, AlterTableContext);
     }
-    public alertView(): AlertViewContext | null {
-        return this.getRuleContext(0, AlertViewContext);
+    public alterView(): AlterViewContext | null {
+        return this.getRuleContext(0, AlterViewContext);
     }
     public alterDatabase(): AlterDatabaseContext | null {
         return this.getRuleContext(0, AlterDatabaseContext);
@@ -15555,7 +15555,7 @@ export class NotForcedContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlertViewContext extends antlr.ParserRuleContext {
+export class AlterViewContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -15578,21 +15578,21 @@ export class AlertViewContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, QueryStatementContext);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_alertView;
+        return FlinkSqlParser.RULE_alterView;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterAlertView) {
-             listener.enterAlertView(this);
+        if(listener.enterAlterView) {
+             listener.enterAlterView(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitAlertView) {
-             listener.exitAlertView(this);
+        if(listener.exitAlterView) {
+             listener.exitAlterView(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlertView) {
-            return visitor.visitAlertView(this);
+        if (visitor.visitAlterView) {
+            return visitor.visitAlterView(this);
         } else {
             return visitor.visitChildren(this);
         }

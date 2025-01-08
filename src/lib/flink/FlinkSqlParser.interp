@@ -1151,7 +1151,7 @@ addConstraint
 dropConstraint
 addUnique
 notForced
-alertView
+alterView
 alterDatabase
 alterFunction
 dropCatalog
