@@ -9,7 +9,9 @@ const { cleanComment } = require('./cleanComment');
 const grammarsPath = path.resolve(__dirname, '../src/grammar');
 const outputPath = path.resolve(__dirname, '../src/lib');
 
-const languageEntries = fs.readdirSync(grammarsPath);
+const languageEntries = fs.readdirSync(grammarsPath).filter((language) => {
+    return fs.statSync(path.join(grammarsPath, language)).isDirectory();
+});
 
 const baseCmd = 'antlr4ng -Dlanguage=TypeScript -visitor -listener -Xexact-output-dir -o';
 
@@ -65,7 +67,7 @@ function main() {
         languageEntries.forEach((language) => {
             compile(language);
         });
-    } else if (argv.lang) {
+    } else if (argv.lang && typeof argv.lang === 'string') {
         // compile single: yarn antlr4 --lang=mysql
         const supportedLanguage = languageEntries.find((language) =>
             language.startsWith(argv.lang)
