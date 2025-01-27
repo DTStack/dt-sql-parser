@@ -95,4 +95,33 @@ describe('Flink SQL Token Suggestion', () => {
             expect(suggestion[0].syntaxContextType).toBe(scenario.entityContextType);
         });
     });
+
+    test('Create Statement table properties', () => {
+        const tokenSql = `CREATE TABLE tmp_table (col INT) WITH ('connector'='kafka');`;
+        const scenarios = [
+            {
+                caretPosition: {
+                    lineNumber: 1,
+                    column: 45,
+                },
+                entityContextType: EntityContextType.TABLE_PROPERTY_KEY,
+            },
+            {
+                caretPosition: {
+                    lineNumber: 1,
+                    column: 55,
+                },
+                entityContextType: EntityContextType.TABLE_PROPERTY_VALUE,
+            },
+        ];
+
+        scenarios.forEach((scenario) => {
+            const suggestion = flink.getSuggestionAtCaretPosition(
+                tokenSql,
+                scenario.caretPosition
+            )?.syntax;
+
+            expect(suggestion[0].syntaxContextType).toBe(scenario.entityContextType);
+        });
+    });
 });
