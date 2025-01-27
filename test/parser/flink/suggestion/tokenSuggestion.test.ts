@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { FlinkSQL } from 'src/parser/flink';
-import { CaretPosition } from 'src/parser/common/types';
+import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
 
 const tokenSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'tokenSuggestion.sql'), 'utf-8');
@@ -66,5 +66,34 @@ describe('Flink SQL Token Suggestion', () => {
             'VIEWS',
             'JARS',
         ]);
+    });
+
+    test('Create Statement table properties', () => {
+        const tokenSql = `CREATE TABLE tmp_table (col INT) WITH ('connector'='kafka');`;
+        const scenarios = [
+            {
+                caretPosition: {
+                    lineNumber: 1,
+                    column: 45,
+                },
+                entityContextType: EntityContextType.TABLE_PROPERTY_KEY,
+            },
+            {
+                caretPosition: {
+                    lineNumber: 1,
+                    column: 55,
+                },
+                entityContextType: EntityContextType.TABLE_PROPERTY_VALUE,
+            },
+        ];
+
+        scenarios.forEach((scenario) => {
+            const suggestion = flink.getSuggestionAtCaretPosition(
+                tokenSql,
+                scenario.caretPosition
+            )?.syntax;
+
+            expect(suggestion[0].syntaxContextType).toBe(scenario.entityContextType);
+        });
     });
 });

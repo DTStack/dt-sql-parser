@@ -31,6 +31,8 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         FlinkSqlParser.RULE_functionNameCreate, // functionName that will be created
         FlinkSqlParser.RULE_columnName,
         FlinkSqlParser.RULE_columnNameCreate,
+        FlinkSqlParser.RULE_tablePropertyKey,
+        FlinkSqlParser.RULE_tablePropertyValue,
     ]);
 
     protected get splitListener() {
@@ -102,6 +104,14 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                 }
                 case FlinkSqlParser.RULE_columnNameCreate: {
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
+                    break;
+                }
+                case FlinkSqlParser.RULE_tablePropertyKey: {
+                    syntaxContextType = EntityContextType.TABLE_PROPERTY_KEY;
+                    break;
+                }
+                case FlinkSqlParser.RULE_tablePropertyValue: {
+                    syntaxContextType = EntityContextType.TABLE_PROPERTY_VALUE;
                     break;
                 }
                 default:
