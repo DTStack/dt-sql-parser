@@ -39,7 +39,7 @@ import { AlterViewContext } from "./ImpalaSqlParser.js";
 import { RenameViewContext } from "./ImpalaSqlParser.js";
 import { AlterViewOwnerContext } from "./ImpalaSqlParser.js";
 import { RenameTableContext } from "./ImpalaSqlParser.js";
-import { AlterUnSetOrSetViewTblpropertiesContext } from "./ImpalaSqlParser.js";
+import { AlterUnSetOrSetViewTblPropertiesContext } from "./ImpalaSqlParser.js";
 import { TruncateTableStatementContext } from "./ImpalaSqlParser.js";
 import { DescribeStatementContext } from "./ImpalaSqlParser.js";
 import { ComputeStatementContext } from "./ImpalaSqlParser.js";
@@ -569,15 +569,15 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      */
     exitRenameTable?: (ctx: RenameTableContext) => void;
     /**
-     * Enter a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblproperties`.
+     * Enter a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblProperties`.
      * @param ctx the parse tree
      */
-    enterAlterUnSetOrSetViewTblproperties?: (ctx: AlterUnSetOrSetViewTblpropertiesContext) => void;
+    enterAlterUnSetOrSetViewTblProperties?: (ctx: AlterUnSetOrSetViewTblPropertiesContext) => void;
     /**
-     * Exit a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblproperties`.
+     * Exit a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblProperties`.
      * @param ctx the parse tree
      */
-    exitAlterUnSetOrSetViewTblproperties?: (ctx: AlterUnSetOrSetViewTblpropertiesContext) => void;
+    exitAlterUnSetOrSetViewTblProperties?: (ctx: AlterUnSetOrSetViewTblPropertiesContext) => void;
     /**
      * Enter a parse tree produced by `ImpalaSqlParser.truncateTableStatement`.
      * @param ctx the parse tree
