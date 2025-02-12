@@ -23,7 +23,7 @@ import { UtilityStatementContext } from "./MySqlParser.js";
 import { CreateDatabaseContext } from "./MySqlParser.js";
 import { CreateEventContext } from "./MySqlParser.js";
 import { CreateIndexContext } from "./MySqlParser.js";
-import { CreateLogfileGroupContext } from "./MySqlParser.js";
+import { CreateLogFileGroupContext } from "./MySqlParser.js";
 import { CreateProcedureContext } from "./MySqlParser.js";
 import { CreateFunctionContext } from "./MySqlParser.js";
 import { CreateFunctionLoadableContext } from "./MySqlParser.js";
@@ -32,8 +32,8 @@ import { CreateServerContext } from "./MySqlParser.js";
 import { QueryCreateTableContext } from "./MySqlParser.js";
 import { CopyCreateTableContext } from "./MySqlParser.js";
 import { ColumnCreateTableContext } from "./MySqlParser.js";
-import { CreateTablespaceInnodbContext } from "./MySqlParser.js";
-import { CreateTablespaceNdbContext } from "./MySqlParser.js";
+import { CreateTableSpaceInnoDBContext } from "./MySqlParser.js";
+import { CreateTableSpaceNDBContext } from "./MySqlParser.js";
 import { CreateTriggerContext } from "./MySqlParser.js";
 import { WithClauseContext } from "./MySqlParser.js";
 import { CommonTableExpressionsContext } from "./MySqlParser.js";
@@ -83,7 +83,7 @@ import { ReferenceActionContext } from "./MySqlParser.js";
 import { ReferenceControlTypeContext } from "./MySqlParser.js";
 import { TableOptionEngineContext } from "./MySqlParser.js";
 import { TableOptionEngineAttributeContext } from "./MySqlParser.js";
-import { TableOptionAutoextendSizeContext } from "./MySqlParser.js";
+import { TableOptionAutoExtendSizeContext } from "./MySqlParser.js";
 import { TableOptionAutoIncrementContext } from "./MySqlParser.js";
 import { TableOptionAverageContext } from "./MySqlParser.js";
 import { TableOptionCharsetContext } from "./MySqlParser.js";
@@ -111,12 +111,12 @@ import { TableOptionSecondaryEngineAttributeContext } from "./MySqlParser.js";
 import { TableOptionRecalculationContext } from "./MySqlParser.js";
 import { TableOptionPersistentContext } from "./MySqlParser.js";
 import { TableOptionSamplePageContext } from "./MySqlParser.js";
-import { TableOptionTablespaceContext } from "./MySqlParser.js";
+import { TableOptionTableSpaceContext } from "./MySqlParser.js";
 import { TableOptionTableTypeContext } from "./MySqlParser.js";
 import { TableOptionTransactionalContext } from "./MySqlParser.js";
 import { TableOptionUnionContext } from "./MySqlParser.js";
 import { TableTypeContext } from "./MySqlParser.js";
-import { TablespaceStorageContext } from "./MySqlParser.js";
+import { TableSpaceStorageContext } from "./MySqlParser.js";
 import { PartitionDefinitionsContext } from "./MySqlParser.js";
 import { PartitionFunctionHashContext } from "./MySqlParser.js";
 import { PartitionFunctionKeyContext } from "./MySqlParser.js";
@@ -130,25 +130,25 @@ import { PartitionListVectorContext } from "./MySqlParser.js";
 import { PartitionSimpleContext } from "./MySqlParser.js";
 import { PartitionDefinerAtomContext } from "./MySqlParser.js";
 import { PartitionDefinerVectorContext } from "./MySqlParser.js";
-import { SubpartitionDefinitionContext } from "./MySqlParser.js";
+import { SubPartitionDefinitionContext } from "./MySqlParser.js";
 import { PartitionOptionEngineContext } from "./MySqlParser.js";
 import { PartitionOptionCommentContext } from "./MySqlParser.js";
 import { PartitionOptionDataDirectoryContext } from "./MySqlParser.js";
 import { PartitionOptionIndexDirectoryContext } from "./MySqlParser.js";
 import { PartitionOptionMaxRowsContext } from "./MySqlParser.js";
 import { PartitionOptionMinRowsContext } from "./MySqlParser.js";
-import { PartitionOptionTablespaceContext } from "./MySqlParser.js";
+import { PartitionOptionTableSpaceContext } from "./MySqlParser.js";
 import { PartitionOptionNodeGroupContext } from "./MySqlParser.js";
 import { AlterSimpleDatabaseContext } from "./MySqlParser.js";
 import { AlterUpgradeNameContext } from "./MySqlParser.js";
 import { AlterEventContext } from "./MySqlParser.js";
 import { AlterFunctionContext } from "./MySqlParser.js";
 import { AlterInstanceContext } from "./MySqlParser.js";
-import { AlterLogfileGroupContext } from "./MySqlParser.js";
+import { AlterLogFileGroupContext } from "./MySqlParser.js";
 import { AlterProcedureContext } from "./MySqlParser.js";
 import { AlterServerContext } from "./MySqlParser.js";
 import { AlterTableContext } from "./MySqlParser.js";
-import { AlterTablespaceContext } from "./MySqlParser.js";
+import { AlterTableSpaceContext } from "./MySqlParser.js";
 import { AlterViewContext } from "./MySqlParser.js";
 import { AlterByTableOptionContext } from "./MySqlParser.js";
 import { AlterByAddColumnContext } from "./MySqlParser.js";
@@ -168,7 +168,7 @@ import { AlterByChangeColumnContext } from "./MySqlParser.js";
 import { AlterByDefaultCharsetContext } from "./MySqlParser.js";
 import { AlterByConvertCharsetContext } from "./MySqlParser.js";
 import { AlterKeysContext } from "./MySqlParser.js";
-import { AlterTablespaceOptionContext } from "./MySqlParser.js";
+import { AlterTableSpaceOptionContext } from "./MySqlParser.js";
 import { AlterByDropColumnContext } from "./MySqlParser.js";
 import { AlterByDropIndexContext } from "./MySqlParser.js";
 import { AlterByDropPrimaryKeyContext } from "./MySqlParser.js";
@@ -200,13 +200,13 @@ import { AlterByUpgradePartitioningContext } from "./MySqlParser.js";
 import { DropDatabaseContext } from "./MySqlParser.js";
 import { DropEventContext } from "./MySqlParser.js";
 import { DropIndexContext } from "./MySqlParser.js";
-import { DropLogfileGroupContext } from "./MySqlParser.js";
+import { DropLogFileGroupContext } from "./MySqlParser.js";
 import { DropProcedureContext } from "./MySqlParser.js";
 import { DropFunctionContext } from "./MySqlParser.js";
 import { DropServerContext } from "./MySqlParser.js";
 import { DropSpatialContext } from "./MySqlParser.js";
 import { DropTableContext } from "./MySqlParser.js";
-import { DropTablespaceContext } from "./MySqlParser.js";
+import { DropTableSpaceContext } from "./MySqlParser.js";
 import { DropTriggerContext } from "./MySqlParser.js";
 import { DropViewContext } from "./MySqlParser.js";
 import { DropRoleContext } from "./MySqlParser.js";
@@ -300,7 +300,7 @@ import { StartTransactionContext } from "./MySqlParser.js";
 import { BeginWorkContext } from "./MySqlParser.js";
 import { CommitWorkContext } from "./MySqlParser.js";
 import { RollbackWorkContext } from "./MySqlParser.js";
-import { SavepointStatementContext } from "./MySqlParser.js";
+import { SavePointStatementContext } from "./MySqlParser.js";
 import { RollbackStatementContext } from "./MySqlParser.js";
 import { ReleaseStatementContext } from "./MySqlParser.js";
 import { LockTablesContext } from "./MySqlParser.js";
@@ -392,7 +392,7 @@ import { HandlerConditionNotfoundContext } from "./MySqlParser.js";
 import { HandlerConditionExceptionContext } from "./MySqlParser.js";
 import { ProcedureSqlStatementContext } from "./MySqlParser.js";
 import { CaseAlternativeContext } from "./MySqlParser.js";
-import { ElifAlternativeContext } from "./MySqlParser.js";
+import { ElseIfAlternativeContext } from "./MySqlParser.js";
 import { AlterUserContext } from "./MySqlParser.js";
 import { CreateUserContext } from "./MySqlParser.js";
 import { DropUserContext } from "./MySqlParser.js";
@@ -403,7 +403,7 @@ import { AlterResourceGroupContext } from "./MySqlParser.js";
 import { CreateResourceGroupContext } from "./MySqlParser.js";
 import { DropResourceGroupContext } from "./MySqlParser.js";
 import { SetResourceGroupContext } from "./MySqlParser.js";
-import { ResourceGroupVcpuSpecContext } from "./MySqlParser.js";
+import { ResourceGroupVCpuSpecContext } from "./MySqlParser.js";
 import { RenameUserContext } from "./MySqlParser.js";
 import { DetailRevokeContext } from "./MySqlParser.js";
 import { ShortRevokeContext } from "./MySqlParser.js";
@@ -431,7 +431,7 @@ import { UserLockOptionContext } from "./MySqlParser.js";
 import { FactorAuthOptionContext } from "./MySqlParser.js";
 import { RegistrationOptionContext } from "./MySqlParser.js";
 import { FactorContext } from "./MySqlParser.js";
-import { PrivelegeClauseContext } from "./MySqlParser.js";
+import { PrivilegeClauseContext } from "./MySqlParser.js";
 import { PrivilegeContext } from "./MySqlParser.js";
 import { CurrentSchemaPriviLevelContext } from "./MySqlParser.js";
 import { GlobalPrivLevelContext } from "./MySqlParser.js";
@@ -489,7 +489,7 @@ import { ShowFilterContext } from "./MySqlParser.js";
 import { ShowGlobalInfoClauseContext } from "./MySqlParser.js";
 import { ShowSchemaEntityContext } from "./MySqlParser.js";
 import { ShowProfileTypeContext } from "./MySqlParser.js";
-import { BinlogStatementContext } from "./MySqlParser.js";
+import { BinLogStatementContext } from "./MySqlParser.js";
 import { CacheIndexStatementContext } from "./MySqlParser.js";
 import { FlushStatementContext } from "./MySqlParser.js";
 import { KillStatementContext } from "./MySqlParser.js";
@@ -539,8 +539,8 @@ import { UserOrRoleNameContext } from "./MySqlParser.js";
 import { ColumnNameCreateContext } from "./MySqlParser.js";
 import { ColumnNamesContext } from "./MySqlParser.js";
 import { ColumnNameContext } from "./MySqlParser.js";
-import { TablespaceNameCreateContext } from "./MySqlParser.js";
-import { TablespaceNameContext } from "./MySqlParser.js";
+import { TableSpaceNameCreateContext } from "./MySqlParser.js";
+import { TableSpaceNameContext } from "./MySqlParser.js";
 import { PartitionNameCreateContext } from "./MySqlParser.js";
 import { PartitionNamesContext } from "./MySqlParser.js";
 import { PartitionNameContext } from "./MySqlParser.js";
@@ -568,7 +568,7 @@ import { FileSizeLiteralContext } from "./MySqlParser.js";
 import { StringLiteralContext } from "./MySqlParser.js";
 import { BooleanLiteralContext } from "./MySqlParser.js";
 import { HexadecimalLiteralContext } from "./MySqlParser.js";
-import { NullNotnullContext } from "./MySqlParser.js";
+import { NullNotNullContext } from "./MySqlParser.js";
 import { ConstantContext } from "./MySqlParser.js";
 import { StringDataTypeContext } from "./MySqlParser.js";
 import { NationalVaryingStringDataTypeContext } from "./MySqlParser.js";
@@ -780,11 +780,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitCreateIndex?: (ctx: CreateIndexContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.createLogfileGroup`.
+     * Visit a parse tree produced by `MySqlParser.createLogFileGroup`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreateLogfileGroup?: (ctx: CreateLogfileGroupContext) => Result;
+    visitCreateLogFileGroup?: (ctx: CreateLogFileGroupContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.createProcedure`.
      * @param ctx the parse tree
@@ -837,17 +837,17 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitColumnCreateTable?: (ctx: ColumnCreateTableContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.createTablespaceInnodb`.
+     * Visit a parse tree produced by `MySqlParser.createTableSpaceInnoDB`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreateTablespaceInnodb?: (ctx: CreateTablespaceInnodbContext) => Result;
+    visitCreateTableSpaceInnoDB?: (ctx: CreateTableSpaceInnoDBContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.createTablespaceNdb`.
+     * Visit a parse tree produced by `MySqlParser.createTableSpaceNDB`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreateTablespaceNdb?: (ctx: CreateTablespaceNdbContext) => Result;
+    visitCreateTableSpaceNDB?: (ctx: CreateTableSpaceNDBContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.createTrigger`.
      * @param ctx the parse tree
@@ -1167,12 +1167,12 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitTableOptionEngineAttribute?: (ctx: TableOptionEngineAttributeContext) => Result;
     /**
-     * Visit a parse tree produced by the `tableOptionAutoextendSize`
+     * Visit a parse tree produced by the `tableOptionAutoExtendSize`
      * labeled alternative in `MySqlParser.tableOption`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTableOptionAutoextendSize?: (ctx: TableOptionAutoextendSizeContext) => Result;
+    visitTableOptionAutoExtendSize?: (ctx: TableOptionAutoExtendSizeContext) => Result;
     /**
      * Visit a parse tree produced by the `tableOptionAutoIncrement`
      * labeled alternative in `MySqlParser.tableOption`.
@@ -1363,12 +1363,12 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitTableOptionSamplePage?: (ctx: TableOptionSamplePageContext) => Result;
     /**
-     * Visit a parse tree produced by the `tableOptionTablespace`
+     * Visit a parse tree produced by the `tableOptionTableSpace`
      * labeled alternative in `MySqlParser.tableOption`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTableOptionTablespace?: (ctx: TableOptionTablespaceContext) => Result;
+    visitTableOptionTableSpace?: (ctx: TableOptionTableSpaceContext) => Result;
     /**
      * Visit a parse tree produced by the `tableOptionTableType`
      * labeled alternative in `MySqlParser.tableOption`.
@@ -1397,11 +1397,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitTableType?: (ctx: TableTypeContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.tablespaceStorage`.
+     * Visit a parse tree produced by `MySqlParser.tableSpaceStorage`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTablespaceStorage?: (ctx: TablespaceStorageContext) => Result;
+    visitTableSpaceStorage?: (ctx: TableSpaceStorageContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.partitionDefinitions`.
      * @param ctx the parse tree
@@ -1491,11 +1491,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitPartitionDefinerVector?: (ctx: PartitionDefinerVectorContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.subpartitionDefinition`.
+     * Visit a parse tree produced by `MySqlParser.subPartitionDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSubpartitionDefinition?: (ctx: SubpartitionDefinitionContext) => Result;
+    visitSubPartitionDefinition?: (ctx: SubPartitionDefinitionContext) => Result;
     /**
      * Visit a parse tree produced by the `partitionOptionEngine`
      * labeled alternative in `MySqlParser.partitionOption`.
@@ -1539,12 +1539,12 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitPartitionOptionMinRows?: (ctx: PartitionOptionMinRowsContext) => Result;
     /**
-     * Visit a parse tree produced by the `partitionOptionTablespace`
+     * Visit a parse tree produced by the `partitionOptionTableSpace`
      * labeled alternative in `MySqlParser.partitionOption`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPartitionOptionTablespace?: (ctx: PartitionOptionTablespaceContext) => Result;
+    visitPartitionOptionTableSpace?: (ctx: PartitionOptionTableSpaceContext) => Result;
     /**
      * Visit a parse tree produced by the `partitionOptionNodeGroup`
      * labeled alternative in `MySqlParser.partitionOption`.
@@ -1585,11 +1585,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitAlterInstance?: (ctx: AlterInstanceContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.alterLogfileGroup`.
+     * Visit a parse tree produced by `MySqlParser.alterLogFileGroup`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlterLogfileGroup?: (ctx: AlterLogfileGroupContext) => Result;
+    visitAlterLogFileGroup?: (ctx: AlterLogFileGroupContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.alterProcedure`.
      * @param ctx the parse tree
@@ -1609,11 +1609,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitAlterTable?: (ctx: AlterTableContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.alterTablespace`.
+     * Visit a parse tree produced by `MySqlParser.alterTableSpace`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlterTablespace?: (ctx: AlterTablespaceContext) => Result;
+    visitAlterTableSpace?: (ctx: AlterTableSpaceContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.alterView`.
      * @param ctx the parse tree
@@ -1747,12 +1747,12 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitAlterKeys?: (ctx: AlterKeysContext) => Result;
     /**
-     * Visit a parse tree produced by the `alterTablespaceOption`
+     * Visit a parse tree produced by the `alterTableSpaceOption`
      * labeled alternative in `MySqlParser.alterOption`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlterTablespaceOption?: (ctx: AlterTablespaceOptionContext) => Result;
+    visitAlterTableSpaceOption?: (ctx: AlterTableSpaceOptionContext) => Result;
     /**
      * Visit a parse tree produced by the `alterByDropColumn`
      * labeled alternative in `MySqlParser.alterOption`.
@@ -1968,11 +1968,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitDropIndex?: (ctx: DropIndexContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.dropLogfileGroup`.
+     * Visit a parse tree produced by `MySqlParser.dropLogFileGroup`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDropLogfileGroup?: (ctx: DropLogfileGroupContext) => Result;
+    visitDropLogFileGroup?: (ctx: DropLogFileGroupContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.dropProcedure`.
      * @param ctx the parse tree
@@ -2004,11 +2004,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitDropTable?: (ctx: DropTableContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.dropTablespace`.
+     * Visit a parse tree produced by `MySqlParser.dropTableSpace`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDropTablespace?: (ctx: DropTablespaceContext) => Result;
+    visitDropTableSpace?: (ctx: DropTableSpaceContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.dropTrigger`.
      * @param ctx the parse tree
@@ -2587,11 +2587,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitRollbackWork?: (ctx: RollbackWorkContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.savepointStatement`.
+     * Visit a parse tree produced by `MySqlParser.savePointStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSavepointStatement?: (ctx: SavepointStatementContext) => Result;
+    visitSavePointStatement?: (ctx: SavePointStatementContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.rollbackStatement`.
      * @param ctx the parse tree
@@ -3174,11 +3174,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitCaseAlternative?: (ctx: CaseAlternativeContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.elifAlternative`.
+     * Visit a parse tree produced by `MySqlParser.elseIfAlternative`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitElifAlternative?: (ctx: ElifAlternativeContext) => Result;
+    visitElseIfAlternative?: (ctx: ElseIfAlternativeContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.alterUser`.
      * @param ctx the parse tree
@@ -3240,11 +3240,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitSetResourceGroup?: (ctx: SetResourceGroupContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.resourceGroupVcpuSpec`.
+     * Visit a parse tree produced by `MySqlParser.resourceGroupVCpuSpec`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitResourceGroupVcpuSpec?: (ctx: ResourceGroupVcpuSpecContext) => Result;
+    visitResourceGroupVCpuSpec?: (ctx: ResourceGroupVCpuSpecContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.renameUser`.
      * @param ctx the parse tree
@@ -3420,11 +3420,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitFactor?: (ctx: FactorContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.privelegeClause`.
+     * Visit a parse tree produced by `MySqlParser.privilegeClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPrivelegeClause?: (ctx: PrivelegeClauseContext) => Result;
+    visitPrivilegeClause?: (ctx: PrivilegeClauseContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.privilege`.
      * @param ctx the parse tree
@@ -3804,11 +3804,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitShowProfileType?: (ctx: ShowProfileTypeContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.binlogStatement`.
+     * Visit a parse tree produced by `MySqlParser.binLogStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitBinlogStatement?: (ctx: BinlogStatementContext) => Result;
+    visitBinLogStatement?: (ctx: BinLogStatementContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.cacheIndexStatement`.
      * @param ctx the parse tree
@@ -4109,17 +4109,17 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.tablespaceNameCreate`.
+     * Visit a parse tree produced by `MySqlParser.tableSpaceNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTablespaceNameCreate?: (ctx: TablespaceNameCreateContext) => Result;
+    visitTableSpaceNameCreate?: (ctx: TableSpaceNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.tablespaceName`.
+     * Visit a parse tree produced by `MySqlParser.tableSpaceName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTablespaceName?: (ctx: TablespaceNameContext) => Result;
+    visitTableSpaceName?: (ctx: TableSpaceNameContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.partitionNameCreate`.
      * @param ctx the parse tree
@@ -4283,11 +4283,11 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitHexadecimalLiteral?: (ctx: HexadecimalLiteralContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.nullNotnull`.
+     * Visit a parse tree produced by `MySqlParser.nullNotNull`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitNullNotnull?: (ctx: NullNotnullContext) => Result;
+    visitNullNotNull?: (ctx: NullNotNullContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.constant`.
      * @param ctx the parse tree
