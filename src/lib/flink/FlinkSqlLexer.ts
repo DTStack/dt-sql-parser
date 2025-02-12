@@ -536,11 +536,11 @@ export class FlinkSqlLexer extends antlr.Lexer {
     public static readonly COLON_SYMB = 527;
     public static readonly ASTERISK_SIGN = 528;
     public static readonly UNDERLINE_SIGN = 529;
-    public static readonly HYPNEN_SIGN = 530;
+    public static readonly HYPHEN_SIGN = 530;
     public static readonly ADD_SIGN = 531;
-    public static readonly PENCENT_SIGN = 532;
+    public static readonly PERCENT_SIGN = 532;
     public static readonly DOUBLE_VERTICAL_SIGN = 533;
-    public static readonly DOUBLE_HYPNEN_SIGN = 534;
+    public static readonly DOUBLE_HYPHEN_SIGN = 534;
     public static readonly SLASH_SIGN = 535;
     public static readonly QUESTION_MARK_SIGN = 536;
     public static readonly DOUBLE_RIGHT_ARROW = 537;
@@ -760,8 +760,8 @@ export class FlinkSqlLexer extends antlr.Lexer {
         "BIT_AND_OP", "BIT_XOR_OP", "DOT", "LS_BRACKET", "RS_BRACKET", "LR_BRACKET", 
         "RR_BRACKET", "LB_BRACKET", "RB_BRACKET", "COMMA", "SEMICOLON", 
         "AT_SIGN", "SINGLE_QUOTE_SYMB", "DOUBLE_QUOTE_SYMB", "REVERSE_QUOTE_SYMB", 
-        "COLON_SYMB", "ASTERISK_SIGN", "UNDERLINE_SIGN", "HYPNEN_SIGN", 
-        "ADD_SIGN", "PENCENT_SIGN", "DOUBLE_VERTICAL_SIGN", "DOUBLE_HYPNEN_SIGN", 
+        "COLON_SYMB", "ASTERISK_SIGN", "UNDERLINE_SIGN", "HYPHEN_SIGN", 
+        "ADD_SIGN", "PERCENT_SIGN", "DOUBLE_VERTICAL_SIGN", "DOUBLE_HYPHEN_SIGN", 
         "SLASH_SIGN", "QUESTION_MARK_SIGN", "DOUBLE_RIGHT_ARROW", "STRING_LITERAL", 
         "DIG_LITERAL", "REAL_LITERAL", "BIT_STRING", "ID_LITERAL"
     ];
@@ -875,8 +875,8 @@ export class FlinkSqlLexer extends antlr.Lexer {
         "BIT_AND_OP", "BIT_XOR_OP", "DOT", "LS_BRACKET", "RS_BRACKET", "LR_BRACKET", 
         "RR_BRACKET", "LB_BRACKET", "RB_BRACKET", "COMMA", "SEMICOLON", 
         "AT_SIGN", "SINGLE_QUOTE_SYMB", "DOUBLE_QUOTE_SYMB", "REVERSE_QUOTE_SYMB", 
-        "COLON_SYMB", "ASTERISK_SIGN", "UNDERLINE_SIGN", "HYPNEN_SIGN", 
-        "ADD_SIGN", "PENCENT_SIGN", "DOUBLE_VERTICAL_SIGN", "DOUBLE_HYPNEN_SIGN", 
+        "COLON_SYMB", "ASTERISK_SIGN", "UNDERLINE_SIGN", "HYPHEN_SIGN", 
+        "ADD_SIGN", "PERCENT_SIGN", "DOUBLE_VERTICAL_SIGN", "DOUBLE_HYPHEN_SIGN", 
         "SLASH_SIGN", "QUESTION_MARK_SIGN", "DOUBLE_RIGHT_ARROW", "STRING_LITERAL", 
         "DIG_LITERAL", "REAL_LITERAL", "BIT_STRING", "ID_LITERAL", "JAR_FILE_PARTTARN", 
         "EXPONENT_NUM_PART", "ID_LITERAL_FRAG", "DEC_DIGIT", "DEC_LETTER", 
