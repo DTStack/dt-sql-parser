@@ -59,12 +59,12 @@ explainOption
     | KW_REOPTIMIZATION
     | KW_LOCKS
     | KW_AST
-    | KW_VECTORIZATION KW_ONLY? vectorizatonDetail?
+    | KW_VECTORIZATION KW_ONLY? vectorizationDetail?
     | KW_DEBUG
     | KW_DDL
     ;
 
-vectorizatonDetail
+vectorizationDetail
     : KW_SUMMARY
     | KW_OPERATOR
     | KW_EXPRESSION
@@ -415,10 +415,10 @@ privObjectCols
     ;
 
 privilegeList
-    : privlegeDef (COMMA privlegeDef)*
+    : privilegeDef (COMMA privilegeDef)*
     ;
 
-privlegeDef
+privilegeDef
     : privilegeType (LPAREN cols=columnNameList RPAREN)?
     ;
 
@@ -663,7 +663,7 @@ recordWriter
 
 rowFormatSerde
     : KW_ROW KW_FORMAT KW_SERDE name=StringLiteral (
-        KW_WITH KW_SERDEPROPERTIES serdeprops=tableProperties
+        KW_WITH KW_SERDEPROPERTIES serderops=tableProperties
     )?
     ;
 
