@@ -132,7 +132,7 @@ createFunction
 
 alterStatement
     : alterDatabase
-    | alterUnSetOrSetViewTblproperties
+    | alterUnSetOrSetViewTblProperties
     | renameTable
     | alterViewOwner
     | alterView
@@ -241,7 +241,7 @@ renameTable
     : KW_ALTER KW_TABLE tableNamePath KW_RENAME KW_TO tableNamePath
     ;
 
-alterUnSetOrSetViewTblproperties
+alterUnSetOrSetViewTblProperties
     : KW_ALTER KW_VIEW viewNamePath (KW_UNSET | KW_SET) KW_TBLPROPERTIES tblProp=properties
     ;
 
