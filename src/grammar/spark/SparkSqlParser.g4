@@ -182,7 +182,7 @@ statement
         KW_USING indexType=identifier
     )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)? # createIndex
     | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName                          # dropIndex
-    | KW_OPTIMIZE tableName whereClause? zorderClause                                            # optimizeTable
+    | KW_OPTIMIZE tableName whereClause? zOrderClause                                            # optimizeTable
     | unsupportedHiveNativeCommands .*?                                                          # unsupportHiveCommands
     ;
 
@@ -595,7 +595,7 @@ hintStatement
     ;
 
 fromClause
-    : KW_FROM relation (COMMA relation)* lateralView* pivotClause? unpivotClause?
+    : KW_FROM relation (COMMA relation)* lateralView* pivotClause? unPivotClause?
     ;
 
 functionKind
@@ -657,55 +657,55 @@ pivotValue
     : expression (KW_AS? identifier)?
     ;
 
-unpivotClause
-    : KW_UNPIVOT nullOperator=unpivotNullClause? LEFT_PAREN operator=unpivotOperator RIGHT_PAREN (
+unPivotClause
+    : KW_UNPIVOT nullOperator=unPivotNullClause? LEFT_PAREN operator=unPivotOperator RIGHT_PAREN (
         KW_AS? identifier
     )?
     ;
 
-unpivotNullClause
+unPivotNullClause
     : (KW_INCLUDE | KW_EXCLUDE) KW_NULLS
     ;
 
-unpivotOperator
-    : (unpivotSingleValueColumnClause | unpivotMultiValueColumnClause)
+unPivotOperator
+    : (unPivotSingleValueColumnClause | unPivotMultiValueColumnClause)
     ;
 
-unpivotSingleValueColumnClause
-    : unpivotValueColumn KW_FOR unpivotNameColumn KW_IN LEFT_PAREN unpivotColumns+=unpivotColumnAndAlias (
-        COMMA unpivotColumns+=unpivotColumnAndAlias
+unPivotSingleValueColumnClause
+    : unPivotValueColumn KW_FOR unPivotNameColumn KW_IN LEFT_PAREN unPivotColumns+=unPivotColumnAndAlias (
+        COMMA unPivotColumns+=unPivotColumnAndAlias
     )* RIGHT_PAREN
     ;
 
-unpivotMultiValueColumnClause
-    : LEFT_PAREN unpivotValueColumns+=unpivotValueColumn (
-        COMMA unpivotValueColumns+=unpivotValueColumn
-    )* RIGHT_PAREN KW_FOR unpivotNameColumn KW_IN LEFT_PAREN unpivotColumnSets+=unpivotColumnSet (
-        COMMA unpivotColumnSets+=unpivotColumnSet
+unPivotMultiValueColumnClause
+    : LEFT_PAREN unPivotValueColumns+=unPivotValueColumn (
+        COMMA unPivotValueColumns+=unPivotValueColumn
+    )* RIGHT_PAREN KW_FOR unPivotNameColumn KW_IN LEFT_PAREN unPivotColumnSets+=unPivotColumnSet (
+        COMMA unPivotColumnSets+=unPivotColumnSet
     )* RIGHT_PAREN
     ;
 
-unpivotColumnSet
-    : LEFT_PAREN unpivotColumns+=unpivotColumn (COMMA unpivotColumns+=unpivotColumn)* RIGHT_PAREN unpivotAlias?
+unPivotColumnSet
+    : LEFT_PAREN unPivotColumns+=unPivotColumn (COMMA unPivotColumns+=unPivotColumn)* RIGHT_PAREN unPivotAlias?
     ;
 
-unpivotValueColumn
+unPivotValueColumn
     : identifier
     ;
 
-unpivotNameColumn
+unPivotNameColumn
     : identifier
     ;
 
-unpivotColumnAndAlias
-    : unpivotColumn unpivotAlias?
+unPivotColumnAndAlias
+    : unPivotColumn unPivotAlias?
     ;
 
-unpivotColumn
+unPivotColumn
     : multipartIdentifier
     ;
 
-unpivotAlias
+unPivotAlias
     : KW_AS? identifier
     ;
 
@@ -736,7 +736,7 @@ relation
 relationExtension
     : joinRelation
     | pivotClause
-    | unpivotClause
+    | unPivotClause
     ;
 
 joinRelation
@@ -1269,7 +1269,7 @@ windowClause
     : KW_WINDOW namedWindow (COMMA namedWindow)*
     ;
 
-zorderClause
+zOrderClause
     : KW_ZORDER KW_BY columnNameSeq
     ;
 
