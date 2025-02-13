@@ -610,22 +610,22 @@ export class PostgreSqlParser extends SQLParserBase {
     public static readonly RULE_program = 0;
     public static readonly RULE_singleStmt = 1;
     public static readonly RULE_stmt = 2;
-    public static readonly RULE_callstmt = 3;
-    public static readonly RULE_createrolestmt = 4;
-    public static readonly RULE_alteroptroleelem = 5;
-    public static readonly RULE_createoptroleelem = 6;
-    public static readonly RULE_createuserstmt = 7;
-    public static readonly RULE_alterrolestmt = 8;
-    public static readonly RULE_alterrolesetstmt = 9;
-    public static readonly RULE_alterroutinestmt = 10;
-    public static readonly RULE_alter_routine_cluase = 11;
+    public static readonly RULE_callStmt = 3;
+    public static readonly RULE_createRoleStmt = 4;
+    public static readonly RULE_alterOperatorRoleElem = 5;
+    public static readonly RULE_createOperatorRoleElem = 6;
+    public static readonly RULE_createUserStmt = 7;
+    public static readonly RULE_alterRoleStmt = 8;
+    public static readonly RULE_alterRoleSetStmt = 9;
+    public static readonly RULE_alterRoutineStmt = 10;
+    public static readonly RULE_alter_routine_clause = 11;
     public static readonly RULE_routine_action = 12;
-    public static readonly RULE_creategroupstmt = 13;
-    public static readonly RULE_altergroupstmt = 14;
-    public static readonly RULE_createschemastmt = 15;
+    public static readonly RULE_createGroupStmt = 13;
+    public static readonly RULE_alterGroupStmt = 14;
+    public static readonly RULE_createSchemaStmt = 15;
     public static readonly RULE_schema_name_create = 16;
     public static readonly RULE_schema_stmt = 17;
-    public static readonly RULE_variablesetstmt = 18;
+    public static readonly RULE_variableSetStmt = 18;
     public static readonly RULE_set_rest = 19;
     public static readonly RULE_generic_set = 20;
     public static readonly RULE_set_rest_more = 21;
@@ -636,258 +636,258 @@ export class PostgreSqlParser extends SQLParserBase {
     public static readonly RULE_opt_boolean_or_string_column = 26;
     public static readonly RULE_opt_boolean_or_string = 27;
     public static readonly RULE_zone_value = 28;
-    public static readonly RULE_nonreservedword_or_sconst = 29;
-    public static readonly RULE_variableresetstmt = 30;
+    public static readonly RULE_nonReservedWordOrStringConst = 29;
+    public static readonly RULE_variableResetStmt = 30;
     public static readonly RULE_reset_rest = 31;
-    public static readonly RULE_setresetclause = 32;
-    public static readonly RULE_functionsetresetclause = 33;
-    public static readonly RULE_variableshowstmt = 34;
-    public static readonly RULE_constraintssetstmt = 35;
-    public static readonly RULE_checkpointstmt = 36;
-    public static readonly RULE_discardstmt = 37;
-    public static readonly RULE_altertablestmt = 38;
+    public static readonly RULE_setOrResetClause = 32;
+    public static readonly RULE_functionSetOrResetClause = 33;
+    public static readonly RULE_variableShowStmt = 34;
+    public static readonly RULE_constraintsSetStmt = 35;
+    public static readonly RULE_checkPointStmt = 36;
+    public static readonly RULE_discardStmt = 37;
+    public static readonly RULE_alterTableStmt = 38;
     public static readonly RULE_alter_table_cmds = 39;
     public static readonly RULE_partition_bound_spec = 40;
-    public static readonly RULE_partition_bound_cluase = 41;
+    public static readonly RULE_partition_bound_clause = 41;
     public static readonly RULE_partition_bound_choose = 42;
-    public static readonly RULE_partition_with_cluase = 43;
+    public static readonly RULE_partition_with_clause = 43;
     public static readonly RULE_partition_cmd = 44;
     public static readonly RULE_index_partition_cmd = 45;
     public static readonly RULE_alter_table_cmd = 46;
     public static readonly RULE_alter_column_default = 47;
     public static readonly RULE_opt_drop_behavior = 48;
     public static readonly RULE_opt_collate_clause = 49;
-    public static readonly RULE_reloptions = 50;
-    public static readonly RULE_opt_reloptions = 51;
-    public static readonly RULE_reloption_elem = 52;
-    public static readonly RULE_partitionboundspec = 53;
-    public static readonly RULE_altercompositetypestmt = 54;
+    public static readonly RULE_relOptions = 50;
+    public static readonly RULE_optRelOptions = 51;
+    public static readonly RULE_relOptionElem = 52;
+    public static readonly RULE_partitionBoundSpec = 53;
+    public static readonly RULE_alterCompositeTypeStmt = 54;
     public static readonly RULE_alter_type_cmd = 55;
-    public static readonly RULE_closeportalstmt = 56;
-    public static readonly RULE_copystmt = 57;
+    public static readonly RULE_closePortalStmt = 56;
+    public static readonly RULE_copyStmt = 57;
     public static readonly RULE_copy_options = 58;
     public static readonly RULE_copy_generic_opt_elem = 59;
-    public static readonly RULE_createstmt = 60;
-    public static readonly RULE_opttemp = 61;
-    public static readonly RULE_opttypedtableelementlist = 62;
-    public static readonly RULE_tableelementlist = 63;
-    public static readonly RULE_tableelement = 64;
-    public static readonly RULE_typedtableelement = 65;
+    public static readonly RULE_createStmt = 60;
+    public static readonly RULE_optTemp = 61;
+    public static readonly RULE_optTypedTableElEmentList = 62;
+    public static readonly RULE_tableElementList = 63;
+    public static readonly RULE_tableElement = 64;
+    public static readonly RULE_typedTableElement = 65;
     public static readonly RULE_column_def = 66;
-    public static readonly RULE_colconstraint = 67;
-    public static readonly RULE_colconstraintelem = 68;
+    public static readonly RULE_colConstraint = 67;
+    public static readonly RULE_colConstraintElem = 68;
     public static readonly RULE_generated_when = 69;
-    public static readonly RULE_tablelikeoption = 70;
-    public static readonly RULE_constraintelem = 71;
+    public static readonly RULE_tableLikeOption = 70;
+    public static readonly RULE_constraintElem = 71;
     public static readonly RULE_opt_column_list = 72;
     public static readonly RULE_opt_column_list_create = 73;
     public static readonly RULE_column_list = 74;
     public static readonly RULE_opt_c_include = 75;
     public static readonly RULE_key_match = 76;
-    public static readonly RULE_exclusionconstraintelem = 77;
+    public static readonly RULE_exclusionConstraintElem = 77;
     public static readonly RULE_key_actions = 78;
     public static readonly RULE_key_update = 79;
     public static readonly RULE_key_delete = 80;
     public static readonly RULE_key_action = 81;
-    public static readonly RULE_optinherit = 82;
-    public static readonly RULE_partitionspec = 83;
+    public static readonly RULE_optInherit = 82;
+    public static readonly RULE_partitionSpec = 83;
     public static readonly RULE_part_elem = 84;
     public static readonly RULE_table_access_method_clause = 85;
-    public static readonly RULE_optwith = 86;
-    public static readonly RULE_oncommitoption = 87;
-    public static readonly RULE_opttablespace = 88;
-    public static readonly RULE_optconstablespace = 89;
-    public static readonly RULE_existingindex = 90;
-    public static readonly RULE_createstatsstmt = 91;
-    public static readonly RULE_alterstatsstmt = 92;
-    public static readonly RULE_createasstmt = 93;
+    public static readonly RULE_optWith = 86;
+    public static readonly RULE_onCommitOption = 87;
+    public static readonly RULE_optTableSpace = 88;
+    public static readonly RULE_optConstableSpace = 89;
+    public static readonly RULE_existingIndex = 90;
+    public static readonly RULE_createStatsStmt = 91;
+    public static readonly RULE_alterStatsStmt = 92;
+    public static readonly RULE_createAsStmt = 93;
     public static readonly RULE_create_as_target = 94;
     public static readonly RULE_opt_with_data = 95;
-    public static readonly RULE_creatematviewstmt = 96;
-    public static readonly RULE_refreshmatviewstmt = 97;
-    public static readonly RULE_createseqstmt = 98;
-    public static readonly RULE_alterseqstmt = 99;
-    public static readonly RULE_seqoptelem = 100;
-    public static readonly RULE_numericonly = 101;
-    public static readonly RULE_createplangstmt = 102;
-    public static readonly RULE_createtablespacestmt = 103;
-    public static readonly RULE_createextensionstmt = 104;
-    public static readonly RULE_alterextensionstmt = 105;
-    public static readonly RULE_alterextensioncontentsstmt = 106;
-    public static readonly RULE_createfdwstmt = 107;
+    public static readonly RULE_createMaterializedViewStmt = 96;
+    public static readonly RULE_refreshMaterializedViewStmt = 97;
+    public static readonly RULE_createSeqStmt = 98;
+    public static readonly RULE_alterSeqStmt = 99;
+    public static readonly RULE_seqOptElem = 100;
+    public static readonly RULE_numericOnly = 101;
+    public static readonly RULE_createProceduralLangStmt = 102;
+    public static readonly RULE_createTableSpaceStmt = 103;
+    public static readonly RULE_createExtensionStmt = 104;
+    public static readonly RULE_alterExtensionStmt = 105;
+    public static readonly RULE_alterExtensionContentsStmt = 106;
+    public static readonly RULE_createFdwStmt = 107;
     public static readonly RULE_fdw_option = 108;
-    public static readonly RULE_alterfdwstmt = 109;
+    public static readonly RULE_alterFdwStmt = 109;
     public static readonly RULE_create_generic_options = 110;
     public static readonly RULE_alter_generic_options = 111;
     public static readonly RULE_alter_generic_option_elem = 112;
     public static readonly RULE_generic_option_elem = 113;
-    public static readonly RULE_createforeignserverstmt = 114;
+    public static readonly RULE_createForeignServerStmt = 114;
     public static readonly RULE_foreign_server_version = 115;
-    public static readonly RULE_alterforeignserverstmt = 116;
-    public static readonly RULE_createforeigntablestmt = 117;
-    public static readonly RULE_importforeignschemastmt = 118;
-    public static readonly RULE_createusermappingstmt = 119;
-    public static readonly RULE_alterusermappingstmt = 120;
-    public static readonly RULE_createpolicystmt = 121;
-    public static readonly RULE_alterpolicystmt = 122;
-    public static readonly RULE_alterprocedurestmt = 123;
+    public static readonly RULE_alterForeignServerStmt = 116;
+    public static readonly RULE_createForeignTableStmt = 117;
+    public static readonly RULE_importForeignSchemaStmt = 118;
+    public static readonly RULE_createUserMappingStmt = 119;
+    public static readonly RULE_alterUserMappingStmt = 120;
+    public static readonly RULE_createPolicyStmt = 121;
+    public static readonly RULE_alterPolicyStmt = 122;
+    public static readonly RULE_alterProcedureStmt = 123;
     public static readonly RULE_procedure_action = 124;
-    public static readonly RULE_rowsecurityoptionalexpr = 125;
-    public static readonly RULE_rowsecurityoptionalwithcheck = 126;
-    public static readonly RULE_createamstmt = 127;
-    public static readonly RULE_createtrigstmt = 128;
-    public static readonly RULE_triggeractiontime = 129;
-    public static readonly RULE_triggerevents = 130;
-    public static readonly RULE_triggeroneevent = 131;
-    public static readonly RULE_triggerwhen = 132;
+    public static readonly RULE_rowSecurityOptionalExpr = 125;
+    public static readonly RULE_rowSecurityOptionalWithCheck = 126;
+    public static readonly RULE_createAccessMethodStmt = 127;
+    public static readonly RULE_createTrigStmt = 128;
+    public static readonly RULE_triggerActionTime = 129;
+    public static readonly RULE_triggerEvents = 130;
+    public static readonly RULE_triggerOneEvent = 131;
+    public static readonly RULE_triggerWhen = 132;
     public static readonly RULE_function_or_procedure = 133;
-    public static readonly RULE_triggerfuncargs = 134;
-    public static readonly RULE_triggerfuncarg = 135;
-    public static readonly RULE_constraintattributeElem = 136;
-    public static readonly RULE_createeventtrigstmt = 137;
+    public static readonly RULE_triggerFuncArgs = 134;
+    public static readonly RULE_triggerFuncArg = 135;
+    public static readonly RULE_constraintAttributeElem = 136;
+    public static readonly RULE_createEventTrigStmt = 137;
     public static readonly RULE_event_trigger_when_item = 138;
-    public static readonly RULE_altereventtrigstmt = 139;
-    public static readonly RULE_createassertionstmt = 140;
-    public static readonly RULE_definestmt = 141;
+    public static readonly RULE_alterEventTrigStmt = 139;
+    public static readonly RULE_createAssertionStmt = 140;
+    public static readonly RULE_defineStmt = 141;
     public static readonly RULE_definition = 142;
     public static readonly RULE_def_elem = 143;
     public static readonly RULE_def_arg = 144;
-    public static readonly RULE_old_aggr_elem = 145;
-    public static readonly RULE_alterenumstmt = 146;
+    public static readonly RULE_old_aggregate_elem = 145;
+    public static readonly RULE_alterEnumStmt = 146;
     public static readonly RULE_opt_if_not_exists = 147;
-    public static readonly RULE_createopclassstmt = 148;
-    public static readonly RULE_opclass_item = 149;
-    public static readonly RULE_createopfamilystmt = 150;
-    public static readonly RULE_alteropfamilystmt = 151;
-    public static readonly RULE_opclass_drop = 152;
-    public static readonly RULE_reassignownedstmt = 153;
-    public static readonly RULE_dropstmt = 154;
+    public static readonly RULE_createOperatorClassStmt = 148;
+    public static readonly RULE_opClassItem = 149;
+    public static readonly RULE_createOperatorFamilyStmt = 150;
+    public static readonly RULE_alterOperatorFamilyStmt = 151;
+    public static readonly RULE_opClassDrop = 152;
+    public static readonly RULE_reassignOwnedStmt = 153;
+    public static readonly RULE_dropStmt = 154;
     public static readonly RULE_object_type_any_name = 155;
     public static readonly RULE_object_type_name = 156;
     public static readonly RULE_any_name_list = 157;
     public static readonly RULE_any_name = 158;
     public static readonly RULE_attrs = 159;
-    public static readonly RULE_truncatestmt = 160;
+    public static readonly RULE_truncateStmt = 160;
     public static readonly RULE_truncate_table = 161;
-    public static readonly RULE_commentstmt = 162;
-    public static readonly RULE_seclabelstmt = 163;
-    public static readonly RULE_fetchstmt = 164;
+    public static readonly RULE_commentStmt = 162;
+    public static readonly RULE_secLabelStmt = 163;
+    public static readonly RULE_fetchStmt = 164;
     public static readonly RULE_fetch_args = 165;
     public static readonly RULE_from_in = 166;
-    public static readonly RULE_grantstmt = 167;
-    public static readonly RULE_revokestmt = 168;
+    public static readonly RULE_grantStmt = 167;
+    public static readonly RULE_revokeStmt = 168;
     public static readonly RULE_privileges = 169;
-    public static readonly RULE_beforeprivilegeselect = 170;
+    public static readonly RULE_beforePrivilegeSelect = 170;
     public static readonly RULE_privilege = 171;
     public static readonly RULE_privilege_target = 172;
     public static readonly RULE_grantee_list = 173;
-    public static readonly RULE_grantrolestmt = 174;
-    public static readonly RULE_revokerolestmt = 175;
-    public static readonly RULE_alterdefaultprivilegesstmt = 176;
+    public static readonly RULE_grantRoleStmt = 174;
+    public static readonly RULE_revokeRoleStmt = 175;
+    public static readonly RULE_alterDefaultPrivilegesStmt = 176;
     public static readonly RULE_defaclaction = 177;
     public static readonly RULE_defacl_privilege_target = 178;
-    public static readonly RULE_indexstmt = 179;
+    public static readonly RULE_indexStmt = 179;
     public static readonly RULE_index_params = 180;
     public static readonly RULE_index_elem = 181;
-    public static readonly RULE_createfunctionstmt = 182;
+    public static readonly RULE_createFunctionStmt = 182;
     public static readonly RULE_opt_or_replace = 183;
     public static readonly RULE_func_args = 184;
     public static readonly RULE_func_args_list = 185;
-    public static readonly RULE_routine_with_argtypes_list = 186;
-    public static readonly RULE_routine_with_argtypes = 187;
-    public static readonly RULE_procedure_with_argtypes_list = 188;
-    public static readonly RULE_procedure_with_argtypes = 189;
-    public static readonly RULE_function_with_argtypes_list = 190;
-    public static readonly RULE_function_with_argtypes = 191;
+    public static readonly RULE_routineWithArgTypesList = 186;
+    public static readonly RULE_routineWithArgTypes = 187;
+    public static readonly RULE_procedureWithArgTypesList = 188;
+    public static readonly RULE_procedureWithArgTypes = 189;
+    public static readonly RULE_functionWithArgTypesList = 190;
+    public static readonly RULE_functionWithArgTypes = 191;
     public static readonly RULE_func_arg = 192;
     public static readonly RULE_arg_class = 193;
     public static readonly RULE_func_type = 194;
     public static readonly RULE_func_arg_with_default = 195;
-    public static readonly RULE_aggr_args = 196;
-    public static readonly RULE_aggregate_with_argtypes = 197;
+    public static readonly RULE_aggregate_args = 196;
+    public static readonly RULE_aggregateWithArgTypes = 197;
     public static readonly RULE_common_func_opt_item = 198;
-    public static readonly RULE_createfunc_opt_item = 199;
+    public static readonly RULE_create_func_opt_item = 199;
     public static readonly RULE_opt_definition = 200;
     public static readonly RULE_table_func_column = 201;
-    public static readonly RULE_alterfunctionstmt = 202;
-    public static readonly RULE_removefuncstmt = 203;
-    public static readonly RULE_removeaggrstmt = 204;
-    public static readonly RULE_removeoperstmt = 205;
-    public static readonly RULE_oper_argtypes = 206;
+    public static readonly RULE_alterFunctionStmt = 202;
+    public static readonly RULE_removeFuncStmt = 203;
+    public static readonly RULE_removeAggregateStmt = 204;
+    public static readonly RULE_removeOperatorStmt = 205;
+    public static readonly RULE_operatorArgTypes = 206;
     public static readonly RULE_any_operator = 207;
-    public static readonly RULE_operator_with_argtypes = 208;
-    public static readonly RULE_dostmt = 209;
-    public static readonly RULE_createcaststmt = 210;
+    public static readonly RULE_operatorWithArgTypes = 208;
+    public static readonly RULE_doStmt = 209;
+    public static readonly RULE_createCastStmt = 210;
     public static readonly RULE_opt_if_exists = 211;
-    public static readonly RULE_createtransformstmt = 212;
+    public static readonly RULE_createTransformStmt = 212;
     public static readonly RULE_sql_with_function = 213;
-    public static readonly RULE_reindexstmt = 214;
-    public static readonly RULE_altertblspcstmt = 215;
-    public static readonly RULE_renamestmt = 216;
-    public static readonly RULE_alterobjectdependsstmt = 217;
-    public static readonly RULE_alterobjectschemastmt = 218;
-    public static readonly RULE_alteroperatorstmt = 219;
+    public static readonly RULE_reindexStmt = 214;
+    public static readonly RULE_alterTblSpcStmt = 215;
+    public static readonly RULE_renameStmt = 216;
+    public static readonly RULE_alterObjectDependsStmt = 217;
+    public static readonly RULE_alterObjectSchemaStmt = 218;
+    public static readonly RULE_alterOperatorStmt = 219;
     public static readonly RULE_operator_def_list = 220;
     public static readonly RULE_operator_def_elem = 221;
-    public static readonly RULE_altertypestmt = 222;
-    public static readonly RULE_alterownerstmt = 223;
-    public static readonly RULE_createpublicationstmt = 224;
-    public static readonly RULE_alterpublicationstmt = 225;
-    public static readonly RULE_createsubscriptionstmt = 226;
-    public static readonly RULE_altersubscriptionstmt = 227;
-    public static readonly RULE_rulestmt = 228;
-    public static readonly RULE_ruleactionstmt = 229;
-    public static readonly RULE_notifystmt = 230;
+    public static readonly RULE_alterTypeStmt = 222;
+    public static readonly RULE_alterOwnerStmt = 223;
+    public static readonly RULE_createPublicationStmt = 224;
+    public static readonly RULE_alterPublicationStmt = 225;
+    public static readonly RULE_createSubscriptionStmt = 226;
+    public static readonly RULE_alterSubscriptionStmt = 227;
+    public static readonly RULE_ruleStmt = 228;
+    public static readonly RULE_ruleActionStmt = 229;
+    public static readonly RULE_notifyStmt = 230;
     public static readonly RULE_notify_payload = 231;
-    public static readonly RULE_listenstmt = 232;
-    public static readonly RULE_unlistenstmt = 233;
-    public static readonly RULE_transactionstmt = 234;
+    public static readonly RULE_listenStmt = 232;
+    public static readonly RULE_unListenStmt = 233;
+    public static readonly RULE_transactionStmt = 234;
     public static readonly RULE_opt_transaction = 235;
     public static readonly RULE_transaction_mode_item = 236;
     public static readonly RULE_transaction_mode_list = 237;
-    public static readonly RULE_viewstmt = 238;
-    public static readonly RULE_loadstmt = 239;
-    public static readonly RULE_createdbstmt = 240;
-    public static readonly RULE_createdb_opt_item = 241;
-    public static readonly RULE_alterdatabasestmt = 242;
-    public static readonly RULE_alterdatabasesetstmt = 243;
-    public static readonly RULE_altercollationstmt = 244;
-    public static readonly RULE_altersystemstmt = 245;
-    public static readonly RULE_createdomainstmt = 246;
-    public static readonly RULE_alterdomainstmt = 247;
-    public static readonly RULE_altertsdictionarystmt = 248;
-    public static readonly RULE_altertsconfigurationstmt = 249;
-    public static readonly RULE_createconversionstmt = 250;
-    public static readonly RULE_clusterstmt = 251;
-    public static readonly RULE_vacuumstmt = 252;
-    public static readonly RULE_analyzestmt = 253;
+    public static readonly RULE_viewStmt = 238;
+    public static readonly RULE_loadStmt = 239;
+    public static readonly RULE_createDbStmt = 240;
+    public static readonly RULE_create_db_opt_item = 241;
+    public static readonly RULE_alterDatabaseStmt = 242;
+    public static readonly RULE_alterDatabaseSetStmt = 243;
+    public static readonly RULE_alterCollationStmt = 244;
+    public static readonly RULE_alterSystemStmt = 245;
+    public static readonly RULE_createDomainStmt = 246;
+    public static readonly RULE_alterDomainStmt = 247;
+    public static readonly RULE_alterSearchDictionaryStmt = 248;
+    public static readonly RULE_alterSearchConfigurationStmt = 249;
+    public static readonly RULE_createConversionStmt = 250;
+    public static readonly RULE_clusterStmt = 251;
+    public static readonly RULE_vacuumStmt = 252;
+    public static readonly RULE_analyzeStmt = 253;
     public static readonly RULE_analyze_keyword = 254;
     public static readonly RULE_vac_analyze_option_elem = 255;
     public static readonly RULE_analyze_option_elem = 256;
     public static readonly RULE_opt_verbose = 257;
     public static readonly RULE_vacuum_relation = 258;
     public static readonly RULE_vacuum_relation_list = 259;
-    public static readonly RULE_explainstmt = 260;
-    public static readonly RULE_explainablestmt = 261;
+    public static readonly RULE_explainStmt = 260;
+    public static readonly RULE_explainableStmt = 261;
     public static readonly RULE_explain_option_list = 262;
-    public static readonly RULE_preparestmt = 263;
+    public static readonly RULE_prepareStmt = 263;
     public static readonly RULE_prep_type_clause = 264;
-    public static readonly RULE_preparablestmt = 265;
-    public static readonly RULE_executestmt = 266;
+    public static readonly RULE_preParableStmt = 265;
+    public static readonly RULE_executeStmt = 266;
     public static readonly RULE_execute_param_clause = 267;
-    public static readonly RULE_deallocatestmt = 268;
-    public static readonly RULE_insertstmt = 269;
+    public static readonly RULE_dealLocateStmt = 268;
+    public static readonly RULE_insertStmt = 269;
     public static readonly RULE_insert_rest = 270;
     public static readonly RULE_insert_column_list = 271;
     public static readonly RULE_insert_column_item = 272;
     public static readonly RULE_returning_clause = 273;
-    public static readonly RULE_deletestmt = 274;
-    public static readonly RULE_lockstmt = 275;
-    public static readonly RULE_updatestmt = 276;
+    public static readonly RULE_deleteStmt = 274;
+    public static readonly RULE_lockStmt = 275;
+    public static readonly RULE_updateStmt = 276;
     public static readonly RULE_set_clause_list = 277;
     public static readonly RULE_set_clause = 278;
-    public static readonly RULE_declarecursorstmt = 279;
-    public static readonly RULE_selectstmt = 280;
+    public static readonly RULE_declareCursorStmt = 279;
+    public static readonly RULE_selectStmt = 280;
     public static readonly RULE_select_with_parens = 281;
     public static readonly RULE_select_no_parens = 282;
     public static readonly RULE_select_clause = 283;
@@ -895,13 +895,13 @@ export class PostgreSqlParser extends SQLParserBase {
     public static readonly RULE_set_operator_with_all_or_distinct = 285;
     public static readonly RULE_with_clause = 286;
     public static readonly RULE_common_table_expr = 287;
-    public static readonly RULE_search_cluase = 288;
-    public static readonly RULE_cycle_cluase = 289;
+    public static readonly RULE_search_clause = 288;
+    public static readonly RULE_cycle_clause = 289;
     public static readonly RULE_into_clause = 290;
-    public static readonly RULE_opttempTableName = 291;
+    public static readonly RULE_optTempTableName = 291;
     public static readonly RULE_distinct_clause = 292;
     public static readonly RULE_sort_clause = 293;
-    public static readonly RULE_sortby = 294;
+    public static readonly RULE_sortBy = 294;
     public static readonly RULE_select_limit = 295;
     public static readonly RULE_limit_clause = 296;
     public static readonly RULE_fetch_clause = 297;
@@ -923,24 +923,24 @@ export class PostgreSqlParser extends SQLParserBase {
     public static readonly RULE_publication_relation_expr = 313;
     public static readonly RULE_relation_expr_list = 314;
     public static readonly RULE_relation_expr_opt_alias = 315;
-    public static readonly RULE_tablesample_clause = 316;
+    public static readonly RULE_tableSampleClause = 316;
     public static readonly RULE_func_table = 317;
-    public static readonly RULE_rowsfrom_item = 318;
+    public static readonly RULE_rowsFromItem = 318;
     public static readonly RULE_where_clause = 319;
     public static readonly RULE_where_or_current_clause = 320;
-    public static readonly RULE_tablefuncelementlist = 321;
-    public static readonly RULE_tablefuncelement = 322;
-    public static readonly RULE_xmltable = 323;
-    public static readonly RULE_xmltable_column_el = 324;
+    public static readonly RULE_tableFuncElementList = 321;
+    public static readonly RULE_tableFuncElement = 322;
+    public static readonly RULE_xmlTable = 323;
+    public static readonly RULE_xmlTableColumnEl = 324;
     public static readonly RULE_xml_namespace_el = 325;
     public static readonly RULE_typename = 326;
-    public static readonly RULE_simpletypename = 327;
-    public static readonly RULE_consttypename = 328;
+    public static readonly RULE_simpleTypeName = 327;
+    public static readonly RULE_constTypeName = 328;
     public static readonly RULE_numeric = 329;
     public static readonly RULE_opt_float = 330;
     public static readonly RULE_bit = 331;
     public static readonly RULE_character = 332;
-    public static readonly RULE_constdatetime = 333;
+    public static readonly RULE_constDatetime = 333;
     public static readonly RULE_opt_interval = 334;
     public static readonly RULE_interval_second = 335;
     public static readonly RULE_comparisonOperator = 336;
@@ -956,7 +956,7 @@ export class PostgreSqlParser extends SQLParserBase {
     public static readonly RULE_xml_attribute_list = 346;
     public static readonly RULE_xml_attribute_el = 347;
     public static readonly RULE_document_or_content = 348;
-    public static readonly RULE_xmlexists_argument = 349;
+    public static readonly RULE_xmlExistsArgument = 349;
     public static readonly RULE_xml_passing_mech = 350;
     public static readonly RULE_window_clause = 351;
     public static readonly RULE_window_definition = 352;
@@ -974,7 +974,7 @@ export class PostgreSqlParser extends SQLParserBase {
     public static readonly RULE_subquery_Op = 364;
     public static readonly RULE_expr_list = 365;
     public static readonly RULE_column_expr = 366;
-    public static readonly RULE_column_expr_noparen = 367;
+    public static readonly RULE_column_expr_no_paren = 367;
     public static readonly RULE_func_arg_list = 368;
     public static readonly RULE_func_arg_expr = 369;
     public static readonly RULE_array_expr = 370;
@@ -1011,15 +1011,15 @@ export class PostgreSqlParser extends SQLParserBase {
     public static readonly RULE_column_name_create = 401;
     public static readonly RULE_function_name_create = 402;
     public static readonly RULE_function_name = 403;
-    public static readonly RULE_sconst = 404;
+    public static readonly RULE_stringConst = 404;
     public static readonly RULE_anysconst = 405;
-    public static readonly RULE_signediconst = 406;
-    public static readonly RULE_rolespec = 407;
+    public static readonly RULE_signedConst = 406;
+    public static readonly RULE_roleSpec = 407;
     public static readonly RULE_role_list = 408;
-    public static readonly RULE_colid = 409;
+    public static readonly RULE_colId = 409;
     public static readonly RULE_type_function_name = 410;
-    public static readonly RULE_nonreservedword = 411;
-    public static readonly RULE_collabel = 412;
+    public static readonly RULE_nonReservedWord = 411;
+    public static readonly RULE_colLabel = 412;
     public static readonly RULE_identifier = 413;
     public static readonly RULE_unreserved_keyword = 414;
     public static readonly RULE_col_name_keyword = 415;
@@ -1057,7 +1057,7 @@ export class PostgreSqlParser extends SQLParserBase {
     public static readonly RULE_stmt_fetch = 447;
     public static readonly RULE_opt_fetch_direction = 448;
     public static readonly RULE_stmt_move = 449;
-    public static readonly RULE_mergestmt = 450;
+    public static readonly RULE_mergeStmt = 450;
     public static readonly RULE_data_source = 451;
     public static readonly RULE_merge_when_clause = 452;
     public static readonly RULE_merge_insert = 453;
@@ -1303,101 +1303,101 @@ export class PostgreSqlParser extends SQLParserBase {
         "AfterEscapeStringConstantWithNewlineMode_Continued"
     ];
     public static readonly ruleNames = [
-        "program", "singleStmt", "stmt", "callstmt", "createrolestmt", "alteroptroleelem", 
-        "createoptroleelem", "createuserstmt", "alterrolestmt", "alterrolesetstmt", 
-        "alterroutinestmt", "alter_routine_cluase", "routine_action", "creategroupstmt", 
-        "altergroupstmt", "createschemastmt", "schema_name_create", "schema_stmt", 
-        "variablesetstmt", "set_rest", "generic_set", "set_rest_more", "var_name", 
+        "program", "singleStmt", "stmt", "callStmt", "createRoleStmt", "alterOperatorRoleElem", 
+        "createOperatorRoleElem", "createUserStmt", "alterRoleStmt", "alterRoleSetStmt", 
+        "alterRoutineStmt", "alter_routine_clause", "routine_action", "createGroupStmt", 
+        "alterGroupStmt", "createSchemaStmt", "schema_name_create", "schema_stmt", 
+        "variableSetStmt", "set_rest", "generic_set", "set_rest_more", "var_name", 
         "var_list", "var_value", "iso_level", "opt_boolean_or_string_column", 
-        "opt_boolean_or_string", "zone_value", "nonreservedword_or_sconst", 
-        "variableresetstmt", "reset_rest", "setresetclause", "functionsetresetclause", 
-        "variableshowstmt", "constraintssetstmt", "checkpointstmt", "discardstmt", 
-        "altertablestmt", "alter_table_cmds", "partition_bound_spec", "partition_bound_cluase", 
-        "partition_bound_choose", "partition_with_cluase", "partition_cmd", 
+        "opt_boolean_or_string", "zone_value", "nonReservedWordOrStringConst", 
+        "variableResetStmt", "reset_rest", "setOrResetClause", "functionSetOrResetClause", 
+        "variableShowStmt", "constraintsSetStmt", "checkPointStmt", "discardStmt", 
+        "alterTableStmt", "alter_table_cmds", "partition_bound_spec", "partition_bound_clause", 
+        "partition_bound_choose", "partition_with_clause", "partition_cmd", 
         "index_partition_cmd", "alter_table_cmd", "alter_column_default", 
-        "opt_drop_behavior", "opt_collate_clause", "reloptions", "opt_reloptions", 
-        "reloption_elem", "partitionboundspec", "altercompositetypestmt", 
-        "alter_type_cmd", "closeportalstmt", "copystmt", "copy_options", 
-        "copy_generic_opt_elem", "createstmt", "opttemp", "opttypedtableelementlist", 
-        "tableelementlist", "tableelement", "typedtableelement", "column_def", 
-        "colconstraint", "colconstraintelem", "generated_when", "tablelikeoption", 
-        "constraintelem", "opt_column_list", "opt_column_list_create", "column_list", 
-        "opt_c_include", "key_match", "exclusionconstraintelem", "key_actions", 
-        "key_update", "key_delete", "key_action", "optinherit", "partitionspec", 
-        "part_elem", "table_access_method_clause", "optwith", "oncommitoption", 
-        "opttablespace", "optconstablespace", "existingindex", "createstatsstmt", 
-        "alterstatsstmt", "createasstmt", "create_as_target", "opt_with_data", 
-        "creatematviewstmt", "refreshmatviewstmt", "createseqstmt", "alterseqstmt", 
-        "seqoptelem", "numericonly", "createplangstmt", "createtablespacestmt", 
-        "createextensionstmt", "alterextensionstmt", "alterextensioncontentsstmt", 
-        "createfdwstmt", "fdw_option", "alterfdwstmt", "create_generic_options", 
-        "alter_generic_options", "alter_generic_option_elem", "generic_option_elem", 
-        "createforeignserverstmt", "foreign_server_version", "alterforeignserverstmt", 
-        "createforeigntablestmt", "importforeignschemastmt", "createusermappingstmt", 
-        "alterusermappingstmt", "createpolicystmt", "alterpolicystmt", "alterprocedurestmt", 
-        "procedure_action", "rowsecurityoptionalexpr", "rowsecurityoptionalwithcheck", 
-        "createamstmt", "createtrigstmt", "triggeractiontime", "triggerevents", 
-        "triggeroneevent", "triggerwhen", "function_or_procedure", "triggerfuncargs", 
-        "triggerfuncarg", "constraintattributeElem", "createeventtrigstmt", 
-        "event_trigger_when_item", "altereventtrigstmt", "createassertionstmt", 
-        "definestmt", "definition", "def_elem", "def_arg", "old_aggr_elem", 
-        "alterenumstmt", "opt_if_not_exists", "createopclassstmt", "opclass_item", 
-        "createopfamilystmt", "alteropfamilystmt", "opclass_drop", "reassignownedstmt", 
-        "dropstmt", "object_type_any_name", "object_type_name", "any_name_list", 
-        "any_name", "attrs", "truncatestmt", "truncate_table", "commentstmt", 
-        "seclabelstmt", "fetchstmt", "fetch_args", "from_in", "grantstmt", 
-        "revokestmt", "privileges", "beforeprivilegeselect", "privilege", 
-        "privilege_target", "grantee_list", "grantrolestmt", "revokerolestmt", 
-        "alterdefaultprivilegesstmt", "defaclaction", "defacl_privilege_target", 
-        "indexstmt", "index_params", "index_elem", "createfunctionstmt", 
-        "opt_or_replace", "func_args", "func_args_list", "routine_with_argtypes_list", 
-        "routine_with_argtypes", "procedure_with_argtypes_list", "procedure_with_argtypes", 
-        "function_with_argtypes_list", "function_with_argtypes", "func_arg", 
-        "arg_class", "func_type", "func_arg_with_default", "aggr_args", 
-        "aggregate_with_argtypes", "common_func_opt_item", "createfunc_opt_item", 
-        "opt_definition", "table_func_column", "alterfunctionstmt", "removefuncstmt", 
-        "removeaggrstmt", "removeoperstmt", "oper_argtypes", "any_operator", 
-        "operator_with_argtypes", "dostmt", "createcaststmt", "opt_if_exists", 
-        "createtransformstmt", "sql_with_function", "reindexstmt", "altertblspcstmt", 
-        "renamestmt", "alterobjectdependsstmt", "alterobjectschemastmt", 
-        "alteroperatorstmt", "operator_def_list", "operator_def_elem", "altertypestmt", 
-        "alterownerstmt", "createpublicationstmt", "alterpublicationstmt", 
-        "createsubscriptionstmt", "altersubscriptionstmt", "rulestmt", "ruleactionstmt", 
-        "notifystmt", "notify_payload", "listenstmt", "unlistenstmt", "transactionstmt", 
+        "opt_drop_behavior", "opt_collate_clause", "relOptions", "optRelOptions", 
+        "relOptionElem", "partitionBoundSpec", "alterCompositeTypeStmt", 
+        "alter_type_cmd", "closePortalStmt", "copyStmt", "copy_options", 
+        "copy_generic_opt_elem", "createStmt", "optTemp", "optTypedTableElEmentList", 
+        "tableElementList", "tableElement", "typedTableElement", "column_def", 
+        "colConstraint", "colConstraintElem", "generated_when", "tableLikeOption", 
+        "constraintElem", "opt_column_list", "opt_column_list_create", "column_list", 
+        "opt_c_include", "key_match", "exclusionConstraintElem", "key_actions", 
+        "key_update", "key_delete", "key_action", "optInherit", "partitionSpec", 
+        "part_elem", "table_access_method_clause", "optWith", "onCommitOption", 
+        "optTableSpace", "optConstableSpace", "existingIndex", "createStatsStmt", 
+        "alterStatsStmt", "createAsStmt", "create_as_target", "opt_with_data", 
+        "createMaterializedViewStmt", "refreshMaterializedViewStmt", "createSeqStmt", 
+        "alterSeqStmt", "seqOptElem", "numericOnly", "createProceduralLangStmt", 
+        "createTableSpaceStmt", "createExtensionStmt", "alterExtensionStmt", 
+        "alterExtensionContentsStmt", "createFdwStmt", "fdw_option", "alterFdwStmt", 
+        "create_generic_options", "alter_generic_options", "alter_generic_option_elem", 
+        "generic_option_elem", "createForeignServerStmt", "foreign_server_version", 
+        "alterForeignServerStmt", "createForeignTableStmt", "importForeignSchemaStmt", 
+        "createUserMappingStmt", "alterUserMappingStmt", "createPolicyStmt", 
+        "alterPolicyStmt", "alterProcedureStmt", "procedure_action", "rowSecurityOptionalExpr", 
+        "rowSecurityOptionalWithCheck", "createAccessMethodStmt", "createTrigStmt", 
+        "triggerActionTime", "triggerEvents", "triggerOneEvent", "triggerWhen", 
+        "function_or_procedure", "triggerFuncArgs", "triggerFuncArg", "constraintAttributeElem", 
+        "createEventTrigStmt", "event_trigger_when_item", "alterEventTrigStmt", 
+        "createAssertionStmt", "defineStmt", "definition", "def_elem", "def_arg", 
+        "old_aggregate_elem", "alterEnumStmt", "opt_if_not_exists", "createOperatorClassStmt", 
+        "opClassItem", "createOperatorFamilyStmt", "alterOperatorFamilyStmt", 
+        "opClassDrop", "reassignOwnedStmt", "dropStmt", "object_type_any_name", 
+        "object_type_name", "any_name_list", "any_name", "attrs", "truncateStmt", 
+        "truncate_table", "commentStmt", "secLabelStmt", "fetchStmt", "fetch_args", 
+        "from_in", "grantStmt", "revokeStmt", "privileges", "beforePrivilegeSelect", 
+        "privilege", "privilege_target", "grantee_list", "grantRoleStmt", 
+        "revokeRoleStmt", "alterDefaultPrivilegesStmt", "defaclaction", 
+        "defacl_privilege_target", "indexStmt", "index_params", "index_elem", 
+        "createFunctionStmt", "opt_or_replace", "func_args", "func_args_list", 
+        "routineWithArgTypesList", "routineWithArgTypes", "procedureWithArgTypesList", 
+        "procedureWithArgTypes", "functionWithArgTypesList", "functionWithArgTypes", 
+        "func_arg", "arg_class", "func_type", "func_arg_with_default", "aggregate_args", 
+        "aggregateWithArgTypes", "common_func_opt_item", "create_func_opt_item", 
+        "opt_definition", "table_func_column", "alterFunctionStmt", "removeFuncStmt", 
+        "removeAggregateStmt", "removeOperatorStmt", "operatorArgTypes", 
+        "any_operator", "operatorWithArgTypes", "doStmt", "createCastStmt", 
+        "opt_if_exists", "createTransformStmt", "sql_with_function", "reindexStmt", 
+        "alterTblSpcStmt", "renameStmt", "alterObjectDependsStmt", "alterObjectSchemaStmt", 
+        "alterOperatorStmt", "operator_def_list", "operator_def_elem", "alterTypeStmt", 
+        "alterOwnerStmt", "createPublicationStmt", "alterPublicationStmt", 
+        "createSubscriptionStmt", "alterSubscriptionStmt", "ruleStmt", "ruleActionStmt", 
+        "notifyStmt", "notify_payload", "listenStmt", "unListenStmt", "transactionStmt", 
         "opt_transaction", "transaction_mode_item", "transaction_mode_list", 
-        "viewstmt", "loadstmt", "createdbstmt", "createdb_opt_item", "alterdatabasestmt", 
-        "alterdatabasesetstmt", "altercollationstmt", "altersystemstmt", 
-        "createdomainstmt", "alterdomainstmt", "altertsdictionarystmt", 
-        "altertsconfigurationstmt", "createconversionstmt", "clusterstmt", 
-        "vacuumstmt", "analyzestmt", "analyze_keyword", "vac_analyze_option_elem", 
+        "viewStmt", "loadStmt", "createDbStmt", "create_db_opt_item", "alterDatabaseStmt", 
+        "alterDatabaseSetStmt", "alterCollationStmt", "alterSystemStmt", 
+        "createDomainStmt", "alterDomainStmt", "alterSearchDictionaryStmt", 
+        "alterSearchConfigurationStmt", "createConversionStmt", "clusterStmt", 
+        "vacuumStmt", "analyzeStmt", "analyze_keyword", "vac_analyze_option_elem", 
         "analyze_option_elem", "opt_verbose", "vacuum_relation", "vacuum_relation_list", 
-        "explainstmt", "explainablestmt", "explain_option_list", "preparestmt", 
-        "prep_type_clause", "preparablestmt", "executestmt", "execute_param_clause", 
-        "deallocatestmt", "insertstmt", "insert_rest", "insert_column_list", 
-        "insert_column_item", "returning_clause", "deletestmt", "lockstmt", 
-        "updatestmt", "set_clause_list", "set_clause", "declarecursorstmt", 
-        "selectstmt", "select_with_parens", "select_no_parens", "select_clause", 
+        "explainStmt", "explainableStmt", "explain_option_list", "prepareStmt", 
+        "prep_type_clause", "preParableStmt", "executeStmt", "execute_param_clause", 
+        "dealLocateStmt", "insertStmt", "insert_rest", "insert_column_list", 
+        "insert_column_item", "returning_clause", "deleteStmt", "lockStmt", 
+        "updateStmt", "set_clause_list", "set_clause", "declareCursorStmt", 
+        "selectStmt", "select_with_parens", "select_no_parens", "select_clause", 
         "simple_select", "set_operator_with_all_or_distinct", "with_clause", 
-        "common_table_expr", "search_cluase", "cycle_cluase", "into_clause", 
-        "opttempTableName", "distinct_clause", "sort_clause", "sortby", 
+        "common_table_expr", "search_clause", "cycle_clause", "into_clause", 
+        "optTempTableName", "distinct_clause", "sort_clause", "sortBy", 
         "select_limit", "limit_clause", "fetch_clause", "offset_clause", 
         "select_fetch_first_value", "group_clause", "group_by_list", "group_by_item", 
         "for_locking_clause", "values_clause", "from_clause", "from_list", 
         "table_ref", "alias_clause", "func_alias_clause", "join_type", "join_qual", 
         "relation_expr", "publication_relation_expr", "relation_expr_list", 
-        "relation_expr_opt_alias", "tablesample_clause", "func_table", "rowsfrom_item", 
-        "where_clause", "where_or_current_clause", "tablefuncelementlist", 
-        "tablefuncelement", "xmltable", "xmltable_column_el", "xml_namespace_el", 
-        "typename", "simpletypename", "consttypename", "numeric", "opt_float", 
-        "bit", "character", "constdatetime", "opt_interval", "interval_second", 
+        "relation_expr_opt_alias", "tableSampleClause", "func_table", "rowsFromItem", 
+        "where_clause", "where_or_current_clause", "tableFuncElementList", 
+        "tableFuncElement", "xmlTable", "xmlTableColumnEl", "xml_namespace_el", 
+        "typename", "simpleTypeName", "constTypeName", "numeric", "opt_float", 
+        "bit", "character", "constDatetime", "opt_interval", "interval_second", 
         "comparisonOperator", "expression", "booleanExpression", "predicate", 
         "valueExpression", "primaryExpression", "func_application", "func_expr", 
         "func_expr_windowless", "func_expr_common_subexpr", "xml_attribute_list", 
-        "xml_attribute_el", "document_or_content", "xmlexists_argument", 
+        "xml_attribute_el", "document_or_content", "xmlExistsArgument", 
         "xml_passing_mech", "window_clause", "window_definition", "over_clause", 
         "window_specification", "opt_frame_clause", "frame_bound", "row", 
         "explicit_row", "sub_type", "all_op", "mathop", "qual_op", "qual_all_op", 
-        "subquery_Op", "expr_list", "column_expr", "column_expr_noparen", 
+        "subquery_Op", "expr_list", "column_expr", "column_expr_no_paren", 
         "func_arg_list", "func_arg_expr", "array_expr", "extract_arg", "unicode_normal_form", 
         "substr_list", "when_clause", "indirection_el", "indirection", "opt_indirection", 
         "target_list", "target_el", "qualified_name_list", "table_name_list", 
@@ -1406,9 +1406,9 @@ export class PostgreSqlParser extends SQLParserBase {
         "view_name", "qualified_name", "tablespace_name_list", "name_list", 
         "database_name_create", "database_name", "schema_name", "routine_name_create", 
         "routine_name", "procedure_name", "procedure_name_create", "column_name", 
-        "column_name_create", "function_name_create", "function_name", "sconst", 
-        "anysconst", "signediconst", "rolespec", "role_list", "colid", "type_function_name", 
-        "nonreservedword", "collabel", "identifier", "unreserved_keyword", 
+        "column_name_create", "function_name_create", "function_name", "stringConst", 
+        "anysconst", "signedConst", "roleSpec", "role_list", "colId", "type_function_name", 
+        "nonReservedWord", "colLabel", "identifier", "unreserved_keyword", 
         "col_name_keyword", "type_func_name_keyword", "reserved_keyword", 
         "pl_block", "label_decl", "decl_statement", "decl_cursor_arg", "assign_operator", 
         "proc_stmt", "stmt_perform", "stmt_call", "stmt_assign", "stmt_getdiag", 
@@ -1417,7 +1417,7 @@ export class PostgreSqlParser extends SQLParserBase {
         "stmt_return", "stmt_raise", "opt_raise_using_elem", "stmt_assert", 
         "loop_body", "stmt_execsql", "stmt_dynexecute", "opt_execute_into", 
         "stmt_open", "opt_open_bound_list_item", "stmt_fetch", "opt_fetch_direction", 
-        "stmt_move", "mergestmt", "data_source", "merge_when_clause", "merge_insert", 
+        "stmt_move", "mergeStmt", "data_source", "merge_when_clause", "merge_insert", 
         "merge_update", "default_values_or_values", "exprofdefault", "stmt_close", 
         "stmt_null", "stmt_commit_or_rollback", "stmt_set", "cursor_variable", 
         "exception_sect", "proc_condition", "any_identifier", "sql_expression",
@@ -1523,812 +1523,812 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 944;
-                this.altereventtrigstmt();
+                this.alterEventTrigStmt();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 945;
-                this.altercollationstmt();
+                this.alterCollationStmt();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 946;
-                this.alterdatabasestmt();
+                this.alterDatabaseStmt();
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 947;
-                this.alterdatabasesetstmt();
+                this.alterDatabaseSetStmt();
                 }
                 break;
             case 5:
                 this.enterOuterAlt(localContext, 5);
                 {
                 this.state = 948;
-                this.alterdefaultprivilegesstmt();
+                this.alterDefaultPrivilegesStmt();
                 }
                 break;
             case 6:
                 this.enterOuterAlt(localContext, 6);
                 {
                 this.state = 949;
-                this.alterdomainstmt();
+                this.alterDomainStmt();
                 }
                 break;
             case 7:
                 this.enterOuterAlt(localContext, 7);
                 {
                 this.state = 950;
-                this.alterenumstmt();
+                this.alterEnumStmt();
                 }
                 break;
             case 8:
                 this.enterOuterAlt(localContext, 8);
                 {
                 this.state = 951;
-                this.alterextensionstmt();
+                this.alterExtensionStmt();
                 }
                 break;
             case 9:
                 this.enterOuterAlt(localContext, 9);
                 {
                 this.state = 952;
-                this.alterextensioncontentsstmt();
+                this.alterExtensionContentsStmt();
                 }
                 break;
             case 10:
                 this.enterOuterAlt(localContext, 10);
                 {
                 this.state = 953;
-                this.alterfdwstmt();
+                this.alterFdwStmt();
                 }
                 break;
             case 11:
                 this.enterOuterAlt(localContext, 11);
                 {
                 this.state = 954;
-                this.alterforeignserverstmt();
+                this.alterForeignServerStmt();
                 }
                 break;
             case 12:
                 this.enterOuterAlt(localContext, 12);
                 {
                 this.state = 955;
-                this.alterfunctionstmt();
+                this.alterFunctionStmt();
                 }
                 break;
             case 13:
                 this.enterOuterAlt(localContext, 13);
                 {
                 this.state = 956;
-                this.altergroupstmt();
+                this.alterGroupStmt();
                 }
                 break;
             case 14:
                 this.enterOuterAlt(localContext, 14);
                 {
                 this.state = 957;
-                this.alterobjectdependsstmt();
+                this.alterObjectDependsStmt();
                 }
                 break;
             case 15:
                 this.enterOuterAlt(localContext, 15);
                 {
                 this.state = 958;
-                this.alterobjectschemastmt();
+                this.alterObjectSchemaStmt();
                 }
                 break;
             case 16:
                 this.enterOuterAlt(localContext, 16);
                 {
                 this.state = 959;
-                this.alterownerstmt();
+                this.alterOwnerStmt();
                 }
                 break;
             case 17:
                 this.enterOuterAlt(localContext, 17);
                 {
                 this.state = 960;
-                this.alteroperatorstmt();
+                this.alterOperatorStmt();
                 }
                 break;
             case 18:
                 this.enterOuterAlt(localContext, 18);
                 {
                 this.state = 961;
-                this.altertypestmt();
+                this.alterTypeStmt();
                 }
                 break;
             case 19:
                 this.enterOuterAlt(localContext, 19);
                 {
                 this.state = 962;
-                this.alterpolicystmt();
+                this.alterPolicyStmt();
                 }
                 break;
             case 20:
                 this.enterOuterAlt(localContext, 20);
                 {
                 this.state = 963;
-                this.alterprocedurestmt();
+                this.alterProcedureStmt();
                 }
                 break;
             case 21:
                 this.enterOuterAlt(localContext, 21);
                 {
                 this.state = 964;
-                this.alterseqstmt();
+                this.alterSeqStmt();
                 }
                 break;
             case 22:
                 this.enterOuterAlt(localContext, 22);
                 {
                 this.state = 965;
-                this.altersystemstmt();
+                this.alterSystemStmt();
                 }
                 break;
             case 23:
                 this.enterOuterAlt(localContext, 23);
                 {
                 this.state = 966;
-                this.altertablestmt();
+                this.alterTableStmt();
                 }
                 break;
             case 24:
                 this.enterOuterAlt(localContext, 24);
                 {
                 this.state = 967;
-                this.altertblspcstmt();
+                this.alterTblSpcStmt();
                 }
                 break;
             case 25:
                 this.enterOuterAlt(localContext, 25);
                 {
                 this.state = 968;
-                this.altercompositetypestmt();
+                this.alterCompositeTypeStmt();
                 }
                 break;
             case 26:
                 this.enterOuterAlt(localContext, 26);
                 {
                 this.state = 969;
-                this.alterpublicationstmt();
+                this.alterPublicationStmt();
                 }
                 break;
             case 27:
                 this.enterOuterAlt(localContext, 27);
                 {
                 this.state = 970;
-                this.alterrolesetstmt();
+                this.alterRoleSetStmt();
                 }
                 break;
             case 28:
                 this.enterOuterAlt(localContext, 28);
                 {
                 this.state = 971;
-                this.alterroutinestmt();
+                this.alterRoutineStmt();
                 }
                 break;
             case 29:
                 this.enterOuterAlt(localContext, 29);
                 {
                 this.state = 972;
-                this.alterrolestmt();
+                this.alterRoleStmt();
                 }
                 break;
             case 30:
                 this.enterOuterAlt(localContext, 30);
                 {
                 this.state = 973;
-                this.altersubscriptionstmt();
+                this.alterSubscriptionStmt();
                 }
                 break;
             case 31:
                 this.enterOuterAlt(localContext, 31);
                 {
                 this.state = 974;
-                this.alterstatsstmt();
+                this.alterStatsStmt();
                 }
                 break;
             case 32:
                 this.enterOuterAlt(localContext, 32);
                 {
                 this.state = 975;
-                this.altertsconfigurationstmt();
+                this.alterSearchConfigurationStmt();
                 }
                 break;
             case 33:
                 this.enterOuterAlt(localContext, 33);
                 {
                 this.state = 976;
-                this.altertsdictionarystmt();
+                this.alterSearchDictionaryStmt();
                 }
                 break;
             case 34:
                 this.enterOuterAlt(localContext, 34);
                 {
                 this.state = 977;
-                this.alterusermappingstmt();
+                this.alterUserMappingStmt();
                 }
                 break;
             case 35:
                 this.enterOuterAlt(localContext, 35);
                 {
                 this.state = 978;
-                this.analyzestmt();
+                this.analyzeStmt();
                 }
                 break;
             case 36:
                 this.enterOuterAlt(localContext, 36);
                 {
                 this.state = 979;
-                this.callstmt();
+                this.callStmt();
                 }
                 break;
             case 37:
                 this.enterOuterAlt(localContext, 37);
                 {
                 this.state = 980;
-                this.checkpointstmt();
+                this.checkPointStmt();
                 }
                 break;
             case 38:
                 this.enterOuterAlt(localContext, 38);
                 {
                 this.state = 981;
-                this.closeportalstmt();
+                this.closePortalStmt();
                 }
                 break;
             case 39:
                 this.enterOuterAlt(localContext, 39);
                 {
                 this.state = 982;
-                this.clusterstmt();
+                this.clusterStmt();
                 }
                 break;
             case 40:
                 this.enterOuterAlt(localContext, 40);
                 {
                 this.state = 983;
-                this.commentstmt();
+                this.commentStmt();
                 }
                 break;
             case 41:
                 this.enterOuterAlt(localContext, 41);
                 {
                 this.state = 984;
-                this.constraintssetstmt();
+                this.constraintsSetStmt();
                 }
                 break;
             case 42:
                 this.enterOuterAlt(localContext, 42);
                 {
                 this.state = 985;
-                this.copystmt();
+                this.copyStmt();
                 }
                 break;
             case 43:
                 this.enterOuterAlt(localContext, 43);
                 {
                 this.state = 986;
-                this.createamstmt();
+                this.createAccessMethodStmt();
                 }
                 break;
             case 44:
                 this.enterOuterAlt(localContext, 44);
                 {
                 this.state = 987;
-                this.createasstmt();
+                this.createAsStmt();
                 }
                 break;
             case 45:
                 this.enterOuterAlt(localContext, 45);
                 {
                 this.state = 988;
-                this.createassertionstmt();
+                this.createAssertionStmt();
                 }
                 break;
             case 46:
                 this.enterOuterAlt(localContext, 46);
                 {
                 this.state = 989;
-                this.createcaststmt();
+                this.createCastStmt();
                 }
                 break;
             case 47:
                 this.enterOuterAlt(localContext, 47);
                 {
                 this.state = 990;
-                this.createconversionstmt();
+                this.createConversionStmt();
                 }
                 break;
             case 48:
                 this.enterOuterAlt(localContext, 48);
                 {
                 this.state = 991;
-                this.createdomainstmt();
+                this.createDomainStmt();
                 }
                 break;
             case 49:
                 this.enterOuterAlt(localContext, 49);
                 {
                 this.state = 992;
-                this.createextensionstmt();
+                this.createExtensionStmt();
                 }
                 break;
             case 50:
                 this.enterOuterAlt(localContext, 50);
                 {
                 this.state = 993;
-                this.createfdwstmt();
+                this.createFdwStmt();
                 }
                 break;
             case 51:
                 this.enterOuterAlt(localContext, 51);
                 {
                 this.state = 994;
-                this.createforeignserverstmt();
+                this.createForeignServerStmt();
                 }
                 break;
             case 52:
                 this.enterOuterAlt(localContext, 52);
                 {
                 this.state = 995;
-                this.createforeigntablestmt();
+                this.createForeignTableStmt();
                 }
                 break;
             case 53:
                 this.enterOuterAlt(localContext, 53);
                 {
                 this.state = 996;
-                this.createfunctionstmt();
+                this.createFunctionStmt();
                 }
                 break;
             case 54:
                 this.enterOuterAlt(localContext, 54);
                 {
                 this.state = 997;
-                this.creategroupstmt();
+                this.createGroupStmt();
                 }
                 break;
             case 55:
                 this.enterOuterAlt(localContext, 55);
                 {
                 this.state = 998;
-                this.creatematviewstmt();
+                this.createMaterializedViewStmt();
                 }
                 break;
             case 56:
                 this.enterOuterAlt(localContext, 56);
                 {
                 this.state = 999;
-                this.createopclassstmt();
+                this.createOperatorClassStmt();
                 }
                 break;
             case 57:
                 this.enterOuterAlt(localContext, 57);
                 {
                 this.state = 1000;
-                this.createopfamilystmt();
+                this.createOperatorFamilyStmt();
                 }
                 break;
             case 58:
                 this.enterOuterAlt(localContext, 58);
                 {
                 this.state = 1001;
-                this.createpublicationstmt();
+                this.createPublicationStmt();
                 }
                 break;
             case 59:
                 this.enterOuterAlt(localContext, 59);
                 {
                 this.state = 1002;
-                this.alteropfamilystmt();
+                this.alterOperatorFamilyStmt();
                 }
                 break;
             case 60:
                 this.enterOuterAlt(localContext, 60);
                 {
                 this.state = 1003;
-                this.createpolicystmt();
+                this.createPolicyStmt();
                 }
                 break;
             case 61:
                 this.enterOuterAlt(localContext, 61);
                 {
                 this.state = 1004;
-                this.createplangstmt();
+                this.createProceduralLangStmt();
                 }
                 break;
             case 62:
                 this.enterOuterAlt(localContext, 62);
                 {
                 this.state = 1005;
-                this.createschemastmt();
+                this.createSchemaStmt();
                 }
                 break;
             case 63:
                 this.enterOuterAlt(localContext, 63);
                 {
                 this.state = 1006;
-                this.createseqstmt();
+                this.createSeqStmt();
                 }
                 break;
             case 64:
                 this.enterOuterAlt(localContext, 64);
                 {
                 this.state = 1007;
-                this.createstmt();
+                this.createStmt();
                 }
                 break;
             case 65:
                 this.enterOuterAlt(localContext, 65);
                 {
                 this.state = 1008;
-                this.createsubscriptionstmt();
+                this.createSubscriptionStmt();
                 }
                 break;
             case 66:
                 this.enterOuterAlt(localContext, 66);
                 {
                 this.state = 1009;
-                this.createstatsstmt();
+                this.createStatsStmt();
                 }
                 break;
             case 67:
                 this.enterOuterAlt(localContext, 67);
                 {
                 this.state = 1010;
-                this.createtablespacestmt();
+                this.createTableSpaceStmt();
                 }
                 break;
             case 68:
                 this.enterOuterAlt(localContext, 68);
                 {
                 this.state = 1011;
-                this.createtransformstmt();
+                this.createTransformStmt();
                 }
                 break;
             case 69:
                 this.enterOuterAlt(localContext, 69);
                 {
                 this.state = 1012;
-                this.createtrigstmt();
+                this.createTrigStmt();
                 }
                 break;
             case 70:
                 this.enterOuterAlt(localContext, 70);
                 {
                 this.state = 1013;
-                this.createeventtrigstmt();
+                this.createEventTrigStmt();
                 }
                 break;
             case 71:
                 this.enterOuterAlt(localContext, 71);
                 {
                 this.state = 1014;
-                this.createrolestmt();
+                this.createRoleStmt();
                 }
                 break;
             case 72:
                 this.enterOuterAlt(localContext, 72);
                 {
                 this.state = 1015;
-                this.createuserstmt();
+                this.createUserStmt();
                 }
                 break;
             case 73:
                 this.enterOuterAlt(localContext, 73);
                 {
                 this.state = 1016;
-                this.createusermappingstmt();
+                this.createUserMappingStmt();
                 }
                 break;
             case 74:
                 this.enterOuterAlt(localContext, 74);
                 {
                 this.state = 1017;
-                this.createdbstmt();
+                this.createDbStmt();
                 }
                 break;
             case 75:
                 this.enterOuterAlt(localContext, 75);
                 {
                 this.state = 1018;
-                this.deallocatestmt();
+                this.dealLocateStmt();
                 }
                 break;
             case 76:
                 this.enterOuterAlt(localContext, 76);
                 {
                 this.state = 1019;
-                this.declarecursorstmt();
+                this.declareCursorStmt();
                 }
                 break;
             case 77:
                 this.enterOuterAlt(localContext, 77);
                 {
                 this.state = 1020;
-                this.definestmt();
+                this.defineStmt();
                 }
                 break;
             case 78:
                 this.enterOuterAlt(localContext, 78);
                 {
                 this.state = 1021;
-                this.deletestmt();
+                this.deleteStmt();
                 }
                 break;
             case 79:
                 this.enterOuterAlt(localContext, 79);
                 {
                 this.state = 1022;
-                this.discardstmt();
+                this.discardStmt();
                 }
                 break;
             case 80:
                 this.enterOuterAlt(localContext, 80);
                 {
                 this.state = 1023;
-                this.dostmt();
+                this.doStmt();
                 }
                 break;
             case 81:
                 this.enterOuterAlt(localContext, 81);
                 {
                 this.state = 1024;
-                this.dropstmt();
+                this.dropStmt();
                 }
                 break;
             case 82:
                 this.enterOuterAlt(localContext, 82);
                 {
                 this.state = 1025;
-                this.executestmt();
+                this.executeStmt();
                 }
                 break;
             case 83:
                 this.enterOuterAlt(localContext, 83);
                 {
                 this.state = 1026;
-                this.explainstmt();
+                this.explainStmt();
                 }
                 break;
             case 84:
                 this.enterOuterAlt(localContext, 84);
                 {
                 this.state = 1027;
-                this.fetchstmt();
+                this.fetchStmt();
                 }
                 break;
             case 85:
                 this.enterOuterAlt(localContext, 85);
                 {
                 this.state = 1028;
-                this.grantstmt();
+                this.grantStmt();
                 }
                 break;
             case 86:
                 this.enterOuterAlt(localContext, 86);
                 {
                 this.state = 1029;
-                this.grantrolestmt();
+                this.grantRoleStmt();
                 }
                 break;
             case 87:
                 this.enterOuterAlt(localContext, 87);
                 {
                 this.state = 1030;
-                this.mergestmt();
+                this.mergeStmt();
                 }
                 break;
             case 88:
                 this.enterOuterAlt(localContext, 88);
                 {
                 this.state = 1031;
-                this.importforeignschemastmt();
+                this.importForeignSchemaStmt();
                 }
                 break;
             case 89:
                 this.enterOuterAlt(localContext, 89);
                 {
                 this.state = 1032;
-                this.indexstmt();
+                this.indexStmt();
                 }
                 break;
             case 90:
                 this.enterOuterAlt(localContext, 90);
                 {
                 this.state = 1033;
-                this.insertstmt();
+                this.insertStmt();
                 }
                 break;
             case 91:
                 this.enterOuterAlt(localContext, 91);
                 {
                 this.state = 1034;
-                this.listenstmt();
+                this.listenStmt();
                 }
                 break;
             case 92:
                 this.enterOuterAlt(localContext, 92);
                 {
                 this.state = 1035;
-                this.refreshmatviewstmt();
+                this.refreshMaterializedViewStmt();
                 }
                 break;
             case 93:
                 this.enterOuterAlt(localContext, 93);
                 {
                 this.state = 1036;
-                this.loadstmt();
+                this.loadStmt();
                 }
                 break;
             case 94:
                 this.enterOuterAlt(localContext, 94);
                 {
                 this.state = 1037;
-                this.lockstmt();
+                this.lockStmt();
                 }
                 break;
             case 95:
                 this.enterOuterAlt(localContext, 95);
                 {
                 this.state = 1038;
-                this.notifystmt();
+                this.notifyStmt();
                 }
                 break;
             case 96:
                 this.enterOuterAlt(localContext, 96);
                 {
                 this.state = 1039;
-                this.preparestmt();
+                this.prepareStmt();
                 }
                 break;
             case 97:
                 this.enterOuterAlt(localContext, 97);
                 {
                 this.state = 1040;
-                this.reassignownedstmt();
+                this.reassignOwnedStmt();
                 }
                 break;
             case 98:
                 this.enterOuterAlt(localContext, 98);
                 {
                 this.state = 1041;
-                this.reindexstmt();
+                this.reindexStmt();
                 }
                 break;
             case 99:
                 this.enterOuterAlt(localContext, 99);
                 {
                 this.state = 1042;
-                this.removeaggrstmt();
+                this.removeAggregateStmt();
                 }
                 break;
             case 100:
                 this.enterOuterAlt(localContext, 100);
                 {
                 this.state = 1043;
-                this.removefuncstmt();
+                this.removeFuncStmt();
                 }
                 break;
             case 101:
                 this.enterOuterAlt(localContext, 101);
                 {
                 this.state = 1044;
-                this.removeoperstmt();
+                this.removeOperatorStmt();
                 }
                 break;
             case 102:
                 this.enterOuterAlt(localContext, 102);
                 {
                 this.state = 1045;
-                this.renamestmt();
+                this.renameStmt();
                 }
                 break;
             case 103:
                 this.enterOuterAlt(localContext, 103);
                 {
                 this.state = 1046;
-                this.revokestmt();
+                this.revokeStmt();
                 }
                 break;
             case 104:
                 this.enterOuterAlt(localContext, 104);
                 {
                 this.state = 1047;
-                this.revokerolestmt();
+                this.revokeRoleStmt();
                 }
                 break;
             case 105:
                 this.enterOuterAlt(localContext, 105);
                 {
                 this.state = 1048;
-                this.rulestmt();
+                this.ruleStmt();
                 }
                 break;
             case 106:
                 this.enterOuterAlt(localContext, 106);
                 {
                 this.state = 1049;
-                this.seclabelstmt();
+                this.secLabelStmt();
                 }
                 break;
             case 107:
                 this.enterOuterAlt(localContext, 107);
                 {
                 this.state = 1050;
-                this.selectstmt();
+                this.selectStmt();
                 }
                 break;
             case 108:
                 this.enterOuterAlt(localContext, 108);
                 {
                 this.state = 1051;
-                this.transactionstmt();
+                this.transactionStmt();
                 }
                 break;
             case 109:
                 this.enterOuterAlt(localContext, 109);
                 {
                 this.state = 1052;
-                this.truncatestmt();
+                this.truncateStmt();
                 }
                 break;
             case 110:
                 this.enterOuterAlt(localContext, 110);
                 {
                 this.state = 1053;
-                this.unlistenstmt();
+                this.unListenStmt();
                 }
                 break;
             case 111:
                 this.enterOuterAlt(localContext, 111);
                 {
                 this.state = 1054;
-                this.updatestmt();
+                this.updateStmt();
                 }
                 break;
             case 112:
                 this.enterOuterAlt(localContext, 112);
                 {
                 this.state = 1055;
-                this.vacuumstmt();
+                this.vacuumStmt();
                 }
                 break;
             case 113:
                 this.enterOuterAlt(localContext, 113);
                 {
                 this.state = 1056;
-                this.variableresetstmt();
+                this.variableResetStmt();
                 }
                 break;
             case 114:
                 this.enterOuterAlt(localContext, 114);
                 {
                 this.state = 1057;
-                this.variablesetstmt();
+                this.variableSetStmt();
                 }
                 break;
             case 115:
                 this.enterOuterAlt(localContext, 115);
                 {
                 this.state = 1058;
-                this.variableshowstmt();
+                this.variableShowStmt();
                 }
                 break;
             case 116:
                 this.enterOuterAlt(localContext, 116);
                 {
                 this.state = 1059;
-                this.viewstmt();
+                this.viewStmt();
                 }
                 break;
             case 117:
@@ -2364,9 +2364,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public callstmt(): CallstmtContext {
-        let localContext = new CallstmtContext(this.context, this.state);
-        this.enterRule(localContext, 6, PostgreSqlParser.RULE_callstmt);
+    public callStmt(): CallStmtContext {
+        let localContext = new CallStmtContext(this.context, this.state);
+        this.enterRule(localContext, 6, PostgreSqlParser.RULE_callStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -2390,9 +2390,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createrolestmt(): CreaterolestmtContext {
-        let localContext = new CreaterolestmtContext(this.context, this.state);
-        this.enterRule(localContext, 8, PostgreSqlParser.RULE_createrolestmt);
+    public createRoleStmt(): CreateRoleStmtContext {
+        let localContext = new CreateRoleStmtContext(this.context, this.state);
+        this.enterRule(localContext, 8, PostgreSqlParser.RULE_createRoleStmt);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -2402,7 +2402,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 1070;
             this.match(PostgreSqlParser.KW_ROLE);
             this.state = 1071;
-            this.rolespec();
+            this.roleSpec();
             this.state = 1073;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 4, this.context) ) {
@@ -2421,7 +2421,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 1075;
-                    this.createoptroleelem();
+                    this.createOperatorRoleElem();
                     }
                     }
                 }
@@ -2445,9 +2445,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alteroptroleelem(): AlteroptroleelemContext {
-        let localContext = new AlteroptroleelemContext(this.context, this.state);
-        this.enterRule(localContext, 10, PostgreSqlParser.RULE_alteroptroleelem);
+    public alterOperatorRoleElem(): AlterOperatorRoleElemContext {
+        let localContext = new AlterOperatorRoleElemContext(this.context, this.state);
+        this.enterRule(localContext, 10, PostgreSqlParser.RULE_alterOperatorRoleElem);
         let _la: number;
         try {
             this.state = 1119;
@@ -2467,7 +2467,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 1082;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 case PostgreSqlParser.KW_NULL:
@@ -2496,7 +2496,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1087;
                 this.match(PostgreSqlParser.KW_PASSWORD);
                 this.state = 1088;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 3:
@@ -2619,7 +2619,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1106;
                 this.match(PostgreSqlParser.KW_LIMIT);
                 this.state = 1107;
-                this.signediconst();
+                this.signedConst();
                 }
                 break;
             case 20:
@@ -2630,7 +2630,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1109;
                 this.match(PostgreSqlParser.KW_UNTIL);
                 this.state = 1110;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 21:
@@ -2699,9 +2699,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createoptroleelem(): CreateoptroleelemContext {
-        let localContext = new CreateoptroleelemContext(this.context, this.state);
-        this.enterRule(localContext, 12, PostgreSqlParser.RULE_createoptroleelem);
+    public createOperatorRoleElem(): CreateOperatorRoleElemContext {
+        let localContext = new CreateOperatorRoleElemContext(this.context, this.state);
+        this.enterRule(localContext, 12, PostgreSqlParser.RULE_createOperatorRoleElem);
         let _la: number;
         try {
             this.state = 1129;
@@ -2711,7 +2711,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 1121;
-                this.alteroptroleelem();
+                this.alterOperatorRoleElem();
                 }
                 break;
             case 2:
@@ -2773,9 +2773,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createuserstmt(): CreateuserstmtContext {
-        let localContext = new CreateuserstmtContext(this.context, this.state);
-        this.enterRule(localContext, 14, PostgreSqlParser.RULE_createuserstmt);
+    public createUserStmt(): CreateUserStmtContext {
+        let localContext = new CreateUserStmtContext(this.context, this.state);
+        this.enterRule(localContext, 14, PostgreSqlParser.RULE_createUserStmt);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -2785,7 +2785,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 1132;
             this.match(PostgreSqlParser.KW_USER);
             this.state = 1133;
-            this.rolespec();
+            this.roleSpec();
             this.state = 1135;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 9, this.context) ) {
@@ -2804,7 +2804,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 1137;
-                    this.createoptroleelem();
+                    this.createOperatorRoleElem();
                     }
                     }
                 }
@@ -2828,9 +2828,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterrolestmt(): AlterrolestmtContext {
-        let localContext = new AlterrolestmtContext(this.context, this.state);
-        this.enterRule(localContext, 16, PostgreSqlParser.RULE_alterrolestmt);
+    public alterRoleStmt(): AlterRoleStmtContext {
+        let localContext = new AlterRoleStmtContext(this.context, this.state);
+        this.enterRule(localContext, 16, PostgreSqlParser.RULE_alterRoleStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -2848,7 +2848,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.consume();
             }
             this.state = 1145;
-            this.rolespec();
+            this.roleSpec();
             this.state = 1147;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 11, this.context) ) {
@@ -2867,7 +2867,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 1149;
-                    this.alteroptroleelem();
+                    this.alterOperatorRoleElem();
                     }
                     }
                 }
@@ -2891,9 +2891,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterrolesetstmt(): AlterrolesetstmtContext {
-        let localContext = new AlterrolesetstmtContext(this.context, this.state);
-        this.enterRule(localContext, 18, PostgreSqlParser.RULE_alterrolesetstmt);
+    public alterRoleSetStmt(): AlterRoleSetStmtContext {
+        let localContext = new AlterRoleSetStmtContext(this.context, this.state);
+        this.enterRule(localContext, 18, PostgreSqlParser.RULE_alterRoleSetStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -3338,7 +3338,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 1158;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             default:
@@ -3351,7 +3351,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 1163;
             this.database_name();
             this.state = 1164;
-            this.setresetclause();
+            this.setOrResetClause();
             }
         }
         catch (re) {
@@ -3368,9 +3368,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterroutinestmt(): AlterroutinestmtContext {
-        let localContext = new AlterroutinestmtContext(this.context, this.state);
-        this.enterRule(localContext, 20, PostgreSqlParser.RULE_alterroutinestmt);
+    public alterRoutineStmt(): AlterRoutineStmtContext {
+        let localContext = new AlterRoutineStmtContext(this.context, this.state);
+        this.enterRule(localContext, 20, PostgreSqlParser.RULE_alterRoutineStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -3392,7 +3392,7 @@ export class PostgreSqlParser extends SQLParserBase {
             }
 
             this.state = 1172;
-            this.alter_routine_cluase();
+            this.alter_routine_clause();
             }
         }
         catch (re) {
@@ -3409,9 +3409,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alter_routine_cluase(): Alter_routine_cluaseContext {
-        let localContext = new Alter_routine_cluaseContext(this.context, this.state);
-        this.enterRule(localContext, 22, PostgreSqlParser.RULE_alter_routine_cluase);
+    public alter_routine_clause(): Alter_routine_clauseContext {
+        let localContext = new Alter_routine_clauseContext(this.context, this.state);
+        this.enterRule(localContext, 22, PostgreSqlParser.RULE_alter_routine_clause);
         let _la: number;
         try {
             let alternative: number;
@@ -3470,7 +3470,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1188;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 1189;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case 4:
@@ -3504,7 +3504,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1198;
                 this.match(PostgreSqlParser.KW_EXTENSION);
                 this.state = 1199;
-                this.colid();
+                this.colId();
                 }
                 break;
             }
@@ -3636,7 +3636,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1223;
                 this.match(PostgreSqlParser.KW_COST);
                 this.state = 1224;
-                this.collabel();
+                this.colLabel();
                 }
                 break;
             case 8:
@@ -3645,7 +3645,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1225;
                 this.match(PostgreSqlParser.KW_ROWS);
                 this.state = 1226;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 9:
@@ -3654,7 +3654,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1227;
                 this.match(PostgreSqlParser.KW_SET);
                 this.state = 1228;
-                this.colid();
+                this.colId();
                 this.state = 1229;
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 10 || _la === 94)) {
@@ -3670,7 +3670,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 1230;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case 2:
@@ -3688,7 +3688,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1234;
                 this.match(PostgreSqlParser.KW_SET);
                 this.state = 1235;
-                this.colid();
+                this.colId();
                 this.state = 1236;
                 this.match(PostgreSqlParser.KW_FROM);
                 this.state = 1237;
@@ -4099,7 +4099,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 1240;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case PostgreSqlParser.KW_ALL:
@@ -4129,9 +4129,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public creategroupstmt(): CreategroupstmtContext {
-        let localContext = new CreategroupstmtContext(this.context, this.state);
-        this.enterRule(localContext, 26, PostgreSqlParser.RULE_creategroupstmt);
+    public createGroupStmt(): CreateGroupStmtContext {
+        let localContext = new CreateGroupStmtContext(this.context, this.state);
+        this.enterRule(localContext, 26, PostgreSqlParser.RULE_createGroupStmt);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -4141,7 +4141,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 1247;
             this.match(PostgreSqlParser.KW_GROUP);
             this.state = 1248;
-            this.rolespec();
+            this.roleSpec();
             this.state = 1250;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 26, this.context) ) {
@@ -4160,7 +4160,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 1252;
-                    this.createoptroleelem();
+                    this.createOperatorRoleElem();
                     }
                     }
                 }
@@ -4184,9 +4184,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altergroupstmt(): AltergroupstmtContext {
-        let localContext = new AltergroupstmtContext(this.context, this.state);
-        this.enterRule(localContext, 28, PostgreSqlParser.RULE_altergroupstmt);
+    public alterGroupStmt(): AlterGroupStmtContext {
+        let localContext = new AlterGroupStmtContext(this.context, this.state);
+        this.enterRule(localContext, 28, PostgreSqlParser.RULE_alterGroupStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -4196,7 +4196,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 1259;
             this.match(PostgreSqlParser.KW_GROUP);
             this.state = 1260;
-            this.rolespec();
+            this.roleSpec();
             this.state = 1261;
             _la = this.tokenStream.LA(1);
             if(!(_la === 133 || _la === 191)) {
@@ -4226,9 +4226,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createschemastmt(): CreateschemastmtContext {
-        let localContext = new CreateschemastmtContext(this.context, this.state);
-        this.enterRule(localContext, 30, PostgreSqlParser.RULE_createschemastmt);
+    public createSchemaStmt(): CreateSchemaStmtContext {
+        let localContext = new CreateSchemaStmtContext(this.context, this.state);
+        this.enterRule(localContext, 30, PostgreSqlParser.RULE_createSchemaStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -4266,7 +4266,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1273;
                 this.match(PostgreSqlParser.KW_AUTHORIZATION);
                 this.state = 1274;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case 2:
@@ -4344,42 +4344,42 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 1286;
-                this.createstmt();
+                this.createStmt();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 1287;
-                this.indexstmt();
+                this.indexStmt();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 1288;
-                this.createseqstmt();
+                this.createSeqStmt();
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 1289;
-                this.createtrigstmt();
+                this.createTrigStmt();
                 }
                 break;
             case 5:
                 this.enterOuterAlt(localContext, 5);
                 {
                 this.state = 1290;
-                this.grantstmt();
+                this.grantStmt();
                 }
                 break;
             case 6:
                 this.enterOuterAlt(localContext, 6);
                 {
                 this.state = 1291;
-                this.viewstmt();
+                this.viewStmt();
                 }
                 break;
             }
@@ -4398,9 +4398,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public variablesetstmt(): VariablesetstmtContext {
-        let localContext = new VariablesetstmtContext(this.context, this.state);
-        this.enterRule(localContext, 36, PostgreSqlParser.RULE_variablesetstmt);
+    public variableSetStmt(): VariableSetStmtContext {
+        let localContext = new VariableSetStmtContext(this.context, this.state);
+        this.enterRule(localContext, 36, PostgreSqlParser.RULE_variableSetStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -4987,7 +4987,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1324;
                 this.match(PostgreSqlParser.KW_CATALOG);
                 this.state = 1325;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 3:
@@ -5010,7 +5010,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 1329;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 case 2:
@@ -5028,7 +5028,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1333;
                 this.match(PostgreSqlParser.KW_ROLE);
                 this.state = 1334;
-                this.nonreservedword_or_sconst();
+                this.nonReservedWordOrStringConst();
                 }
                 break;
             case 6:
@@ -5039,7 +5039,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1336;
                 this.match(PostgreSqlParser.KW_AUTHORIZATION);
                 this.state = 1337;
-                this.nonreservedword_or_sconst();
+                this.nonReservedWordOrStringConst();
                 }
                 break;
             case 7:
@@ -5061,7 +5061,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1342;
                 this.match(PostgreSqlParser.KW_SNAPSHOT);
                 this.state = 1343;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 9:
@@ -5106,7 +5106,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 1351;
-            this.colid();
+            this.colId();
             this.state = 1356;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -5116,7 +5116,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1352;
                 this.match(PostgreSqlParser.DOT);
                 this.state = 1353;
-                this.colid();
+                this.colId();
                 }
                 }
                 this.state = 1358;
@@ -5618,7 +5618,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 1368;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             default:
@@ -5743,7 +5743,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 6);
                 {
                 this.state = 1383;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             }
@@ -6208,7 +6208,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 1389;
-                this.nonreservedword_or_sconst();
+                this.nonReservedWordOrStringConst();
                 }
                 break;
             default:
@@ -6240,7 +6240,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 1392;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 2:
@@ -6263,7 +6263,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1395;
                 this.match(PostgreSqlParser.KW_INTERVAL);
                 this.state = 1396;
-                this.sconst();
+                this.stringConst();
                 this.state = 1398;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 46, this.context) ) {
@@ -6284,14 +6284,14 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1401;
                 this.opt_float();
                 this.state = 1402;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 6:
                 this.enterOuterAlt(localContext, 6);
                 {
                 this.state = 1404;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case 7:
@@ -6317,9 +6317,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public nonreservedword_or_sconst(): Nonreservedword_or_sconstContext {
-        let localContext = new Nonreservedword_or_sconstContext(this.context, this.state);
-        this.enterRule(localContext, 58, PostgreSqlParser.RULE_nonreservedword_or_sconst);
+    public nonReservedWordOrStringConst(): NonReservedWordOrStringConstContext {
+        let localContext = new NonReservedWordOrStringConstContext(this.context, this.state);
+        this.enterRule(localContext, 58, PostgreSqlParser.RULE_nonReservedWordOrStringConst);
         try {
             this.state = 1410;
             this.errorHandler.sync(this);
@@ -6328,14 +6328,14 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 1408;
-                this.nonreservedword();
+                this.nonReservedWord();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 1409;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             }
@@ -6354,9 +6354,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public variableresetstmt(): VariableresetstmtContext {
-        let localContext = new VariableresetstmtContext(this.context, this.state);
-        this.enterRule(localContext, 60, PostgreSqlParser.RULE_variableresetstmt);
+    public variableResetStmt(): VariableResetStmtContext {
+        let localContext = new VariableResetStmtContext(this.context, this.state);
+        this.enterRule(localContext, 60, PostgreSqlParser.RULE_variableResetStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -6446,9 +6446,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public setresetclause(): SetresetclauseContext {
-        let localContext = new SetresetclauseContext(this.context, this.state);
-        this.enterRule(localContext, 64, PostgreSqlParser.RULE_setresetclause);
+    public setOrResetClause(): SetOrResetClauseContext {
+        let localContext = new SetOrResetClauseContext(this.context, this.state);
+        this.enterRule(localContext, 64, PostgreSqlParser.RULE_setOrResetClause);
         try {
             this.state = 1429;
             this.errorHandler.sync(this);
@@ -6466,7 +6466,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 1428;
-                this.variableresetstmt();
+                this.variableResetStmt();
                 }
                 break;
             default:
@@ -6487,9 +6487,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public functionsetresetclause(): FunctionsetresetclauseContext {
-        let localContext = new FunctionsetresetclauseContext(this.context, this.state);
-        this.enterRule(localContext, 66, PostgreSqlParser.RULE_functionsetresetclause);
+    public functionSetOrResetClause(): FunctionSetOrResetClauseContext {
+        let localContext = new FunctionSetOrResetClauseContext(this.context, this.state);
+        this.enterRule(localContext, 66, PostgreSqlParser.RULE_functionSetOrResetClause);
         try {
             this.state = 1434;
             this.errorHandler.sync(this);
@@ -6507,7 +6507,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 1433;
-                this.variableresetstmt();
+                this.variableResetStmt();
                 }
                 break;
             default:
@@ -6528,9 +6528,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public variableshowstmt(): VariableshowstmtContext {
-        let localContext = new VariableshowstmtContext(this.context, this.state);
-        this.enterRule(localContext, 68, PostgreSqlParser.RULE_variableshowstmt);
+    public variableShowStmt(): VariableShowStmtContext {
+        let localContext = new VariableShowStmtContext(this.context, this.state);
+        this.enterRule(localContext, 68, PostgreSqlParser.RULE_variableShowStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -6594,9 +6594,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public constraintssetstmt(): ConstraintssetstmtContext {
-        let localContext = new ConstraintssetstmtContext(this.context, this.state);
-        this.enterRule(localContext, 70, PostgreSqlParser.RULE_constraintssetstmt);
+    public constraintsSetStmt(): ConstraintsSetStmtContext {
+        let localContext = new ConstraintsSetStmtContext(this.context, this.state);
+        this.enterRule(localContext, 70, PostgreSqlParser.RULE_constraintsSetStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -7041,9 +7041,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public checkpointstmt(): CheckpointstmtContext {
-        let localContext = new CheckpointstmtContext(this.context, this.state);
-        this.enterRule(localContext, 72, PostgreSqlParser.RULE_checkpointstmt);
+    public checkPointStmt(): CheckPointStmtContext {
+        let localContext = new CheckPointStmtContext(this.context, this.state);
+        this.enterRule(localContext, 72, PostgreSqlParser.RULE_checkPointStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -7065,9 +7065,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public discardstmt(): DiscardstmtContext {
-        let localContext = new DiscardstmtContext(this.context, this.state);
-        this.enterRule(localContext, 74, PostgreSqlParser.RULE_discardstmt);
+    public discardStmt(): DiscardStmtContext {
+        let localContext = new DiscardStmtContext(this.context, this.state);
+        this.enterRule(localContext, 74, PostgreSqlParser.RULE_discardStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -7099,9 +7099,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altertablestmt(): AltertablestmtContext {
-        let localContext = new AltertablestmtContext(this.context, this.state);
-        this.enterRule(localContext, 76, PostgreSqlParser.RULE_altertablestmt);
+    public alterTableStmt(): AlterTableStmtContext {
+        let localContext = new AlterTableStmtContext(this.context, this.state);
+        this.enterRule(localContext, 76, PostgreSqlParser.RULE_alterTableStmt);
         let _la: number;
         try {
             this.state = 1582;
@@ -7175,7 +7175,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1474;
                 this.match(PostgreSqlParser.KW_IN);
                 this.state = 1475;
-                this.opttablespace();
+                this.optTableSpace();
                 this.state = 1479;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -7364,7 +7364,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1525;
                 this.match(PostgreSqlParser.KW_IN);
                 this.state = 1526;
-                this.opttablespace();
+                this.optTableSpace();
                 this.state = 1530;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -7382,7 +7382,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1532;
                 this.match(PostgreSqlParser.KW_SET);
                 this.state = 1533;
-                this.opttablespace();
+                this.optTableSpace();
                 this.state = 1535;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 65, this.context) ) {
@@ -7465,7 +7465,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1560;
                 this.match(PostgreSqlParser.KW_IN);
                 this.state = 1561;
-                this.opttablespace();
+                this.optTableSpace();
                 this.state = 1565;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -7602,11 +7602,11 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1594;
                 this.match(PostgreSqlParser.KW_FROM);
                 this.state = 1595;
-                this.partition_bound_cluase();
+                this.partition_bound_clause();
                 this.state = 1596;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 1597;
-                this.partition_bound_cluase();
+                this.partition_bound_clause();
                 }
                 break;
             case PostgreSqlParser.KW_WITH:
@@ -7615,7 +7615,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1599;
                 this.match(PostgreSqlParser.KW_WITH);
                 this.state = 1600;
-                this.partition_with_cluase();
+                this.partition_with_clause();
                 }
                 break;
             default:
@@ -7636,9 +7636,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public partition_bound_cluase(): Partition_bound_cluaseContext {
-        let localContext = new Partition_bound_cluaseContext(this.context, this.state);
-        this.enterRule(localContext, 82, PostgreSqlParser.RULE_partition_bound_cluase);
+    public partition_bound_clause(): Partition_bound_clauseContext {
+        let localContext = new Partition_bound_clauseContext(this.context, this.state);
+        this.enterRule(localContext, 82, PostgreSqlParser.RULE_partition_bound_clause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -7727,9 +7727,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public partition_with_cluase(): Partition_with_cluaseContext {
-        let localContext = new Partition_with_cluaseContext(this.context, this.state);
-        this.enterRule(localContext, 86, PostgreSqlParser.RULE_partition_with_cluase);
+    public partition_with_clause(): Partition_with_clauseContext {
+        let localContext = new Partition_with_clauseContext(this.context, this.state);
+        this.enterRule(localContext, 86, PostgreSqlParser.RULE_partition_with_clause);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -7738,13 +7738,13 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 1620;
             this.match(PostgreSqlParser.KW_MODULUS);
             this.state = 1621;
-            this.numericonly();
+            this.numericOnly();
             this.state = 1622;
             this.match(PostgreSqlParser.COMMA);
             this.state = 1623;
             this.match(PostgreSqlParser.KW_REMAINDER);
             this.state = 1624;
-            this.numericonly();
+            this.numericOnly();
             this.state = 1625;
             this.match(PostgreSqlParser.CLOSE_PAREN);
             }
@@ -7776,7 +7776,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1627;
                 this.index_partition_cmd();
                 this.state = 1628;
-                this.partitionboundspec();
+                this.partitionBoundSpec();
                 }
                 break;
             case PostgreSqlParser.KW_DETACH:
@@ -7858,12 +7858,12 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 1640;
                     this.match(PostgreSqlParser.KW_CONSTRAINT);
                     this.state = 1641;
-                    this.colid();
+                    this.colId();
                     }
                 }
 
                 this.state = 1644;
-                this.constraintelem();
+                this.constraintElem();
                 }
                 break;
             case 2:
@@ -7874,7 +7874,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1646;
                 this.match(PostgreSqlParser.KW_CONSTRAINT);
                 this.state = 1647;
-                this.colid();
+                this.colId();
                 this.state = 1651;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 79, this.context);
@@ -7883,7 +7883,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         {
                         {
                         this.state = 1648;
-                        this.constraintattributeElem();
+                        this.constraintAttributeElem();
                         }
                         }
                     }
@@ -7901,7 +7901,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1655;
                 this.match(PostgreSqlParser.KW_CONSTRAINT);
                 this.state = 1656;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 4:
@@ -7922,7 +7922,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 1662;
-                this.colid();
+                this.colId();
                 this.state = 1664;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 81, this.context) ) {
@@ -7961,7 +7961,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1670;
                 this.match(PostgreSqlParser.KW_ON);
                 this.state = 1671;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 7:
@@ -8424,7 +8424,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 1683;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 default:
@@ -8449,7 +8449,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1688;
                 this.match(PostgreSqlParser.KW_RULE);
                 this.state = 1689;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 11:
@@ -8460,7 +8460,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1691;
                 this.match(PostgreSqlParser.KW_RULE);
                 this.state = 1692;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 12:
@@ -8508,7 +8508,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1703;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 1704;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case 16:
@@ -8553,7 +8553,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.KW_USING:
                     {
                     this.state = 1713;
-                    this.existingindex();
+                    this.existingIndex();
                     }
                     break;
                 default:
@@ -8802,7 +8802,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1780;
                 this.match(PostgreSqlParser.KW_STATISTICS);
                 this.state = 1781;
-                this.signediconst();
+                this.signedConst();
                 }
                 break;
             case 25:
@@ -8840,7 +8840,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.consume();
                 }
                 this.state = 1791;
-                this.reloptions();
+                this.relOptions();
                 }
                 break;
             case 26:
@@ -8865,7 +8865,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1798;
                 this.match(PostgreSqlParser.KW_STORAGE);
                 this.state = 1799;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 27:
@@ -8909,7 +8909,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         {
                         {
                         this.state = 1812;
-                        this.seqoptelem();
+                        this.seqOptElem();
                         }
                         }
                         this.state = 1815;
@@ -8970,7 +8970,7 @@ export class PostgreSqlParser extends SQLParserBase {
                                 }
 
                                 this.state = 1830;
-                                this.numericonly();
+                                this.numericOnly();
                                 }
                                 break;
                             }
@@ -8995,7 +8995,7 @@ export class PostgreSqlParser extends SQLParserBase {
                             case PostgreSqlParser.KW_START:
                                 {
                                 this.state = 1834;
-                                this.seqoptelem();
+                                this.seqOptElem();
                                 }
                                 break;
                             case PostgreSqlParser.KW_GENERATED:
@@ -9241,9 +9241,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public reloptions(): ReloptionsContext {
-        let localContext = new ReloptionsContext(this.context, this.state);
-        this.enterRule(localContext, 100, PostgreSqlParser.RULE_reloptions);
+    public relOptions(): RelOptionsContext {
+        let localContext = new RelOptionsContext(this.context, this.state);
+        this.enterRule(localContext, 100, PostgreSqlParser.RULE_relOptions);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -9251,7 +9251,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 1886;
             this.match(PostgreSqlParser.OPEN_PAREN);
             this.state = 1887;
-            this.reloption_elem();
+            this.relOptionElem();
             this.state = 1892;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -9261,7 +9261,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1888;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 1889;
-                this.reloption_elem();
+                this.relOptionElem();
                 }
                 }
                 this.state = 1894;
@@ -9286,16 +9286,16 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public opt_reloptions(): Opt_reloptionsContext {
-        let localContext = new Opt_reloptionsContext(this.context, this.state);
-        this.enterRule(localContext, 102, PostgreSqlParser.RULE_opt_reloptions);
+    public optRelOptions(): OptRelOptionsContext {
+        let localContext = new OptRelOptionsContext(this.context, this.state);
+        this.enterRule(localContext, 102, PostgreSqlParser.RULE_optRelOptions);
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 1897;
             this.match(PostgreSqlParser.KW_WITH);
             this.state = 1898;
-            this.reloptions();
+            this.relOptions();
             }
         }
         catch (re) {
@@ -9312,14 +9312,14 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public reloption_elem(): Reloption_elemContext {
-        let localContext = new Reloption_elemContext(this.context, this.state);
-        this.enterRule(localContext, 104, PostgreSqlParser.RULE_reloption_elem);
+    public relOptionElem(): RelOptionElemContext {
+        let localContext = new RelOptionElemContext(this.context, this.state);
+        this.enterRule(localContext, 104, PostgreSqlParser.RULE_relOptionElem);
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 1900;
-            this.collabel();
+            this.colLabel();
             this.state = 1905;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
@@ -9361,9 +9361,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public partitionboundspec(): PartitionboundspecContext {
-        let localContext = new PartitionboundspecContext(this.context, this.state);
-        this.enterRule(localContext, 106, PostgreSqlParser.RULE_partitionboundspec);
+    public partitionBoundSpec(): PartitionBoundSpecContext {
+        let localContext = new PartitionBoundSpecContext(this.context, this.state);
+        this.enterRule(localContext, 106, PostgreSqlParser.RULE_partitionBoundSpec);
         try {
             this.state = 1929;
             this.errorHandler.sync(this);
@@ -9446,9 +9446,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altercompositetypestmt(): AltercompositetypestmtContext {
-        let localContext = new AltercompositetypestmtContext(this.context, this.state);
-        this.enterRule(localContext, 108, PostgreSqlParser.RULE_altercompositetypestmt);
+    public alterCompositeTypeStmt(): AlterCompositeTypeStmtContext {
+        let localContext = new AlterCompositeTypeStmtContext(this.context, this.state);
+        this.enterRule(localContext, 108, PostgreSqlParser.RULE_alterCompositeTypeStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -9509,7 +9509,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1943;
                 this.match(PostgreSqlParser.KW_ATTRIBUTE);
                 this.state = 1944;
-                this.tablefuncelement();
+                this.tableFuncElement();
                 this.state = 1946;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 123, this.context) ) {
@@ -9540,7 +9540,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 1953;
-                this.colid();
+                this.colId();
                 this.state = 1955;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 125, this.context) ) {
@@ -9561,7 +9561,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 1958;
                 this.match(PostgreSqlParser.KW_ATTRIBUTE);
                 this.state = 1959;
-                this.colid();
+                this.colId();
                 this.state = 1962;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -9618,9 +9618,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public closeportalstmt(): CloseportalstmtContext {
-        let localContext = new CloseportalstmtContext(this.context, this.state);
-        this.enterRule(localContext, 112, PostgreSqlParser.RULE_closeportalstmt);
+    public closePortalStmt(): ClosePortalStmtContext {
+        let localContext = new ClosePortalStmtContext(this.context, this.state);
+        this.enterRule(localContext, 112, PostgreSqlParser.RULE_closePortalStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -10025,7 +10025,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 1975;
-                this.colid();
+                this.colId();
                 }
                 break;
             case PostgreSqlParser.KW_ALL:
@@ -10053,9 +10053,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public copystmt(): CopystmtContext {
-        let localContext = new CopystmtContext(this.context, this.state);
-        this.enterRule(localContext, 114, PostgreSqlParser.RULE_copystmt);
+    public copyStmt(): CopyStmtContext {
+        let localContext = new CopyStmtContext(this.context, this.state);
+        this.enterRule(localContext, 114, PostgreSqlParser.RULE_copyStmt);
         let _la: number;
         try {
             this.state = 2028;
@@ -10116,7 +10116,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 1991;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 case PostgreSqlParser.KW_STDIN:
@@ -10152,7 +10152,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 1999;
                     this.match(PostgreSqlParser.KW_DELIMITERS);
                     this.state = 2000;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 }
@@ -10188,7 +10188,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2011;
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 this.state = 2012;
-                this.preparablestmt();
+                this.preParableStmt();
                 this.state = 2013;
                 this.match(PostgreSqlParser.CLOSE_PAREN);
                 this.state = 2014;
@@ -10212,7 +10212,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 2018;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 case PostgreSqlParser.KW_STDIN:
@@ -10315,7 +10315,7 @@ export class PostgreSqlParser extends SQLParserBase {
                             }
 
                             this.state = 2036;
-                            this.sconst();
+                            this.stringConst();
                             }
                             break;
                         case 4:
@@ -10379,7 +10379,7 @@ export class PostgreSqlParser extends SQLParserBase {
                             this.state = 2051;
                             this.match(PostgreSqlParser.KW_ENCODING);
                             this.state = 2052;
-                            this.sconst();
+                            this.stringConst();
                             }
                             break;
                         }
@@ -10442,7 +10442,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 2071;
-            this.collabel();
+            this.colLabel();
             this.state = 2086;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
@@ -10875,7 +10875,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.Numeric:
                 {
                 this.state = 2073;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case PostgreSqlParser.STAR:
@@ -10932,9 +10932,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createstmt(): CreatestmtContext {
-        let localContext = new CreatestmtContext(this.context, this.state);
-        this.enterRule(localContext, 120, PostgreSqlParser.RULE_createstmt);
+    public createStmt(): CreateStmtContext {
+        let localContext = new CreateStmtContext(this.context, this.state);
+        this.enterRule(localContext, 120, PostgreSqlParser.RULE_createStmt);
         let _la: number;
         try {
             localContext = new ColumnCreateTableContext(localContext);
@@ -10948,7 +10948,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 213 || _la === 254 || ((((_la - 352)) & ~0x1F) === 0 && ((1 << (_la - 352)) & 32773) !== 0)) {
                 {
                 this.state = 2089;
-                this.opttemp();
+                this.optTemp();
                 }
             }
 
@@ -10979,7 +10979,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (((((_la - 42)) & ~0x1F) === 0 && ((1 << (_la - 42)) & 2099209) !== 0) || ((((_la - 85)) & ~0x1F) === 0 && ((1 << (_la - 85)) & 2147491841) !== 0) || ((((_la - 120)) & ~0x1F) === 0 && ((1 << (_la - 120)) & 4294966809) !== 0) || ((((_la - 152)) & ~0x1F) === 0 && ((1 << (_la - 152)) & 4294967295) !== 0) || ((((_la - 184)) & ~0x1F) === 0 && ((1 << (_la - 184)) & 4294967295) !== 0) || ((((_la - 216)) & ~0x1F) === 0 && ((1 << (_la - 216)) & 4290781183) !== 0) || ((((_la - 248)) & ~0x1F) === 0 && ((1 << (_la - 248)) & 4294967295) !== 0) || ((((_la - 280)) & ~0x1F) === 0 && ((1 << (_la - 280)) & 4294967295) !== 0) || ((((_la - 312)) & ~0x1F) === 0 && ((1 << (_la - 312)) & 4294967295) !== 0) || ((((_la - 344)) & ~0x1F) === 0 && ((1 << (_la - 344)) & 4294967295) !== 0) || ((((_la - 376)) & ~0x1F) === 0 && ((1 << (_la - 376)) & 4294967295) !== 0) || ((((_la - 408)) & ~0x1F) === 0 && ((1 << (_la - 408)) & 4294967295) !== 0) || ((((_la - 440)) & ~0x1F) === 0 && ((1 << (_la - 440)) & 4294950911) !== 0) || ((((_la - 473)) & ~0x1F) === 0 && ((1 << (_la - 473)) & 3221225471) !== 0) || ((((_la - 506)) & ~0x1F) === 0 && ((1 << (_la - 506)) & 286719) !== 0) || ((((_la - 547)) & ~0x1F) === 0 && ((1 << (_la - 547)) & 402696335) !== 0) || _la === 584) {
                     {
                     this.state = 2098;
-                    this.tableelementlist();
+                    this.tableElementList();
                     }
                 }
 
@@ -10991,7 +10991,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2102;
-                    this.optinherit();
+                    this.optInherit();
                     }
                     break;
                 }
@@ -11001,7 +11001,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2105;
-                    this.partitionspec();
+                    this.partitionSpec();
                     }
                     break;
                 }
@@ -11021,7 +11021,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2111;
-                    this.optwith();
+                    this.optWith();
                     }
                     break;
                 }
@@ -11031,7 +11031,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 80) {
                     {
                     this.state = 2114;
-                    this.oncommitoption();
+                    this.onCommitOption();
                     }
                 }
 
@@ -11041,7 +11041,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2117;
-                    this.opttablespace();
+                    this.optTableSpace();
                     }
                     break;
                 }
@@ -11059,7 +11059,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2122;
-                    this.opttypedtableelementlist();
+                    this.optTypedTableElEmentList();
                     }
                     break;
                 }
@@ -11069,7 +11069,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2125;
-                    this.partitionspec();
+                    this.partitionSpec();
                     }
                     break;
                 }
@@ -11089,7 +11089,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2131;
-                    this.optwith();
+                    this.optWith();
                     }
                     break;
                 }
@@ -11099,7 +11099,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 80) {
                     {
                     this.state = 2134;
-                    this.oncommitoption();
+                    this.onCommitOption();
                     }
                 }
 
@@ -11109,7 +11109,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2137;
-                    this.opttablespace();
+                    this.optTableSpace();
                     }
                     break;
                 }
@@ -11129,19 +11129,19 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 2) {
                     {
                     this.state = 2143;
-                    this.opttypedtableelementlist();
+                    this.optTypedTableElEmentList();
                     }
                 }
 
                 this.state = 2146;
-                this.partitionboundspec();
+                this.partitionBoundSpec();
                 this.state = 2148;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 168, this.context) ) {
                 case 1:
                     {
                     this.state = 2147;
-                    this.partitionspec();
+                    this.partitionSpec();
                     }
                     break;
                 }
@@ -11161,7 +11161,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2153;
-                    this.optwith();
+                    this.optWith();
                     }
                     break;
                 }
@@ -11171,7 +11171,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 80) {
                     {
                     this.state = 2156;
-                    this.oncommitoption();
+                    this.onCommitOption();
                     }
                 }
 
@@ -11181,7 +11181,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 2159;
-                    this.opttablespace();
+                    this.optTableSpace();
                     }
                     break;
                 }
@@ -11206,9 +11206,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public opttemp(): OpttempContext {
-        let localContext = new OpttempContext(this.context, this.state);
-        this.enterRule(localContext, 122, PostgreSqlParser.RULE_opttemp);
+    public optTemp(): OptTempContext {
+        let localContext = new OptTempContext(this.context, this.state);
+        this.enterRule(localContext, 122, PostgreSqlParser.RULE_optTemp);
         let _la: number;
         try {
             this.state = 2169;
@@ -11277,9 +11277,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public opttypedtableelementlist(): OpttypedtableelementlistContext {
-        let localContext = new OpttypedtableelementlistContext(this.context, this.state);
-        this.enterRule(localContext, 124, PostgreSqlParser.RULE_opttypedtableelementlist);
+    public optTypedTableElEmentList(): OptTypedTableElEmentListContext {
+        let localContext = new OptTypedTableElEmentListContext(this.context, this.state);
+        this.enterRule(localContext, 124, PostgreSqlParser.RULE_optTypedTableElEmentList);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -11287,7 +11287,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2171;
             this.match(PostgreSqlParser.OPEN_PAREN);
             this.state = 2172;
-            this.typedtableelement();
+            this.typedTableElement();
             this.state = 2177;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -11297,7 +11297,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2173;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 2174;
-                this.typedtableelement();
+                this.typedTableElement();
                 }
                 }
                 this.state = 2179;
@@ -11322,15 +11322,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tableelementlist(): TableelementlistContext {
-        let localContext = new TableelementlistContext(this.context, this.state);
-        this.enterRule(localContext, 126, PostgreSqlParser.RULE_tableelementlist);
+    public tableElementList(): TableElementListContext {
+        let localContext = new TableElementListContext(this.context, this.state);
+        this.enterRule(localContext, 126, PostgreSqlParser.RULE_tableElementList);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 2182;
-            this.tableelement();
+            this.tableElement();
             this.state = 2187;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -11340,7 +11340,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2183;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 2184;
-                this.tableelement();
+                this.tableElement();
                 }
                 }
                 this.state = 2189;
@@ -11363,9 +11363,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tableelement(): TableelementContext {
-        let localContext = new TableelementContext(this.context, this.state);
-        this.enterRule(localContext, 128, PostgreSqlParser.RULE_tableelement);
+    public tableElement(): TableElementContext {
+        let localContext = new TableElementContext(this.context, this.state);
+        this.enterRule(localContext, 128, PostgreSqlParser.RULE_tableElement);
         let _la: number;
         try {
             this.state = 2205;
@@ -11382,12 +11382,12 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 2190;
                     this.match(PostgreSqlParser.KW_CONSTRAINT);
                     this.state = 2191;
-                    this.colid();
+                    this.colId();
                     }
                 }
 
                 this.state = 2194;
-                this.constraintelem();
+                this.constraintElem();
                 }
                 break;
             case 2:
@@ -11420,7 +11420,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         this.consume();
                     }
                     this.state = 2199;
-                    this.tablelikeoption();
+                    this.tableLikeOption();
                     }
                     }
                     this.state = 2204;
@@ -11445,9 +11445,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public typedtableelement(): TypedtableelementContext {
-        let localContext = new TypedtableelementContext(this.context, this.state);
-        this.enterRule(localContext, 130, PostgreSqlParser.RULE_typedtableelement);
+    public typedTableElement(): TypedTableElementContext {
+        let localContext = new TypedTableElementContext(this.context, this.state);
+        this.enterRule(localContext, 130, PostgreSqlParser.RULE_typedTableElement);
         let _la: number;
         try {
             this.state = 2223;
@@ -11477,7 +11477,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 2212;
-                    this.colconstraint();
+                    this.colConstraint();
                     }
                     }
                     this.state = 2217;
@@ -11497,12 +11497,12 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 2218;
                     this.match(PostgreSqlParser.KW_CONSTRAINT);
                     this.state = 2219;
-                    this.colid();
+                    this.colId();
                     }
                 }
 
                 this.state = 2222;
-                this.constraintelem();
+                this.constraintElem();
                 }
                 break;
             }
@@ -11586,7 +11586,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 6:
                     {
                     this.state = 2236;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 }
@@ -11601,7 +11601,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2241;
                 this.match(PostgreSqlParser.KW_COMPRESSION);
                 this.state = 2242;
-                this.colid();
+                this.colId();
                 }
             }
 
@@ -11635,7 +11635,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 2252;
-                    this.colconstraint();
+                    this.colConstraint();
                     }
                     }
                 }
@@ -11659,9 +11659,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public colconstraint(): ColconstraintContext {
-        let localContext = new ColconstraintContext(this.context, this.state);
-        this.enterRule(localContext, 134, PostgreSqlParser.RULE_colconstraint);
+    public colConstraint(): ColConstraintContext {
+        let localContext = new ColConstraintContext(this.context, this.state);
+        this.enterRule(localContext, 134, PostgreSqlParser.RULE_colConstraint);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -11674,12 +11674,12 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2258;
                 this.match(PostgreSqlParser.KW_CONSTRAINT);
                 this.state = 2259;
-                this.colid();
+                this.colId();
                 }
             }
 
             this.state = 2262;
-            this.colconstraintelem();
+            this.colConstraintElem();
             this.state = 2267;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 193, this.context) ) {
@@ -11735,9 +11735,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public colconstraintelem(): ColconstraintelemContext {
-        let localContext = new ColconstraintelemContext(this.context, this.state);
-        this.enterRule(localContext, 136, PostgreSqlParser.RULE_colconstraintelem);
+    public colConstraintElem(): ColConstraintElemContext {
+        let localContext = new ColConstraintElemContext(this.context, this.state);
+        this.enterRule(localContext, 136, PostgreSqlParser.RULE_colConstraintElem);
         let _la: number;
         try {
             this.state = 2353;
@@ -11781,7 +11781,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 100) {
                     {
                     this.state = 2281;
-                    this.optconstablespace();
+                    this.optConstableSpace();
                     }
                 }
 
@@ -11843,7 +11843,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 100) {
                     {
                     this.state = 2299;
-                    this.optconstablespace();
+                    this.optConstableSpace();
                     }
                 }
 
@@ -11873,7 +11873,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 100) {
                     {
                     this.state = 2307;
-                    this.optconstablespace();
+                    this.optConstableSpace();
                     }
                 }
 
@@ -11943,7 +11943,7 @@ export class PostgreSqlParser extends SQLParserBase {
                             {
                             {
                             this.state = 2325;
-                            this.seqoptelem();
+                            this.seqOptElem();
                             }
                             }
                             this.state = 2328;
@@ -12077,9 +12077,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tablelikeoption(): TablelikeoptionContext {
-        let localContext = new TablelikeoptionContext(this.context, this.state);
-        this.enterRule(localContext, 140, PostgreSqlParser.RULE_tablelikeoption);
+    public tableLikeOption(): TableLikeOptionContext {
+        let localContext = new TableLikeOptionContext(this.context, this.state);
+        this.enterRule(localContext, 140, PostgreSqlParser.RULE_tableLikeOption);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -12109,9 +12109,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public constraintelem(): ConstraintelemContext {
-        let localContext = new ConstraintelemContext(this.context, this.state);
-        this.enterRule(localContext, 142, PostgreSqlParser.RULE_constraintelem);
+    public constraintElem(): ConstraintElemContext {
+        let localContext = new ConstraintElemContext(this.context, this.state);
+        this.enterRule(localContext, 142, PostgreSqlParser.RULE_constraintElem);
         let _la: number;
         try {
             let alternative: number;
@@ -12137,7 +12137,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         {
                         {
                         this.state = 2366;
-                        this.constraintattributeElem();
+                        this.constraintAttributeElem();
                         }
                         }
                     }
@@ -12206,7 +12206,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     if (_la === 100) {
                         {
                         this.state = 2384;
-                        this.optconstablespace();
+                        this.optConstableSpace();
                         }
                     }
 
@@ -12218,7 +12218,7 @@ export class PostgreSqlParser extends SQLParserBase {
                             {
                             {
                             this.state = 2387;
-                            this.constraintattributeElem();
+                            this.constraintAttributeElem();
                             }
                             }
                         }
@@ -12231,7 +12231,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.KW_USING:
                     {
                     this.state = 2393;
-                    this.existingindex();
+                    this.existingIndex();
                     this.state = 2397;
                     this.errorHandler.sync(this);
                     alternative = this.interpreter.adaptivePredict(this.tokenStream, 220, this.context);
@@ -12240,7 +12240,7 @@ export class PostgreSqlParser extends SQLParserBase {
                             {
                             {
                             this.state = 2394;
-                            this.constraintattributeElem();
+                            this.constraintAttributeElem();
                             }
                             }
                         }
@@ -12273,7 +12273,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2406;
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 this.state = 2407;
-                this.exclusionconstraintelem();
+                this.exclusionConstraintElem();
                 this.state = 2412;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -12283,7 +12283,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 2408;
                     this.match(PostgreSqlParser.COMMA);
                     this.state = 2409;
-                    this.exclusionconstraintelem();
+                    this.exclusionConstraintElem();
                     }
                     }
                     this.state = 2414;
@@ -12318,7 +12318,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 100) {
                     {
                     this.state = 2422;
-                    this.optconstablespace();
+                    this.optConstableSpace();
                     }
                 }
 
@@ -12346,7 +12346,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         {
                         {
                         this.state = 2432;
-                        this.constraintattributeElem();
+                        this.constraintAttributeElem();
                         }
                         }
                     }
@@ -12407,7 +12407,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         {
                         {
                         this.state = 2452;
-                        this.constraintattributeElem();
+                        this.constraintAttributeElem();
                         }
                         }
                     }
@@ -12611,9 +12611,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public exclusionconstraintelem(): ExclusionconstraintelemContext {
-        let localContext = new ExclusionconstraintelemContext(this.context, this.state);
-        this.enterRule(localContext, 154, PostgreSqlParser.RULE_exclusionconstraintelem);
+    public exclusionConstraintElem(): ExclusionConstraintElemContext {
+        let localContext = new ExclusionConstraintElemContext(this.context, this.state);
+        this.enterRule(localContext, 154, PostgreSqlParser.RULE_exclusionConstraintElem);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -12848,9 +12848,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public optinherit(): OptinheritContext {
-        let localContext = new OptinheritContext(this.context, this.state);
-        this.enterRule(localContext, 164, PostgreSqlParser.RULE_optinherit);
+    public optInherit(): OptInheritContext {
+        let localContext = new OptInheritContext(this.context, this.state);
+        this.enterRule(localContext, 164, PostgreSqlParser.RULE_optInherit);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -12878,9 +12878,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public partitionspec(): PartitionspecContext {
-        let localContext = new PartitionspecContext(this.context, this.state);
-        this.enterRule(localContext, 166, PostgreSqlParser.RULE_partitionspec);
+    public partitionSpec(): PartitionSpecContext {
+        let localContext = new PartitionSpecContext(this.context, this.state);
+        this.enterRule(localContext, 166, PostgreSqlParser.RULE_partitionSpec);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -12890,7 +12890,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2534;
             this.match(PostgreSqlParser.KW_BY);
             this.state = 2535;
-            this.colid();
+            this.colId();
             this.state = 2536;
             this.match(PostgreSqlParser.OPEN_PAREN);
             this.state = 2537;
@@ -13009,7 +13009,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2561;
             this.match(PostgreSqlParser.KW_USING);
             this.state = 2562;
-            this.colid();
+            this.colId();
             }
         }
         catch (re) {
@@ -13026,9 +13026,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public optwith(): OptwithContext {
-        let localContext = new OptwithContext(this.context, this.state);
-        this.enterRule(localContext, 172, PostgreSqlParser.RULE_optwith);
+    public optWith(): OptWithContext {
+        let localContext = new OptWithContext(this.context, this.state);
+        this.enterRule(localContext, 172, PostgreSqlParser.RULE_optWith);
         let _la: number;
         try {
             this.state = 2568;
@@ -13040,7 +13040,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2564;
                 this.match(PostgreSqlParser.KW_WITH);
                 this.state = 2565;
-                this.reloptions();
+                this.relOptions();
                 }
                 break;
             case 2:
@@ -13075,9 +13075,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public oncommitoption(): OncommitoptionContext {
-        let localContext = new OncommitoptionContext(this.context, this.state);
-        this.enterRule(localContext, 174, PostgreSqlParser.RULE_oncommitoption);
+    public onCommitOption(): OnCommitOptionContext {
+        let localContext = new OnCommitOptionContext(this.context, this.state);
+        this.enterRule(localContext, 174, PostgreSqlParser.RULE_onCommitOption);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -13129,9 +13129,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public opttablespace(): OpttablespaceContext {
-        let localContext = new OpttablespaceContext(this.context, this.state);
-        this.enterRule(localContext, 176, PostgreSqlParser.RULE_opttablespace);
+    public optTableSpace(): OptTableSpaceContext {
+        let localContext = new OptTableSpaceContext(this.context, this.state);
+        this.enterRule(localContext, 176, PostgreSqlParser.RULE_optTableSpace);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -13155,9 +13155,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public optconstablespace(): OptconstablespaceContext {
-        let localContext = new OptconstablespaceContext(this.context, this.state);
-        this.enterRule(localContext, 178, PostgreSqlParser.RULE_optconstablespace);
+    public optConstableSpace(): OptConstableSpaceContext {
+        let localContext = new OptConstableSpaceContext(this.context, this.state);
+        this.enterRule(localContext, 178, PostgreSqlParser.RULE_optConstableSpace);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -13166,7 +13166,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2583;
             this.match(PostgreSqlParser.KW_INDEX);
             this.state = 2584;
-            this.opttablespace();
+            this.optTableSpace();
             }
         }
         catch (re) {
@@ -13183,9 +13183,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public existingindex(): ExistingindexContext {
-        let localContext = new ExistingindexContext(this.context, this.state);
-        this.enterRule(localContext, 180, PostgreSqlParser.RULE_existingindex);
+    public existingIndex(): ExistingIndexContext {
+        let localContext = new ExistingIndexContext(this.context, this.state);
+        this.enterRule(localContext, 180, PostgreSqlParser.RULE_existingIndex);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -13194,7 +13194,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2587;
             this.match(PostgreSqlParser.KW_INDEX);
             this.state = 2588;
-            this.colid();
+            this.colId();
             }
         }
         catch (re) {
@@ -13211,9 +13211,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createstatsstmt(): CreatestatsstmtContext {
-        let localContext = new CreatestatsstmtContext(this.context, this.state);
-        this.enterRule(localContext, 182, PostgreSqlParser.RULE_createstatsstmt);
+    public createStatsStmt(): CreateStatsStmtContext {
+        let localContext = new CreateStatsStmtContext(this.context, this.state);
+        this.enterRule(localContext, 182, PostgreSqlParser.RULE_createStatsStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -13304,9 +13304,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterstatsstmt(): AlterstatsstmtContext {
-        let localContext = new AlterstatsstmtContext(this.context, this.state);
-        this.enterRule(localContext, 184, PostgreSqlParser.RULE_alterstatsstmt);
+    public alterStatsStmt(): AlterStatsStmtContext {
+        let localContext = new AlterStatsStmtContext(this.context, this.state);
+        this.enterRule(localContext, 184, PostgreSqlParser.RULE_alterStatsStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -13331,7 +13331,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2622;
             this.match(PostgreSqlParser.KW_STATISTICS);
             this.state = 2623;
-            this.signediconst();
+            this.signedConst();
             }
         }
         catch (re) {
@@ -13348,9 +13348,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createasstmt(): CreateasstmtContext {
-        let localContext = new CreateasstmtContext(this.context, this.state);
-        this.enterRule(localContext, 186, PostgreSqlParser.RULE_createasstmt);
+    public createAsStmt(): CreateAsStmtContext {
+        let localContext = new CreateAsStmtContext(this.context, this.state);
+        this.enterRule(localContext, 186, PostgreSqlParser.RULE_createAsStmt);
         let _la: number;
         try {
             localContext = new QueryCreateTableContext(localContext);
@@ -13364,7 +13364,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 213 || _la === 254 || ((((_la - 352)) & ~0x1F) === 0 && ((1 << (_la - 352)) & 32773) !== 0)) {
                 {
                 this.state = 2626;
-                this.opttemp();
+                this.optTemp();
                 }
             }
 
@@ -13385,7 +13385,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2634;
             this.match(PostgreSqlParser.KW_AS);
             this.state = 2635;
-            this.selectstmt();
+            this.selectStmt();
             this.state = 2637;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 256, this.context) ) {
@@ -13447,7 +13447,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 105 || _la === 379) {
                 {
                 this.state = 2646;
-                this.optwith();
+                this.optWith();
                 }
             }
 
@@ -13457,7 +13457,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 80) {
                 {
                 this.state = 2649;
-                this.oncommitoption();
+                this.onCommitOption();
                 }
             }
 
@@ -13467,7 +13467,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 351) {
                 {
                 this.state = 2652;
-                this.opttablespace();
+                this.optTableSpace();
                 }
             }
 
@@ -13531,9 +13531,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public creatematviewstmt(): CreatematviewstmtContext {
-        let localContext = new CreatematviewstmtContext(this.context, this.state);
-        this.enterRule(localContext, 192, PostgreSqlParser.RULE_creatematviewstmt);
+    public createMaterializedViewStmt(): CreateMaterializedViewStmtContext {
+        let localContext = new CreateMaterializedViewStmtContext(this.context, this.state);
+        this.enterRule(localContext, 192, PostgreSqlParser.RULE_createMaterializedViewStmt);
         let _la: number;
         try {
             localContext = new CreateMaterializedViewContext(localContext);
@@ -13593,7 +13593,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 105) {
                 {
                 this.state = 2677;
-                this.opt_reloptions();
+                this.optRelOptions();
                 }
             }
 
@@ -13603,14 +13603,14 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 351) {
                 {
                 this.state = 2680;
-                this.opttablespace();
+                this.optTableSpace();
                 }
             }
 
             this.state = 2683;
             this.match(PostgreSqlParser.KW_AS);
             this.state = 2684;
-            this.selectstmt();
+            this.selectStmt();
             this.state = 2686;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 269, this.context) ) {
@@ -13637,9 +13637,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public refreshmatviewstmt(): RefreshmatviewstmtContext {
-        let localContext = new RefreshmatviewstmtContext(this.context, this.state);
-        this.enterRule(localContext, 194, PostgreSqlParser.RULE_refreshmatviewstmt);
+    public refreshMaterializedViewStmt(): RefreshMaterializedViewStmtContext {
+        let localContext = new RefreshMaterializedViewStmtContext(this.context, this.state);
+        this.enterRule(localContext, 194, PostgreSqlParser.RULE_refreshMaterializedViewStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -13688,9 +13688,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createseqstmt(): CreateseqstmtContext {
-        let localContext = new CreateseqstmtContext(this.context, this.state);
-        this.enterRule(localContext, 196, PostgreSqlParser.RULE_createseqstmt);
+    public createSeqStmt(): CreateSeqStmtContext {
+        let localContext = new CreateSeqStmtContext(this.context, this.state);
+        this.enterRule(localContext, 196, PostgreSqlParser.RULE_createSeqStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -13704,7 +13704,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 213 || _la === 254 || ((((_la - 352)) & ~0x1F) === 0 && ((1 << (_la - 352)) & 32773) !== 0)) {
                 {
                 this.state = 2699;
-                this.opttemp();
+                this.optTemp();
                 }
             }
 
@@ -13736,7 +13736,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         {
                         {
                         this.state = 2707;
-                        this.seqoptelem();
+                        this.seqOptElem();
                         }
                         }
                         break;
@@ -13766,9 +13766,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterseqstmt(): AlterseqstmtContext {
-        let localContext = new AlterseqstmtContext(this.context, this.state);
-        this.enterRule(localContext, 198, PostgreSqlParser.RULE_alterseqstmt);
+    public alterSeqStmt(): AlterSeqStmtContext {
+        let localContext = new AlterSeqStmtContext(this.context, this.state);
+        this.enterRule(localContext, 198, PostgreSqlParser.RULE_alterSeqStmt);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -13798,7 +13798,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 2720;
-                    this.seqoptelem();
+                    this.seqOptElem();
                     }
                     }
                     break;
@@ -13825,9 +13825,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public seqoptelem(): SeqoptelemContext {
-        let localContext = new SeqoptelemContext(this.context, this.state);
-        this.enterRule(localContext, 200, PostgreSqlParser.RULE_seqoptelem);
+    public seqOptElem(): SeqOptElemContext {
+        let localContext = new SeqOptElemContext(this.context, this.state);
+        this.enterRule(localContext, 200, PostgreSqlParser.RULE_seqOptElem);
         let _la: number;
         try {
             this.state = 2758;
@@ -13839,7 +13839,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2725;
                 this.match(PostgreSqlParser.KW_AS);
                 this.state = 2726;
-                this.simpletypename();
+                this.simpleTypeName();
                 }
                 break;
             case PostgreSqlParser.KW_CACHE:
@@ -13853,7 +13853,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 12 || _la === 13 || _la === 571 || _la === 573) {
                     {
                     this.state = 2728;
-                    this.numericonly();
+                    this.numericOnly();
                     }
                 }
 
@@ -13875,7 +13875,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 2735;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case PostgreSqlParser.KW_MAXVALUE:
@@ -13892,7 +13892,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.consume();
                 }
                 this.state = 2737;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case PostgreSqlParser.KW_NO:
@@ -13949,7 +13949,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 2750;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case PostgreSqlParser.KW_RESTART:
@@ -13973,7 +13973,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 12 || _la === 13 || _la === 571 || _la === 573) {
                     {
                     this.state = 2755;
-                    this.numericonly();
+                    this.numericOnly();
                     }
                 }
 
@@ -13997,9 +13997,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public numericonly(): NumericonlyContext {
-        let localContext = new NumericonlyContext(this.context, this.state);
-        this.enterRule(localContext, 202, PostgreSqlParser.RULE_numericonly);
+    public numericOnly(): NumericOnlyContext {
+        let localContext = new NumericOnlyContext(this.context, this.state);
+        this.enterRule(localContext, 202, PostgreSqlParser.RULE_numericOnly);
         let _la: number;
         try {
             this.state = 2765;
@@ -14033,7 +14033,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 2764;
-                this.signediconst();
+                this.signedConst();
                 }
                 break;
             }
@@ -14052,9 +14052,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createplangstmt(): CreateplangstmtContext {
-        let localContext = new CreateplangstmtContext(this.context, this.state);
-        this.enterRule(localContext, 204, PostgreSqlParser.RULE_createplangstmt);
+    public createProceduralLangStmt(): CreateProceduralLangStmtContext {
+        let localContext = new CreateProceduralLangStmtContext(this.context, this.state);
+        this.enterRule(localContext, 204, PostgreSqlParser.RULE_createProceduralLangStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -14094,7 +14094,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2777;
             this.match(PostgreSqlParser.KW_LANGUAGE);
             this.state = 2778;
-            this.colid();
+            this.colId();
             this.state = 2791;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 291, this.context) ) {
@@ -14155,9 +14155,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createtablespacestmt(): CreatetablespacestmtContext {
-        let localContext = new CreatetablespacestmtContext(this.context, this.state);
-        this.enterRule(localContext, 206, PostgreSqlParser.RULE_createtablespacestmt);
+    public createTableSpaceStmt(): CreateTableSpaceStmtContext {
+        let localContext = new CreateTableSpaceStmtContext(this.context, this.state);
+        this.enterRule(localContext, 206, PostgreSqlParser.RULE_createTableSpaceStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -14165,7 +14165,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2793;
             this.match(PostgreSqlParser.KW_CREATE);
             this.state = 2794;
-            this.opttablespace();
+            this.optTableSpace();
             this.state = 2797;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -14174,21 +14174,21 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2795;
                 this.match(PostgreSqlParser.KW_OWNER);
                 this.state = 2796;
-                this.rolespec();
+                this.roleSpec();
                 }
             }
 
             this.state = 2799;
             this.match(PostgreSqlParser.KW_LOCATION);
             this.state = 2800;
-            this.sconst();
+            this.stringConst();
             this.state = 2802;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 293, this.context) ) {
             case 1:
                 {
                 this.state = 2801;
-                this.opt_reloptions();
+                this.optRelOptions();
                 }
                 break;
             }
@@ -14208,9 +14208,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createextensionstmt(): CreateextensionstmtContext {
-        let localContext = new CreateextensionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 208, PostgreSqlParser.RULE_createextensionstmt);
+    public createExtensionStmt(): CreateExtensionStmtContext {
+        let localContext = new CreateExtensionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 208, PostgreSqlParser.RULE_createExtensionStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -14231,7 +14231,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 break;
             }
             this.state = 2809;
-            this.colid();
+            this.colId();
             this.state = 2811;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 295, this.context) ) {
@@ -14272,7 +14272,7 @@ export class PostgreSqlParser extends SQLParserBase {
                             this.consume();
                         }
                         this.state = 2816;
-                        this.nonreservedword_or_sconst();
+                        this.nonReservedWordOrStringConst();
                         }
                         break;
                     case PostgreSqlParser.KW_CASCADE:
@@ -14306,9 +14306,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterextensionstmt(): AlterextensionstmtContext {
-        let localContext = new AlterextensionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 210, PostgreSqlParser.RULE_alterextensionstmt);
+    public alterExtensionStmt(): AlterExtensionStmtContext {
+        let localContext = new AlterExtensionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 210, PostgreSqlParser.RULE_alterExtensionStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -14318,7 +14318,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2824;
             this.match(PostgreSqlParser.KW_EXTENSION);
             this.state = 2825;
-            this.colid();
+            this.colId();
             this.state = 2826;
             this.match(PostgreSqlParser.KW_UPDATE);
             this.state = 2831;
@@ -14330,7 +14330,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2827;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 2828;
-                this.nonreservedword_or_sconst();
+                this.nonReservedWordOrStringConst();
                 }
                 }
                 this.state = 2833;
@@ -14353,9 +14353,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterextensioncontentsstmt(): AlterextensioncontentsstmtContext {
-        let localContext = new AlterextensioncontentsstmtContext(this.context, this.state);
-        this.enterRule(localContext, 212, PostgreSqlParser.RULE_alterextensioncontentsstmt);
+    public alterExtensionContentsStmt(): AlterExtensionContentsStmtContext {
+        let localContext = new AlterExtensionContentsStmtContext(this.context, this.state);
+        this.enterRule(localContext, 212, PostgreSqlParser.RULE_alterExtensionContentsStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -14365,7 +14365,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2835;
             this.match(PostgreSqlParser.KW_EXTENSION);
             this.state = 2836;
-            this.colid();
+            this.colId();
             this.state = 2837;
             _la = this.tokenStream.LA(1);
             if(!(_la === 133 || _la === 191)) {
@@ -14389,7 +14389,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2841;
                 this.match(PostgreSqlParser.KW_LANGUAGE);
                 this.state = 2842;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 2:
@@ -14397,7 +14397,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2844;
                 this.match(PostgreSqlParser.KW_ROUTINE);
                 this.state = 2845;
-                this.routine_with_argtypes();
+                this.routineWithArgTypes();
                 }
                 break;
             case 3:
@@ -14405,7 +14405,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2846;
                 this.match(PostgreSqlParser.KW_PROCEDURE);
                 this.state = 2847;
-                this.procedure_with_argtypes();
+                this.procedureWithArgTypes();
                 }
                 break;
             case 4:
@@ -14432,7 +14432,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2853;
                 this.match(PostgreSqlParser.KW_OPERATOR);
                 this.state = 2854;
-                this.operator_with_argtypes();
+                this.operatorWithArgTypes();
                 }
                 break;
             case 6:
@@ -14440,7 +14440,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2855;
                 this.match(PostgreSqlParser.KW_FUNCTION);
                 this.state = 2856;
-                this.function_with_argtypes();
+                this.functionWithArgTypes();
                 }
                 break;
             case 7:
@@ -14479,7 +14479,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2866;
                 this.match(PostgreSqlParser.KW_AGGREGATE);
                 this.state = 2867;
-                this.aggregate_with_argtypes();
+                this.aggregateWithArgTypes();
                 }
                 break;
             case 10:
@@ -14511,9 +14511,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createfdwstmt(): CreatefdwstmtContext {
-        let localContext = new CreatefdwstmtContext(this.context, this.state);
-        this.enterRule(localContext, 214, PostgreSqlParser.RULE_createfdwstmt);
+    public createFdwStmt(): CreateFdwStmtContext {
+        let localContext = new CreateFdwStmtContext(this.context, this.state);
+        this.enterRule(localContext, 214, PostgreSqlParser.RULE_createFdwStmt);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -14527,7 +14527,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2875;
             this.match(PostgreSqlParser.KW_WRAPPER);
             this.state = 2876;
-            this.colid();
+            this.colId();
             this.state = 2882;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 301, this.context) ) {
@@ -14649,9 +14649,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterfdwstmt(): AlterfdwstmtContext {
-        let localContext = new AlterfdwstmtContext(this.context, this.state);
-        this.enterRule(localContext, 218, PostgreSqlParser.RULE_alterfdwstmt);
+    public alterFdwStmt(): AlterFdwStmtContext {
+        let localContext = new AlterFdwStmtContext(this.context, this.state);
+        this.enterRule(localContext, 218, PostgreSqlParser.RULE_alterFdwStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -14666,7 +14666,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2898;
             this.match(PostgreSqlParser.KW_WRAPPER);
             this.state = 2899;
-            this.colid();
+            this.colId();
             this.state = 2913;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 308, this.context) ) {
@@ -14874,9 +14874,9 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 2942;
-            this.collabel();
+            this.colLabel();
             this.state = 2943;
-            this.sconst();
+            this.stringConst();
             }
         }
         catch (re) {
@@ -14893,9 +14893,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createforeignserverstmt(): CreateforeignserverstmtContext {
-        let localContext = new CreateforeignserverstmtContext(this.context, this.state);
-        this.enterRule(localContext, 228, PostgreSqlParser.RULE_createforeignserverstmt);
+    public createForeignServerStmt(): CreateForeignServerStmtContext {
+        let localContext = new CreateForeignServerStmtContext(this.context, this.state);
+        this.enterRule(localContext, 228, PostgreSqlParser.RULE_createForeignServerStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -14915,7 +14915,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 break;
             }
             this.state = 2950;
-            this.colid();
+            this.colId();
             this.state = 2953;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -14924,7 +14924,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 2951;
                 this.match(PostgreSqlParser.KW_TYPE);
                 this.state = 2952;
-                this.sconst();
+                this.stringConst();
                 }
             }
 
@@ -14945,7 +14945,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2960;
             this.match(PostgreSqlParser.KW_WRAPPER);
             this.state = 2961;
-            this.colid();
+            this.colId();
             this.state = 2963;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 314, this.context) ) {
@@ -14989,7 +14989,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 2966;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case PostgreSqlParser.KW_NULL:
@@ -15017,9 +15017,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterforeignserverstmt(): AlterforeignserverstmtContext {
-        let localContext = new AlterforeignserverstmtContext(this.context, this.state);
-        this.enterRule(localContext, 232, PostgreSqlParser.RULE_alterforeignserverstmt);
+    public alterForeignServerStmt(): AlterForeignServerStmtContext {
+        let localContext = new AlterForeignServerStmtContext(this.context, this.state);
+        this.enterRule(localContext, 232, PostgreSqlParser.RULE_alterForeignServerStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -15028,7 +15028,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 2971;
             this.match(PostgreSqlParser.KW_SERVER);
             this.state = 2972;
-            this.colid();
+            this.colId();
             this.state = 2978;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
@@ -15073,9 +15073,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createforeigntablestmt(): CreateforeigntablestmtContext {
-        let localContext = new CreateforeigntablestmtContext(this.context, this.state);
-        this.enterRule(localContext, 234, PostgreSqlParser.RULE_createforeigntablestmt);
+    public createForeignTableStmt(): CreateForeignTableStmtContext {
+        let localContext = new CreateForeignTableStmtContext(this.context, this.state);
+        this.enterRule(localContext, 234, PostgreSqlParser.RULE_createForeignTableStmt);
         let _la: number;
         try {
             this.state = 3019;
@@ -15111,7 +15111,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (((((_la - 42)) & ~0x1F) === 0 && ((1 << (_la - 42)) & 2099209) !== 0) || ((((_la - 85)) & ~0x1F) === 0 && ((1 << (_la - 85)) & 2147491841) !== 0) || ((((_la - 120)) & ~0x1F) === 0 && ((1 << (_la - 120)) & 4294966809) !== 0) || ((((_la - 152)) & ~0x1F) === 0 && ((1 << (_la - 152)) & 4294967295) !== 0) || ((((_la - 184)) & ~0x1F) === 0 && ((1 << (_la - 184)) & 4294967295) !== 0) || ((((_la - 216)) & ~0x1F) === 0 && ((1 << (_la - 216)) & 4290781183) !== 0) || ((((_la - 248)) & ~0x1F) === 0 && ((1 << (_la - 248)) & 4294967295) !== 0) || ((((_la - 280)) & ~0x1F) === 0 && ((1 << (_la - 280)) & 4294967295) !== 0) || ((((_la - 312)) & ~0x1F) === 0 && ((1 << (_la - 312)) & 4294967295) !== 0) || ((((_la - 344)) & ~0x1F) === 0 && ((1 << (_la - 344)) & 4294967295) !== 0) || ((((_la - 376)) & ~0x1F) === 0 && ((1 << (_la - 376)) & 4294967295) !== 0) || ((((_la - 408)) & ~0x1F) === 0 && ((1 << (_la - 408)) & 4294967295) !== 0) || ((((_la - 440)) & ~0x1F) === 0 && ((1 << (_la - 440)) & 4294950911) !== 0) || ((((_la - 473)) & ~0x1F) === 0 && ((1 << (_la - 473)) & 3221225471) !== 0) || ((((_la - 506)) & ~0x1F) === 0 && ((1 << (_la - 506)) & 286719) !== 0) || ((((_la - 547)) & ~0x1F) === 0 && ((1 << (_la - 547)) & 402696335) !== 0) || _la === 584) {
                     {
                     this.state = 2988;
-                    this.tableelementlist();
+                    this.tableElementList();
                     }
                 }
 
@@ -15123,14 +15123,14 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 238) {
                     {
                     this.state = 2992;
-                    this.optinherit();
+                    this.optInherit();
                     }
                 }
 
                 this.state = 2995;
                 this.match(PostgreSqlParser.KW_SERVER);
                 this.state = 2996;
-                this.colid();
+                this.colId();
                 this.state = 2998;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 321, this.context) ) {
@@ -15177,16 +15177,16 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 2) {
                     {
                     this.state = 3010;
-                    this.opttypedtableelementlist();
+                    this.optTypedTableElEmentList();
                     }
                 }
 
                 this.state = 3013;
-                this.partitionboundspec();
+                this.partitionBoundSpec();
                 this.state = 3014;
                 this.match(PostgreSqlParser.KW_SERVER);
                 this.state = 3015;
-                this.colid();
+                this.colId();
                 this.state = 3017;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 324, this.context) ) {
@@ -15215,9 +15215,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public importforeignschemastmt(): ImportforeignschemastmtContext {
-        let localContext = new ImportforeignschemastmtContext(this.context, this.state);
-        this.enterRule(localContext, 236, PostgreSqlParser.RULE_importforeignschemastmt);
+    public importForeignSchemaStmt(): ImportForeignSchemaStmtContext {
+        let localContext = new ImportForeignSchemaStmtContext(this.context, this.state);
+        this.enterRule(localContext, 236, PostgreSqlParser.RULE_importForeignSchemaStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -15269,11 +15269,11 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3037;
             this.match(PostgreSqlParser.KW_SERVER);
             this.state = 3038;
-            this.colid();
+            this.colId();
             this.state = 3039;
             this.match(PostgreSqlParser.KW_INTO);
             this.state = 3040;
-            this.colid();
+            this.colId();
             this.state = 3042;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 328, this.context) ) {
@@ -15300,9 +15300,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createusermappingstmt(): CreateusermappingstmtContext {
-        let localContext = new CreateusermappingstmtContext(this.context, this.state);
-        this.enterRule(localContext, 238, PostgreSqlParser.RULE_createusermappingstmt);
+    public createUserMappingStmt(): CreateUserMappingStmtContext {
+        let localContext = new CreateUserMappingStmtContext(this.context, this.state);
+        this.enterRule(localContext, 238, PostgreSqlParser.RULE_createUserMappingStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -15748,7 +15748,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 3051;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case PostgreSqlParser.KW_USER:
@@ -15763,7 +15763,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3055;
             this.match(PostgreSqlParser.KW_SERVER);
             this.state = 3056;
-            this.colid();
+            this.colId();
             this.state = 3058;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 331, this.context) ) {
@@ -15790,9 +15790,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterusermappingstmt(): AlterusermappingstmtContext {
-        let localContext = new AlterusermappingstmtContext(this.context, this.state);
-        this.enterRule(localContext, 240, PostgreSqlParser.RULE_alterusermappingstmt);
+    public alterUserMappingStmt(): AlterUserMappingStmtContext {
+        let localContext = new AlterUserMappingStmtContext(this.context, this.state);
+        this.enterRule(localContext, 240, PostgreSqlParser.RULE_alterUserMappingStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -16227,7 +16227,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 3064;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case PostgreSqlParser.KW_USER:
@@ -16242,7 +16242,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3068;
             this.match(PostgreSqlParser.KW_SERVER);
             this.state = 3069;
-            this.colid();
+            this.colId();
             this.state = 3070;
             this.alter_generic_options();
             }
@@ -16261,9 +16261,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createpolicystmt(): CreatepolicystmtContext {
-        let localContext = new CreatepolicystmtContext(this.context, this.state);
-        this.enterRule(localContext, 242, PostgreSqlParser.RULE_createpolicystmt);
+    public createPolicyStmt(): CreatePolicyStmtContext {
+        let localContext = new CreatePolicyStmtContext(this.context, this.state);
+        this.enterRule(localContext, 242, PostgreSqlParser.RULE_createPolicyStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -16273,7 +16273,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3073;
             this.match(PostgreSqlParser.KW_POLICY);
             this.state = 3074;
-            this.colid();
+            this.colId();
             this.state = 3075;
             this.match(PostgreSqlParser.KW_ON);
             this.state = 3076;
@@ -16691,7 +16691,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 100) {
                 {
                 this.state = 3093;
-                this.rowsecurityoptionalexpr();
+                this.rowSecurityOptionalExpr();
                 }
             }
 
@@ -16701,7 +16701,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 3096;
-                this.rowsecurityoptionalwithcheck();
+                this.rowSecurityOptionalWithCheck();
                 }
                 break;
             }
@@ -16721,9 +16721,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterpolicystmt(): AlterpolicystmtContext {
-        let localContext = new AlterpolicystmtContext(this.context, this.state);
-        this.enterRule(localContext, 244, PostgreSqlParser.RULE_alterpolicystmt);
+    public alterPolicyStmt(): AlterPolicyStmtContext {
+        let localContext = new AlterPolicyStmtContext(this.context, this.state);
+        this.enterRule(localContext, 244, PostgreSqlParser.RULE_alterPolicyStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -16733,7 +16733,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3100;
             this.match(PostgreSqlParser.KW_POLICY);
             this.state = 3101;
-            this.colid();
+            this.colId();
             this.state = 3102;
             this.match(PostgreSqlParser.KW_ON);
             this.state = 3103;
@@ -16756,7 +16756,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 100) {
                 {
                 this.state = 3108;
-                this.rowsecurityoptionalexpr();
+                this.rowSecurityOptionalExpr();
                 }
             }
 
@@ -16766,7 +16766,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 3111;
-                this.rowsecurityoptionalwithcheck();
+                this.rowSecurityOptionalWithCheck();
                 }
                 break;
             }
@@ -16786,9 +16786,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterprocedurestmt(): AlterprocedurestmtContext {
-        let localContext = new AlterprocedurestmtContext(this.context, this.state);
-        this.enterRule(localContext, 246, PostgreSqlParser.RULE_alterprocedurestmt);
+    public alterProcedureStmt(): AlterProcedureStmtContext {
+        let localContext = new AlterProcedureStmtContext(this.context, this.state);
+        this.enterRule(localContext, 246, PostgreSqlParser.RULE_alterProcedureStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -16862,7 +16862,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3134;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 3135;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case 4:
@@ -16894,7 +16894,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3144;
                 this.match(PostgreSqlParser.KW_EXTENSION);
                 this.state = 3145;
-                this.colid();
+                this.colId();
                 }
                 break;
             }
@@ -16973,7 +16973,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3160;
                 this.match(PostgreSqlParser.KW_SET);
                 this.state = 3161;
-                this.colid();
+                this.colId();
                 this.state = 3162;
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 9 || _la === 94)) {
@@ -16989,7 +16989,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 3163;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case 2:
@@ -17007,7 +17007,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3167;
                 this.match(PostgreSqlParser.KW_SET);
                 this.state = 3168;
-                this.colid();
+                this.colId();
                 this.state = 3169;
                 this.match(PostgreSqlParser.KW_FROM);
                 this.state = 3170;
@@ -17418,7 +17418,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 3173;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case PostgreSqlParser.KW_ALL:
@@ -17448,9 +17448,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public rowsecurityoptionalexpr(): RowsecurityoptionalexprContext {
-        let localContext = new RowsecurityoptionalexprContext(this.context, this.state);
-        this.enterRule(localContext, 250, PostgreSqlParser.RULE_rowsecurityoptionalexpr);
+    public rowSecurityOptionalExpr(): RowSecurityOptionalExprContext {
+        let localContext = new RowSecurityOptionalExprContext(this.context, this.state);
+        this.enterRule(localContext, 250, PostgreSqlParser.RULE_rowSecurityOptionalExpr);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -17478,9 +17478,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public rowsecurityoptionalwithcheck(): RowsecurityoptionalwithcheckContext {
-        let localContext = new RowsecurityoptionalwithcheckContext(this.context, this.state);
-        this.enterRule(localContext, 252, PostgreSqlParser.RULE_rowsecurityoptionalwithcheck);
+    public rowSecurityOptionalWithCheck(): RowSecurityOptionalWithCheckContext {
+        let localContext = new RowSecurityOptionalWithCheckContext(this.context, this.state);
+        this.enterRule(localContext, 252, PostgreSqlParser.RULE_rowSecurityOptionalWithCheck);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -17510,9 +17510,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createamstmt(): CreateamstmtContext {
-        let localContext = new CreateamstmtContext(this.context, this.state);
-        this.enterRule(localContext, 254, PostgreSqlParser.RULE_createamstmt);
+    public createAccessMethodStmt(): CreateAccessMethodStmtContext {
+        let localContext = new CreateAccessMethodStmtContext(this.context, this.state);
+        this.enterRule(localContext, 254, PostgreSqlParser.RULE_createAccessMethodStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -17524,7 +17524,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3192;
             this.match(PostgreSqlParser.KW_METHOD);
             this.state = 3193;
-            this.colid();
+            this.colId();
             this.state = 3194;
             this.match(PostgreSqlParser.KW_TYPE);
             this.state = 3195;
@@ -17556,9 +17556,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createtrigstmt(): CreatetrigstmtContext {
-        let localContext = new CreatetrigstmtContext(this.context, this.state);
-        this.enterRule(localContext, 256, PostgreSqlParser.RULE_createtrigstmt);
+    public createTrigStmt(): CreateTrigStmtContext {
+        let localContext = new CreateTrigStmtContext(this.context, this.state);
+        this.enterRule(localContext, 256, PostgreSqlParser.RULE_createTrigStmt);
         let _la: number;
         try {
             this.state = 3277;
@@ -17582,11 +17582,11 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3203;
                 this.match(PostgreSqlParser.KW_TRIGGER);
                 this.state = 3204;
-                this.colid();
+                this.colId();
                 this.state = 3205;
-                this.triggeractiontime();
+                this.triggerActionTime();
                 this.state = 3206;
-                this.triggerevents();
+                this.triggerEvents();
                 this.state = 3207;
                 this.match(PostgreSqlParser.KW_ON);
                 this.state = 3208;
@@ -17633,7 +17633,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         }
 
                         this.state = 3215;
-                        this.colid();
+                        this.colId();
                         }
                         }
                         this.state = 3218;
@@ -17678,7 +17678,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 102) {
                     {
                     this.state = 3229;
-                    this.triggerwhen();
+                    this.triggerWhen();
                     }
                 }
 
@@ -17689,7 +17689,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3234;
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 this.state = 3235;
-                this.triggerfuncargs();
+                this.triggerFuncArgs();
                 this.state = 3236;
                 this.match(PostgreSqlParser.CLOSE_PAREN);
                 }
@@ -17722,11 +17722,11 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3245;
                 this.match(PostgreSqlParser.KW_TRIGGER);
                 this.state = 3246;
-                this.colid();
+                this.colId();
                 this.state = 3247;
-                this.triggeractiontime();
+                this.triggerActionTime();
                 this.state = 3248;
-                this.triggerevents();
+                this.triggerEvents();
                 this.state = 3249;
                 this.match(PostgreSqlParser.KW_ON);
                 this.state = 3250;
@@ -17750,7 +17750,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 3255;
-                    this.constraintattributeElem();
+                    this.constraintAttributeElem();
                     }
                     }
                     this.state = 3260;
@@ -17792,7 +17792,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 102) {
                     {
                     this.state = 3268;
-                    this.triggerwhen();
+                    this.triggerWhen();
                     }
                 }
 
@@ -17803,7 +17803,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3273;
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 this.state = 3274;
-                this.triggerfuncargs();
+                this.triggerFuncArgs();
                 this.state = 3275;
                 this.match(PostgreSqlParser.CLOSE_PAREN);
                 }
@@ -17824,9 +17824,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public triggeractiontime(): TriggeractiontimeContext {
-        let localContext = new TriggeractiontimeContext(this.context, this.state);
-        this.enterRule(localContext, 258, PostgreSqlParser.RULE_triggeractiontime);
+    public triggerActionTime(): TriggerActionTimeContext {
+        let localContext = new TriggerActionTimeContext(this.context, this.state);
+        this.enterRule(localContext, 258, PostgreSqlParser.RULE_triggerActionTime);
         try {
             this.state = 3283;
             this.errorHandler.sync(this);
@@ -17872,15 +17872,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public triggerevents(): TriggereventsContext {
-        let localContext = new TriggereventsContext(this.context, this.state);
-        this.enterRule(localContext, 260, PostgreSqlParser.RULE_triggerevents);
+    public triggerEvents(): TriggerEventsContext {
+        let localContext = new TriggerEventsContext(this.context, this.state);
+        this.enterRule(localContext, 260, PostgreSqlParser.RULE_triggerEvents);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 3285;
-            this.triggeroneevent();
+            this.triggerOneEvent();
             this.state = 3290;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -17890,7 +17890,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3286;
                 this.match(PostgreSqlParser.KW_OR);
                 this.state = 3287;
-                this.triggeroneevent();
+                this.triggerOneEvent();
                 }
                 }
                 this.state = 3292;
@@ -17913,9 +17913,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public triggeroneevent(): TriggeroneeventContext {
-        let localContext = new TriggeroneeventContext(this.context, this.state);
-        this.enterRule(localContext, 262, PostgreSqlParser.RULE_triggeroneevent);
+    public triggerOneEvent(): TriggerOneEventContext {
+        let localContext = new TriggerOneEventContext(this.context, this.state);
+        this.enterRule(localContext, 262, PostgreSqlParser.RULE_triggerOneEvent);
         let _la: number;
         try {
             this.state = 3301;
@@ -17979,9 +17979,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public triggerwhen(): TriggerwhenContext {
-        let localContext = new TriggerwhenContext(this.context, this.state);
-        this.enterRule(localContext, 264, PostgreSqlParser.RULE_triggerwhen);
+    public triggerWhen(): TriggerWhenContext {
+        let localContext = new TriggerWhenContext(this.context, this.state);
+        this.enterRule(localContext, 264, PostgreSqlParser.RULE_triggerWhen);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -18052,9 +18052,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public triggerfuncargs(): TriggerfuncargsContext {
-        let localContext = new TriggerfuncargsContext(this.context, this.state);
-        this.enterRule(localContext, 268, PostgreSqlParser.RULE_triggerfuncargs);
+    public triggerFuncArgs(): TriggerFuncArgsContext {
+        let localContext = new TriggerFuncArgsContext(this.context, this.state);
+        this.enterRule(localContext, 268, PostgreSqlParser.RULE_triggerFuncArgs);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -18556,7 +18556,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 3314;
-                this.triggerfuncarg();
+                this.triggerFuncArg();
                 }
                 break;
             case PostgreSqlParser.CLOSE_PAREN:
@@ -18577,7 +18577,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3318;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 3319;
-                this.triggerfuncarg();
+                this.triggerFuncArg();
                 }
                 }
                 this.state = 3324;
@@ -18600,9 +18600,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public triggerfuncarg(): TriggerfuncargContext {
-        let localContext = new TriggerfuncargContext(this.context, this.state);
-        this.enterRule(localContext, 270, PostgreSqlParser.RULE_triggerfuncarg);
+    public triggerFuncArg(): TriggerFuncArgContext {
+        let localContext = new TriggerFuncArgContext(this.context, this.state);
+        this.enterRule(localContext, 270, PostgreSqlParser.RULE_triggerFuncArg);
         try {
             this.state = 3329;
             this.errorHandler.sync(this);
@@ -18625,14 +18625,14 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 3327;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 3328;
-                this.collabel();
+                this.colLabel();
                 }
                 break;
             }
@@ -18651,9 +18651,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public constraintattributeElem(): ConstraintattributeElemContext {
-        let localContext = new ConstraintattributeElemContext(this.context, this.state);
-        this.enterRule(localContext, 272, PostgreSqlParser.RULE_constraintattributeElem);
+    public constraintAttributeElem(): ConstraintAttributeElemContext {
+        let localContext = new ConstraintAttributeElemContext(this.context, this.state);
+        this.enterRule(localContext, 272, PostgreSqlParser.RULE_constraintAttributeElem);
         let _la: number;
         try {
             this.state = 3341;
@@ -18726,9 +18726,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createeventtrigstmt(): CreateeventtrigstmtContext {
-        let localContext = new CreateeventtrigstmtContext(this.context, this.state);
-        this.enterRule(localContext, 274, PostgreSqlParser.RULE_createeventtrigstmt);
+    public createEventTrigStmt(): CreateEventTrigStmtContext {
+        let localContext = new CreateEventTrigStmtContext(this.context, this.state);
+        this.enterRule(localContext, 274, PostgreSqlParser.RULE_createEventTrigStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -18740,11 +18740,11 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3345;
             this.match(PostgreSqlParser.KW_TRIGGER);
             this.state = 3346;
-            this.colid();
+            this.colId();
             this.state = 3347;
             this.match(PostgreSqlParser.KW_ON);
             this.state = 3348;
-            this.collabel();
+            this.colLabel();
             this.state = 3358;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -18805,13 +18805,13 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 3365;
-            this.colid();
+            this.colId();
             this.state = 3366;
             this.match(PostgreSqlParser.KW_IN);
             this.state = 3367;
             this.match(PostgreSqlParser.OPEN_PAREN);
             this.state = 3368;
-            this.sconst();
+            this.stringConst();
             this.state = 3372;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -18844,9 +18844,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altereventtrigstmt(): AltereventtrigstmtContext {
-        let localContext = new AltereventtrigstmtContext(this.context, this.state);
-        this.enterRule(localContext, 278, PostgreSqlParser.RULE_altereventtrigstmt);
+    public alterEventTrigStmt(): AlterEventTrigStmtContext {
+        let localContext = new AlterEventTrigStmtContext(this.context, this.state);
+        this.enterRule(localContext, 278, PostgreSqlParser.RULE_alterEventTrigStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -18858,7 +18858,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3379;
             this.match(PostgreSqlParser.KW_TRIGGER);
             this.state = 3380;
-            this.colid();
+            this.colId();
             this.state = 3386;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
@@ -18910,9 +18910,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createassertionstmt(): CreateassertionstmtContext {
-        let localContext = new CreateassertionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 280, PostgreSqlParser.RULE_createassertionstmt);
+    public createAssertionStmt(): CreateAssertionStmtContext {
+        let localContext = new CreateAssertionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 280, PostgreSqlParser.RULE_createAssertionStmt);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -18939,7 +18939,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 3395;
-                    this.constraintattributeElem();
+                    this.constraintAttributeElem();
                     }
                     }
                 }
@@ -18963,9 +18963,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public definestmt(): DefinestmtContext {
-        let localContext = new DefinestmtContext(this.context, this.state);
-        this.enterRule(localContext, 282, PostgreSqlParser.RULE_definestmt);
+    public defineStmt(): DefineStmtContext {
+        let localContext = new DefineStmtContext(this.context, this.state);
+        this.enterRule(localContext, 282, PostgreSqlParser.RULE_defineStmt);
         let _la: number;
         try {
             this.state = 3479;
@@ -18997,7 +18997,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 3407;
-                    this.aggr_args();
+                    this.aggregate_args();
                     this.state = 3408;
                     this.definition();
                     }
@@ -19008,7 +19008,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 3410;
                     this.match(PostgreSqlParser.OPEN_PAREN);
                     this.state = 3411;
-                    this.old_aggr_elem();
+                    this.old_aggregate_elem();
                     this.state = 3416;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
@@ -19018,7 +19018,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         this.state = 3412;
                         this.match(PostgreSqlParser.COMMA);
                         this.state = 3413;
-                        this.old_aggr_elem();
+                        this.old_aggregate_elem();
                         }
                         }
                         this.state = 3418;
@@ -19069,7 +19069,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     if (_la === 53 || ((((_la - 116)) & ~0x1F) === 0 && ((1 << (_la - 116)) & 4294959489) !== 0) || ((((_la - 148)) & ~0x1F) === 0 && ((1 << (_la - 148)) & 4294967295) !== 0) || ((((_la - 180)) & ~0x1F) === 0 && ((1 << (_la - 180)) & 4294967295) !== 0) || ((((_la - 212)) & ~0x1F) === 0 && ((1 << (_la - 212)) & 4227989503) !== 0) || ((((_la - 244)) & ~0x1F) === 0 && ((1 << (_la - 244)) & 4294967295) !== 0) || ((((_la - 276)) & ~0x1F) === 0 && ((1 << (_la - 276)) & 4294967295) !== 0) || ((((_la - 308)) & ~0x1F) === 0 && ((1 << (_la - 308)) & 4294967295) !== 0) || ((((_la - 340)) & ~0x1F) === 0 && ((1 << (_la - 340)) & 4294967295) !== 0) || ((((_la - 372)) & ~0x1F) === 0 && ((1 << (_la - 372)) & 4294967295) !== 0) || ((((_la - 404)) & ~0x1F) === 0 && ((1 << (_la - 404)) & 4294967295) !== 0) || ((((_la - 436)) & ~0x1F) === 0 && ((1 << (_la - 436)) & 4294705151) !== 0) || ((((_la - 468)) & ~0x1F) === 0 && ((1 << (_la - 468)) & 4294967279) !== 0) || ((((_la - 500)) & ~0x1F) === 0 && ((1 << (_la - 500)) & 18350039) !== 0) || ((((_la - 547)) & ~0x1F) === 0 && ((1 << (_la - 547)) & 402696335) !== 0) || _la === 584) {
                         {
                         this.state = 3433;
-                        this.tablefuncelementlist();
+                        this.tableFuncElementList();
                         }
                     }
 
@@ -19089,7 +19089,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     if (((((_la - 558)) & ~0x1F) === 0 && ((1 << (_la - 558)) & 67108885) !== 0)) {
                         {
                         this.state = 3439;
-                        this.sconst();
+                        this.stringConst();
                         this.state = 3443;
                         this.errorHandler.sync(this);
                         _la = this.tokenStream.LA(1);
@@ -19285,7 +19285,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 3492;
-            this.collabel();
+            this.colLabel();
             this.state = 3495;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -19346,14 +19346,14 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 3500;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case 5:
                 this.enterOuterAlt(localContext, 5);
                 {
                 this.state = 3501;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 6:
@@ -19379,9 +19379,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public old_aggr_elem(): Old_aggr_elemContext {
-        let localContext = new Old_aggr_elemContext(this.context, this.state);
-        this.enterRule(localContext, 290, PostgreSqlParser.RULE_old_aggr_elem);
+    public old_aggregate_elem(): Old_aggregate_elemContext {
+        let localContext = new Old_aggregate_elemContext(this.context, this.state);
+        this.enterRule(localContext, 290, PostgreSqlParser.RULE_old_aggregate_elem);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -19407,9 +19407,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterenumstmt(): AlterenumstmtContext {
-        let localContext = new AlterenumstmtContext(this.context, this.state);
-        this.enterRule(localContext, 292, PostgreSqlParser.RULE_alterenumstmt);
+    public alterEnumStmt(): AlterEnumStmtContext {
+        let localContext = new AlterEnumStmtContext(this.context, this.state);
+        this.enterRule(localContext, 292, PostgreSqlParser.RULE_alterEnumStmt);
         let _la: number;
         try {
             this.state = 3531;
@@ -19439,7 +19439,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 3517;
-                this.sconst();
+                this.stringConst();
                 this.state = 3520;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 400, this.context) ) {
@@ -19455,7 +19455,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         this.consume();
                     }
                     this.state = 3519;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 }
@@ -19475,11 +19475,11 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3526;
                 this.match(PostgreSqlParser.KW_VALUE);
                 this.state = 3527;
-                this.sconst();
+                this.stringConst();
                 this.state = 3528;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 3529;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             }
@@ -19526,9 +19526,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createopclassstmt(): CreateopclassstmtContext {
-        let localContext = new CreateopclassstmtContext(this.context, this.state);
-        this.enterRule(localContext, 296, PostgreSqlParser.RULE_createopclassstmt);
+    public createOperatorClassStmt(): CreateOperatorClassStmtContext {
+        let localContext = new CreateOperatorClassStmtContext(this.context, this.state);
+        this.enterRule(localContext, 296, PostgreSqlParser.RULE_createOperatorClassStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -19574,7 +19574,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3552;
             this.match(PostgreSqlParser.KW_AS);
             this.state = 3553;
-            this.opclass_item();
+            this.opClassItem();
             this.state = 3558;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -19584,7 +19584,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3554;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 3555;
-                this.opclass_item();
+                this.opClassItem();
                 }
                 }
                 this.state = 3560;
@@ -19607,9 +19607,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public opclass_item(): Opclass_itemContext {
-        let localContext = new Opclass_itemContext(this.context, this.state);
-        this.enterRule(localContext, 298, PostgreSqlParser.RULE_opclass_item);
+    public opClassItem(): OpClassItemContext {
+        let localContext = new OpClassItemContext(this.context, this.state);
+        this.enterRule(localContext, 298, PostgreSqlParser.RULE_opClassItem);
         let _la: number;
         try {
             this.state = 3587;
@@ -19630,7 +19630,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 3564;
-                    this.oper_argtypes();
+                    this.operatorArgTypes();
                     }
                     break;
                 }
@@ -19698,7 +19698,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 3584;
-                this.function_with_argtypes();
+                this.functionWithArgTypes();
                 }
                 break;
             case PostgreSqlParser.KW_STORAGE:
@@ -19728,9 +19728,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createopfamilystmt(): CreateopfamilystmtContext {
-        let localContext = new CreateopfamilystmtContext(this.context, this.state);
-        this.enterRule(localContext, 300, PostgreSqlParser.RULE_createopfamilystmt);
+    public createOperatorFamilyStmt(): CreateOperatorFamilyStmtContext {
+        let localContext = new CreateOperatorFamilyStmtContext(this.context, this.state);
+        this.enterRule(localContext, 300, PostgreSqlParser.RULE_createOperatorFamilyStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -19760,9 +19760,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alteropfamilystmt(): AlteropfamilystmtContext {
-        let localContext = new AlteropfamilystmtContext(this.context, this.state);
-        this.enterRule(localContext, 302, PostgreSqlParser.RULE_alteropfamilystmt);
+    public alterOperatorFamilyStmt(): AlterOperatorFamilyStmtContext {
+        let localContext = new AlterOperatorFamilyStmtContext(this.context, this.state);
+        this.enterRule(localContext, 302, PostgreSqlParser.RULE_alterOperatorFamilyStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -19785,7 +19785,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3600;
                 this.match(PostgreSqlParser.KW_ADD);
                 this.state = 3601;
-                this.opclass_item();
+                this.opClassItem();
                 this.state = 3606;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -19795,7 +19795,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 3602;
                     this.match(PostgreSqlParser.COMMA);
                     this.state = 3603;
-                    this.opclass_item();
+                    this.opClassItem();
                     }
                     }
                     this.state = 3608;
@@ -19809,7 +19809,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3609;
                 this.match(PostgreSqlParser.KW_DROP);
                 this.state = 3610;
-                this.opclass_drop();
+                this.opClassDrop();
                 this.state = 3615;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -19819,7 +19819,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 3611;
                     this.match(PostgreSqlParser.COMMA);
                     this.state = 3612;
-                    this.opclass_drop();
+                    this.opClassDrop();
                     }
                     }
                     this.state = 3617;
@@ -19847,9 +19847,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public opclass_drop(): Opclass_dropContext {
-        let localContext = new Opclass_dropContext(this.context, this.state);
-        this.enterRule(localContext, 304, PostgreSqlParser.RULE_opclass_drop);
+    public opClassDrop(): OpClassDropContext {
+        let localContext = new OpClassDropContext(this.context, this.state);
+        this.enterRule(localContext, 304, PostgreSqlParser.RULE_opClassDrop);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -19883,9 +19883,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public reassignownedstmt(): ReassignownedstmtContext {
-        let localContext = new ReassignownedstmtContext(this.context, this.state);
-        this.enterRule(localContext, 306, PostgreSqlParser.RULE_reassignownedstmt);
+    public reassignOwnedStmt(): ReassignOwnedStmtContext {
+        let localContext = new ReassignOwnedStmtContext(this.context, this.state);
+        this.enterRule(localContext, 306, PostgreSqlParser.RULE_reassignOwnedStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -19900,7 +19900,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 3628;
             this.match(PostgreSqlParser.KW_TO);
             this.state = 3629;
-            this.rolespec();
+            this.roleSpec();
             }
         }
         catch (re) {
@@ -19917,9 +19917,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public dropstmt(): DropstmtContext {
-        let localContext = new DropstmtContext(this.context, this.state);
-        this.enterRule(localContext, 308, PostgreSqlParser.RULE_dropstmt);
+    public dropStmt(): DropStmtContext {
+        let localContext = new DropStmtContext(this.context, this.state);
+        this.enterRule(localContext, 308, PostgreSqlParser.RULE_dropStmt);
         let _la: number;
         try {
             this.state = 3838;
@@ -20222,7 +20222,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 3708;
-                this.colid();
+                this.colId();
                 this.state = 3709;
                 this.match(PostgreSqlParser.KW_ON);
                 this.state = 3710;
@@ -20448,7 +20448,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 3776;
-                this.colid();
+                this.colId();
                 this.state = 3778;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 440, this.context) ) {
@@ -20506,7 +20506,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3793;
                 this.match(PostgreSqlParser.KW_LANGUAGE);
                 this.state = 3794;
-                this.colid();
+                this.colId();
                 this.state = 3796;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 443, this.context) ) {
@@ -20991,7 +20991,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 3811;
-                    this.rolespec();
+                    this.roleSpec();
                     }
                     break;
                 case PostgreSqlParser.KW_USER:
@@ -21006,7 +21006,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3815;
                 this.match(PostgreSqlParser.KW_SERVER);
                 this.state = 3816;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 16:
@@ -21294,7 +21294,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     throw new antlr.NoViableAltException(this);
                 }
                 this.state = 3876;
-                this.colid();
+                this.colId();
                 }
                 break;
             case PostgreSqlParser.KW_SCHEMA:
@@ -21319,7 +21319,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 3881;
-                this.opttablespace();
+                this.optTableSpace();
                 }
                 break;
             default:
@@ -21388,7 +21388,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 3892;
-            this.colid();
+            this.colId();
             this.state = 3894;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 459, this.context) ) {
@@ -21433,7 +21433,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 3896;
                     this.match(PostgreSqlParser.DOT);
                     this.state = 3897;
-                    this.collabel();
+                    this.colLabel();
                     }
                     }
                     break;
@@ -21460,9 +21460,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public truncatestmt(): TruncatestmtContext {
-        let localContext = new TruncatestmtContext(this.context, this.state);
-        this.enterRule(localContext, 320, PostgreSqlParser.RULE_truncatestmt);
+    public truncateStmt(): TruncateStmtContext {
+        let localContext = new TruncateStmtContext(this.context, this.state);
+        this.enterRule(localContext, 320, PostgreSqlParser.RULE_truncateStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -21587,9 +21587,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public commentstmt(): CommentstmtContext {
-        let localContext = new CommentstmtContext(this.context, this.state);
-        this.enterRule(localContext, 324, PostgreSqlParser.RULE_commentstmt);
+    public commentStmt(): CommentStmtContext {
+        let localContext = new CommentStmtContext(this.context, this.state);
+        this.enterRule(localContext, 324, PostgreSqlParser.RULE_commentStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -21619,7 +21619,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.match(PostgreSqlParser.KW_COLUMN);
                 {
                 this.state = 3933;
-                this.colid();
+                this.colId();
                 this.state = 3935;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 467, this.context) ) {
@@ -21657,7 +21657,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3942;
                 this.match(PostgreSqlParser.KW_AGGREGATE);
                 this.state = 3943;
-                this.aggregate_with_argtypes();
+                this.aggregateWithArgTypes();
                 }
                 break;
             case 6:
@@ -21665,7 +21665,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3944;
                 this.match(PostgreSqlParser.KW_FUNCTION);
                 this.state = 3945;
-                this.function_with_argtypes();
+                this.functionWithArgTypes();
                 }
                 break;
             case 7:
@@ -21673,7 +21673,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3946;
                 this.match(PostgreSqlParser.KW_OPERATOR);
                 this.state = 3947;
-                this.operator_with_argtypes();
+                this.operatorWithArgTypes();
                 }
                 break;
             case 8:
@@ -21681,7 +21681,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3948;
                 this.match(PostgreSqlParser.KW_CONSTRAINT);
                 this.state = 3949;
-                this.colid();
+                this.colId();
                 this.state = 3950;
                 this.match(PostgreSqlParser.KW_ON);
                 this.state = 3956;
@@ -21726,7 +21726,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.consume();
                 }
                 this.state = 3959;
-                this.colid();
+                this.colId();
                 this.state = 3960;
                 this.match(PostgreSqlParser.KW_ON);
                 this.state = 3961;
@@ -21738,7 +21738,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3963;
                 this.match(PostgreSqlParser.KW_PROCEDURE);
                 this.state = 3964;
-                this.procedure_with_argtypes();
+                this.procedureWithArgTypes();
                 }
                 break;
             case 11:
@@ -21746,7 +21746,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3965;
                 this.match(PostgreSqlParser.KW_ROUTINE);
                 this.state = 3966;
-                this.routine_with_argtypes();
+                this.routineWithArgTypes();
                 }
                 break;
             case 12:
@@ -21760,7 +21760,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3970;
                 this.match(PostgreSqlParser.KW_LANGUAGE);
                 this.state = 3971;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 13:
@@ -21789,7 +21789,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3979;
                 this.match(PostgreSqlParser.KW_OBJECT);
                 this.state = 3980;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case 15:
@@ -21820,7 +21820,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 3991;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case PostgreSqlParser.KW_NULL:
@@ -21848,9 +21848,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public seclabelstmt(): SeclabelstmtContext {
-        let localContext = new SeclabelstmtContext(this.context, this.state);
-        this.enterRule(localContext, 326, PostgreSqlParser.RULE_seclabelstmt);
+    public secLabelStmt(): SecLabelStmtContext {
+        let localContext = new SecLabelStmtContext(this.context, this.state);
+        this.enterRule(localContext, 326, PostgreSqlParser.RULE_secLabelStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -21867,7 +21867,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 3997;
                 this.match(PostgreSqlParser.KW_FOR);
                 this.state = 3998;
-                this.nonreservedword_or_sconst();
+                this.nonReservedWordOrStringConst();
                 }
             }
 
@@ -21896,7 +21896,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4004;
                 this.match(PostgreSqlParser.KW_AGGREGATE);
                 this.state = 4005;
-                this.aggregate_with_argtypes();
+                this.aggregateWithArgTypes();
                 }
                 break;
             case 3:
@@ -21912,7 +21912,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4008;
                 this.match(PostgreSqlParser.KW_FUNCTION);
                 this.state = 4009;
-                this.function_with_argtypes();
+                this.functionWithArgTypes();
                 }
                 break;
             case 5:
@@ -21922,7 +21922,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4011;
                 this.match(PostgreSqlParser.KW_OBJECT);
                 this.state = 4012;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case 6:
@@ -21930,7 +21930,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4013;
                 this.match(PostgreSqlParser.KW_PROCEDURE);
                 this.state = 4014;
-                this.procedure_with_argtypes();
+                this.procedureWithArgTypes();
                 }
                 break;
             case 7:
@@ -21938,7 +21938,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4015;
                 this.match(PostgreSqlParser.KW_ROUTINE);
                 this.state = 4016;
-                this.routine_with_argtypes();
+                this.routineWithArgTypes();
                 }
                 break;
             case 8:
@@ -21965,7 +21965,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 4022;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case PostgreSqlParser.KW_NULL:
@@ -21993,9 +21993,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public fetchstmt(): FetchstmtContext {
-        let localContext = new FetchstmtContext(this.context, this.state);
-        this.enterRule(localContext, 328, PostgreSqlParser.RULE_fetchstmt);
+    public fetchStmt(): FetchStmtContext {
+        let localContext = new FetchStmtContext(this.context, this.state);
+        this.enterRule(localContext, 328, PostgreSqlParser.RULE_fetchStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -22066,7 +22066,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 4035;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 2:
@@ -22090,7 +22090,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 4039;
-                this.signediconst();
+                this.signedConst();
                 this.state = 4041;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -22102,7 +22102,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 4043;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 3:
@@ -22116,7 +22116,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 12 || _la === 13 || _la === 571) {
                     {
                     this.state = 4046;
-                    this.signediconst();
+                    this.signedConst();
                     }
                 }
 
@@ -22131,7 +22131,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 4052;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 4:
@@ -22160,7 +22160,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 4060;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 5:
@@ -22586,7 +22586,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.Integral:
                     {
                     this.state = 4065;
-                    this.signediconst();
+                    this.signedConst();
                     }
                     break;
                 default:
@@ -22603,7 +22603,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 4071;
-                this.colid();
+                this.colId();
                 }
                 break;
             }
@@ -22654,9 +22654,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public grantstmt(): GrantstmtContext {
-        let localContext = new GrantstmtContext(this.context, this.state);
-        this.enterRule(localContext, 334, PostgreSqlParser.RULE_grantstmt);
+    public grantStmt(): GrantStmtContext {
+        let localContext = new GrantStmtContext(this.context, this.state);
+        this.enterRule(localContext, 334, PostgreSqlParser.RULE_grantStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -22702,9 +22702,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public revokestmt(): RevokestmtContext {
-        let localContext = new RevokestmtContext(this.context, this.state);
-        this.enterRule(localContext, 336, PostgreSqlParser.RULE_revokestmt);
+    public revokeStmt(): RevokeStmtContext {
+        let localContext = new RevokeStmtContext(this.context, this.state);
+        this.enterRule(localContext, 336, PostgreSqlParser.RULE_revokeStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -22823,7 +22823,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 4116;
-                this.beforeprivilegeselect();
+                this.beforePrivilegeSelect();
                 this.state = 4121;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -22833,7 +22833,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 4117;
                     this.match(PostgreSqlParser.COMMA);
                     this.state = 4118;
-                    this.beforeprivilegeselect();
+                    this.beforePrivilegeSelect();
                     }
                     }
                     this.state = 4123;
@@ -22858,9 +22858,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public beforeprivilegeselect(): BeforeprivilegeselectContext {
-        let localContext = new BeforeprivilegeselectContext(this.context, this.state);
-        this.enterRule(localContext, 340, PostgreSqlParser.RULE_beforeprivilegeselect);
+    public beforePrivilegeSelect(): BeforePrivilegeSelectContext {
+        let localContext = new BeforePrivilegeSelectContext(this.context, this.state);
+        this.enterRule(localContext, 340, PostgreSqlParser.RULE_beforePrivilegeSelect);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -23314,7 +23314,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 4131;
-                this.colid();
+                this.colId();
                 }
                 break;
             default:
@@ -23431,7 +23431,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4153;
                 this.match(PostgreSqlParser.KW_FUNCTION);
                 this.state = 4154;
-                this.function_with_argtypes_list();
+                this.functionWithArgTypesList();
                 }
                 break;
             case 5:
@@ -23440,7 +23440,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4155;
                 this.match(PostgreSqlParser.KW_PROCEDURE);
                 this.state = 4156;
-                this.procedure_with_argtypes_list();
+                this.procedureWithArgTypesList();
                 }
                 break;
             case 6:
@@ -23449,7 +23449,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4157;
                 this.match(PostgreSqlParser.KW_ROUTINE);
                 this.state = 4158;
-                this.routine_with_argtypes_list();
+                this.routineWithArgTypesList();
                 }
                 break;
             case 7:
@@ -23485,7 +23485,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4164;
                 this.match(PostgreSqlParser.KW_OBJECT);
                 this.state = 4165;
-                this.numericonly();
+                this.numericOnly();
                 this.state = 4170;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -23495,7 +23495,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 4166;
                     this.match(PostgreSqlParser.COMMA);
                     this.state = 4167;
-                    this.numericonly();
+                    this.numericOnly();
                     }
                     }
                     this.state = 4172;
@@ -23579,7 +23579,7 @@ export class PostgreSqlParser extends SQLParserBase {
             }
 
             this.state = 4187;
-            this.rolespec();
+            this.roleSpec();
             }
             this.state = 4196;
             this.errorHandler.sync(this);
@@ -23601,7 +23601,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 4193;
-                this.rolespec();
+                this.roleSpec();
                 }
                 }
                 }
@@ -23625,9 +23625,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public grantrolestmt(): GrantrolestmtContext {
-        let localContext = new GrantrolestmtContext(this.context, this.state);
-        this.enterRule(localContext, 348, PostgreSqlParser.RULE_grantrolestmt);
+    public grantRoleStmt(): GrantRoleStmtContext {
+        let localContext = new GrantRoleStmtContext(this.context, this.state);
+        this.enterRule(localContext, 348, PostgreSqlParser.RULE_grantRoleStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -23680,7 +23680,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4216;
                 this.match(PostgreSqlParser.KW_BY);
                 this.state = 4217;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             }
@@ -23700,9 +23700,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public revokerolestmt(): RevokerolestmtContext {
-        let localContext = new RevokerolestmtContext(this.context, this.state);
-        this.enterRule(localContext, 350, PostgreSqlParser.RULE_revokerolestmt);
+    public revokeRoleStmt(): RevokeRoleStmtContext {
+        let localContext = new RevokeRoleStmtContext(this.context, this.state);
+        this.enterRule(localContext, 350, PostgreSqlParser.RULE_revokeRoleStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -23755,7 +23755,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4237;
                 this.match(PostgreSqlParser.KW_BY);
                 this.state = 4238;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             }
@@ -23785,9 +23785,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterdefaultprivilegesstmt(): AlterdefaultprivilegesstmtContext {
-        let localContext = new AlterdefaultprivilegesstmtContext(this.context, this.state);
-        this.enterRule(localContext, 352, PostgreSqlParser.RULE_alterdefaultprivilegesstmt);
+    public alterDefaultPrivilegesStmt(): AlterDefaultPrivilegesStmtContext {
+        let localContext = new AlterDefaultPrivilegesStmtContext(this.context, this.state);
+        this.enterRule(localContext, 352, PostgreSqlParser.RULE_alterDefaultPrivilegesStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -23989,9 +23989,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public indexstmt(): IndexstmtContext {
-        let localContext = new IndexstmtContext(this.context, this.state);
-        this.enterRule(localContext, 358, PostgreSqlParser.RULE_indexstmt);
+    public indexStmt(): IndexStmtContext {
+        let localContext = new IndexStmtContext(this.context, this.state);
+        this.enterRule(localContext, 358, PostgreSqlParser.RULE_indexStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -24036,7 +24036,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 53 || ((((_la - 116)) & ~0x1F) === 0 && ((1 << (_la - 116)) & 4294959489) !== 0) || ((((_la - 148)) & ~0x1F) === 0 && ((1 << (_la - 148)) & 4294967295) !== 0) || ((((_la - 180)) & ~0x1F) === 0 && ((1 << (_la - 180)) & 4294967295) !== 0) || ((((_la - 212)) & ~0x1F) === 0 && ((1 << (_la - 212)) & 4227989503) !== 0) || ((((_la - 244)) & ~0x1F) === 0 && ((1 << (_la - 244)) & 4294967295) !== 0) || ((((_la - 276)) & ~0x1F) === 0 && ((1 << (_la - 276)) & 4294967295) !== 0) || ((((_la - 308)) & ~0x1F) === 0 && ((1 << (_la - 308)) & 4294967295) !== 0) || ((((_la - 340)) & ~0x1F) === 0 && ((1 << (_la - 340)) & 4294967295) !== 0) || ((((_la - 372)) & ~0x1F) === 0 && ((1 << (_la - 372)) & 4294967295) !== 0) || ((((_la - 404)) & ~0x1F) === 0 && ((1 << (_la - 404)) & 4294967295) !== 0) || ((((_la - 436)) & ~0x1F) === 0 && ((1 << (_la - 436)) & 4294705151) !== 0) || ((((_la - 468)) & ~0x1F) === 0 && ((1 << (_la - 468)) & 4294967279) !== 0) || ((((_la - 500)) & ~0x1F) === 0 && ((1 << (_la - 500)) & 18350039) !== 0) || ((((_la - 547)) & ~0x1F) === 0 && ((1 << (_la - 547)) & 402696335) !== 0) || _la === 584) {
                 {
                 this.state = 4300;
-                this.colid();
+                this.colId();
                 }
             }
 
@@ -24096,7 +24096,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 4320;
-                this.opt_reloptions();
+                this.optRelOptions();
                 }
                 break;
             }
@@ -24106,7 +24106,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 4323;
-                this.opttablespace();
+                this.optTableSpace();
                 }
                 break;
             }
@@ -24246,7 +24246,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4354;
                 this.any_name();
                 this.state = 4355;
-                this.reloptions();
+                this.relOptions();
                 }
                 break;
             }
@@ -24302,9 +24302,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createfunctionstmt(): CreatefunctionstmtContext {
-        let localContext = new CreatefunctionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 364, PostgreSqlParser.RULE_createfunctionstmt);
+    public createFunctionStmt(): CreateFunctionStmtContext {
+        let localContext = new CreateFunctionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 364, PostgreSqlParser.RULE_createFunctionStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -24851,7 +24851,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 4407;
-                    this.createfunc_opt_item();
+                    this.create_func_opt_item();
                     }
                     }
                     break;
@@ -24998,15 +24998,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public routine_with_argtypes_list(): Routine_with_argtypes_listContext {
-        let localContext = new Routine_with_argtypes_listContext(this.context, this.state);
-        this.enterRule(localContext, 372, PostgreSqlParser.RULE_routine_with_argtypes_list);
+    public routineWithArgTypesList(): RoutineWithArgTypesListContext {
+        let localContext = new RoutineWithArgTypesListContext(this.context, this.state);
+        this.enterRule(localContext, 372, PostgreSqlParser.RULE_routineWithArgTypesList);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 4436;
-            this.routine_with_argtypes();
+            this.routineWithArgTypes();
             this.state = 4441;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -25016,7 +25016,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4437;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 4438;
-                this.routine_with_argtypes();
+                this.routineWithArgTypes();
                 }
                 }
                 this.state = 4443;
@@ -25039,9 +25039,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext {
-        let localContext = new Routine_with_argtypesContext(this.context, this.state);
-        this.enterRule(localContext, 374, PostgreSqlParser.RULE_routine_with_argtypes);
+    public routineWithArgTypes(): RoutineWithArgTypesContext {
+        let localContext = new RoutineWithArgTypesContext(this.context, this.state);
+        this.enterRule(localContext, 374, PostgreSqlParser.RULE_routineWithArgTypes);
         try {
             this.state = 4449;
             this.errorHandler.sync(this);
@@ -25085,15 +25085,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public procedure_with_argtypes_list(): Procedure_with_argtypes_listContext {
-        let localContext = new Procedure_with_argtypes_listContext(this.context, this.state);
-        this.enterRule(localContext, 376, PostgreSqlParser.RULE_procedure_with_argtypes_list);
+    public procedureWithArgTypesList(): ProcedureWithArgTypesListContext {
+        let localContext = new ProcedureWithArgTypesListContext(this.context, this.state);
+        this.enterRule(localContext, 376, PostgreSqlParser.RULE_procedureWithArgTypesList);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 4451;
-            this.procedure_with_argtypes();
+            this.procedureWithArgTypes();
             this.state = 4456;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -25103,7 +25103,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4452;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 4453;
-                this.procedure_with_argtypes();
+                this.procedureWithArgTypes();
                 }
                 }
                 this.state = 4458;
@@ -25126,9 +25126,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext {
-        let localContext = new Procedure_with_argtypesContext(this.context, this.state);
-        this.enterRule(localContext, 378, PostgreSqlParser.RULE_procedure_with_argtypes);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext {
+        let localContext = new ProcedureWithArgTypesContext(this.context, this.state);
+        this.enterRule(localContext, 378, PostgreSqlParser.RULE_procedureWithArgTypes);
         try {
             this.state = 4464;
             this.errorHandler.sync(this);
@@ -25172,15 +25172,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public function_with_argtypes_list(): Function_with_argtypes_listContext {
-        let localContext = new Function_with_argtypes_listContext(this.context, this.state);
-        this.enterRule(localContext, 380, PostgreSqlParser.RULE_function_with_argtypes_list);
+    public functionWithArgTypesList(): FunctionWithArgTypesListContext {
+        let localContext = new FunctionWithArgTypesListContext(this.context, this.state);
+        this.enterRule(localContext, 380, PostgreSqlParser.RULE_functionWithArgTypesList);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 4466;
-            this.function_with_argtypes();
+            this.functionWithArgTypes();
             this.state = 4471;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -25190,7 +25190,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4467;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 4468;
-                this.function_with_argtypes();
+                this.functionWithArgTypes();
                 }
                 }
                 this.state = 4473;
@@ -25213,9 +25213,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public function_with_argtypes(): Function_with_argtypesContext {
-        let localContext = new Function_with_argtypesContext(this.context, this.state);
-        this.enterRule(localContext, 382, PostgreSqlParser.RULE_function_with_argtypes);
+    public functionWithArgTypes(): FunctionWithArgTypesContext {
+        let localContext = new FunctionWithArgTypesContext(this.context, this.state);
+        this.enterRule(localContext, 382, PostgreSqlParser.RULE_functionWithArgTypes);
         try {
             this.state = 4479;
             this.errorHandler.sync(this);
@@ -25480,9 +25480,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public aggr_args(): Aggr_argsContext {
-        let localContext = new Aggr_argsContext(this.context, this.state);
-        this.enterRule(localContext, 392, PostgreSqlParser.RULE_aggr_args);
+    public aggregate_args(): Aggregate_argsContext {
+        let localContext = new Aggregate_argsContext(this.context, this.state);
+        this.enterRule(localContext, 392, PostgreSqlParser.RULE_aggregate_args);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -25965,16 +25965,16 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public aggregate_with_argtypes(): Aggregate_with_argtypesContext {
-        let localContext = new Aggregate_with_argtypesContext(this.context, this.state);
-        this.enterRule(localContext, 394, PostgreSqlParser.RULE_aggregate_with_argtypes);
+    public aggregateWithArgTypes(): AggregateWithArgTypesContext {
+        let localContext = new AggregateWithArgTypesContext(this.context, this.state);
+        this.enterRule(localContext, 394, PostgreSqlParser.RULE_aggregateWithArgTypes);
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 4532;
             this.function_name();
             this.state = 4533;
-            this.aggr_args();
+            this.aggregate_args();
             }
         }
         catch (re) {
@@ -26116,7 +26116,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.consume();
                 }
                 this.state = 4556;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case PostgreSqlParser.KW_SUPPORT:
@@ -26141,7 +26141,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 12);
                 {
                 this.state = 4561;
-                this.variableresetstmt();
+                this.variableResetStmt();
                 }
                 break;
             case PostgreSqlParser.KW_PARALLEL:
@@ -26150,7 +26150,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4562;
                 this.match(PostgreSqlParser.KW_PARALLEL);
                 this.state = 4563;
-                this.colid();
+                this.colId();
                 }
                 break;
             default:
@@ -26171,9 +26171,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createfunc_opt_item(): Createfunc_opt_itemContext {
-        let localContext = new Createfunc_opt_itemContext(this.context, this.state);
-        this.enterRule(localContext, 398, PostgreSqlParser.RULE_createfunc_opt_item);
+    public create_func_opt_item(): Create_func_opt_itemContext {
+        let localContext = new Create_func_opt_itemContext(this.context, this.state);
+        this.enterRule(localContext, 398, PostgreSqlParser.RULE_create_func_opt_item);
         let _la: number;
         try {
             this.state = 4601;
@@ -26185,7 +26185,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4566;
                 this.match(PostgreSqlParser.KW_AS);
                 this.state = 4567;
-                this.sconst();
+                this.stringConst();
                 this.state = 4568;
                 this.notify_payload();
                 }
@@ -26196,7 +26196,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4570;
                 this.match(PostgreSqlParser.KW_LANGUAGE);
                 this.state = 4571;
-                this.nonreservedword_or_sconst();
+                this.nonReservedWordOrStringConst();
                 }
                 break;
             case 3:
@@ -26245,7 +26245,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4586;
                 this.match(PostgreSqlParser.KW_SET);
                 this.state = 4587;
-                this.colid();
+                this.colId();
                 this.state = 4594;
                 this.errorHandler.sync(this);
                 switch (this.tokenStream.LA(1)) {
@@ -26254,7 +26254,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 4588;
                     this.match(PostgreSqlParser.KW_TO);
                     this.state = 4589;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case PostgreSqlParser.EQUAL:
@@ -26262,7 +26262,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 4590;
                     this.match(PostgreSqlParser.EQUAL);
                     this.state = 4591;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case PostgreSqlParser.KW_FROM:
@@ -26284,7 +26284,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4596;
                 this.match(PostgreSqlParser.KW_AS);
                 this.state = 4597;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 7:
@@ -26305,7 +26305,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 9);
                 {
                 this.state = 4600;
-                this.colid();
+                this.colId();
                 }
                 break;
             }
@@ -26376,9 +26376,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterfunctionstmt(): AlterfunctionstmtContext {
-        let localContext = new AlterfunctionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 404, PostgreSqlParser.RULE_alterfunctionstmt);
+    public alterFunctionStmt(): AlterFunctionStmtContext {
+        let localContext = new AlterFunctionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 404, PostgreSqlParser.RULE_alterFunctionStmt);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -26393,7 +26393,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4610;
                 this.match(PostgreSqlParser.KW_FUNCTION);
                 this.state = 4611;
-                this.function_with_argtypes();
+                this.functionWithArgTypes();
                 }
                 break;
             case PostgreSqlParser.KW_PROCEDURE:
@@ -26401,7 +26401,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4612;
                 this.match(PostgreSqlParser.KW_PROCEDURE);
                 this.state = 4613;
-                this.procedure_with_argtypes();
+                this.procedureWithArgTypes();
                 }
                 break;
             case PostgreSqlParser.KW_ROUTINE:
@@ -26409,7 +26409,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4614;
                 this.match(PostgreSqlParser.KW_ROUTINE);
                 this.state = 4615;
-                this.routine_with_argtypes();
+                this.routineWithArgTypes();
                 }
                 break;
             default:
@@ -26461,9 +26461,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public removefuncstmt(): RemovefuncstmtContext {
-        let localContext = new RemovefuncstmtContext(this.context, this.state);
-        this.enterRule(localContext, 406, PostgreSqlParser.RULE_removefuncstmt);
+    public removeFuncStmt(): RemoveFuncStmtContext {
+        let localContext = new RemoveFuncStmtContext(this.context, this.state);
+        this.enterRule(localContext, 406, PostgreSqlParser.RULE_removeFuncStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -26487,7 +26487,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 4631;
-                this.function_with_argtypes_list();
+                this.functionWithArgTypesList();
                 }
                 break;
             case PostgreSqlParser.KW_PROCEDURE:
@@ -26505,7 +26505,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 4636;
-                this.procedure_with_argtypes_list();
+                this.procedureWithArgTypesList();
                 }
                 break;
             case PostgreSqlParser.KW_ROUTINE:
@@ -26523,7 +26523,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 4641;
-                this.routine_with_argtypes_list();
+                this.routineWithArgTypesList();
                 }
                 break;
             default:
@@ -26555,9 +26555,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public removeaggrstmt(): RemoveaggrstmtContext {
-        let localContext = new RemoveaggrstmtContext(this.context, this.state);
-        this.enterRule(localContext, 408, PostgreSqlParser.RULE_removeaggrstmt);
+    public removeAggregateStmt(): RemoveAggregateStmtContext {
+        let localContext = new RemoveAggregateStmtContext(this.context, this.state);
+        this.enterRule(localContext, 408, PostgreSqlParser.RULE_removeAggregateStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -26578,7 +26578,7 @@ export class PostgreSqlParser extends SQLParserBase {
             }
             {
             this.state = 4652;
-            this.aggregate_with_argtypes();
+            this.aggregateWithArgTypes();
             this.state = 4657;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -26588,7 +26588,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4653;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 4654;
-                this.aggregate_with_argtypes();
+                this.aggregateWithArgTypes();
                 }
                 }
                 this.state = 4659;
@@ -26622,9 +26622,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public removeoperstmt(): RemoveoperstmtContext {
-        let localContext = new RemoveoperstmtContext(this.context, this.state);
-        this.enterRule(localContext, 410, PostgreSqlParser.RULE_removeoperstmt);
+    public removeOperatorStmt(): RemoveOperatorStmtContext {
+        let localContext = new RemoveOperatorStmtContext(this.context, this.state);
+        this.enterRule(localContext, 410, PostgreSqlParser.RULE_removeOperatorStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -26645,7 +26645,7 @@ export class PostgreSqlParser extends SQLParserBase {
             }
             {
             this.state = 4668;
-            this.operator_with_argtypes();
+            this.operatorWithArgTypes();
             this.state = 4673;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -26655,7 +26655,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4669;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 4670;
-                this.operator_with_argtypes();
+                this.operatorWithArgTypes();
                 }
                 }
                 this.state = 4675;
@@ -26689,9 +26689,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public oper_argtypes(): Oper_argtypesContext {
-        let localContext = new Oper_argtypesContext(this.context, this.state);
-        this.enterRule(localContext, 412, PostgreSqlParser.RULE_oper_argtypes);
+    public operatorArgTypes(): OperatorArgTypesContext {
+        let localContext = new OperatorArgTypesContext(this.context, this.state);
+        this.enterRule(localContext, 412, PostgreSqlParser.RULE_operatorArgTypes);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -26772,7 +26772,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 {
                 {
                 this.state = 4696;
-                this.colid();
+                this.colId();
                 this.state = 4697;
                 this.match(PostgreSqlParser.DOT);
                 }
@@ -26799,16 +26799,16 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public operator_with_argtypes(): Operator_with_argtypesContext {
-        let localContext = new Operator_with_argtypesContext(this.context, this.state);
-        this.enterRule(localContext, 416, PostgreSqlParser.RULE_operator_with_argtypes);
+    public operatorWithArgTypes(): OperatorWithArgTypesContext {
+        let localContext = new OperatorWithArgTypesContext(this.context, this.state);
+        this.enterRule(localContext, 416, PostgreSqlParser.RULE_operatorWithArgTypes);
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 4706;
             this.any_operator();
             this.state = 4707;
-            this.oper_argtypes();
+            this.operatorArgTypes();
             }
         }
         catch (re) {
@@ -26825,9 +26825,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public dostmt(): DostmtContext {
-        let localContext = new DostmtContext(this.context, this.state);
-        this.enterRule(localContext, 418, PostgreSqlParser.RULE_dostmt);
+    public doStmt(): DoStmtContext {
+        let localContext = new DoStmtContext(this.context, this.state);
+        this.enterRule(localContext, 418, PostgreSqlParser.RULE_doStmt);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -26850,7 +26850,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     case PostgreSqlParser.EscapeStringConstant:
                         {
                         this.state = 4710;
-                        this.sconst();
+                        this.stringConst();
                         }
                         break;
                     case PostgreSqlParser.KW_LANGUAGE:
@@ -26858,7 +26858,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         this.state = 4711;
                         this.match(PostgreSqlParser.KW_LANGUAGE);
                         this.state = 4712;
-                        this.nonreservedword_or_sconst();
+                        this.nonReservedWordOrStringConst();
                         }
                         break;
                     default:
@@ -26889,9 +26889,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createcaststmt(): CreatecaststmtContext {
-        let localContext = new CreatecaststmtContext(this.context, this.state);
-        this.enterRule(localContext, 420, PostgreSqlParser.RULE_createcaststmt);
+    public createCastStmt(): CreateCastStmtContext {
+        let localContext = new CreateCastStmtContext(this.context, this.state);
+        this.enterRule(localContext, 420, PostgreSqlParser.RULE_createCastStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -26955,7 +26955,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 4731;
                     this.match(PostgreSqlParser.KW_FUNCTION);
                     this.state = 4732;
-                    this.function_with_argtypes();
+                    this.functionWithArgTypes();
                     }
                     break;
                 case PostgreSqlParser.KW_INOUT:
@@ -27034,9 +27034,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createtransformstmt(): CreatetransformstmtContext {
-        let localContext = new CreatetransformstmtContext(this.context, this.state);
-        this.enterRule(localContext, 424, PostgreSqlParser.RULE_createtransformstmt);
+    public createTransformStmt(): CreateTransformStmtContext {
+        let localContext = new CreateTransformStmtContext(this.context, this.state);
+        this.enterRule(localContext, 424, PostgreSqlParser.RULE_createTransformStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -27062,7 +27062,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 4752;
             this.match(PostgreSqlParser.KW_LANGUAGE);
             this.state = 4753;
-            this.colid();
+            this.colId();
             this.state = 4754;
             this.match(PostgreSqlParser.OPEN_PAREN);
             this.state = 4769;
@@ -27146,7 +27146,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 4775;
             this.match(PostgreSqlParser.KW_FUNCTION);
             this.state = 4776;
-            this.function_with_argtypes();
+            this.functionWithArgTypes();
             }
         }
         catch (re) {
@@ -27163,9 +27163,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public reindexstmt(): ReindexstmtContext {
-        let localContext = new ReindexstmtContext(this.context, this.state);
-        this.enterRule(localContext, 428, PostgreSqlParser.RULE_reindexstmt);
+    public reindexStmt(): ReindexStmtContext {
+        let localContext = new ReindexStmtContext(this.context, this.state);
+        this.enterRule(localContext, 428, PostgreSqlParser.RULE_reindexStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -27275,7 +27275,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 4810;
-                this.colid();
+                this.colId();
                 }
                 break;
             case PostgreSqlParser.KW_DATABASE:
@@ -27316,9 +27316,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altertblspcstmt(): AltertblspcstmtContext {
-        let localContext = new AltertblspcstmtContext(this.context, this.state);
-        this.enterRule(localContext, 430, PostgreSqlParser.RULE_altertblspcstmt);
+    public alterTblSpcStmt(): AlterTblSpcStmtContext {
+        let localContext = new AlterTblSpcStmtContext(this.context, this.state);
+        this.enterRule(localContext, 430, PostgreSqlParser.RULE_alterTblSpcStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -27326,7 +27326,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 4818;
             this.match(PostgreSqlParser.KW_ALTER);
             this.state = 4819;
-            this.opttablespace();
+            this.optTableSpace();
             this.state = 4820;
             _la = this.tokenStream.LA(1);
             if(!(_la === 313 || _la === 333)) {
@@ -27337,7 +27337,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.consume();
             }
             this.state = 4821;
-            this.reloptions();
+            this.relOptions();
             }
         }
         catch (re) {
@@ -27354,9 +27354,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public renamestmt(): RenamestmtContext {
-        let localContext = new RenamestmtContext(this.context, this.state);
-        this.enterRule(localContext, 432, PostgreSqlParser.RULE_renamestmt);
+    public renameStmt(): RenameStmtContext {
+        let localContext = new RenameStmtContext(this.context, this.state);
+        this.enterRule(localContext, 432, PostgreSqlParser.RULE_renameStmt);
         let _la: number;
         try {
             this.state = 5030;
@@ -27375,7 +27375,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 4824;
                     this.match(PostgreSqlParser.KW_AGGREGATE);
                     this.state = 4825;
-                    this.aggregate_with_argtypes();
+                    this.aggregateWithArgTypes();
                     }
                     break;
                 case PostgreSqlParser.KW_ROUTINE:
@@ -27383,7 +27383,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 4826;
                     this.match(PostgreSqlParser.KW_ROUTINE);
                     this.state = 4827;
-                    this.routine_with_argtypes();
+                    this.routineWithArgTypes();
                     }
                     break;
                 default:
@@ -27394,7 +27394,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4831;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 4832;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 2:
@@ -27435,7 +27435,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4845;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 4846;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 4:
@@ -27446,7 +27446,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4849;
                 this.match(PostgreSqlParser.KW_FUNCTION);
                 this.state = 4850;
-                this.function_with_argtypes();
+                this.functionWithArgTypes();
                 this.state = 4851;
                 this.match(PostgreSqlParser.KW_RENAME);
                 this.state = 4852;
@@ -27480,7 +27480,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4861;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 4862;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 6:
@@ -27491,7 +27491,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4865;
                 this.match(PostgreSqlParser.KW_PROCEDURE);
                 this.state = 4866;
-                this.procedure_with_argtypes();
+                this.procedureWithArgTypes();
                 this.state = 4867;
                 this.match(PostgreSqlParser.KW_RENAME);
                 this.state = 4868;
@@ -27548,7 +27548,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4885;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 4886;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 9:
@@ -27768,11 +27768,11 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4956;
                 this.match(PostgreSqlParser.KW_CONSTRAINT);
                 this.state = 4957;
-                this.colid();
+                this.colId();
                 this.state = 4958;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 4959;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 13:
@@ -27817,7 +27817,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     throw new antlr.NoViableAltException(this);
                 }
                 this.state = 4970;
-                this.colid();
+                this.colId();
                 this.state = 4971;
                 this.match(PostgreSqlParser.KW_ON);
                 this.state = 4972;
@@ -27827,7 +27827,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 4974;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 4975;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 14:
@@ -27895,13 +27895,13 @@ export class PostgreSqlParser extends SQLParserBase {
                     throw new antlr.NoViableAltException(this);
                 }
                 this.state = 4992;
-                this.colid();
+                this.colId();
                 this.state = 4993;
                 this.match(PostgreSqlParser.KW_RENAME);
                 this.state = 4994;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 4995;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 15:
@@ -27919,13 +27919,13 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.consume();
                 }
                 this.state = 4999;
-                this.rolespec();
+                this.roleSpec();
                 this.state = 5000;
                 this.match(PostgreSqlParser.KW_RENAME);
                 this.state = 5001;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5002;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case 16:
@@ -27934,7 +27934,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5004;
                 this.match(PostgreSqlParser.KW_ALTER);
                 this.state = 5005;
-                this.opttablespace();
+                this.optTableSpace();
                 this.state = 5006;
                 this.match(PostgreSqlParser.KW_RENAME);
                 this.state = 5007;
@@ -27968,7 +27968,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5016;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5017;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 18:
@@ -27985,11 +27985,11 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5023;
                 this.match(PostgreSqlParser.KW_ATTRIBUTE);
                 this.state = 5024;
-                this.colid();
+                this.colId();
                 this.state = 5025;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5026;
-                this.colid();
+                this.colId();
                 this.state = 5028;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 624, this.context) ) {
@@ -28018,9 +28018,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterobjectdependsstmt(): AlterobjectdependsstmtContext {
-        let localContext = new AlterobjectdependsstmtContext(this.context, this.state);
-        this.enterRule(localContext, 434, PostgreSqlParser.RULE_alterobjectdependsstmt);
+    public alterObjectDependsStmt(): AlterObjectDependsStmtContext {
+        let localContext = new AlterObjectDependsStmtContext(this.context, this.state);
+        this.enterRule(localContext, 434, PostgreSqlParser.RULE_alterObjectDependsStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -28035,7 +28035,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5033;
                 this.match(PostgreSqlParser.KW_FUNCTION);
                 this.state = 5034;
-                this.function_with_argtypes();
+                this.functionWithArgTypes();
                 }
                 break;
             case PostgreSqlParser.KW_PROCEDURE:
@@ -28043,7 +28043,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5035;
                 this.match(PostgreSqlParser.KW_PROCEDURE);
                 this.state = 5036;
-                this.procedure_with_argtypes();
+                this.procedureWithArgTypes();
                 }
                 break;
             case PostgreSqlParser.KW_ROUTINE:
@@ -28051,7 +28051,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5037;
                 this.match(PostgreSqlParser.KW_ROUTINE);
                 this.state = 5038;
-                this.routine_with_argtypes();
+                this.routineWithArgTypes();
                 }
                 break;
             case PostgreSqlParser.KW_TRIGGER:
@@ -28059,7 +28059,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5039;
                 this.match(PostgreSqlParser.KW_TRIGGER);
                 this.state = 5040;
-                this.colid();
+                this.colId();
                 this.state = 5041;
                 this.match(PostgreSqlParser.KW_ON);
                 this.state = 5042;
@@ -28104,7 +28104,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5056;
             this.match(PostgreSqlParser.KW_EXTENSION);
             this.state = 5057;
-            this.colid();
+            this.colId();
             }
         }
         catch (re) {
@@ -28121,9 +28121,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterobjectschemastmt(): AlterobjectschemastmtContext {
-        let localContext = new AlterobjectschemastmtContext(this.context, this.state);
-        this.enterRule(localContext, 436, PostgreSqlParser.RULE_alterobjectschemastmt);
+    public alterObjectSchemaStmt(): AlterObjectSchemaStmtContext {
+        let localContext = new AlterObjectSchemaStmtContext(this.context, this.state);
+        this.enterRule(localContext, 436, PostgreSqlParser.RULE_alterObjectSchemaStmt);
         let _la: number;
         try {
             this.state = 5120;
@@ -28142,7 +28142,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5060;
                     this.match(PostgreSqlParser.KW_AGGREGATE);
                     this.state = 5061;
-                    this.aggregate_with_argtypes();
+                    this.aggregateWithArgTypes();
                     }
                     break;
                 case 2:
@@ -28150,7 +28150,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5062;
                     this.match(PostgreSqlParser.KW_EXTENSION);
                     this.state = 5063;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case 3:
@@ -28158,7 +28158,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5064;
                     this.match(PostgreSqlParser.KW_FUNCTION);
                     this.state = 5065;
-                    this.function_with_argtypes();
+                    this.functionWithArgTypes();
                     }
                     break;
                 case 4:
@@ -28166,7 +28166,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5066;
                     this.match(PostgreSqlParser.KW_OPERATOR);
                     this.state = 5067;
-                    this.operator_with_argtypes();
+                    this.operatorWithArgTypes();
                     }
                     break;
                 case 5:
@@ -28193,7 +28193,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5073;
                     this.match(PostgreSqlParser.KW_PROCEDURE);
                     this.state = 5074;
-                    this.procedure_with_argtypes();
+                    this.procedureWithArgTypes();
                     }
                     break;
                 case 7:
@@ -28201,7 +28201,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5075;
                     this.match(PostgreSqlParser.KW_ROUTINE);
                     this.state = 5076;
-                    this.routine_with_argtypes();
+                    this.routineWithArgTypes();
                     }
                     break;
                 case 8:
@@ -28371,9 +28371,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alteroperatorstmt(): AlteroperatorstmtContext {
-        let localContext = new AlteroperatorstmtContext(this.context, this.state);
-        this.enterRule(localContext, 438, PostgreSqlParser.RULE_alteroperatorstmt);
+    public alterOperatorStmt(): AlterOperatorStmtContext {
+        let localContext = new AlterOperatorStmtContext(this.context, this.state);
+        this.enterRule(localContext, 438, PostgreSqlParser.RULE_alterOperatorStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -28382,7 +28382,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5123;
             this.match(PostgreSqlParser.KW_OPERATOR);
             this.state = 5124;
-            this.operator_with_argtypes();
+            this.operatorWithArgTypes();
             this.state = 5125;
             this.match(PostgreSqlParser.KW_SET);
             this.state = 5126;
@@ -28455,7 +28455,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 5139;
-            this.collabel();
+            this.colLabel();
             this.state = 5140;
             this.match(PostgreSqlParser.EQUAL);
             this.state = 5147;
@@ -28488,13 +28488,13 @@ export class PostgreSqlParser extends SQLParserBase {
             case 5:
                 {
                 this.state = 5145;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case 6:
                 {
                 this.state = 5146;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             }
@@ -28514,9 +28514,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altertypestmt(): AltertypestmtContext {
-        let localContext = new AltertypestmtContext(this.context, this.state);
-        this.enterRule(localContext, 444, PostgreSqlParser.RULE_altertypestmt);
+    public alterTypeStmt(): AlterTypeStmtContext {
+        let localContext = new AlterTypeStmtContext(this.context, this.state);
+        this.enterRule(localContext, 444, PostgreSqlParser.RULE_alterTypeStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -28546,9 +28546,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterownerstmt(): AlterownerstmtContext {
-        let localContext = new AlterownerstmtContext(this.context, this.state);
-        this.enterRule(localContext, 446, PostgreSqlParser.RULE_alterownerstmt);
+    public alterOwnerStmt(): AlterOwnerStmtContext {
+        let localContext = new AlterOwnerStmtContext(this.context, this.state);
+        this.enterRule(localContext, 446, PostgreSqlParser.RULE_alterOwnerStmt);
         let _la: number;
         try {
             this.state = 5229;
@@ -28579,7 +28579,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5161;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5162;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case 2:
@@ -28595,7 +28595,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5165;
                     this.match(PostgreSqlParser.KW_AGGREGATE);
                     this.state = 5166;
-                    this.aggregate_with_argtypes();
+                    this.aggregateWithArgTypes();
                     }
                     break;
                 case 2:
@@ -28611,7 +28611,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5169;
                     this.match(PostgreSqlParser.KW_FUNCTION);
                     this.state = 5170;
-                    this.function_with_argtypes();
+                    this.functionWithArgTypes();
                     }
                     break;
                 case 4:
@@ -28629,7 +28629,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5174;
                     this.match(PostgreSqlParser.KW_LANGUAGE);
                     this.state = 5175;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case 5:
@@ -28639,7 +28639,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5177;
                     this.match(PostgreSqlParser.KW_OBJECT);
                     this.state = 5178;
-                    this.numericonly();
+                    this.numericOnly();
                     }
                     break;
                 case 6:
@@ -28649,7 +28649,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5180;
                     this.match(PostgreSqlParser.KW_OBJECT);
                     this.state = 5181;
-                    this.numericonly();
+                    this.numericOnly();
                     }
                     break;
                 case 7:
@@ -28657,7 +28657,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5182;
                     this.match(PostgreSqlParser.KW_OPERATOR);
                     this.state = 5183;
-                    this.operator_with_argtypes();
+                    this.operatorWithArgTypes();
                     }
                     break;
                 case 8:
@@ -28665,7 +28665,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5184;
                     this.match(PostgreSqlParser.KW_PROCEDURE);
                     this.state = 5185;
-                    this.procedure_with_argtypes();
+                    this.procedureWithArgTypes();
                     }
                     break;
                 case 9:
@@ -28673,7 +28673,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5186;
                     this.match(PostgreSqlParser.KW_ROUTINE);
                     this.state = 5187;
-                    this.routine_with_argtypes();
+                    this.routineWithArgTypes();
                     }
                     break;
                 case 10:
@@ -28687,7 +28687,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 11:
                     {
                     this.state = 5190;
-                    this.opttablespace();
+                    this.optTableSpace();
                     }
                     break;
                 }
@@ -28696,7 +28696,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5194;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5195;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case 3:
@@ -28764,7 +28764,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5210;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5211;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             case 4:
@@ -28819,13 +28819,13 @@ export class PostgreSqlParser extends SQLParserBase {
                     throw new antlr.NoViableAltException(this);
                 }
                 this.state = 5224;
-                this.colid();
+                this.colId();
                 this.state = 5225;
                 this.match(PostgreSqlParser.KW_OWNER);
                 this.state = 5226;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5227;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             }
@@ -28844,9 +28844,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createpublicationstmt(): CreatepublicationstmtContext {
-        let localContext = new CreatepublicationstmtContext(this.context, this.state);
-        this.enterRule(localContext, 448, PostgreSqlParser.RULE_createpublicationstmt);
+    public createPublicationStmt(): CreatePublicationStmtContext {
+        let localContext = new CreatePublicationStmtContext(this.context, this.state);
+        this.enterRule(localContext, 448, PostgreSqlParser.RULE_createPublicationStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -28855,7 +28855,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5232;
             this.match(PostgreSqlParser.KW_PUBLICATION);
             this.state = 5233;
-            this.colid();
+            this.colId();
             this.state = 5240;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 643, this.context) ) {
@@ -28906,9 +28906,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterpublicationstmt(): AlterpublicationstmtContext {
-        let localContext = new AlterpublicationstmtContext(this.context, this.state);
-        this.enterRule(localContext, 450, PostgreSqlParser.RULE_alterpublicationstmt);
+    public alterPublicationStmt(): AlterPublicationStmtContext {
+        let localContext = new AlterPublicationStmtContext(this.context, this.state);
+        this.enterRule(localContext, 450, PostgreSqlParser.RULE_alterPublicationStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -28918,7 +28918,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5246;
             this.match(PostgreSqlParser.KW_PUBLICATION);
             this.state = 5247;
-            this.colid();
+            this.colId();
             this.state = 5265;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 646, this.context) ) {
@@ -28930,7 +28930,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5249;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5250;
-                this.rolespec();
+                this.roleSpec();
                 }
                 }
                 break;
@@ -28952,7 +28952,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5254;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5255;
-                this.colid();
+                this.colId();
                 }
                 }
                 break;
@@ -29004,9 +29004,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createsubscriptionstmt(): CreatesubscriptionstmtContext {
-        let localContext = new CreatesubscriptionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 452, PostgreSqlParser.RULE_createsubscriptionstmt);
+    public createSubscriptionStmt(): CreateSubscriptionStmtContext {
+        let localContext = new CreateSubscriptionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 452, PostgreSqlParser.RULE_createSubscriptionStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -29016,16 +29016,16 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5268;
             this.match(PostgreSqlParser.KW_SUBSCRIPTION);
             this.state = 5269;
-            this.colid();
+            this.colId();
             this.state = 5270;
             this.match(PostgreSqlParser.KW_CONNECTION);
             this.state = 5271;
-            this.sconst();
+            this.stringConst();
             this.state = 5272;
             this.match(PostgreSqlParser.KW_PUBLICATION);
             {
             this.state = 5273;
-            this.collabel();
+            this.colLabel();
             this.state = 5278;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -29035,7 +29035,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5274;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 5275;
-                this.collabel();
+                this.colLabel();
                 }
                 }
                 this.state = 5280;
@@ -29069,9 +29069,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altersubscriptionstmt(): AltersubscriptionstmtContext {
-        let localContext = new AltersubscriptionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 454, PostgreSqlParser.RULE_altersubscriptionstmt);
+    public alterSubscriptionStmt(): AlterSubscriptionStmtContext {
+        let localContext = new AlterSubscriptionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 454, PostgreSqlParser.RULE_alterSubscriptionStmt);
         let _la: number;
         try {
             this.state = 5340;
@@ -29085,7 +29085,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5285;
                 this.match(PostgreSqlParser.KW_SUBSCRIPTION);
                 this.state = 5286;
-                this.colid();
+                this.colId();
                 this.state = 5287;
                 this.match(PostgreSqlParser.KW_SET);
                 this.state = 5288;
@@ -29100,11 +29100,11 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5291;
                 this.match(PostgreSqlParser.KW_SUBSCRIPTION);
                 this.state = 5292;
-                this.colid();
+                this.colId();
                 this.state = 5293;
                 this.match(PostgreSqlParser.KW_CONNECTION);
                 this.state = 5294;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 3:
@@ -29115,7 +29115,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5297;
                 this.match(PostgreSqlParser.KW_SUBSCRIPTION);
                 this.state = 5298;
-                this.colid();
+                this.colId();
                 this.state = 5299;
                 this.match(PostgreSqlParser.KW_REFRESH);
                 this.state = 5300;
@@ -29140,7 +29140,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5305;
                 this.match(PostgreSqlParser.KW_SUBSCRIPTION);
                 this.state = 5306;
-                this.colid();
+                this.colId();
                 this.state = 5307;
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 133 || _la === 191 || _la === 333)) {
@@ -29154,7 +29154,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.match(PostgreSqlParser.KW_PUBLICATION);
                 {
                 this.state = 5309;
-                this.collabel();
+                this.colLabel();
                 this.state = 5314;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -29164,7 +29164,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5310;
                     this.match(PostgreSqlParser.COMMA);
                     this.state = 5311;
-                    this.collabel();
+                    this.colLabel();
                     }
                     }
                     this.state = 5316;
@@ -29192,7 +29192,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5321;
                 this.match(PostgreSqlParser.KW_SUBSCRIPTION);
                 this.state = 5322;
-                this.colid();
+                this.colId();
                 this.state = 5323;
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 186 || _la === 193)) {
@@ -29212,13 +29212,13 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5326;
                 this.match(PostgreSqlParser.KW_SUBSCRIPTION);
                 this.state = 5327;
-                this.colid();
+                this.colId();
                 this.state = 5328;
                 this.match(PostgreSqlParser.KW_SKIP);
                 this.state = 5329;
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 this.state = 5330;
-                this.old_aggr_elem();
+                this.old_aggregate_elem();
                 this.state = 5331;
                 this.match(PostgreSqlParser.CLOSE_PAREN);
                 }
@@ -29231,13 +29231,13 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5334;
                 this.match(PostgreSqlParser.KW_SUBSCRIPTION);
                 this.state = 5335;
-                this.colid();
+                this.colId();
                 this.state = 5336;
                 this.match(PostgreSqlParser.KW_OWNER);
                 this.state = 5337;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 5338;
-                this.rolespec();
+                this.roleSpec();
                 }
                 break;
             }
@@ -29256,9 +29256,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public rulestmt(): RulestmtContext {
-        let localContext = new RulestmtContext(this.context, this.state);
-        this.enterRule(localContext, 456, PostgreSqlParser.RULE_rulestmt);
+    public ruleStmt(): RuleStmtContext {
+        let localContext = new RuleStmtContext(this.context, this.state);
+        this.enterRule(localContext, 456, PostgreSqlParser.RULE_ruleStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -29278,7 +29278,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5346;
             this.match(PostgreSqlParser.KW_RULE);
             this.state = 5347;
-            this.colid();
+            this.colId();
             this.state = 5348;
             this.match(PostgreSqlParser.KW_AS);
             this.state = 5349;
@@ -29337,7 +29337,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 2:
                 {
                 this.state = 5361;
-                this.ruleactionstmt();
+                this.ruleActionStmt();
                 }
                 break;
             case 3:
@@ -29351,7 +29351,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 2 || ((((_la - 88)) & ~0x1F) === 0 && ((1 << (_la - 88)) & 131089) !== 0) || _la === 182 || _la === 241 || _la === 271 || _la === 369 || _la === 422) {
                     {
                     this.state = 5363;
-                    this.ruleactionstmt();
+                    this.ruleActionStmt();
                     }
                 }
 
@@ -29369,7 +29369,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     if (_la === 2 || ((((_la - 88)) & ~0x1F) === 0 && ((1 << (_la - 88)) & 131089) !== 0) || _la === 182 || _la === 241 || _la === 271 || _la === 369 || _la === 422) {
                         {
                         this.state = 5367;
-                        this.ruleactionstmt();
+                        this.ruleActionStmt();
                         }
                     }
 
@@ -29401,9 +29401,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public ruleactionstmt(): RuleactionstmtContext {
-        let localContext = new RuleactionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 458, PostgreSqlParser.RULE_ruleactionstmt);
+    public ruleActionStmt(): RuleActionStmtContext {
+        let localContext = new RuleActionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 458, PostgreSqlParser.RULE_ruleActionStmt);
         try {
             this.state = 5383;
             this.errorHandler.sync(this);
@@ -29412,35 +29412,35 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 5378;
-                this.selectstmt();
+                this.selectStmt();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 5379;
-                this.insertstmt();
+                this.insertStmt();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 5380;
-                this.updatestmt();
+                this.updateStmt();
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 5381;
-                this.deletestmt();
+                this.deleteStmt();
                 }
                 break;
             case 5:
                 this.enterOuterAlt(localContext, 5);
                 {
                 this.state = 5382;
-                this.notifystmt();
+                this.notifyStmt();
                 }
                 break;
             }
@@ -29459,9 +29459,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public notifystmt(): NotifystmtContext {
-        let localContext = new NotifystmtContext(this.context, this.state);
-        this.enterRule(localContext, 460, PostgreSqlParser.RULE_notifystmt);
+    public notifyStmt(): NotifyStmtContext {
+        let localContext = new NotifyStmtContext(this.context, this.state);
+        this.enterRule(localContext, 460, PostgreSqlParser.RULE_notifyStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -29469,7 +29469,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5385;
             this.match(PostgreSqlParser.KW_NOTIFY);
             this.state = 5386;
-            this.colid();
+            this.colId();
             this.state = 5388;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -29505,7 +29505,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5390;
             this.match(PostgreSqlParser.COMMA);
             this.state = 5391;
-            this.sconst();
+            this.stringConst();
             }
         }
         catch (re) {
@@ -29522,16 +29522,16 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public listenstmt(): ListenstmtContext {
-        let localContext = new ListenstmtContext(this.context, this.state);
-        this.enterRule(localContext, 464, PostgreSqlParser.RULE_listenstmt);
+    public listenStmt(): ListenStmtContext {
+        let localContext = new ListenStmtContext(this.context, this.state);
+        this.enterRule(localContext, 464, PostgreSqlParser.RULE_listenStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 5393;
             this.match(PostgreSqlParser.KW_LISTEN);
             this.state = 5394;
-            this.colid();
+            this.colId();
             }
         }
         catch (re) {
@@ -29548,9 +29548,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unlistenstmt(): UnlistenstmtContext {
-        let localContext = new UnlistenstmtContext(this.context, this.state);
-        this.enterRule(localContext, 466, PostgreSqlParser.RULE_unlistenstmt);
+    public unListenStmt(): UnListenStmtContext {
+        let localContext = new UnListenStmtContext(this.context, this.state);
+        this.enterRule(localContext, 466, PostgreSqlParser.RULE_unListenStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -29955,7 +29955,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 5397;
-                this.colid();
+                this.colId();
                 }
                 break;
             case PostgreSqlParser.STAR:
@@ -29983,9 +29983,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public transactionstmt(): TransactionstmtContext {
-        let localContext = new TransactionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 468, PostgreSqlParser.RULE_transactionstmt);
+    public transactionStmt(): TransactionStmtContext {
+        let localContext = new TransactionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 468, PostgreSqlParser.RULE_transactionStmt);
         let _la: number;
         try {
             this.state = 5446;
@@ -30043,7 +30043,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5413;
                 this.match(PostgreSqlParser.KW_SAVEPOINT);
                 this.state = 5414;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 4:
@@ -30062,7 +30062,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 5419;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 5:
@@ -30073,7 +30073,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5421;
                 this.match(PostgreSqlParser.KW_TRANSACTION);
                 this.state = 5422;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 6:
@@ -30091,7 +30091,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5424;
                 this.match(PostgreSqlParser.KW_PREPARED);
                 this.state = 5425;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 7:
@@ -30168,7 +30168,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 5445;
-                this.colid();
+                this.colId();
                 }
                 break;
             }
@@ -30342,9 +30342,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public viewstmt(): ViewstmtContext {
-        let localContext = new ViewstmtContext(this.context, this.state);
-        this.enterRule(localContext, 476, PostgreSqlParser.RULE_viewstmt);
+    public viewStmt(): ViewStmtContext {
+        let localContext = new ViewStmtContext(this.context, this.state);
+        this.enterRule(localContext, 476, PostgreSqlParser.RULE_viewStmt);
         let _la: number;
         try {
             localContext = new CreateViewContext(localContext);
@@ -30370,7 +30370,7 @@ export class PostgreSqlParser extends SQLParserBase {
             if (_la === 213 || _la === 254 || ((((_la - 352)) & ~0x1F) === 0 && ((1 << (_la - 352)) & 32773) !== 0)) {
                 {
                 this.state = 5476;
-                this.opttemp();
+                this.optTemp();
                 }
             }
 
@@ -30399,7 +30399,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 105) {
                     {
                     this.state = 5484;
-                    this.opt_reloptions();
+                    this.optRelOptions();
                     }
                 }
 
@@ -30421,7 +30421,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 105) {
                     {
                     this.state = 5491;
-                    this.opt_reloptions();
+                    this.optRelOptions();
                     }
                 }
 
@@ -30433,7 +30433,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5496;
             this.match(PostgreSqlParser.KW_AS);
             this.state = 5497;
-            this.selectstmt();
+            this.selectStmt();
             this.state = 5504;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 684, this.context) ) {
@@ -30481,16 +30481,16 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public loadstmt(): LoadstmtContext {
-        let localContext = new LoadstmtContext(this.context, this.state);
-        this.enterRule(localContext, 478, PostgreSqlParser.RULE_loadstmt);
+    public loadStmt(): LoadStmtContext {
+        let localContext = new LoadStmtContext(this.context, this.state);
+        this.enterRule(localContext, 478, PostgreSqlParser.RULE_loadStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 5506;
             this.match(PostgreSqlParser.KW_LOAD);
             this.state = 5507;
-            this.sconst();
+            this.stringConst();
             }
         }
         catch (re) {
@@ -30507,9 +30507,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createdbstmt(): CreatedbstmtContext {
-        let localContext = new CreatedbstmtContext(this.context, this.state);
-        this.enterRule(localContext, 480, PostgreSqlParser.RULE_createdbstmt);
+    public createDbStmt(): CreateDbStmtContext {
+        let localContext = new CreateDbStmtContext(this.context, this.state);
+        this.enterRule(localContext, 480, PostgreSqlParser.RULE_createDbStmt);
         try {
             let alternative: number;
             localContext = new CreateDatabaseContext(localContext);
@@ -30545,7 +30545,7 @@ export class PostgreSqlParser extends SQLParserBase {
                         {
                         {
                         this.state = 5515;
-                        this.createdb_opt_item();
+                        this.create_db_opt_item();
                         }
                         }
                         break;
@@ -30575,9 +30575,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createdb_opt_item(): Createdb_opt_itemContext {
-        let localContext = new Createdb_opt_itemContext(this.context, this.state);
-        this.enterRule(localContext, 482, PostgreSqlParser.RULE_createdb_opt_item);
+    public create_db_opt_item(): Create_db_opt_itemContext {
+        let localContext = new Create_db_opt_itemContext(this.context, this.state);
+        this.enterRule(localContext, 482, PostgreSqlParser.RULE_create_db_opt_item);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -30646,7 +30646,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 5535;
-                this.signediconst();
+                this.signedConst();
                 }
                 break;
             case 2:
@@ -30678,9 +30678,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterdatabasestmt(): AlterdatabasestmtContext {
-        let localContext = new AlterdatabasestmtContext(this.context, this.state);
-        this.enterRule(localContext, 484, PostgreSqlParser.RULE_alterdatabasestmt);
+    public alterDatabaseStmt(): AlterDatabaseStmtContext {
+        let localContext = new AlterDatabaseStmtContext(this.context, this.state);
+        this.enterRule(localContext, 484, PostgreSqlParser.RULE_alterDatabaseStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -30739,7 +30739,7 @@ export class PostgreSqlParser extends SQLParserBase {
                             {
                             {
                             this.state = 5551;
-                            this.createdb_opt_item();
+                            this.create_db_opt_item();
                             }
                             }
                             break;
@@ -30772,9 +30772,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterdatabasesetstmt(): AlterdatabasesetstmtContext {
-        let localContext = new AlterdatabasesetstmtContext(this.context, this.state);
-        this.enterRule(localContext, 486, PostgreSqlParser.RULE_alterdatabasesetstmt);
+    public alterDatabaseSetStmt(): AlterDatabaseSetStmtContext {
+        let localContext = new AlterDatabaseSetStmtContext(this.context, this.state);
+        this.enterRule(localContext, 486, PostgreSqlParser.RULE_alterDatabaseSetStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -30790,7 +30790,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 5563;
-                this.setresetclause();
+                this.setOrResetClause();
                 }
                 break;
             }
@@ -30810,9 +30810,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altercollationstmt(): AltercollationstmtContext {
-        let localContext = new AltercollationstmtContext(this.context, this.state);
-        this.enterRule(localContext, 488, PostgreSqlParser.RULE_altercollationstmt);
+    public alterCollationStmt(): AlterCollationStmtContext {
+        let localContext = new AlterCollationStmtContext(this.context, this.state);
+        this.enterRule(localContext, 488, PostgreSqlParser.RULE_alterCollationStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -30842,9 +30842,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altersystemstmt(): AltersystemstmtContext {
-        let localContext = new AltersystemstmtContext(this.context, this.state);
-        this.enterRule(localContext, 490, PostgreSqlParser.RULE_altersystemstmt);
+    public alterSystemStmt(): AlterSystemStmtContext {
+        let localContext = new AlterSystemStmtContext(this.context, this.state);
+        this.enterRule(localContext, 490, PostgreSqlParser.RULE_alterSystemStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -30880,9 +30880,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createdomainstmt(): CreatedomainstmtContext {
-        let localContext = new CreatedomainstmtContext(this.context, this.state);
-        this.enterRule(localContext, 492, PostgreSqlParser.RULE_createdomainstmt);
+    public createDomainStmt(): CreateDomainStmtContext {
+        let localContext = new CreateDomainStmtContext(this.context, this.state);
+        this.enterRule(localContext, 492, PostgreSqlParser.RULE_createDomainStmt);
         let _la: number;
         try {
             let alternative: number;
@@ -30914,7 +30914,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 5584;
-                    this.colconstraint();
+                    this.colConstraint();
                     }
                     }
                 }
@@ -30938,9 +30938,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterdomainstmt(): AlterdomainstmtContext {
-        let localContext = new AlterdomainstmtContext(this.context, this.state);
-        this.enterRule(localContext, 494, PostgreSqlParser.RULE_alterdomainstmt);
+    public alterDomainStmt(): AlterDomainStmtContext {
+        let localContext = new AlterDomainStmtContext(this.context, this.state);
+        this.enterRule(localContext, 494, PostgreSqlParser.RULE_alterDomainStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -30989,12 +30989,12 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5598;
                     this.match(PostgreSqlParser.KW_CONSTRAINT);
                     this.state = 5599;
-                    this.colid();
+                    this.colId();
                     }
                 }
 
                 this.state = 5602;
-                this.constraintelem();
+                this.constraintElem();
                 }
                 break;
             case 4:
@@ -31014,7 +31014,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 5608;
-                this.colid();
+                this.colId();
                 this.state = 5610;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 701, this.context) ) {
@@ -31034,7 +31034,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5613;
                 this.match(PostgreSqlParser.KW_CONSTRAINT);
                 this.state = 5614;
-                this.colid();
+                this.colId();
                 }
                 break;
             }
@@ -31054,9 +31054,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altertsdictionarystmt(): AltertsdictionarystmtContext {
-        let localContext = new AltertsdictionarystmtContext(this.context, this.state);
-        this.enterRule(localContext, 496, PostgreSqlParser.RULE_altertsdictionarystmt);
+    public alterSearchDictionaryStmt(): AlterSearchDictionaryStmtContext {
+        let localContext = new AlterSearchDictionaryStmtContext(this.context, this.state);
+        this.enterRule(localContext, 496, PostgreSqlParser.RULE_alterSearchDictionaryStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -31088,9 +31088,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public altertsconfigurationstmt(): AltertsconfigurationstmtContext {
-        let localContext = new AltertsconfigurationstmtContext(this.context, this.state);
-        this.enterRule(localContext, 498, PostgreSqlParser.RULE_altertsconfigurationstmt);
+    public alterSearchConfigurationStmt(): AlterSearchConfigurationStmtContext {
+        let localContext = new AlterSearchConfigurationStmtContext(this.context, this.state);
+        this.enterRule(localContext, 498, PostgreSqlParser.RULE_alterSearchConfigurationStmt);
         let _la: number;
         try {
             this.state = 5665;
@@ -31218,9 +31218,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createconversionstmt(): CreateconversionstmtContext {
-        let localContext = new CreateconversionstmtContext(this.context, this.state);
-        this.enterRule(localContext, 500, PostgreSqlParser.RULE_createconversionstmt);
+    public createConversionStmt(): CreateConversionStmtContext {
+        let localContext = new CreateConversionStmtContext(this.context, this.state);
+        this.enterRule(localContext, 500, PostgreSqlParser.RULE_createConversionStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -31244,11 +31244,11 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5673;
             this.match(PostgreSqlParser.KW_FOR);
             this.state = 5674;
-            this.sconst();
+            this.stringConst();
             this.state = 5675;
             this.match(PostgreSqlParser.KW_TO);
             this.state = 5676;
-            this.sconst();
+            this.stringConst();
             this.state = 5677;
             this.match(PostgreSqlParser.KW_FROM);
             this.state = 5678;
@@ -31269,9 +31269,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public clusterstmt(): ClusterstmtContext {
-        let localContext = new ClusterstmtContext(this.context, this.state);
-        this.enterRule(localContext, 502, PostgreSqlParser.RULE_clusterstmt);
+    public clusterStmt(): ClusterStmtContext {
+        let localContext = new ClusterStmtContext(this.context, this.state);
+        this.enterRule(localContext, 502, PostgreSqlParser.RULE_clusterStmt);
         let _la: number;
         try {
             this.state = 5705;
@@ -31371,9 +31371,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public vacuumstmt(): VacuumstmtContext {
-        let localContext = new VacuumstmtContext(this.context, this.state);
-        this.enterRule(localContext, 504, PostgreSqlParser.RULE_vacuumstmt);
+    public vacuumStmt(): VacuumStmtContext {
+        let localContext = new VacuumStmtContext(this.context, this.state);
+        this.enterRule(localContext, 504, PostgreSqlParser.RULE_vacuumStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -31470,9 +31470,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public analyzestmt(): AnalyzestmtContext {
-        let localContext = new AnalyzestmtContext(this.context, this.state);
-        this.enterRule(localContext, 506, PostgreSqlParser.RULE_analyzestmt);
+    public analyzeStmt(): AnalyzeStmtContext {
+        let localContext = new AnalyzeStmtContext(this.context, this.state);
+        this.enterRule(localContext, 506, PostgreSqlParser.RULE_analyzeStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -32007,7 +32007,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 5750;
-                this.nonreservedword();
+                this.nonReservedWord();
                 }
                 break;
             case PostgreSqlParser.KW_ANALYSE:
@@ -32452,7 +32452,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.Numeric:
                 {
                 this.state = 5755;
-                this.numericonly();
+                this.numericOnly();
                 }
                 break;
             case PostgreSqlParser.CLOSE_PAREN:
@@ -32531,7 +32531,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.Numeric:
                     {
                     this.state = 5763;
-                    this.numericonly();
+                    this.numericOnly();
                     }
                     break;
                 case PostgreSqlParser.StringConstant:
@@ -32540,7 +32540,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 5764;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 default:
@@ -32683,9 +32683,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public explainstmt(): ExplainstmtContext {
-        let localContext = new ExplainstmtContext(this.context, this.state);
-        this.enterRule(localContext, 520, PostgreSqlParser.RULE_explainstmt);
+    public explainStmt(): ExplainStmtContext {
+        let localContext = new ExplainStmtContext(this.context, this.state);
+        this.enterRule(localContext, 520, PostgreSqlParser.RULE_explainStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -32741,7 +32741,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 break;
             }
             this.state = 5798;
-            this.explainablestmt();
+            this.explainableStmt();
             }
         }
         catch (re) {
@@ -32758,9 +32758,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public explainablestmt(): ExplainablestmtContext {
-        let localContext = new ExplainablestmtContext(this.context, this.state);
-        this.enterRule(localContext, 522, PostgreSqlParser.RULE_explainablestmt);
+    public explainableStmt(): ExplainableStmtContext {
+        let localContext = new ExplainableStmtContext(this.context, this.state);
+        this.enterRule(localContext, 522, PostgreSqlParser.RULE_explainableStmt);
         try {
             this.state = 5809;
             this.errorHandler.sync(this);
@@ -32769,63 +32769,63 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 5800;
-                this.selectstmt();
+                this.selectStmt();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 5801;
-                this.insertstmt();
+                this.insertStmt();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 5802;
-                this.updatestmt();
+                this.updateStmt();
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 5803;
-                this.deletestmt();
+                this.deleteStmt();
                 }
                 break;
             case 5:
                 this.enterOuterAlt(localContext, 5);
                 {
                 this.state = 5804;
-                this.declarecursorstmt();
+                this.declareCursorStmt();
                 }
                 break;
             case 6:
                 this.enterOuterAlt(localContext, 6);
                 {
                 this.state = 5805;
-                this.createasstmt();
+                this.createAsStmt();
                 }
                 break;
             case 7:
                 this.enterOuterAlt(localContext, 7);
                 {
                 this.state = 5806;
-                this.creatematviewstmt();
+                this.createMaterializedViewStmt();
                 }
                 break;
             case 8:
                 this.enterOuterAlt(localContext, 8);
                 {
                 this.state = 5807;
-                this.refreshmatviewstmt();
+                this.refreshMaterializedViewStmt();
                 }
                 break;
             case 9:
                 this.enterOuterAlt(localContext, 9);
                 {
                 this.state = 5808;
-                this.executestmt();
+                this.executeStmt();
                 }
                 break;
             }
@@ -32889,9 +32889,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public preparestmt(): PreparestmtContext {
-        let localContext = new PreparestmtContext(this.context, this.state);
-        this.enterRule(localContext, 526, PostgreSqlParser.RULE_preparestmt);
+    public prepareStmt(): PrepareStmtContext {
+        let localContext = new PrepareStmtContext(this.context, this.state);
+        this.enterRule(localContext, 526, PostgreSqlParser.RULE_prepareStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -32899,7 +32899,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5822;
             this.match(PostgreSqlParser.KW_PREPARE);
             this.state = 5823;
-            this.colid();
+            this.colId();
             this.state = 5825;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -32913,7 +32913,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 5827;
             this.match(PostgreSqlParser.KW_AS);
             this.state = 5828;
-            this.preparablestmt();
+            this.preParableStmt();
             }
         }
         catch (re) {
@@ -32975,9 +32975,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public preparablestmt(): PreparablestmtContext {
-        let localContext = new PreparablestmtContext(this.context, this.state);
-        this.enterRule(localContext, 530, PostgreSqlParser.RULE_preparablestmt);
+    public preParableStmt(): PreParableStmtContext {
+        let localContext = new PreParableStmtContext(this.context, this.state);
+        this.enterRule(localContext, 530, PostgreSqlParser.RULE_preParableStmt);
         try {
             this.state = 5845;
             this.errorHandler.sync(this);
@@ -32986,28 +32986,28 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 5841;
-                this.selectstmt();
+                this.selectStmt();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 5842;
-                this.insertstmt();
+                this.insertStmt();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 5843;
-                this.updatestmt();
+                this.updateStmt();
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 5844;
-                this.deletestmt();
+                this.deleteStmt();
                 }
                 break;
             }
@@ -33026,9 +33026,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public executestmt(): ExecutestmtContext {
-        let localContext = new ExecutestmtContext(this.context, this.state);
-        this.enterRule(localContext, 532, PostgreSqlParser.RULE_executestmt);
+    public executeStmt(): ExecuteStmtContext {
+        let localContext = new ExecuteStmtContext(this.context, this.state);
+        this.enterRule(localContext, 532, PostgreSqlParser.RULE_executeStmt);
         let _la: number;
         try {
             this.state = 5870;
@@ -33040,7 +33040,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5847;
                 this.match(PostgreSqlParser.KW_EXECUTE);
                 this.state = 5848;
-                this.colid();
+                this.colId();
                 this.state = 5850;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 741, this.context) ) {
@@ -33064,7 +33064,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 213 || _la === 254 || ((((_la - 352)) & ~0x1F) === 0 && ((1 << (_la - 352)) & 32773) !== 0)) {
                     {
                     this.state = 5853;
-                    this.opttemp();
+                    this.optTemp();
                     }
                 }
 
@@ -33087,7 +33087,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5862;
                 this.match(PostgreSqlParser.KW_EXECUTE);
                 this.state = 5863;
-                this.colid();
+                this.colId();
                 this.state = 5865;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 744, this.context) ) {
@@ -33156,9 +33156,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public deallocatestmt(): DeallocatestmtContext {
-        let localContext = new DeallocatestmtContext(this.context, this.state);
-        this.enterRule(localContext, 536, PostgreSqlParser.RULE_deallocatestmt);
+    public dealLocateStmt(): DealLocateStmtContext {
+        let localContext = new DealLocateStmtContext(this.context, this.state);
+        this.enterRule(localContext, 536, PostgreSqlParser.RULE_dealLocateStmt);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -33573,7 +33573,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 5880;
-                this.colid();
+                this.colId();
                 }
                 break;
             case PostgreSqlParser.KW_ALL:
@@ -33601,9 +33601,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public insertstmt(): InsertstmtContext {
-        let localContext = new InsertstmtContext(this.context, this.state);
-        this.enterRule(localContext, 538, PostgreSqlParser.RULE_insertstmt);
+    public insertStmt(): InsertStmtContext {
+        let localContext = new InsertStmtContext(this.context, this.state);
+        this.enterRule(localContext, 538, PostgreSqlParser.RULE_insertStmt);
         let _la: number;
         try {
             localContext = new InsertStatementContext(localContext);
@@ -33633,7 +33633,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 5890;
                 this.match(PostgreSqlParser.KW_AS);
                 this.state = 5891;
-                this.colid();
+                this.colId();
                 }
             }
 
@@ -33674,7 +33674,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 5902;
                     this.match(PostgreSqlParser.KW_CONSTRAINT);
                     this.state = 5903;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 case PostgreSqlParser.KW_DO:
@@ -33799,7 +33799,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 2:
                 {
                 this.state = 5933;
-                this.selectstmt();
+                this.selectStmt();
                 }
                 break;
             }
@@ -33912,9 +33912,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public deletestmt(): DeletestmtContext {
-        let localContext = new DeletestmtContext(this.context, this.state);
-        this.enterRule(localContext, 548, PostgreSqlParser.RULE_deletestmt);
+    public deleteStmt(): DeleteStmtContext {
+        let localContext = new DeleteStmtContext(this.context, this.state);
+        this.enterRule(localContext, 548, PostgreSqlParser.RULE_deleteStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -33983,9 +33983,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public lockstmt(): LockstmtContext {
-        let localContext = new LockstmtContext(this.context, this.state);
-        this.enterRule(localContext, 550, PostgreSqlParser.RULE_lockstmt);
+    public lockStmt(): LockStmtContext {
+        let localContext = new LockStmtContext(this.context, this.state);
+        this.enterRule(localContext, 550, PostgreSqlParser.RULE_lockStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -34107,9 +34107,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public updatestmt(): UpdatestmtContext {
-        let localContext = new UpdatestmtContext(this.context, this.state);
-        this.enterRule(localContext, 552, PostgreSqlParser.RULE_updatestmt);
+    public updateStmt(): UpdateStmtContext {
+        let localContext = new UpdateStmtContext(this.context, this.state);
+        this.enterRule(localContext, 552, PostgreSqlParser.RULE_updateStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -34296,9 +34296,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public declarecursorstmt(): DeclarecursorstmtContext {
-        let localContext = new DeclarecursorstmtContext(this.context, this.state);
-        this.enterRule(localContext, 558, PostgreSqlParser.RULE_declarecursorstmt);
+    public declareCursorStmt(): DeclareCursorStmtContext {
+        let localContext = new DeclareCursorStmtContext(this.context, this.state);
+        this.enterRule(localContext, 558, PostgreSqlParser.RULE_declareCursorStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -34306,7 +34306,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 6034;
             this.match(PostgreSqlParser.KW_DECLARE);
             this.state = 6035;
-            this.colid();
+            this.colId();
             {
             this.state = 6044;
             this.errorHandler.sync(this);
@@ -34380,7 +34380,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 6052;
             this.match(PostgreSqlParser.KW_FOR);
             this.state = 6053;
-            this.selectstmt();
+            this.selectStmt();
             }
         }
         catch (re) {
@@ -34397,9 +34397,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public selectstmt(): SelectstmtContext {
-        let localContext = new SelectstmtContext(this.context, this.state);
-        this.enterRule(localContext, 560, PostgreSqlParser.RULE_selectstmt);
+    public selectStmt(): SelectStmtContext {
+        let localContext = new SelectStmtContext(this.context, this.state);
+        this.enterRule(localContext, 560, PostgreSqlParser.RULE_selectStmt);
         try {
             this.state = 6057;
             this.errorHandler.sync(this);
@@ -34859,7 +34859,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 6137;
-            this.colid();
+            this.colId();
             this.state = 6139;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -34895,7 +34895,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 6148;
             this.match(PostgreSqlParser.OPEN_PAREN);
             this.state = 6149;
-            this.preparablestmt();
+            this.preParableStmt();
             this.state = 6150;
             this.match(PostgreSqlParser.CLOSE_PAREN);
             this.state = 6152;
@@ -34904,7 +34904,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 6151;
-                this.search_cluase();
+                this.search_clause();
                 }
                 break;
             }
@@ -34914,7 +34914,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 6154;
-                this.cycle_cluase();
+                this.cycle_clause();
                 }
                 break;
             }
@@ -34934,9 +34934,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public search_cluase(): Search_cluaseContext {
-        let localContext = new Search_cluaseContext(this.context, this.state);
-        this.enterRule(localContext, 576, PostgreSqlParser.RULE_search_cluase);
+    public search_clause(): Search_clauseContext {
+        let localContext = new Search_clauseContext(this.context, this.state);
+        this.enterRule(localContext, 576, PostgreSqlParser.RULE_search_clause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -34978,9 +34978,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public cycle_cluase(): Cycle_cluaseContext {
-        let localContext = new Cycle_cluaseContext(this.context, this.state);
-        this.enterRule(localContext, 578, PostgreSqlParser.RULE_cycle_cluase);
+    public cycle_clause(): Cycle_clauseContext {
+        let localContext = new Cycle_clauseContext(this.context, this.state);
+        this.enterRule(localContext, 578, PostgreSqlParser.RULE_cycle_clause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -35001,11 +35001,11 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6169;
                 this.match(PostgreSqlParser.KW_TO);
                 this.state = 6170;
-                this.colid();
+                this.colId();
                 this.state = 6171;
                 this.match(PostgreSqlParser.KW_DEFAULT);
                 this.state = 6172;
-                this.colid();
+                this.colId();
                 }
             }
 
@@ -35053,7 +35053,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     break;
                 }
                 this.state = 6183;
-                this.opttempTableName();
+                this.optTempTableName();
                 }
                 break;
             case 2:
@@ -35079,9 +35079,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public opttempTableName(): OpttempTableNameContext {
-        let localContext = new OpttempTableNameContext(this.context, this.state);
-        this.enterRule(localContext, 582, PostgreSqlParser.RULE_opttempTableName);
+    public optTempTableName(): OptTempTableNameContext {
+        let localContext = new OptTempTableNameContext(this.context, this.state);
+        this.enterRule(localContext, 582, PostgreSqlParser.RULE_optTempTableName);
         let _la: number;
         try {
             this.state = 6202;
@@ -35221,7 +35221,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 6210;
             this.match(PostgreSqlParser.KW_BY);
             this.state = 6211;
-            this.sortby();
+            this.sortBy();
             this.state = 6216;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -35231,7 +35231,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6212;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 6213;
-                this.sortby();
+                this.sortBy();
                 }
                 }
                 this.state = 6218;
@@ -35254,15 +35254,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public sortby(): SortbyContext {
-        let localContext = new SortbyContext(this.context, this.state);
-        this.enterRule(localContext, 588, PostgreSqlParser.RULE_sortby);
+    public sortBy(): SortByContext {
+        let localContext = new SortByContext(this.context, this.state);
+        this.enterRule(localContext, 588, PostgreSqlParser.RULE_sortBy);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 6219;
-            this.column_expr_noparen();
+            this.column_expr_no_paren();
             this.state = 6223;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 816, this.context) ) {
@@ -36176,7 +36176,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 6289;
-                this.column_expr_noparen();
+                this.column_expr_no_paren();
                 }
                 break;
             case 2:
@@ -36212,7 +36212,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 {
                 this.state = 6296;
-                this.column_expr_noparen();
+                this.column_expr_no_paren();
                 this.state = 6301;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -36222,7 +36222,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 6297;
                     this.match(PostgreSqlParser.COMMA);
                     this.state = 6298;
-                    this.column_expr_noparen();
+                    this.column_expr_no_paren();
                     }
                     }
                     this.state = 6303;
@@ -36590,7 +36590,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 472) {
                     {
                     this.state = 6383;
-                    this.tablesample_clause();
+                    this.tableSampleClause();
                     }
                 }
 
@@ -36614,7 +36614,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 6389;
-                    this.xmltable();
+                    this.xmlTable();
                     this.state = 6391;
                     this.errorHandler.sync(this);
                     switch (this.interpreter.adaptivePredict(this.tokenStream, 850, this.context) ) {
@@ -36851,7 +36851,7 @@ export class PostgreSqlParser extends SQLParserBase {
             }
 
             this.state = 6453;
-            localContext._alias = this.colid();
+            localContext._alias = this.colId();
             this.state = 6458;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 864, this.context) ) {
@@ -36913,7 +36913,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     if (_la === 53 || ((((_la - 116)) & ~0x1F) === 0 && ((1 << (_la - 116)) & 4294959489) !== 0) || ((((_la - 148)) & ~0x1F) === 0 && ((1 << (_la - 148)) & 4294967295) !== 0) || ((((_la - 180)) & ~0x1F) === 0 && ((1 << (_la - 180)) & 4294967295) !== 0) || ((((_la - 212)) & ~0x1F) === 0 && ((1 << (_la - 212)) & 4227989503) !== 0) || ((((_la - 244)) & ~0x1F) === 0 && ((1 << (_la - 244)) & 4294967295) !== 0) || ((((_la - 276)) & ~0x1F) === 0 && ((1 << (_la - 276)) & 4294967295) !== 0) || ((((_la - 308)) & ~0x1F) === 0 && ((1 << (_la - 308)) & 4294967295) !== 0) || ((((_la - 340)) & ~0x1F) === 0 && ((1 << (_la - 340)) & 4294967295) !== 0) || ((((_la - 372)) & ~0x1F) === 0 && ((1 << (_la - 372)) & 4294967295) !== 0) || ((((_la - 404)) & ~0x1F) === 0 && ((1 << (_la - 404)) & 4294967295) !== 0) || ((((_la - 436)) & ~0x1F) === 0 && ((1 << (_la - 436)) & 4294705151) !== 0) || ((((_la - 468)) & ~0x1F) === 0 && ((1 << (_la - 468)) & 4294967279) !== 0) || ((((_la - 500)) & ~0x1F) === 0 && ((1 << (_la - 500)) & 18350039) !== 0) || ((((_la - 547)) & ~0x1F) === 0 && ((1 << (_la - 547)) & 402696335) !== 0) || _la === 584) {
                         {
                         this.state = 6462;
-                        localContext._alias = this.colid();
+                        localContext._alias = this.colId();
                         }
                     }
 
@@ -37315,7 +37315,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 6465;
-                    localContext._alias = this.colid();
+                    localContext._alias = this.colId();
                     }
                     break;
                 default:
@@ -37324,7 +37324,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6468;
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 this.state = 6469;
-                this.tablefuncelementlist();
+                this.tableFuncElementList();
                 this.state = 6470;
                 this.match(PostgreSqlParser.CLOSE_PAREN);
                 }
@@ -39267,7 +39267,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 6539;
-                this.colid();
+                this.colId();
                 }
                 break;
             }
@@ -39287,9 +39287,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tablesample_clause(): Tablesample_clauseContext {
-        let localContext = new Tablesample_clauseContext(this.context, this.state);
-        this.enterRule(localContext, 632, PostgreSqlParser.RULE_tablesample_clause);
+    public tableSampleClause(): TableSampleClauseContext {
+        let localContext = new TableSampleClauseContext(this.context, this.state);
+        this.enterRule(localContext, 632, PostgreSqlParser.RULE_tableSampleClause);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -39357,7 +39357,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6555;
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 this.state = 6556;
-                this.rowsfrom_item();
+                this.rowsFromItem();
                 this.state = 6561;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -39367,7 +39367,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 6557;
                     this.match(PostgreSqlParser.COMMA);
                     this.state = 6558;
-                    this.rowsfrom_item();
+                    this.rowsFromItem();
                     }
                     }
                     this.state = 6563;
@@ -39408,9 +39408,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public rowsfrom_item(): Rowsfrom_itemContext {
-        let localContext = new Rowsfrom_itemContext(this.context, this.state);
-        this.enterRule(localContext, 636, PostgreSqlParser.RULE_rowsfrom_item);
+    public rowsFromItem(): RowsFromItemContext {
+        let localContext = new RowsFromItemContext(this.context, this.state);
+        this.enterRule(localContext, 636, PostgreSqlParser.RULE_rowsFromItem);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -39427,7 +39427,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6574;
                 this.match(PostgreSqlParser.OPEN_PAREN);
                 this.state = 6575;
-                this.tablefuncelementlist();
+                this.tableFuncElementList();
                 this.state = 6576;
                 this.match(PostgreSqlParser.CLOSE_PAREN);
                 }
@@ -39458,7 +39458,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 6580;
             this.match(PostgreSqlParser.KW_WHERE);
             this.state = 6581;
-            this.column_expr_noparen();
+            this.column_expr_no_paren();
             }
         }
         catch (re) {
@@ -39493,7 +39493,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6585;
                 this.match(PostgreSqlParser.KW_OF);
                 this.state = 6586;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 2:
@@ -39519,15 +39519,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tablefuncelementlist(): TablefuncelementlistContext {
-        let localContext = new TablefuncelementlistContext(this.context, this.state);
-        this.enterRule(localContext, 642, PostgreSqlParser.RULE_tablefuncelementlist);
+    public tableFuncElementList(): TableFuncElementListContext {
+        let localContext = new TableFuncElementListContext(this.context, this.state);
+        this.enterRule(localContext, 642, PostgreSqlParser.RULE_tableFuncElementList);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 6590;
-            this.tablefuncelement();
+            this.tableFuncElement();
             this.state = 6595;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -39537,7 +39537,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6591;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 6592;
-                this.tablefuncelement();
+                this.tableFuncElement();
                 }
                 }
                 this.state = 6597;
@@ -39560,15 +39560,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tablefuncelement(): TablefuncelementContext {
-        let localContext = new TablefuncelementContext(this.context, this.state);
-        this.enterRule(localContext, 644, PostgreSqlParser.RULE_tablefuncelement);
+    public tableFuncElement(): TableFuncElementContext {
+        let localContext = new TableFuncElementContext(this.context, this.state);
+        this.enterRule(localContext, 644, PostgreSqlParser.RULE_tableFuncElement);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 6598;
-            this.colid();
+            this.colId();
             this.state = 6599;
             this.typename();
             this.state = 6601;
@@ -39597,9 +39597,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public xmltable(): XmltableContext {
-        let localContext = new XmltableContext(this.context, this.state);
-        this.enterRule(localContext, 646, PostgreSqlParser.RULE_xmltable);
+    public xmlTable(): XmlTableContext {
+        let localContext = new XmlTableContext(this.context, this.state);
+        this.enterRule(localContext, 646, PostgreSqlParser.RULE_xmlTable);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -39646,11 +39646,11 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 6620;
             this.primaryExpression(0);
             this.state = 6621;
-            this.xmlexists_argument();
+            this.xmlExistsArgument();
             this.state = 6622;
             this.match(PostgreSqlParser.KW_COLUMNS);
             this.state = 6623;
-            this.xmltable_column_el();
+            this.xmlTableColumnEl();
             this.state = 6628;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -39660,7 +39660,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6624;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 6625;
-                this.xmltable_column_el();
+                this.xmlTableColumnEl();
                 }
                 }
                 this.state = 6630;
@@ -39686,15 +39686,15 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public xmltable_column_el(): Xmltable_column_elContext {
-        let localContext = new Xmltable_column_elContext(this.context, this.state);
-        this.enterRule(localContext, 648, PostgreSqlParser.RULE_xmltable_column_el);
+    public xmlTableColumnEl(): XmlTableColumnElContext {
+        let localContext = new XmlTableColumnElContext(this.context, this.state);
+        this.enterRule(localContext, 648, PostgreSqlParser.RULE_xmlTableColumnEl);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 6633;
-            this.colid();
+            this.colId();
             this.state = 6652;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
@@ -40565,7 +40565,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 6655;
                 this.match(PostgreSqlParser.KW_AS);
                 this.state = 6656;
-                this.collabel();
+                this.colLabel();
                 }
                 break;
             case 2:
@@ -40616,7 +40616,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 6665;
-                this.simpletypename();
+                this.simpleTypeName();
                 this.state = 6682;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 903, this.context) ) {
@@ -40711,9 +40711,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public simpletypename(): SimpletypenameContext {
-        let localContext = new SimpletypenameContext(this.context, this.state);
-        this.enterRule(localContext, 654, PostgreSqlParser.RULE_simpletypename);
+    public simpleTypeName(): SimpleTypeNameContext {
+        let localContext = new SimpleTypeNameContext(this.context, this.state);
+        this.enterRule(localContext, 654, PostgreSqlParser.RULE_simpleTypeName);
         try {
             this.state = 6705;
             this.errorHandler.sync(this);
@@ -40749,7 +40749,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 6697;
-                this.consttypename();
+                this.constTypeName();
                 }
                 break;
             case 3:
@@ -40799,9 +40799,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public consttypename(): ConsttypenameContext {
-        let localContext = new ConsttypenameContext(this.context, this.state);
-        this.enterRule(localContext, 656, PostgreSqlParser.RULE_consttypename);
+    public constTypeName(): ConstTypeNameContext {
+        let localContext = new ConstTypeNameContext(this.context, this.state);
+        this.enterRule(localContext, 656, PostgreSqlParser.RULE_constTypeName);
         try {
             this.state = 6711;
             this.errorHandler.sync(this);
@@ -40846,7 +40846,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 6710;
-                this.constdatetime();
+                this.constDatetime();
                 }
                 break;
             default:
@@ -41154,9 +41154,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public constdatetime(): ConstdatetimeContext {
-        let localContext = new ConstdatetimeContext(this.context, this.state);
-        this.enterRule(localContext, 666, PostgreSqlParser.RULE_constdatetime);
+    public constDatetime(): ConstDatetimeContext {
+        let localContext = new ConstDatetimeContext(this.context, this.state);
+        this.enterRule(localContext, 666, PostgreSqlParser.RULE_constDatetime);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -42570,7 +42570,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 6940;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 case PostgreSqlParser.OPEN_PAREN:
@@ -42592,7 +42592,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 6946;
                     this.match(PostgreSqlParser.CLOSE_PAREN);
                     this.state = 6947;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 default:
@@ -42608,12 +42608,12 @@ export class PostgreSqlParser extends SQLParserBase {
                 if (_la === 190 || ((((_la - 388)) & ~0x1F) === 0 && ((1 << (_la - 388)) & 3525731551) !== 0) || _la === 423) {
                     {
                     this.state = 6951;
-                    this.consttypename();
+                    this.constTypeName();
                     }
                 }
 
                 this.state = 6954;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case 11:
@@ -42629,7 +42629,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 6956;
-                    this.sconst();
+                    this.stringConst();
                     this.state = 6958;
                     this.errorHandler.sync(this);
                     switch (this.interpreter.adaptivePredict(this.tokenStream, 953, this.context) ) {
@@ -42647,7 +42647,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 6960;
                     this.opt_float();
                     this.state = 6961;
-                    this.sconst();
+                    this.stringConst();
                     }
                     break;
                 default:
@@ -43528,7 +43528,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     case PostgreSqlParser.EscapeStringConstant:
                         {
                         this.state = 7088;
-                        this.colid();
+                        this.colId();
                         }
                         break;
                     default:
@@ -43952,7 +43952,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 7196;
                 this.match(PostgreSqlParser.KW_NAME);
                 this.state = 7197;
-                this.collabel();
+                this.colLabel();
                 this.state = 7207;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -44001,7 +44001,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 7213;
                 this.primaryExpression(0);
                 this.state = 7214;
-                this.xmlexists_argument();
+                this.xmlExistsArgument();
                 this.state = 7215;
                 this.match(PostgreSqlParser.CLOSE_PAREN);
                 }
@@ -44063,7 +44063,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 7234;
                 this.match(PostgreSqlParser.KW_NAME);
                 this.state = 7235;
-                this.collabel();
+                this.colLabel();
                 this.state = 7238;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -44176,7 +44176,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 7270;
                 this.match(PostgreSqlParser.KW_AS);
                 this.state = 7271;
-                this.simpletypename();
+                this.simpleTypeName();
                 this.state = 7272;
                 this.match(PostgreSqlParser.CLOSE_PAREN);
                 }
@@ -44257,7 +44257,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 7285;
                 this.match(PostgreSqlParser.KW_AS);
                 this.state = 7286;
-                this.collabel();
+                this.colLabel();
                 }
             }
 
@@ -44309,9 +44309,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public xmlexists_argument(): Xmlexists_argumentContext {
-        let localContext = new Xmlexists_argumentContext(this.context, this.state);
-        this.enterRule(localContext, 698, PostgreSqlParser.RULE_xmlexists_argument);
+    public xmlExistsArgument(): XmlExistsArgumentContext {
+        let localContext = new XmlExistsArgumentContext(this.context, this.state);
+        this.enterRule(localContext, 698, PostgreSqlParser.RULE_xmlExistsArgument);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -44442,7 +44442,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 7311;
-            this.colid();
+            this.colId();
             this.state = 7312;
             this.match(PostgreSqlParser.KW_AS);
             this.state = 7313;
@@ -44876,7 +44876,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case PostgreSqlParser.EscapeStringConstant:
                 {
                 this.state = 7317;
-                this.colid();
+                this.colId();
                 }
                 break;
             default:
@@ -44913,7 +44913,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 7321;
-                this.colid();
+                this.colId();
                 }
                 break;
             }
@@ -45586,9 +45586,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public column_expr_noparen(): Column_expr_noparenContext {
-        let localContext = new Column_expr_noparenContext(this.context, this.state);
-        this.enterRule(localContext, 734, PostgreSqlParser.RULE_column_expr_noparen);
+    public column_expr_no_paren(): Column_expr_no_parenContext {
+        let localContext = new Column_expr_no_parenContext(this.context, this.state);
+        this.enterRule(localContext, 734, PostgreSqlParser.RULE_column_expr_no_paren);
         try {
             this.state = 7430;
             this.errorHandler.sync(this);
@@ -46296,7 +46296,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 8);
                 {
                 this.state = 7470;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             }
@@ -46977,7 +46977,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 7504;
-                    this.collabel();
+                    this.colLabel();
                     }
                     break;
                 case PostgreSqlParser.STAR:
@@ -47191,7 +47191,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 7541;
-                this.column_expr_noparen();
+                this.column_expr_no_paren();
                 this.state = 7546;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 1036, this.context) ) {
@@ -47200,7 +47200,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 7542;
                     this.match(PostgreSqlParser.KW_AS);
                     this.state = 7543;
-                    this.collabel();
+                    this.colLabel();
                     }
                     break;
                 case 2:
@@ -47562,7 +47562,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 7595;
-            this.colid();
+            this.colId();
             this.state = 7597;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 1042, this.context) ) {
@@ -47638,7 +47638,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 7607;
-            this.colid();
+            this.colId();
             this.state = 7612;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -47648,7 +47648,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 7608;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 7609;
-                this.colid();
+                this.colId();
                 }
                 }
                 this.state = 7614;
@@ -47754,7 +47754,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 7621;
-            this.colid();
+            this.colId();
             }
         }
         catch (re) {
@@ -47779,7 +47779,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 7623;
-            this.colid();
+            this.colId();
             }
         }
         catch (re) {
@@ -47816,7 +47816,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 7626;
-                this.colid();
+                this.colId();
                 this.state = 7627;
                 this.indirection();
                 }
@@ -47857,7 +47857,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 7632;
-                this.colid();
+                this.colId();
                 this.state = 7633;
                 this.indirection();
                 }
@@ -47890,7 +47890,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 7637;
-                this.colid();
+                this.colId();
                 this.state = 7638;
                 this.opt_indirection();
                 }
@@ -47929,7 +47929,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 7643;
-            this.colid();
+            this.colId();
             }
         }
         catch (re) {
@@ -47966,7 +47966,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 7646;
-                this.colid();
+                this.colId();
                 this.state = 7647;
                 this.indirection();
                 }
@@ -48007,7 +48007,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 7652;
-                this.colid();
+                this.colId();
                 this.state = 7653;
                 this.indirection();
                 }
@@ -48028,9 +48028,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public sconst(): SconstContext {
-        let localContext = new SconstContext(this.context, this.state);
-        this.enterRule(localContext, 808, PostgreSqlParser.RULE_sconst);
+    public stringConst(): StringConstContext {
+        let localContext = new StringConstContext(this.context, this.state);
+        this.enterRule(localContext, 808, PostgreSqlParser.RULE_stringConst);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -48134,9 +48134,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public signediconst(): SignediconstContext {
-        let localContext = new SignediconstContext(this.context, this.state);
-        this.enterRule(localContext, 812, PostgreSqlParser.RULE_signediconst);
+    public signedConst(): SignedConstContext {
+        let localContext = new SignedConstContext(this.context, this.state);
+        this.enterRule(localContext, 812, PostgreSqlParser.RULE_signedConst);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -48176,9 +48176,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public rolespec(): RolespecContext {
-        let localContext = new RolespecContext(this.context, this.state);
-        this.enterRule(localContext, 814, PostgreSqlParser.RULE_rolespec);
+    public roleSpec(): RoleSpecContext {
+        let localContext = new RoleSpecContext(this.context, this.state);
+        this.enterRule(localContext, 814, PostgreSqlParser.RULE_roleSpec);
         try {
             this.state = 7685;
             this.errorHandler.sync(this);
@@ -48187,7 +48187,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 7680;
-                this.nonreservedword();
+                this.nonReservedWord();
                 }
                 break;
             case 2:
@@ -48242,7 +48242,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 7687;
-            this.rolespec();
+            this.roleSpec();
             this.state = 7692;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -48252,7 +48252,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 7688;
                 this.match(PostgreSqlParser.COMMA);
                 this.state = 7689;
-                this.rolespec();
+                this.roleSpec();
                 }
                 }
                 this.state = 7694;
@@ -48275,9 +48275,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public colid(): ColidContext {
-        let localContext = new ColidContext(this.context, this.state);
-        this.enterRule(localContext, 818, PostgreSqlParser.RULE_colid);
+    public colId(): ColIdContext {
+        let localContext = new ColIdContext(this.context, this.state);
+        this.enterRule(localContext, 818, PostgreSqlParser.RULE_colId);
         try {
             this.state = 7697;
             this.errorHandler.sync(this);
@@ -48349,9 +48349,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public nonreservedword(): NonreservedwordContext {
-        let localContext = new NonreservedwordContext(this.context, this.state);
-        this.enterRule(localContext, 822, PostgreSqlParser.RULE_nonreservedword);
+    public nonReservedWord(): NonReservedWordContext {
+        let localContext = new NonReservedWordContext(this.context, this.state);
+        this.enterRule(localContext, 822, PostgreSqlParser.RULE_nonReservedWord);
         try {
             this.state = 7706;
             this.errorHandler.sync(this);
@@ -48393,9 +48393,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public collabel(): CollabelContext {
-        let localContext = new CollabelContext(this.context, this.state);
-        this.enterRule(localContext, 824, PostgreSqlParser.RULE_collabel);
+    public colLabel(): ColLabelContext {
+        let localContext = new ColLabelContext(this.context, this.state);
+        this.enterRule(localContext, 824, PostgreSqlParser.RULE_colLabel);
         try {
             this.state = 7712;
             this.errorHandler.sync(this);
@@ -48477,7 +48477,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 7719;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             case PostgreSqlParser.QuotedIdentifier:
@@ -49925,7 +49925,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.EscapeStringConstant:
                     {
                     this.state = 7823;
-                    this.colid();
+                    this.colId();
                     }
                     break;
                 default:
@@ -50064,7 +50064,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.consume();
                 }
                 this.state = 7865;
-                this.selectstmt();
+                this.selectStmt();
                 }
                 break;
             }
@@ -50542,7 +50542,7 @@ export class PostgreSqlParser extends SQLParserBase {
             this.state = 7947;
             this.assign_operator();
             this.state = 7948;
-            this.colid();
+            this.colId();
             }
         }
         catch (re) {
@@ -51316,7 +51316,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 8037;
-                this.colid();
+                this.colId();
                 this.state = 8039;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -51332,13 +51332,13 @@ export class PostgreSqlParser extends SQLParserBase {
             case 2:
                 {
                 this.state = 8041;
-                this.selectstmt();
+                this.selectStmt();
                 }
                 break;
             case 3:
                 {
                 this.state = 8042;
-                this.explainstmt();
+                this.explainStmt();
                 }
                 break;
             case 4:
@@ -51568,7 +51568,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.KW_VALUES:
                     {
                     this.state = 8094;
-                    this.selectstmt();
+                    this.selectStmt();
                     }
                     break;
                 default:
@@ -51655,7 +51655,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     this.state = 8109;
                     this.match(PostgreSqlParser.KW_SQLSTATE);
                     this.state = 8110;
-                    this.sconst();
+                    this.stringConst();
                     }
                     }
                     break;
@@ -51663,7 +51663,7 @@ export class PostgreSqlParser extends SQLParserBase {
                     {
                     {
                     this.state = 8111;
-                    this.sconst();
+                    this.stringConst();
                     this.state = 8118;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
@@ -52081,7 +52081,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 case PostgreSqlParser.KW_VALUES:
                     {
                     this.state = 8204;
-                    this.selectstmt();
+                    this.selectStmt();
                     }
                     break;
                 case PostgreSqlParser.KW_EXECUTE:
@@ -52112,7 +52112,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 2:
                 {
                 this.state = 8213;
-                this.colid();
+                this.colId();
                 this.state = 8225;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -52178,7 +52178,7 @@ export class PostgreSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 8231;
-                this.colid();
+                this.colId();
                 this.state = 8232;
                 this.match(PostgreSqlParser.COLON_EQUALS);
                 }
@@ -52406,9 +52406,9 @@ export class PostgreSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public mergestmt(): MergestmtContext {
-        let localContext = new MergestmtContext(this.context, this.state);
-        this.enterRule(localContext, 900, PostgreSqlParser.RULE_mergestmt);
+    public mergeStmt(): MergeStmtContext {
+        let localContext = new MergeStmtContext(this.context, this.state);
+        this.enterRule(localContext, 900, PostgreSqlParser.RULE_mergeStmt);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -52465,7 +52465,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 8288;
-                this.colid();
+                this.colId();
                 }
             }
 
@@ -52580,7 +52580,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 }
 
                 this.state = 8316;
-                this.colid();
+                this.colId();
                 }
             }
 
@@ -52939,7 +52939,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 8397;
-                this.sortby();
+                this.sortBy();
                 }
                 break;
             case 2:
@@ -53939,7 +53939,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 8432;
-                this.colid();
+                this.colId();
                 }
                 break;
             case PostgreSqlParser.PARAM:
@@ -54065,7 +54065,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.state = 8458;
                 this.match(PostgreSqlParser.KW_SQLSTATE);
                 this.state = 8459;
-                this.sconst();
+                this.stringConst();
                 }
                 break;
             }
@@ -54095,7 +54095,7 @@ export class PostgreSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 8462;
-                this.colid();
+                this.colId();
                 }
                 break;
             case 2:
@@ -58265,353 +58265,353 @@ export class StmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public altereventtrigstmt(): AltereventtrigstmtContext | null {
-        return this.getRuleContext(0, AltereventtrigstmtContext);
+    public alterEventTrigStmt(): AlterEventTrigStmtContext | null {
+        return this.getRuleContext(0, AlterEventTrigStmtContext);
     }
-    public altercollationstmt(): AltercollationstmtContext | null {
-        return this.getRuleContext(0, AltercollationstmtContext);
+    public alterCollationStmt(): AlterCollationStmtContext | null {
+        return this.getRuleContext(0, AlterCollationStmtContext);
     }
-    public alterdatabasestmt(): AlterdatabasestmtContext | null {
-        return this.getRuleContext(0, AlterdatabasestmtContext);
+    public alterDatabaseStmt(): AlterDatabaseStmtContext | null {
+        return this.getRuleContext(0, AlterDatabaseStmtContext);
     }
-    public alterdatabasesetstmt(): AlterdatabasesetstmtContext | null {
-        return this.getRuleContext(0, AlterdatabasesetstmtContext);
+    public alterDatabaseSetStmt(): AlterDatabaseSetStmtContext | null {
+        return this.getRuleContext(0, AlterDatabaseSetStmtContext);
     }
-    public alterdefaultprivilegesstmt(): AlterdefaultprivilegesstmtContext | null {
-        return this.getRuleContext(0, AlterdefaultprivilegesstmtContext);
+    public alterDefaultPrivilegesStmt(): AlterDefaultPrivilegesStmtContext | null {
+        return this.getRuleContext(0, AlterDefaultPrivilegesStmtContext);
     }
-    public alterdomainstmt(): AlterdomainstmtContext | null {
-        return this.getRuleContext(0, AlterdomainstmtContext);
+    public alterDomainStmt(): AlterDomainStmtContext | null {
+        return this.getRuleContext(0, AlterDomainStmtContext);
     }
-    public alterenumstmt(): AlterenumstmtContext | null {
-        return this.getRuleContext(0, AlterenumstmtContext);
+    public alterEnumStmt(): AlterEnumStmtContext | null {
+        return this.getRuleContext(0, AlterEnumStmtContext);
     }
-    public alterextensionstmt(): AlterextensionstmtContext | null {
-        return this.getRuleContext(0, AlterextensionstmtContext);
+    public alterExtensionStmt(): AlterExtensionStmtContext | null {
+        return this.getRuleContext(0, AlterExtensionStmtContext);
     }
-    public alterextensioncontentsstmt(): AlterextensioncontentsstmtContext | null {
-        return this.getRuleContext(0, AlterextensioncontentsstmtContext);
+    public alterExtensionContentsStmt(): AlterExtensionContentsStmtContext | null {
+        return this.getRuleContext(0, AlterExtensionContentsStmtContext);
     }
-    public alterfdwstmt(): AlterfdwstmtContext | null {
-        return this.getRuleContext(0, AlterfdwstmtContext);
+    public alterFdwStmt(): AlterFdwStmtContext | null {
+        return this.getRuleContext(0, AlterFdwStmtContext);
     }
-    public alterforeignserverstmt(): AlterforeignserverstmtContext | null {
-        return this.getRuleContext(0, AlterforeignserverstmtContext);
+    public alterForeignServerStmt(): AlterForeignServerStmtContext | null {
+        return this.getRuleContext(0, AlterForeignServerStmtContext);
     }
-    public alterfunctionstmt(): AlterfunctionstmtContext | null {
-        return this.getRuleContext(0, AlterfunctionstmtContext);
+    public alterFunctionStmt(): AlterFunctionStmtContext | null {
+        return this.getRuleContext(0, AlterFunctionStmtContext);
     }
-    public altergroupstmt(): AltergroupstmtContext | null {
-        return this.getRuleContext(0, AltergroupstmtContext);
+    public alterGroupStmt(): AlterGroupStmtContext | null {
+        return this.getRuleContext(0, AlterGroupStmtContext);
     }
-    public alterobjectdependsstmt(): AlterobjectdependsstmtContext | null {
-        return this.getRuleContext(0, AlterobjectdependsstmtContext);
+    public alterObjectDependsStmt(): AlterObjectDependsStmtContext | null {
+        return this.getRuleContext(0, AlterObjectDependsStmtContext);
     }
-    public alterobjectschemastmt(): AlterobjectschemastmtContext | null {
-        return this.getRuleContext(0, AlterobjectschemastmtContext);
+    public alterObjectSchemaStmt(): AlterObjectSchemaStmtContext | null {
+        return this.getRuleContext(0, AlterObjectSchemaStmtContext);
     }
-    public alterownerstmt(): AlterownerstmtContext | null {
-        return this.getRuleContext(0, AlterownerstmtContext);
+    public alterOwnerStmt(): AlterOwnerStmtContext | null {
+        return this.getRuleContext(0, AlterOwnerStmtContext);
     }
-    public alteroperatorstmt(): AlteroperatorstmtContext | null {
-        return this.getRuleContext(0, AlteroperatorstmtContext);
+    public alterOperatorStmt(): AlterOperatorStmtContext | null {
+        return this.getRuleContext(0, AlterOperatorStmtContext);
     }
-    public altertypestmt(): AltertypestmtContext | null {
-        return this.getRuleContext(0, AltertypestmtContext);
+    public alterTypeStmt(): AlterTypeStmtContext | null {
+        return this.getRuleContext(0, AlterTypeStmtContext);
     }
-    public alterpolicystmt(): AlterpolicystmtContext | null {
-        return this.getRuleContext(0, AlterpolicystmtContext);
+    public alterPolicyStmt(): AlterPolicyStmtContext | null {
+        return this.getRuleContext(0, AlterPolicyStmtContext);
     }
-    public alterprocedurestmt(): AlterprocedurestmtContext | null {
-        return this.getRuleContext(0, AlterprocedurestmtContext);
+    public alterProcedureStmt(): AlterProcedureStmtContext | null {
+        return this.getRuleContext(0, AlterProcedureStmtContext);
     }
-    public alterseqstmt(): AlterseqstmtContext | null {
-        return this.getRuleContext(0, AlterseqstmtContext);
+    public alterSeqStmt(): AlterSeqStmtContext | null {
+        return this.getRuleContext(0, AlterSeqStmtContext);
     }
-    public altersystemstmt(): AltersystemstmtContext | null {
-        return this.getRuleContext(0, AltersystemstmtContext);
+    public alterSystemStmt(): AlterSystemStmtContext | null {
+        return this.getRuleContext(0, AlterSystemStmtContext);
     }
-    public altertablestmt(): AltertablestmtContext | null {
-        return this.getRuleContext(0, AltertablestmtContext);
+    public alterTableStmt(): AlterTableStmtContext | null {
+        return this.getRuleContext(0, AlterTableStmtContext);
     }
-    public altertblspcstmt(): AltertblspcstmtContext | null {
-        return this.getRuleContext(0, AltertblspcstmtContext);
+    public alterTblSpcStmt(): AlterTblSpcStmtContext | null {
+        return this.getRuleContext(0, AlterTblSpcStmtContext);
     }
-    public altercompositetypestmt(): AltercompositetypestmtContext | null {
-        return this.getRuleContext(0, AltercompositetypestmtContext);
+    public alterCompositeTypeStmt(): AlterCompositeTypeStmtContext | null {
+        return this.getRuleContext(0, AlterCompositeTypeStmtContext);
     }
-    public alterpublicationstmt(): AlterpublicationstmtContext | null {
-        return this.getRuleContext(0, AlterpublicationstmtContext);
+    public alterPublicationStmt(): AlterPublicationStmtContext | null {
+        return this.getRuleContext(0, AlterPublicationStmtContext);
     }
-    public alterrolesetstmt(): AlterrolesetstmtContext | null {
-        return this.getRuleContext(0, AlterrolesetstmtContext);
+    public alterRoleSetStmt(): AlterRoleSetStmtContext | null {
+        return this.getRuleContext(0, AlterRoleSetStmtContext);
     }
-    public alterroutinestmt(): AlterroutinestmtContext | null {
-        return this.getRuleContext(0, AlterroutinestmtContext);
+    public alterRoutineStmt(): AlterRoutineStmtContext | null {
+        return this.getRuleContext(0, AlterRoutineStmtContext);
     }
-    public alterrolestmt(): AlterrolestmtContext | null {
-        return this.getRuleContext(0, AlterrolestmtContext);
+    public alterRoleStmt(): AlterRoleStmtContext | null {
+        return this.getRuleContext(0, AlterRoleStmtContext);
     }
-    public altersubscriptionstmt(): AltersubscriptionstmtContext | null {
-        return this.getRuleContext(0, AltersubscriptionstmtContext);
+    public alterSubscriptionStmt(): AlterSubscriptionStmtContext | null {
+        return this.getRuleContext(0, AlterSubscriptionStmtContext);
     }
-    public alterstatsstmt(): AlterstatsstmtContext | null {
-        return this.getRuleContext(0, AlterstatsstmtContext);
+    public alterStatsStmt(): AlterStatsStmtContext | null {
+        return this.getRuleContext(0, AlterStatsStmtContext);
     }
-    public altertsconfigurationstmt(): AltertsconfigurationstmtContext | null {
-        return this.getRuleContext(0, AltertsconfigurationstmtContext);
+    public alterSearchConfigurationStmt(): AlterSearchConfigurationStmtContext | null {
+        return this.getRuleContext(0, AlterSearchConfigurationStmtContext);
     }
-    public altertsdictionarystmt(): AltertsdictionarystmtContext | null {
-        return this.getRuleContext(0, AltertsdictionarystmtContext);
+    public alterSearchDictionaryStmt(): AlterSearchDictionaryStmtContext | null {
+        return this.getRuleContext(0, AlterSearchDictionaryStmtContext);
     }
-    public alterusermappingstmt(): AlterusermappingstmtContext | null {
-        return this.getRuleContext(0, AlterusermappingstmtContext);
+    public alterUserMappingStmt(): AlterUserMappingStmtContext | null {
+        return this.getRuleContext(0, AlterUserMappingStmtContext);
     }
-    public analyzestmt(): AnalyzestmtContext | null {
-        return this.getRuleContext(0, AnalyzestmtContext);
+    public analyzeStmt(): AnalyzeStmtContext | null {
+        return this.getRuleContext(0, AnalyzeStmtContext);
     }
-    public callstmt(): CallstmtContext | null {
-        return this.getRuleContext(0, CallstmtContext);
+    public callStmt(): CallStmtContext | null {
+        return this.getRuleContext(0, CallStmtContext);
     }
-    public checkpointstmt(): CheckpointstmtContext | null {
-        return this.getRuleContext(0, CheckpointstmtContext);
+    public checkPointStmt(): CheckPointStmtContext | null {
+        return this.getRuleContext(0, CheckPointStmtContext);
     }
-    public closeportalstmt(): CloseportalstmtContext | null {
-        return this.getRuleContext(0, CloseportalstmtContext);
+    public closePortalStmt(): ClosePortalStmtContext | null {
+        return this.getRuleContext(0, ClosePortalStmtContext);
     }
-    public clusterstmt(): ClusterstmtContext | null {
-        return this.getRuleContext(0, ClusterstmtContext);
+    public clusterStmt(): ClusterStmtContext | null {
+        return this.getRuleContext(0, ClusterStmtContext);
     }
-    public commentstmt(): CommentstmtContext | null {
-        return this.getRuleContext(0, CommentstmtContext);
+    public commentStmt(): CommentStmtContext | null {
+        return this.getRuleContext(0, CommentStmtContext);
     }
-    public constraintssetstmt(): ConstraintssetstmtContext | null {
-        return this.getRuleContext(0, ConstraintssetstmtContext);
+    public constraintsSetStmt(): ConstraintsSetStmtContext | null {
+        return this.getRuleContext(0, ConstraintsSetStmtContext);
     }
-    public copystmt(): CopystmtContext | null {
-        return this.getRuleContext(0, CopystmtContext);
+    public copyStmt(): CopyStmtContext | null {
+        return this.getRuleContext(0, CopyStmtContext);
     }
-    public createamstmt(): CreateamstmtContext | null {
-        return this.getRuleContext(0, CreateamstmtContext);
+    public createAccessMethodStmt(): CreateAccessMethodStmtContext | null {
+        return this.getRuleContext(0, CreateAccessMethodStmtContext);
     }
-    public createasstmt(): CreateasstmtContext | null {
-        return this.getRuleContext(0, CreateasstmtContext);
+    public createAsStmt(): CreateAsStmtContext | null {
+        return this.getRuleContext(0, CreateAsStmtContext);
     }
-    public createassertionstmt(): CreateassertionstmtContext | null {
-        return this.getRuleContext(0, CreateassertionstmtContext);
+    public createAssertionStmt(): CreateAssertionStmtContext | null {
+        return this.getRuleContext(0, CreateAssertionStmtContext);
     }
-    public createcaststmt(): CreatecaststmtContext | null {
-        return this.getRuleContext(0, CreatecaststmtContext);
+    public createCastStmt(): CreateCastStmtContext | null {
+        return this.getRuleContext(0, CreateCastStmtContext);
     }
-    public createconversionstmt(): CreateconversionstmtContext | null {
-        return this.getRuleContext(0, CreateconversionstmtContext);
+    public createConversionStmt(): CreateConversionStmtContext | null {
+        return this.getRuleContext(0, CreateConversionStmtContext);
     }
-    public createdomainstmt(): CreatedomainstmtContext | null {
-        return this.getRuleContext(0, CreatedomainstmtContext);
+    public createDomainStmt(): CreateDomainStmtContext | null {
+        return this.getRuleContext(0, CreateDomainStmtContext);
     }
-    public createextensionstmt(): CreateextensionstmtContext | null {
-        return this.getRuleContext(0, CreateextensionstmtContext);
+    public createExtensionStmt(): CreateExtensionStmtContext | null {
+        return this.getRuleContext(0, CreateExtensionStmtContext);
     }
-    public createfdwstmt(): CreatefdwstmtContext | null {
-        return this.getRuleContext(0, CreatefdwstmtContext);
+    public createFdwStmt(): CreateFdwStmtContext | null {
+        return this.getRuleContext(0, CreateFdwStmtContext);
     }
-    public createforeignserverstmt(): CreateforeignserverstmtContext | null {
-        return this.getRuleContext(0, CreateforeignserverstmtContext);
+    public createForeignServerStmt(): CreateForeignServerStmtContext | null {
+        return this.getRuleContext(0, CreateForeignServerStmtContext);
     }
-    public createforeigntablestmt(): CreateforeigntablestmtContext | null {
-        return this.getRuleContext(0, CreateforeigntablestmtContext);
+    public createForeignTableStmt(): CreateForeignTableStmtContext | null {
+        return this.getRuleContext(0, CreateForeignTableStmtContext);
     }
-    public createfunctionstmt(): CreatefunctionstmtContext | null {
-        return this.getRuleContext(0, CreatefunctionstmtContext);
+    public createFunctionStmt(): CreateFunctionStmtContext | null {
+        return this.getRuleContext(0, CreateFunctionStmtContext);
     }
-    public creategroupstmt(): CreategroupstmtContext | null {
-        return this.getRuleContext(0, CreategroupstmtContext);
+    public createGroupStmt(): CreateGroupStmtContext | null {
+        return this.getRuleContext(0, CreateGroupStmtContext);
     }
-    public creatematviewstmt(): CreatematviewstmtContext | null {
-        return this.getRuleContext(0, CreatematviewstmtContext);
+    public createMaterializedViewStmt(): CreateMaterializedViewStmtContext | null {
+        return this.getRuleContext(0, CreateMaterializedViewStmtContext);
     }
-    public createopclassstmt(): CreateopclassstmtContext | null {
-        return this.getRuleContext(0, CreateopclassstmtContext);
+    public createOperatorClassStmt(): CreateOperatorClassStmtContext | null {
+        return this.getRuleContext(0, CreateOperatorClassStmtContext);
     }
-    public createopfamilystmt(): CreateopfamilystmtContext | null {
-        return this.getRuleContext(0, CreateopfamilystmtContext);
+    public createOperatorFamilyStmt(): CreateOperatorFamilyStmtContext | null {
+        return this.getRuleContext(0, CreateOperatorFamilyStmtContext);
     }
-    public createpublicationstmt(): CreatepublicationstmtContext | null {
-        return this.getRuleContext(0, CreatepublicationstmtContext);
+    public createPublicationStmt(): CreatePublicationStmtContext | null {
+        return this.getRuleContext(0, CreatePublicationStmtContext);
     }
-    public alteropfamilystmt(): AlteropfamilystmtContext | null {
-        return this.getRuleContext(0, AlteropfamilystmtContext);
+    public alterOperatorFamilyStmt(): AlterOperatorFamilyStmtContext | null {
+        return this.getRuleContext(0, AlterOperatorFamilyStmtContext);
     }
-    public createpolicystmt(): CreatepolicystmtContext | null {
-        return this.getRuleContext(0, CreatepolicystmtContext);
+    public createPolicyStmt(): CreatePolicyStmtContext | null {
+        return this.getRuleContext(0, CreatePolicyStmtContext);
     }
-    public createplangstmt(): CreateplangstmtContext | null {
-        return this.getRuleContext(0, CreateplangstmtContext);
+    public createProceduralLangStmt(): CreateProceduralLangStmtContext | null {
+        return this.getRuleContext(0, CreateProceduralLangStmtContext);
     }
-    public createschemastmt(): CreateschemastmtContext | null {
-        return this.getRuleContext(0, CreateschemastmtContext);
+    public createSchemaStmt(): CreateSchemaStmtContext | null {
+        return this.getRuleContext(0, CreateSchemaStmtContext);
     }
-    public createseqstmt(): CreateseqstmtContext | null {
-        return this.getRuleContext(0, CreateseqstmtContext);
+    public createSeqStmt(): CreateSeqStmtContext | null {
+        return this.getRuleContext(0, CreateSeqStmtContext);
     }
-    public createstmt(): CreatestmtContext | null {
-        return this.getRuleContext(0, CreatestmtContext);
+    public createStmt(): CreateStmtContext | null {
+        return this.getRuleContext(0, CreateStmtContext);
     }
-    public createsubscriptionstmt(): CreatesubscriptionstmtContext | null {
-        return this.getRuleContext(0, CreatesubscriptionstmtContext);
+    public createSubscriptionStmt(): CreateSubscriptionStmtContext | null {
+        return this.getRuleContext(0, CreateSubscriptionStmtContext);
     }
-    public createstatsstmt(): CreatestatsstmtContext | null {
-        return this.getRuleContext(0, CreatestatsstmtContext);
+    public createStatsStmt(): CreateStatsStmtContext | null {
+        return this.getRuleContext(0, CreateStatsStmtContext);
     }
-    public createtablespacestmt(): CreatetablespacestmtContext | null {
-        return this.getRuleContext(0, CreatetablespacestmtContext);
+    public createTableSpaceStmt(): CreateTableSpaceStmtContext | null {
+        return this.getRuleContext(0, CreateTableSpaceStmtContext);
     }
-    public createtransformstmt(): CreatetransformstmtContext | null {
-        return this.getRuleContext(0, CreatetransformstmtContext);
+    public createTransformStmt(): CreateTransformStmtContext | null {
+        return this.getRuleContext(0, CreateTransformStmtContext);
     }
-    public createtrigstmt(): CreatetrigstmtContext | null {
-        return this.getRuleContext(0, CreatetrigstmtContext);
+    public createTrigStmt(): CreateTrigStmtContext | null {
+        return this.getRuleContext(0, CreateTrigStmtContext);
     }
-    public createeventtrigstmt(): CreateeventtrigstmtContext | null {
-        return this.getRuleContext(0, CreateeventtrigstmtContext);
+    public createEventTrigStmt(): CreateEventTrigStmtContext | null {
+        return this.getRuleContext(0, CreateEventTrigStmtContext);
     }
-    public createrolestmt(): CreaterolestmtContext | null {
-        return this.getRuleContext(0, CreaterolestmtContext);
+    public createRoleStmt(): CreateRoleStmtContext | null {
+        return this.getRuleContext(0, CreateRoleStmtContext);
     }
-    public createuserstmt(): CreateuserstmtContext | null {
-        return this.getRuleContext(0, CreateuserstmtContext);
+    public createUserStmt(): CreateUserStmtContext | null {
+        return this.getRuleContext(0, CreateUserStmtContext);
     }
-    public createusermappingstmt(): CreateusermappingstmtContext | null {
-        return this.getRuleContext(0, CreateusermappingstmtContext);
+    public createUserMappingStmt(): CreateUserMappingStmtContext | null {
+        return this.getRuleContext(0, CreateUserMappingStmtContext);
     }
-    public createdbstmt(): CreatedbstmtContext | null {
-        return this.getRuleContext(0, CreatedbstmtContext);
+    public createDbStmt(): CreateDbStmtContext | null {
+        return this.getRuleContext(0, CreateDbStmtContext);
     }
-    public deallocatestmt(): DeallocatestmtContext | null {
-        return this.getRuleContext(0, DeallocatestmtContext);
+    public dealLocateStmt(): DealLocateStmtContext | null {
+        return this.getRuleContext(0, DealLocateStmtContext);
     }
-    public declarecursorstmt(): DeclarecursorstmtContext | null {
-        return this.getRuleContext(0, DeclarecursorstmtContext);
+    public declareCursorStmt(): DeclareCursorStmtContext | null {
+        return this.getRuleContext(0, DeclareCursorStmtContext);
     }
-    public definestmt(): DefinestmtContext | null {
-        return this.getRuleContext(0, DefinestmtContext);
+    public defineStmt(): DefineStmtContext | null {
+        return this.getRuleContext(0, DefineStmtContext);
     }
-    public deletestmt(): DeletestmtContext | null {
-        return this.getRuleContext(0, DeletestmtContext);
+    public deleteStmt(): DeleteStmtContext | null {
+        return this.getRuleContext(0, DeleteStmtContext);
     }
-    public discardstmt(): DiscardstmtContext | null {
-        return this.getRuleContext(0, DiscardstmtContext);
+    public discardStmt(): DiscardStmtContext | null {
+        return this.getRuleContext(0, DiscardStmtContext);
     }
-    public dostmt(): DostmtContext | null {
-        return this.getRuleContext(0, DostmtContext);
+    public doStmt(): DoStmtContext | null {
+        return this.getRuleContext(0, DoStmtContext);
     }
-    public dropstmt(): DropstmtContext | null {
-        return this.getRuleContext(0, DropstmtContext);
+    public dropStmt(): DropStmtContext | null {
+        return this.getRuleContext(0, DropStmtContext);
     }
-    public executestmt(): ExecutestmtContext | null {
-        return this.getRuleContext(0, ExecutestmtContext);
+    public executeStmt(): ExecuteStmtContext | null {
+        return this.getRuleContext(0, ExecuteStmtContext);
     }
-    public explainstmt(): ExplainstmtContext | null {
-        return this.getRuleContext(0, ExplainstmtContext);
+    public explainStmt(): ExplainStmtContext | null {
+        return this.getRuleContext(0, ExplainStmtContext);
     }
-    public fetchstmt(): FetchstmtContext | null {
-        return this.getRuleContext(0, FetchstmtContext);
+    public fetchStmt(): FetchStmtContext | null {
+        return this.getRuleContext(0, FetchStmtContext);
     }
-    public grantstmt(): GrantstmtContext | null {
-        return this.getRuleContext(0, GrantstmtContext);
+    public grantStmt(): GrantStmtContext | null {
+        return this.getRuleContext(0, GrantStmtContext);
     }
-    public grantrolestmt(): GrantrolestmtContext | null {
-        return this.getRuleContext(0, GrantrolestmtContext);
+    public grantRoleStmt(): GrantRoleStmtContext | null {
+        return this.getRuleContext(0, GrantRoleStmtContext);
     }
-    public mergestmt(): MergestmtContext | null {
-        return this.getRuleContext(0, MergestmtContext);
+    public mergeStmt(): MergeStmtContext | null {
+        return this.getRuleContext(0, MergeStmtContext);
     }
-    public importforeignschemastmt(): ImportforeignschemastmtContext | null {
-        return this.getRuleContext(0, ImportforeignschemastmtContext);
+    public importForeignSchemaStmt(): ImportForeignSchemaStmtContext | null {
+        return this.getRuleContext(0, ImportForeignSchemaStmtContext);
     }
-    public indexstmt(): IndexstmtContext | null {
-        return this.getRuleContext(0, IndexstmtContext);
+    public indexStmt(): IndexStmtContext | null {
+        return this.getRuleContext(0, IndexStmtContext);
     }
-    public insertstmt(): InsertstmtContext | null {
-        return this.getRuleContext(0, InsertstmtContext);
+    public insertStmt(): InsertStmtContext | null {
+        return this.getRuleContext(0, InsertStmtContext);
     }
-    public listenstmt(): ListenstmtContext | null {
-        return this.getRuleContext(0, ListenstmtContext);
+    public listenStmt(): ListenStmtContext | null {
+        return this.getRuleContext(0, ListenStmtContext);
     }
-    public refreshmatviewstmt(): RefreshmatviewstmtContext | null {
-        return this.getRuleContext(0, RefreshmatviewstmtContext);
+    public refreshMaterializedViewStmt(): RefreshMaterializedViewStmtContext | null {
+        return this.getRuleContext(0, RefreshMaterializedViewStmtContext);
     }
-    public loadstmt(): LoadstmtContext | null {
-        return this.getRuleContext(0, LoadstmtContext);
+    public loadStmt(): LoadStmtContext | null {
+        return this.getRuleContext(0, LoadStmtContext);
     }
-    public lockstmt(): LockstmtContext | null {
-        return this.getRuleContext(0, LockstmtContext);
+    public lockStmt(): LockStmtContext | null {
+        return this.getRuleContext(0, LockStmtContext);
     }
-    public notifystmt(): NotifystmtContext | null {
-        return this.getRuleContext(0, NotifystmtContext);
+    public notifyStmt(): NotifyStmtContext | null {
+        return this.getRuleContext(0, NotifyStmtContext);
     }
-    public preparestmt(): PreparestmtContext | null {
-        return this.getRuleContext(0, PreparestmtContext);
+    public prepareStmt(): PrepareStmtContext | null {
+        return this.getRuleContext(0, PrepareStmtContext);
     }
-    public reassignownedstmt(): ReassignownedstmtContext | null {
-        return this.getRuleContext(0, ReassignownedstmtContext);
+    public reassignOwnedStmt(): ReassignOwnedStmtContext | null {
+        return this.getRuleContext(0, ReassignOwnedStmtContext);
     }
-    public reindexstmt(): ReindexstmtContext | null {
-        return this.getRuleContext(0, ReindexstmtContext);
+    public reindexStmt(): ReindexStmtContext | null {
+        return this.getRuleContext(0, ReindexStmtContext);
     }
-    public removeaggrstmt(): RemoveaggrstmtContext | null {
-        return this.getRuleContext(0, RemoveaggrstmtContext);
+    public removeAggregateStmt(): RemoveAggregateStmtContext | null {
+        return this.getRuleContext(0, RemoveAggregateStmtContext);
     }
-    public removefuncstmt(): RemovefuncstmtContext | null {
-        return this.getRuleContext(0, RemovefuncstmtContext);
+    public removeFuncStmt(): RemoveFuncStmtContext | null {
+        return this.getRuleContext(0, RemoveFuncStmtContext);
     }
-    public removeoperstmt(): RemoveoperstmtContext | null {
-        return this.getRuleContext(0, RemoveoperstmtContext);
+    public removeOperatorStmt(): RemoveOperatorStmtContext | null {
+        return this.getRuleContext(0, RemoveOperatorStmtContext);
     }
-    public renamestmt(): RenamestmtContext | null {
-        return this.getRuleContext(0, RenamestmtContext);
+    public renameStmt(): RenameStmtContext | null {
+        return this.getRuleContext(0, RenameStmtContext);
     }
-    public revokestmt(): RevokestmtContext | null {
-        return this.getRuleContext(0, RevokestmtContext);
+    public revokeStmt(): RevokeStmtContext | null {
+        return this.getRuleContext(0, RevokeStmtContext);
     }
-    public revokerolestmt(): RevokerolestmtContext | null {
-        return this.getRuleContext(0, RevokerolestmtContext);
+    public revokeRoleStmt(): RevokeRoleStmtContext | null {
+        return this.getRuleContext(0, RevokeRoleStmtContext);
     }
-    public rulestmt(): RulestmtContext | null {
-        return this.getRuleContext(0, RulestmtContext);
+    public ruleStmt(): RuleStmtContext | null {
+        return this.getRuleContext(0, RuleStmtContext);
     }
-    public seclabelstmt(): SeclabelstmtContext | null {
-        return this.getRuleContext(0, SeclabelstmtContext);
+    public secLabelStmt(): SecLabelStmtContext | null {
+        return this.getRuleContext(0, SecLabelStmtContext);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
-    public transactionstmt(): TransactionstmtContext | null {
-        return this.getRuleContext(0, TransactionstmtContext);
+    public transactionStmt(): TransactionStmtContext | null {
+        return this.getRuleContext(0, TransactionStmtContext);
     }
-    public truncatestmt(): TruncatestmtContext | null {
-        return this.getRuleContext(0, TruncatestmtContext);
+    public truncateStmt(): TruncateStmtContext | null {
+        return this.getRuleContext(0, TruncateStmtContext);
     }
-    public unlistenstmt(): UnlistenstmtContext | null {
-        return this.getRuleContext(0, UnlistenstmtContext);
+    public unListenStmt(): UnListenStmtContext | null {
+        return this.getRuleContext(0, UnListenStmtContext);
     }
-    public updatestmt(): UpdatestmtContext | null {
-        return this.getRuleContext(0, UpdatestmtContext);
+    public updateStmt(): UpdateStmtContext | null {
+        return this.getRuleContext(0, UpdateStmtContext);
     }
-    public vacuumstmt(): VacuumstmtContext | null {
-        return this.getRuleContext(0, VacuumstmtContext);
+    public vacuumStmt(): VacuumStmtContext | null {
+        return this.getRuleContext(0, VacuumStmtContext);
     }
-    public variableresetstmt(): VariableresetstmtContext | null {
-        return this.getRuleContext(0, VariableresetstmtContext);
+    public variableResetStmt(): VariableResetStmtContext | null {
+        return this.getRuleContext(0, VariableResetStmtContext);
     }
-    public variablesetstmt(): VariablesetstmtContext | null {
-        return this.getRuleContext(0, VariablesetstmtContext);
+    public variableSetStmt(): VariableSetStmtContext | null {
+        return this.getRuleContext(0, VariableSetStmtContext);
     }
-    public variableshowstmt(): VariableshowstmtContext | null {
-        return this.getRuleContext(0, VariableshowstmtContext);
+    public variableShowStmt(): VariableShowStmtContext | null {
+        return this.getRuleContext(0, VariableShowStmtContext);
     }
-    public viewstmt(): ViewstmtContext | null {
-        return this.getRuleContext(0, ViewstmtContext);
+    public viewStmt(): ViewStmtContext | null {
+        return this.getRuleContext(0, ViewStmtContext);
     }
     public MetaCommand(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.MetaCommand, 0);
@@ -58642,7 +58642,7 @@ export class StmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CallstmtContext extends antlr.ParserRuleContext {
+export class CallStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -58653,21 +58653,21 @@ export class CallstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Func_applicationContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_callstmt;
+        return PostgreSqlParser.RULE_callStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCallstmt) {
-             listener.enterCallstmt(this);
+        if(listener.enterCallStmt) {
+             listener.enterCallStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCallstmt) {
-             listener.exitCallstmt(this);
+        if(listener.exitCallStmt) {
+             listener.exitCallStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCallstmt) {
-            return visitor.visitCallstmt(this);
+        if (visitor.visitCallStmt) {
+            return visitor.visitCallStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -58675,7 +58675,7 @@ export class CallstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreaterolestmtContext extends antlr.ParserRuleContext {
+export class CreateRoleStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -58685,37 +58685,37 @@ export class CreaterolestmtContext extends antlr.ParserRuleContext {
     public KW_ROLE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_ROLE, 0)!;
     }
-    public rolespec(): RolespecContext {
-        return this.getRuleContext(0, RolespecContext)!;
+    public roleSpec(): RoleSpecContext {
+        return this.getRuleContext(0, RoleSpecContext)!;
     }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public createoptroleelem(): CreateoptroleelemContext[];
-    public createoptroleelem(i: number): CreateoptroleelemContext | null;
-    public createoptroleelem(i?: number): CreateoptroleelemContext[] | CreateoptroleelemContext | null {
+    public createOperatorRoleElem(): CreateOperatorRoleElemContext[];
+    public createOperatorRoleElem(i: number): CreateOperatorRoleElemContext | null;
+    public createOperatorRoleElem(i?: number): CreateOperatorRoleElemContext[] | CreateOperatorRoleElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(CreateoptroleelemContext);
+            return this.getRuleContexts(CreateOperatorRoleElemContext);
         }
 
-        return this.getRuleContext(i, CreateoptroleelemContext);
+        return this.getRuleContext(i, CreateOperatorRoleElemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createrolestmt;
+        return PostgreSqlParser.RULE_createRoleStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreaterolestmt) {
-             listener.enterCreaterolestmt(this);
+        if(listener.enterCreateRoleStmt) {
+             listener.enterCreateRoleStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreaterolestmt) {
-             listener.exitCreaterolestmt(this);
+        if(listener.exitCreateRoleStmt) {
+             listener.exitCreateRoleStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreaterolestmt) {
-            return visitor.visitCreaterolestmt(this);
+        if (visitor.visitCreateRoleStmt) {
+            return visitor.visitCreateRoleStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -58723,15 +58723,15 @@ export class CreaterolestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlteroptroleelemContext extends antlr.ParserRuleContext {
+export class AlterOperatorRoleElemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_PASSWORD(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PASSWORD, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_NULL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NULL, 0);
@@ -58796,8 +58796,8 @@ export class AlteroptroleelemContext extends antlr.ParserRuleContext {
     public KW_LIMIT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_LIMIT, 0);
     }
-    public signediconst(): SignediconstContext | null {
-        return this.getRuleContext(0, SignediconstContext);
+    public signedConst(): SignedConstContext | null {
+        return this.getRuleContext(0, SignedConstContext);
     }
     public KW_VALID(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_VALID, 0);
@@ -58830,21 +58830,21 @@ export class AlteroptroleelemContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, IdentifierContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alteroptroleelem;
+        return PostgreSqlParser.RULE_alterOperatorRoleElem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlteroptroleelem) {
-             listener.enterAlteroptroleelem(this);
+        if(listener.enterAlterOperatorRoleElem) {
+             listener.enterAlterOperatorRoleElem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlteroptroleelem) {
-             listener.exitAlteroptroleelem(this);
+        if(listener.exitAlterOperatorRoleElem) {
+             listener.exitAlterOperatorRoleElem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlteroptroleelem) {
-            return visitor.visitAlteroptroleelem(this);
+        if (visitor.visitAlterOperatorRoleElem) {
+            return visitor.visitAlterOperatorRoleElem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -58852,12 +58852,12 @@ export class AlteroptroleelemContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateoptroleelemContext extends antlr.ParserRuleContext {
+export class CreateOperatorRoleElemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public alteroptroleelem(): AlteroptroleelemContext | null {
-        return this.getRuleContext(0, AlteroptroleelemContext);
+    public alterOperatorRoleElem(): AlterOperatorRoleElemContext | null {
+        return this.getRuleContext(0, AlterOperatorRoleElemContext);
     }
     public KW_SYSID(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SYSID, 0);
@@ -58881,21 +58881,21 @@ export class CreateoptroleelemContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_GROUP, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createoptroleelem;
+        return PostgreSqlParser.RULE_createOperatorRoleElem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateoptroleelem) {
-             listener.enterCreateoptroleelem(this);
+        if(listener.enterCreateOperatorRoleElem) {
+             listener.enterCreateOperatorRoleElem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateoptroleelem) {
-             listener.exitCreateoptroleelem(this);
+        if(listener.exitCreateOperatorRoleElem) {
+             listener.exitCreateOperatorRoleElem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateoptroleelem) {
-            return visitor.visitCreateoptroleelem(this);
+        if (visitor.visitCreateOperatorRoleElem) {
+            return visitor.visitCreateOperatorRoleElem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -58903,7 +58903,7 @@ export class CreateoptroleelemContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateuserstmtContext extends antlr.ParserRuleContext {
+export class CreateUserStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -58913,37 +58913,37 @@ export class CreateuserstmtContext extends antlr.ParserRuleContext {
     public KW_USER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_USER, 0)!;
     }
-    public rolespec(): RolespecContext {
-        return this.getRuleContext(0, RolespecContext)!;
+    public roleSpec(): RoleSpecContext {
+        return this.getRuleContext(0, RoleSpecContext)!;
     }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public createoptroleelem(): CreateoptroleelemContext[];
-    public createoptroleelem(i: number): CreateoptroleelemContext | null;
-    public createoptroleelem(i?: number): CreateoptroleelemContext[] | CreateoptroleelemContext | null {
+    public createOperatorRoleElem(): CreateOperatorRoleElemContext[];
+    public createOperatorRoleElem(i: number): CreateOperatorRoleElemContext | null;
+    public createOperatorRoleElem(i?: number): CreateOperatorRoleElemContext[] | CreateOperatorRoleElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(CreateoptroleelemContext);
+            return this.getRuleContexts(CreateOperatorRoleElemContext);
         }
 
-        return this.getRuleContext(i, CreateoptroleelemContext);
+        return this.getRuleContext(i, CreateOperatorRoleElemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createuserstmt;
+        return PostgreSqlParser.RULE_createUserStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateuserstmt) {
-             listener.enterCreateuserstmt(this);
+        if(listener.enterCreateUserStmt) {
+             listener.enterCreateUserStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateuserstmt) {
-             listener.exitCreateuserstmt(this);
+        if(listener.exitCreateUserStmt) {
+             listener.exitCreateUserStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateuserstmt) {
-            return visitor.visitCreateuserstmt(this);
+        if (visitor.visitCreateUserStmt) {
+            return visitor.visitCreateUserStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -58951,15 +58951,15 @@ export class CreateuserstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterrolestmtContext extends antlr.ParserRuleContext {
+export class AlterRoleStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_ALTER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_ALTER, 0)!;
     }
-    public rolespec(): RolespecContext {
-        return this.getRuleContext(0, RolespecContext)!;
+    public roleSpec(): RoleSpecContext {
+        return this.getRuleContext(0, RoleSpecContext)!;
     }
     public KW_ROLE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROLE, 0);
@@ -58970,31 +58970,31 @@ export class AlterrolestmtContext extends antlr.ParserRuleContext {
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public alteroptroleelem(): AlteroptroleelemContext[];
-    public alteroptroleelem(i: number): AlteroptroleelemContext | null;
-    public alteroptroleelem(i?: number): AlteroptroleelemContext[] | AlteroptroleelemContext | null {
+    public alterOperatorRoleElem(): AlterOperatorRoleElemContext[];
+    public alterOperatorRoleElem(i: number): AlterOperatorRoleElemContext | null;
+    public alterOperatorRoleElem(i?: number): AlterOperatorRoleElemContext[] | AlterOperatorRoleElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(AlteroptroleelemContext);
+            return this.getRuleContexts(AlterOperatorRoleElemContext);
         }
 
-        return this.getRuleContext(i, AlteroptroleelemContext);
+        return this.getRuleContext(i, AlterOperatorRoleElemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterrolestmt;
+        return PostgreSqlParser.RULE_alterRoleStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterrolestmt) {
-             listener.enterAlterrolestmt(this);
+        if(listener.enterAlterRoleStmt) {
+             listener.enterAlterRoleStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterrolestmt) {
-             listener.exitAlterrolestmt(this);
+        if(listener.exitAlterRoleStmt) {
+             listener.exitAlterRoleStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterrolestmt) {
-            return visitor.visitAlterrolestmt(this);
+        if (visitor.visitAlterRoleStmt) {
+            return visitor.visitAlterRoleStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59002,7 +59002,7 @@ export class AlterrolestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterrolesetstmtContext extends antlr.ParserRuleContext {
+export class AlterRoleSetStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -59018,8 +59018,8 @@ export class AlterrolesetstmtContext extends antlr.ParserRuleContext {
     public database_name(): Database_nameContext {
         return this.getRuleContext(0, Database_nameContext)!;
     }
-    public setresetclause(): SetresetclauseContext {
-        return this.getRuleContext(0, SetresetclauseContext)!;
+    public setOrResetClause(): SetOrResetClauseContext {
+        return this.getRuleContext(0, SetOrResetClauseContext)!;
     }
     public KW_ROLE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROLE, 0);
@@ -59030,25 +59030,25 @@ export class AlterrolesetstmtContext extends antlr.ParserRuleContext {
     public KW_ALL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ALL, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterrolesetstmt;
+        return PostgreSqlParser.RULE_alterRoleSetStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterrolesetstmt) {
-             listener.enterAlterrolesetstmt(this);
+        if(listener.enterAlterRoleSetStmt) {
+             listener.enterAlterRoleSetStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterrolesetstmt) {
-             listener.exitAlterrolesetstmt(this);
+        if(listener.exitAlterRoleSetStmt) {
+             listener.exitAlterRoleSetStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterrolesetstmt) {
-            return visitor.visitAlterrolesetstmt(this);
+        if (visitor.visitAlterRoleSetStmt) {
+            return visitor.visitAlterRoleSetStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59056,7 +59056,7 @@ export class AlterrolesetstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterroutinestmtContext extends antlr.ParserRuleContext {
+export class AlterRoutineStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -59069,28 +59069,28 @@ export class AlterroutinestmtContext extends antlr.ParserRuleContext {
     public routine_name(): Routine_nameContext {
         return this.getRuleContext(0, Routine_nameContext)!;
     }
-    public alter_routine_cluase(): Alter_routine_cluaseContext {
-        return this.getRuleContext(0, Alter_routine_cluaseContext)!;
+    public alter_routine_clause(): Alter_routine_clauseContext {
+        return this.getRuleContext(0, Alter_routine_clauseContext)!;
     }
     public func_args(): Func_argsContext | null {
         return this.getRuleContext(0, Func_argsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterroutinestmt;
+        return PostgreSqlParser.RULE_alterRoutineStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterroutinestmt) {
-             listener.enterAlterroutinestmt(this);
+        if(listener.enterAlterRoutineStmt) {
+             listener.enterAlterRoutineStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterroutinestmt) {
-             listener.exitAlterroutinestmt(this);
+        if(listener.exitAlterRoutineStmt) {
+             listener.exitAlterRoutineStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterroutinestmt) {
-            return visitor.visitAlterroutinestmt(this);
+        if (visitor.visitAlterRoutineStmt) {
+            return visitor.visitAlterRoutineStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59098,7 +59098,7 @@ export class AlterroutinestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class Alter_routine_cluaseContext extends antlr.ParserRuleContext {
+export class Alter_routine_clauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -59126,8 +59126,8 @@ export class Alter_routine_cluaseContext extends antlr.ParserRuleContext {
     public KW_OWNER(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OWNER, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public KW_SET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SET, 0);
@@ -59147,28 +59147,28 @@ export class Alter_routine_cluaseContext extends antlr.ParserRuleContext {
     public KW_EXTENSION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_EXTENSION, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_NO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NO, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alter_routine_cluase;
+        return PostgreSqlParser.RULE_alter_routine_clause;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlter_routine_cluase) {
-             listener.enterAlter_routine_cluase(this);
+        if(listener.enterAlter_routine_clause) {
+             listener.enterAlter_routine_clause(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlter_routine_cluase) {
-             listener.exitAlter_routine_cluase(this);
+        if(listener.exitAlter_routine_clause) {
+             listener.exitAlter_routine_clause(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlter_routine_cluase) {
-            return visitor.visitAlter_routine_cluase(this);
+        if (visitor.visitAlter_routine_clause) {
+            return visitor.visitAlter_routine_clause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59222,20 +59222,20 @@ export class Routine_actionContext extends antlr.ParserRuleContext {
     public KW_COST(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_COST, 0);
     }
-    public collabel(): CollabelContext | null {
-        return this.getRuleContext(0, CollabelContext);
+    public colLabel(): ColLabelContext | null {
+        return this.getRuleContext(0, ColLabelContext);
     }
     public KW_ROWS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROWS, 0);
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_SET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SET, 0);
@@ -59284,7 +59284,7 @@ export class Routine_actionContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreategroupstmtContext extends antlr.ParserRuleContext {
+export class CreateGroupStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -59294,37 +59294,37 @@ export class CreategroupstmtContext extends antlr.ParserRuleContext {
     public KW_GROUP(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_GROUP, 0)!;
     }
-    public rolespec(): RolespecContext {
-        return this.getRuleContext(0, RolespecContext)!;
+    public roleSpec(): RoleSpecContext {
+        return this.getRuleContext(0, RoleSpecContext)!;
     }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public createoptroleelem(): CreateoptroleelemContext[];
-    public createoptroleelem(i: number): CreateoptroleelemContext | null;
-    public createoptroleelem(i?: number): CreateoptroleelemContext[] | CreateoptroleelemContext | null {
+    public createOperatorRoleElem(): CreateOperatorRoleElemContext[];
+    public createOperatorRoleElem(i: number): CreateOperatorRoleElemContext | null;
+    public createOperatorRoleElem(i?: number): CreateOperatorRoleElemContext[] | CreateOperatorRoleElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(CreateoptroleelemContext);
+            return this.getRuleContexts(CreateOperatorRoleElemContext);
         }
 
-        return this.getRuleContext(i, CreateoptroleelemContext);
+        return this.getRuleContext(i, CreateOperatorRoleElemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_creategroupstmt;
+        return PostgreSqlParser.RULE_createGroupStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreategroupstmt) {
-             listener.enterCreategroupstmt(this);
+        if(listener.enterCreateGroupStmt) {
+             listener.enterCreateGroupStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreategroupstmt) {
-             listener.exitCreategroupstmt(this);
+        if(listener.exitCreateGroupStmt) {
+             listener.exitCreateGroupStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreategroupstmt) {
-            return visitor.visitCreategroupstmt(this);
+        if (visitor.visitCreateGroupStmt) {
+            return visitor.visitCreateGroupStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59332,7 +59332,7 @@ export class CreategroupstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltergroupstmtContext extends antlr.ParserRuleContext {
+export class AlterGroupStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -59342,8 +59342,8 @@ export class AltergroupstmtContext extends antlr.ParserRuleContext {
     public KW_GROUP(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_GROUP, 0)!;
     }
-    public rolespec(): RolespecContext {
-        return this.getRuleContext(0, RolespecContext)!;
+    public roleSpec(): RoleSpecContext {
+        return this.getRuleContext(0, RoleSpecContext)!;
     }
     public KW_USER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_USER, 0)!;
@@ -59358,21 +59358,21 @@ export class AltergroupstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_DROP, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altergroupstmt;
+        return PostgreSqlParser.RULE_alterGroupStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltergroupstmt) {
-             listener.enterAltergroupstmt(this);
+        if(listener.enterAlterGroupStmt) {
+             listener.enterAlterGroupStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltergroupstmt) {
-             listener.exitAltergroupstmt(this);
+        if(listener.exitAlterGroupStmt) {
+             listener.exitAlterGroupStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltergroupstmt) {
-            return visitor.visitAltergroupstmt(this);
+        if (visitor.visitAlterGroupStmt) {
+            return visitor.visitAlterGroupStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59380,7 +59380,7 @@ export class AltergroupstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateschemastmtContext extends antlr.ParserRuleContext {
+export class CreateSchemaStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -59393,8 +59393,8 @@ export class CreateschemastmtContext extends antlr.ParserRuleContext {
     public KW_AUTHORIZATION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AUTHORIZATION, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public schema_name_create(): Schema_name_createContext | null {
         return this.getRuleContext(0, Schema_name_createContext);
@@ -59412,21 +59412,21 @@ export class CreateschemastmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, Schema_stmtContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createschemastmt;
+        return PostgreSqlParser.RULE_createSchemaStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateschemastmt) {
-             listener.enterCreateschemastmt(this);
+        if(listener.enterCreateSchemaStmt) {
+             listener.enterCreateSchemaStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateschemastmt) {
-             listener.exitCreateschemastmt(this);
+        if(listener.exitCreateSchemaStmt) {
+             listener.exitCreateSchemaStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateschemastmt) {
-            return visitor.visitCreateschemastmt(this);
+        if (visitor.visitCreateSchemaStmt) {
+            return visitor.visitCreateSchemaStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59477,23 +59477,23 @@ export class Schema_stmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public createstmt(): CreatestmtContext | null {
-        return this.getRuleContext(0, CreatestmtContext);
+    public createStmt(): CreateStmtContext | null {
+        return this.getRuleContext(0, CreateStmtContext);
     }
-    public indexstmt(): IndexstmtContext | null {
-        return this.getRuleContext(0, IndexstmtContext);
+    public indexStmt(): IndexStmtContext | null {
+        return this.getRuleContext(0, IndexStmtContext);
     }
-    public createseqstmt(): CreateseqstmtContext | null {
-        return this.getRuleContext(0, CreateseqstmtContext);
+    public createSeqStmt(): CreateSeqStmtContext | null {
+        return this.getRuleContext(0, CreateSeqStmtContext);
     }
-    public createtrigstmt(): CreatetrigstmtContext | null {
-        return this.getRuleContext(0, CreatetrigstmtContext);
+    public createTrigStmt(): CreateTrigStmtContext | null {
+        return this.getRuleContext(0, CreateTrigStmtContext);
     }
-    public grantstmt(): GrantstmtContext | null {
-        return this.getRuleContext(0, GrantstmtContext);
+    public grantStmt(): GrantStmtContext | null {
+        return this.getRuleContext(0, GrantStmtContext);
     }
-    public viewstmt(): ViewstmtContext | null {
-        return this.getRuleContext(0, ViewstmtContext);
+    public viewStmt(): ViewStmtContext | null {
+        return this.getRuleContext(0, ViewStmtContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_schema_stmt;
@@ -59518,7 +59518,7 @@ export class Schema_stmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class VariablesetstmtContext extends antlr.ParserRuleContext {
+export class VariableSetStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -59535,21 +59535,21 @@ export class VariablesetstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_SESSION, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_variablesetstmt;
+        return PostgreSqlParser.RULE_variableSetStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterVariablesetstmt) {
-             listener.enterVariablesetstmt(this);
+        if(listener.enterVariableSetStmt) {
+             listener.enterVariableSetStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitVariablesetstmt) {
-             listener.exitVariablesetstmt(this);
+        if(listener.exitVariableSetStmt) {
+             listener.exitVariableSetStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitVariablesetstmt) {
-            return visitor.visitVariablesetstmt(this);
+        if (visitor.visitVariableSetStmt) {
+            return visitor.visitVariableSetStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59663,8 +59663,8 @@ export class Set_rest_moreContext extends antlr.ParserRuleContext {
     public KW_CATALOG(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CATALOG, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_SCHEMA(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SCHEMA, 0);
@@ -59681,8 +59681,8 @@ export class Set_rest_moreContext extends antlr.ParserRuleContext {
     public KW_ROLE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROLE, 0);
     }
-    public nonreservedword_or_sconst(): Nonreservedword_or_sconstContext | null {
-        return this.getRuleContext(0, Nonreservedword_or_sconstContext);
+    public nonReservedWordOrStringConst(): NonReservedWordOrStringConstContext | null {
+        return this.getRuleContext(0, NonReservedWordOrStringConstContext);
     }
     public KW_SESSION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SESSION, 0);
@@ -59744,14 +59744,14 @@ export class Var_nameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public DOT(): antlr.TerminalNode[];
     public DOT(i: number): antlr.TerminalNode | null;
@@ -59837,8 +59837,8 @@ export class Var_valueContext extends antlr.ParserRuleContext {
     public opt_boolean_or_string(): Opt_boolean_or_stringContext | null {
         return this.getRuleContext(0, Opt_boolean_or_stringContext);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_var_value;
@@ -59924,8 +59924,8 @@ export class Opt_boolean_or_string_columnContext extends antlr.ParserRuleContext
     public type_func_name_keyword(): Type_func_name_keywordContext | null {
         return this.getRuleContext(0, Type_func_name_keywordContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_opt_boolean_or_string_column;
@@ -59963,8 +59963,8 @@ export class Opt_boolean_or_stringContext extends antlr.ParserRuleContext {
     public KW_ON(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ON, 0);
     }
-    public nonreservedword_or_sconst(): Nonreservedword_or_sconstContext | null {
-        return this.getRuleContext(0, Nonreservedword_or_sconstContext);
+    public nonReservedWordOrStringConst(): NonReservedWordOrStringConstContext | null {
+        return this.getRuleContext(0, NonReservedWordOrStringConstContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_opt_boolean_or_string;
@@ -59993,8 +59993,8 @@ export class Zone_valueContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_DEFAULT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DEFAULT, 0);
@@ -60011,8 +60011,8 @@ export class Zone_valueContext extends antlr.ParserRuleContext {
     public opt_float(): Opt_floatContext | null {
         return this.getRuleContext(0, Opt_floatContext);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
     public KW_LOCAL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_LOCAL, 0);
@@ -60040,32 +60040,32 @@ export class Zone_valueContext extends antlr.ParserRuleContext {
 }
 
 
-export class Nonreservedword_or_sconstContext extends antlr.ParserRuleContext {
+export class NonReservedWordOrStringConstContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public nonreservedword(): NonreservedwordContext | null {
-        return this.getRuleContext(0, NonreservedwordContext);
+    public nonReservedWord(): NonReservedWordContext | null {
+        return this.getRuleContext(0, NonReservedWordContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_nonreservedword_or_sconst;
+        return PostgreSqlParser.RULE_nonReservedWordOrStringConst;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterNonreservedword_or_sconst) {
-             listener.enterNonreservedword_or_sconst(this);
+        if(listener.enterNonReservedWordOrStringConst) {
+             listener.enterNonReservedWordOrStringConst(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitNonreservedword_or_sconst) {
-             listener.exitNonreservedword_or_sconst(this);
+        if(listener.exitNonReservedWordOrStringConst) {
+             listener.exitNonReservedWordOrStringConst(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitNonreservedword_or_sconst) {
-            return visitor.visitNonreservedword_or_sconst(this);
+        if (visitor.visitNonReservedWordOrStringConst) {
+            return visitor.visitNonReservedWordOrStringConst(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60073,7 +60073,7 @@ export class Nonreservedword_or_sconstContext extends antlr.ParserRuleContext {
 }
 
 
-export class VariableresetstmtContext extends antlr.ParserRuleContext {
+export class VariableResetStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60084,21 +60084,21 @@ export class VariableresetstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Reset_restContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_variableresetstmt;
+        return PostgreSqlParser.RULE_variableResetStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterVariableresetstmt) {
-             listener.enterVariableresetstmt(this);
+        if(listener.enterVariableResetStmt) {
+             listener.enterVariableResetStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitVariableresetstmt) {
-             listener.exitVariableresetstmt(this);
+        if(listener.exitVariableResetStmt) {
+             listener.exitVariableResetStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitVariableresetstmt) {
-            return visitor.visitVariableresetstmt(this);
+        if (visitor.visitVariableResetStmt) {
+            return visitor.visitVariableResetStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60160,7 +60160,7 @@ export class Reset_restContext extends antlr.ParserRuleContext {
 }
 
 
-export class SetresetclauseContext extends antlr.ParserRuleContext {
+export class SetOrResetClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60170,25 +60170,25 @@ export class SetresetclauseContext extends antlr.ParserRuleContext {
     public set_rest(): Set_restContext | null {
         return this.getRuleContext(0, Set_restContext);
     }
-    public variableresetstmt(): VariableresetstmtContext | null {
-        return this.getRuleContext(0, VariableresetstmtContext);
+    public variableResetStmt(): VariableResetStmtContext | null {
+        return this.getRuleContext(0, VariableResetStmtContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_setresetclause;
+        return PostgreSqlParser.RULE_setOrResetClause;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterSetresetclause) {
-             listener.enterSetresetclause(this);
+        if(listener.enterSetOrResetClause) {
+             listener.enterSetOrResetClause(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitSetresetclause) {
-             listener.exitSetresetclause(this);
+        if(listener.exitSetOrResetClause) {
+             listener.exitSetOrResetClause(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSetresetclause) {
-            return visitor.visitSetresetclause(this);
+        if (visitor.visitSetOrResetClause) {
+            return visitor.visitSetOrResetClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60196,7 +60196,7 @@ export class SetresetclauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class FunctionsetresetclauseContext extends antlr.ParserRuleContext {
+export class FunctionSetOrResetClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60206,25 +60206,25 @@ export class FunctionsetresetclauseContext extends antlr.ParserRuleContext {
     public set_rest_more(): Set_rest_moreContext | null {
         return this.getRuleContext(0, Set_rest_moreContext);
     }
-    public variableresetstmt(): VariableresetstmtContext | null {
-        return this.getRuleContext(0, VariableresetstmtContext);
+    public variableResetStmt(): VariableResetStmtContext | null {
+        return this.getRuleContext(0, VariableResetStmtContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_functionsetresetclause;
+        return PostgreSqlParser.RULE_functionSetOrResetClause;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterFunctionsetresetclause) {
-             listener.enterFunctionsetresetclause(this);
+        if(listener.enterFunctionSetOrResetClause) {
+             listener.enterFunctionSetOrResetClause(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitFunctionsetresetclause) {
-             listener.exitFunctionsetresetclause(this);
+        if(listener.exitFunctionSetOrResetClause) {
+             listener.exitFunctionSetOrResetClause(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitFunctionsetresetclause) {
-            return visitor.visitFunctionsetresetclause(this);
+        if (visitor.visitFunctionSetOrResetClause) {
+            return visitor.visitFunctionSetOrResetClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60232,7 +60232,7 @@ export class FunctionsetresetclauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class VariableshowstmtContext extends antlr.ParserRuleContext {
+export class VariableShowStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60267,21 +60267,21 @@ export class VariableshowstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_ALL, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_variableshowstmt;
+        return PostgreSqlParser.RULE_variableShowStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterVariableshowstmt) {
-             listener.enterVariableshowstmt(this);
+        if(listener.enterVariableShowStmt) {
+             listener.enterVariableShowStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitVariableshowstmt) {
-             listener.exitVariableshowstmt(this);
+        if(listener.exitVariableShowStmt) {
+             listener.exitVariableShowStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitVariableshowstmt) {
-            return visitor.visitVariableshowstmt(this);
+        if (visitor.visitVariableShowStmt) {
+            return visitor.visitVariableShowStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60289,7 +60289,7 @@ export class VariableshowstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class ConstraintssetstmtContext extends antlr.ParserRuleContext {
+export class ConstraintsSetStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60312,21 +60312,21 @@ export class ConstraintssetstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Qualified_name_listContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_constraintssetstmt;
+        return PostgreSqlParser.RULE_constraintsSetStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterConstraintssetstmt) {
-             listener.enterConstraintssetstmt(this);
+        if(listener.enterConstraintsSetStmt) {
+             listener.enterConstraintsSetStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitConstraintssetstmt) {
-             listener.exitConstraintssetstmt(this);
+        if(listener.exitConstraintsSetStmt) {
+             listener.exitConstraintsSetStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitConstraintssetstmt) {
-            return visitor.visitConstraintssetstmt(this);
+        if (visitor.visitConstraintsSetStmt) {
+            return visitor.visitConstraintsSetStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60334,7 +60334,7 @@ export class ConstraintssetstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CheckpointstmtContext extends antlr.ParserRuleContext {
+export class CheckPointStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60342,21 +60342,21 @@ export class CheckpointstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_CHECKPOINT, 0)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_checkpointstmt;
+        return PostgreSqlParser.RULE_checkPointStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCheckpointstmt) {
-             listener.enterCheckpointstmt(this);
+        if(listener.enterCheckPointStmt) {
+             listener.enterCheckPointStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCheckpointstmt) {
-             listener.exitCheckpointstmt(this);
+        if(listener.exitCheckPointStmt) {
+             listener.exitCheckPointStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCheckpointstmt) {
-            return visitor.visitCheckpointstmt(this);
+        if (visitor.visitCheckPointStmt) {
+            return visitor.visitCheckPointStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60364,7 +60364,7 @@ export class CheckpointstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class DiscardstmtContext extends antlr.ParserRuleContext {
+export class DiscardStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60387,21 +60387,21 @@ export class DiscardstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_SEQUENCES, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_discardstmt;
+        return PostgreSqlParser.RULE_discardStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterDiscardstmt) {
-             listener.enterDiscardstmt(this);
+        if(listener.enterDiscardStmt) {
+             listener.enterDiscardStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitDiscardstmt) {
-             listener.exitDiscardstmt(this);
+        if(listener.exitDiscardStmt) {
+             listener.exitDiscardStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDiscardstmt) {
-            return visitor.visitDiscardstmt(this);
+        if (visitor.visitDiscardStmt) {
+            return visitor.visitDiscardStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60409,7 +60409,7 @@ export class DiscardstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltertablestmtContext extends antlr.ParserRuleContext {
+export class AlterTableStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60437,14 +60437,14 @@ export class AltertablestmtContext extends antlr.ParserRuleContext {
     public KW_IN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_IN, 0);
     }
-    public opttablespace(): OpttablespaceContext[];
-    public opttablespace(i: number): OpttablespaceContext | null;
-    public opttablespace(i?: number): OpttablespaceContext[] | OpttablespaceContext | null {
+    public optTableSpace(): OptTableSpaceContext[];
+    public optTableSpace(i: number): OptTableSpaceContext | null;
+    public optTableSpace(i?: number): OptTableSpaceContext[] | OptTableSpaceContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(OpttablespaceContext);
+            return this.getRuleContexts(OptTableSpaceContext);
         }
 
-        return this.getRuleContext(i, OpttablespaceContext);
+        return this.getRuleContext(i, OptTableSpaceContext);
     }
     public KW_SET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SET, 0);
@@ -60519,21 +60519,21 @@ export class AltertablestmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_FOREIGN, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altertablestmt;
+        return PostgreSqlParser.RULE_alterTableStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltertablestmt) {
-             listener.enterAltertablestmt(this);
+        if(listener.enterAlterTableStmt) {
+             listener.enterAlterTableStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltertablestmt) {
-             listener.exitAltertablestmt(this);
+        if(listener.exitAlterTableStmt) {
+             listener.exitAlterTableStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltertablestmt) {
-            return visitor.visitAltertablestmt(this);
+        if (visitor.visitAlterTableStmt) {
+            return visitor.visitAlterTableStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60599,14 +60599,14 @@ export class Partition_bound_specContext extends antlr.ParserRuleContext {
     public KW_FROM(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FROM, 0);
     }
-    public partition_bound_cluase(): Partition_bound_cluaseContext[];
-    public partition_bound_cluase(i: number): Partition_bound_cluaseContext | null;
-    public partition_bound_cluase(i?: number): Partition_bound_cluaseContext[] | Partition_bound_cluaseContext | null {
+    public partition_bound_clause(): Partition_bound_clauseContext[];
+    public partition_bound_clause(i: number): Partition_bound_clauseContext | null;
+    public partition_bound_clause(i?: number): Partition_bound_clauseContext[] | Partition_bound_clauseContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Partition_bound_cluaseContext);
+            return this.getRuleContexts(Partition_bound_clauseContext);
         }
 
-        return this.getRuleContext(i, Partition_bound_cluaseContext);
+        return this.getRuleContext(i, Partition_bound_clauseContext);
     }
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
@@ -60614,8 +60614,8 @@ export class Partition_bound_specContext extends antlr.ParserRuleContext {
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public partition_with_cluase(): Partition_with_cluaseContext | null {
-        return this.getRuleContext(0, Partition_with_cluaseContext);
+    public partition_with_clause(): Partition_with_clauseContext | null {
+        return this.getRuleContext(0, Partition_with_clauseContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_partition_bound_spec;
@@ -60640,7 +60640,7 @@ export class Partition_bound_specContext extends antlr.ParserRuleContext {
 }
 
 
-export class Partition_bound_cluaseContext extends antlr.ParserRuleContext {
+export class Partition_bound_clauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60669,21 +60669,21 @@ export class Partition_bound_cluaseContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_partition_bound_cluase;
+        return PostgreSqlParser.RULE_partition_bound_clause;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterPartition_bound_cluase) {
-             listener.enterPartition_bound_cluase(this);
+        if(listener.enterPartition_bound_clause) {
+             listener.enterPartition_bound_clause(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitPartition_bound_cluase) {
-             listener.exitPartition_bound_cluase(this);
+        if(listener.exitPartition_bound_clause) {
+             listener.exitPartition_bound_clause(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPartition_bound_cluase) {
-            return visitor.visitPartition_bound_cluase(this);
+        if (visitor.visitPartition_bound_clause) {
+            return visitor.visitPartition_bound_clause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60727,7 +60727,7 @@ export class Partition_bound_chooseContext extends antlr.ParserRuleContext {
 }
 
 
-export class Partition_with_cluaseContext extends antlr.ParserRuleContext {
+export class Partition_with_clauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -60737,14 +60737,14 @@ export class Partition_with_cluaseContext extends antlr.ParserRuleContext {
     public KW_MODULUS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_MODULUS, 0)!;
     }
-    public numericonly(): NumericonlyContext[];
-    public numericonly(i: number): NumericonlyContext | null;
-    public numericonly(i?: number): NumericonlyContext[] | NumericonlyContext | null {
+    public numericOnly(): NumericOnlyContext[];
+    public numericOnly(i: number): NumericOnlyContext | null;
+    public numericOnly(i?: number): NumericOnlyContext[] | NumericOnlyContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(NumericonlyContext);
+            return this.getRuleContexts(NumericOnlyContext);
         }
 
-        return this.getRuleContext(i, NumericonlyContext);
+        return this.getRuleContext(i, NumericOnlyContext);
     }
     public COMMA(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.COMMA, 0)!;
@@ -60756,21 +60756,21 @@ export class Partition_with_cluaseContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_partition_with_cluase;
+        return PostgreSqlParser.RULE_partition_with_clause;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterPartition_with_cluase) {
-             listener.enterPartition_with_cluase(this);
+        if(listener.enterPartition_with_clause) {
+             listener.enterPartition_with_clause(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitPartition_with_cluase) {
-             listener.exitPartition_with_cluase(this);
+        if(listener.exitPartition_with_clause) {
+             listener.exitPartition_with_clause(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPartition_with_cluase) {
-            return visitor.visitPartition_with_cluase(this);
+        if (visitor.visitPartition_with_clause) {
+            return visitor.visitPartition_with_clause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -60785,8 +60785,8 @@ export class Partition_cmdContext extends antlr.ParserRuleContext {
     public index_partition_cmd(): Index_partition_cmdContext | null {
         return this.getRuleContext(0, Index_partition_cmdContext);
     }
-    public partitionboundspec(): PartitionboundspecContext | null {
-        return this.getRuleContext(0, PartitionboundspecContext);
+    public partitionBoundSpec(): PartitionBoundSpecContext | null {
+        return this.getRuleContext(0, PartitionBoundSpecContext);
     }
     public KW_DETACH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DETACH, 0);
@@ -60863,26 +60863,26 @@ export class Alter_table_cmdContext extends antlr.ParserRuleContext {
     public KW_ADD(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ADD, 0);
     }
-    public constraintelem(): ConstraintelemContext | null {
-        return this.getRuleContext(0, ConstraintelemContext);
+    public constraintElem(): ConstraintElemContext | null {
+        return this.getRuleContext(0, ConstraintElemContext);
     }
     public KW_CONSTRAINT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CONSTRAINT, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_ALTER(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ALTER, 0);
     }
-    public constraintattributeElem(): ConstraintattributeElemContext[];
-    public constraintattributeElem(i: number): ConstraintattributeElemContext | null;
-    public constraintattributeElem(i?: number): ConstraintattributeElemContext[] | ConstraintattributeElemContext | null {
+    public constraintAttributeElem(): ConstraintAttributeElemContext[];
+    public constraintAttributeElem(i: number): ConstraintAttributeElemContext | null;
+    public constraintAttributeElem(i?: number): ConstraintAttributeElemContext[] | ConstraintAttributeElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ConstraintattributeElemContext);
+            return this.getRuleContexts(ConstraintAttributeElemContext);
         }
 
-        return this.getRuleContext(i, ConstraintattributeElemContext);
+        return this.getRuleContext(i, ConstraintAttributeElemContext);
     }
     public KW_VALIDATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_VALIDATE, 0);
@@ -60971,8 +60971,8 @@ export class Alter_table_cmdContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public KW_TABLESPACE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TABLESPACE, 0);
@@ -60992,8 +60992,8 @@ export class Alter_table_cmdContext extends antlr.ParserRuleContext {
     public KW_DEFAULT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DEFAULT, 0);
     }
-    public existingindex(): ExistingindexContext | null {
-        return this.getRuleContext(0, ExistingindexContext);
+    public existingIndex(): ExistingIndexContext | null {
+        return this.getRuleContext(0, ExistingIndexContext);
     }
     public KW_ROW(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROW, 0);
@@ -61034,11 +61034,11 @@ export class Alter_table_cmdContext extends antlr.ParserRuleContext {
     public KW_STATISTICS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_STATISTICS, 0);
     }
-    public signediconst(): SignediconstContext | null {
-        return this.getRuleContext(0, SignediconstContext);
+    public signedConst(): SignedConstContext | null {
+        return this.getRuleContext(0, SignedConstContext);
     }
-    public reloptions(): ReloptionsContext | null {
-        return this.getRuleContext(0, ReloptionsContext);
+    public relOptions(): RelOptionsContext | null {
+        return this.getRuleContext(0, RelOptionsContext);
     }
     public KW_RESET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_RESET, 0);
@@ -61073,14 +61073,14 @@ export class Alter_table_cmdContext extends antlr.ParserRuleContext {
     public CLOSE_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
     }
-    public seqoptelem(): SeqoptelemContext[];
-    public seqoptelem(i: number): SeqoptelemContext | null;
-    public seqoptelem(i?: number): SeqoptelemContext[] | SeqoptelemContext | null {
+    public seqOptElem(): SeqOptElemContext[];
+    public seqOptElem(i: number): SeqOptElemContext | null;
+    public seqOptElem(i?: number): SeqOptElemContext[] | SeqOptElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SeqoptelemContext);
+            return this.getRuleContexts(SeqOptElemContext);
         }
 
-        return this.getRuleContext(i, SeqoptelemContext);
+        return this.getRuleContext(i, SeqOptElemContext);
     }
     public KW_RESTART(): antlr.TerminalNode[];
     public KW_RESTART(i: number): antlr.TerminalNode | null;
@@ -61091,14 +61091,14 @@ export class Alter_table_cmdContext extends antlr.ParserRuleContext {
     		return this.getToken(PostgreSqlParser.KW_RESTART, i);
     	}
     }
-    public numericonly(): NumericonlyContext[];
-    public numericonly(i: number): NumericonlyContext | null;
-    public numericonly(i?: number): NumericonlyContext[] | NumericonlyContext | null {
+    public numericOnly(): NumericOnlyContext[];
+    public numericOnly(i: number): NumericOnlyContext | null;
+    public numericOnly(i?: number): NumericOnlyContext[] | NumericOnlyContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(NumericonlyContext);
+            return this.getRuleContexts(NumericOnlyContext);
         }
 
-        return this.getRuleContext(i, NumericonlyContext);
+        return this.getRuleContext(i, NumericOnlyContext);
     }
     public KW_WITH(): antlr.TerminalNode[];
     public KW_WITH(i: number): antlr.TerminalNode | null;
@@ -61255,21 +61255,21 @@ export class Opt_collate_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class ReloptionsContext extends antlr.ParserRuleContext {
+export class RelOptionsContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public OPEN_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0)!;
     }
-    public reloption_elem(): Reloption_elemContext[];
-    public reloption_elem(i: number): Reloption_elemContext | null;
-    public reloption_elem(i?: number): Reloption_elemContext[] | Reloption_elemContext | null {
+    public relOptionElem(): RelOptionElemContext[];
+    public relOptionElem(i: number): RelOptionElemContext | null;
+    public relOptionElem(i?: number): RelOptionElemContext[] | RelOptionElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Reloption_elemContext);
+            return this.getRuleContexts(RelOptionElemContext);
         }
 
-        return this.getRuleContext(i, Reloption_elemContext);
+        return this.getRuleContext(i, RelOptionElemContext);
     }
     public CLOSE_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
@@ -61284,21 +61284,21 @@ export class ReloptionsContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_reloptions;
+        return PostgreSqlParser.RULE_relOptions;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterReloptions) {
-             listener.enterReloptions(this);
+        if(listener.enterRelOptions) {
+             listener.enterRelOptions(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitReloptions) {
-             listener.exitReloptions(this);
+        if(listener.exitRelOptions) {
+             listener.exitRelOptions(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitReloptions) {
-            return visitor.visitReloptions(this);
+        if (visitor.visitRelOptions) {
+            return visitor.visitRelOptions(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61306,32 +61306,32 @@ export class ReloptionsContext extends antlr.ParserRuleContext {
 }
 
 
-export class Opt_reloptionsContext extends antlr.ParserRuleContext {
+export class OptRelOptionsContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_WITH(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_WITH, 0)!;
     }
-    public reloptions(): ReloptionsContext {
-        return this.getRuleContext(0, ReloptionsContext)!;
+    public relOptions(): RelOptionsContext {
+        return this.getRuleContext(0, RelOptionsContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_opt_reloptions;
+        return PostgreSqlParser.RULE_optRelOptions;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOpt_reloptions) {
-             listener.enterOpt_reloptions(this);
+        if(listener.enterOptRelOptions) {
+             listener.enterOptRelOptions(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOpt_reloptions) {
-             listener.exitOpt_reloptions(this);
+        if(listener.exitOptRelOptions) {
+             listener.exitOptRelOptions(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOpt_reloptions) {
-            return visitor.visitOpt_reloptions(this);
+        if (visitor.visitOptRelOptions) {
+            return visitor.visitOptRelOptions(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61339,12 +61339,12 @@ export class Opt_reloptionsContext extends antlr.ParserRuleContext {
 }
 
 
-export class Reloption_elemContext extends antlr.ParserRuleContext {
+export class RelOptionElemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public collabel(): CollabelContext {
-        return this.getRuleContext(0, CollabelContext)!;
+    public colLabel(): ColLabelContext {
+        return this.getRuleContext(0, ColLabelContext)!;
     }
     public EQUAL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.EQUAL, 0);
@@ -61359,21 +61359,21 @@ export class Reloption_elemContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Def_elemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_reloption_elem;
+        return PostgreSqlParser.RULE_relOptionElem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterReloption_elem) {
-             listener.enterReloption_elem(this);
+        if(listener.enterRelOptionElem) {
+             listener.enterRelOptionElem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitReloption_elem) {
-             listener.exitReloption_elem(this);
+        if(listener.exitRelOptionElem) {
+             listener.exitRelOptionElem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitReloption_elem) {
-            return visitor.visitReloption_elem(this);
+        if (visitor.visitRelOptionElem) {
+            return visitor.visitRelOptionElem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61381,7 +61381,7 @@ export class Reloption_elemContext extends antlr.ParserRuleContext {
 }
 
 
-export class PartitionboundspecContext extends antlr.ParserRuleContext {
+export class PartitionBoundSpecContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -61440,21 +61440,21 @@ export class PartitionboundspecContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_DEFAULT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_partitionboundspec;
+        return PostgreSqlParser.RULE_partitionBoundSpec;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterPartitionboundspec) {
-             listener.enterPartitionboundspec(this);
+        if(listener.enterPartitionBoundSpec) {
+             listener.enterPartitionBoundSpec(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitPartitionboundspec) {
-             listener.exitPartitionboundspec(this);
+        if(listener.exitPartitionBoundSpec) {
+             listener.exitPartitionBoundSpec(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPartitionboundspec) {
-            return visitor.visitPartitionboundspec(this);
+        if (visitor.visitPartitionBoundSpec) {
+            return visitor.visitPartitionBoundSpec(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61462,7 +61462,7 @@ export class PartitionboundspecContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltercompositetypestmtContext extends antlr.ParserRuleContext {
+export class AlterCompositeTypeStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -61494,21 +61494,21 @@ export class AltercompositetypestmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altercompositetypestmt;
+        return PostgreSqlParser.RULE_alterCompositeTypeStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltercompositetypestmt) {
-             listener.enterAltercompositetypestmt(this);
+        if(listener.enterAlterCompositeTypeStmt) {
+             listener.enterAlterCompositeTypeStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltercompositetypestmt) {
-             listener.exitAltercompositetypestmt(this);
+        if(listener.exitAlterCompositeTypeStmt) {
+             listener.exitAlterCompositeTypeStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltercompositetypestmt) {
-            return visitor.visitAltercompositetypestmt(this);
+        if (visitor.visitAlterCompositeTypeStmt) {
+            return visitor.visitAlterCompositeTypeStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61526,8 +61526,8 @@ export class Alter_type_cmdContext extends antlr.ParserRuleContext {
     public KW_ATTRIBUTE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_ATTRIBUTE, 0)!;
     }
-    public tablefuncelement(): TablefuncelementContext | null {
-        return this.getRuleContext(0, TablefuncelementContext);
+    public tableFuncElement(): TableFuncElementContext | null {
+        return this.getRuleContext(0, TableFuncElementContext);
     }
     public opt_drop_behavior(): Opt_drop_behaviorContext | null {
         return this.getRuleContext(0, Opt_drop_behaviorContext);
@@ -61535,8 +61535,8 @@ export class Alter_type_cmdContext extends antlr.ParserRuleContext {
     public KW_DROP(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DROP, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public opt_if_exists(): Opt_if_existsContext | null {
         return this.getRuleContext(0, Opt_if_existsContext);
@@ -61582,35 +61582,35 @@ export class Alter_type_cmdContext extends antlr.ParserRuleContext {
 }
 
 
-export class CloseportalstmtContext extends antlr.ParserRuleContext {
+export class ClosePortalStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_CLOSE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_CLOSE, 0)!;
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_ALL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ALL, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_closeportalstmt;
+        return PostgreSqlParser.RULE_closePortalStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCloseportalstmt) {
-             listener.enterCloseportalstmt(this);
+        if(listener.enterClosePortalStmt) {
+             listener.enterClosePortalStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCloseportalstmt) {
-             listener.exitCloseportalstmt(this);
+        if(listener.exitClosePortalStmt) {
+             listener.exitClosePortalStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCloseportalstmt) {
-            return visitor.visitCloseportalstmt(this);
+        if (visitor.visitClosePortalStmt) {
+            return visitor.visitClosePortalStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61618,7 +61618,7 @@ export class CloseportalstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CopystmtContext extends antlr.ParserRuleContext {
+export class CopyStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -61637,14 +61637,14 @@ export class CopystmtContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
     }
-    public sconst(): SconstContext[];
-    public sconst(i: number): SconstContext | null;
-    public sconst(i?: number): SconstContext[] | SconstContext | null {
+    public stringConst(): StringConstContext[];
+    public stringConst(i: number): StringConstContext | null;
+    public stringConst(i?: number): StringConstContext[] | StringConstContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SconstContext);
+            return this.getRuleContexts(StringConstContext);
         }
 
-        return this.getRuleContext(i, SconstContext);
+        return this.getRuleContext(i, StringConstContext);
     }
     public KW_STDIN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_STDIN, 0);
@@ -61676,28 +61676,28 @@ export class CopystmtContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
     }
-    public preparablestmt(): PreparablestmtContext | null {
-        return this.getRuleContext(0, PreparablestmtContext);
+    public preParableStmt(): PreParableStmtContext | null {
+        return this.getRuleContext(0, PreParableStmtContext);
     }
     public CLOSE_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_copystmt;
+        return PostgreSqlParser.RULE_copyStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCopystmt) {
-             listener.enterCopystmt(this);
+        if(listener.enterCopyStmt) {
+             listener.enterCopyStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCopystmt) {
-             listener.exitCopystmt(this);
+        if(listener.exitCopyStmt) {
+             listener.exitCopyStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCopystmt) {
-            return visitor.visitCopystmt(this);
+        if (visitor.visitCopyStmt) {
+            return visitor.visitCopyStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61727,14 +61727,14 @@ export class Copy_optionsContext extends antlr.ParserRuleContext {
     		return this.getToken(PostgreSqlParser.KW_FREEZE, i);
     	}
     }
-    public sconst(): SconstContext[];
-    public sconst(i: number): SconstContext | null;
-    public sconst(i?: number): SconstContext[] | SconstContext | null {
+    public stringConst(): StringConstContext[];
+    public stringConst(i: number): StringConstContext | null;
+    public stringConst(i?: number): StringConstContext[] | StringConstContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SconstContext);
+            return this.getRuleContexts(StringConstContext);
         }
 
-        return this.getRuleContext(i, SconstContext);
+        return this.getRuleContext(i, StringConstContext);
     }
     public KW_CSV(): antlr.TerminalNode[];
     public KW_CSV(i: number): antlr.TerminalNode | null;
@@ -61895,14 +61895,14 @@ export class Copy_generic_opt_elemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public collabel(): CollabelContext {
-        return this.getRuleContext(0, CollabelContext)!;
+    public colLabel(): ColLabelContext {
+        return this.getRuleContext(0, ColLabelContext)!;
     }
     public opt_boolean_or_string(): Opt_boolean_or_stringContext | null {
         return this.getRuleContext(0, Opt_boolean_or_stringContext);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
     public STAR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.STAR, 0);
@@ -61954,19 +61954,19 @@ export class Copy_generic_opt_elemContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatestmtContext extends antlr.ParserRuleContext {
+export class CreateStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createstmt;
+        return PostgreSqlParser.RULE_createStmt;
     }
-    public override copyFrom(ctx: CreatestmtContext): void {
+    public override copyFrom(ctx: CreateStmtContext): void {
         super.copyFrom(ctx);
     }
 }
-export class ColumnCreateTableContext extends CreatestmtContext {
-    public constructor(ctx: CreatestmtContext) {
+export class ColumnCreateTableContext extends CreateStmtContext {
+    public constructor(ctx: CreateStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -61997,38 +61997,38 @@ export class ColumnCreateTableContext extends CreatestmtContext {
     public qualified_name(): Qualified_nameContext | null {
         return this.getRuleContext(0, Qualified_nameContext);
     }
-    public partitionboundspec(): PartitionboundspecContext | null {
-        return this.getRuleContext(0, PartitionboundspecContext);
+    public partitionBoundSpec(): PartitionBoundSpecContext | null {
+        return this.getRuleContext(0, PartitionBoundSpecContext);
     }
-    public opttemp(): OpttempContext | null {
-        return this.getRuleContext(0, OpttempContext);
+    public optTemp(): OptTempContext | null {
+        return this.getRuleContext(0, OptTempContext);
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
     }
-    public tableelementlist(): TableelementlistContext | null {
-        return this.getRuleContext(0, TableelementlistContext);
+    public tableElementList(): TableElementListContext | null {
+        return this.getRuleContext(0, TableElementListContext);
     }
-    public optinherit(): OptinheritContext | null {
-        return this.getRuleContext(0, OptinheritContext);
+    public optInherit(): OptInheritContext | null {
+        return this.getRuleContext(0, OptInheritContext);
     }
-    public partitionspec(): PartitionspecContext | null {
-        return this.getRuleContext(0, PartitionspecContext);
+    public partitionSpec(): PartitionSpecContext | null {
+        return this.getRuleContext(0, PartitionSpecContext);
     }
     public table_access_method_clause(): Table_access_method_clauseContext | null {
         return this.getRuleContext(0, Table_access_method_clauseContext);
     }
-    public optwith(): OptwithContext | null {
-        return this.getRuleContext(0, OptwithContext);
+    public optWith(): OptWithContext | null {
+        return this.getRuleContext(0, OptWithContext);
     }
-    public oncommitoption(): OncommitoptionContext | null {
-        return this.getRuleContext(0, OncommitoptionContext);
+    public onCommitOption(): OnCommitOptionContext | null {
+        return this.getRuleContext(0, OnCommitOptionContext);
     }
-    public opttablespace(): OpttablespaceContext | null {
-        return this.getRuleContext(0, OpttablespaceContext);
+    public optTableSpace(): OptTableSpaceContext | null {
+        return this.getRuleContext(0, OptTableSpaceContext);
     }
-    public opttypedtableelementlist(): OpttypedtableelementlistContext | null {
-        return this.getRuleContext(0, OpttypedtableelementlistContext);
+    public optTypedTableElEmentList(): OptTypedTableElEmentListContext | null {
+        return this.getRuleContext(0, OptTypedTableElEmentListContext);
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
         if(listener.enterColumnCreateTable) {
@@ -62050,7 +62050,7 @@ export class ColumnCreateTableContext extends CreatestmtContext {
 }
 
 
-export class OpttempContext extends antlr.ParserRuleContext {
+export class OptTempContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -62070,21 +62070,21 @@ export class OpttempContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_UNLOGGED, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_opttemp;
+        return PostgreSqlParser.RULE_optTemp;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOpttemp) {
-             listener.enterOpttemp(this);
+        if(listener.enterOptTemp) {
+             listener.enterOptTemp(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOpttemp) {
-             listener.exitOpttemp(this);
+        if(listener.exitOptTemp) {
+             listener.exitOptTemp(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOpttemp) {
-            return visitor.visitOpttemp(this);
+        if (visitor.visitOptTemp) {
+            return visitor.visitOptTemp(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -62092,21 +62092,21 @@ export class OpttempContext extends antlr.ParserRuleContext {
 }
 
 
-export class OpttypedtableelementlistContext extends antlr.ParserRuleContext {
+export class OptTypedTableElEmentListContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public OPEN_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0)!;
     }
-    public typedtableelement(): TypedtableelementContext[];
-    public typedtableelement(i: number): TypedtableelementContext | null;
-    public typedtableelement(i?: number): TypedtableelementContext[] | TypedtableelementContext | null {
+    public typedTableElement(): TypedTableElementContext[];
+    public typedTableElement(i: number): TypedTableElementContext | null;
+    public typedTableElement(i?: number): TypedTableElementContext[] | TypedTableElementContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(TypedtableelementContext);
+            return this.getRuleContexts(TypedTableElementContext);
         }
 
-        return this.getRuleContext(i, TypedtableelementContext);
+        return this.getRuleContext(i, TypedTableElementContext);
     }
     public CLOSE_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
@@ -62121,21 +62121,21 @@ export class OpttypedtableelementlistContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_opttypedtableelementlist;
+        return PostgreSqlParser.RULE_optTypedTableElEmentList;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOpttypedtableelementlist) {
-             listener.enterOpttypedtableelementlist(this);
+        if(listener.enterOptTypedTableElEmentList) {
+             listener.enterOptTypedTableElEmentList(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOpttypedtableelementlist) {
-             listener.exitOpttypedtableelementlist(this);
+        if(listener.exitOptTypedTableElEmentList) {
+             listener.exitOptTypedTableElEmentList(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOpttypedtableelementlist) {
-            return visitor.visitOpttypedtableelementlist(this);
+        if (visitor.visitOptTypedTableElEmentList) {
+            return visitor.visitOptTypedTableElEmentList(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -62143,18 +62143,18 @@ export class OpttypedtableelementlistContext extends antlr.ParserRuleContext {
 }
 
 
-export class TableelementlistContext extends antlr.ParserRuleContext {
+export class TableElementListContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public tableelement(): TableelementContext[];
-    public tableelement(i: number): TableelementContext | null;
-    public tableelement(i?: number): TableelementContext[] | TableelementContext | null {
+    public tableElement(): TableElementContext[];
+    public tableElement(i: number): TableElementContext | null;
+    public tableElement(i?: number): TableElementContext[] | TableElementContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(TableelementContext);
+            return this.getRuleContexts(TableElementContext);
         }
 
-        return this.getRuleContext(i, TableelementContext);
+        return this.getRuleContext(i, TableElementContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -62166,21 +62166,21 @@ export class TableelementlistContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_tableelementlist;
+        return PostgreSqlParser.RULE_tableElementList;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTableelementlist) {
-             listener.enterTableelementlist(this);
+        if(listener.enterTableElementList) {
+             listener.enterTableElementList(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTableelementlist) {
-             listener.exitTableelementlist(this);
+        if(listener.exitTableElementList) {
+             listener.exitTableElementList(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTableelementlist) {
-            return visitor.visitTableelementlist(this);
+        if (visitor.visitTableElementList) {
+            return visitor.visitTableElementList(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -62188,18 +62188,18 @@ export class TableelementlistContext extends antlr.ParserRuleContext {
 }
 
 
-export class TableelementContext extends antlr.ParserRuleContext {
+export class TableElementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public constraintelem(): ConstraintelemContext | null {
-        return this.getRuleContext(0, ConstraintelemContext);
+    public constraintElem(): ConstraintElemContext | null {
+        return this.getRuleContext(0, ConstraintElemContext);
     }
     public KW_CONSTRAINT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CONSTRAINT, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public column_def(): Column_defContext | null {
         return this.getRuleContext(0, Column_defContext);
@@ -62210,14 +62210,14 @@ export class TableelementContext extends antlr.ParserRuleContext {
     public qualified_name(): Qualified_nameContext | null {
         return this.getRuleContext(0, Qualified_nameContext);
     }
-    public tablelikeoption(): TablelikeoptionContext[];
-    public tablelikeoption(i: number): TablelikeoptionContext | null;
-    public tablelikeoption(i?: number): TablelikeoptionContext[] | TablelikeoptionContext | null {
+    public tableLikeOption(): TableLikeOptionContext[];
+    public tableLikeOption(i: number): TableLikeOptionContext | null;
+    public tableLikeOption(i?: number): TableLikeOptionContext[] | TableLikeOptionContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(TablelikeoptionContext);
+            return this.getRuleContexts(TableLikeOptionContext);
         }
 
-        return this.getRuleContext(i, TablelikeoptionContext);
+        return this.getRuleContext(i, TableLikeOptionContext);
     }
     public KW_INCLUDING(): antlr.TerminalNode[];
     public KW_INCLUDING(i: number): antlr.TerminalNode | null;
@@ -62238,21 +62238,21 @@ export class TableelementContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_tableelement;
+        return PostgreSqlParser.RULE_tableElement;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTableelement) {
-             listener.enterTableelement(this);
+        if(listener.enterTableElement) {
+             listener.enterTableElement(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTableelement) {
-             listener.exitTableelement(this);
+        if(listener.exitTableElement) {
+             listener.exitTableElement(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTableelement) {
-            return visitor.visitTableelement(this);
+        if (visitor.visitTableElement) {
+            return visitor.visitTableElement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -62260,7 +62260,7 @@ export class TableelementContext extends antlr.ParserRuleContext {
 }
 
 
-export class TypedtableelementContext extends antlr.ParserRuleContext {
+export class TypedTableElementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -62273,40 +62273,40 @@ export class TypedtableelementContext extends antlr.ParserRuleContext {
     public KW_OPTIONS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OPTIONS, 0);
     }
-    public colconstraint(): ColconstraintContext[];
-    public colconstraint(i: number): ColconstraintContext | null;
-    public colconstraint(i?: number): ColconstraintContext[] | ColconstraintContext | null {
+    public colConstraint(): ColConstraintContext[];
+    public colConstraint(i: number): ColConstraintContext | null;
+    public colConstraint(i?: number): ColConstraintContext[] | ColConstraintContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColconstraintContext);
+            return this.getRuleContexts(ColConstraintContext);
         }
 
-        return this.getRuleContext(i, ColconstraintContext);
+        return this.getRuleContext(i, ColConstraintContext);
     }
-    public constraintelem(): ConstraintelemContext | null {
-        return this.getRuleContext(0, ConstraintelemContext);
+    public constraintElem(): ConstraintElemContext | null {
+        return this.getRuleContext(0, ConstraintElemContext);
     }
     public KW_CONSTRAINT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CONSTRAINT, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_typedtableelement;
+        return PostgreSqlParser.RULE_typedTableElement;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTypedtableelement) {
-             listener.enterTypedtableelement(this);
+        if(listener.enterTypedTableElement) {
+             listener.enterTypedTableElement(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTypedtableelement) {
-             listener.exitTypedtableelement(this);
+        if(listener.exitTypedTableElement) {
+             listener.exitTypedTableElement(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTypedtableelement) {
-            return visitor.visitTypedtableelement(this);
+        if (visitor.visitTypedTableElement) {
+            return visitor.visitTypedTableElement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -62334,14 +62334,14 @@ export class Column_defContext extends antlr.ParserRuleContext {
     public KW_COMPRESSION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_COMPRESSION, 0);
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public opt_collate_clause(): Opt_collate_clauseContext | null {
         return this.getRuleContext(0, Opt_collate_clauseContext);
@@ -62352,14 +62352,14 @@ export class Column_defContext extends antlr.ParserRuleContext {
     public KW_OPTIONS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OPTIONS, 0);
     }
-    public colconstraint(): ColconstraintContext[];
-    public colconstraint(i: number): ColconstraintContext | null;
-    public colconstraint(i?: number): ColconstraintContext[] | ColconstraintContext | null {
+    public colConstraint(): ColConstraintContext[];
+    public colConstraint(i: number): ColConstraintContext | null;
+    public colConstraint(i?: number): ColConstraintContext[] | ColConstraintContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColconstraintContext);
+            return this.getRuleContexts(ColConstraintContext);
         }
 
-        return this.getRuleContext(i, ColconstraintContext);
+        return this.getRuleContext(i, ColConstraintContext);
     }
     public KW_PLAIN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PLAIN, 0);
@@ -62399,18 +62399,18 @@ export class Column_defContext extends antlr.ParserRuleContext {
 }
 
 
-export class ColconstraintContext extends antlr.ParserRuleContext {
+export class ColConstraintContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colconstraintelem(): ColconstraintelemContext {
-        return this.getRuleContext(0, ColconstraintelemContext)!;
+    public colConstraintElem(): ColConstraintElemContext {
+        return this.getRuleContext(0, ColConstraintElemContext)!;
     }
     public KW_CONSTRAINT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CONSTRAINT, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_DEFERRABLE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DEFERRABLE, 0);
@@ -62428,21 +62428,21 @@ export class ColconstraintContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_NOT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_colconstraint;
+        return PostgreSqlParser.RULE_colConstraint;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterColconstraint) {
-             listener.enterColconstraint(this);
+        if(listener.enterColConstraint) {
+             listener.enterColConstraint(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitColconstraint) {
-             listener.exitColconstraint(this);
+        if(listener.exitColConstraint) {
+             listener.exitColConstraint(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitColconstraint) {
-            return visitor.visitColconstraint(this);
+        if (visitor.visitColConstraint) {
+            return visitor.visitColConstraint(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -62450,7 +62450,7 @@ export class ColconstraintContext extends antlr.ParserRuleContext {
 }
 
 
-export class ColconstraintelemContext extends antlr.ParserRuleContext {
+export class ColConstraintElemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -62466,8 +62466,8 @@ export class ColconstraintelemContext extends antlr.ParserRuleContext {
     public opt_definition(): Opt_definitionContext | null {
         return this.getRuleContext(0, Opt_definitionContext);
     }
-    public optconstablespace(): OptconstablespaceContext | null {
-        return this.getRuleContext(0, OptconstablespaceContext);
+    public optConstableSpace(): OptConstableSpaceContext | null {
+        return this.getRuleContext(0, OptConstableSpaceContext);
     }
     public KW_NULLS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NULLS, 0);
@@ -62529,14 +62529,14 @@ export class ColconstraintelemContext extends antlr.ParserRuleContext {
     public KW_STORED(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_STORED, 0);
     }
-    public seqoptelem(): SeqoptelemContext[];
-    public seqoptelem(i: number): SeqoptelemContext | null;
-    public seqoptelem(i?: number): SeqoptelemContext[] | SeqoptelemContext | null {
+    public seqOptElem(): SeqOptElemContext[];
+    public seqOptElem(i: number): SeqOptElemContext | null;
+    public seqOptElem(i?: number): SeqOptElemContext[] | SeqOptElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SeqoptelemContext);
+            return this.getRuleContexts(SeqOptElemContext);
         }
 
-        return this.getRuleContext(i, SeqoptelemContext);
+        return this.getRuleContext(i, SeqOptElemContext);
     }
     public KW_REFERENCES(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_REFERENCES, 0);
@@ -62557,21 +62557,21 @@ export class ColconstraintelemContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_collate_clauseContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_colconstraintelem;
+        return PostgreSqlParser.RULE_colConstraintElem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterColconstraintelem) {
-             listener.enterColconstraintelem(this);
+        if(listener.enterColConstraintElem) {
+             listener.enterColConstraintElem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitColconstraintelem) {
-             listener.exitColconstraintelem(this);
+        if(listener.exitColConstraintElem) {
+             listener.exitColConstraintElem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitColconstraintelem) {
-            return visitor.visitColconstraintelem(this);
+        if (visitor.visitColConstraintElem) {
+            return visitor.visitColConstraintElem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -62615,7 +62615,7 @@ export class Generated_whenContext extends antlr.ParserRuleContext {
 }
 
 
-export class TablelikeoptionContext extends antlr.ParserRuleContext {
+export class TableLikeOptionContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -62647,21 +62647,21 @@ export class TablelikeoptionContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_ALL, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_tablelikeoption;
+        return PostgreSqlParser.RULE_tableLikeOption;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTablelikeoption) {
-             listener.enterTablelikeoption(this);
+        if(listener.enterTableLikeOption) {
+             listener.enterTableLikeOption(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTablelikeoption) {
-             listener.exitTablelikeoption(this);
+        if(listener.exitTableLikeOption) {
+             listener.exitTableLikeOption(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTablelikeoption) {
-            return visitor.visitTablelikeoption(this);
+        if (visitor.visitTableLikeOption) {
+            return visitor.visitTableLikeOption(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -62669,7 +62669,7 @@ export class TablelikeoptionContext extends antlr.ParserRuleContext {
 }
 
 
-export class ConstraintelemContext extends antlr.ParserRuleContext {
+export class ConstraintElemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -62697,14 +62697,14 @@ export class ConstraintelemContext extends antlr.ParserRuleContext {
     		return this.getToken(PostgreSqlParser.CLOSE_PAREN, i);
     	}
     }
-    public constraintattributeElem(): ConstraintattributeElemContext[];
-    public constraintattributeElem(i: number): ConstraintattributeElemContext | null;
-    public constraintattributeElem(i?: number): ConstraintattributeElemContext[] | ConstraintattributeElemContext | null {
+    public constraintAttributeElem(): ConstraintAttributeElemContext[];
+    public constraintAttributeElem(i: number): ConstraintAttributeElemContext | null;
+    public constraintAttributeElem(i?: number): ConstraintAttributeElemContext[] | ConstraintAttributeElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ConstraintattributeElemContext);
+            return this.getRuleContexts(ConstraintAttributeElemContext);
         }
 
-        return this.getRuleContext(i, ConstraintattributeElemContext);
+        return this.getRuleContext(i, ConstraintAttributeElemContext);
     }
     public KW_UNIQUE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_UNIQUE, 0);
@@ -62718,8 +62718,8 @@ export class ConstraintelemContext extends antlr.ParserRuleContext {
 
         return this.getRuleContext(i, Opt_column_listContext);
     }
-    public existingindex(): ExistingindexContext | null {
-        return this.getRuleContext(0, ExistingindexContext);
+    public existingIndex(): ExistingIndexContext | null {
+        return this.getRuleContext(0, ExistingIndexContext);
     }
     public KW_PRIMARY(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PRIMARY, 0);
@@ -62733,20 +62733,20 @@ export class ConstraintelemContext extends antlr.ParserRuleContext {
     public opt_definition(): Opt_definitionContext | null {
         return this.getRuleContext(0, Opt_definitionContext);
     }
-    public optconstablespace(): OptconstablespaceContext | null {
-        return this.getRuleContext(0, OptconstablespaceContext);
+    public optConstableSpace(): OptConstableSpaceContext | null {
+        return this.getRuleContext(0, OptConstableSpaceContext);
     }
     public KW_EXCLUDE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_EXCLUDE, 0);
     }
-    public exclusionconstraintelem(): ExclusionconstraintelemContext[];
-    public exclusionconstraintelem(i: number): ExclusionconstraintelemContext | null;
-    public exclusionconstraintelem(i?: number): ExclusionconstraintelemContext[] | ExclusionconstraintelemContext | null {
+    public exclusionConstraintElem(): ExclusionConstraintElemContext[];
+    public exclusionConstraintElem(i: number): ExclusionConstraintElemContext | null;
+    public exclusionConstraintElem(i?: number): ExclusionConstraintElemContext[] | ExclusionConstraintElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ExclusionconstraintelemContext);
+            return this.getRuleContexts(ExclusionConstraintElemContext);
         }
 
-        return this.getRuleContext(i, ExclusionconstraintelemContext);
+        return this.getRuleContext(i, ExclusionConstraintElemContext);
     }
     public table_access_method_clause(): Table_access_method_clauseContext | null {
         return this.getRuleContext(0, Table_access_method_clauseContext);
@@ -62779,21 +62779,21 @@ export class ConstraintelemContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Key_actionsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_constraintelem;
+        return PostgreSqlParser.RULE_constraintElem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterConstraintelem) {
-             listener.enterConstraintelem(this);
+        if(listener.enterConstraintElem) {
+             listener.enterConstraintElem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitConstraintelem) {
-             listener.exitConstraintelem(this);
+        if(listener.exitConstraintElem) {
+             listener.exitConstraintElem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitConstraintelem) {
-            return visitor.visitConstraintelem(this);
+        if (visitor.visitConstraintElem) {
+            return visitor.visitConstraintElem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63005,7 +63005,7 @@ export class Key_matchContext extends antlr.ParserRuleContext {
 }
 
 
-export class ExclusionconstraintelemContext extends antlr.ParserRuleContext {
+export class ExclusionConstraintElemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63028,21 +63028,21 @@ export class ExclusionconstraintelemContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_exclusionconstraintelem;
+        return PostgreSqlParser.RULE_exclusionConstraintElem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterExclusionconstraintelem) {
-             listener.enterExclusionconstraintelem(this);
+        if(listener.enterExclusionConstraintElem) {
+             listener.enterExclusionConstraintElem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitExclusionconstraintelem) {
-             listener.exitExclusionconstraintelem(this);
+        if(listener.exitExclusionConstraintElem) {
+             listener.exitExclusionConstraintElem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitExclusionconstraintelem) {
-            return visitor.visitExclusionconstraintelem(this);
+        if (visitor.visitExclusionConstraintElem) {
+            return visitor.visitExclusionConstraintElem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63206,7 +63206,7 @@ export class Key_actionContext extends antlr.ParserRuleContext {
 }
 
 
-export class OptinheritContext extends antlr.ParserRuleContext {
+export class OptInheritContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63223,21 +63223,21 @@ export class OptinheritContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_optinherit;
+        return PostgreSqlParser.RULE_optInherit;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOptinherit) {
-             listener.enterOptinherit(this);
+        if(listener.enterOptInherit) {
+             listener.enterOptInherit(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOptinherit) {
-             listener.exitOptinherit(this);
+        if(listener.exitOptInherit) {
+             listener.exitOptInherit(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOptinherit) {
-            return visitor.visitOptinherit(this);
+        if (visitor.visitOptInherit) {
+            return visitor.visitOptInherit(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63245,7 +63245,7 @@ export class OptinheritContext extends antlr.ParserRuleContext {
 }
 
 
-export class PartitionspecContext extends antlr.ParserRuleContext {
+export class PartitionSpecContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63255,8 +63255,8 @@ export class PartitionspecContext extends antlr.ParserRuleContext {
     public KW_BY(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_BY, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public OPEN_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0)!;
@@ -63283,21 +63283,21 @@ export class PartitionspecContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_partitionspec;
+        return PostgreSqlParser.RULE_partitionSpec;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterPartitionspec) {
-             listener.enterPartitionspec(this);
+        if(listener.enterPartitionSpec) {
+             listener.enterPartitionSpec(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitPartitionspec) {
-             listener.exitPartitionspec(this);
+        if(listener.exitPartitionSpec) {
+             listener.exitPartitionSpec(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPartitionspec) {
-            return visitor.visitPartitionspec(this);
+        if (visitor.visitPartitionSpec) {
+            return visitor.visitPartitionSpec(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63360,8 +63360,8 @@ export class Table_access_method_clauseContext extends antlr.ParserRuleContext {
     public KW_USING(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_USING, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_table_access_method_clause;
@@ -63386,15 +63386,15 @@ export class Table_access_method_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class OptwithContext extends antlr.ParserRuleContext {
+export class OptWithContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public reloptions(): ReloptionsContext | null {
-        return this.getRuleContext(0, ReloptionsContext);
+    public relOptions(): RelOptionsContext | null {
+        return this.getRuleContext(0, RelOptionsContext);
     }
     public KW_OIDS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OIDS, 0);
@@ -63403,21 +63403,21 @@ export class OptwithContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_WITHOUT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_optwith;
+        return PostgreSqlParser.RULE_optWith;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOptwith) {
-             listener.enterOptwith(this);
+        if(listener.enterOptWith) {
+             listener.enterOptWith(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOptwith) {
-             listener.exitOptwith(this);
+        if(listener.exitOptWith) {
+             listener.exitOptWith(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOptwith) {
-            return visitor.visitOptwith(this);
+        if (visitor.visitOptWith) {
+            return visitor.visitOptWith(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63425,7 +63425,7 @@ export class OptwithContext extends antlr.ParserRuleContext {
 }
 
 
-export class OncommitoptionContext extends antlr.ParserRuleContext {
+export class OnCommitOptionContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63448,21 +63448,21 @@ export class OncommitoptionContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_PRESERVE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_oncommitoption;
+        return PostgreSqlParser.RULE_onCommitOption;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOncommitoption) {
-             listener.enterOncommitoption(this);
+        if(listener.enterOnCommitOption) {
+             listener.enterOnCommitOption(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOncommitoption) {
-             listener.exitOncommitoption(this);
+        if(listener.exitOnCommitOption) {
+             listener.exitOnCommitOption(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOncommitoption) {
-            return visitor.visitOncommitoption(this);
+        if (visitor.visitOnCommitOption) {
+            return visitor.visitOnCommitOption(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63470,7 +63470,7 @@ export class OncommitoptionContext extends antlr.ParserRuleContext {
 }
 
 
-export class OpttablespaceContext extends antlr.ParserRuleContext {
+export class OptTableSpaceContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63481,21 +63481,21 @@ export class OpttablespaceContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Tablespace_nameContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_opttablespace;
+        return PostgreSqlParser.RULE_optTableSpace;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOpttablespace) {
-             listener.enterOpttablespace(this);
+        if(listener.enterOptTableSpace) {
+             listener.enterOptTableSpace(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOpttablespace) {
-             listener.exitOpttablespace(this);
+        if(listener.exitOptTableSpace) {
+             listener.exitOptTableSpace(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOpttablespace) {
-            return visitor.visitOpttablespace(this);
+        if (visitor.visitOptTableSpace) {
+            return visitor.visitOptTableSpace(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63503,7 +63503,7 @@ export class OpttablespaceContext extends antlr.ParserRuleContext {
 }
 
 
-export class OptconstablespaceContext extends antlr.ParserRuleContext {
+export class OptConstableSpaceContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63513,25 +63513,25 @@ export class OptconstablespaceContext extends antlr.ParserRuleContext {
     public KW_INDEX(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_INDEX, 0)!;
     }
-    public opttablespace(): OpttablespaceContext {
-        return this.getRuleContext(0, OpttablespaceContext)!;
+    public optTableSpace(): OptTableSpaceContext {
+        return this.getRuleContext(0, OptTableSpaceContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_optconstablespace;
+        return PostgreSqlParser.RULE_optConstableSpace;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOptconstablespace) {
-             listener.enterOptconstablespace(this);
+        if(listener.enterOptConstableSpace) {
+             listener.enterOptConstableSpace(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOptconstablespace) {
-             listener.exitOptconstablespace(this);
+        if(listener.exitOptConstableSpace) {
+             listener.exitOptConstableSpace(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOptconstablespace) {
-            return visitor.visitOptconstablespace(this);
+        if (visitor.visitOptConstableSpace) {
+            return visitor.visitOptConstableSpace(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63539,7 +63539,7 @@ export class OptconstablespaceContext extends antlr.ParserRuleContext {
 }
 
 
-export class ExistingindexContext extends antlr.ParserRuleContext {
+export class ExistingIndexContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63549,25 +63549,25 @@ export class ExistingindexContext extends antlr.ParserRuleContext {
     public KW_INDEX(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_INDEX, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_existingindex;
+        return PostgreSqlParser.RULE_existingIndex;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterExistingindex) {
-             listener.enterExistingindex(this);
+        if(listener.enterExistingIndex) {
+             listener.enterExistingIndex(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitExistingindex) {
-             listener.exitExistingindex(this);
+        if(listener.exitExistingIndex) {
+             listener.exitExistingIndex(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitExistingindex) {
-            return visitor.visitExistingindex(this);
+        if (visitor.visitExistingIndex) {
+            return visitor.visitExistingIndex(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63575,7 +63575,7 @@ export class ExistingindexContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatestatsstmtContext extends antlr.ParserRuleContext {
+export class CreateStatsStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63622,21 +63622,21 @@ export class CreatestatsstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_if_not_existsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createstatsstmt;
+        return PostgreSqlParser.RULE_createStatsStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatestatsstmt) {
-             listener.enterCreatestatsstmt(this);
+        if(listener.enterCreateStatsStmt) {
+             listener.enterCreateStatsStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatestatsstmt) {
-             listener.exitCreatestatsstmt(this);
+        if(listener.exitCreateStatsStmt) {
+             listener.exitCreateStatsStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatestatsstmt) {
-            return visitor.visitCreatestatsstmt(this);
+        if (visitor.visitCreateStatsStmt) {
+            return visitor.visitCreateStatsStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63644,7 +63644,7 @@ export class CreatestatsstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterstatsstmtContext extends antlr.ParserRuleContext {
+export class AlterStatsStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63666,28 +63666,28 @@ export class AlterstatsstmtContext extends antlr.ParserRuleContext {
     public KW_SET(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SET, 0)!;
     }
-    public signediconst(): SignediconstContext {
-        return this.getRuleContext(0, SignediconstContext)!;
+    public signedConst(): SignedConstContext {
+        return this.getRuleContext(0, SignedConstContext)!;
     }
     public opt_if_exists(): Opt_if_existsContext | null {
         return this.getRuleContext(0, Opt_if_existsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterstatsstmt;
+        return PostgreSqlParser.RULE_alterStatsStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterstatsstmt) {
-             listener.enterAlterstatsstmt(this);
+        if(listener.enterAlterStatsStmt) {
+             listener.enterAlterStatsStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterstatsstmt) {
-             listener.exitAlterstatsstmt(this);
+        if(listener.exitAlterStatsStmt) {
+             listener.exitAlterStatsStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterstatsstmt) {
-            return visitor.visitAlterstatsstmt(this);
+        if (visitor.visitAlterStatsStmt) {
+            return visitor.visitAlterStatsStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63695,19 +63695,19 @@ export class AlterstatsstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateasstmtContext extends antlr.ParserRuleContext {
+export class CreateAsStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createasstmt;
+        return PostgreSqlParser.RULE_createAsStmt;
     }
-    public override copyFrom(ctx: CreateasstmtContext): void {
+    public override copyFrom(ctx: CreateAsStmtContext): void {
         super.copyFrom(ctx);
     }
 }
-export class QueryCreateTableContext extends CreateasstmtContext {
-    public constructor(ctx: CreateasstmtContext) {
+export class QueryCreateTableContext extends CreateAsStmtContext {
+    public constructor(ctx: CreateAsStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -63723,11 +63723,11 @@ export class QueryCreateTableContext extends CreateasstmtContext {
     public KW_AS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AS, 0)!;
     }
-    public selectstmt(): SelectstmtContext {
-        return this.getRuleContext(0, SelectstmtContext)!;
+    public selectStmt(): SelectStmtContext {
+        return this.getRuleContext(0, SelectStmtContext)!;
     }
-    public opttemp(): OpttempContext | null {
-        return this.getRuleContext(0, OpttempContext);
+    public optTemp(): OptTempContext | null {
+        return this.getRuleContext(0, OptTempContext);
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
@@ -63768,14 +63768,14 @@ export class Create_as_targetContext extends antlr.ParserRuleContext {
     public table_access_method_clause(): Table_access_method_clauseContext | null {
         return this.getRuleContext(0, Table_access_method_clauseContext);
     }
-    public optwith(): OptwithContext | null {
-        return this.getRuleContext(0, OptwithContext);
+    public optWith(): OptWithContext | null {
+        return this.getRuleContext(0, OptWithContext);
     }
-    public oncommitoption(): OncommitoptionContext | null {
-        return this.getRuleContext(0, OncommitoptionContext);
+    public onCommitOption(): OnCommitOptionContext | null {
+        return this.getRuleContext(0, OnCommitOptionContext);
     }
-    public opttablespace(): OpttablespaceContext | null {
-        return this.getRuleContext(0, OpttablespaceContext);
+    public optTableSpace(): OptTableSpaceContext | null {
+        return this.getRuleContext(0, OptTableSpaceContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_create_as_target;
@@ -63836,19 +63836,19 @@ export class Opt_with_dataContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatematviewstmtContext extends antlr.ParserRuleContext {
+export class CreateMaterializedViewStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_creatematviewstmt;
+        return PostgreSqlParser.RULE_createMaterializedViewStmt;
     }
-    public override copyFrom(ctx: CreatematviewstmtContext): void {
+    public override copyFrom(ctx: CreateMaterializedViewStmtContext): void {
         super.copyFrom(ctx);
     }
 }
-export class CreateMaterializedViewContext extends CreatematviewstmtContext {
-    public constructor(ctx: CreatematviewstmtContext) {
+export class CreateMaterializedViewContext extends CreateMaterializedViewStmtContext {
+    public constructor(ctx: CreateMaterializedViewStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -63867,8 +63867,8 @@ export class CreateMaterializedViewContext extends CreatematviewstmtContext {
     public KW_AS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AS, 0)!;
     }
-    public selectstmt(): SelectstmtContext {
-        return this.getRuleContext(0, SelectstmtContext)!;
+    public selectStmt(): SelectStmtContext {
+        return this.getRuleContext(0, SelectStmtContext)!;
     }
     public KW_UNLOGGED(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_UNLOGGED, 0);
@@ -63882,11 +63882,11 @@ export class CreateMaterializedViewContext extends CreatematviewstmtContext {
     public table_access_method_clause(): Table_access_method_clauseContext | null {
         return this.getRuleContext(0, Table_access_method_clauseContext);
     }
-    public opt_reloptions(): Opt_reloptionsContext | null {
-        return this.getRuleContext(0, Opt_reloptionsContext);
+    public optRelOptions(): OptRelOptionsContext | null {
+        return this.getRuleContext(0, OptRelOptionsContext);
     }
-    public opttablespace(): OpttablespaceContext | null {
-        return this.getRuleContext(0, OpttablespaceContext);
+    public optTableSpace(): OptTableSpaceContext | null {
+        return this.getRuleContext(0, OptTableSpaceContext);
     }
     public opt_with_data(): Opt_with_dataContext | null {
         return this.getRuleContext(0, Opt_with_dataContext);
@@ -63911,7 +63911,7 @@ export class CreateMaterializedViewContext extends CreatematviewstmtContext {
 }
 
 
-export class RefreshmatviewstmtContext extends antlr.ParserRuleContext {
+export class RefreshMaterializedViewStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63934,21 +63934,21 @@ export class RefreshmatviewstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_with_dataContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_refreshmatviewstmt;
+        return PostgreSqlParser.RULE_refreshMaterializedViewStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRefreshmatviewstmt) {
-             listener.enterRefreshmatviewstmt(this);
+        if(listener.enterRefreshMaterializedViewStmt) {
+             listener.enterRefreshMaterializedViewStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRefreshmatviewstmt) {
-             listener.exitRefreshmatviewstmt(this);
+        if(listener.exitRefreshMaterializedViewStmt) {
+             listener.exitRefreshMaterializedViewStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRefreshmatviewstmt) {
-            return visitor.visitRefreshmatviewstmt(this);
+        if (visitor.visitRefreshMaterializedViewStmt) {
+            return visitor.visitRefreshMaterializedViewStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -63956,7 +63956,7 @@ export class RefreshmatviewstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateseqstmtContext extends antlr.ParserRuleContext {
+export class CreateSeqStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -63969,37 +63969,37 @@ export class CreateseqstmtContext extends antlr.ParserRuleContext {
     public qualified_name(): Qualified_nameContext {
         return this.getRuleContext(0, Qualified_nameContext)!;
     }
-    public opttemp(): OpttempContext | null {
-        return this.getRuleContext(0, OpttempContext);
+    public optTemp(): OptTempContext | null {
+        return this.getRuleContext(0, OptTempContext);
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
     }
-    public seqoptelem(): SeqoptelemContext[];
-    public seqoptelem(i: number): SeqoptelemContext | null;
-    public seqoptelem(i?: number): SeqoptelemContext[] | SeqoptelemContext | null {
+    public seqOptElem(): SeqOptElemContext[];
+    public seqOptElem(i: number): SeqOptElemContext | null;
+    public seqOptElem(i?: number): SeqOptElemContext[] | SeqOptElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SeqoptelemContext);
+            return this.getRuleContexts(SeqOptElemContext);
         }
 
-        return this.getRuleContext(i, SeqoptelemContext);
+        return this.getRuleContext(i, SeqOptElemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createseqstmt;
+        return PostgreSqlParser.RULE_createSeqStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateseqstmt) {
-             listener.enterCreateseqstmt(this);
+        if(listener.enterCreateSeqStmt) {
+             listener.enterCreateSeqStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateseqstmt) {
-             listener.exitCreateseqstmt(this);
+        if(listener.exitCreateSeqStmt) {
+             listener.exitCreateSeqStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateseqstmt) {
-            return visitor.visitCreateseqstmt(this);
+        if (visitor.visitCreateSeqStmt) {
+            return visitor.visitCreateSeqStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64007,7 +64007,7 @@ export class CreateseqstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterseqstmtContext extends antlr.ParserRuleContext {
+export class AlterSeqStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64023,31 +64023,31 @@ export class AlterseqstmtContext extends antlr.ParserRuleContext {
     public opt_if_exists(): Opt_if_existsContext | null {
         return this.getRuleContext(0, Opt_if_existsContext);
     }
-    public seqoptelem(): SeqoptelemContext[];
-    public seqoptelem(i: number): SeqoptelemContext | null;
-    public seqoptelem(i?: number): SeqoptelemContext[] | SeqoptelemContext | null {
+    public seqOptElem(): SeqOptElemContext[];
+    public seqOptElem(i: number): SeqOptElemContext | null;
+    public seqOptElem(i?: number): SeqOptElemContext[] | SeqOptElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SeqoptelemContext);
+            return this.getRuleContexts(SeqOptElemContext);
         }
 
-        return this.getRuleContext(i, SeqoptelemContext);
+        return this.getRuleContext(i, SeqOptElemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterseqstmt;
+        return PostgreSqlParser.RULE_alterSeqStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterseqstmt) {
-             listener.enterAlterseqstmt(this);
+        if(listener.enterAlterSeqStmt) {
+             listener.enterAlterSeqStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterseqstmt) {
-             listener.exitAlterseqstmt(this);
+        if(listener.exitAlterSeqStmt) {
+             listener.exitAlterSeqStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterseqstmt) {
-            return visitor.visitAlterseqstmt(this);
+        if (visitor.visitAlterSeqStmt) {
+            return visitor.visitAlterSeqStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64055,21 +64055,21 @@ export class AlterseqstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class SeqoptelemContext extends antlr.ParserRuleContext {
+export class SeqOptElemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public simpletypename(): SimpletypenameContext | null {
-        return this.getRuleContext(0, SimpletypenameContext);
+    public simpleTypeName(): SimpleTypeNameContext | null {
+        return this.getRuleContext(0, SimpleTypeNameContext);
     }
     public KW_CACHE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CACHE, 0);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
     public KW_INCREMENT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_INCREMENT, 0);
@@ -64114,21 +64114,21 @@ export class SeqoptelemContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_RESTART, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_seqoptelem;
+        return PostgreSqlParser.RULE_seqOptElem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterSeqoptelem) {
-             listener.enterSeqoptelem(this);
+        if(listener.enterSeqOptElem) {
+             listener.enterSeqOptElem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitSeqoptelem) {
-             listener.exitSeqoptelem(this);
+        if(listener.exitSeqOptElem) {
+             listener.exitSeqOptElem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSeqoptelem) {
-            return visitor.visitSeqoptelem(this);
+        if (visitor.visitSeqOptElem) {
+            return visitor.visitSeqOptElem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64136,7 +64136,7 @@ export class SeqoptelemContext extends antlr.ParserRuleContext {
 }
 
 
-export class NumericonlyContext extends antlr.ParserRuleContext {
+export class NumericOnlyContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64149,25 +64149,25 @@ export class NumericonlyContext extends antlr.ParserRuleContext {
     public MINUS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.MINUS, 0);
     }
-    public signediconst(): SignediconstContext | null {
-        return this.getRuleContext(0, SignediconstContext);
+    public signedConst(): SignedConstContext | null {
+        return this.getRuleContext(0, SignedConstContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_numericonly;
+        return PostgreSqlParser.RULE_numericOnly;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterNumericonly) {
-             listener.enterNumericonly(this);
+        if(listener.enterNumericOnly) {
+             listener.enterNumericOnly(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitNumericonly) {
-             listener.exitNumericonly(this);
+        if(listener.exitNumericOnly) {
+             listener.exitNumericOnly(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitNumericonly) {
-            return visitor.visitNumericonly(this);
+        if (visitor.visitNumericOnly) {
+            return visitor.visitNumericOnly(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64175,7 +64175,7 @@ export class NumericonlyContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateplangstmtContext extends antlr.ParserRuleContext {
+export class CreateProceduralLangStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64185,8 +64185,8 @@ export class CreateplangstmtContext extends antlr.ParserRuleContext {
     public KW_LANGUAGE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_LANGUAGE, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public opt_or_replace(): Opt_or_replaceContext | null {
         return this.getRuleContext(0, Opt_or_replaceContext);
@@ -64219,21 +64219,21 @@ export class CreateplangstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_NO, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createplangstmt;
+        return PostgreSqlParser.RULE_createProceduralLangStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateplangstmt) {
-             listener.enterCreateplangstmt(this);
+        if(listener.enterCreateProceduralLangStmt) {
+             listener.enterCreateProceduralLangStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateplangstmt) {
-             listener.exitCreateplangstmt(this);
+        if(listener.exitCreateProceduralLangStmt) {
+             listener.exitCreateProceduralLangStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateplangstmt) {
-            return visitor.visitCreateplangstmt(this);
+        if (visitor.visitCreateProceduralLangStmt) {
+            return visitor.visitCreateProceduralLangStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64241,47 +64241,47 @@ export class CreateplangstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatetablespacestmtContext extends antlr.ParserRuleContext {
+export class CreateTableSpaceStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_CREATE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_CREATE, 0)!;
     }
-    public opttablespace(): OpttablespaceContext {
-        return this.getRuleContext(0, OpttablespaceContext)!;
+    public optTableSpace(): OptTableSpaceContext {
+        return this.getRuleContext(0, OptTableSpaceContext)!;
     }
     public KW_LOCATION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_LOCATION, 0)!;
     }
-    public sconst(): SconstContext {
-        return this.getRuleContext(0, SconstContext)!;
+    public stringConst(): StringConstContext {
+        return this.getRuleContext(0, StringConstContext)!;
     }
     public KW_OWNER(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OWNER, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
-    public opt_reloptions(): Opt_reloptionsContext | null {
-        return this.getRuleContext(0, Opt_reloptionsContext);
+    public optRelOptions(): OptRelOptionsContext | null {
+        return this.getRuleContext(0, OptRelOptionsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createtablespacestmt;
+        return PostgreSqlParser.RULE_createTableSpaceStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatetablespacestmt) {
-             listener.enterCreatetablespacestmt(this);
+        if(listener.enterCreateTableSpaceStmt) {
+             listener.enterCreateTableSpaceStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatetablespacestmt) {
-             listener.exitCreatetablespacestmt(this);
+        if(listener.exitCreateTableSpaceStmt) {
+             listener.exitCreateTableSpaceStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatetablespacestmt) {
-            return visitor.visitCreatetablespacestmt(this);
+        if (visitor.visitCreateTableSpaceStmt) {
+            return visitor.visitCreateTableSpaceStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64289,7 +64289,7 @@ export class CreatetablespacestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateextensionstmtContext extends antlr.ParserRuleContext {
+export class CreateExtensionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64299,8 +64299,8 @@ export class CreateextensionstmtContext extends antlr.ParserRuleContext {
     public KW_EXTENSION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_EXTENSION, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
@@ -64326,14 +64326,14 @@ export class CreateextensionstmtContext extends antlr.ParserRuleContext {
 
         return this.getRuleContext(i, Schema_nameContext);
     }
-    public nonreservedword_or_sconst(): Nonreservedword_or_sconstContext[];
-    public nonreservedword_or_sconst(i: number): Nonreservedword_or_sconstContext | null;
-    public nonreservedword_or_sconst(i?: number): Nonreservedword_or_sconstContext[] | Nonreservedword_or_sconstContext | null {
+    public nonReservedWordOrStringConst(): NonReservedWordOrStringConstContext[];
+    public nonReservedWordOrStringConst(i: number): NonReservedWordOrStringConstContext | null;
+    public nonReservedWordOrStringConst(i?: number): NonReservedWordOrStringConstContext[] | NonReservedWordOrStringConstContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Nonreservedword_or_sconstContext);
+            return this.getRuleContexts(NonReservedWordOrStringConstContext);
         }
 
-        return this.getRuleContext(i, Nonreservedword_or_sconstContext);
+        return this.getRuleContext(i, NonReservedWordOrStringConstContext);
     }
     public KW_CASCADE(): antlr.TerminalNode[];
     public KW_CASCADE(i: number): antlr.TerminalNode | null;
@@ -64363,21 +64363,21 @@ export class CreateextensionstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createextensionstmt;
+        return PostgreSqlParser.RULE_createExtensionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateextensionstmt) {
-             listener.enterCreateextensionstmt(this);
+        if(listener.enterCreateExtensionStmt) {
+             listener.enterCreateExtensionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateextensionstmt) {
-             listener.exitCreateextensionstmt(this);
+        if(listener.exitCreateExtensionStmt) {
+             listener.exitCreateExtensionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateextensionstmt) {
-            return visitor.visitCreateextensionstmt(this);
+        if (visitor.visitCreateExtensionStmt) {
+            return visitor.visitCreateExtensionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64385,7 +64385,7 @@ export class CreateextensionstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterextensionstmtContext extends antlr.ParserRuleContext {
+export class AlterExtensionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64395,8 +64395,8 @@ export class AlterextensionstmtContext extends antlr.ParserRuleContext {
     public KW_EXTENSION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_EXTENSION, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_UPDATE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_UPDATE, 0)!;
@@ -64410,31 +64410,31 @@ export class AlterextensionstmtContext extends antlr.ParserRuleContext {
     		return this.getToken(PostgreSqlParser.KW_TO, i);
     	}
     }
-    public nonreservedword_or_sconst(): Nonreservedword_or_sconstContext[];
-    public nonreservedword_or_sconst(i: number): Nonreservedword_or_sconstContext | null;
-    public nonreservedword_or_sconst(i?: number): Nonreservedword_or_sconstContext[] | Nonreservedword_or_sconstContext | null {
+    public nonReservedWordOrStringConst(): NonReservedWordOrStringConstContext[];
+    public nonReservedWordOrStringConst(i: number): NonReservedWordOrStringConstContext | null;
+    public nonReservedWordOrStringConst(i?: number): NonReservedWordOrStringConstContext[] | NonReservedWordOrStringConstContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Nonreservedword_or_sconstContext);
+            return this.getRuleContexts(NonReservedWordOrStringConstContext);
         }
 
-        return this.getRuleContext(i, Nonreservedword_or_sconstContext);
+        return this.getRuleContext(i, NonReservedWordOrStringConstContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterextensionstmt;
+        return PostgreSqlParser.RULE_alterExtensionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterextensionstmt) {
-             listener.enterAlterextensionstmt(this);
+        if(listener.enterAlterExtensionStmt) {
+             listener.enterAlterExtensionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterextensionstmt) {
-             listener.exitAlterextensionstmt(this);
+        if(listener.exitAlterExtensionStmt) {
+             listener.exitAlterExtensionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterextensionstmt) {
-            return visitor.visitAlterextensionstmt(this);
+        if (visitor.visitAlterExtensionStmt) {
+            return visitor.visitAlterExtensionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64442,7 +64442,7 @@ export class AlterextensionstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterextensioncontentsstmtContext extends antlr.ParserRuleContext {
+export class AlterExtensionContentsStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64452,14 +64452,14 @@ export class AlterextensioncontentsstmtContext extends antlr.ParserRuleContext {
     public KW_EXTENSION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_EXTENSION, 0)!;
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_ADD(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ADD, 0);
@@ -64488,14 +64488,14 @@ export class AlterextensioncontentsstmtContext extends antlr.ParserRuleContext {
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext | null {
-        return this.getRuleContext(0, Routine_with_argtypesContext);
+    public routineWithArgTypes(): RoutineWithArgTypesContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesContext);
     }
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypesContext);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesContext);
     }
     public KW_OPERATOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OPERATOR, 0);
@@ -64506,14 +64506,14 @@ export class AlterextensioncontentsstmtContext extends antlr.ParserRuleContext {
     public table_access_method_clause(): Table_access_method_clauseContext | null {
         return this.getRuleContext(0, Table_access_method_clauseContext);
     }
-    public operator_with_argtypes(): Operator_with_argtypesContext | null {
-        return this.getRuleContext(0, Operator_with_argtypesContext);
+    public operatorWithArgTypes(): OperatorWithArgTypesContext | null {
+        return this.getRuleContext(0, OperatorWithArgTypesContext);
     }
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public KW_CAST(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CAST, 0);
@@ -64530,8 +64530,8 @@ export class AlterextensioncontentsstmtContext extends antlr.ParserRuleContext {
     public KW_AGGREGATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AGGREGATE, 0);
     }
-    public aggregate_with_argtypes(): Aggregate_with_argtypesContext | null {
-        return this.getRuleContext(0, Aggregate_with_argtypesContext);
+    public aggregateWithArgTypes(): AggregateWithArgTypesContext | null {
+        return this.getRuleContext(0, AggregateWithArgTypesContext);
     }
     public object_type_name(): Object_type_nameContext | null {
         return this.getRuleContext(0, Object_type_nameContext);
@@ -64552,21 +64552,21 @@ export class AlterextensioncontentsstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_TYPE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterextensioncontentsstmt;
+        return PostgreSqlParser.RULE_alterExtensionContentsStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterextensioncontentsstmt) {
-             listener.enterAlterextensioncontentsstmt(this);
+        if(listener.enterAlterExtensionContentsStmt) {
+             listener.enterAlterExtensionContentsStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterextensioncontentsstmt) {
-             listener.exitAlterextensioncontentsstmt(this);
+        if(listener.exitAlterExtensionContentsStmt) {
+             listener.exitAlterExtensionContentsStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterextensioncontentsstmt) {
-            return visitor.visitAlterextensioncontentsstmt(this);
+        if (visitor.visitAlterExtensionContentsStmt) {
+            return visitor.visitAlterExtensionContentsStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64574,7 +64574,7 @@ export class AlterextensioncontentsstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatefdwstmtContext extends antlr.ParserRuleContext {
+export class CreateFdwStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64590,8 +64590,8 @@ export class CreatefdwstmtContext extends antlr.ParserRuleContext {
     public KW_WRAPPER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_WRAPPER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public create_generic_options(): Create_generic_optionsContext | null {
         return this.getRuleContext(0, Create_generic_optionsContext);
@@ -64606,21 +64606,21 @@ export class CreatefdwstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, Fdw_optionContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createfdwstmt;
+        return PostgreSqlParser.RULE_createFdwStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatefdwstmt) {
-             listener.enterCreatefdwstmt(this);
+        if(listener.enterCreateFdwStmt) {
+             listener.enterCreateFdwStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatefdwstmt) {
-             listener.exitCreatefdwstmt(this);
+        if(listener.exitCreateFdwStmt) {
+             listener.exitCreateFdwStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatefdwstmt) {
-            return visitor.visitCreatefdwstmt(this);
+        if (visitor.visitCreateFdwStmt) {
+            return visitor.visitCreateFdwStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64667,7 +64667,7 @@ export class Fdw_optionContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterfdwstmtContext extends antlr.ParserRuleContext {
+export class AlterFdwStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64683,8 +64683,8 @@ export class AlterfdwstmtContext extends antlr.ParserRuleContext {
     public KW_WRAPPER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_WRAPPER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public alter_generic_options(): Alter_generic_optionsContext | null {
         return this.getRuleContext(0, Alter_generic_optionsContext);
@@ -64699,21 +64699,21 @@ export class AlterfdwstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, Fdw_optionContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterfdwstmt;
+        return PostgreSqlParser.RULE_alterFdwStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterfdwstmt) {
-             listener.enterAlterfdwstmt(this);
+        if(listener.enterAlterFdwStmt) {
+             listener.enterAlterFdwStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterfdwstmt) {
-             listener.exitAlterfdwstmt(this);
+        if(listener.exitAlterFdwStmt) {
+             listener.exitAlterFdwStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterfdwstmt) {
-            return visitor.visitAlterfdwstmt(this);
+        if (visitor.visitAlterFdwStmt) {
+            return visitor.visitAlterFdwStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64872,11 +64872,11 @@ export class Generic_option_elemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public collabel(): CollabelContext {
-        return this.getRuleContext(0, CollabelContext)!;
+    public colLabel(): ColLabelContext {
+        return this.getRuleContext(0, ColLabelContext)!;
     }
-    public sconst(): SconstContext {
-        return this.getRuleContext(0, SconstContext)!;
+    public stringConst(): StringConstContext {
+        return this.getRuleContext(0, StringConstContext)!;
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_generic_option_elem;
@@ -64901,7 +64901,7 @@ export class Generic_option_elemContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateforeignserverstmtContext extends antlr.ParserRuleContext {
+export class CreateForeignServerStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -64911,14 +64911,14 @@ export class CreateforeignserverstmtContext extends antlr.ParserRuleContext {
     public KW_SERVER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SERVER, 0)!;
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_FOREIGN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_FOREIGN, 0)!;
@@ -64935,8 +64935,8 @@ export class CreateforeignserverstmtContext extends antlr.ParserRuleContext {
     public KW_TYPE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TYPE, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public foreign_server_version(): Foreign_server_versionContext | null {
         return this.getRuleContext(0, Foreign_server_versionContext);
@@ -64945,21 +64945,21 @@ export class CreateforeignserverstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Create_generic_optionsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createforeignserverstmt;
+        return PostgreSqlParser.RULE_createForeignServerStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateforeignserverstmt) {
-             listener.enterCreateforeignserverstmt(this);
+        if(listener.enterCreateForeignServerStmt) {
+             listener.enterCreateForeignServerStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateforeignserverstmt) {
-             listener.exitCreateforeignserverstmt(this);
+        if(listener.exitCreateForeignServerStmt) {
+             listener.exitCreateForeignServerStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateforeignserverstmt) {
-            return visitor.visitCreateforeignserverstmt(this);
+        if (visitor.visitCreateForeignServerStmt) {
+            return visitor.visitCreateForeignServerStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -64974,8 +64974,8 @@ export class Foreign_server_versionContext extends antlr.ParserRuleContext {
     public KW_VERSION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_VERSION, 0)!;
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_NULL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NULL, 0);
@@ -65003,7 +65003,7 @@ export class Foreign_server_versionContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterforeignserverstmtContext extends antlr.ParserRuleContext {
+export class AlterForeignServerStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65013,8 +65013,8 @@ export class AlterforeignserverstmtContext extends antlr.ParserRuleContext {
     public KW_SERVER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SERVER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public alter_generic_options(): Alter_generic_optionsContext | null {
         return this.getRuleContext(0, Alter_generic_optionsContext);
@@ -65023,21 +65023,21 @@ export class AlterforeignserverstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Foreign_server_versionContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterforeignserverstmt;
+        return PostgreSqlParser.RULE_alterForeignServerStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterforeignserverstmt) {
-             listener.enterAlterforeignserverstmt(this);
+        if(listener.enterAlterForeignServerStmt) {
+             listener.enterAlterForeignServerStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterforeignserverstmt) {
-             listener.exitAlterforeignserverstmt(this);
+        if(listener.exitAlterForeignServerStmt) {
+             listener.exitAlterForeignServerStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterforeignserverstmt) {
-            return visitor.visitAlterforeignserverstmt(this);
+        if (visitor.visitAlterForeignServerStmt) {
+            return visitor.visitAlterForeignServerStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65045,19 +65045,19 @@ export class AlterforeignserverstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateforeigntablestmtContext extends antlr.ParserRuleContext {
+export class CreateForeignTableStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createforeigntablestmt;
+        return PostgreSqlParser.RULE_createForeignTableStmt;
     }
-    public override copyFrom(ctx: CreateforeigntablestmtContext): void {
+    public override copyFrom(ctx: CreateForeignTableStmtContext): void {
         super.copyFrom(ctx);
     }
 }
-export class CreateForeignTableContext extends CreateforeigntablestmtContext {
-    public constructor(ctx: CreateforeigntablestmtContext) {
+export class CreateForeignTableContext extends CreateForeignTableStmtContext {
+    public constructor(ctx: CreateForeignTableStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -65082,17 +65082,17 @@ export class CreateForeignTableContext extends CreateforeigntablestmtContext {
     public KW_SERVER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SERVER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
     }
-    public tableelementlist(): TableelementlistContext | null {
-        return this.getRuleContext(0, TableelementlistContext);
+    public tableElementList(): TableElementListContext | null {
+        return this.getRuleContext(0, TableElementListContext);
     }
-    public optinherit(): OptinheritContext | null {
-        return this.getRuleContext(0, OptinheritContext);
+    public optInherit(): OptInheritContext | null {
+        return this.getRuleContext(0, OptInheritContext);
     }
     public create_generic_options(): Create_generic_optionsContext | null {
         return this.getRuleContext(0, Create_generic_optionsContext);
@@ -65115,8 +65115,8 @@ export class CreateForeignTableContext extends CreateforeigntablestmtContext {
         }
     }
 }
-export class CreatePartitionForeignTableContext extends CreateforeigntablestmtContext {
-    public constructor(ctx: CreateforeigntablestmtContext) {
+export class CreatePartitionForeignTableContext extends CreateForeignTableStmtContext {
+    public constructor(ctx: CreateForeignTableStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -65141,20 +65141,20 @@ export class CreatePartitionForeignTableContext extends CreateforeigntablestmtCo
     public table_name(): Table_nameContext {
         return this.getRuleContext(0, Table_nameContext)!;
     }
-    public partitionboundspec(): PartitionboundspecContext {
-        return this.getRuleContext(0, PartitionboundspecContext)!;
+    public partitionBoundSpec(): PartitionBoundSpecContext {
+        return this.getRuleContext(0, PartitionBoundSpecContext)!;
     }
     public KW_SERVER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SERVER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
     }
-    public opttypedtableelementlist(): OpttypedtableelementlistContext | null {
-        return this.getRuleContext(0, OpttypedtableelementlistContext);
+    public optTypedTableElEmentList(): OptTypedTableElEmentListContext | null {
+        return this.getRuleContext(0, OptTypedTableElEmentListContext);
     }
     public create_generic_options(): Create_generic_optionsContext | null {
         return this.getRuleContext(0, Create_generic_optionsContext);
@@ -65179,7 +65179,7 @@ export class CreatePartitionForeignTableContext extends CreateforeigntablestmtCo
 }
 
 
-export class ImportforeignschemastmtContext extends antlr.ParserRuleContext {
+export class ImportForeignSchemaStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65201,14 +65201,14 @@ export class ImportforeignschemastmtContext extends antlr.ParserRuleContext {
     public KW_SERVER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SERVER, 0)!;
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_INTO(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_INTO, 0)!;
@@ -65235,21 +65235,21 @@ export class ImportforeignschemastmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_EXCEPT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_importforeignschemastmt;
+        return PostgreSqlParser.RULE_importForeignSchemaStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterImportforeignschemastmt) {
-             listener.enterImportforeignschemastmt(this);
+        if(listener.enterImportForeignSchemaStmt) {
+             listener.enterImportForeignSchemaStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitImportforeignschemastmt) {
-             listener.exitImportforeignschemastmt(this);
+        if(listener.exitImportForeignSchemaStmt) {
+             listener.exitImportForeignSchemaStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitImportforeignschemastmt) {
-            return visitor.visitImportforeignschemastmt(this);
+        if (visitor.visitImportForeignSchemaStmt) {
+            return visitor.visitImportForeignSchemaStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65257,7 +65257,7 @@ export class ImportforeignschemastmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateusermappingstmtContext extends antlr.ParserRuleContext {
+export class CreateUserMappingStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65282,11 +65282,11 @@ export class CreateusermappingstmtContext extends antlr.ParserRuleContext {
     public KW_SERVER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SERVER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
@@ -65295,21 +65295,21 @@ export class CreateusermappingstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Create_generic_optionsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createusermappingstmt;
+        return PostgreSqlParser.RULE_createUserMappingStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateusermappingstmt) {
-             listener.enterCreateusermappingstmt(this);
+        if(listener.enterCreateUserMappingStmt) {
+             listener.enterCreateUserMappingStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateusermappingstmt) {
-             listener.exitCreateusermappingstmt(this);
+        if(listener.exitCreateUserMappingStmt) {
+             listener.exitCreateUserMappingStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateusermappingstmt) {
-            return visitor.visitCreateusermappingstmt(this);
+        if (visitor.visitCreateUserMappingStmt) {
+            return visitor.visitCreateUserMappingStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65317,7 +65317,7 @@ export class CreateusermappingstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterusermappingstmtContext extends antlr.ParserRuleContext {
+export class AlterUserMappingStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65342,31 +65342,31 @@ export class AlterusermappingstmtContext extends antlr.ParserRuleContext {
     public KW_SERVER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SERVER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public alter_generic_options(): Alter_generic_optionsContext {
         return this.getRuleContext(0, Alter_generic_optionsContext)!;
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterusermappingstmt;
+        return PostgreSqlParser.RULE_alterUserMappingStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterusermappingstmt) {
-             listener.enterAlterusermappingstmt(this);
+        if(listener.enterAlterUserMappingStmt) {
+             listener.enterAlterUserMappingStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterusermappingstmt) {
-             listener.exitAlterusermappingstmt(this);
+        if(listener.exitAlterUserMappingStmt) {
+             listener.exitAlterUserMappingStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterusermappingstmt) {
-            return visitor.visitAlterusermappingstmt(this);
+        if (visitor.visitAlterUserMappingStmt) {
+            return visitor.visitAlterUserMappingStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65374,7 +65374,7 @@ export class AlterusermappingstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatepolicystmtContext extends antlr.ParserRuleContext {
+export class CreatePolicyStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65384,8 +65384,8 @@ export class CreatepolicystmtContext extends antlr.ParserRuleContext {
     public KW_POLICY(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_POLICY, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_ON(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_ON, 0)!;
@@ -65405,11 +65405,11 @@ export class CreatepolicystmtContext extends antlr.ParserRuleContext {
     public role_list(): Role_listContext | null {
         return this.getRuleContext(0, Role_listContext);
     }
-    public rowsecurityoptionalexpr(): RowsecurityoptionalexprContext | null {
-        return this.getRuleContext(0, RowsecurityoptionalexprContext);
+    public rowSecurityOptionalExpr(): RowSecurityOptionalExprContext | null {
+        return this.getRuleContext(0, RowSecurityOptionalExprContext);
     }
-    public rowsecurityoptionalwithcheck(): RowsecurityoptionalwithcheckContext | null {
-        return this.getRuleContext(0, RowsecurityoptionalwithcheckContext);
+    public rowSecurityOptionalWithCheck(): RowSecurityOptionalWithCheckContext | null {
+        return this.getRuleContext(0, RowSecurityOptionalWithCheckContext);
     }
     public KW_ALL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ALL, 0);
@@ -65436,21 +65436,21 @@ export class CreatepolicystmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, IdentifierContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createpolicystmt;
+        return PostgreSqlParser.RULE_createPolicyStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatepolicystmt) {
-             listener.enterCreatepolicystmt(this);
+        if(listener.enterCreatePolicyStmt) {
+             listener.enterCreatePolicyStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatepolicystmt) {
-             listener.exitCreatepolicystmt(this);
+        if(listener.exitCreatePolicyStmt) {
+             listener.exitCreatePolicyStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatepolicystmt) {
-            return visitor.visitCreatepolicystmt(this);
+        if (visitor.visitCreatePolicyStmt) {
+            return visitor.visitCreatePolicyStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65458,7 +65458,7 @@ export class CreatepolicystmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterpolicystmtContext extends antlr.ParserRuleContext {
+export class AlterPolicyStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65468,8 +65468,8 @@ export class AlterpolicystmtContext extends antlr.ParserRuleContext {
     public KW_POLICY(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_POLICY, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_ON(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_ON, 0)!;
@@ -65483,28 +65483,28 @@ export class AlterpolicystmtContext extends antlr.ParserRuleContext {
     public role_list(): Role_listContext | null {
         return this.getRuleContext(0, Role_listContext);
     }
-    public rowsecurityoptionalexpr(): RowsecurityoptionalexprContext | null {
-        return this.getRuleContext(0, RowsecurityoptionalexprContext);
+    public rowSecurityOptionalExpr(): RowSecurityOptionalExprContext | null {
+        return this.getRuleContext(0, RowSecurityOptionalExprContext);
     }
-    public rowsecurityoptionalwithcheck(): RowsecurityoptionalwithcheckContext | null {
-        return this.getRuleContext(0, RowsecurityoptionalwithcheckContext);
+    public rowSecurityOptionalWithCheck(): RowSecurityOptionalWithCheckContext | null {
+        return this.getRuleContext(0, RowSecurityOptionalWithCheckContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterpolicystmt;
+        return PostgreSqlParser.RULE_alterPolicyStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterpolicystmt) {
-             listener.enterAlterpolicystmt(this);
+        if(listener.enterAlterPolicyStmt) {
+             listener.enterAlterPolicyStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterpolicystmt) {
-             listener.exitAlterpolicystmt(this);
+        if(listener.exitAlterPolicyStmt) {
+             listener.exitAlterPolicyStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterpolicystmt) {
-            return visitor.visitAlterpolicystmt(this);
+        if (visitor.visitAlterPolicyStmt) {
+            return visitor.visitAlterPolicyStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65512,7 +65512,7 @@ export class AlterpolicystmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterprocedurestmtContext extends antlr.ParserRuleContext {
+export class AlterProcedureStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65546,8 +65546,8 @@ export class AlterprocedurestmtContext extends antlr.ParserRuleContext {
     public KW_OWNER(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OWNER, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public KW_SET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SET, 0);
@@ -65567,8 +65567,8 @@ export class AlterprocedurestmtContext extends antlr.ParserRuleContext {
     public KW_EXTENSION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_EXTENSION, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public func_args(): Func_argsContext | null {
         return this.getRuleContext(0, Func_argsContext);
@@ -65580,21 +65580,21 @@ export class AlterprocedurestmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_NO, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterprocedurestmt;
+        return PostgreSqlParser.RULE_alterProcedureStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterprocedurestmt) {
-             listener.enterAlterprocedurestmt(this);
+        if(listener.enterAlterProcedureStmt) {
+             listener.enterAlterProcedureStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterprocedurestmt) {
-             listener.exitAlterprocedurestmt(this);
+        if(listener.exitAlterProcedureStmt) {
+             listener.exitAlterProcedureStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterprocedurestmt) {
-            return visitor.visitAlterprocedurestmt(this);
+        if (visitor.visitAlterProcedureStmt) {
+            return visitor.visitAlterProcedureStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65621,14 +65621,14 @@ export class Procedure_actionContext extends antlr.ParserRuleContext {
     public KW_SET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SET, 0);
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
@@ -65674,7 +65674,7 @@ export class Procedure_actionContext extends antlr.ParserRuleContext {
 }
 
 
-export class RowsecurityoptionalexprContext extends antlr.ParserRuleContext {
+export class RowSecurityOptionalExprContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65691,21 +65691,21 @@ export class RowsecurityoptionalexprContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_rowsecurityoptionalexpr;
+        return PostgreSqlParser.RULE_rowSecurityOptionalExpr;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRowsecurityoptionalexpr) {
-             listener.enterRowsecurityoptionalexpr(this);
+        if(listener.enterRowSecurityOptionalExpr) {
+             listener.enterRowSecurityOptionalExpr(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRowsecurityoptionalexpr) {
-             listener.exitRowsecurityoptionalexpr(this);
+        if(listener.exitRowSecurityOptionalExpr) {
+             listener.exitRowSecurityOptionalExpr(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRowsecurityoptionalexpr) {
-            return visitor.visitRowsecurityoptionalexpr(this);
+        if (visitor.visitRowSecurityOptionalExpr) {
+            return visitor.visitRowSecurityOptionalExpr(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65713,7 +65713,7 @@ export class RowsecurityoptionalexprContext extends antlr.ParserRuleContext {
 }
 
 
-export class RowsecurityoptionalwithcheckContext extends antlr.ParserRuleContext {
+export class RowSecurityOptionalWithCheckContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65733,21 +65733,21 @@ export class RowsecurityoptionalwithcheckContext extends antlr.ParserRuleContext
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_rowsecurityoptionalwithcheck;
+        return PostgreSqlParser.RULE_rowSecurityOptionalWithCheck;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRowsecurityoptionalwithcheck) {
-             listener.enterRowsecurityoptionalwithcheck(this);
+        if(listener.enterRowSecurityOptionalWithCheck) {
+             listener.enterRowSecurityOptionalWithCheck(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRowsecurityoptionalwithcheck) {
-             listener.exitRowsecurityoptionalwithcheck(this);
+        if(listener.exitRowSecurityOptionalWithCheck) {
+             listener.exitRowSecurityOptionalWithCheck(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRowsecurityoptionalwithcheck) {
-            return visitor.visitRowsecurityoptionalwithcheck(this);
+        if (visitor.visitRowSecurityOptionalWithCheck) {
+            return visitor.visitRowSecurityOptionalWithCheck(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65755,7 +65755,7 @@ export class RowsecurityoptionalwithcheckContext extends antlr.ParserRuleContext
 }
 
 
-export class CreateamstmtContext extends antlr.ParserRuleContext {
+export class CreateAccessMethodStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65768,8 +65768,8 @@ export class CreateamstmtContext extends antlr.ParserRuleContext {
     public KW_METHOD(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_METHOD, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_TYPE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_TYPE, 0)!;
@@ -65787,21 +65787,21 @@ export class CreateamstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_TABLE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createamstmt;
+        return PostgreSqlParser.RULE_createAccessMethodStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateamstmt) {
-             listener.enterCreateamstmt(this);
+        if(listener.enterCreateAccessMethodStmt) {
+             listener.enterCreateAccessMethodStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateamstmt) {
-             listener.exitCreateamstmt(this);
+        if(listener.exitCreateAccessMethodStmt) {
+             listener.exitCreateAccessMethodStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateamstmt) {
-            return visitor.visitCreateamstmt(this);
+        if (visitor.visitCreateAccessMethodStmt) {
+            return visitor.visitCreateAccessMethodStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65809,7 +65809,7 @@ export class CreateamstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatetrigstmtContext extends antlr.ParserRuleContext {
+export class CreateTrigStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65819,20 +65819,20 @@ export class CreatetrigstmtContext extends antlr.ParserRuleContext {
     public KW_TRIGGER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_TRIGGER, 0)!;
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
-    public triggeractiontime(): TriggeractiontimeContext {
-        return this.getRuleContext(0, TriggeractiontimeContext)!;
+    public triggerActionTime(): TriggerActionTimeContext {
+        return this.getRuleContext(0, TriggerActionTimeContext)!;
     }
-    public triggerevents(): TriggereventsContext {
-        return this.getRuleContext(0, TriggereventsContext)!;
+    public triggerEvents(): TriggerEventsContext {
+        return this.getRuleContext(0, TriggerEventsContext)!;
     }
     public KW_ON(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_ON, 0)!;
@@ -65849,8 +65849,8 @@ export class CreatetrigstmtContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0)!;
     }
-    public triggerfuncargs(): TriggerfuncargsContext {
-        return this.getRuleContext(0, TriggerfuncargsContext)!;
+    public triggerFuncArgs(): TriggerFuncArgsContext {
+        return this.getRuleContext(0, TriggerFuncArgsContext)!;
     }
     public CLOSE_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
@@ -65864,8 +65864,8 @@ export class CreatetrigstmtContext extends antlr.ParserRuleContext {
     public KW_FOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FOR, 0);
     }
-    public triggerwhen(): TriggerwhenContext | null {
-        return this.getRuleContext(0, TriggerwhenContext);
+    public triggerWhen(): TriggerWhenContext | null {
+        return this.getRuleContext(0, TriggerWhenContext);
     }
     public KW_ROW(): antlr.TerminalNode[];
     public KW_ROW(i: number): antlr.TerminalNode | null;
@@ -65927,31 +65927,31 @@ export class CreatetrigstmtContext extends antlr.ParserRuleContext {
     public qualified_name(): Qualified_nameContext | null {
         return this.getRuleContext(0, Qualified_nameContext);
     }
-    public constraintattributeElem(): ConstraintattributeElemContext[];
-    public constraintattributeElem(i: number): ConstraintattributeElemContext | null;
-    public constraintattributeElem(i?: number): ConstraintattributeElemContext[] | ConstraintattributeElemContext | null {
+    public constraintAttributeElem(): ConstraintAttributeElemContext[];
+    public constraintAttributeElem(i: number): ConstraintAttributeElemContext | null;
+    public constraintAttributeElem(i?: number): ConstraintAttributeElemContext[] | ConstraintAttributeElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ConstraintattributeElemContext);
+            return this.getRuleContexts(ConstraintAttributeElemContext);
         }
 
-        return this.getRuleContext(i, ConstraintattributeElemContext);
+        return this.getRuleContext(i, ConstraintAttributeElemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createtrigstmt;
+        return PostgreSqlParser.RULE_createTrigStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatetrigstmt) {
-             listener.enterCreatetrigstmt(this);
+        if(listener.enterCreateTrigStmt) {
+             listener.enterCreateTrigStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatetrigstmt) {
-             listener.exitCreatetrigstmt(this);
+        if(listener.exitCreateTrigStmt) {
+             listener.exitCreateTrigStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatetrigstmt) {
-            return visitor.visitCreatetrigstmt(this);
+        if (visitor.visitCreateTrigStmt) {
+            return visitor.visitCreateTrigStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65959,7 +65959,7 @@ export class CreatetrigstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class TriggeractiontimeContext extends antlr.ParserRuleContext {
+export class TriggerActionTimeContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -65976,21 +65976,21 @@ export class TriggeractiontimeContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_OF, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_triggeractiontime;
+        return PostgreSqlParser.RULE_triggerActionTime;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTriggeractiontime) {
-             listener.enterTriggeractiontime(this);
+        if(listener.enterTriggerActionTime) {
+             listener.enterTriggerActionTime(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTriggeractiontime) {
-             listener.exitTriggeractiontime(this);
+        if(listener.exitTriggerActionTime) {
+             listener.exitTriggerActionTime(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTriggeractiontime) {
-            return visitor.visitTriggeractiontime(this);
+        if (visitor.visitTriggerActionTime) {
+            return visitor.visitTriggerActionTime(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -65998,18 +65998,18 @@ export class TriggeractiontimeContext extends antlr.ParserRuleContext {
 }
 
 
-export class TriggereventsContext extends antlr.ParserRuleContext {
+export class TriggerEventsContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public triggeroneevent(): TriggeroneeventContext[];
-    public triggeroneevent(i: number): TriggeroneeventContext | null;
-    public triggeroneevent(i?: number): TriggeroneeventContext[] | TriggeroneeventContext | null {
+    public triggerOneEvent(): TriggerOneEventContext[];
+    public triggerOneEvent(i: number): TriggerOneEventContext | null;
+    public triggerOneEvent(i?: number): TriggerOneEventContext[] | TriggerOneEventContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(TriggeroneeventContext);
+            return this.getRuleContexts(TriggerOneEventContext);
         }
 
-        return this.getRuleContext(i, TriggeroneeventContext);
+        return this.getRuleContext(i, TriggerOneEventContext);
     }
     public KW_OR(): antlr.TerminalNode[];
     public KW_OR(i: number): antlr.TerminalNode | null;
@@ -66021,21 +66021,21 @@ export class TriggereventsContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_triggerevents;
+        return PostgreSqlParser.RULE_triggerEvents;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTriggerevents) {
-             listener.enterTriggerevents(this);
+        if(listener.enterTriggerEvents) {
+             listener.enterTriggerEvents(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTriggerevents) {
-             listener.exitTriggerevents(this);
+        if(listener.exitTriggerEvents) {
+             listener.exitTriggerEvents(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTriggerevents) {
-            return visitor.visitTriggerevents(this);
+        if (visitor.visitTriggerEvents) {
+            return visitor.visitTriggerEvents(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66043,7 +66043,7 @@ export class TriggereventsContext extends antlr.ParserRuleContext {
 }
 
 
-export class TriggeroneeventContext extends antlr.ParserRuleContext {
+export class TriggerOneEventContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66066,21 +66066,21 @@ export class TriggeroneeventContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_TRUNCATE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_triggeroneevent;
+        return PostgreSqlParser.RULE_triggerOneEvent;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTriggeroneevent) {
-             listener.enterTriggeroneevent(this);
+        if(listener.enterTriggerOneEvent) {
+             listener.enterTriggerOneEvent(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTriggeroneevent) {
-             listener.exitTriggeroneevent(this);
+        if(listener.exitTriggerOneEvent) {
+             listener.exitTriggerOneEvent(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTriggeroneevent) {
-            return visitor.visitTriggeroneevent(this);
+        if (visitor.visitTriggerOneEvent) {
+            return visitor.visitTriggerOneEvent(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66088,7 +66088,7 @@ export class TriggeroneeventContext extends antlr.ParserRuleContext {
 }
 
 
-export class TriggerwhenContext extends antlr.ParserRuleContext {
+export class TriggerWhenContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66105,21 +66105,21 @@ export class TriggerwhenContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_triggerwhen;
+        return PostgreSqlParser.RULE_triggerWhen;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTriggerwhen) {
-             listener.enterTriggerwhen(this);
+        if(listener.enterTriggerWhen) {
+             listener.enterTriggerWhen(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTriggerwhen) {
-             listener.exitTriggerwhen(this);
+        if(listener.exitTriggerWhen) {
+             listener.exitTriggerWhen(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTriggerwhen) {
-            return visitor.visitTriggerwhen(this);
+        if (visitor.visitTriggerWhen) {
+            return visitor.visitTriggerWhen(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66166,18 +66166,18 @@ export class Function_or_procedureContext extends antlr.ParserRuleContext {
 }
 
 
-export class TriggerfuncargsContext extends antlr.ParserRuleContext {
+export class TriggerFuncArgsContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public triggerfuncarg(): TriggerfuncargContext[];
-    public triggerfuncarg(i: number): TriggerfuncargContext | null;
-    public triggerfuncarg(i?: number): TriggerfuncargContext[] | TriggerfuncargContext | null {
+    public triggerFuncArg(): TriggerFuncArgContext[];
+    public triggerFuncArg(i: number): TriggerFuncArgContext | null;
+    public triggerFuncArg(i?: number): TriggerFuncArgContext[] | TriggerFuncArgContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(TriggerfuncargContext);
+            return this.getRuleContexts(TriggerFuncArgContext);
         }
 
-        return this.getRuleContext(i, TriggerfuncargContext);
+        return this.getRuleContext(i, TriggerFuncArgContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -66189,21 +66189,21 @@ export class TriggerfuncargsContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_triggerfuncargs;
+        return PostgreSqlParser.RULE_triggerFuncArgs;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTriggerfuncargs) {
-             listener.enterTriggerfuncargs(this);
+        if(listener.enterTriggerFuncArgs) {
+             listener.enterTriggerFuncArgs(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTriggerfuncargs) {
-             listener.exitTriggerfuncargs(this);
+        if(listener.exitTriggerFuncArgs) {
+             listener.exitTriggerFuncArgs(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTriggerfuncargs) {
-            return visitor.visitTriggerfuncargs(this);
+        if (visitor.visitTriggerFuncArgs) {
+            return visitor.visitTriggerFuncArgs(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66211,7 +66211,7 @@ export class TriggerfuncargsContext extends antlr.ParserRuleContext {
 }
 
 
-export class TriggerfuncargContext extends antlr.ParserRuleContext {
+export class TriggerFuncArgContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66221,28 +66221,28 @@ export class TriggerfuncargContext extends antlr.ParserRuleContext {
     public Numeric(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.Numeric, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
-    public collabel(): CollabelContext | null {
-        return this.getRuleContext(0, CollabelContext);
+    public colLabel(): ColLabelContext | null {
+        return this.getRuleContext(0, ColLabelContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_triggerfuncarg;
+        return PostgreSqlParser.RULE_triggerFuncArg;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTriggerfuncarg) {
-             listener.enterTriggerfuncarg(this);
+        if(listener.enterTriggerFuncArg) {
+             listener.enterTriggerFuncArg(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTriggerfuncarg) {
-             listener.exitTriggerfuncarg(this);
+        if(listener.exitTriggerFuncArg) {
+             listener.exitTriggerFuncArg(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTriggerfuncarg) {
-            return visitor.visitTriggerfuncarg(this);
+        if (visitor.visitTriggerFuncArg) {
+            return visitor.visitTriggerFuncArg(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66250,7 +66250,7 @@ export class TriggerfuncargContext extends antlr.ParserRuleContext {
 }
 
 
-export class ConstraintattributeElemContext extends antlr.ParserRuleContext {
+export class ConstraintAttributeElemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66279,21 +66279,21 @@ export class ConstraintattributeElemContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_INHERIT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_constraintattributeElem;
+        return PostgreSqlParser.RULE_constraintAttributeElem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterConstraintattributeElem) {
-             listener.enterConstraintattributeElem(this);
+        if(listener.enterConstraintAttributeElem) {
+             listener.enterConstraintAttributeElem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitConstraintattributeElem) {
-             listener.exitConstraintattributeElem(this);
+        if(listener.exitConstraintAttributeElem) {
+             listener.exitConstraintAttributeElem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitConstraintattributeElem) {
-            return visitor.visitConstraintattributeElem(this);
+        if (visitor.visitConstraintAttributeElem) {
+            return visitor.visitConstraintAttributeElem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66301,7 +66301,7 @@ export class ConstraintattributeElemContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateeventtrigstmtContext extends antlr.ParserRuleContext {
+export class CreateEventTrigStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66314,14 +66314,14 @@ export class CreateeventtrigstmtContext extends antlr.ParserRuleContext {
     public KW_TRIGGER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_TRIGGER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_ON(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_ON, 0)!;
     }
-    public collabel(): CollabelContext {
-        return this.getRuleContext(0, CollabelContext)!;
+    public colLabel(): ColLabelContext {
+        return this.getRuleContext(0, ColLabelContext)!;
     }
     public KW_EXECUTE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_EXECUTE, 0)!;
@@ -66357,21 +66357,21 @@ export class CreateeventtrigstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createeventtrigstmt;
+        return PostgreSqlParser.RULE_createEventTrigStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateeventtrigstmt) {
-             listener.enterCreateeventtrigstmt(this);
+        if(listener.enterCreateEventTrigStmt) {
+             listener.enterCreateEventTrigStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateeventtrigstmt) {
-             listener.exitCreateeventtrigstmt(this);
+        if(listener.exitCreateEventTrigStmt) {
+             listener.exitCreateEventTrigStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateeventtrigstmt) {
-            return visitor.visitCreateeventtrigstmt(this);
+        if (visitor.visitCreateEventTrigStmt) {
+            return visitor.visitCreateEventTrigStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66383,8 +66383,8 @@ export class Event_trigger_when_itemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_IN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_IN, 0)!;
@@ -66392,8 +66392,8 @@ export class Event_trigger_when_itemContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0)!;
     }
-    public sconst(): SconstContext {
-        return this.getRuleContext(0, SconstContext)!;
+    public stringConst(): StringConstContext {
+        return this.getRuleContext(0, StringConstContext)!;
     }
     public CLOSE_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
@@ -66430,7 +66430,7 @@ export class Event_trigger_when_itemContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltereventtrigstmtContext extends antlr.ParserRuleContext {
+export class AlterEventTrigStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66443,8 +66443,8 @@ export class AltereventtrigstmtContext extends antlr.ParserRuleContext {
     public KW_TRIGGER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_TRIGGER, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_ENABLE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ENABLE, 0);
@@ -66459,21 +66459,21 @@ export class AltereventtrigstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_ALWAYS, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altereventtrigstmt;
+        return PostgreSqlParser.RULE_alterEventTrigStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltereventtrigstmt) {
-             listener.enterAltereventtrigstmt(this);
+        if(listener.enterAlterEventTrigStmt) {
+             listener.enterAlterEventTrigStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltereventtrigstmt) {
-             listener.exitAltereventtrigstmt(this);
+        if(listener.exitAlterEventTrigStmt) {
+             listener.exitAlterEventTrigStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltereventtrigstmt) {
-            return visitor.visitAltereventtrigstmt(this);
+        if (visitor.visitAlterEventTrigStmt) {
+            return visitor.visitAlterEventTrigStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66481,7 +66481,7 @@ export class AltereventtrigstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateassertionstmtContext extends antlr.ParserRuleContext {
+export class CreateAssertionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66506,31 +66506,31 @@ export class CreateassertionstmtContext extends antlr.ParserRuleContext {
     public CLOSE_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
     }
-    public constraintattributeElem(): ConstraintattributeElemContext[];
-    public constraintattributeElem(i: number): ConstraintattributeElemContext | null;
-    public constraintattributeElem(i?: number): ConstraintattributeElemContext[] | ConstraintattributeElemContext | null {
+    public constraintAttributeElem(): ConstraintAttributeElemContext[];
+    public constraintAttributeElem(i: number): ConstraintAttributeElemContext | null;
+    public constraintAttributeElem(i?: number): ConstraintAttributeElemContext[] | ConstraintAttributeElemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ConstraintattributeElemContext);
+            return this.getRuleContexts(ConstraintAttributeElemContext);
         }
 
-        return this.getRuleContext(i, ConstraintattributeElemContext);
+        return this.getRuleContext(i, ConstraintAttributeElemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createassertionstmt;
+        return PostgreSqlParser.RULE_createAssertionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateassertionstmt) {
-             listener.enterCreateassertionstmt(this);
+        if(listener.enterCreateAssertionStmt) {
+             listener.enterCreateAssertionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateassertionstmt) {
-             listener.exitCreateassertionstmt(this);
+        if(listener.exitCreateAssertionStmt) {
+             listener.exitCreateAssertionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateassertionstmt) {
-            return visitor.visitCreateassertionstmt(this);
+        if (visitor.visitCreateAssertionStmt) {
+            return visitor.visitCreateAssertionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66538,7 +66538,7 @@ export class CreateassertionstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class DefinestmtContext extends antlr.ParserRuleContext {
+export class DefineStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66554,14 +66554,14 @@ export class DefinestmtContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
     }
-    public old_aggr_elem(): Old_aggr_elemContext[];
-    public old_aggr_elem(i: number): Old_aggr_elemContext | null;
-    public old_aggr_elem(i?: number): Old_aggr_elemContext[] | Old_aggr_elemContext | null {
+    public old_aggregate_elem(): Old_aggregate_elemContext[];
+    public old_aggregate_elem(i: number): Old_aggregate_elemContext | null;
+    public old_aggregate_elem(i?: number): Old_aggregate_elemContext[] | Old_aggregate_elemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Old_aggr_elemContext);
+            return this.getRuleContexts(Old_aggregate_elemContext);
         }
 
-        return this.getRuleContext(i, Old_aggr_elemContext);
+        return this.getRuleContext(i, Old_aggregate_elemContext);
     }
     public CLOSE_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
@@ -66569,8 +66569,8 @@ export class DefinestmtContext extends antlr.ParserRuleContext {
     public opt_or_replace(): Opt_or_replaceContext | null {
         return this.getRuleContext(0, Opt_or_replaceContext);
     }
-    public aggr_args(): Aggr_argsContext | null {
-        return this.getRuleContext(0, Aggr_argsContext);
+    public aggregate_args(): Aggregate_argsContext | null {
+        return this.getRuleContext(0, Aggregate_argsContext);
     }
     public definition(): DefinitionContext | null {
         return this.getRuleContext(0, DefinitionContext);
@@ -66608,11 +66608,11 @@ export class DefinestmtContext extends antlr.ParserRuleContext {
     public KW_ENUM(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ENUM, 0);
     }
-    public tablefuncelementlist(): TablefuncelementlistContext | null {
-        return this.getRuleContext(0, TablefuncelementlistContext);
+    public tableFuncElementList(): TableFuncElementListContext | null {
+        return this.getRuleContext(0, TableFuncElementListContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public notify_payload(): Notify_payloadContext[];
     public notify_payload(i: number): Notify_payloadContext | null;
@@ -66654,21 +66654,21 @@ export class DefinestmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_FROM, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_definestmt;
+        return PostgreSqlParser.RULE_defineStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterDefinestmt) {
-             listener.enterDefinestmt(this);
+        if(listener.enterDefineStmt) {
+             listener.enterDefineStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitDefinestmt) {
-             listener.exitDefinestmt(this);
+        if(listener.exitDefineStmt) {
+             listener.exitDefineStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDefinestmt) {
-            return visitor.visitDefinestmt(this);
+        if (visitor.visitDefineStmt) {
+            return visitor.visitDefineStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66731,8 +66731,8 @@ export class Def_elemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public collabel(): CollabelContext {
-        return this.getRuleContext(0, CollabelContext)!;
+    public colLabel(): ColLabelContext {
+        return this.getRuleContext(0, ColLabelContext)!;
     }
     public EQUAL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.EQUAL, 0);
@@ -66776,11 +66776,11 @@ export class Def_argContext extends antlr.ParserRuleContext {
     public qual_all_op(): Qual_all_opContext | null {
         return this.getRuleContext(0, Qual_all_opContext);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_NONE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NONE, 0);
@@ -66808,7 +66808,7 @@ export class Def_argContext extends antlr.ParserRuleContext {
 }
 
 
-export class Old_aggr_elemContext extends antlr.ParserRuleContext {
+export class Old_aggregate_elemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66822,21 +66822,21 @@ export class Old_aggr_elemContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Def_argContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_old_aggr_elem;
+        return PostgreSqlParser.RULE_old_aggregate_elem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOld_aggr_elem) {
-             listener.enterOld_aggr_elem(this);
+        if(listener.enterOld_aggregate_elem) {
+             listener.enterOld_aggregate_elem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOld_aggr_elem) {
-             listener.exitOld_aggr_elem(this);
+        if(listener.exitOld_aggregate_elem) {
+             listener.exitOld_aggregate_elem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOld_aggr_elem) {
-            return visitor.visitOld_aggr_elem(this);
+        if (visitor.visitOld_aggregate_elem) {
+            return visitor.visitOld_aggregate_elem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66844,7 +66844,7 @@ export class Old_aggr_elemContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterenumstmtContext extends antlr.ParserRuleContext {
+export class AlterEnumStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66863,14 +66863,14 @@ export class AlterenumstmtContext extends antlr.ParserRuleContext {
     public KW_VALUE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_VALUE, 0)!;
     }
-    public sconst(): SconstContext[];
-    public sconst(i: number): SconstContext | null;
-    public sconst(i?: number): SconstContext[] | SconstContext | null {
+    public stringConst(): StringConstContext[];
+    public stringConst(i: number): StringConstContext | null;
+    public stringConst(i?: number): StringConstContext[] | StringConstContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SconstContext);
+            return this.getRuleContexts(StringConstContext);
         }
 
-        return this.getRuleContext(i, SconstContext);
+        return this.getRuleContext(i, StringConstContext);
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
@@ -66888,21 +66888,21 @@ export class AlterenumstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterenumstmt;
+        return PostgreSqlParser.RULE_alterEnumStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterenumstmt) {
-             listener.enterAlterenumstmt(this);
+        if(listener.enterAlterEnumStmt) {
+             listener.enterAlterEnumStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterenumstmt) {
-             listener.exitAlterenumstmt(this);
+        if(listener.exitAlterEnumStmt) {
+             listener.exitAlterEnumStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterenumstmt) {
-            return visitor.visitAlterenumstmt(this);
+        if (visitor.visitAlterEnumStmt) {
+            return visitor.visitAlterEnumStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66946,7 +66946,7 @@ export class Opt_if_not_existsContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateopclassstmtContext extends antlr.ParserRuleContext {
+export class CreateOperatorClassStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66983,14 +66983,14 @@ export class CreateopclassstmtContext extends antlr.ParserRuleContext {
     public KW_AS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AS, 0)!;
     }
-    public opclass_item(): Opclass_itemContext[];
-    public opclass_item(i: number): Opclass_itemContext | null;
-    public opclass_item(i?: number): Opclass_itemContext[] | Opclass_itemContext | null {
+    public opClassItem(): OpClassItemContext[];
+    public opClassItem(i: number): OpClassItemContext | null;
+    public opClassItem(i?: number): OpClassItemContext[] | OpClassItemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Opclass_itemContext);
+            return this.getRuleContexts(OpClassItemContext);
         }
 
-        return this.getRuleContext(i, Opclass_itemContext);
+        return this.getRuleContext(i, OpClassItemContext);
     }
     public KW_DEFAULT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DEFAULT, 0);
@@ -67008,21 +67008,21 @@ export class CreateopclassstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createopclassstmt;
+        return PostgreSqlParser.RULE_createOperatorClassStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateopclassstmt) {
-             listener.enterCreateopclassstmt(this);
+        if(listener.enterCreateOperatorClassStmt) {
+             listener.enterCreateOperatorClassStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateopclassstmt) {
-             listener.exitCreateopclassstmt(this);
+        if(listener.exitCreateOperatorClassStmt) {
+             listener.exitCreateOperatorClassStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateopclassstmt) {
-            return visitor.visitCreateopclassstmt(this);
+        if (visitor.visitCreateOperatorClassStmt) {
+            return visitor.visitCreateOperatorClassStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -67030,7 +67030,7 @@ export class CreateopclassstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class Opclass_itemContext extends antlr.ParserRuleContext {
+export class OpClassItemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -67043,8 +67043,8 @@ export class Opclass_itemContext extends antlr.ParserRuleContext {
     public any_operator(): Any_operatorContext | null {
         return this.getRuleContext(0, Any_operatorContext);
     }
-    public oper_argtypes(): Oper_argtypesContext | null {
-        return this.getRuleContext(0, Oper_argtypesContext);
+    public operatorArgTypes(): OperatorArgTypesContext | null {
+        return this.getRuleContext(0, OperatorArgTypesContext);
     }
     public KW_FOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FOR, 0);
@@ -67067,8 +67067,8 @@ export class Opclass_itemContext extends antlr.ParserRuleContext {
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public prep_type_clause(): Prep_type_clauseContext | null {
         return this.getRuleContext(0, Prep_type_clauseContext);
@@ -67080,21 +67080,21 @@ export class Opclass_itemContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, TypenameContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_opclass_item;
+        return PostgreSqlParser.RULE_opClassItem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOpclass_item) {
-             listener.enterOpclass_item(this);
+        if(listener.enterOpClassItem) {
+             listener.enterOpClassItem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOpclass_item) {
-             listener.exitOpclass_item(this);
+        if(listener.exitOpClassItem) {
+             listener.exitOpClassItem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOpclass_item) {
-            return visitor.visitOpclass_item(this);
+        if (visitor.visitOpClassItem) {
+            return visitor.visitOpClassItem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -67102,7 +67102,7 @@ export class Opclass_itemContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateopfamilystmtContext extends antlr.ParserRuleContext {
+export class CreateOperatorFamilyStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -67122,21 +67122,21 @@ export class CreateopfamilystmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Table_access_method_clauseContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createopfamilystmt;
+        return PostgreSqlParser.RULE_createOperatorFamilyStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateopfamilystmt) {
-             listener.enterCreateopfamilystmt(this);
+        if(listener.enterCreateOperatorFamilyStmt) {
+             listener.enterCreateOperatorFamilyStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateopfamilystmt) {
-             listener.exitCreateopfamilystmt(this);
+        if(listener.exitCreateOperatorFamilyStmt) {
+             listener.exitCreateOperatorFamilyStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateopfamilystmt) {
-            return visitor.visitCreateopfamilystmt(this);
+        if (visitor.visitCreateOperatorFamilyStmt) {
+            return visitor.visitCreateOperatorFamilyStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -67144,7 +67144,7 @@ export class CreateopfamilystmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlteropfamilystmtContext extends antlr.ParserRuleContext {
+export class AlterOperatorFamilyStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -67166,26 +67166,26 @@ export class AlteropfamilystmtContext extends antlr.ParserRuleContext {
     public KW_ADD(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ADD, 0);
     }
-    public opclass_item(): Opclass_itemContext[];
-    public opclass_item(i: number): Opclass_itemContext | null;
-    public opclass_item(i?: number): Opclass_itemContext[] | Opclass_itemContext | null {
+    public opClassItem(): OpClassItemContext[];
+    public opClassItem(i: number): OpClassItemContext | null;
+    public opClassItem(i?: number): OpClassItemContext[] | OpClassItemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Opclass_itemContext);
+            return this.getRuleContexts(OpClassItemContext);
         }
 
-        return this.getRuleContext(i, Opclass_itemContext);
+        return this.getRuleContext(i, OpClassItemContext);
     }
     public KW_DROP(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DROP, 0);
     }
-    public opclass_drop(): Opclass_dropContext[];
-    public opclass_drop(i: number): Opclass_dropContext | null;
-    public opclass_drop(i?: number): Opclass_dropContext[] | Opclass_dropContext | null {
+    public opClassDrop(): OpClassDropContext[];
+    public opClassDrop(i: number): OpClassDropContext | null;
+    public opClassDrop(i?: number): OpClassDropContext[] | OpClassDropContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Opclass_dropContext);
+            return this.getRuleContexts(OpClassDropContext);
         }
 
-        return this.getRuleContext(i, Opclass_dropContext);
+        return this.getRuleContext(i, OpClassDropContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -67197,21 +67197,21 @@ export class AlteropfamilystmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alteropfamilystmt;
+        return PostgreSqlParser.RULE_alterOperatorFamilyStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlteropfamilystmt) {
-             listener.enterAlteropfamilystmt(this);
+        if(listener.enterAlterOperatorFamilyStmt) {
+             listener.enterAlterOperatorFamilyStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlteropfamilystmt) {
-             listener.exitAlteropfamilystmt(this);
+        if(listener.exitAlterOperatorFamilyStmt) {
+             listener.exitAlterOperatorFamilyStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlteropfamilystmt) {
-            return visitor.visitAlteropfamilystmt(this);
+        if (visitor.visitAlterOperatorFamilyStmt) {
+            return visitor.visitAlterOperatorFamilyStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -67219,7 +67219,7 @@ export class AlteropfamilystmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class Opclass_dropContext extends antlr.ParserRuleContext {
+export class OpClassDropContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -67236,21 +67236,21 @@ export class Opclass_dropContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_opclass_drop;
+        return PostgreSqlParser.RULE_opClassDrop;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOpclass_drop) {
-             listener.enterOpclass_drop(this);
+        if(listener.enterOpClassDrop) {
+             listener.enterOpClassDrop(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOpclass_drop) {
-             listener.exitOpclass_drop(this);
+        if(listener.exitOpClassDrop) {
+             listener.exitOpClassDrop(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOpclass_drop) {
-            return visitor.visitOpclass_drop(this);
+        if (visitor.visitOpClassDrop) {
+            return visitor.visitOpClassDrop(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -67258,7 +67258,7 @@ export class Opclass_dropContext extends antlr.ParserRuleContext {
 }
 
 
-export class ReassignownedstmtContext extends antlr.ParserRuleContext {
+export class ReassignOwnedStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -67277,25 +67277,25 @@ export class ReassignownedstmtContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_TO, 0)!;
     }
-    public rolespec(): RolespecContext {
-        return this.getRuleContext(0, RolespecContext)!;
+    public roleSpec(): RoleSpecContext {
+        return this.getRuleContext(0, RoleSpecContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_reassignownedstmt;
+        return PostgreSqlParser.RULE_reassignOwnedStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterReassignownedstmt) {
-             listener.enterReassignownedstmt(this);
+        if(listener.enterReassignOwnedStmt) {
+             listener.enterReassignOwnedStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitReassignownedstmt) {
-             listener.exitReassignownedstmt(this);
+        if(listener.exitReassignOwnedStmt) {
+             listener.exitReassignOwnedStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitReassignownedstmt) {
-            return visitor.visitReassignownedstmt(this);
+        if (visitor.visitReassignOwnedStmt) {
+            return visitor.visitReassignOwnedStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -67303,7 +67303,7 @@ export class ReassignownedstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class DropstmtContext extends antlr.ParserRuleContext {
+export class DropStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -67424,8 +67424,8 @@ export class DropstmtContext extends antlr.ParserRuleContext {
     public schema_name_list(): Schema_name_listContext | null {
         return this.getRuleContext(0, Schema_name_listContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_ON(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ON, 0);
@@ -67526,8 +67526,8 @@ export class DropstmtContext extends antlr.ParserRuleContext {
     public KW_MAPPING(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_MAPPING, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public KW_DATABASE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DATABASE, 0);
@@ -67548,21 +67548,21 @@ export class DropstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_dropstmt;
+        return PostgreSqlParser.RULE_dropStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterDropstmt) {
-             listener.enterDropstmt(this);
+        if(listener.enterDropStmt) {
+             listener.enterDropStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitDropstmt) {
-             listener.exitDropstmt(this);
+        if(listener.exitDropStmt) {
+             listener.exitDropStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDropstmt) {
-            return visitor.visitDropstmt(this);
+        if (visitor.visitDropStmt) {
+            return visitor.visitDropStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -67655,8 +67655,8 @@ export class Object_type_nameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_EVENT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_EVENT, 0);
@@ -67712,8 +67712,8 @@ export class Object_type_nameContext extends antlr.ParserRuleContext {
     public database_name(): Database_nameContext | null {
         return this.getRuleContext(0, Database_nameContext);
     }
-    public opttablespace(): OpttablespaceContext | null {
-        return this.getRuleContext(0, OpttablespaceContext);
+    public optTableSpace(): OptTableSpaceContext | null {
+        return this.getRuleContext(0, OptTableSpaceContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_object_type_name;
@@ -67787,8 +67787,8 @@ export class Any_nameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public attrs(): AttrsContext | null {
         return this.getRuleContext(0, AttrsContext);
@@ -67829,14 +67829,14 @@ export class AttrsContext extends antlr.ParserRuleContext {
     		return this.getToken(PostgreSqlParser.DOT, i);
     	}
     }
-    public collabel(): CollabelContext[];
-    public collabel(i: number): CollabelContext | null;
-    public collabel(i?: number): CollabelContext[] | CollabelContext | null {
+    public colLabel(): ColLabelContext[];
+    public colLabel(i: number): ColLabelContext | null;
+    public colLabel(i?: number): ColLabelContext[] | ColLabelContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(CollabelContext);
+            return this.getRuleContexts(ColLabelContext);
         }
 
-        return this.getRuleContext(i, CollabelContext);
+        return this.getRuleContext(i, ColLabelContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_attrs;
@@ -67861,7 +67861,7 @@ export class AttrsContext extends antlr.ParserRuleContext {
 }
 
 
-export class TruncatestmtContext extends antlr.ParserRuleContext {
+export class TruncateStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -67902,21 +67902,21 @@ export class TruncatestmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_RESTART, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_truncatestmt;
+        return PostgreSqlParser.RULE_truncateStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTruncatestmt) {
-             listener.enterTruncatestmt(this);
+        if(listener.enterTruncateStmt) {
+             listener.enterTruncateStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTruncatestmt) {
-             listener.exitTruncatestmt(this);
+        if(listener.exitTruncateStmt) {
+             listener.exitTruncateStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTruncatestmt) {
-            return visitor.visitTruncatestmt(this);
+        if (visitor.visitTruncateStmt) {
+            return visitor.visitTruncateStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -67960,7 +67960,7 @@ export class Truncate_tableContext extends antlr.ParserRuleContext {
 }
 
 
-export class CommentstmtContext extends antlr.ParserRuleContext {
+export class CommentStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -68006,26 +68006,26 @@ export class CommentstmtContext extends antlr.ParserRuleContext {
     public KW_AGGREGATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AGGREGATE, 0);
     }
-    public aggregate_with_argtypes(): Aggregate_with_argtypesContext | null {
-        return this.getRuleContext(0, Aggregate_with_argtypesContext);
+    public aggregateWithArgTypes(): AggregateWithArgTypesContext | null {
+        return this.getRuleContext(0, AggregateWithArgTypesContext);
     }
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public KW_OPERATOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OPERATOR, 0);
     }
-    public operator_with_argtypes(): Operator_with_argtypesContext | null {
-        return this.getRuleContext(0, Operator_with_argtypesContext);
+    public operatorWithArgTypes(): OperatorWithArgTypesContext | null {
+        return this.getRuleContext(0, OperatorWithArgTypesContext);
     }
     public KW_CONSTRAINT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CONSTRAINT, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public any_name(): Any_nameContext | null {
         return this.getRuleContext(0, Any_nameContext);
@@ -68033,14 +68033,14 @@ export class CommentstmtContext extends antlr.ParserRuleContext {
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypesContext);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext | null {
-        return this.getRuleContext(0, Routine_with_argtypesContext);
+    public routineWithArgTypes(): RoutineWithArgTypesContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesContext);
     }
     public KW_TRANSFORM(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TRANSFORM, 0);
@@ -68060,8 +68060,8 @@ export class CommentstmtContext extends antlr.ParserRuleContext {
     public KW_OBJECT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OBJECT, 0);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
     public KW_CAST(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CAST, 0);
@@ -68075,8 +68075,8 @@ export class CommentstmtContext extends antlr.ParserRuleContext {
     public CLOSE_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_NULL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NULL, 0);
@@ -68109,21 +68109,21 @@ export class CommentstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, AttrsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_commentstmt;
+        return PostgreSqlParser.RULE_commentStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCommentstmt) {
-             listener.enterCommentstmt(this);
+        if(listener.enterCommentStmt) {
+             listener.enterCommentStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCommentstmt) {
-             listener.exitCommentstmt(this);
+        if(listener.exitCommentStmt) {
+             listener.exitCommentStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCommentstmt) {
-            return visitor.visitCommentstmt(this);
+        if (visitor.visitCommentStmt) {
+            return visitor.visitCommentStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -68131,7 +68131,7 @@ export class CommentstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class SeclabelstmtContext extends antlr.ParserRuleContext {
+export class SecLabelStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -68153,8 +68153,8 @@ export class SeclabelstmtContext extends antlr.ParserRuleContext {
     public KW_AGGREGATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AGGREGATE, 0);
     }
-    public aggregate_with_argtypes(): Aggregate_with_argtypesContext | null {
-        return this.getRuleContext(0, Aggregate_with_argtypesContext);
+    public aggregateWithArgTypes(): AggregateWithArgTypesContext | null {
+        return this.getRuleContext(0, AggregateWithArgTypesContext);
     }
     public KW_COLUMN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_COLUMN, 0);
@@ -68165,8 +68165,8 @@ export class SeclabelstmtContext extends antlr.ParserRuleContext {
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public KW_LARGE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_LARGE, 0);
@@ -68174,20 +68174,20 @@ export class SeclabelstmtContext extends antlr.ParserRuleContext {
     public KW_OBJECT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OBJECT, 0);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypesContext);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext | null {
-        return this.getRuleContext(0, Routine_with_argtypesContext);
+    public routineWithArgTypes(): RoutineWithArgTypesContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesContext);
     }
     public object_type_any_name(): Object_type_any_nameContext | null {
         return this.getRuleContext(0, Object_type_any_nameContext);
@@ -68195,8 +68195,8 @@ export class SeclabelstmtContext extends antlr.ParserRuleContext {
     public object_type_name(): Object_type_nameContext | null {
         return this.getRuleContext(0, Object_type_nameContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_NULL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NULL, 0);
@@ -68204,8 +68204,8 @@ export class SeclabelstmtContext extends antlr.ParserRuleContext {
     public KW_FOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FOR, 0);
     }
-    public nonreservedword_or_sconst(): Nonreservedword_or_sconstContext | null {
-        return this.getRuleContext(0, Nonreservedword_or_sconstContext);
+    public nonReservedWordOrStringConst(): NonReservedWordOrStringConstContext | null {
+        return this.getRuleContext(0, NonReservedWordOrStringConstContext);
     }
     public KW_TYPE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TYPE, 0);
@@ -68214,21 +68214,21 @@ export class SeclabelstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_DOMAIN, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_seclabelstmt;
+        return PostgreSqlParser.RULE_secLabelStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterSeclabelstmt) {
-             listener.enterSeclabelstmt(this);
+        if(listener.enterSecLabelStmt) {
+             listener.enterSecLabelStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitSeclabelstmt) {
-             listener.exitSeclabelstmt(this);
+        if(listener.exitSecLabelStmt) {
+             listener.exitSecLabelStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSeclabelstmt) {
-            return visitor.visitSeclabelstmt(this);
+        if (visitor.visitSecLabelStmt) {
+            return visitor.visitSecLabelStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -68236,7 +68236,7 @@ export class SeclabelstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class FetchstmtContext extends antlr.ParserRuleContext {
+export class FetchStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -68250,21 +68250,21 @@ export class FetchstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_MOVE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_fetchstmt;
+        return PostgreSqlParser.RULE_fetchStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterFetchstmt) {
-             listener.enterFetchstmt(this);
+        if(listener.enterFetchStmt) {
+             listener.enterFetchStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitFetchstmt) {
-             listener.exitFetchstmt(this);
+        if(listener.exitFetchStmt) {
+             listener.exitFetchStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitFetchstmt) {
-            return visitor.visitFetchstmt(this);
+        if (visitor.visitFetchStmt) {
+            return visitor.visitFetchStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -68276,8 +68276,8 @@ export class Fetch_argsContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public from_in(): From_inContext | null {
         return this.getRuleContext(0, From_inContext);
@@ -68294,8 +68294,8 @@ export class Fetch_argsContext extends antlr.ParserRuleContext {
     public KW_LAST(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_LAST, 0);
     }
-    public signediconst(): SignediconstContext | null {
-        return this.getRuleContext(0, SignediconstContext);
+    public signedConst(): SignedConstContext | null {
+        return this.getRuleContext(0, SignedConstContext);
     }
     public KW_ABSOLUTE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ABSOLUTE, 0);
@@ -68368,7 +68368,7 @@ export class From_inContext extends antlr.ParserRuleContext {
 }
 
 
-export class GrantstmtContext extends antlr.ParserRuleContext {
+export class GrantStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -68403,21 +68403,21 @@ export class GrantstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_OPTION, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_grantstmt;
+        return PostgreSqlParser.RULE_grantStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterGrantstmt) {
-             listener.enterGrantstmt(this);
+        if(listener.enterGrantStmt) {
+             listener.enterGrantStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitGrantstmt) {
-             listener.exitGrantstmt(this);
+        if(listener.exitGrantStmt) {
+             listener.exitGrantStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitGrantstmt) {
-            return visitor.visitGrantstmt(this);
+        if (visitor.visitGrantStmt) {
+            return visitor.visitGrantStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -68425,7 +68425,7 @@ export class GrantstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class RevokestmtContext extends antlr.ParserRuleContext {
+export class RevokeStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -68460,21 +68460,21 @@ export class RevokestmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_drop_behaviorContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_revokestmt;
+        return PostgreSqlParser.RULE_revokeStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRevokestmt) {
-             listener.enterRevokestmt(this);
+        if(listener.enterRevokeStmt) {
+             listener.enterRevokeStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRevokestmt) {
-             listener.exitRevokestmt(this);
+        if(listener.exitRevokeStmt) {
+             listener.exitRevokeStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRevokestmt) {
-            return visitor.visitRevokestmt(this);
+        if (visitor.visitRevokeStmt) {
+            return visitor.visitRevokeStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -68513,14 +68513,14 @@ export class PrivilegesContext extends antlr.ParserRuleContext {
     public opt_column_list(): Opt_column_listContext | null {
         return this.getRuleContext(0, Opt_column_listContext);
     }
-    public beforeprivilegeselect(): BeforeprivilegeselectContext[];
-    public beforeprivilegeselect(i: number): BeforeprivilegeselectContext | null;
-    public beforeprivilegeselect(i?: number): BeforeprivilegeselectContext[] | BeforeprivilegeselectContext | null {
+    public beforePrivilegeSelect(): BeforePrivilegeSelectContext[];
+    public beforePrivilegeSelect(i: number): BeforePrivilegeSelectContext | null;
+    public beforePrivilegeSelect(i?: number): BeforePrivilegeSelectContext[] | BeforePrivilegeSelectContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(BeforeprivilegeselectContext);
+            return this.getRuleContexts(BeforePrivilegeSelectContext);
         }
 
-        return this.getRuleContext(i, BeforeprivilegeselectContext);
+        return this.getRuleContext(i, BeforePrivilegeSelectContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_privileges;
@@ -68545,7 +68545,7 @@ export class PrivilegesContext extends antlr.ParserRuleContext {
 }
 
 
-export class BeforeprivilegeselectContext extends antlr.ParserRuleContext {
+export class BeforePrivilegeSelectContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -68589,21 +68589,21 @@ export class BeforeprivilegeselectContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_EXECUTE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_beforeprivilegeselect;
+        return PostgreSqlParser.RULE_beforePrivilegeSelect;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterBeforeprivilegeselect) {
-             listener.enterBeforeprivilegeselect(this);
+        if(listener.enterBeforePrivilegeSelect) {
+             listener.enterBeforePrivilegeSelect(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitBeforeprivilegeselect) {
-             listener.exitBeforeprivilegeselect(this);
+        if(listener.exitBeforePrivilegeSelect) {
+             listener.exitBeforePrivilegeSelect(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitBeforeprivilegeselect) {
-            return visitor.visitBeforeprivilegeselect(this);
+        if (visitor.visitBeforePrivilegeSelect) {
+            return visitor.visitBeforePrivilegeSelect(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -68624,8 +68624,8 @@ export class PrivilegeContext extends antlr.ParserRuleContext {
     public KW_CREATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CREATE, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public opt_column_list(): Opt_column_listContext | null {
         return this.getRuleContext(0, Opt_column_listContext);
@@ -68690,20 +68690,20 @@ export class Privilege_targetContext extends antlr.ParserRuleContext {
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes_list(): Function_with_argtypes_listContext | null {
-        return this.getRuleContext(0, Function_with_argtypes_listContext);
+    public functionWithArgTypesList(): FunctionWithArgTypesListContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesListContext);
     }
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes_list(): Procedure_with_argtypes_listContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypes_listContext);
+    public procedureWithArgTypesList(): ProcedureWithArgTypesListContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesListContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes_list(): Routine_with_argtypes_listContext | null {
-        return this.getRuleContext(0, Routine_with_argtypes_listContext);
+    public routineWithArgTypesList(): RoutineWithArgTypesListContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesListContext);
     }
     public KW_DATABASE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DATABASE, 0);
@@ -68726,14 +68726,14 @@ export class Privilege_targetContext extends antlr.ParserRuleContext {
     public KW_OBJECT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OBJECT, 0);
     }
-    public numericonly(): NumericonlyContext[];
-    public numericonly(i: number): NumericonlyContext | null;
-    public numericonly(i?: number): NumericonlyContext[] | NumericonlyContext | null {
+    public numericOnly(): NumericOnlyContext[];
+    public numericOnly(i: number): NumericOnlyContext | null;
+    public numericOnly(i?: number): NumericOnlyContext[] | NumericOnlyContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(NumericonlyContext);
+            return this.getRuleContexts(NumericOnlyContext);
         }
 
-        return this.getRuleContext(i, NumericonlyContext);
+        return this.getRuleContext(i, NumericOnlyContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -68804,14 +68804,14 @@ export class Grantee_listContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public rolespec(): RolespecContext[];
-    public rolespec(i: number): RolespecContext | null;
-    public rolespec(i?: number): RolespecContext[] | RolespecContext | null {
+    public roleSpec(): RoleSpecContext[];
+    public roleSpec(i: number): RoleSpecContext | null;
+    public roleSpec(i?: number): RoleSpecContext[] | RoleSpecContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(RolespecContext);
+            return this.getRuleContexts(RoleSpecContext);
         }
 
-        return this.getRuleContext(i, RolespecContext);
+        return this.getRuleContext(i, RoleSpecContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -68854,7 +68854,7 @@ export class Grantee_listContext extends antlr.ParserRuleContext {
 }
 
 
-export class GrantrolestmtContext extends antlr.ParserRuleContext {
+export class GrantRoleStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -68900,25 +68900,25 @@ export class GrantrolestmtContext extends antlr.ParserRuleContext {
     public KW_BY(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_BY, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_grantrolestmt;
+        return PostgreSqlParser.RULE_grantRoleStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterGrantrolestmt) {
-             listener.enterGrantrolestmt(this);
+        if(listener.enterGrantRoleStmt) {
+             listener.enterGrantRoleStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitGrantrolestmt) {
-             listener.exitGrantrolestmt(this);
+        if(listener.exitGrantRoleStmt) {
+             listener.exitGrantRoleStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitGrantrolestmt) {
-            return visitor.visitGrantrolestmt(this);
+        if (visitor.visitGrantRoleStmt) {
+            return visitor.visitGrantRoleStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -68926,7 +68926,7 @@ export class GrantrolestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class RevokerolestmtContext extends antlr.ParserRuleContext {
+export class RevokeRoleStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -68972,28 +68972,28 @@ export class RevokerolestmtContext extends antlr.ParserRuleContext {
     public KW_BY(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_BY, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public opt_drop_behavior(): Opt_drop_behaviorContext | null {
         return this.getRuleContext(0, Opt_drop_behaviorContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_revokerolestmt;
+        return PostgreSqlParser.RULE_revokeRoleStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRevokerolestmt) {
-             listener.enterRevokerolestmt(this);
+        if(listener.enterRevokeRoleStmt) {
+             listener.enterRevokeRoleStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRevokerolestmt) {
-             listener.exitRevokerolestmt(this);
+        if(listener.exitRevokeRoleStmt) {
+             listener.exitRevokeRoleStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRevokerolestmt) {
-            return visitor.visitRevokerolestmt(this);
+        if (visitor.visitRevokeRoleStmt) {
+            return visitor.visitRevokeRoleStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69001,7 +69001,7 @@ export class RevokerolestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterdefaultprivilegesstmtContext extends antlr.ParserRuleContext {
+export class AlterDefaultPrivilegesStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -69081,21 +69081,21 @@ export class AlterdefaultprivilegesstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterdefaultprivilegesstmt;
+        return PostgreSqlParser.RULE_alterDefaultPrivilegesStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterdefaultprivilegesstmt) {
-             listener.enterAlterdefaultprivilegesstmt(this);
+        if(listener.enterAlterDefaultPrivilegesStmt) {
+             listener.enterAlterDefaultPrivilegesStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterdefaultprivilegesstmt) {
-             listener.exitAlterdefaultprivilegesstmt(this);
+        if(listener.exitAlterDefaultPrivilegesStmt) {
+             listener.exitAlterDefaultPrivilegesStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterdefaultprivilegesstmt) {
-            return visitor.visitAlterdefaultprivilegesstmt(this);
+        if (visitor.visitAlterDefaultPrivilegesStmt) {
+            return visitor.visitAlterDefaultPrivilegesStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69217,7 +69217,7 @@ export class Defacl_privilege_targetContext extends antlr.ParserRuleContext {
 }
 
 
-export class IndexstmtContext extends antlr.ParserRuleContext {
+export class IndexStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -69251,8 +69251,8 @@ export class IndexstmtContext extends antlr.ParserRuleContext {
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public table_access_method_clause(): Table_access_method_clauseContext | null {
         return this.getRuleContext(0, Table_access_method_clauseContext);
@@ -69266,11 +69266,11 @@ export class IndexstmtContext extends antlr.ParserRuleContext {
     public KW_DISTINCT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DISTINCT, 0);
     }
-    public opt_reloptions(): Opt_reloptionsContext | null {
-        return this.getRuleContext(0, Opt_reloptionsContext);
+    public optRelOptions(): OptRelOptionsContext | null {
+        return this.getRuleContext(0, OptRelOptionsContext);
     }
-    public opttablespace(): OpttablespaceContext | null {
-        return this.getRuleContext(0, OpttablespaceContext);
+    public optTableSpace(): OptTableSpaceContext | null {
+        return this.getRuleContext(0, OptTableSpaceContext);
     }
     public where_clause(): Where_clauseContext | null {
         return this.getRuleContext(0, Where_clauseContext);
@@ -69279,21 +69279,21 @@ export class IndexstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_NOT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_indexstmt;
+        return PostgreSqlParser.RULE_indexStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterIndexstmt) {
-             listener.enterIndexstmt(this);
+        if(listener.enterIndexStmt) {
+             listener.enterIndexStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitIndexstmt) {
-             listener.exitIndexstmt(this);
+        if(listener.exitIndexStmt) {
+             listener.exitIndexStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitIndexstmt) {
-            return visitor.visitIndexstmt(this);
+        if (visitor.visitIndexStmt) {
+            return visitor.visitIndexStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69374,8 +69374,8 @@ export class Index_elemContext extends antlr.ParserRuleContext {
     public any_name(): Any_nameContext | null {
         return this.getRuleContext(0, Any_nameContext);
     }
-    public reloptions(): ReloptionsContext | null {
-        return this.getRuleContext(0, ReloptionsContext);
+    public relOptions(): RelOptionsContext | null {
+        return this.getRuleContext(0, RelOptionsContext);
     }
     public opt_collate_clause(): Opt_collate_clauseContext | null {
         return this.getRuleContext(0, Opt_collate_clauseContext);
@@ -69418,7 +69418,7 @@ export class Index_elemContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatefunctionstmtContext extends antlr.ParserRuleContext {
+export class CreateFunctionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -69461,14 +69461,14 @@ export class CreatefunctionstmtContext extends antlr.ParserRuleContext {
     public KW_RETURNS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_RETURNS, 0);
     }
-    public createfunc_opt_item(): Createfunc_opt_itemContext[];
-    public createfunc_opt_item(i: number): Createfunc_opt_itemContext | null;
-    public createfunc_opt_item(i?: number): Createfunc_opt_itemContext[] | Createfunc_opt_itemContext | null {
+    public create_func_opt_item(): Create_func_opt_itemContext[];
+    public create_func_opt_item(i: number): Create_func_opt_itemContext | null;
+    public create_func_opt_item(i?: number): Create_func_opt_itemContext[] | Create_func_opt_itemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Createfunc_opt_itemContext);
+            return this.getRuleContexts(Create_func_opt_itemContext);
         }
 
-        return this.getRuleContext(i, Createfunc_opt_itemContext);
+        return this.getRuleContext(i, Create_func_opt_itemContext);
     }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
@@ -69510,21 +69510,21 @@ export class CreatefunctionstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createfunctionstmt;
+        return PostgreSqlParser.RULE_createFunctionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatefunctionstmt) {
-             listener.enterCreatefunctionstmt(this);
+        if(listener.enterCreateFunctionStmt) {
+             listener.enterCreateFunctionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatefunctionstmt) {
-             listener.exitCreatefunctionstmt(this);
+        if(listener.exitCreateFunctionStmt) {
+             listener.exitCreateFunctionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatefunctionstmt) {
-            return visitor.visitCreatefunctionstmt(this);
+        if (visitor.visitCreateFunctionStmt) {
+            return visitor.visitCreateFunctionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69646,18 +69646,18 @@ export class Func_args_listContext extends antlr.ParserRuleContext {
 }
 
 
-export class Routine_with_argtypes_listContext extends antlr.ParserRuleContext {
+export class RoutineWithArgTypesListContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext[];
-    public routine_with_argtypes(i: number): Routine_with_argtypesContext | null;
-    public routine_with_argtypes(i?: number): Routine_with_argtypesContext[] | Routine_with_argtypesContext | null {
+    public routineWithArgTypes(): RoutineWithArgTypesContext[];
+    public routineWithArgTypes(i: number): RoutineWithArgTypesContext | null;
+    public routineWithArgTypes(i?: number): RoutineWithArgTypesContext[] | RoutineWithArgTypesContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Routine_with_argtypesContext);
+            return this.getRuleContexts(RoutineWithArgTypesContext);
         }
 
-        return this.getRuleContext(i, Routine_with_argtypesContext);
+        return this.getRuleContext(i, RoutineWithArgTypesContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -69669,21 +69669,21 @@ export class Routine_with_argtypes_listContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_routine_with_argtypes_list;
+        return PostgreSqlParser.RULE_routineWithArgTypesList;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRoutine_with_argtypes_list) {
-             listener.enterRoutine_with_argtypes_list(this);
+        if(listener.enterRoutineWithArgTypesList) {
+             listener.enterRoutineWithArgTypesList(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRoutine_with_argtypes_list) {
-             listener.exitRoutine_with_argtypes_list(this);
+        if(listener.exitRoutineWithArgTypesList) {
+             listener.exitRoutineWithArgTypesList(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRoutine_with_argtypes_list) {
-            return visitor.visitRoutine_with_argtypes_list(this);
+        if (visitor.visitRoutineWithArgTypesList) {
+            return visitor.visitRoutineWithArgTypesList(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69691,7 +69691,7 @@ export class Routine_with_argtypes_listContext extends antlr.ParserRuleContext {
 }
 
 
-export class Routine_with_argtypesContext extends antlr.ParserRuleContext {
+export class RoutineWithArgTypesContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -69708,21 +69708,21 @@ export class Routine_with_argtypesContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Qualified_nameContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_routine_with_argtypes;
+        return PostgreSqlParser.RULE_routineWithArgTypes;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRoutine_with_argtypes) {
-             listener.enterRoutine_with_argtypes(this);
+        if(listener.enterRoutineWithArgTypes) {
+             listener.enterRoutineWithArgTypes(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRoutine_with_argtypes) {
-             listener.exitRoutine_with_argtypes(this);
+        if(listener.exitRoutineWithArgTypes) {
+             listener.exitRoutineWithArgTypes(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRoutine_with_argtypes) {
-            return visitor.visitRoutine_with_argtypes(this);
+        if (visitor.visitRoutineWithArgTypes) {
+            return visitor.visitRoutineWithArgTypes(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69730,18 +69730,18 @@ export class Routine_with_argtypesContext extends antlr.ParserRuleContext {
 }
 
 
-export class Procedure_with_argtypes_listContext extends antlr.ParserRuleContext {
+export class ProcedureWithArgTypesListContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext[];
-    public procedure_with_argtypes(i: number): Procedure_with_argtypesContext | null;
-    public procedure_with_argtypes(i?: number): Procedure_with_argtypesContext[] | Procedure_with_argtypesContext | null {
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext[];
+    public procedureWithArgTypes(i: number): ProcedureWithArgTypesContext | null;
+    public procedureWithArgTypes(i?: number): ProcedureWithArgTypesContext[] | ProcedureWithArgTypesContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Procedure_with_argtypesContext);
+            return this.getRuleContexts(ProcedureWithArgTypesContext);
         }
 
-        return this.getRuleContext(i, Procedure_with_argtypesContext);
+        return this.getRuleContext(i, ProcedureWithArgTypesContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -69753,21 +69753,21 @@ export class Procedure_with_argtypes_listContext extends antlr.ParserRuleContext
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_procedure_with_argtypes_list;
+        return PostgreSqlParser.RULE_procedureWithArgTypesList;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterProcedure_with_argtypes_list) {
-             listener.enterProcedure_with_argtypes_list(this);
+        if(listener.enterProcedureWithArgTypesList) {
+             listener.enterProcedureWithArgTypesList(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitProcedure_with_argtypes_list) {
-             listener.exitProcedure_with_argtypes_list(this);
+        if(listener.exitProcedureWithArgTypesList) {
+             listener.exitProcedureWithArgTypesList(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitProcedure_with_argtypes_list) {
-            return visitor.visitProcedure_with_argtypes_list(this);
+        if (visitor.visitProcedureWithArgTypesList) {
+            return visitor.visitProcedureWithArgTypesList(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69775,7 +69775,7 @@ export class Procedure_with_argtypes_listContext extends antlr.ParserRuleContext
 }
 
 
-export class Procedure_with_argtypesContext extends antlr.ParserRuleContext {
+export class ProcedureWithArgTypesContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -69792,21 +69792,21 @@ export class Procedure_with_argtypesContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Qualified_nameContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_procedure_with_argtypes;
+        return PostgreSqlParser.RULE_procedureWithArgTypes;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterProcedure_with_argtypes) {
-             listener.enterProcedure_with_argtypes(this);
+        if(listener.enterProcedureWithArgTypes) {
+             listener.enterProcedureWithArgTypes(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitProcedure_with_argtypes) {
-             listener.exitProcedure_with_argtypes(this);
+        if(listener.exitProcedureWithArgTypes) {
+             listener.exitProcedureWithArgTypes(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitProcedure_with_argtypes) {
-            return visitor.visitProcedure_with_argtypes(this);
+        if (visitor.visitProcedureWithArgTypes) {
+            return visitor.visitProcedureWithArgTypes(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69814,18 +69814,18 @@ export class Procedure_with_argtypesContext extends antlr.ParserRuleContext {
 }
 
 
-export class Function_with_argtypes_listContext extends antlr.ParserRuleContext {
+export class FunctionWithArgTypesListContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public function_with_argtypes(): Function_with_argtypesContext[];
-    public function_with_argtypes(i: number): Function_with_argtypesContext | null;
-    public function_with_argtypes(i?: number): Function_with_argtypesContext[] | Function_with_argtypesContext | null {
+    public functionWithArgTypes(): FunctionWithArgTypesContext[];
+    public functionWithArgTypes(i: number): FunctionWithArgTypesContext | null;
+    public functionWithArgTypes(i?: number): FunctionWithArgTypesContext[] | FunctionWithArgTypesContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Function_with_argtypesContext);
+            return this.getRuleContexts(FunctionWithArgTypesContext);
         }
 
-        return this.getRuleContext(i, Function_with_argtypesContext);
+        return this.getRuleContext(i, FunctionWithArgTypesContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -69837,21 +69837,21 @@ export class Function_with_argtypes_listContext extends antlr.ParserRuleContext 
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_function_with_argtypes_list;
+        return PostgreSqlParser.RULE_functionWithArgTypesList;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterFunction_with_argtypes_list) {
-             listener.enterFunction_with_argtypes_list(this);
+        if(listener.enterFunctionWithArgTypesList) {
+             listener.enterFunctionWithArgTypesList(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitFunction_with_argtypes_list) {
-             listener.exitFunction_with_argtypes_list(this);
+        if(listener.exitFunctionWithArgTypesList) {
+             listener.exitFunctionWithArgTypesList(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitFunction_with_argtypes_list) {
-            return visitor.visitFunction_with_argtypes_list(this);
+        if (visitor.visitFunctionWithArgTypesList) {
+            return visitor.visitFunctionWithArgTypesList(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69859,7 +69859,7 @@ export class Function_with_argtypes_listContext extends antlr.ParserRuleContext 
 }
 
 
-export class Function_with_argtypesContext extends antlr.ParserRuleContext {
+export class FunctionWithArgTypesContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -69876,21 +69876,21 @@ export class Function_with_argtypesContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Qualified_nameContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_function_with_argtypes;
+        return PostgreSqlParser.RULE_functionWithArgTypes;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterFunction_with_argtypes) {
-             listener.enterFunction_with_argtypes(this);
+        if(listener.enterFunctionWithArgTypes) {
+             listener.enterFunctionWithArgTypes(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitFunction_with_argtypes) {
-             listener.exitFunction_with_argtypes(this);
+        if(listener.exitFunctionWithArgTypes) {
+             listener.exitFunctionWithArgTypes(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitFunction_with_argtypes) {
-            return visitor.visitFunction_with_argtypes(this);
+        if (visitor.visitFunctionWithArgTypes) {
+            return visitor.visitFunctionWithArgTypes(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70057,7 +70057,7 @@ export class Func_arg_with_defaultContext extends antlr.ParserRuleContext {
 }
 
 
-export class Aggr_argsContext extends antlr.ParserRuleContext {
+export class Aggregate_argsContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70086,21 +70086,21 @@ export class Aggr_argsContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_BY, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_aggr_args;
+        return PostgreSqlParser.RULE_aggregate_args;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAggr_args) {
-             listener.enterAggr_args(this);
+        if(listener.enterAggregate_args) {
+             listener.enterAggregate_args(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAggr_args) {
-             listener.exitAggr_args(this);
+        if(listener.exitAggregate_args) {
+             listener.exitAggregate_args(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAggr_args) {
-            return visitor.visitAggr_args(this);
+        if (visitor.visitAggregate_args) {
+            return visitor.visitAggregate_args(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70108,32 +70108,32 @@ export class Aggr_argsContext extends antlr.ParserRuleContext {
 }
 
 
-export class Aggregate_with_argtypesContext extends antlr.ParserRuleContext {
+export class AggregateWithArgTypesContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public function_name(): Function_nameContext {
         return this.getRuleContext(0, Function_nameContext)!;
     }
-    public aggr_args(): Aggr_argsContext {
-        return this.getRuleContext(0, Aggr_argsContext)!;
+    public aggregate_args(): Aggregate_argsContext {
+        return this.getRuleContext(0, Aggregate_argsContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_aggregate_with_argtypes;
+        return PostgreSqlParser.RULE_aggregateWithArgTypes;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAggregate_with_argtypes) {
-             listener.enterAggregate_with_argtypes(this);
+        if(listener.enterAggregateWithArgTypes) {
+             listener.enterAggregateWithArgTypes(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAggregate_with_argtypes) {
-             listener.exitAggregate_with_argtypes(this);
+        if(listener.exitAggregateWithArgTypes) {
+             listener.exitAggregateWithArgTypes(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAggregate_with_argtypes) {
-            return visitor.visitAggregate_with_argtypes(this);
+        if (visitor.visitAggregateWithArgTypes) {
+            return visitor.visitAggregateWithArgTypes(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70196,8 +70196,8 @@ export class Common_func_opt_itemContext extends antlr.ParserRuleContext {
     public KW_NOT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NOT, 0);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
     public KW_COST(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_COST, 0);
@@ -70217,14 +70217,14 @@ export class Common_func_opt_itemContext extends antlr.ParserRuleContext {
     public set_rest_more(): Set_rest_moreContext | null {
         return this.getRuleContext(0, Set_rest_moreContext);
     }
-    public variableresetstmt(): VariableresetstmtContext | null {
-        return this.getRuleContext(0, VariableresetstmtContext);
+    public variableResetStmt(): VariableResetStmtContext | null {
+        return this.getRuleContext(0, VariableResetStmtContext);
     }
     public KW_PARALLEL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PARALLEL, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_common_func_opt_item;
@@ -70249,15 +70249,15 @@ export class Common_func_opt_itemContext extends antlr.ParserRuleContext {
 }
 
 
-export class Createfunc_opt_itemContext extends antlr.ParserRuleContext {
+export class Create_func_opt_itemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public notify_payload(): Notify_payloadContext | null {
         return this.getRuleContext(0, Notify_payloadContext);
@@ -70265,8 +70265,8 @@ export class Createfunc_opt_itemContext extends antlr.ParserRuleContext {
     public KW_LANGUAGE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_LANGUAGE, 0);
     }
-    public nonreservedword_or_sconst(): Nonreservedword_or_sconstContext | null {
-        return this.getRuleContext(0, Nonreservedword_or_sconstContext);
+    public nonReservedWordOrStringConst(): NonReservedWordOrStringConstContext | null {
+        return this.getRuleContext(0, NonReservedWordOrStringConstContext);
     }
     public KW_TRANSFORM(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TRANSFORM, 0);
@@ -70313,14 +70313,14 @@ export class Createfunc_opt_itemContext extends antlr.ParserRuleContext {
     public KW_SET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SET, 0);
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
@@ -70341,21 +70341,21 @@ export class Createfunc_opt_itemContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Common_func_opt_itemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createfunc_opt_item;
+        return PostgreSqlParser.RULE_create_func_opt_item;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatefunc_opt_item) {
-             listener.enterCreatefunc_opt_item(this);
+        if(listener.enterCreate_func_opt_item) {
+             listener.enterCreate_func_opt_item(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatefunc_opt_item) {
-             listener.exitCreatefunc_opt_item(this);
+        if(listener.exitCreate_func_opt_item) {
+             listener.exitCreate_func_opt_item(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatefunc_opt_item) {
-            return visitor.visitCreatefunc_opt_item(this);
+        if (visitor.visitCreate_func_opt_item) {
+            return visitor.visitCreate_func_opt_item(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70429,7 +70429,7 @@ export class Table_func_columnContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterfunctionstmtContext extends antlr.ParserRuleContext {
+export class AlterFunctionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70439,20 +70439,20 @@ export class AlterfunctionstmtContext extends antlr.ParserRuleContext {
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypesContext);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext | null {
-        return this.getRuleContext(0, Routine_with_argtypesContext);
+    public routineWithArgTypes(): RoutineWithArgTypesContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesContext);
     }
     public common_func_opt_item(): Common_func_opt_itemContext[];
     public common_func_opt_item(i: number): Common_func_opt_itemContext | null;
@@ -70467,21 +70467,21 @@ export class AlterfunctionstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_RESTRICT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterfunctionstmt;
+        return PostgreSqlParser.RULE_alterFunctionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterfunctionstmt) {
-             listener.enterAlterfunctionstmt(this);
+        if(listener.enterAlterFunctionStmt) {
+             listener.enterAlterFunctionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterfunctionstmt) {
-             listener.exitAlterfunctionstmt(this);
+        if(listener.exitAlterFunctionStmt) {
+             listener.exitAlterFunctionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterfunctionstmt) {
-            return visitor.visitAlterfunctionstmt(this);
+        if (visitor.visitAlterFunctionStmt) {
+            return visitor.visitAlterFunctionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70489,7 +70489,7 @@ export class AlterfunctionstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class RemovefuncstmtContext extends antlr.ParserRuleContext {
+export class RemoveFuncStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70499,20 +70499,20 @@ export class RemovefuncstmtContext extends antlr.ParserRuleContext {
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes_list(): Function_with_argtypes_listContext | null {
-        return this.getRuleContext(0, Function_with_argtypes_listContext);
+    public functionWithArgTypesList(): FunctionWithArgTypesListContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesListContext);
     }
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes_list(): Procedure_with_argtypes_listContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypes_listContext);
+    public procedureWithArgTypesList(): ProcedureWithArgTypesListContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesListContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes_list(): Routine_with_argtypes_listContext | null {
-        return this.getRuleContext(0, Routine_with_argtypes_listContext);
+    public routineWithArgTypesList(): RoutineWithArgTypesListContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesListContext);
     }
     public opt_drop_behavior(): Opt_drop_behaviorContext | null {
         return this.getRuleContext(0, Opt_drop_behaviorContext);
@@ -70521,21 +70521,21 @@ export class RemovefuncstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_if_existsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_removefuncstmt;
+        return PostgreSqlParser.RULE_removeFuncStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRemovefuncstmt) {
-             listener.enterRemovefuncstmt(this);
+        if(listener.enterRemoveFuncStmt) {
+             listener.enterRemoveFuncStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRemovefuncstmt) {
-             listener.exitRemovefuncstmt(this);
+        if(listener.exitRemoveFuncStmt) {
+             listener.exitRemoveFuncStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRemovefuncstmt) {
-            return visitor.visitRemovefuncstmt(this);
+        if (visitor.visitRemoveFuncStmt) {
+            return visitor.visitRemoveFuncStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70543,7 +70543,7 @@ export class RemovefuncstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class RemoveaggrstmtContext extends antlr.ParserRuleContext {
+export class RemoveAggregateStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70553,14 +70553,14 @@ export class RemoveaggrstmtContext extends antlr.ParserRuleContext {
     public KW_AGGREGATE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AGGREGATE, 0)!;
     }
-    public aggregate_with_argtypes(): Aggregate_with_argtypesContext[];
-    public aggregate_with_argtypes(i: number): Aggregate_with_argtypesContext | null;
-    public aggregate_with_argtypes(i?: number): Aggregate_with_argtypesContext[] | Aggregate_with_argtypesContext | null {
+    public aggregateWithArgTypes(): AggregateWithArgTypesContext[];
+    public aggregateWithArgTypes(i: number): AggregateWithArgTypesContext | null;
+    public aggregateWithArgTypes(i?: number): AggregateWithArgTypesContext[] | AggregateWithArgTypesContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Aggregate_with_argtypesContext);
+            return this.getRuleContexts(AggregateWithArgTypesContext);
         }
 
-        return this.getRuleContext(i, Aggregate_with_argtypesContext);
+        return this.getRuleContext(i, AggregateWithArgTypesContext);
     }
     public opt_if_exists(): Opt_if_existsContext | null {
         return this.getRuleContext(0, Opt_if_existsContext);
@@ -70578,21 +70578,21 @@ export class RemoveaggrstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_removeaggrstmt;
+        return PostgreSqlParser.RULE_removeAggregateStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRemoveaggrstmt) {
-             listener.enterRemoveaggrstmt(this);
+        if(listener.enterRemoveAggregateStmt) {
+             listener.enterRemoveAggregateStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRemoveaggrstmt) {
-             listener.exitRemoveaggrstmt(this);
+        if(listener.exitRemoveAggregateStmt) {
+             listener.exitRemoveAggregateStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRemoveaggrstmt) {
-            return visitor.visitRemoveaggrstmt(this);
+        if (visitor.visitRemoveAggregateStmt) {
+            return visitor.visitRemoveAggregateStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70600,7 +70600,7 @@ export class RemoveaggrstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class RemoveoperstmtContext extends antlr.ParserRuleContext {
+export class RemoveOperatorStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70610,14 +70610,14 @@ export class RemoveoperstmtContext extends antlr.ParserRuleContext {
     public KW_OPERATOR(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_OPERATOR, 0)!;
     }
-    public operator_with_argtypes(): Operator_with_argtypesContext[];
-    public operator_with_argtypes(i: number): Operator_with_argtypesContext | null;
-    public operator_with_argtypes(i?: number): Operator_with_argtypesContext[] | Operator_with_argtypesContext | null {
+    public operatorWithArgTypes(): OperatorWithArgTypesContext[];
+    public operatorWithArgTypes(i: number): OperatorWithArgTypesContext | null;
+    public operatorWithArgTypes(i?: number): OperatorWithArgTypesContext[] | OperatorWithArgTypesContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Operator_with_argtypesContext);
+            return this.getRuleContexts(OperatorWithArgTypesContext);
         }
 
-        return this.getRuleContext(i, Operator_with_argtypesContext);
+        return this.getRuleContext(i, OperatorWithArgTypesContext);
     }
     public opt_if_exists(): Opt_if_existsContext | null {
         return this.getRuleContext(0, Opt_if_existsContext);
@@ -70635,21 +70635,21 @@ export class RemoveoperstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_removeoperstmt;
+        return PostgreSqlParser.RULE_removeOperatorStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRemoveoperstmt) {
-             listener.enterRemoveoperstmt(this);
+        if(listener.enterRemoveOperatorStmt) {
+             listener.enterRemoveOperatorStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRemoveoperstmt) {
-             listener.exitRemoveoperstmt(this);
+        if(listener.exitRemoveOperatorStmt) {
+             listener.exitRemoveOperatorStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRemoveoperstmt) {
-            return visitor.visitRemoveoperstmt(this);
+        if (visitor.visitRemoveOperatorStmt) {
+            return visitor.visitRemoveOperatorStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70657,7 +70657,7 @@ export class RemoveoperstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class Oper_argtypesContext extends antlr.ParserRuleContext {
+export class OperatorArgTypesContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70683,21 +70683,21 @@ export class Oper_argtypesContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.COMMA, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_oper_argtypes;
+        return PostgreSqlParser.RULE_operatorArgTypes;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOper_argtypes) {
-             listener.enterOper_argtypes(this);
+        if(listener.enterOperatorArgTypes) {
+             listener.enterOperatorArgTypes(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOper_argtypes) {
-             listener.exitOper_argtypes(this);
+        if(listener.exitOperatorArgTypes) {
+             listener.exitOperatorArgTypes(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOper_argtypes) {
-            return visitor.visitOper_argtypes(this);
+        if (visitor.visitOperatorArgTypes) {
+            return visitor.visitOperatorArgTypes(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70712,14 +70712,14 @@ export class Any_operatorContext extends antlr.ParserRuleContext {
     public all_op(): All_opContext {
         return this.getRuleContext(0, All_opContext)!;
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public DOT(): antlr.TerminalNode[];
     public DOT(i: number): antlr.TerminalNode | null;
@@ -70753,32 +70753,32 @@ export class Any_operatorContext extends antlr.ParserRuleContext {
 }
 
 
-export class Operator_with_argtypesContext extends antlr.ParserRuleContext {
+export class OperatorWithArgTypesContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public any_operator(): Any_operatorContext {
         return this.getRuleContext(0, Any_operatorContext)!;
     }
-    public oper_argtypes(): Oper_argtypesContext {
-        return this.getRuleContext(0, Oper_argtypesContext)!;
+    public operatorArgTypes(): OperatorArgTypesContext {
+        return this.getRuleContext(0, OperatorArgTypesContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_operator_with_argtypes;
+        return PostgreSqlParser.RULE_operatorWithArgTypes;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOperator_with_argtypes) {
-             listener.enterOperator_with_argtypes(this);
+        if(listener.enterOperatorWithArgTypes) {
+             listener.enterOperatorWithArgTypes(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOperator_with_argtypes) {
-             listener.exitOperator_with_argtypes(this);
+        if(listener.exitOperatorWithArgTypes) {
+             listener.exitOperatorWithArgTypes(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOperator_with_argtypes) {
-            return visitor.visitOperator_with_argtypes(this);
+        if (visitor.visitOperatorWithArgTypes) {
+            return visitor.visitOperatorWithArgTypes(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70786,21 +70786,21 @@ export class Operator_with_argtypesContext extends antlr.ParserRuleContext {
 }
 
 
-export class DostmtContext extends antlr.ParserRuleContext {
+export class DoStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_DO(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_DO, 0)!;
     }
-    public sconst(): SconstContext[];
-    public sconst(i: number): SconstContext | null;
-    public sconst(i?: number): SconstContext[] | SconstContext | null {
+    public stringConst(): StringConstContext[];
+    public stringConst(i: number): StringConstContext | null;
+    public stringConst(i?: number): StringConstContext[] | StringConstContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SconstContext);
+            return this.getRuleContexts(StringConstContext);
         }
 
-        return this.getRuleContext(i, SconstContext);
+        return this.getRuleContext(i, StringConstContext);
     }
     public KW_LANGUAGE(): antlr.TerminalNode[];
     public KW_LANGUAGE(i: number): antlr.TerminalNode | null;
@@ -70811,31 +70811,31 @@ export class DostmtContext extends antlr.ParserRuleContext {
     		return this.getToken(PostgreSqlParser.KW_LANGUAGE, i);
     	}
     }
-    public nonreservedword_or_sconst(): Nonreservedword_or_sconstContext[];
-    public nonreservedword_or_sconst(i: number): Nonreservedword_or_sconstContext | null;
-    public nonreservedword_or_sconst(i?: number): Nonreservedword_or_sconstContext[] | Nonreservedword_or_sconstContext | null {
+    public nonReservedWordOrStringConst(): NonReservedWordOrStringConstContext[];
+    public nonReservedWordOrStringConst(i: number): NonReservedWordOrStringConstContext | null;
+    public nonReservedWordOrStringConst(i?: number): NonReservedWordOrStringConstContext[] | NonReservedWordOrStringConstContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Nonreservedword_or_sconstContext);
+            return this.getRuleContexts(NonReservedWordOrStringConstContext);
         }
 
-        return this.getRuleContext(i, Nonreservedword_or_sconstContext);
+        return this.getRuleContext(i, NonReservedWordOrStringConstContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_dostmt;
+        return PostgreSqlParser.RULE_doStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterDostmt) {
-             listener.enterDostmt(this);
+        if(listener.enterDoStmt) {
+             listener.enterDoStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitDostmt) {
-             listener.exitDostmt(this);
+        if(listener.exitDoStmt) {
+             listener.exitDoStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDostmt) {
-            return visitor.visitDostmt(this);
+        if (visitor.visitDoStmt) {
+            return visitor.visitDoStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70843,7 +70843,7 @@ export class DostmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatecaststmtContext extends antlr.ParserRuleContext {
+export class CreateCastStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70886,8 +70886,8 @@ export class CreatecaststmtContext extends antlr.ParserRuleContext {
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public KW_INOUT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_INOUT, 0);
@@ -70899,21 +70899,21 @@ export class CreatecaststmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_IMPLICIT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createcaststmt;
+        return PostgreSqlParser.RULE_createCastStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatecaststmt) {
-             listener.enterCreatecaststmt(this);
+        if(listener.enterCreateCastStmt) {
+             listener.enterCreateCastStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatecaststmt) {
-             listener.exitCreatecaststmt(this);
+        if(listener.exitCreateCastStmt) {
+             listener.exitCreateCastStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatecaststmt) {
-            return visitor.visitCreatecaststmt(this);
+        if (visitor.visitCreateCastStmt) {
+            return visitor.visitCreateCastStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -70954,7 +70954,7 @@ export class Opt_if_existsContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatetransformstmtContext extends antlr.ParserRuleContext {
+export class CreateTransformStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70973,8 +70973,8 @@ export class CreatetransformstmtContext extends antlr.ParserRuleContext {
     public KW_LANGUAGE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_LANGUAGE, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public OPEN_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0)!;
@@ -71004,21 +71004,21 @@ export class CreatetransformstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.COMMA, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createtransformstmt;
+        return PostgreSqlParser.RULE_createTransformStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatetransformstmt) {
-             listener.enterCreatetransformstmt(this);
+        if(listener.enterCreateTransformStmt) {
+             listener.enterCreateTransformStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatetransformstmt) {
-             listener.exitCreatetransformstmt(this);
+        if(listener.exitCreateTransformStmt) {
+             listener.exitCreateTransformStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatetransformstmt) {
-            return visitor.visitCreatetransformstmt(this);
+        if (visitor.visitCreateTransformStmt) {
+            return visitor.visitCreateTransformStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71039,8 +71039,8 @@ export class Sql_with_functionContext extends antlr.ParserRuleContext {
     public KW_FUNCTION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0)!;
     }
-    public function_with_argtypes(): Function_with_argtypesContext {
-        return this.getRuleContext(0, Function_with_argtypesContext)!;
+    public functionWithArgTypes(): FunctionWithArgTypesContext {
+        return this.getRuleContext(0, FunctionWithArgTypesContext)!;
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_sql_with_function;
@@ -71065,7 +71065,7 @@ export class Sql_with_functionContext extends antlr.ParserRuleContext {
 }
 
 
-export class ReindexstmtContext extends antlr.ParserRuleContext {
+export class ReindexStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -71108,8 +71108,8 @@ export class ReindexstmtContext extends antlr.ParserRuleContext {
     public KW_SYSTEM(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SYSTEM, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_DATABASE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DATABASE, 0);
@@ -71130,21 +71130,21 @@ export class ReindexstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_CONCURRENTLY, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_reindexstmt;
+        return PostgreSqlParser.RULE_reindexStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterReindexstmt) {
-             listener.enterReindexstmt(this);
+        if(listener.enterReindexStmt) {
+             listener.enterReindexStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitReindexstmt) {
-             listener.exitReindexstmt(this);
+        if(listener.exitReindexStmt) {
+             listener.exitReindexStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitReindexstmt) {
-            return visitor.visitReindexstmt(this);
+        if (visitor.visitReindexStmt) {
+            return visitor.visitReindexStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71152,18 +71152,18 @@ export class ReindexstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltertblspcstmtContext extends antlr.ParserRuleContext {
+export class AlterTblSpcStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_ALTER(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_ALTER, 0)!;
     }
-    public opttablespace(): OpttablespaceContext {
-        return this.getRuleContext(0, OpttablespaceContext)!;
+    public optTableSpace(): OptTableSpaceContext {
+        return this.getRuleContext(0, OptTableSpaceContext)!;
     }
-    public reloptions(): ReloptionsContext {
-        return this.getRuleContext(0, ReloptionsContext)!;
+    public relOptions(): RelOptionsContext {
+        return this.getRuleContext(0, RelOptionsContext)!;
     }
     public KW_SET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SET, 0);
@@ -71172,21 +71172,21 @@ export class AltertblspcstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_RESET, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altertblspcstmt;
+        return PostgreSqlParser.RULE_alterTblSpcStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltertblspcstmt) {
-             listener.enterAltertblspcstmt(this);
+        if(listener.enterAlterTblSpcStmt) {
+             listener.enterAlterTblSpcStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltertblspcstmt) {
-             listener.exitAltertblspcstmt(this);
+        if(listener.exitAlterTblSpcStmt) {
+             listener.exitAlterTblSpcStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltertblspcstmt) {
-            return visitor.visitAltertblspcstmt(this);
+        if (visitor.visitAlterTblSpcStmt) {
+            return visitor.visitAlterTblSpcStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71194,7 +71194,7 @@ export class AltertblspcstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class RenamestmtContext extends antlr.ParserRuleContext {
+export class RenameStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -71207,26 +71207,26 @@ export class RenamestmtContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_TO, 0)!;
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_AGGREGATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AGGREGATE, 0);
     }
-    public aggregate_with_argtypes(): Aggregate_with_argtypesContext | null {
-        return this.getRuleContext(0, Aggregate_with_argtypesContext);
+    public aggregateWithArgTypes(): AggregateWithArgTypesContext | null {
+        return this.getRuleContext(0, AggregateWithArgTypesContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext | null {
-        return this.getRuleContext(0, Routine_with_argtypesContext);
+    public routineWithArgTypes(): RoutineWithArgTypesContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesContext);
     }
     public KW_DATABASE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DATABASE, 0);
@@ -71258,8 +71258,8 @@ export class RenamestmtContext extends antlr.ParserRuleContext {
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public function_name_create(): Function_name_createContext | null {
         return this.getRuleContext(0, Function_name_createContext);
@@ -71279,8 +71279,8 @@ export class RenamestmtContext extends antlr.ParserRuleContext {
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypesContext);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesContext);
     }
     public procedure_name_create(): Procedure_name_createContext | null {
         return this.getRuleContext(0, Procedure_name_createContext);
@@ -71378,14 +71378,14 @@ export class RenamestmtContext extends antlr.ParserRuleContext {
     public KW_PROCEDURAL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURAL, 0);
     }
-    public rolespec(): RolespecContext[];
-    public rolespec(i: number): RolespecContext | null;
-    public rolespec(i?: number): RolespecContext[] | RolespecContext | null {
+    public roleSpec(): RoleSpecContext[];
+    public roleSpec(i: number): RoleSpecContext | null;
+    public roleSpec(i?: number): RoleSpecContext[] | RoleSpecContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(RolespecContext);
+            return this.getRuleContexts(RoleSpecContext);
         }
 
-        return this.getRuleContext(i, RolespecContext);
+        return this.getRuleContext(i, RoleSpecContext);
     }
     public KW_USER(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_USER, 0);
@@ -71396,8 +71396,8 @@ export class RenamestmtContext extends antlr.ParserRuleContext {
     public KW_GROUP(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_GROUP, 0);
     }
-    public opttablespace(): OpttablespaceContext | null {
-        return this.getRuleContext(0, OpttablespaceContext);
+    public optTableSpace(): OptTableSpaceContext | null {
+        return this.getRuleContext(0, OptTableSpaceContext);
     }
     public tablespace_name_create(): Tablespace_name_createContext | null {
         return this.getRuleContext(0, Tablespace_name_createContext);
@@ -71427,21 +71427,21 @@ export class RenamestmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_drop_behaviorContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_renamestmt;
+        return PostgreSqlParser.RULE_renameStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRenamestmt) {
-             listener.enterRenamestmt(this);
+        if(listener.enterRenameStmt) {
+             listener.enterRenameStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRenamestmt) {
-             listener.exitRenamestmt(this);
+        if(listener.exitRenameStmt) {
+             listener.exitRenameStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRenamestmt) {
-            return visitor.visitRenamestmt(this);
+        if (visitor.visitRenameStmt) {
+            return visitor.visitRenameStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71449,7 +71449,7 @@ export class RenamestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterobjectdependsstmtContext extends antlr.ParserRuleContext {
+export class AlterObjectDependsStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -71471,32 +71471,32 @@ export class AlterobjectdependsstmtContext extends antlr.ParserRuleContext {
     public KW_EXTENSION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_EXTENSION, 0)!;
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypesContext);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext | null {
-        return this.getRuleContext(0, Routine_with_argtypesContext);
+    public routineWithArgTypes(): RoutineWithArgTypesContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesContext);
     }
     public KW_TRIGGER(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TRIGGER, 0);
@@ -71520,21 +71520,21 @@ export class AlterobjectdependsstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_NO, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterobjectdependsstmt;
+        return PostgreSqlParser.RULE_alterObjectDependsStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterobjectdependsstmt) {
-             listener.enterAlterobjectdependsstmt(this);
+        if(listener.enterAlterObjectDependsStmt) {
+             listener.enterAlterObjectDependsStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterobjectdependsstmt) {
-             listener.exitAlterobjectdependsstmt(this);
+        if(listener.exitAlterObjectDependsStmt) {
+             listener.exitAlterObjectDependsStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterobjectdependsstmt) {
-            return visitor.visitAlterobjectdependsstmt(this);
+        if (visitor.visitAlterObjectDependsStmt) {
+            return visitor.visitAlterObjectDependsStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71542,7 +71542,7 @@ export class AlterobjectdependsstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterobjectschemastmtContext extends antlr.ParserRuleContext {
+export class AlterObjectSchemaStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -71561,26 +71561,26 @@ export class AlterobjectschemastmtContext extends antlr.ParserRuleContext {
     public KW_AGGREGATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AGGREGATE, 0);
     }
-    public aggregate_with_argtypes(): Aggregate_with_argtypesContext | null {
-        return this.getRuleContext(0, Aggregate_with_argtypesContext);
+    public aggregateWithArgTypes(): AggregateWithArgTypesContext | null {
+        return this.getRuleContext(0, AggregateWithArgTypesContext);
     }
     public KW_EXTENSION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_EXTENSION, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public KW_OPERATOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OPERATOR, 0);
     }
-    public operator_with_argtypes(): Operator_with_argtypesContext | null {
-        return this.getRuleContext(0, Operator_with_argtypesContext);
+    public operatorWithArgTypes(): OperatorWithArgTypesContext | null {
+        return this.getRuleContext(0, OperatorWithArgTypesContext);
     }
     public any_name(): Any_nameContext | null {
         return this.getRuleContext(0, Any_nameContext);
@@ -71591,14 +71591,14 @@ export class AlterobjectschemastmtContext extends antlr.ParserRuleContext {
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypesContext);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext | null {
-        return this.getRuleContext(0, Routine_with_argtypesContext);
+    public routineWithArgTypes(): RoutineWithArgTypesContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesContext);
     }
     public KW_SEQUENCE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SEQUENCE, 0);
@@ -71667,21 +71667,21 @@ export class AlterobjectschemastmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_CONFIGURATION, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterobjectschemastmt;
+        return PostgreSqlParser.RULE_alterObjectSchemaStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterobjectschemastmt) {
-             listener.enterAlterobjectschemastmt(this);
+        if(listener.enterAlterObjectSchemaStmt) {
+             listener.enterAlterObjectSchemaStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterobjectschemastmt) {
-             listener.exitAlterobjectschemastmt(this);
+        if(listener.exitAlterObjectSchemaStmt) {
+             listener.exitAlterObjectSchemaStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterobjectschemastmt) {
-            return visitor.visitAlterobjectschemastmt(this);
+        if (visitor.visitAlterObjectSchemaStmt) {
+            return visitor.visitAlterObjectSchemaStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71689,7 +71689,7 @@ export class AlterobjectschemastmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlteroperatorstmtContext extends antlr.ParserRuleContext {
+export class AlterOperatorStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -71699,8 +71699,8 @@ export class AlteroperatorstmtContext extends antlr.ParserRuleContext {
     public KW_OPERATOR(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_OPERATOR, 0)!;
     }
-    public operator_with_argtypes(): Operator_with_argtypesContext {
-        return this.getRuleContext(0, Operator_with_argtypesContext)!;
+    public operatorWithArgTypes(): OperatorWithArgTypesContext {
+        return this.getRuleContext(0, OperatorWithArgTypesContext)!;
     }
     public KW_SET(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SET, 0)!;
@@ -71709,21 +71709,21 @@ export class AlteroperatorstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Operator_def_listContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alteroperatorstmt;
+        return PostgreSqlParser.RULE_alterOperatorStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlteroperatorstmt) {
-             listener.enterAlteroperatorstmt(this);
+        if(listener.enterAlterOperatorStmt) {
+             listener.enterAlterOperatorStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlteroperatorstmt) {
-             listener.exitAlteroperatorstmt(this);
+        if(listener.exitAlterOperatorStmt) {
+             listener.exitAlterOperatorStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlteroperatorstmt) {
-            return visitor.visitAlteroperatorstmt(this);
+        if (visitor.visitAlterOperatorStmt) {
+            return visitor.visitAlterOperatorStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71786,8 +71786,8 @@ export class Operator_def_elemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public collabel(): CollabelContext {
-        return this.getRuleContext(0, CollabelContext)!;
+    public colLabel(): ColLabelContext {
+        return this.getRuleContext(0, ColLabelContext)!;
     }
     public EQUAL(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.EQUAL, 0)!;
@@ -71804,11 +71804,11 @@ export class Operator_def_elemContext extends antlr.ParserRuleContext {
     public qual_all_op(): Qual_all_opContext | null {
         return this.getRuleContext(0, Qual_all_opContext);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_operator_def_elem;
@@ -71833,7 +71833,7 @@ export class Operator_def_elemContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltertypestmtContext extends antlr.ParserRuleContext {
+export class AlterTypeStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -71853,21 +71853,21 @@ export class AltertypestmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Operator_def_listContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altertypestmt;
+        return PostgreSqlParser.RULE_alterTypeStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltertypestmt) {
-             listener.enterAltertypestmt(this);
+        if(listener.enterAlterTypeStmt) {
+             listener.enterAlterTypeStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltertypestmt) {
-             listener.exitAltertypestmt(this);
+        if(listener.exitAlterTypeStmt) {
+             listener.exitAlterTypeStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltertypestmt) {
-            return visitor.visitAltertypestmt(this);
+        if (visitor.visitAlterTypeStmt) {
+            return visitor.visitAlterTypeStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71875,7 +71875,7 @@ export class AltertypestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterownerstmtContext extends antlr.ParserRuleContext {
+export class AlterOwnerStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -71897,8 +71897,8 @@ export class AlterownerstmtContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_TO, 0)!;
     }
-    public rolespec(): RolespecContext {
-        return this.getRuleContext(0, RolespecContext)!;
+    public roleSpec(): RoleSpecContext {
+        return this.getRuleContext(0, RoleSpecContext)!;
     }
     public KW_CLASS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CLASS, 0);
@@ -71909,8 +71909,8 @@ export class AlterownerstmtContext extends antlr.ParserRuleContext {
     public KW_AGGREGATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AGGREGATE, 0);
     }
-    public aggregate_with_argtypes(): Aggregate_with_argtypesContext | null {
-        return this.getRuleContext(0, Aggregate_with_argtypesContext);
+    public aggregateWithArgTypes(): AggregateWithArgTypesContext | null {
+        return this.getRuleContext(0, AggregateWithArgTypesContext);
     }
     public KW_DATABASE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DATABASE, 0);
@@ -71921,14 +71921,14 @@ export class AlterownerstmtContext extends antlr.ParserRuleContext {
     public KW_FUNCTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FUNCTION, 0);
     }
-    public function_with_argtypes(): Function_with_argtypesContext | null {
-        return this.getRuleContext(0, Function_with_argtypesContext);
+    public functionWithArgTypes(): FunctionWithArgTypesContext | null {
+        return this.getRuleContext(0, FunctionWithArgTypesContext);
     }
     public KW_LANGUAGE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_LANGUAGE, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_LARGE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_LARGE, 0);
@@ -71936,23 +71936,23 @@ export class AlterownerstmtContext extends antlr.ParserRuleContext {
     public KW_OBJECT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OBJECT, 0);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
-    public operator_with_argtypes(): Operator_with_argtypesContext | null {
-        return this.getRuleContext(0, Operator_with_argtypesContext);
+    public operatorWithArgTypes(): OperatorWithArgTypesContext | null {
+        return this.getRuleContext(0, OperatorWithArgTypesContext);
     }
     public KW_PROCEDURE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURE, 0);
     }
-    public procedure_with_argtypes(): Procedure_with_argtypesContext | null {
-        return this.getRuleContext(0, Procedure_with_argtypesContext);
+    public procedureWithArgTypes(): ProcedureWithArgTypesContext | null {
+        return this.getRuleContext(0, ProcedureWithArgTypesContext);
     }
     public KW_ROUTINE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ROUTINE, 0);
     }
-    public routine_with_argtypes(): Routine_with_argtypesContext | null {
-        return this.getRuleContext(0, Routine_with_argtypesContext);
+    public routineWithArgTypes(): RoutineWithArgTypesContext | null {
+        return this.getRuleContext(0, RoutineWithArgTypesContext);
     }
     public KW_SCHEMA(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SCHEMA, 0);
@@ -71960,8 +71960,8 @@ export class AlterownerstmtContext extends antlr.ParserRuleContext {
     public schema_name(): Schema_nameContext | null {
         return this.getRuleContext(0, Schema_nameContext);
     }
-    public opttablespace(): OpttablespaceContext | null {
-        return this.getRuleContext(0, OpttablespaceContext);
+    public optTableSpace(): OptTableSpaceContext | null {
+        return this.getRuleContext(0, OptTableSpaceContext);
     }
     public KW_PROCEDURAL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PROCEDURAL, 0);
@@ -72018,21 +72018,21 @@ export class AlterownerstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_TRIGGER, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterownerstmt;
+        return PostgreSqlParser.RULE_alterOwnerStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterownerstmt) {
-             listener.enterAlterownerstmt(this);
+        if(listener.enterAlterOwnerStmt) {
+             listener.enterAlterOwnerStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterownerstmt) {
-             listener.exitAlterownerstmt(this);
+        if(listener.exitAlterOwnerStmt) {
+             listener.exitAlterOwnerStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterownerstmt) {
-            return visitor.visitAlterownerstmt(this);
+        if (visitor.visitAlterOwnerStmt) {
+            return visitor.visitAlterOwnerStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72040,7 +72040,7 @@ export class AlterownerstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatepublicationstmtContext extends antlr.ParserRuleContext {
+export class CreatePublicationStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -72050,8 +72050,8 @@ export class CreatepublicationstmtContext extends antlr.ParserRuleContext {
     public KW_PUBLICATION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_PUBLICATION, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_FOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FOR, 0);
@@ -72072,21 +72072,21 @@ export class CreatepublicationstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_definitionContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createpublicationstmt;
+        return PostgreSqlParser.RULE_createPublicationStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatepublicationstmt) {
-             listener.enterCreatepublicationstmt(this);
+        if(listener.enterCreatePublicationStmt) {
+             listener.enterCreatePublicationStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatepublicationstmt) {
-             listener.exitCreatepublicationstmt(this);
+        if(listener.exitCreatePublicationStmt) {
+             listener.exitCreatePublicationStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatepublicationstmt) {
-            return visitor.visitCreatepublicationstmt(this);
+        if (visitor.visitCreatePublicationStmt) {
+            return visitor.visitCreatePublicationStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72094,7 +72094,7 @@ export class CreatepublicationstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterpublicationstmtContext extends antlr.ParserRuleContext {
+export class AlterPublicationStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -72104,14 +72104,14 @@ export class AlterpublicationstmtContext extends antlr.ParserRuleContext {
     public KW_PUBLICATION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_PUBLICATION, 0)!;
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public publication_relation_expr(): Publication_relation_exprContext[];
     public publication_relation_expr(i: number): Publication_relation_exprContext | null;
@@ -72137,8 +72137,8 @@ export class AlterpublicationstmtContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public definition(): DefinitionContext | null {
         return this.getRuleContext(0, DefinitionContext);
@@ -72156,21 +72156,21 @@ export class AlterpublicationstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterpublicationstmt;
+        return PostgreSqlParser.RULE_alterPublicationStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterpublicationstmt) {
-             listener.enterAlterpublicationstmt(this);
+        if(listener.enterAlterPublicationStmt) {
+             listener.enterAlterPublicationStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterpublicationstmt) {
-             listener.exitAlterpublicationstmt(this);
+        if(listener.exitAlterPublicationStmt) {
+             listener.exitAlterPublicationStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterpublicationstmt) {
-            return visitor.visitAlterpublicationstmt(this);
+        if (visitor.visitAlterPublicationStmt) {
+            return visitor.visitAlterPublicationStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72178,7 +72178,7 @@ export class AlterpublicationstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatesubscriptionstmtContext extends antlr.ParserRuleContext {
+export class CreateSubscriptionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -72188,26 +72188,26 @@ export class CreatesubscriptionstmtContext extends antlr.ParserRuleContext {
     public KW_SUBSCRIPTION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SUBSCRIPTION, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_CONNECTION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_CONNECTION, 0)!;
     }
-    public sconst(): SconstContext {
-        return this.getRuleContext(0, SconstContext)!;
+    public stringConst(): StringConstContext {
+        return this.getRuleContext(0, StringConstContext)!;
     }
     public KW_PUBLICATION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_PUBLICATION, 0)!;
     }
-    public collabel(): CollabelContext[];
-    public collabel(i: number): CollabelContext | null;
-    public collabel(i?: number): CollabelContext[] | CollabelContext | null {
+    public colLabel(): ColLabelContext[];
+    public colLabel(i: number): ColLabelContext | null;
+    public colLabel(i?: number): ColLabelContext[] | ColLabelContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(CollabelContext);
+            return this.getRuleContexts(ColLabelContext);
         }
 
-        return this.getRuleContext(i, CollabelContext);
+        return this.getRuleContext(i, ColLabelContext);
     }
     public opt_definition(): Opt_definitionContext | null {
         return this.getRuleContext(0, Opt_definitionContext);
@@ -72222,21 +72222,21 @@ export class CreatesubscriptionstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createsubscriptionstmt;
+        return PostgreSqlParser.RULE_createSubscriptionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatesubscriptionstmt) {
-             listener.enterCreatesubscriptionstmt(this);
+        if(listener.enterCreateSubscriptionStmt) {
+             listener.enterCreateSubscriptionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatesubscriptionstmt) {
-             listener.exitCreatesubscriptionstmt(this);
+        if(listener.exitCreateSubscriptionStmt) {
+             listener.exitCreateSubscriptionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatesubscriptionstmt) {
-            return visitor.visitCreatesubscriptionstmt(this);
+        if (visitor.visitCreateSubscriptionStmt) {
+            return visitor.visitCreateSubscriptionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72244,7 +72244,7 @@ export class CreatesubscriptionstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltersubscriptionstmtContext extends antlr.ParserRuleContext {
+export class AlterSubscriptionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -72254,8 +72254,8 @@ export class AltersubscriptionstmtContext extends antlr.ParserRuleContext {
     public KW_SUBSCRIPTION(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_SUBSCRIPTION, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_SET(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SET, 0);
@@ -72266,8 +72266,8 @@ export class AltersubscriptionstmtContext extends antlr.ParserRuleContext {
     public KW_CONNECTION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CONNECTION, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_REFRESH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_REFRESH, 0);
@@ -72284,14 +72284,14 @@ export class AltersubscriptionstmtContext extends antlr.ParserRuleContext {
     public KW_DROP(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DROP, 0);
     }
-    public collabel(): CollabelContext[];
-    public collabel(i: number): CollabelContext | null;
-    public collabel(i?: number): CollabelContext[] | CollabelContext | null {
+    public colLabel(): ColLabelContext[];
+    public colLabel(i: number): ColLabelContext | null;
+    public colLabel(i?: number): ColLabelContext[] | ColLabelContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(CollabelContext);
+            return this.getRuleContexts(ColLabelContext);
         }
 
-        return this.getRuleContext(i, CollabelContext);
+        return this.getRuleContext(i, ColLabelContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -72314,8 +72314,8 @@ export class AltersubscriptionstmtContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
     }
-    public old_aggr_elem(): Old_aggr_elemContext | null {
-        return this.getRuleContext(0, Old_aggr_elemContext);
+    public old_aggregate_elem(): Old_aggregate_elemContext | null {
+        return this.getRuleContext(0, Old_aggregate_elemContext);
     }
     public CLOSE_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
@@ -72326,25 +72326,25 @@ export class AltersubscriptionstmtContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
     }
-    public rolespec(): RolespecContext | null {
-        return this.getRuleContext(0, RolespecContext);
+    public roleSpec(): RoleSpecContext | null {
+        return this.getRuleContext(0, RoleSpecContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altersubscriptionstmt;
+        return PostgreSqlParser.RULE_alterSubscriptionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltersubscriptionstmt) {
-             listener.enterAltersubscriptionstmt(this);
+        if(listener.enterAlterSubscriptionStmt) {
+             listener.enterAlterSubscriptionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltersubscriptionstmt) {
-             listener.exitAltersubscriptionstmt(this);
+        if(listener.exitAlterSubscriptionStmt) {
+             listener.exitAlterSubscriptionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltersubscriptionstmt) {
-            return visitor.visitAltersubscriptionstmt(this);
+        if (visitor.visitAlterSubscriptionStmt) {
+            return visitor.visitAlterSubscriptionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72352,7 +72352,7 @@ export class AltersubscriptionstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class RulestmtContext extends antlr.ParserRuleContext {
+export class RuleStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -72362,8 +72362,8 @@ export class RulestmtContext extends antlr.ParserRuleContext {
     public KW_RULE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_RULE, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_AS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AS, 0)!;
@@ -72395,14 +72395,14 @@ export class RulestmtContext extends antlr.ParserRuleContext {
     public KW_NOTHING(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NOTHING, 0);
     }
-    public ruleactionstmt(): RuleactionstmtContext[];
-    public ruleactionstmt(i: number): RuleactionstmtContext | null;
-    public ruleactionstmt(i?: number): RuleactionstmtContext[] | RuleactionstmtContext | null {
+    public ruleActionStmt(): RuleActionStmtContext[];
+    public ruleActionStmt(i: number): RuleActionStmtContext | null;
+    public ruleActionStmt(i?: number): RuleActionStmtContext[] | RuleActionStmtContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(RuleactionstmtContext);
+            return this.getRuleContexts(RuleActionStmtContext);
         }
 
-        return this.getRuleContext(i, RuleactionstmtContext);
+        return this.getRuleContext(i, RuleActionStmtContext);
     }
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
@@ -72432,21 +72432,21 @@ export class RulestmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_rulestmt;
+        return PostgreSqlParser.RULE_ruleStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRulestmt) {
-             listener.enterRulestmt(this);
+        if(listener.enterRuleStmt) {
+             listener.enterRuleStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRulestmt) {
-             listener.exitRulestmt(this);
+        if(listener.exitRuleStmt) {
+             listener.exitRuleStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRulestmt) {
-            return visitor.visitRulestmt(this);
+        if (visitor.visitRuleStmt) {
+            return visitor.visitRuleStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72454,41 +72454,41 @@ export class RulestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class RuleactionstmtContext extends antlr.ParserRuleContext {
+export class RuleActionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
-    public insertstmt(): InsertstmtContext | null {
-        return this.getRuleContext(0, InsertstmtContext);
+    public insertStmt(): InsertStmtContext | null {
+        return this.getRuleContext(0, InsertStmtContext);
     }
-    public updatestmt(): UpdatestmtContext | null {
-        return this.getRuleContext(0, UpdatestmtContext);
+    public updateStmt(): UpdateStmtContext | null {
+        return this.getRuleContext(0, UpdateStmtContext);
     }
-    public deletestmt(): DeletestmtContext | null {
-        return this.getRuleContext(0, DeletestmtContext);
+    public deleteStmt(): DeleteStmtContext | null {
+        return this.getRuleContext(0, DeleteStmtContext);
     }
-    public notifystmt(): NotifystmtContext | null {
-        return this.getRuleContext(0, NotifystmtContext);
+    public notifyStmt(): NotifyStmtContext | null {
+        return this.getRuleContext(0, NotifyStmtContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_ruleactionstmt;
+        return PostgreSqlParser.RULE_ruleActionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRuleactionstmt) {
-             listener.enterRuleactionstmt(this);
+        if(listener.enterRuleActionStmt) {
+             listener.enterRuleActionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRuleactionstmt) {
-             listener.exitRuleactionstmt(this);
+        if(listener.exitRuleActionStmt) {
+             listener.exitRuleActionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRuleactionstmt) {
-            return visitor.visitRuleactionstmt(this);
+        if (visitor.visitRuleActionStmt) {
+            return visitor.visitRuleActionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72496,35 +72496,35 @@ export class RuleactionstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class NotifystmtContext extends antlr.ParserRuleContext {
+export class NotifyStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_NOTIFY(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_NOTIFY, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public notify_payload(): Notify_payloadContext | null {
         return this.getRuleContext(0, Notify_payloadContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_notifystmt;
+        return PostgreSqlParser.RULE_notifyStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterNotifystmt) {
-             listener.enterNotifystmt(this);
+        if(listener.enterNotifyStmt) {
+             listener.enterNotifyStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitNotifystmt) {
-             listener.exitNotifystmt(this);
+        if(listener.exitNotifyStmt) {
+             listener.exitNotifyStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitNotifystmt) {
-            return visitor.visitNotifystmt(this);
+        if (visitor.visitNotifyStmt) {
+            return visitor.visitNotifyStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72539,8 +72539,8 @@ export class Notify_payloadContext extends antlr.ParserRuleContext {
     public COMMA(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.COMMA, 0)!;
     }
-    public sconst(): SconstContext {
-        return this.getRuleContext(0, SconstContext)!;
+    public stringConst(): StringConstContext {
+        return this.getRuleContext(0, StringConstContext)!;
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_notify_payload;
@@ -72565,32 +72565,32 @@ export class Notify_payloadContext extends antlr.ParserRuleContext {
 }
 
 
-export class ListenstmtContext extends antlr.ParserRuleContext {
+export class ListenStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_LISTEN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_LISTEN, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_listenstmt;
+        return PostgreSqlParser.RULE_listenStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterListenstmt) {
-             listener.enterListenstmt(this);
+        if(listener.enterListenStmt) {
+             listener.enterListenStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitListenstmt) {
-             listener.exitListenstmt(this);
+        if(listener.exitListenStmt) {
+             listener.exitListenStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitListenstmt) {
-            return visitor.visitListenstmt(this);
+        if (visitor.visitListenStmt) {
+            return visitor.visitListenStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72598,35 +72598,35 @@ export class ListenstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnlistenstmtContext extends antlr.ParserRuleContext {
+export class UnListenStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_UNLISTEN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_UNLISTEN, 0)!;
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public STAR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.STAR, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_unlistenstmt;
+        return PostgreSqlParser.RULE_unListenStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterUnlistenstmt) {
-             listener.enterUnlistenstmt(this);
+        if(listener.enterUnListenStmt) {
+             listener.enterUnListenStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitUnlistenstmt) {
-             listener.exitUnlistenstmt(this);
+        if(listener.exitUnListenStmt) {
+             listener.exitUnListenStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnlistenstmt) {
-            return visitor.visitUnlistenstmt(this);
+        if (visitor.visitUnListenStmt) {
+            return visitor.visitUnListenStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72634,7 +72634,7 @@ export class UnlistenstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class TransactionstmtContext extends antlr.ParserRuleContext {
+export class TransactionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -72656,8 +72656,8 @@ export class TransactionstmtContext extends antlr.ParserRuleContext {
     public KW_SAVEPOINT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SAVEPOINT, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_RELEASE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_RELEASE, 0);
@@ -72665,8 +72665,8 @@ export class TransactionstmtContext extends antlr.ParserRuleContext {
     public KW_PREPARE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PREPARE, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public KW_PREPARED(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PREPARED, 0);
@@ -72696,21 +72696,21 @@ export class TransactionstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_transactionstmt;
+        return PostgreSqlParser.RULE_transactionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTransactionstmt) {
-             listener.enterTransactionstmt(this);
+        if(listener.enterTransactionStmt) {
+             listener.enterTransactionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTransactionstmt) {
-             listener.exitTransactionstmt(this);
+        if(listener.exitTransactionStmt) {
+             listener.exitTransactionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTransactionstmt) {
-            return visitor.visitTransactionstmt(this);
+        if (visitor.visitTransactionStmt) {
+            return visitor.visitTransactionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72847,19 +72847,19 @@ export class Transaction_mode_listContext extends antlr.ParserRuleContext {
 }
 
 
-export class ViewstmtContext extends antlr.ParserRuleContext {
+export class ViewStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_viewstmt;
+        return PostgreSqlParser.RULE_viewStmt;
     }
-    public override copyFrom(ctx: ViewstmtContext): void {
+    public override copyFrom(ctx: ViewStmtContext): void {
         super.copyFrom(ctx);
     }
 }
-export class CreateViewContext extends ViewstmtContext {
-    public constructor(ctx: ViewstmtContext) {
+export class CreateViewContext extends ViewStmtContext {
+    public constructor(ctx: ViewStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -72869,8 +72869,8 @@ export class CreateViewContext extends ViewstmtContext {
     public KW_AS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AS, 0)!;
     }
-    public selectstmt(): SelectstmtContext {
-        return this.getRuleContext(0, SelectstmtContext)!;
+    public selectStmt(): SelectStmtContext {
+        return this.getRuleContext(0, SelectStmtContext)!;
     }
     public KW_VIEW(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_VIEW, 0);
@@ -72890,8 +72890,8 @@ export class CreateViewContext extends ViewstmtContext {
     public KW_REPLACE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_REPLACE, 0);
     }
-    public opttemp(): OpttempContext | null {
-        return this.getRuleContext(0, OpttempContext);
+    public optTemp(): OptTempContext | null {
+        return this.getRuleContext(0, OptTempContext);
     }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
@@ -72905,8 +72905,8 @@ export class CreateViewContext extends ViewstmtContext {
     public opt_column_list_create(): Opt_column_list_createContext | null {
         return this.getRuleContext(0, Opt_column_list_createContext);
     }
-    public opt_reloptions(): Opt_reloptionsContext | null {
-        return this.getRuleContext(0, Opt_reloptionsContext);
+    public optRelOptions(): OptRelOptionsContext | null {
+        return this.getRuleContext(0, OptRelOptionsContext);
     }
     public KW_CASCADED(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CASCADED, 0);
@@ -72934,32 +72934,32 @@ export class CreateViewContext extends ViewstmtContext {
 }
 
 
-export class LoadstmtContext extends antlr.ParserRuleContext {
+export class LoadStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_LOAD(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_LOAD, 0)!;
     }
-    public sconst(): SconstContext {
-        return this.getRuleContext(0, SconstContext)!;
+    public stringConst(): StringConstContext {
+        return this.getRuleContext(0, StringConstContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_loadstmt;
+        return PostgreSqlParser.RULE_loadStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterLoadstmt) {
-             listener.enterLoadstmt(this);
+        if(listener.enterLoadStmt) {
+             listener.enterLoadStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitLoadstmt) {
-             listener.exitLoadstmt(this);
+        if(listener.exitLoadStmt) {
+             listener.exitLoadStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitLoadstmt) {
-            return visitor.visitLoadstmt(this);
+        if (visitor.visitLoadStmt) {
+            return visitor.visitLoadStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -72967,19 +72967,19 @@ export class LoadstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatedbstmtContext extends antlr.ParserRuleContext {
+export class CreateDbStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createdbstmt;
+        return PostgreSqlParser.RULE_createDbStmt;
     }
-    public override copyFrom(ctx: CreatedbstmtContext): void {
+    public override copyFrom(ctx: CreateDbStmtContext): void {
         super.copyFrom(ctx);
     }
 }
-export class CreateDatabaseContext extends CreatedbstmtContext {
-    public constructor(ctx: CreatedbstmtContext) {
+export class CreateDatabaseContext extends CreateDbStmtContext {
+    public constructor(ctx: CreateDbStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -72995,14 +72995,14 @@ export class CreateDatabaseContext extends CreatedbstmtContext {
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public createdb_opt_item(): Createdb_opt_itemContext[];
-    public createdb_opt_item(i: number): Createdb_opt_itemContext | null;
-    public createdb_opt_item(i?: number): Createdb_opt_itemContext[] | Createdb_opt_itemContext | null {
+    public create_db_opt_item(): Create_db_opt_itemContext[];
+    public create_db_opt_item(i: number): Create_db_opt_itemContext | null;
+    public create_db_opt_item(i?: number): Create_db_opt_itemContext[] | Create_db_opt_itemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Createdb_opt_itemContext);
+            return this.getRuleContexts(Create_db_opt_itemContext);
         }
 
-        return this.getRuleContext(i, Createdb_opt_itemContext);
+        return this.getRuleContext(i, Create_db_opt_itemContext);
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
         if(listener.enterCreateDatabase) {
@@ -73024,7 +73024,7 @@ export class CreateDatabaseContext extends CreatedbstmtContext {
 }
 
 
-export class Createdb_opt_itemContext extends antlr.ParserRuleContext {
+export class Create_db_opt_itemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73052,8 +73052,8 @@ export class Createdb_opt_itemContext extends antlr.ParserRuleContext {
     public identifier(): IdentifierContext | null {
         return this.getRuleContext(0, IdentifierContext);
     }
-    public signediconst(): SignediconstContext | null {
-        return this.getRuleContext(0, SignediconstContext);
+    public signedConst(): SignedConstContext | null {
+        return this.getRuleContext(0, SignedConstContext);
     }
     public opt_boolean_or_string(): Opt_boolean_or_stringContext | null {
         return this.getRuleContext(0, Opt_boolean_or_stringContext);
@@ -73065,21 +73065,21 @@ export class Createdb_opt_itemContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.EQUAL, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createdb_opt_item;
+        return PostgreSqlParser.RULE_create_db_opt_item;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatedb_opt_item) {
-             listener.enterCreatedb_opt_item(this);
+        if(listener.enterCreate_db_opt_item) {
+             listener.enterCreate_db_opt_item(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatedb_opt_item) {
-             listener.exitCreatedb_opt_item(this);
+        if(listener.exitCreate_db_opt_item) {
+             listener.exitCreate_db_opt_item(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatedb_opt_item) {
-            return visitor.visitCreatedb_opt_item(this);
+        if (visitor.visitCreate_db_opt_item) {
+            return visitor.visitCreate_db_opt_item(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73087,7 +73087,7 @@ export class Createdb_opt_itemContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterdatabasestmtContext extends antlr.ParserRuleContext {
+export class AlterDatabaseStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73112,31 +73112,31 @@ export class AlterdatabasestmtContext extends antlr.ParserRuleContext {
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_WITH, 0);
     }
-    public createdb_opt_item(): Createdb_opt_itemContext[];
-    public createdb_opt_item(i: number): Createdb_opt_itemContext | null;
-    public createdb_opt_item(i?: number): Createdb_opt_itemContext[] | Createdb_opt_itemContext | null {
+    public create_db_opt_item(): Create_db_opt_itemContext[];
+    public create_db_opt_item(i: number): Create_db_opt_itemContext | null;
+    public create_db_opt_item(i?: number): Create_db_opt_itemContext[] | Create_db_opt_itemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Createdb_opt_itemContext);
+            return this.getRuleContexts(Create_db_opt_itemContext);
         }
 
-        return this.getRuleContext(i, Createdb_opt_itemContext);
+        return this.getRuleContext(i, Create_db_opt_itemContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterdatabasestmt;
+        return PostgreSqlParser.RULE_alterDatabaseStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterdatabasestmt) {
-             listener.enterAlterdatabasestmt(this);
+        if(listener.enterAlterDatabaseStmt) {
+             listener.enterAlterDatabaseStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterdatabasestmt) {
-             listener.exitAlterdatabasestmt(this);
+        if(listener.exitAlterDatabaseStmt) {
+             listener.exitAlterDatabaseStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterdatabasestmt) {
-            return visitor.visitAlterdatabasestmt(this);
+        if (visitor.visitAlterDatabaseStmt) {
+            return visitor.visitAlterDatabaseStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73144,7 +73144,7 @@ export class AlterdatabasestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterdatabasesetstmtContext extends antlr.ParserRuleContext {
+export class AlterDatabaseSetStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73157,25 +73157,25 @@ export class AlterdatabasesetstmtContext extends antlr.ParserRuleContext {
     public database_name(): Database_nameContext {
         return this.getRuleContext(0, Database_nameContext)!;
     }
-    public setresetclause(): SetresetclauseContext | null {
-        return this.getRuleContext(0, SetresetclauseContext);
+    public setOrResetClause(): SetOrResetClauseContext | null {
+        return this.getRuleContext(0, SetOrResetClauseContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterdatabasesetstmt;
+        return PostgreSqlParser.RULE_alterDatabaseSetStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterdatabasesetstmt) {
-             listener.enterAlterdatabasesetstmt(this);
+        if(listener.enterAlterDatabaseSetStmt) {
+             listener.enterAlterDatabaseSetStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterdatabasesetstmt) {
-             listener.exitAlterdatabasesetstmt(this);
+        if(listener.exitAlterDatabaseSetStmt) {
+             listener.exitAlterDatabaseSetStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterdatabasesetstmt) {
-            return visitor.visitAlterdatabasesetstmt(this);
+        if (visitor.visitAlterDatabaseSetStmt) {
+            return visitor.visitAlterDatabaseSetStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73183,7 +73183,7 @@ export class AlterdatabasesetstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltercollationstmtContext extends antlr.ParserRuleContext {
+export class AlterCollationStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73203,21 +73203,21 @@ export class AltercollationstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_VERSION, 0)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altercollationstmt;
+        return PostgreSqlParser.RULE_alterCollationStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltercollationstmt) {
-             listener.enterAltercollationstmt(this);
+        if(listener.enterAlterCollationStmt) {
+             listener.enterAlterCollationStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltercollationstmt) {
-             listener.exitAltercollationstmt(this);
+        if(listener.exitAlterCollationStmt) {
+             listener.exitAlterCollationStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltercollationstmt) {
-            return visitor.visitAltercollationstmt(this);
+        if (visitor.visitAlterCollationStmt) {
+            return visitor.visitAlterCollationStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73225,7 +73225,7 @@ export class AltercollationstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltersystemstmtContext extends antlr.ParserRuleContext {
+export class AlterSystemStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73245,21 +73245,21 @@ export class AltersystemstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_RESET, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altersystemstmt;
+        return PostgreSqlParser.RULE_alterSystemStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltersystemstmt) {
-             listener.enterAltersystemstmt(this);
+        if(listener.enterAlterSystemStmt) {
+             listener.enterAlterSystemStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltersystemstmt) {
-             listener.exitAltersystemstmt(this);
+        if(listener.exitAlterSystemStmt) {
+             listener.exitAlterSystemStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltersystemstmt) {
-            return visitor.visitAltersystemstmt(this);
+        if (visitor.visitAlterSystemStmt) {
+            return visitor.visitAlterSystemStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73267,7 +73267,7 @@ export class AltersystemstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreatedomainstmtContext extends antlr.ParserRuleContext {
+export class CreateDomainStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73286,31 +73286,31 @@ export class CreatedomainstmtContext extends antlr.ParserRuleContext {
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public colconstraint(): ColconstraintContext[];
-    public colconstraint(i: number): ColconstraintContext | null;
-    public colconstraint(i?: number): ColconstraintContext[] | ColconstraintContext | null {
+    public colConstraint(): ColConstraintContext[];
+    public colConstraint(i: number): ColConstraintContext | null;
+    public colConstraint(i?: number): ColConstraintContext[] | ColConstraintContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColconstraintContext);
+            return this.getRuleContexts(ColConstraintContext);
         }
 
-        return this.getRuleContext(i, ColconstraintContext);
+        return this.getRuleContext(i, ColConstraintContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createdomainstmt;
+        return PostgreSqlParser.RULE_createDomainStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreatedomainstmt) {
-             listener.enterCreatedomainstmt(this);
+        if(listener.enterCreateDomainStmt) {
+             listener.enterCreateDomainStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreatedomainstmt) {
-             listener.exitCreatedomainstmt(this);
+        if(listener.exitCreateDomainStmt) {
+             listener.exitCreateDomainStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreatedomainstmt) {
-            return visitor.visitCreatedomainstmt(this);
+        if (visitor.visitCreateDomainStmt) {
+            return visitor.visitCreateDomainStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73318,7 +73318,7 @@ export class CreatedomainstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterdomainstmtContext extends antlr.ParserRuleContext {
+export class AlterDomainStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73343,8 +73343,8 @@ export class AlterdomainstmtContext extends antlr.ParserRuleContext {
     public KW_ADD(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ADD, 0);
     }
-    public constraintelem(): ConstraintelemContext | null {
-        return this.getRuleContext(0, ConstraintelemContext);
+    public constraintElem(): ConstraintElemContext | null {
+        return this.getRuleContext(0, ConstraintElemContext);
     }
     public KW_DROP(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DROP, 0);
@@ -73352,8 +73352,8 @@ export class AlterdomainstmtContext extends antlr.ParserRuleContext {
     public KW_CONSTRAINT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CONSTRAINT, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_VALIDATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_VALIDATE, 0);
@@ -73368,21 +73368,21 @@ export class AlterdomainstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_drop_behaviorContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_alterdomainstmt;
+        return PostgreSqlParser.RULE_alterDomainStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAlterdomainstmt) {
-             listener.enterAlterdomainstmt(this);
+        if(listener.enterAlterDomainStmt) {
+             listener.enterAlterDomainStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAlterdomainstmt) {
-             listener.exitAlterdomainstmt(this);
+        if(listener.exitAlterDomainStmt) {
+             listener.exitAlterDomainStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterdomainstmt) {
-            return visitor.visitAlterdomainstmt(this);
+        if (visitor.visitAlterDomainStmt) {
+            return visitor.visitAlterDomainStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73390,7 +73390,7 @@ export class AlterdomainstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltertsdictionarystmtContext extends antlr.ParserRuleContext {
+export class AlterSearchDictionaryStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73413,21 +73413,21 @@ export class AltertsdictionarystmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, DefinitionContext)!;
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altertsdictionarystmt;
+        return PostgreSqlParser.RULE_alterSearchDictionaryStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltertsdictionarystmt) {
-             listener.enterAltertsdictionarystmt(this);
+        if(listener.enterAlterSearchDictionaryStmt) {
+             listener.enterAlterSearchDictionaryStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltertsdictionarystmt) {
-             listener.exitAltertsdictionarystmt(this);
+        if(listener.exitAlterSearchDictionaryStmt) {
+             listener.exitAlterSearchDictionaryStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltertsdictionarystmt) {
-            return visitor.visitAltertsdictionarystmt(this);
+        if (visitor.visitAlterSearchDictionaryStmt) {
+            return visitor.visitAlterSearchDictionaryStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73435,7 +73435,7 @@ export class AltertsdictionarystmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AltertsconfigurationstmtContext extends antlr.ParserRuleContext {
+export class AlterSearchConfigurationStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73494,21 +73494,21 @@ export class AltertsconfigurationstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_if_existsContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_altertsconfigurationstmt;
+        return PostgreSqlParser.RULE_alterSearchConfigurationStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAltertsconfigurationstmt) {
-             listener.enterAltertsconfigurationstmt(this);
+        if(listener.enterAlterSearchConfigurationStmt) {
+             listener.enterAlterSearchConfigurationStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAltertsconfigurationstmt) {
-             listener.exitAltertsconfigurationstmt(this);
+        if(listener.exitAlterSearchConfigurationStmt) {
+             listener.exitAlterSearchConfigurationStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAltertsconfigurationstmt) {
-            return visitor.visitAltertsconfigurationstmt(this);
+        if (visitor.visitAlterSearchConfigurationStmt) {
+            return visitor.visitAlterSearchConfigurationStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73516,7 +73516,7 @@ export class AltertsconfigurationstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateconversionstmtContext extends antlr.ParserRuleContext {
+export class CreateConversionStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73538,14 +73538,14 @@ export class CreateconversionstmtContext extends antlr.ParserRuleContext {
     public KW_FOR(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_FOR, 0)!;
     }
-    public sconst(): SconstContext[];
-    public sconst(i: number): SconstContext | null;
-    public sconst(i?: number): SconstContext[] | SconstContext | null {
+    public stringConst(): StringConstContext[];
+    public stringConst(i: number): StringConstContext | null;
+    public stringConst(i?: number): StringConstContext[] | StringConstContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SconstContext);
+            return this.getRuleContexts(StringConstContext);
         }
 
-        return this.getRuleContext(i, SconstContext);
+        return this.getRuleContext(i, StringConstContext);
     }
     public KW_TO(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_TO, 0)!;
@@ -73557,21 +73557,21 @@ export class CreateconversionstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_DEFAULT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_createconversionstmt;
+        return PostgreSqlParser.RULE_createConversionStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCreateconversionstmt) {
-             listener.enterCreateconversionstmt(this);
+        if(listener.enterCreateConversionStmt) {
+             listener.enterCreateConversionStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCreateconversionstmt) {
-             listener.exitCreateconversionstmt(this);
+        if(listener.exitCreateConversionStmt) {
+             listener.exitCreateConversionStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateconversionstmt) {
-            return visitor.visitCreateconversionstmt(this);
+        if (visitor.visitCreateConversionStmt) {
+            return visitor.visitCreateConversionStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73579,7 +73579,7 @@ export class CreateconversionstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class ClusterstmtContext extends antlr.ParserRuleContext {
+export class ClusterStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73617,21 +73617,21 @@ export class ClusterstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_clusterstmt;
+        return PostgreSqlParser.RULE_clusterStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterClusterstmt) {
-             listener.enterClusterstmt(this);
+        if(listener.enterClusterStmt) {
+             listener.enterClusterStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitClusterstmt) {
-             listener.exitClusterstmt(this);
+        if(listener.exitClusterStmt) {
+             listener.exitClusterStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitClusterstmt) {
-            return visitor.visitClusterstmt(this);
+        if (visitor.visitClusterStmt) {
+            return visitor.visitClusterStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73639,7 +73639,7 @@ export class ClusterstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class VacuumstmtContext extends antlr.ParserRuleContext {
+export class VacuumStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73665,21 +73665,21 @@ export class VacuumstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Analyze_keywordContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_vacuumstmt;
+        return PostgreSqlParser.RULE_vacuumStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterVacuumstmt) {
-             listener.enterVacuumstmt(this);
+        if(listener.enterVacuumStmt) {
+             listener.enterVacuumStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitVacuumstmt) {
-             listener.exitVacuumstmt(this);
+        if(listener.exitVacuumStmt) {
+             listener.exitVacuumStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitVacuumstmt) {
-            return visitor.visitVacuumstmt(this);
+        if (visitor.visitVacuumStmt) {
+            return visitor.visitVacuumStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73687,7 +73687,7 @@ export class VacuumstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class AnalyzestmtContext extends antlr.ParserRuleContext {
+export class AnalyzeStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73725,21 +73725,21 @@ export class AnalyzestmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_analyzestmt;
+        return PostgreSqlParser.RULE_analyzeStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterAnalyzestmt) {
-             listener.enterAnalyzestmt(this);
+        if(listener.enterAnalyzeStmt) {
+             listener.enterAnalyzeStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitAnalyzestmt) {
-             listener.exitAnalyzestmt(this);
+        if(listener.exitAnalyzeStmt) {
+             listener.exitAnalyzeStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAnalyzestmt) {
-            return visitor.visitAnalyzestmt(this);
+        if (visitor.visitAnalyzeStmt) {
+            return visitor.visitAnalyzeStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -73784,8 +73784,8 @@ export class Vac_analyze_option_elemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public nonreservedword(): NonreservedwordContext | null {
-        return this.getRuleContext(0, NonreservedwordContext);
+    public nonReservedWord(): NonReservedWordContext | null {
+        return this.getRuleContext(0, NonReservedWordContext);
     }
     public analyze_keyword(): Analyze_keywordContext | null {
         return this.getRuleContext(0, Analyze_keywordContext);
@@ -73793,8 +73793,8 @@ export class Vac_analyze_option_elemContext extends antlr.ParserRuleContext {
     public opt_boolean_or_string(): Opt_boolean_or_stringContext | null {
         return this.getRuleContext(0, Opt_boolean_or_stringContext);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_vac_analyze_option_elem;
@@ -73838,11 +73838,11 @@ export class Analyze_option_elemContext extends antlr.ParserRuleContext {
     public KW_BUFFER_USAGE_LIMIT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_BUFFER_USAGE_LIMIT, 0);
     }
-    public numericonly(): NumericonlyContext | null {
-        return this.getRuleContext(0, NumericonlyContext);
+    public numericOnly(): NumericOnlyContext | null {
+        return this.getRuleContext(0, NumericOnlyContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_analyze_option_elem;
@@ -73981,15 +73981,15 @@ export class Vacuum_relation_listContext extends antlr.ParserRuleContext {
 }
 
 
-export class ExplainstmtContext extends antlr.ParserRuleContext {
+export class ExplainStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_EXPLAIN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_EXPLAIN, 0)!;
     }
-    public explainablestmt(): ExplainablestmtContext {
-        return this.getRuleContext(0, ExplainablestmtContext)!;
+    public explainableStmt(): ExplainableStmtContext {
+        return this.getRuleContext(0, ExplainableStmtContext)!;
     }
     public explain_option_list(): Explain_option_listContext | null {
         return this.getRuleContext(0, Explain_option_listContext);
@@ -74004,21 +74004,21 @@ export class ExplainstmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_verboseContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_explainstmt;
+        return PostgreSqlParser.RULE_explainStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterExplainstmt) {
-             listener.enterExplainstmt(this);
+        if(listener.enterExplainStmt) {
+             listener.enterExplainStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitExplainstmt) {
-             listener.exitExplainstmt(this);
+        if(listener.exitExplainStmt) {
+             listener.exitExplainStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitExplainstmt) {
-            return visitor.visitExplainstmt(this);
+        if (visitor.visitExplainStmt) {
+            return visitor.visitExplainStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74026,53 +74026,53 @@ export class ExplainstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class ExplainablestmtContext extends antlr.ParserRuleContext {
+export class ExplainableStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
-    public insertstmt(): InsertstmtContext | null {
-        return this.getRuleContext(0, InsertstmtContext);
+    public insertStmt(): InsertStmtContext | null {
+        return this.getRuleContext(0, InsertStmtContext);
     }
-    public updatestmt(): UpdatestmtContext | null {
-        return this.getRuleContext(0, UpdatestmtContext);
+    public updateStmt(): UpdateStmtContext | null {
+        return this.getRuleContext(0, UpdateStmtContext);
     }
-    public deletestmt(): DeletestmtContext | null {
-        return this.getRuleContext(0, DeletestmtContext);
+    public deleteStmt(): DeleteStmtContext | null {
+        return this.getRuleContext(0, DeleteStmtContext);
     }
-    public declarecursorstmt(): DeclarecursorstmtContext | null {
-        return this.getRuleContext(0, DeclarecursorstmtContext);
+    public declareCursorStmt(): DeclareCursorStmtContext | null {
+        return this.getRuleContext(0, DeclareCursorStmtContext);
     }
-    public createasstmt(): CreateasstmtContext | null {
-        return this.getRuleContext(0, CreateasstmtContext);
+    public createAsStmt(): CreateAsStmtContext | null {
+        return this.getRuleContext(0, CreateAsStmtContext);
     }
-    public creatematviewstmt(): CreatematviewstmtContext | null {
-        return this.getRuleContext(0, CreatematviewstmtContext);
+    public createMaterializedViewStmt(): CreateMaterializedViewStmtContext | null {
+        return this.getRuleContext(0, CreateMaterializedViewStmtContext);
     }
-    public refreshmatviewstmt(): RefreshmatviewstmtContext | null {
-        return this.getRuleContext(0, RefreshmatviewstmtContext);
+    public refreshMaterializedViewStmt(): RefreshMaterializedViewStmtContext | null {
+        return this.getRuleContext(0, RefreshMaterializedViewStmtContext);
     }
-    public executestmt(): ExecutestmtContext | null {
-        return this.getRuleContext(0, ExecutestmtContext);
+    public executeStmt(): ExecuteStmtContext | null {
+        return this.getRuleContext(0, ExecuteStmtContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_explainablestmt;
+        return PostgreSqlParser.RULE_explainableStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterExplainablestmt) {
-             listener.enterExplainablestmt(this);
+        if(listener.enterExplainableStmt) {
+             listener.enterExplainableStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitExplainablestmt) {
-             listener.exitExplainablestmt(this);
+        if(listener.exitExplainableStmt) {
+             listener.exitExplainableStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitExplainablestmt) {
-            return visitor.visitExplainablestmt(this);
+        if (visitor.visitExplainableStmt) {
+            return visitor.visitExplainableStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74131,41 +74131,41 @@ export class Explain_option_listContext extends antlr.ParserRuleContext {
 }
 
 
-export class PreparestmtContext extends antlr.ParserRuleContext {
+export class PrepareStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_PREPARE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_PREPARE, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_AS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AS, 0)!;
     }
-    public preparablestmt(): PreparablestmtContext {
-        return this.getRuleContext(0, PreparablestmtContext)!;
+    public preParableStmt(): PreParableStmtContext {
+        return this.getRuleContext(0, PreParableStmtContext)!;
     }
     public prep_type_clause(): Prep_type_clauseContext | null {
         return this.getRuleContext(0, Prep_type_clauseContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_preparestmt;
+        return PostgreSqlParser.RULE_prepareStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterPreparestmt) {
-             listener.enterPreparestmt(this);
+        if(listener.enterPrepareStmt) {
+             listener.enterPrepareStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitPreparestmt) {
-             listener.exitPreparestmt(this);
+        if(listener.exitPrepareStmt) {
+             listener.exitPrepareStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPreparestmt) {
-            return visitor.visitPreparestmt(this);
+        if (visitor.visitPrepareStmt) {
+            return visitor.visitPrepareStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74224,38 +74224,38 @@ export class Prep_type_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class PreparablestmtContext extends antlr.ParserRuleContext {
+export class PreParableStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
-    public insertstmt(): InsertstmtContext | null {
-        return this.getRuleContext(0, InsertstmtContext);
+    public insertStmt(): InsertStmtContext | null {
+        return this.getRuleContext(0, InsertStmtContext);
     }
-    public updatestmt(): UpdatestmtContext | null {
-        return this.getRuleContext(0, UpdatestmtContext);
+    public updateStmt(): UpdateStmtContext | null {
+        return this.getRuleContext(0, UpdateStmtContext);
     }
-    public deletestmt(): DeletestmtContext | null {
-        return this.getRuleContext(0, DeletestmtContext);
+    public deleteStmt(): DeleteStmtContext | null {
+        return this.getRuleContext(0, DeleteStmtContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_preparablestmt;
+        return PostgreSqlParser.RULE_preParableStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterPreparablestmt) {
-             listener.enterPreparablestmt(this);
+        if(listener.enterPreParableStmt) {
+             listener.enterPreParableStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitPreparablestmt) {
-             listener.exitPreparablestmt(this);
+        if(listener.exitPreParableStmt) {
+             listener.exitPreParableStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPreparablestmt) {
-            return visitor.visitPreparablestmt(this);
+        if (visitor.visitPreParableStmt) {
+            return visitor.visitPreParableStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74263,15 +74263,15 @@ export class PreparablestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class ExecutestmtContext extends antlr.ParserRuleContext {
+export class ExecuteStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_EXECUTE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_EXECUTE, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public execute_param_clause(): Execute_param_clauseContext | null {
         return this.getRuleContext(0, Execute_param_clauseContext);
@@ -74288,8 +74288,8 @@ export class ExecutestmtContext extends antlr.ParserRuleContext {
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public opttemp(): OpttempContext | null {
-        return this.getRuleContext(0, OpttempContext);
+    public optTemp(): OptTempContext | null {
+        return this.getRuleContext(0, OptTempContext);
     }
     public opt_if_not_exists(): Opt_if_not_existsContext | null {
         return this.getRuleContext(0, Opt_if_not_existsContext);
@@ -74298,21 +74298,21 @@ export class ExecutestmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_with_dataContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_executestmt;
+        return PostgreSqlParser.RULE_executeStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterExecutestmt) {
-             listener.enterExecutestmt(this);
+        if(listener.enterExecuteStmt) {
+             listener.enterExecuteStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitExecutestmt) {
-             listener.exitExecutestmt(this);
+        if(listener.exitExecuteStmt) {
+             listener.exitExecuteStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitExecutestmt) {
-            return visitor.visitExecutestmt(this);
+        if (visitor.visitExecuteStmt) {
+            return visitor.visitExecuteStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74356,15 +74356,15 @@ export class Execute_param_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class DeallocatestmtContext extends antlr.ParserRuleContext {
+export class DealLocateStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_DEALLOCATE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_DEALLOCATE, 0)!;
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_ALL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ALL, 0);
@@ -74373,21 +74373,21 @@ export class DeallocatestmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_PREPARE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_deallocatestmt;
+        return PostgreSqlParser.RULE_dealLocateStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterDeallocatestmt) {
-             listener.enterDeallocatestmt(this);
+        if(listener.enterDealLocateStmt) {
+             listener.enterDealLocateStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitDeallocatestmt) {
-             listener.exitDeallocatestmt(this);
+        if(listener.exitDealLocateStmt) {
+             listener.exitDealLocateStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDeallocatestmt) {
-            return visitor.visitDeallocatestmt(this);
+        if (visitor.visitDealLocateStmt) {
+            return visitor.visitDealLocateStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74395,19 +74395,19 @@ export class DeallocatestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class InsertstmtContext extends antlr.ParserRuleContext {
+export class InsertStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_insertstmt;
+        return PostgreSqlParser.RULE_insertStmt;
     }
-    public override copyFrom(ctx: InsertstmtContext): void {
+    public override copyFrom(ctx: InsertStmtContext): void {
         super.copyFrom(ctx);
     }
 }
-export class InsertStatementContext extends InsertstmtContext {
-    public constructor(ctx: InsertstmtContext) {
+export class InsertStatementContext extends InsertStmtContext {
+    public constructor(ctx: InsertStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -74429,14 +74429,14 @@ export class InsertStatementContext extends InsertstmtContext {
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_ON(): antlr.TerminalNode[];
     public KW_ON(i: number): antlr.TerminalNode | null;
@@ -74510,8 +74510,8 @@ export class Insert_restContext extends antlr.ParserRuleContext {
     public default_values_or_values(): Default_values_or_valuesContext | null {
         return this.getRuleContext(0, Default_values_or_valuesContext);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
@@ -74668,7 +74668,7 @@ export class Returning_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class DeletestmtContext extends antlr.ParserRuleContext {
+export class DeleteStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -74697,21 +74697,21 @@ export class DeletestmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Returning_clauseContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_deletestmt;
+        return PostgreSqlParser.RULE_deleteStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterDeletestmt) {
-             listener.enterDeletestmt(this);
+        if(listener.enterDeleteStmt) {
+             listener.enterDeleteStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitDeletestmt) {
-             listener.exitDeletestmt(this);
+        if(listener.exitDeleteStmt) {
+             listener.exitDeleteStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDeletestmt) {
-            return visitor.visitDeletestmt(this);
+        if (visitor.visitDeleteStmt) {
+            return visitor.visitDeleteStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74719,7 +74719,7 @@ export class DeletestmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class LockstmtContext extends antlr.ParserRuleContext {
+export class LockStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -74757,21 +74757,21 @@ export class LockstmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_UPDATE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_lockstmt;
+        return PostgreSqlParser.RULE_lockStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterLockstmt) {
-             listener.enterLockstmt(this);
+        if(listener.enterLockStmt) {
+             listener.enterLockStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitLockstmt) {
-             listener.exitLockstmt(this);
+        if(listener.exitLockStmt) {
+             listener.exitLockStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitLockstmt) {
-            return visitor.visitLockstmt(this);
+        if (visitor.visitLockStmt) {
+            return visitor.visitLockStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74779,7 +74779,7 @@ export class LockstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class UpdatestmtContext extends antlr.ParserRuleContext {
+export class UpdateStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -74808,21 +74808,21 @@ export class UpdatestmtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Returning_clauseContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_updatestmt;
+        return PostgreSqlParser.RULE_updateStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterUpdatestmt) {
-             listener.enterUpdatestmt(this);
+        if(listener.enterUpdateStmt) {
+             listener.enterUpdateStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitUpdatestmt) {
-             listener.exitUpdatestmt(this);
+        if(listener.exitUpdateStmt) {
+             listener.exitUpdateStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUpdatestmt) {
-            return visitor.visitUpdatestmt(this);
+        if (visitor.visitUpdateStmt) {
+            return visitor.visitUpdateStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -74938,15 +74938,15 @@ export class Set_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class DeclarecursorstmtContext extends antlr.ParserRuleContext {
+export class DeclareCursorStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public KW_DECLARE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_DECLARE, 0)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_CURSOR(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_CURSOR, 0)!;
@@ -74954,8 +74954,8 @@ export class DeclarecursorstmtContext extends antlr.ParserRuleContext {
     public KW_FOR(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_FOR, 0)!;
     }
-    public selectstmt(): SelectstmtContext {
-        return this.getRuleContext(0, SelectstmtContext)!;
+    public selectStmt(): SelectStmtContext {
+        return this.getRuleContext(0, SelectStmtContext)!;
     }
     public KW_HOLD(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_HOLD, 0);
@@ -75003,21 +75003,21 @@ export class DeclarecursorstmtContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_declarecursorstmt;
+        return PostgreSqlParser.RULE_declareCursorStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterDeclarecursorstmt) {
-             listener.enterDeclarecursorstmt(this);
+        if(listener.enterDeclareCursorStmt) {
+             listener.enterDeclareCursorStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitDeclarecursorstmt) {
-             listener.exitDeclarecursorstmt(this);
+        if(listener.exitDeclareCursorStmt) {
+             listener.exitDeclareCursorStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDeclarecursorstmt) {
-            return visitor.visitDeclarecursorstmt(this);
+        if (visitor.visitDeclareCursorStmt) {
+            return visitor.visitDeclareCursorStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -75025,19 +75025,19 @@ export class DeclarecursorstmtContext extends antlr.ParserRuleContext {
 }
 
 
-export class SelectstmtContext extends antlr.ParserRuleContext {
+export class SelectStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_selectstmt;
+        return PostgreSqlParser.RULE_selectStmt;
     }
-    public override copyFrom(ctx: SelectstmtContext): void {
+    public override copyFrom(ctx: SelectStmtContext): void {
         super.copyFrom(ctx);
     }
 }
-export class SelectStatementContext extends SelectstmtContext {
-    public constructor(ctx: SelectstmtContext) {
+export class SelectStatementContext extends SelectStmtContext {
+    public constructor(ctx: SelectStmtContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
@@ -75356,8 +75356,8 @@ export class Common_table_exprContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_AS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AS, 0)!;
@@ -75365,8 +75365,8 @@ export class Common_table_exprContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0)!;
     }
-    public preparablestmt(): PreparablestmtContext {
-        return this.getRuleContext(0, PreparablestmtContext)!;
+    public preParableStmt(): PreParableStmtContext {
+        return this.getRuleContext(0, PreParableStmtContext)!;
     }
     public CLOSE_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
@@ -75377,11 +75377,11 @@ export class Common_table_exprContext extends antlr.ParserRuleContext {
     public KW_MATERIALIZED(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_MATERIALIZED, 0);
     }
-    public search_cluase(): Search_cluaseContext | null {
-        return this.getRuleContext(0, Search_cluaseContext);
+    public search_clause(): Search_clauseContext | null {
+        return this.getRuleContext(0, Search_clauseContext);
     }
-    public cycle_cluase(): Cycle_cluaseContext | null {
-        return this.getRuleContext(0, Cycle_cluaseContext);
+    public cycle_clause(): Cycle_clauseContext | null {
+        return this.getRuleContext(0, Cycle_clauseContext);
     }
     public KW_NOT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NOT, 0);
@@ -75409,7 +75409,7 @@ export class Common_table_exprContext extends antlr.ParserRuleContext {
 }
 
 
-export class Search_cluaseContext extends antlr.ParserRuleContext {
+export class Search_clauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -75438,21 +75438,21 @@ export class Search_cluaseContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_DEPTH, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_search_cluase;
+        return PostgreSqlParser.RULE_search_clause;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterSearch_cluase) {
-             listener.enterSearch_cluase(this);
+        if(listener.enterSearch_clause) {
+             listener.enterSearch_clause(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitSearch_cluase) {
-             listener.exitSearch_cluase(this);
+        if(listener.exitSearch_clause) {
+             listener.exitSearch_clause(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSearch_cluase) {
-            return visitor.visitSearch_cluase(this);
+        if (visitor.visitSearch_clause) {
+            return visitor.visitSearch_clause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -75460,7 +75460,7 @@ export class Search_cluaseContext extends antlr.ParserRuleContext {
 }
 
 
-export class Cycle_cluaseContext extends antlr.ParserRuleContext {
+export class Cycle_clauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -75488,34 +75488,34 @@ export class Cycle_cluaseContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_TO, 0);
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public KW_DEFAULT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DEFAULT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_cycle_cluase;
+        return PostgreSqlParser.RULE_cycle_clause;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCycle_cluase) {
-             listener.enterCycle_cluase(this);
+        if(listener.enterCycle_clause) {
+             listener.enterCycle_clause(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCycle_cluase) {
-             listener.exitCycle_cluase(this);
+        if(listener.exitCycle_clause) {
+             listener.exitCycle_clause(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCycle_cluase) {
-            return visitor.visitCycle_cluase(this);
+        if (visitor.visitCycle_clause) {
+            return visitor.visitCycle_clause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -75530,8 +75530,8 @@ export class Into_clauseContext extends antlr.ParserRuleContext {
     public KW_INTO(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_INTO, 0)!;
     }
-    public opttempTableName(): OpttempTableNameContext | null {
-        return this.getRuleContext(0, OpttempTableNameContext);
+    public optTempTableName(): OptTempTableNameContext | null {
+        return this.getRuleContext(0, OptTempTableNameContext);
     }
     public expr_list(): Expr_listContext | null {
         return this.getRuleContext(0, Expr_listContext);
@@ -75562,7 +75562,7 @@ export class Into_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class OpttempTableNameContext extends antlr.ParserRuleContext {
+export class OptTempTableNameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -75588,21 +75588,21 @@ export class OpttempTableNameContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_UNLOGGED, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_opttempTableName;
+        return PostgreSqlParser.RULE_optTempTableName;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterOpttempTableName) {
-             listener.enterOpttempTableName(this);
+        if(listener.enterOptTempTableName) {
+             listener.enterOptTempTableName(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitOpttempTableName) {
-             listener.exitOpttempTableName(this);
+        if(listener.exitOptTempTableName) {
+             listener.exitOptTempTableName(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOpttempTableName) {
-            return visitor.visitOpttempTableName(this);
+        if (visitor.visitOptTempTableName) {
+            return visitor.visitOptTempTableName(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -75656,14 +75656,14 @@ export class Sort_clauseContext extends antlr.ParserRuleContext {
     public KW_BY(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_BY, 0)!;
     }
-    public sortby(): SortbyContext[];
-    public sortby(i: number): SortbyContext | null;
-    public sortby(i?: number): SortbyContext[] | SortbyContext | null {
+    public sortBy(): SortByContext[];
+    public sortBy(i: number): SortByContext | null;
+    public sortBy(i?: number): SortByContext[] | SortByContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SortbyContext);
+            return this.getRuleContexts(SortByContext);
         }
 
-        return this.getRuleContext(i, SortbyContext);
+        return this.getRuleContext(i, SortByContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -75697,12 +75697,12 @@ export class Sort_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class SortbyContext extends antlr.ParserRuleContext {
+export class SortByContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public column_expr_noparen(): Column_expr_noparenContext {
-        return this.getRuleContext(0, Column_expr_noparenContext)!;
+    public column_expr_no_paren(): Column_expr_no_parenContext {
+        return this.getRuleContext(0, Column_expr_no_parenContext)!;
     }
     public KW_USING(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_USING, 0);
@@ -75726,21 +75726,21 @@ export class SortbyContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_LAST, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_sortby;
+        return PostgreSqlParser.RULE_sortBy;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterSortby) {
-             listener.enterSortby(this);
+        if(listener.enterSortBy) {
+             listener.enterSortBy(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitSortby) {
-             listener.exitSortby(this);
+        if(listener.exitSortBy) {
+             listener.exitSortBy(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSortby) {
-            return visitor.visitSortby(this);
+        if (visitor.visitSortBy) {
+            return visitor.visitSortBy(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -76058,14 +76058,14 @@ export class Group_by_itemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public column_expr_noparen(): Column_expr_noparenContext[];
-    public column_expr_noparen(i: number): Column_expr_noparenContext | null;
-    public column_expr_noparen(i?: number): Column_expr_noparenContext[] | Column_expr_noparenContext | null {
+    public column_expr_no_paren(): Column_expr_no_parenContext[];
+    public column_expr_no_paren(i: number): Column_expr_no_parenContext | null;
+    public column_expr_no_paren(i?: number): Column_expr_no_parenContext[] | Column_expr_no_parenContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Column_expr_noparenContext);
+            return this.getRuleContexts(Column_expr_no_parenContext);
         }
 
-        return this.getRuleContext(i, Column_expr_noparenContext);
+        return this.getRuleContext(i, Column_expr_no_parenContext);
     }
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
@@ -76427,8 +76427,8 @@ export class Table_refContext extends antlr.ParserRuleContext {
     public relation_expr(): Relation_exprContext | null {
         return this.getRuleContext(0, Relation_exprContext);
     }
-    public xmltable(): XmltableContext | null {
-        return this.getRuleContext(0, XmltableContext);
+    public xmlTable(): XmlTableContext | null {
+        return this.getRuleContext(0, XmlTableContext);
     }
     public func_table(): Func_tableContext | null {
         return this.getRuleContext(0, Func_tableContext);
@@ -76439,8 +76439,8 @@ export class Table_refContext extends antlr.ParserRuleContext {
     public alias_clause(): Alias_clauseContext | null {
         return this.getRuleContext(0, Alias_clauseContext);
     }
-    public tablesample_clause(): Tablesample_clauseContext | null {
-        return this.getRuleContext(0, Tablesample_clauseContext);
+    public tableSampleClause(): TableSampleClauseContext | null {
+        return this.getRuleContext(0, TableSampleClauseContext);
     }
     public KW_LATERAL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_LATERAL, 0);
@@ -76496,12 +76496,12 @@ export class Table_refContext extends antlr.ParserRuleContext {
 
 
 export class Alias_clauseContext extends antlr.ParserRuleContext {
-    public _alias?: ColidContext;
+    public _alias?: ColIdContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
@@ -76539,7 +76539,7 @@ export class Alias_clauseContext extends antlr.ParserRuleContext {
 
 
 export class Func_alias_clauseContext extends antlr.ParserRuleContext {
-    public _alias?: ColidContext;
+    public _alias?: ColIdContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -76549,8 +76549,8 @@ export class Func_alias_clauseContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
     }
-    public tablefuncelementlist(): TablefuncelementlistContext | null {
-        return this.getRuleContext(0, TablefuncelementlistContext);
+    public tableFuncElementList(): TableFuncElementListContext | null {
+        return this.getRuleContext(0, TableFuncElementListContext);
     }
     public CLOSE_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
@@ -76558,8 +76558,8 @@ export class Func_alias_clauseContext extends antlr.ParserRuleContext {
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_func_alias_clause;
@@ -76837,8 +76837,8 @@ export class Relation_expr_opt_aliasContext extends antlr.ParserRuleContext {
     public relation_expr(): Relation_exprContext {
         return this.getRuleContext(0, Relation_exprContext)!;
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
@@ -76866,7 +76866,7 @@ export class Relation_expr_opt_aliasContext extends antlr.ParserRuleContext {
 }
 
 
-export class Tablesample_clauseContext extends antlr.ParserRuleContext {
+export class TableSampleClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -76892,21 +76892,21 @@ export class Tablesample_clauseContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_tablesample_clause;
+        return PostgreSqlParser.RULE_tableSampleClause;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTablesample_clause) {
-             listener.enterTablesample_clause(this);
+        if(listener.enterTableSampleClause) {
+             listener.enterTableSampleClause(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTablesample_clause) {
-             listener.exitTablesample_clause(this);
+        if(listener.exitTableSampleClause) {
+             listener.exitTableSampleClause(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTablesample_clause) {
-            return visitor.visitTablesample_clause(this);
+        if (visitor.visitTableSampleClause) {
+            return visitor.visitTableSampleClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -76936,14 +76936,14 @@ export class Func_tableContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
     }
-    public rowsfrom_item(): Rowsfrom_itemContext[];
-    public rowsfrom_item(i: number): Rowsfrom_itemContext | null;
-    public rowsfrom_item(i?: number): Rowsfrom_itemContext[] | Rowsfrom_itemContext | null {
+    public rowsFromItem(): RowsFromItemContext[];
+    public rowsFromItem(i: number): RowsFromItemContext | null;
+    public rowsFromItem(i?: number): RowsFromItemContext[] | RowsFromItemContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Rowsfrom_itemContext);
+            return this.getRuleContexts(RowsFromItemContext);
         }
 
-        return this.getRuleContext(i, Rowsfrom_itemContext);
+        return this.getRuleContext(i, RowsFromItemContext);
     }
     public CLOSE_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
@@ -76980,7 +76980,7 @@ export class Func_tableContext extends antlr.ParserRuleContext {
 }
 
 
-export class Rowsfrom_itemContext extends antlr.ParserRuleContext {
+export class RowsFromItemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -76993,28 +76993,28 @@ export class Rowsfrom_itemContext extends antlr.ParserRuleContext {
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
     }
-    public tablefuncelementlist(): TablefuncelementlistContext | null {
-        return this.getRuleContext(0, TablefuncelementlistContext);
+    public tableFuncElementList(): TableFuncElementListContext | null {
+        return this.getRuleContext(0, TableFuncElementListContext);
     }
     public CLOSE_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_rowsfrom_item;
+        return PostgreSqlParser.RULE_rowsFromItem;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRowsfrom_item) {
-             listener.enterRowsfrom_item(this);
+        if(listener.enterRowsFromItem) {
+             listener.enterRowsFromItem(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRowsfrom_item) {
-             listener.exitRowsfrom_item(this);
+        if(listener.exitRowsFromItem) {
+             listener.exitRowsFromItem(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRowsfrom_item) {
-            return visitor.visitRowsfrom_item(this);
+        if (visitor.visitRowsFromItem) {
+            return visitor.visitRowsFromItem(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -77029,8 +77029,8 @@ export class Where_clauseContext extends antlr.ParserRuleContext {
     public KW_WHERE(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_WHERE, 0)!;
     }
-    public column_expr_noparen(): Column_expr_noparenContext {
-        return this.getRuleContext(0, Column_expr_noparenContext)!;
+    public column_expr_no_paren(): Column_expr_no_parenContext {
+        return this.getRuleContext(0, Column_expr_no_parenContext)!;
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_where_clause;
@@ -77068,8 +77068,8 @@ export class Where_or_current_clauseContext extends antlr.ParserRuleContext {
     public KW_OF(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_OF, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public expression(): ExpressionContext | null {
         return this.getRuleContext(0, ExpressionContext);
@@ -77097,18 +77097,18 @@ export class Where_or_current_clauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class TablefuncelementlistContext extends antlr.ParserRuleContext {
+export class TableFuncElementListContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public tablefuncelement(): TablefuncelementContext[];
-    public tablefuncelement(i: number): TablefuncelementContext | null;
-    public tablefuncelement(i?: number): TablefuncelementContext[] | TablefuncelementContext | null {
+    public tableFuncElement(): TableFuncElementContext[];
+    public tableFuncElement(i: number): TableFuncElementContext | null;
+    public tableFuncElement(i?: number): TableFuncElementContext[] | TableFuncElementContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(TablefuncelementContext);
+            return this.getRuleContexts(TableFuncElementContext);
         }
 
-        return this.getRuleContext(i, TablefuncelementContext);
+        return this.getRuleContext(i, TableFuncElementContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -77120,21 +77120,21 @@ export class TablefuncelementlistContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_tablefuncelementlist;
+        return PostgreSqlParser.RULE_tableFuncElementList;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTablefuncelementlist) {
-             listener.enterTablefuncelementlist(this);
+        if(listener.enterTableFuncElementList) {
+             listener.enterTableFuncElementList(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTablefuncelementlist) {
-             listener.exitTablefuncelementlist(this);
+        if(listener.exitTableFuncElementList) {
+             listener.exitTableFuncElementList(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTablefuncelementlist) {
-            return visitor.visitTablefuncelementlist(this);
+        if (visitor.visitTableFuncElementList) {
+            return visitor.visitTableFuncElementList(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -77142,12 +77142,12 @@ export class TablefuncelementlistContext extends antlr.ParserRuleContext {
 }
 
 
-export class TablefuncelementContext extends antlr.ParserRuleContext {
+export class TableFuncElementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public typename(): TypenameContext {
         return this.getRuleContext(0, TypenameContext)!;
@@ -77156,21 +77156,21 @@ export class TablefuncelementContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_collate_clauseContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_tablefuncelement;
+        return PostgreSqlParser.RULE_tableFuncElement;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterTablefuncelement) {
-             listener.enterTablefuncelement(this);
+        if(listener.enterTableFuncElement) {
+             listener.enterTableFuncElement(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitTablefuncelement) {
-             listener.exitTablefuncelement(this);
+        if(listener.exitTableFuncElement) {
+             listener.exitTableFuncElement(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTablefuncelement) {
-            return visitor.visitTablefuncelement(this);
+        if (visitor.visitTableFuncElement) {
+            return visitor.visitTableFuncElement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -77178,7 +77178,7 @@ export class TablefuncelementContext extends antlr.ParserRuleContext {
 }
 
 
-export class XmltableContext extends antlr.ParserRuleContext {
+export class XmlTableContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -77206,20 +77206,20 @@ export class XmltableContext extends antlr.ParserRuleContext {
     public primaryExpression(): PrimaryExpressionContext | null {
         return this.getRuleContext(0, PrimaryExpressionContext);
     }
-    public xmlexists_argument(): Xmlexists_argumentContext | null {
-        return this.getRuleContext(0, Xmlexists_argumentContext);
+    public xmlExistsArgument(): XmlExistsArgumentContext | null {
+        return this.getRuleContext(0, XmlExistsArgumentContext);
     }
     public KW_COLUMNS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_COLUMNS, 0);
     }
-    public xmltable_column_el(): Xmltable_column_elContext[];
-    public xmltable_column_el(i: number): Xmltable_column_elContext | null;
-    public xmltable_column_el(i?: number): Xmltable_column_elContext[] | Xmltable_column_elContext | null {
+    public xmlTableColumnEl(): XmlTableColumnElContext[];
+    public xmlTableColumnEl(i: number): XmlTableColumnElContext | null;
+    public xmlTableColumnEl(i?: number): XmlTableColumnElContext[] | XmlTableColumnElContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(Xmltable_column_elContext);
+            return this.getRuleContexts(XmlTableColumnElContext);
         }
 
-        return this.getRuleContext(i, Xmltable_column_elContext);
+        return this.getRuleContext(i, XmlTableColumnElContext);
     }
     public KW_XMLNAMESPACES(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_XMLNAMESPACES, 0);
@@ -77243,21 +77243,21 @@ export class XmltableContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_xmltable;
+        return PostgreSqlParser.RULE_xmlTable;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterXmltable) {
-             listener.enterXmltable(this);
+        if(listener.enterXmlTable) {
+             listener.enterXmlTable(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitXmltable) {
-             listener.exitXmltable(this);
+        if(listener.exitXmlTable) {
+             listener.exitXmlTable(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitXmltable) {
-            return visitor.visitXmltable(this);
+        if (visitor.visitXmlTable) {
+            return visitor.visitXmlTable(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -77265,12 +77265,12 @@ export class XmltableContext extends antlr.ParserRuleContext {
 }
 
 
-export class Xmltable_column_elContext extends antlr.ParserRuleContext {
+export class XmlTableColumnElContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public typename(): TypenameContext | null {
         return this.getRuleContext(0, TypenameContext);
@@ -77327,21 +77327,21 @@ export class Xmltable_column_elContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_xmltable_column_el;
+        return PostgreSqlParser.RULE_xmlTableColumnEl;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterXmltable_column_el) {
-             listener.enterXmltable_column_el(this);
+        if(listener.enterXmlTableColumnEl) {
+             listener.enterXmlTableColumnEl(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitXmltable_column_el) {
-             listener.exitXmltable_column_el(this);
+        if(listener.exitXmlTableColumnEl) {
+             listener.exitXmlTableColumnEl(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitXmltable_column_el) {
-            return visitor.visitXmltable_column_el(this);
+        if (visitor.visitXmlTableColumnEl) {
+            return visitor.visitXmlTableColumnEl(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -77359,8 +77359,8 @@ export class Xml_namespace_elContext extends antlr.ParserRuleContext {
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public collabel(): CollabelContext | null {
-        return this.getRuleContext(0, CollabelContext);
+    public colLabel(): ColLabelContext | null {
+        return this.getRuleContext(0, ColLabelContext);
     }
     public KW_DEFAULT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DEFAULT, 0);
@@ -77392,8 +77392,8 @@ export class TypenameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public simpletypename(): SimpletypenameContext | null {
-        return this.getRuleContext(0, SimpletypenameContext);
+    public simpleTypeName(): SimpleTypeNameContext | null {
+        return this.getRuleContext(0, SimpleTypeNameContext);
     }
     public KW_ARRAY(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_ARRAY, 0);
@@ -77463,7 +77463,7 @@ export class TypenameContext extends antlr.ParserRuleContext {
 }
 
 
-export class SimpletypenameContext extends antlr.ParserRuleContext {
+export class SimpleTypeNameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -77476,8 +77476,8 @@ export class SimpletypenameContext extends antlr.ParserRuleContext {
     public execute_param_clause(): Execute_param_clauseContext | null {
         return this.getRuleContext(0, Execute_param_clauseContext);
     }
-    public consttypename(): ConsttypenameContext | null {
-        return this.getRuleContext(0, ConsttypenameContext);
+    public constTypeName(): ConstTypeNameContext | null {
+        return this.getRuleContext(0, ConstTypeNameContext);
     }
     public KW_INTERVAL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_INTERVAL, 0);
@@ -77489,21 +77489,21 @@ export class SimpletypenameContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Opt_intervalContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_simpletypename;
+        return PostgreSqlParser.RULE_simpleTypeName;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterSimpletypename) {
-             listener.enterSimpletypename(this);
+        if(listener.enterSimpleTypeName) {
+             listener.enterSimpleTypeName(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitSimpletypename) {
-             listener.exitSimpletypename(this);
+        if(listener.exitSimpleTypeName) {
+             listener.exitSimpleTypeName(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSimpletypename) {
-            return visitor.visitSimpletypename(this);
+        if (visitor.visitSimpleTypeName) {
+            return visitor.visitSimpleTypeName(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -77511,7 +77511,7 @@ export class SimpletypenameContext extends antlr.ParserRuleContext {
 }
 
 
-export class ConsttypenameContext extends antlr.ParserRuleContext {
+export class ConstTypeNameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -77524,25 +77524,25 @@ export class ConsttypenameContext extends antlr.ParserRuleContext {
     public character(): CharacterContext | null {
         return this.getRuleContext(0, CharacterContext);
     }
-    public constdatetime(): ConstdatetimeContext | null {
-        return this.getRuleContext(0, ConstdatetimeContext);
+    public constDatetime(): ConstDatetimeContext | null {
+        return this.getRuleContext(0, ConstDatetimeContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_consttypename;
+        return PostgreSqlParser.RULE_constTypeName;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterConsttypename) {
-             listener.enterConsttypename(this);
+        if(listener.enterConstTypeName) {
+             listener.enterConstTypeName(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitConsttypename) {
-             listener.exitConsttypename(this);
+        if(listener.exitConstTypeName) {
+             listener.exitConstTypeName(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitConsttypename) {
-            return visitor.visitConsttypename(this);
+        if (visitor.visitConstTypeName) {
+            return visitor.visitConstTypeName(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -77739,7 +77739,7 @@ export class CharacterContext extends antlr.ParserRuleContext {
 }
 
 
-export class ConstdatetimeContext extends antlr.ParserRuleContext {
+export class ConstDatetimeContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -77768,21 +77768,21 @@ export class ConstdatetimeContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_WITHOUT, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_constdatetime;
+        return PostgreSqlParser.RULE_constDatetime;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterConstdatetime) {
-             listener.enterConstdatetime(this);
+        if(listener.enterConstDatetime) {
+             listener.enterConstDatetime(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitConstdatetime) {
-             listener.exitConstdatetime(this);
+        if(listener.exitConstDatetime) {
+             listener.exitConstDatetime(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitConstdatetime) {
-            return visitor.visitConstdatetime(this);
+        if (visitor.visitConstDatetime) {
+            return visitor.visitConstDatetime(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -78650,8 +78650,8 @@ export class PrimaryExpressionContext extends antlr.ParserRuleContext {
     public function_name(): Function_nameContext | null {
         return this.getRuleContext(0, Function_nameContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public OPEN_PAREN(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.OPEN_PAREN, 0);
@@ -78665,8 +78665,8 @@ export class PrimaryExpressionContext extends antlr.ParserRuleContext {
     public sort_clause(): Sort_clauseContext | null {
         return this.getRuleContext(0, Sort_clauseContext);
     }
-    public consttypename(): ConsttypenameContext | null {
-        return this.getRuleContext(0, ConsttypenameContext);
+    public constTypeName(): ConstTypeNameContext | null {
+        return this.getRuleContext(0, ConstTypeNameContext);
     }
     public KW_INTERVAL(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_INTERVAL, 0);
@@ -78926,8 +78926,8 @@ export class Func_exprContext extends antlr.ParserRuleContext {
     public window_specification(): Window_specificationContext | null {
         return this.getRuleContext(0, Window_specificationContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public func_expr_common_subexpr(): Func_expr_common_subexprContext | null {
         return this.getRuleContext(0, Func_expr_common_subexprContext);
@@ -79163,8 +79163,8 @@ export class Func_expr_common_subexprContext extends antlr.ParserRuleContext {
     public KW_NAME(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_NAME, 0);
     }
-    public collabel(): CollabelContext | null {
-        return this.getRuleContext(0, CollabelContext);
+    public colLabel(): ColLabelContext | null {
+        return this.getRuleContext(0, ColLabelContext);
     }
     public KW_XMLATTRIBUTES(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_XMLATTRIBUTES, 0);
@@ -79175,8 +79175,8 @@ export class Func_expr_common_subexprContext extends antlr.ParserRuleContext {
     public KW_XMLEXISTS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_XMLEXISTS, 0);
     }
-    public xmlexists_argument(): Xmlexists_argumentContext | null {
-        return this.getRuleContext(0, Xmlexists_argumentContext);
+    public xmlExistsArgument(): XmlExistsArgumentContext | null {
+        return this.getRuleContext(0, XmlExistsArgumentContext);
     }
     public KW_XMLFOREST(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_XMLFOREST, 0);
@@ -79235,8 +79235,8 @@ export class Func_expr_common_subexprContext extends antlr.ParserRuleContext {
     public KW_XMLSERIALIZE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_XMLSERIALIZE, 0);
     }
-    public simpletypename(): SimpletypenameContext | null {
-        return this.getRuleContext(0, SimpletypenameContext);
+    public simpleTypeName(): SimpleTypeNameContext | null {
+        return this.getRuleContext(0, SimpleTypeNameContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_func_expr_common_subexpr;
@@ -79316,8 +79316,8 @@ export class Xml_attribute_elContext extends antlr.ParserRuleContext {
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public collabel(): CollabelContext | null {
-        return this.getRuleContext(0, CollabelContext);
+    public colLabel(): ColLabelContext | null {
+        return this.getRuleContext(0, ColLabelContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_xml_attribute_el;
@@ -79375,7 +79375,7 @@ export class Document_or_contentContext extends antlr.ParserRuleContext {
 }
 
 
-export class Xmlexists_argumentContext extends antlr.ParserRuleContext {
+export class XmlExistsArgumentContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -79395,21 +79395,21 @@ export class Xmlexists_argumentContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, Xml_passing_mechContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_xmlexists_argument;
+        return PostgreSqlParser.RULE_xmlExistsArgument;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterXmlexists_argument) {
-             listener.enterXmlexists_argument(this);
+        if(listener.enterXmlExistsArgument) {
+             listener.enterXmlExistsArgument(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitXmlexists_argument) {
-             listener.exitXmlexists_argument(this);
+        if(listener.exitXmlExistsArgument) {
+             listener.exitXmlExistsArgument(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitXmlexists_argument) {
-            return visitor.visitXmlexists_argument(this);
+        if (visitor.visitXmlExistsArgument) {
+            return visitor.visitXmlExistsArgument(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -79505,8 +79505,8 @@ export class Window_definitionContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public KW_AS(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_AS, 0)!;
@@ -79547,8 +79547,8 @@ export class Over_clauseContext extends antlr.ParserRuleContext {
     public window_specification(): Window_specificationContext | null {
         return this.getRuleContext(0, Window_specificationContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_over_clause;
@@ -79583,8 +79583,8 @@ export class Window_specificationContext extends antlr.ParserRuleContext {
     public CLOSE_PAREN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.CLOSE_PAREN, 0)!;
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_PARTITION(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_PARTITION, 0);
@@ -80164,7 +80164,7 @@ export class Column_exprContext extends antlr.ParserRuleContext {
 }
 
 
-export class Column_expr_noparenContext extends antlr.ParserRuleContext {
+export class Column_expr_no_parenContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -80175,21 +80175,21 @@ export class Column_expr_noparenContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Column_nameContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_column_expr_noparen;
+        return PostgreSqlParser.RULE_column_expr_no_paren;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterColumn_expr_noparen) {
-             listener.enterColumn_expr_noparen(this);
+        if(listener.enterColumn_expr_no_paren) {
+             listener.enterColumn_expr_no_paren(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitColumn_expr_noparen) {
-             listener.exitColumn_expr_noparen(this);
+        if(listener.exitColumn_expr_no_paren) {
+             listener.exitColumn_expr_no_paren(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitColumn_expr_noparen) {
-            return visitor.visitColumn_expr_noparen(this);
+        if (visitor.visitColumn_expr_no_paren) {
+            return visitor.visitColumn_expr_no_paren(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -80363,8 +80363,8 @@ export class Extract_argContext extends antlr.ParserRuleContext {
     public KW_SECOND(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SECOND, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_extract_arg;
@@ -80528,8 +80528,8 @@ export class Indirection_elContext extends antlr.ParserRuleContext {
     public DOT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.DOT, 0);
     }
-    public collabel(): CollabelContext | null {
-        return this.getRuleContext(0, CollabelContext);
+    public colLabel(): ColLabelContext | null {
+        return this.getRuleContext(0, ColLabelContext);
     }
     public STAR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.STAR, 0);
@@ -80708,14 +80708,14 @@ export class Target_labelContext extends Target_elContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public column_expr_noparen(): Column_expr_noparenContext {
-        return this.getRuleContext(0, Column_expr_noparenContext)!;
+    public column_expr_no_paren(): Column_expr_no_parenContext {
+        return this.getRuleContext(0, Column_expr_no_parenContext)!;
     }
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
-    public collabel(): CollabelContext | null {
-        return this.getRuleContext(0, CollabelContext);
+    public colLabel(): ColLabelContext | null {
+        return this.getRuleContext(0, ColLabelContext);
     }
     public identifier(): IdentifierContext | null {
         return this.getRuleContext(0, IdentifierContext);
@@ -81184,8 +81184,8 @@ export class Qualified_nameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public indirection(): IndirectionContext | null {
         return this.getRuleContext(0, IndirectionContext);
@@ -81262,14 +81262,14 @@ export class Name_listContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext[];
-    public colid(i: number): ColidContext | null;
-    public colid(i?: number): ColidContext[] | ColidContext | null {
+    public colId(): ColIdContext[];
+    public colId(i: number): ColIdContext | null;
+    public colId(i?: number): ColIdContext[] | ColIdContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ColidContext);
+            return this.getRuleContexts(ColIdContext);
         }
 
-        return this.getRuleContext(i, ColidContext);
+        return this.getRuleContext(i, ColIdContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -81436,8 +81436,8 @@ export class RoutineNameCreateContext extends Routine_name_createContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
         if(listener.enterRoutineNameCreate) {
@@ -81475,8 +81475,8 @@ export class RoutineNameContext extends Routine_nameContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
         if(listener.enterRoutineName) {
@@ -81517,8 +81517,8 @@ export class ProcedureNameContext extends Procedure_nameContext {
     public type_function_name(): Type_function_nameContext | null {
         return this.getRuleContext(0, Type_function_nameContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public indirection(): IndirectionContext | null {
         return this.getRuleContext(0, IndirectionContext);
@@ -81562,8 +81562,8 @@ export class ProcedureNameCreateContext extends Procedure_name_createContext {
     public type_function_name(): Type_function_nameContext | null {
         return this.getRuleContext(0, Type_function_nameContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public indirection(): IndirectionContext | null {
         return this.getRuleContext(0, IndirectionContext);
@@ -81627,8 +81627,8 @@ export class ColumnNameContext extends Column_nameContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public opt_indirection(): Opt_indirectionContext {
         return this.getRuleContext(0, Opt_indirectionContext)!;
@@ -81669,8 +81669,8 @@ export class ColumnNameCreateContext extends Column_name_createContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
         if(listener.enterColumnNameCreate) {
@@ -81711,8 +81711,8 @@ export class FunctionNameCreateContext extends Function_name_createContext {
     public type_function_name(): Type_function_nameContext | null {
         return this.getRuleContext(0, Type_function_nameContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public indirection(): IndirectionContext | null {
         return this.getRuleContext(0, IndirectionContext);
@@ -81756,8 +81756,8 @@ export class FunctionNameContext extends Function_nameContext {
     public type_function_name(): Type_function_nameContext | null {
         return this.getRuleContext(0, Type_function_nameContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public indirection(): IndirectionContext | null {
         return this.getRuleContext(0, IndirectionContext);
@@ -81782,7 +81782,7 @@ export class FunctionNameContext extends Function_nameContext {
 }
 
 
-export class SconstContext extends antlr.ParserRuleContext {
+export class StringConstContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -81799,21 +81799,21 @@ export class SconstContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_UESCAPE, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_sconst;
+        return PostgreSqlParser.RULE_stringConst;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterSconst) {
-             listener.enterSconst(this);
+        if(listener.enterStringConst) {
+             listener.enterStringConst(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitSconst) {
-             listener.exitSconst(this);
+        if(listener.exitStringConst) {
+             listener.exitStringConst(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSconst) {
-            return visitor.visitSconst(this);
+        if (visitor.visitStringConst) {
+            return visitor.visitStringConst(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -81872,7 +81872,7 @@ export class AnysconstContext extends antlr.ParserRuleContext {
 }
 
 
-export class SignediconstContext extends antlr.ParserRuleContext {
+export class SignedConstContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -81886,21 +81886,21 @@ export class SignediconstContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.MINUS, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_signediconst;
+        return PostgreSqlParser.RULE_signedConst;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterSignediconst) {
-             listener.enterSignediconst(this);
+        if(listener.enterSignedConst) {
+             listener.enterSignedConst(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitSignediconst) {
-             listener.exitSignediconst(this);
+        if(listener.exitSignedConst) {
+             listener.exitSignedConst(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSignediconst) {
-            return visitor.visitSignediconst(this);
+        if (visitor.visitSignedConst) {
+            return visitor.visitSignedConst(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -81908,12 +81908,12 @@ export class SignediconstContext extends antlr.ParserRuleContext {
 }
 
 
-export class RolespecContext extends antlr.ParserRuleContext {
+export class RoleSpecContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public nonreservedword(): NonreservedwordContext | null {
-        return this.getRuleContext(0, NonreservedwordContext);
+    public nonReservedWord(): NonReservedWordContext | null {
+        return this.getRuleContext(0, NonReservedWordContext);
     }
     public KW_CURRENT_USER(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CURRENT_USER, 0);
@@ -81928,21 +81928,21 @@ export class RolespecContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_PUBLIC, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_rolespec;
+        return PostgreSqlParser.RULE_roleSpec;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterRolespec) {
-             listener.enterRolespec(this);
+        if(listener.enterRoleSpec) {
+             listener.enterRoleSpec(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitRolespec) {
-             listener.exitRolespec(this);
+        if(listener.exitRoleSpec) {
+             listener.exitRoleSpec(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitRolespec) {
-            return visitor.visitRolespec(this);
+        if (visitor.visitRoleSpec) {
+            return visitor.visitRoleSpec(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -81954,14 +81954,14 @@ export class Role_listContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public rolespec(): RolespecContext[];
-    public rolespec(i: number): RolespecContext | null;
-    public rolespec(i?: number): RolespecContext[] | RolespecContext | null {
+    public roleSpec(): RoleSpecContext[];
+    public roleSpec(i: number): RoleSpecContext | null;
+    public roleSpec(i?: number): RoleSpecContext[] | RoleSpecContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(RolespecContext);
+            return this.getRuleContexts(RoleSpecContext);
         }
 
-        return this.getRuleContext(i, RolespecContext);
+        return this.getRuleContext(i, RoleSpecContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -81995,7 +81995,7 @@ export class Role_listContext extends antlr.ParserRuleContext {
 }
 
 
-export class ColidContext extends antlr.ParserRuleContext {
+export class ColIdContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -82006,21 +82006,21 @@ export class ColidContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Col_name_keywordContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_colid;
+        return PostgreSqlParser.RULE_colId;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterColid) {
-             listener.enterColid(this);
+        if(listener.enterColId) {
+             listener.enterColId(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitColid) {
-             listener.exitColid(this);
+        if(listener.exitColId) {
+             listener.exitColId(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitColid) {
-            return visitor.visitColid(this);
+        if (visitor.visitColId) {
+            return visitor.visitColId(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -82061,7 +82061,7 @@ export class Type_function_nameContext extends antlr.ParserRuleContext {
 }
 
 
-export class NonreservedwordContext extends antlr.ParserRuleContext {
+export class NonReservedWordContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -82075,21 +82075,21 @@ export class NonreservedwordContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Type_func_name_keywordContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_nonreservedword;
+        return PostgreSqlParser.RULE_nonReservedWord;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterNonreservedword) {
-             listener.enterNonreservedword(this);
+        if(listener.enterNonReservedWord) {
+             listener.enterNonReservedWord(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitNonreservedword) {
-             listener.exitNonreservedword(this);
+        if(listener.exitNonReservedWord) {
+             listener.exitNonReservedWord(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitNonreservedword) {
-            return visitor.visitNonreservedword(this);
+        if (visitor.visitNonReservedWord) {
+            return visitor.visitNonReservedWord(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -82097,7 +82097,7 @@ export class NonreservedwordContext extends antlr.ParserRuleContext {
 }
 
 
-export class CollabelContext extends antlr.ParserRuleContext {
+export class ColLabelContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -82114,21 +82114,21 @@ export class CollabelContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, Reserved_keywordContext);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_collabel;
+        return PostgreSqlParser.RULE_colLabel;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterCollabel) {
-             listener.enterCollabel(this);
+        if(listener.enterColLabel) {
+             listener.enterColLabel(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitCollabel) {
-             listener.exitCollabel(this);
+        if(listener.exitColLabel) {
+             listener.exitColLabel(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCollabel) {
-            return visitor.visitCollabel(this);
+        if (visitor.visitColLabel) {
+            return visitor.visitColLabel(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -82149,8 +82149,8 @@ export class IdentifierContext extends antlr.ParserRuleContext {
     public anysconst(): AnysconstContext | null {
         return this.getRuleContext(0, AnysconstContext);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public QuotedIdentifier(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.QuotedIdentifier, 0);
@@ -83880,8 +83880,8 @@ export class Decl_statementContext extends antlr.ParserRuleContext {
     public KW_CURSOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CURSOR, 0);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
     public KW_IS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_IS, 0);
@@ -83889,8 +83889,8 @@ export class Decl_statementContext extends antlr.ParserRuleContext {
     public PARAM(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.PARAM, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public KW_CONSTANT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_CONSTANT, 0);
@@ -84321,8 +84321,8 @@ export class Getdiag_list_itemContext extends antlr.ParserRuleContext {
     public assign_operator(): Assign_operatorContext {
         return this.getRuleContext(0, Assign_operatorContext)!;
     }
-    public colid(): ColidContext {
-        return this.getRuleContext(0, ColidContext)!;
+    public colId(): ColIdContext {
+        return this.getRuleContext(0, ColIdContext)!;
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_getdiag_list_item;
@@ -84669,14 +84669,14 @@ export class For_controlContext extends antlr.ParserRuleContext {
     public KW_IN(): antlr.TerminalNode {
         return this.getToken(PostgreSqlParser.KW_IN, 0)!;
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
-    public explainstmt(): ExplainstmtContext | null {
-        return this.getRuleContext(0, ExplainstmtContext);
+    public explainStmt(): ExplainStmtContext | null {
+        return this.getRuleContext(0, ExplainStmtContext);
     }
     public KW_EXECUTE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_EXECUTE, 0);
@@ -84861,8 +84861,8 @@ export class Stmt_returnContext extends antlr.ParserRuleContext {
     public expr_list(): Expr_listContext | null {
         return this.getRuleContext(0, Expr_listContext);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_stmt_return;
@@ -84924,8 +84924,8 @@ export class Stmt_raiseContext extends antlr.ParserRuleContext {
     public KW_SQLSTATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SQLSTATE, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public opt_raise_using_elem(): Opt_raise_using_elemContext[];
     public opt_raise_using_elem(i: number): Opt_raise_using_elemContext | null;
@@ -85245,11 +85245,11 @@ export class Stmt_openContext extends antlr.ParserRuleContext {
     public KW_FOR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_FOR, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
-    public selectstmt(): SelectstmtContext | null {
-        return this.getRuleContext(0, SelectstmtContext);
+    public selectStmt(): SelectStmtContext | null {
+        return this.getRuleContext(0, SelectStmtContext);
     }
     public KW_EXECUTE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_EXECUTE, 0);
@@ -85323,8 +85323,8 @@ export class Opt_open_bound_list_itemContext extends antlr.ParserRuleContext {
     public expression(): ExpressionContext {
         return this.getRuleContext(0, ExpressionContext)!;
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public COLON_EQUALS(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.COLON_EQUALS, 0);
@@ -85497,7 +85497,7 @@ export class Stmt_moveContext extends antlr.ParserRuleContext {
 }
 
 
-export class MergestmtContext extends antlr.ParserRuleContext {
+export class MergeStmtContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -85531,8 +85531,8 @@ export class MergestmtContext extends antlr.ParserRuleContext {
     public STAR(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.STAR, 0);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public merge_when_clause(): Merge_when_clauseContext[];
     public merge_when_clause(i: number): Merge_when_clauseContext | null;
@@ -85547,21 +85547,21 @@ export class MergestmtContext extends antlr.ParserRuleContext {
         return this.getToken(PostgreSqlParser.KW_AS, 0);
     }
     public override get ruleIndex(): number {
-        return PostgreSqlParser.RULE_mergestmt;
+        return PostgreSqlParser.RULE_mergeStmt;
     }
     public override enterRule(listener: PostgreSqlParserListener): void {
-        if(listener.enterMergestmt) {
-             listener.enterMergestmt(this);
+        if(listener.enterMergeStmt) {
+             listener.enterMergeStmt(this);
         }
     }
     public override exitRule(listener: PostgreSqlParserListener): void {
-        if(listener.exitMergestmt) {
-             listener.exitMergestmt(this);
+        if(listener.exitMergeStmt) {
+             listener.exitMergeStmt(this);
         }
     }
     public override accept<Result>(visitor: PostgreSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitMergestmt) {
-            return visitor.visitMergestmt(this);
+        if (visitor.visitMergeStmt) {
+            return visitor.visitMergeStmt(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -85576,8 +85576,8 @@ export class Data_sourceContext extends antlr.ParserRuleContext {
     public table_name(): Table_nameContext | null {
         return this.getRuleContext(0, Table_nameContext);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public select_no_parens(): Select_no_parensContext | null {
         return this.getRuleContext(0, Select_no_parensContext);
@@ -85882,8 +85882,8 @@ export class ExprofdefaultContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public sortby(): SortbyContext | null {
-        return this.getRuleContext(0, SortbyContext);
+    public sortBy(): SortByContext | null {
+        return this.getRuleContext(0, SortByContext);
     }
     public KW_DEFAULT(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_DEFAULT, 0);
@@ -86077,8 +86077,8 @@ export class Cursor_variableContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public PARAM(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.PARAM, 0);
@@ -86191,8 +86191,8 @@ export class Proc_conditionContext extends antlr.ParserRuleContext {
     public KW_SQLSTATE(): antlr.TerminalNode | null {
         return this.getToken(PostgreSqlParser.KW_SQLSTATE, 0);
     }
-    public sconst(): SconstContext | null {
-        return this.getRuleContext(0, SconstContext);
+    public stringConst(): StringConstContext | null {
+        return this.getRuleContext(0, StringConstContext);
     }
     public override get ruleIndex(): number {
         return PostgreSqlParser.RULE_proc_condition;
@@ -86221,8 +86221,8 @@ export class Any_identifierContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public colid(): ColidContext | null {
-        return this.getRuleContext(0, ColidContext);
+    public colId(): ColIdContext | null {
+        return this.getRuleContext(0, ColIdContext);
     }
     public unreserved_keyword(): Unreserved_keywordContext | null {
         return this.getRuleContext(0, Unreserved_keywordContext);
