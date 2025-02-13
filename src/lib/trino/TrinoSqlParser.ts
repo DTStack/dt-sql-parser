@@ -400,7 +400,7 @@ export class TrinoSqlParser extends SQLParserBase {
     public static readonly RULE_sampleType = 40;
     public static readonly RULE_trimsSpecification = 41;
     public static readonly RULE_listAggOverflowBehavior = 42;
-    public static readonly RULE_listaggCountIndication = 43;
+    public static readonly RULE_listAggCountIndication = 43;
     public static readonly RULE_patternRecognition = 44;
     public static readonly RULE_measureDefinition = 45;
     public static readonly RULE_rowsPerMatch = 46;
@@ -424,7 +424,7 @@ export class TrinoSqlParser extends SQLParserBase {
     public static readonly RULE_tableArgumentRelation = 64;
     public static readonly RULE_descriptorArgument = 65;
     public static readonly RULE_descriptorField = 66;
-    public static readonly RULE_copartitionTables = 67;
+    public static readonly RULE_coPartitionTables = 67;
     public static readonly RULE_expression = 68;
     public static readonly RULE_booleanExpression = 69;
     public static readonly RULE_predicate = 70;
@@ -643,13 +643,13 @@ export class TrinoSqlParser extends SQLParserBase {
         "groupingSet", "groupingTerm", "windowDefinition", "windowSpecification", 
         "namedQuery", "setQuantifier", "selectItem", "relation", "joinType", 
         "joinCriteria", "sampledRelation", "sampleType", "trimsSpecification", 
-        "listAggOverflowBehavior", "listaggCountIndication", "patternRecognition", 
+        "listAggOverflowBehavior", "listAggCountIndication", "patternRecognition", 
         "measureDefinition", "rowsPerMatch", "emptyMatchHandling", "skipTo", 
         "subsetDefinition", "variableDefinition", "aliasedRelation", "columnListCreate", 
         "columnList", "columnAliases", "relationPrimary", "jsonTableColumn", 
         "jsonTableSpecificPlan", "jsonTablePathName", "planPrimary", "jsonTableDefaultPlan", 
         "tableFunctionCall", "tableFunctionArgument", "tableArgument", "tableArgumentRelation", 
-        "descriptorArgument", "descriptorField", "copartitionTables", "expression", 
+        "descriptorArgument", "descriptorField", "coPartitionTables", "expression", 
         "booleanExpression", "predicate", "valueExpression", "primaryExpression", 
         "jsonPathInvocation", "jsonValueExpression", "jsonRepresentation", 
         "jsonArgument", "jsonExistsErrorBehavior", "jsonValueBehavior", 
@@ -6178,7 +6178,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 }
 
                 this.state = 1661;
-                this.listaggCountIndication();
+                this.listAggCountIndication();
                 }
                 break;
             default:
@@ -6199,9 +6199,9 @@ export class TrinoSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public listaggCountIndication(): ListaggCountIndicationContext {
-        let localContext = new ListaggCountIndicationContext(this.context, this.state);
-        this.enterRule(localContext, 86, TrinoSqlParser.RULE_listaggCountIndication);
+    public listAggCountIndication(): ListAggCountIndicationContext {
+        let localContext = new ListAggCountIndicationContext(this.context, this.state);
+        this.enterRule(localContext, 86, TrinoSqlParser.RULE_listAggCountIndication);
         try {
             this.state = 1668;
             this.errorHandler.sync(this);
@@ -7996,7 +7996,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 this.state = 2076;
                 this.match(TrinoSqlParser.KW_COPARTITION);
                 this.state = 2077;
-                this.copartitionTables();
+                this.coPartitionTables();
                 this.state = 2082;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -8006,7 +8006,7 @@ export class TrinoSqlParser extends SQLParserBase {
                     this.state = 2078;
                     this.match(TrinoSqlParser.T__2);
                     this.state = 2079;
-                    this.copartitionTables();
+                    this.coPartitionTables();
                     }
                     }
                     this.state = 2084;
@@ -8469,9 +8469,9 @@ export class TrinoSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public copartitionTables(): CopartitionTablesContext {
-        let localContext = new CopartitionTablesContext(this.context, this.state);
-        this.enterRule(localContext, 134, TrinoSqlParser.RULE_copartitionTables);
+    public coPartitionTables(): CoPartitionTablesContext {
+        let localContext = new CoPartitionTablesContext(this.context, this.state);
+        this.enterRule(localContext, 134, TrinoSqlParser.RULE_coPartitionTables);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -9482,11 +9482,11 @@ export class TrinoSqlParser extends SQLParserBase {
                 break;
             case 13:
                 {
-                localContext = new ListaggContext(localContext);
+                localContext = new ListAggContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
                 this.state = 2361;
-                (localContext as ListaggContext)._name = this.match(TrinoSqlParser.KW_LISTAGG);
+                (localContext as ListAggContext)._name = this.match(TrinoSqlParser.KW_LISTAGG);
                 this.state = 2362;
                 this.match(TrinoSqlParser.T__0);
                 this.state = 2364;
@@ -23999,8 +23999,8 @@ export class ListAggOverflowBehaviorContext extends antlr.ParserRuleContext {
     public KW_TRUNCATE(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_TRUNCATE, 0);
     }
-    public listaggCountIndication(): ListaggCountIndicationContext | null {
-        return this.getRuleContext(0, ListaggCountIndicationContext);
+    public listAggCountIndication(): ListAggCountIndicationContext | null {
+        return this.getRuleContext(0, ListAggCountIndicationContext);
     }
     public string(): StringContext | null {
         return this.getRuleContext(0, StringContext);
@@ -24028,7 +24028,7 @@ export class ListAggOverflowBehaviorContext extends antlr.ParserRuleContext {
 }
 
 
-export class ListaggCountIndicationContext extends antlr.ParserRuleContext {
+export class ListAggCountIndicationContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -24042,21 +24042,21 @@ export class ListaggCountIndicationContext extends antlr.ParserRuleContext {
         return this.getToken(TrinoSqlParser.KW_WITHOUT, 0);
     }
     public override get ruleIndex(): number {
-        return TrinoSqlParser.RULE_listaggCountIndication;
+        return TrinoSqlParser.RULE_listAggCountIndication;
     }
     public override enterRule(listener: TrinoSqlListener): void {
-        if(listener.enterListaggCountIndication) {
-             listener.enterListaggCountIndication(this);
+        if(listener.enterListAggCountIndication) {
+             listener.enterListAggCountIndication(this);
         }
     }
     public override exitRule(listener: TrinoSqlListener): void {
-        if(listener.exitListaggCountIndication) {
-             listener.exitListaggCountIndication(this);
+        if(listener.exitListAggCountIndication) {
+             listener.exitListAggCountIndication(this);
         }
     }
     public override accept<Result>(visitor: TrinoSqlVisitor<Result>): Result | null {
-        if (visitor.visitListaggCountIndication) {
-            return visitor.visitListaggCountIndication(this);
+        if (visitor.visitListAggCountIndication) {
+            return visitor.visitListAggCountIndication(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -25389,14 +25389,14 @@ export class TableFunctionCallContext extends antlr.ParserRuleContext {
     public KW_COPARTITION(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_COPARTITION, 0);
     }
-    public copartitionTables(): CopartitionTablesContext[];
-    public copartitionTables(i: number): CopartitionTablesContext | null;
-    public copartitionTables(i?: number): CopartitionTablesContext[] | CopartitionTablesContext | null {
+    public coPartitionTables(): CoPartitionTablesContext[];
+    public coPartitionTables(i: number): CoPartitionTablesContext | null;
+    public coPartitionTables(i?: number): CoPartitionTablesContext[] | CoPartitionTablesContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(CopartitionTablesContext);
+            return this.getRuleContexts(CoPartitionTablesContext);
         }
 
-        return this.getRuleContext(i, CopartitionTablesContext);
+        return this.getRuleContext(i, CoPartitionTablesContext);
     }
     public override get ruleIndex(): number {
         return TrinoSqlParser.RULE_tableFunctionCall;
@@ -25705,7 +25705,7 @@ export class DescriptorFieldContext extends antlr.ParserRuleContext {
 }
 
 
-export class CopartitionTablesContext extends antlr.ParserRuleContext {
+export class CoPartitionTablesContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -25719,21 +25719,21 @@ export class CopartitionTablesContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, QualifiedNameContext);
     }
     public override get ruleIndex(): number {
-        return TrinoSqlParser.RULE_copartitionTables;
+        return TrinoSqlParser.RULE_coPartitionTables;
     }
     public override enterRule(listener: TrinoSqlListener): void {
-        if(listener.enterCopartitionTables) {
-             listener.enterCopartitionTables(this);
+        if(listener.enterCoPartitionTables) {
+             listener.enterCoPartitionTables(this);
         }
     }
     public override exitRule(listener: TrinoSqlListener): void {
-        if(listener.exitCopartitionTables) {
-             listener.exitCopartitionTables(this);
+        if(listener.exitCoPartitionTables) {
+             listener.exitCoPartitionTables(this);
         }
     }
     public override accept<Result>(visitor: TrinoSqlVisitor<Result>): Result | null {
-        if (visitor.visitCopartitionTables) {
-            return visitor.visitCopartitionTables(this);
+        if (visitor.visitCoPartitionTables) {
+            return visitor.visitCoPartitionTables(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -26846,6 +26846,75 @@ export class LocalTimestampContext extends PrimaryExpressionContext {
         }
     }
 }
+export class ListAggContext extends PrimaryExpressionContext {
+    public _name?: Token | null;
+    public constructor(ctx: PrimaryExpressionContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public expression(): ExpressionContext {
+        return this.getRuleContext(0, ExpressionContext)!;
+    }
+    public KW_LISTAGG(): antlr.TerminalNode {
+        return this.getToken(TrinoSqlParser.KW_LISTAGG, 0)!;
+    }
+    public KW_WITHIN(): antlr.TerminalNode | null {
+        return this.getToken(TrinoSqlParser.KW_WITHIN, 0);
+    }
+    public KW_GROUP(): antlr.TerminalNode | null {
+        return this.getToken(TrinoSqlParser.KW_GROUP, 0);
+    }
+    public KW_ORDER(): antlr.TerminalNode | null {
+        return this.getToken(TrinoSqlParser.KW_ORDER, 0);
+    }
+    public KW_BY(): antlr.TerminalNode | null {
+        return this.getToken(TrinoSqlParser.KW_BY, 0);
+    }
+    public sortItem(): SortItemContext[];
+    public sortItem(i: number): SortItemContext | null;
+    public sortItem(i?: number): SortItemContext[] | SortItemContext | null {
+        if (i === undefined) {
+            return this.getRuleContexts(SortItemContext);
+        }
+
+        return this.getRuleContext(i, SortItemContext);
+    }
+    public setQuantifier(): SetQuantifierContext | null {
+        return this.getRuleContext(0, SetQuantifierContext);
+    }
+    public string(): StringContext | null {
+        return this.getRuleContext(0, StringContext);
+    }
+    public KW_ON(): antlr.TerminalNode | null {
+        return this.getToken(TrinoSqlParser.KW_ON, 0);
+    }
+    public KW_OVERFLOW(): antlr.TerminalNode | null {
+        return this.getToken(TrinoSqlParser.KW_OVERFLOW, 0);
+    }
+    public listAggOverflowBehavior(): ListAggOverflowBehaviorContext | null {
+        return this.getRuleContext(0, ListAggOverflowBehaviorContext);
+    }
+    public filter(): FilterContext | null {
+        return this.getRuleContext(0, FilterContext);
+    }
+    public override enterRule(listener: TrinoSqlListener): void {
+        if(listener.enterListAgg) {
+             listener.enterListAgg(this);
+        }
+    }
+    public override exitRule(listener: TrinoSqlListener): void {
+        if(listener.exitListAgg) {
+             listener.exitListAgg(this);
+        }
+    }
+    public override accept<Result>(visitor: TrinoSqlVisitor<Result>): Result | null {
+        if (visitor.visitListAgg) {
+            return visitor.visitListAgg(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
 export class JsonObjectContext extends PrimaryExpressionContext {
     public constructor(ctx: PrimaryExpressionContext) {
         super(ctx.parent, ctx.invokingState);
@@ -27841,75 +27910,6 @@ export class PositionContext extends PrimaryExpressionContext {
     public override accept<Result>(visitor: TrinoSqlVisitor<Result>): Result | null {
         if (visitor.visitPosition) {
             return visitor.visitPosition(this);
-        } else {
-            return visitor.visitChildren(this);
-        }
-    }
-}
-export class ListaggContext extends PrimaryExpressionContext {
-    public _name?: Token | null;
-    public constructor(ctx: PrimaryExpressionContext) {
-        super(ctx.parent, ctx.invokingState);
-        super.copyFrom(ctx);
-    }
-    public expression(): ExpressionContext {
-        return this.getRuleContext(0, ExpressionContext)!;
-    }
-    public KW_LISTAGG(): antlr.TerminalNode {
-        return this.getToken(TrinoSqlParser.KW_LISTAGG, 0)!;
-    }
-    public KW_WITHIN(): antlr.TerminalNode | null {
-        return this.getToken(TrinoSqlParser.KW_WITHIN, 0);
-    }
-    public KW_GROUP(): antlr.TerminalNode | null {
-        return this.getToken(TrinoSqlParser.KW_GROUP, 0);
-    }
-    public KW_ORDER(): antlr.TerminalNode | null {
-        return this.getToken(TrinoSqlParser.KW_ORDER, 0);
-    }
-    public KW_BY(): antlr.TerminalNode | null {
-        return this.getToken(TrinoSqlParser.KW_BY, 0);
-    }
-    public sortItem(): SortItemContext[];
-    public sortItem(i: number): SortItemContext | null;
-    public sortItem(i?: number): SortItemContext[] | SortItemContext | null {
-        if (i === undefined) {
-            return this.getRuleContexts(SortItemContext);
-        }
-
-        return this.getRuleContext(i, SortItemContext);
-    }
-    public setQuantifier(): SetQuantifierContext | null {
-        return this.getRuleContext(0, SetQuantifierContext);
-    }
-    public string(): StringContext | null {
-        return this.getRuleContext(0, StringContext);
-    }
-    public KW_ON(): antlr.TerminalNode | null {
-        return this.getToken(TrinoSqlParser.KW_ON, 0);
-    }
-    public KW_OVERFLOW(): antlr.TerminalNode | null {
-        return this.getToken(TrinoSqlParser.KW_OVERFLOW, 0);
-    }
-    public listAggOverflowBehavior(): ListAggOverflowBehaviorContext | null {
-        return this.getRuleContext(0, ListAggOverflowBehaviorContext);
-    }
-    public filter(): FilterContext | null {
-        return this.getRuleContext(0, FilterContext);
-    }
-    public override enterRule(listener: TrinoSqlListener): void {
-        if(listener.enterListagg) {
-             listener.enterListagg(this);
-        }
-    }
-    public override exitRule(listener: TrinoSqlListener): void {
-        if(listener.exitListagg) {
-             listener.exitListagg(this);
-        }
-    }
-    public override accept<Result>(visitor: TrinoSqlVisitor<Result>): Result | null {
-        if (visitor.visitListagg) {
-            return visitor.visitListagg(this);
         } else {
             return visitor.visitChildren(this);
         }
