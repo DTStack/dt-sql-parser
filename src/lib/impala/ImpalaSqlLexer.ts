@@ -293,9 +293,9 @@ export class ImpalaSqlLexer extends antlr.Lexer {
     public static readonly TIME_WITH_TIME_ZONE = 284;
     public static readonly TIMESTAMP_WITH_TIME_ZONE = 285;
     public static readonly DOUBLE_PRECISION = 286;
-    public static readonly SIMPLE_COMMENT = 287;
+    public static readonly LINE_COMMENT = 287;
     public static readonly BRACKETED_COMMENT = 288;
-    public static readonly WS = 289;
+    public static readonly WHITE_SPACE = 289;
 
     public static readonly channelNames = [
         "DEFAULT_TOKEN_CHANNEL", "HIDDEN"
@@ -408,7 +408,7 @@ export class ImpalaSqlLexer extends antlr.Lexer {
         "INTEGER_VALUE", "DECIMAL_VALUE", "DOUBLE_VALUE", "IDENTIFIER", 
         "DIGIT_IDENTIFIER", "QUOTED_IDENTIFIER", "BACKQUOTED_IDENTIFIER", 
         "TIME_WITH_TIME_ZONE", "TIMESTAMP_WITH_TIME_ZONE", "DOUBLE_PRECISION", 
-        "SIMPLE_COMMENT", "BRACKETED_COMMENT", "WS"
+        "LINE_COMMENT", "BRACKETED_COMMENT", "WHITE_SPACE"
     ];
 
     public static readonly modeNames = [
@@ -471,8 +471,8 @@ export class ImpalaSqlLexer extends antlr.Lexer {
         "INTEGER_VALUE", "DECIMAL_VALUE", "DOUBLE_VALUE", "IDENTIFIER", 
         "DIGIT_IDENTIFIER", "QUOTED_IDENTIFIER", "BACKQUOTED_IDENTIFIER", 
         "TIME_WITH_TIME_ZONE", "TIMESTAMP_WITH_TIME_ZONE", "DOUBLE_PRECISION", 
-        "EXPONENT", "DIGIT", "LETTER", "SIMPLE_COMMENT", "BRACKETED_COMMENT", 
-        "WS",
+        "EXPONENT", "DIGIT", "LETTER", "LINE_COMMENT", "BRACKETED_COMMENT", 
+        "WHITE_SPACE",
     ];
 
 

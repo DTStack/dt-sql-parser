@@ -396,9 +396,9 @@ export class SparkSqlLexer extends antlr.Lexer {
     public static readonly BIGDECIMAL_LITERAL = 387;
     public static readonly IDENTIFIER = 388;
     public static readonly BACKQUOTED_IDENTIFIER = 389;
-    public static readonly SIMPLE_COMMENT = 390;
+    public static readonly LINE_COMMENT = 390;
     public static readonly BRACKETED_COMMENT = 391;
-    public static readonly WS = 392;
+    public static readonly WHITE_SPACE = 392;
     public static readonly UNRECOGNIZED = 393;
 
     public static readonly channelNames = [
@@ -549,8 +549,8 @@ export class SparkSqlLexer extends antlr.Lexer {
         "HENT_START", "HENT_END", "QUESTION", "STRING_LITERAL", "DOUBLEQUOTED_STRING", 
         "BIGINT_LITERAL", "SMALLINT_LITERAL", "TINYINT_LITERAL", "INTEGER_VALUE", 
         "EXPONENT_VALUE", "DECIMAL_VALUE", "FLOAT_LITERAL", "DOUBLE_LITERAL", 
-        "BIGDECIMAL_LITERAL", "IDENTIFIER", "BACKQUOTED_IDENTIFIER", "SIMPLE_COMMENT", 
-        "BRACKETED_COMMENT", "WS", "UNRECOGNIZED"
+        "BIGDECIMAL_LITERAL", "IDENTIFIER", "BACKQUOTED_IDENTIFIER", "LINE_COMMENT", 
+        "BRACKETED_COMMENT", "WHITE_SPACE", "UNRECOGNIZED"
     ];
 
     public static readonly modeNames = [
@@ -632,8 +632,8 @@ export class SparkSqlLexer extends antlr.Lexer {
         "BIGINT_LITERAL", "SMALLINT_LITERAL", "TINYINT_LITERAL", "INTEGER_VALUE", 
         "EXPONENT_VALUE", "DECIMAL_VALUE", "FLOAT_LITERAL", "DOUBLE_LITERAL", 
         "BIGDECIMAL_LITERAL", "IDENTIFIER", "BACKQUOTED_IDENTIFIER", "DECIMAL_DIGITS", 
-        "EXPONENT", "DIGIT", "LETTER", "SIMPLE_COMMENT", "BRACKETED_COMMENT", 
-        "WS", "UNRECOGNIZED",
+        "EXPONENT", "DIGIT", "LETTER", "LINE_COMMENT", "BRACKETED_COMMENT", 
+        "WHITE_SPACE", "UNRECOGNIZED",
     ];
 
 
