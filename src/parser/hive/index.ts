@@ -38,8 +38,8 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         return new HiveSqlSplitListener();
     }
 
-    protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return new HiveEntityCollector(input, caretTokenIndex);
+    protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
+        return new HiveEntityCollector(input, allTokens, caretTokenIndex);
     }
 
     protected processCandidates(

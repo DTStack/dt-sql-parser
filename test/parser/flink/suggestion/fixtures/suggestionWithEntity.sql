@@ -9,3 +9,7 @@ INSERT INTO insert_tb PARTITION (country, state) SELECT col1, col2, country, sta
 CREATE TABLE IF NOT EXISTS derived_table WITH ('connector' = 'kafka')  AS SELECT  FROM origin_table;
 
 CREATE TABLE IF NOT EXISTS derived_table WITH ('connector' = 'kafka')  AS SELECT id,  FROM origin_table;
+
+SELECT id FROM tb WHERE 
+
+SELECT id FROM tb GROUP BY  ;  

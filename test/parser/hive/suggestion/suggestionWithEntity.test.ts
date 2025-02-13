@@ -118,12 +118,12 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('a');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[0].belongStmt.isContainCaret).toBeFalsy();
+        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[0].belongStmt.rootStmt.isContainCaret).toBeTruthy();
 
         expect(entities[1].text).toBe('b');
         expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeFalsy();
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[1].belongStmt.rootStmt.isContainCaret).toBeTruthy();
     });
 
@@ -145,12 +145,12 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('a');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[0].belongStmt.isContainCaret).toBeFalsy();
+        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[0].belongStmt.rootStmt.isContainCaret).toBeTruthy();
 
         expect(entities[1].text).toBe('b');
         expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeFalsy();
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[1].belongStmt.rootStmt.isContainCaret).toBeTruthy();
     });
 
@@ -172,12 +172,12 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('page_view_stg');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[0].belongStmt.isContainCaret).toBeFalsy();
+        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[0].belongStmt.rootStmt.isContainCaret).toBeTruthy();
 
         expect(entities[1].text).toBe('page_view');
         expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeFalsy();
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[1].belongStmt.rootStmt.isContainCaret).toBeTruthy();
     });
 
@@ -199,12 +199,12 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('page_view_stg');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[0].belongStmt.isContainCaret).toBeFalsy();
+        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[0].belongStmt.rootStmt.isContainCaret).toBeTruthy();
 
         expect(entities[1].text).toBe('page_view');
         expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeFalsy();
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[1].belongStmt.rootStmt.isContainCaret).toBeTruthy();
     });
 
@@ -306,5 +306,25 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(entities[1].text).toBe('origin_table');
         expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+    });
+
+    test('isContainCaret should be truthy if caret position is whitespace at the end of statement', () => {
+        const pos: CaretPosition = {
+            lineNumber: 25,
+            column: 25,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+        const entities = hive.getAllEntities(sql, pos);
+        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+    });
+
+    test('isContainCaret should be falsy if caret position is whitespace after semicolon', () => {
+        const pos: CaretPosition = {
+            lineNumber: 27,
+            column: 32,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+        const entities = hive.getAllEntities(sql, pos);
+        expect(entities[0].belongStmt.isContainCaret).toBeFalsy();
     });
 });
