@@ -5,7 +5,7 @@ const spark = new SparkSQL();
 
 const features = {
     alterDatabase: readSQL(__dirname, 'alterDatabase.sql'),
-    altertTable: readSQL(__dirname, 'alterTable.sql'),
+    alterTable: readSQL(__dirname, 'alterTable.sql'),
     alterView: readSQL(__dirname, 'alterView.sql'),
     alterMaterializedView: readSQL(__dirname, 'alterMaterializedView.sql'),
 };
