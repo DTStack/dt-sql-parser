@@ -1,4 +1,6 @@
-// Generated from /Users/xuxiaoqi/Documents/work/dt-sql-parser/src/grammar/postgresql/PostgreSqlParser.g4 by ANTLR 4.13.1
+// Generated from dt-sql-parser/src/grammar/postgresql/PostgreSqlParser.g4 by ANTLR 4.13.1
+
+// @ts-nocheck
 
 import { AbstractParseTreeVisitor } from "antlr4ng";
 
