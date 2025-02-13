@@ -3,12 +3,19 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { SparkSqlLexer } from '../../lib/spark/SparkSqlLexer';
 import { SparkSqlParser, ProgramContext } from '../../lib/spark/SparkSqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
+import {
+    Suggestions,
+    EntityContextType,
+    SyntaxSuggestion,
+    CaretPosition,
+    SemanticCollectOptions,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { SparkSqlSplitListener } from './sparkSplitListener';
 import { SparkEntityCollector } from './sparkEntityCollector';
 import { SparkErrorListener } from './sparkErrorListener';
 import { ErrorListener } from '../common/parseErrorListener';
+import { SparkSemanticContextCollector } from './sparkSemanticContextCollector';
 
 export { SparkSqlSplitListener, SparkEntityCollector };
 
@@ -45,6 +52,15 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
         return new SparkEntityCollector(input, caretTokenIndex);
+    }
+
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new SparkSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
     protected processCandidates(

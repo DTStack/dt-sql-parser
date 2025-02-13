@@ -3,12 +3,19 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { MySqlLexer } from '../../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext } from '../../lib/mysql/MySqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
+import {
+    Suggestions,
+    EntityContextType,
+    SyntaxSuggestion,
+    CaretPosition,
+    SemanticCollectOptions,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { MysqlSplitListener } from './mysqlSplitListener';
 import { MySqlEntityCollector } from './mysqlEntityCollector';
 import { MysqlErrorListener } from './mysqlErrorListener';
 import { ErrorListener } from '../common/parseErrorListener';
+import { MySqlSemanticContextCollector } from '../mysql/mysqlSemanticContextCollector';
 
 export { MySqlEntityCollector, MysqlSplitListener };
 
@@ -45,6 +52,15 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
         return new MySqlEntityCollector(input, caretTokenIndex);
+    }
+
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new MySqlSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
     protected processCandidates(

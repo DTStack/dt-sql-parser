@@ -3,12 +3,19 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
 import { TrinoSqlParser, ProgramContext } from '../../lib/trino/TrinoSqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
+import {
+    Suggestions,
+    EntityContextType,
+    SyntaxSuggestion,
+    CaretPosition,
+    SemanticCollectOptions,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { TrinoSqlSplitListener } from './trinoSplitListener';
 import { TrinoEntityCollector } from './trinoEntityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
 import { TrinoErrorListener } from './trinoErrorListener';
+import { TrinoSemanticContextCollector } from './trinoSemanticContextCollector';
 
 export { TrinoSqlSplitListener, TrinoEntityCollector };
 
@@ -32,6 +39,15 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
         return new TrinoEntityCollector(input, caretTokenIndex);
+    }
+
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new TrinoSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
     protected preferredRules: Set<number> = new Set([

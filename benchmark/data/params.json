@@ -6,5 +6,8 @@
     "suggestion_flink": {
         "getAllEntities": ["$sql", { "lineNumber": 1020, "column": 38 }],
         "getSuggestionAtCaretPosition": ["$sql", { "lineNumber": 1020, "column": 38 }]
+    },
+    "select": {
+        "getSemanticContextAtCaretPosition": ["$sql", { "lineNumber": 997, "column": 25 }]
     }
 }

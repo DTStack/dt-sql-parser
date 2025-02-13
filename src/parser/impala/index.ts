@@ -3,12 +3,19 @@ import { CandidatesCollection } from 'antlr4-c3';
 import { ImpalaSqlLexer } from '../../lib/impala/ImpalaSqlLexer';
 import { ImpalaSqlParser, ProgramContext } from '../../lib/impala/ImpalaSqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
+import {
+    CaretPosition,
+    EntityContextType,
+    SemanticCollectOptions,
+    Suggestions,
+    SyntaxSuggestion,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { ImpalaSqlSplitListener } from './impalaSplitListener';
 import { ImpalaEntityCollector } from './impalaEntityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
 import { ImpalaErrorListener } from './ImpalaErrorListener';
+import { ImpalaSemanticContextCollector } from './impalaSemanticContextCollector';
 
 export { ImpalaEntityCollector, ImpalaSqlSplitListener };
 
@@ -45,6 +52,15 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
         return new ImpalaEntityCollector(input, caretTokenIndex);
+    }
+
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new ImpalaSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
     protected processCandidates(

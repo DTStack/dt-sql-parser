@@ -4,12 +4,19 @@ import { HiveSqlLexer } from '../../lib/hive/HiveSqlLexer';
 import { HiveSqlParser, ProgramContext } from '../../lib/hive/HiveSqlParser';
 import { BasicSQL } from '../common/basicSQL';
 
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
+import {
+    CaretPosition,
+    EntityContextType,
+    SemanticCollectOptions,
+    Suggestions,
+    SyntaxSuggestion,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { HiveSqlSplitListener } from './hiveSplitListener';
 import { HiveEntityCollector } from './hiveEntityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
 import { HiveErrorListener } from './hiveErrorListener';
+import { HiveSemanticContextCollector } from './hiveSemanticContextCollector';
 
 export { HiveEntityCollector, HiveSqlSplitListener };
 
@@ -47,6 +54,15 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
 
     protected createEntityCollector(input: string, caretTokenIndex?: number) {
         return new HiveEntityCollector(input, caretTokenIndex);
+    }
+
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new HiveSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
     protected processCandidates(
