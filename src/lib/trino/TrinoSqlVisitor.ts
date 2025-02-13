@@ -268,6 +268,7 @@ import { RowTypeContext } from "./TrinoSqlParser.js";
 import { IntervalTypeContext } from "./TrinoSqlParser.js";
 import { ArrayTypeContext } from "./TrinoSqlParser.js";
 import { DoublePrecisionTypeContext } from "./TrinoSqlParser.js";
+import { TimeTypeContext } from "./TrinoSqlParser.js";
 import { LegacyArrayTypeContext } from "./TrinoSqlParser.js";
 import { GenericTypeContext } from "./TrinoSqlParser.js";
 import { DateTimeTypeContext } from "./TrinoSqlParser.js";
@@ -2133,6 +2134,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitDoublePrecisionType?: (ctx: DoublePrecisionTypeContext) => Result;
+    /**
+     * Visit a parse tree produced by the `timeType`
+     * labeled alternative in `TrinoSqlParser.type`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTimeType?: (ctx: TimeTypeContext) => Result;
     /**
      * Visit a parse tree produced by the `legacyArrayType`
      * labeled alternative in `TrinoSqlParser.type`.

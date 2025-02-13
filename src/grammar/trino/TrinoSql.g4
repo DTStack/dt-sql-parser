@@ -737,17 +737,15 @@ normalForm
     ;
 
 type
-    : KW_ROW '(' rowField (',' rowField)* ')'                                             # rowType
-    | KW_INTERVAL from=intervalField (KW_TO to=intervalField)?                            # intervalType
-    | base=KW_TIMESTAMP ('(' precision= typeParameter ')')? (KW_WITHOUT KW_TIME KW_ZONE)? # dateTimeType
-    | base=KW_TIMESTAMP ('(' precision= typeParameter ')')? KW_WITH KW_TIME KW_ZONE       # dateTimeType
-    | base=KW_TIME ('(' precision= typeParameter ')')? (KW_WITHOUT KW_TIME KW_ZONE)?      # dateTimeType
-    | base=KW_TIME ('(' precision= typeParameter ')')? KW_WITH KW_TIME KW_ZONE            # dateTimeType
-    | KW_DOUBLE KW_PRECISION                                                              # doublePrecisionType
-    | KW_ARRAY '<' type '>'                                                               # legacyArrayType
-    | KW_MAP '<' keyType=type ',' valueType=type '>'                                      # legacyMapType
-    | type KW_ARRAY ('[' INTEGER_VALUE ']')?                                              # arrayType
-    | identifier ('(' typeParameter (',' typeParameter)* ')')?                            # genericType
+    : KW_ROW '(' rowField (',' rowField)* ')'                                                         # rowType
+    | KW_INTERVAL from=intervalField (KW_TO to=intervalField)?                                        # intervalType
+    | base=KW_TIMESTAMP ('(' precision= typeParameter ')')? ((KW_WITH | KW_WITHOUT) KW_TIME KW_ZONE)? # dateTimeType
+    | base=KW_TIME ('(' precision= typeParameter ')')? ((KW_WITH | KW_WITHOUT) KW_TIME KW_ZONE)?      # timeType
+    | KW_DOUBLE KW_PRECISION                                                                          # doublePrecisionType
+    | KW_ARRAY '<' type '>'                                                                           # legacyArrayType
+    | KW_MAP '<' keyType=type ',' valueType=type '>'                                                  # legacyMapType
+    | type KW_ARRAY ('[' INTEGER_VALUE ']')?                                                          # arrayType
+    | identifier ('(' typeParameter (',' typeParameter)* ')')?                                        # genericType
     ;
 
 rowField

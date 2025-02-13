@@ -1,6 +1,4 @@
-// Generated from dt-sql-parser/src/grammar/mysql/MySqlParser.g4 by ANTLR 4.13.1
-
-// @ts-nocheck
+// Generated from /Users/xuxiaoqi/Documents/work/dt-sql-parser/src/grammar/mysql/MySqlParser.g4 by ANTLR 4.13.1
 
 import { AbstractParseTreeVisitor } from "antlr4ng";
 

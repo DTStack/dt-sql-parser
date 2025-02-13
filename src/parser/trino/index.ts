@@ -1,16 +1,17 @@
-import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
-import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
-import { TrinoSqlParser, ProgramContext } from '../../lib/trino/TrinoSqlParser';
-import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
-import { StmtContextType } from '../common/entityCollector';
-import { TrinoSqlSplitListener } from './trinoSplitListener';
-import { TrinoEntityCollector } from './trinoEntityCollector';
-import { ErrorListener } from '../common/parseErrorListener';
-import { TrinoErrorListener } from './trinoErrorListener';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 
-export { TrinoSqlSplitListener, TrinoEntityCollector };
+import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
+import { ProgramContext, TrinoSqlParser } from '../../lib/trino/TrinoSqlParser';
+import { BasicSQL } from '../common/basicSQL';
+import { StmtContextType } from '../common/entityCollector';
+import { ErrorListener } from '../common/parseErrorListener';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
+import { TrinoEntityCollector } from './trinoEntityCollector';
+import { TrinoErrorListener } from './trinoErrorListener';
+import { TrinoSqlSplitListener } from './trinoSplitListener';
+
+export { TrinoEntityCollector, TrinoSqlSplitListener };
 
 export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlParser> {
     protected createLexerFromCharStream(charStreams: CharStream) {
@@ -29,9 +30,8 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         const parserContext = this;
         return new TrinoErrorListener(_errorListener, parserContext, this.preferredRules);
     }
-
-    protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return new TrinoEntityCollector(input, caretTokenIndex);
+    protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
+        return new TrinoEntityCollector(input, allTokens, caretTokenIndex);
     }
 
     protected preferredRules: Set<number> = new Set([

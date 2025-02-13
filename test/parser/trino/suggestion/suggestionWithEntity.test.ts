@@ -156,4 +156,24 @@ describe('PostgreSql Syntax Suggestion with collect entity', () => {
         expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
+
+    test('isContainCaret should be truthy if caret position is whitespace at the end of statement', () => {
+        const pos: CaretPosition = {
+            lineNumber: 13,
+            column: 25,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+        const entities = trino.getAllEntities(sql, pos);
+        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+    });
+
+    test('isContainCaret should be falsy if caret position is whitespace after semicolon', () => {
+        const pos: CaretPosition = {
+            lineNumber: 15,
+            column: 32,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+        const entities = trino.getAllEntities(sql, pos);
+        expect(entities[0].belongStmt.isContainCaret).toBeFalsy();
+    });
 });

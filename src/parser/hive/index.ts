@@ -1,15 +1,15 @@
-import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
+
 import { HiveSqlLexer } from '../../lib/hive/HiveSqlLexer';
 import { HiveSqlParser, ProgramContext } from '../../lib/hive/HiveSqlParser';
 import { BasicSQL } from '../common/basicSQL';
-
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
-import { HiveSqlSplitListener } from './hiveSplitListener';
-import { HiveEntityCollector } from './hiveEntityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
+import { HiveEntityCollector } from './hiveEntityCollector';
 import { HiveErrorListener } from './hiveErrorListener';
+import { HiveSqlSplitListener } from './hiveSplitListener';
 
 export { HiveEntityCollector, HiveSqlSplitListener };
 
@@ -44,9 +44,8 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         const parserContext = this;
         return new HiveErrorListener(_errorListener, parserContext, this.preferredRules);
     }
-
-    protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return new HiveEntityCollector(input, caretTokenIndex);
+    protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
+        return new HiveEntityCollector(input, allTokens, caretTokenIndex);
     }
 
     protected processCandidates(
