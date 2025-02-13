@@ -373,10 +373,10 @@ trimsSpecification
 
 listAggOverflowBehavior
     : KW_ERROR
-    | KW_TRUNCATE string? listaggCountIndication
+    | KW_TRUNCATE string? listAggCountIndication
     ;
 
-listaggCountIndication
+listAggCountIndication
     : KW_WITH KW_COUNT
     | KW_WITHOUT KW_COUNT
     ;
@@ -489,7 +489,7 @@ jsonTableDefaultPlan
 
 tableFunctionCall
     : functionName '(' (tableFunctionArgument (',' tableFunctionArgument)*)? (
-        KW_COPARTITION copartitionTables (',' copartitionTables)*
+        KW_COPARTITION coPartitionTables (',' coPartitionTables)*
     )? ')'
     ;
 
@@ -522,7 +522,7 @@ descriptorField
     : identifier type?
     ;
 
-copartitionTables
+coPartitionTables
     : '(' qualifiedName ',' qualifiedName (',' qualifiedName)* ')'
     ;
 
@@ -573,7 +573,7 @@ primaryExpression
     | KW_ROW '(' expression (',' expression)* ')'               # rowConstructor
     | name=KW_LISTAGG '(' setQuantifier? expression (',' string)? (
         KW_ON KW_OVERFLOW listAggOverflowBehavior
-    )? ')' (KW_WITHIN KW_GROUP '(' KW_ORDER KW_BY sortItem (',' sortItem)* ')') filter?   # listagg
+    )? ')' (KW_WITHIN KW_GROUP '(' KW_ORDER KW_BY sortItem (',' sortItem)* ')') filter?   # listAgg
     | processingMode? functionName '(' (label=identifier '.')? ASTERISK ')' filter? over? # functionCall
     | processingMode? functionName '(' (setQuantifier? expression (',' expression)*)? (
         KW_ORDER KW_BY sortItem (',' sortItem)*
