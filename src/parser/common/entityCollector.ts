@@ -149,10 +149,10 @@ export abstract class EntityCollector {
             const token = this._allTokens[i];
             if (token.channel !== Token.HIDDEN_CHANNEL) {
                 // If prev nonhidden token is ';', the current token does not belong to any statement.
-                return token.text === ';' ? +Infinity : token.tokenIndex;
+                return token.text === ';' ? Infinity : token.tokenIndex;
             }
         }
-        return +Infinity;
+        return Infinity;
     }
 
     protected pushStmt(ctx: ParserRuleContext, type: StmtContextType) {
