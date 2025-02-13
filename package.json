@@ -1,6 +1,6 @@
 {
   "name": "dt-sql-parser",
-  "version": "4.1.0-beta.0",
+  "version": "4.1.0",
   "authors": "DTStack Corporation",
   "description": "SQL Parsers for BigData, built with antlr4",
   "keywords": [
