@@ -268,6 +268,7 @@ import { RowTypeContext } from "./TrinoSqlParser.js";
 import { IntervalTypeContext } from "./TrinoSqlParser.js";
 import { ArrayTypeContext } from "./TrinoSqlParser.js";
 import { DoublePrecisionTypeContext } from "./TrinoSqlParser.js";
+import { TimeTypeContext } from "./TrinoSqlParser.js";
 import { LegacyArrayTypeContext } from "./TrinoSqlParser.js";
 import { GenericTypeContext } from "./TrinoSqlParser.js";
 import { DateTimeTypeContext } from "./TrinoSqlParser.js";
@@ -3356,6 +3357,18 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitDoublePrecisionType?: (ctx: DoublePrecisionTypeContext) => void;
+    /**
+     * Enter a parse tree produced by the `timeType`
+     * labeled alternative in `TrinoSqlParser.type`.
+     * @param ctx the parse tree
+     */
+    enterTimeType?: (ctx: TimeTypeContext) => void;
+    /**
+     * Exit a parse tree produced by the `timeType`
+     * labeled alternative in `TrinoSqlParser.type`.
+     * @param ctx the parse tree
+     */
+    exitTimeType?: (ctx: TimeTypeContext) => void;
     /**
      * Enter a parse tree produced by the `legacyArrayType`
      * labeled alternative in `TrinoSqlParser.type`.
