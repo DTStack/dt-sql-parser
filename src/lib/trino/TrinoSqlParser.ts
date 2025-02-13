@@ -1264,7 +1264,7 @@ export class TrinoSqlParser extends SQLParserBase {
                     this.state = 425;
                     this.match(TrinoSqlParser.KW_COMMENT);
                     this.state = 426;
-                    this.string_();
+                    (localContext as CreateTableAsSelectContext)._comment = this.string_();
                     }
                 }
 
@@ -1392,7 +1392,7 @@ export class TrinoSqlParser extends SQLParserBase {
                     this.state = 470;
                     this.match(TrinoSqlParser.KW_COMMENT);
                     this.state = 471;
-                    this.string_();
+                    (localContext as CreateTableContext)._comment = this.string_();
                     }
                     break;
                 }
@@ -2019,7 +2019,7 @@ export class TrinoSqlParser extends SQLParserBase {
                     this.state = 679;
                     this.match(TrinoSqlParser.KW_COMMENT);
                     this.state = 680;
-                    this.string_();
+                    (localContext as CreateMaterializedViewContext)._comment = this.string_();
                     }
                 }
 
@@ -2071,7 +2071,7 @@ export class TrinoSqlParser extends SQLParserBase {
                     this.state = 697;
                     this.match(TrinoSqlParser.KW_COMMENT);
                     this.state = 698;
-                    this.string_();
+                    (localContext as CreateViewContext)._comment = this.string_();
                     }
                 }
 
@@ -4229,7 +4229,7 @@ export class TrinoSqlParser extends SQLParserBase {
             this.state = 1270;
             this.columnNameCreate();
             this.state = 1271;
-            this.type_(0);
+            localContext._colType = this.type_(0);
             this.state = 1274;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -4250,7 +4250,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 this.state = 1276;
                 this.match(TrinoSqlParser.KW_COMMENT);
                 this.state = 1277;
-                this.string_();
+                localContext._comment = this.string_();
                 }
                 break;
             }
@@ -5718,7 +5718,7 @@ export class TrinoSqlParser extends SQLParserBase {
                     }
 
                     this.state = 1573;
-                    this.identifier();
+                    (localContext as SelectSingleContext)._alias = this.identifier();
                     }
                     break;
                 }
@@ -6836,7 +6836,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 }
 
                 this.state = 1825;
-                this.identifier();
+                localContext._alias = this.identifier();
                 this.state = 1827;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 223, this.context) ) {
@@ -20429,6 +20429,7 @@ export class ShowColumnCommentContext extends StatementContext {
     }
 }
 export class CreateTableContext extends StatementContext {
+    public _comment?: StringContext;
     public constructor(ctx: StatementContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
@@ -20469,14 +20470,14 @@ export class CreateTableContext extends StatementContext {
     public KW_COMMENT(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_COMMENT, 0);
     }
-    public string(): StringContext | null {
-        return this.getRuleContext(0, StringContext);
-    }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_WITH, 0);
     }
     public properties(): PropertiesContext | null {
         return this.getRuleContext(0, PropertiesContext);
+    }
+    public string(): StringContext | null {
+        return this.getRuleContext(0, StringContext);
     }
     public override enterRule(listener: TrinoSqlListener): void {
         if(listener.enterCreateTable) {
@@ -20600,6 +20601,7 @@ export class StartTransactionContext extends StatementContext {
     }
 }
 export class CreateTableAsSelectContext extends StatementContext {
+    public _comment?: StringContext;
     public constructor(ctx: StatementContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
@@ -20640,9 +20642,6 @@ export class CreateTableAsSelectContext extends StatementContext {
     public KW_COMMENT(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_COMMENT, 0);
     }
-    public string(): StringContext | null {
-        return this.getRuleContext(0, StringContext);
-    }
     public KW_WITH(): antlr.TerminalNode[];
     public KW_WITH(i: number): antlr.TerminalNode | null;
     public KW_WITH(i?: number): antlr.TerminalNode | null | antlr.TerminalNode[] {
@@ -20657,6 +20656,9 @@ export class CreateTableAsSelectContext extends StatementContext {
     }
     public KW_DATA(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_DATA, 0);
+    }
+    public string(): StringContext | null {
+        return this.getRuleContext(0, StringContext);
     }
     public KW_NO(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_NO, 0);
@@ -21264,6 +21266,7 @@ export class TruncateTableContext extends StatementContext {
     }
 }
 export class CreateMaterializedViewContext extends StatementContext {
+    public _comment?: StringContext;
     public constructor(ctx: StatementContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
@@ -21313,14 +21316,14 @@ export class CreateMaterializedViewContext extends StatementContext {
     public KW_COMMENT(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_COMMENT, 0);
     }
-    public string(): StringContext | null {
-        return this.getRuleContext(0, StringContext);
-    }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_WITH, 0);
     }
     public properties(): PropertiesContext | null {
         return this.getRuleContext(0, PropertiesContext);
+    }
+    public string(): StringContext | null {
+        return this.getRuleContext(0, StringContext);
     }
     public override enterRule(listener: TrinoSqlListener): void {
         if(listener.enterCreateMaterializedView) {
@@ -21379,6 +21382,7 @@ export class SetSessionContext extends StatementContext {
     }
 }
 export class CreateViewContext extends StatementContext {
+    public _comment?: StringContext;
     public constructor(ctx: StatementContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
@@ -21407,9 +21411,6 @@ export class CreateViewContext extends StatementContext {
     public KW_COMMENT(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_COMMENT, 0);
     }
-    public string(): StringContext | null {
-        return this.getRuleContext(0, StringContext);
-    }
     public KW_SECURITY(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_SECURITY, 0);
     }
@@ -21418,6 +21419,9 @@ export class CreateViewContext extends StatementContext {
     }
     public properties(): PropertiesContext | null {
         return this.getRuleContext(0, PropertiesContext);
+    }
+    public string(): StringContext | null {
+        return this.getRuleContext(0, StringContext);
     }
     public KW_DEFINER(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_DEFINER, 0);
@@ -22392,6 +22396,8 @@ export class TableElementContext extends antlr.ParserRuleContext {
 
 
 export class ColumnDefinitionContext extends antlr.ParserRuleContext {
+    public _colType?: TypeContext;
+    public _comment?: StringContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -22410,14 +22416,14 @@ export class ColumnDefinitionContext extends antlr.ParserRuleContext {
     public KW_COMMENT(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_COMMENT, 0);
     }
-    public string(): StringContext | null {
-        return this.getRuleContext(0, StringContext);
-    }
     public KW_WITH(): antlr.TerminalNode | null {
         return this.getToken(TrinoSqlParser.KW_WITH, 0);
     }
     public properties(): PropertiesContext | null {
         return this.getRuleContext(0, PropertiesContext);
+    }
+    public string(): StringContext | null {
+        return this.getRuleContext(0, StringContext);
     }
     public override get ruleIndex(): number {
         return TrinoSqlParser.RULE_columnDefinition;
@@ -23658,6 +23664,7 @@ export class SelectAllContext extends SelectItemContext {
     }
 }
 export class SelectSingleContext extends SelectItemContext {
+    public _alias?: IdentifierContext;
     public constructor(ctx: SelectItemContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
@@ -24453,6 +24460,7 @@ export class VariableDefinitionContext extends antlr.ParserRuleContext {
 
 
 export class AliasedRelationContext extends antlr.ParserRuleContext {
+    public _alias?: IdentifierContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }

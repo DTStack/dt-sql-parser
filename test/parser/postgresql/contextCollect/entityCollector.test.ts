@@ -2,8 +2,13 @@ import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
 import { PostgreSqlParserListener } from 'src/lib/postgresql/PostgreSqlParserListener';
+import {
+    AttrName,
+    isCommonEntityContext,
+    isFuncEntityContext,
+    StmtContextType,
+} from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
-import { StmtContextType } from 'src/parser/common/entityCollector';
 import {
     PostgreSQL,
     PostgreSqlEntityCollector,
@@ -23,7 +28,7 @@ describe('PostgreSql entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(10);
+        expect(splitListener.statementsContext.length).toBe(11);
     });
 
     test('create database', () => {
@@ -76,14 +81,15 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 122,
         });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
 
-        expect(tableCreateEntity.columns).toBeNull();
-
-        expect(tableCreateEntity.relatedEntities.length).toBe(2);
-        tableCreateEntity.relatedEntities.forEach((relatedEntity) => {
-            expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
-            expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
-        });
+            expect(tableCreateEntity.relatedEntities.length).toBe(2);
+            tableCreateEntity.relatedEntities.forEach((relatedEntity) => {
+                expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
+                expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
+            });
+        }
 
         expect(allEntities[1].text).toBe('films');
         expect(allEntities[1].belongStmt.rootStmt).toBe(allEntities[0].belongStmt);
@@ -138,15 +144,35 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 2,
         });
-
-        expect(tableCreateEntity.columns.length).toBe(2);
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns.length).toBe(2);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+            expect(tableCreateEntity.columns[0][AttrName.colType]).toEqual({
+                text: 'integer',
+                startIndex: 290,
+                endIndex: 296,
+                line: 10,
+                startColumn: 13,
+                endColumn: 20,
+            });
+            expect(tableCreateEntity.columns[1][AttrName.colType]).toEqual({
+                text: 'varchar(40)',
+                startIndex: 311,
+                endIndex: 321,
+                line: 11,
+                startColumn: 13,
+                endColumn: 24,
+            });
+        }
     });
 
     test('create foreign table by columns', () => {
@@ -181,15 +207,43 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 19,
         });
-
-        expect(tableCreateEntity.columns.length).toBe(6);
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns.length).toBe(6);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+            expect(tableCreateEntity.columns[0][AttrName.colType]).toEqual({
+                text: 'char(5)',
+                startIndex: 426,
+                endIndex: 432,
+                line: 16,
+                startColumn: 17,
+                endColumn: 24,
+            });
+            expect(tableCreateEntity.columns[1][AttrName.colType]).toEqual({
+                text: 'varchar(40)',
+                startIndex: 460,
+                endIndex: 470,
+                line: 17,
+                startColumn: 17,
+                endColumn: 28,
+            });
+            expect(tableCreateEntity.columns[3][AttrName.colType]).toEqual({
+                text: 'date',
+                startIndex: 532,
+                endIndex: 535,
+                line: 19,
+                startColumn: 17,
+                endColumn: 21,
+            });
+        }
     });
 
     test('create foreign table of partition', () => {
@@ -224,15 +278,16 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 21,
         });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
 
-        expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-
-        const relatedEntity = tableCreateEntity.relatedEntities[0];
-        expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
-        expect(relatedEntity.text).toBe('measurement');
+            const relatedEntity = tableCreateEntity.relatedEntities[0];
+            expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
+            expect(relatedEntity.text).toBe('measurement');
+        }
     });
 
     test('create view by select', () => {
@@ -265,15 +320,16 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 26,
         });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
 
-        expect(tableCreateEntity.columns).toBeNull();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-
-        const relatedEntity = tableCreateEntity.relatedEntities[0];
-        expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
-        expect(relatedEntity.text).toBe('films');
+            const relatedEntity = tableCreateEntity.relatedEntities[0];
+            expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
+            expect(relatedEntity.text).toBe('films');
+        }
     });
 
     test('create materialized view by columns', () => {
@@ -306,16 +362,20 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 17,
         });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns.length).toBe(2);
 
-        expect(tableCreateEntity.columns.length).toBe(2);
-
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+        }
     });
 
     test('select with clause', () => {
@@ -348,9 +408,10 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 36,
             endColumn: 67,
         });
-        expect(tableEntity1.columns).toBeNull();
-        expect(tableEntity1.relatedEntities).toBeNull();
-
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
+            expect(tableEntity1.relatedEntities).toBeNull();
+        }
         expect(tableEntity2.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity2.text).toBe('table_expression1');
         expect(tableEntity2.position).toEqual({
@@ -370,8 +431,10 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 111,
         });
-        expect(tableEntity2.columns).toBeNull();
-        expect(tableEntity2.relatedEntities).toBeNull();
+        if (isCommonEntityContext(tableEntity2)) {
+            expect(tableEntity2.columns).toBeUndefined();
+            expect(tableEntity2.relatedEntities).toBeNull();
+        }
     });
 
     test('insert into table', () => {
@@ -404,9 +467,10 @@ describe('PostgreSql entity collector tests', () => {
             startColumn: 1,
             endColumn: 55,
         });
-
-        expect(tableInsertEntity.columns).toBeNull();
-        expect(tableInsertEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(tableInsertEntity)) {
+            expect(tableInsertEntity.columns).toBeUndefined();
+            expect(tableInsertEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create function', () => {
@@ -441,8 +505,76 @@ describe('PostgreSql entity collector tests', () => {
             startIndex: 1359,
             startLine: 47,
         });
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.arguments).toBeNull();
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
+    });
 
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+    test('select has table alias with clause', () => {
+        const testingContext = splitListener.statementsContext[10];
+
+        const collectListener = new PostgreSqlEntityCollector(commonSql);
+        postgreSql.listen(collectListener as ParseTreeListener, testingContext);
+
+        const allEntities = collectListener.getEntities();
+        expect(allEntities.length).toBe(2);
+
+        const tableEntity1 = allEntities[0];
+        const tableEntity2 = allEntities[1];
+        expect(tableEntity1.entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntity1.text).toBe('table_expression');
+        expect(tableEntity1.position).toEqual({
+            startIndex: 1531,
+            endIndex: 1546,
+            line: 51,
+            startColumn: 51,
+            endColumn: 67,
+        });
+
+        expect(tableEntity1.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+        expect(tableEntity1.belongStmt.position).toEqual({
+            startIndex: 1516,
+            endIndex: 1546,
+            startLine: 51,
+            endLine: 51,
+            startColumn: 36,
+            endColumn: 67,
+        });
+        if (isCommonEntityContext(tableEntity1)) {
+            expect(tableEntity1.columns).toBeUndefined();
+            expect(tableEntity1.relatedEntities).toBeNull();
+        }
+        expect(tableEntity2.entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntity2.text).toBe('table_expression1');
+        expect(tableEntity2.position).toEqual({
+            startIndex: 1604,
+            endIndex: 1620,
+            line: 52,
+            startColumn: 55,
+            endColumn: 72,
+        });
+
+        expect(tableEntity2.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+        expect(tableEntity2.belongStmt.position).toEqual({
+            startIndex: 1481,
+            endIndex: 1667,
+            startLine: 51,
+            endLine: 52,
+            startColumn: 1,
+            endColumn: 119,
+        });
+        expect(tableEntity2[AttrName.alias]).toEqual({
+            text: 'tb_1',
+            startIndex: 1625,
+            endIndex: 1628,
+            line: 52,
+            startColumn: 76,
+            endColumn: 80,
+        });
+        if (isCommonEntityContext(tableEntity2)) {
+            expect(tableEntity2.columns).toBeUndefined();
+            expect(tableEntity2.relatedEntities).toBeNull();
+        }
     });
 });

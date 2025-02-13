@@ -2,10 +2,15 @@ import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
 import { HiveSqlParserListener } from 'src/lib/hive/HiveSqlParserListener';
+import {
+    AttrName,
+    isCommonEntityContext,
+    isFuncEntityContext,
+    StmtContextType,
+} from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
-import { HiveSQL, HiveEntityCollector } from 'src/parser/hive';
+import { HiveEntityCollector, HiveSQL } from 'src/parser/hive';
 import { HiveSqlSplitListener } from 'src/parser/hive/hiveSplitListener';
-import { StmtContextType } from 'src/parser/common/entityCollector';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
 
@@ -20,7 +25,7 @@ describe('Hive entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(18);
+        expect(splitListener.statementsContext.length).toBe(21);
     });
 
     test('create table by like', () => {
@@ -58,9 +63,11 @@ describe('Hive entity collector tests', () => {
             startColumn: 1,
         });
 
-        expect(tableCreateEntity.relatedEntities).not.toBeNull();
-        expect(tableCreateEntity.relatedEntities[0]).toEqual(tableLikeEntity);
-        expect(tableCreateEntity.columns).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities).not.toBeNull();
+            expect(tableCreateEntity.relatedEntities[0]).toEqual(tableLikeEntity);
+            expect(tableCreateEntity.columns).toBeUndefined();
+        }
 
         expect(tableLikeEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableLikeEntity.text).toBe('origin_table');
@@ -100,17 +107,21 @@ describe('Hive entity collector tests', () => {
             startIndex: 68,
             startLine: 3,
         });
-
-        expect(tableCreateEntity.relatedEntities).toBeNull();
-        expect(tableCreateEntity.columns).not.toBeNull();
-        expect(tableCreateEntity.columns.length).toBe(3);
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities).toBeNull();
+            expect(tableCreateEntity.columns).not.toBeNull();
+            expect(tableCreateEntity.columns.length).toBe(3);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+        }
     });
 
     test('create table by select', () => {
@@ -147,11 +158,11 @@ describe('Hive entity collector tests', () => {
             startIndex: 202,
             startLine: 5,
         });
-
-        expect(tableCreateEntity.relatedEntities).not.toBeNull();
-        expect(tableCreateEntity.relatedEntities[0]).toBe(tableFromEntity);
-        expect(tableCreateEntity.columns).toBeNull();
-
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities).not.toBeNull();
+            expect(tableCreateEntity.relatedEntities[0]).toBe(tableFromEntity);
+            expect(tableCreateEntity.columns).toBeUndefined();
+        }
         expect(tableFromEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableFromEntity.text).toBe('origin_table');
         expect(tableFromEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
@@ -189,11 +200,11 @@ describe('Hive entity collector tests', () => {
             startIndex: 283,
             startLine: 11,
         });
-
-        expect(viewCreateEntity.relatedEntities).not.toBeNull();
-        expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
-        expect(viewCreateEntity.columns).toBeNull();
-
+        if (isCommonEntityContext(viewCreateEntity)) {
+            expect(viewCreateEntity.relatedEntities).not.toBeNull();
+            expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
+            expect(viewCreateEntity.columns).toBeUndefined();
+        }
         expect(viewSelectEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(viewSelectEntity.text).toBe('mydb.sale_tbl');
         expect(viewSelectEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
@@ -232,17 +243,54 @@ describe('Hive entity collector tests', () => {
             startLine: 14,
         });
 
-        expect(viewCreateEntity.relatedEntities).not.toBeNull();
-        expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
-        expect(viewCreateEntity.columns).not.toBeNull();
-        expect(viewCreateEntity.columns.length).toBe(3);
-        viewCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(viewCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
+        expect(viewCreateEntity[AttrName.comment]).toEqual({
+            text: "'一个任务信息视图'",
+            endColumn: 19,
+            line: 19,
+            startColumn: 9,
+            startIndex: 470,
+            endIndex: 479,
         });
+        if (isCommonEntityContext(viewCreateEntity)) {
+            expect(viewCreateEntity.relatedEntities).not.toBeNull();
+            expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
+            expect(viewCreateEntity.columns).not.toBeNull();
+            expect(viewCreateEntity.columns.length).toBe(3);
+            viewCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(viewCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+            expect(viewCreateEntity.columns[0][AttrName.comment]).toEqual({
+                text: "'任务id'",
+                endColumn: 26,
+                line: 15,
+                startColumn: 20,
+                startIndex: 390,
+                endIndex: 395,
+            });
+            expect(viewCreateEntity.columns[1][AttrName.comment]).toEqual({
+                text: "'任务名称'",
+                endColumn: 28,
+                line: 16,
+                startColumn: 22,
+                startIndex: 419,
+                endIndex: 424,
+            });
+            expect(viewCreateEntity.columns[2][AttrName.comment]).toEqual({
+                text: "'任务运行时长'",
+                endColumn: 33,
+                line: 17,
+                startColumn: 25,
+                startIndex: 451,
+                endIndex: 458,
+            });
+        }
 
         expect(viewSelectEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(viewSelectEntity.text).toBe('task_tbl');
@@ -281,11 +329,19 @@ describe('Hive entity collector tests', () => {
             startIndex: 600,
             startLine: 27,
         });
-
-        expect(viewCreateEntity.relatedEntities).not.toBeNull();
-        expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
-        expect(viewCreateEntity.columns).toBeNull();
-
+        expect(viewCreateEntity[AttrName.comment]).toEqual({
+            text: "'一个测试视图'",
+            endColumn: 17,
+            line: 29,
+            startColumn: 9,
+            startIndex: 677,
+            endIndex: 684,
+        });
+        if (isCommonEntityContext(viewCreateEntity)) {
+            expect(viewCreateEntity.relatedEntities).not.toBeNull();
+            expect(viewCreateEntity.relatedEntities[0]).toBe(viewSelectEntity);
+            expect(viewCreateEntity.columns).toBeUndefined();
+        }
         expect(viewSelectEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(viewSelectEntity.text).toBe('mydb.sale_tbl');
         expect(viewSelectEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
@@ -322,9 +378,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 719,
             startLine: 32,
         });
-
-        expect(selectTableEntity.columns).toBeNull();
-        expect(selectTableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity.columns).toBeUndefined();
+            expect(selectTableEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('select table with join', () => {
@@ -359,14 +416,17 @@ describe('Hive entity collector tests', () => {
             startIndex: 757,
             startLine: 34,
         });
-
-        expect(selectTableEntity.columns).toBeNull();
-        expect(selectTableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity.columns).toBeUndefined();
+            expect(selectTableEntity.relatedEntities).toBeNull();
+        }
 
         expect(selectTableEntity.belongStmt).toEqual(joinTableEntity.belongStmt);
         expect(joinTableEntity.text).toBe('b');
-        expect(joinTableEntity.columns).toBeNull();
-        expect(joinTableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(joinTableEntity)) {
+            expect(joinTableEntity.columns).toBeUndefined();
+            expect(joinTableEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('from select table', () => {
@@ -400,9 +460,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 833,
             startLine: 36,
         });
-
-        expect(selectTableEntity.columns).toBeNull();
-        expect(selectTableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity?.columns)?.toBeUndefined();
+            expect(selectTableEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('from select table with join', () => {
@@ -437,14 +498,16 @@ describe('Hive entity collector tests', () => {
             startIndex: 871,
             startLine: 38,
         });
-
-        expect(selectTableEntity.columns).toBeNull();
-        expect(selectTableEntity.relatedEntities).toBeNull();
-
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity.columns).toBeUndefined();
+            expect(selectTableEntity.relatedEntities).toBeNull();
+        }
         expect(selectTableEntity.belongStmt).toEqual(joinTableEntity.belongStmt);
         expect(joinTableEntity.text).toBe('b');
-        expect(joinTableEntity.columns).toBeNull();
-        expect(joinTableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(joinTableEntity)) {
+            expect(joinTableEntity.columns).toBeUndefined();
+            expect(joinTableEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('insert table with values', () => {
@@ -478,9 +541,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 947,
             startLine: 40,
         });
-
-        expect(insertTableEntity.columns).toBeNull();
-        expect(insertTableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(insertTableEntity)) {
+            expect(insertTableEntity.columns).toBeUndefined();
+            expect(insertTableEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('insert table use select', () => {
@@ -515,9 +579,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 1049,
             startLine: 43,
         });
-
-        expect(insertTableEntity.columns).toBeNull();
-        expect(insertTableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(insertTableEntity)) {
+            expect(insertTableEntity.columns).toBeUndefined();
+            expect(insertTableEntity.relatedEntities).toBeNull();
+        }
 
         expect(fromTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
         expect(fromTableEntity.text).toBe('source_table');
@@ -557,9 +622,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 1187,
             startLine: 48,
         });
-
-        expect(insertTableEntity.columns).toBeNull();
-        expect(insertTableEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(insertTableEntity)) {
+            expect(insertTableEntity.columns).toBeUndefined();
+            expect(insertTableEntity.relatedEntities).toBeNull();
+        }
 
         expect(fromTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
         expect(fromTableEntity.text).toBe('page_view_stg');
@@ -597,9 +663,10 @@ describe('Hive entity collector tests', () => {
             startIndex: 1374,
             startLine: 52,
         });
-
-        expect(dbEntity.columns).toBeNull();
-        expect(dbEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
+            expect(dbEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create remote db', () => {
@@ -634,8 +701,10 @@ describe('Hive entity collector tests', () => {
             startLine: 54,
         });
 
-        expect(dbEntity.columns).toBeNull();
-        expect(dbEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
+            expect(dbEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('show locks db', () => {
@@ -670,8 +739,10 @@ describe('Hive entity collector tests', () => {
             startLine: 56,
         });
 
-        expect(dbEntity.columns).toBeNull();
-        expect(dbEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
+            expect(dbEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create function', () => {
@@ -708,8 +779,10 @@ describe('Hive entity collector tests', () => {
             startLine: 58,
         });
 
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.arguments).toBeNull();
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('create temporary function', () => {
@@ -745,8 +818,205 @@ describe('Hive entity collector tests', () => {
             startIndex: 1537,
             startLine: 60,
         });
+        if (isFuncEntityContext(functionEntity)) {
+            expect(functionEntity.arguments).toBeNull();
+            expect(functionEntity.relatedEntities).toBeNull();
+        }
+    });
+    test('create table by columns with attributes', () => {
+        const columnCreateTableContext = splitListener.statementsContext[18];
 
-        expect(functionEntity.columns).toBeNull();
-        expect(functionEntity.relatedEntities).toBeNull();
+        const collectListener = new HiveEntityCollector(commonSql);
+        hiveSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const tableCreateEntity = allEntities[0];
+
+        expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(tableCreateEntity.text).toBe('test_change');
+        expect(tableCreateEntity.position).toEqual({
+            endColumn: 25,
+            endIndex: 1604,
+            line: 62,
+            startColumn: 14,
+            startIndex: 1594,
+        });
+
+        expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_TABLE_STMT
+        );
+        expect(tableCreateEntity.belongStmt.position).toEqual({
+            endColumn: 104,
+            endIndex: 1683,
+            endLine: 62,
+            startColumn: 1,
+            startIndex: 1581,
+            startLine: 62,
+        });
+        expect(tableCreateEntity[AttrName.comment]).toEqual({
+            text: "'table test comment'",
+            endColumn: 104,
+            line: 62,
+            startColumn: 84,
+            startIndex: 1664,
+            endIndex: 1683,
+        });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities).toBeNull();
+            expect(tableCreateEntity.columns).not.toBeNull();
+            expect(tableCreateEntity.columns.length).toBe(3);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+            expect(tableCreateEntity.columns[0].text).toBe('a');
+            expect(tableCreateEntity.columns[0][AttrName.colType]).toEqual({
+                text: 'int',
+                startIndex: 1609,
+                endIndex: 1611,
+                line: 62,
+                startColumn: 29,
+                endColumn: 32,
+            });
+            expect(tableCreateEntity.columns[1].text).toBe('b');
+            expect(tableCreateEntity.columns[1][AttrName.colType]).toEqual({
+                text: 'varchar(255)',
+                startIndex: 1616,
+                endIndex: 1627,
+                line: 62,
+                startColumn: 36,
+                endColumn: 48,
+            });
+            expect(tableCreateEntity.columns[1][AttrName.comment]).toEqual({
+                text: "'column 2'",
+                startIndex: 1637,
+                endIndex: 1646,
+                line: 62,
+                startColumn: 57,
+                endColumn: 67,
+            });
+            expect(tableCreateEntity.columns[2].text).toBe('c');
+            expect(tableCreateEntity.columns[2][AttrName.colType]).toEqual({
+                text: 'int',
+                startIndex: 1651,
+                endIndex: 1653,
+                line: 62,
+                startColumn: 71,
+                endColumn: 74,
+            });
+        }
+    });
+    test('create db with comment', () => {
+        const columnCreateTableContext = splitListener.statementsContext[19];
+
+        const collectListener = new HiveEntityCollector(commonSql);
+        hiveSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const dbEntity = allEntities[0];
+
+        expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
+        expect(dbEntity.text).toBe('testdb');
+        expect(dbEntity.position).toEqual({
+            endColumn: 23,
+            endIndex: 1708,
+            line: 64,
+            startColumn: 17,
+            startIndex: 1703,
+        });
+
+        expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
+        expect(dbEntity.belongStmt.position).toEqual({
+            endColumn: 69,
+            endIndex: 1754,
+            endLine: 64,
+            startColumn: 1,
+            startIndex: 1687,
+            startLine: 64,
+        });
+        expect(dbEntity[AttrName.comment]).toEqual({
+            text: "'test database'",
+            endColumn: 47,
+            endIndex: 1732,
+            line: 64,
+            startColumn: 32,
+            startIndex: 1718,
+        });
+        if (isCommonEntityContext(dbEntity)) {
+            expect(dbEntity.columns).toBeUndefined();
+            expect(dbEntity.relatedEntities).toBeNull();
+        }
+    });
+    test('select table with join with alias', () => {
+        const columnCreateTableContext = splitListener.statementsContext[20];
+
+        const collectListener = new HiveEntityCollector(commonSql);
+        hiveSql.listen(collectListener as ParseTreeListener, columnCreateTableContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(2);
+
+        const selectTableEntity = allEntities[0];
+        const joinTableEntity = allEntities[1];
+
+        expect(selectTableEntity.entityContextType).toBe(EntityContextType.TABLE);
+        expect(selectTableEntity.text).toBe('table_busi');
+        expect(selectTableEntity.position).toEqual({
+            endColumn: 27,
+            endIndex: 1783,
+            line: 66,
+            startColumn: 17,
+            startIndex: 1774,
+        });
+
+        expect(selectTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+        expect(selectTableEntity.belongStmt.position).toEqual({
+            endColumn: 97,
+            endIndex: 1853,
+            endLine: 66,
+            startColumn: 1,
+            startIndex: 1758,
+            startLine: 66,
+        });
+        expect(selectTableEntity[AttrName.alias]).toEqual({
+            text: 'a',
+            endColumn: 29,
+            endIndex: 1785,
+            line: 66,
+            startColumn: 28,
+            startIndex: 1785,
+        });
+        if (isCommonEntityContext(selectTableEntity)) {
+            expect(selectTableEntity.columns).toBeUndefined();
+            expect(selectTableEntity.relatedEntities).toBeNull();
+        }
+
+        expect(selectTableEntity.belongStmt).toEqual(joinTableEntity.belongStmt);
+        expect(joinTableEntity.text).toBe('table_issue');
+        expect(joinTableEntity[AttrName.alias]).toEqual({
+            text: 'b',
+            endColumn: 48,
+            endIndex: 1804,
+            line: 66,
+            startColumn: 47,
+            startIndex: 1804,
+        });
+        if (isCommonEntityContext(joinTableEntity)) {
+            expect(joinTableEntity.columns).toBeUndefined();
+            expect(joinTableEntity.relatedEntities).toBeNull();
+        }
     });
 });

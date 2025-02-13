@@ -1,12 +1,15 @@
-import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
+
 import { MySqlLexer } from '../../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext } from '../../lib/mysql/MySqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
-import { MysqlSplitListener } from './mysqlSplitListener';
+import { ErrorListener } from '../common/parseErrorListener';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { MySqlEntityCollector } from './mysqlEntityCollector';
+import { MysqlErrorListener } from './mysqlErrorListener';
+import { MysqlSplitListener } from './mysqlSplitListener';
 
 export { MySqlEntityCollector, MysqlSplitListener };
 
@@ -36,6 +39,10 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         return new MysqlSplitListener();
     }
 
+    protected createErrorListener(_errorListener: ErrorListener): MysqlErrorListener {
+        const parserContext = this;
+        return new MysqlErrorListener(_errorListener, parserContext, this.preferredRules);
+    }
     protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
         return new MySqlEntityCollector(input, allTokens, caretTokenIndex);
     }

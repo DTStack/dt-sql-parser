@@ -1,10 +1,14 @@
+import { ParseTreeListener } from 'antlr4ng';
 import fs from 'fs';
 import path from 'path';
-import { TrinoSQL, TrinoSqlSplitListener, TrinoEntityCollector } from 'src/parser/trino';
-import { ParseTreeListener } from 'antlr4ng';
 import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
+import {
+    AttrName,
+    isCommonEntityContext,
+    StmtContextType,
+} from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
-import { StmtContextType } from 'src/parser/common/entityCollector';
+import { TrinoEntityCollector, TrinoSQL, TrinoSqlSplitListener } from 'src/parser/trino';
 
 const commonSql = fs.readFileSync(path.join(__dirname, 'fixtures', 'common.sql'), 'utf-8');
 
@@ -19,7 +23,7 @@ describe('Trino entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(9);
+        expect(splitListener.statementsContext.length).toBe(11);
     });
 
     test('create table like', () => {
@@ -55,15 +59,16 @@ describe('Trino entity collector tests', () => {
             startColumn: 1,
             endColumn: 70,
         });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            const beLikedEntity = allEntities[1];
 
-        const beLikedEntity = allEntities[1];
-
-        expect(tableCreateEntity.relatedEntities[0]).toBe(beLikedEntity);
-        expect(beLikedEntity.text).toBe('like_table');
-        expect(beLikedEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(beLikedEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(beLikedEntity);
+            expect(beLikedEntity.text).toBe('like_table');
+            expect(beLikedEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(beLikedEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+        }
     });
 
     test('create table as select', () => {
@@ -84,21 +89,25 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns.length).toBe(2);
+            tableCreateEntity.columns.forEach((columEntity) => {
+                expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
+                expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
+                expect(columEntity.text).toBe(
+                    commonSql.slice(
+                        columEntity.position.startIndex,
+                        columEntity.position.endIndex + 1
+                    )
+                );
+            });
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
 
-        expect(tableCreateEntity.columns.length).toBe(2);
-        tableCreateEntity.columns.forEach((columEntity) => {
-            expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
-            expect(columEntity.belongStmt).toBe(tableCreateEntity.belongStmt);
-            expect(columEntity.text).toBe(
-                commonSql.slice(columEntity.position.startIndex, columEntity.position.endIndex + 1)
-            );
-        });
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-        expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
-
-        expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
-        expect(originTableEntity.text).toBe('t');
-        expect(originTableEntity.belongStmt.rootStmt).toBe(tableCreateEntity.belongStmt);
+            expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
+            expect(originTableEntity.text).toBe('t');
+            expect(originTableEntity.belongStmt.rootStmt).toBe(tableCreateEntity.belongStmt);
+        }
     });
 
     test('create view as select', () => {
@@ -117,10 +126,19 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(tableCreateEntity.text).toBe('a');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-
-        expect(tableCreateEntity.columns).toBeNull();
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-        expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        expect(tableCreateEntity[AttrName.comment]).toEqual({
+            text: "'This is a view comment'",
+            startIndex: 139,
+            endIndex: 162,
+            line: 5,
+            startColumn: 23,
+            endColumn: 47,
+        });
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        }
 
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(originTableEntity.text).toBe('t');
@@ -143,10 +161,20 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(tableCreateEntity.text).toBe('a');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
+        expect(tableCreateEntity[AttrName.comment]).toEqual({
+            text: "'This is an MATERIALIZED view comment'",
+            startIndex: 220,
+            endIndex: 257,
+            line: 7,
+            startColumn: 36,
+            endColumn: 74,
+        });
 
-        expect(tableCreateEntity.columns).toBeNull();
-        expect(tableCreateEntity.relatedEntities.length).toBe(1);
-        expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+        }
 
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(originTableEntity.text).toBe('t');
@@ -169,8 +197,10 @@ describe('Trino entity collector tests', () => {
         expect(tableCreateEntity.text).toBe('table1');
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
 
-        expect(tableCreateEntity.columns).toBeNull();
-        expect(tableCreateEntity.relatedEntities).toBeNull();
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns).toBeUndefined();
+            expect(tableCreateEntity.relatedEntities).toBeNull();
+        }
     });
 
     test('insert into table as select', () => {
@@ -245,5 +275,93 @@ describe('Trino entity collector tests', () => {
         expect(schemaEntity.entityContextType).toBe(EntityContextType.DATABASE);
         expect(schemaEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
         expect(schemaEntity.text).toBe('information_schema');
+    });
+
+    test('select using alias', () => {
+        const testingContext = splitListener.statementsContext[9];
+
+        const collectListener = new TrinoEntityCollector(commonSql);
+        trino.listen(collectListener as ParseTreeListener, testingContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const tableEntity = allEntities[0];
+
+        expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntity.text).toBe('tb');
+        expect(tableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+        expect(tableEntity[AttrName.alias]).toEqual({
+            text: 'tb_alias',
+            startIndex: 512,
+            endIndex: 519,
+            line: 19,
+            startColumn: 44,
+            endColumn: 52,
+        });
+
+        if (isCommonEntityContext(tableEntity)) {
+            expect(tableEntity.columns).toBeUndefined();
+            expect(tableEntity.relatedEntities).toBeNull();
+        }
+    });
+
+    test('create table using alias', () => {
+        const testingContext = splitListener.statementsContext[10];
+
+        const collectListener = new TrinoEntityCollector(commonSql);
+        trino.listen(collectListener as ParseTreeListener, testingContext);
+
+        const allEntities = collectListener.getEntities();
+
+        expect(allEntities.length).toBe(1);
+
+        const tableCreateEntity = allEntities[0];
+
+        expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(tableCreateEntity.text).toBe('orders');
+        expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
+            StmtContextType.CREATE_TABLE_STMT
+        );
+        expect(tableCreateEntity[AttrName.comment]).toEqual({
+            text: "'This is the orders table'",
+            startIndex: 619,
+            endIndex: 644,
+            line: 25,
+            startColumn: 9,
+            endColumn: 35,
+        });
+
+        if (isCommonEntityContext(tableCreateEntity)) {
+            expect(tableCreateEntity.columns?.length).toBe(2);
+            expect(tableCreateEntity.relatedEntities).toBeNull();
+            expect(tableCreateEntity.columns[0].text).toBe('orderkey');
+            expect(tableCreateEntity.columns[1].text).toBe('orderstatus');
+            expect(tableCreateEntity.columns[0][AttrName.colType]).toEqual({
+                text: 'bigint',
+                startIndex: 556,
+                endIndex: 561,
+                line: 22,
+                startColumn: 12,
+                endColumn: 18,
+            });
+            expect(tableCreateEntity.columns[1][AttrName.colType]).toEqual({
+                text: 'varchar',
+                startIndex: 578,
+                endIndex: 584,
+                line: 23,
+                startColumn: 15,
+                endColumn: 22,
+            });
+            expect(tableCreateEntity.columns[1][AttrName.comment]).toEqual({
+                text: "'order status'",
+                startIndex: 594,
+                endIndex: 607,
+                line: 23,
+                startColumn: 31,
+                endColumn: 45,
+            });
+        }
     });
 });

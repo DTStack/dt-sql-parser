@@ -84,11 +84,11 @@ statement
     | KW_ALTER KW_SCHEMA schemaRef KW_RENAME KW_TO schemaNameCreate              # renameSchema
     | KW_ALTER KW_SCHEMA schemaRef KW_SET KW_AUTHORIZATION principal             # setSchemaAuthorization
     | KW_CREATE (KW_OR KW_REPLACE)? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tableNameCreate columnListCreate? (
-        KW_COMMENT string
+        KW_COMMENT comment=string
     )? (KW_WITH properties)? KW_AS (rootQuery | '(' rootQuery ')') (KW_WITH (KW_NO)? KW_DATA)? # createTableAsSelect
     | KW_CREATE (KW_OR KW_REPLACE)? KW_TABLE (KW_IF KW_NOT KW_EXISTS)? tableNameCreate '(' tableElement (
         ',' tableElement
-    )* ')' (KW_COMMENT string)? (KW_WITH properties)?                                                                                         # createTable
+    )* ')' (KW_COMMENT comment=string)? (KW_WITH properties)?                                                                                 # createTable
     | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? tableRef                                                                                            # dropTable
     | KW_INSERT KW_INTO tableRef columnList? rootQuery                                                                                        # insertInto
     | KW_DELETE KW_FROM tableRef (KW_WHERE booleanExpression)?                                                                                # delete
@@ -110,8 +110,8 @@ statement
     | KW_ANALYZE tableRef (KW_WITH properties)? # analyze
     | KW_CREATE (KW_OR KW_REPLACE)? KW_MATERIALIZED KW_VIEW (KW_IF KW_NOT KW_EXISTS)? viewNameCreate (
         KW_GRACE KW_PERIOD interval
-    )? (KW_COMMENT string)? (KW_WITH properties)? KW_AS rootQuery # createMaterializedView
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_VIEW viewNameCreate (KW_COMMENT string)? (
+    )? (KW_COMMENT comment=string)? (KW_WITH properties)? KW_AS rootQuery # createMaterializedView
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_VIEW viewNameCreate (KW_COMMENT comment=string)? (
         KW_SECURITY (KW_DEFINER | KW_INVOKER)
     )? (KW_WITH properties)? KW_AS rootQuery                                                             # createView
     | KW_REFRESH KW_MATERIALIZED KW_VIEW viewRef                                                         # refreshMaterializedView
@@ -214,7 +214,7 @@ tableElement
     ;
 
 columnDefinition
-    : columnNameCreate type (KW_NOT KW_NULL)? (KW_COMMENT string)? (KW_WITH properties)?
+    : columnNameCreate colType=type (KW_NOT KW_NULL)? (KW_COMMENT comment=string)? (KW_WITH properties)?
     ;
 
 likeClause
@@ -330,7 +330,7 @@ setQuantifier
     ;
 
 selectItem
-    : (columnRef | expression) (KW_AS? identifier)?         # selectSingle
+    : (columnRef | expression) (KW_AS? alias=identifier)?   # selectSingle
     | primaryExpression '.' ASTERISK (KW_AS columnAliases)? # selectAll
     | ASTERISK                                              # selectAll
     ;
@@ -425,7 +425,7 @@ variableDefinition
     ;
 
 aliasedRelation
-    : relationPrimary (KW_AS? identifier columnAliases?)?
+    : relationPrimary (KW_AS? alias=identifier columnAliases?)?
     ;
 
 columnListCreate

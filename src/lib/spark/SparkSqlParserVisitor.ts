@@ -270,7 +270,7 @@ import { ColDefinitionDescriptorWithPositionContext } from "./SparkSqlParser.js"
 import { DefaultExpressionContext } from "./SparkSqlParser.js";
 import { VariableDefaultExpressionContext } from "./SparkSqlParser.js";
 import { ColTypeListContext } from "./SparkSqlParser.js";
-import { ColTypeContext } from "./SparkSqlParser.js";
+import { ColumnTypeContext } from "./SparkSqlParser.js";
 import { CreateOrReplaceTableColTypeListContext } from "./SparkSqlParser.js";
 import { CreateOrReplaceTableColTypeContext } from "./SparkSqlParser.js";
 import { ColDefinitionOptionContext } from "./SparkSqlParser.js";
@@ -297,7 +297,7 @@ import { BackQuotedIdentifierContext } from "./SparkSqlParser.js";
 import { NumberContext } from "./SparkSqlParser.js";
 import { AlterColumnActionContext } from "./SparkSqlParser.js";
 import { StringLitContext } from "./SparkSqlParser.js";
-import { CommentContext } from "./SparkSqlParser.js";
+import { CommentStrContext } from "./SparkSqlParser.js";
 import { VersionContext } from "./SparkSqlParser.js";
 import { AnsiNonReservedContext } from "./SparkSqlParser.js";
 import { StrictNonReservedContext } from "./SparkSqlParser.js";
@@ -1982,11 +1982,11 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitColTypeList?: (ctx: ColTypeListContext) => Result;
     /**
-     * Visit a parse tree produced by `SparkSqlParser.colType`.
+     * Visit a parse tree produced by `SparkSqlParser.columnType`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitColType?: (ctx: ColTypeContext) => Result;
+    visitColumnType?: (ctx: ColumnTypeContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.createOrReplaceTableColTypeList`.
      * @param ctx the parse tree
@@ -2144,11 +2144,11 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitStringLit?: (ctx: StringLitContext) => Result;
     /**
-     * Visit a parse tree produced by `SparkSqlParser.comment`.
+     * Visit a parse tree produced by `SparkSqlParser.commentStr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitComment?: (ctx: CommentContext) => Result;
+    visitCommentStr?: (ctx: CommentStrContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.version`.
      * @param ctx the parse tree
