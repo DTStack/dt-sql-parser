@@ -526,9 +526,7 @@ reloption_elem
     ;
 
 partitionboundspec
-    : KW_FOR KW_VALUES KW_WITH OPEN_PAREN nonreservedword Integral (
-        COMMA (nonreservedword Integral)
-    )* CLOSE_PAREN
+    : KW_FOR KW_VALUES KW_WITH OPEN_PAREN KW_MODULUS Integral COMMA KW_REMAINDER Integral CLOSE_PAREN
     | KW_FOR KW_VALUES KW_IN execute_param_clause
     | KW_FOR KW_VALUES KW_FROM execute_param_clause KW_TO execute_param_clause
     | KW_DEFAULT
