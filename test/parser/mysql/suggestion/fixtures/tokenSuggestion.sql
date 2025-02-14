@@ -14,3 +14,7 @@ LOAD
 ;
 SHOW 
 ;
+
+CREATE TABLE tb (id 
+ 
+);
