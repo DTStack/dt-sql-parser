@@ -515,11 +515,7 @@ tableReference
 tablePrimary
     : KW_TABLE? tablePath systemTimePeriod?
     | viewPath systemTimePeriod?
-    | KW_LATERAL KW_TABLE LR_BRACKET (
-        (functionNameWithParams LR_BRACKET functionParam (COMMA functionParam)* RR_BRACKET)
-        | reservedKeywordsNoParamsUsedAsFuncName
-        | functionNameAndParams
-    ) RR_BRACKET
+    | KW_LATERAL KW_TABLE LR_BRACKET functionCallExpression RR_BRACKET
     | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
@@ -751,6 +747,12 @@ valueExpression
     | left=valueExpression comparisonOperator right=valueExpression                                            # comparison
     ;
 
+functionCallExpression
+    : reservedKeywordsNoParamsUsedAsFuncName
+    | functionNameAndParams
+    | functionNameWithParams LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET
+    ;
+
 primaryExpression
     : KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                  # searchedCase
     | KW_CASE value=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END # simpleCase
@@ -764,13 +766,7 @@ primaryExpression
     | uid DOT ASTERISK_SIGN                                                              # star
     // | LR_BRACKET namedExpression (COMMA namedExpression)+ RR_BRACKET                                           #rowConstructor
     | LR_BRACKET queryStatement RR_BRACKET # subqueryExpression
-    | (
-        reservedKeywordsNoParamsUsedAsFuncName
-        | functionNameAndParams
-        | (
-            functionNameWithParams LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET
-        )
-    ) # functionCall
+    | functionCallExpression               # functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript

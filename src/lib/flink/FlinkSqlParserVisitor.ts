@@ -149,6 +149,7 @@ import { ValueExpressionDefaultContext } from "./FlinkSqlParser.js";
 import { ComparisonContext } from "./FlinkSqlParser.js";
 import { ArithmeticBinaryContext } from "./FlinkSqlParser.js";
 import { ArithmeticUnaryContext } from "./FlinkSqlParser.js";
+import { FunctionCallExpressionContext } from "./FlinkSqlParser.js";
 import { DereferenceContext } from "./FlinkSqlParser.js";
 import { SimpleCaseContext } from "./FlinkSqlParser.js";
 import { ColumnReferenceContext } from "./FlinkSqlParser.js";
@@ -1090,6 +1091,12 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitArithmeticUnary?: (ctx: ArithmeticUnaryContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.functionCallExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFunctionCallExpression?: (ctx: FunctionCallExpressionContext) => Result;
     /**
      * Visit a parse tree produced by the `dereference`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.

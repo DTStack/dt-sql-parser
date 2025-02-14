@@ -31,9 +31,9 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         FlinkSqlParser.RULE_viewPath, // view name path
         FlinkSqlParser.RULE_viewPathCreate, // viewName that will be created
         FlinkSqlParser.RULE_functionName, // functionName
-        FlinkSqlParser.RULE_functionNameWithParams, //
-        FlinkSqlParser.RULE_reservedKeywordsFollowParamsUsedAsFuncName,
-        FlinkSqlParser.RULE_reservedKeywordsNoParamsUsedAsFuncName,
+        FlinkSqlParser.RULE_functionNameWithParams, // functionName
+        FlinkSqlParser.RULE_reservedKeywordsFollowParamsUsedAsFuncName, // functionName
+        FlinkSqlParser.RULE_reservedKeywordsNoParamsUsedAsFuncName, // functionName
         FlinkSqlParser.RULE_functionNameCreate, // functionName that will be created
         FlinkSqlParser.RULE_columnName,
         FlinkSqlParser.RULE_columnNameCreate,
