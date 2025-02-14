@@ -31,6 +31,9 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         FlinkSqlParser.RULE_viewPath, // view name path
         FlinkSqlParser.RULE_viewPathCreate, // viewName that will be created
         FlinkSqlParser.RULE_functionName, // functionName
+        FlinkSqlParser.RULE_functionNameWithParams, //
+        FlinkSqlParser.RULE_reservedKeywordsFollowParamsUsedAsFuncName,
+        FlinkSqlParser.RULE_reservedKeywordsNoParamsUsedAsFuncName,
         FlinkSqlParser.RULE_functionNameCreate, // functionName that will be created
         FlinkSqlParser.RULE_columnName,
         FlinkSqlParser.RULE_columnNameCreate,
@@ -64,7 +67,6 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                 startTokenIndex,
                 caretTokenIndex + tokenIndexOffset + 1
             );
-
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
                 case FlinkSqlParser.RULE_catalogPath: {
@@ -95,7 +97,10 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                     syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
-                case FlinkSqlParser.RULE_functionName: {
+                case FlinkSqlParser.RULE_functionName:
+                case FlinkSqlParser.RULE_functionNameWithParams:
+                case FlinkSqlParser.RULE_reservedKeywordsFollowParamsUsedAsFuncName:
+                case FlinkSqlParser.RULE_reservedKeywordsNoParamsUsedAsFuncName: {
                     syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }

@@ -39,4 +39,6 @@ select
       wid is not null
       and wid <> 'None'
       and date_format (click_time, 'yyyy-MM-dd') >= to_date ('2024-12-04', 'yyyy-MM-dd');
+
+SELECT LOCALTIMESTAMP,CURRENT_TIME,CURRENT_DATE,CURRENT_TIMESTAMP,LOCALTIME, DATE '2019-12-23 09:00:00' as time1,TIMESTAMP '2019-12-23 09:00:00' as time2,INTERVAL '2019-12-23 09:00:00' YEAR TO MONTH as time3 from MyTable;
   
