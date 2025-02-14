@@ -487,8 +487,8 @@ selectClause
 
 projectItemDefinition
     : overWindowItem
-    | columnName (KW_AS? expression)?
     | expression (KW_AS? columnName)?
+    | columnName (KW_AS? expression)?
     ;
 
 overWindowItem
@@ -515,7 +515,7 @@ tableReference
 tablePrimary
     : KW_TABLE? tablePath systemTimePeriod?
     | viewPath systemTimePeriod?
-    | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET functionParam (COMMA functionParam)* RR_BRACKET RR_BRACKET
+    | KW_LATERAL KW_TABLE LR_BRACKET functionCallExpression RR_BRACKET
     | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
@@ -747,6 +747,12 @@ valueExpression
     | left=valueExpression comparisonOperator right=valueExpression                                            # comparison
     ;
 
+functionCallExpression
+    : reservedKeywordsNoParamsUsedAsFuncName
+    | functionNameAndParams
+    | functionNameWithParams LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET
+    ;
+
 primaryExpression
     : KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                  # searchedCase
     | KW_CASE value=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END # simpleCase
@@ -759,15 +765,14 @@ primaryExpression
     | ASTERISK_SIGN                                                                      # star
     | uid DOT ASTERISK_SIGN                                                              # star
     // | LR_BRACKET namedExpression (COMMA namedExpression)+ RR_BRACKET                                           #rowConstructor
-    | LR_BRACKET queryStatement RR_BRACKET                                                      # subqueryExpression
-    | functionName LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET # functionCall
+    | LR_BRACKET queryStatement RR_BRACKET # subqueryExpression
+    | functionCallExpression               # functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
     | identifier                                                          # columnReference
     | dereferenceDefinition                                               # dereference
     | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression
-    | KW_CURRENT_TIMESTAMP                                                # dateFunctionExpression
     // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract
     // | (SUBSTR | SUBSTRING) LR_BRACKET str=valueExpression (KW_FROM | COMMA) pos=valueExpression
     //   ((KW_FOR | COMMA) len=valueExpression)? RR_BRACKET                                                   #substring
@@ -782,6 +787,25 @@ functionNameCreate
     ;
 
 functionName
+    : reservedKeywordsUsedAsFuncName
+    | reservedKeywordsNoParamsUsedAsFuncName
+    | reservedKeywordsFollowParamsUsedAsFuncName
+    | uid
+    ;
+
+/**
+* Built-in function name that is following with params directly without parentheses
+* Reference Link:https://nightlies.apache.org/flink/flink-docs-release-1.16/zh/docs/dev/table/functions/systemfunctions/#%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0
+*/
+functionNameAndParams
+    : reservedKeywordsFollowParamsUsedAsFuncName STRING_LITERAL
+    | timeIntervalExpression
+    ;
+
+/**
+* Function name that is need to follow with parentheses and params
+*/
+functionNameWithParams
     : reservedKeywordsUsedAsFuncName
     | uid
     ;
@@ -1077,6 +1101,23 @@ reservedKeywordsUsedAsFuncParam
     | ASTERISK_SIGN
     ;
 
+/**
+* Built-in function name without parentheses and params
+*/
+reservedKeywordsNoParamsUsedAsFuncName
+    : KW_LOCALTIME
+    | KW_LOCALTIMESTAMP
+    | KW_CURRENT_TIME
+    | KW_CURRENT_DATE
+    | KW_CURRENT_TIMESTAMP
+    ;
+
+reservedKeywordsFollowParamsUsedAsFuncName
+    : KW_DATE
+    | KW_TIME
+    | KW_TIMESTAMP
+    ;
+
 reservedKeywordsUsedAsFuncName
     : KW_ABS
     | KW_ARRAY
@@ -1089,10 +1130,6 @@ reservedKeywordsUsedAsFuncName
     | KW_COLLECT
     | KW_COUNT
     | KW_CUME_DIST
-    | KW_CURRENT_DATE
-    | KW_CURRENT_TIME
-    | KW_CURRENT_TIMESTAMP
-    | KW_DATE
     | KW_DAYOFWEEK
     | KW_DAYOFYEAR
     | KW_DENSE_RANK
@@ -1109,8 +1146,6 @@ reservedKeywordsUsedAsFuncName
     | KW_LEAD
     | KW_LEFT
     | KW_LN
-    | KW_LOCALTIME
-    | KW_LOCALTIMESTAMP
     | KW_LOWER
     | KW_MAP
     | KW_MAX
@@ -1135,8 +1170,6 @@ reservedKeywordsUsedAsFuncName
     | KW_STDDEV_SAMP
     | KW_SUBSTRING
     | KW_SUM
-    | KW_TIME
-    | KW_TIMESTAMP
     | KW_TIMESTAMP_DIFF
     | KW_TRIM
     | KW_TRUNCATE
