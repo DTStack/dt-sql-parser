@@ -18,7 +18,7 @@ import {
     type QueryCreateTableContext,
     type SelectStatementContext,
     type SingleStmtContext,
-    Table_refContext,
+    TableRefContext,
     type TableNameContext,
     type TableNameCreateContext,
     type ViewNameContext,
@@ -47,7 +47,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
                 ? [
                       {
                           attrName: AttrName.alias,
-                          endContextList: [Table_refContext.name],
+                          endContextList: [TableRefContext.name],
                       },
                   ]
                 : undefined
@@ -67,7 +67,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
                 ? [
                       {
                           attrName: AttrName.alias,
-                          endContextList: [Table_refContext.name],
+                          endContextList: [TableRefContext.name],
                       },
                   ]
                 : undefined

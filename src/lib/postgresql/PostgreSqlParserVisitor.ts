@@ -19,27 +19,27 @@ import { CreateUserStmtContext } from "./PostgreSqlParser.js";
 import { AlterRoleStmtContext } from "./PostgreSqlParser.js";
 import { AlterRoleSetStmtContext } from "./PostgreSqlParser.js";
 import { AlterRoutineStmtContext } from "./PostgreSqlParser.js";
-import { Alter_routine_clauseContext } from "./PostgreSqlParser.js";
-import { Routine_actionContext } from "./PostgreSqlParser.js";
+import { AlterRoutineClauseContext } from "./PostgreSqlParser.js";
+import { RoutineActionContext } from "./PostgreSqlParser.js";
 import { CreateGroupStmtContext } from "./PostgreSqlParser.js";
 import { AlterGroupStmtContext } from "./PostgreSqlParser.js";
 import { CreateSchemaStmtContext } from "./PostgreSqlParser.js";
 import { SchemaNameCreateContext } from "./PostgreSqlParser.js";
-import { Schema_stmtContext } from "./PostgreSqlParser.js";
+import { SchemaStmtContext } from "./PostgreSqlParser.js";
 import { VariableSetStmtContext } from "./PostgreSqlParser.js";
-import { Set_restContext } from "./PostgreSqlParser.js";
-import { Generic_setContext } from "./PostgreSqlParser.js";
-import { Set_rest_moreContext } from "./PostgreSqlParser.js";
-import { Var_nameContext } from "./PostgreSqlParser.js";
-import { Var_listContext } from "./PostgreSqlParser.js";
-import { Var_valueContext } from "./PostgreSqlParser.js";
-import { Iso_levelContext } from "./PostgreSqlParser.js";
-import { Opt_boolean_or_string_columnContext } from "./PostgreSqlParser.js";
-import { Opt_boolean_or_stringContext } from "./PostgreSqlParser.js";
-import { Zone_valueContext } from "./PostgreSqlParser.js";
+import { SetRestContext } from "./PostgreSqlParser.js";
+import { GenericSetContext } from "./PostgreSqlParser.js";
+import { SetRestMoreContext } from "./PostgreSqlParser.js";
+import { VarNameContext } from "./PostgreSqlParser.js";
+import { VarListContext } from "./PostgreSqlParser.js";
+import { VarValueContext } from "./PostgreSqlParser.js";
+import { IsoLevelContext } from "./PostgreSqlParser.js";
+import { OptBooleanOrStringColumnContext } from "./PostgreSqlParser.js";
+import { BooleanOrStringContext } from "./PostgreSqlParser.js";
+import { ZoneValueContext } from "./PostgreSqlParser.js";
 import { NonReservedWordOrStringConstContext } from "./PostgreSqlParser.js";
 import { VariableResetStmtContext } from "./PostgreSqlParser.js";
-import { Reset_restContext } from "./PostgreSqlParser.js";
+import { ResetRestContext } from "./PostgreSqlParser.js";
 import { SetOrResetClauseContext } from "./PostgreSqlParser.js";
 import { FunctionSetOrResetClauseContext } from "./PostgreSqlParser.js";
 import { VariableShowStmtContext } from "./PostgreSqlParser.js";
@@ -47,28 +47,24 @@ import { ConstraintsSetStmtContext } from "./PostgreSqlParser.js";
 import { CheckPointStmtContext } from "./PostgreSqlParser.js";
 import { DiscardStmtContext } from "./PostgreSqlParser.js";
 import { AlterTableStmtContext } from "./PostgreSqlParser.js";
-import { Alter_table_cmdsContext } from "./PostgreSqlParser.js";
-import { Partition_bound_specContext } from "./PostgreSqlParser.js";
-import { Partition_bound_clauseContext } from "./PostgreSqlParser.js";
-import { Partition_bound_chooseContext } from "./PostgreSqlParser.js";
-import { Partition_with_clauseContext } from "./PostgreSqlParser.js";
-import { Partition_cmdContext } from "./PostgreSqlParser.js";
-import { Index_partition_cmdContext } from "./PostgreSqlParser.js";
-import { Alter_table_cmdContext } from "./PostgreSqlParser.js";
-import { Alter_column_defaultContext } from "./PostgreSqlParser.js";
-import { Opt_drop_behaviorContext } from "./PostgreSqlParser.js";
-import { Opt_collate_clauseContext } from "./PostgreSqlParser.js";
+import { AlterTableCmdsContext } from "./PostgreSqlParser.js";
+import { PartitionCmdContext } from "./PostgreSqlParser.js";
+import { IndexPartitionCmdContext } from "./PostgreSqlParser.js";
+import { AlterTableCmdContext } from "./PostgreSqlParser.js";
+import { AlterColumnDefaultContext } from "./PostgreSqlParser.js";
+import { OptDropBehaviorContext } from "./PostgreSqlParser.js";
+import { CollateClauseContext } from "./PostgreSqlParser.js";
 import { RelOptionsContext } from "./PostgreSqlParser.js";
 import { OptRelOptionsContext } from "./PostgreSqlParser.js";
 import { RelOptionElemContext } from "./PostgreSqlParser.js";
 import { PartitionBoundSpecContext } from "./PostgreSqlParser.js";
 import { AlterCompositeTypeStmtContext } from "./PostgreSqlParser.js";
-import { Alter_type_cmdContext } from "./PostgreSqlParser.js";
+import { AlterTypeCmdContext } from "./PostgreSqlParser.js";
 import { ClosePortalStmtContext } from "./PostgreSqlParser.js";
 import { CopyStmtContext } from "./PostgreSqlParser.js";
 import { CopyOptionsNoparensContext } from "./PostgreSqlParser.js";
 import { CopyOptionsContext } from "./PostgreSqlParser.js";
-import { Copy_generic_opt_elemContext } from "./PostgreSqlParser.js";
+import { CopyGenericOptElemContext } from "./PostgreSqlParser.js";
 import { ColumnCreateTableContext } from "./PostgreSqlParser.js";
 import { OptTempContext } from "./PostgreSqlParser.js";
 import { OptTypedTableElEmentListContext } from "./PostgreSqlParser.js";
@@ -78,23 +74,23 @@ import { TypedTableElementContext } from "./PostgreSqlParser.js";
 import { Column_defContext } from "./PostgreSqlParser.js";
 import { ColConstraintContext } from "./PostgreSqlParser.js";
 import { ColConstraintElemContext } from "./PostgreSqlParser.js";
-import { Generated_whenContext } from "./PostgreSqlParser.js";
+import { GeneratedWhenContext } from "./PostgreSqlParser.js";
 import { TableLikeOptionContext } from "./PostgreSqlParser.js";
 import { ConstraintElemContext } from "./PostgreSqlParser.js";
-import { Opt_column_listContext } from "./PostgreSqlParser.js";
-import { Opt_column_list_createContext } from "./PostgreSqlParser.js";
-import { Column_listContext } from "./PostgreSqlParser.js";
-import { Opt_c_includeContext } from "./PostgreSqlParser.js";
-import { Key_matchContext } from "./PostgreSqlParser.js";
+import { OptColumnListContext } from "./PostgreSqlParser.js";
+import { ColumnListCreateContext } from "./PostgreSqlParser.js";
+import { ColumnListContext } from "./PostgreSqlParser.js";
+import { ColumnListIncludeContext } from "./PostgreSqlParser.js";
+import { KeyMatchContext } from "./PostgreSqlParser.js";
 import { ExclusionConstraintElemContext } from "./PostgreSqlParser.js";
-import { Key_actionsContext } from "./PostgreSqlParser.js";
-import { Key_updateContext } from "./PostgreSqlParser.js";
-import { Key_deleteContext } from "./PostgreSqlParser.js";
-import { Key_actionContext } from "./PostgreSqlParser.js";
+import { KeyActionsContext } from "./PostgreSqlParser.js";
+import { KeyUpdateContext } from "./PostgreSqlParser.js";
+import { KeyDeleteContext } from "./PostgreSqlParser.js";
+import { KeyActionContext } from "./PostgreSqlParser.js";
 import { OptInheritContext } from "./PostgreSqlParser.js";
 import { PartitionSpecContext } from "./PostgreSqlParser.js";
-import { Part_elemContext } from "./PostgreSqlParser.js";
-import { Table_access_method_clauseContext } from "./PostgreSqlParser.js";
+import { PartElemContext } from "./PostgreSqlParser.js";
+import { TableAccessMethodClauseContext } from "./PostgreSqlParser.js";
 import { OptWithContext } from "./PostgreSqlParser.js";
 import { OnCommitOptionContext } from "./PostgreSqlParser.js";
 import { OptTableSpaceContext } from "./PostgreSqlParser.js";
@@ -103,8 +99,8 @@ import { ExistingIndexContext } from "./PostgreSqlParser.js";
 import { CreateStatsStmtContext } from "./PostgreSqlParser.js";
 import { AlterStatsStmtContext } from "./PostgreSqlParser.js";
 import { QueryCreateTableContext } from "./PostgreSqlParser.js";
-import { Create_as_targetContext } from "./PostgreSqlParser.js";
-import { Opt_with_dataContext } from "./PostgreSqlParser.js";
+import { CreateAsTargetContext } from "./PostgreSqlParser.js";
+import { OptWithDataContext } from "./PostgreSqlParser.js";
 import { CreateMaterializedViewContext } from "./PostgreSqlParser.js";
 import { RefreshMaterializedViewStmtContext } from "./PostgreSqlParser.js";
 import { CreateSeqStmtContext } from "./PostgreSqlParser.js";
@@ -117,14 +113,14 @@ import { CreateExtensionStmtContext } from "./PostgreSqlParser.js";
 import { AlterExtensionStmtContext } from "./PostgreSqlParser.js";
 import { AlterExtensionContentsStmtContext } from "./PostgreSqlParser.js";
 import { CreateFdwStmtContext } from "./PostgreSqlParser.js";
-import { Fdw_optionContext } from "./PostgreSqlParser.js";
+import { FdwOptionContext } from "./PostgreSqlParser.js";
 import { AlterFdwStmtContext } from "./PostgreSqlParser.js";
-import { Create_generic_optionsContext } from "./PostgreSqlParser.js";
-import { Alter_generic_optionsContext } from "./PostgreSqlParser.js";
-import { Alter_generic_option_elemContext } from "./PostgreSqlParser.js";
-import { Generic_option_elemContext } from "./PostgreSqlParser.js";
+import { CreateGenericOptionsContext } from "./PostgreSqlParser.js";
+import { AlterGenericOptionsContext } from "./PostgreSqlParser.js";
+import { AlterGenericOptionElemContext } from "./PostgreSqlParser.js";
+import { GenericOptionElemContext } from "./PostgreSqlParser.js";
 import { CreateForeignServerStmtContext } from "./PostgreSqlParser.js";
-import { Foreign_server_versionContext } from "./PostgreSqlParser.js";
+import { ForeignServerVersionContext } from "./PostgreSqlParser.js";
 import { AlterForeignServerStmtContext } from "./PostgreSqlParser.js";
 import { CreateForeignTableContext } from "./PostgreSqlParser.js";
 import { CreatePartitionForeignTableContext } from "./PostgreSqlParser.js";
@@ -134,7 +130,7 @@ import { AlterUserMappingStmtContext } from "./PostgreSqlParser.js";
 import { CreatePolicyStmtContext } from "./PostgreSqlParser.js";
 import { AlterPolicyStmtContext } from "./PostgreSqlParser.js";
 import { AlterProcedureStmtContext } from "./PostgreSqlParser.js";
-import { Procedure_actionContext } from "./PostgreSqlParser.js";
+import { ProcedureActionContext } from "./PostgreSqlParser.js";
 import { RowSecurityOptionalExprContext } from "./PostgreSqlParser.js";
 import { RowSecurityOptionalWithCheckContext } from "./PostgreSqlParser.js";
 import { CreateAccessMethodStmtContext } from "./PostgreSqlParser.js";
@@ -143,21 +139,21 @@ import { TriggerActionTimeContext } from "./PostgreSqlParser.js";
 import { TriggerEventsContext } from "./PostgreSqlParser.js";
 import { TriggerOneEventContext } from "./PostgreSqlParser.js";
 import { TriggerWhenContext } from "./PostgreSqlParser.js";
-import { Function_or_procedureContext } from "./PostgreSqlParser.js";
+import { FunctionOrProcedureContext } from "./PostgreSqlParser.js";
 import { TriggerFuncArgsContext } from "./PostgreSqlParser.js";
 import { TriggerFuncArgContext } from "./PostgreSqlParser.js";
 import { ConstraintAttributeElemContext } from "./PostgreSqlParser.js";
 import { CreateEventTrigStmtContext } from "./PostgreSqlParser.js";
-import { Event_trigger_when_itemContext } from "./PostgreSqlParser.js";
+import { EventTriggerWhenItemContext } from "./PostgreSqlParser.js";
 import { AlterEventTrigStmtContext } from "./PostgreSqlParser.js";
 import { CreateAssertionStmtContext } from "./PostgreSqlParser.js";
 import { DefineStmtContext } from "./PostgreSqlParser.js";
 import { DefinitionContext } from "./PostgreSqlParser.js";
-import { Def_elemContext } from "./PostgreSqlParser.js";
-import { Def_argContext } from "./PostgreSqlParser.js";
-import { Old_aggregate_elemContext } from "./PostgreSqlParser.js";
+import { DefElemContext } from "./PostgreSqlParser.js";
+import { DefArgContext } from "./PostgreSqlParser.js";
+import { OldAggregateElemContext } from "./PostgreSqlParser.js";
 import { AlterEnumStmtContext } from "./PostgreSqlParser.js";
-import { Opt_if_not_existsContext } from "./PostgreSqlParser.js";
+import { IfNotExistsContext } from "./PostgreSqlParser.js";
 import { CreateOperatorClassStmtContext } from "./PostgreSqlParser.js";
 import { OpClassItemContext } from "./PostgreSqlParser.js";
 import { CreateOperatorFamilyStmtContext } from "./PostgreSqlParser.js";
@@ -165,73 +161,73 @@ import { AlterOperatorFamilyStmtContext } from "./PostgreSqlParser.js";
 import { OpClassDropContext } from "./PostgreSqlParser.js";
 import { ReassignOwnedStmtContext } from "./PostgreSqlParser.js";
 import { DropStmtContext } from "./PostgreSqlParser.js";
-import { Object_type_any_nameContext } from "./PostgreSqlParser.js";
-import { Object_type_nameContext } from "./PostgreSqlParser.js";
-import { Any_name_listContext } from "./PostgreSqlParser.js";
-import { Any_nameContext } from "./PostgreSqlParser.js";
+import { ObjectTypeAnyNameContext } from "./PostgreSqlParser.js";
+import { ObjectTypeNameContext } from "./PostgreSqlParser.js";
+import { AnyNameListContext } from "./PostgreSqlParser.js";
+import { AnyNameContext } from "./PostgreSqlParser.js";
 import { AttrsContext } from "./PostgreSqlParser.js";
 import { TruncateStmtContext } from "./PostgreSqlParser.js";
-import { Truncate_tableContext } from "./PostgreSqlParser.js";
+import { TruncateTableContext } from "./PostgreSqlParser.js";
 import { CommentStmtContext } from "./PostgreSqlParser.js";
 import { SecLabelStmtContext } from "./PostgreSqlParser.js";
 import { FetchStmtContext } from "./PostgreSqlParser.js";
 import { Fetch_argsContext } from "./PostgreSqlParser.js";
-import { From_inContext } from "./PostgreSqlParser.js";
+import { FromInContext } from "./PostgreSqlParser.js";
 import { GrantStmtContext } from "./PostgreSqlParser.js";
 import { RevokeStmtContext } from "./PostgreSqlParser.js";
 import { PrivilegesContext } from "./PostgreSqlParser.js";
 import { BeforePrivilegeSelectContext } from "./PostgreSqlParser.js";
 import { PrivilegeContext } from "./PostgreSqlParser.js";
-import { Privilege_targetContext } from "./PostgreSqlParser.js";
-import { Grantee_listContext } from "./PostgreSqlParser.js";
+import { PrivilegeTargetContext } from "./PostgreSqlParser.js";
+import { GranteeListContext } from "./PostgreSqlParser.js";
 import { GrantRoleStmtContext } from "./PostgreSqlParser.js";
 import { RevokeRoleStmtContext } from "./PostgreSqlParser.js";
 import { AlterDefaultPrivilegesStmtContext } from "./PostgreSqlParser.js";
 import { DefaclactionContext } from "./PostgreSqlParser.js";
-import { Defacl_privilege_targetContext } from "./PostgreSqlParser.js";
+import { DefaclPrivilegeTargetContext } from "./PostgreSqlParser.js";
 import { IndexStmtContext } from "./PostgreSqlParser.js";
-import { Index_paramsContext } from "./PostgreSqlParser.js";
-import { Index_elemContext } from "./PostgreSqlParser.js";
+import { IndexParamsContext } from "./PostgreSqlParser.js";
+import { IndexElemContext } from "./PostgreSqlParser.js";
 import { CreateFunctionStmtContext } from "./PostgreSqlParser.js";
-import { Opt_or_replaceContext } from "./PostgreSqlParser.js";
-import { Func_argsContext } from "./PostgreSqlParser.js";
-import { Func_args_listContext } from "./PostgreSqlParser.js";
+import { OrReplaceOptContext } from "./PostgreSqlParser.js";
+import { FuncArgsContext } from "./PostgreSqlParser.js";
+import { FuncArgsListContext } from "./PostgreSqlParser.js";
 import { RoutineWithArgTypesListContext } from "./PostgreSqlParser.js";
 import { RoutineWithArgTypesContext } from "./PostgreSqlParser.js";
 import { ProcedureWithArgTypesListContext } from "./PostgreSqlParser.js";
 import { ProcedureWithArgTypesContext } from "./PostgreSqlParser.js";
 import { FunctionWithArgTypesListContext } from "./PostgreSqlParser.js";
 import { FunctionWithArgTypesContext } from "./PostgreSqlParser.js";
-import { Func_argContext } from "./PostgreSqlParser.js";
-import { Arg_classContext } from "./PostgreSqlParser.js";
-import { Func_typeContext } from "./PostgreSqlParser.js";
-import { Func_arg_with_defaultContext } from "./PostgreSqlParser.js";
-import { Aggregate_argsContext } from "./PostgreSqlParser.js";
+import { FuncArgContext } from "./PostgreSqlParser.js";
+import { ArgClassContext } from "./PostgreSqlParser.js";
+import { FuncTypeContext } from "./PostgreSqlParser.js";
+import { FuncArgWithDefaultContext } from "./PostgreSqlParser.js";
+import { AggregateArgsContext } from "./PostgreSqlParser.js";
 import { AggregateWithArgTypesContext } from "./PostgreSqlParser.js";
-import { Common_func_opt_itemContext } from "./PostgreSqlParser.js";
-import { Create_func_opt_itemContext } from "./PostgreSqlParser.js";
-import { Opt_definitionContext } from "./PostgreSqlParser.js";
-import { Table_func_columnContext } from "./PostgreSqlParser.js";
+import { CommonFuncOptItemContext } from "./PostgreSqlParser.js";
+import { CreateFuncOptItemContext } from "./PostgreSqlParser.js";
+import { OptDefinitionContext } from "./PostgreSqlParser.js";
+import { TableFuncColumnContext } from "./PostgreSqlParser.js";
 import { AlterFunctionStmtContext } from "./PostgreSqlParser.js";
 import { RemoveFuncStmtContext } from "./PostgreSqlParser.js";
 import { RemoveAggregateStmtContext } from "./PostgreSqlParser.js";
 import { RemoveOperatorStmtContext } from "./PostgreSqlParser.js";
 import { OperatorArgTypesContext } from "./PostgreSqlParser.js";
-import { Any_operatorContext } from "./PostgreSqlParser.js";
+import { AnyOperatorContext } from "./PostgreSqlParser.js";
 import { OperatorWithArgTypesContext } from "./PostgreSqlParser.js";
 import { DoStmtContext } from "./PostgreSqlParser.js";
 import { CreateCastStmtContext } from "./PostgreSqlParser.js";
-import { Opt_if_existsContext } from "./PostgreSqlParser.js";
+import { IfExistsContext } from "./PostgreSqlParser.js";
 import { CreateTransformStmtContext } from "./PostgreSqlParser.js";
-import { Sql_with_functionContext } from "./PostgreSqlParser.js";
+import { SqlWithFunctionContext } from "./PostgreSqlParser.js";
 import { ReindexStmtContext } from "./PostgreSqlParser.js";
 import { AlterTblSpcStmtContext } from "./PostgreSqlParser.js";
 import { RenameStmtContext } from "./PostgreSqlParser.js";
 import { AlterObjectDependsStmtContext } from "./PostgreSqlParser.js";
 import { AlterObjectSchemaStmtContext } from "./PostgreSqlParser.js";
 import { AlterOperatorStmtContext } from "./PostgreSqlParser.js";
-import { Operator_def_listContext } from "./PostgreSqlParser.js";
-import { Operator_def_elemContext } from "./PostgreSqlParser.js";
+import { OperatorDefListContext } from "./PostgreSqlParser.js";
+import { OperatorDefElemContext } from "./PostgreSqlParser.js";
 import { AlterTypeStmtContext } from "./PostgreSqlParser.js";
 import { AlterOwnerStmtContext } from "./PostgreSqlParser.js";
 import { CreatePublicationStmtContext } from "./PostgreSqlParser.js";
@@ -241,17 +237,17 @@ import { AlterSubscriptionStmtContext } from "./PostgreSqlParser.js";
 import { RuleStmtContext } from "./PostgreSqlParser.js";
 import { RuleActionStmtContext } from "./PostgreSqlParser.js";
 import { NotifyStmtContext } from "./PostgreSqlParser.js";
-import { Notify_payloadContext } from "./PostgreSqlParser.js";
+import { NotifyPayloadContext } from "./PostgreSqlParser.js";
 import { ListenStmtContext } from "./PostgreSqlParser.js";
 import { UnListenStmtContext } from "./PostgreSqlParser.js";
 import { TransactionStmtContext } from "./PostgreSqlParser.js";
-import { Opt_transactionContext } from "./PostgreSqlParser.js";
-import { Transaction_mode_itemContext } from "./PostgreSqlParser.js";
-import { Transaction_mode_listContext } from "./PostgreSqlParser.js";
+import { OptTransactionContext } from "./PostgreSqlParser.js";
+import { TransactionModeItemContext } from "./PostgreSqlParser.js";
+import { TransactionModeListContext } from "./PostgreSqlParser.js";
 import { CreateViewContext } from "./PostgreSqlParser.js";
 import { LoadStmtContext } from "./PostgreSqlParser.js";
 import { CreateDatabaseContext } from "./PostgreSqlParser.js";
-import { Create_db_opt_itemContext } from "./PostgreSqlParser.js";
+import { CreateDbOptItemContext } from "./PostgreSqlParser.js";
 import { AlterDatabaseStmtContext } from "./PostgreSqlParser.js";
 import { AlterDatabaseSetStmtContext } from "./PostgreSqlParser.js";
 import { AlterCollationStmtContext } from "./PostgreSqlParser.js";
@@ -264,88 +260,88 @@ import { CreateConversionStmtContext } from "./PostgreSqlParser.js";
 import { ClusterStmtContext } from "./PostgreSqlParser.js";
 import { VacuumStmtContext } from "./PostgreSqlParser.js";
 import { AnalyzeStmtContext } from "./PostgreSqlParser.js";
-import { Analyze_keywordContext } from "./PostgreSqlParser.js";
-import { Vac_analyze_option_elemContext } from "./PostgreSqlParser.js";
-import { Analyze_option_elemContext } from "./PostgreSqlParser.js";
-import { Opt_verboseContext } from "./PostgreSqlParser.js";
-import { Vacuum_relationContext } from "./PostgreSqlParser.js";
-import { Vacuum_relation_listContext } from "./PostgreSqlParser.js";
+import { AnalyzeKeywordContext } from "./PostgreSqlParser.js";
+import { VacAnalyzeOptionElemContext } from "./PostgreSqlParser.js";
+import { AnalyzeOptionElemContext } from "./PostgreSqlParser.js";
+import { OptVerboseContext } from "./PostgreSqlParser.js";
+import { VacuumRelationContext } from "./PostgreSqlParser.js";
+import { VacuumRelationListContext } from "./PostgreSqlParser.js";
 import { ExplainStmtContext } from "./PostgreSqlParser.js";
 import { ExplainableStmtContext } from "./PostgreSqlParser.js";
-import { Explain_option_listContext } from "./PostgreSqlParser.js";
+import { ExplainOptionListContext } from "./PostgreSqlParser.js";
 import { PrepareStmtContext } from "./PostgreSqlParser.js";
-import { Prep_type_clauseContext } from "./PostgreSqlParser.js";
+import { PrepTypeClauseContext } from "./PostgreSqlParser.js";
 import { PreParableStmtContext } from "./PostgreSqlParser.js";
 import { ExecuteStmtContext } from "./PostgreSqlParser.js";
-import { Execute_param_clauseContext } from "./PostgreSqlParser.js";
+import { ExecuteParamClauseContext } from "./PostgreSqlParser.js";
 import { DealLocateStmtContext } from "./PostgreSqlParser.js";
 import { InsertStatementContext } from "./PostgreSqlParser.js";
-import { Insert_restContext } from "./PostgreSqlParser.js";
-import { Insert_column_listContext } from "./PostgreSqlParser.js";
-import { Insert_column_itemContext } from "./PostgreSqlParser.js";
-import { Returning_clauseContext } from "./PostgreSqlParser.js";
+import { InsertRestContext } from "./PostgreSqlParser.js";
+import { InsertColumnListContext } from "./PostgreSqlParser.js";
+import { InsertColumnItemContext } from "./PostgreSqlParser.js";
+import { ReturningClauseContext } from "./PostgreSqlParser.js";
 import { DeleteStmtContext } from "./PostgreSqlParser.js";
 import { LockStmtContext } from "./PostgreSqlParser.js";
 import { UpdateStmtContext } from "./PostgreSqlParser.js";
-import { Set_clause_listContext } from "./PostgreSqlParser.js";
-import { Set_clauseContext } from "./PostgreSqlParser.js";
+import { SetClauseListContext } from "./PostgreSqlParser.js";
+import { SetClauseContext } from "./PostgreSqlParser.js";
 import { DeclareCursorStmtContext } from "./PostgreSqlParser.js";
 import { SelectStatementContext } from "./PostgreSqlParser.js";
-import { Select_with_parensContext } from "./PostgreSqlParser.js";
-import { Select_no_parensContext } from "./PostgreSqlParser.js";
-import { Select_clauseContext } from "./PostgreSqlParser.js";
-import { Simple_selectContext } from "./PostgreSqlParser.js";
-import { Set_operator_with_all_or_distinctContext } from "./PostgreSqlParser.js";
-import { With_clauseContext } from "./PostgreSqlParser.js";
-import { Common_table_exprContext } from "./PostgreSqlParser.js";
-import { Search_clauseContext } from "./PostgreSqlParser.js";
-import { Cycle_clauseContext } from "./PostgreSqlParser.js";
-import { Into_clauseContext } from "./PostgreSqlParser.js";
+import { SelectWithParensContext } from "./PostgreSqlParser.js";
+import { SelectNoParensContext } from "./PostgreSqlParser.js";
+import { SelectClauseContext } from "./PostgreSqlParser.js";
+import { SimpleSelectContext } from "./PostgreSqlParser.js";
+import { SetOperatorWithAllOrDistinctContext } from "./PostgreSqlParser.js";
+import { WithClauseContext } from "./PostgreSqlParser.js";
+import { CommonTableExprContext } from "./PostgreSqlParser.js";
+import { SearchClauseContext } from "./PostgreSqlParser.js";
+import { CycleClauseContext } from "./PostgreSqlParser.js";
+import { IntoClauseContext } from "./PostgreSqlParser.js";
 import { OptTempTableNameContext } from "./PostgreSqlParser.js";
-import { Distinct_clauseContext } from "./PostgreSqlParser.js";
-import { Sort_clauseContext } from "./PostgreSqlParser.js";
+import { DistinctClauseContext } from "./PostgreSqlParser.js";
+import { SortClauseContext } from "./PostgreSqlParser.js";
 import { SortByContext } from "./PostgreSqlParser.js";
-import { Select_limitContext } from "./PostgreSqlParser.js";
-import { Limit_clauseContext } from "./PostgreSqlParser.js";
-import { Fetch_clauseContext } from "./PostgreSqlParser.js";
-import { Offset_clauseContext } from "./PostgreSqlParser.js";
-import { Select_fetch_first_valueContext } from "./PostgreSqlParser.js";
-import { Group_clauseContext } from "./PostgreSqlParser.js";
-import { Group_by_listContext } from "./PostgreSqlParser.js";
-import { Group_by_itemContext } from "./PostgreSqlParser.js";
-import { For_locking_clauseContext } from "./PostgreSqlParser.js";
-import { Values_clauseContext } from "./PostgreSqlParser.js";
-import { From_clauseContext } from "./PostgreSqlParser.js";
-import { From_listContext } from "./PostgreSqlParser.js";
-import { Table_refContext } from "./PostgreSqlParser.js";
-import { Alias_clauseContext } from "./PostgreSqlParser.js";
-import { Func_alias_clauseContext } from "./PostgreSqlParser.js";
-import { Join_typeContext } from "./PostgreSqlParser.js";
-import { Join_qualContext } from "./PostgreSqlParser.js";
-import { Relation_exprContext } from "./PostgreSqlParser.js";
-import { Publication_relation_exprContext } from "./PostgreSqlParser.js";
-import { Relation_expr_listContext } from "./PostgreSqlParser.js";
-import { Relation_expr_opt_aliasContext } from "./PostgreSqlParser.js";
+import { SelectLimitContext } from "./PostgreSqlParser.js";
+import { LimitClauseContext } from "./PostgreSqlParser.js";
+import { FetchClauseContext } from "./PostgreSqlParser.js";
+import { OffsetClauseContext } from "./PostgreSqlParser.js";
+import { SelectFetchFirstValueContext } from "./PostgreSqlParser.js";
+import { GroupClauseContext } from "./PostgreSqlParser.js";
+import { GroupByListContext } from "./PostgreSqlParser.js";
+import { GroupByItemContext } from "./PostgreSqlParser.js";
+import { ForLockingClauseContext } from "./PostgreSqlParser.js";
+import { ValuesClauseContext } from "./PostgreSqlParser.js";
+import { FromClauseContext } from "./PostgreSqlParser.js";
+import { FromListContext } from "./PostgreSqlParser.js";
+import { TableRefContext } from "./PostgreSqlParser.js";
+import { AliasClauseContext } from "./PostgreSqlParser.js";
+import { FuncAliasClauseContext } from "./PostgreSqlParser.js";
+import { JoinTypeContext } from "./PostgreSqlParser.js";
+import { JoinQualContext } from "./PostgreSqlParser.js";
+import { RelationExprContext } from "./PostgreSqlParser.js";
+import { PublicationRelationExprContext } from "./PostgreSqlParser.js";
+import { RelationExprListContext } from "./PostgreSqlParser.js";
+import { RelationExprOptAliasContext } from "./PostgreSqlParser.js";
 import { TableSampleClauseContext } from "./PostgreSqlParser.js";
-import { Func_tableContext } from "./PostgreSqlParser.js";
+import { FuncTableContext } from "./PostgreSqlParser.js";
 import { RowsFromItemContext } from "./PostgreSqlParser.js";
-import { Where_clauseContext } from "./PostgreSqlParser.js";
-import { Where_or_current_clauseContext } from "./PostgreSqlParser.js";
+import { WhereClauseContext } from "./PostgreSqlParser.js";
+import { WhereOrCurrentClauseContext } from "./PostgreSqlParser.js";
 import { TableFuncElementListContext } from "./PostgreSqlParser.js";
 import { TableFuncElementContext } from "./PostgreSqlParser.js";
 import { XmlTableContext } from "./PostgreSqlParser.js";
 import { XmlTableColumnElContext } from "./PostgreSqlParser.js";
-import { Xml_namespace_elContext } from "./PostgreSqlParser.js";
+import { XmlNamespaceEleContext } from "./PostgreSqlParser.js";
 import { TypenameContext } from "./PostgreSqlParser.js";
 import { SimpleTypeNameContext } from "./PostgreSqlParser.js";
 import { ConstTypeNameContext } from "./PostgreSqlParser.js";
 import { NumericContext } from "./PostgreSqlParser.js";
-import { Opt_floatContext } from "./PostgreSqlParser.js";
+import { OptFloatContext } from "./PostgreSqlParser.js";
 import { BitContext } from "./PostgreSqlParser.js";
 import { CharacterContext } from "./PostgreSqlParser.js";
 import { ConstDatetimeContext } from "./PostgreSqlParser.js";
-import { Opt_intervalContext } from "./PostgreSqlParser.js";
-import { Interval_secondContext } from "./PostgreSqlParser.js";
+import { OptIntervalContext } from "./PostgreSqlParser.js";
+import { IntervalSecondContext } from "./PostgreSqlParser.js";
 import { ComparisonOperatorContext } from "./PostgreSqlParser.js";
 import { ExpressionContext } from "./PostgreSqlParser.js";
 import { LogicalNotContext } from "./PostgreSqlParser.js";
@@ -365,58 +361,58 @@ import { ArithmeticBinaryContext } from "./PostgreSqlParser.js";
 import { ArithmeticUnaryContext } from "./PostgreSqlParser.js";
 import { AtTimeZoneContext } from "./PostgreSqlParser.js";
 import { PrimaryExpressionContext } from "./PostgreSqlParser.js";
-import { Func_applicationContext } from "./PostgreSqlParser.js";
+import { FuncApplicationContext } from "./PostgreSqlParser.js";
 import { Func_exprContext } from "./PostgreSqlParser.js";
-import { Func_expr_windowlessContext } from "./PostgreSqlParser.js";
-import { Func_expr_common_subexprContext } from "./PostgreSqlParser.js";
-import { Xml_attribute_listContext } from "./PostgreSqlParser.js";
-import { Xml_attribute_elContext } from "./PostgreSqlParser.js";
-import { Document_or_contentContext } from "./PostgreSqlParser.js";
+import { FuncExprWindowlessContext } from "./PostgreSqlParser.js";
+import { FuncExprCommonSubExprContext } from "./PostgreSqlParser.js";
+import { XmlAttributeListContext } from "./PostgreSqlParser.js";
+import { XmlAttributeElContext } from "./PostgreSqlParser.js";
+import { DocumentOrContentContext } from "./PostgreSqlParser.js";
 import { XmlExistsArgumentContext } from "./PostgreSqlParser.js";
-import { Xml_passing_mechContext } from "./PostgreSqlParser.js";
-import { Window_clauseContext } from "./PostgreSqlParser.js";
-import { Window_definitionContext } from "./PostgreSqlParser.js";
+import { XmlPassingMechContext } from "./PostgreSqlParser.js";
+import { WindowClauseContext } from "./PostgreSqlParser.js";
+import { WindowDefinitionContext } from "./PostgreSqlParser.js";
 import { Over_clauseContext } from "./PostgreSqlParser.js";
-import { Window_specificationContext } from "./PostgreSqlParser.js";
-import { Opt_frame_clauseContext } from "./PostgreSqlParser.js";
-import { Frame_boundContext } from "./PostgreSqlParser.js";
+import { WindowSpecificationContext } from "./PostgreSqlParser.js";
+import { OptFrameClauseContext } from "./PostgreSqlParser.js";
+import { FrameBoundContext } from "./PostgreSqlParser.js";
 import { RowContext } from "./PostgreSqlParser.js";
-import { Explicit_rowContext } from "./PostgreSqlParser.js";
-import { Sub_typeContext } from "./PostgreSqlParser.js";
-import { All_opContext } from "./PostgreSqlParser.js";
-import { MathopContext } from "./PostgreSqlParser.js";
-import { Qual_opContext } from "./PostgreSqlParser.js";
-import { Qual_all_opContext } from "./PostgreSqlParser.js";
-import { Subquery_OpContext } from "./PostgreSqlParser.js";
-import { Expr_listContext } from "./PostgreSqlParser.js";
-import { Column_exprContext } from "./PostgreSqlParser.js";
-import { Column_expr_no_parenContext } from "./PostgreSqlParser.js";
-import { Func_arg_listContext } from "./PostgreSqlParser.js";
-import { Func_arg_exprContext } from "./PostgreSqlParser.js";
-import { Array_exprContext } from "./PostgreSqlParser.js";
-import { Extract_argContext } from "./PostgreSqlParser.js";
-import { Unicode_normal_formContext } from "./PostgreSqlParser.js";
-import { Substr_listContext } from "./PostgreSqlParser.js";
+import { ExplicitRowContext } from "./PostgreSqlParser.js";
+import { SubTypeContext } from "./PostgreSqlParser.js";
+import { AllOpContext } from "./PostgreSqlParser.js";
+import { MathOpContext } from "./PostgreSqlParser.js";
+import { QualOpContext } from "./PostgreSqlParser.js";
+import { QualAllOpContext } from "./PostgreSqlParser.js";
+import { SubqueryOperatorContext } from "./PostgreSqlParser.js";
+import { ExprListContext } from "./PostgreSqlParser.js";
+import { ColumnExprContext } from "./PostgreSqlParser.js";
+import { ColumnExprNoParenContext } from "./PostgreSqlParser.js";
+import { FuncArgListContext } from "./PostgreSqlParser.js";
+import { FuncArgExprContext } from "./PostgreSqlParser.js";
+import { ArrayExprContext } from "./PostgreSqlParser.js";
+import { ExtractArgContext } from "./PostgreSqlParser.js";
+import { UnicodeNormalFormContext } from "./PostgreSqlParser.js";
+import { SubstrListContext } from "./PostgreSqlParser.js";
 import { When_clauseContext } from "./PostgreSqlParser.js";
-import { Indirection_elContext } from "./PostgreSqlParser.js";
+import { IndirectionElContext } from "./PostgreSqlParser.js";
 import { IndirectionContext } from "./PostgreSqlParser.js";
-import { Opt_indirectionContext } from "./PostgreSqlParser.js";
-import { Target_listContext } from "./PostgreSqlParser.js";
+import { OptIndirectionContext } from "./PostgreSqlParser.js";
+import { TargetListContext } from "./PostgreSqlParser.js";
 import { Target_labelContext } from "./PostgreSqlParser.js";
 import { Target_starContext } from "./PostgreSqlParser.js";
-import { Qualified_name_listContext } from "./PostgreSqlParser.js";
-import { Table_name_listContext } from "./PostgreSqlParser.js";
-import { Schema_name_listContext } from "./PostgreSqlParser.js";
-import { Database_nameListContext } from "./PostgreSqlParser.js";
-import { TablespaceNameCreateContext } from "./PostgreSqlParser.js";
-import { TablespaceNameContext } from "./PostgreSqlParser.js";
+import { QualifiedNameListContext } from "./PostgreSqlParser.js";
+import { TableNameListContext } from "./PostgreSqlParser.js";
+import { SchemaNameListContext } from "./PostgreSqlParser.js";
+import { DatabaseNameListContext } from "./PostgreSqlParser.js";
+import { TableSpaceNameCreateContext } from "./PostgreSqlParser.js";
+import { TableSpaceNameContext } from "./PostgreSqlParser.js";
 import { TableNameCreateContext } from "./PostgreSqlParser.js";
 import { TableNameContext } from "./PostgreSqlParser.js";
 import { ViewNameCreateContext } from "./PostgreSqlParser.js";
 import { ViewNameContext } from "./PostgreSqlParser.js";
-import { Qualified_nameContext } from "./PostgreSqlParser.js";
-import { Tablespace_name_listContext } from "./PostgreSqlParser.js";
-import { Name_listContext } from "./PostgreSqlParser.js";
+import { QualifiedNameContext } from "./PostgreSqlParser.js";
+import { TableSpaceNameListContext } from "./PostgreSqlParser.js";
+import { NameListContext } from "./PostgreSqlParser.js";
 import { DatabaseNameCreateContext } from "./PostgreSqlParser.js";
 import { DatabaseNameContext } from "./PostgreSqlParser.js";
 import { SchemaNameContext } from "./PostgreSqlParser.js";
@@ -425,7 +421,6 @@ import { RoutineNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
-import { ColumnNameMatchContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameContext } from "./PostgreSqlParser.js";
@@ -433,64 +428,64 @@ import { StringConstContext } from "./PostgreSqlParser.js";
 import { AnysconstContext } from "./PostgreSqlParser.js";
 import { SignedConstContext } from "./PostgreSqlParser.js";
 import { RoleSpecContext } from "./PostgreSqlParser.js";
-import { Role_listContext } from "./PostgreSqlParser.js";
+import { RoleListContext } from "./PostgreSqlParser.js";
 import { ColIdContext } from "./PostgreSqlParser.js";
-import { Type_function_nameContext } from "./PostgreSqlParser.js";
+import { TypeFunctionNameContext } from "./PostgreSqlParser.js";
 import { NonReservedWordContext } from "./PostgreSqlParser.js";
 import { ColLabelContext } from "./PostgreSqlParser.js";
 import { IdentifierContext } from "./PostgreSqlParser.js";
-import { Unreserved_keywordContext } from "./PostgreSqlParser.js";
-import { Col_name_keywordContext } from "./PostgreSqlParser.js";
-import { Type_func_name_keywordContext } from "./PostgreSqlParser.js";
-import { Reserved_keywordContext } from "./PostgreSqlParser.js";
-import { Pl_blockContext } from "./PostgreSqlParser.js";
-import { Label_declContext } from "./PostgreSqlParser.js";
-import { Decl_statementContext } from "./PostgreSqlParser.js";
-import { Decl_cursor_argContext } from "./PostgreSqlParser.js";
-import { Assign_operatorContext } from "./PostgreSqlParser.js";
-import { Proc_stmtContext } from "./PostgreSqlParser.js";
-import { Stmt_performContext } from "./PostgreSqlParser.js";
-import { Stmt_callContext } from "./PostgreSqlParser.js";
-import { Stmt_assignContext } from "./PostgreSqlParser.js";
-import { Stmt_getdiagContext } from "./PostgreSqlParser.js";
-import { Getdiag_list_itemContext } from "./PostgreSqlParser.js";
-import { Assign_varContext } from "./PostgreSqlParser.js";
-import { Stmt_ifContext } from "./PostgreSqlParser.js";
-import { Stmt_elseContext } from "./PostgreSqlParser.js";
-import { Stmt_caseContext } from "./PostgreSqlParser.js";
-import { Stmt_loop_while_forContext } from "./PostgreSqlParser.js";
-import { For_controlContext } from "./PostgreSqlParser.js";
-import { Stmt_foreach_aContext } from "./PostgreSqlParser.js";
-import { Stmt_exitContext } from "./PostgreSqlParser.js";
-import { Stmt_returnContext } from "./PostgreSqlParser.js";
-import { Stmt_raiseContext } from "./PostgreSqlParser.js";
-import { Opt_raise_using_elemContext } from "./PostgreSqlParser.js";
-import { Stmt_assertContext } from "./PostgreSqlParser.js";
-import { Loop_bodyContext } from "./PostgreSqlParser.js";
-import { Stmt_execsqlContext } from "./PostgreSqlParser.js";
-import { Stmt_dynexecuteContext } from "./PostgreSqlParser.js";
-import { Opt_execute_intoContext } from "./PostgreSqlParser.js";
-import { Stmt_openContext } from "./PostgreSqlParser.js";
-import { Opt_open_bound_list_itemContext } from "./PostgreSqlParser.js";
-import { Stmt_fetchContext } from "./PostgreSqlParser.js";
-import { Opt_fetch_directionContext } from "./PostgreSqlParser.js";
-import { Stmt_moveContext } from "./PostgreSqlParser.js";
+import { UnreservedKeywordContext } from "./PostgreSqlParser.js";
+import { ColNameKeywordContext } from "./PostgreSqlParser.js";
+import { TypeFuncNameKeywordContext } from "./PostgreSqlParser.js";
+import { ReservedKeywordContext } from "./PostgreSqlParser.js";
+import { PlBlockContext } from "./PostgreSqlParser.js";
+import { LabelDeclContext } from "./PostgreSqlParser.js";
+import { DeclStatementContext } from "./PostgreSqlParser.js";
+import { DeclCursorArgContext } from "./PostgreSqlParser.js";
+import { AssignOperatorContext } from "./PostgreSqlParser.js";
+import { ProcStmtContext } from "./PostgreSqlParser.js";
+import { StmtPerformContext } from "./PostgreSqlParser.js";
+import { StmtCallContext } from "./PostgreSqlParser.js";
+import { StmtAssignContext } from "./PostgreSqlParser.js";
+import { StmtGetdiagContext } from "./PostgreSqlParser.js";
+import { GetdiagListItemContext } from "./PostgreSqlParser.js";
+import { AssignVarContext } from "./PostgreSqlParser.js";
+import { StmtIfContext } from "./PostgreSqlParser.js";
+import { StmtElseContext } from "./PostgreSqlParser.js";
+import { StmtCaseContext } from "./PostgreSqlParser.js";
+import { StmtLoopWhileForContext } from "./PostgreSqlParser.js";
+import { ForControlContext } from "./PostgreSqlParser.js";
+import { StmtForeachContext } from "./PostgreSqlParser.js";
+import { StmtExitContext } from "./PostgreSqlParser.js";
+import { StmtReturnContext } from "./PostgreSqlParser.js";
+import { StmtRaiseContext } from "./PostgreSqlParser.js";
+import { OptRaiseUsingElemContext } from "./PostgreSqlParser.js";
+import { StmtAssertContext } from "./PostgreSqlParser.js";
+import { LoopBodyContext } from "./PostgreSqlParser.js";
+import { StmtExecsqlContext } from "./PostgreSqlParser.js";
+import { StmtDynexecuteContext } from "./PostgreSqlParser.js";
+import { OptExecuteIntoContext } from "./PostgreSqlParser.js";
+import { StmtOpenContext } from "./PostgreSqlParser.js";
+import { OptOpenBoundListItemContext } from "./PostgreSqlParser.js";
+import { StmtFetchContext } from "./PostgreSqlParser.js";
+import { OptFetchFirectionContext } from "./PostgreSqlParser.js";
+import { StmtMoveContext } from "./PostgreSqlParser.js";
 import { MergeStmtContext } from "./PostgreSqlParser.js";
-import { Data_sourceContext } from "./PostgreSqlParser.js";
-import { Merge_when_clauseContext } from "./PostgreSqlParser.js";
-import { Merge_insertContext } from "./PostgreSqlParser.js";
-import { Merge_updateContext } from "./PostgreSqlParser.js";
-import { Default_values_or_valuesContext } from "./PostgreSqlParser.js";
+import { DataSourceContext } from "./PostgreSqlParser.js";
+import { MergeWhenClauseContext } from "./PostgreSqlParser.js";
+import { MergeInsertContext } from "./PostgreSqlParser.js";
+import { MergeUpdateContext } from "./PostgreSqlParser.js";
+import { DefaultValuesOrValuesContext } from "./PostgreSqlParser.js";
 import { ExprofdefaultContext } from "./PostgreSqlParser.js";
-import { Stmt_closeContext } from "./PostgreSqlParser.js";
-import { Stmt_nullContext } from "./PostgreSqlParser.js";
-import { Stmt_commit_or_rollbackContext } from "./PostgreSqlParser.js";
-import { Stmt_setContext } from "./PostgreSqlParser.js";
-import { Cursor_variableContext } from "./PostgreSqlParser.js";
-import { Exception_sectContext } from "./PostgreSqlParser.js";
-import { Proc_conditionContext } from "./PostgreSqlParser.js";
-import { Any_identifierContext } from "./PostgreSqlParser.js";
-import { Sql_expressionContext } from "./PostgreSqlParser.js";
+import { StmtCloseContext } from "./PostgreSqlParser.js";
+import { StmtNullContext } from "./PostgreSqlParser.js";
+import { StmtCommitOrRollbackContext } from "./PostgreSqlParser.js";
+import { StmtSetContext } from "./PostgreSqlParser.js";
+import { CursorVariableContext } from "./PostgreSqlParser.js";
+import { ExceptionSectContext } from "./PostgreSqlParser.js";
+import { ProcConditionContext } from "./PostgreSqlParser.js";
+import { AnyIdentifierContext } from "./PostgreSqlParser.js";
+import { SqlExpressionContext } from "./PostgreSqlParser.js";
 
 
 /**
@@ -568,17 +563,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAlterRoutineStmt?: (ctx: AlterRoutineStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.alter_routine_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.alterRoutineClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlter_routine_clause?: (ctx: Alter_routine_clauseContext) => Result;
+    visitAlterRoutineClause?: (ctx: AlterRoutineClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.routine_action`.
+     * Visit a parse tree produced by `PostgreSqlParser.routineAction`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitRoutine_action?: (ctx: Routine_actionContext) => Result;
+    visitRoutineAction?: (ctx: RoutineActionContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.createGroupStmt`.
      * @param ctx the parse tree
@@ -598,18 +593,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCreateSchemaStmt?: (ctx: CreateSchemaStmtContext) => Result;
     /**
-     * Visit a parse tree produced by the `schemaNameCreate`
-     * labeled alternative in `PostgreSqlParser.schema_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.schemaNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitSchemaNameCreate?: (ctx: SchemaNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.schema_stmt`.
+     * Visit a parse tree produced by `PostgreSqlParser.schemaStmt`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSchema_stmt?: (ctx: Schema_stmtContext) => Result;
+    visitSchemaStmt?: (ctx: SchemaStmtContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.variableSetStmt`.
      * @param ctx the parse tree
@@ -617,65 +611,65 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitVariableSetStmt?: (ctx: VariableSetStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.set_rest`.
+     * Visit a parse tree produced by `PostgreSqlParser.setRest`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSet_rest?: (ctx: Set_restContext) => Result;
+    visitSetRest?: (ctx: SetRestContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.generic_set`.
+     * Visit a parse tree produced by `PostgreSqlParser.genericSet`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGeneric_set?: (ctx: Generic_setContext) => Result;
+    visitGenericSet?: (ctx: GenericSetContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.set_rest_more`.
+     * Visit a parse tree produced by `PostgreSqlParser.setRestMore`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSet_rest_more?: (ctx: Set_rest_moreContext) => Result;
+    visitSetRestMore?: (ctx: SetRestMoreContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.var_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.varName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitVar_name?: (ctx: Var_nameContext) => Result;
+    visitVarName?: (ctx: VarNameContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.var_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.varList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitVar_list?: (ctx: Var_listContext) => Result;
+    visitVarList?: (ctx: VarListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.var_value`.
+     * Visit a parse tree produced by `PostgreSqlParser.varValue`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitVar_value?: (ctx: Var_valueContext) => Result;
+    visitVarValue?: (ctx: VarValueContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.iso_level`.
+     * Visit a parse tree produced by `PostgreSqlParser.isoLevel`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitIso_level?: (ctx: Iso_levelContext) => Result;
+    visitIsoLevel?: (ctx: IsoLevelContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_boolean_or_string_column`.
+     * Visit a parse tree produced by `PostgreSqlParser.optBooleanOrStringColumn`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_boolean_or_string_column?: (ctx: Opt_boolean_or_string_columnContext) => Result;
+    visitOptBooleanOrStringColumn?: (ctx: OptBooleanOrStringColumnContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_boolean_or_string`.
+     * Visit a parse tree produced by `PostgreSqlParser.booleanOrString`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_boolean_or_string?: (ctx: Opt_boolean_or_stringContext) => Result;
+    visitBooleanOrString?: (ctx: BooleanOrStringContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.zone_value`.
+     * Visit a parse tree produced by `PostgreSqlParser.zoneValue`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitZone_value?: (ctx: Zone_valueContext) => Result;
+    visitZoneValue?: (ctx: ZoneValueContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.nonReservedWordOrStringConst`.
      * @param ctx the parse tree
@@ -689,11 +683,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitVariableResetStmt?: (ctx: VariableResetStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.reset_rest`.
+     * Visit a parse tree produced by `PostgreSqlParser.resetRest`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitReset_rest?: (ctx: Reset_restContext) => Result;
+    visitResetRest?: (ctx: ResetRestContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.setOrResetClause`.
      * @param ctx the parse tree
@@ -737,71 +731,47 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAlterTableStmt?: (ctx: AlterTableStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.alter_table_cmds`.
+     * Visit a parse tree produced by `PostgreSqlParser.alterTableCmds`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlter_table_cmds?: (ctx: Alter_table_cmdsContext) => Result;
+    visitAlterTableCmds?: (ctx: AlterTableCmdsContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.partition_bound_spec`.
+     * Visit a parse tree produced by `PostgreSqlParser.partitionCmd`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPartition_bound_spec?: (ctx: Partition_bound_specContext) => Result;
+    visitPartitionCmd?: (ctx: PartitionCmdContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.partition_bound_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.indexPartitionCmd`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPartition_bound_clause?: (ctx: Partition_bound_clauseContext) => Result;
+    visitIndexPartitionCmd?: (ctx: IndexPartitionCmdContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.partition_bound_choose`.
+     * Visit a parse tree produced by `PostgreSqlParser.alterTableCmd`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPartition_bound_choose?: (ctx: Partition_bound_chooseContext) => Result;
+    visitAlterTableCmd?: (ctx: AlterTableCmdContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.partition_with_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.alterColumnDefault`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPartition_with_clause?: (ctx: Partition_with_clauseContext) => Result;
+    visitAlterColumnDefault?: (ctx: AlterColumnDefaultContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.partition_cmd`.
+     * Visit a parse tree produced by `PostgreSqlParser.optDropBehavior`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPartition_cmd?: (ctx: Partition_cmdContext) => Result;
+    visitOptDropBehavior?: (ctx: OptDropBehaviorContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.index_partition_cmd`.
+     * Visit a parse tree produced by `PostgreSqlParser.collateClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitIndex_partition_cmd?: (ctx: Index_partition_cmdContext) => Result;
-    /**
-     * Visit a parse tree produced by `PostgreSqlParser.alter_table_cmd`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitAlter_table_cmd?: (ctx: Alter_table_cmdContext) => Result;
-    /**
-     * Visit a parse tree produced by `PostgreSqlParser.alter_column_default`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitAlter_column_default?: (ctx: Alter_column_defaultContext) => Result;
-    /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_drop_behavior`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitOpt_drop_behavior?: (ctx: Opt_drop_behaviorContext) => Result;
-    /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_collate_clause`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitOpt_collate_clause?: (ctx: Opt_collate_clauseContext) => Result;
+    visitCollateClause?: (ctx: CollateClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.relOptions`.
      * @param ctx the parse tree
@@ -833,11 +803,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAlterCompositeTypeStmt?: (ctx: AlterCompositeTypeStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.alter_type_cmd`.
+     * Visit a parse tree produced by `PostgreSqlParser.alterTypeCmd`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlter_type_cmd?: (ctx: Alter_type_cmdContext) => Result;
+    visitAlterTypeCmd?: (ctx: AlterTypeCmdContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.closePortalStmt`.
      * @param ctx the parse tree
@@ -863,11 +833,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCopyOptions?: (ctx: CopyOptionsContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.copy_generic_opt_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.copyGenericOptElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCopy_generic_opt_elem?: (ctx: Copy_generic_opt_elemContext) => Result;
+    visitCopyGenericOptElem?: (ctx: CopyGenericOptElemContext) => Result;
     /**
      * Visit a parse tree produced by the `columnCreateTable`
      * labeled alternative in `PostgreSqlParser.createStmt`.
@@ -924,11 +894,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitColConstraintElem?: (ctx: ColConstraintElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.generated_when`.
+     * Visit a parse tree produced by `PostgreSqlParser.generatedWhen`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGenerated_when?: (ctx: Generated_whenContext) => Result;
+    visitGeneratedWhen?: (ctx: GeneratedWhenContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.tableLikeOption`.
      * @param ctx the parse tree
@@ -942,35 +912,35 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitConstraintElem?: (ctx: ConstraintElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_column_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.optColumnList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_column_list?: (ctx: Opt_column_listContext) => Result;
+    visitOptColumnList?: (ctx: OptColumnListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_column_list_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.columnListCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_column_list_create?: (ctx: Opt_column_list_createContext) => Result;
+    visitColumnListCreate?: (ctx: ColumnListCreateContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.column_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.columnList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitColumn_list?: (ctx: Column_listContext) => Result;
+    visitColumnList?: (ctx: ColumnListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_c_include`.
+     * Visit a parse tree produced by `PostgreSqlParser.columnListInclude`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_c_include?: (ctx: Opt_c_includeContext) => Result;
+    visitColumnListInclude?: (ctx: ColumnListIncludeContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.key_match`.
+     * Visit a parse tree produced by `PostgreSqlParser.keyMatch`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitKey_match?: (ctx: Key_matchContext) => Result;
+    visitKeyMatch?: (ctx: KeyMatchContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.exclusionConstraintElem`.
      * @param ctx the parse tree
@@ -978,29 +948,29 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitExclusionConstraintElem?: (ctx: ExclusionConstraintElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.key_actions`.
+     * Visit a parse tree produced by `PostgreSqlParser.keyActions`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitKey_actions?: (ctx: Key_actionsContext) => Result;
+    visitKeyActions?: (ctx: KeyActionsContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.key_update`.
+     * Visit a parse tree produced by `PostgreSqlParser.keyUpdate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitKey_update?: (ctx: Key_updateContext) => Result;
+    visitKeyUpdate?: (ctx: KeyUpdateContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.key_delete`.
+     * Visit a parse tree produced by `PostgreSqlParser.keyDelete`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitKey_delete?: (ctx: Key_deleteContext) => Result;
+    visitKeyDelete?: (ctx: KeyDeleteContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.key_action`.
+     * Visit a parse tree produced by `PostgreSqlParser.keyAction`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitKey_action?: (ctx: Key_actionContext) => Result;
+    visitKeyAction?: (ctx: KeyActionContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.optInherit`.
      * @param ctx the parse tree
@@ -1014,17 +984,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitPartitionSpec?: (ctx: PartitionSpecContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.part_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.partElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPart_elem?: (ctx: Part_elemContext) => Result;
+    visitPartElem?: (ctx: PartElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.table_access_method_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableAccessMethodClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTable_access_method_clause?: (ctx: Table_access_method_clauseContext) => Result;
+    visitTableAccessMethodClause?: (ctx: TableAccessMethodClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.optWith`.
      * @param ctx the parse tree
@@ -1075,17 +1045,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitQueryCreateTable?: (ctx: QueryCreateTableContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.create_as_target`.
+     * Visit a parse tree produced by `PostgreSqlParser.createAsTarget`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreate_as_target?: (ctx: Create_as_targetContext) => Result;
+    visitCreateAsTarget?: (ctx: CreateAsTargetContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_with_data`.
+     * Visit a parse tree produced by `PostgreSqlParser.optWithData`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_with_data?: (ctx: Opt_with_dataContext) => Result;
+    visitOptWithData?: (ctx: OptWithDataContext) => Result;
     /**
      * Visit a parse tree produced by the `createMaterializedView`
      * labeled alternative in `PostgreSqlParser.createMaterializedViewStmt`.
@@ -1160,11 +1130,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCreateFdwStmt?: (ctx: CreateFdwStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.fdw_option`.
+     * Visit a parse tree produced by `PostgreSqlParser.fdwOption`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFdw_option?: (ctx: Fdw_optionContext) => Result;
+    visitFdwOption?: (ctx: FdwOptionContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.alterFdwStmt`.
      * @param ctx the parse tree
@@ -1172,29 +1142,29 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAlterFdwStmt?: (ctx: AlterFdwStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.create_generic_options`.
+     * Visit a parse tree produced by `PostgreSqlParser.createGenericOptions`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreate_generic_options?: (ctx: Create_generic_optionsContext) => Result;
+    visitCreateGenericOptions?: (ctx: CreateGenericOptionsContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.alter_generic_options`.
+     * Visit a parse tree produced by `PostgreSqlParser.alterGenericOptions`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlter_generic_options?: (ctx: Alter_generic_optionsContext) => Result;
+    visitAlterGenericOptions?: (ctx: AlterGenericOptionsContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.alter_generic_option_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.alterGenericOptionElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlter_generic_option_elem?: (ctx: Alter_generic_option_elemContext) => Result;
+    visitAlterGenericOptionElem?: (ctx: AlterGenericOptionElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.generic_option_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.genericOptionElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGeneric_option_elem?: (ctx: Generic_option_elemContext) => Result;
+    visitGenericOptionElem?: (ctx: GenericOptionElemContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.createForeignServerStmt`.
      * @param ctx the parse tree
@@ -1202,11 +1172,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCreateForeignServerStmt?: (ctx: CreateForeignServerStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.foreign_server_version`.
+     * Visit a parse tree produced by `PostgreSqlParser.foreignServerVersion`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitForeign_server_version?: (ctx: Foreign_server_versionContext) => Result;
+    visitForeignServerVersion?: (ctx: ForeignServerVersionContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.alterForeignServerStmt`.
      * @param ctx the parse tree
@@ -1264,11 +1234,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAlterProcedureStmt?: (ctx: AlterProcedureStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.procedure_action`.
+     * Visit a parse tree produced by `PostgreSqlParser.procedureAction`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitProcedure_action?: (ctx: Procedure_actionContext) => Result;
+    visitProcedureAction?: (ctx: ProcedureActionContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.rowSecurityOptionalExpr`.
      * @param ctx the parse tree
@@ -1318,11 +1288,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTriggerWhen?: (ctx: TriggerWhenContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.function_or_procedure`.
+     * Visit a parse tree produced by `PostgreSqlParser.functionOrProcedure`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunction_or_procedure?: (ctx: Function_or_procedureContext) => Result;
+    visitFunctionOrProcedure?: (ctx: FunctionOrProcedureContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.triggerFuncArgs`.
      * @param ctx the parse tree
@@ -1348,11 +1318,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCreateEventTrigStmt?: (ctx: CreateEventTrigStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.event_trigger_when_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.eventTriggerWhenItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitEvent_trigger_when_item?: (ctx: Event_trigger_when_itemContext) => Result;
+    visitEventTriggerWhenItem?: (ctx: EventTriggerWhenItemContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.alterEventTrigStmt`.
      * @param ctx the parse tree
@@ -1378,23 +1348,23 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitDefinition?: (ctx: DefinitionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.def_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.defElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDef_elem?: (ctx: Def_elemContext) => Result;
+    visitDefElem?: (ctx: DefElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.def_arg`.
+     * Visit a parse tree produced by `PostgreSqlParser.defArg`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDef_arg?: (ctx: Def_argContext) => Result;
+    visitDefArg?: (ctx: DefArgContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.old_aggregate_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.oldAggregateElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOld_aggregate_elem?: (ctx: Old_aggregate_elemContext) => Result;
+    visitOldAggregateElem?: (ctx: OldAggregateElemContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.alterEnumStmt`.
      * @param ctx the parse tree
@@ -1402,11 +1372,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAlterEnumStmt?: (ctx: AlterEnumStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_if_not_exists`.
+     * Visit a parse tree produced by `PostgreSqlParser.ifNotExists`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_if_not_exists?: (ctx: Opt_if_not_existsContext) => Result;
+    visitIfNotExists?: (ctx: IfNotExistsContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.createOperatorClassStmt`.
      * @param ctx the parse tree
@@ -1450,29 +1420,29 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitDropStmt?: (ctx: DropStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.object_type_any_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.objectTypeAnyName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitObject_type_any_name?: (ctx: Object_type_any_nameContext) => Result;
+    visitObjectTypeAnyName?: (ctx: ObjectTypeAnyNameContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.object_type_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.objectTypeName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitObject_type_name?: (ctx: Object_type_nameContext) => Result;
+    visitObjectTypeName?: (ctx: ObjectTypeNameContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.any_name_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.anyNameList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAny_name_list?: (ctx: Any_name_listContext) => Result;
+    visitAnyNameList?: (ctx: AnyNameListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.any_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.anyName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAny_name?: (ctx: Any_nameContext) => Result;
+    visitAnyName?: (ctx: AnyNameContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.attrs`.
      * @param ctx the parse tree
@@ -1486,11 +1456,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTruncateStmt?: (ctx: TruncateStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.truncate_table`.
+     * Visit a parse tree produced by `PostgreSqlParser.truncateTable`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTruncate_table?: (ctx: Truncate_tableContext) => Result;
+    visitTruncateTable?: (ctx: TruncateTableContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.commentStmt`.
      * @param ctx the parse tree
@@ -1516,11 +1486,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitFetch_args?: (ctx: Fetch_argsContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.from_in`.
+     * Visit a parse tree produced by `PostgreSqlParser.fromIn`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFrom_in?: (ctx: From_inContext) => Result;
+    visitFromIn?: (ctx: FromInContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.grantStmt`.
      * @param ctx the parse tree
@@ -1552,17 +1522,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitPrivilege?: (ctx: PrivilegeContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.privilege_target`.
+     * Visit a parse tree produced by `PostgreSqlParser.privilegeTarget`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPrivilege_target?: (ctx: Privilege_targetContext) => Result;
+    visitPrivilegeTarget?: (ctx: PrivilegeTargetContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.grantee_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.granteeList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGrantee_list?: (ctx: Grantee_listContext) => Result;
+    visitGranteeList?: (ctx: GranteeListContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.grantRoleStmt`.
      * @param ctx the parse tree
@@ -1588,11 +1558,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitDefaclaction?: (ctx: DefaclactionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.defacl_privilege_target`.
+     * Visit a parse tree produced by `PostgreSqlParser.defaclPrivilegeTarget`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDefacl_privilege_target?: (ctx: Defacl_privilege_targetContext) => Result;
+    visitDefaclPrivilegeTarget?: (ctx: DefaclPrivilegeTargetContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.indexStmt`.
      * @param ctx the parse tree
@@ -1600,17 +1570,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitIndexStmt?: (ctx: IndexStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.index_params`.
+     * Visit a parse tree produced by `PostgreSqlParser.indexParams`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitIndex_params?: (ctx: Index_paramsContext) => Result;
+    visitIndexParams?: (ctx: IndexParamsContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.index_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.indexElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitIndex_elem?: (ctx: Index_elemContext) => Result;
+    visitIndexElem?: (ctx: IndexElemContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.createFunctionStmt`.
      * @param ctx the parse tree
@@ -1618,23 +1588,23 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCreateFunctionStmt?: (ctx: CreateFunctionStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_or_replace`.
+     * Visit a parse tree produced by `PostgreSqlParser.orReplaceOpt`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_or_replace?: (ctx: Opt_or_replaceContext) => Result;
+    visitOrReplaceOpt?: (ctx: OrReplaceOptContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_args`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcArgs`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_args?: (ctx: Func_argsContext) => Result;
+    visitFuncArgs?: (ctx: FuncArgsContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_args_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcArgsList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_args_list?: (ctx: Func_args_listContext) => Result;
+    visitFuncArgsList?: (ctx: FuncArgsListContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.routineWithArgTypesList`.
      * @param ctx the parse tree
@@ -1672,35 +1642,35 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitFunctionWithArgTypes?: (ctx: FunctionWithArgTypesContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_arg`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcArg`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_arg?: (ctx: Func_argContext) => Result;
+    visitFuncArg?: (ctx: FuncArgContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.arg_class`.
+     * Visit a parse tree produced by `PostgreSqlParser.argClass`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitArg_class?: (ctx: Arg_classContext) => Result;
+    visitArgClass?: (ctx: ArgClassContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_type`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcType`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_type?: (ctx: Func_typeContext) => Result;
+    visitFuncType?: (ctx: FuncTypeContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_arg_with_default`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcArgWithDefault`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_arg_with_default?: (ctx: Func_arg_with_defaultContext) => Result;
+    visitFuncArgWithDefault?: (ctx: FuncArgWithDefaultContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.aggregate_args`.
+     * Visit a parse tree produced by `PostgreSqlParser.aggregateArgs`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAggregate_args?: (ctx: Aggregate_argsContext) => Result;
+    visitAggregateArgs?: (ctx: AggregateArgsContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.aggregateWithArgTypes`.
      * @param ctx the parse tree
@@ -1708,29 +1678,29 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAggregateWithArgTypes?: (ctx: AggregateWithArgTypesContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.common_func_opt_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.commonFuncOptItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCommon_func_opt_item?: (ctx: Common_func_opt_itemContext) => Result;
+    visitCommonFuncOptItem?: (ctx: CommonFuncOptItemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.create_func_opt_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.createFuncOptItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreate_func_opt_item?: (ctx: Create_func_opt_itemContext) => Result;
+    visitCreateFuncOptItem?: (ctx: CreateFuncOptItemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_definition`.
+     * Visit a parse tree produced by `PostgreSqlParser.optDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_definition?: (ctx: Opt_definitionContext) => Result;
+    visitOptDefinition?: (ctx: OptDefinitionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.table_func_column`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableFuncColumn`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTable_func_column?: (ctx: Table_func_columnContext) => Result;
+    visitTableFuncColumn?: (ctx: TableFuncColumnContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.alterFunctionStmt`.
      * @param ctx the parse tree
@@ -1762,11 +1732,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitOperatorArgTypes?: (ctx: OperatorArgTypesContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.any_operator`.
+     * Visit a parse tree produced by `PostgreSqlParser.anyOperator`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAny_operator?: (ctx: Any_operatorContext) => Result;
+    visitAnyOperator?: (ctx: AnyOperatorContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.operatorWithArgTypes`.
      * @param ctx the parse tree
@@ -1786,11 +1756,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCreateCastStmt?: (ctx: CreateCastStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_if_exists`.
+     * Visit a parse tree produced by `PostgreSqlParser.ifExists`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_if_exists?: (ctx: Opt_if_existsContext) => Result;
+    visitIfExists?: (ctx: IfExistsContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.createTransformStmt`.
      * @param ctx the parse tree
@@ -1798,11 +1768,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCreateTransformStmt?: (ctx: CreateTransformStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.sql_with_function`.
+     * Visit a parse tree produced by `PostgreSqlParser.sqlWithFunction`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSql_with_function?: (ctx: Sql_with_functionContext) => Result;
+    visitSqlWithFunction?: (ctx: SqlWithFunctionContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.reindexStmt`.
      * @param ctx the parse tree
@@ -1840,17 +1810,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAlterOperatorStmt?: (ctx: AlterOperatorStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.operator_def_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.operatorDefList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOperator_def_list?: (ctx: Operator_def_listContext) => Result;
+    visitOperatorDefList?: (ctx: OperatorDefListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.operator_def_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.operatorDefElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOperator_def_elem?: (ctx: Operator_def_elemContext) => Result;
+    visitOperatorDefElem?: (ctx: OperatorDefElemContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.alterTypeStmt`.
      * @param ctx the parse tree
@@ -1906,11 +1876,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitNotifyStmt?: (ctx: NotifyStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.notify_payload`.
+     * Visit a parse tree produced by `PostgreSqlParser.notifyPayload`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitNotify_payload?: (ctx: Notify_payloadContext) => Result;
+    visitNotifyPayload?: (ctx: NotifyPayloadContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.listenStmt`.
      * @param ctx the parse tree
@@ -1930,23 +1900,23 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTransactionStmt?: (ctx: TransactionStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_transaction`.
+     * Visit a parse tree produced by `PostgreSqlParser.optTransaction`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_transaction?: (ctx: Opt_transactionContext) => Result;
+    visitOptTransaction?: (ctx: OptTransactionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.transaction_mode_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.transactionModeItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTransaction_mode_item?: (ctx: Transaction_mode_itemContext) => Result;
+    visitTransactionModeItem?: (ctx: TransactionModeItemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.transaction_mode_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.transactionModeList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTransaction_mode_list?: (ctx: Transaction_mode_listContext) => Result;
+    visitTransactionModeList?: (ctx: TransactionModeListContext) => Result;
     /**
      * Visit a parse tree produced by the `createView`
      * labeled alternative in `PostgreSqlParser.viewStmt`.
@@ -1968,11 +1938,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCreateDatabase?: (ctx: CreateDatabaseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.create_db_opt_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.createDbOptItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCreate_db_opt_item?: (ctx: Create_db_opt_itemContext) => Result;
+    visitCreateDbOptItem?: (ctx: CreateDbOptItemContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.alterDatabaseStmt`.
      * @param ctx the parse tree
@@ -2046,41 +2016,41 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitAnalyzeStmt?: (ctx: AnalyzeStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.analyze_keyword`.
+     * Visit a parse tree produced by `PostgreSqlParser.analyzeKeyword`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAnalyze_keyword?: (ctx: Analyze_keywordContext) => Result;
+    visitAnalyzeKeyword?: (ctx: AnalyzeKeywordContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.vac_analyze_option_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.vacAnalyzeOptionElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitVac_analyze_option_elem?: (ctx: Vac_analyze_option_elemContext) => Result;
+    visitVacAnalyzeOptionElem?: (ctx: VacAnalyzeOptionElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.analyze_option_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.analyzeOptionElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAnalyze_option_elem?: (ctx: Analyze_option_elemContext) => Result;
+    visitAnalyzeOptionElem?: (ctx: AnalyzeOptionElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_verbose`.
+     * Visit a parse tree produced by `PostgreSqlParser.optVerbose`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_verbose?: (ctx: Opt_verboseContext) => Result;
+    visitOptVerbose?: (ctx: OptVerboseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.vacuum_relation`.
+     * Visit a parse tree produced by `PostgreSqlParser.vacuumRelation`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitVacuum_relation?: (ctx: Vacuum_relationContext) => Result;
+    visitVacuumRelation?: (ctx: VacuumRelationContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.vacuum_relation_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.vacuumRelationList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitVacuum_relation_list?: (ctx: Vacuum_relation_listContext) => Result;
+    visitVacuumRelationList?: (ctx: VacuumRelationListContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.explainStmt`.
      * @param ctx the parse tree
@@ -2094,11 +2064,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitExplainableStmt?: (ctx: ExplainableStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.explain_option_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.explainOptionList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitExplain_option_list?: (ctx: Explain_option_listContext) => Result;
+    visitExplainOptionList?: (ctx: ExplainOptionListContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.prepareStmt`.
      * @param ctx the parse tree
@@ -2106,11 +2076,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitPrepareStmt?: (ctx: PrepareStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.prep_type_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.prepTypeClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPrep_type_clause?: (ctx: Prep_type_clauseContext) => Result;
+    visitPrepTypeClause?: (ctx: PrepTypeClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.preParableStmt`.
      * @param ctx the parse tree
@@ -2124,11 +2094,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitExecuteStmt?: (ctx: ExecuteStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.execute_param_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.executeParamClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitExecute_param_clause?: (ctx: Execute_param_clauseContext) => Result;
+    visitExecuteParamClause?: (ctx: ExecuteParamClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.dealLocateStmt`.
      * @param ctx the parse tree
@@ -2143,29 +2113,29 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitInsertStatement?: (ctx: InsertStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.insert_rest`.
+     * Visit a parse tree produced by `PostgreSqlParser.insertRest`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitInsert_rest?: (ctx: Insert_restContext) => Result;
+    visitInsertRest?: (ctx: InsertRestContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.insert_column_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.insertColumnList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitInsert_column_list?: (ctx: Insert_column_listContext) => Result;
+    visitInsertColumnList?: (ctx: InsertColumnListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.insert_column_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.insertColumnItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitInsert_column_item?: (ctx: Insert_column_itemContext) => Result;
+    visitInsertColumnItem?: (ctx: InsertColumnItemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.returning_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.returningClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitReturning_clause?: (ctx: Returning_clauseContext) => Result;
+    visitReturningClause?: (ctx: ReturningClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.deleteStmt`.
      * @param ctx the parse tree
@@ -2185,17 +2155,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitUpdateStmt?: (ctx: UpdateStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.set_clause_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.setClauseList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSet_clause_list?: (ctx: Set_clause_listContext) => Result;
+    visitSetClauseList?: (ctx: SetClauseListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.set_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.setClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSet_clause?: (ctx: Set_clauseContext) => Result;
+    visitSetClause?: (ctx: SetClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.declareCursorStmt`.
      * @param ctx the parse tree
@@ -2210,65 +2180,65 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitSelectStatement?: (ctx: SelectStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.select_with_parens`.
+     * Visit a parse tree produced by `PostgreSqlParser.selectWithParens`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelect_with_parens?: (ctx: Select_with_parensContext) => Result;
+    visitSelectWithParens?: (ctx: SelectWithParensContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.select_no_parens`.
+     * Visit a parse tree produced by `PostgreSqlParser.selectNoParens`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelect_no_parens?: (ctx: Select_no_parensContext) => Result;
+    visitSelectNoParens?: (ctx: SelectNoParensContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.select_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.selectClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelect_clause?: (ctx: Select_clauseContext) => Result;
+    visitSelectClause?: (ctx: SelectClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.simple_select`.
+     * Visit a parse tree produced by `PostgreSqlParser.simpleSelect`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSimple_select?: (ctx: Simple_selectContext) => Result;
+    visitSimpleSelect?: (ctx: SimpleSelectContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.set_operator_with_all_or_distinct`.
+     * Visit a parse tree produced by `PostgreSqlParser.setOperatorWithAllOrDistinct`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSet_operator_with_all_or_distinct?: (ctx: Set_operator_with_all_or_distinctContext) => Result;
+    visitSetOperatorWithAllOrDistinct?: (ctx: SetOperatorWithAllOrDistinctContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.with_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.withClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWith_clause?: (ctx: With_clauseContext) => Result;
+    visitWithClause?: (ctx: WithClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.common_table_expr`.
+     * Visit a parse tree produced by `PostgreSqlParser.commonTableExpr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCommon_table_expr?: (ctx: Common_table_exprContext) => Result;
+    visitCommonTableExpr?: (ctx: CommonTableExprContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.search_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.searchClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSearch_clause?: (ctx: Search_clauseContext) => Result;
+    visitSearchClause?: (ctx: SearchClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.cycle_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.cycleClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCycle_clause?: (ctx: Cycle_clauseContext) => Result;
+    visitCycleClause?: (ctx: CycleClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.into_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.intoClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitInto_clause?: (ctx: Into_clauseContext) => Result;
+    visitIntoClause?: (ctx: IntoClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.optTempTableName`.
      * @param ctx the parse tree
@@ -2276,17 +2246,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitOptTempTableName?: (ctx: OptTempTableNameContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.distinct_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.distinctClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDistinct_clause?: (ctx: Distinct_clauseContext) => Result;
+    visitDistinctClause?: (ctx: DistinctClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.sort_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.sortClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSort_clause?: (ctx: Sort_clauseContext) => Result;
+    visitSortClause?: (ctx: SortClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.sortBy`.
      * @param ctx the parse tree
@@ -2294,131 +2264,131 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitSortBy?: (ctx: SortByContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.select_limit`.
+     * Visit a parse tree produced by `PostgreSqlParser.selectLimit`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelect_limit?: (ctx: Select_limitContext) => Result;
+    visitSelectLimit?: (ctx: SelectLimitContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.limit_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.limitClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitLimit_clause?: (ctx: Limit_clauseContext) => Result;
+    visitLimitClause?: (ctx: LimitClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.fetch_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.fetchClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFetch_clause?: (ctx: Fetch_clauseContext) => Result;
+    visitFetchClause?: (ctx: FetchClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.offset_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.offsetClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOffset_clause?: (ctx: Offset_clauseContext) => Result;
+    visitOffsetClause?: (ctx: OffsetClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.select_fetch_first_value`.
+     * Visit a parse tree produced by `PostgreSqlParser.selectFetchFirstValue`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelect_fetch_first_value?: (ctx: Select_fetch_first_valueContext) => Result;
+    visitSelectFetchFirstValue?: (ctx: SelectFetchFirstValueContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.group_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.groupClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGroup_clause?: (ctx: Group_clauseContext) => Result;
+    visitGroupClause?: (ctx: GroupClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.group_by_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.groupByList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGroup_by_list?: (ctx: Group_by_listContext) => Result;
+    visitGroupByList?: (ctx: GroupByListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.group_by_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.groupByItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGroup_by_item?: (ctx: Group_by_itemContext) => Result;
+    visitGroupByItem?: (ctx: GroupByItemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.for_locking_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.forLockingClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFor_locking_clause?: (ctx: For_locking_clauseContext) => Result;
+    visitForLockingClause?: (ctx: ForLockingClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.values_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.valuesClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitValues_clause?: (ctx: Values_clauseContext) => Result;
+    visitValuesClause?: (ctx: ValuesClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.from_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.fromClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFrom_clause?: (ctx: From_clauseContext) => Result;
+    visitFromClause?: (ctx: FromClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.from_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.fromList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFrom_list?: (ctx: From_listContext) => Result;
+    visitFromList?: (ctx: FromListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.table_ref`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableRef`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTable_ref?: (ctx: Table_refContext) => Result;
+    visitTableRef?: (ctx: TableRefContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.alias_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.aliasClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlias_clause?: (ctx: Alias_clauseContext) => Result;
+    visitAliasClause?: (ctx: AliasClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_alias_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcAliasClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_alias_clause?: (ctx: Func_alias_clauseContext) => Result;
+    visitFuncAliasClause?: (ctx: FuncAliasClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.join_type`.
+     * Visit a parse tree produced by `PostgreSqlParser.joinType`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitJoin_type?: (ctx: Join_typeContext) => Result;
+    visitJoinType?: (ctx: JoinTypeContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.join_qual`.
+     * Visit a parse tree produced by `PostgreSqlParser.joinQual`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitJoin_qual?: (ctx: Join_qualContext) => Result;
+    visitJoinQual?: (ctx: JoinQualContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.relation_expr`.
+     * Visit a parse tree produced by `PostgreSqlParser.relationExpr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitRelation_expr?: (ctx: Relation_exprContext) => Result;
+    visitRelationExpr?: (ctx: RelationExprContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.publication_relation_expr`.
+     * Visit a parse tree produced by `PostgreSqlParser.publicationRelationExpr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPublication_relation_expr?: (ctx: Publication_relation_exprContext) => Result;
+    visitPublicationRelationExpr?: (ctx: PublicationRelationExprContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.relation_expr_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.relationExprList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitRelation_expr_list?: (ctx: Relation_expr_listContext) => Result;
+    visitRelationExprList?: (ctx: RelationExprListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.relation_expr_opt_alias`.
+     * Visit a parse tree produced by `PostgreSqlParser.relationExprOptAlias`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitRelation_expr_opt_alias?: (ctx: Relation_expr_opt_aliasContext) => Result;
+    visitRelationExprOptAlias?: (ctx: RelationExprOptAliasContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.tableSampleClause`.
      * @param ctx the parse tree
@@ -2426,11 +2396,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTableSampleClause?: (ctx: TableSampleClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_table`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcTable`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_table?: (ctx: Func_tableContext) => Result;
+    visitFuncTable?: (ctx: FuncTableContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.rowsFromItem`.
      * @param ctx the parse tree
@@ -2438,17 +2408,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitRowsFromItem?: (ctx: RowsFromItemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.where_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.whereClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWhere_clause?: (ctx: Where_clauseContext) => Result;
+    visitWhereClause?: (ctx: WhereClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.where_or_current_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.whereOrCurrentClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWhere_or_current_clause?: (ctx: Where_or_current_clauseContext) => Result;
+    visitWhereOrCurrentClause?: (ctx: WhereOrCurrentClauseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.tableFuncElementList`.
      * @param ctx the parse tree
@@ -2474,11 +2444,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitXmlTableColumnEl?: (ctx: XmlTableColumnElContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.xml_namespace_el`.
+     * Visit a parse tree produced by `PostgreSqlParser.xmlNamespaceEle`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitXml_namespace_el?: (ctx: Xml_namespace_elContext) => Result;
+    visitXmlNamespaceEle?: (ctx: XmlNamespaceEleContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.typename`.
      * @param ctx the parse tree
@@ -2504,11 +2474,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitNumeric?: (ctx: NumericContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_float`.
+     * Visit a parse tree produced by `PostgreSqlParser.optFloat`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_float?: (ctx: Opt_floatContext) => Result;
+    visitOptFloat?: (ctx: OptFloatContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.bit`.
      * @param ctx the parse tree
@@ -2528,17 +2498,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitConstDatetime?: (ctx: ConstDatetimeContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_interval`.
+     * Visit a parse tree produced by `PostgreSqlParser.optInterval`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_interval?: (ctx: Opt_intervalContext) => Result;
+    visitOptInterval?: (ctx: OptIntervalContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.interval_second`.
+     * Visit a parse tree produced by `PostgreSqlParser.intervalSecond`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitInterval_second?: (ctx: Interval_secondContext) => Result;
+    visitIntervalSecond?: (ctx: IntervalSecondContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.comparisonOperator`.
      * @param ctx the parse tree
@@ -2670,11 +2640,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitPrimaryExpression?: (ctx: PrimaryExpressionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_application`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcApplication`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_application?: (ctx: Func_applicationContext) => Result;
+    visitFuncApplication?: (ctx: FuncApplicationContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.func_expr`.
      * @param ctx the parse tree
@@ -2682,35 +2652,35 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitFunc_expr?: (ctx: Func_exprContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_expr_windowless`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcExprWindowless`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_expr_windowless?: (ctx: Func_expr_windowlessContext) => Result;
+    visitFuncExprWindowless?: (ctx: FuncExprWindowlessContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_expr_common_subexpr`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcExprCommonSubExpr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_expr_common_subexpr?: (ctx: Func_expr_common_subexprContext) => Result;
+    visitFuncExprCommonSubExpr?: (ctx: FuncExprCommonSubExprContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.xml_attribute_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.xmlAttributeList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitXml_attribute_list?: (ctx: Xml_attribute_listContext) => Result;
+    visitXmlAttributeList?: (ctx: XmlAttributeListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.xml_attribute_el`.
+     * Visit a parse tree produced by `PostgreSqlParser.xmlAttributeEl`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitXml_attribute_el?: (ctx: Xml_attribute_elContext) => Result;
+    visitXmlAttributeEl?: (ctx: XmlAttributeElContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.document_or_content`.
+     * Visit a parse tree produced by `PostgreSqlParser.documentOrContent`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDocument_or_content?: (ctx: Document_or_contentContext) => Result;
+    visitDocumentOrContent?: (ctx: DocumentOrContentContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.xmlExistsArgument`.
      * @param ctx the parse tree
@@ -2718,23 +2688,23 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitXmlExistsArgument?: (ctx: XmlExistsArgumentContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.xml_passing_mech`.
+     * Visit a parse tree produced by `PostgreSqlParser.xmlPassingMech`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitXml_passing_mech?: (ctx: Xml_passing_mechContext) => Result;
+    visitXmlPassingMech?: (ctx: XmlPassingMechContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.window_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.windowClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWindow_clause?: (ctx: Window_clauseContext) => Result;
+    visitWindowClause?: (ctx: WindowClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.window_definition`.
+     * Visit a parse tree produced by `PostgreSqlParser.windowDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWindow_definition?: (ctx: Window_definitionContext) => Result;
+    visitWindowDefinition?: (ctx: WindowDefinitionContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.over_clause`.
      * @param ctx the parse tree
@@ -2742,23 +2712,23 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitOver_clause?: (ctx: Over_clauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.window_specification`.
+     * Visit a parse tree produced by `PostgreSqlParser.windowSpecification`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWindow_specification?: (ctx: Window_specificationContext) => Result;
+    visitWindowSpecification?: (ctx: WindowSpecificationContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_frame_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.optFrameClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_frame_clause?: (ctx: Opt_frame_clauseContext) => Result;
+    visitOptFrameClause?: (ctx: OptFrameClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.frame_bound`.
+     * Visit a parse tree produced by `PostgreSqlParser.frameBound`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFrame_bound?: (ctx: Frame_boundContext) => Result;
+    visitFrameBound?: (ctx: FrameBoundContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.row`.
      * @param ctx the parse tree
@@ -2766,101 +2736,101 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitRow?: (ctx: RowContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.explicit_row`.
+     * Visit a parse tree produced by `PostgreSqlParser.explicitRow`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitExplicit_row?: (ctx: Explicit_rowContext) => Result;
+    visitExplicitRow?: (ctx: ExplicitRowContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.sub_type`.
+     * Visit a parse tree produced by `PostgreSqlParser.subType`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSub_type?: (ctx: Sub_typeContext) => Result;
+    visitSubType?: (ctx: SubTypeContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.all_op`.
+     * Visit a parse tree produced by `PostgreSqlParser.allOp`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAll_op?: (ctx: All_opContext) => Result;
+    visitAllOp?: (ctx: AllOpContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.mathop`.
+     * Visit a parse tree produced by `PostgreSqlParser.mathOp`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitMathop?: (ctx: MathopContext) => Result;
+    visitMathOp?: (ctx: MathOpContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.qual_op`.
+     * Visit a parse tree produced by `PostgreSqlParser.qualOp`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitQual_op?: (ctx: Qual_opContext) => Result;
+    visitQualOp?: (ctx: QualOpContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.qual_all_op`.
+     * Visit a parse tree produced by `PostgreSqlParser.qualAllOp`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitQual_all_op?: (ctx: Qual_all_opContext) => Result;
+    visitQualAllOp?: (ctx: QualAllOpContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.subquery_Op`.
+     * Visit a parse tree produced by `PostgreSqlParser.subqueryOperator`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSubquery_Op?: (ctx: Subquery_OpContext) => Result;
+    visitSubqueryOperator?: (ctx: SubqueryOperatorContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.expr_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.exprList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitExpr_list?: (ctx: Expr_listContext) => Result;
+    visitExprList?: (ctx: ExprListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.column_expr`.
+     * Visit a parse tree produced by `PostgreSqlParser.columnExpr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitColumn_expr?: (ctx: Column_exprContext) => Result;
+    visitColumnExpr?: (ctx: ColumnExprContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.column_expr_no_paren`.
+     * Visit a parse tree produced by `PostgreSqlParser.columnExprNoParen`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitColumn_expr_no_paren?: (ctx: Column_expr_no_parenContext) => Result;
+    visitColumnExprNoParen?: (ctx: ColumnExprNoParenContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_arg_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcArgList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_arg_list?: (ctx: Func_arg_listContext) => Result;
+    visitFuncArgList?: (ctx: FuncArgListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.func_arg_expr`.
+     * Visit a parse tree produced by `PostgreSqlParser.funcArgExpr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFunc_arg_expr?: (ctx: Func_arg_exprContext) => Result;
+    visitFuncArgExpr?: (ctx: FuncArgExprContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.array_expr`.
+     * Visit a parse tree produced by `PostgreSqlParser.arrayExpr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitArray_expr?: (ctx: Array_exprContext) => Result;
+    visitArrayExpr?: (ctx: ArrayExprContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.extract_arg`.
+     * Visit a parse tree produced by `PostgreSqlParser.extractArg`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitExtract_arg?: (ctx: Extract_argContext) => Result;
+    visitExtractArg?: (ctx: ExtractArgContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.unicode_normal_form`.
+     * Visit a parse tree produced by `PostgreSqlParser.unicodeNormalForm`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitUnicode_normal_form?: (ctx: Unicode_normal_formContext) => Result;
+    visitUnicodeNormalForm?: (ctx: UnicodeNormalFormContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.substr_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.substrList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSubstr_list?: (ctx: Substr_listContext) => Result;
+    visitSubstrList?: (ctx: SubstrListContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.when_clause`.
      * @param ctx the parse tree
@@ -2868,11 +2838,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitWhen_clause?: (ctx: When_clauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.indirection_el`.
+     * Visit a parse tree produced by `PostgreSqlParser.indirectionEl`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitIndirection_el?: (ctx: Indirection_elContext) => Result;
+    visitIndirectionEl?: (ctx: IndirectionElContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.indirection`.
      * @param ctx the parse tree
@@ -2880,195 +2850,171 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitIndirection?: (ctx: IndirectionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_indirection`.
+     * Visit a parse tree produced by `PostgreSqlParser.optIndirection`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_indirection?: (ctx: Opt_indirectionContext) => Result;
+    visitOptIndirection?: (ctx: OptIndirectionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.target_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.targetList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTarget_list?: (ctx: Target_listContext) => Result;
+    visitTargetList?: (ctx: TargetListContext) => Result;
     /**
      * Visit a parse tree produced by the `target_label`
-     * labeled alternative in `PostgreSqlParser.target_el`.
+     * labeled alternative in `PostgreSqlParser.targetEl`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitTarget_label?: (ctx: Target_labelContext) => Result;
     /**
      * Visit a parse tree produced by the `target_star`
-     * labeled alternative in `PostgreSqlParser.target_el`.
+     * labeled alternative in `PostgreSqlParser.targetEl`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitTarget_star?: (ctx: Target_starContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.qualified_name_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.qualifiedNameList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitQualified_name_list?: (ctx: Qualified_name_listContext) => Result;
+    visitQualifiedNameList?: (ctx: QualifiedNameListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.table_name_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableNameList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTable_name_list?: (ctx: Table_name_listContext) => Result;
+    visitTableNameList?: (ctx: TableNameListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.schema_name_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.schemaNameList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSchema_name_list?: (ctx: Schema_name_listContext) => Result;
+    visitSchemaNameList?: (ctx: SchemaNameListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.database_nameList`.
+     * Visit a parse tree produced by `PostgreSqlParser.databaseNameList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDatabase_nameList?: (ctx: Database_nameListContext) => Result;
+    visitDatabaseNameList?: (ctx: DatabaseNameListContext) => Result;
     /**
-     * Visit a parse tree produced by the `tablespaceNameCreate`
-     * labeled alternative in `PostgreSqlParser.tablespace_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableSpaceNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTablespaceNameCreate?: (ctx: TablespaceNameCreateContext) => Result;
+    visitTableSpaceNameCreate?: (ctx: TableSpaceNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by the `tablespaceName`
-     * labeled alternative in `PostgreSqlParser.tablespace_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableSpaceName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTablespaceName?: (ctx: TablespaceNameContext) => Result;
+    visitTableSpaceName?: (ctx: TableSpaceNameContext) => Result;
     /**
-     * Visit a parse tree produced by the `tableNameCreate`
-     * labeled alternative in `PostgreSqlParser.table_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitTableNameCreate?: (ctx: TableNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by the `tableName`
-     * labeled alternative in `PostgreSqlParser.table_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitTableName?: (ctx: TableNameContext) => Result;
     /**
-     * Visit a parse tree produced by the `viewNameCreate`
-     * labeled alternative in `PostgreSqlParser.view_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.viewNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitViewNameCreate?: (ctx: ViewNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by the `viewName`
-     * labeled alternative in `PostgreSqlParser.view_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.viewName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitViewName?: (ctx: ViewNameContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.qualified_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.qualifiedName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitQualified_name?: (ctx: Qualified_nameContext) => Result;
+    visitQualifiedName?: (ctx: QualifiedNameContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.tablespace_name_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.tableSpaceNameList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTablespace_name_list?: (ctx: Tablespace_name_listContext) => Result;
+    visitTableSpaceNameList?: (ctx: TableSpaceNameListContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.name_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.nameList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitName_list?: (ctx: Name_listContext) => Result;
+    visitNameList?: (ctx: NameListContext) => Result;
     /**
-     * Visit a parse tree produced by the `databaseNameCreate`
-     * labeled alternative in `PostgreSqlParser.database_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.databaseNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitDatabaseNameCreate?: (ctx: DatabaseNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by the `databaseName`
-     * labeled alternative in `PostgreSqlParser.database_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.databaseName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitDatabaseName?: (ctx: DatabaseNameContext) => Result;
     /**
-     * Visit a parse tree produced by the `schemaName`
-     * labeled alternative in `PostgreSqlParser.schema_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.schemaName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitSchemaName?: (ctx: SchemaNameContext) => Result;
     /**
-     * Visit a parse tree produced by the `routineNameCreate`
-     * labeled alternative in `PostgreSqlParser.routine_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.routineNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitRoutineNameCreate?: (ctx: RoutineNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by the `routineName`
-     * labeled alternative in `PostgreSqlParser.routine_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.routineName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitRoutineName?: (ctx: RoutineNameContext) => Result;
     /**
-     * Visit a parse tree produced by the `procedureName`
-     * labeled alternative in `PostgreSqlParser.procedure_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.procedureName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitProcedureName?: (ctx: ProcedureNameContext) => Result;
     /**
-     * Visit a parse tree produced by the `procedureNameCreate`
-     * labeled alternative in `PostgreSqlParser.procedure_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.procedureNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitProcedureNameCreate?: (ctx: ProcedureNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by the `columnName`
-     * labeled alternative in `PostgreSqlParser.column_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.columnName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
     /**
-     * Visit a parse tree produced by the `columnNameMatch`
-     * labeled alternative in `PostgreSqlParser.column_name`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitColumnNameMatch?: (ctx: ColumnNameMatchContext) => Result;
-    /**
-     * Visit a parse tree produced by the `columnNameCreate`
-     * labeled alternative in `PostgreSqlParser.column_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.columnNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitColumnNameCreate?: (ctx: ColumnNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by the `functionNameCreate`
-     * labeled alternative in `PostgreSqlParser.function_name_create`.
+     * Visit a parse tree produced by `PostgreSqlParser.functionNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitFunctionNameCreate?: (ctx: FunctionNameCreateContext) => Result;
     /**
-     * Visit a parse tree produced by the `functionName`
-     * labeled alternative in `PostgreSqlParser.function_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.functionName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
@@ -3098,11 +3044,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitRoleSpec?: (ctx: RoleSpecContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.role_list`.
+     * Visit a parse tree produced by `PostgreSqlParser.roleList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitRole_list?: (ctx: Role_listContext) => Result;
+    visitRoleList?: (ctx: RoleListContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.colId`.
      * @param ctx the parse tree
@@ -3110,11 +3056,11 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitColId?: (ctx: ColIdContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.type_function_name`.
+     * Visit a parse tree produced by `PostgreSqlParser.typeFunctionName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitType_function_name?: (ctx: Type_function_nameContext) => Result;
+    visitTypeFunctionName?: (ctx: TypeFunctionNameContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.nonReservedWord`.
      * @param ctx the parse tree
@@ -3134,221 +3080,221 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitIdentifier?: (ctx: IdentifierContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.unreserved_keyword`.
+     * Visit a parse tree produced by `PostgreSqlParser.unreservedKeyword`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitUnreserved_keyword?: (ctx: Unreserved_keywordContext) => Result;
+    visitUnreservedKeyword?: (ctx: UnreservedKeywordContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.col_name_keyword`.
+     * Visit a parse tree produced by `PostgreSqlParser.colNameKeyword`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCol_name_keyword?: (ctx: Col_name_keywordContext) => Result;
+    visitColNameKeyword?: (ctx: ColNameKeywordContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.type_func_name_keyword`.
+     * Visit a parse tree produced by `PostgreSqlParser.typeFuncNameKeyword`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitType_func_name_keyword?: (ctx: Type_func_name_keywordContext) => Result;
+    visitTypeFuncNameKeyword?: (ctx: TypeFuncNameKeywordContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.reserved_keyword`.
+     * Visit a parse tree produced by `PostgreSqlParser.reservedKeyword`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitReserved_keyword?: (ctx: Reserved_keywordContext) => Result;
+    visitReservedKeyword?: (ctx: ReservedKeywordContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.pl_block`.
+     * Visit a parse tree produced by `PostgreSqlParser.plBlock`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPl_block?: (ctx: Pl_blockContext) => Result;
+    visitPlBlock?: (ctx: PlBlockContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.label_decl`.
+     * Visit a parse tree produced by `PostgreSqlParser.labelDecl`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitLabel_decl?: (ctx: Label_declContext) => Result;
+    visitLabelDecl?: (ctx: LabelDeclContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.decl_statement`.
+     * Visit a parse tree produced by `PostgreSqlParser.declStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDecl_statement?: (ctx: Decl_statementContext) => Result;
+    visitDeclStatement?: (ctx: DeclStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.decl_cursor_arg`.
+     * Visit a parse tree produced by `PostgreSqlParser.declCursorArg`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDecl_cursor_arg?: (ctx: Decl_cursor_argContext) => Result;
+    visitDeclCursorArg?: (ctx: DeclCursorArgContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.assign_operator`.
+     * Visit a parse tree produced by `PostgreSqlParser.assignOperator`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAssign_operator?: (ctx: Assign_operatorContext) => Result;
+    visitAssignOperator?: (ctx: AssignOperatorContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.proc_stmt`.
+     * Visit a parse tree produced by `PostgreSqlParser.procStmt`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitProc_stmt?: (ctx: Proc_stmtContext) => Result;
+    visitProcStmt?: (ctx: ProcStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_perform`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtPerform`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_perform?: (ctx: Stmt_performContext) => Result;
+    visitStmtPerform?: (ctx: StmtPerformContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_call`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtCall`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_call?: (ctx: Stmt_callContext) => Result;
+    visitStmtCall?: (ctx: StmtCallContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_assign`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtAssign`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_assign?: (ctx: Stmt_assignContext) => Result;
+    visitStmtAssign?: (ctx: StmtAssignContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_getdiag`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtGetdiag`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_getdiag?: (ctx: Stmt_getdiagContext) => Result;
+    visitStmtGetdiag?: (ctx: StmtGetdiagContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.getdiag_list_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.getdiagListItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGetdiag_list_item?: (ctx: Getdiag_list_itemContext) => Result;
+    visitGetdiagListItem?: (ctx: GetdiagListItemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.assign_var`.
+     * Visit a parse tree produced by `PostgreSqlParser.assignVar`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAssign_var?: (ctx: Assign_varContext) => Result;
+    visitAssignVar?: (ctx: AssignVarContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_if`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtIf`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_if?: (ctx: Stmt_ifContext) => Result;
+    visitStmtIf?: (ctx: StmtIfContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_else`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtElse`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_else?: (ctx: Stmt_elseContext) => Result;
+    visitStmtElse?: (ctx: StmtElseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_case`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtCase`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_case?: (ctx: Stmt_caseContext) => Result;
+    visitStmtCase?: (ctx: StmtCaseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_loop_while_for`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtLoopWhileFor`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_loop_while_for?: (ctx: Stmt_loop_while_forContext) => Result;
+    visitStmtLoopWhileFor?: (ctx: StmtLoopWhileForContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.for_control`.
+     * Visit a parse tree produced by `PostgreSqlParser.forControl`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitFor_control?: (ctx: For_controlContext) => Result;
+    visitForControl?: (ctx: ForControlContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_foreach_a`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtForeach`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_foreach_a?: (ctx: Stmt_foreach_aContext) => Result;
+    visitStmtForeach?: (ctx: StmtForeachContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_exit`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtExit`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_exit?: (ctx: Stmt_exitContext) => Result;
+    visitStmtExit?: (ctx: StmtExitContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_return`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtReturn`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_return?: (ctx: Stmt_returnContext) => Result;
+    visitStmtReturn?: (ctx: StmtReturnContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_raise`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtRaise`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_raise?: (ctx: Stmt_raiseContext) => Result;
+    visitStmtRaise?: (ctx: StmtRaiseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_raise_using_elem`.
+     * Visit a parse tree produced by `PostgreSqlParser.optRaiseUsingElem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_raise_using_elem?: (ctx: Opt_raise_using_elemContext) => Result;
+    visitOptRaiseUsingElem?: (ctx: OptRaiseUsingElemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_assert`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtAssert`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_assert?: (ctx: Stmt_assertContext) => Result;
+    visitStmtAssert?: (ctx: StmtAssertContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.loop_body`.
+     * Visit a parse tree produced by `PostgreSqlParser.loopBody`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitLoop_body?: (ctx: Loop_bodyContext) => Result;
+    visitLoopBody?: (ctx: LoopBodyContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_execsql`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtExecsql`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_execsql?: (ctx: Stmt_execsqlContext) => Result;
+    visitStmtExecsql?: (ctx: StmtExecsqlContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_dynexecute`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtDynexecute`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_dynexecute?: (ctx: Stmt_dynexecuteContext) => Result;
+    visitStmtDynexecute?: (ctx: StmtDynexecuteContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_execute_into`.
+     * Visit a parse tree produced by `PostgreSqlParser.optExecuteInto`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_execute_into?: (ctx: Opt_execute_intoContext) => Result;
+    visitOptExecuteInto?: (ctx: OptExecuteIntoContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_open`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtOpen`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_open?: (ctx: Stmt_openContext) => Result;
+    visitStmtOpen?: (ctx: StmtOpenContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_open_bound_list_item`.
+     * Visit a parse tree produced by `PostgreSqlParser.optOpenBoundListItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_open_bound_list_item?: (ctx: Opt_open_bound_list_itemContext) => Result;
+    visitOptOpenBoundListItem?: (ctx: OptOpenBoundListItemContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_fetch`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtFetch`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_fetch?: (ctx: Stmt_fetchContext) => Result;
+    visitStmtFetch?: (ctx: StmtFetchContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.opt_fetch_direction`.
+     * Visit a parse tree produced by `PostgreSqlParser.optFetchFirection`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOpt_fetch_direction?: (ctx: Opt_fetch_directionContext) => Result;
+    visitOptFetchFirection?: (ctx: OptFetchFirectionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_move`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtMove`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_move?: (ctx: Stmt_moveContext) => Result;
+    visitStmtMove?: (ctx: StmtMoveContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.mergeStmt`.
      * @param ctx the parse tree
@@ -3356,35 +3302,35 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitMergeStmt?: (ctx: MergeStmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.data_source`.
+     * Visit a parse tree produced by `PostgreSqlParser.dataSource`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitData_source?: (ctx: Data_sourceContext) => Result;
+    visitDataSource?: (ctx: DataSourceContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.merge_when_clause`.
+     * Visit a parse tree produced by `PostgreSqlParser.mergeWhenClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitMerge_when_clause?: (ctx: Merge_when_clauseContext) => Result;
+    visitMergeWhenClause?: (ctx: MergeWhenClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.merge_insert`.
+     * Visit a parse tree produced by `PostgreSqlParser.mergeInsert`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitMerge_insert?: (ctx: Merge_insertContext) => Result;
+    visitMergeInsert?: (ctx: MergeInsertContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.merge_update`.
+     * Visit a parse tree produced by `PostgreSqlParser.mergeUpdate`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitMerge_update?: (ctx: Merge_updateContext) => Result;
+    visitMergeUpdate?: (ctx: MergeUpdateContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.default_values_or_values`.
+     * Visit a parse tree produced by `PostgreSqlParser.defaultValuesOrValues`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitDefault_values_or_values?: (ctx: Default_values_or_valuesContext) => Result;
+    visitDefaultValuesOrValues?: (ctx: DefaultValuesOrValuesContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.exprofdefault`.
      * @param ctx the parse tree
@@ -3392,58 +3338,58 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitExprofdefault?: (ctx: ExprofdefaultContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_close`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtClose`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_close?: (ctx: Stmt_closeContext) => Result;
+    visitStmtClose?: (ctx: StmtCloseContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_null`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtNull`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_null?: (ctx: Stmt_nullContext) => Result;
+    visitStmtNull?: (ctx: StmtNullContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_commit_or_rollback`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtCommitOrRollback`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_commit_or_rollback?: (ctx: Stmt_commit_or_rollbackContext) => Result;
+    visitStmtCommitOrRollback?: (ctx: StmtCommitOrRollbackContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.stmt_set`.
+     * Visit a parse tree produced by `PostgreSqlParser.stmtSet`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitStmt_set?: (ctx: Stmt_setContext) => Result;
+    visitStmtSet?: (ctx: StmtSetContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.cursor_variable`.
+     * Visit a parse tree produced by `PostgreSqlParser.cursorVariable`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCursor_variable?: (ctx: Cursor_variableContext) => Result;
+    visitCursorVariable?: (ctx: CursorVariableContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.exception_sect`.
+     * Visit a parse tree produced by `PostgreSqlParser.exceptionSect`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitException_sect?: (ctx: Exception_sectContext) => Result;
+    visitExceptionSect?: (ctx: ExceptionSectContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.proc_condition`.
+     * Visit a parse tree produced by `PostgreSqlParser.procCondition`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitProc_condition?: (ctx: Proc_conditionContext) => Result;
+    visitProcCondition?: (ctx: ProcConditionContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.any_identifier`.
+     * Visit a parse tree produced by `PostgreSqlParser.anyIdentifier`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAny_identifier?: (ctx: Any_identifierContext) => Result;
+    visitAnyIdentifier?: (ctx: AnyIdentifierContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.sql_expression`.
+     * Visit a parse tree produced by `PostgreSqlParser.sqlExpression`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSql_expression?: (ctx: Sql_expressionContext) => Result;
+    visitSqlExpression?: (ctx: SqlExpressionContext) => Result;
 }
 
