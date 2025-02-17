@@ -8,5 +8,6 @@ DELETE ;
 
 CREATE ;
 
-
-
+CREATE TABLE tb (id 
+ 
+);
