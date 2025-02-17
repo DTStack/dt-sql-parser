@@ -1,11 +1,11 @@
 import {
-    type AltertablestmtContext,
+    type AlterTableStmtContext,
     Column_defContext,
     type ColumnCreateTableContext,
     type ColumnNameCreateContext,
     type CreateDatabaseContext,
     type CreateForeignTableContext,
-    type CreatefunctionstmtContext,
+    type CreateFunctionStmtContext,
     type CreateMaterializedViewContext,
     type CreatePartitionForeignTableContext,
     type CreateViewContext,
@@ -18,7 +18,7 @@ import {
     type QueryCreateTableContext,
     type SelectStatementContext,
     type SingleStmtContext,
-    Table_refContext,
+    TableRefContext,
     type TableNameContext,
     type TableNameCreateContext,
     type ViewNameContext,
@@ -47,7 +47,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
                 ? [
                       {
                           attrName: AttrName.alias,
-                          endContextList: [Table_refContext.name],
+                          endContextList: [TableRefContext.name],
                       },
                   ]
                 : undefined
@@ -67,7 +67,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
                 ? [
                       {
                           attrName: AttrName.alias,
-                          endContextList: [Table_refContext.name],
+                          endContextList: [TableRefContext.name],
                       },
                   ]
                 : undefined
@@ -184,17 +184,17 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         this.popStmt();
     }
 
-    enterCreatefunctionstmt(ctx: CreatefunctionstmtContext) {
+    enterCreateFunctionStmt(ctx: CreateFunctionStmtContext) {
         this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
     }
 
-    exitCreatefunctionstmt(ctx: CreatefunctionstmtContext) {
+    exitCreateFunctionStmt(ctx: CreateFunctionStmtContext) {
         this.popStmt();
     }
-    enterAltertablestmt(ctx: AltertablestmtContext) {
+    enterAlterTableStmt(ctx: AlterTableStmtContext) {
         this.pushStmt(ctx, StmtContextType.ALTER_TABLE_STMT);
     }
-    exitAltertablestmt(ctx: AltertablestmtContext) {
+    exitAlterTableStmt(ctx: AlterTableStmtContext) {
         this.popStmt();
     }
 }

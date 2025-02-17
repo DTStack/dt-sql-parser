@@ -20,12 +20,12 @@ import { ExplainDetailsContext } from "./FlinkSqlParser.js";
 import { ExplainDetailContext } from "./FlinkSqlParser.js";
 import { UseStatementContext } from "./FlinkSqlParser.js";
 import { UseModuleStatementContext } from "./FlinkSqlParser.js";
-import { ShowStatememtContext } from "./FlinkSqlParser.js";
+import { ShowStatementContext } from "./FlinkSqlParser.js";
 import { LoadStatementContext } from "./FlinkSqlParser.js";
-import { UnloadStatememtContext } from "./FlinkSqlParser.js";
-import { SetStatememtContext } from "./FlinkSqlParser.js";
-import { ResetStatememtContext } from "./FlinkSqlParser.js";
-import { JarStatememtContext } from "./FlinkSqlParser.js";
+import { UnloadStatementContext } from "./FlinkSqlParser.js";
+import { SetStatementContext } from "./FlinkSqlParser.js";
+import { ResetStatementContext } from "./FlinkSqlParser.js";
+import { JarStatementContext } from "./FlinkSqlParser.js";
 import { DtAddStatementContext } from "./FlinkSqlParser.js";
 import { DtFilePathContext } from "./FlinkSqlParser.js";
 import { CreateTableContext } from "./FlinkSqlParser.js";
@@ -88,7 +88,7 @@ import { ValuesRowDefinitionContext } from "./FlinkSqlParser.js";
 import { InsertMulStatementCompatibilityContext } from "./FlinkSqlParser.js";
 import { InsertMulStatementContext } from "./FlinkSqlParser.js";
 import { QueryStatementContext } from "./FlinkSqlParser.js";
-import { ValuesCaluseContext } from "./FlinkSqlParser.js";
+import { ValuesClauseContext } from "./FlinkSqlParser.js";
 import { WithClauseContext } from "./FlinkSqlParser.js";
 import { WithItemContext } from "./FlinkSqlParser.js";
 import { WithItemNameContext } from "./FlinkSqlParser.js";
@@ -103,9 +103,9 @@ import { TablePrimaryContext } from "./FlinkSqlParser.js";
 import { SystemTimePeriodContext } from "./FlinkSqlParser.js";
 import { DateTimeExpressionContext } from "./FlinkSqlParser.js";
 import { InlineDataValueClauseContext } from "./FlinkSqlParser.js";
-import { WindoTVFClauseContext } from "./FlinkSqlParser.js";
-import { WindowTVFExressionContext } from "./FlinkSqlParser.js";
-import { WindoTVFNameContext } from "./FlinkSqlParser.js";
+import { WindowTVFClauseContext } from "./FlinkSqlParser.js";
+import { WindowTVFExpressionContext } from "./FlinkSqlParser.js";
+import { WindowTVFNameContext } from "./FlinkSqlParser.js";
 import { WindowTVFParamContext } from "./FlinkSqlParser.js";
 import { TimeIntervalParamNameContext } from "./FlinkSqlParser.js";
 import { ColumnDescriptorContext } from "./FlinkSqlParser.js";
@@ -114,7 +114,7 @@ import { WhereClauseContext } from "./FlinkSqlParser.js";
 import { GroupByClauseContext } from "./FlinkSqlParser.js";
 import { GroupItemDefinitionContext } from "./FlinkSqlParser.js";
 import { GroupingSetsContext } from "./FlinkSqlParser.js";
-import { GroupingSetsNotaionNameContext } from "./FlinkSqlParser.js";
+import { GroupingSetsNotationNameContext } from "./FlinkSqlParser.js";
 import { GroupWindowFunctionContext } from "./FlinkSqlParser.js";
 import { GroupWindowFunctionNameContext } from "./FlinkSqlParser.js";
 import { TimeAttrColumnContext } from "./FlinkSqlParser.js";
@@ -123,17 +123,17 @@ import { WindowClauseContext } from "./FlinkSqlParser.js";
 import { NamedWindowContext } from "./FlinkSqlParser.js";
 import { WindowSpecContext } from "./FlinkSqlParser.js";
 import { MatchRecognizeClauseContext } from "./FlinkSqlParser.js";
-import { OrderByCaluseContext } from "./FlinkSqlParser.js";
-import { OrderItemDefitionContext } from "./FlinkSqlParser.js";
+import { OrderByClauseContext } from "./FlinkSqlParser.js";
+import { OrderItemDefinitionContext } from "./FlinkSqlParser.js";
 import { LimitClauseContext } from "./FlinkSqlParser.js";
 import { PartitionByClauseContext } from "./FlinkSqlParser.js";
 import { QuantifiersContext } from "./FlinkSqlParser.js";
 import { MeasuresClauseContext } from "./FlinkSqlParser.js";
-import { PatternDefinationContext } from "./FlinkSqlParser.js";
+import { PatternDefinitionContext } from "./FlinkSqlParser.js";
 import { PatternVariableContext } from "./FlinkSqlParser.js";
 import { OutputModeContext } from "./FlinkSqlParser.js";
 import { AfterMatchStrategyContext } from "./FlinkSqlParser.js";
-import { PatternVariablesDefinationContext } from "./FlinkSqlParser.js";
+import { PatternVariablesDefinitionContext } from "./FlinkSqlParser.js";
 import { WindowFrameContext } from "./FlinkSqlParser.js";
 import { FrameBoundContext } from "./FlinkSqlParser.js";
 import { WithinClauseContext } from "./FlinkSqlParser.js";
@@ -307,11 +307,11 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitUseModuleStatement?: (ctx: UseModuleStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.showStatememt`.
+     * Visit a parse tree produced by `FlinkSqlParser.showStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitShowStatememt?: (ctx: ShowStatememtContext) => Result;
+    visitShowStatement?: (ctx: ShowStatementContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.loadStatement`.
      * @param ctx the parse tree
@@ -319,29 +319,29 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitLoadStatement?: (ctx: LoadStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.unloadStatememt`.
+     * Visit a parse tree produced by `FlinkSqlParser.unloadStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitUnloadStatememt?: (ctx: UnloadStatememtContext) => Result;
+    visitUnloadStatement?: (ctx: UnloadStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.setStatememt`.
+     * Visit a parse tree produced by `FlinkSqlParser.setStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSetStatememt?: (ctx: SetStatememtContext) => Result;
+    visitSetStatement?: (ctx: SetStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.resetStatememt`.
+     * Visit a parse tree produced by `FlinkSqlParser.resetStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitResetStatememt?: (ctx: ResetStatememtContext) => Result;
+    visitResetStatement?: (ctx: ResetStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.jarStatememt`.
+     * Visit a parse tree produced by `FlinkSqlParser.jarStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitJarStatememt?: (ctx: JarStatememtContext) => Result;
+    visitJarStatement?: (ctx: JarStatementContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.dtAddStatement`.
      * @param ctx the parse tree
@@ -717,11 +717,11 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitQueryStatement?: (ctx: QueryStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.valuesCaluse`.
+     * Visit a parse tree produced by `FlinkSqlParser.valuesClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitValuesCaluse?: (ctx: ValuesCaluseContext) => Result;
+    visitValuesClause?: (ctx: ValuesClauseContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.withClause`.
      * @param ctx the parse tree
@@ -807,23 +807,23 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitInlineDataValueClause?: (ctx: InlineDataValueClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.windoTVFClause`.
+     * Visit a parse tree produced by `FlinkSqlParser.windowTVFClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWindoTVFClause?: (ctx: WindoTVFClauseContext) => Result;
+    visitWindowTVFClause?: (ctx: WindowTVFClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.windowTVFExression`.
+     * Visit a parse tree produced by `FlinkSqlParser.windowTVFExpression`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWindowTVFExression?: (ctx: WindowTVFExressionContext) => Result;
+    visitWindowTVFExpression?: (ctx: WindowTVFExpressionContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.windoTVFName`.
+     * Visit a parse tree produced by `FlinkSqlParser.windowTVFName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitWindoTVFName?: (ctx: WindoTVFNameContext) => Result;
+    visitWindowTVFName?: (ctx: WindowTVFNameContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.windowTVFParam`.
      * @param ctx the parse tree
@@ -873,11 +873,11 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitGroupingSets?: (ctx: GroupingSetsContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.groupingSetsNotaionName`.
+     * Visit a parse tree produced by `FlinkSqlParser.groupingSetsNotationName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitGroupingSetsNotaionName?: (ctx: GroupingSetsNotaionNameContext) => Result;
+    visitGroupingSetsNotationName?: (ctx: GroupingSetsNotationNameContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.groupWindowFunction`.
      * @param ctx the parse tree
@@ -927,17 +927,17 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitMatchRecognizeClause?: (ctx: MatchRecognizeClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.orderByCaluse`.
+     * Visit a parse tree produced by `FlinkSqlParser.orderByClause`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOrderByCaluse?: (ctx: OrderByCaluseContext) => Result;
+    visitOrderByClause?: (ctx: OrderByClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.orderItemDefition`.
+     * Visit a parse tree produced by `FlinkSqlParser.orderItemDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitOrderItemDefition?: (ctx: OrderItemDefitionContext) => Result;
+    visitOrderItemDefinition?: (ctx: OrderItemDefinitionContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.limitClause`.
      * @param ctx the parse tree
@@ -963,11 +963,11 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitMeasuresClause?: (ctx: MeasuresClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.patternDefination`.
+     * Visit a parse tree produced by `FlinkSqlParser.patternDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPatternDefination?: (ctx: PatternDefinationContext) => Result;
+    visitPatternDefinition?: (ctx: PatternDefinitionContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.patternVariable`.
      * @param ctx the parse tree
@@ -987,11 +987,11 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitAfterMatchStrategy?: (ctx: AfterMatchStrategyContext) => Result;
     /**
-     * Visit a parse tree produced by `FlinkSqlParser.patternVariablesDefination`.
+     * Visit a parse tree produced by `FlinkSqlParser.patternVariablesDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPatternVariablesDefination?: (ctx: PatternVariablesDefinationContext) => Result;
+    visitPatternVariablesDefinition?: (ctx: PatternVariablesDefinitionContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.windowFrame`.
      * @param ctx the parse tree
