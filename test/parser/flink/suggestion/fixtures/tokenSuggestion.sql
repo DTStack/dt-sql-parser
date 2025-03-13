@@ -1,10 +1,9 @@
 SELECT * FROM aa.bb;
 
-USE 
+USE
 ;
 CREATE 
 ;
-SHOW 
-;
-CREATE TABLE IF NOT EXISTS
-;
+SHOW
+
+CREATE TABLE tmp_table (col INT) WITH ('connector'='kafka');
