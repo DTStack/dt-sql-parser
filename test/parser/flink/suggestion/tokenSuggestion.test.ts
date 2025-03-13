@@ -123,18 +123,17 @@ describe('Flink SQL Token Suggestion', () => {
     });
 
     test('Create Statement table properties', () => {
-        const tokenSql = `CREATE TABLE tmp_table (col INT) WITH ('connector'='kafka');`;
         const scenarios = [
             {
                 caretPosition: {
-                    lineNumber: 1,
+                    lineNumber: 9,
                     column: 45,
                 },
                 entityContextType: EntityContextType.TABLE_PROPERTY_KEY,
             },
             {
                 caretPosition: {
-                    lineNumber: 1,
+                    lineNumber: 9,
                     column: 55,
                 },
                 entityContextType: EntityContextType.TABLE_PROPERTY_VALUE,
@@ -143,7 +142,7 @@ describe('Flink SQL Token Suggestion', () => {
 
         scenarios.forEach((scenario) => {
             const suggestion = flink.getSuggestionAtCaretPosition(
-                tokenSql,
+                commentOtherLine(tokenSql, scenario.caretPosition.lineNumber),
                 scenario.caretPosition
             )?.syntax;
 
