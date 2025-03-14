@@ -1430,7 +1430,7 @@ viewNameCreate
     ;
 
 subQuerySource
-    : LPAREN queryStatementExpression RPAREN KW_AS? id_
+    : LPAREN queryStatementExpression RPAREN KW_AS? alias=id_
     ;
 
 /**
@@ -1451,9 +1451,13 @@ partitionTableFunctionSource
     ;
 
 partitionedTableFunction
+    : atomPartitionedTableFunction alias=id_?
+    ;
+
+atomPartitionedTableFunction
     : n=id_ LPAREN KW_ON ptfsrc=partitionTableFunctionSource spec=partitioningSpec? (
         Identifier LPAREN expression RPAREN (COMMA Identifier LPAREN expression RPAREN)*
-    )? RPAREN alias=id_?
+    )? RPAREN
     ;
 
 /**
@@ -1481,12 +1485,16 @@ valuesClause
     )
     ;
 
+atomValuesClause
+    : KW_TABLE LPAREN valuesClause RPAREN
+    ;
+
 /*
 This represents a clause like this:
 TABLE(VALUES(1,2),(2,3)) as VirtTable(col1,col2)
 */
 virtualTableSource
-    : KW_TABLE LPAREN valuesClause RPAREN KW_AS? tableAlias (LPAREN id_ (COMMA id_)*)? RPAREN
+    : atomValuesClause KW_AS? alias=tableAlias (LPAREN id_ (COMMA id_)*)? RPAREN
     ;
 
 /*
@@ -1494,10 +1502,7 @@ Rules for parsing selectClause
  select a,b,c ...
 */
 selectClause
-    : KW_SELECT QUERY_HINT? (
-        (KW_ALL | KW_DISTINCT)? selectItem (COMMA selectItem)*
-        | KW_TRANSFORM selectTrfmClause
-    )
+    : KW_SELECT QUERY_HINT? ((KW_ALL | KW_DISTINCT)? selectList | KW_TRANSFORM selectTrfmClause)
     | trfmClause
     ;
 
@@ -1507,9 +1512,26 @@ selectTrfmClause
     )? rowFormat recordReader
     ;
 
+selectList
+    : selectItem (COMMA selectItem)*
+    ;
+
 selectItem
     : tableAllColumns
-    | ((columnName | expression) (KW_AS? id_ | KW_AS LPAREN id_ (COMMA id_)* RPAREN)?)
+    | (
+        (selectLiteralColumnName | selectExpressionColumnName) (
+            KW_AS? alias=id_
+            | KW_AS LPAREN alias=id_ (COMMA alias=id_)* RPAREN
+        )?
+    )
+    ;
+
+selectLiteralColumnName
+    : columnName
+    ;
+
+selectExpressionColumnName
+    : expression
     ;
 
 trfmClause

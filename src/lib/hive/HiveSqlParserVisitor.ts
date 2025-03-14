@@ -257,12 +257,17 @@ import { SubQuerySourceContext } from "./HiveSqlParser.js";
 import { PartitioningSpecContext } from "./HiveSqlParser.js";
 import { PartitionTableFunctionSourceContext } from "./HiveSqlParser.js";
 import { PartitionedTableFunctionContext } from "./HiveSqlParser.js";
+import { AtomPartitionedTableFunctionContext } from "./HiveSqlParser.js";
 import { WhereClauseContext } from "./HiveSqlParser.js";
 import { ValuesClauseContext } from "./HiveSqlParser.js";
+import { AtomValuesClauseContext } from "./HiveSqlParser.js";
 import { VirtualTableSourceContext } from "./HiveSqlParser.js";
 import { SelectClauseContext } from "./HiveSqlParser.js";
 import { SelectTrfmClauseContext } from "./HiveSqlParser.js";
+import { SelectListContext } from "./HiveSqlParser.js";
 import { SelectItemContext } from "./HiveSqlParser.js";
+import { SelectLiteralColumnNameContext } from "./HiveSqlParser.js";
+import { SelectExpressionColumnNameContext } from "./HiveSqlParser.js";
 import { TrfmClauseContext } from "./HiveSqlParser.js";
 import { SelectExpressionContext } from "./HiveSqlParser.js";
 import { SelectExpressionListContext } from "./HiveSqlParser.js";
@@ -1865,6 +1870,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitPartitionedTableFunction?: (ctx: PartitionedTableFunctionContext) => Result;
     /**
+     * Visit a parse tree produced by `HiveSqlParser.atomPartitionedTableFunction`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAtomPartitionedTableFunction?: (ctx: AtomPartitionedTableFunctionContext) => Result;
+    /**
      * Visit a parse tree produced by `HiveSqlParser.whereClause`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1876,6 +1887,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitValuesClause?: (ctx: ValuesClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.atomValuesClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAtomValuesClause?: (ctx: AtomValuesClauseContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.virtualTableSource`.
      * @param ctx the parse tree
@@ -1895,11 +1912,29 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitSelectTrfmClause?: (ctx: SelectTrfmClauseContext) => Result;
     /**
+     * Visit a parse tree produced by `HiveSqlParser.selectList`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectList?: (ctx: SelectListContext) => Result;
+    /**
      * Visit a parse tree produced by `HiveSqlParser.selectItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitSelectItem?: (ctx: SelectItemContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.trfmClause`.
      * @param ctx the parse tree
