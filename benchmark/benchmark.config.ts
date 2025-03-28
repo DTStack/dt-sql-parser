@@ -80,6 +80,11 @@ const testFiles: TestFile[] = [
         includes: ['flink'],
         testTypes: ['getSuggestionAtCaretPosition'],
     },
+    {
+        name: 'Collect Semantics',
+        sqlFileName: 'select.sql',
+        testTypes: ['getSemanticContextAtCaretPosition'],
+    },
 ];
 
 export default {

@@ -4,12 +4,19 @@ import { processTokenCandidates } from '../common/tokenUtils';
 import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
 import { ProgramContext, TrinoSqlParser } from '../../lib/trino/TrinoSqlParser';
 import { BasicSQL } from '../common/basicSQL';
+import {
+    Suggestions,
+    EntityContextType,
+    SyntaxSuggestion,
+    CaretPosition,
+    SemanticCollectOptions,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { TrinoEntityCollector } from './trinoEntityCollector';
 import { TrinoErrorListener } from './trinoErrorListener';
 import { TrinoSqlSplitListener } from './trinoSplitListener';
+import { TrinoSemanticContextCollector } from './trinoSemanticContextCollector';
 
 export { TrinoEntityCollector, TrinoSqlSplitListener };
 
@@ -32,6 +39,15 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
     }
     protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
         return new TrinoEntityCollector(input, allTokens, caretTokenIndex);
+    }
+
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new TrinoSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
     protected preferredRules: Set<number> = new Set([
