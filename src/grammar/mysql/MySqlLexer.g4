@@ -41,7 +41,7 @@ channels {
     ERRORCHANNEL
 }
 
-SPACE              : [ \t\r\n]+                                                           -> channel(HIDDEN);
+SPACE              : (' ' | '\t' | '\r' | '\n')                                           -> channel(HIDDEN);
 SPEC_MYSQL_COMMENT : '/*!' .+? '*/'                                                       -> channel(MYSQLCOMMENT);
 COMMENT_INPUT      : '/*' .*? '*/'                                                        -> channel(HIDDEN);
 LINE_COMMENT: (('--' [ \t]* | '#') ~[\r\n]* ('\r'? '\n' | EOF) | '--' ('\r'? '\n' | EOF)) -> channel(HIDDEN);

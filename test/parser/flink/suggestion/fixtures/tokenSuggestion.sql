@@ -5,3 +5,7 @@ USE
 CREATE 
 ;
 SHOW 
+
+CREATE TABLE tb (id 
+ 
+);

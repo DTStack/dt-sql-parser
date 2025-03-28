@@ -350,4 +350,4 @@ SIMPLE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 
 BRACKETED_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
 
-WS: [ \r\n\t]+ -> channel(HIDDEN);
+WS: (' ' | '\t' | '\r' | '\n') -> channel(HIDDEN);
