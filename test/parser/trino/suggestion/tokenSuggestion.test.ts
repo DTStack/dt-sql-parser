@@ -19,7 +19,13 @@ describe('Trino SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArray(['VIEW', 'MATERIALIZED', 'TABLE', 'SCHEMA']);
+        expect(suggestion).toMatchUnorderedArray([
+            'VIEW',
+            'MATERIALIZED',
+            'TABLE',
+            'SCHEMA',
+            'MATERIALIZED VIEW',
+        ]);
     });
 
     test('After CREATE', () => {
@@ -41,6 +47,8 @@ describe('Trino SQL Token Suggestion', () => {
             'TABLE',
             'SCHEMA',
             'CATALOG',
+            'OR REPLACE',
+            'MATERIALIZED VIEW',
         ]);
     });
 
@@ -109,6 +117,7 @@ describe('Trino SQL Token Suggestion', () => {
             'TABLE',
             'SCHEMA',
             'CATALOG',
+            'MATERIALIZED VIEW',
         ]);
     });
 
@@ -123,5 +132,31 @@ describe('Trino SQL Token Suggestion', () => {
         )?.keywords;
 
         expect(suggestion).toMatchUnorderedArray(['INTO']);
+    });
+
+    test('After CREATE TABLE, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 15,
+            column: 14,
+        };
+        const suggestion = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('IF');
+        expect(suggestion).toContain('IF NOT EXISTS');
+    });
+
+    test('After CREATE TABLE IF, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 15,
+            column: 17,
+        };
+        const suggestion = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('NOT');
+        expect(suggestion).toContain('NOT EXISTS');
     });
 });
