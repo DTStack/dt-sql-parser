@@ -21,7 +21,7 @@ describe('MySQL Visitor Tests', () => {
             visitProgram = (ctx) => {
                 return this.visitChildren(ctx);
             };
-            visitTable_ref = (ctx) => {
+            visitTableRef = (ctx) => {
                 return ctx.getText().toLowerCase();
             };
         }

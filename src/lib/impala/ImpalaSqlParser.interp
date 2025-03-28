@@ -614,7 +614,7 @@ alterView
 renameView
 alterViewOwner
 renameTable
-alterUnSetOrSetViewTblproperties
+alterUnSetOrSetViewTblProperties
 truncateTableStatement
 describeStatement
 computeStatement
