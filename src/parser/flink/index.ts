@@ -3,13 +3,20 @@ import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { processTokenCandidates } from '../common/tokenUtils';
 import { FlinkSqlLexer } from '../../lib/flink/FlinkSqlLexer';
 import { FlinkSqlParser, ProgramContext } from '../../lib/flink/FlinkSqlParser';
+import {
+    CaretPosition,
+    EntityContextType,
+    SemanticCollectOptions,
+    Suggestions,
+    SyntaxSuggestion,
+} from '../common/types';
 import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { FlinkEntityCollector } from './flinkEntityCollector';
 import { FlinkErrorListener } from './flinkErrorListener';
 import { FlinkSqlSplitListener } from './flinkSplitListener';
+import { FlinkSemanticContextCollector } from './flinkSemanticContextCollector';
 
 export { FlinkEntityCollector, FlinkSqlSplitListener };
 
@@ -46,6 +53,15 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
     }
     protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
         return new FlinkEntityCollector(input, allTokens, caretTokenIndex);
+    }
+
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new FlinkSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
     protected processCandidates(
