@@ -40,6 +40,7 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         FlinkSqlParser.RULE_functionName, // functionName
         FlinkSqlParser.RULE_functionNameCreate, // functionName that will be created
         FlinkSqlParser.RULE_columnName,
+        FlinkSqlParser.RULE_columnNamePath,
         FlinkSqlParser.RULE_columnNameCreate,
     ]);
 
@@ -125,6 +126,19 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                 }
                 case FlinkSqlParser.RULE_columnNameCreate: {
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
+                    break;
+                }
+                case FlinkSqlParser.RULE_columnNamePath: {
+                    if (
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_selectClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_groupByClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_limitClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_havingClause)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
                     break;
                 }
                 default:

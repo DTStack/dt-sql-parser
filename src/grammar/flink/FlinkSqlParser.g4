@@ -189,6 +189,10 @@ columnName
     | {this.shouldMatchEmpty()}?
     ;
 
+columnNamePath
+    : uid
+    ;
+
 columnNameList
     : LR_BRACKET columnName (COMMA columnName)* RR_BRACKET
     ;
@@ -452,9 +456,9 @@ queryStatement
     : valuesCaluse
     | withClause queryStatement
     | LR_BRACKET queryStatement RR_BRACKET
-    | left=queryStatement operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT) KW_ALL? right=queryStatement orderByCaluse? limitClause?
-    | selectClause orderByCaluse? limitClause?
-    | selectStatement orderByCaluse? limitClause?
+    | left=queryStatement operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT) KW_ALL? right=queryStatement orderByClause? limitClause?
+    | selectClause orderByClause? limitClause?
+    | selectStatement orderByClause? limitClause?
     ;
 
 valuesCaluse
@@ -627,15 +631,15 @@ namedWindow
     ;
 
 windowSpec
-    : name=errorCapturingIdentifier? LR_BRACKET partitionByClause? orderByCaluse? windowFrame? RR_BRACKET
+    : name=errorCapturingIdentifier? LR_BRACKET partitionByClause? orderByClause? windowFrame? RR_BRACKET
     ;
 
 matchRecognizeClause
-    : KW_MATCH_RECOGNIZE LR_BRACKET partitionByClause? orderByCaluse? measuresClause? outputMode? afterMatchStrategy? patternDefination?
+    : KW_MATCH_RECOGNIZE LR_BRACKET partitionByClause? orderByClause? measuresClause? outputMode? afterMatchStrategy? patternDefination?
         patternVariablesDefination RR_BRACKET (KW_AS? identifier)?
     ;
 
-orderByCaluse
+orderByClause
     : KW_ORDER KW_BY orderItemDefition (COMMA orderItemDefition)*
     ;
 
@@ -764,7 +768,7 @@ primaryExpression
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
-    | identifier                                                          # columnReference
+    | columnNamePath                                                      # columnReference
     | dereferenceDefinition                                               # dereference
     | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression
     | KW_CURRENT_TIMESTAMP                                                # dateFunctionExpression
