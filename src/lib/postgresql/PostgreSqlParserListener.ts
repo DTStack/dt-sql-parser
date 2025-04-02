@@ -48,10 +48,6 @@ import { CheckpointstmtContext } from "./PostgreSqlParser.js";
 import { DiscardstmtContext } from "./PostgreSqlParser.js";
 import { AltertablestmtContext } from "./PostgreSqlParser.js";
 import { Alter_table_cmdsContext } from "./PostgreSqlParser.js";
-import { Partition_bound_specContext } from "./PostgreSqlParser.js";
-import { Partition_bound_cluaseContext } from "./PostgreSqlParser.js";
-import { Partition_bound_chooseContext } from "./PostgreSqlParser.js";
-import { Partition_with_cluaseContext } from "./PostgreSqlParser.js";
 import { Partition_cmdContext } from "./PostgreSqlParser.js";
 import { Index_partition_cmdContext } from "./PostgreSqlParser.js";
 import { Alter_table_cmdContext } from "./PostgreSqlParser.js";
@@ -62,6 +58,8 @@ import { ReloptionsContext } from "./PostgreSqlParser.js";
 import { Opt_reloptionsContext } from "./PostgreSqlParser.js";
 import { Reloption_elemContext } from "./PostgreSqlParser.js";
 import { PartitionboundspecContext } from "./PostgreSqlParser.js";
+import { PartitionboundexprContext } from "./PostgreSqlParser.js";
+import { PartitionboundchooseContext } from "./PostgreSqlParser.js";
 import { AltercompositetypestmtContext } from "./PostgreSqlParser.js";
 import { Alter_type_cmdContext } from "./PostgreSqlParser.js";
 import { CloseportalstmtContext } from "./PostgreSqlParser.js";
@@ -900,46 +898,6 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitAlter_table_cmds?: (ctx: Alter_table_cmdsContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.partition_bound_spec`.
-     * @param ctx the parse tree
-     */
-    enterPartition_bound_spec?: (ctx: Partition_bound_specContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSqlParser.partition_bound_spec`.
-     * @param ctx the parse tree
-     */
-    exitPartition_bound_spec?: (ctx: Partition_bound_specContext) => void;
-    /**
-     * Enter a parse tree produced by `PostgreSqlParser.partition_bound_cluase`.
-     * @param ctx the parse tree
-     */
-    enterPartition_bound_cluase?: (ctx: Partition_bound_cluaseContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSqlParser.partition_bound_cluase`.
-     * @param ctx the parse tree
-     */
-    exitPartition_bound_cluase?: (ctx: Partition_bound_cluaseContext) => void;
-    /**
-     * Enter a parse tree produced by `PostgreSqlParser.partition_bound_choose`.
-     * @param ctx the parse tree
-     */
-    enterPartition_bound_choose?: (ctx: Partition_bound_chooseContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSqlParser.partition_bound_choose`.
-     * @param ctx the parse tree
-     */
-    exitPartition_bound_choose?: (ctx: Partition_bound_chooseContext) => void;
-    /**
-     * Enter a parse tree produced by `PostgreSqlParser.partition_with_cluase`.
-     * @param ctx the parse tree
-     */
-    enterPartition_with_cluase?: (ctx: Partition_with_cluaseContext) => void;
-    /**
-     * Exit a parse tree produced by `PostgreSqlParser.partition_with_cluase`.
-     * @param ctx the parse tree
-     */
-    exitPartition_with_cluase?: (ctx: Partition_with_cluaseContext) => void;
-    /**
      * Enter a parse tree produced by `PostgreSqlParser.partition_cmd`.
      * @param ctx the parse tree
      */
@@ -1039,6 +997,26 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitPartitionboundspec?: (ctx: PartitionboundspecContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.partitionboundexpr`.
+     * @param ctx the parse tree
+     */
+    enterPartitionboundexpr?: (ctx: PartitionboundexprContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.partitionboundexpr`.
+     * @param ctx the parse tree
+     */
+    exitPartitionboundexpr?: (ctx: PartitionboundexprContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.partitionboundchoose`.
+     * @param ctx the parse tree
+     */
+    enterPartitionboundchoose?: (ctx: PartitionboundchooseContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.partitionboundchoose`.
+     * @param ctx the parse tree
+     */
+    exitPartitionboundchoose?: (ctx: PartitionboundchooseContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.altercompositetypestmt`.
      * @param ctx the parse tree

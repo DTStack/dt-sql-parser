@@ -409,10 +409,7 @@ discardstmt
 altertablestmt
     : KW_ALTER KW_TABLE opt_if_exists? relation_expr (alter_table_cmds | partition_cmd)
     | KW_ALTER KW_TABLE KW_ALL KW_IN opttablespace (KW_OWNED KW_BY role_list)? KW_SET KW_TABLESPACE tablespace_name_create KW_NOWAIT?
-    | KW_ALTER KW_TABLE opt_if_exists? table_name index_partition_cmd (
-        KW_FOR KW_VALUES partition_bound_spec
-        | KW_DEFAULT
-    )
+    | KW_ALTER KW_TABLE opt_if_exists? table_name index_partition_cmd partitionboundspec
     | KW_ALTER KW_TABLE opt_if_exists? table_name KW_DETACH KW_PARTITION qualified_name (
         KW_CONCURRENTLY
         | KW_FINALIZE
@@ -427,26 +424,6 @@ altertablestmt
 
 alter_table_cmds
     : alter_table_cmd (COMMA alter_table_cmd)*
-    ;
-
-partition_bound_spec
-    : KW_IN execute_param_clause
-    | KW_FROM partition_bound_cluase KW_TO partition_bound_cluase
-    | KW_WITH partition_with_cluase
-    ;
-
-partition_bound_cluase
-    : OPEN_PAREN partition_bound_choose (COMMA partition_bound_choose)* CLOSE_PAREN
-    ;
-
-partition_bound_choose
-    : execute_param_clause
-    | KW_MINVALUE
-    | KW_MAXVALUE
-    ;
-
-partition_with_cluase
-    : OPEN_PAREN KW_MODULUS numericonly COMMA KW_REMAINDER numericonly CLOSE_PAREN
     ;
 
 partition_cmd
@@ -526,10 +503,20 @@ reloption_elem
     ;
 
 partitionboundspec
-    : KW_FOR KW_VALUES KW_WITH OPEN_PAREN KW_MODULUS Integral COMMA KW_REMAINDER Integral CLOSE_PAREN
+    : KW_FOR KW_VALUES KW_WITH OPEN_PAREN KW_MODULUS numericonly COMMA KW_REMAINDER numericonly CLOSE_PAREN
     | KW_FOR KW_VALUES KW_IN execute_param_clause
-    | KW_FOR KW_VALUES KW_FROM execute_param_clause KW_TO execute_param_clause
+    | KW_FOR KW_VALUES KW_FROM partitionboundexpr KW_TO partitionboundexpr
     | KW_DEFAULT
+    ;
+
+partitionboundexpr
+    : OPEN_PAREN partitionboundchoose (COMMA partitionboundchoose)* CLOSE_PAREN
+    ;
+
+partitionboundchoose
+    : expr_list
+    | KW_MINVALUE
+    | KW_MAXVALUE
     ;
 
 altercompositetypestmt
