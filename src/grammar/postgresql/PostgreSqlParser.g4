@@ -505,8 +505,18 @@ reloption_elem
 partitionboundspec
     : KW_FOR KW_VALUES KW_WITH OPEN_PAREN KW_MODULUS numericonly COMMA KW_REMAINDER numericonly CLOSE_PAREN
     | KW_FOR KW_VALUES KW_IN execute_param_clause
-    | KW_FOR KW_VALUES KW_FROM execute_param_clause KW_TO execute_param_clause
+    | KW_FOR KW_VALUES KW_FROM partitionboundexpr KW_TO partitionboundexpr
     | KW_DEFAULT
+    ;
+
+partitionboundexpr
+    : OPEN_PAREN partitionboundchoose (COMMA partitionboundchoose)* CLOSE_PAREN
+    ;
+
+partitionboundchoose
+    : expr_list
+    | KW_MINVALUE
+    | KW_MAXVALUE
     ;
 
 altercompositetypestmt

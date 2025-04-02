@@ -58,6 +58,8 @@ import { ReloptionsContext } from "./PostgreSqlParser.js";
 import { Opt_reloptionsContext } from "./PostgreSqlParser.js";
 import { Reloption_elemContext } from "./PostgreSqlParser.js";
 import { PartitionboundspecContext } from "./PostgreSqlParser.js";
+import { PartitionboundexprContext } from "./PostgreSqlParser.js";
+import { PartitionboundchooseContext } from "./PostgreSqlParser.js";
 import { AltercompositetypestmtContext } from "./PostgreSqlParser.js";
 import { Alter_type_cmdContext } from "./PostgreSqlParser.js";
 import { CloseportalstmtContext } from "./PostgreSqlParser.js";
@@ -797,6 +799,18 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitPartitionboundspec?: (ctx: PartitionboundspecContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.partitionboundexpr`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPartitionboundexpr?: (ctx: PartitionboundexprContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.partitionboundchoose`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPartitionboundchoose?: (ctx: PartitionboundchooseContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.altercompositetypestmt`.
      * @param ctx the parse tree

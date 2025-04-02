@@ -58,6 +58,8 @@ import { ReloptionsContext } from "./PostgreSqlParser.js";
 import { Opt_reloptionsContext } from "./PostgreSqlParser.js";
 import { Reloption_elemContext } from "./PostgreSqlParser.js";
 import { PartitionboundspecContext } from "./PostgreSqlParser.js";
+import { PartitionboundexprContext } from "./PostgreSqlParser.js";
+import { PartitionboundchooseContext } from "./PostgreSqlParser.js";
 import { AltercompositetypestmtContext } from "./PostgreSqlParser.js";
 import { Alter_type_cmdContext } from "./PostgreSqlParser.js";
 import { CloseportalstmtContext } from "./PostgreSqlParser.js";
@@ -995,6 +997,26 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitPartitionboundspec?: (ctx: PartitionboundspecContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.partitionboundexpr`.
+     * @param ctx the parse tree
+     */
+    enterPartitionboundexpr?: (ctx: PartitionboundexprContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.partitionboundexpr`.
+     * @param ctx the parse tree
+     */
+    exitPartitionboundexpr?: (ctx: PartitionboundexprContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.partitionboundchoose`.
+     * @param ctx the parse tree
+     */
+    enterPartitionboundchoose?: (ctx: PartitionboundchooseContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.partitionboundchoose`.
+     * @param ctx the parse tree
+     */
+    exitPartitionboundchoose?: (ctx: PartitionboundchooseContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.altercompositetypestmt`.
      * @param ctx the parse tree
