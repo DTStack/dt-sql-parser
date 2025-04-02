@@ -7,7 +7,7 @@ class MySqlSemanticContextCollector
     implements MySqlParserListener
 {
     override getWhiteSpaceRuleType(): number {
-        return MySqlParser.SPACE;
+        return MySqlParser.WHITE_SPACE;
     }
     override getStatementRuleType(): number {
         return MySqlParser.RULE_singleStatement;

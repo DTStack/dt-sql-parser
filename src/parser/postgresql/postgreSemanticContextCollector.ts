@@ -7,7 +7,7 @@ class PostgreSemanticContextCollector
     implements PostgreSqlParserListener
 {
     override getWhiteSpaceRuleType(): number {
-        return PostgreSqlParser.Whitespace;
+        return PostgreSqlParser.WHITE_SPACE;
     }
     override getStatementRuleType(): number {
         return PostgreSqlParser.RULE_singleStmt;

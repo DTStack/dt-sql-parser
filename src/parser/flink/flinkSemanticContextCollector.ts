@@ -7,7 +7,7 @@ class FlinkSemanticContextCollector
     implements FlinkSqlParserListener
 {
     override getWhiteSpaceRuleType(): number {
-        return FlinkSqlParser.SPACE;
+        return FlinkSqlParser.WHITE_SPACE;
     }
     override getStatementRuleType(): number {
         return FlinkSqlParser.RULE_singleStatement;

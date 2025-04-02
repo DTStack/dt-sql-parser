@@ -7,7 +7,7 @@ class SparkSemanticContextCollector
     implements SparkSqlParserListener
 {
     override getWhiteSpaceRuleType(): number {
-        return SparkSqlParser.WS;
+        return SparkSqlParser.WHITE_SPACE;
     }
     override getStatementRuleType(): number {
         return SparkSqlParser.RULE_singleStatement;
