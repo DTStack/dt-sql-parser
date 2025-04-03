@@ -29,6 +29,8 @@ import type { EntityCollector } from './entityCollector';
 import { EntityContext } from './entityCollector';
 import SemanticContextCollector from './semanticContextCollector';
 
+export const SQL_SPLIT_SYMBOL_TEXT = ';';
+
 /**
  * Basic SQL class, every sql needs extends it.
  */
@@ -286,7 +288,6 @@ export abstract class BasicSQL<
         if (errors.length || !this._parseTree) {
             return null;
         }
-
         const splitListener = this.splitListener;
         this.listen(splitListener, this._parseTree);
 
@@ -297,6 +298,78 @@ export abstract class BasicSQL<
             .filter(Boolean) as TextSlice[];
 
         return res;
+    }
+
+    /**
+     * Get the smaller range of input
+     * @param input string
+     * @param allTokens all tokens from input
+     * @param tokenIndexOffset offset of the tokenIndex in the range of input
+     * @param caretTokenIndex tokenIndex of caretPosition
+     * @returns inputSlice: string, caretTokenIndex: number
+     */
+    private splitInputBySymbolText(
+        input: string,
+        allTokens: Token[],
+        tokenIndexOffset: number,
+        caretTokenIndex: number
+    ): { inputSlice: string; allTokens: Token[]; caretTokenIndex: number } {
+        const tokens = allTokens.slice(tokenIndexOffset);
+        /**
+         * Set startToken
+         */
+        let startToken: Token | null = null;
+        for (let tokenIndex = caretTokenIndex - tokenIndexOffset; tokenIndex >= 0; tokenIndex--) {
+            const token = tokens[tokenIndex];
+            if (token?.text === SQL_SPLIT_SYMBOL_TEXT) {
+                startToken = tokens[tokenIndex + 1];
+                break;
+            }
+        }
+        if (startToken === null) {
+            startToken = tokens[0];
+        }
+
+        /**
+         * Set stopToken
+         */
+        let stopToken: Token | null = null;
+        for (
+            let tokenIndex = caretTokenIndex - tokenIndexOffset;
+            tokenIndex < tokens.length;
+            tokenIndex++
+        ) {
+            const token = tokens[tokenIndex];
+            if (token?.text === SQL_SPLIT_SYMBOL_TEXT) {
+                stopToken = token;
+                break;
+            }
+        }
+        if (stopToken === null) {
+            stopToken = tokens[tokens.length - 1];
+        }
+
+        const indexOffset = tokens[0].start;
+        let startIndex = startToken.start - indexOffset;
+        let stopIndex = stopToken.stop + 1 - indexOffset;
+
+        /**
+         * Save offset of the tokenIndex in the range of input
+         * compared to the tokenIndex in the whole input
+         */
+        const _tokenIndexOffset = startToken.tokenIndex;
+        const _caretTokenIndex = caretTokenIndex - _tokenIndexOffset;
+
+        /**
+         * Get the smaller range of _input
+         */
+        const _input = input.slice(startIndex, stopIndex);
+
+        return {
+            inputSlice: _input,
+            allTokens: allTokens.slice(_tokenIndexOffset),
+            caretTokenIndex: _caretTokenIndex,
+        };
     }
 
     /**
@@ -448,9 +521,32 @@ export abstract class BasicSQL<
 
         const inputInfo = this.getMinimumInputInfo(input, caretTokenIndex, this._parseTree);
         if (!inputInfo) return null;
-        const { input: _input, tokenIndexOffset } = inputInfo;
-        caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+        const { input: _input, tokenIndexOffset, statementCount } = inputInfo;
         let inputSlice = _input;
+
+        /**
+         * Split the inputSlice by separator to get the smaller range of inputSlice.
+         */
+        if (inputSlice.includes(SQL_SPLIT_SYMBOL_TEXT)) {
+            const {
+                inputSlice: _inputSlice,
+                allTokens: _allTokens,
+                caretTokenIndex: _caretTokenIndex,
+            } = this.splitInputBySymbolText(
+                inputSlice,
+                allTokens,
+                tokenIndexOffset,
+                caretTokenIndex
+            );
+
+            allTokens = _allTokens;
+            caretTokenIndex = _caretTokenIndex;
+            inputSlice = _inputSlice;
+        } else {
+            if (statementCount > 1) {
+                caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+            }
+        }
 
         let sqlParserIns = this._parser;
         let parseTree = this._parseTree;
@@ -475,7 +571,8 @@ export abstract class BasicSQL<
             candidates,
             allTokens,
             caretTokenIndex,
-            tokenIndexOffset
+            0
+            // tokenIndexOffset
         );
 
         const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(

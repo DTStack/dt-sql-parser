@@ -6,8 +6,7 @@ import {
     SemanticContext,
     SqlSplitStrategy,
 } from '../common/types';
-
-export const SQL_SPLIT_SYMBOL_TEXT = ';';
+import { SQL_SPLIT_SYMBOL_TEXT } from './basicSQL';
 
 abstract class SemanticContextCollector {
     constructor(
