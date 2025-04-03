@@ -70,15 +70,13 @@ export abstract class BasicSQL<
     /**
      * Convert candidates to suggestions
      * @param candidates candidate list
-     * @param allTokens all tokens from input
+     * @param allTokens slice all tokens from input by tokenIndexOffset
      * @param caretTokenIndex tokenIndex of caretPosition
-     * @param tokenIndexOffset offset of the tokenIndex in the candidates compared to the tokenIndex in allTokens
      */
     protected abstract processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token>;
 
     /**
@@ -420,9 +418,8 @@ export abstract class BasicSQL<
         const candidates = core.collectCandidates(newTokenIndex, c3Context);
         const originalSuggestions = this.processCandidates(
             candidates,
-            allTokens,
-            newTokenIndex,
-            tokenIndexOffset
+            allTokens.slice(tokenIndexOffset),
+            newTokenIndex
         );
 
         const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(

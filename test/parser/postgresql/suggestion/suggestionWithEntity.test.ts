@@ -166,7 +166,17 @@ describe('PostgreSql Syntax Suggestion with collect entity', () => {
             (syn) => syn.syntaxContextType === EntityContextType.COLUMN
         );
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['a_column']);
+        expect(suggestion?.wordRanges?.length).toBe(1);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'a_column',
+                line: 13,
+                startIndex: 399,
+                endIndex: 406,
+                startColumn: 27,
+                endColumn: 35,
+            },
+        ]);
 
         const entities = postgre.getAllEntities(sql, pos);
         expect(entities.length).toBe(1);

@@ -30,7 +30,33 @@ describe('MySQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'tb']);
+        expect(suggestion?.wordRanges?.length).toBe(3);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 1,
+                startIndex: 12,
+                endIndex: 13,
+                startColumn: 13,
+                endColumn: 15,
+            },
+            {
+                text: '.',
+                line: 1,
+                startIndex: 14,
+                endIndex: 14,
+                startColumn: 15,
+                endColumn: 16,
+            },
+            {
+                text: 'tb',
+                line: 1,
+                startIndex: 15,
+                endIndex: 16,
+                startColumn: 16,
+                endColumn: 18,
+            },
+        ]);
     });
 
     test('Select table ', () => {

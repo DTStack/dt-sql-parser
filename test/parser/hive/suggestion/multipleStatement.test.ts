@@ -36,7 +36,25 @@ describe('HiveSQL Multiple Statements Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+        expect(suggestion?.wordRanges?.length).toBe(2);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 9,
+                startIndex: 272,
+                endIndex: 273,
+                startColumn: 14,
+                endColumn: 16,
+            },
+            {
+                text: '.',
+                line: 9,
+                startIndex: 274,
+                endIndex: 274,
+                startColumn: 16,
+                endColumn: 17,
+            },
+        ]);
     });
 
     test('Insert into table ', () => {
