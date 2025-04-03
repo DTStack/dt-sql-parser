@@ -9,6 +9,7 @@ import {
     ParseTreeListener,
     PredictionMode,
     ANTLRErrorListener,
+    Parser,
 } from 'antlr4ng';
 import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import { SQLParserBase } from '../../lib/SQLParserBase';
@@ -212,6 +213,28 @@ export abstract class BasicSQL<
     }
 
     /**
+     * Get the parseTree of the input string.
+     * @param input source string
+     * @returns parse and parserTree
+     */
+    private parserWithNewInput(inputSlice: string) {
+        const lexer = this.createLexer(inputSlice);
+        lexer.removeErrorListeners();
+        const tokenStream = new CommonTokenStream(lexer);
+        tokenStream.fill();
+        const parser = this.createParserFromTokenStream(tokenStream);
+        parser.interpreter.predictionMode = PredictionMode.SLL;
+        parser.removeErrorListeners();
+        parser.buildParseTrees = true;
+        parser.errorHandler = new ErrorStrategy();
+
+        return {
+            sqlParserIns: parser,
+            parseTree: parser.program(),
+        };
+    }
+
+    /**
      * Validate input string and return syntax errors if exists.
      * @param input source string
      * @returns syntax errors
@@ -263,8 +286,8 @@ export abstract class BasicSQL<
         if (errors.length || !this._parseTree) {
             return null;
         }
-        const splitListener = this.splitListener;
 
+        const splitListener = this.splitListener;
         this.listen(splitListener, this._parseTree);
 
         const res = splitListener.statementsContext
@@ -277,35 +300,30 @@ export abstract class BasicSQL<
     }
 
     /**
-     * Get a minimum boundary parser near tokenIndex.
-     * @param input source string.
-     * @param tokenIndex start from which index to minimize the boundary.
-     * @param originParseTree the parse tree need to be minimized, default value is the result of parsing `input`.
-     * @returns minimum parser info
+     * Get the minimum input string that can be parsed successfully by c3.
+     * @param input source string
+     * @param caretTokenIndex tokenIndex of caretPosition
+     * @param originParseTree origin parseTree
+     * @returns MinimumInputInfo
      */
-    public getMinimumParserInfo(
+    public getMinimumInputInfo(
         input: string,
-        tokenIndex: number,
-        originParseTree?: ParserRuleContext | null
-    ) {
-        if (arguments.length <= 2) {
-            this.parseWithCache(input);
-            originParseTree = this._parseTree;
-        }
-
+        caretTokenIndex: number,
+        originParseTree: ParserRuleContext | undefined
+    ): { input: string; tokenIndexOffset: number; statementCount: number } | null {
         if (!originParseTree || !input?.length) return null;
+        let inputSlice = input;
 
-        const splitListener = this.splitListener;
         /**
          * Split sql by statement.
          * Try to collect candidates in as small a range as possible.
          */
+        const splitListener = this.splitListener;
         this.listen(splitListener, originParseTree);
+
         const statementCount = splitListener.statementsContext?.length;
         const statementsContext = splitListener.statementsContext;
         let tokenIndexOffset = 0;
-        let sqlParserIns = this._parser;
-        let parseTree = originParseTree;
 
         // If there are multiple statements.
         if (statementCount > 1) {
@@ -330,14 +348,14 @@ export abstract class BasicSQL<
                 const isNextCtxValid =
                     index === statementCount - 1 || !statementsContext[index + 1]?.exception;
 
-                if (ctx.stop && ctx.stop.tokenIndex < tokenIndex && isPrevCtxValid) {
+                if (ctx.stop && ctx.stop.tokenIndex < caretTokenIndex && isPrevCtxValid) {
                     startStatement = ctx;
                 }
 
                 if (
                     ctx.start &&
                     !stopStatement &&
-                    ctx.start.tokenIndex > tokenIndex &&
+                    ctx.start.tokenIndex > caretTokenIndex &&
                     isNextCtxValid
                 ) {
                     stopStatement = ctx;
@@ -347,41 +365,67 @@ export abstract class BasicSQL<
 
             // A boundary consisting of the index of the input.
             const startIndex = startStatement?.start?.start ?? 0;
-            const stopIndex = stopStatement?.stop?.stop ?? input.length - 1;
+            const stopIndex = stopStatement?.stop?.stop ?? inputSlice.length - 1;
 
             /**
              * Save offset of the tokenIndex in the range of input
              * compared to the tokenIndex in the whole input
              */
             tokenIndexOffset = startStatement?.start?.tokenIndex ?? 0;
-            tokenIndex = tokenIndex - tokenIndexOffset;
+            inputSlice = inputSlice.slice(startIndex, stopIndex);
+        }
 
-            /**
-             * Reparse the input fragment，
-             * and c3 will collect candidates in the newly generated parseTree.
-             */
-            const inputSlice = input.slice(startIndex, stopIndex);
+        return {
+            input: inputSlice,
+            tokenIndexOffset,
+            statementCount,
+        };
+    }
 
-            const lexer = this.createLexer(inputSlice);
-            lexer.removeErrorListeners();
-            const tokenStream = new CommonTokenStream(lexer);
-            tokenStream.fill();
+    /**
+     * Get a minimum boundary parser near caretTokenIndex.
+     * @param input source string.
+     * @param caretTokenIndex start from which index to minimize the boundary.
+     * @param originParseTree the parse tree need to be minimized, default value is the result of parsing `input`.
+     * @returns minimum parser info
+     */
+    public getMinimumParserInfo(
+        input: string,
+        caretTokenIndex: number,
+        originParseTree: ParserRuleContext | undefined
+    ): {
+        parser: Parser;
+        parseTree: ParserRuleContext;
+        tokenIndexOffset: number;
+        newTokenIndex: number;
+    } | null {
+        if (!originParseTree || !input?.length) return null;
 
-            const parser = this.createParserFromTokenStream(tokenStream);
-            parser.interpreter.predictionMode = PredictionMode.SLL;
-            parser.removeErrorListeners();
-            parser.buildParseTrees = true;
-            parser.errorHandler = new ErrorStrategy();
+        const inputInfo = this.getMinimumInputInfo(input, caretTokenIndex, originParseTree);
+        if (!inputInfo) return null;
+        const { input: inputSlice, tokenIndexOffset } = inputInfo;
+        caretTokenIndex = caretTokenIndex - tokenIndexOffset;
 
-            sqlParserIns = parser;
-            parseTree = parser.program();
+        let sqlParserIns = this._parser;
+        let parseTree = originParseTree;
+
+        /**
+         * Reparse the input fragment,
+         * and c3 will collect candidates in the newly generated parseTree when input changed.
+         */
+        if (inputSlice !== input) {
+            const { sqlParserIns: _sqlParserIns, parseTree: _parseTree } =
+                this.parserWithNewInput(inputSlice);
+
+            sqlParserIns = _sqlParserIns;
+            parseTree = _parseTree;
         }
 
         return {
             parser: sqlParserIns,
             parseTree,
             tokenIndexOffset,
-            newTokenIndex: tokenIndex,
+            newTokenIndex: caretTokenIndex,
         };
     }
 
@@ -396,32 +440,41 @@ export abstract class BasicSQL<
         caretPosition: CaretPosition
     ): Suggestions | null {
         this.parseWithCache(input);
-
         if (!this._parseTree) return null;
 
-        const allTokens = this.getAllTokens(input);
+        let allTokens = this.getAllTokens(input);
         let caretTokenIndex = findCaretTokenIndex(caretPosition, allTokens);
-
         if (!caretTokenIndex && caretTokenIndex !== 0) return null;
 
-        const minimumParser = this.getMinimumParserInfo(input, caretTokenIndex);
+        const inputInfo = this.getMinimumInputInfo(input, caretTokenIndex, this._parseTree);
+        if (!inputInfo) return null;
+        const { input: _input, tokenIndexOffset } = inputInfo;
+        caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+        let inputSlice = _input;
 
-        if (!minimumParser) return null;
+        let sqlParserIns = this._parser;
+        let parseTree = this._parseTree;
 
-        const {
-            parser: sqlParserIns,
-            tokenIndexOffset,
-            newTokenIndex,
-            parseTree: c3Context,
-        } = minimumParser;
+        /**
+         * Reparse the input fragment,
+         * and c3 will collect candidates in the newly generated parseTree when input changed.
+         */
+        if (inputSlice !== input) {
+            const { sqlParserIns: _sqlParserIns, parseTree: _parseTree } =
+                this.parserWithNewInput(inputSlice);
+
+            sqlParserIns = _sqlParserIns;
+            parseTree = _parseTree;
+        }
+
         const core = new CodeCompletionCore(sqlParserIns);
         core.preferredRules = this.preferredRules;
 
-        const candidates = core.collectCandidates(newTokenIndex, c3Context);
+        const candidates = core.collectCandidates(caretTokenIndex, parseTree);
         const originalSuggestions = this.processCandidates(
             candidates,
             allTokens,
-            newTokenIndex,
+            caretTokenIndex,
             tokenIndexOffset
         );
 
