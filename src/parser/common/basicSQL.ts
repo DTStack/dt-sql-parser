@@ -73,15 +73,13 @@ export abstract class BasicSQL<
     /**
      * Convert candidates to suggestions
      * @param candidates candidate list
-     * @param allTokens all tokens from input
+     * @param allTokens slice all tokens from input by tokenIndexOffset
      * @param caretTokenIndex tokenIndex of caretPosition
-     * @param tokenIndexOffset offset of the tokenIndex in the candidates compared to the tokenIndex in allTokens
      */
     protected abstract processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token>;
 
     /**
@@ -539,13 +537,7 @@ export abstract class BasicSQL<
         core.preferredRules = this.preferredRules;
 
         const candidates = core.collectCandidates(caretTokenIndex, parseTree);
-        const originalSuggestions = this.processCandidates(
-            candidates,
-            allTokens,
-            caretTokenIndex,
-            0
-            // tokenIndexOffset
-        );
+        const originalSuggestions = this.processCandidates(candidates, allTokens, caretTokenIndex);
 
         const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(
             (syntaxCtx) => {
