@@ -215,28 +215,6 @@ export abstract class BasicSQL<
     }
 
     /**
-     * Get the parseTree of the input string.
-     * @param input source string
-     * @returns parse and parserTree
-     */
-    private parserWithNewInput(inputSlice: string) {
-        const lexer = this.createLexer(inputSlice);
-        lexer.removeErrorListeners();
-        const tokenStream = new CommonTokenStream(lexer);
-        tokenStream.fill();
-        const parser = this.createParserFromTokenStream(tokenStream);
-        parser.interpreter.predictionMode = PredictionMode.SLL;
-        parser.removeErrorListeners();
-        parser.buildParseTrees = true;
-        parser.errorHandler = new ErrorStrategy();
-
-        return {
-            sqlParserIns: parser,
-            parseTree: parser.program(),
-        };
-    }
-
-    /**
      * Validate input string and return syntax errors if exists.
      * @param input source string
      * @returns syntax errors
@@ -487,11 +465,8 @@ export abstract class BasicSQL<
          * and c3 will collect candidates in the newly generated parseTree when input changed.
          */
         if (inputSlice !== input) {
-            const { sqlParserIns: _sqlParserIns, parseTree: _parseTree } =
-                this.parserWithNewInput(inputSlice);
-
-            sqlParserIns = _sqlParserIns;
-            parseTree = _parseTree;
+            sqlParserIns = this.createParser(inputSlice);
+            parseTree = sqlParserIns.program();
         }
 
         return {
@@ -556,11 +531,8 @@ export abstract class BasicSQL<
          * and c3 will collect candidates in the newly generated parseTree when input changed.
          */
         if (inputSlice !== input) {
-            const { sqlParserIns: _sqlParserIns, parseTree: _parseTree } =
-                this.parserWithNewInput(inputSlice);
-
-            sqlParserIns = _sqlParserIns;
-            parseTree = _parseTree;
+            sqlParserIns = this.createParser(inputSlice);
+            parseTree = sqlParserIns.program();
         }
 
         const core = new CodeCompletionCore(sqlParserIns);
