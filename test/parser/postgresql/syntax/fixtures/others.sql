@@ -96,9 +96,25 @@ FROM PROGRAM 'command'
 WITH ( FORMAT format_name);
 COPY (SELECT * FROM td)
     TO STDOUT
-    WITH (DELIMITER 'delimiter_character');
-
-
+    WITH (FORMAT format_name, FREEZE true, DELIMITER 'delimiter_character', NULL 'null_string', DEFAULT 'default_string',
+    HEADER boolean, QUOTE 'quote_character',
+    ESCAPE 'escape_character',
+    FORCE_QUOTE ( column_name),
+    FORCE_NOT_NULL ( column_name),
+    FORCE_NULL ( column_name, *),
+    ON_ERROR error_action,
+    ENCODING 'encoding_name',
+    LOG_VERBOSITY verbosity);
+-- COPY MERGE
+COPY MERGE INTO ONLY target_table_name * AS target_alias
+USING ONLY source_table_name * ON s.winename = w.winename
+WHEN MATCHED AND s.winename = w.winename THEN UPDATE SET column_name = stock + 3
+WHEN NOT MATCHED AND stock_delta + stock > 0 THEN INSERT ( column_name) OVERRIDING SYSTEM VALUE VALUES (s.winename)
+WHEN MATCHED THEN DELETE RETURNING merge_action(), w.* TO filename 
+WITH (FORMAT format_name, FREEZE true, DELIMITER 'delimiter_character', NULL 'null_string', DEFAULT 'default_string',
+    HEADER boolean, QUOTE 'quote_character',
+    ESCAPE 'escape_character',
+    FORCE_QUOTE ( column_name));
 -- DEALLOCATE
 DEALLOCATE PREPARE name;
 DEALLOCATE PREPARE ALL;
@@ -186,13 +202,21 @@ MERGE INTO ONLY target_table_name * AS target_alias
 USING ONLY source_table_name * ON s.winename = w.winename
 WHEN MATCHED AND s.winename = w.winename THEN UPDATE SET column_name = stock + 3
 WHEN NOT MATCHED AND stock_delta + stock > 0 THEN INSERT ( column_name) OVERRIDING SYSTEM VALUE VALUES (s.winename)
-WHEN MATCHED THEN DELETE;
+WHEN MATCHED THEN DELETE RETURNING merge_action(), w.*;
 
 -- NOTIFY
 NOTIFY virtual, 'This is the payload';
 
 -- PREPARE
 PREPARE name ( int, numeric) AS INSERT INTO foo VALUES($1, $2, $3, $4);
+
+--PREPARE MERGE
+PREPARE fooplan (int, text, bool, numeric) AS
+    MERGE INTO ONLY target_table_name * AS target_alias
+USING ONLY source_table_name * ON s.winename = w.winename
+WHEN MATCHED AND s.winename = w.winename THEN UPDATE SET column_name = stock + 3
+WHEN NOT MATCHED AND stock_delta + stock > 0 THEN INSERT ( column_name) OVERRIDING SYSTEM VALUE VALUES (s.winename)
+WHEN MATCHED THEN DELETE RETURNING merge_action(), w.*;
 
 -- PREPARE TRANSACTION
 PREPARE TRANSACTION 'foobar';
