@@ -19,7 +19,7 @@ describe('Flink SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary(['MODULES', 'CATALOG']);
+        expect(suggestion).toMatchUnorderedArray(['MODULES', 'CATALOG']);
     });
 
     test('Create Statement ', () => {
@@ -32,7 +32,7 @@ describe('Flink SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'CATALOG',
             'FUNCTION',
             'TEMPORARY',
@@ -52,7 +52,7 @@ describe('Flink SQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArrary([
+        expect(suggestion).toMatchUnorderedArray([
             'MODULES',
             'FULL',
             'FUNCTIONS',

@@ -1,12 +1,15 @@
-import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
+
 import { ImpalaSqlLexer } from '../../lib/impala/ImpalaSqlLexer';
 import { ImpalaSqlParser, ProgramContext } from '../../lib/impala/ImpalaSqlParser';
 import { BasicSQL } from '../common/basicSQL';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
-import { ImpalaSqlSplitListener } from './impalaSplitListener';
+import { ErrorListener } from '../common/parseErrorListener';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { ImpalaEntityCollector } from './impalaEntityCollector';
+import { ImpalaErrorListener } from './ImpalaErrorListener';
+import { ImpalaSqlSplitListener } from './impalaSplitListener';
 
 export { ImpalaEntityCollector, ImpalaSqlSplitListener };
 
@@ -36,8 +39,12 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
         return new ImpalaSqlSplitListener();
     }
 
-    protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return new ImpalaEntityCollector(input, caretTokenIndex);
+    protected createErrorListener(_errorListener: ErrorListener): ImpalaErrorListener {
+        const parserContext = this;
+        return new ImpalaErrorListener(_errorListener, parserContext, this.preferredRules);
+    }
+    protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
+        return new ImpalaEntityCollector(input, allTokens, caretTokenIndex);
     }
 
     protected processCandidates(

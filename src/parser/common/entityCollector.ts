@@ -1,8 +1,16 @@
-import { ParserRuleContext } from 'antlr4ng';
-import { EntityContextType } from './types';
-import { WordPosition, TextPosition } from './textAndWord';
-import { ctxToText, ctxToWord } from './textAndWord';
+import { isToken, ParserRuleContext, Token } from 'antlr4ng';
+
 import { SimpleStack } from './simpleStack';
+import {
+    ctxToText,
+    isWordRange,
+    TextPosition,
+    TextSlice,
+    tokenToWord,
+    WordPosition,
+    WordRange,
+} from './textAndWord';
+import { EntityContextType } from './types';
 
 /**
  * TODO: more stmt type should be supported.
@@ -48,25 +56,80 @@ export function toStmtContext(
     };
 }
 
-export interface BaseAliasContext {
-    readonly isAlias: boolean;
-    alias?: string | EntityContext | null;
-    origin?: string | EntityContext | StmtContext | null;
+/**
+ * entity's attribute
+ * @key comment: entity's comment attribute
+ * @key colType: column entity's type attribute
+ * @key alias: entity's alias attribute
+ * */
+export enum AttrName {
+    comment = '_comment',
+    colType = '_colType',
+    alias = '_alias',
 }
-
-const baseAlias: BaseAliasContext = {
-    isAlias: false,
-    origin: null,
-    alias: null,
+/**
+ * ParserRuleContext with custom attributes
+ * */
+type ParserRuleContextWithAttr = ParserRuleContext & {
+    [K in AttrName]?: Token;
 };
 
-export interface EntityContext extends BaseAliasContext {
+/**
+ * Function's arguments
+ * */
+export interface Argument {
+    argMode?: WordRange;
+    argName?: WordRange;
+    argType: WordRange;
+}
+export interface BaseEntityContext {
     readonly entityContextType: EntityContextType;
     readonly text: string;
     readonly position: WordPosition;
     readonly belongStmt: StmtContext;
-    relatedEntities: EntityContext[] | null;
-    columns: EntityContext[] | null;
+    reference?: string | EntityContext; // reference entity
+    [AttrName.comment]: WordRange | null;
+    [AttrName.alias]?: WordRange | null; // alias token
+}
+
+export interface CommonEntityContext extends BaseEntityContext {
+    relatedEntities: CommonEntityContext[] | null;
+    columns?: ColumnEntityContext[];
+}
+
+export interface ColumnEntityContext extends BaseEntityContext {
+    [AttrName.colType]: WordRange | null;
+}
+
+export interface FuncEntityContext extends BaseEntityContext {
+    relatedEntities: CommonEntityContext[] | null;
+    arguments: Argument[] | null; // function arguments
+    returns?: Argument; // function return value
+}
+
+export type EntityContext = CommonEntityContext | FuncEntityContext | ColumnEntityContext;
+
+export function isCommonEntityContext(entity: EntityContext): entity is CommonEntityContext {
+    if (!entity) return false;
+    return 'relatedEntities' in entity && !('arguments' in entity);
+}
+
+export function isFuncEntityContext(entity: EntityContext): entity is FuncEntityContext {
+    if (!entity) return false;
+    return 'arguments' in entity;
+}
+
+export function isColumnEntityContext(entity: EntityContext): entity is ColumnEntityContext {
+    if (!entity) return false;
+    return AttrName.colType in entity;
+}
+
+/**
+ *  what we need when collect attribute information
+ * */
+interface AttrInfo {
+    attrName: AttrName;
+    endContextList: string[];
 }
 
 export function toEntityContext(
@@ -74,30 +137,121 @@ export function toEntityContext(
     type: EntityContextType,
     input: string,
     belongStmt: StmtContext,
-    alias?: BaseAliasContext
+    attrInfo?: AttrInfo[]
 ): EntityContext | null {
-    const word = ctxToWord(ctx, input);
+    const word = ctxToText(ctx, input);
     if (!word) return null;
-    const { text, ...position } = word;
-    const finalAlias = Object.assign({}, baseAlias, alias ?? {});
-    return {
+    const { text, startLine, endLine, ...rest } = word;
+    const position = {
+        ...rest,
+        line: startLine,
+    };
+    let entityInfo = <EntityContext>{
         entityContextType: type,
         text,
         position,
         belongStmt,
-        relatedEntities: null,
-        columns: null,
-        ...finalAlias,
+        [AttrName.comment]: null,
     };
+    switch (entityInfo.entityContextType) {
+        case EntityContextType.FUNCTION:
+        case EntityContextType.FUNCTION_CREATE: {
+            (entityInfo as FuncEntityContext).relatedEntities = null;
+            (entityInfo as FuncEntityContext).arguments = null;
+            break;
+        }
+        case EntityContextType.COLUMN:
+        case EntityContextType.COLUMN_CREATE:
+            (entityInfo as ColumnEntityContext)[AttrName.colType] = null;
+            break;
+        default:
+            (entityInfo as CommonEntityContext).relatedEntities = null;
+            break;
+    }
+    if (attrInfo) {
+        for (let k = 0; k < attrInfo.length; k++) {
+            const attributeName: AttrName = attrInfo[k]?.attrName;
+            const attrToken = findAttribute(ctx, attributeName, attrInfo[k]?.endContextList);
+            if (attrToken) {
+                const attrVal: WordRange | TextSlice | null = isToken(attrToken)
+                    ? tokenToWord(attrToken, input)
+                    : ctxToText(attrToken, input);
+                if (attrVal) {
+                    if (isWordRange(attrVal)) {
+                        entityInfo = Object.assign(entityInfo, {
+                            [attributeName]: attrVal,
+                        });
+                    } else {
+                        const { startIndex, endIndex, startColumn, endColumn, text, ...rest } =
+                            attrVal;
+                        entityInfo = Object.assign(entityInfo, {
+                            [attributeName]: {
+                                startIndex,
+                                endIndex,
+                                startColumn,
+                                endColumn,
+                                text,
+                                line: rest?.startLine,
+                            },
+                        });
+                    }
+                }
+            }
+        }
+    }
+    return entityInfo;
 }
 
+export function findAttribute(
+    ctx: ParserRuleContextWithAttr | null,
+    keyName: AttrName,
+    endContextNameList: string[]
+): Token | null {
+    const parent: ParserRuleContextWithAttr | null = ctx?.parent || null;
+    let attrVal: Token | null = null;
+    if (parent?.[keyName]) {
+        attrVal = parent?.[keyName] || null;
+        return attrVal;
+    } else {
+        if (parent?.constructor?.name && !endContextNameList.includes(parent?.constructor?.name)) {
+            attrVal = findAttribute(parent, keyName, endContextNameList);
+        }
+        if (!attrVal) {
+            if (parent?.children) {
+                attrVal = findAttributeChildren(parent, keyName);
+            }
+        }
+    }
+    return attrVal;
+}
+
+function findAttributeChildren(
+    ctx: ParserRuleContextWithAttr | null,
+    keyName: AttrName
+): Token | null {
+    const visitChildren = ctx?.children || [];
+    let attrVal: Token | null = null;
+    if (visitChildren.length) {
+        for (let i = 0; i < visitChildren.length; i++) {
+            const child = <ParserRuleContextWithAttr | null>visitChildren[i] || null;
+            if (child?.[keyName]) {
+                attrVal = child?.[keyName] || null;
+                return attrVal;
+            } else {
+                attrVal = findAttributeChildren(child, keyName);
+            }
+        }
+    }
+    return attrVal;
+}
 /**
  * @todo: Handle alias, includes column alias, table alias, query as alias and so on.
  * @todo: [may be need] Combine the entities in each clause.
  */
 export abstract class EntityCollector {
-    constructor(input: string, caretTokenIndex?: number) {
+    constructor(input: string, allTokens?: Token[], caretTokenIndex?: number) {
         this._input = input;
+        this._allTokens = allTokens || [];
         this._caretTokenIndex = caretTokenIndex ?? -1;
         this._entitiesSet = new Set();
         this._stmtStack = new SimpleStack();
@@ -105,6 +259,7 @@ export abstract class EntityCollector {
         this._rootStmt = null;
     }
     private readonly _input: string;
+    private readonly _allTokens: Token[];
     private readonly _caretTokenIndex: number;
     private readonly _entitiesSet: Set<EntityContext>;
     /** Staging statements that have already entered. */
@@ -125,8 +280,12 @@ export abstract class EntityCollector {
 
     exitEveryRule() {}
 
+    getRootStmt() {
+        return this._rootStmt;
+    }
+
     getEntities() {
-        return Array.from(this._entitiesSet);
+        return Array.from(this._entitiesSet) as EntityContext[];
     }
 
     enterProgram() {
@@ -136,6 +295,23 @@ export abstract class EntityCollector {
         this._rootStmt = null;
     }
 
+    /**
+     * The antlr4 will ignore hidden tokens, if we type whitespace at the end of a statement,
+     * the whitespace token will not as stop token, so we consider the whitespace token as a part of the nonhidden token in front of it
+     */
+    protected getPrevNonHiddenTokenIndex(caretTokenIndex: number) {
+        if (this._allTokens[caretTokenIndex].channel !== Token.HIDDEN_CHANNEL)
+            return caretTokenIndex;
+        for (let i = caretTokenIndex - 1; i >= 0; i--) {
+            const token = this._allTokens[i];
+            if (token.channel !== Token.HIDDEN_CHANNEL) {
+                // If prev nonhidden token is ';', the current token does not belong to any statement.
+                return token.text === ';' ? Infinity : token.tokenIndex;
+            }
+        }
+        return Infinity;
+    }
+
     protected pushStmt(ctx: ParserRuleContext, type: StmtContextType) {
         let isContainCaret: boolean | undefined;
         if (this._caretTokenIndex >= 0) {
@@ -143,7 +319,7 @@ export abstract class EntityCollector {
                 !!ctx.start &&
                 !!ctx.stop &&
                 ctx.start.tokenIndex <= this._caretTokenIndex &&
-                ctx.stop.tokenIndex >= this._caretTokenIndex;
+                ctx.stop.tokenIndex >= this.getPrevNonHiddenTokenIndex(this._caretTokenIndex);
         }
         const stmtContext = toStmtContext(
             ctx,
@@ -177,17 +353,13 @@ export abstract class EntityCollector {
         return stmtContext;
     }
 
-    protected pushEntity(
-        ctx: ParserRuleContext,
-        type: EntityContextType,
-        alias?: BaseAliasContext
-    ) {
+    protected pushEntity(ctx: ParserRuleContext, type: EntityContextType, attrInfo?: AttrInfo[]) {
         const entityContext = toEntityContext(
             ctx,
             type,
             this._input,
             this._stmtStack.peek(),
-            alias
+            attrInfo
         );
         if (entityContext) {
             if (this._stmtStack.isEmpty()) {
@@ -273,13 +445,20 @@ export abstract class EntityCollector {
             }
             return result;
         }, [] as EntityContext[]);
-
         if (mainEntity && columns.length) {
-            (mainEntity as EntityContext).columns = columns;
+            if (isCommonEntityContext(mainEntity)) {
+                mainEntity = Object.assign(mainEntity, {
+                    columns,
+                });
+            }
         }
 
         if (mainEntity && relatedEntities.length) {
-            (mainEntity as EntityContext).relatedEntities = relatedEntities;
+            if (isCommonEntityContext(mainEntity) || isFuncEntityContext(mainEntity)) {
+                mainEntity = Object.assign(mainEntity, {
+                    relatedEntities,
+                });
+            }
         }
 
         return finalEntities;

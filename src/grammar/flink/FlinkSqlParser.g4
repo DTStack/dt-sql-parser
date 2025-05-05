@@ -156,8 +156,9 @@ createTable
 simpleCreateTable
     : KW_CREATE KW_TEMPORARY? KW_TABLE ifNotExists? tablePathCreate LR_BRACKET columnOptionDefinition (
         COMMA columnOptionDefinition
-    )* (COMMA watermarkDefinition)? (COMMA tableConstraint)? (COMMA selfDefinitionClause)? RR_BRACKET commentSpec? partitionDefinition? withOption
-        likeDefinition?
+    )* (COMMA watermarkDefinition)? (COMMA tableConstraint)? (COMMA selfDefinitionClause)? RR_BRACKET (
+        KW_COMMENT comment=STRING_LITERAL
+    )? partitionDefinition? withOption likeDefinition?
     ;
 
 /*
@@ -175,7 +176,7 @@ columnOptionDefinition
     ;
 
 physicalColumnDefinition
-    : columnNameCreate columnType columnConstraint? commentSpec?
+    : columnNameCreate columnType columnConstraint? (KW_COMMENT comment=STRING_LITERAL)?
     ;
 
 columnNameCreate
@@ -193,8 +194,8 @@ columnNameList
     ;
 
 columnType
-    : typeName=(KW_DATE | KW_BOOLEAN | KW_NULL)
-    | typeName=(
+    : colType=(KW_DATE | KW_BOOLEAN | KW_NULL)
+    | colType=(
         KW_CHAR
         | KW_VARCHAR
         | KW_STRING
@@ -210,12 +211,12 @@ columnType
         | KW_TIMESTAMP_LTZ
         | KW_DATETIME
     ) lengthOneDimension?
-    | typeName=KW_TIMESTAMP lengthOneDimension? ((KW_WITHOUT | KW_WITH) KW_LOCAL? KW_TIME KW_ZONE)?
-    | typeName=(KW_DECIMAL | KW_DEC | KW_NUMERIC | KW_FLOAT | KW_DOUBLE) lengthTwoOptionalDimension?
-    | type=(KW_ARRAY | KW_MULTISET) lengthOneTypeDimension?
-    | type=KW_MAP mapTypeDimension?
-    | type=KW_ROW rowTypeDimension?
-    | type=KW_RAW lengthTwoStringDimension?
+    | colType=KW_TIMESTAMP lengthOneDimension? ((KW_WITHOUT | KW_WITH) KW_LOCAL? KW_TIME KW_ZONE)?
+    | colType=(KW_DECIMAL | KW_DEC | KW_NUMERIC | KW_FLOAT | KW_DOUBLE) lengthTwoOptionalDimension?
+    | colType=(KW_ARRAY | KW_MULTISET) lengthOneTypeDimension?
+    | colType=KW_MAP mapTypeDimension?
+    | colType=KW_ROW rowTypeDimension?
+    | colType=KW_RAW lengthTwoStringDimension?
     ;
 
 lengthOneDimension
@@ -240,15 +241,12 @@ mapTypeDimension
 
 rowTypeDimension
     : LESS_SYMBOL columnName columnType (COMMA columnName columnType)* GREATER_SYMBOL
+    | LR_BRACKET columnName columnType (COMMA columnName columnType)* RR_BRACKET
     ;
 
 columnConstraint
     : (KW_CONSTRAINT constraintName)? KW_PRIMARY KW_KEY (KW_NOT KW_ENFORCED)?
     | KW_NOT? KW_NULL
-    ;
-
-commentSpec
-    : KW_COMMENT STRING_LITERAL
     ;
 
 metadataColumnDefinition
@@ -260,7 +258,7 @@ metadataKey
     ;
 
 computedColumnDefinition
-    : columnNameCreate KW_AS computedColumnExpression commentSpec?
+    : columnNameCreate KW_AS computedColumnExpression (KW_COMMENT comment=STRING_LITERAL)?
     ;
 
 // 计算表达式
@@ -316,11 +314,13 @@ createCatalog
     ;
 
 createDatabase
-    : KW_CREATE KW_DATABASE ifNotExists? databasePathCreate commentSpec? withOption
+    : KW_CREATE KW_DATABASE ifNotExists? databasePathCreate (KW_COMMENT comment=STRING_LITERAL)? withOption
     ;
 
 createView
-    : KW_CREATE KW_TEMPORARY? KW_VIEW ifNotExists? viewPathCreate columnNameList? commentSpec? KW_AS queryStatement
+    : KW_CREATE KW_TEMPORARY? KW_VIEW ifNotExists? viewPathCreate columnNameList? (
+        KW_COMMENT comment=STRING_LITERAL
+    )? KW_AS queryStatement
     ;
 
 createFunction
@@ -487,8 +487,8 @@ selectClause
 
 projectItemDefinition
     : overWindowItem
-    | columnName (KW_AS? expression)?
     | expression (KW_AS? columnName)?
+    | columnName (KW_AS? expression)?
     ;
 
 overWindowItem
@@ -513,9 +513,9 @@ tableReference
     ;
 
 tablePrimary
-    : KW_TABLE? tablePath systemTimePeriod? (KW_AS? correlationName)?
-    | viewPath systemTimePeriod? (KW_AS? correlationName)?
-    | KW_LATERAL KW_TABLE LR_BRACKET functionName LR_BRACKET functionParam (COMMA functionParam)* RR_BRACKET RR_BRACKET
+    : KW_TABLE? tablePath systemTimePeriod?
+    | viewPath systemTimePeriod?
+    | KW_LATERAL KW_TABLE LR_BRACKET functionCallExpression RR_BRACKET
     | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
@@ -648,7 +648,7 @@ limitClause
     ;
 
 partitionByClause
-    : KW_PARTITION KW_BY columnName (COMMA columnName)*
+    : KW_PARTITION KW_BY (columnName | primaryExpression) (COMMA (columnName | primaryExpression))*
     ;
 
 quantifiers
@@ -747,6 +747,12 @@ valueExpression
     | left=valueExpression comparisonOperator right=valueExpression                                            # comparison
     ;
 
+functionCallExpression
+    : reservedKeywordsNoParamsUsedAsFuncName
+    | functionNameAndParams
+    | functionNameWithParams LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET
+    ;
+
 primaryExpression
     : KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                  # searchedCase
     | KW_CASE value=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END # simpleCase
@@ -759,15 +765,14 @@ primaryExpression
     | ASTERISK_SIGN                                                                      # star
     | uid DOT ASTERISK_SIGN                                                              # star
     // | LR_BRACKET namedExpression (COMMA namedExpression)+ RR_BRACKET                                           #rowConstructor
-    | LR_BRACKET queryStatement RR_BRACKET                                                      # subqueryExpression
-    | functionName LR_BRACKET (setQuantifier? functionParam (COMMA functionParam)*)? RR_BRACKET # functionCall
+    | LR_BRACKET queryStatement RR_BRACKET # subqueryExpression
+    | functionCallExpression               # functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
     | identifier                                                          # columnReference
     | dereferenceDefinition                                               # dereference
     | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression
-    | KW_CURRENT_TIMESTAMP                                                # dateFunctionExpression
     // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract
     // | (SUBSTR | SUBSTRING) LR_BRACKET str=valueExpression (KW_FROM | COMMA) pos=valueExpression
     //   ((KW_FOR | COMMA) len=valueExpression)? RR_BRACKET                                                   #substring
@@ -782,6 +787,25 @@ functionNameCreate
     ;
 
 functionName
+    : reservedKeywordsUsedAsFuncName
+    | reservedKeywordsNoParamsUsedAsFuncName
+    | reservedKeywordsFollowParamsUsedAsFuncName
+    | uid
+    ;
+
+/**
+* Built-in function name that is following with params directly without parentheses
+* Reference Link:https://nightlies.apache.org/flink/flink-docs-release-1.16/zh/docs/dev/table/functions/systemfunctions/#%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0
+*/
+functionNameAndParams
+    : reservedKeywordsFollowParamsUsedAsFuncName STRING_LITERAL
+    | timeIntervalExpression
+    ;
+
+/**
+* Function name that is need to follow with parentheses and params
+*/
+functionNameWithParams
     : reservedKeywordsUsedAsFuncName
     | uid
     ;
@@ -834,7 +858,7 @@ intervalValue
     ;
 
 tableAlias
-    : KW_AS? identifier identifierList?
+    : KW_AS? alias=identifier identifierList?
     ;
 
 errorCapturingIdentifier
@@ -1077,6 +1101,23 @@ reservedKeywordsUsedAsFuncParam
     | ASTERISK_SIGN
     ;
 
+/**
+* Built-in function name without parentheses and params
+*/
+reservedKeywordsNoParamsUsedAsFuncName
+    : KW_LOCALTIME
+    | KW_LOCALTIMESTAMP
+    | KW_CURRENT_TIME
+    | KW_CURRENT_DATE
+    | KW_CURRENT_TIMESTAMP
+    ;
+
+reservedKeywordsFollowParamsUsedAsFuncName
+    : KW_DATE
+    | KW_TIME
+    | KW_TIMESTAMP
+    ;
+
 reservedKeywordsUsedAsFuncName
     : KW_ABS
     | KW_ARRAY
@@ -1089,10 +1130,6 @@ reservedKeywordsUsedAsFuncName
     | KW_COLLECT
     | KW_COUNT
     | KW_CUME_DIST
-    | KW_CURRENT_DATE
-    | KW_CURRENT_TIME
-    | KW_CURRENT_TIMESTAMP
-    | KW_DATE
     | KW_DAYOFWEEK
     | KW_DAYOFYEAR
     | KW_DENSE_RANK
@@ -1109,8 +1146,6 @@ reservedKeywordsUsedAsFuncName
     | KW_LEAD
     | KW_LEFT
     | KW_LN
-    | KW_LOCALTIME
-    | KW_LOCALTIMESTAMP
     | KW_LOWER
     | KW_MAP
     | KW_MAX
@@ -1135,8 +1170,6 @@ reservedKeywordsUsedAsFuncName
     | KW_STDDEV_SAMP
     | KW_SUBSTRING
     | KW_SUM
-    | KW_TIME
-    | KW_TIMESTAMP
     | KW_TIMESTAMP_DIFF
     | KW_TRIM
     | KW_TRUNCATE

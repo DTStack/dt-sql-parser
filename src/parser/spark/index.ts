@@ -1,14 +1,17 @@
-import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 import { CandidatesCollection } from 'antlr4-c3';
-import { SparkSqlLexer } from '../../lib/spark/SparkSqlLexer';
-import { SparkSqlParser, ProgramContext } from '../../lib/spark/SparkSqlParser';
-import { BasicSQL } from '../common/basicSQL';
-import { Suggestions, EntityContextType, SyntaxSuggestion } from '../common/types';
-import { StmtContextType } from '../common/entityCollector';
-import { SparkSqlSplitListener } from './sparkSplitListener';
-import { SparkEntityCollector } from './sparkEntityCollector';
+import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 
-export { SparkSqlSplitListener, SparkEntityCollector };
+import { SparkSqlLexer } from '../../lib/spark/SparkSqlLexer';
+import { ProgramContext, SparkSqlParser } from '../../lib/spark/SparkSqlParser';
+import { BasicSQL } from '../common/basicSQL';
+import { StmtContextType } from '../common/entityCollector';
+import { ErrorListener } from '../common/parseErrorListener';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
+import { SparkEntityCollector } from './sparkEntityCollector';
+import { SparkErrorListener } from './sparkErrorListener';
+import { SparkSqlSplitListener } from './sparkSplitListener';
+
+export { SparkEntityCollector, SparkSqlSplitListener };
 
 export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlParser> {
     protected createLexerFromCharStream(charStreams: CharStream) {
@@ -36,8 +39,12 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         return new SparkSqlSplitListener();
     }
 
-    protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return new SparkEntityCollector(input, caretTokenIndex);
+    protected createErrorListener(_errorListener: ErrorListener): SparkErrorListener {
+        const parserContext = this;
+        return new SparkErrorListener(_errorListener, parserContext, this.preferredRules);
+    }
+    protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
+        return new SparkEntityCollector(input, allTokens, caretTokenIndex);
     }
 
     protected processCandidates(

@@ -1,27 +1,30 @@
-import type {
+import {
+    ColumnNameCreateContext,
+    CreateFunctionContext,
+    CreateNamespaceContext,
+    CreateOrReplaceTableColTypeContext,
+    CreateTableContext,
+    CreateTableLikeContext,
+    CreateTempViewUsingContext,
+    CreateViewContext,
+    FunctionNameCreateContext,
+    IdentifierCommentContext,
+    InsertFromQueryContext,
+    MultipleInsertContext,
     NamespaceNameContext,
     NamespaceNameCreateContext,
+    QueryStatementContext,
+    RelationPrimaryContext,
+    ReplaceTableContext,
     SingleStatementContext,
     TableNameContext,
     TableNameCreateContext,
     ViewNameContext,
     ViewNameCreateContext,
-    FunctionNameCreateContext,
-    ColumnNameCreateContext,
-    CreateTableContext,
-    CreateTableLikeContext,
-    ReplaceTableContext,
-    QueryStatementContext,
-    InsertFromQueryContext,
-    MultipleInsertContext,
-    CreateViewContext,
-    CreateTempViewUsingContext,
-    CreateNamespaceContext,
-    CreateFunctionContext,
 } from '../../lib/spark/SparkSqlParser';
 import type { SparkSqlParserListener } from '../../lib/spark/SparkSqlParserListener';
+import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
-import { StmtContextType, EntityCollector } from '../common/entityCollector';
 
 export class SparkEntityCollector extends EntityCollector implements SparkSqlParserListener {
     /** ====== Entity Begin */
@@ -30,15 +33,37 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
     }
 
     exitNamespaceNameCreate(ctx: NamespaceNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE);
+        this.pushEntity(ctx, EntityContextType.DATABASE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateNamespaceContext.name],
+            },
+        ]);
     }
 
     exitTableName(ctx: TableNameContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE);
+        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            needCollectAttr
+                ? [
+                      {
+                          attrName: AttrName.alias,
+                          endContextList: [RelationPrimaryContext.name],
+                      },
+                  ]
+                : undefined
+        );
     }
 
     exitTableNameCreate(ctx: TableNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.TABLE_CREATE);
+        this.pushEntity(ctx, EntityContextType.TABLE_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateTableContext.name],
+            },
+        ]);
     }
 
     exitViewName(ctx: ViewNameContext) {
@@ -46,7 +71,12 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
     }
 
     exitViewNameCreate(ctx: ViewNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.VIEW_CREATE);
+        this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [CreateViewContext.name],
+            },
+        ]);
     }
 
     exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
@@ -54,7 +84,19 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
     }
 
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE);
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.comment,
+                endContextList: [
+                    CreateOrReplaceTableColTypeContext.name,
+                    IdentifierCommentContext.name,
+                ],
+            },
+            {
+                attrName: AttrName.colType,
+                endContextList: [CreateOrReplaceTableColTypeContext.name],
+            },
+        ]);
     }
 
     /** ===== Statement begin */

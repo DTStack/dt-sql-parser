@@ -44,7 +44,6 @@ import { LengthOneTypeDimensionContext } from "./FlinkSqlParser.js";
 import { MapTypeDimensionContext } from "./FlinkSqlParser.js";
 import { RowTypeDimensionContext } from "./FlinkSqlParser.js";
 import { ColumnConstraintContext } from "./FlinkSqlParser.js";
-import { CommentSpecContext } from "./FlinkSqlParser.js";
 import { MetadataColumnDefinitionContext } from "./FlinkSqlParser.js";
 import { MetadataKeyContext } from "./FlinkSqlParser.js";
 import { ComputedColumnDefinitionContext } from "./FlinkSqlParser.js";
@@ -150,6 +149,7 @@ import { ValueExpressionDefaultContext } from "./FlinkSqlParser.js";
 import { ComparisonContext } from "./FlinkSqlParser.js";
 import { ArithmeticBinaryContext } from "./FlinkSqlParser.js";
 import { ArithmeticUnaryContext } from "./FlinkSqlParser.js";
+import { FunctionCallExpressionContext } from "./FlinkSqlParser.js";
 import { DereferenceContext } from "./FlinkSqlParser.js";
 import { SimpleCaseContext } from "./FlinkSqlParser.js";
 import { ColumnReferenceContext } from "./FlinkSqlParser.js";
@@ -163,10 +163,11 @@ import { ParenthesizedExpressionContext } from "./FlinkSqlParser.js";
 import { FunctionCallContext } from "./FlinkSqlParser.js";
 import { SearchedCaseContext } from "./FlinkSqlParser.js";
 import { PositionContext } from "./FlinkSqlParser.js";
-import { DateFunctionExpressionContext } from "./FlinkSqlParser.js";
 import { FirstContext } from "./FlinkSqlParser.js";
 import { FunctionNameCreateContext } from "./FlinkSqlParser.js";
 import { FunctionNameContext } from "./FlinkSqlParser.js";
+import { FunctionNameAndParamsContext } from "./FlinkSqlParser.js";
+import { FunctionNameWithParamsContext } from "./FlinkSqlParser.js";
 import { FunctionParamContext } from "./FlinkSqlParser.js";
 import { DereferenceDefinitionContext } from "./FlinkSqlParser.js";
 import { CorrelationNameContext } from "./FlinkSqlParser.js";
@@ -219,6 +220,8 @@ import { SetQuantifierContext } from "./FlinkSqlParser.js";
 import { TimePointUnitContext } from "./FlinkSqlParser.js";
 import { TimeIntervalUnitContext } from "./FlinkSqlParser.js";
 import { ReservedKeywordsUsedAsFuncParamContext } from "./FlinkSqlParser.js";
+import { ReservedKeywordsNoParamsUsedAsFuncNameContext } from "./FlinkSqlParser.js";
+import { ReservedKeywordsFollowParamsUsedAsFuncNameContext } from "./FlinkSqlParser.js";
 import { ReservedKeywordsUsedAsFuncNameContext } from "./FlinkSqlParser.js";
 import { NonReservedKeywordsContext } from "./FlinkSqlParser.js";
 
@@ -588,16 +591,6 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnConstraint?: (ctx: ColumnConstraintContext) => void;
-    /**
-     * Enter a parse tree produced by `FlinkSqlParser.commentSpec`.
-     * @param ctx the parse tree
-     */
-    enterCommentSpec?: (ctx: CommentSpecContext) => void;
-    /**
-     * Exit a parse tree produced by `FlinkSqlParser.commentSpec`.
-     * @param ctx the parse tree
-     */
-    exitCommentSpec?: (ctx: CommentSpecContext) => void;
     /**
      * Enter a parse tree produced by `FlinkSqlParser.metadataColumnDefinition`.
      * @param ctx the parse tree
@@ -1671,6 +1664,16 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      */
     exitArithmeticUnary?: (ctx: ArithmeticUnaryContext) => void;
     /**
+     * Enter a parse tree produced by `FlinkSqlParser.functionCallExpression`.
+     * @param ctx the parse tree
+     */
+    enterFunctionCallExpression?: (ctx: FunctionCallExpressionContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.functionCallExpression`.
+     * @param ctx the parse tree
+     */
+    exitFunctionCallExpression?: (ctx: FunctionCallExpressionContext) => void;
+    /**
      * Enter a parse tree produced by the `dereference`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.
      * @param ctx the parse tree
@@ -1827,18 +1830,6 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      */
     exitPosition?: (ctx: PositionContext) => void;
     /**
-     * Enter a parse tree produced by the `dateFunctionExpression`
-     * labeled alternative in `FlinkSqlParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    enterDateFunctionExpression?: (ctx: DateFunctionExpressionContext) => void;
-    /**
-     * Exit a parse tree produced by the `dateFunctionExpression`
-     * labeled alternative in `FlinkSqlParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    exitDateFunctionExpression?: (ctx: DateFunctionExpressionContext) => void;
-    /**
      * Enter a parse tree produced by the `first`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.
      * @param ctx the parse tree
@@ -1870,6 +1861,26 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitFunctionName?: (ctx: FunctionNameContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.functionNameAndParams`.
+     * @param ctx the parse tree
+     */
+    enterFunctionNameAndParams?: (ctx: FunctionNameAndParamsContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.functionNameAndParams`.
+     * @param ctx the parse tree
+     */
+    exitFunctionNameAndParams?: (ctx: FunctionNameAndParamsContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.functionNameWithParams`.
+     * @param ctx the parse tree
+     */
+    enterFunctionNameWithParams?: (ctx: FunctionNameWithParamsContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.functionNameWithParams`.
+     * @param ctx the parse tree
+     */
+    exitFunctionNameWithParams?: (ctx: FunctionNameWithParamsContext) => void;
     /**
      * Enter a parse tree produced by `FlinkSqlParser.functionParam`.
      * @param ctx the parse tree
@@ -2400,6 +2411,26 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitReservedKeywordsUsedAsFuncParam?: (ctx: ReservedKeywordsUsedAsFuncParamContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.reservedKeywordsNoParamsUsedAsFuncName`.
+     * @param ctx the parse tree
+     */
+    enterReservedKeywordsNoParamsUsedAsFuncName?: (ctx: ReservedKeywordsNoParamsUsedAsFuncNameContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.reservedKeywordsNoParamsUsedAsFuncName`.
+     * @param ctx the parse tree
+     */
+    exitReservedKeywordsNoParamsUsedAsFuncName?: (ctx: ReservedKeywordsNoParamsUsedAsFuncNameContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.reservedKeywordsFollowParamsUsedAsFuncName`.
+     * @param ctx the parse tree
+     */
+    enterReservedKeywordsFollowParamsUsedAsFuncName?: (ctx: ReservedKeywordsFollowParamsUsedAsFuncNameContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.reservedKeywordsFollowParamsUsedAsFuncName`.
+     * @param ctx the parse tree
+     */
+    exitReservedKeywordsFollowParamsUsedAsFuncName?: (ctx: ReservedKeywordsFollowParamsUsedAsFuncNameContext) => void;
     /**
      * Enter a parse tree produced by `FlinkSqlParser.reservedKeywordsUsedAsFuncName`.
      * @param ctx the parse tree

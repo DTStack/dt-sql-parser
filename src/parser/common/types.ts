@@ -71,3 +71,5 @@ export interface Suggestions<T = WordRange> {
      */
     readonly keywords: string[];
 }
+
+export type LOCALE_TYPE = 'zh_CN' | 'en_US';

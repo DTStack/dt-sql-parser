@@ -3,10 +3,12 @@ import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
 
 import { PostgreSqlLexer } from '../../lib/postgresql/PostgreSqlLexer';
 import { PostgreSqlParser, ProgramContext } from '../../lib/postgresql/PostgreSqlParser';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
+import { ErrorListener } from '../common/parseErrorListener';
+import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { PostgreSqlEntityCollector } from './postgreEntityCollector';
+import { PostgreSqlErrorListener } from './postgreErrorListener';
 import { PostgreSqlSplitListener } from './postgreSplitListener';
 
 export { PostgreSqlEntityCollector, PostgreSqlSplitListener };
@@ -41,8 +43,12 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         return new PostgreSqlSplitListener();
     }
 
-    protected createEntityCollector(input: string, caretTokenIndex?: number) {
-        return new PostgreSqlEntityCollector(input, caretTokenIndex);
+    protected createErrorListener(_errorListener: ErrorListener): PostgreSqlErrorListener {
+        const parserContext = this;
+        return new PostgreSqlErrorListener(_errorListener, parserContext, this.preferredRules);
+    }
+    protected createEntityCollector(input: string, allTokens?: Token[], caretTokenIndex?: number) {
+        return new PostgreSqlEntityCollector(input, allTokens, caretTokenIndex);
     }
 
     protected processCandidates(

@@ -43,7 +43,9 @@ function checkVersion() {
     if (semver.lt(currentVersion, MIN_VERSION)) {
         console.error(
             chalk.bold.red(
-                `Current Node.js version (v${currentVersion}) is lower than required version (v${semver.major(MIN_VERSION)}.x)`
+                `Current Node.js version (v${currentVersion}) is lower than required version (v${semver.major(
+                    MIN_VERSION
+                )}.x)`
             )
         );
         return false;
@@ -51,7 +53,9 @@ function checkVersion() {
         if (isRelease && semver.lt(currentVersion, RELEASE_VERSION)) {
             console.error(
                 chalk.bold.red(
-                    `Node.js version v${semver.major(RELEASE_VERSION)}.x+ is required for release benchmark!`
+                    `Node.js version v${semver.major(
+                        RELEASE_VERSION
+                    )}.x+ is required for release benchmark!`
                 )
             );
             return false;
@@ -81,7 +85,9 @@ function prompt() {
                             'Cold start' +
                             (isNodeVersionOk
                                 ? ''
-                                : ` (Only supported on Node.js v${semver.major(RECOMMENDED_VERSION)}.x+)`),
+                                : ` (Only supported on Node.js v${semver.major(
+                                      RECOMMENDED_VERSION
+                                  )}.x+)`),
                         value: 'cold',
                         disabled: !isNodeVersionOk,
                     },

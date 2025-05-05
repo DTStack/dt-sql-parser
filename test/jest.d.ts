@@ -9,9 +9,9 @@ namespace jest {
          * Every item must be primitive type, like string, number, etc.
          *
          * @example
-         * expect(['a', 'b']).toMatchUnorderedArrary(['b', 'a']) // pass
-         * expect(['b', 'a']).toMatchUnorderedArrary(['c', 'b', 'a']) // not pass, missing item 'c'
+         * expect(['a', 'b']).toMatchUnorderedArray(['b', 'a']) // pass
+         * expect(['b', 'a']).toMatchUnorderedArray(['c', 'b', 'a']) // not pass, missing item 'c'
          */
-        toMatchUnorderedArrary(expected: unknown[]): R;
+        toMatchUnorderedArray(expected: unknown[]): R;
     }
 }

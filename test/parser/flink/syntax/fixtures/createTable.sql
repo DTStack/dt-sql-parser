@@ -302,3 +302,34 @@ CREATE TABLE dt_catalog.dt_db.users (
 ) WITH (
     'connector' = 'faker'
 );
+
+CREATE TABLE retail_order (
+  message ROW <
+    after ROW (
+      pk_id varchar,
+      id varchar,
+      wid varchar,
+      order_id varchar,
+      cardNo varchar,
+      billDate varchar,
+      orderType varchar,
+      saleChannel varchar,
+      createTime timestamp,
+      refno varchar,
+      ts varchar,
+      source varchar
+    )
+>,
+  proc_time AS PROCTIME ()
+)
+WITH
+  (
+    -- 'properties.bootstrap.servers'='192.168.201.114:9092',
+    'properties.bootstrap.servers' = '192.168.201.238:9092,192.168.201.239:9092,192.168.201.240:9092',
+    'connector' = 'kafka-x',
+    'scan.parallelism' = '1',
+    'properties.group.id' = 'test_flink_custom_clue_create_clue',
+    'format' = 'json',
+    'topic' = 'jnby_retail_order_history',
+    'scan.startup.mode' = 'latest-offset'
+  );
