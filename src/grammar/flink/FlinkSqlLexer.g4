@@ -211,6 +211,7 @@ KW_INTERVAL            : 'INTERVAL';
 KW_INTO                : 'INTO';
 KW_IS                  : 'IS';
 KW_JOIN                : 'JOIN';
+KW_JSON                : 'JSON';
 KW_JSON_ARRAY          : 'JSON_ARRAY';
 KW_JSON_ARRAYAGG       : 'JSON_ARRAYAGG';
 KW_JSON_EXECUTION_PLAN : 'JSON_EXECUTION_PLAN';

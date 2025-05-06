@@ -726,6 +726,7 @@ predicate
     | KW_IS KW_NOT? kind=(KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_NULL)
     | KW_IS KW_NOT? kind=KW_DISTINCT KW_FROM right=valueExpression
     | KW_NOT? kind=KW_SIMILAR KW_TO right=valueExpression (KW_ESCAPE stringLiteral)?
+    | KW_IS KW_JSON (KW_VALUE | KW_ARRAY | identifier)?
     ;
 
 likePredicate
@@ -1179,6 +1180,13 @@ reservedKeywordsUsedAsFuncName
     | KW_VAR_SAMP
     | KW_WEEK
     | KW_YEAR
+    | KW_JSON_VALUE
+    | KW_JSON_EXISTS
+    | KW_JSON_QUERY
+    | KW_JSON_OBJECT
+    | KW_JSON_OBJECTAGG
+    | KW_JSON_ARRAY
+    | KW_JSON_ARRAYAGG
     ;
 
 nonReservedKeywords
