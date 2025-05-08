@@ -5,3 +5,4 @@ export { SparkSQL } from './spark';
 export { PostgreSQL } from './postgresql';
 export { TrinoSQL } from './trino';
 export { ImpalaSQL } from './impala';
+export { Sql } from './sql';
