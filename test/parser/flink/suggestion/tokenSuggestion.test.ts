@@ -67,4 +67,16 @@ describe('Flink SQL Token Suggestion', () => {
             'JARS',
         ]);
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 10,
+            column: 2,
+        };
+        const suggestion = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [9, 11]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

@@ -190,4 +190,16 @@ describe('Postgres SQL Token Suggestion', () => {
         )?.keywords;
         expect(suggestion).toMatchUnorderedArray(['INTO']);
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 12,
+            column: 2,
+        };
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [11, 13]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

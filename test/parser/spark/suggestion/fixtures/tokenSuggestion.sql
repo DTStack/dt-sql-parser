@@ -16,3 +16,7 @@ SHOW
 ;
 EXPORT 
 ;
+
+CREATE TABLE tb (id 
+ 
+);

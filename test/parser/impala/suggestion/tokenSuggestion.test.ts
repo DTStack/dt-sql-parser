@@ -143,4 +143,16 @@ describe('Impala SQL Token Suggestion', () => {
 
         expect(dataTypes.every((dataType) => suggestion.includes(dataType))).toBe(true);
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 14,
+            column: 2,
+        };
+        const suggestion = impala.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [13, 15]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

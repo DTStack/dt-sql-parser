@@ -32,9 +32,15 @@ export const readSQL = (dirname: string, fileName: string) => {
     return result;
 };
 
-export function commentOtherLine(sqlContent: string, line: number) {
+export function commentOtherLine(
+    sqlContent: string,
+    line: number | [startLine: number, endLine: number]
+) {
     const slices = sqlContent.split('\n').map((item, index) => {
-        if (index !== line - 1) {
+        if (
+            (Array.isArray(line) && (index + 1 < line[0] || index + 1 > line[1])) ||
+            (typeof line === 'number' && index + 1 !== line)
+        ) {
             return '-- ' + item;
         } else {
             return item;

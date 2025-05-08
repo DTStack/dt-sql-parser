@@ -124,4 +124,16 @@ describe('Trino SQL Token Suggestion', () => {
 
         expect(suggestion).toMatchUnorderedArray(['INTO']);
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 16,
+            column: 2,
+        };
+        const suggestion = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [15, 17]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });
