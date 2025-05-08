@@ -4,7 +4,7 @@ import SemanticContextCollector from '../common/semanticContextCollector';
 
 class TrinoSemanticContextCollector extends SemanticContextCollector implements TrinoSqlListener {
     override getWhiteSpaceRuleType(): number {
-        return TrinoSqlParser.WS;
+        return TrinoSqlParser.WHITE_SPACE;
     }
     override getStatementRuleType(): number {
         return TrinoSqlParser.RULE_statements;
