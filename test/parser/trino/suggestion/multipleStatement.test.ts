@@ -36,7 +36,25 @@ describe('TrinoSQL Multiple Statements Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+        expect(suggestion?.wordRanges?.length).toBe(2);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 9,
+                startIndex: 137,
+                endIndex: 138,
+                startColumn: 17,
+                endColumn: 19,
+            },
+            {
+                text: '.',
+                line: 9,
+                startIndex: 139,
+                endIndex: 139,
+                startColumn: 19,
+                endColumn: 20,
+            },
+        ]);
     });
 
     test('Insert into table ', () => {

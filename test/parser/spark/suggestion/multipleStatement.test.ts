@@ -36,7 +36,25 @@ describe('SparkSQL Multiple Statements Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+        expect(suggestion?.wordRanges?.length).toBe(2);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                endColumn: 17,
+                endIndex: 258,
+                line: 9,
+                startColumn: 15,
+                startIndex: 257,
+                text: 'db',
+            },
+            {
+                endColumn: 18,
+                endIndex: 259,
+                line: 9,
+                startColumn: 17,
+                startIndex: 259,
+                text: '.',
+            },
+        ]);
     });
 
     test('Insert into table ', () => {

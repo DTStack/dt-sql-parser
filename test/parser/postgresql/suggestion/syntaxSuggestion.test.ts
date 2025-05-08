@@ -32,7 +32,33 @@ describe('Postgre SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'tb']);
+        expect(suggestion?.wordRanges?.length).toBe(3);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 3,
+                startIndex: 88,
+                endIndex: 89,
+                startColumn: 13,
+                endColumn: 15,
+            },
+            {
+                text: '.',
+                line: 3,
+                startIndex: 90,
+                endIndex: 90,
+                startColumn: 15,
+                endColumn: 16,
+            },
+            {
+                text: 'tb',
+                line: 3,
+                startIndex: 91,
+                endIndex: 92,
+                startColumn: 16,
+                endColumn: 18,
+            },
+        ]);
     });
 
     test('Alter table ', () => {
