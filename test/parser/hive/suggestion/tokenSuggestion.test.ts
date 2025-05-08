@@ -33,6 +33,9 @@ describe('Hive SQL Token Suggestion', () => {
             'MATERIALIZED',
             'VIEW',
             'TABLE',
+            'RESOURCE PLAN',
+            'SCHEDULED QUERY',
+            'MATERIALIZED VIEW',
         ]);
     });
 
@@ -68,6 +71,11 @@ describe('Hive SQL Token Suggestion', () => {
             'REMOTE',
             'DATABASE',
             'SCHEMA',
+            'RESOURCE PLAN',
+            'SCHEDULED QUERY',
+            'MATERIALIZED VIEW',
+            'OR REPLACE',
+            'MANAGED TABLE',
         ]);
     });
 
@@ -129,6 +137,9 @@ describe('Hive SQL Token Suggestion', () => {
             'TABLE',
             'DATABASE',
             'SCHEMA',
+            'RESOURCE PLAN',
+            'MATERIALIZED VIEW',
+            'SCHEDULED QUERY',
         ]);
     });
 
@@ -217,16 +228,46 @@ describe('Hive SQL Token Suggestion', () => {
             'EXTENDED',
             'DATABASES',
             'SCHEMAS',
+            'CURRENT ROLES',
+            'ROLE GRANT',
+            'TABLE EXTENDED',
+            'MATERIALIZED VIEWS',
         ]);
+    });
+
+    test('After CREATE TABLE, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 21,
+            column: 14,
+        };
+        const suggestion = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('IF');
+        expect(suggestion).toContain('IF NOT EXISTS');
+    });
+
+    test('After CREATE TABLE IF, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 21,
+            column: 17,
+        };
+        const suggestion = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('NOT');
+        expect(suggestion).toContain('NOT EXISTS');
     });
 
     test('Suggestion in new line', () => {
         const pos: CaretPosition = {
-            lineNumber: 23,
+            lineNumber: 25,
             column: 2,
         };
         const suggestion = hive.getSuggestionAtCaretPosition(
-            commentOtherLine(tokenSql, [21, 23]),
+            commentOtherLine(tokenSql, [24, 26]),
             pos
         )?.keywords;
         expect(suggestion.length).not.toBe(0);

@@ -14,6 +14,7 @@ export class SparkErrorListener extends ParseErrorListener {
         [SparkSqlParser.RULE_functionName, 'function'],
         [SparkSqlParser.RULE_functionNameCreate, 'function'],
         [SparkSqlParser.RULE_columnName, 'column'],
+        [SparkSqlParser.RULE_columnNamePath, 'column'],
         [SparkSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
@@ -46,7 +47,7 @@ export class SparkErrorListener extends ParseErrorListener {
 
         const candidates = core.collectCandidates(newTokenIndex, c3Context);
         if (candidates.rules.size) {
-            const result = [];
+            const result: string[] = [];
             // get expectedText as collect rules first
             for (const candidate of candidates.rules) {
                 const [ruleType] = candidate;
@@ -56,8 +57,11 @@ export class SparkErrorListener extends ParseErrorListener {
                     case SparkSqlParser.RULE_tableName:
                     case SparkSqlParser.RULE_viewName:
                     case SparkSqlParser.RULE_functionName:
-                    case SparkSqlParser.RULE_columnName: {
-                        result.push(`{existing}${name}`);
+                    case SparkSqlParser.RULE_columnName:
+                    case SparkSqlParser.RULE_columnNamePath: {
+                        if (!result.includes(`{existing}${name}`)) {
+                            result.push(`{existing}${name}`);
+                        }
                         break;
                     }
                     case SparkSqlParser.RULE_namespaceNameCreate:
@@ -65,7 +69,9 @@ export class SparkErrorListener extends ParseErrorListener {
                     case SparkSqlParser.RULE_functionNameCreate:
                     case SparkSqlParser.RULE_viewNameCreate:
                     case SparkSqlParser.RULE_columnNameCreate: {
-                        result.push(`{new}${name}`);
+                        if (!result.includes(`{new}${name}`)) {
+                            result.push(`{new}${name}`);
+                        }
                         break;
                     }
                 }

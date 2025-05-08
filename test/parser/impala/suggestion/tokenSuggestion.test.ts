@@ -107,6 +107,10 @@ describe('Impala SQL Token Suggestion', () => {
             'ROLE',
             'ROLES',
             'CURRENT',
+            'TABLE STATS',
+            'COLUMN STATS',
+            'FILES IN',
+            'ROLE GRANT GROUP',
         ]);
     });
 
@@ -144,13 +148,39 @@ describe('Impala SQL Token Suggestion', () => {
         expect(dataTypes.every((dataType) => suggestion.includes(dataType))).toBe(true);
     });
 
+    test('After CREATE TABLE, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 13,
+            column: 14,
+        };
+        const suggestion = impala.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('IF');
+        expect(suggestion).toContain('IF NOT EXISTS');
+    });
+
+    test('After CREATE TABLE IF, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 13,
+            column: 17,
+        };
+        const suggestion = impala.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('NOT');
+        expect(suggestion).toContain('NOT EXISTS');
+    });
+
     test('Suggestion in new line', () => {
         const pos: CaretPosition = {
-            lineNumber: 14,
+            lineNumber: 16,
             column: 2,
         };
         const suggestion = impala.getSuggestionAtCaretPosition(
-            commentOtherLine(tokenSql, [13, 15]),
+            commentOtherLine(tokenSql, [15, 17]),
             pos
         )?.keywords;
         expect(suggestion.length).not.toBe(0);

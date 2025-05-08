@@ -30,7 +30,33 @@ describe('MySQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'tb']);
+        expect(suggestion?.wordRanges?.length).toBe(3);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 1,
+                startIndex: 12,
+                endIndex: 13,
+                startColumn: 13,
+                endColumn: 15,
+            },
+            {
+                text: '.',
+                line: 1,
+                startIndex: 14,
+                endIndex: 14,
+                startColumn: 15,
+                endColumn: 16,
+            },
+            {
+                text: 'tb',
+                line: 1,
+                startIndex: 15,
+                endIndex: 16,
+                startColumn: 16,
+                endColumn: 18,
+            },
+        ]);
     });
 
     test('Select table ', () => {
@@ -507,5 +533,111 @@ describe('MySQL Syntax Suggestion', () => {
 
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['test', '.', 'v']);
+    });
+
+    test('Select expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 59,
+            column: 24,
+        };
+        const syntaxes = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['salary']);
+    });
+
+    test('Group by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 59,
+            column: 72,
+        };
+        const syntaxes = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['user']);
+    });
+
+    test('Having expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 59,
+            column: 91,
+        };
+        const syntaxes = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['salary']);
+    });
+
+    test('Select expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 59,
+            column: 46,
+        };
+        const syntaxes = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['age']);
+    });
+
+    test('Join expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 61,
+            column: 85,
+        };
+        const syntaxes = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([
+            'p',
+            '.',
+            'category_id',
+        ]);
+    });
+
+    test('Case expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 63,
+            column: 30,
+        };
+        const syntaxes = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['score']);
     });
 });

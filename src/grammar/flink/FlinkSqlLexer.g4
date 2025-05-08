@@ -11,8 +11,8 @@ options {
 
 // SKIP
 
-SPACE         : (' ' | '\t' | '\r' | '\n')                                         -> channel(HIDDEN);
-COMMENT_INPUT : '/*' .*? '*/'                                                      -> channel(HIDDEN);
+WHITE_SPACE       : (' ' | '\t' | '\r' | '\n')                                     -> channel(HIDDEN);
+BRACKETED_COMMENT : '/*' .*? '*/'                                                  -> channel(HIDDEN);
 LINE_COMMENT: (('--' | '#') ~[\r\n]* ('\r'? '\n' | EOF) | '--' ('\r'? '\n' | EOF)) -> channel(HIDDEN);
 
 /**

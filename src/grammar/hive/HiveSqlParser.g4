@@ -758,6 +758,10 @@ columnName
     | {this.shouldMatchEmpty()}?
     ;
 
+columnNamePath
+    : poolPath
+    ;
+
 columnNameCreate
     : id_
     ;
@@ -1437,7 +1441,7 @@ subQuerySource
 Rules for parsing PTF clauses
 */
 partitioningSpec
-    : KW_PARTITION KW_BY expressions orderByClause?
+    : partitionByClause orderByClause?
     | orderByClause
     | distributeByClause sortByClause?
     | sortByClause
@@ -1613,6 +1617,10 @@ orderByClause
     : KW_ORDER KW_BY columnRefOrder (COMMA columnRefOrder)*
     ;
 
+partitionByClause
+    : KW_PARTITION KW_BY expressions
+    ;
+
 clusterByClause
     : KW_CLUSTER KW_BY expressions
     ;
@@ -1714,7 +1722,7 @@ constant
     | KW_FALSE
     | KW_NULL
     | p=QUESTION
-    | Identifier
+    | columnNamePath
     ;
 
 intervalValue

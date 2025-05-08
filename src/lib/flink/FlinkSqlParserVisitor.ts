@@ -35,6 +35,7 @@ import { ColumnOptionDefinitionContext } from "./FlinkSqlParser.js";
 import { PhysicalColumnDefinitionContext } from "./FlinkSqlParser.js";
 import { ColumnNameCreateContext } from "./FlinkSqlParser.js";
 import { ColumnNameContext } from "./FlinkSqlParser.js";
+import { ColumnNamePathContext } from "./FlinkSqlParser.js";
 import { ColumnNameListContext } from "./FlinkSqlParser.js";
 import { ColumnTypeContext } from "./FlinkSqlParser.js";
 import { LengthOneDimensionContext } from "./FlinkSqlParser.js";
@@ -396,6 +397,12 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.columnNameList`.
      * @param ctx the parse tree

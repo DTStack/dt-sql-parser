@@ -35,6 +35,7 @@ import { ColumnOptionDefinitionContext } from "./FlinkSqlParser.js";
 import { PhysicalColumnDefinitionContext } from "./FlinkSqlParser.js";
 import { ColumnNameCreateContext } from "./FlinkSqlParser.js";
 import { ColumnNameContext } from "./FlinkSqlParser.js";
+import { ColumnNamePathContext } from "./FlinkSqlParser.js";
 import { ColumnNameListContext } from "./FlinkSqlParser.js";
 import { ColumnTypeContext } from "./FlinkSqlParser.js";
 import { LengthOneDimensionContext } from "./FlinkSqlParser.js";
@@ -501,6 +502,16 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
     /**
      * Enter a parse tree produced by `FlinkSqlParser.columnNameList`.
      * @param ctx the parse tree

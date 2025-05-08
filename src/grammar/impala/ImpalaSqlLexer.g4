@@ -334,11 +334,11 @@ QUOTED_IDENTIFIER: '"' ( ~'"' | '""')* '"';
 
 BACKQUOTED_IDENTIFIER: '`' ( ~'`' | '``')* '`';
 
-TIME_WITH_TIME_ZONE: 'TIME' WS 'WITH' WS 'TIME' WS 'ZONE';
+TIME_WITH_TIME_ZONE: 'TIME' WHITE_SPACE 'WITH' WHITE_SPACE 'TIME' WHITE_SPACE 'ZONE';
 
-TIMESTAMP_WITH_TIME_ZONE: 'TIMESTAMP' WS 'WITH' WS 'TIME' WS 'ZONE';
+TIMESTAMP_WITH_TIME_ZONE: 'TIMESTAMP' WHITE_SPACE 'WITH' WHITE_SPACE 'TIME' WHITE_SPACE 'ZONE';
 
-DOUBLE_PRECISION: 'DOUBLE' WS 'PRECISION';
+DOUBLE_PRECISION: 'DOUBLE' WHITE_SPACE 'PRECISION';
 
 fragment EXPONENT: 'E' [+-]? DIGIT+;
 
@@ -346,8 +346,8 @@ fragment DIGIT: [0-9];
 
 fragment LETTER: [A-Z];
 
-SIMPLE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
+LINE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 
 BRACKETED_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
 
-WS: (' ' | '\t' | '\r' | '\n') -> channel(HIDDEN);
+WHITE_SPACE: (' ' | '\t' | '\r' | '\n') -> channel(HIDDEN);

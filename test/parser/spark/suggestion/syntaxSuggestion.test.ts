@@ -32,7 +32,33 @@ describe('Spark SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'tb']);
+        expect(suggestion?.wordRanges?.length).toBe(3);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 1,
+                startIndex: 12,
+                endIndex: 13,
+                startColumn: 13,
+                endColumn: 15,
+            },
+            {
+                text: '.',
+                line: 1,
+                startIndex: 14,
+                endIndex: 14,
+                startColumn: 15,
+                endColumn: 16,
+            },
+            {
+                text: 'tb',
+                line: 1,
+                startIndex: 15,
+                endIndex: 16,
+                startColumn: 16,
+                endColumn: 18,
+            },
+        ]);
     });
 
     test('Select table ', () => {
@@ -594,5 +620,145 @@ describe('Spark SQL Syntax Suggestion', () => {
 
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['i']);
+    });
+
+    test('Order by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 69,
+            column: 49,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['age']);
+    });
+
+    test('Limit expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 69,
+            column: 68,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['name']);
+    });
+
+    test('Case/When expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 71,
+            column: 19,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['id']);
+    });
+
+    test('Where expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 73,
+            column: 103,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['name']);
+    });
+
+    test('Join expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 75,
+            column: 97,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([
+            'employee',
+            '.',
+            'deptno',
+        ]);
+    });
+
+    test('Group by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 77,
+            column: 64,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['city']);
+    });
+
+    test('Having expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 77,
+            column: 85,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['quantity']);
+    });
+
+    test('Select expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 77,
+            column: 26,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['quantity']);
     });
 });

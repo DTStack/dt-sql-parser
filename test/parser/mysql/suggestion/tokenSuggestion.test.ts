@@ -37,6 +37,10 @@ describe('MySQL Token Suggestion', () => {
             'EVENT',
             'DATABASE',
             'SCHEMA',
+            'RESOURCE GROUP',
+            'SQL SECURITY',
+            'LOGFILE GROUP',
+            'INSTANCE ROTATE INNODB MASTER KEY',
         ]);
     });
 
@@ -79,6 +83,11 @@ describe('MySQL Token Suggestion', () => {
             'EVENT',
             'DATABASE',
             'SCHEMA',
+            'RESOURCE GROUP',
+            'SQL SECURITY',
+            'OR REPLACE',
+            'IF NOT EXISTS',
+            'LOGFILE GROUP',
         ]);
     });
 
@@ -116,6 +125,7 @@ describe('MySQL Token Suggestion', () => {
             'FORMAT',
             'PARTITIONS',
             'EXTENDED',
+            'FOR CONNECTION',
         ]);
     });
 
@@ -149,6 +159,9 @@ describe('MySQL Token Suggestion', () => {
             'EVENT',
             'DATABASE',
             'SCHEMA',
+            'RESOURCE GROUP',
+            'SPATIAL REFERENCE SYSTEM',
+            'LOGFILE GROUP',
         ]);
     });
 
@@ -181,7 +194,7 @@ describe('MySQL Token Suggestion', () => {
             pos
         )?.keywords;
 
-        expect(suggestion).toMatchUnorderedArray(['INDEX', 'XML', 'DATA']);
+        expect(suggestion).toMatchUnorderedArray(['INDEX', 'XML', 'DATA', 'INDEX INTO CACHE']);
     });
 
     test('After SHOW', () => {
@@ -240,16 +253,46 @@ describe('MySQL Token Suggestion', () => {
             'BINLOG',
             'RELAYLOG',
             'BINARY',
+            'OPEN TABLES',
+            'TABLE STATUS',
+            'CHARACTER SET',
         ]);
+    });
+
+    test('After CREATE TABLE, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 17,
+            column: 14,
+        };
+        const suggestion = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+
+        expect(suggestion).toContain('IF');
+        expect(suggestion).toContain('IF NOT EXISTS');
+    });
+
+    test('After CREATE TABLE IF, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 17,
+            column: 17,
+        };
+        const suggestion = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('NOT');
+        expect(suggestion).toContain('NOT EXISTS');
     });
 
     test('Suggestion in new line', () => {
         const pos: CaretPosition = {
-            lineNumber: 19,
+            lineNumber: 21,
             column: 2,
         };
         const suggestion = mysql.getSuggestionAtCaretPosition(
-            commentOtherLine(tokenSql, [18, 20]),
+            commentOtherLine(tokenSql, [20, 22]),
             pos
         )?.keywords;
         expect(suggestion.length).not.toBe(0);

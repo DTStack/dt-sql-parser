@@ -72,7 +72,6 @@ import { DescribeFunctionContext } from "./SparkSqlParser.js";
 import { DescribeNamespaceContext } from "./SparkSqlParser.js";
 import { DescribeRelationContext } from "./SparkSqlParser.js";
 import { DescribeQueryContext } from "./SparkSqlParser.js";
-import { CommentNamespaceContext } from "./SparkSqlParser.js";
 import { CommentTableContext } from "./SparkSqlParser.js";
 import { RefreshTableContext } from "./SparkSqlParser.js";
 import { RefreshFunctionContext } from "./SparkSqlParser.js";
@@ -101,12 +100,7 @@ import { CreateIndexContext } from "./SparkSqlParser.js";
 import { DropIndexContext } from "./SparkSqlParser.js";
 import { OptimizeTableContext } from "./SparkSqlParser.js";
 import { UnsupportHiveCommandsContext } from "./SparkSqlParser.js";
-import { TimezoneContext } from "./SparkSqlParser.js";
-import { ConfigKeyContext } from "./SparkSqlParser.js";
-import { ConfigValueContext } from "./SparkSqlParser.js";
 import { UnsupportedHiveNativeCommandsContext } from "./SparkSqlParser.js";
-import { CreateTableHeaderContext } from "./SparkSqlParser.js";
-import { ReplaceTableHeaderContext } from "./SparkSqlParser.js";
 import { BucketSpecContext } from "./SparkSqlParser.js";
 import { SkewSpecContext } from "./SparkSqlParser.js";
 import { LocationSpecContext } from "./SparkSqlParser.js";
@@ -117,7 +111,6 @@ import { PartitionSpecLocationContext } from "./SparkSqlParser.js";
 import { PartitionSpecContext } from "./SparkSqlParser.js";
 import { PartitionValContext } from "./SparkSqlParser.js";
 import { NamespaceContext } from "./SparkSqlParser.js";
-import { NamespacesContext } from "./SparkSqlParser.js";
 import { DescribeFuncNameContext } from "./SparkSqlParser.js";
 import { DescribeColNameContext } from "./SparkSqlParser.js";
 import { CtesContext } from "./SparkSqlParser.js";
@@ -136,7 +129,6 @@ import { NestedConstantListContext } from "./SparkSqlParser.js";
 import { CreateFileFormatContext } from "./SparkSqlParser.js";
 import { FileFormatContext } from "./SparkSqlParser.js";
 import { StorageHandlerContext } from "./SparkSqlParser.js";
-import { ResourceContext } from "./SparkSqlParser.js";
 import { InsertFromQueryContext } from "./SparkSqlParser.js";
 import { MultipleInsertContext } from "./SparkSqlParser.js";
 import { DeleteFromTableContext } from "./SparkSqlParser.js";
@@ -149,15 +141,17 @@ import { TableNameContext } from "./SparkSqlParser.js";
 import { ViewNameCreateContext } from "./SparkSqlParser.js";
 import { ViewNameContext } from "./SparkSqlParser.js";
 import { ColumnNameContext } from "./SparkSqlParser.js";
+import { ColumnNamePathContext } from "./SparkSqlParser.js";
 import { ColumnNameSeqContext } from "./SparkSqlParser.js";
 import { ColumnNameCreateContext } from "./SparkSqlParser.js";
 import { IdentifierReferenceContext } from "./SparkSqlParser.js";
 import { QueryOrganizationContext } from "./SparkSqlParser.js";
-import { MultiInsertQueryBodyContext } from "./SparkSqlParser.js";
+import { LimitClauseContext } from "./SparkSqlParser.js";
+import { OrderOrSortByClauseContext } from "./SparkSqlParser.js";
+import { ClusterOrDistributeByContext } from "./SparkSqlParser.js";
 import { QueryTermContext } from "./SparkSqlParser.js";
 import { QueryPrimaryContext } from "./SparkSqlParser.js";
 import { SortItemContext } from "./SparkSqlParser.js";
-import { FromStatementContext } from "./SparkSqlParser.js";
 import { FromStatementBodyContext } from "./SparkSqlParser.js";
 import { QuerySpecificationContext } from "./SparkSqlParser.js";
 import { TransformClauseContext } from "./SparkSqlParser.js";
@@ -166,9 +160,7 @@ import { SetClauseContext } from "./SparkSqlParser.js";
 import { MatchedClauseContext } from "./SparkSqlParser.js";
 import { NotMatchedClauseContext } from "./SparkSqlParser.js";
 import { NotMatchedBySourceClauseContext } from "./SparkSqlParser.js";
-import { MatchedActionContext } from "./SparkSqlParser.js";
 import { NotMatchedActionContext } from "./SparkSqlParser.js";
-import { NotMatchedBySourceActionContext } from "./SparkSqlParser.js";
 import { AssignmentListContext } from "./SparkSqlParser.js";
 import { AssignmentContext } from "./SparkSqlParser.js";
 import { WhereClauseContext } from "./SparkSqlParser.js";
@@ -176,33 +168,24 @@ import { HavingClauseContext } from "./SparkSqlParser.js";
 import { HintContext } from "./SparkSqlParser.js";
 import { HintStatementContext } from "./SparkSqlParser.js";
 import { FromClauseContext } from "./SparkSqlParser.js";
-import { FunctionKindContext } from "./SparkSqlParser.js";
 import { TemporalClauseContext } from "./SparkSqlParser.js";
 import { AggregationClauseContext } from "./SparkSqlParser.js";
 import { GroupByClauseContext } from "./SparkSqlParser.js";
 import { GroupingAnalyticsContext } from "./SparkSqlParser.js";
-import { GroupingElementContext } from "./SparkSqlParser.js";
 import { GroupingSetContext } from "./SparkSqlParser.js";
 import { PivotClauseContext } from "./SparkSqlParser.js";
 import { PivotColumnContext } from "./SparkSqlParser.js";
 import { PivotValueContext } from "./SparkSqlParser.js";
 import { UnPivotClauseContext } from "./SparkSqlParser.js";
-import { UnPivotNullClauseContext } from "./SparkSqlParser.js";
-import { UnPivotOperatorContext } from "./SparkSqlParser.js";
 import { UnPivotSingleValueColumnClauseContext } from "./SparkSqlParser.js";
 import { UnPivotMultiValueColumnClauseContext } from "./SparkSqlParser.js";
 import { UnPivotColumnSetContext } from "./SparkSqlParser.js";
-import { UnPivotValueColumnContext } from "./SparkSqlParser.js";
-import { UnPivotNameColumnContext } from "./SparkSqlParser.js";
 import { UnPivotColumnAndAliasContext } from "./SparkSqlParser.js";
-import { UnPivotColumnContext } from "./SparkSqlParser.js";
-import { UnPivotAliasContext } from "./SparkSqlParser.js";
 import { IfNotExistsContext } from "./SparkSqlParser.js";
 import { IfExistsContext } from "./SparkSqlParser.js";
 import { LateralViewContext } from "./SparkSqlParser.js";
 import { SetQuantifierContext } from "./SparkSqlParser.js";
 import { RelationContext } from "./SparkSqlParser.js";
-import { RelationExtensionContext } from "./SparkSqlParser.js";
 import { JoinRelationContext } from "./SparkSqlParser.js";
 import { JoinTypeContext } from "./SparkSqlParser.js";
 import { JoinCriteriaContext } from "./SparkSqlParser.js";
@@ -215,13 +198,11 @@ import { OrderedIdentifierContext } from "./SparkSqlParser.js";
 import { IdentifierCommentListContext } from "./SparkSqlParser.js";
 import { IdentifierCommentContext } from "./SparkSqlParser.js";
 import { RelationPrimaryContext } from "./SparkSqlParser.js";
-import { InlineTableContext } from "./SparkSqlParser.js";
 import { FunctionTableSubqueryArgumentContext } from "./SparkSqlParser.js";
 import { TableArgumentPartitioningContext } from "./SparkSqlParser.js";
 import { FunctionTableNamedArgumentExpressionContext } from "./SparkSqlParser.js";
 import { FunctionTableReferenceArgumentContext } from "./SparkSqlParser.js";
 import { FunctionTableArgumentContext } from "./SparkSqlParser.js";
-import { FunctionTableContext } from "./SparkSqlParser.js";
 import { TableAliasContext } from "./SparkSqlParser.js";
 import { RowFormatContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierListContext } from "./SparkSqlParser.js";
@@ -267,20 +248,16 @@ import { QualifiedColTypeWithPositionForAddContext } from "./SparkSqlParser.js";
 import { QualifiedColTypeWithPositionSeqForReplaceContext } from "./SparkSqlParser.js";
 import { QualifiedColTypeWithPositionForReplaceContext } from "./SparkSqlParser.js";
 import { ColDefinitionDescriptorWithPositionContext } from "./SparkSqlParser.js";
-import { DefaultExpressionContext } from "./SparkSqlParser.js";
 import { VariableDefaultExpressionContext } from "./SparkSqlParser.js";
 import { ColTypeListContext } from "./SparkSqlParser.js";
 import { ColumnTypeContext } from "./SparkSqlParser.js";
 import { CreateOrReplaceTableColTypeListContext } from "./SparkSqlParser.js";
 import { CreateOrReplaceTableColTypeContext } from "./SparkSqlParser.js";
 import { ColDefinitionOptionContext } from "./SparkSqlParser.js";
-import { GenerationExpressionContext } from "./SparkSqlParser.js";
-import { ComplexColTypeListContext } from "./SparkSqlParser.js";
 import { ComplexColTypeContext } from "./SparkSqlParser.js";
 import { WhenClauseContext } from "./SparkSqlParser.js";
 import { WindowClauseContext } from "./SparkSqlParser.js";
 import { ZOrderClauseContext } from "./SparkSqlParser.js";
-import { NamedWindowContext } from "./SparkSqlParser.js";
 import { WindowSpecContext } from "./SparkSqlParser.js";
 import { WindowFrameContext } from "./SparkSqlParser.js";
 import { FrameBoundContext } from "./SparkSqlParser.js";
@@ -293,12 +270,9 @@ import { ErrorCapturingIdentifierExtraContext } from "./SparkSqlParser.js";
 import { IdentifierContext } from "./SparkSqlParser.js";
 import { StrictIdentifierContext } from "./SparkSqlParser.js";
 import { QuotedIdentifierContext } from "./SparkSqlParser.js";
-import { BackQuotedIdentifierContext } from "./SparkSqlParser.js";
 import { NumberContext } from "./SparkSqlParser.js";
 import { AlterColumnActionContext } from "./SparkSqlParser.js";
 import { StringLitContext } from "./SparkSqlParser.js";
-import { CommentStrContext } from "./SparkSqlParser.js";
-import { VersionContext } from "./SparkSqlParser.js";
 import { AnsiNonReservedContext } from "./SparkSqlParser.js";
 import { StrictNonReservedContext } from "./SparkSqlParser.js";
 import { NonReservedContext } from "./SparkSqlParser.js";
@@ -1074,18 +1048,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitDescribeQuery?: (ctx: DescribeQueryContext) => void;
     /**
-     * Enter a parse tree produced by the `commentNamespace`
-     * labeled alternative in `SparkSqlParser.statement`.
-     * @param ctx the parse tree
-     */
-    enterCommentNamespace?: (ctx: CommentNamespaceContext) => void;
-    /**
-     * Exit a parse tree produced by the `commentNamespace`
-     * labeled alternative in `SparkSqlParser.statement`.
-     * @param ctx the parse tree
-     */
-    exitCommentNamespace?: (ctx: CommentNamespaceContext) => void;
-    /**
      * Enter a parse tree produced by the `commentTable`
      * labeled alternative in `SparkSqlParser.statement`.
      * @param ctx the parse tree
@@ -1422,36 +1384,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitUnsupportHiveCommands?: (ctx: UnsupportHiveCommandsContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.timezone`.
-     * @param ctx the parse tree
-     */
-    enterTimezone?: (ctx: TimezoneContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.timezone`.
-     * @param ctx the parse tree
-     */
-    exitTimezone?: (ctx: TimezoneContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.configKey`.
-     * @param ctx the parse tree
-     */
-    enterConfigKey?: (ctx: ConfigKeyContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.configKey`.
-     * @param ctx the parse tree
-     */
-    exitConfigKey?: (ctx: ConfigKeyContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.configValue`.
-     * @param ctx the parse tree
-     */
-    enterConfigValue?: (ctx: ConfigValueContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.configValue`.
-     * @param ctx the parse tree
-     */
-    exitConfigValue?: (ctx: ConfigValueContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.unsupportedHiveNativeCommands`.
      * @param ctx the parse tree
      */
@@ -1461,26 +1393,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitUnsupportedHiveNativeCommands?: (ctx: UnsupportedHiveNativeCommandsContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.createTableHeader`.
-     * @param ctx the parse tree
-     */
-    enterCreateTableHeader?: (ctx: CreateTableHeaderContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.createTableHeader`.
-     * @param ctx the parse tree
-     */
-    exitCreateTableHeader?: (ctx: CreateTableHeaderContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.replaceTableHeader`.
-     * @param ctx the parse tree
-     */
-    enterReplaceTableHeader?: (ctx: ReplaceTableHeaderContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.replaceTableHeader`.
-     * @param ctx the parse tree
-     */
-    exitReplaceTableHeader?: (ctx: ReplaceTableHeaderContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.bucketSpec`.
      * @param ctx the parse tree
@@ -1583,16 +1495,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitNamespace?: (ctx: NamespaceContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.namespaces`.
-     * @param ctx the parse tree
-     */
-    enterNamespaces?: (ctx: NamespacesContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.namespaces`.
-     * @param ctx the parse tree
-     */
-    exitNamespaces?: (ctx: NamespacesContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.describeFuncName`.
      * @param ctx the parse tree
@@ -1774,16 +1676,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitStorageHandler?: (ctx: StorageHandlerContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.resource`.
-     * @param ctx the parse tree
-     */
-    enterResource?: (ctx: ResourceContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.resource`.
-     * @param ctx the parse tree
-     */
-    exitResource?: (ctx: ResourceContext) => void;
-    /**
      * Enter a parse tree produced by the `insertFromQuery`
      * labeled alternative in `SparkSqlParser.dmlStatementNoWith`.
      * @param ctx the parse tree
@@ -1914,6 +1806,16 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
     /**
+     * Enter a parse tree produced by `SparkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
      * Enter a parse tree produced by `SparkSqlParser.columnNameSeq`.
      * @param ctx the parse tree
      */
@@ -1954,15 +1856,35 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitQueryOrganization?: (ctx: QueryOrganizationContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.multiInsertQueryBody`.
+     * Enter a parse tree produced by `SparkSqlParser.limitClause`.
      * @param ctx the parse tree
      */
-    enterMultiInsertQueryBody?: (ctx: MultiInsertQueryBodyContext) => void;
+    enterLimitClause?: (ctx: LimitClauseContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.multiInsertQueryBody`.
+     * Exit a parse tree produced by `SparkSqlParser.limitClause`.
      * @param ctx the parse tree
      */
-    exitMultiInsertQueryBody?: (ctx: MultiInsertQueryBodyContext) => void;
+    exitLimitClause?: (ctx: LimitClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.orderOrSortByClause`.
+     * @param ctx the parse tree
+     */
+    enterOrderOrSortByClause?: (ctx: OrderOrSortByClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.orderOrSortByClause`.
+     * @param ctx the parse tree
+     */
+    exitOrderOrSortByClause?: (ctx: OrderOrSortByClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.clusterOrDistributeBy`.
+     * @param ctx the parse tree
+     */
+    enterClusterOrDistributeBy?: (ctx: ClusterOrDistributeByContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.clusterOrDistributeBy`.
+     * @param ctx the parse tree
+     */
+    exitClusterOrDistributeBy?: (ctx: ClusterOrDistributeByContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.queryTerm`.
      * @param ctx the parse tree
@@ -1993,16 +1915,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSortItem?: (ctx: SortItemContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.fromStatement`.
-     * @param ctx the parse tree
-     */
-    enterFromStatement?: (ctx: FromStatementContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.fromStatement`.
-     * @param ctx the parse tree
-     */
-    exitFromStatement?: (ctx: FromStatementContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.fromStatementBody`.
      * @param ctx the parse tree
@@ -2084,16 +1996,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitNotMatchedBySourceClause?: (ctx: NotMatchedBySourceClauseContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.matchedAction`.
-     * @param ctx the parse tree
-     */
-    enterMatchedAction?: (ctx: MatchedActionContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.matchedAction`.
-     * @param ctx the parse tree
-     */
-    exitMatchedAction?: (ctx: MatchedActionContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.notMatchedAction`.
      * @param ctx the parse tree
      */
@@ -2103,16 +2005,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitNotMatchedAction?: (ctx: NotMatchedActionContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.notMatchedBySourceAction`.
-     * @param ctx the parse tree
-     */
-    enterNotMatchedBySourceAction?: (ctx: NotMatchedBySourceActionContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.notMatchedBySourceAction`.
-     * @param ctx the parse tree
-     */
-    exitNotMatchedBySourceAction?: (ctx: NotMatchedBySourceActionContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.assignmentList`.
      * @param ctx the parse tree
@@ -2184,16 +2076,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitFromClause?: (ctx: FromClauseContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.functionKind`.
-     * @param ctx the parse tree
-     */
-    enterFunctionKind?: (ctx: FunctionKindContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.functionKind`.
-     * @param ctx the parse tree
-     */
-    exitFunctionKind?: (ctx: FunctionKindContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.temporalClause`.
      * @param ctx the parse tree
      */
@@ -2233,16 +2115,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitGroupingAnalytics?: (ctx: GroupingAnalyticsContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.groupingElement`.
-     * @param ctx the parse tree
-     */
-    enterGroupingElement?: (ctx: GroupingElementContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.groupingElement`.
-     * @param ctx the parse tree
-     */
-    exitGroupingElement?: (ctx: GroupingElementContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.groupingSet`.
      * @param ctx the parse tree
@@ -2294,26 +2166,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitUnPivotClause?: (ctx: UnPivotClauseContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.unPivotNullClause`.
-     * @param ctx the parse tree
-     */
-    enterUnPivotNullClause?: (ctx: UnPivotNullClauseContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.unPivotNullClause`.
-     * @param ctx the parse tree
-     */
-    exitUnPivotNullClause?: (ctx: UnPivotNullClauseContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.unPivotOperator`.
-     * @param ctx the parse tree
-     */
-    enterUnPivotOperator?: (ctx: UnPivotOperatorContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.unPivotOperator`.
-     * @param ctx the parse tree
-     */
-    exitUnPivotOperator?: (ctx: UnPivotOperatorContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.unPivotSingleValueColumnClause`.
      * @param ctx the parse tree
      */
@@ -2344,26 +2196,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitUnPivotColumnSet?: (ctx: UnPivotColumnSetContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.unPivotValueColumn`.
-     * @param ctx the parse tree
-     */
-    enterUnPivotValueColumn?: (ctx: UnPivotValueColumnContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.unPivotValueColumn`.
-     * @param ctx the parse tree
-     */
-    exitUnPivotValueColumn?: (ctx: UnPivotValueColumnContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.unPivotNameColumn`.
-     * @param ctx the parse tree
-     */
-    enterUnPivotNameColumn?: (ctx: UnPivotNameColumnContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.unPivotNameColumn`.
-     * @param ctx the parse tree
-     */
-    exitUnPivotNameColumn?: (ctx: UnPivotNameColumnContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.unPivotColumnAndAlias`.
      * @param ctx the parse tree
      */
@@ -2373,26 +2205,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitUnPivotColumnAndAlias?: (ctx: UnPivotColumnAndAliasContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.unPivotColumn`.
-     * @param ctx the parse tree
-     */
-    enterUnPivotColumn?: (ctx: UnPivotColumnContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.unPivotColumn`.
-     * @param ctx the parse tree
-     */
-    exitUnPivotColumn?: (ctx: UnPivotColumnContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.unPivotAlias`.
-     * @param ctx the parse tree
-     */
-    enterUnPivotAlias?: (ctx: UnPivotAliasContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.unPivotAlias`.
-     * @param ctx the parse tree
-     */
-    exitUnPivotAlias?: (ctx: UnPivotAliasContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.ifNotExists`.
      * @param ctx the parse tree
@@ -2443,16 +2255,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitRelation?: (ctx: RelationContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.relationExtension`.
-     * @param ctx the parse tree
-     */
-    enterRelationExtension?: (ctx: RelationExtensionContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.relationExtension`.
-     * @param ctx the parse tree
-     */
-    exitRelationExtension?: (ctx: RelationExtensionContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.joinRelation`.
      * @param ctx the parse tree
@@ -2574,16 +2376,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitRelationPrimary?: (ctx: RelationPrimaryContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.inlineTable`.
-     * @param ctx the parse tree
-     */
-    enterInlineTable?: (ctx: InlineTableContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.inlineTable`.
-     * @param ctx the parse tree
-     */
-    exitInlineTable?: (ctx: InlineTableContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.functionTableSubqueryArgument`.
      * @param ctx the parse tree
      */
@@ -2633,16 +2425,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitFunctionTableArgument?: (ctx: FunctionTableArgumentContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.functionTable`.
-     * @param ctx the parse tree
-     */
-    enterFunctionTable?: (ctx: FunctionTableContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.functionTable`.
-     * @param ctx the parse tree
-     */
-    exitFunctionTable?: (ctx: FunctionTableContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.tableAlias`.
      * @param ctx the parse tree
@@ -3094,16 +2876,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitColDefinitionDescriptorWithPosition?: (ctx: ColDefinitionDescriptorWithPositionContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.defaultExpression`.
-     * @param ctx the parse tree
-     */
-    enterDefaultExpression?: (ctx: DefaultExpressionContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.defaultExpression`.
-     * @param ctx the parse tree
-     */
-    exitDefaultExpression?: (ctx: DefaultExpressionContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.variableDefaultExpression`.
      * @param ctx the parse tree
      */
@@ -3164,26 +2936,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitColDefinitionOption?: (ctx: ColDefinitionOptionContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.generationExpression`.
-     * @param ctx the parse tree
-     */
-    enterGenerationExpression?: (ctx: GenerationExpressionContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.generationExpression`.
-     * @param ctx the parse tree
-     */
-    exitGenerationExpression?: (ctx: GenerationExpressionContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.complexColTypeList`.
-     * @param ctx the parse tree
-     */
-    enterComplexColTypeList?: (ctx: ComplexColTypeListContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.complexColTypeList`.
-     * @param ctx the parse tree
-     */
-    exitComplexColTypeList?: (ctx: ComplexColTypeListContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.complexColType`.
      * @param ctx the parse tree
      */
@@ -3223,16 +2975,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitZOrderClause?: (ctx: ZOrderClauseContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.namedWindow`.
-     * @param ctx the parse tree
-     */
-    enterNamedWindow?: (ctx: NamedWindowContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.namedWindow`.
-     * @param ctx the parse tree
-     */
-    exitNamedWindow?: (ctx: NamedWindowContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.windowSpec`.
      * @param ctx the parse tree
@@ -3354,16 +3096,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitQuotedIdentifier?: (ctx: QuotedIdentifierContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.backQuotedIdentifier`.
-     * @param ctx the parse tree
-     */
-    enterBackQuotedIdentifier?: (ctx: BackQuotedIdentifierContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.backQuotedIdentifier`.
-     * @param ctx the parse tree
-     */
-    exitBackQuotedIdentifier?: (ctx: BackQuotedIdentifierContext) => void;
-    /**
      * Enter a parse tree produced by `SparkSqlParser.number`.
      * @param ctx the parse tree
      */
@@ -3393,26 +3125,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitStringLit?: (ctx: StringLitContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.commentStr`.
-     * @param ctx the parse tree
-     */
-    enterCommentStr?: (ctx: CommentStrContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.commentStr`.
-     * @param ctx the parse tree
-     */
-    exitCommentStr?: (ctx: CommentStrContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.version`.
-     * @param ctx the parse tree
-     */
-    enterVersion?: (ctx: VersionContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.version`.
-     * @param ctx the parse tree
-     */
-    exitVersion?: (ctx: VersionContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.ansiNonReserved`.
      * @param ctx the parse tree

@@ -371,6 +371,7 @@ import { DocumentOrContentContext } from "./PostgreSqlParser.js";
 import { XmlExistsArgumentContext } from "./PostgreSqlParser.js";
 import { XmlPassingMechContext } from "./PostgreSqlParser.js";
 import { WindowClauseContext } from "./PostgreSqlParser.js";
+import { HavingClauseContext } from "./PostgreSqlParser.js";
 import { WindowDefinitionContext } from "./PostgreSqlParser.js";
 import { Over_clauseContext } from "./PostgreSqlParser.js";
 import { WindowSpecificationContext } from "./PostgreSqlParser.js";
@@ -421,6 +422,7 @@ import { RoutineNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
+import { ColumnNamePathContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameContext } from "./PostgreSqlParser.js";
@@ -2700,6 +2702,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitWindowClause?: (ctx: WindowClauseContext) => Result;
     /**
+     * Visit a parse tree produced by `PostgreSqlParser.havingClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitHavingClause?: (ctx: HavingClauseContext) => Result;
+    /**
      * Visit a parse tree produced by `PostgreSqlParser.windowDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -3001,6 +3009,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.columnNameCreate`.
      * @param ctx the parse tree

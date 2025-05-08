@@ -356,6 +356,55 @@ console.log(sqlSlices)
 
 行列号信息不是必传的，如果传了行列号信息，那么收集到的实体中，如果实体位于对应行列号所在的语句下，那么实体的所属的语句对象上会带有 `isContainCaret` 标识，这在与自动补全功能结合时，可以帮助你快速筛选出需要的实体信息。
 
+
+### 获取语义上下文信息
+调用 SQL 实例上的 `getSemanticContextAtCaretPosition` 方法，传入 sql 文本和指定位置的行列号, 例如：
+```typescript
+import { HiveSQL } from 'dt-sql-parser';
+
+const hive = new HiveSQL();
+const sql = 'SELECT * FROM tb;';
+const pos = { lineNumber: 1, column: 18 }; // 'tb;' 的后面
+const semanticContext = hive.getSemanticContextAtCaretPosition(sql, pos);
+
+console.log(semanticContext);
+```
+
+*输出*
+
+```typescript
+/*
+{
+  isStatementBeginning: true,
+}
+*/
+```
+
+目前能收集到的语义上下文信息如下，如果有更多的需求，欢迎提[issue](https://github.com/DTStack/dt-sql-parser/issues)
+- `isStatementBeginning` 当前输入位置是否为一条语句的开头
+
+默认情况下，`isStatementBeginning` 的收集策略为`SqlSplitStrategy.STRICT`
+
+有两种可选策略:
+- `SqlSplitStrategy.STRICT` 严格策略, 仅以语句分隔符`;`作为上一条语句结束的标识
+- `SqlSplitStrategy.LOOSE` 宽松策略, 以语法解析树为基础分割SQL
+
+两种策略的差异：
+如输入SQL为
+```sql
+CREATE TABLE tb (id INT)
+
+SELECT
+```
+CREATE语句后未添加分号，那么当获取SELECT后的语义上下文时，
+在`SqlSplitStrategy.STRICT`策略下`isStatementBeginning` 为`false`, 因为CREATE语句未以分号结尾，那么会被认为这条语句尚未结束;
+在`SqlSplitStrategy.LOOSE`策略下`isStatementBeginning` 为`true`, 因为语法解析树中这条SQL被拆分成了CREATE独立语句与SELECT独立语句。
+
+可以通过第三个`options`参数设置策略:
+```typescript
+hive.getSemanticContextAtCaretPosition(sql, pos, { splitSqlStrategy: SqlSplitStrategy.LOOSE });
+```
+
 ### 其他 API
 
 - `createLexer` 创建一个 Antlr4 Lexer 实例并返回；

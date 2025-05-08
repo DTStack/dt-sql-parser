@@ -1,15 +1,22 @@
 import { CandidatesCollection } from 'antlr4-c3';
 import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
-
+import { processTokenCandidates } from '../common/tokenUtils';
 import { FlinkSqlLexer } from '../../lib/flink/FlinkSqlLexer';
 import { FlinkSqlParser, ProgramContext } from '../../lib/flink/FlinkSqlParser';
+import {
+    CaretPosition,
+    EntityContextType,
+    SemanticCollectOptions,
+    Suggestions,
+    SyntaxSuggestion,
+} from '../common/types';
 import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { FlinkEntityCollector } from './flinkEntityCollector';
 import { FlinkErrorListener } from './flinkErrorListener';
 import { FlinkSqlSplitListener } from './flinkSplitListener';
+import { FlinkSemanticContextCollector } from './flinkSemanticContextCollector';
 
 export { FlinkEntityCollector, FlinkSqlSplitListener };
 
@@ -36,6 +43,7 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         FlinkSqlParser.RULE_reservedKeywordsNoParamsUsedAsFuncName, // functionName
         FlinkSqlParser.RULE_functionNameCreate, // functionName that will be created
         FlinkSqlParser.RULE_columnName,
+        FlinkSqlParser.RULE_columnNamePath,
         FlinkSqlParser.RULE_columnNameCreate,
     ]);
 
@@ -51,22 +59,27 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         return new FlinkEntityCollector(input, allTokens, caretTokenIndex);
     }
 
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new FlinkSemanticContextCollector(input, caretPosition, allTokens, options);
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
+
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
                 case FlinkSqlParser.RULE_catalogPath: {
@@ -116,6 +129,19 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
+                case FlinkSqlParser.RULE_columnNamePath: {
+                    if (
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_selectClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_groupByClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_limitClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_havingClause)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
+                    break;
+                }
                 default:
                     break;
             }
@@ -128,17 +154,9 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
             }
         }
 
-        for (let candidate of candidates.tokens) {
-            const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
-            const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
-                const keyword =
-                    displayName.startsWith("'") && displayName.endsWith("'")
-                        ? displayName.slice(1, -1)
-                        : displayName;
-                keywords.push(keyword);
-            }
-        }
+        const processedKeywords = processTokenCandidates(this._parser, candidates.tokens);
+        keywords.push(...processedKeywords);
+
         return {
             syntax: originalSyntaxSuggestions,
             keywords,

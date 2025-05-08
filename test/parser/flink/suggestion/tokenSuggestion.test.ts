@@ -68,13 +68,39 @@ describe('Flink SQL Token Suggestion', () => {
         ]);
     });
 
+    test('After CREATE TABLE, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 9,
+            column: 14,
+        };
+        const suggestion = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('IF');
+        expect(suggestion).toContain('IF NOT EXISTS');
+    });
+
+    test('After CREATE TABLE IF, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 9,
+            column: 17,
+        };
+        const suggestion = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('NOT');
+        expect(suggestion).toContain('NOT EXISTS');
+    });
+
     test('Suggestion in new line', () => {
         const pos: CaretPosition = {
-            lineNumber: 10,
+            lineNumber: 13,
             column: 2,
         };
         const suggestion = flink.getSuggestionAtCaretPosition(
-            commentOtherLine(tokenSql, [9, 11]),
+            commentOtherLine(tokenSql, [12, 14]),
             pos
         )?.keywords;
         expect(suggestion.length).not.toBe(0);

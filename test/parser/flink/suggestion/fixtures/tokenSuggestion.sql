@@ -5,6 +5,9 @@ USE
 CREATE 
 ;
 SHOW 
+;
+CREATE TABLE IF NOT EXISTS
+;
 
 CREATE TABLE tb (id 
  

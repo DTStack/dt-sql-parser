@@ -58,7 +58,9 @@ export class MysqlErrorListener extends ParseErrorListener {
                     case MySqlParser.RULE_functionName:
                     case MySqlParser.RULE_viewName:
                     case MySqlParser.RULE_columnName: {
-                        result.push(`{existing}${name}`);
+                        if (!result.includes(`{existing}${name}`)) {
+                            result.push(`{existing}${name}`);
+                        }
                         break;
                     }
                     case MySqlParser.RULE_databaseNameCreate:
@@ -66,7 +68,9 @@ export class MysqlErrorListener extends ParseErrorListener {
                     case MySqlParser.RULE_functionNameCreate:
                     case MySqlParser.RULE_viewNameCreate:
                     case MySqlParser.RULE_columnNameCreate: {
-                        result.push(`{new}${name}`);
+                        if (!result.includes(`{new}${name}`)) {
+                            result.push(`{new}${name}`);
+                        }
                         break;
                     }
                 }

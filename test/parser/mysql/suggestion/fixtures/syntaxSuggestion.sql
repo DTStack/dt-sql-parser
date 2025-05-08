@@ -55,3 +55,9 @@ SHOW CREATE TABLE tbl_name;
 SHOW CREATE DATABASE IF NOT EXISTS db_name;
 
 SHOW CREATE VIEW test.v;
+
+SELECT user, MAX(salary) FROM users where age = 10 GROUP BY length(user) HAVING MAX(salary) > 10;
+
+SELECT c.category_id FROM category c JOIN product p ON c.category_id = p.category_id;
+
+SELECT score, CASE WHEN score >= 90 THEN 'A' ELSE 'F' END AS grade FROM students;

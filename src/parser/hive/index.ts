@@ -1,15 +1,23 @@
 import { CandidatesCollection } from 'antlr4-c3';
 import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
-
+import { processTokenCandidates } from '../common/tokenUtils';
 import { HiveSqlLexer } from '../../lib/hive/HiveSqlLexer';
 import { HiveSqlParser, ProgramContext } from '../../lib/hive/HiveSqlParser';
 import { BasicSQL } from '../common/basicSQL';
+
+import {
+    CaretPosition,
+    EntityContextType,
+    SemanticCollectOptions,
+    Suggestions,
+    SyntaxSuggestion,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { HiveEntityCollector } from './hiveEntityCollector';
 import { HiveErrorListener } from './hiveErrorListener';
 import { HiveSqlSplitListener } from './hiveSplitListener';
+import { HiveSemanticContextCollector } from './hiveSemanticContextCollector';
 
 export { HiveEntityCollector, HiveSqlSplitListener };
 
@@ -33,6 +41,7 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         HiveSqlParser.RULE_functionNameForInvoke, // function name
         HiveSqlParser.RULE_functionNameCreate, // function name that will be created
         HiveSqlParser.RULE_columnName,
+        HiveSqlParser.RULE_columnNamePath,
         HiveSqlParser.RULE_columnNameCreate,
     ]);
 
@@ -48,21 +57,25 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         return new HiveEntityCollector(input, allTokens, caretTokenIndex);
     }
 
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new HiveSemanticContextCollector(input, caretPosition, allTokens, options);
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -107,6 +120,26 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
+                case HiveSqlParser.RULE_columnNamePath: {
+                    if (
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_orderByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_groupByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_sortByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_qualifyClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_clusterByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_distributeByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_selectClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_joinSource) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_caseExpression) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_whenExpression) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_castExpression)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
+                    break;
+                }
                 default:
                     break;
             }
@@ -119,17 +152,9 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
             }
         }
 
-        for (let candidate of candidates.tokens) {
-            const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
-            const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
-                const keyword =
-                    displayName.startsWith("'") && displayName.endsWith("'")
-                        ? displayName.slice(1, -1)
-                        : displayName;
-                keywords.push(keyword);
-            }
-        }
+        const processedKeywords = processTokenCandidates(this._parser, candidates.tokens);
+        keywords.push(...processedKeywords);
+
         return {
             syntax: originalSyntaxSuggestions,
             keywords,

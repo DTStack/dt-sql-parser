@@ -189,6 +189,10 @@ columnName
     | {this.shouldMatchEmpty()}?
     ;
 
+columnNamePath
+    : uid
+    ;
+
 columnNameList
     : LR_BRACKET columnName (COMMA columnName)* RR_BRACKET
     ;
@@ -771,7 +775,7 @@ primaryExpression
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
     | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
-    | identifier                                                          # columnReference
+    | columnNamePath                                                      # columnReference
     | dereferenceDefinition                                               # dereference
     | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression
     // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract

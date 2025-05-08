@@ -1,15 +1,23 @@
 import { CandidatesCollection } from 'antlr4-c3';
 import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
+import { processTokenCandidates } from '../common/tokenUtils';
 
 import { PostgreSqlLexer } from '../../lib/postgresql/PostgreSqlLexer';
 import { PostgreSqlParser, ProgramContext } from '../../lib/postgresql/PostgreSqlParser';
+import {
+    CaretPosition,
+    EntityContextType,
+    SemanticCollectOptions,
+    Suggestions,
+    SyntaxSuggestion,
+} from '../common/types';
 import { BasicSQL } from '../common/basicSQL';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { PostgreSqlEntityCollector } from './postgreEntityCollector';
 import { PostgreSqlErrorListener } from './postgreErrorListener';
 import { PostgreSqlSplitListener } from './postgreSplitListener';
+import { PostgreSemanticContextCollector } from './postgreSemanticContextCollector';
 
 export { PostgreSqlEntityCollector, PostgreSqlSplitListener };
 
@@ -37,6 +45,7 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         PostgreSqlParser.RULE_procedureName, // procedure name
         PostgreSqlParser.RULE_columnNameCreate, // column name that will be created
         PostgreSqlParser.RULE_columnName, // column name
+        PostgreSqlParser.RULE_columnNamePath, // column name
     ]);
 
     protected get splitListener() {
@@ -51,21 +60,25 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         return new PostgreSqlEntityCollector(input, allTokens, caretTokenIndex);
     }
 
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new PostgreSemanticContextCollector(input, caretPosition, allTokens, options);
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -125,6 +138,20 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
+                case PostgreSqlParser.RULE_columnNamePath: {
+                    if (
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_groupClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_sortClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_limitClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_windowClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_triggerWhen)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
+                    break;
+                }
                 default:
                     break;
             }
@@ -137,17 +164,9 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
             }
         }
 
-        for (let candidate of candidates.tokens) {
-            const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
-            const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
-                const keyword =
-                    displayName.startsWith("'") && displayName.endsWith("'")
-                        ? displayName.slice(1, -1)
-                        : displayName;
-                keywords.push(keyword);
-            }
-        }
+        const processedKeywords = processTokenCandidates(this._parser, candidates.tokens);
+        keywords.push(...processedKeywords);
+
         return {
             syntax: originalSyntaxSuggestions,
             keywords,
