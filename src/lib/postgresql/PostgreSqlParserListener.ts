@@ -66,7 +66,8 @@ import { AltercompositetypestmtContext } from "./PostgreSqlParser.js";
 import { Alter_type_cmdContext } from "./PostgreSqlParser.js";
 import { CloseportalstmtContext } from "./PostgreSqlParser.js";
 import { CopystmtContext } from "./PostgreSqlParser.js";
-import { Copy_optionsContext } from "./PostgreSqlParser.js";
+import { CopyOptionsNoparensContext } from "./PostgreSqlParser.js";
+import { CopyOptionsContext } from "./PostgreSqlParser.js";
 import { Copy_generic_opt_elemContext } from "./PostgreSqlParser.js";
 import { ColumnCreateTableContext } from "./PostgreSqlParser.js";
 import { OpttempContext } from "./PostgreSqlParser.js";
@@ -1080,15 +1081,25 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitCopystmt?: (ctx: CopystmtContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.copy_options`.
+     * Enter a parse tree produced by `PostgreSqlParser.copyOptionsNoparens`.
      * @param ctx the parse tree
      */
-    enterCopy_options?: (ctx: Copy_optionsContext) => void;
+    enterCopyOptionsNoparens?: (ctx: CopyOptionsNoparensContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.copy_options`.
+     * Exit a parse tree produced by `PostgreSqlParser.copyOptionsNoparens`.
      * @param ctx the parse tree
      */
-    exitCopy_options?: (ctx: Copy_optionsContext) => void;
+    exitCopyOptionsNoparens?: (ctx: CopyOptionsNoparensContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.copyOptions`.
+     * @param ctx the parse tree
+     */
+    enterCopyOptions?: (ctx: CopyOptionsContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.copyOptions`.
+     * @param ctx the parse tree
+     */
+    exitCopyOptions?: (ctx: CopyOptionsContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.copy_generic_opt_elem`.
      * @param ctx the parse tree
