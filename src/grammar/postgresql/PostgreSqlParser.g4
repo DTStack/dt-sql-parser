@@ -551,15 +551,15 @@ copystmt
         sconst
         | KW_STDIN
         | KW_STDOUT
-    ) (KW_USING? KW_DELIMITERS sconst)? KW_WITH? copy_options where_clause?
+    ) (KW_USING? KW_DELIMITERS sconst)? KW_WITH? copyOptions where_clause?
     | KW_COPY OPEN_PAREN preparablestmt CLOSE_PAREN KW_TO KW_PROGRAM? (
         sconst
         | KW_STDIN
         | KW_STDOUT
-    ) KW_WITH? copy_options
+    ) KW_WITH? copyOptions
     ;
 
-copy_options
+copyOptionsNoparens
     : (
         KW_BINARY
         | KW_FREEZE
@@ -569,8 +569,17 @@ copy_options
         | KW_FORCE KW_QUOTE (column_list | STAR)
         | KW_FORCE KW_NOT? KW_NULL column_list
         | KW_ENCODING sconst
+        | (KW_FORCE_QUOTE | KW_FORCE_NOT_NULL | KW_FORCE_NULL) (
+            OPEN_PAREN (column_list | STAR) (COMMA (column_list | STAR))* CLOSE_PAREN
+        )?
     )*
-    | OPEN_PAREN copy_generic_opt_elem (COMMA copy_generic_opt_elem)* CLOSE_PAREN
+    ;
+
+copyOptions
+    : copyOptionsNoparens
+    | OPEN_PAREN (copyOptionsNoparens | copy_generic_opt_elem) (
+        COMMA (copyOptionsNoparens | copy_generic_opt_elem)
+    )* CLOSE_PAREN
     ;
 
 copy_generic_opt_elem
@@ -1911,11 +1920,13 @@ prep_type_clause
     : OPEN_PAREN typename (COMMA typename)* CLOSE_PAREN
     ;
 
+// https://www.postgresql.org/docs/17/sql-select.html
 preparablestmt
     : selectstmt
     | insertstmt
     | updatestmt
     | deletestmt
+    | mergestmt
     ;
 
 executestmt
@@ -3558,8 +3569,10 @@ stmt_move
     : KW_MOVE opt_fetch_direction? cursor_variable SEMI
     ;
 
+// https://www.postgresql.org/docs/17/sql-merge.html
 mergestmt
     : with_clause? KW_MERGE KW_INTO (KW_ONLY)? table_name (STAR)? (KW_AS? colid)? KW_USING data_source KW_ON expression merge_when_clause+
+        returning_clause?
     ;
 
 data_source

@@ -66,7 +66,8 @@ import { AltercompositetypestmtContext } from "./PostgreSqlParser.js";
 import { Alter_type_cmdContext } from "./PostgreSqlParser.js";
 import { CloseportalstmtContext } from "./PostgreSqlParser.js";
 import { CopystmtContext } from "./PostgreSqlParser.js";
-import { Copy_optionsContext } from "./PostgreSqlParser.js";
+import { CopyOptionsNoparensContext } from "./PostgreSqlParser.js";
+import { CopyOptionsContext } from "./PostgreSqlParser.js";
 import { Copy_generic_opt_elemContext } from "./PostgreSqlParser.js";
 import { ColumnCreateTableContext } from "./PostgreSqlParser.js";
 import { OpttempContext } from "./PostgreSqlParser.js";
@@ -850,11 +851,17 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitCopystmt?: (ctx: CopystmtContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.copy_options`.
+     * Visit a parse tree produced by `PostgreSqlParser.copyOptionsNoparens`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitCopy_options?: (ctx: Copy_optionsContext) => Result;
+    visitCopyOptionsNoparens?: (ctx: CopyOptionsNoparensContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.copyOptions`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCopyOptions?: (ctx: CopyOptionsContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.copy_generic_opt_elem`.
      * @param ctx the parse tree
