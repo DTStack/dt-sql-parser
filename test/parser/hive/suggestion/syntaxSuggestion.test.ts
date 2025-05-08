@@ -361,4 +361,208 @@ describe('Hive SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['page_view_stg']);
     });
+
+    test('Order by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 43,
+            column: 54,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['b']);
+    });
+
+    test('Having expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 45,
+            column: 50,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col2']);
+    });
+
+    test('Group by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 47,
+            column: 74,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col1']);
+    });
+
+    test('Where expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 47,
+            column: 100,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['t2', '.', 'col2sum']);
+    });
+
+    test('Sort by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 49,
+            column: 58,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col1']);
+    });
+
+    test('Cluster by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 53,
+            column: 63,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['customer_id']);
+    });
+
+    test('Distribute by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 55,
+            column: 52,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col1']);
+    });
+
+    test('select expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 55,
+            column: 18,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['t3', '.', 'col']);
+    });
+
+    test('Partition by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 57,
+            column: 40,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['c']);
+    });
+
+    test('Join expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 59,
+            column: 41,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['b', '.', 'id']);
+    });
+
+    test('Cast expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 61,
+            column: 89,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['day']);
+    });
+
+    test('Case/When expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 61,
+            column: 35,
+        };
+        const syntaxes = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['month']);
+    });
 });

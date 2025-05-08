@@ -62,6 +62,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         TrinoSqlParser.RULE_functionName,
         TrinoSqlParser.RULE_functionNameCreate,
         TrinoSqlParser.RULE_columnRef,
+        TrinoSqlParser.RULE_columnName,
         TrinoSqlParser.RULE_columnNameCreate,
     ]);
 
@@ -131,6 +132,19 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                 case TrinoSqlParser.RULE_columnRef: {
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
+                }
+                case TrinoSqlParser.RULE_columnName: {
+                    if (
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_groupBy) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_sortItem) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_partitionBy) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_relation)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
                 }
                 default:
                     break;

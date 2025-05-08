@@ -137,6 +137,7 @@ import { ColumnNameTypeOrConstraintListContext } from "./HiveSqlParser.js";
 import { ColumnNameColonTypeListContext } from "./HiveSqlParser.js";
 import { ColumnNameListContext } from "./HiveSqlParser.js";
 import { ColumnNameContext } from "./HiveSqlParser.js";
+import { ColumnNamePathContext } from "./HiveSqlParser.js";
 import { ColumnNameCreateContext } from "./HiveSqlParser.js";
 import { ExtColumnNameContext } from "./HiveSqlParser.js";
 import { ColumnNameOrderListContext } from "./HiveSqlParser.js";
@@ -282,6 +283,7 @@ import { ExpressionsContext } from "./HiveSqlParser.js";
 import { ExpressionsInParenthesisContext } from "./HiveSqlParser.js";
 import { ExpressionsNotInParenthesisContext } from "./HiveSqlParser.js";
 import { OrderByClauseContext } from "./HiveSqlParser.js";
+import { PartitionByClauseContext } from "./HiveSqlParser.js";
 import { ClusterByClauseContext } from "./HiveSqlParser.js";
 import { DistributeByClauseContext } from "./HiveSqlParser.js";
 import { SortByClauseContext } from "./HiveSqlParser.js";
@@ -1653,6 +1655,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.columnNameCreate`.
      * @param ctx the parse tree
@@ -3111,6 +3123,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitOrderByClause?: (ctx: OrderByClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     */
+    enterPartitionByClause?: (ctx: PartitionByClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     */
+    exitPartitionByClause?: (ctx: PartitionByClauseContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.clusterByClause`.
      * @param ctx the parse tree

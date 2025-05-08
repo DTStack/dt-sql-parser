@@ -14,6 +14,7 @@ export class SparkErrorListener extends ParseErrorListener {
         [SparkSqlParser.RULE_functionName, 'function'],
         [SparkSqlParser.RULE_functionNameCreate, 'function'],
         [SparkSqlParser.RULE_columnName, 'column'],
+        [SparkSqlParser.RULE_columnNamePath, 'column'],
         [SparkSqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
@@ -56,7 +57,8 @@ export class SparkErrorListener extends ParseErrorListener {
                     case SparkSqlParser.RULE_tableName:
                     case SparkSqlParser.RULE_viewName:
                     case SparkSqlParser.RULE_functionName:
-                    case SparkSqlParser.RULE_columnName: {
+                    case SparkSqlParser.RULE_columnName:
+                    case SparkSqlParser.RULE_columnNamePath: {
                         result.push(`{existing}${name}`);
                         break;
                     }

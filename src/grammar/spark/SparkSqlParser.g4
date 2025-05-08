@@ -410,6 +410,10 @@ columnName
     | {this.shouldMatchEmpty()}?
     ;
 
+columnNamePath
+    : multipartIdentifier
+    ;
+
 columnNameSeq
     : columnName (COMMA columnName)*
     ;
@@ -424,11 +428,23 @@ identifierReference
     ;
 
 queryOrganization
-    : (KW_ORDER KW_BY order+=sortItem (COMMA order+=sortItem)*)? (
-        KW_CLUSTER KW_BY clusterBy+=expression (COMMA clusterBy+=expression)*
-    )? (KW_DISTRIBUTE KW_BY distributeBy+=expression (COMMA distributeBy+=expression)*)? (
-        KW_SORT KW_BY sort+=sortItem (COMMA sort+=sortItem)*
-    )? windowClause? (KW_LIMIT (KW_ALL | limit=expression))? (KW_OFFSET offset=expression)?
+    : (KW_ORDER KW_BY orderOrSortByClause)? (KW_CLUSTER KW_BY clusterOrDistributeBy)? (
+        KW_DISTRIBUTE KW_BY clusterOrDistributeBy
+    )? (KW_SORT KW_BY orderOrSortByClause)? windowClause? limitClause? (
+        KW_OFFSET offset=expression
+    )?
+    ;
+
+limitClause
+    : KW_LIMIT (KW_ALL | limit=expression)
+    ;
+
+orderOrSortByClause
+    : sortItem (COMMA sortItem)*
+    ;
+
+clusterOrDistributeBy
+    : expression (COMMA expression)*
     ;
 
 queryTerm
@@ -722,11 +738,7 @@ tableArgumentPartitioning
                 | partition+=expression
             )
         )
-    ) (
-        (KW_ORDER | KW_SORT) KW_BY (
-            ((LEFT_PAREN sortItem (COMMA sortItem)* RIGHT_PAREN) | sortItem)
-        )
-    )?
+    ) ((KW_ORDER | KW_SORT) KW_BY ( ((LEFT_PAREN orderOrSortByClause RIGHT_PAREN) | sortItem)))?
     ;
 
 functionTableNamedArgumentExpression
@@ -906,7 +918,7 @@ primaryExpression
     | identifier ARROW expression
     | LEFT_PAREN identifier (COMMA identifier)+ RIGHT_PAREN ARROW expression
     | value=primaryExpression LEFT_BRACKET index=valueExpression RIGHT_BRACKET
-    | identifier
+    | columnNamePath
     | base=primaryExpression DOT fieldName=identifier
     | LEFT_PAREN expression RIGHT_PAREN
     | KW_EXTRACT LEFT_PAREN field=identifier KW_FROM source=valueExpression RIGHT_PAREN
@@ -1161,7 +1173,7 @@ windowSpec
             (KW_PARTITION | KW_DISTRIBUTE) KW_BY partition+=expression (
                 COMMA partition+=expression
             )*
-        )? ((KW_ORDER | KW_SORT) KW_BY sortItem (COMMA sortItem)*)?
+        )? ((KW_ORDER | KW_SORT) KW_BY orderOrSortByClause)?
     ) windowFrame? RIGHT_PAREN
     ;
 

@@ -374,6 +374,7 @@ import { Document_or_contentContext } from "./PostgreSqlParser.js";
 import { Xmlexists_argumentContext } from "./PostgreSqlParser.js";
 import { Xml_passing_mechContext } from "./PostgreSqlParser.js";
 import { Window_clauseContext } from "./PostgreSqlParser.js";
+import { Having_clauseContext } from "./PostgreSqlParser.js";
 import { Window_definitionContext } from "./PostgreSqlParser.js";
 import { Over_clauseContext } from "./PostgreSqlParser.js";
 import { Window_specificationContext } from "./PostgreSqlParser.js";
@@ -425,6 +426,7 @@ import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
 import { ColumnNameMatchContext } from "./PostgreSqlParser.js";
+import { Column_name_pathContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameContext } from "./PostgreSqlParser.js";
@@ -4210,6 +4212,16 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitWindow_clause?: (ctx: Window_clauseContext) => void;
     /**
+     * Enter a parse tree produced by `PostgreSqlParser.having_clause`.
+     * @param ctx the parse tree
+     */
+    enterHaving_clause?: (ctx: Having_clauseContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.having_clause`.
+     * @param ctx the parse tree
+     */
+    exitHaving_clause?: (ctx: Having_clauseContext) => void;
+    /**
      * Enter a parse tree produced by `PostgreSqlParser.window_definition`.
      * @param ctx the parse tree
      */
@@ -4753,6 +4765,16 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnNameMatch?: (ctx: ColumnNameMatchContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.column_name_path`.
+     * @param ctx the parse tree
+     */
+    enterColumn_name_path?: (ctx: Column_name_pathContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.column_name_path`.
+     * @param ctx the parse tree
+     */
+    exitColumn_name_path?: (ctx: Column_name_pathContext) => void;
     /**
      * Enter a parse tree produced by the `columnNameCreate`
      * labeled alternative in `PostgreSqlParser.column_name_create`.

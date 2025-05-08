@@ -1,32 +1,27 @@
 /*
- * [The "MIT license"]
- * Copyright (C) 2014 Sam Harwell, Tunnel Vision Laboratories, LLC
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
+ * [The "MIT license"] Copyright (C) 2014 Sam Harwell, Tunnel Vision Laboratories, LLC
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
- * 1. The above copyright notice and this permission notice shall be included in
- *    all copies or substantial portions of the Software.
- * 2. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- *    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- *    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- *    DEALINGS IN THE SOFTWARE.
- * 3. Except as contained in this notice, the name of Tunnel Vision
- *    Laboratories, LLC. shall not be used in advertising or otherwise to
- *    promote the sale, use or other dealings in this Software without prior
- *    written authorization from Tunnel Vision Laboratories, LLC.
+ * 
+ * 1. The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software. 2. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ * ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE. 3. Except as contained in this notice, the name of Tunnel Vision
+ * Laboratories, LLC. shall not be used in advertising or otherwise to promote the sale, use or
+ * other dealings in this Software without prior written authorization from Tunnel Vision
+ * Laboratories, LLC.
  */
 
 /**
- * This file is an adaptation of antlr's sql/postgresql/PostgreSQLParser.g4 grammar.
- * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/postgresql/PostgreSQLParser.g4
+ * This file is an adaptation of antlr's sql/postgresql/PostgreSQLParser.g4 grammar. Reference:
+ * https://github.com/antlr/grammars-v4/blob/master/sql/postgresql/PostgreSQLParser.g4
  */
 
 /**
@@ -2407,7 +2402,7 @@ primaryExpression
     | explicit_row
     | OPEN_PAREN expression COMMA expr_list CLOSE_PAREN
     | row KW_OVERLAPS row
-    | qualified_name
+    | column_name_path
     | primaryExpression TYPECAST typename
     | (PLUS | MINUS) primaryExpression
     | primaryExpression qual_op primaryExpression?
@@ -2500,6 +2495,10 @@ xml_passing_mech
 
 window_clause
     : KW_WINDOW window_definition (COMMA window_definition)*
+    ;
+
+having_clause
+    : KW_HAVING expression
     ;
 
 window_definition
@@ -2739,6 +2738,10 @@ procedure_name_create
 column_name
     : colid opt_indirection      # columnName
     | {this.shouldMatchEmpty()}? # columnNameMatch
+    ;
+
+column_name_path
+    : colid opt_indirection
     ;
 
 column_name_create
@@ -3629,5 +3632,5 @@ any_identifier
     ;
 
 sql_expression
-    : target_list? into_clause? from_clause? where_clause? group_clause? (KW_HAVING expression)? window_clause?
+    : target_list? into_clause? from_clause? where_clause? group_clause? having_clause? window_clause?
     ;

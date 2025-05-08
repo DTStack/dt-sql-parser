@@ -65,3 +65,13 @@ OPTIMIZE db.tb;
 OPTIMIZE db.tb ZORDER BY  ;
 
 OPTIMIZE db.tb ZORDER BY name, i;
+
+SELECT name, age FROM person ORDER BY length(age) LIMIT length(name);
+
+SELECT id, CASE id WHEN 100 then 'bigger' WHEN  id > 300 THEN '300' ELSE 'small' END FROM person;
+
+INSERT OVERWRITE students PARTITION (student_id = 222222) SELECT name, address FROM persons WHERE name = "Dora Williams";
+
+SELECT id, name, employee.deptno, deptname FROM employee FULL JOIN department ON employee.deptno = department.deptno;
+
+SELECT city, sum(quantity) AS sum FROM dealer GROUP BY sum(city) HAVING max(quantity) > 15;
