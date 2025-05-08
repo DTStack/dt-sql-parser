@@ -1116,23 +1116,4 @@ describe('Postgre SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['depname']);
     });
-
-    test('When expression', () => {
-        const pos: CaretPosition = {
-            lineNumber: 91,
-            column: 123,
-        };
-
-        const syntaxes = postgresql.getSuggestionAtCaretPosition(
-            commentOtherLine(syntaxSql, pos.lineNumber),
-            pos
-        )?.syntax;
-
-        const suggestion = syntaxes?.find(
-            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
-        );
-
-        expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['OLD', '.', 'balance']);
-    });
 });

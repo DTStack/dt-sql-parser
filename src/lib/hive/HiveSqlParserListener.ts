@@ -12,7 +12,7 @@ import { ProgramContext } from "./HiveSqlParser.js";
 import { StatementContext } from "./HiveSqlParser.js";
 import { ExplainStatementContext } from "./HiveSqlParser.js";
 import { ExplainOptionContext } from "./HiveSqlParser.js";
-import { VectorizatonDetailContext } from "./HiveSqlParser.js";
+import { VectorizationDetailContext } from "./HiveSqlParser.js";
 import { ExecStatementContext } from "./HiveSqlParser.js";
 import { LoadStatementContext } from "./HiveSqlParser.js";
 import { ReplicationClauseContext } from "./HiveSqlParser.js";
@@ -68,7 +68,7 @@ import { PrivilegeObjectContext } from "./HiveSqlParser.js";
 import { PrivObjectContext } from "./HiveSqlParser.js";
 import { PrivObjectColsContext } from "./HiveSqlParser.js";
 import { PrivilegeListContext } from "./HiveSqlParser.js";
-import { PrivlegeDefContext } from "./HiveSqlParser.js";
+import { PrivilegeDefContext } from "./HiveSqlParser.js";
 import { PrivilegeTypeContext } from "./HiveSqlParser.js";
 import { PrincipalSpecificationContext } from "./HiveSqlParser.js";
 import { PrincipalNameContext } from "./HiveSqlParser.js";
@@ -406,15 +406,15 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitExplainOption?: (ctx: ExplainOptionContext) => void;
     /**
-     * Enter a parse tree produced by `HiveSqlParser.vectorizatonDetail`.
+     * Enter a parse tree produced by `HiveSqlParser.vectorizationDetail`.
      * @param ctx the parse tree
      */
-    enterVectorizatonDetail?: (ctx: VectorizatonDetailContext) => void;
+    enterVectorizationDetail?: (ctx: VectorizationDetailContext) => void;
     /**
-     * Exit a parse tree produced by `HiveSqlParser.vectorizatonDetail`.
+     * Exit a parse tree produced by `HiveSqlParser.vectorizationDetail`.
      * @param ctx the parse tree
      */
-    exitVectorizatonDetail?: (ctx: VectorizatonDetailContext) => void;
+    exitVectorizationDetail?: (ctx: VectorizationDetailContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.execStatement`.
      * @param ctx the parse tree
@@ -966,15 +966,15 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitPrivilegeList?: (ctx: PrivilegeListContext) => void;
     /**
-     * Enter a parse tree produced by `HiveSqlParser.privlegeDef`.
+     * Enter a parse tree produced by `HiveSqlParser.privilegeDef`.
      * @param ctx the parse tree
      */
-    enterPrivlegeDef?: (ctx: PrivlegeDefContext) => void;
+    enterPrivilegeDef?: (ctx: PrivilegeDefContext) => void;
     /**
-     * Exit a parse tree produced by `HiveSqlParser.privlegeDef`.
+     * Exit a parse tree produced by `HiveSqlParser.privilegeDef`.
      * @param ctx the parse tree
      */
-    exitPrivlegeDef?: (ctx: PrivlegeDefContext) => void;
+    exitPrivilegeDef?: (ctx: PrivilegeDefContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.privilegeType`.
      * @param ctx the parse tree

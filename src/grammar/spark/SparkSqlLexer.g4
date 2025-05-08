@@ -481,7 +481,7 @@ LINE_COMMENT: '--' ('\\\n' | ~[\r\n])* '\r'? '\n'? -> channel(HIDDEN);
 BRACKETED_COMMENT:
     '/*' (BRACKETED_COMMENT | .)*? ('*/' | {this.markUnclosedComment();} EOF) -> channel(HIDDEN);
 
-WHITE_SPACE: [ \r\n\t]+ -> channel(HIDDEN);
+WHITE_SPACE: (' ' | '\t' | '\r' | '\n') -> channel(HIDDEN);
 
 // Catch-all for anything we can't recognize.
 // We use this to be able to ignore and recover all the text

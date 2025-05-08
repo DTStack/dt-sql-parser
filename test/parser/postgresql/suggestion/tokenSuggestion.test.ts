@@ -230,4 +230,16 @@ describe('Postgres SQL Token Suggestion', () => {
         expect(suggestion).toContain('NOT');
         expect(suggestion).toContain('NOT EXISTS');
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 14,
+            column: 2,
+        };
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [13, 15]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

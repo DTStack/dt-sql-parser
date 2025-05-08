@@ -103,6 +103,8 @@ import { UnsupportHiveCommandsContext } from "./SparkSqlParser.js";
 import { UnsupportedHiveNativeCommandsContext } from "./SparkSqlParser.js";
 import { BucketSpecContext } from "./SparkSqlParser.js";
 import { SkewSpecContext } from "./SparkSqlParser.js";
+import { LocationSpecContext } from "./SparkSqlParser.js";
+import { CommentSpecContext } from "./SparkSqlParser.js";
 import { QueryStatementContext } from "./SparkSqlParser.js";
 import { InsertIntoContext } from "./SparkSqlParser.js";
 import { PartitionSpecLocationContext } from "./SparkSqlParser.js";
@@ -174,11 +176,11 @@ import { GroupingSetContext } from "./SparkSqlParser.js";
 import { PivotClauseContext } from "./SparkSqlParser.js";
 import { PivotColumnContext } from "./SparkSqlParser.js";
 import { PivotValueContext } from "./SparkSqlParser.js";
-import { UnpivotClauseContext } from "./SparkSqlParser.js";
-import { UnpivotSingleValueColumnClauseContext } from "./SparkSqlParser.js";
-import { UnpivotMultiValueColumnClauseContext } from "./SparkSqlParser.js";
-import { UnpivotColumnSetContext } from "./SparkSqlParser.js";
-import { UnpivotColumnAndAliasContext } from "./SparkSqlParser.js";
+import { UnPivotClauseContext } from "./SparkSqlParser.js";
+import { UnPivotSingleValueColumnClauseContext } from "./SparkSqlParser.js";
+import { UnPivotMultiValueColumnClauseContext } from "./SparkSqlParser.js";
+import { UnPivotColumnSetContext } from "./SparkSqlParser.js";
+import { UnPivotColumnAndAliasContext } from "./SparkSqlParser.js";
 import { IfNotExistsContext } from "./SparkSqlParser.js";
 import { IfExistsContext } from "./SparkSqlParser.js";
 import { LateralViewContext } from "./SparkSqlParser.js";
@@ -255,6 +257,7 @@ import { ColDefinitionOptionContext } from "./SparkSqlParser.js";
 import { ComplexColTypeContext } from "./SparkSqlParser.js";
 import { WhenClauseContext } from "./SparkSqlParser.js";
 import { WindowClauseContext } from "./SparkSqlParser.js";
+import { ZOrderClauseContext } from "./SparkSqlParser.js";
 import { WindowSpecContext } from "./SparkSqlParser.js";
 import { WindowFrameContext } from "./SparkSqlParser.js";
 import { FrameBoundContext } from "./SparkSqlParser.js";
@@ -1411,6 +1414,26 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitSkewSpec?: (ctx: SkewSpecContext) => void;
     /**
+     * Enter a parse tree produced by `SparkSqlParser.locationSpec`.
+     * @param ctx the parse tree
+     */
+    enterLocationSpec?: (ctx: LocationSpecContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.locationSpec`.
+     * @param ctx the parse tree
+     */
+    exitLocationSpec?: (ctx: LocationSpecContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.commentSpec`.
+     * @param ctx the parse tree
+     */
+    enterCommentSpec?: (ctx: CommentSpecContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.commentSpec`.
+     * @param ctx the parse tree
+     */
+    exitCommentSpec?: (ctx: CommentSpecContext) => void;
+    /**
      * Enter a parse tree produced by the `queryStatement`
      * labeled alternative in `SparkSqlParser.query`.
      * @param ctx the parse tree
@@ -2133,55 +2156,55 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitPivotValue?: (ctx: PivotValueContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.unpivotClause`.
+     * Enter a parse tree produced by `SparkSqlParser.unPivotClause`.
      * @param ctx the parse tree
      */
-    enterUnpivotClause?: (ctx: UnpivotClauseContext) => void;
+    enterUnPivotClause?: (ctx: UnPivotClauseContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.unpivotClause`.
+     * Exit a parse tree produced by `SparkSqlParser.unPivotClause`.
      * @param ctx the parse tree
      */
-    exitUnpivotClause?: (ctx: UnpivotClauseContext) => void;
+    exitUnPivotClause?: (ctx: UnPivotClauseContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.unpivotSingleValueColumnClause`.
+     * Enter a parse tree produced by `SparkSqlParser.unPivotSingleValueColumnClause`.
      * @param ctx the parse tree
      */
-    enterUnpivotSingleValueColumnClause?: (ctx: UnpivotSingleValueColumnClauseContext) => void;
+    enterUnPivotSingleValueColumnClause?: (ctx: UnPivotSingleValueColumnClauseContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.unpivotSingleValueColumnClause`.
+     * Exit a parse tree produced by `SparkSqlParser.unPivotSingleValueColumnClause`.
      * @param ctx the parse tree
      */
-    exitUnpivotSingleValueColumnClause?: (ctx: UnpivotSingleValueColumnClauseContext) => void;
+    exitUnPivotSingleValueColumnClause?: (ctx: UnPivotSingleValueColumnClauseContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.unpivotMultiValueColumnClause`.
+     * Enter a parse tree produced by `SparkSqlParser.unPivotMultiValueColumnClause`.
      * @param ctx the parse tree
      */
-    enterUnpivotMultiValueColumnClause?: (ctx: UnpivotMultiValueColumnClauseContext) => void;
+    enterUnPivotMultiValueColumnClause?: (ctx: UnPivotMultiValueColumnClauseContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.unpivotMultiValueColumnClause`.
+     * Exit a parse tree produced by `SparkSqlParser.unPivotMultiValueColumnClause`.
      * @param ctx the parse tree
      */
-    exitUnpivotMultiValueColumnClause?: (ctx: UnpivotMultiValueColumnClauseContext) => void;
+    exitUnPivotMultiValueColumnClause?: (ctx: UnPivotMultiValueColumnClauseContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.unpivotColumnSet`.
+     * Enter a parse tree produced by `SparkSqlParser.unPivotColumnSet`.
      * @param ctx the parse tree
      */
-    enterUnpivotColumnSet?: (ctx: UnpivotColumnSetContext) => void;
+    enterUnPivotColumnSet?: (ctx: UnPivotColumnSetContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.unpivotColumnSet`.
+     * Exit a parse tree produced by `SparkSqlParser.unPivotColumnSet`.
      * @param ctx the parse tree
      */
-    exitUnpivotColumnSet?: (ctx: UnpivotColumnSetContext) => void;
+    exitUnPivotColumnSet?: (ctx: UnPivotColumnSetContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.unpivotColumnAndAlias`.
+     * Enter a parse tree produced by `SparkSqlParser.unPivotColumnAndAlias`.
      * @param ctx the parse tree
      */
-    enterUnpivotColumnAndAlias?: (ctx: UnpivotColumnAndAliasContext) => void;
+    enterUnPivotColumnAndAlias?: (ctx: UnPivotColumnAndAliasContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.unpivotColumnAndAlias`.
+     * Exit a parse tree produced by `SparkSqlParser.unPivotColumnAndAlias`.
      * @param ctx the parse tree
      */
-    exitUnpivotColumnAndAlias?: (ctx: UnpivotColumnAndAliasContext) => void;
+    exitUnPivotColumnAndAlias?: (ctx: UnPivotColumnAndAliasContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.ifNotExists`.
      * @param ctx the parse tree
@@ -2942,6 +2965,16 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitWindowClause?: (ctx: WindowClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.zOrderClause`.
+     * @param ctx the parse tree
+     */
+    enterZOrderClause?: (ctx: ZOrderClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.zOrderClause`.
+     * @param ctx the parse tree
+     */
+    exitZOrderClause?: (ctx: ZOrderClauseContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.windowSpec`.
      * @param ctx the parse tree

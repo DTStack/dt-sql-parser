@@ -159,4 +159,16 @@ describe('Trino SQL Token Suggestion', () => {
         expect(suggestion).toContain('NOT');
         expect(suggestion).toContain('NOT EXISTS');
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 18,
+            column: 2,
+        };
+        const suggestion = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [17, 19]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

@@ -63,7 +63,9 @@ export class TrinoErrorListener extends ParseErrorListener {
                     case TrinoSqlParser.RULE_functionName:
                     case TrinoSqlParser.RULE_columnRef:
                     case TrinoSqlParser.RULE_columnName: {
-                        result.push(`{existing}${name}`);
+                        if (!result.includes(`{existing}${name}`)) {
+                            result.push(`{existing}${name}`);
+                        }
                         break;
                     }
                     case TrinoSqlParser.RULE_catalogNameCreate:
@@ -71,7 +73,9 @@ export class TrinoErrorListener extends ParseErrorListener {
                     case TrinoSqlParser.RULE_schemaNameCreate:
                     case TrinoSqlParser.RULE_viewNameCreate:
                     case TrinoSqlParser.RULE_tableNameCreate: {
-                        result.push(`{new}${name}`);
+                        if (!result.includes(`{new}${name}`)) {
+                            result.push(`{new}${name}`);
+                        }
                         break;
                     }
                 }

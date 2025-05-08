@@ -350,4 +350,4 @@ LINE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 
 BRACKETED_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
 
-WHITE_SPACE: [ \r\n\t]+ -> channel(HIDDEN);
+WHITE_SPACE: (' ' | '\t' | '\r' | '\n') -> channel(HIDDEN);

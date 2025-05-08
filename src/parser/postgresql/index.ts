@@ -31,21 +31,21 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
     }
 
     protected preferredRules: Set<number> = new Set([
-        PostgreSqlParser.RULE_table_name_create, // table name
-        PostgreSqlParser.RULE_table_name, // table name that will be created
-        PostgreSqlParser.RULE_function_name, // function name
-        PostgreSqlParser.RULE_function_name_create, // function name that will be created
-        PostgreSqlParser.RULE_schema_name_create, // schema name that will be created
-        PostgreSqlParser.RULE_schema_name, // schema name
-        PostgreSqlParser.RULE_view_name_create, // view name that will be created
-        PostgreSqlParser.RULE_view_name, // view name
-        PostgreSqlParser.RULE_database_name_create, // database name that will be created
-        PostgreSqlParser.RULE_database_name, // database name
-        PostgreSqlParser.RULE_procedure_name_create, // procedure name that will be created
-        PostgreSqlParser.RULE_procedure_name, // procedure name
-        PostgreSqlParser.RULE_column_name_create, // column name that will be created
-        PostgreSqlParser.RULE_column_name, // column name
-        PostgreSqlParser.RULE_column_name_path, // column name
+        PostgreSqlParser.RULE_tableNameCreate, // table name
+        PostgreSqlParser.RULE_tableName, // table name that will be created
+        PostgreSqlParser.RULE_functionName, // function name
+        PostgreSqlParser.RULE_functionNameCreate, // function name that will be created
+        PostgreSqlParser.RULE_schemaNameCreate, // schema name that will be created
+        PostgreSqlParser.RULE_schemaName, // schema name
+        PostgreSqlParser.RULE_viewNameCreate, // view name that will be created
+        PostgreSqlParser.RULE_viewName, // view name
+        PostgreSqlParser.RULE_databaseNameCreate, // database name that will be created
+        PostgreSqlParser.RULE_databaseName, // database name
+        PostgreSqlParser.RULE_procedureNameCreate, // procedure name that will be created
+        PostgreSqlParser.RULE_procedureName, // procedure name
+        PostgreSqlParser.RULE_columnNameCreate, // column name that will be created
+        PostgreSqlParser.RULE_columnName, // column name
+        PostgreSqlParser.RULE_columnNamePath, // column name
     ]);
 
     protected get splitListener() {
@@ -87,71 +87,71 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
-                case PostgreSqlParser.RULE_table_name_create: {
+                case PostgreSqlParser.RULE_tableNameCreate: {
                     syntaxContextType = EntityContextType.TABLE_CREATE;
                     break;
                 }
-                case PostgreSqlParser.RULE_table_name: {
+                case PostgreSqlParser.RULE_tableName: {
                     syntaxContextType = EntityContextType.TABLE;
                     break;
                 }
-                case PostgreSqlParser.RULE_function_name_create: {
+                case PostgreSqlParser.RULE_functionNameCreate: {
                     syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
-                case PostgreSqlParser.RULE_function_name: {
+                case PostgreSqlParser.RULE_functionName: {
                     syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
-                case PostgreSqlParser.RULE_schema_name_create: {
+                case PostgreSqlParser.RULE_schemaNameCreate: {
                     syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
-                case PostgreSqlParser.RULE_schema_name: {
+                case PostgreSqlParser.RULE_schemaName: {
                     syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
-                case PostgreSqlParser.RULE_view_name_create: {
+                case PostgreSqlParser.RULE_viewNameCreate: {
                     syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
-                case PostgreSqlParser.RULE_view_name: {
+                case PostgreSqlParser.RULE_viewName: {
                     syntaxContextType = EntityContextType.VIEW;
                     break;
                 }
-                case PostgreSqlParser.RULE_database_name_create: {
+                case PostgreSqlParser.RULE_databaseNameCreate: {
                     syntaxContextType = EntityContextType.DATABASE_CREATE;
                     break;
                 }
-                case PostgreSqlParser.RULE_database_name: {
+                case PostgreSqlParser.RULE_databaseName: {
                     syntaxContextType = EntityContextType.DATABASE;
                     break;
                 }
-                case PostgreSqlParser.RULE_procedure_name_create: {
+                case PostgreSqlParser.RULE_procedureNameCreate: {
                     syntaxContextType = EntityContextType.PROCEDURE_CREATE;
                     break;
                 }
-                case PostgreSqlParser.RULE_procedure_name: {
+                case PostgreSqlParser.RULE_procedureName: {
                     syntaxContextType = EntityContextType.PROCEDURE;
                     break;
                 }
-                case PostgreSqlParser.RULE_column_name_create: {
+                case PostgreSqlParser.RULE_columnNameCreate: {
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
-                case PostgreSqlParser.RULE_column_name: {
+                case PostgreSqlParser.RULE_columnName: {
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
-                case PostgreSqlParser.RULE_column_name_path: {
+                case PostgreSqlParser.RULE_columnNamePath: {
                     if (
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_group_clause) ||
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_sort_clause) ||
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_limit_clause) ||
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_where_clause) ||
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_having_clause) ||
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_window_clause) ||
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_triggerwhen)
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_groupClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_sortClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_limitClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_windowClause) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_triggerWhen)
                     ) {
                         syntaxContextType = EntityContextType.COLUMN;
                     }

@@ -93,4 +93,16 @@ describe('Flink SQL Token Suggestion', () => {
         expect(suggestion).toContain('NOT');
         expect(suggestion).toContain('NOT EXISTS');
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 13,
+            column: 2,
+        };
+        const suggestion = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [12, 14]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

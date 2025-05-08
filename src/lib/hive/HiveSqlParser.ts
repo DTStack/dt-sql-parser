@@ -459,7 +459,7 @@ export class HiveSqlParser extends SQLParserBase {
     public static readonly RULE_statement = 1;
     public static readonly RULE_explainStatement = 2;
     public static readonly RULE_explainOption = 3;
-    public static readonly RULE_vectorizatonDetail = 4;
+    public static readonly RULE_vectorizationDetail = 4;
     public static readonly RULE_execStatement = 5;
     public static readonly RULE_loadStatement = 6;
     public static readonly RULE_replicationClause = 7;
@@ -515,7 +515,7 @@ export class HiveSqlParser extends SQLParserBase {
     public static readonly RULE_privObject = 57;
     public static readonly RULE_privObjectCols = 58;
     public static readonly RULE_privilegeList = 59;
-    public static readonly RULE_privlegeDef = 60;
+    public static readonly RULE_privilegeDef = 60;
     public static readonly RULE_privilegeType = 61;
     public static readonly RULE_principalSpecification = 62;
     public static readonly RULE_principalName = 63;
@@ -969,7 +969,7 @@ export class HiveSqlParser extends SQLParserBase {
         "SHOW_HINT", "HIDDEN_HINT"
     ];
     public static readonly ruleNames = [
-        "program", "statement", "explainStatement", "explainOption", "vectorizatonDetail", 
+        "program", "statement", "explainStatement", "explainOption", "vectorizationDetail", 
         "execStatement", "loadStatement", "replicationClause", "exportStatement", 
         "importStatement", "replDumpStatement", "replDbPolicy", "replLoadStatement", 
         "replTableLevelPolicy", "ddlStatement", "ifExists", "ifNotExists", 
@@ -984,7 +984,7 @@ export class HiveSqlParser extends SQLParserBase {
         "grantRole", "revokeRole", "showRoleGrants", "showRoles", "showCurrentRole", 
         "setRole", "showGrants", "showRolePrincipals", "privilegeIncludeColObject", 
         "privilegeObject", "privObject", "privObjectCols", "privilegeList", 
-        "privlegeDef", "privilegeType", "principalSpecification", "principalName", 
+        "privilegeDef", "privilegeType", "principalSpecification", "principalName", 
         "principalAlterName", "withGrantOption", "grantOptionFor", "adminOptionFor", 
         "withAdminOption", "metastoreCheck", "resourceList", "resource", 
         "resourceType", "createFunctionStatement", "dropFunctionStatement", 
@@ -1445,7 +1445,7 @@ export class HiveSqlParser extends SQLParserBase {
                 if (_la === 91 || _la === 121 || _la === 226 || _la === 325) {
                     {
                     this.state = 740;
-                    this.vectorizatonDetail();
+                    this.vectorizationDetail();
                     }
                 }
 
@@ -1483,9 +1483,9 @@ export class HiveSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public vectorizatonDetail(): VectorizatonDetailContext {
-        let localContext = new VectorizatonDetailContext(this.context, this.state);
-        this.enterRule(localContext, 8, HiveSqlParser.RULE_vectorizatonDetail);
+    public vectorizationDetail(): VectorizationDetailContext {
+        let localContext = new VectorizationDetailContext(this.context, this.state);
+        this.enterRule(localContext, 8, HiveSqlParser.RULE_vectorizationDetail);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -6219,7 +6219,7 @@ export class HiveSqlParser extends SQLParserBase {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 1501;
-            this.privlegeDef();
+            this.privilegeDef();
             this.state = 1506;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -6229,7 +6229,7 @@ export class HiveSqlParser extends SQLParserBase {
                 this.state = 1502;
                 this.match(HiveSqlParser.COMMA);
                 this.state = 1503;
-                this.privlegeDef();
+                this.privilegeDef();
                 }
                 }
                 this.state = 1508;
@@ -6252,9 +6252,9 @@ export class HiveSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public privlegeDef(): PrivlegeDefContext {
-        let localContext = new PrivlegeDefContext(this.context, this.state);
-        this.enterRule(localContext, 120, HiveSqlParser.RULE_privlegeDef);
+    public privilegeDef(): PrivilegeDefContext {
+        let localContext = new PrivilegeDefContext(this.context, this.state);
+        this.enterRule(localContext, 120, HiveSqlParser.RULE_privilegeDef);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -8806,7 +8806,7 @@ export class HiveSqlParser extends SQLParserBase {
                 this.state = 1954;
                 this.match(HiveSqlParser.KW_SERDEPROPERTIES);
                 this.state = 1955;
-                localContext._serdeprops = this.tableProperties();
+                localContext._serderops = this.tableProperties();
                 }
                 break;
             }
@@ -28143,8 +28143,8 @@ export class ExplainOptionContext extends antlr.ParserRuleContext {
     public KW_ONLY(): antlr.TerminalNode | null {
         return this.getToken(HiveSqlParser.KW_ONLY, 0);
     }
-    public vectorizatonDetail(): VectorizatonDetailContext | null {
-        return this.getRuleContext(0, VectorizatonDetailContext);
+    public vectorizationDetail(): VectorizationDetailContext | null {
+        return this.getRuleContext(0, VectorizationDetailContext);
     }
     public KW_DEBUG(): antlr.TerminalNode | null {
         return this.getToken(HiveSqlParser.KW_DEBUG, 0);
@@ -28175,7 +28175,7 @@ export class ExplainOptionContext extends antlr.ParserRuleContext {
 }
 
 
-export class VectorizatonDetailContext extends antlr.ParserRuleContext {
+export class VectorizationDetailContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -28192,21 +28192,21 @@ export class VectorizatonDetailContext extends antlr.ParserRuleContext {
         return this.getToken(HiveSqlParser.KW_DETAIL, 0);
     }
     public override get ruleIndex(): number {
-        return HiveSqlParser.RULE_vectorizatonDetail;
+        return HiveSqlParser.RULE_vectorizationDetail;
     }
     public override enterRule(listener: HiveSqlParserListener): void {
-        if(listener.enterVectorizatonDetail) {
-             listener.enterVectorizatonDetail(this);
+        if(listener.enterVectorizationDetail) {
+             listener.enterVectorizationDetail(this);
         }
     }
     public override exitRule(listener: HiveSqlParserListener): void {
-        if(listener.exitVectorizatonDetail) {
-             listener.exitVectorizatonDetail(this);
+        if(listener.exitVectorizationDetail) {
+             listener.exitVectorizationDetail(this);
         }
     }
     public override accept<Result>(visitor: HiveSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitVectorizatonDetail) {
-            return visitor.visitVectorizatonDetail(this);
+        if (visitor.visitVectorizationDetail) {
+            return visitor.visitVectorizationDetail(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -30958,14 +30958,14 @@ export class PrivilegeListContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public privlegeDef(): PrivlegeDefContext[];
-    public privlegeDef(i: number): PrivlegeDefContext | null;
-    public privlegeDef(i?: number): PrivlegeDefContext[] | PrivlegeDefContext | null {
+    public privilegeDef(): PrivilegeDefContext[];
+    public privilegeDef(i: number): PrivilegeDefContext | null;
+    public privilegeDef(i?: number): PrivilegeDefContext[] | PrivilegeDefContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(PrivlegeDefContext);
+            return this.getRuleContexts(PrivilegeDefContext);
         }
 
-        return this.getRuleContext(i, PrivlegeDefContext);
+        return this.getRuleContext(i, PrivilegeDefContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -30999,7 +30999,7 @@ export class PrivilegeListContext extends antlr.ParserRuleContext {
 }
 
 
-export class PrivlegeDefContext extends antlr.ParserRuleContext {
+export class PrivilegeDefContext extends antlr.ParserRuleContext {
     public _cols?: ColumnNameListContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -31017,21 +31017,21 @@ export class PrivlegeDefContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, ColumnNameListContext);
     }
     public override get ruleIndex(): number {
-        return HiveSqlParser.RULE_privlegeDef;
+        return HiveSqlParser.RULE_privilegeDef;
     }
     public override enterRule(listener: HiveSqlParserListener): void {
-        if(listener.enterPrivlegeDef) {
-             listener.enterPrivlegeDef(this);
+        if(listener.enterPrivilegeDef) {
+             listener.enterPrivilegeDef(this);
         }
     }
     public override exitRule(listener: HiveSqlParserListener): void {
-        if(listener.exitPrivlegeDef) {
-             listener.exitPrivlegeDef(this);
+        if(listener.exitPrivilegeDef) {
+             listener.exitPrivilegeDef(this);
         }
     }
     public override accept<Result>(visitor: HiveSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPrivlegeDef) {
-            return visitor.visitPrivlegeDef(this);
+        if (visitor.visitPrivilegeDef) {
+            return visitor.visitPrivilegeDef(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -33246,7 +33246,7 @@ export class RecordWriterContext extends antlr.ParserRuleContext {
 
 export class RowFormatSerdeContext extends antlr.ParserRuleContext {
     public _name?: Token | null;
-    public _serdeprops?: TablePropertiesContext;
+    public _serderops?: TablePropertiesContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }

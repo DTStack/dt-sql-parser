@@ -60,7 +60,9 @@ export class ImpalaErrorListener extends ParseErrorListener {
                     case ImpalaSqlParser.RULE_viewNamePath:
                     case ImpalaSqlParser.RULE_columnName:
                     case ImpalaSqlParser.RULE_columnNamePath: {
-                        result.push(`{existing}${name}`);
+                        if (!result.includes(`{existing}${name}`)) {
+                            result.push(`{existing}${name}`);
+                        }
                         break;
                     }
                     case ImpalaSqlParser.RULE_databaseNameCreate:
@@ -68,7 +70,9 @@ export class ImpalaErrorListener extends ParseErrorListener {
                     case ImpalaSqlParser.RULE_functionNameCreate:
                     case ImpalaSqlParser.RULE_viewNameCreate:
                     case ImpalaSqlParser.RULE_columnNamePathCreate: {
-                        result.push(`{new}${name}`);
+                        if (!result.includes(`{new}${name}`)) {
+                            result.push(`{new}${name}`);
+                        }
                         break;
                     }
                 }

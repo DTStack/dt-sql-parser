@@ -228,4 +228,16 @@ describe('Spark SQL Token Suggestion', () => {
         expect(suggestion).toContain('NOT');
         expect(suggestion).toContain('NOT EXISTS');
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 23,
+            column: 2,
+        };
+        const suggestion = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [22, 24]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

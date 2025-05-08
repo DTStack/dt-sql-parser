@@ -62,7 +62,9 @@ export class HiveErrorListener extends ParseErrorListener {
                     case HiveSqlParser.RULE_functionNameForInvoke:
                     case HiveSqlParser.RULE_columnName:
                     case HiveSqlParser.RULE_columnNamePath: {
-                        result.push(`{existing}${name}`);
+                        if (!result.includes(`{existing}${name}`)) {
+                            result.push(`{existing}${name}`);
+                        }
                         break;
                     }
                     case HiveSqlParser.RULE_dbSchemaNameCreate:
@@ -70,7 +72,9 @@ export class HiveErrorListener extends ParseErrorListener {
                     case HiveSqlParser.RULE_functionNameCreate:
                     case HiveSqlParser.RULE_viewNameCreate:
                     case HiveSqlParser.RULE_columnNameCreate: {
-                        result.push(`{new}${name}`);
+                        if (!result.includes(`{new}${name}`)) {
+                            result.push(`{new}${name}`);
+                        }
                         break;
                     }
                 }

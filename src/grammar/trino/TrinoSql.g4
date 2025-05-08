@@ -381,10 +381,10 @@ trimsSpecification
 
 listAggOverflowBehavior
     : KW_ERROR
-    | KW_TRUNCATE string? listaggCountIndication
+    | KW_TRUNCATE string? listAggCountIndication
     ;
 
-listaggCountIndication
+listAggCountIndication
     : KW_WITH KW_COUNT
     | KW_WITHOUT KW_COUNT
     ;
@@ -497,7 +497,7 @@ jsonTableDefaultPlan
 
 tableFunctionCall
     : functionName '(' (tableFunctionArgument (',' tableFunctionArgument)*)? (
-        KW_COPARTITION copartitionTables (',' copartitionTables)*
+        KW_COPARTITION coPartitionTables (',' coPartitionTables)*
     )? ')'
     ;
 
@@ -530,7 +530,7 @@ descriptorField
     : identifier type?
     ;
 
-copartitionTables
+coPartitionTables
     : '(' qualifiedName ',' qualifiedName (',' qualifiedName)* ')'
     ;
 
@@ -581,7 +581,7 @@ primaryExpression
     | KW_ROW '(' expression (',' expression)* ')'               # rowConstructor
     | name=KW_LISTAGG '(' setQuantifier? expression (',' string)? (
         KW_ON KW_OVERFLOW listAggOverflowBehavior
-    )? ')' (KW_WITHIN KW_GROUP '(' KW_ORDER KW_BY sortItem (',' sortItem)* ')') filter?   # listagg
+    )? ')' (KW_WITHIN KW_GROUP '(' KW_ORDER KW_BY sortItem (',' sortItem)* ')') filter?   # listAgg
     | processingMode? functionName '(' (label=identifier '.')? ASTERISK ')' filter? over? # functionCall
     | processingMode? functionName '(' (setQuantifier? expression (',' expression)*)? (
         KW_ORDER KW_BY sortItem (',' sortItem)*
@@ -1660,7 +1660,7 @@ LINE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 
 BRACKETED_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
 
-WHITE_SPACE: [ \r\n\t]+ -> channel(HIDDEN);
+WHITE_SPACE: (' ' | '\t' | '\r' | '\n') -> channel(HIDDEN);
 
 // Catch-all for anything we can't recognize.
 // We use this to be able to ignore and recover all the text

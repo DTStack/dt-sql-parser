@@ -5,21 +5,21 @@ import { PostgreSqlParser } from '../../lib/postgresql/PostgreSqlParser';
 
 export class PostgreSqlErrorListener extends ParseErrorListener {
     private objectNames: Map<number, string> = new Map([
-        [PostgreSqlParser.RULE_database_name, 'database'],
-        [PostgreSqlParser.RULE_database_name_create, 'database'],
-        [PostgreSqlParser.RULE_table_name, 'table'],
-        [PostgreSqlParser.RULE_table_name_create, 'table'],
-        [PostgreSqlParser.RULE_view_name, 'view'],
-        [PostgreSqlParser.RULE_view_name_create, 'view'],
-        [PostgreSqlParser.RULE_function_name, 'function'],
-        [PostgreSqlParser.RULE_function_name_create, 'function'],
-        [PostgreSqlParser.RULE_column_name, 'column'],
-        [PostgreSqlParser.RULE_column_name_path, 'column'],
-        [PostgreSqlParser.RULE_column_name_create, 'column'],
-        [PostgreSqlParser.RULE_schema_name_create, 'schema'],
-        [PostgreSqlParser.RULE_schema_name, 'schema'],
-        [PostgreSqlParser.RULE_procedure_name_create, 'procedure'],
-        [PostgreSqlParser.RULE_procedure_name, 'procedure'],
+        [PostgreSqlParser.RULE_databaseName, 'database'],
+        [PostgreSqlParser.RULE_databaseNameCreate, 'database'],
+        [PostgreSqlParser.RULE_tableName, 'table'],
+        [PostgreSqlParser.RULE_tableNameCreate, 'table'],
+        [PostgreSqlParser.RULE_viewName, 'view'],
+        [PostgreSqlParser.RULE_viewNameCreate, 'view'],
+        [PostgreSqlParser.RULE_functionName, 'function'],
+        [PostgreSqlParser.RULE_functionNameCreate, 'function'],
+        [PostgreSqlParser.RULE_columnName, 'column'],
+        [PostgreSqlParser.RULE_columnNameCreate, 'column'],
+        [PostgreSqlParser.RULE_columnNamePath, 'column'],
+        [PostgreSqlParser.RULE_schemaNameCreate, 'schema'],
+        [PostgreSqlParser.RULE_schemaName, 'schema'],
+        [PostgreSqlParser.RULE_procedureNameCreate, 'procedure'],
+        [PostgreSqlParser.RULE_procedureName, 'procedure'],
     ]);
 
     public getExpectedText(parser: Parser, token: Token) {
@@ -58,27 +58,29 @@ export class PostgreSqlErrorListener extends ParseErrorListener {
                 const [ruleType] = candidate;
                 const name = this.objectNames.get(ruleType);
                 switch (ruleType) {
-                    case PostgreSqlParser.RULE_table_name:
-                    case PostgreSqlParser.RULE_function_name:
-                    case PostgreSqlParser.RULE_schema_name:
-                    case PostgreSqlParser.RULE_view_name:
-                    case PostgreSqlParser.RULE_database_name:
-                    case PostgreSqlParser.RULE_procedure_name:
-                    case PostgreSqlParser.RULE_column_name:
-                    case PostgreSqlParser.RULE_column_name_path: {
+                    case PostgreSqlParser.RULE_tableName:
+                    case PostgreSqlParser.RULE_functionName:
+                    case PostgreSqlParser.RULE_schemaName:
+                    case PostgreSqlParser.RULE_viewName:
+                    case PostgreSqlParser.RULE_databaseName:
+                    case PostgreSqlParser.RULE_procedureName:
+                    case PostgreSqlParser.RULE_columnName:
+                    case PostgreSqlParser.RULE_columnNamePath: {
                         if (!result.includes(`{existing}${name}`)) {
                             result.push(`{existing}${name}`);
                         }
                         break;
                     }
-                    case PostgreSqlParser.RULE_table_name_create:
-                    case PostgreSqlParser.RULE_function_name_create:
-                    case PostgreSqlParser.RULE_schema_name_create:
-                    case PostgreSqlParser.RULE_view_name_create:
-                    case PostgreSqlParser.RULE_database_name_create:
-                    case PostgreSqlParser.RULE_procedure_name_create:
-                    case PostgreSqlParser.RULE_column_name_create: {
-                        result.push(`{new}${name}`);
+                    case PostgreSqlParser.RULE_tableNameCreate:
+                    case PostgreSqlParser.RULE_functionNameCreate:
+                    case PostgreSqlParser.RULE_schemaNameCreate:
+                    case PostgreSqlParser.RULE_viewNameCreate:
+                    case PostgreSqlParser.RULE_databaseNameCreate:
+                    case PostgreSqlParser.RULE_procedureNameCreate:
+                    case PostgreSqlParser.RULE_columnNameCreate: {
+                        if (!result.includes(`{new}${name}`)) {
+                            result.push(`{new}${name}`);
+                        }
                         break;
                     }
                 }

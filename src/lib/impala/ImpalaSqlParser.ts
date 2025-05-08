@@ -337,7 +337,7 @@ export class ImpalaSqlParser extends SQLParserBase {
     public static readonly RULE_renameView = 28;
     public static readonly RULE_alterViewOwner = 29;
     public static readonly RULE_renameTable = 30;
-    public static readonly RULE_alterUnSetOrSetViewTblproperties = 31;
+    public static readonly RULE_alterUnSetOrSetViewTblProperties = 31;
     public static readonly RULE_truncateTableStatement = 32;
     public static readonly RULE_describeStatement = 33;
     public static readonly RULE_computeStatement = 34;
@@ -614,7 +614,7 @@ export class ImpalaSqlParser extends SQLParserBase {
         "alterTableOwner", "replaceOrAddColumns", "addSingleColumn", "alterTableNonKuduOrKuduOnly", 
         "addPartitionByRangeOrValue", "alterFormat", "recoverPartitions", 
         "dropPartitionByRangeOrValue", "alterView", "renameView", "alterViewOwner", 
-        "renameTable", "alterUnSetOrSetViewTblproperties", "truncateTableStatement", 
+        "renameTable", "alterUnSetOrSetViewTblProperties", "truncateTableStatement", 
         "describeStatement", "computeStatement", "computeStats", "computeIncrementalStats", 
         "dropStatement", "dropSchema", "dropView", "dropTable", "dropIncrementalStats", 
         "dropFunction", "dropRole", "grantStatement", "grantRole", "grant", 
@@ -1935,7 +1935,7 @@ export class ImpalaSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 671;
-                this.alterUnSetOrSetViewTblproperties();
+                this.alterUnSetOrSetViewTblProperties();
                 }
                 break;
             case 3:
@@ -3040,9 +3040,9 @@ export class ImpalaSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterUnSetOrSetViewTblproperties(): AlterUnSetOrSetViewTblpropertiesContext {
-        let localContext = new AlterUnSetOrSetViewTblpropertiesContext(this.context, this.state);
-        this.enterRule(localContext, 62, ImpalaSqlParser.RULE_alterUnSetOrSetViewTblproperties);
+    public alterUnSetOrSetViewTblProperties(): AlterUnSetOrSetViewTblPropertiesContext {
+        let localContext = new AlterUnSetOrSetViewTblPropertiesContext(this.context, this.state);
+        this.enterRule(localContext, 62, ImpalaSqlParser.RULE_alterUnSetOrSetViewTblProperties);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -15216,8 +15216,8 @@ export class AlterStatementContext extends antlr.ParserRuleContext {
     public alterDatabase(): AlterDatabaseContext | null {
         return this.getRuleContext(0, AlterDatabaseContext);
     }
-    public alterUnSetOrSetViewTblproperties(): AlterUnSetOrSetViewTblpropertiesContext | null {
-        return this.getRuleContext(0, AlterUnSetOrSetViewTblpropertiesContext);
+    public alterUnSetOrSetViewTblProperties(): AlterUnSetOrSetViewTblPropertiesContext | null {
+        return this.getRuleContext(0, AlterUnSetOrSetViewTblPropertiesContext);
     }
     public renameTable(): RenameTableContext | null {
         return this.getRuleContext(0, RenameTableContext);
@@ -16251,7 +16251,7 @@ export class RenameTableContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterUnSetOrSetViewTblpropertiesContext extends antlr.ParserRuleContext {
+export class AlterUnSetOrSetViewTblPropertiesContext extends antlr.ParserRuleContext {
     public _tblProp?: PropertiesContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -16278,21 +16278,21 @@ export class AlterUnSetOrSetViewTblpropertiesContext extends antlr.ParserRuleCon
         return this.getRuleContext(0, PropertiesContext)!;
     }
     public override get ruleIndex(): number {
-        return ImpalaSqlParser.RULE_alterUnSetOrSetViewTblproperties;
+        return ImpalaSqlParser.RULE_alterUnSetOrSetViewTblProperties;
     }
     public override enterRule(listener: ImpalaSqlParserListener): void {
-        if(listener.enterAlterUnSetOrSetViewTblproperties) {
-             listener.enterAlterUnSetOrSetViewTblproperties(this);
+        if(listener.enterAlterUnSetOrSetViewTblProperties) {
+             listener.enterAlterUnSetOrSetViewTblProperties(this);
         }
     }
     public override exitRule(listener: ImpalaSqlParserListener): void {
-        if(listener.exitAlterUnSetOrSetViewTblproperties) {
-             listener.exitAlterUnSetOrSetViewTblproperties(this);
+        if(listener.exitAlterUnSetOrSetViewTblProperties) {
+             listener.exitAlterUnSetOrSetViewTblProperties(this);
         }
     }
     public override accept<Result>(visitor: ImpalaSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterUnSetOrSetViewTblproperties) {
-            return visitor.visitAlterUnSetOrSetViewTblproperties(this);
+        if (visitor.visitAlterUnSetOrSetViewTblProperties) {
+            return visitor.visitAlterUnSetOrSetViewTblProperties(this);
         } else {
             return visitor.visitChildren(this);
         }

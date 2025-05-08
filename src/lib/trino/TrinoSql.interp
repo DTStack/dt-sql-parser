@@ -731,7 +731,7 @@ sampledRelation
 sampleType
 trimsSpecification
 listAggOverflowBehavior
-listaggCountIndication
+listAggCountIndication
 patternRecognition
 measureDefinition
 rowsPerMatch
@@ -755,7 +755,7 @@ tableArgument
 tableArgumentRelation
 descriptorArgument
 descriptorField
-copartitionTables
+coPartitionTables
 expression
 booleanExpression
 predicate

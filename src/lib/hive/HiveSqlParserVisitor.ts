@@ -12,7 +12,7 @@ import { ProgramContext } from "./HiveSqlParser.js";
 import { StatementContext } from "./HiveSqlParser.js";
 import { ExplainStatementContext } from "./HiveSqlParser.js";
 import { ExplainOptionContext } from "./HiveSqlParser.js";
-import { VectorizatonDetailContext } from "./HiveSqlParser.js";
+import { VectorizationDetailContext } from "./HiveSqlParser.js";
 import { ExecStatementContext } from "./HiveSqlParser.js";
 import { LoadStatementContext } from "./HiveSqlParser.js";
 import { ReplicationClauseContext } from "./HiveSqlParser.js";
@@ -68,7 +68,7 @@ import { PrivilegeObjectContext } from "./HiveSqlParser.js";
 import { PrivObjectContext } from "./HiveSqlParser.js";
 import { PrivObjectColsContext } from "./HiveSqlParser.js";
 import { PrivilegeListContext } from "./HiveSqlParser.js";
-import { PrivlegeDefContext } from "./HiveSqlParser.js";
+import { PrivilegeDefContext } from "./HiveSqlParser.js";
 import { PrivilegeTypeContext } from "./HiveSqlParser.js";
 import { PrincipalSpecificationContext } from "./HiveSqlParser.js";
 import { PrincipalNameContext } from "./HiveSqlParser.js";
@@ -393,11 +393,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitExplainOption?: (ctx: ExplainOptionContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.vectorizatonDetail`.
+     * Visit a parse tree produced by `HiveSqlParser.vectorizationDetail`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitVectorizatonDetail?: (ctx: VectorizatonDetailContext) => Result;
+    visitVectorizationDetail?: (ctx: VectorizationDetailContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.execStatement`.
      * @param ctx the parse tree
@@ -729,11 +729,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitPrivilegeList?: (ctx: PrivilegeListContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.privlegeDef`.
+     * Visit a parse tree produced by `HiveSqlParser.privilegeDef`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPrivlegeDef?: (ctx: PrivlegeDefContext) => Result;
+    visitPrivilegeDef?: (ctx: PrivilegeDefContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.privilegeType`.
      * @param ctx the parse tree
