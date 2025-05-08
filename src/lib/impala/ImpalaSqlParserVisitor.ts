@@ -39,7 +39,7 @@ import { AlterViewContext } from "./ImpalaSqlParser.js";
 import { RenameViewContext } from "./ImpalaSqlParser.js";
 import { AlterViewOwnerContext } from "./ImpalaSqlParser.js";
 import { RenameTableContext } from "./ImpalaSqlParser.js";
-import { AlterUnSetOrSetViewTblpropertiesContext } from "./ImpalaSqlParser.js";
+import { AlterUnSetOrSetViewTblPropertiesContext } from "./ImpalaSqlParser.js";
 import { TruncateTableStatementContext } from "./ImpalaSqlParser.js";
 import { DescribeStatementContext } from "./ImpalaSqlParser.js";
 import { ComputeStatementContext } from "./ImpalaSqlParser.js";
@@ -448,11 +448,11 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitRenameTable?: (ctx: RenameTableContext) => Result;
     /**
-     * Visit a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblproperties`.
+     * Visit a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblProperties`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitAlterUnSetOrSetViewTblproperties?: (ctx: AlterUnSetOrSetViewTblpropertiesContext) => Result;
+    visitAlterUnSetOrSetViewTblProperties?: (ctx: AlterUnSetOrSetViewTblPropertiesContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.truncateTableStatement`.
      * @param ctx the parse tree

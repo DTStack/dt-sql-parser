@@ -885,7 +885,7 @@ program
 statement
 explainStatement
 explainOption
-vectorizatonDetail
+vectorizationDetail
 execStatement
 loadStatement
 replicationClause
@@ -941,7 +941,7 @@ privilegeObject
 privObject
 privObjectCols
 privilegeList
-privlegeDef
+privilegeDef
 privilegeType
 principalSpecification
 principalName

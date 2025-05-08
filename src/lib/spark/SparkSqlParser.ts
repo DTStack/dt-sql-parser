@@ -494,17 +494,17 @@ export class SparkSqlParser extends SQLParserBase {
     public static readonly RULE_pivotClause = 81;
     public static readonly RULE_pivotColumn = 82;
     public static readonly RULE_pivotValue = 83;
-    public static readonly RULE_unpivotClause = 84;
-    public static readonly RULE_unpivotNullClause = 85;
-    public static readonly RULE_unpivotOperator = 86;
-    public static readonly RULE_unpivotSingleValueColumnClause = 87;
-    public static readonly RULE_unpivotMultiValueColumnClause = 88;
-    public static readonly RULE_unpivotColumnSet = 89;
-    public static readonly RULE_unpivotValueColumn = 90;
-    public static readonly RULE_unpivotNameColumn = 91;
-    public static readonly RULE_unpivotColumnAndAlias = 92;
-    public static readonly RULE_unpivotColumn = 93;
-    public static readonly RULE_unpivotAlias = 94;
+    public static readonly RULE_unPivotClause = 84;
+    public static readonly RULE_unPivotNullClause = 85;
+    public static readonly RULE_unPivotOperator = 86;
+    public static readonly RULE_unPivotSingleValueColumnClause = 87;
+    public static readonly RULE_unPivotMultiValueColumnClause = 88;
+    public static readonly RULE_unPivotColumnSet = 89;
+    public static readonly RULE_unPivotValueColumn = 90;
+    public static readonly RULE_unPivotNameColumn = 91;
+    public static readonly RULE_unPivotColumnAndAlias = 92;
+    public static readonly RULE_unPivotColumn = 93;
+    public static readonly RULE_unPivotAlias = 94;
     public static readonly RULE_ifNotExists = 95;
     public static readonly RULE_ifExists = 96;
     public static readonly RULE_lateralView = 97;
@@ -587,7 +587,7 @@ export class SparkSqlParser extends SQLParserBase {
     public static readonly RULE_complexColType = 174;
     public static readonly RULE_whenClause = 175;
     public static readonly RULE_windowClause = 176;
-    public static readonly RULE_zorderClause = 177;
+    public static readonly RULE_zOrderClause = 177;
     public static readonly RULE_namedWindow = 178;
     public static readonly RULE_windowSpec = 179;
     public static readonly RULE_windowFrame = 180;
@@ -778,10 +778,10 @@ export class SparkSqlParser extends SQLParserBase {
         "assignmentList", "assignment", "whereClause", "havingClause", "hint", 
         "hintStatement", "fromClause", "functionKind", "temporalClause", 
         "aggregationClause", "groupByClause", "groupingAnalytics", "groupingElement", 
-        "groupingSet", "pivotClause", "pivotColumn", "pivotValue", "unpivotClause", 
-        "unpivotNullClause", "unpivotOperator", "unpivotSingleValueColumnClause", 
-        "unpivotMultiValueColumnClause", "unpivotColumnSet", "unpivotValueColumn", 
-        "unpivotNameColumn", "unpivotColumnAndAlias", "unpivotColumn", "unpivotAlias", 
+        "groupingSet", "pivotClause", "pivotColumn", "pivotValue", "unPivotClause", 
+        "unPivotNullClause", "unPivotOperator", "unPivotSingleValueColumnClause", 
+        "unPivotMultiValueColumnClause", "unPivotColumnSet", "unPivotValueColumn", 
+        "unPivotNameColumn", "unPivotColumnAndAlias", "unPivotColumn", "unPivotAlias", 
         "ifNotExists", "ifExists", "lateralView", "setQuantifier", "relation", 
         "relationExtension", "joinRelation", "joinType", "joinCriteria", 
         "sample", "sampleMethod", "identifierList", "identifierSeq", "orderedIdentifierList", 
@@ -805,7 +805,7 @@ export class SparkSqlParser extends SQLParserBase {
         "defaultExpression", "variableDefaultExpression", "colTypeList", 
         "columnType", "createOrReplaceTableColTypeList", "createOrReplaceTableColType", 
         "colDefinitionOption", "generationExpression", "complexColTypeList", 
-        "complexColType", "whenClause", "windowClause", "zorderClause", 
+        "complexColType", "whenClause", "windowClause", "zOrderClause", 
         "namedWindow", "windowSpec", "windowFrame", "frameBound", "qualifiedNameList", 
         "functionName", "functionNameCreate", "qualifiedName", "errorCapturingIdentifier", 
         "errorCapturingIdentifierExtra", "identifier", "strictIdentifier", 
@@ -4105,7 +4105,7 @@ export class SparkSqlParser extends SQLParserBase {
                 }
 
                 this.state = 1328;
-                this.zorderClause();
+                this.zOrderClause();
                 }
                 break;
             case 91:
@@ -9047,7 +9047,7 @@ export class SparkSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 2330;
-                this.unpivotClause();
+                this.unPivotClause();
                 }
                 break;
             }
@@ -10107,9 +10107,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotClause(): UnpivotClauseContext {
-        let localContext = new UnpivotClauseContext(this.context, this.state);
-        this.enterRule(localContext, 168, SparkSqlParser.RULE_unpivotClause);
+    public unPivotClause(): UnPivotClauseContext {
+        let localContext = new UnPivotClauseContext(this.context, this.state);
+        this.enterRule(localContext, 168, SparkSqlParser.RULE_unPivotClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -10122,14 +10122,14 @@ export class SparkSqlParser extends SQLParserBase {
             if (_la === 104 || _la === 141) {
                 {
                 this.state = 2490;
-                localContext._nullOperator = this.unpivotNullClause();
+                localContext._nullOperator = this.unPivotNullClause();
                 }
             }
 
             this.state = 2493;
             this.match(SparkSqlParser.LEFT_PAREN);
             this.state = 2494;
-            localContext._operator = this.unpivotOperator();
+            localContext._operator = this.unPivotOperator();
             this.state = 2495;
             this.match(SparkSqlParser.RIGHT_PAREN);
             this.state = 2500;
@@ -10168,9 +10168,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotNullClause(): UnpivotNullClauseContext {
-        let localContext = new UnpivotNullClauseContext(this.context, this.state);
-        this.enterRule(localContext, 170, SparkSqlParser.RULE_unpivotNullClause);
+    public unPivotNullClause(): UnPivotNullClauseContext {
+        let localContext = new UnPivotNullClauseContext(this.context, this.state);
+        this.enterRule(localContext, 170, SparkSqlParser.RULE_unPivotNullClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -10202,9 +10202,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotOperator(): UnpivotOperatorContext {
-        let localContext = new UnpivotOperatorContext(this.context, this.state);
-        this.enterRule(localContext, 172, SparkSqlParser.RULE_unpivotOperator);
+    public unPivotOperator(): UnPivotOperatorContext {
+        let localContext = new UnPivotOperatorContext(this.context, this.state);
+        this.enterRule(localContext, 172, SparkSqlParser.RULE_unPivotOperator);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -10556,13 +10556,13 @@ export class SparkSqlParser extends SQLParserBase {
             case SparkSqlParser.BACKQUOTED_IDENTIFIER:
                 {
                 this.state = 2505;
-                this.unpivotSingleValueColumnClause();
+                this.unPivotSingleValueColumnClause();
                 }
                 break;
             case SparkSqlParser.LEFT_PAREN:
                 {
                 this.state = 2506;
-                this.unpivotMultiValueColumnClause();
+                this.unPivotMultiValueColumnClause();
                 }
                 break;
             default:
@@ -10584,26 +10584,26 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotSingleValueColumnClause(): UnpivotSingleValueColumnClauseContext {
-        let localContext = new UnpivotSingleValueColumnClauseContext(this.context, this.state);
-        this.enterRule(localContext, 174, SparkSqlParser.RULE_unpivotSingleValueColumnClause);
+    public unPivotSingleValueColumnClause(): UnPivotSingleValueColumnClauseContext {
+        let localContext = new UnPivotSingleValueColumnClauseContext(this.context, this.state);
+        this.enterRule(localContext, 174, SparkSqlParser.RULE_unPivotSingleValueColumnClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 2509;
-            this.unpivotValueColumn();
+            this.unPivotValueColumn();
             this.state = 2510;
             this.match(SparkSqlParser.KW_FOR);
             this.state = 2511;
-            this.unpivotNameColumn();
+            this.unPivotNameColumn();
             this.state = 2512;
             this.match(SparkSqlParser.KW_IN);
             this.state = 2513;
             this.match(SparkSqlParser.LEFT_PAREN);
             this.state = 2514;
-            localContext._unpivotColumnAndAlias = this.unpivotColumnAndAlias();
-            localContext._unpivotColumns.push(localContext._unpivotColumnAndAlias);
+            localContext._unPivotColumnAndAlias = this.unPivotColumnAndAlias();
+            localContext._unPivotColumns.push(localContext._unPivotColumnAndAlias);
             this.state = 2519;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -10613,8 +10613,8 @@ export class SparkSqlParser extends SQLParserBase {
                 this.state = 2515;
                 this.match(SparkSqlParser.COMMA);
                 this.state = 2516;
-                localContext._unpivotColumnAndAlias = this.unpivotColumnAndAlias();
-                localContext._unpivotColumns.push(localContext._unpivotColumnAndAlias);
+                localContext._unPivotColumnAndAlias = this.unPivotColumnAndAlias();
+                localContext._unPivotColumns.push(localContext._unPivotColumnAndAlias);
                 }
                 }
                 this.state = 2521;
@@ -10639,9 +10639,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotMultiValueColumnClause(): UnpivotMultiValueColumnClauseContext {
-        let localContext = new UnpivotMultiValueColumnClauseContext(this.context, this.state);
-        this.enterRule(localContext, 176, SparkSqlParser.RULE_unpivotMultiValueColumnClause);
+    public unPivotMultiValueColumnClause(): UnPivotMultiValueColumnClauseContext {
+        let localContext = new UnPivotMultiValueColumnClauseContext(this.context, this.state);
+        this.enterRule(localContext, 176, SparkSqlParser.RULE_unPivotMultiValueColumnClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -10649,8 +10649,8 @@ export class SparkSqlParser extends SQLParserBase {
             this.state = 2524;
             this.match(SparkSqlParser.LEFT_PAREN);
             this.state = 2525;
-            localContext._unpivotValueColumn = this.unpivotValueColumn();
-            localContext._unpivotValueColumns.push(localContext._unpivotValueColumn);
+            localContext._unPivotValueColumn = this.unPivotValueColumn();
+            localContext._unPivotValueColumns.push(localContext._unPivotValueColumn);
             this.state = 2530;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -10660,8 +10660,8 @@ export class SparkSqlParser extends SQLParserBase {
                 this.state = 2526;
                 this.match(SparkSqlParser.COMMA);
                 this.state = 2527;
-                localContext._unpivotValueColumn = this.unpivotValueColumn();
-                localContext._unpivotValueColumns.push(localContext._unpivotValueColumn);
+                localContext._unPivotValueColumn = this.unPivotValueColumn();
+                localContext._unPivotValueColumns.push(localContext._unPivotValueColumn);
                 }
                 }
                 this.state = 2532;
@@ -10673,14 +10673,14 @@ export class SparkSqlParser extends SQLParserBase {
             this.state = 2534;
             this.match(SparkSqlParser.KW_FOR);
             this.state = 2535;
-            this.unpivotNameColumn();
+            this.unPivotNameColumn();
             this.state = 2536;
             this.match(SparkSqlParser.KW_IN);
             this.state = 2537;
             this.match(SparkSqlParser.LEFT_PAREN);
             this.state = 2538;
-            localContext._unpivotColumnSet = this.unpivotColumnSet();
-            localContext._unpivotColumnSets.push(localContext._unpivotColumnSet);
+            localContext._unPivotColumnSet = this.unPivotColumnSet();
+            localContext._unPivotColumnSets.push(localContext._unPivotColumnSet);
             this.state = 2543;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -10690,8 +10690,8 @@ export class SparkSqlParser extends SQLParserBase {
                 this.state = 2539;
                 this.match(SparkSqlParser.COMMA);
                 this.state = 2540;
-                localContext._unpivotColumnSet = this.unpivotColumnSet();
-                localContext._unpivotColumnSets.push(localContext._unpivotColumnSet);
+                localContext._unPivotColumnSet = this.unPivotColumnSet();
+                localContext._unPivotColumnSets.push(localContext._unPivotColumnSet);
                 }
                 }
                 this.state = 2545;
@@ -10716,9 +10716,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotColumnSet(): UnpivotColumnSetContext {
-        let localContext = new UnpivotColumnSetContext(this.context, this.state);
-        this.enterRule(localContext, 178, SparkSqlParser.RULE_unpivotColumnSet);
+    public unPivotColumnSet(): UnPivotColumnSetContext {
+        let localContext = new UnPivotColumnSetContext(this.context, this.state);
+        this.enterRule(localContext, 178, SparkSqlParser.RULE_unPivotColumnSet);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -10726,8 +10726,8 @@ export class SparkSqlParser extends SQLParserBase {
             this.state = 2548;
             this.match(SparkSqlParser.LEFT_PAREN);
             this.state = 2549;
-            localContext._unpivotColumn = this.unpivotColumn();
-            localContext._unpivotColumns.push(localContext._unpivotColumn);
+            localContext._unPivotColumn = this.unPivotColumn();
+            localContext._unPivotColumns.push(localContext._unPivotColumn);
             this.state = 2554;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -10737,8 +10737,8 @@ export class SparkSqlParser extends SQLParserBase {
                 this.state = 2550;
                 this.match(SparkSqlParser.COMMA);
                 this.state = 2551;
-                localContext._unpivotColumn = this.unpivotColumn();
-                localContext._unpivotColumns.push(localContext._unpivotColumn);
+                localContext._unPivotColumn = this.unPivotColumn();
+                localContext._unPivotColumns.push(localContext._unPivotColumn);
                 }
                 }
                 this.state = 2556;
@@ -10753,7 +10753,7 @@ export class SparkSqlParser extends SQLParserBase {
             if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967040) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 4160749567) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 4294967295) !== 0) || ((((_la - 160)) & ~0x1F) === 0 && ((1 << (_la - 160)) & 4294967295) !== 0) || ((((_la - 192)) & ~0x1F) === 0 && ((1 << (_la - 192)) & 4294967279) !== 0) || ((((_la - 224)) & ~0x1F) === 0 && ((1 << (_la - 224)) & 4294967295) !== 0) || ((((_la - 256)) & ~0x1F) === 0 && ((1 << (_la - 256)) & 4294967167) !== 0) || ((((_la - 288)) & ~0x1F) === 0 && ((1 << (_la - 288)) & 4294967263) !== 0) || ((((_la - 320)) & ~0x1F) === 0 && ((1 << (_la - 320)) & 4294967295) !== 0) || ((((_la - 378)) & ~0x1F) === 0 && ((1 << (_la - 378)) & 3073) !== 0)) {
                 {
                 this.state = 2558;
-                this.unpivotAlias();
+                this.unPivotAlias();
                 }
             }
 
@@ -10773,9 +10773,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotValueColumn(): UnpivotValueColumnContext {
-        let localContext = new UnpivotValueColumnContext(this.context, this.state);
-        this.enterRule(localContext, 180, SparkSqlParser.RULE_unpivotValueColumn);
+    public unPivotValueColumn(): UnPivotValueColumnContext {
+        let localContext = new UnPivotValueColumnContext(this.context, this.state);
+        this.enterRule(localContext, 180, SparkSqlParser.RULE_unPivotValueColumn);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -10797,9 +10797,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotNameColumn(): UnpivotNameColumnContext {
-        let localContext = new UnpivotNameColumnContext(this.context, this.state);
-        this.enterRule(localContext, 182, SparkSqlParser.RULE_unpivotNameColumn);
+    public unPivotNameColumn(): UnPivotNameColumnContext {
+        let localContext = new UnPivotNameColumnContext(this.context, this.state);
+        this.enterRule(localContext, 182, SparkSqlParser.RULE_unPivotNameColumn);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -10821,22 +10821,22 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotColumnAndAlias(): UnpivotColumnAndAliasContext {
-        let localContext = new UnpivotColumnAndAliasContext(this.context, this.state);
-        this.enterRule(localContext, 184, SparkSqlParser.RULE_unpivotColumnAndAlias);
+    public unPivotColumnAndAlias(): UnPivotColumnAndAliasContext {
+        let localContext = new UnPivotColumnAndAliasContext(this.context, this.state);
+        this.enterRule(localContext, 184, SparkSqlParser.RULE_unPivotColumnAndAlias);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 2565;
-            this.unpivotColumn();
+            this.unPivotColumn();
             this.state = 2567;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4294967040) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 4294967295) !== 0) || ((((_la - 64)) & ~0x1F) === 0 && ((1 << (_la - 64)) & 4294967295) !== 0) || ((((_la - 96)) & ~0x1F) === 0 && ((1 << (_la - 96)) & 4160749567) !== 0) || ((((_la - 128)) & ~0x1F) === 0 && ((1 << (_la - 128)) & 4294967295) !== 0) || ((((_la - 160)) & ~0x1F) === 0 && ((1 << (_la - 160)) & 4294967295) !== 0) || ((((_la - 192)) & ~0x1F) === 0 && ((1 << (_la - 192)) & 4294967279) !== 0) || ((((_la - 224)) & ~0x1F) === 0 && ((1 << (_la - 224)) & 4294967295) !== 0) || ((((_la - 256)) & ~0x1F) === 0 && ((1 << (_la - 256)) & 4294967167) !== 0) || ((((_la - 288)) & ~0x1F) === 0 && ((1 << (_la - 288)) & 4294967263) !== 0) || ((((_la - 320)) & ~0x1F) === 0 && ((1 << (_la - 320)) & 4294967295) !== 0) || ((((_la - 378)) & ~0x1F) === 0 && ((1 << (_la - 378)) & 3073) !== 0)) {
                 {
                 this.state = 2566;
-                this.unpivotAlias();
+                this.unPivotAlias();
                 }
             }
 
@@ -10856,9 +10856,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotColumn(): UnpivotColumnContext {
-        let localContext = new UnpivotColumnContext(this.context, this.state);
-        this.enterRule(localContext, 186, SparkSqlParser.RULE_unpivotColumn);
+    public unPivotColumn(): UnPivotColumnContext {
+        let localContext = new UnPivotColumnContext(this.context, this.state);
+        this.enterRule(localContext, 186, SparkSqlParser.RULE_unPivotColumn);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -10880,9 +10880,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unpivotAlias(): UnpivotAliasContext {
-        let localContext = new UnpivotAliasContext(this.context, this.state);
-        this.enterRule(localContext, 188, SparkSqlParser.RULE_unpivotAlias);
+    public unPivotAlias(): UnPivotAliasContext {
+        let localContext = new UnPivotAliasContext(this.context, this.state);
+        this.enterRule(localContext, 188, SparkSqlParser.RULE_unPivotAlias);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -11209,7 +11209,7 @@ export class SparkSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 2632;
-                this.unpivotClause();
+                this.unPivotClause();
                 }
                 break;
             default:
@@ -17383,9 +17383,9 @@ export class SparkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public zorderClause(): ZorderClauseContext {
-        let localContext = new ZorderClauseContext(this.context, this.state);
-        this.enterRule(localContext, 354, SparkSqlParser.RULE_zorderClause);
+    public zOrderClause(): ZOrderClauseContext {
+        let localContext = new ZOrderClauseContext(this.context, this.state);
+        this.enterRule(localContext, 354, SparkSqlParser.RULE_zOrderClause);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -23071,8 +23071,8 @@ export class OptimizeTableContext extends StatementContext {
     public tableName(): TableNameContext {
         return this.getRuleContext(0, TableNameContext)!;
     }
-    public zorderClause(): ZorderClauseContext {
-        return this.getRuleContext(0, ZorderClauseContext)!;
+    public zOrderClause(): ZOrderClauseContext {
+        return this.getRuleContext(0, ZOrderClauseContext)!;
     }
     public whereClause(): WhereClauseContext | null {
         return this.getRuleContext(0, WhereClauseContext);
@@ -28309,8 +28309,8 @@ export class FromClauseContext extends antlr.ParserRuleContext {
     public pivotClause(): PivotClauseContext | null {
         return this.getRuleContext(0, PivotClauseContext);
     }
-    public unpivotClause(): UnpivotClauseContext | null {
-        return this.getRuleContext(0, UnpivotClauseContext);
+    public unPivotClause(): UnPivotClauseContext | null {
+        return this.getRuleContext(0, UnPivotClauseContext);
     }
     public override get ruleIndex(): number {
         return SparkSqlParser.RULE_fromClause;
@@ -28892,9 +28892,9 @@ export class PivotValueContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotClauseContext extends antlr.ParserRuleContext {
-    public _nullOperator?: UnpivotNullClauseContext;
-    public _operator?: UnpivotOperatorContext;
+export class UnPivotClauseContext extends antlr.ParserRuleContext {
+    public _nullOperator?: UnPivotNullClauseContext;
+    public _operator?: UnPivotOperatorContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -28907,34 +28907,34 @@ export class UnpivotClauseContext extends antlr.ParserRuleContext {
     public RIGHT_PAREN(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.RIGHT_PAREN, 0)!;
     }
-    public unpivotOperator(): UnpivotOperatorContext {
-        return this.getRuleContext(0, UnpivotOperatorContext)!;
+    public unPivotOperator(): UnPivotOperatorContext {
+        return this.getRuleContext(0, UnPivotOperatorContext)!;
     }
     public identifier(): IdentifierContext | null {
         return this.getRuleContext(0, IdentifierContext);
     }
-    public unpivotNullClause(): UnpivotNullClauseContext | null {
-        return this.getRuleContext(0, UnpivotNullClauseContext);
+    public unPivotNullClause(): UnPivotNullClauseContext | null {
+        return this.getRuleContext(0, UnPivotNullClauseContext);
     }
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(SparkSqlParser.KW_AS, 0);
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotClause;
+        return SparkSqlParser.RULE_unPivotClause;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotClause) {
-             listener.enterUnpivotClause(this);
+        if(listener.enterUnPivotClause) {
+             listener.enterUnPivotClause(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotClause) {
-             listener.exitUnpivotClause(this);
+        if(listener.exitUnPivotClause) {
+             listener.exitUnPivotClause(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotClause) {
-            return visitor.visitUnpivotClause(this);
+        if (visitor.visitUnPivotClause) {
+            return visitor.visitUnPivotClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -28942,7 +28942,7 @@ export class UnpivotClauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotNullClauseContext extends antlr.ParserRuleContext {
+export class UnPivotNullClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -28956,21 +28956,21 @@ export class UnpivotNullClauseContext extends antlr.ParserRuleContext {
         return this.getToken(SparkSqlParser.KW_EXCLUDE, 0);
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotNullClause;
+        return SparkSqlParser.RULE_unPivotNullClause;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotNullClause) {
-             listener.enterUnpivotNullClause(this);
+        if(listener.enterUnPivotNullClause) {
+             listener.enterUnPivotNullClause(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotNullClause) {
-             listener.exitUnpivotNullClause(this);
+        if(listener.exitUnPivotNullClause) {
+             listener.exitUnPivotNullClause(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotNullClause) {
-            return visitor.visitUnpivotNullClause(this);
+        if (visitor.visitUnPivotNullClause) {
+            return visitor.visitUnPivotNullClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -28978,32 +28978,32 @@ export class UnpivotNullClauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotOperatorContext extends antlr.ParserRuleContext {
+export class UnPivotOperatorContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public unpivotSingleValueColumnClause(): UnpivotSingleValueColumnClauseContext | null {
-        return this.getRuleContext(0, UnpivotSingleValueColumnClauseContext);
+    public unPivotSingleValueColumnClause(): UnPivotSingleValueColumnClauseContext | null {
+        return this.getRuleContext(0, UnPivotSingleValueColumnClauseContext);
     }
-    public unpivotMultiValueColumnClause(): UnpivotMultiValueColumnClauseContext | null {
-        return this.getRuleContext(0, UnpivotMultiValueColumnClauseContext);
+    public unPivotMultiValueColumnClause(): UnPivotMultiValueColumnClauseContext | null {
+        return this.getRuleContext(0, UnPivotMultiValueColumnClauseContext);
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotOperator;
+        return SparkSqlParser.RULE_unPivotOperator;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotOperator) {
-             listener.enterUnpivotOperator(this);
+        if(listener.enterUnPivotOperator) {
+             listener.enterUnPivotOperator(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotOperator) {
-             listener.exitUnpivotOperator(this);
+        if(listener.exitUnPivotOperator) {
+             listener.exitUnPivotOperator(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotOperator) {
-            return visitor.visitUnpivotOperator(this);
+        if (visitor.visitUnPivotOperator) {
+            return visitor.visitUnPivotOperator(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29011,20 +29011,20 @@ export class UnpivotOperatorContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotSingleValueColumnClauseContext extends antlr.ParserRuleContext {
-    public _unpivotColumnAndAlias?: UnpivotColumnAndAliasContext;
-    public _unpivotColumns: UnpivotColumnAndAliasContext[] = [];
+export class UnPivotSingleValueColumnClauseContext extends antlr.ParserRuleContext {
+    public _unPivotColumnAndAlias?: UnPivotColumnAndAliasContext;
+    public _unPivotColumns: UnPivotColumnAndAliasContext[] = [];
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public unpivotValueColumn(): UnpivotValueColumnContext {
-        return this.getRuleContext(0, UnpivotValueColumnContext)!;
+    public unPivotValueColumn(): UnPivotValueColumnContext {
+        return this.getRuleContext(0, UnPivotValueColumnContext)!;
     }
     public KW_FOR(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.KW_FOR, 0)!;
     }
-    public unpivotNameColumn(): UnpivotNameColumnContext {
-        return this.getRuleContext(0, UnpivotNameColumnContext)!;
+    public unPivotNameColumn(): UnPivotNameColumnContext {
+        return this.getRuleContext(0, UnPivotNameColumnContext)!;
     }
     public KW_IN(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.KW_IN, 0)!;
@@ -29035,14 +29035,14 @@ export class UnpivotSingleValueColumnClauseContext extends antlr.ParserRuleConte
     public RIGHT_PAREN(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.RIGHT_PAREN, 0)!;
     }
-    public unpivotColumnAndAlias(): UnpivotColumnAndAliasContext[];
-    public unpivotColumnAndAlias(i: number): UnpivotColumnAndAliasContext | null;
-    public unpivotColumnAndAlias(i?: number): UnpivotColumnAndAliasContext[] | UnpivotColumnAndAliasContext | null {
+    public unPivotColumnAndAlias(): UnPivotColumnAndAliasContext[];
+    public unPivotColumnAndAlias(i: number): UnPivotColumnAndAliasContext | null;
+    public unPivotColumnAndAlias(i?: number): UnPivotColumnAndAliasContext[] | UnPivotColumnAndAliasContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(UnpivotColumnAndAliasContext);
+            return this.getRuleContexts(UnPivotColumnAndAliasContext);
         }
 
-        return this.getRuleContext(i, UnpivotColumnAndAliasContext);
+        return this.getRuleContext(i, UnPivotColumnAndAliasContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -29054,21 +29054,21 @@ export class UnpivotSingleValueColumnClauseContext extends antlr.ParserRuleConte
     	}
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotSingleValueColumnClause;
+        return SparkSqlParser.RULE_unPivotSingleValueColumnClause;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotSingleValueColumnClause) {
-             listener.enterUnpivotSingleValueColumnClause(this);
+        if(listener.enterUnPivotSingleValueColumnClause) {
+             listener.enterUnPivotSingleValueColumnClause(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotSingleValueColumnClause) {
-             listener.exitUnpivotSingleValueColumnClause(this);
+        if(listener.exitUnPivotSingleValueColumnClause) {
+             listener.exitUnPivotSingleValueColumnClause(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotSingleValueColumnClause) {
-            return visitor.visitUnpivotSingleValueColumnClause(this);
+        if (visitor.visitUnPivotSingleValueColumnClause) {
+            return visitor.visitUnPivotSingleValueColumnClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29076,11 +29076,11 @@ export class UnpivotSingleValueColumnClauseContext extends antlr.ParserRuleConte
 }
 
 
-export class UnpivotMultiValueColumnClauseContext extends antlr.ParserRuleContext {
-    public _unpivotValueColumn?: UnpivotValueColumnContext;
-    public _unpivotValueColumns: UnpivotValueColumnContext[] = [];
-    public _unpivotColumnSet?: UnpivotColumnSetContext;
-    public _unpivotColumnSets: UnpivotColumnSetContext[] = [];
+export class UnPivotMultiValueColumnClauseContext extends antlr.ParserRuleContext {
+    public _unPivotValueColumn?: UnPivotValueColumnContext;
+    public _unPivotValueColumns: UnPivotValueColumnContext[] = [];
+    public _unPivotColumnSet?: UnPivotColumnSetContext;
+    public _unPivotColumnSets: UnPivotColumnSetContext[] = [];
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -29105,29 +29105,29 @@ export class UnpivotMultiValueColumnClauseContext extends antlr.ParserRuleContex
     public KW_FOR(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.KW_FOR, 0)!;
     }
-    public unpivotNameColumn(): UnpivotNameColumnContext {
-        return this.getRuleContext(0, UnpivotNameColumnContext)!;
+    public unPivotNameColumn(): UnPivotNameColumnContext {
+        return this.getRuleContext(0, UnPivotNameColumnContext)!;
     }
     public KW_IN(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.KW_IN, 0)!;
     }
-    public unpivotValueColumn(): UnpivotValueColumnContext[];
-    public unpivotValueColumn(i: number): UnpivotValueColumnContext | null;
-    public unpivotValueColumn(i?: number): UnpivotValueColumnContext[] | UnpivotValueColumnContext | null {
+    public unPivotValueColumn(): UnPivotValueColumnContext[];
+    public unPivotValueColumn(i: number): UnPivotValueColumnContext | null;
+    public unPivotValueColumn(i?: number): UnPivotValueColumnContext[] | UnPivotValueColumnContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(UnpivotValueColumnContext);
+            return this.getRuleContexts(UnPivotValueColumnContext);
         }
 
-        return this.getRuleContext(i, UnpivotValueColumnContext);
+        return this.getRuleContext(i, UnPivotValueColumnContext);
     }
-    public unpivotColumnSet(): UnpivotColumnSetContext[];
-    public unpivotColumnSet(i: number): UnpivotColumnSetContext | null;
-    public unpivotColumnSet(i?: number): UnpivotColumnSetContext[] | UnpivotColumnSetContext | null {
+    public unPivotColumnSet(): UnPivotColumnSetContext[];
+    public unPivotColumnSet(i: number): UnPivotColumnSetContext | null;
+    public unPivotColumnSet(i?: number): UnPivotColumnSetContext[] | UnPivotColumnSetContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(UnpivotColumnSetContext);
+            return this.getRuleContexts(UnPivotColumnSetContext);
         }
 
-        return this.getRuleContext(i, UnpivotColumnSetContext);
+        return this.getRuleContext(i, UnPivotColumnSetContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -29139,21 +29139,21 @@ export class UnpivotMultiValueColumnClauseContext extends antlr.ParserRuleContex
     	}
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotMultiValueColumnClause;
+        return SparkSqlParser.RULE_unPivotMultiValueColumnClause;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotMultiValueColumnClause) {
-             listener.enterUnpivotMultiValueColumnClause(this);
+        if(listener.enterUnPivotMultiValueColumnClause) {
+             listener.enterUnPivotMultiValueColumnClause(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotMultiValueColumnClause) {
-             listener.exitUnpivotMultiValueColumnClause(this);
+        if(listener.exitUnPivotMultiValueColumnClause) {
+             listener.exitUnPivotMultiValueColumnClause(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotMultiValueColumnClause) {
-            return visitor.visitUnpivotMultiValueColumnClause(this);
+        if (visitor.visitUnPivotMultiValueColumnClause) {
+            return visitor.visitUnPivotMultiValueColumnClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29161,9 +29161,9 @@ export class UnpivotMultiValueColumnClauseContext extends antlr.ParserRuleContex
 }
 
 
-export class UnpivotColumnSetContext extends antlr.ParserRuleContext {
-    public _unpivotColumn?: UnpivotColumnContext;
-    public _unpivotColumns: UnpivotColumnContext[] = [];
+export class UnPivotColumnSetContext extends antlr.ParserRuleContext {
+    public _unPivotColumn?: UnPivotColumnContext;
+    public _unPivotColumns: UnPivotColumnContext[] = [];
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -29173,14 +29173,14 @@ export class UnpivotColumnSetContext extends antlr.ParserRuleContext {
     public RIGHT_PAREN(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.RIGHT_PAREN, 0)!;
     }
-    public unpivotColumn(): UnpivotColumnContext[];
-    public unpivotColumn(i: number): UnpivotColumnContext | null;
-    public unpivotColumn(i?: number): UnpivotColumnContext[] | UnpivotColumnContext | null {
+    public unPivotColumn(): UnPivotColumnContext[];
+    public unPivotColumn(i: number): UnPivotColumnContext | null;
+    public unPivotColumn(i?: number): UnPivotColumnContext[] | UnPivotColumnContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(UnpivotColumnContext);
+            return this.getRuleContexts(UnPivotColumnContext);
         }
 
-        return this.getRuleContext(i, UnpivotColumnContext);
+        return this.getRuleContext(i, UnPivotColumnContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -29191,25 +29191,25 @@ export class UnpivotColumnSetContext extends antlr.ParserRuleContext {
     		return this.getToken(SparkSqlParser.COMMA, i);
     	}
     }
-    public unpivotAlias(): UnpivotAliasContext | null {
-        return this.getRuleContext(0, UnpivotAliasContext);
+    public unPivotAlias(): UnPivotAliasContext | null {
+        return this.getRuleContext(0, UnPivotAliasContext);
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotColumnSet;
+        return SparkSqlParser.RULE_unPivotColumnSet;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotColumnSet) {
-             listener.enterUnpivotColumnSet(this);
+        if(listener.enterUnPivotColumnSet) {
+             listener.enterUnPivotColumnSet(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotColumnSet) {
-             listener.exitUnpivotColumnSet(this);
+        if(listener.exitUnPivotColumnSet) {
+             listener.exitUnPivotColumnSet(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotColumnSet) {
-            return visitor.visitUnpivotColumnSet(this);
+        if (visitor.visitUnPivotColumnSet) {
+            return visitor.visitUnPivotColumnSet(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29217,7 +29217,7 @@ export class UnpivotColumnSetContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotValueColumnContext extends antlr.ParserRuleContext {
+export class UnPivotValueColumnContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -29225,21 +29225,21 @@ export class UnpivotValueColumnContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, IdentifierContext)!;
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotValueColumn;
+        return SparkSqlParser.RULE_unPivotValueColumn;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotValueColumn) {
-             listener.enterUnpivotValueColumn(this);
+        if(listener.enterUnPivotValueColumn) {
+             listener.enterUnPivotValueColumn(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotValueColumn) {
-             listener.exitUnpivotValueColumn(this);
+        if(listener.exitUnPivotValueColumn) {
+             listener.exitUnPivotValueColumn(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotValueColumn) {
-            return visitor.visitUnpivotValueColumn(this);
+        if (visitor.visitUnPivotValueColumn) {
+            return visitor.visitUnPivotValueColumn(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29247,7 +29247,7 @@ export class UnpivotValueColumnContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotNameColumnContext extends antlr.ParserRuleContext {
+export class UnPivotNameColumnContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -29255,21 +29255,21 @@ export class UnpivotNameColumnContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, IdentifierContext)!;
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotNameColumn;
+        return SparkSqlParser.RULE_unPivotNameColumn;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotNameColumn) {
-             listener.enterUnpivotNameColumn(this);
+        if(listener.enterUnPivotNameColumn) {
+             listener.enterUnPivotNameColumn(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotNameColumn) {
-             listener.exitUnpivotNameColumn(this);
+        if(listener.exitUnPivotNameColumn) {
+             listener.exitUnPivotNameColumn(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotNameColumn) {
-            return visitor.visitUnpivotNameColumn(this);
+        if (visitor.visitUnPivotNameColumn) {
+            return visitor.visitUnPivotNameColumn(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29277,32 +29277,32 @@ export class UnpivotNameColumnContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotColumnAndAliasContext extends antlr.ParserRuleContext {
+export class UnPivotColumnAndAliasContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public unpivotColumn(): UnpivotColumnContext {
-        return this.getRuleContext(0, UnpivotColumnContext)!;
+    public unPivotColumn(): UnPivotColumnContext {
+        return this.getRuleContext(0, UnPivotColumnContext)!;
     }
-    public unpivotAlias(): UnpivotAliasContext | null {
-        return this.getRuleContext(0, UnpivotAliasContext);
+    public unPivotAlias(): UnPivotAliasContext | null {
+        return this.getRuleContext(0, UnPivotAliasContext);
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotColumnAndAlias;
+        return SparkSqlParser.RULE_unPivotColumnAndAlias;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotColumnAndAlias) {
-             listener.enterUnpivotColumnAndAlias(this);
+        if(listener.enterUnPivotColumnAndAlias) {
+             listener.enterUnPivotColumnAndAlias(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotColumnAndAlias) {
-             listener.exitUnpivotColumnAndAlias(this);
+        if(listener.exitUnPivotColumnAndAlias) {
+             listener.exitUnPivotColumnAndAlias(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotColumnAndAlias) {
-            return visitor.visitUnpivotColumnAndAlias(this);
+        if (visitor.visitUnPivotColumnAndAlias) {
+            return visitor.visitUnPivotColumnAndAlias(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29310,7 +29310,7 @@ export class UnpivotColumnAndAliasContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotColumnContext extends antlr.ParserRuleContext {
+export class UnPivotColumnContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -29318,21 +29318,21 @@ export class UnpivotColumnContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, MultipartIdentifierContext)!;
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotColumn;
+        return SparkSqlParser.RULE_unPivotColumn;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotColumn) {
-             listener.enterUnpivotColumn(this);
+        if(listener.enterUnPivotColumn) {
+             listener.enterUnPivotColumn(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotColumn) {
-             listener.exitUnpivotColumn(this);
+        if(listener.exitUnPivotColumn) {
+             listener.exitUnPivotColumn(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotColumn) {
-            return visitor.visitUnpivotColumn(this);
+        if (visitor.visitUnPivotColumn) {
+            return visitor.visitUnPivotColumn(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29340,7 +29340,7 @@ export class UnpivotColumnContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnpivotAliasContext extends antlr.ParserRuleContext {
+export class UnPivotAliasContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -29351,21 +29351,21 @@ export class UnpivotAliasContext extends antlr.ParserRuleContext {
         return this.getToken(SparkSqlParser.KW_AS, 0);
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_unpivotAlias;
+        return SparkSqlParser.RULE_unPivotAlias;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterUnpivotAlias) {
-             listener.enterUnpivotAlias(this);
+        if(listener.enterUnPivotAlias) {
+             listener.enterUnPivotAlias(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitUnpivotAlias) {
-             listener.exitUnpivotAlias(this);
+        if(listener.exitUnPivotAlias) {
+             listener.exitUnPivotAlias(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnpivotAlias) {
-            return visitor.visitUnpivotAlias(this);
+        if (visitor.visitUnPivotAlias) {
+            return visitor.visitUnPivotAlias(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -29610,8 +29610,8 @@ export class RelationExtensionContext extends antlr.ParserRuleContext {
     public pivotClause(): PivotClauseContext | null {
         return this.getRuleContext(0, PivotClauseContext);
     }
-    public unpivotClause(): UnpivotClauseContext | null {
-        return this.getRuleContext(0, UnpivotClauseContext);
+    public unPivotClause(): UnPivotClauseContext | null {
+        return this.getRuleContext(0, UnPivotClauseContext);
     }
     public override get ruleIndex(): number {
         return SparkSqlParser.RULE_relationExtension;
@@ -33763,7 +33763,7 @@ export class WindowClauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class ZorderClauseContext extends antlr.ParserRuleContext {
+export class ZOrderClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -33777,21 +33777,21 @@ export class ZorderClauseContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, ColumnNameSeqContext)!;
     }
     public override get ruleIndex(): number {
-        return SparkSqlParser.RULE_zorderClause;
+        return SparkSqlParser.RULE_zOrderClause;
     }
     public override enterRule(listener: SparkSqlParserListener): void {
-        if(listener.enterZorderClause) {
-             listener.enterZorderClause(this);
+        if(listener.enterZOrderClause) {
+             listener.enterZOrderClause(this);
         }
     }
     public override exitRule(listener: SparkSqlParserListener): void {
-        if(listener.exitZorderClause) {
-             listener.exitZorderClause(this);
+        if(listener.exitZOrderClause) {
+             listener.exitZOrderClause(this);
         }
     }
     public override accept<Result>(visitor: SparkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitZorderClause) {
-            return visitor.visitZorderClause(this);
+        if (visitor.visitZOrderClause) {
+            return visitor.visitZOrderClause(this);
         } else {
             return visitor.visitChildren(this);
         }

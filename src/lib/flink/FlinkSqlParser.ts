@@ -546,11 +546,11 @@ export class FlinkSqlParser extends SQLParserBase {
     public static readonly COLON_SYMB = 527;
     public static readonly ASTERISK_SIGN = 528;
     public static readonly UNDERLINE_SIGN = 529;
-    public static readonly HYPNEN_SIGN = 530;
+    public static readonly HYPHEN_SIGN = 530;
     public static readonly ADD_SIGN = 531;
-    public static readonly PENCENT_SIGN = 532;
+    public static readonly PERCENT_SIGN = 532;
     public static readonly DOUBLE_VERTICAL_SIGN = 533;
-    public static readonly DOUBLE_HYPNEN_SIGN = 534;
+    public static readonly DOUBLE_HYPHEN_SIGN = 534;
     public static readonly SLASH_SIGN = 535;
     public static readonly QUESTION_MARK_SIGN = 536;
     public static readonly DOUBLE_RIGHT_ARROW = 537;
@@ -571,12 +571,12 @@ export class FlinkSqlParser extends SQLParserBase {
     public static readonly RULE_explainDetail = 9;
     public static readonly RULE_useStatement = 10;
     public static readonly RULE_useModuleStatement = 11;
-    public static readonly RULE_showStatememt = 12;
+    public static readonly RULE_showStatement = 12;
     public static readonly RULE_loadStatement = 13;
-    public static readonly RULE_unloadStatememt = 14;
-    public static readonly RULE_setStatememt = 15;
-    public static readonly RULE_resetStatememt = 16;
-    public static readonly RULE_jarStatememt = 17;
+    public static readonly RULE_unloadStatement = 14;
+    public static readonly RULE_setStatement = 15;
+    public static readonly RULE_resetStatement = 16;
+    public static readonly RULE_jarStatement = 17;
     public static readonly RULE_dtAddStatement = 18;
     public static readonly RULE_dtFilePath = 19;
     public static readonly RULE_createTable = 20;
@@ -638,7 +638,7 @@ export class FlinkSqlParser extends SQLParserBase {
     public static readonly RULE_insertMulStatementCompatibility = 76;
     public static readonly RULE_insertMulStatement = 77;
     public static readonly RULE_queryStatement = 78;
-    public static readonly RULE_valuesCaluse = 79;
+    public static readonly RULE_valuesClause = 79;
     public static readonly RULE_withClause = 80;
     public static readonly RULE_withItem = 81;
     public static readonly RULE_withItemName = 82;
@@ -653,9 +653,9 @@ export class FlinkSqlParser extends SQLParserBase {
     public static readonly RULE_systemTimePeriod = 91;
     public static readonly RULE_dateTimeExpression = 92;
     public static readonly RULE_inlineDataValueClause = 93;
-    public static readonly RULE_windoTVFClause = 94;
-    public static readonly RULE_windowTVFExression = 95;
-    public static readonly RULE_windoTVFName = 96;
+    public static readonly RULE_windowTVFClause = 94;
+    public static readonly RULE_windowTVFExpression = 95;
+    public static readonly RULE_windowTVFName = 96;
     public static readonly RULE_windowTVFParam = 97;
     public static readonly RULE_timeIntervalParamName = 98;
     public static readonly RULE_columnDescriptor = 99;
@@ -664,7 +664,7 @@ export class FlinkSqlParser extends SQLParserBase {
     public static readonly RULE_groupByClause = 102;
     public static readonly RULE_groupItemDefinition = 103;
     public static readonly RULE_groupingSets = 104;
-    public static readonly RULE_groupingSetsNotaionName = 105;
+    public static readonly RULE_groupingSetsNotationName = 105;
     public static readonly RULE_groupWindowFunction = 106;
     public static readonly RULE_groupWindowFunctionName = 107;
     public static readonly RULE_timeAttrColumn = 108;
@@ -673,17 +673,17 @@ export class FlinkSqlParser extends SQLParserBase {
     public static readonly RULE_namedWindow = 111;
     public static readonly RULE_windowSpec = 112;
     public static readonly RULE_matchRecognizeClause = 113;
-    public static readonly RULE_orderByCaluse = 114;
-    public static readonly RULE_orderItemDefition = 115;
+    public static readonly RULE_orderByClause = 114;
+    public static readonly RULE_orderItemDefinition = 115;
     public static readonly RULE_limitClause = 116;
     public static readonly RULE_partitionByClause = 117;
     public static readonly RULE_quantifiers = 118;
     public static readonly RULE_measuresClause = 119;
-    public static readonly RULE_patternDefination = 120;
+    public static readonly RULE_patternDefinition = 120;
     public static readonly RULE_patternVariable = 121;
     public static readonly RULE_outputMode = 122;
     public static readonly RULE_afterMatchStrategy = 123;
-    public static readonly RULE_patternVariablesDefination = 124;
+    public static readonly RULE_patternVariablesDefinition = 124;
     public static readonly RULE_windowFrame = 125;
     public static readonly RULE_frameBound = 126;
     public static readonly RULE_withinClause = 127;
@@ -958,8 +958,8 @@ export class FlinkSqlParser extends SQLParserBase {
         "BIT_AND_OP", "BIT_XOR_OP", "DOT", "LS_BRACKET", "RS_BRACKET", "LR_BRACKET", 
         "RR_BRACKET", "LB_BRACKET", "RB_BRACKET", "COMMA", "SEMICOLON", 
         "AT_SIGN", "SINGLE_QUOTE_SYMB", "DOUBLE_QUOTE_SYMB", "REVERSE_QUOTE_SYMB", 
-        "COLON_SYMB", "ASTERISK_SIGN", "UNDERLINE_SIGN", "HYPNEN_SIGN", 
-        "ADD_SIGN", "PENCENT_SIGN", "DOUBLE_VERTICAL_SIGN", "DOUBLE_HYPNEN_SIGN", 
+        "COLON_SYMB", "ASTERISK_SIGN", "UNDERLINE_SIGN", "HYPHEN_SIGN", 
+        "ADD_SIGN", "PERCENT_SIGN", "DOUBLE_VERTICAL_SIGN", "DOUBLE_HYPHEN_SIGN", 
         "SLASH_SIGN", "QUESTION_MARK_SIGN", "DOUBLE_RIGHT_ARROW", "STRING_LITERAL", 
         "DIG_LITERAL", "REAL_LITERAL", "BIT_STRING", "ID_LITERAL"
     ];
@@ -967,8 +967,8 @@ export class FlinkSqlParser extends SQLParserBase {
         "program", "singleStatement", "sqlStatement", "emptyStatement", 
         "ddlStatement", "dmlStatement", "describeStatement", "explainStatement", 
         "explainDetails", "explainDetail", "useStatement", "useModuleStatement", 
-        "showStatememt", "loadStatement", "unloadStatememt", "setStatememt", 
-        "resetStatememt", "jarStatememt", "dtAddStatement", "dtFilePath", 
+        "showStatement", "loadStatement", "unloadStatement", "setStatement", 
+        "resetStatement", "jarStatement", "dtAddStatement", "dtFilePath", 
         "createTable", "simpleCreateTable", "createTableAsSelect", "columnOptionDefinition", 
         "physicalColumnDefinition", "columnNameCreate", "columnName", "columnNameList", 
         "columnType", "lengthOneDimension", "lengthTwoOptionalDimension", 
@@ -984,18 +984,18 @@ export class FlinkSqlParser extends SQLParserBase {
         "dropCatalog", "dropTable", "dropDatabase", "dropView", "dropFunction", 
         "insertStatement", "insertSimpleStatement", "insertPartitionDefinition", 
         "valuesDefinition", "valuesRowDefinition", "insertMulStatementCompatibility", 
-        "insertMulStatement", "queryStatement", "valuesCaluse", "withClause", 
+        "insertMulStatement", "queryStatement", "valuesClause", "withClause", 
         "withItem", "withItemName", "selectStatement", "selectClause", "projectItemDefinition", 
         "overWindowItem", "fromClause", "tableExpression", "tableReference", 
         "tablePrimary", "systemTimePeriod", "dateTimeExpression", "inlineDataValueClause", 
-        "windoTVFClause", "windowTVFExression", "windoTVFName", "windowTVFParam", 
+        "windowTVFClause", "windowTVFExpression", "windowTVFName", "windowTVFParam", 
         "timeIntervalParamName", "columnDescriptor", "joinCondition", "whereClause", 
-        "groupByClause", "groupItemDefinition", "groupingSets", "groupingSetsNotaionName", 
+        "groupByClause", "groupItemDefinition", "groupingSets", "groupingSetsNotationName", 
         "groupWindowFunction", "groupWindowFunctionName", "timeAttrColumn", 
         "havingClause", "windowClause", "namedWindow", "windowSpec", "matchRecognizeClause", 
-        "orderByCaluse", "orderItemDefition", "limitClause", "partitionByClause", 
-        "quantifiers", "measuresClause", "patternDefination", "patternVariable", 
-        "outputMode", "afterMatchStrategy", "patternVariablesDefination", 
+        "orderByClause", "orderItemDefinition", "limitClause", "partitionByClause", 
+        "quantifiers", "measuresClause", "patternDefinition", "patternVariable", 
+        "outputMode", "afterMatchStrategy", "patternVariablesDefinition", 
         "windowFrame", "frameBound", "withinClause", "expression", "booleanExpression", 
         "predicate", "likePredicate", "valueExpression", "functionCallExpression", 
         "primaryExpression", "functionNameCreate", "functionName", "functionNameAndParams", 
@@ -1184,7 +1184,7 @@ export class FlinkSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 6);
                 {
                 this.state = 404;
-                this.showStatememt();
+                this.showStatement();
                 }
                 break;
             case 7:
@@ -1198,28 +1198,28 @@ export class FlinkSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 8);
                 {
                 this.state = 406;
-                this.unloadStatememt();
+                this.unloadStatement();
                 }
                 break;
             case 9:
                 this.enterOuterAlt(localContext, 9);
                 {
                 this.state = 407;
-                this.setStatememt();
+                this.setStatement();
                 }
                 break;
             case 10:
                 this.enterOuterAlt(localContext, 10);
                 {
                 this.state = 408;
-                this.resetStatememt();
+                this.resetStatement();
                 }
                 break;
             case 11:
                 this.enterOuterAlt(localContext, 11);
                 {
                 this.state = 409;
-                this.jarStatememt();
+                this.jarStatement();
                 }
                 break;
             case 12:
@@ -1713,9 +1713,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public showStatememt(): ShowStatememtContext {
-        let localContext = new ShowStatememtContext(this.context, this.state);
-        this.enterRule(localContext, 24, FlinkSqlParser.RULE_showStatememt);
+    public showStatement(): ShowStatementContext {
+        let localContext = new ShowStatementContext(this.context, this.state);
+        this.enterRule(localContext, 24, FlinkSqlParser.RULE_showStatement);
         let _la: number;
         try {
             this.state = 519;
@@ -1962,9 +1962,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public unloadStatememt(): UnloadStatememtContext {
-        let localContext = new UnloadStatememtContext(this.context, this.state);
-        this.enterRule(localContext, 28, FlinkSqlParser.RULE_unloadStatememt);
+    public unloadStatement(): UnloadStatementContext {
+        let localContext = new UnloadStatementContext(this.context, this.state);
+        this.enterRule(localContext, 28, FlinkSqlParser.RULE_unloadStatement);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -1990,9 +1990,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public setStatememt(): SetStatememtContext {
-        let localContext = new SetStatememtContext(this.context, this.state);
-        this.enterRule(localContext, 30, FlinkSqlParser.RULE_setStatememt);
+    public setStatement(): SetStatementContext {
+        let localContext = new SetStatementContext(this.context, this.state);
+        this.enterRule(localContext, 30, FlinkSqlParser.RULE_setStatement);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -2024,9 +2024,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public resetStatememt(): ResetStatememtContext {
-        let localContext = new ResetStatememtContext(this.context, this.state);
-        this.enterRule(localContext, 32, FlinkSqlParser.RULE_resetStatememt);
+    public resetStatement(): ResetStatementContext {
+        let localContext = new ResetStatementContext(this.context, this.state);
+        this.enterRule(localContext, 32, FlinkSqlParser.RULE_resetStatement);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -2058,9 +2058,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public jarStatememt(): JarStatememtContext {
-        let localContext = new JarStatememtContext(this.context, this.state);
-        this.enterRule(localContext, 34, FlinkSqlParser.RULE_jarStatememt);
+    public jarStatement(): JarStatementContext {
+        let localContext = new JarStatementContext(this.context, this.state);
+        this.enterRule(localContext, 34, FlinkSqlParser.RULE_jarStatement);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -5263,7 +5263,7 @@ export class FlinkSqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 1165;
-                this.valuesCaluse();
+                this.valuesClause();
                 }
                 break;
             case 2:
@@ -5294,7 +5294,7 @@ export class FlinkSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 1174;
-                    this.orderByCaluse();
+                    this.orderByClause();
                     }
                     break;
                 }
@@ -5320,7 +5320,7 @@ export class FlinkSqlParser extends SQLParserBase {
                 case 1:
                     {
                     this.state = 1181;
-                    this.orderByCaluse();
+                    this.orderByClause();
                     }
                     break;
                 }
@@ -5384,7 +5384,7 @@ export class FlinkSqlParser extends SQLParserBase {
                     case 1:
                         {
                         this.state = 1195;
-                        this.orderByCaluse();
+                        this.orderByClause();
                         }
                         break;
                     }
@@ -5421,9 +5421,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public valuesCaluse(): ValuesCaluseContext {
-        let localContext = new ValuesCaluseContext(this.context, this.state);
-        this.enterRule(localContext, 158, FlinkSqlParser.RULE_valuesCaluse);
+    public valuesClause(): ValuesClauseContext {
+        let localContext = new ValuesClauseContext(this.context, this.state);
+        this.enterRule(localContext, 158, FlinkSqlParser.RULE_valuesClause);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -5975,7 +5975,7 @@ export class FlinkSqlParser extends SQLParserBase {
             case 3:
                 {
                 this.state = 1326;
-                this.windoTVFClause();
+                this.windowTVFClause();
                 }
                 break;
             }
@@ -6330,9 +6330,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public windoTVFClause(): WindoTVFClauseContext {
-        let localContext = new WindoTVFClauseContext(this.context, this.state);
-        this.enterRule(localContext, 188, FlinkSqlParser.RULE_windoTVFClause);
+    public windowTVFClause(): WindowTVFClauseContext {
+        let localContext = new WindowTVFClauseContext(this.context, this.state);
+        this.enterRule(localContext, 188, FlinkSqlParser.RULE_windowTVFClause);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -6341,7 +6341,7 @@ export class FlinkSqlParser extends SQLParserBase {
             this.state = 1402;
             this.match(FlinkSqlParser.LR_BRACKET);
             this.state = 1403;
-            this.windowTVFExression();
+            this.windowTVFExpression();
             this.state = 1404;
             this.match(FlinkSqlParser.RR_BRACKET);
             }
@@ -6360,15 +6360,15 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public windowTVFExression(): WindowTVFExressionContext {
-        let localContext = new WindowTVFExressionContext(this.context, this.state);
-        this.enterRule(localContext, 190, FlinkSqlParser.RULE_windowTVFExression);
+    public windowTVFExpression(): WindowTVFExpressionContext {
+        let localContext = new WindowTVFExpressionContext(this.context, this.state);
+        this.enterRule(localContext, 190, FlinkSqlParser.RULE_windowTVFExpression);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
             this.state = 1406;
-            this.windoTVFName();
+            this.windowTVFName();
             this.state = 1407;
             this.match(FlinkSqlParser.LR_BRACKET);
             this.state = 1408;
@@ -6407,9 +6407,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public windoTVFName(): WindoTVFNameContext {
-        let localContext = new WindoTVFNameContext(this.context, this.state);
-        this.enterRule(localContext, 192, FlinkSqlParser.RULE_windoTVFName);
+    public windowTVFName(): WindowTVFNameContext {
+        let localContext = new WindowTVFNameContext(this.context, this.state);
+        this.enterRule(localContext, 192, FlinkSqlParser.RULE_windowTVFName);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -6760,7 +6760,7 @@ export class FlinkSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 5);
                 {
                 this.state = 1478;
-                this.groupingSetsNotaionName();
+                this.groupingSetsNotationName();
                 this.state = 1479;
                 this.match(FlinkSqlParser.LR_BRACKET);
                 this.state = 1480;
@@ -6863,9 +6863,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public groupingSetsNotaionName(): GroupingSetsNotaionNameContext {
-        let localContext = new GroupingSetsNotaionNameContext(this.context, this.state);
-        this.enterRule(localContext, 210, FlinkSqlParser.RULE_groupingSetsNotaionName);
+    public groupingSetsNotationName(): GroupingSetsNotationNameContext {
+        let localContext = new GroupingSetsNotationNameContext(this.context, this.state);
+        this.enterRule(localContext, 210, FlinkSqlParser.RULE_groupingSetsNotationName);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -7119,7 +7119,7 @@ export class FlinkSqlParser extends SQLParserBase {
             if (_la === 259) {
                 {
                 this.state = 1544;
-                this.orderByCaluse();
+                this.orderByClause();
                 }
             }
 
@@ -7178,7 +7178,7 @@ export class FlinkSqlParser extends SQLParserBase {
             if (_la === 259) {
                 {
                 this.state = 1557;
-                this.orderByCaluse();
+                this.orderByClause();
                 }
             }
 
@@ -7218,12 +7218,12 @@ export class FlinkSqlParser extends SQLParserBase {
             if (_la === 272) {
                 {
                 this.state = 1569;
-                this.patternDefination();
+                this.patternDefinition();
                 }
             }
 
             this.state = 1572;
-            this.patternVariablesDefination();
+            this.patternVariablesDefinition();
             this.state = 1573;
             this.match(FlinkSqlParser.RR_BRACKET);
             this.state = 1578;
@@ -7262,9 +7262,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public orderByCaluse(): OrderByCaluseContext {
-        let localContext = new OrderByCaluseContext(this.context, this.state);
-        this.enterRule(localContext, 228, FlinkSqlParser.RULE_orderByCaluse);
+    public orderByClause(): OrderByClauseContext {
+        let localContext = new OrderByClauseContext(this.context, this.state);
+        this.enterRule(localContext, 228, FlinkSqlParser.RULE_orderByClause);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -7274,7 +7274,7 @@ export class FlinkSqlParser extends SQLParserBase {
             this.state = 1581;
             this.match(FlinkSqlParser.KW_BY);
             this.state = 1582;
-            this.orderItemDefition();
+            this.orderItemDefinition();
             this.state = 1587;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 176, this.context);
@@ -7285,7 +7285,7 @@ export class FlinkSqlParser extends SQLParserBase {
                     this.state = 1583;
                     this.match(FlinkSqlParser.COMMA);
                     this.state = 1584;
-                    this.orderItemDefition();
+                    this.orderItemDefinition();
                     }
                     }
                 }
@@ -7309,9 +7309,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public orderItemDefition(): OrderItemDefitionContext {
-        let localContext = new OrderItemDefitionContext(this.context, this.state);
-        this.enterRule(localContext, 230, FlinkSqlParser.RULE_orderItemDefition);
+    public orderItemDefinition(): OrderItemDefinitionContext {
+        let localContext = new OrderItemDefinitionContext(this.context, this.state);
+        this.enterRule(localContext, 230, FlinkSqlParser.RULE_orderItemDefinition);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -7540,7 +7540,7 @@ export class FlinkSqlParser extends SQLParserBase {
             case FlinkSqlParser.BIT_NOT_OP:
             case FlinkSqlParser.LR_BRACKET:
             case FlinkSqlParser.ASTERISK_SIGN:
-            case FlinkSqlParser.HYPNEN_SIGN:
+            case FlinkSqlParser.HYPHEN_SIGN:
             case FlinkSqlParser.ADD_SIGN:
             case FlinkSqlParser.STRING_LITERAL:
             case FlinkSqlParser.DIG_LITERAL:
@@ -7784,9 +7784,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public patternDefination(): PatternDefinationContext {
-        let localContext = new PatternDefinationContext(this.context, this.state);
-        this.enterRule(localContext, 240, FlinkSqlParser.RULE_patternDefination);
+    public patternDefinition(): PatternDefinitionContext {
+        let localContext = new PatternDefinitionContext(this.context, this.state);
+        this.enterRule(localContext, 240, FlinkSqlParser.RULE_patternDefinition);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -8014,9 +8014,9 @@ export class FlinkSqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public patternVariablesDefination(): PatternVariablesDefinationContext {
-        let localContext = new PatternVariablesDefinationContext(this.context, this.state);
-        this.enterRule(localContext, 248, FlinkSqlParser.RULE_patternVariablesDefination);
+    public patternVariablesDefinition(): PatternVariablesDefinitionContext {
+        let localContext = new PatternVariablesDefinitionContext(this.context, this.state);
+        this.enterRule(localContext, 248, FlinkSqlParser.RULE_patternVariablesDefinition);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -9990,7 +9990,7 @@ export class FlinkSqlParser extends SQLParserBase {
             this.state = 2066;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
-            case FlinkSqlParser.HYPNEN_SIGN:
+            case FlinkSqlParser.HYPHEN_SIGN:
             case FlinkSqlParser.ADD_SIGN:
             case FlinkSqlParser.DIG_LITERAL:
             case FlinkSqlParser.REAL_LITERAL:
@@ -11457,7 +11457,7 @@ export class FlinkSqlParser extends SQLParserBase {
                 this.stringLiteral();
                 }
                 break;
-            case FlinkSqlParser.HYPNEN_SIGN:
+            case FlinkSqlParser.HYPHEN_SIGN:
             case FlinkSqlParser.DIG_LITERAL:
                 this.enterOuterAlt(localContext, 4);
                 {
@@ -11467,7 +11467,7 @@ export class FlinkSqlParser extends SQLParserBase {
                 if (_la === 530) {
                     {
                     this.state = 2270;
-                    this.match(FlinkSqlParser.HYPNEN_SIGN);
+                    this.match(FlinkSqlParser.HYPHEN_SIGN);
                     }
                 }
 
@@ -13068,23 +13068,23 @@ export class SqlStatementContext extends antlr.ParserRuleContext {
     public useStatement(): UseStatementContext | null {
         return this.getRuleContext(0, UseStatementContext);
     }
-    public showStatememt(): ShowStatememtContext | null {
-        return this.getRuleContext(0, ShowStatememtContext);
+    public showStatement(): ShowStatementContext | null {
+        return this.getRuleContext(0, ShowStatementContext);
     }
     public loadStatement(): LoadStatementContext | null {
         return this.getRuleContext(0, LoadStatementContext);
     }
-    public unloadStatememt(): UnloadStatememtContext | null {
-        return this.getRuleContext(0, UnloadStatememtContext);
+    public unloadStatement(): UnloadStatementContext | null {
+        return this.getRuleContext(0, UnloadStatementContext);
     }
-    public setStatememt(): SetStatememtContext | null {
-        return this.getRuleContext(0, SetStatememtContext);
+    public setStatement(): SetStatementContext | null {
+        return this.getRuleContext(0, SetStatementContext);
     }
-    public resetStatememt(): ResetStatememtContext | null {
-        return this.getRuleContext(0, ResetStatememtContext);
+    public resetStatement(): ResetStatementContext | null {
+        return this.getRuleContext(0, ResetStatementContext);
     }
-    public jarStatememt(): JarStatememtContext | null {
-        return this.getRuleContext(0, JarStatememtContext);
+    public jarStatement(): JarStatementContext | null {
+        return this.getRuleContext(0, JarStatementContext);
     }
     public dtAddStatement(): DtAddStatementContext | null {
         return this.getRuleContext(0, DtAddStatementContext);
@@ -13502,7 +13502,7 @@ export class UseModuleStatementContext extends antlr.ParserRuleContext {
 }
 
 
-export class ShowStatememtContext extends antlr.ParserRuleContext {
+export class ShowStatementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -13576,21 +13576,21 @@ export class ShowStatememtContext extends antlr.ParserRuleContext {
         return this.getToken(FlinkSqlParser.KW_FULL, 0);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_showStatememt;
+        return FlinkSqlParser.RULE_showStatement;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterShowStatememt) {
-             listener.enterShowStatememt(this);
+        if(listener.enterShowStatement) {
+             listener.enterShowStatement(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitShowStatememt) {
-             listener.exitShowStatememt(this);
+        if(listener.exitShowStatement) {
+             listener.exitShowStatement(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitShowStatememt) {
-            return visitor.visitShowStatememt(this);
+        if (visitor.visitShowStatement) {
+            return visitor.visitShowStatement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -13640,7 +13640,7 @@ export class LoadStatementContext extends antlr.ParserRuleContext {
 }
 
 
-export class UnloadStatememtContext extends antlr.ParserRuleContext {
+export class UnloadStatementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -13654,21 +13654,21 @@ export class UnloadStatememtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, UidContext)!;
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_unloadStatememt;
+        return FlinkSqlParser.RULE_unloadStatement;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterUnloadStatememt) {
-             listener.enterUnloadStatememt(this);
+        if(listener.enterUnloadStatement) {
+             listener.enterUnloadStatement(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitUnloadStatememt) {
-             listener.exitUnloadStatememt(this);
+        if(listener.exitUnloadStatement) {
+             listener.exitUnloadStatement(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitUnloadStatememt) {
-            return visitor.visitUnloadStatememt(this);
+        if (visitor.visitUnloadStatement) {
+            return visitor.visitUnloadStatement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -13676,7 +13676,7 @@ export class UnloadStatememtContext extends antlr.ParserRuleContext {
 }
 
 
-export class SetStatememtContext extends antlr.ParserRuleContext {
+export class SetStatementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -13687,21 +13687,21 @@ export class SetStatememtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, TablePropertyContext);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_setStatememt;
+        return FlinkSqlParser.RULE_setStatement;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterSetStatememt) {
-             listener.enterSetStatememt(this);
+        if(listener.enterSetStatement) {
+             listener.enterSetStatement(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitSetStatememt) {
-             listener.exitSetStatememt(this);
+        if(listener.exitSetStatement) {
+             listener.exitSetStatement(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSetStatememt) {
-            return visitor.visitSetStatememt(this);
+        if (visitor.visitSetStatement) {
+            return visitor.visitSetStatement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -13709,7 +13709,7 @@ export class SetStatememtContext extends antlr.ParserRuleContext {
 }
 
 
-export class ResetStatememtContext extends antlr.ParserRuleContext {
+export class ResetStatementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -13720,21 +13720,21 @@ export class ResetStatememtContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, TablePropertyKeyContext);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_resetStatememt;
+        return FlinkSqlParser.RULE_resetStatement;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterResetStatememt) {
-             listener.enterResetStatememt(this);
+        if(listener.enterResetStatement) {
+             listener.enterResetStatement(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitResetStatememt) {
-             listener.exitResetStatememt(this);
+        if(listener.exitResetStatement) {
+             listener.exitResetStatement(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitResetStatememt) {
-            return visitor.visitResetStatememt(this);
+        if (visitor.visitResetStatement) {
+            return visitor.visitResetStatement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -13742,7 +13742,7 @@ export class ResetStatememtContext extends antlr.ParserRuleContext {
 }
 
 
-export class JarStatememtContext extends antlr.ParserRuleContext {
+export class JarStatementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -13759,21 +13759,21 @@ export class JarStatememtContext extends antlr.ParserRuleContext {
         return this.getToken(FlinkSqlParser.KW_REMOVE, 0);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_jarStatememt;
+        return FlinkSqlParser.RULE_jarStatement;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterJarStatememt) {
-             listener.enterJarStatememt(this);
+        if(listener.enterJarStatement) {
+             listener.enterJarStatement(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitJarStatememt) {
-             listener.exitJarStatememt(this);
+        if(listener.exitJarStatement) {
+             listener.exitJarStatement(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitJarStatememt) {
-            return visitor.visitJarStatememt(this);
+        if (visitor.visitJarStatement) {
+            return visitor.visitJarStatement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -16638,8 +16638,8 @@ export class QueryStatementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public valuesCaluse(): ValuesCaluseContext | null {
-        return this.getRuleContext(0, ValuesCaluseContext);
+    public valuesClause(): ValuesClauseContext | null {
+        return this.getRuleContext(0, ValuesClauseContext);
     }
     public withClause(): WithClauseContext | null {
         return this.getRuleContext(0, WithClauseContext);
@@ -16662,8 +16662,8 @@ export class QueryStatementContext extends antlr.ParserRuleContext {
     public selectClause(): SelectClauseContext | null {
         return this.getRuleContext(0, SelectClauseContext);
     }
-    public orderByCaluse(): OrderByCaluseContext | null {
-        return this.getRuleContext(0, OrderByCaluseContext);
+    public orderByClause(): OrderByClauseContext | null {
+        return this.getRuleContext(0, OrderByClauseContext);
     }
     public limitClause(): LimitClauseContext | null {
         return this.getRuleContext(0, LimitClauseContext);
@@ -16706,7 +16706,7 @@ export class QueryStatementContext extends antlr.ParserRuleContext {
 }
 
 
-export class ValuesCaluseContext extends antlr.ParserRuleContext {
+export class ValuesClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -16732,21 +16732,21 @@ export class ValuesCaluseContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_valuesCaluse;
+        return FlinkSqlParser.RULE_valuesClause;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterValuesCaluse) {
-             listener.enterValuesCaluse(this);
+        if(listener.enterValuesClause) {
+             listener.enterValuesClause(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitValuesCaluse) {
-             listener.exitValuesCaluse(this);
+        if(listener.exitValuesClause) {
+             listener.exitValuesClause(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitValuesCaluse) {
-            return visitor.visitValuesCaluse(this);
+        if (visitor.visitValuesClause) {
+            return visitor.visitValuesClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -17148,8 +17148,8 @@ export class TableExpressionContext extends antlr.ParserRuleContext {
     public inlineDataValueClause(): InlineDataValueClauseContext | null {
         return this.getRuleContext(0, InlineDataValueClauseContext);
     }
-    public windoTVFClause(): WindoTVFClauseContext | null {
-        return this.getRuleContext(0, WindoTVFClauseContext);
+    public windowTVFClause(): WindowTVFClauseContext | null {
+        return this.getRuleContext(0, WindowTVFClauseContext);
     }
     public tableExpression(): TableExpressionContext[];
     public tableExpression(i: number): TableExpressionContext | null;
@@ -17414,7 +17414,7 @@ export class InlineDataValueClauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class WindoTVFClauseContext extends antlr.ParserRuleContext {
+export class WindowTVFClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -17424,28 +17424,28 @@ export class WindoTVFClauseContext extends antlr.ParserRuleContext {
     public LR_BRACKET(): antlr.TerminalNode {
         return this.getToken(FlinkSqlParser.LR_BRACKET, 0)!;
     }
-    public windowTVFExression(): WindowTVFExressionContext {
-        return this.getRuleContext(0, WindowTVFExressionContext)!;
+    public windowTVFExpression(): WindowTVFExpressionContext {
+        return this.getRuleContext(0, WindowTVFExpressionContext)!;
     }
     public RR_BRACKET(): antlr.TerminalNode {
         return this.getToken(FlinkSqlParser.RR_BRACKET, 0)!;
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_windoTVFClause;
+        return FlinkSqlParser.RULE_windowTVFClause;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterWindoTVFClause) {
-             listener.enterWindoTVFClause(this);
+        if(listener.enterWindowTVFClause) {
+             listener.enterWindowTVFClause(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitWindoTVFClause) {
-             listener.exitWindoTVFClause(this);
+        if(listener.exitWindowTVFClause) {
+             listener.exitWindowTVFClause(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitWindoTVFClause) {
-            return visitor.visitWindoTVFClause(this);
+        if (visitor.visitWindowTVFClause) {
+            return visitor.visitWindowTVFClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -17453,12 +17453,12 @@ export class WindoTVFClauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class WindowTVFExressionContext extends antlr.ParserRuleContext {
+export class WindowTVFExpressionContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public windoTVFName(): WindoTVFNameContext {
-        return this.getRuleContext(0, WindoTVFNameContext)!;
+    public windowTVFName(): WindowTVFNameContext {
+        return this.getRuleContext(0, WindowTVFNameContext)!;
     }
     public LR_BRACKET(): antlr.TerminalNode {
         return this.getToken(FlinkSqlParser.LR_BRACKET, 0)!;
@@ -17485,21 +17485,21 @@ export class WindowTVFExressionContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_windowTVFExression;
+        return FlinkSqlParser.RULE_windowTVFExpression;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterWindowTVFExression) {
-             listener.enterWindowTVFExression(this);
+        if(listener.enterWindowTVFExpression) {
+             listener.enterWindowTVFExpression(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitWindowTVFExression) {
-             listener.exitWindowTVFExression(this);
+        if(listener.exitWindowTVFExpression) {
+             listener.exitWindowTVFExpression(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitWindowTVFExression) {
-            return visitor.visitWindowTVFExression(this);
+        if (visitor.visitWindowTVFExpression) {
+            return visitor.visitWindowTVFExpression(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -17507,7 +17507,7 @@ export class WindowTVFExressionContext extends antlr.ParserRuleContext {
 }
 
 
-export class WindoTVFNameContext extends antlr.ParserRuleContext {
+export class WindowTVFNameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -17521,21 +17521,21 @@ export class WindoTVFNameContext extends antlr.ParserRuleContext {
         return this.getToken(FlinkSqlParser.KW_CUMULATE, 0);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_windoTVFName;
+        return FlinkSqlParser.RULE_windowTVFName;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterWindoTVFName) {
-             listener.enterWindoTVFName(this);
+        if(listener.enterWindowTVFName) {
+             listener.enterWindowTVFName(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitWindoTVFName) {
-             listener.exitWindoTVFName(this);
+        if(listener.exitWindowTVFName) {
+             listener.exitWindowTVFName(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitWindoTVFName) {
-            return visitor.visitWindoTVFName(this);
+        if (visitor.visitWindowTVFName) {
+            return visitor.visitWindowTVFName(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -17835,8 +17835,8 @@ export class GroupItemDefinitionContext extends antlr.ParserRuleContext {
     		return this.getToken(FlinkSqlParser.COMMA, i);
     	}
     }
-    public groupingSetsNotaionName(): GroupingSetsNotaionNameContext | null {
-        return this.getRuleContext(0, GroupingSetsNotaionNameContext);
+    public groupingSetsNotationName(): GroupingSetsNotationNameContext | null {
+        return this.getRuleContext(0, GroupingSetsNotationNameContext);
     }
     public groupingSets(): GroupingSetsContext | null {
         return this.getRuleContext(0, GroupingSetsContext);
@@ -17906,7 +17906,7 @@ export class GroupingSetsContext extends antlr.ParserRuleContext {
 }
 
 
-export class GroupingSetsNotaionNameContext extends antlr.ParserRuleContext {
+export class GroupingSetsNotationNameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -17917,21 +17917,21 @@ export class GroupingSetsNotaionNameContext extends antlr.ParserRuleContext {
         return this.getToken(FlinkSqlParser.KW_ROLLUP, 0);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_groupingSetsNotaionName;
+        return FlinkSqlParser.RULE_groupingSetsNotationName;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterGroupingSetsNotaionName) {
-             listener.enterGroupingSetsNotaionName(this);
+        if(listener.enterGroupingSetsNotationName) {
+             listener.enterGroupingSetsNotationName(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitGroupingSetsNotaionName) {
-             listener.exitGroupingSetsNotaionName(this);
+        if(listener.exitGroupingSetsNotationName) {
+             listener.exitGroupingSetsNotationName(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitGroupingSetsNotaionName) {
-            return visitor.visitGroupingSetsNotaionName(this);
+        if (visitor.visitGroupingSetsNotationName) {
+            return visitor.visitGroupingSetsNotationName(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -18182,8 +18182,8 @@ export class WindowSpecContext extends antlr.ParserRuleContext {
     public partitionByClause(): PartitionByClauseContext | null {
         return this.getRuleContext(0, PartitionByClauseContext);
     }
-    public orderByCaluse(): OrderByCaluseContext | null {
-        return this.getRuleContext(0, OrderByCaluseContext);
+    public orderByClause(): OrderByClauseContext | null {
+        return this.getRuleContext(0, OrderByClauseContext);
     }
     public windowFrame(): WindowFrameContext | null {
         return this.getRuleContext(0, WindowFrameContext);
@@ -18224,8 +18224,8 @@ export class MatchRecognizeClauseContext extends antlr.ParserRuleContext {
     public LR_BRACKET(): antlr.TerminalNode {
         return this.getToken(FlinkSqlParser.LR_BRACKET, 0)!;
     }
-    public patternVariablesDefination(): PatternVariablesDefinationContext {
-        return this.getRuleContext(0, PatternVariablesDefinationContext)!;
+    public patternVariablesDefinition(): PatternVariablesDefinitionContext {
+        return this.getRuleContext(0, PatternVariablesDefinitionContext)!;
     }
     public RR_BRACKET(): antlr.TerminalNode {
         return this.getToken(FlinkSqlParser.RR_BRACKET, 0)!;
@@ -18233,8 +18233,8 @@ export class MatchRecognizeClauseContext extends antlr.ParserRuleContext {
     public partitionByClause(): PartitionByClauseContext | null {
         return this.getRuleContext(0, PartitionByClauseContext);
     }
-    public orderByCaluse(): OrderByCaluseContext | null {
-        return this.getRuleContext(0, OrderByCaluseContext);
+    public orderByClause(): OrderByClauseContext | null {
+        return this.getRuleContext(0, OrderByClauseContext);
     }
     public measuresClause(): MeasuresClauseContext | null {
         return this.getRuleContext(0, MeasuresClauseContext);
@@ -18245,8 +18245,8 @@ export class MatchRecognizeClauseContext extends antlr.ParserRuleContext {
     public afterMatchStrategy(): AfterMatchStrategyContext | null {
         return this.getRuleContext(0, AfterMatchStrategyContext);
     }
-    public patternDefination(): PatternDefinationContext | null {
-        return this.getRuleContext(0, PatternDefinationContext);
+    public patternDefinition(): PatternDefinitionContext | null {
+        return this.getRuleContext(0, PatternDefinitionContext);
     }
     public identifier(): IdentifierContext | null {
         return this.getRuleContext(0, IdentifierContext);
@@ -18277,7 +18277,7 @@ export class MatchRecognizeClauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class OrderByCaluseContext extends antlr.ParserRuleContext {
+export class OrderByClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -18287,14 +18287,14 @@ export class OrderByCaluseContext extends antlr.ParserRuleContext {
     public KW_BY(): antlr.TerminalNode {
         return this.getToken(FlinkSqlParser.KW_BY, 0)!;
     }
-    public orderItemDefition(): OrderItemDefitionContext[];
-    public orderItemDefition(i: number): OrderItemDefitionContext | null;
-    public orderItemDefition(i?: number): OrderItemDefitionContext[] | OrderItemDefitionContext | null {
+    public orderItemDefinition(): OrderItemDefinitionContext[];
+    public orderItemDefinition(i: number): OrderItemDefinitionContext | null;
+    public orderItemDefinition(i?: number): OrderItemDefinitionContext[] | OrderItemDefinitionContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(OrderItemDefitionContext);
+            return this.getRuleContexts(OrderItemDefinitionContext);
         }
 
-        return this.getRuleContext(i, OrderItemDefitionContext);
+        return this.getRuleContext(i, OrderItemDefinitionContext);
     }
     public COMMA(): antlr.TerminalNode[];
     public COMMA(i: number): antlr.TerminalNode | null;
@@ -18306,21 +18306,21 @@ export class OrderByCaluseContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_orderByCaluse;
+        return FlinkSqlParser.RULE_orderByClause;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterOrderByCaluse) {
-             listener.enterOrderByCaluse(this);
+        if(listener.enterOrderByClause) {
+             listener.enterOrderByClause(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitOrderByCaluse) {
-             listener.exitOrderByCaluse(this);
+        if(listener.exitOrderByClause) {
+             listener.exitOrderByClause(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOrderByCaluse) {
-            return visitor.visitOrderByCaluse(this);
+        if (visitor.visitOrderByClause) {
+            return visitor.visitOrderByClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -18328,7 +18328,7 @@ export class OrderByCaluseContext extends antlr.ParserRuleContext {
 }
 
 
-export class OrderItemDefitionContext extends antlr.ParserRuleContext {
+export class OrderItemDefinitionContext extends antlr.ParserRuleContext {
     public _ordering?: Token | null;
     public _nullOrder?: Token | null;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
@@ -18353,21 +18353,21 @@ export class OrderItemDefitionContext extends antlr.ParserRuleContext {
         return this.getToken(FlinkSqlParser.KW_FIRST, 0);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_orderItemDefition;
+        return FlinkSqlParser.RULE_orderItemDefinition;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterOrderItemDefition) {
-             listener.enterOrderItemDefition(this);
+        if(listener.enterOrderItemDefinition) {
+             listener.enterOrderItemDefinition(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitOrderItemDefition) {
-             listener.exitOrderItemDefition(this);
+        if(listener.exitOrderItemDefinition) {
+             listener.exitOrderItemDefinition(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitOrderItemDefition) {
-            return visitor.visitOrderItemDefition(this);
+        if (visitor.visitOrderItemDefinition) {
+            return visitor.visitOrderItemDefinition(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -18574,7 +18574,7 @@ export class MeasuresClauseContext extends antlr.ParserRuleContext {
 }
 
 
-export class PatternDefinationContext extends antlr.ParserRuleContext {
+export class PatternDefinitionContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -18600,21 +18600,21 @@ export class PatternDefinationContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, WithinClauseContext);
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_patternDefination;
+        return FlinkSqlParser.RULE_patternDefinition;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterPatternDefination) {
-             listener.enterPatternDefination(this);
+        if(listener.enterPatternDefinition) {
+             listener.enterPatternDefinition(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitPatternDefination) {
-             listener.exitPatternDefination(this);
+        if(listener.exitPatternDefinition) {
+             listener.exitPatternDefinition(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPatternDefination) {
-            return visitor.visitPatternDefination(this);
+        if (visitor.visitPatternDefinition) {
+            return visitor.visitPatternDefinition(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -18757,7 +18757,7 @@ export class AfterMatchStrategyContext extends antlr.ParserRuleContext {
 }
 
 
-export class PatternVariablesDefinationContext extends antlr.ParserRuleContext {
+export class PatternVariablesDefinitionContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -18783,21 +18783,21 @@ export class PatternVariablesDefinationContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return FlinkSqlParser.RULE_patternVariablesDefination;
+        return FlinkSqlParser.RULE_patternVariablesDefinition;
     }
     public override enterRule(listener: FlinkSqlParserListener): void {
-        if(listener.enterPatternVariablesDefination) {
-             listener.enterPatternVariablesDefination(this);
+        if(listener.enterPatternVariablesDefinition) {
+             listener.enterPatternVariablesDefinition(this);
         }
     }
     public override exitRule(listener: FlinkSqlParserListener): void {
-        if(listener.exitPatternVariablesDefination) {
-             listener.exitPatternVariablesDefination(this);
+        if(listener.exitPatternVariablesDefinition) {
+             listener.exitPatternVariablesDefinition(this);
         }
     }
     public override accept<Result>(visitor: FlinkSqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPatternVariablesDefination) {
-            return visitor.visitPatternVariablesDefination(this);
+        if (visitor.visitPatternVariablesDefinition) {
+            return visitor.visitPatternVariablesDefinition(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -19456,8 +19456,8 @@ export class ArithmeticBinaryContext extends ValueExpressionContext {
     public SLASH_SIGN(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.SLASH_SIGN, 0);
     }
-    public PENCENT_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.PENCENT_SIGN, 0);
+    public PERCENT_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.PERCENT_SIGN, 0);
     }
     public KW_DIV(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.KW_DIV, 0);
@@ -19465,8 +19465,8 @@ export class ArithmeticBinaryContext extends ValueExpressionContext {
     public ADD_SIGN(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.ADD_SIGN, 0);
     }
-    public HYPNEN_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.HYPNEN_SIGN, 0);
+    public HYPHEN_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.HYPHEN_SIGN, 0);
     }
     public DOUBLE_VERTICAL_SIGN(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.DOUBLE_VERTICAL_SIGN, 0);
@@ -19507,8 +19507,8 @@ export class ArithmeticUnaryContext extends ValueExpressionContext {
     public valueExpression(): ValueExpressionContext {
         return this.getRuleContext(0, ValueExpressionContext)!;
     }
-    public HYPNEN_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.HYPNEN_SIGN, 0);
+    public HYPHEN_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.HYPHEN_SIGN, 0);
     }
     public ADD_SIGN(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.ADD_SIGN, 0);
@@ -20599,8 +20599,8 @@ export class IntervalValueContext extends antlr.ParserRuleContext {
     public ADD_SIGN(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.ADD_SIGN, 0);
     }
-    public HYPNEN_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.HYPNEN_SIGN, 0);
+    public HYPHEN_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.HYPHEN_SIGN, 0);
     }
     public STRING_LITERAL(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.STRING_LITERAL, 0);
@@ -21837,8 +21837,8 @@ export class MathOperatorContext extends antlr.ParserRuleContext {
     public SLASH_SIGN(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.SLASH_SIGN, 0);
     }
-    public PENCENT_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.PENCENT_SIGN, 0);
+    public PERCENT_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.PERCENT_SIGN, 0);
     }
     public KW_DIV(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.KW_DIV, 0);
@@ -21846,11 +21846,11 @@ export class MathOperatorContext extends antlr.ParserRuleContext {
     public ADD_SIGN(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.ADD_SIGN, 0);
     }
-    public HYPNEN_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.HYPNEN_SIGN, 0);
+    public HYPHEN_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.HYPHEN_SIGN, 0);
     }
-    public DOUBLE_HYPNEN_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.DOUBLE_HYPNEN_SIGN, 0);
+    public DOUBLE_HYPHEN_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.DOUBLE_HYPHEN_SIGN, 0);
     }
     public override get ruleIndex(): number {
         return FlinkSqlParser.RULE_mathOperator;
@@ -21888,8 +21888,8 @@ export class UnaryOperatorContext extends antlr.ParserRuleContext {
     public ADD_SIGN(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.ADD_SIGN, 0);
     }
-    public HYPNEN_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.HYPNEN_SIGN, 0);
+    public HYPHEN_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.HYPHEN_SIGN, 0);
     }
     public KW_NOT(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.KW_NOT, 0);
@@ -21933,8 +21933,8 @@ export class ConstantContext extends antlr.ParserRuleContext {
     public decimalLiteral(): DecimalLiteralContext | null {
         return this.getRuleContext(0, DecimalLiteralContext);
     }
-    public HYPNEN_SIGN(): antlr.TerminalNode | null {
-        return this.getToken(FlinkSqlParser.HYPNEN_SIGN, 0);
+    public HYPHEN_SIGN(): antlr.TerminalNode | null {
+        return this.getToken(FlinkSqlParser.HYPHEN_SIGN, 0);
     }
     public booleanLiteral(): BooleanLiteralContext | null {
         return this.getRuleContext(0, BooleanLiteralContext);
