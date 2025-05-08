@@ -219,4 +219,16 @@ describe('Hive SQL Token Suggestion', () => {
             'SCHEMAS',
         ]);
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 23,
+            column: 2,
+        };
+        const suggestion = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [21, 23]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

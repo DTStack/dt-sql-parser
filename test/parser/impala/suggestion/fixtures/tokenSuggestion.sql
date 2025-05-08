@@ -9,3 +9,7 @@ INSERT ;
 SHOW ;
 
 CREATE TABLE t1 (id );
+
+CREATE TABLE tb (id 
+ 
+);

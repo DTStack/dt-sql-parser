@@ -11,3 +11,7 @@ DESCRIBE ;
 DROP ;
 
 INSERT ;
+
+CREATE TABLE tb (id 
+ 
+);

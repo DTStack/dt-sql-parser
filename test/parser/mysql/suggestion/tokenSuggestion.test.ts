@@ -242,4 +242,16 @@ describe('MySQL Token Suggestion', () => {
             'BINARY',
         ]);
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 19,
+            column: 2,
+        };
+        const suggestion = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [18, 20]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

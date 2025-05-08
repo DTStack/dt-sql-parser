@@ -197,4 +197,16 @@ describe('Spark SQL Token Suggestion', () => {
 
         expect(suggestion).toMatchUnorderedArray(['TABLE']);
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 21,
+            column: 2,
+        };
+        const suggestion = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [20, 22]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });
