@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/DTStack/dt-sql-parser/compare/v4.1.1...v4.2.0) (2025-05-09)
+
+
+### Features
+
+* **postgre:** [#412](https://github.com/DTStack/dt-sql-parser/issues/412) update merge's syntax, with clause syntax and copy syntax ([#413](https://github.com/DTStack/dt-sql-parser/issues/413)) ([52b9a5a](https://github.com/DTStack/dt-sql-parser/commit/52b9a5a0804141a2c990482d3b55e9f8e4a676b7))
+
+
+### Bug Fixes
+
+* **ci:** use project.reject when just check mode ([#404](https://github.com/DTStack/dt-sql-parser/issues/404)) ([7324c27](https://github.com/DTStack/dt-sql-parser/commit/7324c27f741a2df16bb6d0852ad4431b51e96add))
+* **flink:** [#415](https://github.com/DTStack/dt-sql-parser/issues/415) fix supporting json function's different type ([#416](https://github.com/DTStack/dt-sql-parser/issues/416)) ([03a53d3](https://github.com/DTStack/dt-sql-parser/commit/03a53d3a559bce5a0aa302c38062d780146533a4))
+* split whiteSpace into multiple tokens to fix findCaretTokenIndex may undefined ([#385](https://github.com/DTStack/dt-sql-parser/issues/385)) ([8e11012](https://github.com/DTStack/dt-sql-parser/commit/8e110120de5274ca2efdb0742813c18d44f55c5a))
+
 ### [4.1.1](https://github.com/DTStack/dt-sql-parser/compare/v4.1.0...v4.1.1) (2025-02-17)
 
 
