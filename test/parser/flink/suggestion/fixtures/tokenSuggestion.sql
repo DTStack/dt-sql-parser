@@ -1,6 +1,6 @@
 SELECT * FROM aa.bb;
 
-USE
+USE 
 ;
 CREATE 
 ;
