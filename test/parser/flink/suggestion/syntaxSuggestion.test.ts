@@ -469,4 +469,32 @@ describe('Flink SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['age']);
     });
+
+    test('Create Statement table properties', () => {
+        const scenarios = [
+            {
+                caretPosition: {
+                    lineNumber: 9,
+                    column: 45,
+                },
+                entityContextType: EntityContextType.TABLE_PROPERTY_KEY,
+            },
+            {
+                caretPosition: {
+                    lineNumber: 9,
+                    column: 55,
+                },
+                entityContextType: EntityContextType.TABLE_PROPERTY_VALUE,
+            },
+        ];
+
+        scenarios.forEach((scenario) => {
+            const suggestion = flink.getSuggestionAtCaretPosition(
+                commentOtherLine(syntaxSql, scenario.caretPosition.lineNumber),
+                scenario.caretPosition
+            )?.syntax;
+
+            expect(suggestion[0].syntaxContextType).toBe(scenario.entityContextType);
+        });
+    });
 });

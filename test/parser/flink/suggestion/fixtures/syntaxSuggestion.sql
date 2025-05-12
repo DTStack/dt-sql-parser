@@ -40,6 +40,8 @@ CREATE TABLE yourTable (ts TIMESTAMP(3), WATERMARK FOR  );
 
 CREATE TABLE newTable (  );
 
+CREATE TABLE tmp_table (col INT) WITH ('connector'='kafka');
+
 SELECT SUM(amount) FROM Orders GROUP BY length(users) HAVING SUM(amount) > 50;
 
 SELECT * FROM Orders ORDER BY orderTime LIMIT length(order_id);
