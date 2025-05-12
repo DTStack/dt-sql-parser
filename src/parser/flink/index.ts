@@ -151,6 +151,7 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                 case FlinkSqlParser.RULE_tablePropertyValue: {
                     syntaxContextType = EntityContextType.TABLE_PROPERTY_VALUE;
                     break;
+                }
                 default:
                     break;
             }
