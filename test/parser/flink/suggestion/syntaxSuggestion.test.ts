@@ -474,14 +474,14 @@ describe('Flink SQL Syntax Suggestion', () => {
         const scenarios = [
             {
                 caretPosition: {
-                    lineNumber: 9,
+                    lineNumber: 49,
                     column: 45,
                 },
                 entityContextType: EntityContextType.TABLE_PROPERTY_KEY,
             },
             {
                 caretPosition: {
-                    lineNumber: 9,
+                    lineNumber: 49,
                     column: 55,
                 },
                 entityContextType: EntityContextType.TABLE_PROPERTY_VALUE,

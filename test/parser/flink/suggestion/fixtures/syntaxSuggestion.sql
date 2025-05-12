@@ -40,10 +40,10 @@ CREATE TABLE yourTable (ts TIMESTAMP(3), WATERMARK FOR  );
 
 CREATE TABLE newTable (  );
 
-CREATE TABLE tmp_table (col INT) WITH ('connector'='kafka');
-
 SELECT SUM(amount) FROM Orders GROUP BY length(users) HAVING SUM(amount) > 50;
 
 SELECT * FROM Orders ORDER BY orderTime LIMIT length(order_id);
 
 SELECT age CASE WHEN age < 18 THEN 1  ELSE 0 END AS is_minor FROM dt_catalog.dt_db.subscriptions;
+
+CREATE TABLE tmp_table (col INT) WITH ('connector'='kafka');
