@@ -32,7 +32,33 @@ describe('Postgre SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'tb']);
+        expect(suggestion?.wordRanges?.length).toBe(3);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 3,
+                startIndex: 88,
+                endIndex: 89,
+                startColumn: 13,
+                endColumn: 15,
+            },
+            {
+                text: '.',
+                line: 3,
+                startIndex: 90,
+                endIndex: 90,
+                startColumn: 15,
+                endColumn: 16,
+            },
+            {
+                text: 'tb',
+                line: 3,
+                startIndex: 91,
+                endIndex: 92,
+                startColumn: 16,
+                endColumn: 18,
+            },
+        ]);
     });
 
     test('Alter table ', () => {
@@ -1001,5 +1027,119 @@ describe('Postgre SQL Syntax Suggestion', () => {
         expect(suggestion1?.wordRanges.map((token) => token.text)).toEqual([]);
         expect(suggestion2).not.toBeUndefined();
         expect(suggestion2?.wordRanges.map((token) => token.text)).toEqual(['t1']);
+    });
+
+    test('Group by expression', () => {
+        const pos: CaretPosition = {
+            lineNumber: 83,
+            column: 51,
+        };
+
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col2']);
+    });
+
+    test('Order by expression', () => {
+        const pos: CaretPosition = {
+            lineNumber: 83,
+            column: 78,
+        };
+
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['col1']);
+    });
+
+    test('Limit expression', () => {
+        const pos: CaretPosition = {
+            lineNumber: 85,
+            column: 67,
+        };
+
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['id']);
+    });
+
+    test('Where expression', () => {
+        const pos: CaretPosition = {
+            lineNumber: 87,
+            column: 72,
+        };
+
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['x']);
+    });
+
+    test('Having expression', () => {
+        const pos: CaretPosition = {
+            lineNumber: 89,
+            column: 170,
+        };
+
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['len']);
+    });
+
+    test('Partition by expression', () => {
+        const pos: CaretPosition = {
+            lineNumber: 89,
+            column: 229,
+        };
+
+        const syntaxes = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['depname']);
     });
 });

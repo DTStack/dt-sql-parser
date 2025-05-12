@@ -260,4 +260,16 @@ describe('Hive SQL Token Suggestion', () => {
         expect(suggestion).toContain('NOT');
         expect(suggestion).toContain('NOT EXISTS');
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 25,
+            column: 2,
+        };
+        const suggestion = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [24, 26]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

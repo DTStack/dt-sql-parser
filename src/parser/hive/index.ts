@@ -41,6 +41,7 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         HiveSqlParser.RULE_functionNameForInvoke, // function name
         HiveSqlParser.RULE_functionNameCreate, // function name that will be created
         HiveSqlParser.RULE_columnName,
+        HiveSqlParser.RULE_columnNamePath,
         HiveSqlParser.RULE_columnNameCreate,
     ]);
 
@@ -68,18 +69,13 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -122,6 +118,26 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
                 }
                 case HiveSqlParser.RULE_columnNameCreate: {
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
+                    break;
+                }
+                case HiveSqlParser.RULE_columnNamePath: {
+                    if (
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_orderByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_groupByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_sortByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_qualifyClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_clusterByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_distributeByClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_selectClause) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_joinSource) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_caseExpression) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_whenExpression) ||
+                        candidateRule.ruleList.includes(HiveSqlParser.RULE_castExpression)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
                     break;
                 }
                 default:

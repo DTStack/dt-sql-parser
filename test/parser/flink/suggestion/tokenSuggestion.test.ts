@@ -149,4 +149,16 @@ describe('Flink SQL Token Suggestion', () => {
             expect(suggestion[0].syntaxContextType).toBe(scenario.entityContextType);
         });
     });
+  
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 13,
+            column: 2,
+        };
+        const suggestion = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [12, 14]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

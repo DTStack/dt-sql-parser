@@ -668,6 +668,10 @@ KW_EXTENDED           : 'EXTENDED';
 KW_MAIN               : 'MAIN';
 KW_SKIP_LOCKED        : 'SKIP_LOCKED';
 KW_BUFFER_USAGE_LIMIT : 'BUFFER_USAGE_LIMIT';
+
+KW_FORCE_QUOTE    : 'FORCE_QUOTE';
+KW_FORCE_NOT_NULL : 'FORCE_NOT_NULL';
+KW_FORCE_NULL     : 'FORCE_NULL';
 //
 
 // IDENTIFIERS (4.1.1)
@@ -804,22 +808,19 @@ PLSQLIDENTIFIER: ':"' ('\\' . | '""' | ~ ('"' | '\\'))* '"';
 
 //
 
-Whitespace: [ \t]+ -> channel (HIDDEN);
-
-Newline: ('\r' '\n'? | '\n') -> channel (HIDDEN);
-//
+WHITE_SPACE: (' ' | '\r' | '\t' | '\n') -> channel(HIDDEN);
 
 // COMMENTS (4.1.5)
 
 //
 
-LineComment: '--' ~ [\r\n]* -> channel (HIDDEN);
+LINE_COMMENT: '--' ~ [\r\n]* -> channel (HIDDEN);
 
-BlockComment: ('/*' ( '/'* BlockComment | ~ [/*] | '/'+ ~ [/*] | '*'+ ~ [/*])* '*'* '*/') -> channel (HIDDEN);
+BRACKETED_COMMENT: ('/*' ( '/'* BRACKETED_COMMENT | ~ [/*] | '/'+ ~ [/*] | '*'+ ~ [/*])* '*'* '*/') -> channel (HIDDEN);
 
 UnterminatedBlockComment:
     '/*' (
-        '/'* BlockComment
+        '/'* BRACKETED_COMMENT
         | // these characters are not part of special sequences in a block comment
         ~ [/*]
         |
@@ -886,18 +887,14 @@ InvalidUnterminatedEscapeStringConstant:
 fragment InvalidEscapeStringText: ('\'\'' | '\\' . | ~ ['\\])*;
 
 mode AfterEscapeStringConstantMode;
-AfterEscapeStringConstantMode_Whitespace: Whitespace -> type (Whitespace), channel (HIDDEN);
+AfterEscapeStringConstantMode_Whitespace: WHITE_SPACE -> type (WHITE_SPACE), channel (HIDDEN);
 
-AfterEscapeStringConstantMode_Newline:
-    Newline -> type (Newline), channel (HIDDEN), mode (AfterEscapeStringConstantWithNewlineMode);
 //
 // AfterEscapeStringConstantMode_NotContinued: '\\' ~[\r\n] -> skip, popMode;
 
 mode AfterEscapeStringConstantWithNewlineMode;
 AfterEscapeStringConstantWithNewlineMode_Whitespace:
-    Whitespace -> type (Whitespace), channel (HIDDEN);
-
-AfterEscapeStringConstantWithNewlineMode_Newline: Newline -> type (Newline), channel (HIDDEN);
+    WHITE_SPACE -> type (WHITE_SPACE), channel (HIDDEN);
 
 AfterEscapeStringConstantWithNewlineMode_Continued:
     '\'' -> more, mode (EscapeStringConstantMode);

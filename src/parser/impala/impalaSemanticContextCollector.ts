@@ -7,7 +7,7 @@ class ImpalaSemanticContextCollector
     implements ImpalaSqlParserListener
 {
     override getWhiteSpaceRuleType(): number {
-        return ImpalaSqlParser.WS;
+        return ImpalaSqlParser.WHITE_SPACE;
     }
     override getStatementRuleType(): number {
         return ImpalaSqlParser.RULE_singleStatement;

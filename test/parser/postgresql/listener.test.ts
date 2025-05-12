@@ -11,7 +11,7 @@ describe('PostgreSQL Listener Tests', () => {
     test('Listener enterTableName', async () => {
         class MyListener extends PostgreSqlParserListener {
             result = '';
-            enterTable_ref = (ctx) => {
+            enterTableRef = (ctx) => {
                 this.result = ctx.getText().toLowerCase();
             };
         }

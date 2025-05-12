@@ -26,7 +26,33 @@ describe('Impala SQL Syntax Suggestion', () => {
         );
 
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['cat', '.', 'a']);
+        expect(suggestion?.wordRanges?.length).toBe(3);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'cat',
+                line: 1,
+                startIndex: 14,
+                endIndex: 16,
+                startColumn: 15,
+                endColumn: 18,
+            },
+            {
+                text: '.',
+                line: 1,
+                startIndex: 17,
+                endIndex: 17,
+                startColumn: 18,
+                endColumn: 19,
+            },
+            {
+                text: 'a',
+                line: 1,
+                startIndex: 18,
+                endIndex: 18,
+                startColumn: 19,
+                endColumn: 20,
+            },
+        ]);
     });
 
     test('Function call', () => {

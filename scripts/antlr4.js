@@ -61,7 +61,7 @@ function compile(language) {
                     return newHash !== prevHash;
                 });
 
-                if (changedFiles.length > 0) {
+                if (changedFiles.length > 0 && argv.check) {
                     return reject(`${language} not run antlr4`);
                 }
                 resolve();

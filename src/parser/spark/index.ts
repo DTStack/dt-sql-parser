@@ -39,6 +39,7 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         SparkSqlParser.RULE_functionName,
         SparkSqlParser.RULE_functionNameCreate,
         SparkSqlParser.RULE_columnName,
+        SparkSqlParser.RULE_columnNamePath,
         SparkSqlParser.RULE_columnNameCreate,
     ]);
 
@@ -66,19 +67,14 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (const candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -121,6 +117,23 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
                 case SparkSqlParser.RULE_columnNameCreate: {
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
+                }
+                case SparkSqlParser.RULE_columnNamePath: {
+                    if (
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_joinRelation) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_orderOrSortByClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_groupByClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_aggregationClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_windowClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_selectClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_limitClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_clusterOrDistributeBy)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
                 }
                 default:
                     break;

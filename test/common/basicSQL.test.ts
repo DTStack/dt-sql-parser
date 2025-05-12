@@ -87,11 +87,11 @@ describe('BasicSQL unit tests', () => {
 
         expect(tokens.length).toBe(8);
         expect(tokens[0].type).toBe(FlinkSqlLexer.KW_SELECT);
-        expect(tokens[1].type).toBe(FlinkSqlLexer.SPACE);
+        expect(tokens[1].type).toBe(FlinkSqlLexer.WHITE_SPACE);
         expect(tokens[2].type).toBe(FlinkSqlLexer.ASTERISK_SIGN);
-        expect(tokens[3].type).toBe(FlinkSqlLexer.SPACE);
+        expect(tokens[3].type).toBe(FlinkSqlLexer.WHITE_SPACE);
         expect(tokens[4].type).toBe(FlinkSqlLexer.KW_FROM);
-        expect(tokens[5].type).toBe(FlinkSqlLexer.SPACE);
+        expect(tokens[5].type).toBe(FlinkSqlLexer.WHITE_SPACE);
         expect(tokens[6].type).toBe(FlinkSqlLexer.ID_LITERAL);
         expect(tokens[7].type).toBe(FlinkSqlLexer.SEMICOLON);
     });

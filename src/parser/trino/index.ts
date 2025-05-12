@@ -62,25 +62,21 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         TrinoSqlParser.RULE_functionName,
         TrinoSqlParser.RULE_functionNameCreate,
         TrinoSqlParser.RULE_columnRef,
+        TrinoSqlParser.RULE_columnName,
         TrinoSqlParser.RULE_columnNameCreate,
     ]);
 
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -131,6 +127,19 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                 case TrinoSqlParser.RULE_columnRef: {
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
+                }
+                case TrinoSqlParser.RULE_columnName: {
+                    if (
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_groupBy) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_sortItem) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_partitionBy) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_relation)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
                 }
                 default:
                     break;

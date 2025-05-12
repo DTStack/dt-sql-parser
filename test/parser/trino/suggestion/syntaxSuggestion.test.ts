@@ -32,7 +32,33 @@ describe('Trino SQL Syntax Suggestion', () => {
             (syn) => syn.syntaxContextType === EntityContextType.TABLE
         );
         expect(suggestion).not.toBeUndefined();
-        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.', 'tb']);
+        expect(suggestion?.wordRanges?.length).toBe(3);
+        expect(suggestion?.wordRanges).toEqual([
+            {
+                text: 'db',
+                line: 1,
+                startIndex: 12,
+                endIndex: 13,
+                startColumn: 13,
+                endColumn: 15,
+            },
+            {
+                text: '.',
+                line: 1,
+                startIndex: 14,
+                endIndex: 14,
+                startColumn: 15,
+                endColumn: 16,
+            },
+            {
+                text: 'tb',
+                line: 1,
+                startIndex: 15,
+                endIndex: 16,
+                startColumn: 16,
+                endColumn: 18,
+            },
+        ]);
     });
 
     test('Select table ', () => {
@@ -418,5 +444,124 @@ describe('Trino SQL Syntax Suggestion', () => {
 
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
+    });
+
+    test('GroupBy expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 47,
+            column: 44,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['sum', '(']);
+    });
+
+    test('Where expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 49,
+            column: 42,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['b']);
+    });
+
+    test('Having expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 51,
+            column: 75,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['amount']);
+    });
+
+    test('Order by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 53,
+            column: 32,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['t', '.', 'y']);
+    });
+
+    test('Partition by expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 55,
+            column: 59,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['clerk']);
+    });
+
+    test('Case When expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 57,
+            column: 67,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['amount']);
+    });
+
+    test('Join expression column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 59,
+            column: 46,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['friends']);
     });
 });

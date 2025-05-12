@@ -11,7 +11,16 @@ WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC)
  OFFSET start ROWS 
   FOR UPDATE OF table_name, table_name2 NOWAIT;
 SELECT;
-
+with func as (
+    merge into functoids f
+    using (select 1::int as func_id) as n
+      on f.func_id = n.func_id 
+    when matched then
+  update set updated_at = now()
+when not matched then
+  insert default values
+  returning f.func_id
+) select * from func;
 SELECT * FROM db.tbs GROUP BY (col1 > 3, col2 < 8) ORDER BY col3 > 9;
 
 WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) INTERSECT DISTINCT (SELECT * FROM others) ORDER BY salary ASC OFFSET start FETCH NEXT ROW ONLY FOR NO KEY UPDATE;

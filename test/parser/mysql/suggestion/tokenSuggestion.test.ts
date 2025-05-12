@@ -285,4 +285,16 @@ describe('MySQL Token Suggestion', () => {
         expect(suggestion).toContain('NOT');
         expect(suggestion).toContain('NOT EXISTS');
     });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 21,
+            column: 2,
+        };
+        const suggestion = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [20, 22]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
+    });
 });

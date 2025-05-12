@@ -186,7 +186,7 @@ statement
         KW_USING indexType=identifier
     )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)? # createIndex
     | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName                          # dropIndex
-    | KW_OPTIMIZE tableName whereClause? KW_ZORDER KW_BY columnNameSeq                           # optimizeTable
+    | KW_OPTIMIZE tableName whereClause? zOrderClause                                            # optimizeTable
     | unsupportedHiveNativeCommands .*?                                                          # unsupportHiveCommands
     ;
 
@@ -235,6 +235,14 @@ skewSpec
     : KW_SKEWED KW_BY identifierList KW_ON (constantList | nestedConstantList) (
         KW_STORED KW_AS KW_DIRECTORIES
     )?
+    ;
+
+locationSpec
+    : KW_LOCATION stringLit
+    ;
+
+commentSpec
+    : KW_COMMENT comment=stringLit
     ;
 
 query
@@ -410,6 +418,10 @@ columnName
     | {this.shouldMatchEmpty()}?
     ;
 
+columnNamePath
+    : multipartIdentifier
+    ;
+
 columnNameSeq
     : columnName (COMMA columnName)*
     ;
@@ -424,11 +436,23 @@ identifierReference
     ;
 
 queryOrganization
-    : (KW_ORDER KW_BY order+=sortItem (COMMA order+=sortItem)*)? (
-        KW_CLUSTER KW_BY clusterBy+=expression (COMMA clusterBy+=expression)*
-    )? (KW_DISTRIBUTE KW_BY distributeBy+=expression (COMMA distributeBy+=expression)*)? (
-        KW_SORT KW_BY sort+=sortItem (COMMA sort+=sortItem)*
-    )? windowClause? (KW_LIMIT (KW_ALL | limit=expression))? (KW_OFFSET offset=expression)?
+    : (KW_ORDER KW_BY orderOrSortByClause)? (KW_CLUSTER KW_BY clusterOrDistributeBy)? (
+        KW_DISTRIBUTE KW_BY clusterOrDistributeBy
+    )? (KW_SORT KW_BY orderOrSortByClause)? windowClause? limitClause? (
+        KW_OFFSET offset=expression
+    )?
+    ;
+
+limitClause
+    : KW_LIMIT (KW_ALL | limit=expression)
+    ;
+
+orderOrSortByClause
+    : sortItem (COMMA sortItem)*
+    ;
+
+clusterOrDistributeBy
+    : expression (COMMA expression)*
     ;
 
 queryTerm
@@ -537,7 +561,7 @@ hintStatement
     ;
 
 fromClause
-    : KW_FROM relation (COMMA relation)* lateralView* pivotClause? unpivotClause?
+    : KW_FROM relation (COMMA relation)* lateralView* pivotClause? unPivotClause?
     ;
 
 temporalClause
@@ -590,31 +614,31 @@ pivotValue
     : expression (KW_AS? identifier)?
     ;
 
-unpivotClause
+unPivotClause
     : KW_UNPIVOT ((KW_INCLUDE | KW_EXCLUDE) KW_NULLS)? LEFT_PAREN (
-        unpivotSingleValueColumnClause
-        | unpivotMultiValueColumnClause
+        unPivotSingleValueColumnClause
+        | unPivotMultiValueColumnClause
     ) RIGHT_PAREN (KW_AS? identifier)?
     ;
 
-unpivotSingleValueColumnClause
-    : identifier KW_FOR identifier KW_IN LEFT_PAREN unpivotColumns+=unpivotColumnAndAlias (
-        COMMA unpivotColumns+=unpivotColumnAndAlias
+unPivotSingleValueColumnClause
+    : identifier KW_FOR identifier KW_IN LEFT_PAREN unPivotColumns+=unPivotColumnAndAlias (
+        COMMA unPivotColumns+=unPivotColumnAndAlias
     )* RIGHT_PAREN
     ;
 
-unpivotMultiValueColumnClause
-    : LEFT_PAREN unpivotValueColumns+=identifier (COMMA unpivotValueColumns+=identifier)* RIGHT_PAREN KW_FOR identifier KW_IN LEFT_PAREN
-        unpivotColumnSets+=unpivotColumnSet (COMMA unpivotColumnSets+=unpivotColumnSet)* RIGHT_PAREN
+unPivotMultiValueColumnClause
+    : LEFT_PAREN unPivotValueColumns+=identifier (COMMA unPivotValueColumns+=identifier)* RIGHT_PAREN KW_FOR identifier KW_IN LEFT_PAREN
+        unPivotColumnSets+=unPivotColumnSet (COMMA unPivotColumnSets+=unPivotColumnSet)* RIGHT_PAREN
     ;
 
-unpivotColumnSet
-    : LEFT_PAREN unpivotColumns+=multipartIdentifier (COMMA unpivotColumns+=multipartIdentifier)* RIGHT_PAREN (
+unPivotColumnSet
+    : LEFT_PAREN unPivotColumns+=multipartIdentifier (COMMA unPivotColumns+=multipartIdentifier)* RIGHT_PAREN (
         KW_AS? identifier
     )?
     ;
 
-unpivotColumnAndAlias
+unPivotColumnAndAlias
     : multipartIdentifier (KW_AS? identifier)?
     ;
 
@@ -639,7 +663,7 @@ setQuantifier
 
 relation
     : tableName
-    | KW_LATERAL? relationPrimary (joinRelation | pivotClause | unpivotClause)*
+    | KW_LATERAL? relationPrimary (joinRelation | pivotClause | unPivotClause)*
     ;
 
 joinRelation
@@ -722,11 +746,7 @@ tableArgumentPartitioning
                 | partition+=expression
             )
         )
-    ) (
-        (KW_ORDER | KW_SORT) KW_BY (
-            ((LEFT_PAREN sortItem (COMMA sortItem)* RIGHT_PAREN) | sortItem)
-        )
-    )?
+    ) ((KW_ORDER | KW_SORT) KW_BY ( ((LEFT_PAREN orderOrSortByClause RIGHT_PAREN) | sortItem)))?
     ;
 
 functionTableNamedArgumentExpression
@@ -906,7 +926,7 @@ primaryExpression
     | identifier ARROW expression
     | LEFT_PAREN identifier (COMMA identifier)+ RIGHT_PAREN ARROW expression
     | value=primaryExpression LEFT_BRACKET index=valueExpression RIGHT_BRACKET
-    | identifier
+    | columnNamePath
     | base=primaryExpression DOT fieldName=identifier
     | LEFT_PAREN expression RIGHT_PAREN
     | KW_EXTRACT LEFT_PAREN field=identifier KW_FROM source=valueExpression RIGHT_PAREN
@@ -1152,6 +1172,10 @@ windowClause
     )*
     ;
 
+zOrderClause
+    : KW_ZORDER KW_BY columnNameSeq
+    ;
+
 windowSpec
     : name=errorCapturingIdentifier
     | LEFT_PAREN name=errorCapturingIdentifier RIGHT_PAREN
@@ -1161,7 +1185,7 @@ windowSpec
             (KW_PARTITION | KW_DISTRIBUTE) KW_BY partition+=expression (
                 COMMA partition+=expression
             )*
-        )? ((KW_ORDER | KW_SORT) KW_BY sortItem (COMMA sortItem)*)?
+        )? ((KW_ORDER | KW_SORT) KW_BY orderOrSortByClause)?
     ) windowFrame? RIGHT_PAREN
     ;
 

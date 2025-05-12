@@ -38,8 +38,12 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         FlinkSqlParser.RULE_viewPath, // view name path
         FlinkSqlParser.RULE_viewPathCreate, // viewName that will be created
         FlinkSqlParser.RULE_functionName, // functionName
+        FlinkSqlParser.RULE_functionNameWithParams, // functionName
+        FlinkSqlParser.RULE_reservedKeywordsFollowParamsUsedAsFuncName, // functionName
+        FlinkSqlParser.RULE_reservedKeywordsNoParamsUsedAsFuncName, // functionName
         FlinkSqlParser.RULE_functionNameCreate, // functionName that will be created
         FlinkSqlParser.RULE_columnName,
+        FlinkSqlParser.RULE_columnNamePath,
         FlinkSqlParser.RULE_columnNameCreate,
         FlinkSqlParser.RULE_tablePropertyKey,
         FlinkSqlParser.RULE_tablePropertyValue,
@@ -69,19 +73,14 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -113,7 +112,10 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                     syntaxContextType = EntityContextType.VIEW_CREATE;
                     break;
                 }
-                case FlinkSqlParser.RULE_functionName: {
+                case FlinkSqlParser.RULE_functionName:
+                case FlinkSqlParser.RULE_functionNameWithParams:
+                case FlinkSqlParser.RULE_reservedKeywordsFollowParamsUsedAsFuncName:
+                case FlinkSqlParser.RULE_reservedKeywordsNoParamsUsedAsFuncName: {
                     syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
@@ -129,6 +131,19 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
+                case FlinkSqlParser.RULE_columnNamePath: {
+                    if (
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_selectClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_groupByClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_limitClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(FlinkSqlParser.RULE_havingClause)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
+                    break;
+                }
                 case FlinkSqlParser.RULE_tablePropertyKey: {
                     syntaxContextType = EntityContextType.TABLE_PROPERTY_KEY;
                     break;
@@ -136,7 +151,6 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                 case FlinkSqlParser.RULE_tablePropertyValue: {
                     syntaxContextType = EntityContextType.TABLE_PROPERTY_VALUE;
                     break;
-                }
                 default:
                     break;
             }

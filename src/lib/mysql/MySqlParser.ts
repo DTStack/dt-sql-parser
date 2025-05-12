@@ -17,9 +17,9 @@ import { SQLParserBase } from '../SQLParserBase';
 
 
 export class MySqlParser extends SQLParserBase {
-    public static readonly SPACE = 1;
+    public static readonly WHITE_SPACE = 1;
     public static readonly SPEC_MYSQL_COMMENT = 2;
-    public static readonly COMMENT_INPUT = 3;
+    public static readonly BRACKETED_COMMENT = 3;
     public static readonly LINE_COMMENT = 4;
     public static readonly KW_ACTIVE = 5;
     public static readonly KW_ADD = 6;
@@ -927,15 +927,15 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_createDatabase = 12;
     public static readonly RULE_createEvent = 13;
     public static readonly RULE_createIndex = 14;
-    public static readonly RULE_createLogfileGroup = 15;
+    public static readonly RULE_createLogFileGroup = 15;
     public static readonly RULE_createProcedure = 16;
     public static readonly RULE_createFunction = 17;
     public static readonly RULE_createFunctionLoadable = 18;
     public static readonly RULE_createRole = 19;
     public static readonly RULE_createServer = 20;
     public static readonly RULE_createTable = 21;
-    public static readonly RULE_createTablespaceInnodb = 22;
-    public static readonly RULE_createTablespaceNdb = 23;
+    public static readonly RULE_createTableSpaceInnoDB = 22;
+    public static readonly RULE_createTableSpaceNDB = 23;
     public static readonly RULE_createTrigger = 24;
     public static readonly RULE_withClause = 25;
     public static readonly RULE_commonTableExpressions = 26;
@@ -966,37 +966,37 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_referenceControlType = 51;
     public static readonly RULE_tableOption = 52;
     public static readonly RULE_tableType = 53;
-    public static readonly RULE_tablespaceStorage = 54;
+    public static readonly RULE_tableSpaceStorage = 54;
     public static readonly RULE_partitionDefinitions = 55;
     public static readonly RULE_partitionFunctionDefinition = 56;
     public static readonly RULE_subpartitionFunctionDefinition = 57;
     public static readonly RULE_partitionDefinition = 58;
     public static readonly RULE_partitionDefinerAtom = 59;
     public static readonly RULE_partitionDefinerVector = 60;
-    public static readonly RULE_subpartitionDefinition = 61;
+    public static readonly RULE_subPartitionDefinition = 61;
     public static readonly RULE_partitionOption = 62;
     public static readonly RULE_alterDatabase = 63;
     public static readonly RULE_alterEvent = 64;
     public static readonly RULE_alterFunction = 65;
     public static readonly RULE_alterInstance = 66;
-    public static readonly RULE_alterLogfileGroup = 67;
+    public static readonly RULE_alterLogFileGroup = 67;
     public static readonly RULE_alterProcedure = 68;
     public static readonly RULE_alterServer = 69;
     public static readonly RULE_alterTable = 70;
-    public static readonly RULE_alterTablespace = 71;
+    public static readonly RULE_alterTableSpace = 71;
     public static readonly RULE_alterView = 72;
     public static readonly RULE_alterOption = 73;
     public static readonly RULE_alterPartitionSpecification = 74;
     public static readonly RULE_dropDatabase = 75;
     public static readonly RULE_dropEvent = 76;
     public static readonly RULE_dropIndex = 77;
-    public static readonly RULE_dropLogfileGroup = 78;
+    public static readonly RULE_dropLogFileGroup = 78;
     public static readonly RULE_dropProcedure = 79;
     public static readonly RULE_dropFunction = 80;
     public static readonly RULE_dropServer = 81;
     public static readonly RULE_dropSpatial = 82;
     public static readonly RULE_dropTable = 83;
-    public static readonly RULE_dropTablespace = 84;
+    public static readonly RULE_dropTableSpace = 84;
     public static readonly RULE_dropTrigger = 85;
     public static readonly RULE_dropView = 86;
     public static readonly RULE_dropRole = 87;
@@ -1077,7 +1077,7 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_beginWork = 162;
     public static readonly RULE_commitWork = 163;
     public static readonly RULE_rollbackWork = 164;
-    public static readonly RULE_savepointStatement = 165;
+    public static readonly RULE_savePointStatement = 165;
     public static readonly RULE_rollbackStatement = 166;
     public static readonly RULE_releaseStatement = 167;
     public static readonly RULE_lockTables = 168;
@@ -1141,7 +1141,7 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_handlerConditionValue = 226;
     public static readonly RULE_procedureSqlStatement = 227;
     public static readonly RULE_caseAlternative = 228;
-    public static readonly RULE_elifAlternative = 229;
+    public static readonly RULE_elseIfAlternative = 229;
     public static readonly RULE_alterUser = 230;
     public static readonly RULE_createUser = 231;
     public static readonly RULE_dropUser = 232;
@@ -1152,7 +1152,7 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_createResourceGroup = 237;
     public static readonly RULE_dropResourceGroup = 238;
     public static readonly RULE_setResourceGroup = 239;
-    public static readonly RULE_resourceGroupVcpuSpec = 240;
+    public static readonly RULE_resourceGroupVCpuSpec = 240;
     public static readonly RULE_renameUser = 241;
     public static readonly RULE_revokeStatement = 242;
     public static readonly RULE_ignoreUnknownUser = 243;
@@ -1172,7 +1172,7 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_factorAuthOption = 257;
     public static readonly RULE_registrationOption = 258;
     public static readonly RULE_factor = 259;
-    public static readonly RULE_privelegeClause = 260;
+    public static readonly RULE_privilegeClause = 260;
     public static readonly RULE_privilege = 261;
     public static readonly RULE_privilegeLevel = 262;
     public static readonly RULE_renameUserClause = 263;
@@ -1197,7 +1197,7 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_showGlobalInfoClause = 282;
     public static readonly RULE_showSchemaEntity = 283;
     public static readonly RULE_showProfileType = 284;
-    public static readonly RULE_binlogStatement = 285;
+    public static readonly RULE_binLogStatement = 285;
     public static readonly RULE_cacheIndexStatement = 286;
     public static readonly RULE_flushStatement = 287;
     public static readonly RULE_killStatement = 288;
@@ -1244,8 +1244,8 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_columnNameCreate = 329;
     public static readonly RULE_columnNames = 330;
     public static readonly RULE_columnName = 331;
-    public static readonly RULE_tablespaceNameCreate = 332;
-    public static readonly RULE_tablespaceName = 333;
+    public static readonly RULE_tableSpaceNameCreate = 332;
+    public static readonly RULE_tableSpaceName = 333;
     public static readonly RULE_partitionNameCreate = 334;
     public static readonly RULE_partitionNames = 335;
     public static readonly RULE_partitionName = 336;
@@ -1273,7 +1273,7 @@ export class MySqlParser extends SQLParserBase {
     public static readonly RULE_stringLiteral = 358;
     public static readonly RULE_booleanLiteral = 359;
     public static readonly RULE_hexadecimalLiteral = 360;
-    public static readonly RULE_nullNotnull = 361;
+    public static readonly RULE_nullNotNull = 361;
     public static readonly RULE_constant = 362;
     public static readonly RULE_dataType = 363;
     public static readonly RULE_collectionOptions = 364;
@@ -1513,46 +1513,46 @@ export class MySqlParser extends SQLParserBase {
     ];
 
     public static readonly symbolicNames = [
-        null, "SPACE", "SPEC_MYSQL_COMMENT", "COMMENT_INPUT", "LINE_COMMENT", 
-        "KW_ACTIVE", "KW_ADD", "KW_ALL", "KW_ALTER", "KW_ALWAYS", "KW_ANALYZE", 
-        "KW_AND", "KW_ARRAY", "KW_AS", "KW_ASC", "KW_ATTRIBUTE", "KW_BEFORE", 
-        "KW_BETWEEN", "KW_BOTH", "KW_BUCKETS", "KW_BY", "KW_CALL", "KW_CASCADE", 
-        "KW_CASE", "KW_CAST", "KW_CHANGE", "KW_CHARACTER", "KW_CHECK", "KW_COLLATE", 
-        "KW_COLUMN", "KW_CONDITION", "KW_CONSTRAINT", "KW_CONTINUE", "KW_CONVERT", 
-        "KW_CREATE", "KW_CROSS", "KW_CURRENT", "KW_CURRENT_USER", "KW_CURSOR", 
-        "KW_DATABASE", "KW_DATABASES", "KW_DECLARE", "KW_DEFAULT", "KW_DELAYED", 
-        "KW_DELETE", "KW_DESC", "KW_DESCRIBE", "KW_DETERMINISTIC", "KW_DIAGNOSTICS", 
-        "KW_DISTINCT", "KW_DISTINCTROW", "KW_DROP", "KW_EACH", "KW_ELSE", 
-        "KW_ELSEIF", "KW_EMPTY", "KW_ENCLOSED", "KW_ENFORCED", "KW_ESCAPED", 
-        "KW_EXCEPT", "KW_EXISTS", "KW_EXIT", "KW_EXPLAIN", "KW_FALSE", "KW_FETCH", 
-        "KW_FOR", "KW_FORCE", "KW_FOREIGN", "KW_FROM", "KW_FULLTEXT", "KW_GENERATE", 
-        "KW_GENERATED", "KW_GET", "KW_GRANT", "KW_GROUP", "KW_HAVING", "KW_HIGH_PRIORITY", 
-        "KW_HISTOGRAM", "KW_IF", "KW_IGNORE", "KW_IN", "KW_INACTIVE", "KW_INDEX", 
-        "KW_INFILE", "KW_INNER", "KW_INOUT", "KW_INSERT", "KW_INTERVAL", 
-        "KW_INTO", "KW_IS", "KW_ITERATE", "KW_JOIN", "KW_KEY", "KW_KEYS", 
-        "KW_KILL", "KW_LATERAL", "KW_LEADING", "KW_LEAVE", "KW_LEFT", "KW_LIKE", 
-        "KW_LIMIT", "KW_LINEAR", "KW_LINES", "KW_LOAD", "KW_LOCK", "KW_LOCKED", 
-        "KW_LOOP", "KW_LOW_PRIORITY", "KW_MASTER_BIND", "KW_MASTER_SSL_VERIFY_SERVER_CERT", 
-        "KW_MATCH", "KW_MAXVALUE", "KW_MODIFIES", "KW_NATURAL", "KW_NOT", 
-        "KW_NO_WRITE_TO_BINLOG", "KW_NULL_LITERAL", "KW_NUMBER", "KW_STREAM", 
-        "KW_ON", "KW_OPTIMIZE", "KW_OPTION", "KW_OPTIONAL", "KW_OPTIONALLY", 
-        "KW_OR", "KW_ORDER", "KW_OUT", "KW_OUTER", "KW_OUTFILE", "KW_OVER", 
-        "KW_PARTITION", "KW_PRIMARY", "KW_PROCEDURE", "KW_PURGE", "KW_RANGE", 
-        "KW_READ", "KW_READS", "KW_REFERENCE", "KW_REFERENCES", "KW_REGEXP", 
-        "KW_RELEASE", "KW_RENAME", "KW_REPEAT", "KW_REPLACE", "KW_REQUIRE", 
-        "KW_RESIGNAL", "KW_RESTRICT", "KW_RETAIN", "KW_RETURN", "KW_REVOKE", 
-        "KW_RIGHT", "KW_RLIKE", "KW_SCHEMA", "KW_SCHEMAS", "KW_SELECT", 
-        "KW_SET", "KW_SEPARATOR", "KW_SHOW", "KW_SIGNAL", "KW_SKIP", "KW_SKIP_QUERY_REWRITE", 
-        "KW_SPATIAL", "KW_SQL", "KW_SQLEXCEPTION", "KW_SQLSTATE", "KW_SQLWARNING", 
-        "KW_SQL_BIG_RESULT", "KW_SQL_CALC_FOUND_ROWS", "KW_SQL_SMALL_RESULT", 
-        "KW_SSL", "KW_STACKED", "KW_STARTING", "KW_STRAIGHT_JOIN", "KW_TABLE", 
-        "KW_TERMINATED", "KW_THEN", "KW_TO", "KW_TRAILING", "KW_TRIGGER", 
-        "KW_TRUE", "KW_UNDO", "KW_UNION", "KW_UNIQUE", "KW_UNLOCK", "KW_UNSIGNED", 
-        "KW_UPDATE", "KW_USAGE", "KW_USE", "KW_USING", "KW_VALUES", "KW_VCPU", 
-        "KW_WHEN", "KW_WHERE", "KW_WHILE", "KW_WITH", "KW_WRITE", "KW_XOR", 
-        "KW_ZEROFILL", "KW_TINYINT", "KW_SMALLINT", "KW_MEDIUMINT", "KW_MIDDLEINT", 
-        "KW_INT", "KW_INT1", "KW_INT2", "KW_INT3", "KW_INT4", "KW_INT8", 
-        "KW_INTEGER", "KW_BIGINT", "KW_REAL", "KW_DOUBLE", "KW_PRECISION", 
+        null, "WHITE_SPACE", "SPEC_MYSQL_COMMENT", "BRACKETED_COMMENT", 
+        "LINE_COMMENT", "KW_ACTIVE", "KW_ADD", "KW_ALL", "KW_ALTER", "KW_ALWAYS", 
+        "KW_ANALYZE", "KW_AND", "KW_ARRAY", "KW_AS", "KW_ASC", "KW_ATTRIBUTE", 
+        "KW_BEFORE", "KW_BETWEEN", "KW_BOTH", "KW_BUCKETS", "KW_BY", "KW_CALL", 
+        "KW_CASCADE", "KW_CASE", "KW_CAST", "KW_CHANGE", "KW_CHARACTER", 
+        "KW_CHECK", "KW_COLLATE", "KW_COLUMN", "KW_CONDITION", "KW_CONSTRAINT", 
+        "KW_CONTINUE", "KW_CONVERT", "KW_CREATE", "KW_CROSS", "KW_CURRENT", 
+        "KW_CURRENT_USER", "KW_CURSOR", "KW_DATABASE", "KW_DATABASES", "KW_DECLARE", 
+        "KW_DEFAULT", "KW_DELAYED", "KW_DELETE", "KW_DESC", "KW_DESCRIBE", 
+        "KW_DETERMINISTIC", "KW_DIAGNOSTICS", "KW_DISTINCT", "KW_DISTINCTROW", 
+        "KW_DROP", "KW_EACH", "KW_ELSE", "KW_ELSEIF", "KW_EMPTY", "KW_ENCLOSED", 
+        "KW_ENFORCED", "KW_ESCAPED", "KW_EXCEPT", "KW_EXISTS", "KW_EXIT", 
+        "KW_EXPLAIN", "KW_FALSE", "KW_FETCH", "KW_FOR", "KW_FORCE", "KW_FOREIGN", 
+        "KW_FROM", "KW_FULLTEXT", "KW_GENERATE", "KW_GENERATED", "KW_GET", 
+        "KW_GRANT", "KW_GROUP", "KW_HAVING", "KW_HIGH_PRIORITY", "KW_HISTOGRAM", 
+        "KW_IF", "KW_IGNORE", "KW_IN", "KW_INACTIVE", "KW_INDEX", "KW_INFILE", 
+        "KW_INNER", "KW_INOUT", "KW_INSERT", "KW_INTERVAL", "KW_INTO", "KW_IS", 
+        "KW_ITERATE", "KW_JOIN", "KW_KEY", "KW_KEYS", "KW_KILL", "KW_LATERAL", 
+        "KW_LEADING", "KW_LEAVE", "KW_LEFT", "KW_LIKE", "KW_LIMIT", "KW_LINEAR", 
+        "KW_LINES", "KW_LOAD", "KW_LOCK", "KW_LOCKED", "KW_LOOP", "KW_LOW_PRIORITY", 
+        "KW_MASTER_BIND", "KW_MASTER_SSL_VERIFY_SERVER_CERT", "KW_MATCH", 
+        "KW_MAXVALUE", "KW_MODIFIES", "KW_NATURAL", "KW_NOT", "KW_NO_WRITE_TO_BINLOG", 
+        "KW_NULL_LITERAL", "KW_NUMBER", "KW_STREAM", "KW_ON", "KW_OPTIMIZE", 
+        "KW_OPTION", "KW_OPTIONAL", "KW_OPTIONALLY", "KW_OR", "KW_ORDER", 
+        "KW_OUT", "KW_OUTER", "KW_OUTFILE", "KW_OVER", "KW_PARTITION", "KW_PRIMARY", 
+        "KW_PROCEDURE", "KW_PURGE", "KW_RANGE", "KW_READ", "KW_READS", "KW_REFERENCE", 
+        "KW_REFERENCES", "KW_REGEXP", "KW_RELEASE", "KW_RENAME", "KW_REPEAT", 
+        "KW_REPLACE", "KW_REQUIRE", "KW_RESIGNAL", "KW_RESTRICT", "KW_RETAIN", 
+        "KW_RETURN", "KW_REVOKE", "KW_RIGHT", "KW_RLIKE", "KW_SCHEMA", "KW_SCHEMAS", 
+        "KW_SELECT", "KW_SET", "KW_SEPARATOR", "KW_SHOW", "KW_SIGNAL", "KW_SKIP", 
+        "KW_SKIP_QUERY_REWRITE", "KW_SPATIAL", "KW_SQL", "KW_SQLEXCEPTION", 
+        "KW_SQLSTATE", "KW_SQLWARNING", "KW_SQL_BIG_RESULT", "KW_SQL_CALC_FOUND_ROWS", 
+        "KW_SQL_SMALL_RESULT", "KW_SSL", "KW_STACKED", "KW_STARTING", "KW_STRAIGHT_JOIN", 
+        "KW_TABLE", "KW_TERMINATED", "KW_THEN", "KW_TO", "KW_TRAILING", 
+        "KW_TRIGGER", "KW_TRUE", "KW_UNDO", "KW_UNION", "KW_UNIQUE", "KW_UNLOCK", 
+        "KW_UNSIGNED", "KW_UPDATE", "KW_USAGE", "KW_USE", "KW_USING", "KW_VALUES", 
+        "KW_VCPU", "KW_WHEN", "KW_WHERE", "KW_WHILE", "KW_WITH", "KW_WRITE", 
+        "KW_XOR", "KW_ZEROFILL", "KW_TINYINT", "KW_SMALLINT", "KW_MEDIUMINT", 
+        "KW_MIDDLEINT", "KW_INT", "KW_INT1", "KW_INT2", "KW_INT3", "KW_INT4", 
+        "KW_INT8", "KW_INTEGER", "KW_BIGINT", "KW_REAL", "KW_DOUBLE", "KW_PRECISION", 
         "KW_FLOAT", "KW_FLOAT4", "KW_FLOAT8", "KW_DECIMAL", "KW_DEC", "KW_NUMERIC", 
         "KW_DATE", "KW_TIME", "KW_TIMESTAMP", "KW_DATETIME", "KW_YEAR", 
         "KW_CHAR", "KW_VARCHAR", "KW_NVARCHAR", "KW_NATIONAL", "KW_BINARY", 
@@ -1715,24 +1715,24 @@ export class MySqlParser extends SQLParserBase {
         "ddlStatement", "dmlStatement", "transactionStatement", "replicationStatement", 
         "preparedStatement", "compoundStatement", "administrationStatement", 
         "utilityStatement", "createDatabase", "createEvent", "createIndex", 
-        "createLogfileGroup", "createProcedure", "createFunction", "createFunctionLoadable", 
-        "createRole", "createServer", "createTable", "createTablespaceInnodb", 
-        "createTablespaceNdb", "createTrigger", "withClause", "commonTableExpressions", 
+        "createLogFileGroup", "createProcedure", "createFunction", "createFunctionLoadable", 
+        "createRole", "createServer", "createTable", "createTableSpaceInnoDB", 
+        "createTableSpaceNDB", "createTrigger", "withClause", "commonTableExpressions", 
         "createView", "createDatabaseOption", "charSet", "currentUserExpression", 
         "ownerStatement", "scheduleExpression", "timestampValue", "intervalExpr", 
         "intervalType", "enableType", "indexType", "indexOption", "procedureParameter", 
         "functionParameter", "routineOption", "serverOption", "createDefinitions", 
         "createDefinition", "checkConstraintDefinition", "constraintSymbol", 
         "columnDefinition", "columnConstraint", "referenceDefinition", "referenceAction", 
-        "referenceControlType", "tableOption", "tableType", "tablespaceStorage", 
+        "referenceControlType", "tableOption", "tableType", "tableSpaceStorage", 
         "partitionDefinitions", "partitionFunctionDefinition", "subpartitionFunctionDefinition", 
         "partitionDefinition", "partitionDefinerAtom", "partitionDefinerVector", 
-        "subpartitionDefinition", "partitionOption", "alterDatabase", "alterEvent", 
-        "alterFunction", "alterInstance", "alterLogfileGroup", "alterProcedure", 
-        "alterServer", "alterTable", "alterTablespace", "alterView", "alterOption", 
+        "subPartitionDefinition", "partitionOption", "alterDatabase", "alterEvent", 
+        "alterFunction", "alterInstance", "alterLogFileGroup", "alterProcedure", 
+        "alterServer", "alterTable", "alterTableSpace", "alterView", "alterOption", 
         "alterPartitionSpecification", "dropDatabase", "dropEvent", "dropIndex", 
-        "dropLogfileGroup", "dropProcedure", "dropFunction", "dropServer", 
-        "dropSpatial", "dropTable", "dropTablespace", "dropTrigger", "dropView", 
+        "dropLogFileGroup", "dropProcedure", "dropFunction", "dropServer", 
+        "dropSpatial", "dropTable", "dropTableSpace", "dropTrigger", "dropView", 
         "dropRole", "setRole", "renameTable", "renameTableClause", "truncateTable", 
         "callStatement", "deleteStatement", "doStatement", "handlerStatement", 
         "insertStatement", "asRowAlias", "selectOrTableOrValues", "interSectStatement", 
@@ -1752,7 +1752,7 @@ export class MySqlParser extends SQLParserBase {
         "selectElements", "selectElement", "intoClause", "selectFieldsInto", 
         "selectLinesInto", "fromClause", "groupByClause", "havingClause", 
         "windowClause", "groupByItem", "limitClause", "limitClauseAtom", 
-        "startTransaction", "beginWork", "commitWork", "rollbackWork", "savepointStatement", 
+        "startTransaction", "beginWork", "commitWork", "rollbackWork", "savePointStatement", 
         "rollbackStatement", "releaseStatement", "lockTables", "unlockTables", 
         "setAutocommitStatement", "setTransactionStatement", "transactionMode", 
         "lockTableElement", "lockAction", "transactionOption", "transactionLevel", 
@@ -1770,22 +1770,22 @@ export class MySqlParser extends SQLParserBase {
         "iterateStatement", "leaveStatement", "loopStatement", "repeatStatement", 
         "returnStatement", "whileStatement", "cursorStatement", "declareVariable", 
         "declareCondition", "declareCursor", "declareHandler", "handlerConditionValue", 
-        "procedureSqlStatement", "caseAlternative", "elifAlternative", "alterUser", 
-        "createUser", "dropUser", "grantStatement", "roleOption", "grantProxy", 
-        "alterResourceGroup", "createResourceGroup", "dropResourceGroup", 
-        "setResourceGroup", "resourceGroupVcpuSpec", "renameUser", "revokeStatement", 
+        "procedureSqlStatement", "caseAlternative", "elseIfAlternative", 
+        "alterUser", "createUser", "dropUser", "grantStatement", "roleOption", 
+        "grantProxy", "alterResourceGroup", "createResourceGroup", "dropResourceGroup", 
+        "setResourceGroup", "resourceGroupVCpuSpec", "renameUser", "revokeStatement", 
         "ignoreUnknownUser", "privilegeObjectType", "setPasswordStatement", 
         "userSpecification", "alterUserAuthOption", "createUserAuthOption", 
         "createUserInitialAuthOption", "userAuthOption", "authOptionClause", 
         "authenticationRule", "tlsOption", "userResourceOption", "userPasswordOption", 
         "userLockOption", "factorAuthOption", "registrationOption", "factor", 
-        "privelegeClause", "privilege", "privilegeLevel", "renameUserClause", 
+        "privilegeClause", "privilege", "privilegeLevel", "renameUserClause", 
         "analyzeTable", "checkTable", "checksumTable", "optimizeTable", 
         "repairTable", "tableActionOption", "checkTableOption", "installComponent", 
         "variableExpr", "uninstallComponent", "installPlugin", "uninstallPlugin", 
         "cloneStatement", "setStatement", "showStatement", "variableClause", 
         "showCommonEntity", "showFilter", "showGlobalInfoClause", "showSchemaEntity", 
-        "showProfileType", "binlogStatement", "cacheIndexStatement", "flushStatement", 
+        "showProfileType", "binLogStatement", "cacheIndexStatement", "flushStatement", 
         "killStatement", "loadIndexIntoCache", "resetStatement", "resetOption", 
         "resetPersist", "resetAllChannel", "reStartStatement", "shutdownStatement", 
         "tableIndex", "flushOption", "flushTableOption", "loadedTableIndexes", 
@@ -1797,13 +1797,13 @@ export class MySqlParser extends SQLParserBase {
         "viewNameCreate", "viewName", "indexNameCreate", "indexNames", "indexName", 
         "groupNameCreate", "groupName", "tableNameCreate", "tableNames", 
         "tableName", "userOrRoleNames", "userOrRoleName", "columnNameCreate", 
-        "columnNames", "columnName", "tablespaceNameCreate", "tablespaceName", 
+        "columnNames", "columnName", "tableSpaceNameCreate", "tableSpaceName", 
         "partitionNameCreate", "partitionNames", "partitionName", "indexColumnName", 
         "userHostPort", "userAtHost", "simpleUserName", "hostName", "userName", 
         "mysqlVariable", "charsetName", "collationName", "engineName", "engineNameBase", 
         "uuidSet", "xid", "xuidStringId", "fullId", "uidList", "uid", "simpleId", 
         "dottedId", "decimalLiteral", "fileSizeLiteral", "stringLiteral", 
-        "booleanLiteral", "hexadecimalLiteral", "nullNotnull", "constant", 
+        "booleanLiteral", "hexadecimalLiteral", "nullNotNull", "constant", 
         "dataType", "collectionOptions", "convertedDataType", "lengthOneDimension", 
         "lengthTwoDimension", "lengthTwoOptionalDimension", "indexColumnNames", 
         "expressions", "valuesOrValueList", "expressionsWithDefaults", "expressionOrDefault", 
@@ -2110,7 +2110,7 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 4);
                 {
                 this.state = 867;
-                this.createLogfileGroup();
+                this.createLogFileGroup();
                 }
                 break;
             case 5:
@@ -2152,14 +2152,14 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 10);
                 {
                 this.state = 873;
-                this.createTablespaceInnodb();
+                this.createTableSpaceInnoDB();
                 }
                 break;
             case 11:
                 this.enterOuterAlt(localContext, 11);
                 {
                 this.state = 874;
-                this.createTablespaceNdb();
+                this.createTableSpaceNDB();
                 }
                 break;
             case 12:
@@ -2215,7 +2215,7 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 19);
                 {
                 this.state = 882;
-                this.alterLogfileGroup();
+                this.alterLogFileGroup();
                 }
                 break;
             case 20:
@@ -2243,7 +2243,7 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 23);
                 {
                 this.state = 886;
-                this.alterTablespace();
+                this.alterTableSpace();
                 }
                 break;
             case 24:
@@ -2278,7 +2278,7 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 28);
                 {
                 this.state = 891;
-                this.dropLogfileGroup();
+                this.dropLogFileGroup();
                 }
                 break;
             case 29:
@@ -2320,7 +2320,7 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 34);
                 {
                 this.state = 897;
-                this.dropTablespace();
+                this.dropTableSpace();
                 }
                 break;
             case 35:
@@ -2562,7 +2562,7 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 5);
                 {
                 this.state = 929;
-                this.savepointStatement();
+                this.savePointStatement();
                 }
                 break;
             case 6:
@@ -3042,7 +3042,7 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 24);
                 {
                 this.state = 992;
-                this.binlogStatement();
+                this.binLogStatement();
                 }
                 break;
             case 25:
@@ -3537,9 +3537,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createLogfileGroup(): CreateLogfileGroupContext {
-        let localContext = new CreateLogfileGroupContext(this.context, this.state);
-        this.enterRule(localContext, 30, MySqlParser.RULE_createLogfileGroup);
+    public createLogFileGroup(): CreateLogFileGroupContext {
+        let localContext = new CreateLogFileGroupContext(this.context, this.state);
+        this.enterRule(localContext, 30, MySqlParser.RULE_createLogFileGroup);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -3551,7 +3551,7 @@ export class MySqlParser extends SQLParserBase {
             this.state = 1094;
             this.match(MySqlParser.KW_GROUP);
             this.state = 1095;
-            localContext._logfileGroupName = this.uid();
+            localContext._logFileGroupName = this.uid();
             this.state = 1096;
             this.match(MySqlParser.KW_ADD);
             this.state = 1097;
@@ -3642,7 +3642,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 1124;
-                localContext._nodegroup = this.uid();
+                localContext._nodeGroup = this.uid();
                 }
             }
 
@@ -4967,9 +4967,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createTablespaceInnodb(): CreateTablespaceInnodbContext {
-        let localContext = new CreateTablespaceInnodbContext(this.context, this.state);
-        this.enterRule(localContext, 44, MySqlParser.RULE_createTablespaceInnodb);
+    public createTableSpaceInnoDB(): CreateTableSpaceInnoDBContext {
+        let localContext = new CreateTableSpaceInnoDBContext(this.context, this.state);
+        this.enterRule(localContext, 44, MySqlParser.RULE_createTableSpaceInnoDB);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -4989,7 +4989,7 @@ export class MySqlParser extends SQLParserBase {
             this.state = 1332;
             this.match(MySqlParser.KW_TABLESPACE);
             this.state = 1333;
-            this.tablespaceNameCreate();
+            this.tableSpaceNameCreate();
             this.state = 1337;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -5022,7 +5022,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 1343;
-                localContext._autoextendSize = this.fileSizeLiteral();
+                localContext._autoExtendSize = this.fileSizeLiteral();
                 }
             }
 
@@ -5100,9 +5100,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public createTablespaceNdb(): CreateTablespaceNdbContext {
-        let localContext = new CreateTablespaceNdbContext(this.context, this.state);
-        this.enterRule(localContext, 46, MySqlParser.RULE_createTablespaceNdb);
+    public createTableSpaceNDB(): CreateTableSpaceNDBContext {
+        let localContext = new CreateTableSpaceNDBContext(this.context, this.state);
+        this.enterRule(localContext, 46, MySqlParser.RULE_createTableSpaceNDB);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -5122,7 +5122,7 @@ export class MySqlParser extends SQLParserBase {
             this.state = 1369;
             this.match(MySqlParser.KW_TABLESPACE);
             this.state = 1370;
-            this.tablespaceNameCreate();
+            this.tableSpaceNameCreate();
             this.state = 1371;
             this.match(MySqlParser.KW_ADD);
             this.state = 1372;
@@ -5136,7 +5136,7 @@ export class MySqlParser extends SQLParserBase {
             this.state = 1376;
             this.match(MySqlParser.KW_GROUP);
             this.state = 1377;
-            localContext._logfileGroupName = this.uid();
+            localContext._logFileGroupName = this.uid();
             this.state = 1383;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -5199,7 +5199,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 1396;
-                localContext._autoextendSize = this.fileSizeLiteral();
+                localContext._autoExtendSize = this.fileSizeLiteral();
                 }
             }
 
@@ -5243,7 +5243,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 1410;
-                localContext._nodegroup = this.uid();
+                localContext._nodeGroup = this.uid();
                 }
             }
 
@@ -7416,7 +7416,7 @@ export class MySqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 1);
                 {
                 this.state = 1858;
-                this.nullNotnull();
+                this.nullNotNull();
                 }
                 break;
             case MySqlParser.KW_DEFAULT:
@@ -7919,7 +7919,7 @@ export class MySqlParser extends SQLParserBase {
                 }
                 break;
             case 3:
-                localContext = new TableOptionAutoextendSizeContext(localContext);
+                localContext = new TableOptionAutoExtendSizeContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 1955;
@@ -8671,20 +8671,20 @@ export class MySqlParser extends SQLParserBase {
                 }
                 break;
             case 31:
-                localContext = new TableOptionTablespaceContext(localContext);
+                localContext = new TableOptionTableSpaceContext(localContext);
                 this.enterOuterAlt(localContext, 31);
                 {
                 this.state = 2106;
                 this.match(MySqlParser.KW_TABLESPACE);
                 this.state = 2107;
-                this.tablespaceName();
+                this.tableSpaceName();
                 this.state = 2109;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 220, this.context) ) {
                 case 1:
                     {
                     this.state = 2108;
-                    this.tablespaceStorage();
+                    this.tableSpaceStorage();
                     }
                     break;
                 }
@@ -8703,11 +8703,11 @@ export class MySqlParser extends SQLParserBase {
                 }
                 break;
             case 33:
-                localContext = new TableOptionTablespaceContext(localContext);
+                localContext = new TableOptionTableSpaceContext(localContext);
                 this.enterOuterAlt(localContext, 33);
                 {
                 this.state = 2114;
-                this.tablespaceStorage();
+                this.tableSpaceStorage();
                 }
                 break;
             case 34:
@@ -8809,9 +8809,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tablespaceStorage(): TablespaceStorageContext {
-        let localContext = new TablespaceStorageContext(this.context, this.state);
-        this.enterRule(localContext, 108, MySqlParser.RULE_tablespaceStorage);
+    public tableSpaceStorage(): TableSpaceStorageContext {
+        let localContext = new TableSpaceStorageContext(this.context, this.state);
+        this.enterRule(localContext, 108, MySqlParser.RULE_tableSpaceStorage);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -9274,7 +9274,7 @@ export class MySqlParser extends SQLParserBase {
                     this.state = 2256;
                     this.match(MySqlParser.LR_BRACKET);
                     this.state = 2257;
-                    this.subpartitionDefinition();
+                    this.subPartitionDefinition();
                     this.state = 2262;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
@@ -9284,7 +9284,7 @@ export class MySqlParser extends SQLParserBase {
                         this.state = 2258;
                         this.match(MySqlParser.COMMA);
                         this.state = 2259;
-                        this.subpartitionDefinition();
+                        this.subPartitionDefinition();
                         }
                         }
                         this.state = 2264;
@@ -9336,7 +9336,7 @@ export class MySqlParser extends SQLParserBase {
                     this.state = 2281;
                     this.match(MySqlParser.LR_BRACKET);
                     this.state = 2282;
-                    this.subpartitionDefinition();
+                    this.subPartitionDefinition();
                     this.state = 2287;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
@@ -9346,7 +9346,7 @@ export class MySqlParser extends SQLParserBase {
                         this.state = 2283;
                         this.match(MySqlParser.COMMA);
                         this.state = 2284;
-                        this.subpartitionDefinition();
+                        this.subPartitionDefinition();
                         }
                         }
                         this.state = 2289;
@@ -9416,7 +9416,7 @@ export class MySqlParser extends SQLParserBase {
                     this.state = 2314;
                     this.match(MySqlParser.LR_BRACKET);
                     this.state = 2315;
-                    this.subpartitionDefinition();
+                    this.subPartitionDefinition();
                     this.state = 2320;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
@@ -9426,7 +9426,7 @@ export class MySqlParser extends SQLParserBase {
                         this.state = 2316;
                         this.match(MySqlParser.COMMA);
                         this.state = 2317;
-                        this.subpartitionDefinition();
+                        this.subPartitionDefinition();
                         }
                         }
                         this.state = 2322;
@@ -9496,7 +9496,7 @@ export class MySqlParser extends SQLParserBase {
                     this.state = 2347;
                     this.match(MySqlParser.LR_BRACKET);
                     this.state = 2348;
-                    this.subpartitionDefinition();
+                    this.subPartitionDefinition();
                     this.state = 2353;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
@@ -9506,7 +9506,7 @@ export class MySqlParser extends SQLParserBase {
                         this.state = 2349;
                         this.match(MySqlParser.COMMA);
                         this.state = 2350;
-                        this.subpartitionDefinition();
+                        this.subPartitionDefinition();
                         }
                         }
                         this.state = 2355;
@@ -9550,7 +9550,7 @@ export class MySqlParser extends SQLParserBase {
                     this.state = 2368;
                     this.match(MySqlParser.LR_BRACKET);
                     this.state = 2369;
-                    this.subpartitionDefinition();
+                    this.subPartitionDefinition();
                     this.state = 2374;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
@@ -9560,7 +9560,7 @@ export class MySqlParser extends SQLParserBase {
                         this.state = 2370;
                         this.match(MySqlParser.COMMA);
                         this.state = 2371;
-                        this.subpartitionDefinition();
+                        this.subPartitionDefinition();
                         }
                         }
                         this.state = 2376;
@@ -9679,9 +9679,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public subpartitionDefinition(): SubpartitionDefinitionContext {
-        let localContext = new SubpartitionDefinitionContext(this.context, this.state);
-        this.enterRule(localContext, 122, MySqlParser.RULE_subpartitionDefinition);
+    public subPartitionDefinition(): SubPartitionDefinitionContext {
+        let localContext = new SubPartitionDefinitionContext(this.context, this.state);
+        this.enterRule(localContext, 122, MySqlParser.RULE_subPartitionDefinition);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -9875,7 +9875,7 @@ export class MySqlParser extends SQLParserBase {
                 }
                 break;
             case MySqlParser.KW_TABLESPACE:
-                localContext = new PartitionOptionTablespaceContext(localContext);
+                localContext = new PartitionOptionTableSpaceContext(localContext);
                 this.enterOuterAlt(localContext, 7);
                 {
                 this.state = 2444;
@@ -9891,7 +9891,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 2448;
-                this.tablespaceName();
+                this.tableSpaceName();
                 }
                 break;
             case MySqlParser.KW_NODEGROUP:
@@ -9911,7 +9911,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 2453;
-                (localContext as PartitionOptionNodeGroupContext)._nodegroup = this.uid();
+                (localContext as PartitionOptionNodeGroupContext)._nodeGroup = this.uid();
                 }
                 break;
             default:
@@ -10228,9 +10228,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterLogfileGroup(): AlterLogfileGroupContext {
-        let localContext = new AlterLogfileGroupContext(this.context, this.state);
-        this.enterRule(localContext, 134, MySqlParser.RULE_alterLogfileGroup);
+    public alterLogFileGroup(): AlterLogFileGroupContext {
+        let localContext = new AlterLogFileGroupContext(this.context, this.state);
+        this.enterRule(localContext, 134, MySqlParser.RULE_alterLogFileGroup);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -10242,7 +10242,7 @@ export class MySqlParser extends SQLParserBase {
             this.state = 2529;
             this.match(MySqlParser.KW_GROUP);
             this.state = 2530;
-            localContext._logfileGroupName = this.uid();
+            localContext._logFileGroupName = this.uid();
             this.state = 2531;
             this.match(MySqlParser.KW_ADD);
             this.state = 2532;
@@ -10489,9 +10489,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public alterTablespace(): AlterTablespaceContext {
-        let localContext = new AlterTablespaceContext(this.context, this.state);
-        this.enterRule(localContext, 142, MySqlParser.RULE_alterTablespace);
+    public alterTableSpace(): AlterTableSpaceContext {
+        let localContext = new AlterTableSpaceContext(this.context, this.state);
+        this.enterRule(localContext, 142, MySqlParser.RULE_alterTableSpace);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -10511,7 +10511,7 @@ export class MySqlParser extends SQLParserBase {
             this.state = 2600;
             this.match(MySqlParser.KW_TABLESPACE);
             this.state = 2601;
-            this.tablespaceName();
+            this.tableSpaceName();
             this.state = 2602;
             _la = this.tokenStream.LA(1);
             if(!(_la === 6 || _la === 51)) {
@@ -10567,7 +10567,7 @@ export class MySqlParser extends SQLParserBase {
                 this.state = 2616;
                 this.match(MySqlParser.KW_TO);
                 this.state = 2617;
-                this.tablespaceNameCreate();
+                this.tableSpaceNameCreate();
                 }
                 break;
             }
@@ -11743,7 +11743,7 @@ export class MySqlParser extends SQLParserBase {
                 }
                 break;
             case 19:
-                localContext = new AlterTablespaceOptionContext(localContext);
+                localContext = new AlterTableSpaceOptionContext(localContext);
                 this.enterOuterAlt(localContext, 19);
                 {
                 this.state = 2891;
@@ -11996,7 +11996,7 @@ export class MySqlParser extends SQLParserBase {
                 this.state = 2929;
                 this.match(MySqlParser.KW_COLUMN);
                 this.state = 2930;
-                (localContext as AlterByRenameColumnContext)._olcdColumn = this.columnName();
+                (localContext as AlterByRenameColumnContext)._oldColumn = this.columnName();
                 this.state = 2931;
                 this.match(MySqlParser.KW_TO);
                 this.state = 2932;
@@ -16987,10 +16987,10 @@ export class MySqlParser extends SQLParserBase {
             case 1:
                 {
                 this.state = 3066;
-                localContext._intimeAction = this.tokenStream.LT(1);
+                localContext._inTimeAction = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 508 || _la === 514)) {
-                    localContext._intimeAction = this.errorHandler.recoverInline(this);
+                    localContext._inTimeAction = this.errorHandler.recoverInline(this);
                 }
                 else {
                     this.errorHandler.reportMatch(this);
@@ -17091,9 +17091,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public dropLogfileGroup(): DropLogfileGroupContext {
-        let localContext = new DropLogfileGroupContext(this.context, this.state);
-        this.enterRule(localContext, 156, MySqlParser.RULE_dropLogfileGroup);
+    public dropLogFileGroup(): DropLogFileGroupContext {
+        let localContext = new DropLogFileGroupContext(this.context, this.state);
+        this.enterRule(localContext, 156, MySqlParser.RULE_dropLogFileGroup);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -17105,7 +17105,7 @@ export class MySqlParser extends SQLParserBase {
             this.state = 3089;
             this.match(MySqlParser.KW_GROUP);
             this.state = 3090;
-            localContext._logfileGroupName = this.uid();
+            localContext._logFileGroupName = this.uid();
             this.state = 3091;
             this.match(MySqlParser.KW_ENGINE);
             this.state = 3093;
@@ -17360,9 +17360,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public dropTablespace(): DropTablespaceContext {
-        let localContext = new DropTablespaceContext(this.context, this.state);
-        this.enterRule(localContext, 168, MySqlParser.RULE_dropTablespace);
+    public dropTableSpace(): DropTableSpaceContext {
+        let localContext = new DropTableSpaceContext(this.context, this.state);
+        this.enterRule(localContext, 168, MySqlParser.RULE_dropTableSpace);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -17382,7 +17382,7 @@ export class MySqlParser extends SQLParserBase {
             this.state = 3143;
             this.match(MySqlParser.KW_TABLESPACE);
             this.state = 3144;
-            this.tablespaceName();
+            this.tableSpaceName();
             this.state = 3150;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
@@ -23944,7 +23944,7 @@ export class MySqlParser extends SQLParserBase {
                 this.state = 4333;
                 this.match(MySqlParser.KW_BY);
                 this.state = 4334;
-                localContext._enclosion = this.match(MySqlParser.STRING_LITERAL);
+                localContext._enClosion = this.match(MySqlParser.STRING_LITERAL);
                 }
                 break;
             case MySqlParser.KW_ESCAPED:
@@ -25032,7 +25032,7 @@ export class MySqlParser extends SQLParserBase {
                 if (_la === 502) {
                     {
                     this.state = 4434;
-                    localContext._nochain = this.match(MySqlParser.KW_NO);
+                    localContext._noChain = this.match(MySqlParser.KW_NO);
                     }
                 }
 
@@ -25052,7 +25052,7 @@ export class MySqlParser extends SQLParserBase {
                 if (_la === 502) {
                     {
                     this.state = 4440;
-                    localContext._norelease = this.match(MySqlParser.KW_NO);
+                    localContext._noRelease = this.match(MySqlParser.KW_NO);
                     }
                 }
 
@@ -25109,7 +25109,7 @@ export class MySqlParser extends SQLParserBase {
                 if (_la === 502) {
                     {
                     this.state = 4451;
-                    localContext._nochain = this.match(MySqlParser.KW_NO);
+                    localContext._noChain = this.match(MySqlParser.KW_NO);
                     }
                 }
 
@@ -25129,7 +25129,7 @@ export class MySqlParser extends SQLParserBase {
                 if (_la === 502) {
                     {
                     this.state = 4457;
-                    localContext._norelease = this.match(MySqlParser.KW_NO);
+                    localContext._noRelease = this.match(MySqlParser.KW_NO);
                     }
                 }
 
@@ -25154,9 +25154,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public savepointStatement(): SavepointStatementContext {
-        let localContext = new SavepointStatementContext(this.context, this.state);
-        this.enterRule(localContext, 330, MySqlParser.RULE_savepointStatement);
+    public savePointStatement(): SavePointStatementContext {
+        let localContext = new SavePointStatementContext(this.context, this.state);
+        this.enterRule(localContext, 330, MySqlParser.RULE_savePointStatement);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -28095,7 +28095,7 @@ export class MySqlParser extends SQLParserBase {
                 {
                 {
                 this.state = 5035;
-                this.elifAlternative();
+                this.elseIfAlternative();
                 }
                 }
                 this.state = 5040;
@@ -29477,9 +29477,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public elifAlternative(): ElifAlternativeContext {
-        let localContext = new ElifAlternativeContext(this.context, this.state);
-        this.enterRule(localContext, 458, MySqlParser.RULE_elifAlternative);
+    public elseIfAlternative(): ElseIfAlternativeContext {
+        let localContext = new ElseIfAlternativeContext(this.context, this.state);
+        this.enterRule(localContext, 458, MySqlParser.RULE_elseIfAlternative);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -30048,7 +30048,7 @@ export class MySqlParser extends SQLParserBase {
                 this.state = 5342;
                 this.match(MySqlParser.KW_GRANT);
                 this.state = 5343;
-                this.privelegeClause();
+                this.privilegeClause();
                 this.state = 5348;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -30058,7 +30058,7 @@ export class MySqlParser extends SQLParserBase {
                     this.state = 5344;
                     this.match(MySqlParser.COMMA);
                     this.state = 5345;
-                    this.privelegeClause();
+                    this.privilegeClause();
                     }
                     }
                     this.state = 5350;
@@ -30502,7 +30502,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 5469;
-                this.resourceGroupVcpuSpec();
+                this.resourceGroupVCpuSpec();
                 }
             }
 
@@ -30617,7 +30617,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 5496;
-                this.resourceGroupVcpuSpec();
+                this.resourceGroupVCpuSpec();
                 }
             }
 
@@ -30776,9 +30776,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public resourceGroupVcpuSpec(): ResourceGroupVcpuSpecContext {
-        let localContext = new ResourceGroupVcpuSpecContext(this.context, this.state);
-        this.enterRule(localContext, 480, MySqlParser.RULE_resourceGroupVcpuSpec);
+    public resourceGroupVCpuSpec(): ResourceGroupVCpuSpecContext {
+        let localContext = new ResourceGroupVCpuSpecContext(this.context, this.state);
+        this.enterRule(localContext, 480, MySqlParser.RULE_resourceGroupVCpuSpec);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -30813,7 +30813,7 @@ export class MySqlParser extends SQLParserBase {
                     this.state = 5538;
                     this.match(MySqlParser.COMMA);
                     this.state = 5539;
-                    this.resourceGroupVcpuSpec();
+                    this.resourceGroupVCpuSpec();
                     }
                     }
                 }
@@ -30907,7 +30907,7 @@ export class MySqlParser extends SQLParserBase {
                 }
 
                 this.state = 5559;
-                this.privelegeClause();
+                this.privilegeClause();
                 this.state = 5564;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
@@ -30917,7 +30917,7 @@ export class MySqlParser extends SQLParserBase {
                     this.state = 5560;
                     this.match(MySqlParser.COMMA);
                     this.state = 5561;
-                    this.privelegeClause();
+                    this.privilegeClause();
                     }
                     }
                     this.state = 5566;
@@ -32563,9 +32563,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public privelegeClause(): PrivelegeClauseContext {
-        let localContext = new PrivelegeClauseContext(this.context, this.state);
-        this.enterRule(localContext, 520, MySqlParser.RULE_privelegeClause);
+    public privilegeClause(): PrivilegeClauseContext {
+        let localContext = new PrivilegeClauseContext(this.context, this.state);
+        this.enterRule(localContext, 520, MySqlParser.RULE_privilegeClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -36263,9 +36263,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public binlogStatement(): BinlogStatementContext {
-        let localContext = new BinlogStatementContext(this.context, this.state);
-        this.enterRule(localContext, 570, MySqlParser.RULE_binlogStatement);
+    public binLogStatement(): BinLogStatementContext {
+        let localContext = new BinLogStatementContext(this.context, this.state);
+        this.enterRule(localContext, 570, MySqlParser.RULE_binLogStatement);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -40912,9 +40912,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tablespaceNameCreate(): TablespaceNameCreateContext {
-        let localContext = new TablespaceNameCreateContext(this.context, this.state);
-        this.enterRule(localContext, 664, MySqlParser.RULE_tablespaceNameCreate);
+    public tableSpaceNameCreate(): TableSpaceNameCreateContext {
+        let localContext = new TableSpaceNameCreateContext(this.context, this.state);
+        this.enterRule(localContext, 664, MySqlParser.RULE_tableSpaceNameCreate);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -40936,9 +40936,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public tablespaceName(): TablespaceNameContext {
-        let localContext = new TablespaceNameContext(this.context, this.state);
-        this.enterRule(localContext, 666, MySqlParser.RULE_tablespaceName);
+    public tableSpaceName(): TableSpaceNameContext {
+        let localContext = new TableSpaceNameContext(this.context, this.state);
+        this.enterRule(localContext, 666, MySqlParser.RULE_tableSpaceName);
         try {
             this.enterOuterAlt(localContext, 1);
             {
@@ -42735,9 +42735,9 @@ export class MySqlParser extends SQLParserBase {
         }
         return localContext;
     }
-    public nullNotnull(): NullNotnullContext {
-        let localContext = new NullNotnullContext(this.context, this.state);
-        this.enterRule(localContext, 722, MySqlParser.RULE_nullNotnull);
+    public nullNotNull(): NullNotNullContext {
+        let localContext = new NullNotNullContext(this.context, this.state);
+        this.enterRule(localContext, 722, MySqlParser.RULE_nullNotNull);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
@@ -47234,7 +47234,7 @@ export class MySqlParser extends SQLParserBase {
                         this.state = 7905;
                         this.match(MySqlParser.KW_IS);
                         this.state = 7906;
-                        this.nullNotnull();
+                        this.nullNotNull();
                         }
                         break;
                     case 6:
@@ -52224,8 +52224,8 @@ export class DdlStatementContext extends antlr.ParserRuleContext {
     public createIndex(): CreateIndexContext | null {
         return this.getRuleContext(0, CreateIndexContext);
     }
-    public createLogfileGroup(): CreateLogfileGroupContext | null {
-        return this.getRuleContext(0, CreateLogfileGroupContext);
+    public createLogFileGroup(): CreateLogFileGroupContext | null {
+        return this.getRuleContext(0, CreateLogFileGroupContext);
     }
     public createProcedure(): CreateProcedureContext | null {
         return this.getRuleContext(0, CreateProcedureContext);
@@ -52242,11 +52242,11 @@ export class DdlStatementContext extends antlr.ParserRuleContext {
     public createTable(): CreateTableContext | null {
         return this.getRuleContext(0, CreateTableContext);
     }
-    public createTablespaceInnodb(): CreateTablespaceInnodbContext | null {
-        return this.getRuleContext(0, CreateTablespaceInnodbContext);
+    public createTableSpaceInnoDB(): CreateTableSpaceInnoDBContext | null {
+        return this.getRuleContext(0, CreateTableSpaceInnoDBContext);
     }
-    public createTablespaceNdb(): CreateTablespaceNdbContext | null {
-        return this.getRuleContext(0, CreateTablespaceNdbContext);
+    public createTableSpaceNDB(): CreateTableSpaceNDBContext | null {
+        return this.getRuleContext(0, CreateTableSpaceNDBContext);
     }
     public createTrigger(): CreateTriggerContext | null {
         return this.getRuleContext(0, CreateTriggerContext);
@@ -52269,8 +52269,8 @@ export class DdlStatementContext extends antlr.ParserRuleContext {
     public alterInstance(): AlterInstanceContext | null {
         return this.getRuleContext(0, AlterInstanceContext);
     }
-    public alterLogfileGroup(): AlterLogfileGroupContext | null {
-        return this.getRuleContext(0, AlterLogfileGroupContext);
+    public alterLogFileGroup(): AlterLogFileGroupContext | null {
+        return this.getRuleContext(0, AlterLogFileGroupContext);
     }
     public alterProcedure(): AlterProcedureContext | null {
         return this.getRuleContext(0, AlterProcedureContext);
@@ -52281,8 +52281,8 @@ export class DdlStatementContext extends antlr.ParserRuleContext {
     public alterTable(): AlterTableContext | null {
         return this.getRuleContext(0, AlterTableContext);
     }
-    public alterTablespace(): AlterTablespaceContext | null {
-        return this.getRuleContext(0, AlterTablespaceContext);
+    public alterTableSpace(): AlterTableSpaceContext | null {
+        return this.getRuleContext(0, AlterTableSpaceContext);
     }
     public alterView(): AlterViewContext | null {
         return this.getRuleContext(0, AlterViewContext);
@@ -52296,8 +52296,8 @@ export class DdlStatementContext extends antlr.ParserRuleContext {
     public dropIndex(): DropIndexContext | null {
         return this.getRuleContext(0, DropIndexContext);
     }
-    public dropLogfileGroup(): DropLogfileGroupContext | null {
-        return this.getRuleContext(0, DropLogfileGroupContext);
+    public dropLogFileGroup(): DropLogFileGroupContext | null {
+        return this.getRuleContext(0, DropLogFileGroupContext);
     }
     public dropProcedure(): DropProcedureContext | null {
         return this.getRuleContext(0, DropProcedureContext);
@@ -52314,8 +52314,8 @@ export class DdlStatementContext extends antlr.ParserRuleContext {
     public dropTable(): DropTableContext | null {
         return this.getRuleContext(0, DropTableContext);
     }
-    public dropTablespace(): DropTablespaceContext | null {
-        return this.getRuleContext(0, DropTablespaceContext);
+    public dropTableSpace(): DropTableSpaceContext | null {
+        return this.getRuleContext(0, DropTableSpaceContext);
     }
     public dropTrigger(): DropTriggerContext | null {
         return this.getRuleContext(0, DropTriggerContext);
@@ -52452,8 +52452,8 @@ export class TransactionStatementContext extends antlr.ParserRuleContext {
     public rollbackWork(): RollbackWorkContext | null {
         return this.getRuleContext(0, RollbackWorkContext);
     }
-    public savepointStatement(): SavepointStatementContext | null {
-        return this.getRuleContext(0, SavepointStatementContext);
+    public savePointStatement(): SavePointStatementContext | null {
+        return this.getRuleContext(0, SavePointStatementContext);
     }
     public rollbackStatement(): RollbackStatementContext | null {
         return this.getRuleContext(0, RollbackStatementContext);
@@ -52725,8 +52725,8 @@ export class AdministrationStatementContext extends antlr.ParserRuleContext {
     public showStatement(): ShowStatementContext | null {
         return this.getRuleContext(0, ShowStatementContext);
     }
-    public binlogStatement(): BinlogStatementContext | null {
-        return this.getRuleContext(0, BinlogStatementContext);
+    public binLogStatement(): BinLogStatementContext | null {
+        return this.getRuleContext(0, BinLogStatementContext);
     }
     public cacheIndexStatement(): CacheIndexStatementContext | null {
         return this.getRuleContext(0, CacheIndexStatementContext);
@@ -53120,13 +53120,13 @@ export class CreateIndexContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateLogfileGroupContext extends antlr.ParserRuleContext {
-    public _logfileGroupName?: UidContext;
+export class CreateLogFileGroupContext extends antlr.ParserRuleContext {
+    public _logFileGroupName?: UidContext;
     public _undoFile?: Token | null;
     public _initSize?: FileSizeLiteralContext;
     public _undoSize?: FileSizeLiteralContext;
     public _redoSize?: FileSizeLiteralContext;
-    public _nodegroup?: UidContext;
+    public _nodeGroup?: UidContext;
     public _comment?: Token | null;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -53207,21 +53207,21 @@ export class CreateLogfileGroupContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, FileSizeLiteralContext);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_createLogfileGroup;
+        return MySqlParser.RULE_createLogFileGroup;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterCreateLogfileGroup) {
-             listener.enterCreateLogfileGroup(this);
+        if(listener.enterCreateLogFileGroup) {
+             listener.enterCreateLogFileGroup(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitCreateLogfileGroup) {
-             listener.exitCreateLogfileGroup(this);
+        if(listener.exitCreateLogFileGroup) {
+             listener.exitCreateLogFileGroup(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateLogfileGroup) {
-            return visitor.visitCreateLogfileGroup(this);
+        if (visitor.visitCreateLogFileGroup) {
+            return visitor.visitCreateLogFileGroup(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -53782,9 +53782,9 @@ export class QueryCreateTableContext extends CreateTableContext {
 }
 
 
-export class CreateTablespaceInnodbContext extends antlr.ParserRuleContext {
+export class CreateTableSpaceInnoDBContext extends antlr.ParserRuleContext {
     public _datafile?: Token | null;
-    public _autoextendSize?: FileSizeLiteralContext;
+    public _autoExtendSize?: FileSizeLiteralContext;
     public _fileBlockSize?: FileSizeLiteralContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -53795,8 +53795,8 @@ export class CreateTablespaceInnodbContext extends antlr.ParserRuleContext {
     public KW_TABLESPACE(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_TABLESPACE, 0)!;
     }
-    public tablespaceNameCreate(): TablespaceNameCreateContext {
-        return this.getRuleContext(0, TablespaceNameCreateContext)!;
+    public tableSpaceNameCreate(): TableSpaceNameCreateContext {
+        return this.getRuleContext(0, TableSpaceNameCreateContext)!;
     }
     public KW_UNDO(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_UNDO, 0);
@@ -53850,21 +53850,21 @@ export class CreateTablespaceInnodbContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, FileSizeLiteralContext);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_createTablespaceInnodb;
+        return MySqlParser.RULE_createTableSpaceInnoDB;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterCreateTablespaceInnodb) {
-             listener.enterCreateTablespaceInnodb(this);
+        if(listener.enterCreateTableSpaceInnoDB) {
+             listener.enterCreateTableSpaceInnoDB(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitCreateTablespaceInnodb) {
-             listener.exitCreateTablespaceInnodb(this);
+        if(listener.exitCreateTableSpaceInnoDB) {
+             listener.exitCreateTableSpaceInnoDB(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateTablespaceInnodb) {
-            return visitor.visitCreateTablespaceInnodb(this);
+        if (visitor.visitCreateTableSpaceInnoDB) {
+            return visitor.visitCreateTableSpaceInnoDB(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -53872,14 +53872,14 @@ export class CreateTablespaceInnodbContext extends antlr.ParserRuleContext {
 }
 
 
-export class CreateTablespaceNdbContext extends antlr.ParserRuleContext {
+export class CreateTableSpaceNDBContext extends antlr.ParserRuleContext {
     public _datafile?: Token | null;
-    public _logfileGroupName?: UidContext;
+    public _logFileGroupName?: UidContext;
     public _extentSize?: FileSizeLiteralContext;
     public _initialSize?: FileSizeLiteralContext;
-    public _autoextendSize?: FileSizeLiteralContext;
+    public _autoExtendSize?: FileSizeLiteralContext;
     public _maxSize?: FileSizeLiteralContext;
-    public _nodegroup?: UidContext;
+    public _nodeGroup?: UidContext;
     public _comment?: Token | null;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -53890,8 +53890,8 @@ export class CreateTablespaceNdbContext extends antlr.ParserRuleContext {
     public KW_TABLESPACE(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_TABLESPACE, 0)!;
     }
-    public tablespaceNameCreate(): TablespaceNameCreateContext {
-        return this.getRuleContext(0, TablespaceNameCreateContext)!;
+    public tableSpaceNameCreate(): TableSpaceNameCreateContext {
+        return this.getRuleContext(0, TableSpaceNameCreateContext)!;
     }
     public KW_ADD(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_ADD, 0)!;
@@ -53975,21 +53975,21 @@ export class CreateTablespaceNdbContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, FileSizeLiteralContext);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_createTablespaceNdb;
+        return MySqlParser.RULE_createTableSpaceNDB;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterCreateTablespaceNdb) {
-             listener.enterCreateTablespaceNdb(this);
+        if(listener.enterCreateTableSpaceNDB) {
+             listener.enterCreateTableSpaceNDB(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitCreateTablespaceNdb) {
-             listener.exitCreateTablespaceNdb(this);
+        if(listener.exitCreateTableSpaceNDB) {
+             listener.exitCreateTableSpaceNDB(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitCreateTablespaceNdb) {
-            return visitor.visitCreateTablespaceNdb(this);
+        if (visitor.visitCreateTableSpaceNDB) {
+            return visitor.visitCreateTableSpaceNDB(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -55874,8 +55874,8 @@ export class NullColumnConstraintContext extends ColumnConstraintContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public nullNotnull(): NullNotnullContext {
-        return this.getRuleContext(0, NullNotnullContext)!;
+    public nullNotNull(): NullNotNullContext {
+        return this.getRuleContext(0, NullNotNullContext)!;
     }
     public override enterRule(listener: MySqlParserListener): void {
         if(listener.enterNullColumnConstraint) {
@@ -56275,70 +56275,6 @@ export class TableOptionPersistentContext extends TableOptionContext {
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
         if (visitor.visitTableOptionPersistent) {
             return visitor.visitTableOptionPersistent(this);
-        } else {
-            return visitor.visitChildren(this);
-        }
-    }
-}
-export class TableOptionTablespaceContext extends TableOptionContext {
-    public constructor(ctx: TableOptionContext) {
-        super(ctx.parent, ctx.invokingState);
-        super.copyFrom(ctx);
-    }
-    public KW_TABLESPACE(): antlr.TerminalNode | null {
-        return this.getToken(MySqlParser.KW_TABLESPACE, 0);
-    }
-    public tablespaceName(): TablespaceNameContext | null {
-        return this.getRuleContext(0, TablespaceNameContext);
-    }
-    public tablespaceStorage(): TablespaceStorageContext | null {
-        return this.getRuleContext(0, TablespaceStorageContext);
-    }
-    public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterTableOptionTablespace) {
-             listener.enterTableOptionTablespace(this);
-        }
-    }
-    public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitTableOptionTablespace) {
-             listener.exitTableOptionTablespace(this);
-        }
-    }
-    public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTableOptionTablespace) {
-            return visitor.visitTableOptionTablespace(this);
-        } else {
-            return visitor.visitChildren(this);
-        }
-    }
-}
-export class TableOptionAutoextendSizeContext extends TableOptionContext {
-    public constructor(ctx: TableOptionContext) {
-        super(ctx.parent, ctx.invokingState);
-        super.copyFrom(ctx);
-    }
-    public KW_AUTOEXTEND_SIZE(): antlr.TerminalNode {
-        return this.getToken(MySqlParser.KW_AUTOEXTEND_SIZE, 0)!;
-    }
-    public decimalLiteral(): DecimalLiteralContext {
-        return this.getRuleContext(0, DecimalLiteralContext)!;
-    }
-    public EQUAL_SYMBOL(): antlr.TerminalNode | null {
-        return this.getToken(MySqlParser.EQUAL_SYMBOL, 0);
-    }
-    public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterTableOptionAutoextendSize) {
-             listener.enterTableOptionAutoextendSize(this);
-        }
-    }
-    public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitTableOptionAutoextendSize) {
-             listener.exitTableOptionAutoextendSize(this);
-        }
-    }
-    public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTableOptionAutoextendSize) {
-            return visitor.visitTableOptionAutoextendSize(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -57045,6 +56981,38 @@ export class TableOptionPageCompressionLevelContext extends TableOptionContext {
         }
     }
 }
+export class TableOptionTableSpaceContext extends TableOptionContext {
+    public constructor(ctx: TableOptionContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public KW_TABLESPACE(): antlr.TerminalNode | null {
+        return this.getToken(MySqlParser.KW_TABLESPACE, 0);
+    }
+    public tableSpaceName(): TableSpaceNameContext | null {
+        return this.getRuleContext(0, TableSpaceNameContext);
+    }
+    public tableSpaceStorage(): TableSpaceStorageContext | null {
+        return this.getRuleContext(0, TableSpaceStorageContext);
+    }
+    public override enterRule(listener: MySqlParserListener): void {
+        if(listener.enterTableOptionTableSpace) {
+             listener.enterTableOptionTableSpace(this);
+        }
+    }
+    public override exitRule(listener: MySqlParserListener): void {
+        if(listener.exitTableOptionTableSpace) {
+             listener.exitTableOptionTableSpace(this);
+        }
+    }
+    public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
+        if (visitor.visitTableOptionTableSpace) {
+            return visitor.visitTableOptionTableSpace(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
 export class TableOptionSecondaryEngineAttributeContext extends TableOptionContext {
     public constructor(ctx: TableOptionContext) {
         super(ctx.parent, ctx.invokingState);
@@ -57188,6 +57156,38 @@ export class TableOptionRowFormatContext extends TableOptionContext {
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
         if (visitor.visitTableOptionRowFormat) {
             return visitor.visitTableOptionRowFormat(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+export class TableOptionAutoExtendSizeContext extends TableOptionContext {
+    public constructor(ctx: TableOptionContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public KW_AUTOEXTEND_SIZE(): antlr.TerminalNode {
+        return this.getToken(MySqlParser.KW_AUTOEXTEND_SIZE, 0)!;
+    }
+    public decimalLiteral(): DecimalLiteralContext {
+        return this.getRuleContext(0, DecimalLiteralContext)!;
+    }
+    public EQUAL_SYMBOL(): antlr.TerminalNode | null {
+        return this.getToken(MySqlParser.EQUAL_SYMBOL, 0);
+    }
+    public override enterRule(listener: MySqlParserListener): void {
+        if(listener.enterTableOptionAutoExtendSize) {
+             listener.enterTableOptionAutoExtendSize(this);
+        }
+    }
+    public override exitRule(listener: MySqlParserListener): void {
+        if(listener.exitTableOptionAutoExtendSize) {
+             listener.exitTableOptionAutoExtendSize(this);
+        }
+    }
+    public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
+        if (visitor.visitTableOptionAutoExtendSize) {
+            return visitor.visitTableOptionAutoExtendSize(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -57366,7 +57366,7 @@ export class TableTypeContext extends antlr.ParserRuleContext {
 }
 
 
-export class TablespaceStorageContext extends antlr.ParserRuleContext {
+export class TableSpaceStorageContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -57383,21 +57383,21 @@ export class TablespaceStorageContext extends antlr.ParserRuleContext {
         return this.getToken(MySqlParser.KW_DEFAULT, 0);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_tablespaceStorage;
+        return MySqlParser.RULE_tableSpaceStorage;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterTablespaceStorage) {
-             listener.enterTablespaceStorage(this);
+        if(listener.enterTableSpaceStorage) {
+             listener.enterTableSpaceStorage(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitTablespaceStorage) {
-             listener.exitTablespaceStorage(this);
+        if(listener.exitTableSpaceStorage) {
+             listener.exitTableSpaceStorage(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTablespaceStorage) {
-            return visitor.visitTablespaceStorage(this);
+        if (visitor.visitTableSpaceStorage) {
+            return visitor.visitTableSpaceStorage(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -57856,14 +57856,14 @@ export class PartitionComparisonContext extends PartitionDefinitionContext {
 
         return this.getRuleContext(i, PartitionOptionContext);
     }
-    public subpartitionDefinition(): SubpartitionDefinitionContext[];
-    public subpartitionDefinition(i: number): SubpartitionDefinitionContext | null;
-    public subpartitionDefinition(i?: number): SubpartitionDefinitionContext[] | SubpartitionDefinitionContext | null {
+    public subPartitionDefinition(): SubPartitionDefinitionContext[];
+    public subPartitionDefinition(i: number): SubPartitionDefinitionContext | null;
+    public subPartitionDefinition(i?: number): SubPartitionDefinitionContext[] | SubPartitionDefinitionContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SubpartitionDefinitionContext);
+            return this.getRuleContexts(SubPartitionDefinitionContext);
         }
 
-        return this.getRuleContext(i, SubpartitionDefinitionContext);
+        return this.getRuleContext(i, SubPartitionDefinitionContext);
     }
     public override enterRule(listener: MySqlParserListener): void {
         if(listener.enterPartitionComparison) {
@@ -57945,14 +57945,14 @@ export class PartitionListAtomContext extends PartitionDefinitionContext {
 
         return this.getRuleContext(i, PartitionOptionContext);
     }
-    public subpartitionDefinition(): SubpartitionDefinitionContext[];
-    public subpartitionDefinition(i: number): SubpartitionDefinitionContext | null;
-    public subpartitionDefinition(i?: number): SubpartitionDefinitionContext[] | SubpartitionDefinitionContext | null {
+    public subPartitionDefinition(): SubPartitionDefinitionContext[];
+    public subPartitionDefinition(i: number): SubPartitionDefinitionContext | null;
+    public subPartitionDefinition(i?: number): SubPartitionDefinitionContext[] | SubPartitionDefinitionContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SubpartitionDefinitionContext);
+            return this.getRuleContexts(SubPartitionDefinitionContext);
         }
 
-        return this.getRuleContext(i, SubpartitionDefinitionContext);
+        return this.getRuleContext(i, SubPartitionDefinitionContext);
     }
     public override enterRule(listener: MySqlParserListener): void {
         if(listener.enterPartitionListAtom) {
@@ -58034,14 +58034,14 @@ export class PartitionListVectorContext extends PartitionDefinitionContext {
 
         return this.getRuleContext(i, PartitionOptionContext);
     }
-    public subpartitionDefinition(): SubpartitionDefinitionContext[];
-    public subpartitionDefinition(i: number): SubpartitionDefinitionContext | null;
-    public subpartitionDefinition(i?: number): SubpartitionDefinitionContext[] | SubpartitionDefinitionContext | null {
+    public subPartitionDefinition(): SubPartitionDefinitionContext[];
+    public subPartitionDefinition(i: number): SubPartitionDefinitionContext | null;
+    public subPartitionDefinition(i?: number): SubPartitionDefinitionContext[] | SubPartitionDefinitionContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SubpartitionDefinitionContext);
+            return this.getRuleContexts(SubPartitionDefinitionContext);
         }
 
-        return this.getRuleContext(i, SubpartitionDefinitionContext);
+        return this.getRuleContext(i, SubPartitionDefinitionContext);
     }
     public override enterRule(listener: MySqlParserListener): void {
         if(listener.enterPartitionListVector) {
@@ -58084,14 +58084,14 @@ export class PartitionSimpleContext extends PartitionDefinitionContext {
     public LR_BRACKET(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.LR_BRACKET, 0);
     }
-    public subpartitionDefinition(): SubpartitionDefinitionContext[];
-    public subpartitionDefinition(i: number): SubpartitionDefinitionContext | null;
-    public subpartitionDefinition(i?: number): SubpartitionDefinitionContext[] | SubpartitionDefinitionContext | null {
+    public subPartitionDefinition(): SubPartitionDefinitionContext[];
+    public subPartitionDefinition(i: number): SubPartitionDefinitionContext | null;
+    public subPartitionDefinition(i?: number): SubPartitionDefinitionContext[] | SubPartitionDefinitionContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(SubpartitionDefinitionContext);
+            return this.getRuleContexts(SubPartitionDefinitionContext);
         }
 
-        return this.getRuleContext(i, SubpartitionDefinitionContext);
+        return this.getRuleContext(i, SubPartitionDefinitionContext);
     }
     public RR_BRACKET(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.RR_BRACKET, 0);
@@ -58212,7 +58212,7 @@ export class PartitionDefinerVectorContext extends antlr.ParserRuleContext {
 }
 
 
-export class SubpartitionDefinitionContext extends antlr.ParserRuleContext {
+export class SubPartitionDefinitionContext extends antlr.ParserRuleContext {
     public _logicalName?: UidContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -58233,21 +58233,21 @@ export class SubpartitionDefinitionContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, PartitionOptionContext);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_subpartitionDefinition;
+        return MySqlParser.RULE_subPartitionDefinition;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterSubpartitionDefinition) {
-             listener.enterSubpartitionDefinition(this);
+        if(listener.enterSubPartitionDefinition) {
+             listener.enterSubPartitionDefinition(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitSubpartitionDefinition) {
-             listener.exitSubpartitionDefinition(this);
+        if(listener.exitSubPartitionDefinition) {
+             listener.exitSubPartitionDefinition(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSubpartitionDefinition) {
-            return visitor.visitSubpartitionDefinition(this);
+        if (visitor.visitSubPartitionDefinition) {
+            return visitor.visitSubPartitionDefinition(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -58300,7 +58300,7 @@ export class PartitionOptionCommentContext extends PartitionOptionContext {
     }
 }
 export class PartitionOptionNodeGroupContext extends PartitionOptionContext {
-    public _nodegroup?: UidContext;
+    public _nodeGroup?: UidContext;
     public constructor(ctx: PartitionOptionContext) {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
@@ -58401,38 +58401,6 @@ export class PartitionOptionMaxRowsContext extends PartitionOptionContext {
         }
     }
 }
-export class PartitionOptionTablespaceContext extends PartitionOptionContext {
-    public constructor(ctx: PartitionOptionContext) {
-        super(ctx.parent, ctx.invokingState);
-        super.copyFrom(ctx);
-    }
-    public KW_TABLESPACE(): antlr.TerminalNode {
-        return this.getToken(MySqlParser.KW_TABLESPACE, 0)!;
-    }
-    public tablespaceName(): TablespaceNameContext {
-        return this.getRuleContext(0, TablespaceNameContext)!;
-    }
-    public EQUAL_SYMBOL(): antlr.TerminalNode | null {
-        return this.getToken(MySqlParser.EQUAL_SYMBOL, 0);
-    }
-    public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterPartitionOptionTablespace) {
-             listener.enterPartitionOptionTablespace(this);
-        }
-    }
-    public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitPartitionOptionTablespace) {
-             listener.exitPartitionOptionTablespace(this);
-        }
-    }
-    public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPartitionOptionTablespace) {
-            return visitor.visitPartitionOptionTablespace(this);
-        } else {
-            return visitor.visitChildren(this);
-        }
-    }
-}
 export class PartitionOptionEngineContext extends PartitionOptionContext {
     public constructor(ctx: PartitionOptionContext) {
         super(ctx.parent, ctx.invokingState);
@@ -58466,6 +58434,38 @@ export class PartitionOptionEngineContext extends PartitionOptionContext {
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
         if (visitor.visitPartitionOptionEngine) {
             return visitor.visitPartitionOptionEngine(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+export class PartitionOptionTableSpaceContext extends PartitionOptionContext {
+    public constructor(ctx: PartitionOptionContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public KW_TABLESPACE(): antlr.TerminalNode {
+        return this.getToken(MySqlParser.KW_TABLESPACE, 0)!;
+    }
+    public tableSpaceName(): TableSpaceNameContext {
+        return this.getRuleContext(0, TableSpaceNameContext)!;
+    }
+    public EQUAL_SYMBOL(): antlr.TerminalNode | null {
+        return this.getToken(MySqlParser.EQUAL_SYMBOL, 0);
+    }
+    public override enterRule(listener: MySqlParserListener): void {
+        if(listener.enterPartitionOptionTableSpace) {
+             listener.enterPartitionOptionTableSpace(this);
+        }
+    }
+    public override exitRule(listener: MySqlParserListener): void {
+        if(listener.exitPartitionOptionTableSpace) {
+             listener.exitPartitionOptionTableSpace(this);
+        }
+    }
+    public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
+        if (visitor.visitPartitionOptionTableSpace) {
+            return visitor.visitPartitionOptionTableSpace(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -58830,8 +58830,8 @@ export class AlterInstanceContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterLogfileGroupContext extends antlr.ParserRuleContext {
-    public _logfileGroupName?: UidContext;
+export class AlterLogFileGroupContext extends antlr.ParserRuleContext {
+    public _logFileGroupName?: UidContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -58881,21 +58881,21 @@ export class AlterLogfileGroupContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_alterLogfileGroup;
+        return MySqlParser.RULE_alterLogFileGroup;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterAlterLogfileGroup) {
-             listener.enterAlterLogfileGroup(this);
+        if(listener.enterAlterLogFileGroup) {
+             listener.enterAlterLogFileGroup(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitAlterLogfileGroup) {
-             listener.exitAlterLogfileGroup(this);
+        if(listener.exitAlterLogFileGroup) {
+             listener.exitAlterLogFileGroup(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterLogfileGroup) {
-            return visitor.visitAlterLogfileGroup(this);
+        if (visitor.visitAlterLogFileGroup) {
+            return visitor.visitAlterLogFileGroup(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59076,7 +59076,7 @@ export class AlterTableContext extends antlr.ParserRuleContext {
 }
 
 
-export class AlterTablespaceContext extends antlr.ParserRuleContext {
+export class AlterTableSpaceContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -59086,8 +59086,8 @@ export class AlterTablespaceContext extends antlr.ParserRuleContext {
     public KW_TABLESPACE(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_TABLESPACE, 0)!;
     }
-    public tablespaceName(): TablespaceNameContext {
-        return this.getRuleContext(0, TablespaceNameContext)!;
+    public tableSpaceName(): TableSpaceNameContext {
+        return this.getRuleContext(0, TableSpaceNameContext)!;
     }
     public KW_DATAFILE(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_DATAFILE, 0)!;
@@ -59131,8 +59131,8 @@ export class AlterTablespaceContext extends antlr.ParserRuleContext {
     public KW_TO(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_TO, 0);
     }
-    public tablespaceNameCreate(): TablespaceNameCreateContext | null {
-        return this.getRuleContext(0, TablespaceNameCreateContext);
+    public tableSpaceNameCreate(): TableSpaceNameCreateContext | null {
+        return this.getRuleContext(0, TableSpaceNameCreateContext);
     }
     public KW_AUTOEXTEND_SIZE(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_AUTOEXTEND_SIZE, 0);
@@ -59168,21 +59168,21 @@ export class AlterTablespaceContext extends antlr.ParserRuleContext {
     	}
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_alterTablespace;
+        return MySqlParser.RULE_alterTableSpace;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterAlterTablespace) {
-             listener.enterAlterTablespace(this);
+        if(listener.enterAlterTableSpace) {
+             listener.enterAlterTableSpace(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitAlterTablespace) {
-             listener.exitAlterTablespace(this);
+        if(listener.exitAlterTableSpace) {
+             listener.exitAlterTableSpace(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterTablespace) {
-            return visitor.visitAlterTablespace(this);
+        if (visitor.visitAlterTableSpace) {
+            return visitor.visitAlterTableSpace(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59448,7 +59448,7 @@ export class AlterByConvertCharsetContext extends AlterOptionContext {
     }
 }
 export class AlterByRenameColumnContext extends AlterOptionContext {
-    public _olcdColumn?: ColumnNameContext;
+    public _oldColumn?: ColumnNameContext;
     public _newColumn?: ColumnNameCreateContext;
     public constructor(ctx: AlterOptionContext) {
         super(ctx.parent, ctx.invokingState);
@@ -59572,38 +59572,6 @@ export class AlterByRenameIndexContext extends AlterOptionContext {
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
         if (visitor.visitAlterByRenameIndex) {
             return visitor.visitAlterByRenameIndex(this);
-        } else {
-            return visitor.visitChildren(this);
-        }
-    }
-}
-export class AlterTablespaceOptionContext extends AlterOptionContext {
-    public constructor(ctx: AlterOptionContext) {
-        super(ctx.parent, ctx.invokingState);
-        super.copyFrom(ctx);
-    }
-    public KW_TABLESPACE(): antlr.TerminalNode {
-        return this.getToken(MySqlParser.KW_TABLESPACE, 0)!;
-    }
-    public KW_DISCARD(): antlr.TerminalNode | null {
-        return this.getToken(MySqlParser.KW_DISCARD, 0);
-    }
-    public KW_IMPORT(): antlr.TerminalNode | null {
-        return this.getToken(MySqlParser.KW_IMPORT, 0);
-    }
-    public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterAlterTablespaceOption) {
-             listener.enterAlterTablespaceOption(this);
-        }
-    }
-    public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitAlterTablespaceOption) {
-             listener.exitAlterTablespaceOption(this);
-        }
-    }
-    public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitAlterTablespaceOption) {
-            return visitor.visitAlterTablespaceOption(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -59854,6 +59822,38 @@ export class AlterByDropForeignKeyContext extends AlterOptionContext {
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
         if (visitor.visitAlterByDropForeignKey) {
             return visitor.visitAlterByDropForeignKey(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+export class AlterTableSpaceOptionContext extends AlterOptionContext {
+    public constructor(ctx: AlterOptionContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public KW_TABLESPACE(): antlr.TerminalNode {
+        return this.getToken(MySqlParser.KW_TABLESPACE, 0)!;
+    }
+    public KW_DISCARD(): antlr.TerminalNode | null {
+        return this.getToken(MySqlParser.KW_DISCARD, 0);
+    }
+    public KW_IMPORT(): antlr.TerminalNode | null {
+        return this.getToken(MySqlParser.KW_IMPORT, 0);
+    }
+    public override enterRule(listener: MySqlParserListener): void {
+        if(listener.enterAlterTableSpaceOption) {
+             listener.enterAlterTableSpaceOption(this);
+        }
+    }
+    public override exitRule(listener: MySqlParserListener): void {
+        if(listener.exitAlterTableSpaceOption) {
+             listener.exitAlterTableSpaceOption(this);
+        }
+    }
+    public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
+        if (visitor.visitAlterTableSpaceOption) {
+            return visitor.visitAlterTableSpaceOption(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61295,7 +61295,7 @@ export class DropEventContext extends antlr.ParserRuleContext {
 
 
 export class DropIndexContext extends antlr.ParserRuleContext {
-    public _intimeAction?: Token | null;
+    public _inTimeAction?: Token | null;
     public _algType?: Token | null;
     public _lockType?: Token | null;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
@@ -61426,8 +61426,8 @@ export class DropIndexContext extends antlr.ParserRuleContext {
 }
 
 
-export class DropLogfileGroupContext extends antlr.ParserRuleContext {
-    public _logfileGroupName?: UidContext;
+export class DropLogFileGroupContext extends antlr.ParserRuleContext {
+    public _logFileGroupName?: UidContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -61453,21 +61453,21 @@ export class DropLogfileGroupContext extends antlr.ParserRuleContext {
         return this.getToken(MySqlParser.EQUAL_SYMBOL, 0);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_dropLogfileGroup;
+        return MySqlParser.RULE_dropLogFileGroup;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterDropLogfileGroup) {
-             listener.enterDropLogfileGroup(this);
+        if(listener.enterDropLogFileGroup) {
+             listener.enterDropLogFileGroup(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitDropLogfileGroup) {
-             listener.exitDropLogfileGroup(this);
+        if(listener.exitDropLogFileGroup) {
+             listener.exitDropLogFileGroup(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDropLogfileGroup) {
-            return visitor.visitDropLogfileGroup(this);
+        if (visitor.visitDropLogFileGroup) {
+            return visitor.visitDropLogFileGroup(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -61688,7 +61688,7 @@ export class DropTableContext extends antlr.ParserRuleContext {
 }
 
 
-export class DropTablespaceContext extends antlr.ParserRuleContext {
+export class DropTableSpaceContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -61698,8 +61698,8 @@ export class DropTablespaceContext extends antlr.ParserRuleContext {
     public KW_TABLESPACE(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_TABLESPACE, 0)!;
     }
-    public tablespaceName(): TablespaceNameContext {
-        return this.getRuleContext(0, TablespaceNameContext)!;
+    public tableSpaceName(): TableSpaceNameContext {
+        return this.getRuleContext(0, TableSpaceNameContext)!;
     }
     public KW_UNDO(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_UNDO, 0);
@@ -61714,21 +61714,21 @@ export class DropTablespaceContext extends antlr.ParserRuleContext {
         return this.getToken(MySqlParser.EQUAL_SYMBOL, 0);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_dropTablespace;
+        return MySqlParser.RULE_dropTableSpace;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterDropTablespace) {
-             listener.enterDropTablespace(this);
+        if(listener.enterDropTableSpace) {
+             listener.enterDropTableSpace(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitDropTablespace) {
-             listener.exitDropTablespace(this);
+        if(listener.exitDropTableSpace) {
+             listener.exitDropTableSpace(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitDropTablespace) {
-            return visitor.visitDropTablespace(this);
+        if (visitor.visitDropTableSpace) {
+            return visitor.visitDropTableSpace(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -66053,7 +66053,7 @@ export class SelectIntoDumpFileContext extends IntoClauseContext {
 
 export class SelectFieldsIntoContext extends antlr.ParserRuleContext {
     public _terminationField?: Token | null;
-    public _enclosion?: Token | null;
+    public _enClosion?: Token | null;
     public _escaping?: Token | null;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -66560,8 +66560,8 @@ export class BeginWorkContext extends antlr.ParserRuleContext {
 
 
 export class CommitWorkContext extends antlr.ParserRuleContext {
-    public _nochain?: Token | null;
-    public _norelease?: Token | null;
+    public _noChain?: Token | null;
+    public _noRelease?: Token | null;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66613,8 +66613,8 @@ export class CommitWorkContext extends antlr.ParserRuleContext {
 
 
 export class RollbackWorkContext extends antlr.ParserRuleContext {
-    public _nochain?: Token | null;
-    public _norelease?: Token | null;
+    public _noChain?: Token | null;
+    public _noRelease?: Token | null;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -66665,7 +66665,7 @@ export class RollbackWorkContext extends antlr.ParserRuleContext {
 }
 
 
-export class SavepointStatementContext extends antlr.ParserRuleContext {
+export class SavePointStatementContext extends antlr.ParserRuleContext {
     public _identifier?: UidContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
@@ -66677,21 +66677,21 @@ export class SavepointStatementContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, UidContext)!;
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_savepointStatement;
+        return MySqlParser.RULE_savePointStatement;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterSavepointStatement) {
-             listener.enterSavepointStatement(this);
+        if(listener.enterSavePointStatement) {
+             listener.enterSavePointStatement(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitSavepointStatement) {
-             listener.exitSavepointStatement(this);
+        if(listener.exitSavePointStatement) {
+             listener.exitSavePointStatement(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitSavepointStatement) {
-            return visitor.visitSavepointStatement(this);
+        if (visitor.visitSavePointStatement) {
+            return visitor.visitSavePointStatement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -69949,14 +69949,14 @@ export class IfStatementContext extends antlr.ParserRuleContext {
     public KW_END(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_END, 0)!;
     }
-    public elifAlternative(): ElifAlternativeContext[];
-    public elifAlternative(i: number): ElifAlternativeContext | null;
-    public elifAlternative(i?: number): ElifAlternativeContext[] | ElifAlternativeContext | null {
+    public elseIfAlternative(): ElseIfAlternativeContext[];
+    public elseIfAlternative(i: number): ElseIfAlternativeContext | null;
+    public elseIfAlternative(i?: number): ElseIfAlternativeContext[] | ElseIfAlternativeContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ElifAlternativeContext);
+            return this.getRuleContexts(ElseIfAlternativeContext);
         }
 
-        return this.getRuleContext(i, ElifAlternativeContext);
+        return this.getRuleContext(i, ElseIfAlternativeContext);
     }
     public KW_ELSE(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_ELSE, 0);
@@ -70876,7 +70876,7 @@ export class CaseAlternativeContext extends antlr.ParserRuleContext {
 }
 
 
-export class ElifAlternativeContext extends antlr.ParserRuleContext {
+export class ElseIfAlternativeContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -70899,21 +70899,21 @@ export class ElifAlternativeContext extends antlr.ParserRuleContext {
         return this.getRuleContext(i, ProcedureSqlStatementContext);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_elifAlternative;
+        return MySqlParser.RULE_elseIfAlternative;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterElifAlternative) {
-             listener.enterElifAlternative(this);
+        if(listener.enterElseIfAlternative) {
+             listener.enterElseIfAlternative(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitElifAlternative) {
-             listener.exitElifAlternative(this);
+        if(listener.exitElseIfAlternative) {
+             listener.exitElseIfAlternative(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitElifAlternative) {
-            return visitor.visitElifAlternative(this);
+        if (visitor.visitElseIfAlternative) {
+            return visitor.visitElseIfAlternative(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71262,14 +71262,14 @@ export class GrantStatementContext extends antlr.ParserRuleContext {
     		return this.getToken(MySqlParser.KW_GRANT, i);
     	}
     }
-    public privelegeClause(): PrivelegeClauseContext[];
-    public privelegeClause(i: number): PrivelegeClauseContext | null;
-    public privelegeClause(i?: number): PrivelegeClauseContext[] | PrivelegeClauseContext | null {
+    public privilegeClause(): PrivilegeClauseContext[];
+    public privilegeClause(i: number): PrivilegeClauseContext | null;
+    public privilegeClause(i?: number): PrivilegeClauseContext[] | PrivilegeClauseContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(PrivelegeClauseContext);
+            return this.getRuleContexts(PrivilegeClauseContext);
         }
 
-        return this.getRuleContext(i, PrivelegeClauseContext);
+        return this.getRuleContext(i, PrivilegeClauseContext);
     }
     public KW_ON(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_ON, 0);
@@ -71539,8 +71539,8 @@ export class AlterResourceGroupContext extends antlr.ParserRuleContext {
     public KW_VCPU(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_VCPU, 0);
     }
-    public resourceGroupVcpuSpec(): ResourceGroupVcpuSpecContext | null {
-        return this.getRuleContext(0, ResourceGroupVcpuSpecContext);
+    public resourceGroupVCpuSpec(): ResourceGroupVCpuSpecContext | null {
+        return this.getRuleContext(0, ResourceGroupVCpuSpecContext);
     }
     public KW_THREAD_PRIORITY(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_THREAD_PRIORITY, 0);
@@ -71626,8 +71626,8 @@ export class CreateResourceGroupContext extends antlr.ParserRuleContext {
     public KW_VCPU(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_VCPU, 0);
     }
-    public resourceGroupVcpuSpec(): ResourceGroupVcpuSpecContext | null {
-        return this.getRuleContext(0, ResourceGroupVcpuSpecContext);
+    public resourceGroupVCpuSpec(): ResourceGroupVCpuSpecContext | null {
+        return this.getRuleContext(0, ResourceGroupVCpuSpecContext);
     }
     public KW_THREAD_PRIORITY(): antlr.TerminalNode | null {
         return this.getToken(MySqlParser.KW_THREAD_PRIORITY, 0);
@@ -71766,7 +71766,7 @@ export class SetResourceGroupContext extends antlr.ParserRuleContext {
 }
 
 
-export class ResourceGroupVcpuSpecContext extends antlr.ParserRuleContext {
+export class ResourceGroupVCpuSpecContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -71791,31 +71791,31 @@ export class ResourceGroupVcpuSpecContext extends antlr.ParserRuleContext {
     		return this.getToken(MySqlParser.COMMA, i);
     	}
     }
-    public resourceGroupVcpuSpec(): ResourceGroupVcpuSpecContext[];
-    public resourceGroupVcpuSpec(i: number): ResourceGroupVcpuSpecContext | null;
-    public resourceGroupVcpuSpec(i?: number): ResourceGroupVcpuSpecContext[] | ResourceGroupVcpuSpecContext | null {
+    public resourceGroupVCpuSpec(): ResourceGroupVCpuSpecContext[];
+    public resourceGroupVCpuSpec(i: number): ResourceGroupVCpuSpecContext | null;
+    public resourceGroupVCpuSpec(i?: number): ResourceGroupVCpuSpecContext[] | ResourceGroupVCpuSpecContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(ResourceGroupVcpuSpecContext);
+            return this.getRuleContexts(ResourceGroupVCpuSpecContext);
         }
 
-        return this.getRuleContext(i, ResourceGroupVcpuSpecContext);
+        return this.getRuleContext(i, ResourceGroupVCpuSpecContext);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_resourceGroupVcpuSpec;
+        return MySqlParser.RULE_resourceGroupVCpuSpec;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterResourceGroupVcpuSpec) {
-             listener.enterResourceGroupVcpuSpec(this);
+        if(listener.enterResourceGroupVCpuSpec) {
+             listener.enterResourceGroupVCpuSpec(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitResourceGroupVcpuSpec) {
-             listener.exitResourceGroupVcpuSpec(this);
+        if(listener.exitResourceGroupVCpuSpec) {
+             listener.exitResourceGroupVCpuSpec(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitResourceGroupVcpuSpec) {
-            return visitor.visitResourceGroupVcpuSpec(this);
+        if (visitor.visitResourceGroupVCpuSpec) {
+            return visitor.visitResourceGroupVCpuSpec(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -71893,14 +71893,14 @@ export class DetailRevokeContext extends RevokeStatementContext {
     public KW_REVOKE(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_REVOKE, 0)!;
     }
-    public privelegeClause(): PrivelegeClauseContext[];
-    public privelegeClause(i: number): PrivelegeClauseContext | null;
-    public privelegeClause(i?: number): PrivelegeClauseContext[] | PrivelegeClauseContext | null {
+    public privilegeClause(): PrivilegeClauseContext[];
+    public privilegeClause(i: number): PrivilegeClauseContext | null;
+    public privilegeClause(i?: number): PrivilegeClauseContext[] | PrivilegeClauseContext | null {
         if (i === undefined) {
-            return this.getRuleContexts(PrivelegeClauseContext);
+            return this.getRuleContexts(PrivilegeClauseContext);
         }
 
-        return this.getRuleContext(i, PrivelegeClauseContext);
+        return this.getRuleContext(i, PrivilegeClauseContext);
     }
     public KW_ON(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_ON, 0)!;
@@ -73179,7 +73179,7 @@ export class FactorContext extends antlr.ParserRuleContext {
 }
 
 
-export class PrivelegeClauseContext extends antlr.ParserRuleContext {
+export class PrivilegeClauseContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -73196,21 +73196,21 @@ export class PrivelegeClauseContext extends antlr.ParserRuleContext {
         return this.getToken(MySqlParser.RR_BRACKET, 0);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_privelegeClause;
+        return MySqlParser.RULE_privilegeClause;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterPrivelegeClause) {
-             listener.enterPrivelegeClause(this);
+        if(listener.enterPrivilegeClause) {
+             listener.enterPrivilegeClause(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitPrivelegeClause) {
-             listener.exitPrivelegeClause(this);
+        if(listener.exitPrivilegeClause) {
+             listener.exitPrivilegeClause(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitPrivelegeClause) {
-            return visitor.visitPrivelegeClause(this);
+        if (visitor.visitPrivilegeClause) {
+            return visitor.visitPrivilegeClause(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -76049,7 +76049,7 @@ export class ShowProfileTypeContext extends antlr.ParserRuleContext {
 }
 
 
-export class BinlogStatementContext extends antlr.ParserRuleContext {
+export class BinLogStatementContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -76060,21 +76060,21 @@ export class BinlogStatementContext extends antlr.ParserRuleContext {
         return this.getToken(MySqlParser.STRING_LITERAL, 0)!;
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_binlogStatement;
+        return MySqlParser.RULE_binLogStatement;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterBinlogStatement) {
-             listener.enterBinlogStatement(this);
+        if(listener.enterBinLogStatement) {
+             listener.enterBinLogStatement(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitBinlogStatement) {
-             listener.exitBinlogStatement(this);
+        if(listener.exitBinLogStatement) {
+             listener.exitBinLogStatement(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitBinlogStatement) {
-            return visitor.visitBinlogStatement(this);
+        if (visitor.visitBinLogStatement) {
+            return visitor.visitBinLogStatement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -78285,7 +78285,7 @@ export class ColumnNameContext extends antlr.ParserRuleContext {
 }
 
 
-export class TablespaceNameCreateContext extends antlr.ParserRuleContext {
+export class TableSpaceNameCreateContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -78293,21 +78293,21 @@ export class TablespaceNameCreateContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, UidContext)!;
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_tablespaceNameCreate;
+        return MySqlParser.RULE_tableSpaceNameCreate;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterTablespaceNameCreate) {
-             listener.enterTablespaceNameCreate(this);
+        if(listener.enterTableSpaceNameCreate) {
+             listener.enterTableSpaceNameCreate(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitTablespaceNameCreate) {
-             listener.exitTablespaceNameCreate(this);
+        if(listener.exitTableSpaceNameCreate) {
+             listener.exitTableSpaceNameCreate(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTablespaceNameCreate) {
-            return visitor.visitTablespaceNameCreate(this);
+        if (visitor.visitTableSpaceNameCreate) {
+            return visitor.visitTableSpaceNameCreate(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -78315,7 +78315,7 @@ export class TablespaceNameCreateContext extends antlr.ParserRuleContext {
 }
 
 
-export class TablespaceNameContext extends antlr.ParserRuleContext {
+export class TableSpaceNameContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -78323,21 +78323,21 @@ export class TablespaceNameContext extends antlr.ParserRuleContext {
         return this.getRuleContext(0, UidContext)!;
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_tablespaceName;
+        return MySqlParser.RULE_tableSpaceName;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterTablespaceName) {
-             listener.enterTablespaceName(this);
+        if(listener.enterTableSpaceName) {
+             listener.enterTableSpaceName(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitTablespaceName) {
-             listener.exitTablespaceName(this);
+        if(listener.exitTableSpaceName) {
+             listener.exitTableSpaceName(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitTablespaceName) {
-            return visitor.visitTablespaceName(this);
+        if (visitor.visitTableSpaceName) {
+            return visitor.visitTableSpaceName(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -79426,7 +79426,7 @@ export class HexadecimalLiteralContext extends antlr.ParserRuleContext {
 }
 
 
-export class NullNotnullContext extends antlr.ParserRuleContext {
+export class NullNotNullContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -79440,21 +79440,21 @@ export class NullNotnullContext extends antlr.ParserRuleContext {
         return this.getToken(MySqlParser.KW_NOT, 0);
     }
     public override get ruleIndex(): number {
-        return MySqlParser.RULE_nullNotnull;
+        return MySqlParser.RULE_nullNotNull;
     }
     public override enterRule(listener: MySqlParserListener): void {
-        if(listener.enterNullNotnull) {
-             listener.enterNullNotnull(this);
+        if(listener.enterNullNotNull) {
+             listener.enterNullNotNull(this);
         }
     }
     public override exitRule(listener: MySqlParserListener): void {
-        if(listener.exitNullNotnull) {
-             listener.exitNullNotnull(this);
+        if(listener.exitNullNotNull) {
+             listener.exitNullNotNull(this);
         }
     }
     public override accept<Result>(visitor: MySqlParserVisitor<Result>): Result | null {
-        if (visitor.visitNullNotnull) {
-            return visitor.visitNullNotnull(this);
+        if (visitor.visitNullNotNull) {
+            return visitor.visitNullNotNull(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -83216,8 +83216,8 @@ export class IsNullPredicateContext extends PredicateContext {
     public KW_IS(): antlr.TerminalNode {
         return this.getToken(MySqlParser.KW_IS, 0)!;
     }
-    public nullNotnull(): NullNotnullContext {
-        return this.getRuleContext(0, NullNotnullContext)!;
+    public nullNotNull(): NullNotNullContext {
+        return this.getRuleContext(0, NullNotNullContext)!;
     }
     public override enterRule(listener: MySqlParserListener): void {
         if(listener.enterIsNullPredicate) {
