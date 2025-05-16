@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/DTStack/dt-sql-parser/compare/v4.2.0...v4.3.0) (2025-05-16)
+
+
+### Features
+
+* [#410](https://github.com/DTStack/dt-sql-parser/issues/410) optimize processCandidates tokenIndexOffset ([#411](https://github.com/DTStack/dt-sql-parser/issues/411)) ([5fccaa1](https://github.com/DTStack/dt-sql-parser/commit/5fccaa1ac6724419e3f4799b4e4f8fcdba8c049d))
+* **all sql:** add all sql expression column ([#358](https://github.com/DTStack/dt-sql-parser/issues/358)) ([26219b8](https://github.com/DTStack/dt-sql-parser/commit/26219b8eb2086f560670d2a72469f1f6cb77fb44))
+* collect entity's attribute([#333](https://github.com/DTStack/dt-sql-parser/issues/333)) ([ab60b14](https://github.com/DTStack/dt-sql-parser/commit/ab60b144bcdb74383c3f0064531282d89bf46f75))
+* complete after error syntax ([#334](https://github.com/DTStack/dt-sql-parser/issues/334)) ([99b01e5](https://github.com/DTStack/dt-sql-parser/commit/99b01e5310597dc373c3d1589c1dcca2094c22c2))
+* **flinksql:** collect comment, type attribute for entity ([#319](https://github.com/DTStack/dt-sql-parser/issues/319)) ([1f1dd19](https://github.com/DTStack/dt-sql-parser/commit/1f1dd19ff1ef3b062ffbb99f60e8539b41ad1401)), closes [#305](https://github.com/DTStack/dt-sql-parser/issues/305)
+* improve errorListener msg ([#281](https://github.com/DTStack/dt-sql-parser/issues/281)) ([ff49c91](https://github.com/DTStack/dt-sql-parser/commit/ff49c91623ae05f389bb0d9205bc485acbf7e0fb))
+* **merge conflict:** merge main solve conflict ([f17f19f](https://github.com/DTStack/dt-sql-parser/commit/f17f19f57a546aad9b9c8440ad6cfb4721f93f5c))
+* support semantic context of isNewStatement ([#361](https://github.com/DTStack/dt-sql-parser/issues/361)) ([042477d](https://github.com/DTStack/dt-sql-parser/commit/042477d363e7a3f7cdb7adb0a49625346506b4c5))
+* unify variables in lexer ([#366](https://github.com/DTStack/dt-sql-parser/issues/366)) ([07ff5dc](https://github.com/DTStack/dt-sql-parser/commit/07ff5dc5a1455efda434f71536b4fef38e45b5f0))
+
+
+### Bug Fixes
+
+* [#362](https://github.com/DTStack/dt-sql-parser/issues/362) set hiveVar value ([#369](https://github.com/DTStack/dt-sql-parser/issues/369)) ([ba9e3d6](https://github.com/DTStack/dt-sql-parser/commit/ba9e3d67cd43ccf07059e369cad7157931723221))
+* [#371](https://github.com/DTStack/dt-sql-parser/issues/371) export EntityContext types ([#372](https://github.com/DTStack/dt-sql-parser/issues/372)) ([c0a2854](https://github.com/DTStack/dt-sql-parser/commit/c0a28546a0dfa3b42e7a94e81db8b833a62d3f9e))
+* **flink:** fix flinksql syntax error about ROW and function using ([#383](https://github.com/DTStack/dt-sql-parser/issues/383)) ([188d42d](https://github.com/DTStack/dt-sql-parser/commit/188d42da72ad81d5e1f96c453e9e8238692cdb9f))
+* **flink:** resolve conflicts ([ec65d4e](https://github.com/DTStack/dt-sql-parser/commit/ec65d4e21ff0a4ca8e2997b42ccc887b3bba763b))
+* minimum collect candidates boundary to fix parse performance ([#378](https://github.com/DTStack/dt-sql-parser/issues/378)) ([64ed7e4](https://github.com/DTStack/dt-sql-parser/commit/64ed7e4cd30ed12238390d113f202d4122ef9d73))
+* spell check ([#337](https://github.com/DTStack/dt-sql-parser/issues/337)) ([fb55c99](https://github.com/DTStack/dt-sql-parser/commit/fb55c999542a11b197d33b35c25bd5801eff6fa7))
+
 ## [4.2.0](https://github.com/DTStack/dt-sql-parser/compare/v4.1.1...v4.2.0) (2025-05-09)
 
 
