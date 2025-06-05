@@ -414,7 +414,7 @@ export abstract class BasicSQL<
 
             // A boundary consisting of the index of the input.
             const startIndex = startStatement?.start?.start ?? 0;
-            const stopIndex = stopStatement?.stop?.stop ?? inputSlice.length - 1;
+            const stopIndex = stopStatement?.stop?.stop ?? inputSlice.length;
 
             /**
              * Save offset of the tokenIndex in the range of input
@@ -518,6 +518,7 @@ export abstract class BasicSQL<
         } else {
             if (statementCount > 1) {
                 caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+                allTokens = allTokens.slice(tokenIndexOffset);
             }
         }
 

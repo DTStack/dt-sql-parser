@@ -7,6 +7,7 @@ describe('MySQL Complete After Syntax Error', () => {
     const sql1 = `SELECT  FROM tb2;\nINSERT INTO `;
     const sql2 = `SELECT  FROM tb3;\nCREATE TABLE `;
     const sql3 = `SELECT FROM t1;\nSL`;
+    const sql4 = `SELECT FROM t1;\n-- the comment 1\n-- the comment 2\nSELECT * FROM db.`;
 
     test('Syntax error but end with semi, should suggest tableName', () => {
         const pos: CaretPosition = {
@@ -61,5 +62,20 @@ describe('MySQL Complete After Syntax Error', () => {
             (item) => item.startsWith('S') && /S(?=.*L)/.test(item)
         );
         expect(filterKeywords).toMatchUnorderedArray(['SELECT', 'SIGNAL']);
+    });
+
+    test('Syntax suggestion after error and comments', () => {
+        const pos: CaretPosition = {
+            lineNumber: 4,
+            column: 18,
+        };
+        const syntaxes = mysql.getSuggestionAtCaretPosition(sql4, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        // syntax
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
     });
 });

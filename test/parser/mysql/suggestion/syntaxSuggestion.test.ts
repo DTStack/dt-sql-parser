@@ -640,4 +640,52 @@ describe('MySQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['score']);
     });
+
+    test('Syntax suggestion after a comment', () => {
+        const sql = `-- the comment\nSELECT * FROM db.`;
+        const pos: CaretPosition = {
+            lineNumber: 2,
+            column: 18,
+        };
+
+        const syntaxes = mysql.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+    });
+
+    test('Syntax suggestion after comments', () => {
+        const sql = `-- the comment 1\n-- the comment 2\nSELECT * FROM db.`;
+        const pos: CaretPosition = {
+            lineNumber: 3,
+            column: 18,
+        };
+
+        const syntaxes = mysql.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+    });
+
+    test('Syntax suggestion after comments', () => {
+        const sql = `-- SELECT FROM t1;\n-- the comment 1\n-- the comment 2\nSELECT * FROM db.`;
+        const pos: CaretPosition = {
+            lineNumber: 4,
+            column: 18,
+        };
+
+        const syntaxes = mysql.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+    });
 });
