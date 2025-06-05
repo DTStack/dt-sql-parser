@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.1](https://github.com/DTStack/dt-sql-parser/compare/v4.3.0...v4.3.1) (2025-06-05)
+
+
+### Bug Fixes
+
+* **common:** [#424](https://github.com/DTStack/dt-sql-parser/issues/424) allTokens slice when caretTokenIndex use tokenIndexOffset ([#426](https://github.com/DTStack/dt-sql-parser/issues/426)) ([616dc11](https://github.com/DTStack/dt-sql-parser/commit/616dc1126d742bcdd902752ddaedab9b352a8927))
+
 ## [4.3.0](https://github.com/DTStack/dt-sql-parser/compare/v4.2.0...v4.3.0) (2025-05-16)
 
 
