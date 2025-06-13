@@ -913,7 +913,7 @@ tableAllColumns
 
 namedExpression
     : (tableAllColumns | selectLiteralColumnName | selectExpressionColumnName) (
-        KW_AS? (name=errorCapturingIdentifier | identifierList)
+        KW_AS? (alias=errorCapturingIdentifier | identifierList)
     )?
     ;
 

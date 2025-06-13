@@ -409,7 +409,9 @@ export abstract class EntityCollector {
     exitProgram() {
         const entities = Array.from(this._entitiesSet);
         this.removeCtxAttr();
-        this.attachAccessibleToEntities(entities);
+        if (this._caretTokenIndex !== -1) {
+            this.attachAccessibleToEntities(entities);
+        }
         this._entityStack.clear();
     }
 

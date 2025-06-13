@@ -4,9 +4,12 @@ import path from 'path';
 import { SparkSqlParserListener } from 'src/lib/spark/SparkSqlParserListener';
 import {
     AttrName,
+    ColumnDeclareType,
+    CommonEntityContext,
     isCommonEntityContext,
     isFuncEntityContext,
     StmtContextType,
+    TableDeclareType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
 import { SparkEntityCollector, SparkSQL, SparkSqlSplitListener } from 'src/parser/spark';
@@ -24,7 +27,7 @@ describe('SparkSQL entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(12);
+        expect(splitListener.statementsContext.length).toBe(17);
     });
 
     test('create table like', () => {
@@ -162,10 +165,11 @@ describe('SparkSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const tableCreateEntity = allEntities[0];
-        const originTableEntity = allEntities[1];
+        const originTableEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
+        const tableCreateEntity = allEntities[2];
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('student_copy');
@@ -175,7 +179,7 @@ describe('SparkSQL entity collector tests', () => {
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns).toBeUndefined();
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
-            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
         }
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(originTableEntity.text).toBe('student');
@@ -190,10 +194,11 @@ describe('SparkSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const viewEntity = allEntities[0];
-        const tableEntity = allEntities[1];
+        const tableEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
+        const viewEntity = allEntities[2];
 
         expect(viewEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(viewEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
@@ -241,7 +246,7 @@ describe('SparkSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
         const tableEntity1 = allEntities[0];
         const tableEntity2 = allEntities[1];
@@ -298,8 +303,8 @@ describe('SparkSQL entity collector tests', () => {
 
         expect(allEntities.length).toBe(2);
 
-        const targetTableEntity = allEntities[0];
-        const sourceTableEntity = allEntities[1];
+        const sourceTableEntity = allEntities[0];
+        const targetTableEntity = allEntities[1];
 
         expect(targetTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(targetTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
@@ -318,7 +323,7 @@ describe('SparkSQL entity collector tests', () => {
         spark.listen(collectListener as ParseTreeListener, testingContext);
 
         const allEntities = collectListener.getEntities();
-        expect(allEntities.length).toBe(1);
+        expect(allEntities.length).toBe(2);
 
         const sourceTableEntity = allEntities[0];
 
@@ -446,5 +451,195 @@ describe('SparkSQL entity collector tests', () => {
             expect(functionEntity.arguments).toBeNull();
             expect(functionEntity.relatedEntities).toBeNull();
         }
+    });
+
+    test('table entities are accessible when caret is in outer query', () => {
+        const hiveSql = new SparkSQL();
+        const sql = `SELECT id FROM t1, (SELECT name from t2) as t3`;
+
+        // 光标在外层查询的FROM关键字位置
+        const entities = hiveSql.getAllEntities(sql, {
+            lineNumber: 1,
+            column: 13, // 光标在FROM位置
+        });
+
+        // 验证可以访问外层查询中的所有表
+        const accessibleTables = entities.filter(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.isAccessible
+        );
+        expect(accessibleTables.length).toBe(2); // 应该至少包含t1和t3
+
+        // 验证t1和t3是可访问的
+        const t1 = accessibleTables.find((e) => e.text === 't1');
+        const t3 = accessibleTables.find((e) => e._alias?.text === 't3');
+        expect(t1).toBeDefined();
+        expect(t1?.isAccessible).toBeTruthy();
+        expect(t3).toBeDefined();
+        expect(t3?.isAccessible).toBeTruthy();
+    });
+
+    test('table entities are not accessible when caret is in inner query', () => {
+        const hiveSql = new SparkSQL();
+        const sql = `SELECT id FROM t1, (SELECT name from t2) as t3`;
+
+        // 光标在内层查询的name位置
+        const entities = hiveSql.getAllEntities(sql, {
+            lineNumber: 1,
+            column: 29, // 光标在name位置
+        });
+
+        // 验证实体访问规则
+        const tables = entities.filter((e) => e.entityContextType === EntityContextType.TABLE);
+
+        // 找到t1、t2和t3
+        const t1 = tables.find((e) => e.text === 't1');
+        const t2 = tables.find((e) => e.text === 't2');
+        const t3 = tables.find((e) => e._alias?.text === 't3');
+
+        // t1和t3应该不可访问，因为它们在外层查询
+        expect(t1).toBeDefined();
+        expect(t1?.isAccessible).toBeFalsy();
+        expect(t3).toBeDefined();
+        expect(t3?.isAccessible).toBeFalsy();
+
+        // t2应该可以访问，因为它在内层查询中
+        expect(t2).toBeDefined();
+        expect(t2?.isAccessible).toBeTruthy();
+    });
+
+    test('should collect query result and columns', () => {
+        const spark = new SparkSQL();
+        const context = splitListener.statementsContext[12];
+
+        const collectListener = new SparkEntityCollector(commonSql);
+        spark.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('id, age as new_age, count(*) as total');
+        expect(queryResult.relatedEntities?.length).toBe(1);
+        expect(queryResult.relatedEntities?.[0].text).toBe('t1');
+
+        const columns = queryResult.columns;
+        expect(columns?.length).toBe(3);
+        expect(columns[0].text).toBe('id');
+        expect(columns[0].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(columns[1].text).toBe('age');
+        expect(columns[1].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(columns[1][AttrName.alias]).toEqual(expect.objectContaining({ text: 'new_age' }));
+        expect(columns[2].text).toBe('count(*)');
+        expect(columns[2].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(columns[2][AttrName.alias]).toEqual(expect.objectContaining({ text: 'total' }));
+    });
+
+    test('should collect columns with multiple star symbol', () => {
+        const spark = new SparkSQL();
+        const context = splitListener.statementsContext[13];
+
+        const collectListener = new SparkEntityCollector(commonSql);
+        spark.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('t1.*, t2.*');
+        expect(queryResult.columns?.length).toBe(2);
+        expect(queryResult.columns[0].text).toBe('t1.*');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.ALL);
+        expect(queryResult.columns[1].text).toBe('t2.*');
+        expect(queryResult.columns[1].declareType).toBe(ColumnDeclareType.ALL);
+    });
+
+    test('should collect columns with single star symbol', () => {
+        const spark = new SparkSQL();
+        const context = splitListener.statementsContext[14];
+
+        const collectListener = new SparkEntityCollector(commonSql);
+        spark.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('*');
+        expect(queryResult.columns?.length).toBe(1);
+        expect(queryResult.columns[0].text).toBe('*');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.ALL);
+    });
+
+    test('should collect derived table and derived column', () => {
+        const spark = new SparkSQL();
+        const context = splitListener.statementsContext[15];
+
+        const collectListener = new SparkEntityCollector(commonSql);
+        spark.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const tableEntities = allEntities.filter(
+            (entity) => entity.entityContextType === EntityContextType.TABLE
+        ) as CommonEntityContext[];
+
+        expect(tableEntities.length).toBe(4);
+        expect(tableEntities[0].text).toBe('t3');
+        expect(tableEntities[0].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[0][AttrName.alias]).toBeFalsy();
+
+        expect(tableEntities[1].text).toBe('t1');
+        expect(tableEntities[1].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[1][AttrName.alias]).toBeFalsy();
+
+        expect(tableEntities[2].text).toBe('(select id, name from t1)');
+        expect(tableEntities[2].declareType).toBe(TableDeclareType.EXPRESSION);
+        expect(tableEntities[2][AttrName.alias]?.text).toBe('derived_table');
+
+        expect(tableEntities[3].text).toBe('t2');
+        expect(tableEntities[3].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[3][AttrName.alias]).toBeFalsy();
+
+        const queryResults = allEntities.filter(
+            (entity) => entity.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext[];
+        expect(queryResults.length).toBe(3);
+        expect(queryResults[0].text).toBe('max(age) as max_age');
+        expect(queryResults[0].columns?.length).toBe(1);
+        expect(queryResults[0].columns[0].text).toBe('max(age)');
+        expect(queryResults[0].columns[0].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResults[0].columns[0][AttrName.alias]?.text).toBe('max_age');
+
+        expect(queryResults[2].text).toBe('id, (select max(age) as max_age from t3) as max_age');
+        expect(queryResults[2].columns?.length).toBe(2);
+        expect(queryResults[2].columns[0].text).toBe('id');
+        expect(queryResults[2].columns[0].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(queryResults[2].columns[1].text).toBe('(select max(age) as max_age from t3)');
+        expect(queryResults[2].columns[1].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResults[2].columns[1][AttrName.alias]?.text).toBe('max_age');
+    });
+
+    test('should collect query result in where clause', () => {
+        const spark = new SparkSQL();
+        const context = splitListener.statementsContext[16];
+
+        const collectListener = new SparkEntityCollector(commonSql);
+        spark.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResults = allEntities.filter(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext[];
+
+        expect(queryResults.length).toBe(2);
+        expect(queryResults[0].text).toBe('name');
+        expect(queryResults[0].columns?.[0].text).toBe('name');
+        expect(queryResults[1].text).toBe('id');
     });
 });

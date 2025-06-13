@@ -11934,7 +11934,7 @@ export class SparkSqlParser extends SQLParserBase {
         let localContext = new RelationPrimaryContext(this.context, this.state);
         this.enterRule(localContext, 224, SparkSqlParser.RULE_relationPrimary);
         try {
-            this.state = 2821;
+            this.state = 2819;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 359, this.context) ) {
             case 1:
@@ -11992,22 +11992,18 @@ export class SparkSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 2801;
-                this.match(SparkSqlParser.LEFT_PAREN);
-                this.state = 2802;
                 this.atomSubQueryTableSource();
                 this.state = 2803;
-                this.match(SparkSqlParser.RIGHT_PAREN);
-                this.state = 2805;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 357, this.context) ) {
                 case 1:
                     {
-                    this.state = 2804;
+                    this.state = 2802;
                     this.sample();
                     }
                     break;
                 }
-                this.state = 2807;
+                this.state = 2805;
                 this.tableAlias();
                 }
                 break;
@@ -12015,23 +12011,23 @@ export class SparkSqlParser extends SQLParserBase {
                 localContext = new JoinTableSourceContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 2809;
+                this.state = 2807;
                 this.match(SparkSqlParser.LEFT_PAREN);
-                this.state = 2810;
+                this.state = 2808;
                 this.relation();
-                this.state = 2811;
+                this.state = 2809;
                 this.match(SparkSqlParser.RIGHT_PAREN);
-                this.state = 2813;
+                this.state = 2811;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 358, this.context) ) {
                 case 1:
                     {
-                    this.state = 2812;
+                    this.state = 2810;
                     this.sample();
                     }
                     break;
                 }
-                this.state = 2815;
+                this.state = 2813;
                 this.tableAlias();
                 }
                 break;
@@ -12039,9 +12035,9 @@ export class SparkSqlParser extends SQLParserBase {
                 localContext = new InlineTableSourceContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 2817;
+                this.state = 2815;
                 this.inlineTable();
-                this.state = 2818;
+                this.state = 2816;
                 this.tableAlias();
                 }
                 break;
@@ -12049,7 +12045,7 @@ export class SparkSqlParser extends SQLParserBase {
                 localContext = new FunctionTableSourceContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 2820;
+                this.state = 2818;
                 this.functionTable();
                 }
                 break;
@@ -12075,8 +12071,12 @@ export class SparkSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2823;
+            this.state = 2821;
+            this.match(SparkSqlParser.LEFT_PAREN);
+            this.state = 2822;
             this.query();
+            this.state = 2823;
+            this.match(SparkSqlParser.RIGHT_PAREN);
             }
         }
         catch (re) {
@@ -13842,7 +13842,7 @@ export class SparkSqlParser extends SQLParserBase {
                 case SparkSqlParser.BACKQUOTED_IDENTIFIER:
                     {
                     this.state = 3048;
-                    localContext._name = this.errorCapturingIdentifier();
+                    localContext._alias = this.errorCapturingIdentifier();
                     }
                     break;
                 case SparkSqlParser.LEFT_PAREN:
@@ -19159,9 +19159,9 @@ export class SparkSqlParser extends SQLParserBase {
         3,109,2772,8,109,1,110,1,110,1,110,1,110,5,110,2778,8,110,10,110,
         12,110,2781,9,110,1,110,1,110,1,111,1,111,3,111,2787,8,111,1,112,
         1,112,1,112,3,112,2792,8,112,1,112,3,112,2795,8,112,1,112,3,112,
-        2798,8,112,1,112,1,112,1,112,1,112,1,112,1,112,3,112,2806,8,112,
-        1,112,1,112,1,112,1,112,1,112,1,112,3,112,2814,8,112,1,112,1,112,
-        1,112,1,112,1,112,1,112,3,112,2822,8,112,1,113,1,113,1,114,1,114,
+        2798,8,112,1,112,1,112,1,112,1,112,3,112,2804,8,112,1,112,1,112,
+        1,112,1,112,1,112,1,112,3,112,2812,8,112,1,112,1,112,1,112,1,112,
+        1,112,1,112,3,112,2820,8,112,1,113,1,113,1,113,1,113,1,114,1,114,
         1,114,1,114,5,114,2830,8,114,10,114,12,114,2833,9,114,1,115,1,115,
         1,115,3,115,2838,8,115,1,115,1,115,1,115,1,115,1,115,3,115,2845,
         8,115,1,115,1,115,1,115,1,115,1,115,3,115,2852,8,115,3,115,2854,
@@ -19360,7 +19360,7 @@ export class SparkSqlParser extends SQLParserBase {
         1,0,0,0,200,2655,1,0,0,0,202,2674,1,0,0,0,204,2700,1,0,0,0,206,2706,
         1,0,0,0,208,2708,1,0,0,0,210,2744,1,0,0,0,212,2746,1,0,0,0,214,2750,
         1,0,0,0,216,2758,1,0,0,0,218,2769,1,0,0,0,220,2773,1,0,0,0,222,2784,
-        1,0,0,0,224,2821,1,0,0,0,226,2823,1,0,0,0,228,2825,1,0,0,0,230,2853,
+        1,0,0,0,224,2819,1,0,0,0,226,2821,1,0,0,0,228,2825,1,0,0,0,230,2853,
         1,0,0,0,232,2874,1,0,0,0,234,2894,1,0,0,0,236,2900,1,0,0,0,238,2904,
         1,0,0,0,240,2906,1,0,0,0,242,2909,1,0,0,0,244,2930,1,0,0,0,246,2981,
         1,0,0,0,248,2983,1,0,0,0,250,2991,1,0,0,0,252,2999,1,0,0,0,254,3007,
@@ -20210,23 +20210,23 @@ export class SparkSqlParser extends SQLParserBase {
         2790,1,0,0,0,2792,2794,1,0,0,0,2793,2795,3,150,75,0,2794,2793,1,
         0,0,0,2794,2795,1,0,0,0,2795,2797,1,0,0,0,2796,2798,3,208,104,0,
         2797,2796,1,0,0,0,2797,2798,1,0,0,0,2798,2799,1,0,0,0,2799,2800,
-        3,244,122,0,2800,2822,1,0,0,0,2801,2802,5,2,0,0,2802,2803,3,226,
-        113,0,2803,2805,5,3,0,0,2804,2806,3,208,104,0,2805,2804,1,0,0,0,
-        2805,2806,1,0,0,0,2806,2807,1,0,0,0,2807,2808,3,244,122,0,2808,2822,
-        1,0,0,0,2809,2810,5,2,0,0,2810,2811,3,198,99,0,2811,2813,5,3,0,0,
-        2812,2814,3,208,104,0,2813,2812,1,0,0,0,2813,2814,1,0,0,0,2814,2815,
-        1,0,0,0,2815,2816,3,244,122,0,2816,2822,1,0,0,0,2817,2818,3,228,
-        114,0,2818,2819,3,244,122,0,2819,2822,1,0,0,0,2820,2822,3,240,120,
-        0,2821,2791,1,0,0,0,2821,2801,1,0,0,0,2821,2809,1,0,0,0,2821,2817,
-        1,0,0,0,2821,2820,1,0,0,0,2822,225,1,0,0,0,2823,2824,3,26,13,0,2824,
-        227,1,0,0,0,2825,2826,5,333,0,0,2826,2831,3,280,140,0,2827,2828,
-        5,4,0,0,2828,2830,3,280,140,0,2829,2827,1,0,0,0,2830,2833,1,0,0,
-        0,2831,2829,1,0,0,0,2831,2832,1,0,0,0,2832,229,1,0,0,0,2833,2831,
-        1,0,0,0,2834,2835,5,293,0,0,2835,2837,3,86,43,0,2836,2838,3,232,
-        116,0,2837,2836,1,0,0,0,2837,2838,1,0,0,0,2838,2854,1,0,0,0,2839,
-        2840,5,293,0,0,2840,2841,5,2,0,0,2841,2842,3,86,43,0,2842,2844,5,
-        3,0,0,2843,2845,3,232,116,0,2844,2843,1,0,0,0,2844,2845,1,0,0,0,
-        2845,2854,1,0,0,0,2846,2847,5,293,0,0,2847,2848,5,2,0,0,2848,2849,
+        3,244,122,0,2800,2820,1,0,0,0,2801,2803,3,226,113,0,2802,2804,3,
+        208,104,0,2803,2802,1,0,0,0,2803,2804,1,0,0,0,2804,2805,1,0,0,0,
+        2805,2806,3,244,122,0,2806,2820,1,0,0,0,2807,2808,5,2,0,0,2808,2809,
+        3,198,99,0,2809,2811,5,3,0,0,2810,2812,3,208,104,0,2811,2810,1,0,
+        0,0,2811,2812,1,0,0,0,2812,2813,1,0,0,0,2813,2814,3,244,122,0,2814,
+        2820,1,0,0,0,2815,2816,3,228,114,0,2816,2817,3,244,122,0,2817,2820,
+        1,0,0,0,2818,2820,3,240,120,0,2819,2791,1,0,0,0,2819,2801,1,0,0,
+        0,2819,2807,1,0,0,0,2819,2815,1,0,0,0,2819,2818,1,0,0,0,2820,225,
+        1,0,0,0,2821,2822,5,2,0,0,2822,2823,3,26,13,0,2823,2824,5,3,0,0,
+        2824,227,1,0,0,0,2825,2826,5,333,0,0,2826,2831,3,280,140,0,2827,
+        2828,5,4,0,0,2828,2830,3,280,140,0,2829,2827,1,0,0,0,2830,2833,1,
+        0,0,0,2831,2829,1,0,0,0,2831,2832,1,0,0,0,2832,229,1,0,0,0,2833,
+        2831,1,0,0,0,2834,2835,5,293,0,0,2835,2837,3,86,43,0,2836,2838,3,
+        232,116,0,2837,2836,1,0,0,0,2837,2838,1,0,0,0,2838,2854,1,0,0,0,
+        2839,2840,5,293,0,0,2840,2841,5,2,0,0,2841,2842,3,86,43,0,2842,2844,
+        5,3,0,0,2843,2845,3,232,116,0,2844,2843,1,0,0,0,2844,2845,1,0,0,
+        0,2845,2854,1,0,0,0,2846,2847,5,293,0,0,2847,2848,5,2,0,0,2848,2849,
         3,26,13,0,2849,2851,5,3,0,0,2850,2852,3,232,116,0,2851,2850,1,0,
         0,0,2851,2852,1,0,0,0,2852,2854,1,0,0,0,2853,2834,1,0,0,0,2853,2839,
         1,0,0,0,2853,2846,1,0,0,0,2854,231,1,0,0,0,2855,2856,5,346,0,0,2856,
@@ -20668,7 +20668,7 @@ export class SparkSqlParser extends SQLParserBase {
         2581,2589,2594,2608,2617,2620,2625,2632,2635,2641,2647,2650,2655,
         2660,2664,2670,2674,2677,2682,2685,2690,2694,2697,2700,2706,2711,
         2718,2721,2739,2741,2744,2755,2764,2771,2779,2786,2791,2794,2797,
-        2805,2813,2821,2831,2837,2844,2851,2853,2866,2872,2874,2884,2890,
+        2803,2811,2819,2831,2837,2844,2851,2853,2866,2872,2874,2884,2890,
         2892,2900,2904,2916,2919,2924,2928,2930,2939,2951,2953,2960,2967,
         2973,2979,2981,2988,2996,3004,3010,3015,3022,3035,3043,3046,3050,
         3052,3059,3070,3077,3087,3092,3096,3106,3113,3126,3128,3136,3138,
@@ -30424,14 +30424,8 @@ export class SubQueryTableSourceContext extends RelationPrimaryContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public LEFT_PAREN(): antlr.TerminalNode {
-        return this.getToken(SparkSqlParser.LEFT_PAREN, 0)!;
-    }
     public atomSubQueryTableSource(): AtomSubQueryTableSourceContext {
         return this.getRuleContext(0, AtomSubQueryTableSourceContext)!;
-    }
-    public RIGHT_PAREN(): antlr.TerminalNode {
-        return this.getToken(SparkSqlParser.RIGHT_PAREN, 0)!;
     }
     public tableAlias(): TableAliasContext {
         return this.getRuleContext(0, TableAliasContext)!;
@@ -30597,8 +30591,14 @@ export class AtomSubQueryTableSourceContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
+    public LEFT_PAREN(): antlr.TerminalNode {
+        return this.getToken(SparkSqlParser.LEFT_PAREN, 0)!;
+    }
     public query(): QueryContext {
         return this.getRuleContext(0, QueryContext)!;
+    }
+    public RIGHT_PAREN(): antlr.TerminalNode {
+        return this.getToken(SparkSqlParser.RIGHT_PAREN, 0)!;
     }
     public override get ruleIndex(): number {
         return SparkSqlParser.RULE_atomSubQueryTableSource;
@@ -31523,7 +31523,7 @@ export class TableAllColumnsContext extends antlr.ParserRuleContext {
 
 
 export class NamedExpressionContext extends antlr.ParserRuleContext {
-    public _name?: ErrorCapturingIdentifierContext;
+    public _alias?: ErrorCapturingIdentifierContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
