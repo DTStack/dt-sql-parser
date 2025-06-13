@@ -34,7 +34,7 @@ export interface StmtContext {
     readonly rootStmt: StmtContext | null;
     readonly parentStmt: StmtContext | null;
     readonly isContainCaret?: boolean;
-    readonly _scopeDepth: number;
+    readonly scopeDepth: number;
     readonly _ctx: ParserRuleContext;
     readonly text: string;
 }
@@ -57,7 +57,7 @@ export function toStmtContext(
         parentStmt: parentStmt ?? null,
         isContainCaret,
         text: stmtText,
-        _scopeDepth: type === StmtContextType.COMMON_STMT ? 0 : (parentStmt?._scopeDepth ?? 0) + 1,
+        scopeDepth: type === StmtContextType.COMMON_STMT ? 0 : (parentStmt?.scopeDepth ?? 0) + 1,
         _ctx: ctx,
     };
 }
@@ -106,8 +106,8 @@ export interface BaseEntityContext {
     isAccessible: boolean;
     /** Entities related to this entity */
     relatedEntities: EntityContext[] | null;
-    /** The parser rule context for this entity */
-    _ctx: ParserRuleContext;
+    /** The parser rule context for this entity, it will be deleted after the entity is collected because of json serialization */
+    _ctx?: ParserRuleContext;
     /** Comment attribute for this entity */
     [AttrName.comment]: WordRange | null;
     /** Alias attribute for this entity */
@@ -328,10 +328,10 @@ function findAttributeChildren(
  * @returns true if entity is contained within rangeEntity's range
  */
 function isEntityInScope(entity: EntityContext, rangeEntity: EntityContext): boolean {
-    const entityStart = entity._ctx.start?.tokenIndex;
-    const entityStop = entity._ctx.stop?.tokenIndex;
-    const rangeStart = rangeEntity._ctx.start?.tokenIndex;
-    const rangeStop = rangeEntity._ctx.stop?.tokenIndex;
+    const entityStart = entity._ctx?.start?.tokenIndex;
+    const entityStop = entity._ctx?.stop?.tokenIndex;
+    const rangeStart = rangeEntity._ctx?.start?.tokenIndex;
+    const rangeStop = rangeEntity._ctx?.stop?.tokenIndex;
 
     return (
         entityStart != null &&
@@ -408,9 +408,51 @@ export abstract class EntityCollector {
 
     exitProgram() {
         const entities = Array.from(this._entitiesSet);
+        this.removeCtxAttr();
         this.attachAccessibleToEntities(entities);
         this._entityStack.clear();
-        debugger;
+    }
+
+    /**
+     * Remove _ctx property to avoid circular references during JSON serialization
+     */
+    private removeCtxAttr() {
+        const entities = Array.from(this._entitiesSet);
+        // Use WeakSet to track processed objects and avoid infinite recursion from circular references
+        const processed = new WeakSet();
+
+        const removeCtx = (obj: any) => {
+            if (!obj || typeof obj !== 'object' || processed.has(obj)) {
+                return;
+            }
+            processed.add(obj);
+
+            if ('_ctx' in obj) {
+                obj._ctx = undefined;
+            }
+
+            if (obj.belongStmt) {
+                removeCtx(obj.belongStmt);
+            }
+
+            if (obj.rootStmt) {
+                removeCtx(obj.rootStmt);
+            }
+
+            if (obj.parentStmt) {
+                removeCtx(obj.parentStmt);
+            }
+
+            if (obj.relatedEntities && Array.isArray(obj.relatedEntities)) {
+                obj.relatedEntities.forEach(removeCtx);
+            }
+
+            if (obj.columns && Array.isArray(obj.columns)) {
+                obj.columns.forEach(removeCtx);
+            }
+        };
+
+        entities.forEach(removeCtx);
     }
 
     /**
@@ -439,9 +481,6 @@ export abstract class EntityCollector {
 
     /**
      * Adds accessibility markers to entities
-     * Implements SQL query scope rules:
-     * 1. When the caret is in an outer query, all tables are accessible
-     * 2. When the caret is in a subquery, only tables within the subquery are accessible, not tables from outer queries
      * @param entities The list of entities to process
      */
     protected attachAccessibleToEntities(entities: EntityContext[]): void {
@@ -449,15 +488,12 @@ export abstract class EntityCollector {
             return;
         }
 
-        // Determine if the caret is inside a derived table subquery
-        const isCaretInDerivedTableStmt = this.isCaretInDerivedTableStmt();
-
         for (const entity of entities) {
             if (entity.isAccessible !== undefined) {
                 continue;
             }
 
-            const entityScopeDepth = entity.belongStmt._scopeDepth ?? 0;
+            const entityScopeDepth = entity.belongStmt.scopeDepth ?? 0;
 
             // First, the entity must be in a statement containing the caret to potentially be accessible
             entity.isAccessible = entity.belongStmt.isContainCaret ?? false;
@@ -465,11 +501,7 @@ export abstract class EntityCollector {
             // For table-type entities, we need to judge accessibility based on scope depth
             if (entity.entityContextType === EntityContextType.TABLE) {
                 entity.isAccessible =
-                    entity.isAccessible &&
-                    ((!isCaretInDerivedTableStmt &&
-                        entityScopeDepth <= this._caretStmtScopeDepth) ||
-                        (isCaretInDerivedTableStmt &&
-                            entityScopeDepth === this._caretStmtScopeDepth));
+                    entity.isAccessible && entityScopeDepth === this._caretStmtScopeDepth;
             }
 
             // Recursively process related entities
@@ -546,6 +578,7 @@ export abstract class EntityCollector {
     protected getPrevNonHiddenTokenIndex(caretTokenIndex: number) {
         if (this._allTokens[caretTokenIndex].channel !== Token.HIDDEN_CHANNEL)
             return caretTokenIndex;
+
         for (let i = caretTokenIndex - 1; i >= 0; i--) {
             const token = this._allTokens[i];
             if (token.channel !== Token.HIDDEN_CHANNEL) {
@@ -553,11 +586,13 @@ export abstract class EntityCollector {
                 return token.text === ';' ? Infinity : token.tokenIndex;
             }
         }
+
         return Infinity;
     }
 
     protected pushStmt(ctx: ParserRuleContext, type: StmtContextType) {
         let isContainCaret: boolean | undefined;
+
         if (this._caretTokenIndex >= 0) {
             isContainCaret =
                 !!ctx.start &&
@@ -568,6 +603,7 @@ export abstract class EntityCollector {
                 this._caretStmtScopeDepth++;
             }
         }
+
         const stmtContext = toStmtContext(
             ctx,
             type,
@@ -576,6 +612,7 @@ export abstract class EntityCollector {
             this._stmtStack.peek(),
             isContainCaret
         );
+
         if (stmtContext) {
             if (
                 this._stmtStack.isEmpty() ||
@@ -602,7 +639,7 @@ export abstract class EntityCollector {
             // then set it as the nearest statement containing the caret
             if (
                 stmtContext.isContainCaret &&
-                stmtContext._scopeDepth === this._caretStmtScopeDepth
+                stmtContext.scopeDepth === this._caretStmtScopeDepth
             ) {
                 this._caretStmt = stmtContext;
             }

@@ -76,7 +76,6 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
     /** Virtual Table Entity Rules */
     exitAtomValuesClause(ctx: AtomValuesClauseContext) {
         if (!isChildContextOf(ctx, HiveSqlParser.RULE_fromClause)) return;
-
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
@@ -95,7 +94,6 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
     /** SubQuery Table Entity Rules */
     exitQueryStatementExpression(ctx: QueryStatementExpressionContext) {
         if (!isChildContextOf(ctx, HiveSqlParser.RULE_fromClause)) return;
-
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
@@ -114,7 +112,6 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
     /** Partitioned Table Entity Rules */
     exitAtomPartitionedTableFunction(ctx: AtomPartitionedTableFunctionContext) {
         if (!isChildContextOf(ctx, HiveSqlParser.RULE_fromClause)) return;
-
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,

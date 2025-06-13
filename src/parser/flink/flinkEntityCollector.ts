@@ -1,7 +1,10 @@
 import {
+    AtomExpressionTableContext,
+    AtomFunctionTableContext,
     CatalogPathContext,
     CatalogPathCreateContext,
     ColumnNameCreateContext,
+    ColumnProjectItemContext,
     CreateCatalogContext,
     CreateDatabaseContext,
     CreateFunctionContext,
@@ -11,9 +14,15 @@ import {
     DatabasePathCreateContext,
     FunctionNameCreateContext,
     InsertStatementContext,
+    OverWindowItemContext,
     PhysicalColumnDefinitionContext,
     QueryStatementContext,
+    SelectExpressionColumnNameContext,
+    SelectListContext,
+    SelectLiteralColumnNameContext,
+    SelectWindowItemColumnNameContext,
     SqlStatementContext,
+    TableAllColumnsContext,
     TablePathContext,
     TablePathCreateContext,
     TableReferenceContext,
@@ -21,7 +30,13 @@ import {
     ViewPathCreateContext,
 } from '../../lib/flink/FlinkSqlParser';
 import { FlinkSqlParserListener } from '../../lib/flink/FlinkSqlParserListener';
-import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import {
+    AttrName,
+    ColumnDeclareType,
+    EntityCollector,
+    StmtContextType,
+    TableDeclareType,
+} from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
 
 export class FlinkEntityCollector extends EntityCollector implements FlinkSqlParserListener {
@@ -48,18 +63,50 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     }
 
     exitTablePath(ctx: TablePathContext) {
-        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
-            needCollectAttr
-                ? [
-                      {
-                          attrName: AttrName.alias,
-                          endContextList: [TableReferenceContext.name],
-                      },
-                  ]
-                : undefined
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [TableReferenceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.COMMON,
+            }
+        );
+    }
+
+    exitAtomFunctionTable(ctx: AtomFunctionTableContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [TableReferenceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitAtomExpressionTable(ctx: AtomExpressionTableContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [TableReferenceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
         );
     }
 
@@ -85,6 +132,15 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
         ]);
     }
 
+    exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
+        this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE);
+    }
+
+    exitSelectList(ctx: SelectListContext) {
+        this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
+    }
+
+    /** Column entity rules */
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
             {
@@ -98,8 +154,68 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
         ]);
     }
 
-    exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
-        this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE);
+    exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [ColumnProjectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.COMMON,
+            }
+        );
+    }
+
+    exitSelectExpressionColumnName(ctx: SelectExpressionColumnNameContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [ColumnProjectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitSelectWindowItemColumnName(ctx: SelectWindowItemColumnNameContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [ColumnProjectItemContext.name, OverWindowItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitTableAllColumns(ctx: TableAllColumnsContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [ColumnProjectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.ALL,
+            }
+        );
     }
 
     /** ===== Statement begin */

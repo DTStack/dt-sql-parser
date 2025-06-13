@@ -399,6 +399,8 @@ export abstract class BasicSQL<
         } = minimumParser;
         const core = new CodeCompletionCore(sqlParserIns);
         core.preferredRules = this.preferredRules;
+        // core.showRuleStack = true;
+        //  core.showResult = true;
 
         const candidates = core.collectCandidates(newTokenIndex, c3Context);
         const originalSuggestions = this.processCandidates(

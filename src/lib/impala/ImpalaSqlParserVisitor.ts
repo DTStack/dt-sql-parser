@@ -148,13 +148,17 @@ import { InlineTableContext } from "./ImpalaSqlParser.js";
 import { SubqueryContext } from "./ImpalaSqlParser.js";
 import { SortItemContext } from "./ImpalaSqlParser.js";
 import { QuerySpecificationContext } from "./ImpalaSqlParser.js";
+import { SelectListContext } from "./ImpalaSqlParser.js";
 import { GroupByContext } from "./ImpalaSqlParser.js";
 import { SingleGroupingSetContext } from "./ImpalaSqlParser.js";
 import { GroupingSetContext } from "./ImpalaSqlParser.js";
 import { NamedQueryContext } from "./ImpalaSqlParser.js";
 import { SetQuantifierContext } from "./ImpalaSqlParser.js";
-import { SelectSingleContext } from "./ImpalaSqlParser.js";
-import { SelectAllContext } from "./ImpalaSqlParser.js";
+import { SelectItemContext } from "./ImpalaSqlParser.js";
+import { ColumnAliasContext } from "./ImpalaSqlParser.js";
+import { SelectLiteralColumnNameContext } from "./ImpalaSqlParser.js";
+import { SelectExpressionColumnNameContext } from "./ImpalaSqlParser.js";
+import { TableAllColumnsContext } from "./ImpalaSqlParser.js";
 import { RelationDefaultContext } from "./ImpalaSqlParser.js";
 import { JoinRelationContext } from "./ImpalaSqlParser.js";
 import { JoinTypeContext } from "./ImpalaSqlParser.js";
@@ -164,6 +168,7 @@ import { SampleTypeContext } from "./ImpalaSqlParser.js";
 import { AliasedRelationContext } from "./ImpalaSqlParser.js";
 import { ColumnAliasesContext } from "./ImpalaSqlParser.js";
 import { RelationPrimaryContext } from "./ImpalaSqlParser.js";
+import { AtomSubQueryTableSourceContext } from "./ImpalaSqlParser.js";
 import { SubQueryRelationContext } from "./ImpalaSqlParser.js";
 import { UnnestContext } from "./ImpalaSqlParser.js";
 import { ParenthesizedRelationContext } from "./ImpalaSqlParser.js";
@@ -1108,6 +1113,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitQuerySpecification?: (ctx: QuerySpecificationContext) => Result;
     /**
+     * Visit a parse tree produced by `ImpalaSqlParser.selectList`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectList?: (ctx: SelectListContext) => Result;
+    /**
      * Visit a parse tree produced by `ImpalaSqlParser.groupBy`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1139,19 +1150,35 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitSetQuantifier?: (ctx: SetQuantifierContext) => Result;
     /**
-     * Visit a parse tree produced by the `selectSingle`
-     * labeled alternative in `ImpalaSqlParser.selectItem`.
+     * Visit a parse tree produced by `ImpalaSqlParser.selectItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelectSingle?: (ctx: SelectSingleContext) => Result;
+    visitSelectItem?: (ctx: SelectItemContext) => Result;
     /**
-     * Visit a parse tree produced by the `selectAll`
-     * labeled alternative in `ImpalaSqlParser.selectItem`.
+     * Visit a parse tree produced by `ImpalaSqlParser.columnAlias`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelectAll?: (ctx: SelectAllContext) => Result;
+    visitColumnAlias?: (ctx: ColumnAliasContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableAllColumns?: (ctx: TableAllColumnsContext) => Result;
     /**
      * Visit a parse tree produced by the `relationDefault`
      * labeled alternative in `ImpalaSqlParser.relation`.
@@ -1208,6 +1235,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitRelationPrimary?: (ctx: RelationPrimaryContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.atomSubQueryTableSource`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAtomSubQueryTableSource?: (ctx: AtomSubQueryTableSourceContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.subQueryRelation`.
      * @param ctx the parse tree

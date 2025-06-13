@@ -1,32 +1,27 @@
 /*
- * [The "MIT license"]
- * Copyright (C) 2014 Sam Harwell, Tunnel Vision Laboratories, LLC
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
+ * [The "MIT license"] Copyright (C) 2014 Sam Harwell, Tunnel Vision Laboratories, LLC
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
- * 1. The above copyright notice and this permission notice shall be included in
- *    all copies or substantial portions of the Software.
- * 2. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- *    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- *    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- *    DEALINGS IN THE SOFTWARE.
- * 3. Except as contained in this notice, the name of Tunnel Vision
- *    Laboratories, LLC. shall not be used in advertising or otherwise to
- *    promote the sale, use or other dealings in this Software without prior
- *    written authorization from Tunnel Vision Laboratories, LLC.
+ * 
+ * 1. The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software. 2. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ * ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE. 3. Except as contained in this notice, the name of Tunnel Vision
+ * Laboratories, LLC. shall not be used in advertising or otherwise to promote the sale, use or
+ * other dealings in this Software without prior written authorization from Tunnel Vision
+ * Laboratories, LLC.
  */
 
 /**
- * This file is an adaptation of antlr's sql/postgresql/PostgreSQLParser.g4 grammar.
- * Reference: https://github.com/antlr/grammars-v4/blob/master/sql/postgresql/PostgreSQLParser.g4
+ * This file is an adaptation of antlr's sql/postgresql/PostgreSQLParser.g4 grammar. Reference:
+ * https://github.com/antlr/grammars-v4/blob/master/sql/postgresql/PostgreSQLParser.g4
  */
 
 /**
@@ -2142,12 +2137,8 @@ from_list
 
 table_ref
     : (
-        (relation_expr | (KW_ONLY? view_name STAR? column_list? where_clause?)) alias_clause? tablesample_clause?
-        | KW_LATERAL? (
-            xmltable alias_clause?
-            | func_table func_alias_clause?
-            | select_with_parens alias_clause?
-        )
+        (relation_expr | ( KW_ONLY? view_name STAR? column_list? where_clause?)) alias_clause? tablesample_clause?
+        | KW_LATERAL? expressionTable
         | OPEN_PAREN table_ref (
             KW_CROSS KW_JOIN table_ref
             | KW_NATURAL join_type? KW_JOIN table_ref
@@ -2158,6 +2149,12 @@ table_ref
         | KW_NATURAL join_type? KW_JOIN table_ref
         | join_type? KW_JOIN table_ref join_qual
     )*
+    ;
+
+expressionTable
+    : xmltable alias_clause?
+    | func_table func_alias_clause?
+    | select_with_parens alias_clause?
     ;
 
 alias_clause
@@ -2585,8 +2582,8 @@ column_expr
     ;
 
 column_expr_noparen
-    : expression
-    | column_name
+    : expression  # selectExpressionColumnName
+    | column_name # selectLiteralColumnName
     ;
 
 func_arg_list
@@ -2650,8 +2647,12 @@ target_list
     ;
 
 target_el
-    : column_expr_noparen (KW_AS collabel | identifier |) # target_label
-    | STAR                                                # target_star
+    : tableAllColumns                                 # target_star
+    | column_expr_noparen (KW_AS? alias=identifier |) # target_label
+    ;
+
+tableAllColumns
+    : (colid DOT)* STAR
     ;
 
 qualified_name_list

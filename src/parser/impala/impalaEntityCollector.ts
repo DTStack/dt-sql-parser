@@ -1,5 +1,7 @@
 import { ImpalaSqlParserListener } from '../../lib';
+import { SelectItemContext } from '../../lib/hive/HiveSqlParser';
 import {
+    AtomSubQueryTableSourceContext,
     ColumnDefinitionContext,
     ColumnNamePathCreateContext,
     CreateAggregateFunctionContext,
@@ -15,15 +17,26 @@ import {
     InsertStatementContext,
     KuduTableElementContext,
     QueryStatementContext,
-    SampledRelationContext,
+    SelectExpressionColumnNameContext,
+    SelectListContext,
+    SelectLiteralColumnNameContext,
     SingleStatementContext,
+    TableAllColumnsContext,
     TableNameCreateContext,
     TableNamePathContext,
+    UnnestContext,
     ViewColumnItemContext,
     ViewNameCreateContext,
     ViewNamePathContext,
 } from '../../lib/impala/ImpalaSqlParser';
-import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import { AliasedRelationContext } from '../../lib/trino/TrinoSqlParser';
+import {
+    AttrName,
+    ColumnDeclareType,
+    EntityCollector,
+    StmtContextType,
+    TableDeclareType,
+} from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
 
 export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlParserListener {
@@ -41,18 +54,50 @@ export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlP
     }
 
     exitTableNamePath(ctx: TableNamePathContext) {
-        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
-            needCollectAttr
-                ? [
-                      {
-                          attrName: AttrName.alias,
-                          endContextList: [SampledRelationContext.name],
-                      },
-                  ]
-                : undefined
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [AliasedRelationContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.COMMON,
+            }
+        );
+    }
+
+    exitAtomSubQueryTableSource(ctx: AtomSubQueryTableSourceContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [AliasedRelationContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitUnnest(ctx: UnnestContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [AliasedRelationContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
         );
     }
 
@@ -105,6 +150,58 @@ export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlP
 
     exitFunctionNameCreate(ctx: FunctionNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE);
+    }
+
+    exitSelectList(ctx: SelectListContext) {
+        this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
+    }
+
+    exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.COMMON,
+            }
+        );
+    }
+
+    exitSelectExpressionColumnName(ctx: SelectExpressionColumnNameContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitTableAllColumns(ctx: TableAllColumnsContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.ALL,
+            }
+        );
     }
 
     /** ===== Statement begin */

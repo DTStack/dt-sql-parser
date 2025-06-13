@@ -491,7 +491,7 @@ queryPrimary
     : querySpecification
     | fromStatement
     | KW_TABLE tableName
-    | inlineTable
+    | KW_VALUES expression (COMMA expression)* tableAlias
     | LEFT_PAREN query RIGHT_PAREN
     ;
 
@@ -530,7 +530,7 @@ transformClause
     ;
 
 selectClause
-    : KW_SELECT (hints+=hint)* setQuantifier? namedExpressionSeq
+    : KW_SELECT (hints+=hint)* setQuantifier? selectList
     ;
 
 setClause
@@ -799,15 +799,19 @@ identifierComment
     ;
 
 relationPrimary
-    : (tableName | viewName | identifierReference) temporalClause? sample? tableAlias
-    | LEFT_PAREN query RIGHT_PAREN sample? tableAlias
-    | LEFT_PAREN relation RIGHT_PAREN sample? tableAlias
-    | inlineTable
-    | functionTable
+    : (tableName | viewName | identifierReference) temporalClause? sample? tableAlias # tableSource
+    | atomSubQueryTableSource sample? tableAlias                                      # subQueryTableSource
+    | LEFT_PAREN relation RIGHT_PAREN sample? tableAlias                              # joinTableSource
+    | inlineTable tableAlias                                                          # inlineTableSource
+    | functionTable                                                                   # functionTableSource
+    ;
+
+atomSubQueryTableSource
+    : LEFT_PAREN query RIGHT_PAREN
     ;
 
 inlineTable
-    : KW_VALUES expression (COMMA expression)* tableAlias
+    : KW_VALUES expression (COMMA expression)*
     ;
 
 functionTableSubqueryArgument
@@ -847,7 +851,11 @@ functionTableArgument
     ;
 
 functionTable
-    : functionName LEFT_PAREN (functionTableArgument (COMMA functionTableArgument)*)? RIGHT_PAREN tableAlias
+    : atomFunctionTable tableAlias
+    ;
+
+atomFunctionTable
+    : functionName LEFT_PAREN (functionTableArgument (COMMA functionTableArgument)*)? RIGHT_PAREN
     ;
 
 tableAlias
@@ -891,12 +899,30 @@ viewIdentifier
     : (db=errorCapturingIdentifier DOT)? view=errorCapturingIdentifier
     ;
 
+selectLiteralColumnName
+    : columnName
+    ;
+
+selectExpressionColumnName
+    : expression
+    ;
+
+tableAllColumns
+    : (qualifiedName DOT)* ASTERISK
+    ;
+
 namedExpression
-    : (columnName | expression) (KW_AS? (name=errorCapturingIdentifier | identifierList))?
+    : (tableAllColumns | selectLiteralColumnName | selectExpressionColumnName) (
+        KW_AS? (name=errorCapturingIdentifier | identifierList)
+    )?
     ;
 
 namedExpressionSeq
     : namedExpression (COMMA namedExpression)*
+    ;
+
+selectList
+    : namedExpressionSeq
     ;
 
 partitionFieldList
