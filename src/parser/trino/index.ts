@@ -1,15 +1,22 @@
 import { CandidatesCollection } from 'antlr4-c3';
 import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
-
+import { processTokenCandidates } from '../common/tokenUtils';
 import { TrinoSqlLexer } from '../../lib/trino/TrinoSqlLexer';
 import { ProgramContext, TrinoSqlParser } from '../../lib/trino/TrinoSqlParser';
 import { BasicSQL } from '../common/basicSQL';
+import {
+    Suggestions,
+    EntityContextType,
+    SyntaxSuggestion,
+    CaretPosition,
+    SemanticCollectOptions,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { TrinoEntityCollector } from './trinoEntityCollector';
 import { TrinoErrorListener } from './trinoErrorListener';
 import { TrinoSqlSplitListener } from './trinoSplitListener';
+import { TrinoSemanticContextCollector } from './trinoSemanticContextCollector';
 
 export { TrinoEntityCollector, TrinoSqlSplitListener };
 
@@ -34,6 +41,15 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         return new TrinoEntityCollector(input, allTokens, caretTokenIndex);
     }
 
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new TrinoSemanticContextCollector(input, caretPosition, allTokens, options);
+    }
+
     protected preferredRules: Set<number> = new Set([
         TrinoSqlParser.RULE_catalogRef,
         TrinoSqlParser.RULE_catalogNameCreate,
@@ -46,25 +62,21 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         TrinoSqlParser.RULE_functionName,
         TrinoSqlParser.RULE_functionNameCreate,
         TrinoSqlParser.RULE_columnRef,
+        TrinoSqlParser.RULE_columnName,
         TrinoSqlParser.RULE_columnNameCreate,
     ]);
 
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -116,6 +128,19 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
+                case TrinoSqlParser.RULE_columnName: {
+                    if (
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_groupBy) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_sortItem) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_partitionBy) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_relation)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
+                }
                 default:
                     break;
             }
@@ -128,17 +153,9 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
             }
         }
 
-        for (let candidate of candidates.tokens) {
-            const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
-            const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
-                const keyword =
-                    displayName.startsWith("'") && displayName.endsWith("'")
-                        ? displayName.slice(1, -1)
-                        : displayName;
-                keywords.push(keyword);
-            }
-        }
+        const processedKeywords = processTokenCandidates(this._parser, candidates.tokens);
+        keywords.push(...processedKeywords);
+
         return {
             syntax: originalSyntaxSuggestions,
             keywords,

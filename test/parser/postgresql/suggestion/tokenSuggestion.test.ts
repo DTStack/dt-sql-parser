@@ -54,6 +54,10 @@ describe('Postgres SQL Token Suggestion', () => {
             'LARGE',
             'EXTENSION',
             'DEFAULT',
+            'TEXT SEARCH',
+            'EVENT TRIGGER',
+            'LARGE OBJECT',
+            'DEFAULT PRIVILEGES',
         ]);
     });
 
@@ -114,6 +118,12 @@ describe('Postgres SQL Token Suggestion', () => {
             'CAST',
             'ASSERTION',
             'ACCESS',
+            'RECURSIVE VIEW',
+            'TEXT SEARCH',
+            'EVENT TRIGGER',
+            'TRANSFORM FOR',
+            'MATERIALIZED VIEW',
+            'ACCESS METHOD',
         ]);
     });
 
@@ -176,6 +186,10 @@ describe('Postgres SQL Token Suggestion', () => {
             'MATERIALIZED',
             'SEQUENCE',
             'TABLE',
+            'OWNED BY',
+            'TEXT SEARCH',
+            'EVENT TRIGGER',
+            'ACCESS METHOD',
         ]);
     });
 
@@ -189,5 +203,43 @@ describe('Postgres SQL Token Suggestion', () => {
             pos
         )?.keywords;
         expect(suggestion).toMatchUnorderedArray(['INTO']);
+    });
+
+    test('After CREATE TABLE, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 11,
+            column: 14,
+        };
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('IF');
+        expect(suggestion).toContain('IF NOT EXISTS');
+    });
+
+    test('After CREATE TABLE IF, show combined keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 11,
+            column: 17,
+        };
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toContain('NOT');
+        expect(suggestion).toContain('NOT EXISTS');
+    });
+
+    test('Suggestion in new line', () => {
+        const pos: CaretPosition = {
+            lineNumber: 14,
+            column: 2,
+        };
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, [13, 15]),
+            pos
+        )?.keywords;
+        expect(suggestion.length).not.toBe(0);
     });
 });

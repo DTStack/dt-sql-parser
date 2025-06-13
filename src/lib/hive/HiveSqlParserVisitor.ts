@@ -12,7 +12,7 @@ import { ProgramContext } from "./HiveSqlParser.js";
 import { StatementContext } from "./HiveSqlParser.js";
 import { ExplainStatementContext } from "./HiveSqlParser.js";
 import { ExplainOptionContext } from "./HiveSqlParser.js";
-import { VectorizatonDetailContext } from "./HiveSqlParser.js";
+import { VectorizationDetailContext } from "./HiveSqlParser.js";
 import { ExecStatementContext } from "./HiveSqlParser.js";
 import { LoadStatementContext } from "./HiveSqlParser.js";
 import { ReplicationClauseContext } from "./HiveSqlParser.js";
@@ -68,7 +68,7 @@ import { PrivilegeObjectContext } from "./HiveSqlParser.js";
 import { PrivObjectContext } from "./HiveSqlParser.js";
 import { PrivObjectColsContext } from "./HiveSqlParser.js";
 import { PrivilegeListContext } from "./HiveSqlParser.js";
-import { PrivlegeDefContext } from "./HiveSqlParser.js";
+import { PrivilegeDefContext } from "./HiveSqlParser.js";
 import { PrivilegeTypeContext } from "./HiveSqlParser.js";
 import { PrincipalSpecificationContext } from "./HiveSqlParser.js";
 import { PrincipalNameContext } from "./HiveSqlParser.js";
@@ -137,6 +137,7 @@ import { ColumnNameTypeOrConstraintListContext } from "./HiveSqlParser.js";
 import { ColumnNameColonTypeListContext } from "./HiveSqlParser.js";
 import { ColumnNameListContext } from "./HiveSqlParser.js";
 import { ColumnNameContext } from "./HiveSqlParser.js";
+import { ColumnNamePathContext } from "./HiveSqlParser.js";
 import { ColumnNameCreateContext } from "./HiveSqlParser.js";
 import { ExtColumnNameContext } from "./HiveSqlParser.js";
 import { ColumnNameOrderListContext } from "./HiveSqlParser.js";
@@ -287,6 +288,7 @@ import { ExpressionsContext } from "./HiveSqlParser.js";
 import { ExpressionsInParenthesisContext } from "./HiveSqlParser.js";
 import { ExpressionsNotInParenthesisContext } from "./HiveSqlParser.js";
 import { OrderByClauseContext } from "./HiveSqlParser.js";
+import { PartitionByClauseContext } from "./HiveSqlParser.js";
 import { ClusterByClauseContext } from "./HiveSqlParser.js";
 import { DistributeByClauseContext } from "./HiveSqlParser.js";
 import { SortByClauseContext } from "./HiveSqlParser.js";
@@ -396,11 +398,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitExplainOption?: (ctx: ExplainOptionContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.vectorizatonDetail`.
+     * Visit a parse tree produced by `HiveSqlParser.vectorizationDetail`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitVectorizatonDetail?: (ctx: VectorizatonDetailContext) => Result;
+    visitVectorizationDetail?: (ctx: VectorizationDetailContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.execStatement`.
      * @param ctx the parse tree
@@ -732,11 +734,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitPrivilegeList?: (ctx: PrivilegeListContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.privlegeDef`.
+     * Visit a parse tree produced by `HiveSqlParser.privilegeDef`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitPrivlegeDef?: (ctx: PrivlegeDefContext) => Result;
+    visitPrivilegeDef?: (ctx: PrivilegeDefContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.privilegeType`.
      * @param ctx the parse tree
@@ -1145,6 +1147,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.columnNameCreate`.
      * @param ctx the parse tree
@@ -2049,6 +2057,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitOrderByClause?: (ctx: OrderByClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPartitionByClause?: (ctx: PartitionByClauseContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.clusterByClause`.
      * @param ctx the parse tree

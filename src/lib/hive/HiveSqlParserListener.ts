@@ -12,7 +12,7 @@ import { ProgramContext } from "./HiveSqlParser.js";
 import { StatementContext } from "./HiveSqlParser.js";
 import { ExplainStatementContext } from "./HiveSqlParser.js";
 import { ExplainOptionContext } from "./HiveSqlParser.js";
-import { VectorizatonDetailContext } from "./HiveSqlParser.js";
+import { VectorizationDetailContext } from "./HiveSqlParser.js";
 import { ExecStatementContext } from "./HiveSqlParser.js";
 import { LoadStatementContext } from "./HiveSqlParser.js";
 import { ReplicationClauseContext } from "./HiveSqlParser.js";
@@ -68,7 +68,7 @@ import { PrivilegeObjectContext } from "./HiveSqlParser.js";
 import { PrivObjectContext } from "./HiveSqlParser.js";
 import { PrivObjectColsContext } from "./HiveSqlParser.js";
 import { PrivilegeListContext } from "./HiveSqlParser.js";
-import { PrivlegeDefContext } from "./HiveSqlParser.js";
+import { PrivilegeDefContext } from "./HiveSqlParser.js";
 import { PrivilegeTypeContext } from "./HiveSqlParser.js";
 import { PrincipalSpecificationContext } from "./HiveSqlParser.js";
 import { PrincipalNameContext } from "./HiveSqlParser.js";
@@ -137,6 +137,7 @@ import { ColumnNameTypeOrConstraintListContext } from "./HiveSqlParser.js";
 import { ColumnNameColonTypeListContext } from "./HiveSqlParser.js";
 import { ColumnNameListContext } from "./HiveSqlParser.js";
 import { ColumnNameContext } from "./HiveSqlParser.js";
+import { ColumnNamePathContext } from "./HiveSqlParser.js";
 import { ColumnNameCreateContext } from "./HiveSqlParser.js";
 import { ExtColumnNameContext } from "./HiveSqlParser.js";
 import { ColumnNameOrderListContext } from "./HiveSqlParser.js";
@@ -287,6 +288,7 @@ import { ExpressionsContext } from "./HiveSqlParser.js";
 import { ExpressionsInParenthesisContext } from "./HiveSqlParser.js";
 import { ExpressionsNotInParenthesisContext } from "./HiveSqlParser.js";
 import { OrderByClauseContext } from "./HiveSqlParser.js";
+import { PartitionByClauseContext } from "./HiveSqlParser.js";
 import { ClusterByClauseContext } from "./HiveSqlParser.js";
 import { DistributeByClauseContext } from "./HiveSqlParser.js";
 import { SortByClauseContext } from "./HiveSqlParser.js";
@@ -409,15 +411,15 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitExplainOption?: (ctx: ExplainOptionContext) => void;
     /**
-     * Enter a parse tree produced by `HiveSqlParser.vectorizatonDetail`.
+     * Enter a parse tree produced by `HiveSqlParser.vectorizationDetail`.
      * @param ctx the parse tree
      */
-    enterVectorizatonDetail?: (ctx: VectorizatonDetailContext) => void;
+    enterVectorizationDetail?: (ctx: VectorizationDetailContext) => void;
     /**
-     * Exit a parse tree produced by `HiveSqlParser.vectorizatonDetail`.
+     * Exit a parse tree produced by `HiveSqlParser.vectorizationDetail`.
      * @param ctx the parse tree
      */
-    exitVectorizatonDetail?: (ctx: VectorizatonDetailContext) => void;
+    exitVectorizationDetail?: (ctx: VectorizationDetailContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.execStatement`.
      * @param ctx the parse tree
@@ -969,15 +971,15 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitPrivilegeList?: (ctx: PrivilegeListContext) => void;
     /**
-     * Enter a parse tree produced by `HiveSqlParser.privlegeDef`.
+     * Enter a parse tree produced by `HiveSqlParser.privilegeDef`.
      * @param ctx the parse tree
      */
-    enterPrivlegeDef?: (ctx: PrivlegeDefContext) => void;
+    enterPrivilegeDef?: (ctx: PrivilegeDefContext) => void;
     /**
-     * Exit a parse tree produced by `HiveSqlParser.privlegeDef`.
+     * Exit a parse tree produced by `HiveSqlParser.privilegeDef`.
      * @param ctx the parse tree
      */
-    exitPrivlegeDef?: (ctx: PrivlegeDefContext) => void;
+    exitPrivilegeDef?: (ctx: PrivilegeDefContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.privilegeType`.
      * @param ctx the parse tree
@@ -1658,6 +1660,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.columnNameCreate`.
      * @param ctx the parse tree
@@ -3166,6 +3178,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitOrderByClause?: (ctx: OrderByClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     */
+    enterPartitionByClause?: (ctx: PartitionByClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     */
+    exitPartitionByClause?: (ctx: PartitionByClauseContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.clusterByClause`.
      * @param ctx the parse tree

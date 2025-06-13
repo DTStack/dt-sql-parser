@@ -39,7 +39,7 @@ import { AlterViewContext } from "./ImpalaSqlParser.js";
 import { RenameViewContext } from "./ImpalaSqlParser.js";
 import { AlterViewOwnerContext } from "./ImpalaSqlParser.js";
 import { RenameTableContext } from "./ImpalaSqlParser.js";
-import { AlterUnSetOrSetViewTblpropertiesContext } from "./ImpalaSqlParser.js";
+import { AlterUnSetOrSetViewTblPropertiesContext } from "./ImpalaSqlParser.js";
 import { TruncateTableStatementContext } from "./ImpalaSqlParser.js";
 import { DescribeStatementContext } from "./ImpalaSqlParser.js";
 import { ComputeStatementContext } from "./ImpalaSqlParser.js";
@@ -105,6 +105,7 @@ import { TableNamePathContext } from "./ImpalaSqlParser.js";
 import { ViewNamePathContext } from "./ImpalaSqlParser.js";
 import { FunctionNamePathContext } from "./ImpalaSqlParser.js";
 import { ColumnNamePathContext } from "./ImpalaSqlParser.js";
+import { ColumnNameContext } from "./ImpalaSqlParser.js";
 import { TableOrViewPathContext } from "./ImpalaSqlParser.js";
 import { CreateCommonItemContext } from "./ImpalaSqlParser.js";
 import { AssignmentListContext } from "./ImpalaSqlParser.js";
@@ -149,6 +150,8 @@ import { SubqueryContext } from "./ImpalaSqlParser.js";
 import { SortItemContext } from "./ImpalaSqlParser.js";
 import { QuerySpecificationContext } from "./ImpalaSqlParser.js";
 import { SelectListContext } from "./ImpalaSqlParser.js";
+import { WhereClauseContext } from "./ImpalaSqlParser.js";
+import { HavingClauseContext } from "./ImpalaSqlParser.js";
 import { GroupByContext } from "./ImpalaSqlParser.js";
 import { SingleGroupingSetContext } from "./ImpalaSqlParser.js";
 import { GroupingSetContext } from "./ImpalaSqlParser.js";
@@ -233,6 +236,7 @@ import { TypeParameterContext } from "./ImpalaSqlParser.js";
 import { BaseTypeContext } from "./ImpalaSqlParser.js";
 import { WhenClauseContext } from "./ImpalaSqlParser.js";
 import { FilterContext } from "./ImpalaSqlParser.js";
+import { PartitionByClauseContext } from "./ImpalaSqlParser.js";
 import { OverContext } from "./ImpalaSqlParser.js";
 import { WindowFrameContext } from "./ImpalaSqlParser.js";
 import { UnboundedFrameContext } from "./ImpalaSqlParser.js";
@@ -574,15 +578,15 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      */
     exitRenameTable?: (ctx: RenameTableContext) => void;
     /**
-     * Enter a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblproperties`.
+     * Enter a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblProperties`.
      * @param ctx the parse tree
      */
-    enterAlterUnSetOrSetViewTblproperties?: (ctx: AlterUnSetOrSetViewTblpropertiesContext) => void;
+    enterAlterUnSetOrSetViewTblProperties?: (ctx: AlterUnSetOrSetViewTblPropertiesContext) => void;
     /**
-     * Exit a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblproperties`.
+     * Exit a parse tree produced by `ImpalaSqlParser.alterUnSetOrSetViewTblProperties`.
      * @param ctx the parse tree
      */
-    exitAlterUnSetOrSetViewTblproperties?: (ctx: AlterUnSetOrSetViewTblpropertiesContext) => void;
+    exitAlterUnSetOrSetViewTblProperties?: (ctx: AlterUnSetOrSetViewTblPropertiesContext) => void;
     /**
      * Enter a parse tree produced by `ImpalaSqlParser.truncateTableStatement`.
      * @param ctx the parse tree
@@ -1234,6 +1238,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      */
     exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
     /**
+     * Enter a parse tree produced by `ImpalaSqlParser.columnName`.
+     * @param ctx the parse tree
+     */
+    enterColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.columnName`.
+     * @param ctx the parse tree
+     */
+    exitColumnName?: (ctx: ColumnNameContext) => void;
+    /**
      * Enter a parse tree produced by `ImpalaSqlParser.tableOrViewPath`.
      * @param ctx the parse tree
      */
@@ -1685,6 +1699,26 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSelectList?: (ctx: SelectListContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.whereClause`.
+     * @param ctx the parse tree
+     */
+    enterWhereClause?: (ctx: WhereClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.whereClause`.
+     * @param ctx the parse tree
+     */
+    exitWhereClause?: (ctx: WhereClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.havingClause`.
+     * @param ctx the parse tree
+     */
+    enterHavingClause?: (ctx: HavingClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.havingClause`.
+     * @param ctx the parse tree
+     */
+    exitHavingClause?: (ctx: HavingClauseContext) => void;
     /**
      * Enter a parse tree produced by `ImpalaSqlParser.groupBy`.
      * @param ctx the parse tree
@@ -2625,6 +2659,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitFilter?: (ctx: FilterContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     */
+    enterPartitionByClause?: (ctx: PartitionByClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.partitionByClause`.
+     * @param ctx the parse tree
+     */
+    exitPartitionByClause?: (ctx: PartitionByClauseContext) => void;
     /**
      * Enter a parse tree produced by `ImpalaSqlParser.over`.
      * @param ctx the parse tree

@@ -91,7 +91,7 @@ statement
     )* ')' (KW_COMMENT comment=string)? (KW_WITH properties)?                                                                                 # createTable
     | KW_DROP KW_TABLE (KW_IF KW_EXISTS)? tableRef                                                                                            # dropTable
     | KW_INSERT KW_INTO tableRef columnList? rootQuery                                                                                        # insertInto
-    | KW_DELETE KW_FROM tableRef (KW_WHERE booleanExpression)?                                                                                # delete
+    | KW_DELETE KW_FROM tableRef (whereClause)?                                                                                               # delete
     | KW_TRUNCATE KW_TABLE tableRef                                                                                                           # truncateTable
     | KW_COMMENT KW_ON KW_TABLE tableRef KW_IS (string | KW_NULL)                                                                             # commentTable
     | KW_COMMENT KW_ON KW_VIEW viewRef KW_IS (string | KW_NULL)                                                                               # commentView
@@ -106,7 +106,7 @@ statement
     | KW_ALTER KW_TABLE tableName=tableRef KW_SET KW_PROPERTIES propertyAssignments                                                           # setTableProperties
     | KW_ALTER KW_TABLE tableName=tableRef KW_EXECUTE procedureName=functionName (
         '(' (callArgument (',' callArgument)*)? ')'
-    )? (KW_WHERE where=booleanExpression)?      # tableExecute
+    )? (whereClause)?                           # tableExecute
     | KW_ANALYZE tableRef (KW_WITH properties)? # analyze
     | KW_CREATE (KW_OR KW_REPLACE)? KW_MATERIALIZED KW_VIEW (KW_IF KW_NOT KW_EXISTS)? viewNameCreate (
         KW_GRACE KW_PERIOD interval
@@ -167,26 +167,24 @@ statement
     | KW_DESC tableOrViewName                                      # showColumns
     | KW_SHOW KW_FUNCTIONS ((KW_FROM | KW_IN) schemaRef)? (
         KW_LIKE pattern=string (KW_ESCAPE escape=string)?
-    )?                                                                        # showFunctions
-    | KW_SHOW KW_SESSION (KW_LIKE pattern=string (KW_ESCAPE escape=string)?)? # showSession
-    | KW_SET KW_SESSION KW_AUTHORIZATION authorizationUser                    # setSessionAuthorization
-    | KW_RESET KW_SESSION KW_AUTHORIZATION                                    # resetSessionAuthorization
-    | KW_SET KW_SESSION qualifiedName EQ expression                           # setSession
-    | KW_RESET KW_SESSION qualifiedName                                       # resetSession
-    | KW_START KW_TRANSACTION (transactionMode (',' transactionMode)*)?       # startTransaction
-    | KW_COMMIT KW_WORK?                                                      # commit
-    | KW_ROLLBACK KW_WORK?                                                    # rollback
-    | KW_PREPARE identifier KW_FROM statement                                 # prepare
-    | KW_DEALLOCATE KW_PREPARE identifier                                     # deallocate
-    | KW_EXECUTE identifier (KW_USING expression (',' expression)*)?          # execute
-    | KW_EXECUTE KW_IMMEDIATE string (KW_USING expression (',' expression)*)? # executeImmediate
-    | KW_DESCRIBE KW_INPUT identifier                                         # describeInput
-    | KW_DESCRIBE KW_OUTPUT identifier                                        # describeOutput
-    | KW_SET KW_PATH pathSpecification                                        # setPath
-    | KW_SET KW_TIME KW_ZONE ( KW_LOCAL | expression)                         # setTimeZone
-    | KW_UPDATE tableRef KW_SET updateAssignment (',' updateAssignment)* (
-        KW_WHERE where=booleanExpression
-    )?                                                                                             # update
+    )?                                                                                             # showFunctions
+    | KW_SHOW KW_SESSION (KW_LIKE pattern=string (KW_ESCAPE escape=string)?)?                      # showSession
+    | KW_SET KW_SESSION KW_AUTHORIZATION authorizationUser                                         # setSessionAuthorization
+    | KW_RESET KW_SESSION KW_AUTHORIZATION                                                         # resetSessionAuthorization
+    | KW_SET KW_SESSION qualifiedName EQ expression                                                # setSession
+    | KW_RESET KW_SESSION qualifiedName                                                            # resetSession
+    | KW_START KW_TRANSACTION (transactionMode (',' transactionMode)*)?                            # startTransaction
+    | KW_COMMIT KW_WORK?                                                                           # commit
+    | KW_ROLLBACK KW_WORK?                                                                         # rollback
+    | KW_PREPARE identifier KW_FROM statement                                                      # prepare
+    | KW_DEALLOCATE KW_PREPARE identifier                                                          # deallocate
+    | KW_EXECUTE identifier (KW_USING expression (',' expression)*)?                               # execute
+    | KW_EXECUTE KW_IMMEDIATE string (KW_USING expression (',' expression)*)?                      # executeImmediate
+    | KW_DESCRIBE KW_INPUT identifier                                                              # describeInput
+    | KW_DESCRIBE KW_OUTPUT identifier                                                             # describeOutput
+    | KW_SET KW_PATH pathSpecification                                                             # setPath
+    | KW_SET KW_TIME KW_ZONE ( KW_LOCAL | expression)                                              # setTimeZone
+    | KW_UPDATE tableRef KW_SET updateAssignment (',' updateAssignment)* (whereClause)?            # update
     | KW_MERGE KW_INTO tableRef (KW_AS? identifier)? KW_USING relation KW_ON expression mergeCase+ # merge
     | KW_SHOW KW_COMMENT KW_ON KW_TABLE tableRef                                                   # showTableComment  // dtstack
     | KW_SHOW KW_COMMENT KW_ON KW_COLUMN columnRef                                                 # showColumnComment // dtstack
@@ -282,11 +280,17 @@ sortItem
     ;
 
 querySpecification
-    : KW_SELECT setQuantifier? selectList (KW_FROM relation (',' relation)*)? (
-        KW_WHERE where=booleanExpression
-    )? (KW_GROUP KW_BY groupBy)? (KW_HAVING having=booleanExpression)? (
-        KW_WINDOW windowDefinition (',' windowDefinition)*
-    )?
+    : KW_SELECT setQuantifier? selectList (KW_FROM relation (',' relation)*)? (whereClause)? (
+        KW_GROUP KW_BY groupBy
+    )? (havingClause)? (KW_WINDOW windowDefinition (',' windowDefinition)*)?
+    ;
+
+whereClause
+    : KW_WHERE where=booleanExpression
+    ;
+
+havingClause
+    : KW_HAVING having=booleanExpression
     ;
 
 selectList
@@ -295,6 +299,10 @@ selectList
 
 groupBy
     : setQuantifier? groupingElement (',' groupingElement)*
+    ;
+
+partitionBy
+    : expression (',' expression)*
     ;
 
 groupingElement
@@ -319,9 +327,9 @@ windowDefinition
     ;
 
 windowSpecification
-    : (existingWindowName=identifier)? (
-        KW_PARTITION KW_BY partition+=expression (',' partition+=expression)*
-    )? (KW_ORDER KW_BY sortItem (',' sortItem)*)? windowFrame?
+    : (existingWindowName=identifier)? (KW_PARTITION KW_BY partitionBy)? (
+        KW_ORDER KW_BY sortItem (',' sortItem)*
+    )? windowFrame?
     ;
 
 namedQuery
@@ -393,21 +401,21 @@ trimsSpecification
 
 listAggOverflowBehavior
     : KW_ERROR
-    | KW_TRUNCATE string? listaggCountIndication
+    | KW_TRUNCATE string? listAggCountIndication
     ;
 
-listaggCountIndication
+listAggCountIndication
     : KW_WITH KW_COUNT
     | KW_WITHOUT KW_COUNT
     ;
 
 patternRecognition
     : aliasedRelation (
-        KW_MATCH_RECOGNIZE '(' (
-            KW_PARTITION KW_BY partition+=expression (',' partition+=expression)*
-        )? (KW_ORDER KW_BY sortItem (',' sortItem)*)? (
-            KW_MEASURES measureDefinition (',' measureDefinition)*
-        )? rowsPerMatch? (KW_AFTER KW_MATCH skipTo)? (KW_INITIAL | KW_SEEK)? KW_PATTERN '(' rowPattern ')' (
+        KW_MATCH_RECOGNIZE '(' (KW_PARTITION KW_BY partitionBy)? (
+            KW_ORDER KW_BY sortItem (',' sortItem)*
+        )? (KW_MEASURES measureDefinition (',' measureDefinition)*)? rowsPerMatch? (
+            KW_AFTER KW_MATCH skipTo
+        )? (KW_INITIAL | KW_SEEK)? KW_PATTERN '(' rowPattern ')' (
             KW_SUBSET subsetDefinition (',' subsetDefinition)*
         )? KW_DEFINE variableDefinition (',' variableDefinition)* ')' (KW_AS? identifier columnAliases?)?
     )?
@@ -513,7 +521,7 @@ jsonTableDefaultPlan
 
 tableFunctionCall
     : functionName '(' (tableFunctionArgument (',' tableFunctionArgument)*)? (
-        KW_COPARTITION copartitionTables (',' copartitionTables)*
+        KW_COPARTITION coPartitionTables (',' coPartitionTables)*
     )? ')'
     ;
 
@@ -526,7 +534,7 @@ tableFunctionArgument
     ;
 
 tableArgument
-    : tableArgumentRelation (KW_PARTITION KW_BY ('(' (expression (',' expression)*)? ')' | expression))? (
+    : tableArgumentRelation (KW_PARTITION KW_BY ('(' partitionBy? ')' | expression))? (
         KW_PRUNE KW_WHEN KW_EMPTY
         | KW_KEEP KW_WHEN KW_EMPTY
     )? (KW_ORDER KW_BY ('(' sortItem (',' sortItem)* ')' | sortItem))?
@@ -546,7 +554,7 @@ descriptorField
     : identifier type?
     ;
 
-copartitionTables
+coPartitionTables
     : '(' qualifiedName ',' qualifiedName (',' qualifiedName)* ')'
     ;
 
@@ -597,7 +605,7 @@ primaryExpression
     | KW_ROW '(' expression (',' expression)* ')'               # rowConstructor
     | name=KW_LISTAGG '(' setQuantifier? expression (',' string)? (
         KW_ON KW_OVERFLOW listAggOverflowBehavior
-    )? ')' (KW_WITHIN KW_GROUP '(' KW_ORDER KW_BY sortItem (',' sortItem)* ')') filter?   # listagg
+    )? ')' (KW_WITHIN KW_GROUP '(' KW_ORDER KW_BY sortItem (',' sortItem)* ')') filter?   # listAgg
     | processingMode? functionName '(' (label=identifier '.')? ASTERISK ')' filter? over? # functionCall
     | processingMode? functionName '(' (setQuantifier? expression (',' expression)*)? (
         KW_ORDER KW_BY sortItem (',' sortItem)*
@@ -614,7 +622,7 @@ primaryExpression
     | KW_TRY_CAST '(' expression KW_AS type ')'                                                           # cast
     | KW_ARRAY '[' (expression (',' expression)*)? ']'                                                    # arrayConstructor
     | value=primaryExpression '[' index=valueExpression ']'                                               # subscript
-    | identifier                                                                                          # columnReference
+    | columnName                                                                                          # columnReference
     | base=primaryExpression '.' fieldName=identifier                                                     # dereference
     | name=KW_CURRENT_DATE                                                                                # currentDate
     | name=KW_CURRENT_TIME ('(' precision=INTEGER_VALUE ')')?                                             # currentTime
@@ -787,7 +795,7 @@ whenClause
     ;
 
 filter
-    : KW_FILTER '(' KW_WHERE booleanExpression ')'
+    : KW_FILTER '(' whereClause ')'
     ;
 
 mergeCase
@@ -1028,6 +1036,10 @@ functionNameCreate
 columnRef
     : qualifiedName
     | {this.shouldMatchEmpty()}?
+    ;
+
+columnName
+    : qualifiedName
     ;
 
 columnNameCreate
@@ -1668,11 +1680,11 @@ fragment DIGIT: [0-9];
 
 fragment LETTER: [A-Z];
 
-SIMPLE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
+LINE_COMMENT: '--' ~[\r\n]* '\r'? '\n'? -> channel(HIDDEN);
 
 BRACKETED_COMMENT: '/*' .*? '*/' -> channel(HIDDEN);
 
-WS: [ \r\n\t]+ -> channel(HIDDEN);
+WHITE_SPACE: (' ' | '\t' | '\r' | '\n') -> channel(HIDDEN);
 
 // Catch-all for anything we can't recognize.
 // We use this to be able to ignore and recover all the text

@@ -72,14 +72,14 @@ ddlStatement
     : createDatabase
     | createEvent
     | createIndex
-    | createLogfileGroup
+    | createLogFileGroup
     | createProcedure
     | createFunction
     | createFunctionLoadable
     | createServer
     | createTable
-    | createTablespaceInnodb
-    | createTablespaceNdb
+    | createTableSpaceInnoDB
+    | createTableSpaceNDB
     | createTrigger
     | createView
     | createRole
@@ -87,22 +87,22 @@ ddlStatement
     | alterEvent
     | alterFunction
     | alterInstance
-    | alterLogfileGroup
+    | alterLogFileGroup
     | alterProcedure
     | alterServer
     | alterTable
-    | alterTablespace
+    | alterTableSpace
     | alterView
     | dropDatabase
     | dropEvent
     | dropIndex
-    | dropLogfileGroup
+    | dropLogFileGroup
     | dropProcedure
     | dropFunction
     | dropServer
     | dropSpatial
     | dropTable
-    | dropTablespace
+    | dropTableSpace
     | dropTrigger
     | dropView
     | dropRole
@@ -136,7 +136,7 @@ transactionStatement
     | beginWork
     | commitWork
     | rollbackWork
-    | savepointStatement
+    | savePointStatement
     | rollbackStatement
     | releaseStatement
     | lockTables
@@ -205,7 +205,7 @@ administrationStatement
     | cloneStatement
     | setStatement
     | showStatement
-    | binlogStatement
+    | binLogStatement
     | cacheIndexStatement
     | flushStatement
     | killStatement
@@ -253,12 +253,12 @@ createIndex
     )*
     ;
 
-createLogfileGroup
-    : KW_CREATE KW_LOGFILE KW_GROUP logfileGroupName=uid KW_ADD KW_UNDOFILE undoFile=STRING_LITERAL (
+createLogFileGroup
+    : KW_CREATE KW_LOGFILE KW_GROUP logFileGroupName=uid KW_ADD KW_UNDOFILE undoFile=STRING_LITERAL (
         KW_INITIAL_SIZE '='? initSize=fileSizeLiteral
     )? (KW_UNDO_BUFFER_SIZE '='? undoSize=fileSizeLiteral)? (
         KW_REDO_BUFFER_SIZE '='? redoSize=fileSizeLiteral
-    )? (KW_NODEGROUP '='? nodegroup=uid)? KW_WAIT? (KW_COMMENT '='? comment=STRING_LITERAL)? KW_ENGINE '='? engineName
+    )? (KW_NODEGROUP '='? nodeGroup=uid)? KW_WAIT? (KW_COMMENT '='? comment=STRING_LITERAL)? KW_ENGINE '='? engineName
     ;
 
 createProcedure
@@ -307,21 +307,21 @@ createTable
     )? partitionDefinitions? # columnCreateTable
     ;
 
-createTablespaceInnodb
-    : KW_CREATE KW_UNDO? KW_TABLESPACE tablespaceNameCreate (
+createTableSpaceInnoDB
+    : KW_CREATE KW_UNDO? KW_TABLESPACE tableSpaceNameCreate (
         KW_ADD KW_DATAFILE datafile=STRING_LITERAL
-    )? (KW_AUTOEXTEND_SIZE '='? autoextendSize=fileSizeLiteral)? (
+    )? (KW_AUTOEXTEND_SIZE '='? autoExtendSize=fileSizeLiteral)? (
         KW_FILE_BLOCK_SIZE '=' fileBlockSize=fileSizeLiteral
     )? (KW_ENGINE '='? engineName)? (KW_ENGINE_ATTRIBUTE '='? STRING_LITERAL)?
     ;
 
-createTablespaceNdb
-    : KW_CREATE KW_UNDO? KW_TABLESPACE tablespaceNameCreate KW_ADD KW_DATAFILE datafile=STRING_LITERAL KW_USE KW_LOGFILE KW_GROUP logfileGroupName=uid
+createTableSpaceNDB
+    : KW_CREATE KW_UNDO? KW_TABLESPACE tableSpaceNameCreate KW_ADD KW_DATAFILE datafile=STRING_LITERAL KW_USE KW_LOGFILE KW_GROUP logFileGroupName=uid
         (
         KW_EXTENT_SIZE '='? extentSize=fileSizeLiteral
     )? (KW_INITIAL_SIZE '='? initialSize=fileSizeLiteral)? (
-        KW_AUTOEXTEND_SIZE '='? autoextendSize=fileSizeLiteral
-    )? (KW_MAX_SIZE '='? maxSize=fileSizeLiteral)? (KW_NODEGROUP '='? nodegroup=uid)? KW_WAIT? (
+        KW_AUTOEXTEND_SIZE '='? autoExtendSize=fileSizeLiteral
+    )? (KW_MAX_SIZE '='? maxSize=fileSizeLiteral)? (KW_NODEGROUP '='? nodeGroup=uid)? KW_WAIT? (
         KW_COMMENT '='? comment=STRING_LITERAL
     )? KW_ENGINE '='? engineName
     ;
@@ -487,7 +487,7 @@ columnDefinition
     ;
 
 columnConstraint
-    : nullNotnull                                                                  # nullColumnConstraint
+    : nullNotNull                                                                  # nullColumnConstraint
     | KW_DEFAULT defaultValue                                                      # defaultColumnConstraint
     | KW_VISIBLE                                                                   # visibilityColumnConstraint
     | KW_INVISIBLE                                                                 # invisibilityColumnConstraint
@@ -530,7 +530,7 @@ referenceControlType
 tableOption
     : KW_ENGINE '='? engineName?                                       # tableOptionEngine
     | KW_ENGINE_ATTRIBUTE '='? STRING_LITERAL                          # tableOptionEngineAttribute
-    | KW_AUTOEXTEND_SIZE '='? decimalLiteral                           # tableOptionAutoextendSize
+    | KW_AUTOEXTEND_SIZE '='? decimalLiteral                           # tableOptionAutoExtendSize
     | KW_AUTO_INCREMENT '='? decimalLiteral                            # tableOptionAutoIncrement
     | KW_AVG_ROW_LENGTH '='? decimalLiteral                            # tableOptionAverage
     | KW_DEFAULT? charSet '='? (charsetName | KW_DEFAULT)              # tableOptionCharset
@@ -566,9 +566,9 @@ tableOption
     | KW_STATS_AUTO_RECALC '='? extBoolValue=(KW_DEFAULT | '0' | '1') # tableOptionRecalculation
     | KW_STATS_PERSISTENT '='? extBoolValue=(KW_DEFAULT | '0' | '1')  # tableOptionPersistent
     | KW_STATS_SAMPLE_PAGES '='? (KW_DEFAULT | decimalLiteral)        # tableOptionSamplePage
-    | KW_TABLESPACE tablespaceName tablespaceStorage?                 # tableOptionTablespace
+    | KW_TABLESPACE tableSpaceName tableSpaceStorage?                 # tableOptionTableSpace
     | KW_TABLE_TYPE '=' tableType                                     # tableOptionTableType
-    | tablespaceStorage                                               # tableOptionTablespace
+    | tableSpaceStorage                                               # tableOptionTableSpace
     | KW_TRANSACTIONAL '='? ('0' | '1')                               # tableOptionTransactional
     | KW_UNION '='? '(' tableNames ')'                                # tableOptionUnion
     ;
@@ -578,7 +578,7 @@ tableType
     | KW_ODBC
     ;
 
-tablespaceStorage
+tableSpaceStorage
     : KW_STORAGE (KW_DISK | KW_MEMORY | KW_DEFAULT)
     ;
 
@@ -605,18 +605,18 @@ subpartitionFunctionDefinition
 partitionDefinition
     : KW_PARTITION partitionName KW_VALUES KW_LESS KW_THAN '(' partitionDefinerAtom (
         ',' partitionDefinerAtom
-    )* ')' partitionOption* ('(' subpartitionDefinition (',' subpartitionDefinition)* ')')? # partitionComparison
+    )* ')' partitionOption* ('(' subPartitionDefinition (',' subPartitionDefinition)* ')')? # partitionComparison
     | KW_PARTITION partitionName KW_VALUES KW_LESS KW_THAN partitionDefinerAtom partitionOption* (
-        '(' subpartitionDefinition (',' subpartitionDefinition)* ')'
+        '(' subPartitionDefinition (',' subPartitionDefinition)* ')'
     )? # partitionComparison
     | KW_PARTITION partitionName KW_VALUES KW_IN '(' partitionDefinerAtom (
         ',' partitionDefinerAtom
-    )* ')' partitionOption* ('(' subpartitionDefinition (',' subpartitionDefinition)* ')')? # partitionListAtom
+    )* ')' partitionOption* ('(' subPartitionDefinition (',' subPartitionDefinition)* ')')? # partitionListAtom
     | KW_PARTITION partitionName KW_VALUES KW_IN '(' partitionDefinerVector (
         ',' partitionDefinerVector
-    )* ')' partitionOption* ('(' subpartitionDefinition (',' subpartitionDefinition)* ')')? # partitionListVector
+    )* ')' partitionOption* ('(' subPartitionDefinition (',' subPartitionDefinition)* ')')? # partitionListVector
     | KW_PARTITION partitionName partitionOption* (
-        '(' subpartitionDefinition (',' subpartitionDefinition)* ')'
+        '(' subPartitionDefinition (',' subPartitionDefinition)* ')'
     )? # partitionSimple
     ;
 
@@ -630,7 +630,7 @@ partitionDefinerVector
     : '(' partitionDefinerAtom (',' partitionDefinerAtom)+ ')'
     ;
 
-subpartitionDefinition
+subPartitionDefinition
     : KW_SUBPARTITION logicalName=uid partitionOption*
     ;
 
@@ -641,8 +641,8 @@ partitionOption
     | KW_INDEX KW_DIRECTORY '='? indexDirectory=STRING_LITERAL # partitionOptionIndexDirectory
     | KW_MAX_ROWS '='? maxRows=decimalLiteral                  # partitionOptionMaxRows
     | KW_MIN_ROWS '='? minRows=decimalLiteral                  # partitionOptionMinRows
-    | KW_TABLESPACE '='? tablespaceName                        # partitionOptionTablespace
-    | KW_NODEGROUP '='? nodegroup=uid                          # partitionOptionNodeGroup
+    | KW_TABLESPACE '='? tableSpaceName                        # partitionOptionTableSpace
+    | KW_NODEGROUP '='? nodeGroup=uid                          # partitionOptionNodeGroup
     ;
 
 //    Alter statements
@@ -668,8 +668,8 @@ alterInstance
     : KW_ALTER KW_INSTANCE KW_ROTATE KW_INNODB KW_MASTER KW_KEY
     ;
 
-alterLogfileGroup
-    : KW_ALTER KW_LOGFILE KW_GROUP logfileGroupName=uid KW_ADD KW_UNDOFILE STRING_LITERAL (
+alterLogFileGroup
+    : KW_ALTER KW_LOGFILE KW_GROUP logFileGroupName=uid KW_ADD KW_UNDOFILE STRING_LITERAL (
         KW_INITIAL_SIZE '='? fileSizeLiteral
     )? KW_WAIT? KW_ENGINE '='? engineName
     ;
@@ -688,10 +688,10 @@ alterTable
     )?
     ;
 
-alterTablespace
-    : KW_ALTER KW_UNDO? KW_TABLESPACE tablespaceName (KW_ADD | KW_DROP) KW_DATAFILE STRING_LITERAL (
+alterTableSpace
+    : KW_ALTER KW_UNDO? KW_TABLESPACE tableSpaceName (KW_ADD | KW_DROP) KW_DATAFILE STRING_LITERAL (
         KW_INITIAL_SIZE '='? fileSizeLiteral
-    )? KW_WAIT? (KW_RENAME KW_TO tablespaceNameCreate)? (KW_AUTOEXTEND_SIZE '='? fileSizeLiteral)? (
+    )? KW_WAIT? (KW_RENAME KW_TO tableSpaceNameCreate)? (KW_AUTOEXTEND_SIZE '='? fileSizeLiteral)? (
         KW_SET (KW_ACTIVE | KW_INACTIVE)
     )? (KW_ENCRYPTION '='? STRING_LITERAL)? // STRING_LITERAL is 'Y' or 'N'
     (KW_ENGINE '='? engineName)? (KW_ENGINE_ATTRIBUTE '='? STRING_LITERAL)?
@@ -731,7 +731,7 @@ alterOption
     | KW_DEFAULT? KW_CHARACTER KW_SET '=' charsetName (KW_COLLATE '='? collationName)?            # alterByDefaultCharset
     | KW_CONVERT KW_TO (KW_CHARSET | KW_CHARACTER KW_SET) charsetName (KW_COLLATE collationName)? # alterByConvertCharset
     | (KW_DISABLE | KW_ENABLE) KW_KEYS                                                            # alterKeys
-    | (KW_DISCARD | KW_IMPORT) KW_TABLESPACE                                                      # alterTablespaceOption
+    | (KW_DISCARD | KW_IMPORT) KW_TABLESPACE                                                      # alterTableSpaceOption
     | KW_DROP KW_COLUMN? columnName                                                               # alterByDropColumn
     | KW_DROP (KW_INDEX | KW_KEY) indexName                                                       # alterByDropIndex
     | KW_DROP KW_PRIMARY KW_KEY                                                                   # alterByDropPrimaryKey
@@ -740,7 +740,7 @@ alterOption
     | KW_LOCK '='? lockType=(KW_DEFAULT | KW_NONE | KW_SHARED | KW_EXCLUSIVE)                     # alterByLock
     | KW_MODIFY KW_COLUMN? columnName columnDefinition (KW_FIRST | KW_AFTER columnName)?          # alterByModifyColumn
     | KW_ORDER KW_BY columnNames                                                                  # alterByOrder
-    | KW_RENAME KW_COLUMN olcdColumn=columnName KW_TO newColumn=columnNameCreate                  # alterByRenameColumn
+    | KW_RENAME KW_COLUMN oldColumn=columnName KW_TO newColumn=columnNameCreate                   # alterByRenameColumn
     | KW_RENAME indexFormat=(KW_INDEX | KW_KEY) indexName KW_TO indexNameCreate                   # alterByRenameIndex
     | KW_RENAME renameFormat=(KW_TO | KW_AS)? tableNameCreate                                     # alterByRename
     | (KW_WITHOUT | KW_WITH) KW_VALIDATION                                                        # alterByValidate
@@ -778,14 +778,14 @@ dropEvent
     ;
 
 dropIndex
-    : KW_DROP KW_INDEX intimeAction=(KW_ONLINE | KW_OFFLINE)? indexName KW_ON tableName (
+    : KW_DROP KW_INDEX inTimeAction=(KW_ONLINE | KW_OFFLINE)? indexName KW_ON tableName (
         KW_ALGORITHM '='? algType=(KW_DEFAULT | KW_INPLACE | KW_COPY)
         | KW_LOCK '='? lockType=(KW_DEFAULT | KW_NONE | KW_SHARED | KW_EXCLUSIVE)
     )*
     ;
 
-dropLogfileGroup
-    : KW_DROP KW_LOGFILE KW_GROUP logfileGroupName=uid KW_ENGINE '='? engineName
+dropLogFileGroup
+    : KW_DROP KW_LOGFILE KW_GROUP logFileGroupName=uid KW_ENGINE '='? engineName
     ;
 
 dropProcedure
@@ -808,8 +808,8 @@ dropTable
     : KW_DROP KW_TEMPORARY? KW_TABLE ifExists? tableNames dropType=(KW_RESTRICT | KW_CASCADE)?
     ;
 
-dropTablespace
-    : KW_DROP KW_UNDO? KW_TABLESPACE tablespaceName (KW_ENGINE '='? engineName)?
+dropTableSpace
+    : KW_DROP KW_UNDO? KW_TABLESPACE tableSpaceName (KW_ENGINE '='? engineName)?
     ;
 
 dropTrigger
@@ -1239,7 +1239,7 @@ intoClause
 
 selectFieldsInto
     : KW_TERMINATED KW_BY terminationField=STRING_LITERAL
-    | KW_OPTIONALLY? KW_ENCLOSED KW_BY enclosion=STRING_LITERAL
+    | KW_OPTIONALLY? KW_ENCLOSED KW_BY enClosion=STRING_LITERAL
     | KW_ESCAPED KW_BY escaping=STRING_LITERAL
     ;
 
@@ -1292,14 +1292,14 @@ beginWork
     ;
 
 commitWork
-    : KW_COMMIT KW_WORK? (KW_AND nochain=KW_NO? KW_CHAIN)? (norelease=KW_NO? KW_RELEASE)?
+    : KW_COMMIT KW_WORK? (KW_AND noChain=KW_NO? KW_CHAIN)? (noRelease=KW_NO? KW_RELEASE)?
     ;
 
 rollbackWork
-    : KW_ROLLBACK KW_WORK? (KW_AND nochain=KW_NO? KW_CHAIN)? (norelease=KW_NO? KW_RELEASE)?
+    : KW_ROLLBACK KW_WORK? (KW_AND noChain=KW_NO? KW_CHAIN)? (noRelease=KW_NO? KW_RELEASE)?
     ;
 
-savepointStatement
+savePointStatement
     : KW_SAVEPOINT identifier=uid
     ;
 
@@ -1612,7 +1612,7 @@ caseStatement
     ;
 
 ifStatement
-    : KW_IF expression KW_THEN thenStatements+=procedureSqlStatement+ elifAlternative* (
+    : KW_IF expression KW_THEN thenStatements+=procedureSqlStatement+ elseIfAlternative* (
         KW_ELSE elseStatements+=procedureSqlStatement+
     )? KW_END KW_IF
     ;
@@ -1685,7 +1685,7 @@ caseAlternative
     : KW_WHEN (constant | expression) KW_THEN procedureSqlStatement+
     ;
 
-elifAlternative
+elseIfAlternative
     : KW_ELSEIF expression KW_THEN procedureSqlStatement+
     ;
 
@@ -1720,7 +1720,7 @@ dropUser
     ;
 
 grantStatement
-    : KW_GRANT privelegeClause (',' privelegeClause)* KW_ON privilegeObjectType? privilegeLevel KW_TO (
+    : KW_GRANT privilegeClause (',' privilegeClause)* KW_ON privilegeObjectType? privilegeLevel KW_TO (
         (userAuthOption (',' userAuthOption)*)
         | userOrRoleNames
     ) (KW_REQUIRE (tlsNone=KW_NONE | tlsOption (KW_AND? tlsOption)*))? (
@@ -1745,14 +1745,14 @@ grantProxy
     ;
 
 alterResourceGroup
-    : KW_ALTER KW_RESOURCE KW_GROUP groupName (KW_VCPU '='? resourceGroupVcpuSpec)? (
+    : KW_ALTER KW_RESOURCE KW_GROUP groupName (KW_VCPU '='? resourceGroupVCpuSpec)? (
         KW_THREAD_PRIORITY '='? decimalLiteral
     )? ((KW_ENABLE | KW_DISABLE) KW_FORCE?)?
     ;
 
 createResourceGroup
     : KW_CREATE KW_RESOURCE KW_GROUP groupNameCreate KW_TYPE '=' (KW_SYSTEM | KW_USER) (
-        KW_VCPU '='? resourceGroupVcpuSpec
+        KW_VCPU '='? resourceGroupVCpuSpec
     )? (KW_THREAD_PRIORITY '='? decimalLiteral)? (KW_ENABLE | KW_DISABLE)?
     ;
 
@@ -1764,8 +1764,8 @@ setResourceGroup
     : KW_SET KW_RESOURCE KW_GROUP groupName (KW_FOR decimalLiteral (',' decimalLiteral)*)?
     ;
 
-resourceGroupVcpuSpec
-    : (decimalLiteral | decimalLiteral MINUS decimalLiteral) (',' resourceGroupVcpuSpec)*
+resourceGroupVCpuSpec
+    : (decimalLiteral | decimalLiteral MINUS decimalLiteral) (',' resourceGroupVCpuSpec)*
     ;
 
 renameUser
@@ -1773,7 +1773,7 @@ renameUser
     ;
 
 revokeStatement
-    : KW_REVOKE ifExists? privelegeClause (',' privelegeClause)* KW_ON privilegeObjectType? privilegeLevel KW_FROM userOrRoleNames ignoreUnknownUser? #
+    : KW_REVOKE ifExists? privilegeClause (',' privilegeClause)* KW_ON privilegeObjectType? privilegeLevel KW_FROM userOrRoleNames ignoreUnknownUser? #
         detailRevoke
     | KW_REVOKE ifExists? KW_ALL KW_PRIVILEGES? ',' KW_GRANT KW_OPTION KW_FROM userOrRoleNames ignoreUnknownUser? # shortRevoke
     | KW_REVOKE ifExists? (KW_PROXY KW_ON)? userOrRoleNames KW_FROM userOrRoleNames ignoreUnknownUser?            # proxyAndRoleRevoke
@@ -1896,7 +1896,7 @@ factor
     : (TWO_DECIMAL | THREE_DECIMAL) KW_FACTOR
     ;
 
-privelegeClause
+privilegeClause
     : privilege ('(' columnNames ')')?
     ;
 
@@ -2164,7 +2164,7 @@ showProfileType
 
 //    Other administrative statements
 
-binlogStatement
+binLogStatement
     : KW_BINLOG STRING_LITERAL
     ;
 
@@ -2425,11 +2425,11 @@ columnName
     | {this.shouldMatchEmpty()}?
     ;
 
-tablespaceNameCreate
+tableSpaceNameCreate
     : uid
     ;
 
-tablespaceName
+tableSpaceName
     : uid
     ;
 
@@ -2590,7 +2590,7 @@ hexadecimalLiteral
     : STRING_CHARSET_NAME? HEXADECIMAL_LITERAL
     ;
 
-nullNotnull
+nullNotNull
     : KW_NOT? (KW_NULL_LITERAL | NULL_SPEC_LITERAL)
     ;
 
@@ -2968,7 +2968,7 @@ expression
 
 predicate
     : predicate KW_NOT? KW_IN '(' (selectStatement | expressions) ')' # inPredicate
-    | predicate KW_IS nullNotnull                                     # isNullPredicate
+    | predicate KW_IS nullNotNull                                     # isNullPredicate
     | predicate comparisonOperator (
         quantifier=(KW_ALL | KW_ANY | KW_SOME) '(' subQuery=selectStatement ')'
         | right=predicate
@@ -2981,7 +2981,7 @@ predicate
     | expressionAtom                                                  # expressionAtomPredicate
     ;
 
-// Add in ASTVisitor nullNotnull in constant
+// Add in ASTVisitor nullNotNull in constant
 expressionAtom
     : constant                                              # constantExpressionAtom
     | functionCall                                          # functionCallExpressionAtom

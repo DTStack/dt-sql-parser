@@ -46,6 +46,10 @@ export enum EntityContextType {
     COLUMN_CREATE = 'columnCreate',
     /** query result */
     QUERY_RESULT = 'queryResult',
+    /** table property key when creating table*/
+    TABLE_PROPERTY_KEY = 'tablePropertyKey',
+    /** table property value when creating table*/
+    TABLE_PROPERTY_VALUE = 'tablePropertyValue',
 }
 
 /**
@@ -71,3 +75,31 @@ export interface Suggestions<T = WordRange> {
 }
 
 export type LOCALE_TYPE = 'zh_CN' | 'en_US';
+
+export interface SemanticContext {
+    isStatementBeginning: boolean;
+}
+
+export enum SqlSplitStrategy {
+    /** Only end the statement with semicolon symbol */
+    STRICT,
+    /** Based on parse tree to split statements */
+    LOOSE,
+}
+
+export interface SemanticCollectOptions {
+    /**
+     * `sqlSplitStrategy` will affects the result of `isStatementBeginning`;
+     *
+     * For example:
+     *
+     * The sql is "select id from t1   create\<cart_position\>"
+     *
+     * - `SqlSplitStrategy.STRICT`: split symbol `;` is missing after select statement so that it considerd as one statement, and `isStatementBeginning` is false
+     *
+     * - `SqlSplitStrategy.LOOSE`: in parse tree, it will parse to "select id from t1" and "create" two single statement, so `isStatementBeginning` is true
+     *
+     * @default SqlSplitStrategy.STRICT
+     */
+    sqlSplitStrategy?: SqlSplitStrategy;
+}

@@ -123,8 +123,11 @@ import { InlineTableContext } from "./TrinoSqlParser.js";
 import { SubqueryContext } from "./TrinoSqlParser.js";
 import { SortItemContext } from "./TrinoSqlParser.js";
 import { QuerySpecificationContext } from "./TrinoSqlParser.js";
+import { WhereClauseContext } from "./TrinoSqlParser.js";
+import { HavingClauseContext } from "./TrinoSqlParser.js";
 import { SelectListContext } from "./TrinoSqlParser.js";
 import { GroupByContext } from "./TrinoSqlParser.js";
+import { PartitionByContext } from "./TrinoSqlParser.js";
 import { SingleGroupingSetContext } from "./TrinoSqlParser.js";
 import { RollupContext } from "./TrinoSqlParser.js";
 import { CubeContext } from "./TrinoSqlParser.js";
@@ -148,7 +151,7 @@ import { SampledRelationContext } from "./TrinoSqlParser.js";
 import { SampleTypeContext } from "./TrinoSqlParser.js";
 import { TrimsSpecificationContext } from "./TrinoSqlParser.js";
 import { ListAggOverflowBehaviorContext } from "./TrinoSqlParser.js";
-import { ListaggCountIndicationContext } from "./TrinoSqlParser.js";
+import { ListAggCountIndicationContext } from "./TrinoSqlParser.js";
 import { PatternRecognitionContext } from "./TrinoSqlParser.js";
 import { MeasureDefinitionContext } from "./TrinoSqlParser.js";
 import { RowsPerMatchContext } from "./TrinoSqlParser.js";
@@ -186,7 +189,7 @@ import { TableArgumentTableContext } from "./TrinoSqlParser.js";
 import { TableArgumentQueryContext } from "./TrinoSqlParser.js";
 import { DescriptorArgumentContext } from "./TrinoSqlParser.js";
 import { DescriptorFieldContext } from "./TrinoSqlParser.js";
-import { CopartitionTablesContext } from "./TrinoSqlParser.js";
+import { CoPartitionTablesContext } from "./TrinoSqlParser.js";
 import { ExpressionContext } from "./TrinoSqlParser.js";
 import { LogicalNotContext } from "./TrinoSqlParser.js";
 import { PredicatedContext } from "./TrinoSqlParser.js";
@@ -217,6 +220,7 @@ import { TrimContext } from "./TrinoSqlParser.js";
 import { ParameterContext } from "./TrinoSqlParser.js";
 import { NormalizeContext } from "./TrinoSqlParser.js";
 import { LocalTimestampContext } from "./TrinoSqlParser.js";
+import { ListAggContext } from "./TrinoSqlParser.js";
 import { JsonObjectContext } from "./TrinoSqlParser.js";
 import { IntervalLiteralContext } from "./TrinoSqlParser.js";
 import { NumericLiteralContext } from "./TrinoSqlParser.js";
@@ -244,7 +248,6 @@ import { CurrentTimestampContext } from "./TrinoSqlParser.js";
 import { CurrentSchemaContext } from "./TrinoSqlParser.js";
 import { ExistsContext } from "./TrinoSqlParser.js";
 import { PositionContext } from "./TrinoSqlParser.js";
-import { ListaggContext } from "./TrinoSqlParser.js";
 import { SearchedCaseContext } from "./TrinoSqlParser.js";
 import { CurrentCatalogContext } from "./TrinoSqlParser.js";
 import { GroupingOperationContext } from "./TrinoSqlParser.js";
@@ -361,6 +364,7 @@ import { CatalogNameCreateContext } from "./TrinoSqlParser.js";
 import { FunctionNameContext } from "./TrinoSqlParser.js";
 import { FunctionNameCreateContext } from "./TrinoSqlParser.js";
 import { ColumnRefContext } from "./TrinoSqlParser.js";
+import { ColumnNameContext } from "./TrinoSqlParser.js";
 import { ColumnNameCreateContext } from "./TrinoSqlParser.js";
 import { QualifiedNameContext } from "./TrinoSqlParser.js";
 import { QueryPeriodContext } from "./TrinoSqlParser.js";
@@ -1727,6 +1731,26 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitQuerySpecification?: (ctx: QuerySpecificationContext) => void;
     /**
+     * Enter a parse tree produced by `TrinoSqlParser.whereClause`.
+     * @param ctx the parse tree
+     */
+    enterWhereClause?: (ctx: WhereClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.whereClause`.
+     * @param ctx the parse tree
+     */
+    exitWhereClause?: (ctx: WhereClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.havingClause`.
+     * @param ctx the parse tree
+     */
+    enterHavingClause?: (ctx: HavingClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.havingClause`.
+     * @param ctx the parse tree
+     */
+    exitHavingClause?: (ctx: HavingClauseContext) => void;
+    /**
      * Enter a parse tree produced by `TrinoSqlParser.selectList`.
      * @param ctx the parse tree
      */
@@ -1746,6 +1770,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitGroupBy?: (ctx: GroupByContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.partitionBy`.
+     * @param ctx the parse tree
+     */
+    enterPartitionBy?: (ctx: PartitionByContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.partitionBy`.
+     * @param ctx the parse tree
+     */
+    exitPartitionBy?: (ctx: PartitionByContext) => void;
     /**
      * Enter a parse tree produced by the `singleGroupingSet`
      * labeled alternative in `TrinoSqlParser.groupingElement`.
@@ -1989,15 +2023,15 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitListAggOverflowBehavior?: (ctx: ListAggOverflowBehaviorContext) => void;
     /**
-     * Enter a parse tree produced by `TrinoSqlParser.listaggCountIndication`.
+     * Enter a parse tree produced by `TrinoSqlParser.listAggCountIndication`.
      * @param ctx the parse tree
      */
-    enterListaggCountIndication?: (ctx: ListaggCountIndicationContext) => void;
+    enterListAggCountIndication?: (ctx: ListAggCountIndicationContext) => void;
     /**
-     * Exit a parse tree produced by `TrinoSqlParser.listaggCountIndication`.
+     * Exit a parse tree produced by `TrinoSqlParser.listAggCountIndication`.
      * @param ctx the parse tree
      */
-    exitListaggCountIndication?: (ctx: ListaggCountIndicationContext) => void;
+    exitListAggCountIndication?: (ctx: ListAggCountIndicationContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.patternRecognition`.
      * @param ctx the parse tree
@@ -2405,15 +2439,15 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitDescriptorField?: (ctx: DescriptorFieldContext) => void;
     /**
-     * Enter a parse tree produced by `TrinoSqlParser.copartitionTables`.
+     * Enter a parse tree produced by `TrinoSqlParser.coPartitionTables`.
      * @param ctx the parse tree
      */
-    enterCopartitionTables?: (ctx: CopartitionTablesContext) => void;
+    enterCoPartitionTables?: (ctx: CoPartitionTablesContext) => void;
     /**
-     * Exit a parse tree produced by `TrinoSqlParser.copartitionTables`.
+     * Exit a parse tree produced by `TrinoSqlParser.coPartitionTables`.
      * @param ctx the parse tree
      */
-    exitCopartitionTables?: (ctx: CopartitionTablesContext) => void;
+    exitCoPartitionTables?: (ctx: CoPartitionTablesContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.expression`.
      * @param ctx the parse tree
@@ -2773,6 +2807,18 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitLocalTimestamp?: (ctx: LocalTimestampContext) => void;
     /**
+     * Enter a parse tree produced by the `listAgg`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterListAgg?: (ctx: ListAggContext) => void;
+    /**
+     * Exit a parse tree produced by the `listAgg`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitListAgg?: (ctx: ListAggContext) => void;
+    /**
      * Enter a parse tree produced by the `jsonObject`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
      * @param ctx the parse tree
@@ -3096,18 +3142,6 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitPosition?: (ctx: PositionContext) => void;
-    /**
-     * Enter a parse tree produced by the `listagg`
-     * labeled alternative in `TrinoSqlParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    enterListagg?: (ctx: ListaggContext) => void;
-    /**
-     * Exit a parse tree produced by the `listagg`
-     * labeled alternative in `TrinoSqlParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    exitListagg?: (ctx: ListaggContext) => void;
     /**
      * Enter a parse tree produced by the `searchedCase`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.
@@ -4398,6 +4432,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnRef?: (ctx: ColumnRefContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.columnName`.
+     * @param ctx the parse tree
+     */
+    enterColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.columnName`.
+     * @param ctx the parse tree
+     */
+    exitColumnName?: (ctx: ColumnNameContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.columnNameCreate`.
      * @param ctx the parse tree

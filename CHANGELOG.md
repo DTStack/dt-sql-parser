@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/DTStack/dt-sql-parser/compare/v4.1.1...v4.2.0) (2025-05-09)
+
+
+### Features
+
+* **postgre:** [#412](https://github.com/DTStack/dt-sql-parser/issues/412) update merge's syntax, with clause syntax and copy syntax ([#413](https://github.com/DTStack/dt-sql-parser/issues/413)) ([52b9a5a](https://github.com/DTStack/dt-sql-parser/commit/52b9a5a0804141a2c990482d3b55e9f8e4a676b7))
+
+
+### Bug Fixes
+
+* **ci:** use project.reject when just check mode ([#404](https://github.com/DTStack/dt-sql-parser/issues/404)) ([7324c27](https://github.com/DTStack/dt-sql-parser/commit/7324c27f741a2df16bb6d0852ad4431b51e96add))
+* **flink:** [#415](https://github.com/DTStack/dt-sql-parser/issues/415) fix supporting json function's different type ([#416](https://github.com/DTStack/dt-sql-parser/issues/416)) ([03a53d3](https://github.com/DTStack/dt-sql-parser/commit/03a53d3a559bce5a0aa302c38062d780146533a4))
+* split whiteSpace into multiple tokens to fix findCaretTokenIndex may undefined ([#385](https://github.com/DTStack/dt-sql-parser/issues/385)) ([8e11012](https://github.com/DTStack/dt-sql-parser/commit/8e110120de5274ca2efdb0742813c18d44f55c5a))
+
+### [4.1.1](https://github.com/DTStack/dt-sql-parser/compare/v4.1.0...v4.1.1) (2025-02-17)
+
+
+### Bug Fixes
+
+* **flink:** [#398](https://github.com/DTStack/dt-sql-parser/issues/398) fix flinksql built-in function's using ([#399](https://github.com/DTStack/dt-sql-parser/issues/399)) ([f8afbe2](https://github.com/DTStack/dt-sql-parser/commit/f8afbe29b3bbe47ace0e04476ceb50fb44994235))
+
+## [4.1.0](https://github.com/DTStack/dt-sql-parser/compare/v4.0.1...v4.1.0) (2025-02-13)
+
+
+### Features
+
+* add alter table stmt ([#312](https://github.com/DTStack/dt-sql-parser/issues/312)) ([5aade9e](https://github.com/DTStack/dt-sql-parser/commit/5aade9e6daafc2c6e70c5202d7ef06572ec37f6e))
+* add benchmark test suite ([#273](https://github.com/DTStack/dt-sql-parser/issues/273)) ([de1bd9d](https://github.com/DTStack/dt-sql-parser/commit/de1bd9de4cb7c3b42d51bedd79635eb91afba9ed))
+* **basicSql:** remove judge splitListener/collectListener, all sqlParser implements it ([#316](https://github.com/DTStack/dt-sql-parser/issues/316)) ([eb2e920](https://github.com/DTStack/dt-sql-parser/commit/eb2e920e345aef98285ba261c2060db61d1d56b8))
+* sync some useful syntax from antlr/grammars-v4 ([95a1087](https://github.com/DTStack/dt-sql-parser/commit/95a108744bb40e418056faaf86bd97b85dd191f8))
+* upgrade trino to 450 ([#323](https://github.com/DTStack/dt-sql-parser/issues/323)) ([2b0de6a](https://github.com/DTStack/dt-sql-parser/commit/2b0de6a3da16561ec52b0c69d4e052226d54a553))
+* use common sql to run benchmark ([#326](https://github.com/DTStack/dt-sql-parser/issues/326)) ([76d0900](https://github.com/DTStack/dt-sql-parser/commit/76d090040e7af26227727673a82f77cda08b3f9e))
+
+
+### Bug Fixes
+
+* [#351](https://github.com/DTStack/dt-sql-parser/issues/351) antlr4 command optimize ([74d6435](https://github.com/DTStack/dt-sql-parser/commit/74d643599eb5603279a180262c49eccb04779a30))
+* [#381](https://github.com/DTStack/dt-sql-parser/issues/381) antlr4 flink grammar ([74be81c](https://github.com/DTStack/dt-sql-parser/commit/74be81cc695cb26f9b7e90c866e8183f34020a42))
+* add hash partition table keywords MODULUS and REMAINDER ([#384](https://github.com/DTStack/dt-sql-parser/issues/384)) ([f2e6b60](https://github.com/DTStack/dt-sql-parser/commit/f2e6b605eca5f8221588d2ca9b85ac2b824aae8d))
+* alert to alterView ([#346](https://github.com/DTStack/dt-sql-parser/issues/346)) ([9ba5100](https://github.com/DTStack/dt-sql-parser/commit/9ba51007e2f21ab8bc42623596ee281801904cfa))
+* **benchmark:** add reports dir judge and remove plsql and include pgsql ([9c534c2](https://github.com/DTStack/dt-sql-parser/commit/9c534c25cacba3cfba6bd234c68e8f27bd90b2e2))
+* build mysql ([5d6ff46](https://github.com/DTStack/dt-sql-parser/commit/5d6ff4662a11acf9f16b1f18c41c204922890df9))
+* **ci:** add antlr4 all sql in ci ([2b30e78](https://github.com/DTStack/dt-sql-parser/commit/2b30e781a24f9d7685e46ebc90b1cc153f7e267e))
+* **ci:** change ci and add hash judge ([276cc34](https://github.com/DTStack/dt-sql-parser/commit/276cc34c55bacd34cda4e8eeb7eef5f0955f9b82))
+* **ci:** change crypto to devDependencies ([b788e1c](https://github.com/DTStack/dt-sql-parser/commit/b788e1ca788308cc56601bcbf7ae24f3156e3af9))
+* createFunction and createFunctionLoadable ([e83449a](https://github.com/DTStack/dt-sql-parser/commit/e83449a0cc0a50be510c7b4a3337597b1890fc92))
+* flinksql function params add more time functions ([#347](https://github.com/DTStack/dt-sql-parser/issues/347)) ([b835c4b](https://github.com/DTStack/dt-sql-parser/commit/b835c4b5b506c8e4bf0bd9c99fe66c15e53a179b))
+* **hive:** add select into configPropertiesItem ([#365](https://github.com/DTStack/dt-sql-parser/issues/365)) ([bdb4b96](https://github.com/DTStack/dt-sql-parser/commit/bdb4b962f2e170c4e703359a9cd6a451f7b8fd60))
+* **impala:** fix alter table change statement ([#332](https://github.com/DTStack/dt-sql-parser/issues/332)) ([4a9681e](https://github.com/DTStack/dt-sql-parser/commit/4a9681ed3bd188e41c30a6d7be39d6e77df7f61b))
+* mysql case when ([#317](https://github.com/DTStack/dt-sql-parser/issues/317)) ([fea1ad1](https://github.com/DTStack/dt-sql-parser/commit/fea1ad1a357b70291a240eca6d2058bab9b49469))
+* **postgresql:** change func_application to add column_name and paren ([#359](https://github.com/DTStack/dt-sql-parser/issues/359)) ([9a5eda8](https://github.com/DTStack/dt-sql-parser/commit/9a5eda8d80789e37f2904a1ceb3f8c646237a207))
+* **postgresql:** combine plsql_unreserved_keyword to unreserved_keyword and remove unused rules ([7884cbe](https://github.com/DTStack/dt-sql-parser/commit/7884cbe37844c057fa41fde4d0716af43c4023af))
+* **trino:** update timezone grammar to avoid ambiguity ([#394](https://github.com/DTStack/dt-sql-parser/issues/394)) ([05134bc](https://github.com/DTStack/dt-sql-parser/commit/05134bc569996d108f961a7228c2e34cea0fd98b))
+* update isContainCaret judgment when caret position token is whit… ([#390](https://github.com/DTStack/dt-sql-parser/issues/390)) ([20f065d](https://github.com/DTStack/dt-sql-parser/commit/20f065d6f099ee6e021d9b0499e4c4aa7de92e6b))
+
 ## [4.1.0-beta.0](https://github.com/DTStack/dt-sql-parser/compare/v4.0.1...v4.1.0-beta.0) (2024-08-27)
 
 

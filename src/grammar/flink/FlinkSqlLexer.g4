@@ -11,8 +11,8 @@ options {
 
 // SKIP
 
-SPACE         : [ \t\r\n]+                                                         -> channel(HIDDEN);
-COMMENT_INPUT : '/*' .*? '*/'                                                      -> channel(HIDDEN);
+WHITE_SPACE       : (' ' | '\t' | '\r' | '\n')                                     -> channel(HIDDEN);
+BRACKETED_COMMENT : '/*' .*? '*/'                                                  -> channel(HIDDEN);
 LINE_COMMENT: (('--' | '#') ~[\r\n]* ('\r'? '\n' | EOF) | '--' ('\r'? '\n' | EOF)) -> channel(HIDDEN);
 
 /**
@@ -211,6 +211,7 @@ KW_INTERVAL            : 'INTERVAL';
 KW_INTO                : 'INTO';
 KW_IS                  : 'IS';
 KW_JOIN                : 'JOIN';
+KW_JSON                : 'JSON';
 KW_JSON_ARRAY          : 'JSON_ARRAY';
 KW_JSON_ARRAYAGG       : 'JSON_ARRAYAGG';
 KW_JSON_EXECUTION_PLAN : 'JSON_EXECUTION_PLAN';
@@ -570,11 +571,11 @@ REVERSE_QUOTE_SYMB   : '`';
 COLON_SYMB           : ':';
 ASTERISK_SIGN        : '*';
 UNDERLINE_SIGN       : '_';
-HYPNEN_SIGN          : '-';
+HYPHEN_SIGN          : '-';
 ADD_SIGN             : '+';
-PENCENT_SIGN         : '%';
+PERCENT_SIGN         : '%';
 DOUBLE_VERTICAL_SIGN : '||';
-DOUBLE_HYPNEN_SIGN   : '--';
+DOUBLE_HYPHEN_SIGN   : '--';
 SLASH_SIGN           : '/';
 QUESTION_MARK_SIGN   : '?';
 DOUBLE_RIGHT_ARROW   : '=>';

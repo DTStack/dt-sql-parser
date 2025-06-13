@@ -1,15 +1,22 @@
 import { CandidatesCollection } from 'antlr4-c3';
 import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
-
+import { processTokenCandidates } from '../common/tokenUtils';
 import { MySqlLexer } from '../../lib/mysql/MySqlLexer';
 import { MySqlParser, ProgramContext } from '../../lib/mysql/MySqlParser';
 import { BasicSQL } from '../common/basicSQL';
+import {
+    Suggestions,
+    EntityContextType,
+    SyntaxSuggestion,
+    CaretPosition,
+    SemanticCollectOptions,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { MySqlEntityCollector } from './mysqlEntityCollector';
 import { MysqlErrorListener } from './mysqlErrorListener';
 import { MysqlSplitListener } from './mysqlSplitListener';
+import { MySqlSemanticContextCollector } from '../mysql/mysqlSemanticContextCollector';
 
 export { MySqlEntityCollector, MysqlSplitListener };
 
@@ -47,22 +54,26 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         return new MySqlEntityCollector(input, allTokens, caretTokenIndex);
     }
 
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new MySqlSemanticContextCollector(input, caretPosition, allTokens, options);
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (const candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -118,17 +129,8 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
             }
         }
 
-        for (const candidate of candidates.tokens) {
-            const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
-            const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
-                const keyword =
-                    displayName.startsWith("'") && displayName.endsWith("'")
-                        ? displayName.slice(1, -1)
-                        : displayName;
-                keywords.push(keyword);
-            }
-        }
+        const processedKeywords = processTokenCandidates(this._parser, candidates.tokens);
+        keywords.push(...processedKeywords);
 
         return {
             syntax: originalSyntaxSuggestions,

@@ -1,11 +1,11 @@
 import {
-    type AltertablestmtContext,
+    type AlterTableStmtContext,
     Column_defContext,
     type ColumnCreateTableContext,
     type ColumnNameCreateContext,
     type CreateDatabaseContext,
     type CreateForeignTableContext,
-    type CreatefunctionstmtContext,
+    type CreateFunctionStmtContext,
     type CreateMaterializedViewContext,
     type CreatePartitionForeignTableContext,
     type CreateViewContext,
@@ -18,19 +18,19 @@ import {
     type ProcedureNameContext,
     type ProcedureNameCreateContext,
     type QueryCreateTableContext,
-    Select_no_parensContext,
     SelectExpressionColumnNameContext,
     SelectLiteralColumnNameContext,
     type SelectStatementContext,
     type SingleStmtContext,
-    Table_refContext,
     TableAllColumnsContext,
+    TableRefContext,
     type TableNameContext,
     type TableNameCreateContext,
     Target_labelContext,
-    Target_listContext,
     type ViewNameContext,
     type ViewNameCreateContext,
+    TargetListContext,
+    SelectNoParensContext,
 } from '../../lib/postgresql/PostgreSqlParser';
 import type { PostgreSqlParserListener } from '../../lib/postgresql/PostgreSqlParserListener';
 import {
@@ -60,7 +60,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
             [
                 {
                     attrName: AttrName.alias,
-                    endContextList: [Table_refContext.name],
+                    endContextList: [TableRefContext.name],
                 },
             ],
             {
@@ -93,7 +93,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         this.pushEntity(ctx, EntityContextType.VIEW, [
             {
                 attrName: AttrName.alias,
-                endContextList: [Table_refContext.name],
+                endContextList: [TableRefContext.name],
             },
         ]);
     }
@@ -119,20 +119,20 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         ]);
     }
 
-    exitTarget_list(ctx: Target_listContext) {
-        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_simple_select)) return;
+    exitTarget_list(ctx: TargetListContext) {
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_simpleSelect)) return;
         this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
     }
 
     exitTableAllColumns(ctx: TableAllColumnsContext) {
-        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_target_list)) return;
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
         this.pushEntity(ctx, EntityContextType.COLUMN, [], {
             declareType: ColumnDeclareType.ALL,
         });
     }
 
     exitSelectExpressionColumnName(ctx: SelectExpressionColumnNameContext) {
-        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_target_list)) return;
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
         this.pushEntity(
             ctx,
             EntityContextType.COLUMN,
@@ -149,7 +149,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
-        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_target_list)) return;
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
         this.pushEntity(
             ctx,
             EntityContextType.COLUMN,
@@ -242,11 +242,11 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
     }
 
-    enterSelect_no_parens(ctx: Select_no_parensContext) {
+    enterSelectNoParens(ctx: SelectNoParensContext) {
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
     }
 
-    exitSelect_no_parens(ctx: Select_no_parensContext) {
+    exitSelectNoParens(ctx: SelectNoParensContext) {
         this.popStmt();
     }
 
@@ -262,17 +262,17 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         this.popStmt();
     }
 
-    enterCreatefunctionstmt(ctx: CreatefunctionstmtContext) {
+    enterCreateFunctionStmt(ctx: CreateFunctionStmtContext) {
         this.pushStmt(ctx, StmtContextType.CREATE_FUNCTION_STMT);
     }
 
-    exitCreatefunctionstmt(ctx: CreatefunctionstmtContext) {
+    exitCreateFunctionStmt(ctx: CreateFunctionStmtContext) {
         this.popStmt();
     }
-    enterAltertablestmt(ctx: AltertablestmtContext) {
+    enterAlterTableStmt(ctx: AlterTableStmtContext) {
         this.pushStmt(ctx, StmtContextType.ALTER_TABLE_STMT);
     }
-    exitAltertablestmt(ctx: AltertablestmtContext) {
+    exitAlterTableStmt(ctx: AlterTableStmtContext) {
         this.popStmt();
     }
 }

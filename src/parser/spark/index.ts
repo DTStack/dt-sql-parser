@@ -1,15 +1,22 @@
 import { CandidatesCollection } from 'antlr4-c3';
 import { CharStream, CommonTokenStream, Token } from 'antlr4ng';
-
+import { processTokenCandidates } from '../common/tokenUtils';
 import { SparkSqlLexer } from '../../lib/spark/SparkSqlLexer';
 import { ProgramContext, SparkSqlParser } from '../../lib/spark/SparkSqlParser';
 import { BasicSQL } from '../common/basicSQL';
+import {
+    Suggestions,
+    EntityContextType,
+    SyntaxSuggestion,
+    CaretPosition,
+    SemanticCollectOptions,
+} from '../common/types';
 import { StmtContextType } from '../common/entityCollector';
 import { ErrorListener } from '../common/parseErrorListener';
-import { EntityContextType, Suggestions, SyntaxSuggestion } from '../common/types';
 import { SparkEntityCollector } from './sparkEntityCollector';
 import { SparkErrorListener } from './sparkErrorListener';
 import { SparkSqlSplitListener } from './sparkSplitListener';
+import { SparkSemanticContextCollector } from './sparkSemanticContextCollector';
 
 export { SparkEntityCollector, SparkSqlSplitListener };
 
@@ -32,6 +39,7 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         SparkSqlParser.RULE_functionName,
         SparkSqlParser.RULE_functionNameCreate,
         SparkSqlParser.RULE_columnName,
+        SparkSqlParser.RULE_columnNamePath,
         SparkSqlParser.RULE_columnNameCreate,
     ]);
 
@@ -47,22 +55,26 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         return new SparkEntityCollector(input, allTokens, caretTokenIndex);
     }
 
+    protected createSemanticContextCollector(
+        input: string,
+        caretPosition: CaretPosition,
+        allTokens: Token[],
+        options?: SemanticCollectOptions
+    ) {
+        return new SparkSemanticContextCollector(input, caretPosition, allTokens, options);
+    }
+
     protected processCandidates(
         candidates: CandidatesCollection,
         allTokens: Token[],
-        caretTokenIndex: number,
-        tokenIndexOffset: number
+        caretTokenIndex: number
     ): Suggestions<Token> {
         const originalSyntaxSuggestions: SyntaxSuggestion<Token>[] = [];
         const keywords: string[] = [];
 
         for (const candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const startTokenIndex = candidateRule.startTokenIndex + tokenIndexOffset;
-            const tokenRanges = allTokens.slice(
-                startTokenIndex,
-                caretTokenIndex + tokenIndexOffset + 1
-            );
+            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -106,6 +118,23 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
+                case SparkSqlParser.RULE_columnNamePath: {
+                    if (
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_whenClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_whereClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_joinRelation) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_orderOrSortByClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_groupByClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_aggregationClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_havingClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_windowClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_selectClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_limitClause) ||
+                        candidateRule.ruleList.includes(SparkSqlParser.RULE_clusterOrDistributeBy)
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
+                }
                 default:
                     break;
             }
@@ -118,17 +147,8 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
             }
         }
 
-        for (const candidate of candidates.tokens) {
-            const symbolicName = this._parser.vocabulary.getSymbolicName(candidate[0]);
-            const displayName = this._parser.vocabulary.getDisplayName(candidate[0]);
-            if (displayName && symbolicName && symbolicName.startsWith('KW_')) {
-                const keyword =
-                    displayName.startsWith("'") && displayName.endsWith("'")
-                        ? displayName.slice(1, -1)
-                        : displayName;
-                keywords.push(keyword);
-            }
-        }
+        const processedKeywords = processTokenCandidates(this._parser, candidates.tokens);
+        keywords.push(...processedKeywords);
 
         return {
             syntax: originalSyntaxSuggestions,

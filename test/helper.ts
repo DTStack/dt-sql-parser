@@ -32,9 +32,73 @@ export const readSQL = (dirname: string, fileName: string) => {
     return result;
 };
 
-export function commentOtherLine(sqlContent: string, line: number) {
+/**
+ * Read a sql string with special range
+ * @param range line and column start from 1
+ */
+export const readSQLByRange = (
+    sqlSource: {
+        dirname?: string;
+        fileName?: string;
+        sql?: string;
+    },
+    range: { startLine: number; endLine: number; startColumn?: number; endColumn?: number }
+) => {
+    const { dirname, fileName, sql } = sqlSource;
+    const { startLine, endLine, startColumn, endColumn } = range;
+
+    if (endLine < startLine) throw new RangeError('endLine must greater or equal than startLine!');
+    if (!sql && (!dirname || !fileName))
+        throw new Error('A sql input or file info params is required!');
+
+    const content =
+        sql !== undefined
+            ? sql
+            : fs.readFileSync(path.join(dirname, 'fixtures', fileName), 'utf-8');
+    let index = 0;
+    let middleText = '';
+    let startLineText = '';
+    let endLineText = '';
+    let currLine = 1;
+
+    while (index < content.length && currLine <= endLine) {
+        const char = content[index];
+        if (char === '\n') {
+            currLine++;
+        }
+
+        if (currLine === startLine) {
+            // The line break at the beginning needs to be discarded.
+            if (!(char === '\n' && startLineText === '')) {
+                startLineText += char;
+            }
+        } else if (
+            currLine > startLine &&
+            (currLine < endLine || (currLine === endLine && char === '\n'))
+        ) {
+            middleText += char;
+        } else if (currLine === endLine && startLine !== endLine) {
+            endLineText += char;
+        }
+
+        index++;
+    }
+
+    startLineText = startLineText.slice(
+        startColumn !== undefined ? startColumn - 1 : 0,
+        endLine === startLine && endColumn !== undefined ? endColumn - 1 : undefined
+    );
+    endLineText = endLineText.slice(0, endColumn !== undefined ? endColumn - 1 : undefined);
+
+    return startLineText + middleText + endLineText;
+};
+
+export function commentOtherLine(sqlContent: string, line: number[] | number) {
     const slices = sqlContent.split('\n').map((item, index) => {
-        if (index !== line - 1) {
+        if (
+            (Array.isArray(line) && (index + 1 < line[0] || index + 1 > line[1])) ||
+            (typeof line === 'number' && index + 1 !== line)
+        ) {
             return '-- ' + item;
         } else {
             return item;

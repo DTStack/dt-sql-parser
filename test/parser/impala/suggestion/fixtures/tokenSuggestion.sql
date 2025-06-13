@@ -9,3 +9,9 @@ INSERT ;
 SHOW ;
 
 CREATE TABLE t1 (id );
+
+CREATE TABLE IF NOT EXISTS;
+
+CREATE TABLE tb (id 
+ 
+);

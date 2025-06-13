@@ -39,3 +39,23 @@ FROM table_name_1 SELECT col1, col2;
 FROM a JOIN b ON (a.id = b.id AND a.department = b.department) SELECT a.*;
 
 FROM page_view_stg INSERT;
+
+SELECT key FROM (SELECT key FROM src ORDER BY sum(a,b) LIMIT 10)subq1;
+
+SELECT col1 FROM t1 GROUP BY col1 HAVING SUM(col2) > 10;
+
+SELECT col1 FROM (SELECT col1, SUM(col2) AS col2sum FROM t1 GROUP BY col1 > 20) t2 WHERE t2.col2sum > 10;
+
+SELECT col1, col2 FROM t1 DISTRIBUTE BY col1 SORT BY col1 ASC, col2 DESC;
+
+SELECT id, RANK() OVER (PARTITION BY customer_id ORDER BY sale_date) AS rank FROM sales QUALIFY rank = 1;
+
+SELECT id, customer_id, amount FROM sales CLUSTER BY customer_id;
+
+SELECT sum(t3.col), col2 FROM t1 DISTRIBUTE BY col1 SORT BY col1 ASC, col2 DESC;
+
+SELECT a, COUNT(b) OVER (PARTITION BY c, d) FROM T;
+
+SELECT a.* FROM a JOIN b ON (a.id = b.id AND a.department = b.department);
+
+SELECT col1, col2, CASE WHEN month = 'January' THEN 2023 ELSE 2024 END AS year, CAST(day AS int) AS day FROM source_table;
