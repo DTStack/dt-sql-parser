@@ -240,4 +240,16 @@ describe('Spark SQL Token Suggestion', () => {
         )?.keywords;
         expect(suggestion.length).not.toBe(0);
     });
+
+    test('filter unreserved keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 26,
+            column: 17,
+        };
+        const suggestion = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toMatchUnorderedArray(['LATERAL', 'IDENTIFIER', 'VALUES']);
+    });
 });

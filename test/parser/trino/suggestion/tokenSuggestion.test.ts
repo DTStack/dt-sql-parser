@@ -171,4 +171,16 @@ describe('Trino SQL Token Suggestion', () => {
         )?.keywords;
         expect(suggestion.length).not.toBe(0);
     });
+
+    test('filter unreserved keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 21,
+            column: 17,
+        };
+        const suggestion = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toMatchUnorderedArray(['LATERAL', 'UNNEST', 'JSON_TABLE', 'TABLE']);
+    });
 });

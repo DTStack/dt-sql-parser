@@ -33,7 +33,13 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
     /**
      * The rules that keywords you don't want to be suggested.
      */
-    protected excludeKeywordRules = new Set([PostgreSqlParser.RULE_nonReservedWord]);
+    protected excludeKeywordRules = new Set([
+        PostgreSqlParser.RULE_nonReservedWord,
+        PostgreSqlParser.RULE_identifier,
+        PostgreSqlParser.RULE_reservedKeyword,
+        PostgreSqlParser.RULE_typeFuncNameKeyword,
+        PostgreSqlParser.RULE_colNameKeyword,
+    ]);
 
     protected preferredRules: Set<number> = new Set([
         PostgreSqlParser.RULE_tableNameCreate, // table name
