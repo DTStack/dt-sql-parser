@@ -95,12 +95,21 @@ import { WithItemContext } from "./FlinkSqlParser.js";
 import { WithItemNameContext } from "./FlinkSqlParser.js";
 import { SelectStatementContext } from "./FlinkSqlParser.js";
 import { SelectClauseContext } from "./FlinkSqlParser.js";
+import { SelectListContext } from "./FlinkSqlParser.js";
+import { ColumnProjectItemContext } from "./FlinkSqlParser.js";
+import { SelectWindowItemColumnNameContext } from "./FlinkSqlParser.js";
+import { SelectExpressionColumnNameContext } from "./FlinkSqlParser.js";
+import { SelectLiteralColumnNameContext } from "./FlinkSqlParser.js";
+import { ColumnAliasContext } from "./FlinkSqlParser.js";
 import { ProjectItemDefinitionContext } from "./FlinkSqlParser.js";
+import { TableAllColumnsContext } from "./FlinkSqlParser.js";
 import { OverWindowItemContext } from "./FlinkSqlParser.js";
 import { FromClauseContext } from "./FlinkSqlParser.js";
 import { TableExpressionContext } from "./FlinkSqlParser.js";
 import { TableReferenceContext } from "./FlinkSqlParser.js";
 import { TablePrimaryContext } from "./FlinkSqlParser.js";
+import { AtomFunctionTableContext } from "./FlinkSqlParser.js";
+import { AtomExpressionTableContext } from "./FlinkSqlParser.js";
 import { SystemTimePeriodContext } from "./FlinkSqlParser.js";
 import { DateTimeExpressionContext } from "./FlinkSqlParser.js";
 import { InlineDataValueClauseContext } from "./FlinkSqlParser.js";
@@ -760,11 +769,53 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitSelectClause?: (ctx: SelectClauseContext) => Result;
     /**
+     * Visit a parse tree produced by `FlinkSqlParser.selectList`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectList?: (ctx: SelectListContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.columnProjectItem`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnProjectItem?: (ctx: ColumnProjectItemContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.selectWindowItemColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectWindowItemColumnName?: (ctx: SelectWindowItemColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.columnAlias`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnAlias?: (ctx: ColumnAliasContext) => Result;
+    /**
      * Visit a parse tree produced by `FlinkSqlParser.projectItemDefinition`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitProjectItemDefinition?: (ctx: ProjectItemDefinitionContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableAllColumns?: (ctx: TableAllColumnsContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.overWindowItem`.
      * @param ctx the parse tree
@@ -795,6 +846,18 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitTablePrimary?: (ctx: TablePrimaryContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.atomFunctionTable`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAtomFunctionTable?: (ctx: AtomFunctionTableContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.atomExpressionTable`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAtomExpressionTable?: (ctx: AtomExpressionTableContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.systemTimePeriod`.
      * @param ctx the parse tree

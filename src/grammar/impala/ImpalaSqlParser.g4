@@ -771,9 +771,13 @@ sortItem
     ;
 
 querySpecification
-    : KW_SELECT setQuantifier? (KW_STRAIGHT_JOIN)? selectItem (COMMA selectItem)* (
-        KW_FROM relation (COMMA relation)*
-    )? (whereClause)? (KW_GROUP KW_BY groupBy)? (havingClause)?
+    : KW_SELECT setQuantifier? (KW_STRAIGHT_JOIN)? selectList (KW_FROM relation (COMMA relation)*)? (
+        whereClause
+    )? (KW_GROUP KW_BY groupBy)? (havingClause)?
+    ;
+
+selectList
+    : selectItem (COMMA selectItem)*
     ;
 
 whereClause
@@ -807,9 +811,25 @@ setQuantifier
     ;
 
 selectItem
-    : columnItem (KW_AS? identifier)? # selectSingle
-    | qualifiedName DOT ASTERISK      # selectAll
-    | ASTERISK                        # selectAll
+    : selectLiteralColumnName columnAlias?
+    | selectExpressionColumnName columnAlias?
+    | tableAllColumns columnAlias?
+    ;
+
+columnAlias
+    : KW_AS alias=identifier
+    ;
+
+selectLiteralColumnName
+    : columnNamePath columnAlias?
+    ;
+
+selectExpressionColumnName
+    : expression
+    ;
+
+tableAllColumns
+    : (qualifiedName DOT)? ASTERISK
     ;
 
 relation
@@ -861,9 +881,13 @@ columnAliases
 
 relationPrimary
     : tableOrViewPath
-    | KW_LATERAL? subQueryRelation
+    | atomSubQueryTableSource
     | unnest
     | parenthesizedRelation
+    ;
+
+atomSubQueryTableSource
+    : KW_LATERAL? subQueryRelation
     ;
 
 subQueryRelation

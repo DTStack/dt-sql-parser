@@ -11,21 +11,36 @@ import {
     type CreateViewContext,
     type DatabaseNameContext,
     type DatabaseNameCreateContext,
+    ExpressionTableContext,
     type FunctionNameCreateContext,
     type InsertStatementContext,
+    PostgreSqlParser,
     type ProcedureNameContext,
     type ProcedureNameCreateContext,
     type QueryCreateTableContext,
+    SelectExpressionColumnNameContext,
+    SelectLiteralColumnNameContext,
     type SelectStatementContext,
     type SingleStmtContext,
+    TableAllColumnsContext,
     TableRefContext,
     type TableNameContext,
     type TableNameCreateContext,
+    Target_labelContext,
     type ViewNameContext,
     type ViewNameCreateContext,
+    TargetListContext,
+    SelectNoParensContext,
 } from '../../lib/postgresql/PostgreSqlParser';
 import type { PostgreSqlParserListener } from '../../lib/postgresql/PostgreSqlParserListener';
-import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import {
+    AttrName,
+    ColumnDeclareType,
+    EntityCollector,
+    isChildContextOf,
+    StmtContextType,
+    TableDeclareType,
+} from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
 
 export class PostgreSqlEntityCollector extends EntityCollector implements PostgreSqlParserListener {
@@ -39,18 +54,34 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitTableName(ctx: TableNameContext) {
-        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
-            needCollectAttr
-                ? [
-                      {
-                          attrName: AttrName.alias,
-                          endContextList: [TableRefContext.name],
-                      },
-                  ]
-                : undefined
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [TableRefContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.COMMON,
+            }
+        );
+    }
+
+    exitExpressionTable(ctx: ExpressionTableContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [ExpressionTableContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
         );
     }
 
@@ -59,19 +90,12 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitViewName(ctx: ViewNameContext) {
-        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
-        this.pushEntity(
-            ctx,
-            EntityContextType.VIEW,
-            needCollectAttr
-                ? [
-                      {
-                          attrName: AttrName.alias,
-                          endContextList: [TableRefContext.name],
-                      },
-                  ]
-                : undefined
-        );
+        this.pushEntity(ctx, EntityContextType.VIEW, [
+            {
+                attrName: AttrName.alias,
+                endContextList: [TableRefContext.name],
+            },
+        ]);
     }
 
     exitViewNameCreate(ctx: ViewNameCreateContext) {
@@ -93,6 +117,52 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
                 endContextList: [Column_defContext.name],
             },
         ]);
+    }
+
+    exitTarget_list(ctx: TargetListContext) {
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_simpleSelect)) return;
+        this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
+    }
+
+    exitTableAllColumns(ctx: TableAllColumnsContext) {
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitSelectExpressionColumnName(ctx: SelectExpressionColumnNameContext) {
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [Target_labelContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [Target_labelContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.COMMON,
+            }
+        );
     }
 
     exitProcedureName(ctx: ProcedureNameContext) {
@@ -170,6 +240,14 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
 
     enterSelectStatement(ctx: SelectStatementContext) {
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
+    }
+
+    enterSelectNoParens(ctx: SelectNoParensContext) {
+        this.pushStmt(ctx, StmtContextType.SELECT_STMT);
+    }
+
+    exitSelectNoParens(ctx: SelectNoParensContext) {
+        this.popStmt();
     }
 
     exitSelectStatement(ctx: SelectStatementContext) {

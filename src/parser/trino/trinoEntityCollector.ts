@@ -10,17 +10,30 @@ import {
     CreateTableAsSelectContext,
     CreateTableContext,
     CreateViewContext,
+    ExpressionSourceTableContext,
     InsertIntoContext,
     QueryStatementContext,
     SchemaNameCreateContext,
     SchemaRefContext,
+    SelectAllWithoutTableContext,
+    SelectExpressionColumnNameContext,
+    SelectItemContext,
+    SelectListContext,
+    SelectLiteralColumnNameContext,
     SingleStatementContext,
+    TableAllColumnsContext,
     TableNameCreateContext,
     TableRefContext,
     ViewNameCreateContext,
     ViewRefContext,
 } from '../../lib/trino/TrinoSqlParser';
-import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import {
+    AttrName,
+    ColumnDeclareType,
+    EntityCollector,
+    StmtContextType,
+    TableDeclareType,
+} from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
 
 export class TrinoEntityCollector extends EntityCollector implements TrinoSqlListener {
@@ -42,18 +55,34 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
     }
 
     exitTableRef(ctx: TableRefContext) {
-        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
-            needCollectAttr
-                ? [
-                      {
-                          attrName: AttrName.alias,
-                          endContextList: [AliasedRelationContext.name],
-                      },
-                  ]
-                : undefined
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [AliasedRelationContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.COMMON,
+            }
+        );
+    }
+
+    exitExpressionSourceTable(ctx: ExpressionSourceTableContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [AliasedRelationContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
         );
     }
 
@@ -79,6 +108,10 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
         ]);
     }
 
+    exitSelectList(ctx: SelectListContext) {
+        this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
+    }
+
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
             {
@@ -92,6 +125,49 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
         ]);
     }
 
+    exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.COMMON,
+            }
+        );
+    }
+
+    exitSelectExpressionColumnName(ctx: SelectExpressionColumnNameContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitTableAllColumns(ctx: TableAllColumnsContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitSelectAllWithoutTable(ctx: SelectAllWithoutTableContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
     /** ===== Statement begin */
 
     enterSingleStatement(ctx: SingleStatementContext) {

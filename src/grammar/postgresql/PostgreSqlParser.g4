@@ -2113,11 +2113,7 @@ fromList
 tableRef
     : (
         (relationExpr | (KW_ONLY? viewName STAR? columnList? whereClause?)) aliasClause? tableSampleClause?
-        | KW_LATERAL? (
-            xmlTable aliasClause?
-            | funcTable funcAliasClause?
-            | selectWithParens aliasClause?
-        )
+        | KW_LATERAL? expressionTable
         | OPEN_PAREN tableRef (
             KW_CROSS KW_JOIN tableRef
             | KW_NATURAL joinType? KW_JOIN tableRef
@@ -2128,6 +2124,12 @@ tableRef
         | KW_NATURAL joinType? KW_JOIN tableRef
         | joinType? KW_JOIN tableRef joinQual
     )*
+    ;
+
+expressionTable
+    : xmlTable aliasClause?
+    | funcTable funcAliasClause?
+    | selectWithParens aliasClause?
     ;
 
 aliasClause
@@ -2558,8 +2560,8 @@ columnExpr
     ;
 
 columnExprNoParen
-    : expression
-    | columnName
+    : expression # selectExpressionColumnName
+    | columnName # selectLiteralColumnName
     ;
 
 funcArgList
@@ -2623,8 +2625,12 @@ targetList
     ;
 
 targetEl
-    : columnExprNoParen (KW_AS colLabel | identifier |) # target_label
-    | STAR                                              # target_star
+    : tableAllColumns                               # target_star
+    | columnExprNoParen (KW_AS? alias=identifier |) # target_label
+    ;
+
+tableAllColumns
+    : (colId DOT)* STAR
     ;
 
 qualifiedNameList
