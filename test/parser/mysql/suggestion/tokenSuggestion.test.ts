@@ -297,4 +297,16 @@ describe('MySQL Token Suggestion', () => {
         )?.keywords;
         expect(suggestion.length).not.toBe(0);
     });
+
+    test('filter unreserved keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 24,
+            column: 17,
+        };
+        const suggestion = mysql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toMatchUnorderedArray(['JSON_TABLE', 'LATERAL', 'SELECT']);
+    });
 });
