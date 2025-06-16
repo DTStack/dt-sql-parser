@@ -29,6 +29,11 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
         return new ImpalaSqlParser(tokenStream);
     }
 
+    /**
+     * The rules that keywords you don't want to be suggested.
+     */
+    protected excludeKeywordRules = new Set([ImpalaSqlParser.RULE_nonReserved]);
+
     protected preferredRules: Set<number> = new Set([
         ImpalaSqlParser.RULE_functionNameCreate,
         ImpalaSqlParser.RULE_tableNameCreate,
@@ -41,6 +46,7 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
         ImpalaSqlParser.RULE_databaseNamePath,
         ImpalaSqlParser.RULE_columnNamePath,
         ImpalaSqlParser.RULE_columnName,
+        ...this.excludeKeywordRules,
     ]);
 
     protected get splitListener() {

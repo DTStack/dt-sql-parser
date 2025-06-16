@@ -272,4 +272,16 @@ describe('Hive SQL Token Suggestion', () => {
         )?.keywords;
         expect(suggestion.length).not.toBe(0);
     });
+
+    test('filter unreserved keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 28,
+            column: 16,
+        };
+        const suggestion = hive.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toMatchUnorderedArray(['TABLE', 'UNIQUEJOIN']);
+    });
 });

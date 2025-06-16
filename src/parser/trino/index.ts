@@ -50,6 +50,11 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         return new TrinoSemanticContextCollector(input, caretPosition, allTokens, options);
     }
 
+    /**
+     * The rules that keywords you don't want to be suggested.
+     */
+    protected excludeKeywordRules = new Set([TrinoSqlParser.RULE_nonReserved]);
+
     protected preferredRules: Set<number> = new Set([
         TrinoSqlParser.RULE_catalogRef,
         TrinoSqlParser.RULE_catalogNameCreate,
@@ -64,6 +69,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
         TrinoSqlParser.RULE_columnRef,
         TrinoSqlParser.RULE_columnName,
         TrinoSqlParser.RULE_columnNameCreate,
+        ...this.excludeKeywordRules,
     ]);
 
     protected processCandidates(

@@ -29,6 +29,15 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         return new SparkSqlParser(tokenStream);
     }
 
+    /**
+     * The rules that keywords you don't want to be suggested.
+     */
+    protected excludeKeywordRules = new Set([
+        SparkSqlParser.RULE_strictIdentifier,
+        SparkSqlParser.RULE_strictNonReserved,
+        SparkSqlParser.RULE_nonReserved,
+    ]);
+
     protected preferredRules: Set<number> = new Set([
         SparkSqlParser.RULE_namespaceName,
         SparkSqlParser.RULE_namespaceNameCreate,
@@ -41,6 +50,7 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         SparkSqlParser.RULE_columnName,
         SparkSqlParser.RULE_columnNamePath,
         SparkSqlParser.RULE_columnNameCreate,
+        ...this.excludeKeywordRules,
     ]);
 
     protected get splitListener() {
