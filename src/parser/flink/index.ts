@@ -29,6 +29,17 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         return new FlinkSqlParser(tokenStream);
     }
 
+    /**
+     * The rules that keywords you don't want to be suggested.
+     */
+    protected excludeKeywordRules = new Set([
+        FlinkSqlParser.RULE_nonReservedKeywords,
+        FlinkSqlParser.RULE_reservedKeywordsUsedAsFuncName,
+        FlinkSqlParser.RULE_reservedKeywordsFollowParamsUsedAsFuncName,
+        FlinkSqlParser.RULE_reservedKeywordsNoParamsUsedAsFuncName,
+        FlinkSqlParser.RULE_reservedKeywordsUsedAsFuncParam,
+    ]);
+
     protected preferredRules = new Set([
         FlinkSqlParser.RULE_catalogPath, // catalog name
         FlinkSqlParser.RULE_databasePath, // database name
@@ -47,6 +58,7 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
         FlinkSqlParser.RULE_columnNameCreate,
         FlinkSqlParser.RULE_tablePropertyKey,
         FlinkSqlParser.RULE_tablePropertyValue,
+        ...this.excludeKeywordRules,
     ]);
 
     protected get splitListener() {

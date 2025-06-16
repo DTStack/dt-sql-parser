@@ -30,6 +30,17 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         return new PostgreSqlParser(tokenStream);
     }
 
+    /**
+     * The rules that keywords you don't want to be suggested.
+     */
+    protected excludeKeywordRules = new Set([
+        PostgreSqlParser.RULE_nonReservedWord,
+        PostgreSqlParser.RULE_identifier,
+        PostgreSqlParser.RULE_reservedKeyword,
+        PostgreSqlParser.RULE_typeFuncNameKeyword,
+        PostgreSqlParser.RULE_colNameKeyword,
+    ]);
+
     protected preferredRules: Set<number> = new Set([
         PostgreSqlParser.RULE_tableNameCreate, // table name
         PostgreSqlParser.RULE_tableName, // table name that will be created
@@ -46,6 +57,7 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         PostgreSqlParser.RULE_columnNameCreate, // column name that will be created
         PostgreSqlParser.RULE_columnName, // column name
         PostgreSqlParser.RULE_columnNamePath, // column name
+        ...this.excludeKeywordRules,
     ]);
 
     protected get splitListener() {

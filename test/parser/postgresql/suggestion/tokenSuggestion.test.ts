@@ -242,4 +242,16 @@ describe('Postgres SQL Token Suggestion', () => {
         )?.keywords;
         expect(suggestion.length).not.toBe(0);
     });
+
+    test('filter unreserved keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 17,
+            column: 14,
+        };
+        const suggestion = postgresql.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toEqual([]);
+    });
 });
