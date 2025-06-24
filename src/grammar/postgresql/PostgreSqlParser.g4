@@ -2378,7 +2378,6 @@ primaryExpression
     | OPEN_PAREN expression COMMA exprList CLOSE_PAREN
     | row KW_OVERLAPS row
     | columnNamePath
-    | qualifiedName
     | primaryExpression TYPECAST typename
     | (PLUS | MINUS) primaryExpression
     | primaryExpression qualOp primaryExpression?

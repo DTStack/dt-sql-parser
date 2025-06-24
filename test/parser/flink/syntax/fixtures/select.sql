@@ -50,4 +50,8 @@ SELECT
   TIMESTAMP '2019-12-23 09:00:00' as time2,
   INTERVAL '10 00:00:00.004' DAY TO SECOND as time3
 from
-  MyTable; 
+  MyTable;
+
+
+SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
+SELECT SUM(c.amount) AS total_amount FROM cust c;

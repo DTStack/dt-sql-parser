@@ -196,3 +196,7 @@ SELECT int4range(10, 20) @> 3;
 
 -- Object Identifier Types
 SELECT * FROM pg_attribute WHERE attrelid = 'mytable'::regclass;
+
+
+SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
+SELECT SUM(c.amount) AS total_amount FROM cust c;
