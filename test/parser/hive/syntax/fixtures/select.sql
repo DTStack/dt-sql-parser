@@ -244,3 +244,7 @@ EXPLAIN select sum(hash(key)), sum(hash(value)) from src_orc_merge_test_part whe
 FROM table_name_1 SELECT col1, col2;
 
 FROM a JOIN b ON (a.id = b.id AND a.department = b.department) SELECT a.*;
+
+
+SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
+SELECT SUM(c.amount) AS total_amount FROM cust c;

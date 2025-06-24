@@ -115,3 +115,7 @@ SELECT 123 INTERSECT DISTINCT SELECT 123 INTERSECT ALL SELECT 123;
 -- substring_built_in_function
 SELECT substring('string' FROM 2);
 SELECT substring('string' FROM 2 FOR 3);
+
+
+SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
+SELECT SUM(c.amount) AS total_amount FROM cust c;

@@ -78,3 +78,7 @@ SELECT ID ,SUM(COL_1) AS SUM_COL_1 FROM (
     UNION ALL
     (SELECT ID ,COL_1 FROM TEST_AUTO_INC TAI)
 )SS GROUP BY 1 ORDER BY 1;
+
+
+SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
+SELECT SUM(c.amount) AS total_amount FROM cust c;

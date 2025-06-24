@@ -214,3 +214,7 @@ select true and null;
 select c_first_name, c_last_name from customer where lower(trim(c_last_name)) regexp '^de.*';
 
 select c_first_name, c_last_name from customer where lower(trim(c_last_name)) rlike '^de.*';
+
+
+SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
+SELECT SUM(c.amount) AS total_amount FROM cust c;

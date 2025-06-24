@@ -25,3 +25,7 @@ SELECT name, age FROM person;
 -- persons with age 16 are in the second partition. The rows are sorted based
 -- on age within each partition.
 SELECT age, name FROM person CLUSTER BY age;
+
+
+SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
+SELECT SUM(c.amount) AS total_amount FROM cust c;
