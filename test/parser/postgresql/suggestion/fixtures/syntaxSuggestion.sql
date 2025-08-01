@@ -87,3 +87,7 @@ VALUES (1, '3'), (3, 'sdsd') ORDER BY sort_expression ASC LIMIT id = 1;
 CREATE OR REPLACE RULE name AS ON SELECT TO table_name WHERE length(y+x) = 3 DO INSTEAD NOTHING;
 
 WITH query_name (id) AS (SELECT id FROM table_expression) SELECT DISTINCT ON (col1) random() AS name1 FROM table_expression WHERE name1=name1 GROUP BY id  HAVING sum(len+y) < interval '5 hours' WINDOW  w AS (PARTITION BY depname ORDER BY salary DESC) EXCEPT (SELECT * FROM others) ORDER BY salary USING > NULLS FIRST OFFSET start FETCH NEXT ROW ONLY FOR KEY SHARE OF table_name NOWAIT;
+
+SELECT  FROM tb1;
+
+SELECT age FROM tb1;

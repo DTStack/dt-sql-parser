@@ -762,6 +762,39 @@ describe('Spark SQL Syntax Suggestion', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['quantity']);
     });
 
+    test('Sync suggestion no duplicate syntaxContextType', () => {
+        const pos: CaretPosition = {
+            lineNumber: 79,
+            column: 8,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const syntaxContextTypes = syntaxes?.map((syn) => syn.syntaxContextType);
+
+        expect(syntaxContextTypes).not.toBeUndefined();
+        expect(syntaxContextTypes).toEqual([EntityContextType.COLUMN, EntityContextType.FUNCTION]);
+    });
+
+    test('Select function or column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 81,
+            column: 11,
+        };
+        const syntaxes = spark.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const wordRangesArr = syntaxes?.map((syn) => syn.wordRanges);
+
+        expect(wordRangesArr).not.toBeUndefined();
+        expect(wordRangesArr.length).toBe(2);
+        expect(
+            wordRangesArr.map((wordRanges) => wordRanges.map((wordRange) => wordRange.text))
+        ).toEqual([['age'], ['age']]);
+    });
+
     test('Syntax suggestion after a comment', () => {
         const sql = `-- the comment\nSELECT * FROM db.`;
         const pos: CaretPosition = {
