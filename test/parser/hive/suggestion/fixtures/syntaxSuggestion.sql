@@ -59,3 +59,7 @@ SELECT a, COUNT(b) OVER (PARTITION BY c, d) FROM T;
 SELECT a.* FROM a JOIN b ON (a.id = b.id AND a.department = b.department);
 
 SELECT col1, col2, CASE WHEN month = 'January' THEN 2023 ELSE 2024 END AS year, CAST(day AS int) AS day FROM source_table;
+
+SELECT  FROM tb1;
+
+SELECT age FROM tb1;
