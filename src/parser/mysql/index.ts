@@ -121,7 +121,12 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
                     break;
             }
 
-            if (syntaxContextType) {
+            if (
+                syntaxContextType &&
+                !originalSyntaxSuggestions.some(
+                    (syn) => syn.syntaxContextType === syntaxContextType
+                )
+            ) {
                 originalSyntaxSuggestions.push({
                     syntaxContextType,
                     wordRanges: tokenRanges,

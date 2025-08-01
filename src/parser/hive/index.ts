@@ -144,7 +144,12 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
                     break;
             }
 
-            if (syntaxContextType) {
+            if (
+                syntaxContextType &&
+                !originalSyntaxSuggestions.some(
+                    (syn) => syn.syntaxContextType === syntaxContextType
+                )
+            ) {
                 originalSyntaxSuggestions.push({
                     syntaxContextType,
                     wordRanges: tokenRanges,

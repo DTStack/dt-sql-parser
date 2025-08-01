@@ -139,7 +139,12 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
                     break;
             }
 
-            if (syntaxContextType) {
+            if (
+                syntaxContextType &&
+                !originalSyntaxSuggestions.some(
+                    (syn) => syn.syntaxContextType === syntaxContextType
+                )
+            ) {
                 originalSyntaxSuggestions.push({
                     syntaxContextType,
                     wordRanges: tokenRanges,

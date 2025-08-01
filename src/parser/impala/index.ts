@@ -132,7 +132,12 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
                     break;
             }
 
-            if (syntaxContextType) {
+            if (
+                syntaxContextType &&
+                !originalSyntaxSuggestions.some(
+                    (syn) => syn.syntaxContextType === syntaxContextType
+                )
+            ) {
                 originalSyntaxSuggestions.push({
                     syntaxContextType,
                     wordRanges: tokenRanges,

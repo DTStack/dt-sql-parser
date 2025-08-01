@@ -156,7 +156,12 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
                     break;
             }
 
-            if (syntaxContextType) {
+            if (
+                syntaxContextType &&
+                !originalSyntaxSuggestions.some(
+                    (syn) => syn.syntaxContextType === syntaxContextType
+                )
+            ) {
                 originalSyntaxSuggestions.push({
                     syntaxContextType,
                     wordRanges: tokenRanges,
