@@ -75,3 +75,7 @@ INSERT OVERWRITE students PARTITION (student_id = 222222) SELECT name, address F
 SELECT id, name, employee.deptno, deptname FROM employee FULL JOIN department ON employee.deptno = department.deptno;
 
 SELECT city, sum(quantity) AS sum FROM dealer GROUP BY sum(city) HAVING max(quantity) > 15;
+
+SELECT  FROM tb1;
+
+SELECT age FROM tb1;

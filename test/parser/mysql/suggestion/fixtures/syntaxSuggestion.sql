@@ -61,3 +61,7 @@ SELECT user, MAX(salary) FROM users where age = 10 GROUP BY length(user) HAVING 
 SELECT c.category_id FROM category c JOIN product p ON c.category_id = p.category_id;
 
 SELECT score, CASE WHEN score >= 90 THEN 'A' ELSE 'F' END AS grade FROM students;
+
+SELECT  FROM tb1;
+
+SELECT age FROM tb1;
