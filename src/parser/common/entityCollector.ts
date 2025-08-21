@@ -35,7 +35,6 @@ export interface StmtContext {
     readonly parentStmt: StmtContext | null;
     readonly isContainCaret?: boolean;
     readonly scopeDepth: number;
-    readonly _ctx: ParserRuleContext;
     readonly text: string;
 }
 
@@ -58,7 +57,6 @@ export function toStmtContext(
         isContainCaret,
         text: stmtText,
         scopeDepth: type === StmtContextType.COMMON_STMT ? 0 : (parentStmt?.scopeDepth ?? 0) + 1,
-        _ctx: ctx,
     };
 }
 
@@ -106,8 +104,6 @@ export interface BaseEntityContext {
     isAccessible: boolean;
     /** Entities related to this entity */
     relatedEntities: EntityContext[] | null;
-    /** The parser rule context for this entity, it will be deleted after the entity is collected because of json serialization */
-    _ctx?: ParserRuleContext;
     /** Comment attribute for this entity */
     [AttrName.comment]: WordRange | null;
     /** Alias attribute for this entity */
@@ -225,7 +221,6 @@ export function toEntityContext(
         position,
         belongStmt,
         declareType: metaInfo?.declareType,
-        _ctx: ctx,
         [AttrName.comment]: null,
     };
     switch (entityInfo.entityContextType) {
@@ -328,10 +323,10 @@ function findAttributeChildren(
  * @returns true if entity is contained within rangeEntity's range
  */
 function isEntityInScope(entity: EntityContext, rangeEntity: EntityContext): boolean {
-    const entityStart = entity._ctx?.start?.tokenIndex;
-    const entityStop = entity._ctx?.stop?.tokenIndex;
-    const rangeStart = rangeEntity._ctx?.start?.tokenIndex;
-    const rangeStop = rangeEntity._ctx?.stop?.tokenIndex;
+    const entityStart = entity.position.startTokenIndex;
+    const entityStop = entity.position.endTokenIndex;
+    const rangeStart = rangeEntity.position.startTokenIndex;
+    const rangeStop = rangeEntity.position.endTokenIndex;
 
     return (
         entityStart != null &&
@@ -408,53 +403,10 @@ export abstract class EntityCollector {
 
     exitProgram() {
         const entities = Array.from(this._entitiesSet);
-        this.removeCtxAttr();
         if (this._caretTokenIndex !== -1) {
             this.attachAccessibleToEntities(entities);
         }
         this._entityStack.clear();
-    }
-
-    /**
-     * Remove _ctx property to avoid circular references during JSON serialization
-     */
-    private removeCtxAttr() {
-        const entities = Array.from(this._entitiesSet);
-        // Use WeakSet to track processed objects and avoid infinite recursion from circular references
-        const processed = new WeakSet();
-
-        const removeCtx = (obj: any) => {
-            if (!obj || typeof obj !== 'object' || processed.has(obj)) {
-                return;
-            }
-            processed.add(obj);
-
-            if ('_ctx' in obj) {
-                obj._ctx = undefined;
-            }
-
-            if (obj.belongStmt) {
-                removeCtx(obj.belongStmt);
-            }
-
-            if (obj.rootStmt) {
-                removeCtx(obj.rootStmt);
-            }
-
-            if (obj.parentStmt) {
-                removeCtx(obj.parentStmt);
-            }
-
-            if (obj.relatedEntities && Array.isArray(obj.relatedEntities)) {
-                obj.relatedEntities.forEach(removeCtx);
-            }
-
-            if (obj.columns && Array.isArray(obj.columns)) {
-                obj.columns.forEach(removeCtx);
-            }
-        };
-
-        entities.forEach(removeCtx);
     }
 
     /**

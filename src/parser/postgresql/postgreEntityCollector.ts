@@ -31,6 +31,9 @@ import {
     type ViewNameCreateContext,
     TargetListContext,
     SelectNoParensContext,
+    XmlTableContext,
+    FuncTableContext,
+    SelectWithParensContext,
 } from '../../lib/postgresql/PostgreSqlParser';
 import type { PostgreSqlParserListener } from '../../lib/postgresql/PostgreSqlParserListener';
 import {
@@ -69,7 +72,40 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         );
     }
 
-    exitExpressionTable(ctx: ExpressionTableContext) {
+    exitXmlTable(ctx: XmlTableContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [ExpressionTableContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitFuncTable(ctx: FuncTableContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [ExpressionTableContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitSelectWithParens(ctx: SelectWithParensContext) {
+        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_expressionTable)) return;
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
@@ -119,7 +155,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         ]);
     }
 
-    exitTarget_list(ctx: TargetListContext) {
+    exitTargetList(ctx: TargetListContext) {
         if (!isChildContextOf(ctx, PostgreSqlParser.RULE_simpleSelect)) return;
         this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
     }
