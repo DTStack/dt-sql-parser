@@ -67,7 +67,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
                 },
             ],
             {
-                declareType: TableDeclareType.COMMON,
+                declareType: TableDeclareType.LITERAL,
             }
         );
     }
@@ -196,7 +196,7 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
                 },
             ],
             {
-                declareType: ColumnDeclareType.COMMON,
+                declareType: ColumnDeclareType.LITERAL,
             }
         );
     }

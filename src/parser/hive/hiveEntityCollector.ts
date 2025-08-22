@@ -68,7 +68,7 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
                 },
             ],
             {
-                declareType: TableDeclareType.COMMON,
+                declareType: TableDeclareType.LITERAL,
             }
         );
     }
@@ -153,7 +153,7 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
                 },
             ],
             {
-                declareType: ColumnDeclareType.COMMON,
+                declareType: ColumnDeclareType.LITERAL,
             }
         );
     }

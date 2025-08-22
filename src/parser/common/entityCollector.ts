@@ -115,7 +115,7 @@ export interface BaseEntityContext {
  */
 export enum ColumnDeclareType {
     /** Literal column name */
-    COMMON,
+    LITERAL,
     /** Using asterisk syntax (tableName.*) */
     ALL,
     /** Complex expressions like subqueries, case statements, function calls */
@@ -127,7 +127,7 @@ export enum ColumnDeclareType {
  */
 export enum TableDeclareType {
     /** Regular table reference */
-    COMMON,
+    LITERAL,
     /** Table defined by expression (e.g., subquery) */
     EXPRESSION,
 }

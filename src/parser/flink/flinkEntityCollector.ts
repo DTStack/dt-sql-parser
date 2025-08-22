@@ -73,7 +73,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
                 },
             ],
             {
-                declareType: TableDeclareType.COMMON,
+                declareType: TableDeclareType.LITERAL,
             }
         );
     }
@@ -165,7 +165,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
                 },
             ],
             {
-                declareType: ColumnDeclareType.COMMON,
+                declareType: ColumnDeclareType.LITERAL,
             }
         );
     }

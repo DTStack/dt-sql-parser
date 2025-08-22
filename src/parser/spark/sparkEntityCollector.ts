@@ -76,7 +76,7 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
                 },
             ],
             {
-                declareType: TableDeclareType.COMMON,
+                declareType: TableDeclareType.LITERAL,
             }
         );
     }
@@ -191,7 +191,7 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
                 },
             ],
             {
-                declareType: ColumnDeclareType.COMMON,
+                declareType: ColumnDeclareType.LITERAL,
             }
         );
     }

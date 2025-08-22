@@ -64,7 +64,7 @@ export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlP
                 },
             ],
             {
-                declareType: TableDeclareType.COMMON,
+                declareType: TableDeclareType.LITERAL,
             }
         );
     }
@@ -167,7 +167,7 @@ export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlP
                 },
             ],
             {
-                declareType: ColumnDeclareType.COMMON,
+                declareType: ColumnDeclareType.LITERAL,
             }
         );
     }

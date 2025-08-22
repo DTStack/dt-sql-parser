@@ -65,7 +65,7 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
                 },
             ],
             {
-                declareType: TableDeclareType.COMMON,
+                declareType: TableDeclareType.LITERAL,
             }
         );
     }
@@ -136,7 +136,7 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
                 },
             ],
             {
-                declareType: ColumnDeclareType.COMMON,
+                declareType: ColumnDeclareType.LITERAL,
             }
         );
     }

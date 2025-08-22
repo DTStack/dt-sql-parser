@@ -61,7 +61,7 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
                 },
             ],
             {
-                declareType: TableDeclareType.COMMON,
+                declareType: TableDeclareType.LITERAL,
             }
         );
     }
@@ -149,7 +149,7 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
                 },
             ],
             {
-                declareType: ColumnDeclareType.COMMON,
+                declareType: ColumnDeclareType.LITERAL,
             }
         );
     }
