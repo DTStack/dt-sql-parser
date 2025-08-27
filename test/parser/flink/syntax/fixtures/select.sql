@@ -55,3 +55,6 @@ from
 
 SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
 SELECT SUM(c.amount) AS total_amount FROM cust c;
+INSERT INTO SR_CATALOG.DEMOS.DETAIL_DEMO VALUES(2, 'YY', 2, CURRENT_DATE, NOW(),func1(),func2(1),func3('a',2));
+
+INSERT INTO SR_CATALOG.DEMOS.DETAIL_DEMO SELECT 2, 'YY', 2, CURRENT_DATE,NOW(),func1(),func2(1),func3('a',2);
