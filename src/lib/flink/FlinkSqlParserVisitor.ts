@@ -86,6 +86,7 @@ import { InsertSimpleStatementContext } from "./FlinkSqlParser.js";
 import { InsertPartitionDefinitionContext } from "./FlinkSqlParser.js";
 import { ValuesDefinitionContext } from "./FlinkSqlParser.js";
 import { ValuesRowDefinitionContext } from "./FlinkSqlParser.js";
+import { ValueDefinitionContext } from "./FlinkSqlParser.js";
 import { InsertMulStatementCompatibilityContext } from "./FlinkSqlParser.js";
 import { InsertMulStatementContext } from "./FlinkSqlParser.js";
 import { QueryStatementContext } from "./FlinkSqlParser.js";
@@ -705,6 +706,12 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitValuesRowDefinition?: (ctx: ValuesRowDefinitionContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.valueDefinition`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitValueDefinition?: (ctx: ValueDefinitionContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.insertMulStatementCompatibility`.
      * @param ctx the parse tree
