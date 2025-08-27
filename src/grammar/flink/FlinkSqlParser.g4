@@ -439,7 +439,12 @@ valuesDefinition
     ;
 
 valuesRowDefinition
-    : LR_BRACKET constant (COMMA constant)* RR_BRACKET
+    : LR_BRACKET valueDefinition (COMMA valueDefinition)* RR_BRACKET
+    ;
+
+valueDefinition
+    : constant
+    | functionCallExpression
     ;
 
 insertMulStatementCompatibility
