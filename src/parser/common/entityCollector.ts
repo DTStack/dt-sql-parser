@@ -100,8 +100,8 @@ export interface BaseEntityContext {
     readonly belongStmt: StmtContext;
     /** Reference to another entity or string */
     reference?: string | EntityContext;
-    /** Whether the entity is accessible from the caret position */
-    isAccessible: boolean;
+    /** Whether the entity is accessible from the caret position, **ONLY** applicable to table entity */
+    isAccessible: boolean | null;
     /** Entities related to this entity */
     relatedEntities: EntityContext[] | null;
     /** Comment attribute for this entity */
@@ -410,30 +410,6 @@ export abstract class EntityCollector {
     }
 
     /**
-     * Determines if the caret is inside a derived table subquery
-     * For example, in: SELECT id FROM t1, (SELECT name from t2) as t3
-     * Checks if the caret is inside the subquery (SELECT name from t2)
-     * @returns Whether the caret is inside a derived table subquery
-     */
-    protected isCaretInDerivedTableStmt(): boolean {
-        if (!this._caretStmt) {
-            return false;
-        }
-
-        // Check all entities to find a derived table entity containing the subquery where the caret is located
-        return this.getEntities().some(
-            (entity) =>
-                entity.entityContextType === EntityContextType.TABLE &&
-                entity.belongStmt.isContainCaret &&
-                entity.relatedEntities?.some(
-                    (relatedEntity) =>
-                        relatedEntity.entityContextType === EntityContextType.QUERY_RESULT &&
-                        relatedEntity.belongStmt === this._caretStmt
-                )
-        );
-    }
-
-    /**
      * Adds accessibility markers to entities
      * @param entities The list of entities to process
      */
@@ -449,13 +425,12 @@ export abstract class EntityCollector {
 
             const entityScopeDepth = entity.belongStmt.scopeDepth ?? 0;
 
-            // First, the entity must be in a statement containing the caret to potentially be accessible
-            entity.isAccessible = entity.belongStmt.isContainCaret ?? false;
-
-            // For table-type entities, we need to judge accessibility based on scope depth
             if (entity.entityContextType === EntityContextType.TABLE) {
                 entity.isAccessible =
-                    entity.isAccessible && entityScopeDepth === this._caretStmtScopeDepth;
+                    !!entity.belongStmt.isContainCaret &&
+                    entityScopeDepth === this._caretStmtScopeDepth;
+            } else {
+                entity.isAccessible = null;
             }
 
             // Recursively process related entities
