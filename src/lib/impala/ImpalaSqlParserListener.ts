@@ -193,6 +193,7 @@ import { ValueExpressionDefaultContext } from "./ImpalaSqlParser.js";
 import { ConcatenationContext } from "./ImpalaSqlParser.js";
 import { ArithmeticBinaryContext } from "./ImpalaSqlParser.js";
 import { ArithmeticUnaryContext } from "./ImpalaSqlParser.js";
+import { FunctionCallExpressionContext } from "./ImpalaSqlParser.js";
 import { DereferenceContext } from "./ImpalaSqlParser.js";
 import { TypeConstructorContext } from "./ImpalaSqlParser.js";
 import { SpecialDateTimeFunctionContext } from "./ImpalaSqlParser.js";
@@ -2167,6 +2168,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitArithmeticUnary?: (ctx: ArithmeticUnaryContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.functionCallExpression`.
+     * @param ctx the parse tree
+     */
+    enterFunctionCallExpression?: (ctx: FunctionCallExpressionContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.functionCallExpression`.
+     * @param ctx the parse tree
+     */
+    exitFunctionCallExpression?: (ctx: FunctionCallExpressionContext) => void;
     /**
      * Enter a parse tree produced by the `dereference`
      * labeled alternative in `ImpalaSqlParser.primaryExpression`.

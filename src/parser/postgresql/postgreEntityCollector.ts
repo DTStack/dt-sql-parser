@@ -168,7 +168,6 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitSelectExpressionColumnName(ctx: SelectExpressionColumnNameContext) {
-        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
         this.pushEntity(
             ctx,
             EntityContextType.COLUMN,
@@ -185,7 +184,6 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
-        if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
         this.pushEntity(
             ctx,
             EntityContextType.COLUMN,
@@ -278,15 +276,15 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
     }
 
+    exitSelectStatement(ctx: SelectStatementContext) {
+        this.popStmt();
+    }
+
     enterSelectNoParens(ctx: SelectNoParensContext) {
         this.pushStmt(ctx, StmtContextType.SELECT_STMT);
     }
 
     exitSelectNoParens(ctx: SelectNoParensContext) {
-        this.popStmt();
-    }
-
-    exitSelectStatement(ctx: SelectStatementContext) {
         this.popStmt();
     }
 

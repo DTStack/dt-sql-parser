@@ -5856,30 +5856,14 @@ export class FlinkSqlParser extends SQLParserBase {
                 this.enterOuterAlt(localContext, 3);
                 {
                 this.state = 1312;
-                this.selectExpressionColumnName();
-                this.state = 1318;
+                this.tableAllColumns();
+                this.state = 1314;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 137, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 136, this.context) ) {
                 case 1:
                     {
                     this.state = 1313;
                     this.columnAlias();
-                    }
-                    break;
-                case 2:
-                    {
-                    this.state = 1315;
-                    this.errorHandler.sync(this);
-                    switch (this.interpreter.adaptivePredict(this.tokenStream, 136, this.context) ) {
-                    case 1:
-                        {
-                        this.state = 1314;
-                        this.match(FlinkSqlParser.KW_AS);
-                        }
-                        break;
-                    }
-                    this.state = 1317;
-                    this.columnName();
                     }
                     break;
                 }
@@ -5888,15 +5872,31 @@ export class FlinkSqlParser extends SQLParserBase {
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 1320;
-                this.tableAllColumns();
+                this.state = 1316;
+                this.selectExpressionColumnName();
                 this.state = 1322;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 138, this.context) ) {
                 case 1:
                     {
-                    this.state = 1321;
+                    this.state = 1317;
                     this.columnAlias();
+                    }
+                    break;
+                case 2:
+                    {
+                    this.state = 1319;
+                    this.errorHandler.sync(this);
+                    switch (this.interpreter.adaptivePredict(this.tokenStream, 137, this.context) ) {
+                    case 1:
+                        {
+                        this.state = 1318;
+                        this.match(FlinkSqlParser.KW_AS);
+                        }
+                        break;
+                    }
+                    this.state = 1321;
+                    this.columnName();
                     }
                     break;
                 }
@@ -12469,8 +12469,8 @@ export class FlinkSqlParser extends SQLParserBase {
         1273,8,84,1,84,3,84,1276,8,84,1,84,3,84,1279,8,84,1,84,3,84,1282,
         8,84,1,84,1,84,1,84,1,84,3,84,1288,8,84,1,85,1,85,3,85,1292,8,85,
         1,85,1,85,1,86,1,86,1,86,5,86,1299,8,86,10,86,12,86,1302,9,86,1,
-        87,1,87,1,87,1,87,3,87,1308,8,87,1,87,3,87,1311,8,87,1,87,1,87,1,
-        87,3,87,1316,8,87,1,87,3,87,1319,8,87,1,87,1,87,3,87,1323,8,87,3,
+        87,1,87,1,87,1,87,3,87,1308,8,87,1,87,3,87,1311,8,87,1,87,1,87,3,
+        87,1315,8,87,1,87,1,87,1,87,3,87,1320,8,87,1,87,3,87,1323,8,87,3,
         87,1325,8,87,1,88,1,88,1,89,1,89,1,90,1,90,1,91,3,91,1334,8,91,1,
         91,1,91,1,92,1,92,1,92,3,92,1341,8,92,1,92,3,92,1344,8,92,1,92,1,
         92,3,92,1348,8,92,1,92,3,92,1351,8,92,3,92,1353,8,92,1,93,1,93,1,
@@ -12967,17 +12967,17 @@ export class FlinkSqlParser extends SQLParserBase {
         176,88,0,1304,1310,3,180,90,0,1305,1311,3,182,91,0,1306,1308,5,17,
         0,0,1307,1306,1,0,0,0,1307,1308,1,0,0,0,1308,1309,1,0,0,0,1309,1311,
         3,276,138,0,1310,1305,1,0,0,0,1310,1307,1,0,0,0,1310,1311,1,0,0,
-        0,1311,1325,1,0,0,0,1312,1318,3,178,89,0,1313,1319,3,182,91,0,1314,
-        1316,5,17,0,0,1315,1314,1,0,0,0,1315,1316,1,0,0,0,1316,1317,1,0,
-        0,0,1317,1319,3,52,26,0,1318,1313,1,0,0,0,1318,1315,1,0,0,0,1318,
-        1319,1,0,0,0,1319,1325,1,0,0,0,1320,1322,3,186,93,0,1321,1323,3,
-        182,91,0,1322,1321,1,0,0,0,1322,1323,1,0,0,0,1323,1325,1,0,0,0,1324,
-        1303,1,0,0,0,1324,1304,1,0,0,0,1324,1312,1,0,0,0,1324,1320,1,0,0,
-        0,1325,175,1,0,0,0,1326,1327,3,188,94,0,1327,177,1,0,0,0,1328,1329,
-        3,276,138,0,1329,179,1,0,0,0,1330,1331,3,52,26,0,1331,181,1,0,0,
-        0,1332,1334,5,17,0,0,1333,1332,1,0,0,0,1333,1334,1,0,0,0,1334,1335,
-        1,0,0,0,1335,1336,3,328,164,0,1336,183,1,0,0,0,1337,1353,3,188,94,
-        0,1338,1343,3,276,138,0,1339,1341,5,17,0,0,1340,1339,1,0,0,0,1340,
+        0,1311,1325,1,0,0,0,1312,1314,3,186,93,0,1313,1315,3,182,91,0,1314,
+        1313,1,0,0,0,1314,1315,1,0,0,0,1315,1325,1,0,0,0,1316,1322,3,178,
+        89,0,1317,1323,3,182,91,0,1318,1320,5,17,0,0,1319,1318,1,0,0,0,1319,
+        1320,1,0,0,0,1320,1321,1,0,0,0,1321,1323,3,52,26,0,1322,1317,1,0,
+        0,0,1322,1319,1,0,0,0,1322,1323,1,0,0,0,1323,1325,1,0,0,0,1324,1303,
+        1,0,0,0,1324,1304,1,0,0,0,1324,1312,1,0,0,0,1324,1316,1,0,0,0,1325,
+        175,1,0,0,0,1326,1327,3,188,94,0,1327,177,1,0,0,0,1328,1329,3,276,
+        138,0,1329,179,1,0,0,0,1330,1331,3,52,26,0,1331,181,1,0,0,0,1332,
+        1334,5,17,0,0,1333,1332,1,0,0,0,1333,1334,1,0,0,0,1334,1335,1,0,
+        0,0,1335,1336,3,328,164,0,1336,183,1,0,0,0,1337,1353,3,188,94,0,
+        1338,1343,3,276,138,0,1339,1341,5,17,0,0,1340,1339,1,0,0,0,1340,
         1341,1,0,0,0,1341,1342,1,0,0,0,1342,1344,3,52,26,0,1343,1340,1,0,
         0,0,1343,1344,1,0,0,0,1344,1353,1,0,0,0,1345,1350,3,52,26,0,1346,
         1348,5,17,0,0,1347,1346,1,0,0,0,1347,1348,1,0,0,0,1348,1349,1,0,
@@ -13356,7 +13356,7 @@ export class FlinkSqlParser extends SQLParserBase {
         1066,1071,1077,1081,1088,1092,1096,1100,1108,1112,1117,1123,1129,
         1132,1136,1147,1156,1170,1182,1197,1200,1204,1207,1209,1214,1218,
         1221,1225,1234,1243,1253,1258,1269,1272,1275,1278,1281,1287,1291,
-        1300,1307,1310,1315,1318,1322,1324,1333,1340,1343,1347,1350,1352,
+        1300,1307,1310,1314,1319,1322,1324,1333,1340,1343,1347,1350,1352,
         1359,1364,1380,1391,1396,1404,1407,1410,1415,1417,1419,1424,1427,
         1431,1435,1439,1448,1459,1486,1508,1521,1533,1546,1558,1570,1576,
         1603,1611,1615,1618,1621,1628,1631,1634,1637,1640,1643,1648,1651,
@@ -17497,14 +17497,14 @@ export class ColumnProjectItemContext extends antlr.ParserRuleContext {
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(FlinkSqlParser.KW_AS, 0);
     }
+    public tableAllColumns(): TableAllColumnsContext | null {
+        return this.getRuleContext(0, TableAllColumnsContext);
+    }
     public selectExpressionColumnName(): SelectExpressionColumnNameContext | null {
         return this.getRuleContext(0, SelectExpressionColumnNameContext);
     }
     public columnName(): ColumnNameContext | null {
         return this.getRuleContext(0, ColumnNameContext);
-    }
-    public tableAllColumns(): TableAllColumnsContext | null {
-        return this.getRuleContext(0, TableAllColumnsContext);
     }
     public override get ruleIndex(): number {
         return FlinkSqlParser.RULE_columnProjectItem;

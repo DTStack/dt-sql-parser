@@ -193,6 +193,7 @@ import { ValueExpressionDefaultContext } from "./ImpalaSqlParser.js";
 import { ConcatenationContext } from "./ImpalaSqlParser.js";
 import { ArithmeticBinaryContext } from "./ImpalaSqlParser.js";
 import { ArithmeticUnaryContext } from "./ImpalaSqlParser.js";
+import { FunctionCallExpressionContext } from "./ImpalaSqlParser.js";
 import { DereferenceContext } from "./ImpalaSqlParser.js";
 import { TypeConstructorContext } from "./ImpalaSqlParser.js";
 import { SpecialDateTimeFunctionContext } from "./ImpalaSqlParser.js";
@@ -1405,6 +1406,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitArithmeticUnary?: (ctx: ArithmeticUnaryContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.functionCallExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFunctionCallExpression?: (ctx: FunctionCallExpressionContext) => Result;
     /**
      * Visit a parse tree produced by the `dereference`
      * labeled alternative in `ImpalaSqlParser.primaryExpression`.

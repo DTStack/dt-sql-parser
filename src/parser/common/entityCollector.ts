@@ -681,8 +681,14 @@ export abstract class EntityCollector {
             return Array.from(
                 new Set([...tableSourceEntities, ...queryResultEntities, ...otherEntities])
             );
+        } else {
+            // Do not collect column and queryResult entities if they are not inside a select statement
+            return entitiesInsideStmt.filter(
+                (entity) =>
+                    entity.entityContextType !== EntityContextType.COLUMN &&
+                    entity.entityContextType !== EntityContextType.QUERY_RESULT
+            );
         }
-        return entitiesInsideStmt;
     }
 
     protected combineQueryResultStmtEntities(

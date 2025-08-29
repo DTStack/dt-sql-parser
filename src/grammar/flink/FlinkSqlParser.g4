@@ -493,8 +493,8 @@ selectList
 columnProjectItem
     : selectWindowItemColumnName
     | selectLiteralColumnName (columnAlias | KW_AS? expression)?
-    | selectExpressionColumnName (columnAlias | KW_AS? columnName)?
     | tableAllColumns columnAlias?
+    | selectExpressionColumnName (columnAlias | KW_AS? columnName)?
     ;
 
 selectWindowItemColumnName

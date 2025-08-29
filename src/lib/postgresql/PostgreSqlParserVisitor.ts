@@ -387,9 +387,10 @@ import { QualOpContext } from "./PostgreSqlParser.js";
 import { QualAllOpContext } from "./PostgreSqlParser.js";
 import { SubqueryOperatorContext } from "./PostgreSqlParser.js";
 import { ExprListContext } from "./PostgreSqlParser.js";
-import { ColumnExprContext } from "./PostgreSqlParser.js";
 import { SelectExpressionColumnNameContext } from "./PostgreSqlParser.js";
 import { SelectLiteralColumnNameContext } from "./PostgreSqlParser.js";
+import { ColumnExprContext } from "./PostgreSqlParser.js";
+import { ColumnExprNoParenContext } from "./PostgreSqlParser.js";
 import { FuncArgListContext } from "./PostgreSqlParser.js";
 import { FuncArgExprContext } from "./PostgreSqlParser.js";
 import { ArrayExprContext } from "./PostgreSqlParser.js";
@@ -2801,25 +2802,29 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitExprList?: (ctx: ExprListContext) => Result;
     /**
+     * Visit a parse tree produced by `PostgreSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => Result;
+    /**
      * Visit a parse tree produced by `PostgreSqlParser.columnExpr`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitColumnExpr?: (ctx: ColumnExprContext) => Result;
     /**
-     * Visit a parse tree produced by the `selectExpressionColumnName`
-     * labeled alternative in `PostgreSqlParser.columnExprNoParen`.
+     * Visit a parse tree produced by `PostgreSqlParser.columnExprNoParen`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => Result;
-    /**
-     * Visit a parse tree produced by the `selectLiteralColumnName`
-     * labeled alternative in `PostgreSqlParser.columnExprNoParen`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => Result;
+    visitColumnExprNoParen?: (ctx: ColumnExprNoParenContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.funcArgList`.
      * @param ctx the parse tree

@@ -2554,14 +2554,22 @@ exprList
     : expression (COMMA expression)*
     ;
 
+selectExpressionColumnName
+    : expression
+    ;
+
+selectLiteralColumnName
+    : columnName
+    ;
+
 columnExpr
     : (OPEN_PAREN expression CLOSE_PAREN)
     | columnName
     ;
 
 columnExprNoParen
-    : expression # selectExpressionColumnName
-    | columnName # selectLiteralColumnName
+    : expression
+    | columnName
     ;
 
 funcArgList
@@ -2625,8 +2633,8 @@ targetList
     ;
 
 targetEl
-    : tableAllColumns                               # target_star
-    | columnExprNoParen (KW_AS? alias=identifier |) # target_label
+    : tableAllColumns                                                                    # target_star
+    | (selectLiteralColumnName | selectExpressionColumnName) (KW_AS? alias=identifier |) # target_label
     ;
 
 tableAllColumns
