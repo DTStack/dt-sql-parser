@@ -369,7 +369,10 @@ export abstract class EntityCollector {
      */
     private _caretStmtScopeDepth: number;
 
-    /** The nearest statement containing the caret */
+    /**
+     * The nearest statement containing the caret,
+     * Not used for now.
+     */
     private _caretStmt: StmtContext | null;
 
     /**
