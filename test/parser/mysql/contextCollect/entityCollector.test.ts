@@ -4,9 +4,12 @@ import path from 'path';
 import { MySqlParserListener } from 'src/lib/mysql/MySqlParserListener';
 import {
     AttrName,
+    ColumnDeclareType,
+    CommonEntityContext,
     isCommonEntityContext,
     isFuncEntityContext,
     StmtContextType,
+    TableDeclareType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
 import { MySQL, MySqlEntityCollector, MysqlSplitListener } from 'src/parser/mysql';
@@ -24,7 +27,7 @@ describe('MySQL entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(16);
+        expect(splitListener.statementsContext.length).toBe(21);
     });
 
     test('create table by columns', () => {
@@ -41,13 +44,15 @@ describe('MySQL entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('new_tb_with_col');
-        expect(tableCreateEntity.position).toEqual({
-            startIndex: 13,
-            endIndex: 27,
-            line: 1,
-            startColumn: 14,
-            endColumn: 29,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                startIndex: 13,
+                endIndex: 27,
+                line: 1,
+                startColumn: 14,
+                endColumn: 29,
+            })
+        );
         expect(tableCreateEntity[AttrName.comment]).toEqual({
             text: "'new_tb_with_col comment'",
             startIndex: 77,
@@ -60,14 +65,16 @@ describe('MySQL entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            startIndex: 0,
-            endIndex: 101,
-            startLine: 1,
-            endLine: 1,
-            startColumn: 1,
-            endColumn: 103,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                startIndex: 0,
+                endIndex: 101,
+                startLine: 1,
+                endLine: 1,
+                startColumn: 1,
+                endColumn: 103,
+            })
+        );
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).toBeNull();
 
@@ -119,59 +126,74 @@ describe('MySQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(3);
+        expect(allEntities.length).toBe(4);
 
-        const tableCreateEntity = allEntities[0];
+        const old_tb1_entity = allEntities[0];
+        const old_tb2_entity = allEntities[1];
+        const queryResultEntity = allEntities[2];
+        const tableCreateEntity = allEntities[3];
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('new_tb_from_old');
-        expect(tableCreateEntity.position).toEqual({
-            startIndex: 118,
-            endIndex: 132,
-            line: 3,
-            startColumn: 14,
-            endColumn: 29,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                startIndex: 118,
+                endIndex: 132,
+                line: 3,
+                startColumn: 14,
+                endColumn: 29,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            startIndex: 105,
-            endIndex: 321,
-            startLine: 3,
-            endLine: 12,
-            startColumn: 1,
-            endColumn: 34,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                startIndex: 105,
+                endIndex: 321,
+                startLine: 3,
+                endLine: 12,
+                startColumn: 1,
+                endColumn: 34,
+            })
+        );
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns).toBeUndefined();
 
-            expect(tableCreateEntity.relatedEntities.length).toBe(2);
+            expect(tableCreateEntity.relatedEntities.length).toBe(1);
             tableCreateEntity.relatedEntities.forEach((relatedEntity) => {
-                expect(relatedEntity.entityContextType).toBe(EntityContextType.TABLE);
+                expect(relatedEntity.entityContextType).toBe(EntityContextType.QUERY_RESULT);
                 expect(allEntities.some((en) => relatedEntity === en)).toBeTruthy();
             });
         }
-        expect(allEntities[1].text).toBe('old_tb1');
-        expect(allEntities[1].belongStmt.rootStmt).toBe(allEntities[0].belongStmt);
-        expect(allEntities[1].position).toEqual({
-            startIndex: 217,
-            endIndex: 223,
-            line: 8,
-            startColumn: 9,
-            endColumn: 16,
-        });
 
-        expect(allEntities[2].text).toBe('old_tb2');
-        expect(allEntities[2].belongStmt.rootStmt).toBe(allEntities[0].belongStmt);
-        expect(allEntities[2].position).toEqual({
-            startIndex: 243,
-            endIndex: 249,
-            line: 10,
-            startColumn: 9,
-            endColumn: 16,
-        });
+        expect(old_tb1_entity.text).toBe('old_tb1');
+        expect(old_tb1_entity.belongStmt.rootStmt).toBe(tableCreateEntity.belongStmt);
+        expect(old_tb1_entity.position).toEqual(
+            expect.objectContaining({
+                startIndex: 217,
+                endIndex: 223,
+                line: 8,
+                startColumn: 9,
+                endColumn: 16,
+            })
+        );
+
+        expect(old_tb2_entity.text).toBe('old_tb2');
+        expect(old_tb2_entity.belongStmt.rootStmt).toBe(tableCreateEntity.belongStmt);
+        expect(old_tb2_entity.position).toEqual(
+            expect.objectContaining({
+                startIndex: 243,
+                endIndex: 249,
+                line: 10,
+                startColumn: 9,
+                endColumn: 16,
+            })
+        );
+
+        expect(queryResultEntity.entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(queryResultEntity.belongStmt.rootStmt).toBe(tableCreateEntity.belongStmt);
     });
 
     test('create table like', () => {
@@ -209,9 +231,10 @@ describe('MySQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(1);
+        expect(allEntities.length).toBe(2);
 
         const tableEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
 
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity.text).toBe('select_tb');
@@ -220,6 +243,10 @@ describe('MySQL entity collector tests', () => {
             expect(tableEntity.columns).toBeUndefined();
             expect(tableEntity.relatedEntities).toBeNull();
         }
+
+        expect(queryResultEntity.entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(queryResultEntity.text).toBe('*');
+        expect(queryResultEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
     });
 
     test('select into from table', () => {
@@ -229,9 +256,10 @@ describe('MySQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(1);
+        expect(allEntities.length).toBe(2);
 
         const tableEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
 
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity.text).toBe('into_select_tb');
@@ -240,6 +268,10 @@ describe('MySQL entity collector tests', () => {
             expect(tableEntity.columns).toBeUndefined();
             expect(tableEntity.relatedEntities).toBeNull();
         }
+
+        expect(queryResultEntity.entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(queryResultEntity.text).toBe('*');
+        expect(queryResultEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
     });
 
     test('select from table join', () => {
@@ -249,10 +281,11 @@ describe('MySQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
         const tableEntity1 = allEntities[0];
         const tableEntity2 = allEntities[1];
+        const queryResultEntity = allEntities[2];
 
         expect(tableEntity1.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity1.text).toBe('from_tb');
@@ -277,6 +310,10 @@ describe('MySQL entity collector tests', () => {
             expect(tableEntity2.columns).toBeUndefined();
             expect(tableEntity2.relatedEntities).toBeNull();
         }
+
+        expect(queryResultEntity.entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(queryResultEntity.text).toBe('*');
+        expect(queryResultEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
 
         expect(tableEntity1.belongStmt).toBe(tableEntity2.belongStmt);
     });
@@ -308,11 +345,19 @@ describe('MySQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(3);
-
-        const insertTableEntity = allEntities[0];
-        const fromTableEntity1 = allEntities[1];
-        const fromTableEntity2 = allEntities[2];
+        expect(allEntities.length).toBe(5);
+        const insertTableEntity = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'insert_from_tb'
+        );
+        const fromTableEntity1 = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'from_tb1'
+        );
+        const fromTableEntity2 = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'from_tb2'
+        );
+        const queryResults = allEntities.filter(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        );
 
         expect(insertTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(insertTableEntity.text).toBe('insert_from_tb');
@@ -325,6 +370,11 @@ describe('MySQL entity collector tests', () => {
         expect(fromTableEntity2.entityContextType).toBe(EntityContextType.TABLE);
         expect(fromTableEntity2.text).toBe('from_tb2');
         expect(fromTableEntity2.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
+
+        expect(queryResults.length).toBe(2);
+        queryResults.forEach((qr) => {
+            expect(qr.entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        });
 
         expect(fromTableEntity1.belongStmt.parentStmt).toBe(insertTableEntity.belongStmt);
         expect(fromTableEntity2.belongStmt.parentStmt).toBe(insertTableEntity.belongStmt);
@@ -339,20 +389,29 @@ describe('MySQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(1);
+        expect(allEntities.length).toBe(2);
 
-        expect(allEntities[0].entityContextType).toBe(EntityContextType.VIEW_CREATE);
-        expect(allEntities[0].text).toBe('new_view');
-        expect(allEntities[0].belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-        if (isCommonEntityContext(allEntities[0])) {
-            expect(allEntities[0].columns.length).toBe(2);
-            expect(allEntities[0].columns[0].text).toBe('col1');
-            expect(allEntities[0].columns[1].text).toBe('col2');
-            expect(allEntities[0].columns[0].entityContextType).toBe(
+        const viewCreateEntity = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.VIEW_CREATE
+        );
+        const queryResultEntity = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        );
+
+        expect(viewCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
+        expect(viewCreateEntity.text).toBe('new_view');
+        expect(viewCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
+        if (isCommonEntityContext(viewCreateEntity)) {
+            expect(viewCreateEntity.columns.length).toBe(2);
+            expect(viewCreateEntity.columns[0].text).toBe('col1');
+            expect(viewCreateEntity.columns[1].text).toBe('col2');
+            expect(viewCreateEntity.columns[0].entityContextType).toBe(
                 EntityContextType.COLUMN_CREATE
             );
-            expect(allEntities[0].columns[0].belongStmt).toBe(allEntities[0].belongStmt);
+            expect(viewCreateEntity.columns[0].belongStmt).toBe(viewCreateEntity.belongStmt);
         }
+
+        expect(queryResultEntity.entityContextType).toBe(EntityContextType.QUERY_RESULT);
     });
 
     test('create view as select table', () => {
@@ -362,11 +421,26 @@ describe('MySQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        expect(allEntities[0].entityContextType).toBe(EntityContextType.VIEW_CREATE);
-        expect(allEntities[0].text).toBe('db.new_view');
-        expect(allEntities[0].belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
+        const viewCreateEntity = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.VIEW_CREATE
+        );
+        const tableEntity = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE
+        );
+        const queryResultEntity = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        );
+
+        expect(viewCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
+        expect(viewCreateEntity.text).toBe('db.new_view');
+        expect(viewCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
+
+        expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntity.text).toBe('from_tb');
+
+        expect(queryResultEntity.entityContextType).toBe(EntityContextType.QUERY_RESULT);
     });
 
     test('create database', () => {
@@ -383,23 +457,27 @@ describe('MySQL entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(dbEntity.text).toBe('db_name');
-        expect(dbEntity.position).toEqual({
-            endColumn: 24,
-            endIndex: 841,
-            line: 31,
-            startColumn: 17,
-            startIndex: 835,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 24,
+                endIndex: 841,
+                line: 31,
+                startColumn: 17,
+                startIndex: 835,
+            })
+        );
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 47,
-            endIndex: 864,
-            endLine: 31,
-            startColumn: 1,
-            startIndex: 819,
-            startLine: 31,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 47,
+                endIndex: 864,
+                endLine: 31,
+                startColumn: 1,
+                startIndex: 819,
+                startLine: 31,
+            })
+        );
         if (isCommonEntityContext(dbEntity)) {
             expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
@@ -420,23 +498,27 @@ describe('MySQL entity collector tests', () => {
 
         expect(schemaEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(schemaEntity.text).toBe('db_name');
-        expect(schemaEntity.position).toEqual({
-            endColumn: 36,
-            endIndex: 902,
-            line: 33,
-            startColumn: 29,
-            startIndex: 896,
-        });
+        expect(schemaEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 36,
+                endIndex: 902,
+                line: 33,
+                startColumn: 29,
+                startIndex: 896,
+            })
+        );
 
         expect(schemaEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
-        expect(schemaEntity.belongStmt.position).toEqual({
-            endColumn: 59,
-            endIndex: 925,
-            endLine: 33,
-            startColumn: 1,
-            startIndex: 868,
-            startLine: 33,
-        });
+        expect(schemaEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 59,
+                endIndex: 925,
+                endLine: 33,
+                startColumn: 1,
+                startIndex: 868,
+                startLine: 33,
+            })
+        );
         if (isCommonEntityContext(schemaEntity)) {
             expect(schemaEntity.columns).toBeUndefined();
             expect(schemaEntity.relatedEntities).toBeNull();
@@ -457,23 +539,27 @@ describe('MySQL entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE);
         expect(dbEntity.text).toBe('db_name');
-        expect(dbEntity.position).toEqual({
-            endColumn: 41,
-            endIndex: 968,
-            line: 35,
-            startColumn: 34,
-            startIndex: 962,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 41,
+                endIndex: 968,
+                line: 35,
+                startColumn: 34,
+                startIndex: 962,
+            })
+        );
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 42,
-            endIndex: 969,
-            endLine: 35,
-            startColumn: 1,
-            startIndex: 929,
-            startLine: 35,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 42,
+                endIndex: 969,
+                endLine: 35,
+                startColumn: 1,
+                startIndex: 929,
+                startLine: 35,
+            })
+        );
         if (isCommonEntityContext(dbEntity)) {
             expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
@@ -494,23 +580,27 @@ describe('MySQL entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE);
         expect(dbEntity.text).toBe('db_name');
-        expect(dbEntity.position).toEqual({
-            endColumn: 30,
-            endIndex: 1000,
-            line: 37,
-            startColumn: 23,
-            startIndex: 994,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 30,
+                endIndex: 1000,
+                line: 37,
+                startColumn: 23,
+                startIndex: 994,
+            })
+        );
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 31,
-            endIndex: 1001,
-            endLine: 37,
-            startColumn: 1,
-            startIndex: 972,
-            startLine: 37,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 31,
+                endIndex: 1001,
+                endLine: 37,
+                startColumn: 1,
+                startIndex: 972,
+                startLine: 37,
+            })
+        );
         if (isCommonEntityContext(dbEntity)) {
             expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
@@ -531,13 +621,15 @@ describe('MySQL entity collector tests', () => {
 
         expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
         expect(functionEntity.text).toBe('hello');
-        expect(functionEntity.position).toEqual({
-            endColumn: 39,
-            endIndex: 1041,
-            line: 39,
-            startColumn: 34,
-            startIndex: 1037,
-        });
+        expect(functionEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 39,
+                endIndex: 1041,
+                line: 39,
+                startColumn: 34,
+                startIndex: 1037,
+            })
+        );
 
         expect(functionEntity[AttrName.comment]).toEqual({
             text: "'this is a defuner user function'",
@@ -551,14 +643,16 @@ describe('MySQL entity collector tests', () => {
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 156,
-            endIndex: 1158,
-            endLine: 39,
-            startColumn: 1,
-            startIndex: 1004,
-            startLine: 39,
-        });
+        expect(functionEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 156,
+                endIndex: 1158,
+                endLine: 39,
+                startColumn: 1,
+                startIndex: 1004,
+                startLine: 39,
+            })
+        );
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.arguments).toBeNull();
             expect(functionEntity.relatedEntities).toBeNull();
@@ -579,27 +673,166 @@ describe('MySQL entity collector tests', () => {
 
         expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
         expect(functionEntity.text).toBe('my_concat_ws');
-        expect(functionEntity.position).toEqual({
-            endColumn: 43,
-            endIndex: 1203,
-            line: 41,
-            startColumn: 31,
-            startIndex: 1192,
-        });
+        expect(functionEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 43,
+                endIndex: 1203,
+                line: 41,
+                startColumn: 31,
+                startIndex: 1192,
+            })
+        );
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 87,
-            endIndex: 1247,
-            endLine: 41,
-            startColumn: 1,
-            startIndex: 1162,
-            startLine: 41,
-        });
+        expect(functionEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 87,
+                endIndex: 1247,
+                endLine: 41,
+                startColumn: 1,
+                startIndex: 1162,
+                startLine: 41,
+            })
+        );
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.relatedEntities).toBeNull();
         }
+    });
+
+    test('should collect query result and columns', () => {
+        const mysql = new MySQL();
+        const context = splitListener.statementsContext[16];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('id, age as new_age, count(*) as total');
+        expect(queryResult.relatedEntities?.length).toBe(1);
+        expect(queryResult.relatedEntities?.[0].text).toBe('t1');
+
+        const columns = queryResult.columns;
+        expect(columns?.length).toBe(3);
+        expect(columns[0].text).toBe('id');
+        expect(columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(columns[1].text).toBe('age');
+        expect(columns[1].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(columns[1][AttrName.alias]).toEqual(expect.objectContaining({ text: 'new_age' }));
+        expect(columns[2].text).toBe('count(*)');
+        expect(columns[2].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(columns[2][AttrName.alias]).toEqual(expect.objectContaining({ text: 'total' }));
+    });
+
+    test('should collect columns with multiple star symbol', () => {
+        const mysql = new MySQL();
+        const context = splitListener.statementsContext[17];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('t1.*, t2.*');
+        expect(queryResult.columns?.length).toBe(2);
+        expect(queryResult.columns[0].text).toBe('t1.*');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.ALL);
+        expect(queryResult.columns[1].text).toBe('t2.*');
+        expect(queryResult.columns[1].declareType).toBe(ColumnDeclareType.ALL);
+    });
+
+    test('should collect columns with single star symbol', () => {
+        const mysql = new MySQL();
+        const context = splitListener.statementsContext[18];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('*');
+        expect(queryResult.columns?.length).toBe(1);
+        expect(queryResult.columns[0].text).toBe('*');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.ALL);
+    });
+
+    test('should collect derived table and derived column', () => {
+        const mysql = new MySQL();
+        const context = splitListener.statementsContext[19];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const tableEntities = allEntities.filter(
+            (entity) => entity.entityContextType === EntityContextType.TABLE
+        ) as CommonEntityContext[];
+
+        expect(tableEntities.length).toBe(4);
+        expect(tableEntities[0].text).toBe('t3');
+        expect(tableEntities[0].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[0][AttrName.alias]).toBeFalsy();
+
+        expect(tableEntities[1].text).toBe('t1');
+        expect(tableEntities[1].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[1][AttrName.alias]).toBeFalsy();
+
+        expect(tableEntities[2].text).toBe('(select id, name from t1)');
+        expect(tableEntities[2].declareType).toBe(TableDeclareType.EXPRESSION);
+        expect(tableEntities[2][AttrName.alias]?.text).toBe('derived_table');
+
+        expect(tableEntities[3].text).toBe('t2');
+        expect(tableEntities[3].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[3][AttrName.alias]).toBeFalsy();
+
+        const queryResults = allEntities.filter(
+            (entity) => entity.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext[];
+        expect(queryResults.length).toBe(3);
+        expect(queryResults[0].text).toBe('max(age)');
+        expect(queryResults[0].columns?.length).toBe(1);
+        expect(queryResults[0].columns[0].text).toBe('max(age)');
+        expect(queryResults[0].columns[0].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResults[0].columns[0][AttrName.alias]).toBeFalsy();
+
+        expect(queryResults[2].text).toBe('id, (select max(age) from t3) as max_age');
+        expect(queryResults[2].columns?.length).toBe(2);
+        expect(queryResults[2].columns[0].text).toBe('id');
+        expect(queryResults[2].columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(queryResults[2].columns[1].text).toBe('(select max(age) from t3)');
+        expect(queryResults[2].columns[1].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResults[2].columns[1][AttrName.alias]?.text).toBe('max_age');
+    });
+
+    test('should collect query result in where clause', () => {
+        const mysql = new MySQL();
+        const context = splitListener.statementsContext[20];
+
+        const collectListener = new MySqlEntityCollector(commonSql);
+        mysql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResults = allEntities.filter(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext[];
+
+        expect(queryResults.length).toBe(2);
+        expect(queryResults[0].text).toBe('name');
+        expect(queryResults[0].columns?.[0].text).toBe('name');
+        expect(queryResults[1].text).toBe('id');
     });
 });

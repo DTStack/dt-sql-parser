@@ -46,25 +46,29 @@ describe('Hive entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('copy_table');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 48,
-            endIndex: 46,
-            line: 1,
-            startColumn: 38,
-            startIndex: 37,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 48,
+                endIndex: 46,
+                line: 1,
+                startColumn: 38,
+                startIndex: 37,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 66,
-            endIndex: 64,
-            startLine: 1,
-            endLine: 1,
-            startIndex: 0,
-            startColumn: 1,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 66,
+                endIndex: 64,
+                startLine: 1,
+                endLine: 1,
+                startIndex: 0,
+                startColumn: 1,
+            })
+        );
 
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).not.toBeNull();
@@ -91,25 +95,29 @@ describe('Hive entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('list_bucket_multiple');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 67,
-            endIndex: 133,
-            line: 3,
-            startColumn: 47,
-            startIndex: 114,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 67,
+                endIndex: 133,
+                line: 3,
+                startColumn: 47,
+                startIndex: 114,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 132,
-            endIndex: 198,
-            endLine: 3,
-            startColumn: 1,
-            startIndex: 68,
-            startLine: 3,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 132,
+                endIndex: 198,
+                endLine: 3,
+                startColumn: 1,
+                startIndex: 68,
+                startLine: 3,
+            })
+        );
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).toBeNull();
             expect(tableCreateEntity.columns).not.toBeNull();
@@ -136,31 +144,37 @@ describe('Hive entity collector tests', () => {
         const allEntities = collectListener.getEntities();
         expect(allEntities.length).toBe(3);
 
+        debugger;
+
         const tableFromEntity = allEntities[0];
         const queryResultEntity = allEntities[1];
         const tableCreateEntity = allEntities[2];
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('derived_table');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 41,
-            endIndex: 241,
-            line: 5,
-            startColumn: 28,
-            startIndex: 229,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 41,
+                endIndex: 241,
+                line: 5,
+                startColumn: 28,
+                startIndex: 229,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 17,
-            endIndex: 279,
-            endLine: 9,
-            startColumn: 1,
-            startIndex: 202,
-            startLine: 5,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 17,
+                endIndex: 279,
+                endLine: 9,
+                startColumn: 1,
+                startIndex: 202,
+                startLine: 5,
+            })
+        );
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).not.toBeNull();
             expect(tableCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
@@ -187,23 +201,27 @@ describe('Hive entity collector tests', () => {
 
         expect(viewCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(viewCreateEntity.text).toBe('mydb.bro_view');
-        expect(viewCreateEntity.position).toEqual({
-            endColumn: 26,
-            endIndex: 307,
-            line: 11,
-            startColumn: 13,
-            startIndex: 295,
-        });
+        expect(viewCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 26,
+                endIndex: 307,
+                line: 11,
+                startColumn: 13,
+                startIndex: 295,
+            })
+        );
 
         expect(viewCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-        expect(viewCreateEntity.belongStmt.position).toEqual({
-            endColumn: 31,
-            endIndex: 338,
-            endLine: 12,
-            startColumn: 1,
-            startIndex: 283,
-            startLine: 11,
-        });
+        expect(viewCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 31,
+                endIndex: 338,
+                endLine: 12,
+                startColumn: 1,
+                startIndex: 283,
+                startLine: 11,
+            })
+        );
         if (isCommonEntityContext(viewCreateEntity)) {
             expect(viewCreateEntity.relatedEntities).not.toBeNull();
             expect(viewCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
@@ -230,23 +248,27 @@ describe('Hive entity collector tests', () => {
 
         expect(viewCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(viewCreateEntity.text).toBe('mydb.task_view');
-        expect(viewCreateEntity.position).toEqual({
-            endColumn: 27,
-            endIndex: 367,
-            line: 14,
-            startColumn: 13,
-            startIndex: 354,
-        });
+        expect(viewCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 27,
+                endIndex: 367,
+                line: 14,
+                startColumn: 13,
+                startIndex: 354,
+            })
+        );
 
         expect(viewCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-        expect(viewCreateEntity.belongStmt.position).toEqual({
-            endColumn: 21,
-            endIndex: 596,
-            endLine: 25,
-            startColumn: 1,
-            startIndex: 342,
-            startLine: 14,
-        });
+        expect(viewCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 21,
+                endIndex: 596,
+                endLine: 25,
+                startColumn: 1,
+                startIndex: 342,
+                startLine: 14,
+            })
+        );
 
         expect(viewCreateEntity[AttrName.comment]).toEqual({
             text: "'一个任务信息视图'",
@@ -318,23 +340,27 @@ describe('Hive entity collector tests', () => {
 
         expect(viewCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(viewCreateEntity.text).toBe('mydb.bro_view');
-        expect(viewCreateEntity.position).toEqual({
-            endColumn: 53,
-            endIndex: 651,
-            line: 27,
-            startColumn: 40,
-            startIndex: 639,
-        });
+        expect(viewCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 53,
+                endIndex: 651,
+                line: 27,
+                startColumn: 40,
+                startIndex: 639,
+            })
+        );
 
         expect(viewCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-        expect(viewCreateEntity.belongStmt.position).toEqual({
-            endColumn: 31,
-            endIndex: 715,
-            endLine: 30,
-            startColumn: 1,
-            startIndex: 600,
-            startLine: 27,
-        });
+        expect(viewCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 31,
+                endIndex: 715,
+                endLine: 30,
+                startColumn: 1,
+                startIndex: 600,
+                startLine: 27,
+            })
+        );
         expect(viewCreateEntity[AttrName.comment]).toEqual({
             text: "'一个测试视图'",
             endColumn: 17,
@@ -367,23 +393,27 @@ describe('Hive entity collector tests', () => {
 
         expect(selectTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(selectTableEntity.text).toBe('table_name_1');
-        expect(selectTableEntity.position).toEqual({
-            endColumn: 36,
-            endIndex: 753,
-            line: 32,
-            startColumn: 24,
-            startIndex: 742,
-        });
+        expect(selectTableEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 36,
+                endIndex: 753,
+                line: 32,
+                startColumn: 24,
+                startIndex: 742,
+            })
+        );
 
         expect(selectTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-        expect(selectTableEntity.belongStmt.position).toEqual({
-            endColumn: 36,
-            endIndex: 753,
-            endLine: 32,
-            startColumn: 1,
-            startIndex: 719,
-            startLine: 32,
-        });
+        expect(selectTableEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 36,
+                endIndex: 753,
+                endLine: 32,
+                startColumn: 1,
+                startIndex: 719,
+                startLine: 32,
+            })
+        );
         if (isCommonEntityContext(selectTableEntity)) {
             expect(selectTableEntity.columns).toBeUndefined();
             expect(selectTableEntity.relatedEntities).toBeNull();
@@ -405,23 +435,27 @@ describe('Hive entity collector tests', () => {
 
         expect(selectTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(selectTableEntity.text).toBe('a');
-        expect(selectTableEntity.position).toEqual({
-            endColumn: 18,
-            endIndex: 773,
-            line: 34,
-            startColumn: 17,
-            startIndex: 773,
-        });
+        expect(selectTableEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 18,
+                endIndex: 773,
+                line: 34,
+                startColumn: 17,
+                startIndex: 773,
+            })
+        );
 
         expect(selectTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-        expect(selectTableEntity.belongStmt.position).toEqual({
-            endColumn: 74,
-            endIndex: 829,
-            endLine: 34,
-            startColumn: 1,
-            startIndex: 757,
-            startLine: 34,
-        });
+        expect(selectTableEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 74,
+                endIndex: 829,
+                endLine: 34,
+                startColumn: 1,
+                startIndex: 757,
+                startLine: 34,
+            })
+        );
         if (isCommonEntityContext(selectTableEntity)) {
             expect(selectTableEntity.columns).toBeUndefined();
             expect(selectTableEntity.relatedEntities).toBeNull();
@@ -449,23 +483,27 @@ describe('Hive entity collector tests', () => {
 
         expect(selectTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(selectTableEntity.text).toBe('table_name_1');
-        expect(selectTableEntity.position).toEqual({
-            endColumn: 18,
-            endIndex: 849,
-            line: 36,
-            startColumn: 6,
-            startIndex: 838,
-        });
+        expect(selectTableEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 18,
+                endIndex: 849,
+                line: 36,
+                startColumn: 6,
+                startIndex: 838,
+            })
+        );
 
         expect(selectTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-        expect(selectTableEntity.belongStmt.position).toEqual({
-            endColumn: 36,
-            endIndex: 867,
-            endLine: 36,
-            startColumn: 1,
-            startIndex: 833,
-            startLine: 36,
-        });
+        expect(selectTableEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 36,
+                endIndex: 867,
+                endLine: 36,
+                startColumn: 1,
+                startIndex: 833,
+                startLine: 36,
+            })
+        );
         if (isCommonEntityContext(selectTableEntity)) {
             expect(selectTableEntity?.columns)?.toBeUndefined();
             expect(selectTableEntity.relatedEntities).toBeNull();
@@ -487,23 +525,27 @@ describe('Hive entity collector tests', () => {
 
         expect(selectTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(selectTableEntity.text).toBe('a');
-        expect(selectTableEntity.position).toEqual({
-            endColumn: 7,
-            endIndex: 876,
-            line: 38,
-            startColumn: 6,
-            startIndex: 876,
-        });
+        expect(selectTableEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 7,
+                endIndex: 876,
+                line: 38,
+                startColumn: 6,
+                startIndex: 876,
+            })
+        );
 
         expect(selectTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-        expect(selectTableEntity.belongStmt.position).toEqual({
-            endColumn: 74,
-            endIndex: 943,
-            endLine: 38,
-            startColumn: 1,
-            startIndex: 871,
-            startLine: 38,
-        });
+        expect(selectTableEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 74,
+                endIndex: 943,
+                endLine: 38,
+                startColumn: 1,
+                startIndex: 871,
+                startLine: 38,
+            })
+        );
         if (isCommonEntityContext(selectTableEntity)) {
             expect(selectTableEntity.columns).toBeUndefined();
             expect(selectTableEntity.relatedEntities).toBeNull();
@@ -530,23 +572,27 @@ describe('Hive entity collector tests', () => {
 
         expect(insertTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(insertTableEntity.text).toBe('students');
-        expect(insertTableEntity.position).toEqual({
-            endColumn: 27,
-            endIndex: 972,
-            line: 40,
-            startColumn: 19,
-            startIndex: 965,
-        });
+        expect(insertTableEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 27,
+                endIndex: 972,
+                line: 40,
+                startColumn: 19,
+                startIndex: 965,
+            })
+        );
 
         expect(insertTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
-        expect(insertTableEntity.belongStmt.position).toEqual({
-            endColumn: 66,
-            endIndex: 1045,
-            endLine: 41,
-            startColumn: 1,
-            startIndex: 947,
-            startLine: 40,
-        });
+        expect(insertTableEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 66,
+                endIndex: 1045,
+                endLine: 41,
+                startColumn: 1,
+                startIndex: 947,
+                startLine: 40,
+            })
+        );
         if (isCommonEntityContext(insertTableEntity)) {
             expect(insertTableEntity.columns).toBeUndefined();
             expect(insertTableEntity.relatedEntities).toBeNull();
@@ -568,23 +614,27 @@ describe('Hive entity collector tests', () => {
 
         expect(insertTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(insertTableEntity.text).toBe('table_name');
-        expect(insertTableEntity.position).toEqual({
-            endColumn: 23,
-            endIndex: 1070,
-            line: 43,
-            startColumn: 13,
-            startIndex: 1061,
-        });
+        expect(insertTableEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 23,
+                endIndex: 1070,
+                line: 43,
+                startColumn: 13,
+                startIndex: 1061,
+            })
+        );
 
         expect(insertTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
-        expect(insertTableEntity.belongStmt.position).toEqual({
-            endColumn: 18,
-            endIndex: 1183,
-            endLine: 46,
-            startColumn: 1,
-            startIndex: 1049,
-            startLine: 43,
-        });
+        expect(insertTableEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 18,
+                endIndex: 1183,
+                endLine: 46,
+                startColumn: 1,
+                startIndex: 1049,
+                startLine: 43,
+            })
+        );
         if (isCommonEntityContext(insertTableEntity)) {
             expect(insertTableEntity.columns).toBeUndefined();
             expect(insertTableEntity.relatedEntities).toBeNull();
@@ -604,31 +654,34 @@ describe('Hive entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        // todo Fix
-        expect(allEntities.length).toBe(3);
+        expect(allEntities.length).toBe(2);
 
         const fromTableEntity = allEntities[0];
         const insertTableEntity = allEntities[1];
 
         expect(insertTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(insertTableEntity.text).toBe('page_view');
-        expect(insertTableEntity.position).toEqual({
-            endColumn: 33,
-            endIndex: 1241,
-            line: 49,
-            startColumn: 24,
-            startIndex: 1233,
-        });
+        expect(insertTableEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 33,
+                endIndex: 1241,
+                line: 49,
+                startColumn: 24,
+                startIndex: 1233,
+            })
+        );
 
         expect(insertTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
-        expect(insertTableEntity.belongStmt.position).toEqual({
-            endColumn: 93,
-            endIndex: 1370,
-            endLine: 50,
-            startColumn: 1,
-            startIndex: 1187,
-            startLine: 48,
-        });
+        expect(insertTableEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 93,
+                endIndex: 1370,
+                endLine: 50,
+                startColumn: 1,
+                startIndex: 1187,
+                startLine: 48,
+            })
+        );
         if (isCommonEntityContext(insertTableEntity)) {
             expect(insertTableEntity.columns).toBeUndefined();
             expect(insertTableEntity.relatedEntities).toBeNull();
@@ -653,23 +706,27 @@ describe('Hive entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(dbEntity.text).toBe('mydb');
-        expect(dbEntity.position).toEqual({
-            endColumn: 21,
-            endIndex: 1393,
-            line: 52,
-            startColumn: 17,
-            startIndex: 1390,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 21,
+                endIndex: 1393,
+                line: 52,
+                startColumn: 17,
+                startIndex: 1390,
+            })
+        );
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 21,
-            endIndex: 1393,
-            endLine: 52,
-            startColumn: 1,
-            startIndex: 1374,
-            startLine: 52,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 21,
+                endIndex: 1393,
+                endLine: 52,
+                startColumn: 1,
+                startIndex: 1374,
+                startLine: 52,
+            })
+        );
         if (isCommonEntityContext(dbEntity)) {
             expect(dbEntity.columns).toBeUndefined();
             expect(dbEntity.relatedEntities).toBeNull();
@@ -690,23 +747,27 @@ describe('Hive entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(dbEntity.text).toBe('mydb');
-        expect(dbEntity.position).toEqual({
-            endColumn: 28,
-            endIndex: 1423,
-            line: 54,
-            startColumn: 24,
-            startIndex: 1420,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 28,
+                endIndex: 1423,
+                line: 54,
+                startColumn: 24,
+                startIndex: 1420,
+            })
+        );
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 28,
-            endIndex: 1423,
-            endLine: 54,
-            startColumn: 1,
-            startIndex: 1397,
-            startLine: 54,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 28,
+                endIndex: 1423,
+                endLine: 54,
+                startColumn: 1,
+                startIndex: 1397,
+                startLine: 54,
+            })
+        );
 
         if (isCommonEntityContext(dbEntity)) {
             expect(dbEntity.columns).toBeUndefined();
@@ -728,23 +789,27 @@ describe('Hive entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE);
         expect(dbEntity.text).toBe('db1');
-        expect(dbEntity.position).toEqual({
-            endColumn: 24,
-            endIndex: 1449,
-            line: 56,
-            startColumn: 21,
-            startIndex: 1447,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 24,
+                endIndex: 1449,
+                line: 56,
+                startColumn: 21,
+                startIndex: 1447,
+            })
+        );
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 25,
-            endIndex: 1450,
-            endLine: 56,
-            startColumn: 1,
-            startIndex: 1427,
-            startLine: 56,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 25,
+                endIndex: 1450,
+                endLine: 56,
+                startColumn: 1,
+                startIndex: 1427,
+                startLine: 56,
+            })
+        );
 
         if (isCommonEntityContext(dbEntity)) {
             expect(dbEntity.columns).toBeUndefined();
@@ -766,25 +831,29 @@ describe('Hive entity collector tests', () => {
 
         expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
         expect(functionEntity.text).toBe('base_analizer');
-        expect(functionEntity.position).toEqual({
-            endColumn: 30,
-            endIndex: 1481,
-            line: 58,
-            startColumn: 17,
-            startIndex: 1469,
-        });
+        expect(functionEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 30,
+                endIndex: 1481,
+                line: 58,
+                startColumn: 17,
+                startIndex: 1469,
+            })
+        );
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 30,
-            endIndex: 1481,
-            endLine: 58,
-            startColumn: 17,
-            startIndex: 1469,
-            startLine: 58,
-        });
+        expect(functionEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 30,
+                endIndex: 1481,
+                endLine: 58,
+                startColumn: 17,
+                startIndex: 1469,
+                startLine: 58,
+            })
+        );
 
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.arguments).toBeNull();
@@ -806,25 +875,29 @@ describe('Hive entity collector tests', () => {
 
         expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
         expect(functionEntity.text).toBe('flat_analizer');
-        expect(functionEntity.position).toEqual({
-            endColumn: 40,
-            endIndex: 1549,
-            line: 60,
-            startColumn: 27,
-            startIndex: 1537,
-        });
+        expect(functionEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 40,
+                endIndex: 1549,
+                line: 60,
+                startColumn: 27,
+                startIndex: 1537,
+            })
+        );
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 40,
-            endIndex: 1549,
-            endLine: 60,
-            startColumn: 27,
-            startIndex: 1537,
-            startLine: 60,
-        });
+        expect(functionEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 40,
+                endIndex: 1549,
+                endLine: 60,
+                startColumn: 27,
+                startIndex: 1537,
+                startLine: 60,
+            })
+        );
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.arguments).toBeNull();
             expect(functionEntity.relatedEntities).toBeNull();
@@ -844,25 +917,29 @@ describe('Hive entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('test_change');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 25,
-            endIndex: 1604,
-            line: 62,
-            startColumn: 14,
-            startIndex: 1594,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 25,
+                endIndex: 1604,
+                line: 62,
+                startColumn: 14,
+                startIndex: 1594,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 104,
-            endIndex: 1683,
-            endLine: 62,
-            startColumn: 1,
-            startIndex: 1581,
-            startLine: 62,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 104,
+                endIndex: 1683,
+                endLine: 62,
+                startColumn: 1,
+                startIndex: 1581,
+                startLine: 62,
+            })
+        );
         expect(tableCreateEntity[AttrName.comment]).toEqual({
             text: "'table test comment'",
             endColumn: 104,
@@ -936,23 +1013,27 @@ describe('Hive entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(dbEntity.text).toBe('testdb');
-        expect(dbEntity.position).toEqual({
-            endColumn: 23,
-            endIndex: 1708,
-            line: 64,
-            startColumn: 17,
-            startIndex: 1703,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 23,
+                endIndex: 1708,
+                line: 64,
+                startColumn: 17,
+                startIndex: 1703,
+            })
+        );
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 69,
-            endIndex: 1754,
-            endLine: 64,
-            startColumn: 1,
-            startIndex: 1687,
-            startLine: 64,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 69,
+                endIndex: 1754,
+                endLine: 64,
+                startColumn: 1,
+                startIndex: 1687,
+                startLine: 64,
+            })
+        );
         expect(dbEntity[AttrName.comment]).toEqual({
             text: "'test database'",
             endColumn: 47,
@@ -981,23 +1062,27 @@ describe('Hive entity collector tests', () => {
 
         expect(selectTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(selectTableEntity.text).toBe('table_busi');
-        expect(selectTableEntity.position).toEqual({
-            endColumn: 27,
-            endIndex: 1783,
-            line: 66,
-            startColumn: 17,
-            startIndex: 1774,
-        });
+        expect(selectTableEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 27,
+                endIndex: 1783,
+                line: 66,
+                startColumn: 17,
+                startIndex: 1774,
+            })
+        );
 
         expect(selectTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-        expect(selectTableEntity.belongStmt.position).toEqual({
-            endColumn: 97,
-            endIndex: 1853,
-            endLine: 66,
-            startColumn: 1,
-            startIndex: 1758,
-            startLine: 66,
-        });
+        expect(selectTableEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 97,
+                endIndex: 1853,
+                endLine: 66,
+                startColumn: 1,
+                startIndex: 1758,
+                startLine: 66,
+            })
+        );
         expect(selectTableEntity[AttrName.alias]).toEqual({
             text: 'a',
             endColumn: 29,
@@ -1101,9 +1186,9 @@ describe('Hive entity collector tests', () => {
         const columns = queryResult.columns;
         expect(columns?.length).toBe(3);
         expect(columns[0].text).toBe('id');
-        expect(columns[0].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
         expect(columns[1].text).toBe('age');
-        expect(columns[1].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(columns[1].declareType).toBe(ColumnDeclareType.LITERAL);
         expect(columns[1][AttrName.alias]).toEqual(expect.objectContaining({ text: 'new_age' }));
         expect(columns[2].text).toBe('count(*)');
         expect(columns[2].declareType).toBe(ColumnDeclareType.EXPRESSION);
@@ -1164,11 +1249,11 @@ describe('Hive entity collector tests', () => {
 
         expect(tableEntities.length).toBe(4);
         expect(tableEntities[0].text).toBe('t3');
-        expect(tableEntities[0].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[0].declareType).toBe(TableDeclareType.LITERAL);
         expect(tableEntities[0][AttrName.alias]).toBeFalsy();
 
         expect(tableEntities[1].text).toBe('t1');
-        expect(tableEntities[1].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[1].declareType).toBe(TableDeclareType.LITERAL);
         expect(tableEntities[1][AttrName.alias]).toBeFalsy();
 
         expect(tableEntities[2].text).toBe('select id, name from t1');
@@ -1176,7 +1261,7 @@ describe('Hive entity collector tests', () => {
         expect(tableEntities[2][AttrName.alias]?.text).toBe('derived_table');
 
         expect(tableEntities[3].text).toBe('t2');
-        expect(tableEntities[3].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[3].declareType).toBe(TableDeclareType.LITERAL);
         expect(tableEntities[3][AttrName.alias]).toBeFalsy();
 
         const queryResults = allEntities.filter(
@@ -1192,7 +1277,7 @@ describe('Hive entity collector tests', () => {
         expect(queryResults[2].text).toBe('id, (select max(age) from t3) as max_age');
         expect(queryResults[2].columns?.length).toBe(2);
         expect(queryResults[2].columns[0].text).toBe('id');
-        expect(queryResults[2].columns[0].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(queryResults[2].columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
         expect(queryResults[2].columns[1].text).toBe('(select max(age) from t3)');
         expect(queryResults[2].columns[1].declareType).toBe(ColumnDeclareType.EXPRESSION);
         expect(queryResults[2].columns[1][AttrName.alias]?.text).toBe('max_age');

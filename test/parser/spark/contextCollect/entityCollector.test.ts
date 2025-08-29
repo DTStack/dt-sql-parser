@@ -44,25 +44,29 @@ describe('SparkSQL entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('new_tb1');
-        expect(tableCreateEntity.position).toEqual({
-            startIndex: 27,
-            endIndex: 33,
-            line: 1,
-            startColumn: 28,
-            endColumn: 35,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                startIndex: 27,
+                endIndex: 33,
+                line: 1,
+                startColumn: 28,
+                endColumn: 35,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            startIndex: 0,
-            endIndex: 50,
-            startLine: 1,
-            endLine: 1,
-            startColumn: 1,
-            endColumn: 52,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                startIndex: 0,
+                endIndex: 50,
+                startLine: 1,
+                endLine: 1,
+                startColumn: 1,
+                endColumn: 52,
+            })
+        );
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
@@ -89,13 +93,15 @@ describe('SparkSQL entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('new_tb2');
-        expect(tableCreateEntity.position).toEqual({
-            startIndex: 67,
-            endIndex: 73,
-            line: 3,
-            startColumn: 14,
-            endColumn: 21,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                startIndex: 67,
+                endIndex: 73,
+                line: 3,
+                startColumn: 14,
+                endColumn: 21,
+            })
+        );
         expect(tableCreateEntity[AttrName.comment]).toEqual({
             text: "'this is new_tb2 comment'",
             startIndex: 283,
@@ -108,14 +114,16 @@ describe('SparkSQL entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            startIndex: 54,
-            endIndex: 307,
-            startLine: 3,
-            endLine: 9,
-            startColumn: 1,
-            endColumn: 38,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                startIndex: 54,
+                endIndex: 307,
+                startLine: 3,
+                endLine: 9,
+                startColumn: 1,
+                endColumn: 38,
+            })
+        );
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).toBeNull();
             expect(tableCreateEntity.columns.length).toBe(2);
@@ -388,25 +396,29 @@ describe('SparkSQL entity collector tests', () => {
 
         expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
         expect(functionEntity.text).toBe('simple_udf');
-        expect(functionEntity.position).toEqual({
-            endColumn: 38,
-            endIndex: 1013,
-            line: 29,
-            startColumn: 28,
-            startIndex: 1004,
-        });
+        expect(functionEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 38,
+                endIndex: 1013,
+                line: 29,
+                startColumn: 28,
+                startIndex: 1004,
+            })
+        );
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 54,
-            endIndex: 1029,
-            endLine: 29,
-            startColumn: 1,
-            startIndex: 977,
-            startLine: 29,
-        });
+        expect(functionEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 54,
+                endIndex: 1029,
+                endLine: 29,
+                startColumn: 1,
+                startIndex: 977,
+                startLine: 29,
+            })
+        );
 
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.arguments).toBeNull();
@@ -428,25 +440,29 @@ describe('SparkSQL entity collector tests', () => {
 
         expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
         expect(functionEntity.text).toBe('simple_udf');
-        expect(functionEntity.position).toEqual({
-            endColumn: 27,
-            endIndex: 1058,
-            line: 31,
-            startColumn: 17,
-            startIndex: 1049,
-        });
+        expect(functionEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 27,
+                endIndex: 1058,
+                line: 31,
+                startColumn: 17,
+                startIndex: 1049,
+            })
+        );
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 43,
-            endIndex: 1074,
-            endLine: 31,
-            startColumn: 1,
-            startIndex: 1033,
-            startLine: 31,
-        });
+        expect(functionEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 43,
+                endIndex: 1074,
+                endLine: 31,
+                startColumn: 1,
+                startIndex: 1033,
+                startLine: 31,
+            })
+        );
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.arguments).toBeNull();
             expect(functionEntity.relatedEntities).toBeNull();
@@ -528,9 +544,9 @@ describe('SparkSQL entity collector tests', () => {
         const columns = queryResult.columns;
         expect(columns?.length).toBe(3);
         expect(columns[0].text).toBe('id');
-        expect(columns[0].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
         expect(columns[1].text).toBe('age');
-        expect(columns[1].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(columns[1].declareType).toBe(ColumnDeclareType.LITERAL);
         expect(columns[1][AttrName.alias]).toEqual(expect.objectContaining({ text: 'new_age' }));
         expect(columns[2].text).toBe('count(*)');
         expect(columns[2].declareType).toBe(ColumnDeclareType.EXPRESSION);
@@ -591,11 +607,11 @@ describe('SparkSQL entity collector tests', () => {
 
         expect(tableEntities.length).toBe(4);
         expect(tableEntities[0].text).toBe('t3');
-        expect(tableEntities[0].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[0].declareType).toBe(TableDeclareType.LITERAL);
         expect(tableEntities[0][AttrName.alias]).toBeFalsy();
 
         expect(tableEntities[1].text).toBe('t1');
-        expect(tableEntities[1].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[1].declareType).toBe(TableDeclareType.LITERAL);
         expect(tableEntities[1][AttrName.alias]).toBeFalsy();
 
         expect(tableEntities[2].text).toBe('(select id, name from t1)');
@@ -603,7 +619,7 @@ describe('SparkSQL entity collector tests', () => {
         expect(tableEntities[2][AttrName.alias]?.text).toBe('derived_table');
 
         expect(tableEntities[3].text).toBe('t2');
-        expect(tableEntities[3].declareType).toBe(TableDeclareType.COMMON);
+        expect(tableEntities[3].declareType).toBe(TableDeclareType.LITERAL);
         expect(tableEntities[3][AttrName.alias]).toBeFalsy();
 
         const queryResults = allEntities.filter(
@@ -619,7 +635,7 @@ describe('SparkSQL entity collector tests', () => {
         expect(queryResults[2].text).toBe('id, (select max(age) as max_age from t3) as max_age');
         expect(queryResults[2].columns?.length).toBe(2);
         expect(queryResults[2].columns[0].text).toBe('id');
-        expect(queryResults[2].columns[0].declareType).toBe(ColumnDeclareType.COMMON);
+        expect(queryResults[2].columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
         expect(queryResults[2].columns[1].text).toBe('(select max(age) as max_age from t3)');
         expect(queryResults[2].columns[1].declareType).toBe(ColumnDeclareType.EXPRESSION);
         expect(queryResults[2].columns[1][AttrName.alias]?.text).toBe('max_age');

@@ -196,8 +196,8 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        // todo fix
-        expect(entities.length).toBe(3);
+
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('page_view_stg');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();

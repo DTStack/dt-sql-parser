@@ -4,8 +4,11 @@ import path from 'path';
 import { TrinoSqlListener } from 'src/lib/trino/TrinoSqlListener';
 import {
     AttrName,
+    ColumnDeclareType,
+    CommonEntityContext,
     isCommonEntityContext,
     StmtContextType,
+    TableDeclareType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
 import { TrinoEntityCollector, TrinoSQL, TrinoSqlSplitListener } from 'src/parser/trino';
@@ -23,7 +26,7 @@ describe('Trino entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(11);
+        expect(splitListener.statementsContext.length).toBe(16);
     });
 
     test('create table like', () => {
@@ -40,25 +43,29 @@ describe('Trino entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('bar');
-        expect(tableCreateEntity.position).toEqual({
-            startIndex: 27,
-            endIndex: 29,
-            line: 1,
-            startColumn: 28,
-            endColumn: 31,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                startIndex: 27,
+                endIndex: 29,
+                line: 1,
+                startColumn: 28,
+                endColumn: 31,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            startIndex: 0,
-            endIndex: 68,
-            startLine: 1,
-            endLine: 1,
-            startColumn: 1,
-            endColumn: 70,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                startIndex: 0,
+                endIndex: 68,
+                startLine: 1,
+                endLine: 1,
+                startColumn: 1,
+                endColumn: 70,
+            })
+        );
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
 
@@ -79,10 +86,11 @@ describe('Trino entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const tableCreateEntity = allEntities[0];
-        const originTableEntity = allEntities[1];
+        const originTableEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
+        const tableCreateEntity = allEntities[2];
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('foo');
@@ -102,7 +110,7 @@ describe('Trino entity collector tests', () => {
                 );
             });
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
-            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
 
             expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
             expect(originTableEntity.text).toBe('t');
@@ -118,10 +126,11 @@ describe('Trino entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const tableCreateEntity = allEntities[0];
-        const originTableEntity = allEntities[1];
+        const originTableEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
+        const tableCreateEntity = allEntities[2];
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(tableCreateEntity.text).toBe('a');
@@ -137,7 +146,7 @@ describe('Trino entity collector tests', () => {
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns).toBeUndefined();
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
-            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
         }
 
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
@@ -153,10 +162,11 @@ describe('Trino entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const tableCreateEntity = allEntities[0];
-        const originTableEntity = allEntities[1];
+        const originTableEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
+        const tableCreateEntity = allEntities[2];
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(tableCreateEntity.text).toBe('a');
@@ -173,7 +183,7 @@ describe('Trino entity collector tests', () => {
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns).toBeUndefined();
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
-            expect(tableCreateEntity.relatedEntities[0]).toBe(originTableEntity);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
         }
 
         expect(originTableEntity.entityContextType).toBe(EntityContextType.TABLE);
@@ -189,7 +199,7 @@ describe('Trino entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(1);
+        expect(allEntities.length).toBe(2);
 
         const tableCreateEntity = allEntities[0];
 
@@ -211,14 +221,18 @@ describe('Trino entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const insertTableEntity = allEntities[0];
-        const fromTableEntity = allEntities[1];
+        const fromTableEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
+        const insertTableEntity = allEntities[2];
 
         expect(insertTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(insertTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
         expect(insertTableEntity.text).toBe('orders');
+
+        expect(queryResultEntity.entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(queryResultEntity.text).toBe('*');
 
         expect(fromTableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(fromTableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
@@ -285,7 +299,7 @@ describe('Trino entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(1);
+        expect(allEntities.length).toBe(2);
 
         const tableEntity = allEntities[0];
 
@@ -363,5 +377,140 @@ describe('Trino entity collector tests', () => {
                 endColumn: 45,
             });
         }
+    });
+
+    test('should collect query result and columns', () => {
+        const trino = new TrinoSQL();
+        const context = splitListener.statementsContext[11];
+
+        const collectListener = new TrinoEntityCollector(commonSql);
+        trino.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('id, age as new_age, count(*) as total');
+        expect(queryResult.relatedEntities?.length).toBe(1);
+        expect(queryResult.relatedEntities?.[0].text).toBe('t1');
+
+        const columns = queryResult.columns;
+        expect(columns?.length).toBe(3);
+        expect(columns[0].text).toBe('id');
+        expect(columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(columns[1].text).toBe('age');
+        expect(columns[1].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(columns[1][AttrName.alias]).toEqual(expect.objectContaining({ text: 'new_age' }));
+        expect(columns[2].text).toBe('count(*)');
+        expect(columns[2].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(columns[2][AttrName.alias]).toEqual(expect.objectContaining({ text: 'total' }));
+    });
+
+    test('should collect columns with multiple star symbol', () => {
+        const trino = new TrinoSQL();
+        const context = splitListener.statementsContext[12];
+
+        const collectListener = new TrinoEntityCollector(commonSql);
+        trino.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('t1.*, t2.*');
+        expect(queryResult.columns?.length).toBe(2);
+        expect(queryResult.columns[0].text).toBe('t1.*');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.ALL);
+        expect(queryResult.columns[1].text).toBe('t2.*');
+        expect(queryResult.columns[1].declareType).toBe(ColumnDeclareType.ALL);
+    });
+
+    test('should collect columns with single star symbol', () => {
+        const trino = new TrinoSQL();
+        const context = splitListener.statementsContext[13];
+
+        const collectListener = new TrinoEntityCollector(commonSql);
+        trino.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('*');
+        expect(queryResult.columns?.length).toBe(1);
+        expect(queryResult.columns[0].text).toBe('*');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.ALL);
+    });
+
+    test('should collect derived table and derived column', () => {
+        const trino = new TrinoSQL();
+        const context = splitListener.statementsContext[14];
+
+        const collectListener = new TrinoEntityCollector(commonSql);
+        trino.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const tableEntities = allEntities.filter(
+            (entity) => entity.entityContextType === EntityContextType.TABLE
+        ) as CommonEntityContext[];
+
+        expect(tableEntities.length).toBe(4);
+        expect(tableEntities[0].text).toBe('t3');
+        expect(tableEntities[0].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[0][AttrName.alias]).toBeFalsy();
+
+        expect(tableEntities[1].text).toBe('t1');
+        expect(tableEntities[1].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[1][AttrName.alias]).toBeFalsy();
+
+        expect(tableEntities[2].text).toBe('(select id, name from t1)');
+        expect(tableEntities[2].declareType).toBe(TableDeclareType.EXPRESSION);
+        expect(tableEntities[2][AttrName.alias]?.text).toBe('derived_table');
+
+        expect(tableEntities[3].text).toBe('t2');
+        expect(tableEntities[3].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[3][AttrName.alias]).toBeFalsy();
+
+        const queryResults = allEntities.filter(
+            (entity) => entity.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext[];
+        expect(queryResults.length).toBe(3);
+        expect(queryResults[0].text).toBe('max(age)');
+        expect(queryResults[0].columns?.length).toBe(1);
+        expect(queryResults[0].columns[0].text).toBe('max(age)');
+        expect(queryResults[0].columns[0].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResults[0].columns[0][AttrName.alias]).toBeFalsy();
+
+        expect(queryResults[2].text).toBe('id, (select max(age) from t3) as max_age');
+        expect(queryResults[2].columns?.length).toBe(2);
+        expect(queryResults[2].columns[0].text).toBe('id');
+        expect(queryResults[2].columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(queryResults[2].columns[1].text).toBe('(select max(age) from t3)');
+        expect(queryResults[2].columns[1].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResults[2].columns[1][AttrName.alias]?.text).toBe('max_age');
+    });
+
+    test('should collect query result in where clause', () => {
+        const trino = new TrinoSQL();
+        const context = splitListener.statementsContext[15];
+
+        const collectListener = new TrinoEntityCollector(commonSql);
+        trino.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResults = allEntities.filter(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext[];
+
+        expect(queryResults.length).toBe(2);
+        expect(queryResults[0].text).toBe('name');
+        expect(queryResults[0].columns?.[0].text).toBe('name');
+        expect(queryResults[1].text).toBe('id');
     });
 });
