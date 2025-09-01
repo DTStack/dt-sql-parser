@@ -470,11 +470,11 @@ describe('SparkSQL entity collector tests', () => {
     });
 
     test('table entities are accessible when caret is in outer query', () => {
-        const hiveSql = new SparkSQL();
+        const spark = new SparkSQL();
         const sql = `SELECT id FROM t1, (SELECT name from t2) as t3`;
 
         // 光标在外层查询的FROM关键字位置
-        const entities = hiveSql.getAllEntities(sql, {
+        const entities = spark.getAllEntities(sql, {
             lineNumber: 1,
             column: 13, // 光标在FROM位置
         });
@@ -495,11 +495,11 @@ describe('SparkSQL entity collector tests', () => {
     });
 
     test('table entities are not accessible when caret is in inner query', () => {
-        const hiveSql = new SparkSQL();
+        const spark = new SparkSQL();
         const sql = `SELECT id FROM t1, (SELECT name from t2) as t3`;
 
         // 光标在内层查询的name位置
-        const entities = hiveSql.getAllEntities(sql, {
+        const entities = spark.getAllEntities(sql, {
             lineNumber: 1,
             column: 29, // 光标在name位置
         });

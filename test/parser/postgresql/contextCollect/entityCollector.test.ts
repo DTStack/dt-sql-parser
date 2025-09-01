@@ -776,4 +776,58 @@ describe('PostgreSql entity collector tests', () => {
         expect(queryResults[0].columns?.[0].text).toBe('name');
         expect(queryResults[1].text).toBe('id');
     });
+
+    test('table entities are accessible when caret is in outer query', () => {
+        const postgreSql = new PostgreSQL();
+        const sql = `SELECT id FROM t1, (SELECT name from t2) as t3`;
+
+        // 光标在外层查询的FROM关键字位置
+        const entities = postgreSql.getAllEntities(sql, {
+            lineNumber: 1,
+            column: 13, // 光标在FROM位置
+        });
+
+        // 验证可以访问外层查询中的所有表
+        const accessibleTables = entities.filter(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.isAccessible
+        );
+        expect(accessibleTables.length).toBe(2); // 应该至少包含t1和t3
+
+        // 验证t1和t3是可访问的
+        const t1 = accessibleTables.find((e) => e.text === 't1');
+        const t3 = accessibleTables.find((e) => e._alias?.text === 't3');
+        expect(t1).toBeDefined();
+        expect(t1?.isAccessible).toBeTruthy();
+        expect(t3).toBeDefined();
+        expect(t3?.isAccessible).toBeTruthy();
+    });
+
+    test('table entities are not accessible when caret is in inner query', () => {
+        const postgreSql = new PostgreSQL();
+        const sql = `SELECT id FROM t1, (SELECT name from t2) as t3`;
+
+        // 光标在内层查询的name位置
+        const entities = postgreSql.getAllEntities(sql, {
+            lineNumber: 1,
+            column: 29, // 光标在name位置
+        });
+
+        // 验证实体访问规则
+        const tables = entities.filter((e) => e.entityContextType === EntityContextType.TABLE);
+
+        // 找到t1、t2和t3
+        const t1 = tables.find((e) => e.text === 't1');
+        const t2 = tables.find((e) => e.text === 't2');
+        const t3 = tables.find((e) => e._alias?.text === 't3');
+
+        // t1和t3应该不可访问，因为它们在外层查询
+        expect(t1).toBeDefined();
+        expect(t1?.isAccessible).toBeFalsy();
+        expect(t3).toBeDefined();
+        expect(t3?.isAccessible).toBeFalsy();
+
+        // t2应该可以访问，因为它在内层查询中
+        expect(t2).toBeDefined();
+        expect(t2?.isAccessible).toBeTruthy();
+    });
 });
