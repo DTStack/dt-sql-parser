@@ -239,6 +239,8 @@ describe('SparkSQL entity collector tests', () => {
                 startColumn: 35,
                 endColumn: 65,
             });
+            expect(viewEntity.relatedEntities).not.toBeNull();
+            expect(viewEntity.relatedEntities[0]).toBe(queryResultEntity);
         }
         expect(tableEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
