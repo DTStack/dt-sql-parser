@@ -373,6 +373,7 @@ export abstract class EntityCollector {
      * The nearest statement containing the caret,
      * Not used for now.
      */
+    // @ts-ignore
     private _caretStmt: StmtContext | null;
 
     /**
