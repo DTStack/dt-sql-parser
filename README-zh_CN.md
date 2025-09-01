@@ -330,6 +330,8 @@ console.log(sqlSlices)
     {
       entityContextType: 'table',
       text: 'tb',
+      declareType: 0,
+      isAccessible: true,
       position: {
         line: 1,
         startIndex: 14,
@@ -346,16 +348,181 @@ console.log(sqlSlices)
       },
       relatedEntities: null,
       columns: null,
-      isAlias: false,
-      origin: null,
-      alias: null
-    }
+      _alias: null,
+      _comment: null
+    },
+    {
+      entityContextType: 'queryResult',
+      text: '*',
+      declareType: undefined,
+      isAccessible: null,
+      position: {
+        line: 1,
+        startIndex: 7,
+        endIndex: 7,
+        startColumn: 8,
+        endColumn: 9
+      },
+      belongStmt: {
+        stmtContextType: 'selectStmt',
+        position: [Object],
+        rootStmt: [Object],
+        parentStmt: [Object],
+        isContainCaret: true
+      },
+      relatedEntities: [
+        // relate to table entity
+      ],
+      columns: [
+        // relate to `*` column entity
+      ],
+      _alias: null,
+      _comment: null,
+    },
   ]
 */
 ```
 
 行列号信息不是必传的，如果传了行列号信息，那么收集到的实体中，如果实体位于对应行列号所在的语句下，那么实体的所属的语句对象上会带有 `isContainCaret` 标识，这在与自动补全功能结合时，可以帮助你快速筛选出需要的实体信息。
 
+在子查询嵌套的情况下，`isContainCaret` 可能不足以筛选出需要的实体，例如对于SQL: `SELECT id FROM t1 LEFT JOIN (SELECT id, name FROM t2) AS t3 ON t1.id = t3.id`, 当我们光标处在内部查询`t3`派生表内时, 期望提供`t2`表下的字段补全, 但由于`t1`与`t2`的`isContainCaret`都为`true`, 无法更细节的区分出可用的表实体。
+
+所以, 针对`entityContextType`为`table`的实体类型, 收集到的实体上会带有`isAccessible`标识, 用于表示该实体是否可访问。`isAccessible`内部利用作用域深度来判断, 当实体的语句作用域深度与光标所在语句的作用域深度相同且`isContainCaret`为`true`时, 则认为该实体可访问(当然这种判断方法并非绝对，但能排除大多数无关实体）。
+
+#### 实体额外信息说明
+
+**别名（Alias）信息**
+
+当实体具有别名时，会在实体对象中包含 `_alias` 字段：
+- `_alias`: 别名的详细信息，包含文本内容和位置信息
+
+```typescript
+// 示例：SELECT u.name FROM users AS u
+{
+  entityContextType: 'table',
+  text: 'users',
+  _alias: {        // 表的别名信息
+    text: 'u',
+    startIndex: 29,
+    endIndex: 29,
+    startColumn: 30,
+    endColumn: 31,
+    line: 1
+  }
+}
+
+// 示例：SELECT name AS username FROM users
+{
+  entityContextType: 'column',
+  text: 'name',
+  _alias: {        // 列的别名信息
+    text: 'username',
+    startIndex: 15,
+    endIndex: 22,
+    startColumn: 16,
+    endColumn: 24,
+    line: 1
+  }
+}
+```
+
+**声明类型（DeclareType）**
+
+`declareType` 字段用于标识实体的声明方式，不同类型的实体有不同的声明类型：
+
+**表实体的声明类型（TableDeclareType）：**
+- `LITERAL`：字面量表名，如 `SELECT * FROM users`
+- `EXPRESSION`：表达式定义的表，如子查询 `SELECT * FROM (SELECT * FROM users) AS t`
+
+**列实体的声明类型（ColumnDeclareType）：**
+- `LITERAL`：字面量列名，如 `SELECT id, name FROM users`
+- `ALL`：通配符语法，如 `SELECT users.* FROM users`
+- `EXPRESSION`：复杂表达式，如子查询、CASE语句、函数调用等
+
+```typescript
+// 示例：不同 declareType 的示例
+// 1. 字面量列
+{
+  entityContextType: 'column',
+  text: 'name',
+  declareType: ColumnDeclareType.LITERAL,
+}
+
+// 2. 通配符列
+{
+  entityContextType: 'column', 
+  text: 'users.*',
+  declareType: ColumnDeclareType.ALL,
+}
+
+// 3. 表达式列
+{
+  entityContextType: 'column',
+  text: 'CASE WHEN age > 18 THEN "adult" ELSE "minor" END',
+  declareType: ColumnDeclareType.EXPRESSION,
+}
+```
+
+
+**其他元信息字段**
+
+**注释信息（Comment）**
+- `_comment`：实体的注释信息，主要用于 CREATE 语句中的列注释或表注释
+
+```typescript
+// 示例：CREATE TABLE users (id INT COMMENT 'USERID', name VARCHAR(50) COMMENT 'USERNAME')
+{
+  entityContextType: 'column',
+  text: 'id',
+  _comment: {
+    text: "'USERID'",
+    startIndex: 35,
+    endIndex: 42,
+    startColumn: 36,
+    endColumn: 44,
+    line: 1
+  },
+  _colType: {
+    text: 'INT',
+    startIndex: 23,
+    endIndex: 42,
+    startColumn: 24,
+    endColumn: 44,
+    line: 1
+  }
+}
+```
+
+**列类型信息（Column Type）**
+- `_colType`：列的数据类型信息，仅用于建表语句中的列实体，包含类型名称和位置信息
+
+```typescript
+// 示例：CREATE TABLE users (name VARCHAR(50) NOT NULL)
+{
+  entityContextType: 'columnCreate',
+  text: 'name',
+  _colType: {
+    text: 'VARCHAR(50)',
+    startIndex: 25,
+    endIndex: 35,
+    startColumn: 26,
+    endColumn: 37,
+    line: 1
+  }
+}
+```
+
+**关联信息字段**
+- `relatedEntities`：与当前实体相关的其他实体列表，例如查询结果实体关联的表实体
+- `columns`：包含的字段列表
+
+一个简单的实体关联实例：
+
+```sql
+CREATE TABLE tb1 AS SELECT id FROM tb2;
+```
+
+![relation-image](./docs/images/relation.png)
 
 ### 获取语义上下文信息
 调用 SQL 实例上的 `getSemanticContextAtCaretPosition` 方法，传入 sql 文本和指定位置的行列号, 例如：
