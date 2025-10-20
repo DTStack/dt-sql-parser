@@ -1,6 +1,6 @@
 import { ImpalaSqlParserListener } from '../../lib';
-import { SelectItemContext } from '../../lib/hive/HiveSqlParser';
 import {
+    AliasedRelationContext,
     AtomSubQueryTableSourceContext,
     ColumnDefinitionContext,
     ColumnNamePathCreateContext,
@@ -18,6 +18,7 @@ import {
     KuduTableElementContext,
     QueryStatementContext,
     SelectExpressionColumnNameContext,
+    SelectItemContext,
     SelectListContext,
     SelectLiteralColumnNameContext,
     SingleStatementContext,
@@ -29,7 +30,6 @@ import {
     ViewNameCreateContext,
     ViewNamePathContext,
 } from '../../lib/impala/ImpalaSqlParser';
-import { AliasedRelationContext } from '../../lib/trino/TrinoSqlParser';
 import {
     AttrName,
     ColumnDeclareType,

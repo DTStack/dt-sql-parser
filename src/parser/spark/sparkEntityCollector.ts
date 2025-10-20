@@ -1,4 +1,3 @@
-import { TableSourceContext } from '../../lib/mysql/MySqlParser';
 import {
     AtomSubQueryTableSourceContext,
     ColumnNameCreateContext,
@@ -31,6 +30,7 @@ import {
     TableAllColumnsContext,
     TableNameContext,
     TableNameCreateContext,
+    TableSourceContext,
     ViewNameContext,
     ViewNameCreateContext,
 } from '../../lib/spark/SparkSqlParser';
