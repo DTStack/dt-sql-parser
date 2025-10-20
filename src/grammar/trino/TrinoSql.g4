@@ -280,9 +280,9 @@ sortItem
     ;
 
 querySpecification
-    : KW_SELECT setQuantifier? selectItem (',' selectItem)* (KW_FROM relation (',' relation)*)? (
-        whereClause
-    )? (KW_GROUP KW_BY groupBy)? (havingClause)? (KW_WINDOW windowDefinition (',' windowDefinition)*)?
+    : KW_SELECT setQuantifier? selectList (KW_FROM relation (',' relation)*)? (whereClause)? (
+        KW_GROUP KW_BY groupBy
+    )? (havingClause)? (KW_WINDOW windowDefinition (',' windowDefinition)*)?
     ;
 
 whereClause
@@ -291,6 +291,10 @@ whereClause
 
 havingClause
     : KW_HAVING having=booleanExpression
+    ;
+
+selectList
+    : selectItem (',' selectItem)*
     ;
 
 groupBy
@@ -338,9 +342,25 @@ setQuantifier
     ;
 
 selectItem
-    : (columnRef | expression) (KW_AS? alias=identifier)?   # selectSingle
-    | primaryExpression '.' ASTERISK (KW_AS columnAliases)? # selectAll
-    | ASTERISK                                              # selectAll
+    : (selectLiteralColumnName | selectExpressionColumnName) (KW_AS? alias=identifier)?
+    | tableAllColumns (KW_AS columnAliases)?
+    | selectAllWithoutTable
+    ;
+
+selectAllWithoutTable
+    : ASTERISK
+    ;
+
+tableAllColumns
+    : primaryExpression '.' ASTERISK
+    ;
+
+selectLiteralColumnName
+    : columnRef
+    ;
+
+selectExpressionColumnName
+    : expression
     ;
 
 relation
@@ -449,12 +469,16 @@ columnAliases
     ;
 
 relationPrimary
-    : tableOrViewName queryPeriod?                                            # tableName
-    | '(' query ')'                                                           # subqueryRelation
+    : tableOrViewName queryPeriod? # tableName
+    | relationSourceTable          # expressionSourceTable
+    | '(' relation ')'             # parenthesizedRelation
+    ;
+
+relationSourceTable
+    : '(' query ')'                                                           # subqueryRelation
     | KW_UNNEST '(' expression (',' expression)* ')' (KW_WITH KW_ORDINALITY)? # unnest
     | KW_LATERAL '(' query ')'                                                # lateral
     | KW_TABLE '(' tableFunctionCall ')'                                      # tableFunctionInvocation
-    | '(' relation ')'                                                        # parenthesizedRelation
     | KW_JSON_TABLE '(' jsonPathInvocation KW_COLUMNS '(' jsonTableColumn (',' jsonTableColumn)* ')' (
         KW_PLAN '(' jsonTableSpecificPlan ')'
         | KW_PLAN KW_DEFAULT '(' jsonTableDefaultPlan ')'

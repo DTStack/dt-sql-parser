@@ -149,6 +149,7 @@ import { InlineTableContext } from "./ImpalaSqlParser.js";
 import { SubqueryContext } from "./ImpalaSqlParser.js";
 import { SortItemContext } from "./ImpalaSqlParser.js";
 import { QuerySpecificationContext } from "./ImpalaSqlParser.js";
+import { SelectListContext } from "./ImpalaSqlParser.js";
 import { WhereClauseContext } from "./ImpalaSqlParser.js";
 import { HavingClauseContext } from "./ImpalaSqlParser.js";
 import { GroupByContext } from "./ImpalaSqlParser.js";
@@ -156,8 +157,11 @@ import { SingleGroupingSetContext } from "./ImpalaSqlParser.js";
 import { GroupingSetContext } from "./ImpalaSqlParser.js";
 import { NamedQueryContext } from "./ImpalaSqlParser.js";
 import { SetQuantifierContext } from "./ImpalaSqlParser.js";
-import { SelectSingleContext } from "./ImpalaSqlParser.js";
-import { SelectAllContext } from "./ImpalaSqlParser.js";
+import { SelectItemContext } from "./ImpalaSqlParser.js";
+import { ColumnAliasContext } from "./ImpalaSqlParser.js";
+import { SelectLiteralColumnNameContext } from "./ImpalaSqlParser.js";
+import { SelectExpressionColumnNameContext } from "./ImpalaSqlParser.js";
+import { TableAllColumnsContext } from "./ImpalaSqlParser.js";
 import { RelationDefaultContext } from "./ImpalaSqlParser.js";
 import { JoinRelationContext } from "./ImpalaSqlParser.js";
 import { JoinTypeContext } from "./ImpalaSqlParser.js";
@@ -167,6 +171,7 @@ import { SampleTypeContext } from "./ImpalaSqlParser.js";
 import { AliasedRelationContext } from "./ImpalaSqlParser.js";
 import { ColumnAliasesContext } from "./ImpalaSqlParser.js";
 import { RelationPrimaryContext } from "./ImpalaSqlParser.js";
+import { AtomSubQueryTableSourceContext } from "./ImpalaSqlParser.js";
 import { SubQueryRelationContext } from "./ImpalaSqlParser.js";
 import { UnnestContext } from "./ImpalaSqlParser.js";
 import { ParenthesizedRelationContext } from "./ImpalaSqlParser.js";
@@ -188,6 +193,7 @@ import { ValueExpressionDefaultContext } from "./ImpalaSqlParser.js";
 import { ConcatenationContext } from "./ImpalaSqlParser.js";
 import { ArithmeticBinaryContext } from "./ImpalaSqlParser.js";
 import { ArithmeticUnaryContext } from "./ImpalaSqlParser.js";
+import { FunctionCallExpressionContext } from "./ImpalaSqlParser.js";
 import { DereferenceContext } from "./ImpalaSqlParser.js";
 import { TypeConstructorContext } from "./ImpalaSqlParser.js";
 import { SpecialDateTimeFunctionContext } from "./ImpalaSqlParser.js";
@@ -1685,6 +1691,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      */
     exitQuerySpecification?: (ctx: QuerySpecificationContext) => void;
     /**
+     * Enter a parse tree produced by `ImpalaSqlParser.selectList`.
+     * @param ctx the parse tree
+     */
+    enterSelectList?: (ctx: SelectListContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.selectList`.
+     * @param ctx the parse tree
+     */
+    exitSelectList?: (ctx: SelectListContext) => void;
+    /**
      * Enter a parse tree produced by `ImpalaSqlParser.whereClause`.
      * @param ctx the parse tree
      */
@@ -1757,29 +1773,55 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      */
     exitSetQuantifier?: (ctx: SetQuantifierContext) => void;
     /**
-     * Enter a parse tree produced by the `selectSingle`
-     * labeled alternative in `ImpalaSqlParser.selectItem`.
+     * Enter a parse tree produced by `ImpalaSqlParser.selectItem`.
      * @param ctx the parse tree
      */
-    enterSelectSingle?: (ctx: SelectSingleContext) => void;
+    enterSelectItem?: (ctx: SelectItemContext) => void;
     /**
-     * Exit a parse tree produced by the `selectSingle`
-     * labeled alternative in `ImpalaSqlParser.selectItem`.
+     * Exit a parse tree produced by `ImpalaSqlParser.selectItem`.
      * @param ctx the parse tree
      */
-    exitSelectSingle?: (ctx: SelectSingleContext) => void;
+    exitSelectItem?: (ctx: SelectItemContext) => void;
     /**
-     * Enter a parse tree produced by the `selectAll`
-     * labeled alternative in `ImpalaSqlParser.selectItem`.
+     * Enter a parse tree produced by `ImpalaSqlParser.columnAlias`.
      * @param ctx the parse tree
      */
-    enterSelectAll?: (ctx: SelectAllContext) => void;
+    enterColumnAlias?: (ctx: ColumnAliasContext) => void;
     /**
-     * Exit a parse tree produced by the `selectAll`
-     * labeled alternative in `ImpalaSqlParser.selectItem`.
+     * Exit a parse tree produced by `ImpalaSqlParser.columnAlias`.
      * @param ctx the parse tree
      */
-    exitSelectAll?: (ctx: SelectAllContext) => void;
+    exitColumnAlias?: (ctx: ColumnAliasContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     */
+    enterSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     */
+    exitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     */
+    enterSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     */
+    exitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     */
+    enterTableAllColumns?: (ctx: TableAllColumnsContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     */
+    exitTableAllColumns?: (ctx: TableAllColumnsContext) => void;
     /**
      * Enter a parse tree produced by the `relationDefault`
      * labeled alternative in `ImpalaSqlParser.relation`.
@@ -1874,6 +1916,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitRelationPrimary?: (ctx: RelationPrimaryContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.atomSubQueryTableSource`.
+     * @param ctx the parse tree
+     */
+    enterAtomSubQueryTableSource?: (ctx: AtomSubQueryTableSourceContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.atomSubQueryTableSource`.
+     * @param ctx the parse tree
+     */
+    exitAtomSubQueryTableSource?: (ctx: AtomSubQueryTableSourceContext) => void;
     /**
      * Enter a parse tree produced by `ImpalaSqlParser.subQueryRelation`.
      * @param ctx the parse tree
@@ -2116,6 +2168,16 @@ export class ImpalaSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitArithmeticUnary?: (ctx: ArithmeticUnaryContext) => void;
+    /**
+     * Enter a parse tree produced by `ImpalaSqlParser.functionCallExpression`.
+     * @param ctx the parse tree
+     */
+    enterFunctionCallExpression?: (ctx: FunctionCallExpressionContext) => void;
+    /**
+     * Exit a parse tree produced by `ImpalaSqlParser.functionCallExpression`.
+     * @param ctx the parse tree
+     */
+    exitFunctionCallExpression?: (ctx: FunctionCallExpressionContext) => void;
     /**
      * Enter a parse tree produced by the `dereference`
      * labeled alternative in `ImpalaSqlParser.primaryExpression`.

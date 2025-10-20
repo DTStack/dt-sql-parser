@@ -483,10 +483,34 @@ selectStatement
     ;
 
 selectClause
-    : KW_SELECT setQuantifier? (
-        ASTERISK_SIGN
-        | projectItemDefinition (COMMA projectItemDefinition)*
-    )
+    : KW_SELECT setQuantifier? selectList
+    ;
+
+selectList
+    : columnProjectItem (COMMA columnProjectItem)*
+    ;
+
+columnProjectItem
+    : selectWindowItemColumnName
+    | selectLiteralColumnName (columnAlias | KW_AS? expression)?
+    | tableAllColumns columnAlias?
+    | selectExpressionColumnName (columnAlias | KW_AS? columnName)?
+    ;
+
+selectWindowItemColumnName
+    : overWindowItem
+    ;
+
+selectExpressionColumnName
+    : expression
+    ;
+
+selectLiteralColumnName
+    : columnName
+    ;
+
+columnAlias
+    : KW_AS? alias=identifier
     ;
 
 projectItemDefinition
@@ -495,9 +519,13 @@ projectItemDefinition
     | columnName (KW_AS? expression)?
     ;
 
+tableAllColumns
+    : (identifier (DOT identifier)* DOT)? ASTERISK_SIGN
+    ;
+
 overWindowItem
-    : primaryExpression KW_OVER windowSpec KW_AS identifier
-    | primaryExpression KW_OVER errorCapturingIdentifier KW_AS identifier
+    : primaryExpression KW_OVER windowSpec KW_AS alias=identifier
+    | primaryExpression KW_OVER errorCapturingIdentifier KW_AS alias=identifier
     ;
 
 fromClause
@@ -519,8 +547,16 @@ tableReference
 tablePrimary
     : KW_TABLE? tablePath systemTimePeriod?
     | viewPath systemTimePeriod?
-    | KW_LATERAL KW_TABLE LR_BRACKET functionCallExpression RR_BRACKET
-    | KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
+    | atomFunctionTable
+    | atomExpressionTable
+    ;
+
+atomFunctionTable
+    : KW_LATERAL KW_TABLE LR_BRACKET functionCallExpression RR_BRACKET
+    ;
+
+atomExpressionTable
+    : KW_LATERAL? LR_BRACKET queryStatement RR_BRACKET
     | KW_UNNEST LR_BRACKET expression RR_BRACKET
     ;
 
@@ -939,7 +975,7 @@ viewPathCreate
     ;
 
 uid
-    : identifier (DOT identifier)*?
+    : identifier (DOT identifier)*
     ;
 
 withOption

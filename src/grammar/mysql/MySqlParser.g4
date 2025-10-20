@@ -1087,9 +1087,14 @@ tableSource
 tableSourceItem
     : tableName (KW_PARTITION '(' partitionNames ')')? (KW_AS? alias=uid)? (
         indexHint (',' indexHint)*
-    )?                                                                                                              # atomTableItem
-    | KW_LATERAL? (selectStatement | '(' parenthesisSubquery=selectStatement ')') KW_AS? alias=uid fullColumnNames? # subqueryTableItem
-    | '(' tableSources ')'                                                                                          # tableSourcesItem
+    )?                                                                      # atomTableItem
+    | KW_LATERAL? atomSubQueryTableSource KW_AS? alias=uid fullColumnNames? # subqueryTableItem
+    | '(' tableSources ')'                                                  # tableSourcesItem
+    ;
+
+atomSubQueryTableSource
+    : selectStatement
+    | '(' parenthesisSubquery=selectStatement ')'
     ;
 
 // (col_list) | (col_alias [, col_alias] ...)
@@ -1196,14 +1201,30 @@ selectSpec
     ;
 
 selectElements
-    : (star='*' | selectElement) (',' selectElement)*
+    : (pureAllColumns | selectElement) (',' selectElement)*
     ;
 
 selectElement
-    : (LOCAL_ID VAR_ASSIGN)? expression (KW_AS? alias=uid)? # selectExpressionElement
-    | functionCall (KW_AS? alias=uid)?                      # selectFunctionElement
-    | select_element=fullId '.' '*'                         # selectStarElement
-    | columnName (KW_AS? alias=uid)?                        # selectColumnElement
+    : tableAllColumns
+    | selectLiteralColumnName (KW_AS? alias=uid)?
+    | selectExpressionColumnName (KW_AS? alias=uid)?
+    ;
+
+tableAllColumns
+    : fullId DOT STAR
+    ;
+
+pureAllColumns
+    : STAR
+    ;
+
+selectLiteralColumnName
+    : columnName
+    ;
+
+selectExpressionColumnName
+    : (LOCAL_ID VAR_ASSIGN)? expression # selectExpressionElement
+    | functionCall                      # selectFunctionElement
     ;
 
 intoClause

@@ -123,7 +123,8 @@ export class ImpalaSQL extends BasicSQL<ImpalaSqlLexer, ProgramContext, ImpalaSq
                         candidateRule.ruleList.includes(ImpalaSqlParser.RULE_whereClause) ||
                         candidateRule.ruleList.includes(ImpalaSqlParser.RULE_whenClause) ||
                         candidateRule.ruleList.includes(ImpalaSqlParser.RULE_partitionByClause) ||
-                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_relation)
+                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_relation) ||
+                        candidateRule.ruleList.includes(ImpalaSqlParser.RULE_functionCallExpression)
                     ) {
                         syntaxContextType = EntityContextType.COLUMN;
                     }

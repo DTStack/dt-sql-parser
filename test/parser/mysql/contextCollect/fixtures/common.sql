@@ -39,3 +39,13 @@ DROP SCHEMA IF EXISTS db_name;
 CREATE DEFINER = 'user' FUNCTION hello (s CHAR(20)) RETURNS CHAR(50) DETERMINISTIC COMMENT 'this is a defuner user function' RETURN CONCAT('Hello, ',s,'!');
 
 CREATE FUNCTION IF NOT EXISTS my_concat_ws RETURNS STRING SONAME 'udf_my_concat_ws.so';
+
+select id, age as new_age, count(*) as total from t1;
+
+select t1.*, t2.* from t1, t2;
+
+select * from t1;
+
+select id, (select max(age) from t3) as max_age from (select id, name from t1) as derived_table, t2;
+
+select id from a1 where name in (select name from b1);

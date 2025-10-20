@@ -24,3 +24,13 @@ CREATE TABLE orders (
 )
 COMMENT 'This is the orders table'
 WITH (format = 'ORC');
+
+select id, age as new_age, count(*) as total from t1;
+
+select t1.*, t2.* from t1, t2;
+
+select * from t1;
+
+select id, (select max(age) from t3) as max_age from (select id, name from t1) as derived_table, t2;
+
+select id from a1 where name in (select name from b1);

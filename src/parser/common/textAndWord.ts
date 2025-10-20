@@ -11,9 +11,13 @@ export interface WordPosition {
     readonly startColumn: number;
     /** end at ..n + 1 */
     readonly endColumn: number;
+    /** start at 0 */
+    readonly startTokenIndex: number;
+    /** end at ..n-1 */
+    readonly endTokenIndex: number;
 }
 
-export interface WordRange extends WordPosition {
+export interface WordRange extends Omit<WordPosition, 'startTokenIndex' | 'endTokenIndex'> {
     /** content of word */
     readonly text: string;
 }
@@ -31,6 +35,10 @@ export interface TextPosition {
     readonly startColumn: number;
     /** end at ..n + 1 */
     readonly endColumn: number;
+    /** start at 0 */
+    readonly startTokenIndex: number;
+    /** end at ..n-1 */
+    readonly endTokenIndex: number;
 }
 
 export interface TextSlice extends TextPosition {
@@ -75,6 +83,8 @@ export function ctxToText(
         endIndex,
         startColumn: ctx.start.column + 1,
         endColumn: ctx.stop.column + 1 + (ctx.stop.text?.length ?? 0),
+        startTokenIndex: ctx.start.tokenIndex,
+        endTokenIndex: ctx.stop.tokenIndex,
     };
 }
 
