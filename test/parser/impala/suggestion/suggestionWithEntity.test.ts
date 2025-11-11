@@ -70,15 +70,14 @@ describe('Impala SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = impala.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('insert_tb');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        // TODO:
-        // expect(entities[1].text).toBe('from_tb');
-        // expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        // expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+        expect(entities[1].text).toBe('from_tb');
+        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('insert into table as select with trailing comma', () => {
@@ -121,14 +120,14 @@ describe('Impala SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = impala.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('sorted_census_data');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
-        // TODO:
-        // expect(entities[1].text).toBe('unsorted_census_data');
-        // expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        // expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[1].text).toBe('unsorted_census_data');
+        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('create table as select with trailing comma', () => {
