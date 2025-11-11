@@ -184,4 +184,7 @@ module.exports = {
     // watchman: true
 
     transformIgnorePatterns: ['dist/', '<rootDir>/node_modules/.pnpm/(?!(antlr4ng|antlr4-c3)@)'],
+
+    // Disable console output in tests
+    silent: true,
 };
