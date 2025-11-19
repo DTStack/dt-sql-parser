@@ -29,23 +29,6 @@ options {
     caseInsensitive= true;
 }
 
-@members {
-  /**
-   * When true, parser should throw ParseException for unclosed bracketed comment.
-   */
-  public has_unclosed_bracketed_comment = false;
-
-  /**
-   * This method will be called when the character stream ends and try to find out the
-   * unclosed bracketed comment.
-   * If the method be called, it means the end of the entire character stream match,
-   * and we set the flag and fail later.
-   */
-  public markUnclosedComment() {
-    this.has_unclosed_bracketed_comment = true;
-  }
-}
-
 SEMICOLON: ';';
 
 LEFT_PAREN    : '(';
@@ -424,7 +407,7 @@ GTE  : '>=' | '!<';
 NOT         : '!';
 PLUS        : '+';
 MINUS       : '-';
-ASTERISK    : '*';
+STAR        : '*';
 SLASH       : '/';
 PERCENT     : '%';
 TILDE       : '~';
@@ -478,8 +461,7 @@ fragment LETTER: [A-Z];
 
 LINE_COMMENT: '--' ('\\\n' | ~[\r\n])* '\r'? '\n'? -> channel(HIDDEN);
 
-BRACKETED_COMMENT:
-    '/*' (BRACKETED_COMMENT | .)*? ('*/' | {this.markUnclosedComment();} EOF) -> channel(HIDDEN);
+BRACKETED_COMMENT: '/*' (BRACKETED_COMMENT | .)*? '*/' -> channel(HIDDEN);
 
 WHITE_SPACE: (' ' | '\t' | '\r' | '\n') -> channel(HIDDEN);
 
