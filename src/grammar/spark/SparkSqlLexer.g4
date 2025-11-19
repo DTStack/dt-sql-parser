@@ -407,7 +407,7 @@ GTE  : '>=' | '!<';
 NOT         : '!';
 PLUS        : '+';
 MINUS       : '-';
-ASTERISK    : '*';
+STAR        : '*';
 SLASH       : '/';
 PERCENT     : '%';
 TILDE       : '~';
