@@ -27,11 +27,6 @@ parser grammar SparkSqlParser;
 options {
     tokenVocab=SparkSqlLexer;
     caseInsensitive= true;
-    superClass=SQLParserBase;
-}
-
-@header {
-import { SQLParserBase } from '../SQLParserBase';
 }
 
 program
@@ -415,7 +410,6 @@ viewName
 
 columnName
     : multipartIdentifier
-    | {this.shouldMatchEmpty()}?
     ;
 
 columnNamePath
