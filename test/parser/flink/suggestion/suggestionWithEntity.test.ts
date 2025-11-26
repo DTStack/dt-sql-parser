@@ -32,10 +32,14 @@ describe('Flink SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = flink.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('tb1');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('select with columns with columns and trailing comma', () => {
@@ -76,7 +80,7 @@ describe('Flink SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = flink.getAllEntities(sql, pos);
-        expect(entities.length).toBe(4);
+        expect(entities.length).toBe(5);
 
         const insertTableEntity = entities.find(
             (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'insert_tb'
@@ -89,15 +93,18 @@ describe('Flink SQL Syntax Suggestion with collect entity', () => {
                 e.entityContextType === EntityContextType.TABLE &&
                 e.declareType === TableDeclareType.EXPRESSION
         );
-        const queryResultEntity = entities.find(
+        const queryResultEntity = entities.filter(
             (e) => e.entityContextType === EntityContextType.QUERY_RESULT
         );
 
         expect(insideTableEntity.belongStmt.isContainCaret).toBeTruthy();
         expect(insertTableEntity.belongStmt.isContainCaret).toBeTruthy();
         expect(derivedTableEntity.belongStmt.isContainCaret).toBeTruthy();
+        expect(queryResultEntity[0].belongStmt.isContainCaret).toBeTruthy();
+        expect(queryResultEntity[1].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(queryResultEntity.text).toBe('col1, col2, country, state');
+        expect(queryResultEntity[0].text).toBe('');
+        expect(queryResultEntity[1].text).toBe('col1, col2, country, state');
     });
 
     test('insert into from nested query with columns and trailing comma', () => {
@@ -150,15 +157,19 @@ describe('Flink SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = flink.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
+        expect(entities.length).toBe(3);
 
         expect(entities[0].text).toBe('origin_table');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('derived_table');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[2].text).toBe('derived_table');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('create table as select with columns and trailing comma', () => {
