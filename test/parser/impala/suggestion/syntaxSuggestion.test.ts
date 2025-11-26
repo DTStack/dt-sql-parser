@@ -462,4 +462,85 @@ describe('Impala SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['YEAR']);
     });
+
+    test('Sync suggestion no duplicate syntaxContextType', () => {
+        const pos: CaretPosition = {
+            lineNumber: 49,
+            column: 8,
+        };
+        const syntaxes = impala.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const syntaxContextTypes = syntaxes?.map((syn) => syn.syntaxContextType);
+
+        expect(syntaxContextTypes).not.toBeUndefined();
+        expect(syntaxContextTypes).toEqual([EntityContextType.COLUMN, EntityContextType.FUNCTION]);
+    });
+
+    test('Select function or column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 51,
+            column: 11,
+        };
+        const syntaxes = impala.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+        const wordRangesArr = syntaxes?.map((syn) => syn.wordRanges);
+
+        expect(wordRangesArr).not.toBeUndefined();
+        expect(wordRangesArr.length).toBe(2);
+        expect(
+            wordRangesArr.map((wordRanges) => wordRanges.map((wordRange) => wordRange.text))
+        ).toEqual([['age'], ['age']]);
+    });
+
+    test('Syntax suggestion after a comment', () => {
+        const sql = `-- the comment\nSELECT * FROM db.`;
+        const pos: CaretPosition = {
+            lineNumber: 2,
+            column: 18,
+        };
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+    });
+
+    test('Syntax suggestion after comments', () => {
+        const sql = `-- the comment 1\n-- the comment 2\nSELECT * FROM db.`;
+        const pos: CaretPosition = {
+            lineNumber: 3,
+            column: 18,
+        };
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+    });
+
+    test('Syntax suggestion after comments', () => {
+        const sql = `-- SELECT FROM t1;\n-- the comment 1\n-- the comment 2\nSELECT * FROM db.`;
+        const pos: CaretPosition = {
+            lineNumber: 4,
+            column: 18,
+        };
+
+        const syntaxes = impala.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.TABLE
+        );
+
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
+    });
 });

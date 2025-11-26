@@ -105,4 +105,16 @@ describe('Flink SQL Token Suggestion', () => {
         )?.keywords;
         expect(suggestion.length).not.toBe(0);
     });
+
+    test('filter unreserved keywords', () => {
+        const pos: CaretPosition = {
+            lineNumber: 16,
+            column: 17,
+        };
+        const suggestion = flink.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+        expect(suggestion).toMatchUnorderedArray(['TABLE', 'LATERAL', 'UNNEST']);
+    });
 });

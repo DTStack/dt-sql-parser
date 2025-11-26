@@ -30,6 +30,11 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         return new HiveSqlParser(tokenStream);
     }
 
+    /**
+     * The rules that keywords you don't want to be suggested.
+     */
+    protected excludeKeywordRules = new Set([HiveSqlParser.RULE_nonReserved]);
+
     protected preferredRules: Set<number> = new Set([
         HiveSqlParser.RULE_dbSchemaName, // db or schema name
         HiveSqlParser.RULE_dbSchemaNameCreate, // db or schema name that will be created
@@ -43,6 +48,7 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
         HiveSqlParser.RULE_columnName,
         HiveSqlParser.RULE_columnNamePath,
         HiveSqlParser.RULE_columnNameCreate,
+        ...this.excludeKeywordRules,
     ]);
 
     protected get splitListener() {
@@ -144,7 +150,15 @@ export class HiveSQL extends BasicSQL<HiveSqlLexer, ProgramContext, HiveSqlParse
                     break;
             }
 
-            if (syntaxContextType) {
+            if (
+                syntaxContextType &&
+                !originalSyntaxSuggestions.some(
+                    (syn) =>
+                        syn.syntaxContextType === syntaxContextType &&
+                        syn.wordRanges.map((wordRange: Token) => wordRange.text)?.join(',') ===
+                            tokenRanges.map((tokenRange: Token) => tokenRange.text)?.join(',')
+                )
+            ) {
                 originalSyntaxSuggestions.push({
                     syntaxContextType,
                     wordRanges: tokenRanges,

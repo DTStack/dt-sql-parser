@@ -29,6 +29,11 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         return new MySqlParser(tokenStream);
     }
 
+    /**
+     * The rules that keywords you don't want to be suggested.
+     */
+    protected excludeKeywordRules = new Set([MySqlParser.RULE_keywordsCanBeId]);
+
     protected preferredRules: Set<number> = new Set([
         MySqlParser.RULE_databaseName,
         MySqlParser.RULE_databaseNameCreate,
@@ -40,6 +45,7 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         MySqlParser.RULE_functionNameCreate,
         MySqlParser.RULE_columnName,
         MySqlParser.RULE_columnNameCreate,
+        ...this.excludeKeywordRules,
     ]);
 
     protected get splitListener() {
@@ -121,7 +127,15 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
                     break;
             }
 
-            if (syntaxContextType) {
+            if (
+                syntaxContextType &&
+                !originalSyntaxSuggestions.some(
+                    (syn) =>
+                        syn.syntaxContextType === syntaxContextType &&
+                        syn.wordRanges.map((wordRange: Token) => wordRange.text)?.join(',') ===
+                            tokenRanges.map((tokenRange: Token) => tokenRange.text)?.join(',')
+                )
+            ) {
                 originalSyntaxSuggestions.push({
                     syntaxContextType,
                     wordRanges: tokenRanges,

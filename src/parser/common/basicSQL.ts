@@ -134,6 +134,7 @@ export abstract class BasicSQL<
     public createParser(input: string, errorListener?: ErrorListener) {
         const lexer = this.createLexer(input, errorListener);
         const tokenStream = new CommonTokenStream(lexer);
+        tokenStream.fill();
         const parser = this.createParserFromTokenStream(tokenStream);
         parser.interpreter.predictionMode = PredictionMode.SLL;
         if (errorListener) {
@@ -414,7 +415,7 @@ export abstract class BasicSQL<
 
             // A boundary consisting of the index of the input.
             const startIndex = startStatement?.start?.start ?? 0;
-            const stopIndex = stopStatement?.stop?.stop ?? inputSlice.length - 1;
+            const stopIndex = stopStatement?.stop?.stop ?? inputSlice.length;
 
             /**
              * Save offset of the tokenIndex in the range of input
@@ -518,6 +519,7 @@ export abstract class BasicSQL<
         } else {
             if (statementCount > 1) {
                 caretTokenIndex = caretTokenIndex - tokenIndexOffset;
+                allTokens = allTokens.slice(tokenIndexOffset);
             }
         }
 
@@ -559,29 +561,28 @@ export abstract class BasicSQL<
     }
 
     public getAllEntities(input: string, caretPosition?: CaretPosition): EntityContext[] | null {
-        const allTokens = this.getAllTokens(input);
+        /**
+         * Create a new parser to generate brand new parse tree.
+         * And the new parse tree should not effect cached parse tree which is used by validate and getSuggestionAtCaretPosition method.
+         */
+        const parser = this.createParser(input);
+        const allTokens = (parser.tokenStream as CommonTokenStream).getTokens();
+
         const caretTokenIndex = caretPosition
             ? findCaretTokenIndex(caretPosition, allTokens)
             : void 0;
-
         const collectListener = this.createEntityCollector(input, allTokens, caretTokenIndex);
-        // const parser = this.createParserWithCache(input);
 
-        // parser.entityCollecting = true;
-        // if(caretPosition) {
-        //     const allTokens = this.getAllTokens(input);
-        //     const tokenIndex = findCaretTokenIndex(caretPosition, allTokens);
-        //     parser.caretTokenIndex = tokenIndex;
-        // }
+        parser.entityCollecting = true;
+        if (caretPosition && caretTokenIndex !== undefined) {
+            parser.caretTokenIndex = caretTokenIndex;
+        }
 
-        // const parseTree = parser.program();
-
-        const parseTree = this.parseWithCache(input);
-
+        const parseTree = parser.program();
         this.listen(collectListener, parseTree);
 
-        // parser.caretTokenIndex = -1;
-        // parser.entityCollecting = false;
+        parser.caretTokenIndex = -1;
+        parser.entityCollecting = false;
 
         return collectListener.getEntities();
     }
