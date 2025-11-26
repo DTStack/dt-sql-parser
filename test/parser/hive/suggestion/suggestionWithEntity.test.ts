@@ -3,7 +3,7 @@ import path from 'path';
 import { HiveSQL } from 'src/parser/hive';
 import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
-import { AttrName, CommonEntityContext } from 'src/parser/common/entityCollector';
+import { AttrName } from 'src/parser/common/entityCollector';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'suggestionWithEntity.sql'),
