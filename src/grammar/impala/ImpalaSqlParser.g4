@@ -771,9 +771,13 @@ sortItem
     ;
 
 querySpecification
-    : KW_SELECT setQuantifier? (KW_STRAIGHT_JOIN)? selectItem (COMMA selectItem)* (
-        KW_FROM relation (COMMA relation)*
-    )? (whereClause)? (KW_GROUP KW_BY groupBy)? (havingClause)?
+    : KW_SELECT setQuantifier? (KW_STRAIGHT_JOIN)? selectList (KW_FROM relation (COMMA relation)*)? (
+        whereClause
+    )? (KW_GROUP KW_BY groupBy)? (havingClause)?
+    ;
+
+selectList
+    : selectItem (COMMA selectItem)*
     ;
 
 whereClause
@@ -807,9 +811,25 @@ setQuantifier
     ;
 
 selectItem
-    : columnItem (KW_AS? identifier)? # selectSingle
-    | qualifiedName DOT ASTERISK      # selectAll
-    | ASTERISK                        # selectAll
+    : selectLiteralColumnName columnAlias?
+    | selectExpressionColumnName columnAlias?
+    | tableAllColumns
+    ;
+
+columnAlias
+    : KW_AS? alias=identifier
+    ;
+
+selectLiteralColumnName
+    : columnNamePath
+    ;
+
+selectExpressionColumnName
+    : expression
+    ;
+
+tableAllColumns
+    : (qualifiedName DOT)? ASTERISK
     ;
 
 relation
@@ -861,9 +881,13 @@ columnAliases
 
 relationPrimary
     : tableOrViewPath
-    | KW_LATERAL? subQueryRelation
+    | atomSubQueryTableSource
     | unnest
     | parenthesizedRelation
+    ;
+
+atomSubQueryTableSource
+    : KW_LATERAL? subQueryRelation
     ;
 
 subQueryRelation
@@ -916,23 +940,27 @@ valueExpression
     | left=valueExpression CONCAT right=valueExpression                                # concatenation
     ;
 
-primaryExpression
-    : KW_NULL                                                                   # nullLiteral
-    | interval                                                                  # intervalLiteral
-    | identifier stringLiteral                                                  # typeConstructor
-    | DOUBLE_PRECISION stringLiteral                                            # typeConstructor
-    | number                                                                    # numericLiteral
-    | booleanValue                                                              # booleanLiteral
-    | stringLiteral                                                             # stringLiteralValues
-    | BINARY_LITERAL                                                            # binaryLiteral
-    | QUESTION                                                                  # parameter
-    | KW_POSITION LPAREN valueExpression KW_IN valueExpression RPAREN           # position
-    | LPAREN expression (KW_AS type)? (COMMA expression (KW_AS type)?)*? RPAREN # rowConstructor
-    | KW_ROW LPAREN expression (COMMA expression)* RPAREN                       # rowConstructor
-    | functionNamePath LPAREN ASTERISK RPAREN filter? over?                     # functionCall
-    | functionNamePath LPAREN (setQuantifier? expression (COMMA expression)*)? (
+functionCallExpression
+    : functionNamePath LPAREN (setQuantifier? expression (COMMA expression)*)? (
         KW_ORDER KW_BY sortItem (COMMA sortItem)*
-    )? RPAREN filter? over?                                                                        # functionCall
+    )? RPAREN filter? over?
+    ;
+
+primaryExpression
+    : KW_NULL                                                                                      # nullLiteral
+    | interval                                                                                     # intervalLiteral
+    | identifier stringLiteral                                                                     # typeConstructor
+    | DOUBLE_PRECISION stringLiteral                                                               # typeConstructor
+    | number                                                                                       # numericLiteral
+    | booleanValue                                                                                 # booleanLiteral
+    | stringLiteral                                                                                # stringLiteralValues
+    | BINARY_LITERAL                                                                               # binaryLiteral
+    | QUESTION                                                                                     # parameter
+    | KW_POSITION LPAREN valueExpression KW_IN valueExpression RPAREN                              # position
+    | LPAREN expression (KW_AS type)? (COMMA expression (KW_AS type)?)*? RPAREN                    # rowConstructor
+    | KW_ROW LPAREN expression (COMMA expression)* RPAREN                                          # rowConstructor
+    | functionNamePath LPAREN ASTERISK RPAREN filter? over?                                        # functionCall
+    | functionCallExpression                                                                       # functionCall
     | identifier RIGHT_ARROW expression                                                            # lambda
     | LPAREN (identifier (COMMA identifier)*)? RPAREN RIGHT_ARROW expression                       # lambda
     | LPAREN queryStatement RPAREN                                                                 # subqueryExpression

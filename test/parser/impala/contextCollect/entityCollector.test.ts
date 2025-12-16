@@ -4,9 +4,12 @@ import path from 'path';
 import { ImpalaSqlParserListener } from 'src/lib/impala/ImpalaSqlParserListener';
 import {
     AttrName,
+    ColumnDeclareType,
+    CommonEntityContext,
     isCommonEntityContext,
     isFuncEntityContext,
     StmtContextType,
+    TableDeclareType,
 } from 'src/parser/common/entityCollector';
 import { EntityContextType } from 'src/parser/common/types';
 import { ImpalaEntityCollector, ImpalaSQL, ImpalaSqlSplitListener } from 'src/parser/impala';
@@ -24,7 +27,7 @@ describe('ImpalaSQL entity collector tests', () => {
     });
 
     test('split results', () => {
-        expect(splitListener.statementsContext.length).toBe(14);
+        expect(splitListener.statementsContext.length).toBe(19);
     });
 
     test('create table by like', () => {
@@ -42,25 +45,29 @@ describe('ImpalaSQL entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('new_Table');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 23,
-            endIndex: 21,
-            line: 1,
-            startColumn: 14,
-            startIndex: 13,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 23,
+                endIndex: 21,
+                line: 1,
+                startColumn: 14,
+                startIndex: 13,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 38,
-            endIndex: 36,
-            endLine: 1,
-            startColumn: 1,
-            startIndex: 0,
-            startLine: 1,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 38,
+                endIndex: 36,
+                endLine: 1,
+                startColumn: 1,
+                startIndex: 0,
+                startLine: 1,
+            })
+        );
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
             expect(tableCreateEntity.columns).toBeUndefined();
@@ -85,25 +92,29 @@ describe('ImpalaSQL entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('census');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 20,
-            endIndex: 58,
-            line: 3,
-            startColumn: 14,
-            startIndex: 53,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 20,
+                endIndex: 58,
+                line: 3,
+                startColumn: 14,
+                startIndex: 53,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 138,
-            endIndex: 176,
-            endLine: 3,
-            startColumn: 1,
-            startIndex: 40,
-            startLine: 3,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 138,
+                endIndex: 176,
+                endLine: 3,
+                startColumn: 1,
+                startIndex: 40,
+                startLine: 3,
+            })
+        );
         expect(tableCreateEntity[AttrName.comment]).toEqual({
             text: "'common census table comment'",
             endColumn: 138,
@@ -161,32 +172,37 @@ describe('ImpalaSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const tableCreateEntity = allEntities[0];
-        const fromCreateEntity = allEntities[1];
+        const fromCreateEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
+        const tableCreateEntity = allEntities[2];
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('sorted_census_data');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 32,
-            endIndex: 210,
-            line: 5,
-            startColumn: 14,
-            startIndex: 193,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 32,
+                endIndex: 210,
+                line: 5,
+                startColumn: 14,
+                startIndex: 193,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 30,
-            endIndex: 339,
-            endLine: 9,
-            startColumn: 1,
-            startIndex: 180,
-            startLine: 5,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 30,
+                endIndex: 339,
+                endLine: 9,
+                startColumn: 1,
+                startIndex: 180,
+                startLine: 5,
+            })
+        );
 
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
@@ -194,7 +210,7 @@ describe('ImpalaSQL entity collector tests', () => {
 
             expect(fromCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
             expect(fromCreateEntity.text).toBe('unsorted_census_data');
-            expect(tableCreateEntity.relatedEntities[0]).toBe(fromCreateEntity);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
         }
     });
 
@@ -206,32 +222,37 @@ describe('ImpalaSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const tableCreateEntity = allEntities[0];
-        const fromCreateEntity = allEntities[1];
+        const fromCreateEntity = allEntities[0];
+        const queryResultEntity = allEntities[1];
+        const tableCreateEntity = allEntities[2];
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('ctas_t1');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 21,
-            endIndex: 362,
-            line: 11,
-            startColumn: 14,
-            startIndex: 356,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 21,
+                endIndex: 362,
+                line: 11,
+                startColumn: 14,
+                startIndex: 356,
+            })
+        );
 
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 31,
-            endIndex: 466,
-            endLine: 14,
-            startColumn: 1,
-            startIndex: 343,
-            startLine: 11,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 31,
+                endIndex: 466,
+                endLine: 14,
+                startColumn: 1,
+                startIndex: 343,
+                startLine: 11,
+            })
+        );
 
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities.length).toBe(1);
@@ -239,7 +260,7 @@ describe('ImpalaSQL entity collector tests', () => {
 
             expect(fromCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
             expect(fromCreateEntity.text).toBe('kudu_t1');
-            expect(tableCreateEntity.relatedEntities[0]).toBe(fromCreateEntity);
+            expect(tableCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
         }
     });
 
@@ -257,13 +278,15 @@ describe('ImpalaSQL entity collector tests', () => {
 
         expect(tableCreateEntity.entityContextType).toBe(EntityContextType.TABLE_CREATE);
         expect(tableCreateEntity.text).toBe('kudu_t3');
-        expect(tableCreateEntity.position).toEqual({
-            endColumn: 21,
-            endIndex: 489,
-            line: 16,
-            startColumn: 14,
-            startIndex: 483,
-        });
+        expect(tableCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 21,
+                endIndex: 489,
+                line: 16,
+                startColumn: 14,
+                startIndex: 483,
+            })
+        );
         expect(tableCreateEntity[AttrName.comment]).toEqual({
             text: "'kudu table comment'",
             endColumn: 31,
@@ -276,14 +299,16 @@ describe('ImpalaSQL entity collector tests', () => {
         expect(tableCreateEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_TABLE_STMT
         );
-        expect(tableCreateEntity.belongStmt.position).toEqual({
-            endColumn: 17,
-            endIndex: 857,
-            endLine: 24,
-            startColumn: 1,
-            startIndex: 470,
-            startLine: 16,
-        });
+        expect(tableCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 17,
+                endIndex: 857,
+                endLine: 24,
+                startColumn: 1,
+                startIndex: 470,
+                startLine: 16,
+            })
+        );
 
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.relatedEntities).toBeNull();
@@ -349,20 +374,23 @@ describe('ImpalaSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const viewCreateEntity = allEntities[0];
-        const fromCreateEntity = allEntities[1];
+        const queryResultEntity = allEntities[1];
+        const fromCreateEntity = allEntities[0];
+        const viewCreateEntity = allEntities[2];
 
         expect(viewCreateEntity.entityContextType).toBe(EntityContextType.VIEW_CREATE);
         expect(viewCreateEntity.text).toBe('my_view');
-        expect(viewCreateEntity.position).toEqual({
-            endColumn: 20,
-            endIndex: 879,
-            line: 26,
-            startColumn: 13,
-            startIndex: 873,
-        });
+        expect(viewCreateEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 20,
+                endIndex: 879,
+                line: 26,
+                startColumn: 13,
+                startIndex: 873,
+            })
+        );
 
         expect(viewCreateEntity[AttrName.comment]).toEqual({
             text: "'view comment'",
@@ -374,17 +402,19 @@ describe('ImpalaSQL entity collector tests', () => {
         });
 
         expect(viewCreateEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_VIEW_STMT);
-        expect(viewCreateEntity.belongStmt.position).toEqual({
-            endColumn: 169,
-            endIndex: 1028,
-            endLine: 26,
-            startColumn: 1,
-            startIndex: 861,
-            startLine: 26,
-        });
+        expect(viewCreateEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 169,
+                endIndex: 1028,
+                endLine: 26,
+                startColumn: 1,
+                startIndex: 861,
+                startLine: 26,
+            })
+        );
 
         if (isCommonEntityContext(viewCreateEntity)) {
-            expect(viewCreateEntity.relatedEntities[0]).toBe(fromCreateEntity);
+            expect(viewCreateEntity.relatedEntities[0]).toBe(queryResultEntity);
             expect(viewCreateEntity.columns.length).toBe(2);
             viewCreateEntity.columns.forEach((columEntity) => {
                 expect(columEntity.entityContextType).toBe(EntityContextType.COLUMN_CREATE);
@@ -427,30 +457,34 @@ describe('ImpalaSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
-        const tableInsertEntity = allEntities[0];
-        const fromTableEntity = allEntities[1];
+        const fromTableEntity = allEntities[0];
+        const tableInsertEntity = allEntities[2];
 
         expect(tableInsertEntity.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableInsertEntity.text).toBe('t2');
-        expect(tableInsertEntity.position).toEqual({
-            endColumn: 15,
-            endIndex: 1045,
-            line: 28,
-            startColumn: 13,
-            startIndex: 1044,
-        });
+        expect(tableInsertEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 15,
+                endIndex: 1045,
+                line: 28,
+                startColumn: 13,
+                startIndex: 1044,
+            })
+        );
 
         expect(tableInsertEntity.belongStmt.stmtContextType).toBe(StmtContextType.INSERT_STMT);
-        expect(tableInsertEntity.belongStmt.position).toEqual({
-            endColumn: 40,
-            endIndex: 1070,
-            endLine: 28,
-            startColumn: 1,
-            startIndex: 1032,
-            startLine: 28,
-        });
+        expect(tableInsertEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 40,
+                endIndex: 1070,
+                endLine: 28,
+                startColumn: 1,
+                startIndex: 1032,
+                startLine: 28,
+            })
+        );
         if (isCommonEntityContext(tableInsertEntity)) {
             expect(tableInsertEntity.columns).toBeUndefined();
         }
@@ -469,29 +503,33 @@ describe('ImpalaSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(1);
+        expect(allEntities.length).toBe(2);
 
         const tableEntity1 = allEntities[0];
 
         expect(tableEntity1.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity1.text).toBe('a');
-        expect(tableEntity1.position).toEqual({
-            endColumn: 16,
-            endIndex: 1088,
-            line: 30,
-            startColumn: 15,
-            startIndex: 1088,
-        });
+        expect(tableEntity1.position).toEqual(
+            expect.objectContaining({
+                endColumn: 16,
+                endIndex: 1088,
+                line: 30,
+                startColumn: 15,
+                startIndex: 1088,
+            })
+        );
 
         expect(tableEntity1.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-        expect(tableEntity1.belongStmt.position).toEqual({
-            endColumn: 16,
-            endIndex: 1088,
-            endLine: 30,
-            startColumn: 1,
-            startIndex: 1074,
-            startLine: 30,
-        });
+        expect(tableEntity1.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 16,
+                endIndex: 1088,
+                endLine: 30,
+                startColumn: 1,
+                startIndex: 1074,
+                startLine: 30,
+            })
+        );
         if (isCommonEntityContext(tableEntity1)) {
             expect(tableEntity1.columns).toBeUndefined();
             expect(tableEntity1.relatedEntities).toBeNull();
@@ -506,20 +544,22 @@ describe('ImpalaSQL entity collector tests', () => {
 
         const allEntities = collectListener.getEntities();
 
-        expect(allEntities.length).toBe(2);
+        expect(allEntities.length).toBe(3);
 
         const tableEntity1 = allEntities[0];
         const tableEntity2 = allEntities[1];
 
         expect(tableEntity1.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity1.text).toBe('table1');
-        expect(tableEntity1.position).toEqual({
-            endColumn: 32,
-            endIndex: 1122,
-            line: 32,
-            startColumn: 26,
-            startIndex: 1117,
-        });
+        expect(tableEntity1.position).toEqual(
+            expect.objectContaining({
+                endColumn: 32,
+                endIndex: 1122,
+                line: 32,
+                startColumn: 26,
+                startIndex: 1117,
+            })
+        );
         expect(tableEntity1[AttrName.alias]).toEqual({
             text: 't1',
             endColumn: 38,
@@ -530,14 +570,16 @@ describe('ImpalaSQL entity collector tests', () => {
         });
 
         expect(tableEntity1.belongStmt.stmtContextType).toBe(StmtContextType.SELECT_STMT);
-        expect(tableEntity1.belongStmt.position).toEqual({
-            endColumn: 20,
-            endIndex: 1217,
-            endLine: 34,
-            startColumn: 1,
-            startIndex: 1092,
-            startLine: 32,
-        });
+        expect(tableEntity1.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 20,
+                endIndex: 1217,
+                endLine: 34,
+                startColumn: 1,
+                startIndex: 1092,
+                startLine: 32,
+            })
+        );
         if (isCommonEntityContext(tableEntity1)) {
             expect(tableEntity1.columns).toBeUndefined();
             expect(tableEntity1.relatedEntities).toBeNull();
@@ -576,13 +618,15 @@ describe('ImpalaSQL entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(dbEntity.text).toBe('my_db');
-        expect(dbEntity.position).toEqual({
-            endColumn: 22,
-            endIndex: 1241,
-            line: 36,
-            startColumn: 17,
-            startIndex: 1237,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 22,
+                endIndex: 1241,
+                line: 36,
+                startColumn: 17,
+                startIndex: 1237,
+            })
+        );
 
         expect(dbEntity[AttrName.comment]).toEqual({
             text: "'my first db'",
@@ -594,14 +638,16 @@ describe('ImpalaSQL entity collector tests', () => {
         });
 
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 74,
-            endIndex: 1293,
-            endLine: 36,
-            startColumn: 1,
-            startIndex: 1221,
-            startLine: 36,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 74,
+                endIndex: 1293,
+                endLine: 36,
+                startColumn: 1,
+                startIndex: 1221,
+                startLine: 36,
+            })
+        );
 
         if (isCommonEntityContext(dbEntity)) {
             expect(dbEntity.columns).toBeUndefined();
@@ -623,13 +669,15 @@ describe('ImpalaSQL entity collector tests', () => {
 
         expect(schemaEntity.entityContextType).toBe(EntityContextType.DATABASE_CREATE);
         expect(schemaEntity.text).toBe('my_schema');
-        expect(schemaEntity.position).toEqual({
-            endColumn: 38,
-            endIndex: 1333,
-            line: 38,
-            startColumn: 29,
-            startIndex: 1325,
-        });
+        expect(schemaEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 38,
+                endIndex: 1333,
+                line: 38,
+                startColumn: 29,
+                startIndex: 1325,
+            })
+        );
         expect(schemaEntity[AttrName.comment]).toEqual({
             text: "'my first schema'",
             endColumn: 64,
@@ -640,14 +688,16 @@ describe('ImpalaSQL entity collector tests', () => {
         });
 
         expect(schemaEntity.belongStmt.stmtContextType).toBe(StmtContextType.CREATE_DATABASE_STMT);
-        expect(schemaEntity.belongStmt.position).toEqual({
-            endColumn: 94,
-            endIndex: 1389,
-            endLine: 38,
-            startColumn: 1,
-            startIndex: 1297,
-            startLine: 38,
-        });
+        expect(schemaEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 94,
+                endIndex: 1389,
+                endLine: 38,
+                startColumn: 1,
+                startIndex: 1297,
+                startLine: 38,
+            })
+        );
         if (isCommonEntityContext(schemaEntity)) {
             expect(schemaEntity.columns).toBeUndefined();
             expect(schemaEntity.relatedEntities).toBeNull();
@@ -668,24 +718,28 @@ describe('ImpalaSQL entity collector tests', () => {
 
         expect(dbEntity.entityContextType).toBe(EntityContextType.DATABASE);
         expect(dbEntity.text).toBe('my_database');
-        expect(dbEntity.position).toEqual({
-            endColumn: 32,
-            endIndex: 1423,
-            line: 40,
-            startColumn: 21,
-            startIndex: 1413,
-        });
+        expect(dbEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 32,
+                endIndex: 1423,
+                line: 40,
+                startColumn: 21,
+                startIndex: 1413,
+            })
+        );
 
         // 由于没有处理 comment 语句，所以当前是处于 COMMON_STMT
         expect(dbEntity.belongStmt.stmtContextType).toBe(StmtContextType.COMMON_STMT);
-        expect(dbEntity.belongStmt.position).toEqual({
-            endColumn: 59,
-            endIndex: 1450,
-            endLine: 40,
-            startColumn: 1,
-            startIndex: 1393,
-            startLine: 40,
-        });
+        expect(dbEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 59,
+                endIndex: 1450,
+                endLine: 40,
+                startColumn: 1,
+                startIndex: 1393,
+                startLine: 40,
+            })
+        );
 
         if (isCommonEntityContext(dbEntity)) {
             expect(dbEntity.columns).toBeUndefined();
@@ -707,25 +761,29 @@ describe('ImpalaSQL entity collector tests', () => {
 
         expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
         expect(functionEntity.text).toBe('function_name');
-        expect(functionEntity.position).toEqual({
-            endColumn: 40,
-            endIndex: 1491,
-            line: 42,
-            startColumn: 27,
-            startIndex: 1479,
-        });
+        expect(functionEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 40,
+                endIndex: 1491,
+                line: 42,
+                startColumn: 27,
+                startIndex: 1479,
+            })
+        );
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 26,
-            endIndex: 1608,
-            endLine: 46,
-            startColumn: 1,
-            startIndex: 1453,
-            startLine: 42,
-        });
+        expect(functionEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 26,
+                endIndex: 1608,
+                endLine: 46,
+                startColumn: 1,
+                startIndex: 1453,
+                startLine: 42,
+            })
+        );
 
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.arguments).toBeNull();
@@ -747,28 +805,222 @@ describe('ImpalaSQL entity collector tests', () => {
 
         expect(functionEntity.entityContextType).toBe(EntityContextType.FUNCTION_CREATE);
         expect(functionEntity.text).toBe('function_name');
-        expect(functionEntity.position).toEqual({
-            endColumn: 30,
-            endIndex: 1640,
-            line: 48,
-            startColumn: 17,
-            startIndex: 1628,
-        });
+        expect(functionEntity.position).toEqual(
+            expect.objectContaining({
+                endColumn: 30,
+                endIndex: 1640,
+                line: 48,
+                startColumn: 17,
+                startIndex: 1628,
+            })
+        );
 
         expect(functionEntity.belongStmt.stmtContextType).toBe(
             StmtContextType.CREATE_FUNCTION_STMT
         );
-        expect(functionEntity.belongStmt.position).toEqual({
-            endColumn: 21,
-            endIndex: 1734,
-            endLine: 51,
-            startColumn: 1,
-            startIndex: 1612,
-            startLine: 48,
-        });
+        expect(functionEntity.belongStmt.position).toEqual(
+            expect.objectContaining({
+                endColumn: 21,
+                endIndex: 1734,
+                endLine: 51,
+                startColumn: 1,
+                startIndex: 1612,
+                startLine: 48,
+            })
+        );
         if (isFuncEntityContext(functionEntity)) {
             expect(functionEntity.arguments).toBeNull();
             expect(functionEntity.relatedEntities).toBeNull();
         }
+    });
+
+    test('should collect query result and columns', () => {
+        const impalaSql = new ImpalaSQL();
+        const context = splitListener.statementsContext[14];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('id, age as new_age, count(*) as total');
+        expect(queryResult.relatedEntities?.length).toBe(1);
+        expect(queryResult.relatedEntities?.[0].text).toBe('t1');
+
+        const columns = queryResult.columns;
+
+        expect(columns?.length).toBe(3);
+        expect(columns[0].text).toBe('id');
+        expect(columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(columns[1].text).toBe('age');
+        expect(columns[1].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(columns[1][AttrName.alias]).toEqual(expect.objectContaining({ text: 'new_age' }));
+        expect(columns[2].text).toBe('count(*)');
+        expect(columns[2].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(columns[2][AttrName.alias]).toEqual(expect.objectContaining({ text: 'total' }));
+    });
+
+    test('should collect columns with multiple star symbol', () => {
+        const impalaSql = new ImpalaSQL();
+        const context = splitListener.statementsContext[15];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('t1.*, t2.*');
+        expect(queryResult.columns?.length).toBe(2);
+        expect(queryResult.columns[0].text).toBe('t1.*');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.ALL);
+        expect(queryResult.columns[1].text).toBe('t2.*');
+        expect(queryResult.columns[1].declareType).toBe(ColumnDeclareType.ALL);
+    });
+
+    test('should collect columns with single star symbol', () => {
+        const impalaSql = new ImpalaSQL();
+        const context = splitListener.statementsContext[16];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult?.text).toBe('*');
+        expect(queryResult.columns?.length).toBe(1);
+        expect(queryResult.columns[0].text).toBe('*');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.ALL);
+    });
+
+    test('should collect derived table and derived column', () => {
+        const impalaSql = new ImpalaSQL();
+        const context = splitListener.statementsContext[17];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const tableEntities = allEntities.filter(
+            (entity) => entity.entityContextType === EntityContextType.TABLE
+        ) as CommonEntityContext[];
+
+        expect(tableEntities.length).toBe(4);
+        expect(tableEntities[0].text).toBe('t3');
+        expect(tableEntities[0].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[0][AttrName.alias]).toBeFalsy();
+
+        expect(tableEntities[1].text).toBe('t1');
+        expect(tableEntities[1].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[1][AttrName.alias]).toBeFalsy();
+
+        expect(tableEntities[2].text).toBe('(select id, name from t1)');
+        expect(tableEntities[2].declareType).toBe(TableDeclareType.EXPRESSION);
+        expect(tableEntities[2][AttrName.alias]?.text).toBe('derived_table');
+
+        expect(tableEntities[3].text).toBe('t2');
+        expect(tableEntities[3].declareType).toBe(TableDeclareType.LITERAL);
+        expect(tableEntities[3][AttrName.alias]).toBeFalsy();
+
+        const queryResults = allEntities.filter(
+            (entity) => entity.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext[];
+        expect(queryResults.length).toBe(3);
+        expect(queryResults[0].text).toBe('max(age)');
+        expect(queryResults[0].columns?.length).toBe(1);
+        expect(queryResults[0].columns[0].text).toBe('max(age)');
+        expect(queryResults[0].columns[0].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResults[0].columns[0][AttrName.alias]).toBeFalsy();
+
+        expect(queryResults[2].text).toBe('id, (select max(age) from t3) as max_age');
+        expect(queryResults[2].columns?.length).toBe(2);
+        expect(queryResults[2].columns[0].text).toBe('id');
+        expect(queryResults[2].columns[0].declareType).toBe(ColumnDeclareType.LITERAL);
+        expect(queryResults[2].columns[1].text).toBe('(select max(age) from t3)');
+        expect(queryResults[2].columns[1].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResults[2].columns[1][AttrName.alias]?.text).toBe('max_age');
+    });
+
+    test('should collect query result in where clause', () => {
+        const impalaSql = new ImpalaSQL();
+        const context = splitListener.statementsContext[18];
+
+        const collectListener = new ImpalaEntityCollector(commonSql);
+        impalaSql.listen(collectListener as ParseTreeListener, context);
+
+        const allEntities = collectListener.getEntities();
+        const queryResults = allEntities.filter(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext[];
+
+        expect(queryResults.length).toBe(2);
+        expect(queryResults[0].text).toBe('name');
+        expect(queryResults[0].columns?.[0].text).toBe('name');
+        expect(queryResults[1].text).toBe('id');
+    });
+
+    test('table entities are accessible when caret is in outer query', () => {
+        const impalaSql = new ImpalaSQL();
+        const sql = `SELECT id FROM t1, (SELECT name from t2) as t3`;
+
+        // 光标在外层查询的FROM关键字位置
+        const entities = impalaSql.getAllEntities(sql, {
+            lineNumber: 1,
+            column: 13, // 光标在FROM位置
+        });
+
+        // 验证可以访问外层查询中的所有表
+        const accessibleTables = entities.filter(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.isAccessible
+        );
+        expect(accessibleTables.length).toBe(2); // 应该至少包含t1和t3
+
+        // 验证t1和t3是可访问的
+        const t1 = accessibleTables.find((e) => e.text === 't1');
+        const t3 = accessibleTables.find((e) => e._alias?.text === 't3');
+        expect(t1).toBeDefined();
+        expect(t1?.isAccessible).toBeTruthy();
+        expect(t3).toBeDefined();
+        expect(t3?.isAccessible).toBeTruthy();
+    });
+
+    test('table entities are not accessible when caret is in inner query', () => {
+        const impalaSql = new ImpalaSQL();
+        const sql = `SELECT id FROM t1, (SELECT name from t2) as t3`;
+
+        // 光标在内层查询的name位置
+        const entities = impalaSql.getAllEntities(sql, {
+            lineNumber: 1,
+            column: 29, // 光标在name位置
+        });
+
+        // 验证实体访问规则
+        const tables = entities.filter((e) => e.entityContextType === EntityContextType.TABLE);
+
+        // 找到t1、t2和t3
+        const t1 = tables.find((e) => e.text === 't1');
+        const t2 = tables.find((e) => e.text === 't2');
+        const t3 = tables.find((e) => e._alias?.text === 't3');
+
+        // t1和t3应该不可访问，因为它们在外层查询
+        expect(t1).toBeDefined();
+        expect(t1?.isAccessible).toBeFalsy();
+        expect(t3).toBeDefined();
+        expect(t3?.isAccessible).toBeFalsy();
+
+        // t2应该可以访问，因为它在内层查询中
+        expect(t2).toBeDefined();
+        expect(t2?.isAccessible).toBeTruthy();
     });
 });

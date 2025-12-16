@@ -261,6 +261,7 @@ import { TableJsonContext } from "./MySqlParser.js";
 import { AtomTableItemContext } from "./MySqlParser.js";
 import { SubqueryTableItemContext } from "./MySqlParser.js";
 import { TableSourcesItemContext } from "./MySqlParser.js";
+import { AtomSubQueryTableSourceContext } from "./MySqlParser.js";
 import { FullColumnNamesContext } from "./MySqlParser.js";
 import { IndexHintContext } from "./MySqlParser.js";
 import { IndexHintTypeContext } from "./MySqlParser.js";
@@ -280,10 +281,12 @@ import { JsonOnEmptyContext } from "./MySqlParser.js";
 import { JsonOnErrorContext } from "./MySqlParser.js";
 import { SelectSpecContext } from "./MySqlParser.js";
 import { SelectElementsContext } from "./MySqlParser.js";
+import { SelectElementContext } from "./MySqlParser.js";
+import { TableAllColumnsContext } from "./MySqlParser.js";
+import { PureAllColumnsContext } from "./MySqlParser.js";
+import { SelectLiteralColumnNameContext } from "./MySqlParser.js";
 import { SelectExpressionElementContext } from "./MySqlParser.js";
 import { SelectFunctionElementContext } from "./MySqlParser.js";
-import { SelectStarElementContext } from "./MySqlParser.js";
-import { SelectColumnElementContext } from "./MySqlParser.js";
 import { SelectIntoVariablesContext } from "./MySqlParser.js";
 import { SelectIntoDumpFileContext } from "./MySqlParser.js";
 import { SelectIntoTextFileContext } from "./MySqlParser.js";
@@ -2342,6 +2345,12 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitTableSourcesItem?: (ctx: TableSourcesItemContext) => Result;
     /**
+     * Visit a parse tree produced by `MySqlParser.atomSubQueryTableSource`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAtomSubQueryTableSource?: (ctx: AtomSubQueryTableSourceContext) => Result;
+    /**
      * Visit a parse tree produced by `MySqlParser.fullColumnNames`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -2460,33 +2469,43 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitSelectElements?: (ctx: SelectElementsContext) => Result;
     /**
+     * Visit a parse tree produced by `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectElement?: (ctx: SelectElementContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableAllColumns?: (ctx: TableAllColumnsContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.pureAllColumns`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPureAllColumns?: (ctx: PureAllColumnsContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => Result;
+    /**
      * Visit a parse tree produced by the `selectExpressionElement`
-     * labeled alternative in `MySqlParser.selectElement`.
+     * labeled alternative in `MySqlParser.selectExpressionColumnName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitSelectExpressionElement?: (ctx: SelectExpressionElementContext) => Result;
     /**
      * Visit a parse tree produced by the `selectFunctionElement`
-     * labeled alternative in `MySqlParser.selectElement`.
+     * labeled alternative in `MySqlParser.selectExpressionColumnName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitSelectFunctionElement?: (ctx: SelectFunctionElementContext) => Result;
-    /**
-     * Visit a parse tree produced by the `selectStarElement`
-     * labeled alternative in `MySqlParser.selectElement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSelectStarElement?: (ctx: SelectStarElementContext) => Result;
-    /**
-     * Visit a parse tree produced by the `selectColumnElement`
-     * labeled alternative in `MySqlParser.selectElement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSelectColumnElement?: (ctx: SelectColumnElementContext) => Result;
     /**
      * Visit a parse tree produced by the `selectIntoVariables`
      * labeled alternative in `MySqlParser.intoClause`.
