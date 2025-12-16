@@ -61,3 +61,5 @@ SELECT * FROM users CROSS JOIN UNNEST(friends) WITH ordinality;
 SELECT  FROM tb1;
 
 SELECT age FROM tb1;
+
+SELECT a. FROM tb1 a;

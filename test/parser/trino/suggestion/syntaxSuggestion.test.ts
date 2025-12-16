@@ -598,6 +598,25 @@ describe('Trino SQL Syntax Suggestion', () => {
         ).toEqual([['age'], ['age']]);
     });
 
+    test('Select alias column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 65,
+            column: 10,
+        };
+        const syntaxes = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const wordRangesArr = syntaxes?.map((syn) => syn.wordRanges);
+
+        expect(wordRangesArr).not.toBeUndefined();
+        expect(wordRangesArr.length).toBe(1);
+        expect(
+            wordRangesArr.map((wordRanges) => wordRanges.map((wordRange) => wordRange.text))
+        ).toEqual([['a', '.']]);
+    });
+
     test('Syntax suggestion after a comment', () => {
         const sql = `-- the comment\nSELECT * FROM db.`;
         const pos: CaretPosition = {
