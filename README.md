@@ -347,15 +347,152 @@ Call the `getAllEntities` method on the SQL instance, and pass in the sql text a
       },
       relatedEntities: null,
       columns: null,
-      isAlias: false,
-      origin: null,
-      alias: null
+      _alias: null,
+      _comment: null
     }
   ]
 */
 ```
 
 Position is not required, if the position is passed, then in the collected entities, if the entity is located under the statement where the corresponding position is located, then the statement object to which the entity belongs will be marked with `isContainCaret`, which can help you quickly filter out the required entities when combined with the code completion function.
+
+In nested subquery scenarios, `isContainCaret` may not be sufficient to filter out the required entities. For example, for SQL: `SELECT id FROM t1 LEFT JOIN (SELECT id, name FROM t2) AS t3 ON t1.id = t3.id`, when our cursor is inside the inner query `t3` derived table, we expect to provide field completion for the `t2` table, but since both `t1` and `t2` have `isContainCaret` as `true`, we cannot distinguish available table entities in more detail.
+
+Therefore, for entity types with `entityContextType` as `table`, collected entities will have an `isAccessible` flag to indicate whether the entity is accessible. `isAccessible` uses scope depth internally to determine accessibility. When the entity's statement scope depth equals the cursor's statement scope depth and `isContainCaret` is `true`, the entity is considered accessible (though this determination method is not absolute, it can exclude most irrelevant entities).
+
+#### Additional Entity Information
+
+**Alias Information**
+
+When an entity has an alias, the entity object will contain the `_alias` field:
+- `_alias`: Detailed alias information, including text content and position information
+
+```typescript
+// Example: SELECT u.name FROM users AS u
+{
+  entityContextType: 'table',
+  text: 'users',
+  _alias: {        // Table alias information
+    text: 'u',
+    startIndex: 29,
+    endIndex: 29,
+    startColumn: 30,
+    endColumn: 31,
+    line: 1
+  }
+}
+
+// Example: SELECT name AS username FROM users
+{
+  entityContextType: 'column',
+  text: 'name',
+  _alias: {        // Column alias information
+    text: 'username',
+    startIndex: 15,
+    endIndex: 22,
+    startColumn: 16,
+    endColumn: 24,
+    line: 1
+  }
+}
+```
+
+**Declaration Type (DeclareType)**
+
+The `declareType` field identifies how an entity is declared, with different entity types having different declaration types:
+
+**Table Entity Declaration Types (TableDeclareType):**
+- `LITERAL`: Literal table name, e.g., `SELECT * FROM users`
+- `EXPRESSION`: Table defined by expression, e.g., subquery `SELECT * FROM (SELECT * FROM users) AS t`
+
+**Column Entity Declaration Types (ColumnDeclareType):**
+- `LITERAL`: Literal column name, e.g., `SELECT id, name FROM users`
+- `ALL`: Wildcard syntax, e.g., `SELECT users.* FROM users`
+- `EXPRESSION`: Complex expressions like subqueries, CASE statements, function calls, etc.
+
+```typescript
+// Examples of different declareType values
+// 1. Literal column
+{
+  entityContextType: 'column',
+  text: 'name',
+  declareType: ColumnDeclareType.LITERAL,
+}
+
+// 2. Wildcard column
+{
+  entityContextType: 'column', 
+  text: 'users.*',
+  declareType: ColumnDeclareType.ALL,
+}
+
+// 3. Expression column
+{
+  entityContextType: 'column',
+  text: 'CASE WHEN age > 18 THEN "adult" ELSE "minor" END',
+  declareType: ColumnDeclareType.EXPRESSION,
+}
+```
+
+**Other Metadata Fields**
+
+**Comment Information**
+- `_comment`: Entity comment information, mainly used for column or table comments in CREATE statements
+
+```typescript
+// Example: CREATE TABLE users (id INT COMMENT 'USERID', name VARCHAR(50) COMMENT 'USERNAME')
+{
+  entityContextType: 'column',
+  text: 'id',
+  _comment: {
+    text: "'USERID'",
+    startIndex: 35,
+    endIndex: 42,
+    startColumn: 36,
+    endColumn: 44,
+    line: 1
+  },
+  _colType: {
+    text: 'INT',
+    startIndex: 23,
+    endIndex: 42,
+    startColumn: 24,
+    endColumn: 44,
+    line: 1
+  }
+}
+```
+
+**Column Type Information**
+- `_colType`: Column data type information, only used for column entities in CREATE TABLE statements, includes type name and position information
+
+```typescript
+// Example: CREATE TABLE users (name VARCHAR(50) NOT NULL)
+{
+  entityContextType: 'columnCreate',
+  text: 'name',
+  _colType: {
+    text: 'VARCHAR(50)',
+    startIndex: 25,
+    endIndex: 35,
+    startColumn: 26,
+    endColumn: 37,
+    line: 1
+  }
+}
+```
+
+**Relationship Fields**
+- `relatedEntities`: List of other entities related to the current entity, e.g., query result entities related to table entities
+- `columns`: List of contained columns
+
+A simple entity relationship example:
+
+```sql
+CREATE TABLE tb1 AS SELECT id FROM tb2;
+```
+
+![relation-image](./docs/images/relation.png)
 
 ### Get semantic context information
 

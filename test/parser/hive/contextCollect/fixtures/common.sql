@@ -64,3 +64,13 @@ CREATE TABLE test_change (a int, b varchar(255) COMMENT 'column 2', c int) COMME
 CREATE DATABASE testdb COMMENT 'test database' LOCATION '/test/path';
 
 SELECT a.* FROM table_busi a JOIN table_issue b ON (a.id = b.id AND a.department = b.department);
+
+select id, age as new_age, count(*) as total from t1;
+
+select t1.*, t2.* from t1, t2;
+
+select * from t1;
+
+select id, (select max(age) from t3) as max_age from (select id, name from t1) as derived_table, t2;
+
+select id from a1 where name in (select name from b1);

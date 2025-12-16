@@ -34,6 +34,8 @@ export interface StmtContext {
     readonly rootStmt: StmtContext | null;
     readonly parentStmt: StmtContext | null;
     readonly isContainCaret?: boolean;
+    readonly scopeDepth: number;
+    readonly text: string;
 }
 
 export function toStmtContext(
@@ -46,13 +48,15 @@ export function toStmtContext(
 ): StmtContext | null {
     const text = ctxToText(ctx, input);
     if (!text) return null;
-    const { text: _, ...position } = text;
+    const { text: stmtText, ...position } = text;
     return {
         stmtContextType: type,
         position,
         rootStmt: rootStmt ?? null,
         parentStmt: parentStmt ?? null,
         isContainCaret,
+        text: stmtText,
+        scopeDepth: type === StmtContextType.COMMON_STMT ? 0 : (parentStmt?.scopeDepth ?? 0) + 1,
     };
 }
 
@@ -82,46 +86,106 @@ export interface Argument {
     argName?: WordRange;
     argType: WordRange;
 }
+/**
+ * Base interface for all entity contexts in SQL parsing
+ */
 export interface BaseEntityContext {
+    /** The type of entity context */
     readonly entityContextType: EntityContextType;
+    /** The text representation of this entity */
     readonly text: string;
+    /** The position information for this entity */
     readonly position: WordPosition;
+    /** The statement this entity belongs to */
     readonly belongStmt: StmtContext;
-    reference?: string | EntityContext; // reference entity
+    /** Reference to another entity or string */
+    reference?: string | EntityContext;
+    /** Whether the entity is accessible from the caret position, **ONLY** applicable to table entity */
+    isAccessible: boolean | null;
+    /** Entities related to this entity */
+    relatedEntities: EntityContext[] | null;
+    /** Comment attribute for this entity */
     [AttrName.comment]: WordRange | null;
-    [AttrName.alias]?: WordRange | null; // alias token
+    /** Alias attribute for this entity */
+    [AttrName.alias]?: WordRange | null;
+}
+
+/**
+ * Types of column declarations
+ */
+export enum ColumnDeclareType {
+    /** Literal column name */
+    LITERAL,
+    /** Using asterisk syntax (tableName.*) */
+    ALL,
+    /** Complex expressions like subqueries, case statements, function calls */
+    EXPRESSION,
+}
+
+/**
+ * Types of table declarations
+ */
+export enum TableDeclareType {
+    /** Regular table reference */
+    LITERAL,
+    /** Table defined by expression (e.g., subquery) */
+    EXPRESSION,
 }
 
 export interface CommonEntityContext extends BaseEntityContext {
-    relatedEntities: CommonEntityContext[] | null;
+    /** Columns associated with this entity */
     columns?: ColumnEntityContext[];
+    /** Type of table declaration */
+    declareType?: TableDeclareType;
 }
 
 export interface ColumnEntityContext extends BaseEntityContext {
+    /** Type of column declaration */
+    declareType?: ColumnDeclareType;
+    /** Column type information */
     [AttrName.colType]: WordRange | null;
+    /** Column alias */
+    [AttrName.alias]?: WordRange | null;
 }
 
 export interface FuncEntityContext extends BaseEntityContext {
-    relatedEntities: CommonEntityContext[] | null;
-    arguments: Argument[] | null; // function arguments
-    returns?: Argument; // function return value
+    /** Function arguments */
+    arguments: Argument[] | null;
+    /** Function return value */
+    returns?: Argument;
 }
 
 export type EntityContext = CommonEntityContext | FuncEntityContext | ColumnEntityContext;
 
 export function isCommonEntityContext(entity: EntityContext): entity is CommonEntityContext {
     if (!entity) return false;
-    return 'relatedEntities' in entity && !('arguments' in entity);
+    return !isFuncEntityContext(entity) && !isColumnEntityContext(entity);
 }
 
 export function isFuncEntityContext(entity: EntityContext): entity is FuncEntityContext {
     if (!entity) return false;
-    return 'arguments' in entity;
+    return [EntityContextType.FUNCTION, EntityContextType.FUNCTION_CREATE].includes(
+        entity.entityContextType
+    );
 }
 
 export function isColumnEntityContext(entity: EntityContext): entity is ColumnEntityContext {
     if (!entity) return false;
-    return AttrName.colType in entity;
+    return [EntityContextType.COLUMN, EntityContextType.COLUMN_CREATE].includes(
+        entity.entityContextType
+    );
+}
+
+/**
+ * Check if ctx is a child node of a specific rule type
+ */
+export function isChildContextOf(ctx: ParserRuleContext, parentRuleIndex: number): boolean {
+    let parentCtx = ctx.parent;
+    while (parentCtx) {
+        if (parentCtx.ruleIndex === parentRuleIndex) return true;
+        parentCtx = parentCtx.parent;
+    }
+    return false;
 }
 
 /**
@@ -132,12 +196,17 @@ interface AttrInfo {
     endContextList: string[];
 }
 
+interface MetaInfo {
+    declareType: TableDeclareType | ColumnDeclareType;
+}
+
 export function toEntityContext(
     ctx: ParserRuleContext,
     type: EntityContextType,
     input: string,
     belongStmt: StmtContext,
-    attrInfo?: AttrInfo[]
+    attrInfo?: AttrInfo[],
+    metaInfo?: MetaInfo
 ): EntityContext | null {
     const word = ctxToText(ctx, input);
     if (!word) return null;
@@ -151,6 +220,7 @@ export function toEntityContext(
         text,
         position,
         belongStmt,
+        declareType: metaInfo?.declareType,
         [AttrName.comment]: null,
     };
     switch (entityInfo.entityContextType) {
@@ -216,6 +286,7 @@ export function findAttribute(
         if (parent?.constructor?.name && !endContextNameList.includes(parent?.constructor?.name)) {
             attrVal = findAttribute(parent, keyName, endContextNameList);
         }
+
         if (!attrVal) {
             if (parent?.children) {
                 attrVal = findAttributeChildren(parent, keyName);
@@ -244,6 +315,29 @@ function findAttributeChildren(
     }
     return attrVal;
 }
+
+/**
+ * Check if an entity is contained within the range entity's context
+ * @param entity - The entity to check if it's contained
+ * @param rangeEntity - The entity that defines the containing range
+ * @returns true if entity is contained within rangeEntity's range
+ */
+function isEntityInScope(entity: EntityContext, rangeEntity: EntityContext): boolean {
+    const entityStart = entity.position.startTokenIndex;
+    const entityStop = entity.position.endTokenIndex;
+    const rangeStart = rangeEntity.position.startTokenIndex;
+    const rangeStop = rangeEntity.position.endTokenIndex;
+
+    return (
+        entityStart != null &&
+        entityStop != null &&
+        rangeStart != null &&
+        rangeStop != null &&
+        rangeStart <= entityStart &&
+        rangeStop >= entityStop
+    );
+}
+
 /**
  * @todo: Handle alias, includes column alias, table alias, query as alias and so on.
  * @todo: [may be need] Combine the entities in each clause.
@@ -257,6 +351,8 @@ export abstract class EntityCollector {
         this._stmtStack = new SimpleStack();
         this._entityStack = new SimpleStack();
         this._rootStmt = null;
+        this._caretStmtScopeDepth = 0;
+        this._caretStmt = null;
     }
     private readonly _input: string;
     private readonly _allTokens: Token[];
@@ -266,6 +362,20 @@ export abstract class EntityCollector {
     private readonly _stmtStack: SimpleStack<StmtContext>;
     /** Staging entities inside a single statement or clause. */
     private readonly _entityStack: SimpleStack<EntityContext>;
+
+    /**
+     * The scope depth of the statement containing the caret.
+     * This is used to determine the accessibility of entities.
+     */
+    private _caretStmtScopeDepth: number;
+
+    /**
+     * The nearest statement containing the caret,
+     * Not used for now.
+     */
+    // @ts-ignore
+    private _caretStmt: StmtContext | null;
+
     /**
      * Always point to the first non-commonStmt at the bottom of the _stmtStack,
      * unless there are only commonStmts in the _stmtStack.
@@ -295,6 +405,105 @@ export abstract class EntityCollector {
         this._rootStmt = null;
     }
 
+    exitProgram() {
+        const entities = Array.from(this._entitiesSet);
+        if (this._caretTokenIndex !== -1) {
+            this.attachAccessibleToEntities(entities);
+        }
+        this._entityStack.clear();
+    }
+
+    /**
+     * Adds accessibility markers to entities
+     * @param entities The list of entities to process
+     */
+    protected attachAccessibleToEntities(entities: EntityContext[]): void {
+        if (!entities.length) {
+            return;
+        }
+
+        for (const entity of entities) {
+            if (entity.isAccessible !== undefined) {
+                continue;
+            }
+
+            const entityScopeDepth = entity.belongStmt.scopeDepth ?? 0;
+
+            if (entity.entityContextType === EntityContextType.TABLE) {
+                entity.isAccessible =
+                    !!entity.belongStmt.isContainCaret &&
+                    entityScopeDepth === this._caretStmtScopeDepth;
+            } else {
+                entity.isAccessible = null;
+            }
+
+            // Recursively process related entities
+            if (entity.relatedEntities) {
+                this.attachAccessibleToEntities(entity.relatedEntities);
+            }
+
+            // Process columns of the table
+            if ((entity as CommonEntityContext).columns) {
+                const columnEntities = (entity as CommonEntityContext).columns || [];
+                this.attachAccessibleToEntities(columnEntities);
+            }
+        }
+    }
+
+    /**
+     * Attach query result to column if the column is derived from expression.
+     */
+    protected attachQueryResultToColumn(
+        column: ColumnEntityContext,
+        queryResults: CommonEntityContext[]
+    ): void {
+        const relatedEntities = queryResults.filter((queryResult) =>
+            isEntityInScope(queryResult, column)
+        );
+        column.relatedEntities = relatedEntities;
+    }
+
+    /**
+     * Attach related columns to query result
+     */
+    protected attachColumnsToQueryResult(
+        queryResult: CommonEntityContext,
+        columns: ColumnEntityContext[]
+    ): void {
+        const relatedColumns = columns.filter(
+            (column) => column.belongStmt === queryResult.belongStmt
+        );
+        queryResult.columns = relatedColumns;
+    }
+
+    /**
+     * Attach query result to table if the table is derived from expression.
+     */
+    protected attachQueryResultToTable(
+        table: CommonEntityContext,
+        queryResults: CommonEntityContext[]
+    ): void {
+        const relatedQueryResults = queryResults.filter((queryResult) =>
+            isEntityInScope(queryResult, table)
+        );
+        table.relatedEntities = relatedQueryResults;
+    }
+
+    /**
+     * Gets query result entities inside a statement
+     * @param stmt The statement to search within
+     * @returns Array of query result entity contexts
+     */
+    protected getQueryResultEntitiesInsideStmt(stmt: StmtContext): CommonEntityContext[] {
+        return this.getEntities()
+            .filter(
+                (entity) =>
+                    entity.entityContextType === EntityContextType.QUERY_RESULT &&
+                    entity.belongStmt.parentStmt === stmt
+            )
+            .filter(isCommonEntityContext);
+    }
+
     /**
      * The antlr4 will ignore hidden tokens, if we type whitespace at the end of a statement,
      * the whitespace token will not as stop token, so we consider the whitespace token as a part of the nonhidden token in front of it
@@ -302,6 +511,7 @@ export abstract class EntityCollector {
     protected getPrevNonHiddenTokenIndex(caretTokenIndex: number) {
         if (this._allTokens[caretTokenIndex].channel !== Token.HIDDEN_CHANNEL)
             return caretTokenIndex;
+
         for (let i = caretTokenIndex - 1; i >= 0; i--) {
             const token = this._allTokens[i];
             if (token.channel !== Token.HIDDEN_CHANNEL) {
@@ -309,18 +519,24 @@ export abstract class EntityCollector {
                 return token.text === ';' ? Infinity : token.tokenIndex;
             }
         }
+
         return Infinity;
     }
 
     protected pushStmt(ctx: ParserRuleContext, type: StmtContextType) {
         let isContainCaret: boolean | undefined;
+
         if (this._caretTokenIndex >= 0) {
             isContainCaret =
                 !!ctx.start &&
                 !!ctx.stop &&
                 ctx.start.tokenIndex <= this._caretTokenIndex &&
                 ctx.stop.tokenIndex >= this.getPrevNonHiddenTokenIndex(this._caretTokenIndex);
+            if (isContainCaret && type !== StmtContextType.COMMON_STMT) {
+                this._caretStmtScopeDepth++;
+            }
         }
+
         const stmtContext = toStmtContext(
             ctx,
             type,
@@ -329,6 +545,7 @@ export abstract class EntityCollector {
             this._stmtStack.peek(),
             isContainCaret
         );
+
         if (stmtContext) {
             if (
                 this._stmtStack.isEmpty() ||
@@ -344,22 +561,38 @@ export abstract class EntityCollector {
 
     protected popStmt() {
         const stmtContext = this._stmtStack.pop();
-        if (stmtContext && this._rootStmt === stmtContext) {
-            this._rootStmt = this._stmtStack.peek();
+        if (stmtContext) {
+            if (stmtContext.stmtContextType === StmtContextType.COMMON_STMT) {
+                this._rootStmt = this._stmtStack.peek();
+            }
             if (!this._entityStack.isEmpty()) {
                 this.combineEntitiesAndAdd(stmtContext);
+            }
+            // If the current statement contains the caret and its scope depth equals the caret statement's scope depth
+            // then set it as the nearest statement containing the caret
+            if (
+                stmtContext.isContainCaret &&
+                stmtContext.scopeDepth === this._caretStmtScopeDepth
+            ) {
+                this._caretStmt = stmtContext;
             }
         }
         return stmtContext;
     }
 
-    protected pushEntity(ctx: ParserRuleContext, type: EntityContextType, attrInfo?: AttrInfo[]) {
+    protected pushEntity(
+        ctx: ParserRuleContext,
+        type: EntityContextType,
+        attrInfo?: AttrInfo[],
+        metaInfo?: MetaInfo
+    ) {
         const entityContext = toEntityContext(
             ctx,
             type,
             this._input,
             this._stmtStack.peek(),
-            attrInfo
+            attrInfo,
+            metaInfo
         );
         if (entityContext) {
             if (this._stmtStack.isEmpty()) {
@@ -407,8 +640,107 @@ export abstract class EntityCollector {
             stmtContext.stmtContextType === StmtContextType.CREATE_TABLE_STMT
         ) {
             return this.combineCreateTableOrViewStmtEntities(stmtContext, entitiesInsideStmt);
+        } else if (stmtContext.stmtContextType === StmtContextType.SELECT_STMT) {
+            const tableSourceEntities = this.combineFromTableSource(
+                stmtContext,
+                entitiesInsideStmt
+            );
+            const queryResultEntities = this.combineQueryResultStmtEntities(
+                stmtContext,
+                entitiesInsideStmt
+            );
+            const otherEntities = entitiesInsideStmt.filter(
+                (entity) =>
+                    ![
+                        EntityContextType.QUERY_RESULT,
+                        EntityContextType.TABLE,
+                        EntityContextType.COLUMN,
+                    ].includes(entity.entityContextType)
+            );
+            return Array.from(
+                new Set([...tableSourceEntities, ...queryResultEntities, ...otherEntities])
+            );
+        } else {
+            // Do not collect column and queryResult entities if they are not inside a select statement
+            return entitiesInsideStmt.filter(
+                (entity) =>
+                    entity.entityContextType !== EntityContextType.COLUMN &&
+                    entity.entityContextType !== EntityContextType.QUERY_RESULT
+            );
         }
-        return entitiesInsideStmt;
+    }
+
+    protected combineQueryResultStmtEntities(
+        stmtContext: StmtContext,
+        entitiesInsideStmt: EntityContext[]
+    ): EntityContext[] {
+        if (!stmtContext || !entitiesInsideStmt?.length) {
+            return [];
+        }
+
+        const columnEntities: ColumnEntityContext[] = [];
+        const relatedTableEntities: CommonEntityContext[] = [];
+        const finalEntities: EntityContext[] = [];
+        const queryResultEntitiesInsideStmt: CommonEntityContext[] =
+            this.getQueryResultEntitiesInsideStmt(stmtContext);
+
+        // Categorize and process entities
+        entitiesInsideStmt.forEach((entity) => {
+            if (entity.belongStmt !== stmtContext) return;
+            if (
+                entity.entityContextType === EntityContextType.QUERY_RESULT &&
+                isCommonEntityContext(entity)
+            ) {
+                finalEntities.push(entity);
+            } else if (
+                entity.entityContextType === EntityContextType.COLUMN &&
+                isColumnEntityContext(entity)
+            ) {
+                if (entity.declareType === ColumnDeclareType.EXPRESSION) {
+                    this.attachQueryResultToColumn(entity, queryResultEntitiesInsideStmt);
+                }
+                columnEntities.push(entity);
+            } else if (
+                entity.entityContextType === EntityContextType.TABLE &&
+                isCommonEntityContext(entity)
+            ) {
+                relatedTableEntities.push(entity);
+            }
+        });
+
+        // combine collected entities to query result entity
+        finalEntities.forEach((queryResultEntity) => {
+            this.attachColumnsToQueryResult(
+                queryResultEntity as CommonEntityContext,
+                columnEntities
+            );
+            queryResultEntity.relatedEntities = relatedTableEntities;
+        });
+
+        return finalEntities;
+    }
+
+    protected combineFromTableSource(
+        stmtContext: StmtContext,
+        entitiesInsideStmt: EntityContext[]
+    ): EntityContext[] {
+        const finalEntities: EntityContext[] = [];
+        const queryResultEntitiesInsideStmt = this.getQueryResultEntitiesInsideStmt(stmtContext);
+        const tableEntities = <CommonEntityContext[]>(
+            entitiesInsideStmt.filter(
+                (entity) => entity.entityContextType === EntityContextType.TABLE
+            )
+        );
+
+        tableEntities.forEach((table) => {
+            // If it's an EXPRESSION type (subquery), need to associate with QUERY_RESULT entities
+            if (table.declareType === TableDeclareType.EXPRESSION) {
+                this.attachQueryResultToTable(table, queryResultEntitiesInsideStmt);
+            }
+            finalEntities.push(table);
+        });
+
+        return finalEntities;
     }
 
     protected combineCreateTableOrViewStmtEntities(
@@ -417,34 +749,39 @@ export abstract class EntityCollector {
     ): EntityContext[] {
         const columns: EntityContext[] = [];
         const relatedEntities: EntityContext[] = [];
+        const queryResultEntitiesInsideStmt: EntityContext[] =
+            this.getQueryResultEntitiesInsideStmt(stmtContext);
         let mainEntity: EntityContext | null = null;
-        const finalEntities = entitiesInsideStmt.reduce((result, entity) => {
-            if (entity.belongStmt !== stmtContext) {
-                if (
-                    entity.entityContextType !== EntityContextType.COLUMN &&
-                    entity.entityContextType !== EntityContextType.COLUMN_CREATE
+        const finalEntities = [...entitiesInsideStmt, ...queryResultEntitiesInsideStmt].reduce(
+            (result, entity) => {
+                if (entity.belongStmt !== stmtContext) {
+                    if (
+                        entity.entityContextType !== EntityContextType.COLUMN &&
+                        entity.entityContextType !== EntityContextType.COLUMN_CREATE
+                    ) {
+                        relatedEntities.push(entity);
+                        result.push(entity);
+                    }
+                    return result;
+                }
+
+                if (entity.entityContextType === EntityContextType.COLUMN_CREATE) {
+                    columns.push(entity);
+                } else if (
+                    entity.entityContextType === EntityContextType.TABLE_CREATE ||
+                    entity.entityContextType === EntityContextType.VIEW_CREATE
                 ) {
+                    mainEntity = entity;
+                    result.push(entity);
+                    return result;
+                } else if (entity.entityContextType !== EntityContextType.COLUMN) {
                     relatedEntities.push(entity);
                     result.push(entity);
                 }
                 return result;
-            }
-
-            if (entity.entityContextType === EntityContextType.COLUMN_CREATE) {
-                columns.push(entity);
-            } else if (
-                entity.entityContextType === EntityContextType.TABLE_CREATE ||
-                entity.entityContextType === EntityContextType.VIEW_CREATE
-            ) {
-                mainEntity = entity;
-                result.push(entity);
-                return result;
-            } else if (entity.entityContextType !== EntityContextType.COLUMN) {
-                relatedEntities.push(entity);
-                result.push(entity);
-            }
-            return result;
-        }, [] as EntityContext[]);
+            },
+            [] as EntityContext[]
+        );
         if (mainEntity && columns.length) {
             if (isCommonEntityContext(mainEntity)) {
                 mainEntity = Object.assign(mainEntity, {

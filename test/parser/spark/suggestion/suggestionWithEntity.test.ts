@@ -27,10 +27,14 @@ describe('Spark SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = spark.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('my_db.tb');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('select with columns with trailing comma', () => {
@@ -48,7 +52,7 @@ describe('Spark SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = spark.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('students');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
@@ -69,14 +73,19 @@ describe('Spark SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = spark.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('insert_tb');
+        expect(entities.length).toBe(3);
+
+        expect(entities[0].text).toBe('from_tb');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('from_tb');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[2].text).toBe('insert_tb');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('insert into table as select with trailing comma', () => {
@@ -94,14 +103,15 @@ describe('Spark SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = spark.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('insert_tb');
+        expect(entities.length).toBe(3);
+
+        expect(entities[0].text).toBe('from_tb');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('from_tb');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+        expect(entities[2].text).toBe('insert_tb');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('create table as select with no column', () => {
@@ -119,14 +129,19 @@ describe('Spark SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = spark.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('sorted_census_data');
-        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities.length).toBe(3);
+
+        expect(entities[0].text).toBe('unsorted_census_data');
+        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('unsorted_census_data');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[2].text).toBe('sorted_census_data');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('create table as select with trailing comma', () => {
@@ -144,14 +159,15 @@ describe('Spark SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = spark.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('sorted_census_data');
-        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities.length).toBe(3);
+
+        expect(entities[0].text).toBe('unsorted_census_data');
+        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('unsorted_census_data');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+        expect(entities[2].text).toBe('sorted_census_data');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('isContainCaret should be truthy if caret position is whitespace at the end of statement', () => {
