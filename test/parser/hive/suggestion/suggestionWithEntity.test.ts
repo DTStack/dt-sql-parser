@@ -3,6 +3,7 @@ import path from 'path';
 import { HiveSQL } from 'src/parser/hive';
 import { CaretPosition, EntityContextType } from 'src/parser/common/types';
 import { commentOtherLine } from 'test/helper';
+import { AttrName } from 'src/parser/common/entityCollector';
 
 const syntaxSql = fs.readFileSync(
     path.join(__dirname, 'fixtures', 'suggestionWithEntity.sql'),
@@ -31,10 +32,14 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('tb1');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('select with columns with columns and trailing comma', () => {
@@ -52,7 +57,7 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('tb');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
@@ -73,10 +78,14 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('table_name_1');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.rootStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('from table select with with columns and trailing comma', () => {
@@ -94,7 +103,7 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('table_name_1');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.rootStmt.isContainCaret).toBeTruthy();
@@ -115,7 +124,7 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
+        expect(entities.length).toBe(3);
         expect(entities[0].text).toBe('a');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
@@ -125,6 +134,10 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
         expect(entities[1].belongStmt.rootStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[2].text).toBe('');
+        expect(entities[2].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('from joined table select with columns and trailing comma', () => {
@@ -142,7 +155,7 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
+        expect(entities.length).toBe(3);
         expect(entities[0].text).toBe('a');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
@@ -196,6 +209,7 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
+
         expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('page_view_stg');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
@@ -223,14 +237,28 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('insert_tb');
+        expect(entities.length).toBe(5);
+
+        expect(entities[0].text).toBe('inside_tb');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('inside_tb');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(entities[1].text).toBe('');
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[2].text).toBe('SELECT  FROM inside_tb');
+        expect(entities[2][AttrName.alias].text).toBe('subquery');
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[3].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(entities[3].text).toBe('col1, col2, country, state');
+        expect(entities[3].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[4].text).toBe('insert_tb');
+        expect(entities[4].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[4].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('insert into from nested query with columns and trailing comma', () => {
@@ -248,14 +276,18 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('insert_tb');
-        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+        const tableEntities = entities.filter(
+            (entity) => entity.entityContextType === EntityContextType.TABLE
+        );
+        expect(tableEntities.length).toBe(3);
 
-        expect(entities[1].text).toBe('inside_tb');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+        expect(tableEntities[0].text).toBe('inside_tb');
+        expect(tableEntities[0].entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntities[0].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(tableEntities[2].text).toBe('insert_tb');
+        expect(tableEntities[2].entityContextType).toBe(EntityContextType.TABLE);
+        expect(tableEntities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('create table as select with no column', () => {
@@ -273,14 +305,19 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('derived_table');
-        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities.length).toBe(3);
+
+        expect(entities[0].text).toBe('origin_table');
+        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('origin_table');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[2].text).toBe('derived_table');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('create table as select with columns and trailing comma', () => {
@@ -298,14 +335,16 @@ describe('Hive SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = hive.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('derived_table');
-        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+
+        expect(entities.length).toBe(3);
+
+        expect(entities[0].text).toBe('origin_table');
+        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('origin_table');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+        expect(entities[2].text).toBe('derived_table');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('isContainCaret should be truthy if caret position is whitespace at the end of statement', () => {
