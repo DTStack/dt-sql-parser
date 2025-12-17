@@ -558,13 +558,22 @@ functionNamePath
     | qualifiedName
     ;
 
+emptyColumn
+    :
+    ;
+
 columnNamePath
-    : qualifiedName
-    | {this.shouldMatchEmpty()}?
+    : {this.shouldMatchEmpty()}? emptyColumn
+    | qualifiedNameAllowEmpty
     ;
 
 columnName
     : qualifiedName
+    ;
+
+columnNameAllowEmpty
+    : {this.shouldMatchEmpty()}? emptyColumn
+    | qualifiedNameAllowEmpty
     ;
 
 tableOrViewPath
@@ -781,11 +790,11 @@ selectList
     ;
 
 whereClause
-    : KW_WHERE where=booleanExpression
+    : KW_WHERE (where=booleanExpression | columnNameAllowEmpty)
     ;
 
 havingClause
-    : KW_HAVING having=booleanExpression
+    : KW_HAVING (having=booleanExpression | columnNameAllowEmpty)
     ;
 
 groupBy
@@ -854,7 +863,7 @@ joinType
     ;
 
 joinCriteria
-    : KW_ON booleanExpression
+    : KW_ON (booleanExpression | columnNameAllowEmpty)
     | KW_USING LPAREN identifier (COMMA identifier)* RPAREN
     ;
 
@@ -1147,6 +1156,11 @@ objectType
 
 qualifiedName
     : identifier (DOT identifier)*
+    ;
+
+qualifiedNameAllowEmpty
+    : {this.shouldMatchEmpty()}? (identifier DOT emptyColumn | emptyColumn)
+    | identifier (DOT identifier)*
     ;
 
 principal

@@ -1122,7 +1122,7 @@ joinPart
     ;
 
 joinSpec
-    : (KW_ON expression)
+    : (KW_ON (expression | columnNamePathAllowEmpty))
     | KW_USING '(' columnNames ')'
     ;
 
@@ -1249,7 +1249,7 @@ selectLinesInto
     ;
 
 fromClause
-    : (KW_FROM tableSources)? (KW_WHERE whereExpr=expression)?
+    : (KW_FROM tableSources)? (KW_WHERE (whereExpr=expression | columnNamePathAllowEmpty))?
     ;
 
 groupByClause
@@ -2419,10 +2419,24 @@ columnNames
     : columnName (',' columnName)*
     ;
 
+emptyColumn
+    :
+    ;
+
 columnName
+    : uid (dottedIdAllowEmpty dottedIdAllowEmpty?)?
+    | .? dottedId dottedId?
+    | {this.shouldMatchEmpty()}? emptyColumn
+    ;
+
+columnNamePath
     : uid (dottedId dottedId?)?
     | .? dottedId dottedId?
-    | {this.shouldMatchEmpty()}?
+    ;
+
+columnNamePathAllowEmpty
+    : {this.shouldMatchEmpty()}? emptyColumn
+    | uid (dottedIdAllowEmpty dottedIdAllowEmpty?)?
     ;
 
 tableSpaceNameCreate
@@ -2558,6 +2572,12 @@ simpleId
 dottedId
     : DOT ID
     | '.' uid
+    ;
+
+dottedIdAllowEmpty
+    : DOT ID
+    | '.' uid
+    | {this.shouldMatchEmpty()}? DOT emptyColumn
     ;
 
 decimalLiteral
@@ -2998,7 +3018,7 @@ expressionAtom
     | left=expressionAtom jsonOperator right=expressionAtom # jsonExpressionAtom
     | left=expressionAtom bitOperator right=expressionAtom  # bitExpressionAtom
     | left=expressionAtom mathOperator right=expressionAtom # mathExpressionAtom
-    | columnName                                            # columnNameExpressionAtom
+    | columnNamePath                                        # columnNameExpressionAtom
     ;
 
 unaryOperator

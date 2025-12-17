@@ -425,6 +425,7 @@ import { RoutineNameCreateContext } from "./PostgreSqlParser.js";
 import { RoutineNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
+import { EmptyColumnContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
 import { ColumnNamePathContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
@@ -4723,6 +4724,16 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitProcedureNameCreate?: (ctx: ProcedureNameCreateContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    enterEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    exitEmptyColumn?: (ctx: EmptyColumnContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.columnName`.
      * @param ctx the parse tree

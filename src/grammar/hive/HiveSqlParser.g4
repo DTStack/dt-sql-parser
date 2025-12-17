@@ -754,12 +754,17 @@ columnNameList
     ;
 
 columnName
-    : poolPath
-    | {this.shouldMatchEmpty()}?
+    : poolPathAllowEmpty
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnNamePath
     : poolPath
+    ;
+
+columnNamePathAllowEmpty
+    : poolPathAllowEmpty
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnNameCreate
@@ -1346,7 +1351,10 @@ atomjoinSource
 
 joinSource
     : atomjoinSource (
-        joinToken joinSourcePart (KW_ON expression | KW_USING columnParenthesesList)?
+        joinToken joinSourcePart (
+            KW_ON (expression | columnNamePathAllowEmpty (EQUAL columnNamePathAllowEmpty)?)
+            | KW_USING columnParenthesesList
+        )?
     )*
     ;
 
@@ -1469,7 +1477,7 @@ Rules for parsing whereClause
  where a=b and ...
 */
 whereClause
-    : KW_WHERE expression
+    : KW_WHERE (expression | columnNamePathAllowEmpty)
     ;
 
 /**
@@ -1600,7 +1608,7 @@ groupingSetExpression
     ;
 
 havingClause
-    : KW_HAVING expression
+    : KW_HAVING (expression | columnNamePathAllowEmpty)
     ;
 
 qualifyClause
@@ -2425,8 +2433,17 @@ decimal
     | KW_NUMERIC
     ;
 
+emptyColumn
+    :
+    ;
+
 poolPath
     : id_ (DOT id_)*
+    ;
+
+poolPathAllowEmpty
+    : id_ (DOT id_)*
+    | {this.shouldMatchEmpty()}? id_ (DOT emptyColumn)*
     ;
 
 triggerAtomExpression

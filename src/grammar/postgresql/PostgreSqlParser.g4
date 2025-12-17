@@ -2722,13 +2722,18 @@ procedureNameCreate
     | colId indirection
     ;
 
+emptyColumn
+    :
+    ;
+
 columnName
     : colId optIndirection
-    | {this.shouldMatchEmpty()}?
+    | {this.shouldMatchEmpty()}? (colId DOT emptyColumn | emptyColumn)
     ;
 
 columnNamePath
     : colId optIndirection
+    | {this.shouldMatchEmpty()}? (colId DOT emptyColumn | emptyColumn)
     ;
 
 columnNameCreate
