@@ -34,8 +34,10 @@ import { CreateTableAsSelectContext } from "./FlinkSqlParser.js";
 import { ColumnOptionDefinitionContext } from "./FlinkSqlParser.js";
 import { PhysicalColumnDefinitionContext } from "./FlinkSqlParser.js";
 import { ColumnNameCreateContext } from "./FlinkSqlParser.js";
+import { EmptyColumnContext } from "./FlinkSqlParser.js";
 import { ColumnNameContext } from "./FlinkSqlParser.js";
 import { ColumnNamePathContext } from "./FlinkSqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./FlinkSqlParser.js";
 import { ColumnNameListContext } from "./FlinkSqlParser.js";
 import { ColumnTypeContext } from "./FlinkSqlParser.js";
 import { LengthOneDimensionContext } from "./FlinkSqlParser.js";
@@ -210,6 +212,7 @@ import { TablePathContext } from "./FlinkSqlParser.js";
 import { ViewPathContext } from "./FlinkSqlParser.js";
 import { ViewPathCreateContext } from "./FlinkSqlParser.js";
 import { UidContext } from "./FlinkSqlParser.js";
+import { UidAllowEmptyContext } from "./FlinkSqlParser.js";
 import { WithOptionContext } from "./FlinkSqlParser.js";
 import { IfNotExistsContext } from "./FlinkSqlParser.js";
 import { IfExistsContext } from "./FlinkSqlParser.js";
@@ -503,6 +506,16 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      */
     exitColumnNameCreate?: (ctx: ColumnNameCreateContext) => void;
     /**
+     * Enter a parse tree produced by `FlinkSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    enterEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    exitEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
      * Enter a parse tree produced by `FlinkSqlParser.columnName`.
      * @param ctx the parse tree
      */
@@ -522,6 +535,16 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `FlinkSqlParser.columnNameList`.
      * @param ctx the parse tree
@@ -2322,6 +2345,16 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitUid?: (ctx: UidContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.uidAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterUidAllowEmpty?: (ctx: UidAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.uidAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitUidAllowEmpty?: (ctx: UidAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `FlinkSqlParser.withOption`.
      * @param ctx the parse tree

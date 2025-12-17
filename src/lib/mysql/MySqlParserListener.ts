@@ -541,7 +541,10 @@ import { UserOrRoleNamesContext } from "./MySqlParser.js";
 import { UserOrRoleNameContext } from "./MySqlParser.js";
 import { ColumnNameCreateContext } from "./MySqlParser.js";
 import { ColumnNamesContext } from "./MySqlParser.js";
+import { EmptyColumnContext } from "./MySqlParser.js";
 import { ColumnNameContext } from "./MySqlParser.js";
+import { ColumnNamePathContext } from "./MySqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./MySqlParser.js";
 import { TableSpaceNameCreateContext } from "./MySqlParser.js";
 import { TableSpaceNameContext } from "./MySqlParser.js";
 import { PartitionNameCreateContext } from "./MySqlParser.js";
@@ -566,6 +569,7 @@ import { UidListContext } from "./MySqlParser.js";
 import { UidContext } from "./MySqlParser.js";
 import { SimpleIdContext } from "./MySqlParser.js";
 import { DottedIdContext } from "./MySqlParser.js";
+import { DottedIdAllowEmptyContext } from "./MySqlParser.js";
 import { DecimalLiteralContext } from "./MySqlParser.js";
 import { FileSizeLiteralContext } from "./MySqlParser.js";
 import { StringLiteralContext } from "./MySqlParser.js";
@@ -6482,6 +6486,16 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitColumnNames?: (ctx: ColumnNamesContext) => void;
     /**
+     * Enter a parse tree produced by `MySqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    enterEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    exitEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
      * Enter a parse tree produced by `MySqlParser.columnName`.
      * @param ctx the parse tree
      */
@@ -6491,6 +6505,26 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Enter a parse tree produced by `MySqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.tableSpaceNameCreate`.
      * @param ctx the parse tree
@@ -6731,6 +6765,16 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitDottedId?: (ctx: DottedIdContext) => void;
+    /**
+     * Enter a parse tree produced by `MySqlParser.dottedIdAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterDottedIdAllowEmpty?: (ctx: DottedIdAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.dottedIdAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitDottedIdAllowEmpty?: (ctx: DottedIdAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.decimalLiteral`.
      * @param ctx the parse tree

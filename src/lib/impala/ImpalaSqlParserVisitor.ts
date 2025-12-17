@@ -104,8 +104,10 @@ import { DatabaseNamePathContext } from "./ImpalaSqlParser.js";
 import { TableNamePathContext } from "./ImpalaSqlParser.js";
 import { ViewNamePathContext } from "./ImpalaSqlParser.js";
 import { FunctionNamePathContext } from "./ImpalaSqlParser.js";
+import { EmptyColumnContext } from "./ImpalaSqlParser.js";
 import { ColumnNamePathContext } from "./ImpalaSqlParser.js";
 import { ColumnNameContext } from "./ImpalaSqlParser.js";
+import { ColumnNameAllowEmptyContext } from "./ImpalaSqlParser.js";
 import { TableOrViewPathContext } from "./ImpalaSqlParser.js";
 import { CreateCommonItemContext } from "./ImpalaSqlParser.js";
 import { AssignmentListContext } from "./ImpalaSqlParser.js";
@@ -249,6 +251,7 @@ import { PathSpecificationContext } from "./ImpalaSqlParser.js";
 import { PrivilegeContext } from "./ImpalaSqlParser.js";
 import { ObjectTypeContext } from "./ImpalaSqlParser.js";
 import { QualifiedNameContext } from "./ImpalaSqlParser.js";
+import { QualifiedNameAllowEmptyContext } from "./ImpalaSqlParser.js";
 import { RolePrincipalContext } from "./ImpalaSqlParser.js";
 import { UserPrincipalContext } from "./ImpalaSqlParser.js";
 import { GroupPrincipalContext } from "./ImpalaSqlParser.js";
@@ -848,6 +851,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitFunctionNamePath?: (ctx: FunctionNamePathContext) => Result;
     /**
+     * Visit a parse tree produced by `ImpalaSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
+    /**
      * Visit a parse tree produced by `ImpalaSqlParser.columnNamePath`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -859,6 +868,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.columnNameAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNameAllowEmpty?: (ctx: ColumnNameAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.tableOrViewPath`.
      * @param ctx the parse tree
@@ -1778,6 +1793,12 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitQualifiedName?: (ctx: QualifiedNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `ImpalaSqlParser.qualifiedNameAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitQualifiedNameAllowEmpty?: (ctx: QualifiedNameAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by the `rolePrincipal`
      * labeled alternative in `ImpalaSqlParser.principal`.

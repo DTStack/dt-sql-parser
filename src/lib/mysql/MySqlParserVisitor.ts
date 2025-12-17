@@ -541,7 +541,10 @@ import { UserOrRoleNamesContext } from "./MySqlParser.js";
 import { UserOrRoleNameContext } from "./MySqlParser.js";
 import { ColumnNameCreateContext } from "./MySqlParser.js";
 import { ColumnNamesContext } from "./MySqlParser.js";
+import { EmptyColumnContext } from "./MySqlParser.js";
 import { ColumnNameContext } from "./MySqlParser.js";
+import { ColumnNamePathContext } from "./MySqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./MySqlParser.js";
 import { TableSpaceNameCreateContext } from "./MySqlParser.js";
 import { TableSpaceNameContext } from "./MySqlParser.js";
 import { PartitionNameCreateContext } from "./MySqlParser.js";
@@ -566,6 +569,7 @@ import { UidListContext } from "./MySqlParser.js";
 import { UidContext } from "./MySqlParser.js";
 import { SimpleIdContext } from "./MySqlParser.js";
 import { DottedIdContext } from "./MySqlParser.js";
+import { DottedIdAllowEmptyContext } from "./MySqlParser.js";
 import { DecimalLiteralContext } from "./MySqlParser.js";
 import { FileSizeLiteralContext } from "./MySqlParser.js";
 import { StringLiteralContext } from "./MySqlParser.js";
@@ -4122,11 +4126,29 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitColumnNames?: (ctx: ColumnNamesContext) => Result;
     /**
+     * Visit a parse tree produced by `MySqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
+    /**
      * Visit a parse tree produced by `MySqlParser.columnName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.tableSpaceNameCreate`.
      * @param ctx the parse tree
@@ -4271,6 +4293,12 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitDottedId?: (ctx: DottedIdContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.dottedIdAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDottedIdAllowEmpty?: (ctx: DottedIdAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.decimalLiteral`.
      * @param ctx the parse tree

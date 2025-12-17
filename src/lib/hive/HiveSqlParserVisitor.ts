@@ -138,6 +138,7 @@ import { ColumnNameColonTypeListContext } from "./HiveSqlParser.js";
 import { ColumnNameListContext } from "./HiveSqlParser.js";
 import { ColumnNameContext } from "./HiveSqlParser.js";
 import { ColumnNamePathContext } from "./HiveSqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./HiveSqlParser.js";
 import { ColumnNameCreateContext } from "./HiveSqlParser.js";
 import { ExtColumnNameContext } from "./HiveSqlParser.js";
 import { ColumnNameOrderListContext } from "./HiveSqlParser.js";
@@ -358,7 +359,9 @@ import { HourContext } from "./HiveSqlParser.js";
 import { MinuteContext } from "./HiveSqlParser.js";
 import { SecondContext } from "./HiveSqlParser.js";
 import { DecimalContext } from "./HiveSqlParser.js";
+import { EmptyColumnContext } from "./HiveSqlParser.js";
 import { PoolPathContext } from "./HiveSqlParser.js";
+import { PoolPathAllowEmptyContext } from "./HiveSqlParser.js";
 import { TriggerAtomExpressionContext } from "./HiveSqlParser.js";
 import { TriggerActionExpressionContext } from "./HiveSqlParser.js";
 import { PoolAssignContext } from "./HiveSqlParser.js";
@@ -1153,6 +1156,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.columnNameCreate`.
      * @param ctx the parse tree
@@ -2478,11 +2487,23 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitDecimal?: (ctx: DecimalContext) => Result;
     /**
+     * Visit a parse tree produced by `HiveSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
+    /**
      * Visit a parse tree produced by `HiveSqlParser.poolPath`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitPoolPath?: (ctx: PoolPathContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.poolPathAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPoolPathAllowEmpty?: (ctx: PoolPathAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.triggerAtomExpression`.
      * @param ctx the parse tree

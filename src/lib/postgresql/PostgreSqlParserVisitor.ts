@@ -425,6 +425,7 @@ import { RoutineNameCreateContext } from "./PostgreSqlParser.js";
 import { RoutineNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
+import { EmptyColumnContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
 import { ColumnNamePathContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
@@ -3031,6 +3032,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitProcedureNameCreate?: (ctx: ProcedureNameCreateContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.columnName`.
      * @param ctx the parse tree
