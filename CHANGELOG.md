@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.1](https://github.com/DTStack/dt-sql-parser/compare/v4.3.1...v4.4.1) (2025-12-22)
+
+
+### Features
+
+* mark as entityCollecting in getAllEntities context to allow empty column ([ba6fbbb](https://github.com/DTStack/dt-sql-parser/commit/ba6fbbbe90bee79a7bba22350c3d50d6c9205b0d))
+* remove noReserved keywords in completions ([cf1957e](https://github.com/DTStack/dt-sql-parser/commit/cf1957e66896fbcb587f6038242e8f174b7045ff))
+
+
+### Bug Fixes
+
+* [#438](https://github.com/DTStack/dt-sql-parser/issues/438) syntaxContextType not duplicate ([4705620](https://github.com/DTStack/dt-sql-parser/commit/47056209150ef6aaade7c612700b7a289c279208))
+* **flink:** [#442](https://github.com/DTStack/dt-sql-parser/issues/442) fix flink's insert values() can't support function problem ([98ab7d4](https://github.com/DTStack/dt-sql-parser/commit/98ab7d459b189b7ef07cc1bf820524594a0cc78c))
+* **postgresql:** [#432](https://github.com/DTStack/dt-sql-parser/issues/432) remove error rule ([3684ae7](https://github.com/DTStack/dt-sql-parser/commit/3684ae71e92cefe4bac18174b757e162d3f89457))
+* **trino:** add selectItem rule to candidates for column suggestions ([81a361f](https://github.com/DTStack/dt-sql-parser/commit/81a361fb8e45e81c8826cba212f0007443bf12b5))
+
 ## [4.4.0](https://github.com/DTStack/dt-sql-parser/compare/v4.4.0-beta.0...v4.4.0) (2025-11-26)
 
 ## [4.4.0-beta.0](https://github.com/DTStack/dt-sql-parser/compare/v4.3.1...v4.4.0-beta.0) (2025-11-18)
