@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0-beta.0](https://github.com/DTStack/dt-sql-parser/compare/v4.4.1...v4.5.0-beta.0) (2025-12-30)
+
+
+### Features
+
+* support query result and derived table entity collecting ([#434](https://github.com/DTStack/dt-sql-parser/issues/434)) ([a176253](https://github.com/DTStack/dt-sql-parser/commit/a176253799b514fcd169c82f2706c2fe2810d85c))
+
 ### [4.4.1](https://github.com/DTStack/dt-sql-parser/compare/v4.4.0...v4.4.1) (2025-12-22)
 
 ### Bug Fixes
