@@ -146,6 +146,7 @@ import { ExistsContext } from "./FlinkSqlParser.js";
 import { LogicalNestedContext } from "./FlinkSqlParser.js";
 import { LogicalBinaryContext } from "./FlinkSqlParser.js";
 import { PredicateContext } from "./FlinkSqlParser.js";
+import { JsonFunctionBranchContext } from "./FlinkSqlParser.js";
 import { LikePredicateContext } from "./FlinkSqlParser.js";
 import { ValueExpressionDefaultContext } from "./FlinkSqlParser.js";
 import { ComparisonContext } from "./FlinkSqlParser.js";
@@ -171,6 +172,10 @@ import { FunctionNameContext } from "./FlinkSqlParser.js";
 import { FunctionNameAndParamsContext } from "./FlinkSqlParser.js";
 import { FunctionNameWithParamsContext } from "./FlinkSqlParser.js";
 import { FunctionParamContext } from "./FlinkSqlParser.js";
+import { JsonValueParamsContext } from "./FlinkSqlParser.js";
+import { JsonQueryParamsContext } from "./FlinkSqlParser.js";
+import { JsonObjectParamsContext } from "./FlinkSqlParser.js";
+import { JsonArrayParamsContext } from "./FlinkSqlParser.js";
 import { DereferenceDefinitionContext } from "./FlinkSqlParser.js";
 import { CorrelationNameContext } from "./FlinkSqlParser.js";
 import { QualifiedNameContext } from "./FlinkSqlParser.js";
@@ -1072,6 +1077,12 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitPredicate?: (ctx: PredicateContext) => Result;
     /**
+     * Visit a parse tree produced by `FlinkSqlParser.jsonFunctionBranch`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonFunctionBranch?: (ctx: JsonFunctionBranchContext) => Result;
+    /**
      * Visit a parse tree produced by `FlinkSqlParser.likePredicate`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1239,6 +1250,30 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitFunctionParam?: (ctx: FunctionParamContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.jsonValueParams`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonValueParams?: (ctx: JsonValueParamsContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.jsonQueryParams`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonQueryParams?: (ctx: JsonQueryParamsContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.jsonObjectParams`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonObjectParams?: (ctx: JsonObjectParamsContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.jsonArrayParams`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJsonArrayParams?: (ctx: JsonArrayParamsContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.dereferenceDefinition`.
      * @param ctx the parse tree
