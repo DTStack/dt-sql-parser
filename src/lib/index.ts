@@ -18,3 +18,6 @@ export { TrinoSqlVisitor } from './trino/TrinoSqlVisitor';
 
 export { ImpalaSqlParserListener } from './impala/ImpalaSqlParserListener';
 export { ImpalaSqlParserVisitor } from './impala/ImpalaSqlParserVisitor';
+
+export { SqlParserListener } from './sql/SqlParserListener';
+export { SqlParserVisitor } from './sql/SqlParserVisitor';
