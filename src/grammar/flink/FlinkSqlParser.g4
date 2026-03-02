@@ -649,7 +649,9 @@ orderByClause
     ;
 
 orderItemDefinition
-    : columnName ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
+    : (columnName | valueExpression) ordering=(KW_ASC | KW_DESC)? (
+        KW_NULLS nullOrder=(KW_LAST | KW_FIRST)
+    )?
     ;
 
 limitClause
@@ -699,11 +701,24 @@ patternVariablesDefinition
 
 windowFrame
     : KW_RANGE KW_BETWEEN timeIntervalExpression frameBound
+    | (KW_ROWS | KW_RANGE) KW_BETWEEN frameStart KW_AND frameEnd
     | KW_ROWS KW_BETWEEN DIG_LITERAL frameBound
     ;
 
 frameBound
     : KW_PRECEDING KW_AND KW_CURRENT KW_ROW
+    ;
+
+frameStart
+    : KW_UNBOUNDED KW_PRECEDING
+    | DIG_LITERAL KW_PRECEDING
+    | KW_CURRENT KW_ROW
+    ;
+
+frameEnd
+    : KW_CURRENT KW_ROW
+    | DIG_LITERAL KW_FOLLOWING
+    | KW_UNBOUNDED KW_FOLLOWING
     ;
 
 withinClause
