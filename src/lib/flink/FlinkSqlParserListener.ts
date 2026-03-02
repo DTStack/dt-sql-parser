@@ -165,6 +165,7 @@ import { SubqueryExpressionContext } from "./FlinkSqlParser.js";
 import { CastContext } from "./FlinkSqlParser.js";
 import { ConstantDefaultContext } from "./FlinkSqlParser.js";
 import { ParenthesizedExpressionContext } from "./FlinkSqlParser.js";
+import { ExtractContext } from "./FlinkSqlParser.js";
 import { FunctionCallContext } from "./FlinkSqlParser.js";
 import { SearchedCaseContext } from "./FlinkSqlParser.js";
 import { PositionContext } from "./FlinkSqlParser.js";
@@ -1852,6 +1853,18 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => void;
+    /**
+     * Enter a parse tree produced by the `extract`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterExtract?: (ctx: ExtractContext) => void;
+    /**
+     * Exit a parse tree produced by the `extract`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitExtract?: (ctx: ExtractContext) => void;
     /**
      * Enter a parse tree produced by the `functionCall`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.

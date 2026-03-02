@@ -803,11 +803,11 @@ primaryExpression
     | functionCallExpression               # functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
-    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
-    | columnNamePath                                                      # columnReference
-    | dereferenceDefinition                                               # dereference
-    | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression
-    // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract
+    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET              # subscript
+    | columnNamePath                                                                   # columnReference
+    | dereferenceDefinition                                                            # dereference
+    | LR_BRACKET expression RR_BRACKET                                                 # parenthesizedExpression
+    | KW_EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET # extract
     // | (SUBSTR | SUBSTRING) LR_BRACKET str=valueExpression (KW_FROM | COMMA) pos=valueExpression
     //   ((KW_FOR | COMMA) len=valueExpression)? RR_BRACKET                                                   #substring
     // | TRIM LR_BRACKET trimOption=(BOTH | LEADING | TRAILING)? (trimStr=valueExpression)?

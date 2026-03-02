@@ -68,4 +68,11 @@ select
 from rocketmq_source
 ;
 
-
+INSERT INTO Paimon.iov_paimon_prd.ods_track_vcos_log_prs_hi
+SELECT
+vin AS vin, -- 车架号
+-- Kafka时间戳转毫秒级（含毫秒精度）
+UNIX_TIMESTAMP(DATE_FORMAT(kafka_timestamp, 'yyyy-MM-dd HH:mm:ss')) * 1000
++ EXTRACT(MILLISECOND FROM kafka_timestamp) AS kafka_ts -- Kafka时间戳（毫秒）
+FROM ods_track_vcos_log_prs_rt2
+WHERE JSON_VALUE(parse_track_pb(data), '$.eid') = '1570001000';

@@ -165,6 +165,7 @@ import { SubqueryExpressionContext } from "./FlinkSqlParser.js";
 import { CastContext } from "./FlinkSqlParser.js";
 import { ConstantDefaultContext } from "./FlinkSqlParser.js";
 import { ParenthesizedExpressionContext } from "./FlinkSqlParser.js";
+import { ExtractContext } from "./FlinkSqlParser.js";
 import { FunctionCallContext } from "./FlinkSqlParser.js";
 import { SearchedCaseContext } from "./FlinkSqlParser.js";
 import { PositionContext } from "./FlinkSqlParser.js";
@@ -1206,6 +1207,13 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => Result;
+    /**
+     * Visit a parse tree produced by the `extract`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitExtract?: (ctx: ExtractContext) => Result;
     /**
      * Visit a parse tree produced by the `functionCall`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.
