@@ -138,6 +138,8 @@ import { AfterMatchStrategyContext } from "./FlinkSqlParser.js";
 import { PatternVariablesDefinitionContext } from "./FlinkSqlParser.js";
 import { WindowFrameContext } from "./FlinkSqlParser.js";
 import { FrameBoundContext } from "./FlinkSqlParser.js";
+import { FrameStartContext } from "./FlinkSqlParser.js";
+import { FrameEndContext } from "./FlinkSqlParser.js";
 import { WithinClauseContext } from "./FlinkSqlParser.js";
 import { ExpressionContext } from "./FlinkSqlParser.js";
 import { LogicalNotContext } from "./FlinkSqlParser.js";
@@ -163,6 +165,7 @@ import { SubqueryExpressionContext } from "./FlinkSqlParser.js";
 import { CastContext } from "./FlinkSqlParser.js";
 import { ConstantDefaultContext } from "./FlinkSqlParser.js";
 import { ParenthesizedExpressionContext } from "./FlinkSqlParser.js";
+import { ExtractContext } from "./FlinkSqlParser.js";
 import { FunctionCallContext } from "./FlinkSqlParser.js";
 import { SearchedCaseContext } from "./FlinkSqlParser.js";
 import { PositionContext } from "./FlinkSqlParser.js";
@@ -1543,6 +1546,26 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      */
     exitFrameBound?: (ctx: FrameBoundContext) => void;
     /**
+     * Enter a parse tree produced by `FlinkSqlParser.frameStart`.
+     * @param ctx the parse tree
+     */
+    enterFrameStart?: (ctx: FrameStartContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.frameStart`.
+     * @param ctx the parse tree
+     */
+    exitFrameStart?: (ctx: FrameStartContext) => void;
+    /**
+     * Enter a parse tree produced by `FlinkSqlParser.frameEnd`.
+     * @param ctx the parse tree
+     */
+    enterFrameEnd?: (ctx: FrameEndContext) => void;
+    /**
+     * Exit a parse tree produced by `FlinkSqlParser.frameEnd`.
+     * @param ctx the parse tree
+     */
+    exitFrameEnd?: (ctx: FrameEndContext) => void;
+    /**
      * Enter a parse tree produced by `FlinkSqlParser.withinClause`.
      * @param ctx the parse tree
      */
@@ -1830,6 +1853,18 @@ export class FlinkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => void;
+    /**
+     * Enter a parse tree produced by the `extract`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterExtract?: (ctx: ExtractContext) => void;
+    /**
+     * Exit a parse tree produced by the `extract`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitExtract?: (ctx: ExtractContext) => void;
     /**
      * Enter a parse tree produced by the `functionCall`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.

@@ -138,6 +138,8 @@ import { AfterMatchStrategyContext } from "./FlinkSqlParser.js";
 import { PatternVariablesDefinitionContext } from "./FlinkSqlParser.js";
 import { WindowFrameContext } from "./FlinkSqlParser.js";
 import { FrameBoundContext } from "./FlinkSqlParser.js";
+import { FrameStartContext } from "./FlinkSqlParser.js";
+import { FrameEndContext } from "./FlinkSqlParser.js";
 import { WithinClauseContext } from "./FlinkSqlParser.js";
 import { ExpressionContext } from "./FlinkSqlParser.js";
 import { LogicalNotContext } from "./FlinkSqlParser.js";
@@ -163,6 +165,7 @@ import { SubqueryExpressionContext } from "./FlinkSqlParser.js";
 import { CastContext } from "./FlinkSqlParser.js";
 import { ConstantDefaultContext } from "./FlinkSqlParser.js";
 import { ParenthesizedExpressionContext } from "./FlinkSqlParser.js";
+import { ExtractContext } from "./FlinkSqlParser.js";
 import { FunctionCallContext } from "./FlinkSqlParser.js";
 import { SearchedCaseContext } from "./FlinkSqlParser.js";
 import { PositionContext } from "./FlinkSqlParser.js";
@@ -1024,6 +1027,18 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitFrameBound?: (ctx: FrameBoundContext) => Result;
     /**
+     * Visit a parse tree produced by `FlinkSqlParser.frameStart`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFrameStart?: (ctx: FrameStartContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.frameEnd`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFrameEnd?: (ctx: FrameEndContext) => Result;
+    /**
      * Visit a parse tree produced by `FlinkSqlParser.withinClause`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1192,6 +1207,13 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitParenthesizedExpression?: (ctx: ParenthesizedExpressionContext) => Result;
+    /**
+     * Visit a parse tree produced by the `extract`
+     * labeled alternative in `FlinkSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitExtract?: (ctx: ExtractContext) => Result;
     /**
      * Visit a parse tree produced by the `functionCall`
      * labeled alternative in `FlinkSqlParser.primaryExpression`.

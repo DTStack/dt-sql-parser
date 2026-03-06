@@ -85,3 +85,9 @@ SELECT
 FROM user_behavior
 WHERE JSON_VALUE(event_data, '$.eventType' RETURNING STRING) IS NOT NULL
 ;
+
+SELECT * FROM orders ORDER BY price * quantity ASC LIMIT 10;
+SELECT *, COALESCE(quantity, 0) * price AS total_amount FROM orders ORDER BY (COALESCE(quantity, 0) * price) DESC;
+SELECT *, COALESCE(quantity, 0) * price AS total_amount FROM orders ORDER BY customer_id ASC, (COALESCE(quantity, 0) * price) DESC, order_time ASC;
+SELECT *, ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_time DESC) AS rn FROM orders ORDER BY rn ASC;
+SELECT *, SUM(quantity * price) OVER (PARTITION BY customer_id ORDER BY order_time ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total FROM orders ORDER BY running_total DESC;

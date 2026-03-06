@@ -649,7 +649,9 @@ orderByClause
     ;
 
 orderItemDefinition
-    : columnName ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
+    : (columnName | valueExpression) ordering=(KW_ASC | KW_DESC)? (
+        KW_NULLS nullOrder=(KW_LAST | KW_FIRST)
+    )?
     ;
 
 limitClause
@@ -699,11 +701,24 @@ patternVariablesDefinition
 
 windowFrame
     : KW_RANGE KW_BETWEEN timeIntervalExpression frameBound
+    | (KW_ROWS | KW_RANGE) KW_BETWEEN frameStart KW_AND frameEnd
     | KW_ROWS KW_BETWEEN DIG_LITERAL frameBound
     ;
 
 frameBound
     : KW_PRECEDING KW_AND KW_CURRENT KW_ROW
+    ;
+
+frameStart
+    : KW_UNBOUNDED KW_PRECEDING
+    | DIG_LITERAL KW_PRECEDING
+    | KW_CURRENT KW_ROW
+    ;
+
+frameEnd
+    : KW_CURRENT KW_ROW
+    | DIG_LITERAL KW_FOLLOWING
+    | KW_UNBOUNDED KW_FOLLOWING
     ;
 
 withinClause
@@ -788,11 +803,11 @@ primaryExpression
     | functionCallExpression               # functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
-    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
-    | columnNamePath                                                      # columnReference
-    | dereferenceDefinition                                               # dereference
-    | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression
-    // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract
+    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET              # subscript
+    | columnNamePath                                                                   # columnReference
+    | dereferenceDefinition                                                            # dereference
+    | LR_BRACKET expression RR_BRACKET                                                 # parenthesizedExpression
+    | KW_EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET # extract
     // | (SUBSTR | SUBSTRING) LR_BRACKET str=valueExpression (KW_FROM | COMMA) pos=valueExpression
     //   ((KW_FOR | COMMA) len=valueExpression)? RR_BRACKET                                                   #substring
     // | TRIM LR_BRACKET trimOption=(BOTH | LEADING | TRAILING)? (trimStr=valueExpression)?
