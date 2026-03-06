@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.2](https://github.com/DTStack/dt-sql-parser/compare/v4.4.1...v4.4.2) (2026-03-06)
+
+
+### Bug Fixes
+
+* **flink:** [#455](https://github.com/DTStack/dt-sql-parser/issues/455) fix json functions' params problem in flink ([12ef949](https://github.com/DTStack/dt-sql-parser/commit/12ef949339ffb0889e428c97c54149cd567b6ae8))
+* **flink:** some grammar rules ([#465](https://github.com/DTStack/dt-sql-parser/issues/465)) ([20e352c](https://github.com/DTStack/dt-sql-parser/commit/20e352cb32142c825ee086e36051ff9797798e09)), closes [#464](https://github.com/DTStack/dt-sql-parser/issues/464) [#464](https://github.com/DTStack/dt-sql-parser/issues/464) [#464](https://github.com/DTStack/dt-sql-parser/issues/464)
+
 ### [4.4.1](https://github.com/DTStack/dt-sql-parser/compare/v4.3.1...v4.4.1) (2025-12-22)
 
 
