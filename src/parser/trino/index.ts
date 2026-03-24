@@ -136,6 +136,7 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                 }
                 case TrinoSqlParser.RULE_columnName: {
                     if (
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_selectItem) ||
                         candidateRule.ruleList.includes(TrinoSqlParser.RULE_groupBy) ||
                         candidateRule.ruleList.includes(TrinoSqlParser.RULE_sortItem) ||
                         candidateRule.ruleList.includes(TrinoSqlParser.RULE_whereClause) ||
