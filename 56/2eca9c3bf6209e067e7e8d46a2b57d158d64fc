@@ -1,0 +1,36 @@
+src/grammar/generic/GenericSql.g4
+  07bf0f75c1dc7c40 317,339-340,837-840
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "562eca9c3bf6209e067e7e8d46a2b57d158d64fc",
+  "prompts": {
+    "07bf0f75c1dc7c40": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_2032ae430ffexB3nljztUIye97",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "liuxy0551",
+      "messages": [],
+      "total_additions": 7,
+      "total_deletions": 48,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    },
+    "3d696cf70e5842c4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_203420f11ffeiR3HmT5GEgmLGK",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "liuxy0551",
+      "messages": [],
+      "total_additions": 935,
+      "total_deletions": 0,
+      "accepted_lines": 887,
+      "overriden_lines": 1
+    }
+  }
+}
