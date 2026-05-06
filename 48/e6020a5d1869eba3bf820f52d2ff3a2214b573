@@ -1,0 +1,50 @@
+src/grammar/generic/GenericSql.g4
+  e41495e4bd949a40 1-62,64-339,430-619,625-824,826-935
+  3d696cf70e5842c4 63,340-429,621-623
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "48e6020a5d1869eba3bf820f52d2ff3a2214b573",
+  "prompts": {
+    "3d696cf70e5842c4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_203420f11ffeiR3HmT5GEgmLGK",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "liuxy0551",
+      "messages": [],
+      "total_additions": 22,
+      "total_deletions": 221,
+      "accepted_lines": 94,
+      "overriden_lines": 0
+    },
+    "780136ff7c8dacae": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_203b054e2ffe3lfzY24uT1u54J",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "liuxy0551",
+      "messages": [],
+      "total_additions": 1678,
+      "total_deletions": 1,
+      "accepted_lines": 1677,
+      "overriden_lines": 0
+    },
+    "e41495e4bd949a40": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_2034e667cffek6ZaNJziVq1Jv1",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "liuxy0551",
+      "messages": [],
+      "total_additions": 18699,
+      "total_deletions": 2846,
+      "accepted_lines": 721,
+      "overriden_lines": 1
+    }
+  }
+}
