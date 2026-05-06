@@ -314,6 +314,7 @@ literal
 // 标识符
 identifier
     : IDENTIFIER
+    | DIGIT_IDENTIFIER
     | QUOTED_IDENTIFIER
     | BACKQUOTED_IDENTIFIER
     | nonReserved
@@ -335,98 +336,52 @@ tableNameCreate
     : qualifiedName
     ;
 
-// 非保留关键字
+// 非保留关键字 — 可以用作标识符的关键字
+// 核心结构关键字 (SELECT, FROM, WHERE, CREATE, TABLE, INSERT, UPDATE, DELETE, DROP, ALTER, SET 等) 是保留的，不能用作标识符
 nonReserved
     : KW_ADD
     | KW_ALL
-    | KW_ALTER
-    | KW_AND
-    | KW_AS
     | KW_ASC
-    | KW_BETWEEN
     | KW_BIGINT
     | KW_BINARY
     | KW_BOOLEAN
     | KW_BY
-    | KW_CASE
-    | KW_CAST
     | KW_CHAR
-    | KW_CHECK
     | KW_COALESCE
     | KW_COLUMN
-    | KW_CONSTRAINT
-    | KW_CREATE
     | KW_CROSS
     | KW_DATE
     | KW_DECIMAL
     | KW_DEFAULT
-    | KW_DELETE
     | KW_DESC
-    | KW_DISTINCT
     | KW_DOUBLE
-    | KW_DROP
-    | KW_ELSE
-    | KW_END
-    | KW_ESCAPE
-    | KW_EXCEPT
-    | KW_EXISTS
     | KW_FALSE
     | KW_FIRST
     | KW_FLOAT
-    | KW_FOREIGN
-    | KW_FROM
     | KW_FULL
-    | KW_GROUP
-    | KW_HAVING
     | KW_IF
-    | KW_IN
-    | KW_INNER
-    | KW_INSERT
     | KW_INT
     | KW_INTEGER
-    | KW_INTO
-    | KW_INTERSECT
-    | KW_IS
-    | KW_JOIN
     | KW_KEY
     | KW_LAST
     | KW_LEFT
-    | KW_LIKE
     | KW_LIMIT
-    | KW_NOT
-    | KW_NULL
     | KW_NULLIF
     | KW_NULLS
     | KW_NUMERIC
     | KW_OFFSET
-    | KW_ON
-    | KW_OR
-    | KW_ORDER
     | KW_OUTER
-    | KW_PRIMARY
-    | KW_RECURSIVE
-    | KW_REFERENCES
-    | KW_RENAME
     | KW_RIGHT
-    | KW_SELECT
-    | KW_SET
     | KW_SMALLINT
-    | KW_TABLE
     | KW_TEXT
-    | KW_THEN
     | KW_TIME
     | KW_TIMESTAMP
     | KW_TINYINT
     | KW_TO
     | KW_TRUE
-    | KW_UNION
     | KW_UNIQUE
-    | KW_UPDATE
     | KW_VARCHAR
     | KW_VARBINARY
-    | KW_WHEN
-    | KW_WHERE
-    | KW_WITH
     ;
 
 // 关键字定义
@@ -877,6 +832,10 @@ DOUBLE_VALUE
 // 标识符
 IDENTIFIER
     : (LETTER | '_') (LETTER | DIGIT | '_')*
+    ;
+
+DIGIT_IDENTIFIER
+    : DIGIT (LETTER | DIGIT | '_')+
     ;
 
 QUOTED_IDENTIFIER
