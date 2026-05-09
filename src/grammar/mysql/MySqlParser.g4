@@ -1205,9 +1205,10 @@ selectElements
     ;
 
 selectElement
-    : tableAllColumns
-    | selectLiteralColumnName (KW_AS? alias=uid)?
-    | selectExpressionColumnName (KW_AS? alias=uid)?
+    : tableAllColumns                                # selectElement_star
+    | selectLiteralColumnName (KW_AS? alias=uid)?    # selectElement_label
+    | selectExpressionColumnName (KW_AS? alias=uid)? # selectElement_expr
+    | uid DOT {this.shouldMatchEmpty()}? emptyColumn # selectElement_dot_empty
     ;
 
 tableAllColumns
@@ -2424,7 +2425,7 @@ emptyColumn
     ;
 
 columnName
-    : uid (dottedIdAllowEmpty dottedIdAllowEmpty?)?
+    : uid (dottedId dottedId?)?
     | .? dottedId dottedId?
     | {this.shouldMatchEmpty()}? emptyColumn
     ;
@@ -2436,7 +2437,7 @@ columnNamePath
 
 columnNamePathAllowEmpty
     : {this.shouldMatchEmpty()}? emptyColumn
-    | uid (dottedIdAllowEmpty dottedIdAllowEmpty?)?
+    | uid (dottedId dottedId?)?
     ;
 
 tableSpaceNameCreate
@@ -2572,12 +2573,6 @@ simpleId
 dottedId
     : DOT ID
     | '.' uid
-    ;
-
-dottedIdAllowEmpty
-    : DOT ID
-    | '.' uid
-    | {this.shouldMatchEmpty()}? DOT emptyColumn
     ;
 
 decimalLiteral

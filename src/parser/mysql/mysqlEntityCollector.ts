@@ -12,8 +12,9 @@ import {
     FunctionNameCreateContext,
     InsertStatementContext,
     QueryCreateTableContext,
-    SelectElementContext,
+    SelectElementsContext,
     SelectExpressionElementContext,
+    SelectLiteralColumnNameContext,
     SelectStatementContext,
     SingleStatementContext,
     TableNameContext,
@@ -22,12 +23,13 @@ import {
     ViewNameContext,
     ViewNameCreateContext,
     TableAllColumnsContext,
-    SelectLiteralColumnNameContext,
     AtomSubQueryTableSourceContext,
-    SelectElementsContext,
     AtomTableItemContext,
     SubqueryTableItemContext,
     PureAllColumnsContext,
+    SelectElement_labelContext,
+    SelectElement_exprContext,
+    SelectElement_dot_emptyContext,
 } from '../../lib/mysql/MySqlParser';
 import type { MySqlParserListener } from '../../lib/mysql/MySqlParserListener';
 import {
@@ -139,19 +141,31 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
     }
 
     exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
+        // Handle empty column case (e.g., "select  from")
+        // When emptyColumn matches, the context has no actual tokens
+        if (!ctx.start || !ctx.stop || ctx.start.start > ctx.stop.stop) {
+            return;
+        }
+
         this.pushEntity(
             ctx,
             EntityContextType.COLUMN,
             [
                 {
                     attrName: AttrName.alias,
-                    endContextList: [SelectElementContext.name],
+                    endContextList: [SelectElement_labelContext.name],
                 },
             ],
             {
                 declareType: ColumnDeclareType.LITERAL,
             }
         );
+    }
+
+    exitSelectElement_dot_empty(ctx: SelectElement_dot_emptyContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.LITERAL,
+        });
     }
 
     exitSelectExpressionElement(ctx: SelectExpressionElementContext) {
@@ -161,7 +175,7 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
             [
                 {
                     attrName: AttrName.alias,
-                    endContextList: [SelectElementContext.name],
+                    endContextList: [SelectElement_exprContext.name],
                 },
             ],
             {

@@ -214,6 +214,36 @@ describe('PostgreSql Syntax Suggestion with collect entity', () => {
         expect(entities[0].belongStmt?.isContainCaret).toBeTruthy();
     });
 
+    test('select with empty column after dot (tb.)', () => {
+        const pos: CaretPosition = {
+            lineNumber: 19,
+            column: 11,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = postgre.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb', '.']);
+
+        const entities = postgre.getAllEntities(sql, pos);
+        expect(entities.length).toBe(2);
+
+        const tableEntity = entities.find((e) => e.entityContextType === EntityContextType.TABLE);
+        expect(tableEntity).not.toBeUndefined();
+        expect(tableEntity?.text).toBe('tb');
+        expect(tableEntity?.belongStmt.isContainCaret).toBeTruthy();
+
+        const queryResultEntity = entities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        );
+        expect(queryResultEntity).not.toBeUndefined();
+        expect(queryResultEntity?.text).toBe('tb.');
+        expect(queryResultEntity?.belongStmt.isContainCaret).toBeTruthy();
+    });
+
     test('isContainCaret should be truthy if caret position is whitespace at the end of statement', () => {
         const pos: CaretPosition = {
             lineNumber: 15,

@@ -509,6 +509,7 @@ columnProjectItem
     | selectLiteralColumnName (columnAlias | KW_AS? expression)?
     | tableAllColumns columnAlias?
     | selectExpressionColumnName (columnAlias | KW_AS? columnName)?
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 selectWindowItemColumnName

@@ -281,7 +281,10 @@ import { JsonOnEmptyContext } from "./MySqlParser.js";
 import { JsonOnErrorContext } from "./MySqlParser.js";
 import { SelectSpecContext } from "./MySqlParser.js";
 import { SelectElementsContext } from "./MySqlParser.js";
-import { SelectElementContext } from "./MySqlParser.js";
+import { SelectElement_starContext } from "./MySqlParser.js";
+import { SelectElement_labelContext } from "./MySqlParser.js";
+import { SelectElement_exprContext } from "./MySqlParser.js";
+import { SelectElement_dot_emptyContext } from "./MySqlParser.js";
 import { TableAllColumnsContext } from "./MySqlParser.js";
 import { PureAllColumnsContext } from "./MySqlParser.js";
 import { SelectLiteralColumnNameContext } from "./MySqlParser.js";
@@ -569,7 +572,6 @@ import { UidListContext } from "./MySqlParser.js";
 import { UidContext } from "./MySqlParser.js";
 import { SimpleIdContext } from "./MySqlParser.js";
 import { DottedIdContext } from "./MySqlParser.js";
-import { DottedIdAllowEmptyContext } from "./MySqlParser.js";
 import { DecimalLiteralContext } from "./MySqlParser.js";
 import { FileSizeLiteralContext } from "./MySqlParser.js";
 import { StringLiteralContext } from "./MySqlParser.js";
@@ -3700,15 +3702,53 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitSelectElements?: (ctx: SelectElementsContext) => void;
     /**
-     * Enter a parse tree produced by `MySqlParser.selectElement`.
+     * Enter a parse tree produced by the `selectElement_star`
+     * labeled alternative in `MySqlParser.selectElement`.
      * @param ctx the parse tree
      */
-    enterSelectElement?: (ctx: SelectElementContext) => void;
+    enterSelectElement_star?: (ctx: SelectElement_starContext) => void;
     /**
-     * Exit a parse tree produced by `MySqlParser.selectElement`.
+     * Exit a parse tree produced by the `selectElement_star`
+     * labeled alternative in `MySqlParser.selectElement`.
      * @param ctx the parse tree
      */
-    exitSelectElement?: (ctx: SelectElementContext) => void;
+    exitSelectElement_star?: (ctx: SelectElement_starContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectElement_label`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    enterSelectElement_label?: (ctx: SelectElement_labelContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectElement_label`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    exitSelectElement_label?: (ctx: SelectElement_labelContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectElement_expr`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    enterSelectElement_expr?: (ctx: SelectElement_exprContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectElement_expr`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    exitSelectElement_expr?: (ctx: SelectElement_exprContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectElement_dot_empty`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    enterSelectElement_dot_empty?: (ctx: SelectElement_dot_emptyContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectElement_dot_empty`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    exitSelectElement_dot_empty?: (ctx: SelectElement_dot_emptyContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.tableAllColumns`.
      * @param ctx the parse tree
@@ -6765,16 +6805,6 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitDottedId?: (ctx: DottedIdContext) => void;
-    /**
-     * Enter a parse tree produced by `MySqlParser.dottedIdAllowEmpty`.
-     * @param ctx the parse tree
-     */
-    enterDottedIdAllowEmpty?: (ctx: DottedIdAllowEmptyContext) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.dottedIdAllowEmpty`.
-     * @param ctx the parse tree
-     */
-    exitDottedIdAllowEmpty?: (ctx: DottedIdAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.decimalLiteral`.
      * @param ctx the parse tree
