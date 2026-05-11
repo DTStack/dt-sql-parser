@@ -1,0 +1,45 @@
+README-zh_CN.md
+  s_36ee005e3035b6::t_2bbbfa0d9ae3ca 29
+  s_36ee005e3035b6::t_de19339829812a 55
+src/parser/index.ts
+  8ccd1074cdc50d9d 8
+src/lib/index.ts
+  8ccd1074cdc50d9d 20-23
+README.md
+  s_36ee005e3035b6::t_fa1696d8160e27 29
+  s_36ee005e3035b6::t_96825db4ccb46c 57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "c7c9ebc62eac251423ff41e814bf1c3324957f9c",
+  "prompts": {
+    "8ccd1074cdc50d9d": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_20319bcdaffecjR0TYgr5eHgWi",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "liuxy0551",
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 5,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_3070dc1062bb3b": {
+      "author": "liuxy0551 <liuxy0551@qq.com>"
+    }
+  },
+  "sessions": {
+    "s_36ee005e3035b6": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1ea01d8d5ffeUuI2B37vDnAvvd",
+        "model": "mimo-v2.5"
+      },
+      "human_author": "liuxy0551 <liuxy0551@qq.com>"
+    }
+  }
+}
