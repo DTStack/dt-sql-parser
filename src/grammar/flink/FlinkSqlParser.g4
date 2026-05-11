@@ -685,7 +685,9 @@ orderByClause
     ;
 
 orderItemDefinition
-    : columnName ordering=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_LAST | KW_FIRST))?
+    : (columnName | valueExpression) ordering=(KW_ASC | KW_DESC)? (
+        KW_NULLS nullOrder=(KW_LAST | KW_FIRST)
+    )?
     ;
 
 limitClause
@@ -735,11 +737,24 @@ patternVariablesDefinition
 
 windowFrame
     : KW_RANGE KW_BETWEEN timeIntervalExpression frameBound
+    | (KW_ROWS | KW_RANGE) KW_BETWEEN frameStart KW_AND frameEnd
     | KW_ROWS KW_BETWEEN DIG_LITERAL frameBound
     ;
 
 frameBound
     : KW_PRECEDING KW_AND KW_CURRENT KW_ROW
+    ;
+
+frameStart
+    : KW_UNBOUNDED KW_PRECEDING
+    | DIG_LITERAL KW_PRECEDING
+    | KW_CURRENT KW_ROW
+    ;
+
+frameEnd
+    : KW_CURRENT KW_ROW
+    | DIG_LITERAL KW_FOLLOWING
+    | KW_UNBOUNDED KW_FOLLOWING
     ;
 
 withinClause
@@ -772,6 +787,15 @@ predicate
     | KW_IS KW_NOT? kind=KW_DISTINCT KW_FROM right=valueExpression
     | KW_NOT? kind=KW_SIMILAR KW_TO right=valueExpression (KW_ESCAPE stringLiteral)?
     | KW_IS KW_JSON (KW_VALUE | KW_ARRAY | identifier)?
+    ;
+
+jsonFunctionBranch
+    : KW_NULL
+    | KW_EMPTY KW_ARRAY
+    | KW_EMPTY uid
+    | KW_TRUE
+    | KW_FALSE
+    | KW_UNKNOWN
     ;
 
 likePredicate
@@ -815,11 +839,11 @@ primaryExpression
     | functionCallExpression               # functionCall
     // | identifier '->' expression                                                               #lambda
     // | '(' identifier (',' identifier)+ ')' '->' expression                                     #lambda
-    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET # subscript
-    | columnNamePath                                                      # columnReference
-    | dereferenceDefinition                                               # dereference
-    | LR_BRACKET expression RR_BRACKET                                    # parenthesizedExpression
-    // | EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET                             #extract
+    | value=primaryExpression LS_BRACKET index=valueExpression RS_BRACKET              # subscript
+    | columnNamePath                                                                   # columnReference
+    | dereferenceDefinition                                                            # dereference
+    | LR_BRACKET expression RR_BRACKET                                                 # parenthesizedExpression
+    | KW_EXTRACT LR_BRACKET field=identifier KW_FROM source=valueExpression RR_BRACKET # extract
     // | (SUBSTR | SUBSTRING) LR_BRACKET str=valueExpression (KW_FROM | COMMA) pos=valueExpression
     //   ((KW_FOR | COMMA) len=valueExpression)? RR_BRACKET                                                   #substring
     // | TRIM LR_BRACKET trimOption=(BOTH | LEADING | TRAILING)? (trimStr=valueExpression)?
@@ -861,6 +885,36 @@ functionParam
     | timeIntervalUnit
     | timePointUnit
     | expression
+    | jsonValueParams
+    | jsonQueryParams
+    | jsonObjectParams
+    | jsonArrayParams
+    ;
+
+jsonValueParams
+    : columnNamePath (uid columnType)? (
+        (uid | KW_NULL | KW_DEFAULT valueExpression) KW_ON KW_EMPTY
+    )? ((uid | KW_NULL | KW_DEFAULT valueExpression) KW_ON uid)?
+    ;
+
+jsonQueryParams
+    : columnNamePath ((KW_WITHOUT | KW_WITH uid?) KW_ARRAY? uid)? (
+        jsonFunctionBranch KW_ON KW_EMPTY
+    )? (jsonFunctionBranch KW_ON uid)?
+    ;
+
+// JSON 函数只能在 JSON_OBJECT 函数中使用
+jsonObjectParams
+    : (
+        KW_KEY? columnNamePath KW_VALUE? (
+            valueExpression
+            | KW_JSON LR_BRACKET (valueExpression)* RR_BRACKET
+        )
+    )* ((KW_NULL | uid) KW_ON KW_NULL)?
+    ;
+
+jsonArrayParams
+    : valueExpression* ((KW_NULL | uid) KW_ON KW_NULL)?
     ;
 
 dereferenceDefinition
