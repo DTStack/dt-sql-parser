@@ -1,0 +1,20 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "fe15ad7c576a5d25d9fd98d069ea960babab8e70",
+  "prompts": {
+    "4f4f2e33242090b5": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_202d8db76ffeMajg6c2SJF08TB",
+        "model": "mimo/mimo-v2.5-pro"
+      },
+      "human_author": "liuxy0551 <liuxy0551@qq.com>",
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
