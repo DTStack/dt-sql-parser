@@ -70,6 +70,7 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
                 declareType: ColumnDeclareType.ALL,
             });
         } else {
+            const isSimpleColumn = this.isSimpleColumnReference(ctx);
             this.pushEntity(
                 ctx,
                 EntityContextType.COLUMN,
@@ -80,10 +81,25 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
                     },
                 ],
                 {
-                    declareType: ColumnDeclareType.EXPRESSION,
+                    declareType: isSimpleColumn
+                        ? ColumnDeclareType.LITERAL
+                        : ColumnDeclareType.EXPRESSION,
                 }
             );
         }
+    }
+
+    private isSimpleColumnReference(ctx: SelectItemContext): boolean {
+        const text = ctx.getText();
+        // Simple column reference: no parentheses, no operators, no spaces
+        return (
+            !text.includes('(') &&
+            !text.includes(' ') &&
+            !text.includes('+') &&
+            !text.includes('-') &&
+            !text.includes('*') &&
+            !text.includes('/')
+        );
     }
 
     /** ===== Statement begin */
