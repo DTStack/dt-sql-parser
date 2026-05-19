@@ -662,11 +662,24 @@ export abstract class EntityCollector {
             );
         } else {
             // Do not collect column and queryResult entities if they are not inside a select statement
-            return entitiesInsideStmt.filter(
-                (entity) =>
+            // Exception: empty column entities (text === '') should be kept
+            return entitiesInsideStmt.filter((entity) => {
+                // Keep non-COLUMN and non-QUERY_RESULT entities
+                if (
                     entity.entityContextType !== EntityContextType.COLUMN &&
                     entity.entityContextType !== EntityContextType.QUERY_RESULT
-            );
+                ) {
+                    return true;
+                }
+                // Also keep empty QUERY_RESULT entities (text === '')
+                if (
+                    entity.entityContextType === EntityContextType.QUERY_RESULT &&
+                    entity.text === ''
+                ) {
+                    return true;
+                }
+                return false;
+            });
         }
     }
 

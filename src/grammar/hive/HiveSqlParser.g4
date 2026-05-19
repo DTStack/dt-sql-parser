@@ -1536,6 +1536,7 @@ selectItem
             | KW_AS LPAREN alias=id_ (COMMA alias=id_)* RPAREN
         )?
     )
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 selectLiteralColumnName

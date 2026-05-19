@@ -850,6 +850,7 @@ namedExpression
     : (tableAllColumns | selectLiteralColumnName | selectExpressionColumnName) (
         KW_AS? (alias=errorCapturingIdentifier | identifierList)
     )?
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 namedExpressionSeq

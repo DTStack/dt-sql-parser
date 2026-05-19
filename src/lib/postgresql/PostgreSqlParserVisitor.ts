@@ -404,6 +404,8 @@ import { OptIndirectionContext } from "./PostgreSqlParser.js";
 import { TargetListContext } from "./PostgreSqlParser.js";
 import { Target_starContext } from "./PostgreSqlParser.js";
 import { Target_labelContext } from "./PostgreSqlParser.js";
+import { Target_dot_emptyContext } from "./PostgreSqlParser.js";
+import { Target_emptyContext } from "./PostgreSqlParser.js";
 import { TableAllColumnsContext } from "./PostgreSqlParser.js";
 import { QualifiedNameListContext } from "./PostgreSqlParser.js";
 import { TableNameListContext } from "./PostgreSqlParser.js";
@@ -440,6 +442,7 @@ import { ColIdContext } from "./PostgreSqlParser.js";
 import { TypeFunctionNameContext } from "./PostgreSqlParser.js";
 import { NonReservedWordContext } from "./PostgreSqlParser.js";
 import { ColLabelContext } from "./PostgreSqlParser.js";
+import { IndirectionLabelContext } from "./PostgreSqlParser.js";
 import { IdentifierContext } from "./PostgreSqlParser.js";
 import { UnreservedKeywordContext } from "./PostgreSqlParser.js";
 import { ColNameKeywordContext } from "./PostgreSqlParser.js";
@@ -2907,6 +2910,20 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTarget_label?: (ctx: Target_labelContext) => Result;
     /**
+     * Visit a parse tree produced by the `target_dot_empty`
+     * labeled alternative in `PostgreSqlParser.targetEl`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTarget_dot_empty?: (ctx: Target_dot_emptyContext) => Result;
+    /**
+     * Visit a parse tree produced by the `target_empty`
+     * labeled alternative in `PostgreSqlParser.targetEl`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTarget_empty?: (ctx: Target_emptyContext) => Result;
+    /**
      * Visit a parse tree produced by `PostgreSqlParser.tableAllColumns`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -3122,6 +3139,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitColLabel?: (ctx: ColLabelContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.indirectionLabel`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIndirectionLabel?: (ctx: IndirectionLabelContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.identifier`.
      * @param ctx the parse tree

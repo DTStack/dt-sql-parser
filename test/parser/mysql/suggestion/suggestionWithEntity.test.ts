@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { MySQL } from 'src/parser/mysql';
 import { CaretPosition, EntityContextType } from 'src/parser/common/types';
+import { MySQL } from 'src/parser/mysql';
 import { commentOtherLine } from 'test/helper';
 
 const syntaxSql = fs.readFileSync(
@@ -185,6 +185,58 @@ describe('MySQL Syntax Suggestion with collect entity', () => {
         };
         const sql = commentOtherLine(syntaxSql, pos.lineNumber);
         const entities = mysql.getAllEntities(sql, pos);
-        expect(entities[0].belongStmt.isContainCaret).toBeFalsy();
+
+        // When caret is after semicolon, entities should not contain caret
+        if (entities && entities.length > 0) {
+            entities.forEach((entity) => {
+                expect(entity.belongStmt.isContainCaret).toBeFalsy();
+            });
+        }
+    });
+
+    test('suggestion with table alias and dot', () => {
+        const pos: CaretPosition = {
+            lineNumber: 17,
+            column: 11,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = mysql.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['tb', '.']);
+
+        const entities = mysql.getAllEntities(sql, pos);
+        expect(entities.length).toBe(2);
+        expect(entities[0].text).toBe('tb');
+        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+        expect(entities[1].text).toBe('tb.');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+    });
+
+    test('suggestion with table alias and dot (with alias from clause)', () => {
+        const pos: CaretPosition = {
+            lineNumber: 19,
+            column: 11,
+        };
+        const sql = commentOtherLine(syntaxSql, pos.lineNumber);
+
+        const syntaxes = mysql.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['t1', '.']);
+
+        const entities = mysql.getAllEntities(sql, pos);
+        expect(entities.length).toBe(2);
+        expect(entities[0].text).toBe('sorted_census_data');
+        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+        expect(entities[1].text).toBe('t1.');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
     });
 });

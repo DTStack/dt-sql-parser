@@ -823,6 +823,7 @@ selectItem
     : selectLiteralColumnName columnAlias?
     | selectExpressionColumnName columnAlias?
     | tableAllColumns
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnAlias
