@@ -1,0 +1,163 @@
+test/parser/generic/syntax/createStatement.test.ts
+  s_c362305206cb40::t_593eac394269ec 1-16
+test/parser/generic/syntax/updateStatement.test.ts
+  s_c362305206cb40::t_0708183291dd3d 1-16
+test/parser/generic/syntax/fixtures/alter_table.sql
+  s_c362305206cb40::t_edbe590ec9007a 20-60
+  s_c362305206cb40::t_45e8cd7f01710a 1,4-5,8,10-11,13-14,16-17,19
+  s_c362305206cb40::t_701acf0e3768f9 2-3,6-7,9,12,15,18
+test/parser/generic/syntax/fixtures/select_with_clause.sql
+  s_c362305206cb40::t_6c33fa84ef429b 23-29
+  s_c362305206cb40::t_9a1248d90ece64 1,4-16
+  s_c362305206cb40::t_175e2ebd34a4f0 2-3,17-22
+  s_c362305206cb40::t_d95dd6c1b96f94 30-39,41-42,44-45,47-55,57-58,60-88
+  s_c362305206cb40::t_0af95aa63b3e05 40,43,46,56,59
+test/parser/generic/suggestion/tokenSuggestion.test.ts
+  s_c362305206cb40::t_d625a61aa5bca7 1-113,235
+  s_c362305206cb40::t_02f650f3926320 114-116,118-128,130-135,138-141,143-153,155-165,167-177,179-189,191-201,203-213,215-225,227-234
+  s_c362305206cb40::t_8978f91378d673 136-137
+  s_c362305206cb40::t_5bcf7a8e007a7d 117,129,142,154,166,178,190,202,214,226
+test/parser/generic/syntax/insertStatement.test.ts
+  s_c362305206cb40::t_0533fb8f124e91 1-16
+test/parser/generic/suggestion/suggestionWithEntity.test.ts
+  s_c362305206cb40::t_6c2ae6fce8915e 7-8,10-11,21-22,24-25,36-37,39-40,44-46,48-49,52-53,55-56,61-73
+  s_c362305206cb40::t_3e2a3b59658329 59
+  s_c362305206cb40::t_6465a6080b87c8 1-6,9,12-14,19-20,23,26-28,34-35,38,41-43,50-51,54,57-58,60,74-75
+  s_c362305206cb40::t_7fd9e7bf47e3ee 16-18,30-33,47
+  s_c362305206cb40::t_cda380d08c61cf 15,29
+test/parser/generic/syntax/fixtures/select_with_sub_queries.sql
+  s_c362305206cb40::t_5a2cf4c979c214 1,3-5,7,9,11-18
+  s_c362305206cb40::t_0ffc83348aae44 21-35,37-38,40-44,46-48,50-79
+  s_c362305206cb40::t_09a01b8194b009 36,39,45,49
+  s_c362305206cb40::t_697e1590f9fcae 2,6,8,10
+  s_c362305206cb40::t_22bcb7df2149e5 19-20
+test/parser/generic/suggestion/syntaxSuggestion.test.ts
+  s_c362305206cb40::t_0d36c3d8cfb52f 1-36,39-52,55-66
+  s_c362305206cb40::t_5fe7bdba32f7d4 37-38,53-54
+test/parser/generic/suggestion/multipleStatement.test.ts
+  s_c362305206cb40::t_4f5aebd1f85d2e 1-40
+test/parser/generic/contextCollect/semanticContextCollector.test.ts
+  s_c362305206cb40::t_bd8a42a628cc20 1-81
+test/parser/generic/syntax/fixtures/select_with_function.sql
+  s_c362305206cb40::t_03c6402d2066f9 36,52,57,59,67
+  s_c362305206cb40::t_83fe4e86cd3597 32
+  s_c362305206cb40::t_391d0ff3ccc26a 33-35,37-51,53-56,58,60-66,68-71
+  s_c362305206cb40::t_8ed3007e894ca5 1-31
+test/parser/generic/syntax/selectWithExists.test.ts
+  s_c362305206cb40::t_83d3bf200cef4d 1-16
+test/parser/generic/suggestion/fixtures/suggestionWithEntity.sql
+  s_c362305206cb40::t_8759d631e67802 1,3-6
+  s_c362305206cb40::t_132ea740c1f4fe 2
+test/parser/generic/syntax/selectStatement.test.ts
+  s_c362305206cb40::t_b62c739e25e5fc 1-51
+test/parser/generic/errorStrategy.test.ts
+  s_c362305206cb40::t_97903ca8b78a93 1-3,5-17,19,21,23-33,35,37,39-48,50,52,54-57
+  s_c362305206cb40::t_5e81d215830328 4,18,20,22,34,36,38,49,51,53
+test/parser/generic/contextCollect/entityCollector.test.ts
+  s_c362305206cb40::t_b1c4953ae559cf 146-147
+  s_c362305206cb40::t_57b0f661a3c182 1-26,28-49,53-57,59-79,81-105,107-127,129-145,148-151,153-168,170-184,186-194,197-200,202-204,206-228,230-251
+  s_c362305206cb40::t_3c767264f63283 27,58,80,106,128,152,169,185,205,229
+  s_c362305206cb40::t_bfe6dbba09f5c9 50-52,195-196,201
+test/parser/generic/syntax/selectWithFunction.test.ts
+  s_c362305206cb40::t_7bbbc87e01ca0c 1-16
+test/parser/generic/suggestion/fixtures/multipleStatement.sql
+  s_c362305206cb40::t_0f5dfae3009d78 1,7,9,13
+  s_c362305206cb40::t_5489e6fe8ffaf1 2-6,8,10-12,14-15
+test/parser/generic/validateInvalidSql.test.ts
+  s_c362305206cb40::t_23eeeb1659f6fc 1-16
+test/parser/generic/syntax/dropStatement.test.ts
+  s_c362305206cb40::t_446ef64145757c 1-16
+test/parser/generic/syntax/fixtures/update.sql
+  s_c362305206cb40::t_15e094fb34af79 2,4,9
+  s_c362305206cb40::t_d33a5b5718c758 1,3,5-8,10-13
+  s_c362305206cb40::t_ff07c4ffeaaea2 14-48
+test/parser/generic/syntax/fixtures/select_with_exists.sql
+  s_c362305206cb40::t_6be23e34ac0a6a 1-33
+  s_c362305206cb40::t_be7db098400394 34-50,52-87,89-98
+  s_c362305206cb40::t_6ae1d55a19add4 51,88
+test/parser/generic/syntax/fixtures/select_with_expression.sql
+  s_c362305206cb40::t_bb132743588ad8 5,11,14,21,24,27,32,34
+  s_c362305206cb40::t_5c82bf25d2c8e0 1-4,6-10,12-13,15-20,22-23,25-26,28-31,33,35-39
+  s_c362305206cb40::t_87fb5655d02e25 40-91
+test/parser/generic/syntax/fixtures/select_with_set_operations.sql
+  s_c362305206cb40::t_0d4c3afb54edf8 19-21,23-43,45-56
+  s_c362305206cb40::t_a04b37dd8fc9b7 22
+  s_c362305206cb40::t_e11420ff48e6c9 2-3,5-6,8-9,11
+  s_c362305206cb40::t_34e4245deeed26 44
+  s_c362305206cb40::t_6eaecf017071a3 1,4,7,10,12-18
+test/parser/generic/suggestion/completeAfterSyntaxError.test.ts
+  s_c362305206cb40::t_c918accfa010eb 1-74
+test/parser/generic/syntax/fixtures/select_with_join.sql
+  s_c362305206cb40::t_7d5f1cd146597b 26-30,32-59,61-72
+  s_c362305206cb40::t_2fa8f5c08e5646 1,4,7,10,13,15-25
+  s_c362305206cb40::t_fbb7462b0349c3 31
+  s_c362305206cb40::t_abcf2bea6c6e4b 2-3,5-6,8-9,11-12,14
+  s_c362305206cb40::t_0631e95ef5f781 60
+test/parser/generic/suggestion/fixtures/syntaxSuggestion.sql
+  s_c362305206cb40::t_0e88bdbdb1a57f 5,7
+  s_c362305206cb40::t_d14f60d4db1781 1-4,6,8-27
+test/parser/generic/syntax/alterStatement.test.ts
+  s_c362305206cb40::t_e341f0e98cc6d2 1-16
+test/parser/generic/contextCollect/fixtures/common.sql
+  s_c362305206cb40::t_78e42b36dfab96 1-3,5-9,11-13,15-22
+  s_c362305206cb40::t_0c1b6a3bd1f3e2 4,10,14
+src/parser/generic/genericEntityCollector.ts
+  s_c362305206cb40::t_919e00147d255c 73,84-86,92-102
+test/parser/generic/syntax/fixtures/delete.sql
+  s_c362305206cb40::t_e4dfee278723d9 2,4,7
+  s_c362305206cb40::t_8c141775ce759a 11-20,25-42
+  s_c362305206cb40::t_79c06b9ca40698 1,3,5-6,8-10
+  s_c362305206cb40::t_f11b4d4fe307fd 21-24
+test/parser/generic/syntax/fixtures/create_table.sql
+  s_c362305206cb40::t_0c090a9484f770 2,4,52
+  s_c362305206cb40::t_e7d2b274ad8135 117-118,121-122
+  s_c362305206cb40::t_bfc1e49dd16712 70-116,124-173
+  s_c362305206cb40::t_5cced91a6d96dc 1,3,5-51,53-69
+  s_c362305206cb40::t_b2deebefad80d1 119-120,123
+test/parser/generic/listener.test.ts
+  s_c362305206cb40::t_88bebc58fa768f 1-54
+test/parser/generic/suggestion/fixtures/tokenSuggestion.sql
+  s_c362305206cb40::t_c78096984da41e 1-17
+  s_c362305206cb40::t_65164d26a65ac7 18-37
+test/parser/generic/contextCollect/fixtures/semantic.sql
+  s_c362305206cb40::t_df50e4ba56f33c 1-25,27-29
+  s_c362305206cb40::t_e2572e468a09aa 26,30
+test/parser/generic/syntax/fixtures/drop_table.sql
+  s_c362305206cb40::t_829dff26dd173c 1,3-4,6-11
+  s_c362305206cb40::t_6010420bc517d7 2,5
+  s_c362305206cb40::t_dc7d016de01e18 12-33
+test/parser/generic/visitor.test.ts
+  s_c362305206cb40::t_2483266210e88d 1-33
+test/parser/generic/syntax/fixtures/select.sql
+  s_c362305206cb40::t_b811b400171494 101-128,130-165,168-201,203-206
+  s_c362305206cb40::t_f954164c5f5f69 166-167
+  s_c362305206cb40::t_e0361ebd834121 129
+  s_c362305206cb40::t_484b84f7b32da7 202
+  s_c362305206cb40::t_301f615ced1212 1,4-67,71-72,74-75,79,82,85-100
+  s_c362305206cb40::t_3c9ed13b3cada3 2-3,68-69,76-78,80-81,83-84
+  s_c362305206cb40::t_d536832efbcc22 70,73
+test/parser/generic/syntax/deleteStatement.test.ts
+  s_c362305206cb40::t_d28cd0c7b91eed 1-16
+test/parser/generic/syntax/fixtures/insert_into.sql
+  s_c362305206cb40::t_739e8c0e3662a6 1,3,5,7-12
+  s_c362305206cb40::t_96d91189be98f9 4,6
+  s_c362305206cb40::t_aeebf1c159eb66 21,46
+  s_c362305206cb40::t_d4fdb83084f286 2
+  s_c362305206cb40::t_6ca7393f41be71 13-20,22-45,47-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "0c139055abfd9ffb7c9e305fe7cf86b0ba249788",
+  "prompts": {},
+  "sessions": {
+    "s_c362305206cb40": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6429a95c-b6c8-4467-9be7-4c3ea59f9bea",
+        "model": "mimo-v2.5-pro"
+      },
+      "human_author": "liuxy0551 <liuxy0551@qq.com>"
+    }
+  }
+}
