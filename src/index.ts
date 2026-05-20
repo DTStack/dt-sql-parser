@@ -1,4 +1,13 @@
-export { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgreSQL, TrinoSQL, ImpalaSQL } from './parser';
+export {
+    MySQL,
+    FlinkSQL,
+    SparkSQL,
+    HiveSQL,
+    PostgreSQL,
+    TrinoSQL,
+    ImpalaSQL,
+    GenericSQL,
+} from './parser';
 
 export {
     MySqlParserListener,
@@ -15,6 +24,8 @@ export {
     TrinoSqlVisitor,
     ImpalaSqlParserListener,
     ImpalaSqlParserVisitor,
+    GenericSqlListener,
+    GenericSqlVisitor,
 } from './lib';
 
 export { EntityContextType } from './parser/common/types';
@@ -26,6 +37,8 @@ export type { CaretPosition, Suggestions, SyntaxSuggestion } from './parser/comm
 export type { WordRange, TextSlice } from './parser/common/textAndWord';
 
 export type { SyntaxError, ParseError, ErrorListener } from './parser/common/parseErrorListener';
+
+export type { GenericSQLOptions } from './parser/generic';
 
 export type {
     StmtContext,
