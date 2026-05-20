@@ -34,8 +34,10 @@ import { CreateTableAsSelectContext } from "./FlinkSqlParser.js";
 import { ColumnOptionDefinitionContext } from "./FlinkSqlParser.js";
 import { PhysicalColumnDefinitionContext } from "./FlinkSqlParser.js";
 import { ColumnNameCreateContext } from "./FlinkSqlParser.js";
+import { EmptyColumnContext } from "./FlinkSqlParser.js";
 import { ColumnNameContext } from "./FlinkSqlParser.js";
 import { ColumnNamePathContext } from "./FlinkSqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./FlinkSqlParser.js";
 import { ColumnNameListContext } from "./FlinkSqlParser.js";
 import { ColumnTypeContext } from "./FlinkSqlParser.js";
 import { LengthOneDimensionContext } from "./FlinkSqlParser.js";
@@ -218,6 +220,7 @@ import { TablePathContext } from "./FlinkSqlParser.js";
 import { ViewPathContext } from "./FlinkSqlParser.js";
 import { ViewPathCreateContext } from "./FlinkSqlParser.js";
 import { UidContext } from "./FlinkSqlParser.js";
+import { UidAllowEmptyContext } from "./FlinkSqlParser.js";
 import { WithOptionContext } from "./FlinkSqlParser.js";
 import { IfNotExistsContext } from "./FlinkSqlParser.js";
 import { IfExistsContext } from "./FlinkSqlParser.js";
@@ -410,6 +413,12 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitColumnNameCreate?: (ctx: ColumnNameCreateContext) => Result;
     /**
+     * Visit a parse tree produced by `FlinkSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
+    /**
      * Visit a parse tree produced by `FlinkSqlParser.columnName`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -421,6 +430,12 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.columnNameList`.
      * @param ctx the parse tree
@@ -1544,6 +1559,12 @@ export class FlinkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitUid?: (ctx: UidContext) => Result;
+    /**
+     * Visit a parse tree produced by `FlinkSqlParser.uidAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitUidAllowEmpty?: (ctx: UidAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `FlinkSqlParser.withOption`.
      * @param ctx the parse tree

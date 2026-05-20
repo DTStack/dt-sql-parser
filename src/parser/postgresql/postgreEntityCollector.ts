@@ -12,6 +12,7 @@ import {
     type DatabaseNameContext,
     type DatabaseNameCreateContext,
     ExpressionTableContext,
+    FuncTableContext,
     type FunctionNameCreateContext,
     type InsertStatementContext,
     PostgreSqlParser,
@@ -20,20 +21,21 @@ import {
     type QueryCreateTableContext,
     SelectExpressionColumnNameContext,
     SelectLiteralColumnNameContext,
+    SelectNoParensContext,
     type SelectStatementContext,
+    SelectWithParensContext,
     type SingleStmtContext,
     TableAllColumnsContext,
-    TableRefContext,
     type TableNameContext,
     type TableNameCreateContext,
+    TableRefContext,
+    Target_dot_emptyContext,
+    Target_emptyContext,
     Target_labelContext,
+    TargetListContext,
     type ViewNameContext,
     type ViewNameCreateContext,
-    TargetListContext,
-    SelectNoParensContext,
     XmlTableContext,
-    FuncTableContext,
-    SelectWithParensContext,
 } from '../../lib/postgresql/PostgreSqlParser';
 import type { PostgreSqlParserListener } from '../../lib/postgresql/PostgreSqlParserListener';
 import {
@@ -156,7 +158,9 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     }
 
     exitTargetList(ctx: TargetListContext) {
+        // Only create QUERY_RESULT for targetList that is direct child of simpleSelect
         if (!isChildContextOf(ctx, PostgreSqlParser.RULE_simpleSelect)) return;
+
         this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
     }
 
@@ -164,6 +168,20 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
         if (!isChildContextOf(ctx, PostgreSqlParser.RULE_targetList)) return;
         this.pushEntity(ctx, EntityContextType.COLUMN, [], {
             declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitTarget_empty(ctx: Target_emptyContext) {
+        // Don't create entity for empty column here
+        // The targetList will create QUERY_RESULT entity
+        // Empty targetEl means the QUERY_RESULT has no columns
+    }
+
+    exitTarget_dot_empty(ctx: Target_dot_emptyContext) {
+        // Create COLUMN entity for incomplete column reference (e.g., "tb.|")
+        // This allows completion to suggest columns from table "tb"
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.LITERAL,
         });
     }
 
