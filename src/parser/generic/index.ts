@@ -56,6 +56,9 @@ export class GenericSQL extends BasicSQL<GenericSqlLexer, ProgramContext, Generi
         GenericSqlParser.RULE_tableName,
         GenericSqlParser.RULE_tableNameCreate,
         GenericSqlParser.RULE_columnRef,
+        GenericSqlParser.RULE_columnRefCreate,
+        GenericSqlParser.RULE_columnName,
+        GenericSqlParser.RULE_functionName,
         ...this.excludeKeywordRules,
     ]);
 
@@ -105,6 +108,18 @@ export class GenericSQL extends BasicSQL<GenericSqlLexer, ProgramContext, Generi
                 }
                 case GenericSqlParser.RULE_columnRef: {
                     syntaxContextType = EntityContextType.COLUMN;
+                    break;
+                }
+                case GenericSqlParser.RULE_columnRefCreate: {
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
+                    break;
+                }
+                case GenericSqlParser.RULE_columnName: {
+                    syntaxContextType = EntityContextType.COLUMN;
+                    break;
+                }
+                case GenericSqlParser.RULE_functionName: {
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 default:

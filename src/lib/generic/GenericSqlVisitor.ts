@@ -26,7 +26,10 @@ import { QueryTermContext } from "./GenericSqlParser.js";
 import { QueryPrimaryContext } from "./GenericSqlParser.js";
 import { QuerySpecificationContext } from "./GenericSqlParser.js";
 import { SetQuantifierContext } from "./GenericSqlParser.js";
-import { SelectItemContext } from "./GenericSqlParser.js";
+import { SelectExpressionElementContext } from "./GenericSqlParser.js";
+import { SelectStarElementContext } from "./GenericSqlParser.js";
+import { SelectAllElementContext } from "./GenericSqlParser.js";
+import { SelectEmptyElementContext } from "./GenericSqlParser.js";
 import { FromClauseContext } from "./GenericSqlParser.js";
 import { SimpleRelationContext } from "./GenericSqlParser.js";
 import { JoinRelationContext } from "./GenericSqlParser.js";
@@ -48,6 +51,7 @@ import { DeleteStatementContext } from "./GenericSqlParser.js";
 import { CreateTableStatementContext } from "./GenericSqlParser.js";
 import { TableElementContext } from "./GenericSqlParser.js";
 import { ColumnDefinitionContext } from "./GenericSqlParser.js";
+import { ColumnRefCreateContext } from "./GenericSqlParser.js";
 import { TableConstraintContext } from "./GenericSqlParser.js";
 import { AlterTableStatementContext } from "./GenericSqlParser.js";
 import { DropTableStatementContext } from "./GenericSqlParser.js";
@@ -95,8 +99,11 @@ import { BinaryLiteralContext } from "./GenericSqlParser.js";
 import { IdentifierContext } from "./GenericSqlParser.js";
 import { QualifiedNameContext } from "./GenericSqlParser.js";
 import { ColumnRefContext } from "./GenericSqlParser.js";
+import { ColumnNameContext } from "./GenericSqlParser.js";
+import { EmptyColumnContext } from "./GenericSqlParser.js";
 import { TableNameContext } from "./GenericSqlParser.js";
 import { TableNameCreateContext } from "./GenericSqlParser.js";
+import { FunctionNameContext } from "./GenericSqlParser.js";
 import { NonReservedContext } from "./GenericSqlParser.js";
 
 
@@ -224,11 +231,33 @@ export class GenericSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> 
      */
     visitSetQuantifier?: (ctx: SetQuantifierContext) => Result;
     /**
-     * Visit a parse tree produced by `GenericSqlParser.selectItem`.
+     * Visit a parse tree produced by the `selectExpressionElement`
+     * labeled alternative in `GenericSqlParser.selectItem`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelectItem?: (ctx: SelectItemContext) => Result;
+    visitSelectExpressionElement?: (ctx: SelectExpressionElementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectStarElement`
+     * labeled alternative in `GenericSqlParser.selectItem`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectStarElement?: (ctx: SelectStarElementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectAllElement`
+     * labeled alternative in `GenericSqlParser.selectItem`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectAllElement?: (ctx: SelectAllElementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectEmptyElement`
+     * labeled alternative in `GenericSqlParser.selectItem`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectEmptyElement?: (ctx: SelectEmptyElementContext) => Result;
     /**
      * Visit a parse tree produced by `GenericSqlParser.fromClause`.
      * @param ctx the parse tree
@@ -359,6 +388,12 @@ export class GenericSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> 
      * @return the visitor result
      */
     visitColumnDefinition?: (ctx: ColumnDefinitionContext) => Result;
+    /**
+     * Visit a parse tree produced by `GenericSqlParser.columnRefCreate`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnRefCreate?: (ctx: ColumnRefCreateContext) => Result;
     /**
      * Visit a parse tree produced by `GenericSqlParser.tableConstraint`.
      * @param ctx the parse tree
@@ -675,6 +710,18 @@ export class GenericSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> 
      */
     visitColumnRef?: (ctx: ColumnRefContext) => Result;
     /**
+     * Visit a parse tree produced by `GenericSqlParser.columnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `GenericSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
+    /**
      * Visit a parse tree produced by `GenericSqlParser.tableName`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -686,6 +733,12 @@ export class GenericSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> 
      * @return the visitor result
      */
     visitTableNameCreate?: (ctx: TableNameCreateContext) => Result;
+    /**
+     * Visit a parse tree produced by `GenericSqlParser.functionName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitFunctionName?: (ctx: FunctionNameContext) => Result;
     /**
      * Visit a parse tree produced by `GenericSqlParser.nonReserved`.
      * @param ctx the parse tree
