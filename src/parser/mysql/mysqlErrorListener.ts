@@ -14,6 +14,7 @@ export class MysqlErrorListener extends ParseErrorListener {
         [MySqlParser.RULE_functionName, 'function'],
         [MySqlParser.RULE_functionNameCreate, 'function'],
         [MySqlParser.RULE_columnName, 'column'],
+        [MySqlParser.RULE_columnNamePath, 'column'],
         [MySqlParser.RULE_columnNameCreate, 'column'],
     ]);
 
@@ -57,6 +58,7 @@ export class MysqlErrorListener extends ParseErrorListener {
                     case MySqlParser.RULE_tableName:
                     case MySqlParser.RULE_functionName:
                     case MySqlParser.RULE_viewName:
+                    case MySqlParser.RULE_columnNamePath:
                     case MySqlParser.RULE_columnName: {
                         if (!result.includes(`{existing}${name}`)) {
                             result.push(`{existing}${name}`);

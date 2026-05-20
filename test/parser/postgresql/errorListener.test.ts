@@ -87,3 +87,38 @@ describe('PostgreSQL validate invalid sql and test msg', () => {
         expect(errors[0].message).toBe(`'a' 在此位置无效，期望一个存在的procedure或者一个关键字`);
     });
 });
+
+describe('PostgreSQL validate multiple erroneous statements', () => {
+    const pgSQL = new PostgreSQL();
+
+    test('validate multiple erroneous statements', () => {
+        const sql = `SELEC * from table1; SELECT * form table2;`;
+        const errors = pgSQL.validate(sql);
+        expect(errors.length).toBe(2);
+    });
+
+    test('validate valid + erroneous statements', () => {
+        const sql = `SELECT * from table1; SELEC * from table2;`;
+        const errors = pgSQL.validate(sql);
+        expect(errors.length).toBe(1);
+    });
+
+    test('validate erroneous + valid statements', () => {
+        const sql = `SELEC * from table1; SELECT * from table2;`;
+        const errors = pgSQL.validate(sql);
+        expect(errors.length).toBe(1);
+    });
+
+    test('validate multiple valid statements', () => {
+        const sql = `SELECT * from table1; SELECT * from table2;`;
+        const errors = pgSQL.validate(sql);
+        expect(errors.length).toBe(0);
+    });
+
+    test('validate multiline erroneous statement reports correct line', () => {
+        const sql = `SELECT * from table1;\nSELEC *\n  from table2;`;
+        const errors = pgSQL.validate(sql);
+        expect(errors.length).toBe(1);
+        expect(errors[0].startLine).toBe(2);
+    });
+});

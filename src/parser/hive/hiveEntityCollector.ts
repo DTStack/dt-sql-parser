@@ -1,5 +1,7 @@
 import { HiveSqlParserListener } from '../../lib';
 import {
+    AtomPartitionedTableFunctionContext,
+    AtomValuesClauseContext,
     ColumnNameCommentContext,
     ColumnNameCreateContext,
     ColumnNameTypeConstraintContext,
@@ -13,17 +15,34 @@ import {
     FromInsertStmtContext,
     FromSelectStmtContext,
     FunctionNameCreateContext,
+    HiveSqlParser,
     InsertStmtContext,
+    PartitionedTableFunctionContext,
+    QueryStatementExpressionContext,
+    SelectExpressionColumnNameContext,
+    SelectItemContext,
+    SelectListContext,
+    SelectLiteralColumnNameContext,
     SelectStatementContext,
     StatementContext,
+    SubQuerySourceContext,
+    TableAllColumnsContext,
     TableNameContext,
     TableNameCreateContext,
     TableSourceContext,
     UniqueJoinSourceContext,
     ViewNameContext,
     ViewNameCreateContext,
+    VirtualTableSourceContext,
 } from '../../lib/hive/HiveSqlParser';
-import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import {
+    AttrName,
+    ColumnDeclareType,
+    EntityCollector,
+    isChildContextOf,
+    StmtContextType,
+    TableDeclareType,
+} from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
 
 export class HiveEntityCollector extends EntityCollector implements HiveSqlParserListener {
@@ -37,22 +56,78 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
         ]);
     }
 
+    /** Table Entity Rules */
     exitTableName(ctx: TableNameContext) {
-        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
-            needCollectAttr
-                ? [
-                      {
-                          attrName: AttrName.alias,
-                          endContextList: [TableSourceContext.name, UniqueJoinSourceContext.name],
-                      },
-                  ]
-                : undefined
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [TableSourceContext.name, UniqueJoinSourceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.LITERAL,
+            }
         );
     }
 
+    /** Virtual Table Entity Rules */
+    exitAtomValuesClause(ctx: AtomValuesClauseContext) {
+        if (!isChildContextOf(ctx, HiveSqlParser.RULE_fromClause)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [VirtualTableSourceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    /** SubQuery Table Entity Rules */
+    exitQueryStatementExpression(ctx: QueryStatementExpressionContext) {
+        if (!isChildContextOf(ctx, HiveSqlParser.RULE_fromClause)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SubQuerySourceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    /** Partitioned Table Entity Rules */
+    exitAtomPartitionedTableFunction(ctx: AtomPartitionedTableFunctionContext) {
+        if (!isChildContextOf(ctx, HiveSqlParser.RULE_fromClause)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [PartitionedTableFunctionContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    /** Column Entity Rules */
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
             {
@@ -66,6 +141,47 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
         ]);
     }
 
+    exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
+        if (!isChildContextOf(ctx, HiveSqlParser.RULE_selectItem)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.LITERAL,
+            }
+        );
+    }
+
+    exitSelectExpressionColumnName(ctx: SelectExpressionColumnNameContext) {
+        if (!isChildContextOf(ctx, HiveSqlParser.RULE_selectItem)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectItemContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitTableAllColumns(ctx: TableAllColumnsContext) {
+        if (!isChildContextOf(ctx, HiveSqlParser.RULE_selectItem)) return;
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
     exitViewNameCreate(ctx: ViewNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
             {
@@ -73,6 +189,10 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
                 endContextList: [CreateViewStatementContext.name],
             },
         ]);
+    }
+
+    exitSelectList(ctx: SelectListContext) {
+        this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
     }
 
     exitViewName(ctx: ViewNameContext) {

@@ -1087,9 +1087,14 @@ tableSource
 tableSourceItem
     : tableName (KW_PARTITION '(' partitionNames ')')? (KW_AS? alias=uid)? (
         indexHint (',' indexHint)*
-    )?                                                                                                              # atomTableItem
-    | KW_LATERAL? (selectStatement | '(' parenthesisSubquery=selectStatement ')') KW_AS? alias=uid fullColumnNames? # subqueryTableItem
-    | '(' tableSources ')'                                                                                          # tableSourcesItem
+    )?                                                                      # atomTableItem
+    | KW_LATERAL? atomSubQueryTableSource KW_AS? alias=uid fullColumnNames? # subqueryTableItem
+    | '(' tableSources ')'                                                  # tableSourcesItem
+    ;
+
+atomSubQueryTableSource
+    : selectStatement
+    | '(' parenthesisSubquery=selectStatement ')'
     ;
 
 // (col_list) | (col_alias [, col_alias] ...)
@@ -1117,7 +1122,7 @@ joinPart
     ;
 
 joinSpec
-    : (KW_ON expression)
+    : (KW_ON (expression | columnNamePathAllowEmpty))
     | KW_USING '(' columnNames ')'
     ;
 
@@ -1196,14 +1201,31 @@ selectSpec
     ;
 
 selectElements
-    : (star='*' | selectElement) (',' selectElement)*
+    : (pureAllColumns | selectElement) (',' selectElement)*
     ;
 
 selectElement
-    : (LOCAL_ID VAR_ASSIGN)? expression (KW_AS? alias=uid)? # selectExpressionElement
-    | functionCall (KW_AS? alias=uid)?                      # selectFunctionElement
-    | select_element=fullId '.' '*'                         # selectStarElement
-    | columnName (KW_AS? alias=uid)?                        # selectColumnElement
+    : tableAllColumns                                # selectElement_star
+    | selectLiteralColumnName (KW_AS? alias=uid)?    # selectElement_label
+    | selectExpressionColumnName (KW_AS? alias=uid)? # selectElement_expr
+    | uid DOT {this.shouldMatchEmpty()}? emptyColumn # selectElement_dot_empty
+    ;
+
+tableAllColumns
+    : fullId DOT STAR
+    ;
+
+pureAllColumns
+    : STAR
+    ;
+
+selectLiteralColumnName
+    : columnName
+    ;
+
+selectExpressionColumnName
+    : (LOCAL_ID VAR_ASSIGN)? expression # selectExpressionElement
+    | functionCall                      # selectFunctionElement
     ;
 
 intoClause
@@ -1228,7 +1250,7 @@ selectLinesInto
     ;
 
 fromClause
-    : (KW_FROM tableSources)? (KW_WHERE whereExpr=expression)?
+    : (KW_FROM tableSources)? (KW_WHERE (whereExpr=expression | columnNamePathAllowEmpty))?
     ;
 
 groupByClause
@@ -2398,10 +2420,24 @@ columnNames
     : columnName (',' columnName)*
     ;
 
+emptyColumn
+    :
+    ;
+
 columnName
     : uid (dottedId dottedId?)?
     | .? dottedId dottedId?
-    | {this.shouldMatchEmpty()}?
+    | {this.shouldMatchEmpty()}? emptyColumn
+    ;
+
+columnNamePath
+    : uid (dottedId dottedId?)?
+    | .? dottedId dottedId?
+    ;
+
+columnNamePathAllowEmpty
+    : {this.shouldMatchEmpty()}? emptyColumn
+    | uid (dottedId dottedId?)?
     ;
 
 tableSpaceNameCreate
@@ -2977,7 +3013,7 @@ expressionAtom
     | left=expressionAtom jsonOperator right=expressionAtom # jsonExpressionAtom
     | left=expressionAtom bitOperator right=expressionAtom  # bitExpressionAtom
     | left=expressionAtom mathOperator right=expressionAtom # mathExpressionAtom
-    | columnName                                            # columnNameExpressionAtom
+    | columnNamePath                                        # columnNameExpressionAtom
     ;
 
 unaryOperator

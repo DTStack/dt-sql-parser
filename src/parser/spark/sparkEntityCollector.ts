@@ -1,4 +1,5 @@
 import {
+    AtomSubQueryTableSourceContext,
     ColumnNameCreateContext,
     CreateFunctionContext,
     CreateNamespaceContext,
@@ -8,22 +9,40 @@ import {
     CreateTempViewUsingContext,
     CreateViewContext,
     FunctionNameCreateContext,
+    FunctionTableSourceContext,
     IdentifierCommentContext,
+    InlineTableSourceContext,
     InsertFromQueryContext,
     MultipleInsertContext,
+    NamedExpressionContext,
     NamespaceNameContext,
     NamespaceNameCreateContext,
     QueryStatementContext,
+    RelationContext,
     RelationPrimaryContext,
     ReplaceTableContext,
+    SelectExpressionColumnNameContext,
+    SelectListContext,
+    SelectLiteralColumnNameContext,
     SingleStatementContext,
+    SparkSqlParser,
+    SubQueryTableSourceContext,
+    TableAllColumnsContext,
     TableNameContext,
     TableNameCreateContext,
+    TableSourceContext,
     ViewNameContext,
     ViewNameCreateContext,
 } from '../../lib/spark/SparkSqlParser';
 import type { SparkSqlParserListener } from '../../lib/spark/SparkSqlParserListener';
-import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import {
+    AttrName,
+    ColumnDeclareType,
+    EntityCollector,
+    isChildContextOf,
+    StmtContextType,
+    TableDeclareType,
+} from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
 
 export class SparkEntityCollector extends EntityCollector implements SparkSqlParserListener {
@@ -41,19 +60,75 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
         ]);
     }
 
+    /** Table Entity Rules */
     exitTableName(ctx: TableNameContext) {
-        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
-            needCollectAttr
-                ? [
-                      {
-                          attrName: AttrName.alias,
-                          endContextList: [RelationPrimaryContext.name],
-                      },
-                  ]
-                : undefined
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [
+                        RelationPrimaryContext.name,
+                        RelationContext.name,
+                        TableSourceContext.name,
+                    ],
+                },
+            ],
+            {
+                declareType: TableDeclareType.LITERAL,
+            }
+        );
+    }
+
+    /** Inline Table Entity Rules */
+    exitInlineTableSource(ctx: InlineTableSourceContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [InlineTableSourceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    /** Function Table Entity Rules */
+    exitFunctionTableSource(ctx: FunctionTableSourceContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [FunctionTableSourceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    /** SubQuery Table Entity Rules */
+    exitAtomSubQueryTableSource(ctx: AtomSubQueryTableSourceContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SubQueryTableSourceContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
         );
     }
 
@@ -70,6 +145,10 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
         this.pushEntity(ctx, EntityContextType.VIEW);
     }
 
+    exitSelectList(ctx: SelectListContext) {
+        this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
+    }
+
     exitViewNameCreate(ctx: ViewNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.VIEW_CREATE, [
             {
@@ -83,6 +162,7 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
         this.pushEntity(ctx, EntityContextType.FUNCTION_CREATE);
     }
 
+    /** Column Entity Rules */
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
             {
@@ -97,6 +177,57 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
                 endContextList: [CreateOrReplaceTableColTypeContext.name],
             },
         ]);
+    }
+
+    exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
+        if (!isChildContextOf(ctx, SparkSqlParser.RULE_namedExpression)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [NamedExpressionContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.LITERAL,
+            }
+        );
+    }
+
+    exitSelectExpressionColumnName(ctx: SelectExpressionColumnNameContext) {
+        if (!isChildContextOf(ctx, SparkSqlParser.RULE_namedExpression)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [NamedExpressionContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.EXPRESSION,
+            }
+        );
+    }
+
+    exitTableAllColumns(ctx: TableAllColumnsContext) {
+        if (!isChildContextOf(ctx, SparkSqlParser.RULE_namedExpression)) return;
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [NamedExpressionContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.ALL,
+            }
+        );
     }
 
     /** ===== Statement begin */

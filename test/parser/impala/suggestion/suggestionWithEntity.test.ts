@@ -49,10 +49,14 @@ describe('Impala SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = impala.getAllEntities(sql, pos);
-        expect(entities.length).toBe(1);
+        expect(entities.length).toBe(2);
         expect(entities[0].text).toBe('students');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[1].text).toBe('name, calculate_age(birthdate) AS age,');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
+        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('insert into table as select with no column', () => {
@@ -70,14 +74,18 @@ describe('Impala SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = impala.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('insert_tb');
+        expect(entities.length).toBe(3);
+        expect(entities[0].text).toBe('from_tb');
         expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('from_tb');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[2].text).toBe('insert_tb');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('insert into table as select with trailing comma', () => {
@@ -95,14 +103,26 @@ describe('Impala SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = impala.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('insert_tb');
-        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('from_tb');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+        expect(entities.length).toBe(3);
+
+        const insertTableEntity = entities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'insert_tb'
+        );
+        const fromTableEntity = entities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'from_tb'
+        );
+        const queryResultEntity = entities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        );
+
+        expect(insertTableEntity).toBeDefined();
+        expect(fromTableEntity).toBeDefined();
+        expect(queryResultEntity).toBeDefined();
+
+        expect(insertTableEntity.belongStmt.isContainCaret).toBeTruthy();
+        expect(fromTableEntity.belongStmt.isContainCaret).toBeTruthy();
+        expect(queryResultEntity.text).toBe('id,');
     });
 
     test('create table as select with no column', () => {
@@ -120,14 +140,18 @@ describe('Impala SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = impala.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('sorted_census_data');
-        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities.length).toBe(3);
+        expect(entities[0].text).toBe('unsorted_census_data');
+        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE);
         expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
 
-        expect(entities[1].text).toBe('unsorted_census_data');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
+        expect(entities[1].text).toBe('');
+        expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
         expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+
+        expect(entities[2].text).toBe('sorted_census_data');
+        expect(entities[2].entityContextType).toBe(EntityContextType.TABLE_CREATE);
+        expect(entities[2].belongStmt.isContainCaret).toBeTruthy();
     });
 
     test('create table as select with trailing comma', () => {
@@ -145,14 +169,28 @@ describe('Impala SQL Syntax Suggestion with collect entity', () => {
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual([]);
 
         const entities = impala.getAllEntities(sql, pos);
-        expect(entities.length).toBe(2);
-        expect(entities[0].text).toBe('sorted_census_data');
-        expect(entities[0].entityContextType).toBe(EntityContextType.TABLE_CREATE);
-        expect(entities[0].belongStmt.isContainCaret).toBeTruthy();
+        expect(entities.length).toBe(3);
 
-        expect(entities[1].text).toBe('unsorted_census_data');
-        expect(entities[1].entityContextType).toBe(EntityContextType.TABLE);
-        expect(entities[1].belongStmt.isContainCaret).toBeTruthy();
+        const tableCreateEntity = entities.find(
+            (e) =>
+                e.entityContextType === EntityContextType.TABLE_CREATE &&
+                e.text === 'sorted_census_data'
+        );
+        const tableEntity = entities.find(
+            (e) =>
+                e.entityContextType === EntityContextType.TABLE && e.text === 'unsorted_census_data'
+        );
+        const queryResultEntity = entities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        );
+
+        expect(tableCreateEntity).toBeDefined();
+        expect(tableEntity).toBeDefined();
+        expect(queryResultEntity).toBeDefined();
+
+        expect(tableCreateEntity.belongStmt.isContainCaret).toBeTruthy();
+        expect(tableEntity.belongStmt.isContainCaret).toBeTruthy();
+        expect(queryResultEntity.text).toBe('id,');
     });
 
     test('isContainCaret should be truthy if caret position is whitespace at the end of statement', () => {
