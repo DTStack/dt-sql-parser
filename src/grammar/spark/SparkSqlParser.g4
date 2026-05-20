@@ -466,7 +466,6 @@ clusterOrDistributeBy
 
 queryTerm
     : queryPrimary
-    | left=queryTerm operator=(KW_INTERSECT | KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
     | left=queryTerm operator=KW_INTERSECT setQuantifier? right=queryTerm
     | left=queryTerm operator=(KW_UNION | KW_EXCEPT | KW_MINUS) setQuantifier? right=queryTerm
     ;

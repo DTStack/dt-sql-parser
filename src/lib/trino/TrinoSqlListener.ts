@@ -232,6 +232,7 @@ import { NullLiteralContext } from "./TrinoSqlParser.js";
 import { RowConstructorContext } from "./TrinoSqlParser.js";
 import { SubscriptContext } from "./TrinoSqlParser.js";
 import { JsonExistsContext } from "./TrinoSqlParser.js";
+import { CoalesceContext } from "./TrinoSqlParser.js";
 import { CurrentPathContext } from "./TrinoSqlParser.js";
 import { SubqueryExpressionContext } from "./TrinoSqlParser.js";
 import { BinaryLiteralContext } from "./TrinoSqlParser.js";
@@ -2950,6 +2951,18 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitJsonExists?: (ctx: JsonExistsContext) => void;
+    /**
+     * Enter a parse tree produced by the `coalesce`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterCoalesce?: (ctx: CoalesceContext) => void;
+    /**
+     * Exit a parse tree produced by the `coalesce`
+     * labeled alternative in `TrinoSqlParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitCoalesce?: (ctx: CoalesceContext) => void;
     /**
      * Enter a parse tree produced by the `currentPath`
      * labeled alternative in `TrinoSqlParser.primaryExpression`.

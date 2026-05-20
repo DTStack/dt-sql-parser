@@ -19,3 +19,5 @@ CREATE TABLE tb (id
 );
 
 SELECT id FROM   ;
+
+SELECT ;

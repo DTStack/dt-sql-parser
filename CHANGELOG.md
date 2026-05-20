@@ -11,6 +11,20 @@ All notable changes to this project will be documented in this file. See [standa
 * **flink:** [#455](https://github.com/DTStack/dt-sql-parser/issues/455) fix json functions' params problem in flink ([12ef949](https://github.com/DTStack/dt-sql-parser/commit/12ef949339ffb0889e428c97c54149cd567b6ae8))
 * **flink:** some grammar rules ([#465](https://github.com/DTStack/dt-sql-parser/issues/465)) ([20e352c](https://github.com/DTStack/dt-sql-parser/commit/20e352cb32142c825ee086e36051ff9797798e09)), closes [#464](https://github.com/DTStack/dt-sql-parser/issues/464) [#464](https://github.com/DTStack/dt-sql-parser/issues/464) [#464](https://github.com/DTStack/dt-sql-parser/issues/464)
 
+### [4.4.1](https://github.com/DTStack/dt-sql-parser/compare/v4.3.1...v4.4.1) (2025-12-22)
+
+
+### Features
+
+* mark as entityCollecting in getAllEntities context to allow empty column ([ba6fbbb](https://github.com/DTStack/dt-sql-parser/commit/ba6fbbbe90bee79a7bba22350c3d50d6c9205b0d))
+* remove noReserved keywords in completions ([cf1957e](https://github.com/DTStack/dt-sql-parser/commit/cf1957e66896fbcb587f6038242e8f174b7045ff))
+
+
+### Bug Fixes
+
+* **flink:** [#455](https://github.com/DTStack/dt-sql-parser/issues/455) fix json functions' params problem in flink ([12ef949](https://github.com/DTStack/dt-sql-parser/commit/12ef949339ffb0889e428c97c54149cd567b6ae8))
+* **flink:** some grammar rules ([#465](https://github.com/DTStack/dt-sql-parser/issues/465)) ([20e352c](https://github.com/DTStack/dt-sql-parser/commit/20e352cb32142c825ee086e36051ff9797798e09)), closes [#464](https://github.com/DTStack/dt-sql-parser/issues/464) [#464](https://github.com/DTStack/dt-sql-parser/issues/464) [#464](https://github.com/DTStack/dt-sql-parser/issues/464)
+
 
 ### Features
 

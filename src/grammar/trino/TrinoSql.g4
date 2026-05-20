@@ -638,6 +638,7 @@ primaryExpression
     | KW_SUBSTRING '(' valueExpression KW_FROM valueExpression (KW_FOR valueExpression)? ')'              # substring
     | KW_NORMALIZE '(' valueExpression (',' normalForm)? ')'                                              # normalize
     | KW_EXTRACT '(' identifier KW_FROM valueExpression ')'                                               # extract
+    | KW_COALESCE '(' expression (',' expression)* ')'                                                    # coalesce
     | '(' expression ')'                                                                                  # parenthesizedExpression
     | KW_GROUPING '(' (qualifiedName (',' qualifiedName)*)? ')'                                           # groupingOperation
     | KW_JSON_EXISTS '(' jsonPathInvocation (jsonExistsErrorBehavior KW_ON KW_ERROR)? ')'                 # jsonExists
@@ -1125,6 +1126,7 @@ nonReserved
     | KW_CASCADE
     | KW_CATALOG
     | KW_CATALOGS
+    | KW_COALESCE
     | KW_COLUMN
     | KW_COLUMNS
     | KW_COMMENT
@@ -1358,6 +1360,7 @@ KW_CASE              : 'CASE';
 KW_CAST              : 'CAST';
 KW_CATALOG           : 'CATALOG';
 KW_CATALOGS          : 'CATALOGS';
+KW_COALESCE          : 'COALESCE';
 KW_COLUMN            : 'COLUMN';
 KW_COLUMNS           : 'COLUMNS';
 KW_COMMENT           : 'COMMENT';

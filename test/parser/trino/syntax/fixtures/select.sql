@@ -119,3 +119,17 @@ SELECT substring('string' FROM 2 FOR 3);
 
 SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
 SELECT SUM(c.amount) AS total_amount FROM cust c;
+
+-- COALESCE function
+SELECT COALESCE(1, 2, 3);
+SELECT COALESCE(NULL, 2, 3);
+SELECT COALESCE(NULL, NULL, 3);
+SELECT COALESCE(NULL, NULL, NULL);
+SELECT COALESCE(a, b, c) FROM table1;
+SELECT COALESCE(a, NULL, c) FROM table1;
+SELECT COALESCE(a, b, 'default') FROM table1;
+SELECT COALESCE(1, 2, 3, 4, 5);
+SELECT COALESCE(col1, col2, col3, col4) FROM table1 WHERE COALESCE(col1, col2) IS NOT NULL;
+SELECT COALESCE(a + b, c * d, e) FROM table1;
+SELECT COALESCE(CAST(a AS VARCHAR), b) FROM table1;
+SELECT COALESCE(NULL, COALESCE(a, b), c) FROM table1;
