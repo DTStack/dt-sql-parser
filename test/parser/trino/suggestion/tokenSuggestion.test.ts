@@ -183,4 +183,17 @@ describe('Trino SQL Token Suggestion', () => {
         )?.keywords;
         expect(suggestion).toMatchUnorderedArray(['LATERAL', 'UNNEST', 'JSON_TABLE', 'TABLE']);
     });
+
+    test('After SELECT', () => {
+        const pos: CaretPosition = {
+            lineNumber: 23,
+            column: 8,
+        };
+        const suggestion = trino.getSuggestionAtCaretPosition(
+            commentOtherLine(tokenSql, pos.lineNumber),
+            pos
+        )?.keywords;
+
+        expect(suggestion).toContain('COALESCE');
+    });
 });
