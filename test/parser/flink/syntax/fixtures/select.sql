@@ -58,3 +58,36 @@ SELECT SUM(c.amount) AS total_amount FROM cust c;
 INSERT INTO SR_CATALOG.DEMOS.DETAIL_DEMO VALUES(2, 'YY', 2, CURRENT_DATE, NOW(),func1(),func2(1),func3('a',2));
 
 INSERT INTO SR_CATALOG.DEMOS.DETAIL_DEMO SELECT 2, 'YY', 2, CURRENT_DATE,NOW(),func1(),func2(1),func3('a',2);
+
+SELECT 
+    user_id,
+    JSON_VALUE(event_data, '$.eventType' RETURNING STRING) AS event_type,
+    JSON_VALUE(
+        event_data, 
+        '$.pageUrl' 
+        NULL ON EMPTY 
+        NULL ON ERROR
+    ) AS page_url,
+    JSON_VALUE(event_data, '$.productId' RETURNING STRING) AS product_id,
+    JSON_VALUE(
+        event_data, 
+        '$.amount' 
+        RETURNING DOUBLE
+        NULL ON EMPTY 
+        NULL ON ERROR
+    ) AS amount,
+    JSON_VALUE('{"contains blank": "right"}', 'strict $.[''contains blank'']' NULL ON EMPTY DEFAULT 'wrong' ON ERROR) AS name1,
+    JSON_QUERY('{"a":[{"c":"c1"},{"c":"c2"}]}', 'lax $.a[*].c' RETURNING ARRAY<STRING>) as d1,
+    JSON_QUERY('{}', 'lax $.invalid' EMPTY OBJECT ON EMPTY) asd2,
+    JSON_OBJECT('K1' VALUE JSON('{"K2": {"value": 42}}')),
+    JSON_ARRAY(CAST(NULL AS STRING) ABSENT ON NULL),
+    event_time
+FROM user_behavior
+WHERE JSON_VALUE(event_data, '$.eventType' RETURNING STRING) IS NOT NULL
+;
+
+SELECT * FROM orders ORDER BY price * quantity ASC LIMIT 10;
+SELECT *, COALESCE(quantity, 0) * price AS total_amount FROM orders ORDER BY (COALESCE(quantity, 0) * price) DESC;
+SELECT *, COALESCE(quantity, 0) * price AS total_amount FROM orders ORDER BY customer_id ASC, (COALESCE(quantity, 0) * price) DESC, order_time ASC;
+SELECT *, ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_time DESC) AS rn FROM orders ORDER BY rn ASC;
+SELECT *, SUM(quantity * price) OVER (PARTITION BY customer_id ORDER BY order_time ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total FROM orders ORDER BY running_total DESC;

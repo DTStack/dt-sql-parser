@@ -26,6 +26,7 @@ Additionally, it provides advanced features such as **SQL Validation**, **Code C
 - PostgreSQL
 - Trino
 - Impala
+- GenericSQL
 
 >[!TIP]
 >This project is the default for Typescript target, also you can try to compile it to other languages if you need.
@@ -53,7 +54,7 @@ yarn add dt-sql-parser
 ## Usage
 We recommend learning the fundamentals usage before continuing. The dt-sql-parser library provides SQL classes for different types of SQL.
 ```javascript
-import { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgreSQL, TrinoSQL, ImpalaSQL } from 'dt-sql-parser';
+import { MySQL, FlinkSQL, SparkSQL, HiveSQL, PostgreSQL, TrinoSQL, ImpalaSQL, GenericSQL } from 'dt-sql-parser';
 ```
 
 Before using syntax validation, code completion, and other features, it is necessary to instantiate the Parser of the relevant SQL type.
