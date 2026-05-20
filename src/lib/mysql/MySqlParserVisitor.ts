@@ -281,7 +281,10 @@ import { JsonOnEmptyContext } from "./MySqlParser.js";
 import { JsonOnErrorContext } from "./MySqlParser.js";
 import { SelectSpecContext } from "./MySqlParser.js";
 import { SelectElementsContext } from "./MySqlParser.js";
-import { SelectElementContext } from "./MySqlParser.js";
+import { SelectElement_starContext } from "./MySqlParser.js";
+import { SelectElement_labelContext } from "./MySqlParser.js";
+import { SelectElement_exprContext } from "./MySqlParser.js";
+import { SelectElement_dot_emptyContext } from "./MySqlParser.js";
 import { TableAllColumnsContext } from "./MySqlParser.js";
 import { PureAllColumnsContext } from "./MySqlParser.js";
 import { SelectLiteralColumnNameContext } from "./MySqlParser.js";
@@ -541,7 +544,10 @@ import { UserOrRoleNamesContext } from "./MySqlParser.js";
 import { UserOrRoleNameContext } from "./MySqlParser.js";
 import { ColumnNameCreateContext } from "./MySqlParser.js";
 import { ColumnNamesContext } from "./MySqlParser.js";
+import { EmptyColumnContext } from "./MySqlParser.js";
 import { ColumnNameContext } from "./MySqlParser.js";
+import { ColumnNamePathContext } from "./MySqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./MySqlParser.js";
 import { TableSpaceNameCreateContext } from "./MySqlParser.js";
 import { TableSpaceNameContext } from "./MySqlParser.js";
 import { PartitionNameCreateContext } from "./MySqlParser.js";
@@ -2469,11 +2475,33 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitSelectElements?: (ctx: SelectElementsContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.selectElement`.
+     * Visit a parse tree produced by the `selectElement_star`
+     * labeled alternative in `MySqlParser.selectElement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelectElement?: (ctx: SelectElementContext) => Result;
+    visitSelectElement_star?: (ctx: SelectElement_starContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectElement_label`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectElement_label?: (ctx: SelectElement_labelContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectElement_expr`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectElement_expr?: (ctx: SelectElement_exprContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectElement_dot_empty`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectElement_dot_empty?: (ctx: SelectElement_dot_emptyContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.tableAllColumns`.
      * @param ctx the parse tree
@@ -4122,11 +4150,29 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitColumnNames?: (ctx: ColumnNamesContext) => Result;
     /**
+     * Visit a parse tree produced by `MySqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
+    /**
      * Visit a parse tree produced by `MySqlParser.columnName`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
+    /**
+     * Visit a parse tree produced by `MySqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.tableSpaceNameCreate`.
      * @param ctx the parse tree

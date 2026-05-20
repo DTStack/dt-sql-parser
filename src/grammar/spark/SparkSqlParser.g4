@@ -413,13 +413,22 @@ viewName
     : viewIdentifier
     ;
 
+emptyColumn
+    :
+    ;
+
 columnName
-    : multipartIdentifier
-    | {this.shouldMatchEmpty()}?
+    : multipartIdentifierAllowEmpty
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnNamePath
     : multipartIdentifier
+    ;
+
+columnNamePathAllowEmpty
+    : multipartIdentifierAllowEmpty
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnNameSeq
@@ -680,7 +689,7 @@ joinType
     ;
 
 joinCriteria
-    : KW_ON booleanExpression
+    : KW_ON (booleanExpression | columnNamePathAllowEmpty (EQ columnNamePathAllowEmpty)?)
     | KW_USING identifierList
     ;
 
@@ -804,6 +813,11 @@ multipartIdentifier
     : parts+=errorCapturingIdentifier (DOT parts+=errorCapturingIdentifier)*
     ;
 
+multipartIdentifierAllowEmpty
+    : multipartIdentifier
+    | {this.shouldMatchEmpty()}? multipartIdentifier DOT emptyColumn
+    ;
+
 multipartIdentifierPropertyList
     : multipartIdentifierProperty (COMMA multipartIdentifierProperty)*
     ;
@@ -836,6 +850,7 @@ namedExpression
     : (tableAllColumns | selectLiteralColumnName | selectExpressionColumnName) (
         KW_AS? (alias=errorCapturingIdentifier | identifierList)
     )?
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 namedExpressionSeq

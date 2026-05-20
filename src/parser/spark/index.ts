@@ -49,6 +49,7 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
         SparkSqlParser.RULE_functionNameCreate,
         SparkSqlParser.RULE_columnName,
         SparkSqlParser.RULE_columnNamePath,
+        SparkSqlParser.RULE_columnNamePathAllowEmpty,
         SparkSqlParser.RULE_columnNameCreate,
         ...this.excludeKeywordRules,
     ]);
@@ -128,7 +129,8 @@ export class SparkSQL extends BasicSQL<SparkSqlLexer, ProgramContext, SparkSqlPa
                     syntaxContextType = EntityContextType.COLUMN_CREATE;
                     break;
                 }
-                case SparkSqlParser.RULE_columnNamePath: {
+                case SparkSqlParser.RULE_columnNamePath:
+                case SparkSqlParser.RULE_columnNamePathAllowEmpty: {
                     if (
                         candidateRule.ruleList.includes(SparkSqlParser.RULE_whenClause) ||
                         candidateRule.ruleList.includes(SparkSqlParser.RULE_whereClause) ||

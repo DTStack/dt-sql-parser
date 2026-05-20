@@ -1,20 +1,27 @@
+import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import {
-    Lexer,
-    Token,
+    ANTLRErrorListener,
+    CharStream,
     CharStreams,
     CommonTokenStream,
-    CharStream,
-    ParserRuleContext,
-    ParseTreeWalker,
-    ParseTreeListener,
-    PredictionMode,
-    ANTLRErrorListener,
+    Lexer,
     Parser,
+    ParserRuleContext,
+    ParseTreeListener,
+    ParseTreeWalker,
+    PredictionMode,
+    Token,
 } from 'antlr4ng';
-import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
+
 import { SQLParserBase } from '../../lib/SQLParserBase';
+import type { EntityCollector } from './entityCollector';
+import { EntityContext } from './entityCollector';
+import { ErrorStrategy } from './errorStrategy';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
-import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
+import { ErrorListener, ParseError } from './parseErrorListener';
+import SemanticContextCollector from './semanticContextCollector';
+import type { SplitListener } from './splitListener';
+import { ctxToText, TextSlice, tokenToWord, WordRange } from './textAndWord';
 import {
     CaretPosition,
     LOCALE_TYPE,
@@ -22,12 +29,6 @@ import {
     Suggestions,
     SyntaxSuggestion,
 } from './types';
-import { ParseError, ErrorListener } from './parseErrorListener';
-import { ErrorStrategy } from './errorStrategy';
-import type { SplitListener } from './splitListener';
-import type { EntityCollector } from './entityCollector';
-import { EntityContext } from './entityCollector';
-import SemanticContextCollector from './semanticContextCollector';
 
 export const SQL_SPLIT_SYMBOL_TEXT = ';';
 
@@ -538,7 +539,7 @@ export abstract class BasicSQL<
         const core = new CodeCompletionCore(sqlParserIns);
         core.preferredRules = this.preferredRules;
         // core.showRuleStack = true;
-        //  core.showResult = true;
+        // core.showResult = true;
 
         const candidates = core.collectCandidates(caretTokenIndex, parseTree);
         const originalSuggestions = this.processCandidates(candidates, allTokens, caretTokenIndex);

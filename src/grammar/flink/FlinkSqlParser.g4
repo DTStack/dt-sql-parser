@@ -184,13 +184,22 @@ columnNameCreate
     | expression
     ;
 
+emptyColumn
+    :
+    ;
+
 columnName
-    : uid
-    | {this.shouldMatchEmpty()}?
+    : uidAllowEmpty
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnNamePath
     : uid
+    ;
+
+columnNamePathAllowEmpty
+    : uidAllowEmpty
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnNameList
@@ -500,6 +509,7 @@ columnProjectItem
     | selectLiteralColumnName (columnAlias | KW_AS? expression)?
     | tableAllColumns columnAlias?
     | selectExpressionColumnName (columnAlias | KW_AS? columnName)?
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 selectWindowItemColumnName
@@ -614,12 +624,12 @@ columnDescriptor
     ;
 
 joinCondition
-    : KW_ON booleanExpression
+    : KW_ON (booleanExpression | columnNamePathAllowEmpty (EQUAL_SYMBOL columnNamePathAllowEmpty)?)
     | KW_USING columnNameList
     ;
 
 whereClause
-    : KW_WHERE booleanExpression
+    : KW_WHERE (booleanExpression | columnNamePathAllowEmpty)
     ;
 
 groupByClause
@@ -981,6 +991,11 @@ viewPathCreate
 
 uid
     : identifier (DOT identifier)*
+    ;
+
+uidAllowEmpty
+    : identifier (DOT identifier)*
+    | {this.shouldMatchEmpty()}? identifier DOT emptyColumn
     ;
 
 withOption

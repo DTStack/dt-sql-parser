@@ -1122,7 +1122,7 @@ joinPart
     ;
 
 joinSpec
-    : (KW_ON expression)
+    : (KW_ON (expression | columnNamePathAllowEmpty))
     | KW_USING '(' columnNames ')'
     ;
 
@@ -1205,9 +1205,10 @@ selectElements
     ;
 
 selectElement
-    : tableAllColumns
-    | selectLiteralColumnName (KW_AS? alias=uid)?
-    | selectExpressionColumnName (KW_AS? alias=uid)?
+    : tableAllColumns                                # selectElement_star
+    | selectLiteralColumnName (KW_AS? alias=uid)?    # selectElement_label
+    | selectExpressionColumnName (KW_AS? alias=uid)? # selectElement_expr
+    | uid DOT {this.shouldMatchEmpty()}? emptyColumn # selectElement_dot_empty
     ;
 
 tableAllColumns
@@ -1249,7 +1250,7 @@ selectLinesInto
     ;
 
 fromClause
-    : (KW_FROM tableSources)? (KW_WHERE whereExpr=expression)?
+    : (KW_FROM tableSources)? (KW_WHERE (whereExpr=expression | columnNamePathAllowEmpty))?
     ;
 
 groupByClause
@@ -2419,10 +2420,24 @@ columnNames
     : columnName (',' columnName)*
     ;
 
+emptyColumn
+    :
+    ;
+
 columnName
     : uid (dottedId dottedId?)?
     | .? dottedId dottedId?
-    | {this.shouldMatchEmpty()}?
+    | {this.shouldMatchEmpty()}? emptyColumn
+    ;
+
+columnNamePath
+    : uid (dottedId dottedId?)?
+    | .? dottedId dottedId?
+    ;
+
+columnNamePathAllowEmpty
+    : {this.shouldMatchEmpty()}? emptyColumn
+    | uid (dottedId dottedId?)?
     ;
 
 tableSpaceNameCreate
@@ -2998,7 +3013,7 @@ expressionAtom
     | left=expressionAtom jsonOperator right=expressionAtom # jsonExpressionAtom
     | left=expressionAtom bitOperator right=expressionAtom  # bitExpressionAtom
     | left=expressionAtom mathOperator right=expressionAtom # mathExpressionAtom
-    | columnName                                            # columnNameExpressionAtom
+    | columnNamePath                                        # columnNameExpressionAtom
     ;
 
 unaryOperator

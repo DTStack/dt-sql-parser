@@ -281,7 +281,10 @@ import { JsonOnEmptyContext } from "./MySqlParser.js";
 import { JsonOnErrorContext } from "./MySqlParser.js";
 import { SelectSpecContext } from "./MySqlParser.js";
 import { SelectElementsContext } from "./MySqlParser.js";
-import { SelectElementContext } from "./MySqlParser.js";
+import { SelectElement_starContext } from "./MySqlParser.js";
+import { SelectElement_labelContext } from "./MySqlParser.js";
+import { SelectElement_exprContext } from "./MySqlParser.js";
+import { SelectElement_dot_emptyContext } from "./MySqlParser.js";
 import { TableAllColumnsContext } from "./MySqlParser.js";
 import { PureAllColumnsContext } from "./MySqlParser.js";
 import { SelectLiteralColumnNameContext } from "./MySqlParser.js";
@@ -541,7 +544,10 @@ import { UserOrRoleNamesContext } from "./MySqlParser.js";
 import { UserOrRoleNameContext } from "./MySqlParser.js";
 import { ColumnNameCreateContext } from "./MySqlParser.js";
 import { ColumnNamesContext } from "./MySqlParser.js";
+import { EmptyColumnContext } from "./MySqlParser.js";
 import { ColumnNameContext } from "./MySqlParser.js";
+import { ColumnNamePathContext } from "./MySqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./MySqlParser.js";
 import { TableSpaceNameCreateContext } from "./MySqlParser.js";
 import { TableSpaceNameContext } from "./MySqlParser.js";
 import { PartitionNameCreateContext } from "./MySqlParser.js";
@@ -3696,15 +3702,53 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitSelectElements?: (ctx: SelectElementsContext) => void;
     /**
-     * Enter a parse tree produced by `MySqlParser.selectElement`.
+     * Enter a parse tree produced by the `selectElement_star`
+     * labeled alternative in `MySqlParser.selectElement`.
      * @param ctx the parse tree
      */
-    enterSelectElement?: (ctx: SelectElementContext) => void;
+    enterSelectElement_star?: (ctx: SelectElement_starContext) => void;
     /**
-     * Exit a parse tree produced by `MySqlParser.selectElement`.
+     * Exit a parse tree produced by the `selectElement_star`
+     * labeled alternative in `MySqlParser.selectElement`.
      * @param ctx the parse tree
      */
-    exitSelectElement?: (ctx: SelectElementContext) => void;
+    exitSelectElement_star?: (ctx: SelectElement_starContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectElement_label`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    enterSelectElement_label?: (ctx: SelectElement_labelContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectElement_label`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    exitSelectElement_label?: (ctx: SelectElement_labelContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectElement_expr`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    enterSelectElement_expr?: (ctx: SelectElement_exprContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectElement_expr`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    exitSelectElement_expr?: (ctx: SelectElement_exprContext) => void;
+    /**
+     * Enter a parse tree produced by the `selectElement_dot_empty`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    enterSelectElement_dot_empty?: (ctx: SelectElement_dot_emptyContext) => void;
+    /**
+     * Exit a parse tree produced by the `selectElement_dot_empty`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     */
+    exitSelectElement_dot_empty?: (ctx: SelectElement_dot_emptyContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.tableAllColumns`.
      * @param ctx the parse tree
@@ -6482,6 +6526,16 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitColumnNames?: (ctx: ColumnNamesContext) => void;
     /**
+     * Enter a parse tree produced by `MySqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    enterEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    exitEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
      * Enter a parse tree produced by `MySqlParser.columnName`.
      * @param ctx the parse tree
      */
@@ -6491,6 +6545,26 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Enter a parse tree produced by `MySqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `MySqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.tableSpaceNameCreate`.
      * @param ctx the parse tree

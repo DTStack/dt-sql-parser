@@ -140,8 +140,10 @@ import { TableNameCreateContext } from "./SparkSqlParser.js";
 import { TableNameContext } from "./SparkSqlParser.js";
 import { ViewNameCreateContext } from "./SparkSqlParser.js";
 import { ViewNameContext } from "./SparkSqlParser.js";
+import { EmptyColumnContext } from "./SparkSqlParser.js";
 import { ColumnNameContext } from "./SparkSqlParser.js";
 import { ColumnNamePathContext } from "./SparkSqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./SparkSqlParser.js";
 import { ColumnNameSeqContext } from "./SparkSqlParser.js";
 import { ColumnNameCreateContext } from "./SparkSqlParser.js";
 import { IdentifierReferenceContext } from "./SparkSqlParser.js";
@@ -215,6 +217,7 @@ import { TableAliasContext } from "./SparkSqlParser.js";
 import { RowFormatContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierListContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierContext } from "./SparkSqlParser.js";
+import { MultipartIdentifierAllowEmptyContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierPropertyListContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierPropertyContext } from "./SparkSqlParser.js";
 import { TableIdentifierContext } from "./SparkSqlParser.js";
@@ -1187,6 +1190,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitViewName?: (ctx: ViewNameContext) => Result;
     /**
+     * Visit a parse tree produced by `SparkSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
+    /**
      * Visit a parse tree produced by `SparkSqlParser.columnName`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1198,6 +1207,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.columnNameSeq`.
      * @param ctx the parse tree
@@ -1641,6 +1656,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitMultipartIdentifier?: (ctx: MultipartIdentifierContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.multipartIdentifierAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitMultipartIdentifierAllowEmpty?: (ctx: MultipartIdentifierAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.multipartIdentifierPropertyList`.
      * @param ctx the parse tree
