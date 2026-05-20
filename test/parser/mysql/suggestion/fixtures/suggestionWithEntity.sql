@@ -13,3 +13,7 @@ CREATE TABLE sorted_census_data AS SELECT id, age,  FROM unsorted_census_data;
 SELECT id FROM tb WHERE 
 
 SELECT id FROM tb GROUP BY  ;  
+
+SELECT tb. FROM tb;
+
+select t1. from sorted_census_data as t1;

@@ -2,6 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0-beta.0](https://github.com/DTStack/dt-sql-parser/compare/v4.4.1...v4.5.0-beta.0) (2025-12-30)
 ### [4.4.2](https://github.com/DTStack/dt-sql-parser/compare/v4.4.1...v4.4.2) (2026-03-06)
 
 
@@ -21,9 +22,18 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* [#438](https://github.com/DTStack/dt-sql-parser/issues/438) syntaxContextType not duplicate ([4705620](https://github.com/DTStack/dt-sql-parser/commit/47056209150ef6aaade7c612700b7a289c279208))
-* **flink:** [#442](https://github.com/DTStack/dt-sql-parser/issues/442) fix flink's insert values() can't support function problem ([98ab7d4](https://github.com/DTStack/dt-sql-parser/commit/98ab7d459b189b7ef07cc1bf820524594a0cc78c))
-* **postgresql:** [#432](https://github.com/DTStack/dt-sql-parser/issues/432) remove error rule ([3684ae7](https://github.com/DTStack/dt-sql-parser/commit/3684ae71e92cefe4bac18174b757e162d3f89457))
+* **flink:** [#455](https://github.com/DTStack/dt-sql-parser/issues/455) fix json functions' params problem in flink ([12ef949](https://github.com/DTStack/dt-sql-parser/commit/12ef949339ffb0889e428c97c54149cd567b6ae8))
+* **flink:** some grammar rules ([#465](https://github.com/DTStack/dt-sql-parser/issues/465)) ([20e352c](https://github.com/DTStack/dt-sql-parser/commit/20e352cb32142c825ee086e36051ff9797798e09)), closes [#464](https://github.com/DTStack/dt-sql-parser/issues/464) [#464](https://github.com/DTStack/dt-sql-parser/issues/464) [#464](https://github.com/DTStack/dt-sql-parser/issues/464)
+
+
+### Features
+
+* support query result and derived table entity collecting ([#434](https://github.com/DTStack/dt-sql-parser/issues/434)) ([a176253](https://github.com/DTStack/dt-sql-parser/commit/a176253799b514fcd169c82f2706c2fe2810d85c))
+
+### [4.4.1](https://github.com/DTStack/dt-sql-parser/compare/v4.4.0...v4.4.1) (2025-12-22)
+
+### Bug Fixes
+
 * **trino:** add selectItem rule to candidates for column suggestions ([81a361f](https://github.com/DTStack/dt-sql-parser/commit/81a361fb8e45e81c8826cba212f0007443bf12b5))
 
 ## [4.4.0](https://github.com/DTStack/dt-sql-parser/compare/v4.4.0-beta.0...v4.4.0) (2025-11-26)

@@ -44,3 +44,15 @@ CREATE VIEW view1(col1, col2) COMMENT 'this is a view' AS SELECT col3, col4 FROM
 CREATE DATABASE IF NOT EXISTS db1 COMMENT 'this is a created database' WITH ('key1' = 'value1', 'key2.a' = 'value2.a');
 
 CREATE FUNCTION IF NOT EXISTS tempFunction AS 'SimpleUdf';
+
+SELECT id, age as new_age, count(*) as total FROM t1;
+
+SELECT t1.*, t2.* FROM t1, t2;
+
+SELECT * FROM t1;
+
+SELECT * FROM LATERAL TABLE(generate_series(1, 10));
+
+SELECT COUNT(*) FROM t1;
+
+SELECT id FROM t1 WHERE id > 0;

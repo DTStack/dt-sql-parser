@@ -115,3 +115,38 @@ describe('FlinkSQL validate invalid sql and test msg', () => {
         );
     });
 });
+
+describe('FlinkSQL validate multiple erroneous statements', () => {
+    const flink = new FlinkSQL();
+
+    test('validate multiple erroneous statements', () => {
+        const sql = `SELEC * from table1; SELECT * form table2;`;
+        const errors = flink.validate(sql);
+        expect(errors.length).toBe(2);
+    });
+
+    test('validate valid + erroneous statements', () => {
+        const sql = `SELECT * from table1; SELEC * from table2;`;
+        const errors = flink.validate(sql);
+        expect(errors.length).toBe(1);
+    });
+
+    test('validate erroneous + valid statements', () => {
+        const sql = `SELEC * from table1; SELECT * from table2;`;
+        const errors = flink.validate(sql);
+        expect(errors.length).toBe(1);
+    });
+
+    test('validate multiple valid statements', () => {
+        const sql = `SELECT * from table1; SELECT * from table2;`;
+        const errors = flink.validate(sql);
+        expect(errors.length).toBe(0);
+    });
+
+    test('validate multiline erroneous statement reports correct line', () => {
+        const sql = `SELECT * from table1;\nSELEC *\n  from table2;`;
+        const errors = flink.validate(sql);
+        expect(errors.length).toBe(1);
+        expect(errors[0].startLine).toBe(2);
+    });
+});

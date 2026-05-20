@@ -314,6 +314,7 @@ import { ValuesClauseContext } from "./PostgreSqlParser.js";
 import { FromClauseContext } from "./PostgreSqlParser.js";
 import { FromListContext } from "./PostgreSqlParser.js";
 import { TableRefContext } from "./PostgreSqlParser.js";
+import { ExpressionTableContext } from "./PostgreSqlParser.js";
 import { AliasClauseContext } from "./PostgreSqlParser.js";
 import { FuncAliasClauseContext } from "./PostgreSqlParser.js";
 import { JoinTypeContext } from "./PostgreSqlParser.js";
@@ -386,6 +387,8 @@ import { QualOpContext } from "./PostgreSqlParser.js";
 import { QualAllOpContext } from "./PostgreSqlParser.js";
 import { SubqueryOperatorContext } from "./PostgreSqlParser.js";
 import { ExprListContext } from "./PostgreSqlParser.js";
+import { SelectExpressionColumnNameContext } from "./PostgreSqlParser.js";
+import { SelectLiteralColumnNameContext } from "./PostgreSqlParser.js";
 import { ColumnExprContext } from "./PostgreSqlParser.js";
 import { ColumnExprNoParenContext } from "./PostgreSqlParser.js";
 import { FuncArgListContext } from "./PostgreSqlParser.js";
@@ -399,8 +402,11 @@ import { IndirectionElContext } from "./PostgreSqlParser.js";
 import { IndirectionContext } from "./PostgreSqlParser.js";
 import { OptIndirectionContext } from "./PostgreSqlParser.js";
 import { TargetListContext } from "./PostgreSqlParser.js";
-import { Target_labelContext } from "./PostgreSqlParser.js";
 import { Target_starContext } from "./PostgreSqlParser.js";
+import { Target_labelContext } from "./PostgreSqlParser.js";
+import { Target_dot_emptyContext } from "./PostgreSqlParser.js";
+import { Target_emptyContext } from "./PostgreSqlParser.js";
+import { TableAllColumnsContext } from "./PostgreSqlParser.js";
 import { QualifiedNameListContext } from "./PostgreSqlParser.js";
 import { TableNameListContext } from "./PostgreSqlParser.js";
 import { SchemaNameListContext } from "./PostgreSqlParser.js";
@@ -421,6 +427,7 @@ import { RoutineNameCreateContext } from "./PostgreSqlParser.js";
 import { RoutineNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
+import { EmptyColumnContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
 import { ColumnNamePathContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
@@ -435,6 +442,7 @@ import { ColIdContext } from "./PostgreSqlParser.js";
 import { TypeFunctionNameContext } from "./PostgreSqlParser.js";
 import { NonReservedWordContext } from "./PostgreSqlParser.js";
 import { ColLabelContext } from "./PostgreSqlParser.js";
+import { IndirectionLabelContext } from "./PostgreSqlParser.js";
 import { IdentifierContext } from "./PostgreSqlParser.js";
 import { UnreservedKeywordContext } from "./PostgreSqlParser.js";
 import { ColNameKeywordContext } from "./PostgreSqlParser.js";
@@ -2344,6 +2352,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTableRef?: (ctx: TableRefContext) => Result;
     /**
+     * Visit a parse tree produced by `PostgreSqlParser.expressionTable`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitExpressionTable?: (ctx: ExpressionTableContext) => Result;
+    /**
      * Visit a parse tree produced by `PostgreSqlParser.aliasClause`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -2792,6 +2806,18 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitExprList?: (ctx: ExprListContext) => Result;
     /**
+     * Visit a parse tree produced by `PostgreSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => Result;
+    /**
      * Visit a parse tree produced by `PostgreSqlParser.columnExpr`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -2870,6 +2896,13 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTargetList?: (ctx: TargetListContext) => Result;
     /**
+     * Visit a parse tree produced by the `target_star`
+     * labeled alternative in `PostgreSqlParser.targetEl`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTarget_star?: (ctx: Target_starContext) => Result;
+    /**
      * Visit a parse tree produced by the `target_label`
      * labeled alternative in `PostgreSqlParser.targetEl`.
      * @param ctx the parse tree
@@ -2877,12 +2910,25 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitTarget_label?: (ctx: Target_labelContext) => Result;
     /**
-     * Visit a parse tree produced by the `target_star`
+     * Visit a parse tree produced by the `target_dot_empty`
      * labeled alternative in `PostgreSqlParser.targetEl`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTarget_star?: (ctx: Target_starContext) => Result;
+    visitTarget_dot_empty?: (ctx: Target_dot_emptyContext) => Result;
+    /**
+     * Visit a parse tree produced by the `target_empty`
+     * labeled alternative in `PostgreSqlParser.targetEl`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTarget_empty?: (ctx: Target_emptyContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableAllColumns?: (ctx: TableAllColumnsContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.qualifiedNameList`.
      * @param ctx the parse tree
@@ -3004,6 +3050,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitProcedureNameCreate?: (ctx: ProcedureNameCreateContext) => Result;
     /**
+     * Visit a parse tree produced by `PostgreSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
+    /**
      * Visit a parse tree produced by `PostgreSqlParser.columnName`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -3087,6 +3139,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitColLabel?: (ctx: ColLabelContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.indirectionLabel`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIndirectionLabel?: (ctx: IndirectionLabelContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.identifier`.
      * @param ctx the parse tree

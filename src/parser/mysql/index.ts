@@ -44,6 +44,7 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         MySqlParser.RULE_functionName,
         MySqlParser.RULE_functionNameCreate,
         MySqlParser.RULE_columnName,
+        MySqlParser.RULE_columnNamePath,
         MySqlParser.RULE_columnNameCreate,
         ...this.excludeKeywordRules,
     ]);
@@ -115,7 +116,8 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
                     syntaxContextType = EntityContextType.FUNCTION_CREATE;
                     break;
                 }
-                case MySqlParser.RULE_columnName: {
+                case MySqlParser.RULE_columnName:
+                case MySqlParser.RULE_columnNamePath: {
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
