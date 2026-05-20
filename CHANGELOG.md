@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/DTStack/dt-sql-parser/compare/v4.4.2...v4.5.0) (2026-05-20)
+
+
+### Features
+
+* add generic SQL language support ([#469](https://github.com/DTStack/dt-sql-parser/issues/469)) ([107ba2d](https://github.com/DTStack/dt-sql-parser/commit/107ba2dc02978faa4d207c54dd9da85c0f98983c))
+* match empty column when in entityCollecting context ([#457](https://github.com/DTStack/dt-sql-parser/issues/457)) ([#472](https://github.com/DTStack/dt-sql-parser/issues/472)) ([764deb8](https://github.com/DTStack/dt-sql-parser/commit/764deb81909a0033766fab70a70f2ffd1aa8fda6)), closes [#424](https://github.com/DTStack/dt-sql-parser/issues/424) [#426](https://github.com/DTStack/dt-sql-parser/issues/426) [#424](https://github.com/DTStack/dt-sql-parser/issues/424) [#424](https://github.com/DTStack/dt-sql-parser/issues/424) [#432](https://github.com/DTStack/dt-sql-parser/issues/432) [#432](https://github.com/DTStack/dt-sql-parser/issues/432) [#432](https://github.com/DTStack/dt-sql-parser/issues/432) [#438](https://github.com/DTStack/dt-sql-parser/issues/438) [#438](https://github.com/DTStack/dt-sql-parser/issues/438) [#434](https://github.com/DTStack/dt-sql-parser/issues/434) [#467](https://github.com/DTStack/dt-sql-parser/issues/467)
+
+
+### Bug Fixes
+
+* **parser:** [#283](https://github.com/DTStack/dt-sql-parser/issues/283) collect errors from all erroneous statements in multi-statement input ([#470](https://github.com/DTStack/dt-sql-parser/issues/470)) ([0041ed2](https://github.com/DTStack/dt-sql-parser/commit/0041ed299f8888df7feb414738f8f8062e6fab55))
+* spark sql union recursion ([#466](https://github.com/DTStack/dt-sql-parser/issues/466)) ([5f0e936](https://github.com/DTStack/dt-sql-parser/commit/5f0e93685c2680580349bc2ee9d2ac32a4e5b67b))
+* **trino:** support function COALESCE ([#471](https://github.com/DTStack/dt-sql-parser/issues/471)) ([d6e1df2](https://github.com/DTStack/dt-sql-parser/commit/d6e1df279701c9f847fc4ba8b196070d39b14721))
+
+## [4.5.0-beta.0](https://github.com/DTStack/dt-sql-parser/compare/v4.4.1...v4.5.0-beta.0) (2025-12-30)
+
+
+### Features
+
+* support query result and derived table entity collecting ([#434](https://github.com/DTStack/dt-sql-parser/issues/434)) ([d784daf](https://github.com/DTStack/dt-sql-parser/commit/d784daf511bb2949a254ef5629124f5ce41b6bd7))
+
 ## [4.5.0-beta.0](https://github.com/DTStack/dt-sql-parser/compare/v4.4.1...v4.5.0-beta.0) (2025-12-30)
 ### [4.4.2](https://github.com/DTStack/dt-sql-parser/compare/v4.4.1...v4.4.2) (2026-03-06)
 
