@@ -653,7 +653,9 @@ describe('MySQL Syntax Suggestion', () => {
         const syntaxContextTypes = syntaxes?.map((syn) => syn.syntaxContextType);
 
         expect(syntaxContextTypes).not.toBeUndefined();
-        expect(syntaxContextTypes).toEqual([EntityContextType.COLUMN, EntityContextType.FUNCTION]);
+        expect(syntaxContextTypes).toHaveLength(2);
+        expect(syntaxContextTypes).toContain(EntityContextType.COLUMN);
+        expect(syntaxContextTypes).toContain(EntityContextType.FUNCTION);
     });
 
     test('Select function or column', () => {

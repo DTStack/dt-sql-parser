@@ -14,4 +14,6 @@ ALTER TABLE my_table DROP a_column;
 
 SELECT id FROM tb WHERE 
 
-SELECT id FROM tb GROUP BY  ;  
+SELECT id FROM tb GROUP BY  ;
+
+SELECT tb. FROM tb;

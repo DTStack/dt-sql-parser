@@ -281,7 +281,10 @@ import { JsonOnEmptyContext } from "./MySqlParser.js";
 import { JsonOnErrorContext } from "./MySqlParser.js";
 import { SelectSpecContext } from "./MySqlParser.js";
 import { SelectElementsContext } from "./MySqlParser.js";
-import { SelectElementContext } from "./MySqlParser.js";
+import { SelectElement_starContext } from "./MySqlParser.js";
+import { SelectElement_labelContext } from "./MySqlParser.js";
+import { SelectElement_exprContext } from "./MySqlParser.js";
+import { SelectElement_dot_emptyContext } from "./MySqlParser.js";
 import { TableAllColumnsContext } from "./MySqlParser.js";
 import { PureAllColumnsContext } from "./MySqlParser.js";
 import { SelectLiteralColumnNameContext } from "./MySqlParser.js";
@@ -569,7 +572,6 @@ import { UidListContext } from "./MySqlParser.js";
 import { UidContext } from "./MySqlParser.js";
 import { SimpleIdContext } from "./MySqlParser.js";
 import { DottedIdContext } from "./MySqlParser.js";
-import { DottedIdAllowEmptyContext } from "./MySqlParser.js";
 import { DecimalLiteralContext } from "./MySqlParser.js";
 import { FileSizeLiteralContext } from "./MySqlParser.js";
 import { StringLiteralContext } from "./MySqlParser.js";
@@ -2473,11 +2475,33 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      */
     visitSelectElements?: (ctx: SelectElementsContext) => Result;
     /**
-     * Visit a parse tree produced by `MySqlParser.selectElement`.
+     * Visit a parse tree produced by the `selectElement_star`
+     * labeled alternative in `MySqlParser.selectElement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitSelectElement?: (ctx: SelectElementContext) => Result;
+    visitSelectElement_star?: (ctx: SelectElement_starContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectElement_label`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectElement_label?: (ctx: SelectElement_labelContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectElement_expr`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectElement_expr?: (ctx: SelectElement_exprContext) => Result;
+    /**
+     * Visit a parse tree produced by the `selectElement_dot_empty`
+     * labeled alternative in `MySqlParser.selectElement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSelectElement_dot_empty?: (ctx: SelectElement_dot_emptyContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.tableAllColumns`.
      * @param ctx the parse tree
@@ -4293,12 +4317,6 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitDottedId?: (ctx: DottedIdContext) => Result;
-    /**
-     * Visit a parse tree produced by `MySqlParser.dottedIdAllowEmpty`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitDottedIdAllowEmpty?: (ctx: DottedIdAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.decimalLiteral`.
      * @param ctx the parse tree

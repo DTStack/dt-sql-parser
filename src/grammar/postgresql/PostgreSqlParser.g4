@@ -2615,7 +2615,8 @@ when_clause
     ;
 
 indirectionEl
-    : DOT (colLabel | STAR)
+    : DOT indirectionLabel
+    | DOT STAR
     | OPEN_BRACKET (expression | expression? COLON expression?) CLOSE_BRACKET
     ;
 
@@ -2634,6 +2635,8 @@ targetList
 targetEl
     : tableAllColumns                                                                    # target_star
     | (selectLiteralColumnName | selectExpressionColumnName) (KW_AS? alias=identifier |) # target_label
+    | colId DOT {this.entityCollecting}? emptyColumn                                     # target_dot_empty
+    | {this.entityCollecting}? emptyColumn                                               # target_empty
     ;
 
 tableAllColumns
@@ -2722,18 +2725,17 @@ procedureNameCreate
     | colId indirection
     ;
 
+// Empty column rule for entity collection
 emptyColumn
     :
     ;
 
 columnName
     : colId optIndirection
-    | {this.shouldMatchEmpty()}? (colId DOT emptyColumn | emptyColumn)
     ;
 
 columnNamePath
     : colId optIndirection
-    | {this.shouldMatchEmpty()}? (colId DOT emptyColumn | emptyColumn)
     ;
 
 columnNameCreate
@@ -2798,6 +2800,12 @@ colLabel
     | colNameKeyword
     | typeFuncNameKeyword
     | reservedKeyword
+    ;
+
+indirectionLabel
+    : identifier
+    | colNameKeyword
+    | typeFuncNameKeyword
     ;
 
 identifier
