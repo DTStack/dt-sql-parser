@@ -413,13 +413,22 @@ viewName
     : viewIdentifier
     ;
 
+emptyColumn
+    :
+    ;
+
 columnName
-    : multipartIdentifier
-    | {this.shouldMatchEmpty()}?
+    : multipartIdentifierAllowEmpty
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnNamePath
     : multipartIdentifier
+    ;
+
+columnNamePathAllowEmpty
+    : multipartIdentifierAllowEmpty
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnNameSeq
@@ -500,7 +509,7 @@ transformClause
     ;
 
 selectClause
-    : KW_SELECT (hints+=hint)* setQuantifier? namedExpressionSeq
+    : KW_SELECT (hints+=hint)* setQuantifier? selectList
     ;
 
 setClause
@@ -679,7 +688,7 @@ joinType
     ;
 
 joinCriteria
-    : KW_ON booleanExpression
+    : KW_ON (booleanExpression | columnNamePathAllowEmpty (EQ columnNamePathAllowEmpty)?)
     | KW_USING identifierList
     ;
 
@@ -723,11 +732,19 @@ identifierComment
     ;
 
 relationPrimary
-    : (tableName | viewName | identifierReference) temporalClause? sample? tableAlias
-    | LEFT_PAREN query RIGHT_PAREN sample? tableAlias
-    | LEFT_PAREN relation RIGHT_PAREN sample? tableAlias
-    | KW_VALUES expression (COMMA expression)* tableAlias
-    | functionName LEFT_PAREN (functionTableArgument (COMMA functionTableArgument)*)? RIGHT_PAREN tableAlias
+    : (tableName | viewName | identifierReference) temporalClause? sample? tableAlias # tableSource
+    | atomSubQueryTableSource sample? tableAlias                                      # subQueryTableSource
+    | LEFT_PAREN relation RIGHT_PAREN sample? tableAlias                              # joinTableSource
+    | inlineTable tableAlias                                                          # inlineTableSource
+    | functionTable                                                                   # functionTableSource
+    ;
+
+atomSubQueryTableSource
+    : LEFT_PAREN query RIGHT_PAREN
+    ;
+
+inlineTable
+    : KW_VALUES expression (COMMA expression)*
     ;
 
 functionTableSubqueryArgument
@@ -762,6 +779,14 @@ functionTableArgument
     | functionArgument
     ;
 
+functionTable
+    : atomFunctionTable tableAlias
+    ;
+
+atomFunctionTable
+    : functionName LEFT_PAREN (functionTableArgument (COMMA functionTableArgument)*)? RIGHT_PAREN
+    ;
+
 tableAlias
     : (KW_AS? alias=strictIdentifier identifierList?)?
     ;
@@ -787,6 +812,11 @@ multipartIdentifier
     : parts+=errorCapturingIdentifier (DOT parts+=errorCapturingIdentifier)*
     ;
 
+multipartIdentifierAllowEmpty
+    : multipartIdentifier
+    | {this.shouldMatchEmpty()}? multipartIdentifier DOT emptyColumn
+    ;
+
 multipartIdentifierPropertyList
     : multipartIdentifierProperty (COMMA multipartIdentifierProperty)*
     ;
@@ -803,12 +833,31 @@ viewIdentifier
     : (db=errorCapturingIdentifier DOT)? view=errorCapturingIdentifier
     ;
 
+selectLiteralColumnName
+    : columnName
+    ;
+
+selectExpressionColumnName
+    : expression
+    ;
+
+tableAllColumns
+    : (qualifiedName DOT)* ASTERISK
+    ;
+
 namedExpression
-    : (columnName | expression) (KW_AS? (name=errorCapturingIdentifier | identifierList))?
+    : (tableAllColumns | selectLiteralColumnName | selectExpressionColumnName) (
+        KW_AS? (alias=errorCapturingIdentifier | identifierList)
+    )?
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 namedExpressionSeq
     : namedExpression (COMMA namedExpression)*
+    ;
+
+selectList
+    : namedExpressionSeq
     ;
 
 partitionFieldList

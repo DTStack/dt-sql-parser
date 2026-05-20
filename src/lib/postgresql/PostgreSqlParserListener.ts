@@ -314,6 +314,7 @@ import { ValuesClauseContext } from "./PostgreSqlParser.js";
 import { FromClauseContext } from "./PostgreSqlParser.js";
 import { FromListContext } from "./PostgreSqlParser.js";
 import { TableRefContext } from "./PostgreSqlParser.js";
+import { ExpressionTableContext } from "./PostgreSqlParser.js";
 import { AliasClauseContext } from "./PostgreSqlParser.js";
 import { FuncAliasClauseContext } from "./PostgreSqlParser.js";
 import { JoinTypeContext } from "./PostgreSqlParser.js";
@@ -386,6 +387,8 @@ import { QualOpContext } from "./PostgreSqlParser.js";
 import { QualAllOpContext } from "./PostgreSqlParser.js";
 import { SubqueryOperatorContext } from "./PostgreSqlParser.js";
 import { ExprListContext } from "./PostgreSqlParser.js";
+import { SelectExpressionColumnNameContext } from "./PostgreSqlParser.js";
+import { SelectLiteralColumnNameContext } from "./PostgreSqlParser.js";
 import { ColumnExprContext } from "./PostgreSqlParser.js";
 import { ColumnExprNoParenContext } from "./PostgreSqlParser.js";
 import { FuncArgListContext } from "./PostgreSqlParser.js";
@@ -399,8 +402,11 @@ import { IndirectionElContext } from "./PostgreSqlParser.js";
 import { IndirectionContext } from "./PostgreSqlParser.js";
 import { OptIndirectionContext } from "./PostgreSqlParser.js";
 import { TargetListContext } from "./PostgreSqlParser.js";
-import { Target_labelContext } from "./PostgreSqlParser.js";
 import { Target_starContext } from "./PostgreSqlParser.js";
+import { Target_labelContext } from "./PostgreSqlParser.js";
+import { Target_dot_emptyContext } from "./PostgreSqlParser.js";
+import { Target_emptyContext } from "./PostgreSqlParser.js";
+import { TableAllColumnsContext } from "./PostgreSqlParser.js";
 import { QualifiedNameListContext } from "./PostgreSqlParser.js";
 import { TableNameListContext } from "./PostgreSqlParser.js";
 import { SchemaNameListContext } from "./PostgreSqlParser.js";
@@ -421,6 +427,7 @@ import { RoutineNameCreateContext } from "./PostgreSqlParser.js";
 import { RoutineNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
+import { EmptyColumnContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
 import { ColumnNamePathContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
@@ -435,6 +442,7 @@ import { ColIdContext } from "./PostgreSqlParser.js";
 import { TypeFunctionNameContext } from "./PostgreSqlParser.js";
 import { NonReservedWordContext } from "./PostgreSqlParser.js";
 import { ColLabelContext } from "./PostgreSqlParser.js";
+import { IndirectionLabelContext } from "./PostgreSqlParser.js";
 import { IdentifierContext } from "./PostgreSqlParser.js";
 import { UnreservedKeywordContext } from "./PostgreSqlParser.js";
 import { ColNameKeywordContext } from "./PostgreSqlParser.js";
@@ -3574,6 +3582,16 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitTableRef?: (ctx: TableRefContext) => void;
     /**
+     * Enter a parse tree produced by `PostgreSqlParser.expressionTable`.
+     * @param ctx the parse tree
+     */
+    enterExpressionTable?: (ctx: ExpressionTableContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.expressionTable`.
+     * @param ctx the parse tree
+     */
+    exitExpressionTable?: (ctx: ExpressionTableContext) => void;
+    /**
      * Enter a parse tree produced by `PostgreSqlParser.aliasClause`.
      * @param ctx the parse tree
      */
@@ -4326,6 +4344,26 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitExprList?: (ctx: ExprListContext) => void;
     /**
+     * Enter a parse tree produced by `PostgreSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     */
+    enterSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     */
+    exitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     */
+    enterSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     */
+    exitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => void;
+    /**
      * Enter a parse tree produced by `PostgreSqlParser.columnExpr`.
      * @param ctx the parse tree
      */
@@ -4456,6 +4494,18 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitTargetList?: (ctx: TargetListContext) => void;
     /**
+     * Enter a parse tree produced by the `target_star`
+     * labeled alternative in `PostgreSqlParser.targetEl`.
+     * @param ctx the parse tree
+     */
+    enterTarget_star?: (ctx: Target_starContext) => void;
+    /**
+     * Exit a parse tree produced by the `target_star`
+     * labeled alternative in `PostgreSqlParser.targetEl`.
+     * @param ctx the parse tree
+     */
+    exitTarget_star?: (ctx: Target_starContext) => void;
+    /**
      * Enter a parse tree produced by the `target_label`
      * labeled alternative in `PostgreSqlParser.targetEl`.
      * @param ctx the parse tree
@@ -4468,17 +4518,39 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitTarget_label?: (ctx: Target_labelContext) => void;
     /**
-     * Enter a parse tree produced by the `target_star`
+     * Enter a parse tree produced by the `target_dot_empty`
      * labeled alternative in `PostgreSqlParser.targetEl`.
      * @param ctx the parse tree
      */
-    enterTarget_star?: (ctx: Target_starContext) => void;
+    enterTarget_dot_empty?: (ctx: Target_dot_emptyContext) => void;
     /**
-     * Exit a parse tree produced by the `target_star`
+     * Exit a parse tree produced by the `target_dot_empty`
      * labeled alternative in `PostgreSqlParser.targetEl`.
      * @param ctx the parse tree
      */
-    exitTarget_star?: (ctx: Target_starContext) => void;
+    exitTarget_dot_empty?: (ctx: Target_dot_emptyContext) => void;
+    /**
+     * Enter a parse tree produced by the `target_empty`
+     * labeled alternative in `PostgreSqlParser.targetEl`.
+     * @param ctx the parse tree
+     */
+    enterTarget_empty?: (ctx: Target_emptyContext) => void;
+    /**
+     * Exit a parse tree produced by the `target_empty`
+     * labeled alternative in `PostgreSqlParser.targetEl`.
+     * @param ctx the parse tree
+     */
+    exitTarget_empty?: (ctx: Target_emptyContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     */
+    enterTableAllColumns?: (ctx: TableAllColumnsContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     */
+    exitTableAllColumns?: (ctx: TableAllColumnsContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.qualifiedNameList`.
      * @param ctx the parse tree
@@ -4680,6 +4752,16 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitProcedureNameCreate?: (ctx: ProcedureNameCreateContext) => void;
     /**
+     * Enter a parse tree produced by `PostgreSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    enterEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    exitEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
      * Enter a parse tree produced by `PostgreSqlParser.columnName`.
      * @param ctx the parse tree
      */
@@ -4819,6 +4901,16 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColLabel?: (ctx: ColLabelContext) => void;
+    /**
+     * Enter a parse tree produced by `PostgreSqlParser.indirectionLabel`.
+     * @param ctx the parse tree
+     */
+    enterIndirectionLabel?: (ctx: IndirectionLabelContext) => void;
+    /**
+     * Exit a parse tree produced by `PostgreSqlParser.indirectionLabel`.
+     * @param ctx the parse tree
+     */
+    exitIndirectionLabel?: (ctx: IndirectionLabelContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.identifier`.
      * @param ctx the parse tree

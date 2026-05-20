@@ -138,6 +138,7 @@ import { ColumnNameColonTypeListContext } from "./HiveSqlParser.js";
 import { ColumnNameListContext } from "./HiveSqlParser.js";
 import { ColumnNameContext } from "./HiveSqlParser.js";
 import { ColumnNamePathContext } from "./HiveSqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./HiveSqlParser.js";
 import { ColumnNameCreateContext } from "./HiveSqlParser.js";
 import { ExtColumnNameContext } from "./HiveSqlParser.js";
 import { ColumnNameOrderListContext } from "./HiveSqlParser.js";
@@ -258,12 +259,17 @@ import { SubQuerySourceContext } from "./HiveSqlParser.js";
 import { PartitioningSpecContext } from "./HiveSqlParser.js";
 import { PartitionTableFunctionSourceContext } from "./HiveSqlParser.js";
 import { PartitionedTableFunctionContext } from "./HiveSqlParser.js";
+import { AtomPartitionedTableFunctionContext } from "./HiveSqlParser.js";
 import { WhereClauseContext } from "./HiveSqlParser.js";
 import { ValuesClauseContext } from "./HiveSqlParser.js";
+import { AtomValuesClauseContext } from "./HiveSqlParser.js";
 import { VirtualTableSourceContext } from "./HiveSqlParser.js";
 import { SelectClauseContext } from "./HiveSqlParser.js";
 import { SelectTrfmClauseContext } from "./HiveSqlParser.js";
+import { SelectListContext } from "./HiveSqlParser.js";
 import { SelectItemContext } from "./HiveSqlParser.js";
+import { SelectLiteralColumnNameContext } from "./HiveSqlParser.js";
+import { SelectExpressionColumnNameContext } from "./HiveSqlParser.js";
 import { TrfmClauseContext } from "./HiveSqlParser.js";
 import { SelectExpressionContext } from "./HiveSqlParser.js";
 import { SelectExpressionListContext } from "./HiveSqlParser.js";
@@ -353,7 +359,9 @@ import { HourContext } from "./HiveSqlParser.js";
 import { MinuteContext } from "./HiveSqlParser.js";
 import { SecondContext } from "./HiveSqlParser.js";
 import { DecimalContext } from "./HiveSqlParser.js";
+import { EmptyColumnContext } from "./HiveSqlParser.js";
 import { PoolPathContext } from "./HiveSqlParser.js";
+import { PoolPathAllowEmptyContext } from "./HiveSqlParser.js";
 import { TriggerAtomExpressionContext } from "./HiveSqlParser.js";
 import { TriggerActionExpressionContext } from "./HiveSqlParser.js";
 import { PoolAssignContext } from "./HiveSqlParser.js";
@@ -1666,6 +1674,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
     /**
+     * Enter a parse tree produced by `HiveSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
+    /**
      * Enter a parse tree produced by `HiveSqlParser.columnNameCreate`.
      * @param ctx the parse tree
      */
@@ -2874,6 +2892,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitPartitionedTableFunction?: (ctx: PartitionedTableFunctionContext) => void;
     /**
+     * Enter a parse tree produced by `HiveSqlParser.atomPartitionedTableFunction`.
+     * @param ctx the parse tree
+     */
+    enterAtomPartitionedTableFunction?: (ctx: AtomPartitionedTableFunctionContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.atomPartitionedTableFunction`.
+     * @param ctx the parse tree
+     */
+    exitAtomPartitionedTableFunction?: (ctx: AtomPartitionedTableFunctionContext) => void;
+    /**
      * Enter a parse tree produced by `HiveSqlParser.whereClause`.
      * @param ctx the parse tree
      */
@@ -2893,6 +2921,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitValuesClause?: (ctx: ValuesClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.atomValuesClause`.
+     * @param ctx the parse tree
+     */
+    enterAtomValuesClause?: (ctx: AtomValuesClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.atomValuesClause`.
+     * @param ctx the parse tree
+     */
+    exitAtomValuesClause?: (ctx: AtomValuesClauseContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.virtualTableSource`.
      * @param ctx the parse tree
@@ -2924,6 +2962,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitSelectTrfmClause?: (ctx: SelectTrfmClauseContext) => void;
     /**
+     * Enter a parse tree produced by `HiveSqlParser.selectList`.
+     * @param ctx the parse tree
+     */
+    enterSelectList?: (ctx: SelectListContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.selectList`.
+     * @param ctx the parse tree
+     */
+    exitSelectList?: (ctx: SelectListContext) => void;
+    /**
      * Enter a parse tree produced by `HiveSqlParser.selectItem`.
      * @param ctx the parse tree
      */
@@ -2933,6 +2981,26 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSelectItem?: (ctx: SelectItemContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     */
+    enterSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     */
+    exitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     */
+    enterSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     */
+    exitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.trfmClause`.
      * @param ctx the parse tree
@@ -3824,6 +3892,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      */
     exitDecimal?: (ctx: DecimalContext) => void;
     /**
+     * Enter a parse tree produced by `HiveSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    enterEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    exitEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
      * Enter a parse tree produced by `HiveSqlParser.poolPath`.
      * @param ctx the parse tree
      */
@@ -3833,6 +3911,16 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitPoolPath?: (ctx: PoolPathContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.poolPathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterPoolPathAllowEmpty?: (ctx: PoolPathAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.poolPathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitPoolPathAllowEmpty?: (ctx: PoolPathAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.triggerAtomExpression`.
      * @param ctx the parse tree

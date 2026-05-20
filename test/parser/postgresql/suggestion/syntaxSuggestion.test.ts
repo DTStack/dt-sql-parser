@@ -1155,7 +1155,7 @@ describe('Postgre SQL Syntax Suggestion', () => {
         const syntaxContextTypes = syntaxes?.map((syn) => syn.syntaxContextType);
 
         expect(syntaxContextTypes).not.toBeUndefined();
-        expect(syntaxContextTypes).toEqual([EntityContextType.FUNCTION, EntityContextType.COLUMN]);
+        expect(syntaxContextTypes).toEqual([EntityContextType.COLUMN, EntityContextType.FUNCTION]);
     });
 
     test('Select function or column', () => {

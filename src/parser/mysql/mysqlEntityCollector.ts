@@ -12,16 +12,33 @@ import {
     FunctionNameCreateContext,
     InsertStatementContext,
     QueryCreateTableContext,
+    SelectElementsContext,
+    SelectExpressionElementContext,
+    SelectLiteralColumnNameContext,
     SelectStatementContext,
     SingleStatementContext,
     TableNameContext,
     TableNameCreateContext,
-    TableSourceContext,
+    TableSourceItemContext,
     ViewNameContext,
     ViewNameCreateContext,
+    TableAllColumnsContext,
+    AtomSubQueryTableSourceContext,
+    AtomTableItemContext,
+    SubqueryTableItemContext,
+    PureAllColumnsContext,
+    SelectElement_labelContext,
+    SelectElement_exprContext,
+    SelectElement_dot_emptyContext,
 } from '../../lib/mysql/MySqlParser';
 import type { MySqlParserListener } from '../../lib/mysql/MySqlParserListener';
-import { AttrName, EntityCollector, StmtContextType } from '../common/entityCollector';
+import {
+    AttrName,
+    ColumnDeclareType,
+    EntityCollector,
+    StmtContextType,
+    TableDeclareType,
+} from '../common/entityCollector';
 import { EntityContextType } from '../common/types';
 
 export class MySqlEntityCollector extends EntityCollector implements MySqlParserListener {
@@ -34,19 +51,37 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
         this.pushEntity(ctx, EntityContextType.DATABASE_CREATE);
     }
 
+    /** Table Entity Rules */
     exitTableName(ctx: TableNameContext) {
-        const needCollectAttr = this.getRootStmt()?.stmtContextType === StmtContextType.SELECT_STMT;
         this.pushEntity(
             ctx,
             EntityContextType.TABLE,
-            needCollectAttr
-                ? [
-                      {
-                          attrName: AttrName.alias,
-                          endContextList: [TableSourceContext.name],
-                      },
-                  ]
-                : undefined
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [TableSourceItemContext.name, AtomTableItemContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.LITERAL,
+            }
+        );
+    }
+
+    /** SubQuery Table Entity Rules */
+    exitAtomSubQueryTableSource(ctx: AtomSubQueryTableSourceContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.TABLE,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [TableSourceItemContext.name, SubqueryTableItemContext.name],
+                },
+            ],
+            {
+                declareType: TableDeclareType.EXPRESSION,
+            }
         );
     }
 
@@ -76,6 +111,10 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
         ]);
     }
 
+    exitSelectElements(ctx: SelectElementsContext) {
+        this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
+    }
+
     exitColumnNameCreate(ctx: ColumnNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
             {
@@ -87,6 +126,62 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
                 endContextList: [CreateDefinitionContext.name],
             },
         ]);
+    }
+
+    exitTableAllColumns(ctx: TableAllColumnsContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitPureAllColumns(ctx: PureAllColumnsContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {
+        // Handle empty column case (e.g., "select  from")
+        // When emptyColumn matches, the context has no actual tokens
+        if (!ctx.start || !ctx.stop || ctx.start.start > ctx.stop.stop) {
+            return;
+        }
+
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectElement_labelContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.LITERAL,
+            }
+        );
+    }
+
+    exitSelectElement_dot_empty(ctx: SelectElement_dot_emptyContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.LITERAL,
+        });
+    }
+
+    exitSelectExpressionElement(ctx: SelectExpressionElementContext) {
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
+                {
+                    attrName: AttrName.alias,
+                    endContextList: [SelectElement_exprContext.name],
+                },
+            ],
+            {
+                declareType: ColumnDeclareType.EXPRESSION,
+            }
+        );
     }
 
     /** ===== Statement begin */

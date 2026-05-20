@@ -140,8 +140,10 @@ import { TableNameCreateContext } from "./SparkSqlParser.js";
 import { TableNameContext } from "./SparkSqlParser.js";
 import { ViewNameCreateContext } from "./SparkSqlParser.js";
 import { ViewNameContext } from "./SparkSqlParser.js";
+import { EmptyColumnContext } from "./SparkSqlParser.js";
 import { ColumnNameContext } from "./SparkSqlParser.js";
 import { ColumnNamePathContext } from "./SparkSqlParser.js";
+import { ColumnNamePathAllowEmptyContext } from "./SparkSqlParser.js";
 import { ColumnNameSeqContext } from "./SparkSqlParser.js";
 import { ColumnNameCreateContext } from "./SparkSqlParser.js";
 import { IdentifierReferenceContext } from "./SparkSqlParser.js";
@@ -197,22 +199,35 @@ import { OrderedIdentifierListContext } from "./SparkSqlParser.js";
 import { OrderedIdentifierContext } from "./SparkSqlParser.js";
 import { IdentifierCommentListContext } from "./SparkSqlParser.js";
 import { IdentifierCommentContext } from "./SparkSqlParser.js";
-import { RelationPrimaryContext } from "./SparkSqlParser.js";
+import { TableSourceContext } from "./SparkSqlParser.js";
+import { SubQueryTableSourceContext } from "./SparkSqlParser.js";
+import { JoinTableSourceContext } from "./SparkSqlParser.js";
+import { InlineTableSourceContext } from "./SparkSqlParser.js";
+import { FunctionTableSourceContext } from "./SparkSqlParser.js";
+import { AtomSubQueryTableSourceContext } from "./SparkSqlParser.js";
+import { InlineTableContext } from "./SparkSqlParser.js";
 import { FunctionTableSubqueryArgumentContext } from "./SparkSqlParser.js";
 import { TableArgumentPartitioningContext } from "./SparkSqlParser.js";
 import { FunctionTableNamedArgumentExpressionContext } from "./SparkSqlParser.js";
 import { FunctionTableReferenceArgumentContext } from "./SparkSqlParser.js";
 import { FunctionTableArgumentContext } from "./SparkSqlParser.js";
+import { FunctionTableContext } from "./SparkSqlParser.js";
+import { AtomFunctionTableContext } from "./SparkSqlParser.js";
 import { TableAliasContext } from "./SparkSqlParser.js";
 import { RowFormatContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierListContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierContext } from "./SparkSqlParser.js";
+import { MultipartIdentifierAllowEmptyContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierPropertyListContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierPropertyContext } from "./SparkSqlParser.js";
 import { TableIdentifierContext } from "./SparkSqlParser.js";
 import { ViewIdentifierContext } from "./SparkSqlParser.js";
+import { SelectLiteralColumnNameContext } from "./SparkSqlParser.js";
+import { SelectExpressionColumnNameContext } from "./SparkSqlParser.js";
+import { TableAllColumnsContext } from "./SparkSqlParser.js";
 import { NamedExpressionContext } from "./SparkSqlParser.js";
 import { NamedExpressionSeqContext } from "./SparkSqlParser.js";
+import { SelectListContext } from "./SparkSqlParser.js";
 import { PartitionFieldListContext } from "./SparkSqlParser.js";
 import { PartitionFieldContext } from "./SparkSqlParser.js";
 import { TransformContext } from "./SparkSqlParser.js";
@@ -1796,6 +1811,16 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitViewName?: (ctx: ViewNameContext) => void;
     /**
+     * Enter a parse tree produced by `SparkSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    enterEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    exitEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
      * Enter a parse tree produced by `SparkSqlParser.columnName`.
      * @param ctx the parse tree
      */
@@ -1815,6 +1840,16 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.columnNamePathAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePathAllowEmpty?: (ctx: ColumnNamePathAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.columnNameSeq`.
      * @param ctx the parse tree
@@ -2366,15 +2401,85 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitIdentifierComment?: (ctx: IdentifierCommentContext) => void;
     /**
-     * Enter a parse tree produced by `SparkSqlParser.relationPrimary`.
+     * Enter a parse tree produced by the `tableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
      * @param ctx the parse tree
      */
-    enterRelationPrimary?: (ctx: RelationPrimaryContext) => void;
+    enterTableSource?: (ctx: TableSourceContext) => void;
     /**
-     * Exit a parse tree produced by `SparkSqlParser.relationPrimary`.
+     * Exit a parse tree produced by the `tableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
      * @param ctx the parse tree
      */
-    exitRelationPrimary?: (ctx: RelationPrimaryContext) => void;
+    exitTableSource?: (ctx: TableSourceContext) => void;
+    /**
+     * Enter a parse tree produced by the `subQueryTableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    enterSubQueryTableSource?: (ctx: SubQueryTableSourceContext) => void;
+    /**
+     * Exit a parse tree produced by the `subQueryTableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    exitSubQueryTableSource?: (ctx: SubQueryTableSourceContext) => void;
+    /**
+     * Enter a parse tree produced by the `joinTableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    enterJoinTableSource?: (ctx: JoinTableSourceContext) => void;
+    /**
+     * Exit a parse tree produced by the `joinTableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    exitJoinTableSource?: (ctx: JoinTableSourceContext) => void;
+    /**
+     * Enter a parse tree produced by the `inlineTableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    enterInlineTableSource?: (ctx: InlineTableSourceContext) => void;
+    /**
+     * Exit a parse tree produced by the `inlineTableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    exitInlineTableSource?: (ctx: InlineTableSourceContext) => void;
+    /**
+     * Enter a parse tree produced by the `functionTableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    enterFunctionTableSource?: (ctx: FunctionTableSourceContext) => void;
+    /**
+     * Exit a parse tree produced by the `functionTableSource`
+     * labeled alternative in `SparkSqlParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    exitFunctionTableSource?: (ctx: FunctionTableSourceContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.atomSubQueryTableSource`.
+     * @param ctx the parse tree
+     */
+    enterAtomSubQueryTableSource?: (ctx: AtomSubQueryTableSourceContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.atomSubQueryTableSource`.
+     * @param ctx the parse tree
+     */
+    exitAtomSubQueryTableSource?: (ctx: AtomSubQueryTableSourceContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.inlineTable`.
+     * @param ctx the parse tree
+     */
+    enterInlineTable?: (ctx: InlineTableContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.inlineTable`.
+     * @param ctx the parse tree
+     */
+    exitInlineTable?: (ctx: InlineTableContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.functionTableSubqueryArgument`.
      * @param ctx the parse tree
@@ -2426,6 +2531,26 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitFunctionTableArgument?: (ctx: FunctionTableArgumentContext) => void;
     /**
+     * Enter a parse tree produced by `SparkSqlParser.functionTable`.
+     * @param ctx the parse tree
+     */
+    enterFunctionTable?: (ctx: FunctionTableContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.functionTable`.
+     * @param ctx the parse tree
+     */
+    exitFunctionTable?: (ctx: FunctionTableContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.atomFunctionTable`.
+     * @param ctx the parse tree
+     */
+    enterAtomFunctionTable?: (ctx: AtomFunctionTableContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.atomFunctionTable`.
+     * @param ctx the parse tree
+     */
+    exitAtomFunctionTable?: (ctx: AtomFunctionTableContext) => void;
+    /**
      * Enter a parse tree produced by `SparkSqlParser.tableAlias`.
      * @param ctx the parse tree
      */
@@ -2465,6 +2590,16 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitMultipartIdentifier?: (ctx: MultipartIdentifierContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.multipartIdentifierAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterMultipartIdentifierAllowEmpty?: (ctx: MultipartIdentifierAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.multipartIdentifierAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitMultipartIdentifierAllowEmpty?: (ctx: MultipartIdentifierAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.multipartIdentifierPropertyList`.
      * @param ctx the parse tree
@@ -2506,6 +2641,36 @@ export class SparkSqlParserListener implements ParseTreeListener {
      */
     exitViewIdentifier?: (ctx: ViewIdentifierContext) => void;
     /**
+     * Enter a parse tree produced by `SparkSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     */
+    enterSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.selectLiteralColumnName`.
+     * @param ctx the parse tree
+     */
+    exitSelectLiteralColumnName?: (ctx: SelectLiteralColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     */
+    enterSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.selectExpressionColumnName`.
+     * @param ctx the parse tree
+     */
+    exitSelectExpressionColumnName?: (ctx: SelectExpressionColumnNameContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     */
+    enterTableAllColumns?: (ctx: TableAllColumnsContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.tableAllColumns`.
+     * @param ctx the parse tree
+     */
+    exitTableAllColumns?: (ctx: TableAllColumnsContext) => void;
+    /**
      * Enter a parse tree produced by `SparkSqlParser.namedExpression`.
      * @param ctx the parse tree
      */
@@ -2525,6 +2690,16 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitNamedExpressionSeq?: (ctx: NamedExpressionSeqContext) => void;
+    /**
+     * Enter a parse tree produced by `SparkSqlParser.selectList`.
+     * @param ctx the parse tree
+     */
+    enterSelectList?: (ctx: SelectListContext) => void;
+    /**
+     * Exit a parse tree produced by `SparkSqlParser.selectList`.
+     * @param ctx the parse tree
+     */
+    exitSelectList?: (ctx: SelectListContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.partitionFieldList`.
      * @param ctx the parse tree

@@ -1,20 +1,27 @@
+import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
 import {
-    Lexer,
-    Token,
+    ANTLRErrorListener,
+    CharStream,
     CharStreams,
     CommonTokenStream,
-    CharStream,
-    ParserRuleContext,
-    ParseTreeWalker,
-    ParseTreeListener,
-    PredictionMode,
-    ANTLRErrorListener,
+    Lexer,
     Parser,
+    ParserRuleContext,
+    ParseTreeListener,
+    ParseTreeWalker,
+    PredictionMode,
+    Token,
 } from 'antlr4ng';
-import { CandidatesCollection, CodeCompletionCore } from 'antlr4-c3';
+
 import { SQLParserBase } from '../../lib/SQLParserBase';
+import type { EntityCollector } from './entityCollector';
+import { EntityContext } from './entityCollector';
+import { ErrorStrategy } from './errorStrategy';
 import { findCaretTokenIndex } from './findCaretTokenIndex';
-import { ctxToText, tokenToWord, WordRange, TextSlice } from './textAndWord';
+import { ErrorListener, ParseError } from './parseErrorListener';
+import SemanticContextCollector from './semanticContextCollector';
+import type { SplitListener } from './splitListener';
+import { ctxToText, TextSlice, tokenToWord, WordRange } from './textAndWord';
 import {
     CaretPosition,
     LOCALE_TYPE,
@@ -22,12 +29,6 @@ import {
     Suggestions,
     SyntaxSuggestion,
 } from './types';
-import { ParseError, ErrorListener } from './parseErrorListener';
-import { ErrorStrategy } from './errorStrategy';
-import type { SplitListener } from './splitListener';
-import type { EntityCollector } from './entityCollector';
-import { EntityContext } from './entityCollector';
-import SemanticContextCollector from './semanticContextCollector';
 
 export const SQL_SPLIT_SYMBOL_TEXT = ';';
 
@@ -215,12 +216,90 @@ export abstract class BasicSQL<
 
     /**
      * Validate input string and return syntax errors if exists.
+     * When input contains multiple statements separated by semicolons
+     * and the initial parse doesn't capture all errors, each statement
+     * is validated independently to collect all errors.
      * @param input source string
      * @returns syntax errors
      */
     public validate(input: string): ParseError[] {
         this.parseWithCache(input);
+
+        if (this._parseErrors.length > 0) {
+            const statements = this.splitStatements(input);
+            if (statements.length > 1) {
+                const splitErrors = this.validateStatements(statements);
+                if (splitErrors.length > this._parseErrors.length) {
+                    this._parseErrors = splitErrors;
+                }
+            }
+        }
+
         return this._parseErrors;
+    }
+
+    /**
+     * Validate each statement fragment independently and collect all errors.
+     */
+    private validateStatements(statements: { text: string; start: number }[]): ParseError[] {
+        const allErrors: ParseError[] = [];
+        let lineOffset = 0;
+        for (const statement of statements) {
+            if (!statement.text.trim()) {
+                const newlines = (statement.text.match(/\n/g) || []).length;
+                lineOffset += newlines;
+                continue;
+            }
+            const parser = this.createParser(statement.text);
+            const errors: ParseError[] = [];
+            parser.removeErrorListeners();
+            parser.addErrorListener(
+                this.createErrorListener((error) => {
+                    errors.push({
+                        startLine: error.startLine + lineOffset,
+                        endLine: error.endLine + lineOffset,
+                        startColumn: error.startColumn,
+                        endColumn: error.endColumn,
+                        message: error.message,
+                    });
+                })
+            );
+            parser.errorHandler = new ErrorStrategy();
+            parser.program();
+            allErrors.push(...errors);
+            const newlines = (statement.text.match(/\n/g) || []).length;
+            lineOffset += newlines;
+        }
+        return allErrors;
+    }
+
+    /**
+     * Split input into individual statement strings by semicolons.
+     * Handles semicolons inside quoted strings correctly.
+     */
+    private splitStatements(input: string): { text: string; start: number }[] {
+        const statements: { text: string; start: number }[] = [];
+        let inSingleQuote = false;
+        let inDoubleQuote = false;
+        let lastSplit = 0;
+
+        for (let i = 0; i < input.length; i++) {
+            const ch = input[i];
+            if (ch === "'" && !inDoubleQuote) {
+                inSingleQuote = !inSingleQuote;
+            } else if (ch === '"' && !inSingleQuote) {
+                inDoubleQuote = !inDoubleQuote;
+            } else if (ch === ';' && !inSingleQuote && !inDoubleQuote) {
+                statements.push({ text: input.slice(lastSplit, i + 1), start: lastSplit });
+                lastSplit = i + 1;
+            }
+        }
+
+        if (lastSplit < input.length) {
+            statements.push({ text: input.slice(lastSplit), start: lastSplit });
+        }
+
+        return statements;
     }
 
     /**
@@ -537,6 +616,8 @@ export abstract class BasicSQL<
 
         const core = new CodeCompletionCore(sqlParserIns);
         core.preferredRules = this.preferredRules;
+        // core.showRuleStack = true;
+        // core.showResult = true;
 
         const candidates = core.collectCandidates(caretTokenIndex, parseTree);
         const originalSuggestions = this.processCandidates(candidates, allTokens, caretTokenIndex);

@@ -2113,11 +2113,7 @@ fromList
 tableRef
     : (
         (relationExpr | (KW_ONLY? viewName STAR? columnList? whereClause?)) aliasClause? tableSampleClause?
-        | KW_LATERAL? (
-            xmlTable aliasClause?
-            | funcTable funcAliasClause?
-            | selectWithParens aliasClause?
-        )
+        | KW_LATERAL? expressionTable
         | OPEN_PAREN tableRef (
             KW_CROSS KW_JOIN tableRef
             | KW_NATURAL joinType? KW_JOIN tableRef
@@ -2128,6 +2124,12 @@ tableRef
         | KW_NATURAL joinType? KW_JOIN tableRef
         | joinType? KW_JOIN tableRef joinQual
     )*
+    ;
+
+expressionTable
+    : xmlTable aliasClause?
+    | funcTable funcAliasClause?
+    | selectWithParens aliasClause?
     ;
 
 aliasClause
@@ -2551,6 +2553,14 @@ exprList
     : expression (COMMA expression)*
     ;
 
+selectExpressionColumnName
+    : expression
+    ;
+
+selectLiteralColumnName
+    : columnName
+    ;
+
 columnExpr
     : (OPEN_PAREN expression CLOSE_PAREN)
     | columnName
@@ -2605,7 +2615,8 @@ when_clause
     ;
 
 indirectionEl
-    : DOT (colLabel | STAR)
+    : DOT indirectionLabel
+    | DOT STAR
     | OPEN_BRACKET (expression | expression? COLON expression?) CLOSE_BRACKET
     ;
 
@@ -2622,8 +2633,14 @@ targetList
     ;
 
 targetEl
-    : columnExprNoParen (KW_AS colLabel | identifier |) # target_label
-    | STAR                                              # target_star
+    : tableAllColumns                                                                    # target_star
+    | (selectLiteralColumnName | selectExpressionColumnName) (KW_AS? alias=identifier |) # target_label
+    | colId DOT {this.entityCollecting}? emptyColumn                                     # target_dot_empty
+    | {this.entityCollecting}? emptyColumn                                               # target_empty
+    ;
+
+tableAllColumns
+    : (colId DOT)* STAR
     ;
 
 qualifiedNameList
@@ -2708,9 +2725,13 @@ procedureNameCreate
     | colId indirection
     ;
 
+// Empty column rule for entity collection
+emptyColumn
+    :
+    ;
+
 columnName
     : colId optIndirection
-    | {this.shouldMatchEmpty()}?
     ;
 
 columnNamePath
@@ -2779,6 +2800,12 @@ colLabel
     | colNameKeyword
     | typeFuncNameKeyword
     | reservedKeyword
+    ;
+
+indirectionLabel
+    : identifier
+    | colNameKeyword
+    | typeFuncNameKeyword
     ;
 
 identifier
