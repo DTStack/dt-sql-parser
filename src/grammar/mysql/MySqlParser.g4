@@ -1071,7 +1071,7 @@ orderByClause
     ;
 
 orderByExpression
-    : expression order=(KW_ASC | KW_DESC)?
+    : (expression | columnNamePathAllowEmpty) order=(KW_ASC | KW_DESC)?
     ;
 
 tableSources
@@ -1258,7 +1258,7 @@ groupByClause
     ;
 
 havingClause
-    : KW_HAVING havingExpr=expression
+    : KW_HAVING (havingExpr=expression | columnNamePathAllowEmpty)
     ;
 
 windowClause
@@ -1266,7 +1266,7 @@ windowClause
     ;
 
 groupByItem
-    : expression order=(KW_ASC | KW_DESC)?
+    : (expression | columnNamePathAllowEmpty) order=(KW_ASC | KW_DESC)?
     ;
 
 limitClause
@@ -2431,13 +2431,14 @@ columnName
     ;
 
 columnNamePath
-    : uid (dottedId dottedId?)?
-    | .? dottedId dottedId?
+    : uid (dottedId dottedId?)?                      # columnNamePath_default
+    | .? dottedId dottedId?                          # columnNamePath_dotted
+    | uid DOT {this.shouldMatchEmpty()}? emptyColumn # columnNamePath_dot_empty
     ;
 
 columnNamePathAllowEmpty
-    : {this.shouldMatchEmpty()}? emptyColumn
-    | uid (dottedId dottedId?)?
+    : columnNamePath
+    | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 tableSpaceNameCreate

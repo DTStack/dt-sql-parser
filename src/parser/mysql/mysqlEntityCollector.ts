@@ -30,6 +30,7 @@ import {
     SelectElement_labelContext,
     SelectElement_exprContext,
     SelectElement_dot_emptyContext,
+    ColumnNamePath_dot_emptyContext,
 } from '../../lib/mysql/MySqlParser';
 import type { MySqlParserListener } from '../../lib/mysql/MySqlParserListener';
 import {
@@ -163,6 +164,12 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
     }
 
     exitSelectElement_dot_empty(ctx: SelectElement_dot_emptyContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.LITERAL,
+        });
+    }
+
+    exitColumnNamePath_dot_empty(ctx: ColumnNamePath_dot_emptyContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN, [], {
             declareType: ColumnDeclareType.LITERAL,
         });

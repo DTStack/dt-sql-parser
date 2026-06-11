@@ -158,7 +158,8 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
                         candidateRule.ruleList.includes(PostgreSqlParser.RULE_whereClause) ||
                         candidateRule.ruleList.includes(PostgreSqlParser.RULE_havingClause) ||
                         candidateRule.ruleList.includes(PostgreSqlParser.RULE_windowClause) ||
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_triggerWhen)
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_triggerWhen) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_joinQual)
                     ) {
                         syntaxContextType = EntityContextType.COLUMN;
                     }

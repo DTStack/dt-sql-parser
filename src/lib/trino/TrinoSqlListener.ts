@@ -147,6 +147,8 @@ import { RelationDefaultContext } from "./TrinoSqlParser.js";
 import { JoinRelationContext } from "./TrinoSqlParser.js";
 import { JoinTypeContext } from "./TrinoSqlParser.js";
 import { JoinCriteriaContext } from "./TrinoSqlParser.js";
+import { JoinColumnEqualityContext } from "./TrinoSqlParser.js";
+import { JoinColumnReferenceContext } from "./TrinoSqlParser.js";
 import { SampledRelationContext } from "./TrinoSqlParser.js";
 import { SampleTypeContext } from "./TrinoSqlParser.js";
 import { TrimsSpecificationContext } from "./TrinoSqlParser.js";
@@ -365,6 +367,7 @@ import { CatalogNameCreateContext } from "./TrinoSqlParser.js";
 import { FunctionNameContext } from "./TrinoSqlParser.js";
 import { FunctionNameCreateContext } from "./TrinoSqlParser.js";
 import { ColumnRefContext } from "./TrinoSqlParser.js";
+import { EmptyColumnContext } from "./TrinoSqlParser.js";
 import { ColumnNameContext } from "./TrinoSqlParser.js";
 import { ColumnNameCreateContext } from "./TrinoSqlParser.js";
 import { QualifiedNameContext } from "./TrinoSqlParser.js";
@@ -1983,6 +1986,26 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitJoinCriteria?: (ctx: JoinCriteriaContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.joinColumnEquality`.
+     * @param ctx the parse tree
+     */
+    enterJoinColumnEquality?: (ctx: JoinColumnEqualityContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.joinColumnEquality`.
+     * @param ctx the parse tree
+     */
+    exitJoinColumnEquality?: (ctx: JoinColumnEqualityContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.joinColumnReference`.
+     * @param ctx the parse tree
+     */
+    enterJoinColumnReference?: (ctx: JoinColumnReferenceContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.joinColumnReference`.
+     * @param ctx the parse tree
+     */
+    exitJoinColumnReference?: (ctx: JoinColumnReferenceContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.sampledRelation`.
      * @param ctx the parse tree
@@ -4445,6 +4468,16 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitColumnRef?: (ctx: ColumnRefContext) => void;
+    /**
+     * Enter a parse tree produced by `TrinoSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    enterEmptyColumn?: (ctx: EmptyColumnContext) => void;
+    /**
+     * Exit a parse tree produced by `TrinoSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     */
+    exitEmptyColumn?: (ctx: EmptyColumnContext) => void;
     /**
      * Enter a parse tree produced by `TrinoSqlParser.columnName`.
      * @param ctx the parse tree

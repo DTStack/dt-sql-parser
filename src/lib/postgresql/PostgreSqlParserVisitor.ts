@@ -429,7 +429,8 @@ import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
 import { EmptyColumnContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
-import { ColumnNamePathContext } from "./PostgreSqlParser.js";
+import { ColumnNamePath_defaultContext } from "./PostgreSqlParser.js";
+import { ColumnNamePath_dot_emptyContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameContext } from "./PostgreSqlParser.js";
@@ -3062,11 +3063,19 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      */
     visitColumnName?: (ctx: ColumnNameContext) => Result;
     /**
-     * Visit a parse tree produced by `PostgreSqlParser.columnNamePath`.
+     * Visit a parse tree produced by the `columnNamePath_default`
+     * labeled alternative in `PostgreSqlParser.columnNamePath`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitColumnNamePath?: (ctx: ColumnNamePathContext) => Result;
+    visitColumnNamePath_default?: (ctx: ColumnNamePath_defaultContext) => Result;
+    /**
+     * Visit a parse tree produced by the `columnNamePath_dot_empty`
+     * labeled alternative in `PostgreSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitColumnNamePath_dot_empty?: (ctx: ColumnNamePath_dot_emptyContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.columnNameCreate`.
      * @param ctx the parse tree

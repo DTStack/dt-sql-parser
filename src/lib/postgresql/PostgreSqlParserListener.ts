@@ -429,7 +429,8 @@ import { ProcedureNameContext } from "./PostgreSqlParser.js";
 import { ProcedureNameCreateContext } from "./PostgreSqlParser.js";
 import { EmptyColumnContext } from "./PostgreSqlParser.js";
 import { ColumnNameContext } from "./PostgreSqlParser.js";
-import { ColumnNamePathContext } from "./PostgreSqlParser.js";
+import { ColumnNamePath_defaultContext } from "./PostgreSqlParser.js";
+import { ColumnNamePath_dot_emptyContext } from "./PostgreSqlParser.js";
 import { ColumnNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameCreateContext } from "./PostgreSqlParser.js";
 import { FunctionNameContext } from "./PostgreSqlParser.js";
@@ -4772,15 +4773,29 @@ export class PostgreSqlParserListener implements ParseTreeListener {
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
     /**
-     * Enter a parse tree produced by `PostgreSqlParser.columnNamePath`.
+     * Enter a parse tree produced by the `columnNamePath_default`
+     * labeled alternative in `PostgreSqlParser.columnNamePath`.
      * @param ctx the parse tree
      */
-    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    enterColumnNamePath_default?: (ctx: ColumnNamePath_defaultContext) => void;
     /**
-     * Exit a parse tree produced by `PostgreSqlParser.columnNamePath`.
+     * Exit a parse tree produced by the `columnNamePath_default`
+     * labeled alternative in `PostgreSqlParser.columnNamePath`.
      * @param ctx the parse tree
      */
-    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    exitColumnNamePath_default?: (ctx: ColumnNamePath_defaultContext) => void;
+    /**
+     * Enter a parse tree produced by the `columnNamePath_dot_empty`
+     * labeled alternative in `PostgreSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath_dot_empty?: (ctx: ColumnNamePath_dot_emptyContext) => void;
+    /**
+     * Exit a parse tree produced by the `columnNamePath_dot_empty`
+     * labeled alternative in `PostgreSqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath_dot_empty?: (ctx: ColumnNamePath_dot_emptyContext) => void;
     /**
      * Enter a parse tree produced by `PostgreSqlParser.columnNameCreate`.
      * @param ctx the parse tree

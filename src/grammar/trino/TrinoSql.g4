@@ -29,6 +29,12 @@ options {
     superClass=SQLParserBase;
 }
 
+@parser::members {
+    notEntityCollecting(): boolean {
+        return !this.entityCollecting;
+    }
+}
+
 @header {
 import { SQLParserBase } from '../SQLParserBase';
 }
@@ -380,8 +386,17 @@ joinType
     ;
 
 joinCriteria
-    : KW_ON booleanExpression
+    : KW_ON (joinColumnEquality | {this.notEntityCollecting()}? booleanExpression)
     | KW_USING '(' identifier (',' identifier)* ')'
+    ;
+
+joinColumnEquality
+    : left=joinColumnReference EQ right=joinColumnReference
+    ;
+
+joinColumnReference
+    : identifier DOT {this.entityCollecting}? emptyColumn
+    | columnName
     ;
 
 sampledRelation
@@ -1037,6 +1052,10 @@ functionNameCreate
 columnRef
     : qualifiedName
     | {this.shouldMatchEmpty()}?
+    ;
+
+emptyColumn
+    :
     ;
 
 columnName

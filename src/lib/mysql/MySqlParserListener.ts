@@ -546,7 +546,9 @@ import { ColumnNameCreateContext } from "./MySqlParser.js";
 import { ColumnNamesContext } from "./MySqlParser.js";
 import { EmptyColumnContext } from "./MySqlParser.js";
 import { ColumnNameContext } from "./MySqlParser.js";
-import { ColumnNamePathContext } from "./MySqlParser.js";
+import { ColumnNamePath_defaultContext } from "./MySqlParser.js";
+import { ColumnNamePath_dottedContext } from "./MySqlParser.js";
+import { ColumnNamePath_dot_emptyContext } from "./MySqlParser.js";
 import { ColumnNamePathAllowEmptyContext } from "./MySqlParser.js";
 import { TableSpaceNameCreateContext } from "./MySqlParser.js";
 import { TableSpaceNameContext } from "./MySqlParser.js";
@@ -6546,15 +6548,41 @@ export class MySqlParserListener implements ParseTreeListener {
      */
     exitColumnName?: (ctx: ColumnNameContext) => void;
     /**
-     * Enter a parse tree produced by `MySqlParser.columnNamePath`.
+     * Enter a parse tree produced by the `columnNamePath_default`
+     * labeled alternative in `MySqlParser.columnNamePath`.
      * @param ctx the parse tree
      */
-    enterColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    enterColumnNamePath_default?: (ctx: ColumnNamePath_defaultContext) => void;
     /**
-     * Exit a parse tree produced by `MySqlParser.columnNamePath`.
+     * Exit a parse tree produced by the `columnNamePath_default`
+     * labeled alternative in `MySqlParser.columnNamePath`.
      * @param ctx the parse tree
      */
-    exitColumnNamePath?: (ctx: ColumnNamePathContext) => void;
+    exitColumnNamePath_default?: (ctx: ColumnNamePath_defaultContext) => void;
+    /**
+     * Enter a parse tree produced by the `columnNamePath_dotted`
+     * labeled alternative in `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath_dotted?: (ctx: ColumnNamePath_dottedContext) => void;
+    /**
+     * Exit a parse tree produced by the `columnNamePath_dotted`
+     * labeled alternative in `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath_dotted?: (ctx: ColumnNamePath_dottedContext) => void;
+    /**
+     * Enter a parse tree produced by the `columnNamePath_dot_empty`
+     * labeled alternative in `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    enterColumnNamePath_dot_empty?: (ctx: ColumnNamePath_dot_emptyContext) => void;
+    /**
+     * Exit a parse tree produced by the `columnNamePath_dot_empty`
+     * labeled alternative in `MySqlParser.columnNamePath`.
+     * @param ctx the parse tree
+     */
+    exitColumnNamePath_dot_empty?: (ctx: ColumnNamePath_dot_emptyContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.columnNamePathAllowEmpty`.
      * @param ctx the parse tree
