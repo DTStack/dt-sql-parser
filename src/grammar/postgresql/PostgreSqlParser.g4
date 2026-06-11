@@ -40,6 +40,17 @@ options {
     superClass=SQLParserBase;
 }
 
+@parser::members {
+    isFollowedByInto(): boolean {
+        return this.tokenStream.LA(1) === PostgreSqlParser.KW_INTO;
+    }
+
+    isFollowedByEnd(): boolean {
+        const la = this.tokenStream.LA(1);
+        return la === PostgreSqlParser.SEMI || la === PostgreSqlParser.EOF;
+    }
+}
+
 @header {
 import { SQLParserBase } from '../SQLParserBase';
 }
@@ -2629,7 +2640,8 @@ optIndirection
     ;
 
 targetList
-    : targetEl (COMMA targetEl)*
+    : {this.isFollowedByInto() || this.isFollowedByEnd()}?
+    | targetEl (COMMA targetEl)*
     ;
 
 targetEl
@@ -2735,7 +2747,8 @@ columnName
     ;
 
 columnNamePath
-    : colId optIndirection
+    : colId optIndirection                             # columnNamePath_default
+    | colId DOT {this.shouldMatchEmpty()}? emptyColumn # columnNamePath_dot_empty
     ;
 
 columnNameCreate
@@ -3628,5 +3641,5 @@ anyIdentifier
     ;
 
 sqlExpression
-    : targetList? intoClause? fromClause? whereClause? groupClause? havingClause? windowClause?
+    : targetList intoClause? fromClause? whereClause? groupClause? havingClause? windowClause?
     ;

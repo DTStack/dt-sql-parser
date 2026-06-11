@@ -147,6 +147,8 @@ import { RelationDefaultContext } from "./TrinoSqlParser.js";
 import { JoinRelationContext } from "./TrinoSqlParser.js";
 import { JoinTypeContext } from "./TrinoSqlParser.js";
 import { JoinCriteriaContext } from "./TrinoSqlParser.js";
+import { JoinColumnEqualityContext } from "./TrinoSqlParser.js";
+import { JoinColumnReferenceContext } from "./TrinoSqlParser.js";
 import { SampledRelationContext } from "./TrinoSqlParser.js";
 import { SampleTypeContext } from "./TrinoSqlParser.js";
 import { TrimsSpecificationContext } from "./TrinoSqlParser.js";
@@ -365,6 +367,7 @@ import { CatalogNameCreateContext } from "./TrinoSqlParser.js";
 import { FunctionNameContext } from "./TrinoSqlParser.js";
 import { FunctionNameCreateContext } from "./TrinoSqlParser.js";
 import { ColumnRefContext } from "./TrinoSqlParser.js";
+import { EmptyColumnContext } from "./TrinoSqlParser.js";
 import { ColumnNameContext } from "./TrinoSqlParser.js";
 import { ColumnNameCreateContext } from "./TrinoSqlParser.js";
 import { QualifiedNameContext } from "./TrinoSqlParser.js";
@@ -1331,6 +1334,18 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitJoinCriteria?: (ctx: JoinCriteriaContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.joinColumnEquality`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJoinColumnEquality?: (ctx: JoinColumnEqualityContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.joinColumnReference`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJoinColumnReference?: (ctx: JoinColumnReferenceContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.sampledRelation`.
      * @param ctx the parse tree
@@ -2780,6 +2795,12 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitColumnRef?: (ctx: ColumnRefContext) => Result;
+    /**
+     * Visit a parse tree produced by `TrinoSqlParser.emptyColumn`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitEmptyColumn?: (ctx: EmptyColumnContext) => Result;
     /**
      * Visit a parse tree produced by `TrinoSqlParser.columnName`.
      * @param ctx the parse tree

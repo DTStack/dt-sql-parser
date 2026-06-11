@@ -239,4 +239,45 @@ describe('MySQL Syntax Suggestion with collect entity', () => {
         expect(entities[1].text).toBe('t1.');
         expect(entities[1].entityContextType).toBe(EntityContextType.QUERY_RESULT);
     });
+    test('suggestions with column after ORDER BY space', () => {
+        const sql = 'SELECT age FROM orders o ORDER BY ';
+        const result = mysql.getSuggestionAtCaretPosition(sql, { lineNumber: 1, column: 35 });
+        expect(result?.syntax?.some((s) => s.syntaxContextType === EntityContextType.COLUMN)).toBe(
+            true
+        );
+    });
+
+    test('suggestions with column after GROUP BY space', () => {
+        const sql = 'SELECT age FROM orders o GROUP BY ';
+        const result = mysql.getSuggestionAtCaretPosition(sql, { lineNumber: 1, column: 35 });
+        expect(result?.syntax?.some((s) => s.syntaxContextType === EntityContextType.COLUMN)).toBe(
+            true
+        );
+    });
+
+    test('suggestions with column after HAVING space', () => {
+        const sql = 'SELECT age FROM orders o GROUP BY age HAVING ';
+        const result = mysql.getSuggestionAtCaretPosition(sql, { lineNumber: 1, column: 44 });
+        expect(result?.syntax?.some((s) => s.syntaxContextType === EntityContextType.COLUMN)).toBe(
+            true
+        );
+    });
+
+    test('suggestions with column user scenario with WHERE before ORDER BY', () => {
+        const sql = `SELECT age
+FROM orders o WHERE age order by `;
+        const result = mysql.getSuggestionAtCaretPosition(sql, { lineNumber: 2, column: 34 });
+        expect(result?.syntax?.some((s) => s.syntaxContextType === EntityContextType.COLUMN)).toBe(
+            true
+        );
+    });
+
+    test('suggestions with column entities after ORDER BY expose table alias', () => {
+        const sql = 'SELECT age FROM orders o ORDER BY ';
+        const entities = mysql.getAllEntities(sql, { lineNumber: 1, column: 35 });
+        const tables = entities?.filter(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.isAccessible
+        );
+        expect(tables?.map((e) => e._alias?.text)).toEqual(expect.arrayContaining(['o']));
+    });
 });
