@@ -30,6 +30,8 @@ DROP TEMPORARY MACRO IF EXISTS macro2;
 -- Drop Role
 DROP ROLE `admin`;
 
+DROP ROLE role_name;
+
 -- Drop Index
 DROP INDEX table01_index ON table01;
 
