@@ -123,9 +123,11 @@ statement
     | KW_ALTER KW_VIEW from=viewRef KW_SET KW_AUTHORIZATION principal                                    # setViewAuthorization
     | KW_CALL functionName '(' (callArgument (',' callArgument)*)? ')'                                   # call
     | KW_CREATE (KW_OR KW_REPLACE)? functionSpecification                                                # createFunction
-    | KW_DROP KW_FUNCTION (KW_IF KW_EXISTS)? functionSignature                                           # dropFunction
-    | KW_CREATE KW_ROLE name=identifier (KW_WITH KW_ADMIN grantor)? (KW_IN catalog=catalogRef)?          # createRole
-    | KW_DROP KW_ROLE name=identifier (KW_IN catalog=catalogRef)?                                        # dropRole
+    | KW_DROP KW_FUNCTION (KW_IF KW_EXISTS)? functionName '(' (
+        parameterDeclaration (',' parameterDeclaration)*
+    )? ')'                                                                                      # dropFunction
+    | KW_CREATE KW_ROLE name=identifier (KW_WITH KW_ADMIN grantor)? (KW_IN catalog=catalogRef)? # createRole
+    | KW_DROP KW_ROLE name=identifier (KW_IN catalog=catalogRef)?                               # dropRole
     | KW_GRANT privilegeOrRole (',' privilegeOrRole)* KW_TO principal (',' principal)* (
         KW_WITH KW_ADMIN KW_OPTION
     )? (KW_GRANTED KW_BY grantor)? (KW_IN catalog=catalogRef)? # grantRoles
@@ -169,7 +171,7 @@ statement
         KW_LIKE pattern=string (KW_ESCAPE escape=string)?
     )?                                                                                             # showFunctions
     | KW_SHOW KW_SESSION (KW_LIKE pattern=string (KW_ESCAPE escape=string)?)?                      # showSession
-    | KW_SET KW_SESSION KW_AUTHORIZATION authorizationUser                                         # setSessionAuthorization
+    | KW_SET KW_SESSION KW_AUTHORIZATION (identifier | string)                                     # setSessionAuthorization
     | KW_RESET KW_SESSION KW_AUTHORIZATION                                                         # resetSessionAuthorization
     | KW_SET KW_SESSION qualifiedName EQ expression                                                # setSession
     | KW_RESET KW_SESSION qualifiedName                                                            # resetSession
@@ -208,15 +210,11 @@ with
 
 tableElement
     : columnDefinition
-    | likeClause
+    | KW_LIKE tableRef (optionType=( KW_INCLUDING | KW_EXCLUDING) KW_PROPERTIES)?
     ;
 
 columnDefinition
     : columnNameCreate colType=type (KW_NOT KW_NULL)? (KW_COMMENT comment=string)? (KW_WITH properties)?
-    ;
-
-likeClause
-    : KW_LIKE tableRef (optionType=( KW_INCLUDING | KW_EXCLUDING) KW_PROPERTIES)?
     ;
 
 properties
@@ -228,36 +226,21 @@ propertyAssignments
     ;
 
 property
-    : identifier EQ propertyValue
-    ;
-
-propertyValue
-    : KW_DEFAULT # defaultPropertyValue
-    | expression # nonDefaultPropertyValue
+    : identifier EQ (KW_DEFAULT | expression)
     ;
 
 queryNoWith
     : queryTerm (KW_ORDER KW_BY sortItem (',' sortItem)*)? (
-        KW_OFFSET offset=rowCount (KW_ROW | KW_ROWS)?
+        KW_OFFSET offset=(INTEGER_VALUE | QUESTION_MARK) (KW_ROW | KW_ROWS)?
     )? (
-        (KW_LIMIT limit=limitRowCount)
+        (KW_LIMIT limit=(KW_ALL | INTEGER_VALUE | QUESTION_MARK))
         | (
-            KW_FETCH (KW_FIRST | KW_NEXT) (fetchFirst=rowCount)? (KW_ROW | KW_ROWS) (
-                KW_ONLY
-                | KW_WITH KW_TIES
-            )
+            KW_FETCH (KW_FIRST | KW_NEXT) (fetchFirst=(INTEGER_VALUE | QUESTION_MARK))? (
+                KW_ROW
+                | KW_ROWS
+            ) (KW_ONLY | KW_WITH KW_TIES)
         )
     )?
-    ;
-
-limitRowCount
-    : KW_ALL
-    | rowCount
-    ;
-
-rowCount
-    : INTEGER_VALUE
-    | QUESTION_MARK
     ;
 
 queryTerm
@@ -313,13 +296,8 @@ groupingElement
     ;
 
 groupingSet
-    : '(' (groupingTerm (',' groupingTerm)*)? ')'
-    | groupingTerm
-    ;
-
-groupingTerm
-    : columnRef
-    | expression
+    : '(' ((columnRef | expression) (',' (columnRef | expression))*)? ')'
+    | (columnRef | expression)
     ;
 
 windowDefinition
@@ -366,7 +344,10 @@ selectExpressionColumnName
 relation
     : left=relation (
         KW_CROSS KW_JOIN right=sampledRelation
-        | joinType KW_JOIN rightRelation=relation joinCriteria
+        | joinType KW_JOIN rightRelation=relation (
+            KW_ON booleanExpression
+            | KW_USING '(' identifier (',' identifier)* ')'
+        )
         | KW_NATURAL joinType KW_JOIN right=sampledRelation
     )                 # joinRelation
     | sampledRelation # relationDefault
@@ -379,34 +360,13 @@ joinType
     | KW_FULL KW_OUTER?
     ;
 
-joinCriteria
-    : KW_ON booleanExpression
-    | KW_USING '(' identifier (',' identifier)* ')'
-    ;
-
 sampledRelation
-    : patternRecognition (KW_TABLESAMPLE sampleType '(' percentage=expression ')')?
-    ;
-
-sampleType
-    : KW_BERNOULLI
-    | KW_SYSTEM
-    ;
-
-trimsSpecification
-    : KW_LEADING
-    | KW_TRAILING
-    | KW_BOTH
+    : patternRecognition (KW_TABLESAMPLE (KW_BERNOULLI | KW_SYSTEM) '(' percentage=expression ')')?
     ;
 
 listAggOverflowBehavior
     : KW_ERROR
-    | KW_TRUNCATE string? listAggCountIndication
-    ;
-
-listAggCountIndication
-    : KW_WITH KW_COUNT
-    | KW_WITHOUT KW_COUNT
+    | KW_TRUNCATE string? (KW_WITH KW_COUNT | KW_WITHOUT KW_COUNT)
     ;
 
 patternRecognition
@@ -427,13 +387,11 @@ measureDefinition
 
 rowsPerMatch
     : KW_ONE KW_ROW KW_PER KW_MATCH
-    | KW_ALL KW_ROWS KW_PER KW_MATCH emptyMatchHandling?
-    ;
-
-emptyMatchHandling
-    : KW_SHOW KW_EMPTY KW_MATCHES
-    | KW_OMIT KW_EMPTY KW_MATCHES
-    | KW_WITH KW_UNMATCHED KW_ROWS
+    | KW_ALL KW_ROWS KW_PER KW_MATCH (
+        KW_SHOW KW_EMPTY KW_MATCHES
+        | KW_OMIT KW_EMPTY KW_MATCHES
+        | KW_WITH KW_UNMATCHED KW_ROWS
+    )?
     ;
 
 skipTo
@@ -469,9 +427,9 @@ columnAliases
     ;
 
 relationPrimary
-    : tableOrViewName queryPeriod? # tableName
-    | relationSourceTable          # expressionSourceTable
-    | '(' relation ')'             # parenthesizedRelation
+    : tableOrViewName (KW_FOR (KW_TIMESTAMP | KW_VERSION) KW_AS KW_OF end=valueExpression)? # tableName
+    | relationSourceTable                                                                   # expressionSourceTable
+    | '(' relation ')'                                                                      # parenthesizedRelation
     ;
 
 relationSourceTable
@@ -583,7 +541,7 @@ predicate[antlr.ParserRuleContext value]
 
 valueExpression
     : primaryExpression                                                                # valueExpressionDefault
-    | valueExpression KW_AT timeZoneSpecifier                                          # atTimeZone
+    | valueExpression KW_AT (KW_TIME KW_ZONE interval | KW_TIME KW_ZONE string)        # atTimeZone
     | operator=(MINUS | PLUS) valueExpression                                          # arithmeticUnary
     | left=valueExpression operator=(ASTERISK | SLASH | PERCENT) right=valueExpression # arithmeticBinary
     | left=valueExpression operator=(PLUS | MINUS) right=valueExpression               # arithmeticBinary
@@ -596,7 +554,7 @@ primaryExpression
     | identifier string                                         # typeConstructor
     | KW_DOUBLE KW_PRECISION string                             # typeConstructor
     | number                                                    # numericLiteral
-    | booleanValue                                              # booleanLiteral
+    | (KW_TRUE | KW_FALSE)                                      # booleanLiteral
     | string                                                    # stringLiteral
     | BINARY_LITERAL                                            # binaryLiteral
     | QUESTION_MARK                                             # parameter
@@ -609,39 +567,39 @@ primaryExpression
     | processingMode? functionName '(' (label=identifier '.')? ASTERISK ')' filter? over? # functionCall
     | processingMode? functionName '(' (setQuantifier? expression (',' expression)*)? (
         KW_ORDER KW_BY sortItem (',' sortItem)*
-    )? ')' filter? (nullTreatment? over)?                     # functionCall
-    | identifier over                                         # measure
-    | identifier '->' expression                              # lambda
-    | '(' (identifier (',' identifier)*)? ')' '->' expression # lambda
-    | '(' query ')'                                           # subqueryExpression
+    )? ')' filter? ((KW_IGNORE KW_NULLS | KW_RESPECT KW_NULLS)? over)? # functionCall
+    | identifier over                                                  # measure
+    | identifier '->' expression                                       # lambda
+    | '(' (identifier (',' identifier)*)? ')' '->' expression          # lambda
+    | '(' query ')'                                                    # subqueryExpression
     // This is an extension to ANSI SQL, which considers KW_EXISTS to be a <boolean expression>
-    | KW_EXISTS '(' query ')'                                                                             # exists
-    | KW_CASE operand=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END                  # simpleCase
-    | KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                                     # searchedCase
-    | KW_CAST '(' expression KW_AS type ')'                                                               # cast
-    | KW_TRY_CAST '(' expression KW_AS type ')'                                                           # cast
-    | KW_ARRAY '[' (expression (',' expression)*)? ']'                                                    # arrayConstructor
-    | value=primaryExpression '[' index=valueExpression ']'                                               # subscript
-    | columnName                                                                                          # columnReference
-    | base=primaryExpression '.' fieldName=identifier                                                     # dereference
-    | name=KW_CURRENT_DATE                                                                                # currentDate
-    | name=KW_CURRENT_TIME ('(' precision=INTEGER_VALUE ')')?                                             # currentTime
-    | name=KW_CURRENT_TIMESTAMP ('(' precision=INTEGER_VALUE ')')?                                        # currentTimestamp
-    | name=KW_LOCALTIME ('(' precision=INTEGER_VALUE ')')?                                                # localTime
-    | name=KW_LOCALTIMESTAMP ('(' precision=INTEGER_VALUE ')')?                                           # localTimestamp
-    | name=KW_CURRENT_USER                                                                                # currentUser
-    | name=KW_CURRENT_CATALOG                                                                             # currentCatalog
-    | name=KW_CURRENT_SCHEMA                                                                              # currentSchema
-    | name=KW_CURRENT_PATH                                                                                # currentPath
-    | KW_TRIM '(' (trimsSpecification? trimChar=valueExpression? KW_FROM)? trimSource=valueExpression ')' # trim
-    | KW_TRIM '(' trimSource=valueExpression ',' trimChar=valueExpression ')'                             # trim
-    | KW_SUBSTRING '(' valueExpression KW_FROM valueExpression (KW_FOR valueExpression)? ')'              # substring
-    | KW_NORMALIZE '(' valueExpression (',' normalForm)? ')'                                              # normalize
-    | KW_EXTRACT '(' identifier KW_FROM valueExpression ')'                                               # extract
-    | KW_COALESCE '(' expression (',' expression)* ')'                                                    # coalesce
-    | '(' expression ')'                                                                                  # parenthesizedExpression
-    | KW_GROUPING '(' (qualifiedName (',' qualifiedName)*)? ')'                                           # groupingOperation
-    | KW_JSON_EXISTS '(' jsonPathInvocation (jsonExistsErrorBehavior KW_ON KW_ERROR)? ')'                 # jsonExists
+    | KW_EXISTS '(' query ')'                                                                                               # exists
+    | KW_CASE operand=expression whenClause+ (KW_ELSE elseExpression=expression)? KW_END                                    # simpleCase
+    | KW_CASE whenClause+ (KW_ELSE elseExpression=expression)? KW_END                                                       # searchedCase
+    | KW_CAST '(' expression KW_AS type ')'                                                                                 # cast
+    | KW_TRY_CAST '(' expression KW_AS type ')'                                                                             # cast
+    | KW_ARRAY '[' (expression (',' expression)*)? ']'                                                                      # arrayConstructor
+    | value=primaryExpression '[' index=valueExpression ']'                                                                 # subscript
+    | columnName                                                                                                            # columnReference
+    | base=primaryExpression '.' fieldName=identifier                                                                       # dereference
+    | name=KW_CURRENT_DATE                                                                                                  # currentDate
+    | name=KW_CURRENT_TIME ('(' precision=INTEGER_VALUE ')')?                                                               # currentTime
+    | name=KW_CURRENT_TIMESTAMP ('(' precision=INTEGER_VALUE ')')?                                                          # currentTimestamp
+    | name=KW_LOCALTIME ('(' precision=INTEGER_VALUE ')')?                                                                  # localTime
+    | name=KW_LOCALTIMESTAMP ('(' precision=INTEGER_VALUE ')')?                                                             # localTimestamp
+    | name=KW_CURRENT_USER                                                                                                  # currentUser
+    | name=KW_CURRENT_CATALOG                                                                                               # currentCatalog
+    | name=KW_CURRENT_SCHEMA                                                                                                # currentSchema
+    | name=KW_CURRENT_PATH                                                                                                  # currentPath
+    | KW_TRIM '(' ((KW_LEADING | KW_TRAILING | KW_BOTH)? trimChar=valueExpression? KW_FROM)? trimSource=valueExpression ')' # trim
+    | KW_TRIM '(' trimSource=valueExpression ',' trimChar=valueExpression ')'                                               # trim
+    | KW_SUBSTRING '(' valueExpression KW_FROM valueExpression (KW_FOR valueExpression)? ')'                                # substring
+    | KW_NORMALIZE '(' valueExpression (',' (KW_NFD | KW_NFC | KW_NFKD | KW_NFKC))? ')'                                     # normalize
+    | KW_EXTRACT '(' identifier KW_FROM valueExpression ')'                                                                 # extract
+    | KW_COALESCE '(' expression (',' expression)* ')'                                                                      # coalesce
+    | '(' expression ')'                                                                                                    # parenthesizedExpression
+    | KW_GROUPING '(' (qualifiedName (',' qualifiedName)*)? ')'                                                             # groupingOperation
+    | KW_JSON_EXISTS '(' jsonPathInvocation ((KW_TRUE | KW_FALSE | KW_UNKNOWN | KW_ERROR) KW_ON KW_ERROR)? ')'              # jsonExists
     | KW_JSON_VALUE '(' jsonPathInvocation (KW_RETURNING type)? (
         emptyBehavior=jsonValueBehavior KW_ON KW_EMPTY
     )? (errorBehavior=jsonValueBehavior KW_ON KW_ERROR)? ')' # jsonValue
@@ -679,13 +637,6 @@ jsonArgument
     : jsonValueExpression KW_AS identifier
     ;
 
-jsonExistsErrorBehavior
-    : KW_TRUE
-    | KW_FALSE
-    | KW_UNKNOWN
-    | KW_ERROR
-    ;
-
 jsonValueBehavior
     : KW_ERROR
     | KW_NULL
@@ -714,19 +665,9 @@ processingMode
     | KW_FINAL
     ;
 
-nullTreatment
-    : KW_IGNORE KW_NULLS
-    | KW_RESPECT KW_NULLS
-    ;
-
 string
     : STRING                              # basicStringLiteral
     | UNICODE_STRING (KW_UESCAPE STRING)? # unicodeStringLiteral
-    ;
-
-timeZoneSpecifier
-    : KW_TIME KW_ZONE interval # timeZoneInterval
-    | KW_TIME KW_ZONE string   # timeZoneString
     ;
 
 comparisonOperator
@@ -744,11 +685,6 @@ comparisonQuantifier
     | KW_ANY
     ;
 
-booleanValue
-    : KW_TRUE
-    | KW_FALSE
-    ;
-
 interval
     : KW_INTERVAL sign=(PLUS | MINUS)? string from=intervalField (KW_TO to=intervalField)?
     ;
@@ -760,13 +696,6 @@ intervalField
     | KW_HOUR
     | KW_MINUTE
     | KW_SECOND
-    ;
-
-normalForm
-    : KW_NFD
-    | KW_NFC
-    | KW_NFKD
-    | KW_NFKC
     ;
 
 type
@@ -823,12 +752,10 @@ windowFrame
     ;
 
 frameExtent
-    : frameType=KW_RANGE start=frameBound
-    | frameType=KW_ROWS start=frameBound
-    | frameType=KW_GROUPS start=frameBound
-    | frameType=KW_RANGE KW_BETWEEN start=frameBound KW_AND end=frameBound
-    | frameType=KW_ROWS KW_BETWEEN start=frameBound KW_AND end=frameBound
-    | frameType=KW_GROUPS KW_BETWEEN start=frameBound KW_AND end=frameBound
+    : frameType=(KW_RANGE | KW_ROWS | KW_GROUPS) (
+        KW_BETWEEN start=frameBound KW_AND end=frameBound
+        | start=frameBound
+    )
     ;
 
 frameBound
@@ -872,15 +799,13 @@ explainOption
     ;
 
 transactionMode
-    : KW_ISOLATION KW_LEVEL levelOfIsolation  # isolationLevel
+    : KW_ISOLATION KW_LEVEL (
+        KW_READ KW_UNCOMMITTED
+        | KW_READ KW_COMMITTED
+        | KW_REPEATABLE KW_READ
+        | KW_SERIALIZABLE
+    )                                         # isolationLevel
     | KW_READ accessMode=(KW_ONLY | KW_WRITE) # transactionAccessMode
-    ;
-
-levelOfIsolation
-    : KW_READ KW_UNCOMMITTED # readUncommitted
-    | KW_READ KW_COMMITTED   # readCommitted
-    | KW_REPEATABLE KW_READ  # repeatableRead
-    | KW_SERIALIZABLE        # serializable
     ;
 
 callArgument
@@ -898,23 +823,11 @@ pathSpecification
     ;
 
 functionSpecification
-    : KW_FUNCTION functionDeclaration returnsClause routineCharacteristic* controlStatement
-    ;
-
-functionDeclaration
-    : functionNameCreate '(' (parameterDeclaration (',' parameterDeclaration)*)? ')'
-    ;
-
-functionSignature
-    : functionName '(' (parameterDeclaration (',' parameterDeclaration)*)? ')'
+    : KW_FUNCTION functionNameCreate '(' (parameterDeclaration (',' parameterDeclaration)*)? ')' KW_RETURNS type routineCharacteristic* controlStatement
     ;
 
 parameterDeclaration
     : identifier? type
-    ;
-
-returnsClause
-    : KW_RETURNS type
     ;
 
 routineCharacteristic
@@ -927,33 +840,25 @@ routineCharacteristic
     ;
 
 controlStatement
-    : KW_RETURN valueExpression                                                               # returnStatement
-    | KW_SET identifier EQ expression                                                         # assignmentStatement
-    | KW_CASE expression caseStatementWhenClause+ elseClause? KW_END KW_CASE                  # simpleCaseStatement
-    | KW_CASE caseStatementWhenClause+ elseClause? KW_END KW_CASE                             # searchedCaseStatement
-    | KW_IF expression KW_THEN sqlStatementList elseIfClause* elseClause? KW_END KW_IF        # ifStatement
-    | KW_ITERATE identifier                                                                   # iterateStatement
-    | KW_LEAVE identifier                                                                     # leaveStatement
-    | KW_BEGIN (variableDeclaration SEMICOLON)* sqlStatementList? KW_END                      # compoundStatement
-    | (label=identifier ':')? KW_LOOP sqlStatementList KW_END KW_LOOP                         # loopStatement
-    | (label=identifier ':')? KW_WHILE expression KW_DO sqlStatementList KW_END KW_WHILE      # whileStatement
-    | (label=identifier ':')? KW_REPEAT sqlStatementList KW_UNTIL expression KW_END KW_REPEAT # repeatStatement
+    : KW_RETURN valueExpression                                                                                                 # returnStatement
+    | KW_SET identifier EQ expression                                                                                           # assignmentStatement
+    | KW_CASE expression caseStatementWhenClause+ elseClause? KW_END KW_CASE                                                    # simpleCaseStatement
+    | KW_CASE caseStatementWhenClause+ elseClause? KW_END KW_CASE                                                               # searchedCaseStatement
+    | KW_IF expression KW_THEN sqlStatementList (KW_ELSEIF expression KW_THEN sqlStatementList)* elseClause? KW_END KW_IF       # ifStatement
+    | KW_ITERATE identifier                                                                                                     # iterateStatement
+    | KW_LEAVE identifier                                                                                                       # leaveStatement
+    | KW_BEGIN (KW_DECLARE identifier (',' identifier)* type (KW_DEFAULT valueExpression)? SEMICOLON)* sqlStatementList? KW_END # compoundStatement
+    | (label=identifier ':')? KW_LOOP sqlStatementList KW_END KW_LOOP                                                           # loopStatement
+    | (label=identifier ':')? KW_WHILE expression KW_DO sqlStatementList KW_END KW_WHILE                                        # whileStatement
+    | (label=identifier ':')? KW_REPEAT sqlStatementList KW_UNTIL expression KW_END KW_REPEAT                                   # repeatStatement
     ;
 
 caseStatementWhenClause
     : KW_WHEN expression KW_THEN sqlStatementList
     ;
 
-elseIfClause
-    : KW_ELSEIF expression KW_THEN sqlStatementList
-    ;
-
 elseClause
     : KW_ELSE sqlStatementList
-    ;
-
-variableDeclaration
-    : KW_DECLARE identifier (',' identifier)* type (KW_DEFAULT valueExpression)?
     ;
 
 sqlStatementList
@@ -969,14 +874,8 @@ privilege
     | identifier
     ;
 
-entityKind
-    : KW_TABLE
-    | KW_SCHEMA
-    | identifier
-    ;
-
 grantObject
-    : entityKind? qualifiedName
+    : (KW_TABLE | KW_SCHEMA | identifier)? qualifiedName
     ;
 
 tableOrViewName
@@ -1051,15 +950,6 @@ qualifiedName
     : identifier ('.' identifier)*
     ;
 
-queryPeriod
-    : KW_FOR rangeType KW_AS KW_OF end=valueExpression
-    ;
-
-rangeType
-    : KW_TIMESTAMP
-    | KW_VERSION
-    ;
-
 grantor
     : principal       # specifiedPrincipal
     | KW_CURRENT_USER # currentUserGrantor
@@ -1098,11 +988,6 @@ number
     : MINUS? DECIMAL_VALUE # decimalLiteral
     | MINUS? DOUBLE_VALUE  # doubleLiteral
     | MINUS? INTEGER_VALUE # integerLiteral
-    ;
-
-authorizationUser
-    : identifier # identifierUser
-    | string     # stringUser
     ;
 
 nonReserved
