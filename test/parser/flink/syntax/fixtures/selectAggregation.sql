@@ -89,6 +89,33 @@ GROUP BY
     SESSION(order_time, INTERVAL '1' DAY),
     `user`;
 
+-- GROUPING SETS with multiple groups (groupingSets inlined)
+SELECT
+    supplier_id,
+    item,
+    SUM(price) as price
+FROM Bid
+GROUP BY
+    GROUPING SETS ((supplier_id), (item), ());
+
+-- CUBE with multiple columns (groupingSetsNotationName inlined)
+SELECT
+    supplier_id,
+    item,
+    SUM(price) as price
+FROM Bid
+GROUP BY
+    CUBE (supplier_id, item);
+
+-- ROLLUP with multiple columns (groupingSetsNotationName inlined)
+SELECT
+    supplier_id,
+    item,
+    SUM(price) as price
+FROM Bid
+GROUP BY
+    ROLLUP (supplier_id, item);
+
 -- Having
 SELECT SUM(amount)
 FROM Orders

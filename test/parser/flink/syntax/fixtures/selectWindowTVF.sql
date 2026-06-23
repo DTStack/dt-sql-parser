@@ -50,3 +50,12 @@ FROM TABLE(
         INTERVAL '10' MINUTES
     ))
 GROUP BY window_start, window_end;
+
+-- Window TVF with dotted column reference (timeAttrColumn inlined to uid)
+SELECT * FROM TABLE(
+    TUMBLE(
+        DATA => TABLE Bid,
+        TIMECOL => DESCRIPTOR(b.bidtime),
+        SIZE => INTERVAL '10' MINUTES
+    )
+);
