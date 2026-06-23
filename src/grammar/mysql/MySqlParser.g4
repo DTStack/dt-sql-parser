@@ -51,7 +51,7 @@ program
 
 singleStatement
     : sqlStatement SEMI?
-    | emptyStatement_
+    | SEMI
     ;
 
 sqlStatement
@@ -62,10 +62,6 @@ sqlStatement
     | preparedStatement
     | administrationStatement
     | utilityStatement
-    ;
-
-emptyStatement_
-    : SEMI
     ;
 
 ddlStatement
@@ -2903,21 +2899,7 @@ windowName
     ;
 
 frameClause
-    : frameUnits frameExtent
-    ;
-
-frameUnits
-    : KW_ROWS
-    | KW_RANGE
-    ;
-
-frameExtent
-    : frameRange
-    | frameBetween
-    ;
-
-frameBetween
-    : KW_BETWEEN frameRange KW_AND frameRange
+    : (KW_ROWS | KW_RANGE) (frameRange | KW_BETWEEN frameRange KW_AND frameRange)
     ;
 
 frameRange
