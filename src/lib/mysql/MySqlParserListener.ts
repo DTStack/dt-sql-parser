@@ -11,7 +11,6 @@ import { SQLParserBase } from '../SQLParserBase';
 import { ProgramContext } from "./MySqlParser.js";
 import { SingleStatementContext } from "./MySqlParser.js";
 import { SqlStatementContext } from "./MySqlParser.js";
-import { EmptyStatement_Context } from "./MySqlParser.js";
 import { DdlStatementContext } from "./MySqlParser.js";
 import { DmlStatementContext } from "./MySqlParser.js";
 import { TransactionStatementContext } from "./MySqlParser.js";
@@ -636,9 +635,6 @@ import { OverClauseContext } from "./MySqlParser.js";
 import { WindowSpecContext } from "./MySqlParser.js";
 import { WindowNameContext } from "./MySqlParser.js";
 import { FrameClauseContext } from "./MySqlParser.js";
-import { FrameUnitsContext } from "./MySqlParser.js";
-import { FrameExtentContext } from "./MySqlParser.js";
-import { FrameBetweenContext } from "./MySqlParser.js";
 import { FrameRangeContext } from "./MySqlParser.js";
 import { PartitionClauseContext } from "./MySqlParser.js";
 import { ScalarFunctionNameContext } from "./MySqlParser.js";
@@ -725,16 +721,6 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSqlStatement?: (ctx: SqlStatementContext) => void;
-    /**
-     * Enter a parse tree produced by `MySqlParser.emptyStatement_`.
-     * @param ctx the parse tree
-     */
-    enterEmptyStatement_?: (ctx: EmptyStatement_Context) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.emptyStatement_`.
-     * @param ctx the parse tree
-     */
-    exitEmptyStatement_?: (ctx: EmptyStatement_Context) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.ddlStatement`.
      * @param ctx the parse tree
@@ -7507,36 +7493,6 @@ export class MySqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitFrameClause?: (ctx: FrameClauseContext) => void;
-    /**
-     * Enter a parse tree produced by `MySqlParser.frameUnits`.
-     * @param ctx the parse tree
-     */
-    enterFrameUnits?: (ctx: FrameUnitsContext) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.frameUnits`.
-     * @param ctx the parse tree
-     */
-    exitFrameUnits?: (ctx: FrameUnitsContext) => void;
-    /**
-     * Enter a parse tree produced by `MySqlParser.frameExtent`.
-     * @param ctx the parse tree
-     */
-    enterFrameExtent?: (ctx: FrameExtentContext) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.frameExtent`.
-     * @param ctx the parse tree
-     */
-    exitFrameExtent?: (ctx: FrameExtentContext) => void;
-    /**
-     * Enter a parse tree produced by `MySqlParser.frameBetween`.
-     * @param ctx the parse tree
-     */
-    enterFrameBetween?: (ctx: FrameBetweenContext) => void;
-    /**
-     * Exit a parse tree produced by `MySqlParser.frameBetween`.
-     * @param ctx the parse tree
-     */
-    exitFrameBetween?: (ctx: FrameBetweenContext) => void;
     /**
      * Enter a parse tree produced by `MySqlParser.frameRange`.
      * @param ctx the parse tree

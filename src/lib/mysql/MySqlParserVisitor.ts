@@ -11,7 +11,6 @@ import { SQLParserBase } from '../SQLParserBase';
 import { ProgramContext } from "./MySqlParser.js";
 import { SingleStatementContext } from "./MySqlParser.js";
 import { SqlStatementContext } from "./MySqlParser.js";
-import { EmptyStatement_Context } from "./MySqlParser.js";
 import { DdlStatementContext } from "./MySqlParser.js";
 import { DmlStatementContext } from "./MySqlParser.js";
 import { TransactionStatementContext } from "./MySqlParser.js";
@@ -636,9 +635,6 @@ import { OverClauseContext } from "./MySqlParser.js";
 import { WindowSpecContext } from "./MySqlParser.js";
 import { WindowNameContext } from "./MySqlParser.js";
 import { FrameClauseContext } from "./MySqlParser.js";
-import { FrameUnitsContext } from "./MySqlParser.js";
-import { FrameExtentContext } from "./MySqlParser.js";
-import { FrameBetweenContext } from "./MySqlParser.js";
 import { FrameRangeContext } from "./MySqlParser.js";
 import { PartitionClauseContext } from "./MySqlParser.js";
 import { ScalarFunctionNameContext } from "./MySqlParser.js";
@@ -716,12 +712,6 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitSqlStatement?: (ctx: SqlStatementContext) => Result;
-    /**
-     * Visit a parse tree produced by `MySqlParser.emptyStatement_`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitEmptyStatement_?: (ctx: EmptyStatement_Context) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.ddlStatement`.
      * @param ctx the parse tree
@@ -4732,24 +4722,6 @@ export class MySqlParserVisitor<Result> extends AbstractParseTreeVisitor<Result>
      * @return the visitor result
      */
     visitFrameClause?: (ctx: FrameClauseContext) => Result;
-    /**
-     * Visit a parse tree produced by `MySqlParser.frameUnits`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitFrameUnits?: (ctx: FrameUnitsContext) => Result;
-    /**
-     * Visit a parse tree produced by `MySqlParser.frameExtent`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitFrameExtent?: (ctx: FrameExtentContext) => Result;
-    /**
-     * Visit a parse tree produced by `MySqlParser.frameBetween`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitFrameBetween?: (ctx: FrameBetweenContext) => Result;
     /**
      * Visit a parse tree produced by `MySqlParser.frameRange`.
      * @param ctx the parse tree
