@@ -32,7 +32,12 @@ export { EntityContextType } from './parser/common/types';
 
 export { StmtContextType } from './parser/common/entityCollector';
 
-export type { CaretPosition, Suggestions, SyntaxSuggestion } from './parser/common/types';
+export type {
+    CaretPosition,
+    SuggestionOptions,
+    Suggestions,
+    SyntaxSuggestion,
+} from './parser/common/types';
 
 export type { WordRange, TextSlice } from './parser/common/textAndWord';
 
