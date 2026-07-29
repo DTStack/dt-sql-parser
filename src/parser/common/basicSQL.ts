@@ -83,6 +83,38 @@ export abstract class BasicSQL<
         caretTokenIndex: number
     ): Suggestions<Token>;
 
+    protected getCandidateTokenRanges(
+        candidates: CandidatesCollection,
+        candidateStartTokenIndex: number,
+        allTokens: Token[],
+        caretTokenIndex: number
+    ): Token[] {
+        // antlr4-c3 may return both entity and alias candidates; use the nearest candidate's start index as boundary
+        const endTokenIndex = Array.from(candidates.rules.values()).reduce(
+            (nearestStartTokenIndex, candidateRule) => {
+                if (candidateRule.startTokenIndex <= candidateStartTokenIndex) {
+                    return nearestStartTokenIndex;
+                }
+                return Math.min(nearestStartTokenIndex, candidateRule.startTokenIndex);
+            },
+            caretTokenIndex + 1
+        );
+        const previousVisibleToken = allTokens
+            .slice(candidateStartTokenIndex, endTokenIndex)
+            .reverse()
+            .find((token) => token.channel === Token.DEFAULT_CHANNEL);
+        // look past hidden tokens to detect dot, preserving dot and following identifier in incomplete qualified names
+        const rangeEndTokenIndex =
+            endTokenIndex <= caretTokenIndex &&
+            (allTokens[endTokenIndex]?.text === '.' || previousVisibleToken?.text === '.')
+                ? endTokenIndex + 1
+                : endTokenIndex;
+
+        return allTokens
+            .slice(candidateStartTokenIndex, rangeEndTokenIndex)
+            .filter((token) => token.channel === Token.DEFAULT_CHANNEL);
+    }
+
     /**
      * Get a new splitListener instance.
      */

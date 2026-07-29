@@ -93,7 +93,12 @@ export class FlinkSQL extends BasicSQL<FlinkSqlLexer, ProgramContext, FlinkSqlPa
 
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
+            const tokenRanges = this.getCandidateTokenRanges(
+                candidates,
+                candidateRule.startTokenIndex,
+                allTokens,
+                caretTokenIndex
+            );
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
