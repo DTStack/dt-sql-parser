@@ -8,6 +8,8 @@ import {
     SparkSQL,
     TrinoSQL,
 } from 'src/index';
+import { CandidatesCollection } from 'antlr4-c3';
+import { Token } from 'antlr4ng';
 import { EntityContextType } from 'src/parser/common/types';
 
 type SuggestionParser = Pick<MySQL, 'getSuggestionAtCaretPosition'>;
@@ -22,6 +24,22 @@ const parserFactories: Array<[string, () => SuggestionParser]> = [
     ['ImpalaSQL', () => new ImpalaSQL()],
     ['GenericSQL', () => new GenericSQL()],
 ];
+
+class TestableSparkSQL extends SparkSQL {
+    public getCandidateTokenRangesForTest(
+        candidates: CandidatesCollection,
+        candidateStartTokenIndex: number,
+        allTokens: Token[],
+        caretTokenIndex: number
+    ): Token[] {
+        return this.getCandidateTokenRanges(
+            candidates,
+            candidateStartTokenIndex,
+            allTokens,
+            caretTokenIndex
+        );
+    }
+}
 
 const scenarios = [
     {
@@ -89,6 +107,24 @@ test('SparkSQL preserves a qualified table name separated by a comment', () => {
     expect(tableSuggestion).toBeDefined();
     expect(tableSuggestion?.wordRanges.map((wordRange) => wordRange.text)).toEqual([
         'db',
+        '.',
+        'table',
+    ]);
+});
+
+test('preserves a multi-level qualified table name when another candidate starts in the middle', () => {
+    const parser = new TestableSparkSQL();
+    const allTokens = parser.getAllTokens('catalog.schema.table');
+    const candidates = new CandidatesCollection();
+    candidates.rules.set(0, { startTokenIndex: 0, ruleList: [] });
+    candidates.rules.set(1, { startTokenIndex: 2, ruleList: [] });
+
+    const wordRanges = parser.getCandidateTokenRangesForTest(candidates, 0, allTokens, 4);
+
+    expect(wordRanges.map((wordRange) => wordRange.text)).toEqual([
+        'catalog',
+        '.',
+        'schema',
         '.',
         'table',
     ]);

@@ -103,12 +103,34 @@ export abstract class BasicSQL<
             .slice(candidateStartTokenIndex, endTokenIndex)
             .reverse()
             .find((token) => token.channel === Token.DEFAULT_CHANNEL);
-        // look past hidden tokens to detect dot, preserving dot and following identifier in incomplete qualified names
-        const rangeEndTokenIndex =
-            endTokenIndex <= caretTokenIndex &&
-            (allTokens[endTokenIndex]?.text === '.' || previousVisibleToken?.text === '.')
-                ? endTokenIndex + 1
-                : endTokenIndex;
+        const visibleTokenIndexes = allTokens
+            .slice(endTokenIndex, caretTokenIndex + 1)
+            .reduce<number[]>((indexes, token, offset) => {
+                if (token.channel === Token.DEFAULT_CHANNEL) {
+                    indexes.push(endTokenIndex + offset);
+                }
+                return indexes;
+            }, []);
+        const firstVisibleToken = allTokens[visibleTokenIndexes[0]];
+        let rangeEndTokenIndex = endTokenIndex;
+
+        // candidate boundary may fall inside a multi-level qualified name; extend along the identifier and dot chain
+        if (previousVisibleToken?.text === '.' || firstVisibleToken?.text === '.') {
+            let visibleTokenOffset = 0;
+            if (previousVisibleToken?.text === '.' && firstVisibleToken) {
+                rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                visibleTokenOffset += 1;
+            }
+
+            while (allTokens[visibleTokenIndexes[visibleTokenOffset]]?.text === '.') {
+                rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                visibleTokenOffset += 1;
+                if (visibleTokenOffset < visibleTokenIndexes.length) {
+                    rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                    visibleTokenOffset += 1;
+                }
+            }
+        }
 
         return allTokens
             .slice(candidateStartTokenIndex, rangeEndTokenIndex)
