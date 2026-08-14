@@ -1,3 +1,5 @@
+import { ParserRuleContext } from 'antlr4ng';
+
 import {
     FlinkSQL,
     GenericSQL,
@@ -19,6 +21,21 @@ const dialects = [
     ['ImpalaSQL', () => new ImpalaSQL()],
     ['GenericSQL', () => new GenericSQL()],
 ] as const;
+
+test.each(dialects)(
+    '%s exposes each top-level statement as a direct program child',
+    (_, createParser) => {
+        const parseTree = createParser().parse('SELECT * FROM t; SELECT * FROM u');
+        const topLevelStatements =
+            parseTree.children?.filter((child) => child instanceof ParserRuleContext) ?? [];
+
+        expect(topLevelStatements).toHaveLength(2);
+        expect(topLevelStatements.map((statement) => statement.getText())).toEqual([
+            'SELECT*FROMt;',
+            'SELECT*FROMu',
+        ]);
+    }
+);
 
 describe.each(dialects)('%s suggestion at caret position', (_, createParser) => {
     const parser = createParser();

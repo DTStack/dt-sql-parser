@@ -559,6 +559,8 @@ export abstract class BasicSQL<
 
     /**
      * Get the minimum statement tree for collecting completion candidates
+     * Each supported grammar exposes one top-level statement per direct program child
+     * Keep the lookup shallow to avoid selecting nested statements or subqueries
      */
     private getSuggestionParseTree(
         parseTree: ParserRuleContext,
@@ -605,6 +607,7 @@ export abstract class BasicSQL<
 
         if (suggestionParseTree === parseTree) return candidates;
 
+        // Keep the program candidates for outer rule paths and use statement candidates for isolation
         const statementCore = new CodeCompletionCore(parser);
         statementCore.preferredRules = this.preferredRules;
         const statementCandidates = statementCore.collectCandidates(
