@@ -56,4 +56,22 @@ export abstract class SQLParserBase<T = antlr.ParserRuleContext> extends antlr.P
         // This allows ANTLR to report errors naturally
         return false;
     }
+
+    /**
+     * Semantic predicate to check whether the previous token and the next token
+     * are adjacent (no whitespace in between).
+     *
+     * Used to support hyphens inside Hive SET config property names, e.g.
+     * `set tez.grouping.max-size = 1`, while still rejecting invalid spacing
+     * like `set hive.a - b = 1`.
+     */
+    public isNextTokenAdjacent(): boolean {
+        const previousToken = this.tokenStream.LT(-1);
+        const nextToken = this.tokenStream.LT(1);
+        return (
+            previousToken !== null &&
+            nextToken !== null &&
+            previousToken.stop + 1 === nextToken.start
+        );
+    }
 }

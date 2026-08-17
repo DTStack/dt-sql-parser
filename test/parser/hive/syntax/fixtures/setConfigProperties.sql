@@ -662,3 +662,9 @@ SET hivevar:A = 1;
 -- SELECT ${hivevar:A};
 SELECT `_A`;
 SELECT `_hivevar:A`;
+
+-- https://github.com/DTStack/dt-sql-parser/issues/487
+set tez.grouping.max-size = 268435456;
+set tez.grouping.min-size = 134217728;
+set tez.grouping.split-waves = 1;
+set a-b-c = 1;

@@ -13,4 +13,12 @@ describe('HiveSQL Select Syntax Tests', () => {
             expect(hive.validate(configProperty).length).toBe(0);
         });
     });
+
+    // https://github.com/DTStack/dt-sql-parser/issues/487
+    // A hyphen inside a config property name must be adjacent to the surrounding
+    // words (no whitespace), e.g. `max-size`. Spaced-out `a - b` is invalid.
+    it('should report error when hyphen in config property is surrounded by whitespace', () => {
+        expect(hive.validate('set hive.a - b = 1;').length).toBeGreaterThan(0);
+        expect(hive.validate('set hive.a- b = 1;').length).toBeGreaterThan(0);
+    });
 });
