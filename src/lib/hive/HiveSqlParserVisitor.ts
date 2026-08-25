@@ -342,6 +342,8 @@ import { FunctionIdentifierContext } from "./HiveSqlParser.js";
 import { PrincipalIdentifierContext } from "./HiveSqlParser.js";
 import { NonReservedContext } from "./HiveSqlParser.js";
 import { Sql11ReservedKeywordsUsedAsFunctionNameContext } from "./HiveSqlParser.js";
+import { ConfigPropertyContext } from "./HiveSqlParser.js";
+import { ConfigPropertyPartContext } from "./HiveSqlParser.js";
 import { ConfigPropertiesItemContext } from "./HiveSqlParser.js";
 import { ResourcePlanDdlStatementsContext } from "./HiveSqlParser.js";
 import { MappingTypesContext } from "./HiveSqlParser.js";
@@ -2384,6 +2386,18 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitSql11ReservedKeywordsUsedAsFunctionName?: (ctx: Sql11ReservedKeywordsUsedAsFunctionNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.configProperty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitConfigProperty?: (ctx: ConfigPropertyContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.configPropertyPart`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitConfigPropertyPart?: (ctx: ConfigPropertyPartContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.configPropertiesItem`.
      * @param ctx the parse tree

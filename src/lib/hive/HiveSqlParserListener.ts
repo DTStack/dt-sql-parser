@@ -342,6 +342,8 @@ import { FunctionIdentifierContext } from "./HiveSqlParser.js";
 import { PrincipalIdentifierContext } from "./HiveSqlParser.js";
 import { NonReservedContext } from "./HiveSqlParser.js";
 import { Sql11ReservedKeywordsUsedAsFunctionNameContext } from "./HiveSqlParser.js";
+import { ConfigPropertyContext } from "./HiveSqlParser.js";
+import { ConfigPropertyPartContext } from "./HiveSqlParser.js";
 import { ConfigPropertiesItemContext } from "./HiveSqlParser.js";
 import { ResourcePlanDdlStatementsContext } from "./HiveSqlParser.js";
 import { MappingTypesContext } from "./HiveSqlParser.js";
@@ -3721,6 +3723,26 @@ export class HiveSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSql11ReservedKeywordsUsedAsFunctionName?: (ctx: Sql11ReservedKeywordsUsedAsFunctionNameContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.configProperty`.
+     * @param ctx the parse tree
+     */
+    enterConfigProperty?: (ctx: ConfigPropertyContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.configProperty`.
+     * @param ctx the parse tree
+     */
+    exitConfigProperty?: (ctx: ConfigPropertyContext) => void;
+    /**
+     * Enter a parse tree produced by `HiveSqlParser.configPropertyPart`.
+     * @param ctx the parse tree
+     */
+    enterConfigPropertyPart?: (ctx: ConfigPropertyPartContext) => void;
+    /**
+     * Exit a parse tree produced by `HiveSqlParser.configPropertyPart`.
+     * @param ctx the parse tree
+     */
+    exitConfigPropertyPart?: (ctx: ConfigPropertyPartContext) => void;
     /**
      * Enter a parse tree produced by `HiveSqlParser.configPropertiesItem`.
      * @param ctx the parse tree

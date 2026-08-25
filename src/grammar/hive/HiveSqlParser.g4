@@ -86,7 +86,7 @@ execStatement
     | KW_MERGE QUERY_HINT? KW_INTO tableName (KW_AS? id_)? KW_USING joinSourcePart KW_ON expression whenClauses
     | KW_PREPARE id_ KW_FROM queryStatementExpression
     | KW_EXECUTE id_ KW_USING constantList
-    | KW_SET configPropertiesItem ((DOT | COLON) configPropertiesItem)* EQUAL .*?
+    | KW_SET configProperty EQUAL .*?
     ;
 
 loadStatement
@@ -2263,6 +2263,16 @@ sql11ReservedKeywordsUsedAsFunctionName
     | KW_REAL
     | KW_SMALLINT
     | KW_TIMESTAMP
+    ;
+
+configProperty
+    : configPropertyPart ((DOT | COLON) configPropertyPart)*
+    ;
+
+configPropertyPart
+    : configPropertiesItem (
+        {this.isNextTokenAdjacent()}? MINUS {this.isNextTokenAdjacent()}? configPropertiesItem
+    )*
     ;
 
 configPropertiesItem
