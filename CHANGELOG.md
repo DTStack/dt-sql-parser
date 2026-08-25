@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.5.1](https://github.com/DTStack/dt-sql-parser/compare/v4.5.1-beta.2...v4.5.1) (2026-08-25)
+
+
+### Bug Fixes
+
+* [#239](https://github.com/DTStack/dt-sql-parser/issues/239) correct suggestion word ranges ([b846974](https://github.com/DTStack/dt-sql-parser/commit/b8469744ef3a696bec17fcf45ccaae87283963b8))
+* [#239](https://github.com/DTStack/dt-sql-parser/issues/239) preserve multi-level qualified name ranges ([eca84d6](https://github.com/DTStack/dt-sql-parser/commit/eca84d683598f7a9b965daf6e48df7bfe6268e5c))
+* [#436](https://github.com/DTStack/dt-sql-parser/issues/436) improve SQL keyword suggestions ([81ec301](https://github.com/DTStack/dt-sql-parser/commit/81ec301496a37a4473866dab169c82ff3c8f0fed))
+* [#487](https://github.com/DTStack/dt-sql-parser/issues/487) support hyphenated config property names in SET statement ([7df4e56](https://github.com/DTStack/dt-sql-parser/commit/7df4e568b2ca2ec61acf202136a221d604307d94))
+
 ## [4.5.0](https://github.com/DTStack/dt-sql-parser/compare/v4.4.2...v4.5.0) (2026-05-20)
 
 
