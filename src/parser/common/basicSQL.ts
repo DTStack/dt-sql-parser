@@ -83,6 +83,60 @@ export abstract class BasicSQL<
         caretTokenIndex: number
     ): Suggestions<Token>;
 
+    protected getCandidateTokenRanges(
+        candidates: CandidatesCollection,
+        candidateStartTokenIndex: number,
+        allTokens: Token[],
+        caretTokenIndex: number
+    ): Token[] {
+        // antlr4-c3 may return both entity and alias candidates; use the nearest candidate's start index as boundary
+        const endTokenIndex = Array.from(candidates.rules.values()).reduce(
+            (nearestStartTokenIndex, candidateRule) => {
+                if (candidateRule.startTokenIndex <= candidateStartTokenIndex) {
+                    return nearestStartTokenIndex;
+                }
+                return Math.min(nearestStartTokenIndex, candidateRule.startTokenIndex);
+            },
+            caretTokenIndex + 1
+        );
+        const previousVisibleToken = allTokens
+            .slice(candidateStartTokenIndex, endTokenIndex)
+            .reverse()
+            .find((token) => token.channel === Token.DEFAULT_CHANNEL);
+        const visibleTokenIndexes = allTokens
+            .slice(endTokenIndex, caretTokenIndex + 1)
+            .reduce<number[]>((indexes, token, offset) => {
+                if (token.channel === Token.DEFAULT_CHANNEL) {
+                    indexes.push(endTokenIndex + offset);
+                }
+                return indexes;
+            }, []);
+        const firstVisibleToken = allTokens[visibleTokenIndexes[0]];
+        let rangeEndTokenIndex = endTokenIndex;
+
+        // candidate boundary may fall inside a multi-level qualified name; extend along the identifier and dot chain
+        if (previousVisibleToken?.text === '.' || firstVisibleToken?.text === '.') {
+            let visibleTokenOffset = 0;
+            if (previousVisibleToken?.text === '.' && firstVisibleToken) {
+                rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                visibleTokenOffset += 1;
+            }
+
+            while (allTokens[visibleTokenIndexes[visibleTokenOffset]]?.text === '.') {
+                rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                visibleTokenOffset += 1;
+                if (visibleTokenOffset < visibleTokenIndexes.length) {
+                    rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                    visibleTokenOffset += 1;
+                }
+            }
+        }
+
+        return allTokens
+            .slice(candidateStartTokenIndex, rangeEndTokenIndex)
+            .filter((token) => token.channel === Token.DEFAULT_CHANNEL);
+    }
+
     /**
      * Get a new splitListener instance.
      */
