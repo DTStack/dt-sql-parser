@@ -25,3 +25,8 @@ SELECT  FROM tb1;
 SELECT age FROM tb1;
 
 SELECT a. FROM tb1 a;
+
+SELECT CONCAT( FROM tb;
+
+CREATE TABLE tb (id int,  varchar(50));
+
