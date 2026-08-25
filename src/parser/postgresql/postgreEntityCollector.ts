@@ -31,6 +31,7 @@ import {
     TableRefContext,
     Target_dot_emptyContext,
     Target_emptyContext,
+    ColumnNamePath_dot_emptyContext,
     Target_labelContext,
     TargetListContext,
     type ViewNameContext,
@@ -180,6 +181,12 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
     exitTarget_dot_empty(ctx: Target_dot_emptyContext) {
         // Create COLUMN entity for incomplete column reference (e.g., "tb.|")
         // This allows completion to suggest columns from table "tb"
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.LITERAL,
+        });
+    }
+
+    exitColumnNamePath_dot_empty(ctx: ColumnNamePath_dot_emptyContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN, [], {
             declareType: ColumnDeclareType.LITERAL,
         });
