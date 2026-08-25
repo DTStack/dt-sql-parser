@@ -20,6 +20,14 @@ import { MySqlSemanticContextCollector } from '../mysql/mysqlSemanticContextColl
 
 export { MySqlEntityCollector, MysqlSplitListener };
 
+const ALLOW_EMPTY_COLUMN_PARENT_RULES = new Set([
+    MySqlParser.RULE_joinSpec,
+    MySqlParser.RULE_fromClause,
+    MySqlParser.RULE_orderByExpression,
+    MySqlParser.RULE_groupByItem,
+    MySqlParser.RULE_havingClause,
+]);
+
 export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
     protected createLexerFromCharStream(charStreams: CharStream): MySqlLexer {
         return new MySqlLexer(charStreams);
@@ -45,6 +53,7 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
         MySqlParser.RULE_functionNameCreate,
         MySqlParser.RULE_columnName,
         MySqlParser.RULE_columnNamePath,
+        MySqlParser.RULE_columnNamePathAllowEmpty,
         MySqlParser.RULE_columnNameCreate,
         ...this.excludeKeywordRules,
     ]);
@@ -80,7 +89,12 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
 
         for (const candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
+            const tokenRanges = this.getCandidateTokenRanges(
+                candidates,
+                candidateRule.startTokenIndex,
+                allTokens,
+                caretTokenIndex
+            );
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -119,6 +133,16 @@ export class MySQL extends BasicSQL<MySqlLexer, ProgramContext, MySqlParser> {
                 case MySqlParser.RULE_columnName:
                 case MySqlParser.RULE_columnNamePath: {
                     syntaxContextType = EntityContextType.COLUMN;
+                    break;
+                }
+                case MySqlParser.RULE_columnNamePathAllowEmpty: {
+                    if (
+                        candidateRule.ruleList.some((rule) =>
+                            ALLOW_EMPTY_COLUMN_PARENT_RULES.has(rule)
+                        )
+                    ) {
+                        syntaxContextType = EntityContextType.COLUMN;
+                    }
                     break;
                 }
                 case MySqlParser.RULE_columnNameCreate: {

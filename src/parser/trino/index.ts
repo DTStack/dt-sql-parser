@@ -82,7 +82,12 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
 
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
+            const tokenRanges = this.getCandidateTokenRanges(
+                candidates,
+                candidateRule.startTokenIndex,
+                allTokens,
+                caretTokenIndex
+            );
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -143,10 +148,12 @@ export class TrinoSQL extends BasicSQL<TrinoSqlLexer, ProgramContext, TrinoSqlPa
                         candidateRule.ruleList.includes(TrinoSqlParser.RULE_havingClause) ||
                         candidateRule.ruleList.includes(TrinoSqlParser.RULE_partitionBy) ||
                         candidateRule.ruleList.includes(TrinoSqlParser.RULE_whenClause) ||
-                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_relation)
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_relation) ||
+                        candidateRule.ruleList.includes(TrinoSqlParser.RULE_joinCriteria)
                     ) {
                         syntaxContextType = EntityContextType.COLUMN;
                     }
+                    break;
                 }
                 default:
                     break;

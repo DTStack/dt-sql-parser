@@ -26,6 +26,7 @@ import {
     CaretPosition,
     LOCALE_TYPE,
     SemanticCollectOptions,
+    SuggestionOptions,
     Suggestions,
     SyntaxSuggestion,
 } from './types';
@@ -48,6 +49,7 @@ export abstract class BasicSQL<
     protected _parseTree: PRC | null;
     protected _parsedInput: string;
     protected _parseErrors: ParseError[] = [];
+    private _statementStartTokenTypes: Set<number> | null = null;
     /** members for cache end */
 
     private _errorListener: ErrorListener = (error) => {
@@ -82,6 +84,60 @@ export abstract class BasicSQL<
         allTokens: Token[],
         caretTokenIndex: number
     ): Suggestions<Token>;
+
+    protected getCandidateTokenRanges(
+        candidates: CandidatesCollection,
+        candidateStartTokenIndex: number,
+        allTokens: Token[],
+        caretTokenIndex: number
+    ): Token[] {
+        // antlr4-c3 may return both entity and alias candidates; use the nearest candidate's start index as boundary
+        const endTokenIndex = Array.from(candidates.rules.values()).reduce(
+            (nearestStartTokenIndex, candidateRule) => {
+                if (candidateRule.startTokenIndex <= candidateStartTokenIndex) {
+                    return nearestStartTokenIndex;
+                }
+                return Math.min(nearestStartTokenIndex, candidateRule.startTokenIndex);
+            },
+            caretTokenIndex + 1
+        );
+        const previousVisibleToken = allTokens
+            .slice(candidateStartTokenIndex, endTokenIndex)
+            .reverse()
+            .find((token) => token.channel === Token.DEFAULT_CHANNEL);
+        const visibleTokenIndexes = allTokens
+            .slice(endTokenIndex, caretTokenIndex + 1)
+            .reduce<number[]>((indexes, token, offset) => {
+                if (token.channel === Token.DEFAULT_CHANNEL) {
+                    indexes.push(endTokenIndex + offset);
+                }
+                return indexes;
+            }, []);
+        const firstVisibleToken = allTokens[visibleTokenIndexes[0]];
+        let rangeEndTokenIndex = endTokenIndex;
+
+        // candidate boundary may fall inside a multi-level qualified name; extend along the identifier and dot chain
+        if (previousVisibleToken?.text === '.' || firstVisibleToken?.text === '.') {
+            let visibleTokenOffset = 0;
+            if (previousVisibleToken?.text === '.' && firstVisibleToken) {
+                rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                visibleTokenOffset += 1;
+            }
+
+            while (allTokens[visibleTokenIndexes[visibleTokenOffset]]?.text === '.') {
+                rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                visibleTokenOffset += 1;
+                if (visibleTokenOffset < visibleTokenIndexes.length) {
+                    rangeEndTokenIndex = visibleTokenIndexes[visibleTokenOffset] + 1;
+                    visibleTokenOffset += 1;
+                }
+            }
+        }
+
+        return allTokens
+            .slice(candidateStartTokenIndex, rangeEndTokenIndex)
+            .filter((token) => token.channel === Token.DEFAULT_CHANNEL);
+    }
 
     /**
      * Get a new splitListener instance.
@@ -556,14 +612,97 @@ export abstract class BasicSQL<
     }
 
     /**
+     * Get the minimum statement tree for collecting completion candidates
+     * Each supported grammar exposes one top-level statement per direct program child
+     * Keep the lookup shallow to avoid selecting nested statements or subqueries
+     */
+    private getSuggestionParseTree(
+        parseTree: ParserRuleContext,
+        caretTokenIndex: number
+    ): ParserRuleContext {
+        const children = parseTree.children;
+        if (!children?.length) return parseTree;
+
+        for (let index = children.length - 1; index >= 0; index--) {
+            const child = children[index];
+            if (!(child instanceof ParserRuleContext)) continue;
+
+            const startTokenIndex = child.start?.tokenIndex;
+            const stopTokenIndex = child.stop?.tokenIndex;
+            if (
+                startTokenIndex === undefined ||
+                stopTokenIndex === undefined ||
+                startTokenIndex > caretTokenIndex
+            )
+                continue;
+
+            // Use the current statement tree when the caret is inside it
+            if (stopTokenIndex >= caretTokenIndex) return child;
+
+            // Keep using the current statement until it ends with a semicolon
+            return child.stop?.text === SQL_SPLIT_SYMBOL_TEXT ? parseTree : child;
+        }
+
+        return parseTree;
+    }
+
+    /**
+     * Collect candidates for the current statement and remove new-statement-only keywords
+     */
+    private collectSuggestionCandidates(
+        parser: Parser,
+        parseTree: ParserRuleContext,
+        caretTokenIndex: number
+    ): CandidatesCollection {
+        const core = new CodeCompletionCore(parser);
+        core.preferredRules = this.preferredRules;
+        const candidates = core.collectCandidates(caretTokenIndex, parseTree);
+        const suggestionParseTree = this.getSuggestionParseTree(parseTree, caretTokenIndex);
+
+        if (suggestionParseTree === parseTree) return candidates;
+
+        // Keep the program candidates for outer rule paths and use statement candidates for isolation
+        const statementCore = new CodeCompletionCore(parser);
+        statementCore.preferredRules = this.preferredRules;
+        const statementCandidates = statementCore.collectCandidates(
+            caretTokenIndex,
+            suggestionParseTree
+        );
+
+        if (this._statementStartTokenTypes === null) {
+            const statementStartCore = new CodeCompletionCore(parser);
+            statementStartCore.preferredRules = this.preferredRules;
+            const statementStartCandidates = statementStartCore.collectCandidates(0, parseTree);
+            this._statementStartTokenTypes = new Set(statementStartCandidates.tokens.keys());
+        }
+
+        const tokens = new Map(candidates.tokens);
+        for (const tokenType of this._statementStartTokenTypes) {
+            if (!statementCandidates.tokens.has(tokenType)) {
+                tokens.delete(tokenType);
+            } else if (tokens.has(tokenType)) {
+                // Use the current statement follow-list to preserve valid combined keywords
+                tokens.set(tokenType, statementCandidates.tokens.get(tokenType)!);
+            }
+        }
+
+        return {
+            rules: candidates.rules,
+            tokens,
+        };
+    }
+
+    /**
      * Get suggestions of syntax and token at caretPosition
      * @param input source string
      * @param caretPosition caret position, such as cursor position
+     * @param options suggestion options
      * @returns suggestion
      */
     public getSuggestionAtCaretPosition(
         input: string,
-        caretPosition: CaretPosition
+        caretPosition: CaretPosition,
+        options?: SuggestionOptions
     ): Suggestions | null {
         this.parseWithCache(input);
         if (!this._parseTree) return null;
@@ -614,12 +753,11 @@ export abstract class BasicSQL<
             parseTree = sqlParserIns.program();
         }
 
-        const core = new CodeCompletionCore(sqlParserIns);
-        core.preferredRules = this.preferredRules;
-        // core.showRuleStack = true;
-        // core.showResult = true;
-
-        const candidates = core.collectCandidates(caretTokenIndex, parseTree);
+        const candidates = this.collectSuggestionCandidates(
+            sqlParserIns,
+            parseTree,
+            caretTokenIndex
+        );
         const originalSuggestions = this.processCandidates(candidates, allTokens, caretTokenIndex);
 
         const syntaxSuggestions: SyntaxSuggestion<WordRange>[] = originalSuggestions.syntax.map(
@@ -633,9 +771,14 @@ export abstract class BasicSQL<
                 };
             }
         );
+        const keywordFilter = options?.keywordFilter;
+        const keywords = keywordFilter
+            ? originalSuggestions.keywords.filter((keyword) => keywordFilter(keyword))
+            : originalSuggestions.keywords;
+
         return {
             syntax: syntaxSuggestions,
-            keywords: originalSuggestions.keywords,
+            keywords,
         };
     }
 

@@ -90,7 +90,12 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
         const keywords: string[] = [];
         for (let candidate of candidates.rules) {
             const [ruleType, candidateRule] = candidate;
-            const tokenRanges = allTokens.slice(candidateRule.startTokenIndex, caretTokenIndex + 1);
+            const tokenRanges = this.getCandidateTokenRanges(
+                candidates,
+                candidateRule.startTokenIndex,
+                allTokens,
+                caretTokenIndex
+            );
 
             let syntaxContextType: EntityContextType | StmtContextType | undefined = void 0;
             switch (ruleType) {
@@ -158,7 +163,8 @@ export class PostgreSQL extends BasicSQL<PostgreSqlLexer, ProgramContext, Postgr
                         candidateRule.ruleList.includes(PostgreSqlParser.RULE_whereClause) ||
                         candidateRule.ruleList.includes(PostgreSqlParser.RULE_havingClause) ||
                         candidateRule.ruleList.includes(PostgreSqlParser.RULE_windowClause) ||
-                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_triggerWhen)
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_triggerWhen) ||
+                        candidateRule.ruleList.includes(PostgreSqlParser.RULE_joinQual)
                     ) {
                         syntaxContextType = EntityContextType.COLUMN;
                     }
