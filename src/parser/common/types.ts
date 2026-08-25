@@ -74,6 +74,16 @@ export interface Suggestions<T = WordRange> {
     readonly keywords: string[];
 }
 
+/**
+ * Suggested information options
+ */
+export interface SuggestionOptions {
+    /**
+     * Return true to keep the keyword, otherwise remove it
+     */
+    keywordFilter?: (keyword: string) => boolean;
+}
+
 export type LOCALE_TYPE = 'zh_CN' | 'en_US';
 
 export interface SemanticContext {

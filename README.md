@@ -263,6 +263,18 @@ Call the `getAllEntities` method on the SQL instance, pass the SQL content and t
     [ 'CATALOG', 'FUNCTION', 'TEMPORARY', 'VIEW', 'DATABASE', 'TABLE' ] 
     */
     ```
+
+    Use the optional `keywordFilter` to remove unwanted keyword candidates. Return `true` to keep a keyword and `false` to remove it.
+
+    ```typescript
+    const sql = 'SELECT * FROM tb ';
+    const pos = { lineNumber: 1, column: sql.length + 1 };
+    const excludedKeywords = new Set(['WHERE', 'ORDER BY']);
+    const keywords = flink.getSuggestionAtCaretPosition(sql, pos, {
+        keywordFilter: (keyword) => !excludedKeywords.has(keyword),
+    })?.keywords;
+    ```
+
 +  **Obtaining information related to grammar completion**
     ```javascript
     import { FlinkSQL } from 'dt-sql-parser';

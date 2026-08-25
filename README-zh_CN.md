@@ -262,6 +262,18 @@ console.log(sqlSlices)
     [ 'CATALOG', 'FUNCTION', 'TEMPORARY', 'VIEW', 'DATABASE', 'TABLE' ] 
     */ 
     ```
+
+    可以通过可选的 `keywordFilter` 移除不需要的关键字候选项。返回 `true` 保留关键字，返回 `false` 移除关键字。
+
+    ```typescript
+    const sql = 'SELECT * FROM tb ';
+    const pos = { lineNumber: 1, column: sql.length + 1 };
+    const excludedKeywords = new Set(['WHERE', 'ORDER BY']);
+    const keywords = flink.getSuggestionAtCaretPosition(sql, pos, {
+        keywordFilter: (keyword) => !excludedKeywords.has(keyword),
+    })?.keywords;
+    ```
+
 + **获取语法相关自动补全信息**
     ```typescript
     import { FlinkSQL } from 'dt-sql-parser';
