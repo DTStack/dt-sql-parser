@@ -20,7 +20,7 @@ program
 
 singleStatement
     : sqlStatement SEMICOLON?
-    | emptyStatement
+    | SEMICOLON
     ;
 
 sqlStatement
@@ -36,10 +36,6 @@ sqlStatement
     | resetStatement
     | jarStatement
     | dtAddStatement
-    ;
-
-emptyStatement
-    : SEMICOLON
     ;
 
 ddlStatement
@@ -124,7 +120,7 @@ resetStatement
     ;
 
 jarStatement
-    : (KW_ADD | KW_REMOVE) KW_JAR jarFileName
+    : (KW_ADD | KW_REMOVE) KW_JAR STRING_LITERAL
     ;
 
 // 数栈平台自研的添加文件语法
@@ -158,7 +154,7 @@ simpleCreateTable
         COMMA columnOptionDefinition
     )* (COMMA watermarkDefinition)? (COMMA tableConstraint)? (COMMA selfDefinitionClause)? RR_BRACKET (
         KW_COMMENT comment=STRING_LITERAL
-    )? partitionDefinition? withOption likeDefinition?
+    )? (KW_PARTITIONED KW_BY LR_BRACKET transform (COMMA transform)* RR_BRACKET)? withOption likeDefinition?
     ;
 
 /*
@@ -263,22 +259,14 @@ columnConstraint
     ;
 
 metadataColumnDefinition
-    : columnNameCreate columnType KW_METADATA (KW_FROM metadataKey)? KW_VIRTUAL?
-    ;
-
-metadataKey
-    : STRING_LITERAL
+    : columnNameCreate columnType KW_METADATA (KW_FROM STRING_LITERAL)? KW_VIRTUAL?
     ;
 
 computedColumnDefinition
-    : columnNameCreate KW_AS computedColumnExpression (KW_COMMENT comment=STRING_LITERAL)?
+    : columnNameCreate KW_AS expression (KW_COMMENT comment=STRING_LITERAL)?
     ;
 
 // 计算表达式
-computedColumnExpression
-    : expression
-    ;
-
 watermarkDefinition
     : KW_WATERMARK KW_FOR columnName KW_AS expression
     ;
@@ -293,14 +281,6 @@ constraintName
 
 selfDefinitionClause // 数栈自定义语句 ‘PERIOD KW_FOR SYSTEM_TIME’
     : KW_PERIOD KW_FOR KW_SYSTEM_TIME
-    ;
-
-partitionDefinition
-    : KW_PARTITIONED KW_BY transformList
-    ;
-
-transformList
-    : LR_BRACKET transform (COMMA transform)* RR_BRACKET
     ;
 
 transform
@@ -343,11 +323,7 @@ createFunction
     ;
 
 usingClause
-    : KW_USING KW_JAR jarFileName (COMMA KW_JAR jarFileName)*
-    ;
-
-jarFileName
-    : STRING_LITERAL
+    : KW_USING KW_JAR STRING_LITERAL (COMMA KW_JAR STRING_LITERAL)*
     ;
 
 // Alter statements
@@ -373,7 +349,7 @@ setKeyValueDefinition
     ;
 
 addConstraint
-    : KW_ADD KW_CONSTRAINT constraintName KW_PRIMARY KW_KEY columnNameList notForced?
+    : KW_ADD KW_CONSTRAINT constraintName KW_PRIMARY KW_KEY columnNameList (KW_NOT KW_ENFORCED)?
     ;
 
 dropConstraint
@@ -382,10 +358,6 @@ dropConstraint
 
 addUnique
     : KW_ADD KW_UNIQUE columnNameList
-    ;
-
-notForced
-    : KW_NOT KW_ENFORCED
     ;
 
 alterView
@@ -434,13 +406,9 @@ insertStatement
 
 insertSimpleStatement
     : KW_INSERT (KW_INTO | KW_OVERWRITE) tablePath (
-        insertPartitionDefinition? columnNameList? queryStatement
+        (KW_PARTITION tablePropertyList)? columnNameList? queryStatement
         | valuesDefinition
     )
-    ;
-
-insertPartitionDefinition
-    : KW_PARTITION tablePropertyList
     ;
 
 valuesDefinition
@@ -484,11 +452,7 @@ withClause
     ;
 
 withItem
-    : withItemName (LR_BRACKET columnName (COMMA columnName)* RR_BRACKET)? KW_AS LR_BRACKET queryStatement RR_BRACKET
-    ;
-
-withItemName
-    : identifier
+    : identifier (LR_BRACKET columnName (COMMA columnName)* RR_BRACKET)? KW_AS LR_BRACKET queryStatement RR_BRACKET
     ;
 
 selectStatement
@@ -576,11 +540,7 @@ atomExpressionTable
     ;
 
 systemTimePeriod
-    : KW_FOR KW_SYSTEM_TIME KW_AS KW_OF dateTimeExpression
-    ;
-
-dateTimeExpression
-    : expression
+    : KW_FOR KW_SYSTEM_TIME KW_AS KW_OF expression
     ;
 
 inlineDataValueClause
@@ -602,10 +562,10 @@ windowTVFName
     ;
 
 windowTVFParam
-    : KW_TABLE timeAttrColumn
+    : KW_TABLE uid
     | columnDescriptor
     | timeIntervalExpression
-    | KW_DATA DOUBLE_RIGHT_ARROW KW_TABLE timeAttrColumn
+    | KW_DATA DOUBLE_RIGHT_ARROW KW_TABLE uid
     | KW_TIMECOL DOUBLE_RIGHT_ARROW columnDescriptor
     | timeIntervalParamName DOUBLE_RIGHT_ARROW timeIntervalExpression
     ;
@@ -641,32 +601,19 @@ groupItemDefinition
     | groupWindowFunction
     | LR_BRACKET RR_BRACKET
     | LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | groupingSetsNotationName LR_BRACKET expression (COMMA expression)* RR_BRACKET
-    | groupingSets LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
+    | (KW_CUBE | KW_ROLLUP) LR_BRACKET expression (COMMA expression)* RR_BRACKET
+    | KW_GROUPING KW_SETS LR_BRACKET groupItemDefinition (COMMA groupItemDefinition)* RR_BRACKET
     | expression
     ;
 
-groupingSets
-    : KW_GROUPING KW_SETS
-    ;
-
-groupingSetsNotationName
-    : KW_CUBE
-    | KW_ROLLUP
-    ;
-
 groupWindowFunction
-    : groupWindowFunctionName LR_BRACKET timeAttrColumn COMMA timeIntervalExpression RR_BRACKET
+    : groupWindowFunctionName LR_BRACKET uid COMMA timeIntervalExpression RR_BRACKET
     ;
 
 groupWindowFunctionName
     : KW_TUMBLE
     | KW_HOP
     | KW_SESSION
-    ;
-
-timeAttrColumn
-    : uid
     ;
 
 havingClause
@@ -932,10 +879,6 @@ dereferenceDefinition
     ;
 
 // base common
-
-correlationName
-    : identifier
-    ;
 
 qualifiedName
     : identifier
