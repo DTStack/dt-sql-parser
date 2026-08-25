@@ -26,17 +26,14 @@ import { DdlStatementContext } from "./HiveSqlParser.js";
 import { IfExistsContext } from "./HiveSqlParser.js";
 import { IfNotExistsContext } from "./HiveSqlParser.js";
 import { RestrictOrCascadeContext } from "./HiveSqlParser.js";
+import { StoredAsDirsContext } from "./HiveSqlParser.js";
 import { RewriteEnabledContext } from "./HiveSqlParser.js";
 import { RewriteDisabledContext } from "./HiveSqlParser.js";
-import { StoredAsDirsContext } from "./HiveSqlParser.js";
 import { CreateDatabaseStatementContext } from "./HiveSqlParser.js";
-import { DbConnectorNameContext } from "./HiveSqlParser.js";
 import { SwitchDatabaseStatementContext } from "./HiveSqlParser.js";
 import { DropDatabaseStatementContext } from "./HiveSqlParser.js";
-import { DatabaseCommentContext } from "./HiveSqlParser.js";
 import { TruncateTableStatementContext } from "./HiveSqlParser.js";
 import { DropTableStatementContext } from "./HiveSqlParser.js";
-import { InputFileFormatContext } from "./HiveSqlParser.js";
 import { TabTypeExprContext } from "./HiveSqlParser.js";
 import { PartTypeExprContext } from "./HiveSqlParser.js";
 import { TabPartColTypeExprContext } from "./HiveSqlParser.js";
@@ -48,11 +45,7 @@ import { ShowStatementContext } from "./HiveSqlParser.js";
 import { ShowTablesFilterExprContext } from "./HiveSqlParser.js";
 import { LockStatementContext } from "./HiveSqlParser.js";
 import { LockDatabaseContext } from "./HiveSqlParser.js";
-import { LockModeContext } from "./HiveSqlParser.js";
-import { UnlockStatementContext } from "./HiveSqlParser.js";
-import { UnlockDatabaseContext } from "./HiveSqlParser.js";
 import { CreateRoleStatementContext } from "./HiveSqlParser.js";
-import { DropRoleStatementContext } from "./HiveSqlParser.js";
 import { GrantPrivilegesContext } from "./HiveSqlParser.js";
 import { RevokePrivilegesContext } from "./HiveSqlParser.js";
 import { GrantRoleContext } from "./HiveSqlParser.js";
@@ -73,13 +66,7 @@ import { PrivilegeTypeContext } from "./HiveSqlParser.js";
 import { PrincipalSpecificationContext } from "./HiveSqlParser.js";
 import { PrincipalNameContext } from "./HiveSqlParser.js";
 import { PrincipalAlterNameContext } from "./HiveSqlParser.js";
-import { WithGrantOptionContext } from "./HiveSqlParser.js";
-import { GrantOptionForContext } from "./HiveSqlParser.js";
-import { AdminOptionForContext } from "./HiveSqlParser.js";
-import { WithAdminOptionContext } from "./HiveSqlParser.js";
 import { MetastoreCheckContext } from "./HiveSqlParser.js";
-import { ResourceListContext } from "./HiveSqlParser.js";
-import { ResourceContext } from "./HiveSqlParser.js";
 import { ResourceTypeContext } from "./HiveSqlParser.js";
 import { CreateFunctionStatementContext } from "./HiveSqlParser.js";
 import { DropFunctionStatementContext } from "./HiveSqlParser.js";
@@ -97,7 +84,6 @@ import { ViewDistSpecContext } from "./HiveSqlParser.js";
 import { ViewSortSpecContext } from "./HiveSqlParser.js";
 import { DropViewStatementContext } from "./HiveSqlParser.js";
 import { CreateMaterializedViewStatementContext } from "./HiveSqlParser.js";
-import { DropMaterializedViewStatementContext } from "./HiveSqlParser.js";
 import { CreateScheduledQueryStatementContext } from "./HiveSqlParser.js";
 import { DropScheduledQueryStatementContext } from "./HiveSqlParser.js";
 import { AlterScheduledQueryStatementContext } from "./HiveSqlParser.js";
@@ -115,21 +101,18 @@ import { PartitionTransformTypeContext } from "./HiveSqlParser.js";
 import { TableBucketsContext } from "./HiveSqlParser.js";
 import { TableSkewedContext } from "./HiveSqlParser.js";
 import { RowFormatContext } from "./HiveSqlParser.js";
-import { RecordReaderContext } from "./HiveSqlParser.js";
-import { RecordWriterContext } from "./HiveSqlParser.js";
 import { RowFormatSerdeContext } from "./HiveSqlParser.js";
 import { RowFormatDelimitedContext } from "./HiveSqlParser.js";
-import { TableRowFormatContext } from "./HiveSqlParser.js";
 import { TablePropertiesPrefixedContext } from "./HiveSqlParser.js";
 import { TablePropertiesContext } from "./HiveSqlParser.js";
 import { TablePropertiesListContext } from "./HiveSqlParser.js";
 import { KeyValuePropertiesContext } from "./HiveSqlParser.js";
 import { KeyValuePropertyListContext } from "./HiveSqlParser.js";
 import { KeyValuePropertyContext } from "./HiveSqlParser.js";
-import { TableRowFormatFieldIdentifierContext } from "./HiveSqlParser.js";
-import { TableRowFormatCollItemsIdentifierContext } from "./HiveSqlParser.js";
-import { TableRowFormatMapKeysIdentifierContext } from "./HiveSqlParser.js";
-import { TableRowFormatLinesIdentifierContext } from "./HiveSqlParser.js";
+import { RowFormatFieldIdentifierContext } from "./HiveSqlParser.js";
+import { RowFormatCollItemsIdentifierContext } from "./HiveSqlParser.js";
+import { RowFormatMapKeysIdentifierContext } from "./HiveSqlParser.js";
+import { RowFormatLinesIdentifierContext } from "./HiveSqlParser.js";
 import { TableRowNullFormatContext } from "./HiveSqlParser.js";
 import { TableFileFormatContext } from "./HiveSqlParser.js";
 import { ColumnNameTypeListContext } from "./HiveSqlParser.js";
@@ -145,9 +128,7 @@ import { ColumnNameOrderListContext } from "./HiveSqlParser.js";
 import { ColumnParenthesesListContext } from "./HiveSqlParser.js";
 import { EnableValidateSpecificationContext } from "./HiveSqlParser.js";
 import { EnableSpecificationContext } from "./HiveSqlParser.js";
-import { ValidateSpecificationContext } from "./HiveSqlParser.js";
 import { EnforcedSpecificationContext } from "./HiveSqlParser.js";
-import { RelySpecificationContext } from "./HiveSqlParser.js";
 import { CreateConstraintContext } from "./HiveSqlParser.js";
 import { AlterConstraintWithNameContext } from "./HiveSqlParser.js";
 import { TableLevelConstraintContext } from "./HiveSqlParser.js";
@@ -172,17 +153,11 @@ import { ColumnNameTypeConstraintContext } from "./HiveSqlParser.js";
 import { ColumnConstraintContext } from "./HiveSqlParser.js";
 import { ForeignKeyConstraintContext } from "./HiveSqlParser.js";
 import { ColConstraintContext } from "./HiveSqlParser.js";
-import { AlterColumnConstraintContext } from "./HiveSqlParser.js";
-import { AlterForeignKeyConstraintContext } from "./HiveSqlParser.js";
-import { AlterColConstraintContext } from "./HiveSqlParser.js";
 import { ColumnConstraintTypeContext } from "./HiveSqlParser.js";
-import { DefaultValContext } from "./HiveSqlParser.js";
 import { TableConstraintTypeContext } from "./HiveSqlParser.js";
-import { ConstraintOptsCreateContext } from "./HiveSqlParser.js";
-import { ConstraintOptsAlterContext } from "./HiveSqlParser.js";
+import { ConstraintOptsContext } from "./HiveSqlParser.js";
 import { ColumnNameColonTypeContext } from "./HiveSqlParser.js";
-import { ColumnTypeContext } from "./HiveSqlParser.js";
-import { ColumnTypeListContext } from "./HiveSqlParser.js";
+import { TypeListContext } from "./HiveSqlParser.js";
 import { TypeContext } from "./HiveSqlParser.js";
 import { PrimitiveTypeContext } from "./HiveSqlParser.js";
 import { ListTypeContext } from "./HiveSqlParser.js";
@@ -215,9 +190,6 @@ import { WhenClausesContext } from "./HiveSqlParser.js";
 import { WhenNotMatchedClauseContext } from "./HiveSqlParser.js";
 import { WhenMatchedAndClauseContext } from "./HiveSqlParser.js";
 import { WhenMatchedThenClauseContext } from "./HiveSqlParser.js";
-import { CompactionPoolContext } from "./HiveSqlParser.js";
-import { CompactionTypeContext } from "./HiveSqlParser.js";
-import { CompactionStatusContext } from "./HiveSqlParser.js";
 import { AlterStatementContext } from "./HiveSqlParser.js";
 import { AlterTableStatementSuffixContext } from "./HiveSqlParser.js";
 import { AlterTblPartitionStatementSuffixContext } from "./HiveSqlParser.js";
@@ -283,7 +255,6 @@ import { RollupOldSyntaxContext } from "./HiveSqlParser.js";
 import { GroupingSetExpressionContext } from "./HiveSqlParser.js";
 import { HavingClauseContext } from "./HiveSqlParser.js";
 import { QualifyClauseContext } from "./HiveSqlParser.js";
-import { ExpressionOrDefaultContext } from "./HiveSqlParser.js";
 import { FirstExpressionsWithAliasContext } from "./HiveSqlParser.js";
 import { ExpressionsContext } from "./HiveSqlParser.js";
 import { ExpressionsInParenthesisContext } from "./HiveSqlParser.js";
@@ -294,7 +265,6 @@ import { ClusterByClauseContext } from "./HiveSqlParser.js";
 import { DistributeByClauseContext } from "./HiveSqlParser.js";
 import { SortByClauseContext } from "./HiveSqlParser.js";
 import { Function_Context } from "./HiveSqlParser.js";
-import { Null_treatmentContext } from "./HiveSqlParser.js";
 import { FunctionNameCreateContext } from "./HiveSqlParser.js";
 import { FunctionNameForDDLContext } from "./HiveSqlParser.js";
 import { FunctionNameForInvokeContext } from "./HiveSqlParser.js";
@@ -317,13 +287,11 @@ import { PrecedencePlusExpressionContext } from "./HiveSqlParser.js";
 import { PrecedenceConcatenateExpressionContext } from "./HiveSqlParser.js";
 import { PrecedenceAmpersandExpressionContext } from "./HiveSqlParser.js";
 import { PrecedenceBitwiseOrExpressionContext } from "./HiveSqlParser.js";
-import { PrecedenceSimilarOperatorContext } from "./HiveSqlParser.js";
 import { SubQueryExpressionContext } from "./HiveSqlParser.js";
+import { PrecedenceSimilarOperatorContext } from "./HiveSqlParser.js";
 import { PrecedenceSimilarExpressionContext } from "./HiveSqlParser.js";
 import { PrecedenceSimilarExpressionPartContext } from "./HiveSqlParser.js";
 import { PrecedenceSimilarExpressionAtomContext } from "./HiveSqlParser.js";
-import { PrecedenceSimilarExpressionInContext } from "./HiveSqlParser.js";
-import { PrecedenceSimilarExpressionPartNotContext } from "./HiveSqlParser.js";
 import { PrecedenceDistinctOperatorContext } from "./HiveSqlParser.js";
 import { PrecedenceEqualOperatorContext } from "./HiveSqlParser.js";
 import { PrecedenceEqualExpressionContext } from "./HiveSqlParser.js";
@@ -351,14 +319,6 @@ import { RpUnassignContext } from "./HiveSqlParser.js";
 import { ActivateContext } from "./HiveSqlParser.js";
 import { EnableContext } from "./HiveSqlParser.js";
 import { DisableContext } from "./HiveSqlParser.js";
-import { YearContext } from "./HiveSqlParser.js";
-import { MonthContext } from "./HiveSqlParser.js";
-import { WeekContext } from "./HiveSqlParser.js";
-import { DayContext } from "./HiveSqlParser.js";
-import { HourContext } from "./HiveSqlParser.js";
-import { MinuteContext } from "./HiveSqlParser.js";
-import { SecondContext } from "./HiveSqlParser.js";
-import { DecimalContext } from "./HiveSqlParser.js";
 import { EmptyColumnContext } from "./HiveSqlParser.js";
 import { PoolPathContext } from "./HiveSqlParser.js";
 import { PoolPathAllowEmptyContext } from "./HiveSqlParser.js";
@@ -485,6 +445,12 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitRestrictOrCascade?: (ctx: RestrictOrCascadeContext) => Result;
     /**
+     * Visit a parse tree produced by `HiveSqlParser.storedAsDirs`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitStoredAsDirs?: (ctx: StoredAsDirsContext) => Result;
+    /**
      * Visit a parse tree produced by `HiveSqlParser.rewriteEnabled`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -497,23 +463,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitRewriteDisabled?: (ctx: RewriteDisabledContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.storedAsDirs`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitStoredAsDirs?: (ctx: StoredAsDirsContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.createDatabaseStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitCreateDatabaseStatement?: (ctx: CreateDatabaseStatementContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.dbConnectorName`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitDbConnectorName?: (ctx: DbConnectorNameContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.switchDatabaseStatement`.
      * @param ctx the parse tree
@@ -527,12 +481,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitDropDatabaseStatement?: (ctx: DropDatabaseStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.databaseComment`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitDatabaseComment?: (ctx: DatabaseCommentContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.truncateTableStatement`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -544,12 +492,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitDropTableStatement?: (ctx: DropTableStatementContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.inputFileFormat`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitInputFileFormat?: (ctx: InputFileFormatContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.tabTypeExpr`.
      * @param ctx the parse tree
@@ -617,35 +559,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitLockDatabase?: (ctx: LockDatabaseContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.lockMode`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitLockMode?: (ctx: LockModeContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.unlockStatement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitUnlockStatement?: (ctx: UnlockStatementContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.unlockDatabase`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitUnlockDatabase?: (ctx: UnlockDatabaseContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.createRoleStatement`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitCreateRoleStatement?: (ctx: CreateRoleStatementContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.dropRoleStatement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitDropRoleStatement?: (ctx: DropRoleStatementContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.grantPrivileges`.
      * @param ctx the parse tree
@@ -767,47 +685,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitPrincipalAlterName?: (ctx: PrincipalAlterNameContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.withGrantOption`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitWithGrantOption?: (ctx: WithGrantOptionContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.grantOptionFor`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitGrantOptionFor?: (ctx: GrantOptionForContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.adminOptionFor`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitAdminOptionFor?: (ctx: AdminOptionForContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.withAdminOption`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitWithAdminOption?: (ctx: WithAdminOptionContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.metastoreCheck`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitMetastoreCheck?: (ctx: MetastoreCheckContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.resourceList`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitResourceList?: (ctx: ResourceListContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.resource`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitResource?: (ctx: ResourceContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.resourceType`.
      * @param ctx the parse tree
@@ -911,12 +793,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitCreateMaterializedViewStatement?: (ctx: CreateMaterializedViewStatementContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.dropMaterializedViewStatement`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitDropMaterializedViewStatement?: (ctx: DropMaterializedViewStatementContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.createScheduledQueryStatement`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1019,18 +895,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitRowFormat?: (ctx: RowFormatContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.recordReader`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitRecordReader?: (ctx: RecordReaderContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.recordWriter`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitRecordWriter?: (ctx: RecordWriterContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.rowFormatSerde`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1042,12 +906,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitRowFormatDelimited?: (ctx: RowFormatDelimitedContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.tableRowFormat`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitTableRowFormat?: (ctx: TableRowFormatContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.tablePropertiesPrefixed`.
      * @param ctx the parse tree
@@ -1085,29 +943,29 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitKeyValueProperty?: (ctx: KeyValuePropertyContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.tableRowFormatFieldIdentifier`.
+     * Visit a parse tree produced by `HiveSqlParser.rowFormatFieldIdentifier`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTableRowFormatFieldIdentifier?: (ctx: TableRowFormatFieldIdentifierContext) => Result;
+    visitRowFormatFieldIdentifier?: (ctx: RowFormatFieldIdentifierContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.tableRowFormatCollItemsIdentifier`.
+     * Visit a parse tree produced by `HiveSqlParser.rowFormatCollItemsIdentifier`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTableRowFormatCollItemsIdentifier?: (ctx: TableRowFormatCollItemsIdentifierContext) => Result;
+    visitRowFormatCollItemsIdentifier?: (ctx: RowFormatCollItemsIdentifierContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.tableRowFormatMapKeysIdentifier`.
+     * Visit a parse tree produced by `HiveSqlParser.rowFormatMapKeysIdentifier`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTableRowFormatMapKeysIdentifier?: (ctx: TableRowFormatMapKeysIdentifierContext) => Result;
+    visitRowFormatMapKeysIdentifier?: (ctx: RowFormatMapKeysIdentifierContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.tableRowFormatLinesIdentifier`.
+     * Visit a parse tree produced by `HiveSqlParser.rowFormatLinesIdentifier`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitTableRowFormatLinesIdentifier?: (ctx: TableRowFormatLinesIdentifierContext) => Result;
+    visitRowFormatLinesIdentifier?: (ctx: RowFormatLinesIdentifierContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.tableRowNullFormat`.
      * @param ctx the parse tree
@@ -1199,23 +1057,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitEnableSpecification?: (ctx: EnableSpecificationContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.validateSpecification`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitValidateSpecification?: (ctx: ValidateSpecificationContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.enforcedSpecification`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitEnforcedSpecification?: (ctx: EnforcedSpecificationContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.relySpecification`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitRelySpecification?: (ctx: RelySpecificationContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.createConstraint`.
      * @param ctx the parse tree
@@ -1361,35 +1207,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitColConstraint?: (ctx: ColConstraintContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.alterColumnConstraint`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitAlterColumnConstraint?: (ctx: AlterColumnConstraintContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.alterForeignKeyConstraint`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitAlterForeignKeyConstraint?: (ctx: AlterForeignKeyConstraintContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.alterColConstraint`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitAlterColConstraint?: (ctx: AlterColConstraintContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.columnConstraintType`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitColumnConstraintType?: (ctx: ColumnConstraintTypeContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.defaultVal`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitDefaultVal?: (ctx: DefaultValContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.tableConstraintType`.
      * @param ctx the parse tree
@@ -1397,17 +1219,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitTableConstraintType?: (ctx: TableConstraintTypeContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.constraintOptsCreate`.
+     * Visit a parse tree produced by `HiveSqlParser.constraintOpts`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitConstraintOptsCreate?: (ctx: ConstraintOptsCreateContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.constraintOptsAlter`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitConstraintOptsAlter?: (ctx: ConstraintOptsAlterContext) => Result;
+    visitConstraintOpts?: (ctx: ConstraintOptsContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.columnNameColonType`.
      * @param ctx the parse tree
@@ -1415,17 +1231,11 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitColumnNameColonType?: (ctx: ColumnNameColonTypeContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.columnType`.
+     * Visit a parse tree produced by `HiveSqlParser.typeList`.
      * @param ctx the parse tree
      * @return the visitor result
      */
-    visitColumnType?: (ctx: ColumnTypeContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.columnTypeList`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitColumnTypeList?: (ctx: ColumnTypeListContext) => Result;
+    visitTypeList?: (ctx: TypeListContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.type`.
      * @param ctx the parse tree
@@ -1622,24 +1432,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitWhenMatchedThenClause?: (ctx: WhenMatchedThenClauseContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.compactionPool`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitCompactionPool?: (ctx: CompactionPoolContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.compactionType`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitCompactionType?: (ctx: CompactionTypeContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.compactionStatus`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitCompactionStatus?: (ctx: CompactionStatusContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.alterStatement`.
      * @param ctx the parse tree
@@ -2031,12 +1823,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitQualifyClause?: (ctx: QualifyClauseContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.expressionOrDefault`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitExpressionOrDefault?: (ctx: ExpressionOrDefaultContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.firstExpressionsWithAlias`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -2096,12 +1882,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitFunction_?: (ctx: Function_Context) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.null_treatment`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitNull_treatment?: (ctx: Null_treatmentContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.functionNameCreate`.
      * @param ctx the parse tree
@@ -2235,17 +2015,17 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      */
     visitPrecedenceBitwiseOrExpression?: (ctx: PrecedenceBitwiseOrExpressionContext) => Result;
     /**
-     * Visit a parse tree produced by `HiveSqlParser.precedenceSimilarOperator`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitPrecedenceSimilarOperator?: (ctx: PrecedenceSimilarOperatorContext) => Result;
-    /**
      * Visit a parse tree produced by `HiveSqlParser.subQueryExpression`.
      * @param ctx the parse tree
      * @return the visitor result
      */
     visitSubQueryExpression?: (ctx: SubQueryExpressionContext) => Result;
+    /**
+     * Visit a parse tree produced by `HiveSqlParser.precedenceSimilarOperator`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitPrecedenceSimilarOperator?: (ctx: PrecedenceSimilarOperatorContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.precedenceSimilarExpression`.
      * @param ctx the parse tree
@@ -2264,18 +2044,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitPrecedenceSimilarExpressionAtom?: (ctx: PrecedenceSimilarExpressionAtomContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.precedenceSimilarExpressionIn`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitPrecedenceSimilarExpressionIn?: (ctx: PrecedenceSimilarExpressionInContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.precedenceSimilarExpressionPartNot`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitPrecedenceSimilarExpressionPartNot?: (ctx: PrecedenceSimilarExpressionPartNotContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.precedenceDistinctOperator`.
      * @param ctx the parse tree
@@ -2438,54 +2206,6 @@ export class HiveSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resul
      * @return the visitor result
      */
     visitDisable?: (ctx: DisableContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.year`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitYear?: (ctx: YearContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.month`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitMonth?: (ctx: MonthContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.week`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitWeek?: (ctx: WeekContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.day`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitDay?: (ctx: DayContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.hour`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitHour?: (ctx: HourContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.minute`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitMinute?: (ctx: MinuteContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.second`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSecond?: (ctx: SecondContext) => Result;
-    /**
-     * Visit a parse tree produced by `HiveSqlParser.decimal`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitDecimal?: (ctx: DecimalContext) => Result;
     /**
      * Visit a parse tree produced by `HiveSqlParser.emptyColumn`.
      * @param ctx the parse tree

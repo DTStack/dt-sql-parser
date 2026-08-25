@@ -75,7 +75,6 @@ describe('Hive SQL Token Suggestion', () => {
             'SCHEDULED QUERY',
             'MATERIALIZED VIEW',
             'OR REPLACE',
-            'MANAGED TABLE',
         ]);
     });
 
@@ -138,7 +137,6 @@ describe('Hive SQL Token Suggestion', () => {
             'DATABASE',
             'SCHEMA',
             'RESOURCE PLAN',
-            'MATERIALIZED VIEW',
             'SCHEDULED QUERY',
         ]);
     });
