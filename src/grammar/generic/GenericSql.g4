@@ -82,9 +82,10 @@ setQuantifier
     ;
 
 selectItem
-    : expression (KW_AS? identifier)?
-    | qualifiedName '.' ASTERISK
-    | ASTERISK
+    : expression (KW_AS? identifier)?        # selectExpressionElement
+    | qualifiedName '.' ASTERISK             # selectStarElement
+    | ASTERISK                               # selectAllElement
+    | {this.shouldMatchEmpty()}? emptyColumn # selectEmptyElement
     ;
 
 fromClause
@@ -114,7 +115,7 @@ relationPrimary
     ;
 
 whereClause
-    : KW_WHERE expression
+    : KW_WHERE (expression | emptyColumn)
     ;
 
 groupByClause
@@ -122,7 +123,7 @@ groupByClause
     ;
 
 havingClause
-    : KW_HAVING expression
+    : KW_HAVING (expression | emptyColumn)
     ;
 
 orderByClause
@@ -173,7 +174,11 @@ tableElement
     ;
 
 columnDefinition
-    : columnRef dataType (KW_NOT KW_NULL)? (KW_DEFAULT expression)? (KW_PRIMARY KW_KEY)?
+    : columnRefCreate colType=dataType (KW_NOT KW_NULL)? (KW_DEFAULT expression)? (KW_PRIMARY KW_KEY)?
+    ;
+
+columnRefCreate
+    : identifier
     ;
 
 tableConstraint
@@ -247,17 +252,17 @@ valueExpression
     ;
 
 primaryExpression
-    : literal                                                              # literalExpression
-    | qualifiedName '(' (setQuantifier? expression (',' expression)*)? ')' # functionCall
-    | KW_CASE whenClause+ (KW_ELSE expression)? KW_END                     # searchedCaseExpression
-    | KW_CASE expression whenClause+ (KW_ELSE expression)? KW_END          # simpleCaseExpression
-    | KW_CAST '(' expression KW_AS dataType ')'                            # castExpression
-    | KW_COALESCE '(' expression (',' expression)* ')'                     # coalesceExpression
-    | KW_NULLIF '(' valueExpression ',' valueExpression ')'                # nullIfExpression
-    | '(' expression ')'                                                   # parenthesizedExpression
-    | KW_EXISTS '(' queryStatement ')'                                     # existsExpression
-    | subqueryExpression                                                   # subqueryExpressionDefault
-    | qualifiedName                                                        # columnReference
+    : literal                                                             # literalExpression
+    | functionName '(' (setQuantifier? expression (',' expression)*)? ')' # functionCall
+    | KW_CASE whenClause+ (KW_ELSE expression)? KW_END                    # searchedCaseExpression
+    | KW_CASE expression whenClause+ (KW_ELSE expression)? KW_END         # simpleCaseExpression
+    | KW_CAST '(' expression KW_AS dataType ')'                           # castExpression
+    | KW_COALESCE '(' expression (',' expression)* ')'                    # coalesceExpression
+    | KW_NULLIF '(' valueExpression ',' valueExpression ')'               # nullIfExpression
+    | '(' expression ')'                                                  # parenthesizedExpression
+    | KW_EXISTS '(' queryStatement ')'                                    # existsExpression
+    | subqueryExpression                                                  # subqueryExpressionDefault
+    | columnName                                                          # columnReference
     ;
 
 whenClause
@@ -326,6 +331,15 @@ qualifiedName
 
 columnRef
     : identifier
+    | {this.shouldMatchEmpty()}? emptyColumn
+    ;
+
+columnName
+    : qualifiedName
+    ;
+
+emptyColumn
+    :
     ;
 
 tableName
@@ -333,6 +347,10 @@ tableName
     ;
 
 tableNameCreate
+    : qualifiedName
+    ;
+
+functionName
     : qualifiedName
     ;
 

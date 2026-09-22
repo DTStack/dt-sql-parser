@@ -3,6 +3,7 @@ import {
     AlterTableContext,
     ColumnDefinitionContext,
     ColumnRefContext,
+    ColumnRefCreateContext,
     CreateTableContext,
     CreateTableStatementContext,
     DeleteContext,
@@ -10,7 +11,10 @@ import {
     InsertContext,
     QuerySpecificationContext,
     QueryStatementContext,
-    SelectItemContext,
+    SelectAllElementContext,
+    SelectEmptyElementContext,
+    SelectExpressionElementContext,
+    SelectStarElementContext,
     SingleStatementContext,
     TableNameContext,
     TableNameCreateContext,
@@ -47,7 +51,7 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
         this.pushEntity(ctx, EntityContextType.COLUMN);
     }
 
-    exitColumnDefinition(ctx: ColumnDefinitionContext) {
+    exitColumnRefCreate(ctx: ColumnRefCreateContext) {
         this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
             {
                 attrName: AttrName.colType,
@@ -64,32 +68,44 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
         this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
     }
 
-    exitSelectItem(ctx: SelectItemContext) {
-        if (ctx.ASTERISK()) {
-            this.pushEntity(ctx, EntityContextType.COLUMN, [], {
-                declareType: ColumnDeclareType.ALL,
-            });
-        } else {
-            const isSimpleColumn = this.isSimpleColumnReference(ctx);
-            this.pushEntity(
-                ctx,
-                EntityContextType.COLUMN,
-                [
-                    {
-                        attrName: AttrName.alias,
-                        endContextList: [SelectItemContext.name],
-                    },
-                ],
+    exitSelectExpressionElement(ctx: SelectExpressionElementContext) {
+        const isSimpleColumn = this.isSimpleColumnReference(ctx);
+        this.pushEntity(
+            ctx,
+            EntityContextType.COLUMN,
+            [
                 {
-                    declareType: isSimpleColumn
-                        ? ColumnDeclareType.LITERAL
-                        : ColumnDeclareType.EXPRESSION,
-                }
-            );
-        }
+                    attrName: AttrName.alias,
+                    endContextList: [SelectExpressionElementContext.name],
+                },
+            ],
+            {
+                declareType: isSimpleColumn
+                    ? ColumnDeclareType.LITERAL
+                    : ColumnDeclareType.EXPRESSION,
+            }
+        );
     }
 
-    private isSimpleColumnReference(ctx: SelectItemContext): boolean {
+    exitSelectStarElement(ctx: SelectStarElementContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitSelectAllElement(ctx: SelectAllElementContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitSelectEmptyElement(ctx: SelectEmptyElementContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.LITERAL,
+        });
+    }
+
+    private isSimpleColumnReference(ctx: SelectExpressionElementContext): boolean {
         const text = ctx.getText();
         // Simple column reference: no parentheses, no operators, no spaces
         return (

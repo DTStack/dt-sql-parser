@@ -63,4 +63,37 @@ describe('GenericSQL Syntax Suggestion', () => {
         );
         expect(suggestion).not.toBeUndefined();
     });
+
+    test('Function call', () => {
+        const pos: CaretPosition = {
+            lineNumber: 29,
+            column: 9,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['CONCAT']);
+    });
+
+    test('Create table column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 31,
+            column: 26,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
+        );
+        expect(suggestion).not.toBeUndefined();
+    });
 });
