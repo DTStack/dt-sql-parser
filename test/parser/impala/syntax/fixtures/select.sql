@@ -218,3 +218,23 @@ select c_first_name, c_last_name from customer where lower(trim(c_last_name)) rl
 
 SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
 SELECT SUM(c.amount) AS total_amount FROM cust c;
+
+-- TABLESAMPLE with BERNOULLI (sampleType inlined)
+SELECT * FROM t1 TABLESAMPLE BERNOULLI(50);
+SELECT * FROM t1 TABLESAMPLE SYSTEM(20);
+
+-- NORMALIZE with normalForm (inlined)
+SELECT NORMALIZE(col1, NFD) FROM t1;
+SELECT NORMALIZE(col1, NFC) FROM t1;
+SELECT NORMALIZE(col1, NFKD) FROM t1;
+SELECT NORMALIZE(col1, NFKC) FROM t1;
+
+-- Window frame with RANGE/ROWS (windowFrame merged)
+SELECT id, SUM(val) OVER (ORDER BY ts ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) FROM t1;
+SELECT id, SUM(val) OVER (ORDER BY ts RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) FROM t1;
+SELECT id, SUM(val) OVER (ORDER BY ts ROWS UNBOUNDED PRECEDING) FROM t1;
+SELECT id, SUM(val) OVER (ORDER BY ts RANGE CURRENT ROW) FROM t1;
+
+-- booleanValue (inlined)
+SELECT * FROM t1 WHERE col1 = TRUE;
+SELECT * FROM t1 WHERE col1 = FALSE;
