@@ -1122,7 +1122,7 @@ joinPart
     ;
 
 joinSpec
-    : (KW_ON (expression | columnNamePathAllowEmpty))
+    : (KW_ON ( expression | columnNamePathAllowEmpty (EQUAL_SYMBOL columnNamePathAllowEmpty)?))
     | KW_USING '(' columnNames ')'
     ;
 

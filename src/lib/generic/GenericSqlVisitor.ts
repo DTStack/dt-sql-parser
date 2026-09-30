@@ -21,6 +21,7 @@ import { DropTableContext } from "./GenericSqlParser.js";
 import { QueryStatementContext } from "./GenericSqlParser.js";
 import { WithClauseContext } from "./GenericSqlParser.js";
 import { NamedQueryContext } from "./GenericSqlParser.js";
+import { CteColumnListContext } from "./GenericSqlParser.js";
 import { QueryNoWithContext } from "./GenericSqlParser.js";
 import { QueryTermContext } from "./GenericSqlParser.js";
 import { QueryPrimaryContext } from "./GenericSqlParser.js";
@@ -193,6 +194,12 @@ export class GenericSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> 
      * @return the visitor result
      */
     visitNamedQuery?: (ctx: NamedQueryContext) => Result;
+    /**
+     * Visit a parse tree produced by `GenericSqlParser.cteColumnList`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCteColumnList?: (ctx: CteColumnListContext) => Result;
     /**
      * Visit a parse tree produced by `GenericSqlParser.queryNoWith`.
      * @param ctx the parse tree

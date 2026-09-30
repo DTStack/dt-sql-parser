@@ -318,6 +318,7 @@ import { ExpressionTableContext } from "./PostgreSqlParser.js";
 import { AliasClauseContext } from "./PostgreSqlParser.js";
 import { FuncAliasClauseContext } from "./PostgreSqlParser.js";
 import { JoinTypeContext } from "./PostgreSqlParser.js";
+import { JoinConditionContext } from "./PostgreSqlParser.js";
 import { JoinQualContext } from "./PostgreSqlParser.js";
 import { RelationExprContext } from "./PostgreSqlParser.js";
 import { PublicationRelationExprContext } from "./PostgreSqlParser.js";
@@ -2376,6 +2377,12 @@ export class PostgreSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Re
      * @return the visitor result
      */
     visitJoinType?: (ctx: JoinTypeContext) => Result;
+    /**
+     * Visit a parse tree produced by `PostgreSqlParser.joinCondition`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitJoinCondition?: (ctx: JoinConditionContext) => Result;
     /**
      * Visit a parse tree produced by `PostgreSqlParser.joinQual`.
      * @param ctx the parse tree

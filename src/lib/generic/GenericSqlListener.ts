@@ -21,6 +21,7 @@ import { DropTableContext } from "./GenericSqlParser.js";
 import { QueryStatementContext } from "./GenericSqlParser.js";
 import { WithClauseContext } from "./GenericSqlParser.js";
 import { NamedQueryContext } from "./GenericSqlParser.js";
+import { CteColumnListContext } from "./GenericSqlParser.js";
 import { QueryNoWithContext } from "./GenericSqlParser.js";
 import { QueryTermContext } from "./GenericSqlParser.js";
 import { QueryPrimaryContext } from "./GenericSqlParser.js";
@@ -249,6 +250,16 @@ export class GenericSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitNamedQuery?: (ctx: NamedQueryContext) => void;
+    /**
+     * Enter a parse tree produced by `GenericSqlParser.cteColumnList`.
+     * @param ctx the parse tree
+     */
+    enterCteColumnList?: (ctx: CteColumnListContext) => void;
+    /**
+     * Exit a parse tree produced by `GenericSqlParser.cteColumnList`.
+     * @param ctx the parse tree
+     */
+    exitCteColumnList?: (ctx: CteColumnListContext) => void;
     /**
      * Enter a parse tree produced by `GenericSqlParser.queryNoWith`.
      * @param ctx the parse tree

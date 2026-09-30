@@ -2128,12 +2128,12 @@ tableRef
         | OPEN_PAREN tableRef (
             KW_CROSS KW_JOIN tableRef
             | KW_NATURAL joinType? KW_JOIN tableRef
-            | joinType? KW_JOIN tableRef joinQual
+            | joinType? KW_JOIN tableRef joinCondition
         )? CLOSE_PAREN aliasClause?
     ) (
         KW_CROSS KW_JOIN tableRef
         | KW_NATURAL joinType? KW_JOIN tableRef
-        | joinType? KW_JOIN tableRef joinQual
+        | joinType? KW_JOIN tableRef joinCondition
     )*
     ;
 
@@ -2156,9 +2156,20 @@ joinType
     : (KW_FULL | KW_LEFT | KW_RIGHT | KW_INNER) KW_OUTER?
     ;
 
+// A finished JOIN needs ON or USING. The empty alternative is only for a
+// caret sitting after the joined table, so validation still rejects `JOIN b`.
+joinCondition
+    : joinQual
+    | {this.caretTokenIndex >= 0 && this.shouldMatchEmpty()}? emptyColumn
+    ;
+
 joinQual
     : KW_USING optColumnList
-    | KW_ON expression
+    | KW_ON (
+        expression
+        | columnNamePath (EQUAL columnNamePath)?
+        | {this.shouldMatchEmpty()}? emptyColumn
+    )
     ;
 
 relationExpr

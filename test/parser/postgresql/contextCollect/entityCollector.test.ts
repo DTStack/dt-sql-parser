@@ -420,10 +420,28 @@ describe('PostgreSql entity collector tests', () => {
         postgreSql.listen(collectListener as ParseTreeListener, testingContext);
 
         const allEntities = collectListener.getEntities();
-        expect(allEntities.length).toBe(4);
+        expect(allEntities.length).toBe(5);
 
-        const tableEntity1 = allEntities[0];
-        const tableEntity2 = allEntities[2];
+        const tableEntity1 = allEntities.find(
+            (entity) =>
+                entity.entityContextType === EntityContextType.TABLE &&
+                entity.text === 'table_expression'
+        )!;
+        const tableEntity2 = allEntities.find(
+            (entity) =>
+                entity.entityContextType === EntityContextType.TABLE &&
+                entity.text === 'table_expression1'
+        )!;
+        const cteEntity = allEntities.find(
+            (entity) =>
+                entity.entityContextType === EntityContextType.TABLE && entity.text === 'query_name'
+        ) as CommonEntityContext;
+        expect(cteEntity.declareType).toBe(TableDeclareType.EXPRESSION);
+        expect(
+            (cteEntity.relatedEntities?.[0] as CommonEntityContext).columns?.map(
+                (column) => column.text
+            )
+        ).toEqual(['id']);
         expect(tableEntity1.entityContextType).toBe(EntityContextType.TABLE);
         expect(tableEntity1.text).toBe('table_expression');
         expect(tableEntity1.position).toEqual(
@@ -569,7 +587,7 @@ describe('PostgreSql entity collector tests', () => {
         postgreSql.listen(collectListener as ParseTreeListener, testingContext);
 
         const allEntities = collectListener.getEntities();
-        expect(allEntities.length).toBe(4);
+        expect(allEntities.length).toBe(5);
 
         const tableEntity1 = allEntities.find(
             (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'table_expression'
@@ -577,6 +595,11 @@ describe('PostgreSql entity collector tests', () => {
         const tableEntity2 = allEntities.find(
             (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'table_expression1'
         );
+        const cteEntity = allEntities.find(
+            (entity) =>
+                entity.entityContextType === EntityContextType.TABLE && entity.text === 'query_name'
+        ) as CommonEntityContext;
+        expect(cteEntity.declareType).toBe(TableDeclareType.EXPRESSION);
 
         expect(tableEntity1).toBeDefined();
         expect(tableEntity2).toBeDefined();

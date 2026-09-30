@@ -1,4 +1,4 @@
-import { isToken, ParserRuleContext, Token } from 'antlr4ng';
+import { ErrorNode, isToken, ParserRuleContext, TerminalNode, Token } from 'antlr4ng';
 
 import { SimpleStack } from './simpleStack';
 import {
@@ -339,6 +339,46 @@ function isEntityInScope(entity: EntityContext, rangeEntity: EntityContext): boo
 }
 
 /**
+ * Parents of a single CTE item. The scope of that CTE is the query that owns this clause.
+ */
+const CTE_CLAUSE_CONTEXT_NAMES = new Set([
+    'WithClauseContext',
+    'WithStatementContext',
+    'CtesContext',
+    'WithContext',
+]);
+
+interface CteDefinition {
+    entity: CommonEntityContext;
+    name: string;
+    body: ParserRuleContext | null;
+    columnNameCtxs: ParserRuleContext[];
+    /** Column-list node. Used when empty-match mode hides the identifier children. */
+    columnListCtx: ParserRuleContext | null;
+    /** Last token of this CTE item. The name is not visible at or before this token. */
+    endTokenIndex: number;
+    /** Last token of the query that owns the WITH clause. */
+    scopeEndTokenIndex: number;
+    outward: CommonEntityContext | null;
+}
+
+function normalizeIdent(text: string): string {
+    let value = text.trim();
+    if (
+        (value.startsWith('`') && value.endsWith('`') && value.length >= 2) ||
+        (value.startsWith('"') && value.endsWith('"') && value.length >= 2) ||
+        (value.startsWith('[') && value.endsWith(']') && value.length >= 2)
+    ) {
+        value = value.slice(1, -1);
+    }
+    return value.toLowerCase();
+}
+
+function sameIdent(left: string, right: string): boolean {
+    return normalizeIdent(left) === normalizeIdent(right);
+}
+
+/**
  * @todo: Handle alias, includes column alias, table alias, query as alias and so on.
  * @todo: [may be need] Combine the entities in each clause.
  */
@@ -350,6 +390,7 @@ export abstract class EntityCollector {
         this._entitiesSet = new Set();
         this._stmtStack = new SimpleStack();
         this._entityStack = new SimpleStack();
+        this._cteDefinitions = [];
         this._rootStmt = null;
         this._caretStmtScopeDepth = 0;
         this._caretStmt = null;
@@ -358,10 +399,21 @@ export abstract class EntityCollector {
     private readonly _allTokens: Token[];
     private readonly _caretTokenIndex: number;
     private readonly _entitiesSet: Set<EntityContext>;
+    /**
+     * Contexts whose source slice contains a parse error.
+     * Error recovery can stretch a rule context across a whole clause, so `ctxToText`
+     * would return e.g. `JOIN myOwn\nORDER BY 1` where a name is expected.
+     */
+    private readonly _errorContexts = new Set<ParserRuleContext>();
     /** Staging statements that have already entered. */
     private readonly _stmtStack: SimpleStack<StmtContext>;
     /** Staging entities inside a single statement or clause. */
     private readonly _entityStack: SimpleStack<EntityContext>;
+    /**
+     * CTE definitions collected while walking.
+     * Visibility is sequential inside the WITH owner's range, and references bind to the nearest preceding CTE.
+     */
+    private _cteDefinitions: CteDefinition[];
 
     /**
      * The scope depth of the statement containing the caret.
@@ -384,7 +436,18 @@ export abstract class EntityCollector {
 
     visitTerminal() {}
 
-    visitErrorNode() {}
+    visitErrorNode(node: ErrorNode) {
+        /**
+         * Mark every ancestor. An entity pushed on one of them would carry the
+         * error-tainted source slice as its `text`. Entities are always pushed from
+         * `exit<Rule>` callbacks, so this runs before the context is used.
+         */
+        let parent = node.parent as ParserRuleContext | null;
+        while (parent) {
+            this._errorContexts.add(parent);
+            parent = parent.parent as ParserRuleContext | null;
+        }
+    }
 
     enterEveryRule() {}
 
@@ -402,12 +465,17 @@ export abstract class EntityCollector {
         this._entitiesSet.clear();
         this._stmtStack.clear();
         this._entityStack.clear();
+        this._cteDefinitions = [];
         this._rootStmt = null;
+        this._errorContexts.clear();
     }
 
     exitProgram() {
+        this.finalizeCteDefinitions();
+        this.bindCteReferences();
         const entities = Array.from(this._entitiesSet);
         if (this._caretTokenIndex !== -1) {
+            this.markCteAccessibility();
             this.attachAccessibleToEntities(entities);
         }
         this._entityStack.clear();
@@ -568,6 +636,11 @@ export abstract class EntityCollector {
             if (!this._entityStack.isEmpty()) {
                 this.combineEntitiesAndAdd(stmtContext);
             }
+            // Statement-scoped walks never exit program. Finalize once the outermost statement pops.
+            if (this._stmtStack.isEmpty()) {
+                this.finalizeCteDefinitions();
+                this.bindCteReferences();
+            }
             // If the current statement contains the caret and its scope depth equals the caret statement's scope depth
             // then set it as the nearest statement containing the caret
             if (
@@ -586,6 +659,8 @@ export abstract class EntityCollector {
         attrInfo?: AttrInfo[],
         metaInfo?: MetaInfo
     ) {
+        // A context containing a parse error has no usable `text`.
+        if (this._errorContexts.has(ctx)) return null;
         const entityContext = toEntityContext(
             ctx,
             type,
@@ -812,5 +887,281 @@ export abstract class EntityCollector {
         }
 
         return finalEntities;
+    }
+
+    /**
+     * Collect one CTE definition.
+     * `endTokenIndex` is the closing token of this item only (not a following CTE).
+     * Column names, when present, become the outward schema and do not replace the body query result.
+     */
+    protected collectCte(
+        cteCtx: ParserRuleContext,
+        nameCtx: ParserRuleContext | null,
+        bodyCtx: ParserRuleContext | null,
+        endTokenIndex: number,
+        columnNameCtxs: ParserRuleContext[] = [],
+        columnListCtx: ParserRuleContext | null = null
+    ) {
+        if (!nameCtx || endTokenIndex < 0) return;
+        const entity = this.pushEntity(nameCtx, EntityContextType.TABLE, undefined, {
+            declareType: TableDeclareType.EXPRESSION,
+        });
+        if (!entity || !isCommonEntityContext(entity)) return;
+
+        this._cteDefinitions.push({
+            entity,
+            name: entity.text,
+            body: bodyCtx,
+            columnNameCtxs,
+            columnListCtx,
+            endTokenIndex,
+            scopeEndTokenIndex: this.cteScopeEndTokenIndex(cteCtx, endTokenIndex),
+            outward: null,
+        });
+    }
+
+    private cteScopeEndTokenIndex(cteCtx: ParserRuleContext, endTokenIndex: number): number {
+        let scopeEnd = endTokenIndex;
+        let current: ParserRuleContext | null = cteCtx.parent;
+        while (current) {
+            if (CTE_CLAUSE_CONTEXT_NAMES.has(current.constructor.name)) {
+                scopeEnd = current.parent?.stop?.tokenIndex ?? endTokenIndex;
+                break;
+            }
+            current = current.parent;
+        }
+        if (!current) {
+            scopeEnd = this._stmtStack.peek()?.position.endTokenIndex ?? endTokenIndex;
+        }
+        // An incomplete FROM/JOIN stops the parsed query before the caret.
+        // Keep the CTE visible until a semicolon or a closing paren leaves this query.
+        return this.extendUnclosedScope(scopeEnd);
+    }
+
+    private extendUnclosedScope(scopeEnd: number): number {
+        let depth = 0;
+        let end = scopeEnd;
+        for (let i = scopeEnd + 1; i < this._allTokens.length; i++) {
+            const token = this._allTokens[i];
+            if (token.channel === Token.HIDDEN_CHANNEL || token.type === Token.EOF) continue;
+            const text = token.text ?? '';
+            if (text === ';') break;
+            if (text === '(') {
+                depth++;
+            } else if (text === ')') {
+                if (depth === 0) break;
+                depth--;
+            }
+            end = token.tokenIndex;
+        }
+        return end;
+    }
+
+    private finalizeCteDefinitions() {
+        this._cteDefinitions.forEach((cte) => {
+            if (cte.outward) {
+                cte.entity.relatedEntities = [cte.outward];
+                return;
+            }
+            const fromColumnList = cte.columnListCtx
+                ? this.createColumnListQueryResultFromTokens(
+                      cte.entity.belongStmt,
+                      this.columnTokens(cte.columnListCtx)
+                  )
+                : cte.columnNameCtxs.length
+                  ? this.createColumnListQueryResult(cte.entity.belongStmt, cte.columnNameCtxs)
+                  : null;
+            const found = fromColumnList ?? this.findOutwardQueryResult(cte.body);
+            // Column-list results are already a dedicated object. A body query
+            // result is shared with the entity set, so dialects may copy it.
+            const outward = fromColumnList ?? (found ? this.adaptOutwardQueryResult(found) : null);
+            cte.outward = outward;
+            if (outward) {
+                cte.entity.relatedEntities = [outward];
+            }
+        });
+    }
+
+    /**
+     * CTE outward schema defaults to the body query result itself.
+     * Override when that result's text covers more than the select list.
+     */
+    protected adaptOutwardQueryResult(entity: CommonEntityContext): CommonEntityContext {
+        return entity;
+    }
+
+    protected sourceSlice(startIndex: number, endIndex: number): string {
+        return this._input.slice(startIndex, endIndex + 1);
+    }
+
+    private findOutwardQueryResult(body: ParserRuleContext | null): CommonEntityContext | null {
+        if (!body?.start || !body.stop) return null;
+        const start = body.start.tokenIndex;
+        const stop = body.stop.tokenIndex;
+        let best: CommonEntityContext | null = null;
+        for (const entity of this._entitiesSet) {
+            if (
+                entity.entityContextType !== EntityContextType.QUERY_RESULT ||
+                !isCommonEntityContext(entity)
+            ) {
+                continue;
+            }
+            const tokenStart = entity.position.startTokenIndex;
+            const tokenStop = entity.position.endTokenIndex;
+            if (tokenStart < start || tokenStop > stop) continue;
+            if (!best) {
+                best = entity;
+                continue;
+            }
+            const bestDepth = best.belongStmt?.scopeDepth ?? 0;
+            const depth = entity.belongStmt?.scopeDepth ?? 0;
+            if (
+                depth < bestDepth ||
+                (depth === bestDepth && tokenStart < best.position.startTokenIndex)
+            ) {
+                best = entity;
+            }
+        }
+        return best;
+    }
+
+    private columnTokens(listCtx: ParserRuleContext): Token[] {
+        const tokens: Token[] = [];
+        const skip = new Set(['(', ')', ',', '.', '[', ']']);
+        const visit = (ctx: ParserRuleContext) => {
+            for (let i = 0; i < ctx.getChildCount(); i++) {
+                const child = ctx.getChild(i);
+                if (child instanceof ParserRuleContext) {
+                    visit(child);
+                    continue;
+                }
+                if (child instanceof TerminalNode) {
+                    const text = child.symbol.text ?? '';
+                    if (text && !skip.has(text)) tokens.push(child.symbol);
+                }
+            }
+        };
+        visit(listCtx);
+        return tokens;
+    }
+
+    private createColumnListQueryResultFromTokens(
+        belongStmt: StmtContext,
+        tokens: Token[]
+    ): CommonEntityContext | null {
+        const columns: ColumnEntityContext[] = [];
+        tokens.forEach((token) => {
+            const word = tokenToWord(token, this._input);
+            if (!word.text.trim()) return;
+            columns.push({
+                entityContextType: EntityContextType.COLUMN,
+                text: word.text,
+                position: {
+                    startIndex: word.startIndex,
+                    endIndex: word.endIndex,
+                    line: word.line,
+                    startColumn: word.startColumn,
+                    endColumn: word.endColumn,
+                    startTokenIndex: token.tokenIndex,
+                    endTokenIndex: token.tokenIndex,
+                },
+                belongStmt,
+                declareType: ColumnDeclareType.LITERAL,
+                relatedEntities: null,
+                [AttrName.colType]: null,
+                [AttrName.comment]: null,
+                isAccessible: null,
+            });
+        });
+        return this.wrapOutwardColumns(belongStmt, columns);
+    }
+
+    private createColumnListQueryResult(
+        belongStmt: StmtContext,
+        columnNameCtxs: ParserRuleContext[]
+    ): CommonEntityContext | null {
+        const columns: ColumnEntityContext[] = [];
+        columnNameCtxs.forEach((nameCtx) => {
+            const column = toEntityContext(
+                nameCtx,
+                EntityContextType.COLUMN,
+                this._input,
+                belongStmt,
+                undefined,
+                { declareType: ColumnDeclareType.LITERAL }
+            );
+            if (column && isColumnEntityContext(column) && column.text.trim()) {
+                columns.push(column);
+            }
+        });
+        return this.wrapOutwardColumns(belongStmt, columns);
+    }
+
+    private wrapOutwardColumns(
+        belongStmt: StmtContext,
+        columns: ColumnEntityContext[]
+    ): CommonEntityContext | null {
+        if (!columns.length) return null;
+        const first = columns[0].position;
+        const last = columns[columns.length - 1].position;
+        return {
+            entityContextType: EntityContextType.QUERY_RESULT,
+            text: columns.map((column) => column.text).join(', '),
+            position: {
+                startIndex: first.startIndex,
+                endIndex: last.endIndex,
+                line: first.line,
+                startColumn: first.startColumn,
+                endColumn: last.endColumn,
+                startTokenIndex: first.startTokenIndex,
+                endTokenIndex: last.endTokenIndex,
+            },
+            belongStmt,
+            relatedEntities: null,
+            columns,
+            [AttrName.comment]: null,
+            isAccessible: null,
+        };
+    }
+
+    private bindCteReferences() {
+        this._entitiesSet.forEach((entity) => {
+            if (
+                entity.entityContextType !== EntityContextType.TABLE ||
+                !isCommonEntityContext(entity) ||
+                entity.declareType !== TableDeclareType.LITERAL
+            ) {
+                return;
+            }
+            const cte = this.resolveCte(entity.text, entity.position.startTokenIndex);
+            if (!cte) return;
+            entity.declareType = TableDeclareType.EXPRESSION;
+            entity.relatedEntities = cte.outward ? [cte.outward] : null;
+        });
+    }
+
+    private markCteAccessibility() {
+        const caretTokenIndex = this.getPrevNonHiddenTokenIndex(this._caretTokenIndex);
+        if (!Number.isFinite(caretTokenIndex)) {
+            this._cteDefinitions.forEach((cte) => {
+                cte.entity.isAccessible = false;
+            });
+            return;
+        }
+        this._cteDefinitions.forEach((cte) => {
+            cte.entity.isAccessible = this.resolveCte(cte.name, caretTokenIndex) === cte;
+        });
+    }
+
+    /** Nearest preceding CTE whose scope covers `tokenIndex`. */
+    private resolveCte(name: string, tokenIndex: number): CteDefinition | null {
+        let winner: CteDefinition | null = null;
+        this._cteDefinitions.forEach((cte) => {
+            if (!sameIdent(cte.name, name)) return;
+            if (tokenIndex <= cte.endTokenIndex) return;
+            if (tokenIndex > cte.scopeEndTokenIndex) return;
+            if (!winner || cte.endTokenIndex > winner.endTokenIndex) winner = cte;
+        });
+        return winner;
     }
 }
