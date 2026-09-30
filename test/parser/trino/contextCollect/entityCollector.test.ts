@@ -567,4 +567,20 @@ describe('Trino entity collector tests', () => {
         expect(t2).toBeDefined();
         expect(t2?.isAccessible).toBeTruthy();
     });
+
+    test('table stays accessible at WHERE table.', () => {
+        const trino = new TrinoSQL();
+        const sql = 'SELECT * FROM orders WHERE orders.';
+        const pos = { lineNumber: 1, column: sql.length + 1 };
+
+        const orders = trino
+            .getAllEntities(sql, pos)
+            ?.find((e) => e.entityContextType === EntityContextType.TABLE && e.text === 'orders');
+        expect(orders?.isAccessible).toBeTruthy();
+
+        const column = trino
+            .getSuggestionAtCaretPosition(sql, pos)
+            ?.syntax?.find((syn) => syn.syntaxContextType === EntityContextType.COLUMN);
+        expect(column?.wordRanges.map((word) => word.text)).toEqual(['orders', '.']);
+    });
 });

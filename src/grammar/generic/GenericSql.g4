@@ -56,7 +56,11 @@ withClause
     ;
 
 namedQuery
-    : name=identifier KW_AS '(' queryStatement ')'
+    : name=identifier cteColumnList? KW_AS '(' queryStatement ')'
+    ;
+
+cteColumnList
+    : '(' identifier (',' identifier)* ')'
     ;
 
 queryNoWith
@@ -82,7 +86,7 @@ setQuantifier
     ;
 
 selectItem
-    : expression (KW_AS? identifier)?
+    : expression (KW_AS? alias=identifier)?
     | qualifiedName '.' ASTERISK
     | ASTERISK
     ;
@@ -105,7 +109,7 @@ joinType
     ;
 
 aliasedRelation
-    : relationPrimary (KW_AS? identifier)?
+    : relationPrimary (KW_AS? alias=identifier)?
     ;
 
 relationPrimary
