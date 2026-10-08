@@ -1,3 +1,4 @@
+import { TerminalNode } from 'antlr4ng';
 import {
     ColumnCreateTableContext,
     ColumnNameCreateContext,
@@ -25,6 +26,7 @@ import {
     TableAllColumnsContext,
     AtomSubQueryTableSourceContext,
     AtomTableItemContext,
+    CommonTableExpressionsContext,
     SubqueryTableItemContext,
     PureAllColumnsContext,
     SelectElement_labelContext,
@@ -67,6 +69,22 @@ export class MySqlEntityCollector extends EntityCollector implements MySqlParser
                 declareType: TableDeclareType.LITERAL,
             }
         );
+    }
+
+    exitCommonTableExpressions(ctx: CommonTableExpressionsContext) {
+        const names = ctx.uid();
+        if (!names?.length) return;
+        const bodyEnd = ctx.dmlStatement()?.stop?.tokenIndex ?? -1;
+        let endTokenIndex = bodyEnd;
+        for (let i = 0; i < ctx.getChildCount(); i++) {
+            const child = ctx.getChild(i);
+            if (!(child instanceof TerminalNode)) continue;
+            if (child.symbol.text === ')' && child.symbol.tokenIndex > bodyEnd) {
+                endTokenIndex = child.symbol.tokenIndex;
+                break;
+            }
+        }
+        this.collectCte(ctx, names[0], ctx.dmlStatement(), endTokenIndex, names.slice(1));
     }
 
     /** SubQuery Table Entity Rules */

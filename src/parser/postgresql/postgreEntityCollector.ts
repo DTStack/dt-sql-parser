@@ -2,6 +2,7 @@ import {
     type AlterTableStmtContext,
     Column_defContext,
     type ColumnCreateTableContext,
+    type CommonTableExprContext,
     type ColumnNameCreateContext,
     type CreateDatabaseContext,
     type CreateForeignTableContext,
@@ -126,6 +127,17 @@ export class PostgreSqlEntityCollector extends EntityCollector implements Postgr
 
     exitTableNameCreate(ctx: TableNameCreateContext) {
         this.pushEntity(ctx, EntityContextType.TABLE_CREATE);
+    }
+
+    exitCommonTableExpr(ctx: CommonTableExprContext) {
+        const columns = ctx.optColumnList()?.columnList()?.columnName() ?? [];
+        this.collectCte(
+            ctx,
+            ctx.colId(),
+            ctx.preParableStmt(),
+            ctx.stop?.tokenIndex ?? -1,
+            columns
+        );
     }
 
     exitViewName(ctx: ViewNameContext) {

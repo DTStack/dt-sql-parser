@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { GenericSqlListener } from 'src/lib/generic/GenericSqlListener';
 import {
+    AttrName,
     ColumnDeclareType,
     CommonEntityContext,
     isCommonEntityContext,
@@ -47,11 +48,28 @@ describe('GenericSQL entity collector tests', () => {
 
         if (isCommonEntityContext(tableCreateEntity)) {
             expect(tableCreateEntity.columns?.length).toBe(2);
-            // GenericSQL column text includes data type
-            expect(tableCreateEntity.columns[0].text).toContain('orderkey');
-            expect(tableCreateEntity.columns[1].text).toContain('orderstatus');
+            expect(tableCreateEntity.columns[0].text).toBe('orderkey');
+            expect(tableCreateEntity.columns[0][AttrName.colType]?.text).toBe('bigint');
+            expect(tableCreateEntity.columns[1].text).toBe('orderstatus');
+            expect(tableCreateEntity.columns[1][AttrName.colType]?.text).toBe('varchar');
             expect(tableCreateEntity.relatedEntities).toBeNull();
         }
+    });
+
+    test('column type range covers the whole type', () => {
+        const sql = 'CREATE TABLE t (name varchar(50));';
+        const entities = parser.getAllEntities(sql) ?? [];
+        const table = entities.find(
+            (entity) => entity.entityContextType === EntityContextType.TABLE_CREATE
+        );
+        if (!isCommonEntityContext(table)) {
+            throw new Error('missing create table entity');
+        }
+        const colType = table.columns?.[0][AttrName.colType];
+        expect(table.columns?.[0].text).toBe('name');
+        expect(colType?.text).toBe('varchar(50)');
+        expect(colType?.endIndex).toBe((colType?.startIndex ?? 0) + colType!.text.length - 1);
+        expect(colType?.endColumn).toBe((colType?.startColumn ?? 0) + colType!.text.length);
     });
 
     test('select from table', () => {
