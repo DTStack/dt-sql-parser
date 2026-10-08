@@ -1,0 +1,1 @@
+var e={fontSize:12,tabSize:4,insertSpaces:!0,detectIndentation:!0,trimAutoWhitespace:!0,largeFileOptimizations:!0,wordBasedSuggestions:"currentDocument","semanticHighlighting.enabled":"configuredByTheme",stablePeek:!1,maxTokenizationLineLength:2e4,autoDetectHighContrast:!0};export{e as default};

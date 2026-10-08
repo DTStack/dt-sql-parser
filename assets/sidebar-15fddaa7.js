@@ -1,0 +1,1 @@
+var n=(o=>(o.onToolbarClick="sidebar.onToolbarClick",o.onContextMenu="sidebar.onContextMenu",o))(n||{});class s{constructor(a=[],r=!1,t){this.data=a,this.loading=r,this.current=t}}export{n as S,s as a};
