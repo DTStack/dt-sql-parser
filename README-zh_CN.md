@@ -222,7 +222,7 @@ console.log(sqlSlices)
     startLine: 1,
     endLine: 1,
     startColumn: 1,
-    endColumn: 12,
+    endColumn: 13,
     text: 'SHOW TABLES;'
   },
   {
@@ -231,7 +231,7 @@ console.log(sqlSlices)
     startLine: 2,
     endLine: 2,
     startColumn: 1,
-    endColumn: 17,
+    endColumn: 18,
     text: 'SELECT * FROM tb;'
   }
 ]
@@ -250,7 +250,7 @@ console.log(sqlSlices)
   
     const flink = new FlinkSQL();
     const sql = 'CREATE ';
-    const pos = { lineNumber: 1, column: 16 }; // 最后一个位置
+    const pos = { lineNumber: 1, column: sql.length + 1 }; // 最后一个位置
     const keywords = flink.getSuggestionAtCaretPosition(sql, pos)?.keywords;
   
     console.log(keywords);
@@ -297,10 +297,10 @@ console.log(sqlSlices)
           {
             text: 'tb',
             startIndex: 14,
-            stopIndex: 15,
+            endIndex: 15,
             line: 1,
             startColumn: 15,
-            stopColumn: 16
+            endColumn: 17
           }
         ]
       },
@@ -310,10 +310,10 @@ console.log(sqlSlices)
           {
             text: 'tb',
             startIndex: 14,
-            stopIndex: 15,
+            endIndex: 15,
             line: 1,
             startColumn: 15,
-            stopColumn: 16
+            endColumn: 17
           }
         ]
       }
