@@ -110,35 +110,30 @@ class SqlBenchmark {
 
     private _lastResultsCache: BenchmarkResult[] | null = null;
 
+    private _parserConstructor: (new () => BasicSQL) | null = null;
+
     /**
      * Returns SqlParser instance of specific language.
      */
     getSqlParser(): BasicSQL {
-        if (!this.isHot) {
-            this.clearATNCache();
+        if (!this._parserConstructor) {
+            this._parserConstructor = require(path.resolve(`src/parser/${this.language}/index.ts`))[
+                languageNameMap[this.language]
+            ];
         }
-        const Parser = require(path.resolve(`src/parser/${this.language}/index.ts`))[
-            languageNameMap[this.language]
-        ];
-        return new Parser();
+        const parser = new this._parserConstructor();
+        if (!this.isHot) {
+            parser.resetDfaCache();
+        }
+        return parser;
     }
 
     /**
-     * Due to the presence of ATN cache in antlr4, we will clear the module cache to ensure that each parser is brand new and with no cache.
+     * Reset the shared DFA caches before collecting hot-start samples.
      */
-    clearATNCache() {
-        const caches = Object.keys(require.cache);
-        const sourcePath = path.join(__dirname, '../src');
-        caches
-            .filter((cache) => cache.includes(sourcePath))
-            .forEach((moduleName) => {
-                const module = require.cache[moduleName]!;
-                // Fix Memory Leak
-                if (module.parent) {
-                    module.parent.children = [];
-                }
-                delete require.cache[moduleName];
-            });
+    resetDfaCache() {
+        const parser = this.getSqlParser();
+        parser.resetDfaCache();
     }
 
     getColumns = () => {
@@ -166,7 +161,7 @@ class SqlBenchmark {
             this._lastResultsCache?.find((item) => item.type === type && item.name === name) ?? {};
 
         if (this.isHot) {
-            this.clearATNCache();
+            this.resetDfaCache();
         }
 
         if (this.isHot && loopTimes < 2) {

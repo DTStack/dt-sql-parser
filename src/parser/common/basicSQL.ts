@@ -271,6 +271,22 @@ export abstract class BasicSQL<
     }
 
     /**
+     * Reset the shared Lexer and Parser DFA caches for cold-start benchmarks.
+     * This affects every parser instance of the same dialect.
+     */
+    public resetDfaCache(): void {
+        if (!this._parser || !this._lexer) {
+            this.createParserWithCache('');
+        }
+        this._parser.interpreter.clearDFA();
+        this._lexer.interpreter.clearDFA();
+        this._parseTree = null;
+        this._parsedInput = '';
+        this._parseErrors = [];
+        this._statementStartTokenTypes = null;
+    }
+
+    /**
      * Validate input string and return syntax errors if exists.
      * When input contains multiple statements separated by semicolons
      * and the initial parse doesn't capture all errors, each statement
