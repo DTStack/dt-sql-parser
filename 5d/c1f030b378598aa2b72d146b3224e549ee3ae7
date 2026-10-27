@@ -1,0 +1,22 @@
+benchmark/sqlBenchmark.ts
+  h_3070dc1062bb3b 113-114,119-124,126,128,132,134-136,164
+package.json
+  h_3070dc1062bb3b 32,38-39
+scripts/benchmark.js
+  h_3070dc1062bb3b 1,112
+src/parser/common/basicSQL.ts
+  h_3070dc1062bb3b 273-288
+test/common/basicSQL.test.ts
+  h_3070dc1062bb3b 6-10,89-113
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5dc1f030b378598aa2b72d146b3224e549ee3ae7",
+  "prompts": {},
+  "humans": {
+    "h_3070dc1062bb3b": {
+      "author": "liuxy0551 <liuxy0551@qq.com>"
+    }
+  }
+}
