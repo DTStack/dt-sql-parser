@@ -303,6 +303,56 @@ CREATE TABLE dt_catalog.dt_db.users (
     'connector' = 'faker'
 );
 
+-- Computed column with complex expression (computedColumnExpression inlined to expression)
+CREATE TABLE tbl_computed (
+    a INT,
+    b INT,
+    c STRING,
+    d AS a + b * 2,
+    e AS CONCAT(c, '_suffix'),
+    f AS CASE WHEN a > 0 THEN b ELSE 0 END
+) WITH (
+    'connector' = 'kafka'
+);
+
+-- Computed column with nested function call
+CREATE TABLE tbl_computed2 (
+    ts TIMESTAMP(3),
+    ts_str AS CAST(ts AS STRING),
+    year_val AS YEAR(ts)
+) WITH (
+    'connector' = 'kafka'
+);
+
+-- Table constraint with NOT ENFORCED (notForced inlined)
+CREATE TABLE tbl_constraint (
+    id INT,
+    name STRING,
+    PRIMARY KEY (id, name) NOT ENFORCED
+) WITH (
+    'connector' = 'kafka'
+);
+
+-- Partitioned by identity transform (partitionDefinition + transformList inlined)
+CREATE TABLE tbl_partitioned (
+    id BIGINT,
+    name STRING,
+    ts TIMESTAMP(3),
+    WATERMARK FOR ts AS ts - INTERVAL '5' SECOND
+) PARTITIONED BY (name) WITH (
+    'connector' = 'kafka'
+);
+
+-- Partitioned by apply transform
+CREATE TABLE tbl_partitioned_apply (
+    id BIGINT,
+    name STRING,
+    ts TIMESTAMP(3),
+    WATERMARK FOR ts AS ts - INTERVAL '5' SECOND
+) PARTITIONED BY ((`year`, ts), (mytruncate, 10, id)) WITH (
+    'connector' = 'kafka'
+);
+
 CREATE TABLE retail_order (
   message ROW <
     after ROW (

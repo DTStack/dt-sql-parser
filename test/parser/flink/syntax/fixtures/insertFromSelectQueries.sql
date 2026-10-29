@@ -82,3 +82,8 @@ SELECT
 vin AS vin
 FROM ods_track_vcos_log_prs_rt2
 WHERE JSON_VALUE(parse_track_pb(data), '$.eid' RETURNING STRING) = '1570001000';
+
+-- Insert with single partition key (insertPartitionDefinition inlined)
+INSERT INTO country_page_view PARTITION (`date` = '2019-8-30')
+SELECT `user`, cnt
+FROM page_view_source;

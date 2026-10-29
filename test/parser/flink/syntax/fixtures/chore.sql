@@ -19,6 +19,9 @@ ADD JAR '<path_to_filename>.jar'
 
 REMOVE JAR '<path_to_filename>.jar'
 
+-- Empty Statement (standalone semicolon)
+;
+
 -- Complex Arithmetic Expression
 INSERT INTO avg_request_size_5m SELECT
     window_start,
