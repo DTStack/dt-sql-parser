@@ -56,7 +56,9 @@ export class GenericSQL extends BasicSQL<GenericSqlLexer, ProgramContext, Generi
         GenericSqlParser.RULE_tableName,
         GenericSqlParser.RULE_tableNameCreate,
         GenericSqlParser.RULE_columnRef,
-        GenericSqlParser.RULE_qualifiedName,
+        GenericSqlParser.RULE_columnRefCreate,
+        GenericSqlParser.RULE_columnName,
+        GenericSqlParser.RULE_functionName,
         ...this.excludeKeywordRules,
     ]);
 
@@ -113,17 +115,16 @@ export class GenericSQL extends BasicSQL<GenericSqlLexer, ProgramContext, Generi
                     syntaxContextType = EntityContextType.COLUMN;
                     break;
                 }
-                case GenericSqlParser.RULE_qualifiedName: {
-                    // Expressions use qualifiedName for columns. Table names use the same
-                    // rule through tableName, and those stay TABLE suggestions.
-                    const rules = candidateRule.ruleList;
-                    if (
-                        !rules.includes(GenericSqlParser.RULE_tableName) &&
-                        !rules.includes(GenericSqlParser.RULE_tableNameCreate) &&
-                        rules.includes(GenericSqlParser.RULE_expression)
-                    ) {
-                        syntaxContextType = EntityContextType.COLUMN;
-                    }
+                case GenericSqlParser.RULE_columnRefCreate: {
+                    syntaxContextType = EntityContextType.COLUMN_CREATE;
+                    break;
+                }
+                case GenericSqlParser.RULE_columnName: {
+                    syntaxContextType = EntityContextType.COLUMN;
+                    break;
+                }
+                case GenericSqlParser.RULE_functionName: {
+                    syntaxContextType = EntityContextType.FUNCTION;
                     break;
                 }
                 default:
