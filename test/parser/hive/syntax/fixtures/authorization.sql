@@ -32,3 +32,23 @@ REVOKE GRANT OPTION FOR ALL, ALTER, UPDATE, CREATE, DROP, INDEX, LOCK, SELECT, S
     ON table_or_view_name
     FROM USER `user`, ROLE `role`;
 
+-- Lock and Unlock Statements
+LOCK TABLE tbl1 SHARED;
+
+LOCK TABLE tbl2 EXCLUSIVE;
+
+LOCK TABLE tbl3 PARTITION (ds='2010-03-03') SHARED;
+
+UNLOCK TABLE tbl1;
+
+UNLOCK TABLE tbl2 PARTITION (ds='2010-03-03');
+
+-- Lock and Unlock Database
+LOCK DATABASE mydb SHARED;
+
+LOCK DATABASE mydb EXCLUSIVE;
+
+UNLOCK DATABASE mydb;
+
+UNLOCK SCHEMA myschema;
+

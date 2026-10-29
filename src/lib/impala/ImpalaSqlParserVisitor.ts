@@ -127,7 +127,6 @@ import { ColumnSpecWithKuduContext } from "./ImpalaSqlParser.js";
 import { CreateColumnSpecWithKuduContext } from "./ImpalaSqlParser.js";
 import { KuduAttributesContext } from "./ImpalaSqlParser.js";
 import { KuduStorageAttrContext } from "./ImpalaSqlParser.js";
-import { StatsKeyContext } from "./ImpalaSqlParser.js";
 import { FileFormatContext } from "./ImpalaSqlParser.js";
 import { KuduPartitionClauseContext } from "./ImpalaSqlParser.js";
 import { HashClauseContext } from "./ImpalaSqlParser.js";
@@ -169,7 +168,6 @@ import { JoinRelationContext } from "./ImpalaSqlParser.js";
 import { JoinTypeContext } from "./ImpalaSqlParser.js";
 import { JoinCriteriaContext } from "./ImpalaSqlParser.js";
 import { SampledRelationContext } from "./ImpalaSqlParser.js";
-import { SampleTypeContext } from "./ImpalaSqlParser.js";
 import { AliasedRelationContext } from "./ImpalaSqlParser.js";
 import { ColumnAliasesContext } from "./ImpalaSqlParser.js";
 import { RelationPrimaryContext } from "./ImpalaSqlParser.js";
@@ -229,10 +227,8 @@ import { BasicStringLiteralContext } from "./ImpalaSqlParser.js";
 import { UnicodeStringLiteralContext } from "./ImpalaSqlParser.js";
 import { ComparisonOperatorContext } from "./ImpalaSqlParser.js";
 import { ComparisonQuantifierContext } from "./ImpalaSqlParser.js";
-import { BooleanValueContext } from "./ImpalaSqlParser.js";
 import { IntervalContext } from "./ImpalaSqlParser.js";
 import { IntervalFieldContext } from "./ImpalaSqlParser.js";
-import { NormalFormContext } from "./ImpalaSqlParser.js";
 import { TypeContext } from "./ImpalaSqlParser.js";
 import { DataTypeContext } from "./ImpalaSqlParser.js";
 import { TypeParameterContext } from "./ImpalaSqlParser.js";
@@ -989,12 +985,6 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitKuduStorageAttr?: (ctx: KuduStorageAttrContext) => Result;
     /**
-     * Visit a parse tree produced by `ImpalaSqlParser.statsKey`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitStatsKey?: (ctx: StatsKeyContext) => Result;
-    /**
      * Visit a parse tree produced by `ImpalaSqlParser.fileFormat`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1249,12 +1239,6 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitSampledRelation?: (ctx: SampledRelationContext) => Result;
-    /**
-     * Visit a parse tree produced by `ImpalaSqlParser.sampleType`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitSampleType?: (ctx: SampleTypeContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.aliasedRelation`.
      * @param ctx the parse tree
@@ -1657,12 +1641,6 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      */
     visitComparisonQuantifier?: (ctx: ComparisonQuantifierContext) => Result;
     /**
-     * Visit a parse tree produced by `ImpalaSqlParser.booleanValue`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitBooleanValue?: (ctx: BooleanValueContext) => Result;
-    /**
      * Visit a parse tree produced by `ImpalaSqlParser.interval`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1674,12 +1652,6 @@ export class ImpalaSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Res
      * @return the visitor result
      */
     visitIntervalField?: (ctx: IntervalFieldContext) => Result;
-    /**
-     * Visit a parse tree produced by `ImpalaSqlParser.normalForm`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitNormalForm?: (ctx: NormalFormContext) => Result;
     /**
      * Visit a parse tree produced by `ImpalaSqlParser.type`.
      * @param ctx the parse tree

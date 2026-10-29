@@ -123,7 +123,7 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
     exitWithItem(ctx: WithItemContext) {
         this.collectCte(
             ctx,
-            ctx.withItemName(),
+            ctx.identifier(),
             ctx.queryStatement(),
             ctx.stop?.tokenIndex ?? -1,
             ctx.columnName()
