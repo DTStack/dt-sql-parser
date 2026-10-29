@@ -362,6 +362,11 @@ interface CteDefinition {
     outward: CommonEntityContext | null;
 }
 
+/**
+ * Strip outer quotes/brackets and lowercase for CTE name matching.
+ * Quoted forms are lowercased too on purpose — loose match for completion UX
+ * across dialects, not dialect-accurate case folding (e.g. PostgreSQL quoted ids).
+ */
 function normalizeIdent(text: string): string {
     let value = text.trim();
     if (
