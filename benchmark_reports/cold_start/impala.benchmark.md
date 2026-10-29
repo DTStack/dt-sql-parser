@@ -4,16 +4,16 @@
 ImpalaSQL
 
 ### Report Time
-2024/12/18 14:50:08
+2026/9/24 14:45:40
 
 ### Device
-macOS 15.0.1
-(8) arm64 Apple M1 Pro
+macOS 15.7.9
+(8) arm64 Apple M3
 16.00 GB
 
 ### Version
-`nodejs`: v21.6.1
-`dt-sql-parser`: v4.1.0-beta.0
+`nodejs`: v22.23.1
+`dt-sql-parser`: v4.5.1
 `antlr4-c3`: v3.3.7
 `antlr4ng`: v2.0.11
 
@@ -23,17 +23,17 @@ Cold Start
 ### Report
 |  Benchmark Name |           Method Name           |SQL Rows|Average Time(ms)| 
 |-----------------|---------------------------------|--------|----------------| 
-| Query Collection|           getAllTokens          |  1015  |       77       | 
-| Query Collection|             validate            |  1015  |       72       | 
-|   Update Table  |           getAllTokens          |  1011  |       120      | 
-|   Update Table  |             validate            |  1011  |       121      | 
-|  Insert Columns |           getAllTokens          |  1001  |       218      | 
-|  Insert Columns |             validate            |  1001  |       217      | 
-|   Create Table  |           getAllTokens          |  1002  |       25       | 
-|   Create Table  |             validate            |  1002  |       25       | 
-|    Split SQL    |       splitSQLByStatement       |  1001  |       67       | 
-| Collect Entities|          getAllEntities         |  1066  |       93       | 
+| Query Collection|           getAllTokens          |  1015  |       94       | 
+| Query Collection|             validate            |  1015  |       79       | 
+|   Update Table  |           getAllTokens          |  1011  |       95       | 
+|   Update Table  |             validate            |  1011  |       95       | 
+|  Insert Columns |           getAllTokens          |  1001  |       121      | 
+|  Insert Columns |             validate            |  1001  |       120      | 
+|   Create Table  |           getAllTokens          |  1002  |       15       | 
+|   Create Table  |             validate            |  1002  |       15       | 
+|    Split SQL    |       splitSQLByStatement       |  1001  |       53       | 
+| Collect Entities|          getAllEntities         |  1066  |       105      | 
 |    Suggestion   |   getSuggestionAtCaretPosition  |  1066  |       101      | 
-|Collect Semantics|getSemanticContextAtCaretPosition|  1015  |       80       | 
+|Collect Semantics|getSemanticContextAtCaretPosition|  1015  |       93       | 
 
 
