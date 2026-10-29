@@ -10,6 +10,7 @@ import {
     CreateMaterializedViewStatementContext,
     CreateTableStatementContext,
     CreateViewStatementContext,
+    CteStatementContext,
     DbSchemaNameContext,
     DbSchemaNameCreateContext,
     FromInsertStmtContext,
@@ -193,6 +194,17 @@ export class HiveEntityCollector extends EntityCollector implements HiveSqlParse
 
     exitSelectList(ctx: SelectListContext) {
         this.pushEntity(ctx, EntityContextType.QUERY_RESULT);
+    }
+
+    exitCteStatement(ctx: CteStatementContext) {
+        const columns = ctx.columnNameList()?.columnName() ?? [];
+        this.collectCte(
+            ctx,
+            ctx.id_(),
+            ctx.queryStatementExpression(),
+            ctx.stop?.tokenIndex ?? -1,
+            columns
+        );
     }
 
     exitViewName(ctx: ViewNameContext) {

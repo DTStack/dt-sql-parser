@@ -608,6 +608,7 @@ primaryExpression
     | value=primaryExpression '[' index=valueExpression ']'                                                                 # subscript
     | columnName                                                                                                            # columnReference
     | base=primaryExpression '.' fieldName=identifier                                                                       # dereference
+    | base=primaryExpression '.' {this.caretTokenIndex >= 0 && this.shouldMatchEmpty()}? emptyColumn                        # dereference
     | name=KW_CURRENT_DATE                                                                                                  # currentDate
     | name=KW_CURRENT_TIME ('(' precision=INTEGER_VALUE ')')?                                                               # currentTime
     | name=KW_CURRENT_TIMESTAMP ('(' precision=INTEGER_VALUE ')')?                                                          # currentTimestamp

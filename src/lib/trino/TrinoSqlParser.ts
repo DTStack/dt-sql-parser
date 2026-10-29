@@ -11230,7 +11230,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 break;
             }
             this.context!.stop = this.tokenStream.LT(-1);
-            this.state = 2806;
+            this.state = 2810;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 365, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
@@ -11240,7 +11240,7 @@ export class TrinoSqlParser extends SQLParserBase {
                     }
                     previousContext = localContext;
                     {
-                    this.state = 2804;
+                    this.state = 2808;
                     this.errorHandler.sync(this);
                     switch (this.interpreter.adaptivePredict(this.tokenStream, 364, this.context) ) {
                     case 1:
@@ -11249,8 +11249,8 @@ export class TrinoSqlParser extends SQLParserBase {
                         (localContext as SubscriptContext)._value = previousContext;
                         this.pushNewRecursionContext(localContext, _startState, TrinoSqlParser.RULE_primaryExpression);
                         this.state = 2796;
-                        if (!(this.precpred(this.context, 25))) {
-                            throw this.createFailedPredicateException("this.precpred(this.context, 25)");
+                        if (!(this.precpred(this.context, 26))) {
+                            throw this.createFailedPredicateException("this.precpred(this.context, 26)");
                         }
                         this.state = 2797;
                         this.match(TrinoSqlParser.T__7);
@@ -11266,8 +11266,8 @@ export class TrinoSqlParser extends SQLParserBase {
                         (localContext as DereferenceContext)._base = previousContext;
                         this.pushNewRecursionContext(localContext, _startState, TrinoSqlParser.RULE_primaryExpression);
                         this.state = 2801;
-                        if (!(this.precpred(this.context, 23))) {
-                            throw this.createFailedPredicateException("this.precpred(this.context, 23)");
+                        if (!(this.precpred(this.context, 24))) {
+                            throw this.createFailedPredicateException("this.precpred(this.context, 24)");
                         }
                         this.state = 2802;
                         this.match(TrinoSqlParser.T__3);
@@ -11275,10 +11275,29 @@ export class TrinoSqlParser extends SQLParserBase {
                         (localContext as DereferenceContext)._fieldName = this.identifier();
                         }
                         break;
+                    case 3:
+                        {
+                        localContext = new DereferenceContext(new PrimaryExpressionContext(parentContext, parentState));
+                        (localContext as DereferenceContext)._base = previousContext;
+                        this.pushNewRecursionContext(localContext, _startState, TrinoSqlParser.RULE_primaryExpression);
+                        this.state = 2804;
+                        if (!(this.precpred(this.context, 23))) {
+                            throw this.createFailedPredicateException("this.precpred(this.context, 23)");
+                        }
+                        this.state = 2805;
+                        this.match(TrinoSqlParser.T__3);
+                        this.state = 2806;
+                        if (!(this.caretTokenIndex >= 0 && this.shouldMatchEmpty())) {
+                            throw this.createFailedPredicateException("this.caretTokenIndex >= 0 && this.shouldMatchEmpty()");
+                        }
+                        this.state = 2807;
+                        this.emptyColumn();
+                        }
+                        break;
                     }
                     }
                 }
-                this.state = 2808;
+                this.state = 2812;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 365, this.context);
             }
@@ -11305,46 +11324,46 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2809;
+            this.state = 2813;
             this.jsonValueExpression();
-            this.state = 2810;
-            this.match(TrinoSqlParser.T__2);
-            this.state = 2811;
-            localContext._path = this.string_();
             this.state = 2814;
+            this.match(TrinoSqlParser.T__2);
+            this.state = 2815;
+            localContext._path = this.string_();
+            this.state = 2818;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 28) {
                 {
-                this.state = 2812;
+                this.state = 2816;
                 this.match(TrinoSqlParser.KW_AS);
-                this.state = 2813;
+                this.state = 2817;
                 localContext._pathName = this.identifier();
                 }
             }
 
-            this.state = 2825;
+            this.state = 2829;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 204) {
                 {
-                this.state = 2816;
+                this.state = 2820;
                 this.match(TrinoSqlParser.KW_PASSING);
-                this.state = 2817;
+                this.state = 2821;
                 this.jsonArgument();
-                this.state = 2822;
+                this.state = 2826;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 2818;
+                    this.state = 2822;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 2819;
+                    this.state = 2823;
                     this.jsonArgument();
                     }
                     }
-                    this.state = 2824;
+                    this.state = 2828;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
@@ -11374,16 +11393,16 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2827;
+            this.state = 2831;
             this.expression();
-            this.state = 2830;
+            this.state = 2834;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 105) {
                 {
-                this.state = 2828;
+                this.state = 2832;
                 this.match(TrinoSqlParser.KW_FORMAT);
-                this.state = 2829;
+                this.state = 2833;
                 this.jsonRepresentation();
                 }
             }
@@ -11411,16 +11430,16 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2832;
+            this.state = 2836;
             this.match(TrinoSqlParser.KW_JSON);
-            this.state = 2835;
+            this.state = 2839;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 88) {
                 {
-                this.state = 2833;
+                this.state = 2837;
                 this.match(TrinoSqlParser.KW_ENCODING);
-                this.state = 2834;
+                this.state = 2838;
                 _la = this.tokenStream.LA(1);
                 if(!(((((_la - 292)) & ~0x1F) === 0 && ((1 << (_la - 292)) & 7) !== 0))) {
                 this.errorHandler.recoverInline(this);
@@ -11454,11 +11473,11 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2837;
+            this.state = 2841;
             this.jsonValueExpression();
-            this.state = 2838;
+            this.state = 2842;
             this.match(TrinoSqlParser.KW_AS);
-            this.state = 2839;
+            this.state = 2843;
             this.identifier();
             }
         }
@@ -11480,29 +11499,29 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new JsonValueBehaviorContext(this.context, this.state);
         this.enterRule(localContext, 162, TrinoSqlParser.RULE_jsonValueBehavior);
         try {
-            this.state = 2845;
+            this.state = 2849;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.KW_ERROR:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 2841;
+                this.state = 2845;
                 this.match(TrinoSqlParser.KW_ERROR);
                 }
                 break;
             case TrinoSqlParser.KW_NULL:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 2842;
+                this.state = 2846;
                 this.match(TrinoSqlParser.KW_NULL);
                 }
                 break;
             case TrinoSqlParser.KW_DEFAULT:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 2843;
+                this.state = 2847;
                 this.match(TrinoSqlParser.KW_DEFAULT);
-                this.state = 2844;
+                this.state = 2848;
                 this.expression();
                 }
                 break;
@@ -11529,20 +11548,20 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 164, TrinoSqlParser.RULE_jsonQueryWrapperBehavior);
         let _la: number;
         try {
-            this.state = 2858;
+            this.state = 2862;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.KW_WITHOUT:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 2847;
+                this.state = 2851;
                 this.match(TrinoSqlParser.KW_WITHOUT);
-                this.state = 2849;
+                this.state = 2853;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 27) {
                     {
-                    this.state = 2848;
+                    this.state = 2852;
                     this.match(TrinoSqlParser.KW_ARRAY);
                     }
                 }
@@ -11552,14 +11571,14 @@ export class TrinoSqlParser extends SQLParserBase {
             case TrinoSqlParser.KW_WITH:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 2851;
+                this.state = 2855;
                 this.match(TrinoSqlParser.KW_WITH);
-                this.state = 2853;
+                this.state = 2857;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 50 || _la === 281) {
                     {
-                    this.state = 2852;
+                    this.state = 2856;
                     _la = this.tokenStream.LA(1);
                     if(!(_la === 50 || _la === 281)) {
                     this.errorHandler.recoverInline(this);
@@ -11571,12 +11590,12 @@ export class TrinoSqlParser extends SQLParserBase {
                     }
                 }
 
-                this.state = 2856;
+                this.state = 2860;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 27) {
                     {
-                    this.state = 2855;
+                    this.state = 2859;
                     this.match(TrinoSqlParser.KW_ARRAY);
                     }
                 }
@@ -11605,38 +11624,38 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new JsonQueryBehaviorContext(this.context, this.state);
         this.enterRule(localContext, 166, TrinoSqlParser.RULE_jsonQueryBehavior);
         try {
-            this.state = 2866;
+            this.state = 2870;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 376, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 2860;
+                this.state = 2864;
                 this.match(TrinoSqlParser.KW_ERROR);
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 2861;
+                this.state = 2865;
                 this.match(TrinoSqlParser.KW_NULL);
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 2862;
+                this.state = 2866;
                 this.match(TrinoSqlParser.KW_EMPTY);
-                this.state = 2863;
+                this.state = 2867;
                 this.match(TrinoSqlParser.KW_ARRAY);
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 2864;
+                this.state = 2868;
                 this.match(TrinoSqlParser.KW_EMPTY);
-                this.state = 2865;
+                this.state = 2869;
                 this.match(TrinoSqlParser.KW_OBJECT);
                 }
                 break;
@@ -11660,38 +11679,38 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new JsonObjectMemberContext(this.context, this.state);
         this.enterRule(localContext, 168, TrinoSqlParser.RULE_jsonObjectMember);
         try {
-            this.state = 2879;
+            this.state = 2883;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 378, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 2869;
+                this.state = 2873;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 377, this.context) ) {
                 case 1:
                     {
-                    this.state = 2868;
+                    this.state = 2872;
                     this.match(TrinoSqlParser.KW_KEY);
                     }
                     break;
                 }
-                this.state = 2871;
+                this.state = 2875;
                 this.expression();
-                this.state = 2872;
+                this.state = 2876;
                 this.match(TrinoSqlParser.KW_VALUE);
-                this.state = 2873;
+                this.state = 2877;
                 this.jsonValueExpression();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 2875;
+                this.state = 2879;
                 this.expression();
-                this.state = 2876;
+                this.state = 2880;
                 this.match(TrinoSqlParser.T__9);
-                this.state = 2877;
+                this.state = 2881;
                 this.jsonValueExpression();
                 }
                 break;
@@ -11718,7 +11737,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2881;
+            this.state = 2885;
             _la = this.tokenStream.LA(1);
             if(!(_la === 101 || _la === 242)) {
             this.errorHandler.recoverInline(this);
@@ -11747,14 +11766,14 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new StringContext(this.context, this.state);
         this.enterRule(localContext, 172, TrinoSqlParser.RULE_string);
         try {
-            this.state = 2889;
+            this.state = 2893;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.STRING:
                 localContext = new BasicStringLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 2883;
+                this.state = 2887;
                 this.match(TrinoSqlParser.STRING);
                 }
                 break;
@@ -11762,16 +11781,16 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new UnicodeStringLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 2884;
+                this.state = 2888;
                 this.match(TrinoSqlParser.UNICODE_STRING);
-                this.state = 2887;
+                this.state = 2891;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 379, this.context) ) {
                 case 1:
                     {
-                    this.state = 2885;
+                    this.state = 2889;
                     this.match(TrinoSqlParser.KW_UESCAPE);
-                    this.state = 2886;
+                    this.state = 2890;
                     this.match(TrinoSqlParser.STRING);
                     }
                     break;
@@ -11803,7 +11822,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2891;
+            this.state = 2895;
             _la = this.tokenStream.LA(1);
             if(!(((((_la - 313)) & ~0x1F) === 0 && ((1 << (_la - 313)) & 63) !== 0))) {
             this.errorHandler.recoverInline(this);
@@ -11835,7 +11854,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2893;
+            this.state = 2897;
             _la = this.tokenStream.LA(1);
             if(!(_la === 22 || _la === 26 || _la === 255)) {
             this.errorHandler.recoverInline(this);
@@ -11867,14 +11886,14 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2895;
+            this.state = 2899;
             this.match(TrinoSqlParser.KW_INTERVAL);
-            this.state = 2897;
+            this.state = 2901;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 319 || _la === 320) {
                 {
-                this.state = 2896;
+                this.state = 2900;
                 localContext._sign = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 319 || _la === 320)) {
@@ -11887,18 +11906,18 @@ export class TrinoSqlParser extends SQLParserBase {
                 }
             }
 
-            this.state = 2899;
-            this.string_();
-            this.state = 2900;
-            localContext._from_ = this.intervalField();
             this.state = 2903;
+            this.string_();
+            this.state = 2904;
+            localContext._from_ = this.intervalField();
+            this.state = 2907;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 382, this.context) ) {
             case 1:
                 {
-                this.state = 2901;
+                this.state = 2905;
                 this.match(TrinoSqlParser.KW_TO);
-                this.state = 2902;
+                this.state = 2906;
                 localContext._to = this.intervalField();
                 }
                 break;
@@ -11926,7 +11945,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2905;
+            this.state = 2909;
             _la = this.tokenStream.LA(1);
             if(!(_la === 68 || _la === 119 || _la === 171 || _la === 172 || _la === 246 || _la === 311)) {
             this.errorHandler.recoverInline(this);
@@ -11970,7 +11989,7 @@ export class TrinoSqlParser extends SQLParserBase {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 2978;
+            this.state = 2982;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 391, this.context) ) {
             case 1:
@@ -11979,29 +11998,29 @@ export class TrinoSqlParser extends SQLParserBase {
                 this.context = localContext;
                 previousContext = localContext;
 
-                this.state = 2908;
+                this.state = 2912;
                 this.match(TrinoSqlParser.KW_ROW);
-                this.state = 2909;
+                this.state = 2913;
                 this.match(TrinoSqlParser.T__0);
-                this.state = 2910;
+                this.state = 2914;
                 this.rowField();
-                this.state = 2915;
+                this.state = 2919;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 2911;
+                    this.state = 2915;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 2912;
+                    this.state = 2916;
                     this.rowField();
                     }
                     }
-                    this.state = 2917;
+                    this.state = 2921;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 2918;
+                this.state = 2922;
                 this.match(TrinoSqlParser.T__1);
                 }
                 break;
@@ -12010,18 +12029,18 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new IntervalTypeContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 2920;
-                this.match(TrinoSqlParser.KW_INTERVAL);
-                this.state = 2921;
-                (localContext as IntervalTypeContext)._from_ = this.intervalField();
                 this.state = 2924;
+                this.match(TrinoSqlParser.KW_INTERVAL);
+                this.state = 2925;
+                (localContext as IntervalTypeContext)._from_ = this.intervalField();
+                this.state = 2928;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 384, this.context) ) {
                 case 1:
                     {
-                    this.state = 2922;
+                    this.state = 2926;
                     this.match(TrinoSqlParser.KW_TO);
-                    this.state = 2923;
+                    this.state = 2927;
                     (localContext as IntervalTypeContext)._to = this.intervalField();
                     }
                     break;
@@ -12033,28 +12052,28 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new DateTimeTypeContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 2926;
+                this.state = 2930;
                 (localContext as DateTimeTypeContext)._base = this.match(TrinoSqlParser.KW_TIMESTAMP);
-                this.state = 2931;
+                this.state = 2935;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 385, this.context) ) {
                 case 1:
                     {
-                    this.state = 2927;
+                    this.state = 2931;
                     this.match(TrinoSqlParser.T__0);
-                    this.state = 2928;
+                    this.state = 2932;
                     (localContext as DateTimeTypeContext)._precision = this.typeParameter();
-                    this.state = 2929;
+                    this.state = 2933;
                     this.match(TrinoSqlParser.T__1);
                     }
                     break;
                 }
-                this.state = 2936;
+                this.state = 2940;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 386, this.context) ) {
                 case 1:
                     {
-                    this.state = 2933;
+                    this.state = 2937;
                     _la = this.tokenStream.LA(1);
                     if(!(_la === 305 || _la === 307)) {
                     this.errorHandler.recoverInline(this);
@@ -12063,9 +12082,9 @@ export class TrinoSqlParser extends SQLParserBase {
                         this.errorHandler.reportMatch(this);
                         this.consume();
                     }
-                    this.state = 2934;
+                    this.state = 2938;
                     this.match(TrinoSqlParser.KW_TIME);
-                    this.state = 2935;
+                    this.state = 2939;
                     this.match(TrinoSqlParser.KW_ZONE);
                     }
                     break;
@@ -12077,28 +12096,28 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new TimeTypeContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 2938;
+                this.state = 2942;
                 (localContext as TimeTypeContext)._base = this.match(TrinoSqlParser.KW_TIME);
-                this.state = 2943;
+                this.state = 2947;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 387, this.context) ) {
                 case 1:
                     {
-                    this.state = 2939;
+                    this.state = 2943;
                     this.match(TrinoSqlParser.T__0);
-                    this.state = 2940;
+                    this.state = 2944;
                     (localContext as TimeTypeContext)._precision = this.typeParameter();
-                    this.state = 2941;
+                    this.state = 2945;
                     this.match(TrinoSqlParser.T__1);
                     }
                     break;
                 }
-                this.state = 2948;
+                this.state = 2952;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 388, this.context) ) {
                 case 1:
                     {
-                    this.state = 2945;
+                    this.state = 2949;
                     _la = this.tokenStream.LA(1);
                     if(!(_la === 305 || _la === 307)) {
                     this.errorHandler.recoverInline(this);
@@ -12107,9 +12126,9 @@ export class TrinoSqlParser extends SQLParserBase {
                         this.errorHandler.reportMatch(this);
                         this.consume();
                     }
-                    this.state = 2946;
+                    this.state = 2950;
                     this.match(TrinoSqlParser.KW_TIME);
-                    this.state = 2947;
+                    this.state = 2951;
                     this.match(TrinoSqlParser.KW_ZONE);
                     }
                     break;
@@ -12121,9 +12140,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new DoublePrecisionTypeContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 2950;
+                this.state = 2954;
                 this.match(TrinoSqlParser.KW_DOUBLE);
-                this.state = 2951;
+                this.state = 2955;
                 this.match(TrinoSqlParser.KW_PRECISION);
                 }
                 break;
@@ -12132,13 +12151,13 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new LegacyArrayTypeContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 2952;
+                this.state = 2956;
                 this.match(TrinoSqlParser.KW_ARRAY);
-                this.state = 2953;
+                this.state = 2957;
                 this.match(TrinoSqlParser.LT);
-                this.state = 2954;
+                this.state = 2958;
                 this.type_(0);
-                this.state = 2955;
+                this.state = 2959;
                 this.match(TrinoSqlParser.GT);
                 }
                 break;
@@ -12147,17 +12166,17 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new LegacyMapTypeContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 2957;
-                this.match(TrinoSqlParser.KW_MAP);
-                this.state = 2958;
-                this.match(TrinoSqlParser.LT);
-                this.state = 2959;
-                (localContext as LegacyMapTypeContext)._keyType = this.type_(0);
-                this.state = 2960;
-                this.match(TrinoSqlParser.T__2);
                 this.state = 2961;
-                (localContext as LegacyMapTypeContext)._valueType = this.type_(0);
+                this.match(TrinoSqlParser.KW_MAP);
                 this.state = 2962;
+                this.match(TrinoSqlParser.LT);
+                this.state = 2963;
+                (localContext as LegacyMapTypeContext)._keyType = this.type_(0);
+                this.state = 2964;
+                this.match(TrinoSqlParser.T__2);
+                this.state = 2965;
+                (localContext as LegacyMapTypeContext)._valueType = this.type_(0);
+                this.state = 2966;
                 this.match(TrinoSqlParser.GT);
                 }
                 break;
@@ -12166,34 +12185,34 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new GenericTypeContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 2964;
+                this.state = 2968;
                 this.identifier();
-                this.state = 2976;
+                this.state = 2980;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 390, this.context) ) {
                 case 1:
                     {
-                    this.state = 2965;
+                    this.state = 2969;
                     this.match(TrinoSqlParser.T__0);
-                    this.state = 2966;
+                    this.state = 2970;
                     this.typeParameter();
-                    this.state = 2971;
+                    this.state = 2975;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                     while (_la === 3) {
                         {
                         {
-                        this.state = 2967;
+                        this.state = 2971;
                         this.match(TrinoSqlParser.T__2);
-                        this.state = 2968;
+                        this.state = 2972;
                         this.typeParameter();
                         }
                         }
-                        this.state = 2973;
+                        this.state = 2977;
                         this.errorHandler.sync(this);
                         _la = this.tokenStream.LA(1);
                     }
-                    this.state = 2974;
+                    this.state = 2978;
                     this.match(TrinoSqlParser.T__1);
                     }
                     break;
@@ -12202,7 +12221,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 break;
             }
             this.context!.stop = this.tokenStream.LT(-1);
-            this.state = 2989;
+            this.state = 2993;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 393, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
@@ -12215,22 +12234,22 @@ export class TrinoSqlParser extends SQLParserBase {
                     {
                     localContext = new ArrayTypeContext(new TypeContext(parentContext, parentState));
                     this.pushNewRecursionContext(localContext, _startState, TrinoSqlParser.RULE_type);
-                    this.state = 2980;
+                    this.state = 2984;
                     if (!(this.precpred(this.context, 2))) {
                         throw this.createFailedPredicateException("this.precpred(this.context, 2)");
                     }
-                    this.state = 2981;
-                    this.match(TrinoSqlParser.KW_ARRAY);
                     this.state = 2985;
+                    this.match(TrinoSqlParser.KW_ARRAY);
+                    this.state = 2989;
                     this.errorHandler.sync(this);
                     switch (this.interpreter.adaptivePredict(this.tokenStream, 392, this.context) ) {
                     case 1:
                         {
-                        this.state = 2982;
+                        this.state = 2986;
                         this.match(TrinoSqlParser.T__7);
-                        this.state = 2983;
+                        this.state = 2987;
                         this.match(TrinoSqlParser.INTEGER_VALUE);
-                        this.state = 2984;
+                        this.state = 2988;
                         this.match(TrinoSqlParser.T__8);
                         }
                         break;
@@ -12238,7 +12257,7 @@ export class TrinoSqlParser extends SQLParserBase {
                     }
                     }
                 }
-                this.state = 2991;
+                this.state = 2995;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 393, this.context);
             }
@@ -12262,22 +12281,22 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new RowFieldContext(this.context, this.state);
         this.enterRule(localContext, 184, TrinoSqlParser.RULE_rowField);
         try {
-            this.state = 2996;
+            this.state = 3000;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 394, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 2992;
+                this.state = 2996;
                 this.type_(0);
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 2993;
+                this.state = 2997;
                 this.identifier();
-                this.state = 2994;
+                this.state = 2998;
                 this.type_(0);
                 }
                 break;
@@ -12301,13 +12320,13 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new TypeParameterContext(this.context, this.state);
         this.enterRule(localContext, 186, TrinoSqlParser.RULE_typeParameter);
         try {
-            this.state = 3000;
+            this.state = 3004;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.INTEGER_VALUE:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 2998;
+                this.state = 3002;
                 this.match(TrinoSqlParser.INTEGER_VALUE);
                 }
                 break;
@@ -12531,7 +12550,7 @@ export class TrinoSqlParser extends SQLParserBase {
             case TrinoSqlParser.BACKQUOTED_IDENTIFIER:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 2999;
+                this.state = 3003;
                 this.type_(0);
                 }
                 break;
@@ -12559,13 +12578,13 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3002;
+            this.state = 3006;
             this.match(TrinoSqlParser.KW_WHEN);
-            this.state = 3003;
+            this.state = 3007;
             localContext._condition = this.expression();
-            this.state = 3004;
+            this.state = 3008;
             this.match(TrinoSqlParser.KW_THEN);
-            this.state = 3005;
+            this.state = 3009;
             localContext._result = this.expression();
             }
         }
@@ -12589,13 +12608,13 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3007;
+            this.state = 3011;
             this.match(TrinoSqlParser.KW_FILTER);
-            this.state = 3008;
+            this.state = 3012;
             this.match(TrinoSqlParser.T__0);
-            this.state = 3009;
+            this.state = 3013;
             this.whereClause();
-            this.state = 3010;
+            this.state = 3014;
             this.match(TrinoSqlParser.T__1);
             }
         }
@@ -12618,62 +12637,62 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 192, TrinoSqlParser.RULE_mergeCase);
         let _la: number;
         try {
-            this.state = 3076;
+            this.state = 3080;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 403, this.context) ) {
             case 1:
                 localContext = new MergeUpdateContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3012;
-                this.match(TrinoSqlParser.KW_WHEN);
-                this.state = 3013;
-                this.match(TrinoSqlParser.KW_MATCHED);
                 this.state = 3016;
+                this.match(TrinoSqlParser.KW_WHEN);
+                this.state = 3017;
+                this.match(TrinoSqlParser.KW_MATCHED);
+                this.state = 3020;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 25) {
                     {
-                    this.state = 3014;
+                    this.state = 3018;
                     this.match(TrinoSqlParser.KW_AND);
-                    this.state = 3015;
+                    this.state = 3019;
                     (localContext as MergeUpdateContext)._condition = this.expression();
                     }
                 }
 
-                this.state = 3018;
+                this.state = 3022;
                 this.match(TrinoSqlParser.KW_THEN);
-                this.state = 3019;
+                this.state = 3023;
                 this.match(TrinoSqlParser.KW_UPDATE);
-                this.state = 3020;
+                this.state = 3024;
                 this.match(TrinoSqlParser.KW_SET);
-                this.state = 3021;
+                this.state = 3025;
                 (localContext as MergeUpdateContext)._identifier = this.identifier();
                 (localContext as MergeUpdateContext)._targets.push((localContext as MergeUpdateContext)._identifier);
-                this.state = 3022;
+                this.state = 3026;
                 this.match(TrinoSqlParser.EQ);
-                this.state = 3023;
+                this.state = 3027;
                 (localContext as MergeUpdateContext)._expression = this.expression();
                 (localContext as MergeUpdateContext)._values.push((localContext as MergeUpdateContext)._expression);
-                this.state = 3031;
+                this.state = 3035;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 3024;
+                    this.state = 3028;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 3025;
+                    this.state = 3029;
                     (localContext as MergeUpdateContext)._identifier = this.identifier();
                     (localContext as MergeUpdateContext)._targets.push((localContext as MergeUpdateContext)._identifier);
-                    this.state = 3026;
+                    this.state = 3030;
                     this.match(TrinoSqlParser.EQ);
-                    this.state = 3027;
+                    this.state = 3031;
                     (localContext as MergeUpdateContext)._expression = this.expression();
                     (localContext as MergeUpdateContext)._values.push((localContext as MergeUpdateContext)._expression);
                     }
                     }
-                    this.state = 3033;
+                    this.state = 3037;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
@@ -12683,25 +12702,25 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new MergeDeleteContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3034;
-                this.match(TrinoSqlParser.KW_WHEN);
-                this.state = 3035;
-                this.match(TrinoSqlParser.KW_MATCHED);
                 this.state = 3038;
+                this.match(TrinoSqlParser.KW_WHEN);
+                this.state = 3039;
+                this.match(TrinoSqlParser.KW_MATCHED);
+                this.state = 3042;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 25) {
                     {
-                    this.state = 3036;
+                    this.state = 3040;
                     this.match(TrinoSqlParser.KW_AND);
-                    this.state = 3037;
+                    this.state = 3041;
                     (localContext as MergeDeleteContext)._condition = this.expression();
                     }
                 }
 
-                this.state = 3040;
+                this.state = 3044;
                 this.match(TrinoSqlParser.KW_THEN);
-                this.state = 3041;
+                this.state = 3045;
                 this.match(TrinoSqlParser.KW_DELETE);
                 }
                 break;
@@ -12709,85 +12728,85 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new MergeInsertContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3042;
+                this.state = 3046;
                 this.match(TrinoSqlParser.KW_WHEN);
-                this.state = 3043;
-                this.match(TrinoSqlParser.KW_NOT);
-                this.state = 3044;
-                this.match(TrinoSqlParser.KW_MATCHED);
                 this.state = 3047;
+                this.match(TrinoSqlParser.KW_NOT);
+                this.state = 3048;
+                this.match(TrinoSqlParser.KW_MATCHED);
+                this.state = 3051;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 25) {
                     {
-                    this.state = 3045;
+                    this.state = 3049;
                     this.match(TrinoSqlParser.KW_AND);
-                    this.state = 3046;
+                    this.state = 3050;
                     (localContext as MergeInsertContext)._condition = this.expression();
                     }
                 }
 
-                this.state = 3049;
+                this.state = 3053;
                 this.match(TrinoSqlParser.KW_THEN);
-                this.state = 3050;
+                this.state = 3054;
                 this.match(TrinoSqlParser.KW_INSERT);
-                this.state = 3062;
+                this.state = 3066;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 1) {
                     {
-                    this.state = 3051;
+                    this.state = 3055;
                     this.match(TrinoSqlParser.T__0);
-                    this.state = 3052;
+                    this.state = 3056;
                     (localContext as MergeInsertContext)._identifier = this.identifier();
                     (localContext as MergeInsertContext)._targets.push((localContext as MergeInsertContext)._identifier);
-                    this.state = 3057;
+                    this.state = 3061;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                     while (_la === 3) {
                         {
                         {
-                        this.state = 3053;
+                        this.state = 3057;
                         this.match(TrinoSqlParser.T__2);
-                        this.state = 3054;
+                        this.state = 3058;
                         (localContext as MergeInsertContext)._identifier = this.identifier();
                         (localContext as MergeInsertContext)._targets.push((localContext as MergeInsertContext)._identifier);
                         }
                         }
-                        this.state = 3059;
+                        this.state = 3063;
                         this.errorHandler.sync(this);
                         _la = this.tokenStream.LA(1);
                     }
-                    this.state = 3060;
+                    this.state = 3064;
                     this.match(TrinoSqlParser.T__1);
                     }
                 }
 
-                this.state = 3064;
+                this.state = 3068;
                 this.match(TrinoSqlParser.KW_VALUES);
-                this.state = 3065;
+                this.state = 3069;
                 this.match(TrinoSqlParser.T__0);
-                this.state = 3066;
+                this.state = 3070;
                 (localContext as MergeInsertContext)._expression = this.expression();
                 (localContext as MergeInsertContext)._values.push((localContext as MergeInsertContext)._expression);
-                this.state = 3071;
+                this.state = 3075;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 3067;
+                    this.state = 3071;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 3068;
+                    this.state = 3072;
                     (localContext as MergeInsertContext)._expression = this.expression();
                     (localContext as MergeInsertContext)._values.push((localContext as MergeInsertContext)._expression);
                     }
                     }
-                    this.state = 3073;
+                    this.state = 3077;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 3074;
+                this.state = 3078;
                 this.match(TrinoSqlParser.T__1);
                 }
                 break;
@@ -12813,9 +12832,9 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3078;
+            this.state = 3082;
             this.match(TrinoSqlParser.KW_OVER);
-            this.state = 3084;
+            this.state = 3088;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.KW_ABSENT:
@@ -13037,17 +13056,17 @@ export class TrinoSqlParser extends SQLParserBase {
             case TrinoSqlParser.QUOTED_IDENTIFIER:
             case TrinoSqlParser.BACKQUOTED_IDENTIFIER:
                 {
-                this.state = 3079;
+                this.state = 3083;
                 localContext._windowName = this.identifier();
                 }
                 break;
             case TrinoSqlParser.T__0:
                 {
-                this.state = 3080;
+                this.state = 3084;
                 this.match(TrinoSqlParser.T__0);
-                this.state = 3081;
+                this.state = 3085;
                 this.windowSpecification();
-                this.state = 3082;
+                this.state = 3086;
                 this.match(TrinoSqlParser.T__1);
                 }
                 break;
@@ -13077,56 +13096,56 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3095;
+            this.state = 3099;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 169) {
                 {
-                this.state = 3086;
+                this.state = 3090;
                 this.match(TrinoSqlParser.KW_MEASURES);
-                this.state = 3087;
+                this.state = 3091;
                 this.measureDefinition();
-                this.state = 3092;
+                this.state = 3096;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 3088;
+                    this.state = 3092;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 3089;
+                    this.state = 3093;
                     this.measureDefinition();
                     }
                     }
-                    this.state = 3094;
+                    this.state = 3098;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
                 }
             }
 
-            this.state = 3097;
-            this.frameExtent();
             this.state = 3101;
+            this.frameExtent();
+            this.state = 3105;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 21) {
                 {
-                this.state = 3098;
+                this.state = 3102;
                 this.match(TrinoSqlParser.KW_AFTER);
-                this.state = 3099;
+                this.state = 3103;
                 this.match(TrinoSqlParser.KW_MATCH);
-                this.state = 3100;
+                this.state = 3104;
                 this.skipTo();
                 }
             }
 
-            this.state = 3104;
+            this.state = 3108;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 125 || _la === 248) {
                 {
-                this.state = 3103;
+                this.state = 3107;
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 125 || _la === 248)) {
                 this.errorHandler.recoverInline(this);
@@ -13138,72 +13157,72 @@ export class TrinoSqlParser extends SQLParserBase {
                 }
             }
 
-            this.state = 3111;
+            this.state = 3115;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 207) {
                 {
-                this.state = 3106;
+                this.state = 3110;
                 this.match(TrinoSqlParser.KW_PATTERN);
-                this.state = 3107;
+                this.state = 3111;
                 this.match(TrinoSqlParser.T__0);
-                this.state = 3108;
+                this.state = 3112;
                 this.rowPattern(0);
-                this.state = 3109;
+                this.state = 3113;
                 this.match(TrinoSqlParser.T__1);
                 }
             }
 
-            this.state = 3122;
+            this.state = 3126;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 258) {
                 {
-                this.state = 3113;
+                this.state = 3117;
                 this.match(TrinoSqlParser.KW_SUBSET);
-                this.state = 3114;
+                this.state = 3118;
                 this.subsetDefinition();
-                this.state = 3119;
+                this.state = 3123;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 3115;
+                    this.state = 3119;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 3116;
+                    this.state = 3120;
                     this.subsetDefinition();
                     }
                     }
-                    this.state = 3121;
+                    this.state = 3125;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
                 }
             }
 
-            this.state = 3133;
+            this.state = 3137;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 72) {
                 {
-                this.state = 3124;
+                this.state = 3128;
                 this.match(TrinoSqlParser.KW_DEFINE);
-                this.state = 3125;
+                this.state = 3129;
                 this.variableDefinition();
-                this.state = 3130;
+                this.state = 3134;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 3126;
+                    this.state = 3130;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 3127;
+                    this.state = 3131;
                     this.variableDefinition();
                     }
                     }
-                    this.state = 3132;
+                    this.state = 3136;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
@@ -13233,7 +13252,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3135;
+            this.state = 3139;
             localContext._frameType = this.tokenStream.LT(1);
             _la = this.tokenStream.LA(1);
             if(!(_la === 117 || _la === 220 || _la === 241)) {
@@ -13243,18 +13262,18 @@ export class TrinoSqlParser extends SQLParserBase {
                 this.errorHandler.reportMatch(this);
                 this.consume();
             }
-            this.state = 3142;
+            this.state = 3146;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.KW_BETWEEN:
                 {
-                this.state = 3136;
+                this.state = 3140;
                 this.match(TrinoSqlParser.KW_BETWEEN);
-                this.state = 3137;
+                this.state = 3141;
                 localContext._start = this.frameBound();
-                this.state = 3138;
+                this.state = 3142;
                 this.match(TrinoSqlParser.KW_AND);
-                this.state = 3139;
+                this.state = 3143;
                 localContext._end = this.frameBound();
                 }
                 break;
@@ -13513,7 +13532,7 @@ export class TrinoSqlParser extends SQLParserBase {
             case TrinoSqlParser.QUOTED_IDENTIFIER:
             case TrinoSqlParser.BACKQUOTED_IDENTIFIER:
                 {
-                this.state = 3141;
+                this.state = 3145;
                 localContext._start = this.frameBound();
                 }
                 break;
@@ -13541,16 +13560,16 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 200, TrinoSqlParser.RULE_frameBound);
         let _la: number;
         try {
-            this.state = 3153;
+            this.state = 3157;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 415, this.context) ) {
             case 1:
                 localContext = new UnboundedFrameContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3144;
+                this.state = 3148;
                 this.match(TrinoSqlParser.KW_UNBOUNDED);
-                this.state = 3145;
+                this.state = 3149;
                 (localContext as UnboundedFrameContext)._boundType = this.match(TrinoSqlParser.KW_PRECEDING);
                 }
                 break;
@@ -13558,9 +13577,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new UnboundedFrameContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3146;
+                this.state = 3150;
                 this.match(TrinoSqlParser.KW_UNBOUNDED);
-                this.state = 3147;
+                this.state = 3151;
                 (localContext as UnboundedFrameContext)._boundType = this.match(TrinoSqlParser.KW_FOLLOWING);
                 }
                 break;
@@ -13568,9 +13587,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new CurrentRowBoundContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3148;
+                this.state = 3152;
                 this.match(TrinoSqlParser.KW_CURRENT);
-                this.state = 3149;
+                this.state = 3153;
                 this.match(TrinoSqlParser.KW_ROW);
                 }
                 break;
@@ -13578,9 +13597,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new BoundedFrameContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 3150;
+                this.state = 3154;
                 this.expression();
-                this.state = 3151;
+                this.state = 3155;
                 (localContext as BoundedFrameContext)._boundType = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 103 || _la === 213)) {
@@ -13631,21 +13650,21 @@ export class TrinoSqlParser extends SQLParserBase {
             this.context = localContext;
             previousContext = localContext;
 
-            this.state = 3156;
+            this.state = 3160;
             this.patternPrimary();
-            this.state = 3158;
+            this.state = 3162;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 416, this.context) ) {
             case 1:
                 {
-                this.state = 3157;
+                this.state = 3161;
                 this.patternQuantifier();
                 }
                 break;
             }
             }
             this.context!.stop = this.tokenStream.LT(-1);
-            this.state = 3167;
+            this.state = 3171;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 418, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
@@ -13655,18 +13674,18 @@ export class TrinoSqlParser extends SQLParserBase {
                     }
                     previousContext = localContext;
                     {
-                    this.state = 3165;
+                    this.state = 3169;
                     this.errorHandler.sync(this);
                     switch (this.interpreter.adaptivePredict(this.tokenStream, 417, this.context) ) {
                     case 1:
                         {
                         localContext = new PatternConcatenationContext(new RowPatternContext(parentContext, parentState));
                         this.pushNewRecursionContext(localContext, _startState, TrinoSqlParser.RULE_rowPattern);
-                        this.state = 3160;
+                        this.state = 3164;
                         if (!(this.precpred(this.context, 2))) {
                             throw this.createFailedPredicateException("this.precpred(this.context, 2)");
                         }
-                        this.state = 3161;
+                        this.state = 3165;
                         this.rowPattern(3);
                         }
                         break;
@@ -13674,20 +13693,20 @@ export class TrinoSqlParser extends SQLParserBase {
                         {
                         localContext = new PatternAlternationContext(new RowPatternContext(parentContext, parentState));
                         this.pushNewRecursionContext(localContext, _startState, TrinoSqlParser.RULE_rowPattern);
-                        this.state = 3162;
+                        this.state = 3166;
                         if (!(this.precpred(this.context, 1))) {
                             throw this.createFailedPredicateException("this.precpred(this.context, 1)");
                         }
-                        this.state = 3163;
+                        this.state = 3167;
                         this.match(TrinoSqlParser.T__10);
-                        this.state = 3164;
+                        this.state = 3168;
                         this.rowPattern(2);
                         }
                         break;
                     }
                     }
                 }
-                this.state = 3169;
+                this.state = 3173;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 418, this.context);
             }
@@ -13712,14 +13731,14 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 204, TrinoSqlParser.RULE_patternPrimary);
         let _la: number;
         try {
-            this.state = 3195;
+            this.state = 3199;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 420, this.context) ) {
             case 1:
                 localContext = new PatternVariableContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3170;
+                this.state = 3174;
                 this.identifier();
                 }
                 break;
@@ -13727,9 +13746,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new EmptyPatternContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3171;
+                this.state = 3175;
                 this.match(TrinoSqlParser.T__0);
-                this.state = 3172;
+                this.state = 3176;
                 this.match(TrinoSqlParser.T__1);
                 }
                 break;
@@ -13737,29 +13756,29 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new PatternPermutationContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3173;
+                this.state = 3177;
                 this.match(TrinoSqlParser.KW_PERMUTE);
-                this.state = 3174;
+                this.state = 3178;
                 this.match(TrinoSqlParser.T__0);
-                this.state = 3175;
+                this.state = 3179;
                 this.rowPattern(0);
-                this.state = 3180;
+                this.state = 3184;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 3176;
+                    this.state = 3180;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 3177;
+                    this.state = 3181;
                     this.rowPattern(0);
                     }
                     }
-                    this.state = 3182;
+                    this.state = 3186;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 3183;
+                this.state = 3187;
                 this.match(TrinoSqlParser.T__1);
                 }
                 break;
@@ -13767,11 +13786,11 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new GroupedPatternContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 3185;
+                this.state = 3189;
                 this.match(TrinoSqlParser.T__0);
-                this.state = 3186;
+                this.state = 3190;
                 this.rowPattern(0);
-                this.state = 3187;
+                this.state = 3191;
                 this.match(TrinoSqlParser.T__1);
                 }
                 break;
@@ -13779,7 +13798,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new PartitionStartAnchorContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 3189;
+                this.state = 3193;
                 this.match(TrinoSqlParser.T__11);
                 }
                 break;
@@ -13787,7 +13806,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new PartitionEndAnchorContext(localContext);
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 3190;
+                this.state = 3194;
                 this.match(TrinoSqlParser.T__12);
                 }
                 break;
@@ -13795,11 +13814,11 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new ExcludedPatternContext(localContext);
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 3191;
+                this.state = 3195;
                 this.match(TrinoSqlParser.T__13);
-                this.state = 3192;
+                this.state = 3196;
                 this.rowPattern(0);
-                this.state = 3193;
+                this.state = 3197;
                 this.match(TrinoSqlParser.T__14);
                 }
                 break;
@@ -13824,21 +13843,21 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 206, TrinoSqlParser.RULE_patternQuantifier);
         let _la: number;
         try {
-            this.state = 3227;
+            this.state = 3231;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 428, this.context) ) {
             case 1:
                 localContext = new ZeroOrMoreQuantifierContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3197;
+                this.state = 3201;
                 this.match(TrinoSqlParser.ASTERISK);
-                this.state = 3199;
+                this.state = 3203;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 421, this.context) ) {
                 case 1:
                     {
-                    this.state = 3198;
+                    this.state = 3202;
                     (localContext as ZeroOrMoreQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
                     }
                     break;
@@ -13849,14 +13868,14 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new OneOrMoreQuantifierContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3201;
+                this.state = 3205;
                 this.match(TrinoSqlParser.PLUS);
-                this.state = 3203;
+                this.state = 3207;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 422, this.context) ) {
                 case 1:
                     {
-                    this.state = 3202;
+                    this.state = 3206;
                     (localContext as OneOrMoreQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
                     }
                     break;
@@ -13867,14 +13886,14 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new ZeroOrOneQuantifierContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3205;
+                this.state = 3209;
                 this.match(TrinoSqlParser.QUESTION_MARK);
-                this.state = 3207;
+                this.state = 3211;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 423, this.context) ) {
                 case 1:
                     {
-                    this.state = 3206;
+                    this.state = 3210;
                     (localContext as ZeroOrOneQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
                     }
                     break;
@@ -13885,18 +13904,18 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new RangeQuantifierContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 3209;
-                this.match(TrinoSqlParser.T__15);
-                this.state = 3210;
-                (localContext as RangeQuantifierContext)._exactly = this.match(TrinoSqlParser.INTEGER_VALUE);
-                this.state = 3211;
-                this.match(TrinoSqlParser.T__16);
                 this.state = 3213;
+                this.match(TrinoSqlParser.T__15);
+                this.state = 3214;
+                (localContext as RangeQuantifierContext)._exactly = this.match(TrinoSqlParser.INTEGER_VALUE);
+                this.state = 3215;
+                this.match(TrinoSqlParser.T__16);
+                this.state = 3217;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 424, this.context) ) {
                 case 1:
                     {
-                    this.state = 3212;
+                    this.state = 3216;
                     (localContext as RangeQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
                     }
                     break;
@@ -13907,38 +13926,38 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new RangeQuantifierContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 3215;
-                this.match(TrinoSqlParser.T__15);
-                this.state = 3217;
-                this.errorHandler.sync(this);
-                _la = this.tokenStream.LA(1);
-                if (_la === 330) {
-                    {
-                    this.state = 3216;
-                    (localContext as RangeQuantifierContext)._atLeast = this.match(TrinoSqlParser.INTEGER_VALUE);
-                    }
-                }
-
                 this.state = 3219;
-                this.match(TrinoSqlParser.T__2);
+                this.match(TrinoSqlParser.T__15);
                 this.state = 3221;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 330) {
                     {
                     this.state = 3220;
-                    (localContext as RangeQuantifierContext)._atMost = this.match(TrinoSqlParser.INTEGER_VALUE);
+                    (localContext as RangeQuantifierContext)._atLeast = this.match(TrinoSqlParser.INTEGER_VALUE);
                     }
                 }
 
                 this.state = 3223;
-                this.match(TrinoSqlParser.T__16);
+                this.match(TrinoSqlParser.T__2);
                 this.state = 3225;
+                this.errorHandler.sync(this);
+                _la = this.tokenStream.LA(1);
+                if (_la === 330) {
+                    {
+                    this.state = 3224;
+                    (localContext as RangeQuantifierContext)._atMost = this.match(TrinoSqlParser.INTEGER_VALUE);
+                    }
+                }
+
+                this.state = 3227;
+                this.match(TrinoSqlParser.T__16);
+                this.state = 3229;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 427, this.context) ) {
                 case 1:
                     {
-                    this.state = 3224;
+                    this.state = 3228;
                     (localContext as RangeQuantifierContext)._reluctant = this.match(TrinoSqlParser.QUESTION_MARK);
                     }
                     break;
@@ -13967,11 +13986,11 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3229;
+            this.state = 3233;
             this.identifier();
-            this.state = 3230;
+            this.state = 3234;
             this.match(TrinoSqlParser.EQ);
-            this.state = 3231;
+            this.state = 3235;
             this.expression();
             }
         }
@@ -13994,16 +14013,16 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 210, TrinoSqlParser.RULE_explainOption);
         let _la: number;
         try {
-            this.state = 3237;
+            this.state = 3241;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.KW_FORMAT:
                 localContext = new ExplainFormatContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3233;
+                this.state = 3237;
                 this.match(TrinoSqlParser.KW_FORMAT);
-                this.state = 3234;
+                this.state = 3238;
                 (localContext as ExplainFormatContext)._value = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 114 || _la === 138 || _la === 264)) {
@@ -14019,9 +14038,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new ExplainTypeContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3235;
+                this.state = 3239;
                 this.match(TrinoSqlParser.KW_TYPE);
-                this.state = 3236;
+                this.state = 3240;
                 (localContext as ExplainTypeContext)._value = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 81 || _la === 133 || _la === 161 || _la === 295)) {
@@ -14056,47 +14075,47 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 212, TrinoSqlParser.RULE_transactionMode);
         let _la: number;
         try {
-            this.state = 3252;
+            this.state = 3256;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.KW_ISOLATION:
                 localContext = new IsolationLevelContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3239;
+                this.state = 3243;
                 this.match(TrinoSqlParser.KW_ISOLATION);
-                this.state = 3240;
+                this.state = 3244;
                 this.match(TrinoSqlParser.KW_LEVEL);
-                this.state = 3248;
+                this.state = 3252;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 430, this.context) ) {
                 case 1:
                     {
-                    this.state = 3241;
+                    this.state = 3245;
                     this.match(TrinoSqlParser.KW_READ);
-                    this.state = 3242;
+                    this.state = 3246;
                     this.match(TrinoSqlParser.KW_UNCOMMITTED);
                     }
                     break;
                 case 2:
                     {
-                    this.state = 3243;
+                    this.state = 3247;
                     this.match(TrinoSqlParser.KW_READ);
-                    this.state = 3244;
+                    this.state = 3248;
                     this.match(TrinoSqlParser.KW_COMMITTED);
                     }
                     break;
                 case 3:
                     {
-                    this.state = 3245;
+                    this.state = 3249;
                     this.match(TrinoSqlParser.KW_REPEATABLE);
-                    this.state = 3246;
+                    this.state = 3250;
                     this.match(TrinoSqlParser.KW_READ);
                     }
                     break;
                 case 4:
                     {
-                    this.state = 3247;
+                    this.state = 3251;
                     this.match(TrinoSqlParser.KW_SERIALIZABLE);
                     }
                     break;
@@ -14107,9 +14126,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new TransactionAccessModeContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3250;
+                this.state = 3254;
                 this.match(TrinoSqlParser.KW_READ);
-                this.state = 3251;
+                this.state = 3255;
                 (localContext as TransactionAccessModeContext)._accessMode = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 193 || _la === 310)) {
@@ -14143,14 +14162,14 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new CallArgumentContext(this.context, this.state);
         this.enterRule(localContext, 214, TrinoSqlParser.RULE_callArgument);
         try {
-            this.state = 3259;
+            this.state = 3263;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 432, this.context) ) {
             case 1:
                 localContext = new PositionalArgumentContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3254;
+                this.state = 3258;
                 this.expression();
                 }
                 break;
@@ -14158,11 +14177,11 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new NamedArgumentContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3255;
+                this.state = 3259;
                 this.identifier();
-                this.state = 3256;
+                this.state = 3260;
                 this.match(TrinoSqlParser.T__5);
-                this.state = 3257;
+                this.state = 3261;
                 this.expression();
                 }
                 break;
@@ -14186,18 +14205,18 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new PathElementContext(this.context, this.state);
         this.enterRule(localContext, 216, TrinoSqlParser.RULE_pathElement);
         try {
-            this.state = 3266;
+            this.state = 3270;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 433, this.context) ) {
             case 1:
                 localContext = new QualifiedArgumentContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3261;
+                this.state = 3265;
                 this.identifier();
-                this.state = 3262;
+                this.state = 3266;
                 this.match(TrinoSqlParser.T__3);
-                this.state = 3263;
+                this.state = 3267;
                 this.identifier();
                 }
                 break;
@@ -14205,7 +14224,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new UnqualifiedArgumentContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3265;
+                this.state = 3269;
                 this.identifier();
                 }
                 break;
@@ -14232,21 +14251,21 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3268;
+            this.state = 3272;
             this.pathElement();
-            this.state = 3273;
+            this.state = 3277;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 3) {
                 {
                 {
-                this.state = 3269;
+                this.state = 3273;
                 this.match(TrinoSqlParser.T__2);
-                this.state = 3270;
+                this.state = 3274;
                 this.pathElement();
                 }
                 }
-                this.state = 3275;
+                this.state = 3279;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -14274,61 +14293,61 @@ export class TrinoSqlParser extends SQLParserBase {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3276;
+            this.state = 3280;
             this.match(TrinoSqlParser.KW_FUNCTION);
-            this.state = 3277;
+            this.state = 3281;
             this.functionNameCreate();
-            this.state = 3278;
+            this.state = 3282;
             this.match(TrinoSqlParser.T__0);
-            this.state = 3287;
+            this.state = 3291;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (((((_la - 18)) & ~0x1F) === 0 && ((1 << (_la - 18)) & 4282055519) !== 0) || ((((_la - 50)) & ~0x1F) === 0 && ((1 << (_la - 50)) & 3069640845) !== 0) || ((((_la - 82)) & ~0x1F) === 0 && ((1 << (_la - 82)) & 4240329075) !== 0) || ((((_la - 114)) & ~0x1F) === 0 && ((1 << (_la - 114)) & 2171416041) !== 0) || ((((_la - 146)) & ~0x1F) === 0 && ((1 << (_la - 146)) & 4160722303) !== 0) || ((((_la - 178)) & ~0x1F) === 0 && ((1 << (_la - 178)) & 4293517199) !== 0) || ((((_la - 210)) & ~0x1F) === 0 && ((1 << (_la - 210)) & 3724537823) !== 0) || ((((_la - 242)) & ~0x1F) === 0 && ((1 << (_la - 242)) & 2130182015) !== 0) || ((((_la - 275)) & ~0x1F) === 0 && ((1 << (_la - 275)) & 3015636855) !== 0) || ((((_la - 307)) & ~0x1F) === 0 && ((1 << (_la - 307)) & 1006633023) !== 0)) {
                 {
-                this.state = 3279;
+                this.state = 3283;
                 this.parameterDeclaration();
-                this.state = 3284;
+                this.state = 3288;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 3) {
                     {
                     {
-                    this.state = 3280;
+                    this.state = 3284;
                     this.match(TrinoSqlParser.T__2);
-                    this.state = 3281;
+                    this.state = 3285;
                     this.parameterDeclaration();
                     }
                     }
-                    this.state = 3286;
+                    this.state = 3290;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
                 }
             }
 
-            this.state = 3289;
+            this.state = 3293;
             this.match(TrinoSqlParser.T__1);
-            this.state = 3290;
+            this.state = 3294;
             this.match(TrinoSqlParser.KW_RETURNS);
-            this.state = 3291;
-            this.type_(0);
             this.state = 3295;
+            this.type_(0);
+            this.state = 3299;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 437, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
                 if (alternative === 1) {
                     {
                     {
-                    this.state = 3292;
+                    this.state = 3296;
                     this.routineCharacteristic();
                     }
                     }
                 }
-                this.state = 3297;
+                this.state = 3301;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 437, this.context);
             }
-            this.state = 3298;
+            this.state = 3302;
             this.controlStatement();
             }
         }
@@ -14352,17 +14371,17 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3301;
+            this.state = 3305;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 438, this.context) ) {
             case 1:
                 {
-                this.state = 3300;
+                this.state = 3304;
                 this.identifier();
                 }
                 break;
             }
-            this.state = 3303;
+            this.state = 3307;
             this.type_(0);
             }
         }
@@ -14385,16 +14404,16 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 224, TrinoSqlParser.RULE_routineCharacteristic);
         let _la: number;
         try {
-            this.state = 3324;
+            this.state = 3328;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.KW_LANGUAGE:
                 localContext = new LanguageCharacteristicContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3305;
+                this.state = 3309;
                 this.match(TrinoSqlParser.KW_LANGUAGE);
-                this.state = 3306;
+                this.state = 3310;
                 this.identifier();
                 }
                 break;
@@ -14403,17 +14422,17 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new DeterministicCharacteristicContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3308;
+                this.state = 3312;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 183) {
                     {
-                    this.state = 3307;
+                    this.state = 3311;
                     this.match(TrinoSqlParser.KW_NOT);
                     }
                 }
 
-                this.state = 3310;
+                this.state = 3314;
                 this.match(TrinoSqlParser.KW_DETERMINISTIC);
                 }
                 break;
@@ -14421,24 +14440,10 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new ReturnsNullOnNullInputCharacteristicContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3311;
-                this.match(TrinoSqlParser.KW_RETURNS);
-                this.state = 3312;
-                this.match(TrinoSqlParser.KW_NULL);
-                this.state = 3313;
-                this.match(TrinoSqlParser.KW_ON);
-                this.state = 3314;
-                this.match(TrinoSqlParser.KW_NULL);
                 this.state = 3315;
-                this.match(TrinoSqlParser.KW_INPUT);
-                }
-                break;
-            case TrinoSqlParser.KW_CALLED:
-                localContext = new CalledOnNullInputCharacteristicContext(localContext);
-                this.enterOuterAlt(localContext, 4);
-                {
+                this.match(TrinoSqlParser.KW_RETURNS);
                 this.state = 3316;
-                this.match(TrinoSqlParser.KW_CALLED);
+                this.match(TrinoSqlParser.KW_NULL);
                 this.state = 3317;
                 this.match(TrinoSqlParser.KW_ON);
                 this.state = 3318;
@@ -14447,13 +14452,27 @@ export class TrinoSqlParser extends SQLParserBase {
                 this.match(TrinoSqlParser.KW_INPUT);
                 }
                 break;
+            case TrinoSqlParser.KW_CALLED:
+                localContext = new CalledOnNullInputCharacteristicContext(localContext);
+                this.enterOuterAlt(localContext, 4);
+                {
+                this.state = 3320;
+                this.match(TrinoSqlParser.KW_CALLED);
+                this.state = 3321;
+                this.match(TrinoSqlParser.KW_ON);
+                this.state = 3322;
+                this.match(TrinoSqlParser.KW_NULL);
+                this.state = 3323;
+                this.match(TrinoSqlParser.KW_INPUT);
+                }
+                break;
             case TrinoSqlParser.KW_SECURITY:
                 localContext = new SecurityCharacteristicContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 3320;
+                this.state = 3324;
                 this.match(TrinoSqlParser.KW_SECURITY);
-                this.state = 3321;
+                this.state = 3325;
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 73 || _la === 132)) {
                 this.errorHandler.recoverInline(this);
@@ -14468,9 +14487,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new CommentCharacteristicContext(localContext);
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 3322;
+                this.state = 3326;
                 this.match(TrinoSqlParser.KW_COMMENT);
-                this.state = 3323;
+                this.state = 3327;
                 this.string_();
                 }
                 break;
@@ -14498,16 +14517,16 @@ export class TrinoSqlParser extends SQLParserBase {
         let _la: number;
         try {
             let alternative: number;
-            this.state = 3442;
+            this.state = 3446;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 454, this.context) ) {
             case 1:
                 localContext = new ReturnStatementContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3326;
+                this.state = 3330;
                 this.match(TrinoSqlParser.KW_RETURN);
-                this.state = 3327;
+                this.state = 3331;
                 this.valueExpression(0);
                 }
                 break;
@@ -14515,13 +14534,13 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new AssignmentStatementContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3328;
+                this.state = 3332;
                 this.match(TrinoSqlParser.KW_SET);
-                this.state = 3329;
+                this.state = 3333;
                 this.identifier();
-                this.state = 3330;
+                this.state = 3334;
                 this.match(TrinoSqlParser.EQ);
-                this.state = 3331;
+                this.state = 3335;
                 this.expression();
                 }
                 break;
@@ -14529,37 +14548,37 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new SimpleCaseStatementContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3333;
+                this.state = 3337;
                 this.match(TrinoSqlParser.KW_CASE);
-                this.state = 3334;
+                this.state = 3338;
                 this.expression();
-                this.state = 3336;
+                this.state = 3340;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 do {
                     {
                     {
-                    this.state = 3335;
+                    this.state = 3339;
                     this.caseStatementWhenClause();
                     }
                     }
-                    this.state = 3338;
+                    this.state = 3342;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 } while (_la === 301);
-                this.state = 3341;
+                this.state = 3345;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 85) {
                     {
-                    this.state = 3340;
+                    this.state = 3344;
                     this.elseClause();
                     }
                 }
 
-                this.state = 3343;
+                this.state = 3347;
                 this.match(TrinoSqlParser.KW_END);
-                this.state = 3344;
+                this.state = 3348;
                 this.match(TrinoSqlParser.KW_CASE);
                 }
                 break;
@@ -14567,35 +14586,35 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new SearchedCaseStatementContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 3346;
+                this.state = 3350;
                 this.match(TrinoSqlParser.KW_CASE);
-                this.state = 3348;
+                this.state = 3352;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 do {
                     {
                     {
-                    this.state = 3347;
+                    this.state = 3351;
                     this.caseStatementWhenClause();
                     }
                     }
-                    this.state = 3350;
+                    this.state = 3354;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 } while (_la === 301);
-                this.state = 3353;
+                this.state = 3357;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 85) {
                     {
-                    this.state = 3352;
+                    this.state = 3356;
                     this.elseClause();
                     }
                 }
 
-                this.state = 3355;
+                this.state = 3359;
                 this.match(TrinoSqlParser.KW_END);
-                this.state = 3356;
+                this.state = 3360;
                 this.match(TrinoSqlParser.KW_CASE);
                 }
                 break;
@@ -14603,47 +14622,47 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new IfStatementContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 3358;
+                this.state = 3362;
                 this.match(TrinoSqlParser.KW_IF);
-                this.state = 3359;
+                this.state = 3363;
                 this.expression();
-                this.state = 3360;
+                this.state = 3364;
                 this.match(TrinoSqlParser.KW_THEN);
-                this.state = 3361;
+                this.state = 3365;
                 this.sqlStatementList();
-                this.state = 3369;
+                this.state = 3373;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 87) {
                     {
                     {
-                    this.state = 3362;
+                    this.state = 3366;
                     this.match(TrinoSqlParser.KW_ELSEIF);
-                    this.state = 3363;
+                    this.state = 3367;
                     this.expression();
-                    this.state = 3364;
+                    this.state = 3368;
                     this.match(TrinoSqlParser.KW_THEN);
-                    this.state = 3365;
+                    this.state = 3369;
                     this.sqlStatementList();
                     }
                     }
-                    this.state = 3371;
+                    this.state = 3375;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 3373;
+                this.state = 3377;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 85) {
                     {
-                    this.state = 3372;
+                    this.state = 3376;
                     this.elseClause();
                     }
                 }
 
-                this.state = 3375;
+                this.state = 3379;
                 this.match(TrinoSqlParser.KW_END);
-                this.state = 3376;
+                this.state = 3380;
                 this.match(TrinoSqlParser.KW_IF);
                 }
                 break;
@@ -14651,9 +14670,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new IterateStatementContext(localContext);
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 3378;
+                this.state = 3382;
                 this.match(TrinoSqlParser.KW_ITERATE);
-                this.state = 3379;
+                this.state = 3383;
                 this.identifier();
                 }
                 break;
@@ -14661,9 +14680,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new LeaveStatementContext(localContext);
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 3380;
+                this.state = 3384;
                 this.match(TrinoSqlParser.KW_LEAVE);
-                this.state = 3381;
+                this.state = 3385;
                 this.identifier();
                 }
                 break;
@@ -14671,69 +14690,69 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new CompoundStatementContext(localContext);
                 this.enterOuterAlt(localContext, 8);
                 {
-                this.state = 3382;
+                this.state = 3386;
                 this.match(TrinoSqlParser.KW_BEGIN);
-                this.state = 3401;
+                this.state = 3405;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 449, this.context);
                 while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
                     if (alternative === 1) {
                         {
                         {
-                        this.state = 3383;
+                        this.state = 3387;
                         this.match(TrinoSqlParser.KW_DECLARE);
-                        this.state = 3384;
+                        this.state = 3388;
                         this.identifier();
-                        this.state = 3389;
+                        this.state = 3393;
                         this.errorHandler.sync(this);
                         _la = this.tokenStream.LA(1);
                         while (_la === 3) {
                             {
                             {
-                            this.state = 3385;
+                            this.state = 3389;
                             this.match(TrinoSqlParser.T__2);
-                            this.state = 3386;
+                            this.state = 3390;
                             this.identifier();
                             }
                             }
-                            this.state = 3391;
+                            this.state = 3395;
                             this.errorHandler.sync(this);
                             _la = this.tokenStream.LA(1);
                         }
-                        this.state = 3392;
+                        this.state = 3396;
                         this.type_(0);
-                        this.state = 3395;
+                        this.state = 3399;
                         this.errorHandler.sync(this);
                         _la = this.tokenStream.LA(1);
                         if (_la === 71) {
                             {
-                            this.state = 3393;
+                            this.state = 3397;
                             this.match(TrinoSqlParser.KW_DEFAULT);
-                            this.state = 3394;
+                            this.state = 3398;
                             this.valueExpression(0);
                             }
                         }
 
-                        this.state = 3397;
+                        this.state = 3401;
                         this.match(TrinoSqlParser.SEMICOLON);
                         }
                         }
                     }
-                    this.state = 3403;
+                    this.state = 3407;
                     this.errorHandler.sync(this);
                     alternative = this.interpreter.adaptivePredict(this.tokenStream, 449, this.context);
                 }
-                this.state = 3405;
+                this.state = 3409;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (((((_la - 18)) & ~0x1F) === 0 && ((1 << (_la - 18)) & 4286249823) !== 0) || ((((_la - 50)) & ~0x1F) === 0 && ((1 << (_la - 50)) & 3069640845) !== 0) || ((((_la - 82)) & ~0x1F) === 0 && ((1 << (_la - 82)) & 4240329075) !== 0) || ((((_la - 114)) & ~0x1F) === 0 && ((1 << (_la - 114)) & 2171416041) !== 0) || ((((_la - 146)) & ~0x1F) === 0 && ((1 << (_la - 146)) & 4160722303) !== 0) || ((((_la - 178)) & ~0x1F) === 0 && ((1 << (_la - 178)) & 4293517199) !== 0) || ((((_la - 210)) & ~0x1F) === 0 && ((1 << (_la - 210)) & 3724537823) !== 0) || ((((_la - 242)) & ~0x1F) === 0 && ((1 << (_la - 242)) & 2130182015) !== 0) || ((((_la - 275)) & ~0x1F) === 0 && ((1 << (_la - 275)) & 3015636855) !== 0) || ((((_la - 307)) & ~0x1F) === 0 && ((1 << (_la - 307)) & 1006633023) !== 0)) {
                     {
-                    this.state = 3404;
+                    this.state = 3408;
                     this.sqlStatementList();
                     }
                 }
 
-                this.state = 3407;
+                this.state = 3411;
                 this.match(TrinoSqlParser.KW_END);
                 }
                 break;
@@ -14741,25 +14760,25 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new LoopStatementContext(localContext);
                 this.enterOuterAlt(localContext, 9);
                 {
-                this.state = 3411;
+                this.state = 3415;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 451, this.context) ) {
                 case 1:
                     {
-                    this.state = 3408;
+                    this.state = 3412;
                     (localContext as LoopStatementContext)._label = this.identifier();
-                    this.state = 3409;
+                    this.state = 3413;
                     this.match(TrinoSqlParser.T__9);
                     }
                     break;
                 }
-                this.state = 3413;
+                this.state = 3417;
                 this.match(TrinoSqlParser.KW_LOOP);
-                this.state = 3414;
+                this.state = 3418;
                 this.sqlStatementList();
-                this.state = 3415;
+                this.state = 3419;
                 this.match(TrinoSqlParser.KW_END);
-                this.state = 3416;
+                this.state = 3420;
                 this.match(TrinoSqlParser.KW_LOOP);
                 }
                 break;
@@ -14767,29 +14786,29 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new WhileStatementContext(localContext);
                 this.enterOuterAlt(localContext, 10);
                 {
-                this.state = 3421;
+                this.state = 3425;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 452, this.context) ) {
                 case 1:
                     {
-                    this.state = 3418;
+                    this.state = 3422;
                     (localContext as WhileStatementContext)._label = this.identifier();
-                    this.state = 3419;
+                    this.state = 3423;
                     this.match(TrinoSqlParser.T__9);
                     }
                     break;
                 }
-                this.state = 3423;
-                this.match(TrinoSqlParser.KW_WHILE);
-                this.state = 3424;
-                this.expression();
-                this.state = 3425;
-                this.match(TrinoSqlParser.KW_DO);
-                this.state = 3426;
-                this.sqlStatementList();
                 this.state = 3427;
-                this.match(TrinoSqlParser.KW_END);
+                this.match(TrinoSqlParser.KW_WHILE);
                 this.state = 3428;
+                this.expression();
+                this.state = 3429;
+                this.match(TrinoSqlParser.KW_DO);
+                this.state = 3430;
+                this.sqlStatementList();
+                this.state = 3431;
+                this.match(TrinoSqlParser.KW_END);
+                this.state = 3432;
                 this.match(TrinoSqlParser.KW_WHILE);
                 }
                 break;
@@ -14797,29 +14816,29 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new RepeatStatementContext(localContext);
                 this.enterOuterAlt(localContext, 11);
                 {
-                this.state = 3433;
+                this.state = 3437;
                 this.errorHandler.sync(this);
                 switch (this.interpreter.adaptivePredict(this.tokenStream, 453, this.context) ) {
                 case 1:
                     {
-                    this.state = 3430;
+                    this.state = 3434;
                     (localContext as RepeatStatementContext)._label = this.identifier();
-                    this.state = 3431;
+                    this.state = 3435;
                     this.match(TrinoSqlParser.T__9);
                     }
                     break;
                 }
-                this.state = 3435;
-                this.match(TrinoSqlParser.KW_REPEAT);
-                this.state = 3436;
-                this.sqlStatementList();
-                this.state = 3437;
-                this.match(TrinoSqlParser.KW_UNTIL);
-                this.state = 3438;
-                this.expression();
                 this.state = 3439;
-                this.match(TrinoSqlParser.KW_END);
+                this.match(TrinoSqlParser.KW_REPEAT);
                 this.state = 3440;
+                this.sqlStatementList();
+                this.state = 3441;
+                this.match(TrinoSqlParser.KW_UNTIL);
+                this.state = 3442;
+                this.expression();
+                this.state = 3443;
+                this.match(TrinoSqlParser.KW_END);
+                this.state = 3444;
                 this.match(TrinoSqlParser.KW_REPEAT);
                 }
                 break;
@@ -14845,13 +14864,13 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3444;
+            this.state = 3448;
             this.match(TrinoSqlParser.KW_WHEN);
-            this.state = 3445;
+            this.state = 3449;
             this.expression();
-            this.state = 3446;
+            this.state = 3450;
             this.match(TrinoSqlParser.KW_THEN);
-            this.state = 3447;
+            this.state = 3451;
             this.sqlStatementList();
             }
         }
@@ -14875,9 +14894,9 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3449;
+            this.state = 3453;
             this.match(TrinoSqlParser.KW_ELSE);
-            this.state = 3450;
+            this.state = 3454;
             this.sqlStatementList();
             }
         }
@@ -14902,7 +14921,7 @@ export class TrinoSqlParser extends SQLParserBase {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3455;
+            this.state = 3459;
             this.errorHandler.sync(this);
             alternative = 1;
             do {
@@ -14910,9 +14929,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 case 1:
                     {
                     {
-                    this.state = 3452;
+                    this.state = 3456;
                     this.controlStatement();
-                    this.state = 3453;
+                    this.state = 3457;
                     this.match(TrinoSqlParser.SEMICOLON);
                     }
                     }
@@ -14920,7 +14939,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 default:
                     throw new antlr.NoViableAltException(this);
                 }
-                this.state = 3457;
+                this.state = 3461;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 455, this.context);
             } while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER);
@@ -14944,48 +14963,48 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new PrivilegeContext(this.context, this.state);
         this.enterRule(localContext, 234, TrinoSqlParser.RULE_privilege);
         try {
-            this.state = 3465;
+            this.state = 3469;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 456, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3459;
+                this.state = 3463;
                 this.match(TrinoSqlParser.KW_CREATE);
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3460;
+                this.state = 3464;
                 this.match(TrinoSqlParser.KW_SELECT);
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3461;
+                this.state = 3465;
                 this.match(TrinoSqlParser.KW_DELETE);
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 3462;
+                this.state = 3466;
                 this.match(TrinoSqlParser.KW_INSERT);
                 }
                 break;
             case 5:
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 3463;
+                this.state = 3467;
                 this.match(TrinoSqlParser.KW_UPDATE);
                 }
                 break;
             case 6:
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 3464;
+                this.state = 3468;
                 this.identifier();
                 }
                 break;
@@ -15011,29 +15030,29 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3470;
+            this.state = 3474;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 457, this.context) ) {
             case 1:
                 {
-                this.state = 3467;
+                this.state = 3471;
                 this.match(TrinoSqlParser.KW_TABLE);
                 }
                 break;
             case 2:
                 {
-                this.state = 3468;
+                this.state = 3472;
                 this.match(TrinoSqlParser.KW_SCHEMA);
                 }
                 break;
             case 3:
                 {
-                this.state = 3469;
+                this.state = 3473;
                 this.identifier();
                 }
                 break;
             }
-            this.state = 3472;
+            this.state = 3476;
             this.qualifiedName();
             }
         }
@@ -15055,20 +15074,20 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new TableOrViewNameContext(this.context, this.state);
         this.enterRule(localContext, 238, TrinoSqlParser.RULE_tableOrViewName);
         try {
-            this.state = 3476;
+            this.state = 3480;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 458, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3474;
+                this.state = 3478;
                 this.tableRef();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3475;
+                this.state = 3479;
                 this.viewRef();
                 }
                 break;
@@ -15092,39 +15111,39 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new TableRefContext(this.context, this.state);
         this.enterRule(localContext, 240, TrinoSqlParser.RULE_tableRef);
         try {
-            this.state = 3489;
+            this.state = 3493;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 459, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3478;
+                this.state = 3482;
                 localContext._table = this.identifier();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3479;
+                this.state = 3483;
                 localContext._schema = this.identifier();
-                this.state = 3480;
+                this.state = 3484;
                 this.match(TrinoSqlParser.T__3);
-                this.state = 3481;
+                this.state = 3485;
                 localContext._table = this.identifier();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3483;
-                localContext._catalog = this.identifier();
-                this.state = 3484;
-                this.match(TrinoSqlParser.T__3);
-                this.state = 3485;
-                localContext._schema = this.identifier();
-                this.state = 3486;
-                this.match(TrinoSqlParser.T__3);
                 this.state = 3487;
+                localContext._catalog = this.identifier();
+                this.state = 3488;
+                this.match(TrinoSqlParser.T__3);
+                this.state = 3489;
+                localContext._schema = this.identifier();
+                this.state = 3490;
+                this.match(TrinoSqlParser.T__3);
+                this.state = 3491;
                 localContext._table = this.identifier();
                 }
                 break;
@@ -15148,39 +15167,39 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new TableNameCreateContext(this.context, this.state);
         this.enterRule(localContext, 242, TrinoSqlParser.RULE_tableNameCreate);
         try {
-            this.state = 3502;
+            this.state = 3506;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 460, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3491;
+                this.state = 3495;
                 localContext._table = this.identifier();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3492;
+                this.state = 3496;
                 localContext._schema = this.identifier();
-                this.state = 3493;
+                this.state = 3497;
                 this.match(TrinoSqlParser.T__3);
-                this.state = 3494;
+                this.state = 3498;
                 localContext._table = this.identifier();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3496;
-                localContext._catalog = this.identifier();
-                this.state = 3497;
-                this.match(TrinoSqlParser.T__3);
-                this.state = 3498;
-                localContext._schema = this.identifier();
-                this.state = 3499;
-                this.match(TrinoSqlParser.T__3);
                 this.state = 3500;
+                localContext._catalog = this.identifier();
+                this.state = 3501;
+                this.match(TrinoSqlParser.T__3);
+                this.state = 3502;
+                localContext._schema = this.identifier();
+                this.state = 3503;
+                this.match(TrinoSqlParser.T__3);
+                this.state = 3504;
                 localContext._table = this.identifier();
                 }
                 break;
@@ -15204,39 +15223,39 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new ViewRefContext(this.context, this.state);
         this.enterRule(localContext, 244, TrinoSqlParser.RULE_viewRef);
         try {
-            this.state = 3515;
+            this.state = 3519;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 461, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3504;
+                this.state = 3508;
                 localContext._view = this.identifier();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3505;
+                this.state = 3509;
                 localContext._schema = this.identifier();
-                this.state = 3506;
+                this.state = 3510;
                 this.match(TrinoSqlParser.T__3);
-                this.state = 3507;
+                this.state = 3511;
                 localContext._view = this.identifier();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3509;
-                localContext._catalog = this.identifier();
-                this.state = 3510;
-                this.match(TrinoSqlParser.T__3);
-                this.state = 3511;
-                localContext._schema = this.identifier();
-                this.state = 3512;
-                this.match(TrinoSqlParser.T__3);
                 this.state = 3513;
+                localContext._catalog = this.identifier();
+                this.state = 3514;
+                this.match(TrinoSqlParser.T__3);
+                this.state = 3515;
+                localContext._schema = this.identifier();
+                this.state = 3516;
+                this.match(TrinoSqlParser.T__3);
+                this.state = 3517;
                 localContext._view = this.identifier();
                 }
                 break;
@@ -15260,39 +15279,39 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new ViewNameCreateContext(this.context, this.state);
         this.enterRule(localContext, 246, TrinoSqlParser.RULE_viewNameCreate);
         try {
-            this.state = 3528;
+            this.state = 3532;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 462, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3517;
+                this.state = 3521;
                 localContext._view = this.identifier();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3518;
+                this.state = 3522;
                 localContext._schema = this.identifier();
-                this.state = 3519;
+                this.state = 3523;
                 this.match(TrinoSqlParser.T__3);
-                this.state = 3520;
+                this.state = 3524;
                 localContext._view = this.identifier();
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3522;
-                localContext._catalog = this.identifier();
-                this.state = 3523;
-                this.match(TrinoSqlParser.T__3);
-                this.state = 3524;
-                localContext._schema = this.identifier();
-                this.state = 3525;
-                this.match(TrinoSqlParser.T__3);
                 this.state = 3526;
+                localContext._catalog = this.identifier();
+                this.state = 3527;
+                this.match(TrinoSqlParser.T__3);
+                this.state = 3528;
+                localContext._schema = this.identifier();
+                this.state = 3529;
+                this.match(TrinoSqlParser.T__3);
+                this.state = 3530;
                 localContext._view = this.identifier();
                 }
                 break;
@@ -15316,24 +15335,24 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new SchemaRefContext(this.context, this.state);
         this.enterRule(localContext, 248, TrinoSqlParser.RULE_schemaRef);
         try {
-            this.state = 3535;
+            this.state = 3539;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 463, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3530;
+                this.state = 3534;
                 localContext._schema = this.identifier();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3531;
+                this.state = 3535;
                 localContext._catalog = this.identifier();
-                this.state = 3532;
+                this.state = 3536;
                 this.match(TrinoSqlParser.T__3);
-                this.state = 3533;
+                this.state = 3537;
                 localContext._schema = this.identifier();
                 }
                 break;
@@ -15357,24 +15376,24 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new SchemaNameCreateContext(this.context, this.state);
         this.enterRule(localContext, 250, TrinoSqlParser.RULE_schemaNameCreate);
         try {
-            this.state = 3542;
+            this.state = 3546;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 464, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3537;
+                this.state = 3541;
                 localContext._schema = this.identifier();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3538;
+                this.state = 3542;
                 localContext._catalog = this.identifier();
-                this.state = 3539;
+                this.state = 3543;
                 this.match(TrinoSqlParser.T__3);
-                this.state = 3540;
+                this.state = 3544;
                 localContext._schema = this.identifier();
                 }
                 break;
@@ -15400,7 +15419,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3544;
+            this.state = 3548;
             localContext._catalog = this.identifier();
             }
         }
@@ -15424,7 +15443,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3546;
+            this.state = 3550;
             localContext._catalog = this.identifier();
             }
         }
@@ -15448,7 +15467,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3548;
+            this.state = 3552;
             this.qualifiedName();
             }
         }
@@ -15472,7 +15491,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3550;
+            this.state = 3554;
             this.qualifiedName();
             }
         }
@@ -15494,20 +15513,20 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new ColumnRefContext(this.context, this.state);
         this.enterRule(localContext, 260, TrinoSqlParser.RULE_columnRef);
         try {
-            this.state = 3554;
+            this.state = 3558;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 465, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3552;
+                this.state = 3556;
                 this.qualifiedName();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3553;
+                this.state = 3557;
                 if (!(this.shouldMatchEmpty())) {
                     throw this.createFailedPredicateException("this.shouldMatchEmpty()");
                 }
@@ -15558,7 +15577,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3558;
+            this.state = 3562;
             this.qualifiedName();
             }
         }
@@ -15582,7 +15601,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3560;
+            this.state = 3564;
             this.identifier();
             }
         }
@@ -15607,23 +15626,23 @@ export class TrinoSqlParser extends SQLParserBase {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3562;
+            this.state = 3566;
             this.identifier();
-            this.state = 3567;
+            this.state = 3571;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 466, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
                 if (alternative === 1) {
                     {
                     {
-                    this.state = 3563;
+                    this.state = 3567;
                     this.match(TrinoSqlParser.T__3);
-                    this.state = 3564;
+                    this.state = 3568;
                     this.identifier();
                     }
                     }
                 }
-                this.state = 3569;
+                this.state = 3573;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 466, this.context);
             }
@@ -15647,7 +15666,7 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new GrantorContext(this.context, this.state);
         this.enterRule(localContext, 270, TrinoSqlParser.RULE_grantor);
         try {
-            this.state = 3573;
+            this.state = 3577;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.KW_ABSENT:
@@ -15871,7 +15890,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new SpecifiedPrincipalContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3570;
+                this.state = 3574;
                 this.principal();
                 }
                 break;
@@ -15879,7 +15898,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new CurrentUserGrantorContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3571;
+                this.state = 3575;
                 this.match(TrinoSqlParser.KW_CURRENT_USER);
                 }
                 break;
@@ -15887,7 +15906,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new CurrentRoleGrantorContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3572;
+                this.state = 3576;
                 this.match(TrinoSqlParser.KW_CURRENT_ROLE);
                 }
                 break;
@@ -15913,14 +15932,14 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new PrincipalContext(this.context, this.state);
         this.enterRule(localContext, 272, TrinoSqlParser.RULE_principal);
         try {
-            this.state = 3580;
+            this.state = 3584;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 468, this.context) ) {
             case 1:
                 localContext = new UnspecifiedPrincipalContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3575;
+                this.state = 3579;
                 this.identifier();
                 }
                 break;
@@ -15928,9 +15947,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new UserPrincipalContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3576;
+                this.state = 3580;
                 this.match(TrinoSqlParser.KW_USER);
-                this.state = 3577;
+                this.state = 3581;
                 this.identifier();
                 }
                 break;
@@ -15938,9 +15957,9 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new RolePrincipalContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3578;
+                this.state = 3582;
                 this.match(TrinoSqlParser.KW_ROLE);
-                this.state = 3579;
+                this.state = 3583;
                 this.identifier();
                 }
                 break;
@@ -15967,21 +15986,21 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3582;
+            this.state = 3586;
             this.identifier();
-            this.state = 3587;
+            this.state = 3591;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 3) {
                 {
                 {
-                this.state = 3583;
+                this.state = 3587;
                 this.match(TrinoSqlParser.T__2);
-                this.state = 3584;
+                this.state = 3588;
                 this.identifier();
                 }
                 }
-                this.state = 3589;
+                this.state = 3593;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -16005,55 +16024,55 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new PrivilegeOrRoleContext(this.context, this.state);
         this.enterRule(localContext, 276, TrinoSqlParser.RULE_privilegeOrRole);
         try {
-            this.state = 3597;
+            this.state = 3601;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 470, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3590;
+                this.state = 3594;
                 this.match(TrinoSqlParser.KW_CREATE);
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3591;
+                this.state = 3595;
                 this.match(TrinoSqlParser.KW_SELECT);
                 }
                 break;
             case 3:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3592;
+                this.state = 3596;
                 this.match(TrinoSqlParser.KW_DELETE);
                 }
                 break;
             case 4:
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 3593;
+                this.state = 3597;
                 this.match(TrinoSqlParser.KW_INSERT);
                 }
                 break;
             case 5:
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 3594;
+                this.state = 3598;
                 this.match(TrinoSqlParser.KW_UPDATE);
                 }
                 break;
             case 6:
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 3595;
+                this.state = 3599;
                 this.match(TrinoSqlParser.KW_EXECUTE);
                 }
                 break;
             case 7:
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 3596;
+                this.state = 3600;
                 this.identifier();
                 }
                 break;
@@ -16077,14 +16096,14 @@ export class TrinoSqlParser extends SQLParserBase {
         let localContext = new IdentifierContext(this.context, this.state);
         this.enterRule(localContext, 278, TrinoSqlParser.RULE_identifier);
         try {
-            this.state = 3604;
+            this.state = 3608;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case TrinoSqlParser.IDENTIFIER:
                 localContext = new UnquotedIdentifierContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 3599;
+                this.state = 3603;
                 this.match(TrinoSqlParser.IDENTIFIER);
                 }
                 break;
@@ -16092,7 +16111,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new QuotedIdentifierContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 3600;
+                this.state = 3604;
                 this.match(TrinoSqlParser.QUOTED_IDENTIFIER);
                 }
                 break;
@@ -16313,7 +16332,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new UnquotedIdentifierContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 3601;
+                this.state = 3605;
                 this.nonReserved();
                 }
                 break;
@@ -16321,7 +16340,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new BackQuotedIdentifierContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 3602;
+                this.state = 3606;
                 this.match(TrinoSqlParser.BACKQUOTED_IDENTIFIER);
                 }
                 break;
@@ -16329,7 +16348,7 @@ export class TrinoSqlParser extends SQLParserBase {
                 localContext = new DigitIdentifierContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 3603;
+                this.state = 3607;
                 this.match(TrinoSqlParser.DIGIT_IDENTIFIER);
                 }
                 break;
@@ -16356,30 +16375,12 @@ export class TrinoSqlParser extends SQLParserBase {
         this.enterRule(localContext, 280, TrinoSqlParser.RULE_number);
         let _la: number;
         try {
-            this.state = 3618;
+            this.state = 3622;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 475, this.context) ) {
             case 1:
                 localContext = new DecimalLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 1);
-                {
-                this.state = 3607;
-                this.errorHandler.sync(this);
-                _la = this.tokenStream.LA(1);
-                if (_la === 320) {
-                    {
-                    this.state = 3606;
-                    this.match(TrinoSqlParser.MINUS);
-                    }
-                }
-
-                this.state = 3609;
-                this.match(TrinoSqlParser.DECIMAL_VALUE);
-                }
-                break;
-            case 2:
-                localContext = new DoubleLiteralContext(localContext);
-                this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 3611;
                 this.errorHandler.sync(this);
@@ -16392,12 +16393,12 @@ export class TrinoSqlParser extends SQLParserBase {
                 }
 
                 this.state = 3613;
-                this.match(TrinoSqlParser.DOUBLE_VALUE);
+                this.match(TrinoSqlParser.DECIMAL_VALUE);
                 }
                 break;
-            case 3:
-                localContext = new IntegerLiteralContext(localContext);
-                this.enterOuterAlt(localContext, 3);
+            case 2:
+                localContext = new DoubleLiteralContext(localContext);
+                this.enterOuterAlt(localContext, 2);
                 {
                 this.state = 3615;
                 this.errorHandler.sync(this);
@@ -16410,6 +16411,24 @@ export class TrinoSqlParser extends SQLParserBase {
                 }
 
                 this.state = 3617;
+                this.match(TrinoSqlParser.DOUBLE_VALUE);
+                }
+                break;
+            case 3:
+                localContext = new IntegerLiteralContext(localContext);
+                this.enterOuterAlt(localContext, 3);
+                {
+                this.state = 3619;
+                this.errorHandler.sync(this);
+                _la = this.tokenStream.LA(1);
+                if (_la === 320) {
+                    {
+                    this.state = 3618;
+                    this.match(TrinoSqlParser.MINUS);
+                    }
+                }
+
+                this.state = 3621;
                 this.match(TrinoSqlParser.INTEGER_VALUE);
                 }
                 break;
@@ -16436,7 +16455,7 @@ export class TrinoSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 3620;
+            this.state = 3624;
             _la = this.tokenStream.LA(1);
             if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 3984326656) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 37223659) !== 0) || ((((_la - 66)) & ~0x1F) === 0 && ((1 << (_la - 66)) & 1232320247) !== 0) || ((((_la - 99)) & ~0x1F) === 0 && ((1 << (_la - 99)) & 2532638303) !== 0) || ((((_la - 132)) & ~0x1F) === 0 && ((1 << (_la - 132)) & 3848265819) !== 0) || ((((_la - 164)) & ~0x1F) === 0 && ((1 << (_la - 164)) & 2011430399) !== 0) || ((((_la - 197)) & ~0x1F) === 0 && ((1 << (_la - 197)) & 4261150717) !== 0) || ((((_la - 229)) & ~0x1F) === 0 && ((1 << (_la - 229)) & 4293917631) !== 0) || ((((_la - 262)) & ~0x1F) === 0 && ((1 << (_la - 262)) & 3740198895) !== 0) || ((((_la - 294)) & ~0x1F) === 0 && ((1 << (_la - 294)) & 521847) !== 0))) {
             this.errorHandler.recoverInline(this);
@@ -16542,38 +16561,42 @@ export class TrinoSqlParser extends SQLParserBase {
     private primaryExpression_sempred(localContext: PrimaryExpressionContext | null, predIndex: number): boolean {
         switch (predIndex) {
         case 11:
-            return this.precpred(this.context, 25);
+            return this.precpred(this.context, 26);
         case 12:
+            return this.precpred(this.context, 24);
+        case 13:
             return this.precpred(this.context, 23);
+        case 14:
+            return this.caretTokenIndex >= 0 && this.shouldMatchEmpty();
         }
         return true;
     }
     private type_sempred(localContext: TypeContext | null, predIndex: number): boolean {
         switch (predIndex) {
-        case 13:
+        case 15:
             return this.precpred(this.context, 2);
         }
         return true;
     }
     private rowPattern_sempred(localContext: RowPatternContext | null, predIndex: number): boolean {
         switch (predIndex) {
-        case 14:
+        case 16:
             return this.precpred(this.context, 2);
-        case 15:
+        case 17:
             return this.precpred(this.context, 1);
         }
         return true;
     }
     private columnRef_sempred(localContext: ColumnRefContext | null, predIndex: number): boolean {
         switch (predIndex) {
-        case 16:
+        case 18:
             return this.shouldMatchEmpty();
         }
         return true;
     }
 
     public static readonly _serializedATN: number[] = [
-        4,1,342,3623,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,
+        4,1,342,3627,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,
         7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,
         13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
         20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,
@@ -16809,150 +16832,150 @@ export class TrinoSqlParser extends SQLParserBase {
         1,76,1,76,1,76,5,76,2771,8,76,10,76,12,76,2774,9,76,1,76,1,76,1,
         76,1,76,1,76,1,76,3,76,2782,8,76,3,76,2784,8,76,1,76,1,76,1,76,1,
         76,3,76,2790,8,76,3,76,2792,8,76,1,76,3,76,2795,8,76,1,76,1,76,1,
-        76,1,76,1,76,1,76,1,76,1,76,5,76,2805,8,76,10,76,12,76,2808,9,76,
-        1,77,1,77,1,77,1,77,1,77,3,77,2815,8,77,1,77,1,77,1,77,1,77,5,77,
-        2821,8,77,10,77,12,77,2824,9,77,3,77,2826,8,77,1,78,1,78,1,78,3,
-        78,2831,8,78,1,79,1,79,1,79,3,79,2836,8,79,1,80,1,80,1,80,1,80,1,
-        81,1,81,1,81,1,81,3,81,2846,8,81,1,82,1,82,3,82,2850,8,82,1,82,1,
-        82,3,82,2854,8,82,1,82,3,82,2857,8,82,3,82,2859,8,82,1,83,1,83,1,
-        83,1,83,1,83,1,83,3,83,2867,8,83,1,84,3,84,2870,8,84,1,84,1,84,1,
-        84,1,84,1,84,1,84,1,84,1,84,3,84,2880,8,84,1,85,1,85,1,86,1,86,1,
-        86,1,86,3,86,2888,8,86,3,86,2890,8,86,1,87,1,87,1,88,1,88,1,89,1,
-        89,3,89,2898,8,89,1,89,1,89,1,89,1,89,3,89,2904,8,89,1,90,1,90,1,
-        91,1,91,1,91,1,91,1,91,1,91,5,91,2914,8,91,10,91,12,91,2917,9,91,
-        1,91,1,91,1,91,1,91,1,91,1,91,3,91,2925,8,91,1,91,1,91,1,91,1,91,
-        1,91,3,91,2932,8,91,1,91,1,91,1,91,3,91,2937,8,91,1,91,1,91,1,91,
-        1,91,1,91,3,91,2944,8,91,1,91,1,91,1,91,3,91,2949,8,91,1,91,1,91,
-        1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,
-        1,91,1,91,1,91,1,91,5,91,2970,8,91,10,91,12,91,2973,9,91,1,91,1,
-        91,3,91,2977,8,91,3,91,2979,8,91,1,91,1,91,1,91,1,91,1,91,3,91,2986,
-        8,91,5,91,2988,8,91,10,91,12,91,2991,9,91,1,92,1,92,1,92,1,92,3,
-        92,2997,8,92,1,93,1,93,3,93,3001,8,93,1,94,1,94,1,94,1,94,1,94,1,
-        95,1,95,1,95,1,95,1,95,1,96,1,96,1,96,1,96,3,96,3017,8,96,1,96,1,
-        96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,5,96,3030,8,96,10,
-        96,12,96,3033,9,96,1,96,1,96,1,96,1,96,3,96,3039,8,96,1,96,1,96,
-        1,96,1,96,1,96,1,96,1,96,3,96,3048,8,96,1,96,1,96,1,96,1,96,1,96,
-        1,96,5,96,3056,8,96,10,96,12,96,3059,9,96,1,96,1,96,3,96,3063,8,
-        96,1,96,1,96,1,96,1,96,1,96,5,96,3070,8,96,10,96,12,96,3073,9,96,
-        1,96,1,96,3,96,3077,8,96,1,97,1,97,1,97,1,97,1,97,1,97,3,97,3085,
-        8,97,1,98,1,98,1,98,1,98,5,98,3091,8,98,10,98,12,98,3094,9,98,3,
-        98,3096,8,98,1,98,1,98,1,98,1,98,3,98,3102,8,98,1,98,3,98,3105,8,
-        98,1,98,1,98,1,98,1,98,1,98,3,98,3112,8,98,1,98,1,98,1,98,1,98,5,
-        98,3118,8,98,10,98,12,98,3121,9,98,3,98,3123,8,98,1,98,1,98,1,98,
-        1,98,5,98,3129,8,98,10,98,12,98,3132,9,98,3,98,3134,8,98,1,99,1,
-        99,1,99,1,99,1,99,1,99,1,99,3,99,3143,8,99,1,100,1,100,1,100,1,100,
-        1,100,1,100,1,100,1,100,1,100,3,100,3154,8,100,1,101,1,101,1,101,
-        3,101,3159,8,101,1,101,1,101,1,101,1,101,1,101,5,101,3166,8,101,
-        10,101,12,101,3169,9,101,1,102,1,102,1,102,1,102,1,102,1,102,1,102,
-        1,102,5,102,3179,8,102,10,102,12,102,3182,9,102,1,102,1,102,1,102,
-        1,102,1,102,1,102,1,102,1,102,1,102,1,102,1,102,1,102,3,102,3196,
-        8,102,1,103,1,103,3,103,3200,8,103,1,103,1,103,3,103,3204,8,103,
-        1,103,1,103,3,103,3208,8,103,1,103,1,103,1,103,1,103,3,103,3214,
-        8,103,1,103,1,103,3,103,3218,8,103,1,103,1,103,3,103,3222,8,103,
-        1,103,1,103,3,103,3226,8,103,3,103,3228,8,103,1,104,1,104,1,104,
-        1,104,1,105,1,105,1,105,1,105,3,105,3238,8,105,1,106,1,106,1,106,
-        1,106,1,106,1,106,1,106,1,106,1,106,3,106,3249,8,106,1,106,1,106,
-        3,106,3253,8,106,1,107,1,107,1,107,1,107,1,107,3,107,3260,8,107,
-        1,108,1,108,1,108,1,108,1,108,3,108,3267,8,108,1,109,1,109,1,109,
-        5,109,3272,8,109,10,109,12,109,3275,9,109,1,110,1,110,1,110,1,110,
-        1,110,1,110,5,110,3283,8,110,10,110,12,110,3286,9,110,3,110,3288,
-        8,110,1,110,1,110,1,110,1,110,5,110,3294,8,110,10,110,12,110,3297,
-        9,110,1,110,1,110,1,111,3,111,3302,8,111,1,111,1,111,1,112,1,112,
-        1,112,3,112,3309,8,112,1,112,1,112,1,112,1,112,1,112,1,112,1,112,
-        1,112,1,112,1,112,1,112,1,112,1,112,1,112,3,112,3325,8,112,1,113,
-        1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,4,113,3337,
-        8,113,11,113,12,113,3338,1,113,3,113,3342,8,113,1,113,1,113,1,113,
-        1,113,1,113,4,113,3349,8,113,11,113,12,113,3350,1,113,3,113,3354,
-        8,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,
-        1,113,1,113,5,113,3368,8,113,10,113,12,113,3371,9,113,1,113,3,113,
-        3374,8,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,
-        1,113,1,113,1,113,5,113,3388,8,113,10,113,12,113,3391,9,113,1,113,
-        1,113,1,113,3,113,3396,8,113,1,113,1,113,5,113,3400,8,113,10,113,
-        12,113,3403,9,113,1,113,3,113,3406,8,113,1,113,1,113,1,113,1,113,
-        3,113,3412,8,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,
-        3,113,3422,8,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,
-        1,113,1,113,3,113,3434,8,113,1,113,1,113,1,113,1,113,1,113,1,113,
-        1,113,3,113,3443,8,113,1,114,1,114,1,114,1,114,1,114,1,115,1,115,
-        1,115,1,116,1,116,1,116,4,116,3456,8,116,11,116,12,116,3457,1,117,
-        1,117,1,117,1,117,1,117,1,117,3,117,3466,8,117,1,118,1,118,1,118,
-        3,118,3471,8,118,1,118,1,118,1,119,1,119,3,119,3477,8,119,1,120,
-        1,120,1,120,1,120,1,120,1,120,1,120,1,120,1,120,1,120,1,120,3,120,
-        3490,8,120,1,121,1,121,1,121,1,121,1,121,1,121,1,121,1,121,1,121,
-        1,121,1,121,3,121,3503,8,121,1,122,1,122,1,122,1,122,1,122,1,122,
-        1,122,1,122,1,122,1,122,1,122,3,122,3516,8,122,1,123,1,123,1,123,
-        1,123,1,123,1,123,1,123,1,123,1,123,1,123,1,123,3,123,3529,8,123,
-        1,124,1,124,1,124,1,124,1,124,3,124,3536,8,124,1,125,1,125,1,125,
-        1,125,1,125,3,125,3543,8,125,1,126,1,126,1,127,1,127,1,128,1,128,
-        1,129,1,129,1,130,1,130,3,130,3555,8,130,1,131,1,131,1,132,1,132,
-        1,133,1,133,1,134,1,134,1,134,5,134,3566,8,134,10,134,12,134,3569,
-        9,134,1,135,1,135,1,135,3,135,3574,8,135,1,136,1,136,1,136,1,136,
-        1,136,3,136,3581,8,136,1,137,1,137,1,137,5,137,3586,8,137,10,137,
-        12,137,3589,9,137,1,138,1,138,1,138,1,138,1,138,1,138,1,138,3,138,
-        3598,8,138,1,139,1,139,1,139,1,139,1,139,3,139,3605,8,139,1,140,
-        3,140,3608,8,140,1,140,1,140,3,140,3612,8,140,1,140,1,140,3,140,
-        3616,8,140,1,140,3,140,3619,8,140,1,141,1,141,1,141,0,7,40,82,146,
-        150,152,182,202,142,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,
-        34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,
-        78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,
-        116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,146,
-        148,150,152,154,156,158,160,162,164,166,168,170,172,174,176,178,
-        180,182,184,186,188,190,192,194,196,198,200,202,204,206,208,210,
-        212,214,216,218,220,222,224,226,228,230,232,234,236,238,240,242,
-        244,246,248,250,252,254,256,258,260,262,264,266,268,270,272,274,
-        276,278,280,282,0,38,2,0,39,39,230,230,2,0,73,73,132,132,2,0,106,
-        106,123,123,2,0,93,93,124,124,2,0,325,325,330,330,1,0,240,241,3,
-        0,22,22,325,325,330,330,2,0,102,102,175,175,2,0,92,92,282,282,2,
-        0,29,29,76,76,2,0,102,102,149,149,2,0,22,22,80,80,2,0,33,33,260,
-        260,2,0,125,125,248,248,2,0,269,269,299,299,2,0,86,86,90,90,2,0,
-        145,145,190,190,2,0,126,126,198,198,2,0,55,55,282,282,1,0,319,320,
-        1,0,321,323,2,0,98,98,274,274,3,0,35,35,151,151,271,271,1,0,176,
-        179,4,0,90,90,98,98,274,274,284,284,1,0,292,294,2,0,50,50,281,281,
-        2,0,101,101,242,242,1,0,313,318,3,0,22,22,26,26,255,255,5,0,68,68,
-        119,119,171,172,246,246,311,311,2,0,305,305,307,307,3,0,117,117,
-        220,220,241,241,2,0,103,103,213,213,3,0,114,114,138,138,264,264,
-        4,0,81,81,133,133,161,161,295,295,2,0,193,193,310,310,54,0,18,22,
-        24,24,26,27,29,33,35,35,37,39,42,50,52,53,57,57,66,68,70,73,75,76,
-        78,79,81,83,86,88,90,90,93,93,96,96,99,103,105,105,108,114,117,117,
-        119,122,124,125,127,127,130,130,132,133,135,136,138,138,145,152,
-        154,154,156,156,158,158,161,172,174,181,185,190,192,194,197,197,
-        199,214,216,221,223,234,236,238,240,248,250,260,262,265,267,272,
-        275,277,279,281,283,285,287,290,292,296,298,300,303,304,306,312,
-        4180,0,287,1,0,0,0,2,292,1,0,0,0,4,294,1,0,0,0,6,298,1,0,0,0,8,302,
-        1,0,0,0,10,306,1,0,0,0,12,310,1,0,0,0,14,314,1,0,0,0,16,1228,1,0,
-        0,0,18,1231,1,0,0,0,20,1235,1,0,0,0,22,1245,1,0,0,0,24,1249,1,0,
-        0,0,26,1263,1,0,0,0,28,1265,1,0,0,0,30,1279,1,0,0,0,32,1285,1,0,
-        0,0,34,1289,1,0,0,0,36,1297,1,0,0,0,38,1303,1,0,0,0,40,1338,1,0,
-        0,0,42,1374,1,0,0,0,44,1378,1,0,0,0,46,1387,1,0,0,0,48,1425,1,0,
-        0,0,50,1428,1,0,0,0,52,1431,1,0,0,0,54,1440,1,0,0,0,56,1450,1,0,
-        0,0,58,1498,1,0,0,0,60,1513,1,0,0,0,62,1517,1,0,0,0,64,1519,1,0,
-        0,0,66,1526,1,0,0,0,68,1548,1,0,0,0,70,1557,1,0,0,0,72,1575,1,0,
-        0,0,74,1577,1,0,0,0,76,1579,1,0,0,0,78,1583,1,0,0,0,80,1585,1,0,
-        0,0,82,1587,1,0,0,0,84,1626,1,0,0,0,86,1646,1,0,0,0,88,1648,1,0,
-        0,0,90,1658,1,0,0,0,92,1660,1,0,0,0,94,1680,1,0,0,0,96,1682,1,0,
-        0,0,98,1760,1,0,0,0,100,1783,1,0,0,0,102,1804,1,0,0,0,104,1806,1,
-        0,0,0,106,1819,1,0,0,0,108,1823,1,0,0,0,110,1833,1,0,0,0,112,1844,
+        76,1,76,1,76,1,76,1,76,1,76,1,76,1,76,1,76,1,76,5,76,2809,8,76,10,
+        76,12,76,2812,9,76,1,77,1,77,1,77,1,77,1,77,3,77,2819,8,77,1,77,
+        1,77,1,77,1,77,5,77,2825,8,77,10,77,12,77,2828,9,77,3,77,2830,8,
+        77,1,78,1,78,1,78,3,78,2835,8,78,1,79,1,79,1,79,3,79,2840,8,79,1,
+        80,1,80,1,80,1,80,1,81,1,81,1,81,1,81,3,81,2850,8,81,1,82,1,82,3,
+        82,2854,8,82,1,82,1,82,3,82,2858,8,82,1,82,3,82,2861,8,82,3,82,2863,
+        8,82,1,83,1,83,1,83,1,83,1,83,1,83,3,83,2871,8,83,1,84,3,84,2874,
+        8,84,1,84,1,84,1,84,1,84,1,84,1,84,1,84,1,84,3,84,2884,8,84,1,85,
+        1,85,1,86,1,86,1,86,1,86,3,86,2892,8,86,3,86,2894,8,86,1,87,1,87,
+        1,88,1,88,1,89,1,89,3,89,2902,8,89,1,89,1,89,1,89,1,89,3,89,2908,
+        8,89,1,90,1,90,1,91,1,91,1,91,1,91,1,91,1,91,5,91,2918,8,91,10,91,
+        12,91,2921,9,91,1,91,1,91,1,91,1,91,1,91,1,91,3,91,2929,8,91,1,91,
+        1,91,1,91,1,91,1,91,3,91,2936,8,91,1,91,1,91,1,91,3,91,2941,8,91,
+        1,91,1,91,1,91,1,91,1,91,3,91,2948,8,91,1,91,1,91,1,91,3,91,2953,
+        8,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,1,91,
+        1,91,1,91,1,91,1,91,1,91,1,91,1,91,5,91,2974,8,91,10,91,12,91,2977,
+        9,91,1,91,1,91,3,91,2981,8,91,3,91,2983,8,91,1,91,1,91,1,91,1,91,
+        1,91,3,91,2990,8,91,5,91,2992,8,91,10,91,12,91,2995,9,91,1,92,1,
+        92,1,92,1,92,3,92,3001,8,92,1,93,1,93,3,93,3005,8,93,1,94,1,94,1,
+        94,1,94,1,94,1,95,1,95,1,95,1,95,1,95,1,96,1,96,1,96,1,96,3,96,3021,
+        8,96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,5,96,
+        3034,8,96,10,96,12,96,3037,9,96,1,96,1,96,1,96,1,96,3,96,3043,8,
+        96,1,96,1,96,1,96,1,96,1,96,1,96,1,96,3,96,3052,8,96,1,96,1,96,1,
+        96,1,96,1,96,1,96,5,96,3060,8,96,10,96,12,96,3063,9,96,1,96,1,96,
+        3,96,3067,8,96,1,96,1,96,1,96,1,96,1,96,5,96,3074,8,96,10,96,12,
+        96,3077,9,96,1,96,1,96,3,96,3081,8,96,1,97,1,97,1,97,1,97,1,97,1,
+        97,3,97,3089,8,97,1,98,1,98,1,98,1,98,5,98,3095,8,98,10,98,12,98,
+        3098,9,98,3,98,3100,8,98,1,98,1,98,1,98,1,98,3,98,3106,8,98,1,98,
+        3,98,3109,8,98,1,98,1,98,1,98,1,98,1,98,3,98,3116,8,98,1,98,1,98,
+        1,98,1,98,5,98,3122,8,98,10,98,12,98,3125,9,98,3,98,3127,8,98,1,
+        98,1,98,1,98,1,98,5,98,3133,8,98,10,98,12,98,3136,9,98,3,98,3138,
+        8,98,1,99,1,99,1,99,1,99,1,99,1,99,1,99,3,99,3147,8,99,1,100,1,100,
+        1,100,1,100,1,100,1,100,1,100,1,100,1,100,3,100,3158,8,100,1,101,
+        1,101,1,101,3,101,3163,8,101,1,101,1,101,1,101,1,101,1,101,5,101,
+        3170,8,101,10,101,12,101,3173,9,101,1,102,1,102,1,102,1,102,1,102,
+        1,102,1,102,1,102,5,102,3183,8,102,10,102,12,102,3186,9,102,1,102,
+        1,102,1,102,1,102,1,102,1,102,1,102,1,102,1,102,1,102,1,102,1,102,
+        3,102,3200,8,102,1,103,1,103,3,103,3204,8,103,1,103,1,103,3,103,
+        3208,8,103,1,103,1,103,3,103,3212,8,103,1,103,1,103,1,103,1,103,
+        3,103,3218,8,103,1,103,1,103,3,103,3222,8,103,1,103,1,103,3,103,
+        3226,8,103,1,103,1,103,3,103,3230,8,103,3,103,3232,8,103,1,104,1,
+        104,1,104,1,104,1,105,1,105,1,105,1,105,3,105,3242,8,105,1,106,1,
+        106,1,106,1,106,1,106,1,106,1,106,1,106,1,106,3,106,3253,8,106,1,
+        106,1,106,3,106,3257,8,106,1,107,1,107,1,107,1,107,1,107,3,107,3264,
+        8,107,1,108,1,108,1,108,1,108,1,108,3,108,3271,8,108,1,109,1,109,
+        1,109,5,109,3276,8,109,10,109,12,109,3279,9,109,1,110,1,110,1,110,
+        1,110,1,110,1,110,5,110,3287,8,110,10,110,12,110,3290,9,110,3,110,
+        3292,8,110,1,110,1,110,1,110,1,110,5,110,3298,8,110,10,110,12,110,
+        3301,9,110,1,110,1,110,1,111,3,111,3306,8,111,1,111,1,111,1,112,
+        1,112,1,112,3,112,3313,8,112,1,112,1,112,1,112,1,112,1,112,1,112,
+        1,112,1,112,1,112,1,112,1,112,1,112,1,112,1,112,3,112,3329,8,112,
+        1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,4,113,
+        3341,8,113,11,113,12,113,3342,1,113,3,113,3346,8,113,1,113,1,113,
+        1,113,1,113,1,113,4,113,3353,8,113,11,113,12,113,3354,1,113,3,113,
+        3358,8,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,
+        1,113,1,113,1,113,5,113,3372,8,113,10,113,12,113,3375,9,113,1,113,
+        3,113,3378,8,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,
+        1,113,1,113,1,113,1,113,5,113,3392,8,113,10,113,12,113,3395,9,113,
+        1,113,1,113,1,113,3,113,3400,8,113,1,113,1,113,5,113,3404,8,113,
+        10,113,12,113,3407,9,113,1,113,3,113,3410,8,113,1,113,1,113,1,113,
+        1,113,3,113,3416,8,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,
+        1,113,3,113,3426,8,113,1,113,1,113,1,113,1,113,1,113,1,113,1,113,
+        1,113,1,113,1,113,3,113,3438,8,113,1,113,1,113,1,113,1,113,1,113,
+        1,113,1,113,3,113,3447,8,113,1,114,1,114,1,114,1,114,1,114,1,115,
+        1,115,1,115,1,116,1,116,1,116,4,116,3460,8,116,11,116,12,116,3461,
+        1,117,1,117,1,117,1,117,1,117,1,117,3,117,3470,8,117,1,118,1,118,
+        1,118,3,118,3475,8,118,1,118,1,118,1,119,1,119,3,119,3481,8,119,
+        1,120,1,120,1,120,1,120,1,120,1,120,1,120,1,120,1,120,1,120,1,120,
+        3,120,3494,8,120,1,121,1,121,1,121,1,121,1,121,1,121,1,121,1,121,
+        1,121,1,121,1,121,3,121,3507,8,121,1,122,1,122,1,122,1,122,1,122,
+        1,122,1,122,1,122,1,122,1,122,1,122,3,122,3520,8,122,1,123,1,123,
+        1,123,1,123,1,123,1,123,1,123,1,123,1,123,1,123,1,123,3,123,3533,
+        8,123,1,124,1,124,1,124,1,124,1,124,3,124,3540,8,124,1,125,1,125,
+        1,125,1,125,1,125,3,125,3547,8,125,1,126,1,126,1,127,1,127,1,128,
+        1,128,1,129,1,129,1,130,1,130,3,130,3559,8,130,1,131,1,131,1,132,
+        1,132,1,133,1,133,1,134,1,134,1,134,5,134,3570,8,134,10,134,12,134,
+        3573,9,134,1,135,1,135,1,135,3,135,3578,8,135,1,136,1,136,1,136,
+        1,136,1,136,3,136,3585,8,136,1,137,1,137,1,137,5,137,3590,8,137,
+        10,137,12,137,3593,9,137,1,138,1,138,1,138,1,138,1,138,1,138,1,138,
+        3,138,3602,8,138,1,139,1,139,1,139,1,139,1,139,3,139,3609,8,139,
+        1,140,3,140,3612,8,140,1,140,1,140,3,140,3616,8,140,1,140,1,140,
+        3,140,3620,8,140,1,140,3,140,3623,8,140,1,141,1,141,1,141,0,7,40,
+        82,146,150,152,182,202,142,0,2,4,6,8,10,12,14,16,18,20,22,24,26,
+        28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,
+        72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,
+        112,114,116,118,120,122,124,126,128,130,132,134,136,138,140,142,
+        144,146,148,150,152,154,156,158,160,162,164,166,168,170,172,174,
+        176,178,180,182,184,186,188,190,192,194,196,198,200,202,204,206,
+        208,210,212,214,216,218,220,222,224,226,228,230,232,234,236,238,
+        240,242,244,246,248,250,252,254,256,258,260,262,264,266,268,270,
+        272,274,276,278,280,282,0,38,2,0,39,39,230,230,2,0,73,73,132,132,
+        2,0,106,106,123,123,2,0,93,93,124,124,2,0,325,325,330,330,1,0,240,
+        241,3,0,22,22,325,325,330,330,2,0,102,102,175,175,2,0,92,92,282,
+        282,2,0,29,29,76,76,2,0,102,102,149,149,2,0,22,22,80,80,2,0,33,33,
+        260,260,2,0,125,125,248,248,2,0,269,269,299,299,2,0,86,86,90,90,
+        2,0,145,145,190,190,2,0,126,126,198,198,2,0,55,55,282,282,1,0,319,
+        320,1,0,321,323,2,0,98,98,274,274,3,0,35,35,151,151,271,271,1,0,
+        176,179,4,0,90,90,98,98,274,274,284,284,1,0,292,294,2,0,50,50,281,
+        281,2,0,101,101,242,242,1,0,313,318,3,0,22,22,26,26,255,255,5,0,
+        68,68,119,119,171,172,246,246,311,311,2,0,305,305,307,307,3,0,117,
+        117,220,220,241,241,2,0,103,103,213,213,3,0,114,114,138,138,264,
+        264,4,0,81,81,133,133,161,161,295,295,2,0,193,193,310,310,54,0,18,
+        22,24,24,26,27,29,33,35,35,37,39,42,50,52,53,57,57,66,68,70,73,75,
+        76,78,79,81,83,86,88,90,90,93,93,96,96,99,103,105,105,108,114,117,
+        117,119,122,124,125,127,127,130,130,132,133,135,136,138,138,145,
+        152,154,154,156,156,158,158,161,172,174,181,185,190,192,194,197,
+        197,199,214,216,221,223,234,236,238,240,248,250,260,262,265,267,
+        272,275,277,279,281,283,285,287,290,292,296,298,300,303,304,306,
+        312,4185,0,287,1,0,0,0,2,292,1,0,0,0,4,294,1,0,0,0,6,298,1,0,0,0,
+        8,302,1,0,0,0,10,306,1,0,0,0,12,310,1,0,0,0,14,314,1,0,0,0,16,1228,
+        1,0,0,0,18,1231,1,0,0,0,20,1235,1,0,0,0,22,1245,1,0,0,0,24,1249,
+        1,0,0,0,26,1263,1,0,0,0,28,1265,1,0,0,0,30,1279,1,0,0,0,32,1285,
+        1,0,0,0,34,1289,1,0,0,0,36,1297,1,0,0,0,38,1303,1,0,0,0,40,1338,
+        1,0,0,0,42,1374,1,0,0,0,44,1378,1,0,0,0,46,1387,1,0,0,0,48,1425,
+        1,0,0,0,50,1428,1,0,0,0,52,1431,1,0,0,0,54,1440,1,0,0,0,56,1450,
+        1,0,0,0,58,1498,1,0,0,0,60,1513,1,0,0,0,62,1517,1,0,0,0,64,1519,
+        1,0,0,0,66,1526,1,0,0,0,68,1548,1,0,0,0,70,1557,1,0,0,0,72,1575,
+        1,0,0,0,74,1577,1,0,0,0,76,1579,1,0,0,0,78,1583,1,0,0,0,80,1585,
+        1,0,0,0,82,1587,1,0,0,0,84,1626,1,0,0,0,86,1646,1,0,0,0,88,1648,
+        1,0,0,0,90,1658,1,0,0,0,92,1660,1,0,0,0,94,1680,1,0,0,0,96,1682,
+        1,0,0,0,98,1760,1,0,0,0,100,1783,1,0,0,0,102,1804,1,0,0,0,104,1806,
+        1,0,0,0,106,1819,1,0,0,0,108,1823,1,0,0,0,110,1833,1,0,0,0,112,1844,
         1,0,0,0,114,1855,1,0,0,0,116,1879,1,0,0,0,118,1944,1,0,0,0,120,2023,
         1,0,0,0,122,2050,1,0,0,0,124,2052,1,0,0,0,126,2059,1,0,0,0,128,2071,
         1,0,0,0,130,2073,1,0,0,0,132,2101,1,0,0,0,134,2108,1,0,0,0,136,2173,
         1,0,0,0,138,2193,1,0,0,0,140,2195,1,0,0,0,142,2199,1,0,0,0,144,2212,
         1,0,0,0,146,2221,1,0,0,0,148,2295,1,0,0,0,150,2301,1,0,0,0,152,2794,
-        1,0,0,0,154,2809,1,0,0,0,156,2827,1,0,0,0,158,2832,1,0,0,0,160,2837,
-        1,0,0,0,162,2845,1,0,0,0,164,2858,1,0,0,0,166,2866,1,0,0,0,168,2879,
-        1,0,0,0,170,2881,1,0,0,0,172,2889,1,0,0,0,174,2891,1,0,0,0,176,2893,
-        1,0,0,0,178,2895,1,0,0,0,180,2905,1,0,0,0,182,2978,1,0,0,0,184,2996,
-        1,0,0,0,186,3000,1,0,0,0,188,3002,1,0,0,0,190,3007,1,0,0,0,192,3076,
-        1,0,0,0,194,3078,1,0,0,0,196,3095,1,0,0,0,198,3135,1,0,0,0,200,3153,
-        1,0,0,0,202,3155,1,0,0,0,204,3195,1,0,0,0,206,3227,1,0,0,0,208,3229,
-        1,0,0,0,210,3237,1,0,0,0,212,3252,1,0,0,0,214,3259,1,0,0,0,216,3266,
-        1,0,0,0,218,3268,1,0,0,0,220,3276,1,0,0,0,222,3301,1,0,0,0,224,3324,
-        1,0,0,0,226,3442,1,0,0,0,228,3444,1,0,0,0,230,3449,1,0,0,0,232,3455,
-        1,0,0,0,234,3465,1,0,0,0,236,3470,1,0,0,0,238,3476,1,0,0,0,240,3489,
-        1,0,0,0,242,3502,1,0,0,0,244,3515,1,0,0,0,246,3528,1,0,0,0,248,3535,
-        1,0,0,0,250,3542,1,0,0,0,252,3544,1,0,0,0,254,3546,1,0,0,0,256,3548,
-        1,0,0,0,258,3550,1,0,0,0,260,3554,1,0,0,0,262,3556,1,0,0,0,264,3558,
-        1,0,0,0,266,3560,1,0,0,0,268,3562,1,0,0,0,270,3573,1,0,0,0,272,3580,
-        1,0,0,0,274,3582,1,0,0,0,276,3597,1,0,0,0,278,3604,1,0,0,0,280,3618,
-        1,0,0,0,282,3620,1,0,0,0,284,286,3,2,1,0,285,284,1,0,0,0,286,289,
+        1,0,0,0,154,2813,1,0,0,0,156,2831,1,0,0,0,158,2836,1,0,0,0,160,2841,
+        1,0,0,0,162,2849,1,0,0,0,164,2862,1,0,0,0,166,2870,1,0,0,0,168,2883,
+        1,0,0,0,170,2885,1,0,0,0,172,2893,1,0,0,0,174,2895,1,0,0,0,176,2897,
+        1,0,0,0,178,2899,1,0,0,0,180,2909,1,0,0,0,182,2982,1,0,0,0,184,3000,
+        1,0,0,0,186,3004,1,0,0,0,188,3006,1,0,0,0,190,3011,1,0,0,0,192,3080,
+        1,0,0,0,194,3082,1,0,0,0,196,3099,1,0,0,0,198,3139,1,0,0,0,200,3157,
+        1,0,0,0,202,3159,1,0,0,0,204,3199,1,0,0,0,206,3231,1,0,0,0,208,3233,
+        1,0,0,0,210,3241,1,0,0,0,212,3256,1,0,0,0,214,3263,1,0,0,0,216,3270,
+        1,0,0,0,218,3272,1,0,0,0,220,3280,1,0,0,0,222,3305,1,0,0,0,224,3328,
+        1,0,0,0,226,3446,1,0,0,0,228,3448,1,0,0,0,230,3453,1,0,0,0,232,3459,
+        1,0,0,0,234,3469,1,0,0,0,236,3474,1,0,0,0,238,3480,1,0,0,0,240,3493,
+        1,0,0,0,242,3506,1,0,0,0,244,3519,1,0,0,0,246,3532,1,0,0,0,248,3539,
+        1,0,0,0,250,3546,1,0,0,0,252,3548,1,0,0,0,254,3550,1,0,0,0,256,3552,
+        1,0,0,0,258,3554,1,0,0,0,260,3558,1,0,0,0,262,3560,1,0,0,0,264,3562,
+        1,0,0,0,266,3564,1,0,0,0,268,3566,1,0,0,0,270,3577,1,0,0,0,272,3584,
+        1,0,0,0,274,3586,1,0,0,0,276,3601,1,0,0,0,278,3608,1,0,0,0,280,3622,
+        1,0,0,0,282,3624,1,0,0,0,284,286,3,2,1,0,285,284,1,0,0,0,286,289,
         1,0,0,0,287,285,1,0,0,0,287,288,1,0,0,0,288,290,1,0,0,0,289,287,
         1,0,0,0,290,291,5,0,0,1,291,1,1,0,0,0,292,293,3,4,2,0,293,3,1,0,
         0,0,294,296,3,16,8,0,295,297,5,326,0,0,296,295,1,0,0,0,296,297,1,
@@ -17806,331 +17829,332 @@ export class TrinoSqlParser extends SQLParserBase {
         2576,1,0,0,0,2794,2577,1,0,0,0,2794,2591,1,0,0,0,2794,2598,1,0,0,
         0,2794,2609,1,0,0,0,2794,2618,1,0,0,0,2794,2625,1,0,0,0,2794,2637,
         1,0,0,0,2794,2641,1,0,0,0,2794,2654,1,0,0,0,2794,2664,1,0,0,0,2794,
-        2685,1,0,0,0,2794,2724,1,0,0,0,2794,2765,1,0,0,0,2795,2806,1,0,0,
-        0,2796,2797,10,25,0,0,2797,2798,5,8,0,0,2798,2799,3,150,75,0,2799,
-        2800,5,9,0,0,2800,2805,1,0,0,0,2801,2802,10,23,0,0,2802,2803,5,4,
-        0,0,2803,2805,3,278,139,0,2804,2796,1,0,0,0,2804,2801,1,0,0,0,2805,
-        2808,1,0,0,0,2806,2804,1,0,0,0,2806,2807,1,0,0,0,2807,153,1,0,0,
-        0,2808,2806,1,0,0,0,2809,2810,3,156,78,0,2810,2811,5,3,0,0,2811,
-        2814,3,172,86,0,2812,2813,5,28,0,0,2813,2815,3,278,139,0,2814,2812,
-        1,0,0,0,2814,2815,1,0,0,0,2815,2825,1,0,0,0,2816,2817,5,204,0,0,
-        2817,2822,3,160,80,0,2818,2819,5,3,0,0,2819,2821,3,160,80,0,2820,
-        2818,1,0,0,0,2821,2824,1,0,0,0,2822,2820,1,0,0,0,2822,2823,1,0,0,
-        0,2823,2826,1,0,0,0,2824,2822,1,0,0,0,2825,2816,1,0,0,0,2825,2826,
-        1,0,0,0,2826,155,1,0,0,0,2827,2830,3,144,72,0,2828,2829,5,105,0,
-        0,2829,2831,3,158,79,0,2830,2828,1,0,0,0,2830,2831,1,0,0,0,2831,
-        157,1,0,0,0,2832,2835,5,138,0,0,2833,2834,5,88,0,0,2834,2836,7,25,
-        0,0,2835,2833,1,0,0,0,2835,2836,1,0,0,0,2836,159,1,0,0,0,2837,2838,
-        3,156,78,0,2838,2839,5,28,0,0,2839,2840,3,278,139,0,2840,161,1,0,
-        0,0,2841,2846,5,90,0,0,2842,2846,5,184,0,0,2843,2844,5,71,0,0,2844,
-        2846,3,144,72,0,2845,2841,1,0,0,0,2845,2842,1,0,0,0,2845,2843,1,
-        0,0,0,2846,163,1,0,0,0,2847,2849,5,307,0,0,2848,2850,5,27,0,0,2849,
-        2848,1,0,0,0,2849,2850,1,0,0,0,2850,2859,1,0,0,0,2851,2853,5,305,
-        0,0,2852,2854,7,26,0,0,2853,2852,1,0,0,0,2853,2854,1,0,0,0,2854,
-        2856,1,0,0,0,2855,2857,5,27,0,0,2856,2855,1,0,0,0,2856,2857,1,0,
-        0,0,2857,2859,1,0,0,0,2858,2847,1,0,0,0,2858,2851,1,0,0,0,2859,165,
-        1,0,0,0,2860,2867,5,90,0,0,2861,2867,5,184,0,0,2862,2863,5,86,0,
-        0,2863,2867,5,27,0,0,2864,2865,5,86,0,0,2865,2867,5,187,0,0,2866,
-        2860,1,0,0,0,2866,2861,1,0,0,0,2866,2862,1,0,0,0,2866,2864,1,0,0,
-        0,2867,167,1,0,0,0,2868,2870,5,146,0,0,2869,2868,1,0,0,0,2869,2870,
-        1,0,0,0,2870,2871,1,0,0,0,2871,2872,3,144,72,0,2872,2873,5,296,0,
-        0,2873,2874,3,156,78,0,2874,2880,1,0,0,0,2875,2876,3,144,72,0,2876,
-        2877,5,10,0,0,2877,2878,3,156,78,0,2878,2880,1,0,0,0,2879,2869,1,
-        0,0,0,2879,2875,1,0,0,0,2880,169,1,0,0,0,2881,2882,7,27,0,0,2882,
-        171,1,0,0,0,2883,2890,5,327,0,0,2884,2887,5,328,0,0,2885,2886,5,
-        278,0,0,2886,2888,5,327,0,0,2887,2885,1,0,0,0,2887,2888,1,0,0,0,
-        2888,2890,1,0,0,0,2889,2883,1,0,0,0,2889,2884,1,0,0,0,2890,173,1,
-        0,0,0,2891,2892,7,28,0,0,2892,175,1,0,0,0,2893,2894,7,29,0,0,2894,
-        177,1,0,0,0,2895,2897,5,130,0,0,2896,2898,7,19,0,0,2897,2896,1,0,
-        0,0,2897,2898,1,0,0,0,2898,2899,1,0,0,0,2899,2900,3,172,86,0,2900,
-        2903,3,180,90,0,2901,2902,5,270,0,0,2902,2904,3,180,90,0,2903,2901,
-        1,0,0,0,2903,2904,1,0,0,0,2904,179,1,0,0,0,2905,2906,7,30,0,0,2906,
-        181,1,0,0,0,2907,2908,6,91,-1,0,2908,2909,5,240,0,0,2909,2910,5,
-        1,0,0,2910,2915,3,184,92,0,2911,2912,5,3,0,0,2912,2914,3,184,92,
-        0,2913,2911,1,0,0,0,2914,2917,1,0,0,0,2915,2913,1,0,0,0,2915,2916,
-        1,0,0,0,2916,2918,1,0,0,0,2917,2915,1,0,0,0,2918,2919,5,2,0,0,2919,
-        2979,1,0,0,0,2920,2921,5,130,0,0,2921,2924,3,180,90,0,2922,2923,
-        5,270,0,0,2923,2925,3,180,90,0,2924,2922,1,0,0,0,2924,2925,1,0,0,
-        0,2925,2979,1,0,0,0,2926,2931,5,269,0,0,2927,2928,5,1,0,0,2928,2929,
-        3,186,93,0,2929,2930,5,2,0,0,2930,2932,1,0,0,0,2931,2927,1,0,0,0,
-        2931,2932,1,0,0,0,2932,2936,1,0,0,0,2933,2934,7,31,0,0,2934,2935,
-        5,268,0,0,2935,2937,5,312,0,0,2936,2933,1,0,0,0,2936,2937,1,0,0,
-        0,2937,2979,1,0,0,0,2938,2943,5,268,0,0,2939,2940,5,1,0,0,2940,2941,
-        3,186,93,0,2941,2942,5,2,0,0,2942,2944,1,0,0,0,2943,2939,1,0,0,0,
-        2943,2944,1,0,0,0,2944,2948,1,0,0,0,2945,2946,7,31,0,0,2946,2947,
-        5,268,0,0,2947,2949,5,312,0,0,2948,2945,1,0,0,0,2948,2949,1,0,0,
-        0,2949,2979,1,0,0,0,2950,2951,5,83,0,0,2951,2979,5,214,0,0,2952,
-        2953,5,27,0,0,2953,2954,5,315,0,0,2954,2955,3,182,91,0,2955,2956,
-        5,317,0,0,2956,2979,1,0,0,0,2957,2958,5,163,0,0,2958,2959,5,315,
-        0,0,2959,2960,3,182,91,0,2960,2961,5,3,0,0,2961,2962,3,182,91,0,
-        2962,2963,5,317,0,0,2963,2979,1,0,0,0,2964,2976,3,278,139,0,2965,
-        2966,5,1,0,0,2966,2971,3,186,93,0,2967,2968,5,3,0,0,2968,2970,3,
-        186,93,0,2969,2967,1,0,0,0,2970,2973,1,0,0,0,2971,2969,1,0,0,0,2971,
-        2972,1,0,0,0,2972,2974,1,0,0,0,2973,2971,1,0,0,0,2974,2975,5,2,0,
-        0,2975,2977,1,0,0,0,2976,2965,1,0,0,0,2976,2977,1,0,0,0,2977,2979,
-        1,0,0,0,2978,2907,1,0,0,0,2978,2920,1,0,0,0,2978,2926,1,0,0,0,2978,
-        2938,1,0,0,0,2978,2950,1,0,0,0,2978,2952,1,0,0,0,2978,2957,1,0,0,
-        0,2978,2964,1,0,0,0,2979,2989,1,0,0,0,2980,2981,10,2,0,0,2981,2985,
-        5,27,0,0,2982,2983,5,8,0,0,2983,2984,5,330,0,0,2984,2986,5,9,0,0,
-        2985,2982,1,0,0,0,2985,2986,1,0,0,0,2986,2988,1,0,0,0,2987,2980,
-        1,0,0,0,2988,2991,1,0,0,0,2989,2987,1,0,0,0,2989,2990,1,0,0,0,2990,
-        183,1,0,0,0,2991,2989,1,0,0,0,2992,2997,3,182,91,0,2993,2994,3,278,
-        139,0,2994,2995,3,182,91,0,2995,2997,1,0,0,0,2996,2992,1,0,0,0,2996,
-        2993,1,0,0,0,2997,185,1,0,0,0,2998,3001,5,330,0,0,2999,3001,3,182,
-        91,0,3000,2998,1,0,0,0,3000,2999,1,0,0,0,3001,187,1,0,0,0,3002,3003,
-        5,301,0,0,3003,3004,3,144,72,0,3004,3005,5,266,0,0,3005,3006,3,144,
-        72,0,3006,189,1,0,0,0,3007,3008,5,100,0,0,3008,3009,5,1,0,0,3009,
-        3010,3,48,24,0,3010,3011,5,2,0,0,3011,191,1,0,0,0,3012,3013,5,301,
-        0,0,3013,3016,5,165,0,0,3014,3015,5,25,0,0,3015,3017,3,144,72,0,
-        3016,3014,1,0,0,0,3016,3017,1,0,0,0,3017,3018,1,0,0,0,3018,3019,
-        5,266,0,0,3019,3020,5,288,0,0,3020,3021,5,252,0,0,3021,3022,3,278,
-        139,0,3022,3023,5,313,0,0,3023,3031,3,144,72,0,3024,3025,5,3,0,0,
-        3025,3026,3,278,139,0,3026,3027,5,313,0,0,3027,3028,3,144,72,0,3028,
-        3030,1,0,0,0,3029,3024,1,0,0,0,3030,3033,1,0,0,0,3031,3029,1,0,0,
-        0,3031,3032,1,0,0,0,3032,3077,1,0,0,0,3033,3031,1,0,0,0,3034,3035,
-        5,301,0,0,3035,3038,5,165,0,0,3036,3037,5,25,0,0,3037,3039,3,144,
-        72,0,3038,3036,1,0,0,0,3038,3039,1,0,0,0,3039,3040,1,0,0,0,3040,
-        3041,5,266,0,0,3041,3077,5,74,0,0,3042,3043,5,301,0,0,3043,3044,
-        5,183,0,0,3044,3047,5,165,0,0,3045,3046,5,25,0,0,3046,3048,3,144,
-        72,0,3047,3045,1,0,0,0,3047,3048,1,0,0,0,3048,3049,1,0,0,0,3049,
-        3050,5,266,0,0,3050,3062,5,128,0,0,3051,3052,5,1,0,0,3052,3057,3,
-        278,139,0,3053,3054,5,3,0,0,3054,3056,3,278,139,0,3055,3053,1,0,
-        0,0,3056,3059,1,0,0,0,3057,3055,1,0,0,0,3057,3058,1,0,0,0,3058,3060,
-        1,0,0,0,3059,3057,1,0,0,0,3060,3061,5,2,0,0,3061,3063,1,0,0,0,3062,
-        3051,1,0,0,0,3062,3063,1,0,0,0,3063,3064,1,0,0,0,3064,3065,5,297,
-        0,0,3065,3066,5,1,0,0,3066,3071,3,144,72,0,3067,3068,5,3,0,0,3068,
-        3070,3,144,72,0,3069,3067,1,0,0,0,3070,3073,1,0,0,0,3071,3069,1,
-        0,0,0,3071,3072,1,0,0,0,3072,3074,1,0,0,0,3073,3071,1,0,0,0,3074,
-        3075,5,2,0,0,3075,3077,1,0,0,0,3076,3012,1,0,0,0,3076,3034,1,0,0,
-        0,3076,3042,1,0,0,0,3077,193,1,0,0,0,3078,3084,5,200,0,0,3079,3085,
-        3,278,139,0,3080,3081,5,1,0,0,3081,3082,3,66,33,0,3082,3083,5,2,
-        0,0,3083,3085,1,0,0,0,3084,3079,1,0,0,0,3084,3080,1,0,0,0,3085,195,
-        1,0,0,0,3086,3087,5,169,0,0,3087,3092,3,98,49,0,3088,3089,5,3,0,
-        0,3089,3091,3,98,49,0,3090,3088,1,0,0,0,3091,3094,1,0,0,0,3092,3090,
-        1,0,0,0,3092,3093,1,0,0,0,3093,3096,1,0,0,0,3094,3092,1,0,0,0,3095,
-        3086,1,0,0,0,3095,3096,1,0,0,0,3096,3097,1,0,0,0,3097,3101,3,198,
-        99,0,3098,3099,5,21,0,0,3099,3100,5,164,0,0,3100,3102,3,102,51,0,
-        3101,3098,1,0,0,0,3101,3102,1,0,0,0,3102,3104,1,0,0,0,3103,3105,
-        7,13,0,0,3104,3103,1,0,0,0,3104,3105,1,0,0,0,3105,3111,1,0,0,0,3106,
-        3107,5,207,0,0,3107,3108,5,1,0,0,3108,3109,3,202,101,0,3109,3110,
-        5,2,0,0,3110,3112,1,0,0,0,3111,3106,1,0,0,0,3111,3112,1,0,0,0,3112,
-        3122,1,0,0,0,3113,3114,5,258,0,0,3114,3119,3,104,52,0,3115,3116,
-        5,3,0,0,3116,3118,3,104,52,0,3117,3115,1,0,0,0,3118,3121,1,0,0,0,
-        3119,3117,1,0,0,0,3119,3120,1,0,0,0,3120,3123,1,0,0,0,3121,3119,
-        1,0,0,0,3122,3113,1,0,0,0,3122,3123,1,0,0,0,3123,3133,1,0,0,0,3124,
-        3125,5,72,0,0,3125,3130,3,106,53,0,3126,3127,5,3,0,0,3127,3129,3,
-        106,53,0,3128,3126,1,0,0,0,3129,3132,1,0,0,0,3130,3128,1,0,0,0,3130,
-        3131,1,0,0,0,3131,3134,1,0,0,0,3132,3130,1,0,0,0,3133,3124,1,0,0,
-        0,3133,3134,1,0,0,0,3134,197,1,0,0,0,3135,3142,7,32,0,0,3136,3137,
-        5,34,0,0,3137,3138,3,200,100,0,3138,3139,5,25,0,0,3139,3140,3,200,
-        100,0,3140,3143,1,0,0,0,3141,3143,3,200,100,0,3142,3136,1,0,0,0,
-        3142,3141,1,0,0,0,3143,199,1,0,0,0,3144,3145,5,279,0,0,3145,3154,
-        5,213,0,0,3146,3147,5,279,0,0,3147,3154,5,103,0,0,3148,3149,5,57,
-        0,0,3149,3154,5,240,0,0,3150,3151,3,144,72,0,3151,3152,7,33,0,0,
-        3152,3154,1,0,0,0,3153,3144,1,0,0,0,3153,3146,1,0,0,0,3153,3148,
-        1,0,0,0,3153,3150,1,0,0,0,3154,201,1,0,0,0,3155,3156,6,101,-1,0,
-        3156,3158,3,204,102,0,3157,3159,3,206,103,0,3158,3157,1,0,0,0,3158,
-        3159,1,0,0,0,3159,3167,1,0,0,0,3160,3161,10,2,0,0,3161,3166,3,202,
-        101,3,3162,3163,10,1,0,0,3163,3164,5,11,0,0,3164,3166,3,202,101,
-        2,3165,3160,1,0,0,0,3165,3162,1,0,0,0,3166,3169,1,0,0,0,3167,3165,
-        1,0,0,0,3167,3168,1,0,0,0,3168,203,1,0,0,0,3169,3167,1,0,0,0,3170,
-        3196,3,278,139,0,3171,3172,5,1,0,0,3172,3196,5,2,0,0,3173,3174,5,
-        210,0,0,3174,3175,5,1,0,0,3175,3180,3,202,101,0,3176,3177,5,3,0,
-        0,3177,3179,3,202,101,0,3178,3176,1,0,0,0,3179,3182,1,0,0,0,3180,
-        3178,1,0,0,0,3180,3181,1,0,0,0,3181,3183,1,0,0,0,3182,3180,1,0,0,
-        0,3183,3184,5,2,0,0,3184,3196,1,0,0,0,3185,3186,5,1,0,0,3186,3187,
-        3,202,101,0,3187,3188,5,2,0,0,3188,3196,1,0,0,0,3189,3196,5,12,0,
-        0,3190,3196,5,13,0,0,3191,3192,5,14,0,0,3192,3193,3,202,101,0,3193,
-        3194,5,15,0,0,3194,3196,1,0,0,0,3195,3170,1,0,0,0,3195,3171,1,0,
-        0,0,3195,3173,1,0,0,0,3195,3185,1,0,0,0,3195,3189,1,0,0,0,3195,3190,
-        1,0,0,0,3195,3191,1,0,0,0,3196,205,1,0,0,0,3197,3199,5,321,0,0,3198,
-        3200,5,325,0,0,3199,3198,1,0,0,0,3199,3200,1,0,0,0,3200,3228,1,0,
-        0,0,3201,3203,5,319,0,0,3202,3204,5,325,0,0,3203,3202,1,0,0,0,3203,
-        3204,1,0,0,0,3204,3228,1,0,0,0,3205,3207,5,325,0,0,3206,3208,5,325,
-        0,0,3207,3206,1,0,0,0,3207,3208,1,0,0,0,3208,3228,1,0,0,0,3209,3210,
-        5,16,0,0,3210,3211,5,330,0,0,3211,3213,5,17,0,0,3212,3214,5,325,
-        0,0,3213,3212,1,0,0,0,3213,3214,1,0,0,0,3214,3228,1,0,0,0,3215,3217,
-        5,16,0,0,3216,3218,5,330,0,0,3217,3216,1,0,0,0,3217,3218,1,0,0,0,
-        3218,3219,1,0,0,0,3219,3221,5,3,0,0,3220,3222,5,330,0,0,3221,3220,
-        1,0,0,0,3221,3222,1,0,0,0,3222,3223,1,0,0,0,3223,3225,5,17,0,0,3224,
-        3226,5,325,0,0,3225,3224,1,0,0,0,3225,3226,1,0,0,0,3226,3228,1,0,
-        0,0,3227,3197,1,0,0,0,3227,3201,1,0,0,0,3227,3205,1,0,0,0,3227,3209,
-        1,0,0,0,3227,3215,1,0,0,0,3228,207,1,0,0,0,3229,3230,3,278,139,0,
-        3230,3231,5,313,0,0,3231,3232,3,144,72,0,3232,209,1,0,0,0,3233,3234,
-        5,105,0,0,3234,3238,7,34,0,0,3235,3236,5,277,0,0,3236,3238,7,35,
-        0,0,3237,3233,1,0,0,0,3237,3235,1,0,0,0,3238,211,1,0,0,0,3239,3240,
-        5,135,0,0,3240,3248,5,154,0,0,3241,3242,5,221,0,0,3242,3249,5,280,
-        0,0,3243,3244,5,221,0,0,3244,3249,5,49,0,0,3245,3246,5,226,0,0,3246,
-        3249,5,221,0,0,3247,3249,5,250,0,0,3248,3241,1,0,0,0,3248,3243,1,
-        0,0,0,3248,3245,1,0,0,0,3248,3247,1,0,0,0,3249,3253,1,0,0,0,3250,
-        3251,5,221,0,0,3251,3253,7,36,0,0,3252,3239,1,0,0,0,3252,3250,1,
-        0,0,0,3253,213,1,0,0,0,3254,3260,3,144,72,0,3255,3256,3,278,139,
-        0,3256,3257,5,6,0,0,3257,3258,3,144,72,0,3258,3260,1,0,0,0,3259,
-        3254,1,0,0,0,3259,3255,1,0,0,0,3260,215,1,0,0,0,3261,3262,3,278,
-        139,0,3262,3263,5,4,0,0,3263,3264,3,278,139,0,3264,3267,1,0,0,0,
-        3265,3267,3,278,139,0,3266,3261,1,0,0,0,3266,3265,1,0,0,0,3267,217,
-        1,0,0,0,3268,3273,3,216,108,0,3269,3270,5,3,0,0,3270,3272,3,216,
-        108,0,3271,3269,1,0,0,0,3272,3275,1,0,0,0,3273,3271,1,0,0,0,3273,
-        3274,1,0,0,0,3274,219,1,0,0,0,3275,3273,1,0,0,0,3276,3277,5,108,
-        0,0,3277,3278,3,258,129,0,3278,3287,5,1,0,0,3279,3284,3,222,111,
-        0,3280,3281,5,3,0,0,3281,3283,3,222,111,0,3282,3280,1,0,0,0,3283,
-        3286,1,0,0,0,3284,3282,1,0,0,0,3284,3285,1,0,0,0,3285,3288,1,0,0,
-        0,3286,3284,1,0,0,0,3287,3279,1,0,0,0,3287,3288,1,0,0,0,3288,3289,
-        1,0,0,0,3289,3290,5,2,0,0,3290,3291,5,233,0,0,3291,3295,3,182,91,
-        0,3292,3294,3,224,112,0,3293,3292,1,0,0,0,3294,3297,1,0,0,0,3295,
-        3293,1,0,0,0,3295,3296,1,0,0,0,3296,3298,1,0,0,0,3297,3295,1,0,0,
-        0,3298,3299,3,226,113,0,3299,221,1,0,0,0,3300,3302,3,278,139,0,3301,
-        3300,1,0,0,0,3301,3302,1,0,0,0,3302,3303,1,0,0,0,3303,3304,3,182,
-        91,0,3304,223,1,0,0,0,3305,3306,5,148,0,0,3306,3325,3,278,139,0,
-        3307,3309,5,183,0,0,3308,3307,1,0,0,0,3308,3309,1,0,0,0,3309,3310,
-        1,0,0,0,3310,3325,5,79,0,0,3311,3312,5,233,0,0,3312,3313,5,184,0,
-        0,3313,3314,5,191,0,0,3314,3315,5,184,0,0,3315,3325,5,127,0,0,3316,
-        3317,5,38,0,0,3317,3318,5,191,0,0,3318,3319,5,184,0,0,3319,3325,
-        5,127,0,0,3320,3321,5,247,0,0,3321,3325,7,1,0,0,3322,3323,5,47,0,
-        0,3323,3325,3,172,86,0,3324,3305,1,0,0,0,3324,3308,1,0,0,0,3324,
-        3311,1,0,0,0,3324,3316,1,0,0,0,3324,3320,1,0,0,0,3324,3322,1,0,0,
-        0,3325,225,1,0,0,0,3326,3327,5,231,0,0,3327,3443,3,150,75,0,3328,
-        3329,5,252,0,0,3329,3330,3,278,139,0,3330,3331,5,313,0,0,3331,3332,
-        3,144,72,0,3332,3443,1,0,0,0,3333,3334,5,40,0,0,3334,3336,3,144,
-        72,0,3335,3337,3,228,114,0,3336,3335,1,0,0,0,3337,3338,1,0,0,0,3338,
-        3336,1,0,0,0,3338,3339,1,0,0,0,3339,3341,1,0,0,0,3340,3342,3,230,
-        115,0,3341,3340,1,0,0,0,3341,3342,1,0,0,0,3342,3343,1,0,0,0,3343,
-        3344,5,89,0,0,3344,3345,5,40,0,0,3345,3443,1,0,0,0,3346,3348,5,40,
-        0,0,3347,3349,3,228,114,0,3348,3347,1,0,0,0,3349,3350,1,0,0,0,3350,
-        3348,1,0,0,0,3350,3351,1,0,0,0,3351,3353,1,0,0,0,3352,3354,3,230,
-        115,0,3353,3352,1,0,0,0,3353,3354,1,0,0,0,3354,3355,1,0,0,0,3355,
-        3356,5,89,0,0,3356,3357,5,40,0,0,3357,3443,1,0,0,0,3358,3359,5,120,
-        0,0,3359,3360,3,144,72,0,3360,3361,5,266,0,0,3361,3369,3,232,116,
-        0,3362,3363,5,87,0,0,3363,3364,3,144,72,0,3364,3365,5,266,0,0,3365,
-        3366,3,232,116,0,3366,3368,1,0,0,0,3367,3362,1,0,0,0,3368,3371,1,
-        0,0,0,3369,3367,1,0,0,0,3369,3370,1,0,0,0,3370,3373,1,0,0,0,3371,
-        3369,1,0,0,0,3372,3374,3,230,115,0,3373,3372,1,0,0,0,3373,3374,1,
-        0,0,0,3374,3375,1,0,0,0,3375,3376,5,89,0,0,3376,3377,5,120,0,0,3377,
-        3443,1,0,0,0,3378,3379,5,136,0,0,3379,3443,3,278,139,0,3380,3381,
-        5,152,0,0,3381,3443,3,278,139,0,3382,3401,5,32,0,0,3383,3384,5,70,
-        0,0,3384,3389,3,278,139,0,3385,3386,5,3,0,0,3386,3388,3,278,139,
-        0,3387,3385,1,0,0,0,3388,3391,1,0,0,0,3389,3387,1,0,0,0,3389,3390,
-        1,0,0,0,3390,3392,1,0,0,0,3391,3389,1,0,0,0,3392,3395,3,182,91,0,
-        3393,3394,5,71,0,0,3394,3396,3,150,75,0,3395,3393,1,0,0,0,3395,3396,
-        1,0,0,0,3396,3397,1,0,0,0,3397,3398,5,326,0,0,3398,3400,1,0,0,0,
-        3399,3383,1,0,0,0,3400,3403,1,0,0,0,3401,3399,1,0,0,0,3401,3402,
-        1,0,0,0,3402,3405,1,0,0,0,3403,3401,1,0,0,0,3404,3406,3,232,116,
-        0,3405,3404,1,0,0,0,3405,3406,1,0,0,0,3406,3407,1,0,0,0,3407,3443,
-        5,89,0,0,3408,3409,3,278,139,0,3409,3410,5,10,0,0,3410,3412,1,0,
-        0,0,3411,3408,1,0,0,0,3411,3412,1,0,0,0,3412,3413,1,0,0,0,3413,3414,
-        5,162,0,0,3414,3415,3,232,116,0,3415,3416,5,89,0,0,3416,3417,5,162,
-        0,0,3417,3443,1,0,0,0,3418,3419,3,278,139,0,3419,3420,5,10,0,0,3420,
-        3422,1,0,0,0,3421,3418,1,0,0,0,3421,3422,1,0,0,0,3422,3423,1,0,0,
-        0,3423,3424,5,303,0,0,3424,3425,3,144,72,0,3425,3426,5,82,0,0,3426,
-        3427,3,232,116,0,3427,3428,5,89,0,0,3428,3429,5,303,0,0,3429,3443,
-        1,0,0,0,3430,3431,3,278,139,0,3431,3432,5,10,0,0,3432,3434,1,0,0,
-        0,3433,3430,1,0,0,0,3433,3434,1,0,0,0,3434,3435,1,0,0,0,3435,3436,
-        5,225,0,0,3436,3437,3,232,116,0,3437,3438,5,287,0,0,3438,3439,3,
-        144,72,0,3439,3440,5,89,0,0,3440,3441,5,225,0,0,3441,3443,1,0,0,
-        0,3442,3326,1,0,0,0,3442,3328,1,0,0,0,3442,3333,1,0,0,0,3442,3346,
-        1,0,0,0,3442,3358,1,0,0,0,3442,3378,1,0,0,0,3442,3380,1,0,0,0,3442,
-        3382,1,0,0,0,3442,3411,1,0,0,0,3442,3421,1,0,0,0,3442,3433,1,0,0,
-        0,3443,227,1,0,0,0,3444,3445,5,301,0,0,3445,3446,3,144,72,0,3446,
-        3447,5,266,0,0,3447,3448,3,232,116,0,3448,229,1,0,0,0,3449,3450,
-        5,85,0,0,3450,3451,3,232,116,0,3451,231,1,0,0,0,3452,3453,3,226,
-        113,0,3453,3454,5,326,0,0,3454,3456,1,0,0,0,3455,3452,1,0,0,0,3456,
-        3457,1,0,0,0,3457,3455,1,0,0,0,3457,3458,1,0,0,0,3458,233,1,0,0,
-        0,3459,3466,5,54,0,0,3460,3466,5,249,0,0,3461,3466,5,74,0,0,3462,
-        3466,5,128,0,0,3463,3466,5,288,0,0,3464,3466,3,278,139,0,3465,3459,
-        1,0,0,0,3465,3460,1,0,0,0,3465,3461,1,0,0,0,3465,3462,1,0,0,0,3465,
-        3463,1,0,0,0,3465,3464,1,0,0,0,3466,235,1,0,0,0,3467,3471,5,261,
-        0,0,3468,3471,5,244,0,0,3469,3471,3,278,139,0,3470,3467,1,0,0,0,
-        3470,3468,1,0,0,0,3470,3469,1,0,0,0,3470,3471,1,0,0,0,3471,3472,
-        1,0,0,0,3472,3473,3,268,134,0,3473,237,1,0,0,0,3474,3477,3,240,120,
-        0,3475,3477,3,244,122,0,3476,3474,1,0,0,0,3476,3475,1,0,0,0,3477,
-        239,1,0,0,0,3478,3490,3,278,139,0,3479,3480,3,278,139,0,3480,3481,
-        5,4,0,0,3481,3482,3,278,139,0,3482,3490,1,0,0,0,3483,3484,3,278,
-        139,0,3484,3485,5,4,0,0,3485,3486,3,278,139,0,3486,3487,5,4,0,0,
-        3487,3488,3,278,139,0,3488,3490,1,0,0,0,3489,3478,1,0,0,0,3489,3479,
-        1,0,0,0,3489,3483,1,0,0,0,3490,241,1,0,0,0,3491,3503,3,278,139,0,
-        3492,3493,3,278,139,0,3493,3494,5,4,0,0,3494,3495,3,278,139,0,3495,
-        3503,1,0,0,0,3496,3497,3,278,139,0,3497,3498,5,4,0,0,3498,3499,3,
-        278,139,0,3499,3500,5,4,0,0,3500,3501,3,278,139,0,3501,3503,1,0,
-        0,0,3502,3491,1,0,0,0,3502,3492,1,0,0,0,3502,3496,1,0,0,0,3503,243,
-        1,0,0,0,3504,3516,3,278,139,0,3505,3506,3,278,139,0,3506,3507,5,
-        4,0,0,3507,3508,3,278,139,0,3508,3516,1,0,0,0,3509,3510,3,278,139,
-        0,3510,3511,5,4,0,0,3511,3512,3,278,139,0,3512,3513,5,4,0,0,3513,
-        3514,3,278,139,0,3514,3516,1,0,0,0,3515,3504,1,0,0,0,3515,3505,1,
-        0,0,0,3515,3509,1,0,0,0,3516,245,1,0,0,0,3517,3529,3,278,139,0,3518,
-        3519,3,278,139,0,3519,3520,5,4,0,0,3520,3521,3,278,139,0,3521,3529,
-        1,0,0,0,3522,3523,3,278,139,0,3523,3524,5,4,0,0,3524,3525,3,278,
-        139,0,3525,3526,5,4,0,0,3526,3527,3,278,139,0,3527,3529,1,0,0,0,
-        3528,3517,1,0,0,0,3528,3518,1,0,0,0,3528,3522,1,0,0,0,3529,247,1,
-        0,0,0,3530,3536,3,278,139,0,3531,3532,3,278,139,0,3532,3533,5,4,
-        0,0,3533,3534,3,278,139,0,3534,3536,1,0,0,0,3535,3530,1,0,0,0,3535,
-        3531,1,0,0,0,3536,249,1,0,0,0,3537,3543,3,278,139,0,3538,3539,3,
-        278,139,0,3539,3540,5,4,0,0,3540,3541,3,278,139,0,3541,3543,1,0,
-        0,0,3542,3537,1,0,0,0,3542,3538,1,0,0,0,3543,251,1,0,0,0,3544,3545,
-        3,278,139,0,3545,253,1,0,0,0,3546,3547,3,278,139,0,3547,255,1,0,
-        0,0,3548,3549,3,268,134,0,3549,257,1,0,0,0,3550,3551,3,268,134,0,
-        3551,259,1,0,0,0,3552,3555,3,268,134,0,3553,3555,4,130,16,0,3554,
-        3552,1,0,0,0,3554,3553,1,0,0,0,3555,261,1,0,0,0,3556,3557,1,0,0,
-        0,3557,263,1,0,0,0,3558,3559,3,268,134,0,3559,265,1,0,0,0,3560,3561,
-        3,278,139,0,3561,267,1,0,0,0,3562,3567,3,278,139,0,3563,3564,5,4,
-        0,0,3564,3566,3,278,139,0,3565,3563,1,0,0,0,3566,3569,1,0,0,0,3567,
-        3565,1,0,0,0,3567,3568,1,0,0,0,3568,269,1,0,0,0,3569,3567,1,0,0,
-        0,3570,3574,3,272,136,0,3571,3574,5,65,0,0,3572,3574,5,61,0,0,3573,
-        3570,1,0,0,0,3573,3571,1,0,0,0,3573,3572,1,0,0,0,3574,271,1,0,0,
-        0,3575,3581,3,278,139,0,3576,3577,5,290,0,0,3577,3581,3,278,139,
-        0,3578,3579,5,236,0,0,3579,3581,3,278,139,0,3580,3575,1,0,0,0,3580,
-        3576,1,0,0,0,3580,3578,1,0,0,0,3581,273,1,0,0,0,3582,3587,3,278,
-        139,0,3583,3584,5,3,0,0,3584,3586,3,278,139,0,3585,3583,1,0,0,0,
-        3586,3589,1,0,0,0,3587,3585,1,0,0,0,3587,3588,1,0,0,0,3588,275,1,
-        0,0,0,3589,3587,1,0,0,0,3590,3598,5,54,0,0,3591,3598,5,249,0,0,3592,
-        3598,5,74,0,0,3593,3598,5,128,0,0,3594,3598,5,288,0,0,3595,3598,
-        5,94,0,0,3596,3598,3,278,139,0,3597,3590,1,0,0,0,3597,3591,1,0,0,
-        0,3597,3592,1,0,0,0,3597,3593,1,0,0,0,3597,3594,1,0,0,0,3597,3595,
-        1,0,0,0,3597,3596,1,0,0,0,3598,277,1,0,0,0,3599,3605,5,333,0,0,3600,
-        3605,5,335,0,0,3601,3605,3,282,141,0,3602,3605,5,336,0,0,3603,3605,
-        5,334,0,0,3604,3599,1,0,0,0,3604,3600,1,0,0,0,3604,3601,1,0,0,0,
-        3604,3602,1,0,0,0,3604,3603,1,0,0,0,3605,279,1,0,0,0,3606,3608,5,
-        320,0,0,3607,3606,1,0,0,0,3607,3608,1,0,0,0,3608,3609,1,0,0,0,3609,
-        3619,5,331,0,0,3610,3612,5,320,0,0,3611,3610,1,0,0,0,3611,3612,1,
-        0,0,0,3612,3613,1,0,0,0,3613,3619,5,332,0,0,3614,3616,5,320,0,0,
-        3615,3614,1,0,0,0,3615,3616,1,0,0,0,3616,3617,1,0,0,0,3617,3619,
-        5,330,0,0,3618,3607,1,0,0,0,3618,3611,1,0,0,0,3618,3615,1,0,0,0,
-        3619,281,1,0,0,0,3620,3621,7,37,0,0,3621,283,1,0,0,0,476,287,296,
-        300,304,308,312,325,332,336,340,346,350,357,362,366,372,376,395,
-        401,405,409,413,421,425,428,433,439,448,454,458,464,471,479,491,
-        500,509,515,526,534,542,549,559,566,574,589,624,627,630,633,639,
-        644,651,657,661,665,673,679,683,687,701,709,728,753,756,763,770,
-        779,782,792,796,803,811,820,826,831,835,843,848,857,863,870,879,
-        885,889,895,902,907,920,925,937,941,947,956,961,967,995,1001,1003,
-        1009,1015,1017,1025,1027,1037,1039,1054,1059,1066,1076,1082,1084,
-        1092,1094,1101,1122,1125,1129,1133,1151,1154,1165,1168,1184,1194,
-        1198,1204,1207,1216,1228,1231,1241,1245,1251,1258,1263,1269,1273,
-        1277,1283,1294,1301,1311,1314,1319,1321,1328,1334,1336,1344,1350,
-        1353,1355,1367,1374,1378,1381,1385,1389,1398,1401,1404,1409,1412,
-        1420,1423,1436,1440,1447,1455,1466,1469,1479,1482,1493,1498,1506,
-        1509,1513,1517,1526,1531,1540,1543,1546,1550,1561,1564,1567,1572,
-        1575,1604,1608,1612,1616,1620,1624,1626,1632,1641,1646,1658,1667,
-        1672,1678,1680,1688,1697,1700,1708,1711,1714,1719,1722,1734,1737,
-        1745,1750,1754,1756,1758,1781,1783,1804,1814,1825,1829,1831,1839,
-        1850,1861,1872,1879,1892,1898,1920,1935,1940,1944,1954,1960,1966,
-        1974,1979,1986,1988,1994,2000,2004,2009,2018,2023,2037,2047,2050,
-        2059,2064,2069,2071,2080,2083,2091,2094,2101,2106,2113,2117,2119,
-        2127,2137,2143,2145,2152,2156,2158,2165,2169,2171,2173,2182,2193,
-        2197,2207,2217,2221,2229,2231,2244,2252,2261,2267,2275,2281,2285,
-        2290,2295,2301,2320,2322,2324,2354,2365,2373,2378,2383,2396,2402,
-        2405,2412,2417,2420,2423,2428,2435,2438,2447,2450,2454,2460,2463,
-        2478,2481,2500,2504,2512,2516,2541,2544,2553,2559,2565,2571,2580,
-        2583,2586,2605,2614,2632,2648,2651,2660,2669,2675,2681,2692,2694,
-        2699,2706,2708,2714,2720,2731,2740,2745,2750,2752,2754,2760,2762,
-        2772,2781,2783,2789,2791,2794,2804,2806,2814,2822,2825,2830,2835,
-        2845,2849,2853,2856,2858,2866,2869,2879,2887,2889,2897,2903,2915,
-        2924,2931,2936,2943,2948,2971,2976,2978,2985,2989,2996,3000,3016,
-        3031,3038,3047,3057,3062,3071,3076,3084,3092,3095,3101,3104,3111,
-        3119,3122,3130,3133,3142,3153,3158,3165,3167,3180,3195,3199,3203,
-        3207,3213,3217,3221,3225,3227,3237,3248,3252,3259,3266,3273,3284,
-        3287,3295,3301,3308,3324,3338,3341,3350,3353,3369,3373,3389,3395,
-        3401,3405,3411,3421,3433,3442,3457,3465,3470,3476,3489,3502,3515,
-        3528,3535,3542,3554,3567,3573,3580,3587,3597,3604,3607,3611,3615,
-        3618
+        2685,1,0,0,0,2794,2724,1,0,0,0,2794,2765,1,0,0,0,2795,2810,1,0,0,
+        0,2796,2797,10,26,0,0,2797,2798,5,8,0,0,2798,2799,3,150,75,0,2799,
+        2800,5,9,0,0,2800,2809,1,0,0,0,2801,2802,10,24,0,0,2802,2803,5,4,
+        0,0,2803,2809,3,278,139,0,2804,2805,10,23,0,0,2805,2806,5,4,0,0,
+        2806,2807,4,76,14,0,2807,2809,3,262,131,0,2808,2796,1,0,0,0,2808,
+        2801,1,0,0,0,2808,2804,1,0,0,0,2809,2812,1,0,0,0,2810,2808,1,0,0,
+        0,2810,2811,1,0,0,0,2811,153,1,0,0,0,2812,2810,1,0,0,0,2813,2814,
+        3,156,78,0,2814,2815,5,3,0,0,2815,2818,3,172,86,0,2816,2817,5,28,
+        0,0,2817,2819,3,278,139,0,2818,2816,1,0,0,0,2818,2819,1,0,0,0,2819,
+        2829,1,0,0,0,2820,2821,5,204,0,0,2821,2826,3,160,80,0,2822,2823,
+        5,3,0,0,2823,2825,3,160,80,0,2824,2822,1,0,0,0,2825,2828,1,0,0,0,
+        2826,2824,1,0,0,0,2826,2827,1,0,0,0,2827,2830,1,0,0,0,2828,2826,
+        1,0,0,0,2829,2820,1,0,0,0,2829,2830,1,0,0,0,2830,155,1,0,0,0,2831,
+        2834,3,144,72,0,2832,2833,5,105,0,0,2833,2835,3,158,79,0,2834,2832,
+        1,0,0,0,2834,2835,1,0,0,0,2835,157,1,0,0,0,2836,2839,5,138,0,0,2837,
+        2838,5,88,0,0,2838,2840,7,25,0,0,2839,2837,1,0,0,0,2839,2840,1,0,
+        0,0,2840,159,1,0,0,0,2841,2842,3,156,78,0,2842,2843,5,28,0,0,2843,
+        2844,3,278,139,0,2844,161,1,0,0,0,2845,2850,5,90,0,0,2846,2850,5,
+        184,0,0,2847,2848,5,71,0,0,2848,2850,3,144,72,0,2849,2845,1,0,0,
+        0,2849,2846,1,0,0,0,2849,2847,1,0,0,0,2850,163,1,0,0,0,2851,2853,
+        5,307,0,0,2852,2854,5,27,0,0,2853,2852,1,0,0,0,2853,2854,1,0,0,0,
+        2854,2863,1,0,0,0,2855,2857,5,305,0,0,2856,2858,7,26,0,0,2857,2856,
+        1,0,0,0,2857,2858,1,0,0,0,2858,2860,1,0,0,0,2859,2861,5,27,0,0,2860,
+        2859,1,0,0,0,2860,2861,1,0,0,0,2861,2863,1,0,0,0,2862,2851,1,0,0,
+        0,2862,2855,1,0,0,0,2863,165,1,0,0,0,2864,2871,5,90,0,0,2865,2871,
+        5,184,0,0,2866,2867,5,86,0,0,2867,2871,5,27,0,0,2868,2869,5,86,0,
+        0,2869,2871,5,187,0,0,2870,2864,1,0,0,0,2870,2865,1,0,0,0,2870,2866,
+        1,0,0,0,2870,2868,1,0,0,0,2871,167,1,0,0,0,2872,2874,5,146,0,0,2873,
+        2872,1,0,0,0,2873,2874,1,0,0,0,2874,2875,1,0,0,0,2875,2876,3,144,
+        72,0,2876,2877,5,296,0,0,2877,2878,3,156,78,0,2878,2884,1,0,0,0,
+        2879,2880,3,144,72,0,2880,2881,5,10,0,0,2881,2882,3,156,78,0,2882,
+        2884,1,0,0,0,2883,2873,1,0,0,0,2883,2879,1,0,0,0,2884,169,1,0,0,
+        0,2885,2886,7,27,0,0,2886,171,1,0,0,0,2887,2894,5,327,0,0,2888,2891,
+        5,328,0,0,2889,2890,5,278,0,0,2890,2892,5,327,0,0,2891,2889,1,0,
+        0,0,2891,2892,1,0,0,0,2892,2894,1,0,0,0,2893,2887,1,0,0,0,2893,2888,
+        1,0,0,0,2894,173,1,0,0,0,2895,2896,7,28,0,0,2896,175,1,0,0,0,2897,
+        2898,7,29,0,0,2898,177,1,0,0,0,2899,2901,5,130,0,0,2900,2902,7,19,
+        0,0,2901,2900,1,0,0,0,2901,2902,1,0,0,0,2902,2903,1,0,0,0,2903,2904,
+        3,172,86,0,2904,2907,3,180,90,0,2905,2906,5,270,0,0,2906,2908,3,
+        180,90,0,2907,2905,1,0,0,0,2907,2908,1,0,0,0,2908,179,1,0,0,0,2909,
+        2910,7,30,0,0,2910,181,1,0,0,0,2911,2912,6,91,-1,0,2912,2913,5,240,
+        0,0,2913,2914,5,1,0,0,2914,2919,3,184,92,0,2915,2916,5,3,0,0,2916,
+        2918,3,184,92,0,2917,2915,1,0,0,0,2918,2921,1,0,0,0,2919,2917,1,
+        0,0,0,2919,2920,1,0,0,0,2920,2922,1,0,0,0,2921,2919,1,0,0,0,2922,
+        2923,5,2,0,0,2923,2983,1,0,0,0,2924,2925,5,130,0,0,2925,2928,3,180,
+        90,0,2926,2927,5,270,0,0,2927,2929,3,180,90,0,2928,2926,1,0,0,0,
+        2928,2929,1,0,0,0,2929,2983,1,0,0,0,2930,2935,5,269,0,0,2931,2932,
+        5,1,0,0,2932,2933,3,186,93,0,2933,2934,5,2,0,0,2934,2936,1,0,0,0,
+        2935,2931,1,0,0,0,2935,2936,1,0,0,0,2936,2940,1,0,0,0,2937,2938,
+        7,31,0,0,2938,2939,5,268,0,0,2939,2941,5,312,0,0,2940,2937,1,0,0,
+        0,2940,2941,1,0,0,0,2941,2983,1,0,0,0,2942,2947,5,268,0,0,2943,2944,
+        5,1,0,0,2944,2945,3,186,93,0,2945,2946,5,2,0,0,2946,2948,1,0,0,0,
+        2947,2943,1,0,0,0,2947,2948,1,0,0,0,2948,2952,1,0,0,0,2949,2950,
+        7,31,0,0,2950,2951,5,268,0,0,2951,2953,5,312,0,0,2952,2949,1,0,0,
+        0,2952,2953,1,0,0,0,2953,2983,1,0,0,0,2954,2955,5,83,0,0,2955,2983,
+        5,214,0,0,2956,2957,5,27,0,0,2957,2958,5,315,0,0,2958,2959,3,182,
+        91,0,2959,2960,5,317,0,0,2960,2983,1,0,0,0,2961,2962,5,163,0,0,2962,
+        2963,5,315,0,0,2963,2964,3,182,91,0,2964,2965,5,3,0,0,2965,2966,
+        3,182,91,0,2966,2967,5,317,0,0,2967,2983,1,0,0,0,2968,2980,3,278,
+        139,0,2969,2970,5,1,0,0,2970,2975,3,186,93,0,2971,2972,5,3,0,0,2972,
+        2974,3,186,93,0,2973,2971,1,0,0,0,2974,2977,1,0,0,0,2975,2973,1,
+        0,0,0,2975,2976,1,0,0,0,2976,2978,1,0,0,0,2977,2975,1,0,0,0,2978,
+        2979,5,2,0,0,2979,2981,1,0,0,0,2980,2969,1,0,0,0,2980,2981,1,0,0,
+        0,2981,2983,1,0,0,0,2982,2911,1,0,0,0,2982,2924,1,0,0,0,2982,2930,
+        1,0,0,0,2982,2942,1,0,0,0,2982,2954,1,0,0,0,2982,2956,1,0,0,0,2982,
+        2961,1,0,0,0,2982,2968,1,0,0,0,2983,2993,1,0,0,0,2984,2985,10,2,
+        0,0,2985,2989,5,27,0,0,2986,2987,5,8,0,0,2987,2988,5,330,0,0,2988,
+        2990,5,9,0,0,2989,2986,1,0,0,0,2989,2990,1,0,0,0,2990,2992,1,0,0,
+        0,2991,2984,1,0,0,0,2992,2995,1,0,0,0,2993,2991,1,0,0,0,2993,2994,
+        1,0,0,0,2994,183,1,0,0,0,2995,2993,1,0,0,0,2996,3001,3,182,91,0,
+        2997,2998,3,278,139,0,2998,2999,3,182,91,0,2999,3001,1,0,0,0,3000,
+        2996,1,0,0,0,3000,2997,1,0,0,0,3001,185,1,0,0,0,3002,3005,5,330,
+        0,0,3003,3005,3,182,91,0,3004,3002,1,0,0,0,3004,3003,1,0,0,0,3005,
+        187,1,0,0,0,3006,3007,5,301,0,0,3007,3008,3,144,72,0,3008,3009,5,
+        266,0,0,3009,3010,3,144,72,0,3010,189,1,0,0,0,3011,3012,5,100,0,
+        0,3012,3013,5,1,0,0,3013,3014,3,48,24,0,3014,3015,5,2,0,0,3015,191,
+        1,0,0,0,3016,3017,5,301,0,0,3017,3020,5,165,0,0,3018,3019,5,25,0,
+        0,3019,3021,3,144,72,0,3020,3018,1,0,0,0,3020,3021,1,0,0,0,3021,
+        3022,1,0,0,0,3022,3023,5,266,0,0,3023,3024,5,288,0,0,3024,3025,5,
+        252,0,0,3025,3026,3,278,139,0,3026,3027,5,313,0,0,3027,3035,3,144,
+        72,0,3028,3029,5,3,0,0,3029,3030,3,278,139,0,3030,3031,5,313,0,0,
+        3031,3032,3,144,72,0,3032,3034,1,0,0,0,3033,3028,1,0,0,0,3034,3037,
+        1,0,0,0,3035,3033,1,0,0,0,3035,3036,1,0,0,0,3036,3081,1,0,0,0,3037,
+        3035,1,0,0,0,3038,3039,5,301,0,0,3039,3042,5,165,0,0,3040,3041,5,
+        25,0,0,3041,3043,3,144,72,0,3042,3040,1,0,0,0,3042,3043,1,0,0,0,
+        3043,3044,1,0,0,0,3044,3045,5,266,0,0,3045,3081,5,74,0,0,3046,3047,
+        5,301,0,0,3047,3048,5,183,0,0,3048,3051,5,165,0,0,3049,3050,5,25,
+        0,0,3050,3052,3,144,72,0,3051,3049,1,0,0,0,3051,3052,1,0,0,0,3052,
+        3053,1,0,0,0,3053,3054,5,266,0,0,3054,3066,5,128,0,0,3055,3056,5,
+        1,0,0,3056,3061,3,278,139,0,3057,3058,5,3,0,0,3058,3060,3,278,139,
+        0,3059,3057,1,0,0,0,3060,3063,1,0,0,0,3061,3059,1,0,0,0,3061,3062,
+        1,0,0,0,3062,3064,1,0,0,0,3063,3061,1,0,0,0,3064,3065,5,2,0,0,3065,
+        3067,1,0,0,0,3066,3055,1,0,0,0,3066,3067,1,0,0,0,3067,3068,1,0,0,
+        0,3068,3069,5,297,0,0,3069,3070,5,1,0,0,3070,3075,3,144,72,0,3071,
+        3072,5,3,0,0,3072,3074,3,144,72,0,3073,3071,1,0,0,0,3074,3077,1,
+        0,0,0,3075,3073,1,0,0,0,3075,3076,1,0,0,0,3076,3078,1,0,0,0,3077,
+        3075,1,0,0,0,3078,3079,5,2,0,0,3079,3081,1,0,0,0,3080,3016,1,0,0,
+        0,3080,3038,1,0,0,0,3080,3046,1,0,0,0,3081,193,1,0,0,0,3082,3088,
+        5,200,0,0,3083,3089,3,278,139,0,3084,3085,5,1,0,0,3085,3086,3,66,
+        33,0,3086,3087,5,2,0,0,3087,3089,1,0,0,0,3088,3083,1,0,0,0,3088,
+        3084,1,0,0,0,3089,195,1,0,0,0,3090,3091,5,169,0,0,3091,3096,3,98,
+        49,0,3092,3093,5,3,0,0,3093,3095,3,98,49,0,3094,3092,1,0,0,0,3095,
+        3098,1,0,0,0,3096,3094,1,0,0,0,3096,3097,1,0,0,0,3097,3100,1,0,0,
+        0,3098,3096,1,0,0,0,3099,3090,1,0,0,0,3099,3100,1,0,0,0,3100,3101,
+        1,0,0,0,3101,3105,3,198,99,0,3102,3103,5,21,0,0,3103,3104,5,164,
+        0,0,3104,3106,3,102,51,0,3105,3102,1,0,0,0,3105,3106,1,0,0,0,3106,
+        3108,1,0,0,0,3107,3109,7,13,0,0,3108,3107,1,0,0,0,3108,3109,1,0,
+        0,0,3109,3115,1,0,0,0,3110,3111,5,207,0,0,3111,3112,5,1,0,0,3112,
+        3113,3,202,101,0,3113,3114,5,2,0,0,3114,3116,1,0,0,0,3115,3110,1,
+        0,0,0,3115,3116,1,0,0,0,3116,3126,1,0,0,0,3117,3118,5,258,0,0,3118,
+        3123,3,104,52,0,3119,3120,5,3,0,0,3120,3122,3,104,52,0,3121,3119,
+        1,0,0,0,3122,3125,1,0,0,0,3123,3121,1,0,0,0,3123,3124,1,0,0,0,3124,
+        3127,1,0,0,0,3125,3123,1,0,0,0,3126,3117,1,0,0,0,3126,3127,1,0,0,
+        0,3127,3137,1,0,0,0,3128,3129,5,72,0,0,3129,3134,3,106,53,0,3130,
+        3131,5,3,0,0,3131,3133,3,106,53,0,3132,3130,1,0,0,0,3133,3136,1,
+        0,0,0,3134,3132,1,0,0,0,3134,3135,1,0,0,0,3135,3138,1,0,0,0,3136,
+        3134,1,0,0,0,3137,3128,1,0,0,0,3137,3138,1,0,0,0,3138,197,1,0,0,
+        0,3139,3146,7,32,0,0,3140,3141,5,34,0,0,3141,3142,3,200,100,0,3142,
+        3143,5,25,0,0,3143,3144,3,200,100,0,3144,3147,1,0,0,0,3145,3147,
+        3,200,100,0,3146,3140,1,0,0,0,3146,3145,1,0,0,0,3147,199,1,0,0,0,
+        3148,3149,5,279,0,0,3149,3158,5,213,0,0,3150,3151,5,279,0,0,3151,
+        3158,5,103,0,0,3152,3153,5,57,0,0,3153,3158,5,240,0,0,3154,3155,
+        3,144,72,0,3155,3156,7,33,0,0,3156,3158,1,0,0,0,3157,3148,1,0,0,
+        0,3157,3150,1,0,0,0,3157,3152,1,0,0,0,3157,3154,1,0,0,0,3158,201,
+        1,0,0,0,3159,3160,6,101,-1,0,3160,3162,3,204,102,0,3161,3163,3,206,
+        103,0,3162,3161,1,0,0,0,3162,3163,1,0,0,0,3163,3171,1,0,0,0,3164,
+        3165,10,2,0,0,3165,3170,3,202,101,3,3166,3167,10,1,0,0,3167,3168,
+        5,11,0,0,3168,3170,3,202,101,2,3169,3164,1,0,0,0,3169,3166,1,0,0,
+        0,3170,3173,1,0,0,0,3171,3169,1,0,0,0,3171,3172,1,0,0,0,3172,203,
+        1,0,0,0,3173,3171,1,0,0,0,3174,3200,3,278,139,0,3175,3176,5,1,0,
+        0,3176,3200,5,2,0,0,3177,3178,5,210,0,0,3178,3179,5,1,0,0,3179,3184,
+        3,202,101,0,3180,3181,5,3,0,0,3181,3183,3,202,101,0,3182,3180,1,
+        0,0,0,3183,3186,1,0,0,0,3184,3182,1,0,0,0,3184,3185,1,0,0,0,3185,
+        3187,1,0,0,0,3186,3184,1,0,0,0,3187,3188,5,2,0,0,3188,3200,1,0,0,
+        0,3189,3190,5,1,0,0,3190,3191,3,202,101,0,3191,3192,5,2,0,0,3192,
+        3200,1,0,0,0,3193,3200,5,12,0,0,3194,3200,5,13,0,0,3195,3196,5,14,
+        0,0,3196,3197,3,202,101,0,3197,3198,5,15,0,0,3198,3200,1,0,0,0,3199,
+        3174,1,0,0,0,3199,3175,1,0,0,0,3199,3177,1,0,0,0,3199,3189,1,0,0,
+        0,3199,3193,1,0,0,0,3199,3194,1,0,0,0,3199,3195,1,0,0,0,3200,205,
+        1,0,0,0,3201,3203,5,321,0,0,3202,3204,5,325,0,0,3203,3202,1,0,0,
+        0,3203,3204,1,0,0,0,3204,3232,1,0,0,0,3205,3207,5,319,0,0,3206,3208,
+        5,325,0,0,3207,3206,1,0,0,0,3207,3208,1,0,0,0,3208,3232,1,0,0,0,
+        3209,3211,5,325,0,0,3210,3212,5,325,0,0,3211,3210,1,0,0,0,3211,3212,
+        1,0,0,0,3212,3232,1,0,0,0,3213,3214,5,16,0,0,3214,3215,5,330,0,0,
+        3215,3217,5,17,0,0,3216,3218,5,325,0,0,3217,3216,1,0,0,0,3217,3218,
+        1,0,0,0,3218,3232,1,0,0,0,3219,3221,5,16,0,0,3220,3222,5,330,0,0,
+        3221,3220,1,0,0,0,3221,3222,1,0,0,0,3222,3223,1,0,0,0,3223,3225,
+        5,3,0,0,3224,3226,5,330,0,0,3225,3224,1,0,0,0,3225,3226,1,0,0,0,
+        3226,3227,1,0,0,0,3227,3229,5,17,0,0,3228,3230,5,325,0,0,3229,3228,
+        1,0,0,0,3229,3230,1,0,0,0,3230,3232,1,0,0,0,3231,3201,1,0,0,0,3231,
+        3205,1,0,0,0,3231,3209,1,0,0,0,3231,3213,1,0,0,0,3231,3219,1,0,0,
+        0,3232,207,1,0,0,0,3233,3234,3,278,139,0,3234,3235,5,313,0,0,3235,
+        3236,3,144,72,0,3236,209,1,0,0,0,3237,3238,5,105,0,0,3238,3242,7,
+        34,0,0,3239,3240,5,277,0,0,3240,3242,7,35,0,0,3241,3237,1,0,0,0,
+        3241,3239,1,0,0,0,3242,211,1,0,0,0,3243,3244,5,135,0,0,3244,3252,
+        5,154,0,0,3245,3246,5,221,0,0,3246,3253,5,280,0,0,3247,3248,5,221,
+        0,0,3248,3253,5,49,0,0,3249,3250,5,226,0,0,3250,3253,5,221,0,0,3251,
+        3253,5,250,0,0,3252,3245,1,0,0,0,3252,3247,1,0,0,0,3252,3249,1,0,
+        0,0,3252,3251,1,0,0,0,3253,3257,1,0,0,0,3254,3255,5,221,0,0,3255,
+        3257,7,36,0,0,3256,3243,1,0,0,0,3256,3254,1,0,0,0,3257,213,1,0,0,
+        0,3258,3264,3,144,72,0,3259,3260,3,278,139,0,3260,3261,5,6,0,0,3261,
+        3262,3,144,72,0,3262,3264,1,0,0,0,3263,3258,1,0,0,0,3263,3259,1,
+        0,0,0,3264,215,1,0,0,0,3265,3266,3,278,139,0,3266,3267,5,4,0,0,3267,
+        3268,3,278,139,0,3268,3271,1,0,0,0,3269,3271,3,278,139,0,3270,3265,
+        1,0,0,0,3270,3269,1,0,0,0,3271,217,1,0,0,0,3272,3277,3,216,108,0,
+        3273,3274,5,3,0,0,3274,3276,3,216,108,0,3275,3273,1,0,0,0,3276,3279,
+        1,0,0,0,3277,3275,1,0,0,0,3277,3278,1,0,0,0,3278,219,1,0,0,0,3279,
+        3277,1,0,0,0,3280,3281,5,108,0,0,3281,3282,3,258,129,0,3282,3291,
+        5,1,0,0,3283,3288,3,222,111,0,3284,3285,5,3,0,0,3285,3287,3,222,
+        111,0,3286,3284,1,0,0,0,3287,3290,1,0,0,0,3288,3286,1,0,0,0,3288,
+        3289,1,0,0,0,3289,3292,1,0,0,0,3290,3288,1,0,0,0,3291,3283,1,0,0,
+        0,3291,3292,1,0,0,0,3292,3293,1,0,0,0,3293,3294,5,2,0,0,3294,3295,
+        5,233,0,0,3295,3299,3,182,91,0,3296,3298,3,224,112,0,3297,3296,1,
+        0,0,0,3298,3301,1,0,0,0,3299,3297,1,0,0,0,3299,3300,1,0,0,0,3300,
+        3302,1,0,0,0,3301,3299,1,0,0,0,3302,3303,3,226,113,0,3303,221,1,
+        0,0,0,3304,3306,3,278,139,0,3305,3304,1,0,0,0,3305,3306,1,0,0,0,
+        3306,3307,1,0,0,0,3307,3308,3,182,91,0,3308,223,1,0,0,0,3309,3310,
+        5,148,0,0,3310,3329,3,278,139,0,3311,3313,5,183,0,0,3312,3311,1,
+        0,0,0,3312,3313,1,0,0,0,3313,3314,1,0,0,0,3314,3329,5,79,0,0,3315,
+        3316,5,233,0,0,3316,3317,5,184,0,0,3317,3318,5,191,0,0,3318,3319,
+        5,184,0,0,3319,3329,5,127,0,0,3320,3321,5,38,0,0,3321,3322,5,191,
+        0,0,3322,3323,5,184,0,0,3323,3329,5,127,0,0,3324,3325,5,247,0,0,
+        3325,3329,7,1,0,0,3326,3327,5,47,0,0,3327,3329,3,172,86,0,3328,3309,
+        1,0,0,0,3328,3312,1,0,0,0,3328,3315,1,0,0,0,3328,3320,1,0,0,0,3328,
+        3324,1,0,0,0,3328,3326,1,0,0,0,3329,225,1,0,0,0,3330,3331,5,231,
+        0,0,3331,3447,3,150,75,0,3332,3333,5,252,0,0,3333,3334,3,278,139,
+        0,3334,3335,5,313,0,0,3335,3336,3,144,72,0,3336,3447,1,0,0,0,3337,
+        3338,5,40,0,0,3338,3340,3,144,72,0,3339,3341,3,228,114,0,3340,3339,
+        1,0,0,0,3341,3342,1,0,0,0,3342,3340,1,0,0,0,3342,3343,1,0,0,0,3343,
+        3345,1,0,0,0,3344,3346,3,230,115,0,3345,3344,1,0,0,0,3345,3346,1,
+        0,0,0,3346,3347,1,0,0,0,3347,3348,5,89,0,0,3348,3349,5,40,0,0,3349,
+        3447,1,0,0,0,3350,3352,5,40,0,0,3351,3353,3,228,114,0,3352,3351,
+        1,0,0,0,3353,3354,1,0,0,0,3354,3352,1,0,0,0,3354,3355,1,0,0,0,3355,
+        3357,1,0,0,0,3356,3358,3,230,115,0,3357,3356,1,0,0,0,3357,3358,1,
+        0,0,0,3358,3359,1,0,0,0,3359,3360,5,89,0,0,3360,3361,5,40,0,0,3361,
+        3447,1,0,0,0,3362,3363,5,120,0,0,3363,3364,3,144,72,0,3364,3365,
+        5,266,0,0,3365,3373,3,232,116,0,3366,3367,5,87,0,0,3367,3368,3,144,
+        72,0,3368,3369,5,266,0,0,3369,3370,3,232,116,0,3370,3372,1,0,0,0,
+        3371,3366,1,0,0,0,3372,3375,1,0,0,0,3373,3371,1,0,0,0,3373,3374,
+        1,0,0,0,3374,3377,1,0,0,0,3375,3373,1,0,0,0,3376,3378,3,230,115,
+        0,3377,3376,1,0,0,0,3377,3378,1,0,0,0,3378,3379,1,0,0,0,3379,3380,
+        5,89,0,0,3380,3381,5,120,0,0,3381,3447,1,0,0,0,3382,3383,5,136,0,
+        0,3383,3447,3,278,139,0,3384,3385,5,152,0,0,3385,3447,3,278,139,
+        0,3386,3405,5,32,0,0,3387,3388,5,70,0,0,3388,3393,3,278,139,0,3389,
+        3390,5,3,0,0,3390,3392,3,278,139,0,3391,3389,1,0,0,0,3392,3395,1,
+        0,0,0,3393,3391,1,0,0,0,3393,3394,1,0,0,0,3394,3396,1,0,0,0,3395,
+        3393,1,0,0,0,3396,3399,3,182,91,0,3397,3398,5,71,0,0,3398,3400,3,
+        150,75,0,3399,3397,1,0,0,0,3399,3400,1,0,0,0,3400,3401,1,0,0,0,3401,
+        3402,5,326,0,0,3402,3404,1,0,0,0,3403,3387,1,0,0,0,3404,3407,1,0,
+        0,0,3405,3403,1,0,0,0,3405,3406,1,0,0,0,3406,3409,1,0,0,0,3407,3405,
+        1,0,0,0,3408,3410,3,232,116,0,3409,3408,1,0,0,0,3409,3410,1,0,0,
+        0,3410,3411,1,0,0,0,3411,3447,5,89,0,0,3412,3413,3,278,139,0,3413,
+        3414,5,10,0,0,3414,3416,1,0,0,0,3415,3412,1,0,0,0,3415,3416,1,0,
+        0,0,3416,3417,1,0,0,0,3417,3418,5,162,0,0,3418,3419,3,232,116,0,
+        3419,3420,5,89,0,0,3420,3421,5,162,0,0,3421,3447,1,0,0,0,3422,3423,
+        3,278,139,0,3423,3424,5,10,0,0,3424,3426,1,0,0,0,3425,3422,1,0,0,
+        0,3425,3426,1,0,0,0,3426,3427,1,0,0,0,3427,3428,5,303,0,0,3428,3429,
+        3,144,72,0,3429,3430,5,82,0,0,3430,3431,3,232,116,0,3431,3432,5,
+        89,0,0,3432,3433,5,303,0,0,3433,3447,1,0,0,0,3434,3435,3,278,139,
+        0,3435,3436,5,10,0,0,3436,3438,1,0,0,0,3437,3434,1,0,0,0,3437,3438,
+        1,0,0,0,3438,3439,1,0,0,0,3439,3440,5,225,0,0,3440,3441,3,232,116,
+        0,3441,3442,5,287,0,0,3442,3443,3,144,72,0,3443,3444,5,89,0,0,3444,
+        3445,5,225,0,0,3445,3447,1,0,0,0,3446,3330,1,0,0,0,3446,3332,1,0,
+        0,0,3446,3337,1,0,0,0,3446,3350,1,0,0,0,3446,3362,1,0,0,0,3446,3382,
+        1,0,0,0,3446,3384,1,0,0,0,3446,3386,1,0,0,0,3446,3415,1,0,0,0,3446,
+        3425,1,0,0,0,3446,3437,1,0,0,0,3447,227,1,0,0,0,3448,3449,5,301,
+        0,0,3449,3450,3,144,72,0,3450,3451,5,266,0,0,3451,3452,3,232,116,
+        0,3452,229,1,0,0,0,3453,3454,5,85,0,0,3454,3455,3,232,116,0,3455,
+        231,1,0,0,0,3456,3457,3,226,113,0,3457,3458,5,326,0,0,3458,3460,
+        1,0,0,0,3459,3456,1,0,0,0,3460,3461,1,0,0,0,3461,3459,1,0,0,0,3461,
+        3462,1,0,0,0,3462,233,1,0,0,0,3463,3470,5,54,0,0,3464,3470,5,249,
+        0,0,3465,3470,5,74,0,0,3466,3470,5,128,0,0,3467,3470,5,288,0,0,3468,
+        3470,3,278,139,0,3469,3463,1,0,0,0,3469,3464,1,0,0,0,3469,3465,1,
+        0,0,0,3469,3466,1,0,0,0,3469,3467,1,0,0,0,3469,3468,1,0,0,0,3470,
+        235,1,0,0,0,3471,3475,5,261,0,0,3472,3475,5,244,0,0,3473,3475,3,
+        278,139,0,3474,3471,1,0,0,0,3474,3472,1,0,0,0,3474,3473,1,0,0,0,
+        3474,3475,1,0,0,0,3475,3476,1,0,0,0,3476,3477,3,268,134,0,3477,237,
+        1,0,0,0,3478,3481,3,240,120,0,3479,3481,3,244,122,0,3480,3478,1,
+        0,0,0,3480,3479,1,0,0,0,3481,239,1,0,0,0,3482,3494,3,278,139,0,3483,
+        3484,3,278,139,0,3484,3485,5,4,0,0,3485,3486,3,278,139,0,3486,3494,
+        1,0,0,0,3487,3488,3,278,139,0,3488,3489,5,4,0,0,3489,3490,3,278,
+        139,0,3490,3491,5,4,0,0,3491,3492,3,278,139,0,3492,3494,1,0,0,0,
+        3493,3482,1,0,0,0,3493,3483,1,0,0,0,3493,3487,1,0,0,0,3494,241,1,
+        0,0,0,3495,3507,3,278,139,0,3496,3497,3,278,139,0,3497,3498,5,4,
+        0,0,3498,3499,3,278,139,0,3499,3507,1,0,0,0,3500,3501,3,278,139,
+        0,3501,3502,5,4,0,0,3502,3503,3,278,139,0,3503,3504,5,4,0,0,3504,
+        3505,3,278,139,0,3505,3507,1,0,0,0,3506,3495,1,0,0,0,3506,3496,1,
+        0,0,0,3506,3500,1,0,0,0,3507,243,1,0,0,0,3508,3520,3,278,139,0,3509,
+        3510,3,278,139,0,3510,3511,5,4,0,0,3511,3512,3,278,139,0,3512,3520,
+        1,0,0,0,3513,3514,3,278,139,0,3514,3515,5,4,0,0,3515,3516,3,278,
+        139,0,3516,3517,5,4,0,0,3517,3518,3,278,139,0,3518,3520,1,0,0,0,
+        3519,3508,1,0,0,0,3519,3509,1,0,0,0,3519,3513,1,0,0,0,3520,245,1,
+        0,0,0,3521,3533,3,278,139,0,3522,3523,3,278,139,0,3523,3524,5,4,
+        0,0,3524,3525,3,278,139,0,3525,3533,1,0,0,0,3526,3527,3,278,139,
+        0,3527,3528,5,4,0,0,3528,3529,3,278,139,0,3529,3530,5,4,0,0,3530,
+        3531,3,278,139,0,3531,3533,1,0,0,0,3532,3521,1,0,0,0,3532,3522,1,
+        0,0,0,3532,3526,1,0,0,0,3533,247,1,0,0,0,3534,3540,3,278,139,0,3535,
+        3536,3,278,139,0,3536,3537,5,4,0,0,3537,3538,3,278,139,0,3538,3540,
+        1,0,0,0,3539,3534,1,0,0,0,3539,3535,1,0,0,0,3540,249,1,0,0,0,3541,
+        3547,3,278,139,0,3542,3543,3,278,139,0,3543,3544,5,4,0,0,3544,3545,
+        3,278,139,0,3545,3547,1,0,0,0,3546,3541,1,0,0,0,3546,3542,1,0,0,
+        0,3547,251,1,0,0,0,3548,3549,3,278,139,0,3549,253,1,0,0,0,3550,3551,
+        3,278,139,0,3551,255,1,0,0,0,3552,3553,3,268,134,0,3553,257,1,0,
+        0,0,3554,3555,3,268,134,0,3555,259,1,0,0,0,3556,3559,3,268,134,0,
+        3557,3559,4,130,18,0,3558,3556,1,0,0,0,3558,3557,1,0,0,0,3559,261,
+        1,0,0,0,3560,3561,1,0,0,0,3561,263,1,0,0,0,3562,3563,3,268,134,0,
+        3563,265,1,0,0,0,3564,3565,3,278,139,0,3565,267,1,0,0,0,3566,3571,
+        3,278,139,0,3567,3568,5,4,0,0,3568,3570,3,278,139,0,3569,3567,1,
+        0,0,0,3570,3573,1,0,0,0,3571,3569,1,0,0,0,3571,3572,1,0,0,0,3572,
+        269,1,0,0,0,3573,3571,1,0,0,0,3574,3578,3,272,136,0,3575,3578,5,
+        65,0,0,3576,3578,5,61,0,0,3577,3574,1,0,0,0,3577,3575,1,0,0,0,3577,
+        3576,1,0,0,0,3578,271,1,0,0,0,3579,3585,3,278,139,0,3580,3581,5,
+        290,0,0,3581,3585,3,278,139,0,3582,3583,5,236,0,0,3583,3585,3,278,
+        139,0,3584,3579,1,0,0,0,3584,3580,1,0,0,0,3584,3582,1,0,0,0,3585,
+        273,1,0,0,0,3586,3591,3,278,139,0,3587,3588,5,3,0,0,3588,3590,3,
+        278,139,0,3589,3587,1,0,0,0,3590,3593,1,0,0,0,3591,3589,1,0,0,0,
+        3591,3592,1,0,0,0,3592,275,1,0,0,0,3593,3591,1,0,0,0,3594,3602,5,
+        54,0,0,3595,3602,5,249,0,0,3596,3602,5,74,0,0,3597,3602,5,128,0,
+        0,3598,3602,5,288,0,0,3599,3602,5,94,0,0,3600,3602,3,278,139,0,3601,
+        3594,1,0,0,0,3601,3595,1,0,0,0,3601,3596,1,0,0,0,3601,3597,1,0,0,
+        0,3601,3598,1,0,0,0,3601,3599,1,0,0,0,3601,3600,1,0,0,0,3602,277,
+        1,0,0,0,3603,3609,5,333,0,0,3604,3609,5,335,0,0,3605,3609,3,282,
+        141,0,3606,3609,5,336,0,0,3607,3609,5,334,0,0,3608,3603,1,0,0,0,
+        3608,3604,1,0,0,0,3608,3605,1,0,0,0,3608,3606,1,0,0,0,3608,3607,
+        1,0,0,0,3609,279,1,0,0,0,3610,3612,5,320,0,0,3611,3610,1,0,0,0,3611,
+        3612,1,0,0,0,3612,3613,1,0,0,0,3613,3623,5,331,0,0,3614,3616,5,320,
+        0,0,3615,3614,1,0,0,0,3615,3616,1,0,0,0,3616,3617,1,0,0,0,3617,3623,
+        5,332,0,0,3618,3620,5,320,0,0,3619,3618,1,0,0,0,3619,3620,1,0,0,
+        0,3620,3621,1,0,0,0,3621,3623,5,330,0,0,3622,3611,1,0,0,0,3622,3615,
+        1,0,0,0,3622,3619,1,0,0,0,3623,281,1,0,0,0,3624,3625,7,37,0,0,3625,
+        283,1,0,0,0,476,287,296,300,304,308,312,325,332,336,340,346,350,
+        357,362,366,372,376,395,401,405,409,413,421,425,428,433,439,448,
+        454,458,464,471,479,491,500,509,515,526,534,542,549,559,566,574,
+        589,624,627,630,633,639,644,651,657,661,665,673,679,683,687,701,
+        709,728,753,756,763,770,779,782,792,796,803,811,820,826,831,835,
+        843,848,857,863,870,879,885,889,895,902,907,920,925,937,941,947,
+        956,961,967,995,1001,1003,1009,1015,1017,1025,1027,1037,1039,1054,
+        1059,1066,1076,1082,1084,1092,1094,1101,1122,1125,1129,1133,1151,
+        1154,1165,1168,1184,1194,1198,1204,1207,1216,1228,1231,1241,1245,
+        1251,1258,1263,1269,1273,1277,1283,1294,1301,1311,1314,1319,1321,
+        1328,1334,1336,1344,1350,1353,1355,1367,1374,1378,1381,1385,1389,
+        1398,1401,1404,1409,1412,1420,1423,1436,1440,1447,1455,1466,1469,
+        1479,1482,1493,1498,1506,1509,1513,1517,1526,1531,1540,1543,1546,
+        1550,1561,1564,1567,1572,1575,1604,1608,1612,1616,1620,1624,1626,
+        1632,1641,1646,1658,1667,1672,1678,1680,1688,1697,1700,1708,1711,
+        1714,1719,1722,1734,1737,1745,1750,1754,1756,1758,1781,1783,1804,
+        1814,1825,1829,1831,1839,1850,1861,1872,1879,1892,1898,1920,1935,
+        1940,1944,1954,1960,1966,1974,1979,1986,1988,1994,2000,2004,2009,
+        2018,2023,2037,2047,2050,2059,2064,2069,2071,2080,2083,2091,2094,
+        2101,2106,2113,2117,2119,2127,2137,2143,2145,2152,2156,2158,2165,
+        2169,2171,2173,2182,2193,2197,2207,2217,2221,2229,2231,2244,2252,
+        2261,2267,2275,2281,2285,2290,2295,2301,2320,2322,2324,2354,2365,
+        2373,2378,2383,2396,2402,2405,2412,2417,2420,2423,2428,2435,2438,
+        2447,2450,2454,2460,2463,2478,2481,2500,2504,2512,2516,2541,2544,
+        2553,2559,2565,2571,2580,2583,2586,2605,2614,2632,2648,2651,2660,
+        2669,2675,2681,2692,2694,2699,2706,2708,2714,2720,2731,2740,2745,
+        2750,2752,2754,2760,2762,2772,2781,2783,2789,2791,2794,2808,2810,
+        2818,2826,2829,2834,2839,2849,2853,2857,2860,2862,2870,2873,2883,
+        2891,2893,2901,2907,2919,2928,2935,2940,2947,2952,2975,2980,2982,
+        2989,2993,3000,3004,3020,3035,3042,3051,3061,3066,3075,3080,3088,
+        3096,3099,3105,3108,3115,3123,3126,3134,3137,3146,3157,3162,3169,
+        3171,3184,3199,3203,3207,3211,3217,3221,3225,3229,3231,3241,3252,
+        3256,3263,3270,3277,3288,3291,3299,3305,3312,3328,3342,3345,3354,
+        3357,3373,3377,3393,3399,3405,3409,3415,3425,3437,3446,3461,3469,
+        3474,3480,3493,3506,3519,3532,3539,3546,3558,3571,3577,3584,3591,
+        3601,3608,3611,3615,3619,3622
     ];
 
     private static __ATN: antlr.ATN;
@@ -26539,8 +26563,11 @@ export class DereferenceContext extends PrimaryExpressionContext {
     public primaryExpression(): PrimaryExpressionContext {
         return this.getRuleContext(0, PrimaryExpressionContext)!;
     }
-    public identifier(): IdentifierContext {
-        return this.getRuleContext(0, IdentifierContext)!;
+    public identifier(): IdentifierContext | null {
+        return this.getRuleContext(0, IdentifierContext);
+    }
+    public emptyColumn(): EmptyColumnContext | null {
+        return this.getRuleContext(0, EmptyColumnContext);
     }
     public override enterRule(listener: TrinoSqlListener): void {
         if(listener.enterDereference) {

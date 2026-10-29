@@ -15,6 +15,7 @@ import {
     InsertFromQueryContext,
     MultipleInsertContext,
     NamedExpressionContext,
+    NamedQueryContext,
     NamespaceNameContext,
     NamespaceNameCreateContext,
     QueryStatementContext,
@@ -139,6 +140,17 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
                 endContextList: [CreateTableContext.name],
             },
         ]);
+    }
+
+    exitNamedQuery(ctx: NamedQueryContext) {
+        const columns = ctx.identifierList()?.identifierSeq()?.errorCapturingIdentifier() ?? [];
+        this.collectCte(
+            ctx,
+            ctx.errorCapturingIdentifier(),
+            ctx.query(),
+            ctx.stop?.tokenIndex ?? -1,
+            columns
+        );
     }
 
     exitViewName(ctx: ViewNameContext) {
