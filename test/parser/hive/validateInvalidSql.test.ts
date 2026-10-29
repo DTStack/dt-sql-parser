@@ -13,4 +13,16 @@ describe('Hive SQL validate invalid sql', () => {
     test('validate unComplete sql', () => {
         expect(hive.validate(unCompleteSQL).length).not.toBe(0);
     });
+
+    test.each([
+        'LOCK TABLE tbl1;',
+        'UNLOCK TABLE tbl1 SHARED;',
+        'LOCK DATABASE db1;',
+        'UNLOCK DATABASE db1 EXCLUSIVE;',
+        'CREATE EXTERNAL MANAGED TABLE t (id INT);',
+        'CREATE TEMPORARY MANAGED TABLE t (id INT);',
+        'CREATE TRANSACTIONAL MANAGED TABLE t (id INT);',
+    ])('reject grammar optimization overmatch: %s', (sql) => {
+        expect(hive.validate(sql).length).not.toBe(0);
+    });
 });
