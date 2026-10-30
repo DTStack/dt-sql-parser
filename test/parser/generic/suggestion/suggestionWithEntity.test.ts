@@ -140,4 +140,76 @@ describe('GenericSQL Syntax Suggestion with collect entity', () => {
             expect(idColumn?.[AttrName.colType]?.text).toBe('int');
         }
     });
+
+    test('select with join on dot empty column (o. and u.)', () => {
+        const sql1 = `create table orders ( id BIGINT, age int, name VARCHAR ); create table t1 ( id1 BIGINT, age1 int, name1 VARCHAR ); SELECT o.age, u.age1 FROM orders o JOIN t1 u ON o.`;
+        const pos1: CaretPosition = {
+            lineNumber: 1,
+            column: sql1.length + 1,
+        };
+        const syntaxes1 = parser.getSuggestionAtCaretPosition(sql1, pos1)?.syntax;
+        const col1 = syntaxes1?.find((s) => s.syntaxContextType === EntityContextType.COLUMN);
+        expect(col1).toBeDefined();
+        expect(col1?.wordRanges.map((w) => w.text)).toEqual(['o', '.']);
+
+        const sql2 = `create table orders ( id BIGINT, age int, name VARCHAR ); create table t1 ( id1 BIGINT, age1 int, name1 VARCHAR ); SELECT o.age, u.age1 FROM orders o JOIN t1 u ON o.id = u.`;
+        const pos2: CaretPosition = {
+            lineNumber: 1,
+            column: sql2.length + 1,
+        };
+        const syntaxes2 = parser.getSuggestionAtCaretPosition(sql2, pos2)?.syntax;
+        const col2 = syntaxes2?.find((s) => s.syntaxContextType === EntityContextType.COLUMN);
+        expect(col2).toBeDefined();
+        expect(col2?.wordRanges.map((w) => w.text)).toEqual(['u', '.']);
+
+        const entities = parser.getAllEntities(sql2, pos2);
+        const ordersTable = entities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'orders'
+        );
+        expect(ordersTable).toBeDefined();
+        expect(ordersTable?.[AttrName.alias]?.text).toBe('o');
+
+        const t1Table = entities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 't1'
+        );
+        expect(t1Table).toBeDefined();
+        expect(t1Table?.[AttrName.alias]?.text).toBe('u');
+    });
+
+    test('select with where empty column', () => {
+        const sql = `create table orders ( id BIGINT, age int, name VARCHAR ); create table t1 ( id1 BIGINT, age1 int, name1 VARCHAR ); SELECT age FROM orders o where `;
+        const pos: CaretPosition = {
+            lineNumber: 1,
+            column: sql.length + 1,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const col = syntaxes?.find((s) => s.syntaxContextType === EntityContextType.COLUMN);
+        expect(col).toBeDefined();
+
+        const entities = parser.getAllEntities(sql, pos);
+        const ordersTable = entities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'orders'
+        );
+        expect(ordersTable).toBeDefined();
+        expect(ordersTable?.[AttrName.alias]?.text).toBe('o');
+    });
+
+    test('select with where dot empty column (o.)', () => {
+        const sql = `SELECT * FROM orders o WHERE o.`;
+        const pos: CaretPosition = {
+            lineNumber: 1,
+            column: sql.length + 1,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const col = syntaxes?.find((s) => s.syntaxContextType === EntityContextType.COLUMN);
+        expect(col).toBeDefined();
+        expect(col?.wordRanges.map((w) => w.text)).toEqual(['o', '.']);
+
+        const entities = parser.getAllEntities(sql, pos);
+        const ordersTable = entities.find(
+            (e) => e.entityContextType === EntityContextType.TABLE && e.text === 'orders'
+        );
+        expect(ordersTable).toBeDefined();
+        expect(ordersTable?.[AttrName.alias]?.text).toBe('o');
+    });
 });

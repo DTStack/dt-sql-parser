@@ -99,6 +99,7 @@ import { StringLiteralContext } from "./GenericSqlParser.js";
 import { BinaryLiteralContext } from "./GenericSqlParser.js";
 import { IdentifierContext } from "./GenericSqlParser.js";
 import { QualifiedNameContext } from "./GenericSqlParser.js";
+import { QualifiedNameAllowEmptyContext } from "./GenericSqlParser.js";
 import { ColumnRefContext } from "./GenericSqlParser.js";
 import { ColumnNameContext } from "./GenericSqlParser.js";
 import { EmptyColumnContext } from "./GenericSqlParser.js";
@@ -1119,6 +1120,16 @@ export class GenericSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitQualifiedName?: (ctx: QualifiedNameContext) => void;
+    /**
+     * Enter a parse tree produced by `GenericSqlParser.qualifiedNameAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    enterQualifiedNameAllowEmpty?: (ctx: QualifiedNameAllowEmptyContext) => void;
+    /**
+     * Exit a parse tree produced by `GenericSqlParser.qualifiedNameAllowEmpty`.
+     * @param ctx the parse tree
+     */
+    exitQualifiedNameAllowEmpty?: (ctx: QualifiedNameAllowEmptyContext) => void;
     /**
      * Enter a parse tree produced by `GenericSqlParser.columnRef`.
      * @param ctx the parse tree

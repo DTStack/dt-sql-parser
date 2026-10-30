@@ -99,6 +99,7 @@ import { StringLiteralContext } from "./GenericSqlParser.js";
 import { BinaryLiteralContext } from "./GenericSqlParser.js";
 import { IdentifierContext } from "./GenericSqlParser.js";
 import { QualifiedNameContext } from "./GenericSqlParser.js";
+import { QualifiedNameAllowEmptyContext } from "./GenericSqlParser.js";
 import { ColumnRefContext } from "./GenericSqlParser.js";
 import { ColumnNameContext } from "./GenericSqlParser.js";
 import { EmptyColumnContext } from "./GenericSqlParser.js";
@@ -710,6 +711,12 @@ export class GenericSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> 
      * @return the visitor result
      */
     visitQualifiedName?: (ctx: QualifiedNameContext) => Result;
+    /**
+     * Visit a parse tree produced by `GenericSqlParser.qualifiedNameAllowEmpty`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitQualifiedNameAllowEmpty?: (ctx: QualifiedNameAllowEmptyContext) => Result;
     /**
      * Visit a parse tree produced by `GenericSqlParser.columnRef`.
      * @param ctx the parse tree

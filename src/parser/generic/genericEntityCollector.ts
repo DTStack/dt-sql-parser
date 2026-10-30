@@ -46,7 +46,7 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
     /** ====== Entity Begin */
 
     exitTableName(ctx: TableNameContext) {
-        this.pushEntity(
+        const entity = this.pushEntity(
             ctx,
             EntityContextType.TABLE,
             [
@@ -59,6 +59,17 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
                 declareType: TableDeclareType.LITERAL,
             }
         );
+        // 如果通用属性查找未找到 alias，尝试从 AliasedRelationContext._alias 获取
+        if (entity && !entity[AttrName.alias]) {
+            let parent = ctx.parent;
+            while (parent && !(parent instanceof AliasedRelationContext)) {
+                parent = parent.parent;
+            }
+            const aliasToken = (parent as AliasedRelationContext)?._alias?.start;
+            if (aliasToken) {
+                entity[AttrName.alias] = tokenToWord(aliasToken, '');
+            }
+        }
     }
 
     exitNamedQuery(ctx: NamedQueryContext) {

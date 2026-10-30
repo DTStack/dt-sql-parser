@@ -119,7 +119,7 @@ relationPrimary
     ;
 
 whereClause
-    : KW_WHERE (expression | emptyColumn)
+    : KW_WHERE (expression | {this.shouldMatchEmpty()}? emptyColumn)
     ;
 
 groupByClause
@@ -127,7 +127,7 @@ groupByClause
     ;
 
 havingClause
-    : KW_HAVING (expression | emptyColumn)
+    : KW_HAVING (expression | {this.shouldMatchEmpty()}? emptyColumn)
     ;
 
 orderByClause
@@ -333,13 +333,18 @@ qualifiedName
     : identifier ('.' identifier)*
     ;
 
+qualifiedNameAllowEmpty
+    : qualifiedName
+    | {this.shouldMatchEmpty()}? qualifiedName '.' emptyColumn
+    ;
+
 columnRef
     : identifier
     | {this.shouldMatchEmpty()}? emptyColumn
     ;
 
 columnName
-    : qualifiedName
+    : qualifiedNameAllowEmpty
     ;
 
 emptyColumn
