@@ -3,6 +3,11 @@ import { FlinkSqlLexer } from 'src/lib/flink/FlinkSqlLexer';
 import { ErrorListener } from 'src/parser/common/parseErrorListener';
 import { CommonTokenStream } from 'antlr4ng';
 
+type DfaInterpreter = { decisionToDFA: Array<{ states: { length: number } }> };
+
+const countDfaStates = (interpreter: DfaInterpreter) =>
+    interpreter.decisionToDFA.reduce((count, dfa) => count + dfa.states.length, 0);
+
 describe('BasicSQL unit tests', () => {
     const flink = new FlinkSQL();
     test('Create lexer', () => {
@@ -79,6 +84,31 @@ describe('BasicSQL unit tests', () => {
         expect(parseTree).not.toBeUndefined();
         expect(parseTree).not.toBeNull();
         expect(errors.length).not.toBe(0);
+    });
+
+    test('Reset shared DFA caches and reparse the same input', () => {
+        const parser = new FlinkSQL();
+        const sql = 'SELECT a, b FROM tbl1 WHERE a = 1 ORDER BY b';
+
+        expect(parser.validate(sql)).toHaveLength(0);
+
+        const parserInternals = parser as unknown as {
+            _lexer: { interpreter: DfaInterpreter };
+            _parser: { interpreter: DfaInterpreter };
+        };
+
+        expect(countDfaStates(parserInternals._lexer.interpreter)).toBeGreaterThan(0);
+        expect(countDfaStates(parserInternals._parser.interpreter)).toBeGreaterThan(0);
+
+        parser.resetDfaCache();
+
+        expect(countDfaStates(parserInternals._lexer.interpreter)).toBe(0);
+        expect(countDfaStates(parserInternals._parser.interpreter)).toBe(0);
+        expect(parser.getParsedInput()).toBe('');
+
+        expect(parser.validate(sql)).toHaveLength(0);
+        expect(countDfaStates(parserInternals._lexer.interpreter)).toBeGreaterThan(0);
+        expect(countDfaStates(parserInternals._parser.interpreter)).toBeGreaterThan(0);
     });
 
     test('Get All tokens', () => {

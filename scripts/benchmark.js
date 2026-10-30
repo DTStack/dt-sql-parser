@@ -1,3 +1,4 @@
+process.env.NODE_OPTIONS = process.env.NODE_OPTIONS || '--max_old_space_size=4096';
 const path = require('path');
 const spawn = require('child_process').spawn;
 const fs = require('fs');
@@ -108,7 +109,7 @@ function main() {
     if (argv.lang) {
         const supportedLanguage = languages.some((language) => language === argv.lang);
         if (supportedLanguage || argv.lang === 'All Languages') {
-            runBenchmark(argv.lang);
+            runBenchmark(argv.lang, argv.hot ? 'hot' : 'cold');
         } else {
             console.error(
                 chalk.bold.red('\n[Invalid language]:'),
