@@ -4,6 +4,7 @@ import {
     ColumnDefinitionContext,
     ColumnRefContext,
     AliasedRelationContext,
+    ColumnRefCreateContext,
     CreateTableContext,
     CreateTableStatementContext,
     DeleteContext,
@@ -12,7 +13,10 @@ import {
     NamedQueryContext,
     QuerySpecificationContext,
     QueryStatementContext,
-    SelectItemContext,
+    SelectAllElementContext,
+    SelectEmptyElementContext,
+    SelectExpressionElementContext,
+    SelectStarElementContext,
     SingleStatementContext,
     TableNameContext,
     TableNameCreateContext,
@@ -23,7 +27,6 @@ import {
     ColumnDeclareType,
     CommonEntityContext,
     EntityCollector,
-    isColumnEntityContext,
     isCommonEntityContext,
     StmtContextType,
     TableDeclareType,
@@ -43,7 +46,7 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
     /** ====== Entity Begin */
 
     exitTableName(ctx: TableNameContext) {
-        this.pushEntity(
+        const entity = this.pushEntity(
             ctx,
             EntityContextType.TABLE,
             [
@@ -56,6 +59,17 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
                 declareType: TableDeclareType.LITERAL,
             }
         );
+        // 如果通用属性查找未找到 alias，尝试从 AliasedRelationContext._alias 获取
+        if (entity && !entity[AttrName.alias]) {
+            let parent = ctx.parent;
+            while (parent && !(parent instanceof AliasedRelationContext)) {
+                parent = parent.parent;
+            }
+            const aliasToken = (parent as AliasedRelationContext)?._alias?.start;
+            if (aliasToken) {
+                entity[AttrName.alias] = tokenToWord(aliasToken, '');
+            }
+        }
     }
 
     exitNamedQuery(ctx: NamedQueryContext) {
@@ -82,33 +96,17 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
         this.pushEntity(ctx, EntityContextType.COLUMN);
     }
 
-    exitColumnDefinition(ctx: ColumnDefinitionContext) {
-        // The name is only `columnRef`. Pushing the whole definition made the
-        // completion label `age int` and inserted the type into the SQL.
-        const entity = this.pushEntity(ctx.columnRef(), EntityContextType.COLUMN_CREATE, [
+    exitColumnRefCreate(ctx: ColumnRefCreateContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE, [
+            {
+                attrName: AttrName.colType,
+                endContextList: [ColumnDefinitionContext.name],
+            },
             {
                 attrName: AttrName.comment,
                 endContextList: [ColumnDefinitionContext.name],
             },
         ]);
-        const dataType = ctx.dataType();
-        if (entity && isColumnEntityContext(entity) && dataType?.start && dataType.stop) {
-            const startIndex = dataType.start.start;
-            const endIndex = dataType.stop.stop;
-            const typeText = this.sourceSlice(startIndex, endIndex);
-            const startColumn = dataType.start.column + 1;
-            entity[AttrName.colType] = {
-                text: typeText,
-                line: dataType.start.line,
-                startIndex,
-                endIndex,
-                startColumn,
-                endColumn:
-                    dataType.stop.line === dataType.start.line
-                        ? startColumn + typeText.length
-                        : dataType.stop.column + 1 + (dataType.stop.text?.length ?? 0),
-            };
-        }
     }
 
     exitQuerySpecification(ctx: QuerySpecificationContext) {
@@ -127,28 +125,36 @@ export class GenericEntityCollector extends EntityCollector implements GenericSq
         return { ...entity, text };
     }
 
-    exitSelectItem(ctx: SelectItemContext) {
-        if (ctx.ASTERISK()) {
-            this.pushEntity(ctx, EntityContextType.COLUMN, [], {
-                declareType: ColumnDeclareType.ALL,
-            });
-        } else {
-            const isSimpleColumn = this.isSimpleColumnReference(ctx);
-            const entity = this.pushEntity(ctx, EntityContextType.COLUMN, [], {
-                declareType: isSimpleColumn
-                    ? ColumnDeclareType.LITERAL
-                    : ColumnDeclareType.EXPRESSION,
-            });
-            // The alias sits on this select item. Searching parents would pick a
-            // later item's alias and label every column with that name.
-            const aliasToken = ctx._alias?.start;
-            if (entity && aliasToken) {
-                entity[AttrName.alias] = tokenToWord(aliasToken, '');
-            }
+    exitSelectExpressionElement(ctx: SelectExpressionElementContext) {
+        const isSimpleColumn = this.isSimpleColumnReference(ctx);
+        const entity = this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: isSimpleColumn ? ColumnDeclareType.LITERAL : ColumnDeclareType.EXPRESSION,
+        });
+        const aliasToken = ctx._alias?.start;
+        if (entity && aliasToken) {
+            entity[AttrName.alias] = tokenToWord(aliasToken, '');
         }
     }
 
-    private isSimpleColumnReference(ctx: SelectItemContext): boolean {
+    exitSelectStarElement(ctx: SelectStarElementContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitSelectAllElement(ctx: SelectAllElementContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.ALL,
+        });
+    }
+
+    exitSelectEmptyElement(ctx: SelectEmptyElementContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN, [], {
+            declareType: ColumnDeclareType.LITERAL,
+        });
+    }
+
+    private isSimpleColumnReference(ctx: SelectExpressionElementContext): boolean {
         const text = ctx.getText();
         // Simple column reference: no parentheses, no operators, no spaces
         return (
