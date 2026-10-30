@@ -56,7 +56,11 @@ withClause
     ;
 
 namedQuery
-    : name=identifier KW_AS '(' queryStatement ')'
+    : name=identifier cteColumnList? KW_AS '(' queryStatement ')'
+    ;
+
+cteColumnList
+    : '(' identifier (',' identifier)* ')'
     ;
 
 queryNoWith
@@ -82,9 +86,10 @@ setQuantifier
     ;
 
 selectItem
-    : expression (KW_AS? identifier)?
-    | qualifiedName '.' ASTERISK
-    | ASTERISK
+    : expression (KW_AS? alias=identifier)?  # selectExpressionElement
+    | qualifiedName '.' ASTERISK             # selectStarElement
+    | ASTERISK                               # selectAllElement
+    | {this.shouldMatchEmpty()}? emptyColumn # selectEmptyElement
     ;
 
 fromClause
@@ -105,7 +110,7 @@ joinType
     ;
 
 aliasedRelation
-    : relationPrimary (KW_AS? identifier)?
+    : relationPrimary (KW_AS? alias=identifier)?
     ;
 
 relationPrimary
@@ -114,7 +119,7 @@ relationPrimary
     ;
 
 whereClause
-    : KW_WHERE expression
+    : KW_WHERE (expression | {this.shouldMatchEmpty()}? emptyColumn)
     ;
 
 groupByClause
@@ -122,7 +127,7 @@ groupByClause
     ;
 
 havingClause
-    : KW_HAVING expression
+    : KW_HAVING (expression | {this.shouldMatchEmpty()}? emptyColumn)
     ;
 
 orderByClause
@@ -173,7 +178,11 @@ tableElement
     ;
 
 columnDefinition
-    : columnRef dataType (KW_NOT KW_NULL)? (KW_DEFAULT expression)? (KW_PRIMARY KW_KEY)?
+    : columnRefCreate colType=dataType (KW_NOT KW_NULL)? (KW_DEFAULT expression)? (KW_PRIMARY KW_KEY)?
+    ;
+
+columnRefCreate
+    : identifier
     ;
 
 tableConstraint
@@ -247,17 +256,17 @@ valueExpression
     ;
 
 primaryExpression
-    : literal                                                              # literalExpression
-    | qualifiedName '(' (setQuantifier? expression (',' expression)*)? ')' # functionCall
-    | KW_CASE whenClause+ (KW_ELSE expression)? KW_END                     # searchedCaseExpression
-    | KW_CASE expression whenClause+ (KW_ELSE expression)? KW_END          # simpleCaseExpression
-    | KW_CAST '(' expression KW_AS dataType ')'                            # castExpression
-    | KW_COALESCE '(' expression (',' expression)* ')'                     # coalesceExpression
-    | KW_NULLIF '(' valueExpression ',' valueExpression ')'                # nullIfExpression
-    | '(' expression ')'                                                   # parenthesizedExpression
-    | KW_EXISTS '(' queryStatement ')'                                     # existsExpression
-    | subqueryExpression                                                   # subqueryExpressionDefault
-    | qualifiedName                                                        # columnReference
+    : literal                                                             # literalExpression
+    | functionName '(' (setQuantifier? expression (',' expression)*)? ')' # functionCall
+    | KW_CASE whenClause+ (KW_ELSE expression)? KW_END                    # searchedCaseExpression
+    | KW_CASE expression whenClause+ (KW_ELSE expression)? KW_END         # simpleCaseExpression
+    | KW_CAST '(' expression KW_AS dataType ')'                           # castExpression
+    | KW_COALESCE '(' expression (',' expression)* ')'                    # coalesceExpression
+    | KW_NULLIF '(' valueExpression ',' valueExpression ')'               # nullIfExpression
+    | '(' expression ')'                                                  # parenthesizedExpression
+    | KW_EXISTS '(' queryStatement ')'                                    # existsExpression
+    | subqueryExpression                                                  # subqueryExpressionDefault
+    | columnName                                                          # columnReference
     ;
 
 whenClause
@@ -324,8 +333,22 @@ qualifiedName
     : identifier ('.' identifier)*
     ;
 
+qualifiedNameAllowEmpty
+    : qualifiedName
+    | {this.shouldMatchEmpty()}? qualifiedName '.' emptyColumn
+    ;
+
 columnRef
     : identifier
+    | {this.shouldMatchEmpty()}? emptyColumn
+    ;
+
+columnName
+    : qualifiedNameAllowEmpty
+    ;
+
+emptyColumn
+    :
     ;
 
 tableName
@@ -333,6 +356,10 @@ tableName
     ;
 
 tableNameCreate
+    : qualifiedName
+    ;
+
+functionName
     : qualifiedName
     ;
 

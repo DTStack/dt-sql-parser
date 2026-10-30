@@ -63,4 +63,57 @@ describe('GenericSQL Syntax Suggestion', () => {
         );
         expect(suggestion).not.toBeUndefined();
     });
+
+    test('Join on suggests a column context so source tables can be offered', () => {
+        const sql = 'SELECT o.age, u.age1 FROM orders JOIN t1 ON ';
+        const pos: CaretPosition = {
+            lineNumber: 1,
+            column: sql.length + 1,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(sql, pos)?.syntax;
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges).toEqual([]);
+
+        const tables = parser
+            .getAllEntities(sql, pos)
+            ?.filter((entity) => entity.entityContextType === EntityContextType.TABLE);
+        expect(tables?.map((table) => table.text).sort()).toEqual(['orders', 't1']);
+        expect(tables?.every((table) => table.isAccessible)).toBe(true);
+    });
+
+    test('Function call', () => {
+        const pos: CaretPosition = {
+            lineNumber: 29,
+            column: 9,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
+        );
+        expect(suggestion).not.toBeUndefined();
+        expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['CONCAT']);
+    });
+
+    test('Create table column', () => {
+        const pos: CaretPosition = {
+            lineNumber: 31,
+            column: 26,
+        };
+        const syntaxes = parser.getSuggestionAtCaretPosition(
+            commentOtherLine(syntaxSql, pos.lineNumber),
+            pos
+        )?.syntax;
+
+        const suggestion = syntaxes?.find(
+            (syn) => syn.syntaxContextType === EntityContextType.COLUMN_CREATE
+        );
+        expect(suggestion).not.toBeUndefined();
+    });
 });

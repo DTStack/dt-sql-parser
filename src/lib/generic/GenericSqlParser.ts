@@ -146,53 +146,59 @@ export class GenericSqlParser extends SQLParserBase {
     public static readonly RULE_queryStatement = 4;
     public static readonly RULE_withClause = 5;
     public static readonly RULE_namedQuery = 6;
-    public static readonly RULE_queryNoWith = 7;
-    public static readonly RULE_queryTerm = 8;
-    public static readonly RULE_queryPrimary = 9;
-    public static readonly RULE_querySpecification = 10;
-    public static readonly RULE_setQuantifier = 11;
-    public static readonly RULE_selectItem = 12;
-    public static readonly RULE_fromClause = 13;
-    public static readonly RULE_relation = 14;
-    public static readonly RULE_joinType = 15;
-    public static readonly RULE_aliasedRelation = 16;
-    public static readonly RULE_relationPrimary = 17;
-    public static readonly RULE_whereClause = 18;
-    public static readonly RULE_groupByClause = 19;
-    public static readonly RULE_havingClause = 20;
-    public static readonly RULE_orderByClause = 21;
-    public static readonly RULE_sortItem = 22;
-    public static readonly RULE_limitClause = 23;
-    public static readonly RULE_insertStatement = 24;
-    public static readonly RULE_columnList = 25;
-    public static readonly RULE_updateStatement = 26;
-    public static readonly RULE_updateAssignment = 27;
-    public static readonly RULE_deleteStatement = 28;
-    public static readonly RULE_createTableStatement = 29;
-    public static readonly RULE_tableElement = 30;
-    public static readonly RULE_columnDefinition = 31;
-    public static readonly RULE_tableConstraint = 32;
-    public static readonly RULE_alterTableStatement = 33;
-    public static readonly RULE_dropTableStatement = 34;
-    public static readonly RULE_expression = 35;
-    public static readonly RULE_booleanExpression = 36;
-    public static readonly RULE_predicatedExpression = 37;
-    public static readonly RULE_predicate = 38;
-    public static readonly RULE_comparisonOperator = 39;
-    public static readonly RULE_valueExpression = 40;
-    public static readonly RULE_primaryExpression = 41;
-    public static readonly RULE_whenClause = 42;
-    public static readonly RULE_subqueryExpression = 43;
-    public static readonly RULE_dataType = 44;
-    public static readonly RULE_properties = 45;
-    public static readonly RULE_property = 46;
-    public static readonly RULE_literal = 47;
-    public static readonly RULE_identifier = 48;
-    public static readonly RULE_qualifiedName = 49;
-    public static readonly RULE_columnRef = 50;
-    public static readonly RULE_tableName = 51;
-    public static readonly RULE_tableNameCreate = 52;
-    public static readonly RULE_nonReserved = 53;
+    public static readonly RULE_cteColumnList = 7;
+    public static readonly RULE_queryNoWith = 8;
+    public static readonly RULE_queryTerm = 9;
+    public static readonly RULE_queryPrimary = 10;
+    public static readonly RULE_querySpecification = 11;
+    public static readonly RULE_setQuantifier = 12;
+    public static readonly RULE_selectItem = 13;
+    public static readonly RULE_fromClause = 14;
+    public static readonly RULE_relation = 15;
+    public static readonly RULE_joinType = 16;
+    public static readonly RULE_aliasedRelation = 17;
+    public static readonly RULE_relationPrimary = 18;
+    public static readonly RULE_whereClause = 19;
+    public static readonly RULE_groupByClause = 20;
+    public static readonly RULE_havingClause = 21;
+    public static readonly RULE_orderByClause = 22;
+    public static readonly RULE_sortItem = 23;
+    public static readonly RULE_limitClause = 24;
+    public static readonly RULE_insertStatement = 25;
+    public static readonly RULE_columnList = 26;
+    public static readonly RULE_updateStatement = 27;
+    public static readonly RULE_updateAssignment = 28;
+    public static readonly RULE_deleteStatement = 29;
+    public static readonly RULE_createTableStatement = 30;
+    public static readonly RULE_tableElement = 31;
+    public static readonly RULE_columnDefinition = 32;
+    public static readonly RULE_columnRefCreate = 33;
+    public static readonly RULE_tableConstraint = 34;
+    public static readonly RULE_alterTableStatement = 35;
+    public static readonly RULE_dropTableStatement = 36;
+    public static readonly RULE_expression = 37;
+    public static readonly RULE_booleanExpression = 38;
+    public static readonly RULE_predicatedExpression = 39;
+    public static readonly RULE_predicate = 40;
+    public static readonly RULE_comparisonOperator = 41;
+    public static readonly RULE_valueExpression = 42;
+    public static readonly RULE_primaryExpression = 43;
+    public static readonly RULE_whenClause = 44;
+    public static readonly RULE_subqueryExpression = 45;
+    public static readonly RULE_dataType = 46;
+    public static readonly RULE_properties = 47;
+    public static readonly RULE_property = 48;
+    public static readonly RULE_literal = 49;
+    public static readonly RULE_identifier = 50;
+    public static readonly RULE_qualifiedName = 51;
+    public static readonly RULE_qualifiedNameAllowEmpty = 52;
+    public static readonly RULE_columnRef = 53;
+    public static readonly RULE_columnName = 54;
+    public static readonly RULE_emptyColumn = 55;
+    public static readonly RULE_tableName = 56;
+    public static readonly RULE_tableNameCreate = 57;
+    public static readonly RULE_functionName = 58;
+    public static readonly RULE_nonReserved = 59;
 
     public static readonly literalNames = [
         null, "','", "'('", "')'", "'.'", "'ADD'", "'ALL'", "'ALTER'", "'AND'", 
@@ -240,18 +246,19 @@ export class GenericSqlParser extends SQLParserBase {
     ];
     public static readonly ruleNames = [
         "program", "statements", "singleStatement", "statement", "queryStatement", 
-        "withClause", "namedQuery", "queryNoWith", "queryTerm", "queryPrimary", 
-        "querySpecification", "setQuantifier", "selectItem", "fromClause", 
-        "relation", "joinType", "aliasedRelation", "relationPrimary", "whereClause", 
-        "groupByClause", "havingClause", "orderByClause", "sortItem", "limitClause", 
-        "insertStatement", "columnList", "updateStatement", "updateAssignment", 
-        "deleteStatement", "createTableStatement", "tableElement", "columnDefinition", 
-        "tableConstraint", "alterTableStatement", "dropTableStatement", 
-        "expression", "booleanExpression", "predicatedExpression", "predicate", 
-        "comparisonOperator", "valueExpression", "primaryExpression", "whenClause", 
-        "subqueryExpression", "dataType", "properties", "property", "literal", 
-        "identifier", "qualifiedName", "columnRef", "tableName", "tableNameCreate", 
-        "nonReserved",
+        "withClause", "namedQuery", "cteColumnList", "queryNoWith", "queryTerm", 
+        "queryPrimary", "querySpecification", "setQuantifier", "selectItem", 
+        "fromClause", "relation", "joinType", "aliasedRelation", "relationPrimary", 
+        "whereClause", "groupByClause", "havingClause", "orderByClause", 
+        "sortItem", "limitClause", "insertStatement", "columnList", "updateStatement", 
+        "updateAssignment", "deleteStatement", "createTableStatement", "tableElement", 
+        "columnDefinition", "columnRefCreate", "tableConstraint", "alterTableStatement", 
+        "dropTableStatement", "expression", "booleanExpression", "predicatedExpression", 
+        "predicate", "comparisonOperator", "valueExpression", "primaryExpression", 
+        "whenClause", "subqueryExpression", "dataType", "properties", "property", 
+        "literal", "identifier", "qualifiedName", "qualifiedNameAllowEmpty", 
+        "columnRef", "columnName", "emptyColumn", "tableName", "tableNameCreate", 
+        "functionName", "nonReserved",
     ];
 
     public get grammarFileName(): string { return "GenericSql.g4"; }
@@ -275,21 +282,21 @@ export class GenericSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 111;
+            this.state = 123;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 276824196) !== 0) || _la === 32 || _la === 49 || ((((_la - 76)) & ~0x1F) === 0 && ((1 << (_la - 76)) & 270337) !== 0)) {
                 {
                 {
-                this.state = 108;
+                this.state = 120;
                 this.statements();
                 }
                 }
-                this.state = 113;
+                this.state = 125;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
-            this.state = 114;
+            this.state = 126;
             this.match(GenericSqlParser.EOF);
             }
         }
@@ -313,7 +320,7 @@ export class GenericSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 116;
+            this.state = 128;
             this.singleStatement();
             }
         }
@@ -338,14 +345,14 @@ export class GenericSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 118;
+            this.state = 130;
             this.statement();
-            this.state = 120;
+            this.state = 132;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 108) {
                 {
-                this.state = 119;
+                this.state = 131;
                 this.match(GenericSqlParser.SEMICOLON);
                 }
             }
@@ -370,7 +377,7 @@ export class GenericSqlParser extends SQLParserBase {
         let localContext = new StatementContext(this.context, this.state);
         this.enterRule(localContext, 6, GenericSqlParser.RULE_statement);
         try {
-            this.state = 129;
+            this.state = 141;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case GenericSqlParser.T__1:
@@ -379,7 +386,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new StatementDefaultContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 122;
+                this.state = 134;
                 this.queryStatement();
                 }
                 break;
@@ -387,7 +394,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new InsertContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 123;
+                this.state = 135;
                 this.insertStatement();
                 }
                 break;
@@ -395,7 +402,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new UpdateContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 124;
+                this.state = 136;
                 this.updateStatement();
                 }
                 break;
@@ -403,7 +410,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new DeleteContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 125;
+                this.state = 137;
                 this.deleteStatement();
                 }
                 break;
@@ -411,7 +418,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new CreateTableContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 126;
+                this.state = 138;
                 this.createTableStatement();
                 }
                 break;
@@ -419,7 +426,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new AlterTableContext(localContext);
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 127;
+                this.state = 139;
                 this.alterTableStatement();
                 }
                 break;
@@ -427,7 +434,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new DropTableContext(localContext);
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 128;
+                this.state = 140;
                 this.dropTableStatement();
                 }
                 break;
@@ -456,17 +463,17 @@ export class GenericSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 132;
+            this.state = 144;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 94) {
                 {
-                this.state = 131;
+                this.state = 143;
                 this.withClause();
                 }
             }
 
-            this.state = 134;
+            this.state = 146;
             this.queryNoWith();
             }
         }
@@ -491,33 +498,33 @@ export class GenericSqlParser extends SQLParserBase {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 136;
+            this.state = 148;
             this.match(GenericSqlParser.KW_WITH);
-            this.state = 138;
+            this.state = 150;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 72) {
                 {
-                this.state = 137;
+                this.state = 149;
                 this.match(GenericSqlParser.KW_RECURSIVE);
                 }
             }
 
-            this.state = 140;
+            this.state = 152;
             this.namedQuery();
-            this.state = 145;
+            this.state = 157;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 141;
+                this.state = 153;
                 this.match(GenericSqlParser.T__0);
-                this.state = 142;
+                this.state = 154;
                 this.namedQuery();
                 }
                 }
-                this.state = 147;
+                this.state = 159;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -540,18 +547,74 @@ export class GenericSqlParser extends SQLParserBase {
     public namedQuery(): NamedQueryContext {
         let localContext = new NamedQueryContext(this.context, this.state);
         this.enterRule(localContext, 12, GenericSqlParser.RULE_namedQuery);
+        let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 148;
+            this.state = 160;
             localContext._name = this.identifier();
-            this.state = 149;
+            this.state = 162;
+            this.errorHandler.sync(this);
+            _la = this.tokenStream.LA(1);
+            if (_la === 2) {
+                {
+                this.state = 161;
+                this.cteColumnList();
+                }
+            }
+
+            this.state = 164;
             this.match(GenericSqlParser.KW_AS);
-            this.state = 150;
+            this.state = 165;
             this.match(GenericSqlParser.T__1);
-            this.state = 151;
+            this.state = 166;
             this.queryStatement();
-            this.state = 152;
+            this.state = 167;
+            this.match(GenericSqlParser.T__2);
+            }
+        }
+        catch (re) {
+            if (re instanceof antlr.RecognitionException) {
+                localContext.exception = re;
+                this.errorHandler.reportError(this, re);
+                this.errorHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        }
+        finally {
+            this.exitRule();
+        }
+        return localContext;
+    }
+    public cteColumnList(): CteColumnListContext {
+        let localContext = new CteColumnListContext(this.context, this.state);
+        this.enterRule(localContext, 14, GenericSqlParser.RULE_cteColumnList);
+        let _la: number;
+        try {
+            this.enterOuterAlt(localContext, 1);
+            {
+            this.state = 169;
+            this.match(GenericSqlParser.T__1);
+            this.state = 170;
+            this.identifier();
+            this.state = 175;
+            this.errorHandler.sync(this);
+            _la = this.tokenStream.LA(1);
+            while (_la === 1) {
+                {
+                {
+                this.state = 171;
+                this.match(GenericSqlParser.T__0);
+                this.state = 172;
+                this.identifier();
+                }
+                }
+                this.state = 177;
+                this.errorHandler.sync(this);
+                _la = this.tokenStream.LA(1);
+            }
+            this.state = 178;
             this.match(GenericSqlParser.T__2);
             }
         }
@@ -571,20 +634,20 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public queryNoWith(): QueryNoWithContext {
         let localContext = new QueryNoWithContext(this.context, this.state);
-        this.enterRule(localContext, 14, GenericSqlParser.RULE_queryNoWith);
+        this.enterRule(localContext, 16, GenericSqlParser.RULE_queryNoWith);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 154;
+            this.state = 180;
             this.queryTerm();
-            this.state = 162;
+            this.state = 188;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 36 || _la === 52 || _la === 87) {
                 {
                 {
-                this.state = 155;
+                this.state = 181;
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 36 || _la === 52 || _la === 87)) {
                 this.errorHandler.recoverInline(this);
@@ -593,21 +656,21 @@ export class GenericSqlParser extends SQLParserBase {
                     this.errorHandler.reportMatch(this);
                     this.consume();
                 }
-                this.state = 157;
+                this.state = 183;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 6) {
                     {
-                    this.state = 156;
+                    this.state = 182;
                     this.match(GenericSqlParser.KW_ALL);
                     }
                 }
 
-                this.state = 159;
+                this.state = 185;
                 this.queryTerm();
                 }
                 }
-                this.state = 164;
+                this.state = 190;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -629,11 +692,11 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public queryTerm(): QueryTermContext {
         let localContext = new QueryTermContext(this.context, this.state);
-        this.enterRule(localContext, 16, GenericSqlParser.RULE_queryTerm);
+        this.enterRule(localContext, 18, GenericSqlParser.RULE_queryTerm);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 165;
+            this.state = 191;
             this.queryPrimary();
             }
         }
@@ -653,26 +716,26 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public queryPrimary(): QueryPrimaryContext {
         let localContext = new QueryPrimaryContext(this.context, this.state);
-        this.enterRule(localContext, 18, GenericSqlParser.RULE_queryPrimary);
+        this.enterRule(localContext, 20, GenericSqlParser.RULE_queryPrimary);
         try {
-            this.state = 172;
+            this.state = 198;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case GenericSqlParser.KW_SELECT:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 167;
+                this.state = 193;
                 this.querySpecification();
                 }
                 break;
             case GenericSqlParser.T__1:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 168;
+                this.state = 194;
                 this.match(GenericSqlParser.T__1);
-                this.state = 169;
+                this.state = 195;
                 this.queryStatement();
-                this.state = 170;
+                this.state = 196;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -696,97 +759,97 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public querySpecification(): QuerySpecificationContext {
         let localContext = new QuerySpecificationContext(this.context, this.state);
-        this.enterRule(localContext, 20, GenericSqlParser.RULE_querySpecification);
+        this.enterRule(localContext, 22, GenericSqlParser.RULE_querySpecification);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 174;
+            this.state = 200;
             this.match(GenericSqlParser.KW_SELECT);
-            this.state = 176;
+            this.state = 202;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 9, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 11, this.context) ) {
             case 1:
                 {
-                this.state = 175;
+                this.state = 201;
                 this.setQuantifier();
                 }
                 break;
             }
-            this.state = 178;
+            this.state = 204;
             this.selectItem();
-            this.state = 183;
+            this.state = 209;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 179;
+                this.state = 205;
                 this.match(GenericSqlParser.T__0);
-                this.state = 180;
+                this.state = 206;
                 this.selectItem();
                 }
                 }
-                this.state = 185;
+                this.state = 211;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
-            this.state = 187;
+            this.state = 213;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 42) {
                 {
-                this.state = 186;
+                this.state = 212;
                 this.fromClause();
                 }
             }
 
-            this.state = 190;
+            this.state = 216;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 93) {
                 {
-                this.state = 189;
+                this.state = 215;
                 this.whereClause();
                 }
             }
 
-            this.state = 193;
+            this.state = 219;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 44) {
                 {
-                this.state = 192;
+                this.state = 218;
                 this.groupByClause();
                 }
             }
 
-            this.state = 196;
+            this.state = 222;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 45) {
                 {
-                this.state = 195;
+                this.state = 221;
                 this.havingClause();
                 }
             }
 
-            this.state = 199;
+            this.state = 225;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 69) {
                 {
-                this.state = 198;
+                this.state = 224;
                 this.orderByClause();
                 }
             }
 
-            this.state = 202;
+            this.state = 228;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 60) {
                 {
-                this.state = 201;
+                this.state = 227;
                 this.limitClause();
                 }
             }
@@ -809,12 +872,12 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public setQuantifier(): SetQuantifierContext {
         let localContext = new SetQuantifierContext(this.context, this.state);
-        this.enterRule(localContext, 22, GenericSqlParser.RULE_setQuantifier);
+        this.enterRule(localContext, 24, GenericSqlParser.RULE_setQuantifier);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 204;
+            this.state = 230;
             _la = this.tokenStream.LA(1);
             if(!(_la === 6 || _la === 30)) {
             this.errorHandler.recoverInline(this);
@@ -841,55 +904,70 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public selectItem(): SelectItemContext {
         let localContext = new SelectItemContext(this.context, this.state);
-        this.enterRule(localContext, 24, GenericSqlParser.RULE_selectItem);
+        this.enterRule(localContext, 26, GenericSqlParser.RULE_selectItem);
         let _la: number;
         try {
-            this.state = 218;
+            this.state = 246;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 19, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 21, this.context) ) {
             case 1:
+                localContext = new SelectExpressionElementContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 206;
+                this.state = 232;
                 this.expression();
-                this.state = 211;
+                this.state = 237;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 18, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 20, this.context) ) {
                 case 1:
                     {
-                    this.state = 208;
+                    this.state = 234;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                     if (_la === 9) {
                         {
-                        this.state = 207;
+                        this.state = 233;
                         this.match(GenericSqlParser.KW_AS);
                         }
                     }
 
-                    this.state = 210;
-                    this.identifier();
+                    this.state = 236;
+                    (localContext as SelectExpressionElementContext)._alias = this.identifier();
                     }
                     break;
                 }
                 }
                 break;
             case 2:
+                localContext = new SelectStarElementContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 213;
+                this.state = 239;
                 this.qualifiedName();
-                this.state = 214;
+                this.state = 240;
                 this.match(GenericSqlParser.T__3);
-                this.state = 215;
+                this.state = 241;
                 this.match(GenericSqlParser.ASTERISK);
                 }
                 break;
             case 3:
+                localContext = new SelectAllElementContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 217;
+                this.state = 243;
                 this.match(GenericSqlParser.ASTERISK);
+                }
+                break;
+            case 4:
+                localContext = new SelectEmptyElementContext(localContext);
+                this.enterOuterAlt(localContext, 4);
+                {
+                this.state = 244;
+                if (!(this.shouldMatchEmpty())) {
+                    throw this.createFailedPredicateException("this.shouldMatchEmpty()");
+                }
+                this.state = 245;
+                this.emptyColumn();
                 }
                 break;
             }
@@ -910,28 +988,28 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public fromClause(): FromClauseContext {
         let localContext = new FromClauseContext(this.context, this.state);
-        this.enterRule(localContext, 26, GenericSqlParser.RULE_fromClause);
+        this.enterRule(localContext, 28, GenericSqlParser.RULE_fromClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 220;
+            this.state = 248;
             this.match(GenericSqlParser.KW_FROM);
-            this.state = 221;
+            this.state = 249;
             this.relation(0);
-            this.state = 226;
+            this.state = 254;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 222;
+                this.state = 250;
                 this.match(GenericSqlParser.T__0);
-                this.state = 223;
+                this.state = 251;
                 this.relation(0);
                 }
                 }
-                this.state = 228;
+                this.state = 256;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -963,8 +1041,8 @@ export class GenericSqlParser extends SQLParserBase {
         let parentState = this.state;
         let localContext = new RelationContext(this.context, parentState);
         let previousContext = localContext;
-        let _startState = 28;
-        this.enterRecursionRule(localContext, 28, GenericSqlParser.RULE_relation, _p);
+        let _startState = 30;
+        this.enterRecursionRule(localContext, 30, GenericSqlParser.RULE_relation, _p);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
@@ -974,13 +1052,13 @@ export class GenericSqlParser extends SQLParserBase {
             this.context = localContext;
             previousContext = localContext;
 
-            this.state = 230;
+            this.state = 258;
             this.aliasedRelation();
             }
             this.context!.stop = this.tokenStream.LT(-1);
-            this.state = 241;
+            this.state = 269;
             this.errorHandler.sync(this);
-            alternative = this.interpreter.adaptivePredict(this.tokenStream, 21, this.context);
+            alternative = this.interpreter.adaptivePredict(this.tokenStream, 23, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
                 if (alternative === 1) {
                     if (this._parseListeners != null) {
@@ -992,26 +1070,26 @@ export class GenericSqlParser extends SQLParserBase {
                     localContext = new JoinRelationContext(new RelationContext(parentContext, parentState));
                     (localContext as JoinRelationContext)._left = previousContext;
                     this.pushNewRecursionContext(localContext, _startState, GenericSqlParser.RULE_relation);
-                    this.state = 232;
+                    this.state = 260;
                     if (!(this.precpred(this.context, 2))) {
                         throw this.createFailedPredicateException("this.precpred(this.context, 2)");
                     }
-                    this.state = 233;
+                    this.state = 261;
                     this.joinType();
-                    this.state = 234;
+                    this.state = 262;
                     this.match(GenericSqlParser.KW_JOIN);
-                    this.state = 235;
+                    this.state = 263;
                     (localContext as JoinRelationContext)._right = this.relation(0);
-                    this.state = 236;
+                    this.state = 264;
                     this.match(GenericSqlParser.KW_ON);
-                    this.state = 237;
+                    this.state = 265;
                     (localContext as JoinRelationContext)._condition = this.expression();
                     }
                     }
                 }
-                this.state = 243;
+                this.state = 271;
                 this.errorHandler.sync(this);
-                alternative = this.interpreter.adaptivePredict(this.tokenStream, 21, this.context);
+                alternative = this.interpreter.adaptivePredict(this.tokenStream, 23, this.context);
             }
             }
         }
@@ -1031,22 +1109,22 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public joinType(): JoinTypeContext {
         let localContext = new JoinTypeContext(this.context, this.state);
-        this.enterRule(localContext, 30, GenericSqlParser.RULE_joinType);
+        this.enterRule(localContext, 32, GenericSqlParser.RULE_joinType);
         let _la: number;
         try {
-            this.state = 260;
+            this.state = 288;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case GenericSqlParser.KW_INNER:
             case GenericSqlParser.KW_JOIN:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 245;
+                this.state = 273;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 48) {
                     {
-                    this.state = 244;
+                    this.state = 272;
                     this.match(GenericSqlParser.KW_INNER);
                     }
                 }
@@ -1056,14 +1134,14 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_LEFT:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 247;
+                this.state = 275;
                 this.match(GenericSqlParser.KW_LEFT);
-                this.state = 249;
+                this.state = 277;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 70) {
                     {
-                    this.state = 248;
+                    this.state = 276;
                     this.match(GenericSqlParser.KW_OUTER);
                     }
                 }
@@ -1073,14 +1151,14 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_RIGHT:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 251;
+                this.state = 279;
                 this.match(GenericSqlParser.KW_RIGHT);
-                this.state = 253;
+                this.state = 281;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 70) {
                     {
-                    this.state = 252;
+                    this.state = 280;
                     this.match(GenericSqlParser.KW_OUTER);
                     }
                 }
@@ -1090,14 +1168,14 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_FULL:
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 255;
+                this.state = 283;
                 this.match(GenericSqlParser.KW_FULL);
-                this.state = 257;
+                this.state = 285;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 70) {
                     {
-                    this.state = 256;
+                    this.state = 284;
                     this.match(GenericSqlParser.KW_OUTER);
                     }
                 }
@@ -1107,7 +1185,7 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_CROSS:
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 259;
+                this.state = 287;
                 this.match(GenericSqlParser.KW_CROSS);
                 }
                 break;
@@ -1131,30 +1209,30 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public aliasedRelation(): AliasedRelationContext {
         let localContext = new AliasedRelationContext(this.context, this.state);
-        this.enterRule(localContext, 32, GenericSqlParser.RULE_aliasedRelation);
+        this.enterRule(localContext, 34, GenericSqlParser.RULE_aliasedRelation);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 262;
+            this.state = 290;
             this.relationPrimary();
-            this.state = 267;
+            this.state = 295;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 28, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 30, this.context) ) {
             case 1:
                 {
-                this.state = 264;
+                this.state = 292;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 9) {
                     {
-                    this.state = 263;
+                    this.state = 291;
                     this.match(GenericSqlParser.KW_AS);
                     }
                 }
 
-                this.state = 266;
-                this.identifier();
+                this.state = 294;
+                localContext._alias = this.identifier();
                 }
                 break;
             }
@@ -1176,9 +1254,9 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public relationPrimary(): RelationPrimaryContext {
         let localContext = new RelationPrimaryContext(this.context, this.state);
-        this.enterRule(localContext, 34, GenericSqlParser.RULE_relationPrimary);
+        this.enterRule(localContext, 36, GenericSqlParser.RULE_relationPrimary);
         try {
-            this.state = 274;
+            this.state = 302;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case GenericSqlParser.KW_ADD:
@@ -1231,7 +1309,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new TableNameRelationContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 269;
+                this.state = 297;
                 this.tableName();
                 }
                 break;
@@ -1239,11 +1317,11 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new SubqueryRelationContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 270;
+                this.state = 298;
                 this.match(GenericSqlParser.T__1);
-                this.state = 271;
+                this.state = 299;
                 this.queryStatement();
-                this.state = 272;
+                this.state = 300;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -1267,14 +1345,32 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public whereClause(): WhereClauseContext {
         let localContext = new WhereClauseContext(this.context, this.state);
-        this.enterRule(localContext, 36, GenericSqlParser.RULE_whereClause);
+        this.enterRule(localContext, 38, GenericSqlParser.RULE_whereClause);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 276;
+            this.state = 304;
             this.match(GenericSqlParser.KW_WHERE);
-            this.state = 277;
-            this.expression();
+            this.state = 308;
+            this.errorHandler.sync(this);
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 32, this.context) ) {
+            case 1:
+                {
+                this.state = 305;
+                this.expression();
+                }
+                break;
+            case 2:
+                {
+                this.state = 306;
+                if (!(this.shouldMatchEmpty())) {
+                    throw this.createFailedPredicateException("this.shouldMatchEmpty()");
+                }
+                this.state = 307;
+                this.emptyColumn();
+                }
+                break;
+            }
             }
         }
         catch (re) {
@@ -1293,40 +1389,40 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public groupByClause(): GroupByClauseContext {
         let localContext = new GroupByClauseContext(this.context, this.state);
-        this.enterRule(localContext, 38, GenericSqlParser.RULE_groupByClause);
+        this.enterRule(localContext, 40, GenericSqlParser.RULE_groupByClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 279;
+            this.state = 310;
             this.match(GenericSqlParser.KW_GROUP);
-            this.state = 280;
+            this.state = 311;
             this.match(GenericSqlParser.KW_BY);
-            this.state = 282;
+            this.state = 313;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 30, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 33, this.context) ) {
             case 1:
                 {
-                this.state = 281;
+                this.state = 312;
                 this.setQuantifier();
                 }
                 break;
             }
-            this.state = 284;
+            this.state = 315;
             this.expression();
-            this.state = 289;
+            this.state = 320;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 285;
+                this.state = 316;
                 this.match(GenericSqlParser.T__0);
-                this.state = 286;
+                this.state = 317;
                 this.expression();
                 }
                 }
-                this.state = 291;
+                this.state = 322;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -1348,14 +1444,32 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public havingClause(): HavingClauseContext {
         let localContext = new HavingClauseContext(this.context, this.state);
-        this.enterRule(localContext, 40, GenericSqlParser.RULE_havingClause);
+        this.enterRule(localContext, 42, GenericSqlParser.RULE_havingClause);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 292;
+            this.state = 323;
             this.match(GenericSqlParser.KW_HAVING);
-            this.state = 293;
-            this.expression();
+            this.state = 327;
+            this.errorHandler.sync(this);
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 35, this.context) ) {
+            case 1:
+                {
+                this.state = 324;
+                this.expression();
+                }
+                break;
+            case 2:
+                {
+                this.state = 325;
+                if (!(this.shouldMatchEmpty())) {
+                    throw this.createFailedPredicateException("this.shouldMatchEmpty()");
+                }
+                this.state = 326;
+                this.emptyColumn();
+                }
+                break;
+            }
             }
         }
         catch (re) {
@@ -1374,30 +1488,30 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public orderByClause(): OrderByClauseContext {
         let localContext = new OrderByClauseContext(this.context, this.state);
-        this.enterRule(localContext, 42, GenericSqlParser.RULE_orderByClause);
+        this.enterRule(localContext, 44, GenericSqlParser.RULE_orderByClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 295;
+            this.state = 329;
             this.match(GenericSqlParser.KW_ORDER);
-            this.state = 296;
+            this.state = 330;
             this.match(GenericSqlParser.KW_BY);
-            this.state = 297;
+            this.state = 331;
             this.sortItem();
-            this.state = 302;
+            this.state = 336;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 298;
+                this.state = 332;
                 this.match(GenericSqlParser.T__0);
-                this.state = 299;
+                this.state = 333;
                 this.sortItem();
                 }
                 }
-                this.state = 304;
+                this.state = 338;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
@@ -1419,19 +1533,19 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public sortItem(): SortItemContext {
         let localContext = new SortItemContext(this.context, this.state);
-        this.enterRule(localContext, 44, GenericSqlParser.RULE_sortItem);
+        this.enterRule(localContext, 46, GenericSqlParser.RULE_sortItem);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 305;
+            this.state = 339;
             this.expression();
-            this.state = 307;
+            this.state = 341;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 10 || _la === 29) {
                 {
-                this.state = 306;
+                this.state = 340;
                 localContext._ordering = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 10 || _la === 29)) {
@@ -1444,14 +1558,14 @@ export class GenericSqlParser extends SQLParserBase {
                 }
             }
 
-            this.state = 311;
+            this.state = 345;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 64) {
                 {
-                this.state = 309;
+                this.state = 343;
                 this.match(GenericSqlParser.KW_NULLS);
-                this.state = 310;
+                this.state = 344;
                 localContext._nullOrdering = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 39 || _la === 57)) {
@@ -1482,23 +1596,23 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public limitClause(): LimitClauseContext {
         let localContext = new LimitClauseContext(this.context, this.state);
-        this.enterRule(localContext, 46, GenericSqlParser.RULE_limitClause);
+        this.enterRule(localContext, 48, GenericSqlParser.RULE_limitClause);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 313;
+            this.state = 347;
             this.match(GenericSqlParser.KW_LIMIT);
-            this.state = 314;
+            this.state = 348;
             localContext._limit = this.expression();
-            this.state = 317;
+            this.state = 351;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 66) {
                 {
-                this.state = 315;
+                this.state = 349;
                 this.match(GenericSqlParser.KW_OFFSET);
-                this.state = 316;
+                this.state = 350;
                 localContext._offset = this.expression();
                 }
             }
@@ -1521,27 +1635,27 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public insertStatement(): InsertStatementContext {
         let localContext = new InsertStatementContext(this.context, this.state);
-        this.enterRule(localContext, 48, GenericSqlParser.RULE_insertStatement);
+        this.enterRule(localContext, 50, GenericSqlParser.RULE_insertStatement);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 319;
+            this.state = 353;
             this.match(GenericSqlParser.KW_INSERT);
-            this.state = 320;
+            this.state = 354;
             this.match(GenericSqlParser.KW_INTO);
-            this.state = 321;
+            this.state = 355;
             this.tableName();
-            this.state = 323;
+            this.state = 357;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 36, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 40, this.context) ) {
             case 1:
                 {
-                this.state = 322;
+                this.state = 356;
                 this.columnList();
                 }
                 break;
             }
-            this.state = 325;
+            this.state = 359;
             this.queryStatement();
             }
         }
@@ -1561,32 +1675,32 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public columnList(): ColumnListContext {
         let localContext = new ColumnListContext(this.context, this.state);
-        this.enterRule(localContext, 50, GenericSqlParser.RULE_columnList);
+        this.enterRule(localContext, 52, GenericSqlParser.RULE_columnList);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 327;
+            this.state = 361;
             this.match(GenericSqlParser.T__1);
-            this.state = 328;
+            this.state = 362;
             this.columnRef();
-            this.state = 333;
+            this.state = 367;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 329;
+                this.state = 363;
                 this.match(GenericSqlParser.T__0);
-                this.state = 330;
+                this.state = 364;
                 this.columnRef();
                 }
                 }
-                this.state = 335;
+                this.state = 369;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
-            this.state = 336;
+            this.state = 370;
             this.match(GenericSqlParser.T__2);
             }
         }
@@ -1606,41 +1720,41 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public updateStatement(): UpdateStatementContext {
         let localContext = new UpdateStatementContext(this.context, this.state);
-        this.enterRule(localContext, 52, GenericSqlParser.RULE_updateStatement);
+        this.enterRule(localContext, 54, GenericSqlParser.RULE_updateStatement);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 338;
+            this.state = 372;
             this.match(GenericSqlParser.KW_UPDATE);
-            this.state = 339;
+            this.state = 373;
             this.tableName();
-            this.state = 340;
+            this.state = 374;
             this.match(GenericSqlParser.KW_SET);
-            this.state = 341;
+            this.state = 375;
             this.updateAssignment();
-            this.state = 346;
+            this.state = 380;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 342;
+                this.state = 376;
                 this.match(GenericSqlParser.T__0);
-                this.state = 343;
+                this.state = 377;
                 this.updateAssignment();
                 }
                 }
-                this.state = 348;
+                this.state = 382;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
-            this.state = 350;
+            this.state = 384;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 93) {
                 {
-                this.state = 349;
+                this.state = 383;
                 this.whereClause();
                 }
             }
@@ -1663,15 +1777,15 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public updateAssignment(): UpdateAssignmentContext {
         let localContext = new UpdateAssignmentContext(this.context, this.state);
-        this.enterRule(localContext, 54, GenericSqlParser.RULE_updateAssignment);
+        this.enterRule(localContext, 56, GenericSqlParser.RULE_updateAssignment);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 352;
+            this.state = 386;
             this.columnRef();
-            this.state = 353;
+            this.state = 387;
             this.match(GenericSqlParser.EQ);
-            this.state = 354;
+            this.state = 388;
             this.expression();
             }
         }
@@ -1691,23 +1805,23 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public deleteStatement(): DeleteStatementContext {
         let localContext = new DeleteStatementContext(this.context, this.state);
-        this.enterRule(localContext, 56, GenericSqlParser.RULE_deleteStatement);
+        this.enterRule(localContext, 58, GenericSqlParser.RULE_deleteStatement);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 356;
+            this.state = 390;
             this.match(GenericSqlParser.KW_DELETE);
-            this.state = 357;
+            this.state = 391;
             this.match(GenericSqlParser.KW_FROM);
-            this.state = 358;
+            this.state = 392;
             this.tableName();
-            this.state = 360;
+            this.state = 394;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 93) {
                 {
-                this.state = 359;
+                this.state = 393;
                 this.whereClause();
                 }
             }
@@ -1730,61 +1844,61 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public createTableStatement(): CreateTableStatementContext {
         let localContext = new CreateTableStatementContext(this.context, this.state);
-        this.enterRule(localContext, 58, GenericSqlParser.RULE_createTableStatement);
+        this.enterRule(localContext, 60, GenericSqlParser.RULE_createTableStatement);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 362;
+            this.state = 396;
             this.match(GenericSqlParser.KW_CREATE);
-            this.state = 363;
+            this.state = 397;
             this.match(GenericSqlParser.KW_TABLE);
-            this.state = 367;
+            this.state = 401;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 41, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 45, this.context) ) {
             case 1:
                 {
-                this.state = 364;
+                this.state = 398;
                 this.match(GenericSqlParser.KW_IF);
-                this.state = 365;
+                this.state = 399;
                 this.match(GenericSqlParser.KW_NOT);
-                this.state = 366;
+                this.state = 400;
                 this.match(GenericSqlParser.KW_EXISTS);
                 }
                 break;
             }
-            this.state = 369;
+            this.state = 403;
             this.tableNameCreate();
-            this.state = 370;
+            this.state = 404;
             this.match(GenericSqlParser.T__1);
-            this.state = 371;
+            this.state = 405;
             this.tableElement();
-            this.state = 376;
+            this.state = 410;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 372;
+                this.state = 406;
                 this.match(GenericSqlParser.T__0);
-                this.state = 373;
+                this.state = 407;
                 this.tableElement();
                 }
                 }
-                this.state = 378;
+                this.state = 412;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
-            this.state = 379;
+            this.state = 413;
             this.match(GenericSqlParser.T__2);
-            this.state = 382;
+            this.state = 416;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 43, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 47, this.context) ) {
             case 1:
                 {
-                this.state = 380;
+                this.state = 414;
                 this.match(GenericSqlParser.KW_WITH);
-                this.state = 381;
+                this.state = 415;
                 this.properties();
                 }
                 break;
@@ -1807,22 +1921,22 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public tableElement(): TableElementContext {
         let localContext = new TableElementContext(this.context, this.state);
-        this.enterRule(localContext, 60, GenericSqlParser.RULE_tableElement);
+        this.enterRule(localContext, 62, GenericSqlParser.RULE_tableElement);
         try {
-            this.state = 386;
+            this.state = 420;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 44, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 48, this.context) ) {
             case 1:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 384;
+                this.state = 418;
                 this.columnDefinition();
                 }
                 break;
             case 2:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 385;
+                this.state = 419;
                 this.tableConstraint();
                 }
                 break;
@@ -1844,47 +1958,47 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public columnDefinition(): ColumnDefinitionContext {
         let localContext = new ColumnDefinitionContext(this.context, this.state);
-        this.enterRule(localContext, 62, GenericSqlParser.RULE_columnDefinition);
+        this.enterRule(localContext, 64, GenericSqlParser.RULE_columnDefinition);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 388;
-            this.columnRef();
-            this.state = 389;
-            this.dataType();
-            this.state = 392;
+            this.state = 422;
+            this.columnRefCreate();
+            this.state = 423;
+            localContext._colType = this.dataType();
+            this.state = 426;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 61) {
                 {
-                this.state = 390;
+                this.state = 424;
                 this.match(GenericSqlParser.KW_NOT);
-                this.state = 391;
+                this.state = 425;
                 this.match(GenericSqlParser.KW_NULL);
                 }
             }
 
-            this.state = 396;
+            this.state = 430;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 27) {
                 {
-                this.state = 394;
+                this.state = 428;
                 this.match(GenericSqlParser.KW_DEFAULT);
-                this.state = 395;
+                this.state = 429;
                 this.expression();
                 }
             }
 
-            this.state = 400;
+            this.state = 434;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 71) {
                 {
-                this.state = 398;
+                this.state = 432;
                 this.match(GenericSqlParser.KW_PRIMARY);
-                this.state = 399;
+                this.state = 433;
                 this.match(GenericSqlParser.KW_KEY);
                 }
             }
@@ -1905,151 +2019,175 @@ export class GenericSqlParser extends SQLParserBase {
         }
         return localContext;
     }
+    public columnRefCreate(): ColumnRefCreateContext {
+        let localContext = new ColumnRefCreateContext(this.context, this.state);
+        this.enterRule(localContext, 66, GenericSqlParser.RULE_columnRefCreate);
+        try {
+            this.enterOuterAlt(localContext, 1);
+            {
+            this.state = 436;
+            this.identifier();
+            }
+        }
+        catch (re) {
+            if (re instanceof antlr.RecognitionException) {
+                localContext.exception = re;
+                this.errorHandler.reportError(this, re);
+                this.errorHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        }
+        finally {
+            this.exitRule();
+        }
+        return localContext;
+    }
     public tableConstraint(): TableConstraintContext {
         let localContext = new TableConstraintContext(this.context, this.state);
-        this.enterRule(localContext, 64, GenericSqlParser.RULE_tableConstraint);
+        this.enterRule(localContext, 68, GenericSqlParser.RULE_tableConstraint);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 404;
+            this.state = 440;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 22) {
                 {
-                this.state = 402;
+                this.state = 438;
                 this.match(GenericSqlParser.KW_CONSTRAINT);
-                this.state = 403;
+                this.state = 439;
                 this.identifier();
                 }
             }
 
-            this.state = 461;
+            this.state = 497;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case GenericSqlParser.KW_PRIMARY:
                 {
-                this.state = 406;
+                this.state = 442;
                 this.match(GenericSqlParser.KW_PRIMARY);
-                this.state = 407;
+                this.state = 443;
                 this.match(GenericSqlParser.KW_KEY);
-                this.state = 408;
+                this.state = 444;
                 this.match(GenericSqlParser.T__1);
-                this.state = 409;
+                this.state = 445;
                 this.columnRef();
-                this.state = 414;
+                this.state = 450;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 1) {
                     {
                     {
-                    this.state = 410;
+                    this.state = 446;
                     this.match(GenericSqlParser.T__0);
-                    this.state = 411;
+                    this.state = 447;
                     this.columnRef();
                     }
                     }
-                    this.state = 416;
+                    this.state = 452;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 417;
+                this.state = 453;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
             case GenericSqlParser.KW_UNIQUE:
                 {
-                this.state = 419;
+                this.state = 455;
                 this.match(GenericSqlParser.KW_UNIQUE);
-                this.state = 420;
+                this.state = 456;
                 this.match(GenericSqlParser.T__1);
-                this.state = 421;
+                this.state = 457;
                 this.columnRef();
-                this.state = 426;
+                this.state = 462;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 1) {
                     {
                     {
-                    this.state = 422;
+                    this.state = 458;
                     this.match(GenericSqlParser.T__0);
-                    this.state = 423;
+                    this.state = 459;
                     this.columnRef();
                     }
                     }
-                    this.state = 428;
+                    this.state = 464;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 429;
+                this.state = 465;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
             case GenericSqlParser.KW_CHECK:
                 {
-                this.state = 431;
+                this.state = 467;
                 this.match(GenericSqlParser.KW_CHECK);
-                this.state = 432;
+                this.state = 468;
                 this.match(GenericSqlParser.T__1);
-                this.state = 433;
+                this.state = 469;
                 this.expression();
-                this.state = 434;
+                this.state = 470;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
             case GenericSqlParser.KW_FOREIGN:
                 {
-                this.state = 436;
+                this.state = 472;
                 this.match(GenericSqlParser.KW_FOREIGN);
-                this.state = 437;
+                this.state = 473;
                 this.match(GenericSqlParser.KW_KEY);
-                this.state = 438;
+                this.state = 474;
                 this.match(GenericSqlParser.T__1);
-                this.state = 439;
+                this.state = 475;
                 this.columnRef();
-                this.state = 444;
+                this.state = 480;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 1) {
                     {
                     {
-                    this.state = 440;
+                    this.state = 476;
                     this.match(GenericSqlParser.T__0);
-                    this.state = 441;
+                    this.state = 477;
                     this.columnRef();
                     }
                     }
-                    this.state = 446;
+                    this.state = 482;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 447;
+                this.state = 483;
                 this.match(GenericSqlParser.T__2);
-                this.state = 448;
+                this.state = 484;
                 this.match(GenericSqlParser.KW_REFERENCES);
-                this.state = 449;
+                this.state = 485;
                 this.tableName();
-                this.state = 450;
+                this.state = 486;
                 this.match(GenericSqlParser.T__1);
-                this.state = 451;
+                this.state = 487;
                 this.columnRef();
-                this.state = 456;
+                this.state = 492;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 1) {
                     {
                     {
-                    this.state = 452;
+                    this.state = 488;
                     this.match(GenericSqlParser.T__0);
-                    this.state = 453;
+                    this.state = 489;
                     this.columnRef();
                     }
                     }
-                    this.state = 458;
+                    this.state = 494;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 459;
+                this.state = 495;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -2074,114 +2212,114 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public alterTableStatement(): AlterTableStatementContext {
         let localContext = new AlterTableStatementContext(this.context, this.state);
-        this.enterRule(localContext, 66, GenericSqlParser.RULE_alterTableStatement);
+        this.enterRule(localContext, 70, GenericSqlParser.RULE_alterTableStatement);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 463;
+            this.state = 499;
             this.match(GenericSqlParser.KW_ALTER);
-            this.state = 464;
+            this.state = 500;
             this.match(GenericSqlParser.KW_TABLE);
-            this.state = 467;
+            this.state = 503;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 54, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 58, this.context) ) {
             case 1:
                 {
-                this.state = 465;
+                this.state = 501;
                 this.match(GenericSqlParser.KW_IF);
-                this.state = 466;
+                this.state = 502;
                 this.match(GenericSqlParser.KW_EXISTS);
                 }
                 break;
             }
-            this.state = 469;
+            this.state = 505;
             this.tableName();
-            this.state = 501;
+            this.state = 537;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 57, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 61, this.context) ) {
             case 1:
                 {
-                this.state = 470;
+                this.state = 506;
                 this.match(GenericSqlParser.KW_ADD);
-                this.state = 471;
+                this.state = 507;
                 this.match(GenericSqlParser.KW_COLUMN);
-                this.state = 475;
+                this.state = 511;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 55, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 59, this.context) ) {
                 case 1:
                     {
-                    this.state = 472;
+                    this.state = 508;
                     this.match(GenericSqlParser.KW_IF);
-                    this.state = 473;
+                    this.state = 509;
                     this.match(GenericSqlParser.KW_NOT);
-                    this.state = 474;
+                    this.state = 510;
                     this.match(GenericSqlParser.KW_EXISTS);
                     }
                     break;
                 }
-                this.state = 477;
+                this.state = 513;
                 this.columnDefinition();
                 }
                 break;
             case 2:
                 {
-                this.state = 478;
+                this.state = 514;
                 this.match(GenericSqlParser.KW_DROP);
-                this.state = 479;
+                this.state = 515;
                 this.match(GenericSqlParser.KW_COLUMN);
-                this.state = 482;
+                this.state = 518;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 56, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 60, this.context) ) {
                 case 1:
                     {
-                    this.state = 480;
+                    this.state = 516;
                     this.match(GenericSqlParser.KW_IF);
-                    this.state = 481;
+                    this.state = 517;
                     this.match(GenericSqlParser.KW_EXISTS);
                     }
                     break;
                 }
-                this.state = 484;
+                this.state = 520;
                 this.columnRef();
                 }
                 break;
             case 3:
                 {
-                this.state = 485;
+                this.state = 521;
                 this.match(GenericSqlParser.KW_RENAME);
-                this.state = 486;
+                this.state = 522;
                 this.match(GenericSqlParser.KW_TO);
-                this.state = 487;
+                this.state = 523;
                 this.tableNameCreate();
                 }
                 break;
             case 4:
                 {
-                this.state = 488;
+                this.state = 524;
                 this.match(GenericSqlParser.KW_ALTER);
-                this.state = 489;
+                this.state = 525;
                 this.match(GenericSqlParser.KW_COLUMN);
-                this.state = 490;
+                this.state = 526;
                 this.columnRef();
-                this.state = 491;
+                this.state = 527;
                 this.match(GenericSqlParser.KW_SET);
-                this.state = 492;
+                this.state = 528;
                 this.match(GenericSqlParser.KW_DEFAULT);
-                this.state = 493;
+                this.state = 529;
                 this.expression();
                 }
                 break;
             case 5:
                 {
-                this.state = 495;
+                this.state = 531;
                 this.match(GenericSqlParser.KW_ALTER);
-                this.state = 496;
+                this.state = 532;
                 this.match(GenericSqlParser.KW_COLUMN);
-                this.state = 497;
+                this.state = 533;
                 this.columnRef();
-                this.state = 498;
+                this.state = 534;
                 this.match(GenericSqlParser.KW_DROP);
-                this.state = 499;
+                this.state = 535;
                 this.match(GenericSqlParser.KW_DEFAULT);
                 }
                 break;
@@ -2204,27 +2342,27 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public dropTableStatement(): DropTableStatementContext {
         let localContext = new DropTableStatementContext(this.context, this.state);
-        this.enterRule(localContext, 68, GenericSqlParser.RULE_dropTableStatement);
+        this.enterRule(localContext, 72, GenericSqlParser.RULE_dropTableStatement);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 503;
+            this.state = 539;
             this.match(GenericSqlParser.KW_DROP);
-            this.state = 504;
+            this.state = 540;
             this.match(GenericSqlParser.KW_TABLE);
-            this.state = 507;
+            this.state = 543;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 58, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 62, this.context) ) {
             case 1:
                 {
-                this.state = 505;
+                this.state = 541;
                 this.match(GenericSqlParser.KW_IF);
-                this.state = 506;
+                this.state = 542;
                 this.match(GenericSqlParser.KW_EXISTS);
                 }
                 break;
             }
-            this.state = 509;
+            this.state = 545;
             this.tableName();
             }
         }
@@ -2244,11 +2382,11 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public expression(): ExpressionContext {
         let localContext = new ExpressionContext(this.context, this.state);
-        this.enterRule(localContext, 70, GenericSqlParser.RULE_expression);
+        this.enterRule(localContext, 74, GenericSqlParser.RULE_expression);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 511;
+            this.state = 547;
             this.booleanExpression(0);
             }
         }
@@ -2278,101 +2416,41 @@ export class GenericSqlParser extends SQLParserBase {
         let parentState = this.state;
         let localContext = new BooleanExpressionContext(this.context, parentState);
         let previousContext = localContext;
-        let _startState = 72;
-        this.enterRecursionRule(localContext, 72, GenericSqlParser.RULE_booleanExpression, _p);
+        let _startState = 76;
+        this.enterRecursionRule(localContext, 76, GenericSqlParser.RULE_booleanExpression, _p);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 517;
+            this.state = 553;
             this.errorHandler.sync(this);
-            switch (this.tokenStream.LA(1)) {
-            case GenericSqlParser.T__1:
-            case GenericSqlParser.KW_ADD:
-            case GenericSqlParser.KW_ALL:
-            case GenericSqlParser.KW_ASC:
-            case GenericSqlParser.KW_BIGINT:
-            case GenericSqlParser.KW_BINARY:
-            case GenericSqlParser.KW_BOOLEAN:
-            case GenericSqlParser.KW_BY:
-            case GenericSqlParser.KW_CASE:
-            case GenericSqlParser.KW_CAST:
-            case GenericSqlParser.KW_CHAR:
-            case GenericSqlParser.KW_COALESCE:
-            case GenericSqlParser.KW_COLUMN:
-            case GenericSqlParser.KW_CROSS:
-            case GenericSqlParser.KW_DATE:
-            case GenericSqlParser.KW_DECIMAL:
-            case GenericSqlParser.KW_DEFAULT:
-            case GenericSqlParser.KW_DESC:
-            case GenericSqlParser.KW_DOUBLE:
-            case GenericSqlParser.KW_EXISTS:
-            case GenericSqlParser.KW_FALSE:
-            case GenericSqlParser.KW_FIRST:
-            case GenericSqlParser.KW_FLOAT:
-            case GenericSqlParser.KW_FULL:
-            case GenericSqlParser.KW_IF:
-            case GenericSqlParser.KW_INT:
-            case GenericSqlParser.KW_INTEGER:
-            case GenericSqlParser.KW_KEY:
-            case GenericSqlParser.KW_LAST:
-            case GenericSqlParser.KW_LEFT:
-            case GenericSqlParser.KW_LIMIT:
-            case GenericSqlParser.KW_NULL:
-            case GenericSqlParser.KW_NULLIF:
-            case GenericSqlParser.KW_NULLS:
-            case GenericSqlParser.KW_NUMERIC:
-            case GenericSqlParser.KW_OFFSET:
-            case GenericSqlParser.KW_OUTER:
-            case GenericSqlParser.KW_RIGHT:
-            case GenericSqlParser.KW_SMALLINT:
-            case GenericSqlParser.KW_TEXT:
-            case GenericSqlParser.KW_TIME:
-            case GenericSqlParser.KW_TIMESTAMP:
-            case GenericSqlParser.KW_TINYINT:
-            case GenericSqlParser.KW_TO:
-            case GenericSqlParser.KW_TRUE:
-            case GenericSqlParser.KW_UNIQUE:
-            case GenericSqlParser.KW_VARCHAR:
-            case GenericSqlParser.KW_VARBINARY:
-            case GenericSqlParser.PLUS:
-            case GenericSqlParser.MINUS:
-            case GenericSqlParser.STRING:
-            case GenericSqlParser.BINARY_LITERAL:
-            case GenericSqlParser.INTEGER_VALUE:
-            case GenericSqlParser.DECIMAL_VALUE:
-            case GenericSqlParser.DOUBLE_VALUE:
-            case GenericSqlParser.IDENTIFIER:
-            case GenericSqlParser.DIGIT_IDENTIFIER:
-            case GenericSqlParser.QUOTED_IDENTIFIER:
-            case GenericSqlParser.BACKQUOTED_IDENTIFIER:
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 63, this.context) ) {
+            case 1:
                 {
                 localContext = new PredicatedContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
 
-                this.state = 514;
+                this.state = 550;
                 this.predicatedExpression();
                 }
                 break;
-            case GenericSqlParser.KW_NOT:
+            case 2:
                 {
                 localContext = new NotExpressionContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 515;
+                this.state = 551;
                 this.match(GenericSqlParser.KW_NOT);
-                this.state = 516;
+                this.state = 552;
                 this.booleanExpression(3);
                 }
                 break;
-            default:
-                throw new antlr.NoViableAltException(this);
             }
             this.context!.stop = this.tokenStream.LT(-1);
-            this.state = 527;
+            this.state = 563;
             this.errorHandler.sync(this);
-            alternative = this.interpreter.adaptivePredict(this.tokenStream, 61, this.context);
+            alternative = this.interpreter.adaptivePredict(this.tokenStream, 65, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
                 if (alternative === 1) {
                     if (this._parseListeners != null) {
@@ -2380,21 +2458,21 @@ export class GenericSqlParser extends SQLParserBase {
                     }
                     previousContext = localContext;
                     {
-                    this.state = 525;
+                    this.state = 561;
                     this.errorHandler.sync(this);
-                    switch (this.interpreter.adaptivePredict(this.tokenStream, 60, this.context) ) {
+                    switch (this.interpreter.adaptivePredict(this.tokenStream, 64, this.context) ) {
                     case 1:
                         {
                         localContext = new AndExpressionContext(new BooleanExpressionContext(parentContext, parentState));
                         (localContext as AndExpressionContext)._left = previousContext;
                         this.pushNewRecursionContext(localContext, _startState, GenericSqlParser.RULE_booleanExpression);
-                        this.state = 519;
+                        this.state = 555;
                         if (!(this.precpred(this.context, 2))) {
                             throw this.createFailedPredicateException("this.precpred(this.context, 2)");
                         }
-                        this.state = 520;
+                        this.state = 556;
                         this.match(GenericSqlParser.KW_AND);
-                        this.state = 521;
+                        this.state = 557;
                         (localContext as AndExpressionContext)._right = this.booleanExpression(3);
                         }
                         break;
@@ -2403,22 +2481,22 @@ export class GenericSqlParser extends SQLParserBase {
                         localContext = new OrExpressionContext(new BooleanExpressionContext(parentContext, parentState));
                         (localContext as OrExpressionContext)._left = previousContext;
                         this.pushNewRecursionContext(localContext, _startState, GenericSqlParser.RULE_booleanExpression);
-                        this.state = 522;
+                        this.state = 558;
                         if (!(this.precpred(this.context, 1))) {
                             throw this.createFailedPredicateException("this.precpred(this.context, 1)");
                         }
-                        this.state = 523;
+                        this.state = 559;
                         this.match(GenericSqlParser.KW_OR);
-                        this.state = 524;
+                        this.state = 560;
                         (localContext as OrExpressionContext)._right = this.booleanExpression(2);
                         }
                         break;
                     }
                     }
                 }
-                this.state = 529;
+                this.state = 565;
                 this.errorHandler.sync(this);
-                alternative = this.interpreter.adaptivePredict(this.tokenStream, 61, this.context);
+                alternative = this.interpreter.adaptivePredict(this.tokenStream, 65, this.context);
             }
             }
         }
@@ -2438,18 +2516,18 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public predicatedExpression(): PredicatedExpressionContext {
         let localContext = new PredicatedExpressionContext(this.context, this.state);
-        this.enterRule(localContext, 74, GenericSqlParser.RULE_predicatedExpression);
+        this.enterRule(localContext, 78, GenericSqlParser.RULE_predicatedExpression);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 530;
+            this.state = 566;
             this.valueExpression(0);
-            this.state = 532;
+            this.state = 568;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 62, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 66, this.context) ) {
             case 1:
                 {
-                this.state = 531;
+                this.state = 567;
                 this.predicate();
                 }
                 break;
@@ -2472,19 +2550,19 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public predicate(): PredicateContext {
         let localContext = new PredicateContext(this.context, this.state);
-        this.enterRule(localContext, 76, GenericSqlParser.RULE_predicate);
+        this.enterRule(localContext, 80, GenericSqlParser.RULE_predicate);
         let _la: number;
         try {
-            this.state = 589;
+            this.state = 625;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 71, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 75, this.context) ) {
             case 1:
                 localContext = new ComparisonPredicateContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 534;
+                this.state = 570;
                 this.comparisonOperator();
-                this.state = 535;
+                this.state = 571;
                 (localContext as ComparisonPredicateContext)._right = this.valueExpression(0);
                 }
                 break;
@@ -2492,39 +2570,39 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new InPredicateContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 538;
+                this.state = 574;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 61) {
                     {
-                    this.state = 537;
+                    this.state = 573;
                     this.match(GenericSqlParser.KW_NOT);
                     }
                 }
 
-                this.state = 540;
+                this.state = 576;
                 this.match(GenericSqlParser.KW_IN);
-                this.state = 541;
+                this.state = 577;
                 this.match(GenericSqlParser.T__1);
-                this.state = 542;
+                this.state = 578;
                 this.expression();
-                this.state = 547;
+                this.state = 583;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 1) {
                     {
                     {
-                    this.state = 543;
+                    this.state = 579;
                     this.match(GenericSqlParser.T__0);
-                    this.state = 544;
+                    this.state = 580;
                     this.expression();
                     }
                     }
-                    this.state = 549;
+                    this.state = 585;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 550;
+                this.state = 586;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -2532,23 +2610,23 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new InSubqueryPredicateContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 553;
+                this.state = 589;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 61) {
                     {
-                    this.state = 552;
+                    this.state = 588;
                     this.match(GenericSqlParser.KW_NOT);
                     }
                 }
 
-                this.state = 555;
+                this.state = 591;
                 this.match(GenericSqlParser.KW_IN);
-                this.state = 556;
+                this.state = 592;
                 this.match(GenericSqlParser.T__1);
-                this.state = 557;
+                this.state = 593;
                 this.queryStatement();
-                this.state = 558;
+                this.state = 594;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -2556,23 +2634,23 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new BetweenPredicateContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 561;
+                this.state = 597;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 61) {
                     {
-                    this.state = 560;
+                    this.state = 596;
                     this.match(GenericSqlParser.KW_NOT);
                     }
                 }
 
-                this.state = 563;
+                this.state = 599;
                 this.match(GenericSqlParser.KW_BETWEEN);
-                this.state = 564;
+                this.state = 600;
                 (localContext as BetweenPredicateContext)._lower = this.valueExpression(0);
-                this.state = 565;
+                this.state = 601;
                 this.match(GenericSqlParser.KW_AND);
-                this.state = 566;
+                this.state = 602;
                 (localContext as BetweenPredicateContext)._upper = this.valueExpression(0);
                 }
                 break;
@@ -2580,28 +2658,28 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new LikePredicateContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 569;
+                this.state = 605;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 61) {
                     {
-                    this.state = 568;
+                    this.state = 604;
                     this.match(GenericSqlParser.KW_NOT);
                     }
                 }
 
-                this.state = 571;
+                this.state = 607;
                 this.match(GenericSqlParser.KW_LIKE);
-                this.state = 572;
+                this.state = 608;
                 (localContext as LikePredicateContext)._pattern = this.valueExpression(0);
-                this.state = 575;
+                this.state = 611;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 68, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 72, this.context) ) {
                 case 1:
                     {
-                    this.state = 573;
+                    this.state = 609;
                     this.match(GenericSqlParser.KW_ESCAPE);
-                    this.state = 574;
+                    this.state = 610;
                     (localContext as LikePredicateContext)._escape = this.valueExpression(0);
                     }
                     break;
@@ -2612,19 +2690,19 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new NullPredicateContext(localContext);
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 577;
+                this.state = 613;
                 this.match(GenericSqlParser.KW_IS);
-                this.state = 579;
+                this.state = 615;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 61) {
                     {
-                    this.state = 578;
+                    this.state = 614;
                     this.match(GenericSqlParser.KW_NOT);
                     }
                 }
 
-                this.state = 581;
+                this.state = 617;
                 this.match(GenericSqlParser.KW_NULL);
                 }
                 break;
@@ -2632,23 +2710,23 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new DistinctFromPredicateContext(localContext);
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 582;
+                this.state = 618;
                 this.match(GenericSqlParser.KW_IS);
-                this.state = 584;
+                this.state = 620;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 61) {
                     {
-                    this.state = 583;
+                    this.state = 619;
                     this.match(GenericSqlParser.KW_NOT);
                     }
                 }
 
-                this.state = 586;
+                this.state = 622;
                 this.match(GenericSqlParser.KW_DISTINCT);
-                this.state = 587;
+                this.state = 623;
                 this.match(GenericSqlParser.KW_FROM);
-                this.state = 588;
+                this.state = 624;
                 (localContext as DistinctFromPredicateContext)._right = this.valueExpression(0);
                 }
                 break;
@@ -2670,12 +2748,12 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public comparisonOperator(): ComparisonOperatorContext {
         let localContext = new ComparisonOperatorContext(this.context, this.state);
-        this.enterRule(localContext, 78, GenericSqlParser.RULE_comparisonOperator);
+        this.enterRule(localContext, 82, GenericSqlParser.RULE_comparisonOperator);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 591;
+            this.state = 627;
             _la = this.tokenStream.LA(1);
             if(!(((((_la - 95)) & ~0x1F) === 0 && ((1 << (_la - 95)) & 63) !== 0))) {
             this.errorHandler.recoverInline(this);
@@ -2712,89 +2790,32 @@ export class GenericSqlParser extends SQLParserBase {
         let parentState = this.state;
         let localContext = new ValueExpressionContext(this.context, parentState);
         let previousContext = localContext;
-        let _startState = 80;
-        this.enterRecursionRule(localContext, 80, GenericSqlParser.RULE_valueExpression, _p);
+        let _startState = 84;
+        this.enterRecursionRule(localContext, 84, GenericSqlParser.RULE_valueExpression, _p);
         let _la: number;
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 597;
+            this.state = 633;
             this.errorHandler.sync(this);
-            switch (this.tokenStream.LA(1)) {
-            case GenericSqlParser.T__1:
-            case GenericSqlParser.KW_ADD:
-            case GenericSqlParser.KW_ALL:
-            case GenericSqlParser.KW_ASC:
-            case GenericSqlParser.KW_BIGINT:
-            case GenericSqlParser.KW_BINARY:
-            case GenericSqlParser.KW_BOOLEAN:
-            case GenericSqlParser.KW_BY:
-            case GenericSqlParser.KW_CASE:
-            case GenericSqlParser.KW_CAST:
-            case GenericSqlParser.KW_CHAR:
-            case GenericSqlParser.KW_COALESCE:
-            case GenericSqlParser.KW_COLUMN:
-            case GenericSqlParser.KW_CROSS:
-            case GenericSqlParser.KW_DATE:
-            case GenericSqlParser.KW_DECIMAL:
-            case GenericSqlParser.KW_DEFAULT:
-            case GenericSqlParser.KW_DESC:
-            case GenericSqlParser.KW_DOUBLE:
-            case GenericSqlParser.KW_EXISTS:
-            case GenericSqlParser.KW_FALSE:
-            case GenericSqlParser.KW_FIRST:
-            case GenericSqlParser.KW_FLOAT:
-            case GenericSqlParser.KW_FULL:
-            case GenericSqlParser.KW_IF:
-            case GenericSqlParser.KW_INT:
-            case GenericSqlParser.KW_INTEGER:
-            case GenericSqlParser.KW_KEY:
-            case GenericSqlParser.KW_LAST:
-            case GenericSqlParser.KW_LEFT:
-            case GenericSqlParser.KW_LIMIT:
-            case GenericSqlParser.KW_NULL:
-            case GenericSqlParser.KW_NULLIF:
-            case GenericSqlParser.KW_NULLS:
-            case GenericSqlParser.KW_NUMERIC:
-            case GenericSqlParser.KW_OFFSET:
-            case GenericSqlParser.KW_OUTER:
-            case GenericSqlParser.KW_RIGHT:
-            case GenericSqlParser.KW_SMALLINT:
-            case GenericSqlParser.KW_TEXT:
-            case GenericSqlParser.KW_TIME:
-            case GenericSqlParser.KW_TIMESTAMP:
-            case GenericSqlParser.KW_TINYINT:
-            case GenericSqlParser.KW_TO:
-            case GenericSqlParser.KW_TRUE:
-            case GenericSqlParser.KW_UNIQUE:
-            case GenericSqlParser.KW_VARCHAR:
-            case GenericSqlParser.KW_VARBINARY:
-            case GenericSqlParser.STRING:
-            case GenericSqlParser.BINARY_LITERAL:
-            case GenericSqlParser.INTEGER_VALUE:
-            case GenericSqlParser.DECIMAL_VALUE:
-            case GenericSqlParser.DOUBLE_VALUE:
-            case GenericSqlParser.IDENTIFIER:
-            case GenericSqlParser.DIGIT_IDENTIFIER:
-            case GenericSqlParser.QUOTED_IDENTIFIER:
-            case GenericSqlParser.BACKQUOTED_IDENTIFIER:
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 76, this.context) ) {
+            case 1:
                 {
                 localContext = new ValueExpressionDefaultContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
 
-                this.state = 594;
+                this.state = 630;
                 this.primaryExpression();
                 }
                 break;
-            case GenericSqlParser.PLUS:
-            case GenericSqlParser.MINUS:
+            case 2:
                 {
                 localContext = new ArithmeticUnaryContext(localContext);
                 this.context = localContext;
                 previousContext = localContext;
-                this.state = 595;
+                this.state = 631;
                 (localContext as ArithmeticUnaryContext)._operator = this.tokenStream.LT(1);
                 _la = this.tokenStream.LA(1);
                 if(!(_la === 101 || _la === 102)) {
@@ -2804,17 +2825,15 @@ export class GenericSqlParser extends SQLParserBase {
                     this.errorHandler.reportMatch(this);
                     this.consume();
                 }
-                this.state = 596;
+                this.state = 632;
                 this.valueExpression(4);
                 }
                 break;
-            default:
-                throw new antlr.NoViableAltException(this);
             }
             this.context!.stop = this.tokenStream.LT(-1);
-            this.state = 610;
+            this.state = 646;
             this.errorHandler.sync(this);
-            alternative = this.interpreter.adaptivePredict(this.tokenStream, 74, this.context);
+            alternative = this.interpreter.adaptivePredict(this.tokenStream, 78, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
                 if (alternative === 1) {
                     if (this._parseListeners != null) {
@@ -2822,19 +2841,19 @@ export class GenericSqlParser extends SQLParserBase {
                     }
                     previousContext = localContext;
                     {
-                    this.state = 608;
+                    this.state = 644;
                     this.errorHandler.sync(this);
-                    switch (this.interpreter.adaptivePredict(this.tokenStream, 73, this.context) ) {
+                    switch (this.interpreter.adaptivePredict(this.tokenStream, 77, this.context) ) {
                     case 1:
                         {
                         localContext = new ArithmeticBinaryContext(new ValueExpressionContext(parentContext, parentState));
                         (localContext as ArithmeticBinaryContext)._left = previousContext;
                         this.pushNewRecursionContext(localContext, _startState, GenericSqlParser.RULE_valueExpression);
-                        this.state = 599;
+                        this.state = 635;
                         if (!(this.precpred(this.context, 3))) {
                             throw this.createFailedPredicateException("this.precpred(this.context, 3)");
                         }
-                        this.state = 600;
+                        this.state = 636;
                         (localContext as ArithmeticBinaryContext)._operator = this.tokenStream.LT(1);
                         _la = this.tokenStream.LA(1);
                         if(!(((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & 7) !== 0))) {
@@ -2844,7 +2863,7 @@ export class GenericSqlParser extends SQLParserBase {
                             this.errorHandler.reportMatch(this);
                             this.consume();
                         }
-                        this.state = 601;
+                        this.state = 637;
                         (localContext as ArithmeticBinaryContext)._right = this.valueExpression(4);
                         }
                         break;
@@ -2853,11 +2872,11 @@ export class GenericSqlParser extends SQLParserBase {
                         localContext = new ArithmeticBinaryContext(new ValueExpressionContext(parentContext, parentState));
                         (localContext as ArithmeticBinaryContext)._left = previousContext;
                         this.pushNewRecursionContext(localContext, _startState, GenericSqlParser.RULE_valueExpression);
-                        this.state = 602;
+                        this.state = 638;
                         if (!(this.precpred(this.context, 2))) {
                             throw this.createFailedPredicateException("this.precpred(this.context, 2)");
                         }
-                        this.state = 603;
+                        this.state = 639;
                         (localContext as ArithmeticBinaryContext)._operator = this.tokenStream.LT(1);
                         _la = this.tokenStream.LA(1);
                         if(!(_la === 101 || _la === 102)) {
@@ -2867,7 +2886,7 @@ export class GenericSqlParser extends SQLParserBase {
                             this.errorHandler.reportMatch(this);
                             this.consume();
                         }
-                        this.state = 604;
+                        this.state = 640;
                         (localContext as ArithmeticBinaryContext)._right = this.valueExpression(3);
                         }
                         break;
@@ -2876,22 +2895,22 @@ export class GenericSqlParser extends SQLParserBase {
                         localContext = new ConcatenationContext(new ValueExpressionContext(parentContext, parentState));
                         (localContext as ConcatenationContext)._left = previousContext;
                         this.pushNewRecursionContext(localContext, _startState, GenericSqlParser.RULE_valueExpression);
-                        this.state = 605;
+                        this.state = 641;
                         if (!(this.precpred(this.context, 1))) {
                             throw this.createFailedPredicateException("this.precpred(this.context, 1)");
                         }
-                        this.state = 606;
+                        this.state = 642;
                         this.match(GenericSqlParser.CONCAT);
-                        this.state = 607;
+                        this.state = 643;
                         (localContext as ConcatenationContext)._right = this.valueExpression(2);
                         }
                         break;
                     }
                     }
                 }
-                this.state = 612;
+                this.state = 648;
                 this.errorHandler.sync(this);
-                alternative = this.interpreter.adaptivePredict(this.tokenStream, 74, this.context);
+                alternative = this.interpreter.adaptivePredict(this.tokenStream, 78, this.context);
             }
             }
         }
@@ -2911,17 +2930,17 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public primaryExpression(): PrimaryExpressionContext {
         let localContext = new PrimaryExpressionContext(this.context, this.state);
-        this.enterRule(localContext, 82, GenericSqlParser.RULE_primaryExpression);
+        this.enterRule(localContext, 86, GenericSqlParser.RULE_primaryExpression);
         let _la: number;
         try {
-            this.state = 693;
+            this.state = 729;
             this.errorHandler.sync(this);
-            switch (this.interpreter.adaptivePredict(this.tokenStream, 83, this.context) ) {
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 87, this.context) ) {
             case 1:
                 localContext = new LiteralExpressionContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 613;
+                this.state = 649;
                 this.literal();
                 }
                 break;
@@ -2929,47 +2948,47 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new FunctionCallContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 614;
-                this.qualifiedName();
-                this.state = 615;
+                this.state = 650;
+                this.functionName();
+                this.state = 651;
                 this.match(GenericSqlParser.T__1);
-                this.state = 627;
+                this.state = 663;
                 this.errorHandler.sync(this);
-                _la = this.tokenStream.LA(1);
-                if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4013421668) !== 0) || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & 1069048399) !== 0) || ((((_la - 70)) & ~0x1F) === 0 && ((1 << (_la - 70)) & 2151019809) !== 0) || ((((_la - 102)) & ~0x1F) === 0 && ((1 << (_la - 102)) & 65409) !== 0)) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 81, this.context) ) {
+                case 1:
                     {
-                    this.state = 617;
+                    this.state = 653;
                     this.errorHandler.sync(this);
-                    switch (this.interpreter.adaptivePredict(this.tokenStream, 75, this.context) ) {
+                    switch (this.interpreter.adaptivePredict(this.tokenStream, 79, this.context) ) {
                     case 1:
                         {
-                        this.state = 616;
+                        this.state = 652;
                         this.setQuantifier();
                         }
                         break;
                     }
-                    this.state = 619;
+                    this.state = 655;
                     this.expression();
-                    this.state = 624;
+                    this.state = 660;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                     while (_la === 1) {
                         {
                         {
-                        this.state = 620;
+                        this.state = 656;
                         this.match(GenericSqlParser.T__0);
-                        this.state = 621;
+                        this.state = 657;
                         this.expression();
                         }
                         }
-                        this.state = 626;
+                        this.state = 662;
                         this.errorHandler.sync(this);
                         _la = this.tokenStream.LA(1);
                     }
                     }
+                    break;
                 }
-
-                this.state = 629;
+                this.state = 665;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -2977,35 +2996,35 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new SearchedCaseExpressionContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 631;
+                this.state = 667;
                 this.match(GenericSqlParser.KW_CASE);
-                this.state = 633;
+                this.state = 669;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 do {
                     {
                     {
-                    this.state = 632;
+                    this.state = 668;
                     this.whenClause();
                     }
                     }
-                    this.state = 635;
+                    this.state = 671;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 } while (_la === 92);
-                this.state = 639;
+                this.state = 675;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 33) {
                     {
-                    this.state = 637;
+                    this.state = 673;
                     this.match(GenericSqlParser.KW_ELSE);
-                    this.state = 638;
+                    this.state = 674;
                     this.expression();
                     }
                 }
 
-                this.state = 641;
+                this.state = 677;
                 this.match(GenericSqlParser.KW_END);
                 }
                 break;
@@ -3013,37 +3032,37 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new SimpleCaseExpressionContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 643;
+                this.state = 679;
                 this.match(GenericSqlParser.KW_CASE);
-                this.state = 644;
+                this.state = 680;
                 this.expression();
-                this.state = 646;
+                this.state = 682;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 do {
                     {
                     {
-                    this.state = 645;
+                    this.state = 681;
                     this.whenClause();
                     }
                     }
-                    this.state = 648;
+                    this.state = 684;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 } while (_la === 92);
-                this.state = 652;
+                this.state = 688;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 if (_la === 33) {
                     {
-                    this.state = 650;
+                    this.state = 686;
                     this.match(GenericSqlParser.KW_ELSE);
-                    this.state = 651;
+                    this.state = 687;
                     this.expression();
                     }
                 }
 
-                this.state = 654;
+                this.state = 690;
                 this.match(GenericSqlParser.KW_END);
                 }
                 break;
@@ -3051,17 +3070,17 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new CastExpressionContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 656;
+                this.state = 692;
                 this.match(GenericSqlParser.KW_CAST);
-                this.state = 657;
+                this.state = 693;
                 this.match(GenericSqlParser.T__1);
-                this.state = 658;
+                this.state = 694;
                 this.expression();
-                this.state = 659;
+                this.state = 695;
                 this.match(GenericSqlParser.KW_AS);
-                this.state = 660;
+                this.state = 696;
                 this.dataType();
-                this.state = 661;
+                this.state = 697;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -3069,29 +3088,29 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new CoalesceExpressionContext(localContext);
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 663;
+                this.state = 699;
                 this.match(GenericSqlParser.KW_COALESCE);
-                this.state = 664;
+                this.state = 700;
                 this.match(GenericSqlParser.T__1);
-                this.state = 665;
+                this.state = 701;
                 this.expression();
-                this.state = 670;
+                this.state = 706;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
                 while (_la === 1) {
                     {
                     {
-                    this.state = 666;
+                    this.state = 702;
                     this.match(GenericSqlParser.T__0);
-                    this.state = 667;
+                    this.state = 703;
                     this.expression();
                     }
                     }
-                    this.state = 672;
+                    this.state = 708;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                 }
-                this.state = 673;
+                this.state = 709;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -3099,17 +3118,17 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new NullIfExpressionContext(localContext);
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 675;
+                this.state = 711;
                 this.match(GenericSqlParser.KW_NULLIF);
-                this.state = 676;
+                this.state = 712;
                 this.match(GenericSqlParser.T__1);
-                this.state = 677;
+                this.state = 713;
                 this.valueExpression(0);
-                this.state = 678;
+                this.state = 714;
                 this.match(GenericSqlParser.T__0);
-                this.state = 679;
+                this.state = 715;
                 this.valueExpression(0);
-                this.state = 680;
+                this.state = 716;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -3117,11 +3136,11 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new ParenthesizedExpressionContext(localContext);
                 this.enterOuterAlt(localContext, 8);
                 {
-                this.state = 682;
+                this.state = 718;
                 this.match(GenericSqlParser.T__1);
-                this.state = 683;
+                this.state = 719;
                 this.expression();
-                this.state = 684;
+                this.state = 720;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -3129,13 +3148,13 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new ExistsExpressionContext(localContext);
                 this.enterOuterAlt(localContext, 9);
                 {
-                this.state = 686;
+                this.state = 722;
                 this.match(GenericSqlParser.KW_EXISTS);
-                this.state = 687;
+                this.state = 723;
                 this.match(GenericSqlParser.T__1);
-                this.state = 688;
+                this.state = 724;
                 this.queryStatement();
-                this.state = 689;
+                this.state = 725;
                 this.match(GenericSqlParser.T__2);
                 }
                 break;
@@ -3143,7 +3162,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new SubqueryExpressionDefaultContext(localContext);
                 this.enterOuterAlt(localContext, 10);
                 {
-                this.state = 691;
+                this.state = 727;
                 this.subqueryExpression();
                 }
                 break;
@@ -3151,8 +3170,8 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new ColumnReferenceContext(localContext);
                 this.enterOuterAlt(localContext, 11);
                 {
-                this.state = 692;
-                this.qualifiedName();
+                this.state = 728;
+                this.columnName();
                 }
                 break;
             }
@@ -3173,17 +3192,17 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public whenClause(): WhenClauseContext {
         let localContext = new WhenClauseContext(this.context, this.state);
-        this.enterRule(localContext, 84, GenericSqlParser.RULE_whenClause);
+        this.enterRule(localContext, 88, GenericSqlParser.RULE_whenClause);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 695;
+            this.state = 731;
             this.match(GenericSqlParser.KW_WHEN);
-            this.state = 696;
+            this.state = 732;
             localContext._condition = this.expression();
-            this.state = 697;
+            this.state = 733;
             this.match(GenericSqlParser.KW_THEN);
-            this.state = 698;
+            this.state = 734;
             localContext._result = this.expression();
             }
         }
@@ -3203,15 +3222,15 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public subqueryExpression(): SubqueryExpressionContext {
         let localContext = new SubqueryExpressionContext(this.context, this.state);
-        this.enterRule(localContext, 86, GenericSqlParser.RULE_subqueryExpression);
+        this.enterRule(localContext, 90, GenericSqlParser.RULE_subqueryExpression);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 700;
+            this.state = 736;
             this.match(GenericSqlParser.T__1);
-            this.state = 701;
+            this.state = 737;
             this.queryStatement();
-            this.state = 702;
+            this.state = 738;
             this.match(GenericSqlParser.T__2);
             }
         }
@@ -3231,95 +3250,95 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public dataType(): DataTypeContext {
         let localContext = new DataTypeContext(this.context, this.state);
-        this.enterRule(localContext, 88, GenericSqlParser.RULE_dataType);
+        this.enterRule(localContext, 92, GenericSqlParser.RULE_dataType);
         let _la: number;
         try {
-            this.state = 750;
+            this.state = 786;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case GenericSqlParser.KW_BOOLEAN:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 704;
+                this.state = 740;
                 this.match(GenericSqlParser.KW_BOOLEAN);
                 }
                 break;
             case GenericSqlParser.KW_TINYINT:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 705;
+                this.state = 741;
                 this.match(GenericSqlParser.KW_TINYINT);
                 }
                 break;
             case GenericSqlParser.KW_SMALLINT:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 706;
+                this.state = 742;
                 this.match(GenericSqlParser.KW_SMALLINT);
                 }
                 break;
             case GenericSqlParser.KW_INT:
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 707;
+                this.state = 743;
                 this.match(GenericSqlParser.KW_INT);
                 }
                 break;
             case GenericSqlParser.KW_INTEGER:
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 708;
+                this.state = 744;
                 this.match(GenericSqlParser.KW_INTEGER);
                 }
                 break;
             case GenericSqlParser.KW_BIGINT:
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 709;
+                this.state = 745;
                 this.match(GenericSqlParser.KW_BIGINT);
                 }
                 break;
             case GenericSqlParser.KW_FLOAT:
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 710;
+                this.state = 746;
                 this.match(GenericSqlParser.KW_FLOAT);
                 }
                 break;
             case GenericSqlParser.KW_DOUBLE:
                 this.enterOuterAlt(localContext, 8);
                 {
-                this.state = 711;
+                this.state = 747;
                 this.match(GenericSqlParser.KW_DOUBLE);
                 }
                 break;
             case GenericSqlParser.KW_DECIMAL:
                 this.enterOuterAlt(localContext, 9);
                 {
-                this.state = 712;
+                this.state = 748;
                 this.match(GenericSqlParser.KW_DECIMAL);
-                this.state = 720;
+                this.state = 756;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 85, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 89, this.context) ) {
                 case 1:
                     {
-                    this.state = 713;
+                    this.state = 749;
                     this.match(GenericSqlParser.T__1);
-                    this.state = 714;
+                    this.state = 750;
                     localContext._precision = this.match(GenericSqlParser.INTEGER_VALUE);
-                    this.state = 717;
+                    this.state = 753;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                     if (_la === 1) {
                         {
-                        this.state = 715;
+                        this.state = 751;
                         this.match(GenericSqlParser.T__0);
-                        this.state = 716;
+                        this.state = 752;
                         localContext._scale = this.match(GenericSqlParser.INTEGER_VALUE);
                         }
                     }
 
-                    this.state = 719;
+                    this.state = 755;
                     this.match(GenericSqlParser.T__2);
                     }
                     break;
@@ -3329,30 +3348,30 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_NUMERIC:
                 this.enterOuterAlt(localContext, 10);
                 {
-                this.state = 722;
+                this.state = 758;
                 this.match(GenericSqlParser.KW_NUMERIC);
-                this.state = 730;
+                this.state = 766;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 87, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 91, this.context) ) {
                 case 1:
                     {
-                    this.state = 723;
+                    this.state = 759;
                     this.match(GenericSqlParser.T__1);
-                    this.state = 724;
+                    this.state = 760;
                     localContext._precision = this.match(GenericSqlParser.INTEGER_VALUE);
-                    this.state = 727;
+                    this.state = 763;
                     this.errorHandler.sync(this);
                     _la = this.tokenStream.LA(1);
                     if (_la === 1) {
                         {
-                        this.state = 725;
+                        this.state = 761;
                         this.match(GenericSqlParser.T__0);
-                        this.state = 726;
+                        this.state = 762;
                         localContext._scale = this.match(GenericSqlParser.INTEGER_VALUE);
                         }
                     }
 
-                    this.state = 729;
+                    this.state = 765;
                     this.match(GenericSqlParser.T__2);
                     }
                     break;
@@ -3362,18 +3381,18 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_VARCHAR:
                 this.enterOuterAlt(localContext, 11);
                 {
-                this.state = 732;
+                this.state = 768;
                 this.match(GenericSqlParser.KW_VARCHAR);
-                this.state = 736;
+                this.state = 772;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 88, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 92, this.context) ) {
                 case 1:
                     {
-                    this.state = 733;
+                    this.state = 769;
                     this.match(GenericSqlParser.T__1);
-                    this.state = 734;
+                    this.state = 770;
                     localContext._maxLength = this.match(GenericSqlParser.INTEGER_VALUE);
-                    this.state = 735;
+                    this.state = 771;
                     this.match(GenericSqlParser.T__2);
                     }
                     break;
@@ -3383,18 +3402,18 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_CHAR:
                 this.enterOuterAlt(localContext, 12);
                 {
-                this.state = 738;
+                this.state = 774;
                 this.match(GenericSqlParser.KW_CHAR);
-                this.state = 742;
+                this.state = 778;
                 this.errorHandler.sync(this);
-                switch (this.interpreter.adaptivePredict(this.tokenStream, 89, this.context) ) {
+                switch (this.interpreter.adaptivePredict(this.tokenStream, 93, this.context) ) {
                 case 1:
                     {
-                    this.state = 739;
+                    this.state = 775;
                     this.match(GenericSqlParser.T__1);
-                    this.state = 740;
+                    this.state = 776;
                     localContext._length = this.match(GenericSqlParser.INTEGER_VALUE);
-                    this.state = 741;
+                    this.state = 777;
                     this.match(GenericSqlParser.T__2);
                     }
                     break;
@@ -3404,42 +3423,42 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_TEXT:
                 this.enterOuterAlt(localContext, 13);
                 {
-                this.state = 744;
+                this.state = 780;
                 this.match(GenericSqlParser.KW_TEXT);
                 }
                 break;
             case GenericSqlParser.KW_DATE:
                 this.enterOuterAlt(localContext, 14);
                 {
-                this.state = 745;
+                this.state = 781;
                 this.match(GenericSqlParser.KW_DATE);
                 }
                 break;
             case GenericSqlParser.KW_TIME:
                 this.enterOuterAlt(localContext, 15);
                 {
-                this.state = 746;
+                this.state = 782;
                 this.match(GenericSqlParser.KW_TIME);
                 }
                 break;
             case GenericSqlParser.KW_TIMESTAMP:
                 this.enterOuterAlt(localContext, 16);
                 {
-                this.state = 747;
+                this.state = 783;
                 this.match(GenericSqlParser.KW_TIMESTAMP);
                 }
                 break;
             case GenericSqlParser.KW_BINARY:
                 this.enterOuterAlt(localContext, 17);
                 {
-                this.state = 748;
+                this.state = 784;
                 this.match(GenericSqlParser.KW_BINARY);
                 }
                 break;
             case GenericSqlParser.KW_VARBINARY:
                 this.enterOuterAlt(localContext, 18);
                 {
-                this.state = 749;
+                this.state = 785;
                 this.match(GenericSqlParser.KW_VARBINARY);
                 }
                 break;
@@ -3463,32 +3482,32 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public properties(): PropertiesContext {
         let localContext = new PropertiesContext(this.context, this.state);
-        this.enterRule(localContext, 90, GenericSqlParser.RULE_properties);
+        this.enterRule(localContext, 94, GenericSqlParser.RULE_properties);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 752;
+            this.state = 788;
             this.match(GenericSqlParser.T__1);
-            this.state = 753;
+            this.state = 789;
             this.property();
-            this.state = 758;
+            this.state = 794;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             while (_la === 1) {
                 {
                 {
-                this.state = 754;
+                this.state = 790;
                 this.match(GenericSqlParser.T__0);
-                this.state = 755;
+                this.state = 791;
                 this.property();
                 }
                 }
-                this.state = 760;
+                this.state = 796;
                 this.errorHandler.sync(this);
                 _la = this.tokenStream.LA(1);
             }
-            this.state = 761;
+            this.state = 797;
             this.match(GenericSqlParser.T__2);
             }
         }
@@ -3508,15 +3527,15 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public property(): PropertyContext {
         let localContext = new PropertyContext(this.context, this.state);
-        this.enterRule(localContext, 92, GenericSqlParser.RULE_property);
+        this.enterRule(localContext, 96, GenericSqlParser.RULE_property);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 763;
+            this.state = 799;
             this.identifier();
-            this.state = 764;
+            this.state = 800;
             this.match(GenericSqlParser.EQ);
-            this.state = 765;
+            this.state = 801;
             this.literal();
             }
         }
@@ -3536,16 +3555,16 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public literal(): LiteralContext {
         let localContext = new LiteralContext(this.context, this.state);
-        this.enterRule(localContext, 94, GenericSqlParser.RULE_literal);
+        this.enterRule(localContext, 98, GenericSqlParser.RULE_literal);
         try {
-            this.state = 775;
+            this.state = 811;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case GenericSqlParser.KW_NULL:
                 localContext = new NullLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 767;
+                this.state = 803;
                 this.match(GenericSqlParser.KW_NULL);
                 }
                 break;
@@ -3553,7 +3572,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new BooleanLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 768;
+                this.state = 804;
                 this.match(GenericSqlParser.KW_TRUE);
                 }
                 break;
@@ -3561,7 +3580,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new BooleanLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 769;
+                this.state = 805;
                 this.match(GenericSqlParser.KW_FALSE);
                 }
                 break;
@@ -3569,7 +3588,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new IntegerLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 770;
+                this.state = 806;
                 this.match(GenericSqlParser.INTEGER_VALUE);
                 }
                 break;
@@ -3577,7 +3596,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new DecimalLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 771;
+                this.state = 807;
                 this.match(GenericSqlParser.DECIMAL_VALUE);
                 }
                 break;
@@ -3585,7 +3604,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new DoubleLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 6);
                 {
-                this.state = 772;
+                this.state = 808;
                 this.match(GenericSqlParser.DOUBLE_VALUE);
                 }
                 break;
@@ -3593,7 +3612,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new StringLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 7);
                 {
-                this.state = 773;
+                this.state = 809;
                 this.match(GenericSqlParser.STRING);
                 }
                 break;
@@ -3601,7 +3620,7 @@ export class GenericSqlParser extends SQLParserBase {
                 localContext = new BinaryLiteralContext(localContext);
                 this.enterOuterAlt(localContext, 8);
                 {
-                this.state = 774;
+                this.state = 810;
                 this.match(GenericSqlParser.BINARY_LITERAL);
                 }
                 break;
@@ -3625,36 +3644,36 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public identifier(): IdentifierContext {
         let localContext = new IdentifierContext(this.context, this.state);
-        this.enterRule(localContext, 96, GenericSqlParser.RULE_identifier);
+        this.enterRule(localContext, 100, GenericSqlParser.RULE_identifier);
         try {
-            this.state = 782;
+            this.state = 818;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case GenericSqlParser.IDENTIFIER:
                 this.enterOuterAlt(localContext, 1);
                 {
-                this.state = 777;
+                this.state = 813;
                 this.match(GenericSqlParser.IDENTIFIER);
                 }
                 break;
             case GenericSqlParser.DIGIT_IDENTIFIER:
                 this.enterOuterAlt(localContext, 2);
                 {
-                this.state = 778;
+                this.state = 814;
                 this.match(GenericSqlParser.DIGIT_IDENTIFIER);
                 }
                 break;
             case GenericSqlParser.QUOTED_IDENTIFIER:
                 this.enterOuterAlt(localContext, 3);
                 {
-                this.state = 779;
+                this.state = 815;
                 this.match(GenericSqlParser.QUOTED_IDENTIFIER);
                 }
                 break;
             case GenericSqlParser.BACKQUOTED_IDENTIFIER:
                 this.enterOuterAlt(localContext, 4);
                 {
-                this.state = 780;
+                this.state = 816;
                 this.match(GenericSqlParser.BACKQUOTED_IDENTIFIER);
                 }
                 break;
@@ -3703,7 +3722,7 @@ export class GenericSqlParser extends SQLParserBase {
             case GenericSqlParser.KW_VARBINARY:
                 this.enterOuterAlt(localContext, 5);
                 {
-                this.state = 781;
+                this.state = 817;
                 this.nonReserved();
                 }
                 break;
@@ -3727,31 +3746,76 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public qualifiedName(): QualifiedNameContext {
         let localContext = new QualifiedNameContext(this.context, this.state);
-        this.enterRule(localContext, 98, GenericSqlParser.RULE_qualifiedName);
+        this.enterRule(localContext, 102, GenericSqlParser.RULE_qualifiedName);
         try {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 784;
+            this.state = 820;
             this.identifier();
-            this.state = 789;
+            this.state = 825;
             this.errorHandler.sync(this);
-            alternative = this.interpreter.adaptivePredict(this.tokenStream, 94, this.context);
+            alternative = this.interpreter.adaptivePredict(this.tokenStream, 98, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
                 if (alternative === 1) {
                     {
                     {
-                    this.state = 785;
+                    this.state = 821;
                     this.match(GenericSqlParser.T__3);
-                    this.state = 786;
+                    this.state = 822;
                     this.identifier();
                     }
                     }
                 }
-                this.state = 791;
+                this.state = 827;
                 this.errorHandler.sync(this);
-                alternative = this.interpreter.adaptivePredict(this.tokenStream, 94, this.context);
+                alternative = this.interpreter.adaptivePredict(this.tokenStream, 98, this.context);
             }
+            }
+        }
+        catch (re) {
+            if (re instanceof antlr.RecognitionException) {
+                localContext.exception = re;
+                this.errorHandler.reportError(this, re);
+                this.errorHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        }
+        finally {
+            this.exitRule();
+        }
+        return localContext;
+    }
+    public qualifiedNameAllowEmpty(): QualifiedNameAllowEmptyContext {
+        let localContext = new QualifiedNameAllowEmptyContext(this.context, this.state);
+        this.enterRule(localContext, 104, GenericSqlParser.RULE_qualifiedNameAllowEmpty);
+        try {
+            this.state = 834;
+            this.errorHandler.sync(this);
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 99, this.context) ) {
+            case 1:
+                this.enterOuterAlt(localContext, 1);
+                {
+                this.state = 828;
+                this.qualifiedName();
+                }
+                break;
+            case 2:
+                this.enterOuterAlt(localContext, 2);
+                {
+                this.state = 829;
+                if (!(this.shouldMatchEmpty())) {
+                    throw this.createFailedPredicateException("this.shouldMatchEmpty()");
+                }
+                this.state = 830;
+                this.qualifiedName();
+                this.state = 831;
+                this.match(GenericSqlParser.T__3);
+                this.state = 832;
+                this.emptyColumn();
+                }
+                break;
             }
         }
         catch (re) {
@@ -3770,12 +3834,76 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public columnRef(): ColumnRefContext {
         let localContext = new ColumnRefContext(this.context, this.state);
-        this.enterRule(localContext, 100, GenericSqlParser.RULE_columnRef);
+        this.enterRule(localContext, 106, GenericSqlParser.RULE_columnRef);
+        try {
+            this.state = 839;
+            this.errorHandler.sync(this);
+            switch (this.interpreter.adaptivePredict(this.tokenStream, 100, this.context) ) {
+            case 1:
+                this.enterOuterAlt(localContext, 1);
+                {
+                this.state = 836;
+                this.identifier();
+                }
+                break;
+            case 2:
+                this.enterOuterAlt(localContext, 2);
+                {
+                this.state = 837;
+                if (!(this.shouldMatchEmpty())) {
+                    throw this.createFailedPredicateException("this.shouldMatchEmpty()");
+                }
+                this.state = 838;
+                this.emptyColumn();
+                }
+                break;
+            }
+        }
+        catch (re) {
+            if (re instanceof antlr.RecognitionException) {
+                localContext.exception = re;
+                this.errorHandler.reportError(this, re);
+                this.errorHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        }
+        finally {
+            this.exitRule();
+        }
+        return localContext;
+    }
+    public columnName(): ColumnNameContext {
+        let localContext = new ColumnNameContext(this.context, this.state);
+        this.enterRule(localContext, 108, GenericSqlParser.RULE_columnName);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 792;
-            this.identifier();
+            this.state = 841;
+            this.qualifiedNameAllowEmpty();
+            }
+        }
+        catch (re) {
+            if (re instanceof antlr.RecognitionException) {
+                localContext.exception = re;
+                this.errorHandler.reportError(this, re);
+                this.errorHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        }
+        finally {
+            this.exitRule();
+        }
+        return localContext;
+    }
+    public emptyColumn(): EmptyColumnContext {
+        let localContext = new EmptyColumnContext(this.context, this.state);
+        this.enterRule(localContext, 110, GenericSqlParser.RULE_emptyColumn);
+        try {
+            this.enterOuterAlt(localContext, 1);
+            // tslint:disable-next-line:no-empty
+            {
             }
         }
         catch (re) {
@@ -3794,11 +3922,11 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public tableName(): TableNameContext {
         let localContext = new TableNameContext(this.context, this.state);
-        this.enterRule(localContext, 102, GenericSqlParser.RULE_tableName);
+        this.enterRule(localContext, 112, GenericSqlParser.RULE_tableName);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 794;
+            this.state = 845;
             this.qualifiedName();
             }
         }
@@ -3818,11 +3946,35 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public tableNameCreate(): TableNameCreateContext {
         let localContext = new TableNameCreateContext(this.context, this.state);
-        this.enterRule(localContext, 104, GenericSqlParser.RULE_tableNameCreate);
+        this.enterRule(localContext, 114, GenericSqlParser.RULE_tableNameCreate);
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 796;
+            this.state = 847;
+            this.qualifiedName();
+            }
+        }
+        catch (re) {
+            if (re instanceof antlr.RecognitionException) {
+                localContext.exception = re;
+                this.errorHandler.reportError(this, re);
+                this.errorHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        }
+        finally {
+            this.exitRule();
+        }
+        return localContext;
+    }
+    public functionName(): FunctionNameContext {
+        let localContext = new FunctionNameContext(this.context, this.state);
+        this.enterRule(localContext, 116, GenericSqlParser.RULE_functionName);
+        try {
+            this.enterOuterAlt(localContext, 1);
+            {
+            this.state = 849;
             this.qualifiedName();
             }
         }
@@ -3842,12 +3994,12 @@ export class GenericSqlParser extends SQLParserBase {
     }
     public nonReserved(): NonReservedContext {
         let localContext = new NonReservedContext(this.context, this.state);
-        this.enterRule(localContext, 106, GenericSqlParser.RULE_nonReserved);
+        this.enterRule(localContext, 118, GenericSqlParser.RULE_nonReserved);
         let _la: number;
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 798;
+            this.state = 851;
             _la = this.tokenStream.LA(1);
             if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 2939483232) !== 0) || ((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 509358375) !== 0) || ((((_la - 70)) & ~0x1F) === 0 && ((1 << (_la - 70)) & 3536161) !== 0))) {
             this.errorHandler.recoverInline(this);
@@ -3875,35 +4027,55 @@ export class GenericSqlParser extends SQLParserBase {
 
     public override sempred(localContext: antlr.RuleContext | null, ruleIndex: number, predIndex: number): boolean {
         switch (ruleIndex) {
-        case 14:
+        case 13:
+            return this.selectItem_sempred(localContext as SelectItemContext, predIndex);
+        case 15:
             return this.relation_sempred(localContext as RelationContext, predIndex);
-        case 36:
+        case 19:
+            return this.whereClause_sempred(localContext as WhereClauseContext, predIndex);
+        case 21:
+            return this.havingClause_sempred(localContext as HavingClauseContext, predIndex);
+        case 38:
             return this.booleanExpression_sempred(localContext as BooleanExpressionContext, predIndex);
-        case 40:
+        case 42:
             return this.valueExpression_sempred(localContext as ValueExpressionContext, predIndex);
+        case 52:
+            return this.qualifiedNameAllowEmpty_sempred(localContext as QualifiedNameAllowEmptyContext, predIndex);
+        case 53:
+            return this.columnRef_sempred(localContext as ColumnRefContext, predIndex);
+        }
+        return true;
+    }
+    private selectItem_sempred(localContext: SelectItemContext | null, predIndex: number): boolean {
+        switch (predIndex) {
+        case 0:
+            return this.shouldMatchEmpty();
         }
         return true;
     }
     private relation_sempred(localContext: RelationContext | null, predIndex: number): boolean {
         switch (predIndex) {
-        case 0:
+        case 1:
             return this.precpred(this.context, 2);
+        }
+        return true;
+    }
+    private whereClause_sempred(localContext: WhereClauseContext | null, predIndex: number): boolean {
+        switch (predIndex) {
+        case 2:
+            return this.shouldMatchEmpty();
+        }
+        return true;
+    }
+    private havingClause_sempred(localContext: HavingClauseContext | null, predIndex: number): boolean {
+        switch (predIndex) {
+        case 3:
+            return this.shouldMatchEmpty();
         }
         return true;
     }
     private booleanExpression_sempred(localContext: BooleanExpressionContext | null, predIndex: number): boolean {
         switch (predIndex) {
-        case 1:
-            return this.precpred(this.context, 2);
-        case 2:
-            return this.precpred(this.context, 1);
-        }
-        return true;
-    }
-    private valueExpression_sempred(localContext: ValueExpressionContext | null, predIndex: number): boolean {
-        switch (predIndex) {
-        case 3:
-            return this.precpred(this.context, 3);
         case 4:
             return this.precpred(this.context, 2);
         case 5:
@@ -3911,9 +4083,34 @@ export class GenericSqlParser extends SQLParserBase {
         }
         return true;
     }
+    private valueExpression_sempred(localContext: ValueExpressionContext | null, predIndex: number): boolean {
+        switch (predIndex) {
+        case 6:
+            return this.precpred(this.context, 3);
+        case 7:
+            return this.precpred(this.context, 2);
+        case 8:
+            return this.precpred(this.context, 1);
+        }
+        return true;
+    }
+    private qualifiedNameAllowEmpty_sempred(localContext: QualifiedNameAllowEmptyContext | null, predIndex: number): boolean {
+        switch (predIndex) {
+        case 9:
+            return this.shouldMatchEmpty();
+        }
+        return true;
+    }
+    private columnRef_sempred(localContext: ColumnRefContext | null, predIndex: number): boolean {
+        switch (predIndex) {
+        case 10:
+            return this.shouldMatchEmpty();
+        }
+        return true;
+    }
 
     public static readonly _serializedATN: number[] = [
-        4,1,122,801,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,
+        4,1,122,854,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,
         7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,
         13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
         20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,
@@ -3921,305 +4118,324 @@ export class GenericSqlParser extends SQLParserBase {
         33,7,33,2,34,7,34,2,35,7,35,2,36,7,36,2,37,7,37,2,38,7,38,2,39,7,
         39,2,40,7,40,2,41,7,41,2,42,7,42,2,43,7,43,2,44,7,44,2,45,7,45,2,
         46,7,46,2,47,7,47,2,48,7,48,2,49,7,49,2,50,7,50,2,51,7,51,2,52,7,
-        52,2,53,7,53,1,0,5,0,110,8,0,10,0,12,0,113,9,0,1,0,1,0,1,1,1,1,1,
-        2,1,2,3,2,121,8,2,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,3,130,8,3,1,4,3,
-        4,133,8,4,1,4,1,4,1,5,1,5,3,5,139,8,5,1,5,1,5,1,5,5,5,144,8,5,10,
-        5,12,5,147,9,5,1,6,1,6,1,6,1,6,1,6,1,6,1,7,1,7,1,7,3,7,158,8,7,1,
-        7,5,7,161,8,7,10,7,12,7,164,9,7,1,8,1,8,1,9,1,9,1,9,1,9,1,9,3,9,
-        173,8,9,1,10,1,10,3,10,177,8,10,1,10,1,10,1,10,5,10,182,8,10,10,
-        10,12,10,185,9,10,1,10,3,10,188,8,10,1,10,3,10,191,8,10,1,10,3,10,
-        194,8,10,1,10,3,10,197,8,10,1,10,3,10,200,8,10,1,10,3,10,203,8,10,
-        1,11,1,11,1,12,1,12,3,12,209,8,12,1,12,3,12,212,8,12,1,12,1,12,1,
-        12,1,12,1,12,3,12,219,8,12,1,13,1,13,1,13,1,13,5,13,225,8,13,10,
-        13,12,13,228,9,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,
-        14,5,14,240,8,14,10,14,12,14,243,9,14,1,15,3,15,246,8,15,1,15,1,
-        15,3,15,250,8,15,1,15,1,15,3,15,254,8,15,1,15,1,15,3,15,258,8,15,
-        1,15,3,15,261,8,15,1,16,1,16,3,16,265,8,16,1,16,3,16,268,8,16,1,
-        17,1,17,1,17,1,17,1,17,3,17,275,8,17,1,18,1,18,1,18,1,19,1,19,1,
-        19,3,19,283,8,19,1,19,1,19,1,19,5,19,288,8,19,10,19,12,19,291,9,
-        19,1,20,1,20,1,20,1,21,1,21,1,21,1,21,1,21,5,21,301,8,21,10,21,12,
-        21,304,9,21,1,22,1,22,3,22,308,8,22,1,22,1,22,3,22,312,8,22,1,23,
-        1,23,1,23,1,23,3,23,318,8,23,1,24,1,24,1,24,1,24,3,24,324,8,24,1,
-        24,1,24,1,25,1,25,1,25,1,25,5,25,332,8,25,10,25,12,25,335,9,25,1,
-        25,1,25,1,26,1,26,1,26,1,26,1,26,1,26,5,26,345,8,26,10,26,12,26,
-        348,9,26,1,26,3,26,351,8,26,1,27,1,27,1,27,1,27,1,28,1,28,1,28,1,
-        28,3,28,361,8,28,1,29,1,29,1,29,1,29,1,29,3,29,368,8,29,1,29,1,29,
-        1,29,1,29,1,29,5,29,375,8,29,10,29,12,29,378,9,29,1,29,1,29,1,29,
-        3,29,383,8,29,1,30,1,30,3,30,387,8,30,1,31,1,31,1,31,1,31,3,31,393,
-        8,31,1,31,1,31,3,31,397,8,31,1,31,1,31,3,31,401,8,31,1,32,1,32,3,
-        32,405,8,32,1,32,1,32,1,32,1,32,1,32,1,32,5,32,413,8,32,10,32,12,
-        32,416,9,32,1,32,1,32,1,32,1,32,1,32,1,32,1,32,5,32,425,8,32,10,
-        32,12,32,428,9,32,1,32,1,32,1,32,1,32,1,32,1,32,1,32,1,32,1,32,1,
-        32,1,32,1,32,1,32,5,32,443,8,32,10,32,12,32,446,9,32,1,32,1,32,1,
-        32,1,32,1,32,1,32,1,32,5,32,455,8,32,10,32,12,32,458,9,32,1,32,1,
-        32,3,32,462,8,32,1,33,1,33,1,33,1,33,3,33,468,8,33,1,33,1,33,1,33,
-        1,33,1,33,1,33,3,33,476,8,33,1,33,1,33,1,33,1,33,1,33,3,33,483,8,
-        33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,
-        33,1,33,1,33,1,33,1,33,3,33,502,8,33,1,34,1,34,1,34,1,34,3,34,508,
-        8,34,1,34,1,34,1,35,1,35,1,36,1,36,1,36,1,36,3,36,518,8,36,1,36,
-        1,36,1,36,1,36,1,36,1,36,5,36,526,8,36,10,36,12,36,529,9,36,1,37,
-        1,37,3,37,533,8,37,1,38,1,38,1,38,1,38,3,38,539,8,38,1,38,1,38,1,
-        38,1,38,1,38,5,38,546,8,38,10,38,12,38,549,9,38,1,38,1,38,1,38,3,
-        38,554,8,38,1,38,1,38,1,38,1,38,1,38,1,38,3,38,562,8,38,1,38,1,38,
-        1,38,1,38,1,38,1,38,3,38,570,8,38,1,38,1,38,1,38,1,38,3,38,576,8,
-        38,1,38,1,38,3,38,580,8,38,1,38,1,38,1,38,3,38,585,8,38,1,38,1,38,
-        1,38,3,38,590,8,38,1,39,1,39,1,40,1,40,1,40,1,40,3,40,598,8,40,1,
-        40,1,40,1,40,1,40,1,40,1,40,1,40,1,40,1,40,5,40,609,8,40,10,40,12,
-        40,612,9,40,1,41,1,41,1,41,1,41,3,41,618,8,41,1,41,1,41,1,41,5,41,
-        623,8,41,10,41,12,41,626,9,41,3,41,628,8,41,1,41,1,41,1,41,1,41,
-        4,41,634,8,41,11,41,12,41,635,1,41,1,41,3,41,640,8,41,1,41,1,41,
-        1,41,1,41,1,41,4,41,647,8,41,11,41,12,41,648,1,41,1,41,3,41,653,
-        8,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,
-        1,41,1,41,5,41,669,8,41,10,41,12,41,672,9,41,1,41,1,41,1,41,1,41,
-        1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,1,41,
-        1,41,1,41,1,41,3,41,694,8,41,1,42,1,42,1,42,1,42,1,42,1,43,1,43,
-        1,43,1,43,1,44,1,44,1,44,1,44,1,44,1,44,1,44,1,44,1,44,1,44,1,44,
-        1,44,1,44,3,44,718,8,44,1,44,3,44,721,8,44,1,44,1,44,1,44,1,44,1,
-        44,3,44,728,8,44,1,44,3,44,731,8,44,1,44,1,44,1,44,1,44,3,44,737,
-        8,44,1,44,1,44,1,44,1,44,3,44,743,8,44,1,44,1,44,1,44,1,44,1,44,
-        1,44,3,44,751,8,44,1,45,1,45,1,45,1,45,5,45,757,8,45,10,45,12,45,
-        760,9,45,1,45,1,45,1,46,1,46,1,46,1,46,1,47,1,47,1,47,1,47,1,47,
-        1,47,1,47,1,47,3,47,776,8,47,1,48,1,48,1,48,1,48,1,48,3,48,783,8,
-        48,1,49,1,49,1,49,5,49,788,8,49,10,49,12,49,791,9,49,1,50,1,50,1,
-        51,1,51,1,52,1,52,1,53,1,53,1,53,0,3,28,72,80,54,0,2,4,6,8,10,12,
-        14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,
-        58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,
-        102,104,106,0,8,3,0,36,36,52,52,87,87,2,0,6,6,30,30,2,0,10,10,29,
-        29,2,0,39,39,57,57,1,0,95,100,1,0,101,102,1,0,103,105,22,0,5,6,10,
-        10,12,15,18,18,20,21,24,27,29,29,31,31,38,40,43,43,46,46,50,51,56,
-        58,60,60,63,66,70,70,75,75,78,78,80,80,82,86,88,88,90,91,895,0,111,
-        1,0,0,0,2,116,1,0,0,0,4,118,1,0,0,0,6,129,1,0,0,0,8,132,1,0,0,0,
-        10,136,1,0,0,0,12,148,1,0,0,0,14,154,1,0,0,0,16,165,1,0,0,0,18,172,
-        1,0,0,0,20,174,1,0,0,0,22,204,1,0,0,0,24,218,1,0,0,0,26,220,1,0,
-        0,0,28,229,1,0,0,0,30,260,1,0,0,0,32,262,1,0,0,0,34,274,1,0,0,0,
-        36,276,1,0,0,0,38,279,1,0,0,0,40,292,1,0,0,0,42,295,1,0,0,0,44,305,
-        1,0,0,0,46,313,1,0,0,0,48,319,1,0,0,0,50,327,1,0,0,0,52,338,1,0,
-        0,0,54,352,1,0,0,0,56,356,1,0,0,0,58,362,1,0,0,0,60,386,1,0,0,0,
-        62,388,1,0,0,0,64,404,1,0,0,0,66,463,1,0,0,0,68,503,1,0,0,0,70,511,
-        1,0,0,0,72,517,1,0,0,0,74,530,1,0,0,0,76,589,1,0,0,0,78,591,1,0,
-        0,0,80,597,1,0,0,0,82,693,1,0,0,0,84,695,1,0,0,0,86,700,1,0,0,0,
-        88,750,1,0,0,0,90,752,1,0,0,0,92,763,1,0,0,0,94,775,1,0,0,0,96,782,
-        1,0,0,0,98,784,1,0,0,0,100,792,1,0,0,0,102,794,1,0,0,0,104,796,1,
-        0,0,0,106,798,1,0,0,0,108,110,3,2,1,0,109,108,1,0,0,0,110,113,1,
-        0,0,0,111,109,1,0,0,0,111,112,1,0,0,0,112,114,1,0,0,0,113,111,1,
-        0,0,0,114,115,5,0,0,1,115,1,1,0,0,0,116,117,3,4,2,0,117,3,1,0,0,
-        0,118,120,3,6,3,0,119,121,5,108,0,0,120,119,1,0,0,0,120,121,1,0,
-        0,0,121,5,1,0,0,0,122,130,3,8,4,0,123,130,3,48,24,0,124,130,3,52,
-        26,0,125,130,3,56,28,0,126,130,3,58,29,0,127,130,3,66,33,0,128,130,
-        3,68,34,0,129,122,1,0,0,0,129,123,1,0,0,0,129,124,1,0,0,0,129,125,
-        1,0,0,0,129,126,1,0,0,0,129,127,1,0,0,0,129,128,1,0,0,0,130,7,1,
-        0,0,0,131,133,3,10,5,0,132,131,1,0,0,0,132,133,1,0,0,0,133,134,1,
-        0,0,0,134,135,3,14,7,0,135,9,1,0,0,0,136,138,5,94,0,0,137,139,5,
-        72,0,0,138,137,1,0,0,0,138,139,1,0,0,0,139,140,1,0,0,0,140,145,3,
-        12,6,0,141,142,5,1,0,0,142,144,3,12,6,0,143,141,1,0,0,0,144,147,
-        1,0,0,0,145,143,1,0,0,0,145,146,1,0,0,0,146,11,1,0,0,0,147,145,1,
-        0,0,0,148,149,3,96,48,0,149,150,5,9,0,0,150,151,5,2,0,0,151,152,
-        3,8,4,0,152,153,5,3,0,0,153,13,1,0,0,0,154,162,3,16,8,0,155,157,
-        7,0,0,0,156,158,5,6,0,0,157,156,1,0,0,0,157,158,1,0,0,0,158,159,
-        1,0,0,0,159,161,3,16,8,0,160,155,1,0,0,0,161,164,1,0,0,0,162,160,
-        1,0,0,0,162,163,1,0,0,0,163,15,1,0,0,0,164,162,1,0,0,0,165,166,3,
-        18,9,0,166,17,1,0,0,0,167,173,3,20,10,0,168,169,5,2,0,0,169,170,
-        3,8,4,0,170,171,5,3,0,0,171,173,1,0,0,0,172,167,1,0,0,0,172,168,
-        1,0,0,0,173,19,1,0,0,0,174,176,5,76,0,0,175,177,3,22,11,0,176,175,
-        1,0,0,0,176,177,1,0,0,0,177,178,1,0,0,0,178,183,3,24,12,0,179,180,
-        5,1,0,0,180,182,3,24,12,0,181,179,1,0,0,0,182,185,1,0,0,0,183,181,
-        1,0,0,0,183,184,1,0,0,0,184,187,1,0,0,0,185,183,1,0,0,0,186,188,
-        3,26,13,0,187,186,1,0,0,0,187,188,1,0,0,0,188,190,1,0,0,0,189,191,
-        3,36,18,0,190,189,1,0,0,0,190,191,1,0,0,0,191,193,1,0,0,0,192,194,
-        3,38,19,0,193,192,1,0,0,0,193,194,1,0,0,0,194,196,1,0,0,0,195,197,
-        3,40,20,0,196,195,1,0,0,0,196,197,1,0,0,0,197,199,1,0,0,0,198,200,
-        3,42,21,0,199,198,1,0,0,0,199,200,1,0,0,0,200,202,1,0,0,0,201,203,
-        3,46,23,0,202,201,1,0,0,0,202,203,1,0,0,0,203,21,1,0,0,0,204,205,
-        7,1,0,0,205,23,1,0,0,0,206,211,3,70,35,0,207,209,5,9,0,0,208,207,
-        1,0,0,0,208,209,1,0,0,0,209,210,1,0,0,0,210,212,3,96,48,0,211,208,
-        1,0,0,0,211,212,1,0,0,0,212,219,1,0,0,0,213,214,3,98,49,0,214,215,
-        5,4,0,0,215,216,5,103,0,0,216,219,1,0,0,0,217,219,5,103,0,0,218,
-        206,1,0,0,0,218,213,1,0,0,0,218,217,1,0,0,0,219,25,1,0,0,0,220,221,
-        5,42,0,0,221,226,3,28,14,0,222,223,5,1,0,0,223,225,3,28,14,0,224,
-        222,1,0,0,0,225,228,1,0,0,0,226,224,1,0,0,0,226,227,1,0,0,0,227,
-        27,1,0,0,0,228,226,1,0,0,0,229,230,6,14,-1,0,230,231,3,32,16,0,231,
-        241,1,0,0,0,232,233,10,2,0,0,233,234,3,30,15,0,234,235,5,55,0,0,
-        235,236,3,28,14,0,236,237,5,67,0,0,237,238,3,70,35,0,238,240,1,0,
-        0,0,239,232,1,0,0,0,240,243,1,0,0,0,241,239,1,0,0,0,241,242,1,0,
-        0,0,242,29,1,0,0,0,243,241,1,0,0,0,244,246,5,48,0,0,245,244,1,0,
-        0,0,245,246,1,0,0,0,246,261,1,0,0,0,247,249,5,58,0,0,248,250,5,70,
-        0,0,249,248,1,0,0,0,249,250,1,0,0,0,250,261,1,0,0,0,251,253,5,75,
-        0,0,252,254,5,70,0,0,253,252,1,0,0,0,253,254,1,0,0,0,254,261,1,0,
-        0,0,255,257,5,43,0,0,256,258,5,70,0,0,257,256,1,0,0,0,257,258,1,
-        0,0,0,258,261,1,0,0,0,259,261,5,24,0,0,260,245,1,0,0,0,260,247,1,
-        0,0,0,260,251,1,0,0,0,260,255,1,0,0,0,260,259,1,0,0,0,261,31,1,0,
-        0,0,262,267,3,34,17,0,263,265,5,9,0,0,264,263,1,0,0,0,264,265,1,
-        0,0,0,265,266,1,0,0,0,266,268,3,96,48,0,267,264,1,0,0,0,267,268,
-        1,0,0,0,268,33,1,0,0,0,269,275,3,102,51,0,270,271,5,2,0,0,271,272,
-        3,8,4,0,272,273,5,3,0,0,273,275,1,0,0,0,274,269,1,0,0,0,274,270,
-        1,0,0,0,275,35,1,0,0,0,276,277,5,93,0,0,277,278,3,70,35,0,278,37,
-        1,0,0,0,279,280,5,44,0,0,280,282,5,15,0,0,281,283,3,22,11,0,282,
-        281,1,0,0,0,282,283,1,0,0,0,283,284,1,0,0,0,284,289,3,70,35,0,285,
-        286,5,1,0,0,286,288,3,70,35,0,287,285,1,0,0,0,288,291,1,0,0,0,289,
-        287,1,0,0,0,289,290,1,0,0,0,290,39,1,0,0,0,291,289,1,0,0,0,292,293,
-        5,45,0,0,293,294,3,70,35,0,294,41,1,0,0,0,295,296,5,69,0,0,296,297,
-        5,15,0,0,297,302,3,44,22,0,298,299,5,1,0,0,299,301,3,44,22,0,300,
-        298,1,0,0,0,301,304,1,0,0,0,302,300,1,0,0,0,302,303,1,0,0,0,303,
-        43,1,0,0,0,304,302,1,0,0,0,305,307,3,70,35,0,306,308,7,2,0,0,307,
-        306,1,0,0,0,307,308,1,0,0,0,308,311,1,0,0,0,309,310,5,64,0,0,310,
-        312,7,3,0,0,311,309,1,0,0,0,311,312,1,0,0,0,312,45,1,0,0,0,313,314,
-        5,60,0,0,314,317,3,70,35,0,315,316,5,66,0,0,316,318,3,70,35,0,317,
-        315,1,0,0,0,317,318,1,0,0,0,318,47,1,0,0,0,319,320,5,49,0,0,320,
-        321,5,53,0,0,321,323,3,102,51,0,322,324,3,50,25,0,323,322,1,0,0,
-        0,323,324,1,0,0,0,324,325,1,0,0,0,325,326,3,8,4,0,326,49,1,0,0,0,
-        327,328,5,2,0,0,328,333,3,100,50,0,329,330,5,1,0,0,330,332,3,100,
-        50,0,331,329,1,0,0,0,332,335,1,0,0,0,333,331,1,0,0,0,333,334,1,0,
-        0,0,334,336,1,0,0,0,335,333,1,0,0,0,336,337,5,3,0,0,337,51,1,0,0,
-        0,338,339,5,89,0,0,339,340,3,102,51,0,340,341,5,77,0,0,341,346,3,
-        54,27,0,342,343,5,1,0,0,343,345,3,54,27,0,344,342,1,0,0,0,345,348,
-        1,0,0,0,346,344,1,0,0,0,346,347,1,0,0,0,347,350,1,0,0,0,348,346,
-        1,0,0,0,349,351,3,36,18,0,350,349,1,0,0,0,350,351,1,0,0,0,351,53,
-        1,0,0,0,352,353,3,100,50,0,353,354,5,95,0,0,354,355,3,70,35,0,355,
-        55,1,0,0,0,356,357,5,28,0,0,357,358,5,42,0,0,358,360,3,102,51,0,
-        359,361,3,36,18,0,360,359,1,0,0,0,360,361,1,0,0,0,361,57,1,0,0,0,
-        362,363,5,23,0,0,363,367,5,79,0,0,364,365,5,46,0,0,365,366,5,61,
-        0,0,366,368,5,37,0,0,367,364,1,0,0,0,367,368,1,0,0,0,368,369,1,0,
-        0,0,369,370,3,104,52,0,370,371,5,2,0,0,371,376,3,60,30,0,372,373,
-        5,1,0,0,373,375,3,60,30,0,374,372,1,0,0,0,375,378,1,0,0,0,376,374,
-        1,0,0,0,376,377,1,0,0,0,377,379,1,0,0,0,378,376,1,0,0,0,379,382,
-        5,3,0,0,380,381,5,94,0,0,381,383,3,90,45,0,382,380,1,0,0,0,382,383,
-        1,0,0,0,383,59,1,0,0,0,384,387,3,62,31,0,385,387,3,64,32,0,386,384,
-        1,0,0,0,386,385,1,0,0,0,387,61,1,0,0,0,388,389,3,100,50,0,389,392,
-        3,88,44,0,390,391,5,61,0,0,391,393,5,62,0,0,392,390,1,0,0,0,392,
-        393,1,0,0,0,393,396,1,0,0,0,394,395,5,27,0,0,395,397,3,70,35,0,396,
-        394,1,0,0,0,396,397,1,0,0,0,397,400,1,0,0,0,398,399,5,71,0,0,399,
-        401,5,56,0,0,400,398,1,0,0,0,400,401,1,0,0,0,401,63,1,0,0,0,402,
-        403,5,22,0,0,403,405,3,96,48,0,404,402,1,0,0,0,404,405,1,0,0,0,405,
-        461,1,0,0,0,406,407,5,71,0,0,407,408,5,56,0,0,408,409,5,2,0,0,409,
-        414,3,100,50,0,410,411,5,1,0,0,411,413,3,100,50,0,412,410,1,0,0,
-        0,413,416,1,0,0,0,414,412,1,0,0,0,414,415,1,0,0,0,415,417,1,0,0,
-        0,416,414,1,0,0,0,417,418,5,3,0,0,418,462,1,0,0,0,419,420,5,88,0,
-        0,420,421,5,2,0,0,421,426,3,100,50,0,422,423,5,1,0,0,423,425,3,100,
-        50,0,424,422,1,0,0,0,425,428,1,0,0,0,426,424,1,0,0,0,426,427,1,0,
-        0,0,427,429,1,0,0,0,428,426,1,0,0,0,429,430,5,3,0,0,430,462,1,0,
-        0,0,431,432,5,19,0,0,432,433,5,2,0,0,433,434,3,70,35,0,434,435,5,
-        3,0,0,435,462,1,0,0,0,436,437,5,41,0,0,437,438,5,56,0,0,438,439,
-        5,2,0,0,439,444,3,100,50,0,440,441,5,1,0,0,441,443,3,100,50,0,442,
-        440,1,0,0,0,443,446,1,0,0,0,444,442,1,0,0,0,444,445,1,0,0,0,445,
-        447,1,0,0,0,446,444,1,0,0,0,447,448,5,3,0,0,448,449,5,73,0,0,449,
-        450,3,102,51,0,450,451,5,2,0,0,451,456,3,100,50,0,452,453,5,1,0,
-        0,453,455,3,100,50,0,454,452,1,0,0,0,455,458,1,0,0,0,456,454,1,0,
-        0,0,456,457,1,0,0,0,457,459,1,0,0,0,458,456,1,0,0,0,459,460,5,3,
-        0,0,460,462,1,0,0,0,461,406,1,0,0,0,461,419,1,0,0,0,461,431,1,0,
-        0,0,461,436,1,0,0,0,462,65,1,0,0,0,463,464,5,7,0,0,464,467,5,79,
-        0,0,465,466,5,46,0,0,466,468,5,37,0,0,467,465,1,0,0,0,467,468,1,
-        0,0,0,468,469,1,0,0,0,469,501,3,102,51,0,470,471,5,5,0,0,471,475,
-        5,21,0,0,472,473,5,46,0,0,473,474,5,61,0,0,474,476,5,37,0,0,475,
-        472,1,0,0,0,475,476,1,0,0,0,476,477,1,0,0,0,477,502,3,62,31,0,478,
-        479,5,32,0,0,479,482,5,21,0,0,480,481,5,46,0,0,481,483,5,37,0,0,
-        482,480,1,0,0,0,482,483,1,0,0,0,483,484,1,0,0,0,484,502,3,100,50,
-        0,485,486,5,74,0,0,486,487,5,85,0,0,487,502,3,104,52,0,488,489,5,
-        7,0,0,489,490,5,21,0,0,490,491,3,100,50,0,491,492,5,77,0,0,492,493,
-        5,27,0,0,493,494,3,70,35,0,494,502,1,0,0,0,495,496,5,7,0,0,496,497,
-        5,21,0,0,497,498,3,100,50,0,498,499,5,32,0,0,499,500,5,27,0,0,500,
-        502,1,0,0,0,501,470,1,0,0,0,501,478,1,0,0,0,501,485,1,0,0,0,501,
-        488,1,0,0,0,501,495,1,0,0,0,502,67,1,0,0,0,503,504,5,32,0,0,504,
-        507,5,79,0,0,505,506,5,46,0,0,506,508,5,37,0,0,507,505,1,0,0,0,507,
-        508,1,0,0,0,508,509,1,0,0,0,509,510,3,102,51,0,510,69,1,0,0,0,511,
-        512,3,72,36,0,512,71,1,0,0,0,513,514,6,36,-1,0,514,518,3,74,37,0,
-        515,516,5,61,0,0,516,518,3,72,36,3,517,513,1,0,0,0,517,515,1,0,0,
-        0,518,527,1,0,0,0,519,520,10,2,0,0,520,521,5,8,0,0,521,526,3,72,
-        36,3,522,523,10,1,0,0,523,524,5,68,0,0,524,526,3,72,36,2,525,519,
-        1,0,0,0,525,522,1,0,0,0,526,529,1,0,0,0,527,525,1,0,0,0,527,528,
-        1,0,0,0,528,73,1,0,0,0,529,527,1,0,0,0,530,532,3,80,40,0,531,533,
-        3,76,38,0,532,531,1,0,0,0,532,533,1,0,0,0,533,75,1,0,0,0,534,535,
-        3,78,39,0,535,536,3,80,40,0,536,590,1,0,0,0,537,539,5,61,0,0,538,
-        537,1,0,0,0,538,539,1,0,0,0,539,540,1,0,0,0,540,541,5,47,0,0,541,
-        542,5,2,0,0,542,547,3,70,35,0,543,544,5,1,0,0,544,546,3,70,35,0,
-        545,543,1,0,0,0,546,549,1,0,0,0,547,545,1,0,0,0,547,548,1,0,0,0,
-        548,550,1,0,0,0,549,547,1,0,0,0,550,551,5,3,0,0,551,590,1,0,0,0,
-        552,554,5,61,0,0,553,552,1,0,0,0,553,554,1,0,0,0,554,555,1,0,0,0,
-        555,556,5,47,0,0,556,557,5,2,0,0,557,558,3,8,4,0,558,559,5,3,0,0,
-        559,590,1,0,0,0,560,562,5,61,0,0,561,560,1,0,0,0,561,562,1,0,0,0,
-        562,563,1,0,0,0,563,564,5,11,0,0,564,565,3,80,40,0,565,566,5,8,0,
-        0,566,567,3,80,40,0,567,590,1,0,0,0,568,570,5,61,0,0,569,568,1,0,
-        0,0,569,570,1,0,0,0,570,571,1,0,0,0,571,572,5,59,0,0,572,575,3,80,
-        40,0,573,574,5,35,0,0,574,576,3,80,40,0,575,573,1,0,0,0,575,576,
-        1,0,0,0,576,590,1,0,0,0,577,579,5,54,0,0,578,580,5,61,0,0,579,578,
-        1,0,0,0,579,580,1,0,0,0,580,581,1,0,0,0,581,590,5,62,0,0,582,584,
-        5,54,0,0,583,585,5,61,0,0,584,583,1,0,0,0,584,585,1,0,0,0,585,586,
-        1,0,0,0,586,587,5,30,0,0,587,588,5,42,0,0,588,590,3,80,40,0,589,
-        534,1,0,0,0,589,538,1,0,0,0,589,553,1,0,0,0,589,561,1,0,0,0,589,
-        569,1,0,0,0,589,577,1,0,0,0,589,582,1,0,0,0,590,77,1,0,0,0,591,592,
-        7,4,0,0,592,79,1,0,0,0,593,594,6,40,-1,0,594,598,3,82,41,0,595,596,
-        7,5,0,0,596,598,3,80,40,4,597,593,1,0,0,0,597,595,1,0,0,0,598,610,
-        1,0,0,0,599,600,10,3,0,0,600,601,7,6,0,0,601,609,3,80,40,4,602,603,
-        10,2,0,0,603,604,7,5,0,0,604,609,3,80,40,3,605,606,10,1,0,0,606,
-        607,5,106,0,0,607,609,3,80,40,2,608,599,1,0,0,0,608,602,1,0,0,0,
-        608,605,1,0,0,0,609,612,1,0,0,0,610,608,1,0,0,0,610,611,1,0,0,0,
-        611,81,1,0,0,0,612,610,1,0,0,0,613,694,3,94,47,0,614,615,3,98,49,
-        0,615,627,5,2,0,0,616,618,3,22,11,0,617,616,1,0,0,0,617,618,1,0,
-        0,0,618,619,1,0,0,0,619,624,3,70,35,0,620,621,5,1,0,0,621,623,3,
-        70,35,0,622,620,1,0,0,0,623,626,1,0,0,0,624,622,1,0,0,0,624,625,
-        1,0,0,0,625,628,1,0,0,0,626,624,1,0,0,0,627,617,1,0,0,0,627,628,
-        1,0,0,0,628,629,1,0,0,0,629,630,5,3,0,0,630,694,1,0,0,0,631,633,
-        5,16,0,0,632,634,3,84,42,0,633,632,1,0,0,0,634,635,1,0,0,0,635,633,
-        1,0,0,0,635,636,1,0,0,0,636,639,1,0,0,0,637,638,5,33,0,0,638,640,
-        3,70,35,0,639,637,1,0,0,0,639,640,1,0,0,0,640,641,1,0,0,0,641,642,
-        5,34,0,0,642,694,1,0,0,0,643,644,5,16,0,0,644,646,3,70,35,0,645,
-        647,3,84,42,0,646,645,1,0,0,0,647,648,1,0,0,0,648,646,1,0,0,0,648,
-        649,1,0,0,0,649,652,1,0,0,0,650,651,5,33,0,0,651,653,3,70,35,0,652,
-        650,1,0,0,0,652,653,1,0,0,0,653,654,1,0,0,0,654,655,5,34,0,0,655,
-        694,1,0,0,0,656,657,5,17,0,0,657,658,5,2,0,0,658,659,3,70,35,0,659,
-        660,5,9,0,0,660,661,3,88,44,0,661,662,5,3,0,0,662,694,1,0,0,0,663,
-        664,5,20,0,0,664,665,5,2,0,0,665,670,3,70,35,0,666,667,5,1,0,0,667,
-        669,3,70,35,0,668,666,1,0,0,0,669,672,1,0,0,0,670,668,1,0,0,0,670,
-        671,1,0,0,0,671,673,1,0,0,0,672,670,1,0,0,0,673,674,5,3,0,0,674,
-        694,1,0,0,0,675,676,5,63,0,0,676,677,5,2,0,0,677,678,3,80,40,0,678,
-        679,5,1,0,0,679,680,3,80,40,0,680,681,5,3,0,0,681,694,1,0,0,0,682,
-        683,5,2,0,0,683,684,3,70,35,0,684,685,5,3,0,0,685,694,1,0,0,0,686,
-        687,5,37,0,0,687,688,5,2,0,0,688,689,3,8,4,0,689,690,5,3,0,0,690,
-        694,1,0,0,0,691,694,3,86,43,0,692,694,3,98,49,0,693,613,1,0,0,0,
-        693,614,1,0,0,0,693,631,1,0,0,0,693,643,1,0,0,0,693,656,1,0,0,0,
-        693,663,1,0,0,0,693,675,1,0,0,0,693,682,1,0,0,0,693,686,1,0,0,0,
-        693,691,1,0,0,0,693,692,1,0,0,0,694,83,1,0,0,0,695,696,5,92,0,0,
-        696,697,3,70,35,0,697,698,5,81,0,0,698,699,3,70,35,0,699,85,1,0,
-        0,0,700,701,5,2,0,0,701,702,3,8,4,0,702,703,5,3,0,0,703,87,1,0,0,
-        0,704,751,5,14,0,0,705,751,5,84,0,0,706,751,5,78,0,0,707,751,5,50,
-        0,0,708,751,5,51,0,0,709,751,5,12,0,0,710,751,5,40,0,0,711,751,5,
-        31,0,0,712,720,5,26,0,0,713,714,5,2,0,0,714,717,5,111,0,0,715,716,
-        5,1,0,0,716,718,5,111,0,0,717,715,1,0,0,0,717,718,1,0,0,0,718,719,
-        1,0,0,0,719,721,5,3,0,0,720,713,1,0,0,0,720,721,1,0,0,0,721,751,
-        1,0,0,0,722,730,5,65,0,0,723,724,5,2,0,0,724,727,5,111,0,0,725,726,
-        5,1,0,0,726,728,5,111,0,0,727,725,1,0,0,0,727,728,1,0,0,0,728,729,
-        1,0,0,0,729,731,5,3,0,0,730,723,1,0,0,0,730,731,1,0,0,0,731,751,
-        1,0,0,0,732,736,5,90,0,0,733,734,5,2,0,0,734,735,5,111,0,0,735,737,
-        5,3,0,0,736,733,1,0,0,0,736,737,1,0,0,0,737,751,1,0,0,0,738,742,
-        5,18,0,0,739,740,5,2,0,0,740,741,5,111,0,0,741,743,5,3,0,0,742,739,
-        1,0,0,0,742,743,1,0,0,0,743,751,1,0,0,0,744,751,5,80,0,0,745,751,
-        5,25,0,0,746,751,5,82,0,0,747,751,5,83,0,0,748,751,5,13,0,0,749,
-        751,5,91,0,0,750,704,1,0,0,0,750,705,1,0,0,0,750,706,1,0,0,0,750,
-        707,1,0,0,0,750,708,1,0,0,0,750,709,1,0,0,0,750,710,1,0,0,0,750,
-        711,1,0,0,0,750,712,1,0,0,0,750,722,1,0,0,0,750,732,1,0,0,0,750,
-        738,1,0,0,0,750,744,1,0,0,0,750,745,1,0,0,0,750,746,1,0,0,0,750,
-        747,1,0,0,0,750,748,1,0,0,0,750,749,1,0,0,0,751,89,1,0,0,0,752,753,
-        5,2,0,0,753,758,3,92,46,0,754,755,5,1,0,0,755,757,3,92,46,0,756,
-        754,1,0,0,0,757,760,1,0,0,0,758,756,1,0,0,0,758,759,1,0,0,0,759,
-        761,1,0,0,0,760,758,1,0,0,0,761,762,5,3,0,0,762,91,1,0,0,0,763,764,
-        3,96,48,0,764,765,5,95,0,0,765,766,3,94,47,0,766,93,1,0,0,0,767,
-        776,5,62,0,0,768,776,5,86,0,0,769,776,5,38,0,0,770,776,5,111,0,0,
-        771,776,5,112,0,0,772,776,5,113,0,0,773,776,5,109,0,0,774,776,5,
-        110,0,0,775,767,1,0,0,0,775,768,1,0,0,0,775,769,1,0,0,0,775,770,
-        1,0,0,0,775,771,1,0,0,0,775,772,1,0,0,0,775,773,1,0,0,0,775,774,
-        1,0,0,0,776,95,1,0,0,0,777,783,5,114,0,0,778,783,5,115,0,0,779,783,
-        5,116,0,0,780,783,5,117,0,0,781,783,3,106,53,0,782,777,1,0,0,0,782,
-        778,1,0,0,0,782,779,1,0,0,0,782,780,1,0,0,0,782,781,1,0,0,0,783,
-        97,1,0,0,0,784,789,3,96,48,0,785,786,5,4,0,0,786,788,3,96,48,0,787,
-        785,1,0,0,0,788,791,1,0,0,0,789,787,1,0,0,0,789,790,1,0,0,0,790,
-        99,1,0,0,0,791,789,1,0,0,0,792,793,3,96,48,0,793,101,1,0,0,0,794,
-        795,3,98,49,0,795,103,1,0,0,0,796,797,3,98,49,0,797,105,1,0,0,0,
-        798,799,7,7,0,0,799,107,1,0,0,0,95,111,120,129,132,138,145,157,162,
-        172,176,183,187,190,193,196,199,202,208,211,218,226,241,245,249,
-        253,257,260,264,267,274,282,289,302,307,311,317,323,333,346,350,
-        360,367,376,382,386,392,396,400,404,414,426,444,456,461,467,475,
-        482,501,507,517,525,527,532,538,547,553,561,569,575,579,584,589,
-        597,608,610,617,624,627,635,639,648,652,670,693,717,720,727,730,
-        736,742,750,758,775,782,789
+        52,2,53,7,53,2,54,7,54,2,55,7,55,2,56,7,56,2,57,7,57,2,58,7,58,2,
+        59,7,59,1,0,5,0,122,8,0,10,0,12,0,125,9,0,1,0,1,0,1,1,1,1,1,2,1,
+        2,3,2,133,8,2,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,3,142,8,3,1,4,3,4,145,
+        8,4,1,4,1,4,1,5,1,5,3,5,151,8,5,1,5,1,5,1,5,5,5,156,8,5,10,5,12,
+        5,159,9,5,1,6,1,6,3,6,163,8,6,1,6,1,6,1,6,1,6,1,6,1,7,1,7,1,7,1,
+        7,5,7,174,8,7,10,7,12,7,177,9,7,1,7,1,7,1,8,1,8,1,8,3,8,184,8,8,
+        1,8,5,8,187,8,8,10,8,12,8,190,9,8,1,9,1,9,1,10,1,10,1,10,1,10,1,
+        10,3,10,199,8,10,1,11,1,11,3,11,203,8,11,1,11,1,11,1,11,5,11,208,
+        8,11,10,11,12,11,211,9,11,1,11,3,11,214,8,11,1,11,3,11,217,8,11,
+        1,11,3,11,220,8,11,1,11,3,11,223,8,11,1,11,3,11,226,8,11,1,11,3,
+        11,229,8,11,1,12,1,12,1,13,1,13,3,13,235,8,13,1,13,3,13,238,8,13,
+        1,13,1,13,1,13,1,13,1,13,1,13,1,13,3,13,247,8,13,1,14,1,14,1,14,
+        1,14,5,14,253,8,14,10,14,12,14,256,9,14,1,15,1,15,1,15,1,15,1,15,
+        1,15,1,15,1,15,1,15,1,15,5,15,268,8,15,10,15,12,15,271,9,15,1,16,
+        3,16,274,8,16,1,16,1,16,3,16,278,8,16,1,16,1,16,3,16,282,8,16,1,
+        16,1,16,3,16,286,8,16,1,16,3,16,289,8,16,1,17,1,17,3,17,293,8,17,
+        1,17,3,17,296,8,17,1,18,1,18,1,18,1,18,1,18,3,18,303,8,18,1,19,1,
+        19,1,19,1,19,3,19,309,8,19,1,20,1,20,1,20,3,20,314,8,20,1,20,1,20,
+        1,20,5,20,319,8,20,10,20,12,20,322,9,20,1,21,1,21,1,21,1,21,3,21,
+        328,8,21,1,22,1,22,1,22,1,22,1,22,5,22,335,8,22,10,22,12,22,338,
+        9,22,1,23,1,23,3,23,342,8,23,1,23,1,23,3,23,346,8,23,1,24,1,24,1,
+        24,1,24,3,24,352,8,24,1,25,1,25,1,25,1,25,3,25,358,8,25,1,25,1,25,
+        1,26,1,26,1,26,1,26,5,26,366,8,26,10,26,12,26,369,9,26,1,26,1,26,
+        1,27,1,27,1,27,1,27,1,27,1,27,5,27,379,8,27,10,27,12,27,382,9,27,
+        1,27,3,27,385,8,27,1,28,1,28,1,28,1,28,1,29,1,29,1,29,1,29,3,29,
+        395,8,29,1,30,1,30,1,30,1,30,1,30,3,30,402,8,30,1,30,1,30,1,30,1,
+        30,1,30,5,30,409,8,30,10,30,12,30,412,9,30,1,30,1,30,1,30,3,30,417,
+        8,30,1,31,1,31,3,31,421,8,31,1,32,1,32,1,32,1,32,3,32,427,8,32,1,
+        32,1,32,3,32,431,8,32,1,32,1,32,3,32,435,8,32,1,33,1,33,1,34,1,34,
+        3,34,441,8,34,1,34,1,34,1,34,1,34,1,34,1,34,5,34,449,8,34,10,34,
+        12,34,452,9,34,1,34,1,34,1,34,1,34,1,34,1,34,1,34,5,34,461,8,34,
+        10,34,12,34,464,9,34,1,34,1,34,1,34,1,34,1,34,1,34,1,34,1,34,1,34,
+        1,34,1,34,1,34,1,34,5,34,479,8,34,10,34,12,34,482,9,34,1,34,1,34,
+        1,34,1,34,1,34,1,34,1,34,5,34,491,8,34,10,34,12,34,494,9,34,1,34,
+        1,34,3,34,498,8,34,1,35,1,35,1,35,1,35,3,35,504,8,35,1,35,1,35,1,
+        35,1,35,1,35,1,35,3,35,512,8,35,1,35,1,35,1,35,1,35,1,35,3,35,519,
+        8,35,1,35,1,35,1,35,1,35,1,35,1,35,1,35,1,35,1,35,1,35,1,35,1,35,
+        1,35,1,35,1,35,1,35,1,35,3,35,538,8,35,1,36,1,36,1,36,1,36,3,36,
+        544,8,36,1,36,1,36,1,37,1,37,1,38,1,38,1,38,1,38,3,38,554,8,38,1,
+        38,1,38,1,38,1,38,1,38,1,38,5,38,562,8,38,10,38,12,38,565,9,38,1,
+        39,1,39,3,39,569,8,39,1,40,1,40,1,40,1,40,3,40,575,8,40,1,40,1,40,
+        1,40,1,40,1,40,5,40,582,8,40,10,40,12,40,585,9,40,1,40,1,40,1,40,
+        3,40,590,8,40,1,40,1,40,1,40,1,40,1,40,1,40,3,40,598,8,40,1,40,1,
+        40,1,40,1,40,1,40,1,40,3,40,606,8,40,1,40,1,40,1,40,1,40,3,40,612,
+        8,40,1,40,1,40,3,40,616,8,40,1,40,1,40,1,40,3,40,621,8,40,1,40,1,
+        40,1,40,3,40,626,8,40,1,41,1,41,1,42,1,42,1,42,1,42,3,42,634,8,42,
+        1,42,1,42,1,42,1,42,1,42,1,42,1,42,1,42,1,42,5,42,645,8,42,10,42,
+        12,42,648,9,42,1,43,1,43,1,43,1,43,3,43,654,8,43,1,43,1,43,1,43,
+        5,43,659,8,43,10,43,12,43,662,9,43,3,43,664,8,43,1,43,1,43,1,43,
+        1,43,4,43,670,8,43,11,43,12,43,671,1,43,1,43,3,43,676,8,43,1,43,
+        1,43,1,43,1,43,1,43,4,43,683,8,43,11,43,12,43,684,1,43,1,43,3,43,
+        689,8,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,
+        1,43,1,43,1,43,5,43,705,8,43,10,43,12,43,708,9,43,1,43,1,43,1,43,
+        1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,1,43,
+        1,43,1,43,1,43,1,43,3,43,730,8,43,1,44,1,44,1,44,1,44,1,44,1,45,
+        1,45,1,45,1,45,1,46,1,46,1,46,1,46,1,46,1,46,1,46,1,46,1,46,1,46,
+        1,46,1,46,1,46,3,46,754,8,46,1,46,3,46,757,8,46,1,46,1,46,1,46,1,
+        46,1,46,3,46,764,8,46,1,46,3,46,767,8,46,1,46,1,46,1,46,1,46,3,46,
+        773,8,46,1,46,1,46,1,46,1,46,3,46,779,8,46,1,46,1,46,1,46,1,46,1,
+        46,1,46,3,46,787,8,46,1,47,1,47,1,47,1,47,5,47,793,8,47,10,47,12,
+        47,796,9,47,1,47,1,47,1,48,1,48,1,48,1,48,1,49,1,49,1,49,1,49,1,
+        49,1,49,1,49,1,49,3,49,812,8,49,1,50,1,50,1,50,1,50,1,50,3,50,819,
+        8,50,1,51,1,51,1,51,5,51,824,8,51,10,51,12,51,827,9,51,1,52,1,52,
+        1,52,1,52,1,52,1,52,3,52,835,8,52,1,53,1,53,1,53,3,53,840,8,53,1,
+        54,1,54,1,55,1,55,1,56,1,56,1,57,1,57,1,58,1,58,1,59,1,59,1,59,0,
+        3,30,76,84,60,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,
+        38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,
+        82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116,118,
+        0,8,3,0,36,36,52,52,87,87,2,0,6,6,30,30,2,0,10,10,29,29,2,0,39,39,
+        57,57,1,0,95,100,1,0,101,102,1,0,103,105,22,0,5,6,10,10,12,15,18,
+        18,20,21,24,27,29,29,31,31,38,40,43,43,46,46,50,51,56,58,60,60,63,
+        66,70,70,75,75,78,78,80,80,82,86,88,88,90,91,949,0,123,1,0,0,0,2,
+        128,1,0,0,0,4,130,1,0,0,0,6,141,1,0,0,0,8,144,1,0,0,0,10,148,1,0,
+        0,0,12,160,1,0,0,0,14,169,1,0,0,0,16,180,1,0,0,0,18,191,1,0,0,0,
+        20,198,1,0,0,0,22,200,1,0,0,0,24,230,1,0,0,0,26,246,1,0,0,0,28,248,
+        1,0,0,0,30,257,1,0,0,0,32,288,1,0,0,0,34,290,1,0,0,0,36,302,1,0,
+        0,0,38,304,1,0,0,0,40,310,1,0,0,0,42,323,1,0,0,0,44,329,1,0,0,0,
+        46,339,1,0,0,0,48,347,1,0,0,0,50,353,1,0,0,0,52,361,1,0,0,0,54,372,
+        1,0,0,0,56,386,1,0,0,0,58,390,1,0,0,0,60,396,1,0,0,0,62,420,1,0,
+        0,0,64,422,1,0,0,0,66,436,1,0,0,0,68,440,1,0,0,0,70,499,1,0,0,0,
+        72,539,1,0,0,0,74,547,1,0,0,0,76,553,1,0,0,0,78,566,1,0,0,0,80,625,
+        1,0,0,0,82,627,1,0,0,0,84,633,1,0,0,0,86,729,1,0,0,0,88,731,1,0,
+        0,0,90,736,1,0,0,0,92,786,1,0,0,0,94,788,1,0,0,0,96,799,1,0,0,0,
+        98,811,1,0,0,0,100,818,1,0,0,0,102,820,1,0,0,0,104,834,1,0,0,0,106,
+        839,1,0,0,0,108,841,1,0,0,0,110,843,1,0,0,0,112,845,1,0,0,0,114,
+        847,1,0,0,0,116,849,1,0,0,0,118,851,1,0,0,0,120,122,3,2,1,0,121,
+        120,1,0,0,0,122,125,1,0,0,0,123,121,1,0,0,0,123,124,1,0,0,0,124,
+        126,1,0,0,0,125,123,1,0,0,0,126,127,5,0,0,1,127,1,1,0,0,0,128,129,
+        3,4,2,0,129,3,1,0,0,0,130,132,3,6,3,0,131,133,5,108,0,0,132,131,
+        1,0,0,0,132,133,1,0,0,0,133,5,1,0,0,0,134,142,3,8,4,0,135,142,3,
+        50,25,0,136,142,3,54,27,0,137,142,3,58,29,0,138,142,3,60,30,0,139,
+        142,3,70,35,0,140,142,3,72,36,0,141,134,1,0,0,0,141,135,1,0,0,0,
+        141,136,1,0,0,0,141,137,1,0,0,0,141,138,1,0,0,0,141,139,1,0,0,0,
+        141,140,1,0,0,0,142,7,1,0,0,0,143,145,3,10,5,0,144,143,1,0,0,0,144,
+        145,1,0,0,0,145,146,1,0,0,0,146,147,3,16,8,0,147,9,1,0,0,0,148,150,
+        5,94,0,0,149,151,5,72,0,0,150,149,1,0,0,0,150,151,1,0,0,0,151,152,
+        1,0,0,0,152,157,3,12,6,0,153,154,5,1,0,0,154,156,3,12,6,0,155,153,
+        1,0,0,0,156,159,1,0,0,0,157,155,1,0,0,0,157,158,1,0,0,0,158,11,1,
+        0,0,0,159,157,1,0,0,0,160,162,3,100,50,0,161,163,3,14,7,0,162,161,
+        1,0,0,0,162,163,1,0,0,0,163,164,1,0,0,0,164,165,5,9,0,0,165,166,
+        5,2,0,0,166,167,3,8,4,0,167,168,5,3,0,0,168,13,1,0,0,0,169,170,5,
+        2,0,0,170,175,3,100,50,0,171,172,5,1,0,0,172,174,3,100,50,0,173,
+        171,1,0,0,0,174,177,1,0,0,0,175,173,1,0,0,0,175,176,1,0,0,0,176,
+        178,1,0,0,0,177,175,1,0,0,0,178,179,5,3,0,0,179,15,1,0,0,0,180,188,
+        3,18,9,0,181,183,7,0,0,0,182,184,5,6,0,0,183,182,1,0,0,0,183,184,
+        1,0,0,0,184,185,1,0,0,0,185,187,3,18,9,0,186,181,1,0,0,0,187,190,
+        1,0,0,0,188,186,1,0,0,0,188,189,1,0,0,0,189,17,1,0,0,0,190,188,1,
+        0,0,0,191,192,3,20,10,0,192,19,1,0,0,0,193,199,3,22,11,0,194,195,
+        5,2,0,0,195,196,3,8,4,0,196,197,5,3,0,0,197,199,1,0,0,0,198,193,
+        1,0,0,0,198,194,1,0,0,0,199,21,1,0,0,0,200,202,5,76,0,0,201,203,
+        3,24,12,0,202,201,1,0,0,0,202,203,1,0,0,0,203,204,1,0,0,0,204,209,
+        3,26,13,0,205,206,5,1,0,0,206,208,3,26,13,0,207,205,1,0,0,0,208,
+        211,1,0,0,0,209,207,1,0,0,0,209,210,1,0,0,0,210,213,1,0,0,0,211,
+        209,1,0,0,0,212,214,3,28,14,0,213,212,1,0,0,0,213,214,1,0,0,0,214,
+        216,1,0,0,0,215,217,3,38,19,0,216,215,1,0,0,0,216,217,1,0,0,0,217,
+        219,1,0,0,0,218,220,3,40,20,0,219,218,1,0,0,0,219,220,1,0,0,0,220,
+        222,1,0,0,0,221,223,3,42,21,0,222,221,1,0,0,0,222,223,1,0,0,0,223,
+        225,1,0,0,0,224,226,3,44,22,0,225,224,1,0,0,0,225,226,1,0,0,0,226,
+        228,1,0,0,0,227,229,3,48,24,0,228,227,1,0,0,0,228,229,1,0,0,0,229,
+        23,1,0,0,0,230,231,7,1,0,0,231,25,1,0,0,0,232,237,3,74,37,0,233,
+        235,5,9,0,0,234,233,1,0,0,0,234,235,1,0,0,0,235,236,1,0,0,0,236,
+        238,3,100,50,0,237,234,1,0,0,0,237,238,1,0,0,0,238,247,1,0,0,0,239,
+        240,3,102,51,0,240,241,5,4,0,0,241,242,5,103,0,0,242,247,1,0,0,0,
+        243,247,5,103,0,0,244,245,4,13,0,0,245,247,3,110,55,0,246,232,1,
+        0,0,0,246,239,1,0,0,0,246,243,1,0,0,0,246,244,1,0,0,0,247,27,1,0,
+        0,0,248,249,5,42,0,0,249,254,3,30,15,0,250,251,5,1,0,0,251,253,3,
+        30,15,0,252,250,1,0,0,0,253,256,1,0,0,0,254,252,1,0,0,0,254,255,
+        1,0,0,0,255,29,1,0,0,0,256,254,1,0,0,0,257,258,6,15,-1,0,258,259,
+        3,34,17,0,259,269,1,0,0,0,260,261,10,2,0,0,261,262,3,32,16,0,262,
+        263,5,55,0,0,263,264,3,30,15,0,264,265,5,67,0,0,265,266,3,74,37,
+        0,266,268,1,0,0,0,267,260,1,0,0,0,268,271,1,0,0,0,269,267,1,0,0,
+        0,269,270,1,0,0,0,270,31,1,0,0,0,271,269,1,0,0,0,272,274,5,48,0,
+        0,273,272,1,0,0,0,273,274,1,0,0,0,274,289,1,0,0,0,275,277,5,58,0,
+        0,276,278,5,70,0,0,277,276,1,0,0,0,277,278,1,0,0,0,278,289,1,0,0,
+        0,279,281,5,75,0,0,280,282,5,70,0,0,281,280,1,0,0,0,281,282,1,0,
+        0,0,282,289,1,0,0,0,283,285,5,43,0,0,284,286,5,70,0,0,285,284,1,
+        0,0,0,285,286,1,0,0,0,286,289,1,0,0,0,287,289,5,24,0,0,288,273,1,
+        0,0,0,288,275,1,0,0,0,288,279,1,0,0,0,288,283,1,0,0,0,288,287,1,
+        0,0,0,289,33,1,0,0,0,290,295,3,36,18,0,291,293,5,9,0,0,292,291,1,
+        0,0,0,292,293,1,0,0,0,293,294,1,0,0,0,294,296,3,100,50,0,295,292,
+        1,0,0,0,295,296,1,0,0,0,296,35,1,0,0,0,297,303,3,112,56,0,298,299,
+        5,2,0,0,299,300,3,8,4,0,300,301,5,3,0,0,301,303,1,0,0,0,302,297,
+        1,0,0,0,302,298,1,0,0,0,303,37,1,0,0,0,304,308,5,93,0,0,305,309,
+        3,74,37,0,306,307,4,19,2,0,307,309,3,110,55,0,308,305,1,0,0,0,308,
+        306,1,0,0,0,309,39,1,0,0,0,310,311,5,44,0,0,311,313,5,15,0,0,312,
+        314,3,24,12,0,313,312,1,0,0,0,313,314,1,0,0,0,314,315,1,0,0,0,315,
+        320,3,74,37,0,316,317,5,1,0,0,317,319,3,74,37,0,318,316,1,0,0,0,
+        319,322,1,0,0,0,320,318,1,0,0,0,320,321,1,0,0,0,321,41,1,0,0,0,322,
+        320,1,0,0,0,323,327,5,45,0,0,324,328,3,74,37,0,325,326,4,21,3,0,
+        326,328,3,110,55,0,327,324,1,0,0,0,327,325,1,0,0,0,328,43,1,0,0,
+        0,329,330,5,69,0,0,330,331,5,15,0,0,331,336,3,46,23,0,332,333,5,
+        1,0,0,333,335,3,46,23,0,334,332,1,0,0,0,335,338,1,0,0,0,336,334,
+        1,0,0,0,336,337,1,0,0,0,337,45,1,0,0,0,338,336,1,0,0,0,339,341,3,
+        74,37,0,340,342,7,2,0,0,341,340,1,0,0,0,341,342,1,0,0,0,342,345,
+        1,0,0,0,343,344,5,64,0,0,344,346,7,3,0,0,345,343,1,0,0,0,345,346,
+        1,0,0,0,346,47,1,0,0,0,347,348,5,60,0,0,348,351,3,74,37,0,349,350,
+        5,66,0,0,350,352,3,74,37,0,351,349,1,0,0,0,351,352,1,0,0,0,352,49,
+        1,0,0,0,353,354,5,49,0,0,354,355,5,53,0,0,355,357,3,112,56,0,356,
+        358,3,52,26,0,357,356,1,0,0,0,357,358,1,0,0,0,358,359,1,0,0,0,359,
+        360,3,8,4,0,360,51,1,0,0,0,361,362,5,2,0,0,362,367,3,106,53,0,363,
+        364,5,1,0,0,364,366,3,106,53,0,365,363,1,0,0,0,366,369,1,0,0,0,367,
+        365,1,0,0,0,367,368,1,0,0,0,368,370,1,0,0,0,369,367,1,0,0,0,370,
+        371,5,3,0,0,371,53,1,0,0,0,372,373,5,89,0,0,373,374,3,112,56,0,374,
+        375,5,77,0,0,375,380,3,56,28,0,376,377,5,1,0,0,377,379,3,56,28,0,
+        378,376,1,0,0,0,379,382,1,0,0,0,380,378,1,0,0,0,380,381,1,0,0,0,
+        381,384,1,0,0,0,382,380,1,0,0,0,383,385,3,38,19,0,384,383,1,0,0,
+        0,384,385,1,0,0,0,385,55,1,0,0,0,386,387,3,106,53,0,387,388,5,95,
+        0,0,388,389,3,74,37,0,389,57,1,0,0,0,390,391,5,28,0,0,391,392,5,
+        42,0,0,392,394,3,112,56,0,393,395,3,38,19,0,394,393,1,0,0,0,394,
+        395,1,0,0,0,395,59,1,0,0,0,396,397,5,23,0,0,397,401,5,79,0,0,398,
+        399,5,46,0,0,399,400,5,61,0,0,400,402,5,37,0,0,401,398,1,0,0,0,401,
+        402,1,0,0,0,402,403,1,0,0,0,403,404,3,114,57,0,404,405,5,2,0,0,405,
+        410,3,62,31,0,406,407,5,1,0,0,407,409,3,62,31,0,408,406,1,0,0,0,
+        409,412,1,0,0,0,410,408,1,0,0,0,410,411,1,0,0,0,411,413,1,0,0,0,
+        412,410,1,0,0,0,413,416,5,3,0,0,414,415,5,94,0,0,415,417,3,94,47,
+        0,416,414,1,0,0,0,416,417,1,0,0,0,417,61,1,0,0,0,418,421,3,64,32,
+        0,419,421,3,68,34,0,420,418,1,0,0,0,420,419,1,0,0,0,421,63,1,0,0,
+        0,422,423,3,66,33,0,423,426,3,92,46,0,424,425,5,61,0,0,425,427,5,
+        62,0,0,426,424,1,0,0,0,426,427,1,0,0,0,427,430,1,0,0,0,428,429,5,
+        27,0,0,429,431,3,74,37,0,430,428,1,0,0,0,430,431,1,0,0,0,431,434,
+        1,0,0,0,432,433,5,71,0,0,433,435,5,56,0,0,434,432,1,0,0,0,434,435,
+        1,0,0,0,435,65,1,0,0,0,436,437,3,100,50,0,437,67,1,0,0,0,438,439,
+        5,22,0,0,439,441,3,100,50,0,440,438,1,0,0,0,440,441,1,0,0,0,441,
+        497,1,0,0,0,442,443,5,71,0,0,443,444,5,56,0,0,444,445,5,2,0,0,445,
+        450,3,106,53,0,446,447,5,1,0,0,447,449,3,106,53,0,448,446,1,0,0,
+        0,449,452,1,0,0,0,450,448,1,0,0,0,450,451,1,0,0,0,451,453,1,0,0,
+        0,452,450,1,0,0,0,453,454,5,3,0,0,454,498,1,0,0,0,455,456,5,88,0,
+        0,456,457,5,2,0,0,457,462,3,106,53,0,458,459,5,1,0,0,459,461,3,106,
+        53,0,460,458,1,0,0,0,461,464,1,0,0,0,462,460,1,0,0,0,462,463,1,0,
+        0,0,463,465,1,0,0,0,464,462,1,0,0,0,465,466,5,3,0,0,466,498,1,0,
+        0,0,467,468,5,19,0,0,468,469,5,2,0,0,469,470,3,74,37,0,470,471,5,
+        3,0,0,471,498,1,0,0,0,472,473,5,41,0,0,473,474,5,56,0,0,474,475,
+        5,2,0,0,475,480,3,106,53,0,476,477,5,1,0,0,477,479,3,106,53,0,478,
+        476,1,0,0,0,479,482,1,0,0,0,480,478,1,0,0,0,480,481,1,0,0,0,481,
+        483,1,0,0,0,482,480,1,0,0,0,483,484,5,3,0,0,484,485,5,73,0,0,485,
+        486,3,112,56,0,486,487,5,2,0,0,487,492,3,106,53,0,488,489,5,1,0,
+        0,489,491,3,106,53,0,490,488,1,0,0,0,491,494,1,0,0,0,492,490,1,0,
+        0,0,492,493,1,0,0,0,493,495,1,0,0,0,494,492,1,0,0,0,495,496,5,3,
+        0,0,496,498,1,0,0,0,497,442,1,0,0,0,497,455,1,0,0,0,497,467,1,0,
+        0,0,497,472,1,0,0,0,498,69,1,0,0,0,499,500,5,7,0,0,500,503,5,79,
+        0,0,501,502,5,46,0,0,502,504,5,37,0,0,503,501,1,0,0,0,503,504,1,
+        0,0,0,504,505,1,0,0,0,505,537,3,112,56,0,506,507,5,5,0,0,507,511,
+        5,21,0,0,508,509,5,46,0,0,509,510,5,61,0,0,510,512,5,37,0,0,511,
+        508,1,0,0,0,511,512,1,0,0,0,512,513,1,0,0,0,513,538,3,64,32,0,514,
+        515,5,32,0,0,515,518,5,21,0,0,516,517,5,46,0,0,517,519,5,37,0,0,
+        518,516,1,0,0,0,518,519,1,0,0,0,519,520,1,0,0,0,520,538,3,106,53,
+        0,521,522,5,74,0,0,522,523,5,85,0,0,523,538,3,114,57,0,524,525,5,
+        7,0,0,525,526,5,21,0,0,526,527,3,106,53,0,527,528,5,77,0,0,528,529,
+        5,27,0,0,529,530,3,74,37,0,530,538,1,0,0,0,531,532,5,7,0,0,532,533,
+        5,21,0,0,533,534,3,106,53,0,534,535,5,32,0,0,535,536,5,27,0,0,536,
+        538,1,0,0,0,537,506,1,0,0,0,537,514,1,0,0,0,537,521,1,0,0,0,537,
+        524,1,0,0,0,537,531,1,0,0,0,538,71,1,0,0,0,539,540,5,32,0,0,540,
+        543,5,79,0,0,541,542,5,46,0,0,542,544,5,37,0,0,543,541,1,0,0,0,543,
+        544,1,0,0,0,544,545,1,0,0,0,545,546,3,112,56,0,546,73,1,0,0,0,547,
+        548,3,76,38,0,548,75,1,0,0,0,549,550,6,38,-1,0,550,554,3,78,39,0,
+        551,552,5,61,0,0,552,554,3,76,38,3,553,549,1,0,0,0,553,551,1,0,0,
+        0,554,563,1,0,0,0,555,556,10,2,0,0,556,557,5,8,0,0,557,562,3,76,
+        38,3,558,559,10,1,0,0,559,560,5,68,0,0,560,562,3,76,38,2,561,555,
+        1,0,0,0,561,558,1,0,0,0,562,565,1,0,0,0,563,561,1,0,0,0,563,564,
+        1,0,0,0,564,77,1,0,0,0,565,563,1,0,0,0,566,568,3,84,42,0,567,569,
+        3,80,40,0,568,567,1,0,0,0,568,569,1,0,0,0,569,79,1,0,0,0,570,571,
+        3,82,41,0,571,572,3,84,42,0,572,626,1,0,0,0,573,575,5,61,0,0,574,
+        573,1,0,0,0,574,575,1,0,0,0,575,576,1,0,0,0,576,577,5,47,0,0,577,
+        578,5,2,0,0,578,583,3,74,37,0,579,580,5,1,0,0,580,582,3,74,37,0,
+        581,579,1,0,0,0,582,585,1,0,0,0,583,581,1,0,0,0,583,584,1,0,0,0,
+        584,586,1,0,0,0,585,583,1,0,0,0,586,587,5,3,0,0,587,626,1,0,0,0,
+        588,590,5,61,0,0,589,588,1,0,0,0,589,590,1,0,0,0,590,591,1,0,0,0,
+        591,592,5,47,0,0,592,593,5,2,0,0,593,594,3,8,4,0,594,595,5,3,0,0,
+        595,626,1,0,0,0,596,598,5,61,0,0,597,596,1,0,0,0,597,598,1,0,0,0,
+        598,599,1,0,0,0,599,600,5,11,0,0,600,601,3,84,42,0,601,602,5,8,0,
+        0,602,603,3,84,42,0,603,626,1,0,0,0,604,606,5,61,0,0,605,604,1,0,
+        0,0,605,606,1,0,0,0,606,607,1,0,0,0,607,608,5,59,0,0,608,611,3,84,
+        42,0,609,610,5,35,0,0,610,612,3,84,42,0,611,609,1,0,0,0,611,612,
+        1,0,0,0,612,626,1,0,0,0,613,615,5,54,0,0,614,616,5,61,0,0,615,614,
+        1,0,0,0,615,616,1,0,0,0,616,617,1,0,0,0,617,626,5,62,0,0,618,620,
+        5,54,0,0,619,621,5,61,0,0,620,619,1,0,0,0,620,621,1,0,0,0,621,622,
+        1,0,0,0,622,623,5,30,0,0,623,624,5,42,0,0,624,626,3,84,42,0,625,
+        570,1,0,0,0,625,574,1,0,0,0,625,589,1,0,0,0,625,597,1,0,0,0,625,
+        605,1,0,0,0,625,613,1,0,0,0,625,618,1,0,0,0,626,81,1,0,0,0,627,628,
+        7,4,0,0,628,83,1,0,0,0,629,630,6,42,-1,0,630,634,3,86,43,0,631,632,
+        7,5,0,0,632,634,3,84,42,4,633,629,1,0,0,0,633,631,1,0,0,0,634,646,
+        1,0,0,0,635,636,10,3,0,0,636,637,7,6,0,0,637,645,3,84,42,4,638,639,
+        10,2,0,0,639,640,7,5,0,0,640,645,3,84,42,3,641,642,10,1,0,0,642,
+        643,5,106,0,0,643,645,3,84,42,2,644,635,1,0,0,0,644,638,1,0,0,0,
+        644,641,1,0,0,0,645,648,1,0,0,0,646,644,1,0,0,0,646,647,1,0,0,0,
+        647,85,1,0,0,0,648,646,1,0,0,0,649,730,3,98,49,0,650,651,3,116,58,
+        0,651,663,5,2,0,0,652,654,3,24,12,0,653,652,1,0,0,0,653,654,1,0,
+        0,0,654,655,1,0,0,0,655,660,3,74,37,0,656,657,5,1,0,0,657,659,3,
+        74,37,0,658,656,1,0,0,0,659,662,1,0,0,0,660,658,1,0,0,0,660,661,
+        1,0,0,0,661,664,1,0,0,0,662,660,1,0,0,0,663,653,1,0,0,0,663,664,
+        1,0,0,0,664,665,1,0,0,0,665,666,5,3,0,0,666,730,1,0,0,0,667,669,
+        5,16,0,0,668,670,3,88,44,0,669,668,1,0,0,0,670,671,1,0,0,0,671,669,
+        1,0,0,0,671,672,1,0,0,0,672,675,1,0,0,0,673,674,5,33,0,0,674,676,
+        3,74,37,0,675,673,1,0,0,0,675,676,1,0,0,0,676,677,1,0,0,0,677,678,
+        5,34,0,0,678,730,1,0,0,0,679,680,5,16,0,0,680,682,3,74,37,0,681,
+        683,3,88,44,0,682,681,1,0,0,0,683,684,1,0,0,0,684,682,1,0,0,0,684,
+        685,1,0,0,0,685,688,1,0,0,0,686,687,5,33,0,0,687,689,3,74,37,0,688,
+        686,1,0,0,0,688,689,1,0,0,0,689,690,1,0,0,0,690,691,5,34,0,0,691,
+        730,1,0,0,0,692,693,5,17,0,0,693,694,5,2,0,0,694,695,3,74,37,0,695,
+        696,5,9,0,0,696,697,3,92,46,0,697,698,5,3,0,0,698,730,1,0,0,0,699,
+        700,5,20,0,0,700,701,5,2,0,0,701,706,3,74,37,0,702,703,5,1,0,0,703,
+        705,3,74,37,0,704,702,1,0,0,0,705,708,1,0,0,0,706,704,1,0,0,0,706,
+        707,1,0,0,0,707,709,1,0,0,0,708,706,1,0,0,0,709,710,5,3,0,0,710,
+        730,1,0,0,0,711,712,5,63,0,0,712,713,5,2,0,0,713,714,3,84,42,0,714,
+        715,5,1,0,0,715,716,3,84,42,0,716,717,5,3,0,0,717,730,1,0,0,0,718,
+        719,5,2,0,0,719,720,3,74,37,0,720,721,5,3,0,0,721,730,1,0,0,0,722,
+        723,5,37,0,0,723,724,5,2,0,0,724,725,3,8,4,0,725,726,5,3,0,0,726,
+        730,1,0,0,0,727,730,3,90,45,0,728,730,3,108,54,0,729,649,1,0,0,0,
+        729,650,1,0,0,0,729,667,1,0,0,0,729,679,1,0,0,0,729,692,1,0,0,0,
+        729,699,1,0,0,0,729,711,1,0,0,0,729,718,1,0,0,0,729,722,1,0,0,0,
+        729,727,1,0,0,0,729,728,1,0,0,0,730,87,1,0,0,0,731,732,5,92,0,0,
+        732,733,3,74,37,0,733,734,5,81,0,0,734,735,3,74,37,0,735,89,1,0,
+        0,0,736,737,5,2,0,0,737,738,3,8,4,0,738,739,5,3,0,0,739,91,1,0,0,
+        0,740,787,5,14,0,0,741,787,5,84,0,0,742,787,5,78,0,0,743,787,5,50,
+        0,0,744,787,5,51,0,0,745,787,5,12,0,0,746,787,5,40,0,0,747,787,5,
+        31,0,0,748,756,5,26,0,0,749,750,5,2,0,0,750,753,5,111,0,0,751,752,
+        5,1,0,0,752,754,5,111,0,0,753,751,1,0,0,0,753,754,1,0,0,0,754,755,
+        1,0,0,0,755,757,5,3,0,0,756,749,1,0,0,0,756,757,1,0,0,0,757,787,
+        1,0,0,0,758,766,5,65,0,0,759,760,5,2,0,0,760,763,5,111,0,0,761,762,
+        5,1,0,0,762,764,5,111,0,0,763,761,1,0,0,0,763,764,1,0,0,0,764,765,
+        1,0,0,0,765,767,5,3,0,0,766,759,1,0,0,0,766,767,1,0,0,0,767,787,
+        1,0,0,0,768,772,5,90,0,0,769,770,5,2,0,0,770,771,5,111,0,0,771,773,
+        5,3,0,0,772,769,1,0,0,0,772,773,1,0,0,0,773,787,1,0,0,0,774,778,
+        5,18,0,0,775,776,5,2,0,0,776,777,5,111,0,0,777,779,5,3,0,0,778,775,
+        1,0,0,0,778,779,1,0,0,0,779,787,1,0,0,0,780,787,5,80,0,0,781,787,
+        5,25,0,0,782,787,5,82,0,0,783,787,5,83,0,0,784,787,5,13,0,0,785,
+        787,5,91,0,0,786,740,1,0,0,0,786,741,1,0,0,0,786,742,1,0,0,0,786,
+        743,1,0,0,0,786,744,1,0,0,0,786,745,1,0,0,0,786,746,1,0,0,0,786,
+        747,1,0,0,0,786,748,1,0,0,0,786,758,1,0,0,0,786,768,1,0,0,0,786,
+        774,1,0,0,0,786,780,1,0,0,0,786,781,1,0,0,0,786,782,1,0,0,0,786,
+        783,1,0,0,0,786,784,1,0,0,0,786,785,1,0,0,0,787,93,1,0,0,0,788,789,
+        5,2,0,0,789,794,3,96,48,0,790,791,5,1,0,0,791,793,3,96,48,0,792,
+        790,1,0,0,0,793,796,1,0,0,0,794,792,1,0,0,0,794,795,1,0,0,0,795,
+        797,1,0,0,0,796,794,1,0,0,0,797,798,5,3,0,0,798,95,1,0,0,0,799,800,
+        3,100,50,0,800,801,5,95,0,0,801,802,3,98,49,0,802,97,1,0,0,0,803,
+        812,5,62,0,0,804,812,5,86,0,0,805,812,5,38,0,0,806,812,5,111,0,0,
+        807,812,5,112,0,0,808,812,5,113,0,0,809,812,5,109,0,0,810,812,5,
+        110,0,0,811,803,1,0,0,0,811,804,1,0,0,0,811,805,1,0,0,0,811,806,
+        1,0,0,0,811,807,1,0,0,0,811,808,1,0,0,0,811,809,1,0,0,0,811,810,
+        1,0,0,0,812,99,1,0,0,0,813,819,5,114,0,0,814,819,5,115,0,0,815,819,
+        5,116,0,0,816,819,5,117,0,0,817,819,3,118,59,0,818,813,1,0,0,0,818,
+        814,1,0,0,0,818,815,1,0,0,0,818,816,1,0,0,0,818,817,1,0,0,0,819,
+        101,1,0,0,0,820,825,3,100,50,0,821,822,5,4,0,0,822,824,3,100,50,
+        0,823,821,1,0,0,0,824,827,1,0,0,0,825,823,1,0,0,0,825,826,1,0,0,
+        0,826,103,1,0,0,0,827,825,1,0,0,0,828,835,3,102,51,0,829,830,4,52,
+        9,0,830,831,3,102,51,0,831,832,5,4,0,0,832,833,3,110,55,0,833,835,
+        1,0,0,0,834,828,1,0,0,0,834,829,1,0,0,0,835,105,1,0,0,0,836,840,
+        3,100,50,0,837,838,4,53,10,0,838,840,3,110,55,0,839,836,1,0,0,0,
+        839,837,1,0,0,0,840,107,1,0,0,0,841,842,3,104,52,0,842,109,1,0,0,
+        0,843,844,1,0,0,0,844,111,1,0,0,0,845,846,3,102,51,0,846,113,1,0,
+        0,0,847,848,3,102,51,0,848,115,1,0,0,0,849,850,3,102,51,0,850,117,
+        1,0,0,0,851,852,7,7,0,0,852,119,1,0,0,0,101,123,132,141,144,150,
+        157,162,175,183,188,198,202,209,213,216,219,222,225,228,234,237,
+        246,254,269,273,277,281,285,288,292,295,302,308,313,320,327,336,
+        341,345,351,357,367,380,384,394,401,410,416,420,426,430,434,440,
+        450,462,480,492,497,503,511,518,537,543,553,561,563,568,574,583,
+        589,597,605,611,615,620,625,633,644,646,653,660,663,671,675,684,
+        688,706,729,753,756,763,766,772,778,786,794,811,818,825,834,839
     ];
 
     private static __ATN: antlr.ATN;
@@ -4627,6 +4843,9 @@ export class NamedQueryContext extends antlr.ParserRuleContext {
     public identifier(): IdentifierContext {
         return this.getRuleContext(0, IdentifierContext)!;
     }
+    public cteColumnList(): CteColumnListContext | null {
+        return this.getRuleContext(0, CteColumnListContext);
+    }
     public override get ruleIndex(): number {
         return GenericSqlParser.RULE_namedQuery;
     }
@@ -4643,6 +4862,42 @@ export class NamedQueryContext extends antlr.ParserRuleContext {
     public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
         if (visitor.visitNamedQuery) {
             return visitor.visitNamedQuery(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+
+
+export class CteColumnListContext extends antlr.ParserRuleContext {
+    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
+        super(parent, invokingState);
+    }
+    public identifier(): IdentifierContext[];
+    public identifier(i: number): IdentifierContext | null;
+    public identifier(i?: number): IdentifierContext[] | IdentifierContext | null {
+        if (i === undefined) {
+            return this.getRuleContexts(IdentifierContext);
+        }
+
+        return this.getRuleContext(i, IdentifierContext);
+    }
+    public override get ruleIndex(): number {
+        return GenericSqlParser.RULE_cteColumnList;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterCteColumnList) {
+             listener.enterCteColumnList(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitCteColumnList) {
+             listener.exitCteColumnList(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitCteColumnList) {
+            return visitor.visitCteColumnList(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -4882,8 +5137,21 @@ export class SelectItemContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public expression(): ExpressionContext | null {
-        return this.getRuleContext(0, ExpressionContext);
+    public override get ruleIndex(): number {
+        return GenericSqlParser.RULE_selectItem;
+    }
+    public override copyFrom(ctx: SelectItemContext): void {
+        super.copyFrom(ctx);
+    }
+}
+export class SelectExpressionElementContext extends SelectItemContext {
+    public _alias?: IdentifierContext;
+    public constructor(ctx: SelectItemContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public expression(): ExpressionContext {
+        return this.getRuleContext(0, ExpressionContext)!;
     }
     public identifier(): IdentifierContext | null {
         return this.getRuleContext(0, IdentifierContext);
@@ -4891,28 +5159,100 @@ export class SelectItemContext extends antlr.ParserRuleContext {
     public KW_AS(): antlr.TerminalNode | null {
         return this.getToken(GenericSqlParser.KW_AS, 0);
     }
-    public qualifiedName(): QualifiedNameContext | null {
-        return this.getRuleContext(0, QualifiedNameContext);
-    }
-    public ASTERISK(): antlr.TerminalNode | null {
-        return this.getToken(GenericSqlParser.ASTERISK, 0);
-    }
-    public override get ruleIndex(): number {
-        return GenericSqlParser.RULE_selectItem;
-    }
     public override enterRule(listener: GenericSqlListener): void {
-        if(listener.enterSelectItem) {
-             listener.enterSelectItem(this);
+        if(listener.enterSelectExpressionElement) {
+             listener.enterSelectExpressionElement(this);
         }
     }
     public override exitRule(listener: GenericSqlListener): void {
-        if(listener.exitSelectItem) {
-             listener.exitSelectItem(this);
+        if(listener.exitSelectExpressionElement) {
+             listener.exitSelectExpressionElement(this);
         }
     }
     public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
-        if (visitor.visitSelectItem) {
-            return visitor.visitSelectItem(this);
+        if (visitor.visitSelectExpressionElement) {
+            return visitor.visitSelectExpressionElement(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+export class SelectEmptyElementContext extends SelectItemContext {
+    public constructor(ctx: SelectItemContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public emptyColumn(): EmptyColumnContext {
+        return this.getRuleContext(0, EmptyColumnContext)!;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterSelectEmptyElement) {
+             listener.enterSelectEmptyElement(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitSelectEmptyElement) {
+             listener.exitSelectEmptyElement(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitSelectEmptyElement) {
+            return visitor.visitSelectEmptyElement(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+export class SelectStarElementContext extends SelectItemContext {
+    public constructor(ctx: SelectItemContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public qualifiedName(): QualifiedNameContext {
+        return this.getRuleContext(0, QualifiedNameContext)!;
+    }
+    public ASTERISK(): antlr.TerminalNode {
+        return this.getToken(GenericSqlParser.ASTERISK, 0)!;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterSelectStarElement) {
+             listener.enterSelectStarElement(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitSelectStarElement) {
+             listener.exitSelectStarElement(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitSelectStarElement) {
+            return visitor.visitSelectStarElement(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+export class SelectAllElementContext extends SelectItemContext {
+    public constructor(ctx: SelectItemContext) {
+        super(ctx.parent, ctx.invokingState);
+        super.copyFrom(ctx);
+    }
+    public ASTERISK(): antlr.TerminalNode {
+        return this.getToken(GenericSqlParser.ASTERISK, 0)!;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterSelectAllElement) {
+             listener.enterSelectAllElement(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitSelectAllElement) {
+             listener.exitSelectAllElement(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitSelectAllElement) {
+            return visitor.visitSelectAllElement(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -5091,6 +5431,7 @@ export class JoinTypeContext extends antlr.ParserRuleContext {
 
 
 export class AliasedRelationContext extends antlr.ParserRuleContext {
+    public _alias?: IdentifierContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
@@ -5198,8 +5539,11 @@ export class WhereClauseContext extends antlr.ParserRuleContext {
     public KW_WHERE(): antlr.TerminalNode {
         return this.getToken(GenericSqlParser.KW_WHERE, 0)!;
     }
-    public expression(): ExpressionContext {
-        return this.getRuleContext(0, ExpressionContext)!;
+    public expression(): ExpressionContext | null {
+        return this.getRuleContext(0, ExpressionContext);
+    }
+    public emptyColumn(): EmptyColumnContext | null {
+        return this.getRuleContext(0, EmptyColumnContext);
     }
     public override get ruleIndex(): number {
         return GenericSqlParser.RULE_whereClause;
@@ -5276,8 +5620,11 @@ export class HavingClauseContext extends antlr.ParserRuleContext {
     public KW_HAVING(): antlr.TerminalNode {
         return this.getToken(GenericSqlParser.KW_HAVING, 0)!;
     }
-    public expression(): ExpressionContext {
-        return this.getRuleContext(0, ExpressionContext)!;
+    public expression(): ExpressionContext | null {
+        return this.getRuleContext(0, ExpressionContext);
+    }
+    public emptyColumn(): EmptyColumnContext | null {
+        return this.getRuleContext(0, EmptyColumnContext);
     }
     public override get ruleIndex(): number {
         return GenericSqlParser.RULE_havingClause;
@@ -5730,11 +6077,12 @@ export class TableElementContext extends antlr.ParserRuleContext {
 
 
 export class ColumnDefinitionContext extends antlr.ParserRuleContext {
+    public _colType?: DataTypeContext;
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public columnRef(): ColumnRefContext {
-        return this.getRuleContext(0, ColumnRefContext)!;
+    public columnRefCreate(): ColumnRefCreateContext {
+        return this.getRuleContext(0, ColumnRefCreateContext)!;
     }
     public dataType(): DataTypeContext {
         return this.getRuleContext(0, DataTypeContext)!;
@@ -5773,6 +6121,36 @@ export class ColumnDefinitionContext extends antlr.ParserRuleContext {
     public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
         if (visitor.visitColumnDefinition) {
             return visitor.visitColumnDefinition(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+
+
+export class ColumnRefCreateContext extends antlr.ParserRuleContext {
+    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
+        super(parent, invokingState);
+    }
+    public identifier(): IdentifierContext {
+        return this.getRuleContext(0, IdentifierContext)!;
+    }
+    public override get ruleIndex(): number {
+        return GenericSqlParser.RULE_columnRefCreate;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterColumnRefCreate) {
+             listener.enterColumnRefCreate(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitColumnRefCreate) {
+             listener.exitColumnRefCreate(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitColumnRefCreate) {
+            return visitor.visitColumnRefCreate(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -6775,8 +7153,8 @@ export class ColumnReferenceContext extends PrimaryExpressionContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public qualifiedName(): QualifiedNameContext {
-        return this.getRuleContext(0, QualifiedNameContext)!;
+    public columnName(): ColumnNameContext {
+        return this.getRuleContext(0, ColumnNameContext)!;
     }
     public override enterRule(listener: GenericSqlListener): void {
         if(listener.enterColumnReference) {
@@ -6856,8 +7234,8 @@ export class FunctionCallContext extends PrimaryExpressionContext {
         super(ctx.parent, ctx.invokingState);
         super.copyFrom(ctx);
     }
-    public qualifiedName(): QualifiedNameContext {
-        return this.getRuleContext(0, QualifiedNameContext)!;
+    public functionName(): FunctionNameContext {
+        return this.getRuleContext(0, FunctionNameContext)!;
     }
     public expression(): ExpressionContext[];
     public expression(i: number): ExpressionContext | null;
@@ -7562,12 +7940,48 @@ export class QualifiedNameContext extends antlr.ParserRuleContext {
 }
 
 
+export class QualifiedNameAllowEmptyContext extends antlr.ParserRuleContext {
+    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
+        super(parent, invokingState);
+    }
+    public qualifiedName(): QualifiedNameContext {
+        return this.getRuleContext(0, QualifiedNameContext)!;
+    }
+    public emptyColumn(): EmptyColumnContext | null {
+        return this.getRuleContext(0, EmptyColumnContext);
+    }
+    public override get ruleIndex(): number {
+        return GenericSqlParser.RULE_qualifiedNameAllowEmpty;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterQualifiedNameAllowEmpty) {
+             listener.enterQualifiedNameAllowEmpty(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitQualifiedNameAllowEmpty) {
+             listener.exitQualifiedNameAllowEmpty(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitQualifiedNameAllowEmpty) {
+            return visitor.visitQualifiedNameAllowEmpty(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+
+
 export class ColumnRefContext extends antlr.ParserRuleContext {
     public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
         super(parent, invokingState);
     }
-    public identifier(): IdentifierContext {
-        return this.getRuleContext(0, IdentifierContext)!;
+    public identifier(): IdentifierContext | null {
+        return this.getRuleContext(0, IdentifierContext);
+    }
+    public emptyColumn(): EmptyColumnContext | null {
+        return this.getRuleContext(0, EmptyColumnContext);
     }
     public override get ruleIndex(): number {
         return GenericSqlParser.RULE_columnRef;
@@ -7585,6 +7999,63 @@ export class ColumnRefContext extends antlr.ParserRuleContext {
     public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
         if (visitor.visitColumnRef) {
             return visitor.visitColumnRef(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+
+
+export class ColumnNameContext extends antlr.ParserRuleContext {
+    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
+        super(parent, invokingState);
+    }
+    public qualifiedNameAllowEmpty(): QualifiedNameAllowEmptyContext {
+        return this.getRuleContext(0, QualifiedNameAllowEmptyContext)!;
+    }
+    public override get ruleIndex(): number {
+        return GenericSqlParser.RULE_columnName;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterColumnName) {
+             listener.enterColumnName(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitColumnName) {
+             listener.exitColumnName(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitColumnName) {
+            return visitor.visitColumnName(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+
+
+export class EmptyColumnContext extends antlr.ParserRuleContext {
+    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
+        super(parent, invokingState);
+    }
+    public override get ruleIndex(): number {
+        return GenericSqlParser.RULE_emptyColumn;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterEmptyColumn) {
+             listener.enterEmptyColumn(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitEmptyColumn) {
+             listener.exitEmptyColumn(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitEmptyColumn) {
+            return visitor.visitEmptyColumn(this);
         } else {
             return visitor.visitChildren(this);
         }
@@ -7645,6 +8116,36 @@ export class TableNameCreateContext extends antlr.ParserRuleContext {
     public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
         if (visitor.visitTableNameCreate) {
             return visitor.visitTableNameCreate(this);
+        } else {
+            return visitor.visitChildren(this);
+        }
+    }
+}
+
+
+export class FunctionNameContext extends antlr.ParserRuleContext {
+    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number) {
+        super(parent, invokingState);
+    }
+    public qualifiedName(): QualifiedNameContext {
+        return this.getRuleContext(0, QualifiedNameContext)!;
+    }
+    public override get ruleIndex(): number {
+        return GenericSqlParser.RULE_functionName;
+    }
+    public override enterRule(listener: GenericSqlListener): void {
+        if(listener.enterFunctionName) {
+             listener.enterFunctionName(this);
+        }
+    }
+    public override exitRule(listener: GenericSqlListener): void {
+        if(listener.exitFunctionName) {
+             listener.exitFunctionName(this);
+        }
+    }
+    public override accept<Result>(visitor: GenericSqlVisitor<Result>): Result | null {
+        if (visitor.visitFunctionName) {
+            return visitor.visitFunctionName(this);
         } else {
             return visitor.visitChildren(this);
         }

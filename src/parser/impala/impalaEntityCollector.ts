@@ -16,6 +16,7 @@ import {
     FunctionNameCreateContext,
     InsertStatementContext,
     KuduTableElementContext,
+    NamedQueryContext,
     QueryStatementContext,
     SelectExpressionColumnNameContext,
     SelectItemContext,
@@ -129,6 +130,17 @@ export class ImpalaEntityCollector extends EntityCollector implements ImpalaSqlP
                 endContextList: [CreateViewContext.name],
             },
         ]);
+    }
+
+    exitNamedQuery(ctx: NamedQueryContext) {
+        this.collectCte(
+            ctx,
+            ctx.identifier(),
+            ctx.subQueryRelation(),
+            ctx.stop?.tokenIndex ?? -1,
+            [],
+            ctx.columnAliases()
+        );
     }
 
     exitViewNamePath(ctx: ViewNamePathContext) {

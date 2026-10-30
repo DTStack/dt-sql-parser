@@ -56,6 +56,12 @@ FROM
 WHERE
     r_currency = o_currency;
 
+-- Temporal Join with expression (dateTimeExpression inlined to expression)
+SELECT o.order_id, o.total, c.country
+FROM Orders o
+LEFT JOIN currency_rates FOR SYSTEM_TIME AS OF o.order_time + INTERVAL '1' HOUR AS c
+ON o.currency = c.currency;
+
 -- Lookup Join
 SELECT o.order_id, o.total, c.country, c.zip
 FROM Orders AS o

@@ -96,7 +96,7 @@ createKuduTableAsSelect
     : KW_CREATE KW_EXTERNAL? KW_TABLE ifNotExists? tableNameCreate (
         LPAREN kuduTableElement (COMMA kuduTableElement)* (COMMA KW_PRIMARY KW_KEY columnAliases)? RPAREN
     )? (KW_PRIMARY KW_KEY columnAliases?)? (KW_PARTITION KW_BY kuduPartitionClause)? (
-        commentClause
+        KW_COMMENT comment=stringLiteral
     )? KW_STORED KW_AS KW_KUDU (KW_TBLPROPERTIES tblProp=properties)? (KW_AS queryStatement)?
     ;
 
@@ -156,8 +156,13 @@ alterDatabase
     ;
 
 alterStatsKey
-    : KW_ALTER KW_TABLE tableNamePath KW_SET KW_COLUMN KW_STATS columnNamePath LPAREN statsKey EQ stringLiteral (
-        COMMA statsKey EQ stringLiteral
+    : KW_ALTER KW_TABLE tableNamePath KW_SET KW_COLUMN KW_STATS columnNamePath LPAREN (
+        STATS_NUMDVS
+        | STATS_NUMNULLS
+        | STATS_AVGSIZE
+        | STATS_MAXSIZE
+    ) EQ stringLiteral (
+        COMMA (STATS_NUMDVS | STATS_NUMNULLS | STATS_AVGSIZE | STATS_MAXSIZE) EQ stringLiteral
     )? RPAREN
     ;
 
@@ -670,13 +675,6 @@ kuduStorageAttr
     | KW_BLOCK_SIZE number
     ;
 
-statsKey
-    : STATS_NUMDVS
-    | STATS_NUMNULLS
-    | STATS_AVGSIZE
-    | STATS_MAXSIZE
-    ;
-
 fileFormat
     : KW_TEXTFILE
     | KW_PARQUET
@@ -870,15 +868,10 @@ joinCriteria
 
 sampledRelation
     : aliasedRelation (
-        KW_TABLESAMPLE sampleType LPAREN percentage=expression RPAREN (
+        KW_TABLESAMPLE (KW_BERNOULLI | KW_SYSTEM) LPAREN percentage=expression RPAREN (
             KW_REPEATABLE LPAREN seed=expression RPAREN
         )?
     )?
-    ;
-
-sampleType
-    : KW_BERNOULLI
-    | KW_SYSTEM
     ;
 
 aliasedRelation
@@ -962,7 +955,7 @@ primaryExpression
     | identifier stringLiteral                                                                     # typeConstructor
     | DOUBLE_PRECISION stringLiteral                                                               # typeConstructor
     | number                                                                                       # numericLiteral
-    | booleanValue                                                                                 # booleanLiteral
+    | (KW_TRUE | KW_FALSE)                                                                         # booleanLiteral
     | stringLiteral                                                                                # stringLiteralValues
     | BINARY_LITERAL                                                                               # binaryLiteral
     | QUESTION                                                                                     # parameter
@@ -991,7 +984,7 @@ primaryExpression
     | name=KW_CURRENT_USER                                                                         # currentUser
     | name=KW_CURRENT_PATH                                                                         # currentPath
     | KW_SUBSTRING LPAREN valueExpression KW_FROM valueExpression (KW_FOR valueExpression)? RPAREN # substring
-    | KW_NORMALIZE LPAREN valueExpression (COMMA normalForm)? RPAREN                               # normalize
+    | KW_NORMALIZE LPAREN valueExpression (COMMA (KW_NFD | KW_NFC | KW_NFKD | KW_NFKC))? RPAREN    # normalize
     | KW_EXTRACT LPAREN identifier KW_FROM valueExpression RPAREN                                  # extract
     | LPAREN expression RPAREN                                                                     # parenthesizedExpression
     | KW_GROUPING LPAREN (qualifiedName (COMMA qualifiedName)*)? RPAREN                            # groupingOperation
@@ -1017,11 +1010,6 @@ comparisonQuantifier
     | KW_ANY
     ;
 
-booleanValue
-    : KW_TRUE
-    | KW_FALSE
-    ;
-
 interval
     : INTEGER_VALUE intervalField
     | LPAREN INTEGER_VALUE RPAREN intervalField
@@ -1042,13 +1030,6 @@ intervalField
     | KW_MINUTES
     | KW_SECOND
     | KW_SECONDS
-    ;
-
-normalForm
-    : KW_NFD
-    | KW_NFC
-    | KW_NFKD
-    | KW_NFKC
     ;
 
 type
@@ -1116,10 +1097,8 @@ over
 * https://github.com/tunnelvisionlabs/antlr4ts/issues/417
 */
 windowFrame
-    : frameType=KW_RANGE start_=frameBound
-    | frameType=KW_ROWS start_=frameBound
-    | frameType=KW_RANGE KW_BETWEEN start_=frameBound KW_AND end=frameBound
-    | frameType=KW_ROWS KW_BETWEEN start_=frameBound KW_AND end=frameBound
+    : frameType=(KW_RANGE | KW_ROWS) start_=frameBound
+    | frameType=(KW_RANGE | KW_ROWS) KW_BETWEEN start_=frameBound KW_AND end=frameBound
     ;
 
 frameBound

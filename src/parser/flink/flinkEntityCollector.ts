@@ -28,6 +28,7 @@ import {
     TableReferenceContext,
     ViewPathContext,
     ViewPathCreateContext,
+    WithItemContext,
 } from '../../lib/flink/FlinkSqlParser';
 import { FlinkSqlParserListener } from '../../lib/flink/FlinkSqlParserListener';
 import {
@@ -117,6 +118,16 @@ export class FlinkEntityCollector extends EntityCollector implements FlinkSqlPar
                 endContextList: [CreateTableContext.name],
             },
         ]);
+    }
+
+    exitWithItem(ctx: WithItemContext) {
+        this.collectCte(
+            ctx,
+            ctx.identifier(),
+            ctx.queryStatement(),
+            ctx.stop?.tokenIndex ?? -1,
+            ctx.columnName()
+        );
     }
 
     exitViewPath(ctx: ViewPathContext) {

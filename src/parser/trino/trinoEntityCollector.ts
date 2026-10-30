@@ -12,6 +12,7 @@ import {
     CreateViewContext,
     ExpressionSourceTableContext,
     InsertIntoContext,
+    NamedQueryContext,
     QueryStatementContext,
     SchemaNameCreateContext,
     SchemaRefContext,
@@ -93,6 +94,11 @@ export class TrinoEntityCollector extends EntityCollector implements TrinoSqlLis
                 endContextList: [CreateTableContext.name, CreateTableAsSelectContext.name],
             },
         ]);
+    }
+
+    exitNamedQuery(ctx: NamedQueryContext) {
+        const columns = ctx.columnAliases()?.identifier() ?? [];
+        this.collectCte(ctx, ctx.identifier(), ctx.query(), ctx.stop?.tokenIndex ?? -1, columns);
     }
 
     exitViewRef(ctx: ViewRefContext) {
