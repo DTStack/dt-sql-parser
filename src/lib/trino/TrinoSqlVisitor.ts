@@ -32,6 +32,7 @@ import { DeleteContext } from "./TrinoSqlParser.js";
 import { TruncateTableContext } from "./TrinoSqlParser.js";
 import { CommentTableContext } from "./TrinoSqlParser.js";
 import { CommentViewContext } from "./TrinoSqlParser.js";
+import { CommentMaterializedViewContext } from "./TrinoSqlParser.js";
 import { CommentColumnContext } from "./TrinoSqlParser.js";
 import { RenameTableContext } from "./TrinoSqlParser.js";
 import { AddColumnContext } from "./TrinoSqlParser.js";
@@ -49,9 +50,11 @@ import { RefreshMaterializedViewContext } from "./TrinoSqlParser.js";
 import { DropMaterializedViewContext } from "./TrinoSqlParser.js";
 import { RenameMaterializedViewContext } from "./TrinoSqlParser.js";
 import { SetMaterializedViewPropertiesContext } from "./TrinoSqlParser.js";
+import { SetMaterializedViewAuthorizationContext } from "./TrinoSqlParser.js";
 import { DropViewContext } from "./TrinoSqlParser.js";
 import { RenameViewContext } from "./TrinoSqlParser.js";
 import { SetViewAuthorizationContext } from "./TrinoSqlParser.js";
+import { RefreshViewContext } from "./TrinoSqlParser.js";
 import { CallContext } from "./TrinoSqlParser.js";
 import { CreateFunctionContext } from "./TrinoSqlParser.js";
 import { DropFunctionContext } from "./TrinoSqlParser.js";
@@ -534,6 +537,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitCommentView?: (ctx: CommentViewContext) => Result;
     /**
+     * Visit a parse tree produced by the `commentMaterializedView`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCommentMaterializedView?: (ctx: CommentMaterializedViewContext) => Result;
+    /**
      * Visit a parse tree produced by the `commentColumn`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -653,6 +663,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      */
     visitSetMaterializedViewProperties?: (ctx: SetMaterializedViewPropertiesContext) => Result;
     /**
+     * Visit a parse tree produced by the `setMaterializedViewAuthorization`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSetMaterializedViewAuthorization?: (ctx: SetMaterializedViewAuthorizationContext) => Result;
+    /**
      * Visit a parse tree produced by the `dropView`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -673,6 +690,13 @@ export class TrinoSqlVisitor<Result> extends AbstractParseTreeVisitor<Result> {
      * @return the visitor result
      */
     visitSetViewAuthorization?: (ctx: SetViewAuthorizationContext) => Result;
+    /**
+     * Visit a parse tree produced by the `refreshView`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitRefreshView?: (ctx: RefreshViewContext) => Result;
     /**
      * Visit a parse tree produced by the `call`
      * labeled alternative in `TrinoSqlParser.statement`.

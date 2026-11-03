@@ -9,3 +9,9 @@ CREATE VIEW a COMMENT '' AS SELECT * FROM t;
 CREATE VIEW bar.foo AS SELECT * FROM t;
 CREATE VIEW "awesome view" AS SELECT * FROM t;
 CREATE VIEW "awesome schema"."awesome view" AS SELECT * FROM t;
+CREATE VIEW IF NOT EXISTS a AS SELECT * FROM t;
+CREATE VIEW IF NOT EXISTS catalog.schema.a AS SELECT * FROM t;
+create view if not exists "awesome schema"."awesome view" as select * from t;
+CREATE VIEW IF NOT EXISTS a COMMENT 'view comment' SECURITY INVOKER WITH (foo = 'bar')
+AS WITH source AS (SELECT id FROM t) SELECT id FROM source;
+CREATE VIEW if AS SELECT * FROM t;

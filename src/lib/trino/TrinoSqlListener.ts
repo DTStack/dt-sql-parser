@@ -32,6 +32,7 @@ import { DeleteContext } from "./TrinoSqlParser.js";
 import { TruncateTableContext } from "./TrinoSqlParser.js";
 import { CommentTableContext } from "./TrinoSqlParser.js";
 import { CommentViewContext } from "./TrinoSqlParser.js";
+import { CommentMaterializedViewContext } from "./TrinoSqlParser.js";
 import { CommentColumnContext } from "./TrinoSqlParser.js";
 import { RenameTableContext } from "./TrinoSqlParser.js";
 import { AddColumnContext } from "./TrinoSqlParser.js";
@@ -49,9 +50,11 @@ import { RefreshMaterializedViewContext } from "./TrinoSqlParser.js";
 import { DropMaterializedViewContext } from "./TrinoSqlParser.js";
 import { RenameMaterializedViewContext } from "./TrinoSqlParser.js";
 import { SetMaterializedViewPropertiesContext } from "./TrinoSqlParser.js";
+import { SetMaterializedViewAuthorizationContext } from "./TrinoSqlParser.js";
 import { DropViewContext } from "./TrinoSqlParser.js";
 import { RenameViewContext } from "./TrinoSqlParser.js";
 import { SetViewAuthorizationContext } from "./TrinoSqlParser.js";
+import { RefreshViewContext } from "./TrinoSqlParser.js";
 import { CallContext } from "./TrinoSqlParser.js";
 import { CreateFunctionContext } from "./TrinoSqlParser.js";
 import { DropFunctionContext } from "./TrinoSqlParser.js";
@@ -643,6 +646,18 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitCommentView?: (ctx: CommentViewContext) => void;
     /**
+     * Enter a parse tree produced by the `commentMaterializedView`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterCommentMaterializedView?: (ctx: CommentMaterializedViewContext) => void;
+    /**
+     * Exit a parse tree produced by the `commentMaterializedView`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitCommentMaterializedView?: (ctx: CommentMaterializedViewContext) => void;
+    /**
      * Enter a parse tree produced by the `commentColumn`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -847,6 +862,18 @@ export class TrinoSqlListener implements ParseTreeListener {
      */
     exitSetMaterializedViewProperties?: (ctx: SetMaterializedViewPropertiesContext) => void;
     /**
+     * Enter a parse tree produced by the `setMaterializedViewAuthorization`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterSetMaterializedViewAuthorization?: (ctx: SetMaterializedViewAuthorizationContext) => void;
+    /**
+     * Exit a parse tree produced by the `setMaterializedViewAuthorization`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitSetMaterializedViewAuthorization?: (ctx: SetMaterializedViewAuthorizationContext) => void;
+    /**
      * Enter a parse tree produced by the `dropView`
      * labeled alternative in `TrinoSqlParser.statement`.
      * @param ctx the parse tree
@@ -882,6 +909,18 @@ export class TrinoSqlListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSetViewAuthorization?: (ctx: SetViewAuthorizationContext) => void;
+    /**
+     * Enter a parse tree produced by the `refreshView`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterRefreshView?: (ctx: RefreshViewContext) => void;
+    /**
+     * Exit a parse tree produced by the `refreshView`
+     * labeled alternative in `TrinoSqlParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitRefreshView?: (ctx: RefreshViewContext) => void;
     /**
      * Enter a parse tree produced by the `call`
      * labeled alternative in `TrinoSqlParser.statement`.
