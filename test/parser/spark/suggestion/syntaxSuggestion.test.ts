@@ -842,4 +842,72 @@ describe('Spark SQL Syntax Suggestion', () => {
         expect(suggestion).not.toBeUndefined();
         expect(suggestion?.wordRanges.map((token) => token.text)).toEqual(['db', '.']);
     });
+
+    test('Lateral view function suggestion', () => {
+        const cases: { sql: string; column: number; expected: string[]; checkOuterKw?: boolean }[] =
+            [
+                {
+                    sql: `SELECT * FROM person LATERAL VIEW `,
+                    column: 35,
+                    expected: [],
+                    checkOuterKw: true,
+                },
+                {
+                    sql: `SELECT * FROM person LATERAL VIEW exp`,
+                    column: 38,
+                    expected: ['exp'],
+                },
+                {
+                    sql: `SELECT * FROM person LATERAL VIEW db.`,
+                    column: 38,
+                    expected: ['db', '.'],
+                },
+                {
+                    sql: `SELECT * FROM person LATERAL VIEW db.exp`,
+                    column: 41,
+                    expected: ['db', '.', 'exp'],
+                },
+                {
+                    sql: `SELECT * FROM person LATERAL VIEW cat.db.exp`,
+                    column: 45,
+                    expected: ['cat', '.', 'db', '.', 'exp'],
+                },
+                {
+                    sql: `SELECT * FROM person LATERAL VIEW OUTER db.exp`,
+                    column: 47,
+                    expected: ['db', '.', 'exp'],
+                },
+                {
+                    sql: `SELECT * FROM person LATERAL VIEW EXPLODE(arr1) t1 AS c1 LATERAL VIEW pos`,
+                    column: 74,
+                    expected: ['pos'],
+                },
+                {
+                    sql: `FROM person SELECT * LATERAL VIEW exp`,
+                    column: 38,
+                    expected: ['exp'],
+                },
+            ];
+
+        cases.forEach(({ sql, column, expected, checkOuterKw }) => {
+            const result = spark.getSuggestionAtCaretPosition(sql, {
+                lineNumber: 1,
+                column,
+            });
+            const syntaxes = result?.syntax;
+            const fnSuggestion = syntaxes?.find(
+                (syn) => syn.syntaxContextType === EntityContextType.FUNCTION
+            );
+            const viewSuggestion = syntaxes?.find(
+                (syn) => syn.syntaxContextType === EntityContextType.VIEW
+            );
+
+            expect(fnSuggestion).not.toBeUndefined();
+            expect(viewSuggestion).toBeUndefined();
+            expect(fnSuggestion?.wordRanges.map((token) => token.text)).toEqual(expected);
+            if (checkOuterKw) {
+                expect(result?.keywords).toContain('OUTER');
+            }
+        });
+    });
 });

@@ -659,7 +659,7 @@ ifExists
     ;
 
 lateralView
-    : KW_LATERAL KW_VIEW (KW_OUTER)? viewName LEFT_PAREN (expression (COMMA expression)*)? RIGHT_PAREN tableAlias (
+    : KW_LATERAL KW_VIEW (KW_OUTER)? functionName LEFT_PAREN (expression (COMMA expression)*)? RIGHT_PAREN tableAlias (
         KW_AS? colName+=identifier (COMMA colName+=identifier)*
     )?
     ;

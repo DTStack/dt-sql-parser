@@ -10924,7 +10924,7 @@ export class SparkSqlParser extends SQLParserBase {
                 break;
             }
             this.state = 2478;
-            this.viewName();
+            this.functionName();
             this.state = 2479;
             this.match(SparkSqlParser.LEFT_PAREN);
             this.state = 2488;
@@ -19676,7 +19676,7 @@ export class SparkSqlParser extends SQLParserBase {
         105,0,0,2469,165,1,0,0,0,2470,2471,5,137,0,0,2471,2472,5,105,0,0,
         2472,167,1,0,0,0,2473,2474,5,158,0,0,2474,2476,5,338,0,0,2475,2477,
         5,211,0,0,2476,2475,1,0,0,0,2476,2477,1,0,0,0,2477,2478,1,0,0,0,
-        2478,2479,3,76,38,0,2479,2488,5,2,0,0,2480,2485,3,254,127,0,2481,
+        2478,2479,3,344,172,0,2479,2488,5,2,0,0,2480,2485,3,254,127,0,2481,
         2482,5,4,0,0,2482,2484,3,254,127,0,2483,2481,1,0,0,0,2484,2487,1,
         0,0,0,2485,2483,1,0,0,0,2485,2486,1,0,0,0,2486,2489,1,0,0,0,2487,
         2485,1,0,0,0,2488,2480,1,0,0,0,2488,2489,1,0,0,0,2489,2490,1,0,0,
@@ -28874,8 +28874,8 @@ export class LateralViewContext extends antlr.ParserRuleContext {
     public KW_VIEW(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.KW_VIEW, 0)!;
     }
-    public viewName(): ViewNameContext {
-        return this.getRuleContext(0, ViewNameContext)!;
+    public functionName(): FunctionNameContext {
+        return this.getRuleContext(0, FunctionNameContext)!;
     }
     public LEFT_PAREN(): antlr.TerminalNode {
         return this.getToken(SparkSqlParser.LEFT_PAREN, 0)!;
