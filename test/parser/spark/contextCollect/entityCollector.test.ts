@@ -286,6 +286,66 @@ describe('SparkSQL entity collector tests', () => {
         });
     });
 
+    test('should not collect lateral view generator function as view entity', () => {
+        const spark = new SparkSQL();
+        const sql = `SELECT * FROM person LATERAL VIEW EXPLODE(ARRAY(30, 60)) tableName AS c_age;`;
+        const allEntities = spark.getAllEntities(sql);
+
+        expect(
+            allEntities.map((e) => ({
+                type: e.entityContextType,
+                text: e.text,
+            }))
+        ).toEqual([
+            { type: EntityContextType.TABLE, text: 'person' },
+            { type: EntityContextType.QUERY_RESULT, text: '*' },
+        ]);
+    });
+
+    test('should collect entities accurately with chained, qualified, and subquery lateral views', () => {
+        const spark = new SparkSQL();
+        const sql = `
+            CREATE VIEW db1.v_person AS
+            SELECT p.name, c_age, d_val
+            FROM db1.person p
+            JOIN db2.dept d ON p.dept_id = d.id
+            LATERAL VIEW db_func.explode_func(p.ages) t1 AS c_age
+            LATERAL VIEW OUTER catalog1.db_func.posexplode_func((SELECT collect_list(score) FROM db3.scores)) t2 AS d_pos, d_val
+            LATERAL VIEW IDENTIFIER('explode')(ARRAY(1, 2)) t3 AS e_val;
+        `;
+        const allEntities = spark.getAllEntities(sql);
+
+        expect(
+            allEntities.map((e) => ({
+                type: e.entityContextType,
+                text: e.text,
+            }))
+        ).toEqual([
+            { type: EntityContextType.TABLE, text: 'db3.scores' },
+            { type: EntityContextType.QUERY_RESULT, text: 'collect_list(score)' },
+            { type: EntityContextType.TABLE, text: 'db1.person' },
+            { type: EntityContextType.TABLE, text: 'db2.dept' },
+            { type: EntityContextType.QUERY_RESULT, text: 'p.name, c_age, d_val' },
+            { type: EntityContextType.VIEW_CREATE, text: 'db1.v_person' },
+        ]);
+    });
+
+    test('should not collect lateral view generator function in from-select statement', () => {
+        const spark = new SparkSQL();
+        const sql = `FROM person SELECT * LATERAL VIEW OUTER db.explode_fn(ARRAY(30, 60)) tableName AS c_age;`;
+        const allEntities = spark.getAllEntities(sql);
+
+        expect(
+            allEntities.map((e) => ({
+                type: e.entityContextType,
+                text: e.text,
+            }))
+        ).toEqual([
+            { type: EntityContextType.TABLE, text: 'person' },
+            { type: EntityContextType.QUERY_RESULT, text: '*' },
+        ]);
+    });
+
     test('insert into table values', () => {
         const testingContext = splitListener.statementsContext[5];
 

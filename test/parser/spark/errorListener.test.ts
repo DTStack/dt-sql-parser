@@ -5,6 +5,8 @@ const sql1 = `ALTER VIEW`;
 const sql2 = `SELECT * FROM `;
 const sql3 = `DROP SCHEMA aaa aaa`;
 const sql4 = `SELECT name, age FROM person ORDER BY length( `;
+const sql5 = `SELECT * FROM person LATERAL VIEW `;
+const sql6 = `SELECT * FROM person LATERAL VIEW OUTER `;
 
 describe('SparkSQL validate invalid sql and test msg', () => {
     const spark = new SparkSQL();
@@ -47,6 +49,20 @@ describe('SparkSQL validate invalid sql and test msg', () => {
         );
     });
 
+    test('validate unComplete lateral view sql', () => {
+        const errors = spark.validate(sql5);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(
+            `Statement is incomplete, expecting an existing function or a keyword`
+        );
+
+        const outerErrors = spark.validate(sql6);
+        expect(outerErrors.length).toBe(1);
+        expect(outerErrors[0].message).toBe(
+            `Statement is incomplete, expecting an existing function or a keyword`
+        );
+    });
+
     test('validate random text cn', () => {
         spark.locale = 'zh_CN';
         const errors = spark.validate(randomText);
@@ -80,6 +96,16 @@ describe('SparkSQL validate invalid sql and test msg', () => {
         expect(errors[0].message).toBe(
             `语句不完整，期望一个存在的function或者一个存在的column或者一个关键字`
         );
+    });
+
+    test('validate unComplete lateral view sql cn', () => {
+        const errors = spark.validate(sql5);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe(`语句不完整，期望一个存在的function或者一个关键字`);
+
+        const outerErrors = spark.validate(sql6);
+        expect(outerErrors.length).toBe(1);
+        expect(outerErrors[0].message).toBe(`语句不完整，期望一个存在的function或者一个关键字`);
     });
 });
 
