@@ -1272,17 +1272,8 @@ qualifiedName
     : identifier (DOT identifier)*
     ;
 
-// this rule is used for explicitly capturing wrong identifiers such as test-table, which should actually be `test-table`
-// replace identifier with errorCapturingIdentifier where the immediate follow symbol is not an expression, otherwise
-// valid expressions such as "a-b" can be recognized as an identifier
 errorCapturingIdentifier
-    : identifier errorCapturingIdentifierExtra
-    ;
-
-// extra left-factoring grammar
-errorCapturingIdentifierExtra
-    : (MINUS identifier)+
-    |
+    : identifier
     ;
 
 identifier

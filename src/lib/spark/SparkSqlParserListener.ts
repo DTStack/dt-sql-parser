@@ -281,7 +281,6 @@ import { FunctionNameContext } from "./SparkSqlParser.js";
 import { FunctionNameCreateContext } from "./SparkSqlParser.js";
 import { QualifiedNameContext } from "./SparkSqlParser.js";
 import { ErrorCapturingIdentifierContext } from "./SparkSqlParser.js";
-import { ErrorCapturingIdentifierExtraContext } from "./SparkSqlParser.js";
 import { IdentifierContext } from "./SparkSqlParser.js";
 import { StrictIdentifierContext } from "./SparkSqlParser.js";
 import { QuotedIdentifierContext } from "./SparkSqlParser.js";
@@ -3230,16 +3229,6 @@ export class SparkSqlParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitErrorCapturingIdentifier?: (ctx: ErrorCapturingIdentifierContext) => void;
-    /**
-     * Enter a parse tree produced by `SparkSqlParser.errorCapturingIdentifierExtra`.
-     * @param ctx the parse tree
-     */
-    enterErrorCapturingIdentifierExtra?: (ctx: ErrorCapturingIdentifierExtraContext) => void;
-    /**
-     * Exit a parse tree produced by `SparkSqlParser.errorCapturingIdentifierExtra`.
-     * @param ctx the parse tree
-     */
-    exitErrorCapturingIdentifierExtra?: (ctx: ErrorCapturingIdentifierExtraContext) => void;
     /**
      * Enter a parse tree produced by `SparkSqlParser.identifier`.
      * @param ctx the parse tree

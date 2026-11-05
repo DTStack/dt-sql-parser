@@ -162,4 +162,39 @@ describe('Spark Select Syntax Tests', () => {
             expect(spark.validate(itemSql).length).toBe(0);
         });
     });
+
+    // https://github.com/DTStack/dt-sql-parser/issues/501
+    describe('subtraction expression with column and function call (#501)', () => {
+        const validSqlList = [
+            // Original issue SQL and comparison variations
+            'SELECT (price - if(`symbol` is null, open_price, 0)) * quantity FROM t;',
+            'SELECT price - if(`symbol` is null, open_price, 0) FROM t;',
+            'SELECT (price - if(`symbol` is null, open_price, 0) * quantity) FROM t;',
+            'SELECT (price + if(`symbol` is null, open_price, 0)) * quantity FROM t;',
+            'SELECT (1 - if(`symbol` is null, open_price, 0)) * quantity FROM t;',
+            // Qualified column names, backquoted hyphenated identifiers, and nested parentheses/functions
+            'SELECT (t.price - coalesce(t.discount, 0)) * t.quantity FROM orders t;',
+            'SELECT (`col-a` - if(`col-b` is null, `col-c`, 0)) * `col-d` FROM `my-db`.`my-table`;',
+            'SELECT ((a - coalesce(b, 0)) - if(c > 0, d, 1)) / total FROM t;',
+            'SELECT round((price - if(`symbol` is null, open_price, 0)) * quantity, 2) FROM t;',
+            // Subtraction with function call without FROM clause or followed by other clauses
+            'SELECT price - if(`symbol` is null, open_price, 0);',
+            'SELECT price - if(`symbol` is null, open_price, 0) WHERE price > 0;',
+            'SELECT price - if(`symbol` is null, open_price, 0) GROUP BY price HAVING price > 0;',
+            'SELECT price - if(`symbol` is null, open_price, 0) ORDER BY price LIMIT 10;',
+            // Zero-argument functions and compact subtraction without whitespace
+            'SELECT a - f(), (a - f()) * b, a-f(x), (a-b) FROM t;',
+            // Parenthesized subtraction in WHERE, JOIN ON, GROUP BY, HAVING, ORDER BY, and CASE WHEN
+            'SELECT * FROM t WHERE (price - if(`symbol` is null, open_price, 0)) > 0;',
+            'SELECT * FROM t1 JOIN t2 ON (t1.a - nvl(t2.b, 0)) = 0;',
+            'SELECT (a - coalesce(b, 0)), count(*) FROM t GROUP BY (a - coalesce(b, 0)) HAVING (max(a) - coalesce(min(b), 0)) > 0 ORDER BY (max(a) - coalesce(min(b), 0)) DESC;',
+            'SELECT CASE WHEN (price - if(discount is null, 0, discount)) > 0 THEN (price - coalesce(tax, 0)) ELSE 0 END FROM t;',
+        ];
+
+        validSqlList.forEach((sql) => {
+            it(sql, () => {
+                expect(spark.validate(sql).length).toBe(0);
+            });
+        });
+    });
 });
