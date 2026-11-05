@@ -660,4 +660,40 @@ describe('SparkSQL entity collector tests', () => {
         expect(queryResults[0].columns?.[0].text).toBe('name');
         expect(queryResults[1].text).toBe('id');
     });
+
+    // https://github.com/DTStack/dt-sql-parser/issues/501
+    test('should collect subtraction expressions as expression columns', () => {
+        const spark = new SparkSQL();
+        const allEntities = spark.getAllEntities(
+            'SELECT a - b, t.a - t.b AS diff, a - f(x), (price - if(`symbol` is null, open_price, 0)) * quantity AS total FROM t;'
+        );
+        const queryResult = allEntities.find(
+            (e) => e.entityContextType === EntityContextType.QUERY_RESULT
+        ) as CommonEntityContext;
+
+        expect(queryResult).toBeDefined();
+        expect(queryResult.columns?.length).toBe(4);
+
+        expect(queryResult.columns[0].text).toBe('a - b');
+        expect(queryResult.columns[0].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResult.columns[0][AttrName.alias]).toBeFalsy();
+
+        expect(queryResult.columns[1].text).toBe('t.a - t.b');
+        expect(queryResult.columns[1].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResult.columns[1][AttrName.alias]).toEqual(
+            expect.objectContaining({ text: 'diff' })
+        );
+
+        expect(queryResult.columns[2].text).toBe('a - f(x)');
+        expect(queryResult.columns[2].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResult.columns[2][AttrName.alias]).toBeFalsy();
+
+        expect(queryResult.columns[3].text).toBe(
+            '(price - if(`symbol` is null, open_price, 0)) * quantity'
+        );
+        expect(queryResult.columns[3].declareType).toBe(ColumnDeclareType.EXPRESSION);
+        expect(queryResult.columns[3][AttrName.alias]).toEqual(
+            expect.objectContaining({ text: 'total' })
+        );
+    });
 });

@@ -281,7 +281,6 @@ import { FunctionNameContext } from "./SparkSqlParser.js";
 import { FunctionNameCreateContext } from "./SparkSqlParser.js";
 import { QualifiedNameContext } from "./SparkSqlParser.js";
 import { ErrorCapturingIdentifierContext } from "./SparkSqlParser.js";
-import { ErrorCapturingIdentifierExtraContext } from "./SparkSqlParser.js";
 import { IdentifierContext } from "./SparkSqlParser.js";
 import { StrictIdentifierContext } from "./SparkSqlParser.js";
 import { QuotedIdentifierContext } from "./SparkSqlParser.js";
@@ -2040,12 +2039,6 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitErrorCapturingIdentifier?: (ctx: ErrorCapturingIdentifierContext) => Result;
-    /**
-     * Visit a parse tree produced by `SparkSqlParser.errorCapturingIdentifierExtra`.
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    visitErrorCapturingIdentifierExtra?: (ctx: ErrorCapturingIdentifierExtraContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.identifier`.
      * @param ctx the parse tree

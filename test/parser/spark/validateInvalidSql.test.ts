@@ -13,4 +13,10 @@ describe('Spark SQL validate invalid sql', () => {
     test('validate unComplete sql', () => {
         expect(spark.validate(unCompleteSQL).length).not.toBe(0);
     });
+
+    test('validate unquoted hyphenated identifiers', () => {
+        expect(spark.validate('CREATE DATABASE test-db;').length).not.toBe(0);
+        expect(spark.validate('CREATE TABLE test-tbl (id-col INT);').length).not.toBe(0);
+        expect(spark.validate('SELECT * FROM test-tbl;').length).not.toBe(0);
+    });
 });
