@@ -98,6 +98,17 @@ import { ResetConfigContext } from "./SparkSqlParser.js";
 import { ResetAnyContext } from "./SparkSqlParser.js";
 import { CreateIndexContext } from "./SparkSqlParser.js";
 import { DropIndexContext } from "./SparkSqlParser.js";
+import { CallStatementContext } from "./SparkSqlParser.js";
+import { AddPartitionFieldContext } from "./SparkSqlParser.js";
+import { DropPartitionFieldContext } from "./SparkSqlParser.js";
+import { ReplacePartitionFieldContext } from "./SparkSqlParser.js";
+import { SetWriteDistributionAndOrderingContext } from "./SparkSqlParser.js";
+import { SetIdentifierFieldsContext } from "./SparkSqlParser.js";
+import { DropIdentifierFieldsContext } from "./SparkSqlParser.js";
+import { CreateOrReplaceBranchContext } from "./SparkSqlParser.js";
+import { CreateOrReplaceTagContext } from "./SparkSqlParser.js";
+import { DropBranchContext } from "./SparkSqlParser.js";
+import { DropTagContext } from "./SparkSqlParser.js";
 import { OptimizeTableContext } from "./SparkSqlParser.js";
 import { UnsupportHiveCommandsContext } from "./SparkSqlParser.js";
 import { UnsupportedHiveNativeCommandsContext } from "./SparkSqlParser.js";
@@ -138,6 +149,7 @@ import { NamespaceNameContext } from "./SparkSqlParser.js";
 import { NamespaceNameCreateContext } from "./SparkSqlParser.js";
 import { TableNameCreateContext } from "./SparkSqlParser.js";
 import { TableNameContext } from "./SparkSqlParser.js";
+import { IcebergTableNameContext } from "./SparkSqlParser.js";
 import { ViewNameCreateContext } from "./SparkSqlParser.js";
 import { ViewNameContext } from "./SparkSqlParser.js";
 import { EmptyColumnContext } from "./SparkSqlParser.js";
@@ -146,6 +158,7 @@ import { ColumnNamePathContext } from "./SparkSqlParser.js";
 import { ColumnNamePathAllowEmptyContext } from "./SparkSqlParser.js";
 import { ColumnNameSeqContext } from "./SparkSqlParser.js";
 import { ColumnNameCreateContext } from "./SparkSqlParser.js";
+import { NestedColumnNameCreateContext } from "./SparkSqlParser.js";
 import { IdentifierReferenceContext } from "./SparkSqlParser.js";
 import { QueryOrganizationContext } from "./SparkSqlParser.js";
 import { LimitClauseContext } from "./SparkSqlParser.js";
@@ -220,8 +233,10 @@ import { MultipartIdentifierContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierAllowEmptyContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierPropertyListContext } from "./SparkSqlParser.js";
 import { MultipartIdentifierPropertyContext } from "./SparkSqlParser.js";
+import { BoundedQualifiedIdentifierContext } from "./SparkSqlParser.js";
 import { TableIdentifierContext } from "./SparkSqlParser.js";
 import { ViewIdentifierContext } from "./SparkSqlParser.js";
+import { TableIdentifierReferenceContext } from "./SparkSqlParser.js";
 import { SelectLiteralColumnNameContext } from "./SparkSqlParser.js";
 import { SelectExpressionColumnNameContext } from "./SparkSqlParser.js";
 import { TableAllColumnsContext } from "./SparkSqlParser.js";
@@ -232,6 +247,20 @@ import { PartitionFieldListContext } from "./SparkSqlParser.js";
 import { PartitionFieldContext } from "./SparkSqlParser.js";
 import { TransformContext } from "./SparkSqlParser.js";
 import { TransformArgumentContext } from "./SparkSqlParser.js";
+import { IcebergWriteSpecContext } from "./SparkSqlParser.js";
+import { IcebergWriteDistributionSpecContext } from "./SparkSqlParser.js";
+import { IcebergWriteOrderingSpecContext } from "./SparkSqlParser.js";
+import { IcebergOrderContext } from "./SparkSqlParser.js";
+import { IcebergOrderFieldContext } from "./SparkSqlParser.js";
+import { IcebergCreateReplaceBranchClauseContext } from "./SparkSqlParser.js";
+import { IcebergCreateReplaceTagClauseContext } from "./SparkSqlParser.js";
+import { IcebergBranchOptionsContext } from "./SparkSqlParser.js";
+import { IcebergTagOptionsContext } from "./SparkSqlParser.js";
+import { IcebergSnapshotRetentionContext } from "./SparkSqlParser.js";
+import { IcebergRefRetainContext } from "./SparkSqlParser.js";
+import { IcebergMaxSnapshotAgeContext } from "./SparkSqlParser.js";
+import { IcebergMinSnapshotsToKeepContext } from "./SparkSqlParser.js";
+import { IcebergTimeUnitContext } from "./SparkSqlParser.js";
 import { ExpressionContext } from "./SparkSqlParser.js";
 import { NamedArgumentExpressionContext } from "./SparkSqlParser.js";
 import { FunctionArgumentContext } from "./SparkSqlParser.js";
@@ -930,6 +959,83 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitDropIndex?: (ctx: DropIndexContext) => Result;
     /**
+     * Visit a parse tree produced by the `callStatement`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCallStatement?: (ctx: CallStatementContext) => Result;
+    /**
+     * Visit a parse tree produced by the `addPartitionField`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitAddPartitionField?: (ctx: AddPartitionFieldContext) => Result;
+    /**
+     * Visit a parse tree produced by the `dropPartitionField`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDropPartitionField?: (ctx: DropPartitionFieldContext) => Result;
+    /**
+     * Visit a parse tree produced by the `replacePartitionField`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitReplacePartitionField?: (ctx: ReplacePartitionFieldContext) => Result;
+    /**
+     * Visit a parse tree produced by the `setWriteDistributionAndOrdering`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSetWriteDistributionAndOrdering?: (ctx: SetWriteDistributionAndOrderingContext) => Result;
+    /**
+     * Visit a parse tree produced by the `setIdentifierFields`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitSetIdentifierFields?: (ctx: SetIdentifierFieldsContext) => Result;
+    /**
+     * Visit a parse tree produced by the `dropIdentifierFields`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDropIdentifierFields?: (ctx: DropIdentifierFieldsContext) => Result;
+    /**
+     * Visit a parse tree produced by the `createOrReplaceBranch`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCreateOrReplaceBranch?: (ctx: CreateOrReplaceBranchContext) => Result;
+    /**
+     * Visit a parse tree produced by the `createOrReplaceTag`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitCreateOrReplaceTag?: (ctx: CreateOrReplaceTagContext) => Result;
+    /**
+     * Visit a parse tree produced by the `dropBranch`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDropBranch?: (ctx: DropBranchContext) => Result;
+    /**
+     * Visit a parse tree produced by the `dropTag`
+     * labeled alternative in `SparkSqlParser.statement`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitDropTag?: (ctx: DropTagContext) => Result;
+    /**
      * Visit a parse tree produced by the `optimizeTable`
      * labeled alternative in `SparkSqlParser.statement`.
      * @param ctx the parse tree
@@ -1178,6 +1284,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitTableName?: (ctx: TableNameContext) => Result;
     /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergTableName`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergTableName?: (ctx: IcebergTableNameContext) => Result;
+    /**
      * Visit a parse tree produced by `SparkSqlParser.viewNameCreate`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1225,6 +1337,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitColumnNameCreate?: (ctx: ColumnNameCreateContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.nestedColumnNameCreate`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitNestedColumnNameCreate?: (ctx: NestedColumnNameCreateContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.identifierReference`.
      * @param ctx the parse tree
@@ -1675,6 +1793,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      */
     visitMultipartIdentifierProperty?: (ctx: MultipartIdentifierPropertyContext) => Result;
     /**
+     * Visit a parse tree produced by `SparkSqlParser.boundedQualifiedIdentifier`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitBoundedQualifiedIdentifier?: (ctx: BoundedQualifiedIdentifierContext) => Result;
+    /**
      * Visit a parse tree produced by `SparkSqlParser.tableIdentifier`.
      * @param ctx the parse tree
      * @return the visitor result
@@ -1686,6 +1810,12 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitViewIdentifier?: (ctx: ViewIdentifierContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.tableIdentifierReference`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitTableIdentifierReference?: (ctx: TableIdentifierReferenceContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.selectLiteralColumnName`.
      * @param ctx the parse tree
@@ -1746,6 +1876,90 @@ export class SparkSqlParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitTransformArgument?: (ctx: TransformArgumentContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergWriteSpec`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergWriteSpec?: (ctx: IcebergWriteSpecContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergWriteDistributionSpec`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergWriteDistributionSpec?: (ctx: IcebergWriteDistributionSpecContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergWriteOrderingSpec`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergWriteOrderingSpec?: (ctx: IcebergWriteOrderingSpecContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergOrder`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergOrder?: (ctx: IcebergOrderContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergOrderField`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergOrderField?: (ctx: IcebergOrderFieldContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergCreateReplaceBranchClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergCreateReplaceBranchClause?: (ctx: IcebergCreateReplaceBranchClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergCreateReplaceTagClause`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergCreateReplaceTagClause?: (ctx: IcebergCreateReplaceTagClauseContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergBranchOptions`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergBranchOptions?: (ctx: IcebergBranchOptionsContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergTagOptions`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergTagOptions?: (ctx: IcebergTagOptionsContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergSnapshotRetention`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergSnapshotRetention?: (ctx: IcebergSnapshotRetentionContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergRefRetain`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergRefRetain?: (ctx: IcebergRefRetainContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergMaxSnapshotAge`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergMaxSnapshotAge?: (ctx: IcebergMaxSnapshotAgeContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergMinSnapshotsToKeep`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergMinSnapshotsToKeep?: (ctx: IcebergMinSnapshotsToKeepContext) => Result;
+    /**
+     * Visit a parse tree produced by `SparkSqlParser.icebergTimeUnit`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitIcebergTimeUnit?: (ctx: IcebergTimeUnitContext) => Result;
     /**
      * Visit a parse tree produced by `SparkSqlParser.expression`.
      * @param ctx the parse tree

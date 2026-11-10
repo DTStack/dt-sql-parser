@@ -186,6 +186,21 @@ statement
         KW_USING indexType=identifier
     )? LEFT_PAREN multipartIdentifierPropertyList RIGHT_PAREN (KW_OPTIONS options=propertyList)? # createIndex
     | KW_DROP KW_INDEX (ifExists)? identifier KW_ON KW_TABLE? tableName                          # dropIndex
+    | KW_CALL functionName LEFT_PAREN (functionArgument (COMMA functionArgument)*)? RIGHT_PAREN  # callStatement
+    | KW_ALTER KW_TABLE icebergTableName KW_ADD KW_PARTITION KW_FIELD transform (
+        KW_AS name=identifier
+    )?                                                                           # addPartitionField
+    | KW_ALTER KW_TABLE icebergTableName KW_DROP KW_PARTITION KW_FIELD transform # dropPartitionField
+    | KW_ALTER KW_TABLE icebergTableName KW_REPLACE KW_PARTITION KW_FIELD transform KW_WITH transform (
+        KW_AS name=identifier
+    )?                                                                                           # replacePartitionField
+    | KW_ALTER KW_TABLE icebergTableName KW_WRITE icebergWriteSpec                               # setWriteDistributionAndOrdering
+    | KW_ALTER KW_TABLE icebergTableName KW_SET KW_IDENTIFIER KW_FIELDS multipartIdentifierList  # setIdentifierFields
+    | KW_ALTER KW_TABLE icebergTableName KW_DROP KW_IDENTIFIER KW_FIELDS multipartIdentifierList # dropIdentifierFields
+    | KW_ALTER KW_TABLE icebergTableName icebergCreateReplaceBranchClause                        # createOrReplaceBranch
+    | KW_ALTER KW_TABLE icebergTableName icebergCreateReplaceTagClause                           # createOrReplaceTag
+    | KW_ALTER KW_TABLE icebergTableName KW_DROP KW_BRANCH ifExists? identifier                  # dropBranch
+    | KW_ALTER KW_TABLE icebergTableName KW_DROP KW_TAG ifExists? identifier                     # dropTag
     | KW_OPTIMIZE tableName whereClause? zOrderClause                                            # optimizeTable
     | unsupportedHiveNativeCommands .*?                                                          # unsupportHiveCommands
     ;
@@ -250,15 +265,14 @@ query
     ;
 
 insertInto
-    : KW_INSERT KW_OVERWRITE KW_TABLE? tableName (partitionSpec (ifNotExists)?)? (
+    : KW_INSERT KW_OVERWRITE KW_TABLE? icebergTableName (partitionSpec (ifNotExists)?)? (
         (KW_BY KW_NAME)
         | (LEFT_PAREN columnNameSeq RIGHT_PAREN)
     )?
-    | KW_INSERT KW_INTO KW_TABLE? tableName partitionSpec? (ifNotExists)? (
+    | KW_INSERT KW_INTO KW_TABLE? icebergTableName partitionSpec? (ifNotExists)? (
         (KW_BY KW_NAME)
         | (LEFT_PAREN columnNameSeq RIGHT_PAREN)
-    )?
-    | KW_INSERT KW_INTO KW_TABLE? tableName KW_REPLACE whereClause
+    )? (KW_REPLACE whereClause)?
     | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY path=stringLit rowFormat? createFileFormat?
     | KW_INSERT KW_OVERWRITE KW_LOCAL? KW_DIRECTORY (path=stringLit)? tableProvider (
         KW_OPTIONS options=propertyList
@@ -379,12 +393,12 @@ storageHandler
     ;
 
 dmlStatementNoWith
-    : insertInto query                                      # insertFromQuery
-    | fromClause (insertInto fromStatementBody)+            # multipleInsert
-    | KW_DELETE KW_FROM tableName tableAlias whereClause?   # deleteFromTable
-    | KW_UPDATE tableName tableAlias setClause whereClause? # updateTable
-    | KW_MERGE KW_INTO target=tableName targetAlias=tableAlias KW_USING (
-        source=identifierReference
+    : insertInto query                                             # insertFromQuery
+    | fromClause (insertInto fromStatementBody)+                   # multipleInsert
+    | KW_DELETE KW_FROM icebergTableName tableAlias whereClause?   # deleteFromTable
+    | KW_UPDATE icebergTableName tableAlias setClause whereClause? # updateTable
+    | KW_MERGE KW_INTO target=icebergTableName targetAlias=tableAlias KW_USING (
+        source=icebergTableName
         | LEFT_PAREN sourceQuery=query RIGHT_PAREN
     ) sourceAlias=tableAlias KW_ON mergeCondition=booleanExpression matchedClause* notMatchedClause* notMatchedBySourceClause* # mergeIntoTable
     ;
@@ -402,6 +416,10 @@ tableNameCreate
     ;
 
 tableName
+    : tableIdentifier
+    ;
+
+icebergTableName
     : tableIdentifier
     ;
 
@@ -437,6 +455,10 @@ columnNameSeq
 
 columnNameCreate
     : errorCapturingIdentifier
+    ;
+
+nestedColumnNameCreate
+    : multipartIdentifier
     ;
 
 identifierReference
@@ -732,11 +754,11 @@ identifierComment
     ;
 
 relationPrimary
-    : (tableName | viewName | identifierReference) temporalClause? sample? tableAlias # tableSource
-    | atomSubQueryTableSource sample? tableAlias                                      # subQueryTableSource
-    | LEFT_PAREN relation RIGHT_PAREN sample? tableAlias                              # joinTableSource
-    | inlineTable tableAlias                                                          # inlineTableSource
-    | functionTable                                                                   # functionTableSource
+    : (tableName | viewName | tableIdentifierReference) temporalClause? sample? tableAlias # tableSource
+    | atomSubQueryTableSource sample? tableAlias                                           # subQueryTableSource
+    | LEFT_PAREN relation RIGHT_PAREN sample? tableAlias                                   # joinTableSource
+    | inlineTable tableAlias                                                               # inlineTableSource
+    | functionTable                                                                        # functionTableSource
     ;
 
 atomSubQueryTableSource
@@ -825,12 +847,23 @@ multipartIdentifierProperty
     : multipartIdentifier (KW_OPTIONS options=propertyList)?
     ;
 
+boundedQualifiedIdentifier
+    : parts+=errorCapturingIdentifier DOT parts+=errorCapturingIdentifier DOT parts+=errorCapturingIdentifier DOT parts+=errorCapturingIdentifier
+    ;
+
 tableIdentifier
-    : (db=errorCapturingIdentifier DOT)? table=errorCapturingIdentifier
+    : (catalog=errorCapturingIdentifier DOT)? (db=errorCapturingIdentifier DOT)? table=errorCapturingIdentifier
+    | boundedQualifiedIdentifier
     ;
 
 viewIdentifier
-    : (db=errorCapturingIdentifier DOT)? view=errorCapturingIdentifier
+    : (catalog=errorCapturingIdentifier DOT)? (db=errorCapturingIdentifier DOT)? view=errorCapturingIdentifier
+    | boundedQualifiedIdentifier
+    ;
+
+tableIdentifierReference
+    : KW_IDENTIFIER LEFT_PAREN expression RIGHT_PAREN
+    | tableIdentifier
     ;
 
 selectLiteralColumnName
@@ -877,6 +910,71 @@ transform
 transformArgument
     : qualifiedName
     | constant
+    ;
+
+icebergWriteSpec
+    : (icebergWriteDistributionSpec | icebergWriteOrderingSpec)+
+    ;
+
+icebergWriteDistributionSpec
+    : KW_DISTRIBUTED KW_BY KW_PARTITION
+    ;
+
+icebergWriteOrderingSpec
+    : KW_LOCALLY? KW_ORDERED KW_BY icebergOrder
+    | KW_UNORDERED
+    ;
+
+icebergOrder
+    : icebergOrderField (COMMA icebergOrderField)*
+    | LEFT_PAREN icebergOrderField (COMMA icebergOrderField)* RIGHT_PAREN
+    ;
+
+icebergOrderField
+    : transform direction=(KW_ASC | KW_DESC)? (KW_NULLS nullOrder=(KW_FIRST | KW_LAST))?
+    ;
+
+icebergCreateReplaceBranchClause
+    : (KW_CREATE KW_OR)? KW_REPLACE KW_BRANCH identifier icebergBranchOptions
+    | KW_CREATE KW_BRANCH ifNotExists? identifier icebergBranchOptions
+    ;
+
+icebergCreateReplaceTagClause
+    : (KW_CREATE KW_OR)? KW_REPLACE KW_TAG identifier icebergTagOptions
+    | KW_CREATE KW_TAG ifNotExists? identifier icebergTagOptions
+    ;
+
+icebergBranchOptions
+    : (KW_AS KW_OF KW_VERSION snapshotId=number)? icebergRefRetain? icebergSnapshotRetention?
+    ;
+
+icebergTagOptions
+    : (KW_AS KW_OF KW_VERSION snapshotId=number)? icebergRefRetain?
+    ;
+
+icebergSnapshotRetention
+    : KW_WITH KW_SNAPSHOT KW_RETENTION (
+        icebergMinSnapshotsToKeep icebergMaxSnapshotAge?
+        | icebergMaxSnapshotAge
+    )
+    ;
+
+icebergRefRetain
+    : KW_RETAIN number icebergTimeUnit
+    ;
+
+icebergMaxSnapshotAge
+    : number icebergTimeUnit
+    ;
+
+icebergMinSnapshotsToKeep
+    : number KW_SNAPSHOTS
+    ;
+
+icebergTimeUnit
+    : KW_DAYS
+    | KW_HOURS
+    | KW_MINUTES
     ;
 
 expression
@@ -1161,7 +1259,7 @@ qualifiedColTypeWithPositionSeqForAdd
     ;
 
 qualifiedColTypeWithPositionForAdd
-    : name=columnNameCreate dataType colDefinitionDescriptorWithPosition*
+    : name=nestedColumnNameCreate dataType colDefinitionDescriptorWithPosition*
     ;
 
 qualifiedColTypeWithPositionSeqForReplace
@@ -1317,7 +1415,7 @@ number
     ;
 
 alterColumnAction
-    : KW_TYPE dataType
+    : KW_TYPE dataType (KW_COMMENT comment=stringLit)?
     | KW_COMMENT comment=stringLit
     | colPosition
     | setOrDrop=(KW_SET | KW_DROP) KW_NOT KW_NULL
@@ -1664,11 +1762,13 @@ nonReserved
     | KW_BINARY_HEX
     | KW_BOOLEAN
     | KW_BOTH
+    | KW_BRANCH
     | KW_BUCKET
     | KW_BUCKETS
     | KW_BY
     | KW_BYTE
     | KW_CACHE
+    | KW_CALL
     | KW_CASCADE
     | KW_CASE
     | KW_CAST
@@ -1728,6 +1828,7 @@ nonReserved
     | KW_DISABLE
     | KW_DISTINCT
     | KW_DISTRIBUTE
+    | KW_DISTRIBUTED
     | KW_DIV
     | KW_DOUBLE
     | KW_DROP
@@ -1746,6 +1847,7 @@ nonReserved
     | KW_EXTRACT
     | KW_FALSE
     | KW_FETCH
+    | KW_FIELD
     | KW_FILTER
     | KW_FIELDS
     | KW_FILEFORMAT
@@ -1797,6 +1899,7 @@ nonReserved
     | KW_LIST
     | KW_LOAD
     | KW_LOCAL
+    | KW_LOCALLY
     | KW_LOCATION
     | KW_LOCK
     | KW_LOCKS
@@ -1834,6 +1937,7 @@ nonReserved
     | KW_OPTIONS
     | KW_OR
     | KW_ORDER
+    | KW_ORDERED
     | KW_OUT
     | KW_OUTER
     | KW_OUTPUTFORMAT
@@ -1872,6 +1976,8 @@ nonReserved
     | KW_RESET
     | KW_RESPECT
     | KW_RESTRICT
+    | KW_RETAIN
+    | KW_RETENTION
     | KW_REVOKE
     | KW_REWRITE
     | KW_RLIKE
@@ -1896,6 +2002,8 @@ nonReserved
     | KW_SHOW
     | KW_SINGLE
     | KW_SKEWED
+    | KW_SNAPSHOT
+    | KW_SNAPSHOTS
     | KW_SMALLINT
     | KW_SOME
     | KW_SORT
@@ -1913,7 +2021,8 @@ nonReserved
     | KW_SYSTEM
     | KW_SYSTEM_TIME
     | KW_SYSTEM_VERSION
-    // | KW_TABLE
+    | KW_TAG
+    | KW_TABLE
     | KW_TABLES
     | KW_TABLESAMPLE
     | KW_TARGET
@@ -1946,6 +2055,7 @@ nonReserved
     | KW_UNIQUE
     | KW_UNKNOWN
     | KW_UNLOCK
+    | KW_UNORDERED
     | KW_UNPIVOT
     | KW_UNSET
     | KW_UPDATE
@@ -1966,6 +2076,7 @@ nonReserved
     | KW_WINDOW
     | KW_WITH
     | KW_WITHIN
+    | KW_WRITE
     | KW_YEAR
     | KW_YEARS
     | KW_ZONE

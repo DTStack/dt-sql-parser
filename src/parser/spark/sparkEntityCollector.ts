@@ -10,6 +10,7 @@ import {
     CreateViewContext,
     FunctionNameCreateContext,
     FunctionTableSourceContext,
+    IcebergTableNameContext,
     IdentifierCommentContext,
     InlineTableSourceContext,
     InsertFromQueryContext,
@@ -17,6 +18,7 @@ import {
     NamedExpressionContext,
     NamespaceNameContext,
     NamespaceNameCreateContext,
+    NestedColumnNameCreateContext,
     QueryStatementContext,
     RelationContext,
     RelationPrimaryContext,
@@ -79,6 +81,13 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
                 declareType: TableDeclareType.LITERAL,
             }
         );
+    }
+
+    /** Iceberg extension table entity rules */
+    exitIcebergTableName(ctx: IcebergTableNameContext) {
+        this.pushEntity(ctx, EntityContextType.TABLE, undefined, {
+            declareType: TableDeclareType.LITERAL,
+        });
     }
 
     /** Inline Table Entity Rules */
@@ -177,6 +186,10 @@ export class SparkEntityCollector extends EntityCollector implements SparkSqlPar
                 endContextList: [CreateOrReplaceTableColTypeContext.name],
             },
         ]);
+    }
+
+    exitNestedColumnNameCreate(ctx: NestedColumnNameCreateContext) {
+        this.pushEntity(ctx, EntityContextType.COLUMN_CREATE);
     }
 
     exitSelectLiteralColumnName(ctx: SelectLiteralColumnNameContext) {

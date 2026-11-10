@@ -5,6 +5,7 @@ const sql1 = `ALTER VIEW`;
 const sql2 = `SELECT * FROM `;
 const sql3 = `DROP SCHEMA aaa aaa`;
 const sql4 = `SELECT name, age FROM person ORDER BY length( `;
+const sql5 = `ALTER TABLE prod.db.sample ADD COLUMN 123 DOUBLE`;
 
 describe('SparkSQL validate invalid sql and test msg', () => {
     const spark = new SparkSQL();
@@ -44,6 +45,13 @@ describe('SparkSQL validate invalid sql and test msg', () => {
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe(
             `Statement is incomplete, expecting an existing function or an existing column or a keyword`
+        );
+    });
+
+    test('validate invalid nested ADD COLUMN reports a new column', () => {
+        const errors = spark.validate(sql5);
+        expect(errors[0].message).toBe(
+            `'123' is not valid at this position, expecting a new column`
         );
     });
 
