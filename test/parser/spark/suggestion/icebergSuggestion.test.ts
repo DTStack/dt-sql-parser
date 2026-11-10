@@ -24,6 +24,28 @@ describe('Spark Iceberg suggestions', () => {
         ).toBe(true);
     });
 
+    test('at a fresh FROM, suggests a table and the dynamic IDENTIFIER keyword', () => {
+        const suggestion = getSuggestion('SELECT * FROM <caret>');
+
+        expect(
+            suggestion?.syntax.some(
+                (syntax) => syntax.syntaxContextType === EntityContextType.TABLE
+            )
+        ).toBe(true);
+        expect(suggestion?.keywords).toContain('IDENTIFIER');
+    });
+
+    test('while completing a qualified name, suggests a table without the dynamic IDENTIFIER keyword', () => {
+        const suggestion = getSuggestion('SELECT * FROM prod.db.table.<caret>');
+
+        expect(
+            suggestion?.syntax.some(
+                (syntax) => syntax.syntaxContextType === EntityContextType.TABLE
+            )
+        ).toBe(true);
+        expect(suggestion?.keywords.includes('IDENTIFIER')).toBe(false);
+    });
+
     test('suggests a new column for nested ADD COLUMN', () => {
         const suggestion = getSuggestion('ALTER TABLE prod.db.sample ADD COLUMN <caret>');
 
