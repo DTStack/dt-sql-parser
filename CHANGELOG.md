@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.6.1](https://github.com/DTStack/dt-sql-parser/compare/v4.6.0...v4.6.1) (2026-11-11)
+
+
+### Features
+
+* **spark:** support spark iceberg syntax and entities ([#463](https://github.com/DTStack/dt-sql-parser/issues/463)) ([638f3d5](https://github.com/DTStack/dt-sql-parser/commit/638f3d5b81f79ba53d931fac8c27dc9aa4832fda))
+
 ### [4.5.1](https://github.com/DTStack/dt-sql-parser/compare/v4.5.1-beta.2...v4.5.1) (2026-08-25)
 
 
