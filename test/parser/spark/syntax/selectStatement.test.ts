@@ -24,6 +24,7 @@ const features = {
     selectJoin: readSQL(__dirname, 'selectJoin.sql'),
     selectInlineTable: readSQL(__dirname, 'selectInlineTable.sql'),
     selectHiving: readSQL(__dirname, 'selectHiving.sql'),
+    selectIceberg: readSQL(__dirname, 'selectIceberg.sql'),
     selectHint: readSQL(__dirname, 'selectHint.sql'),
     selectGroupBy: readSQL(__dirname, 'selectGroupBy.sql'),
     selectFile: readSQL(__dirname, 'selectFile.sql'),
@@ -128,6 +129,11 @@ describe('Spark Select Syntax Tests', () => {
         });
     });
     features.selectHiving.forEach((itemSql) => {
+        it(itemSql, () => {
+            expect(spark.validate(itemSql).length).toBe(0);
+        });
+    });
+    features.selectIceberg.forEach((itemSql) => {
         it(itemSql, () => {
             expect(spark.validate(itemSql).length).toBe(0);
         });

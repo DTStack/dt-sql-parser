@@ -1,0 +1,62 @@
+SELECT * FROM prod.db.table.history;
+SELECT * FROM prod.db.table.metadata_log_entries;
+SELECT * FROM prod.db.table.snapshots;
+SELECT * FROM prod.db.table.entries;
+SELECT * FROM prod.db.table.all_entries;
+SELECT * FROM prod.db.table.files;
+SELECT * FROM prod.db.table.data_files;
+SELECT * FROM prod.db.table.delete_files;
+SELECT * FROM prod.db.table.all_files;
+SELECT * FROM prod.db.table.all_data_files;
+SELECT * FROM prod.db.table.all_delete_files;
+SELECT * FROM prod.db.table.manifests;
+SELECT * FROM prod.db.table.all_manifests;
+SELECT * FROM prod.db.table.partitions;
+SELECT * FROM prod.db.table.position_deletes;
+SELECT * FROM prod.db.table.refs;
+SELECT * FROM prod.db.table TIMESTAMP AS OF '1986-10-26 01:21:00';
+SELECT * FROM prod.db.table VERSION AS OF 10963874102873;
+SELECT * FROM prod.db.table VERSION AS OF 'audit-branch';
+SELECT * FROM prod.db.table VERSION AS OF 'historical-snapshot';
+SELECT * FROM prod.db.table FOR SYSTEM_TIME AS OF '1986-10-26 01:21:00';
+SELECT * FROM prod.db.table FOR SYSTEM_VERSION AS OF 10963874102873;
+SELECT * FROM prod.db.table FOR SYSTEM_VERSION AS OF 'audit-branch';
+SELECT * FROM prod.db.table TIMESTAMP AS OF 499162860;
+SELECT * FROM prod.db.table.`branch_audit-branch`;
+SELECT * FROM prod.db.table.`tag_historical-snapshot`;
+SELECT * FROM prod.db.table.manifests TIMESTAMP AS OF '2021-09-20 08:00:00';
+SELECT * FROM prod.db.table.partitions VERSION AS OF 10963874102873;
+INSERT INTO prod.db.table VALUES (1, 'a'), (2, 'b');
+INSERT INTO prod.db.table SELECT id, data FROM prod.db.source;
+INSERT OVERWRITE prod.my_app.logs SELECT uuid, first(level), first(ts), first(message) FROM prod.my_app.logs WHERE cast(ts AS date) = '2020-07-01' GROUP BY uuid;
+INSERT OVERWRITE prod.my_app.logs PARTITION (level = 'INFO') SELECT uuid, first(level), first(ts), first(message) FROM prod.my_app.logs WHERE level = 'INFO' GROUP BY uuid;
+MERGE INTO prod.db.target t USING prod.db.source s ON t.id = s.id WHEN MATCHED AND s.op = 'delete' THEN DELETE WHEN MATCHED AND t.count IS NULL AND s.op = 'increment' THEN UPDATE SET t.count = 0 WHEN MATCHED AND s.op = 'increment' THEN UPDATE SET t.count = t.count + 1 WHEN NOT MATCHED AND s.event_time > TIMESTAMP '2020-01-01 00:00:00' THEN INSERT (id, count) VALUES (s.id, 1) WHEN NOT MATCHED BY SOURCE THEN UPDATE SET status = 'invalid';
+MERGE INTO prod.db.target t USING prod.db.source s ON t.id = s.id WHEN MATCHED THEN UPDATE SET * WHEN NOT MATCHED THEN INSERT *;
+UPDATE prod.db.table SET c1 = 'update_c1', c2 = 'update_c2' WHERE ts >= '2020-05-01 00:00:00' AND ts < '2020-06-01 00:00:00';
+UPDATE prod.db.orders AS t1 SET order_status = 'returned' WHERE EXISTS (SELECT oid FROM prod.db.returned_orders WHERE t1.oid = oid);
+DELETE FROM prod.db.table WHERE ts >= '2020-05-01 00:00:00' AND ts < '2020-06-01 00:00:00';
+DELETE FROM prod.db.orders AS t1 WHERE EXISTS (SELECT oid FROM prod.db.returned_orders WHERE t1.oid = oid);
+INSERT INTO prod.db.table.branch_audit VALUES (1, 'a'), (2, 'b');
+UPDATE prod.db.table.branch_audit AS t1 SET val = 'c';
+DELETE FROM prod.db.table.branch_audit WHERE id = 2;
+MERGE INTO prod.db.table.branch_audit t USING prod.db.source s ON t.id = s.id WHEN MATCHED THEN UPDATE SET *;
+INSERT INTO prod.db.target BY NAME SELECT named_struct('b', 2, 'a', 1) AS s, 0 AS n, 'data' AS text;
+INSERT OVERWRITE prod.db.students PARTITION (student_id = 222222) BY NAME SELECT 'Unknown' AS address, name FROM prod.db.persons WHERE name = 'Dora Williams';
+INSERT INTO prod.db.persons REPLACE WHERE ssn = 123456789 SELECT * FROM prod.db.persons2;
+INSERT INTO prod.db.persons BY NAME REPLACE WHERE ssn = 123456789 SELECT * FROM prod.db.new_persons;
+SELECT system.iceberg_version();
+SELECT system.bucket(16, id), system.days(ts) FROM prod.db.table;
+SELECT prod.system.bucket(16, id) FROM prod.db.table;
+-- INSERT column list and explicit TABLE
+INSERT INTO prod.db.table (id, data) VALUES (1, 'a');
+INSERT OVERWRITE TABLE prod.db.table SELECT id, data FROM prod.db.source;
+-- Branch INSERT SELECT
+INSERT INTO prod.db.table.branch_audit SELECT id, data FROM prod.db.source;
+-- UPDATE expression and scalar subquery
+UPDATE prod.db.table SET count = count + 1 WHERE id = 1;
+UPDATE prod.db.table SET count = (SELECT MAX(count) FROM prod.db.source) WHERE id = 1;
+-- DELETE without WHERE and with IN subquery
+DELETE FROM prod.db.table;
+DELETE FROM prod.db.table WHERE id IN (SELECT id FROM prod.db.source);
+-- Iceberg changelog view
+SELECT * FROM prod.db.table.changes;
