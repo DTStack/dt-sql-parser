@@ -26,7 +26,9 @@ describe('TrinoSQL validate invalid sql and test msg', () => {
     test('validate unComplete sql2', () => {
         const errors = trinoSQL.validate(sql2);
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toBe('Statement is incomplete, expecting a new view');
+        expect(errors[0].message).toBe(
+            'Statement is incomplete, expecting a new view or a keyword'
+        );
     });
 
     test('validate unComplete sql3', () => {
@@ -62,7 +64,7 @@ describe('TrinoSQL validate invalid sql and test msg', () => {
     test('validate unComplete sql2 cn', () => {
         const errors = trinoSQL.validate(sql2);
         expect(errors.length).toBe(1);
-        expect(errors[0].message).toEqual('语句不完整，期望一个新的view');
+        expect(errors[0].message).toEqual('语句不完整，期望一个新的view或者一个关键字');
     });
 
     test('validate unComplete sql3 cn', () => {

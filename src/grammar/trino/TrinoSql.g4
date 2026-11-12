@@ -101,6 +101,7 @@ statement
     | KW_TRUNCATE KW_TABLE tableRef                                                                                                           # truncateTable
     | KW_COMMENT KW_ON KW_TABLE tableRef KW_IS (string | KW_NULL)                                                                             # commentTable
     | KW_COMMENT KW_ON KW_VIEW viewRef KW_IS (string | KW_NULL)                                                                               # commentView
+    | KW_COMMENT KW_ON KW_MATERIALIZED KW_VIEW viewRef KW_IS (string | KW_NULL)                                                               # commentMaterializedView
     | KW_COMMENT KW_ON KW_COLUMN columnRef KW_IS (string | KW_NULL)                                                                           # commentColumn
     | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? from=tableRef KW_RENAME KW_TO to=tableNameCreate                                                   # renameTable
     | KW_ALTER KW_TABLE (KW_IF KW_EXISTS)? tableName=tableRef KW_ADD KW_COLUMN (KW_IF KW_NOT KW_EXISTS)? column=columnDefinition              # addColumn
@@ -117,16 +118,18 @@ statement
     | KW_CREATE (KW_OR KW_REPLACE)? KW_MATERIALIZED KW_VIEW (KW_IF KW_NOT KW_EXISTS)? viewNameCreate (
         KW_GRACE KW_PERIOD interval
     )? (KW_COMMENT comment=string)? (KW_WITH properties)? KW_AS rootQuery # createMaterializedView
-    | KW_CREATE (KW_OR KW_REPLACE)? KW_VIEW viewNameCreate (KW_COMMENT comment=string)? (
+    | KW_CREATE (KW_OR KW_REPLACE)? KW_VIEW (KW_IF KW_NOT KW_EXISTS)? viewNameCreate (KW_COMMENT comment=string)? (
         KW_SECURITY (KW_DEFINER | KW_INVOKER)
     )? (KW_WITH properties)? KW_AS rootQuery                                                             # createView
     | KW_REFRESH KW_MATERIALIZED KW_VIEW viewRef                                                         # refreshMaterializedView
     | KW_DROP KW_MATERIALIZED KW_VIEW (KW_IF KW_EXISTS)? viewRef                                         # dropMaterializedView
     | KW_ALTER KW_MATERIALIZED KW_VIEW (KW_IF KW_EXISTS)? from=viewRef KW_RENAME KW_TO to=viewNameCreate # renameMaterializedView
     | KW_ALTER KW_MATERIALIZED KW_VIEW viewRef KW_SET KW_PROPERTIES propertyAssignments                  # setMaterializedViewProperties
+    | KW_ALTER KW_MATERIALIZED KW_VIEW viewRef KW_SET KW_AUTHORIZATION principal                        # setMaterializedViewAuthorization
     | KW_DROP KW_VIEW (KW_IF KW_EXISTS)? viewRef                                                         # dropView
     | KW_ALTER KW_VIEW from=viewRef KW_RENAME KW_TO to=viewNameCreate                                    # renameView
     | KW_ALTER KW_VIEW from=viewRef KW_SET KW_AUTHORIZATION principal                                    # setViewAuthorization
+    | KW_ALTER KW_VIEW viewName=viewRef KW_REFRESH                                                      # refreshView
     | KW_CALL functionName '(' (callArgument (',' callArgument)*)? ')'                                   # call
     | KW_CREATE (KW_OR KW_REPLACE)? functionSpecification                                                # createFunction
     | KW_DROP KW_FUNCTION (KW_IF KW_EXISTS)? functionName '(' (
