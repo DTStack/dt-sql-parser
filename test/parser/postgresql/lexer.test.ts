@@ -9,4 +9,18 @@ describe('PostgreSQL Lexer tests', () => {
     test('token counts', () => {
         expect(tokens.length).toBe(12);
     });
+
+    test('tokens after an escape string constant are lexed normally', () => {
+        const escapeTokens = mysqlParser.getAllTokens(`SELECT E'a\\nb' FROM t;`);
+        expect(escapeTokens.map((token) => token.text)).toEqual([
+            'SELECT',
+            ' ',
+            "E'a\\nb'",
+            ' ',
+            'FROM',
+            ' ',
+            't',
+            ';',
+        ]);
+    });
 });

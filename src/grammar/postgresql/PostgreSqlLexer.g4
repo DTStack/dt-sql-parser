@@ -855,7 +855,7 @@ EndMetaCommand: '\\\\';
 ErrorCharacter: .;
 
 mode EscapeStringConstantMode;
-EscapeStringConstant: EscapeStringText '\'' -> mode (AfterEscapeStringConstantMode);
+EscapeStringConstant: EscapeStringText '\'' -> popMode;
 
 UnterminatedEscapeStringConstant:
     EscapeStringText
@@ -877,7 +877,7 @@ fragment EscapeStringText: (
         | ~ ['\\]
     )*;
 
-InvalidEscapeStringConstant: InvalidEscapeStringText '\'' -> mode (AfterEscapeStringConstantMode);
+InvalidEscapeStringConstant: InvalidEscapeStringText '\'' -> popMode;
 
 InvalidUnterminatedEscapeStringConstant:
     InvalidEscapeStringText

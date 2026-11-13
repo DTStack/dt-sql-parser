@@ -200,3 +200,28 @@ SELECT * FROM pg_attribute WHERE attrelid = 'mytable'::regclass;
 
 SELECT COALESCE(SUM(c.amount), 0) AS total_amount FROM cust c;
 SELECT SUM(c.amount) AS total_amount FROM cust c;
+
+-- Row and Array Comparisons: ANY / SOME / ALL
+SELECT * FROM t WHERE id = ANY(ARRAY[1, 2]);
+SELECT * FROM t WHERE id = ANY($1);
+SELECT * FROM t WHERE id = SOME(ARRAY[1, 2]);
+SELECT * FROM t WHERE id <> ALL($1);
+SELECT * FROM t WHERE id = ANY (SELECT id FROM u);
+SELECT * FROM t WHERE x > ALL (SELECT x FROM u);
+SELECT * FROM t WHERE name LIKE ANY(ARRAY['a%', 'b%']);
+SELECT * FROM t WHERE name NOT ILIKE ALL(ARRAY['a%']);
+SELECT * FROM t WHERE tags @> ANY(ARRAY[ARRAY[1]]);
+SELECT * FROM t WHERE id OPERATOR(pg_catalog.=) ANY(ARRAY[1]);
+
+-- Collation expressions
+SELECT a FROM t ORDER BY a COLLATE "C";
+SELECT a FROM t ORDER BY a COLLATE pg_catalog."default" DESC NULLS LAST, b;
+SELECT a::text COLLATE "de_DE" FROM t WHERE a COLLATE "C" < b;
+
+-- Bit shift operators
+SELECT 1 << 2, 8 >> 1;
+SELECT inet '192.168.1.5' << inet '192.168.1.0/24';
+
+-- String Constants With C-Style Escapes
+SELECT E'a\nb';
+SELECT E'it''s', e'\\' || 'x' FROM t WHERE name = E'\t';
