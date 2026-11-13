@@ -2354,14 +2354,11 @@ booleanExpression
     ;
 
 predicate[antlr.ParserRuleContext value]
-    : comparisonOperator right= valueExpression # comparison
-    | comparisonOperator subqueryOperator subType (
-        selectWithParens
-        | OPEN_PAREN expression CLOSE_PAREN
-    )                                                                         # quantifiedComparison
-    | KW_NOT? KW_BETWEEN lower= valueExpression KW_AND upper= valueExpression # between
-    | KW_NOT? KW_IN OPEN_PAREN expression (COMMA expression)* CLOSE_PAREN     # inList
-    | KW_NOT? KW_IN selectWithParens                                          # inSubquery
+    : comparisonOperator right= valueExpression                                       # comparison
+    | subqueryOperator subType (selectWithParens | OPEN_PAREN expression CLOSE_PAREN) # quantifiedComparison
+    | KW_NOT? KW_BETWEEN lower= valueExpression KW_AND upper= valueExpression         # between
+    | KW_NOT? KW_IN OPEN_PAREN expression (COMMA expression)* CLOSE_PAREN             # inList
+    | KW_NOT? KW_IN selectWithParens                                                  # inSubquery
     | KW_NOT? (KW_LIKE | KW_ILIKE | KW_SIMILAR KW_TO | KW_BETWEEN KW_SYMMETRIC?) pattern= valueExpression (
         KW_ESCAPE escape= valueExpression
     )?                                                         # like
@@ -2403,6 +2400,7 @@ primaryExpression
     | row KW_OVERLAPS row
     | columnNamePath
     | primaryExpression TYPECAST typename
+    | primaryExpression collateClause
     | (PLUS | MINUS) primaryExpression
     | primaryExpression qualOp primaryExpression?
     | primaryExpression mathOp primaryExpression
@@ -2554,6 +2552,8 @@ mathOp
     | LESS_EQUALS
     | GREATER_EQUALS
     | NOT_EQUALS
+    | LESS_LESS
+    | GREATER_GREATER
     ;
 
 qualOp
